@@ -61,7 +61,7 @@ active proctype receiver()
 			do
 			:: i < SIZE -> if
 					/* if Adresse entspricht gesuchter Adresse -> gib zugehörigen Wert zurück*/
-					::queue[i].spalte[0] = adresse ->  channel ! read,adresse,queue[i].spalte[1],c;
+					::queue[i].spalte[0] == adresse ->  channel ! read,adresse,queue[i].spalte[1],c;
 					::else -> i++;
 					fi
 			/*Zugriff auf Speicher und Rückgabe des entsprechenden Wertes*/
