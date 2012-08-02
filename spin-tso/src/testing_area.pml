@@ -1,10 +1,10 @@
 
 /*Array welches die  Queue darstellt (Form: 3-dimensionales Array der Laenge SIZE) das heißt (nx3)-Matrix*/
 #define SIZE 5
-#define MAX_SIZE 5
+#define MAX_SIZE 10 
 
 //[zahl] gibt Größe an (also die Dimension)
-typedef matrix{int spalte [3]}
+typedef matrix{int zeile [3]}
 mtype = {write, read};
 /*Channel der die reads und writes verschickt (Type (also write,read); Adresse; Wert;... )*/
 chan channel = [0] of {mtype, int, int, int};
@@ -23,15 +23,13 @@ active proctype receiver()
 	
 	/* ----------- read-Test dafür Arrays mit Werten initialisieren -----------*/
 	do
-	:: i < SIZE ->	queue[i].spalte[1] = 10*i;
-		queue[i].spalte[0] = i+42;
-		memory[i].spalte[1] = 100*i;
-		memory[i].spalte[0] = i+1;
+	:: i < SIZE ->	queue[i].zeile[1] = 10*i;
+		queue[i].zeile[0] = i+42;
+		memory[i].zeile[1] = 100*i;
+		memory[i].zeile[0] = i+1;
 		i++;
 	:: else -> break;
 	od;
-	
-	/*warum???????????????????????????????????    ; */
 	
 	
 	/*enqueue-Operation der Queue vom Writebuffer (einfügen in Queue wenn ein write-Befehl geschickt wird) und bei read-Befehl Queue bzw Speicher durchsuchen und Wert zurückgeben */
@@ -49,9 +47,9 @@ active proctype receiver()
 					fi;
 					atomic{
 						tail ++;
-						queue[tail].spalte[0] = adresse;
-				 		queue[tail].spalte[1] = value;
-				 		queue[tail].spalte[2] = c; 
+						queue[tail].zeile[0] = adresse;
+				 		queue[tail].zeile[1] = value;
+				 		queue[tail].zeile[2] = c; 
 				 	}
 			fi
 			
@@ -61,11 +59,11 @@ active proctype receiver()
 			do
 			:: i < SIZE -> if
 					/* if Adresse entspricht gesuchter Adresse -> gib zugehörigen Wert zurück*/
-					::queue[i].spalte[0] == adresse ->  channel ! read,adresse,queue[i].spalte[1],c;
+					::queue[i].zeile[0] == adresse ->  channel ! read,adresse,queue[i].zeile[1],c;
 					::else -> i++;
 					fi
 			/*Zugriff auf Speicher und Rückgabe des entsprechenden Wertes*/
-			::i>=SIZE -> channel ! read,adresse,memory[i].spalte[1],c;
+			::i>=SIZE -> channel ! read,adresse,memory[i].zeile[1],c;
 			od
 		fi
 		
@@ -79,15 +77,20 @@ active proctype sender()
 	int y = 3;
 	int z = 1;
 	int key = 1;
+	int re_adresse, re_value, re_c;
 	printf("%d\n%d\n%d\n",x,y,z); 
-	do
-		:: key ==1 -> channel ! read(x,y,z); key++;
-		:: key == 2 -> channel ? read(x,y,z); key++;
-		:: key == 3 -> y++; channel ! write,3,y,42; key++;
-	/* nur reads betrachten*/
-		:: key == 4 -> x++; channel ! write,x,y,z; key++;
-		:: key == 5 -> z++; channel ! write,x,y,z; key++;
-		:: else -> break;
-	od;
 	
+	again:
+	do
+		:: key == 1 -> x++; channel ! write,x,y,z; key++; goto again
+		:: key == 2 -> z++; channel ! write,x,y,z; key++;goto again
+		:: key ==3 -> channel ! read(x,y,z); key++;goto again
+		:: channel ? read(re_adresse,re_value,re_c) -> printf("%d\n", re_value)
+		:: key == 4 -> channel ? read(x,y,z); key++
+		:: key == 5 -> y++; channel ! write,3,y,42; key++
+	/* nur reads betrachten*/
+		:: key == 6 -> x++; channel ! write,x,y,z; key++
+		:: key == 7 -> z++; channel ! write,x,y,z; key++
+	od	
+
 }
