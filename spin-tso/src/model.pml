@@ -21,10 +21,8 @@ active proctype receiver()
 	int adresse, value,c; 
 	int i = 0;
 	/*enqueue-Operation der Queue vom Writebuffer (einfügen in Queue wenn ein write-Befehl geschickt wird) und bei read-Befehl Queue bzw Speicher durchsuchen und Wert zurückgeben */
-	{
-		
-		
-		if
+	do 
+	:: 	atomic{ if
 		:: channel ? write(adresse,value,c) ->
 			/*error if buffer full*/
 			if
@@ -52,10 +50,8 @@ active proctype receiver()
 			::i>=SIZE -> channel ! read,adresse,memory[i].zeile[1],c;
 			od
 		fi
-		
-		
-		
-	}
+		}
+	od
 }
 active proctype sender()
 {
@@ -63,9 +59,11 @@ active proctype sender()
 	int y = 1;
 	int z = 1;
 	
-	y++; channel ! write,x,y,z;
-	x++; channel ! write,x,y,z;
-	 
-	z++; channel ! write,x,y,z;
+	y++; 
+	channel ! write,x,y,z;
+	x++; 
+	channel ! write,x,y,z;
+	z++; 
+	channel ! write,x,y,z;
 	
 }
