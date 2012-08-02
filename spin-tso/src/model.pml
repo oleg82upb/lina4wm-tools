@@ -4,7 +4,7 @@
 #define MAX_SIZE 5
 
 //[zahl] gibt Größe an (also die Dimension)
-typedef matrix{int spalte [3]}
+typedef matrix{int zeile [3]}
 mtype = {write, read};
 /*Channel der die reads und writes verschickt (Type (also write,read); Adresse; Wert;... )*/
 chan channel = [0] of {mtype, int, int, int};
@@ -35,9 +35,9 @@ active proctype receiver()
 					::(tail == SIZE-1) -> tail = 0;	
 					fi
 					-> tail ++;
-					queue[tail].spalte[0] = adresse;
-				 	queue[tail].spalte[1] = value;
-				 	queue[tail].spalte[2] = c; 
+					queue[tail].zeile[0] = adresse;
+				 	queue[tail].zeile[1] = value;
+				 	queue[tail].zeile[2] = c; 
 			fi
 			
 			
@@ -45,11 +45,11 @@ active proctype receiver()
 			do
 			:: i < SIZE -> if
 					/* if Adresse entspricht gesuchter Adresse -> gib zugehörigen Wert zurück*/
-					::queue[i].spalte[0] = adresse ->  channel ! read,adresse,queue[i].spalte[1],c;
+					::queue[i].zeile[0] = adresse ->  channel ! read,adresse,queue[i].zeile[1],c;
 					::else -> i++;
 					fi
 			/*Zugriff auf Speicher und Rückgabe des entsprechenden Wertes*/
-			::i>=SIZE -> channel ! read,adresse,memory[i].spalte[1],c;
+			::i>=SIZE -> channel ! read,adresse,memory[i].zeile[1],c;
 			od
 		fi
 		
