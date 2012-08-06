@@ -22,17 +22,20 @@ active proctype receiver()
 	int i = 0;
 	/*enqueue-Operation der Queue vom Writebuffer (einfügen in Queue wenn ein write-Befehl geschickt wird) und bei read-Befehl Queue bzw Speicher durchsuchen und Wert zurückgeben */
 	do 
-	:: 	atomic{ if
+	:: 	atomic{ 
+		if
 		:: channel ? write(adresse,value,c) ->
 			/*error if buffer full*/
 			if
-			:: (head == 0 && tail == SIZE-1 || head == tail+1) -> printf("Buffer full\n");
-			:: else ->	if
-		/*Initialisierung, wenn der erste Wert gesetzt wird*/
+			:: (head == 0 && tail == SIZE-1 || head == tail+1) -> printf("Buffer full, need to dequeue\n");
+			:: else ->	
+					if
+					/*Initialisierung, wenn der erste Wert gesetzt wird*/
 					:: head == -1 && tail == -1 ->head = 0;	
-					::(tail == SIZE-1) -> tail = 0;	
+					::(tail == SIZE-1) -> tail = 0;
+					:: else -> skip;	
 					fi
-					-> tail ++;
+					->tail++;
 					queue[tail].zeile[0] = adresse;
 				 	queue[tail].zeile[1] = value;
 				 	queue[tail].zeile[2] = c; 
@@ -49,6 +52,7 @@ active proctype receiver()
 			/*Zugriff auf Speicher und Rückgabe des entsprechenden Wertes*/
 			::i>=SIZE -> channel ! read,adresse,memory[i].zeile[1],c;
 			od
+		:: else -> skip/* Dequeue */
 		fi
 		}
 	od
@@ -59,6 +63,18 @@ active proctype sender()
 	int y = 1;
 	int z = 1;
 	
+	y++; 
+	channel ! write,x,y,z;
+	x++; 
+	channel ! write,x,y,z;
+	z++; 
+	channel ! write,x,y,z;
+	y++; 
+	channel ! write,x,y,z;
+	x++; 
+	channel ! write,x,y,z;
+	z++; 
+	channel ! write,x,y,z;
 	y++; 
 	channel ! write,x,y,z;
 	x++; 
