@@ -15,79 +15,76 @@ matrix queue [SIZE];
 int memory[MAX_SIZE];
 
 /* ... TODO ... memory initialisieren???? welche Adressen existieren? */
-active proctype receiver()
+active proctype buffer()
 {		
 	/*Queue Anfang bzw Ende*/
-	int head = -1;
+	int head = 0;
 	int tail = -1;
-	bit isEmpty = 1;
+	bit isEmpty = false;
 	int adresse, value,c; 
 	int i = 0;
 	/*enqueue-Operation der Queue vom Writebuffer (einfügen in Queue wenn ein write-Befehl geschickt wird) und bei read-Befehl Queue bzw Speicher durchsuchen und Wert zurückgeben */
-	do 
+end:	do 
 	:: 	atomic{ 
 		if
-		
-		
-		/*write*/
-		:: if 
-			:: (((tail+1) % SIZE) != head || isEmpty)
-				->
-				channel ? write(adresse,value,c) ->
-			/*error if buffer full*/
-			/*if
-			:: (((tail+1) % SIZE) == head) && (isEmpty == FALSE)-> printf("Buffer full, need to dequeue\n");
-			:: else -> */	
-					ife
-					/*Initialisierung, wenn der erste Wert gesetzt wird*/
-					::(head == -1 && tail == -1) -> head = 0; isEmpty = FALSE;	
-					:: else -> skip;	
-					fi
-					->tail = (tail+1) % SIZE;
-					queue[tail].zeile[0] = adresse;
-				 	queue[tail].zeile[1] = value;
-				 	queue[tail].zeile[2] = c;
-			:: else -> skip; 
-			fi
-		
-		
-		
-		/*read*/
-		:: channel ? read, adresse, value, c ->
-			do
-			:: i < SIZE -> 
-					if
-					/* if Adresse entspricht gesuchter Adresse -> gib zugehörigen Wert zurück*/
-					::queue[i].zeile[0] == adresse ->  channel ! read,adresse,queue[i].zeile[1],c;
-					::else -> i++;
-					fi
-			/*Zugriff auf Speicher und Rückgabe des entsprechenden Wertes*/
-			::i>=SIZE -> channel ! read,adresse,memory[adresse],c;
-			od
-		
-		
-			
-		/*dequeue*/
-		:: !isEmpty ->
-						if
-						::(head == ((tail+1) % SIZE))-> isEmpty = TRUE;
-						:: else -> skip;
-						fi;
-						/*Wert in Speicher schreiben: memory[adresse] = value*/
-						memory[queue[head].zeile[0]] = queue[head].zeile[1];
-						/*Writebuffer leeren .....NOTWENDIG ???*/
+			/*WRITE*/
+			:: channel ? write(adresse,value,c) ->
+				if
+				:: (((tail+1) % SIZE) != head || isEmpty) -> 	// buffer full, need to dequeue
+					/*Wert in Speicher schreiben: memory[adresse] = value*/
+					memory[queue[head].zeile[0]] = queue[head].zeile[1];
+					/*Writebuffer leeren .....NOTWENDIG ???*/
 					/*queue[head].zeile[0] = NULL;
 					queue[head].zeile[1] = NULL;
 					queue[head].zeile[2] = NULL;
+					*/
+					/*head weitersetzen*/
+					head = (head+1) % SIZE;	
+				:: else -> skip;
+				fi
+				->
+					
+					
+ 				tail = (tail+1) % SIZE;
+				queue[tail].zeile[0] = adresse;
+				queue[tail].zeile[1] = value;
+				queue[tail].zeile[2] = c;
+		
+		/*READ*/
+		:: channel ? read, adresse, value, c ->
+			do
+			:: i < SIZE -> 
+				if
+				/* if Adresse entspricht gesuchter Adresse -> gib zugehörigen Wert zurück*/
+				::queue[i].zeile[0] == adresse ->  channel ! read,adresse,queue[i].zeile[1],c;
+				::else -> i++;
+				fi
+			/*Zugriff auf Speicher und Rückgabe des entsprechenden Wertes*/
+			::i>=SIZE -> channel ! read,adresse,memory[adresse],c;
+			od
+
+		
+			
+		/*FLUSH*/
+		:: !isEmpty ->
+					if
+						::(head == ((tail+1) % SIZE))-> isEmpty = TRUE;
+						:: else -> skip;
+					fi;
+						/*Wert in Speicher schreiben: memory[adresse] = value*/
+						memory[queue[head].zeile[0]] = queue[head].zeile[1];
+						/*Writebuffer leeren .....NOTWENDIG ???*/
+						/*queue[head].zeile[0] = NULL;
+						queue[head].zeile[1] = NULL;
+						queue[head].zeile[2] = NULL;
 						*/
 						/*head weitersetzen*/
 						head = (head+1) % SIZE;
-		/*:: else -> skip;*/
 		fi
 		}
 	od
 }
-active proctype sender()
+active proctype program()
 {
 	int x = 1;
 	int y = 1;
