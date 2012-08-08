@@ -27,12 +27,18 @@ active proctype receiver()
 	do 
 	:: 	atomic{ 
 		if
-		:: channel ? write(adresse,value,c) ->
+		
+		
+		/*write*/
+		:: if 
+			:: (((tail+1) % SIZE) != head || isEmpty)
+				->
+				channel ? write(adresse,value,c) ->
 			/*error if buffer full*/
-			if
+			/*if
 			:: (((tail+1) % SIZE) == head) && (isEmpty == FALSE)-> printf("Buffer full, need to dequeue\n");
-			:: else ->	
-					if
+			:: else -> */	
+					ife
 					/*Initialisierung, wenn der erste Wert gesetzt wird*/
 					::(head == -1 && tail == -1) -> head = 0; isEmpty = FALSE;	
 					:: else -> skip;	
@@ -40,11 +46,13 @@ active proctype receiver()
 					->tail = (tail+1) % SIZE;
 					queue[tail].zeile[0] = adresse;
 				 	queue[tail].zeile[1] = value;
-				 	queue[tail].zeile[2] = c; 
+				 	queue[tail].zeile[2] = c;
+			:: else -> skip; 
 			fi
 		
-		/*read*/
 		
+		
+		/*read*/
 		:: channel ? read, adresse, value, c ->
 			do
 			:: i < SIZE -> 
@@ -56,13 +64,11 @@ active proctype receiver()
 			/*Zugriff auf Speicher und Rückgabe des entsprechenden Wertes*/
 			::i>=SIZE -> channel ! read,adresse,memory[adresse],c;
 			od
+		
+		
 			
 		/*dequeue*/
-		
-		:: skip ->
-				if 
-				:: (isEmpty == TRUE) -> printf("error: queue empty")
-				:: else ->
+		:: !isEmpty ->
 						if
 						::(head == ((tail+1) % SIZE))-> isEmpty = TRUE;
 						:: else -> skip;
@@ -76,8 +82,7 @@ active proctype receiver()
 						*/
 						/*head weitersetzen*/
 						head = (head+1) % SIZE;
-				
-				fi
+		/*:: else -> skip;*/
 		fi
 		}
 	od
