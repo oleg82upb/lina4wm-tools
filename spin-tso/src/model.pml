@@ -1,26 +1,25 @@
 
-/*Array welches die  Queue darstellt (Form: 3-dimensionales Array der Laenge SIZE) das heißt (nx3)-Matrix*/
 #define SIZE 5
 #define MAX_SIZE 5
 #define TRUE 1
 #define FALSE 0
 
-//[zahl] gibt Größe an (also die Dimension)
+/*Array welches die  Queue darstellt (Form: 3-dimensionales Array der Laenge SIZE) das heißt (nx3)-Matrix*/
 typedef matrix{int zeile [3]}
 mtype = {write, read};
 /*Channel der die reads und writes verschickt (Type (also write,read); Adresse; Wert;... )*/
 chan channel = [0] of {mtype, int, int, int};
 /*Writebuffer*/
 matrix queue [SIZE];
+/*Speicher*/
 int memory[MAX_SIZE];
 
-/* ... TODO ... memory initialisieren???? welche Adressen existieren? */
 active proctype buffer()
 {		
 	/*Queue Anfang bzw Ende*/
 	int head = 0;
 	int tail = -1;
-	bit isEmpty = false;
+	bit isEmpty = TRUE;
 	int adresse, value,c; 
 	int i = 0;
 	/*enqueue-Operation der Queue vom Writebuffer (einfügen in Queue wenn ein write-Befehl geschickt wird) und bei read-Befehl Queue bzw Speicher durchsuchen und Wert zurückgeben */
@@ -30,21 +29,19 @@ end:	do
 			/*WRITE*/
 			:: channel ? write(adresse,value,c) ->
 				if
-				:: (((tail+1) % SIZE) != head || isEmpty) -> 	// buffer full, need to dequeue
+				:: (((tail+1) % SIZE) == head && !isEmpty) -> 	// buffer full, need to dequeue
 					/*Wert in Speicher schreiben: memory[adresse] = value*/
 					memory[queue[head].zeile[0]] = queue[head].zeile[1];
-					/*Writebuffer leeren .....NOTWENDIG ???*/
-					/*queue[head].zeile[0] = NULL;
-					queue[head].zeile[1] = NULL;
-					queue[head].zeile[2] = NULL;
-					*/
+					/*Writebuffer auf leer setzen*/
+					queue[head].zeile[0] = -1;
+					queue[head].zeile[1] = -1;
+					queue[head].zeile[2] = -1;
+					
 					/*head weitersetzen*/
 					head = (head+1) % SIZE;	
-				:: else -> skip;
+				:: else -> isEmpty = FALSE; skip;
 				fi
-				->
-					
-					
+				->	
  				tail = (tail+1) % SIZE;
 				queue[tail].zeile[0] = adresse;
 				queue[tail].zeile[1] = value;
@@ -69,17 +66,17 @@ end:	do
 		:: !isEmpty ->
 					if
 						::(head == ((tail+1) % SIZE))-> isEmpty = TRUE;
-						:: else -> skip;
+						:: else -> /*Wert in Speicher schreiben: memory[adresse] = value*/
+									memory[queue[head].zeile[0]] = queue[head].zeile[1];
+									/*Writebuffer leeren*/
+									queue[head].zeile[0] = -1;
+									queue[head].zeile[1] = -1;
+									queue[head].zeile[2] = -1;
+						
+									/*head weitersetzen*/
+									head = (head+1) % SIZE;
 					fi;
-						/*Wert in Speicher schreiben: memory[adresse] = value*/
-						memory[queue[head].zeile[0]] = queue[head].zeile[1];
-						/*Writebuffer leeren .....NOTWENDIG ???*/
-						/*queue[head].zeile[0] = NULL;
-						queue[head].zeile[1] = NULL;
-						queue[head].zeile[2] = NULL;
-						*/
-						/*head weitersetzen*/
-						head = (head+1) % SIZE;
+						
 		fi
 		}
 	od
@@ -97,8 +94,8 @@ active proctype program()
 	z++; 
 	channel ! write,x,y,z;
 	y++; 
-	channel ! write,x,y,z;
-	x++; 
+	channel ! read,x,y,z;
+	/*x++; 
 	channel ! write,x,y,z;
 	z++; 
 	channel ! write,x,y,z;
@@ -108,5 +105,5 @@ active proctype program()
 	channel ! write,x,y,z;
 	z++; 
 	channel ! write,x,y,z;
-	
+	*/
 }
