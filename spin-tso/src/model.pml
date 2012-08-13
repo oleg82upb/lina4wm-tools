@@ -1,8 +1,6 @@
 
 #define SIZE 5
 #define MAX_SIZE 5
-#define TRUE 1
-#define FALSE 0
 
 /*Array welches die  Queue darstellt (Form: 3-dimensionales Array der Laenge SIZE) das heißt (nx3)-Matrix*/
 typedef matrix{int zeile [3]}
@@ -19,7 +17,7 @@ active proctype buffer()
 	/*Queue Anfang bzw Ende*/
 	int head = 0;
 	int tail = -1;
-	bit isEmpty = TRUE;
+	bit isEmpty = true;
 	int adresse, value,c; 
 	int i = 0;
 	/*enqueue-Operation der Queue vom Writebuffer (einfügen in Queue wenn ein write-Befehl geschickt wird) und bei read-Befehl Queue bzw Speicher durchsuchen und Wert zurückgeben */
@@ -39,7 +37,7 @@ end:	do
 					
 					/*head weitersetzen*/
 					head = (head+1) % SIZE;	
-				:: else -> isEmpty = FALSE; skip;
+				:: else -> isEmpty = false; skip;
 				fi
 				->	
  				tail = (tail+1) % SIZE;
@@ -64,19 +62,20 @@ end:	do
 			
 		/*FLUSH*/
 		:: !isEmpty ->
-					if
-						::(head == ((tail+1) % SIZE))-> isEmpty = TRUE;
-						:: else -> /*Wert in Speicher schreiben: memory[adresse] = value*/
-									memory[queue[head].zeile[0]] = queue[head].zeile[1];
-									/*Writebuffer leeren*/
-									queue[head].zeile[0] = -1;
-									queue[head].zeile[1] = -1;
-									queue[head].zeile[2] = -1;
+						/*Wert in Speicher schreiben: memory[adresse] = value*/
+						memory[queue[head].zeile[0]] = queue[head].zeile[1];
+						/*Writebuffer leeren .....NOTWENDIG ???*/
+						/*queue[head].zeile[0] = NULL;
+						queue[head].zeile[1] = NULL;
+						queue[head].zeile[2] = NULL;
+						*/
+						/*head weitersetzen*/
+						head = (head+1) % SIZE;
 						
-									/*head weitersetzen*/
-									head = (head+1) % SIZE;
-					fi;
-						
+						if
+						::(head == ((tail+1) % SIZE))-> isEmpty = true;
+						:: else -> skip;
+						fi;
 		fi
 		}
 	od
@@ -94,8 +93,8 @@ active proctype program()
 	z++; 
 	channel ! write,x,y,z;
 	y++; 
-	channel ! read,x,y,z;
-	/*x++; 
+	channel ! write,x,y,z;
+	x++; 
 	channel ! write,x,y,z;
 	z++; 
 	channel ! write,x,y,z;
@@ -105,5 +104,5 @@ active proctype program()
 	channel ! write,x,y,z;
 	z++; 
 	channel ! write,x,y,z;
-	*/
+	
 }
