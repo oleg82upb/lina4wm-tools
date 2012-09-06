@@ -1,18 +1,20 @@
 
 #define SIZE 5
 #define MAX_SIZE 5
-
+#define ADRESSE_X 0
+#define ADRESSE_Y 1
 /*Array welches die  Queue darstellt (Form: 3-dimensionales Array der Laenge SIZE) das heißt (nx3)-Matrix*/
 typedef matrix{int zeile [3]}
 mtype = {write, read};
 /*Channel der die reads und writes verschickt (Type (also write,read); Adresse; Wert;... )*/
-chan channel = [0] of {mtype, int, int, int};
+chan channelT1 = [0] of {mtype, int, int, int};
+chan channelT2 = [0] of {mtype, int, int, int};
 /*Writebuffer*/
 matrix queue [SIZE];
 /*Speicher*/
 int memory[MAX_SIZE];
 
-active proctype buffer()
+proctype buffer(chan channel)
 {		
 	/*Queue Anfang bzw Ende*/
 	int head = 0;
@@ -64,11 +66,11 @@ end:	do
 		:: !isEmpty ->
 						/*Wert in Speicher schreiben: memory[adresse] = value*/
 						memory[queue[head].zeile[0]] = queue[head].zeile[1];
-						/*Writebuffer leeren .....NOTWENDIG ???*/
-						/*queue[head].zeile[0] = NULL;
-						queue[head].zeile[1] = NULL;
-						queue[head].zeile[2] = NULL;
-						*/
+						/*Writebuffer leeren*/
+						queue[head].zeile[0] = 0;
+						queue[head].zeile[1] = 0;
+						queue[head].zeile[2] = 0;
+						
 						/*head weitersetzen*/
 						head = (head+1) % SIZE;
 						
@@ -80,29 +82,32 @@ end:	do
 		}
 	od
 }
-active proctype program()
+proctype process1()
 {
-	int x = 1;
-	int y = 1;
-	int z = 1;
+	channelT1 ! write,ADRESSE_X,1,0;
+	channelT1 ! write,ADRESSE_X,1,0;
 	
-	y++; 
-	channel ! write,x,y,z;
-	x++; 
-	channel ! write,x,y,z;
-	z++; 
-	channel ! write,x,y,z;
-	y++; 
-	channel ! write,x,y,z;
-	x++; 
-	channel ! write,x,y,z;
-	z++; 
-	channel ! write,x,y,z;
-	y++; 
-	channel ! write,x,y,z;
-	x++; 
-	channel ! write,x,y,z;
-	z++; 
-	channel ! write,x,y,z;
+}
+
+proctype process2()
+{
+	int r1 = 0;
+	int r2 = 0;
 	
+	/*Wie ist das mit den letzten beiden Werten?			????????????????????????????????*/
+	channelT2 ! read, ADRESSE_X, 0, 0;
+	
+	/* wird nur ausgeführt wenn auch die Adresse von x ist*/
+	channelT2 ? read, ADRESSE_X, r1, 0;
+	
+	channelT2 ! read, ADRESSE_Y, 0, 0;
+	channelT2 ? read, ADRESSE_Y,r2, 0;
+}
+
+init
+{
+	run process1();
+	run buffer(channelT1);
+	run process2();
+	run buffer(channelT2)
 }
