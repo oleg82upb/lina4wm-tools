@@ -1,20 +1,20 @@
 
 #define SIZE 5
 #define MAX_SIZE 5
-#define ADRESSE_X 0
-#define ADRESSE_Y 1
+#define ADRESSE_X 1
+#define ADRESSE_Y 2
+#define NULL -1
 /*Array welches die  Queue darstellt (Form: 3-dimensionales Array der Laenge SIZE) das heißt (nx3)-Matrix*/
 typedef matrix{int zeile [3]}
 mtype = {write, read};
 /*Channel der die reads und writes verschickt (Type (also write,read); Adresse; Wert;... )*/
 chan channelT1 = [0] of {mtype, int, int, int};
 chan channelT2 = [0] of {mtype, int, int, int};
-/*Writebuffer*/
-matrix queue [SIZE];
+
 /*Speicher*/
 int memory[MAX_SIZE];
 
-proctype buffer(chan channel)
+proctype bufferProcess(chan channel)
 {		
 	/*Queue Anfang bzw Ende*/
 	int head = 0;
@@ -22,6 +22,9 @@ proctype buffer(chan channel)
 	bit isEmpty = true;
 	int adresse, value,c; 
 	int i = 0;
+	
+	/*Writebuffer*/
+	matrix buffer [SIZE];
 	/*enqueue-Operation der Queue vom Writebuffer (einfügen in Queue wenn ein write-Befehl geschickt wird) und bei read-Befehl Queue bzw Speicher durchsuchen und Wert zurückgeben */
 end:	do 
 	:: 	atomic{ 
@@ -31,11 +34,11 @@ end:	do
 				if
 				:: (((tail+1) % SIZE) == head && !isEmpty) -> 	// buffer full, need to dequeue
 					/*Wert in Speicher schreiben: memory[adresse] = value*/
-					memory[queue[head].zeile[0]] = queue[head].zeile[1];
+					memory[buffer[head].zeile[0]] = buffer[head].zeile[1];
 					/*Writebuffer auf leer setzen*/
-					queue[head].zeile[0] = -1;
-					queue[head].zeile[1] = -1;
-					queue[head].zeile[2] = -1;
+					buffer[head].zeile[0] = NULL;
+					buffer[head].zeile[1] = NULL;
+					buffer[head].zeile[2] = NULL;
 					
 					/*head weitersetzen*/
 					head = (head+1) % SIZE;	
@@ -43,21 +46,24 @@ end:	do
 				fi
 				->	
  				tail = (tail+1) % SIZE;
-				queue[tail].zeile[0] = adresse;
-				queue[tail].zeile[1] = value;
-				queue[tail].zeile[2] = c;
+				buffer[tail].zeile[0] = adresse;
+				buffer[tail].zeile[1] = value;
+				buffer[tail].zeile[2] = c;
 		
 		/*READ*/
 		:: channel ? read, adresse, value, c ->
+			i = 0;
 			do
 			:: i < SIZE -> 
 				if
 				/* if Adresse entspricht gesuchter Adresse -> gib zugehörigen Wert zurück*/
-				::queue[i].zeile[0] == adresse ->  channel ! read,adresse,queue[i].zeile[1],c;
+				::buffer[i].zeile[0] == adresse ->  channel ! read,adresse,buffer[i].zeile[1],c;
 				::else -> i++;
 				fi
 			/*Zugriff auf Speicher und Rückgabe des entsprechenden Wertes*/
-			::i>=SIZE -> channel ! read,adresse,memory[adresse],c;
+			::else ->
+				channel ! read,adresse,memory[adresse],c;
+				break;
 			od
 
 		
@@ -65,11 +71,11 @@ end:	do
 		/*FLUSH*/
 		:: !isEmpty ->
 						/*Wert in Speicher schreiben: memory[adresse] = value*/
-						memory[queue[head].zeile[0]] = queue[head].zeile[1];
+						memory[buffer[head].zeile[0]] = buffer[head].zeile[1];
 						/*Writebuffer leeren*/
-						queue[head].zeile[0] = 0;
-						queue[head].zeile[1] = 0;
-						queue[head].zeile[2] = 0;
+						buffer[head].zeile[0] = NULL;
+						buffer[head].zeile[1] = NULL;
+						buffer[head].zeile[2] = NULL;
 						
 						/*head weitersetzen*/
 						head = (head+1) % SIZE;
@@ -84,8 +90,8 @@ end:	do
 }
 proctype process1()
 {
-	channelT1 ! write,ADRESSE_X,1,0;
-	channelT1 ! write,ADRESSE_X,1,0;
+	channelT1 ! write,ADRESSE_X,1,NULL;
+	channelT1 ! write,ADRESSE_Y,1,NULL;
 	
 }
 
@@ -94,20 +100,21 @@ proctype process2()
 	int r1 = 0;
 	int r2 = 0;
 	
-	/*Wie ist das mit den letzten beiden Werten?			????????????????????????????????*/
-	channelT2 ! read, ADRESSE_X, 0, 0;
+	channelT2 ! read, ADRESSE_X,NULL,NULL;
 	
 	/* wird nur ausgeführt wenn auch die Adresse von x ist*/
-	channelT2 ? read, ADRESSE_X, r1, 0;
+	channelT2 ? read, ADRESSE_X, r1, _;
 	
-	channelT2 ! read, ADRESSE_Y, 0, 0;
-	channelT2 ? read, ADRESSE_Y,r2, 0;
+	channelT2 ! read, ADRESSE_Y, NULL, NULL;
+	channelT2 ? read, ADRESSE_Y,r2, _;
+	/*assert*/
+	
 }
 
 init
 {
 	run process1();
-	run buffer(channelT1);
+	run bufferProcess(channelT1);
 	run process2();
-	run buffer(channelT2)
+	run bufferProcess(channelT2)
 }
