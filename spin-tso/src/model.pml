@@ -4,90 +4,12 @@
 #define ADRESSE_X 1
 #define ADRESSE_Y 2
 #define NULL -1
-/*Array welches die  Queue darstellt (Form: 3-dimensionales Array der Laenge SIZE) das heißt (nx3)-Matrix*/
-typedef matrix{int zeile [3]}
-mtype = {write, read};
+#include "buffer.pml"
+
 /*Channel der die reads und writes verschickt (Type (also write,read); Adresse; Wert;... )*/
 chan channelT1 = [0] of {mtype, int, int, int};
 chan channelT2 = [0] of {mtype, int, int, int};
 
-/*Speicher*/
-int memory[MAX_SIZE];
-
-proctype bufferProcess(chan channel)
-{		
-	/*Queue Anfang bzw Ende*/
-	int head = 0;
-	int tail = -1;
-	bit isEmpty = true;
-	int adresse, value,c; 
-	int i = 0;
-	
-	/*Writebuffer*/
-	matrix buffer [SIZE];
-	/*enqueue-Operation der Queue vom Writebuffer (einfügen in Queue wenn ein write-Befehl geschickt wird) und bei read-Befehl Queue bzw Speicher durchsuchen und Wert zurückgeben */
-end:	do 
-	:: 	atomic{ 
-		if
-			/*WRITE*/
-			:: channel ? write(adresse,value,c) ->
-				if
-				:: (((tail+1) % SIZE) == head && !isEmpty) -> 	// buffer full, need to dequeue
-					/*Wert in Speicher schreiben: memory[adresse] = value*/
-					memory[buffer[head].zeile[0]] = buffer[head].zeile[1];
-					/*Writebuffer auf leer setzen*/
-					buffer[head].zeile[0] = NULL;
-					buffer[head].zeile[1] = NULL;
-					buffer[head].zeile[2] = NULL;
-					
-					/*head weitersetzen*/
-					head = (head+1) % SIZE;	
-				:: else -> isEmpty = false; skip;
-				fi
-				->	
- 				tail = (tail+1) % SIZE;
-				buffer[tail].zeile[0] = adresse;
-				buffer[tail].zeile[1] = value;
-				buffer[tail].zeile[2] = c;
-		
-		/*READ*/
-		:: channel ? read, adresse, value, c ->
-			i = 0;
-			do
-			:: i < SIZE -> 
-				if
-				/* if Adresse entspricht gesuchter Adresse -> gib zugehörigen Wert zurück*/
-				::buffer[i].zeile[0] == adresse ->  channel ! read,adresse,buffer[i].zeile[1],c;
-				::else -> i++;
-				fi
-			/*Zugriff auf Speicher und Rückgabe des entsprechenden Wertes*/
-			::else ->
-				channel ! read,adresse,memory[adresse],c;
-				break;
-			od
-
-		
-			
-		/*FLUSH*/
-		:: !isEmpty ->
-						/*Wert in Speicher schreiben: memory[adresse] = value*/
-						memory[buffer[head].zeile[0]] = buffer[head].zeile[1];
-						/*Writebuffer leeren*/
-						buffer[head].zeile[0] = NULL;
-						buffer[head].zeile[1] = NULL;
-						buffer[head].zeile[2] = NULL;
-						
-						/*head weitersetzen*/
-						head = (head+1) % SIZE;
-						
-						if
-						::(head == ((tail+1) % SIZE))-> isEmpty = true;
-						:: else -> skip;
-						fi;
-		fi
-		}
-	od
-}
 proctype process1()
 {
 	channelT1 ! write,ADRESSE_X,1,NULL;
@@ -100,15 +22,15 @@ proctype process2()
 	int r1 = 0;
 	int r2 = 0;
 	
-	channelT2 ! read, ADRESSE_X,NULL,NULL;
+	channelT2 ! read, ADRESSE_Y,NULL,NULL;
 	
 	/* wird nur ausgeführt wenn auch die Adresse von x ist*/
-	channelT2 ? read, ADRESSE_X, r1, _;
+	channelT2 ? read, ADRESSE_Y, r1, _;
 	
-	channelT2 ! read, ADRESSE_Y, NULL, NULL;
-	channelT2 ? read, ADRESSE_Y,r2, _;
-	/*assert*/
-	
+	channelT2 ! read, ADRESSE_X, NULL, NULL;
+	channelT2 ? read, ADRESSE_X,r2, _;
+	/*assert: not allowed r1=1 and r2=0*/
+	assert( r1 == 1 && r2 == 0)
 }
 
 init
