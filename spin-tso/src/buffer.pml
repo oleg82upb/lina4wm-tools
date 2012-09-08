@@ -1,7 +1,5 @@
 #define SIZE 5
 #define MAX_SIZE 5
-#define ADRESSE_X 1
-#define ADRESSE_Y 2
 #define NULL -1
 
 /*Array welches die  Queue darstellt (Form: 3-dimensionales Array der Laenge SIZE) das heißt (nx3)-Matrix*/
