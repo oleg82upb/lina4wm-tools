@@ -32,7 +32,10 @@ proctype process2()
 	}
 
 	/*assert: not allowed r1=1 and r2=0*/
-	atomic {r1 == 1 -> assert( !(r2 == 0))}
+	atomic {r1 == 1 -> assert( (r2 == 1))}
+	//atomic {r1 == 1 -> assert( (r2 == 0))}
+	//atomic {r1 == 0 -> assert( (r2 == 1))}
+	//atomic {r1 == 0 -> assert( (r2 == 0))}
 }
 
 init
