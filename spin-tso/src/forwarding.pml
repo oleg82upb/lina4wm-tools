@@ -1,3 +1,11 @@
+/*
+* author: Annika Mütze <muetze.annika@gmail.com>
+* date: 09.2012
+*
+* Litmus-Test: allows two processors to see the writes in diffrent orders. 
+* Own write can be seen earlier than that of the other process.
+*/
+
 #define ADRESSE_X 1
 #define ADRESSE_Y 2
 #include "buffer.pml"

@@ -1,3 +1,11 @@
+/*
+* author: Annika Mütze <muetze.annika@gmail.com>
+* date: 09.2012
+*
+* Litmus-Test: Shows that there is no reordering of reads
+* with older writes to the same location.
+*/
+
 #define ADRESSE_X 1
 #include "buffer.pml"
 

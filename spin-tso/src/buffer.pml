@@ -1,3 +1,10 @@
+/*
+author: Annika Mütze <muetze.annika@gmail.com>
+date: 09.2012
+
+writebuffer model. Read, write and flush
+*/
+
 #define SIZE 5
 #define MAX_SIZE 5
 #define NULL -1
@@ -14,7 +21,10 @@ proctype bufferProcess(chan channel)
 	short head = 0;
 	short tail = -1;
 	bit isEmpty = true;
-	short adresse, value,c; 
+
+	short adresse = 0;
+	short value = 0;
+	short c = 0; 
 	short i = 0;
 	
 	/*Writebuffer*/

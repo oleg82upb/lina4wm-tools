@@ -1,9 +1,10 @@
 /*
-author: Annika Mütze <muetze.annika@gmail.com>
-date: 09.2012
-
-Litmus-Test: No reordering of writes 
-when a read to the same location procedes*/
+* author: Annika Mütze <muetze.annika@gmail.com>
+* date: 09.2012
+*
+* Litmus-Test: Reordering of reads with older writes is allowed
+* when the location differs
+*/
 
 #define ADRESSE_X 1
 #define ADRESSE_Y 2
@@ -18,24 +19,23 @@ bit r2 = 0;
 
 proctype process1()
 {
+	channelT1 ! write, ADRESSE_X, 1, NULL;
 	atomic{
-	channelT1 ! read,ADRESSE_X,NULL,NULL;
-	channelT1 ? read, ADRESSE_X, r1, _;
+	channelT1 ! read, ADRESSE_Y, NULL, NULL;
+	channelT1 ? read, ADRESSE_Y, r1, NULL;
 	}
-	channelT1 ! write,ADRESSE_Y,1,NULL;
-	
 }
 
 proctype process2()
 {
+	channelT2 ! write, ADRESSE_Y, 1, NULL;
 	atomic{
-	channelT2 ! read, ADRESSE_Y,NULL,NULL;
-	channelT2 ? read, ADRESSE_Y, r2, _;
+	channelT2 ! read, ADRESSE_X, NULL, NULL;
+	channelT2 ? read, ADRESSE_X, r2, NULL;
 	}
-	channelT2 ! write, ADRESSE_X, NULL, NULL;
-	
-	/*assert: not allowed r1=1 and r2=1*/
-	atomic{ r1 == 1 -> assert (r2 == 0)};
+	/*assert: allowed r1 = 0 and r2=  0
+	*all possibilities are valid*/
+	//atomic{ r1 == 1 -> assert (r2 == 0)};
 	//atomic{ r1 == 1 -> assert (r2 == 1)};
 	//atomic{ r1 == 0 -> assert (r2 == 1)};
 	//atomic{ r1 == 0 -> assert (r2 == 0)};
@@ -48,4 +48,3 @@ init
 	run process2();
 	run bufferProcess(channelT2)
 }
-
