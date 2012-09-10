@@ -3,19 +3,19 @@
 #define NULL -1
 
 /*Array welches die  Queue darstellt (Form: 3-dimensionales Array der Laenge SIZE) das heißt (nx3)-Matrix*/
-typedef matrix{int zeile [3]}
+typedef matrix{short zeile [3]}
 mtype = {write, read};
 /*Speicher*/
-int memory[MAX_SIZE];
+short memory[MAX_SIZE];
 
 proctype bufferProcess(chan channel)
 {		
 	/*Queue Anfang bzw Ende*/
-	int head = 0;
-	int tail = -1;
+	short head = 0;
+	short tail = -1;
 	bit isEmpty = true;
-	int adresse, value,c; 
-	int i = 0;
+	short adresse, value,c; 
+	short i = 0;
 	
 	/*Writebuffer*/
 	matrix buffer [SIZE];
