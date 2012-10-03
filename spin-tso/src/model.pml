@@ -14,17 +14,17 @@ Litmus-Test
 chan channelT1 = [0] of {mtype, short, short, short};
 chan channelT2 = [0] of {mtype, short, short, short};
 
-proctype process1()
+active proctype process1()
 {
 	channelT1 ! write,ADRESSE_X,1,NULL;
 	channelT1 ! write,ADRESSE_Y,1,NULL;
 	
 }
 
-proctype process2()
+active proctype process2()
 {
-	short r1 = 0;
-	short r2 = 0;
+	bit r1 = 0;
+	bit r2 = 0;
 	
 	atomic{
 	channelT2 ! read, ADRESSE_Y,NULL,NULL;
@@ -46,8 +46,8 @@ proctype process2()
 
 init
 {
-	run process1();
+	atomic{
 	run bufferProcess(channelT1);
-	run process2();
 	run bufferProcess(channelT2)
+	}
 }

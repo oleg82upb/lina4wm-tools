@@ -16,7 +16,7 @@ chan channelT2 = [0] of {mtype, short, short, short};
 bit r1 = 0;
 bit r2 = 0;
 
-proctype process1()
+active proctype process1()
 {
 	atomic{
 	channelT1 ! read,ADRESSE_X,NULL,NULL;
@@ -26,7 +26,7 @@ proctype process1()
 	
 }
 
-proctype process2()
+active proctype process2()
 {
 	atomic{
 	channelT2 ! read, ADRESSE_Y,NULL,NULL;
@@ -43,9 +43,8 @@ proctype process2()
 
 init
 {
-	run process1();
+	atomic{
 	run bufferProcess(channelT1);
-	run process2();
 	run bufferProcess(channelT2)
+	}
 }
-

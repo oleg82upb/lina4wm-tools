@@ -19,7 +19,7 @@ bit r2 = 0;
 bit r3 = 0;
 bit r4 = 0;
 
-proctype process1()
+active proctype process1()
 {
 	channelT1 ! write, ADRESSE_X, 1, NULL;
 	atomic{
@@ -32,7 +32,7 @@ proctype process1()
 	}
 }
 
-proctype process2()
+active proctype process2()
 {
 	channelT2 ! write, ADRESSE_Y, 1, NULL;
 	atomic{
@@ -48,8 +48,8 @@ proctype process2()
 
 init
 {
-	run process1();
-	run bufferProcess(channelT1);
-	run process2();
-	run bufferProcess(channelT2)
+	atomic{
+		run bufferProcess(channelT1);
+		run bufferProcess(channelT2)
+	}
 }
