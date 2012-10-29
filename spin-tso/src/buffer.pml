@@ -1,17 +1,15 @@
 /*
 author: Annika Mütze <muetze.annika@gmail.com>
-date: 09.2012
+date: 9.10.2012
 
-writebuffer model. Read, write and flush
+writebuffer model. Read, write, flush, fence and CAS
 */
 
-#define SIZE 5
-#define MAX_SIZE 5
 #define NULL -1
 
 /*Array welches die  Queue darstellt (Form: 3-dimensionales Array der Laenge SIZE) das heißt (nx3)-Matrix*/
 typedef matrix{short zeile [3]}
-mtype = {write, read};
+mtype = {write, read , fence, compareAndSwap};
 /*Speicher*/
 short memory[MAX_SIZE];
 
@@ -26,6 +24,8 @@ proctype bufferProcess(chan channel)
 	short value = 0;
 	short c = 0; 
 	short i = 0;
+	short old = 0;
+	short new = 0;
 	
 	/*Writebuffer*/
 	matrix buffer [SIZE];
@@ -34,8 +34,8 @@ proctype bufferProcess(chan channel)
 end:	do 
 	:: 	atomic{ 
 		if
-			/*WRITE*/
-			:: channel ? write(adresse,value,c) ->
+		/*WRITE*/
+		:: channel ? write(adresse,value,c) ->
 				if
 				:: (((tail+1) % SIZE) == head && !isEmpty) -> 	// buffer full, need to dequeue
 					/*Wert in Speicher schreiben: memory[adresse] = value*/
@@ -71,7 +71,6 @@ end:	do
 				break;
 			od
 
-		
 			
 		/*FLUSH*/
 		:: !isEmpty ->
@@ -89,6 +88,38 @@ end:	do
 						::(head == ((tail+1) % SIZE))-> isEmpty = true;
 						:: else -> skip;
 						fi;
+		
+		
+		
+		/*FENCE*/
+		::channel ? fence, _, _ ,_ ->
+			do
+			:: //FLUSH 
+					/*Wert in Speicher schreiben: memory[adresse] = value*/
+					memory[buffer[head].zeile[0]] = buffer[head].zeile[1];
+					/*Writebuffer leeren*/
+					buffer[head].zeile[0] = NULL;
+					buffer[head].zeile[1] = NULL;
+					buffer[head].zeile[2] = NULL;
+						
+					/*head weitersetzen*/
+					head = (head+1) % SIZE;
+						
+					if
+					::(head == ((tail+1) % SIZE))-> isEmpty = true;
+					:: else -> skip;
+					fi;
+			:: isEmpty -> break
+			od
+			
+		/*COMPARE AND SWAP*/
+		:: channel ? compareAndSwap, adresse , old, new ->
+			if
+			:: (memory[adresse] == old) -> memory[adresse] = new;
+			:: else -> skip
+			fi
+					
+		
 		fi
 		}
 	od

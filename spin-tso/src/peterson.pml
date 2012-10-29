@@ -1,3 +1,5 @@
+#define SIZE 5 			//size of Buffer
+#define MAX_SIZE 5		//size of memory 
 #include "buffer.pml"
 
 /*Channel der die reads und writes verschickt (Type (also write,read); Adresse; Wert;... )*/
@@ -25,7 +27,7 @@ inline readI(a, into)
 }
 
 
-proctype peterson1(chan b)
+atomic proctype peterson1(chan b)
 {	
 	short r5, r6;
 	bit myFlag = 0; 
@@ -56,7 +58,7 @@ again2:
         goto again2 
 }
 
-proctype peterson2(chan b){	
+atomic proctype peterson2(chan b){	
 	short r5, r6;
 	bit myFlag = 1; 
 	bit hisFlag = 0;
@@ -92,7 +94,5 @@ init
 	
 	run bufferProcess(bufferChannel2);
 	run bufferProcess(bufferChannel1);
-	run peterson1(bufferChannel1);
-	run peterson2(bufferChannel2);
 	
 }
