@@ -15,8 +15,8 @@ when a read to the same location procedes*/
 /*Channel der die reads und writes verschickt (Type (also write,read); Adresse; Wert;... )*/
 chan channelT1 = [0] of {mtype, short, short, short};
 chan channelT2 = [0] of {mtype, short, short, short};
-bit r1 = 0;
-bit r2 = 0;
+short r1 = 0;
+short r2 = 0;
 
 active proctype process1()
 {
@@ -25,7 +25,7 @@ active proctype process1()
 	channelT1 ? iRead, ADRESSE_X, r1, _;
 	}
 	channelT1 ! iWrite,ADRESSE_Y,1,NULL;
-	
+	end: skip;
 }
 
 active proctype process2()
@@ -34,13 +34,8 @@ active proctype process2()
 	channelT2 ! iRead, ADRESSE_Y,NULL,NULL;
 	channelT2 ? iRead, ADRESSE_Y, r2, _;
 	}
-	channelT2 ! iWrite, ADRESSE_X, NULL, NULL;
-	
-	/*assert: not allowed r1=1 and r2=1*/
-	//atomic{ r1 == 1 -> assert (r2 == 0)};
-	//atomic{ r1 == 1 -> assert (r2 == 1)};
-	//atomic{ r1 == 0 -> assert (r2 == 1)};
-	//atomic{ r1 == 0 -> assert (r2 == 0)};
+	channelT2 ! iWrite, ADRESSE_X, 1, NULL;	
+	end: skip;
 }
 
 init
@@ -50,3 +45,8 @@ init
 	run bufferProcess(channelT2)
 	}
 }
+	// r1 == 1  (r2 == 1)	-> not allowed r1=1 and r2=1*/
+	// r1 == 1  (r2 == 0)	-> ok
+	// r1 == 0  (r2 == 1)	-> ok
+	// r1 == 0  (r2 == 0)	-> ok
+ltl check { [] (process1 @ end && process2 @ end ->( ! (r1 == 1 && r2 == 1)))}; 
