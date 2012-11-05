@@ -1,0 +1,230 @@
+grammar de.upb.llvm_parser.LLVM with org.eclipse.xtext.common.Terminals
+
+generate lLVM "http://www.upb.de/llvm_parser/LLVM"
+
+LLVM:
+	(elements+=toplevelentity)*;
+
+toplevelentity:
+	'module' 'asm' STRING |
+	'target' 'triple' '=' STRING |
+	'target' 'datalayout' '=' STRING |
+	'deplibs' '=' '[' ']' |
+	'deplibs' '=' '[' STRING (',' STRING)* ']' |
+	'declare' FunctionHeader |
+	LocalVar '=' 'type' Type |
+	'define' FunctionHeader '{' //FIXME  INSTRUCTIONS
+;
+MDString:
+	'!'STRING
+;
+MDNode:
+	'!'//FIXME MDNodeNumber
+;
+UnnamedType:
+	LocalVarID '=' 'type'+ type
+;
+GlobalType:
+	'constant' | 'global'
+;
+Alias:
+	GlobalVar '=' OptionalVisibility 'alias' OptionalLinkage Aliasee
+;
+Aliasee:
+	TypeAndValue |
+	'bitcast' '(' TypeAndValue 'to' Type ')'|
+	'getelementptr' 'inbounds'? '('  ...  ')'
+;
+Global:
+GlobalVar '=' OptionalLinkage OptionalVisibility OptionalThreadLocal OptionalAddrSpace OptionalUnNammedAddr GlobalType Type Const |
+OptionalLinkage OptionalVisibility OptionalThreadLocal OptionalAddrSpace OptionalUnNammedAddr GlobalType Type Const
+;
+
+GlobalVar: OptionalLinkage OptionalVisibility OptionalThreadLocal OptionalAddrSpace OptionalUnNammedAddr('constant'|'global')
+;
+
+UInt32:
+	uint32
+;
+TLSModel:
+'localdynamic'|'initialexec'|'localexec'
+;
+OptionalThreadLocal:
+	WS | 'thread_local'|'thread_local' '(' TLSModel ')'
+;
+OptionalLinkage:
+	WS |'private'|'linker_private'|'linker_private_weak'|'internal'|'weak'|'weak_odr'|'linkonce'|'linkonce_odr'|
+	'linkonce_odr_auto_hide'|'available_externally'|'appending'|'dllexport'|'common'|'dllimport'|'extern_weak'|'external'
+;
+OptionalAddrSpace:
+	WS |'addrspace' '(' UInt32 ')'
+;
+OptionalVisibility:
+	WS|'default'|'hidden'|'protected'
+;
+OptionalCallingConv:
+WS|'ccc'|'fastcc'|'coldcc'|'x86_stdcallcc'|'x86_fastcallcc'|'x86_thiscallcc'|'arm_apcscc'|
+'arm_aapcscc'|'arm_aapcs_vfpcc'|'msp430_intrcc'|'ptx_kernel'|'ptx_device'|'spir_func'|'spir_kernel'|'cc' UINT
+;
+InstructionMetadata:
+!dbg !42 (',' !dbg !57)*
+;
+OptionalAlignment:
+WS|'align' 4
+;
+OptionalCommaAlign:
+WS|',' align 4
+;
+ScopeAndOrdering: // FIXME HIER MUSS EINIGES PASSIEREN
+if isAtomic: ::= 'singlethread'? AtomicOrdering
+else: ::= //FIXME HIER FEHLT WAS
+;
+OptionalStackAlignment
+WS | 'alignstack' '(' 4 ')'
+;
+IndexList:
+(',' uint32)+
+;
+LocalVar:
+	''
+;
+Type:
+ 'float' | 'void' /*(etc)*/ | StructType | '[' /*FIXME  ... */ ']'|'<' /*FIXME ... */ '>'|%foo|%4|Type '*'|Type 'addrspace' '(' uint32 ')' '*'|
+ Types '(' ArgTypeListI ')' OptFuncAttrs|'[' APSINTVAL 'x' Types ']'|'<' APSINTVAL 'x' Types '>'
+;
+ParameterList:
+'(' ')'|'(' Arg (',' Arg)* ')'
+;
+Arg:
+Type OptionalAttributes Value OptionalAttributes
+;
+ArgumentList:
+	'(' ArgTypeListI ')'
+;
+ArgTypeListI:
+WS|'...'|ArgTypeList ',' '...'|ArgType (',' ArgType)*
+;
+FunctionType:
+Type ArgumentList OptionalAttrs
+;
+StructType: '{' '}'|'{' Type (',' Type)* '}'|'<' '{' '}' '>'|'<' '{' Type (',' Type)* '}' '>'
+;
+ValID :
+'{' ConstVector '}'| '<' ConstVector '>'|'<' '{' ConstVector '}' '>'|'asm' SideEffect? AlignStack? STRINGCONSTANT ',' STRINGCONSTANT|
+'blockaddress' '(' @foo ',' %bar ')'
+;
+GlobalValueVector:
+WS|TypeAndValue (',' TypeAndValue)*
+;
+MetadataValue:
+!42|!{...}|!"string"
+;
+FunctionHeader:
+OptionalLinkage OptionalVisibility OptionalCallingConv OptRetAttrs OptUnnamedAddr Type GlobalName '(' ArgList ')' OptFuncAttrs OptSection OptionalAlign OptGC
+;
+FunctionBody:
+'{' BasicBlock+ '}'
+;
+BasicBlock:
+LabelStr? Instruction*
+;
+Ret:
+'ret' void (',' !dbg, !1)*|'ret' TypeAndValue (',' !dbg, !1)*
+;
+Br:
+'br' TypeAndValue|'br' TypeAndValue ',' TypeAndValue ',' TypeAndValue
+;
+Instruction:
+'switch' TypeAndValue ',' TypeAndValue '[' JumpTable ']'|
+'indirectbr' TypeAndValue ',' '[' LabelList ']'
+;
+JumpTable:
+(TypeAndValue ',' TypeAndValue)*
+;
+Invoke:
+'invoke' OptionalCallingConv OptionalAttrs Type Value ParamList OptionalAttrs 'to' TypeAndValue 'unwind' TypeAndValue
+;
+Resume:
+'resume' TypeAndValue
+;
+
+Arithmetic:
+ArithmeticOps TypeAndValue ',' Value
+;
+LocalVarID:
+	'';
+
+Logical:
+ArithmeticOps TypeAndValue ',' Value {
+;
+Compare:
+'icmp' IPredicates TypeAndValue ',' Value
+'fcmp' FPredicates TypeAndValue ',' Value
+;
+Cast:
+CastOpc TypeAndValue 'to' Type
+;
+Select:
+'select' TypeAndValue ',' TypeAndValue ',' TypeAndValue
+;
+VA_Arg:
+'va_arg' TypeAndValue ',' Type
+;
+ExtractElement:
+'extractelement' TypeAndValue ',' TypeAndValue
+;
+InsertElement:
+'insertelement' TypeAndValue ',' TypeAndValue ',' TypeAndValue
+;
+ShuffleVector:
+'shufflevector' TypeAndValue ',' TypeAndValue ',' TypeAndValue
+;
+PHI:
+'phi' Type '[' Value ',' Value ']' (',' '[' Value ',' Value ']')*
+;
+LandingPad:
+'landingpad' Type 'personality' TypeAndValue 'cleanup'? Clause+
+;
+Clause:
+'catch' TypeAndValue
+'filter'
+'filter' TypeAndValue ( ',' TypeAndValue )*
+;
+Call:
+'tail'? 'call' OptionalCallingConv OptionalAttrs Type Value ParameterList OptionalAttrs
+;
+Alloc:
+'alloca' Type (',' TypeAndValue)? (',' OptionalInfo)?
+;
+Load:
+'load' 'volatile'? TypeAndValue (',' 'align' i32)?
+'load' 'atomic' 'volatile'? TypeAndValue 'singlethread'? AtomicOrdering (',' 'align' i32)?
+;
+Store:
+'store' 'volatile'? TypeAndValue ',' TypeAndValue (',' 'align' i32)?
+'store' 'atomic' 'volatile'? TypeAndValue ',' TypeAndValue 'singlethread'? AtomicOrdering (',' 'align' i32)?
+;
+CmpXchg:
+'cmpxchg' 'volatile'? TypeAndValue ',' TypeAndValue ',' TypeAndValue 'singlethread'? AtomicOrdering
+;
+AtomicRMW:
+'atomicrmw' 'volatile'? BinOp TypeAndValue ',' TypeAndValue 'singlethread'? AtomicOrdering
+;
+Fence:
+'fence' 'singlethread'? AtomicOrdering
+;
+GetElementPtr:
+'getelementptr' 'inbounds'? TypeAndValue (',' TypeAndValue)*
+;
+ExtractValue:
+'extractvalue' TypeAndValue (',' uint32)+
+;
+InsertValue:
+'insertvalue' TypeAndValue ',' TypeAndValue (',' uint32)+
+;
+MDNodeVector:
+Element (',' Element)*
+;
+Element:
+'null' | TypeAndValue
+;
