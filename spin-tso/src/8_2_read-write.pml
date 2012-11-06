@@ -18,29 +18,25 @@ chan channelT2 = [0] of {mtype, short, short, short};
 short r1 = 0;
 short r2 = 0;
 
-active proctype process1()
+proctype process1(chan ch)
 {
-	atomic{
-	channelT1 ! iRead,ADRESSE_X,NULL,NULL;
-	channelT1 ? iRead, ADRESSE_X, r1, _;
-	}
-	channelT1 ! iWrite,ADRESSE_Y,1,NULL;
-	end: skip;
+	read(ADRESSE_X, r1);
+	write(ADRESSE_Y,1);
+	done: skip;
 }
 
-active proctype process2()
+proctype process2(chan ch)
 {
-	atomic{
-	channelT2 ! iRead, ADRESSE_Y,NULL,NULL;
-	channelT2 ? iRead, ADRESSE_Y, r2, _;
-	}
-	channelT2 ! iWrite, ADRESSE_X, 1, NULL;	
-	end: skip;
+	read(ADRESSE_Y, r2);
+	write(ADRESSE_X,1);
+	done: skip;
 }
 
 init
 {
 	atomic{
+	run process1(channelT1);
+	run process2(channelT2);
 	run bufferProcess(channelT1);
 	run bufferProcess(channelT2)
 	}
@@ -49,4 +45,4 @@ init
 	// r1 == 1  (r2 == 0)	-> ok
 	// r1 == 0  (r2 == 1)	-> ok
 	// r1 == 0  (r2 == 0)	-> ok
-ltl check { [] (process1 @ end && process2 @ end ->( ! (r1 == 1 && r2 == 1)))}; 
+ltl check { [] (process1 @ done && process2 @ done ->( ! (r1 == 1 && r2 == 1)))}; 
