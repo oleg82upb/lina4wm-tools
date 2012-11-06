@@ -14,7 +14,22 @@ mtype = {iWrite, iRead , iMfence, iCas};
 short memory[MAX_SIZE];
 
 
-inline write() {
+inline write(adr, value)
+{
+	ch ! iWrite, adr, value, NULL;
+}
+
+inline read(adr, target)
+{
+	atomic{
+	ch ! iRead, adr, NULL, NULL;
+	ch ? iRead, adr, target, NULL;
+	}
+}
+
+
+
+inline writeB() {
 	if
 	:: (((tail+1) % SIZE) == head && !isEmpty) -> 	// buffer full, need to dequeue
 		/*Wert in Speicher schreiben: memory[adresse] = value*/
@@ -35,7 +50,7 @@ inline write() {
 		buffer[tail].zeile[2] = c;
 }
 
-inline read() {
+inline readB() {
 	i = 0;
 	do
 	:: i < SIZE -> 
@@ -51,7 +66,7 @@ inline read() {
 	od
 }
 
-inline flush() {
+inline flushB() {
 	/*Wert in Speicher schreiben: memory[adresse] = value*/
 	memory[buffer[head].zeile[0]] = buffer[head].zeile[1];
 	/*Writebuffer leeren*/
@@ -68,16 +83,16 @@ inline flush() {
 	fi;
 }
 
-inline mfence() {
+inline mfenceB() {
 	do
-	:: flush() 
+	:: flushB() 
 	:: isEmpty -> break
 	od
 }
 	
-inline cas() {
+inline casB() {
 	do
-	:: flush()
+	:: flushB()
 	:: isEmpty -> 
 		if
 		:: (memory[adresse] == old) -> memory[adresse] = new;
@@ -109,15 +124,15 @@ end:	do
 		::	atomic{ 
 				if
 				/*WRITE*/
-				:: channel ? iWrite(adresse,value,c) -> write();
+				:: channel ? iWrite(adresse,value, _) -> writeB();
 				/*READ*/
-				:: channel ? iRead, adresse, value, c -> read();
+				:: channel ? iRead, adresse, value, c -> readB();
 				/*FLUSH*/
-				:: !isEmpty -> flush();
+				:: !isEmpty -> flushB();
 				/*FENCE*/
-				::channel ? iMfence, _, _ ,_ -> mfence();
+				::channel ? iMfence, _, _ ,_ -> mfenceB();
 				/*COMPARE AND SWAP*/
-				:: channel ? iCas, adresse , old, new -> cas();
+				:: channel ? iCas, adresse , old, new -> casB();
 				fi
 			}
 		od

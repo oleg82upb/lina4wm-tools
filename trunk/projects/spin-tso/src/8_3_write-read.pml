@@ -11,45 +11,46 @@
 #define SIZE 4 			//size of Buffer
 #define MAX_SIZE 4		//size of memory 
 #include "x86_tso_buffer.pml"
-
+//#include "sc-model.pml"
 
 /*Channel der die reads und writes verschickt (Type (also write,read); Adresse; Wert;... )*/
+
+short r1 = 0;
+short r2 = 0;
 chan channelT1 = [0] of {mtype, short, short, short};
 chan channelT2 = [0] of {mtype, short, short, short};
-bit r1 = 0;
-bit r2 = 0;
 
-active proctype process1()
+
+proctype process1(chan ch)
 {
-	
-	channelT1 ! iWrite, ADRESSE_X, 1, NULL;
-	atomic{
-	channelT1 ! iRead, ADRESSE_Y, NULL, NULL;
-	channelT1 ? iRead, ADRESSE_Y, r1, NULL;
-	}
+
+	write(ADRESSE_X, 1);
+	read(ADRESSE_Y, r1);
+	done:skip;
 }
 
-active proctype process2()
+proctype process2(chan ch)
 {
-	
-	channelT2 ! iWrite, ADRESSE_Y, 1, NULL;
-	atomic{
-	channelT2 ! iRead, ADRESSE_X, NULL, NULL;
-	channelT2 ? iRead, ADRESSE_X, r2, NULL;
-	}
+	write(ADRESSE_Y, 1);
+	read(ADRESSE_X, r2);
+
 	/*assert: allowed r1 = 0 and r2=  0
 	*all possibilities are valid*/
 	//atomic{ r1 == 1 -> assert (r2 == 0)};
 	//atomic{ r1 == 1 -> assert (r2 == 1)};
 	//atomic{ r1 == 0 -> assert (r2 == 1)};
 	//atomic{ r1 == 0 -> assert (r2 == 0)};
+	done:skip;
 }
 
 init
 {
 atomic{
+	run process1(channelT1);
+	run process2(channelT2);
 	run bufferProcess(channelT1);
 	run bufferProcess(channelT2);
-	}
-	
+	}	
 }
+
+ltl check { [] ((process1 @ done && process2 @ done) -> (!(r1 == 0 && r2 == 0)))}; 

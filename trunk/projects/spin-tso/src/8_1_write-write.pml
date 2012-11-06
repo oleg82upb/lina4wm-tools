@@ -15,41 +15,36 @@ Litmus-Test
 /*Channel der die reads und writes verschickt (Type (also write,read); Adresse; Wert;... )*/
 chan channelT1 = [0] of {mtype, short, short, short};
 chan channelT2 = [0] of {mtype, short, short, short};
+short r1 = 0;
+short r2 = 0;
 
-active proctype process1()
+
+proctype process1(chan ch)
 {
-	channelT1 ! iWrite,ADRESSE_X,1,NULL;
-	channelT1 ! iWrite,ADRESSE_Y,1,NULL;
-	
+	write(ADRESSE_X, 1);
+	write(ADRESSE_Y, 1);
 }
 
-active proctype process2()
-{
-	bit r1 = 0;
-	bit r2 = 0;
+proctype process2(chan ch)
+{	
+	read(ADRESSE_Y, r1);
+	read(ADRESSE_X, r2);	
 	
-	atomic{
-	channelT2 ! iRead, ADRESSE_Y,NULL,NULL;
-	channelT2 ? iRead, ADRESSE_Y, r1, _;
-	}
-
-	
-	atomic{
-	channelT2 ! iRead, ADRESSE_X, NULL, NULL;
-	channelT2 ? iRead, ADRESSE_X,r2, _;
-	}
 	/*assert: not allowed r1=1 and r2=0*/
 	atomic {r1 == 1 -> assert( (r2 == 1))}
 	//atomic {r1 == 1 -> assert( (r2 == 0))}
 	//atomic {r1 == 0 -> assert( (r2 == 1))}
 	//atomic {r1 == 0 -> assert( (r2 == 0))}
-
 }
 
 init
 {
 	atomic{
+	run process1(channelT1);
+	run process2(channelT2);
 	run bufferProcess(channelT1);
 	run bufferProcess(channelT2)
 	}
 }
+
+//ltl check { [] (r1 == 1 -> r2 != 0)}; 

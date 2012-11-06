@@ -16,42 +16,38 @@ Litmus-Test: Stores Are Transitively Visible
 chan channelT1 = [0] of {mtype, short, short, short};
 chan channelT2 = [0] of {mtype, short, short, short};
 chan channelT3 = [0] of {mtype, short, short, short};
-bit r1 = 0;
-bit r2 = 0;
-bit r3 = 0;
+short r1 = 0;
+short r2 = 0;
+short r3 = 0;
 
-active proctype process1()
+proctype process1(chan ch)
 {
-	channelT1 ! iWrite,ADRESSE_X,1,NULL;	
+	write(ADRESSE_X, 1);
 }
 
-active proctype process2()
+proctype process2(chan ch)
 {
-	atomic{
-	channelT2 ! iRead, ADRESSE_X, NULL, NULL;
-	channelT2 ? iRead, ADRESSE_X, r1, _;
-	}
-	channelT2 ! iWrite, ADRESSE_Y, 1, NULL;
+	read(ADRESSE_X, r1);
+	write(ADRESSE_Y, 1);
 }
 
-active proctype process3()
+proctype process3(chan ch)
 {
-	atomic{
-	channelT3 ! iRead, ADRESSE_Y, NULL, NULL;
-	channelT3 ? iRead, ADRESSE_Y, r2, _;
-	}
-	atomic{
-	channelT3 ! iRead, ADRESSE_X, NULL,NULL;
-	channelT3 ? iRead, ADRESSE_X, r3, _; 
-	}
+	read(ADRESSE_Y, r2);
+	read(ADRESSE_X, r3);
+	
 	atomic{ r1 == 1 && r2 == 1 -> assert (r3 == 1)};
 	//atomic{ r1 == 1 && r2 == 1 -> assert (r3 == 0)}
 }
 
 init {
 	atomic{
+	run process1(channelT1);
+	run process2(channelT2);
+	run process3(channelT3);
 	run bufferProcess(channelT1);
 	run bufferProcess(channelT2);
 	run bufferProcess(channelT3)
 	}
 }
+
