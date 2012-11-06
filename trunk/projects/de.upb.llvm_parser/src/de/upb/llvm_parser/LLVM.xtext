@@ -146,8 +146,6 @@ Type OptionalAttributes Value OptionalAttributes
 Value:
 	WS //FIXME Nicht aufgeöstes Terminal
 ;
-
-
 OptionalAttributes:
 	WS //FIXME Nicht aufgeöstes Terminal
 ;
@@ -158,32 +156,78 @@ ArgumentList:
 ArgTypeListI:
 WS|'...'|ArgTypeList ',' '...'|ArgType (',' ArgType)*
 ;
+ArgType:
+	WS //FIXME Nicht aufgeöstes Terminal
+;
+ArgTypeList:
+	WS //FIXME Nicht aufgeöstes Terminal
+;
+
 FunctionType:
 Type ArgumentList OptionalAttributes
 ;
 StructType: '{' '}'|'{' Type (',' Type)* '}'|'<' '{' '}' '>'|'<' '{' Type (',' Type)* '}' '>'
 ;
 ValID :
-'{' ConstVector '}'| '<' ConstVector '>'|'<' '{' ConstVector '}' '>'|'asm' SideEffect? AlignStack? STRINGCONSTANT ',' STRINGCONSTANT|
-'blockaddress' '(' @foo ',' %bar ')'
+'{' ConstVector '}'| '<' ConstVector '>'|'<' '{' ConstVector '}' '>'|'asm' SideEffect? AlignStack? STRING ',' STRING|
+'blockaddress' '(' '@foo' ',' '%bar' ')'
+;
+AlignStack:
+	WS //FIXME Nicht aufgeöstes Terminal	
+;
+SideEffect:
+	WS //FIXME Nicht aufgeöstes Terminal
+;
+ConstVector:
+	WS //FIXME Nicht aufgeöstes Terminal
 ;
 GlobalValueVector:
 WS|TypeAndValue (',' TypeAndValue)*
 ;
 MetadataValue:
-!42|!{...}|!"string"
+	'!42'|'!{...}'|"!string"
 ;
 FunctionHeader:
-OptionalLinkage OptionalVisibility OptionalCallingConv OptRetAttrs OptUnnamedAddr Type GlobalName '(' ArgList ')' OptFuncAttrs OptSection OptionalAlign OptGC
+OptionalLinkage OptionalVisibility OptionalCallingConv OptRetAttrs OptionalUnNammedAddr Type GlobalName '(' ArgumentList ')' OptFuncAttrs OptSection OptionalAlign OptGC
 ;
+
+OptGC:
+	WS //FIXME Nicht aufgeöstes Terminal
+;
+
+
+OptionalAlign:
+	WS //FIXME Nicht aufgeöstes Terminal
+;
+
+
+OptSection:
+	WS //FIXME Nicht aufgeöstes Terminal
+;
+
+
+GlobalName:
+	WS //FIXME Nicht aufgeöstes Terminal
+;
+
+
+OptRetAttrs:
+	WS //FIXME Nicht aufgeöstes Terminal
+;
+
 FunctionBody:
 '{' BasicBlock+ '}'
 ;
 BasicBlock:
 LabelStr? Instruction*
 ;
+
+LabelStr:
+	WS //FIXME Nicht aufgeöstes Terminal
+;
+
 Ret:
-'ret' void (',' !dbg, !1)*|'ret' TypeAndValue (',' !dbg, !1)*
+'ret' 'void' (',' '!dbg' '!'INT)*|'ret' TypeAndValue (',' '!dbg' '!'INT)*
 ;
 Br:
 'br' TypeAndValue|'br' TypeAndValue ',' TypeAndValue ',' TypeAndValue
@@ -192,11 +236,16 @@ Instruction:
 'switch' TypeAndValue ',' TypeAndValue '[' JumpTable ']'|
 'indirectbr' TypeAndValue ',' '[' LabelList ']'
 ;
+
+LabelList:
+	WS //FIXME Nicht aufgeöstes Terminal
+;
+
 JumpTable:
 (TypeAndValue ',' TypeAndValue)*
 ;
 Invoke:
-'invoke' OptionalCallingConv OptionalAttrs Type Value ParamList OptionalAttrs 'to' TypeAndValue 'unwind' TypeAndValue
+'invoke' OptionalCallingConv OptionalAttributes Type Value ParameterList OptionalAttributes 'to' TypeAndValue 'unwind' TypeAndValue
 ;
 Resume:
 'resume' TypeAndValue
@@ -205,19 +254,40 @@ Resume:
 Arithmetic:
 ArithmeticOps TypeAndValue ',' Value
 ;
+
+ArithmeticOps:
+	WS //FIXME Nicht aufgeöstes Terminal
+;
+
 LocalVarID:
-	'';
+	WS //FIXME Nicht aufgeöstes Terminal
+;	
 
 Logical:
-ArithmeticOps TypeAndValue ',' Value {
+ArithmeticOps TypeAndValue ',' Value '{'
 ;
 Compare:
 'icmp' IPredicates TypeAndValue ',' Value
 'fcmp' FPredicates TypeAndValue ',' Value
 ;
+
+FPredicates:
+	WS //FIXME Nicht aufgeöstes Terminal
+;
+
+
+IPredicates:
+	WS //FIXME Nicht aufgeöstes Terminal
+;
+
 Cast:
 CastOpc TypeAndValue 'to' Type
 ;
+
+CastOpc:
+	WS //FIXME Nicht aufgeöstes Terminal
+;
+
 Select:
 'select' TypeAndValue ',' TypeAndValue ',' TypeAndValue
 ;
@@ -245,18 +315,23 @@ Clause:
 'filter' TypeAndValue ( ',' TypeAndValue )*
 ;
 Call:
-'tail'? 'call' OptionalCallingConv OptionalAttrs Type Value ParameterList OptionalAttrs
+'tail'? 'call' OptionalCallingConv OptionalAttributes Type Value ParameterList OptionalAttributes
 ;
 Alloc:
 'alloca' Type (',' TypeAndValue)? (',' OptionalInfo)?
 ;
+
+OptionalInfo:
+	WS //FIXME Nicht aufgeöstes Terminal
+;
+
 Load:
-'load' 'volatile'? TypeAndValue (',' 'align' i32)?
-'load' 'atomic' 'volatile'? TypeAndValue 'singlethread'? AtomicOrdering (',' 'align' i32)?
+'load' 'volatile'? TypeAndValue (',' 'align' UInt32)?
+'load' 'atomic' 'volatile'? TypeAndValue 'singlethread'? AtomicOrdering (',' 'align' UInt32)?
 ;
 Store:
-'store' 'volatile'? TypeAndValue ',' TypeAndValue (',' 'align' i32)?
-'store' 'atomic' 'volatile'? TypeAndValue ',' TypeAndValue 'singlethread'? AtomicOrdering (',' 'align' i32)?
+'store' 'volatile'? TypeAndValue ',' TypeAndValue (',' 'align' UInt32)?
+'store' 'atomic' 'volatile'? TypeAndValue ',' TypeAndValue 'singlethread'? AtomicOrdering (',' 'align' UInt32)?
 ;
 CmpXchg:
 'cmpxchg' 'volatile'? TypeAndValue ',' TypeAndValue ',' TypeAndValue 'singlethread'? AtomicOrdering
@@ -264,17 +339,27 @@ CmpXchg:
 AtomicRMW:
 'atomicrmw' 'volatile'? BinOp TypeAndValue ',' TypeAndValue 'singlethread'? AtomicOrdering
 ;
+
+BinOp:
+	WS //FIXME Nicht aufgeöstes Terminal
+;
+
 Fence:
 'fence' 'singlethread'? AtomicOrdering
 ;
+
+AtomicOrdering:
+	WS //FIXME Nicht aufgeöstes Terminal
+;
+
 GetElementPtr:
 'getelementptr' 'inbounds'? TypeAndValue (',' TypeAndValue)*
 ;
 ExtractValue:
-'extractvalue' TypeAndValue (',' uint32)+
+'extractvalue' TypeAndValue (',' INT)+
 ;
 InsertValue:
-'insertvalue' TypeAndValue ',' TypeAndValue (',' uint32)+
+'insertvalue' TypeAndValue ',' TypeAndValue (',' INT)+
 ;
 MDNodeVector:
 Element (',' Element)*
