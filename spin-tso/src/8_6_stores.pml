@@ -7,8 +7,8 @@ Litmus-Test: Stores Are Transitively Visible
 
 #define ADRESSE_X 1
 #define ADRESSE_Y 2
-#define SIZE 5 			//size of Buffer
-#define MAX_SIZE 5		//size of memory 
+#define BUFF_SIZE 5 	//size of Buffer
+#define MEM_SIZE 5		//size of memory 
 #include "x86_tso_buffer.pml"
 
 

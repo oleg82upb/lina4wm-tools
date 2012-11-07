@@ -8,8 +8,8 @@
 
 #define ADRESSE_X 1
 #define ADRESSE_Y 2
-#define SIZE 4 			//size of Buffer
-#define MAX_SIZE 4		//size of memory 
+#define BUFF_SIZE 4 	//size of Buffer
+#define MEM_SIZE 4		//size of memory 
 #include "x86_tso_buffer.pml"
 //#include "sc-model.pml"
 

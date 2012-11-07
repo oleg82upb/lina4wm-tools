@@ -11,7 +11,7 @@ writebuffer model. Read, write, flush, fence and CAS
 typedef matrix{short zeile [3]}
 mtype = {iWrite, iRead , iMfence, iCas};
 /*Speicher*/
-short memory[MAX_SIZE];
+short memory[MEM_SIZE];
 
 
 inline write(adr, value)
@@ -27,11 +27,21 @@ inline read(adr, target)
 	}
 }
 
+inline cas(adr, oldValue, newValue, returnValue) 
+{
+	bit success;
+	atomic{
+	ch ! iCas, adr, oldValue, newValue;
+	ch ? iCas, adr, success, _; 
+	returnValue = success;
+	}
+}
+
 
 
 inline writeB() {
 	if
-	:: (((tail+1) % SIZE) == head && !isEmpty) -> 	// buffer full, need to dequeue
+	:: (((tail+1) % BUFF_SIZE) == head && !isEmpty) -> 	// buffer full, need to dequeue
 		/*Wert in Speicher schreiben: memory[adresse] = value*/
 		memory[buffer[head].zeile[0]] = buffer[head].zeile[1];
 		/*Writebuffer auf leer setzen*/
@@ -40,11 +50,11 @@ inline writeB() {
 		buffer[head].zeile[2] = NULL;
 					
 		/*head weitersetzen*/
-		head = (head+1) % SIZE;	
+		head = (head+1) % BUFF_SIZE;	
 	:: else -> isEmpty = false; skip;
 	fi
 		->	
- 		tail = (tail+1) % SIZE;
+ 		tail = (tail+1) % BUFF_SIZE;
 		buffer[tail].zeile[0] = adresse;
 		buffer[tail].zeile[1] = value;
 		buffer[tail].zeile[2] = c;
@@ -53,7 +63,7 @@ inline writeB() {
 inline readB() {
 	i = 0;
 	do
-	:: i < SIZE -> 
+	:: i < BUFF_SIZE -> 
 			if
 			/* if Adresse entspricht gesuchter Adresse -> gib zugehörigen Wert zurück*/
 			::buffer[i].zeile[0] == adresse ->  channel ! iRead,adresse,buffer[i].zeile[1],c;
@@ -75,10 +85,10 @@ inline flushB() {
 	buffer[head].zeile[2] = NULL;
 						
 	/*head weitersetzen*/
-	head = (head+1) % SIZE;
+	head = (head+1) % BUFF_SIZE;
 			
 	if
-	::(head == ((tail+1) % SIZE))-> isEmpty = true;
+	::(head == ((tail+1) % BUFF_SIZE))-> isEmpty = true;
 	:: else -> skip;
 	fi;
 }
@@ -117,7 +127,7 @@ proctype bufferProcess(chan channel)
 	short new = 0;
 	
 	/*Writebuffer*/
-	matrix buffer [SIZE];
+	matrix buffer [BUFF_SIZE];
 	
 	/*enqueue-Operation der Queue vom Writebuffer (einfügen in Queue wenn ein write-Befehl geschickt wird) und bei read-Befehl Queue bzw Speicher durchsuchen und Wert zurückgeben */
 end:	do 
