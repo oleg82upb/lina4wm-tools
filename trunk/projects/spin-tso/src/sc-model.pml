@@ -4,7 +4,7 @@
 /*Array welches die  Queue darstellt (Form: 3-dimensionales Array der Laenge SIZE) das heißt (nx3)-Matrix*/
 typedef matrix{short zeile [3]}
 /*Speicher*/
-short memory[MAX_SIZE];
+short memory[MEM_SIZE];
 
 
 inline write(adr, value)
