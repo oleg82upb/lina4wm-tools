@@ -419,15 +419,6 @@ public interface LLVMFactory extends EFactory
   MainLevelEntity createMainLevelEntity();
 
   /**
-   * Returns a new object of class '<em>Local Var Instruction</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Local Var Instruction</em>'.
-   * @generated
-   */
-  LocalVarInstruction createLocalVarInstruction();
-
-  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

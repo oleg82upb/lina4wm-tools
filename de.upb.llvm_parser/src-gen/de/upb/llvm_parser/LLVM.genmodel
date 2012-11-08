@@ -17,6 +17,7 @@
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//LocalVar">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//LocalVar/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//LocalVar/instr"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//GetElementPtr">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//GetElementPtr/pointer"/>
@@ -168,9 +169,5 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//UnNammedAddr/adress"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//MainLevelEntity"/>
-    <genClasses ecoreClass="LLVM.ecore#//LocalVarInstruction">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//LocalVarInstruction/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//LocalVarInstruction/instruction"/>
-    </genClasses>
   </genPackages>
 </genmodel:GenModel>

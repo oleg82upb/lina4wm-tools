@@ -33,7 +33,6 @@ import de.upb.llvm_parser.lLVM.LabelStr;
 import de.upb.llvm_parser.lLVM.LandingPad;
 import de.upb.llvm_parser.lLVM.Load;
 import de.upb.llvm_parser.lLVM.LocalVar;
-import de.upb.llvm_parser.lLVM.LocalVarInstruction;
 import de.upb.llvm_parser.lLVM.Logical;
 import de.upb.llvm_parser.lLVM.MainLevelEntity;
 import de.upb.llvm_parser.lLVM.ParameterList;
@@ -372,13 +371,6 @@ public class LLVMPackageImpl extends EPackageImpl implements LLVMPackage
   private EClass mainLevelEntityEClass = null;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass localVarInstructionEClass = null;
-
-  /**
    * Creates an instance of the model <b>Package</b>, registered with
    * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
    * package URI value.
@@ -519,6 +511,16 @@ public class LLVMPackageImpl extends EPackageImpl implements LLVMPackage
   public EAttribute getLocalVar_Name()
   {
     return (EAttribute)localVarEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getLocalVar_Instr()
+  {
+    return (EReference)localVarEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1686,36 +1688,6 @@ public class LLVMPackageImpl extends EPackageImpl implements LLVMPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getLocalVarInstruction()
-  {
-    return localVarInstructionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getLocalVarInstruction_Name()
-  {
-    return (EAttribute)localVarInstructionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getLocalVarInstruction_Instruction()
-  {
-    return (EReference)localVarInstructionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public LLVMFactory getLLVMFactory()
   {
     return (LLVMFactory)getEFactoryInstance();
@@ -1752,6 +1724,7 @@ public class LLVMPackageImpl extends EPackageImpl implements LLVMPackage
 
     localVarEClass = createEClass(LOCAL_VAR);
     createEAttribute(localVarEClass, LOCAL_VAR__NAME);
+    createEReference(localVarEClass, LOCAL_VAR__INSTR);
 
     getElementPtrEClass = createEClass(GET_ELEMENT_PTR);
     createEReference(getElementPtrEClass, GET_ELEMENT_PTR__POINTER);
@@ -1908,10 +1881,6 @@ public class LLVMPackageImpl extends EPackageImpl implements LLVMPackage
     createEAttribute(unNammedAddrEClass, UN_NAMMED_ADDR__ADRESS);
 
     mainLevelEntityEClass = createEClass(MAIN_LEVEL_ENTITY);
-
-    localVarInstructionEClass = createEClass(LOCAL_VAR_INSTRUCTION);
-    createEAttribute(localVarInstructionEClass, LOCAL_VAR_INSTRUCTION__NAME);
-    createEReference(localVarInstructionEClass, LOCAL_VAR_INSTRUCTION__INSTRUCTION);
   }
 
   /**
@@ -1979,7 +1948,6 @@ public class LLVMPackageImpl extends EPackageImpl implements LLVMPackage
     functionHeaderEClass.getESuperTypes().add(this.getMainLevelEntity());
     unNammedAddrEClass.getESuperTypes().add(this.getFunctionHeader());
     mainLevelEntityEClass.getESuperTypes().add(this.getAbstractElement());
-    localVarInstructionEClass.getESuperTypes().add(this.getMainLevelEntity());
 
     // Initialize classes and features; add operations and parameters
     initEClass(llvmEClass, de.upb.llvm_parser.lLVM.LLVM.class, "LLVM", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1993,6 +1961,7 @@ public class LLVMPackageImpl extends EPackageImpl implements LLVMPackage
 
     initEClass(localVarEClass, LocalVar.class, "LocalVar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getLocalVar_Name(), ecorePackage.getEString(), "name", null, 0, 1, LocalVar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getLocalVar_Instr(), this.getInstruction(), null, "instr", null, 0, 1, LocalVar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(getElementPtrEClass, GetElementPtr.class, "GetElementPtr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getGetElementPtr_Pointer(), this.getTypeAndValue(), null, "pointer", null, 0, -1, GetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2149,10 +2118,6 @@ public class LLVMPackageImpl extends EPackageImpl implements LLVMPackage
     initEAttribute(getUnNammedAddr_Adress(), ecorePackage.getEInt(), "adress", null, 0, 1, UnNammedAddr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(mainLevelEntityEClass, MainLevelEntity.class, "MainLevelEntity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(localVarInstructionEClass, LocalVarInstruction.class, "LocalVarInstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getLocalVarInstruction_Name(), ecorePackage.getEString(), "name", null, 0, 1, LocalVarInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getLocalVarInstruction_Instruction(), this.getInstruction(), null, "instruction", null, 0, 1, LocalVarInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

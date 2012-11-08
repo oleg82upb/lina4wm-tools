@@ -172,7 +172,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * CallingConv:
 	 * 	'ccc' | 'fastcc' | 'coldcc' | 'x86_stdcallcc' | 'x86_fastcallcc' | 'x86_thiscallcc' | 'arm_apcscc' |
 	 * 	'arm_aapcscc' | 'arm_aapcs_vfpcc' | 'msp430_intrcc' | 'ptx_kernel' | 'ptx_device' | 'spir_func' | 'spir_kernel' |
-	 * 	'cc <' INT '>' | INT;
+	 * 	'cc' '<' INT '>' | INT;
 	 */
 	protected String getCallingConvToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
@@ -204,7 +204,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * FunctionAttributes:
-	 * 	'address_safety' | 'alignstack(<n>)' | 'alwaysinline' | 'nonlazybind' | 'inlinehint' | 'naked' | 'noimplicitfloat' |
+	 * 	'address_safety' | 'alignstack''(''<'INT'>'')' | 'alwaysinline' | 'nonlazybind' | 'inlinehint' | 'naked' | 'noimplicitfloat' |
 	 * 	'noinline' |
 	 * 	'noredzone' | 'noreturn' | 'nounwind' | 'optsize' | 'readnone' | 'readonly' | 'returns_twice' | 'ssp' | 'sspreq' |
 	 * 	'uwtable';
@@ -303,12 +303,12 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Type:
-	 * 	BasicType | StructType | Pointer | VAR_TYPE;
+	 * 	(StructType | VAR_TYPE )+ ;
 	 */
 	protected String getTypeToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
-		return "int";
+		return "{}";
 	}
 	
 	/**
