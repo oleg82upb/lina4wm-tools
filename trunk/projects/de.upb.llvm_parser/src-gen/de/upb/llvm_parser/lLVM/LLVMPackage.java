@@ -216,13 +216,22 @@ public interface LLVMPackage extends EPackage
   int LOCAL_VAR__NAME = MAIN_LEVEL_ENTITY_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Instr</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOCAL_VAR__INSTR = MAIN_LEVEL_ENTITY_FEATURE_COUNT + 1;
+
+  /**
    * The number of structural features of the '<em>Local Var</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int LOCAL_VAR_FEATURE_COUNT = MAIN_LEVEL_ENTITY_FEATURE_COUNT + 1;
+  int LOCAL_VAR_FEATURE_COUNT = MAIN_LEVEL_ENTITY_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link de.upb.llvm_parser.lLVM.impl.InstructionImpl <em>Instruction</em>}' class.
@@ -1648,43 +1657,6 @@ public interface LLVMPackage extends EPackage
    */
   int UN_NAMMED_ADDR_FEATURE_COUNT = FUNCTION_HEADER_FEATURE_COUNT + 1;
 
-  /**
-   * The meta object id for the '{@link de.upb.llvm_parser.lLVM.impl.LocalVarInstructionImpl <em>Local Var Instruction</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see de.upb.llvm_parser.lLVM.impl.LocalVarInstructionImpl
-   * @see de.upb.llvm_parser.lLVM.impl.LLVMPackageImpl#getLocalVarInstruction()
-   * @generated
-   */
-  int LOCAL_VAR_INSTRUCTION = 44;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOCAL_VAR_INSTRUCTION__NAME = MAIN_LEVEL_ENTITY_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Instruction</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOCAL_VAR_INSTRUCTION__INSTRUCTION = MAIN_LEVEL_ENTITY_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Local Var Instruction</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOCAL_VAR_INSTRUCTION_FEATURE_COUNT = MAIN_LEVEL_ENTITY_FEATURE_COUNT + 2;
-
 
   /**
    * Returns the meta object for class '{@link de.upb.llvm_parser.lLVM.LLVM <em>LLVM</em>}'.
@@ -1769,6 +1741,17 @@ public interface LLVMPackage extends EPackage
    * @generated
    */
   EAttribute getLocalVar_Name();
+
+  /**
+   * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.lLVM.LocalVar#getInstr <em>Instr</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Instr</em>'.
+   * @see de.upb.llvm_parser.lLVM.LocalVar#getInstr()
+   * @see #getLocalVar()
+   * @generated
+   */
+  EReference getLocalVar_Instr();
 
   /**
    * Returns the meta object for class '{@link de.upb.llvm_parser.lLVM.GetElementPtr <em>Get Element Ptr</em>}'.
@@ -3007,38 +2990,6 @@ public interface LLVMPackage extends EPackage
   EClass getMainLevelEntity();
 
   /**
-   * Returns the meta object for class '{@link de.upb.llvm_parser.lLVM.LocalVarInstruction <em>Local Var Instruction</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Local Var Instruction</em>'.
-   * @see de.upb.llvm_parser.lLVM.LocalVarInstruction
-   * @generated
-   */
-  EClass getLocalVarInstruction();
-
-  /**
-   * Returns the meta object for the attribute '{@link de.upb.llvm_parser.lLVM.LocalVarInstruction#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see de.upb.llvm_parser.lLVM.LocalVarInstruction#getName()
-   * @see #getLocalVarInstruction()
-   * @generated
-   */
-  EAttribute getLocalVarInstruction_Name();
-
-  /**
-   * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.lLVM.LocalVarInstruction#getInstruction <em>Instruction</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Instruction</em>'.
-   * @see de.upb.llvm_parser.lLVM.LocalVarInstruction#getInstruction()
-   * @see #getLocalVarInstruction()
-   * @generated
-   */
-  EReference getLocalVarInstruction_Instruction();
-
-  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3132,6 +3083,14 @@ public interface LLVMPackage extends EPackage
      * @generated
      */
     EAttribute LOCAL_VAR__NAME = eINSTANCE.getLocalVar_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Instr</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference LOCAL_VAR__INSTR = eINSTANCE.getLocalVar_Instr();
 
     /**
      * The meta object literal for the '{@link de.upb.llvm_parser.lLVM.impl.GetElementPtrImpl <em>Get Element Ptr</em>}' class.
@@ -4140,32 +4099,6 @@ public interface LLVMPackage extends EPackage
      * @generated
      */
     EClass MAIN_LEVEL_ENTITY = eINSTANCE.getMainLevelEntity();
-
-    /**
-     * The meta object literal for the '{@link de.upb.llvm_parser.lLVM.impl.LocalVarInstructionImpl <em>Local Var Instruction</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see de.upb.llvm_parser.lLVM.impl.LocalVarInstructionImpl
-     * @see de.upb.llvm_parser.lLVM.impl.LLVMPackageImpl#getLocalVarInstruction()
-     * @generated
-     */
-    EClass LOCAL_VAR_INSTRUCTION = eINSTANCE.getLocalVarInstruction();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute LOCAL_VAR_INSTRUCTION__NAME = eINSTANCE.getLocalVarInstruction_Name();
-
-    /**
-     * The meta object literal for the '<em><b>Instruction</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference LOCAL_VAR_INSTRUCTION__INSTRUCTION = eINSTANCE.getLocalVarInstruction_Instruction();
 
   }
 

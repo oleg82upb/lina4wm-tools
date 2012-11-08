@@ -422,15 +422,6 @@ public class LLVMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case LLVMPackage.LOCAL_VAR_INSTRUCTION:
-      {
-        LocalVarInstruction localVarInstruction = (LocalVarInstruction)theEObject;
-        T result = caseLocalVarInstruction(localVarInstruction);
-        if (result == null) result = caseMainLevelEntity(localVarInstruction);
-        if (result == null) result = caseAbstractElement(localVarInstruction);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       default: return defaultCase(theEObject);
     }
   }
@@ -1135,22 +1126,6 @@ public class LLVMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseMainLevelEntity(MainLevelEntity object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Local Var Instruction</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Local Var Instruction</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseLocalVarInstruction(LocalVarInstruction object)
   {
     return null;
   }

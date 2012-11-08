@@ -2,12 +2,15 @@
  */
 package de.upb.llvm_parser.lLVM.impl;
 
+import de.upb.llvm_parser.lLVM.Instruction;
 import de.upb.llvm_parser.lLVM.LLVMPackage;
 import de.upb.llvm_parser.lLVM.LocalVar;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -19,6 +22,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.lLVM.impl.LocalVarImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.lLVM.impl.LocalVarImpl#getInstr <em>Instr</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,6 +49,16 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getInstr() <em>Instr</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getInstr()
+   * @generated
+   * @ordered
+   */
+  protected Instruction instr;
 
   /**
    * <!-- begin-user-doc -->
@@ -95,6 +109,70 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
    * <!-- end-user-doc -->
    * @generated
    */
+  public Instruction getInstr()
+  {
+    return instr;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetInstr(Instruction newInstr, NotificationChain msgs)
+  {
+    Instruction oldInstr = instr;
+    instr = newInstr;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LLVMPackage.LOCAL_VAR__INSTR, oldInstr, newInstr);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setInstr(Instruction newInstr)
+  {
+    if (newInstr != instr)
+    {
+      NotificationChain msgs = null;
+      if (instr != null)
+        msgs = ((InternalEObject)instr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LLVMPackage.LOCAL_VAR__INSTR, null, msgs);
+      if (newInstr != null)
+        msgs = ((InternalEObject)newInstr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LLVMPackage.LOCAL_VAR__INSTR, null, msgs);
+      msgs = basicSetInstr(newInstr, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LLVMPackage.LOCAL_VAR__INSTR, newInstr, newInstr));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case LLVMPackage.LOCAL_VAR__INSTR:
+        return basicSetInstr(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
@@ -102,6 +180,8 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
     {
       case LLVMPackage.LOCAL_VAR__NAME:
         return getName();
+      case LLVMPackage.LOCAL_VAR__INSTR:
+        return getInstr();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -118,6 +198,9 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
     {
       case LLVMPackage.LOCAL_VAR__NAME:
         setName((String)newValue);
+        return;
+      case LLVMPackage.LOCAL_VAR__INSTR:
+        setInstr((Instruction)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,6 +219,9 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
       case LLVMPackage.LOCAL_VAR__NAME:
         setName(NAME_EDEFAULT);
         return;
+      case LLVMPackage.LOCAL_VAR__INSTR:
+        setInstr((Instruction)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -152,6 +238,8 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
     {
       case LLVMPackage.LOCAL_VAR__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case LLVMPackage.LOCAL_VAR__INSTR:
+        return instr != null;
     }
     return super.eIsSet(featureID);
   }

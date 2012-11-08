@@ -12,30 +12,20 @@ AbstractElement:
 	{AbstractElement} TopLevelEntity SL_COMMENT? | MainLevelEntity SL_COMMENT?;
 
 TypeAndValue:
-	type=Type value=VAR_TYPE;
+	type=VAR_TYPE value=Type;
 
 Type:
-	BasicType | StructType | Pointer | VAR_TYPE;
+	(StructType | VAR_TYPE )+ ;
+
 terminal VAR_TYPE:
-	('@'|'%') ('a'..'z'|'$'|'_'|'A'..'Z'|'.')+('a'..'z'|'$'|'_'|'A'..'Z'|'0'..'9')*
-;
+	('@' | '%') ('a'..'z' | '$' | '_' | 'A'..'Z' | '.')+ (('a'..'z' | '$' | '_' | 'A'..'Z' | '0'..'9')*('*')*)?;
+
 LocalVar:
-name = Type '=' 'type' Type;
-
-
-BasicType:
-	'int' | 'long' | 'double' | 'float' | 'bool' | 'sbyte' | 'short' | 'ulong' | 'label' | 'void' | 'ubyte' | 'ushort' |
-	'uint';
-
-Pointer:
-	BasicType ('*')+ | BasicType 'addrspace' '(' INT ')' '*';
-
+	name=Type '=' ('type' Type| instr=Instruction);
+ 
 StructType:
-	'{' '}' | // {}
-	'{' Type (',' Type)* '}' | // {BasicType*}
-	'<' '{' '}' '>' | // <{}>
-	'<' '{' Type (',' Type)* '}' '>' // <{BasicType*}>
-;
+	'{' (VAR_TYPE (',' VAR_TYPE)*)? '}' |
+	'<' '{' (VAR_TYPE (',' VAR_TYPE)*)? '}' '>';
 
 GetElementPtr:
 	'getelementptr' 'inbounds'? pointer+=TypeAndValue (',' params+=TypeAndValue)*;
@@ -83,10 +73,10 @@ Alloc:
 CallingConv:
 	'ccc' | 'fastcc' | 'coldcc' | 'x86_stdcallcc' | 'x86_fastcallcc' | 'x86_thiscallcc' | 'arm_apcscc' |
 	'arm_aapcscc' | 'arm_aapcs_vfpcc' | 'msp430_intrcc' | 'ptx_kernel' | 'ptx_device' | 'spir_func' | 'spir_kernel' |
-	'cc <' INT '>' | INT;
+	'cc' '<' INT '>' | INT;
 
 FunctionAttributes:
-	'address_safety' | 'alignstack(<n>)' | 'alwaysinline' | 'nonlazybind' | 'inlinehint' | 'naked' | 'noimplicitfloat' |
+	'address_safety' | 'alignstack''(''<'INT'>'')' | 'alwaysinline' | 'nonlazybind' | 'inlinehint' | 'naked' | 'noimplicitfloat' |
 	'noinline' |
 	'noredzone' | 'noreturn' | 'nounwind' | 'optsize' | 'readnone' | 'readonly' | 'returns_twice' | 'ssp' | 'sspreq' |
 	'uwtable';
@@ -105,7 +95,6 @@ LandingPad:
 
 Clause:
 	'catch' TypeAndValue |
-	{Clause} 'filter' |
 	'filter' filter+=TypeAndValue (',' filter+=TypeAndValue)*;
 
 Select:
@@ -224,11 +213,7 @@ TopLevelEntity:
 	'deplibs' '=' '[' STRING (',' STRING)* ']';
 
 MainLevelEntity:
-	FunctionHeader |
-	LocalVarInstruction |LocalVar;
-
-LocalVarInstruction:
-	'%' name=ID '=' instruction=Instruction;
+	FunctionHeader | LocalVar;
 
 Alignment:
 	'align' INT //must be a power of 2

@@ -39,8 +39,7 @@ public class LLVMParser extends AbstractContentAssistParser {
 				{
 					put(grammarAccess.getAbstractElementAccess().getAlternatives(), "rule__AbstractElement__Alternatives");
 					put(grammarAccess.getTypeAccess().getAlternatives(), "rule__Type__Alternatives");
-					put(grammarAccess.getBasicTypeAccess().getAlternatives(), "rule__BasicType__Alternatives");
-					put(grammarAccess.getPointerAccess().getAlternatives(), "rule__Pointer__Alternatives");
+					put(grammarAccess.getLocalVarAccess().getAlternatives_2(), "rule__LocalVar__Alternatives_2");
 					put(grammarAccess.getStructTypeAccess().getAlternatives(), "rule__StructType__Alternatives");
 					put(grammarAccess.getAtomicOrderingAccess().getAlternatives(), "rule__AtomicOrdering__Alternatives");
 					put(grammarAccess.getBinOpAccess().getAlternatives(), "rule__BinOp__Alternatives");
@@ -72,14 +71,13 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAbstractElementAccess().getGroup_1(), "rule__AbstractElement__Group_1__0");
 					put(grammarAccess.getTypeAndValueAccess().getGroup(), "rule__TypeAndValue__Group__0");
 					put(grammarAccess.getLocalVarAccess().getGroup(), "rule__LocalVar__Group__0");
-					put(grammarAccess.getPointerAccess().getGroup_0(), "rule__Pointer__Group_0__0");
-					put(grammarAccess.getPointerAccess().getGroup_1(), "rule__Pointer__Group_1__0");
+					put(grammarAccess.getLocalVarAccess().getGroup_2_0(), "rule__LocalVar__Group_2_0__0");
 					put(grammarAccess.getStructTypeAccess().getGroup_0(), "rule__StructType__Group_0__0");
+					put(grammarAccess.getStructTypeAccess().getGroup_0_1(), "rule__StructType__Group_0_1__0");
+					put(grammarAccess.getStructTypeAccess().getGroup_0_1_1(), "rule__StructType__Group_0_1_1__0");
 					put(grammarAccess.getStructTypeAccess().getGroup_1(), "rule__StructType__Group_1__0");
 					put(grammarAccess.getStructTypeAccess().getGroup_1_2(), "rule__StructType__Group_1_2__0");
-					put(grammarAccess.getStructTypeAccess().getGroup_2(), "rule__StructType__Group_2__0");
-					put(grammarAccess.getStructTypeAccess().getGroup_3(), "rule__StructType__Group_3__0");
-					put(grammarAccess.getStructTypeAccess().getGroup_3_3(), "rule__StructType__Group_3_3__0");
+					put(grammarAccess.getStructTypeAccess().getGroup_1_2_1(), "rule__StructType__Group_1_2_1__0");
 					put(grammarAccess.getGetElementPtrAccess().getGroup(), "rule__GetElementPtr__Group__0");
 					put(grammarAccess.getGetElementPtrAccess().getGroup_3(), "rule__GetElementPtr__Group_3__0");
 					put(grammarAccess.getExtractValueAccess().getGroup(), "rule__ExtractValue__Group__0");
@@ -103,6 +101,7 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAllocAccess().getGroup_2(), "rule__Alloc__Group_2__0");
 					put(grammarAccess.getAllocAccess().getGroup_3(), "rule__Alloc__Group_3__0");
 					put(grammarAccess.getCallingConvAccess().getGroup_14(), "rule__CallingConv__Group_14__0");
+					put(grammarAccess.getFunctionAttributesAccess().getGroup_1(), "rule__FunctionAttributes__Group_1__0");
 					put(grammarAccess.getParameterListAccess().getGroup(), "rule__ParameterList__Group__0");
 					put(grammarAccess.getParameterListAccess().getGroup_2_1(), "rule__ParameterList__Group_2_1__0");
 					put(grammarAccess.getParameterListAccess().getGroup_2_1_1(), "rule__ParameterList__Group_2_1_1__0");
@@ -113,8 +112,7 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getLandingPadAccess().getGroup_4_0(), "rule__LandingPad__Group_4_0__0");
 					put(grammarAccess.getClauseAccess().getGroup_0(), "rule__Clause__Group_0__0");
 					put(grammarAccess.getClauseAccess().getGroup_1(), "rule__Clause__Group_1__0");
-					put(grammarAccess.getClauseAccess().getGroup_2(), "rule__Clause__Group_2__0");
-					put(grammarAccess.getClauseAccess().getGroup_2_2(), "rule__Clause__Group_2_2__0");
+					put(grammarAccess.getClauseAccess().getGroup_1_2(), "rule__Clause__Group_1_2__0");
 					put(grammarAccess.getSelectAccess().getGroup(), "rule__Select__Group__0");
 					put(grammarAccess.getVA_ArgAccess().getGroup(), "rule__VA_Arg__Group__0");
 					put(grammarAccess.getExtractElementAccess().getGroup(), "rule__ExtractElement__Group__0");
@@ -151,12 +149,12 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTopLevelEntityAccess().getGroup_3(), "rule__TopLevelEntity__Group_3__0");
 					put(grammarAccess.getTopLevelEntityAccess().getGroup_4(), "rule__TopLevelEntity__Group_4__0");
 					put(grammarAccess.getTopLevelEntityAccess().getGroup_4_4(), "rule__TopLevelEntity__Group_4_4__0");
-					put(grammarAccess.getLocalVarInstructionAccess().getGroup(), "rule__LocalVarInstruction__Group__0");
 					put(grammarAccess.getAlignmentAccess().getGroup(), "rule__Alignment__Group__0");
 					put(grammarAccess.getLLVMAccess().getElementsAssignment(), "rule__LLVM__ElementsAssignment");
 					put(grammarAccess.getTypeAndValueAccess().getTypeAssignment_0(), "rule__TypeAndValue__TypeAssignment_0");
 					put(grammarAccess.getTypeAndValueAccess().getValueAssignment_1(), "rule__TypeAndValue__ValueAssignment_1");
 					put(grammarAccess.getLocalVarAccess().getNameAssignment_0(), "rule__LocalVar__NameAssignment_0");
+					put(grammarAccess.getLocalVarAccess().getInstrAssignment_2_1(), "rule__LocalVar__InstrAssignment_2_1");
 					put(grammarAccess.getGetElementPtrAccess().getPointerAssignment_2(), "rule__GetElementPtr__PointerAssignment_2");
 					put(grammarAccess.getGetElementPtrAccess().getParamsAssignment_3_1(), "rule__GetElementPtr__ParamsAssignment_3_1");
 					put(grammarAccess.getExtractValueAccess().getAggregateAssignment_1(), "rule__ExtractValue__AggregateAssignment_1");
@@ -198,8 +196,8 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getLandingPadAccess().getPersonalityAssignment_3(), "rule__LandingPad__PersonalityAssignment_3");
 					put(grammarAccess.getLandingPadAccess().getClauseAssignment_4_0_1(), "rule__LandingPad__ClauseAssignment_4_0_1");
 					put(grammarAccess.getLandingPadAccess().getClauseAssignment_4_1(), "rule__LandingPad__ClauseAssignment_4_1");
-					put(grammarAccess.getClauseAccess().getFilterAssignment_2_1(), "rule__Clause__FilterAssignment_2_1");
-					put(grammarAccess.getClauseAccess().getFilterAssignment_2_2_1(), "rule__Clause__FilterAssignment_2_2_1");
+					put(grammarAccess.getClauseAccess().getFilterAssignment_1_1(), "rule__Clause__FilterAssignment_1_1");
+					put(grammarAccess.getClauseAccess().getFilterAssignment_1_2_1(), "rule__Clause__FilterAssignment_1_2_1");
 					put(grammarAccess.getSelectAccess().getConditionAssignment_1(), "rule__Select__ConditionAssignment_1");
 					put(grammarAccess.getSelectAccess().getVal1Assignment_3(), "rule__Select__Val1Assignment_3");
 					put(grammarAccess.getSelectAccess().getVal2Assignment_5(), "rule__Select__Val2Assignment_5");
@@ -241,8 +239,6 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getFunctionHeaderAccess().getPListAssignment_8(), "rule__FunctionHeader__PListAssignment_8");
 					put(grammarAccess.getGlobalNameAccess().getNameAssignment_1(), "rule__GlobalName__NameAssignment_1");
 					put(grammarAccess.getUnNammedAddrAccess().getAdressAssignment(), "rule__UnNammedAddr__AdressAssignment");
-					put(grammarAccess.getLocalVarInstructionAccess().getNameAssignment_1(), "rule__LocalVarInstruction__NameAssignment_1");
-					put(grammarAccess.getLocalVarInstructionAccess().getInstructionAssignment_3(), "rule__LocalVarInstruction__InstructionAssignment_3");
 				}
 			};
 		}

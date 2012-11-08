@@ -30,7 +30,6 @@ import de.upb.llvm_parser.lLVM.LabelStr;
 import de.upb.llvm_parser.lLVM.LandingPad;
 import de.upb.llvm_parser.lLVM.Load;
 import de.upb.llvm_parser.lLVM.LocalVar;
-import de.upb.llvm_parser.lLVM.LocalVarInstruction;
 import de.upb.llvm_parser.lLVM.PHI;
 import de.upb.llvm_parser.lLVM.ParameterList;
 import de.upb.llvm_parser.lLVM.Return;
@@ -245,14 +244,6 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 					return; 
 				}
 				else break;
-			case LLVMPackage.LOCAL_VAR_INSTRUCTION:
-				if(context == grammarAccess.getAbstractElementRule() ||
-				   context == grammarAccess.getLocalVarInstructionRule() ||
-				   context == grammarAccess.getMainLevelEntityRule()) {
-					sequence_LocalVarInstruction(context, (LocalVarInstruction) semanticObject); 
-					return; 
-				}
-				else break;
 			case LLVMPackage.PHI:
 				if(context == grammarAccess.getInstructionRule() ||
 				   context == grammarAccess.getPHIRule()) {
@@ -441,7 +432,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     {Clause}
+	 *     (filter+=TypeAndValue filter+=TypeAndValue*)
 	 */
 	protected void sequence_Clause(EObject context, Clause semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -726,36 +717,10 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (name=ID instruction=Instruction)
-	 */
-	protected void sequence_LocalVarInstruction(EObject context, LocalVarInstruction semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, LLVMPackage.Literals.LOCAL_VAR_INSTRUCTION__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LLVMPackage.Literals.LOCAL_VAR_INSTRUCTION__NAME));
-			if(transientValues.isValueTransient(semanticObject, LLVMPackage.Literals.LOCAL_VAR_INSTRUCTION__INSTRUCTION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LLVMPackage.Literals.LOCAL_VAR_INSTRUCTION__INSTRUCTION));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getLocalVarInstructionAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getLocalVarInstructionAccess().getInstructionInstructionParserRuleCall_3_0(), semanticObject.getInstruction());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     name=Type
+	 *     (name=Type instr=Instruction?)
 	 */
 	protected void sequence_LocalVar(EObject context, LocalVar semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, LLVMPackage.Literals.LOCAL_VAR__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LLVMPackage.Literals.LOCAL_VAR__NAME));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getLocalVarAccess().getNameTypeParserRuleCall_0_0(), semanticObject.getName());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -850,7 +815,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (type=Type value=VAR_TYPE)
+	 *     (type=VAR_TYPE value=Type)
 	 */
 	protected void sequence_TypeAndValue(EObject context, TypeAndValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

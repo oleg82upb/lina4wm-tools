@@ -108,7 +108,6 @@ public class LLVMFactoryImpl extends EFactoryImpl implements LLVMFactory
       case LLVMPackage.GLOBAL_NAME: return createGlobalName();
       case LLVMPackage.UN_NAMMED_ADDR: return createUnNammedAddr();
       case LLVMPackage.MAIN_LEVEL_ENTITY: return createMainLevelEntity();
-      case LLVMPackage.LOCAL_VAR_INSTRUCTION: return createLocalVarInstruction();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -596,17 +595,6 @@ public class LLVMFactoryImpl extends EFactoryImpl implements LLVMFactory
   {
     MainLevelEntityImpl mainLevelEntity = new MainLevelEntityImpl();
     return mainLevelEntity;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public LocalVarInstruction createLocalVarInstruction()
-  {
-    LocalVarInstructionImpl localVarInstruction = new LocalVarInstructionImpl();
-    return localVarInstruction;
   }
 
   /**
