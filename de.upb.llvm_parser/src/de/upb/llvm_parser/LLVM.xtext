@@ -3,367 +3,233 @@ grammar de.upb.llvm_parser.LLVM with org.eclipse.xtext.common.Terminals
 generate lLVM "http://www.upb.de/llvm_parser/LLVM"
 
 LLVM:
-	(elements+=toplevelentity)*;
+	elements+=AbstractElement*;
 
-toplevelentity:
+terminal SL_COMMENT:
+	';' !('\n' | '\r')* ('\r'? '\n')?;
+
+AbstractElement:
+	{AbstractElement} TopLevelEntity SL_COMMENT? | MainLevelEntity SL_COMMENT?;
+
+TypeAndValue:
+	type=Type value=VAR_TYPE;
+
+Type:
+	BasicType | StructType | Pointer | VAR_TYPE;
+terminal VAR_TYPE:
+	('@'|'%') ('a'..'z'|'$'|'_'|'A'..'Z'|'.')+('a'..'z'|'$'|'_'|'A'..'Z'|'0'..'9')*
+;
+LocalVar:
+name = Type '=' 'type' Type;
+
+
+BasicType:
+	'int' | 'long' | 'double' | 'float' | 'bool' | 'sbyte' | 'short' | 'ulong' | 'label' | 'void' | 'ubyte' | 'ushort' |
+	'uint';
+
+Pointer:
+	BasicType ('*')+ | BasicType 'addrspace' '(' INT ')' '*';
+
+StructType:
+	'{' '}' | // {}
+	'{' Type (',' Type)* '}' | // {BasicType*}
+	'<' '{' '}' '>' | // <{}>
+	'<' '{' Type (',' Type)* '}' '>' // <{BasicType*}>
+;
+
+GetElementPtr:
+	'getelementptr' 'inbounds'? pointer+=TypeAndValue (',' params+=TypeAndValue)*;
+
+ExtractValue:
+	'extractvalue' aggregate=TypeAndValue (',' index+=INT)+;
+
+InsertValue:
+	'insertvalue' aggregate=TypeAndValue ',' value=TypeAndValue (',' index+=INT)+;
+
+Fence:
+	'fence' 'singlethread'? ordering=AtomicOrdering;
+
+AtomicOrdering:
+	'unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst';
+
+CmpXchg:
+	'cmpxchg' 'volatile'? adress=TypeAndValue ',' compare_val=TypeAndValue ',' new_val=TypeAndValue 'singlethread'?
+	ordering=AtomicOrdering;
+
+AtomicRMW:
+	'atomicrmw' 'volatile'? BinOp adress=TypeAndValue ',' value=TypeAndValue 'singlethread'? ordering=AtomicOrdering;
+
+BinOp:
+	'xchg' | 'add' | 'sub' | 'and' | 'nand' | 'or' | 'xor' | 'max' | 'min' | 'umax' | 'umin';
+
+Load:
+	'load' 'volatile'? adress=TypeAndValue (',' align=Alignment)? (',' '!nontemporal' '!' index=INT)? |
+	'load' 'atomic' 'volatile'? adress=TypeAndValue 'singlethread'? ordering=AtomicOrdering (',' 'align' index=INT)?;
+
+Store:
+	'store' 'volatile'? value=TypeAndValue ',' adress=TypeAndValue (',' 'align' INT)? |
+	'store' 'atomic' 'volatile'? value=TypeAndValue ',' adress=TypeAndValue 'singlethread'? ordering=AtomicOrdering (','
+	'align' index=INT)?;
+
+Call:
+	'tail'? 'call' CallingConv? ReturnAttributes? pointer=TypeAndValue plist=ParameterList FunctionAttributes?;
+
+ReturnAttributes:
+	'zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest';
+
+Alloc:
+	'alloca' type=Type (',' numElements=TypeAndValue)? (',' Alignment)?;
+
+CallingConv:
+	'ccc' | 'fastcc' | 'coldcc' | 'x86_stdcallcc' | 'x86_fastcallcc' | 'x86_thiscallcc' | 'arm_apcscc' |
+	'arm_aapcscc' | 'arm_aapcs_vfpcc' | 'msp430_intrcc' | 'ptx_kernel' | 'ptx_device' | 'spir_func' | 'spir_kernel' |
+	'cc <' INT '>' | INT;
+
+FunctionAttributes:
+	'address_safety' | 'alignstack(<n>)' | 'alwaysinline' | 'nonlazybind' | 'inlinehint' | 'naked' | 'noimplicitfloat' |
+	'noinline' |
+	'noredzone' | 'noreturn' | 'nounwind' | 'optsize' | 'readnone' | 'readonly' | 'returns_twice' | 'ssp' | 'sspreq' |
+	'uwtable';
+
+ParameterList:
+	{ParameterList} '(' (')' | params+=TypeAndValue (',' params+=TypeAndValue)* ')');
+
+PHI:
+	'phi' Type '[' values+=ValuePair ']' (',' '[' values+=ValuePair ']')*;
+
+ValuePair:
+	'%'? value1=ID ',' '%'? value2=ID;
+
+LandingPad:
+	'landingpad' type=Type 'personality' personality=TypeAndValue ('cleanup' clause+=Clause* | clause+=Clause+);
+
+Clause:
+	'catch' TypeAndValue |
+	{Clause} 'filter' |
+	'filter' filter+=TypeAndValue (',' filter+=TypeAndValue)*;
+
+Select:
+	'select' condition=TypeAndValue ',' val1=TypeAndValue ',' val2=TypeAndValue;
+
+VA_Arg:
+	'va_arg' list=TypeAndValue ',' argType=Type;
+
+ExtractElement:
+	'extractelement' vector=TypeAndValue ',' index=TypeAndValue;
+
+InsertElement:
+	'insertelement' vector=TypeAndValue ',' scalar=TypeAndValue ',' index=TypeAndValue;
+
+ShuffleVector:
+	'shufflevector' vector1=TypeAndValue ',' vector2=TypeAndValue ',' mask=TypeAndValue;
+
+Cast:
+	CastType value=TypeAndValue 'to' castto=Type;
+
+CastType:
+	'trunc' | 'zext' | 'sext' | 'fptrunc' | 'fpext' | 'fptoui' | 'fptosi' | 'uitofp' | 'sitofp' | 'ptrtoint' | 'inttoptr'
+	| 'bitcast';
+
+Compare:
+	'icmp' IPredicates Type ValuePair |
+	'fcmp' FPredicates Type ValuePair;
+
+IPredicates:
+	'eq' | 'ne' | 'ugt' | 'uge' | 'ult' | 'ule' | 'sgt' | 'sge' | 'slt' | 'sle';
+
+FPredicates:
+	'false' | 'oeq' | 'ogt' | 'oge' | 'olt' | 'ole' | 'one' | 'ord' |
+	'ueq' | 'ugt' | 'uge' | 'ult' | 'ule' | 'une' | 'uno' | 'true';
+
+ArithmeticOP:
+	'add' | 'fadd' | 'sub' | 'fsub' | 'mul' | 'fmul' | 'udiv' | 'sdiv' | 'fdiv' | 'urem' | 'srem' | 'frem';
+
+LogicalOP:
+	'shl' | 'lshr' | 'ashr' | 'and' | 'or' | 'xor';
+
+Arithmetic:
+	ArithmeticOP Type ValuePair;
+
+Logical:
+	LogicalOP Type ValuePair;
+
+Instruction:
+	Switch | IndirectBranch | Branch | Return | Load | Store | Fence | GetElementPtr | Logical | Arithmetic | Compare |
+	Cast | ShuffleVector | InsertElement | ExtractElement | Invoke | Resume | InsertValue | ExtractValue | Alloc |
+	CmpXchg | AtomicRMW | PHI | Select | Call | VA_Arg | LandingPad;
+
+IndirectBranch:
+	'indirectbr' adress=TypeAndValue ',' '[' (lList=LabelList)? ']';
+
+LabelList:
+	(labels+=TypeAndValue)+;
+
+Switch:
+	'switch' value=TypeAndValue ',' default=TypeAndValue '[' (jTable=JumpTable)? ']';
+
+JumpTable:
+	(values+=TypeAndValue ',' destinations+=TypeAndValue)+;
+
+Invoke:
+	'invoke' CallingConv? ReturnAttributes? function=TypeAndValue pList=ParameterList FunctionAttributes? 'to'
+	to=TypeAndValue 'unwind' unwind=TypeAndValue;
+
+Resume:
+	'resume' TypeAndValue;
+
+Return:
+	{Return} 'ret' 'void' (',' '!dbg' '!' INT)? | 'ret' value=TypeAndValue (',' '!dbg' '!' INT)?;
+
+Branch:
+	'br' destination=TypeAndValue | 'br' cond=TypeAndValue ',' labelTrue=TypeAndValue ',' labelFalse=TypeAndValue;
+
+FunctionBody:
+	'{' blocks+=BasicBlock+ '}';
+
+BasicBlock:
+	{BasicBlock} name=LabelStr? instructions+=Instruction*;
+
+LabelStr:
+	name=ID ':';
+
+FunctionHeader:
+	('declare' | 'define') Linkage? Visibility? CallingConv? ReturnAttributes? UnNammedAddr? returnType=Type
+	name=GlobalName pList=ParameterList
+	FunctionAttributes? ('section ' STRING)? Alignment?;
+
+GlobalName:
+	'@' name=ID;
+
+UnNammedAddr:
+	adress=INT;
+
+Visibility:
+	'default' | 'hidden' | 'protected';
+
+Linkage:
+	'private' | 'linker_private' | 'linker_private_weak' | 'available_externally' | 'linkonce' | 'common' |
+	'appending' | 'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' | 'dllimport' | 'dllexport' | AliasLinkage;
+
+AliasLinkage:
+	'external' | 'internal' | 'weak' | 'weak_odr';
+
+MetadataValue:
+	'!' INT | '!{' STRING '}' | "!" STRING;
+
+TopLevelEntity:
 	'module' 'asm' STRING |
 	'target' 'triple' '=' STRING |
 	'target' 'datalayout' '=' STRING |
 	'deplibs' '=' '[' ']' |
-	'deplibs' '=' '[' STRING (',' STRING)* ']' |
-	'declare' FunctionHeader |
-	LocalVar '=' 'type' Type |
-	'define' FunctionHeader '{' //FIXME  INSTRUCTIONS
-;
-TypeAndValue:
-	Type'%foo'
-;
-MDString:
-	'!'STRING
-;
-MDNode:
-	'!' MDNodeNumber
-;
+	'deplibs' '=' '[' STRING (',' STRING)* ']';
 
-MDNodeNumber:
-	WS//FIXME Nicht aufgelöstes Terminal
-;
+MainLevelEntity:
+	FunctionHeader |
+	LocalVarInstruction |LocalVar;
 
+LocalVarInstruction:
+	'%' name=ID '=' instruction=Instruction;
 
-UnnamedType:
-	LocalVarID '=' 'type'+ Type
-;
-
-GlobalType:
-	'constant' | 'global'
-;
-Alias:
-	GlobalVar '=' OptionalVisibility 'alias' OptionalLinkage Aliasee
-;
-Aliasee:
-	TypeAndValue |
-	'bitcast' '(' TypeAndValue 'to' Type ')'|
-	'getelementptr' 'inbounds'? '('  /*FIXME ... */ ')'
-;
-Global:
-GlobalVar '=' OptionalLinkage OptionalVisibility OptionalThreadLocal OptionalAddrSpace OptionalUnNammedAddr GlobalType Type Const |
-OptionalLinkage OptionalVisibility OptionalThreadLocal OptionalAddrSpace OptionalUnNammedAddr GlobalType Type Const
-;
-
-Const:
-	WS//FIXME Nicht aufgelöstes Terminal
-;
-
-
-OptionalUnNammedAddr:
-	WS//FIXME Nicht aufgelöstes Terminal
-;
-
-
-GlobalVar: OptionalLinkage OptionalVisibility OptionalThreadLocal OptionalAddrSpace OptionalUnNammedAddr('constant'|'global')
-;
-
-UInt32:
-	INT	//FIXME uint32
-;
-TLSModel:
-'localdynamic'|'initialexec'|'localexec'
-;
-OptionalThreadLocal:
-	WS | 'thread_local'|'thread_local' '(' TLSModel ')'
-;
-OptionalLinkage:
-	WS |'private'|'linker_private'|'linker_private_weak'|'internal'|'weak'|'weak_odr'|'linkonce'|'linkonce_odr'|
-	'linkonce_odr_auto_hide'|'available_externally'|'appending'|'dllexport'|'common'|'dllimport'|'extern_weak'|'external'
-;
-OptionalAddrSpace:
-	WS |'addrspace' '(' UInt32 ')'
-;
-OptionalVisibility:
-	WS|'default'|'hidden'|'protected'
-;
-OptionalCallingConv:
-WS|'ccc'|'fastcc'|'coldcc'|'x86_stdcallcc'|'x86_fastcallcc'|'x86_thiscallcc'|'arm_apcscc'|
-'arm_aapcscc'|'arm_aapcs_vfpcc'|'msp430_intrcc'|'ptx_kernel'|'ptx_device'|'spir_func'|'spir_kernel'|'cc' UINT
-;
-
-UINT:
-	INT //FIXME Nicht aufgeöstes Terminal
-;
-
-InstructionMetadata:
-'!dbg !42' (',' '!dbg !57')*
-;
-OptionalAlignment:
-WS|'align' '4'
-;
-OptionalCommaAlign:
-WS|',' 'align' '4'
-;
-
-//	ScopeAndOrdering: // FIXME HIER MUSS EINIGES PASSIEREN
-//	if isAtomic: ::= 'singlethread'? AtomicOrdering
-//	else: ::= //FIXME HIER FEHLT WAS
-//	;
-
-
-OptionalStackAlignment:
-WS | 'alignstack' '(' '4' ')'
-;
-IndexList:
-(',' UInt32)+
-;
-LocalVar:
-	''
-;
-Type:
- 'float' | 'void' /*(etc)*/ | StructType | '[' /*FIXME  ... */ ']'|'<' /*FIXME ... */ '>'|'%foo'|'%4'|/* FIXME: left-recursive... Type '*'|Type 'addrspace' '(' UInt32 ')' '*'|*/
- Types '(' ArgTypeListI ')' OptFuncAttrs|'[' APSINTVAL 'x' Types ']'|'<' APSINTVAL 'x' Types '>'
-;
-
-OptFuncAttrs:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-
-
-APSINTVAL:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-
-
-Types:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-
-ParameterList:
-'(' ')'|
-'(' Arg (',' Arg)* ')'
-	;
-Arg:
-Type OptionalAttributes Value OptionalAttributes
-;
-
-Value:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-OptionalAttributes:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-
-ArgumentList:
-	'(' ArgTypeListI ')'
-;
-ArgTypeListI:
-WS|'...'|ArgTypeList ',' '...'|ArgType (',' ArgType)*
-;
-ArgType:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-ArgTypeList:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-
-FunctionType:
-Type ArgumentList OptionalAttributes
-;
-StructType: '{' '}'|'{' Type (',' Type)* '}'|'<' '{' '}' '>'|'<' '{' Type (',' Type)* '}' '>'
-;
-ValID :
-'{' ConstVector '}'| '<' ConstVector '>'|'<' '{' ConstVector '}' '>'|'asm' SideEffect? AlignStack? STRING ',' STRING|
-'blockaddress' '(' '@foo' ',' '%bar' ')'
-;
-AlignStack:
-	WS //FIXME Nicht aufgeöstes Terminal	
-;
-SideEffect:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-ConstVector:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-GlobalValueVector:
-WS|TypeAndValue (',' TypeAndValue)*
-;
-MetadataValue:
-	'!42'|'!{...}'|"!string"
-;
-FunctionHeader:
-OptionalLinkage OptionalVisibility OptionalCallingConv OptRetAttrs OptionalUnNammedAddr Type GlobalName '(' ArgumentList ')' OptFuncAttrs OptSection OptionalAlign OptGC
-;
-
-OptGC:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-
-
-OptionalAlign:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-
-
-OptSection:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-
-
-GlobalName:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-
-
-OptRetAttrs:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-
-FunctionBody:
-'{' BasicBlock+ '}'
-;
-BasicBlock:
-LabelStr? Instruction*
-;
-
-LabelStr:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-
-Ret:
-'ret' 'void' (',' '!dbg' '!'INT)*|'ret' TypeAndValue (',' '!dbg' '!'INT)*
-;
-Br:
-'br' TypeAndValue|'br' TypeAndValue ',' TypeAndValue ',' TypeAndValue
-;
-Instruction:
-'switch' TypeAndValue ',' TypeAndValue '[' JumpTable ']'|
-'indirectbr' TypeAndValue ',' '[' LabelList ']'
-;
-
-LabelList:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-
-JumpTable:
-(TypeAndValue ',' TypeAndValue)*
-;
-Invoke:
-'invoke' OptionalCallingConv OptionalAttributes Type Value ParameterList OptionalAttributes 'to' TypeAndValue 'unwind' TypeAndValue
-;
-Resume:
-'resume' TypeAndValue
-;
-
-Arithmetic:
-ArithmeticOps TypeAndValue ',' Value
-;
-
-ArithmeticOps:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-
-LocalVarID:
-	WS //FIXME Nicht aufgeöstes Terminal
-;	
-
-Logical:
-ArithmeticOps TypeAndValue ',' Value '{'
-;
-Compare:
-'icmp' IPredicates TypeAndValue ',' Value
-'fcmp' FPredicates TypeAndValue ',' Value
-;
-
-FPredicates:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-
-
-IPredicates:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-
-Cast:
-CastOpc TypeAndValue 'to' Type
-;
-
-CastOpc:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-
-Select:
-'select' TypeAndValue ',' TypeAndValue ',' TypeAndValue
-;
-VA_Arg:
-'va_arg' TypeAndValue ',' Type
-;
-ExtractElement:
-'extractelement' TypeAndValue ',' TypeAndValue
-;
-InsertElement:
-'insertelement' TypeAndValue ',' TypeAndValue ',' TypeAndValue
-;
-ShuffleVector:
-'shufflevector' TypeAndValue ',' TypeAndValue ',' TypeAndValue
-;
-PHI:
-'phi' Type '[' Value ',' Value ']' (',' '[' Value ',' Value ']')*
-;
-LandingPad:
-'landingpad' Type 'personality' TypeAndValue 'cleanup'? Clause+
-;
-Clause:
-'catch' TypeAndValue
-'filter'
-'filter' TypeAndValue ( ',' TypeAndValue )*
-;
-Call:
-'tail'? 'call' OptionalCallingConv OptionalAttributes Type Value ParameterList OptionalAttributes
-;
-Alloc:
-'alloca' Type (',' TypeAndValue)? (',' OptionalInfo)?
-;
-
-OptionalInfo:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-
-Load:
-'load' 'volatile'? TypeAndValue (',' 'align' UInt32)?
-'load' 'atomic' 'volatile'? TypeAndValue 'singlethread'? AtomicOrdering (',' 'align' UInt32)?
-;
-Store:
-'store' 'volatile'? TypeAndValue ',' TypeAndValue (',' 'align' UInt32)?
-'store' 'atomic' 'volatile'? TypeAndValue ',' TypeAndValue 'singlethread'? AtomicOrdering (',' 'align' UInt32)?
-;
-CmpXchg:
-'cmpxchg' 'volatile'? TypeAndValue ',' TypeAndValue ',' TypeAndValue 'singlethread'? AtomicOrdering
-;
-AtomicRMW:
-'atomicrmw' 'volatile'? BinOp TypeAndValue ',' TypeAndValue 'singlethread'? AtomicOrdering
-;
-
-BinOp:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-
-Fence:
-'fence' 'singlethread'? AtomicOrdering
-;
-
-AtomicOrdering:
-	WS //FIXME Nicht aufgeöstes Terminal
-;
-
-GetElementPtr:
-'getelementptr' 'inbounds'? TypeAndValue (',' TypeAndValue)*
-;
-ExtractValue:
-'extractvalue' TypeAndValue (',' INT)+
-;
-InsertValue:
-'insertvalue' TypeAndValue ',' TypeAndValue (',' INT)+
-;
-MDNodeVector:
-Element (',' Element)*
-;
-Element:
-'null' | TypeAndValue
+Alignment:
+	'align' INT //must be a power of 2
 ;
