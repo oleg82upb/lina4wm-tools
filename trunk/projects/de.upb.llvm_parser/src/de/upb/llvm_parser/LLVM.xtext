@@ -1,6 +1,6 @@
 grammar de.upb.llvm_parser.LLVM with org.eclipse.xtext.common.Terminals
 
-generate lLVM "http://www.upb.de/llvm_parser/LLVM"
+generate llvm "http://www.upb.de/llvm_parser/llvm"
 
 LLVM:
 	elements+=AbstractElement*;
@@ -8,24 +8,62 @@ LLVM:
 terminal SL_COMMENT:
 	';' !('\n' | '\r')* ('\r'? '\n')?;
 
-AbstractElement:
-	{AbstractElement} TopLevelEntity SL_COMMENT? | MainLevelEntity SL_COMMENT?;
-
-TypeAndValue:
-	type=VAR_TYPE value=Type;
-
-Type:
-	(StructType | VAR_TYPE )+ ;
-
 terminal VAR_TYPE:
-	('@' | '%') ('a'..'z' | '$' | '_' | 'A'..'Z' | '.')+ (('a'..'z' | '$' | '_' | 'A'..'Z' | '0'..'9')*('*')*)?;
+	('('?('@' | '%') (('a'..'z' | '$' | '_' | 'A'..'Z') ('a'..'z' | '$' | '_' | 'A'..'Z' | '0'..'9')* ('.' ('a'..'z' | '$' |
+	'_' | 'A'..'Z') ('a'..'z' | '$' | '_' | 'A'..'Z' | '0'..'9')* ('*')*)?')*'?))
+	;
+
+terminal INTEGER:
+	'i' ('0'..'9')+;
+
+AbstractElement:
+	TopLevelEntity SL_COMMENT? |
+	MainLevelEntity SL_COMMENT?;
+
+TopLevelEntity:
+	'module' 'asm' module=STRING |
+	'target' ('datalayout' | 'triple') '=' target=STRING |
+	'deplibs' '=' '[' libs+=STRING (',' libs+=STRING)* ']';
+
+MainLevelEntity:
+	FunctionHeader |
+	LocalVar;
+
+FunctionHeader:
+	('declare' | 'define') Linkage? Visibility? CallingConv? ReturnAttributes? returnType=Type
+	name=VAR_TYPE pList=ParameterList 'unnamed_addr'? FunctionAttributes? ('section ' STRING)? Alignment?;
 
 LocalVar:
-	name=Type '=' ('type' Type| instr=Instruction);
- 
+	name=Type '=' (type=LocalType | instr=LocalInstruction |alias=LocalAlias)
+;
+LocalType:
+	'type' type=Type
+;
+LocalInstruction:
+	instr=Instruction
+;
+LocalAlias:
+	'alias' AliasLinkage? Visibility? type=Type aliasee=Type
+;
+
+Type:
+	(StructType | VAR_TYPE | BType);
+
+TypeAndValue:
+	type=(VAR_TYPE | BType) value=Type;
+
 StructType:
-	'{' (VAR_TYPE (',' VAR_TYPE)*)? '}' |
-	'<' '{' (VAR_TYPE (',' VAR_TYPE)*)? '}' '>';
+	'{' ((VAR_TYPE | BType) (',' (VAR_TYPE | BType))*)? '}' |
+	'<' '{' ((VAR_TYPE | BType) (',' (VAR_TYPE | BType))*)? '}' '>';
+
+BType:
+	INTEGER | FPoint | BasicType;
+
+BasicType:
+	'void'VAR_TYPE;
+
+FPoint:
+	'half' | 'float' | 'double' | 'x86_fp80' | 'fp128' | 'ppc_fp128';
 
 GetElementPtr:
 	'getelementptr' 'inbounds'? pointer+=TypeAndValue (',' params+=TypeAndValue)*;
@@ -73,10 +111,11 @@ Alloc:
 CallingConv:
 	'ccc' | 'fastcc' | 'coldcc' | 'x86_stdcallcc' | 'x86_fastcallcc' | 'x86_thiscallcc' | 'arm_apcscc' |
 	'arm_aapcscc' | 'arm_aapcs_vfpcc' | 'msp430_intrcc' | 'ptx_kernel' | 'ptx_device' | 'spir_func' | 'spir_kernel' |
-	'cc' '<' INT '>' | INT;
+	'cc' '<' INT '>' INT;
 
 FunctionAttributes:
-	'address_safety' | 'alignstack''(''<'INT'>'')' | 'alwaysinline' | 'nonlazybind' | 'inlinehint' | 'naked' | 'noimplicitfloat' |
+	'address_safety' | 'alignstack' '(' '<' INT '>' ')' | 'alwaysinline' | 'nonlazybind' | 'inlinehint' | 'naked' |
+	'noimplicitfloat' |
 	'noinline' |
 	'noredzone' | 'noreturn' | 'nounwind' | 'optsize' | 'readnone' | 'readonly' | 'returns_twice' | 'ssp' | 'sspreq' |
 	'uwtable';
@@ -88,7 +127,7 @@ PHI:
 	'phi' Type '[' values+=ValuePair ']' (',' '[' values+=ValuePair ']')*;
 
 ValuePair:
-	'%'? value1=ID ',' '%'? value2=ID;
+	value1=VAR_TYPE ',' value2=VAR_TYPE;
 
 LandingPad:
 	'landingpad' type=Type 'personality' personality=TypeAndValue ('cleanup' clause+=Clause* | clause+=Clause+);
@@ -176,21 +215,7 @@ FunctionBody:
 	'{' blocks+=BasicBlock+ '}';
 
 BasicBlock:
-	{BasicBlock} name=LabelStr? instructions+=Instruction*;
-
-LabelStr:
-	name=ID ':';
-
-FunctionHeader:
-	('declare' | 'define') Linkage? Visibility? CallingConv? ReturnAttributes? UnNammedAddr? returnType=Type
-	name=GlobalName pList=ParameterList
-	FunctionAttributes? ('section ' STRING)? Alignment?;
-
-GlobalName:
-	'@' name=ID;
-
-UnNammedAddr:
-	adress=INT;
+	name=VAR_TYPE ':' instructions+=Instruction*;
 
 Visibility:
 	'default' | 'hidden' | 'protected';
@@ -204,16 +229,6 @@ AliasLinkage:
 
 MetadataValue:
 	'!' INT | '!{' STRING '}' | "!" STRING;
-
-TopLevelEntity:
-	'module' 'asm' STRING |
-	'target' 'triple' '=' STRING |
-	'target' 'datalayout' '=' STRING |
-	'deplibs' '=' '[' ']' |
-	'deplibs' '=' '[' STRING (',' STRING)* ']';
-
-MainLevelEntity:
-	FunctionHeader | LocalVar;
 
 Alignment:
 	'align' INT //must be a power of 2
