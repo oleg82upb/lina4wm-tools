@@ -5,8 +5,8 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.upb.de/llvm_parser/LLVM" 
-       class = "de.upb.llvm_parser.lLVM.LLVMPackage"
+       uri = "http://www.upb.de/llvm_parser/llvm" 
+       class = "de.upb.llvm_parser.llvm.LlvmPackage"
        genModel = "de/upb/llvm_parser/LLVM.genmodel" /> 
 	
   </extension>

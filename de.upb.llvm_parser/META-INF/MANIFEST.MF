@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: de.upb.llvm_parser
 Bundle-Vendor: My Company
 Bundle-Version: 1.0.0.qualifier
-Bundle-SymbolicName: de.upb.llvm_parser; singleton:=true
+Bundle-SymbolicName: de.upb.llvm_parser;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.xbase;resolution:=optional;visibility:=reexport,
@@ -22,13 +22,13 @@ Import-Package: org.apache.log4j,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: de.upb.llvm_parser,
  de.upb.llvm_parser.services,
- de.upb.llvm_parser.lLVM,
- de.upb.llvm_parser.lLVM.impl,
- de.upb.llvm_parser.lLVM.util,
  de.upb.llvm_parser.serializer,
  de.upb.llvm_parser.parser.antlr,
  de.upb.llvm_parser.parser.antlr.internal,
  de.upb.llvm_parser.validation,
  de.upb.llvm_parser.scoping,
  de.upb.llvm_parser.generator,
- de.upb.llvm_parser.formatting
+ de.upb.llvm_parser.formatting,
+ de.upb.llvm_parser.llvm,
+ de.upb.llvm_parser.llvm.impl,
+ de.upb.llvm_parser.llvm.util
