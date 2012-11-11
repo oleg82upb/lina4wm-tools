@@ -21,7 +21,6 @@ proctype process1(chan ch){
 	read(ADRESSE_X, r1);
 	/* not allowed to reorder with earlier write to same location*/ 
 	assert (r1 == 1);
-	//assert (r1 == 0);
 }
 
 init{

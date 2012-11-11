@@ -25,16 +25,11 @@ proctype process1(chan ch)
 	write(ADRESSE_Y, 1);
 }
 
+
 proctype process2(chan ch)
 {	
 	read(ADRESSE_Y, r1);
 	read(ADRESSE_X, r2);	
-	
-	/*assert: not allowed r1=1 and r2=0*/
-	atomic {r1 == 1 -> assert( (r2 == 1))}
-	//atomic {r1 == 1 -> assert( (r2 == 0))}
-	//atomic {r1 == 0 -> assert( (r2 == 1))}
-	//atomic {r1 == 0 -> assert( (r2 == 0))}
 }
 
 init
@@ -46,5 +41,12 @@ init
 	run bufferProcess(channelT2)
 	}
 }
+	// r1 == 1  (r2 == 0)	-> not allowed (x muss schon geschrieben sein, wenn y = 1 gelesen wird
+	// r1 == 1  (r2 == 1)	-> ok
+	// r1 == 0  (r2 == 1)	-> ok
+	// r1 == 0  (r2 == 0)	-> ok
+	
+ltl check_1{ [] (process1 @ end && process2 @ end -> ( ! (r1 == 1 && r2 == 0)))}
+//ltl check_2{ [] (process1 @ end && process2 @ end -> ( r1 == 0 -> (r2 == 1 || r2 == 0)))}
 
 //ltl check { [] (r1 == 1 -> r2 != 0)}; 

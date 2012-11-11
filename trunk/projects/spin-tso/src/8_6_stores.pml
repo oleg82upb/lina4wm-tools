@@ -37,7 +37,6 @@ proctype process3(chan ch)
 	read(ADRESSE_X, r3);
 	
 	atomic{ r1 == 1 && r2 == 1 -> assert (r3 == 1)};
-	//atomic{ r1 == 1 && r2 == 1 -> assert (r3 == 0)}
 }
 
 init {
@@ -50,4 +49,3 @@ init {
 	run bufferProcess(channelT3)
 	}
 }
-

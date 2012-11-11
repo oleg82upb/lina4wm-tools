@@ -13,12 +13,12 @@
 #include "x86_tso_buffer.pml"
 //#include "sc-model.pml"
 
-/*Channel der die reads und writes verschickt (Type (also write,read); Adresse; Wert;... )*/
 
-short r1 = 0;
-short r2 = 0;
+/*Channel der die reads und writes verschickt (Type (also write,read); Adresse; Wert;... )*/
 chan channelT1 = [0] of {mtype, short, short, short};
 chan channelT2 = [0] of {mtype, short, short, short};
+short r1 = 0;
+short r2 = 0;
 
 
 proctype process1(chan ch)
@@ -33,13 +33,6 @@ proctype process2(chan ch)
 {
 	write(ADRESSE_Y, 1);
 	read(ADRESSE_X, r2);
-
-	/*assert: allowed r1 = 0 and r2=  0
-	*all possibilities are valid*/
-	//atomic{ r1 == 1 -> assert (r2 == 0)};
-	//atomic{ r1 == 1 -> assert (r2 == 1)};
-	//atomic{ r1 == 0 -> assert (r2 == 1)};
-	//atomic{ r1 == 0 -> assert (r2 == 0)};
 	done:skip;
 }
 
@@ -52,5 +45,12 @@ atomic{
 	run bufferProcess(channelT2);
 	}	
 }
+	
+	/*all possibilities are valid
+	*(r1 == 1) && (r2 == 0) ok
+	*(r1 == 0) && (r2 == 1) ok
+	*(r1 == 1) && (r2 == 1) ok
+	*(r1 == 0) && (r2 == 0) ok (allowed)*/
 
-ltl check { [] ((process1 @ done && process2 @ done) -> (!(r1 == 0 && r2 == 0)))}; 
+ltl check_0{ [] ((process1 @ done && process2 @ done) -> (!(r1 == 0 && r2 == 0)))};
+ltl check_1{ [] ((process1 @ done && process2 @ done) -> (!(r1 == 1 && r2 == 0)))}; 

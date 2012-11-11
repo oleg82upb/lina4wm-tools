@@ -54,15 +54,10 @@ init {
 	run process4(channelT4);
 	run bufferProcess(channelT1);
 	run bufferProcess(channelT2);
-	run bufferProcess(channelT3);
+	run bufferProcess(channelT3); 
 	run bufferProcess(channelT4);
 	}
 }
-
-
-/*	atomic{ r1 == 1 -> assert(r4 == 1)};
-	atomic{ r2 == 1 -> assert(r3 == 1)};
-	atomic{ r1 == 0 -> assert(r4 == 0)};
-	atomic{ r2 == 0 -> assert(r3 == 0)}; 
-*/
-ltl check { [] (process3 @ done && process4 @ done ->( ! (r1 == 1 && r3 == 1 && r2 == 0 && r4 == 0)))}; 
+	/* (r1 == 1) && (r2 == 0) && (r3 == 1) && (r4 == 0)	-> not allowed */
+	
+ltl check { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 1 && r3 == 1 && r2 == 0 && r4 == 0)))}; 

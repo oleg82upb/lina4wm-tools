@@ -23,8 +23,6 @@ proctype process1(chan ch)
 	read(ADRESSE_X, r1);
 	write(ADRESSE_Y,1);
 	done: skip;
-}
-
 proctype process2(chan ch)
 {
 	read(ADRESSE_Y, r2);
@@ -45,4 +43,5 @@ init
 	// r1 == 1  (r2 == 0)	-> ok
 	// r1 == 0  (r2 == 1)	-> ok
 	// r1 == 0  (r2 == 0)	-> ok
+//ltl check_1{ [] (process1 @ end && process2 @ end -> ( ! (r1 == 1 && r2 == 1)))}; 
 ltl check { [] (process1 @ done && process2 @ done ->( ! (r1 == 1 && r2 == 1)))}; 

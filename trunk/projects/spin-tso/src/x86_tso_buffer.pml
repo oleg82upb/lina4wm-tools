@@ -7,10 +7,11 @@ writebuffer model. Read, write, flush, fence and CAS
 
 #define NULL -1
 
-/*Array welches die  Queue darstellt (Form: 3-dimensionales Array der Laenge SIZE) das heißt (nx3)-Matrix*/
-typedef matrix{short zeile [3]}
+/*Buffer as a 3 dimensional array which represents the queue [(nx3)-matrix]*/
+typedef matrix{short line [3]}
+
 mtype = {iWrite, iRead , iMfence, iCas};
-/*Speicher*/
+/*memory*/
 short memory[MEM_SIZE];
 
 
@@ -27,6 +28,11 @@ inline read(adr, target)
 	}
 }
 
+inline mfence()
+{
+	ch ! iMfence, NULL, NULL, NULL;
+}	
+
 inline cas(adr, oldValue, newValue, returnValue) 
 {
 	bit success;
@@ -37,54 +43,46 @@ inline cas(adr, oldValue, newValue, returnValue)
 	}
 }
 
-
-
 inline writeB() {
 	if
-	:: (((tail+1) % BUFF_SIZE) == head && !isEmpty) -> 	// buffer full, need to dequeue
-		/*Wert in Speicher schreiben: memory[adresse] = value*/
-		memory[buffer[head].zeile[0]] = buffer[head].zeile[1];
-		/*Writebuffer auf leer setzen*/
-		buffer[head].zeile[0] = NULL;
-		buffer[head].zeile[1] = NULL;
-		buffer[head].zeile[2] = NULL;
-					
-		/*head weitersetzen*/
-		head = (head+1) % BUFF_SIZE;	
+		/*buffer full, need to flush first*/
+	:: (((tail+1) % BUFF_SIZE) == head && !isEmpty) -> flushB()	
 	:: else -> isEmpty = false; skip;
 	fi
 		->	
  		tail = (tail+1) % BUFF_SIZE;
-		buffer[tail].zeile[0] = adresse;
-		buffer[tail].zeile[1] = value;
-		buffer[tail].zeile[2] = c;
+		buffer[tail].line[0] = address;
+		buffer[tail].line[1] = value;
+		buffer[tail].line[2] = c;
 }
 
+
 inline readB() {
-	i = 0;
+	i = tail;
 	do
-	:: i < BUFF_SIZE -> 
+	:: i >= head  -> 
 			if
-			/* if Adresse entspricht gesuchter Adresse -> gib zugehörigen Wert zurück*/
-			::buffer[i].zeile[0] == adresse ->  channel ! iRead,adresse,buffer[i].zeile[1],c;
-			::else -> i++;
+			/* if an address in the buffer is equivalent to the searched -> return value*/
+			::buffer[i].line[0] == address ->  channel ! iRead,address,buffer[i].line[1],c;
+			::else -> i--;
 			fi
-			/*Zugriff auf Speicher und Rückgabe des entsprechenden Wertes*/
+			/*else: access to memory and return value of searched address*/
 	::else ->
-		channel ! iRead,adresse,memory[adresse],c;
+		channel ! iRead,address,memory[address],c;
 		break;
 	od
 }
 
+
 inline flushB() {
-	/*Wert in Speicher schreiben: memory[adresse] = value*/
-	memory[buffer[head].zeile[0]] = buffer[head].zeile[1];
-	/*Writebuffer leeren*/
-	buffer[head].zeile[0] = NULL;
-	buffer[head].zeile[1] = NULL;
-	buffer[head].zeile[2] = NULL;
+	/*write value in memory: memory[address] = value*/
+	memory[buffer[head].line[0]] = buffer[head].line[1];
+	/*empty write buffer*/
+	buffer[head].line[0] = NULL;
+	buffer[head].line[1] = NULL;
+	buffer[head].line[2] = NULL;
 						
-	/*head weitersetzen*/
+	/*moving head*/
 	head = (head+1) % BUFF_SIZE;
 			
 	if
@@ -95,8 +93,8 @@ inline flushB() {
 
 inline mfenceB() {
 	do
+	:: isEmpty -> break;
 	:: flushB() 
-	:: isEmpty -> break
 	od
 }
 	
@@ -105,7 +103,7 @@ inline casB() {
 	:: flushB()
 	:: isEmpty -> 
 		if
-		:: (memory[adresse] == old) -> memory[adresse] = new;
+		:: (memory[address] == old) -> memory[address] = new;
 		:: else -> skip
 		fi
 	::else -> break
@@ -114,38 +112,36 @@ inline casB() {
 
 proctype bufferProcess(chan channel)
 {		
-	/*Queue Anfang bzw Ende*/
+	/*start resp. end of queue*/
 	short head = 0;
 	short tail = -1;
 	bit isEmpty = true;
 
-	short adresse = 0;
+	short address = 0;
 	short value = 0;
 	short c = 0; 
 	short i = 0;
 	short old = 0;
 	short new = 0;
 	
-	/*Writebuffer*/
+	/*writebuffer*/
 	matrix buffer [BUFF_SIZE];
+
 	
-	/*enqueue-Operation der Queue vom Writebuffer (einfügen in Queue wenn ein write-Befehl geschickt wird) und bei read-Befehl Queue bzw Speicher durchsuchen und Wert zurückgeben */
 end:	do 
 		::	atomic{ 
 				if
 				/*WRITE*/
-				:: channel ? iWrite(adresse,value, _) -> writeB();
+				:: channel ? iWrite(address,value, _) -> writeB();
 				/*READ*/
-				:: channel ? iRead, adresse, value, c -> readB();
+				:: channel ? iRead, address, value, c -> readB();
 				/*FLUSH*/
 				:: !isEmpty -> flushB();
 				/*FENCE*/
 				::channel ? iMfence, _, _ ,_ -> mfenceB();
 				/*COMPARE AND SWAP*/
-				:: channel ? iCas, adresse , old, new -> casB();
+				:: channel ? iCas, address , old, new -> casB();
 				fi
 			}
 		od
 }
-		
-		
