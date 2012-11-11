@@ -48,4 +48,5 @@ init
 }
 /*assert: allowed r2 = 0 and r4 = 0*/
 //TODO: find a formula to check this 
+/* ltl check{ <> [] (process1 @ done && process2 @ done -> r2 == 0 && r4 == 0)*/
 //ltl check { [] (process1 @ done && process2 @ done ->( ! (r1 == 1 && r2 == 1)))}; 
