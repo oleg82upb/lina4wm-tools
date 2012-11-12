@@ -2,55 +2,50 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
-import de.upb.llvm_parser.llvm.LabelList;
+import de.upb.llvm_parser.llvm.Aggregate;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.TypeAndValue;
 
 import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Label List</b></em>'.
+ * An implementation of the model object '<em><b>Aggregate</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.LabelListImpl#getLabels <em>Labels</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.AggregateImpl#getAgg <em>Agg</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class LabelListImpl extends MinimalEObjectImpl.Container implements LabelList
+public class AggregateImpl extends MinimalEObjectImpl.Container implements Aggregate
 {
   /**
-   * The cached value of the '{@link #getLabels() <em>Labels</em>}' containment reference list.
+   * The cached value of the '{@link #getAgg() <em>Agg</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLabels()
+   * @see #getAgg()
    * @generated
    * @ordered
    */
-  protected EList<TypeAndValue> labels;
+  protected EList<String> agg;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected LabelListImpl()
+  protected AggregateImpl()
   {
     super();
   }
@@ -63,7 +58,7 @@ public class LabelListImpl extends MinimalEObjectImpl.Container implements Label
   @Override
   protected EClass eStaticClass()
   {
-    return LlvmPackage.Literals.LABEL_LIST;
+    return LlvmPackage.Literals.AGGREGATE;
   }
 
   /**
@@ -71,29 +66,13 @@ public class LabelListImpl extends MinimalEObjectImpl.Container implements Label
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<TypeAndValue> getLabels()
+  public EList<String> getAgg()
   {
-    if (labels == null)
+    if (agg == null)
     {
-      labels = new EObjectContainmentEList<TypeAndValue>(TypeAndValue.class, this, LlvmPackage.LABEL_LIST__LABELS);
+      agg = new EDataTypeEList<String>(String.class, this, LlvmPackage.AGGREGATE__AGG);
     }
-    return labels;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case LlvmPackage.LABEL_LIST__LABELS:
-        return ((InternalEList<?>)getLabels()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    return agg;
   }
 
   /**
@@ -106,8 +85,8 @@ public class LabelListImpl extends MinimalEObjectImpl.Container implements Label
   {
     switch (featureID)
     {
-      case LlvmPackage.LABEL_LIST__LABELS:
-        return getLabels();
+      case LlvmPackage.AGGREGATE__AGG:
+        return getAgg();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -123,9 +102,9 @@ public class LabelListImpl extends MinimalEObjectImpl.Container implements Label
   {
     switch (featureID)
     {
-      case LlvmPackage.LABEL_LIST__LABELS:
-        getLabels().clear();
-        getLabels().addAll((Collection<? extends TypeAndValue>)newValue);
+      case LlvmPackage.AGGREGATE__AGG:
+        getAgg().clear();
+        getAgg().addAll((Collection<? extends String>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -141,8 +120,8 @@ public class LabelListImpl extends MinimalEObjectImpl.Container implements Label
   {
     switch (featureID)
     {
-      case LlvmPackage.LABEL_LIST__LABELS:
-        getLabels().clear();
+      case LlvmPackage.AGGREGATE__AGG:
+        getAgg().clear();
         return;
     }
     super.eUnset(featureID);
@@ -158,10 +137,27 @@ public class LabelListImpl extends MinimalEObjectImpl.Container implements Label
   {
     switch (featureID)
     {
-      case LlvmPackage.LABEL_LIST__LABELS:
-        return labels != null && !labels.isEmpty();
+      case LlvmPackage.AGGREGATE__AGG:
+        return agg != null && !agg.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //LabelListImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (agg: ");
+    result.append(agg);
+    result.append(')');
+    return result.toString();
+  }
+
+} //AggregateImpl

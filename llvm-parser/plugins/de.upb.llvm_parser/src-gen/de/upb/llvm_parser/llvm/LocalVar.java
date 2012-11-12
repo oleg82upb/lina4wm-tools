@@ -21,83 +21,84 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface LocalVar extends MainLevelEntity {
-	/**
-	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Type</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' containment reference.
-	 * @see #setType(LocalType)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLocalVar_Type()
-	 * @model containment="true"
-	 * @generated
-	 */
-	LocalType getType();
+public interface LocalVar extends MainLevelEntity, Instruction
+{
+  /**
+   * Returns the value of the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Type</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Type</em>' containment reference.
+   * @see #setType(LocalType)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getLocalVar_Type()
+   * @model containment="true"
+   * @generated
+   */
+  LocalType getType();
 
-	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.LocalVar#getType <em>Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' containment reference.
-	 * @see #getType()
-	 * @generated
-	 */
-	void setType(LocalType value);
+  /**
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.LocalVar#getType <em>Type</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Type</em>' containment reference.
+   * @see #getType()
+   * @generated
+   */
+  void setType(LocalType value);
 
-	/**
-	 * Returns the value of the '<em><b>Instr</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Instr</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Instr</em>' containment reference.
-	 * @see #setInstr(LocalInstruction)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLocalVar_Instr()
-	 * @model containment="true"
-	 * @generated
-	 */
-	LocalInstruction getInstr();
+  /**
+   * Returns the value of the '<em><b>Instr</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Instr</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Instr</em>' containment reference.
+   * @see #setInstr(LocalInstruction)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getLocalVar_Instr()
+   * @model containment="true"
+   * @generated
+   */
+  LocalInstruction getInstr();
 
-	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.LocalVar#getInstr <em>Instr</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Instr</em>' containment reference.
-	 * @see #getInstr()
-	 * @generated
-	 */
-	void setInstr(LocalInstruction value);
+  /**
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.LocalVar#getInstr <em>Instr</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Instr</em>' containment reference.
+   * @see #getInstr()
+   * @generated
+   */
+  void setInstr(LocalInstruction value);
 
-	/**
-	 * Returns the value of the '<em><b>Alias</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Alias</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Alias</em>' containment reference.
-	 * @see #setAlias(LocalAlias)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLocalVar_Alias()
-	 * @model containment="true"
-	 * @generated
-	 */
-	LocalAlias getAlias();
+  /**
+   * Returns the value of the '<em><b>Alias</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Alias</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Alias</em>' containment reference.
+   * @see #setAlias(LocalAlias)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getLocalVar_Alias()
+   * @model containment="true"
+   * @generated
+   */
+  LocalAlias getAlias();
 
-	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.LocalVar#getAlias <em>Alias</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Alias</em>' containment reference.
-	 * @see #getAlias()
-	 * @generated
-	 */
-	void setAlias(LocalAlias value);
+  /**
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.LocalVar#getAlias <em>Alias</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Alias</em>' containment reference.
+   * @see #getAlias()
+   * @generated
+   */
+  void setAlias(LocalAlias value);
 
 } // LocalVar

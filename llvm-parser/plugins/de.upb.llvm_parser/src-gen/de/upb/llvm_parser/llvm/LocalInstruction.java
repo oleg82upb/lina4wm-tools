@@ -20,31 +20,32 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface LocalInstruction extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Instr</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Instr</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Instr</em>' containment reference.
-	 * @see #setInstr(Instruction)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLocalInstruction_Instr()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Instruction getInstr();
+public interface LocalInstruction extends EObject
+{
+  /**
+   * Returns the value of the '<em><b>Instr</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Instr</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Instr</em>' containment reference.
+   * @see #setInstr(Instruction)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getLocalInstruction_Instr()
+   * @model containment="true"
+   * @generated
+   */
+  Instruction getInstr();
 
-	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.LocalInstruction#getInstr <em>Instr</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Instr</em>' containment reference.
-	 * @see #getInstr()
-	 * @generated
-	 */
-	void setInstr(Instruction value);
+  /**
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.LocalInstruction#getInstr <em>Instr</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Instr</em>' containment reference.
+   * @see #getInstr()
+   * @generated
+   */
+  void setInstr(Instruction value);
 
 } // LocalInstruction

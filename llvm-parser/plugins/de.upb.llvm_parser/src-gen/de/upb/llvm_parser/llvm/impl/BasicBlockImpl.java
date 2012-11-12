@@ -29,194 +29,212 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.BasicBlockImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.BasicBlockImpl#getLabel <em>Label</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.BasicBlockImpl#getInstructions <em>Instructions</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class BasicBlockImpl extends MinimalEObjectImpl.Container implements BasicBlock {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
+public class BasicBlockImpl extends MinimalEObjectImpl.Container implements BasicBlock
+{
+  /**
+   * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getLabel()
+   * @generated
+   * @ordered
+   */
+  protected static final String LABEL_EDEFAULT = null;
 
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
+  /**
+   * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getLabel()
+   * @generated
+   * @ordered
+   */
+  protected String label = LABEL_EDEFAULT;
 
-	/**
-	 * The cached value of the '{@link #getInstructions() <em>Instructions</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInstructions()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Instruction> instructions;
+  /**
+   * The cached value of the '{@link #getInstructions() <em>Instructions</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getInstructions()
+   * @generated
+   * @ordered
+   */
+  protected EList<Instruction> instructions;
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BasicBlockImpl() {
-		super();
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected BasicBlockImpl()
+  {
+    super();
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return LlvmPackage.Literals.BASIC_BLOCK;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass()
+  {
+    return LlvmPackage.Literals.BASIC_BLOCK;
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getLabel()
+  {
+    return label;
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.BASIC_BLOCK__NAME, oldName, name));
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setLabel(String newLabel)
+  {
+    String oldLabel = label;
+    label = newLabel;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.BASIC_BLOCK__LABEL, oldLabel, label));
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Instruction> getInstructions() {
-		if (instructions == null) {
-			instructions = new EObjectContainmentEList<Instruction>(Instruction.class, this, LlvmPackage.BASIC_BLOCK__INSTRUCTIONS);
-		}
-		return instructions;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<Instruction> getInstructions()
+  {
+    if (instructions == null)
+    {
+      instructions = new EObjectContainmentEList<Instruction>(Instruction.class, this, LlvmPackage.BASIC_BLOCK__INSTRUCTIONS);
+    }
+    return instructions;
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
-				return ((InternalEList<?>)getInstructions()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
+        return ((InternalEList<?>)getInstructions()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case LlvmPackage.BASIC_BLOCK__NAME:
-				return getName();
-			case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
-				return getInstructions();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Object eGet(int featureID, boolean resolve, boolean coreType)
+  {
+    switch (featureID)
+    {
+      case LlvmPackage.BASIC_BLOCK__LABEL:
+        return getLabel();
+      case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
+        return getInstructions();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case LlvmPackage.BASIC_BLOCK__NAME:
-				setName((String)newValue);
-				return;
-			case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
-				getInstructions().clear();
-				getInstructions().addAll((Collection<? extends Instruction>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public void eSet(int featureID, Object newValue)
+  {
+    switch (featureID)
+    {
+      case LlvmPackage.BASIC_BLOCK__LABEL:
+        setLabel((String)newValue);
+        return;
+      case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
+        getInstructions().clear();
+        getInstructions().addAll((Collection<? extends Instruction>)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case LlvmPackage.BASIC_BLOCK__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
-				getInstructions().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void eUnset(int featureID)
+  {
+    switch (featureID)
+    {
+      case LlvmPackage.BASIC_BLOCK__LABEL:
+        setLabel(LABEL_EDEFAULT);
+        return;
+      case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
+        getInstructions().clear();
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case LlvmPackage.BASIC_BLOCK__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
-				return instructions != null && !instructions.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public boolean eIsSet(int featureID)
+  {
+    switch (featureID)
+    {
+      case LlvmPackage.BASIC_BLOCK__LABEL:
+        return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
+      case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
+        return instructions != null && !instructions.isEmpty();
+    }
+    return super.eIsSet(featureID);
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (label: ");
+    result.append(label);
+    result.append(')');
+    return result.toString();
+  }
 
 } //BasicBlockImpl

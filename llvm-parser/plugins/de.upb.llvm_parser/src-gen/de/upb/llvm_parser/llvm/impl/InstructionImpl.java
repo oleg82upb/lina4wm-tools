@@ -18,24 +18,27 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class InstructionImpl extends MinimalEObjectImpl.Container implements Instruction {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected InstructionImpl() {
-		super();
-	}
+public class InstructionImpl extends MinimalEObjectImpl.Container implements Instruction
+{
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected InstructionImpl()
+  {
+    super();
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return LlvmPackage.Literals.INSTRUCTION;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass()
+  {
+    return LlvmPackage.Literals.INSTRUCTION;
+  }
 
 } //InstructionImpl

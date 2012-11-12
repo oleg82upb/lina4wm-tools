@@ -16,24 +16,27 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class ArithmeticImpl extends InstructionImpl implements Arithmetic {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ArithmeticImpl() {
-		super();
-	}
+public class ArithmeticImpl extends InstructionImpl implements Arithmetic
+{
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected ArithmeticImpl()
+  {
+    super();
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return LlvmPackage.Literals.ARITHMETIC;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass()
+  {
+    return LlvmPackage.Literals.ARITHMETIC;
+  }
 
 } //ArithmeticImpl

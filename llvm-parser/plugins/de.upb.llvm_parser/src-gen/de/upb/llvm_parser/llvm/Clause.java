@@ -22,21 +22,22 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Clause extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Filter</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.TypeAndValue}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Filter</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Filter</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getClause_Filter()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<TypeAndValue> getFilter();
+public interface Clause extends EObject
+{
+  /**
+   * Returns the value of the '<em><b>Filter</b></em>' containment reference list.
+   * The list contents are of type {@link de.upb.llvm_parser.llvm.TypeAndValue}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Filter</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Filter</em>' containment reference list.
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getClause_Filter()
+   * @model containment="true"
+   * @generated
+   */
+  EList<TypeAndValue> getFilter();
 
 } // Clause

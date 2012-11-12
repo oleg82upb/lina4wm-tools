@@ -22,21 +22,22 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface LabelList extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Labels</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.TypeAndValue}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Labels</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Labels</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLabelList_Labels()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<TypeAndValue> getLabels();
+public interface LabelList extends EObject
+{
+  /**
+   * Returns the value of the '<em><b>Labels</b></em>' containment reference list.
+   * The list contents are of type {@link de.upb.llvm_parser.llvm.TypeAndValue}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Labels</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Labels</em>' containment reference list.
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getLabelList_Labels()
+   * @model containment="true"
+   * @generated
+   */
+  EList<TypeAndValue> getLabels();
 
 } // LabelList

@@ -13,5 +13,6 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface Compare extends Instruction {
+public interface Compare extends Instruction
+{
 } // Compare

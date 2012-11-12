@@ -13,5 +13,6 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface Arithmetic extends Instruction {
+public interface Arithmetic extends Instruction
+{
 } // Arithmetic
