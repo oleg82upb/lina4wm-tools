@@ -13,5 +13,6 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface Logical extends Instruction {
+public interface Logical extends Instruction
+{
 } // Logical

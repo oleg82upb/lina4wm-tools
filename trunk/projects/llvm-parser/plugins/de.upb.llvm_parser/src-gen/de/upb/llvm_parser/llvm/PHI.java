@@ -20,21 +20,22 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface PHI extends Instruction {
-	/**
-	 * Returns the value of the '<em><b>Values</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.ValuePair}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Values</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Values</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getPHI_Values()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<ValuePair> getValues();
+public interface PHI extends Instruction
+{
+  /**
+   * Returns the value of the '<em><b>Values</b></em>' containment reference list.
+   * The list contents are of type {@link de.upb.llvm_parser.llvm.ValuePair}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Values</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Values</em>' containment reference list.
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getPHI_Values()
+   * @model containment="true"
+   * @generated
+   */
+  EList<ValuePair> getValues();
 
 } // PHI

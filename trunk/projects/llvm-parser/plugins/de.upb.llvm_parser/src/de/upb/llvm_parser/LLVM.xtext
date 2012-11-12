@@ -4,18 +4,36 @@ generate llvm "http://www.upb.de/llvm_parser/llvm"
 
 LLVM:
 	elements+=AbstractElement*;
+	//[%@][a-zA-Z$._][a-zA-Z$._0-9]*
+terminal INTEGER:
+	'i' ('0'..'9')+ '*'*;
 
 terminal SL_COMMENT:
 	';' !('\n' | '\r')* ('\r'? '\n')?;
 
 terminal VAR_TYPE:
-	('('?('@' | '%') (('a'..'z' | '$' | '_' | 'A'..'Z') ('a'..'z' | '$' | '_' | 'A'..'Z' | '0'..'9')* ('.' ('a'..'z' | '$' |
-	'_' | 'A'..'Z') ('a'..'z' | '$' | '_' | 'A'..'Z' | '0'..'9')* ('*')*)?')*'?))
-	;
+	((('%' | '@') (NOBRACKET | '(' NOBRACKET ')' | INT) '*'*) | '('+ ('%' | '@') (NOBRACKET | '(' NOBRACKET ')' | '%'
+	INT) '*'* ')'+ '*'*);
 
-terminal INTEGER:
-	'i' ('0'..'9')+;
+terminal NOBRACKET:
+	(('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')* POINT?);
 
+terminal POINT:
+	'.' ((NOBRACKET) | '(' NOBRACKET ')');
+	//	('%'|'@')NOBRACE | '('VAR_TYPE')'
+//;
+//terminal NEXTVAR:
+//	BRACE | NOBRACE
+//;
+//terminal NOBRACE:
+//	(('a'..'z'|'A'..'Z'|'_')('a'..'z'|'A'..'Z'|'_'|'0'..'9')*(POINT|'*'+)?)|INT
+//;
+//terminal BRACE:
+//	'(' NEXTVAR ')' ('*'+| POINT)?
+//;
+//terminal POINT:
+//	'.'NEXTVAR
+//;
 AbstractElement:
 	TopLevelEntity SL_COMMENT? |
 	MainLevelEntity SL_COMMENT?;
@@ -30,90 +48,99 @@ MainLevelEntity:
 	LocalVar;
 
 FunctionHeader:
-	('declare' | 'define') Linkage? Visibility? CallingConv? ReturnAttributes? returnType=Type
-	name=VAR_TYPE pList=ParameterList 'unnamed_addr'? FunctionAttributes? ('section ' STRING)? Alignment?;
+	'define' LINKAGE? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=(Type)
+	name=VAR_TYPE pList=ParameterList 'unnamed_addr'? FUNCTION_ATTRIBUTES? ('section ' STRING)? ALIGNMENT?
+	body=FunctionBody |
+	'declare' LINKAGE? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=(Type)
+	name=VAR_TYPE (tList=TypeList|'(...)') 'unnamed_addr'? FUNCTION_ATTRIBUTES? ('section ' STRING)? ALIGNMENT?;
+
+TypeList:
+	{TypeList} '(' (types+=Type(',' types+=Type)*)? ')';
+
+
+Aggregate:
+	'{' agg+=Type (',' agg+=Type) '}';
 
 LocalVar:
-	name=Type '=' (type=LocalType | instr=LocalInstruction |alias=LocalAlias)
-;
+	name=Type '=' (type=LocalType | instr=LocalInstruction | alias=LocalAlias);
+
 LocalType:
-	'type' type=Type
-;
+	'type' type=Type;
+
 LocalInstruction:
-	instr=Instruction
-;
+	instr=Instruction;
+
 LocalAlias:
-	'alias' AliasLinkage? Visibility? type=Type aliasee=Type
-;
+	'alias' ALIAS_LINKAGE? VISIBILITY? type=TypeAndValue aliasee=Type;
 
 Type:
 	(StructType | VAR_TYPE | BType);
 
 TypeAndValue:
-	type=(VAR_TYPE | BType) value=Type;
+	(type=(VAR_TYPE | BType) value=Type) | aggregate=Aggregate value=Type;
 
 StructType:
 	'{' ((VAR_TYPE | BType) (',' (VAR_TYPE | BType))*)? '}' |
 	'<' '{' ((VAR_TYPE | BType) (',' (VAR_TYPE | BType))*)? '}' '>';
 
 BType:
-	INTEGER | FPoint | BasicType;
+	INTEGER | F_POINT | BasicType | INT;
 
 BasicType:
-	'void'VAR_TYPE;
+	'void' | 'null' | 'label' | 'undef';
 
-FPoint:
+F_POINT:
 	'half' | 'float' | 'double' | 'x86_fp80' | 'fp128' | 'ppc_fp128';
 
 GetElementPtr:
 	'getelementptr' 'inbounds'? pointer+=TypeAndValue (',' params+=TypeAndValue)*;
 
 ExtractValue:
-	'extractvalue' aggregate=TypeAndValue (',' index+=INT)+;
+	'extractvalue' aggregate=Aggregate type=Type (',' index+=INT)+;
 
 InsertValue:
-	'insertvalue' aggregate=TypeAndValue ',' value=TypeAndValue (',' index+=INT)+;
+	'insertvalue' aggregate=Aggregate type=Type ',' value=TypeAndValue (',' index+=INT)+;
 
 Fence:
-	'fence' 'singlethread'? ordering=AtomicOrdering;
+	'fence' 'singlethread'? ordering=ATOMIC_ORDERING;
 
-AtomicOrdering:
+ATOMIC_ORDERING:
 	'unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst';
 
 CmpXchg:
 	'cmpxchg' 'volatile'? adress=TypeAndValue ',' compare_val=TypeAndValue ',' new_val=TypeAndValue 'singlethread'?
-	ordering=AtomicOrdering;
+	ordering=ATOMIC_ORDERING;
 
 AtomicRMW:
-	'atomicrmw' 'volatile'? BinOp adress=TypeAndValue ',' value=TypeAndValue 'singlethread'? ordering=AtomicOrdering;
+	'atomicrmw' 'volatile'? BIN_OP adress=TypeAndValue ',' value=TypeAndValue 'singlethread'? ordering=ATOMIC_ORDERING;
 
-BinOp:
+BIN_OP:
 	'xchg' | 'add' | 'sub' | 'and' | 'nand' | 'or' | 'xor' | 'max' | 'min' | 'umax' | 'umin';
 
 Load:
-	'load' 'volatile'? adress=TypeAndValue (',' align=Alignment)? (',' '!nontemporal' '!' index=INT)? |
-	'load' 'atomic' 'volatile'? adress=TypeAndValue 'singlethread'? ordering=AtomicOrdering (',' 'align' index=INT)?;
+	'load' 'volatile'? adress=TypeAndValue (',' align=ALIGNMENT)? (',' '!nontemporal' '!' index=INT)? |
+	'load' 'atomic' 'volatile'? adress=TypeAndValue 'singlethread'? ordering=ATOMIC_ORDERING (',' 'align' index=INT)?;
 
 Store:
 	'store' 'volatile'? value=TypeAndValue ',' adress=TypeAndValue (',' 'align' INT)? |
-	'store' 'atomic' 'volatile'? value=TypeAndValue ',' adress=TypeAndValue 'singlethread'? ordering=AtomicOrdering (','
+	'store' 'atomic' 'volatile'? value=TypeAndValue ',' adress=TypeAndValue 'singlethread'? ordering=ATOMIC_ORDERING (','
 	'align' index=INT)?;
 
 Call:
-	'tail'? 'call' CallingConv? ReturnAttributes? pointer=TypeAndValue plist=ParameterList FunctionAttributes?;
+	'tail'? 'call' CallingConv? RETURN_ATTRIBUTES? pointer=TypeAndValue plist=ParameterList FUNCTION_ATTRIBUTES?;
 
-ReturnAttributes:
+RETURN_ATTRIBUTES:
 	'zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest';
 
 Alloc:
-	'alloca' type=Type (',' numElements=TypeAndValue)? (',' Alignment)?;
+	'alloca' type=Type (',' numElements=TypeAndValue)? (',' ALIGNMENT)?;
 
 CallingConv:
 	'ccc' | 'fastcc' | 'coldcc' | 'x86_stdcallcc' | 'x86_fastcallcc' | 'x86_thiscallcc' | 'arm_apcscc' |
 	'arm_aapcscc' | 'arm_aapcs_vfpcc' | 'msp430_intrcc' | 'ptx_kernel' | 'ptx_device' | 'spir_func' | 'spir_kernel' |
 	'cc' '<' INT '>' INT;
 
-FunctionAttributes:
+FUNCTION_ATTRIBUTES:
 	'address_safety' | 'alignstack' '(' '<' INT '>' ')' | 'alwaysinline' | 'nonlazybind' | 'inlinehint' | 'naked' |
 	'noimplicitfloat' |
 	'noinline' |
@@ -121,16 +148,18 @@ FunctionAttributes:
 	'uwtable';
 
 ParameterList:
-	{ParameterList} '(' (')' | params+=TypeAndValue (',' params+=TypeAndValue)* ')');
+	{ParameterList} '(' (params+=TypeAndValue (',' params+=TypeAndValue)*)? ')';
 
 PHI:
 	'phi' Type '[' values+=ValuePair ']' (',' '[' values+=ValuePair ']')*;
 
 ValuePair:
-	value1=VAR_TYPE ',' value2=VAR_TYPE;
+	value1=Type ',' value2=Type;
 
 LandingPad:
-	'landingpad' type=Type 'personality' personality=TypeAndValue ('cleanup' clause+=Clause* | clause+=Clause+);
+	'landingpad' type=Type 'personality' personality=TypeAndValue ('cleanup' clause+=Clause* | clause+=Clause+) |
+	'landingpad' type=Type 'personality' personalitytype=Type personalityfunction=CAST_TYPE '(' value=Type '(...)*'
+	VAR_TYPE 'to' castto=Type ')' ('cleanup' clause+=Clause* | clause+=Clause+);
 
 Clause:
 	'catch' TypeAndValue |
@@ -152,39 +181,39 @@ ShuffleVector:
 	'shufflevector' vector1=TypeAndValue ',' vector2=TypeAndValue ',' mask=TypeAndValue;
 
 Cast:
-	CastType value=TypeAndValue 'to' castto=Type;
+	CAST_TYPE value=TypeAndValue 'to' castto=Type;
 
-CastType:
+CAST_TYPE:
 	'trunc' | 'zext' | 'sext' | 'fptrunc' | 'fpext' | 'fptoui' | 'fptosi' | 'uitofp' | 'sitofp' | 'ptrtoint' | 'inttoptr'
 	| 'bitcast';
 
 Compare:
-	'icmp' IPredicates Type ValuePair |
-	'fcmp' FPredicates Type ValuePair;
+	'icmp' I_PREDICATES Type ValuePair |
+	'fcmp' F_PREDICATES Type ValuePair;
 
-IPredicates:
+I_PREDICATES:
 	'eq' | 'ne' | 'ugt' | 'uge' | 'ult' | 'ule' | 'sgt' | 'sge' | 'slt' | 'sle';
 
-FPredicates:
+F_PREDICATES:
 	'false' | 'oeq' | 'ogt' | 'oge' | 'olt' | 'ole' | 'one' | 'ord' |
 	'ueq' | 'ugt' | 'uge' | 'ult' | 'ule' | 'une' | 'uno' | 'true';
 
-ArithmeticOP:
+ARITHMETIC_OP:
 	'add' | 'fadd' | 'sub' | 'fsub' | 'mul' | 'fmul' | 'udiv' | 'sdiv' | 'fdiv' | 'urem' | 'srem' | 'frem';
 
-LogicalOP:
+LOGICAL_OP:
 	'shl' | 'lshr' | 'ashr' | 'and' | 'or' | 'xor';
 
 Arithmetic:
-	ArithmeticOP Type ValuePair;
+	ARITHMETIC_OP Type ValuePair;
 
 Logical:
-	LogicalOP Type ValuePair;
+	LOGICAL_OP Type ValuePair;
 
 Instruction:
 	Switch | IndirectBranch | Branch | Return | Load | Store | Fence | GetElementPtr | Logical | Arithmetic | Compare |
 	Cast | ShuffleVector | InsertElement | ExtractElement | Invoke | Resume | InsertValue | ExtractValue | Alloc |
-	CmpXchg | AtomicRMW | PHI | Select | Call | VA_Arg | LandingPad;
+	CmpXchg | AtomicRMW | PHI | Select | Call | VA_Arg | LandingPad | LocalVar;
 
 IndirectBranch:
 	'indirectbr' adress=TypeAndValue ',' '[' (lList=LabelList)? ']';
@@ -199,7 +228,7 @@ JumpTable:
 	(values+=TypeAndValue ',' destinations+=TypeAndValue)+;
 
 Invoke:
-	'invoke' CallingConv? ReturnAttributes? function=TypeAndValue pList=ParameterList FunctionAttributes? 'to'
+	'invoke' CallingConv? RETURN_ATTRIBUTES? function=TypeAndValue pList=ParameterList FUNCTION_ATTRIBUTES? 'to'
 	to=TypeAndValue 'unwind' unwind=TypeAndValue;
 
 Resume:
@@ -215,21 +244,22 @@ FunctionBody:
 	'{' blocks+=BasicBlock+ '}';
 
 BasicBlock:
-	name=VAR_TYPE ':' instructions+=Instruction*;
+	label=NOBRACKET ':'
+	instructions+=Instruction*;
 
-Visibility:
+VISIBILITY:
 	'default' | 'hidden' | 'protected';
 
-Linkage:
+LINKAGE:
 	'private' | 'linker_private' | 'linker_private_weak' | 'available_externally' | 'linkonce' | 'common' |
-	'appending' | 'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' | 'dllimport' | 'dllexport' | AliasLinkage;
+	'appending' | 'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' | 'dllimport' | 'dllexport' | ALIAS_LINKAGE;
 
-AliasLinkage:
+ALIAS_LINKAGE:
 	'external' | 'internal' | 'weak' | 'weak_odr';
 
 MetadataValue:
 	'!' INT | '!{' STRING '}' | "!" STRING;
 
-Alignment:
+ALIGNMENT:
 	'align' INT //must be a power of 2
 ;
