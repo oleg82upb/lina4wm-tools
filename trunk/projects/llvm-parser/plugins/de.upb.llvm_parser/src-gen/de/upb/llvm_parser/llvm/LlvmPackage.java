@@ -317,7 +317,7 @@ public interface LlvmPackage extends EPackage
   int LOCAL_VAR__NAME = MAIN_LEVEL_ENTITY__NAME;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * The feature id for the '<em><b>Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -353,70 +353,14 @@ public interface LlvmPackage extends EPackage
   int LOCAL_VAR_FEATURE_COUNT = MAIN_LEVEL_ENTITY_FEATURE_COUNT + 3;
 
   /**
-   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.LocalTypeImpl <em>Local Type</em>}' class.
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.AliasImpl <em>Alias</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see de.upb.llvm_parser.llvm.impl.LocalTypeImpl
-   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLocalType()
+   * @see de.upb.llvm_parser.llvm.impl.AliasImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAlias()
    * @generated
    */
-  int LOCAL_TYPE = 8;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOCAL_TYPE__TYPE = 0;
-
-  /**
-   * The number of structural features of the '<em>Local Type</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOCAL_TYPE_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.LocalInstructionImpl <em>Local Instruction</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see de.upb.llvm_parser.llvm.impl.LocalInstructionImpl
-   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLocalInstruction()
-   * @generated
-   */
-  int LOCAL_INSTRUCTION = 9;
-
-  /**
-   * The feature id for the '<em><b>Instr</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOCAL_INSTRUCTION__INSTR = 0;
-
-  /**
-   * The number of structural features of the '<em>Local Instruction</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOCAL_INSTRUCTION_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.LocalAliasImpl <em>Local Alias</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see de.upb.llvm_parser.llvm.impl.LocalAliasImpl
-   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLocalAlias()
-   * @generated
-   */
-  int LOCAL_ALIAS = 10;
+  int ALIAS = 8;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -425,7 +369,7 @@ public interface LlvmPackage extends EPackage
    * @generated
    * @ordered
    */
-  int LOCAL_ALIAS__TYPE = 0;
+  int ALIAS__TYPE = 0;
 
   /**
    * The feature id for the '<em><b>Aliasee</b></em>' attribute.
@@ -434,16 +378,16 @@ public interface LlvmPackage extends EPackage
    * @generated
    * @ordered
    */
-  int LOCAL_ALIAS__ALIASEE = 1;
+  int ALIAS__ALIASEE = 1;
 
   /**
-   * The number of structural features of the '<em>Local Alias</em>' class.
+   * The number of structural features of the '<em>Alias</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int LOCAL_ALIAS_FEATURE_COUNT = 2;
+  int ALIAS_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ClauseImpl <em>Clause</em>}' class.
@@ -453,7 +397,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getClause()
    * @generated
    */
-  int CLAUSE = 26;
+  int CLAUSE = 24;
 
   /**
    * The feature id for the '<em><b>Filter</b></em>' containment reference list.
@@ -481,7 +425,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getTypeAndValue()
    * @generated
    */
-  int TYPE_AND_VALUE = 11;
+  int TYPE_AND_VALUE = 9;
 
   /**
    * The feature id for the '<em><b>Filter</b></em>' containment reference list.
@@ -536,7 +480,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getInstruction()
    * @generated
    */
-  int INSTRUCTION = 36;
+  int INSTRUCTION = 34;
 
   /**
    * The number of structural features of the '<em>Instruction</em>' class.
@@ -555,7 +499,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getGetElementPtr()
    * @generated
    */
-  int GET_ELEMENT_PTR = 12;
+  int GET_ELEMENT_PTR = 10;
 
   /**
    * The feature id for the '<em><b>Pointer</b></em>' containment reference list.
@@ -592,7 +536,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getExtractValue()
    * @generated
    */
-  int EXTRACT_VALUE = 13;
+  int EXTRACT_VALUE = 11;
 
   /**
    * The feature id for the '<em><b>Aggregate</b></em>' containment reference.
@@ -638,7 +582,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getInsertValue()
    * @generated
    */
-  int INSERT_VALUE = 14;
+  int INSERT_VALUE = 12;
 
   /**
    * The feature id for the '<em><b>Aggregate</b></em>' containment reference.
@@ -693,7 +637,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getFence()
    * @generated
    */
-  int FENCE = 15;
+  int FENCE = 13;
 
   /**
    * The feature id for the '<em><b>Ordering</b></em>' attribute.
@@ -721,7 +665,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getCmpXchg()
    * @generated
    */
-  int CMP_XCHG = 16;
+  int CMP_XCHG = 14;
 
   /**
    * The feature id for the '<em><b>Adress</b></em>' containment reference.
@@ -776,7 +720,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRMW()
    * @generated
    */
-  int ATOMIC_RMW = 17;
+  int ATOMIC_RMW = 15;
 
   /**
    * The feature id for the '<em><b>Adress</b></em>' containment reference.
@@ -822,7 +766,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLoad()
    * @generated
    */
-  int LOAD = 18;
+  int LOAD = 16;
 
   /**
    * The feature id for the '<em><b>Adress</b></em>' containment reference.
@@ -877,7 +821,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getStore()
    * @generated
    */
-  int STORE = 19;
+  int STORE = 17;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -932,7 +876,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getCall()
    * @generated
    */
-  int CALL = 20;
+  int CALL = 18;
 
   /**
    * The feature id for the '<em><b>Pointer</b></em>' containment reference.
@@ -969,7 +913,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAlloc()
    * @generated
    */
-  int ALLOC = 21;
+  int ALLOC = 19;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1006,7 +950,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getParameterList()
    * @generated
    */
-  int PARAMETER_LIST = 22;
+  int PARAMETER_LIST = 20;
 
   /**
    * The feature id for the '<em><b>Params</b></em>' containment reference list.
@@ -1034,7 +978,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getPHI()
    * @generated
    */
-  int PHI = 23;
+  int PHI = 21;
 
   /**
    * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -1062,7 +1006,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getCompare()
    * @generated
    */
-  int COMPARE = 33;
+  int COMPARE = 31;
 
   /**
    * The number of structural features of the '<em>Compare</em>' class.
@@ -1081,7 +1025,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getValuePair()
    * @generated
    */
-  int VALUE_PAIR = 24;
+  int VALUE_PAIR = 22;
 
   /**
    * The feature id for the '<em><b>Value1</b></em>' attribute.
@@ -1118,7 +1062,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLandingPad()
    * @generated
    */
-  int LANDING_PAD = 25;
+  int LANDING_PAD = 23;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1200,7 +1144,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getSelect()
    * @generated
    */
-  int SELECT = 27;
+  int SELECT = 25;
 
   /**
    * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -1246,7 +1190,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getVA_Arg()
    * @generated
    */
-  int VA_ARG = 28;
+  int VA_ARG = 26;
 
   /**
    * The feature id for the '<em><b>List</b></em>' containment reference.
@@ -1283,7 +1227,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getExtractElement()
    * @generated
    */
-  int EXTRACT_ELEMENT = 29;
+  int EXTRACT_ELEMENT = 27;
 
   /**
    * The feature id for the '<em><b>Vector</b></em>' containment reference.
@@ -1320,7 +1264,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getInsertElement()
    * @generated
    */
-  int INSERT_ELEMENT = 30;
+  int INSERT_ELEMENT = 28;
 
   /**
    * The feature id for the '<em><b>Vector</b></em>' containment reference.
@@ -1366,7 +1310,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getShuffleVector()
    * @generated
    */
-  int SHUFFLE_VECTOR = 31;
+  int SHUFFLE_VECTOR = 29;
 
   /**
    * The feature id for the '<em><b>Vector1</b></em>' containment reference.
@@ -1412,7 +1356,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getCast()
    * @generated
    */
-  int CAST = 32;
+  int CAST = 30;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -1442,42 +1386,42 @@ public interface LlvmPackage extends EPackage
   int CAST_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 2;
 
   /**
-   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticImpl <em>Arithmetic</em>}' class.
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ARITHMETIC_OPImpl <em>ARITHMETIC OP</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see de.upb.llvm_parser.llvm.impl.ArithmeticImpl
-   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmetic()
+   * @see de.upb.llvm_parser.llvm.impl.ARITHMETIC_OPImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getARITHMETIC_OP()
    * @generated
    */
-  int ARITHMETIC = 34;
+  int ARITHMETIC_OP = 32;
 
   /**
-   * The number of structural features of the '<em>Arithmetic</em>' class.
+   * The number of structural features of the '<em>ARITHMETIC OP</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ARITHMETIC_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 0;
+  int ARITHMETIC_OP_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.LogicalImpl <em>Logical</em>}' class.
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.LOGICAL_OPImpl <em>LOGICAL OP</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see de.upb.llvm_parser.llvm.impl.LogicalImpl
-   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLogical()
+   * @see de.upb.llvm_parser.llvm.impl.LOGICAL_OPImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLOGICAL_OP()
    * @generated
    */
-  int LOGICAL = 35;
+  int LOGICAL_OP = 33;
 
   /**
-   * The number of structural features of the '<em>Logical</em>' class.
+   * The number of structural features of the '<em>LOGICAL OP</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int LOGICAL_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 0;
+  int LOGICAL_OP_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.IndirectBranchImpl <em>Indirect Branch</em>}' class.
@@ -1487,7 +1431,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getIndirectBranch()
    * @generated
    */
-  int INDIRECT_BRANCH = 37;
+  int INDIRECT_BRANCH = 35;
 
   /**
    * The feature id for the '<em><b>Adress</b></em>' containment reference.
@@ -1524,7 +1468,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLabelList()
    * @generated
    */
-  int LABEL_LIST = 38;
+  int LABEL_LIST = 36;
 
   /**
    * The feature id for the '<em><b>Labels</b></em>' containment reference list.
@@ -1552,7 +1496,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getSwitch()
    * @generated
    */
-  int SWITCH = 39;
+  int SWITCH = 37;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -1598,7 +1542,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getJumpTable()
    * @generated
    */
-  int JUMP_TABLE = 40;
+  int JUMP_TABLE = 38;
 
   /**
    * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -1635,7 +1579,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getInvoke()
    * @generated
    */
-  int INVOKE = 41;
+  int INVOKE = 39;
 
   /**
    * The feature id for the '<em><b>Function</b></em>' containment reference.
@@ -1690,7 +1634,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getResume()
    * @generated
    */
-  int RESUME = 42;
+  int RESUME = 40;
 
   /**
    * The number of structural features of the '<em>Resume</em>' class.
@@ -1702,6 +1646,25 @@ public interface LlvmPackage extends EPackage
   int RESUME_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.UnreachableImpl <em>Unreachable</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.UnreachableImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getUnreachable()
+   * @generated
+   */
+  int UNREACHABLE = 41;
+
+  /**
+   * The number of structural features of the '<em>Unreachable</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNREACHABLE_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ReturnImpl <em>Return</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1709,7 +1672,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getReturn()
    * @generated
    */
-  int RETURN = 43;
+  int RETURN = 42;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -1737,7 +1700,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getBranch()
    * @generated
    */
-  int BRANCH = 44;
+  int BRANCH = 43;
 
   /**
    * The feature id for the '<em><b>Destination</b></em>' containment reference.
@@ -1792,7 +1755,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getFunctionBody()
    * @generated
    */
-  int FUNCTION_BODY = 45;
+  int FUNCTION_BODY = 44;
 
   /**
    * The feature id for the '<em><b>Blocks</b></em>' containment reference list.
@@ -1820,7 +1783,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getBasicBlock()
    * @generated
    */
-  int BASIC_BLOCK = 46;
+  int BASIC_BLOCK = 45;
 
   /**
    * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -2052,15 +2015,15 @@ public interface LlvmPackage extends EPackage
   EClass getLocalVar();
 
   /**
-   * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.LocalVar#getType <em>Type</em>}'.
+   * Returns the meta object for the attribute '{@link de.upb.llvm_parser.llvm.LocalVar#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @return the meta object for the attribute '<em>Type</em>'.
    * @see de.upb.llvm_parser.llvm.LocalVar#getType()
    * @see #getLocalVar()
    * @generated
    */
-  EReference getLocalVar_Type();
+  EAttribute getLocalVar_Type();
 
   /**
    * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.LocalVar#getInstr <em>Instr</em>}'.
@@ -2085,78 +2048,36 @@ public interface LlvmPackage extends EPackage
   EReference getLocalVar_Alias();
 
   /**
-   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.LocalType <em>Local Type</em>}'.
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.Alias <em>Alias</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Local Type</em>'.
-   * @see de.upb.llvm_parser.llvm.LocalType
+   * @return the meta object for class '<em>Alias</em>'.
+   * @see de.upb.llvm_parser.llvm.Alias
    * @generated
    */
-  EClass getLocalType();
+  EClass getAlias();
 
   /**
-   * Returns the meta object for the attribute '{@link de.upb.llvm_parser.llvm.LocalType#getType <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Type</em>'.
-   * @see de.upb.llvm_parser.llvm.LocalType#getType()
-   * @see #getLocalType()
-   * @generated
-   */
-  EAttribute getLocalType_Type();
-
-  /**
-   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.LocalInstruction <em>Local Instruction</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Local Instruction</em>'.
-   * @see de.upb.llvm_parser.llvm.LocalInstruction
-   * @generated
-   */
-  EClass getLocalInstruction();
-
-  /**
-   * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.LocalInstruction#getInstr <em>Instr</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Instr</em>'.
-   * @see de.upb.llvm_parser.llvm.LocalInstruction#getInstr()
-   * @see #getLocalInstruction()
-   * @generated
-   */
-  EReference getLocalInstruction_Instr();
-
-  /**
-   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.LocalAlias <em>Local Alias</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Local Alias</em>'.
-   * @see de.upb.llvm_parser.llvm.LocalAlias
-   * @generated
-   */
-  EClass getLocalAlias();
-
-  /**
-   * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.LocalAlias#getType <em>Type</em>}'.
+   * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.Alias#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Type</em>'.
-   * @see de.upb.llvm_parser.llvm.LocalAlias#getType()
-   * @see #getLocalAlias()
+   * @see de.upb.llvm_parser.llvm.Alias#getType()
+   * @see #getAlias()
    * @generated
    */
-  EReference getLocalAlias_Type();
+  EReference getAlias_Type();
 
   /**
-   * Returns the meta object for the attribute '{@link de.upb.llvm_parser.llvm.LocalAlias#getAliasee <em>Aliasee</em>}'.
+   * Returns the meta object for the attribute '{@link de.upb.llvm_parser.llvm.Alias#getAliasee <em>Aliasee</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Aliasee</em>'.
-   * @see de.upb.llvm_parser.llvm.LocalAlias#getAliasee()
-   * @see #getLocalAlias()
+   * @see de.upb.llvm_parser.llvm.Alias#getAliasee()
+   * @see #getAlias()
    * @generated
    */
-  EAttribute getLocalAlias_Aliasee();
+  EAttribute getAlias_Aliasee();
 
   /**
    * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.TypeAndValue <em>Type And Value</em>}'.
@@ -3038,24 +2959,24 @@ public interface LlvmPackage extends EPackage
   EClass getCompare();
 
   /**
-   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.Arithmetic <em>Arithmetic</em>}'.
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ARITHMETIC_OP <em>ARITHMETIC OP</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Arithmetic</em>'.
-   * @see de.upb.llvm_parser.llvm.Arithmetic
+   * @return the meta object for class '<em>ARITHMETIC OP</em>'.
+   * @see de.upb.llvm_parser.llvm.ARITHMETIC_OP
    * @generated
    */
-  EClass getArithmetic();
+  EClass getARITHMETIC_OP();
 
   /**
-   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.Logical <em>Logical</em>}'.
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.LOGICAL_OP <em>LOGICAL OP</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Logical</em>'.
-   * @see de.upb.llvm_parser.llvm.Logical
+   * @return the meta object for class '<em>LOGICAL OP</em>'.
+   * @see de.upb.llvm_parser.llvm.LOGICAL_OP
    * @generated
    */
-  EClass getLogical();
+  EClass getLOGICAL_OP();
 
   /**
    * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.Instruction <em>Instruction</em>}'.
@@ -3258,6 +3179,16 @@ public interface LlvmPackage extends EPackage
    * @generated
    */
   EClass getResume();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.Unreachable <em>Unreachable</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Unreachable</em>'.
+   * @see de.upb.llvm_parser.llvm.Unreachable
+   * @generated
+   */
+  EClass getUnreachable();
 
   /**
    * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.Return <em>Return</em>}'.
@@ -3579,12 +3510,12 @@ public interface LlvmPackage extends EPackage
     EClass LOCAL_VAR = eINSTANCE.getLocalVar();
 
     /**
-     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference LOCAL_VAR__TYPE = eINSTANCE.getLocalVar_Type();
+    EAttribute LOCAL_VAR__TYPE = eINSTANCE.getLocalVar_Type();
 
     /**
      * The meta object literal for the '<em><b>Instr</b></em>' containment reference feature.
@@ -3603,50 +3534,14 @@ public interface LlvmPackage extends EPackage
     EReference LOCAL_VAR__ALIAS = eINSTANCE.getLocalVar_Alias();
 
     /**
-     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.LocalTypeImpl <em>Local Type</em>}' class.
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.AliasImpl <em>Alias</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see de.upb.llvm_parser.llvm.impl.LocalTypeImpl
-     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLocalType()
+     * @see de.upb.llvm_parser.llvm.impl.AliasImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAlias()
      * @generated
      */
-    EClass LOCAL_TYPE = eINSTANCE.getLocalType();
-
-    /**
-     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute LOCAL_TYPE__TYPE = eINSTANCE.getLocalType_Type();
-
-    /**
-     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.LocalInstructionImpl <em>Local Instruction</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see de.upb.llvm_parser.llvm.impl.LocalInstructionImpl
-     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLocalInstruction()
-     * @generated
-     */
-    EClass LOCAL_INSTRUCTION = eINSTANCE.getLocalInstruction();
-
-    /**
-     * The meta object literal for the '<em><b>Instr</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference LOCAL_INSTRUCTION__INSTR = eINSTANCE.getLocalInstruction_Instr();
-
-    /**
-     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.LocalAliasImpl <em>Local Alias</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see de.upb.llvm_parser.llvm.impl.LocalAliasImpl
-     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLocalAlias()
-     * @generated
-     */
-    EClass LOCAL_ALIAS = eINSTANCE.getLocalAlias();
+    EClass ALIAS = eINSTANCE.getAlias();
 
     /**
      * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
@@ -3654,7 +3549,7 @@ public interface LlvmPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference LOCAL_ALIAS__TYPE = eINSTANCE.getLocalAlias_Type();
+    EReference ALIAS__TYPE = eINSTANCE.getAlias_Type();
 
     /**
      * The meta object literal for the '<em><b>Aliasee</b></em>' attribute feature.
@@ -3662,7 +3557,7 @@ public interface LlvmPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute LOCAL_ALIAS__ALIASEE = eINSTANCE.getLocalAlias_Aliasee();
+    EAttribute ALIAS__ALIASEE = eINSTANCE.getAlias_Aliasee();
 
     /**
      * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.TypeAndValueImpl <em>Type And Value</em>}' class.
@@ -4367,24 +4262,24 @@ public interface LlvmPackage extends EPackage
     EClass COMPARE = eINSTANCE.getCompare();
 
     /**
-     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticImpl <em>Arithmetic</em>}' class.
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ARITHMETIC_OPImpl <em>ARITHMETIC OP</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see de.upb.llvm_parser.llvm.impl.ArithmeticImpl
-     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmetic()
+     * @see de.upb.llvm_parser.llvm.impl.ARITHMETIC_OPImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getARITHMETIC_OP()
      * @generated
      */
-    EClass ARITHMETIC = eINSTANCE.getArithmetic();
+    EClass ARITHMETIC_OP = eINSTANCE.getARITHMETIC_OP();
 
     /**
-     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.LogicalImpl <em>Logical</em>}' class.
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.LOGICAL_OPImpl <em>LOGICAL OP</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see de.upb.llvm_parser.llvm.impl.LogicalImpl
-     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLogical()
+     * @see de.upb.llvm_parser.llvm.impl.LOGICAL_OPImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLOGICAL_OP()
      * @generated
      */
-    EClass LOGICAL = eINSTANCE.getLogical();
+    EClass LOGICAL_OP = eINSTANCE.getLOGICAL_OP();
 
     /**
      * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.InstructionImpl <em>Instruction</em>}' class.
@@ -4551,6 +4446,16 @@ public interface LlvmPackage extends EPackage
      * @generated
      */
     EClass RESUME = eINSTANCE.getResume();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.UnreachableImpl <em>Unreachable</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.UnreachableImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getUnreachable()
+     * @generated
+     */
+    EClass UNREACHABLE = eINSTANCE.getUnreachable();
 
     /**
      * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ReturnImpl <em>Return</em>}' class.

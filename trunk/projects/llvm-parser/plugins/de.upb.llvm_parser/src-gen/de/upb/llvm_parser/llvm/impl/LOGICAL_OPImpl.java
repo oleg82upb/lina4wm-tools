@@ -2,28 +2,28 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
+import de.upb.llvm_parser.llvm.LOGICAL_OP;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.Logical;
 
 import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Logical</b></em>'.
+ * An implementation of the model object '<em><b>LOGICAL OP</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class LogicalImpl extends InstructionImpl implements Logical
+public class LOGICAL_OPImpl extends InstructionImpl implements LOGICAL_OP
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected LogicalImpl()
+  protected LOGICAL_OPImpl()
   {
     super();
   }
@@ -36,7 +36,7 @@ public class LogicalImpl extends InstructionImpl implements Logical
   @Override
   protected EClass eStaticClass()
   {
-    return LlvmPackage.Literals.LOGICAL;
+    return LlvmPackage.Literals.LOGICAL_OP;
   }
 
-} //LogicalImpl
+} //LOGICAL_OPImpl

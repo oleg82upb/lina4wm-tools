@@ -2,8 +2,8 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
+import de.upb.llvm_parser.llvm.Alias;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.LocalAlias;
 import de.upb.llvm_parser.llvm.TypeAndValue;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -17,19 +17,19 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Local Alias</b></em>'.
+ * An implementation of the model object '<em><b>Alias</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.LocalAliasImpl#getType <em>Type</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.LocalAliasImpl#getAliasee <em>Aliasee</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.AliasImpl#getType <em>Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.AliasImpl#getAliasee <em>Aliasee</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class LocalAliasImpl extends MinimalEObjectImpl.Container implements LocalAlias
+public class AliasImpl extends MinimalEObjectImpl.Container implements Alias
 {
   /**
    * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
@@ -66,7 +66,7 @@ public class LocalAliasImpl extends MinimalEObjectImpl.Container implements Loca
    * <!-- end-user-doc -->
    * @generated
    */
-  protected LocalAliasImpl()
+  protected AliasImpl()
   {
     super();
   }
@@ -79,7 +79,7 @@ public class LocalAliasImpl extends MinimalEObjectImpl.Container implements Loca
   @Override
   protected EClass eStaticClass()
   {
-    return LlvmPackage.Literals.LOCAL_ALIAS;
+    return LlvmPackage.Literals.ALIAS;
   }
 
   /**
@@ -103,7 +103,7 @@ public class LocalAliasImpl extends MinimalEObjectImpl.Container implements Loca
     type = newType;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.LOCAL_ALIAS__TYPE, oldType, newType);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.ALIAS__TYPE, oldType, newType);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -120,14 +120,14 @@ public class LocalAliasImpl extends MinimalEObjectImpl.Container implements Loca
     {
       NotificationChain msgs = null;
       if (type != null)
-        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LOCAL_ALIAS__TYPE, null, msgs);
+        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ALIAS__TYPE, null, msgs);
       if (newType != null)
-        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LOCAL_ALIAS__TYPE, null, msgs);
+        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ALIAS__TYPE, null, msgs);
       msgs = basicSetType(newType, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOCAL_ALIAS__TYPE, newType, newType));
+      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ALIAS__TYPE, newType, newType));
   }
 
   /**
@@ -150,7 +150,7 @@ public class LocalAliasImpl extends MinimalEObjectImpl.Container implements Loca
     String oldAliasee = aliasee;
     aliasee = newAliasee;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOCAL_ALIAS__ALIASEE, oldAliasee, aliasee));
+      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ALIAS__ALIASEE, oldAliasee, aliasee));
   }
 
   /**
@@ -163,7 +163,7 @@ public class LocalAliasImpl extends MinimalEObjectImpl.Container implements Loca
   {
     switch (featureID)
     {
-      case LlvmPackage.LOCAL_ALIAS__TYPE:
+      case LlvmPackage.ALIAS__TYPE:
         return basicSetType(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -179,9 +179,9 @@ public class LocalAliasImpl extends MinimalEObjectImpl.Container implements Loca
   {
     switch (featureID)
     {
-      case LlvmPackage.LOCAL_ALIAS__TYPE:
+      case LlvmPackage.ALIAS__TYPE:
         return getType();
-      case LlvmPackage.LOCAL_ALIAS__ALIASEE:
+      case LlvmPackage.ALIAS__ALIASEE:
         return getAliasee();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -197,10 +197,10 @@ public class LocalAliasImpl extends MinimalEObjectImpl.Container implements Loca
   {
     switch (featureID)
     {
-      case LlvmPackage.LOCAL_ALIAS__TYPE:
+      case LlvmPackage.ALIAS__TYPE:
         setType((TypeAndValue)newValue);
         return;
-      case LlvmPackage.LOCAL_ALIAS__ALIASEE:
+      case LlvmPackage.ALIAS__ALIASEE:
         setAliasee((String)newValue);
         return;
     }
@@ -217,10 +217,10 @@ public class LocalAliasImpl extends MinimalEObjectImpl.Container implements Loca
   {
     switch (featureID)
     {
-      case LlvmPackage.LOCAL_ALIAS__TYPE:
+      case LlvmPackage.ALIAS__TYPE:
         setType((TypeAndValue)null);
         return;
-      case LlvmPackage.LOCAL_ALIAS__ALIASEE:
+      case LlvmPackage.ALIAS__ALIASEE:
         setAliasee(ALIASEE_EDEFAULT);
         return;
     }
@@ -237,9 +237,9 @@ public class LocalAliasImpl extends MinimalEObjectImpl.Container implements Loca
   {
     switch (featureID)
     {
-      case LlvmPackage.LOCAL_ALIAS__TYPE:
+      case LlvmPackage.ALIAS__TYPE:
         return type != null;
-      case LlvmPackage.LOCAL_ALIAS__ALIASEE:
+      case LlvmPackage.ALIAS__ALIASEE:
         return ALIASEE_EDEFAULT == null ? aliasee != null : !ALIASEE_EDEFAULT.equals(aliasee);
     }
     return super.eIsSet(featureID);
@@ -262,4 +262,4 @@ public class LocalAliasImpl extends MinimalEObjectImpl.Container implements Loca
     return result.toString();
   }
 
-} //LocalAliasImpl
+} //AliasImpl

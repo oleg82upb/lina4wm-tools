@@ -2,28 +2,28 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
-import de.upb.llvm_parser.llvm.Arithmetic;
+import de.upb.llvm_parser.llvm.ARITHMETIC_OP;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
 import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Arithmetic</b></em>'.
+ * An implementation of the model object '<em><b>ARITHMETIC OP</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class ArithmeticImpl extends InstructionImpl implements Arithmetic
+public class ARITHMETIC_OPImpl extends InstructionImpl implements ARITHMETIC_OP
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ArithmeticImpl()
+  protected ARITHMETIC_OPImpl()
   {
     super();
   }
@@ -36,7 +36,7 @@ public class ArithmeticImpl extends InstructionImpl implements Arithmetic
   @Override
   protected EClass eStaticClass()
   {
-    return LlvmPackage.Literals.ARITHMETIC;
+    return LlvmPackage.Literals.ARITHMETIC_OP;
   }
 
-} //ArithmeticImpl
+} //ARITHMETIC_OPImpl

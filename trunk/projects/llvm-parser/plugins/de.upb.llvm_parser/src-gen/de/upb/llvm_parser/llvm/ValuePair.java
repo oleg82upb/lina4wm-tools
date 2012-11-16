@@ -20,7 +20,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface ValuePair extends Compare, Arithmetic, Logical
+public interface ValuePair extends Compare, ARITHMETIC_OP, LOGICAL_OP
 {
   /**
    * Returns the value of the '<em><b>Value1</b></em>' attribute.

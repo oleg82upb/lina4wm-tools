@@ -115,19 +115,9 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
         return createLocalVarAdapter();
       }
       @Override
-      public Adapter caseLocalType(LocalType object)
+      public Adapter caseAlias(Alias object)
       {
-        return createLocalTypeAdapter();
-      }
-      @Override
-      public Adapter caseLocalInstruction(LocalInstruction object)
-      {
-        return createLocalInstructionAdapter();
-      }
-      @Override
-      public Adapter caseLocalAlias(LocalAlias object)
-      {
-        return createLocalAliasAdapter();
+        return createAliasAdapter();
       }
       @Override
       public Adapter caseTypeAndValue(TypeAndValue object)
@@ -245,14 +235,14 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
         return createCompareAdapter();
       }
       @Override
-      public Adapter caseArithmetic(Arithmetic object)
+      public Adapter caseARITHMETIC_OP(ARITHMETIC_OP object)
       {
-        return createArithmeticAdapter();
+        return createARITHMETIC_OPAdapter();
       }
       @Override
-      public Adapter caseLogical(Logical object)
+      public Adapter caseLOGICAL_OP(LOGICAL_OP object)
       {
-        return createLogicalAdapter();
+        return createLOGICAL_OPAdapter();
       }
       @Override
       public Adapter caseInstruction(Instruction object)
@@ -288,6 +278,11 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
       public Adapter caseResume(Resume object)
       {
         return createResumeAdapter();
+      }
+      @Override
+      public Adapter caseUnreachable(Unreachable object)
+      {
+        return createUnreachableAdapter();
       }
       @Override
       public Adapter caseReturn(Return object)
@@ -452,46 +447,16 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.LocalType <em>Local Type</em>}'.
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Alias <em>Alias</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.upb.llvm_parser.llvm.LocalType
+   * @see de.upb.llvm_parser.llvm.Alias
    * @generated
    */
-  public Adapter createLocalTypeAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.LocalInstruction <em>Local Instruction</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see de.upb.llvm_parser.llvm.LocalInstruction
-   * @generated
-   */
-  public Adapter createLocalInstructionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.LocalAlias <em>Local Alias</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see de.upb.llvm_parser.llvm.LocalAlias
-   * @generated
-   */
-  public Adapter createLocalAliasAdapter()
+  public Adapter createAliasAdapter()
   {
     return null;
   }
@@ -842,31 +807,31 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Arithmetic <em>Arithmetic</em>}'.
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ARITHMETIC_OP <em>ARITHMETIC OP</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.upb.llvm_parser.llvm.Arithmetic
+   * @see de.upb.llvm_parser.llvm.ARITHMETIC_OP
    * @generated
    */
-  public Adapter createArithmeticAdapter()
+  public Adapter createARITHMETIC_OPAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Logical <em>Logical</em>}'.
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.LOGICAL_OP <em>LOGICAL OP</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.upb.llvm_parser.llvm.Logical
+   * @see de.upb.llvm_parser.llvm.LOGICAL_OP
    * @generated
    */
-  public Adapter createLogicalAdapter()
+  public Adapter createLOGICAL_OPAdapter()
   {
     return null;
   }
@@ -972,6 +937,21 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createResumeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Unreachable <em>Unreachable</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Unreachable
+   * @generated
+   */
+  public Adapter createUnreachableAdapter()
   {
     return null;
   }

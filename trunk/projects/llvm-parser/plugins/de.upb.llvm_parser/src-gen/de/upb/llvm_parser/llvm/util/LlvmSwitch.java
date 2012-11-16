@@ -135,24 +135,10 @@ public class LlvmSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case LlvmPackage.LOCAL_TYPE:
+      case LlvmPackage.ALIAS:
       {
-        LocalType localType = (LocalType)theEObject;
-        T result = caseLocalType(localType);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case LlvmPackage.LOCAL_INSTRUCTION:
-      {
-        LocalInstruction localInstruction = (LocalInstruction)theEObject;
-        T result = caseLocalInstruction(localInstruction);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case LlvmPackage.LOCAL_ALIAS:
-      {
-        LocalAlias localAlias = (LocalAlias)theEObject;
-        T result = caseLocalAlias(localAlias);
+        Alias alias = (Alias)theEObject;
+        T result = caseAlias(alias);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -266,8 +252,8 @@ public class LlvmSwitch<T> extends Switch<T>
         ValuePair valuePair = (ValuePair)theEObject;
         T result = caseValuePair(valuePair);
         if (result == null) result = caseCompare(valuePair);
-        if (result == null) result = caseArithmetic(valuePair);
-        if (result == null) result = caseLogical(valuePair);
+        if (result == null) result = caseARITHMETIC_OP(valuePair);
+        if (result == null) result = caseLOGICAL_OP(valuePair);
         if (result == null) result = caseInstruction(valuePair);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -343,19 +329,19 @@ public class LlvmSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case LlvmPackage.ARITHMETIC:
+      case LlvmPackage.ARITHMETIC_OP:
       {
-        Arithmetic arithmetic = (Arithmetic)theEObject;
-        T result = caseArithmetic(arithmetic);
-        if (result == null) result = caseInstruction(arithmetic);
+        ARITHMETIC_OP arithmetiC_OP = (ARITHMETIC_OP)theEObject;
+        T result = caseARITHMETIC_OP(arithmetiC_OP);
+        if (result == null) result = caseInstruction(arithmetiC_OP);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case LlvmPackage.LOGICAL:
+      case LlvmPackage.LOGICAL_OP:
       {
-        Logical logical = (Logical)theEObject;
-        T result = caseLogical(logical);
-        if (result == null) result = caseInstruction(logical);
+        LOGICAL_OP logicaL_OP = (LOGICAL_OP)theEObject;
+        T result = caseLOGICAL_OP(logicaL_OP);
+        if (result == null) result = caseInstruction(logicaL_OP);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -409,6 +395,14 @@ public class LlvmSwitch<T> extends Switch<T>
         Resume resume = (Resume)theEObject;
         T result = caseResume(resume);
         if (result == null) result = caseInstruction(resume);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.UNREACHABLE:
+      {
+        Unreachable unreachable = (Unreachable)theEObject;
+        T result = caseUnreachable(unreachable);
+        if (result == null) result = caseInstruction(unreachable);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -575,49 +569,17 @@ public class LlvmSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Local Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Alias</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Local Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Alias</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseLocalType(LocalType object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Local Instruction</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Local Instruction</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseLocalInstruction(LocalInstruction object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Local Alias</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Local Alias</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseLocalAlias(LocalAlias object)
+  public T caseAlias(Alias object)
   {
     return null;
   }
@@ -991,33 +953,33 @@ public class LlvmSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Arithmetic</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>ARITHMETIC OP</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Arithmetic</em>'.
+   * @return the result of interpreting the object as an instance of '<em>ARITHMETIC OP</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseArithmetic(Arithmetic object)
+  public T caseARITHMETIC_OP(ARITHMETIC_OP object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Logical</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>LOGICAL OP</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Logical</em>'.
+   * @return the result of interpreting the object as an instance of '<em>LOGICAL OP</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseLogical(Logical object)
+  public T caseLOGICAL_OP(LOGICAL_OP object)
   {
     return null;
   }
@@ -1130,6 +1092,22 @@ public class LlvmSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseResume(Resume object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Unreachable</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Unreachable</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseUnreachable(Unreachable object)
   {
     return null;
   }
