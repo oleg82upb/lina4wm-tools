@@ -2,10 +2,9 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
+import de.upb.llvm_parser.llvm.Alias;
+import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.LocalAlias;
-import de.upb.llvm_parser.llvm.LocalInstruction;
-import de.upb.llvm_parser.llvm.LocalType;
 import de.upb.llvm_parser.llvm.LocalVar;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -34,14 +33,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
 {
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+   * The default value of the '{@link #getType() <em>Type</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getType()
    * @generated
    * @ordered
    */
-  protected LocalType type;
+  protected static final String TYPE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected String type = TYPE_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getInstr() <em>Instr</em>}' containment reference.
@@ -51,7 +60,7 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
    * @generated
    * @ordered
    */
-  protected LocalInstruction instr;
+  protected Instruction instr;
 
   /**
    * The cached value of the '{@link #getAlias() <em>Alias</em>}' containment reference.
@@ -61,7 +70,7 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
    * @generated
    * @ordered
    */
-  protected LocalAlias alias;
+  protected Alias alias;
 
   /**
    * <!-- begin-user-doc -->
@@ -89,7 +98,7 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
    * <!-- end-user-doc -->
    * @generated
    */
-  public LocalType getType()
+  public String getType()
   {
     return type;
   }
@@ -99,16 +108,12 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetType(LocalType newType, NotificationChain msgs)
+  public void setType(String newType)
   {
-    LocalType oldType = type;
+    String oldType = type;
     type = newType;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.LOCAL_VAR__TYPE, oldType, newType);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
+      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOCAL_VAR__TYPE, oldType, type));
   }
 
   /**
@@ -116,28 +121,7 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(LocalType newType)
-  {
-    if (newType != type)
-    {
-      NotificationChain msgs = null;
-      if (type != null)
-        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LOCAL_VAR__TYPE, null, msgs);
-      if (newType != null)
-        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LOCAL_VAR__TYPE, null, msgs);
-      msgs = basicSetType(newType, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOCAL_VAR__TYPE, newType, newType));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public LocalInstruction getInstr()
+  public Instruction getInstr()
   {
     return instr;
   }
@@ -147,9 +131,9 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetInstr(LocalInstruction newInstr, NotificationChain msgs)
+  public NotificationChain basicSetInstr(Instruction newInstr, NotificationChain msgs)
   {
-    LocalInstruction oldInstr = instr;
+    Instruction oldInstr = instr;
     instr = newInstr;
     if (eNotificationRequired())
     {
@@ -164,7 +148,7 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setInstr(LocalInstruction newInstr)
+  public void setInstr(Instruction newInstr)
   {
     if (newInstr != instr)
     {
@@ -185,7 +169,7 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
    * <!-- end-user-doc -->
    * @generated
    */
-  public LocalAlias getAlias()
+  public Alias getAlias()
   {
     return alias;
   }
@@ -195,9 +179,9 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetAlias(LocalAlias newAlias, NotificationChain msgs)
+  public NotificationChain basicSetAlias(Alias newAlias, NotificationChain msgs)
   {
-    LocalAlias oldAlias = alias;
+    Alias oldAlias = alias;
     alias = newAlias;
     if (eNotificationRequired())
     {
@@ -212,7 +196,7 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAlias(LocalAlias newAlias)
+  public void setAlias(Alias newAlias)
   {
     if (newAlias != alias)
     {
@@ -238,8 +222,6 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
   {
     switch (featureID)
     {
-      case LlvmPackage.LOCAL_VAR__TYPE:
-        return basicSetType(null, msgs);
       case LlvmPackage.LOCAL_VAR__INSTR:
         return basicSetInstr(null, msgs);
       case LlvmPackage.LOCAL_VAR__ALIAS:
@@ -279,13 +261,13 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
     switch (featureID)
     {
       case LlvmPackage.LOCAL_VAR__TYPE:
-        setType((LocalType)newValue);
+        setType((String)newValue);
         return;
       case LlvmPackage.LOCAL_VAR__INSTR:
-        setInstr((LocalInstruction)newValue);
+        setInstr((Instruction)newValue);
         return;
       case LlvmPackage.LOCAL_VAR__ALIAS:
-        setAlias((LocalAlias)newValue);
+        setAlias((Alias)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -302,13 +284,13 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
     switch (featureID)
     {
       case LlvmPackage.LOCAL_VAR__TYPE:
-        setType((LocalType)null);
+        setType(TYPE_EDEFAULT);
         return;
       case LlvmPackage.LOCAL_VAR__INSTR:
-        setInstr((LocalInstruction)null);
+        setInstr((Instruction)null);
         return;
       case LlvmPackage.LOCAL_VAR__ALIAS:
-        setAlias((LocalAlias)null);
+        setAlias((Alias)null);
         return;
     }
     super.eUnset(featureID);
@@ -325,13 +307,30 @@ public class LocalVarImpl extends MainLevelEntityImpl implements LocalVar
     switch (featureID)
     {
       case LlvmPackage.LOCAL_VAR__TYPE:
-        return type != null;
+        return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
       case LlvmPackage.LOCAL_VAR__INSTR:
         return instr != null;
       case LlvmPackage.LOCAL_VAR__ALIAS:
         return alias != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (type: ");
+    result.append(type);
+    result.append(')');
+    return result.toString();
   }
 
 } //LocalVarImpl

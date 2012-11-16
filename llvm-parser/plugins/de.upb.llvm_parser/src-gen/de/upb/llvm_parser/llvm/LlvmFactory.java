@@ -95,31 +95,13 @@ public interface LlvmFactory extends EFactory
   LocalVar createLocalVar();
 
   /**
-   * Returns a new object of class '<em>Local Type</em>'.
+   * Returns a new object of class '<em>Alias</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Local Type</em>'.
+   * @return a new object of class '<em>Alias</em>'.
    * @generated
    */
-  LocalType createLocalType();
-
-  /**
-   * Returns a new object of class '<em>Local Instruction</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Local Instruction</em>'.
-   * @generated
-   */
-  LocalInstruction createLocalInstruction();
-
-  /**
-   * Returns a new object of class '<em>Local Alias</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Local Alias</em>'.
-   * @generated
-   */
-  LocalAlias createLocalAlias();
+  Alias createAlias();
 
   /**
    * Returns a new object of class '<em>Type And Value</em>'.
@@ -329,22 +311,22 @@ public interface LlvmFactory extends EFactory
   Compare createCompare();
 
   /**
-   * Returns a new object of class '<em>Arithmetic</em>'.
+   * Returns a new object of class '<em>ARITHMETIC OP</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Arithmetic</em>'.
+   * @return a new object of class '<em>ARITHMETIC OP</em>'.
    * @generated
    */
-  Arithmetic createArithmetic();
+  ARITHMETIC_OP createARITHMETIC_OP();
 
   /**
-   * Returns a new object of class '<em>Logical</em>'.
+   * Returns a new object of class '<em>LOGICAL OP</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Logical</em>'.
+   * @return a new object of class '<em>LOGICAL OP</em>'.
    * @generated
    */
-  Logical createLogical();
+  LOGICAL_OP createLOGICAL_OP();
 
   /**
    * Returns a new object of class '<em>Instruction</em>'.
@@ -408,6 +390,15 @@ public interface LlvmFactory extends EFactory
    * @generated
    */
   Resume createResume();
+
+  /**
+   * Returns a new object of class '<em>Unreachable</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unreachable</em>'.
+   * @generated
+   */
+  Unreachable createUnreachable();
 
   /**
    * Returns a new object of class '<em>Return</em>'.

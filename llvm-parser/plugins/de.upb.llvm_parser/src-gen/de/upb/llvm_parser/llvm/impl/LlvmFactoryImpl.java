@@ -72,9 +72,7 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
       case LlvmPackage.TYPE_LIST: return createTypeList();
       case LlvmPackage.AGGREGATE: return createAggregate();
       case LlvmPackage.LOCAL_VAR: return createLocalVar();
-      case LlvmPackage.LOCAL_TYPE: return createLocalType();
-      case LlvmPackage.LOCAL_INSTRUCTION: return createLocalInstruction();
-      case LlvmPackage.LOCAL_ALIAS: return createLocalAlias();
+      case LlvmPackage.ALIAS: return createAlias();
       case LlvmPackage.TYPE_AND_VALUE: return createTypeAndValue();
       case LlvmPackage.GET_ELEMENT_PTR: return createGetElementPtr();
       case LlvmPackage.EXTRACT_VALUE: return createExtractValue();
@@ -98,8 +96,8 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
       case LlvmPackage.SHUFFLE_VECTOR: return createShuffleVector();
       case LlvmPackage.CAST: return createCast();
       case LlvmPackage.COMPARE: return createCompare();
-      case LlvmPackage.ARITHMETIC: return createArithmetic();
-      case LlvmPackage.LOGICAL: return createLogical();
+      case LlvmPackage.ARITHMETIC_OP: return createARITHMETIC_OP();
+      case LlvmPackage.LOGICAL_OP: return createLOGICAL_OP();
       case LlvmPackage.INSTRUCTION: return createInstruction();
       case LlvmPackage.INDIRECT_BRANCH: return createIndirectBranch();
       case LlvmPackage.LABEL_LIST: return createLabelList();
@@ -107,6 +105,7 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
       case LlvmPackage.JUMP_TABLE: return createJumpTable();
       case LlvmPackage.INVOKE: return createInvoke();
       case LlvmPackage.RESUME: return createResume();
+      case LlvmPackage.UNREACHABLE: return createUnreachable();
       case LlvmPackage.RETURN: return createReturn();
       case LlvmPackage.BRANCH: return createBranch();
       case LlvmPackage.FUNCTION_BODY: return createFunctionBody();
@@ -209,32 +208,10 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public LocalType createLocalType()
+  public Alias createAlias()
   {
-    LocalTypeImpl localType = new LocalTypeImpl();
-    return localType;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public LocalInstruction createLocalInstruction()
-  {
-    LocalInstructionImpl localInstruction = new LocalInstructionImpl();
-    return localInstruction;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public LocalAlias createLocalAlias()
-  {
-    LocalAliasImpl localAlias = new LocalAliasImpl();
-    return localAlias;
+    AliasImpl alias = new AliasImpl();
+    return alias;
   }
 
   /**
@@ -495,10 +472,10 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Arithmetic createArithmetic()
+  public ARITHMETIC_OP createARITHMETIC_OP()
   {
-    ArithmeticImpl arithmetic = new ArithmeticImpl();
-    return arithmetic;
+    ARITHMETIC_OPImpl arithmetiC_OP = new ARITHMETIC_OPImpl();
+    return arithmetiC_OP;
   }
 
   /**
@@ -506,10 +483,10 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Logical createLogical()
+  public LOGICAL_OP createLOGICAL_OP()
   {
-    LogicalImpl logical = new LogicalImpl();
-    return logical;
+    LOGICAL_OPImpl logicaL_OP = new LOGICAL_OPImpl();
+    return logicaL_OP;
   }
 
   /**
@@ -587,6 +564,17 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
   {
     ResumeImpl resume = new ResumeImpl();
     return resume;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Unreachable createUnreachable()
+  {
+    UnreachableImpl unreachable = new UnreachableImpl();
+    return unreachable;
   }
 
   /**

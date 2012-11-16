@@ -32,19 +32,13 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Aggregate/agg"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//LocalVar">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//LocalVar/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//LocalVar/type"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//LocalVar/instr"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//LocalVar/alias"/>
     </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//LocalType">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//LocalType/type"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//LocalInstruction">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//LocalInstruction/instr"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//LocalAlias">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//LocalAlias/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//LocalAlias/aliasee"/>
+    <genClasses ecoreClass="LLVM.ecore#//Alias">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Alias/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Alias/aliasee"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//TypeAndValue">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//TypeAndValue/type"/>
@@ -150,8 +144,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Cast/castto"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//Compare"/>
-    <genClasses ecoreClass="LLVM.ecore#//Arithmetic"/>
-    <genClasses ecoreClass="LLVM.ecore#//Logical"/>
+    <genClasses ecoreClass="LLVM.ecore#//ARITHMETIC_OP"/>
+    <genClasses ecoreClass="LLVM.ecore#//LOGICAL_OP"/>
     <genClasses ecoreClass="LLVM.ecore#//Instruction"/>
     <genClasses ecoreClass="LLVM.ecore#//IndirectBranch">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//IndirectBranch/adress"/>
@@ -176,6 +170,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Invoke/unwind"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//Resume"/>
+    <genClasses ecoreClass="LLVM.ecore#//Unreachable"/>
     <genClasses ecoreClass="LLVM.ecore#//Return">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Return/value"/>
     </genClasses>

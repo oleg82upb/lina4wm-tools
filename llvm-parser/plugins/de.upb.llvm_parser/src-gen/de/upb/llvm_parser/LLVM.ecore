@@ -33,21 +33,13 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LocalVar" eSuperTypes="#//MainLevelEntity #//Instruction">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//LocalType"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="instr" eType="#//LocalInstruction"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="alias" eType="#//LocalAlias"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LocalType">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LocalInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="instr" eType="#//Instruction"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="alias" eType="#//Alias"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LocalAlias">
+  <eClassifiers xsi:type="ecore:EClass" name="Alias">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TypeAndValue"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="aliasee" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -133,7 +125,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
         eType="#//ValuePair" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ValuePair" eSuperTypes="#//Compare #//Arithmetic #//Logical">
+  <eClassifiers xsi:type="ecore:EClass" name="ValuePair" eSuperTypes="#//Compare #//ARITHMETIC_OP #//LOGICAL_OP">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -193,8 +185,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="castto" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Compare" eSuperTypes="#//Instruction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Arithmetic" eSuperTypes="#//Instruction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Logical" eSuperTypes="#//Instruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ARITHMETIC_OP" eSuperTypes="#//Instruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LOGICAL_OP" eSuperTypes="#//Instruction"/>
   <eClassifiers xsi:type="ecore:EClass" name="Instruction"/>
   <eClassifiers xsi:type="ecore:EClass" name="IndirectBranch" eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="adress" eType="#//TypeAndValue"
@@ -231,6 +223,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Resume" eSuperTypes="#//Instruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Unreachable" eSuperTypes="#//Instruction"/>
   <eClassifiers xsi:type="ecore:EClass" name="Return" eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//TypeAndValue"
         containment="true"/>

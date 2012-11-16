@@ -6,22 +6,22 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Local Alias</b></em>'.
+ * A representation of the model object '<em><b>Alias</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.LocalAlias#getType <em>Type</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.LocalAlias#getAliasee <em>Aliasee</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Alias#getType <em>Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Alias#getAliasee <em>Aliasee</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.upb.llvm_parser.llvm.LlvmPackage#getLocalAlias()
+ * @see de.upb.llvm_parser.llvm.LlvmPackage#getAlias()
  * @model
  * @generated
  */
-public interface LocalAlias extends EObject
+public interface Alias extends EObject
 {
   /**
    * Returns the value of the '<em><b>Type</b></em>' containment reference.
@@ -33,14 +33,14 @@ public interface LocalAlias extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' containment reference.
    * @see #setType(TypeAndValue)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getLocalAlias_Type()
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getAlias_Type()
    * @model containment="true"
    * @generated
    */
   TypeAndValue getType();
 
   /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.LocalAlias#getType <em>Type</em>}' containment reference.
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Alias#getType <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Type</em>' containment reference.
@@ -59,14 +59,14 @@ public interface LocalAlias extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Aliasee</em>' attribute.
    * @see #setAliasee(String)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getLocalAlias_Aliasee()
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getAlias_Aliasee()
    * @model
    * @generated
    */
   String getAliasee();
 
   /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.LocalAlias#getAliasee <em>Aliasee</em>}' attribute.
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Alias#getAliasee <em>Aliasee</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Aliasee</em>' attribute.
@@ -75,4 +75,4 @@ public interface LocalAlias extends EObject
    */
   void setAliasee(String value);
 
-} // LocalAlias
+} // Alias
