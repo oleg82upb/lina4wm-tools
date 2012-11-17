@@ -14,7 +14,7 @@
 //#include "sc-model.pml"
 
 
-/*Channel der die reads und writes verschickt (Type (also write,read); Adresse; Wert;... )*/
+/*channel who send the reads and writes: (messagetype, address, value, extra)*/
 chan channelT1 = [0] of {mtype, short, short, short};
 chan channelT2 = [0] of {mtype, short, short, short};
 short r1 = 0;
@@ -23,7 +23,6 @@ short r2 = 0;
 
 proctype process1(chan ch)
 {
-
 	write(ADRESSE_X, 1);
 	read(ADRESSE_Y, r1);
 	done:skip;
