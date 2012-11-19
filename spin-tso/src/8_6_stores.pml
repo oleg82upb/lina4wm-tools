@@ -23,20 +23,23 @@ short r3 = 0;
 proctype process1(chan ch)
 {
 	write(ADRESSE_X, 1);
+	done: skip;
 }
 
 proctype process2(chan ch)
 {
 	read(ADRESSE_X, r1);
 	write(ADRESSE_Y, 1);
+	done: skip;
 }
 
 proctype process3(chan ch)
 {
 	read(ADRESSE_Y, r2);
 	read(ADRESSE_X, r3);
+	done: skip;
 	
-	atomic{ r1 == 1 && r2 == 1 -> assert (r3 == 1)};
+	//atomic{ r1 == 1 && r2 == 1 -> assert (r3 == 1)};
 }
 
 init {
@@ -49,3 +52,14 @@ init {
 	run bufferProcess(channelT3)
 	}
 }
+	// r1 == 1  (r2 == 1)	(r3 == 0)	-> not allowed
+	// r1 == 1  (r2 == 1)	(r3 == 1)	-> ok
+	
+ltl check_0 {[] ((process1 @ done && process2 @ done && process3 @ done) -> (!( (r1 == 1) && (r2 == 1) && (r3 == 0))))};
+ltl check_1 {[] ((process1 @ done && process2 @ done && process3 @ done) -> (!( (r1 == 1) && (r2 == 1) && (r3 == 1))))};
+ltl check_2 {[] ((process1 @ done && process2 @ done && process3 @ done) -> (!( (r1 == 1) && (r2 == 0) && (r3 == 0))))};
+ltl check_3 {[] ((process1 @ done && process2 @ done && process3 @ done) -> (!( (r1 == 1) && (r2 == 0) && (r3 == 1))))};
+ltl check_4 {[] ((process1 @ done && process2 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 == 1) && (r3 == 0))))};
+ltl check_5 {[] ((process1 @ done && process2 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 == 1) && (r3 == 1))))};
+ltl check_6 {[] ((process1 @ done && process2 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 == 0) && (r3 == 0))))};
+ltl check_7 {[] ((process1 @ done && process2 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 == 0) && (r3 == 1))))};

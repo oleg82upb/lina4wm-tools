@@ -20,10 +20,13 @@ proctype process1(chan ch){
 	write(ADRESSE_X, 1);
 	read(ADRESSE_X, r1);
 	/* not allowed to reorder with earlier write to same location*/ 
-	assert (r1 == 1);
+	//assert (r1 == 1);
+	done: skip;
 }
 
 init{
 	run process1(channelT1);
 	run bufferProcess(channelT1);
 }
+//no reordering of reads with older write to same location
+ltl check_0 { [] (process1 @ done -> !(r1 == 0 ))}; 

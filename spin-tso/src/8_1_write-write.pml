@@ -48,4 +48,8 @@ init
 	// r1 == 0  (r2 == 1)	-> ok
 	// r1 == 0  (r2 == 0)	-> ok
 	
-ltl check_1{ [] (process1 @ end && process2 @ end -> ( ! (r1 == 1 && r2 == 0)))}
+ltl check_0{ [] (process1 @ end && process2 @ end -> ( ! (r1 == 1 && r2 == 0)))}
+
+ltl check_1{ [] (process1 @ end && process2 @ end -> ( ! (r1 == 0 && r2 == 0)))}
+ltl check_2{ [] (process1 @ end && process2 @ end -> ( ! (r1 == 1 && r2 == 1)))}
+ltl check_3{ [] (process1 @ end && process2 @ end -> ( ! (r1 == 0 && r2 == 1)))}
