@@ -52,4 +52,7 @@ atomic{
 	*(r1 == 0) && (r2 == 0) ok (allowed)*/
 
 ltl check_0{ [] ((process1 @ done && process2 @ done) -> (!(r1 == 0 && r2 == 0)))};
-ltl check_1{ [] ((process1 @ done && process2 @ done) -> (!(r1 == 1 && r2 == 0)))}; 
+ltl check_1{ [] ((process1 @ done && process2 @ done) -> (!(r1 == 1 && r2 == 0)))};
+
+ltl check_2{ [] ((process1 @ done && process2 @ done) -> (!(r1 == 0 && r2 == 1)))}; 
+ltl check_3{ [] ((process1 @ done && process2 @ done) -> (!(r1 == 1 && r2 == 1)))};  

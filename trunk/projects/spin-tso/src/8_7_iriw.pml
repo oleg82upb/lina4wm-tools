@@ -60,4 +60,5 @@ init {
 }
 	/* (r1 == 1) && (r2 == 0) && (r3 == 1) && (r4 == 0)	-> not allowed */
 	
-ltl check { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 1 && r3 == 1 && r2 == 0 && r4 == 0)))}; 
+ltl check_0 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 1 && r3 == 1 && r2 == 0 && r4 == 0)))}; 
+ltl check_1 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 0 && r3 == 0 && r2 == 0 && r4 == 0)))}; 
