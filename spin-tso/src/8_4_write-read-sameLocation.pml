@@ -28,5 +28,6 @@ init{
 	run process1(channelT1);
 	run bufferProcess(channelT1);
 }
+
 //no reordering of reads with older write to same location
 ltl check_0 { [] (process1 @ done -> !(r1 == 0 ))}; 
