@@ -93,8 +93,10 @@ inline flushB() {
 
 inline mfenceB() {
 	do
-	:: isEmpty -> break;
-	:: flushB() 
+	:: if
+		::isEmpty -> break;
+		::else -> flushB() 
+		fi
 	od
 }
 	

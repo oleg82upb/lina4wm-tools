@@ -43,4 +43,4 @@ init{
 		}
 }
 
-ltl check { [] ((process1 @ done && process2 @ done) -> ! (r1 == 0 && r2 == 0))};
+ltl check { [] ((process1 @ done && process2 @ done) ->  !(r1 == 0 && r2 == 0))};
