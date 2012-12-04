@@ -84,7 +84,6 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
       case LlvmPackage.STORE: return createStore();
       case LlvmPackage.CALL: return createCall();
       case LlvmPackage.ALLOC: return createAlloc();
-      case LlvmPackage.PARAMETER_LIST: return createParameterList();
       case LlvmPackage.PHI: return createPHI();
       case LlvmPackage.VALUE_PAIR: return createValuePair();
       case LlvmPackage.LANDING_PAD: return createLandingPad();
@@ -110,6 +109,7 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
       case LlvmPackage.BRANCH: return createBranch();
       case LlvmPackage.FUNCTION_BODY: return createFunctionBody();
       case LlvmPackage.BASIC_BLOCK: return createBasicBlock();
+      case LlvmPackage.RET_INSTR: return createRet_Instr();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -333,17 +333,6 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
   {
     AllocImpl alloc = new AllocImpl();
     return alloc;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ParameterList createParameterList()
-  {
-    ParameterListImpl parameterList = new ParameterListImpl();
-    return parameterList;
   }
 
   /**
@@ -619,6 +608,17 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
   {
     BasicBlockImpl basicBlock = new BasicBlockImpl();
     return basicBlock;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Ret_Instr createRet_Instr()
+  {
+    Ret_InstrImpl ret_Instr = new Ret_InstrImpl();
+    return ret_Instr;
   }
 
   /**

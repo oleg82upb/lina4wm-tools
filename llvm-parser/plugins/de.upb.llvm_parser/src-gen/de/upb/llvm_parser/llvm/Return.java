@@ -19,7 +19,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface Return extends Instruction
+public interface Return extends Ret_Instr
 {
   /**
    * Returns the value of the '<em><b>Value</b></em>' containment reference.

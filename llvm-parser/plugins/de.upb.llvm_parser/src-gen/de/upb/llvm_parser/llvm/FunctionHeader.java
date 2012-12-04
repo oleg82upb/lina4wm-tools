@@ -12,7 +12,7 @@ package de.upb.llvm_parser.llvm;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.FunctionHeader#getReturnType <em>Return Type</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.FunctionHeader#getPList <em>PList</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.FunctionHeader#getPl <em>Pl</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.FunctionHeader#getBody <em>Body</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.FunctionHeader#getTList <em>TList</em>}</li>
  * </ul>
@@ -51,30 +51,30 @@ public interface FunctionHeader extends MainLevelEntity
   void setReturnType(String value);
 
   /**
-   * Returns the value of the '<em><b>PList</b></em>' containment reference.
+   * Returns the value of the '<em><b>Pl</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>PList</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Pl</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>PList</em>' containment reference.
-   * @see #setPList(ParameterList)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getFunctionHeader_PList()
-   * @model containment="true"
+   * @return the value of the '<em>Pl</em>' attribute.
+   * @see #setPl(String)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getFunctionHeader_Pl()
+   * @model
    * @generated
    */
-  ParameterList getPList();
+  String getPl();
 
   /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.FunctionHeader#getPList <em>PList</em>}' containment reference.
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.FunctionHeader#getPl <em>Pl</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>PList</em>' containment reference.
-   * @see #getPList()
+   * @param value the new value of the '<em>Pl</em>' attribute.
+   * @see #getPl()
    * @generated
    */
-  void setPList(ParameterList value);
+  void setPl(String value);
 
   /**
    * Returns the value of the '<em><b>Body</b></em>' containment reference.

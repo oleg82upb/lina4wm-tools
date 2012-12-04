@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class IndirectBranchImpl extends InstructionImpl implements IndirectBranch
+public class IndirectBranchImpl extends Ret_InstrImpl implements IndirectBranch
 {
   /**
    * The cached value of the '{@link #getAdress() <em>Adress</em>}' containment reference.

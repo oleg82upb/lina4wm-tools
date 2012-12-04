@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -27,6 +28,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.FunctionBodyImpl#getMeta <em>Meta</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.FunctionBodyImpl#getBlocks <em>Blocks</em>}</li>
  * </ul>
  * </p>
@@ -35,6 +37,16 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class FunctionBodyImpl extends MinimalEObjectImpl.Container implements FunctionBody
 {
+  /**
+   * The cached value of the '{@link #getMeta() <em>Meta</em>}' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getMeta()
+   * @generated
+   * @ordered
+   */
+  protected EList<String> meta;
+
   /**
    * The cached value of the '{@link #getBlocks() <em>Blocks</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -64,6 +76,20 @@ public class FunctionBodyImpl extends MinimalEObjectImpl.Container implements Fu
   protected EClass eStaticClass()
   {
     return LlvmPackage.Literals.FUNCTION_BODY;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<String> getMeta()
+  {
+    if (meta == null)
+    {
+      meta = new EDataTypeEList<String>(String.class, this, LlvmPackage.FUNCTION_BODY__META);
+    }
+    return meta;
   }
 
   /**
@@ -106,6 +132,8 @@ public class FunctionBodyImpl extends MinimalEObjectImpl.Container implements Fu
   {
     switch (featureID)
     {
+      case LlvmPackage.FUNCTION_BODY__META:
+        return getMeta();
       case LlvmPackage.FUNCTION_BODY__BLOCKS:
         return getBlocks();
     }
@@ -123,6 +151,10 @@ public class FunctionBodyImpl extends MinimalEObjectImpl.Container implements Fu
   {
     switch (featureID)
     {
+      case LlvmPackage.FUNCTION_BODY__META:
+        getMeta().clear();
+        getMeta().addAll((Collection<? extends String>)newValue);
+        return;
       case LlvmPackage.FUNCTION_BODY__BLOCKS:
         getBlocks().clear();
         getBlocks().addAll((Collection<? extends BasicBlock>)newValue);
@@ -141,6 +173,9 @@ public class FunctionBodyImpl extends MinimalEObjectImpl.Container implements Fu
   {
     switch (featureID)
     {
+      case LlvmPackage.FUNCTION_BODY__META:
+        getMeta().clear();
+        return;
       case LlvmPackage.FUNCTION_BODY__BLOCKS:
         getBlocks().clear();
         return;
@@ -158,10 +193,29 @@ public class FunctionBodyImpl extends MinimalEObjectImpl.Container implements Fu
   {
     switch (featureID)
     {
+      case LlvmPackage.FUNCTION_BODY__META:
+        return meta != null && !meta.isEmpty();
       case LlvmPackage.FUNCTION_BODY__BLOCKS:
         return blocks != null && !blocks.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (meta: ");
+    result.append(meta);
+    result.append(')');
+    return result.toString();
   }
 
 } //FunctionBodyImpl

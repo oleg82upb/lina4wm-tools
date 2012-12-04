@@ -4,7 +4,6 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.Call;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.ParameterList;
 import de.upb.llvm_parser.llvm.TypeAndValue;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -23,7 +22,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.CallImpl#getPointer <em>Pointer</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.CallImpl#getPlist <em>Plist</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.CallImpl#getPList <em>PList</em>}</li>
  * </ul>
  * </p>
  *
@@ -42,14 +41,24 @@ public class CallImpl extends InstructionImpl implements Call
   protected TypeAndValue pointer;
 
   /**
-   * The cached value of the '{@link #getPlist() <em>Plist</em>}' containment reference.
+   * The default value of the '{@link #getPList() <em>PList</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getPlist()
+   * @see #getPList()
    * @generated
    * @ordered
    */
-  protected ParameterList plist;
+  protected static final String PLIST_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getPList() <em>PList</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPList()
+   * @generated
+   * @ordered
+   */
+  protected String pList = PLIST_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -125,9 +134,9 @@ public class CallImpl extends InstructionImpl implements Call
    * <!-- end-user-doc -->
    * @generated
    */
-  public ParameterList getPlist()
+  public String getPList()
   {
-    return plist;
+    return pList;
   }
 
   /**
@@ -135,37 +144,12 @@ public class CallImpl extends InstructionImpl implements Call
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetPlist(ParameterList newPlist, NotificationChain msgs)
+  public void setPList(String newPList)
   {
-    ParameterList oldPlist = plist;
-    plist = newPlist;
+    String oldPList = pList;
+    pList = newPList;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.CALL__PLIST, oldPlist, newPlist);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setPlist(ParameterList newPlist)
-  {
-    if (newPlist != plist)
-    {
-      NotificationChain msgs = null;
-      if (plist != null)
-        msgs = ((InternalEObject)plist).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CALL__PLIST, null, msgs);
-      if (newPlist != null)
-        msgs = ((InternalEObject)newPlist).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CALL__PLIST, null, msgs);
-      msgs = basicSetPlist(newPlist, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CALL__PLIST, newPlist, newPlist));
+      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CALL__PLIST, oldPList, pList));
   }
 
   /**
@@ -180,8 +164,6 @@ public class CallImpl extends InstructionImpl implements Call
     {
       case LlvmPackage.CALL__POINTER:
         return basicSetPointer(null, msgs);
-      case LlvmPackage.CALL__PLIST:
-        return basicSetPlist(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -199,7 +181,7 @@ public class CallImpl extends InstructionImpl implements Call
       case LlvmPackage.CALL__POINTER:
         return getPointer();
       case LlvmPackage.CALL__PLIST:
-        return getPlist();
+        return getPList();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -218,7 +200,7 @@ public class CallImpl extends InstructionImpl implements Call
         setPointer((TypeAndValue)newValue);
         return;
       case LlvmPackage.CALL__PLIST:
-        setPlist((ParameterList)newValue);
+        setPList((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -238,7 +220,7 @@ public class CallImpl extends InstructionImpl implements Call
         setPointer((TypeAndValue)null);
         return;
       case LlvmPackage.CALL__PLIST:
-        setPlist((ParameterList)null);
+        setPList(PLIST_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -257,9 +239,26 @@ public class CallImpl extends InstructionImpl implements Call
       case LlvmPackage.CALL__POINTER:
         return pointer != null;
       case LlvmPackage.CALL__PLIST:
-        return plist != null;
+        return PLIST_EDEFAULT == null ? pList != null : !PLIST_EDEFAULT.equals(pList);
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (pList: ");
+    result.append(pList);
+    result.append(')');
+    return result.toString();
   }
 
 } //CallImpl

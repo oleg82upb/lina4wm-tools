@@ -4,7 +4,6 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.Invoke;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.ParameterList;
 import de.upb.llvm_parser.llvm.TypeAndValue;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -31,7 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class InvokeImpl extends InstructionImpl implements Invoke
+public class InvokeImpl extends Ret_InstrImpl implements Invoke
 {
   /**
    * The cached value of the '{@link #getFunction() <em>Function</em>}' containment reference.
@@ -44,14 +43,24 @@ public class InvokeImpl extends InstructionImpl implements Invoke
   protected TypeAndValue function;
 
   /**
-   * The cached value of the '{@link #getPList() <em>PList</em>}' containment reference.
+   * The default value of the '{@link #getPList() <em>PList</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getPList()
    * @generated
    * @ordered
    */
-  protected ParameterList pList;
+  protected static final String PLIST_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getPList() <em>PList</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPList()
+   * @generated
+   * @ordered
+   */
+  protected String pList = PLIST_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getTo() <em>To</em>}' containment reference.
@@ -147,7 +156,7 @@ public class InvokeImpl extends InstructionImpl implements Invoke
    * <!-- end-user-doc -->
    * @generated
    */
-  public ParameterList getPList()
+  public String getPList()
   {
     return pList;
   }
@@ -157,37 +166,12 @@ public class InvokeImpl extends InstructionImpl implements Invoke
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetPList(ParameterList newPList, NotificationChain msgs)
+  public void setPList(String newPList)
   {
-    ParameterList oldPList = pList;
+    String oldPList = pList;
     pList = newPList;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__PLIST, oldPList, newPList);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setPList(ParameterList newPList)
-  {
-    if (newPList != pList)
-    {
-      NotificationChain msgs = null;
-      if (pList != null)
-        msgs = ((InternalEObject)pList).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__PLIST, null, msgs);
-      if (newPList != null)
-        msgs = ((InternalEObject)newPList).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__PLIST, null, msgs);
-      msgs = basicSetPList(newPList, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__PLIST, newPList, newPList));
+      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__PLIST, oldPList, pList));
   }
 
   /**
@@ -298,8 +282,6 @@ public class InvokeImpl extends InstructionImpl implements Invoke
     {
       case LlvmPackage.INVOKE__FUNCTION:
         return basicSetFunction(null, msgs);
-      case LlvmPackage.INVOKE__PLIST:
-        return basicSetPList(null, msgs);
       case LlvmPackage.INVOKE__TO:
         return basicSetTo(null, msgs);
       case LlvmPackage.INVOKE__UNWIND:
@@ -344,7 +326,7 @@ public class InvokeImpl extends InstructionImpl implements Invoke
         setFunction((TypeAndValue)newValue);
         return;
       case LlvmPackage.INVOKE__PLIST:
-        setPList((ParameterList)newValue);
+        setPList((String)newValue);
         return;
       case LlvmPackage.INVOKE__TO:
         setTo((TypeAndValue)newValue);
@@ -370,7 +352,7 @@ public class InvokeImpl extends InstructionImpl implements Invoke
         setFunction((TypeAndValue)null);
         return;
       case LlvmPackage.INVOKE__PLIST:
-        setPList((ParameterList)null);
+        setPList(PLIST_EDEFAULT);
         return;
       case LlvmPackage.INVOKE__TO:
         setTo((TypeAndValue)null);
@@ -395,13 +377,30 @@ public class InvokeImpl extends InstructionImpl implements Invoke
       case LlvmPackage.INVOKE__FUNCTION:
         return function != null;
       case LlvmPackage.INVOKE__PLIST:
-        return pList != null;
+        return PLIST_EDEFAULT == null ? pList != null : !PLIST_EDEFAULT.equals(pList);
       case LlvmPackage.INVOKE__TO:
         return to != null;
       case LlvmPackage.INVOKE__UNWIND:
         return unwind != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (pList: ");
+    result.append(pList);
+    result.append(')');
+    return result.toString();
   }
 
 } //InvokeImpl

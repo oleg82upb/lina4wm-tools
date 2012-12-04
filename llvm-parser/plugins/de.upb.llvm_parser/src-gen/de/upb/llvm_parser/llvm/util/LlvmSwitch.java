@@ -148,7 +148,7 @@ public class LlvmSwitch<T> extends Switch<T>
         T result = caseTypeAndValue(typeAndValue);
         if (result == null) result = caseClause(typeAndValue);
         if (result == null) result = caseResume(typeAndValue);
-        if (result == null) result = caseInstruction(typeAndValue);
+        if (result == null) result = caseRet_Instr(typeAndValue);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -229,13 +229,6 @@ public class LlvmSwitch<T> extends Switch<T>
         Alloc alloc = (Alloc)theEObject;
         T result = caseAlloc(alloc);
         if (result == null) result = caseInstruction(alloc);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case LlvmPackage.PARAMETER_LIST:
-      {
-        ParameterList parameterList = (ParameterList)theEObject;
-        T result = caseParameterList(parameterList);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -356,7 +349,7 @@ public class LlvmSwitch<T> extends Switch<T>
       {
         IndirectBranch indirectBranch = (IndirectBranch)theEObject;
         T result = caseIndirectBranch(indirectBranch);
-        if (result == null) result = caseInstruction(indirectBranch);
+        if (result == null) result = caseRet_Instr(indirectBranch);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -371,7 +364,7 @@ public class LlvmSwitch<T> extends Switch<T>
       {
         de.upb.llvm_parser.llvm.Switch switch_ = (de.upb.llvm_parser.llvm.Switch)theEObject;
         T result = caseSwitch(switch_);
-        if (result == null) result = caseInstruction(switch_);
+        if (result == null) result = caseRet_Instr(switch_);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -386,7 +379,7 @@ public class LlvmSwitch<T> extends Switch<T>
       {
         Invoke invoke = (Invoke)theEObject;
         T result = caseInvoke(invoke);
-        if (result == null) result = caseInstruction(invoke);
+        if (result == null) result = caseRet_Instr(invoke);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -394,7 +387,7 @@ public class LlvmSwitch<T> extends Switch<T>
       {
         Resume resume = (Resume)theEObject;
         T result = caseResume(resume);
-        if (result == null) result = caseInstruction(resume);
+        if (result == null) result = caseRet_Instr(resume);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -402,7 +395,7 @@ public class LlvmSwitch<T> extends Switch<T>
       {
         Unreachable unreachable = (Unreachable)theEObject;
         T result = caseUnreachable(unreachable);
-        if (result == null) result = caseInstruction(unreachable);
+        if (result == null) result = caseRet_Instr(unreachable);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -410,7 +403,7 @@ public class LlvmSwitch<T> extends Switch<T>
       {
         Return return_ = (Return)theEObject;
         T result = caseReturn(return_);
-        if (result == null) result = caseInstruction(return_);
+        if (result == null) result = caseRet_Instr(return_);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -418,7 +411,7 @@ public class LlvmSwitch<T> extends Switch<T>
       {
         Branch branch = (Branch)theEObject;
         T result = caseBranch(branch);
-        if (result == null) result = caseInstruction(branch);
+        if (result == null) result = caseRet_Instr(branch);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -433,6 +426,13 @@ public class LlvmSwitch<T> extends Switch<T>
       {
         BasicBlock basicBlock = (BasicBlock)theEObject;
         T result = caseBasicBlock(basicBlock);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.RET_INSTR:
+      {
+        Ret_Instr ret_Instr = (Ret_Instr)theEObject;
+        T result = caseRet_Instr(ret_Instr);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -756,22 +756,6 @@ public class LlvmSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseAlloc(Alloc object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Parameter List</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Parameter List</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseParameterList(ParameterList object)
   {
     return null;
   }
@@ -1172,6 +1156,22 @@ public class LlvmSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseBasicBlock(BasicBlock object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Ret Instr</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Ret Instr</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRet_Instr(Ret_Instr object)
   {
     return null;
   }

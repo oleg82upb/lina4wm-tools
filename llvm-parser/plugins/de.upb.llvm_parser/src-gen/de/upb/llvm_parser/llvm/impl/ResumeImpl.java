@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class ResumeImpl extends InstructionImpl implements Resume
+public class ResumeImpl extends Ret_InstrImpl implements Resume
 {
   /**
    * <!-- begin-user-doc -->

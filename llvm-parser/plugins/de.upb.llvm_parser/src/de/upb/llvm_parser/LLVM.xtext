@@ -2,8 +2,18 @@ grammar de.upb.llvm_parser.LLVM with org.eclipse.xtext.common.Terminals
 
 generate llvm "http://www.upb.de/llvm_parser/llvm"
 
+/*
+ * This Grammer is used to parse a llvm document.
+ * The llvm project itself is located at http://llvm.org
+ * For a language introduction see: http://llvm.org/docs/LangRef.html
+ * A list of guides can be found on: http://llvm.org/docs/userguides.html
+ */
 LLVM:
 	elements+=AbstractElement*;
+
+terminal DOTS:
+	'.'*
+;
 /*
  * Integer defintion: iN(*)*
  * Examples:
@@ -31,7 +41,7 @@ terminal SL_COMMENT:
  *  @_44bar.your.choice
  */
 terminal VAR_TYPE:
-	((('%' | '@') (NOBRACKET | '(' NOBRACKET ')' | INT) '*'*) | '('+ ('%' | '@') (NOBRACKET | '(' NOBRACKET ')' | '%'
+	(((('%' | '@')'.'*) (NOBRACKET | '(' NOBRACKET ')' | INT) '*'*) | '('+ (('%' | '@')'.'*) (NOBRACKET | '(' NOBRACKET ')' | '%'
 	INT) '*'* ')'+ '*'*);
 
 /*
@@ -80,10 +90,21 @@ MainLevelEntity:
  */
 FunctionHeader:
 	'define' LINKAGE? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=(Type)
-	name=VAR_TYPE pList=ParameterList 'unnamed_addr'? FUNCTION_ATTRIBUTES? ('section ' STRING)? ALIGNMENT?
+	name=VAR_TYPE pl=ParameterList 'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ALIGNMENT?
 	body=FunctionBody |
 	'declare' LINKAGE? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=(Type)
-	name=VAR_TYPE (tList=TypeList | '(...)') 'unnamed_addr'? FUNCTION_ATTRIBUTES? ('section ' STRING)? ALIGNMENT?;
+	name=VAR_TYPE (tList=TypeList | '(...)') 'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ALIGNMENT?;
+
+/*
+ * This rule creates a Parameterlist and saves also the TypeAndValue to each parameter
+ * Brackets are 
+ */
+ParameterList:
+	'('(((VAR_TYPE | B_TYPE)RETURN_ATTRIBUTES?Type)(','((VAR_TYPE | B_TYPE)RETURN_ATTRIBUTES?Type))*)?')'
+	
+;
+
+
 
 /*
  * If a function is declared, the parameterlist has to be set empty or contain a List of Types.
@@ -119,33 +140,33 @@ Alias:
  * This rule is used to summarize them
  */
 Type:
-	(StructType | VAR_TYPE | BType);
+	(StructType | VAR_TYPE | B_TYPE)RETURN_ATTRIBUTES?;
 
 /*
  * This rule is used to bind a Type to a value.
  * It is used for example on parameterlists, on instructions etc.
  */
 TypeAndValue:
-	(type=(VAR_TYPE | BType) value=Type) | aggregate=Aggregate value=Type;
+	(type=(VAR_TYPE | B_TYPE)RETURN_ATTRIBUTES? value=Type) | aggregate=Aggregate value=Type;
 
 /*
  * This rule specified Stuctures
  */
 StructType:
-	'{' ((VAR_TYPE | BType) (',' (VAR_TYPE | BType))*)? '}' |
-	'<' '{' ((VAR_TYPE | BType) (',' (VAR_TYPE | BType))*)? '}' '>';
+	'{' ((VAR_TYPE | B_TYPE) (',' (VAR_TYPE | B_TYPE))*)? '}' |
+	'<' '{' ((VAR_TYPE | B_TYPE) (',' (VAR_TYPE | B_TYPE))*)? '}' '>';
 
 /*
- * To summerize all BasicTypes inside one Rule.
+ * To summerize all BASIC_TYPEs inside one Rule.
  */
-BType:
-	INTEGER | F_POINT | BasicType | INT;
+B_TYPE:
+	INTEGER | F_POINT | BASIC_TYPE | INT;
 
 /*
  * To distinguish the types here only Basic Types
  */
-BasicType:
-	'void' | 'null' | 'label' | 'undef';
+BASIC_TYPE:
+	'void' | 'null' | 'label' | 'undef' | 'true' | 'false';
 
 /*
  * To distinguish the types here only Floating Types
@@ -208,14 +229,14 @@ BIN_OP:
  * The 'load' instruction is used to read from memory.
  */
 Load:
-	'load' 'volatile'? adress=TypeAndValue (',' align=ALIGNMENT)? (',' '!nontemporal' '!' index=INT)? |
+	'load' 'volatile'? adress=TypeAndValue (',' ((ALIGNMENT)|(MetadataValue)+))* |
 	'load' 'atomic' 'volatile'? adress=TypeAndValue 'singlethread'? ordering=ATOMIC_ORDERING (',' 'align' index=INT)?;
 
 /*
  * The 'store' instruction is used to write to memory.
  */
 Store:
-	'store' 'volatile'? value=TypeAndValue ',' adress=TypeAndValue (',' 'align' INT)? |
+	'store'  'volatile'? value=TypeAndValue ',' adress=TypeAndValue (',' ((ALIGNMENT)|(MetadataValue)+))* |
 	'store' 'atomic' 'volatile'? value=TypeAndValue ',' adress=TypeAndValue 'singlethread'? ordering=ATOMIC_ORDERING (','
 	'align' index=INT)?;
 
@@ -223,7 +244,7 @@ Store:
  * The 'call' instruction represents a simple function call.
  */
 Call:
-	'tail'? 'call' CallingConv? RETURN_ATTRIBUTES? pointer=TypeAndValue plist=ParameterList FUNCTION_ATTRIBUTES?;
+	'tail'? 'call' CallingConv? RETURN_ATTRIBUTES? pointer=TypeAndValue pList=ParameterList FUNCTION_ATTRIBUTES*;
 
 /*
  * This is to summarize the possible return attributes
@@ -233,6 +254,7 @@ RETURN_ATTRIBUTES:
 
 Alloc:
 	'alloca' type=Type (',' numElements=TypeAndValue)? (',' ALIGNMENT)?;
+
 
 /*
  * This is to summarize the possible Calling Conventions
@@ -252,13 +274,7 @@ FUNCTION_ATTRIBUTES:
 	'noredzone' | 'noreturn' | 'nounwind' | 'optsize' | 'readnone' | 'readonly' | 'returns_twice' | 'ssp' | 'sspreq' |
 	'uwtable';
 
-/*
- * This rule creates a Parameterlist and saves also the TypeAndValue to each parameter
- * Brackets are 
- */
-ParameterList:
-	{ParameterList} '(' (params+=TypeAndValue (',' params+=TypeAndValue)*)? ')';
-	
+
 /*
  * The 'phi' instruction is used to implement the φ node in the SSA graph representing the function.
  */
@@ -380,9 +396,10 @@ LOGICAL_OP:
  * This is only to summarize all possible Instructions
  */
 Instruction:
-	Switch | IndirectBranch | Branch | Return | Load | Store | Fence | GetElementPtr | LOGICAL_OP | ARITHMETIC_OP | Compare |
-	Cast | ShuffleVector | InsertElement | ExtractElement | Invoke | Resume | InsertValue | ExtractValue | Alloc |
-	CmpXchg | AtomicRMW | PHI | Select | Call | VA_Arg | LandingPad | LocalVar | Unreachable;
+	('volatile'? Load) | ('volatile'? Store) | Fence | GetElementPtr | LOGICAL_OP | ARITHMETIC_OP | Compare |
+	Cast | ShuffleVector | InsertElement | ExtractElement   | InsertValue | ExtractValue | Alloc |
+	CmpXchg | AtomicRMW | PHI | Select | Call | VA_Arg | LandingPad | LocalVar;
+
 
 /*
  * The 'indirectbr' instruction implements an indirect branch to a label within the current function, whose 
@@ -425,7 +442,7 @@ JumpTable:
  * within the "landingpad" instruction can't be lost through normal code motion.
  */
 Invoke:
-	'invoke' CallingConv? RETURN_ATTRIBUTES? function=TypeAndValue pList=ParameterList FUNCTION_ATTRIBUTES? 'to'
+	'invoke' CallingConv? RETURN_ATTRIBUTES? function=TypeAndValue pList=ParameterList FUNCTION_ATTRIBUTES* 'to'
 	to=TypeAndValue 'unwind' unwind=TypeAndValue;
 	
 /*
@@ -465,14 +482,24 @@ Branch:
  * Every Functionbody contains at leaset one Basic Block. 
  */
 FunctionBody:
-	'{' blocks+=BasicBlock+ '}';
+	meta+=MetadataValue*
+	'{' blocks+=BasicBlock+ '}'
+	meta+=MetadataValue*
+	;
 
 /*
- * Every Basic Block is contained inside a Functionbody and has a label and at least one instruction 
+ * Every Basic Block is contained inside a Functionbody and has a label(eventually) and at least one instruction 
  */
 BasicBlock:
-	label=NOBRACKET ':'
-	instructions+=Instruction+;
+	(label = DOTS? NOBRACKET ':')?
+	instructions+=Instruction*
+	terminator = Ret_Instr
+;
+
+Ret_Instr:
+	Return |Branch| Switch|IndirectBranch|Invoke|Resume|Unreachable
+;
+
 
 /*
  * This is to summarize the possible visibilities
@@ -499,9 +526,17 @@ ALIAS_LINKAGE:
  *  ; Named metadata
  *	!1 = metadata !{i32 42}
  *	!foo = !{!1, null} 
+ *  !1 = metadata !{metadata !"omnipotent char", metadata !2}
  */
 MetadataValue:
-	(('!' INT )| ('!{' STRING '}') | ("!" STRING)) '=' (('!' INT) | ('!{' STRING '}') | ("!" STRING));
+	(('!' INT )| ('!{' NOBRACKET '}') | ("!" NOBRACKET)) 
+	('=' 
+		(('!' INT) | 
+		 ('!{' NOBRACKET '}') |
+		 ("!" NOBRACKET) |
+		 'metadata'(('!''{'|'!{')'metadata''!'STRING','('metadata''!'INT|BASIC_TYPE)'}')?
+		)
+	)?;
 
 /*
  * This rule is to define the alignment

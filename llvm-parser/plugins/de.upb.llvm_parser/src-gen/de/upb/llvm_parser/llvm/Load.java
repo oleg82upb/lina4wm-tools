@@ -12,9 +12,8 @@ package de.upb.llvm_parser.llvm;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.Load#getAdress <em>Adress</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Load#getAlign <em>Align</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Load#getIndex <em>Index</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Load#getOrdering <em>Ordering</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Load#getIndex <em>Index</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,30 +50,30 @@ public interface Load extends Instruction
   void setAdress(TypeAndValue value);
 
   /**
-   * Returns the value of the '<em><b>Align</b></em>' attribute.
+   * Returns the value of the '<em><b>Ordering</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Align</em>' attribute isn't clear,
+   * If the meaning of the '<em>Ordering</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Align</em>' attribute.
-   * @see #setAlign(String)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getLoad_Align()
+   * @return the value of the '<em>Ordering</em>' attribute.
+   * @see #setOrdering(String)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getLoad_Ordering()
    * @model
    * @generated
    */
-  String getAlign();
+  String getOrdering();
 
   /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Load#getAlign <em>Align</em>}' attribute.
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Load#getOrdering <em>Ordering</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Align</em>' attribute.
-   * @see #getAlign()
+   * @param value the new value of the '<em>Ordering</em>' attribute.
+   * @see #getOrdering()
    * @generated
    */
-  void setAlign(String value);
+  void setOrdering(String value);
 
   /**
    * Returns the value of the '<em><b>Index</b></em>' attribute.
@@ -101,31 +100,5 @@ public interface Load extends Instruction
    * @generated
    */
   void setIndex(int value);
-
-  /**
-   * Returns the value of the '<em><b>Ordering</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ordering</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Ordering</em>' attribute.
-   * @see #setOrdering(String)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getLoad_Ordering()
-   * @model
-   * @generated
-   */
-  String getOrdering();
-
-  /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Load#getOrdering <em>Ordering</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Ordering</em>' attribute.
-   * @see #getOrdering()
-   * @generated
-   */
-  void setOrdering(String value);
 
 } // Load

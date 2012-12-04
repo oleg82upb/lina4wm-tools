@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class SwitchImpl extends InstructionImpl implements Switch
+public class SwitchImpl extends Ret_InstrImpl implements Switch
 {
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
