@@ -1,0 +1,23 @@
+---
+List of plugins used on current eclipse installation
+to run Xtext and to provide LLVM grammar
+---
+
+--- Core ---
+Eclipse Modelling Tools 1.5.1 Juno (4.2)
+EMF Xcore SDK 1.0.1
+EMF Compare SDK 1.3.2
+GMF Tooling 3.0.0
+GMF Runtime 1.6.0
+JNA Libary 3.4.0
+Mylyn EMF/GMF 0.9.1
+
+--- Xtext ---
+Xtext SDK 2.3.1
+Eclipse Labs Xtext Testing Utilities 0.9.3
+
+--- Other (not required) ---
+MofScript 1.4.0
+Subclipse 1.8.16
+CollabNet Merge Client 3.0.12
+SVNKit 1.7.5
