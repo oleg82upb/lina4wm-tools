@@ -13,6 +13,6 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface Resume extends Instruction
+public interface Resume extends Ret_Instr
 {
 } // Resume

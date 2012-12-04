@@ -22,7 +22,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface Invoke extends Instruction
+public interface Invoke extends Ret_Instr
 {
   /**
    * Returns the value of the '<em><b>Function</b></em>' containment reference.
@@ -51,30 +51,30 @@ public interface Invoke extends Instruction
   void setFunction(TypeAndValue value);
 
   /**
-   * Returns the value of the '<em><b>PList</b></em>' containment reference.
+   * Returns the value of the '<em><b>PList</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>PList</em>' containment reference isn't clear,
+   * If the meaning of the '<em>PList</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>PList</em>' containment reference.
-   * @see #setPList(ParameterList)
+   * @return the value of the '<em>PList</em>' attribute.
+   * @see #setPList(String)
    * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_PList()
-   * @model containment="true"
+   * @model
    * @generated
    */
-  ParameterList getPList();
+  String getPList();
 
   /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getPList <em>PList</em>}' containment reference.
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getPList <em>PList</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>PList</em>' containment reference.
+   * @param value the new value of the '<em>PList</em>' attribute.
    * @see #getPList()
    * @generated
    */
-  void setPList(ParameterList value);
+  void setPList(String value);
 
   /**
    * Returns the value of the '<em><b>To</b></em>' containment reference.

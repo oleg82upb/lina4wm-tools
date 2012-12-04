@@ -22,7 +22,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface Branch extends Instruction
+public interface Branch extends Ret_Instr
 {
   /**
    * Returns the value of the '<em><b>Destination</b></em>' containment reference.

@@ -12,7 +12,7 @@ package de.upb.llvm_parser.llvm;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.Call#getPointer <em>Pointer</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Call#getPlist <em>Plist</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Call#getPList <em>PList</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,29 +49,29 @@ public interface Call extends Instruction
   void setPointer(TypeAndValue value);
 
   /**
-   * Returns the value of the '<em><b>Plist</b></em>' containment reference.
+   * Returns the value of the '<em><b>PList</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Plist</em>' containment reference isn't clear,
+   * If the meaning of the '<em>PList</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Plist</em>' containment reference.
-   * @see #setPlist(ParameterList)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getCall_Plist()
-   * @model containment="true"
+   * @return the value of the '<em>PList</em>' attribute.
+   * @see #setPList(String)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getCall_PList()
+   * @model
    * @generated
    */
-  ParameterList getPlist();
+  String getPList();
 
   /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Call#getPlist <em>Plist</em>}' containment reference.
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Call#getPList <em>PList</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Plist</em>' containment reference.
-   * @see #getPlist()
+   * @param value the new value of the '<em>PList</em>' attribute.
+   * @see #getPList()
    * @generated
    */
-  void setPlist(ParameterList value);
+  void setPList(String value);
 
 } // Call

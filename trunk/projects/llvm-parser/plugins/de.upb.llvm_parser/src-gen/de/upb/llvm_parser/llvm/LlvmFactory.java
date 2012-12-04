@@ -203,15 +203,6 @@ public interface LlvmFactory extends EFactory
   Alloc createAlloc();
 
   /**
-   * Returns a new object of class '<em>Parameter List</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Parameter List</em>'.
-   * @generated
-   */
-  ParameterList createParameterList();
-
-  /**
    * Returns a new object of class '<em>PHI</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -435,6 +426,15 @@ public interface LlvmFactory extends EFactory
    * @generated
    */
   BasicBlock createBasicBlock();
+
+  /**
+   * Returns a new object of class '<em>Ret Instr</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Ret Instr</em>'.
+   * @generated
+   */
+  Ret_Instr createRet_Instr();
 
   /**
    * Returns the package supported by this factory.

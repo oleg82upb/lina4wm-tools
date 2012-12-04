@@ -175,11 +175,6 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
         return createAllocAdapter();
       }
       @Override
-      public Adapter caseParameterList(ParameterList object)
-      {
-        return createParameterListAdapter();
-      }
-      @Override
       public Adapter casePHI(PHI object)
       {
         return createPHIAdapter();
@@ -303,6 +298,11 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
       public Adapter caseBasicBlock(BasicBlock object)
       {
         return createBasicBlockAdapter();
+      }
+      @Override
+      public Adapter caseRet_Instr(Ret_Instr object)
+      {
+        return createRet_InstrAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -622,21 +622,6 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAllocAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ParameterList <em>Parameter List</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see de.upb.llvm_parser.llvm.ParameterList
-   * @generated
-   */
-  public Adapter createParameterListAdapter()
   {
     return null;
   }
@@ -1012,6 +997,21 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createBasicBlockAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Ret_Instr <em>Ret Instr</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Ret_Instr
+   * @generated
+   */
+  public Adapter createRet_InstrAdapter()
   {
     return null;
   }

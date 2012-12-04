@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class ReturnImpl extends InstructionImpl implements Return
+public class ReturnImpl extends Ret_InstrImpl implements Return
 {
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.

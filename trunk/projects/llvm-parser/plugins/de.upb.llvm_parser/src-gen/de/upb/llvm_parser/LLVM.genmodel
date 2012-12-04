@@ -21,7 +21,7 @@
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//FunctionHeader">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//FunctionHeader/returnType"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//FunctionHeader/pList"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//FunctionHeader/pl"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//FunctionHeader/body"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//FunctionHeader/tList"/>
     </genClasses>
@@ -76,9 +76,8 @@
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//Load">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Load/adress"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Load/align"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Load/index"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Load/ordering"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Load/index"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//Store">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Store/value"/>
@@ -88,14 +87,11 @@
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//Call">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Call/pointer"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Call/plist"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Call/pList"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//Alloc">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Alloc/type"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Alloc/numElements"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//ParameterList">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ParameterList/params"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//PHI">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//PHI/values"/>
@@ -165,7 +161,7 @@
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//Invoke">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Invoke/function"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Invoke/pList"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Invoke/pList"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Invoke/to"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Invoke/unwind"/>
     </genClasses>
@@ -181,11 +177,14 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Branch/labelFalse"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//FunctionBody">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//FunctionBody/meta"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//FunctionBody/blocks"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//BasicBlock">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//BasicBlock/label"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//BasicBlock/instructions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//BasicBlock/terminator"/>
     </genClasses>
+    <genClasses ecoreClass="LLVM.ecore#//Ret_Instr"/>
   </genPackages>
 </genmodel:GenModel>

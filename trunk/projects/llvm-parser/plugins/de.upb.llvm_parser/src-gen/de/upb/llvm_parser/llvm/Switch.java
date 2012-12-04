@@ -21,7 +21,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface Switch extends Instruction
+public interface Switch extends Ret_Instr
 {
   /**
    * Returns the value of the '<em><b>Value</b></em>' containment reference.

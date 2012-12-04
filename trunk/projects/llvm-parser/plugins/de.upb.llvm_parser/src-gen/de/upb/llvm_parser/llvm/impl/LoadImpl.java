@@ -22,9 +22,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getAdress <em>Adress</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getAlign <em>Align</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getIndex <em>Index</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getOrdering <em>Ordering</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getIndex <em>Index</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,46 +40,6 @@ public class LoadImpl extends InstructionImpl implements Load
    * @ordered
    */
   protected TypeAndValue adress;
-
-  /**
-   * The default value of the '{@link #getAlign() <em>Align</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAlign()
-   * @generated
-   * @ordered
-   */
-  protected static final String ALIGN_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getAlign() <em>Align</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAlign()
-   * @generated
-   * @ordered
-   */
-  protected String align = ALIGN_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getIndex()
-   * @generated
-   * @ordered
-   */
-  protected static final int INDEX_EDEFAULT = 0;
-
-  /**
-   * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getIndex()
-   * @generated
-   * @ordered
-   */
-  protected int index = INDEX_EDEFAULT;
 
   /**
    * The default value of the '{@link #getOrdering() <em>Ordering</em>}' attribute.
@@ -101,6 +60,26 @@ public class LoadImpl extends InstructionImpl implements Load
    * @ordered
    */
   protected String ordering = ORDERING_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getIndex()
+   * @generated
+   * @ordered
+   */
+  protected static final int INDEX_EDEFAULT = 0;
+
+  /**
+   * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getIndex()
+   * @generated
+   * @ordered
+   */
+  protected int index = INDEX_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -176,9 +155,9 @@ public class LoadImpl extends InstructionImpl implements Load
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getAlign()
+  public String getOrdering()
   {
-    return align;
+    return ordering;
   }
 
   /**
@@ -186,12 +165,12 @@ public class LoadImpl extends InstructionImpl implements Load
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAlign(String newAlign)
+  public void setOrdering(String newOrdering)
   {
-    String oldAlign = align;
-    align = newAlign;
+    String oldOrdering = ordering;
+    ordering = newOrdering;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__ALIGN, oldAlign, align));
+      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__ORDERING, oldOrdering, ordering));
   }
 
   /**
@@ -222,29 +201,6 @@ public class LoadImpl extends InstructionImpl implements Load
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getOrdering()
-  {
-    return ordering;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setOrdering(String newOrdering)
-  {
-    String oldOrdering = ordering;
-    ordering = newOrdering;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__ORDERING, oldOrdering, ordering));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -268,12 +224,10 @@ public class LoadImpl extends InstructionImpl implements Load
     {
       case LlvmPackage.LOAD__ADRESS:
         return getAdress();
-      case LlvmPackage.LOAD__ALIGN:
-        return getAlign();
-      case LlvmPackage.LOAD__INDEX:
-        return getIndex();
       case LlvmPackage.LOAD__ORDERING:
         return getOrdering();
+      case LlvmPackage.LOAD__INDEX:
+        return getIndex();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -291,14 +245,11 @@ public class LoadImpl extends InstructionImpl implements Load
       case LlvmPackage.LOAD__ADRESS:
         setAdress((TypeAndValue)newValue);
         return;
-      case LlvmPackage.LOAD__ALIGN:
-        setAlign((String)newValue);
+      case LlvmPackage.LOAD__ORDERING:
+        setOrdering((String)newValue);
         return;
       case LlvmPackage.LOAD__INDEX:
         setIndex((Integer)newValue);
-        return;
-      case LlvmPackage.LOAD__ORDERING:
-        setOrdering((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -317,14 +268,11 @@ public class LoadImpl extends InstructionImpl implements Load
       case LlvmPackage.LOAD__ADRESS:
         setAdress((TypeAndValue)null);
         return;
-      case LlvmPackage.LOAD__ALIGN:
-        setAlign(ALIGN_EDEFAULT);
+      case LlvmPackage.LOAD__ORDERING:
+        setOrdering(ORDERING_EDEFAULT);
         return;
       case LlvmPackage.LOAD__INDEX:
         setIndex(INDEX_EDEFAULT);
-        return;
-      case LlvmPackage.LOAD__ORDERING:
-        setOrdering(ORDERING_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -342,12 +290,10 @@ public class LoadImpl extends InstructionImpl implements Load
     {
       case LlvmPackage.LOAD__ADRESS:
         return adress != null;
-      case LlvmPackage.LOAD__ALIGN:
-        return ALIGN_EDEFAULT == null ? align != null : !ALIGN_EDEFAULT.equals(align);
-      case LlvmPackage.LOAD__INDEX:
-        return index != INDEX_EDEFAULT;
       case LlvmPackage.LOAD__ORDERING:
         return ORDERING_EDEFAULT == null ? ordering != null : !ORDERING_EDEFAULT.equals(ordering);
+      case LlvmPackage.LOAD__INDEX:
+        return index != INDEX_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -363,12 +309,10 @@ public class LoadImpl extends InstructionImpl implements Load
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (align: ");
-    result.append(align);
+    result.append(" (ordering: ");
+    result.append(ordering);
     result.append(", index: ");
     result.append(index);
-    result.append(", ordering: ");
-    result.append(ordering);
     result.append(')');
     return result.toString();
   }

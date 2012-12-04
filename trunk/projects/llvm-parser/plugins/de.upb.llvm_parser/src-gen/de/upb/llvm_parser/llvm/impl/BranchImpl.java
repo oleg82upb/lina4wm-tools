@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class BranchImpl extends InstructionImpl implements Branch
+public class BranchImpl extends Ret_InstrImpl implements Branch
 {
   /**
    * The cached value of the '{@link #getDestination() <em>Destination</em>}' containment reference.

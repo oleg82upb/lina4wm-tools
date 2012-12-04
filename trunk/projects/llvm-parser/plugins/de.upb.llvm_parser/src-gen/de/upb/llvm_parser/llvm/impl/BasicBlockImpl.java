@@ -5,6 +5,7 @@ package de.upb.llvm_parser.llvm.impl;
 import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.Ret_Instr;
 
 import java.util.Collection;
 
@@ -31,6 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.BasicBlockImpl#getLabel <em>Label</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.BasicBlockImpl#getInstructions <em>Instructions</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.BasicBlockImpl#getTerminator <em>Terminator</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,6 +69,16 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
    * @ordered
    */
   protected EList<Instruction> instructions;
+
+  /**
+   * The cached value of the '{@link #getTerminator() <em>Terminator</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTerminator()
+   * @generated
+   * @ordered
+   */
+  protected Ret_Instr terminator;
 
   /**
    * <!-- begin-user-doc -->
@@ -131,6 +143,54 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
    * <!-- end-user-doc -->
    * @generated
    */
+  public Ret_Instr getTerminator()
+  {
+    return terminator;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetTerminator(Ret_Instr newTerminator, NotificationChain msgs)
+  {
+    Ret_Instr oldTerminator = terminator;
+    terminator = newTerminator;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.BASIC_BLOCK__TERMINATOR, oldTerminator, newTerminator);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setTerminator(Ret_Instr newTerminator)
+  {
+    if (newTerminator != terminator)
+    {
+      NotificationChain msgs = null;
+      if (terminator != null)
+        msgs = ((InternalEObject)terminator).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.BASIC_BLOCK__TERMINATOR, null, msgs);
+      if (newTerminator != null)
+        msgs = ((InternalEObject)newTerminator).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.BASIC_BLOCK__TERMINATOR, null, msgs);
+      msgs = basicSetTerminator(newTerminator, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.BASIC_BLOCK__TERMINATOR, newTerminator, newTerminator));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -138,6 +198,8 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
     {
       case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
         return ((InternalEList<?>)getInstructions()).basicRemove(otherEnd, msgs);
+      case LlvmPackage.BASIC_BLOCK__TERMINATOR:
+        return basicSetTerminator(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -156,6 +218,8 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
         return getLabel();
       case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
         return getInstructions();
+      case LlvmPackage.BASIC_BLOCK__TERMINATOR:
+        return getTerminator();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -178,6 +242,9 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
         getInstructions().clear();
         getInstructions().addAll((Collection<? extends Instruction>)newValue);
         return;
+      case LlvmPackage.BASIC_BLOCK__TERMINATOR:
+        setTerminator((Ret_Instr)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -198,6 +265,9 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
       case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
         getInstructions().clear();
         return;
+      case LlvmPackage.BASIC_BLOCK__TERMINATOR:
+        setTerminator((Ret_Instr)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -216,6 +286,8 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
         return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
       case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
         return instructions != null && !instructions.isEmpty();
+      case LlvmPackage.BASIC_BLOCK__TERMINATOR:
+        return terminator != null;
     }
     return super.eIsSet(featureID);
   }

@@ -20,7 +20,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface IndirectBranch extends Instruction
+public interface IndirectBranch extends Ret_Instr
 {
   /**
    * Returns the value of the '<em><b>Adress</b></em>' containment reference.
