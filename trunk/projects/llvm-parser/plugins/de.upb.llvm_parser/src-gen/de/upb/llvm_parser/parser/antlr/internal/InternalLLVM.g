@@ -6293,7 +6293,13 @@ RULE_INTEGER : 'i' ('0'..'9')+ '*'*;
 
 RULE_SL_COMMENT : ';' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-RULE_VAR_TYPE : (('%'|'@') '.'* (RULE_NOBRACKET|'(' RULE_NOBRACKET ')'|RULE_INT) '*'*|'('+ ('%'|'@') '.'* (RULE_NOBRACKET|'(' RULE_NOBRACKET ')'|'%' RULE_INT) '*'* ')'+ '*'*);
+RULE_VAR_TYPE : (RULE_PREFIX_CHAR RULE_VAR_ID|'(' RULE_VAR_TYPE ')' '*'*) ('.' (RULE_BRACKETS|RULE_VAR_ID))*;
+
+RULE_BRACKETS : '(' RULE_VAR_ID ')' '*'*;
+
+RULE_VAR_ID : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')* '*'*;
+
+RULE_PREFIX_CHAR : ('%'|'@') '.'?;
 
 RULE_NOBRACKET : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')* RULE_POINT?;
 

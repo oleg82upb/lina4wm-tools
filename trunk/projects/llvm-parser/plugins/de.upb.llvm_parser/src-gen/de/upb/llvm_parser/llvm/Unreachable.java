@@ -13,6 +13,5 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface Unreachable extends Ret_Instr
-{
+public interface Unreachable extends Ret_Instr {
 } // Unreachable
