@@ -14,6 +14,5 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Instruction extends EObject
-{
+public interface Instruction extends EObject {
 } // Instruction

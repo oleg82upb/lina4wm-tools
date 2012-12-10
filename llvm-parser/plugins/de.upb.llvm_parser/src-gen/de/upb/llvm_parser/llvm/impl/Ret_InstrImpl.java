@@ -18,27 +18,24 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class Ret_InstrImpl extends MinimalEObjectImpl.Container implements Ret_Instr
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected Ret_InstrImpl()
-  {
-    super();
-  }
+public class Ret_InstrImpl extends MinimalEObjectImpl.Container implements Ret_Instr {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected Ret_InstrImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return LlvmPackage.Literals.RET_INSTR;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return LlvmPackage.Literals.RET_INSTR;
+	}
 
 } //Ret_InstrImpl

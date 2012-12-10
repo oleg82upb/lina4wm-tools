@@ -282,14 +282,12 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * MetadataValue:
-	 * 	(('!' INT )| ('!{' NOBRACKET '}') | ("!" NOBRACKET)) 
-	 * 	('=' 
-	 * 		(('!' INT) | 
-	 * 		 ('!{' NOBRACKET '}') |
-	 * 		 ("!" NOBRACKET) |
-	 * 		 'metadata'(('!''{'|'!{')'metadata''!'STRING','('metadata''!'INT|BASIC_TYPE)'}')?
-	 * 		)
-	 * 	)?;
+	 * 	(('!' INT) | ('!{' NOBRACKET '}') | ("!" NOBRACKET))
+	 * 	('='
+	 * 	(('!' INT) |
+	 * 	('!{' NOBRACKET '}') |
+	 * 	("!" NOBRACKET) |
+	 * 	'metadata' (('!' '{' | '!{') 'metadata' '!' STRING ',' ('metadata' '!' INT | BASIC_TYPE) '}')?))?;
 	 */
 	protected String getMetadataValueToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
@@ -341,7 +339,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Type:
-	 * 	(StructType | VAR_TYPE | B_TYPE)RETURN_ATTRIBUTES?;
+	 * 	(StructType | VAR_TYPE | B_TYPE) RETURN_ATTRIBUTES?;
 	 */
 	protected String getTypeToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
@@ -351,8 +349,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * terminal VAR_TYPE:
-	 * 	(((('%' | '@')'.'*) (NOBRACKET | '(' NOBRACKET ')' | INT) '*'*) | '('+ (('%' | '@')'.'*) (NOBRACKET | '(' NOBRACKET ')' | '%'
-	 * 	INT) '*'* ')'+ '*'*);
+	 * 	(PREFIX_CHAR VAR_ID | ('(' VAR_TYPE')''*'*)) ('.' (BRACKETS | VAR_ID))*;
 	 */
 	protected String getVAR_TYPEToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
@@ -493,12 +490,12 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	     'fsub' | 
 	     'add' | 
 	     'sdiv' | 
-	     'udiv' | 
 	     'fdiv' | 
+	     'udiv' | 
 	     'frem' | 
 	     'fmul' | 
-	     'srem' | 
 	     'sub' | 
+	     'srem' | 
 	     'mul' | 
 	     'urem'
 	 )
@@ -510,8 +507,24 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * Syntax:
 	 *     (
-	     ('fcmp' F_PREDICATES Type) | 
 	     (
+	         (
+	             (
+	                 'fadd' | 
+	                 'fsub' | 
+	                 'add' | 
+	                 'fdiv' | 
+	                 'sdiv' | 
+	                 'udiv' | 
+	                 'fmul' | 
+	                 'frem' | 
+	                 'sub' | 
+	                 'srem' | 
+	                 'mul' | 
+	                 'urem'
+	             ) 
+	             Type
+	         ) | 
 	         (
 	             (
 	                 'or' | 
@@ -522,26 +535,10 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	                 'lshr'
 	             ) 
 	             Type
-	         ) | 
-	         (
-	             (
-	                 'fadd' | 
-	                 'fsub' | 
-	                 'add' | 
-	                 'udiv' | 
-	                 'fdiv' | 
-	                 'sdiv' | 
-	                 'frem' | 
-	                 'fmul' | 
-	                 'sub' | 
-	                 'srem' | 
-	                 'mul' | 
-	                 'urem'
-	             ) 
-	             Type
 	         )
 	     ) | 
-	     ('icmp' I_PREDICATES Type)
+	     ('icmp' I_PREDICATES Type) | 
+	     ('fcmp' F_PREDICATES Type)
 	 )
 	 */
 	protected void emit_ARITHMETIC_OP_Compare_LOGICAL_OP___FcmpKeyword_1_0_F_PREDICATESParserRuleCall_1_1_TypeParserRuleCall_1_2___or___IcmpKeyword_0_0_I_PREDICATESParserRuleCall_0_1_TypeParserRuleCall_0_2___or_______AddKeyword_0_0_or_FaddKeyword_0_1_or_FdivKeyword_0_8_or_FmulKeyword_0_5_or_FremKeyword_0_11_or_FsubKeyword_0_3_or_MulKeyword_0_4_or_SdivKeyword_0_7_or_SremKeyword_0_10_or_SubKeyword_0_2_or_UdivKeyword_0_6_or_UremKeyword_0_9___TypeParserRuleCall_1___or_____AndKeyword_0_3_or_AshrKeyword_0_2_or_LshrKeyword_0_1_or_OrKeyword_0_4_or_ShlKeyword_0_0_or_XorKeyword_0_5___TypeParserRuleCall_1____(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -662,7 +659,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     ('fcmp' F_PREDICATES Type) | ('icmp' I_PREDICATES Type)
+	 *     ('icmp' I_PREDICATES Type) | ('fcmp' F_PREDICATES Type)
 	 */
 	protected void emit_Compare___FcmpKeyword_1_0_F_PREDICATESParserRuleCall_1_1_TypeParserRuleCall_1_2___or___IcmpKeyword_0_0_I_PREDICATESParserRuleCall_0_1_TypeParserRuleCall_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -949,7 +946,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     'triple' | 'datalayout'
+	 *     'datalayout' | 'triple'
 	 */
 	protected void emit_TopLevelEntity_DatalayoutKeyword_1_1_0_or_TripleKeyword_1_1_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

@@ -319,5 +319,20 @@
             extensions="llp">
     </provider>
   </extension>
+  <extension
+        point="org.eclipse.ui.popupMenus">
+     <objectContribution
+           id="de.upb.llvm_parser.ui.saveasttool"
+           nameFilter="*.llp"
+           objectClass="org.eclipse.core.resources.IFile">
+        <action
+              class="de.upb.llvm_parser.ui.contentassist.LLVMASTAssistant"
+              enablesFor="1"
+              id="de.upb.llvm_parser.ui.action1"
+              label="Save AST"
+              menubarPath="additions">
+        </action>
+     </objectContribution>
+  </extension>
 
 </plugin>

@@ -14,6 +14,5 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Ret_Instr extends EObject
-{
+public interface Ret_Instr extends EObject {
 } // Ret_Instr

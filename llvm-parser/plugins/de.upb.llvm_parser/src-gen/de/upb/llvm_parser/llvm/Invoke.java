@@ -22,110 +22,109 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface Invoke extends Ret_Instr
-{
-  /**
-   * Returns the value of the '<em><b>Function</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Function</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Function</em>' containment reference.
-   * @see #setFunction(TypeAndValue)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_Function()
-   * @model containment="true"
-   * @generated
-   */
-  TypeAndValue getFunction();
+public interface Invoke extends Ret_Instr {
+	/**
+	 * Returns the value of the '<em><b>Function</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Function</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Function</em>' containment reference.
+	 * @see #setFunction(TypeAndValue)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_Function()
+	 * @model containment="true"
+	 * @generated
+	 */
+	TypeAndValue getFunction();
 
-  /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getFunction <em>Function</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Function</em>' containment reference.
-   * @see #getFunction()
-   * @generated
-   */
-  void setFunction(TypeAndValue value);
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getFunction <em>Function</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Function</em>' containment reference.
+	 * @see #getFunction()
+	 * @generated
+	 */
+	void setFunction(TypeAndValue value);
 
-  /**
-   * Returns the value of the '<em><b>PList</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>PList</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>PList</em>' attribute.
-   * @see #setPList(String)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_PList()
-   * @model
-   * @generated
-   */
-  String getPList();
+	/**
+	 * Returns the value of the '<em><b>PList</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>PList</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>PList</em>' attribute.
+	 * @see #setPList(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_PList()
+	 * @model
+	 * @generated
+	 */
+	String getPList();
 
-  /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getPList <em>PList</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>PList</em>' attribute.
-   * @see #getPList()
-   * @generated
-   */
-  void setPList(String value);
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getPList <em>PList</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>PList</em>' attribute.
+	 * @see #getPList()
+	 * @generated
+	 */
+	void setPList(String value);
 
-  /**
-   * Returns the value of the '<em><b>To</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>To</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>To</em>' containment reference.
-   * @see #setTo(TypeAndValue)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_To()
-   * @model containment="true"
-   * @generated
-   */
-  TypeAndValue getTo();
+	/**
+	 * Returns the value of the '<em><b>To</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>To</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>To</em>' containment reference.
+	 * @see #setTo(TypeAndValue)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_To()
+	 * @model containment="true"
+	 * @generated
+	 */
+	TypeAndValue getTo();
 
-  /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getTo <em>To</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>To</em>' containment reference.
-   * @see #getTo()
-   * @generated
-   */
-  void setTo(TypeAndValue value);
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getTo <em>To</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>To</em>' containment reference.
+	 * @see #getTo()
+	 * @generated
+	 */
+	void setTo(TypeAndValue value);
 
-  /**
-   * Returns the value of the '<em><b>Unwind</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Unwind</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Unwind</em>' containment reference.
-   * @see #setUnwind(TypeAndValue)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_Unwind()
-   * @model containment="true"
-   * @generated
-   */
-  TypeAndValue getUnwind();
+	/**
+	 * Returns the value of the '<em><b>Unwind</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Unwind</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Unwind</em>' containment reference.
+	 * @see #setUnwind(TypeAndValue)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_Unwind()
+	 * @model containment="true"
+	 * @generated
+	 */
+	TypeAndValue getUnwind();
 
-  /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getUnwind <em>Unwind</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Unwind</em>' containment reference.
-   * @see #getUnwind()
-   * @generated
-   */
-  void setUnwind(TypeAndValue value);
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getUnwind <em>Unwind</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Unwind</em>' containment reference.
+	 * @see #getUnwind()
+	 * @generated
+	 */
+	void setUnwind(TypeAndValue value);
 
 } // Invoke

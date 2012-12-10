@@ -119,7 +119,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		
 		/// *
 		//
-		// * Predefinitions of the llcm-code
+		// * Predefinitions of the llvm-code
 		//
 		// * / TopLevelEntity:
 		//
@@ -459,9 +459,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		
 		/// *
 		//
-		// * This rule creates a Parameterlist and saves also the TypeAndValue to each parameter
-		//
-		// * Brackets are 
+		// * This rule creates a Parameterlist and saves also the TypeAndValue to each parameter 
 		//
 		// * / ParameterList:
 		//
@@ -4384,6 +4382,9 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 	private TerminalRule tINTEGER;
 	private TerminalRule tSL_COMMENT;
 	private TerminalRule tVAR_TYPE;
+	private TerminalRule tBRACKETS;
+	private TerminalRule tVAR_ID;
+	private TerminalRule tPREFIX_CHAR;
 	private TerminalRule tNOBRACKET;
 	private TerminalRule tPOINT;
 	private AbstractElementElements pAbstractElement;
@@ -4567,11 +4568,34 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	// * / terminal VAR_TYPE:
 	//
-	//	(("%" | "@") "."*) (NOBRACKET | "(" NOBRACKET ")" | INT) "*"* | "("+ (("%" | "@") "."*) (NOBRACKET | "(" NOBRACKET
-	//
-	//	")" | "%" INT) "*"* ")"+ "*"*;
+	//	(PREFIX_CHAR VAR_ID | "(" VAR_TYPE ")" "*"*) ("." (BRACKETS | VAR_ID))*;
 	public TerminalRule getVAR_TYPERule() {
 		return (tVAR_TYPE != null) ? tVAR_TYPE : (tVAR_TYPE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "VAR_TYPE"));
+	} 
+
+	////	(((('%' | '@')'.'*) (NOBRACKET | '(' NOBRACKET ')' | INT) '*'*) | '('+ (('%' | '@')'.'*) (NOBRACKET | '(' NOBRACKET ')' | '%'
+	//
+	////	INT) '*'* ')'+ '*'*);
+	//
+	//terminal BRACKETS:
+	//
+	//	"(" VAR_ID ")" "*"*;
+	public TerminalRule getBRACKETSRule() {
+		return (tBRACKETS != null) ? tBRACKETS : (tBRACKETS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "BRACKETS"));
+	} 
+
+	//terminal VAR_ID:
+	//
+	//	("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")* "*"*;
+	public TerminalRule getVAR_IDRule() {
+		return (tVAR_ID != null) ? tVAR_ID : (tVAR_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "VAR_ID"));
+	} 
+
+	//terminal PREFIX_CHAR:
+	//
+	//	("%" | "@") "."?;
+	public TerminalRule getPREFIX_CHARRule() {
+		return (tPREFIX_CHAR != null) ? tPREFIX_CHAR : (tPREFIX_CHAR = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "PREFIX_CHAR"));
 	} 
 
 	/// *
@@ -4615,7 +4639,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// *
 	//
-	// * Predefinitions of the llcm-code
+	// * Predefinitions of the llvm-code
 	//
 	// * / TopLevelEntity:
 	//
@@ -4680,9 +4704,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// *
 	//
-	// * This rule creates a Parameterlist and saves also the TypeAndValue to each parameter
-	//
-	// * Brackets are 
+	// * This rule creates a Parameterlist and saves also the TypeAndValue to each parameter 
 	//
 	// * / ParameterList:
 	//
