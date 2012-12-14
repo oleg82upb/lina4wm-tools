@@ -31,8 +31,9 @@ import de.upb.llvm_parser.llvm.LandingPad;
 import de.upb.llvm_parser.llvm.LlvmFactory;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Load;
-import de.upb.llvm_parser.llvm.LocalVar;
+import de.upb.llvm_parser.llvm.LocalVarInstruction;
 import de.upb.llvm_parser.llvm.MainLevelEntity;
+import de.upb.llvm_parser.llvm.ParameterList;
 import de.upb.llvm_parser.llvm.Resume;
 import de.upb.llvm_parser.llvm.Ret_Instr;
 import de.upb.llvm_parser.llvm.Return;
@@ -101,6 +102,34 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass parameterListEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass functionBodyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass basicBlockEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass ret_InstrEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass typeListEClass = null;
 
 	/**
@@ -115,7 +144,14 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass localVarEClass = null;
+	private EClass localVarInstructionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass instructionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -297,13 +333,6 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass instructionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass indirectBranchEClass = null;
 
 	/**
@@ -361,27 +390,6 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * @generated
 	 */
 	private EClass branchEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass functionBodyEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass basicBlockEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass ret_InstrEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -548,8 +556,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFunctionHeader_Pl() {
-		return (EAttribute)functionHeaderEClass.getEStructuralFeatures().get(1);
+	public EReference getFunctionHeader_Pl() {
+		return (EReference)functionHeaderEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -568,6 +576,96 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 */
 	public EReference getFunctionHeader_TList() {
 		return (EReference)functionHeaderEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getParameterList() {
+		return parameterListEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterList_Params() {
+		return (EReference)parameterListEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFunctionBody() {
+		return functionBodyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFunctionBody_Meta() {
+		return (EAttribute)functionBodyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFunctionBody_Blocks() {
+		return (EReference)functionBodyEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBasicBlock() {
+		return basicBlockEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBasicBlock_Label() {
+		return (EAttribute)basicBlockEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBasicBlock_Instructions() {
+		return (EReference)basicBlockEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBasicBlock_Terminator() {
+		return (EReference)basicBlockEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRet_Instr() {
+		return ret_InstrEClass;
 	}
 
 	/**
@@ -611,8 +709,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getLocalVar() {
-		return localVarEClass;
+	public EClass getLocalVarInstruction() {
+		return localVarInstructionEClass;
 	}
 
 	/**
@@ -620,8 +718,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLocalVar_Type() {
-		return (EAttribute)localVarEClass.getEStructuralFeatures().get(0);
+	public EAttribute getLocalVarInstruction_Type() {
+		return (EAttribute)localVarInstructionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -629,8 +727,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLocalVar_Instr() {
-		return (EReference)localVarEClass.getEStructuralFeatures().get(1);
+	public EReference getLocalVarInstruction_Instr() {
+		return (EReference)localVarInstructionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -638,8 +736,17 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLocalVar_Alias() {
-		return (EReference)localVarEClass.getEStructuralFeatures().get(2);
+	public EReference getLocalVarInstruction_Alias() {
+		return (EReference)localVarInstructionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getInstruction() {
+		return instructionEClass;
 	}
 
 	/**
@@ -1016,8 +1123,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCall_PList() {
-		return (EAttribute)callEClass.getEStructuralFeatures().get(1);
+	public EReference getCall_PList() {
+		return (EReference)callEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1403,15 +1510,6 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getInstruction() {
-		return instructionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getIndirectBranch() {
 		return indirectBranchEClass;
 	}
@@ -1538,8 +1636,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getInvoke_PList() {
-		return (EAttribute)invokeEClass.getEStructuralFeatures().get(1);
+	public EReference getInvoke_PList() {
+		return (EReference)invokeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1646,78 +1744,6 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFunctionBody() {
-		return functionBodyEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFunctionBody_Meta() {
-		return (EAttribute)functionBodyEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getFunctionBody_Blocks() {
-		return (EReference)functionBodyEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getBasicBlock() {
-		return basicBlockEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBasicBlock_Label() {
-		return (EAttribute)basicBlockEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBasicBlock_Instructions() {
-		return (EReference)basicBlockEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBasicBlock_Terminator() {
-		return (EReference)basicBlockEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getRet_Instr() {
-		return ret_InstrEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public LlvmFactory getLlvmFactory() {
 		return (LlvmFactory)getEFactoryInstance();
 	}
@@ -1756,9 +1782,23 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 
 		functionHeaderEClass = createEClass(FUNCTION_HEADER);
 		createEAttribute(functionHeaderEClass, FUNCTION_HEADER__RETURN_TYPE);
-		createEAttribute(functionHeaderEClass, FUNCTION_HEADER__PL);
+		createEReference(functionHeaderEClass, FUNCTION_HEADER__PL);
 		createEReference(functionHeaderEClass, FUNCTION_HEADER__BODY);
 		createEReference(functionHeaderEClass, FUNCTION_HEADER__TLIST);
+
+		parameterListEClass = createEClass(PARAMETER_LIST);
+		createEReference(parameterListEClass, PARAMETER_LIST__PARAMS);
+
+		functionBodyEClass = createEClass(FUNCTION_BODY);
+		createEAttribute(functionBodyEClass, FUNCTION_BODY__META);
+		createEReference(functionBodyEClass, FUNCTION_BODY__BLOCKS);
+
+		basicBlockEClass = createEClass(BASIC_BLOCK);
+		createEAttribute(basicBlockEClass, BASIC_BLOCK__LABEL);
+		createEReference(basicBlockEClass, BASIC_BLOCK__INSTRUCTIONS);
+		createEReference(basicBlockEClass, BASIC_BLOCK__TERMINATOR);
+
+		ret_InstrEClass = createEClass(RET_INSTR);
 
 		typeListEClass = createEClass(TYPE_LIST);
 		createEAttribute(typeListEClass, TYPE_LIST__TYPES);
@@ -1766,10 +1806,12 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		aggregateEClass = createEClass(AGGREGATE);
 		createEAttribute(aggregateEClass, AGGREGATE__AGG);
 
-		localVarEClass = createEClass(LOCAL_VAR);
-		createEAttribute(localVarEClass, LOCAL_VAR__TYPE);
-		createEReference(localVarEClass, LOCAL_VAR__INSTR);
-		createEReference(localVarEClass, LOCAL_VAR__ALIAS);
+		localVarInstructionEClass = createEClass(LOCAL_VAR_INSTRUCTION);
+		createEAttribute(localVarInstructionEClass, LOCAL_VAR_INSTRUCTION__TYPE);
+		createEReference(localVarInstructionEClass, LOCAL_VAR_INSTRUCTION__INSTR);
+		createEReference(localVarInstructionEClass, LOCAL_VAR_INSTRUCTION__ALIAS);
+
+		instructionEClass = createEClass(INSTRUCTION);
 
 		aliasEClass = createEClass(ALIAS);
 		createEReference(aliasEClass, ALIAS__TYPE);
@@ -1822,7 +1864,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 
 		callEClass = createEClass(CALL);
 		createEReference(callEClass, CALL__POINTER);
-		createEAttribute(callEClass, CALL__PLIST);
+		createEReference(callEClass, CALL__PLIST);
 
 		allocEClass = createEClass(ALLOC);
 		createEAttribute(allocEClass, ALLOC__TYPE);
@@ -1880,8 +1922,6 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 
 		logicaL_OPEClass = createEClass(LOGICAL_OP);
 
-		instructionEClass = createEClass(INSTRUCTION);
-
 		indirectBranchEClass = createEClass(INDIRECT_BRANCH);
 		createEReference(indirectBranchEClass, INDIRECT_BRANCH__ADRESS);
 		createEReference(indirectBranchEClass, INDIRECT_BRANCH__LLIST);
@@ -1900,7 +1940,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 
 		invokeEClass = createEClass(INVOKE);
 		createEReference(invokeEClass, INVOKE__FUNCTION);
-		createEAttribute(invokeEClass, INVOKE__PLIST);
+		createEReference(invokeEClass, INVOKE__PLIST);
 		createEReference(invokeEClass, INVOKE__TO);
 		createEReference(invokeEClass, INVOKE__UNWIND);
 
@@ -1916,17 +1956,6 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		createEReference(branchEClass, BRANCH__COND);
 		createEReference(branchEClass, BRANCH__LABEL_TRUE);
 		createEReference(branchEClass, BRANCH__LABEL_FALSE);
-
-		functionBodyEClass = createEClass(FUNCTION_BODY);
-		createEAttribute(functionBodyEClass, FUNCTION_BODY__META);
-		createEReference(functionBodyEClass, FUNCTION_BODY__BLOCKS);
-
-		basicBlockEClass = createEClass(BASIC_BLOCK);
-		createEAttribute(basicBlockEClass, BASIC_BLOCK__LABEL);
-		createEReference(basicBlockEClass, BASIC_BLOCK__INSTRUCTIONS);
-		createEReference(basicBlockEClass, BASIC_BLOCK__TERMINATOR);
-
-		ret_InstrEClass = createEClass(RET_INSTR);
 	}
 
 	/**
@@ -1960,8 +1989,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		topLevelEntityEClass.getESuperTypes().add(this.getAbstractElement());
 		mainLevelEntityEClass.getESuperTypes().add(this.getAbstractElement());
 		functionHeaderEClass.getESuperTypes().add(this.getMainLevelEntity());
-		localVarEClass.getESuperTypes().add(this.getMainLevelEntity());
-		localVarEClass.getESuperTypes().add(this.getInstruction());
+		localVarInstructionEClass.getESuperTypes().add(this.getMainLevelEntity());
 		typeAndValueEClass.getESuperTypes().add(this.getClause());
 		typeAndValueEClass.getESuperTypes().add(this.getResume());
 		getElementPtrEClass.getESuperTypes().add(this.getInstruction());
@@ -2012,9 +2040,23 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 
 		initEClass(functionHeaderEClass, FunctionHeader.class, "FunctionHeader", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFunctionHeader_ReturnType(), ecorePackage.getEString(), "returnType", null, 0, 1, FunctionHeader.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFunctionHeader_Pl(), ecorePackage.getEString(), "pl", null, 0, 1, FunctionHeader.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFunctionHeader_Pl(), this.getParameterList(), null, "pl", null, 0, 1, FunctionHeader.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunctionHeader_Body(), this.getFunctionBody(), null, "body", null, 0, 1, FunctionHeader.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunctionHeader_TList(), this.getTypeList(), null, "tList", null, 0, 1, FunctionHeader.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(parameterListEClass, ParameterList.class, "ParameterList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getParameterList_Params(), this.getTypeAndValue(), null, "params", null, 0, -1, ParameterList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(functionBodyEClass, FunctionBody.class, "FunctionBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFunctionBody_Meta(), ecorePackage.getEString(), "meta", null, 0, -1, FunctionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFunctionBody_Blocks(), this.getBasicBlock(), null, "blocks", null, 0, -1, FunctionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(basicBlockEClass, BasicBlock.class, "BasicBlock", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBasicBlock_Label(), ecorePackage.getEString(), "label", null, 0, 1, BasicBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBasicBlock_Instructions(), ecorePackage.getEObject(), null, "instructions", null, 0, -1, BasicBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBasicBlock_Terminator(), this.getRet_Instr(), null, "terminator", null, 0, 1, BasicBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(ret_InstrEClass, Ret_Instr.class, "Ret_Instr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(typeListEClass, TypeList.class, "TypeList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTypeList_Types(), ecorePackage.getEString(), "types", null, 0, -1, TypeList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2022,10 +2064,12 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		initEClass(aggregateEClass, Aggregate.class, "Aggregate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAggregate_Agg(), ecorePackage.getEString(), "agg", null, 0, -1, Aggregate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(localVarEClass, LocalVar.class, "LocalVar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getLocalVar_Type(), ecorePackage.getEString(), "type", null, 0, 1, LocalVar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLocalVar_Instr(), this.getInstruction(), null, "instr", null, 0, 1, LocalVar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLocalVar_Alias(), this.getAlias(), null, "alias", null, 0, 1, LocalVar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(localVarInstructionEClass, LocalVarInstruction.class, "LocalVarInstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getLocalVarInstruction_Type(), ecorePackage.getEString(), "type", null, 0, 1, LocalVarInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLocalVarInstruction_Instr(), this.getInstruction(), null, "instr", null, 0, 1, LocalVarInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLocalVarInstruction_Alias(), this.getAlias(), null, "alias", null, 0, 1, LocalVarInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(instructionEClass, Instruction.class, "Instruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(aliasEClass, Alias.class, "Alias", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAlias_Type(), this.getTypeAndValue(), null, "type", null, 0, 1, Alias.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2078,7 +2122,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 
 		initEClass(callEClass, Call.class, "Call", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCall_Pointer(), this.getTypeAndValue(), null, "pointer", null, 0, 1, Call.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCall_PList(), ecorePackage.getEString(), "pList", null, 0, 1, Call.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCall_PList(), this.getParameterList(), null, "pList", null, 0, 1, Call.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(allocEClass, Alloc.class, "Alloc", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAlloc_Type(), ecorePackage.getEString(), "type", null, 0, 1, Alloc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2136,8 +2180,6 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 
 		initEClass(logicaL_OPEClass, de.upb.llvm_parser.llvm.LOGICAL_OP.class, "LOGICAL_OP", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(instructionEClass, Instruction.class, "Instruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(indirectBranchEClass, IndirectBranch.class, "IndirectBranch", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getIndirectBranch_Adress(), this.getTypeAndValue(), null, "adress", null, 0, 1, IndirectBranch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getIndirectBranch_LList(), this.getLabelList(), null, "lList", null, 0, 1, IndirectBranch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2156,7 +2198,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 
 		initEClass(invokeEClass, Invoke.class, "Invoke", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInvoke_Function(), this.getTypeAndValue(), null, "function", null, 0, 1, Invoke.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getInvoke_PList(), ecorePackage.getEString(), "pList", null, 0, 1, Invoke.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInvoke_PList(), this.getParameterList(), null, "pList", null, 0, 1, Invoke.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInvoke_To(), this.getTypeAndValue(), null, "to", null, 0, 1, Invoke.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInvoke_Unwind(), this.getTypeAndValue(), null, "unwind", null, 0, 1, Invoke.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2172,17 +2214,6 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		initEReference(getBranch_Cond(), this.getTypeAndValue(), null, "cond", null, 0, 1, Branch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBranch_LabelTrue(), this.getTypeAndValue(), null, "labelTrue", null, 0, 1, Branch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBranch_LabelFalse(), this.getTypeAndValue(), null, "labelFalse", null, 0, 1, Branch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(functionBodyEClass, FunctionBody.class, "FunctionBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFunctionBody_Meta(), ecorePackage.getEString(), "meta", null, 0, -1, FunctionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunctionBody_Blocks(), this.getBasicBlock(), null, "blocks", null, 0, -1, FunctionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(basicBlockEClass, BasicBlock.class, "BasicBlock", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBasicBlock_Label(), ecorePackage.getEString(), "label", null, 0, 1, BasicBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBasicBlock_Instructions(), this.getInstruction(), null, "instructions", null, 0, -1, BasicBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBasicBlock_Terminator(), this.getRet_Instr(), null, "terminator", null, 0, 1, BasicBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(ret_InstrEClass, Ret_Instr.class, "Ret_Instr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

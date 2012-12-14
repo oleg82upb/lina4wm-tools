@@ -61,9 +61,14 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 			case LlvmPackage.TOP_LEVEL_ENTITY: return createTopLevelEntity();
 			case LlvmPackage.MAIN_LEVEL_ENTITY: return createMainLevelEntity();
 			case LlvmPackage.FUNCTION_HEADER: return createFunctionHeader();
+			case LlvmPackage.PARAMETER_LIST: return createParameterList();
+			case LlvmPackage.FUNCTION_BODY: return createFunctionBody();
+			case LlvmPackage.BASIC_BLOCK: return createBasicBlock();
+			case LlvmPackage.RET_INSTR: return createRet_Instr();
 			case LlvmPackage.TYPE_LIST: return createTypeList();
 			case LlvmPackage.AGGREGATE: return createAggregate();
-			case LlvmPackage.LOCAL_VAR: return createLocalVar();
+			case LlvmPackage.LOCAL_VAR_INSTRUCTION: return createLocalVarInstruction();
+			case LlvmPackage.INSTRUCTION: return createInstruction();
 			case LlvmPackage.ALIAS: return createAlias();
 			case LlvmPackage.TYPE_AND_VALUE: return createTypeAndValue();
 			case LlvmPackage.GET_ELEMENT_PTR: return createGetElementPtr();
@@ -89,7 +94,6 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 			case LlvmPackage.COMPARE: return createCompare();
 			case LlvmPackage.ARITHMETIC_OP: return createARITHMETIC_OP();
 			case LlvmPackage.LOGICAL_OP: return createLOGICAL_OP();
-			case LlvmPackage.INSTRUCTION: return createInstruction();
 			case LlvmPackage.INDIRECT_BRANCH: return createIndirectBranch();
 			case LlvmPackage.LABEL_LIST: return createLabelList();
 			case LlvmPackage.SWITCH: return createSwitch();
@@ -99,9 +103,6 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 			case LlvmPackage.UNREACHABLE: return createUnreachable();
 			case LlvmPackage.RETURN: return createReturn();
 			case LlvmPackage.BRANCH: return createBranch();
-			case LlvmPackage.FUNCTION_BODY: return createFunctionBody();
-			case LlvmPackage.BASIC_BLOCK: return createBasicBlock();
-			case LlvmPackage.RET_INSTR: return createRet_Instr();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -162,6 +163,46 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ParameterList createParameterList() {
+		ParameterListImpl parameterList = new ParameterListImpl();
+		return parameterList;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FunctionBody createFunctionBody() {
+		FunctionBodyImpl functionBody = new FunctionBodyImpl();
+		return functionBody;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BasicBlock createBasicBlock() {
+		BasicBlockImpl basicBlock = new BasicBlockImpl();
+		return basicBlock;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Ret_Instr createRet_Instr() {
+		Ret_InstrImpl ret_Instr = new Ret_InstrImpl();
+		return ret_Instr;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public TypeList createTypeList() {
 		TypeListImpl typeList = new TypeListImpl();
 		return typeList;
@@ -182,9 +223,19 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LocalVar createLocalVar() {
-		LocalVarImpl localVar = new LocalVarImpl();
-		return localVar;
+	public LocalVarInstruction createLocalVarInstruction() {
+		LocalVarInstructionImpl localVarInstruction = new LocalVarInstructionImpl();
+		return localVarInstruction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Instruction createInstruction() {
+		InstructionImpl instruction = new InstructionImpl();
+		return instruction;
 	}
 
 	/**
@@ -442,16 +493,6 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Instruction createInstruction() {
-		InstructionImpl instruction = new InstructionImpl();
-		return instruction;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public IndirectBranch createIndirectBranch() {
 		IndirectBranchImpl indirectBranch = new IndirectBranchImpl();
 		return indirectBranch;
@@ -535,36 +576,6 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 	public Branch createBranch() {
 		BranchImpl branch = new BranchImpl();
 		return branch;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public FunctionBody createFunctionBody() {
-		FunctionBodyImpl functionBody = new FunctionBodyImpl();
-		return functionBody;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BasicBlock createBasicBlock() {
-		BasicBlockImpl basicBlock = new BasicBlockImpl();
-		return basicBlock;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Ret_Instr createRet_Instr() {
-		Ret_InstrImpl ret_Instr = new Ret_InstrImpl();
-		return ret_Instr;
 	}
 
 	/**

@@ -4,6 +4,7 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.Call;
 import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.ParameterList;
 import de.upb.llvm_parser.llvm.TypeAndValue;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -40,24 +41,14 @@ public class CallImpl extends InstructionImpl implements Call {
 	protected TypeAndValue pointer;
 
 	/**
-	 * The default value of the '{@link #getPList() <em>PList</em>}' attribute.
+	 * The cached value of the '{@link #getPList() <em>PList</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getPList()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String PLIST_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getPList() <em>PList</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPList()
-	 * @generated
-	 * @ordered
-	 */
-	protected String pList = PLIST_EDEFAULT;
+	protected ParameterList pList;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -126,7 +117,7 @@ public class CallImpl extends InstructionImpl implements Call {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getPList() {
+	public ParameterList getPList() {
 		return pList;
 	}
 
@@ -135,11 +126,33 @@ public class CallImpl extends InstructionImpl implements Call {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPList(String newPList) {
-		String oldPList = pList;
+	public NotificationChain basicSetPList(ParameterList newPList, NotificationChain msgs) {
+		ParameterList oldPList = pList;
 		pList = newPList;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CALL__PLIST, oldPList, pList));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.CALL__PLIST, oldPList, newPList);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPList(ParameterList newPList) {
+		if (newPList != pList) {
+			NotificationChain msgs = null;
+			if (pList != null)
+				msgs = ((InternalEObject)pList).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CALL__PLIST, null, msgs);
+			if (newPList != null)
+				msgs = ((InternalEObject)newPList).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CALL__PLIST, null, msgs);
+			msgs = basicSetPList(newPList, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CALL__PLIST, newPList, newPList));
 	}
 
 	/**
@@ -152,6 +165,8 @@ public class CallImpl extends InstructionImpl implements Call {
 		switch (featureID) {
 			case LlvmPackage.CALL__POINTER:
 				return basicSetPointer(null, msgs);
+			case LlvmPackage.CALL__PLIST:
+				return basicSetPList(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -184,7 +199,7 @@ public class CallImpl extends InstructionImpl implements Call {
 				setPointer((TypeAndValue)newValue);
 				return;
 			case LlvmPackage.CALL__PLIST:
-				setPList((String)newValue);
+				setPList((ParameterList)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -202,7 +217,7 @@ public class CallImpl extends InstructionImpl implements Call {
 				setPointer((TypeAndValue)null);
 				return;
 			case LlvmPackage.CALL__PLIST:
-				setPList(PLIST_EDEFAULT);
+				setPList((ParameterList)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -219,25 +234,9 @@ public class CallImpl extends InstructionImpl implements Call {
 			case LlvmPackage.CALL__POINTER:
 				return pointer != null;
 			case LlvmPackage.CALL__PLIST:
-				return PLIST_EDEFAULT == null ? pList != null : !PLIST_EDEFAULT.equals(pList);
+				return pList != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (pList: ");
-		result.append(pList);
-		result.append(')');
-		return result.toString();
 	}
 
 } //CallImpl

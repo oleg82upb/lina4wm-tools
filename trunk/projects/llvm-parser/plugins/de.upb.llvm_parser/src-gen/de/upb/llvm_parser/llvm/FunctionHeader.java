@@ -50,30 +50,30 @@ public interface FunctionHeader extends MainLevelEntity {
 	void setReturnType(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Pl</b></em>' attribute.
+	 * Returns the value of the '<em><b>Pl</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Pl</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Pl</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Pl</em>' attribute.
-	 * @see #setPl(String)
+	 * @return the value of the '<em>Pl</em>' containment reference.
+	 * @see #setPl(ParameterList)
 	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getFunctionHeader_Pl()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
-	String getPl();
+	ParameterList getPl();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.FunctionHeader#getPl <em>Pl</em>}' attribute.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.FunctionHeader#getPl <em>Pl</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Pl</em>' attribute.
+	 * @param value the new value of the '<em>Pl</em>' containment reference.
 	 * @see #getPl()
 	 * @generated
 	 */
-	void setPl(String value);
+	void setPl(ParameterList value);
 
 	/**
 	 * Returns the value of the '<em><b>Body</b></em>' containment reference.

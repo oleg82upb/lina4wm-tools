@@ -3,17 +3,17 @@
 package de.upb.llvm_parser.llvm.tests;
 
 import de.upb.llvm_parser.llvm.LlvmFactory;
-import de.upb.llvm_parser.llvm.LocalVar;
+import de.upb.llvm_parser.llvm.LocalVarInstruction;
 
 import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>Local Var</b></em>'.
+ * A test case for the model object '<em><b>Local Var Instruction</b></em>'.
  * <!-- end-user-doc -->
  * @generated
  */
-public class LocalVarTest extends MainLevelEntityTest {
+public class LocalVarInstructionTest extends MainLevelEntityTest {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -21,28 +21,28 @@ public class LocalVarTest extends MainLevelEntityTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-		TestRunner.run(LocalVarTest.class);
+		TestRunner.run(LocalVarInstructionTest.class);
 	}
 
 	/**
-	 * Constructs a new Local Var test case with the given name.
+	 * Constructs a new Local Var Instruction test case with the given name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LocalVarTest(String name) {
+	public LocalVarInstructionTest(String name) {
 		super(name);
 	}
 
 	/**
-	 * Returns the fixture for this Local Var test case.
+	 * Returns the fixture for this Local Var Instruction test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	protected LocalVar getFixture() {
-		return (LocalVar)fixture;
+	protected LocalVarInstruction getFixture() {
+		return (LocalVarInstruction)fixture;
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class LocalVarTest extends MainLevelEntityTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-		setFixture(LlvmFactory.eINSTANCE.createLocalVar());
+		setFixture(LlvmFactory.eINSTANCE.createLocalVarInstruction());
 	}
 
 	/**
@@ -67,4 +67,4 @@ public class LocalVarTest extends MainLevelEntityTest {
 		setFixture(null);
 	}
 
-} //LocalVarTest
+} //LocalVarInstructionTest

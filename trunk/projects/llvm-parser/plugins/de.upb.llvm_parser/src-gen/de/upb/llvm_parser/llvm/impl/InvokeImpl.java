@@ -4,6 +4,7 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.Invoke;
 import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.ParameterList;
 import de.upb.llvm_parser.llvm.TypeAndValue;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -42,24 +43,14 @@ public class InvokeImpl extends Ret_InstrImpl implements Invoke {
 	protected TypeAndValue function;
 
 	/**
-	 * The default value of the '{@link #getPList() <em>PList</em>}' attribute.
+	 * The cached value of the '{@link #getPList() <em>PList</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getPList()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String PLIST_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getPList() <em>PList</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPList()
-	 * @generated
-	 * @ordered
-	 */
-	protected String pList = PLIST_EDEFAULT;
+	protected ParameterList pList;
 
 	/**
 	 * The cached value of the '{@link #getTo() <em>To</em>}' containment reference.
@@ -148,7 +139,7 @@ public class InvokeImpl extends Ret_InstrImpl implements Invoke {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getPList() {
+	public ParameterList getPList() {
 		return pList;
 	}
 
@@ -157,11 +148,33 @@ public class InvokeImpl extends Ret_InstrImpl implements Invoke {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPList(String newPList) {
-		String oldPList = pList;
+	public NotificationChain basicSetPList(ParameterList newPList, NotificationChain msgs) {
+		ParameterList oldPList = pList;
 		pList = newPList;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__PLIST, oldPList, pList));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__PLIST, oldPList, newPList);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPList(ParameterList newPList) {
+		if (newPList != pList) {
+			NotificationChain msgs = null;
+			if (pList != null)
+				msgs = ((InternalEObject)pList).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__PLIST, null, msgs);
+			if (newPList != null)
+				msgs = ((InternalEObject)newPList).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__PLIST, null, msgs);
+			msgs = basicSetPList(newPList, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__PLIST, newPList, newPList));
 	}
 
 	/**
@@ -260,6 +273,8 @@ public class InvokeImpl extends Ret_InstrImpl implements Invoke {
 		switch (featureID) {
 			case LlvmPackage.INVOKE__FUNCTION:
 				return basicSetFunction(null, msgs);
+			case LlvmPackage.INVOKE__PLIST:
+				return basicSetPList(null, msgs);
 			case LlvmPackage.INVOKE__TO:
 				return basicSetTo(null, msgs);
 			case LlvmPackage.INVOKE__UNWIND:
@@ -300,7 +315,7 @@ public class InvokeImpl extends Ret_InstrImpl implements Invoke {
 				setFunction((TypeAndValue)newValue);
 				return;
 			case LlvmPackage.INVOKE__PLIST:
-				setPList((String)newValue);
+				setPList((ParameterList)newValue);
 				return;
 			case LlvmPackage.INVOKE__TO:
 				setTo((TypeAndValue)newValue);
@@ -324,7 +339,7 @@ public class InvokeImpl extends Ret_InstrImpl implements Invoke {
 				setFunction((TypeAndValue)null);
 				return;
 			case LlvmPackage.INVOKE__PLIST:
-				setPList(PLIST_EDEFAULT);
+				setPList((ParameterList)null);
 				return;
 			case LlvmPackage.INVOKE__TO:
 				setTo((TypeAndValue)null);
@@ -347,29 +362,13 @@ public class InvokeImpl extends Ret_InstrImpl implements Invoke {
 			case LlvmPackage.INVOKE__FUNCTION:
 				return function != null;
 			case LlvmPackage.INVOKE__PLIST:
-				return PLIST_EDEFAULT == null ? pList != null : !PLIST_EDEFAULT.equals(pList);
+				return pList != null;
 			case LlvmPackage.INVOKE__TO:
 				return to != null;
 			case LlvmPackage.INVOKE__UNWIND:
 				return unwind != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (pList: ");
-		result.append(pList);
-		result.append(')');
-		return result.toString();
 	}
 
 } //InvokeImpl
