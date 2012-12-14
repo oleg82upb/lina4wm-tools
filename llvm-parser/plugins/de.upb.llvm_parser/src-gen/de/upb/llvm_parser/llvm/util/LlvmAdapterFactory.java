@@ -88,6 +88,22 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 				return createFunctionHeaderAdapter();
 			}
 			@Override
+			public Adapter caseParameterList(ParameterList object) {
+				return createParameterListAdapter();
+			}
+			@Override
+			public Adapter caseFunctionBody(FunctionBody object) {
+				return createFunctionBodyAdapter();
+			}
+			@Override
+			public Adapter caseBasicBlock(BasicBlock object) {
+				return createBasicBlockAdapter();
+			}
+			@Override
+			public Adapter caseRet_Instr(Ret_Instr object) {
+				return createRet_InstrAdapter();
+			}
+			@Override
 			public Adapter caseTypeList(TypeList object) {
 				return createTypeListAdapter();
 			}
@@ -96,8 +112,12 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 				return createAggregateAdapter();
 			}
 			@Override
-			public Adapter caseLocalVar(LocalVar object) {
-				return createLocalVarAdapter();
+			public Adapter caseLocalVarInstruction(LocalVarInstruction object) {
+				return createLocalVarInstructionAdapter();
+			}
+			@Override
+			public Adapter caseInstruction(Instruction object) {
+				return createInstructionAdapter();
 			}
 			@Override
 			public Adapter caseAlias(Alias object) {
@@ -200,10 +220,6 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 				return createLOGICAL_OPAdapter();
 			}
 			@Override
-			public Adapter caseInstruction(Instruction object) {
-				return createInstructionAdapter();
-			}
-			@Override
 			public Adapter caseIndirectBranch(IndirectBranch object) {
 				return createIndirectBranchAdapter();
 			}
@@ -238,18 +254,6 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseBranch(Branch object) {
 				return createBranchAdapter();
-			}
-			@Override
-			public Adapter caseFunctionBody(FunctionBody object) {
-				return createFunctionBodyAdapter();
-			}
-			@Override
-			public Adapter caseBasicBlock(BasicBlock object) {
-				return createBasicBlockAdapter();
-			}
-			@Override
-			public Adapter caseRet_Instr(Ret_Instr object) {
-				return createRet_InstrAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -342,6 +346,62 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ParameterList <em>Parameter List</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.llvm_parser.llvm.ParameterList
+	 * @generated
+	 */
+	public Adapter createParameterListAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.FunctionBody <em>Function Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.llvm_parser.llvm.FunctionBody
+	 * @generated
+	 */
+	public Adapter createFunctionBodyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.BasicBlock <em>Basic Block</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.llvm_parser.llvm.BasicBlock
+	 * @generated
+	 */
+	public Adapter createBasicBlockAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Ret_Instr <em>Ret Instr</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.llvm_parser.llvm.Ret_Instr
+	 * @generated
+	 */
+	public Adapter createRet_InstrAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.TypeList <em>Type List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -370,16 +430,30 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.LocalVar <em>Local Var</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.LocalVarInstruction <em>Local Var Instruction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.LocalVar
+	 * @see de.upb.llvm_parser.llvm.LocalVarInstruction
 	 * @generated
 	 */
-	public Adapter createLocalVarAdapter() {
+	public Adapter createLocalVarInstructionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Instruction <em>Instruction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.llvm_parser.llvm.Instruction
+	 * @generated
+	 */
+	public Adapter createInstructionAdapter() {
 		return null;
 	}
 
@@ -734,20 +808,6 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Instruction <em>Instruction</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Instruction
-	 * @generated
-	 */
-	public Adapter createInstructionAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.IndirectBranch <em>Indirect Branch</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -870,48 +930,6 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBranchAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.FunctionBody <em>Function Body</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.FunctionBody
-	 * @generated
-	 */
-	public Adapter createFunctionBodyAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.BasicBlock <em>Basic Block</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.BasicBlock
-	 * @generated
-	 */
-	public Adapter createBasicBlockAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Ret_Instr <em>Ret Instr</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Ret_Instr
-	 * @generated
-	 */
-	public Adapter createRet_InstrAdapter() {
 		return null;
 	}
 

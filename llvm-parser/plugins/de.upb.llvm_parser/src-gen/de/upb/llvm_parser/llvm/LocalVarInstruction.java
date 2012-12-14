@@ -5,23 +5,23 @@ package de.upb.llvm_parser.llvm;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Local Var</b></em>'.
+ * A representation of the model object '<em><b>Local Var Instruction</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.LocalVar#getType <em>Type</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.LocalVar#getInstr <em>Instr</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.LocalVar#getAlias <em>Alias</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.LocalVarInstruction#getType <em>Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.LocalVarInstruction#getInstr <em>Instr</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.LocalVarInstruction#getAlias <em>Alias</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.upb.llvm_parser.llvm.LlvmPackage#getLocalVar()
+ * @see de.upb.llvm_parser.llvm.LlvmPackage#getLocalVarInstruction()
  * @model
  * @generated
  */
-public interface LocalVar extends MainLevelEntity, Instruction {
+public interface LocalVarInstruction extends MainLevelEntity {
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -32,14 +32,14 @@ public interface LocalVar extends MainLevelEntity, Instruction {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' attribute.
 	 * @see #setType(String)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLocalVar_Type()
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLocalVarInstruction_Type()
 	 * @model
 	 * @generated
 	 */
 	String getType();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.LocalVar#getType <em>Type</em>}' attribute.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.LocalVarInstruction#getType <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Type</em>' attribute.
@@ -58,14 +58,14 @@ public interface LocalVar extends MainLevelEntity, Instruction {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Instr</em>' containment reference.
 	 * @see #setInstr(Instruction)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLocalVar_Instr()
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLocalVarInstruction_Instr()
 	 * @model containment="true"
 	 * @generated
 	 */
 	Instruction getInstr();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.LocalVar#getInstr <em>Instr</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.LocalVarInstruction#getInstr <em>Instr</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Instr</em>' containment reference.
@@ -84,14 +84,14 @@ public interface LocalVar extends MainLevelEntity, Instruction {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Alias</em>' containment reference.
 	 * @see #setAlias(Alias)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLocalVar_Alias()
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLocalVarInstruction_Alias()
 	 * @model containment="true"
 	 * @generated
 	 */
 	Alias getAlias();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.LocalVar#getAlias <em>Alias</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.LocalVarInstruction#getAlias <em>Alias</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Alias</em>' containment reference.
@@ -100,4 +100,4 @@ public interface LocalVar extends MainLevelEntity, Instruction {
 	 */
 	void setAlias(Alias value);
 
-} // LocalVar
+} // LocalVarInstruction

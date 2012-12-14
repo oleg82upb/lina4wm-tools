@@ -3,7 +3,7 @@
 package de.upb.llvm_parser.llvm.tests;
 
 import de.upb.llvm_parser.llvm.LlvmFactory;
-import de.upb.llvm_parser.llvm.ValuePair;
+import de.upb.llvm_parser.llvm.ParameterList;
 
 import junit.framework.TestCase;
 
@@ -11,11 +11,19 @@ import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>Value Pair</b></em>'.
+ * A test case for the model object '<em><b>Parameter List</b></em>'.
  * <!-- end-user-doc -->
  * @generated
  */
-public class ValuePairTest extends CompareTest {
+public class ParameterListTest extends TestCase {
+
+	/**
+	 * The fixture for this Parameter List test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ParameterList fixture = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -23,28 +31,37 @@ public class ValuePairTest extends CompareTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-		TestRunner.run(ValuePairTest.class);
+		TestRunner.run(ParameterListTest.class);
 	}
 
 	/**
-	 * Constructs a new Value Pair test case with the given name.
+	 * Constructs a new Parameter List test case with the given name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ValuePairTest(String name) {
+	public ParameterListTest(String name) {
 		super(name);
 	}
 
 	/**
-	 * Returns the fixture for this Value Pair test case.
+	 * Sets the fixture for this Parameter List test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	protected ValuePair getFixture() {
-		return (ValuePair)fixture;
+	protected void setFixture(ParameterList fixture) {
+		this.fixture = fixture;
+	}
+
+	/**
+	 * Returns the fixture for this Parameter List test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ParameterList getFixture() {
+		return fixture;
 	}
 
 	/**
@@ -55,7 +72,7 @@ public class ValuePairTest extends CompareTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-		setFixture(LlvmFactory.eINSTANCE.createValuePair());
+		setFixture(LlvmFactory.eINSTANCE.createParameterList());
 	}
 
 	/**
@@ -69,4 +86,4 @@ public class ValuePairTest extends CompareTest {
 		setFixture(null);
 	}
 
-} //ValuePairTest
+} //ParameterListTest

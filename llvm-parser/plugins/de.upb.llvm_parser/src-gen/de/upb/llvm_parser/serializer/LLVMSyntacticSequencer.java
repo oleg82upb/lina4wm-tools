@@ -28,7 +28,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_Alloc___CommaKeyword_3_0_ALIGNMENTParserRuleCall_3_1__q;
 	protected AbstractElementAlias match_AtomicRMW_SinglethreadKeyword_6_q;
 	protected AbstractElementAlias match_AtomicRMW_VolatileKeyword_1_q;
-	protected AbstractElementAlias match_BasicBlock___NOBRACKETTerminalRuleCall_0_1_ColonKeyword_0_2__q;
 	protected AbstractElementAlias match_Call_CallingConvParserRuleCall_2_q;
 	protected AbstractElementAlias match_Call_FUNCTION_ATTRIBUTESParserRuleCall_6_a;
 	protected AbstractElementAlias match_Call_RETURN_ATTRIBUTESParserRuleCall_3_q;
@@ -85,7 +84,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_Alloc___CommaKeyword_3_0_ALIGNMENTParserRuleCall_3_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getAllocAccess().getCommaKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getAllocAccess().getALIGNMENTParserRuleCall_3_1()));
 		match_AtomicRMW_SinglethreadKeyword_6_q = new TokenAlias(false, true, grammarAccess.getAtomicRMWAccess().getSinglethreadKeyword_6());
 		match_AtomicRMW_VolatileKeyword_1_q = new TokenAlias(false, true, grammarAccess.getAtomicRMWAccess().getVolatileKeyword_1());
-		match_BasicBlock___NOBRACKETTerminalRuleCall_0_1_ColonKeyword_0_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getBasicBlockAccess().getNOBRACKETTerminalRuleCall_0_1()), new TokenAlias(false, false, grammarAccess.getBasicBlockAccess().getColonKeyword_0_2()));
 		match_Call_CallingConvParserRuleCall_2_q = new TokenAlias(false, true, grammarAccess.getCallAccess().getCallingConvParserRuleCall_2());
 		match_Call_FUNCTION_ATTRIBUTESParserRuleCall_6_a = new TokenAlias(true, true, grammarAccess.getCallAccess().getFUNCTION_ATTRIBUTESParserRuleCall_6());
 		match_Call_RETURN_ATTRIBUTESParserRuleCall_3_q = new TokenAlias(false, true, grammarAccess.getCallAccess().getRETURN_ATTRIBUTESParserRuleCall_3());
@@ -155,8 +153,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 			return getLINKAGEToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getMetadataValueRule())
 			return getMetadataValueToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getNOBRACKETRule())
-			return getNOBRACKETToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getRETURN_ATTRIBUTESRule())
 			return getRETURN_ATTRIBUTESToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getSL_COMMENTRule())
@@ -282,27 +278,19 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * MetadataValue:
-	 * 	(('!' INT) | ('!{' NOBRACKET '}') | ("!" NOBRACKET))
-	 * 	('='
-	 * 	(('!' INT) |
-	 * 	('!{' NOBRACKET '}') |
-	 * 	("!" NOBRACKET) |
-	 * 	'metadata' (('!' '{' | '!{') 'metadata' '!' STRING ',' ('metadata' '!' INT | BASIC_TYPE) '}')?))?;
+	 * 	(('!' INT )| ('!{' NOBRACKET '}') | ("!" NOBRACKET)) 
+	 * 	('=' 
+	 * 		(('!' INT) | 
+	 * 		 ('!{' NOBRACKET '}') |
+	 * 		 ("!" NOBRACKET) |
+	 * 		 'metadata'(('!''{'|'!{')'metadata''!'STRING','('metadata''!'INT|BASIC_TYPE)'}')?
+	 * 		)
+	 * 	)?;
 	 */
 	protected String getMetadataValueToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "!";
-	}
-	
-	/**
-	 * terminal NOBRACKET:
-	 * 	(('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')* POINT?);
-	 */
-	protected String getNOBRACKETToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "";
 	}
 	
 	/**
@@ -339,7 +327,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Type:
-	 * 	(StructType | VAR_TYPE | B_TYPE) RETURN_ATTRIBUTES?;
+	 * 	(StructType | VAR_TYPE | B_TYPE)RETURN_ATTRIBUTES?;
 	 */
 	protected String getTypeToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
@@ -349,7 +337,8 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * terminal VAR_TYPE:
-	 * 	(PREFIX_CHAR VAR_ID | ('(' VAR_TYPE')''*'*)) ('.' (BRACKETS | VAR_ID))*;
+	 * 	(((('%' | '@')'.'*) (NOBRACKET | '(' NOBRACKET ')' | INT) '*'*) | '('+ (('%' | '@')'.'*) (NOBRACKET | '(' NOBRACKET ')' | '%'
+	 * 	INT) '*'* ')'+ '*'*);
 	 */
 	protected String getVAR_TYPEToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
@@ -391,8 +380,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_AtomicRMW_SinglethreadKeyword_6_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_AtomicRMW_VolatileKeyword_1_q.equals(syntax))
 				emit_AtomicRMW_VolatileKeyword_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_BasicBlock___NOBRACKETTerminalRuleCall_0_1_ColonKeyword_0_2__q.equals(syntax))
-				emit_BasicBlock___NOBRACKETTerminalRuleCall_0_1_ColonKeyword_0_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_Call_CallingConvParserRuleCall_2_q.equals(syntax))
 				emit_Call_CallingConvParserRuleCall_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_Call_FUNCTION_ATTRIBUTESParserRuleCall_6_a.equals(syntax))
@@ -486,18 +473,18 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * Syntax:
 	 *     (
-	     'fadd' | 
 	     'fsub' | 
-	     'add' | 
-	     'sdiv' | 
-	     'fdiv' | 
+	     'srem' | 
 	     'udiv' | 
+	     'sub' | 
+	     'add' | 
+	     'fdiv' | 
+	     'sdiv' | 
 	     'frem' | 
 	     'fmul' | 
-	     'sub' | 
-	     'srem' | 
-	     'mul' | 
-	     'urem'
+	     'fadd' | 
+	     'urem' | 
+	     'mul'
 	 )
 	 */
 	protected void emit_ARITHMETIC_OP_AddKeyword_0_0_or_FaddKeyword_0_1_or_FdivKeyword_0_8_or_FmulKeyword_0_5_or_FremKeyword_0_11_or_FsubKeyword_0_3_or_MulKeyword_0_4_or_SdivKeyword_0_7_or_SremKeyword_0_10_or_SubKeyword_0_2_or_UdivKeyword_0_6_or_UremKeyword_0_9(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -510,35 +497,35 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	     (
 	         (
 	             (
-	                 'fadd' | 
-	                 'fsub' | 
-	                 'add' | 
-	                 'fdiv' | 
-	                 'sdiv' | 
-	                 'udiv' | 
-	                 'fmul' | 
-	                 'frem' | 
-	                 'sub' | 
-	                 'srem' | 
-	                 'mul' | 
-	                 'urem'
+	                 'shl' | 
+	                 'xor' | 
+	                 'lshr' | 
+	                 'or' | 
+	                 'ashr' | 
+	                 'and'
 	             ) 
 	             Type
 	         ) | 
 	         (
 	             (
-	                 'or' | 
-	                 'and' | 
-	                 'ashr' | 
-	                 'shl' | 
-	                 'xor' | 
-	                 'lshr'
+	                 'fsub' | 
+	                 'srem' | 
+	                 'udiv' | 
+	                 'sub' | 
+	                 'add' | 
+	                 'fdiv' | 
+	                 'sdiv' | 
+	                 'frem' | 
+	                 'fmul' | 
+	                 'fadd' | 
+	                 'mul' | 
+	                 'urem'
 	             ) 
 	             Type
 	         )
 	     ) | 
-	     ('icmp' I_PREDICATES Type) | 
-	     ('fcmp' F_PREDICATES Type)
+	     ('fcmp' F_PREDICATES Type) | 
+	     ('icmp' I_PREDICATES Type)
 	 )
 	 */
 	protected void emit_ARITHMETIC_OP_Compare_LOGICAL_OP___FcmpKeyword_1_0_F_PREDICATESParserRuleCall_1_1_TypeParserRuleCall_1_2___or___IcmpKeyword_0_0_I_PREDICATESParserRuleCall_0_1_TypeParserRuleCall_0_2___or_______AddKeyword_0_0_or_FaddKeyword_0_1_or_FdivKeyword_0_8_or_FmulKeyword_0_5_or_FremKeyword_0_11_or_FsubKeyword_0_3_or_MulKeyword_0_4_or_SdivKeyword_0_7_or_SremKeyword_0_10_or_SubKeyword_0_2_or_UdivKeyword_0_6_or_UremKeyword_0_9___TypeParserRuleCall_1___or_____AndKeyword_0_3_or_AshrKeyword_0_2_or_LshrKeyword_0_1_or_OrKeyword_0_4_or_ShlKeyword_0_0_or_XorKeyword_0_5___TypeParserRuleCall_1____(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -603,14 +590,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     (NOBRACKET ':')?
-	 */
-	protected void emit_BasicBlock___NOBRACKETTerminalRuleCall_0_1_ColonKeyword_0_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Syntax:
 	 *     CallingConv?
 	 */
 	protected void emit_Call_CallingConvParserRuleCall_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -659,7 +638,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     ('icmp' I_PREDICATES Type) | ('fcmp' F_PREDICATES Type)
+	 *     ('fcmp' F_PREDICATES Type) | ('icmp' I_PREDICATES Type)
 	 */
 	protected void emit_Compare___FcmpKeyword_1_0_F_PREDICATESParserRuleCall_1_1_TypeParserRuleCall_1_2___or___IcmpKeyword_0_0_I_PREDICATESParserRuleCall_0_1_TypeParserRuleCall_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -852,12 +831,12 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * Syntax:
 	 *     (
-	     'or' | 
-	     'and' | 
-	     'ashr' | 
 	     'shl' | 
 	     'xor' | 
-	     'lshr'
+	     'lshr' | 
+	     'or' | 
+	     'ashr' | 
+	     'and'
 	 )
 	 */
 	protected void emit_LOGICAL_OP_AndKeyword_0_3_or_AshrKeyword_0_2_or_LshrKeyword_0_1_or_OrKeyword_0_4_or_ShlKeyword_0_0_or_XorKeyword_0_5(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -890,7 +869,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     (',' (ALIGNMENT | MetadataValue+))*
+	 *     (',' (MetadataValue+ | ALIGNMENT))*
 	 */
 	protected void emit_Load___CommaKeyword_0_3_0___ALIGNMENTParserRuleCall_0_3_1_0_or_MetadataValueParserRuleCall_0_3_1_1_p____a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -938,7 +917,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     (',' (MetadataValue+ | ALIGNMENT))*
+	 *     (',' (ALIGNMENT | MetadataValue+))*
 	 */
 	protected void emit_Store___CommaKeyword_0_5_0___ALIGNMENTParserRuleCall_0_5_1_0_or_MetadataValueParserRuleCall_0_5_1_1_p____a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -946,7 +925,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     'datalayout' | 'triple'
+	 *     'triple' | 'datalayout'
 	 */
 	protected void emit_TopLevelEntity_DatalayoutKeyword_1_1_0_or_TripleKeyword_1_1_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

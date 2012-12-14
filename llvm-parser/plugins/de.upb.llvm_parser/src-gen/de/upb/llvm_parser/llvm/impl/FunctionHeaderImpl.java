@@ -5,6 +5,7 @@ package de.upb.llvm_parser.llvm.impl;
 import de.upb.llvm_parser.llvm.FunctionBody;
 import de.upb.llvm_parser.llvm.FunctionHeader;
 import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.ParameterList;
 import de.upb.llvm_parser.llvm.TypeList;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -53,24 +54,14 @@ public class FunctionHeaderImpl extends MainLevelEntityImpl implements FunctionH
 	protected String returnType = RETURN_TYPE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getPl() <em>Pl</em>}' attribute.
+	 * The cached value of the '{@link #getPl() <em>Pl</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getPl()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String PL_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getPl() <em>Pl</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPl()
-	 * @generated
-	 * @ordered
-	 */
-	protected String pl = PL_EDEFAULT;
+	protected ParameterList pl;
 
 	/**
 	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
@@ -137,7 +128,7 @@ public class FunctionHeaderImpl extends MainLevelEntityImpl implements FunctionH
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getPl() {
+	public ParameterList getPl() {
 		return pl;
 	}
 
@@ -146,11 +137,33 @@ public class FunctionHeaderImpl extends MainLevelEntityImpl implements FunctionH
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPl(String newPl) {
-		String oldPl = pl;
+	public NotificationChain basicSetPl(ParameterList newPl, NotificationChain msgs) {
+		ParameterList oldPl = pl;
 		pl = newPl;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.FUNCTION_HEADER__PL, oldPl, pl));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.FUNCTION_HEADER__PL, oldPl, newPl);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPl(ParameterList newPl) {
+		if (newPl != pl) {
+			NotificationChain msgs = null;
+			if (pl != null)
+				msgs = ((InternalEObject)pl).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.FUNCTION_HEADER__PL, null, msgs);
+			if (newPl != null)
+				msgs = ((InternalEObject)newPl).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.FUNCTION_HEADER__PL, null, msgs);
+			msgs = basicSetPl(newPl, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.FUNCTION_HEADER__PL, newPl, newPl));
 	}
 
 	/**
@@ -247,6 +260,8 @@ public class FunctionHeaderImpl extends MainLevelEntityImpl implements FunctionH
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case LlvmPackage.FUNCTION_HEADER__PL:
+				return basicSetPl(null, msgs);
 			case LlvmPackage.FUNCTION_HEADER__BODY:
 				return basicSetBody(null, msgs);
 			case LlvmPackage.FUNCTION_HEADER__TLIST:
@@ -287,7 +302,7 @@ public class FunctionHeaderImpl extends MainLevelEntityImpl implements FunctionH
 				setReturnType((String)newValue);
 				return;
 			case LlvmPackage.FUNCTION_HEADER__PL:
-				setPl((String)newValue);
+				setPl((ParameterList)newValue);
 				return;
 			case LlvmPackage.FUNCTION_HEADER__BODY:
 				setBody((FunctionBody)newValue);
@@ -311,7 +326,7 @@ public class FunctionHeaderImpl extends MainLevelEntityImpl implements FunctionH
 				setReturnType(RETURN_TYPE_EDEFAULT);
 				return;
 			case LlvmPackage.FUNCTION_HEADER__PL:
-				setPl(PL_EDEFAULT);
+				setPl((ParameterList)null);
 				return;
 			case LlvmPackage.FUNCTION_HEADER__BODY:
 				setBody((FunctionBody)null);
@@ -334,7 +349,7 @@ public class FunctionHeaderImpl extends MainLevelEntityImpl implements FunctionH
 			case LlvmPackage.FUNCTION_HEADER__RETURN_TYPE:
 				return RETURN_TYPE_EDEFAULT == null ? returnType != null : !RETURN_TYPE_EDEFAULT.equals(returnType);
 			case LlvmPackage.FUNCTION_HEADER__PL:
-				return PL_EDEFAULT == null ? pl != null : !PL_EDEFAULT.equals(pl);
+				return pl != null;
 			case LlvmPackage.FUNCTION_HEADER__BODY:
 				return body != null;
 			case LlvmPackage.FUNCTION_HEADER__TLIST:
@@ -355,8 +370,6 @@ public class FunctionHeaderImpl extends MainLevelEntityImpl implements FunctionH
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (returnType: ");
 		result.append(returnType);
-		result.append(", pl: ");
-		result.append(pl);
 		result.append(')');
 		return result.toString();
 	}

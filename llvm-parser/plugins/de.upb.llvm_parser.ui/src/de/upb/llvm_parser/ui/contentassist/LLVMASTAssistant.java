@@ -96,8 +96,10 @@ public class LLVMASTAssistant extends LLVMParser implements
 	public void saveAstUtil(IFile llvmFile, IWorkbenchWindow window) {
 		/* Dialog for target file location */
 		SaveAsDialog sad = new SaveAsDialog(window.getShell());
-		sad.setOriginalName(llvmFile.getName());
+		sad.setOriginalName(llvmFile.getName()+".llvm");
 		sad.open();
+		if(sad.getResult()==null)
+			return;
 		String location = sad.getResult().toOSString();
 
 		/* Prepare file for parser */

@@ -28,8 +28,9 @@ import de.upb.llvm_parser.llvm.LabelList;
 import de.upb.llvm_parser.llvm.LandingPad;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Load;
-import de.upb.llvm_parser.llvm.LocalVar;
+import de.upb.llvm_parser.llvm.LocalVarInstruction;
 import de.upb.llvm_parser.llvm.PHI;
+import de.upb.llvm_parser.llvm.ParameterList;
 import de.upb.llvm_parser.llvm.Return;
 import de.upb.llvm_parser.llvm.Select;
 import de.upb.llvm_parser.llvm.ShuffleVector;
@@ -230,12 +231,11 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 					return; 
 				}
 				else break;
-			case LlvmPackage.LOCAL_VAR:
+			case LlvmPackage.LOCAL_VAR_INSTRUCTION:
 				if(context == grammarAccess.getAbstractElementRule() ||
-				   context == grammarAccess.getInstructionRule() ||
-				   context == grammarAccess.getLocalVarRule() ||
+				   context == grammarAccess.getLocalVarInstructionRule() ||
 				   context == grammarAccess.getMainLevelEntityRule()) {
-					sequence_LocalVar(context, (LocalVar) semanticObject); 
+					sequence_LocalVarInstruction(context, (LocalVarInstruction) semanticObject); 
 					return; 
 				}
 				else break;
@@ -243,6 +243,12 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				if(context == grammarAccess.getInstructionRule() ||
 				   context == grammarAccess.getPHIRule()) {
 					sequence_PHI(context, (PHI) semanticObject); 
+					return; 
+				}
+				else break;
+			case LlvmPackage.PARAMETER_LIST:
+				if(context == grammarAccess.getParameterListRule()) {
+					sequence_ParameterList(context, (ParameterList) semanticObject); 
 					return; 
 				}
 				else break;
@@ -392,7 +398,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (label=DOTS? instructions+=Instruction* terminator=Ret_Instr)
+	 *     (label=NOBRACKET? (instructions+=LocalVarInstruction | instructions+=Instruction)* terminator=Ret_Instr)
 	 */
 	protected void sequence_BasicBlock(EObject context, BasicBlock semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -675,7 +681,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 * Constraint:
 	 *     (name=Type (type=Type | instr=Instruction | alias=Alias))
 	 */
-	protected void sequence_LocalVar(EObject context, LocalVar semanticObject) {
+	protected void sequence_LocalVarInstruction(EObject context, LocalVarInstruction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -685,6 +691,15 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     (values+=ValuePair values+=ValuePair*)
 	 */
 	protected void sequence_PHI(EObject context, PHI semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ((params+=TypeAndValue params+=TypeAndValue*)?)
+	 */
+	protected void sequence_ParameterList(EObject context, ParameterList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

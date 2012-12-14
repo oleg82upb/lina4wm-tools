@@ -3,7 +3,6 @@
 package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.BasicBlock;
-import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Ret_Instr;
 
@@ -15,6 +14,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -67,7 +67,7 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Instruction> instructions;
+	protected EList<EObject> instructions;
 
 	/**
 	 * The cached value of the '{@link #getTerminator() <em>Terminator</em>}' containment reference.
@@ -124,9 +124,9 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Instruction> getInstructions() {
+	public EList<EObject> getInstructions() {
 		if (instructions == null) {
-			instructions = new EObjectContainmentEList<Instruction>(Instruction.class, this, LlvmPackage.BASIC_BLOCK__INSTRUCTIONS);
+			instructions = new EObjectContainmentEList<EObject>(EObject.class, this, LlvmPackage.BASIC_BLOCK__INSTRUCTIONS);
 		}
 		return instructions;
 	}
@@ -222,7 +222,7 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
 				return;
 			case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
 				getInstructions().clear();
-				getInstructions().addAll((Collection<? extends Instruction>)newValue);
+				getInstructions().addAll((Collection<? extends EObject>)newValue);
 				return;
 			case LlvmPackage.BASIC_BLOCK__TERMINATOR:
 				setTerminator((Ret_Instr)newValue);

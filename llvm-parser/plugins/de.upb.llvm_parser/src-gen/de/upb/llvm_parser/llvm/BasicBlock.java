@@ -53,7 +53,7 @@ public interface BasicBlock extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Instructions</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.Instruction}.
+	 * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Instructions</em>' containment reference list isn't clear,
@@ -65,7 +65,7 @@ public interface BasicBlock extends EObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Instruction> getInstructions();
+	EList<EObject> getInstructions();
 
 	/**
 	 * Returns the value of the '<em><b>Terminator</b></em>' containment reference.

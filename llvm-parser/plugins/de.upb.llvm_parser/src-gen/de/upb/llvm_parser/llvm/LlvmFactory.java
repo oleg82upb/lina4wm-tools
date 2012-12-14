@@ -67,6 +67,42 @@ public interface LlvmFactory extends EFactory {
 	FunctionHeader createFunctionHeader();
 
 	/**
+	 * Returns a new object of class '<em>Parameter List</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Parameter List</em>'.
+	 * @generated
+	 */
+	ParameterList createParameterList();
+
+	/**
+	 * Returns a new object of class '<em>Function Body</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Function Body</em>'.
+	 * @generated
+	 */
+	FunctionBody createFunctionBody();
+
+	/**
+	 * Returns a new object of class '<em>Basic Block</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Basic Block</em>'.
+	 * @generated
+	 */
+	BasicBlock createBasicBlock();
+
+	/**
+	 * Returns a new object of class '<em>Ret Instr</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Ret Instr</em>'.
+	 * @generated
+	 */
+	Ret_Instr createRet_Instr();
+
+	/**
 	 * Returns a new object of class '<em>Type List</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -85,13 +121,22 @@ public interface LlvmFactory extends EFactory {
 	Aggregate createAggregate();
 
 	/**
-	 * Returns a new object of class '<em>Local Var</em>'.
+	 * Returns a new object of class '<em>Local Var Instruction</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Local Var</em>'.
+	 * @return a new object of class '<em>Local Var Instruction</em>'.
 	 * @generated
 	 */
-	LocalVar createLocalVar();
+	LocalVarInstruction createLocalVarInstruction();
+
+	/**
+	 * Returns a new object of class '<em>Instruction</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Instruction</em>'.
+	 * @generated
+	 */
+	Instruction createInstruction();
 
 	/**
 	 * Returns a new object of class '<em>Alias</em>'.
@@ -319,15 +364,6 @@ public interface LlvmFactory extends EFactory {
 	LOGICAL_OP createLOGICAL_OP();
 
 	/**
-	 * Returns a new object of class '<em>Instruction</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Instruction</em>'.
-	 * @generated
-	 */
-	Instruction createInstruction();
-
-	/**
 	 * Returns a new object of class '<em>Indirect Branch</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -407,33 +443,6 @@ public interface LlvmFactory extends EFactory {
 	 * @generated
 	 */
 	Branch createBranch();
-
-	/**
-	 * Returns a new object of class '<em>Function Body</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Function Body</em>'.
-	 * @generated
-	 */
-	FunctionBody createFunctionBody();
-
-	/**
-	 * Returns a new object of class '<em>Basic Block</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Basic Block</em>'.
-	 * @generated
-	 */
-	BasicBlock createBasicBlock();
-
-	/**
-	 * Returns a new object of class '<em>Ret Instr</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Ret Instr</em>'.
-	 * @generated
-	 */
-	Ret_Instr createRet_Instr();
 
 	/**
 	 * Returns the package supported by this factory.
