@@ -9,19 +9,15 @@
 #define ADRESSE_Y 2
 #define BUFF_SIZE 4 	//size of Buffer
 #define MEM_SIZE 4		//size of memory 
-#include "x86_tso_buffer.pml"
+#include "sc-model.pml"
 
 
-/*Channel der die reads und writes verschickt (Type (also write,read); Adresse; Wert;... )*/
-chan channelT1 = [0] of {mtype, short, short, short};
-chan channelT2 = [0] of {mtype, short, short, short};
-chan channelT3 = [0] of {mtype, short, short, short};
 short r1 = 0;
 short r2 = 0;
 short r3 = 0;
 
 
-proctype process1(chan ch)
+proctype process1()
 {
 
 	write(ADRESSE_X, 2);
@@ -29,13 +25,13 @@ proctype process1(chan ch)
 	done:skip;
 }
 
-proctype process2(chan ch)
+proctype process2()
 {
 	write(ADRESSE_Y, 1);
 	write(ADRESSE_X, 1);
 	done:skip;
 }
-proctype process3(chan ch)
+proctype process3()
 {
 	read(ADRESSE_X, r2);
 	read(ADRESSE_X, r3);
@@ -45,12 +41,9 @@ proctype process3(chan ch)
 init
 {
 atomic{
-	run process1(channelT1);
-	run process2(channelT2);
-	run process3(channelT3);
-	run bufferProcess(channelT1);
-	run bufferProcess(channelT2);
-	run bufferProcess(channelT3);
+	run process1();
+	run process2();
+	run process3();
 	}	
 }
 	

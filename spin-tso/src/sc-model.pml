@@ -2,7 +2,7 @@
 #define NULL -1
 
 /*Array welches die  Queue darstellt (Form: 3-dimensionales Array der Laenge SIZE) das heißt (nx3)-Matrix*/
-typedef matrix{short zeile [3]}
+typedef matrix{short line [3]}
 /*Speicher*/
 short memory[MEM_SIZE];
 
