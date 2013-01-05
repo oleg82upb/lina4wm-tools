@@ -55,6 +55,25 @@ atomic{
 }
 	
 
-	/*(r1 == 0) && (r2 == 1) && (r3 == 2) ok (allowed)*/
+/*(r1 == 0) && (r2 == 1) && (r3 == 2) ok (allowed)*/
 
-ltl check_0{ [] ((process1 @ done && process2 @ done && process3 @ done) -> (!(r1 == 0 && r2 == 1 && r3 == 2)))};
+ltl check_0 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 == 1) && (r3 == 2))))};
+
+ltl check_1 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 1) && (r2 == 0) && (r3 == 0))))};
+ltl check_2 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 1) && (r2 == 0) && (r3 == 1))))};
+ltl check_3 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 1) && (r2 == 1) && (r3 == 0))))};
+ltl check_4 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 1) && (r2 == 1) && (r3 == 1))))};
+ltl check_5 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 == 0) && (r3 == 0))))};
+ltl check_6 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 == 0) && (r3 == 1))))};
+ltl check_7 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 == 1) && (r3 == 0))))};
+ltl check_8 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 == 1) && (r3 == 1))))};
+
+ltl check_9 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 == 2) && (r3 == 1))))};
+ltl check_10 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 == 0) && (r3 == 2))))};
+ltl check_11 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 == 2) && (r3 == 0))))};
+ltl check_12 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 == 2) && (r3 == 2))))};
+ltl check_13 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 == 2) && (r3 == 1))))};
+ltl check_14 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 1) && (r2 == 1) && (r3 == 2))))};
+ltl check_15 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 1) && (r2 == 0) && (r3 == 2))))};
+ltl check_16 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 1) && (r2 == 2) && (r3 == 0))))};
+ltl check_17 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 1) && (r2 == 2) && (r3 == 2))))};

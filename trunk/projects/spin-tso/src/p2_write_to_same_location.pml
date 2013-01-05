@@ -31,7 +31,7 @@ proctype process1(chan ch)
 
 proctype process2(chan ch)
 {
-	write(ADRESSE_X, 1);
+	write(ADRESSE_X, 2);
 	done: skip;
 }
 
@@ -60,6 +60,6 @@ init {
 	run bufferProcess(channelT4);
 	}
 }
-	/* (r1 == 1) && (r2 == 0) && (r3 == 1) && (r4 == 0)	-> not allowed */
+	/* (r1 == 1) && (r2 == 2) && (r3 == 2) && (r4 == 1)	-> not allowed */
 ltl check { [] ((process1 @ done && process2 @ done && process3 @ done && process4 @ done)
 			-> !(r1 == 1 && r2 == 2 && r3 == 2 && r4 == 1))};

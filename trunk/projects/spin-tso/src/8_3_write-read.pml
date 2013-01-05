@@ -11,7 +11,7 @@
 #define BUFF_SIZE 4 	//size of Buffer
 #define MEM_SIZE 4		//size of memory 
 #include "x86_tso_buffer.pml"
-//#include "sc-model.pml"
+//#include "x86_tso_buffer.pml"
 
 
 /*channel who send the reads and writes: (messagetype, address, value, extra)*/
@@ -52,8 +52,8 @@ atomic{
 	*(r1 == 0) && (r2 == 0) ok (allowed)*/
 
 ltl check_0{ [] ((process1 @ done && process2 @ done) -> (!(r1 == 0 && r2 == 0)))};
-ltl check_1{ [] ((process1 @ done && process2 @ done) -> (!(r1 == 1 && r2 == 0)))};
 
+ltl check_1{ [] ((process1 @ done && process2 @ done) -> (!(r1 == 1 && r2 == 0)))};
 ltl check_2{ [] ((process1 @ done && process2 @ done) -> (!(r1 == 0 && r2 == 1)))}; 
 ltl check_3{ [] ((process1 @ done && process2 @ done) -> (!(r1 == 1 && r2 == 1)))};
  

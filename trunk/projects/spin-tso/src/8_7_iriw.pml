@@ -59,7 +59,21 @@ init {
 	}
 }
 	/* (r1 == 1) && (r2 == 0) && (r3 == 1) && (r4 == 0)	-> not allowed */
+ltl check_0 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 1 && r2 == 0 && r3 == 1 && r4 == 0)))};
 	
-ltl check_0 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 1 && r3 == 1 && r2 == 0 && r4 == 0)))}; 
-ltl check_1 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 0 && r3 == 0 && r2 == 0 && r4 == 0)))};
- 
+ltl check_1 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 1 && r2 == 0 && r3 == 0 && r4 == 0)))}; 
+ltl check_2 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 1 && r2 == 0 && r3 == 0 && r4 == 1)))};
+
+ltl check_3 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 1 && r2 == 1 && r3 == 0 && r4 == 0)))};
+ltl check_4 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 1 && r2 == 0 && r3 == 1 && r4 == 1)))};
+ltl check_5 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 1 && r2 == 1 && r3 == 1 && r4 == 0)))};
+ltl check_6 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 1 && r2 == 1 && r3 == 0 && r4 == 1)))};
+ltl check_7 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 1 && r2 == 1 && r3 == 1 && r4 == 1)))};
+ltl check_8 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 0 && r2 == 0 && r3 == 0 && r4 == 0)))};
+ltl check_9 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 0 && r2 == 0 && r3 == 0 && r4 == 1)))};
+ltl check_10 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 0 && r2 == 0 && r3 == 1 && r4 == 0)))};
+ltl check_11 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 0 && r2 == 1 && r3 == 0 && r4 == 0)))};
+ltl check_12 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 0 && r2 == 0 && r3 == 1 && r4 == 1)))};
+ltl check_13 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 0 && r2 == 1 && r3 == 1 && r4 == 0)))};
+ltl check_14 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 0 && r2 == 1 && r3 == 0 && r4 == 1)))};
+ltl check_15 { [] ((process3 @ done && process4 @ done) ->( ! (r1 == 0 && r2 == 1 && r3 == 1 && r4 == 1)))};
