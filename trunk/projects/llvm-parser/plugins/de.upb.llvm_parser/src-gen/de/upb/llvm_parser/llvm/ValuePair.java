@@ -2,6 +2,7 @@
  */
 package de.upb.llvm_parser.llvm;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,7 +21,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface ValuePair extends Compare, ARITHMETIC_OP, LOGICAL_OP {
+public interface ValuePair extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Value1</b></em>' attribute.
 	 * <!-- begin-user-doc -->

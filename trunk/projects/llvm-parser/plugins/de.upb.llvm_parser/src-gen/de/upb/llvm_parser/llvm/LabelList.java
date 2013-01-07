@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link de.upb.llvm_parser.llvm.LabelList#getLabeltype <em>Labeltype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.LabelList#getLabels <em>Labels</em>}</li>
  * </ul>
  * </p>
@@ -24,19 +25,35 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface LabelList extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Labels</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.TypeAndValue}.
+	 * Returns the value of the '<em><b>Labeltype</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Labels</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Labeltype</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Labels</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLabelList_Labels()
-	 * @model containment="true"
+	 * @return the value of the '<em>Labeltype</em>' attribute list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLabelList_Labeltype()
+	 * @model unique="false"
 	 * @generated
 	 */
-	EList<TypeAndValue> getLabels();
+	EList<String> getLabeltype();
+
+	/**
+	 * Returns the value of the '<em><b>Labels</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Labels</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Labels</em>' attribute list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLabelList_Labels()
+	 * @model unique="false"
+	 * @generated
+	 */
+	EList<String> getLabels();
 
 } // LabelList

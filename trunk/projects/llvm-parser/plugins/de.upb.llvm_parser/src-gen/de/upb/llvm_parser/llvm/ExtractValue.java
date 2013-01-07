@@ -12,7 +12,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.ExtractValue#getAggregate <em>Aggregate</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.ExtractValue#getArray <em>Array</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.ExtractValue#getStruct <em>Struct</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.ExtractValue#getType <em>Type</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.ExtractValue#getIndex <em>Index</em>}</li>
  * </ul>
@@ -24,30 +25,56 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface ExtractValue extends Instruction {
 	/**
-	 * Returns the value of the '<em><b>Aggregate</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Array</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Aggregate</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Array</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Aggregate</em>' containment reference.
-	 * @see #setAggregate(Aggregate)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getExtractValue_Aggregate()
+	 * @return the value of the '<em>Array</em>' attribute.
+	 * @see #setArray(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getExtractValue_Array()
+	 * @model
+	 * @generated
+	 */
+	String getArray();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ExtractValue#getArray <em>Array</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Array</em>' attribute.
+	 * @see #getArray()
+	 * @generated
+	 */
+	void setArray(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Struct</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Struct</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Struct</em>' containment reference.
+	 * @see #setStruct(Structure)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getExtractValue_Struct()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Aggregate getAggregate();
+	Structure getStruct();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ExtractValue#getAggregate <em>Aggregate</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ExtractValue#getStruct <em>Struct</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Aggregate</em>' containment reference.
-	 * @see #getAggregate()
+	 * @param value the new value of the '<em>Struct</em>' containment reference.
+	 * @see #getStruct()
 	 * @generated
 	 */
-	void setAggregate(Aggregate value);
+	void setStruct(Structure value);
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.

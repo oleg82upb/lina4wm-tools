@@ -2,9 +2,9 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
-import de.upb.llvm_parser.llvm.Aggregate;
 import de.upb.llvm_parser.llvm.ExtractValue;
 import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.Structure;
 
 import java.util.Collection;
 
@@ -27,7 +27,8 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ExtractValueImpl#getAggregate <em>Aggregate</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.ExtractValueImpl#getArray <em>Array</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.ExtractValueImpl#getStruct <em>Struct</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.ExtractValueImpl#getType <em>Type</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.ExtractValueImpl#getIndex <em>Index</em>}</li>
  * </ul>
@@ -37,14 +38,34 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
  */
 public class ExtractValueImpl extends InstructionImpl implements ExtractValue {
 	/**
-	 * The cached value of the '{@link #getAggregate() <em>Aggregate</em>}' containment reference.
+	 * The default value of the '{@link #getArray() <em>Array</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAggregate()
+	 * @see #getArray()
 	 * @generated
 	 * @ordered
 	 */
-	protected Aggregate aggregate;
+	protected static final String ARRAY_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getArray() <em>Array</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getArray()
+	 * @generated
+	 * @ordered
+	 */
+	protected String array = ARRAY_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getStruct() <em>Struct</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStruct()
+	 * @generated
+	 * @ordered
+	 */
+	protected Structure struct;
 
 	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -100,8 +121,8 @@ public class ExtractValueImpl extends InstructionImpl implements ExtractValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Aggregate getAggregate() {
-		return aggregate;
+	public String getArray() {
+		return array;
 	}
 
 	/**
@@ -109,11 +130,32 @@ public class ExtractValueImpl extends InstructionImpl implements ExtractValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetAggregate(Aggregate newAggregate, NotificationChain msgs) {
-		Aggregate oldAggregate = aggregate;
-		aggregate = newAggregate;
+	public void setArray(String newArray) {
+		String oldArray = array;
+		array = newArray;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.EXTRACT_VALUE__ARRAY, oldArray, array));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Structure getStruct() {
+		return struct;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetStruct(Structure newStruct, NotificationChain msgs) {
+		Structure oldStruct = struct;
+		struct = newStruct;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.EXTRACT_VALUE__AGGREGATE, oldAggregate, newAggregate);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.EXTRACT_VALUE__STRUCT, oldStruct, newStruct);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -124,18 +166,18 @@ public class ExtractValueImpl extends InstructionImpl implements ExtractValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAggregate(Aggregate newAggregate) {
-		if (newAggregate != aggregate) {
+	public void setStruct(Structure newStruct) {
+		if (newStruct != struct) {
 			NotificationChain msgs = null;
-			if (aggregate != null)
-				msgs = ((InternalEObject)aggregate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.EXTRACT_VALUE__AGGREGATE, null, msgs);
-			if (newAggregate != null)
-				msgs = ((InternalEObject)newAggregate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.EXTRACT_VALUE__AGGREGATE, null, msgs);
-			msgs = basicSetAggregate(newAggregate, msgs);
+			if (struct != null)
+				msgs = ((InternalEObject)struct).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.EXTRACT_VALUE__STRUCT, null, msgs);
+			if (newStruct != null)
+				msgs = ((InternalEObject)newStruct).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.EXTRACT_VALUE__STRUCT, null, msgs);
+			msgs = basicSetStruct(newStruct, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.EXTRACT_VALUE__AGGREGATE, newAggregate, newAggregate));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.EXTRACT_VALUE__STRUCT, newStruct, newStruct));
 	}
 
 	/**
@@ -179,8 +221,8 @@ public class ExtractValueImpl extends InstructionImpl implements ExtractValue {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case LlvmPackage.EXTRACT_VALUE__AGGREGATE:
-				return basicSetAggregate(null, msgs);
+			case LlvmPackage.EXTRACT_VALUE__STRUCT:
+				return basicSetStruct(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -193,8 +235,10 @@ public class ExtractValueImpl extends InstructionImpl implements ExtractValue {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case LlvmPackage.EXTRACT_VALUE__AGGREGATE:
-				return getAggregate();
+			case LlvmPackage.EXTRACT_VALUE__ARRAY:
+				return getArray();
+			case LlvmPackage.EXTRACT_VALUE__STRUCT:
+				return getStruct();
 			case LlvmPackage.EXTRACT_VALUE__TYPE:
 				return getType();
 			case LlvmPackage.EXTRACT_VALUE__INDEX:
@@ -212,8 +256,11 @@ public class ExtractValueImpl extends InstructionImpl implements ExtractValue {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case LlvmPackage.EXTRACT_VALUE__AGGREGATE:
-				setAggregate((Aggregate)newValue);
+			case LlvmPackage.EXTRACT_VALUE__ARRAY:
+				setArray((String)newValue);
+				return;
+			case LlvmPackage.EXTRACT_VALUE__STRUCT:
+				setStruct((Structure)newValue);
 				return;
 			case LlvmPackage.EXTRACT_VALUE__TYPE:
 				setType((String)newValue);
@@ -234,8 +281,11 @@ public class ExtractValueImpl extends InstructionImpl implements ExtractValue {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case LlvmPackage.EXTRACT_VALUE__AGGREGATE:
-				setAggregate((Aggregate)null);
+			case LlvmPackage.EXTRACT_VALUE__ARRAY:
+				setArray(ARRAY_EDEFAULT);
+				return;
+			case LlvmPackage.EXTRACT_VALUE__STRUCT:
+				setStruct((Structure)null);
 				return;
 			case LlvmPackage.EXTRACT_VALUE__TYPE:
 				setType(TYPE_EDEFAULT);
@@ -255,8 +305,10 @@ public class ExtractValueImpl extends InstructionImpl implements ExtractValue {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case LlvmPackage.EXTRACT_VALUE__AGGREGATE:
-				return aggregate != null;
+			case LlvmPackage.EXTRACT_VALUE__ARRAY:
+				return ARRAY_EDEFAULT == null ? array != null : !ARRAY_EDEFAULT.equals(array);
+			case LlvmPackage.EXTRACT_VALUE__STRUCT:
+				return struct != null;
 			case LlvmPackage.EXTRACT_VALUE__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 			case LlvmPackage.EXTRACT_VALUE__INDEX:
@@ -275,7 +327,9 @@ public class ExtractValueImpl extends InstructionImpl implements ExtractValue {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (type: ");
+		result.append(" (array: ");
+		result.append(array);
+		result.append(", type: ");
 		result.append(type);
 		result.append(", index: ");
 		result.append(index);

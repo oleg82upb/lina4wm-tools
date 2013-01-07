@@ -5,7 +5,6 @@ package de.upb.llvm_parser.llvm.impl;
 import de.upb.llvm_parser.llvm.JumpTable;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Switch;
-import de.upb.llvm_parser.llvm.TypeAndValue;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -22,8 +21,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getValue <em>Value</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getDefault <em>Default</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getComptype <em>Comptype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getCompvalue <em>Compvalue</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getDefaulttype <em>Defaulttype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getDefaultvalue <em>Defaultvalue</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getJTable <em>JTable</em>}</li>
  * </ul>
  * </p>
@@ -32,24 +33,84 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class SwitchImpl extends Ret_InstrImpl implements Switch {
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
+	 * The default value of the '{@link #getComptype() <em>Comptype</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getComptype()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeAndValue value;
+	protected static final String COMPTYPE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getDefault() <em>Default</em>}' containment reference.
+	 * The cached value of the '{@link #getComptype() <em>Comptype</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDefault()
+	 * @see #getComptype()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeAndValue default_;
+	protected String comptype = COMPTYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getCompvalue() <em>Compvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCompvalue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String COMPVALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getCompvalue() <em>Compvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCompvalue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String compvalue = COMPVALUE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDefaulttype() <em>Defaulttype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaulttype()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DEFAULTTYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDefaulttype() <em>Defaulttype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaulttype()
+	 * @generated
+	 * @ordered
+	 */
+	protected String defaulttype = DEFAULTTYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDefaultvalue() <em>Defaultvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultvalue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DEFAULTVALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDefaultvalue() <em>Defaultvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultvalue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String defaultvalue = DEFAULTVALUE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getJTable() <em>JTable</em>}' containment reference.
@@ -85,8 +146,8 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeAndValue getValue() {
-		return value;
+	public String getComptype() {
+		return comptype;
 	}
 
 	/**
@@ -94,14 +155,11 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValue(TypeAndValue newValue, NotificationChain msgs) {
-		TypeAndValue oldValue = value;
-		value = newValue;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__VALUE, oldValue, newValue);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public void setComptype(String newComptype) {
+		String oldComptype = comptype;
+		comptype = newComptype;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__COMPTYPE, oldComptype, comptype));
 	}
 
 	/**
@@ -109,18 +167,8 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(TypeAndValue newValue) {
-		if (newValue != value) {
-			NotificationChain msgs = null;
-			if (value != null)
-				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SWITCH__VALUE, null, msgs);
-			if (newValue != null)
-				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SWITCH__VALUE, null, msgs);
-			msgs = basicSetValue(newValue, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__VALUE, newValue, newValue));
+	public String getCompvalue() {
+		return compvalue;
 	}
 
 	/**
@@ -128,8 +176,11 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeAndValue getDefault() {
-		return default_;
+	public void setCompvalue(String newCompvalue) {
+		String oldCompvalue = compvalue;
+		compvalue = newCompvalue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__COMPVALUE, oldCompvalue, compvalue));
 	}
 
 	/**
@@ -137,14 +188,8 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetDefault(TypeAndValue newDefault, NotificationChain msgs) {
-		TypeAndValue oldDefault = default_;
-		default_ = newDefault;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__DEFAULT, oldDefault, newDefault);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public String getDefaulttype() {
+		return defaulttype;
 	}
 
 	/**
@@ -152,18 +197,32 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDefault(TypeAndValue newDefault) {
-		if (newDefault != default_) {
-			NotificationChain msgs = null;
-			if (default_ != null)
-				msgs = ((InternalEObject)default_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SWITCH__DEFAULT, null, msgs);
-			if (newDefault != null)
-				msgs = ((InternalEObject)newDefault).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SWITCH__DEFAULT, null, msgs);
-			msgs = basicSetDefault(newDefault, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__DEFAULT, newDefault, newDefault));
+	public void setDefaulttype(String newDefaulttype) {
+		String oldDefaulttype = defaulttype;
+		defaulttype = newDefaulttype;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__DEFAULTTYPE, oldDefaulttype, defaulttype));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getDefaultvalue() {
+		return defaultvalue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDefaultvalue(String newDefaultvalue) {
+		String oldDefaultvalue = defaultvalue;
+		defaultvalue = newDefaultvalue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__DEFAULTVALUE, oldDefaultvalue, defaultvalue));
 	}
 
 	/**
@@ -217,10 +276,6 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case LlvmPackage.SWITCH__VALUE:
-				return basicSetValue(null, msgs);
-			case LlvmPackage.SWITCH__DEFAULT:
-				return basicSetDefault(null, msgs);
 			case LlvmPackage.SWITCH__JTABLE:
 				return basicSetJTable(null, msgs);
 		}
@@ -235,10 +290,14 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case LlvmPackage.SWITCH__VALUE:
-				return getValue();
-			case LlvmPackage.SWITCH__DEFAULT:
-				return getDefault();
+			case LlvmPackage.SWITCH__COMPTYPE:
+				return getComptype();
+			case LlvmPackage.SWITCH__COMPVALUE:
+				return getCompvalue();
+			case LlvmPackage.SWITCH__DEFAULTTYPE:
+				return getDefaulttype();
+			case LlvmPackage.SWITCH__DEFAULTVALUE:
+				return getDefaultvalue();
 			case LlvmPackage.SWITCH__JTABLE:
 				return getJTable();
 		}
@@ -253,11 +312,17 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case LlvmPackage.SWITCH__VALUE:
-				setValue((TypeAndValue)newValue);
+			case LlvmPackage.SWITCH__COMPTYPE:
+				setComptype((String)newValue);
 				return;
-			case LlvmPackage.SWITCH__DEFAULT:
-				setDefault((TypeAndValue)newValue);
+			case LlvmPackage.SWITCH__COMPVALUE:
+				setCompvalue((String)newValue);
+				return;
+			case LlvmPackage.SWITCH__DEFAULTTYPE:
+				setDefaulttype((String)newValue);
+				return;
+			case LlvmPackage.SWITCH__DEFAULTVALUE:
+				setDefaultvalue((String)newValue);
 				return;
 			case LlvmPackage.SWITCH__JTABLE:
 				setJTable((JumpTable)newValue);
@@ -274,11 +339,17 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case LlvmPackage.SWITCH__VALUE:
-				setValue((TypeAndValue)null);
+			case LlvmPackage.SWITCH__COMPTYPE:
+				setComptype(COMPTYPE_EDEFAULT);
 				return;
-			case LlvmPackage.SWITCH__DEFAULT:
-				setDefault((TypeAndValue)null);
+			case LlvmPackage.SWITCH__COMPVALUE:
+				setCompvalue(COMPVALUE_EDEFAULT);
+				return;
+			case LlvmPackage.SWITCH__DEFAULTTYPE:
+				setDefaulttype(DEFAULTTYPE_EDEFAULT);
+				return;
+			case LlvmPackage.SWITCH__DEFAULTVALUE:
+				setDefaultvalue(DEFAULTVALUE_EDEFAULT);
 				return;
 			case LlvmPackage.SWITCH__JTABLE:
 				setJTable((JumpTable)null);
@@ -295,14 +366,40 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case LlvmPackage.SWITCH__VALUE:
-				return value != null;
-			case LlvmPackage.SWITCH__DEFAULT:
-				return default_ != null;
+			case LlvmPackage.SWITCH__COMPTYPE:
+				return COMPTYPE_EDEFAULT == null ? comptype != null : !COMPTYPE_EDEFAULT.equals(comptype);
+			case LlvmPackage.SWITCH__COMPVALUE:
+				return COMPVALUE_EDEFAULT == null ? compvalue != null : !COMPVALUE_EDEFAULT.equals(compvalue);
+			case LlvmPackage.SWITCH__DEFAULTTYPE:
+				return DEFAULTTYPE_EDEFAULT == null ? defaulttype != null : !DEFAULTTYPE_EDEFAULT.equals(defaulttype);
+			case LlvmPackage.SWITCH__DEFAULTVALUE:
+				return DEFAULTVALUE_EDEFAULT == null ? defaultvalue != null : !DEFAULTVALUE_EDEFAULT.equals(defaultvalue);
 			case LlvmPackage.SWITCH__JTABLE:
 				return jTable != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (comptype: ");
+		result.append(comptype);
+		result.append(", compvalue: ");
+		result.append(compvalue);
+		result.append(", defaulttype: ");
+		result.append(defaulttype);
+		result.append(", defaultvalue: ");
+		result.append(defaultvalue);
+		result.append(')');
+		return result.toString();
 	}
 
 } //SwitchImpl

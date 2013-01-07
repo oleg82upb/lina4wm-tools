@@ -4,13 +4,10 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.CmpXchg;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.TypeAndValue;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -21,9 +18,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.CmpXchgImpl#getAdresstype <em>Adresstype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.CmpXchgImpl#getAdress <em>Adress</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.CmpXchgImpl#getCompare_val <em>Compare val</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.CmpXchgImpl#getNew_val <em>New val</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.CmpXchgImpl#getComparetype <em>Comparetype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.CmpXchgImpl#getComparevalue <em>Comparevalue</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.CmpXchgImpl#getNewtype <em>Newtype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.CmpXchgImpl#getNewvalue <em>Newvalue</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.CmpXchgImpl#getOrdering <em>Ordering</em>}</li>
  * </ul>
  * </p>
@@ -32,34 +32,124 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class CmpXchgImpl extends InstructionImpl implements CmpXchg {
 	/**
-	 * The cached value of the '{@link #getAdress() <em>Adress</em>}' containment reference.
+	 * The default value of the '{@link #getAdresstype() <em>Adresstype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAdresstype()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ADRESSTYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAdresstype() <em>Adresstype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAdresstype()
+	 * @generated
+	 * @ordered
+	 */
+	protected String adresstype = ADRESSTYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getAdress() <em>Adress</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAdress()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeAndValue adress;
+	protected static final String ADRESS_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getCompare_val() <em>Compare val</em>}' containment reference.
+	 * The cached value of the '{@link #getAdress() <em>Adress</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCompare_val()
+	 * @see #getAdress()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeAndValue compare_val;
+	protected String adress = ADRESS_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getNew_val() <em>New val</em>}' containment reference.
+	 * The default value of the '{@link #getComparetype() <em>Comparetype</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNew_val()
+	 * @see #getComparetype()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeAndValue new_val;
+	protected static final String COMPARETYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getComparetype() <em>Comparetype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComparetype()
+	 * @generated
+	 * @ordered
+	 */
+	protected String comparetype = COMPARETYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getComparevalue() <em>Comparevalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComparevalue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String COMPAREVALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getComparevalue() <em>Comparevalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComparevalue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String comparevalue = COMPAREVALUE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getNewtype() <em>Newtype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNewtype()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NEWTYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNewtype() <em>Newtype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNewtype()
+	 * @generated
+	 * @ordered
+	 */
+	protected String newtype = NEWTYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getNewvalue() <em>Newvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNewvalue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NEWVALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNewvalue() <em>Newvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNewvalue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String newvalue = NEWVALUE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getOrdering() <em>Ordering</em>}' attribute.
@@ -105,7 +195,28 @@ public class CmpXchgImpl extends InstructionImpl implements CmpXchg {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeAndValue getAdress() {
+	public String getAdresstype() {
+		return adresstype;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAdresstype(String newAdresstype) {
+		String oldAdresstype = adresstype;
+		adresstype = newAdresstype;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CMP_XCHG__ADRESSTYPE, oldAdresstype, adresstype));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getAdress() {
 		return adress;
 	}
 
@@ -114,14 +225,11 @@ public class CmpXchgImpl extends InstructionImpl implements CmpXchg {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetAdress(TypeAndValue newAdress, NotificationChain msgs) {
-		TypeAndValue oldAdress = adress;
+	public void setAdress(String newAdress) {
+		String oldAdress = adress;
 		adress = newAdress;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.CMP_XCHG__ADRESS, oldAdress, newAdress);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CMP_XCHG__ADRESS, oldAdress, adress));
 	}
 
 	/**
@@ -129,18 +237,8 @@ public class CmpXchgImpl extends InstructionImpl implements CmpXchg {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAdress(TypeAndValue newAdress) {
-		if (newAdress != adress) {
-			NotificationChain msgs = null;
-			if (adress != null)
-				msgs = ((InternalEObject)adress).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CMP_XCHG__ADRESS, null, msgs);
-			if (newAdress != null)
-				msgs = ((InternalEObject)newAdress).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CMP_XCHG__ADRESS, null, msgs);
-			msgs = basicSetAdress(newAdress, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CMP_XCHG__ADRESS, newAdress, newAdress));
+	public String getComparetype() {
+		return comparetype;
 	}
 
 	/**
@@ -148,8 +246,11 @@ public class CmpXchgImpl extends InstructionImpl implements CmpXchg {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeAndValue getCompare_val() {
-		return compare_val;
+	public void setComparetype(String newComparetype) {
+		String oldComparetype = comparetype;
+		comparetype = newComparetype;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CMP_XCHG__COMPARETYPE, oldComparetype, comparetype));
 	}
 
 	/**
@@ -157,14 +258,8 @@ public class CmpXchgImpl extends InstructionImpl implements CmpXchg {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetCompare_val(TypeAndValue newCompare_val, NotificationChain msgs) {
-		TypeAndValue oldCompare_val = compare_val;
-		compare_val = newCompare_val;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.CMP_XCHG__COMPARE_VAL, oldCompare_val, newCompare_val);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public String getComparevalue() {
+		return comparevalue;
 	}
 
 	/**
@@ -172,18 +267,11 @@ public class CmpXchgImpl extends InstructionImpl implements CmpXchg {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCompare_val(TypeAndValue newCompare_val) {
-		if (newCompare_val != compare_val) {
-			NotificationChain msgs = null;
-			if (compare_val != null)
-				msgs = ((InternalEObject)compare_val).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CMP_XCHG__COMPARE_VAL, null, msgs);
-			if (newCompare_val != null)
-				msgs = ((InternalEObject)newCompare_val).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CMP_XCHG__COMPARE_VAL, null, msgs);
-			msgs = basicSetCompare_val(newCompare_val, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CMP_XCHG__COMPARE_VAL, newCompare_val, newCompare_val));
+	public void setComparevalue(String newComparevalue) {
+		String oldComparevalue = comparevalue;
+		comparevalue = newComparevalue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CMP_XCHG__COMPAREVALUE, oldComparevalue, comparevalue));
 	}
 
 	/**
@@ -191,8 +279,8 @@ public class CmpXchgImpl extends InstructionImpl implements CmpXchg {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeAndValue getNew_val() {
-		return new_val;
+	public String getNewtype() {
+		return newtype;
 	}
 
 	/**
@@ -200,14 +288,11 @@ public class CmpXchgImpl extends InstructionImpl implements CmpXchg {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetNew_val(TypeAndValue newNew_val, NotificationChain msgs) {
-		TypeAndValue oldNew_val = new_val;
-		new_val = newNew_val;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.CMP_XCHG__NEW_VAL, oldNew_val, newNew_val);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public void setNewtype(String newNewtype) {
+		String oldNewtype = newtype;
+		newtype = newNewtype;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CMP_XCHG__NEWTYPE, oldNewtype, newtype));
 	}
 
 	/**
@@ -215,18 +300,20 @@ public class CmpXchgImpl extends InstructionImpl implements CmpXchg {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setNew_val(TypeAndValue newNew_val) {
-		if (newNew_val != new_val) {
-			NotificationChain msgs = null;
-			if (new_val != null)
-				msgs = ((InternalEObject)new_val).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CMP_XCHG__NEW_VAL, null, msgs);
-			if (newNew_val != null)
-				msgs = ((InternalEObject)newNew_val).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CMP_XCHG__NEW_VAL, null, msgs);
-			msgs = basicSetNew_val(newNew_val, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CMP_XCHG__NEW_VAL, newNew_val, newNew_val));
+	public String getNewvalue() {
+		return newvalue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNewvalue(String newNewvalue) {
+		String oldNewvalue = newvalue;
+		newvalue = newNewvalue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CMP_XCHG__NEWVALUE, oldNewvalue, newvalue));
 	}
 
 	/**
@@ -256,32 +343,20 @@ public class CmpXchgImpl extends InstructionImpl implements CmpXchg {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case LlvmPackage.CMP_XCHG__ADRESS:
-				return basicSetAdress(null, msgs);
-			case LlvmPackage.CMP_XCHG__COMPARE_VAL:
-				return basicSetCompare_val(null, msgs);
-			case LlvmPackage.CMP_XCHG__NEW_VAL:
-				return basicSetNew_val(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case LlvmPackage.CMP_XCHG__ADRESSTYPE:
+				return getAdresstype();
 			case LlvmPackage.CMP_XCHG__ADRESS:
 				return getAdress();
-			case LlvmPackage.CMP_XCHG__COMPARE_VAL:
-				return getCompare_val();
-			case LlvmPackage.CMP_XCHG__NEW_VAL:
-				return getNew_val();
+			case LlvmPackage.CMP_XCHG__COMPARETYPE:
+				return getComparetype();
+			case LlvmPackage.CMP_XCHG__COMPAREVALUE:
+				return getComparevalue();
+			case LlvmPackage.CMP_XCHG__NEWTYPE:
+				return getNewtype();
+			case LlvmPackage.CMP_XCHG__NEWVALUE:
+				return getNewvalue();
 			case LlvmPackage.CMP_XCHG__ORDERING:
 				return getOrdering();
 		}
@@ -296,14 +371,23 @@ public class CmpXchgImpl extends InstructionImpl implements CmpXchg {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case LlvmPackage.CMP_XCHG__ADRESSTYPE:
+				setAdresstype((String)newValue);
+				return;
 			case LlvmPackage.CMP_XCHG__ADRESS:
-				setAdress((TypeAndValue)newValue);
+				setAdress((String)newValue);
 				return;
-			case LlvmPackage.CMP_XCHG__COMPARE_VAL:
-				setCompare_val((TypeAndValue)newValue);
+			case LlvmPackage.CMP_XCHG__COMPARETYPE:
+				setComparetype((String)newValue);
 				return;
-			case LlvmPackage.CMP_XCHG__NEW_VAL:
-				setNew_val((TypeAndValue)newValue);
+			case LlvmPackage.CMP_XCHG__COMPAREVALUE:
+				setComparevalue((String)newValue);
+				return;
+			case LlvmPackage.CMP_XCHG__NEWTYPE:
+				setNewtype((String)newValue);
+				return;
+			case LlvmPackage.CMP_XCHG__NEWVALUE:
+				setNewvalue((String)newValue);
 				return;
 			case LlvmPackage.CMP_XCHG__ORDERING:
 				setOrdering((String)newValue);
@@ -320,14 +404,23 @@ public class CmpXchgImpl extends InstructionImpl implements CmpXchg {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case LlvmPackage.CMP_XCHG__ADRESSTYPE:
+				setAdresstype(ADRESSTYPE_EDEFAULT);
+				return;
 			case LlvmPackage.CMP_XCHG__ADRESS:
-				setAdress((TypeAndValue)null);
+				setAdress(ADRESS_EDEFAULT);
 				return;
-			case LlvmPackage.CMP_XCHG__COMPARE_VAL:
-				setCompare_val((TypeAndValue)null);
+			case LlvmPackage.CMP_XCHG__COMPARETYPE:
+				setComparetype(COMPARETYPE_EDEFAULT);
 				return;
-			case LlvmPackage.CMP_XCHG__NEW_VAL:
-				setNew_val((TypeAndValue)null);
+			case LlvmPackage.CMP_XCHG__COMPAREVALUE:
+				setComparevalue(COMPAREVALUE_EDEFAULT);
+				return;
+			case LlvmPackage.CMP_XCHG__NEWTYPE:
+				setNewtype(NEWTYPE_EDEFAULT);
+				return;
+			case LlvmPackage.CMP_XCHG__NEWVALUE:
+				setNewvalue(NEWVALUE_EDEFAULT);
 				return;
 			case LlvmPackage.CMP_XCHG__ORDERING:
 				setOrdering(ORDERING_EDEFAULT);
@@ -344,12 +437,18 @@ public class CmpXchgImpl extends InstructionImpl implements CmpXchg {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case LlvmPackage.CMP_XCHG__ADRESSTYPE:
+				return ADRESSTYPE_EDEFAULT == null ? adresstype != null : !ADRESSTYPE_EDEFAULT.equals(adresstype);
 			case LlvmPackage.CMP_XCHG__ADRESS:
-				return adress != null;
-			case LlvmPackage.CMP_XCHG__COMPARE_VAL:
-				return compare_val != null;
-			case LlvmPackage.CMP_XCHG__NEW_VAL:
-				return new_val != null;
+				return ADRESS_EDEFAULT == null ? adress != null : !ADRESS_EDEFAULT.equals(adress);
+			case LlvmPackage.CMP_XCHG__COMPARETYPE:
+				return COMPARETYPE_EDEFAULT == null ? comparetype != null : !COMPARETYPE_EDEFAULT.equals(comparetype);
+			case LlvmPackage.CMP_XCHG__COMPAREVALUE:
+				return COMPAREVALUE_EDEFAULT == null ? comparevalue != null : !COMPAREVALUE_EDEFAULT.equals(comparevalue);
+			case LlvmPackage.CMP_XCHG__NEWTYPE:
+				return NEWTYPE_EDEFAULT == null ? newtype != null : !NEWTYPE_EDEFAULT.equals(newtype);
+			case LlvmPackage.CMP_XCHG__NEWVALUE:
+				return NEWVALUE_EDEFAULT == null ? newvalue != null : !NEWVALUE_EDEFAULT.equals(newvalue);
 			case LlvmPackage.CMP_XCHG__ORDERING:
 				return ORDERING_EDEFAULT == null ? ordering != null : !ORDERING_EDEFAULT.equals(ordering);
 		}
@@ -366,7 +465,19 @@ public class CmpXchgImpl extends InstructionImpl implements CmpXchg {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (ordering: ");
+		result.append(" (adresstype: ");
+		result.append(adresstype);
+		result.append(", adress: ");
+		result.append(adress);
+		result.append(", comparetype: ");
+		result.append(comparetype);
+		result.append(", comparevalue: ");
+		result.append(comparevalue);
+		result.append(", newtype: ");
+		result.append(newtype);
+		result.append(", newvalue: ");
+		result.append(newvalue);
+		result.append(", ordering: ");
 		result.append(ordering);
 		result.append(')');
 		return result.toString();

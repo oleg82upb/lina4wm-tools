@@ -11,8 +11,10 @@ package de.upb.llvm_parser.llvm;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.Switch#getValue <em>Value</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Switch#getDefault <em>Default</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Switch#getComptype <em>Comptype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Switch#getCompvalue <em>Compvalue</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Switch#getDefaulttype <em>Defaulttype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Switch#getDefaultvalue <em>Defaultvalue</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Switch#getJTable <em>JTable</em>}</li>
  * </ul>
  * </p>
@@ -23,56 +25,108 @@ package de.upb.llvm_parser.llvm;
  */
 public interface Switch extends Ret_Instr {
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Comptype</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Value</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Comptype</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(TypeAndValue)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_Value()
-	 * @model containment="true"
+	 * @return the value of the '<em>Comptype</em>' attribute.
+	 * @see #setComptype(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_Comptype()
+	 * @model
 	 * @generated
 	 */
-	TypeAndValue getValue();
+	String getComptype();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Switch#getValue <em>Value</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Switch#getComptype <em>Comptype</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' containment reference.
-	 * @see #getValue()
+	 * @param value the new value of the '<em>Comptype</em>' attribute.
+	 * @see #getComptype()
 	 * @generated
 	 */
-	void setValue(TypeAndValue value);
+	void setComptype(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Default</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Compvalue</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Default</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Compvalue</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default</em>' containment reference.
-	 * @see #setDefault(TypeAndValue)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_Default()
-	 * @model containment="true"
+	 * @return the value of the '<em>Compvalue</em>' attribute.
+	 * @see #setCompvalue(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_Compvalue()
+	 * @model
 	 * @generated
 	 */
-	TypeAndValue getDefault();
+	String getCompvalue();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Switch#getDefault <em>Default</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Switch#getCompvalue <em>Compvalue</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Default</em>' containment reference.
-	 * @see #getDefault()
+	 * @param value the new value of the '<em>Compvalue</em>' attribute.
+	 * @see #getCompvalue()
 	 * @generated
 	 */
-	void setDefault(TypeAndValue value);
+	void setCompvalue(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Defaulttype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Defaulttype</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Defaulttype</em>' attribute.
+	 * @see #setDefaulttype(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_Defaulttype()
+	 * @model
+	 * @generated
+	 */
+	String getDefaulttype();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Switch#getDefaulttype <em>Defaulttype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Defaulttype</em>' attribute.
+	 * @see #getDefaulttype()
+	 * @generated
+	 */
+	void setDefaulttype(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Defaultvalue</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Defaultvalue</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Defaultvalue</em>' attribute.
+	 * @see #setDefaultvalue(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_Defaultvalue()
+	 * @model
+	 * @generated
+	 */
+	String getDefaultvalue();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Switch#getDefaultvalue <em>Defaultvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Defaultvalue</em>' attribute.
+	 * @see #getDefaultvalue()
+	 * @generated
+	 */
+	void setDefaultvalue(String value);
 
 	/**
 	 * Returns the value of the '<em><b>JTable</b></em>' containment reference.

@@ -15,7 +15,15 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ValuePairTest extends CompareTest {
+public class ValuePairTest extends TestCase {
+
+	/**
+	 * The fixture for this Value Pair test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ValuePair fixture = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -37,14 +45,23 @@ public class ValuePairTest extends CompareTest {
 	}
 
 	/**
+	 * Sets the fixture for this Value Pair test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void setFixture(ValuePair fixture) {
+		this.fixture = fixture;
+	}
+
+	/**
 	 * Returns the fixture for this Value Pair test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	protected ValuePair getFixture() {
-		return (ValuePair)fixture;
+		return fixture;
 	}
 
 	/**

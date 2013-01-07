@@ -4,13 +4,10 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.TypeAndValue;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -22,7 +19,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.AllocImpl#getType <em>Type</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.AllocImpl#getNumElements <em>Num Elements</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.AllocImpl#getNumelementstype <em>Numelementstype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.AllocImpl#getNumelementsvalue <em>Numelementsvalue</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,14 +48,44 @@ public class AllocImpl extends InstructionImpl implements Alloc {
 	protected String type = TYPE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getNumElements() <em>Num Elements</em>}' containment reference.
+	 * The default value of the '{@link #getNumelementstype() <em>Numelementstype</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNumElements()
+	 * @see #getNumelementstype()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeAndValue numElements;
+	protected static final String NUMELEMENTSTYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNumelementstype() <em>Numelementstype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNumelementstype()
+	 * @generated
+	 * @ordered
+	 */
+	protected String numelementstype = NUMELEMENTSTYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getNumelementsvalue() <em>Numelementsvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNumelementsvalue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NUMELEMENTSVALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNumelementsvalue() <em>Numelementsvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNumelementsvalue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String numelementsvalue = NUMELEMENTSVALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -104,8 +132,8 @@ public class AllocImpl extends InstructionImpl implements Alloc {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeAndValue getNumElements() {
-		return numElements;
+	public String getNumelementstype() {
+		return numelementstype;
 	}
 
 	/**
@@ -113,14 +141,11 @@ public class AllocImpl extends InstructionImpl implements Alloc {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetNumElements(TypeAndValue newNumElements, NotificationChain msgs) {
-		TypeAndValue oldNumElements = numElements;
-		numElements = newNumElements;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.ALLOC__NUM_ELEMENTS, oldNumElements, newNumElements);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public void setNumelementstype(String newNumelementstype) {
+		String oldNumelementstype = numelementstype;
+		numelementstype = newNumelementstype;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ALLOC__NUMELEMENTSTYPE, oldNumelementstype, numelementstype));
 	}
 
 	/**
@@ -128,18 +153,8 @@ public class AllocImpl extends InstructionImpl implements Alloc {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setNumElements(TypeAndValue newNumElements) {
-		if (newNumElements != numElements) {
-			NotificationChain msgs = null;
-			if (numElements != null)
-				msgs = ((InternalEObject)numElements).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ALLOC__NUM_ELEMENTS, null, msgs);
-			if (newNumElements != null)
-				msgs = ((InternalEObject)newNumElements).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ALLOC__NUM_ELEMENTS, null, msgs);
-			msgs = basicSetNumElements(newNumElements, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ALLOC__NUM_ELEMENTS, newNumElements, newNumElements));
+	public String getNumelementsvalue() {
+		return numelementsvalue;
 	}
 
 	/**
@@ -147,13 +162,11 @@ public class AllocImpl extends InstructionImpl implements Alloc {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case LlvmPackage.ALLOC__NUM_ELEMENTS:
-				return basicSetNumElements(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+	public void setNumelementsvalue(String newNumelementsvalue) {
+		String oldNumelementsvalue = numelementsvalue;
+		numelementsvalue = newNumelementsvalue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ALLOC__NUMELEMENTSVALUE, oldNumelementsvalue, numelementsvalue));
 	}
 
 	/**
@@ -166,8 +179,10 @@ public class AllocImpl extends InstructionImpl implements Alloc {
 		switch (featureID) {
 			case LlvmPackage.ALLOC__TYPE:
 				return getType();
-			case LlvmPackage.ALLOC__NUM_ELEMENTS:
-				return getNumElements();
+			case LlvmPackage.ALLOC__NUMELEMENTSTYPE:
+				return getNumelementstype();
+			case LlvmPackage.ALLOC__NUMELEMENTSVALUE:
+				return getNumelementsvalue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -183,8 +198,11 @@ public class AllocImpl extends InstructionImpl implements Alloc {
 			case LlvmPackage.ALLOC__TYPE:
 				setType((String)newValue);
 				return;
-			case LlvmPackage.ALLOC__NUM_ELEMENTS:
-				setNumElements((TypeAndValue)newValue);
+			case LlvmPackage.ALLOC__NUMELEMENTSTYPE:
+				setNumelementstype((String)newValue);
+				return;
+			case LlvmPackage.ALLOC__NUMELEMENTSVALUE:
+				setNumelementsvalue((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -201,8 +219,11 @@ public class AllocImpl extends InstructionImpl implements Alloc {
 			case LlvmPackage.ALLOC__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
-			case LlvmPackage.ALLOC__NUM_ELEMENTS:
-				setNumElements((TypeAndValue)null);
+			case LlvmPackage.ALLOC__NUMELEMENTSTYPE:
+				setNumelementstype(NUMELEMENTSTYPE_EDEFAULT);
+				return;
+			case LlvmPackage.ALLOC__NUMELEMENTSVALUE:
+				setNumelementsvalue(NUMELEMENTSVALUE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -218,8 +239,10 @@ public class AllocImpl extends InstructionImpl implements Alloc {
 		switch (featureID) {
 			case LlvmPackage.ALLOC__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
-			case LlvmPackage.ALLOC__NUM_ELEMENTS:
-				return numElements != null;
+			case LlvmPackage.ALLOC__NUMELEMENTSTYPE:
+				return NUMELEMENTSTYPE_EDEFAULT == null ? numelementstype != null : !NUMELEMENTSTYPE_EDEFAULT.equals(numelementstype);
+			case LlvmPackage.ALLOC__NUMELEMENTSVALUE:
+				return NUMELEMENTSVALUE_EDEFAULT == null ? numelementsvalue != null : !NUMELEMENTSVALUE_EDEFAULT.equals(numelementsvalue);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -236,6 +259,10 @@ public class AllocImpl extends InstructionImpl implements Alloc {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (type: ");
 		result.append(type);
+		result.append(", numelementstype: ");
+		result.append(numelementstype);
+		result.append(", numelementsvalue: ");
+		result.append(numelementsvalue);
 		result.append(')');
 		return result.toString();
 	}

@@ -20,6 +20,24 @@ LLVM:
  */
 terminal INTEGER:
 	'i' ('0'..'9')+ '*'*;
+terminal STRING	: 
+			'"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'u'|'0'|'"'|"'"|'\\') | !('\\'|'"') )* '"' |
+			"'" ( '\\' ('b'|'t'|'n'|'f'|'r'|'u'|'0'|'"'|"'"|'\\') | !('\\'|"'") )* "'"
+		;
+terminal CSTRING:
+	'c'STRING
+;
+terminal OREST:
+	'(...)' '*'*
+;
+terminal ARRAY:
+	'['' '?('0'..'9')+' '?'x'' '?(INTEGER|F_POINT|VAR_TYPE)' '?']''*'*
+;
+/*
+ * To distinguish the types here only Floating Types
+ */
+terminal F_POINT:
+	'half' | 'float' | 'double' | 'x86_fp80' | 'fp128' | 'ppc_fp128';
 
 /*
  * Comments are delimited with a ';' and go until the end of line.
@@ -38,7 +56,7 @@ terminal SL_COMMENT:
  *  @_44bar.your.choice
  */
 terminal VAR_TYPE:
-	(((('%' | '@')'.'*) (NOBRACKET | '(' NOBRACKET ')' | INT) '*'*) | '('+ (('%' | '@')'.'*) (NOBRACKET | '(' NOBRACKET ')' | '%'
+	(((('%' | '@')'.'*) (NOBRACKET | '(' NOBRACKET ')' | INT | STRING) '*'*) | '('+ (('%' | '@')'.'*) (NOBRACKET | '(' NOBRACKET ')' | '%'
 	INT) '*'* ')'+ '*'*);
 
 /*
@@ -74,7 +92,36 @@ TopLevelEntity:
  */
 MainLevelEntity:
 	FunctionHeader |
-	LocalVarInstruction;
+	NamedType
+;
+
+NamedType:
+	(name=Type '=' (LINKAGE| 'global'|'unnamed_addr'|'constant')*(('type' (struct = Structure|Opaque)) | instr=Instruction | (ARRAY|struct=Structure) CSTRING ('zeroinitializer'|'null')* (','ALIGNMENT)? | alias=Alias | type=Type ('zeroinitializer'|'null')* (('0 ,'|'0,'|',')ALIGNMENT)?))
+;
+Type:
+	VAR_TYPE|INT|INTEGER|Primitive
+;
+Structure:
+	{Structure}'{' ((types+=Type|ARRAY)OREST? (Lists+=TypeList)? (',' (types+=Type|ARRAY)OREST? (Lists+=TypeList)?)*)? '}' |
+	{Structure}'<' '{' ((types+=Type|ARRAY)OREST?(Lists+=TypeList)? (','(types+=Type|ARRAY)OREST?(Lists+=TypeList)?)*)? '}' '>'
+;
+/*
+ * Aliases act as "second name" for the aliasee value (which can be either function, 
+ * global variable, another alias or bitcast of global value). 
+ * Aliases may have an optional linkage type, and an optional visibility style
+ */
+Alias:
+	'alias' ALIAS_LINKAGE? VISIBILITY? aliastype=Type aliasvalue=Type aliasee=Type
+;
+
+Primitive:
+	'void' | 'null' | 'label' | 'undef' | 'true' | 'false'
+;
+
+Opaque:
+	'opaque'
+;
+
 
 /*
  * A Function Header has to be defined or declared.
@@ -90,14 +137,14 @@ FunctionHeader:
 	name=VAR_TYPE pl=ParameterList 'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ALIGNMENT?
 	body=FunctionBody |
 	'declare' LINKAGE? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=(Type)
-	name=VAR_TYPE (tList=TypeList | '(...)') 'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ALIGNMENT?;
+	name=VAR_TYPE (tList=TypeList | OREST) 'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ALIGNMENT?;
 
 /*
  * This rule creates a Parameterlist and saves also the TypeAndValue to each parameter
  * Brackets are 
  */
 ParameterList:
-	{ParameterList}'('(params+=TypeAndValue(','params+=TypeAndValue)*)?')'
+	{ParameterList}'('(types+=Type variables+=Type(','types+=Type variables+=Type)*)?')'
 	
 ;
 
@@ -116,7 +163,7 @@ FunctionBody:
  */
 BasicBlock:
 	(label = NOBRACKET ':')?
-	instructions+=(LocalVarInstruction|Instruction)*
+	instructions+=(NamedType|Instruction)*
 	terminator = Ret_Instr
 ;
 
@@ -130,19 +177,16 @@ Ret_Instr:
  * If a function is declared, the parameterlist has to be set empty or contain a List of Types.
  */
 TypeList:
-	{TypeList} '(' (types+=Type (',' types+=Type)*)? ')';
+	{TypeList} '(' ((types+=Type (',' types+=Type)*))? ')''*'*;
 
 /*
  * An Aggregate is a tuple of types enclosed by curly brackets
  */
-Aggregate:
-	'{' agg+=Type (',' agg+=Type) '}';
 
 /*
  * A Local Variable definition needs a name, followed by an equalsign and either an Instruction, an Alias or a Type  
  */
-LocalVarInstruction:
-	(name=Type '=' (('type' type=Type) | instr=Instruction | alias=Alias));
+
 
 /*
  * This is only to summarize all possible Instructions
@@ -154,72 +198,31 @@ Instruction:
 
 
 /*
- * Aliases act as "second name" for the aliasee value (which can be either function, 
- * global variable, another alias or bitcast of global value). 
- * Aliases may have an optional linkage type, and an optional visibility style
- */
-Alias:
-	'alias' ALIAS_LINKAGE? VISIBILITY? type=TypeAndValue aliasee=Type;
-
-/*
- * Types..
- * A Type is a type.
- * There are different types. Primitive Types, Struct Types, or own VaraiableTypes.
- * This rule is used to summarize them
- */
-Type:
-	(StructType | VAR_TYPE | B_TYPE)RETURN_ATTRIBUTES?;
-
-/*
  * This rule is used to bind a Type to a value.
  * It is used for example on parameterlists, on instructions etc.
  */
-TypeAndValue:
-	(type=(VAR_TYPE | B_TYPE)RETURN_ATTRIBUTES? value=Type) | aggregate=Aggregate value=Type;
+//TypeAndValue:
+//	(type=(VAR_TYPE | B_TYPE)RETURN_ATTRIBUTES? value=Type) | aggregate=Aggregate value=Type;
 
-/*
- * This rule specified Stuctures
- */
-StructType:
-	'{' ((VAR_TYPE | B_TYPE) (',' (VAR_TYPE | B_TYPE))*)? '}' |
-	'<' '{' ((VAR_TYPE | B_TYPE) (',' (VAR_TYPE | B_TYPE))*)? '}' '>';
-
-/*
- * To summerize all BASIC_TYPEs inside one Rule.
- */
-B_TYPE:
-	INTEGER | F_POINT | BASIC_TYPE | INT;
-
-/*
- * To distinguish the types here only Basic Types
- */
-BASIC_TYPE:
-	'void' | 'null' | 'label' | 'undef' | 'true' | 'false';
-
-/*
- * To distinguish the types here only Floating Types
- */
-F_POINT:
-	'half' | 'float' | 'double' | 'x86_fp80' | 'fp128' | 'ppc_fp128';
 
 /*
  * The 'getelementptr' instruction is used to get the address of a subelement of an aggregate data structure. 
  * It performs address calculation only and does not access memory.
  */
 GetElementPtr:
-	'getelementptr' 'inbounds'? pointer+=TypeAndValue (',' params+=TypeAndValue)*;
+	'getelementptr' 'inbounds'? elementtype=Type element=Type (',' indicetypes+=Type indices+=Type )*;
 
 /*
  * The 'extractvalue' instruction extracts the value of a member field from an aggregate value.
  */
 ExtractValue:
-	'extractvalue' aggregate=Aggregate type=Type (',' index+=INT)+;
+	'extractvalue' (array=ARRAY|struct=Structure) type=Type (',' index+=INT)+;
 
 /*
  * The 'insertvalue' instruction inserts a value into a member field in an aggregate value.
  */
 InsertValue:
-	'insertvalue' aggregate=Aggregate type=Type ',' value=TypeAndValue (',' index+=INT)+;
+	'insertvalue' struct=Structure value=Type ',' inserttype=Type insertvalue=Type (',' index+=INT)+;
 
 /*
  * The 'fence' instruction is used to introduce happens-before edges between operations.
@@ -238,14 +241,14 @@ ATOMIC_ORDERING:
  * a given value. If they are equal, it stores a new value into the memory.
  */
 CmpXchg:
-	'cmpxchg' 'volatile'? adress=TypeAndValue ',' compare_val=TypeAndValue ',' new_val=TypeAndValue 'singlethread'?
+	'cmpxchg' 'volatile'? adresstype=Type adress=Type ','comparetype=Type comparevalue=Type ',' newtype=Type newvalue=Type 'singlethread'?
 	ordering=ATOMIC_ORDERING;
 
 /*
  * The 'atomicrmw' instruction is used to atomically modify memory.
  */
 AtomicRMW:
-	'atomicrmw' 'volatile'? BIN_OP adress=TypeAndValue ',' value=TypeAndValue 'singlethread'? ordering=ATOMIC_ORDERING;
+	'atomicrmw' 'volatile'? BIN_OP adresstype=Type adress=Type ',' optype=Type opvalue=Type 'singlethread'? ordering=ATOMIC_ORDERING;
 
 /*
  * This is only to summarize the different Binary Operations
@@ -257,22 +260,22 @@ BIN_OP:
  * The 'load' instruction is used to read from memory.
  */
 Load:
-	'load' 'volatile'? adress=TypeAndValue (',' ((ALIGNMENT)|(MetadataValue)+))* |
-	'load' 'atomic' 'volatile'? adress=TypeAndValue 'singlethread'? ordering=ATOMIC_ORDERING (',' 'align' index=INT)?;
+	'load' 'volatile'? adresstype=Type adress=Type (',' ((ALIGNMENT)|(MetadataValue)+))* |
+	'load' 'atomic' 'volatile'? adresstype=Type adress=Type 'singlethread'? ordering=ATOMIC_ORDERING (',' 'align' index=INT)?;
 
 /*
  * The 'store' instruction is used to write to memory.
  */
 Store:
-	'store'  'volatile'? value=TypeAndValue ',' adress=TypeAndValue (',' ((ALIGNMENT)|(MetadataValue)+))* |
-	'store' 'atomic' 'volatile'? value=TypeAndValue ',' adress=TypeAndValue 'singlethread'? ordering=ATOMIC_ORDERING (','
+	'store'  'volatile'? newtype=Type newvalue=Type ',' adresstype=Type adress=Type (',' ((ALIGNMENT)|(MetadataValue)+))* |
+	'store' 'atomic' 'volatile'? newtype=Type newvalue=Type ',' adresstype=Type adress=Type 'singlethread'? ordering=ATOMIC_ORDERING (','
 	'align' index=INT)?;
 
 /*
  * The 'call' instruction represents a simple function call.
  */
 Call:
-	'tail'? 'call' CallingConv? RETURN_ATTRIBUTES? pointer=TypeAndValue pList=ParameterList FUNCTION_ATTRIBUTES*;
+	'tail'? 'call' CallingConv? RETURN_ATTRIBUTES? adresstype=Type adress=Type pList=ParameterList FUNCTION_ATTRIBUTES*;
 
 /*
  * This is to summarize the possible return attributes
@@ -281,7 +284,7 @@ RETURN_ATTRIBUTES:
 	'zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest';
 
 Alloc:
-	'alloca' type=Type (',' numElements=TypeAndValue)? (',' ALIGNMENT)?;
+	'alloca' type=Type (',' numelementstype=Type numelementsvalue=Type)? (',' ALIGNMENT)?;
 
 
 /*
@@ -304,7 +307,7 @@ FUNCTION_ATTRIBUTES:
 
 
 /*
- * The 'phi' instruction is used to implement the Ï† node in the SSA graph representing the function.
+ * The 'phi' instruction is used to implement the φ node in the SSA graph representing the function.
  */
 PHI:
 	'phi' Type '[' values+=ValuePair ']' (',' '[' values+=ValuePair ']')*;
@@ -317,56 +320,56 @@ ValuePair:
 
 /*
  * The 'landingpad' instruction is used by LLVM's exception handling system to specify that a basic 
- * block is a landing pad â€” one where the exception lands, and corresponds to the code found in the 
+ * block is a landing pad — one where the exception lands, and corresponds to the code found in the 
  * catch portion of a try/catch sequence. It defines values supplied by the personality function (pers_fn)
  * upon re-entry to the function. The resultval has the type resultty.
  */
 LandingPad:
-	'landingpad' type=Type 'personality' personality=TypeAndValue ('cleanup' clause+=Clause* | clause+=Clause+) |
-	'landingpad' type=Type 'personality' personalitytype=Type personalityfunction=CAST_TYPE '(' value=Type '(...)*'
+	'landingpad' struct=Structure 'personality' personalitytype=Type personalityvalue=Type ('cleanup' clause+=Clause* | clause+=Clause+) |
+	'landingpad' struct=Structure 'personality' personalitytype=Type personalityfunction=CAST_TYPE '(' value=Type OREST
 	VAR_TYPE 'to' castto=Type ')' ('cleanup' clause+=Clause* | clause+=Clause+);
 
 /*
- * A clause begins with the clause type â€” catch or filter â€” and contains the global variable representing
+ * A clause begins with the clause type — catch or filter — and contains the global variable representing
  * the "type" that may be caught or filtered respectively. Unlike the catch clause, the filter clause takes
  * an array constant as its argument. Use "[0 x i8**] undef" for a filter which cannot throw. The 'landingpad'
  * instruction must contain at least one clause or the cleanup flag.
  */
 Clause:
-	'catch' TypeAndValue |
-	'filter' filter+=TypeAndValue (',' filter+=TypeAndValue)*;
+	'catch' type=Type value=Type |
+	'filter' filtertype+=Type filtervalue+=Type(',' filtertype+=Type filtervalue+=Type)*;
 
 /*
  * The 'select' instruction is used to choose one value based on a condition, without branching.
  */
 Select:
-	'select' condition=TypeAndValue ',' val1=TypeAndValue ',' val2=TypeAndValue;
+	'select' conditiontype=Type conditionvalue=Type',' val1type=Type val1value=Type',' val2type=Type val2value=Type;
 
 /*
  * The 'va_arg' instruction is used to access arguments passed through the "variable argument" area of a 
  * function call. It is used to implement the va_arg macro in C.
  */
 VA_Arg:
-	'va_arg' list=TypeAndValue ',' argType=Type;
+	'va_arg' listtype=Type listvalue=Type ',' argType=Type;
 
 /*
  * The 'extractelement' instruction extracts a single scalar element from a vector at a specified index.
  */
 ExtractElement:
-	'extractelement' vector=TypeAndValue ',' index=TypeAndValue;
+	'extractelement' vectortype=Type vectorvalue=Type ',' indextype = Type index=Type;
 
 /*
  * The 'insertelement' instruction inserts a scalar element into a vector at a specified index.
  */
 InsertElement:
-	'insertelement' vector=TypeAndValue ',' scalar=TypeAndValue ',' index=TypeAndValue;
+	'insertelement' vectortype=Type vectorvalue=Type ',' scalartype=Type scalarvalue =Type',' indextype = Type index=Type;
 
 /*
  * The 'shufflevector' instruction constructs a permutation of elements from two input vectors, 
  * returning a vector with the same element type as the input and length that is the same as the shuffle mask.
  */
 ShuffleVector:
-	'shufflevector' vector1=TypeAndValue ',' vector2=TypeAndValue ',' mask=TypeAndValue;
+	'shufflevector' val1type=Type val1value=Type',' val2type=Type val2value=Type ',' masktype=Type maskvalue=Type;
 
 /*
  * This rule is to provide a typecast. Nothing special
@@ -375,7 +378,7 @@ ShuffleVector:
  *  %Z = fptosi float 1.04E+17 to i8
  */
 Cast:
-	CAST_TYPE value=TypeAndValue 'to' castto=Type;
+	CAST_TYPE castfrom=Type value=Type 'to' castto=Type;
 
 /*
  * The instructions in this category are the conversion instructions (casting) which
@@ -391,8 +394,8 @@ CAST_TYPE:
  * The 'fcmp' instruction returns a boolean value or vector of boolean values based on comparison of its operands.
  */
 Compare:
-	'icmp' I_PREDICATES Type ValuePair |
-	'fcmp' F_PREDICATES Type ValuePair;
+	'icmp' I_PREDICATES comptype=Type value1=Type ',' value2=Type |
+	'fcmp' F_PREDICATES comptype= Type value1=Type ',' value2=Type;
 
 /*
  * This is to summarize the possible Integer Predicates
@@ -412,40 +415,40 @@ F_PREDICATES:
  */
 ARITHMETIC_OP:
 	('add' | 'fadd' | 'sub' | 'fsub' | 'mul' | 'fmul' | 'udiv' | 'sdiv' | 'fdiv' | 'urem' | 'srem' | 'frem')
-	Type ValuePair;
+	optype=Type value1=Type ',' value2=Type;
 
 /*
  * This is to summarize the possible Logical Operations
  */
 LOGICAL_OP:
-	('shl' | 'lshr' | 'ashr' | 'and' | 'or' | 'xor')Type ValuePair;
+	('shl' | 'lshr' | 'ashr' | 'and' | 'or' | 'xor')optype=Type value1=Type ',' value2=Type;
 
 /*
  * The 'indirectbr' instruction implements an indirect branch to a label within the current function, whose 
  * address is specified by "address". Address must be derived from a blockaddress constant.
  */
 IndirectBranch:
-	'indirectbr' adress=TypeAndValue ',' '[' (lList=LabelList)? ']';
+	'indirectbr' adresstype=Type adress=Type ',' '[' (lList=LabelList)? ']';
 
 /*
  * The Indirect Branch instruction needs a List of labels to jump to. 
  * This List is created here an contains Pairs of Types and Values
  */
 LabelList:
-	(labels+=TypeAndValue)+;
+	(labeltype+=Type labels+=Type)+;
 
 /*
  * The 'switch' instruction is used to transfer control flow to one of several different places. It is a generalization of 
  * the 'br' instruction, allowing a branch to occur to one of many possible destinations.
  */
 Switch:
-	'switch' value=TypeAndValue ',' default=TypeAndValue '[' (jTable=JumpTable)? ']';
+	'switch' comptype=Type compvalue=Type ',' defaulttype=Type defaultvalue=Type '[' (jTable=JumpTable)? ']';
 
 /*
  * The Switch instruction needs a list of values and destination, that will be jumped in case of value occures
  */
 JumpTable:
-	(values+=TypeAndValue ',' destinations+=TypeAndValue)+;
+	(jtypes+=Type jvalues+=Type ',' destinationtypes+=Type destinations+=Type)+;
 
 /*
  * The 'invoke' instruction causes control to transfer to a specified function, with the possibility of 
@@ -461,14 +464,14 @@ JumpTable:
  * within the "landingpad" instruction can't be lost through normal code motion.
  */
 Invoke:
-	'invoke' CallingConv? RETURN_ATTRIBUTES? function=TypeAndValue pList=ParameterList FUNCTION_ATTRIBUTES* 'to'
-	to=TypeAndValue 'unwind' unwind=TypeAndValue;
+	'invoke' CallingConv? RETURN_ATTRIBUTES? functiontype=Type functionvalue=Type pList=ParameterList FUNCTION_ATTRIBUTES* 'to'
+	totype=Type tovalue=Type 'unwind' unwindtype=Type unwindvalue=Type;
 	
 /*
  * The 'resume' instruction is a terminator instruction that has no successors.
  */
 Resume:
-	'resume' TypeAndValue;
+	'resume' resumestruct=Structure resumevalue=Type;
 /*
  * The 'unreachable' instruction has no defined semantics. This instruction is used to inform the 
  * optimizer that a particular portion of the code is not reachable. This can be used to indicate 
@@ -486,7 +489,7 @@ Unreachable:
  * causes control flow, and one that just causes control flow to occur.
  */
 Return:
-	{Return} 'ret' 'void' (',' '!dbg' '!' INT)? | 'ret' value=TypeAndValue (',' '!dbg' '!' INT)?;
+	{Return} 'ret' 'void' (',' '!dbg' '!' INT)? | 'ret' returntype=Type returnvalue=Type (',' '!dbg' '!' INT)?;
 
 /*
  * The 'br' instruction is used to cause control flow to transfer to a different basic block in 
@@ -494,7 +497,7 @@ Return:
  * branch and an unconditional branch.
  */
 Branch:
-	'br' destination=TypeAndValue | 'br' cond=TypeAndValue ',' labelTrue=TypeAndValue ',' labelFalse=TypeAndValue;
+	'br' destinationtype=Type destination=Type | 'br' condtype=Type condvalue=Type ',' labelTruetype=Type labelTrue=Type ',' labelFalsetype=Type labelFalse=Type;
 
 /*
  * This is to summarize the possible visibilities
@@ -529,7 +532,7 @@ MetadataValue:
 		(('!' INT) | 
 		 ('!{' NOBRACKET '}') |
 		 ("!" NOBRACKET) |
-		 'metadata'(('!''{'|'!{')'metadata''!'STRING','('metadata''!'INT|BASIC_TYPE)'}')?
+		 'metadata'(('!''{'|'!{')'metadata''!'STRING','('metadata''!'INT)'}')?
 		)
 	)?;
 

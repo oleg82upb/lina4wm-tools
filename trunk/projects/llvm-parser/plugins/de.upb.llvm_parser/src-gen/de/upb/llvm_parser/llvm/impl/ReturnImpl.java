@@ -4,13 +4,10 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Return;
-import de.upb.llvm_parser.llvm.TypeAndValue;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -21,7 +18,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ReturnImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.ReturnImpl#getReturntype <em>Returntype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.ReturnImpl#getReturnvalue <em>Returnvalue</em>}</li>
  * </ul>
  * </p>
  *
@@ -29,14 +27,44 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class ReturnImpl extends Ret_InstrImpl implements Return {
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
+	 * The default value of the '{@link #getReturntype() <em>Returntype</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getReturntype()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeAndValue value;
+	protected static final String RETURNTYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getReturntype() <em>Returntype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReturntype()
+	 * @generated
+	 * @ordered
+	 */
+	protected String returntype = RETURNTYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getReturnvalue() <em>Returnvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReturnvalue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String RETURNVALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getReturnvalue() <em>Returnvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReturnvalue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String returnvalue = RETURNVALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -62,8 +90,8 @@ public class ReturnImpl extends Ret_InstrImpl implements Return {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeAndValue getValue() {
-		return value;
+	public String getReturntype() {
+		return returntype;
 	}
 
 	/**
@@ -71,14 +99,11 @@ public class ReturnImpl extends Ret_InstrImpl implements Return {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValue(TypeAndValue newValue, NotificationChain msgs) {
-		TypeAndValue oldValue = value;
-		value = newValue;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.RETURN__VALUE, oldValue, newValue);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public void setReturntype(String newReturntype) {
+		String oldReturntype = returntype;
+		returntype = newReturntype;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.RETURN__RETURNTYPE, oldReturntype, returntype));
 	}
 
 	/**
@@ -86,18 +111,8 @@ public class ReturnImpl extends Ret_InstrImpl implements Return {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(TypeAndValue newValue) {
-		if (newValue != value) {
-			NotificationChain msgs = null;
-			if (value != null)
-				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.RETURN__VALUE, null, msgs);
-			if (newValue != null)
-				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.RETURN__VALUE, null, msgs);
-			msgs = basicSetValue(newValue, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.RETURN__VALUE, newValue, newValue));
+	public String getReturnvalue() {
+		return returnvalue;
 	}
 
 	/**
@@ -105,13 +120,11 @@ public class ReturnImpl extends Ret_InstrImpl implements Return {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case LlvmPackage.RETURN__VALUE:
-				return basicSetValue(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+	public void setReturnvalue(String newReturnvalue) {
+		String oldReturnvalue = returnvalue;
+		returnvalue = newReturnvalue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.RETURN__RETURNVALUE, oldReturnvalue, returnvalue));
 	}
 
 	/**
@@ -122,8 +135,10 @@ public class ReturnImpl extends Ret_InstrImpl implements Return {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case LlvmPackage.RETURN__VALUE:
-				return getValue();
+			case LlvmPackage.RETURN__RETURNTYPE:
+				return getReturntype();
+			case LlvmPackage.RETURN__RETURNVALUE:
+				return getReturnvalue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -136,8 +151,11 @@ public class ReturnImpl extends Ret_InstrImpl implements Return {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case LlvmPackage.RETURN__VALUE:
-				setValue((TypeAndValue)newValue);
+			case LlvmPackage.RETURN__RETURNTYPE:
+				setReturntype((String)newValue);
+				return;
+			case LlvmPackage.RETURN__RETURNVALUE:
+				setReturnvalue((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -151,8 +169,11 @@ public class ReturnImpl extends Ret_InstrImpl implements Return {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case LlvmPackage.RETURN__VALUE:
-				setValue((TypeAndValue)null);
+			case LlvmPackage.RETURN__RETURNTYPE:
+				setReturntype(RETURNTYPE_EDEFAULT);
+				return;
+			case LlvmPackage.RETURN__RETURNVALUE:
+				setReturnvalue(RETURNVALUE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -166,10 +187,30 @@ public class ReturnImpl extends Ret_InstrImpl implements Return {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case LlvmPackage.RETURN__VALUE:
-				return value != null;
+			case LlvmPackage.RETURN__RETURNTYPE:
+				return RETURNTYPE_EDEFAULT == null ? returntype != null : !RETURNTYPE_EDEFAULT.equals(returntype);
+			case LlvmPackage.RETURN__RETURNVALUE:
+				return RETURNVALUE_EDEFAULT == null ? returnvalue != null : !RETURNVALUE_EDEFAULT.equals(returnvalue);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (returntype: ");
+		result.append(returntype);
+		result.append(", returnvalue: ");
+		result.append(returnvalue);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ReturnImpl

@@ -92,6 +92,26 @@ public class LlvmSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case LlvmPackage.NAMED_TYPE: {
+				NamedType namedType = (NamedType)theEObject;
+				T result = caseNamedType(namedType);
+				if (result == null) result = caseMainLevelEntity(namedType);
+				if (result == null) result = caseAbstractElement(namedType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.STRUCTURE: {
+				Structure structure = (Structure)theEObject;
+				T result = caseStructure(structure);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.ALIAS: {
+				Alias alias = (Alias)theEObject;
+				T result = caseAlias(alias);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case LlvmPackage.FUNCTION_HEADER: {
 				FunctionHeader functionHeader = (FunctionHeader)theEObject;
 				T result = caseFunctionHeader(functionHeader);
@@ -130,38 +150,9 @@ public class LlvmSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case LlvmPackage.AGGREGATE: {
-				Aggregate aggregate = (Aggregate)theEObject;
-				T result = caseAggregate(aggregate);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case LlvmPackage.LOCAL_VAR_INSTRUCTION: {
-				LocalVarInstruction localVarInstruction = (LocalVarInstruction)theEObject;
-				T result = caseLocalVarInstruction(localVarInstruction);
-				if (result == null) result = caseMainLevelEntity(localVarInstruction);
-				if (result == null) result = caseAbstractElement(localVarInstruction);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case LlvmPackage.INSTRUCTION: {
 				Instruction instruction = (Instruction)theEObject;
 				T result = caseInstruction(instruction);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case LlvmPackage.ALIAS: {
-				Alias alias = (Alias)theEObject;
-				T result = caseAlias(alias);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case LlvmPackage.TYPE_AND_VALUE: {
-				TypeAndValue typeAndValue = (TypeAndValue)theEObject;
-				T result = caseTypeAndValue(typeAndValue);
-				if (result == null) result = caseClause(typeAndValue);
-				if (result == null) result = caseResume(typeAndValue);
-				if (result == null) result = caseRet_Instr(typeAndValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -245,10 +236,6 @@ public class LlvmSwitch<T> extends Switch<T> {
 			case LlvmPackage.VALUE_PAIR: {
 				ValuePair valuePair = (ValuePair)theEObject;
 				T result = caseValuePair(valuePair);
-				if (result == null) result = caseCompare(valuePair);
-				if (result == null) result = caseARITHMETIC_OP(valuePair);
-				if (result == null) result = caseLOGICAL_OP(valuePair);
-				if (result == null) result = caseInstruction(valuePair);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -454,6 +441,51 @@ public class LlvmSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Named Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Named Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNamedType(NamedType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Structure</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Structure</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStructure(Structure object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Alias</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Alias</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAlias(Alias object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Function Header</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -544,36 +576,6 @@ public class LlvmSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Aggregate</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Aggregate</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAggregate(Aggregate object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Local Var Instruction</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Local Var Instruction</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLocalVarInstruction(LocalVarInstruction object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Instruction</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -585,36 +587,6 @@ public class LlvmSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseInstruction(Instruction object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Alias</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Alias</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAlias(Alias object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type And Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type And Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTypeAndValue(TypeAndValue object) {
 		return null;
 	}
 

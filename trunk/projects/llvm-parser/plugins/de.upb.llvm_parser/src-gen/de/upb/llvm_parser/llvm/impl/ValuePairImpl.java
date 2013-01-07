@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class ValuePairImpl extends CompareImpl implements ValuePair {
+public class ValuePairImpl extends MinimalEObjectImpl.Container implements ValuePair {
 	/**
 	 * The default value of the '{@link #getValue1() <em>Value1</em>}' attribute.
 	 * <!-- begin-user-doc -->

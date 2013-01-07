@@ -12,10 +12,10 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.LandingPad#getType <em>Type</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.LandingPad#getPersonality <em>Personality</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.LandingPad#getClause <em>Clause</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.LandingPad#getStruct <em>Struct</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.LandingPad#getPersonalitytype <em>Personalitytype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.LandingPad#getPersonalityvalue <em>Personalityvalue</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.LandingPad#getClause <em>Clause</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.LandingPad#getPersonalityfunction <em>Personalityfunction</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.LandingPad#getValue <em>Value</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.LandingPad#getCastto <em>Castto</em>}</li>
@@ -28,72 +28,30 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface LandingPad extends Instruction {
 	/**
-	 * Returns the value of the '<em><b>Type</b></em>' attribute.
+	 * Returns the value of the '<em><b>Struct</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Type</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Struct</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' attribute.
-	 * @see #setType(String)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLandingPad_Type()
-	 * @model
-	 * @generated
-	 */
-	String getType();
-
-	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.LandingPad#getType <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' attribute.
-	 * @see #getType()
-	 * @generated
-	 */
-	void setType(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Personality</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Personality</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Personality</em>' containment reference.
-	 * @see #setPersonality(TypeAndValue)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLandingPad_Personality()
+	 * @return the value of the '<em>Struct</em>' containment reference.
+	 * @see #setStruct(Structure)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLandingPad_Struct()
 	 * @model containment="true"
 	 * @generated
 	 */
-	TypeAndValue getPersonality();
+	Structure getStruct();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.LandingPad#getPersonality <em>Personality</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.LandingPad#getStruct <em>Struct</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Personality</em>' containment reference.
-	 * @see #getPersonality()
+	 * @param value the new value of the '<em>Struct</em>' containment reference.
+	 * @see #getStruct()
 	 * @generated
 	 */
-	void setPersonality(TypeAndValue value);
-
-	/**
-	 * Returns the value of the '<em><b>Clause</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.Clause}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Clause</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Clause</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLandingPad_Clause()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Clause> getClause();
+	void setStruct(Structure value);
 
 	/**
 	 * Returns the value of the '<em><b>Personalitytype</b></em>' attribute.
@@ -120,6 +78,48 @@ public interface LandingPad extends Instruction {
 	 * @generated
 	 */
 	void setPersonalitytype(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Personalityvalue</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Personalityvalue</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Personalityvalue</em>' attribute.
+	 * @see #setPersonalityvalue(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLandingPad_Personalityvalue()
+	 * @model
+	 * @generated
+	 */
+	String getPersonalityvalue();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.LandingPad#getPersonalityvalue <em>Personalityvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Personalityvalue</em>' attribute.
+	 * @see #getPersonalityvalue()
+	 * @generated
+	 */
+	void setPersonalityvalue(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Clause</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.Clause}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Clause</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Clause</em>' containment reference list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLandingPad_Clause()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Clause> getClause();
 
 	/**
 	 * Returns the value of the '<em><b>Personalityfunction</b></em>' attribute.

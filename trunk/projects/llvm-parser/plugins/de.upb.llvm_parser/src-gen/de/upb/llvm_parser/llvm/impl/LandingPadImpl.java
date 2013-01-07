@@ -5,7 +5,7 @@ package de.upb.llvm_parser.llvm.impl;
 import de.upb.llvm_parser.llvm.Clause;
 import de.upb.llvm_parser.llvm.LandingPad;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.TypeAndValue;
+import de.upb.llvm_parser.llvm.Structure;
 
 import java.util.Collection;
 
@@ -29,10 +29,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl#getType <em>Type</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl#getPersonality <em>Personality</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl#getClause <em>Clause</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl#getStruct <em>Struct</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl#getPersonalitytype <em>Personalitytype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl#getPersonalityvalue <em>Personalityvalue</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl#getClause <em>Clause</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl#getPersonalityfunction <em>Personalityfunction</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl#getValue <em>Value</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl#getCastto <em>Castto</em>}</li>
@@ -43,44 +43,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class LandingPadImpl extends InstructionImpl implements LandingPad {
 	/**
-	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * The cached value of the '{@link #getStruct() <em>Struct</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
+	 * @see #getStruct()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String TYPE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
-	protected String type = TYPE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getPersonality() <em>Personality</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPersonality()
-	 * @generated
-	 * @ordered
-	 */
-	protected TypeAndValue personality;
-
-	/**
-	 * The cached value of the '{@link #getClause() <em>Clause</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getClause()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Clause> clause;
+	protected Structure struct;
 
 	/**
 	 * The default value of the '{@link #getPersonalitytype() <em>Personalitytype</em>}' attribute.
@@ -101,6 +71,36 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 	 * @ordered
 	 */
 	protected String personalitytype = PERSONALITYTYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getPersonalityvalue() <em>Personalityvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPersonalityvalue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PERSONALITYVALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPersonalityvalue() <em>Personalityvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPersonalityvalue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String personalityvalue = PERSONALITYVALUE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getClause() <em>Clause</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClause()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Clause> clause;
 
 	/**
 	 * The default value of the '{@link #getPersonalityfunction() <em>Personalityfunction</em>}' attribute.
@@ -186,8 +186,8 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getType() {
-		return type;
+	public Structure getStruct() {
+		return struct;
 	}
 
 	/**
@@ -195,32 +195,11 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(String newType) {
-		String oldType = type;
-		type = newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LANDING_PAD__TYPE, oldType, type));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TypeAndValue getPersonality() {
-		return personality;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetPersonality(TypeAndValue newPersonality, NotificationChain msgs) {
-		TypeAndValue oldPersonality = personality;
-		personality = newPersonality;
+	public NotificationChain basicSetStruct(Structure newStruct, NotificationChain msgs) {
+		Structure oldStruct = struct;
+		struct = newStruct;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.LANDING_PAD__PERSONALITY, oldPersonality, newPersonality);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.LANDING_PAD__STRUCT, oldStruct, newStruct);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -231,30 +210,18 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPersonality(TypeAndValue newPersonality) {
-		if (newPersonality != personality) {
+	public void setStruct(Structure newStruct) {
+		if (newStruct != struct) {
 			NotificationChain msgs = null;
-			if (personality != null)
-				msgs = ((InternalEObject)personality).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LANDING_PAD__PERSONALITY, null, msgs);
-			if (newPersonality != null)
-				msgs = ((InternalEObject)newPersonality).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LANDING_PAD__PERSONALITY, null, msgs);
-			msgs = basicSetPersonality(newPersonality, msgs);
+			if (struct != null)
+				msgs = ((InternalEObject)struct).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LANDING_PAD__STRUCT, null, msgs);
+			if (newStruct != null)
+				msgs = ((InternalEObject)newStruct).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LANDING_PAD__STRUCT, null, msgs);
+			msgs = basicSetStruct(newStruct, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LANDING_PAD__PERSONALITY, newPersonality, newPersonality));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Clause> getClause() {
-		if (clause == null) {
-			clause = new EObjectContainmentEList<Clause>(Clause.class, this, LlvmPackage.LANDING_PAD__CLAUSE);
-		}
-		return clause;
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LANDING_PAD__STRUCT, newStruct, newStruct));
 	}
 
 	/**
@@ -276,6 +243,39 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 		personalitytype = newPersonalitytype;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LANDING_PAD__PERSONALITYTYPE, oldPersonalitytype, personalitytype));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getPersonalityvalue() {
+		return personalityvalue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPersonalityvalue(String newPersonalityvalue) {
+		String oldPersonalityvalue = personalityvalue;
+		personalityvalue = newPersonalityvalue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LANDING_PAD__PERSONALITYVALUE, oldPersonalityvalue, personalityvalue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Clause> getClause() {
+		if (clause == null) {
+			clause = new EObjectContainmentEList<Clause>(Clause.class, this, LlvmPackage.LANDING_PAD__CLAUSE);
+		}
+		return clause;
 	}
 
 	/**
@@ -349,8 +349,8 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case LlvmPackage.LANDING_PAD__PERSONALITY:
-				return basicSetPersonality(null, msgs);
+			case LlvmPackage.LANDING_PAD__STRUCT:
+				return basicSetStruct(null, msgs);
 			case LlvmPackage.LANDING_PAD__CLAUSE:
 				return ((InternalEList<?>)getClause()).basicRemove(otherEnd, msgs);
 		}
@@ -365,14 +365,14 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case LlvmPackage.LANDING_PAD__TYPE:
-				return getType();
-			case LlvmPackage.LANDING_PAD__PERSONALITY:
-				return getPersonality();
-			case LlvmPackage.LANDING_PAD__CLAUSE:
-				return getClause();
+			case LlvmPackage.LANDING_PAD__STRUCT:
+				return getStruct();
 			case LlvmPackage.LANDING_PAD__PERSONALITYTYPE:
 				return getPersonalitytype();
+			case LlvmPackage.LANDING_PAD__PERSONALITYVALUE:
+				return getPersonalityvalue();
+			case LlvmPackage.LANDING_PAD__CLAUSE:
+				return getClause();
 			case LlvmPackage.LANDING_PAD__PERSONALITYFUNCTION:
 				return getPersonalityfunction();
 			case LlvmPackage.LANDING_PAD__VALUE:
@@ -392,18 +392,18 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case LlvmPackage.LANDING_PAD__TYPE:
-				setType((String)newValue);
+			case LlvmPackage.LANDING_PAD__STRUCT:
+				setStruct((Structure)newValue);
 				return;
-			case LlvmPackage.LANDING_PAD__PERSONALITY:
-				setPersonality((TypeAndValue)newValue);
+			case LlvmPackage.LANDING_PAD__PERSONALITYTYPE:
+				setPersonalitytype((String)newValue);
+				return;
+			case LlvmPackage.LANDING_PAD__PERSONALITYVALUE:
+				setPersonalityvalue((String)newValue);
 				return;
 			case LlvmPackage.LANDING_PAD__CLAUSE:
 				getClause().clear();
 				getClause().addAll((Collection<? extends Clause>)newValue);
-				return;
-			case LlvmPackage.LANDING_PAD__PERSONALITYTYPE:
-				setPersonalitytype((String)newValue);
 				return;
 			case LlvmPackage.LANDING_PAD__PERSONALITYFUNCTION:
 				setPersonalityfunction((String)newValue);
@@ -426,17 +426,17 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case LlvmPackage.LANDING_PAD__TYPE:
-				setType(TYPE_EDEFAULT);
-				return;
-			case LlvmPackage.LANDING_PAD__PERSONALITY:
-				setPersonality((TypeAndValue)null);
-				return;
-			case LlvmPackage.LANDING_PAD__CLAUSE:
-				getClause().clear();
+			case LlvmPackage.LANDING_PAD__STRUCT:
+				setStruct((Structure)null);
 				return;
 			case LlvmPackage.LANDING_PAD__PERSONALITYTYPE:
 				setPersonalitytype(PERSONALITYTYPE_EDEFAULT);
+				return;
+			case LlvmPackage.LANDING_PAD__PERSONALITYVALUE:
+				setPersonalityvalue(PERSONALITYVALUE_EDEFAULT);
+				return;
+			case LlvmPackage.LANDING_PAD__CLAUSE:
+				getClause().clear();
 				return;
 			case LlvmPackage.LANDING_PAD__PERSONALITYFUNCTION:
 				setPersonalityfunction(PERSONALITYFUNCTION_EDEFAULT);
@@ -459,14 +459,14 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case LlvmPackage.LANDING_PAD__TYPE:
-				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
-			case LlvmPackage.LANDING_PAD__PERSONALITY:
-				return personality != null;
-			case LlvmPackage.LANDING_PAD__CLAUSE:
-				return clause != null && !clause.isEmpty();
+			case LlvmPackage.LANDING_PAD__STRUCT:
+				return struct != null;
 			case LlvmPackage.LANDING_PAD__PERSONALITYTYPE:
 				return PERSONALITYTYPE_EDEFAULT == null ? personalitytype != null : !PERSONALITYTYPE_EDEFAULT.equals(personalitytype);
+			case LlvmPackage.LANDING_PAD__PERSONALITYVALUE:
+				return PERSONALITYVALUE_EDEFAULT == null ? personalityvalue != null : !PERSONALITYVALUE_EDEFAULT.equals(personalityvalue);
+			case LlvmPackage.LANDING_PAD__CLAUSE:
+				return clause != null && !clause.isEmpty();
 			case LlvmPackage.LANDING_PAD__PERSONALITYFUNCTION:
 				return PERSONALITYFUNCTION_EDEFAULT == null ? personalityfunction != null : !PERSONALITYFUNCTION_EDEFAULT.equals(personalityfunction);
 			case LlvmPackage.LANDING_PAD__VALUE:
@@ -487,10 +487,10 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (type: ");
-		result.append(type);
-		result.append(", personalitytype: ");
+		result.append(" (personalitytype: ");
 		result.append(personalitytype);
+		result.append(", personalityvalue: ");
+		result.append(personalityvalue);
 		result.append(", personalityfunction: ");
 		result.append(personalityfunction);
 		result.append(", value: ");
