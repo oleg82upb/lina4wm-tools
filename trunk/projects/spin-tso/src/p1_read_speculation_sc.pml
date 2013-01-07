@@ -46,9 +46,8 @@ atomic{
 	run process3();
 	}	
 }
-	
 
-/*(r1 == 0) && (r2 == 1) && (r3 == 2) ok (allowed)*/
+/*(r1 == 0) && (r2 == 1) && (r3 == 2) (NOT allowed)*/
 
 ltl check_0 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 == 1) && (r3 == 2))))};
 
