@@ -4,13 +4,10 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.Alias;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.TypeAndValue;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
@@ -22,7 +19,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.AliasImpl#getType <em>Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.AliasImpl#getAliastype <em>Aliastype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.AliasImpl#getAliasvalue <em>Aliasvalue</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.AliasImpl#getAliasee <em>Aliasee</em>}</li>
  * </ul>
  * </p>
@@ -31,14 +29,44 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  */
 public class AliasImpl extends MinimalEObjectImpl.Container implements Alias {
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+	 * The default value of the '{@link #getAliastype() <em>Aliastype</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
+	 * @see #getAliastype()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeAndValue type;
+	protected static final String ALIASTYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAliastype() <em>Aliastype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAliastype()
+	 * @generated
+	 * @ordered
+	 */
+	protected String aliastype = ALIASTYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getAliasvalue() <em>Aliasvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAliasvalue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ALIASVALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAliasvalue() <em>Aliasvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAliasvalue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String aliasvalue = ALIASVALUE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getAliasee() <em>Aliasee</em>}' attribute.
@@ -84,8 +112,8 @@ public class AliasImpl extends MinimalEObjectImpl.Container implements Alias {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeAndValue getType() {
-		return type;
+	public String getAliastype() {
+		return aliastype;
 	}
 
 	/**
@@ -93,14 +121,11 @@ public class AliasImpl extends MinimalEObjectImpl.Container implements Alias {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetType(TypeAndValue newType, NotificationChain msgs) {
-		TypeAndValue oldType = type;
-		type = newType;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.ALIAS__TYPE, oldType, newType);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public void setAliastype(String newAliastype) {
+		String oldAliastype = aliastype;
+		aliastype = newAliastype;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ALIAS__ALIASTYPE, oldAliastype, aliastype));
 	}
 
 	/**
@@ -108,18 +133,20 @@ public class AliasImpl extends MinimalEObjectImpl.Container implements Alias {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(TypeAndValue newType) {
-		if (newType != type) {
-			NotificationChain msgs = null;
-			if (type != null)
-				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ALIAS__TYPE, null, msgs);
-			if (newType != null)
-				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ALIAS__TYPE, null, msgs);
-			msgs = basicSetType(newType, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ALIAS__TYPE, newType, newType));
+	public String getAliasvalue() {
+		return aliasvalue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAliasvalue(String newAliasvalue) {
+		String oldAliasvalue = aliasvalue;
+		aliasvalue = newAliasvalue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ALIAS__ALIASVALUE, oldAliasvalue, aliasvalue));
 	}
 
 	/**
@@ -149,24 +176,12 @@ public class AliasImpl extends MinimalEObjectImpl.Container implements Alias {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case LlvmPackage.ALIAS__TYPE:
-				return basicSetType(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case LlvmPackage.ALIAS__TYPE:
-				return getType();
+			case LlvmPackage.ALIAS__ALIASTYPE:
+				return getAliastype();
+			case LlvmPackage.ALIAS__ALIASVALUE:
+				return getAliasvalue();
 			case LlvmPackage.ALIAS__ALIASEE:
 				return getAliasee();
 		}
@@ -181,8 +196,11 @@ public class AliasImpl extends MinimalEObjectImpl.Container implements Alias {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case LlvmPackage.ALIAS__TYPE:
-				setType((TypeAndValue)newValue);
+			case LlvmPackage.ALIAS__ALIASTYPE:
+				setAliastype((String)newValue);
+				return;
+			case LlvmPackage.ALIAS__ALIASVALUE:
+				setAliasvalue((String)newValue);
 				return;
 			case LlvmPackage.ALIAS__ALIASEE:
 				setAliasee((String)newValue);
@@ -199,8 +217,11 @@ public class AliasImpl extends MinimalEObjectImpl.Container implements Alias {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case LlvmPackage.ALIAS__TYPE:
-				setType((TypeAndValue)null);
+			case LlvmPackage.ALIAS__ALIASTYPE:
+				setAliastype(ALIASTYPE_EDEFAULT);
+				return;
+			case LlvmPackage.ALIAS__ALIASVALUE:
+				setAliasvalue(ALIASVALUE_EDEFAULT);
 				return;
 			case LlvmPackage.ALIAS__ALIASEE:
 				setAliasee(ALIASEE_EDEFAULT);
@@ -217,8 +238,10 @@ public class AliasImpl extends MinimalEObjectImpl.Container implements Alias {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case LlvmPackage.ALIAS__TYPE:
-				return type != null;
+			case LlvmPackage.ALIAS__ALIASTYPE:
+				return ALIASTYPE_EDEFAULT == null ? aliastype != null : !ALIASTYPE_EDEFAULT.equals(aliastype);
+			case LlvmPackage.ALIAS__ALIASVALUE:
+				return ALIASVALUE_EDEFAULT == null ? aliasvalue != null : !ALIASVALUE_EDEFAULT.equals(aliasvalue);
 			case LlvmPackage.ALIAS__ALIASEE:
 				return ALIASEE_EDEFAULT == null ? aliasee != null : !ALIASEE_EDEFAULT.equals(aliasee);
 		}
@@ -235,7 +258,11 @@ public class AliasImpl extends MinimalEObjectImpl.Container implements Alias {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (aliasee: ");
+		result.append(" (aliastype: ");
+		result.append(aliastype);
+		result.append(", aliasvalue: ");
+		result.append(aliasvalue);
+		result.append(", aliasee: ");
 		result.append(aliasee);
 		result.append(')');
 		return result.toString();

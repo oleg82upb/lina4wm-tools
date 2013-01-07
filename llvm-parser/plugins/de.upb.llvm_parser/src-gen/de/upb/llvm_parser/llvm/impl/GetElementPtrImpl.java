@@ -4,19 +4,18 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.GetElementPtr;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.TypeAndValue;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,8 +24,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getPointer <em>Pointer</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getParams <em>Params</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getElementtype <em>Elementtype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getElement <em>Element</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getIndicetypes <em>Indicetypes</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getIndices <em>Indices</em>}</li>
  * </ul>
  * </p>
  *
@@ -34,24 +35,64 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr {
 	/**
-	 * The cached value of the '{@link #getPointer() <em>Pointer</em>}' containment reference list.
+	 * The default value of the '{@link #getElementtype() <em>Elementtype</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPointer()
+	 * @see #getElementtype()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TypeAndValue> pointer;
+	protected static final String ELEMENTTYPE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getParams() <em>Params</em>}' containment reference list.
+	 * The cached value of the '{@link #getElementtype() <em>Elementtype</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getParams()
+	 * @see #getElementtype()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TypeAndValue> params;
+	protected String elementtype = ELEMENTTYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getElement() <em>Element</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getElement()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ELEMENT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getElement() <em>Element</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getElement()
+	 * @generated
+	 * @ordered
+	 */
+	protected String element = ELEMENT_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getIndicetypes() <em>Indicetypes</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIndicetypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> indicetypes;
+
+	/**
+	 * The cached value of the '{@link #getIndices() <em>Indices</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIndices()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> indices;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -77,11 +118,8 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TypeAndValue> getPointer() {
-		if (pointer == null) {
-			pointer = new EObjectContainmentEList<TypeAndValue>(TypeAndValue.class, this, LlvmPackage.GET_ELEMENT_PTR__POINTER);
-		}
-		return pointer;
+	public String getElementtype() {
+		return elementtype;
 	}
 
 	/**
@@ -89,11 +127,11 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TypeAndValue> getParams() {
-		if (params == null) {
-			params = new EObjectContainmentEList<TypeAndValue>(TypeAndValue.class, this, LlvmPackage.GET_ELEMENT_PTR__PARAMS);
-		}
-		return params;
+	public void setElementtype(String newElementtype) {
+		String oldElementtype = elementtype;
+		elementtype = newElementtype;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE, oldElementtype, elementtype));
 	}
 
 	/**
@@ -101,15 +139,44 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case LlvmPackage.GET_ELEMENT_PTR__POINTER:
-				return ((InternalEList<?>)getPointer()).basicRemove(otherEnd, msgs);
-			case LlvmPackage.GET_ELEMENT_PTR__PARAMS:
-				return ((InternalEList<?>)getParams()).basicRemove(otherEnd, msgs);
+	public String getElement() {
+		return element;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setElement(String newElement) {
+		String oldElement = element;
+		element = newElement;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.GET_ELEMENT_PTR__ELEMENT, oldElement, element));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getIndicetypes() {
+		if (indicetypes == null) {
+			indicetypes = new EDataTypeEList<String>(String.class, this, LlvmPackage.GET_ELEMENT_PTR__INDICETYPES);
 		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+		return indicetypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getIndices() {
+		if (indices == null) {
+			indices = new EDataTypeEList<String>(String.class, this, LlvmPackage.GET_ELEMENT_PTR__INDICES);
+		}
+		return indices;
 	}
 
 	/**
@@ -120,10 +187,14 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case LlvmPackage.GET_ELEMENT_PTR__POINTER:
-				return getPointer();
-			case LlvmPackage.GET_ELEMENT_PTR__PARAMS:
-				return getParams();
+			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE:
+				return getElementtype();
+			case LlvmPackage.GET_ELEMENT_PTR__ELEMENT:
+				return getElement();
+			case LlvmPackage.GET_ELEMENT_PTR__INDICETYPES:
+				return getIndicetypes();
+			case LlvmPackage.GET_ELEMENT_PTR__INDICES:
+				return getIndices();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -137,13 +208,19 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case LlvmPackage.GET_ELEMENT_PTR__POINTER:
-				getPointer().clear();
-				getPointer().addAll((Collection<? extends TypeAndValue>)newValue);
+			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE:
+				setElementtype((String)newValue);
 				return;
-			case LlvmPackage.GET_ELEMENT_PTR__PARAMS:
-				getParams().clear();
-				getParams().addAll((Collection<? extends TypeAndValue>)newValue);
+			case LlvmPackage.GET_ELEMENT_PTR__ELEMENT:
+				setElement((String)newValue);
+				return;
+			case LlvmPackage.GET_ELEMENT_PTR__INDICETYPES:
+				getIndicetypes().clear();
+				getIndicetypes().addAll((Collection<? extends String>)newValue);
+				return;
+			case LlvmPackage.GET_ELEMENT_PTR__INDICES:
+				getIndices().clear();
+				getIndices().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -157,11 +234,17 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case LlvmPackage.GET_ELEMENT_PTR__POINTER:
-				getPointer().clear();
+			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE:
+				setElementtype(ELEMENTTYPE_EDEFAULT);
 				return;
-			case LlvmPackage.GET_ELEMENT_PTR__PARAMS:
-				getParams().clear();
+			case LlvmPackage.GET_ELEMENT_PTR__ELEMENT:
+				setElement(ELEMENT_EDEFAULT);
+				return;
+			case LlvmPackage.GET_ELEMENT_PTR__INDICETYPES:
+				getIndicetypes().clear();
+				return;
+			case LlvmPackage.GET_ELEMENT_PTR__INDICES:
+				getIndices().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -175,12 +258,38 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case LlvmPackage.GET_ELEMENT_PTR__POINTER:
-				return pointer != null && !pointer.isEmpty();
-			case LlvmPackage.GET_ELEMENT_PTR__PARAMS:
-				return params != null && !params.isEmpty();
+			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE:
+				return ELEMENTTYPE_EDEFAULT == null ? elementtype != null : !ELEMENTTYPE_EDEFAULT.equals(elementtype);
+			case LlvmPackage.GET_ELEMENT_PTR__ELEMENT:
+				return ELEMENT_EDEFAULT == null ? element != null : !ELEMENT_EDEFAULT.equals(element);
+			case LlvmPackage.GET_ELEMENT_PTR__INDICETYPES:
+				return indicetypes != null && !indicetypes.isEmpty();
+			case LlvmPackage.GET_ELEMENT_PTR__INDICES:
+				return indices != null && !indices.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (elementtype: ");
+		result.append(elementtype);
+		result.append(", element: ");
+		result.append(element);
+		result.append(", indicetypes: ");
+		result.append(indicetypes);
+		result.append(", indices: ");
+		result.append(indices);
+		result.append(')');
+		return result.toString();
 	}
 
 } //GetElementPtrImpl

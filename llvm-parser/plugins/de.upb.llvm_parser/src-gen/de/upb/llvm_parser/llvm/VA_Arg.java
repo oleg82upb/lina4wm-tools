@@ -11,7 +11,8 @@ package de.upb.llvm_parser.llvm;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.VA_Arg#getList <em>List</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.VA_Arg#getListtype <em>Listtype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.VA_Arg#getListvalue <em>Listvalue</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.VA_Arg#getArgType <em>Arg Type</em>}</li>
  * </ul>
  * </p>
@@ -22,30 +23,56 @@ package de.upb.llvm_parser.llvm;
  */
 public interface VA_Arg extends Instruction {
 	/**
-	 * Returns the value of the '<em><b>List</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Listtype</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>List</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Listtype</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>List</em>' containment reference.
-	 * @see #setList(TypeAndValue)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getVA_Arg_List()
-	 * @model containment="true"
+	 * @return the value of the '<em>Listtype</em>' attribute.
+	 * @see #setListtype(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getVA_Arg_Listtype()
+	 * @model
 	 * @generated
 	 */
-	TypeAndValue getList();
+	String getListtype();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.VA_Arg#getList <em>List</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.VA_Arg#getListtype <em>Listtype</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>List</em>' containment reference.
-	 * @see #getList()
+	 * @param value the new value of the '<em>Listtype</em>' attribute.
+	 * @see #getListtype()
 	 * @generated
 	 */
-	void setList(TypeAndValue value);
+	void setListtype(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Listvalue</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Listvalue</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Listvalue</em>' attribute.
+	 * @see #setListvalue(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getVA_Arg_Listvalue()
+	 * @model
+	 * @generated
+	 */
+	String getListvalue();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.VA_Arg#getListvalue <em>Listvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Listvalue</em>' attribute.
+	 * @see #getListvalue()
+	 * @generated
+	 */
+	void setListvalue(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Arg Type</b></em>' attribute.

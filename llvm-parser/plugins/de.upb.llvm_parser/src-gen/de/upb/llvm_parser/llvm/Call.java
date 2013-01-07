@@ -11,7 +11,8 @@ package de.upb.llvm_parser.llvm;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.Call#getPointer <em>Pointer</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Call#getAdresstype <em>Adresstype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Call#getAdress <em>Adress</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Call#getPList <em>PList</em>}</li>
  * </ul>
  * </p>
@@ -22,30 +23,56 @@ package de.upb.llvm_parser.llvm;
  */
 public interface Call extends Instruction {
 	/**
-	 * Returns the value of the '<em><b>Pointer</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Adresstype</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Pointer</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Adresstype</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Pointer</em>' containment reference.
-	 * @see #setPointer(TypeAndValue)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCall_Pointer()
-	 * @model containment="true"
+	 * @return the value of the '<em>Adresstype</em>' attribute.
+	 * @see #setAdresstype(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCall_Adresstype()
+	 * @model
 	 * @generated
 	 */
-	TypeAndValue getPointer();
+	String getAdresstype();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Call#getPointer <em>Pointer</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Call#getAdresstype <em>Adresstype</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Pointer</em>' containment reference.
-	 * @see #getPointer()
+	 * @param value the new value of the '<em>Adresstype</em>' attribute.
+	 * @see #getAdresstype()
 	 * @generated
 	 */
-	void setPointer(TypeAndValue value);
+	void setAdresstype(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Adress</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Adress</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Adress</em>' attribute.
+	 * @see #setAdress(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCall_Adress()
+	 * @model
+	 * @generated
+	 */
+	String getAdress();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Call#getAdress <em>Adress</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Adress</em>' attribute.
+	 * @see #getAdress()
+	 * @generated
+	 */
+	void setAdress(String value);
 
 	/**
 	 * Returns the value of the '<em><b>PList</b></em>' containment reference.

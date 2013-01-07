@@ -4,13 +4,10 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Load;
-import de.upb.llvm_parser.llvm.TypeAndValue;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -21,6 +18,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getAdresstype <em>Adresstype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getAdress <em>Adress</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getOrdering <em>Ordering</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getIndex <em>Index</em>}</li>
@@ -31,14 +29,44 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class LoadImpl extends InstructionImpl implements Load {
 	/**
-	 * The cached value of the '{@link #getAdress() <em>Adress</em>}' containment reference.
+	 * The default value of the '{@link #getAdresstype() <em>Adresstype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAdresstype()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ADRESSTYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAdresstype() <em>Adresstype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAdresstype()
+	 * @generated
+	 * @ordered
+	 */
+	protected String adresstype = ADRESSTYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getAdress() <em>Adress</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAdress()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeAndValue adress;
+	protected static final String ADRESS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAdress() <em>Adress</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAdress()
+	 * @generated
+	 * @ordered
+	 */
+	protected String adress = ADRESS_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getOrdering() <em>Ordering</em>}' attribute.
@@ -104,7 +132,28 @@ public class LoadImpl extends InstructionImpl implements Load {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeAndValue getAdress() {
+	public String getAdresstype() {
+		return adresstype;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAdresstype(String newAdresstype) {
+		String oldAdresstype = adresstype;
+		adresstype = newAdresstype;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__ADRESSTYPE, oldAdresstype, adresstype));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getAdress() {
 		return adress;
 	}
 
@@ -113,33 +162,11 @@ public class LoadImpl extends InstructionImpl implements Load {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetAdress(TypeAndValue newAdress, NotificationChain msgs) {
-		TypeAndValue oldAdress = adress;
+	public void setAdress(String newAdress) {
+		String oldAdress = adress;
 		adress = newAdress;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__ADRESS, oldAdress, newAdress);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAdress(TypeAndValue newAdress) {
-		if (newAdress != adress) {
-			NotificationChain msgs = null;
-			if (adress != null)
-				msgs = ((InternalEObject)adress).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LOAD__ADRESS, null, msgs);
-			if (newAdress != null)
-				msgs = ((InternalEObject)newAdress).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LOAD__ADRESS, null, msgs);
-			msgs = basicSetAdress(newAdress, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__ADRESS, newAdress, newAdress));
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__ADRESS, oldAdress, adress));
 	}
 
 	/**
@@ -190,22 +217,10 @@ public class LoadImpl extends InstructionImpl implements Load {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case LlvmPackage.LOAD__ADRESS:
-				return basicSetAdress(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case LlvmPackage.LOAD__ADRESSTYPE:
+				return getAdresstype();
 			case LlvmPackage.LOAD__ADRESS:
 				return getAdress();
 			case LlvmPackage.LOAD__ORDERING:
@@ -224,8 +239,11 @@ public class LoadImpl extends InstructionImpl implements Load {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case LlvmPackage.LOAD__ADRESSTYPE:
+				setAdresstype((String)newValue);
+				return;
 			case LlvmPackage.LOAD__ADRESS:
-				setAdress((TypeAndValue)newValue);
+				setAdress((String)newValue);
 				return;
 			case LlvmPackage.LOAD__ORDERING:
 				setOrdering((String)newValue);
@@ -245,8 +263,11 @@ public class LoadImpl extends InstructionImpl implements Load {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case LlvmPackage.LOAD__ADRESSTYPE:
+				setAdresstype(ADRESSTYPE_EDEFAULT);
+				return;
 			case LlvmPackage.LOAD__ADRESS:
-				setAdress((TypeAndValue)null);
+				setAdress(ADRESS_EDEFAULT);
 				return;
 			case LlvmPackage.LOAD__ORDERING:
 				setOrdering(ORDERING_EDEFAULT);
@@ -266,8 +287,10 @@ public class LoadImpl extends InstructionImpl implements Load {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case LlvmPackage.LOAD__ADRESSTYPE:
+				return ADRESSTYPE_EDEFAULT == null ? adresstype != null : !ADRESSTYPE_EDEFAULT.equals(adresstype);
 			case LlvmPackage.LOAD__ADRESS:
-				return adress != null;
+				return ADRESS_EDEFAULT == null ? adress != null : !ADRESS_EDEFAULT.equals(adress);
 			case LlvmPackage.LOAD__ORDERING:
 				return ORDERING_EDEFAULT == null ? ordering != null : !ORDERING_EDEFAULT.equals(ordering);
 			case LlvmPackage.LOAD__INDEX:
@@ -286,7 +309,11 @@ public class LoadImpl extends InstructionImpl implements Load {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (ordering: ");
+		result.append(" (adresstype: ");
+		result.append(adresstype);
+		result.append(", adress: ");
+		result.append(adress);
+		result.append(", ordering: ");
 		result.append(ordering);
 		result.append(", index: ");
 		result.append(index);

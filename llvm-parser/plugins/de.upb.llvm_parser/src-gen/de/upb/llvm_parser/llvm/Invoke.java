@@ -11,10 +11,13 @@ package de.upb.llvm_parser.llvm;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.Invoke#getFunction <em>Function</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Invoke#getFunctiontype <em>Functiontype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Invoke#getFunctionvalue <em>Functionvalue</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Invoke#getPList <em>PList</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Invoke#getTo <em>To</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Invoke#getUnwind <em>Unwind</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Invoke#getTotype <em>Totype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Invoke#getTovalue <em>Tovalue</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Invoke#getUnwindtype <em>Unwindtype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Invoke#getUnwindvalue <em>Unwindvalue</em>}</li>
  * </ul>
  * </p>
  *
@@ -24,30 +27,56 @@ package de.upb.llvm_parser.llvm;
  */
 public interface Invoke extends Ret_Instr {
 	/**
-	 * Returns the value of the '<em><b>Function</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Functiontype</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Function</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Functiontype</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Function</em>' containment reference.
-	 * @see #setFunction(TypeAndValue)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_Function()
-	 * @model containment="true"
+	 * @return the value of the '<em>Functiontype</em>' attribute.
+	 * @see #setFunctiontype(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_Functiontype()
+	 * @model
 	 * @generated
 	 */
-	TypeAndValue getFunction();
+	String getFunctiontype();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getFunction <em>Function</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getFunctiontype <em>Functiontype</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Function</em>' containment reference.
-	 * @see #getFunction()
+	 * @param value the new value of the '<em>Functiontype</em>' attribute.
+	 * @see #getFunctiontype()
 	 * @generated
 	 */
-	void setFunction(TypeAndValue value);
+	void setFunctiontype(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Functionvalue</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Functionvalue</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Functionvalue</em>' attribute.
+	 * @see #setFunctionvalue(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_Functionvalue()
+	 * @model
+	 * @generated
+	 */
+	String getFunctionvalue();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getFunctionvalue <em>Functionvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Functionvalue</em>' attribute.
+	 * @see #getFunctionvalue()
+	 * @generated
+	 */
+	void setFunctionvalue(String value);
 
 	/**
 	 * Returns the value of the '<em><b>PList</b></em>' containment reference.
@@ -76,55 +105,107 @@ public interface Invoke extends Ret_Instr {
 	void setPList(ParameterList value);
 
 	/**
-	 * Returns the value of the '<em><b>To</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Totype</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>To</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Totype</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>To</em>' containment reference.
-	 * @see #setTo(TypeAndValue)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_To()
-	 * @model containment="true"
+	 * @return the value of the '<em>Totype</em>' attribute.
+	 * @see #setTotype(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_Totype()
+	 * @model
 	 * @generated
 	 */
-	TypeAndValue getTo();
+	String getTotype();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getTo <em>To</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getTotype <em>Totype</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>To</em>' containment reference.
-	 * @see #getTo()
+	 * @param value the new value of the '<em>Totype</em>' attribute.
+	 * @see #getTotype()
 	 * @generated
 	 */
-	void setTo(TypeAndValue value);
+	void setTotype(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Unwind</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Tovalue</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Unwind</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Tovalue</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Unwind</em>' containment reference.
-	 * @see #setUnwind(TypeAndValue)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_Unwind()
-	 * @model containment="true"
+	 * @return the value of the '<em>Tovalue</em>' attribute.
+	 * @see #setTovalue(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_Tovalue()
+	 * @model
 	 * @generated
 	 */
-	TypeAndValue getUnwind();
+	String getTovalue();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getUnwind <em>Unwind</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getTovalue <em>Tovalue</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Unwind</em>' containment reference.
-	 * @see #getUnwind()
+	 * @param value the new value of the '<em>Tovalue</em>' attribute.
+	 * @see #getTovalue()
 	 * @generated
 	 */
-	void setUnwind(TypeAndValue value);
+	void setTovalue(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Unwindtype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Unwindtype</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Unwindtype</em>' attribute.
+	 * @see #setUnwindtype(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_Unwindtype()
+	 * @model
+	 * @generated
+	 */
+	String getUnwindtype();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getUnwindtype <em>Unwindtype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Unwindtype</em>' attribute.
+	 * @see #getUnwindtype()
+	 * @generated
+	 */
+	void setUnwindtype(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Unwindvalue</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Unwindvalue</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Unwindvalue</em>' attribute.
+	 * @see #setUnwindvalue(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_Unwindvalue()
+	 * @model
+	 * @generated
+	 */
+	String getUnwindvalue();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getUnwindvalue <em>Unwindvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Unwindvalue</em>' attribute.
+	 * @see #getUnwindvalue()
+	 * @generated
+	 */
+	void setUnwindvalue(String value);
 
 } // Invoke

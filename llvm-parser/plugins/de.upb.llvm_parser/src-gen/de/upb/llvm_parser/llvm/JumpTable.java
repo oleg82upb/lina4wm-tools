@@ -14,7 +14,9 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.JumpTable#getValues <em>Values</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.JumpTable#getJtypes <em>Jtypes</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.JumpTable#getJvalues <em>Jvalues</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.JumpTable#getDestinationtypes <em>Destinationtypes</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.JumpTable#getDestinations <em>Destinations</em>}</li>
  * </ul>
  * </p>
@@ -25,35 +27,67 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface JumpTable extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Values</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.TypeAndValue}.
+	 * Returns the value of the '<em><b>Jtypes</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Values</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Jtypes</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Values</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getJumpTable_Values()
-	 * @model containment="true"
+	 * @return the value of the '<em>Jtypes</em>' attribute list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getJumpTable_Jtypes()
+	 * @model unique="false"
 	 * @generated
 	 */
-	EList<TypeAndValue> getValues();
+	EList<String> getJtypes();
 
 	/**
-	 * Returns the value of the '<em><b>Destinations</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.TypeAndValue}.
+	 * Returns the value of the '<em><b>Jvalues</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Destinations</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Jvalues</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Destinations</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getJumpTable_Destinations()
-	 * @model containment="true"
+	 * @return the value of the '<em>Jvalues</em>' attribute list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getJumpTable_Jvalues()
+	 * @model unique="false"
 	 * @generated
 	 */
-	EList<TypeAndValue> getDestinations();
+	EList<String> getJvalues();
+
+	/**
+	 * Returns the value of the '<em><b>Destinationtypes</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Destinationtypes</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Destinationtypes</em>' attribute list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getJumpTable_Destinationtypes()
+	 * @model unique="false"
+	 * @generated
+	 */
+	EList<String> getDestinationtypes();
+
+	/**
+	 * Returns the value of the '<em><b>Destinations</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Destinations</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Destinations</em>' attribute list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getJumpTable_Destinations()
+	 * @model unique="false"
+	 * @generated
+	 */
+	EList<String> getDestinations();
 
 } // JumpTable

@@ -4,13 +4,10 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Select;
-import de.upb.llvm_parser.llvm.TypeAndValue;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -21,9 +18,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.SelectImpl#getCondition <em>Condition</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.SelectImpl#getVal1 <em>Val1</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.SelectImpl#getVal2 <em>Val2</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.SelectImpl#getConditiontype <em>Conditiontype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.SelectImpl#getConditionvalue <em>Conditionvalue</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.SelectImpl#getVal1type <em>Val1type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.SelectImpl#getVal1value <em>Val1value</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.SelectImpl#getVal2type <em>Val2type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.SelectImpl#getVal2value <em>Val2value</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,34 +31,124 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class SelectImpl extends InstructionImpl implements Select {
 	/**
-	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
+	 * The default value of the '{@link #getConditiontype() <em>Conditiontype</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCondition()
+	 * @see #getConditiontype()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeAndValue condition;
+	protected static final String CONDITIONTYPE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getVal1() <em>Val1</em>}' containment reference.
+	 * The cached value of the '{@link #getConditiontype() <em>Conditiontype</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getVal1()
+	 * @see #getConditiontype()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeAndValue val1;
+	protected String conditiontype = CONDITIONTYPE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getVal2() <em>Val2</em>}' containment reference.
+	 * The default value of the '{@link #getConditionvalue() <em>Conditionvalue</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getVal2()
+	 * @see #getConditionvalue()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeAndValue val2;
+	protected static final String CONDITIONVALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getConditionvalue() <em>Conditionvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConditionvalue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String conditionvalue = CONDITIONVALUE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getVal1type() <em>Val1type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVal1type()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String VAL1TYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getVal1type() <em>Val1type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVal1type()
+	 * @generated
+	 * @ordered
+	 */
+	protected String val1type = VAL1TYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getVal1value() <em>Val1value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVal1value()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String VAL1VALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getVal1value() <em>Val1value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVal1value()
+	 * @generated
+	 * @ordered
+	 */
+	protected String val1value = VAL1VALUE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getVal2type() <em>Val2type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVal2type()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String VAL2TYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getVal2type() <em>Val2type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVal2type()
+	 * @generated
+	 * @ordered
+	 */
+	protected String val2type = VAL2TYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getVal2value() <em>Val2value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVal2value()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String VAL2VALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getVal2value() <em>Val2value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVal2value()
+	 * @generated
+	 * @ordered
+	 */
+	protected String val2value = VAL2VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -84,8 +174,8 @@ public class SelectImpl extends InstructionImpl implements Select {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeAndValue getCondition() {
-		return condition;
+	public String getConditiontype() {
+		return conditiontype;
 	}
 
 	/**
@@ -93,14 +183,11 @@ public class SelectImpl extends InstructionImpl implements Select {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetCondition(TypeAndValue newCondition, NotificationChain msgs) {
-		TypeAndValue oldCondition = condition;
-		condition = newCondition;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SELECT__CONDITION, oldCondition, newCondition);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public void setConditiontype(String newConditiontype) {
+		String oldConditiontype = conditiontype;
+		conditiontype = newConditiontype;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SELECT__CONDITIONTYPE, oldConditiontype, conditiontype));
 	}
 
 	/**
@@ -108,18 +195,8 @@ public class SelectImpl extends InstructionImpl implements Select {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCondition(TypeAndValue newCondition) {
-		if (newCondition != condition) {
-			NotificationChain msgs = null;
-			if (condition != null)
-				msgs = ((InternalEObject)condition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SELECT__CONDITION, null, msgs);
-			if (newCondition != null)
-				msgs = ((InternalEObject)newCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SELECT__CONDITION, null, msgs);
-			msgs = basicSetCondition(newCondition, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SELECT__CONDITION, newCondition, newCondition));
+	public String getConditionvalue() {
+		return conditionvalue;
 	}
 
 	/**
@@ -127,8 +204,11 @@ public class SelectImpl extends InstructionImpl implements Select {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeAndValue getVal1() {
-		return val1;
+	public void setConditionvalue(String newConditionvalue) {
+		String oldConditionvalue = conditionvalue;
+		conditionvalue = newConditionvalue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SELECT__CONDITIONVALUE, oldConditionvalue, conditionvalue));
 	}
 
 	/**
@@ -136,14 +216,8 @@ public class SelectImpl extends InstructionImpl implements Select {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetVal1(TypeAndValue newVal1, NotificationChain msgs) {
-		TypeAndValue oldVal1 = val1;
-		val1 = newVal1;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SELECT__VAL1, oldVal1, newVal1);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public String getVal1type() {
+		return val1type;
 	}
 
 	/**
@@ -151,18 +225,11 @@ public class SelectImpl extends InstructionImpl implements Select {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setVal1(TypeAndValue newVal1) {
-		if (newVal1 != val1) {
-			NotificationChain msgs = null;
-			if (val1 != null)
-				msgs = ((InternalEObject)val1).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SELECT__VAL1, null, msgs);
-			if (newVal1 != null)
-				msgs = ((InternalEObject)newVal1).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SELECT__VAL1, null, msgs);
-			msgs = basicSetVal1(newVal1, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SELECT__VAL1, newVal1, newVal1));
+	public void setVal1type(String newVal1type) {
+		String oldVal1type = val1type;
+		val1type = newVal1type;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SELECT__VAL1TYPE, oldVal1type, val1type));
 	}
 
 	/**
@@ -170,8 +237,8 @@ public class SelectImpl extends InstructionImpl implements Select {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeAndValue getVal2() {
-		return val2;
+	public String getVal1value() {
+		return val1value;
 	}
 
 	/**
@@ -179,14 +246,11 @@ public class SelectImpl extends InstructionImpl implements Select {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetVal2(TypeAndValue newVal2, NotificationChain msgs) {
-		TypeAndValue oldVal2 = val2;
-		val2 = newVal2;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SELECT__VAL2, oldVal2, newVal2);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public void setVal1value(String newVal1value) {
+		String oldVal1value = val1value;
+		val1value = newVal1value;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SELECT__VAL1VALUE, oldVal1value, val1value));
 	}
 
 	/**
@@ -194,18 +258,8 @@ public class SelectImpl extends InstructionImpl implements Select {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setVal2(TypeAndValue newVal2) {
-		if (newVal2 != val2) {
-			NotificationChain msgs = null;
-			if (val2 != null)
-				msgs = ((InternalEObject)val2).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SELECT__VAL2, null, msgs);
-			if (newVal2 != null)
-				msgs = ((InternalEObject)newVal2).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SELECT__VAL2, null, msgs);
-			msgs = basicSetVal2(newVal2, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SELECT__VAL2, newVal2, newVal2));
+	public String getVal2type() {
+		return val2type;
 	}
 
 	/**
@@ -213,17 +267,32 @@ public class SelectImpl extends InstructionImpl implements Select {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case LlvmPackage.SELECT__CONDITION:
-				return basicSetCondition(null, msgs);
-			case LlvmPackage.SELECT__VAL1:
-				return basicSetVal1(null, msgs);
-			case LlvmPackage.SELECT__VAL2:
-				return basicSetVal2(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+	public void setVal2type(String newVal2type) {
+		String oldVal2type = val2type;
+		val2type = newVal2type;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SELECT__VAL2TYPE, oldVal2type, val2type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getVal2value() {
+		return val2value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVal2value(String newVal2value) {
+		String oldVal2value = val2value;
+		val2value = newVal2value;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SELECT__VAL2VALUE, oldVal2value, val2value));
 	}
 
 	/**
@@ -234,12 +303,18 @@ public class SelectImpl extends InstructionImpl implements Select {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case LlvmPackage.SELECT__CONDITION:
-				return getCondition();
-			case LlvmPackage.SELECT__VAL1:
-				return getVal1();
-			case LlvmPackage.SELECT__VAL2:
-				return getVal2();
+			case LlvmPackage.SELECT__CONDITIONTYPE:
+				return getConditiontype();
+			case LlvmPackage.SELECT__CONDITIONVALUE:
+				return getConditionvalue();
+			case LlvmPackage.SELECT__VAL1TYPE:
+				return getVal1type();
+			case LlvmPackage.SELECT__VAL1VALUE:
+				return getVal1value();
+			case LlvmPackage.SELECT__VAL2TYPE:
+				return getVal2type();
+			case LlvmPackage.SELECT__VAL2VALUE:
+				return getVal2value();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -252,14 +327,23 @@ public class SelectImpl extends InstructionImpl implements Select {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case LlvmPackage.SELECT__CONDITION:
-				setCondition((TypeAndValue)newValue);
+			case LlvmPackage.SELECT__CONDITIONTYPE:
+				setConditiontype((String)newValue);
 				return;
-			case LlvmPackage.SELECT__VAL1:
-				setVal1((TypeAndValue)newValue);
+			case LlvmPackage.SELECT__CONDITIONVALUE:
+				setConditionvalue((String)newValue);
 				return;
-			case LlvmPackage.SELECT__VAL2:
-				setVal2((TypeAndValue)newValue);
+			case LlvmPackage.SELECT__VAL1TYPE:
+				setVal1type((String)newValue);
+				return;
+			case LlvmPackage.SELECT__VAL1VALUE:
+				setVal1value((String)newValue);
+				return;
+			case LlvmPackage.SELECT__VAL2TYPE:
+				setVal2type((String)newValue);
+				return;
+			case LlvmPackage.SELECT__VAL2VALUE:
+				setVal2value((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -273,14 +357,23 @@ public class SelectImpl extends InstructionImpl implements Select {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case LlvmPackage.SELECT__CONDITION:
-				setCondition((TypeAndValue)null);
+			case LlvmPackage.SELECT__CONDITIONTYPE:
+				setConditiontype(CONDITIONTYPE_EDEFAULT);
 				return;
-			case LlvmPackage.SELECT__VAL1:
-				setVal1((TypeAndValue)null);
+			case LlvmPackage.SELECT__CONDITIONVALUE:
+				setConditionvalue(CONDITIONVALUE_EDEFAULT);
 				return;
-			case LlvmPackage.SELECT__VAL2:
-				setVal2((TypeAndValue)null);
+			case LlvmPackage.SELECT__VAL1TYPE:
+				setVal1type(VAL1TYPE_EDEFAULT);
+				return;
+			case LlvmPackage.SELECT__VAL1VALUE:
+				setVal1value(VAL1VALUE_EDEFAULT);
+				return;
+			case LlvmPackage.SELECT__VAL2TYPE:
+				setVal2type(VAL2TYPE_EDEFAULT);
+				return;
+			case LlvmPackage.SELECT__VAL2VALUE:
+				setVal2value(VAL2VALUE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -294,14 +387,46 @@ public class SelectImpl extends InstructionImpl implements Select {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case LlvmPackage.SELECT__CONDITION:
-				return condition != null;
-			case LlvmPackage.SELECT__VAL1:
-				return val1 != null;
-			case LlvmPackage.SELECT__VAL2:
-				return val2 != null;
+			case LlvmPackage.SELECT__CONDITIONTYPE:
+				return CONDITIONTYPE_EDEFAULT == null ? conditiontype != null : !CONDITIONTYPE_EDEFAULT.equals(conditiontype);
+			case LlvmPackage.SELECT__CONDITIONVALUE:
+				return CONDITIONVALUE_EDEFAULT == null ? conditionvalue != null : !CONDITIONVALUE_EDEFAULT.equals(conditionvalue);
+			case LlvmPackage.SELECT__VAL1TYPE:
+				return VAL1TYPE_EDEFAULT == null ? val1type != null : !VAL1TYPE_EDEFAULT.equals(val1type);
+			case LlvmPackage.SELECT__VAL1VALUE:
+				return VAL1VALUE_EDEFAULT == null ? val1value != null : !VAL1VALUE_EDEFAULT.equals(val1value);
+			case LlvmPackage.SELECT__VAL2TYPE:
+				return VAL2TYPE_EDEFAULT == null ? val2type != null : !VAL2TYPE_EDEFAULT.equals(val2type);
+			case LlvmPackage.SELECT__VAL2VALUE:
+				return VAL2VALUE_EDEFAULT == null ? val2value != null : !VAL2VALUE_EDEFAULT.equals(val2value);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (conditiontype: ");
+		result.append(conditiontype);
+		result.append(", conditionvalue: ");
+		result.append(conditionvalue);
+		result.append(", val1type: ");
+		result.append(val1type);
+		result.append(", val1value: ");
+		result.append(val1value);
+		result.append(", val2type: ");
+		result.append(val2type);
+		result.append(", val2value: ");
+		result.append(val2value);
+		result.append(')');
+		return result.toString();
 	}
 
 } //SelectImpl

@@ -58,6 +58,33 @@ public interface LlvmFactory extends EFactory {
 	MainLevelEntity createMainLevelEntity();
 
 	/**
+	 * Returns a new object of class '<em>Named Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Named Type</em>'.
+	 * @generated
+	 */
+	NamedType createNamedType();
+
+	/**
+	 * Returns a new object of class '<em>Structure</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Structure</em>'.
+	 * @generated
+	 */
+	Structure createStructure();
+
+	/**
+	 * Returns a new object of class '<em>Alias</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Alias</em>'.
+	 * @generated
+	 */
+	Alias createAlias();
+
+	/**
 	 * Returns a new object of class '<em>Function Header</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -112,24 +139,6 @@ public interface LlvmFactory extends EFactory {
 	TypeList createTypeList();
 
 	/**
-	 * Returns a new object of class '<em>Aggregate</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Aggregate</em>'.
-	 * @generated
-	 */
-	Aggregate createAggregate();
-
-	/**
-	 * Returns a new object of class '<em>Local Var Instruction</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Local Var Instruction</em>'.
-	 * @generated
-	 */
-	LocalVarInstruction createLocalVarInstruction();
-
-	/**
 	 * Returns a new object of class '<em>Instruction</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -137,24 +146,6 @@ public interface LlvmFactory extends EFactory {
 	 * @generated
 	 */
 	Instruction createInstruction();
-
-	/**
-	 * Returns a new object of class '<em>Alias</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Alias</em>'.
-	 * @generated
-	 */
-	Alias createAlias();
-
-	/**
-	 * Returns a new object of class '<em>Type And Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type And Value</em>'.
-	 * @generated
-	 */
-	TypeAndValue createTypeAndValue();
 
 	/**
 	 * Returns a new object of class '<em>Get Element Ptr</em>'.

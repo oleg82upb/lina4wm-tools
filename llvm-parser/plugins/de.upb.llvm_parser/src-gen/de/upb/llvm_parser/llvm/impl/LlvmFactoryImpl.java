@@ -60,17 +60,16 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 			case LlvmPackage.ABSTRACT_ELEMENT: return createAbstractElement();
 			case LlvmPackage.TOP_LEVEL_ENTITY: return createTopLevelEntity();
 			case LlvmPackage.MAIN_LEVEL_ENTITY: return createMainLevelEntity();
+			case LlvmPackage.NAMED_TYPE: return createNamedType();
+			case LlvmPackage.STRUCTURE: return createStructure();
+			case LlvmPackage.ALIAS: return createAlias();
 			case LlvmPackage.FUNCTION_HEADER: return createFunctionHeader();
 			case LlvmPackage.PARAMETER_LIST: return createParameterList();
 			case LlvmPackage.FUNCTION_BODY: return createFunctionBody();
 			case LlvmPackage.BASIC_BLOCK: return createBasicBlock();
 			case LlvmPackage.RET_INSTR: return createRet_Instr();
 			case LlvmPackage.TYPE_LIST: return createTypeList();
-			case LlvmPackage.AGGREGATE: return createAggregate();
-			case LlvmPackage.LOCAL_VAR_INSTRUCTION: return createLocalVarInstruction();
 			case LlvmPackage.INSTRUCTION: return createInstruction();
-			case LlvmPackage.ALIAS: return createAlias();
-			case LlvmPackage.TYPE_AND_VALUE: return createTypeAndValue();
 			case LlvmPackage.GET_ELEMENT_PTR: return createGetElementPtr();
 			case LlvmPackage.EXTRACT_VALUE: return createExtractValue();
 			case LlvmPackage.INSERT_VALUE: return createInsertValue();
@@ -153,6 +152,36 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public NamedType createNamedType() {
+		NamedTypeImpl namedType = new NamedTypeImpl();
+		return namedType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Structure createStructure() {
+		StructureImpl structure = new StructureImpl();
+		return structure;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Alias createAlias() {
+		AliasImpl alias = new AliasImpl();
+		return alias;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public FunctionHeader createFunctionHeader() {
 		FunctionHeaderImpl functionHeader = new FunctionHeaderImpl();
 		return functionHeader;
@@ -213,49 +242,9 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Aggregate createAggregate() {
-		AggregateImpl aggregate = new AggregateImpl();
-		return aggregate;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public LocalVarInstruction createLocalVarInstruction() {
-		LocalVarInstructionImpl localVarInstruction = new LocalVarInstructionImpl();
-		return localVarInstruction;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Instruction createInstruction() {
 		InstructionImpl instruction = new InstructionImpl();
 		return instruction;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Alias createAlias() {
-		AliasImpl alias = new AliasImpl();
-		return alias;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TypeAndValue createTypeAndValue() {
-		TypeAndValueImpl typeAndValue = new TypeAndValueImpl();
-		return typeAndValue;
 	}
 
 	/**

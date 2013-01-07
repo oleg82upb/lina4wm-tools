@@ -11,9 +11,12 @@ package de.upb.llvm_parser.llvm;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.ShuffleVector#getVector1 <em>Vector1</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.ShuffleVector#getVector2 <em>Vector2</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.ShuffleVector#getMask <em>Mask</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.ShuffleVector#getVal1type <em>Val1type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.ShuffleVector#getVal1value <em>Val1value</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.ShuffleVector#getVal2type <em>Val2type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.ShuffleVector#getVal2value <em>Val2value</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.ShuffleVector#getMasktype <em>Masktype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.ShuffleVector#getMaskvalue <em>Maskvalue</em>}</li>
  * </ul>
  * </p>
  *
@@ -23,81 +26,159 @@ package de.upb.llvm_parser.llvm;
  */
 public interface ShuffleVector extends Instruction {
 	/**
-	 * Returns the value of the '<em><b>Vector1</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Val1type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Vector1</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Val1type</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Vector1</em>' containment reference.
-	 * @see #setVector1(TypeAndValue)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getShuffleVector_Vector1()
-	 * @model containment="true"
+	 * @return the value of the '<em>Val1type</em>' attribute.
+	 * @see #setVal1type(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getShuffleVector_Val1type()
+	 * @model
 	 * @generated
 	 */
-	TypeAndValue getVector1();
+	String getVal1type();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ShuffleVector#getVector1 <em>Vector1</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ShuffleVector#getVal1type <em>Val1type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Vector1</em>' containment reference.
-	 * @see #getVector1()
+	 * @param value the new value of the '<em>Val1type</em>' attribute.
+	 * @see #getVal1type()
 	 * @generated
 	 */
-	void setVector1(TypeAndValue value);
+	void setVal1type(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Vector2</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Val1value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Vector2</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Val1value</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Vector2</em>' containment reference.
-	 * @see #setVector2(TypeAndValue)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getShuffleVector_Vector2()
-	 * @model containment="true"
+	 * @return the value of the '<em>Val1value</em>' attribute.
+	 * @see #setVal1value(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getShuffleVector_Val1value()
+	 * @model
 	 * @generated
 	 */
-	TypeAndValue getVector2();
+	String getVal1value();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ShuffleVector#getVector2 <em>Vector2</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ShuffleVector#getVal1value <em>Val1value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Vector2</em>' containment reference.
-	 * @see #getVector2()
+	 * @param value the new value of the '<em>Val1value</em>' attribute.
+	 * @see #getVal1value()
 	 * @generated
 	 */
-	void setVector2(TypeAndValue value);
+	void setVal1value(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Mask</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Val2type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Mask</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Val2type</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mask</em>' containment reference.
-	 * @see #setMask(TypeAndValue)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getShuffleVector_Mask()
-	 * @model containment="true"
+	 * @return the value of the '<em>Val2type</em>' attribute.
+	 * @see #setVal2type(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getShuffleVector_Val2type()
+	 * @model
 	 * @generated
 	 */
-	TypeAndValue getMask();
+	String getVal2type();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ShuffleVector#getMask <em>Mask</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ShuffleVector#getVal2type <em>Val2type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Mask</em>' containment reference.
-	 * @see #getMask()
+	 * @param value the new value of the '<em>Val2type</em>' attribute.
+	 * @see #getVal2type()
 	 * @generated
 	 */
-	void setMask(TypeAndValue value);
+	void setVal2type(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Val2value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Val2value</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Val2value</em>' attribute.
+	 * @see #setVal2value(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getShuffleVector_Val2value()
+	 * @model
+	 * @generated
+	 */
+	String getVal2value();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ShuffleVector#getVal2value <em>Val2value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Val2value</em>' attribute.
+	 * @see #getVal2value()
+	 * @generated
+	 */
+	void setVal2value(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Masktype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Masktype</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Masktype</em>' attribute.
+	 * @see #setMasktype(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getShuffleVector_Masktype()
+	 * @model
+	 * @generated
+	 */
+	String getMasktype();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ShuffleVector#getMasktype <em>Masktype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Masktype</em>' attribute.
+	 * @see #getMasktype()
+	 * @generated
+	 */
+	void setMasktype(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Maskvalue</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Maskvalue</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Maskvalue</em>' attribute.
+	 * @see #setMaskvalue(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getShuffleVector_Maskvalue()
+	 * @model
+	 * @generated
+	 */
+	String getMaskvalue();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ShuffleVector#getMaskvalue <em>Maskvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Maskvalue</em>' attribute.
+	 * @see #getMaskvalue()
+	 * @generated
+	 */
+	void setMaskvalue(String value);
 
 } // ShuffleVector

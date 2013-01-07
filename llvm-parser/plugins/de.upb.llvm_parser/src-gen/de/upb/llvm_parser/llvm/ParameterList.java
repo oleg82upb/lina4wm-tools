@@ -14,7 +14,8 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.ParameterList#getParams <em>Params</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.ParameterList#getTypes <em>Types</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.ParameterList#getVariables <em>Variables</em>}</li>
  * </ul>
  * </p>
  *
@@ -24,19 +25,35 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ParameterList extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Params</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.TypeAndValue}.
+	 * Returns the value of the '<em><b>Types</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Params</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Types</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Params</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getParameterList_Params()
-	 * @model containment="true"
+	 * @return the value of the '<em>Types</em>' attribute list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getParameterList_Types()
+	 * @model unique="false"
 	 * @generated
 	 */
-	EList<TypeAndValue> getParams();
+	EList<String> getTypes();
+
+	/**
+	 * Returns the value of the '<em><b>Variables</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Variables</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Variables</em>' attribute list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getParameterList_Variables()
+	 * @model unique="false"
+	 * @generated
+	 */
+	EList<String> getVariables();
 
 } // ParameterList

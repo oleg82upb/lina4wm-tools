@@ -11,7 +11,9 @@ package de.upb.llvm_parser.llvm;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.ExtractElement#getVector <em>Vector</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.ExtractElement#getVectortype <em>Vectortype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.ExtractElement#getVectorvalue <em>Vectorvalue</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.ExtractElement#getIndextype <em>Indextype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.ExtractElement#getIndex <em>Index</em>}</li>
  * </ul>
  * </p>
@@ -22,55 +24,107 @@ package de.upb.llvm_parser.llvm;
  */
 public interface ExtractElement extends Instruction {
 	/**
-	 * Returns the value of the '<em><b>Vector</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Vectortype</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Vector</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Vectortype</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Vector</em>' containment reference.
-	 * @see #setVector(TypeAndValue)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getExtractElement_Vector()
-	 * @model containment="true"
+	 * @return the value of the '<em>Vectortype</em>' attribute.
+	 * @see #setVectortype(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getExtractElement_Vectortype()
+	 * @model
 	 * @generated
 	 */
-	TypeAndValue getVector();
+	String getVectortype();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ExtractElement#getVector <em>Vector</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ExtractElement#getVectortype <em>Vectortype</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Vector</em>' containment reference.
-	 * @see #getVector()
+	 * @param value the new value of the '<em>Vectortype</em>' attribute.
+	 * @see #getVectortype()
 	 * @generated
 	 */
-	void setVector(TypeAndValue value);
+	void setVectortype(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Index</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Vectorvalue</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Index</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Vectorvalue</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Index</em>' containment reference.
-	 * @see #setIndex(TypeAndValue)
+	 * @return the value of the '<em>Vectorvalue</em>' attribute.
+	 * @see #setVectorvalue(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getExtractElement_Vectorvalue()
+	 * @model
+	 * @generated
+	 */
+	String getVectorvalue();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ExtractElement#getVectorvalue <em>Vectorvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Vectorvalue</em>' attribute.
+	 * @see #getVectorvalue()
+	 * @generated
+	 */
+	void setVectorvalue(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Indextype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Indextype</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Indextype</em>' attribute.
+	 * @see #setIndextype(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getExtractElement_Indextype()
+	 * @model
+	 * @generated
+	 */
+	String getIndextype();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ExtractElement#getIndextype <em>Indextype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Indextype</em>' attribute.
+	 * @see #getIndextype()
+	 * @generated
+	 */
+	void setIndextype(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Index</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Index</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Index</em>' attribute.
+	 * @see #setIndex(String)
 	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getExtractElement_Index()
-	 * @model containment="true"
+	 * @model
 	 * @generated
 	 */
-	TypeAndValue getIndex();
+	String getIndex();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ExtractElement#getIndex <em>Index</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ExtractElement#getIndex <em>Index</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Index</em>' containment reference.
+	 * @param value the new value of the '<em>Index</em>' attribute.
 	 * @see #getIndex()
 	 * @generated
 	 */
-	void setIndex(TypeAndValue value);
+	void setIndex(String value);
 
 } // ExtractElement

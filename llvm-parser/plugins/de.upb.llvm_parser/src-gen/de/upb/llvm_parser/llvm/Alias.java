@@ -12,7 +12,8 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.Alias#getType <em>Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Alias#getAliastype <em>Aliastype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Alias#getAliasvalue <em>Aliasvalue</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Alias#getAliasee <em>Aliasee</em>}</li>
  * </ul>
  * </p>
@@ -23,30 +24,56 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Alias extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Aliastype</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Type</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Aliastype</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' containment reference.
-	 * @see #setType(TypeAndValue)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getAlias_Type()
-	 * @model containment="true"
+	 * @return the value of the '<em>Aliastype</em>' attribute.
+	 * @see #setAliastype(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getAlias_Aliastype()
+	 * @model
 	 * @generated
 	 */
-	TypeAndValue getType();
+	String getAliastype();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Alias#getType <em>Type</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Alias#getAliastype <em>Aliastype</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' containment reference.
-	 * @see #getType()
+	 * @param value the new value of the '<em>Aliastype</em>' attribute.
+	 * @see #getAliastype()
 	 * @generated
 	 */
-	void setType(TypeAndValue value);
+	void setAliastype(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Aliasvalue</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Aliasvalue</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Aliasvalue</em>' attribute.
+	 * @see #setAliasvalue(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getAlias_Aliasvalue()
+	 * @model
+	 * @generated
+	 */
+	String getAliasvalue();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Alias#getAliasvalue <em>Aliasvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Aliasvalue</em>' attribute.
+	 * @see #getAliasvalue()
+	 * @generated
+	 */
+	void setAliasvalue(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Aliasee</b></em>' attribute.

@@ -12,7 +12,8 @@ package de.upb.llvm_parser.llvm;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.Alloc#getType <em>Type</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Alloc#getNumElements <em>Num Elements</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Alloc#getNumelementstype <em>Numelementstype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Alloc#getNumelementsvalue <em>Numelementsvalue</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,29 +49,55 @@ public interface Alloc extends Instruction {
 	void setType(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Num Elements</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Numelementstype</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Num Elements</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Numelementstype</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Num Elements</em>' containment reference.
-	 * @see #setNumElements(TypeAndValue)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getAlloc_NumElements()
-	 * @model containment="true"
+	 * @return the value of the '<em>Numelementstype</em>' attribute.
+	 * @see #setNumelementstype(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getAlloc_Numelementstype()
+	 * @model
 	 * @generated
 	 */
-	TypeAndValue getNumElements();
+	String getNumelementstype();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Alloc#getNumElements <em>Num Elements</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Alloc#getNumelementstype <em>Numelementstype</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Num Elements</em>' containment reference.
-	 * @see #getNumElements()
+	 * @param value the new value of the '<em>Numelementstype</em>' attribute.
+	 * @see #getNumelementstype()
 	 * @generated
 	 */
-	void setNumElements(TypeAndValue value);
+	void setNumelementstype(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Numelementsvalue</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Numelementsvalue</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Numelementsvalue</em>' attribute.
+	 * @see #setNumelementsvalue(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getAlloc_Numelementsvalue()
+	 * @model
+	 * @generated
+	 */
+	String getNumelementsvalue();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Alloc#getNumelementsvalue <em>Numelementsvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Numelementsvalue</em>' attribute.
+	 * @see #getNumelementsvalue()
+	 * @generated
+	 */
+	void setNumelementsvalue(String value);
 
 } // Alloc

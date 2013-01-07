@@ -4,13 +4,10 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.AtomicRMW;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.TypeAndValue;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -21,8 +18,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.AtomicRMWImpl#getAdresstype <em>Adresstype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.AtomicRMWImpl#getAdress <em>Adress</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.AtomicRMWImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.AtomicRMWImpl#getOptype <em>Optype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.AtomicRMWImpl#getOpvalue <em>Opvalue</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.AtomicRMWImpl#getOrdering <em>Ordering</em>}</li>
  * </ul>
  * </p>
@@ -31,24 +30,84 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class AtomicRMWImpl extends InstructionImpl implements AtomicRMW {
 	/**
-	 * The cached value of the '{@link #getAdress() <em>Adress</em>}' containment reference.
+	 * The default value of the '{@link #getAdresstype() <em>Adresstype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAdresstype()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ADRESSTYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAdresstype() <em>Adresstype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAdresstype()
+	 * @generated
+	 * @ordered
+	 */
+	protected String adresstype = ADRESSTYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getAdress() <em>Adress</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAdress()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeAndValue adress;
+	protected static final String ADRESS_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
+	 * The cached value of the '{@link #getAdress() <em>Adress</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getAdress()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeAndValue value;
+	protected String adress = ADRESS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getOptype() <em>Optype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOptype()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String OPTYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getOptype() <em>Optype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOptype()
+	 * @generated
+	 * @ordered
+	 */
+	protected String optype = OPTYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getOpvalue() <em>Opvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOpvalue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String OPVALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getOpvalue() <em>Opvalue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOpvalue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String opvalue = OPVALUE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getOrdering() <em>Ordering</em>}' attribute.
@@ -94,7 +153,28 @@ public class AtomicRMWImpl extends InstructionImpl implements AtomicRMW {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeAndValue getAdress() {
+	public String getAdresstype() {
+		return adresstype;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAdresstype(String newAdresstype) {
+		String oldAdresstype = adresstype;
+		adresstype = newAdresstype;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ATOMIC_RMW__ADRESSTYPE, oldAdresstype, adresstype));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getAdress() {
 		return adress;
 	}
 
@@ -103,14 +183,11 @@ public class AtomicRMWImpl extends InstructionImpl implements AtomicRMW {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetAdress(TypeAndValue newAdress, NotificationChain msgs) {
-		TypeAndValue oldAdress = adress;
+	public void setAdress(String newAdress) {
+		String oldAdress = adress;
 		adress = newAdress;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.ATOMIC_RMW__ADRESS, oldAdress, newAdress);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ATOMIC_RMW__ADRESS, oldAdress, adress));
 	}
 
 	/**
@@ -118,18 +195,8 @@ public class AtomicRMWImpl extends InstructionImpl implements AtomicRMW {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAdress(TypeAndValue newAdress) {
-		if (newAdress != adress) {
-			NotificationChain msgs = null;
-			if (adress != null)
-				msgs = ((InternalEObject)adress).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ATOMIC_RMW__ADRESS, null, msgs);
-			if (newAdress != null)
-				msgs = ((InternalEObject)newAdress).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ATOMIC_RMW__ADRESS, null, msgs);
-			msgs = basicSetAdress(newAdress, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ATOMIC_RMW__ADRESS, newAdress, newAdress));
+	public String getOptype() {
+		return optype;
 	}
 
 	/**
@@ -137,8 +204,11 @@ public class AtomicRMWImpl extends InstructionImpl implements AtomicRMW {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeAndValue getValue() {
-		return value;
+	public void setOptype(String newOptype) {
+		String oldOptype = optype;
+		optype = newOptype;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ATOMIC_RMW__OPTYPE, oldOptype, optype));
 	}
 
 	/**
@@ -146,14 +216,8 @@ public class AtomicRMWImpl extends InstructionImpl implements AtomicRMW {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValue(TypeAndValue newValue, NotificationChain msgs) {
-		TypeAndValue oldValue = value;
-		value = newValue;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.ATOMIC_RMW__VALUE, oldValue, newValue);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public String getOpvalue() {
+		return opvalue;
 	}
 
 	/**
@@ -161,18 +225,11 @@ public class AtomicRMWImpl extends InstructionImpl implements AtomicRMW {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(TypeAndValue newValue) {
-		if (newValue != value) {
-			NotificationChain msgs = null;
-			if (value != null)
-				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ATOMIC_RMW__VALUE, null, msgs);
-			if (newValue != null)
-				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ATOMIC_RMW__VALUE, null, msgs);
-			msgs = basicSetValue(newValue, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ATOMIC_RMW__VALUE, newValue, newValue));
+	public void setOpvalue(String newOpvalue) {
+		String oldOpvalue = opvalue;
+		opvalue = newOpvalue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ATOMIC_RMW__OPVALUE, oldOpvalue, opvalue));
 	}
 
 	/**
@@ -202,28 +259,16 @@ public class AtomicRMWImpl extends InstructionImpl implements AtomicRMW {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case LlvmPackage.ATOMIC_RMW__ADRESS:
-				return basicSetAdress(null, msgs);
-			case LlvmPackage.ATOMIC_RMW__VALUE:
-				return basicSetValue(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case LlvmPackage.ATOMIC_RMW__ADRESSTYPE:
+				return getAdresstype();
 			case LlvmPackage.ATOMIC_RMW__ADRESS:
 				return getAdress();
-			case LlvmPackage.ATOMIC_RMW__VALUE:
-				return getValue();
+			case LlvmPackage.ATOMIC_RMW__OPTYPE:
+				return getOptype();
+			case LlvmPackage.ATOMIC_RMW__OPVALUE:
+				return getOpvalue();
 			case LlvmPackage.ATOMIC_RMW__ORDERING:
 				return getOrdering();
 		}
@@ -238,11 +283,17 @@ public class AtomicRMWImpl extends InstructionImpl implements AtomicRMW {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case LlvmPackage.ATOMIC_RMW__ADRESS:
-				setAdress((TypeAndValue)newValue);
+			case LlvmPackage.ATOMIC_RMW__ADRESSTYPE:
+				setAdresstype((String)newValue);
 				return;
-			case LlvmPackage.ATOMIC_RMW__VALUE:
-				setValue((TypeAndValue)newValue);
+			case LlvmPackage.ATOMIC_RMW__ADRESS:
+				setAdress((String)newValue);
+				return;
+			case LlvmPackage.ATOMIC_RMW__OPTYPE:
+				setOptype((String)newValue);
+				return;
+			case LlvmPackage.ATOMIC_RMW__OPVALUE:
+				setOpvalue((String)newValue);
 				return;
 			case LlvmPackage.ATOMIC_RMW__ORDERING:
 				setOrdering((String)newValue);
@@ -259,11 +310,17 @@ public class AtomicRMWImpl extends InstructionImpl implements AtomicRMW {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case LlvmPackage.ATOMIC_RMW__ADRESS:
-				setAdress((TypeAndValue)null);
+			case LlvmPackage.ATOMIC_RMW__ADRESSTYPE:
+				setAdresstype(ADRESSTYPE_EDEFAULT);
 				return;
-			case LlvmPackage.ATOMIC_RMW__VALUE:
-				setValue((TypeAndValue)null);
+			case LlvmPackage.ATOMIC_RMW__ADRESS:
+				setAdress(ADRESS_EDEFAULT);
+				return;
+			case LlvmPackage.ATOMIC_RMW__OPTYPE:
+				setOptype(OPTYPE_EDEFAULT);
+				return;
+			case LlvmPackage.ATOMIC_RMW__OPVALUE:
+				setOpvalue(OPVALUE_EDEFAULT);
 				return;
 			case LlvmPackage.ATOMIC_RMW__ORDERING:
 				setOrdering(ORDERING_EDEFAULT);
@@ -280,10 +337,14 @@ public class AtomicRMWImpl extends InstructionImpl implements AtomicRMW {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case LlvmPackage.ATOMIC_RMW__ADRESSTYPE:
+				return ADRESSTYPE_EDEFAULT == null ? adresstype != null : !ADRESSTYPE_EDEFAULT.equals(adresstype);
 			case LlvmPackage.ATOMIC_RMW__ADRESS:
-				return adress != null;
-			case LlvmPackage.ATOMIC_RMW__VALUE:
-				return value != null;
+				return ADRESS_EDEFAULT == null ? adress != null : !ADRESS_EDEFAULT.equals(adress);
+			case LlvmPackage.ATOMIC_RMW__OPTYPE:
+				return OPTYPE_EDEFAULT == null ? optype != null : !OPTYPE_EDEFAULT.equals(optype);
+			case LlvmPackage.ATOMIC_RMW__OPVALUE:
+				return OPVALUE_EDEFAULT == null ? opvalue != null : !OPVALUE_EDEFAULT.equals(opvalue);
 			case LlvmPackage.ATOMIC_RMW__ORDERING:
 				return ORDERING_EDEFAULT == null ? ordering != null : !ORDERING_EDEFAULT.equals(ordering);
 		}
@@ -300,7 +361,15 @@ public class AtomicRMWImpl extends InstructionImpl implements AtomicRMW {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (ordering: ");
+		result.append(" (adresstype: ");
+		result.append(adresstype);
+		result.append(", adress: ");
+		result.append(adress);
+		result.append(", optype: ");
+		result.append(optype);
+		result.append(", opvalue: ");
+		result.append(opvalue);
+		result.append(", ordering: ");
 		result.append(ordering);
 		result.append(')');
 		return result.toString();
