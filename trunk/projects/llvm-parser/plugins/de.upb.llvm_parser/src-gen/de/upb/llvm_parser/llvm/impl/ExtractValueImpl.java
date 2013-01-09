@@ -2,6 +2,7 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
+import de.upb.llvm_parser.llvm.ARRAY;
 import de.upb.llvm_parser.llvm.ExtractValue;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Structure;
@@ -38,24 +39,14 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
  */
 public class ExtractValueImpl extends InstructionImpl implements ExtractValue {
 	/**
-	 * The default value of the '{@link #getArray() <em>Array</em>}' attribute.
+	 * The cached value of the '{@link #getArray() <em>Array</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getArray()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ARRAY_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getArray() <em>Array</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getArray()
-	 * @generated
-	 * @ordered
-	 */
-	protected String array = ARRAY_EDEFAULT;
+	protected ARRAY array;
 
 	/**
 	 * The cached value of the '{@link #getStruct() <em>Struct</em>}' containment reference.
@@ -121,7 +112,7 @@ public class ExtractValueImpl extends InstructionImpl implements ExtractValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getArray() {
+	public ARRAY getArray() {
 		return array;
 	}
 
@@ -130,11 +121,33 @@ public class ExtractValueImpl extends InstructionImpl implements ExtractValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setArray(String newArray) {
-		String oldArray = array;
+	public NotificationChain basicSetArray(ARRAY newArray, NotificationChain msgs) {
+		ARRAY oldArray = array;
 		array = newArray;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.EXTRACT_VALUE__ARRAY, oldArray, array));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.EXTRACT_VALUE__ARRAY, oldArray, newArray);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setArray(ARRAY newArray) {
+		if (newArray != array) {
+			NotificationChain msgs = null;
+			if (array != null)
+				msgs = ((InternalEObject)array).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.EXTRACT_VALUE__ARRAY, null, msgs);
+			if (newArray != null)
+				msgs = ((InternalEObject)newArray).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.EXTRACT_VALUE__ARRAY, null, msgs);
+			msgs = basicSetArray(newArray, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.EXTRACT_VALUE__ARRAY, newArray, newArray));
 	}
 
 	/**
@@ -221,6 +234,8 @@ public class ExtractValueImpl extends InstructionImpl implements ExtractValue {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case LlvmPackage.EXTRACT_VALUE__ARRAY:
+				return basicSetArray(null, msgs);
 			case LlvmPackage.EXTRACT_VALUE__STRUCT:
 				return basicSetStruct(null, msgs);
 		}
@@ -257,7 +272,7 @@ public class ExtractValueImpl extends InstructionImpl implements ExtractValue {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case LlvmPackage.EXTRACT_VALUE__ARRAY:
-				setArray((String)newValue);
+				setArray((ARRAY)newValue);
 				return;
 			case LlvmPackage.EXTRACT_VALUE__STRUCT:
 				setStruct((Structure)newValue);
@@ -282,7 +297,7 @@ public class ExtractValueImpl extends InstructionImpl implements ExtractValue {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case LlvmPackage.EXTRACT_VALUE__ARRAY:
-				setArray(ARRAY_EDEFAULT);
+				setArray((ARRAY)null);
 				return;
 			case LlvmPackage.EXTRACT_VALUE__STRUCT:
 				setStruct((Structure)null);
@@ -306,7 +321,7 @@ public class ExtractValueImpl extends InstructionImpl implements ExtractValue {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case LlvmPackage.EXTRACT_VALUE__ARRAY:
-				return ARRAY_EDEFAULT == null ? array != null : !ARRAY_EDEFAULT.equals(array);
+				return array != null;
 			case LlvmPackage.EXTRACT_VALUE__STRUCT:
 				return struct != null;
 			case LlvmPackage.EXTRACT_VALUE__TYPE:
@@ -327,9 +342,7 @@ public class ExtractValueImpl extends InstructionImpl implements ExtractValue {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (array: ");
-		result.append(array);
-		result.append(", type: ");
+		result.append(" (type: ");
 		result.append(type);
 		result.append(", index: ");
 		result.append(index);

@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.Structure#getTypes <em>Types</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Structure#getArrays <em>Arrays</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Structure#getLists <em>Lists</em>}</li>
  * </ul>
  * </p>
@@ -39,6 +40,22 @@ public interface Structure extends EObject {
 	 * @generated
 	 */
 	EList<String> getTypes();
+
+	/**
+	 * Returns the value of the '<em><b>Arrays</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.ARRAY}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Arrays</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Arrays</em>' containment reference list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getStructure_Arrays()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ARRAY> getArrays();
 
 	/**
 	 * Returns the value of the '<em><b>Lists</b></em>' containment reference list.

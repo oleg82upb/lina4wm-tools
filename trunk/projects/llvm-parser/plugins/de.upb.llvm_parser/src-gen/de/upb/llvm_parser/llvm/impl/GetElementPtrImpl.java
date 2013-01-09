@@ -2,16 +2,19 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
+import de.upb.llvm_parser.llvm.ARRAY;
 import de.upb.llvm_parser.llvm.GetElementPtr;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -25,6 +28,7 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getElementtype <em>Elementtype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getElementarray <em>Elementarray</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getElement <em>Element</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getIndicetypes <em>Indicetypes</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getIndices <em>Indices</em>}</li>
@@ -53,6 +57,16 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	 * @ordered
 	 */
 	protected String elementtype = ELEMENTTYPE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getElementarray() <em>Elementarray</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getElementarray()
+	 * @generated
+	 * @ordered
+	 */
+	protected ARRAY elementarray;
 
 	/**
 	 * The default value of the '{@link #getElement() <em>Element</em>}' attribute.
@@ -139,6 +153,49 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ARRAY getElementarray() {
+		return elementarray;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetElementarray(ARRAY newElementarray, NotificationChain msgs) {
+		ARRAY oldElementarray = elementarray;
+		elementarray = newElementarray;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY, oldElementarray, newElementarray);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setElementarray(ARRAY newElementarray) {
+		if (newElementarray != elementarray) {
+			NotificationChain msgs = null;
+			if (elementarray != null)
+				msgs = ((InternalEObject)elementarray).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY, null, msgs);
+			if (newElementarray != null)
+				msgs = ((InternalEObject)newElementarray).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY, null, msgs);
+			msgs = basicSetElementarray(newElementarray, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY, newElementarray, newElementarray));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getElement() {
 		return element;
 	}
@@ -185,10 +242,26 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY:
+				return basicSetElementarray(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE:
 				return getElementtype();
+			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY:
+				return getElementarray();
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENT:
 				return getElement();
 			case LlvmPackage.GET_ELEMENT_PTR__INDICETYPES:
@@ -210,6 +283,9 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 		switch (featureID) {
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE:
 				setElementtype((String)newValue);
+				return;
+			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY:
+				setElementarray((ARRAY)newValue);
 				return;
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENT:
 				setElement((String)newValue);
@@ -237,6 +313,9 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE:
 				setElementtype(ELEMENTTYPE_EDEFAULT);
 				return;
+			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY:
+				setElementarray((ARRAY)null);
+				return;
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENT:
 				setElement(ELEMENT_EDEFAULT);
 				return;
@@ -260,6 +339,8 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 		switch (featureID) {
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE:
 				return ELEMENTTYPE_EDEFAULT == null ? elementtype != null : !ELEMENTTYPE_EDEFAULT.equals(elementtype);
+			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY:
+				return elementarray != null;
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENT:
 				return ELEMENT_EDEFAULT == null ? element != null : !ELEMENT_EDEFAULT.equals(element);
 			case LlvmPackage.GET_ELEMENT_PTR__INDICETYPES:

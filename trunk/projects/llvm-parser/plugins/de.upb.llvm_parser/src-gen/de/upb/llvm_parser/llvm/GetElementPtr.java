@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.GetElementPtr#getElementtype <em>Elementtype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.GetElementPtr#getElementarray <em>Elementarray</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.GetElementPtr#getElement <em>Element</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.GetElementPtr#getIndicetypes <em>Indicetypes</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.GetElementPtr#getIndices <em>Indices</em>}</li>
@@ -49,6 +50,32 @@ public interface GetElementPtr extends Instruction {
 	 * @generated
 	 */
 	void setElementtype(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Elementarray</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Elementarray</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Elementarray</em>' containment reference.
+	 * @see #setElementarray(ARRAY)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getGetElementPtr_Elementarray()
+	 * @model containment="true"
+	 * @generated
+	 */
+	ARRAY getElementarray();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.GetElementPtr#getElementarray <em>Elementarray</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Elementarray</em>' containment reference.
+	 * @see #getElementarray()
+	 * @generated
+	 */
+	void setElementarray(ARRAY value);
 
 	/**
 	 * Returns the value of the '<em><b>Element</b></em>' attribute.

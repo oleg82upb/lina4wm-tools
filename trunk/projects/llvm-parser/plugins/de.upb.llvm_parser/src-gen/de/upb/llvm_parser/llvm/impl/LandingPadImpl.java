@@ -32,10 +32,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl#getStruct <em>Struct</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl#getPersonalitytype <em>Personalitytype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl#getPersonalityvalue <em>Personalityvalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl#getClause <em>Clause</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl#getPersonalityfunction <em>Personalityfunction</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl#getValue <em>Value</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl#getCastto <em>Castto</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl#getClause <em>Clause</em>}</li>
  * </ul>
  * </p>
  *
@@ -91,16 +91,6 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 	 * @ordered
 	 */
 	protected String personalityvalue = PERSONALITYVALUE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getClause() <em>Clause</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getClause()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Clause> clause;
 
 	/**
 	 * The default value of the '{@link #getPersonalityfunction() <em>Personalityfunction</em>}' attribute.
@@ -161,6 +151,16 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 	 * @ordered
 	 */
 	protected String castto = CASTTO_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getClause() <em>Clause</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClause()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Clause> clause;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -271,18 +271,6 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Clause> getClause() {
-		if (clause == null) {
-			clause = new EObjectContainmentEList<Clause>(Clause.class, this, LlvmPackage.LANDING_PAD__CLAUSE);
-		}
-		return clause;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getPersonalityfunction() {
 		return personalityfunction;
 	}
@@ -346,6 +334,18 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Clause> getClause() {
+		if (clause == null) {
+			clause = new EObjectContainmentEList<Clause>(Clause.class, this, LlvmPackage.LANDING_PAD__CLAUSE);
+		}
+		return clause;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -371,14 +371,14 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 				return getPersonalitytype();
 			case LlvmPackage.LANDING_PAD__PERSONALITYVALUE:
 				return getPersonalityvalue();
-			case LlvmPackage.LANDING_PAD__CLAUSE:
-				return getClause();
 			case LlvmPackage.LANDING_PAD__PERSONALITYFUNCTION:
 				return getPersonalityfunction();
 			case LlvmPackage.LANDING_PAD__VALUE:
 				return getValue();
 			case LlvmPackage.LANDING_PAD__CASTTO:
 				return getCastto();
+			case LlvmPackage.LANDING_PAD__CLAUSE:
+				return getClause();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -401,10 +401,6 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 			case LlvmPackage.LANDING_PAD__PERSONALITYVALUE:
 				setPersonalityvalue((String)newValue);
 				return;
-			case LlvmPackage.LANDING_PAD__CLAUSE:
-				getClause().clear();
-				getClause().addAll((Collection<? extends Clause>)newValue);
-				return;
 			case LlvmPackage.LANDING_PAD__PERSONALITYFUNCTION:
 				setPersonalityfunction((String)newValue);
 				return;
@@ -413,6 +409,10 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 				return;
 			case LlvmPackage.LANDING_PAD__CASTTO:
 				setCastto((String)newValue);
+				return;
+			case LlvmPackage.LANDING_PAD__CLAUSE:
+				getClause().clear();
+				getClause().addAll((Collection<? extends Clause>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -435,9 +435,6 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 			case LlvmPackage.LANDING_PAD__PERSONALITYVALUE:
 				setPersonalityvalue(PERSONALITYVALUE_EDEFAULT);
 				return;
-			case LlvmPackage.LANDING_PAD__CLAUSE:
-				getClause().clear();
-				return;
 			case LlvmPackage.LANDING_PAD__PERSONALITYFUNCTION:
 				setPersonalityfunction(PERSONALITYFUNCTION_EDEFAULT);
 				return;
@@ -446,6 +443,9 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 				return;
 			case LlvmPackage.LANDING_PAD__CASTTO:
 				setCastto(CASTTO_EDEFAULT);
+				return;
+			case LlvmPackage.LANDING_PAD__CLAUSE:
+				getClause().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -465,14 +465,14 @@ public class LandingPadImpl extends InstructionImpl implements LandingPad {
 				return PERSONALITYTYPE_EDEFAULT == null ? personalitytype != null : !PERSONALITYTYPE_EDEFAULT.equals(personalitytype);
 			case LlvmPackage.LANDING_PAD__PERSONALITYVALUE:
 				return PERSONALITYVALUE_EDEFAULT == null ? personalityvalue != null : !PERSONALITYVALUE_EDEFAULT.equals(personalityvalue);
-			case LlvmPackage.LANDING_PAD__CLAUSE:
-				return clause != null && !clause.isEmpty();
 			case LlvmPackage.LANDING_PAD__PERSONALITYFUNCTION:
 				return PERSONALITYFUNCTION_EDEFAULT == null ? personalityfunction != null : !PERSONALITYFUNCTION_EDEFAULT.equals(personalityfunction);
 			case LlvmPackage.LANDING_PAD__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 			case LlvmPackage.LANDING_PAD__CASTTO:
 				return CASTTO_EDEFAULT == null ? castto != null : !CASTTO_EDEFAULT.equals(castto);
+			case LlvmPackage.LANDING_PAD__CLAUSE:
+				return clause != null && !clause.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

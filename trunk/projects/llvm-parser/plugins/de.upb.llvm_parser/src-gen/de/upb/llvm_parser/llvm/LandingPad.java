@@ -15,10 +15,10 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.upb.llvm_parser.llvm.LandingPad#getStruct <em>Struct</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.LandingPad#getPersonalitytype <em>Personalitytype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.LandingPad#getPersonalityvalue <em>Personalityvalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.LandingPad#getClause <em>Clause</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.LandingPad#getPersonalityfunction <em>Personalityfunction</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.LandingPad#getValue <em>Value</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.LandingPad#getCastto <em>Castto</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.LandingPad#getClause <em>Clause</em>}</li>
  * </ul>
  * </p>
  *
@@ -106,22 +106,6 @@ public interface LandingPad extends Instruction {
 	void setPersonalityvalue(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Clause</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.Clause}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Clause</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Clause</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLandingPad_Clause()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Clause> getClause();
-
-	/**
 	 * Returns the value of the '<em><b>Personalityfunction</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -198,5 +182,21 @@ public interface LandingPad extends Instruction {
 	 * @generated
 	 */
 	void setCastto(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Clause</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.Clause}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Clause</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Clause</em>' containment reference list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLandingPad_Clause()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Clause> getClause();
 
 } // LandingPad

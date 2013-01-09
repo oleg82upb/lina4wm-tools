@@ -95,6 +95,52 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.ARRAY} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ARRAYItemProvider arrayItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.ARRAY}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createARRAYAdapter() {
+		if (arrayItemProvider == null) {
+			arrayItemProvider = new ARRAYItemProvider(this);
+		}
+
+		return arrayItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.ValueStruct} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ValueStructItemProvider valueStructItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.ValueStruct}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createValueStructAdapter() {
+		if (valueStructItemProvider == null) {
+			valueStructItemProvider = new ValueStructItemProvider(this);
+		}
+
+		return valueStructItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.AbstractElement} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -184,6 +230,29 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 		}
 
 		return namedTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.CastStructure} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CastStructureItemProvider castStructureItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.CastStructure}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCastStructureAdapter() {
+		if (castStructureItemProvider == null) {
+			castStructureItemProvider = new CastStructureItemProvider(this);
+		}
+
+		return castStructureItemProvider;
 	}
 
 	/**
@@ -1233,6 +1302,9 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 		if (topLevelEntityItemProvider != null) topLevelEntityItemProvider.dispose();
 		if (mainLevelEntityItemProvider != null) mainLevelEntityItemProvider.dispose();
 		if (namedTypeItemProvider != null) namedTypeItemProvider.dispose();
+		if (castStructureItemProvider != null) castStructureItemProvider.dispose();
+		if (arrayItemProvider != null) arrayItemProvider.dispose();
+		if (valueStructItemProvider != null) valueStructItemProvider.dispose();
 		if (structureItemProvider != null) structureItemProvider.dispose();
 		if (aliasItemProvider != null) aliasItemProvider.dispose();
 		if (functionHeaderItemProvider != null) functionHeaderItemProvider.dispose();

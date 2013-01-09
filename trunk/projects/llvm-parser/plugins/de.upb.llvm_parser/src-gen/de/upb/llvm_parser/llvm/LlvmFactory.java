@@ -67,6 +67,33 @@ public interface LlvmFactory extends EFactory {
 	NamedType createNamedType();
 
 	/**
+	 * Returns a new object of class '<em>Cast Structure</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Cast Structure</em>'.
+	 * @generated
+	 */
+	CastStructure createCastStructure();
+
+	/**
+	 * Returns a new object of class '<em>ARRAY</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>ARRAY</em>'.
+	 * @generated
+	 */
+	ARRAY createARRAY();
+
+	/**
+	 * Returns a new object of class '<em>Value Struct</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Value Struct</em>'.
+	 * @generated
+	 */
+	ValueStruct createValueStruct();
+
+	/**
 	 * Returns a new object of class '<em>Structure</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

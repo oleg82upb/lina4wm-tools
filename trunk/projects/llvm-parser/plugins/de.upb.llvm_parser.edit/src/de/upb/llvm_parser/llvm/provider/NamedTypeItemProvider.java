@@ -101,6 +101,8 @@ public class NamedTypeItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.NAMED_TYPE__STRUCT);
 			childrenFeatures.add(LlvmPackage.Literals.NAMED_TYPE__INSTR);
+			childrenFeatures.add(LlvmPackage.Literals.NAMED_TYPE__ARRAY);
+			childrenFeatures.add(LlvmPackage.Literals.NAMED_TYPE__CASTSTRUCT);
 			childrenFeatures.add(LlvmPackage.Literals.NAMED_TYPE__ALIAS);
 		}
 		return childrenFeatures;
@@ -161,6 +163,8 @@ public class NamedTypeItemProvider
 				return;
 			case LlvmPackage.NAMED_TYPE__STRUCT:
 			case LlvmPackage.NAMED_TYPE__INSTR:
+			case LlvmPackage.NAMED_TYPE__ARRAY:
+			case LlvmPackage.NAMED_TYPE__CASTSTRUCT:
 			case LlvmPackage.NAMED_TYPE__ALIAS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -293,6 +297,16 @@ public class NamedTypeItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.NAMED_TYPE__INSTR,
 				 LlvmFactory.eINSTANCE.createLOGICAL_OP()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.NAMED_TYPE__ARRAY,
+				 LlvmFactory.eINSTANCE.createARRAY()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.NAMED_TYPE__CASTSTRUCT,
+				 LlvmFactory.eINSTANCE.createCastStructure()));
 
 		newChildDescriptors.add
 			(createChildParameter

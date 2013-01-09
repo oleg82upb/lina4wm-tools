@@ -102,6 +102,7 @@ public class StructureItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.STRUCTURE__ARRAYS);
 			childrenFeatures.add(LlvmPackage.Literals.STRUCTURE__LISTS);
 		}
 		return childrenFeatures;
@@ -157,6 +158,7 @@ public class StructureItemProvider
 			case LlvmPackage.STRUCTURE__TYPES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case LlvmPackage.STRUCTURE__ARRAYS:
 			case LlvmPackage.STRUCTURE__LISTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -174,6 +176,11 @@ public class StructureItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.STRUCTURE__ARRAYS,
+				 LlvmFactory.eINSTANCE.createARRAY()));
 
 		newChildDescriptors.add
 			(createChildParameter

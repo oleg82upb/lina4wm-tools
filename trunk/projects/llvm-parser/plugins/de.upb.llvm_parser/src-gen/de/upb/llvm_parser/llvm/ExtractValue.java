@@ -25,30 +25,30 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface ExtractValue extends Instruction {
 	/**
-	 * Returns the value of the '<em><b>Array</b></em>' attribute.
+	 * Returns the value of the '<em><b>Array</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Array</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Array</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Array</em>' attribute.
-	 * @see #setArray(String)
+	 * @return the value of the '<em>Array</em>' containment reference.
+	 * @see #setArray(ARRAY)
 	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getExtractValue_Array()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
-	String getArray();
+	ARRAY getArray();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ExtractValue#getArray <em>Array</em>}' attribute.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ExtractValue#getArray <em>Array</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Array</em>' attribute.
+	 * @param value the new value of the '<em>Array</em>' containment reference.
 	 * @see #getArray()
 	 * @generated
 	 */
-	void setArray(String value);
+	void setArray(ARRAY value);
 
 	/**
 	 * Returns the value of the '<em><b>Struct</b></em>' containment reference.
