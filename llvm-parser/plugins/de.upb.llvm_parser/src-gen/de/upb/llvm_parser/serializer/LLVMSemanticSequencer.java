@@ -3,6 +3,7 @@ package de.upb.llvm_parser.serializer;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import de.upb.llvm_parser.llvm.ARITHMETIC_OP;
+import de.upb.llvm_parser.llvm.ARRAY;
 import de.upb.llvm_parser.llvm.Alias;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.AtomicRMW;
@@ -10,6 +11,7 @@ import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.Branch;
 import de.upb.llvm_parser.llvm.Call;
 import de.upb.llvm_parser.llvm.Cast;
+import de.upb.llvm_parser.llvm.CastStructure;
 import de.upb.llvm_parser.llvm.Clause;
 import de.upb.llvm_parser.llvm.CmpXchg;
 import de.upb.llvm_parser.llvm.Compare;
@@ -45,6 +47,7 @@ import de.upb.llvm_parser.llvm.TypeList;
 import de.upb.llvm_parser.llvm.Unreachable;
 import de.upb.llvm_parser.llvm.VA_Arg;
 import de.upb.llvm_parser.llvm.ValuePair;
+import de.upb.llvm_parser.llvm.ValueStruct;
 import de.upb.llvm_parser.services.LLVMGrammarAccess;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
@@ -70,6 +73,12 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				if(context == grammarAccess.getARITHMETIC_OPRule() ||
 				   context == grammarAccess.getInstructionRule()) {
 					sequence_ARITHMETIC_OP(context, (ARITHMETIC_OP) semanticObject); 
+					return; 
+				}
+				else break;
+			case LlvmPackage.ARRAY:
+				if(context == grammarAccess.getARRAYRule()) {
+					sequence_ARRAY(context, (ARRAY) semanticObject); 
 					return; 
 				}
 				else break;
@@ -117,6 +126,12 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				if(context == grammarAccess.getCastRule() ||
 				   context == grammarAccess.getInstructionRule()) {
 					sequence_Cast(context, (Cast) semanticObject); 
+					return; 
+				}
+				else break;
+			case LlvmPackage.CAST_STRUCTURE:
+				if(context == grammarAccess.getCastStructureRule()) {
+					sequence_CastStructure(context, (CastStructure) semanticObject); 
 					return; 
 				}
 				else break;
@@ -351,6 +366,12 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 					return; 
 				}
 				else break;
+			case LlvmPackage.VALUE_STRUCT:
+				if(context == grammarAccess.getValueStructRule()) {
+					sequence_ValueStruct(context, (ValueStruct) semanticObject); 
+					return; 
+				}
+				else break;
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
@@ -374,6 +395,15 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		feeder.accept(grammarAccess.getARITHMETIC_OPAccess().getValue1TypeParserRuleCall_2_0(), semanticObject.getValue1());
 		feeder.accept(grammarAccess.getARITHMETIC_OPAccess().getValue2TypeParserRuleCall_4_0(), semanticObject.getValue2());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (struct=Structure? (lstruct=Structure rstruct=ValueStruct)?)
+	 */
+	protected void sequence_ARRAY(EObject context, ARRAY semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -488,23 +518,19 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (castfrom=Type value=Type castto=Type)
+	 *     (type+=Type (op+=Cast | op+=GetElementPtr)? type+=Type* (type+=Type (op+=Cast | op+=GetElementPtr) type+=Type*)*)
+	 */
+	protected void sequence_CastStructure(EObject context, CastStructure semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ((castfrom=Type | caststruct=Structure) ((value=Type dual=Type?) | op=GetElementPtr) global=Type? castto=Type list=TypeList?)
 	 */
 	protected void sequence_Cast(EObject context, Cast semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.CAST__CASTFROM) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.CAST__CASTFROM));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.CAST__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.CAST__VALUE));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.CAST__CASTTO) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.CAST__CASTTO));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getCastAccess().getCastfromTypeParserRuleCall_1_0(), semanticObject.getCastfrom());
-		feeder.accept(grammarAccess.getCastAccess().getValueTypeParserRuleCall_2_0(), semanticObject.getValue());
-		feeder.accept(grammarAccess.getCastAccess().getCasttoTypeParserRuleCall_4_0(), semanticObject.getCastto());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -638,7 +664,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (elementtype=Type element=Type (indicetypes+=Type indices+=Type)*)
+	 *     ((elementtype=Type | elementarray=ARRAY) element=Type (indicetypes+=Type indices+=Type)*)
 	 */
 	protected void sequence_GetElementPtr(EObject context, GetElementPtr semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -795,15 +821,10 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (
-	 *         (struct=Structure personalitytype=Type personalityvalue=Type (clause+=Clause* | clause+=Clause+)) | 
-	 *         (
-	 *             struct=Structure 
-	 *             personalitytype=Type 
-	 *             personalityfunction=CAST_TYPE 
-	 *             value=Type 
-	 *             castto=Type 
-	 *             (clause+=Clause* | clause+=Clause+)
-	 *         )
+	 *         struct=Structure 
+	 *         personalitytype=Type 
+	 *         (personalityvalue=Type | (personalityfunction=CAST_TYPE value=Type castto=Type)) 
+	 *         (clause+=Clause* | clause+=Clause+)
 	 *     )
 	 */
 	protected void sequence_LandingPad(EObject context, LandingPad semanticObject) {
@@ -822,7 +843,17 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (name=Type (struct=Structure? | instr=Instruction | alias=Alias | type=Type)?)
+	 *     (
+	 *         name=Type 
+	 *         (
+	 *             struct=Structure? | 
+	 *             instr=Instruction | 
+	 *             (array=ARRAY caststruct=CastStructure?) | 
+	 *             (struct=Structure caststruct=CastStructure) | 
+	 *             alias=Alias | 
+	 *             type=Type
+	 *         )
+	 *     )
 	 */
 	protected void sequence_NamedType(EObject context, NamedType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -840,7 +871,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((types+=Type variables+=Type (types+=Type variables+=Type)*)?)
+	 *     ((types+=Type Lists+=TypeList? (variables+=Type | casts+=Cast) (types+=Type Lists+=TypeList? (variables+=Type | casts+=Cast)?)*)?)
 	 */
 	protected void sequence_ParameterList(EObject context, ParameterList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -972,7 +1003,10 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (((types+=Type? Lists+=TypeList? (types+=Type? Lists+=TypeList?)*)?) | ((types+=Type? Lists+=TypeList? (types+=Type? Lists+=TypeList?)*)?))
+	 *     (
+	 *         (((types+=Type | arrays+=ARRAY) Lists+=TypeList? ((types+=Type | arrays+=ARRAY) Lists+=TypeList?)*)?) | 
+	 *         (((types+=Type | arrays+=ARRAY) Lists+=TypeList? ((types+=Type | arrays+=ARRAY) Lists+=TypeList?)*)?)
+	 *     )
 	 */
 	protected void sequence_Structure(EObject context, Structure semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1053,5 +1087,14 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		feeder.accept(grammarAccess.getValuePairAccess().getValue1TypeParserRuleCall_0_0(), semanticObject.getValue1());
 		feeder.accept(grammarAccess.getValuePairAccess().getValue2TypeParserRuleCall_2_0(), semanticObject.getValue2());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (types+=Type Value+=Type types+=Type Value+=Type)
+	 */
+	protected void sequence_ValueStruct(EObject context, ValueStruct semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 }

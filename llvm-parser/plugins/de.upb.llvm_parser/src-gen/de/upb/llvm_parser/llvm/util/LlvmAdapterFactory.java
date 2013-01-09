@@ -88,6 +88,18 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 				return createNamedTypeAdapter();
 			}
 			@Override
+			public Adapter caseCastStructure(CastStructure object) {
+				return createCastStructureAdapter();
+			}
+			@Override
+			public Adapter caseARRAY(ARRAY object) {
+				return createARRAYAdapter();
+			}
+			@Override
+			public Adapter caseValueStruct(ValueStruct object) {
+				return createValueStructAdapter();
+			}
+			@Override
 			public Adapter caseStructure(Structure object) {
 				return createStructureAdapter();
 			}
@@ -338,6 +350,48 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNamedTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.CastStructure <em>Cast Structure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.llvm_parser.llvm.CastStructure
+	 * @generated
+	 */
+	public Adapter createCastStructureAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ARRAY <em>ARRAY</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.llvm_parser.llvm.ARRAY
+	 * @generated
+	 */
+	public Adapter createARRAYAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ValueStruct <em>Value Struct</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.llvm_parser.llvm.ValueStruct
+	 * @generated
+	 */
+	public Adapter createValueStructAdapter() {
 		return null;
 	}
 

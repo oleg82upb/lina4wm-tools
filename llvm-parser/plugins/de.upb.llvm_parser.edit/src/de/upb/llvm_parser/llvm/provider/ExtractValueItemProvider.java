@@ -60,33 +60,10 @@ public class ExtractValueItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addArrayPropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
 			addIndexPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Array feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addArrayPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ExtractValue_array_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ExtractValue_array_feature", "_UI_ExtractValue_type"),
-				 LlvmPackage.Literals.EXTRACT_VALUE__ARRAY,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -145,6 +122,7 @@ public class ExtractValueItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.EXTRACT_VALUE__ARRAY);
 			childrenFeatures.add(LlvmPackage.Literals.EXTRACT_VALUE__STRUCT);
 		}
 		return childrenFeatures;
@@ -182,7 +160,7 @@ public class ExtractValueItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ExtractValue)object).getArray();
+		String label = ((ExtractValue)object).getType();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ExtractValue_type") :
 			getString("_UI_ExtractValue_type") + " " + label;
@@ -200,11 +178,11 @@ public class ExtractValueItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ExtractValue.class)) {
-			case LlvmPackage.EXTRACT_VALUE__ARRAY:
 			case LlvmPackage.EXTRACT_VALUE__TYPE:
 			case LlvmPackage.EXTRACT_VALUE__INDEX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case LlvmPackage.EXTRACT_VALUE__ARRAY:
 			case LlvmPackage.EXTRACT_VALUE__STRUCT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -222,6 +200,11 @@ public class ExtractValueItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.EXTRACT_VALUE__ARRAY,
+				 LlvmFactory.eINSTANCE.createARRAY()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -13,6 +13,8 @@ package de.upb.llvm_parser.llvm;
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.NamedType#getStruct <em>Struct</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.NamedType#getInstr <em>Instr</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.NamedType#getArray <em>Array</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.NamedType#getCaststruct <em>Caststruct</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.NamedType#getAlias <em>Alias</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.NamedType#getType <em>Type</em>}</li>
  * </ul>
@@ -74,6 +76,58 @@ public interface NamedType extends MainLevelEntity {
 	 * @generated
 	 */
 	void setInstr(Instruction value);
+
+	/**
+	 * Returns the value of the '<em><b>Array</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Array</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Array</em>' containment reference.
+	 * @see #setArray(ARRAY)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getNamedType_Array()
+	 * @model containment="true"
+	 * @generated
+	 */
+	ARRAY getArray();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.NamedType#getArray <em>Array</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Array</em>' containment reference.
+	 * @see #getArray()
+	 * @generated
+	 */
+	void setArray(ARRAY value);
+
+	/**
+	 * Returns the value of the '<em><b>Caststruct</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Caststruct</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Caststruct</em>' containment reference.
+	 * @see #setCaststruct(CastStructure)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getNamedType_Caststruct()
+	 * @model containment="true"
+	 * @generated
+	 */
+	CastStructure getCaststruct();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.NamedType#getCaststruct <em>Caststruct</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Caststruct</em>' containment reference.
+	 * @see #getCaststruct()
+	 * @generated
+	 */
+	void setCaststruct(CastStructure value);
 
 	/**
 	 * Returns the value of the '<em><b>Alias</b></em>' containment reference.

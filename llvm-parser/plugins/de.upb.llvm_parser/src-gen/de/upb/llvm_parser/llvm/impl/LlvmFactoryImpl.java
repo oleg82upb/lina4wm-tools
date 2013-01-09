@@ -61,6 +61,9 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 			case LlvmPackage.TOP_LEVEL_ENTITY: return createTopLevelEntity();
 			case LlvmPackage.MAIN_LEVEL_ENTITY: return createMainLevelEntity();
 			case LlvmPackage.NAMED_TYPE: return createNamedType();
+			case LlvmPackage.CAST_STRUCTURE: return createCastStructure();
+			case LlvmPackage.ARRAY: return createARRAY();
+			case LlvmPackage.VALUE_STRUCT: return createValueStruct();
 			case LlvmPackage.STRUCTURE: return createStructure();
 			case LlvmPackage.ALIAS: return createAlias();
 			case LlvmPackage.FUNCTION_HEADER: return createFunctionHeader();
@@ -155,6 +158,36 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 	public NamedType createNamedType() {
 		NamedTypeImpl namedType = new NamedTypeImpl();
 		return namedType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CastStructure createCastStructure() {
+		CastStructureImpl castStructure = new CastStructureImpl();
+		return castStructure;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ARRAY createARRAY() {
+		ARRAYImpl array = new ARRAYImpl();
+		return array;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ValueStruct createValueStruct() {
+		ValueStructImpl valueStruct = new ValueStructImpl();
+		return valueStruct;
 	}
 
 	/**

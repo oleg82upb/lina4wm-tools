@@ -2,7 +2,9 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
+import de.upb.llvm_parser.llvm.ARRAY;
 import de.upb.llvm_parser.llvm.Alias;
+import de.upb.llvm_parser.llvm.CastStructure;
 import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.NamedType;
@@ -25,6 +27,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.NamedTypeImpl#getStruct <em>Struct</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.NamedTypeImpl#getInstr <em>Instr</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.NamedTypeImpl#getArray <em>Array</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.NamedTypeImpl#getCaststruct <em>Caststruct</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.NamedTypeImpl#getAlias <em>Alias</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.NamedTypeImpl#getType <em>Type</em>}</li>
  * </ul>
@@ -52,6 +56,26 @@ public class NamedTypeImpl extends MainLevelEntityImpl implements NamedType {
 	 * @ordered
 	 */
 	protected Instruction instr;
+
+	/**
+	 * The cached value of the '{@link #getArray() <em>Array</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getArray()
+	 * @generated
+	 * @ordered
+	 */
+	protected ARRAY array;
+
+	/**
+	 * The cached value of the '{@link #getCaststruct() <em>Caststruct</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCaststruct()
+	 * @generated
+	 * @ordered
+	 */
+	protected CastStructure caststruct;
 
 	/**
 	 * The cached value of the '{@link #getAlias() <em>Alias</em>}' containment reference.
@@ -193,6 +217,92 @@ public class NamedTypeImpl extends MainLevelEntityImpl implements NamedType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ARRAY getArray() {
+		return array;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetArray(ARRAY newArray, NotificationChain msgs) {
+		ARRAY oldArray = array;
+		array = newArray;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.NAMED_TYPE__ARRAY, oldArray, newArray);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setArray(ARRAY newArray) {
+		if (newArray != array) {
+			NotificationChain msgs = null;
+			if (array != null)
+				msgs = ((InternalEObject)array).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.NAMED_TYPE__ARRAY, null, msgs);
+			if (newArray != null)
+				msgs = ((InternalEObject)newArray).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.NAMED_TYPE__ARRAY, null, msgs);
+			msgs = basicSetArray(newArray, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.NAMED_TYPE__ARRAY, newArray, newArray));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CastStructure getCaststruct() {
+		return caststruct;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetCaststruct(CastStructure newCaststruct, NotificationChain msgs) {
+		CastStructure oldCaststruct = caststruct;
+		caststruct = newCaststruct;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.NAMED_TYPE__CASTSTRUCT, oldCaststruct, newCaststruct);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCaststruct(CastStructure newCaststruct) {
+		if (newCaststruct != caststruct) {
+			NotificationChain msgs = null;
+			if (caststruct != null)
+				msgs = ((InternalEObject)caststruct).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.NAMED_TYPE__CASTSTRUCT, null, msgs);
+			if (newCaststruct != null)
+				msgs = ((InternalEObject)newCaststruct).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.NAMED_TYPE__CASTSTRUCT, null, msgs);
+			msgs = basicSetCaststruct(newCaststruct, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.NAMED_TYPE__CASTSTRUCT, newCaststruct, newCaststruct));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Alias getAlias() {
 		return alias;
 	}
@@ -264,6 +374,10 @@ public class NamedTypeImpl extends MainLevelEntityImpl implements NamedType {
 				return basicSetStruct(null, msgs);
 			case LlvmPackage.NAMED_TYPE__INSTR:
 				return basicSetInstr(null, msgs);
+			case LlvmPackage.NAMED_TYPE__ARRAY:
+				return basicSetArray(null, msgs);
+			case LlvmPackage.NAMED_TYPE__CASTSTRUCT:
+				return basicSetCaststruct(null, msgs);
 			case LlvmPackage.NAMED_TYPE__ALIAS:
 				return basicSetAlias(null, msgs);
 		}
@@ -282,6 +396,10 @@ public class NamedTypeImpl extends MainLevelEntityImpl implements NamedType {
 				return getStruct();
 			case LlvmPackage.NAMED_TYPE__INSTR:
 				return getInstr();
+			case LlvmPackage.NAMED_TYPE__ARRAY:
+				return getArray();
+			case LlvmPackage.NAMED_TYPE__CASTSTRUCT:
+				return getCaststruct();
 			case LlvmPackage.NAMED_TYPE__ALIAS:
 				return getAlias();
 			case LlvmPackage.NAMED_TYPE__TYPE:
@@ -303,6 +421,12 @@ public class NamedTypeImpl extends MainLevelEntityImpl implements NamedType {
 				return;
 			case LlvmPackage.NAMED_TYPE__INSTR:
 				setInstr((Instruction)newValue);
+				return;
+			case LlvmPackage.NAMED_TYPE__ARRAY:
+				setArray((ARRAY)newValue);
+				return;
+			case LlvmPackage.NAMED_TYPE__CASTSTRUCT:
+				setCaststruct((CastStructure)newValue);
 				return;
 			case LlvmPackage.NAMED_TYPE__ALIAS:
 				setAlias((Alias)newValue);
@@ -328,6 +452,12 @@ public class NamedTypeImpl extends MainLevelEntityImpl implements NamedType {
 			case LlvmPackage.NAMED_TYPE__INSTR:
 				setInstr((Instruction)null);
 				return;
+			case LlvmPackage.NAMED_TYPE__ARRAY:
+				setArray((ARRAY)null);
+				return;
+			case LlvmPackage.NAMED_TYPE__CASTSTRUCT:
+				setCaststruct((CastStructure)null);
+				return;
 			case LlvmPackage.NAMED_TYPE__ALIAS:
 				setAlias((Alias)null);
 				return;
@@ -350,6 +480,10 @@ public class NamedTypeImpl extends MainLevelEntityImpl implements NamedType {
 				return struct != null;
 			case LlvmPackage.NAMED_TYPE__INSTR:
 				return instr != null;
+			case LlvmPackage.NAMED_TYPE__ARRAY:
+				return array != null;
+			case LlvmPackage.NAMED_TYPE__CASTSTRUCT:
+				return caststruct != null;
 			case LlvmPackage.NAMED_TYPE__ALIAS:
 				return alias != null;
 			case LlvmPackage.NAMED_TYPE__TYPE:

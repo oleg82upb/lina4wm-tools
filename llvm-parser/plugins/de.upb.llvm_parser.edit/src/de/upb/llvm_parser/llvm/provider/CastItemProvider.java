@@ -62,6 +62,8 @@ public class CastItemProvider
 
 			addCastfromPropertyDescriptor(object);
 			addValuePropertyDescriptor(object);
+			addDualPropertyDescriptor(object);
+			addGlobalPropertyDescriptor(object);
 			addCasttoPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -112,6 +114,50 @@ public class CastItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Dual feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDualPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Cast_dual_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Cast_dual_feature", "_UI_Cast_type"),
+				 LlvmPackage.Literals.CAST__DUAL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Global feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addGlobalPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Cast_global_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Cast_global_feature", "_UI_Cast_type"),
+				 LlvmPackage.Literals.CAST__GLOBAL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Castto feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -131,6 +177,38 @@ public class CastItemProvider
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
+	}
+
+	/**
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.CAST__CASTSTRUCT);
+			childrenFeatures.add(LlvmPackage.Literals.CAST__OP);
+			childrenFeatures.add(LlvmPackage.Literals.CAST__LIST);
+		}
+		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
 	}
 
 	/**
@@ -172,8 +250,15 @@ public class CastItemProvider
 		switch (notification.getFeatureID(Cast.class)) {
 			case LlvmPackage.CAST__CASTFROM:
 			case LlvmPackage.CAST__VALUE:
+			case LlvmPackage.CAST__DUAL:
+			case LlvmPackage.CAST__GLOBAL:
 			case LlvmPackage.CAST__CASTTO:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case LlvmPackage.CAST__CASTSTRUCT:
+			case LlvmPackage.CAST__OP:
+			case LlvmPackage.CAST__LIST:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -189,6 +274,21 @@ public class CastItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CAST__CASTSTRUCT,
+				 LlvmFactory.eINSTANCE.createStructure()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CAST__OP,
+				 LlvmFactory.eINSTANCE.createGetElementPtr()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CAST__LIST,
+				 LlvmFactory.eINSTANCE.createTypeList()));
 	}
 
 }
