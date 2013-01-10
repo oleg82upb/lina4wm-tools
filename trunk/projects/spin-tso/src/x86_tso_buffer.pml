@@ -8,7 +8,7 @@ writebuffer model. Read, write, flush, fence and CAS
 #define NULL -1
 
 /*Buffer as a 3 dimensional array which represents the queue [(nx3)-matrix]*/
-typedef matrix{short line [3]}
+typedef matrix{short line [2]}
 
 mtype = {iWrite, iRead , iMfence, iCas};
 /*memory*/
@@ -55,7 +55,6 @@ inline writeB() {
  		tail = (tail+1) % BUFF_SIZE;
 		buffer[tail].line[0] = address;
 		buffer[tail].line[1] = value;
-		//buffer[tail].line[2] = c;
 }
 
 
@@ -84,7 +83,6 @@ inline flushB() {
 	/*empty write buffer*/
 	buffer[head].line[0] = NULL;
 	buffer[head].line[1] = NULL;
-	buffer[head].line[2] = NULL;
 						
 	/*moving head*/
 	head = (head+1) % BUFF_SIZE;
