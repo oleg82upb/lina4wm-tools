@@ -122,8 +122,7 @@ proctype bufferProcess(chan channel)
 	bit isEmpty = true;
 
 	short address = 0;
-	short value = 0;
-	short c = 0; 
+	short value = 0; 
 	short i = 0;
 	short old = 0;
 	short new = 0;
