@@ -15,16 +15,18 @@ mtype = {iWrite, iRead , iMfence, iCas};
 short memory[MEM_SIZE];
 
 
-inline write(adr, value)
+inline write(adr, newValue)
 {
-	ch ! iWrite, adr, value, NULL;
+	ch ! iWrite, adr, newValue, NULL;
 }
 
 inline read(adr, target)
 {
 	atomic{
+	short readValue;
 	ch ! iRead, adr, NULL, NULL;
-	ch ? iRead, adr, target, NULL;
+	ch ? iRead, adr, readValue, NULL;
+	target = readValue;
 	}
 }
 
@@ -53,7 +55,7 @@ inline writeB() {
  		tail = (tail+1) % BUFF_SIZE;
 		buffer[tail].line[0] = address;
 		buffer[tail].line[1] = value;
-		buffer[tail].line[2] = c;
+		//buffer[tail].line[2] = c;
 }
 
 
@@ -63,12 +65,14 @@ inline readB() {
 	:: i >= head  -> 
 			if
 			/* if an address in the buffer is equivalent to the searched -> return value*/
-			::buffer[i].line[0] == address ->  channel ! iRead,address,buffer[i].line[1],c;
+			::buffer[i].line[0] == address 
+				->  channel ! iRead,address,buffer[i].line[1],NULL;
+					break;
 			::else -> i--;
 			fi
 			/*else: access to memory and return value of searched address*/
 	::else ->
-		channel ! iRead,address,memory[address],c;
+		channel ! iRead,address,memory[address],NULL;
 		break;
 	od
 }
@@ -136,7 +140,7 @@ end:	do
 				/*WRITE*/
 				:: channel ? iWrite(address,value, _) -> writeB();
 				/*READ*/
-				:: channel ? iRead, address, value, c -> readB();
+				:: channel ? iRead, address, value, _ -> readB();
 				/*FLUSH*/
 				:: !isEmpty -> flushB();
 				/*FENCE*/
