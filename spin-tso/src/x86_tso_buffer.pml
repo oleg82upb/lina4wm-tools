@@ -37,8 +37,9 @@ inline mfence()
 
 inline cas(adr, oldValue, newValue, returnValue) 
 {
-	bit success;
+	
 	atomic{
+	bit success;
 	ch ! iCas, adr, oldValue, newValue;
 	ch ? iCas, adr, success, _; 
 	returnValue = success;
@@ -104,13 +105,18 @@ inline mfenceB() {
 	
 inline casB() {
 	do
-	:: flushB()
+	:: else -> flushB()
 	:: isEmpty -> 
-		if
-		:: (memory[address] == old) -> memory[address] = new;
-		:: else -> skip
+		if 
+			:: memory[address] == old 
+				-> 	memory[address] = new;
+				channel ! iCas, address, true, NULL;
+				break;
+			:: else 
+				-> channel ! iCas, address, false, NULL;
+				break;
 		fi
-	::else -> break
+	//::else -> break
 	od
 }
 
