@@ -3,13 +3,18 @@
 */
 
 #define BUFF_SIZE 8 	//size of Buffer
-#define MEM_SIZE 200	//size of memory 
+#define MEM_SIZE 20	//size of memory 
+//-----------------------------------------------------------------------------------------------------------------------------------------------
 #include "x86_tso_buffer.pml"
 
-//Types for LLVM
-short Stack = 0; //= {0};
-short Node = 1; //= {0,1};
-short I32 = 0; // = {0};
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//Types for LLVM, actually their length in size of pointers and values
+short Stack = 0; 	//= {0};
+short Node = 1; 	//= {0,1};
+short I32 = 0; 		// = {0};
+short Ptr = 0;
+short memUse = 1; 	//shows to the next free cell in memory
+short this; 		//Stack instance pointer
 
 chan channelT1 = [0] of {mtype, short, short, short};
 
@@ -26,7 +31,9 @@ inline alloca(type, targetRegister)
 {
 	atomic{
 	//need c_Code here, but for now we could use this to statically define used addresses
-	skip;
+	targetRegister = memUse;
+	memUse = memUse + type + 1;
+	assert(memUse < MEM_SIZE);
 	}
 }
 
@@ -37,33 +44,35 @@ inline alloca(type, targetRegister)
 
 inline push(this, v)
 {
-short thisAddr, vAddr, n, ss, v0, v1, v2, v3, v4, v5, v7, v9, v11, this1, val, head, head2, next; 
+short thisAddr, vAddr, n, ss, v0, v1, v2, v3, v4, v5, v7, v9, v11, this1, val, head, head2, next;
+
 entry: 
-	alloca(Stack, thisAddr);
+	alloca(Ptr, thisAddr);
 	alloca(I32, vAddr);
-	alloca(Node, n);
-	alloca(Node, ss);
+	alloca(Ptr, n);
+	alloca(Ptr, ss);
 	write(thisAddr, this);
 	write(vAddr, v);
 	read(thisAddr, this1);
-	//new Node();
+	alloca(Node, v0); //new Node();
 	
 invokeCont: 
 	write(n, v0);
 	read(vAddr, v1);
 	read(n, v2);
-	getelementptr(Node, n, 0, val);
+	getelementptr(Node, v2, 0, val);
 	write(val, v1);
 		 
 doBody: 
 	getelementptr(Stack, this, 0, head);
+	mfence();
 	read(head, v3);		// volatile! use mfence() here?;
 	write(ss, v3);
 	read(ss, v4);
 	read(n, v5);
-	getelementptr(Node, v5, 1, next);
+	getelementptr(Node, v5, 1, next); //FIXME: v5 holds value and is no longer the pointer. 
 	write(next, v4);
-	
+
 doCond:
 	getelementptr(Stack, this1, 0, head2);
 	//bitcast head2 to i32 for cas. we don't need this. its local anyway
@@ -77,13 +86,18 @@ doCond:
 	fi
 //doEnd: 
 //	skip; //done
+
 }
 
 proctype process1(chan ch){
-	push(1, 666);
+	push(this, 666);
+	push(this, 333);
 }
 
 init{
+atomic{
+	alloca(Stack, this)
 	run process1(channelT1);
 	run bufferProcess(channelT1);
+	}
 }
