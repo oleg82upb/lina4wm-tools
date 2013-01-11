@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.BasicBlockImpl#getLabel <em>Label</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.BasicBlockImpl#getInstructions <em>Instructions</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.BasicBlockImpl#getRetadr <em>Retadr</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.BasicBlockImpl#getTerminator <em>Terminator</em>}</li>
  * </ul>
  * </p>
@@ -68,6 +69,26 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
 	 * @ordered
 	 */
 	protected EList<EObject> instructions;
+
+	/**
+	 * The default value of the '{@link #getRetadr() <em>Retadr</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRetadr()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String RETADR_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getRetadr() <em>Retadr</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRetadr()
+	 * @generated
+	 * @ordered
+	 */
+	protected String retadr = RETADR_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getTerminator() <em>Terminator</em>}' containment reference.
@@ -129,6 +150,27 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
 			instructions = new EObjectContainmentEList<EObject>(EObject.class, this, LlvmPackage.BASIC_BLOCK__INSTRUCTIONS);
 		}
 		return instructions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getRetadr() {
+		return retadr;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRetadr(String newRetadr) {
+		String oldRetadr = retadr;
+		retadr = newRetadr;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.BASIC_BLOCK__RETADR, oldRetadr, retadr));
 	}
 
 	/**
@@ -202,6 +244,8 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
 				return getLabel();
 			case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
 				return getInstructions();
+			case LlvmPackage.BASIC_BLOCK__RETADR:
+				return getRetadr();
 			case LlvmPackage.BASIC_BLOCK__TERMINATOR:
 				return getTerminator();
 		}
@@ -224,6 +268,9 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
 				getInstructions().clear();
 				getInstructions().addAll((Collection<? extends EObject>)newValue);
 				return;
+			case LlvmPackage.BASIC_BLOCK__RETADR:
+				setRetadr((String)newValue);
+				return;
 			case LlvmPackage.BASIC_BLOCK__TERMINATOR:
 				setTerminator((Ret_Instr)newValue);
 				return;
@@ -245,6 +292,9 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
 			case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
 				getInstructions().clear();
 				return;
+			case LlvmPackage.BASIC_BLOCK__RETADR:
+				setRetadr(RETADR_EDEFAULT);
+				return;
 			case LlvmPackage.BASIC_BLOCK__TERMINATOR:
 				setTerminator((Ret_Instr)null);
 				return;
@@ -264,6 +314,8 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
 				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
 			case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
 				return instructions != null && !instructions.isEmpty();
+			case LlvmPackage.BASIC_BLOCK__RETADR:
+				return RETADR_EDEFAULT == null ? retadr != null : !RETADR_EDEFAULT.equals(retadr);
 			case LlvmPackage.BASIC_BLOCK__TERMINATOR:
 				return terminator != null;
 		}
@@ -282,6 +334,8 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (label: ");
 		result.append(label);
+		result.append(", retadr: ");
+		result.append(retadr);
 		result.append(')');
 		return result.toString();
 	}

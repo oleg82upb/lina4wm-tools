@@ -34,7 +34,6 @@ terminal CSTRING:
 
 terminal OREST:
 	'(...)' '*'*;
-
 terminal ARRAYL:
 	'[';
 
@@ -102,12 +101,14 @@ MainLevelEntity:
 	NamedType;
 
 NamedType:
-	(name=Type '=' (LINKAGE | 'global' | 'unnamed_addr' | 'constant')* (('type' (struct=Structure | Opaque)) |
-	instr=Instruction |
-	array=ARRAY (caststruct=CastStructure | (CSTRING ('zeroinitializer' | 'null')* (',' ALIGNMENT)?))? |
-	struct=Structure caststruct=CastStructure |
-	alias=Alias |
-	type=Type INT? ('zeroinitializer' | 'null')* (',' ALIGNMENT)?));
+	(name=Type '=' (LINKAGE | 'global' | 'unnamed_addr' | 'constant')* (
+		('type' (struct=Structure | Opaque)) |
+		instr=Instruction |
+		array=ARRAY (caststruct=CastStructure | (CSTRING ('zeroinitializer' | 'null')* (',' ALIGNMENT)?))? |
+		struct=Structure caststruct=CastStructure |
+		alias=Alias |
+		type=Type INT? ('zeroinitializer' | 'null')* (',' ALIGNMENT)?)
+	);
 
 CastStructure:
 	('{' | ARRAYL)
@@ -168,8 +169,11 @@ FunctionHeader:
  * Brackets are 
  */
 ParameterList:
-	{ParameterList} '(' (types+=Type (Lists+=TypeList)? (variables+=Type | casts+=Cast) (',' types+=Type
-	(Lists+=TypeList)? (variables+=Type | casts+=Cast)?)*)? ')';
+	{ParameterList} '(' 
+	(types+=Type (Lists+=TypeList)? RETURN_ATTRIBUTES* ((ALIGNMENT alignname+=Type ',')? (variables+=Type | (op+=Cast')'?)|(op+=GetElementPtr')')))
+	(',' types+=Type (Lists+=TypeList)? RETURN_ATTRIBUTES* ((ALIGNMENT alignname+=Type )?| (variables+=Type | (op+=Cast')'?)|(op+=GetElementPtr')'))))*)? 
+	')';
+	
 
 	/* 
  * This rule is the start of the function body and has to be right after de 'define' of a function.
@@ -184,10 +188,10 @@ FunctionBody:
  * Every Basic Block is contained inside a Functionbody and has a label(eventually) and at least one instruction 
  */
 BasicBlock:
-	(label=NOBRACKET ':')?
+	(label=(NOBRACKET|'catch') ':')?
 	instructions+=(NamedType | Instruction)*
-	terminator=Ret_Instr;
-
+	(retadr=VAR_TYPE '=' )?terminator=Ret_Instr;
+	
 Ret_Instr:
 	Return | Branch | Switch | IndirectBranch | Invoke | Resume | Unreachable;
 
@@ -195,7 +199,7 @@ Ret_Instr:
  * If a function is declared, the parameterlist has to be set empty or contain a List of Types.
  */
 TypeList:
-	{TypeList} '(' ((types+=Type (',' types+=Type)*))? ((')' '*'?) | (')*'));
+	{TypeList} '(' ((types+=Type(typelists+=TypeList)?RETURN_ATTRIBUTES? (',' types+=Type(typelists+=TypeList)? RETURN_ATTRIBUTES?)*))? ((')''*'*)|')*'|')**'|')***'|')****');
 
 	/*
  * An Aggregate is a tuple of types enclosed by curly brackets
@@ -226,7 +230,7 @@ Instruction:
  * It performs address calculation only and does not access memory.
  */
 GetElementPtr:
-	'getelementptr' 'inbounds'? '('? ((elementtype=Type | elementarray=ARRAY) element=Type (',' indicetypes+=Type
+	'getelementptr' 'inbounds'? '('? ((elementtype=Type (types=TypeList)? | elementarray=ARRAY) element=Type (',' indicetypes+=Type
 	indices+=Type)*);
 
 	/*
@@ -273,23 +277,23 @@ AtomicRMW:
  * This is only to summarize the different Binary Operations
  */
 BIN_OP:
-	'xchg' | 'add' | 'sub' | 'and' | 'nand' | 'or' | 'xor' | 'max' | 'min' | 'umax' | 'umin';
+	('xchg' | 'add' | 'sub' | 'and' | 'nand' | 'or' | 'xor' | 'max' | 'min' | 'umax' | 'umin');
 
 	/*
  * The 'load' instruction is used to read from memory.
  */
 Load:
-	'load' 'volatile'? adresstype=Type adress=Type (',' ((ALIGNMENT) | (MetadataValue)+))* |
-	'load' 'atomic' 'volatile'? adresstype=Type adress=Type 'singlethread'? ordering=ATOMIC_ORDERING (',' 'align'
+	'load' 'volatile'? adresstype=Type (types=TypeList)? adress=Type (',' ((ALIGNMENT) | (MetadataValue)+))* |
+	'load' 'atomic' 'volatile'? adresstype=Type adress=Type(types=TypeList)? 'singlethread'? ordering=ATOMIC_ORDERING (',' 'align'
 	index=INT)?;
 
 	/*
  * The 'store' instruction is used to write to memory.
  */
 Store:
-	'store' 'volatile'? newtype=Type newvalue=Type ',' adresstype=Type adress=Type (',' ((ALIGNMENT) |
+	'store' 'volatile'? newtype=Type (types+=TypeList)? (newvalue=Type|newelement=GetElementPtr ')') ',' adresstype=Type (types+=TypeList)? adress=Type (',' ((ALIGNMENT) |
 	(MetadataValue)+))* |
-	'store' 'atomic' 'volatile'? newtype=Type newvalue=Type ',' adresstype=Type adress=Type 'singlethread'?
+	'store' 'atomic' 'volatile'? newtype=Type(types+=TypeList)? newvalue=Type ',' adresstype=Type (types+=TypeList)? adress=Type 'singlethread'?
 	ordering=ATOMIC_ORDERING (','
 	'align' index=INT)?;
 
@@ -306,7 +310,7 @@ RETURN_ATTRIBUTES:
 	'zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest';
 
 Alloc:
-	'alloca' type=Type (',' numelementstype=Type numelementsvalue=Type)? (',' ALIGNMENT)?;
+	'alloca' (type=(VAR_TYPE|INTEGER)|type=Primitive typelist=TypeList) (',' numelementstype=Type numelementsvalue=Type)? (',' ALIGNMENT)?;
 
 	/*
  * This is to summarize the possible Calling Conventions
@@ -357,7 +361,7 @@ LandingPad:
  */
 Clause:
 	'catch' type=Type value=Type |
-	'filter' filtertype+=Type filtervalue+=Type (',' filtertype+=Type filtervalue+=Type)*;
+	'filter' filterarray=ARRAY ((constant=Type)|'zeroinitializer');
 
 	/*
  * The 'select' instruction is used to choose one value based on a condition, without branching.
@@ -398,9 +402,9 @@ ShuffleVector:
  *  %Z = fptosi float 1.04E+17 to i8
  */
 Cast:
-	CAST_TYPE '('? (castfrom=Type ('()*')? | caststruct=Structure) '('* (value=Type (',' dual=Type ')*')? |
+	CAST_TYPE '('? ((castfrom=(VAR_TYPE|INTEGER) | castfrom=Primitive ('()*'|types+=TypeList)) | caststruct=Structure) '('* (value=Type (',' dual=Type ')*')? |
 	op=GetElementPtr) global=Type? ')'* 'to'
-	castto=Type (list=TypeList)?;
+	(castto=(VAR_TYPE|INTEGER) | castto=Primitive ('()*'|types+=TypeList));
 	//	CAST_TYPE ((castfrom=Type | caststruct=Structure)  (value=Type | op=GetElementPtr) global=Type? 'to' castto=Type) |
 //	'('+(castfrom=Type | caststruct=Structure) '('? (value=Type | op=GetElementPtr) global=Type? ')'* 'to' castto=Type ')'
 
@@ -438,7 +442,7 @@ F_PREDICATES:
  * This is to summarize the possible Arithmetic Operations
  */
 ARITHMETIC_OP:
-	('add' | 'fadd' | 'sub' | 'fsub' | 'mul' | 'fmul' | 'udiv' | 'sdiv' | 'fdiv' | 'urem' | 'srem' | 'frem')
+	('add' | 'fadd' | 'sub' | 'fsub' | 'mul' | 'fmul' | 'udiv' | 'sdiv' | 'fdiv' | 'urem' | 'srem' | 'frem')  (('nsw'|'nuw')('nuw'|'nsw')?)?
 	optype=Type value1=Type ',' value2=Type;
 
 	/*

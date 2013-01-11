@@ -5,6 +5,7 @@ package de.upb.llvm_parser.llvm.impl;
 import de.upb.llvm_parser.llvm.ARRAY;
 import de.upb.llvm_parser.llvm.GetElementPtr;
 import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.TypeList;
 
 import java.util.Collection;
 
@@ -28,6 +29,7 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getElementtype <em>Elementtype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getTypes <em>Types</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getElementarray <em>Elementarray</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getElement <em>Element</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getIndicetypes <em>Indicetypes</em>}</li>
@@ -57,6 +59,16 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	 * @ordered
 	 */
 	protected String elementtype = ELEMENTTYPE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getTypes() <em>Types</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected TypeList types;
 
 	/**
 	 * The cached value of the '{@link #getElementarray() <em>Elementarray</em>}' containment reference.
@@ -146,6 +158,49 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 		elementtype = newElementtype;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE, oldElementtype, elementtype));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeList getTypes() {
+		return types;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTypes(TypeList newTypes, NotificationChain msgs) {
+		TypeList oldTypes = types;
+		types = newTypes;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.GET_ELEMENT_PTR__TYPES, oldTypes, newTypes);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTypes(TypeList newTypes) {
+		if (newTypes != types) {
+			NotificationChain msgs = null;
+			if (types != null)
+				msgs = ((InternalEObject)types).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.GET_ELEMENT_PTR__TYPES, null, msgs);
+			if (newTypes != null)
+				msgs = ((InternalEObject)newTypes).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.GET_ELEMENT_PTR__TYPES, null, msgs);
+			msgs = basicSetTypes(newTypes, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.GET_ELEMENT_PTR__TYPES, newTypes, newTypes));
 	}
 
 	/**
@@ -244,6 +299,8 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case LlvmPackage.GET_ELEMENT_PTR__TYPES:
+				return basicSetTypes(null, msgs);
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY:
 				return basicSetElementarray(null, msgs);
 		}
@@ -260,6 +317,8 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 		switch (featureID) {
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE:
 				return getElementtype();
+			case LlvmPackage.GET_ELEMENT_PTR__TYPES:
+				return getTypes();
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY:
 				return getElementarray();
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENT:
@@ -283,6 +342,9 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 		switch (featureID) {
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE:
 				setElementtype((String)newValue);
+				return;
+			case LlvmPackage.GET_ELEMENT_PTR__TYPES:
+				setTypes((TypeList)newValue);
 				return;
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY:
 				setElementarray((ARRAY)newValue);
@@ -313,6 +375,9 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE:
 				setElementtype(ELEMENTTYPE_EDEFAULT);
 				return;
+			case LlvmPackage.GET_ELEMENT_PTR__TYPES:
+				setTypes((TypeList)null);
+				return;
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY:
 				setElementarray((ARRAY)null);
 				return;
@@ -339,6 +404,8 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 		switch (featureID) {
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE:
 				return ELEMENTTYPE_EDEFAULT == null ? elementtype != null : !ELEMENTTYPE_EDEFAULT.equals(elementtype);
+			case LlvmPackage.GET_ELEMENT_PTR__TYPES:
+				return types != null;
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY:
 				return elementarray != null;
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENT:

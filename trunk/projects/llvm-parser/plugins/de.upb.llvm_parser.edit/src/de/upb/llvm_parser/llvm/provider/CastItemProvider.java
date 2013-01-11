@@ -191,9 +191,9 @@ public class CastItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.CAST__TYPES);
 			childrenFeatures.add(LlvmPackage.Literals.CAST__CASTSTRUCT);
 			childrenFeatures.add(LlvmPackage.Literals.CAST__OP);
-			childrenFeatures.add(LlvmPackage.Literals.CAST__LIST);
 		}
 		return childrenFeatures;
 	}
@@ -255,9 +255,9 @@ public class CastItemProvider
 			case LlvmPackage.CAST__CASTTO:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case LlvmPackage.CAST__TYPES:
 			case LlvmPackage.CAST__CASTSTRUCT:
 			case LlvmPackage.CAST__OP:
-			case LlvmPackage.CAST__LIST:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -277,6 +277,11 @@ public class CastItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.CAST__TYPES,
+				 LlvmFactory.eINSTANCE.createTypeList()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.CAST__CASTSTRUCT,
 				 LlvmFactory.eINSTANCE.createStructure()));
 
@@ -284,11 +289,6 @@ public class CastItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__OP,
 				 LlvmFactory.eINSTANCE.createGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CAST__LIST,
-				 LlvmFactory.eINSTANCE.createTypeList()));
 	}
 
 }

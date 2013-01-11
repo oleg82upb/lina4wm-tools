@@ -2,21 +2,18 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
+import de.upb.llvm_parser.llvm.ARRAY;
 import de.upb.llvm_parser.llvm.Clause;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,8 +24,8 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.ClauseImpl#getType <em>Type</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.ClauseImpl#getValue <em>Value</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ClauseImpl#getFiltertype <em>Filtertype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ClauseImpl#getFiltervalue <em>Filtervalue</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.ClauseImpl#getFilterarray <em>Filterarray</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.ClauseImpl#getConstant <em>Constant</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,24 +73,34 @@ public class ClauseImpl extends MinimalEObjectImpl.Container implements Clause {
 	protected String value = VALUE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getFiltertype() <em>Filtertype</em>}' attribute list.
+	 * The cached value of the '{@link #getFilterarray() <em>Filterarray</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFiltertype()
+	 * @see #getFilterarray()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<String> filtertype;
+	protected ARRAY filterarray;
 
 	/**
-	 * The cached value of the '{@link #getFiltervalue() <em>Filtervalue</em>}' attribute list.
+	 * The default value of the '{@link #getConstant() <em>Constant</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFiltervalue()
+	 * @see #getConstant()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<String> filtervalue;
+	protected static final String CONSTANT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getConstant() <em>Constant</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstant()
+	 * @generated
+	 * @ordered
+	 */
+	protected String constant = CONSTANT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -161,11 +168,8 @@ public class ClauseImpl extends MinimalEObjectImpl.Container implements Clause {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<String> getFiltertype() {
-		if (filtertype == null) {
-			filtertype = new EDataTypeEList<String>(String.class, this, LlvmPackage.CLAUSE__FILTERTYPE);
-		}
-		return filtertype;
+	public ARRAY getFilterarray() {
+		return filterarray;
 	}
 
 	/**
@@ -173,11 +177,68 @@ public class ClauseImpl extends MinimalEObjectImpl.Container implements Clause {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<String> getFiltervalue() {
-		if (filtervalue == null) {
-			filtervalue = new EDataTypeEList<String>(String.class, this, LlvmPackage.CLAUSE__FILTERVALUE);
+	public NotificationChain basicSetFilterarray(ARRAY newFilterarray, NotificationChain msgs) {
+		ARRAY oldFilterarray = filterarray;
+		filterarray = newFilterarray;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.CLAUSE__FILTERARRAY, oldFilterarray, newFilterarray);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return filtervalue;
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFilterarray(ARRAY newFilterarray) {
+		if (newFilterarray != filterarray) {
+			NotificationChain msgs = null;
+			if (filterarray != null)
+				msgs = ((InternalEObject)filterarray).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CLAUSE__FILTERARRAY, null, msgs);
+			if (newFilterarray != null)
+				msgs = ((InternalEObject)newFilterarray).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CLAUSE__FILTERARRAY, null, msgs);
+			msgs = basicSetFilterarray(newFilterarray, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CLAUSE__FILTERARRAY, newFilterarray, newFilterarray));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getConstant() {
+		return constant;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setConstant(String newConstant) {
+		String oldConstant = constant;
+		constant = newConstant;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CLAUSE__CONSTANT, oldConstant, constant));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case LlvmPackage.CLAUSE__FILTERARRAY:
+				return basicSetFilterarray(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -192,10 +253,10 @@ public class ClauseImpl extends MinimalEObjectImpl.Container implements Clause {
 				return getType();
 			case LlvmPackage.CLAUSE__VALUE:
 				return getValue();
-			case LlvmPackage.CLAUSE__FILTERTYPE:
-				return getFiltertype();
-			case LlvmPackage.CLAUSE__FILTERVALUE:
-				return getFiltervalue();
+			case LlvmPackage.CLAUSE__FILTERARRAY:
+				return getFilterarray();
+			case LlvmPackage.CLAUSE__CONSTANT:
+				return getConstant();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -205,7 +266,6 @@ public class ClauseImpl extends MinimalEObjectImpl.Container implements Clause {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -215,13 +275,11 @@ public class ClauseImpl extends MinimalEObjectImpl.Container implements Clause {
 			case LlvmPackage.CLAUSE__VALUE:
 				setValue((String)newValue);
 				return;
-			case LlvmPackage.CLAUSE__FILTERTYPE:
-				getFiltertype().clear();
-				getFiltertype().addAll((Collection<? extends String>)newValue);
+			case LlvmPackage.CLAUSE__FILTERARRAY:
+				setFilterarray((ARRAY)newValue);
 				return;
-			case LlvmPackage.CLAUSE__FILTERVALUE:
-				getFiltervalue().clear();
-				getFiltervalue().addAll((Collection<? extends String>)newValue);
+			case LlvmPackage.CLAUSE__CONSTANT:
+				setConstant((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -241,11 +299,11 @@ public class ClauseImpl extends MinimalEObjectImpl.Container implements Clause {
 			case LlvmPackage.CLAUSE__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
-			case LlvmPackage.CLAUSE__FILTERTYPE:
-				getFiltertype().clear();
+			case LlvmPackage.CLAUSE__FILTERARRAY:
+				setFilterarray((ARRAY)null);
 				return;
-			case LlvmPackage.CLAUSE__FILTERVALUE:
-				getFiltervalue().clear();
+			case LlvmPackage.CLAUSE__CONSTANT:
+				setConstant(CONSTANT_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -263,10 +321,10 @@ public class ClauseImpl extends MinimalEObjectImpl.Container implements Clause {
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 			case LlvmPackage.CLAUSE__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
-			case LlvmPackage.CLAUSE__FILTERTYPE:
-				return filtertype != null && !filtertype.isEmpty();
-			case LlvmPackage.CLAUSE__FILTERVALUE:
-				return filtervalue != null && !filtervalue.isEmpty();
+			case LlvmPackage.CLAUSE__FILTERARRAY:
+				return filterarray != null;
+			case LlvmPackage.CLAUSE__CONSTANT:
+				return CONSTANT_EDEFAULT == null ? constant != null : !CONSTANT_EDEFAULT.equals(constant);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -285,10 +343,8 @@ public class ClauseImpl extends MinimalEObjectImpl.Container implements Clause {
 		result.append(type);
 		result.append(", value: ");
 		result.append(value);
-		result.append(", filtertype: ");
-		result.append(filtertype);
-		result.append(", filtervalue: ");
-		result.append(filtervalue);
+		result.append(", constant: ");
+		result.append(constant);
 		result.append(')');
 		return result.toString();
 	}

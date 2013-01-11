@@ -12,6 +12,7 @@ package de.upb.llvm_parser.llvm;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.Load#getAdresstype <em>Adresstype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Load#getTypes <em>Types</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Load#getAdress <em>Adress</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Load#getOrdering <em>Ordering</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Load#getIndex <em>Index</em>}</li>
@@ -48,6 +49,32 @@ public interface Load extends Instruction {
 	 * @generated
 	 */
 	void setAdresstype(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Types</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Types</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Types</em>' containment reference.
+	 * @see #setTypes(TypeList)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLoad_Types()
+	 * @model containment="true"
+	 * @generated
+	 */
+	TypeList getTypes();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Load#getTypes <em>Types</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Types</em>' containment reference.
+	 * @see #getTypes()
+	 * @generated
+	 */
+	void setTypes(TypeList value);
 
 	/**
 	 * Returns the value of the '<em><b>Adress</b></em>' attribute.

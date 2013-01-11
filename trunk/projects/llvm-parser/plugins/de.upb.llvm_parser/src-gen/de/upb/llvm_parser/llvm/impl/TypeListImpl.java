@@ -7,13 +7,18 @@ import de.upb.llvm_parser.llvm.TypeList;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,6 +28,7 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.TypeListImpl#getTypes <em>Types</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.TypeListImpl#getTypelists <em>Typelists</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,6 +44,16 @@ public class TypeListImpl extends MinimalEObjectImpl.Container implements TypeLi
 	 * @ordered
 	 */
 	protected EList<String> types;
+
+	/**
+	 * The cached value of the '{@link #getTypelists() <em>Typelists</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypelists()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypeList> typelists;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -75,11 +91,39 @@ public class TypeListImpl extends MinimalEObjectImpl.Container implements TypeLi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<TypeList> getTypelists() {
+		if (typelists == null) {
+			typelists = new EObjectContainmentEList<TypeList>(TypeList.class, this, LlvmPackage.TYPE_LIST__TYPELISTS);
+		}
+		return typelists;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case LlvmPackage.TYPE_LIST__TYPELISTS:
+				return ((InternalEList<?>)getTypelists()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case LlvmPackage.TYPE_LIST__TYPES:
 				return getTypes();
+			case LlvmPackage.TYPE_LIST__TYPELISTS:
+				return getTypelists();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -97,6 +141,10 @@ public class TypeListImpl extends MinimalEObjectImpl.Container implements TypeLi
 				getTypes().clear();
 				getTypes().addAll((Collection<? extends String>)newValue);
 				return;
+			case LlvmPackage.TYPE_LIST__TYPELISTS:
+				getTypelists().clear();
+				getTypelists().addAll((Collection<? extends TypeList>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -112,6 +160,9 @@ public class TypeListImpl extends MinimalEObjectImpl.Container implements TypeLi
 			case LlvmPackage.TYPE_LIST__TYPES:
 				getTypes().clear();
 				return;
+			case LlvmPackage.TYPE_LIST__TYPELISTS:
+				getTypelists().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -126,6 +177,8 @@ public class TypeListImpl extends MinimalEObjectImpl.Container implements TypeLi
 		switch (featureID) {
 			case LlvmPackage.TYPE_LIST__TYPES:
 				return types != null && !types.isEmpty();
+			case LlvmPackage.TYPE_LIST__TYPELISTS:
+				return typelists != null && !typelists.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

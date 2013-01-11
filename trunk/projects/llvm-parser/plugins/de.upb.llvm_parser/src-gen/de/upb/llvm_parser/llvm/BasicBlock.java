@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.BasicBlock#getLabel <em>Label</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.BasicBlock#getInstructions <em>Instructions</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.BasicBlock#getRetadr <em>Retadr</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.BasicBlock#getTerminator <em>Terminator</em>}</li>
  * </ul>
  * </p>
@@ -66,6 +67,32 @@ public interface BasicBlock extends EObject {
 	 * @generated
 	 */
 	EList<EObject> getInstructions();
+
+	/**
+	 * Returns the value of the '<em><b>Retadr</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Retadr</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Retadr</em>' attribute.
+	 * @see #setRetadr(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getBasicBlock_Retadr()
+	 * @model
+	 * @generated
+	 */
+	String getRetadr();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.BasicBlock#getRetadr <em>Retadr</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Retadr</em>' attribute.
+	 * @see #getRetadr()
+	 * @generated
+	 */
+	void setRetadr(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Terminator</b></em>' containment reference.
