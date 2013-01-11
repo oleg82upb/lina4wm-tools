@@ -2,8 +2,6 @@
  */
 package de.upb.llvm_parser.llvm;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -16,8 +14,8 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.Clause#getType <em>Type</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Clause#getValue <em>Value</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Clause#getFiltertype <em>Filtertype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Clause#getFiltervalue <em>Filtervalue</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Clause#getFilterarray <em>Filterarray</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Clause#getConstant <em>Constant</em>}</li>
  * </ul>
  * </p>
  *
@@ -79,35 +77,55 @@ public interface Clause extends EObject {
 	void setValue(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Filtertype</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
+	 * Returns the value of the '<em><b>Filterarray</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Filtertype</em>' attribute list isn't clear,
+	 * If the meaning of the '<em>Filterarray</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Filtertype</em>' attribute list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getClause_Filtertype()
-	 * @model unique="false"
+	 * @return the value of the '<em>Filterarray</em>' containment reference.
+	 * @see #setFilterarray(ARRAY)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getClause_Filterarray()
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<String> getFiltertype();
+	ARRAY getFilterarray();
 
 	/**
-	 * Returns the value of the '<em><b>Filtervalue</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Clause#getFilterarray <em>Filterarray</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Filterarray</em>' containment reference.
+	 * @see #getFilterarray()
+	 * @generated
+	 */
+	void setFilterarray(ARRAY value);
+
+	/**
+	 * Returns the value of the '<em><b>Constant</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Filtervalue</em>' attribute list isn't clear,
+	 * If the meaning of the '<em>Constant</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Filtervalue</em>' attribute list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getClause_Filtervalue()
-	 * @model unique="false"
+	 * @return the value of the '<em>Constant</em>' attribute.
+	 * @see #setConstant(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getClause_Constant()
+	 * @model
 	 * @generated
 	 */
-	EList<String> getFiltervalue();
+	String getConstant();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Clause#getConstant <em>Constant</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Constant</em>' attribute.
+	 * @see #getConstant()
+	 * @generated
+	 */
+	void setConstant(String value);
 
 } // Clause

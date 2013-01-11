@@ -2,6 +2,7 @@
  */
 package de.upb.llvm_parser.llvm;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -12,13 +13,13 @@ package de.upb.llvm_parser.llvm;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.Cast#getCastfrom <em>Castfrom</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Cast#getTypes <em>Types</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Cast#getCaststruct <em>Caststruct</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Cast#getValue <em>Value</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Cast#getDual <em>Dual</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Cast#getOp <em>Op</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Cast#getGlobal <em>Global</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Cast#getCastto <em>Castto</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Cast#getList <em>List</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,6 +53,22 @@ public interface Cast extends Instruction {
 	 * @generated
 	 */
 	void setCastfrom(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Types</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.TypeList}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Types</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Types</em>' containment reference list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCast_Types()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<TypeList> getTypes();
 
 	/**
 	 * Returns the value of the '<em><b>Caststruct</b></em>' containment reference.
@@ -208,31 +225,5 @@ public interface Cast extends Instruction {
 	 * @generated
 	 */
 	void setCastto(String value);
-
-	/**
-	 * Returns the value of the '<em><b>List</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>List</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>List</em>' containment reference.
-	 * @see #setList(TypeList)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCast_List()
-	 * @model containment="true"
-	 * @generated
-	 */
-	TypeList getList();
-
-	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Cast#getList <em>List</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>List</em>' containment reference.
-	 * @see #getList()
-	 * @generated
-	 */
-	void setList(TypeList value);
 
 } // Cast

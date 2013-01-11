@@ -2,7 +2,7 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
-import de.upb.llvm_parser.llvm.Cast;
+import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.ParameterList;
 import de.upb.llvm_parser.llvm.TypeList;
@@ -31,8 +31,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.ParameterListImpl#getTypes <em>Types</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.ParameterListImpl#getLists <em>Lists</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.ParameterListImpl#getAlignname <em>Alignname</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.ParameterListImpl#getVariables <em>Variables</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ParameterListImpl#getCasts <em>Casts</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.ParameterListImpl#getOp <em>Op</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,6 +61,16 @@ public class ParameterListImpl extends MinimalEObjectImpl.Container implements P
 	protected EList<TypeList> lists;
 
 	/**
+	 * The cached value of the '{@link #getAlignname() <em>Alignname</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAlignname()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> alignname;
+
+	/**
 	 * The cached value of the '{@link #getVariables() <em>Variables</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -70,14 +81,14 @@ public class ParameterListImpl extends MinimalEObjectImpl.Container implements P
 	protected EList<String> variables;
 
 	/**
-	 * The cached value of the '{@link #getCasts() <em>Casts</em>}' containment reference list.
+	 * The cached value of the '{@link #getOp() <em>Op</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCasts()
+	 * @see #getOp()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Cast> casts;
+	protected EList<Instruction> op;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -127,6 +138,18 @@ public class ParameterListImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getAlignname() {
+		if (alignname == null) {
+			alignname = new EDataTypeEList<String>(String.class, this, LlvmPackage.PARAMETER_LIST__ALIGNNAME);
+		}
+		return alignname;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<String> getVariables() {
 		if (variables == null) {
 			variables = new EDataTypeEList<String>(String.class, this, LlvmPackage.PARAMETER_LIST__VARIABLES);
@@ -139,11 +162,11 @@ public class ParameterListImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Cast> getCasts() {
-		if (casts == null) {
-			casts = new EObjectContainmentEList<Cast>(Cast.class, this, LlvmPackage.PARAMETER_LIST__CASTS);
+	public EList<Instruction> getOp() {
+		if (op == null) {
+			op = new EObjectContainmentEList<Instruction>(Instruction.class, this, LlvmPackage.PARAMETER_LIST__OP);
 		}
-		return casts;
+		return op;
 	}
 
 	/**
@@ -156,8 +179,8 @@ public class ParameterListImpl extends MinimalEObjectImpl.Container implements P
 		switch (featureID) {
 			case LlvmPackage.PARAMETER_LIST__LISTS:
 				return ((InternalEList<?>)getLists()).basicRemove(otherEnd, msgs);
-			case LlvmPackage.PARAMETER_LIST__CASTS:
-				return ((InternalEList<?>)getCasts()).basicRemove(otherEnd, msgs);
+			case LlvmPackage.PARAMETER_LIST__OP:
+				return ((InternalEList<?>)getOp()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -174,10 +197,12 @@ public class ParameterListImpl extends MinimalEObjectImpl.Container implements P
 				return getTypes();
 			case LlvmPackage.PARAMETER_LIST__LISTS:
 				return getLists();
+			case LlvmPackage.PARAMETER_LIST__ALIGNNAME:
+				return getAlignname();
 			case LlvmPackage.PARAMETER_LIST__VARIABLES:
 				return getVariables();
-			case LlvmPackage.PARAMETER_LIST__CASTS:
-				return getCasts();
+			case LlvmPackage.PARAMETER_LIST__OP:
+				return getOp();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -199,13 +224,17 @@ public class ParameterListImpl extends MinimalEObjectImpl.Container implements P
 				getLists().clear();
 				getLists().addAll((Collection<? extends TypeList>)newValue);
 				return;
+			case LlvmPackage.PARAMETER_LIST__ALIGNNAME:
+				getAlignname().clear();
+				getAlignname().addAll((Collection<? extends String>)newValue);
+				return;
 			case LlvmPackage.PARAMETER_LIST__VARIABLES:
 				getVariables().clear();
 				getVariables().addAll((Collection<? extends String>)newValue);
 				return;
-			case LlvmPackage.PARAMETER_LIST__CASTS:
-				getCasts().clear();
-				getCasts().addAll((Collection<? extends Cast>)newValue);
+			case LlvmPackage.PARAMETER_LIST__OP:
+				getOp().clear();
+				getOp().addAll((Collection<? extends Instruction>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -225,11 +254,14 @@ public class ParameterListImpl extends MinimalEObjectImpl.Container implements P
 			case LlvmPackage.PARAMETER_LIST__LISTS:
 				getLists().clear();
 				return;
+			case LlvmPackage.PARAMETER_LIST__ALIGNNAME:
+				getAlignname().clear();
+				return;
 			case LlvmPackage.PARAMETER_LIST__VARIABLES:
 				getVariables().clear();
 				return;
-			case LlvmPackage.PARAMETER_LIST__CASTS:
-				getCasts().clear();
+			case LlvmPackage.PARAMETER_LIST__OP:
+				getOp().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -247,10 +279,12 @@ public class ParameterListImpl extends MinimalEObjectImpl.Container implements P
 				return types != null && !types.isEmpty();
 			case LlvmPackage.PARAMETER_LIST__LISTS:
 				return lists != null && !lists.isEmpty();
+			case LlvmPackage.PARAMETER_LIST__ALIGNNAME:
+				return alignname != null && !alignname.isEmpty();
 			case LlvmPackage.PARAMETER_LIST__VARIABLES:
 				return variables != null && !variables.isEmpty();
-			case LlvmPackage.PARAMETER_LIST__CASTS:
-				return casts != null && !casts.isEmpty();
+			case LlvmPackage.PARAMETER_LIST__OP:
+				return op != null && !op.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -267,6 +301,8 @@ public class ParameterListImpl extends MinimalEObjectImpl.Container implements P
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (types: ");
 		result.append(types);
+		result.append(", alignname: ");
+		result.append(alignname);
 		result.append(", variables: ");
 		result.append(variables);
 		result.append(')');

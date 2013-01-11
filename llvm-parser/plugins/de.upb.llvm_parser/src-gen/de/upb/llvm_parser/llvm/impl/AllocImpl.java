@@ -4,10 +4,13 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.TypeList;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -19,6 +22,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.AllocImpl#getType <em>Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.AllocImpl#getTypelist <em>Typelist</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.AllocImpl#getNumelementstype <em>Numelementstype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.AllocImpl#getNumelementsvalue <em>Numelementsvalue</em>}</li>
  * </ul>
@@ -46,6 +50,16 @@ public class AllocImpl extends InstructionImpl implements Alloc {
 	 * @ordered
 	 */
 	protected String type = TYPE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getTypelist() <em>Typelist</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypelist()
+	 * @generated
+	 * @ordered
+	 */
+	protected TypeList typelist;
 
 	/**
 	 * The default value of the '{@link #getNumelementstype() <em>Numelementstype</em>}' attribute.
@@ -132,6 +146,49 @@ public class AllocImpl extends InstructionImpl implements Alloc {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public TypeList getTypelist() {
+		return typelist;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTypelist(TypeList newTypelist, NotificationChain msgs) {
+		TypeList oldTypelist = typelist;
+		typelist = newTypelist;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.ALLOC__TYPELIST, oldTypelist, newTypelist);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTypelist(TypeList newTypelist) {
+		if (newTypelist != typelist) {
+			NotificationChain msgs = null;
+			if (typelist != null)
+				msgs = ((InternalEObject)typelist).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ALLOC__TYPELIST, null, msgs);
+			if (newTypelist != null)
+				msgs = ((InternalEObject)newTypelist).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ALLOC__TYPELIST, null, msgs);
+			msgs = basicSetTypelist(newTypelist, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ALLOC__TYPELIST, newTypelist, newTypelist));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getNumelementstype() {
 		return numelementstype;
 	}
@@ -175,10 +232,26 @@ public class AllocImpl extends InstructionImpl implements Alloc {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case LlvmPackage.ALLOC__TYPELIST:
+				return basicSetTypelist(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case LlvmPackage.ALLOC__TYPE:
 				return getType();
+			case LlvmPackage.ALLOC__TYPELIST:
+				return getTypelist();
 			case LlvmPackage.ALLOC__NUMELEMENTSTYPE:
 				return getNumelementstype();
 			case LlvmPackage.ALLOC__NUMELEMENTSVALUE:
@@ -197,6 +270,9 @@ public class AllocImpl extends InstructionImpl implements Alloc {
 		switch (featureID) {
 			case LlvmPackage.ALLOC__TYPE:
 				setType((String)newValue);
+				return;
+			case LlvmPackage.ALLOC__TYPELIST:
+				setTypelist((TypeList)newValue);
 				return;
 			case LlvmPackage.ALLOC__NUMELEMENTSTYPE:
 				setNumelementstype((String)newValue);
@@ -219,6 +295,9 @@ public class AllocImpl extends InstructionImpl implements Alloc {
 			case LlvmPackage.ALLOC__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
+			case LlvmPackage.ALLOC__TYPELIST:
+				setTypelist((TypeList)null);
+				return;
 			case LlvmPackage.ALLOC__NUMELEMENTSTYPE:
 				setNumelementstype(NUMELEMENTSTYPE_EDEFAULT);
 				return;
@@ -239,6 +318,8 @@ public class AllocImpl extends InstructionImpl implements Alloc {
 		switch (featureID) {
 			case LlvmPackage.ALLOC__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+			case LlvmPackage.ALLOC__TYPELIST:
+				return typelist != null;
 			case LlvmPackage.ALLOC__NUMELEMENTSTYPE:
 				return NUMELEMENTSTYPE_EDEFAULT == null ? numelementstype != null : !NUMELEMENTSTYPE_EDEFAULT.equals(numelementstype);
 			case LlvmPackage.ALLOC__NUMELEMENTSVALUE:

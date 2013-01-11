@@ -2,6 +2,7 @@
  */
 package de.upb.llvm_parser.llvm;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -12,7 +13,9 @@ package de.upb.llvm_parser.llvm;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.Store#getNewtype <em>Newtype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Store#getTypes <em>Types</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Store#getNewvalue <em>Newvalue</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Store#getNewelement <em>Newelement</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Store#getAdresstype <em>Adresstype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Store#getAdress <em>Adress</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Store#getOrdering <em>Ordering</em>}</li>
@@ -52,6 +55,22 @@ public interface Store extends Instruction {
 	void setNewtype(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Types</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.TypeList}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Types</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Types</em>' containment reference list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getStore_Types()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<TypeList> getTypes();
+
+	/**
 	 * Returns the value of the '<em><b>Newvalue</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -76,6 +95,32 @@ public interface Store extends Instruction {
 	 * @generated
 	 */
 	void setNewvalue(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Newelement</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Newelement</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Newelement</em>' containment reference.
+	 * @see #setNewelement(GetElementPtr)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getStore_Newelement()
+	 * @model containment="true"
+	 * @generated
+	 */
+	GetElementPtr getNewelement();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Store#getNewelement <em>Newelement</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Newelement</em>' containment reference.
+	 * @see #getNewelement()
+	 * @generated
+	 */
+	void setNewelement(GetElementPtr value);
 
 	/**
 	 * Returns the value of the '<em><b>Adresstype</b></em>' attribute.

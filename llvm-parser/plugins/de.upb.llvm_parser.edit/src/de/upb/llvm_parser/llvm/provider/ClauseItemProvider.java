@@ -65,8 +65,7 @@ public class ClauseItemProvider
 
 			addTypePropertyDescriptor(object);
 			addValuePropertyDescriptor(object);
-			addFiltertypePropertyDescriptor(object);
-			addFiltervaluePropertyDescriptor(object);
+			addConstantPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -116,19 +115,19 @@ public class ClauseItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Filtertype feature.
+	 * This adds a property descriptor for the Constant feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addFiltertypePropertyDescriptor(Object object) {
+	protected void addConstantPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Clause_filtertype_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Clause_filtertype_feature", "_UI_Clause_type"),
-				 LlvmPackage.Literals.CLAUSE__FILTERTYPE,
+				 getString("_UI_Clause_constant_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Clause_constant_feature", "_UI_Clause_type"),
+				 LlvmPackage.Literals.CLAUSE__CONSTANT,
 				 true,
 				 false,
 				 false,
@@ -138,25 +137,33 @@ public class ClauseItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Filtervalue feature.
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addFiltervaluePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Clause_filtervalue_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Clause_filtervalue_feature", "_UI_Clause_type"),
-				 LlvmPackage.Literals.CLAUSE__FILTERVALUE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.CLAUSE__FILTERARRAY);
+		}
+		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
 	}
 
 	/**
@@ -198,9 +205,11 @@ public class ClauseItemProvider
 		switch (notification.getFeatureID(Clause.class)) {
 			case LlvmPackage.CLAUSE__TYPE:
 			case LlvmPackage.CLAUSE__VALUE:
-			case LlvmPackage.CLAUSE__FILTERTYPE:
-			case LlvmPackage.CLAUSE__FILTERVALUE:
+			case LlvmPackage.CLAUSE__CONSTANT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case LlvmPackage.CLAUSE__FILTERARRAY:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -216,6 +225,11 @@ public class ClauseItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CLAUSE__FILTERARRAY,
+				 LlvmFactory.eINSTANCE.createARRAY()));
 	}
 
 	/**

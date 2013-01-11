@@ -850,7 +850,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getParameterList_Variables() {
+	public EAttribute getParameterList_Alignname() {
 		return (EAttribute)parameterListEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -859,8 +859,17 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getParameterList_Casts() {
-		return (EReference)parameterListEClass.getEStructuralFeatures().get(3);
+	public EAttribute getParameterList_Variables() {
+		return (EAttribute)parameterListEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterList_Op() {
+		return (EReference)parameterListEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -922,8 +931,17 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getBasicBlock_Retadr() {
+		return (EAttribute)basicBlockEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getBasicBlock_Terminator() {
-		return (EReference)basicBlockEClass.getEStructuralFeatures().get(2);
+		return (EReference)basicBlockEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -958,6 +976,15 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getTypeList_Typelists() {
+		return (EReference)typeListEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getInstruction() {
 		return instructionEClass;
 	}
@@ -985,7 +1012,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getGetElementPtr_Elementarray() {
+	public EReference getGetElementPtr_Types() {
 		return (EReference)getElementPtrEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -994,8 +1021,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getGetElementPtr_Element() {
-		return (EAttribute)getElementPtrEClass.getEStructuralFeatures().get(2);
+	public EReference getGetElementPtr_Elementarray() {
+		return (EReference)getElementPtrEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1003,7 +1030,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getGetElementPtr_Indicetypes() {
+	public EAttribute getGetElementPtr_Element() {
 		return (EAttribute)getElementPtrEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1012,8 +1039,17 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getGetElementPtr_Indices() {
+	public EAttribute getGetElementPtr_Indicetypes() {
 		return (EAttribute)getElementPtrEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGetElementPtr_Indices() {
+		return (EAttribute)getElementPtrEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1282,8 +1318,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLoad_Adress() {
-		return (EAttribute)loadEClass.getEStructuralFeatures().get(1);
+	public EReference getLoad_Types() {
+		return (EReference)loadEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1291,7 +1327,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLoad_Ordering() {
+	public EAttribute getLoad_Adress() {
 		return (EAttribute)loadEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1300,8 +1336,17 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLoad_Index() {
+	public EAttribute getLoad_Ordering() {
 		return (EAttribute)loadEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLoad_Index() {
+		return (EAttribute)loadEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1327,8 +1372,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStore_Newvalue() {
-		return (EAttribute)storeEClass.getEStructuralFeatures().get(1);
+	public EReference getStore_Types() {
+		return (EReference)storeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1336,7 +1381,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStore_Adresstype() {
+	public EAttribute getStore_Newvalue() {
 		return (EAttribute)storeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1345,8 +1390,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStore_Adress() {
-		return (EAttribute)storeEClass.getEStructuralFeatures().get(3);
+	public EReference getStore_Newelement() {
+		return (EReference)storeEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1354,7 +1399,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStore_Ordering() {
+	public EAttribute getStore_Adresstype() {
 		return (EAttribute)storeEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -1363,8 +1408,26 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStore_Index() {
+	public EAttribute getStore_Adress() {
 		return (EAttribute)storeEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStore_Ordering() {
+		return (EAttribute)storeEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStore_Index() {
+		return (EAttribute)storeEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1426,8 +1489,17 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAlloc_Typelist() {
+		return (EReference)allocEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getAlloc_Numelementstype() {
-		return (EAttribute)allocEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)allocEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1436,7 +1508,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * @generated
 	 */
 	public EAttribute getAlloc_Numelementsvalue() {
-		return (EAttribute)allocEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)allocEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1588,8 +1660,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getClause_Filtertype() {
-		return (EAttribute)clauseEClass.getEStructuralFeatures().get(2);
+	public EReference getClause_Filterarray() {
+		return (EReference)clauseEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1597,7 +1669,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getClause_Filtervalue() {
+	public EAttribute getClause_Constant() {
 		return (EAttribute)clauseEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1894,7 +1966,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCast_Caststruct() {
+	public EReference getCast_Types() {
 		return (EReference)castEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1903,8 +1975,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCast_Value() {
-		return (EAttribute)castEClass.getEStructuralFeatures().get(2);
+	public EReference getCast_Caststruct() {
+		return (EReference)castEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1912,7 +1984,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCast_Dual() {
+	public EAttribute getCast_Value() {
 		return (EAttribute)castEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1921,8 +1993,17 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCast_Dual() {
+		return (EAttribute)castEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getCast_Op() {
-		return (EReference)castEClass.getEStructuralFeatures().get(4);
+		return (EReference)castEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1931,15 +2012,6 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * @generated
 	 */
 	public EAttribute getCast_Global() {
-		return (EAttribute)castEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCast_Castto() {
 		return (EAttribute)castEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -1948,8 +2020,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCast_List() {
-		return (EReference)castEClass.getEStructuralFeatures().get(7);
+	public EAttribute getCast_Castto() {
+		return (EAttribute)castEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -2519,8 +2591,9 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		parameterListEClass = createEClass(PARAMETER_LIST);
 		createEAttribute(parameterListEClass, PARAMETER_LIST__TYPES);
 		createEReference(parameterListEClass, PARAMETER_LIST__LISTS);
+		createEAttribute(parameterListEClass, PARAMETER_LIST__ALIGNNAME);
 		createEAttribute(parameterListEClass, PARAMETER_LIST__VARIABLES);
-		createEReference(parameterListEClass, PARAMETER_LIST__CASTS);
+		createEReference(parameterListEClass, PARAMETER_LIST__OP);
 
 		functionBodyEClass = createEClass(FUNCTION_BODY);
 		createEAttribute(functionBodyEClass, FUNCTION_BODY__META);
@@ -2529,17 +2602,20 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		basicBlockEClass = createEClass(BASIC_BLOCK);
 		createEAttribute(basicBlockEClass, BASIC_BLOCK__LABEL);
 		createEReference(basicBlockEClass, BASIC_BLOCK__INSTRUCTIONS);
+		createEAttribute(basicBlockEClass, BASIC_BLOCK__RETADR);
 		createEReference(basicBlockEClass, BASIC_BLOCK__TERMINATOR);
 
 		ret_InstrEClass = createEClass(RET_INSTR);
 
 		typeListEClass = createEClass(TYPE_LIST);
 		createEAttribute(typeListEClass, TYPE_LIST__TYPES);
+		createEReference(typeListEClass, TYPE_LIST__TYPELISTS);
 
 		instructionEClass = createEClass(INSTRUCTION);
 
 		getElementPtrEClass = createEClass(GET_ELEMENT_PTR);
 		createEAttribute(getElementPtrEClass, GET_ELEMENT_PTR__ELEMENTTYPE);
+		createEReference(getElementPtrEClass, GET_ELEMENT_PTR__TYPES);
 		createEReference(getElementPtrEClass, GET_ELEMENT_PTR__ELEMENTARRAY);
 		createEAttribute(getElementPtrEClass, GET_ELEMENT_PTR__ELEMENT);
 		createEAttribute(getElementPtrEClass, GET_ELEMENT_PTR__INDICETYPES);
@@ -2579,13 +2655,16 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 
 		loadEClass = createEClass(LOAD);
 		createEAttribute(loadEClass, LOAD__ADRESSTYPE);
+		createEReference(loadEClass, LOAD__TYPES);
 		createEAttribute(loadEClass, LOAD__ADRESS);
 		createEAttribute(loadEClass, LOAD__ORDERING);
 		createEAttribute(loadEClass, LOAD__INDEX);
 
 		storeEClass = createEClass(STORE);
 		createEAttribute(storeEClass, STORE__NEWTYPE);
+		createEReference(storeEClass, STORE__TYPES);
 		createEAttribute(storeEClass, STORE__NEWVALUE);
+		createEReference(storeEClass, STORE__NEWELEMENT);
 		createEAttribute(storeEClass, STORE__ADRESSTYPE);
 		createEAttribute(storeEClass, STORE__ADRESS);
 		createEAttribute(storeEClass, STORE__ORDERING);
@@ -2598,6 +2677,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 
 		allocEClass = createEClass(ALLOC);
 		createEAttribute(allocEClass, ALLOC__TYPE);
+		createEReference(allocEClass, ALLOC__TYPELIST);
 		createEAttribute(allocEClass, ALLOC__NUMELEMENTSTYPE);
 		createEAttribute(allocEClass, ALLOC__NUMELEMENTSVALUE);
 
@@ -2620,8 +2700,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		clauseEClass = createEClass(CLAUSE);
 		createEAttribute(clauseEClass, CLAUSE__TYPE);
 		createEAttribute(clauseEClass, CLAUSE__VALUE);
-		createEAttribute(clauseEClass, CLAUSE__FILTERTYPE);
-		createEAttribute(clauseEClass, CLAUSE__FILTERVALUE);
+		createEReference(clauseEClass, CLAUSE__FILTERARRAY);
+		createEAttribute(clauseEClass, CLAUSE__CONSTANT);
 
 		selectEClass = createEClass(SELECT);
 		createEAttribute(selectEClass, SELECT__CONDITIONTYPE);
@@ -2660,13 +2740,13 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 
 		castEClass = createEClass(CAST);
 		createEAttribute(castEClass, CAST__CASTFROM);
+		createEReference(castEClass, CAST__TYPES);
 		createEReference(castEClass, CAST__CASTSTRUCT);
 		createEAttribute(castEClass, CAST__VALUE);
 		createEAttribute(castEClass, CAST__DUAL);
 		createEReference(castEClass, CAST__OP);
 		createEAttribute(castEClass, CAST__GLOBAL);
 		createEAttribute(castEClass, CAST__CASTTO);
-		createEReference(castEClass, CAST__LIST);
 
 		compareEClass = createEClass(COMPARE);
 		createEAttribute(compareEClass, COMPARE__COMPTYPE);
@@ -2850,8 +2930,9 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		initEClass(parameterListEClass, ParameterList.class, "ParameterList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getParameterList_Types(), ecorePackage.getEString(), "types", null, 0, -1, ParameterList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getParameterList_Lists(), this.getTypeList(), null, "Lists", null, 0, -1, ParameterList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getParameterList_Alignname(), ecorePackage.getEString(), "alignname", null, 0, -1, ParameterList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParameterList_Variables(), ecorePackage.getEString(), "variables", null, 0, -1, ParameterList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getParameterList_Casts(), this.getCast(), null, "casts", null, 0, -1, ParameterList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getParameterList_Op(), this.getInstruction(), null, "op", null, 0, -1, ParameterList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(functionBodyEClass, FunctionBody.class, "FunctionBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFunctionBody_Meta(), ecorePackage.getEString(), "meta", null, 0, -1, FunctionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2860,17 +2941,20 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		initEClass(basicBlockEClass, BasicBlock.class, "BasicBlock", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBasicBlock_Label(), ecorePackage.getEString(), "label", null, 0, 1, BasicBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBasicBlock_Instructions(), ecorePackage.getEObject(), null, "instructions", null, 0, -1, BasicBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBasicBlock_Retadr(), ecorePackage.getEString(), "retadr", null, 0, 1, BasicBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBasicBlock_Terminator(), this.getRet_Instr(), null, "terminator", null, 0, 1, BasicBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(ret_InstrEClass, Ret_Instr.class, "Ret_Instr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(typeListEClass, TypeList.class, "TypeList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTypeList_Types(), ecorePackage.getEString(), "types", null, 0, -1, TypeList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypeList_Typelists(), this.getTypeList(), null, "typelists", null, 0, -1, TypeList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(instructionEClass, Instruction.class, "Instruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(getElementPtrEClass, GetElementPtr.class, "GetElementPtr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGetElementPtr_Elementtype(), ecorePackage.getEString(), "elementtype", null, 0, 1, GetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGetElementPtr_Types(), this.getTypeList(), null, "types", null, 0, 1, GetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGetElementPtr_Elementarray(), this.getARRAY(), null, "elementarray", null, 0, 1, GetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGetElementPtr_Element(), ecorePackage.getEString(), "element", null, 0, 1, GetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGetElementPtr_Indicetypes(), ecorePackage.getEString(), "indicetypes", null, 0, -1, GetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2910,13 +2994,16 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 
 		initEClass(loadEClass, Load.class, "Load", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLoad_Adresstype(), ecorePackage.getEString(), "adresstype", null, 0, 1, Load.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLoad_Types(), this.getTypeList(), null, "types", null, 0, 1, Load.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLoad_Adress(), ecorePackage.getEString(), "adress", null, 0, 1, Load.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLoad_Ordering(), ecorePackage.getEString(), "ordering", null, 0, 1, Load.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLoad_Index(), ecorePackage.getEInt(), "index", null, 0, 1, Load.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(storeEClass, Store.class, "Store", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStore_Newtype(), ecorePackage.getEString(), "newtype", null, 0, 1, Store.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStore_Types(), this.getTypeList(), null, "types", null, 0, -1, Store.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStore_Newvalue(), ecorePackage.getEString(), "newvalue", null, 0, 1, Store.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStore_Newelement(), this.getGetElementPtr(), null, "newelement", null, 0, 1, Store.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStore_Adresstype(), ecorePackage.getEString(), "adresstype", null, 0, 1, Store.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStore_Adress(), ecorePackage.getEString(), "adress", null, 0, 1, Store.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStore_Ordering(), ecorePackage.getEString(), "ordering", null, 0, 1, Store.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2929,6 +3016,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 
 		initEClass(allocEClass, Alloc.class, "Alloc", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAlloc_Type(), ecorePackage.getEString(), "type", null, 0, 1, Alloc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAlloc_Typelist(), this.getTypeList(), null, "typelist", null, 0, 1, Alloc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAlloc_Numelementstype(), ecorePackage.getEString(), "numelementstype", null, 0, 1, Alloc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAlloc_Numelementsvalue(), ecorePackage.getEString(), "numelementsvalue", null, 0, 1, Alloc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2951,8 +3039,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		initEClass(clauseEClass, Clause.class, "Clause", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getClause_Type(), ecorePackage.getEString(), "type", null, 0, 1, Clause.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getClause_Value(), ecorePackage.getEString(), "value", null, 0, 1, Clause.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getClause_Filtertype(), ecorePackage.getEString(), "filtertype", null, 0, -1, Clause.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getClause_Filtervalue(), ecorePackage.getEString(), "filtervalue", null, 0, -1, Clause.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClause_Filterarray(), this.getARRAY(), null, "filterarray", null, 0, 1, Clause.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClause_Constant(), ecorePackage.getEString(), "constant", null, 0, 1, Clause.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(selectEClass, Select.class, "Select", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSelect_Conditiontype(), ecorePackage.getEString(), "conditiontype", null, 0, 1, Select.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2991,13 +3079,13 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 
 		initEClass(castEClass, Cast.class, "Cast", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCast_Castfrom(), ecorePackage.getEString(), "castfrom", null, 0, 1, Cast.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCast_Types(), this.getTypeList(), null, "types", null, 0, -1, Cast.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCast_Caststruct(), this.getStructure(), null, "caststruct", null, 0, 1, Cast.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCast_Value(), ecorePackage.getEString(), "value", null, 0, 1, Cast.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCast_Dual(), ecorePackage.getEString(), "dual", null, 0, 1, Cast.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCast_Op(), this.getGetElementPtr(), null, "op", null, 0, 1, Cast.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCast_Global(), ecorePackage.getEString(), "global", null, 0, 1, Cast.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCast_Castto(), ecorePackage.getEString(), "castto", null, 0, 1, Cast.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCast_List(), this.getTypeList(), null, "list", null, 0, 1, Cast.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(compareEClass, Compare.class, "Compare", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCompare_Comptype(), ecorePackage.getEString(), "comptype", null, 0, 1, Compare.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

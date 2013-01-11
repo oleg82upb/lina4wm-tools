@@ -8,13 +8,20 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Structure;
 import de.upb.llvm_parser.llvm.TypeList;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,13 +31,13 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.CastImpl#getCastfrom <em>Castfrom</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.CastImpl#getTypes <em>Types</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.CastImpl#getCaststruct <em>Caststruct</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.CastImpl#getValue <em>Value</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.CastImpl#getDual <em>Dual</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.CastImpl#getOp <em>Op</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.CastImpl#getGlobal <em>Global</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.CastImpl#getCastto <em>Castto</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.CastImpl#getList <em>List</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,6 +63,16 @@ public class CastImpl extends InstructionImpl implements Cast {
 	 * @ordered
 	 */
 	protected String castfrom = CASTFROM_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getTypes() <em>Types</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypeList> types;
 
 	/**
 	 * The cached value of the '{@link #getCaststruct() <em>Caststruct</em>}' containment reference.
@@ -158,16 +175,6 @@ public class CastImpl extends InstructionImpl implements Cast {
 	protected String castto = CASTTO_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getList() <em>List</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getList()
-	 * @generated
-	 * @ordered
-	 */
-	protected TypeList list;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -205,6 +212,18 @@ public class CastImpl extends InstructionImpl implements Cast {
 		castfrom = newCastfrom;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CAST__CASTFROM, oldCastfrom, castfrom));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TypeList> getTypes() {
+		if (types == null) {
+			types = new EObjectContainmentEList<TypeList>(TypeList.class, this, LlvmPackage.CAST__TYPES);
+		}
+		return types;
 	}
 
 	/**
@@ -382,58 +401,15 @@ public class CastImpl extends InstructionImpl implements Cast {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeList getList() {
-		return list;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetList(TypeList newList, NotificationChain msgs) {
-		TypeList oldList = list;
-		list = newList;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.CAST__LIST, oldList, newList);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setList(TypeList newList) {
-		if (newList != list) {
-			NotificationChain msgs = null;
-			if (list != null)
-				msgs = ((InternalEObject)list).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CAST__LIST, null, msgs);
-			if (newList != null)
-				msgs = ((InternalEObject)newList).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CAST__LIST, null, msgs);
-			msgs = basicSetList(newList, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CAST__LIST, newList, newList));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case LlvmPackage.CAST__TYPES:
+				return ((InternalEList<?>)getTypes()).basicRemove(otherEnd, msgs);
 			case LlvmPackage.CAST__CASTSTRUCT:
 				return basicSetCaststruct(null, msgs);
 			case LlvmPackage.CAST__OP:
 				return basicSetOp(null, msgs);
-			case LlvmPackage.CAST__LIST:
-				return basicSetList(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -448,6 +424,8 @@ public class CastImpl extends InstructionImpl implements Cast {
 		switch (featureID) {
 			case LlvmPackage.CAST__CASTFROM:
 				return getCastfrom();
+			case LlvmPackage.CAST__TYPES:
+				return getTypes();
 			case LlvmPackage.CAST__CASTSTRUCT:
 				return getCaststruct();
 			case LlvmPackage.CAST__VALUE:
@@ -460,8 +438,6 @@ public class CastImpl extends InstructionImpl implements Cast {
 				return getGlobal();
 			case LlvmPackage.CAST__CASTTO:
 				return getCastto();
-			case LlvmPackage.CAST__LIST:
-				return getList();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -471,11 +447,16 @@ public class CastImpl extends InstructionImpl implements Cast {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case LlvmPackage.CAST__CASTFROM:
 				setCastfrom((String)newValue);
+				return;
+			case LlvmPackage.CAST__TYPES:
+				getTypes().clear();
+				getTypes().addAll((Collection<? extends TypeList>)newValue);
 				return;
 			case LlvmPackage.CAST__CASTSTRUCT:
 				setCaststruct((Structure)newValue);
@@ -495,9 +476,6 @@ public class CastImpl extends InstructionImpl implements Cast {
 			case LlvmPackage.CAST__CASTTO:
 				setCastto((String)newValue);
 				return;
-			case LlvmPackage.CAST__LIST:
-				setList((TypeList)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -512,6 +490,9 @@ public class CastImpl extends InstructionImpl implements Cast {
 		switch (featureID) {
 			case LlvmPackage.CAST__CASTFROM:
 				setCastfrom(CASTFROM_EDEFAULT);
+				return;
+			case LlvmPackage.CAST__TYPES:
+				getTypes().clear();
 				return;
 			case LlvmPackage.CAST__CASTSTRUCT:
 				setCaststruct((Structure)null);
@@ -531,9 +512,6 @@ public class CastImpl extends InstructionImpl implements Cast {
 			case LlvmPackage.CAST__CASTTO:
 				setCastto(CASTTO_EDEFAULT);
 				return;
-			case LlvmPackage.CAST__LIST:
-				setList((TypeList)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -548,6 +526,8 @@ public class CastImpl extends InstructionImpl implements Cast {
 		switch (featureID) {
 			case LlvmPackage.CAST__CASTFROM:
 				return CASTFROM_EDEFAULT == null ? castfrom != null : !CASTFROM_EDEFAULT.equals(castfrom);
+			case LlvmPackage.CAST__TYPES:
+				return types != null && !types.isEmpty();
 			case LlvmPackage.CAST__CASTSTRUCT:
 				return caststruct != null;
 			case LlvmPackage.CAST__VALUE:
@@ -560,8 +540,6 @@ public class CastImpl extends InstructionImpl implements Cast {
 				return GLOBAL_EDEFAULT == null ? global != null : !GLOBAL_EDEFAULT.equals(global);
 			case LlvmPackage.CAST__CASTTO:
 				return CASTTO_EDEFAULT == null ? castto != null : !CASTTO_EDEFAULT.equals(castto);
-			case LlvmPackage.CAST__LIST:
-				return list != null;
 		}
 		return super.eIsSet(featureID);
 	}

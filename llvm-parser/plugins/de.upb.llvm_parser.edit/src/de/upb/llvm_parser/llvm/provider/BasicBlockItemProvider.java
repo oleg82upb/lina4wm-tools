@@ -64,6 +64,7 @@ public class BasicBlockItemProvider
 			super.getPropertyDescriptors(object);
 
 			addLabelPropertyDescriptor(object);
+			addRetadrPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -82,6 +83,28 @@ public class BasicBlockItemProvider
 				 getString("_UI_BasicBlock_label_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_BasicBlock_label_feature", "_UI_BasicBlock_type"),
 				 LlvmPackage.Literals.BASIC_BLOCK__LABEL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Retadr feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRetadrPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BasicBlock_retadr_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BasicBlock_retadr_feature", "_UI_BasicBlock_type"),
+				 LlvmPackage.Literals.BASIC_BLOCK__RETADR,
 				 true,
 				 false,
 				 false,
@@ -159,6 +182,7 @@ public class BasicBlockItemProvider
 
 		switch (notification.getFeatureID(BasicBlock.class)) {
 			case LlvmPackage.BASIC_BLOCK__LABEL:
+			case LlvmPackage.BASIC_BLOCK__RETADR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:

@@ -64,6 +64,7 @@ public class ParameterListItemProvider
 			super.getPropertyDescriptors(object);
 
 			addTypesPropertyDescriptor(object);
+			addAlignnamePropertyDescriptor(object);
 			addVariablesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -83,6 +84,28 @@ public class ParameterListItemProvider
 				 getString("_UI_ParameterList_types_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ParameterList_types_feature", "_UI_ParameterList_type"),
 				 LlvmPackage.Literals.PARAMETER_LIST__TYPES,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Alignname feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAlignnamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ParameterList_alignname_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ParameterList_alignname_feature", "_UI_ParameterList_type"),
+				 LlvmPackage.Literals.PARAMETER_LIST__ALIGNNAME,
 				 true,
 				 false,
 				 false,
@@ -126,7 +149,7 @@ public class ParameterListItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.PARAMETER_LIST__LISTS);
-			childrenFeatures.add(LlvmPackage.Literals.PARAMETER_LIST__CASTS);
+			childrenFeatures.add(LlvmPackage.Literals.PARAMETER_LIST__OP);
 		}
 		return childrenFeatures;
 	}
@@ -179,11 +202,12 @@ public class ParameterListItemProvider
 
 		switch (notification.getFeatureID(ParameterList.class)) {
 			case LlvmPackage.PARAMETER_LIST__TYPES:
+			case LlvmPackage.PARAMETER_LIST__ALIGNNAME:
 			case LlvmPackage.PARAMETER_LIST__VARIABLES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case LlvmPackage.PARAMETER_LIST__LISTS:
-			case LlvmPackage.PARAMETER_LIST__CASTS:
+			case LlvmPackage.PARAMETER_LIST__OP:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -208,8 +232,113 @@ public class ParameterListItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.PARAMETER_LIST__CASTS,
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createInstruction()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createGetElementPtr()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createExtractValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createInsertValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createFence()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createCmpXchg()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createAtomicRMW()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createLoad()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createStore()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createAlloc()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createPHI()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createLandingPad()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createSelect()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createVA_Arg()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createExtractElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createInsertElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createShuffleVector()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createCompare()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createARITHMETIC_OP()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__OP,
+				 LlvmFactory.eINSTANCE.createLOGICAL_OP()));
 	}
 
 	/**

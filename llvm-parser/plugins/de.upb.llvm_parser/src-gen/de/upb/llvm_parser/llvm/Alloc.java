@@ -12,6 +12,7 @@ package de.upb.llvm_parser.llvm;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.Alloc#getType <em>Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Alloc#getTypelist <em>Typelist</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Alloc#getNumelementstype <em>Numelementstype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Alloc#getNumelementsvalue <em>Numelementsvalue</em>}</li>
  * </ul>
@@ -47,6 +48,32 @@ public interface Alloc extends Instruction {
 	 * @generated
 	 */
 	void setType(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Typelist</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Typelist</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Typelist</em>' containment reference.
+	 * @see #setTypelist(TypeList)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getAlloc_Typelist()
+	 * @model containment="true"
+	 * @generated
+	 */
+	TypeList getTypelist();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Alloc#getTypelist <em>Typelist</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Typelist</em>' containment reference.
+	 * @see #getTypelist()
+	 * @generated
+	 */
+	void setTypelist(TypeList value);
 
 	/**
 	 * Returns the value of the '<em><b>Numelementstype</b></em>' attribute.

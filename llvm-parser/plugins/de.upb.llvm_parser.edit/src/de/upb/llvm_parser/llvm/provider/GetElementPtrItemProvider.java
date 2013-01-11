@@ -168,6 +168,7 @@ public class GetElementPtrItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.GET_ELEMENT_PTR__TYPES);
 			childrenFeatures.add(LlvmPackage.Literals.GET_ELEMENT_PTR__ELEMENTARRAY);
 		}
 		return childrenFeatures;
@@ -229,6 +230,7 @@ public class GetElementPtrItemProvider
 			case LlvmPackage.GET_ELEMENT_PTR__INDICES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case LlvmPackage.GET_ELEMENT_PTR__TYPES:
 			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -246,6 +248,11 @@ public class GetElementPtrItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__TYPES,
+				 LlvmFactory.eINSTANCE.createTypeList()));
 
 		newChildDescriptors.add
 			(createChildParameter
