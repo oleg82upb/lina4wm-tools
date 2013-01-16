@@ -2,17 +2,75 @@
 	trying to specify the LLVM-compiled Treiber Stack implementation  
 */
 
-#define BUFF_SIZE 2 	//size of Buffer
-#define MEM_SIZE 30	//size of memory 
+#define BUFF_SIZE 4 	//size of Buffer
+#define MEM_SIZE 40	//size of memory
+ 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 #include "x86_tso_buffer.pml"
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
+
+//abstract Stack implemented as array----------------------
+#define ASSIZE 4
+short asStack[ASSIZE];
+short asTop = 0;
+
+//asValue the value we expect to be on top of the stack
+inline asPop(asValue, asReturn)
+{
+	atomic{
+	if
+		:: asTop == 0 -> assert(asReturn == false); //stack must be empty
+		:: else -> { assert (asStack[asTop] == asValue);  	//asValue must be top element
+					 assert (asReturn == true);				//operation must have been successful
+					 asStack[asTop] = 0;					//remove element from stack
+					 asTop--;								//decrement top
+					}
+	fi	
+	}
+}
+
+inline asPush(asValue)
+{
+	atomic{
+	assert(asTop < ASSIZE); //make sure, stack array is never full
+	asStack[asTop] = asValue;
+	asTop++;
+	}
+	//should we return something?
+}
+
+inline casLPPop(adr, oldValue, newValue, returnValue, controlValue) 
+{
+	// 2 steps for the executing process, but atomic on memory
+	bit success;
+	ch ! iCas, adr, oldValue, newValue;
+	atomic{
+	ch ? iCas, adr, success, _; 
+	returnValue = success;
+	asPop(controlValue, success);
+	}
+}
+inline casLPPush(adr, oldValue, newValue, returnValue, controlValue) 
+{
+	// 2 steps for the executing process, but atomic on memory
+	bit success;
+	ch ! iCas, adr, oldValue, newValue;
+	atomic{
+	ch ? iCas, adr, success, _; 
+	returnValue = success;
+	if 	:: success -> asPush(controlValue);
+		:: else -> skip;
+	fi
+	}
+}
+
+
 //Types for LLVM, actually their length in size of pointers and values
-byte Stack = 0; 	//= {0};
-byte Node = 1; 	//= {0,1};
-byte I32 = 0; 		// = {0};
-byte Ptr = 0;
+#define Stack  0 	//= {0};
+#define Node  1	//= {0,1};
+#define I32  0 		// = {0};
+#define Ptr  0
 short memUse = 1; 	//shows to the next free cell in memory
 byte this; 		//Stack instance pointer
 
@@ -21,11 +79,13 @@ chan channelT2 = [0] of {mtype, short, short, short};
 
 inline getelementptr(type, instance, offset, targetRegister)
 {
+	atomic{
 	//simplified version of what llvm does.
 	//we don't need the type as long as we assume our memory to hold only values/pointers etc of equal length. 
 	//In this case, the offset directly correspond to adding it to instance address. 
 	assert(offset <= type); //offset shouldn't be greater than the type range
 	targetRegister = instance + offset;
+	}
 }
 
 inline alloca(type, targetRegister)
@@ -85,7 +145,10 @@ doCond:
 	read(ss, v7);
 	//ptrtoint ...
 	read(n, v9);
-	cas(head2, v7, v9, v11);
+	atomic{
+	casLPPush(head2, v7, v9, v11, v);
+	
+	}
 	if 
 		:: v11 == false -> goto doBody;
 		:: else -> skip;;
