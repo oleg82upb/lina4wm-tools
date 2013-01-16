@@ -37,25 +37,25 @@ inline mfence()
 
 inline cas(adr, oldValue, newValue, returnValue) 
 {
-	
-	atomic{
+	// 2 steps for the executing process, but atomic on memory
 	bit success;
 	ch ! iCas, adr, oldValue, newValue;
 	ch ? iCas, adr, success, _; 
 	returnValue = success;
-	}
 }
 
 inline writeB() {
-	if
-		/*buffer full, need to flush first*/
+	/* if
+		//buffer full, need to flush first
 	:: (((tail+1) % BUFF_SIZE) == head && !isEmpty) -> flushB()	
 	:: else -> isEmpty = false; skip;
 	fi
-		->	
- 		tail = (tail+1) % BUFF_SIZE;
-		buffer[tail].line[0] = address;
-		buffer[tail].line[1] = value;
+		-> */	
+	assert(!(((tail+1) % BUFF_SIZE) == head && !isEmpty)); //buffer should never be full
+	isEmpty = false;
+ 	tail = (tail+1) % BUFF_SIZE;
+	buffer[tail].line[0] = address;
+	buffer[tail].line[1] = value;
 }
 
 
@@ -96,28 +96,28 @@ inline flushB() {
 
 inline mfenceB() {
 	do
-	:: if
-		::isEmpty -> break;
-		::else -> flushB() 
-		fi
+	:: atomic{
+			if
+			::isEmpty -> break;
+			::else -> flushB() 
+			fi
+		}
 	od
 }
 	
-inline casB() {
-	do
-	:: else -> flushB()
-	:: isEmpty -> 
+inline casB() 
+{
+	mfenceB();	//buffer must be empty
+	bit result = false;
+	atomic{ 
 		if 
 			:: memory[address] == old 
 				-> 	memory[address] = new;
-				channel ! iCas, address, true, NULL;
-				break;
-			:: else 
-				-> channel ! iCas, address, false, NULL;
-				break;
+					result = true;
+			:: else -> skip;
 		fi
-	//::else -> break
-	od
+	}
+	channel ! iCas, address, result, NULL;
 }
 
 proctype bufferProcess(chan channel)
@@ -138,19 +138,32 @@ proctype bufferProcess(chan channel)
 
 	
 end:	do 
-		::	atomic{ 
+		::	/*
+		atomic{ 
 				if
-				/*WRITE*/
+				//WRITE
 				:: channel ? iWrite(address,value, _) -> writeB();
-				/*READ*/
+				//READ
 				:: channel ? iRead, address, value, _ -> readB();
-				/*FLUSH*/
+				//FLUSH
 				:: !isEmpty -> flushB();
-				/*FENCE*/
-				::channel ? iMfence, _, _ ,_ -> mfenceB();
-				/*COMPARE AND SWAP*/
+				//FENCE
+				:: channel ? iMfence, _, _ ,_ -> mfenceB();
+				//COMPARE AND SWAP
 				:: channel ? iCas, address , old, new -> casB();
 				fi
-			}
+			} */
+			if
+				//WRITE
+				:: atomic{channel ? iWrite(address,value, _) -> writeB();}
+				//READ
+				:: atomic{channel ? iRead, address, value, _ -> readB();}
+				//FLUSH
+				:: atomic{!isEmpty -> flushB();}
+				//FENCE
+				:: channel ? iMfence, _, _ ,_ -> mfenceB();
+				//COMPARE AND SWAP
+				:: channel ? iCas, address , old, new -> casB();
+			fi
 		od
 }
