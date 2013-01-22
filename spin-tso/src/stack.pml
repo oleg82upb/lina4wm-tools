@@ -40,7 +40,7 @@ inline asPush(asValue)
 	//should we return something?
 }
 
-inline casLPPop(adr, oldValue, newValue, returnValue, controlValue) 
+inline casLPPop(adr, oldValue, newValue, returnValue) 
 {
 	// 2 steps for the executing process, but atomic on memory
 	bit success;
@@ -48,7 +48,7 @@ inline casLPPop(adr, oldValue, newValue, returnValue, controlValue)
 	atomic{
 	ch ? iCas, adr, success, _; 
 	returnValue = success;
-	asPop(controlValue, success);
+	asPop(oldValue, success); //if successfull, then the popped value is the oldValue 
 	}
 }
 inline casLPPush(adr, oldValue, newValue, returnValue, controlValue) 
@@ -152,7 +152,7 @@ doCond:
 	}
 	if 
 		:: v11 == false -> goto doBody;
-		:: else -> skip;;
+		:: else -> skip;
 	fi
 //doEnd: 
 //	skip; //done
@@ -164,14 +164,14 @@ doCond:
 
 inline pop()
 {
-	short retval, head, head2, thisAddr, ss, ssn, this1, v, v0, v1, v2, v3, v4, v5, v7, v9, v11;			//some more v_i still missing
+	short retval, head, head2, thisAddr, ss, ssn, this1, v, v0, v1, v2, v3, v4, v5, v7, v9, v11, next;			//some more v_i still missing
 	
 entry:
 atomic {
-	allocata(Ptr, retval);
-	allocata(Ptr, thisAddr);
-	allocata(Ptr, ss);
-	allocata(Ptr, ssn);
+	alloca(Ptr, retval);
+	alloca(Ptr, thisAddr);
+	alloca(Ptr, ss);
+	alloca(Ptr, ssn);
 	}
 	write(this, thisAddr);
 	read(thisAddr, this1);
@@ -183,10 +183,11 @@ doBody:
 	read(ss, v1);
 	
 	if 
-	:: ss == NULL ->write(retval, NULL);
-					goto return;
-	:: else -> goto ifend;
+	:: ss == NULL -> write(retval, NULL);
+					 goto retLabel;
+	:: else -> skip;
 	fi
+	->
 ifend:
 	read (ss,v2);
 	getelementptr (Node, v2, 1, next);
@@ -198,24 +199,29 @@ doCond:
 															
 	read (ss, v5);											// equals: v5; v4 wäre ein bitcast von head2 (ptr) zu i32  (also 32bit integer) 
 	read (ssn, v7);											// v7 in llvm code , da v6 cast
-	casLPPop(head2, v5, v7, v9, v);										//cas(head, ss, ssn); cas(adr, oldValue, newValue, returnValue)
+	casLPPop(head2, v5, v7, v9);										//cas(head, ss, ssn); cas(adr, oldValue, newValue, returnValue)
 	
 	if
 	:: v9 == false -> goto doBody
-	:: else read(ss,v11);									//v11 in llvm
-			write(reval, v11);								//v11 in llvm
-	fi		
-//return nicht notwendig da in retval der Wert schon steht.
+	:: else skip;
+	fi
+	->
+			
+retLabel: 
+	read(ss,v11);									//v11 in llvm
+	write(retval, v11);								//v11 in llvm
 }
 
 proctype process1(chan ch){
 	push(this, 666);
 	push(this, 333);
+	//pop();
 }
 
 proctype process2(chan ch){
 	push(this, 555);
 	push(this, 111);
+	//skip;
 }
 
 init{
