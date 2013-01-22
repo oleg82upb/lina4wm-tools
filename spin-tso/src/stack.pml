@@ -2,7 +2,7 @@
 	trying to specify the LLVM-compiled Treiber Stack implementation  
 */
 
-#define BUFF_SIZE 4 	//size of Buffer
+#define BUFF_SIZE 6 	//size of Buffer
 #define MEM_SIZE 40	//size of memory
  
 //-----------------------------------------------------------------------------------------------------------------------------------------------
@@ -13,7 +13,7 @@
 //abstract Stack implemented as array----------------------
 #define ASSIZE 4
 short asStack[ASSIZE];
-short asTop = 0;
+hidden byte asTop = 0;
 
 //asValue the value we expect to be on top of the stack
 inline asPop(asValue, asReturn)
@@ -103,8 +103,9 @@ inline alloca(type, targetRegister)
 
 
 
-inline push(this, v)
+inline push(sInstance, v)
 {
+//register declaration
 short thisAddr, vAddr, n, ss, v0, v1, v2, v3, v4, v5, v7, v9, v11, this1, val, head, head2, next;
 
 entry: 
@@ -117,7 +118,7 @@ atomic{
 	alloca(Ptr, ss);
 	alloca(Node, v0); //new Node();		*
 	}
-	write(thisAddr, this);
+	write(thisAddr, sInstance);
 	write(vAddr, v);
 	read(thisAddr, this1);
 	//* new Node() originally was here
@@ -130,8 +131,8 @@ invokeCont:
 	write(val, v1);
 		 
 doBody: 
-	getelementptr(Stack, this, 0, head);
-	mfence();
+	getelementptr(Stack, sInstance, 0, head);
+	//mfence();
 	read(head, v3);		// volatile! use mfence() here?;
 	write(ss, v3);
 	read(ss, v4);
