@@ -7,7 +7,7 @@ writebuffer model. Read, write, flush, fence and CAS
 
 #define NULL -1
 
-/*Buffer as a 3 dimensional array which represents the queue [(nx3)-matrix]*/
+/*Buffer as a 2 dimensional array which represents the queue [(nx2)-matrix]*/
 typedef matrix{short line [2]}
 
 mtype = {iWrite, iRead , iMfence, iCas};
@@ -60,19 +60,26 @@ inline writeB() {
 
 
 inline readB() {
-	i = tail;
+	short i = tail;
+	if 
+		:: tail < head && !isEmpty -> i = i + BUFF_SIZE;
+	   	:: else -> skip;
+	fi
+	->
 	do
 	:: i >= head  -> 
 			if
 			/* if an address in the buffer is equivalent to the searched -> return value*/
-			::buffer[i].line[0] == address 
-				->  channel ! iRead,address,buffer[i].line[1],NULL;
+			::buffer[i%BUFF_SIZE].line[0] == address 
+				->  channel ! iRead,address,buffer[i%BUFF_SIZE].line[1],NULL;
+					i = 0;
 					break;
 			::else -> i--;
 			fi
 			/*else: access to memory and return value of searched address*/
 	::else ->
 		channel ! iRead,address,memory[address],NULL;
+		i = 0;
 		break;
 	od
 }
@@ -82,8 +89,8 @@ inline flushB() {
 	/*write value in memory: memory[address] = value*/
 	memory[buffer[head].line[0]] = buffer[head].line[1];
 	/*empty write buffer*/
-	buffer[head].line[0] = NULL;
-	buffer[head].line[1] = NULL;
+	buffer[head].line[0] = 0;
+	buffer[head].line[1] = 0;
 						
 	/*moving head*/
 	head = (head+1) % BUFF_SIZE;
@@ -108,16 +115,19 @@ inline mfenceB() {
 inline casB() 
 {
 	mfenceB();	//buffer must be empty
-	bit result = false;
 	atomic{ 
+		bit result = false;
 		if 
 			:: memory[address] == old 
 				-> 	memory[address] = new;
 					result = true;
 			:: else -> skip;
 		fi
+		->
+		channel ! iCas, address, result, NULL;
+		//reducing state space from here on
 	}
-	channel ! iCas, address, result, NULL;
+	
 }
 
 proctype bufferProcess(chan channel)
@@ -129,7 +139,6 @@ proctype bufferProcess(chan channel)
 
 	short address = 0;
 	short value = 0; 
-	short i = 0;
 	short old = 0;
 	short new = 0;
 	
