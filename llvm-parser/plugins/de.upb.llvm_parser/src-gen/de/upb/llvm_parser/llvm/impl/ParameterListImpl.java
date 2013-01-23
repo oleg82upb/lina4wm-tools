@@ -2,10 +2,11 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
-import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.ParameterList;
 import de.upb.llvm_parser.llvm.TypeList;
+import de.upb.llvm_parser.llvm.TypeUse;
+import de.upb.llvm_parser.llvm.Value;
 
 import java.util.Collection;
 
@@ -18,7 +19,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -31,9 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.ParameterListImpl#getTypes <em>Types</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.ParameterListImpl#getLists <em>Lists</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ParameterListImpl#getAlignname <em>Alignname</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.ParameterListImpl#getVariables <em>Variables</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ParameterListImpl#getOp <em>Op</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,14 +39,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class ParameterListImpl extends MinimalEObjectImpl.Container implements ParameterList {
 	/**
-	 * The cached value of the '{@link #getTypes() <em>Types</em>}' attribute list.
+	 * The cached value of the '{@link #getTypes() <em>Types</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTypes()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<String> types;
+	protected EList<TypeUse> types;
 
 	/**
 	 * The cached value of the '{@link #getLists() <em>Lists</em>}' containment reference list.
@@ -61,34 +59,14 @@ public class ParameterListImpl extends MinimalEObjectImpl.Container implements P
 	protected EList<TypeList> lists;
 
 	/**
-	 * The cached value of the '{@link #getAlignname() <em>Alignname</em>}' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAlignname()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<String> alignname;
-
-	/**
-	 * The cached value of the '{@link #getVariables() <em>Variables</em>}' attribute list.
+	 * The cached value of the '{@link #getVariables() <em>Variables</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getVariables()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<String> variables;
-
-	/**
-	 * The cached value of the '{@link #getOp() <em>Op</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOp()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Instruction> op;
+	protected EList<Value> variables;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -114,9 +92,9 @@ public class ParameterListImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<String> getTypes() {
+	public EList<TypeUse> getTypes() {
 		if (types == null) {
-			types = new EDataTypeEList<String>(String.class, this, LlvmPackage.PARAMETER_LIST__TYPES);
+			types = new EObjectContainmentEList<TypeUse>(TypeUse.class, this, LlvmPackage.PARAMETER_LIST__TYPES);
 		}
 		return types;
 	}
@@ -138,35 +116,11 @@ public class ParameterListImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<String> getAlignname() {
-		if (alignname == null) {
-			alignname = new EDataTypeEList<String>(String.class, this, LlvmPackage.PARAMETER_LIST__ALIGNNAME);
-		}
-		return alignname;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<String> getVariables() {
+	public EList<Value> getVariables() {
 		if (variables == null) {
-			variables = new EDataTypeEList<String>(String.class, this, LlvmPackage.PARAMETER_LIST__VARIABLES);
+			variables = new EObjectContainmentEList<Value>(Value.class, this, LlvmPackage.PARAMETER_LIST__VARIABLES);
 		}
 		return variables;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Instruction> getOp() {
-		if (op == null) {
-			op = new EObjectContainmentEList<Instruction>(Instruction.class, this, LlvmPackage.PARAMETER_LIST__OP);
-		}
-		return op;
 	}
 
 	/**
@@ -177,10 +131,12 @@ public class ParameterListImpl extends MinimalEObjectImpl.Container implements P
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case LlvmPackage.PARAMETER_LIST__TYPES:
+				return ((InternalEList<?>)getTypes()).basicRemove(otherEnd, msgs);
 			case LlvmPackage.PARAMETER_LIST__LISTS:
 				return ((InternalEList<?>)getLists()).basicRemove(otherEnd, msgs);
-			case LlvmPackage.PARAMETER_LIST__OP:
-				return ((InternalEList<?>)getOp()).basicRemove(otherEnd, msgs);
+			case LlvmPackage.PARAMETER_LIST__VARIABLES:
+				return ((InternalEList<?>)getVariables()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -197,12 +153,8 @@ public class ParameterListImpl extends MinimalEObjectImpl.Container implements P
 				return getTypes();
 			case LlvmPackage.PARAMETER_LIST__LISTS:
 				return getLists();
-			case LlvmPackage.PARAMETER_LIST__ALIGNNAME:
-				return getAlignname();
 			case LlvmPackage.PARAMETER_LIST__VARIABLES:
 				return getVariables();
-			case LlvmPackage.PARAMETER_LIST__OP:
-				return getOp();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -218,23 +170,15 @@ public class ParameterListImpl extends MinimalEObjectImpl.Container implements P
 		switch (featureID) {
 			case LlvmPackage.PARAMETER_LIST__TYPES:
 				getTypes().clear();
-				getTypes().addAll((Collection<? extends String>)newValue);
+				getTypes().addAll((Collection<? extends TypeUse>)newValue);
 				return;
 			case LlvmPackage.PARAMETER_LIST__LISTS:
 				getLists().clear();
 				getLists().addAll((Collection<? extends TypeList>)newValue);
 				return;
-			case LlvmPackage.PARAMETER_LIST__ALIGNNAME:
-				getAlignname().clear();
-				getAlignname().addAll((Collection<? extends String>)newValue);
-				return;
 			case LlvmPackage.PARAMETER_LIST__VARIABLES:
 				getVariables().clear();
-				getVariables().addAll((Collection<? extends String>)newValue);
-				return;
-			case LlvmPackage.PARAMETER_LIST__OP:
-				getOp().clear();
-				getOp().addAll((Collection<? extends Instruction>)newValue);
+				getVariables().addAll((Collection<? extends Value>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -254,14 +198,8 @@ public class ParameterListImpl extends MinimalEObjectImpl.Container implements P
 			case LlvmPackage.PARAMETER_LIST__LISTS:
 				getLists().clear();
 				return;
-			case LlvmPackage.PARAMETER_LIST__ALIGNNAME:
-				getAlignname().clear();
-				return;
 			case LlvmPackage.PARAMETER_LIST__VARIABLES:
 				getVariables().clear();
-				return;
-			case LlvmPackage.PARAMETER_LIST__OP:
-				getOp().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -279,34 +217,10 @@ public class ParameterListImpl extends MinimalEObjectImpl.Container implements P
 				return types != null && !types.isEmpty();
 			case LlvmPackage.PARAMETER_LIST__LISTS:
 				return lists != null && !lists.isEmpty();
-			case LlvmPackage.PARAMETER_LIST__ALIGNNAME:
-				return alignname != null && !alignname.isEmpty();
 			case LlvmPackage.PARAMETER_LIST__VARIABLES:
 				return variables != null && !variables.isEmpty();
-			case LlvmPackage.PARAMETER_LIST__OP:
-				return op != null && !op.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (types: ");
-		result.append(types);
-		result.append(", alignname: ");
-		result.append(alignname);
-		result.append(", variables: ");
-		result.append(variables);
-		result.append(')');
-		return result.toString();
 	}
 
 } //ParameterListImpl

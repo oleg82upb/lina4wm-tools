@@ -1,0 +1,148 @@
+grammar de.upb.llvm_parser.LLVM with org.eclipse.xtext.common.Terminals
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+generate llvm "http://www.upb.de/llvm_parser/llvm"
+
+/*
+ * This Grammer is used to parse a llvm document.
+ * The llvm project itself is located at http://llvm.org
+ * For a language introduction see: http://llvm.org/docs/LangRef.html
+ * A list of guides can be found on: http://llvm.org/docs/userguides.html
+ */
+LLVM:
+	elements+=AbstractElement*;
+
+	/*
+ * Integer defintion: iN(*)*
+ * Examples:
+ * 	i32  			- 32 bit Integer
+ *  i1   			- Single bit Integer
+ *  i32 (i32*) *	- A pointer to a function that takes an i32*, returning an i32.
+ */
+//terminal VALID_ID:
+//	(((('%' | '@') '.'*) (ID | '(' ID ')' | INT | STRING)) |
+//	'(' VALID_ID POINTER? ')') ('.' ((ID) | '(' ID ')'))*;
+terminal INT returns ecore::EInt:
+	'-'? ('0'..'9')+;
+
+terminal VALID_ID:
+	(
+		(
+			('%' | '@')'.'*
+			((('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*)|
+			INT|STRING)
+		)|
+		('('VALID_ID POINTER?')')
+	)
+	(
+		'.'(('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*)|
+		('('('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*POINTER?')')
+	)*;
+
+
+terminal INT_TYPE:
+	'i' ('0'..'9')+ POINTER?;
+
+terminal STRING:
+	'"' ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '"' | "'" | '\\') | !('\\' | '"'))* '"' |
+	"'" ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '"' | "'" | '\\') | !('\\' | "'"))* "'";
+
+terminal CSTRING:
+	'c' STRING;
+
+terminal OREST:
+	'(...)' POINTER?;
+
+terminal ARRAYL:
+	'[';
+
+terminal ARRAYR:
+	']' POINTER?;
+	/*
+ * To distinguish the types here only Floating Types
+ */
+//terminal F_POINT:
+//	'half' | 'float' | 'double' | 'x86_fp80' | 'fp128' | 'ppc_fp128';
+
+/*
+ * Comments are delimited with a ';' and go until the end of line.
+ */
+terminal SL_COMMENT:
+	';' !('\n' | '\r')* ('\r'? '\n')?;
+
+	/*
+ * Initial Variable Definition
+ * Every Variable starts with either '%' for local or '@' for global
+ * the regualar expression for this identifiers is [%@][a-zA-Z$._][a-zA-Z$._0-9]*
+ * 
+ * Examples:
+ *  %foo
+ *  (%Stack.Node).Node.a.very.long.identifier 
+ *  @_44bar.your.choice
+ */
+//terminal VAR_TYPE:
+//	(((('%' | '@') '.'*) (NOBRACKET | '(' NOBRACKET ')' | INT | STRING) ) |
+//	'('+ (('%' | '@') '.'*) (NOBRACKET | '(' NOBRACKET ')' | INT | STRING) '*'* ')'+);
+
+//
+//	/*
+// * Inner Identifier Rule (no Brackets allowed)
+// */
+//terminal NOBRACKET:
+//	(('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')* POINT?);
+//
+//	/*
+// * This rule is responsible for the dot
+// */
+//terminal POINT:
+//	'.' ((NOBRACKET) | '(' NOBRACKET ')');
+terminal POINTER:
+	'*'+;
+	/*
+ * An Abstract Element is either a TopLevelEntity, used for the predefinitions of the llvm-code
+ * or a MainLevelEntity, which are basically functiondefinitions. 
+ */
+AbstractElement:
+	TopLevelEntity SL_COMMENT? |
+	MainLevelEntity SL_COMMENT?;
+
+	/*
+ * Predefinitions of the llcm-code
+ */
+TopLevelEntity:
+	'module' 'asm' module=STRING |
+	'target' ('datalayout' | 'triple') '=' target=STRING |
+	'deplibs' '=' ARRAYL libs+=STRING (',' libs+=STRING)* ARRAYR;
+
+	/*
+ * This rule is used to devide the Function Definitions form the Variable Definitions.
+ */
+MainLevelEntity:
+	TypeDefinition;
+
+TypeDefinition:
+	(name=Type '=' (('type' (struct=Structure | Opaque))));
+
+Predefined:
+	Primitive | INT | INT_TYPE;
+
+Array:
+	ARRAYL INT 'x' Type ARRAYR;
+
+Type:
+	type=(VALID_ID | Predefined) (pointer=POINTER)?;
+
+Constant:
+	value=INT;
+
+Value:
+	(value=VALID_ID (pointer=POINTER)?) | const=Constant;
+
+Structure:
+	{Structure} '{' (types+=(Type | Array) (',' (types+=(Type | Array)))*)? '}' POINTER?;
+
+Primitive:
+	'void' | 'null' | 'label' | 'undef' | 'true' | 'false';
+
+Opaque:
+	'opaque';

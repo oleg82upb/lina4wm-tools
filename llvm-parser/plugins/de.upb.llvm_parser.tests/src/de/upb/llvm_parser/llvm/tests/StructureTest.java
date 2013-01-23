@@ -15,15 +15,7 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class StructureTest extends TestCase {
-
-	/**
-	 * The fixture for this Structure test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected Structure fixture = null;
+public class StructureTest extends Aggregate_TypesTest {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -45,23 +37,14 @@ public class StructureTest extends TestCase {
 	}
 
 	/**
-	 * Sets the fixture for this Structure test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(Structure fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this Structure test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected Structure getFixture() {
-		return fixture;
+		return (Structure)fixture;
 	}
 
 	/**

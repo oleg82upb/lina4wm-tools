@@ -24,7 +24,6 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
@@ -35,7 +34,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class StructureItemProvider
-	extends ItemProviderAdapter
+	extends Aggregate_TypesItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -63,31 +62,8 @@ public class StructureItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTypesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Types feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTypesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Structure_types_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Structure_types_feature", "_UI_Structure_type"),
-				 LlvmPackage.Literals.STRUCTURE__TYPES,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -102,8 +78,7 @@ public class StructureItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(LlvmPackage.Literals.STRUCTURE__ARRAYS);
-			childrenFeatures.add(LlvmPackage.Literals.STRUCTURE__LISTS);
+			childrenFeatures.add(LlvmPackage.Literals.STRUCTURE__TYPES);
 		}
 		return childrenFeatures;
 	}
@@ -156,10 +131,6 @@ public class StructureItemProvider
 
 		switch (notification.getFeatureID(Structure.class)) {
 			case LlvmPackage.STRUCTURE__TYPES:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case LlvmPackage.STRUCTURE__ARRAYS:
-			case LlvmPackage.STRUCTURE__LISTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -179,24 +150,18 @@ public class StructureItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.STRUCTURE__ARRAYS,
-				 LlvmFactory.eINSTANCE.createARRAY()));
+				(LlvmPackage.Literals.STRUCTURE__TYPES,
+				 LlvmFactory.eINSTANCE.createTypeUse()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.STRUCTURE__LISTS,
-				 LlvmFactory.eINSTANCE.createTypeList()));
-	}
+				(LlvmPackage.Literals.STRUCTURE__TYPES,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
 
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return LLVMEditPlugin.INSTANCE;
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.STRUCTURE__TYPES,
+				 LlvmFactory.eINSTANCE.createPredefined()));
 	}
 
 }

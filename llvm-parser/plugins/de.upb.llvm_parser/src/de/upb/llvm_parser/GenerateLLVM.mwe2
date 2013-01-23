@@ -5,7 +5,7 @@ import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
 var grammarURI = "classpath:/de/upb/llvm_parser/LLVM.xtext"
-var file.extensions = "llp"
+var file.extensions = "s"
 var projectName = "de.upb.llvm_parser"
 var runtimeProject = "../${projectName}"
 

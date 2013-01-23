@@ -3,15 +3,16 @@
 package de.upb.llvm_parser.llvm.provider;
 
 
+import de.upb.llvm_parser.llvm.LlvmFactory;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.MainLevelEntity;
-
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -57,31 +58,38 @@ public class MainLevelEntityItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_MainLevelEntity_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_MainLevelEntity_name_feature", "_UI_MainLevelEntity_type"),
-				 LlvmPackage.Literals.MAIN_LEVEL_ENTITY__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.MAIN_LEVEL_ENTITY__ADDRESS);
+		}
+		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
 	}
 
 	/**
@@ -103,10 +111,7 @@ public class MainLevelEntityItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((MainLevelEntity)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_MainLevelEntity_type") :
-			getString("_UI_MainLevelEntity_type") + " " + label;
+		return getString("_UI_MainLevelEntity_type");
 	}
 
 	/**
@@ -121,8 +126,8 @@ public class MainLevelEntityItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(MainLevelEntity.class)) {
-			case LlvmPackage.MAIN_LEVEL_ENTITY__NAME:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+			case LlvmPackage.MAIN_LEVEL_ENTITY__ADDRESS:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -138,6 +143,11 @@ public class MainLevelEntityItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.MAIN_LEVEL_ENTITY__ADDRESS,
+				 LlvmFactory.eINSTANCE.createAddress()));
 	}
 
 }

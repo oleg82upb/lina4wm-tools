@@ -165,12 +165,12 @@ public class LLVMItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.LLVM__ELEMENTS,
-				 LlvmFactory.eINSTANCE.createNamedType()));
+				 LlvmFactory.eINSTANCE.createTypeDefinition()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.LLVM__ELEMENTS,
-				 LlvmFactory.eINSTANCE.createFunctionHeader()));
+				 LlvmFactory.eINSTANCE.createFunctionDefinition()));
 	}
 
 	/**
