@@ -4,7 +4,6 @@ package de.upb.llvm_parser.llvm.provider;
 
 
 import de.upb.llvm_parser.llvm.BasicBlock;
-import de.upb.llvm_parser.llvm.LlvmFactory;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
 import java.util.Collection;
@@ -14,8 +13,6 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
-
-import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -64,7 +61,6 @@ public class BasicBlockItemProvider
 			super.getPropertyDescriptors(object);
 
 			addLabelPropertyDescriptor(object);
-			addRetadrPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -89,59 +85,6 @@ public class BasicBlockItemProvider
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Retadr feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addRetadrPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_BasicBlock_retadr_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BasicBlock_retadr_feature", "_UI_BasicBlock_type"),
-				 LlvmPackage.Literals.BASIC_BLOCK__RETADR,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS);
-			childrenFeatures.add(LlvmPackage.Literals.BASIC_BLOCK__TERMINATOR);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
 	}
 
 	/**
@@ -182,12 +125,7 @@ public class BasicBlockItemProvider
 
 		switch (notification.getFeatureID(BasicBlock.class)) {
 			case LlvmPackage.BASIC_BLOCK__LABEL:
-			case LlvmPackage.BASIC_BLOCK__RETADR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
-			case LlvmPackage.BASIC_BLOCK__TERMINATOR:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -203,314 +141,6 @@ public class BasicBlockItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createLLVM()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createAbstractElement()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createTopLevelEntity()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createMainLevelEntity()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createNamedType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createCastStructure()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createARRAY()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createValueStruct()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createStructure()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createAlias()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createFunctionHeader()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createParameterList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createFunctionBody()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createBasicBlock()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createRet_Instr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createTypeList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createInstruction()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createExtractValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createInsertValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createFence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createCmpXchg()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createAtomicRMW()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createLoad()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createStore()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createCall()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createAlloc()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createPHI()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createValuePair()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createLandingPad()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createClause()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createSelect()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createVA_Arg()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createExtractElement()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createInsertElement()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createShuffleVector()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createCompare()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createARITHMETIC_OP()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createLOGICAL_OP()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createIndirectBranch()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createLabelList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createSwitch()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createJumpTable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createInvoke()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createResume()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createUnreachable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createReturn()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createBranch()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__TERMINATOR,
-				 LlvmFactory.eINSTANCE.createRet_Instr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__TERMINATOR,
-				 LlvmFactory.eINSTANCE.createIndirectBranch()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__TERMINATOR,
-				 LlvmFactory.eINSTANCE.createSwitch()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__TERMINATOR,
-				 LlvmFactory.eINSTANCE.createInvoke()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__TERMINATOR,
-				 LlvmFactory.eINSTANCE.createResume()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__TERMINATOR,
-				 LlvmFactory.eINSTANCE.createUnreachable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__TERMINATOR,
-				 LlvmFactory.eINSTANCE.createReturn()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__TERMINATOR,
-				 LlvmFactory.eINSTANCE.createBranch()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS ||
-			childFeature == LlvmPackage.Literals.BASIC_BLOCK__TERMINATOR;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

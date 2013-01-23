@@ -17,267 +17,63 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//TopLevelEntity/libs"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//MainLevelEntity">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//MainLevelEntity/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//MainLevelEntity/address"/>
     </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//NamedType">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//NamedType/struct"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//NamedType/instr"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//NamedType/array"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//NamedType/caststruct"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//NamedType/alias"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//NamedType/type"/>
+    <genClasses ecoreClass="LLVM.ecore#//TypeDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//TypeDefinition/struct"/>
     </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//CastStructure">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//CastStructure/type"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//CastStructure/op"/>
+    <genClasses ecoreClass="LLVM.ecore#//FunctionDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//FunctionDefinition/returnType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//FunctionDefinition/pl"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//FunctionDefinition/body"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//FunctionDefinition/tList"/>
     </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//ARRAY">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ARRAY/struct"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ARRAY/lstruct"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ARRAY/rstruct"/>
+    <genClasses ecoreClass="LLVM.ecore#//AliasDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//AliasDefinition/address"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//AliasDefinition/aliastype"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//AliasDefinition/aliasvalue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//AliasDefinition/aliasee"/>
     </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//ValueStruct">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ValueStruct/types"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ValueStruct/Value"/>
+    <genClasses ecoreClass="LLVM.ecore#//TypeUse">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//TypeUse/pointer"/>
     </genClasses>
+    <genClasses ecoreClass="LLVM.ecore#//AddressUse">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LLVM.ecore#//AddressUse/address"/>
+    </genClasses>
+    <genClasses ecoreClass="LLVM.ecore#//Address">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Address/name"/>
+    </genClasses>
+    <genClasses ecoreClass="LLVM.ecore#//Predefined">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Predefined/type"/>
+    </genClasses>
+    <genClasses ecoreClass="LLVM.ecore#//Vector"/>
+    <genClasses ecoreClass="LLVM.ecore#//Array"/>
+    <genClasses ecoreClass="LLVM.ecore#//Aggregate_Types"/>
+    <genClasses ecoreClass="LLVM.ecore#//Constant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Constant/value"/>
+    </genClasses>
+    <genClasses ecoreClass="LLVM.ecore#//NonConstantValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//NonConstantValue/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//NonConstantValue/pointer"/>
+    </genClasses>
+    <genClasses ecoreClass="LLVM.ecore#//Value"/>
     <genClasses ecoreClass="LLVM.ecore#//Structure">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Structure/types"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Structure/arrays"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Structure/Lists"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//Alias">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Alias/aliastype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Alias/aliasvalue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Alias/aliasee"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//FunctionHeader">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//FunctionHeader/returnType"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//FunctionHeader/pl"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//FunctionHeader/body"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//FunctionHeader/tList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Structure/types"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//ParameterList">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ParameterList/types"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ParameterList/types"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ParameterList/Lists"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ParameterList/alignname"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ParameterList/variables"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ParameterList/op"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ParameterList/variables"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//FunctionBody">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//FunctionBody/meta"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//FunctionBody/blocks"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//BasicBlock">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//BasicBlock/label"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//BasicBlock/instructions"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//BasicBlock/retadr"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//BasicBlock/terminator"/>
     </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//Ret_Instr"/>
     <genClasses ecoreClass="LLVM.ecore#//TypeList">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//TypeList/types"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//TypeList/types"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//TypeList/typelists"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//Instruction"/>
-    <genClasses ecoreClass="LLVM.ecore#//GetElementPtr">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//GetElementPtr/elementtype"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//GetElementPtr/types"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//GetElementPtr/elementarray"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//GetElementPtr/element"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//GetElementPtr/indicetypes"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//GetElementPtr/indices"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//ExtractValue">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ExtractValue/array"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ExtractValue/struct"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ExtractValue/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ExtractValue/index"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//InsertValue">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//InsertValue/struct"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//InsertValue/value"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//InsertValue/inserttype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//InsertValue/insertvalue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//InsertValue/index"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//Fence">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Fence/ordering"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//CmpXchg">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//CmpXchg/adresstype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//CmpXchg/adress"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//CmpXchg/comparetype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//CmpXchg/comparevalue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//CmpXchg/newtype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//CmpXchg/newvalue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//CmpXchg/ordering"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//AtomicRMW">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//AtomicRMW/adresstype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//AtomicRMW/adress"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//AtomicRMW/optype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//AtomicRMW/opvalue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//AtomicRMW/ordering"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//Load">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Load/adresstype"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Load/types"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Load/adress"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Load/ordering"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Load/index"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//Store">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Store/newtype"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Store/types"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Store/newvalue"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Store/newelement"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Store/adresstype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Store/adress"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Store/ordering"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Store/index"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//Call">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Call/adresstype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Call/adress"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Call/pList"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//Alloc">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Alloc/type"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Alloc/typelist"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Alloc/numelementstype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Alloc/numelementsvalue"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//PHI">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//PHI/values"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//ValuePair">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ValuePair/value1"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ValuePair/value2"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//LandingPad">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//LandingPad/struct"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//LandingPad/personalitytype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//LandingPad/personalityvalue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//LandingPad/personalityfunction"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//LandingPad/value"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//LandingPad/castto"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//LandingPad/clause"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//Clause">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Clause/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Clause/value"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Clause/filterarray"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Clause/constant"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//Select">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Select/conditiontype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Select/conditionvalue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Select/val1type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Select/val1value"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Select/val2type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Select/val2value"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//VA_Arg">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//VA_Arg/listtype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//VA_Arg/listvalue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//VA_Arg/argType"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//ExtractElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ExtractElement/vectortype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ExtractElement/vectorvalue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ExtractElement/indextype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ExtractElement/index"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//InsertElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//InsertElement/vectortype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//InsertElement/vectorvalue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//InsertElement/scalartype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//InsertElement/scalarvalue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//InsertElement/indextype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//InsertElement/index"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//ShuffleVector">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ShuffleVector/val1type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ShuffleVector/val1value"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ShuffleVector/val2type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ShuffleVector/val2value"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ShuffleVector/masktype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ShuffleVector/maskvalue"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//Cast">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Cast/castfrom"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Cast/types"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Cast/caststruct"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Cast/value"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Cast/dual"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Cast/op"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Cast/global"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Cast/castto"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//Compare">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Compare/comptype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Compare/value1"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Compare/value2"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//ARITHMETIC_OP">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ARITHMETIC_OP/optype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ARITHMETIC_OP/value1"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ARITHMETIC_OP/value2"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//LOGICAL_OP">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//LOGICAL_OP/optype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//LOGICAL_OP/value1"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//LOGICAL_OP/value2"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//IndirectBranch">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//IndirectBranch/adresstype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//IndirectBranch/adress"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//IndirectBranch/lList"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//LabelList">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//LabelList/labeltype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//LabelList/labels"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//Switch">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Switch/comptype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Switch/compvalue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Switch/defaulttype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Switch/defaultvalue"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Switch/jTable"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//JumpTable">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//JumpTable/jtypes"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//JumpTable/jvalues"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//JumpTable/destinationtypes"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//JumpTable/destinations"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//Invoke">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Invoke/functiontype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Invoke/functionvalue"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Invoke/pList"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Invoke/totype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Invoke/tovalue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Invoke/unwindtype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Invoke/unwindvalue"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//Resume">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Resume/resumestruct"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Resume/resumevalue"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//Unreachable"/>
-    <genClasses ecoreClass="LLVM.ecore#//Return">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Return/returntype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Return/returnvalue"/>
-    </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//Branch">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Branch/destinationtype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Branch/destination"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Branch/condtype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Branch/condvalue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Branch/labelTruetype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Branch/labelTrue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Branch/labelFalsetype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Branch/labelFalse"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

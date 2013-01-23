@@ -2,12 +2,15 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
+import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.MainLevelEntity;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -18,7 +21,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.MainLevelEntityImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.MainLevelEntityImpl#getAddress <em>Address</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,24 +29,14 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class MainLevelEntityImpl extends AbstractElementImpl implements MainLevelEntity {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getAddress() <em>Address</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getAddress()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
+	protected Address address;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,8 +62,8 @@ public class MainLevelEntityImpl extends AbstractElementImpl implements MainLeve
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
+	public Address getAddress() {
+		return address;
 	}
 
 	/**
@@ -78,11 +71,47 @@ public class MainLevelEntityImpl extends AbstractElementImpl implements MainLeve
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.MAIN_LEVEL_ENTITY__NAME, oldName, name));
+	public NotificationChain basicSetAddress(Address newAddress, NotificationChain msgs) {
+		Address oldAddress = address;
+		address = newAddress;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.MAIN_LEVEL_ENTITY__ADDRESS, oldAddress, newAddress);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAddress(Address newAddress) {
+		if (newAddress != address) {
+			NotificationChain msgs = null;
+			if (address != null)
+				msgs = ((InternalEObject)address).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.MAIN_LEVEL_ENTITY__ADDRESS, null, msgs);
+			if (newAddress != null)
+				msgs = ((InternalEObject)newAddress).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.MAIN_LEVEL_ENTITY__ADDRESS, null, msgs);
+			msgs = basicSetAddress(newAddress, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.MAIN_LEVEL_ENTITY__ADDRESS, newAddress, newAddress));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case LlvmPackage.MAIN_LEVEL_ENTITY__ADDRESS:
+				return basicSetAddress(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -93,8 +122,8 @@ public class MainLevelEntityImpl extends AbstractElementImpl implements MainLeve
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case LlvmPackage.MAIN_LEVEL_ENTITY__NAME:
-				return getName();
+			case LlvmPackage.MAIN_LEVEL_ENTITY__ADDRESS:
+				return getAddress();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -107,8 +136,8 @@ public class MainLevelEntityImpl extends AbstractElementImpl implements MainLeve
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case LlvmPackage.MAIN_LEVEL_ENTITY__NAME:
-				setName((String)newValue);
+			case LlvmPackage.MAIN_LEVEL_ENTITY__ADDRESS:
+				setAddress((Address)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -122,8 +151,8 @@ public class MainLevelEntityImpl extends AbstractElementImpl implements MainLeve
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case LlvmPackage.MAIN_LEVEL_ENTITY__NAME:
-				setName(NAME_EDEFAULT);
+			case LlvmPackage.MAIN_LEVEL_ENTITY__ADDRESS:
+				setAddress((Address)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -137,26 +166,10 @@ public class MainLevelEntityImpl extends AbstractElementImpl implements MainLeve
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case LlvmPackage.MAIN_LEVEL_ENTITY__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case LlvmPackage.MAIN_LEVEL_ENTITY__ADDRESS:
+				return address != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //MainLevelEntityImpl

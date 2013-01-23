@@ -9,7 +9,7 @@
             class="de.upb.llvm_parser.ui.LLVMExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
-            extensions="llp"
+            extensions="s"
             id="de.upb.llvm_parser.LLVM"
             name="LLVM Editor">
         </editor>
@@ -140,13 +140,13 @@
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
 			class="de.upb.llvm_parser.ui.LLVMExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="llp">
+			type="s">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
             class="de.upb.llvm_parser.ui.LLVMExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-            uriExtension="llp">
+            uriExtension="s">
         </resourceServiceProvider>
     </extension>
 
@@ -304,26 +304,26 @@
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="de.upb.llvm_parser.LLVM.compare.contentViewers"
             class="de.upb.llvm_parser.ui.LLVMExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="llp">
+            extensions="s">
     </viewer>
   </extension>
   <extension point="org.eclipse.compare.contentMergeViewers">
     <viewer id="de.upb.llvm_parser.LLVM.compare.contentMergeViewers"
             class="de.upb.llvm_parser.ui.LLVMExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="llp" label="LLVM Compare">
+            extensions="s" label="LLVM Compare">
      </viewer>
   </extension>
   <extension point="org.eclipse.ui.editors.documentProviders">
     <provider id="de.upb.llvm_parser.LLVM.editors.documentProviders"
             class="de.upb.llvm_parser.ui.LLVMExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
-            extensions="llp">
+            extensions="s">
     </provider>
   </extension>
   <extension
         point="org.eclipse.ui.popupMenus">
      <objectContribution
            id="de.upb.llvm_parser.ui.saveasttool"
-           nameFilter="*.llp"
+           nameFilter="*.s"
            objectClass="org.eclipse.core.resources.IFile">
         <action
               class="de.upb.llvm_parser.ui.contentassist.LLVMASTAssistant"

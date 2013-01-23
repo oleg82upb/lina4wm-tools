@@ -2,10 +2,9 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
-import de.upb.llvm_parser.llvm.ARRAY;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Structure;
-import de.upb.llvm_parser.llvm.TypeList;
+import de.upb.llvm_parser.llvm.TypeUse;
 
 import java.util.Collection;
 
@@ -16,9 +15,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -30,43 +26,21 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.StructureImpl#getTypes <em>Types</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.StructureImpl#getArrays <em>Arrays</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.StructureImpl#getLists <em>Lists</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class StructureImpl extends MinimalEObjectImpl.Container implements Structure {
+public class StructureImpl extends Aggregate_TypesImpl implements Structure {
 	/**
-	 * The cached value of the '{@link #getTypes() <em>Types</em>}' attribute list.
+	 * The cached value of the '{@link #getTypes() <em>Types</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTypes()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<String> types;
-
-	/**
-	 * The cached value of the '{@link #getArrays() <em>Arrays</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getArrays()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ARRAY> arrays;
-
-	/**
-	 * The cached value of the '{@link #getLists() <em>Lists</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLists()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<TypeList> lists;
+	protected EList<TypeUse> types;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -92,35 +66,11 @@ public class StructureImpl extends MinimalEObjectImpl.Container implements Struc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<String> getTypes() {
+	public EList<TypeUse> getTypes() {
 		if (types == null) {
-			types = new EDataTypeEList<String>(String.class, this, LlvmPackage.STRUCTURE__TYPES);
+			types = new EObjectContainmentEList<TypeUse>(TypeUse.class, this, LlvmPackage.STRUCTURE__TYPES);
 		}
 		return types;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<ARRAY> getArrays() {
-		if (arrays == null) {
-			arrays = new EObjectContainmentEList<ARRAY>(ARRAY.class, this, LlvmPackage.STRUCTURE__ARRAYS);
-		}
-		return arrays;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<TypeList> getLists() {
-		if (lists == null) {
-			lists = new EObjectContainmentEList<TypeList>(TypeList.class, this, LlvmPackage.STRUCTURE__LISTS);
-		}
-		return lists;
 	}
 
 	/**
@@ -131,10 +81,8 @@ public class StructureImpl extends MinimalEObjectImpl.Container implements Struc
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case LlvmPackage.STRUCTURE__ARRAYS:
-				return ((InternalEList<?>)getArrays()).basicRemove(otherEnd, msgs);
-			case LlvmPackage.STRUCTURE__LISTS:
-				return ((InternalEList<?>)getLists()).basicRemove(otherEnd, msgs);
+			case LlvmPackage.STRUCTURE__TYPES:
+				return ((InternalEList<?>)getTypes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -149,10 +97,6 @@ public class StructureImpl extends MinimalEObjectImpl.Container implements Struc
 		switch (featureID) {
 			case LlvmPackage.STRUCTURE__TYPES:
 				return getTypes();
-			case LlvmPackage.STRUCTURE__ARRAYS:
-				return getArrays();
-			case LlvmPackage.STRUCTURE__LISTS:
-				return getLists();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -168,15 +112,7 @@ public class StructureImpl extends MinimalEObjectImpl.Container implements Struc
 		switch (featureID) {
 			case LlvmPackage.STRUCTURE__TYPES:
 				getTypes().clear();
-				getTypes().addAll((Collection<? extends String>)newValue);
-				return;
-			case LlvmPackage.STRUCTURE__ARRAYS:
-				getArrays().clear();
-				getArrays().addAll((Collection<? extends ARRAY>)newValue);
-				return;
-			case LlvmPackage.STRUCTURE__LISTS:
-				getLists().clear();
-				getLists().addAll((Collection<? extends TypeList>)newValue);
+				getTypes().addAll((Collection<? extends TypeUse>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -193,12 +129,6 @@ public class StructureImpl extends MinimalEObjectImpl.Container implements Struc
 			case LlvmPackage.STRUCTURE__TYPES:
 				getTypes().clear();
 				return;
-			case LlvmPackage.STRUCTURE__ARRAYS:
-				getArrays().clear();
-				return;
-			case LlvmPackage.STRUCTURE__LISTS:
-				getLists().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -213,28 +143,8 @@ public class StructureImpl extends MinimalEObjectImpl.Container implements Struc
 		switch (featureID) {
 			case LlvmPackage.STRUCTURE__TYPES:
 				return types != null && !types.isEmpty();
-			case LlvmPackage.STRUCTURE__ARRAYS:
-				return arrays != null && !arrays.isEmpty();
-			case LlvmPackage.STRUCTURE__LISTS:
-				return lists != null && !lists.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (types: ");
-		result.append(types);
-		result.append(')');
-		return result.toString();
 	}
 
 } //StructureImpl

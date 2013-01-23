@@ -16,14 +16,13 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
@@ -62,31 +61,8 @@ public class TypeListItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTypesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Types feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTypesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_TypeList_types_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TypeList_types_feature", "_UI_TypeList_type"),
-				 LlvmPackage.Literals.TYPE_LIST__TYPES,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -101,6 +77,7 @@ public class TypeListItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.TYPE_LIST__TYPES);
 			childrenFeatures.add(LlvmPackage.Literals.TYPE_LIST__TYPELISTS);
 		}
 		return childrenFeatures;
@@ -154,8 +131,6 @@ public class TypeListItemProvider
 
 		switch (notification.getFeatureID(TypeList.class)) {
 			case LlvmPackage.TYPE_LIST__TYPES:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
 			case LlvmPackage.TYPE_LIST__TYPELISTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -173,6 +148,21 @@ public class TypeListItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.TYPE_LIST__TYPES,
+				 LlvmFactory.eINSTANCE.createTypeUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.TYPE_LIST__TYPES,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.TYPE_LIST__TYPES,
+				 LlvmFactory.eINSTANCE.createPredefined()));
 
 		newChildDescriptors.add
 			(createChildParameter
