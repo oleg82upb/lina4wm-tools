@@ -37,7 +37,7 @@ inline asPush(asValue)
 	//should we return something?
 }
 
-inline casLPPop(adr, oldValue, newValue, returnValue, controlValue) 
+inline casLPPop(adr, oldValue, newValue, returnValue) 
 {
 	// 2 steps for the executing process, but atomic on memory
 	bit success;
@@ -45,7 +45,7 @@ inline casLPPop(adr, oldValue, newValue, returnValue, controlValue)
 	atomic{
 	ch ? iCas, adr, success, _; 
 	returnValue = success;
-	asPop(controlValue, success);
+	asPop(oldValue, success); //if successfull, then the popped value is the oldValue 
 	}
 }
 inline casLPPush(adr, oldValue, newValue, returnValue, controlValue) 
@@ -61,6 +61,7 @@ inline casLPPush(adr, oldValue, newValue, returnValue, controlValue)
 	fi
 	}
 }
+
 
 
 //Types for LLVM, actually their length in size of pointers and values
@@ -94,19 +95,38 @@ inline alloca(type, targetRegister)
 	assert(memUse < MEM_SIZE);
 	}
 }
+//-----------------------------------------------------------------------------------------------------------
+inline push(this, v)
 
-// ----------------------------------------------------------------------------------------------------------
-inline pop (return){
+short 
 
-short this_addr, retval, ss, ssn, v0, v1, v2, v3, v4, v6, v7, v8, v9, v11, v13, v14;
+entry: 
+atomic{
+	alloca(Ptr, thisAddr);
+	alloca(I32, vAddr);
+	alloca(Ptr, n);
+	alloca(Ptr, ss);
+	alloca(Node, v0); //new Node();	
+}
+	write(this_addr, this);
+	write(v_addr, v);
+	//146ff missing
+	
+	
+//-----------------------------------------------------------------------------------------------------------
+inline pop (returnvalue){
+
+short this_addr, retval, ss, ssn, v0, v1, v2, v3, v4, v6, v7, v8, v9, v11, v13, v14, v16, v20, v21;
 
 entry:
+atomic{
 	alloca(Stack, this_addr);
 	alloca(Node, retval);
 	alloca(Node, v0);
 	alloca(Node, ss);
 	alloca(Node, ssn);
 	alloca(Node, lv);
+}
 	write(this_addr, this);
 	
 bb:
@@ -129,15 +149,21 @@ bb2:
 	read(ss, v11);
 	read( this_addr, v13);
 	getelementptr(Stack, v13, 0, v14);
+	casLPPop (v14, v11, v9, v16);
+	//108-114??????????????????????ß
+
+bb5:
+	read(ss, v20);
+	write(v0, v20);
+
+bb6:
+	read(v0, v21);
+	write(retval, v21);
 	
-	// stopt at line 102 in stack.s
-	// @llvm.memory.barrier = http://llvm.org/releases/2.5/docs/LangRef.html#int_memory_barrier
-	// @llvm.atomic.cmp.swap same link
-	
-	
-	
-	
-	
+retLabel:
+	read(retval, returnvalue);
+
+}
 	
 	
 	
