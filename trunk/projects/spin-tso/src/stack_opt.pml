@@ -5,7 +5,7 @@
 #include "x86_tso_buffer.pml"
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
-
+// ----standard stack implementation-------------
 
 //abstract Stack implemented as array----------------------
 #define ASSIZE 4
@@ -96,36 +96,68 @@ inline alloca(type, targetRegister)
 	}
 }
 //-----------------------------------------------------------------------------------------------------------
-inline push(this, v)
+//------push-optimized--------
+inline push(this, v){
 
-short 
+short this_addr,v_addr, n, ss, v0, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v16, v18, v19, v21;
 
 entry: 
 atomic{
-	alloca(Ptr, thisAddr);
-	alloca(I32, vAddr);
+	alloca(Ptr, this_addr);
+	alloca(I32, v_addr);
+	//alloca(I8,retval.0)		//do I need this?
 	alloca(Ptr, n);
 	alloca(Ptr, ss);
 	alloca(Node, v0); //new Node();	
 }
 	write(this_addr, this);
 	write(v_addr, v);
-	//146ff missing
+	//146 -150 missing (just new Node???)
+	read(v0, v4);
+	write(n, v0);
+	read(n, v5);
+	getelementptr(Node,v5,0,v6);
+	read(v_addr, v7);
+	write(v6,v7);
 	
-	
+bb:
+	read(this_addr, v8);
+	getelementptr(Stack, v8, 0, v9);
+	read(v9, v10);					//volatile important?
+	write(ss, v10);
+	read(n, v11);
+	getelementptr(Node, v11, 1, v12)
+	read(ss, v13)
+	write(v12, v13);
+	read(n, v14);
+	read(ss, v16);
+	read(this_addr, v18);
+	getelementptr(Stack, v18, 0, v19);
+	atomic{
+	casLPPush(v19, v16, v14, v21, v);		// v21= CAS(this_addr,ss, n) 
+	}
+	if 
+		:: v21 == false -> goto bb;
+		:: else -> skip;
+	fi;
+}
+
+
+
 //-----------------------------------------------------------------------------------------------------------
+//------pop-optimized--------
 inline pop (returnvalue){
 
-short this_addr, retval, ss, ssn, v0, v1, v2, v3, v4, v6, v7, v8, v9, v11, v13, v14, v16, v20, v21;
+short this_addr, retval, ss, ssn, lv, v0, v1, v2, v3, v4, v6, v7, v8, v9, v11, v13, v14, v16, v20, v21;
 
 entry:
 atomic{
-	alloca(Stack, this_addr);
-	alloca(Node, retval);
-	alloca(Node, v0);
-	alloca(Node, ss);
-	alloca(Node, ssn);
-	alloca(Node, lv);
+	alloca(Ptr, this_addr);
+	alloca(Ptr, retval);
+	alloca(Ptr, v0);
+	alloca(Ptr, ss);
+	alloca(Ptr, ssn);
+	alloca(Ptr, lv);		//needed???
 }
 	write(this_addr, this);
 	
@@ -147,10 +179,14 @@ bb2:
 	write(ssn, v8);
 	read(ssn, v9);
 	read(ss, v11);
-	read( this_addr, v13);
+	read(this_addr, v13);
 	getelementptr(Stack, v13, 0, v14);
 	casLPPop (v14, v11, v9, v16);
-	//108-114??????????????????????ß
+	if
+	:: v16 == false -> goto bb;
+	:: else skip;
+	fi
+	->
 
 bb5:
 	read(ss, v20);
@@ -164,8 +200,31 @@ retLabel:
 	read(retval, returnvalue);
 
 }
-	
-	
+//-----------------------------------------------------------------------------------------------------------
+
+
+proctype process1(chan ch){
+	short returnvalue;
+	push(this, 666);
+	push(this, 333);
+	pop(returnvalue);
+}
+
+proctype process2(chan ch){
+	push(this, 555);
+	push(this, 111);
+	//skip;
+}
+
+init{
+atomic{
+	alloca(Stack, this)
+	run process1(channelT1);
+	run bufferProcess(channelT1);
+	run process2(channelT2);
+	run bufferProcess(channelT2);
+	}
+}
 	
 	
 	
