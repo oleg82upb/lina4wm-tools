@@ -162,7 +162,7 @@ doCond:
 
 
 
-inline pop()
+inline pop(returnvalue)
 {
 	short retval, head, head2, thisAddr, ss, ssn, this1, v, v0, v1, v2, v3, v4, v5, v7, v9, v11, next;			//some more v_i still missing
 	
@@ -210,12 +210,15 @@ doCond:
 retLabel: 
 	read(ss,v11);									//v11 in llvm
 	write(retval, v11);								//v11 in llvm
+	returnvalue = v11;
+	
 }
 
 proctype process1(chan ch){
+	short returnvalue;
 	push(this, 666);
 	push(this, 333);
-	//pop();
+	pop(returnvalue);
 }
 
 proctype process2(chan ch){
