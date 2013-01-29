@@ -21,10 +21,10 @@ inline asPop(asValue, asReturn)
 	atomic{
 	if
 		:: asTop == 0 -> assert(asReturn == false); //stack must be empty
-		:: else -> { assert (asStack[asTop] == asValue);  	//asValue must be top element
+		:: else -> { asTop--;								//decrement top 
+					 assert (asStack[asTop] == asValue);  	//asValue must be top element
 					 assert (asReturn == true);				//operation must have been successful
 					 asStack[asTop] = 0;					//remove element from stack
-					 asTop--;								//decrement top
 					}
 	fi	
 	}

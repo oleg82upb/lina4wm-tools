@@ -18,10 +18,11 @@ inline asPop(asValue, asReturn)
 	atomic{
 	if
 		:: asTop == 0 -> assert(asReturn == false); //stack must be empty
-		:: else -> { assert (asStack[asTop] == asValue);  	//asValue must be top element
+		:: else -> { asTop--;								//decrement top
+					 assert (asStack[asTop] == asValue);  	//asValue must be top element
 					 assert (asReturn == true);				//operation must have been successful
 					 asStack[asTop] = 0;					//remove element from stack
-					 asTop--;								//decrement top
+
 					}
 	fi	
 	}
@@ -157,7 +158,6 @@ atomic{
 	alloca(Ptr, v0);
 	alloca(Ptr, ss);
 	alloca(Ptr, ssn);
-	alloca(Ptr, lv);		//needed???
 }
 	write(this_addr, this);
 	
@@ -207,7 +207,7 @@ proctype process1(chan ch){
 	short returnvalue;
 	push(this, 666);
 	push(this, 333);
-	pop(returnvalue);
+	//pop(returnvalue);
 }
 
 proctype process2(chan ch){
