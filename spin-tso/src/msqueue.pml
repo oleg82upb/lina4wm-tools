@@ -64,8 +64,38 @@ invoke_cont:
 	->
 	
 doBody:
-	//stopped at line 98
-							
+	getelementptr(Queue, this1, 1, tail);
+	read(tail, v4);
+	write(localTail, v4);
+	read(localTail, v5);
+	getelementptr(Node, v5,1, v6);
+	read(next3, v6);
+	write(next, v6);
+	read(localTail,v7);
+	getelementptr(Queue, this1,1, tail4);
+	read(tail4, v8);
+	
+	if
+	:: v7 == v8 -> goto if_then
+	:: else -> goto if_end11
+	fi
+
+if_then:
+	read(next, v9);
+	if 
+	:: v9 == NULL -> goto if_then6
+	:: else goto if_end
+	fi
+	
+if_then6:
+	read(localTail, v10);
+	getelmentptr(Node, v10, 1, next7);
+	read(next, v12);
+	read(node, v14);
+	//cas(next7, v12, v14, v16) 
+	if
+	:: v16 == false -> goto if_end
+	:: else -> goto then_8			//????		
 
 }
 
@@ -148,9 +178,9 @@ if_else:
 	read(next, v22);
 	//cas(head9, v20, v22, v24);
 	if
-	:: v24 == true -> 	write(retval, true);
-						goto return;
-	:: else -> goto doBody
+	:: v24 == false -> goto doBody
+	:: else -> 	write(retval, true);
+				goto return;
 	fi;
 	
 

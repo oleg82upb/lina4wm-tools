@@ -5,7 +5,7 @@ date: 10.2012
 writebuffer model. Read, write, flush, fence and CAS
 */
 
-#define NULL -1
+#define NULL 0
 
 /*Buffer as a 2 dimensional array which represents the queue [(nx2)-matrix]*/
 typedef matrix{short line [2]}
