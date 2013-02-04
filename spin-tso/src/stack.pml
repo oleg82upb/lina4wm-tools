@@ -22,7 +22,7 @@ inline asPop(asValue, asReturn)
 	if
 		:: asTop == 0 -> assert(asReturn == false); //stack must be empty
 		:: else -> { asTop--;								//decrement top 
-					 assert (asStack[asTop] == asValue);  	//asValue must be top element
+					 assert (asStack[asTop] == memory[asValue]);  	//asValue must be top element
 					 assert (asReturn == true);				//operation must have been successful
 					 asStack[asTop] = 0;					//remove element from stack
 					}
@@ -173,7 +173,7 @@ atomic {
 	alloca(Ptr, ss);
 	alloca(Ptr, ssn);
 	}
-	write(this, thisAddr);
+	write(thisAddr, this);
 	read(thisAddr, this1);
 
 doBody:
@@ -217,14 +217,14 @@ retLabel:
 proctype process1(chan ch){
 	short returnvalue;
 	push(this, 666);
-	push(this, 333);
+	//push(this, 333);
 	pop(returnvalue);
 }
 
 proctype process2(chan ch){
-	push(this, 555);
-	push(this, 111);
-	//skip;
+	//push(this, 555);
+	//push(this, 111);
+	skip;
 }
 
 init{
@@ -232,7 +232,7 @@ atomic{
 	alloca(Stack, this)
 	run process1(channelT1);
 	run bufferProcess(channelT1);
-	run process2(channelT2);
-	run bufferProcess(channelT2);
+	//run process2(channelT2);
+	//run bufferProcess(channelT2);
 	}
 }
