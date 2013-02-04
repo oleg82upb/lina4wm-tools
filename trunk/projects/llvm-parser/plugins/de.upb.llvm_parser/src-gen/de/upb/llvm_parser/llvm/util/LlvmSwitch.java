@@ -100,6 +100,14 @@ public class LlvmSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case LlvmPackage.GLOBAL_DEFINITION: {
+				GlobalDefinition globalDefinition = (GlobalDefinition)theEObject;
+				T result = caseGlobalDefinition(globalDefinition);
+				if (result == null) result = caseMainLevelEntity(globalDefinition);
+				if (result == null) result = caseAbstractElement(globalDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case LlvmPackage.FUNCTION_DEFINITION: {
 				FunctionDefinition functionDefinition = (FunctionDefinition)theEObject;
 				T result = caseFunctionDefinition(functionDefinition);
@@ -111,15 +119,14 @@ public class LlvmSwitch<T> extends Switch<T> {
 			case LlvmPackage.ALIAS_DEFINITION: {
 				AliasDefinition aliasDefinition = (AliasDefinition)theEObject;
 				T result = caseAliasDefinition(aliasDefinition);
+				if (result == null) result = caseMainLevelEntity(aliasDefinition);
+				if (result == null) result = caseAbstractElement(aliasDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case LlvmPackage.TYPE_USE: {
 				TypeUse typeUse = (TypeUse)theEObject;
 				T result = caseTypeUse(typeUse);
-				if (result == null) result = caseVector(typeUse);
-				if (result == null) result = caseArray(typeUse);
-				if (result == null) result = caseAggregate_Types(typeUse);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -127,9 +134,6 @@ public class LlvmSwitch<T> extends Switch<T> {
 				AddressUse addressUse = (AddressUse)theEObject;
 				T result = caseAddressUse(addressUse);
 				if (result == null) result = caseTypeUse(addressUse);
-				if (result == null) result = caseVector(addressUse);
-				if (result == null) result = caseArray(addressUse);
-				if (result == null) result = caseAggregate_Types(addressUse);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -143,9 +147,6 @@ public class LlvmSwitch<T> extends Switch<T> {
 				Predefined predefined = (Predefined)theEObject;
 				T result = casePredefined(predefined);
 				if (result == null) result = caseTypeUse(predefined);
-				if (result == null) result = caseVector(predefined);
-				if (result == null) result = caseArray(predefined);
-				if (result == null) result = caseAggregate_Types(predefined);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -189,6 +190,12 @@ public class LlvmSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case LlvmPackage.VALUE_STRUCT: {
+				ValueStruct valueStruct = (ValueStruct)theEObject;
+				T result = caseValueStruct(valueStruct);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case LlvmPackage.STRUCTURE: {
 				Structure structure = (Structure)theEObject;
 				T result = caseStructure(structure);
@@ -199,6 +206,12 @@ public class LlvmSwitch<T> extends Switch<T> {
 			case LlvmPackage.PARAMETER_LIST: {
 				ParameterList parameterList = (ParameterList)theEObject;
 				T result = caseParameterList(parameterList);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.TYPE_LIST: {
+				TypeList typeList = (TypeList)theEObject;
+				T result = caseTypeList(typeList);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -214,9 +227,242 @@ public class LlvmSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case LlvmPackage.TYPE_LIST: {
-				TypeList typeList = (TypeList)theEObject;
-				T result = caseTypeList(typeList);
+			case LlvmPackage.INSTRUCTION_USE: {
+				InstructionUse instructionUse = (InstructionUse)theEObject;
+				T result = caseInstructionUse(instructionUse);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.RET_INSTR: {
+				Ret_Instr ret_Instr = (Ret_Instr)theEObject;
+				T result = caseRet_Instr(ret_Instr);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.INSTRUCTION: {
+				Instruction instruction = (Instruction)theEObject;
+				T result = caseInstruction(instruction);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.ARITHMETIC_OP: {
+				ARITHMETIC_OP arithmetiC_OP = (ARITHMETIC_OP)theEObject;
+				T result = caseARITHMETIC_OP(arithmetiC_OP);
+				if (result == null) result = caseInstruction(arithmetiC_OP);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.LOGICAL_OP: {
+				LOGICAL_OP logicaL_OP = (LOGICAL_OP)theEObject;
+				T result = caseLOGICAL_OP(logicaL_OP);
+				if (result == null) result = caseInstruction(logicaL_OP);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.CAST: {
+				Cast cast = (Cast)theEObject;
+				T result = caseCast(cast);
+				if (result == null) result = caseValue(cast);
+				if (result == null) result = caseInstruction(cast);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.GET_ELEMENT_PTR: {
+				GetElementPtr getElementPtr = (GetElementPtr)theEObject;
+				T result = caseGetElementPtr(getElementPtr);
+				if (result == null) result = caseInstruction(getElementPtr);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.EXTRACT_VALUE: {
+				ExtractValue extractValue = (ExtractValue)theEObject;
+				T result = caseExtractValue(extractValue);
+				if (result == null) result = caseInstruction(extractValue);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.INSERT_VALUE: {
+				InsertValue insertValue = (InsertValue)theEObject;
+				T result = caseInsertValue(insertValue);
+				if (result == null) result = caseInstruction(insertValue);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.FENCE: {
+				Fence fence = (Fence)theEObject;
+				T result = caseFence(fence);
+				if (result == null) result = caseInstruction(fence);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.CMP_XCHG: {
+				CmpXchg cmpXchg = (CmpXchg)theEObject;
+				T result = caseCmpXchg(cmpXchg);
+				if (result == null) result = caseInstruction(cmpXchg);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.ATOMIC_RMW: {
+				AtomicRMW atomicRMW = (AtomicRMW)theEObject;
+				T result = caseAtomicRMW(atomicRMW);
+				if (result == null) result = caseInstruction(atomicRMW);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.LOAD: {
+				Load load = (Load)theEObject;
+				T result = caseLoad(load);
+				if (result == null) result = caseInstruction(load);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.STORE: {
+				Store store = (Store)theEObject;
+				T result = caseStore(store);
+				if (result == null) result = caseInstruction(store);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.CALL: {
+				Call call = (Call)theEObject;
+				T result = caseCall(call);
+				if (result == null) result = caseInstruction(call);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.ALLOC: {
+				Alloc alloc = (Alloc)theEObject;
+				T result = caseAlloc(alloc);
+				if (result == null) result = caseInstruction(alloc);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.PHI: {
+				PHI phi = (PHI)theEObject;
+				T result = casePHI(phi);
+				if (result == null) result = caseInstruction(phi);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.VALUE_PAIR: {
+				ValuePair valuePair = (ValuePair)theEObject;
+				T result = caseValuePair(valuePair);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.LANDING_PAD: {
+				LandingPad landingPad = (LandingPad)theEObject;
+				T result = caseLandingPad(landingPad);
+				if (result == null) result = caseInstruction(landingPad);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.CLAUSE: {
+				Clause clause = (Clause)theEObject;
+				T result = caseClause(clause);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.SELECT: {
+				Select select = (Select)theEObject;
+				T result = caseSelect(select);
+				if (result == null) result = caseInstruction(select);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.VA_ARG: {
+				VA_Arg vA_Arg = (VA_Arg)theEObject;
+				T result = caseVA_Arg(vA_Arg);
+				if (result == null) result = caseInstruction(vA_Arg);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.EXTRACT_ELEMENT: {
+				ExtractElement extractElement = (ExtractElement)theEObject;
+				T result = caseExtractElement(extractElement);
+				if (result == null) result = caseInstruction(extractElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.INSERT_ELEMENT: {
+				InsertElement insertElement = (InsertElement)theEObject;
+				T result = caseInsertElement(insertElement);
+				if (result == null) result = caseInstruction(insertElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.SHUFFLE_VECTOR: {
+				ShuffleVector shuffleVector = (ShuffleVector)theEObject;
+				T result = caseShuffleVector(shuffleVector);
+				if (result == null) result = caseInstruction(shuffleVector);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.COMPARE: {
+				Compare compare = (Compare)theEObject;
+				T result = caseCompare(compare);
+				if (result == null) result = caseInstruction(compare);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.INDIRECT_BRANCH: {
+				IndirectBranch indirectBranch = (IndirectBranch)theEObject;
+				T result = caseIndirectBranch(indirectBranch);
+				if (result == null) result = caseRet_Instr(indirectBranch);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.LABEL_LIST: {
+				LabelList labelList = (LabelList)theEObject;
+				T result = caseLabelList(labelList);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.SWITCH: {
+				de.upb.llvm_parser.llvm.Switch switch_ = (de.upb.llvm_parser.llvm.Switch)theEObject;
+				T result = caseSwitch(switch_);
+				if (result == null) result = caseRet_Instr(switch_);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.JUMP_TABLE: {
+				JumpTable jumpTable = (JumpTable)theEObject;
+				T result = caseJumpTable(jumpTable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.INVOKE: {
+				Invoke invoke = (Invoke)theEObject;
+				T result = caseInvoke(invoke);
+				if (result == null) result = caseRet_Instr(invoke);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.RESUME: {
+				Resume resume = (Resume)theEObject;
+				T result = caseResume(resume);
+				if (result == null) result = caseRet_Instr(resume);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.UNREACHABLE: {
+				Unreachable unreachable = (Unreachable)theEObject;
+				T result = caseUnreachable(unreachable);
+				if (result == null) result = caseRet_Instr(unreachable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.RETURN: {
+				Return return_ = (Return)theEObject;
+				T result = caseReturn(return_);
+				if (result == null) result = caseRet_Instr(return_);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.BRANCH: {
+				Branch branch = (Branch)theEObject;
+				T result = caseBranch(branch);
+				if (result == null) result = caseRet_Instr(branch);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -296,6 +542,21 @@ public class LlvmSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypeDefinition(TypeDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Global Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Global Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGlobalDefinition(GlobalDefinition object) {
 		return null;
 	}
 
@@ -480,6 +741,21 @@ public class LlvmSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Value Struct</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Value Struct</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseValueStruct(ValueStruct object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Structure</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -506,6 +782,21 @@ public class LlvmSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseParameterList(ParameterList object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type List</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type List</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypeList(TypeList object) {
 		return null;
 	}
 
@@ -540,17 +831,527 @@ public class LlvmSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type List</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Instruction Use</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type List</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Instruction Use</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypeList(TypeList object) {
+	public T caseInstructionUse(InstructionUse object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Ret Instr</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Ret Instr</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRet_Instr(Ret_Instr object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Instruction</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Instruction</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInstruction(Instruction object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>ARITHMETIC OP</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>ARITHMETIC OP</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseARITHMETIC_OP(ARITHMETIC_OP object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>LOGICAL OP</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>LOGICAL OP</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLOGICAL_OP(LOGICAL_OP object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Cast</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Cast</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCast(Cast object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Get Element Ptr</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Get Element Ptr</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGetElementPtr(GetElementPtr object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Extract Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Extract Value</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExtractValue(ExtractValue object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Insert Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Insert Value</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInsertValue(InsertValue object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Fence</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Fence</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFence(Fence object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Cmp Xchg</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Cmp Xchg</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCmpXchg(CmpXchg object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Atomic RMW</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Atomic RMW</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAtomicRMW(AtomicRMW object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Load</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Load</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLoad(Load object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Store</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Store</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStore(Store object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Call</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCall(Call object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Alloc</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Alloc</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAlloc(Alloc object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>PHI</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>PHI</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePHI(PHI object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Value Pair</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Value Pair</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseValuePair(ValuePair object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Landing Pad</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Landing Pad</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLandingPad(LandingPad object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Clause</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Clause</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseClause(Clause object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Select</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Select</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSelect(Select object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>VA Arg</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>VA Arg</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVA_Arg(VA_Arg object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Extract Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Extract Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExtractElement(ExtractElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Insert Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Insert Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInsertElement(InsertElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Shuffle Vector</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Shuffle Vector</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseShuffleVector(ShuffleVector object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Compare</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Compare</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCompare(Compare object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Indirect Branch</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Indirect Branch</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIndirectBranch(IndirectBranch object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Label List</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Label List</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLabelList(LabelList object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Switch</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Switch</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSwitch(de.upb.llvm_parser.llvm.Switch object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Jump Table</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Jump Table</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJumpTable(JumpTable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Invoke</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Invoke</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInvoke(Invoke object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Resume</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Resume</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseResume(Resume object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unreachable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unreachable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnreachable(Unreachable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Return</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Return</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReturn(Return object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Branch</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Branch</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBranch(Branch object) {
 		return null;
 	}
 

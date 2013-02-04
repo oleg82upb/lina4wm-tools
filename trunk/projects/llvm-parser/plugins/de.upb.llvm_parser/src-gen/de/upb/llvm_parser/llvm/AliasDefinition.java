@@ -2,7 +2,6 @@
  */
 package de.upb.llvm_parser.llvm;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface AliasDefinition extends EObject {
+public interface AliasDefinition extends MainLevelEntity {
 	/**
 	 * Returns the value of the '<em><b>Address</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

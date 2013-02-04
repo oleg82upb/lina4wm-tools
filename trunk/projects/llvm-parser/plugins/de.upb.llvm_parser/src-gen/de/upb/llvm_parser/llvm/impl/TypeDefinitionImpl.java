@@ -2,6 +2,7 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
+import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Structure;
 import de.upb.llvm_parser.llvm.TypeDefinition;
@@ -21,6 +22,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.TypeDefinitionImpl#getAddress <em>Address</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.TypeDefinitionImpl#getStruct <em>Struct</em>}</li>
  * </ul>
  * </p>
@@ -28,6 +30,16 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * @generated
  */
 public class TypeDefinitionImpl extends MainLevelEntityImpl implements TypeDefinition {
+	/**
+	 * The cached value of the '{@link #getAddress() <em>Address</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAddress()
+	 * @generated
+	 * @ordered
+	 */
+	protected Address address;
+
 	/**
 	 * The cached value of the '{@link #getStruct() <em>Struct</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -55,6 +67,49 @@ public class TypeDefinitionImpl extends MainLevelEntityImpl implements TypeDefin
 	@Override
 	protected EClass eStaticClass() {
 		return LlvmPackage.Literals.TYPE_DEFINITION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Address getAddress() {
+		return address;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetAddress(Address newAddress, NotificationChain msgs) {
+		Address oldAddress = address;
+		address = newAddress;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.TYPE_DEFINITION__ADDRESS, oldAddress, newAddress);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAddress(Address newAddress) {
+		if (newAddress != address) {
+			NotificationChain msgs = null;
+			if (address != null)
+				msgs = ((InternalEObject)address).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.TYPE_DEFINITION__ADDRESS, null, msgs);
+			if (newAddress != null)
+				msgs = ((InternalEObject)newAddress).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.TYPE_DEFINITION__ADDRESS, null, msgs);
+			msgs = basicSetAddress(newAddress, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.TYPE_DEFINITION__ADDRESS, newAddress, newAddress));
 	}
 
 	/**
@@ -108,6 +163,8 @@ public class TypeDefinitionImpl extends MainLevelEntityImpl implements TypeDefin
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case LlvmPackage.TYPE_DEFINITION__ADDRESS:
+				return basicSetAddress(null, msgs);
 			case LlvmPackage.TYPE_DEFINITION__STRUCT:
 				return basicSetStruct(null, msgs);
 		}
@@ -122,6 +179,8 @@ public class TypeDefinitionImpl extends MainLevelEntityImpl implements TypeDefin
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case LlvmPackage.TYPE_DEFINITION__ADDRESS:
+				return getAddress();
 			case LlvmPackage.TYPE_DEFINITION__STRUCT:
 				return getStruct();
 		}
@@ -136,6 +195,9 @@ public class TypeDefinitionImpl extends MainLevelEntityImpl implements TypeDefin
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case LlvmPackage.TYPE_DEFINITION__ADDRESS:
+				setAddress((Address)newValue);
+				return;
 			case LlvmPackage.TYPE_DEFINITION__STRUCT:
 				setStruct((Structure)newValue);
 				return;
@@ -151,6 +213,9 @@ public class TypeDefinitionImpl extends MainLevelEntityImpl implements TypeDefin
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case LlvmPackage.TYPE_DEFINITION__ADDRESS:
+				setAddress((Address)null);
+				return;
 			case LlvmPackage.TYPE_DEFINITION__STRUCT:
 				setStruct((Structure)null);
 				return;
@@ -166,6 +231,8 @@ public class TypeDefinitionImpl extends MainLevelEntityImpl implements TypeDefin
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case LlvmPackage.TYPE_DEFINITION__ADDRESS:
+				return address != null;
 			case LlvmPackage.TYPE_DEFINITION__STRUCT:
 				return struct != null;
 		}

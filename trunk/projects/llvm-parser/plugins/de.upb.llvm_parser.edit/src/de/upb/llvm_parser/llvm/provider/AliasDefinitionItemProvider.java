@@ -32,7 +32,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class AliasDefinitionItemProvider
-	extends ItemProviderAdapter
+	extends MainLevelEntityItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -189,6 +189,11 @@ public class AliasDefinitionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.ALIAS_DEFINITION__ALIASVALUE,
+				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.ALIAS_DEFINITION__ALIASEE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -224,17 +229,6 @@ public class AliasDefinitionItemProvider
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return LLVMEditPlugin.INSTANCE;
 	}
 
 }

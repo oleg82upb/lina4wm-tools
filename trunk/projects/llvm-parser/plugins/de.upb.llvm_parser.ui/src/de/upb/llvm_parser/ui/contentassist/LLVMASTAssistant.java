@@ -118,6 +118,7 @@ public class LLVMASTAssistant extends XtextResource implements
 			ResourceSet resSet = new ResourceSetImpl();
 			resource = resSet.createResource(URI.createFileURI(getLocation((IFile) last, window)));
 			resource.getContents().add(ast);
+			EcoreUtil.resolveAll(ast);
 			resource.save(Collections.EMPTY_MAP);
 			refreshWorkspace();
 		} catch (Exception e) {

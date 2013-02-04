@@ -2,6 +2,7 @@
  */
 package de.upb.llvm_parser.llvm;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,7 +20,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface TypeUse extends Vector, Array {
+public interface TypeUse extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Pointer</b></em>' attribute.
 	 * <!-- begin-user-doc -->

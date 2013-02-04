@@ -12,6 +12,7 @@ package de.upb.llvm_parser.llvm;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.FunctionDefinition#getReturnType <em>Return Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.FunctionDefinition#getAddress <em>Address</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.FunctionDefinition#getPl <em>Pl</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.FunctionDefinition#getBody <em>Body</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.FunctionDefinition#getTList <em>TList</em>}</li>
@@ -48,6 +49,32 @@ public interface FunctionDefinition extends MainLevelEntity {
 	 * @generated
 	 */
 	void setReturnType(TypeUse value);
+
+	/**
+	 * Returns the value of the '<em><b>Address</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Address</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Address</em>' containment reference.
+	 * @see #setAddress(Address)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getFunctionDefinition_Address()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Address getAddress();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.FunctionDefinition#getAddress <em>Address</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Address</em>' containment reference.
+	 * @see #getAddress()
+	 * @generated
+	 */
+	void setAddress(Address value);
 
 	/**
 	 * Returns the value of the '<em><b>Pl</b></em>' containment reference.
