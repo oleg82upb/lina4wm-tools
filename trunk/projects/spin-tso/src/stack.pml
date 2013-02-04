@@ -2,7 +2,7 @@
 	trying to specify the LLVM-compiled Treiber Stack implementation  
 */
 
-#define BUFF_SIZE 6 	//size of Buffer
+#define BUFF_SIZE 10 	//size of Buffer
 #define MEM_SIZE 40	//size of memory
  
 //-----------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,6 +71,7 @@ inline casLPPop(adr, oldValue, newValue, returnValue)
 	 
 	}
 }
+
 inline casLPPush(adr, oldValue, newValue, returnValue, controlValue) 
 {
 	// 2 steps for the executing process, but atomic on memory
@@ -203,7 +204,7 @@ doBody:
 	read(ss, v1);
 	
 	if 
-	:: ss == NULL -> write(retval, NULL);
+	:: v1 == NULL -> write(retval, NULL);
 					 goto retLabel;
 	:: else -> skip;
 	fi
@@ -230,22 +231,24 @@ doCond:
 retLabel: 
 	read(ss,v11);									//v11 in llvm
 	write(retval, v11);								//v11 in llvm
-	returnvalue = v11;
+	read(retval, returnvalue);
 	
 }
 
 proctype process1(chan ch){
 	short returnvalue;
-	push(this, 666);
-	push(this, 333);
 	pop(returnvalue);
+	push(this, 666);
+	//push(this, 333);
+	//pop(returnvalue);
 }
 
 proctype process2(chan ch){
-	short returnValue;
-	push(this, 555);
-	push(this, 111);
-	pop(returnValue);
+	//short returnValue;
+	//push(this, 555);
+	//push(this, 111);
+	//pop(returnValue);
+	skip;
 }
 
 init{

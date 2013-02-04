@@ -1,4 +1,4 @@
-#define BUFF_SIZE 6 	//size of Buffer
+#define BUFF_SIZE 7 	//size of Buffer
 #define MEM_SIZE 40	//size of memory
  
 //-----------------------------------------------------------------------------------------------------------------------------------------------
@@ -15,18 +15,14 @@ hidden byte asTop = 0;
 //asValue the value we expect to be on top of the stack
 inline asPop(asValue, asReturn)
 {
-	atomic{
-	if
-		:: asTop == 0 -> assert(asReturn == false); //stack must be empty
-		:: else -> { asTop--;								//decrement top
-					 assert (asStack[asTop] == asValue);  	//asValue must be top element
-					 assert (asReturn == true);				//operation must have been successful
-					 asStack[asTop] = 0;					//remove element from stack
-
-					}
-	fi	
+	atomic
+	{
+		asTop--;										//decrement top 
+		assert (asStack[asTop] == memory[asValue]);  	//asValue must be top element
+		asStack[asTop] = 0;								//remove element from stack
 	}
 }
+
 
 inline asPush(asValue)
 {
@@ -38,6 +34,7 @@ inline asPush(asValue)
 	//should we return something?
 }
 
+
 inline casLPPop(adr, oldValue, newValue, returnValue) 
 {
 	// 2 steps for the executing process, but atomic on memory
@@ -46,9 +43,15 @@ inline casLPPop(adr, oldValue, newValue, returnValue)
 	atomic{
 	ch ? iCas, adr, success, _; 
 	returnValue = success;
-	asPop(oldValue, success); //if successfull, then the popped value is the oldValue 
+	if 
+		:: success -> asPop(oldValue, success); //if successfull, then the popped value is the oldValue
+		:: else -> skip;
+	fi
+	 
 	}
 }
+
+
 inline casLPPush(adr, oldValue, newValue, returnValue, controlValue) 
 {
 	// 2 steps for the executing process, but atomic on memory
@@ -113,7 +116,6 @@ atomic{
 }
 	write(this_addr, this);
 	write(v_addr, v);
-	//146 -150 missing (just new Node???)
 	read(v0, v4);
 	write(n, v0);
 	read(n, v5);
@@ -168,8 +170,8 @@ bb:
 	write(ss, v3);
 	read(ss, v4);
 	if
-	:: v4 == 0 ->write(v0, NULL); goto bb6;
-	::else -> goto bb2;
+	:: v4 == NULL -> write(v0, NULL); goto bb6;
+	:: else -> goto bb2;
 	fi;
 	
 bb2:
@@ -205,9 +207,10 @@ retLabel:
 
 proctype process1(chan ch){
 	short returnvalue;
+	pop(returnvalue);
 	push(this, 666);
 	push(this, 333);
-	//pop(returnvalue);
+	pop(returnvalue);
 }
 
 proctype process2(chan ch){
