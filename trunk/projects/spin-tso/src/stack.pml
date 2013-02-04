@@ -26,6 +26,11 @@ inline asPop(asValue, asReturn)
 	}
 }
 
+inline asPopFail()
+{
+	assert (asTop == 0)
+}
+
 inline asPush(asValue)
 {
 	atomic
@@ -35,6 +40,20 @@ inline asPush(asValue)
 		asTop++;
 	}
 	//should we return something?
+}
+
+inline readLPPopFail(adr, target)
+{
+	atomic{
+	short readValue;
+	ch ! iRead, adr, NULL, NULL;
+	ch ? iRead, adr, readValue, NULL;
+	target = readValue;
+	if 
+		:: readValue == NULL -> asPopFail();
+		:: else -> skip;
+	fi
+	}
 }
 
 inline casLPPop(adr, oldValue, newValue, returnValue) 
@@ -179,7 +198,7 @@ atomic {
 
 doBody:
 	getelementptr (Stack, this1, 0, head);
-	read (head, v0);
+	readLPPopFail (head, v0);
 	write (ss, v0);
 	read(ss, v1);
 	
