@@ -15,7 +15,15 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TypeUseTest extends VectorTest {
+public class TypeUseTest extends TestCase {
+
+	/**
+	 * The fixture for this Type Use test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypeUse fixture = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -37,14 +45,23 @@ public class TypeUseTest extends VectorTest {
 	}
 
 	/**
+	 * Sets the fixture for this Type Use test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void setFixture(TypeUse fixture) {
+		this.fixture = fixture;
+	}
+
+	/**
 	 * Returns the fixture for this Type Use test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	protected TypeUse getFixture() {
-		return (TypeUse)fixture;
+		return fixture;
 	}
 
 	/**

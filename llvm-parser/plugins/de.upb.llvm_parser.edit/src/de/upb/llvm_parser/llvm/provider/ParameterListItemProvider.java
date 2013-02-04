@@ -185,6 +185,11 @@ public class ParameterListItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.PARAMETER_LIST__VARIABLES,
 				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__VARIABLES,
+				 LlvmFactory.eINSTANCE.createCast()));
 	}
 
 	/**

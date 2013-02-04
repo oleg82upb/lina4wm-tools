@@ -2,6 +2,7 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
+import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.FunctionBody;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LlvmPackage;
@@ -25,6 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl#getReturnType <em>Return Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl#getAddress <em>Address</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl#getPl <em>Pl</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl#getBody <em>Body</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl#getTList <em>TList</em>}</li>
@@ -43,6 +45,16 @@ public class FunctionDefinitionImpl extends MainLevelEntityImpl implements Funct
 	 * @ordered
 	 */
 	protected TypeUse returnType;
+
+	/**
+	 * The cached value of the '{@link #getAddress() <em>Address</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAddress()
+	 * @generated
+	 * @ordered
+	 */
+	protected Address address;
 
 	/**
 	 * The cached value of the '{@link #getPl() <em>Pl</em>}' containment reference.
@@ -134,6 +146,49 @@ public class FunctionDefinitionImpl extends MainLevelEntityImpl implements Funct
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.FUNCTION_DEFINITION__RETURN_TYPE, newReturnType, newReturnType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Address getAddress() {
+		return address;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetAddress(Address newAddress, NotificationChain msgs) {
+		Address oldAddress = address;
+		address = newAddress;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.FUNCTION_DEFINITION__ADDRESS, oldAddress, newAddress);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAddress(Address newAddress) {
+		if (newAddress != address) {
+			NotificationChain msgs = null;
+			if (address != null)
+				msgs = ((InternalEObject)address).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.FUNCTION_DEFINITION__ADDRESS, null, msgs);
+			if (newAddress != null)
+				msgs = ((InternalEObject)newAddress).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.FUNCTION_DEFINITION__ADDRESS, null, msgs);
+			msgs = basicSetAddress(newAddress, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.FUNCTION_DEFINITION__ADDRESS, newAddress, newAddress));
 	}
 
 	/**
@@ -275,6 +330,8 @@ public class FunctionDefinitionImpl extends MainLevelEntityImpl implements Funct
 		switch (featureID) {
 			case LlvmPackage.FUNCTION_DEFINITION__RETURN_TYPE:
 				return basicSetReturnType(null, msgs);
+			case LlvmPackage.FUNCTION_DEFINITION__ADDRESS:
+				return basicSetAddress(null, msgs);
 			case LlvmPackage.FUNCTION_DEFINITION__PL:
 				return basicSetPl(null, msgs);
 			case LlvmPackage.FUNCTION_DEFINITION__BODY:
@@ -295,6 +352,8 @@ public class FunctionDefinitionImpl extends MainLevelEntityImpl implements Funct
 		switch (featureID) {
 			case LlvmPackage.FUNCTION_DEFINITION__RETURN_TYPE:
 				return getReturnType();
+			case LlvmPackage.FUNCTION_DEFINITION__ADDRESS:
+				return getAddress();
 			case LlvmPackage.FUNCTION_DEFINITION__PL:
 				return getPl();
 			case LlvmPackage.FUNCTION_DEFINITION__BODY:
@@ -315,6 +374,9 @@ public class FunctionDefinitionImpl extends MainLevelEntityImpl implements Funct
 		switch (featureID) {
 			case LlvmPackage.FUNCTION_DEFINITION__RETURN_TYPE:
 				setReturnType((TypeUse)newValue);
+				return;
+			case LlvmPackage.FUNCTION_DEFINITION__ADDRESS:
+				setAddress((Address)newValue);
 				return;
 			case LlvmPackage.FUNCTION_DEFINITION__PL:
 				setPl((ParameterList)newValue);
@@ -340,6 +402,9 @@ public class FunctionDefinitionImpl extends MainLevelEntityImpl implements Funct
 			case LlvmPackage.FUNCTION_DEFINITION__RETURN_TYPE:
 				setReturnType((TypeUse)null);
 				return;
+			case LlvmPackage.FUNCTION_DEFINITION__ADDRESS:
+				setAddress((Address)null);
+				return;
 			case LlvmPackage.FUNCTION_DEFINITION__PL:
 				setPl((ParameterList)null);
 				return;
@@ -363,6 +428,8 @@ public class FunctionDefinitionImpl extends MainLevelEntityImpl implements Funct
 		switch (featureID) {
 			case LlvmPackage.FUNCTION_DEFINITION__RETURN_TYPE:
 				return returnType != null;
+			case LlvmPackage.FUNCTION_DEFINITION__ADDRESS:
+				return address != null;
 			case LlvmPackage.FUNCTION_DEFINITION__PL:
 				return pl != null;
 			case LlvmPackage.FUNCTION_DEFINITION__BODY:

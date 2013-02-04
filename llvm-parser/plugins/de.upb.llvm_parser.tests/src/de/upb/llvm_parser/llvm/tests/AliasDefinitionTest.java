@@ -15,15 +15,7 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class AliasDefinitionTest extends TestCase {
-
-	/**
-	 * The fixture for this Alias Definition test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AliasDefinition fixture = null;
+public class AliasDefinitionTest extends MainLevelEntityTest {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -45,23 +37,14 @@ public class AliasDefinitionTest extends TestCase {
 	}
 
 	/**
-	 * Sets the fixture for this Alias Definition test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(AliasDefinition fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this Alias Definition test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected AliasDefinition getFixture() {
-		return fixture;
+		return (AliasDefinition)fixture;
 	}
 
 	/**

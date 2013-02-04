@@ -76,6 +76,7 @@ public class TypeDefinitionItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.TYPE_DEFINITION__ADDRESS);
 			childrenFeatures.add(LlvmPackage.Literals.TYPE_DEFINITION__STRUCT);
 		}
 		return childrenFeatures;
@@ -128,6 +129,7 @@ public class TypeDefinitionItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(TypeDefinition.class)) {
+			case LlvmPackage.TYPE_DEFINITION__ADDRESS:
 			case LlvmPackage.TYPE_DEFINITION__STRUCT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -145,6 +147,11 @@ public class TypeDefinitionItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.TYPE_DEFINITION__ADDRESS,
+				 LlvmFactory.eINSTANCE.createAddress()));
 
 		newChildDescriptors.add
 			(createChildParameter

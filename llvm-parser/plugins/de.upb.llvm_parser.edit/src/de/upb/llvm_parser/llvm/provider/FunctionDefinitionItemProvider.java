@@ -75,6 +75,7 @@ public class FunctionDefinitionItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.FUNCTION_DEFINITION__RETURN_TYPE);
+			childrenFeatures.add(LlvmPackage.Literals.FUNCTION_DEFINITION__ADDRESS);
 			childrenFeatures.add(LlvmPackage.Literals.FUNCTION_DEFINITION__PL);
 			childrenFeatures.add(LlvmPackage.Literals.FUNCTION_DEFINITION__BODY);
 			childrenFeatures.add(LlvmPackage.Literals.FUNCTION_DEFINITION__TLIST);
@@ -130,6 +131,7 @@ public class FunctionDefinitionItemProvider
 
 		switch (notification.getFeatureID(FunctionDefinition.class)) {
 			case LlvmPackage.FUNCTION_DEFINITION__RETURN_TYPE:
+			case LlvmPackage.FUNCTION_DEFINITION__ADDRESS:
 			case LlvmPackage.FUNCTION_DEFINITION__PL:
 			case LlvmPackage.FUNCTION_DEFINITION__BODY:
 			case LlvmPackage.FUNCTION_DEFINITION__TLIST:
@@ -164,6 +166,11 @@ public class FunctionDefinitionItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.FUNCTION_DEFINITION__RETURN_TYPE,
 				 LlvmFactory.eINSTANCE.createPredefined()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.FUNCTION_DEFINITION__ADDRESS,
+				 LlvmFactory.eINSTANCE.createAddress()));
 
 		newChildDescriptors.add
 			(createChildParameter

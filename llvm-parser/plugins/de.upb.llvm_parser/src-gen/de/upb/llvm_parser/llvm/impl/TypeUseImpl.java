@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +25,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class TypeUseImpl extends VectorImpl implements TypeUse {
+public class TypeUseImpl extends MinimalEObjectImpl.Container implements TypeUse {
 	/**
 	 * The default value of the '{@link #getPointer() <em>Pointer</em>}' attribute.
 	 * <!-- begin-user-doc -->
