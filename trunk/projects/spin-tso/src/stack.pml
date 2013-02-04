@@ -18,24 +18,21 @@ hidden byte asTop = 0;
 //asValue the value we expect to be on top of the stack
 inline asPop(asValue, asReturn)
 {
-	atomic{
-	if
-		:: asTop == 0 -> assert(asReturn == false); //stack must be empty
-		:: else -> { asTop--;								//decrement top 
-					 assert (asStack[asTop] == memory[asValue]);  	//asValue must be top element
-					 assert (asReturn == true);				//operation must have been successful
-					 asStack[asTop] = 0;					//remove element from stack
-					}
-	fi	
+	atomic
+	{
+		asTop--;										//decrement top 
+		assert (asStack[asTop] == memory[asValue]);  	//asValue must be top element
+		asStack[asTop] = 0;								//remove element from stack
 	}
 }
 
 inline asPush(asValue)
 {
-	atomic{
-	assert(asTop < ASSIZE); //make sure, stack array is never full
-	asStack[asTop] = asValue;
-	asTop++;
+	atomic
+	{
+		assert(asTop < ASSIZE); //make sure, stack array is never full
+		asStack[asTop] = asValue;
+		asTop++;
 	}
 	//should we return something?
 }
@@ -48,7 +45,11 @@ inline casLPPop(adr, oldValue, newValue, returnValue)
 	atomic{
 	ch ? iCas, adr, success, _; 
 	returnValue = success;
-	asPop(oldValue, success); //if successfull, then the popped value is the oldValue 
+	if 
+		:: success -> asPop(oldValue, success); //if successfull, then the popped value is the oldValue
+		:: else -> skip;
+	fi
+	 
 	}
 }
 inline casLPPush(adr, oldValue, newValue, returnValue, controlValue) 
@@ -217,14 +218,15 @@ retLabel:
 proctype process1(chan ch){
 	short returnvalue;
 	push(this, 666);
-	//push(this, 333);
+	push(this, 333);
 	pop(returnvalue);
 }
 
 proctype process2(chan ch){
-	//push(this, 555);
-	//push(this, 111);
-	skip;
+	short returnValue;
+	push(this, 555);
+	push(this, 111);
+	pop(returnValue);
 }
 
 init{
@@ -232,7 +234,7 @@ atomic{
 	alloca(Stack, this)
 	run process1(channelT1);
 	run bufferProcess(channelT1);
-	//run process2(channelT2);
-	//run bufferProcess(channelT2);
+	run process2(channelT2);
+	run bufferProcess(channelT2);
 	}
 }
