@@ -185,6 +185,11 @@ public class ARITHMETIC_OPItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.ARITHMETIC_OP__VALUE1,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.ARITHMETIC_OP__VALUE2,
 				 LlvmFactory.eINSTANCE.createValue()));
 
@@ -202,6 +207,11 @@ public class ARITHMETIC_OPItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.ARITHMETIC_OP__VALUE2,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.ARITHMETIC_OP__VALUE2,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**

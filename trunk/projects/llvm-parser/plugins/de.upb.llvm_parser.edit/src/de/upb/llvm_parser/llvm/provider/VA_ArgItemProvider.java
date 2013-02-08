@@ -185,6 +185,11 @@ public class VA_ArgItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.VA_ARG__LISTVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.VA_ARG__ARG_TYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 

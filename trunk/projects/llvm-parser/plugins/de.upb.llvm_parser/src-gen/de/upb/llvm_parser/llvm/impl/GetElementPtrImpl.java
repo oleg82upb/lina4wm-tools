@@ -2,10 +2,8 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
-import de.upb.llvm_parser.llvm.Array;
 import de.upb.llvm_parser.llvm.GetElementPtr;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.TypeList;
 import de.upb.llvm_parser.llvm.TypeUse;
 import de.upb.llvm_parser.llvm.Value;
 
@@ -17,6 +15,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -31,12 +30,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getElementtype <em>Elementtype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getTypes <em>Types</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getElementarray <em>Elementarray</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getElement <em>Element</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getIndicetypes <em>Indicetypes</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getIndices <em>Indices</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getAggregate <em>Aggregate</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getAggregatename <em>Aggregatename</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getIndTypes <em>Ind Types</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl#getIndizies <em>Indizies</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,64 +41,44 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr {
 	/**
-	 * The cached value of the '{@link #getElementtype() <em>Elementtype</em>}' containment reference.
+	 * The cached value of the '{@link #getAggregate() <em>Aggregate</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getElementtype()
+	 * @see #getAggregate()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeUse elementtype;
+	protected EObject aggregate;
 
 	/**
-	 * The cached value of the '{@link #getTypes() <em>Types</em>}' containment reference.
+	 * The cached value of the '{@link #getAggregatename() <em>Aggregatename</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTypes()
+	 * @see #getAggregatename()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeList types;
+	protected Value aggregatename;
 
 	/**
-	 * The cached value of the '{@link #getElementarray() <em>Elementarray</em>}' containment reference.
+	 * The cached value of the '{@link #getIndTypes() <em>Ind Types</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getElementarray()
+	 * @see #getIndTypes()
 	 * @generated
 	 * @ordered
 	 */
-	protected Array elementarray;
+	protected EList<TypeUse> indTypes;
 
 	/**
-	 * The cached value of the '{@link #getElement() <em>Element</em>}' containment reference.
+	 * The cached value of the '{@link #getIndizies() <em>Indizies</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getElement()
+	 * @see #getIndizies()
 	 * @generated
 	 * @ordered
 	 */
-	protected Value element;
-
-	/**
-	 * The cached value of the '{@link #getIndicetypes() <em>Indicetypes</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIndicetypes()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<TypeUse> indicetypes;
-
-	/**
-	 * The cached value of the '{@link #getIndices() <em>Indices</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIndices()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Value> indices;
+	protected EList<Value> indizies;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -127,8 +104,8 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeUse getElementtype() {
-		return elementtype;
+	public EObject getAggregate() {
+		return aggregate;
 	}
 
 	/**
@@ -136,11 +113,11 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetElementtype(TypeUse newElementtype, NotificationChain msgs) {
-		TypeUse oldElementtype = elementtype;
-		elementtype = newElementtype;
+	public NotificationChain basicSetAggregate(EObject newAggregate, NotificationChain msgs) {
+		EObject oldAggregate = aggregate;
+		aggregate = newAggregate;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE, oldElementtype, newElementtype);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.GET_ELEMENT_PTR__AGGREGATE, oldAggregate, newAggregate);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -151,18 +128,18 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setElementtype(TypeUse newElementtype) {
-		if (newElementtype != elementtype) {
+	public void setAggregate(EObject newAggregate) {
+		if (newAggregate != aggregate) {
 			NotificationChain msgs = null;
-			if (elementtype != null)
-				msgs = ((InternalEObject)elementtype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE, null, msgs);
-			if (newElementtype != null)
-				msgs = ((InternalEObject)newElementtype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE, null, msgs);
-			msgs = basicSetElementtype(newElementtype, msgs);
+			if (aggregate != null)
+				msgs = ((InternalEObject)aggregate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.GET_ELEMENT_PTR__AGGREGATE, null, msgs);
+			if (newAggregate != null)
+				msgs = ((InternalEObject)newAggregate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.GET_ELEMENT_PTR__AGGREGATE, null, msgs);
+			msgs = basicSetAggregate(newAggregate, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE, newElementtype, newElementtype));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.GET_ELEMENT_PTR__AGGREGATE, newAggregate, newAggregate));
 	}
 
 	/**
@@ -170,8 +147,8 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeList getTypes() {
-		return types;
+	public Value getAggregatename() {
+		return aggregatename;
 	}
 
 	/**
@@ -179,11 +156,11 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTypes(TypeList newTypes, NotificationChain msgs) {
-		TypeList oldTypes = types;
-		types = newTypes;
+	public NotificationChain basicSetAggregatename(Value newAggregatename, NotificationChain msgs) {
+		Value oldAggregatename = aggregatename;
+		aggregatename = newAggregatename;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.GET_ELEMENT_PTR__TYPES, oldTypes, newTypes);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.GET_ELEMENT_PTR__AGGREGATENAME, oldAggregatename, newAggregatename);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -194,18 +171,18 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTypes(TypeList newTypes) {
-		if (newTypes != types) {
+	public void setAggregatename(Value newAggregatename) {
+		if (newAggregatename != aggregatename) {
 			NotificationChain msgs = null;
-			if (types != null)
-				msgs = ((InternalEObject)types).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.GET_ELEMENT_PTR__TYPES, null, msgs);
-			if (newTypes != null)
-				msgs = ((InternalEObject)newTypes).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.GET_ELEMENT_PTR__TYPES, null, msgs);
-			msgs = basicSetTypes(newTypes, msgs);
+			if (aggregatename != null)
+				msgs = ((InternalEObject)aggregatename).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.GET_ELEMENT_PTR__AGGREGATENAME, null, msgs);
+			if (newAggregatename != null)
+				msgs = ((InternalEObject)newAggregatename).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.GET_ELEMENT_PTR__AGGREGATENAME, null, msgs);
+			msgs = basicSetAggregatename(newAggregatename, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.GET_ELEMENT_PTR__TYPES, newTypes, newTypes));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.GET_ELEMENT_PTR__AGGREGATENAME, newAggregatename, newAggregatename));
 	}
 
 	/**
@@ -213,23 +190,11 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Array getElementarray() {
-		return elementarray;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetElementarray(Array newElementarray, NotificationChain msgs) {
-		Array oldElementarray = elementarray;
-		elementarray = newElementarray;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY, oldElementarray, newElementarray);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public EList<TypeUse> getIndTypes() {
+		if (indTypes == null) {
+			indTypes = new EObjectContainmentEList<TypeUse>(TypeUse.class, this, LlvmPackage.GET_ELEMENT_PTR__IND_TYPES);
 		}
-		return msgs;
+		return indTypes;
 	}
 
 	/**
@@ -237,85 +202,11 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setElementarray(Array newElementarray) {
-		if (newElementarray != elementarray) {
-			NotificationChain msgs = null;
-			if (elementarray != null)
-				msgs = ((InternalEObject)elementarray).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY, null, msgs);
-			if (newElementarray != null)
-				msgs = ((InternalEObject)newElementarray).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY, null, msgs);
-			msgs = basicSetElementarray(newElementarray, msgs);
-			if (msgs != null) msgs.dispatch();
+	public EList<Value> getIndizies() {
+		if (indizies == null) {
+			indizies = new EObjectContainmentEList<Value>(Value.class, this, LlvmPackage.GET_ELEMENT_PTR__INDIZIES);
 		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY, newElementarray, newElementarray));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Value getElement() {
-		return element;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetElement(Value newElement, NotificationChain msgs) {
-		Value oldElement = element;
-		element = newElement;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.GET_ELEMENT_PTR__ELEMENT, oldElement, newElement);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setElement(Value newElement) {
-		if (newElement != element) {
-			NotificationChain msgs = null;
-			if (element != null)
-				msgs = ((InternalEObject)element).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.GET_ELEMENT_PTR__ELEMENT, null, msgs);
-			if (newElement != null)
-				msgs = ((InternalEObject)newElement).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.GET_ELEMENT_PTR__ELEMENT, null, msgs);
-			msgs = basicSetElement(newElement, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.GET_ELEMENT_PTR__ELEMENT, newElement, newElement));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<TypeUse> getIndicetypes() {
-		if (indicetypes == null) {
-			indicetypes = new EObjectContainmentEList<TypeUse>(TypeUse.class, this, LlvmPackage.GET_ELEMENT_PTR__INDICETYPES);
-		}
-		return indicetypes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Value> getIndices() {
-		if (indices == null) {
-			indices = new EObjectContainmentEList<Value>(Value.class, this, LlvmPackage.GET_ELEMENT_PTR__INDICES);
-		}
-		return indices;
+		return indizies;
 	}
 
 	/**
@@ -326,18 +217,14 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE:
-				return basicSetElementtype(null, msgs);
-			case LlvmPackage.GET_ELEMENT_PTR__TYPES:
-				return basicSetTypes(null, msgs);
-			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY:
-				return basicSetElementarray(null, msgs);
-			case LlvmPackage.GET_ELEMENT_PTR__ELEMENT:
-				return basicSetElement(null, msgs);
-			case LlvmPackage.GET_ELEMENT_PTR__INDICETYPES:
-				return ((InternalEList<?>)getIndicetypes()).basicRemove(otherEnd, msgs);
-			case LlvmPackage.GET_ELEMENT_PTR__INDICES:
-				return ((InternalEList<?>)getIndices()).basicRemove(otherEnd, msgs);
+			case LlvmPackage.GET_ELEMENT_PTR__AGGREGATE:
+				return basicSetAggregate(null, msgs);
+			case LlvmPackage.GET_ELEMENT_PTR__AGGREGATENAME:
+				return basicSetAggregatename(null, msgs);
+			case LlvmPackage.GET_ELEMENT_PTR__IND_TYPES:
+				return ((InternalEList<?>)getIndTypes()).basicRemove(otherEnd, msgs);
+			case LlvmPackage.GET_ELEMENT_PTR__INDIZIES:
+				return ((InternalEList<?>)getIndizies()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -350,18 +237,14 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE:
-				return getElementtype();
-			case LlvmPackage.GET_ELEMENT_PTR__TYPES:
-				return getTypes();
-			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY:
-				return getElementarray();
-			case LlvmPackage.GET_ELEMENT_PTR__ELEMENT:
-				return getElement();
-			case LlvmPackage.GET_ELEMENT_PTR__INDICETYPES:
-				return getIndicetypes();
-			case LlvmPackage.GET_ELEMENT_PTR__INDICES:
-				return getIndices();
+			case LlvmPackage.GET_ELEMENT_PTR__AGGREGATE:
+				return getAggregate();
+			case LlvmPackage.GET_ELEMENT_PTR__AGGREGATENAME:
+				return getAggregatename();
+			case LlvmPackage.GET_ELEMENT_PTR__IND_TYPES:
+				return getIndTypes();
+			case LlvmPackage.GET_ELEMENT_PTR__INDIZIES:
+				return getIndizies();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -375,25 +258,19 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE:
-				setElementtype((TypeUse)newValue);
+			case LlvmPackage.GET_ELEMENT_PTR__AGGREGATE:
+				setAggregate((EObject)newValue);
 				return;
-			case LlvmPackage.GET_ELEMENT_PTR__TYPES:
-				setTypes((TypeList)newValue);
+			case LlvmPackage.GET_ELEMENT_PTR__AGGREGATENAME:
+				setAggregatename((Value)newValue);
 				return;
-			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY:
-				setElementarray((Array)newValue);
+			case LlvmPackage.GET_ELEMENT_PTR__IND_TYPES:
+				getIndTypes().clear();
+				getIndTypes().addAll((Collection<? extends TypeUse>)newValue);
 				return;
-			case LlvmPackage.GET_ELEMENT_PTR__ELEMENT:
-				setElement((Value)newValue);
-				return;
-			case LlvmPackage.GET_ELEMENT_PTR__INDICETYPES:
-				getIndicetypes().clear();
-				getIndicetypes().addAll((Collection<? extends TypeUse>)newValue);
-				return;
-			case LlvmPackage.GET_ELEMENT_PTR__INDICES:
-				getIndices().clear();
-				getIndices().addAll((Collection<? extends Value>)newValue);
+			case LlvmPackage.GET_ELEMENT_PTR__INDIZIES:
+				getIndizies().clear();
+				getIndizies().addAll((Collection<? extends Value>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -407,23 +284,17 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE:
-				setElementtype((TypeUse)null);
+			case LlvmPackage.GET_ELEMENT_PTR__AGGREGATE:
+				setAggregate((EObject)null);
 				return;
-			case LlvmPackage.GET_ELEMENT_PTR__TYPES:
-				setTypes((TypeList)null);
+			case LlvmPackage.GET_ELEMENT_PTR__AGGREGATENAME:
+				setAggregatename((Value)null);
 				return;
-			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY:
-				setElementarray((Array)null);
+			case LlvmPackage.GET_ELEMENT_PTR__IND_TYPES:
+				getIndTypes().clear();
 				return;
-			case LlvmPackage.GET_ELEMENT_PTR__ELEMENT:
-				setElement((Value)null);
-				return;
-			case LlvmPackage.GET_ELEMENT_PTR__INDICETYPES:
-				getIndicetypes().clear();
-				return;
-			case LlvmPackage.GET_ELEMENT_PTR__INDICES:
-				getIndices().clear();
+			case LlvmPackage.GET_ELEMENT_PTR__INDIZIES:
+				getIndizies().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -437,18 +308,14 @@ public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE:
-				return elementtype != null;
-			case LlvmPackage.GET_ELEMENT_PTR__TYPES:
-				return types != null;
-			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY:
-				return elementarray != null;
-			case LlvmPackage.GET_ELEMENT_PTR__ELEMENT:
-				return element != null;
-			case LlvmPackage.GET_ELEMENT_PTR__INDICETYPES:
-				return indicetypes != null && !indicetypes.isEmpty();
-			case LlvmPackage.GET_ELEMENT_PTR__INDICES:
-				return indices != null && !indices.isEmpty();
+			case LlvmPackage.GET_ELEMENT_PTR__AGGREGATE:
+				return aggregate != null;
+			case LlvmPackage.GET_ELEMENT_PTR__AGGREGATENAME:
+				return aggregatename != null;
+			case LlvmPackage.GET_ELEMENT_PTR__IND_TYPES:
+				return indTypes != null && !indTypes.isEmpty();
+			case LlvmPackage.GET_ELEMENT_PTR__INDIZIES:
+				return indizies != null && !indizies.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

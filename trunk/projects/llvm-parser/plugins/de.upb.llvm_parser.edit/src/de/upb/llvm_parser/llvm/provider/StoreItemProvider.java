@@ -125,7 +125,6 @@ public class StoreItemProvider
 			childrenFeatures.add(LlvmPackage.Literals.STORE__NEWTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.STORE__TYPES);
 			childrenFeatures.add(LlvmPackage.Literals.STORE__NEWVALUE);
-			childrenFeatures.add(LlvmPackage.Literals.STORE__NEWELEMENT);
 			childrenFeatures.add(LlvmPackage.Literals.STORE__ADRESSTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.STORE__ADRESS);
 		}
@@ -189,7 +188,6 @@ public class StoreItemProvider
 			case LlvmPackage.STORE__NEWTYPE:
 			case LlvmPackage.STORE__TYPES:
 			case LlvmPackage.STORE__NEWVALUE:
-			case LlvmPackage.STORE__NEWELEMENT:
 			case LlvmPackage.STORE__ADRESSTYPE:
 			case LlvmPackage.STORE__ADRESS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
@@ -251,8 +249,8 @@ public class StoreItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.STORE__NEWELEMENT,
-				 LlvmFactory.eINSTANCE.createGetElementPtr()));
+				(LlvmPackage.Literals.STORE__NEWVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -288,6 +286,11 @@ public class StoreItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.STORE__ADRESS,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.STORE__ADRESS,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**

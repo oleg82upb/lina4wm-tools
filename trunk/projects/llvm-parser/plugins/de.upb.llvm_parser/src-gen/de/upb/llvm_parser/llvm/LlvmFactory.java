@@ -301,6 +301,24 @@ public interface LlvmFactory extends EFactory {
 	GetElementPtr createGetElementPtr();
 
 	/**
+	 * Returns a new object of class '<em>Get Element Ptr1</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Get Element Ptr1</em>'.
+	 * @generated
+	 */
+	GetElementPtr1 createGetElementPtr1();
+
+	/**
+	 * Returns a new object of class '<em>Get Element Ptr2</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Get Element Ptr2</em>'.
+	 * @generated
+	 */
+	GetElementPtr2 createGetElementPtr2();
+
+	/**
 	 * Returns a new object of class '<em>Extract Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

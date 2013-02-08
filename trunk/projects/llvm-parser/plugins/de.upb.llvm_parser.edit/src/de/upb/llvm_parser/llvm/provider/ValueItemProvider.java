@@ -63,31 +63,8 @@ public class ValueItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addPrimitivePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Primitive feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addPrimitivePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Value_primitive_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Value_primitive_feature", "_UI_Value_type"),
-				 LlvmPackage.Literals.VALUE__PRIMITIVE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -109,10 +86,7 @@ public class ValueItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Value)object).getPrimitive();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Value_type") :
-			getString("_UI_Value_type") + " " + label;
+		return getString("_UI_Value_type");
 	}
 
 	/**
@@ -125,12 +99,6 @@ public class ValueItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(Value.class)) {
-			case LlvmPackage.VALUE__PRIMITIVE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 

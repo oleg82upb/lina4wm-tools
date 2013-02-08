@@ -15,7 +15,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.upb.llvm_parser.llvm.Store#getNewtype <em>Newtype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Store#getTypes <em>Types</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Store#getNewvalue <em>Newvalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Store#getNewelement <em>Newelement</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Store#getAdresstype <em>Adresstype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Store#getAdress <em>Adress</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Store#getOrdering <em>Ordering</em>}</li>
@@ -95,32 +94,6 @@ public interface Store extends Instruction {
 	 * @generated
 	 */
 	void setNewvalue(Value value);
-
-	/**
-	 * Returns the value of the '<em><b>Newelement</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Newelement</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Newelement</em>' containment reference.
-	 * @see #setNewelement(GetElementPtr)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getStore_Newelement()
-	 * @model containment="true"
-	 * @generated
-	 */
-	GetElementPtr getNewelement();
-
-	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Store#getNewelement <em>Newelement</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Newelement</em>' containment reference.
-	 * @see #getNewelement()
-	 * @generated
-	 */
-	void setNewelement(GetElementPtr value);
 
 	/**
 	 * Returns the value of the '<em><b>Adresstype</b></em>' containment reference.

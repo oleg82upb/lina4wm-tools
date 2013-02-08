@@ -191,6 +191,11 @@ public class ShuffleVectorItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1VALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2TYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -226,6 +231,11 @@ public class ShuffleVectorItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2VALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.SHUFFLE_VECTOR__MASKTYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -258,6 +268,11 @@ public class ShuffleVectorItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.SHUFFLE_VECTOR__MASKVALUE,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SHUFFLE_VECTOR__MASKVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**

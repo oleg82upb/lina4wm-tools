@@ -716,6 +716,52 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.GetElementPtr1} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected GetElementPtr1ItemProvider getElementPtr1ItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.GetElementPtr1}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createGetElementPtr1Adapter() {
+		if (getElementPtr1ItemProvider == null) {
+			getElementPtr1ItemProvider = new GetElementPtr1ItemProvider(this);
+		}
+
+		return getElementPtr1ItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.GetElementPtr2} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected GetElementPtr2ItemProvider getElementPtr2ItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.GetElementPtr2}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createGetElementPtr2Adapter() {
+		if (getElementPtr2ItemProvider == null) {
+			getElementPtr2ItemProvider = new GetElementPtr2ItemProvider(this);
+		}
+
+		return getElementPtr2ItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.ExtractValue} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1558,6 +1604,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 		if (logicaL_OPItemProvider != null) logicaL_OPItemProvider.dispose();
 		if (castItemProvider != null) castItemProvider.dispose();
 		if (getElementPtrItemProvider != null) getElementPtrItemProvider.dispose();
+		if (getElementPtr1ItemProvider != null) getElementPtr1ItemProvider.dispose();
+		if (getElementPtr2ItemProvider != null) getElementPtr2ItemProvider.dispose();
 		if (extractValueItemProvider != null) extractValueItemProvider.dispose();
 		if (insertValueItemProvider != null) insertValueItemProvider.dispose();
 		if (fenceItemProvider != null) fenceItemProvider.dispose();

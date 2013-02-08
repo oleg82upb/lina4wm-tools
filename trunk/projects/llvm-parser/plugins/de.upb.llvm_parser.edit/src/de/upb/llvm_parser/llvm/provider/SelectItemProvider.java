@@ -191,6 +191,11 @@ public class SelectItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.SELECT__CONDITIONVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.SELECT__VAL1TYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -226,6 +231,11 @@ public class SelectItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.SELECT__VAL1VALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.SELECT__VAL2TYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -258,6 +268,11 @@ public class SelectItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.SELECT__VAL2VALUE,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SELECT__VAL2VALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**

@@ -205,6 +205,11 @@ public class InsertValueItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.INSERT_VALUE__VALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.INSERT_VALUE__INSERTTYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -237,6 +242,11 @@ public class InsertValueItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.INSERT_VALUE__INSERTVALUE,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.INSERT_VALUE__INSERTVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**

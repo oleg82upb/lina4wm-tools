@@ -185,6 +185,11 @@ public class IndirectBranchItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESS,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.INDIRECT_BRANCH__LLIST,
 				 LlvmFactory.eINSTANCE.createLabelList()));
 	}

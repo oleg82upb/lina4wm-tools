@@ -189,6 +189,11 @@ public class SwitchItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__COMPVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.SWITCH__DEFAULTTYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -221,6 +226,11 @@ public class SwitchItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.SWITCH__DEFAULTVALUE,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__DEFAULTVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 
 		newChildDescriptors.add
 			(createChildParameter

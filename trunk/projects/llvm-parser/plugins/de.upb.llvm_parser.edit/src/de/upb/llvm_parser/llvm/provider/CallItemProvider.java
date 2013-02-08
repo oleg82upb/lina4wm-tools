@@ -185,6 +185,11 @@ public class CallItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.CALL__ADRESS,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.CALL__PLIST,
 				 LlvmFactory.eINSTANCE.createParameterList()));
 	}

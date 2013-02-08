@@ -187,6 +187,11 @@ public class ExtractElementItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.EXTRACT_ELEMENT__VECTORVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.EXTRACT_ELEMENT__INDEXTYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -219,6 +224,11 @@ public class ExtractElementItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.EXTRACT_ELEMENT__INDEX,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.EXTRACT_ELEMENT__INDEX,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**

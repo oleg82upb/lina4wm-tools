@@ -206,6 +206,16 @@ public class InstructionUseItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSTRUCTION_USE__INSTRUCTION,
+				 LlvmFactory.eINSTANCE.createGetElementPtr1()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.INSTRUCTION_USE__INSTRUCTION,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.INSTRUCTION_USE__INSTRUCTION,
 				 LlvmFactory.eINSTANCE.createExtractValue()));
 
 		newChildDescriptors.add

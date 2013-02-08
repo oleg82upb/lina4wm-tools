@@ -180,6 +180,11 @@ public class ReturnItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.RETURN__RETURNVALUE,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.RETURN__RETURNVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 }

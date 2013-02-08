@@ -242,6 +242,11 @@ public class LoadItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.LOAD__ADRESS,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.LOAD__ADRESS,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 }

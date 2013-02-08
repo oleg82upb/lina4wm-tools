@@ -87,6 +87,8 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 			case LlvmPackage.LOGICAL_OP: return createLOGICAL_OP();
 			case LlvmPackage.CAST: return createCast();
 			case LlvmPackage.GET_ELEMENT_PTR: return createGetElementPtr();
+			case LlvmPackage.GET_ELEMENT_PTR1: return createGetElementPtr1();
+			case LlvmPackage.GET_ELEMENT_PTR2: return createGetElementPtr2();
 			case LlvmPackage.EXTRACT_VALUE: return createExtractValue();
 			case LlvmPackage.INSERT_VALUE: return createInsertValue();
 			case LlvmPackage.FENCE: return createFence();
@@ -428,6 +430,26 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 	public GetElementPtr createGetElementPtr() {
 		GetElementPtrImpl getElementPtr = new GetElementPtrImpl();
 		return getElementPtr;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GetElementPtr1 createGetElementPtr1() {
+		GetElementPtr1Impl getElementPtr1 = new GetElementPtr1Impl();
+		return getElementPtr1;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GetElementPtr2 createGetElementPtr2() {
+		GetElementPtr2Impl getElementPtr2 = new GetElementPtr2Impl();
+		return getElementPtr2;
 	}
 
 	/**

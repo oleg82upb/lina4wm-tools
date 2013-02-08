@@ -205,6 +205,11 @@ public class ExtractValueItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.EXTRACT_VALUE__VALUE,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.EXTRACT_VALUE__VALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 }

@@ -185,6 +185,11 @@ public class LOGICAL_OPItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.LOGICAL_OP__VALUE1,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.LOGICAL_OP__VALUE2,
 				 LlvmFactory.eINSTANCE.createValue()));
 
@@ -202,6 +207,11 @@ public class LOGICAL_OPItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.LOGICAL_OP__VALUE2,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.LOGICAL_OP__VALUE2,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**

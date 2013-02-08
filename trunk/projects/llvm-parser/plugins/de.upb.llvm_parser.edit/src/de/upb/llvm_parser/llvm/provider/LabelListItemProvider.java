@@ -183,6 +183,11 @@ public class LabelListItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.LABEL_LIST__LABELS,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.LABEL_LIST__LABELS,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**

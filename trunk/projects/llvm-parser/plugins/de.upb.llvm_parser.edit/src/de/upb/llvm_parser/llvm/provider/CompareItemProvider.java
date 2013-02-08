@@ -185,6 +185,11 @@ public class CompareItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.COMPARE__VALUE1,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.COMPARE__VALUE2,
 				 LlvmFactory.eINSTANCE.createValue()));
 
@@ -202,6 +207,11 @@ public class CompareItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.COMPARE__VALUE2,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.COMPARE__VALUE2,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**
