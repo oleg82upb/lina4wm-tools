@@ -192,6 +192,14 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 				return createGetElementPtrAdapter();
 			}
 			@Override
+			public Adapter caseGetElementPtr1(GetElementPtr1 object) {
+				return createGetElementPtr1Adapter();
+			}
+			@Override
+			public Adapter caseGetElementPtr2(GetElementPtr2 object) {
+				return createGetElementPtr2Adapter();
+			}
+			@Override
 			public Adapter caseExtractValue(ExtractValue object) {
 				return createExtractValueAdapter();
 			}
@@ -754,6 +762,34 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createGetElementPtrAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.GetElementPtr1 <em>Get Element Ptr1</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.llvm_parser.llvm.GetElementPtr1
+	 * @generated
+	 */
+	public Adapter createGetElementPtr1Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.GetElementPtr2 <em>Get Element Ptr2</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.llvm_parser.llvm.GetElementPtr2
+	 * @generated
+	 */
+	public Adapter createGetElementPtr2Adapter() {
 		return null;
 	}
 

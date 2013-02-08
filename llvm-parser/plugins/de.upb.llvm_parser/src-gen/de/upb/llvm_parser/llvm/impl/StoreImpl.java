@@ -2,7 +2,6 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
-import de.upb.llvm_parser.llvm.GetElementPtr;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.TypeList;
@@ -34,7 +33,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.upb.llvm_parser.llvm.impl.StoreImpl#getNewtype <em>Newtype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.StoreImpl#getTypes <em>Types</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.StoreImpl#getNewvalue <em>Newvalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.StoreImpl#getNewelement <em>Newelement</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.StoreImpl#getAdresstype <em>Adresstype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.StoreImpl#getAdress <em>Adress</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.StoreImpl#getOrdering <em>Ordering</em>}</li>
@@ -74,16 +72,6 @@ public class StoreImpl extends InstructionImpl implements Store {
 	 * @ordered
 	 */
 	protected Value newvalue;
-
-	/**
-	 * The cached value of the '{@link #getNewelement() <em>Newelement</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getNewelement()
-	 * @generated
-	 * @ordered
-	 */
-	protected GetElementPtr newelement;
 
 	/**
 	 * The cached value of the '{@link #getAdresstype() <em>Adresstype</em>}' containment reference.
@@ -267,49 +255,6 @@ public class StoreImpl extends InstructionImpl implements Store {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GetElementPtr getNewelement() {
-		return newelement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetNewelement(GetElementPtr newNewelement, NotificationChain msgs) {
-		GetElementPtr oldNewelement = newelement;
-		newelement = newNewelement;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.STORE__NEWELEMENT, oldNewelement, newNewelement);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setNewelement(GetElementPtr newNewelement) {
-		if (newNewelement != newelement) {
-			NotificationChain msgs = null;
-			if (newelement != null)
-				msgs = ((InternalEObject)newelement).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.STORE__NEWELEMENT, null, msgs);
-			if (newNewelement != null)
-				msgs = ((InternalEObject)newNewelement).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.STORE__NEWELEMENT, null, msgs);
-			msgs = basicSetNewelement(newNewelement, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.STORE__NEWELEMENT, newNewelement, newNewelement));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public TypeUse getAdresstype() {
 		return adresstype;
 	}
@@ -447,8 +392,6 @@ public class StoreImpl extends InstructionImpl implements Store {
 				return ((InternalEList<?>)getTypes()).basicRemove(otherEnd, msgs);
 			case LlvmPackage.STORE__NEWVALUE:
 				return basicSetNewvalue(null, msgs);
-			case LlvmPackage.STORE__NEWELEMENT:
-				return basicSetNewelement(null, msgs);
 			case LlvmPackage.STORE__ADRESSTYPE:
 				return basicSetAdresstype(null, msgs);
 			case LlvmPackage.STORE__ADRESS:
@@ -471,8 +414,6 @@ public class StoreImpl extends InstructionImpl implements Store {
 				return getTypes();
 			case LlvmPackage.STORE__NEWVALUE:
 				return getNewvalue();
-			case LlvmPackage.STORE__NEWELEMENT:
-				return getNewelement();
 			case LlvmPackage.STORE__ADRESSTYPE:
 				return getAdresstype();
 			case LlvmPackage.STORE__ADRESS:
@@ -503,9 +444,6 @@ public class StoreImpl extends InstructionImpl implements Store {
 				return;
 			case LlvmPackage.STORE__NEWVALUE:
 				setNewvalue((Value)newValue);
-				return;
-			case LlvmPackage.STORE__NEWELEMENT:
-				setNewelement((GetElementPtr)newValue);
 				return;
 			case LlvmPackage.STORE__ADRESSTYPE:
 				setAdresstype((TypeUse)newValue);
@@ -540,9 +478,6 @@ public class StoreImpl extends InstructionImpl implements Store {
 			case LlvmPackage.STORE__NEWVALUE:
 				setNewvalue((Value)null);
 				return;
-			case LlvmPackage.STORE__NEWELEMENT:
-				setNewelement((GetElementPtr)null);
-				return;
 			case LlvmPackage.STORE__ADRESSTYPE:
 				setAdresstype((TypeUse)null);
 				return;
@@ -573,8 +508,6 @@ public class StoreImpl extends InstructionImpl implements Store {
 				return types != null && !types.isEmpty();
 			case LlvmPackage.STORE__NEWVALUE:
 				return newvalue != null;
-			case LlvmPackage.STORE__NEWELEMENT:
-				return newelement != null;
 			case LlvmPackage.STORE__ADRESSTYPE:
 				return adresstype != null;
 			case LlvmPackage.STORE__ADRESS:

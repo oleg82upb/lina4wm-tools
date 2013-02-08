@@ -194,6 +194,11 @@ public class AliasDefinitionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.ALIAS_DEFINITION__ALIASVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.ALIAS_DEFINITION__ALIASEE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 

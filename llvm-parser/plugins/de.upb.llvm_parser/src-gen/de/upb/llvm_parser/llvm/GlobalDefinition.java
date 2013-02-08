@@ -84,12 +84,12 @@ public interface GlobalDefinition extends MainLevelEntity {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(Value)
+	 * @see #setValue(EObject)
 	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getGlobalDefinition_Value()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Value getValue();
+	EObject getValue();
 
 	/**
 	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.GlobalDefinition#getValue <em>Value</em>}' containment reference.
@@ -99,6 +99,6 @@ public interface GlobalDefinition extends MainLevelEntity {
 	 * @see #getValue()
 	 * @generated
 	 */
-	void setValue(Value value);
+	void setValue(EObject value);
 
 } // GlobalDefinition

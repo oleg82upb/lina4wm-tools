@@ -222,6 +222,11 @@ public class CmpXchgItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.CMP_XCHG__ADRESS,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.CMP_XCHG__COMPARETYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -257,6 +262,11 @@ public class CmpXchgItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.CMP_XCHG__COMPAREVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.CMP_XCHG__NEWTYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -289,6 +299,11 @@ public class CmpXchgItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.CMP_XCHG__NEWVALUE,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CMP_XCHG__NEWVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**

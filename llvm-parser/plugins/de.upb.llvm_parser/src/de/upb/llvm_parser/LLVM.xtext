@@ -26,11 +26,8 @@ terminal INT_TYPE:
 	'i' ('0'..'9')+ POINTER?;
 
 terminal STRING:
-	'"' ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '"' | "'" | '\\') | !('\\' | '"'))* '"' |
-	"'" ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '"' | "'" | '\\') | !('\\' | "'"))* "'";
-
-terminal CSTRING:
-	'c' STRING;
+	'c'?'"' ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '"' | "'" | '\\') | !('\\' | '"'))* '"' |
+	'c'?"'" ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '"' | "'" | '\\') | !('\\' | "'"))* "'";
 
 terminal OREST:
 	'(...)' POINTER?;
@@ -42,7 +39,7 @@ terminal POINTER:
 	'*'+;
 
 ID_FQN:
-	(ID | 'catch' | 'invoke' | 'resume' | 'switch' | 'true' | 'false') ('.' (ID | 'catch' | 'invoke' | 'resume' | 'switch' | 'true' | 'false'))*;
+	(INT_TYPE|ID | 'catch' | 'invoke' | 'resume' | 'switch' | 'true' | 'false') ('.' (INT_TYPE|ID | 'catch' | 'invoke' | 'resume' | 'switch' | 'true' | 'false'))*;
 
 AbstractElement:
 	TopLevelEntity SL_COMMENT? |
@@ -60,19 +57,21 @@ MainLevelEntity:
 	TypeDefinition
 	| GlobalDefinition
 	| FunctionDefinition
-	| AliasDefinition;
+	| AliasDefinition
+	| meta += MetadataValue;
 
 TypeDefinition:
 	(address=Address '=' (('type' (struct=Structure | Opaque))));
 
 GlobalDefinition:
-	adress=Address '=' (LINKAGE | 'global' | 'unnamed_addr' | 'constant')* type=(TypeUse | Aggregate_Types) value=Value
+	adress=Address '=' (LINKAGE | 'global' | 'unnamed_addr' | 'constant')* type = (TypeUse|Aggregate_Types) value=(ValueStruct|Value)?
 	(',' ALIGNMENT)?;
 
 FunctionDefinition:
 	('define' LINKAGE? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=(TypeUse)
 	address=Address pl=ParameterList 'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ALIGNMENT?
-	body=FunctionBody) | ('declare' LINKAGE? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=(TypeUse)
+	body=FunctionBody) | 
+	('declare' LINKAGE? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=(TypeUse)
 	address=Address (tList=TypeList | OREST) 'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ALIGNMENT?);
 
 AliasDefinition:
@@ -118,10 +117,10 @@ NonConstantValue:
 	name=VALID_ID (pointer=POINTER)?;
 
 Value:
-	Cast | Constant | NonConstantValue | primitive=(Primitive_Type | Initializers);
+	{Value} (STRING| Primitive_Type | Initializers) | Cast | GetElementPtr2 | Constant | NonConstantValue;
 
 ValueStruct:
-	'{' types+=TypeUse ('()*')? Value+=Value (',' types+=TypeUse ('()*')? Value+=Value) '}';
+	'{' types+=TypeUse ('()*')? value+=Value (',' types+=TypeUse ('()*')? value+=Value)* '}';
 
 Structure:
 	{Structure} '{' (types+=TypeUse (',' types+=TypeUse)*)? '}' POINTER?;
@@ -142,7 +141,7 @@ TypeList:
 FunctionBody:
 	meta+=MetadataValue*
 	'{' blocks+=BasicBlock+ '}'
-	meta+=MetadataValue*;
+	;
 
 BasicBlock:
 	(label=ID_FQN ':')
@@ -169,7 +168,7 @@ LOGICAL_OP:
 	('shl' | 'lshr' | 'ashr' | 'and' | 'or' | 'xor') optype=TypeUse value1=Value ',' value2=Value;
 
 Cast:
-	Cast_OP (('(' from=TypeUse value=Value 'to' to=TypeUse ')') | (from=TypeUse value=Value 'to' to=TypeUse));
+	Cast_OP (('(' from=(TypeUse|Aggregate_Types) value=Value 'to' to=TypeUse ')') | (from=(TypeUse|Aggregate_Types) value=Value 'to' to=TypeUse));
 
 MetadataValue:
 	(('!' INT) | ('!{' ID_FQN '}') | ('!' ID_FQN))
@@ -184,10 +183,17 @@ ALIGNMENT:
 ;
 
 GetElementPtr:
-	'getelementptr' 'inbounds'? '('? ((elementtype=TypeUse (types=TypeList)? | elementarray=Array) element=Value (','
-	indicetypes+=TypeUse
-	indices+=Value)*);
-
+	GetElementPtr1 | GetElementPtr2
+	; 
+GetElementPtr1:
+	'getelementptr' 'inbounds'? 
+		(aggregate=(TypeUse|Array) aggregatename=Value(',' indTypes+=TypeUse indizies+=Value)*)
+;
+GetElementPtr2:
+	'getelementptr' 'inbounds'? 
+		('('aggregate=(TypeUse|Array) aggregatename=Value(',' indTypes+=TypeUse indizies+=Value)*')')
+;
+	
 ExtractValue:
 	'extractvalue' (array=Array | struct=Structure) value=Value (',' index+=INT)+;
 
@@ -213,9 +219,10 @@ Load:
 	index=INT)?;
 
 Store:
-	'store' 'volatile'? newtype=(TypeUse) (types+=TypeList)? (newvalue=Value | newelement=GetElementPtr ')') ','
+	'store' 'volatile'? newtype=(TypeUse) (types+=TypeList)? (newvalue=Value) ','
 	adresstype=TypeUse (types+=TypeList)? adress=Value (',' ((ALIGNMENT) |
-	(MetadataValue)+))* |
+	(MetadataValue)+))* 
+	|
 	'store' 'atomic' 'volatile'? newtype=TypeUse (types+=TypeList)? newvalue=Value ',' adresstype=TypeUse
 	(types+=TypeList)? adress=Value 'singlethread'?
 	ordering=ATOMIC_ORDERING (','

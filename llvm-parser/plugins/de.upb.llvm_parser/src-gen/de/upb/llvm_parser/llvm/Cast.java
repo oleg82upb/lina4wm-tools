@@ -2,6 +2,7 @@
  */
 package de.upb.llvm_parser.llvm;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,12 +32,12 @@ public interface Cast extends Value, Instruction {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>From</em>' containment reference.
-	 * @see #setFrom(TypeUse)
+	 * @see #setFrom(EObject)
 	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCast_From()
 	 * @model containment="true"
 	 * @generated
 	 */
-	TypeUse getFrom();
+	EObject getFrom();
 
 	/**
 	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Cast#getFrom <em>From</em>}' containment reference.
@@ -46,7 +47,7 @@ public interface Cast extends Value, Instruction {
 	 * @see #getFrom()
 	 * @generated
 	 */
-	void setFrom(TypeUse value);
+	void setFrom(EObject value);
 
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' containment reference.

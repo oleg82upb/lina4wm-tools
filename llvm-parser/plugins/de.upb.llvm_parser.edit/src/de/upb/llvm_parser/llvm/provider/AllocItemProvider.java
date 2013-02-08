@@ -204,6 +204,11 @@ public class AllocItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.ALLOC__NUMELEMENTSVALUE,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.ALLOC__NUMELEMENTSVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**

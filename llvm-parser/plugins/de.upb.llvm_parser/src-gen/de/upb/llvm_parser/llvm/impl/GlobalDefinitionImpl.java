@@ -5,7 +5,6 @@ package de.upb.llvm_parser.llvm.impl;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.GlobalDefinition;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.Value;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -60,7 +59,7 @@ public class GlobalDefinitionImpl extends MainLevelEntityImpl implements GlobalD
 	 * @generated
 	 * @ordered
 	 */
-	protected Value value;
+	protected EObject value;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -172,7 +171,7 @@ public class GlobalDefinitionImpl extends MainLevelEntityImpl implements GlobalD
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Value getValue() {
+	public EObject getValue() {
 		return value;
 	}
 
@@ -181,8 +180,8 @@ public class GlobalDefinitionImpl extends MainLevelEntityImpl implements GlobalD
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValue(Value newValue, NotificationChain msgs) {
-		Value oldValue = value;
+	public NotificationChain basicSetValue(EObject newValue, NotificationChain msgs) {
+		EObject oldValue = value;
 		value = newValue;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.GLOBAL_DEFINITION__VALUE, oldValue, newValue);
@@ -196,7 +195,7 @@ public class GlobalDefinitionImpl extends MainLevelEntityImpl implements GlobalD
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(Value newValue) {
+	public void setValue(EObject newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;
 			if (value != null)
@@ -261,7 +260,7 @@ public class GlobalDefinitionImpl extends MainLevelEntityImpl implements GlobalD
 				setType((EObject)newValue);
 				return;
 			case LlvmPackage.GLOBAL_DEFINITION__VALUE:
-				setValue((Value)newValue);
+				setValue((EObject)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -282,7 +281,7 @@ public class GlobalDefinitionImpl extends MainLevelEntityImpl implements GlobalD
 				setType((EObject)null);
 				return;
 			case LlvmPackage.GLOBAL_DEFINITION__VALUE:
-				setValue((Value)null);
+				setValue((EObject)null);
 				return;
 		}
 		super.eUnset(featureID);

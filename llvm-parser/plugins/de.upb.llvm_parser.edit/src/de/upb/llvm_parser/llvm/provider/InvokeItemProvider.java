@@ -218,6 +218,11 @@ public class InvokeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.INVOKE__TOVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.INVOKE__UNWINDTYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -250,6 +255,11 @@ public class InvokeItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.INVOKE__UNWINDVALUE,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.INVOKE__UNWINDVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**

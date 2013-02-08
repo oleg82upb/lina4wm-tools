@@ -190,6 +190,11 @@ public class ClauseItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.CLAUSE__VALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.CLAUSE__FILTERARRAY,
 				 LlvmFactory.eINSTANCE.createArray()));
 
@@ -212,6 +217,11 @@ public class ClauseItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.CLAUSE__CONSTANT,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CLAUSE__CONSTANT,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**

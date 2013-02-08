@@ -192,6 +192,11 @@ public class LandingPadItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.LANDING_PAD__PERSONALITYVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.LANDING_PAD__CLAUSE,
 				 LlvmFactory.eINSTANCE.createClause()));
 	}

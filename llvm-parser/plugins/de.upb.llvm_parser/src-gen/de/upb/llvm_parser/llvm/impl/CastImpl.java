@@ -11,6 +11,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -39,7 +40,7 @@ public class CastImpl extends ValueImpl implements Cast {
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeUse from;
+	protected EObject from;
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
@@ -85,7 +86,7 @@ public class CastImpl extends ValueImpl implements Cast {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeUse getFrom() {
+	public EObject getFrom() {
 		return from;
 	}
 
@@ -94,8 +95,8 @@ public class CastImpl extends ValueImpl implements Cast {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetFrom(TypeUse newFrom, NotificationChain msgs) {
-		TypeUse oldFrom = from;
+	public NotificationChain basicSetFrom(EObject newFrom, NotificationChain msgs) {
+		EObject oldFrom = from;
 		from = newFrom;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.CAST__FROM, oldFrom, newFrom);
@@ -109,7 +110,7 @@ public class CastImpl extends ValueImpl implements Cast {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFrom(TypeUse newFrom) {
+	public void setFrom(EObject newFrom) {
 		if (newFrom != from) {
 			NotificationChain msgs = null;
 			if (from != null)
@@ -254,7 +255,7 @@ public class CastImpl extends ValueImpl implements Cast {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case LlvmPackage.CAST__FROM:
-				setFrom((TypeUse)newValue);
+				setFrom((EObject)newValue);
 				return;
 			case LlvmPackage.CAST__VALUE:
 				setValue((Value)newValue);
@@ -275,7 +276,7 @@ public class CastImpl extends ValueImpl implements Cast {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case LlvmPackage.CAST__FROM:
-				setFrom((TypeUse)null);
+				setFrom((EObject)null);
 				return;
 			case LlvmPackage.CAST__VALUE:
 				setValue((Value)null);

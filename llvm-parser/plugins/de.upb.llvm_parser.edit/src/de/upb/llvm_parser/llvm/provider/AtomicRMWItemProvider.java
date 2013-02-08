@@ -218,6 +218,11 @@ public class AtomicRMWItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.ATOMIC_RMW__ADRESS,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.ATOMIC_RMW__OPTYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -250,6 +255,11 @@ public class AtomicRMWItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.ATOMIC_RMW__OPVALUE,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.ATOMIC_RMW__OPVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**

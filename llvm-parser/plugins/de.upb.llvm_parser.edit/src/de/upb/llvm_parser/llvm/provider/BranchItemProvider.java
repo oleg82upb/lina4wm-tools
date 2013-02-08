@@ -176,6 +176,11 @@ public class BranchItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.BRANCH__DESTINATION,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.BRANCH__CONDVALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
@@ -193,6 +198,11 @@ public class BranchItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.BRANCH__CONDVALUE,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.BRANCH__CONDVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -231,6 +241,11 @@ public class BranchItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.BRANCH__LABEL_TRUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.BRANCH__LABEL_FALSETYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -263,6 +278,11 @@ public class BranchItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.BRANCH__LABEL_FALSE,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.BRANCH__LABEL_FALSE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**

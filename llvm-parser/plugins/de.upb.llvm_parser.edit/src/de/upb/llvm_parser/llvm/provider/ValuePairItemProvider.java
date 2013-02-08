@@ -171,6 +171,11 @@ public class ValuePairItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.VALUE_PAIR__VALUE1,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.VALUE_PAIR__VALUE2,
 				 LlvmFactory.eINSTANCE.createValue()));
 
@@ -188,6 +193,11 @@ public class ValuePairItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.VALUE_PAIR__VALUE2,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.VALUE_PAIR__VALUE2,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**

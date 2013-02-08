@@ -15,12 +15,14 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -74,12 +76,10 @@ public class GetElementPtrItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(LlvmPackage.Literals.GET_ELEMENT_PTR__ELEMENTTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.GET_ELEMENT_PTR__TYPES);
-			childrenFeatures.add(LlvmPackage.Literals.GET_ELEMENT_PTR__ELEMENTARRAY);
-			childrenFeatures.add(LlvmPackage.Literals.GET_ELEMENT_PTR__ELEMENT);
-			childrenFeatures.add(LlvmPackage.Literals.GET_ELEMENT_PTR__INDICETYPES);
-			childrenFeatures.add(LlvmPackage.Literals.GET_ELEMENT_PTR__INDICES);
+			childrenFeatures.add(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE);
+			childrenFeatures.add(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATENAME);
+			childrenFeatures.add(LlvmPackage.Literals.GET_ELEMENT_PTR__IND_TYPES);
+			childrenFeatures.add(LlvmPackage.Literals.GET_ELEMENT_PTR__INDIZIES);
 		}
 		return childrenFeatures;
 	}
@@ -131,12 +131,10 @@ public class GetElementPtrItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(GetElementPtr.class)) {
-			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTTYPE:
-			case LlvmPackage.GET_ELEMENT_PTR__TYPES:
-			case LlvmPackage.GET_ELEMENT_PTR__ELEMENTARRAY:
-			case LlvmPackage.GET_ELEMENT_PTR__ELEMENT:
-			case LlvmPackage.GET_ELEMENT_PTR__INDICETYPES:
-			case LlvmPackage.GET_ELEMENT_PTR__INDICES:
+			case LlvmPackage.GET_ELEMENT_PTR__AGGREGATE:
+			case LlvmPackage.GET_ELEMENT_PTR__AGGREGATENAME:
+			case LlvmPackage.GET_ELEMENT_PTR__IND_TYPES:
+			case LlvmPackage.GET_ELEMENT_PTR__INDIZIES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -156,83 +154,373 @@ public class GetElementPtrItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__ELEMENTTYPE,
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createLLVM()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createAbstractElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createTopLevelEntity()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createMainLevelEntity()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createTypeDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createGlobalDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createFunctionDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createAliasDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__ELEMENTTYPE,
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createAddressUse()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__ELEMENTTYPE,
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createAddress()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createPredefined()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__TYPES,
-				 LlvmFactory.eINSTANCE.createTypeList()));
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createAggregate_Types()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__ELEMENTARRAY,
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createVector()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createArray()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__ELEMENT,
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__ELEMENT,
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createConstant()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__ELEMENT,
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createNonConstantValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__ELEMENT,
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createValueStruct()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createStructure()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createParameterList()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createTypeList()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createFunctionBody()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createBasicBlock()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createInstructionUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createRet_Instr()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createInstruction()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createARITHMETIC_OP()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createLOGICAL_OP()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__INDICETYPES,
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr1()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createExtractValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createInsertValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createFence()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createCmpXchg()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createAtomicRMW()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createLoad()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createStore()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createAlloc()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createPHI()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createValuePair()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createLandingPad()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createClause()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createSelect()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createVA_Arg()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createExtractElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createInsertElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createShuffleVector()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createCompare()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createIndirectBranch()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createLabelList()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createSwitch()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createJumpTable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createInvoke()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createResume()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createUnreachable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createReturn()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createBranch()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATENAME,
+				 LlvmFactory.eINSTANCE.createValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATENAME,
+				 LlvmFactory.eINSTANCE.createConstant()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATENAME,
+				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATENAME,
+				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATENAME,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__IND_TYPES,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__INDICETYPES,
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__IND_TYPES,
 				 LlvmFactory.eINSTANCE.createAddressUse()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__INDICETYPES,
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__IND_TYPES,
 				 LlvmFactory.eINSTANCE.createPredefined()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__INDICES,
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__INDIZIES,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__INDICES,
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__INDIZIES,
 				 LlvmFactory.eINSTANCE.createConstant()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__INDICES,
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__INDIZIES,
 				 LlvmFactory.eINSTANCE.createNonConstantValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__INDICES,
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__INDIZIES,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__INDIZIES,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**
@@ -247,10 +535,10 @@ public class GetElementPtrItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == LlvmPackage.Literals.GET_ELEMENT_PTR__ELEMENTTYPE ||
-			childFeature == LlvmPackage.Literals.GET_ELEMENT_PTR__INDICETYPES ||
-			childFeature == LlvmPackage.Literals.GET_ELEMENT_PTR__ELEMENT ||
-			childFeature == LlvmPackage.Literals.GET_ELEMENT_PTR__INDICES;
+			childFeature == LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE ||
+			childFeature == LlvmPackage.Literals.GET_ELEMENT_PTR__IND_TYPES ||
+			childFeature == LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATENAME ||
+			childFeature == LlvmPackage.Literals.GET_ELEMENT_PTR__INDIZIES;
 
 		if (qualify) {
 			return getString

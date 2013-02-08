@@ -170,6 +170,11 @@ public class ResumeItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.RESUME__RESUMEVALUE,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.RESUME__RESUMEVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 }

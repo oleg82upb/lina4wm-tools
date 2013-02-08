@@ -191,6 +191,11 @@ public class InsertElementItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.INSERT_ELEMENT__VECTORVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.INSERT_ELEMENT__SCALARTYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -226,6 +231,11 @@ public class InsertElementItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.INSERT_ELEMENT__SCALARVALUE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.INSERT_ELEMENT__INDEXTYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -258,6 +268,11 @@ public class InsertElementItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.INSERT_ELEMENT__INDEX,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.INSERT_ELEMENT__INDEX,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**

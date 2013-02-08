@@ -190,6 +190,11 @@ public class JumpTableItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.JUMP_TABLE__JVALUES,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.JUMP_TABLE__DESTINATIONTYPES,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -222,6 +227,11 @@ public class JumpTableItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.JUMP_TABLE__DESTINATIONS,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.JUMP_TABLE__DESTINATIONS,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**

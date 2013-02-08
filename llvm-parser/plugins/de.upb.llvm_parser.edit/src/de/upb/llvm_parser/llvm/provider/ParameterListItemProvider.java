@@ -190,6 +190,11 @@ public class ParameterListItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.PARAMETER_LIST__VARIABLES,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER_LIST__VARIABLES,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**

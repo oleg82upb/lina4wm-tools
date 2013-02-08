@@ -274,6 +274,23 @@ public class LlvmSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case LlvmPackage.GET_ELEMENT_PTR1: {
+				GetElementPtr1 getElementPtr1 = (GetElementPtr1)theEObject;
+				T result = caseGetElementPtr1(getElementPtr1);
+				if (result == null) result = caseGetElementPtr(getElementPtr1);
+				if (result == null) result = caseInstruction(getElementPtr1);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.GET_ELEMENT_PTR2: {
+				GetElementPtr2 getElementPtr2 = (GetElementPtr2)theEObject;
+				T result = caseGetElementPtr2(getElementPtr2);
+				if (result == null) result = caseValue(getElementPtr2);
+				if (result == null) result = caseGetElementPtr(getElementPtr2);
+				if (result == null) result = caseInstruction(getElementPtr2);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case LlvmPackage.EXTRACT_VALUE: {
 				ExtractValue extractValue = (ExtractValue)theEObject;
 				T result = caseExtractValue(extractValue);
@@ -932,6 +949,36 @@ public class LlvmSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseGetElementPtr(GetElementPtr object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Get Element Ptr1</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Get Element Ptr1</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGetElementPtr1(GetElementPtr1 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Get Element Ptr2</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Get Element Ptr2</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGetElementPtr2(GetElementPtr2 object) {
 		return null;
 	}
 
