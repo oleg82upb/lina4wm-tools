@@ -1,4 +1,4 @@
-#define BUFF_SIZE 7 	//size of Buffer
+#define BUFF_SIZE 10 	//size of Buffer
 #define MEM_SIZE 40	//size of memory
  
 //-----------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,158 @@
+proc	from	trans	to	src	stmnt
+name	state	id	state
+
+bufferProcess	105	[64]	7	stack.pml:167	channel?iWrite,address,value,_
+bufferProcess	105	[66]	33	stack.pml:167	channel?iRead,address,value,_
+bufferProcess	105	[76]	46	stack.pml:167	(!(isEmpty))
+bufferProcess	105	[81]	69	stack.pml:167	channel?iMfence,_,_,_
+bufferProcess	105	[88]	102	stack.pml:167	channel?iCas,address,old,new
+bufferProcess	7	[65]	105	stack.pml:54	assert(!(((((tail+1)%7)==head)&&!(isEmpty))))
+bufferProcess	33	[67]	15	stack.pml:64	i = tail
+bufferProcess	15	[68]	30	stack.pml:65	(((tail<head)&&!(isEmpty)))
+bufferProcess	15	[2]	14	stack.pml:65	else
+bufferProcess	30	[69]	24	stack.pml:70	((i>=head))
+bufferProcess	30	[2]	27	stack.pml:70	else
+bufferProcess	24	[70]	19	stack.pml:73	((buffer[(i%7)].line[0]==address))
+bufferProcess	24	[2]	23	stack.pml:73	else
+bufferProcess	19	[71]	20	stack.pml:74	channel!iRead,address,buffer[(i%7)].line[1],0
+bufferProcess	20	[72]	32	stack.pml:75	i = 0
+bufferProcess	32	[1]	105	stack.pml:69	break
+bufferProcess	23	[73]	30	stack.pml:77	i = (i-1)
+bufferProcess	27	[74]	28	stack.pml:81	channel!iRead,address,memory[address],0
+bufferProcess	28	[75]	32	stack.pml:82	i = 0
+bufferProcess	14	[1]	30	stack.pml:66	(1)
+bufferProcess	46	[77]	44	stack.pml:90	memory[buffer[head].line[0]] = buffer[head].line[1]
+bufferProcess	44	[78]	105	stack.pml:99	((head==((tail+1)%7)))
+bufferProcess	44	[2]	43	stack.pml:99	else
+bufferProcess	43	[80]	105	stack.pml:100	(1)
+bufferProcess	69	[82]	68	stack.pml:108	(isEmpty)
+bufferProcess	69	[2]	62	stack.pml:108	else
+bufferProcess	68	[1]	105	stack.pml:105	break
+bufferProcess	62	[84]	60	stack.pml:90	memory[buffer[head].line[0]] = buffer[head].line[1]
+bufferProcess	60	[85]	66	stack.pml:99	((head==((tail+1)%7)))
+bufferProcess	60	[2]	59	stack.pml:99	else
+bufferProcess	66	[82]	68	stack.pml:108	(isEmpty)
+bufferProcess	66	[2]	62	stack.pml:108	else
+bufferProcess	59	[87]	66	stack.pml:100	(1)
+bufferProcess	102	[89]	90	stack.pml:108	(isEmpty)
+bufferProcess	102	[2]	84	stack.pml:108	else
+bufferProcess	90	[1]	101	stack.pml:105	break
+bufferProcess	101	[95]	98	stack.pml:120	result = 0
+bufferProcess	98	[96]	100	stack.pml:121	((memory[address]==old))
+bufferProcess	98	[2]	97	stack.pml:121	else
+bufferProcess	100	[99]	105	stack.pml:127	channel!iCas,address,result,0
+bufferProcess	97	[98]	100	stack.pml:124	(1)
+bufferProcess	84	[91]	82	stack.pml:90	memory[buffer[head].line[0]] = buffer[head].line[1]
+bufferProcess	82	[92]	88	stack.pml:99	((head==((tail+1)%7)))
+bufferProcess	82	[2]	81	stack.pml:99	else
+bufferProcess	88	[89]	90	stack.pml:108	(isEmpty)
+bufferProcess	88	[2]	84	stack.pml:108	else
+bufferProcess	81	[94]	88	stack.pml:100	(1)
+
+process1	151	[10]	39	stack.pml:188	retval = 0
+process1	39	[11]	28	stack.pml:116	retval = memUse
+process1	28	[12]	33	stack.pml:116	thisAddr = memUse
+process1	33	[13]	38	stack.pml:116	ss = memUse
+process1	38	[14]	41	stack.pml:116	ssn = memUse
+process1	41	[15]	47	stack.pml:20	ch!iWrite,thisAddr,this,0
+process1	47	[16]	43	stack.pml:27	readValue = 0
+process1	43	[17]	44	stack.pml:27	ch!iRead,thisAddr,0,0
+process1	44	[18]	51	stack.pml:28	ch?iRead,thisAddr,readValue,0
+process1	51	[19]	64	stack.pml:107	assert((0<=0))
+process1	64	[20]	53	stack.pml:49	readValue = 0
+process1	53	[21]	54	stack.pml:49	ch!iRead,head,0,0
+process1	54	[22]	61	stack.pml:50	ch?iRead,head,readValue,0
+process1	61	[23]	58	stack.pml:53	((readValue==0))
+process1	61	[2]	60	stack.pml:53	else
+process1	58	[24]	66	stack.pml:31	assert((asTop==0))
+process1	66	[27]	72	stack.pml:20	ch!iWrite,ss,v0,0
+process1	72	[28]	68	stack.pml:27	readValue = 0
+process1	68	[29]	69	stack.pml:27	ch!iRead,ss,0,0
+process1	69	[30]	79	stack.pml:28	ch?iRead,ss,readValue,0
+process1	79	[31]	75	stack.pml:207	((v1==0))
+process1	79	[2]	78	stack.pml:207	else
+process1	75	[32]	142	stack.pml:20	ch!iWrite,retval,0,0
+process1	142	[56]	138	stack.pml:27	readValue = 0
+process1	138	[57]	139	stack.pml:27	ch!iRead,ss,0,0
+process1	139	[58]	144	stack.pml:28	ch?iRead,ss,readValue,0
+process1	144	[59]	150	stack.pml:20	ch!iWrite,retval,v11,0
+process1	150	[60]	146	stack.pml:27	readValue = 0
+process1	146	[61]	147	stack.pml:27	ch!iRead,retval,0,0
+process1	147	[62]	152	stack.pml:28	ch?iRead,retval,readValue,0
+process1	152	[63]	0	stack.pml:244	-end-
+process1	78	[1]	86	stack.pml:209	(1)
+process1	86	[33]	82	stack.pml:27	readValue = 0
+process1	82	[34]	83	stack.pml:27	ch!iRead,ss,0,0
+process1	83	[35]	90	stack.pml:28	ch?iRead,ss,readValue,0
+process1	90	[36]	96	stack.pml:107	assert((1<=1))
+process1	96	[37]	92	stack.pml:27	readValue = 0
+process1	92	[38]	93	stack.pml:27	ch!iRead,next,0,0
+process1	93	[39]	98	stack.pml:28	ch?iRead,next,readValue,0
+process1	98	[40]	102	stack.pml:20	ch!iWrite,ssn,v3,0
+process1	102	[41]	108	stack.pml:107	assert((0<=0))
+process1	108	[42]	104	stack.pml:27	readValue = 0
+process1	104	[43]	105	stack.pml:27	ch!iRead,ss,0,0
+process1	105	[44]	114	stack.pml:28	ch?iRead,ss,readValue,0
+process1	114	[45]	110	stack.pml:27	readValue = 0
+process1	110	[46]	111	stack.pml:27	ch!iRead,ssn,0,0
+process1	111	[47]	130	stack.pml:28	ch?iRead,ssn,readValue,0
+process1	130	[48]	116	stack.pml:63	success = 0
+process1	116	[49]	129	stack.pml:63	ch!iCas,head2,v5,v7
+process1	129	[50]	127	stack.pml:65	ch?iCas,head2,success,_
+process1	127	[51]	124	stack.pml:68	(success)
+process1	127	[2]	126	stack.pml:68	else
+process1	124	[52]	135	stack.pml:23	asTop = (asTop-1)
+process1	135	[55]	51	stack.pml:226	((v9==0))
+process1	135	[2]	134	stack.pml:226	else
+process1	134	[1]	142	stack.pml:227	(1)
+process1	126	[54]	135	stack.pml:69	(1)
+process1	60	[26]	66	stack.pml:54	(1)
+
+process2	1	[1]	2	stack.pml:251	(1)
+process2	2	[9]	0	stack.pml:252	-end-
+init
+process2	10	[3]	6	stack.pml:116	this = memUse
+process2	6	[4]	7	stack.pml:257	(run process1(channelT1))
+process2	7	[5]	8	stack.pml:258	(run bufferProcess(channelT1))
+process2	8	[6]	9	stack.pml:259	(run process2(channelT2))
+process2	9	[7]	11	stack.pml:260	(run bufferProcess(channelT2))
+process2	11	[8]	0	stack.pml:262	-end-
+
+      stmnt executed in each merge sequence is shown
+      (use spin -a -o3 to disable statement merging)
+
+To replay the error-trail, goto Simulate/Replay and select "Run"
+spin -a  stack.pml
+gcc -DMEMLIM=1024 -O2 -DXUSAFE -DSAFETY -DNOCLAIM -w -o pan pan.c
+./pan -m10000  -n
+Pid: 6212
+
+(Spin Version 6.2.1 -- 14 May 2012)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	- (not selected)
+	assertion violations	+
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	+
+
+State-vector 288 byte, depth reached 95, errors: 0
+       60 states, stored
+       20 states, matched
+       80 transitions (= stored+matched)
+      231 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.017	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.264	actual memory usage for states
+   64.000	memory used for hash table (-w24)
+    0.343	memory used for DFS stack (-m10000)
+   64.539	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+No errors found -- did you verify all claims?
+
+
