@@ -2,8 +2,8 @@
 	trying to specify the LLVM-compiled Treiber Stack implementation  
 */
 
-#define BUFF_SIZE 10 	//size of Buffer
-#define MEM_SIZE 40	//size of memory
+#define BUFF_SIZE 13 	//size of Buffer
+#define MEM_SIZE 43	//size of memory
  
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 #include "x86_tso_buffer.pml"
@@ -97,6 +97,9 @@ byte this; 		//Stack instance pointer
 
 chan channelT1 = [0] of {mtype, short, short, short};
 chan channelT2 = [0] of {mtype, short, short, short};
+chan channelT3 = [0] of {mtype, short, short, short};
+chan channelT4 = [0] of {mtype, short, short, short};
+
 
 inline getelementptr(type, instance, offset, targetRegister)
 {
@@ -185,7 +188,7 @@ doCond:
 
 inline pop(returnvalue)
 {
-	short retval, head, head2, thisAddr, ss, ssn, this1, v, v0, v1, v2, v3, v4, v5, v7, v9, v11, next;			//some more v_i still missing
+	short retval, head, head2, thisAddr, ss, ssn, this1, v0, v1, v2, v3, v4, v5, v7, v9, v11, next;			//some more v_i still missing
 	
 entry:
 atomic {
@@ -237,19 +240,42 @@ retLabel:
 
 proctype process1(chan ch){
 	short returnvalue;
-	pop(returnvalue);
-	push(this, 666);
 	//push(this, 333);
-	//pop(returnvalue);
+	//push(this, 111);
+	pop(returnvalue);
+	//push(this, 666);
+	pop(returnvalue);
+	pop(returnvalue);
+	//push(this, 777);
+	//push(this, 888);
+
 }
 
 proctype process2(chan ch){
-	//short returnValue;
+	//short returnvalue2;
 	//push(this, 555);
 	//push(this, 111);
-	//pop(returnValue);
+	//pop(returnvalue2);
+	//push(this, 999);
+	//pop(returnvalue2);
 	skip;
 }
+
+//proctype process3(chan ch){
+	//short returnValue;
+	//push(this, 555);
+	//push(this, 222);
+	//pop(returnValue);
+	//skip;
+//}
+
+//proctype process4(chan ch){
+	//short returnValue;
+	//push(this, 555);
+	//push(this, 444);
+	//pop(returnValue);
+	//skip;
+//}
 
 init{
 atomic{
@@ -258,5 +284,9 @@ atomic{
 	run bufferProcess(channelT1);
 	run process2(channelT2);
 	run bufferProcess(channelT2);
+	//run process3(channelT3);
+	//run bufferProcess(channelT3);
+	//run process4(channelT4);
+	//run bufferProcess(channelT4);
 	}
 }
