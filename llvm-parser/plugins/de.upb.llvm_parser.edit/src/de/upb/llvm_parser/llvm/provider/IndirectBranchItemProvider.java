@@ -76,7 +76,8 @@ public class IndirectBranchItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESSTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESS);
-			childrenFeatures.add(LlvmPackage.Literals.INDIRECT_BRANCH__LLIST);
+			childrenFeatures.add(LlvmPackage.Literals.INDIRECT_BRANCH__LABELTYPE);
+			childrenFeatures.add(LlvmPackage.Literals.INDIRECT_BRANCH__LABELS);
 		}
 		return childrenFeatures;
 	}
@@ -130,7 +131,8 @@ public class IndirectBranchItemProvider
 		switch (notification.getFeatureID(IndirectBranch.class)) {
 			case LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE:
 			case LlvmPackage.INDIRECT_BRANCH__ADRESS:
-			case LlvmPackage.INDIRECT_BRANCH__LLIST:
+			case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
+			case LlvmPackage.INDIRECT_BRANCH__LABELS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -190,8 +192,68 @@ public class IndirectBranchItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.INDIRECT_BRANCH__LLIST,
-				 LlvmFactory.eINSTANCE.createLabelList()));
+				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELTYPE,
+				 LlvmFactory.eINSTANCE.createTypeUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELTYPE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELTYPE,
+				 LlvmFactory.eINSTANCE.createPredefined()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELS,
+				 LlvmFactory.eINSTANCE.createValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELS,
+				 LlvmFactory.eINSTANCE.createConstant()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELS,
+				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELS,
+				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELS,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == LlvmPackage.Literals.INDIRECT_BRANCH__ADRESSTYPE ||
+			childFeature == LlvmPackage.Literals.INDIRECT_BRANCH__LABELTYPE ||
+			childFeature == LlvmPackage.Literals.INDIRECT_BRANCH__ADRESS ||
+			childFeature == LlvmPackage.Literals.INDIRECT_BRANCH__LABELS;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

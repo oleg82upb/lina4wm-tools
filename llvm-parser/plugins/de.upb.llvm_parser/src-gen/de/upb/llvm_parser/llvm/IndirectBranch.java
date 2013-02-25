@@ -2,6 +2,7 @@
  */
 package de.upb.llvm_parser.llvm;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -13,7 +14,8 @@ package de.upb.llvm_parser.llvm;
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.IndirectBranch#getAdresstype <em>Adresstype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.IndirectBranch#getAdress <em>Adress</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.IndirectBranch#getLList <em>LList</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.IndirectBranch#getLabeltype <em>Labeltype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.IndirectBranch#getLabels <em>Labels</em>}</li>
  * </ul>
  * </p>
  *
@@ -75,29 +77,35 @@ public interface IndirectBranch extends Ret_Instr {
 	void setAdress(Value value);
 
 	/**
-	 * Returns the value of the '<em><b>LList</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Labeltype</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.TypeUse}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>LList</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Labeltype</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>LList</em>' containment reference.
-	 * @see #setLList(LabelList)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getIndirectBranch_LList()
+	 * @return the value of the '<em>Labeltype</em>' containment reference list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getIndirectBranch_Labeltype()
 	 * @model containment="true"
 	 * @generated
 	 */
-	LabelList getLList();
+	EList<TypeUse> getLabeltype();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.IndirectBranch#getLList <em>LList</em>}' containment reference.
+	 * Returns the value of the '<em><b>Labels</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.Value}.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Labels</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>LList</em>' containment reference.
-	 * @see #getLList()
+	 * @return the value of the '<em>Labels</em>' containment reference list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getIndirectBranch_Labels()
+	 * @model containment="true"
 	 * @generated
 	 */
-	void setLList(LabelList value);
+	EList<Value> getLabels();
 
 } // IndirectBranch

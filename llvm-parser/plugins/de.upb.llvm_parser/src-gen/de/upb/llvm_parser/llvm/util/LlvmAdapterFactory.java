@@ -240,10 +240,6 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 				return createPHIAdapter();
 			}
 			@Override
-			public Adapter caseValuePair(ValuePair object) {
-				return createValuePairAdapter();
-			}
-			@Override
 			public Adapter caseLandingPad(LandingPad object) {
 				return createLandingPadAdapter();
 			}
@@ -280,16 +276,8 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 				return createIndirectBranchAdapter();
 			}
 			@Override
-			public Adapter caseLabelList(LabelList object) {
-				return createLabelListAdapter();
-			}
-			@Override
 			public Adapter caseSwitch(Switch object) {
 				return createSwitchAdapter();
-			}
-			@Override
-			public Adapter caseJumpTable(JumpTable object) {
-				return createJumpTableAdapter();
 			}
 			@Override
 			public Adapter caseInvoke(Invoke object) {
@@ -934,20 +922,6 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ValuePair <em>Value Pair</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.ValuePair
-	 * @generated
-	 */
-	public Adapter createValuePairAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.LandingPad <em>Landing Pad</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1074,20 +1048,6 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.LabelList <em>Label List</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.LabelList
-	 * @generated
-	 */
-	public Adapter createLabelListAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Switch <em>Switch</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1098,20 +1058,6 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSwitchAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.JumpTable <em>Jump Table</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.JumpTable
-	 * @generated
-	 */
-	public Adapter createJumpTableAdapter() {
 		return null;
 	}
 

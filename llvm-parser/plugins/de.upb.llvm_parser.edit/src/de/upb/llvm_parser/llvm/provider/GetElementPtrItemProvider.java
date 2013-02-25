@@ -370,11 +370,6 @@ public class GetElementPtrItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
-				 LlvmFactory.eINSTANCE.createValuePair()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createLandingPad()));
 
 		newChildDescriptors.add
@@ -420,17 +415,7 @@ public class GetElementPtrItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
-				 LlvmFactory.eINSTANCE.createLabelList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createSwitch()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
-				 LlvmFactory.eINSTANCE.createJumpTable()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -236,10 +236,7 @@ Alloc:
 	'alloca' ((type=TypeUse typelist=TypeList?)) (',' numelementstype=TypeUse numelementsvalue=Value)? (',' ALIGNMENT)?;
 
 PHI:
-	'phi' type=TypeUse '[' values+=ValuePair ']' (',' '[' values+=ValuePair ']')*;
-
-ValuePair:
-	value1=Value ',' value2=Value;
+	'phi' type=TypeUse '[' firstclass+=Value ',' values+=Value ']' (',' '[' firstclass+=Value ',' values+=Value ']')*;
 
 LandingPad:
 	'landingpad' struct=Structure 'personality' personalitytype=TypeUse
@@ -272,16 +269,10 @@ Compare:
 	'fcmp' F_PREDICATES comptype=TypeUse value1=Value ',' value2=Value;
 
 IndirectBranch:
-	'indirectbr' adresstype=TypeUse adress=Value ',' '[' (lList=LabelList)? ']';
-
-LabelList:
-	(labeltype+=TypeUse labels+=Value)+;
+	'indirectbr' adresstype=TypeUse adress=Value ',' '[' (labeltype+=TypeUse labels+=Value (',' labeltype+=TypeUse labels+=Value)*)? ']';
 
 Switch:
-	'switch' comptype=TypeUse compvalue=Value ',' defaulttype=TypeUse defaultvalue=Value '[' (jTable=JumpTable)? ']';
-
-JumpTable:
-	(jtypes+=TypeUse jvalues+=Value ',' destinationtypes+=TypeUse destinations+=Value)+;
+	'switch' comptype=TypeUse compvalue=Value ',' defaulttype=TypeUse defaultvalue=Value '[' (jtypes+=TypeUse jvalues+=Value ',' destinationtypes+=TypeUse destinations+=Value)+ ']';
 
 Invoke:
 	'invoke' CallingConv? RETURN_ATTRIBUTES? functiontype=TypeUse name=Address pList=ParameterList

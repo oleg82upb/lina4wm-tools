@@ -1881,13 +1881,22 @@ public interface LlvmPackage extends EPackage {
 	int PHI__TYPE = INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Firstclass</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHI__FIRSTCLASS = INSTRUCTION_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PHI__VALUES = INSTRUCTION_FEATURE_COUNT + 1;
+	int PHI__VALUES = INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>PHI</em>' class.
@@ -1896,44 +1905,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PHI_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ValuePairImpl <em>Value Pair</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.upb.llvm_parser.llvm.impl.ValuePairImpl
-	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getValuePair()
-	 * @generated
-	 */
-	int VALUE_PAIR = 43;
-
-	/**
-	 * The feature id for the '<em><b>Value1</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALUE_PAIR__VALUE1 = 0;
-
-	/**
-	 * The feature id for the '<em><b>Value2</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALUE_PAIR__VALUE2 = 1;
-
-	/**
-	 * The number of structural features of the '<em>Value Pair</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALUE_PAIR_FEATURE_COUNT = 2;
+	int PHI_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl <em>Landing Pad</em>}' class.
@@ -1943,7 +1915,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLandingPad()
 	 * @generated
 	 */
-	int LANDING_PAD = 44;
+	int LANDING_PAD = 43;
 
 	/**
 	 * The feature id for the '<em><b>Struct</b></em>' containment reference.
@@ -1998,7 +1970,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getClause()
 	 * @generated
 	 */
-	int CLAUSE = 45;
+	int CLAUSE = 44;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -2053,7 +2025,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getSelect()
 	 * @generated
 	 */
-	int SELECT = 46;
+	int SELECT = 45;
 
 	/**
 	 * The feature id for the '<em><b>Conditiontype</b></em>' containment reference.
@@ -2126,7 +2098,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getVA_Arg()
 	 * @generated
 	 */
-	int VA_ARG = 47;
+	int VA_ARG = 46;
 
 	/**
 	 * The feature id for the '<em><b>Listtype</b></em>' containment reference.
@@ -2172,7 +2144,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getExtractElement()
 	 * @generated
 	 */
-	int EXTRACT_ELEMENT = 48;
+	int EXTRACT_ELEMENT = 47;
 
 	/**
 	 * The feature id for the '<em><b>Vectortype</b></em>' containment reference.
@@ -2227,7 +2199,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getInsertElement()
 	 * @generated
 	 */
-	int INSERT_ELEMENT = 49;
+	int INSERT_ELEMENT = 48;
 
 	/**
 	 * The feature id for the '<em><b>Vectortype</b></em>' containment reference.
@@ -2300,7 +2272,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getShuffleVector()
 	 * @generated
 	 */
-	int SHUFFLE_VECTOR = 50;
+	int SHUFFLE_VECTOR = 49;
 
 	/**
 	 * The feature id for the '<em><b>Val1type</b></em>' containment reference.
@@ -2373,7 +2345,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getCompare()
 	 * @generated
 	 */
-	int COMPARE = 51;
+	int COMPARE = 50;
 
 	/**
 	 * The feature id for the '<em><b>Comptype</b></em>' containment reference.
@@ -2419,7 +2391,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getIndirectBranch()
 	 * @generated
 	 */
-	int INDIRECT_BRANCH = 52;
+	int INDIRECT_BRANCH = 51;
 
 	/**
 	 * The feature id for the '<em><b>Adresstype</b></em>' containment reference.
@@ -2440,41 +2412,13 @@ public interface LlvmPackage extends EPackage {
 	int INDIRECT_BRANCH__ADRESS = RET_INSTR_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>LList</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INDIRECT_BRANCH__LLIST = RET_INSTR_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Indirect Branch</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INDIRECT_BRANCH_FEATURE_COUNT = RET_INSTR_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.LabelListImpl <em>Label List</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.upb.llvm_parser.llvm.impl.LabelListImpl
-	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLabelList()
-	 * @generated
-	 */
-	int LABEL_LIST = 53;
-
-	/**
 	 * The feature id for the '<em><b>Labeltype</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LABEL_LIST__LABELTYPE = 0;
+	int INDIRECT_BRANCH__LABELTYPE = RET_INSTR_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
@@ -2483,16 +2427,16 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LABEL_LIST__LABELS = 1;
+	int INDIRECT_BRANCH__LABELS = RET_INSTR_FEATURE_COUNT + 3;
 
 	/**
-	 * The number of structural features of the '<em>Label List</em>' class.
+	 * The number of structural features of the '<em>Indirect Branch</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LABEL_LIST_FEATURE_COUNT = 2;
+	int INDIRECT_BRANCH_FEATURE_COUNT = RET_INSTR_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.SwitchImpl <em>Switch</em>}' class.
@@ -2502,7 +2446,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getSwitch()
 	 * @generated
 	 */
-	int SWITCH = 54;
+	int SWITCH = 52;
 
 	/**
 	 * The feature id for the '<em><b>Comptype</b></em>' containment reference.
@@ -2541,41 +2485,13 @@ public interface LlvmPackage extends EPackage {
 	int SWITCH__DEFAULTVALUE = RET_INSTR_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>JTable</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SWITCH__JTABLE = RET_INSTR_FEATURE_COUNT + 4;
-
-	/**
-	 * The number of structural features of the '<em>Switch</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SWITCH_FEATURE_COUNT = RET_INSTR_FEATURE_COUNT + 5;
-
-	/**
-	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.JumpTableImpl <em>Jump Table</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.upb.llvm_parser.llvm.impl.JumpTableImpl
-	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getJumpTable()
-	 * @generated
-	 */
-	int JUMP_TABLE = 55;
-
-	/**
 	 * The feature id for the '<em><b>Jtypes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JUMP_TABLE__JTYPES = 0;
+	int SWITCH__JTYPES = RET_INSTR_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Jvalues</b></em>' containment reference list.
@@ -2584,7 +2500,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JUMP_TABLE__JVALUES = 1;
+	int SWITCH__JVALUES = RET_INSTR_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Destinationtypes</b></em>' containment reference list.
@@ -2593,7 +2509,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JUMP_TABLE__DESTINATIONTYPES = 2;
+	int SWITCH__DESTINATIONTYPES = RET_INSTR_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Destinations</b></em>' containment reference list.
@@ -2602,16 +2518,16 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JUMP_TABLE__DESTINATIONS = 3;
+	int SWITCH__DESTINATIONS = RET_INSTR_FEATURE_COUNT + 7;
 
 	/**
-	 * The number of structural features of the '<em>Jump Table</em>' class.
+	 * The number of structural features of the '<em>Switch</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JUMP_TABLE_FEATURE_COUNT = 4;
+	int SWITCH_FEATURE_COUNT = RET_INSTR_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.InvokeImpl <em>Invoke</em>}' class.
@@ -2621,7 +2537,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getInvoke()
 	 * @generated
 	 */
-	int INVOKE = 56;
+	int INVOKE = 53;
 
 	/**
 	 * The feature id for the '<em><b>Functiontype</b></em>' containment reference.
@@ -2703,7 +2619,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getResume()
 	 * @generated
 	 */
-	int RESUME = 57;
+	int RESUME = 54;
 
 	/**
 	 * The feature id for the '<em><b>Resumestruct</b></em>' containment reference.
@@ -2740,7 +2656,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getUnreachable()
 	 * @generated
 	 */
-	int UNREACHABLE = 58;
+	int UNREACHABLE = 55;
 
 	/**
 	 * The number of structural features of the '<em>Unreachable</em>' class.
@@ -2759,7 +2675,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getReturn()
 	 * @generated
 	 */
-	int RETURN = 59;
+	int RETURN = 56;
 
 	/**
 	 * The feature id for the '<em><b>Returntype</b></em>' containment reference.
@@ -2796,7 +2712,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getBranch()
 	 * @generated
 	 */
-	int BRANCH = 60;
+	int BRANCH = 57;
 
 	/**
 	 * The feature id for the '<em><b>Destination</b></em>' containment reference.
@@ -4382,6 +4298,17 @@ public interface LlvmPackage extends EPackage {
 	EReference getPHI_Type();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.PHI#getFirstclass <em>Firstclass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Firstclass</em>'.
+	 * @see de.upb.llvm_parser.llvm.PHI#getFirstclass()
+	 * @see #getPHI()
+	 * @generated
+	 */
+	EReference getPHI_Firstclass();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.PHI#getValues <em>Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4391,38 +4318,6 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPHI_Values();
-
-	/**
-	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ValuePair <em>Value Pair</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Value Pair</em>'.
-	 * @see de.upb.llvm_parser.llvm.ValuePair
-	 * @generated
-	 */
-	EClass getValuePair();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.ValuePair#getValue1 <em>Value1</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Value1</em>'.
-	 * @see de.upb.llvm_parser.llvm.ValuePair#getValue1()
-	 * @see #getValuePair()
-	 * @generated
-	 */
-	EReference getValuePair_Value1();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.ValuePair#getValue2 <em>Value2</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Value2</em>'.
-	 * @see de.upb.llvm_parser.llvm.ValuePair#getValue2()
-	 * @see #getValuePair()
-	 * @generated
-	 */
-	EReference getValuePair_Value2();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.LandingPad <em>Landing Pad</em>}'.
@@ -4933,47 +4828,26 @@ public interface LlvmPackage extends EPackage {
 	EReference getIndirectBranch_Adress();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.IndirectBranch#getLList <em>LList</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>LList</em>'.
-	 * @see de.upb.llvm_parser.llvm.IndirectBranch#getLList()
-	 * @see #getIndirectBranch()
-	 * @generated
-	 */
-	EReference getIndirectBranch_LList();
-
-	/**
-	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.LabelList <em>Label List</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Label List</em>'.
-	 * @see de.upb.llvm_parser.llvm.LabelList
-	 * @generated
-	 */
-	EClass getLabelList();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.LabelList#getLabeltype <em>Labeltype</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.IndirectBranch#getLabeltype <em>Labeltype</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Labeltype</em>'.
-	 * @see de.upb.llvm_parser.llvm.LabelList#getLabeltype()
-	 * @see #getLabelList()
+	 * @see de.upb.llvm_parser.llvm.IndirectBranch#getLabeltype()
+	 * @see #getIndirectBranch()
 	 * @generated
 	 */
-	EReference getLabelList_Labeltype();
+	EReference getIndirectBranch_Labeltype();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.LabelList#getLabels <em>Labels</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.IndirectBranch#getLabels <em>Labels</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Labels</em>'.
-	 * @see de.upb.llvm_parser.llvm.LabelList#getLabels()
-	 * @see #getLabelList()
+	 * @see de.upb.llvm_parser.llvm.IndirectBranch#getLabels()
+	 * @see #getIndirectBranch()
 	 * @generated
 	 */
-	EReference getLabelList_Labels();
+	EReference getIndirectBranch_Labels();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.Switch <em>Switch</em>}'.
@@ -5030,69 +4904,48 @@ public interface LlvmPackage extends EPackage {
 	EReference getSwitch_Defaultvalue();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.Switch#getJTable <em>JTable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>JTable</em>'.
-	 * @see de.upb.llvm_parser.llvm.Switch#getJTable()
-	 * @see #getSwitch()
-	 * @generated
-	 */
-	EReference getSwitch_JTable();
-
-	/**
-	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.JumpTable <em>Jump Table</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Jump Table</em>'.
-	 * @see de.upb.llvm_parser.llvm.JumpTable
-	 * @generated
-	 */
-	EClass getJumpTable();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.JumpTable#getJtypes <em>Jtypes</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.Switch#getJtypes <em>Jtypes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Jtypes</em>'.
-	 * @see de.upb.llvm_parser.llvm.JumpTable#getJtypes()
-	 * @see #getJumpTable()
+	 * @see de.upb.llvm_parser.llvm.Switch#getJtypes()
+	 * @see #getSwitch()
 	 * @generated
 	 */
-	EReference getJumpTable_Jtypes();
+	EReference getSwitch_Jtypes();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.JumpTable#getJvalues <em>Jvalues</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.Switch#getJvalues <em>Jvalues</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Jvalues</em>'.
-	 * @see de.upb.llvm_parser.llvm.JumpTable#getJvalues()
-	 * @see #getJumpTable()
+	 * @see de.upb.llvm_parser.llvm.Switch#getJvalues()
+	 * @see #getSwitch()
 	 * @generated
 	 */
-	EReference getJumpTable_Jvalues();
+	EReference getSwitch_Jvalues();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.JumpTable#getDestinationtypes <em>Destinationtypes</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.Switch#getDestinationtypes <em>Destinationtypes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Destinationtypes</em>'.
-	 * @see de.upb.llvm_parser.llvm.JumpTable#getDestinationtypes()
-	 * @see #getJumpTable()
+	 * @see de.upb.llvm_parser.llvm.Switch#getDestinationtypes()
+	 * @see #getSwitch()
 	 * @generated
 	 */
-	EReference getJumpTable_Destinationtypes();
+	EReference getSwitch_Destinationtypes();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.JumpTable#getDestinations <em>Destinations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.Switch#getDestinations <em>Destinations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Destinations</em>'.
-	 * @see de.upb.llvm_parser.llvm.JumpTable#getDestinations()
-	 * @see #getJumpTable()
+	 * @see de.upb.llvm_parser.llvm.Switch#getDestinations()
+	 * @see #getSwitch()
 	 * @generated
 	 */
-	EReference getJumpTable_Destinations();
+	EReference getSwitch_Destinations();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.Invoke <em>Invoke</em>}'.
@@ -6576,38 +6429,20 @@ public interface LlvmPackage extends EPackage {
 		EReference PHI__TYPE = eINSTANCE.getPHI_Type();
 
 		/**
+		 * The meta object literal for the '<em><b>Firstclass</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PHI__FIRSTCLASS = eINSTANCE.getPHI_Firstclass();
+
+		/**
 		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference PHI__VALUES = eINSTANCE.getPHI_Values();
-
-		/**
-		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ValuePairImpl <em>Value Pair</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.upb.llvm_parser.llvm.impl.ValuePairImpl
-		 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getValuePair()
-		 * @generated
-		 */
-		EClass VALUE_PAIR = eINSTANCE.getValuePair();
-
-		/**
-		 * The meta object literal for the '<em><b>Value1</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VALUE_PAIR__VALUE1 = eINSTANCE.getValuePair_Value1();
-
-		/**
-		 * The meta object literal for the '<em><b>Value2</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VALUE_PAIR__VALUE2 = eINSTANCE.getValuePair_Value2();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl <em>Landing Pad</em>}' class.
@@ -7004,30 +6839,12 @@ public interface LlvmPackage extends EPackage {
 		EReference INDIRECT_BRANCH__ADRESS = eINSTANCE.getIndirectBranch_Adress();
 
 		/**
-		 * The meta object literal for the '<em><b>LList</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference INDIRECT_BRANCH__LLIST = eINSTANCE.getIndirectBranch_LList();
-
-		/**
-		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.LabelListImpl <em>Label List</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.upb.llvm_parser.llvm.impl.LabelListImpl
-		 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLabelList()
-		 * @generated
-		 */
-		EClass LABEL_LIST = eINSTANCE.getLabelList();
-
-		/**
 		 * The meta object literal for the '<em><b>Labeltype</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LABEL_LIST__LABELTYPE = eINSTANCE.getLabelList_Labeltype();
+		EReference INDIRECT_BRANCH__LABELTYPE = eINSTANCE.getIndirectBranch_Labeltype();
 
 		/**
 		 * The meta object literal for the '<em><b>Labels</b></em>' containment reference list feature.
@@ -7035,7 +6852,7 @@ public interface LlvmPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LABEL_LIST__LABELS = eINSTANCE.getLabelList_Labels();
+		EReference INDIRECT_BRANCH__LABELS = eINSTANCE.getIndirectBranch_Labels();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.SwitchImpl <em>Switch</em>}' class.
@@ -7080,30 +6897,12 @@ public interface LlvmPackage extends EPackage {
 		EReference SWITCH__DEFAULTVALUE = eINSTANCE.getSwitch_Defaultvalue();
 
 		/**
-		 * The meta object literal for the '<em><b>JTable</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SWITCH__JTABLE = eINSTANCE.getSwitch_JTable();
-
-		/**
-		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.JumpTableImpl <em>Jump Table</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.upb.llvm_parser.llvm.impl.JumpTableImpl
-		 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getJumpTable()
-		 * @generated
-		 */
-		EClass JUMP_TABLE = eINSTANCE.getJumpTable();
-
-		/**
 		 * The meta object literal for the '<em><b>Jtypes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference JUMP_TABLE__JTYPES = eINSTANCE.getJumpTable_Jtypes();
+		EReference SWITCH__JTYPES = eINSTANCE.getSwitch_Jtypes();
 
 		/**
 		 * The meta object literal for the '<em><b>Jvalues</b></em>' containment reference list feature.
@@ -7111,7 +6910,7 @@ public interface LlvmPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference JUMP_TABLE__JVALUES = eINSTANCE.getJumpTable_Jvalues();
+		EReference SWITCH__JVALUES = eINSTANCE.getSwitch_Jvalues();
 
 		/**
 		 * The meta object literal for the '<em><b>Destinationtypes</b></em>' containment reference list feature.
@@ -7119,7 +6918,7 @@ public interface LlvmPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference JUMP_TABLE__DESTINATIONTYPES = eINSTANCE.getJumpTable_Destinationtypes();
+		EReference SWITCH__DESTINATIONTYPES = eINSTANCE.getSwitch_Destinationtypes();
 
 		/**
 		 * The meta object literal for the '<em><b>Destinations</b></em>' containment reference list feature.
@@ -7127,7 +6926,7 @@ public interface LlvmPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference JUMP_TABLE__DESTINATIONS = eINSTANCE.getJumpTable_Destinations();
+		EReference SWITCH__DESTINATIONS = eINSTANCE.getSwitch_Destinations();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.InvokeImpl <em>Invoke</em>}' class.

@@ -5,7 +5,7 @@ package de.upb.llvm_parser.llvm.impl;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.PHI;
 import de.upb.llvm_parser.llvm.TypeUse;
-import de.upb.llvm_parser.llvm.ValuePair;
+import de.upb.llvm_parser.llvm.Value;
 
 import java.util.Collection;
 
@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.PHIImpl#getType <em>Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.PHIImpl#getFirstclass <em>Firstclass</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.PHIImpl#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
@@ -48,6 +49,16 @@ public class PHIImpl extends InstructionImpl implements PHI {
 	protected TypeUse type;
 
 	/**
+	 * The cached value of the '{@link #getFirstclass() <em>Firstclass</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFirstclass()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Value> firstclass;
+
+	/**
 	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -55,7 +66,7 @@ public class PHIImpl extends InstructionImpl implements PHI {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ValuePair> values;
+	protected EList<Value> values;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -124,9 +135,21 @@ public class PHIImpl extends InstructionImpl implements PHI {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ValuePair> getValues() {
+	public EList<Value> getFirstclass() {
+		if (firstclass == null) {
+			firstclass = new EObjectContainmentEList<Value>(Value.class, this, LlvmPackage.PHI__FIRSTCLASS);
+		}
+		return firstclass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Value> getValues() {
 		if (values == null) {
-			values = new EObjectContainmentEList<ValuePair>(ValuePair.class, this, LlvmPackage.PHI__VALUES);
+			values = new EObjectContainmentEList<Value>(Value.class, this, LlvmPackage.PHI__VALUES);
 		}
 		return values;
 	}
@@ -141,6 +164,8 @@ public class PHIImpl extends InstructionImpl implements PHI {
 		switch (featureID) {
 			case LlvmPackage.PHI__TYPE:
 				return basicSetType(null, msgs);
+			case LlvmPackage.PHI__FIRSTCLASS:
+				return ((InternalEList<?>)getFirstclass()).basicRemove(otherEnd, msgs);
 			case LlvmPackage.PHI__VALUES:
 				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
 		}
@@ -157,6 +182,8 @@ public class PHIImpl extends InstructionImpl implements PHI {
 		switch (featureID) {
 			case LlvmPackage.PHI__TYPE:
 				return getType();
+			case LlvmPackage.PHI__FIRSTCLASS:
+				return getFirstclass();
 			case LlvmPackage.PHI__VALUES:
 				return getValues();
 		}
@@ -175,9 +202,13 @@ public class PHIImpl extends InstructionImpl implements PHI {
 			case LlvmPackage.PHI__TYPE:
 				setType((TypeUse)newValue);
 				return;
+			case LlvmPackage.PHI__FIRSTCLASS:
+				getFirstclass().clear();
+				getFirstclass().addAll((Collection<? extends Value>)newValue);
+				return;
 			case LlvmPackage.PHI__VALUES:
 				getValues().clear();
-				getValues().addAll((Collection<? extends ValuePair>)newValue);
+				getValues().addAll((Collection<? extends Value>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -193,6 +224,9 @@ public class PHIImpl extends InstructionImpl implements PHI {
 		switch (featureID) {
 			case LlvmPackage.PHI__TYPE:
 				setType((TypeUse)null);
+				return;
+			case LlvmPackage.PHI__FIRSTCLASS:
+				getFirstclass().clear();
 				return;
 			case LlvmPackage.PHI__VALUES:
 				getValues().clear();
@@ -211,6 +245,8 @@ public class PHIImpl extends InstructionImpl implements PHI {
 		switch (featureID) {
 			case LlvmPackage.PHI__TYPE:
 				return type != null;
+			case LlvmPackage.PHI__FIRSTCLASS:
+				return firstclass != null && !firstclass.isEmpty();
 			case LlvmPackage.PHI__VALUES:
 				return values != null && !values.isEmpty();
 		}
