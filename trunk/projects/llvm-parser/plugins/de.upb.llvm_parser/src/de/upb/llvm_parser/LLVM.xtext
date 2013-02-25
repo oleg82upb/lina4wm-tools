@@ -123,7 +123,7 @@ ValueStruct:
 	'{' types+=TypeUse ('()*')? value+=Value (',' types+=TypeUse ('()*')? value+=Value)* '}';
 
 Structure:
-	{Structure} '{' (types+=TypeUse (',' types+=TypeUse)*)? '}' POINTER?;
+	{Structure} '{' (types+=TypeUse (',' types+=(TypeUse|Aggregate_Types))*)? '}' POINTER?;
 
 Opaque:
 	'opaque';

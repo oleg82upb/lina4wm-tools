@@ -1135,7 +1135,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((types+=TypeUse types+=TypeUse*)?)
+	 *     ((types+=TypeUse (types+=TypeUse | types+=Aggregate_Types)*)?)
 	 */
 	protected void sequence_Structure(EObject context, Structure semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

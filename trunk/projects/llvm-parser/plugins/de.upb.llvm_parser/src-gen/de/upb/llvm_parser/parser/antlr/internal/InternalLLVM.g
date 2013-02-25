@@ -2057,20 +2057,38 @@ ruleStructure returns [EObject current=null]
     }
 (
 (
+(
 		{ 
-	        newCompositeNode(grammarAccess.getStructureAccess().getTypesTypeUseParserRuleCall_2_1_1_0()); 
+	        newCompositeNode(grammarAccess.getStructureAccess().getTypesTypeUseParserRuleCall_2_1_1_0_0()); 
 	    }
-		lv_types_4_0=ruleTypeUse		{
+		lv_types_4_1=ruleTypeUse		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStructureRule());
 	        }
        		add(
        			$current, 
        			"types",
-        		lv_types_4_0, 
+        		lv_types_4_1, 
         		"TypeUse");
 	        afterParserOrEnumRuleCall();
 	    }
+
+    |		{ 
+	        newCompositeNode(grammarAccess.getStructureAccess().getTypesAggregate_TypesParserRuleCall_2_1_1_0_1()); 
+	    }
+		lv_types_4_2=ruleAggregate_Types		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getStructureRule());
+	        }
+       		add(
+       			$current, 
+       			"types",
+        		lv_types_4_2, 
+        		"Aggregate_Types");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 
 )
 ))*)?	otherlv_5='}' 
