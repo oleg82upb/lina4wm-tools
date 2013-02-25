@@ -4,7 +4,6 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Structure;
-import de.upb.llvm_parser.llvm.TypeUse;
 
 import java.util.Collection;
 
@@ -13,6 +12,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -40,7 +40,7 @@ public class StructureImpl extends Aggregate_TypesImpl implements Structure {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TypeUse> types;
+	protected EList<EObject> types;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -66,9 +66,9 @@ public class StructureImpl extends Aggregate_TypesImpl implements Structure {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TypeUse> getTypes() {
+	public EList<EObject> getTypes() {
 		if (types == null) {
-			types = new EObjectContainmentEList<TypeUse>(TypeUse.class, this, LlvmPackage.STRUCTURE__TYPES);
+			types = new EObjectContainmentEList<EObject>(EObject.class, this, LlvmPackage.STRUCTURE__TYPES);
 		}
 		return types;
 	}
@@ -112,7 +112,7 @@ public class StructureImpl extends Aggregate_TypesImpl implements Structure {
 		switch (featureID) {
 			case LlvmPackage.STRUCTURE__TYPES:
 				getTypes().clear();
-				getTypes().addAll((Collection<? extends TypeUse>)newValue);
+				getTypes().addAll((Collection<? extends EObject>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

@@ -57,6 +57,7 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAggregate_TypesAccess().getAlternatives(), "rule__Aggregate_Types__Alternatives");
 					put(grammarAccess.getValueAccess().getAlternatives(), "rule__Value__Alternatives");
 					put(grammarAccess.getValueAccess().getAlternatives_0_1(), "rule__Value__Alternatives_0_1");
+					put(grammarAccess.getStructureAccess().getTypesAlternatives_2_1_1_0(), "rule__Structure__TypesAlternatives_2_1_1_0");
 					put(grammarAccess.getParameterListAccess().getAlternatives_1(), "rule__ParameterList__Alternatives_1");
 					put(grammarAccess.getTypeListAccess().getAlternatives_1(), "rule__TypeList__Alternatives_1");
 					put(grammarAccess.getTypeListAccess().getAlternatives_1_1_2(), "rule__TypeList__Alternatives_1_1_2");

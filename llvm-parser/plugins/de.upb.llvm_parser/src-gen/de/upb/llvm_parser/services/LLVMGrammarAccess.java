@@ -1246,16 +1246,18 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
 		private final Keyword cCommaKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
 		private final Assignment cTypesAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final RuleCall cTypesTypeUseParserRuleCall_2_1_1_0 = (RuleCall)cTypesAssignment_2_1_1.eContents().get(0);
+		private final Alternatives cTypesAlternatives_2_1_1_0 = (Alternatives)cTypesAssignment_2_1_1.eContents().get(0);
+		private final RuleCall cTypesTypeUseParserRuleCall_2_1_1_0_0 = (RuleCall)cTypesAlternatives_2_1_1_0.eContents().get(0);
+		private final RuleCall cTypesAggregate_TypesParserRuleCall_2_1_1_0_1 = (RuleCall)cTypesAlternatives_2_1_1_0.eContents().get(1);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final RuleCall cPOINTERTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
 		
 		//Structure:
 		//
-		//	{Structure} "{" (types+=TypeUse ("," types+=TypeUse)*)? "}" POINTER?;
+		//	{Structure} "{" (types+=TypeUse ("," types+=(TypeUse | Aggregate_Types))*)? "}" POINTER?;
 		public ParserRule getRule() { return rule; }
 
-		//{Structure} "{" (types+=TypeUse ("," types+=TypeUse)*)? "}" POINTER?
+		//{Structure} "{" (types+=TypeUse ("," types+=(TypeUse | Aggregate_Types))*)? "}" POINTER?
 		public Group getGroup() { return cGroup; }
 
 		//{Structure}
@@ -1264,7 +1266,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		//(types+=TypeUse ("," types+=TypeUse)*)?
+		//(types+=TypeUse ("," types+=(TypeUse | Aggregate_Types))*)?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//types+=TypeUse
@@ -1273,17 +1275,23 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//TypeUse
 		public RuleCall getTypesTypeUseParserRuleCall_2_0_0() { return cTypesTypeUseParserRuleCall_2_0_0; }
 
-		//("," types+=TypeUse)*
+		//("," types+=(TypeUse | Aggregate_Types))*
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//","
 		public Keyword getCommaKeyword_2_1_0() { return cCommaKeyword_2_1_0; }
 
-		//types+=TypeUse
+		//types+=(TypeUse | Aggregate_Types)
 		public Assignment getTypesAssignment_2_1_1() { return cTypesAssignment_2_1_1; }
 
+		//TypeUse | Aggregate_Types
+		public Alternatives getTypesAlternatives_2_1_1_0() { return cTypesAlternatives_2_1_1_0; }
+
 		//TypeUse
-		public RuleCall getTypesTypeUseParserRuleCall_2_1_1_0() { return cTypesTypeUseParserRuleCall_2_1_1_0; }
+		public RuleCall getTypesTypeUseParserRuleCall_2_1_1_0_0() { return cTypesTypeUseParserRuleCall_2_1_1_0_0; }
+
+		//Aggregate_Types
+		public RuleCall getTypesAggregate_TypesParserRuleCall_2_1_1_0_1() { return cTypesAggregate_TypesParserRuleCall_2_1_1_0_1; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
@@ -5795,7 +5803,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 
 	//Structure:
 	//
-	//	{Structure} "{" (types+=TypeUse ("," types+=TypeUse)*)? "}" POINTER?;
+	//	{Structure} "{" (types+=TypeUse ("," types+=(TypeUse | Aggregate_Types))*)? "}" POINTER?;
 	public StructureElements getStructureAccess() {
 		return (pStructure != null) ? pStructure : (pStructure = new StructureElements());
 	}

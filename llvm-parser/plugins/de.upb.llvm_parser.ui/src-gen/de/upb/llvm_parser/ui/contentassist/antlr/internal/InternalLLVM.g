@@ -3013,6 +3013,28 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__Structure__TypesAlternatives_2_1_1_0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getStructureAccess().getTypesTypeUseParserRuleCall_2_1_1_0_0()); }
+	ruleTypeUse
+{ after(grammarAccess.getStructureAccess().getTypesTypeUseParserRuleCall_2_1_1_0_0()); }
+)
+
+    |(
+{ before(grammarAccess.getStructureAccess().getTypesAggregate_TypesParserRuleCall_2_1_1_0_1()); }
+	ruleAggregate_Types
+{ after(grammarAccess.getStructureAccess().getTypesAggregate_TypesParserRuleCall_2_1_1_0_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 rule__ParameterList__Alternatives_1
     @init {
 		int stackSize = keepStackSize();
@@ -22196,8 +22218,9 @@ rule__Structure__TypesAssignment_2_1_1
     }
 :
 (
-{ before(grammarAccess.getStructureAccess().getTypesTypeUseParserRuleCall_2_1_1_0()); }
-	ruleTypeUse{ after(grammarAccess.getStructureAccess().getTypesTypeUseParserRuleCall_2_1_1_0()); }
+{ before(grammarAccess.getStructureAccess().getTypesAlternatives_2_1_1_0()); }
+(rule__Structure__TypesAlternatives_2_1_1_0)
+{ after(grammarAccess.getStructureAccess().getTypesAlternatives_2_1_1_0()); }
 )
 
 ;
