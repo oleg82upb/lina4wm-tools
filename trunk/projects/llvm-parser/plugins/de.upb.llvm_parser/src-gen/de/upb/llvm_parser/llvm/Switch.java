@@ -2,6 +2,7 @@
  */
 package de.upb.llvm_parser.llvm;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,7 +16,10 @@ package de.upb.llvm_parser.llvm;
  *   <li>{@link de.upb.llvm_parser.llvm.Switch#getCompvalue <em>Compvalue</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Switch#getDefaulttype <em>Defaulttype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Switch#getDefaultvalue <em>Defaultvalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Switch#getJTable <em>JTable</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Switch#getJtypes <em>Jtypes</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Switch#getJvalues <em>Jvalues</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Switch#getDestinationtypes <em>Destinationtypes</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Switch#getDestinations <em>Destinations</em>}</li>
  * </ul>
  * </p>
  *
@@ -129,29 +133,67 @@ public interface Switch extends Ret_Instr {
 	void setDefaultvalue(Value value);
 
 	/**
-	 * Returns the value of the '<em><b>JTable</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Jtypes</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.TypeUse}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>JTable</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Jtypes</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>JTable</em>' containment reference.
-	 * @see #setJTable(JumpTable)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_JTable()
+	 * @return the value of the '<em>Jtypes</em>' containment reference list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_Jtypes()
 	 * @model containment="true"
 	 * @generated
 	 */
-	JumpTable getJTable();
+	EList<TypeUse> getJtypes();
 
 	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Switch#getJTable <em>JTable</em>}' containment reference.
+	 * Returns the value of the '<em><b>Jvalues</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.Value}.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Jvalues</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>JTable</em>' containment reference.
-	 * @see #getJTable()
+	 * @return the value of the '<em>Jvalues</em>' containment reference list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_Jvalues()
+	 * @model containment="true"
 	 * @generated
 	 */
-	void setJTable(JumpTable value);
+	EList<Value> getJvalues();
+
+	/**
+	 * Returns the value of the '<em><b>Destinationtypes</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.TypeUse}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Destinationtypes</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Destinationtypes</em>' containment reference list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_Destinationtypes()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<TypeUse> getDestinationtypes();
+
+	/**
+	 * Returns the value of the '<em><b>Destinations</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.Value}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Destinations</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Destinations</em>' containment reference list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_Destinations()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Value> getDestinations();
 
 } // Switch

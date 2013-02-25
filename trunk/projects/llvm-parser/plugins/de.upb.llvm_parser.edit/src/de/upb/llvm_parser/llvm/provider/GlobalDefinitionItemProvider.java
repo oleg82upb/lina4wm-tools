@@ -371,11 +371,6 @@ public class GlobalDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE,
-				 LlvmFactory.eINSTANCE.createValuePair()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE,
 				 LlvmFactory.eINSTANCE.createLandingPad()));
 
 		newChildDescriptors.add
@@ -421,17 +416,7 @@ public class GlobalDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE,
-				 LlvmFactory.eINSTANCE.createLabelList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE,
 				 LlvmFactory.eINSTANCE.createSwitch()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE,
-				 LlvmFactory.eINSTANCE.createJumpTable()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -676,11 +661,6 @@ public class GlobalDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__VALUE,
-				 LlvmFactory.eINSTANCE.createValuePair()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.GLOBAL_DEFINITION__VALUE,
 				 LlvmFactory.eINSTANCE.createLandingPad()));
 
 		newChildDescriptors.add
@@ -726,17 +706,7 @@ public class GlobalDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__VALUE,
-				 LlvmFactory.eINSTANCE.createLabelList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.GLOBAL_DEFINITION__VALUE,
 				 LlvmFactory.eINSTANCE.createSwitch()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.GLOBAL_DEFINITION__VALUE,
-				 LlvmFactory.eINSTANCE.createJumpTable()));
 
 		newChildDescriptors.add
 			(createChildParameter

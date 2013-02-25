@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.PHI#getType <em>Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.PHI#getFirstclass <em>Firstclass</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.PHI#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
@@ -49,8 +50,24 @@ public interface PHI extends Instruction {
 	void setType(TypeUse value);
 
 	/**
+	 * Returns the value of the '<em><b>Firstclass</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.Value}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Firstclass</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Firstclass</em>' containment reference list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getPHI_Firstclass()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Value> getFirstclass();
+
+	/**
 	 * Returns the value of the '<em><b>Values</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.ValuePair}.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.Value}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Values</em>' containment reference list isn't clear,
@@ -62,6 +79,6 @@ public interface PHI extends Instruction {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ValuePair> getValues();
+	EList<Value> getValues();
 
 } // PHI

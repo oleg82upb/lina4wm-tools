@@ -992,29 +992,6 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.ValuePair} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ValuePairItemProvider valuePairItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.ValuePair}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createValuePairAdapter() {
-		if (valuePairItemProvider == null) {
-			valuePairItemProvider = new ValuePairItemProvider(this);
-		}
-
-		return valuePairItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.LandingPad} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1291,29 +1268,6 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.LabelList} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected LabelListItemProvider labelListItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.LabelList}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createLabelListAdapter() {
-		if (labelListItemProvider == null) {
-			labelListItemProvider = new LabelListItemProvider(this);
-		}
-
-		return labelListItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.Switch} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1334,29 +1288,6 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 		}
 
 		return switchItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.JumpTable} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected JumpTableItemProvider jumpTableItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.JumpTable}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createJumpTableAdapter() {
-		if (jumpTableItemProvider == null) {
-			jumpTableItemProvider = new JumpTableItemProvider(this);
-		}
-
-		return jumpTableItemProvider;
 	}
 
 	/**
@@ -1616,7 +1547,6 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 		if (callItemProvider != null) callItemProvider.dispose();
 		if (allocItemProvider != null) allocItemProvider.dispose();
 		if (phiItemProvider != null) phiItemProvider.dispose();
-		if (valuePairItemProvider != null) valuePairItemProvider.dispose();
 		if (landingPadItemProvider != null) landingPadItemProvider.dispose();
 		if (clauseItemProvider != null) clauseItemProvider.dispose();
 		if (selectItemProvider != null) selectItemProvider.dispose();
@@ -1626,9 +1556,7 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 		if (shuffleVectorItemProvider != null) shuffleVectorItemProvider.dispose();
 		if (compareItemProvider != null) compareItemProvider.dispose();
 		if (indirectBranchItemProvider != null) indirectBranchItemProvider.dispose();
-		if (labelListItemProvider != null) labelListItemProvider.dispose();
 		if (switchItemProvider != null) switchItemProvider.dispose();
-		if (jumpTableItemProvider != null) jumpTableItemProvider.dispose();
 		if (invokeItemProvider != null) invokeItemProvider.dispose();
 		if (resumeItemProvider != null) resumeItemProvider.dispose();
 		if (unreachableItemProvider != null) unreachableItemProvider.dispose();

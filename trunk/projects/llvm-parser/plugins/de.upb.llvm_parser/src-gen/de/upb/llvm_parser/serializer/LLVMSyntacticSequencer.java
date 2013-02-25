@@ -584,18 +584,18 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * Syntax:
 	 *     (
-	     'sub' | 
-	     'fmul' | 
+	     'urem' | 
+	     'fdiv' | 
 	     'udiv' | 
-	     'fsub' | 
-	     'frem' | 
-	     'sdiv' | 
-	     'srem' | 
+	     'fmul' | 
 	     'add' | 
 	     'fadd' | 
+	     'sdiv' | 
+	     'sub' | 
+	     'srem' | 
+	     'frem' | 
 	     'mul' | 
-	     'fdiv' | 
-	     'urem'
+	     'fsub'
 	 )
 	 */
 	protected void emit_ARITHMETIC_OP_AddKeyword_0_0_or_FaddKeyword_0_1_or_FdivKeyword_0_8_or_FmulKeyword_0_5_or_FremKeyword_0_11_or_FsubKeyword_0_3_or_MulKeyword_0_4_or_SdivKeyword_0_7_or_SremKeyword_0_10_or_SubKeyword_0_2_or_UdivKeyword_0_6_or_UremKeyword_0_9(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -908,7 +908,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     ('constant' | 'global' | LINKAGE | 'unnamed_addr')*
+	 *     ('unnamed_addr' | LINKAGE | 'constant' | 'global')*
 	 */
 	protected void emit_GlobalDefinition___ConstantKeyword_2_3_or_GlobalKeyword_2_1_or_LINKAGEParserRuleCall_2_0_or_Unnamed_addrKeyword_2_2__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -957,12 +957,12 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * Syntax:
 	 *     (
-	     'shl' | 
 	     'or' | 
 	     'and' | 
-	     'lshr' | 
+	     'ashr' | 
 	     'xor' | 
-	     'ashr'
+	     'lshr' | 
+	     'shl'
 	 )
 	 */
 	protected void emit_LOGICAL_OP_AndKeyword_0_3_or_AshrKeyword_0_2_or_LshrKeyword_0_1_or_OrKeyword_0_4_or_ShlKeyword_0_0_or_XorKeyword_0_5(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -995,7 +995,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     (',' (ALIGNMENT | MetadataValue+))*
+	 *     (',' (MetadataValue+ | ALIGNMENT))*
 	 */
 	protected void emit_Load___CommaKeyword_0_5_0___ALIGNMENTParserRuleCall_0_5_1_0_or_MetadataValueParserRuleCall_0_5_1_1_p____a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -1067,7 +1067,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     (',' (ALIGNMENT | MetadataValue+))*
+	 *     (',' (MetadataValue+ | ALIGNMENT))*
 	 */
 	protected void emit_Store___CommaKeyword_0_9_0___ALIGNMENTParserRuleCall_0_9_1_0_or_MetadataValueParserRuleCall_0_9_1_1_p____a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -1083,7 +1083,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     'triple' | 'datalayout'
+	 *     'datalayout' | 'triple'
 	 */
 	protected void emit_TopLevelEntity_DatalayoutKeyword_1_1_0_or_TripleKeyword_1_1_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -1092,18 +1092,18 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * Syntax:
 	 *     (
+	     '()' | 
 	     (
 	         '(' 
 	         (
-	             ')' | 
-	             ')****' | 
+	             ')**' | 
 	             ')***' | 
+	             ')****' | 
+	             ')' | 
 	             ')*' | 
-	             ')*****' | 
-	             ')**'
+	             ')*****'
 	         )
-	     ) | 
-	     '()'
+	     )
 	 )
 	 */
 	protected void emit_TypeList_LeftParenthesisRightParenthesisKeyword_1_0_or___LeftParenthesisKeyword_1_1_0___RightParenthesisAsteriskAsteriskAsteriskAsteriskAsteriskKeyword_1_1_2_5_or_RightParenthesisAsteriskAsteriskAsteriskAsteriskKeyword_1_1_2_4_or_RightParenthesisAsteriskAsteriskAsteriskKeyword_1_1_2_3_or_RightParenthesisAsteriskAsteriskKeyword_1_1_2_2_or_RightParenthesisAsteriskKeyword_1_1_2_1_or_RightParenthesisKeyword_1_1_2_0____(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -1129,12 +1129,12 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * Syntax:
 	 *     (
-	     ')' | 
+	     ')**' | 
 	     ')****' | 
 	     ')***' | 
+	     ')' | 
 	     ')*' | 
-	     ')*****' | 
-	     ')**'
+	     ')*****'
 	 )
 	 */
 	protected void emit_TypeList_RightParenthesisAsteriskAsteriskAsteriskAsteriskAsteriskKeyword_1_1_2_5_or_RightParenthesisAsteriskAsteriskAsteriskAsteriskKeyword_1_1_2_4_or_RightParenthesisAsteriskAsteriskAsteriskKeyword_1_1_2_3_or_RightParenthesisAsteriskAsteriskKeyword_1_1_2_2_or_RightParenthesisAsteriskKeyword_1_1_2_1_or_RightParenthesisKeyword_1_1_2_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -1167,7 +1167,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     Initializers | Primitive_Type | STRING
+	 *     STRING | Initializers | Primitive_Type
 	 */
 	protected void emit_Value_InitializersParserRuleCall_0_1_2_or_Primitive_TypeParserRuleCall_0_1_1_or_STRINGTerminalRuleCall_0_1_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

@@ -33,8 +33,6 @@ import de.upb.llvm_parser.llvm.InsertValue;
 import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.InstructionUse;
 import de.upb.llvm_parser.llvm.Invoke;
-import de.upb.llvm_parser.llvm.JumpTable;
-import de.upb.llvm_parser.llvm.LabelList;
 import de.upb.llvm_parser.llvm.LandingPad;
 import de.upb.llvm_parser.llvm.LlvmFactory;
 import de.upb.llvm_parser.llvm.LlvmPackage;
@@ -58,7 +56,6 @@ import de.upb.llvm_parser.llvm.TypeUse;
 import de.upb.llvm_parser.llvm.Unreachable;
 import de.upb.llvm_parser.llvm.VA_Arg;
 import de.upb.llvm_parser.llvm.Value;
-import de.upb.llvm_parser.llvm.ValuePair;
 import de.upb.llvm_parser.llvm.ValueStruct;
 import de.upb.llvm_parser.llvm.Vector;
 
@@ -382,13 +379,6 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass valuePairEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass landingPadEClass = null;
 
 	/**
@@ -452,21 +442,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass labelListEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass switchEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass jumpTableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1847,7 +1823,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPHI_Values() {
+	public EReference getPHI_Firstclass() {
 		return (EReference)phiEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1856,26 +1832,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getValuePair() {
-		return valuePairEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getValuePair_Value1() {
-		return (EReference)valuePairEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getValuePair_Value2() {
-		return (EReference)valuePairEClass.getEStructuralFeatures().get(1);
+	public EReference getPHI_Values() {
+		return (EReference)phiEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2306,7 +2264,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getIndirectBranch_LList() {
+	public EReference getIndirectBranch_Labeltype() {
 		return (EReference)indirectBranchEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -2315,26 +2273,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getLabelList() {
-		return labelListEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getLabelList_Labeltype() {
-		return (EReference)labelListEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getLabelList_Labels() {
-		return (EReference)labelListEClass.getEStructuralFeatures().get(1);
+	public EReference getIndirectBranch_Labels() {
+		return (EReference)indirectBranchEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -2387,7 +2327,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSwitch_JTable() {
+	public EReference getSwitch_Jtypes() {
 		return (EReference)switchEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -2396,8 +2336,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getJumpTable() {
-		return jumpTableEClass;
+	public EReference getSwitch_Jvalues() {
+		return (EReference)switchEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -2405,8 +2345,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getJumpTable_Jtypes() {
-		return (EReference)jumpTableEClass.getEStructuralFeatures().get(0);
+	public EReference getSwitch_Destinationtypes() {
+		return (EReference)switchEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -2414,26 +2354,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getJumpTable_Jvalues() {
-		return (EReference)jumpTableEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getJumpTable_Destinationtypes() {
-		return (EReference)jumpTableEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getJumpTable_Destinations() {
-		return (EReference)jumpTableEClass.getEStructuralFeatures().get(3);
+	public EReference getSwitch_Destinations() {
+		return (EReference)switchEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -2846,11 +2768,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 
 		phiEClass = createEClass(PHI);
 		createEReference(phiEClass, PHI__TYPE);
+		createEReference(phiEClass, PHI__FIRSTCLASS);
 		createEReference(phiEClass, PHI__VALUES);
-
-		valuePairEClass = createEClass(VALUE_PAIR);
-		createEReference(valuePairEClass, VALUE_PAIR__VALUE1);
-		createEReference(valuePairEClass, VALUE_PAIR__VALUE2);
 
 		landingPadEClass = createEClass(LANDING_PAD);
 		createEReference(landingPadEClass, LANDING_PAD__STRUCT);
@@ -2907,24 +2826,18 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		indirectBranchEClass = createEClass(INDIRECT_BRANCH);
 		createEReference(indirectBranchEClass, INDIRECT_BRANCH__ADRESSTYPE);
 		createEReference(indirectBranchEClass, INDIRECT_BRANCH__ADRESS);
-		createEReference(indirectBranchEClass, INDIRECT_BRANCH__LLIST);
-
-		labelListEClass = createEClass(LABEL_LIST);
-		createEReference(labelListEClass, LABEL_LIST__LABELTYPE);
-		createEReference(labelListEClass, LABEL_LIST__LABELS);
+		createEReference(indirectBranchEClass, INDIRECT_BRANCH__LABELTYPE);
+		createEReference(indirectBranchEClass, INDIRECT_BRANCH__LABELS);
 
 		switchEClass = createEClass(SWITCH);
 		createEReference(switchEClass, SWITCH__COMPTYPE);
 		createEReference(switchEClass, SWITCH__COMPVALUE);
 		createEReference(switchEClass, SWITCH__DEFAULTTYPE);
 		createEReference(switchEClass, SWITCH__DEFAULTVALUE);
-		createEReference(switchEClass, SWITCH__JTABLE);
-
-		jumpTableEClass = createEClass(JUMP_TABLE);
-		createEReference(jumpTableEClass, JUMP_TABLE__JTYPES);
-		createEReference(jumpTableEClass, JUMP_TABLE__JVALUES);
-		createEReference(jumpTableEClass, JUMP_TABLE__DESTINATIONTYPES);
-		createEReference(jumpTableEClass, JUMP_TABLE__DESTINATIONS);
+		createEReference(switchEClass, SWITCH__JTYPES);
+		createEReference(switchEClass, SWITCH__JVALUES);
+		createEReference(switchEClass, SWITCH__DESTINATIONTYPES);
+		createEReference(switchEClass, SWITCH__DESTINATIONS);
 
 		invokeEClass = createEClass(INVOKE);
 		createEReference(invokeEClass, INVOKE__FUNCTIONTYPE);
@@ -3213,11 +3126,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 
 		initEClass(phiEClass, de.upb.llvm_parser.llvm.PHI.class, "PHI", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPHI_Type(), this.getTypeUse(), null, "type", null, 0, 1, de.upb.llvm_parser.llvm.PHI.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPHI_Values(), this.getValuePair(), null, "values", null, 0, -1, de.upb.llvm_parser.llvm.PHI.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(valuePairEClass, ValuePair.class, "ValuePair", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getValuePair_Value1(), this.getValue(), null, "value1", null, 0, 1, ValuePair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getValuePair_Value2(), this.getValue(), null, "value2", null, 0, 1, ValuePair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPHI_Firstclass(), this.getValue(), null, "firstclass", null, 0, -1, de.upb.llvm_parser.llvm.PHI.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPHI_Values(), this.getValue(), null, "values", null, 0, -1, de.upb.llvm_parser.llvm.PHI.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(landingPadEClass, LandingPad.class, "LandingPad", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLandingPad_Struct(), this.getStructure(), null, "struct", null, 0, 1, LandingPad.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3274,24 +3184,18 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		initEClass(indirectBranchEClass, IndirectBranch.class, "IndirectBranch", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getIndirectBranch_Adresstype(), this.getTypeUse(), null, "adresstype", null, 0, 1, IndirectBranch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getIndirectBranch_Adress(), this.getValue(), null, "adress", null, 0, 1, IndirectBranch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getIndirectBranch_LList(), this.getLabelList(), null, "lList", null, 0, 1, IndirectBranch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(labelListEClass, LabelList.class, "LabelList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLabelList_Labeltype(), this.getTypeUse(), null, "labeltype", null, 0, -1, LabelList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLabelList_Labels(), this.getValue(), null, "labels", null, 0, -1, LabelList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIndirectBranch_Labeltype(), this.getTypeUse(), null, "labeltype", null, 0, -1, IndirectBranch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIndirectBranch_Labels(), this.getValue(), null, "labels", null, 0, -1, IndirectBranch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(switchEClass, Switch.class, "Switch", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSwitch_Comptype(), this.getTypeUse(), null, "comptype", null, 0, 1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSwitch_Compvalue(), this.getValue(), null, "compvalue", null, 0, 1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSwitch_Defaulttype(), this.getTypeUse(), null, "defaulttype", null, 0, 1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSwitch_Defaultvalue(), this.getValue(), null, "defaultvalue", null, 0, 1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSwitch_JTable(), this.getJumpTable(), null, "jTable", null, 0, 1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(jumpTableEClass, JumpTable.class, "JumpTable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getJumpTable_Jtypes(), this.getTypeUse(), null, "jtypes", null, 0, -1, JumpTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getJumpTable_Jvalues(), this.getValue(), null, "jvalues", null, 0, -1, JumpTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getJumpTable_Destinationtypes(), this.getTypeUse(), null, "destinationtypes", null, 0, -1, JumpTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getJumpTable_Destinations(), this.getValue(), null, "destinations", null, 0, -1, JumpTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSwitch_Jtypes(), this.getTypeUse(), null, "jtypes", null, 0, -1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSwitch_Jvalues(), this.getValue(), null, "jvalues", null, 0, -1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSwitch_Destinationtypes(), this.getTypeUse(), null, "destinationtypes", null, 0, -1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSwitch_Destinations(), this.getValue(), null, "destinations", null, 0, -1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(invokeEClass, Invoke.class, "Invoke", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInvoke_Functiontype(), this.getTypeUse(), null, "functiontype", null, 0, 1, Invoke.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

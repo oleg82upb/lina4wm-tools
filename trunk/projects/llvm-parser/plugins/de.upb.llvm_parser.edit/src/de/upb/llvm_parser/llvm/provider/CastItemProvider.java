@@ -366,11 +366,6 @@ public class CastItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createValuePair()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CAST__FROM,
 				 LlvmFactory.eINSTANCE.createLandingPad()));
 
 		newChildDescriptors.add
@@ -416,17 +411,7 @@ public class CastItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createLabelList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CAST__FROM,
 				 LlvmFactory.eINSTANCE.createSwitch()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createJumpTable()));
 
 		newChildDescriptors.add
 			(createChildParameter

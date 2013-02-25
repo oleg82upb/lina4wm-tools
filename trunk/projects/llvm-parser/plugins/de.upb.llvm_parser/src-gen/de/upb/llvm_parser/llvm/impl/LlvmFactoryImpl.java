@@ -99,7 +99,6 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 			case LlvmPackage.CALL: return createCall();
 			case LlvmPackage.ALLOC: return createAlloc();
 			case LlvmPackage.PHI: return createPHI();
-			case LlvmPackage.VALUE_PAIR: return createValuePair();
 			case LlvmPackage.LANDING_PAD: return createLandingPad();
 			case LlvmPackage.CLAUSE: return createClause();
 			case LlvmPackage.SELECT: return createSelect();
@@ -109,9 +108,7 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 			case LlvmPackage.SHUFFLE_VECTOR: return createShuffleVector();
 			case LlvmPackage.COMPARE: return createCompare();
 			case LlvmPackage.INDIRECT_BRANCH: return createIndirectBranch();
-			case LlvmPackage.LABEL_LIST: return createLabelList();
 			case LlvmPackage.SWITCH: return createSwitch();
-			case LlvmPackage.JUMP_TABLE: return createJumpTable();
 			case LlvmPackage.INVOKE: return createInvoke();
 			case LlvmPackage.RESUME: return createResume();
 			case LlvmPackage.UNREACHABLE: return createUnreachable();
@@ -557,16 +554,6 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ValuePair createValuePair() {
-		ValuePairImpl valuePair = new ValuePairImpl();
-		return valuePair;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public LandingPad createLandingPad() {
 		LandingPadImpl landingPad = new LandingPadImpl();
 		return landingPad;
@@ -657,29 +644,9 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LabelList createLabelList() {
-		LabelListImpl labelList = new LabelListImpl();
-		return labelList;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Switch createSwitch() {
 		SwitchImpl switch_ = new SwitchImpl();
 		return switch_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JumpTable createJumpTable() {
-		JumpTableImpl jumpTable = new JumpTableImpl();
-		return jumpTable;
 	}
 
 	/**

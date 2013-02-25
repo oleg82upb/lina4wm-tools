@@ -366,11 +366,6 @@ public class StructureItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createValuePair()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STRUCTURE__TYPES,
 				 LlvmFactory.eINSTANCE.createLandingPad()));
 
 		newChildDescriptors.add
@@ -416,17 +411,7 @@ public class StructureItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createLabelList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STRUCTURE__TYPES,
 				 LlvmFactory.eINSTANCE.createSwitch()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createJumpTable()));
 
 		newChildDescriptors.add
 			(createChildParameter

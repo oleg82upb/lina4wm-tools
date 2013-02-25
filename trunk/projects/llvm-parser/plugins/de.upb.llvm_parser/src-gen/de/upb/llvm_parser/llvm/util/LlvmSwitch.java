@@ -361,12 +361,6 @@ public class LlvmSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case LlvmPackage.VALUE_PAIR: {
-				ValuePair valuePair = (ValuePair)theEObject;
-				T result = caseValuePair(valuePair);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case LlvmPackage.LANDING_PAD: {
 				LandingPad landingPad = (LandingPad)theEObject;
 				T result = caseLandingPad(landingPad);
@@ -429,22 +423,10 @@ public class LlvmSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case LlvmPackage.LABEL_LIST: {
-				LabelList labelList = (LabelList)theEObject;
-				T result = caseLabelList(labelList);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case LlvmPackage.SWITCH: {
 				de.upb.llvm_parser.llvm.Switch switch_ = (de.upb.llvm_parser.llvm.Switch)theEObject;
 				T result = caseSwitch(switch_);
 				if (result == null) result = caseRet_Instr(switch_);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case LlvmPackage.JUMP_TABLE: {
-				JumpTable jumpTable = (JumpTable)theEObject;
-				T result = caseJumpTable(jumpTable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1133,21 +1115,6 @@ public class LlvmSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Value Pair</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Value Pair</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseValuePair(ValuePair object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Landing Pad</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1283,21 +1250,6 @@ public class LlvmSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Label List</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Label List</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLabelList(LabelList object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Switch</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1309,21 +1261,6 @@ public class LlvmSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSwitch(de.upb.llvm_parser.llvm.Switch object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Jump Table</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Jump Table</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseJumpTable(JumpTable object) {
 		return null;
 	}
 

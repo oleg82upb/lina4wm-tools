@@ -258,14 +258,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="PHI" eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TypeUse"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="firstclass" upperBound="-1"
+        eType="#//Value" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
-        eType="#//ValuePair" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ValuePair">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value1" eType="#//Value"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value2" eType="#//Value"
-        containment="true"/>
+        eType="#//Value" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LandingPad" eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="struct" eType="#//Structure"
@@ -360,10 +356,6 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="adress" eType="#//Value"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="lList" eType="#//LabelList"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LabelList">
     <eStructuralFeatures xsi:type="ecore:EReference" name="labeltype" upperBound="-1"
         eType="#//TypeUse" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="labels" upperBound="-1"
@@ -378,10 +370,6 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="defaultvalue" eType="#//Value"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="jTable" eType="#//JumpTable"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JumpTable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="jtypes" upperBound="-1"
         eType="#//TypeUse" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="jvalues" upperBound="-1"

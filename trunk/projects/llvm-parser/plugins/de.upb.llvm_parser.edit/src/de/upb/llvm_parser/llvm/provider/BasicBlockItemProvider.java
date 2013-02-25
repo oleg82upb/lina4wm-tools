@@ -421,11 +421,6 @@ public class BasicBlockItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createValuePair()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
 				 LlvmFactory.eINSTANCE.createLandingPad()));
 
 		newChildDescriptors.add
@@ -471,17 +466,7 @@ public class BasicBlockItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createLabelList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
 				 LlvmFactory.eINSTANCE.createSwitch()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createJumpTable()));
 
 		newChildDescriptors.add
 			(createChildParameter

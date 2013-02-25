@@ -3,18 +3,24 @@
 package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.IndirectBranch;
-import de.upb.llvm_parser.llvm.LabelList;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.TypeUse;
 import de.upb.llvm_parser.llvm.Value;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +31,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.IndirectBranchImpl#getAdresstype <em>Adresstype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.IndirectBranchImpl#getAdress <em>Adress</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.IndirectBranchImpl#getLList <em>LList</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.IndirectBranchImpl#getLabeltype <em>Labeltype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.IndirectBranchImpl#getLabels <em>Labels</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,14 +60,24 @@ public class IndirectBranchImpl extends Ret_InstrImpl implements IndirectBranch 
 	protected Value adress;
 
 	/**
-	 * The cached value of the '{@link #getLList() <em>LList</em>}' containment reference.
+	 * The cached value of the '{@link #getLabeltype() <em>Labeltype</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLList()
+	 * @see #getLabeltype()
 	 * @generated
 	 * @ordered
 	 */
-	protected LabelList lList;
+	protected EList<TypeUse> labeltype;
+
+	/**
+	 * The cached value of the '{@link #getLabels() <em>Labels</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabels()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Value> labels;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -172,8 +189,11 @@ public class IndirectBranchImpl extends Ret_InstrImpl implements IndirectBranch 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LabelList getLList() {
-		return lList;
+	public EList<TypeUse> getLabeltype() {
+		if (labeltype == null) {
+			labeltype = new EObjectContainmentEList<TypeUse>(TypeUse.class, this, LlvmPackage.INDIRECT_BRANCH__LABELTYPE);
+		}
+		return labeltype;
 	}
 
 	/**
@@ -181,33 +201,11 @@ public class IndirectBranchImpl extends Ret_InstrImpl implements IndirectBranch 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetLList(LabelList newLList, NotificationChain msgs) {
-		LabelList oldLList = lList;
-		lList = newLList;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__LLIST, oldLList, newLList);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public EList<Value> getLabels() {
+		if (labels == null) {
+			labels = new EObjectContainmentEList<Value>(Value.class, this, LlvmPackage.INDIRECT_BRANCH__LABELS);
 		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setLList(LabelList newLList) {
-		if (newLList != lList) {
-			NotificationChain msgs = null;
-			if (lList != null)
-				msgs = ((InternalEObject)lList).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__LLIST, null, msgs);
-			if (newLList != null)
-				msgs = ((InternalEObject)newLList).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__LLIST, null, msgs);
-			msgs = basicSetLList(newLList, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__LLIST, newLList, newLList));
+		return labels;
 	}
 
 	/**
@@ -222,8 +220,10 @@ public class IndirectBranchImpl extends Ret_InstrImpl implements IndirectBranch 
 				return basicSetAdresstype(null, msgs);
 			case LlvmPackage.INDIRECT_BRANCH__ADRESS:
 				return basicSetAdress(null, msgs);
-			case LlvmPackage.INDIRECT_BRANCH__LLIST:
-				return basicSetLList(null, msgs);
+			case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
+				return ((InternalEList<?>)getLabeltype()).basicRemove(otherEnd, msgs);
+			case LlvmPackage.INDIRECT_BRANCH__LABELS:
+				return ((InternalEList<?>)getLabels()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -240,8 +240,10 @@ public class IndirectBranchImpl extends Ret_InstrImpl implements IndirectBranch 
 				return getAdresstype();
 			case LlvmPackage.INDIRECT_BRANCH__ADRESS:
 				return getAdress();
-			case LlvmPackage.INDIRECT_BRANCH__LLIST:
-				return getLList();
+			case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
+				return getLabeltype();
+			case LlvmPackage.INDIRECT_BRANCH__LABELS:
+				return getLabels();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -251,6 +253,7 @@ public class IndirectBranchImpl extends Ret_InstrImpl implements IndirectBranch 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -260,8 +263,13 @@ public class IndirectBranchImpl extends Ret_InstrImpl implements IndirectBranch 
 			case LlvmPackage.INDIRECT_BRANCH__ADRESS:
 				setAdress((Value)newValue);
 				return;
-			case LlvmPackage.INDIRECT_BRANCH__LLIST:
-				setLList((LabelList)newValue);
+			case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
+				getLabeltype().clear();
+				getLabeltype().addAll((Collection<? extends TypeUse>)newValue);
+				return;
+			case LlvmPackage.INDIRECT_BRANCH__LABELS:
+				getLabels().clear();
+				getLabels().addAll((Collection<? extends Value>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -281,8 +289,11 @@ public class IndirectBranchImpl extends Ret_InstrImpl implements IndirectBranch 
 			case LlvmPackage.INDIRECT_BRANCH__ADRESS:
 				setAdress((Value)null);
 				return;
-			case LlvmPackage.INDIRECT_BRANCH__LLIST:
-				setLList((LabelList)null);
+			case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
+				getLabeltype().clear();
+				return;
+			case LlvmPackage.INDIRECT_BRANCH__LABELS:
+				getLabels().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -300,8 +311,10 @@ public class IndirectBranchImpl extends Ret_InstrImpl implements IndirectBranch 
 				return adresstype != null;
 			case LlvmPackage.INDIRECT_BRANCH__ADRESS:
 				return adress != null;
-			case LlvmPackage.INDIRECT_BRANCH__LLIST:
-				return lList != null;
+			case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
+				return labeltype != null && !labeltype.isEmpty();
+			case LlvmPackage.INDIRECT_BRANCH__LABELS:
+				return labels != null && !labels.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

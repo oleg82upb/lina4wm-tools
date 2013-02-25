@@ -78,7 +78,10 @@ public class SwitchItemProvider
 			childrenFeatures.add(LlvmPackage.Literals.SWITCH__COMPVALUE);
 			childrenFeatures.add(LlvmPackage.Literals.SWITCH__DEFAULTTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.SWITCH__DEFAULTVALUE);
-			childrenFeatures.add(LlvmPackage.Literals.SWITCH__JTABLE);
+			childrenFeatures.add(LlvmPackage.Literals.SWITCH__JTYPES);
+			childrenFeatures.add(LlvmPackage.Literals.SWITCH__JVALUES);
+			childrenFeatures.add(LlvmPackage.Literals.SWITCH__DESTINATIONTYPES);
+			childrenFeatures.add(LlvmPackage.Literals.SWITCH__DESTINATIONS);
 		}
 		return childrenFeatures;
 	}
@@ -134,7 +137,10 @@ public class SwitchItemProvider
 			case LlvmPackage.SWITCH__COMPVALUE:
 			case LlvmPackage.SWITCH__DEFAULTTYPE:
 			case LlvmPackage.SWITCH__DEFAULTVALUE:
-			case LlvmPackage.SWITCH__JTABLE:
+			case LlvmPackage.SWITCH__JTYPES:
+			case LlvmPackage.SWITCH__JVALUES:
+			case LlvmPackage.SWITCH__DESTINATIONTYPES:
+			case LlvmPackage.SWITCH__DESTINATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -234,8 +240,83 @@ public class SwitchItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__JTABLE,
-				 LlvmFactory.eINSTANCE.createJumpTable()));
+				(LlvmPackage.Literals.SWITCH__JTYPES,
+				 LlvmFactory.eINSTANCE.createTypeUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__JTYPES,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__JTYPES,
+				 LlvmFactory.eINSTANCE.createPredefined()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__JVALUES,
+				 LlvmFactory.eINSTANCE.createValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__JVALUES,
+				 LlvmFactory.eINSTANCE.createConstant()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__JVALUES,
+				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__JVALUES,
+				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__JVALUES,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__DESTINATIONTYPES,
+				 LlvmFactory.eINSTANCE.createTypeUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__DESTINATIONTYPES,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__DESTINATIONTYPES,
+				 LlvmFactory.eINSTANCE.createPredefined()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__DESTINATIONS,
+				 LlvmFactory.eINSTANCE.createValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__DESTINATIONS,
+				 LlvmFactory.eINSTANCE.createConstant()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__DESTINATIONS,
+				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__DESTINATIONS,
+				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__DESTINATIONS,
+				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 	}
 
 	/**
@@ -252,8 +333,12 @@ public class SwitchItemProvider
 		boolean qualify =
 			childFeature == LlvmPackage.Literals.SWITCH__COMPTYPE ||
 			childFeature == LlvmPackage.Literals.SWITCH__DEFAULTTYPE ||
+			childFeature == LlvmPackage.Literals.SWITCH__JTYPES ||
+			childFeature == LlvmPackage.Literals.SWITCH__DESTINATIONTYPES ||
 			childFeature == LlvmPackage.Literals.SWITCH__COMPVALUE ||
-			childFeature == LlvmPackage.Literals.SWITCH__DEFAULTVALUE;
+			childFeature == LlvmPackage.Literals.SWITCH__DEFAULTVALUE ||
+			childFeature == LlvmPackage.Literals.SWITCH__JVALUES ||
+			childFeature == LlvmPackage.Literals.SWITCH__DESTINATIONS;
 
 		if (qualify) {
 			return getString

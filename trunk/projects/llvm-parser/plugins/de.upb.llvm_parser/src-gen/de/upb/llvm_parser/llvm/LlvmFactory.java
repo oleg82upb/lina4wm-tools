@@ -409,15 +409,6 @@ public interface LlvmFactory extends EFactory {
 	PHI createPHI();
 
 	/**
-	 * Returns a new object of class '<em>Value Pair</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Value Pair</em>'.
-	 * @generated
-	 */
-	ValuePair createValuePair();
-
-	/**
 	 * Returns a new object of class '<em>Landing Pad</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -499,15 +490,6 @@ public interface LlvmFactory extends EFactory {
 	IndirectBranch createIndirectBranch();
 
 	/**
-	 * Returns a new object of class '<em>Label List</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Label List</em>'.
-	 * @generated
-	 */
-	LabelList createLabelList();
-
-	/**
 	 * Returns a new object of class '<em>Switch</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -515,15 +497,6 @@ public interface LlvmFactory extends EFactory {
 	 * @generated
 	 */
 	Switch createSwitch();
-
-	/**
-	 * Returns a new object of class '<em>Jump Table</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Jump Table</em>'.
-	 * @generated
-	 */
-	JumpTable createJumpTable();
 
 	/**
 	 * Returns a new object of class '<em>Invoke</em>'.

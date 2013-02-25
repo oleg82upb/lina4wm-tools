@@ -2,19 +2,25 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
-import de.upb.llvm_parser.llvm.JumpTable;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Switch;
 import de.upb.llvm_parser.llvm.TypeUse;
 import de.upb.llvm_parser.llvm.Value;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +33,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getCompvalue <em>Compvalue</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getDefaulttype <em>Defaulttype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getDefaultvalue <em>Defaultvalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getJTable <em>JTable</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getJtypes <em>Jtypes</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getJvalues <em>Jvalues</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getDestinationtypes <em>Destinationtypes</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getDestinations <em>Destinations</em>}</li>
  * </ul>
  * </p>
  *
@@ -75,14 +84,44 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 	protected Value defaultvalue;
 
 	/**
-	 * The cached value of the '{@link #getJTable() <em>JTable</em>}' containment reference.
+	 * The cached value of the '{@link #getJtypes() <em>Jtypes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getJTable()
+	 * @see #getJtypes()
 	 * @generated
 	 * @ordered
 	 */
-	protected JumpTable jTable;
+	protected EList<TypeUse> jtypes;
+
+	/**
+	 * The cached value of the '{@link #getJvalues() <em>Jvalues</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getJvalues()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Value> jvalues;
+
+	/**
+	 * The cached value of the '{@link #getDestinationtypes() <em>Destinationtypes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDestinationtypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypeUse> destinationtypes;
+
+	/**
+	 * The cached value of the '{@link #getDestinations() <em>Destinations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDestinations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Value> destinations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -280,8 +319,11 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JumpTable getJTable() {
-		return jTable;
+	public EList<TypeUse> getJtypes() {
+		if (jtypes == null) {
+			jtypes = new EObjectContainmentEList<TypeUse>(TypeUse.class, this, LlvmPackage.SWITCH__JTYPES);
+		}
+		return jtypes;
 	}
 
 	/**
@@ -289,14 +331,11 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetJTable(JumpTable newJTable, NotificationChain msgs) {
-		JumpTable oldJTable = jTable;
-		jTable = newJTable;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__JTABLE, oldJTable, newJTable);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public EList<Value> getJvalues() {
+		if (jvalues == null) {
+			jvalues = new EObjectContainmentEList<Value>(Value.class, this, LlvmPackage.SWITCH__JVALUES);
 		}
-		return msgs;
+		return jvalues;
 	}
 
 	/**
@@ -304,18 +343,23 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setJTable(JumpTable newJTable) {
-		if (newJTable != jTable) {
-			NotificationChain msgs = null;
-			if (jTable != null)
-				msgs = ((InternalEObject)jTable).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SWITCH__JTABLE, null, msgs);
-			if (newJTable != null)
-				msgs = ((InternalEObject)newJTable).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SWITCH__JTABLE, null, msgs);
-			msgs = basicSetJTable(newJTable, msgs);
-			if (msgs != null) msgs.dispatch();
+	public EList<TypeUse> getDestinationtypes() {
+		if (destinationtypes == null) {
+			destinationtypes = new EObjectContainmentEList<TypeUse>(TypeUse.class, this, LlvmPackage.SWITCH__DESTINATIONTYPES);
 		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__JTABLE, newJTable, newJTable));
+		return destinationtypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Value> getDestinations() {
+		if (destinations == null) {
+			destinations = new EObjectContainmentEList<Value>(Value.class, this, LlvmPackage.SWITCH__DESTINATIONS);
+		}
+		return destinations;
 	}
 
 	/**
@@ -334,8 +378,14 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 				return basicSetDefaulttype(null, msgs);
 			case LlvmPackage.SWITCH__DEFAULTVALUE:
 				return basicSetDefaultvalue(null, msgs);
-			case LlvmPackage.SWITCH__JTABLE:
-				return basicSetJTable(null, msgs);
+			case LlvmPackage.SWITCH__JTYPES:
+				return ((InternalEList<?>)getJtypes()).basicRemove(otherEnd, msgs);
+			case LlvmPackage.SWITCH__JVALUES:
+				return ((InternalEList<?>)getJvalues()).basicRemove(otherEnd, msgs);
+			case LlvmPackage.SWITCH__DESTINATIONTYPES:
+				return ((InternalEList<?>)getDestinationtypes()).basicRemove(otherEnd, msgs);
+			case LlvmPackage.SWITCH__DESTINATIONS:
+				return ((InternalEList<?>)getDestinations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -356,8 +406,14 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 				return getDefaulttype();
 			case LlvmPackage.SWITCH__DEFAULTVALUE:
 				return getDefaultvalue();
-			case LlvmPackage.SWITCH__JTABLE:
-				return getJTable();
+			case LlvmPackage.SWITCH__JTYPES:
+				return getJtypes();
+			case LlvmPackage.SWITCH__JVALUES:
+				return getJvalues();
+			case LlvmPackage.SWITCH__DESTINATIONTYPES:
+				return getDestinationtypes();
+			case LlvmPackage.SWITCH__DESTINATIONS:
+				return getDestinations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -367,6 +423,7 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -382,8 +439,21 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 			case LlvmPackage.SWITCH__DEFAULTVALUE:
 				setDefaultvalue((Value)newValue);
 				return;
-			case LlvmPackage.SWITCH__JTABLE:
-				setJTable((JumpTable)newValue);
+			case LlvmPackage.SWITCH__JTYPES:
+				getJtypes().clear();
+				getJtypes().addAll((Collection<? extends TypeUse>)newValue);
+				return;
+			case LlvmPackage.SWITCH__JVALUES:
+				getJvalues().clear();
+				getJvalues().addAll((Collection<? extends Value>)newValue);
+				return;
+			case LlvmPackage.SWITCH__DESTINATIONTYPES:
+				getDestinationtypes().clear();
+				getDestinationtypes().addAll((Collection<? extends TypeUse>)newValue);
+				return;
+			case LlvmPackage.SWITCH__DESTINATIONS:
+				getDestinations().clear();
+				getDestinations().addAll((Collection<? extends Value>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -409,8 +479,17 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 			case LlvmPackage.SWITCH__DEFAULTVALUE:
 				setDefaultvalue((Value)null);
 				return;
-			case LlvmPackage.SWITCH__JTABLE:
-				setJTable((JumpTable)null);
+			case LlvmPackage.SWITCH__JTYPES:
+				getJtypes().clear();
+				return;
+			case LlvmPackage.SWITCH__JVALUES:
+				getJvalues().clear();
+				return;
+			case LlvmPackage.SWITCH__DESTINATIONTYPES:
+				getDestinationtypes().clear();
+				return;
+			case LlvmPackage.SWITCH__DESTINATIONS:
+				getDestinations().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -432,8 +511,14 @@ public class SwitchImpl extends Ret_InstrImpl implements Switch {
 				return defaulttype != null;
 			case LlvmPackage.SWITCH__DEFAULTVALUE:
 				return defaultvalue != null;
-			case LlvmPackage.SWITCH__JTABLE:
-				return jTable != null;
+			case LlvmPackage.SWITCH__JTYPES:
+				return jtypes != null && !jtypes.isEmpty();
+			case LlvmPackage.SWITCH__JVALUES:
+				return jvalues != null && !jvalues.isEmpty();
+			case LlvmPackage.SWITCH__DESTINATIONTYPES:
+				return destinationtypes != null && !destinationtypes.isEmpty();
+			case LlvmPackage.SWITCH__DESTINATIONS:
+				return destinations != null && !destinations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
