@@ -118,6 +118,7 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getFunctionDefinitionAccess().getGroup_1_10(), "rule__FunctionDefinition__Group_1_10__0");
 					put(grammarAccess.getAliasDefinitionAccess().getGroup(), "rule__AliasDefinition__Group__0");
 					put(grammarAccess.getTypeUseAccess().getGroup(), "rule__TypeUse__Group__0");
+					put(grammarAccess.getTypeUseAccess().getGroup_0_1(), "rule__TypeUse__Group_0_1__0");
 					put(grammarAccess.getAddressUseAccess().getGroup(), "rule__AddressUse__Group__0");
 					put(grammarAccess.getPredefinedAccess().getGroup(), "rule__Predefined__Group__0");
 					put(grammarAccess.getVectorAccess().getGroup(), "rule__Vector__Group__0");
@@ -127,7 +128,7 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNonConstantValueAccess().getGroup(), "rule__NonConstantValue__Group__0");
 					put(grammarAccess.getValueAccess().getGroup_0(), "rule__Value__Group_0__0");
 					put(grammarAccess.getValueStructAccess().getGroup(), "rule__ValueStruct__Group__0");
-					put(grammarAccess.getValueStructAccess().getGroup_4(), "rule__ValueStruct__Group_4__0");
+					put(grammarAccess.getValueStructAccess().getGroup_3(), "rule__ValueStruct__Group_3__0");
 					put(grammarAccess.getStructureAccess().getGroup(), "rule__Structure__Group__0");
 					put(grammarAccess.getStructureAccess().getGroup_2(), "rule__Structure__Group_2__0");
 					put(grammarAccess.getStructureAccess().getGroup_2_1(), "rule__Structure__Group_2_1__0");
@@ -258,9 +259,9 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNonConstantValueAccess().getNameAssignment_0(), "rule__NonConstantValue__NameAssignment_0");
 					put(grammarAccess.getNonConstantValueAccess().getPointerAssignment_1(), "rule__NonConstantValue__PointerAssignment_1");
 					put(grammarAccess.getValueStructAccess().getTypesAssignment_1(), "rule__ValueStruct__TypesAssignment_1");
-					put(grammarAccess.getValueStructAccess().getValueAssignment_3(), "rule__ValueStruct__ValueAssignment_3");
-					put(grammarAccess.getValueStructAccess().getTypesAssignment_4_1(), "rule__ValueStruct__TypesAssignment_4_1");
-					put(grammarAccess.getValueStructAccess().getValueAssignment_4_3(), "rule__ValueStruct__ValueAssignment_4_3");
+					put(grammarAccess.getValueStructAccess().getValueAssignment_2(), "rule__ValueStruct__ValueAssignment_2");
+					put(grammarAccess.getValueStructAccess().getTypesAssignment_3_1(), "rule__ValueStruct__TypesAssignment_3_1");
+					put(grammarAccess.getValueStructAccess().getValueAssignment_3_2(), "rule__ValueStruct__ValueAssignment_3_2");
 					put(grammarAccess.getStructureAccess().getTypesAssignment_2_0(), "rule__Structure__TypesAssignment_2_0");
 					put(grammarAccess.getStructureAccess().getTypesAssignment_2_1_1(), "rule__Structure__TypesAssignment_2_1_1");
 					put(grammarAccess.getParameterListAccess().getTypesAssignment_1_1_1_0(), "rule__ParameterList__TypesAssignment_1_1_1_0");
