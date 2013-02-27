@@ -1,3 +1,11 @@
+/*
+author: Annika Mütze <muetze.annika@gmail.com>
+date: 01.2013
+
+abstract Treiber Stack implementation based on a LLVM optimized version
+*/
+
+
 #define BUFF_SIZE 10 	//size of Buffer
 #define MEM_SIZE 40	//size of memory
  
@@ -23,6 +31,10 @@ inline asPop(asValue, asReturn)
 	}
 }
 
+inline asPopFail()
+{
+	assert (asTop == 0)
+}
 
 inline asPush(asValue)
 {

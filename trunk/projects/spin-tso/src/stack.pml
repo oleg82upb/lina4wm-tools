@@ -1,4 +1,11 @@
 /*
+author: Annika Mütze <muetze.annika@gmail.com>
+date: 01.2013
+
+abstract Treiber Stack implementation
+*/
+
+/*
 	trying to specify the LLVM-compiled Treiber Stack implementation  
 */
 
@@ -16,7 +23,7 @@ short asStack[ASSIZE];
 hidden byte asTop = 0;
 
 //asValue the value we expect to be on top of the stack
-inline asPop(asValue, asReturn)
+inline asPop(asValue, asReturn) //can leave out the returnValue????????????????????????????????
 {
 	atomic
 	{
