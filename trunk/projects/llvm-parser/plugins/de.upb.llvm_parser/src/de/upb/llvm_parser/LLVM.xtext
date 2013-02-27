@@ -78,7 +78,7 @@ AliasDefinition:
 	address=Address '=' 'alias' ALIAS_LINKAGE? VISIBILITY? aliastype=TypeUse aliasvalue=Value aliasee=(TypeUse);
 
 TypeUse:
-	(Predefined | AddressUse) OREST?;
+	(Predefined | AddressUse) ('()*')? OREST?;
 
 AddressUse:
 	address=[Address|VALID_ID] (pointer=POINTER)?;
@@ -120,7 +120,7 @@ Value:
 	{Value} (STRING| Primitive_Type | Initializers) | Cast | GetElementPtr2 | Constant | NonConstantValue;
 
 ValueStruct:
-	'{' types+=TypeUse ('()*')? value+=Value (',' types+=TypeUse ('()*')? value+=Value)* '}';
+	'{' types+=TypeUse value+=Value (',' types+=TypeUse value+=Value)* '}';
 
 Structure:
 	{Structure} '{' (types+=TypeUse (',' types+=(TypeUse|Aggregate_Types))*)? '}' POINTER?;
