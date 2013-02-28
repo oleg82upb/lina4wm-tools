@@ -2,7 +2,7 @@
 	trying to specify the LLVM-compiled Treiber Stack implementation  
 */
 
-#define BUFF_SIZE 4 	//size of Buffer
+#define BUFF_SIZE 20 	//size of Buffer
 #define MEM_SIZE 5	//size of memory
  
 //-----------------------------------------------------------------------------------------------------------------------------------------------
@@ -18,7 +18,7 @@
 #define FLAG0 1
 #define FLAG1 2
 short memUse = 1; 	//shows to the next free cell in memory
-short critCount = 0;
+short crit = 0;
 
 
 chan channelT1 = [0] of {mtype, short, short, short};
@@ -47,7 +47,17 @@ inline alloca(type, targetRegister)
 
 
 
+inline critical()
+{
+	assert(crit == 0); 
+	crit = _pid;
+}
 
+inline uncritical()
+{
+	assert(crit == _pid); 
+	crit = 0;
+}
 
 
 inline p1()
@@ -60,11 +70,10 @@ whileBegin:	write(FLAG0, 1);
 whileCond1:	read(FLAG1, v0);
 			if
 				:: v0 != 0 -> goto whileCond1;
-				:: else -> skip;
+				:: atomic{else -> critical(); skip;}
 			fi
 			->
-critical:	critCount = critCount+1;
-			critCount = critCount-1;
+			uncritical();
 			write(FLAG0, 0);
 end:		goto whileBegin;
 }
@@ -82,16 +91,15 @@ while:		read(FLAG0,v0);
 			fi
 			->
 			write(FLAG1, 1);
-			mfence();
+			//mfence();
 			read(FLAG0, v1);
 			if
-				:: v1 == 0 -> goto critical;
-				:: else -> goto ifend;
+				:: v1 != 0 -> goto ifend;
+				:: atomic{else -> critical(); skip;}
 			fi
 			->
 			
-critical:	critCount = critCount+1;
-			critCount = critCount-1;
+			uncritical();
 
 ifend:		write(FLAG1, 0);
 end:		goto while;
@@ -114,5 +122,4 @@ proctype process2(chan ch){
 	p2();
 }
 
-ltl neverBothCritical{ [] !(process1 @ critical && process2 @ critical)}
-ltl n2c{ [] !(critCount > 1)}
+//ltl neverBothCritical{ [] !(process1 @ critical && process2 @ critical)}
