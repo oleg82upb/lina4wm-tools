@@ -80,9 +80,8 @@ public class LLVMASTAssistant extends XtextResource implements
 		try {
 			IWorkbenchWindow window = PlatformUI.getWorkbench()
 					.getActiveWorkbenchWindow();
-
-			ISelection selection = window.getSelectionService().getSelection(
-					"org.eclipse.jdt.ui.PackageExplorer");
+			
+			ISelection selection = window.getSelectionService().getSelection();
 
 			TreePath[] paths = ((TreeSelection) selection).getPaths();
 			TreePath p = paths[0];
@@ -116,7 +115,10 @@ public class LLVMASTAssistant extends XtextResource implements
 			Resource resource = xtextResourceSet.getResource(uri, true);
 			EObject ast = resource.getContents().get(0);
 			ResourceSet resSet = new ResourceSetImpl();
-			resource = resSet.createResource(URI.createFileURI(getLocation((IFile) last, window)));
+			String loc = getLocation((IFile) last, window);
+			if(loc == null)
+				return;
+			resource = resSet.createResource(URI.createFileURI(loc));
 			resource.getContents().add(ast);
 			EcoreUtil.resolveAll(ast);
 			resource.save(Collections.EMPTY_MAP);
