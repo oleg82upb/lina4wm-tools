@@ -78,7 +78,7 @@ inline casLPDequeue(adr, oldValue, newValue, returnValue)
 	ch ? iCas, adr, success, _; 
 	returnValue = success;
 	if 
-		:: success -> asDequeue(oldValue, success); //if successfull, then the popped value is the oldValue
+		:: success -> asDequeue(oldValue, success); //if successfull, then the dequeued value is the oldValue
 		:: else -> skip;
 	fi
 	 
@@ -191,7 +191,7 @@ if_else:
 	getelementptr(Queue, this1, 1, tail9);
 	read(localTail, v22);
 	read(next, v24);
-	casLPEnqueue(tail9, v22, v24, v26, value);
+	cas(tail9, v22, v24, v26);
 	if
 	:: v26 == false -> goto doBody;
 	:: else -> skip;
@@ -202,10 +202,10 @@ do_end:
 	read(localTail, v29);
 	read(node, v31);
 	casLPEnqueue(tail12, v29, v31, v33, value);
-	if
-	:: v33 == false -> goto doBody; // skip;//goto doBody; //why do I need this/ what do I do with this???
-	:: else-> skip;
-	fi;
+	//if
+	//:: v33 == false -> goto doBody; // skip; //why do I need this/ what do I do with this???
+	//:: else-> skip;
+	//fi;
 	
 		
 	
@@ -262,24 +262,23 @@ if_then:
 if_then5:
 	read(next, v8);
 	if
-	:: v8 == NULL -> goto if_then7
+	:: v8 == NULL -> 	write(retval, false);			//queue is empty
+						goto end_return;
 	:: else -> goto if_end
 	fi;
 	
-if_then7:
-	write(retval, false);
-	goto end_return;
 	
 if_end:
 	getelementptr(Queue, this1, 1, tail8);
 	read(localTail, v10);
 	read(next, v12);
-	casLPDequeue(tail8, v10, v12, v14);
-	if
-	:: v14 == false-> goto doBody
-	:: else -> 	write(retval, true);
-				goto end_return;
-	fi;
+	cas(tail8, v10, v12, v14);
+	//if
+	//:: v14 == false-> 
+	goto doBody;
+	//:: else -> 	write(retval, true);			//doesent make sense!!! There shouldnt be a decision -> always goto doBody!
+	//			goto end_return;
+	//fi;
 	
 if_else:
 	read(next, v16);
@@ -305,8 +304,9 @@ end_return:
 //---------------------------------------------------------------------------------------------------------------------------------------
 proctype process1(chan ch){
 	short returnval;
-	short v = 555;
-	enqueue(this, v);
+	short v;
+	enqueue(this, 555);
+	enqueue(this, 666);
 	dequeue(returnval, v);
 }
 
