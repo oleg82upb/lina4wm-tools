@@ -5,7 +5,7 @@ date: 02.2013
 abstract MSqueue implementation
 */
 
-#define BUFF_SIZE 10 	//size of Buffer
+#define BUFF_SIZE 20 	//size of Buffer
 #define MEM_SIZE 40	//size of memory
  
 //-----------------------------------------------------------------------------------------------------------------------------------------------
@@ -13,10 +13,10 @@ abstract MSqueue implementation
 
 //-------------------------------------------------------------------------------------------------
 //abstract Queue implemented as array----------------------
-#define ASSIZE 4
+#define ASSIZE 6
 short asQueue[ASSIZE];
 hidden byte asHead = 0;
-hidden byte asTail = -1;
+hidden byte asTail = 0;
 hidden byte asIsEmpty = true; 
 
 
@@ -42,12 +42,11 @@ inline asDequeue(asValue, asReturn)
 {
 	atomic
 	{
-		//assert(Queue not empty)
-		assert (asQueue[asHead] == memory[asValue]);  	//asValue must be the element head is poniting to
 		asQueue[asHead] = 0;							//remove element from queue
-		head = (head+1) % ASSIZE;						//move at to the next in line
+		asHead = (asHead+1) % ASSIZE;						//move head to the next in line
+		assert (asQueue[asHead] == memory[asValue]);  	//asValue must be the element head is poniting to
 		if
-		:: head == (tail+1) % ASSIZE -> asIsEmpty = true;	//mark queue as empty if last element is dequeued
+		:: asHead == (asTail+1) % ASSIZE -> asIsEmpty = true;	//mark queue as empty if last element is dequeued
 		:: else -> skip
 		fi;
 	}
@@ -233,6 +232,7 @@ entry:
 	->
 doBody:
 	getelementptr(Queue, this1, 0, head);
+	//check wether queue is empty?
 	read(head, v0);
 	write(localHead, v0);
 	getelementptr(Queue, this1, 1, tail);
@@ -273,12 +273,11 @@ if_end:
 	read(localTail, v10);
 	read(next, v12);
 	cas(tail8, v10, v12, v14);
-	//if
-	//:: v14 == false-> 
-	goto doBody;
-	//:: else -> 	write(retval, true);			//doesent make sense!!! There shouldnt be a decision -> always goto doBody!
-	//			goto end_return;
-	//fi;
+	if
+	:: v14 == false-> goto doBody;
+	:: else -> 	write(retval, true);			//doesent make sense!!! There shouldnt be a decision -> always goto doBody!
+			goto end_return;
+	fi;
 	
 if_else:
 	read(next, v16);
@@ -303,16 +302,19 @@ end_return:
 }
 //---------------------------------------------------------------------------------------------------------------------------------------
 proctype process1(chan ch){
-	short returnval;
-	short v;
+	short returnval, v;
 	enqueue(this, 555);
-	enqueue(this, 666);
+	//enqueue(this, 666);
+	//enqueue(this, 777);
+	//enqueue(this, 888);
 	dequeue(returnval, v);
+	//dequeue(returnval, v);
 }
 
 proctype process2(chan ch){
 //	short returnval2;
-//	enqueue(this, 666);
+	//enqueue(this, 777);
+	//enqueue(this, 888);
 //	dequeue(returnval2);
 	skip;
 }
