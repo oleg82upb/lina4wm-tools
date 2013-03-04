@@ -123,7 +123,7 @@ inline alloca(type, targetRegister)
 
 inline enqueue (this, value){
 
-short this_addr, value_addr, this1, node, head, tail, localTail, next, next2, next3, next7, val, tail4, tail9, tail12;
+short this_addr, value_addr, this1, node, ghead, gtail, localTail, next, next2, next3, next7, val, tail4, tail9, tail12;
 short v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v12, v14, v16, v22, v24, v26, v29, v31, v33;
 
 entry:
@@ -152,8 +152,8 @@ invoke_cont:
 	write(next2, NULL);
 	
 doBody:
-	getelementptr(Queue, this1, 1, tail);
-	read(tail, v4);
+	getelementptr(Queue, this1, 1, gtail);
+	read(gtail, v4);
 	write(localTail, v4);
 	read(localTail, v5);
 	getelementptr(Node, v5, 1, next3);
@@ -185,7 +185,7 @@ if_then6:
 	:: v16 == false -> goto doBody
 	:: else -> goto do_end					
 	fi;
-	//lpad ???????????????????????????????????????????????
+	
 if_else:
 	getelementptr(Queue, this1, 1, tail9);
 	read(localTail, v22);
@@ -200,20 +200,14 @@ do_end:
 	getelementptr(Queue, this1, 1, tail12);
 	read(localTail, v29);
 	read(node, v31);
-	casLPEnqueue(tail12, v29, v31, v33, value);
-	//if
-	//:: v33 == false -> goto doBody; // skip; //why do I need this/ what do I do with this???
-	//:: else-> skip;
-	//fi;
-	
+	cas(tail12, v29, v31, v33);
 		
-	
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 inline dequeue (returnval, valueA){		// why do we need a value for dequeuing???
 
-short retval, this_addr, this_value, localHead, localTail, this1, value_addr, val, next, next2, head, head3, head9, tail, tail8;
+short retval, this_addr, this_value, localHead, localTail, this1, value_addr, val, next, next2, ghead, head3, head9, gtail, tail8;
 short v0, v1, v2, v3, v4, v5, v6, v7, v8, v10, v12, v14, v16, v17, v18, v20, v22, v24;
 
 entry: 
@@ -231,12 +225,12 @@ entry:
 		
 	->
 doBody:
-	getelementptr(Queue, this1, 0, head);
+	getelementptr(Queue, this1, 0, ghead);
 	//check wether queue is empty?
-	read(head, v0);
+	read(ghead, v0);
 	write(localHead, v0);
-	getelementptr(Queue, this1, 1, tail);
-	read(tail, v1);
+	getelementptr(Queue, this1, 1, gtail);
+	read(gtail, v1);
 	write(localTail, v1);
 	read(localHead, v2);
 	getelementptr(Node, v2, 1, next2);
@@ -275,8 +269,10 @@ if_end:
 	cas(tail8, v10, v12, v14);
 	if
 	:: v14 == false-> goto doBody;
-	:: else -> 	write(retval, true);			//doesent make sense!!! There shouldnt be a decision -> always goto doBody!
-			goto end_return;
+	//br label %if.end12
+	//do.cond:  br i1 true, label %do.body, label %do.end
+	//:: else -> 	write(retval, true);			//doesent make sense!!! There shouldnt be a decision -> always goto doBody!
+	//		goto end_return;
 	fi;
 	
 if_else:
@@ -321,11 +317,13 @@ proctype process2(chan ch){
 
 init{
 atomic{
-	alloca(Queue, this)
+	alloca(Queue, this);
+	alloca(Node, memory[1]);
+	memory[2] = memory[1];
 	run process1(channelT1);
 	run bufferProcess(channelT1);
-	run process2(channelT2);
-	run bufferProcess(channelT2);
+	//run process2(channelT2);
+	//run bufferProcess(channelT2);
 	}
 }
 
