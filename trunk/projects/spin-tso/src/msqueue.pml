@@ -77,7 +77,7 @@ inline casLPDequeue(adr, oldValue, newValue, returnValue)
 	ch ? iCas, adr, success, _; 
 	returnValue = success;
 	if 
-		:: success -> asDequeue(oldValue, success); //if successfull, then the dequeued value is the oldValue
+		:: success -> asDequeue(newValue, success); //if successfull, then the dequeued value is the newValue
 		:: else -> skip;
 	fi
 	 
@@ -135,8 +135,6 @@ entry:
 		alloca(Ptr, next);
 		alloca(Node, v0);		//new node
 		}
-		//???    %exn.slot = alloca i8*
- 		//???    %ehselector.slot = alloca i32
 		write(this_addr, this);
 		write(value_addr, value);
 		read(this_addr, this1);
@@ -180,7 +178,7 @@ if_then6:
 	getelementptr(Node, v10, 1, next7);
 	read(next, v12);
 	read(node, v14);
-	cas(next7, v12, v14, v16); 
+	casLPEnqueue(next7, v12, v14, v16, value); 
 	if
 	:: v16 == false -> goto doBody
 	:: else -> goto do_end					
@@ -205,7 +203,7 @@ do_end:
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-inline dequeue (returnval, valueA){		// why do we need a value for dequeuing???
+inline dequeue (returnval, valueA){
 
 short retval, this_addr, this_value, localHead, localTail, this1, value_addr, val, next, next2, ghead, head3, head9, gtail, tail8;
 short v0, v1, v2, v3, v4, v5, v6, v7, v8, v10, v12, v14, v16, v17, v18, v20, v22, v24;
@@ -214,6 +212,7 @@ entry:
 	atomic{
 		alloca(Ptr, retval);		
 		alloca(Ptr, this_addr);
+		alloca(Ptr, value_addr);
 		alloca(Ptr, this_value);
 		alloca(Ptr, localHead);
 		alloca(Ptr, localTail);
@@ -267,13 +266,8 @@ if_end:
 	read(localTail, v10);
 	read(next, v12);
 	cas(tail8, v10, v12, v14);
-	if
-	:: v14 == false-> goto doBody;
-	//br label %if.end12
-	//do.cond:  br i1 true, label %do.body, label %do.end
-	//:: else -> 	write(retval, true);			//doesent make sense!!! There shouldnt be a decision -> always goto doBody!
-	//		goto end_return;
-	fi;
+	goto doBody;
+	
 	
 if_else:
 	read(next, v16);
@@ -300,18 +294,17 @@ end_return:
 proctype process1(chan ch){
 	short returnval, v;
 	enqueue(this, 555);
-	//enqueue(this, 666);
-	//enqueue(this, 777);
-	//enqueue(this, 888);
-	dequeue(returnval, v);
+	enqueue(this, 666);
+	//dequeue(returnval, v);
 	//dequeue(returnval, v);
 }
 
 proctype process2(chan ch){
-//	short returnval2;
+	short returnval2, returnval3, n;
 	//enqueue(this, 777);
 	//enqueue(this, 888);
-//	dequeue(returnval2);
+	dequeue(returnval2,n);
+	dequeue(returnval3,n);
 	skip;
 }
 
@@ -322,8 +315,8 @@ atomic{
 	memory[2] = memory[1];
 	run process1(channelT1);
 	run bufferProcess(channelT1);
-	//run process2(channelT2);
-	//run bufferProcess(channelT2);
+	run process2(channelT2);
+	run bufferProcess(channelT2);
 	}
 }
 
