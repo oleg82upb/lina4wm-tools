@@ -1,5 +1,5 @@
 
-#define NULL -1
+#define NULL 0
 
 /*Array welches die  Queue darstellt (Form: 3-dimensionales Array der Laenge SIZE) das heißt (nx3)-Matrix*/
 typedef matrix{short line [3]}

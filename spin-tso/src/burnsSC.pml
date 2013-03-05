@@ -2,11 +2,11 @@
 	trying to specify the LLVM-compiled Treiber Stack implementation  
 */
 
-#define BUFF_SIZE 8 	//size of Buffer
+//#define BUFF_SIZE 8 	//size of Buffer
 #define MEM_SIZE 3	//size of memory
  
 //-----------------------------------------------------------------------------------------------------------------------------------------------
-#include "x86_tso_buffer.pml"
+#include "sc-model.pml"
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -65,7 +65,7 @@ inline p1()
 short v0;
 
 whileBegin:	write(FLAG0, 1);
-			mfence();
+			//mfence();
 
 whileCond1:	read(FLAG1, v0);
 			if
@@ -91,7 +91,7 @@ while:		read(FLAG0,v0);
 			fi
 			->
 			write(FLAG1, 1);
-			mfence();
+			//mfence();
 			read(FLAG0, v1);
 			if
 				:: v1 != 0 -> goto ifend;
@@ -107,18 +107,18 @@ end:		goto while;
 
 init{
 atomic{
-	run process1(channelT1);
-	run bufferProcess(channelT1);
-	run process2(channelT2);
-	run bufferProcess(channelT2);
+	run process1();
+	//run bufferProcess(channelT1);
+	run process2();
+	//run bufferProcess(channelT2);
 	}
 }
 
-proctype process1(chan ch){
+proctype process1(){
 	p1();
 }
 
-proctype process2(chan ch){
+proctype process2(){
 	p2();
 }
 
