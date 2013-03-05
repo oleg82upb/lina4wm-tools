@@ -2,8 +2,8 @@
 	trying to specify the LLVM-compiled Treiber Stack implementation  
 */
 
-#define BUFF_SIZE 20 	//size of Buffer
-#define MEM_SIZE 5	//size of memory
+#define BUFF_SIZE 8 	//size of Buffer
+#define MEM_SIZE 3	//size of memory
  
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 #include "x86_tso_buffer.pml"
@@ -91,7 +91,7 @@ while:		read(FLAG0,v0);
 			fi
 			->
 			write(FLAG1, 1);
-			//mfence();
+			mfence();
 			read(FLAG0, v1);
 			if
 				:: v1 != 0 -> goto ifend;
