@@ -115,30 +115,30 @@ inline alloca(type, targetRegister)
 //------push-optimized--------
 inline push(this, v){
 
-short this_addr,v_addr, n, ss, v0, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v16, v18, v19, v21;
+short this_addr,v_addr, n, ss, v0, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v16, v18, v19, v21;
 
 entry: 
 atomic{
 	alloca(Ptr, this_addr);
 	alloca(I32, v_addr);
-	//alloca(I8,retval.0)		//do I need this?
 	alloca(Ptr, n);
 	alloca(Ptr, ss);
 	alloca(Node, v0); //new Node();	
 }
 	write(this_addr, this);
 	write(v_addr, v);
+	read(v0, v3);	
 	read(v0, v4);
-	write(n, v0);
+	write(n, v4);
 	read(n, v5);
 	getelementptr(Node,v5,0,v6);
 	read(v_addr, v7);
-	write(v6,v7);
-	
+	write(v6,v7)
+	->
 bb:
 	read(this_addr, v8);
 	getelementptr(Stack, v8, 0, v9);
-	read(v9, v10);					//volatile important?
+	read(v9, v10);				
 	write(ss, v10);
 	read(n, v11);
 	getelementptr(Node, v11, 1, v12)
@@ -163,7 +163,7 @@ bb:
 //------pop-optimized--------
 inline pop (returnvalue){
 
-short this_addr, retval, ss, ssn, lv, v0, v1, v2, v3, v4, v6, v7, v8, v9, v11, v13, v14, v16, v20, v21;
+short this_addr, retval, ss, ssn, v0, v1, v2, v3, v4, v6, v7, v8, v9, v11, v13, v14, v16, v20, v21;
 
 entry:
 atomic{
@@ -188,7 +188,7 @@ bb:
 	
 bb2:
 	read(ss, v6);
-	getelementptr(Node, v6, 1,v7);
+	getelementptr(Node, v6, 1, v7);
 	read(v7, v8);
 	write(ssn, v8);
 	read(ssn, v9);
@@ -204,11 +204,13 @@ bb2:
 
 bb5:
 	read(ss, v20);
-	write(v0, v20);
+	write(v0, v20)
+	->
 
 bb6:
 	read(v0, v21);
-	write(retval, v21);
+	write(retval, v21)
+	->
 	
 retLabel:
 	read(retval, returnvalue);
@@ -219,16 +221,17 @@ retLabel:
 
 proctype process1(chan ch){
 	short returnvalue;
-	pop(returnvalue);
+	//pop(returnvalue);
 	push(this, 666);
-	push(this, 333);
+	//push(this, 444);
 	pop(returnvalue);
 }
 
 proctype process2(chan ch){
-	push(this, 555);
-	push(this, 111);
-	//skip;
+	//push(this, 555);
+
+	//push(this, 111);
+	skip;
 }
 
 init{
