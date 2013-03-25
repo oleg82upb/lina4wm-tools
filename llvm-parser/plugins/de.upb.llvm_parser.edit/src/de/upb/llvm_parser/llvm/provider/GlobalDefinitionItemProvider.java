@@ -271,6 +271,11 @@ public class GlobalDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE,
+				 LlvmFactory.eINSTANCE.createInstruction()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE,
 				 LlvmFactory.eINSTANCE.createBasicBlock()));
 
 		newChildDescriptors.add
@@ -286,7 +291,7 @@ public class GlobalDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE,
-				 LlvmFactory.eINSTANCE.createInstruction()));
+				 LlvmFactory.eINSTANCE.createStd_Instr()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -561,6 +566,11 @@ public class GlobalDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__VALUE,
+				 LlvmFactory.eINSTANCE.createInstruction()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GLOBAL_DEFINITION__VALUE,
 				 LlvmFactory.eINSTANCE.createBasicBlock()));
 
 		newChildDescriptors.add
@@ -576,7 +586,7 @@ public class GlobalDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__VALUE,
-				 LlvmFactory.eINSTANCE.createInstruction()));
+				 LlvmFactory.eINSTANCE.createStd_Instr()));
 
 		newChildDescriptors.add
 			(createChildParameter

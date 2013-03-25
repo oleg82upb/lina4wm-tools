@@ -37,7 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class PHIImpl extends InstructionImpl implements PHI {
+public class PHIImpl extends Std_InstrImpl implements PHI {
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->

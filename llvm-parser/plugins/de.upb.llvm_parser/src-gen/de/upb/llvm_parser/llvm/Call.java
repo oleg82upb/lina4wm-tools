@@ -21,7 +21,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface Call extends Instruction {
+public interface Call extends Std_Instr {
 	/**
 	 * Returns the value of the '<em><b>Adresstype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

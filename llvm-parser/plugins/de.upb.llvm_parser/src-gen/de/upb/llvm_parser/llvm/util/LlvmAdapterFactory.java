@@ -160,6 +160,10 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 				return createFunctionBodyAdapter();
 			}
 			@Override
+			public Adapter caseInstruction(Instruction object) {
+				return createInstructionAdapter();
+			}
+			@Override
 			public Adapter caseBasicBlock(BasicBlock object) {
 				return createBasicBlockAdapter();
 			}
@@ -172,8 +176,8 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 				return createRet_InstrAdapter();
 			}
 			@Override
-			public Adapter caseInstruction(Instruction object) {
-				return createInstructionAdapter();
+			public Adapter caseStd_Instr(Std_Instr object) {
+				return createStd_InstrAdapter();
 			}
 			@Override
 			public Adapter caseARITHMETIC_OP(ARITHMETIC_OP object) {
@@ -642,6 +646,20 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Instruction <em>Instruction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.llvm_parser.llvm.Instruction
+	 * @generated
+	 */
+	public Adapter createInstructionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.BasicBlock <em>Basic Block</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -684,16 +702,16 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Instruction <em>Instruction</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Std_Instr <em>Std Instr</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Instruction
+	 * @see de.upb.llvm_parser.llvm.Std_Instr
 	 * @generated
 	 */
-	public Adapter createInstructionAdapter() {
+	public Adapter createStd_InstrAdapter() {
 		return null;
 	}
 

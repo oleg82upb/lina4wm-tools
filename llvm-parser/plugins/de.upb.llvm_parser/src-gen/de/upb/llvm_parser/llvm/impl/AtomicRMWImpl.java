@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class AtomicRMWImpl extends InstructionImpl implements AtomicRMW {
+public class AtomicRMWImpl extends Std_InstrImpl implements AtomicRMW {
 	/**
 	 * The cached value of the '{@link #getAdresstype() <em>Adresstype</em>}' containment reference.
 	 * <!-- begin-user-doc -->

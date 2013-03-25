@@ -229,6 +229,15 @@ public interface LlvmFactory extends EFactory {
 	FunctionBody createFunctionBody();
 
 	/**
+	 * Returns a new object of class '<em>Instruction</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Instruction</em>'.
+	 * @generated
+	 */
+	Instruction createInstruction();
+
+	/**
 	 * Returns a new object of class '<em>Basic Block</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -256,13 +265,13 @@ public interface LlvmFactory extends EFactory {
 	Ret_Instr createRet_Instr();
 
 	/**
-	 * Returns a new object of class '<em>Instruction</em>'.
+	 * Returns a new object of class '<em>Std Instr</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Instruction</em>'.
+	 * @return a new object of class '<em>Std Instr</em>'.
 	 * @generated
 	 */
-	Instruction createInstruction();
+	Std_Instr createStd_Instr();
 
 	/**
 	 * Returns a new object of class '<em>ARITHMETIC OP</em>'.

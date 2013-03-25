@@ -181,7 +181,7 @@ public class InstructionUseItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSTRUCTION_USE__INSTRUCTION,
-				 LlvmFactory.eINSTANCE.createInstruction()));
+				 LlvmFactory.eINSTANCE.createStd_Instr()));
 
 		newChildDescriptors.add
 			(createChildParameter

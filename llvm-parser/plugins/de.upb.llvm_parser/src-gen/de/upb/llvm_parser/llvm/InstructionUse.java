@@ -57,12 +57,12 @@ public interface InstructionUse extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Instruction</em>' containment reference.
-	 * @see #setInstruction(Instruction)
+	 * @see #setInstruction(Std_Instr)
 	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInstructionUse_Instruction()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Instruction getInstruction();
+	Std_Instr getInstruction();
 
 	/**
 	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.InstructionUse#getInstruction <em>Instruction</em>}' containment reference.
@@ -72,6 +72,6 @@ public interface InstructionUse extends EObject {
 	 * @see #getInstruction()
 	 * @generated
 	 */
-	void setInstruction(Instruction value);
+	void setInstruction(Std_Instr value);
 
 } // InstructionUse

@@ -42,7 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class StoreImpl extends InstructionImpl implements Store {
+public class StoreImpl extends Std_InstrImpl implements Store {
 	/**
 	 * The cached value of the '{@link #getNewtype() <em>Newtype</em>}' containment reference.
 	 * <!-- begin-user-doc -->

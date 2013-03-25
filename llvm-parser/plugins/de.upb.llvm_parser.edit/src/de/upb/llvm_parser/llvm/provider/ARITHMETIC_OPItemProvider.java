@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class ARITHMETIC_OPItemProvider
-	extends InstructionItemProvider
+	extends Std_InstrItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,

@@ -39,7 +39,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class GetElementPtrImpl extends InstructionImpl implements GetElementPtr {
+public class GetElementPtrImpl extends Std_InstrImpl implements GetElementPtr {
 	/**
 	 * The cached value of the '{@link #getAggregate() <em>Aggregate</em>}' containment reference.
 	 * <!-- begin-user-doc -->

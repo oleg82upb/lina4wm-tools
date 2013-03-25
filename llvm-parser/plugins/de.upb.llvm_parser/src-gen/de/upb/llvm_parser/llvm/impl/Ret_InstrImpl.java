@@ -7,8 +7,6 @@ import de.upb.llvm_parser.llvm.Ret_Instr;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Ret Instr</b></em>'.
@@ -18,7 +16,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class Ret_InstrImpl extends MinimalEObjectImpl.Container implements Ret_Instr {
+public class Ret_InstrImpl extends InstructionImpl implements Ret_Instr {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

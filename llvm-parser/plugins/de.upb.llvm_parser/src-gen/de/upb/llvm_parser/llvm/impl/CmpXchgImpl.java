@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class CmpXchgImpl extends InstructionImpl implements CmpXchg {
+public class CmpXchgImpl extends Std_InstrImpl implements CmpXchg {
 	/**
 	 * The cached value of the '{@link #getAdresstype() <em>Adresstype</em>}' containment reference.
 	 * <!-- begin-user-doc -->

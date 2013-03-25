@@ -3386,7 +3386,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTypeUse"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1145:1: ruleTypeUse returns [EObject current=null] : ( (this_Predefined_0= rulePredefined | (this_AddressUse_1= ruleAddressUse (otherlv_2= '()*' )? ) ) (this_OREST_3= RULE_OREST )? ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1145:1: ruleTypeUse returns [EObject current=null] : ( (this_Predefined_0= rulePredefined | this_AddressUse_1= ruleAddressUse ) (otherlv_2= '()*' )? (this_OREST_3= RULE_OREST )? ) ;
     public final EObject ruleTypeUse() throws RecognitionException {
         EObject current = null;
 
@@ -3400,29 +3400,29 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1148:28: ( ( (this_Predefined_0= rulePredefined | (this_AddressUse_1= ruleAddressUse (otherlv_2= '()*' )? ) ) (this_OREST_3= RULE_OREST )? ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1149:1: ( (this_Predefined_0= rulePredefined | (this_AddressUse_1= ruleAddressUse (otherlv_2= '()*' )? ) ) (this_OREST_3= RULE_OREST )? )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1148:28: ( ( (this_Predefined_0= rulePredefined | this_AddressUse_1= ruleAddressUse ) (otherlv_2= '()*' )? (this_OREST_3= RULE_OREST )? ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1149:1: ( (this_Predefined_0= rulePredefined | this_AddressUse_1= ruleAddressUse ) (otherlv_2= '()*' )? (this_OREST_3= RULE_OREST )? )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1149:1: ( (this_Predefined_0= rulePredefined | (this_AddressUse_1= ruleAddressUse (otherlv_2= '()*' )? ) ) (this_OREST_3= RULE_OREST )? )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1149:2: (this_Predefined_0= rulePredefined | (this_AddressUse_1= ruleAddressUse (otherlv_2= '()*' )? ) ) (this_OREST_3= RULE_OREST )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1149:1: ( (this_Predefined_0= rulePredefined | this_AddressUse_1= ruleAddressUse ) (otherlv_2= '()*' )? (this_OREST_3= RULE_OREST )? )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1149:2: (this_Predefined_0= rulePredefined | this_AddressUse_1= ruleAddressUse ) (otherlv_2= '()*' )? (this_OREST_3= RULE_OREST )?
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1149:2: (this_Predefined_0= rulePredefined | (this_AddressUse_1= ruleAddressUse (otherlv_2= '()*' )? ) )
-            int alt39=2;
-            int LA39_0 = input.LA(1);
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1149:2: (this_Predefined_0= rulePredefined | this_AddressUse_1= ruleAddressUse )
+            int alt38=2;
+            int LA38_0 = input.LA(1);
 
-            if ( (LA39_0==RULE_INT_TYPE||(LA39_0>=19 && LA39_0<=20)||(LA39_0>=41 && LA39_0<=44)||(LA39_0>=46 && LA39_0<=51)) ) {
-                alt39=1;
+            if ( (LA38_0==RULE_INT_TYPE||(LA38_0>=19 && LA38_0<=20)||(LA38_0>=41 && LA38_0<=44)||(LA38_0>=46 && LA38_0<=51)) ) {
+                alt38=1;
             }
-            else if ( (LA39_0==RULE_VALID_ID) ) {
-                alt39=2;
+            else if ( (LA38_0==RULE_VALID_ID) ) {
+                alt38=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 39, 0, input);
+                    new NoViableAltException("", 38, 0, input);
 
                 throw nvae;
             }
-            switch (alt39) {
+            switch (alt38) {
                 case 1 :
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1150:5: this_Predefined_0= rulePredefined
                     {
@@ -3442,15 +3442,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1159:6: (this_AddressUse_1= ruleAddressUse (otherlv_2= '()*' )? )
-                    {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1159:6: (this_AddressUse_1= ruleAddressUse (otherlv_2= '()*' )? )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1160:5: this_AddressUse_1= ruleAddressUse (otherlv_2= '()*' )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1160:5: this_AddressUse_1= ruleAddressUse
                     {
                      
-                            newCompositeNode(grammarAccess.getTypeUseAccess().getAddressUseParserRuleCall_0_1_0()); 
+                            newCompositeNode(grammarAccess.getTypeUseAccess().getAddressUseParserRuleCall_0_1()); 
                         
-                    pushFollow(FOLLOW_ruleAddressUse_in_ruleTypeUse2578);
+                    pushFollow(FOLLOW_ruleAddressUse_in_ruleTypeUse2577);
                     this_AddressUse_1=ruleAddressUse();
 
                     state._fsp--;
@@ -3459,37 +3456,34 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                             current = this_AddressUse_1; 
                             afterParserOrEnumRuleCall();
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1168:1: (otherlv_2= '()*' )?
-                    int alt38=2;
-                    int LA38_0 = input.LA(1);
-
-                    if ( (LA38_0==40) ) {
-                        alt38=1;
-                    }
-                    switch (alt38) {
-                        case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1168:3: otherlv_2= '()*'
-                            {
-                            otherlv_2=(Token)match(input,40,FOLLOW_40_in_ruleTypeUse2590); 
-
-                                	newLeafNode(otherlv_2, grammarAccess.getTypeUseAccess().getLeftParenthesisRightParenthesisAsteriskKeyword_0_1_1());
-                                
-
-                            }
-                            break;
-
-                    }
-
-
-                    }
-
 
                     }
                     break;
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1172:5: (this_OREST_3= RULE_OREST )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1168:2: (otherlv_2= '()*' )?
+            int alt39=2;
+            int LA39_0 = input.LA(1);
+
+            if ( (LA39_0==40) ) {
+                alt39=1;
+            }
+            switch (alt39) {
+                case 1 :
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1168:4: otherlv_2= '()*'
+                    {
+                    otherlv_2=(Token)match(input,40,FOLLOW_40_in_ruleTypeUse2590); 
+
+                        	newLeafNode(otherlv_2, grammarAccess.getTypeUseAccess().getLeftParenthesisRightParenthesisAsteriskKeyword_1());
+                        
+
+                    }
+                    break;
+
+            }
+
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1172:3: (this_OREST_3= RULE_OREST )?
             int alt40=2;
             int LA40_0 = input.LA(1);
 
@@ -3498,11 +3492,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt40) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1172:6: this_OREST_3= RULE_OREST
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1172:4: this_OREST_3= RULE_OREST
                     {
-                    this_OREST_3=(Token)match(input,RULE_OREST,FOLLOW_RULE_OREST_in_ruleTypeUse2606); 
+                    this_OREST_3=(Token)match(input,RULE_OREST,FOLLOW_RULE_OREST_in_ruleTypeUse2604); 
                      
-                        newLeafNode(this_OREST_3, grammarAccess.getTypeUseAccess().getORESTTerminalRuleCall_1()); 
+                        newLeafNode(this_OREST_3, grammarAccess.getTypeUseAccess().getORESTTerminalRuleCall_2()); 
                         
 
                     }
@@ -3543,13 +3537,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1186:2: iv_ruleAddressUse= ruleAddressUse EOF
             {
              newCompositeNode(grammarAccess.getAddressUseRule()); 
-            pushFollow(FOLLOW_ruleAddressUse_in_entryRuleAddressUse2643);
+            pushFollow(FOLLOW_ruleAddressUse_in_entryRuleAddressUse2641);
             iv_ruleAddressUse=ruleAddressUse();
 
             state._fsp--;
 
              current =iv_ruleAddressUse; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAddressUse2653); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAddressUse2651); 
 
             }
 
@@ -3594,7 +3588,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getAddressUseRule());
             	        }
                     
-            otherlv_0=(Token)match(input,RULE_VALID_ID,FOLLOW_RULE_VALID_ID_in_ruleAddressUse2698); 
+            otherlv_0=(Token)match(input,RULE_VALID_ID,FOLLOW_RULE_VALID_ID_in_ruleAddressUse2696); 
 
             		newLeafNode(otherlv_0, grammarAccess.getAddressUseAccess().getAddressAddressCrossReference_0_0()); 
             	
@@ -3618,7 +3612,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1211:1: (lv_pointer_1_0= RULE_POINTER )
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1212:3: lv_pointer_1_0= RULE_POINTER
                     {
-                    lv_pointer_1_0=(Token)match(input,RULE_POINTER,FOLLOW_RULE_POINTER_in_ruleAddressUse2715); 
+                    lv_pointer_1_0=(Token)match(input,RULE_POINTER,FOLLOW_RULE_POINTER_in_ruleAddressUse2713); 
 
                     			newLeafNode(lv_pointer_1_0, grammarAccess.getAddressUseAccess().getPointerPOINTERTerminalRuleCall_1_0()); 
                     		
@@ -3674,13 +3668,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1238:2: iv_ruleAddress= ruleAddress EOF
             {
              newCompositeNode(grammarAccess.getAddressRule()); 
-            pushFollow(FOLLOW_ruleAddress_in_entryRuleAddress2757);
+            pushFollow(FOLLOW_ruleAddress_in_entryRuleAddress2755);
             iv_ruleAddress=ruleAddress();
 
             state._fsp--;
 
              current =iv_ruleAddress; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAddress2767); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAddress2765); 
 
             }
 
@@ -3716,7 +3710,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1250:1: (lv_name_0_0= RULE_VALID_ID )
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1251:3: lv_name_0_0= RULE_VALID_ID
             {
-            lv_name_0_0=(Token)match(input,RULE_VALID_ID,FOLLOW_RULE_VALID_ID_in_ruleAddress2808); 
+            lv_name_0_0=(Token)match(input,RULE_VALID_ID,FOLLOW_RULE_VALID_ID_in_ruleAddress2806); 
 
             			newLeafNode(lv_name_0_0, grammarAccess.getAddressAccess().getNameVALID_IDTerminalRuleCall_0()); 
             		
@@ -3766,13 +3760,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1277:2: iv_rulePredefined= rulePredefined EOF
             {
              newCompositeNode(grammarAccess.getPredefinedRule()); 
-            pushFollow(FOLLOW_rulePredefined_in_entryRulePredefined2848);
+            pushFollow(FOLLOW_rulePredefined_in_entryRulePredefined2846);
             iv_rulePredefined=rulePredefined();
 
             state._fsp--;
 
              current =iv_rulePredefined; 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePredefined2858); 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePredefined2856); 
 
             }
 
@@ -3816,7 +3810,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getPredefinedAccess().getTypePredefined_TypesParserRuleCall_0_0()); 
             	    
-            pushFollow(FOLLOW_rulePredefined_Types_in_rulePredefined2904);
+            pushFollow(FOLLOW_rulePredefined_Types_in_rulePredefined2902);
             lv_type_0_0=rulePredefined_Types();
 
             state._fsp--;
@@ -3852,7 +3846,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1307:1: (lv_pointer_1_0= RULE_POINTER )
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1308:3: lv_pointer_1_0= RULE_POINTER
                     {
-                    lv_pointer_1_0=(Token)match(input,RULE_POINTER,FOLLOW_RULE_POINTER_in_rulePredefined2921); 
+                    lv_pointer_1_0=(Token)match(input,RULE_POINTER,FOLLOW_RULE_POINTER_in_rulePredefined2919); 
 
                     			newLeafNode(lv_pointer_1_0, grammarAccess.getPredefinedAccess().getPointerPOINTERTerminalRuleCall_1_0()); 
                     		
@@ -3908,13 +3902,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1334:2: iv_rulePrimitive_Type= rulePrimitive_Type EOF
             {
              newCompositeNode(grammarAccess.getPrimitive_TypeRule()); 
-            pushFollow(FOLLOW_rulePrimitive_Type_in_entryRulePrimitive_Type2964);
+            pushFollow(FOLLOW_rulePrimitive_Type_in_entryRulePrimitive_Type2962);
             iv_rulePrimitive_Type=rulePrimitive_Type();
 
             state._fsp--;
 
              current =iv_rulePrimitive_Type.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePrimitive_Type2975); 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePrimitive_Type2973); 
 
             }
 
@@ -3988,7 +3982,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1346:2: kw= 'void'
                     {
-                    kw=(Token)match(input,41,FOLLOW_41_in_rulePrimitive_Type3013); 
+                    kw=(Token)match(input,41,FOLLOW_41_in_rulePrimitive_Type3011); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getPrimitive_TypeAccess().getVoidKeyword_0()); 
@@ -3999,7 +3993,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1353:2: kw= 'null'
                     {
-                    kw=(Token)match(input,42,FOLLOW_42_in_rulePrimitive_Type3032); 
+                    kw=(Token)match(input,42,FOLLOW_42_in_rulePrimitive_Type3030); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getPrimitive_TypeAccess().getNullKeyword_1()); 
@@ -4010,7 +4004,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 case 3 :
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1360:2: kw= 'label'
                     {
-                    kw=(Token)match(input,43,FOLLOW_43_in_rulePrimitive_Type3051); 
+                    kw=(Token)match(input,43,FOLLOW_43_in_rulePrimitive_Type3049); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getPrimitive_TypeAccess().getLabelKeyword_2()); 
@@ -4021,7 +4015,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 case 4 :
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1367:2: kw= 'undef'
                     {
-                    kw=(Token)match(input,44,FOLLOW_44_in_rulePrimitive_Type3070); 
+                    kw=(Token)match(input,44,FOLLOW_44_in_rulePrimitive_Type3068); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getPrimitive_TypeAccess().getUndefKeyword_3()); 
@@ -4032,7 +4026,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 case 5 :
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1374:2: kw= 'true'
                     {
-                    kw=(Token)match(input,19,FOLLOW_19_in_rulePrimitive_Type3089); 
+                    kw=(Token)match(input,19,FOLLOW_19_in_rulePrimitive_Type3087); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getPrimitive_TypeAccess().getTrueKeyword_4()); 
@@ -4043,7 +4037,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 case 6 :
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1381:2: kw= 'false'
                     {
-                    kw=(Token)match(input,20,FOLLOW_20_in_rulePrimitive_Type3108); 
+                    kw=(Token)match(input,20,FOLLOW_20_in_rulePrimitive_Type3106); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getPrimitive_TypeAccess().getFalseKeyword_5()); 
@@ -4084,13 +4078,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1396:2: iv_ruleInitializers= ruleInitializers EOF
             {
              newCompositeNode(grammarAccess.getInitializersRule()); 
-            pushFollow(FOLLOW_ruleInitializers_in_entryRuleInitializers3149);
+            pushFollow(FOLLOW_ruleInitializers_in_entryRuleInitializers3147);
             iv_ruleInitializers=ruleInitializers();
 
             state._fsp--;
 
              current =iv_ruleInitializers.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInitializers3160); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInitializers3158); 
 
             }
 
@@ -4120,7 +4114,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1406:28: (kw= 'zeroinitializer' )
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1408:2: kw= 'zeroinitializer'
             {
-            kw=(Token)match(input,45,FOLLOW_45_in_ruleInitializers3197); 
+            kw=(Token)match(input,45,FOLLOW_45_in_ruleInitializers3195); 
 
                     current.merge(kw);
                     newLeafNode(kw, grammarAccess.getInitializersAccess().getZeroinitializerKeyword()); 
@@ -4155,13 +4149,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1423:2: iv_ruleFloatingPoint_Type= ruleFloatingPoint_Type EOF
             {
              newCompositeNode(grammarAccess.getFloatingPoint_TypeRule()); 
-            pushFollow(FOLLOW_ruleFloatingPoint_Type_in_entryRuleFloatingPoint_Type3237);
+            pushFollow(FOLLOW_ruleFloatingPoint_Type_in_entryRuleFloatingPoint_Type3235);
             iv_ruleFloatingPoint_Type=ruleFloatingPoint_Type();
 
             state._fsp--;
 
              current =iv_ruleFloatingPoint_Type.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFloatingPoint_Type3248); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFloatingPoint_Type3246); 
 
             }
 
@@ -4235,7 +4229,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1435:2: kw= 'half'
                     {
-                    kw=(Token)match(input,46,FOLLOW_46_in_ruleFloatingPoint_Type3286); 
+                    kw=(Token)match(input,46,FOLLOW_46_in_ruleFloatingPoint_Type3284); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getFloatingPoint_TypeAccess().getHalfKeyword_0()); 
@@ -4246,7 +4240,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1442:2: kw= 'float'
                     {
-                    kw=(Token)match(input,47,FOLLOW_47_in_ruleFloatingPoint_Type3305); 
+                    kw=(Token)match(input,47,FOLLOW_47_in_ruleFloatingPoint_Type3303); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getFloatingPoint_TypeAccess().getFloatKeyword_1()); 
@@ -4257,7 +4251,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 case 3 :
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1449:2: kw= 'double'
                     {
-                    kw=(Token)match(input,48,FOLLOW_48_in_ruleFloatingPoint_Type3324); 
+                    kw=(Token)match(input,48,FOLLOW_48_in_ruleFloatingPoint_Type3322); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getFloatingPoint_TypeAccess().getDoubleKeyword_2()); 
@@ -4268,7 +4262,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 case 4 :
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1456:2: kw= 'x86_fp80'
                     {
-                    kw=(Token)match(input,49,FOLLOW_49_in_ruleFloatingPoint_Type3343); 
+                    kw=(Token)match(input,49,FOLLOW_49_in_ruleFloatingPoint_Type3341); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getFloatingPoint_TypeAccess().getX86_fp80Keyword_3()); 
@@ -4279,7 +4273,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 case 5 :
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1463:2: kw= 'fp128'
                     {
-                    kw=(Token)match(input,50,FOLLOW_50_in_ruleFloatingPoint_Type3362); 
+                    kw=(Token)match(input,50,FOLLOW_50_in_ruleFloatingPoint_Type3360); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getFloatingPoint_TypeAccess().getFp128Keyword_4()); 
@@ -4290,7 +4284,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 case 6 :
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1470:2: kw= 'ppc_fp128'
                     {
-                    kw=(Token)match(input,51,FOLLOW_51_in_ruleFloatingPoint_Type3381); 
+                    kw=(Token)match(input,51,FOLLOW_51_in_ruleFloatingPoint_Type3379); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getFloatingPoint_TypeAccess().getPpc_fp128Keyword_5()); 
@@ -4331,13 +4325,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1485:2: iv_rulePredefined_Types= rulePredefined_Types EOF
             {
              newCompositeNode(grammarAccess.getPredefined_TypesRule()); 
-            pushFollow(FOLLOW_rulePredefined_Types_in_entryRulePredefined_Types3422);
+            pushFollow(FOLLOW_rulePredefined_Types_in_entryRulePredefined_Types3420);
             iv_rulePredefined_Types=rulePredefined_Types();
 
             state._fsp--;
 
              current =iv_rulePredefined_Types.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePredefined_Types3433); 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePredefined_Types3431); 
 
             }
 
@@ -4413,7 +4407,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getPredefined_TypesAccess().getPrimitive_TypeParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_rulePrimitive_Type_in_rulePredefined_Types3480);
+                    pushFollow(FOLLOW_rulePrimitive_Type_in_rulePredefined_Types3478);
                     this_Primitive_Type_0=rulePrimitive_Type();
 
                     state._fsp--;
@@ -4430,7 +4424,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1508:10: this_INT_TYPE_1= RULE_INT_TYPE
                     {
-                    this_INT_TYPE_1=(Token)match(input,RULE_INT_TYPE,FOLLOW_RULE_INT_TYPE_in_rulePredefined_Types3506); 
+                    this_INT_TYPE_1=(Token)match(input,RULE_INT_TYPE,FOLLOW_RULE_INT_TYPE_in_rulePredefined_Types3504); 
 
                     		current.merge(this_INT_TYPE_1);
                         
@@ -4446,7 +4440,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getPredefined_TypesAccess().getFloatingPoint_TypeParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleFloatingPoint_Type_in_rulePredefined_Types3539);
+                    pushFollow(FOLLOW_ruleFloatingPoint_Type_in_rulePredefined_Types3537);
                     this_FloatingPoint_Type_2=ruleFloatingPoint_Type();
 
                     state._fsp--;
@@ -4493,13 +4487,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1537:2: iv_ruleVector= ruleVector EOF
             {
              newCompositeNode(grammarAccess.getVectorRule()); 
-            pushFollow(FOLLOW_ruleVector_in_entryRuleVector3584);
+            pushFollow(FOLLOW_ruleVector_in_entryRuleVector3582);
             iv_ruleVector=ruleVector();
 
             state._fsp--;
 
              current =iv_ruleVector; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleVector3594); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleVector3592); 
 
             }
 
@@ -4537,15 +4531,15 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1548:1: (otherlv_0= '<' this_INT_1= RULE_INT otherlv_2= 'x' ( (lv_type_3_0= ruleTypeUse ) ) otherlv_4= '>' )
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1548:3: otherlv_0= '<' this_INT_1= RULE_INT otherlv_2= 'x' ( (lv_type_3_0= ruleTypeUse ) ) otherlv_4= '>'
             {
-            otherlv_0=(Token)match(input,52,FOLLOW_52_in_ruleVector3631); 
+            otherlv_0=(Token)match(input,52,FOLLOW_52_in_ruleVector3629); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getVectorAccess().getLessThanSignKeyword_0());
                 
-            this_INT_1=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVector3642); 
+            this_INT_1=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVector3640); 
              
                 newLeafNode(this_INT_1, grammarAccess.getVectorAccess().getINTTerminalRuleCall_1()); 
                 
-            otherlv_2=(Token)match(input,53,FOLLOW_53_in_ruleVector3653); 
+            otherlv_2=(Token)match(input,53,FOLLOW_53_in_ruleVector3651); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getVectorAccess().getXKeyword_2());
                 
@@ -4558,7 +4552,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getVectorAccess().getTypeTypeUseParserRuleCall_3_0()); 
             	    
-            pushFollow(FOLLOW_ruleTypeUse_in_ruleVector3674);
+            pushFollow(FOLLOW_ruleTypeUse_in_ruleVector3672);
             lv_type_3_0=ruleTypeUse();
 
             state._fsp--;
@@ -4580,7 +4574,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,54,FOLLOW_54_in_ruleVector3686); 
+            otherlv_4=(Token)match(input,54,FOLLOW_54_in_ruleVector3684); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getVectorAccess().getGreaterThanSignKeyword_4());
                 
@@ -4617,13 +4611,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1592:2: iv_ruleArray= ruleArray EOF
             {
              newCompositeNode(grammarAccess.getArrayRule()); 
-            pushFollow(FOLLOW_ruleArray_in_entryRuleArray3722);
+            pushFollow(FOLLOW_ruleArray_in_entryRuleArray3720);
             iv_ruleArray=ruleArray();
 
             state._fsp--;
 
              current =iv_ruleArray; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleArray3732); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleArray3730); 
 
             }
 
@@ -4712,15 +4706,15 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1609:3: (otherlv_1= '[' this_INT_2= RULE_INT otherlv_3= 'x' ( (lv_type_4_0= ruleTypeUse ) ) otherlv_5= ']' )
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1609:5: otherlv_1= '[' this_INT_2= RULE_INT otherlv_3= 'x' ( (lv_type_4_0= ruleTypeUse ) ) otherlv_5= ']'
                     {
-                    otherlv_1=(Token)match(input,29,FOLLOW_29_in_ruleArray3780); 
+                    otherlv_1=(Token)match(input,29,FOLLOW_29_in_ruleArray3778); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getArrayAccess().getLeftSquareBracketKeyword_1_0_0());
                         
-                    this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleArray3791); 
+                    this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleArray3789); 
                      
                         newLeafNode(this_INT_2, grammarAccess.getArrayAccess().getINTTerminalRuleCall_1_0_1()); 
                         
-                    otherlv_3=(Token)match(input,53,FOLLOW_53_in_ruleArray3802); 
+                    otherlv_3=(Token)match(input,53,FOLLOW_53_in_ruleArray3800); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getArrayAccess().getXKeyword_1_0_2());
                         
@@ -4733,7 +4727,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getArrayAccess().getTypeTypeUseParserRuleCall_1_0_3_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleTypeUse_in_ruleArray3823);
+                    pushFollow(FOLLOW_ruleTypeUse_in_ruleArray3821);
                     lv_type_4_0=ruleTypeUse();
 
                     state._fsp--;
@@ -4755,7 +4749,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_5=(Token)match(input,31,FOLLOW_31_in_ruleArray3835); 
+                    otherlv_5=(Token)match(input,31,FOLLOW_31_in_ruleArray3833); 
 
                         	newLeafNode(otherlv_5, grammarAccess.getArrayAccess().getRightSquareBracketKeyword_1_0_4());
                         
@@ -4768,7 +4762,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1644:7: otherlv_6= '[]'
                     {
-                    otherlv_6=(Token)match(input,55,FOLLOW_55_in_ruleArray3854); 
+                    otherlv_6=(Token)match(input,55,FOLLOW_55_in_ruleArray3852); 
 
                         	newLeafNode(otherlv_6, grammarAccess.getArrayAccess().getLeftSquareBracketRightSquareBracketKeyword_1_1());
                         
@@ -4781,11 +4775,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1649:6: (otherlv_7= '[' otherlv_8= ']' )
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1649:8: otherlv_7= '[' otherlv_8= ']'
                     {
-                    otherlv_7=(Token)match(input,29,FOLLOW_29_in_ruleArray3873); 
+                    otherlv_7=(Token)match(input,29,FOLLOW_29_in_ruleArray3871); 
 
                         	newLeafNode(otherlv_7, grammarAccess.getArrayAccess().getLeftSquareBracketKeyword_1_2_0());
                         
-                    otherlv_8=(Token)match(input,31,FOLLOW_31_in_ruleArray3885); 
+                    otherlv_8=(Token)match(input,31,FOLLOW_31_in_ruleArray3883); 
 
                         	newLeafNode(otherlv_8, grammarAccess.getArrayAccess().getRightSquareBracketKeyword_1_2_1());
                         
@@ -4809,7 +4803,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1657:4: this_POINTER_9= RULE_POINTER
                     {
-                    this_POINTER_9=(Token)match(input,RULE_POINTER,FOLLOW_RULE_POINTER_in_ruleArray3899); 
+                    this_POINTER_9=(Token)match(input,RULE_POINTER,FOLLOW_RULE_POINTER_in_ruleArray3897); 
                      
                         newLeafNode(this_POINTER_9, grammarAccess.getArrayAccess().getPOINTERTerminalRuleCall_2()); 
                         
@@ -4852,13 +4846,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1671:2: iv_ruleAggregate_Types= ruleAggregate_Types EOF
             {
              newCompositeNode(grammarAccess.getAggregate_TypesRule()); 
-            pushFollow(FOLLOW_ruleAggregate_Types_in_entryRuleAggregate_Types3936);
+            pushFollow(FOLLOW_ruleAggregate_Types_in_entryRuleAggregate_Types3934);
             iv_ruleAggregate_Types=ruleAggregate_Types();
 
             state._fsp--;
 
              current =iv_ruleAggregate_Types; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAggregate_Types3946); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAggregate_Types3944); 
 
             }
 
@@ -4926,7 +4920,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getAggregate_TypesAccess().getStructureParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleStructure_in_ruleAggregate_Types3993);
+                    pushFollow(FOLLOW_ruleStructure_in_ruleAggregate_Types3991);
                     this_Structure_0=ruleStructure();
 
                     state._fsp--;
@@ -4944,7 +4938,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getAggregate_TypesAccess().getArrayParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleArray_in_ruleAggregate_Types4020);
+                    pushFollow(FOLLOW_ruleArray_in_ruleAggregate_Types4018);
                     this_Array_1=ruleArray();
 
                     state._fsp--;
@@ -4962,7 +4956,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getAggregate_TypesAccess().getVectorParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleVector_in_ruleAggregate_Types4047);
+                    pushFollow(FOLLOW_ruleVector_in_ruleAggregate_Types4045);
                     this_Vector_2=ruleVector();
 
                     state._fsp--;
@@ -5007,13 +5001,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1721:2: iv_ruleConstant= ruleConstant EOF
             {
              newCompositeNode(grammarAccess.getConstantRule()); 
-            pushFollow(FOLLOW_ruleConstant_in_entryRuleConstant4082);
+            pushFollow(FOLLOW_ruleConstant_in_entryRuleConstant4080);
             iv_ruleConstant=ruleConstant();
 
             state._fsp--;
 
              current =iv_ruleConstant; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleConstant4092); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleConstant4090); 
 
             }
 
@@ -5049,7 +5043,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1733:1: (lv_value_0_0= RULE_INT )
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1734:3: lv_value_0_0= RULE_INT
             {
-            lv_value_0_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleConstant4133); 
+            lv_value_0_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleConstant4131); 
 
             			newLeafNode(lv_value_0_0, grammarAccess.getConstantAccess().getValueINTTerminalRuleCall_0()); 
             		
@@ -5099,13 +5093,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1760:2: iv_ruleNonConstantValue= ruleNonConstantValue EOF
             {
              newCompositeNode(grammarAccess.getNonConstantValueRule()); 
-            pushFollow(FOLLOW_ruleNonConstantValue_in_entryRuleNonConstantValue4173);
+            pushFollow(FOLLOW_ruleNonConstantValue_in_entryRuleNonConstantValue4171);
             iv_ruleNonConstantValue=ruleNonConstantValue();
 
             state._fsp--;
 
              current =iv_ruleNonConstantValue; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNonConstantValue4183); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNonConstantValue4181); 
 
             }
 
@@ -5145,7 +5139,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1772:1: (lv_name_0_0= RULE_VALID_ID )
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1773:3: lv_name_0_0= RULE_VALID_ID
             {
-            lv_name_0_0=(Token)match(input,RULE_VALID_ID,FOLLOW_RULE_VALID_ID_in_ruleNonConstantValue4225); 
+            lv_name_0_0=(Token)match(input,RULE_VALID_ID,FOLLOW_RULE_VALID_ID_in_ruleNonConstantValue4223); 
 
             			newLeafNode(lv_name_0_0, grammarAccess.getNonConstantValueAccess().getNameVALID_IDTerminalRuleCall_0_0()); 
             		
@@ -5179,7 +5173,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1790:1: (lv_pointer_1_0= RULE_POINTER )
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1791:3: lv_pointer_1_0= RULE_POINTER
                     {
-                    lv_pointer_1_0=(Token)match(input,RULE_POINTER,FOLLOW_RULE_POINTER_in_ruleNonConstantValue4247); 
+                    lv_pointer_1_0=(Token)match(input,RULE_POINTER,FOLLOW_RULE_POINTER_in_ruleNonConstantValue4245); 
 
                     			newLeafNode(lv_pointer_1_0, grammarAccess.getNonConstantValueAccess().getPointerPOINTERTerminalRuleCall_1_0()); 
                     		
@@ -5235,13 +5229,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1817:2: iv_ruleValue= ruleValue EOF
             {
              newCompositeNode(grammarAccess.getValueRule()); 
-            pushFollow(FOLLOW_ruleValue_in_entryRuleValue4289);
+            pushFollow(FOLLOW_ruleValue_in_entryRuleValue4287);
             iv_ruleValue=ruleValue();
 
             state._fsp--;
 
              current =iv_ruleValue; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleValue4299); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleValue4297); 
 
             }
 
@@ -5384,7 +5378,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1834:3: this_STRING_1= RULE_STRING
                             {
-                            this_STRING_1=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleValue4346); 
+                            this_STRING_1=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleValue4344); 
                              
                                 newLeafNode(this_STRING_1, grammarAccess.getValueAccess().getSTRINGTerminalRuleCall_0_1_0()); 
                                 
@@ -5397,7 +5391,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                              
                                     newCompositeNode(grammarAccess.getValueAccess().getPrimitive_TypeParserRuleCall_0_1_1()); 
                                 
-                            pushFollow(FOLLOW_rulePrimitive_Type_in_ruleValue4367);
+                            pushFollow(FOLLOW_rulePrimitive_Type_in_ruleValue4365);
                             rulePrimitive_Type();
 
                             state._fsp--;
@@ -5414,7 +5408,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                              
                                     newCompositeNode(grammarAccess.getValueAccess().getInitializersParserRuleCall_0_1_2()); 
                                 
-                            pushFollow(FOLLOW_ruleInitializers_in_ruleValue4388);
+                            pushFollow(FOLLOW_ruleInitializers_in_ruleValue4386);
                             ruleInitializers();
 
                             state._fsp--;
@@ -5440,7 +5434,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getValueAccess().getCastParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleCast_in_ruleValue4417);
+                    pushFollow(FOLLOW_ruleCast_in_ruleValue4415);
                     this_Cast_4=ruleCast();
 
                     state._fsp--;
@@ -5458,7 +5452,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getValueAccess().getGetElementPtr2ParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleGetElementPtr2_in_ruleValue4444);
+                    pushFollow(FOLLOW_ruleGetElementPtr2_in_ruleValue4442);
                     this_GetElementPtr2_5=ruleGetElementPtr2();
 
                     state._fsp--;
@@ -5476,7 +5470,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getValueAccess().getConstantParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleConstant_in_ruleValue4471);
+                    pushFollow(FOLLOW_ruleConstant_in_ruleValue4469);
                     this_Constant_6=ruleConstant();
 
                     state._fsp--;
@@ -5494,7 +5488,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getValueAccess().getNonConstantValueParserRuleCall_4()); 
                         
-                    pushFollow(FOLLOW_ruleNonConstantValue_in_ruleValue4498);
+                    pushFollow(FOLLOW_ruleNonConstantValue_in_ruleValue4496);
                     this_NonConstantValue_7=ruleNonConstantValue();
 
                     state._fsp--;
@@ -5539,13 +5533,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1906:2: iv_ruleValueStruct= ruleValueStruct EOF
             {
              newCompositeNode(grammarAccess.getValueStructRule()); 
-            pushFollow(FOLLOW_ruleValueStruct_in_entryRuleValueStruct4533);
+            pushFollow(FOLLOW_ruleValueStruct_in_entryRuleValueStruct4531);
             iv_ruleValueStruct=ruleValueStruct();
 
             state._fsp--;
 
              current =iv_ruleValueStruct; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleValueStruct4543); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleValueStruct4541); 
 
             }
 
@@ -5588,7 +5582,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1917:1: (otherlv_0= '{' ( (lv_types_1_0= ruleTypeUse ) ) ( (lv_value_2_0= ruleValue ) ) (otherlv_3= ',' ( (lv_types_4_0= ruleTypeUse ) ) ( (lv_value_5_0= ruleValue ) ) )* otherlv_6= '}' )
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1917:3: otherlv_0= '{' ( (lv_types_1_0= ruleTypeUse ) ) ( (lv_value_2_0= ruleValue ) ) (otherlv_3= ',' ( (lv_types_4_0= ruleTypeUse ) ) ( (lv_value_5_0= ruleValue ) ) )* otherlv_6= '}'
             {
-            otherlv_0=(Token)match(input,56,FOLLOW_56_in_ruleValueStruct4580); 
+            otherlv_0=(Token)match(input,56,FOLLOW_56_in_ruleValueStruct4578); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getValueStructAccess().getLeftCurlyBracketKeyword_0());
                 
@@ -5601,7 +5595,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getValueStructAccess().getTypesTypeUseParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleTypeUse_in_ruleValueStruct4601);
+            pushFollow(FOLLOW_ruleTypeUse_in_ruleValueStruct4599);
             lv_types_1_0=ruleTypeUse();
 
             state._fsp--;
@@ -5632,7 +5626,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getValueStructAccess().getValueValueParserRuleCall_2_0()); 
             	    
-            pushFollow(FOLLOW_ruleValue_in_ruleValueStruct4622);
+            pushFollow(FOLLOW_ruleValue_in_ruleValueStruct4620);
             lv_value_2_0=ruleValue();
 
             state._fsp--;
@@ -5669,7 +5663,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:1957:4: otherlv_3= ',' ( (lv_types_4_0= ruleTypeUse ) ) ( (lv_value_5_0= ruleValue ) )
             	    {
-            	    otherlv_3=(Token)match(input,30,FOLLOW_30_in_ruleValueStruct4635); 
+            	    otherlv_3=(Token)match(input,30,FOLLOW_30_in_ruleValueStruct4633); 
 
             	        	newLeafNode(otherlv_3, grammarAccess.getValueStructAccess().getCommaKeyword_3_0());
             	        
@@ -5682,7 +5676,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getValueStructAccess().getTypesTypeUseParserRuleCall_3_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleTypeUse_in_ruleValueStruct4656);
+            	    pushFollow(FOLLOW_ruleTypeUse_in_ruleValueStruct4654);
             	    lv_types_4_0=ruleTypeUse();
 
             	    state._fsp--;
@@ -5713,7 +5707,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getValueStructAccess().getValueValueParserRuleCall_3_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleValue_in_ruleValueStruct4677);
+            	    pushFollow(FOLLOW_ruleValue_in_ruleValueStruct4675);
             	    lv_value_5_0=ruleValue();
 
             	    state._fsp--;
@@ -5744,7 +5738,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_6=(Token)match(input,57,FOLLOW_57_in_ruleValueStruct4691); 
+            otherlv_6=(Token)match(input,57,FOLLOW_57_in_ruleValueStruct4689); 
 
                 	newLeafNode(otherlv_6, grammarAccess.getValueStructAccess().getRightCurlyBracketKeyword_4());
                 
@@ -5781,13 +5775,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2011:2: iv_ruleStructure= ruleStructure EOF
             {
              newCompositeNode(grammarAccess.getStructureRule()); 
-            pushFollow(FOLLOW_ruleStructure_in_entryRuleStructure4727);
+            pushFollow(FOLLOW_ruleStructure_in_entryRuleStructure4725);
             iv_ruleStructure=ruleStructure();
 
             state._fsp--;
 
              current =iv_ruleStructure; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleStructure4737); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleStructure4735); 
 
             }
 
@@ -5840,7 +5834,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,56,FOLLOW_56_in_ruleStructure4783); 
+            otherlv_1=(Token)match(input,56,FOLLOW_56_in_ruleStructure4781); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getStructureAccess().getLeftCurlyBracketKeyword_1());
                 
@@ -5864,7 +5858,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getStructureAccess().getTypesTypeUseParserRuleCall_2_0_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleTypeUse_in_ruleStructure4805);
+                    pushFollow(FOLLOW_ruleTypeUse_in_ruleStructure4803);
                     lv_types_2_0=ruleTypeUse();
 
                     state._fsp--;
@@ -5901,7 +5895,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2050:4: otherlv_3= ',' ( ( (lv_types_4_1= ruleTypeUse | lv_types_4_2= ruleAggregate_Types ) ) )
                     	    {
-                    	    otherlv_3=(Token)match(input,30,FOLLOW_30_in_ruleStructure4818); 
+                    	    otherlv_3=(Token)match(input,30,FOLLOW_30_in_ruleStructure4816); 
 
                     	        	newLeafNode(otherlv_3, grammarAccess.getStructureAccess().getCommaKeyword_2_1_0());
                     	        
@@ -5934,7 +5928,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     	             
                     	            	        newCompositeNode(grammarAccess.getStructureAccess().getTypesTypeUseParserRuleCall_2_1_1_0_0()); 
                     	            	    
-                    	            pushFollow(FOLLOW_ruleTypeUse_in_ruleStructure4841);
+                    	            pushFollow(FOLLOW_ruleTypeUse_in_ruleStructure4839);
                     	            lv_types_4_1=ruleTypeUse();
 
                     	            state._fsp--;
@@ -5959,7 +5953,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     	             
                     	            	        newCompositeNode(grammarAccess.getStructureAccess().getTypesAggregate_TypesParserRuleCall_2_1_1_0_1()); 
                     	            	    
-                    	            pushFollow(FOLLOW_ruleAggregate_Types_in_ruleStructure4860);
+                    	            pushFollow(FOLLOW_ruleAggregate_Types_in_ruleStructure4858);
                     	            lv_types_4_2=ruleAggregate_Types();
 
                     	            state._fsp--;
@@ -6002,7 +5996,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_5=(Token)match(input,57,FOLLOW_57_in_ruleStructure4879); 
+            otherlv_5=(Token)match(input,57,FOLLOW_57_in_ruleStructure4877); 
 
                 	newLeafNode(otherlv_5, grammarAccess.getStructureAccess().getRightCurlyBracketKeyword_3());
                 
@@ -6017,7 +6011,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2094:2: this_POINTER_6= RULE_POINTER
                     {
-                    this_POINTER_6=(Token)match(input,RULE_POINTER,FOLLOW_RULE_POINTER_in_ruleStructure4891); 
+                    this_POINTER_6=(Token)match(input,RULE_POINTER,FOLLOW_RULE_POINTER_in_ruleStructure4889); 
                      
                         newLeafNode(this_POINTER_6, grammarAccess.getStructureAccess().getPOINTERTerminalRuleCall_4()); 
                         
@@ -6060,13 +6054,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2108:2: iv_ruleOpaque= ruleOpaque EOF
             {
              newCompositeNode(grammarAccess.getOpaqueRule()); 
-            pushFollow(FOLLOW_ruleOpaque_in_entryRuleOpaque4929);
+            pushFollow(FOLLOW_ruleOpaque_in_entryRuleOpaque4927);
             iv_ruleOpaque=ruleOpaque();
 
             state._fsp--;
 
              current =iv_ruleOpaque.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleOpaque4940); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleOpaque4938); 
 
             }
 
@@ -6096,7 +6090,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2118:28: (kw= 'opaque' )
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2120:2: kw= 'opaque'
             {
-            kw=(Token)match(input,58,FOLLOW_58_in_ruleOpaque4977); 
+            kw=(Token)match(input,58,FOLLOW_58_in_ruleOpaque4975); 
 
                     current.merge(kw);
                     newLeafNode(kw, grammarAccess.getOpaqueAccess().getOpaqueKeyword()); 
@@ -6131,13 +6125,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2135:2: iv_ruleParameterList= ruleParameterList EOF
             {
              newCompositeNode(grammarAccess.getParameterListRule()); 
-            pushFollow(FOLLOW_ruleParameterList_in_entryRuleParameterList5016);
+            pushFollow(FOLLOW_ruleParameterList_in_entryRuleParameterList5014);
             iv_ruleParameterList=ruleParameterList();
 
             state._fsp--;
 
              current =iv_ruleParameterList; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleParameterList5026); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleParameterList5024); 
 
             }
 
@@ -6216,7 +6210,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2152:4: otherlv_1= '()'
                     {
-                    otherlv_1=(Token)match(input,59,FOLLOW_59_in_ruleParameterList5073); 
+                    otherlv_1=(Token)match(input,59,FOLLOW_59_in_ruleParameterList5071); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getParameterListAccess().getLeftParenthesisRightParenthesisKeyword_1_0());
                         
@@ -6229,7 +6223,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2157:6: (otherlv_2= '(' ( ( (lv_types_3_0= ruleTypeUse ) ) ( (lv_Lists_4_0= ruleTypeList ) )? ( ruleRETURN_ATTRIBUTES )* ( (lv_variables_6_0= ruleValue ) ) (otherlv_7= ',' ( (lv_types_8_0= ruleTypeUse ) ) ( (lv_Lists_9_0= ruleTypeList ) )? ( ruleRETURN_ATTRIBUTES )* ( (lv_variables_11_0= ruleValue ) ) )* )? otherlv_12= ')' )
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2157:8: otherlv_2= '(' ( ( (lv_types_3_0= ruleTypeUse ) ) ( (lv_Lists_4_0= ruleTypeList ) )? ( ruleRETURN_ATTRIBUTES )* ( (lv_variables_6_0= ruleValue ) ) (otherlv_7= ',' ( (lv_types_8_0= ruleTypeUse ) ) ( (lv_Lists_9_0= ruleTypeList ) )? ( ruleRETURN_ATTRIBUTES )* ( (lv_variables_11_0= ruleValue ) ) )* )? otherlv_12= ')'
                     {
-                    otherlv_2=(Token)match(input,60,FOLLOW_60_in_ruleParameterList5092); 
+                    otherlv_2=(Token)match(input,60,FOLLOW_60_in_ruleParameterList5090); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getParameterListAccess().getLeftParenthesisKeyword_1_1_0());
                         
@@ -6253,7 +6247,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getParameterListAccess().getTypesTypeUseParserRuleCall_1_1_1_0_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleTypeUse_in_ruleParameterList5114);
+                            pushFollow(FOLLOW_ruleTypeUse_in_ruleParameterList5112);
                             lv_types_3_0=ruleTypeUse();
 
                             state._fsp--;
@@ -6292,7 +6286,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                                      
                                     	        newCompositeNode(grammarAccess.getParameterListAccess().getListsTypeListParserRuleCall_1_1_1_1_0()); 
                                     	    
-                                    pushFollow(FOLLOW_ruleTypeList_in_ruleParameterList5135);
+                                    pushFollow(FOLLOW_ruleTypeList_in_ruleParameterList5133);
                                     lv_Lists_4_0=ruleTypeList();
 
                                     state._fsp--;
@@ -6335,7 +6329,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                             	     
                             	            newCompositeNode(grammarAccess.getParameterListAccess().getRETURN_ATTRIBUTESParserRuleCall_1_1_1_2()); 
                             	        
-                            	    pushFollow(FOLLOW_ruleRETURN_ATTRIBUTES_in_ruleParameterList5153);
+                            	    pushFollow(FOLLOW_ruleRETURN_ATTRIBUTES_in_ruleParameterList5151);
                             	    ruleRETURN_ATTRIBUTES();
 
                             	    state._fsp--;
@@ -6361,7 +6355,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getParameterListAccess().getVariablesValueParserRuleCall_1_1_1_3_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleValue_in_ruleParameterList5175);
+                            pushFollow(FOLLOW_ruleValue_in_ruleParameterList5173);
                             lv_variables_6_0=ruleValue();
 
                             state._fsp--;
@@ -6398,7 +6392,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                             	case 1 :
                             	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2223:4: otherlv_7= ',' ( (lv_types_8_0= ruleTypeUse ) ) ( (lv_Lists_9_0= ruleTypeList ) )? ( ruleRETURN_ATTRIBUTES )* ( (lv_variables_11_0= ruleValue ) )
                             	    {
-                            	    otherlv_7=(Token)match(input,30,FOLLOW_30_in_ruleParameterList5188); 
+                            	    otherlv_7=(Token)match(input,30,FOLLOW_30_in_ruleParameterList5186); 
 
                             	        	newLeafNode(otherlv_7, grammarAccess.getParameterListAccess().getCommaKeyword_1_1_1_4_0());
                             	        
@@ -6411,7 +6405,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                             	     
                             	    	        newCompositeNode(grammarAccess.getParameterListAccess().getTypesTypeUseParserRuleCall_1_1_1_4_1_0()); 
                             	    	    
-                            	    pushFollow(FOLLOW_ruleTypeUse_in_ruleParameterList5209);
+                            	    pushFollow(FOLLOW_ruleTypeUse_in_ruleParameterList5207);
                             	    lv_types_8_0=ruleTypeUse();
 
                             	    state._fsp--;
@@ -6450,7 +6444,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                             	             
                             	            	        newCompositeNode(grammarAccess.getParameterListAccess().getListsTypeListParserRuleCall_1_1_1_4_2_0()); 
                             	            	    
-                            	            pushFollow(FOLLOW_ruleTypeList_in_ruleParameterList5230);
+                            	            pushFollow(FOLLOW_ruleTypeList_in_ruleParameterList5228);
                             	            lv_Lists_9_0=ruleTypeList();
 
                             	            state._fsp--;
@@ -6493,7 +6487,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                             	    	     
                             	    	            newCompositeNode(grammarAccess.getParameterListAccess().getRETURN_ATTRIBUTESParserRuleCall_1_1_1_4_3()); 
                             	    	        
-                            	    	    pushFollow(FOLLOW_ruleRETURN_ATTRIBUTES_in_ruleParameterList5248);
+                            	    	    pushFollow(FOLLOW_ruleRETURN_ATTRIBUTES_in_ruleParameterList5246);
                             	    	    ruleRETURN_ATTRIBUTES();
 
                             	    	    state._fsp--;
@@ -6519,7 +6513,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                             	     
                             	    	        newCompositeNode(grammarAccess.getParameterListAccess().getVariablesValueParserRuleCall_1_1_1_4_4_0()); 
                             	    	    
-                            	    pushFollow(FOLLOW_ruleValue_in_ruleParameterList5270);
+                            	    pushFollow(FOLLOW_ruleValue_in_ruleParameterList5268);
                             	    lv_variables_11_0=ruleValue();
 
                             	    state._fsp--;
@@ -6556,7 +6550,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_12=(Token)match(input,61,FOLLOW_61_in_ruleParameterList5286); 
+                    otherlv_12=(Token)match(input,61,FOLLOW_61_in_ruleParameterList5284); 
 
                         	newLeafNode(otherlv_12, grammarAccess.getParameterListAccess().getRightParenthesisKeyword_1_1_2());
                         
@@ -6602,13 +6596,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2303:2: iv_ruleTypeList= ruleTypeList EOF
             {
              newCompositeNode(grammarAccess.getTypeListRule()); 
-            pushFollow(FOLLOW_ruleTypeList_in_entryRuleTypeList5324);
+            pushFollow(FOLLOW_ruleTypeList_in_entryRuleTypeList5322);
             iv_ruleTypeList=ruleTypeList();
 
             state._fsp--;
 
              current =iv_ruleTypeList; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTypeList5334); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTypeList5332); 
 
             }
 
@@ -6688,7 +6682,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2320:4: otherlv_1= '()'
                     {
-                    otherlv_1=(Token)match(input,59,FOLLOW_59_in_ruleTypeList5381); 
+                    otherlv_1=(Token)match(input,59,FOLLOW_59_in_ruleTypeList5379); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getTypeListAccess().getLeftParenthesisRightParenthesisKeyword_1_0());
                         
@@ -6701,7 +6695,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2325:6: (otherlv_2= '(' ( ( (lv_types_3_0= ruleTypeUse ) ) ( (lv_typelists_4_0= ruleTypeList ) )? ( ruleRETURN_ATTRIBUTES )? (otherlv_6= ',' ( (lv_types_7_0= ruleTypeUse ) ) ( (lv_typelists_8_0= ruleTypeList ) )? ( ruleRETURN_ATTRIBUTES )? )* )? (otherlv_10= ')' | otherlv_11= ')*' | otherlv_12= ')**' | otherlv_13= ')***' | otherlv_14= ')****' | otherlv_15= ')*****' ) )
                     // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2325:8: otherlv_2= '(' ( ( (lv_types_3_0= ruleTypeUse ) ) ( (lv_typelists_4_0= ruleTypeList ) )? ( ruleRETURN_ATTRIBUTES )? (otherlv_6= ',' ( (lv_types_7_0= ruleTypeUse ) ) ( (lv_typelists_8_0= ruleTypeList ) )? ( ruleRETURN_ATTRIBUTES )? )* )? (otherlv_10= ')' | otherlv_11= ')*' | otherlv_12= ')**' | otherlv_13= ')***' | otherlv_14= ')****' | otherlv_15= ')*****' )
                     {
-                    otherlv_2=(Token)match(input,60,FOLLOW_60_in_ruleTypeList5400); 
+                    otherlv_2=(Token)match(input,60,FOLLOW_60_in_ruleTypeList5398); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getTypeListAccess().getLeftParenthesisKeyword_1_1_0());
                         
@@ -6725,7 +6719,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getTypeListAccess().getTypesTypeUseParserRuleCall_1_1_1_0_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleTypeUse_in_ruleTypeList5422);
+                            pushFollow(FOLLOW_ruleTypeUse_in_ruleTypeList5420);
                             lv_types_3_0=ruleTypeUse();
 
                             state._fsp--;
@@ -6764,7 +6758,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                                      
                                     	        newCompositeNode(grammarAccess.getTypeListAccess().getTypelistsTypeListParserRuleCall_1_1_1_1_0()); 
                                     	    
-                                    pushFollow(FOLLOW_ruleTypeList_in_ruleTypeList5443);
+                                    pushFollow(FOLLOW_ruleTypeList_in_ruleTypeList5441);
                                     lv_typelists_4_0=ruleTypeList();
 
                                     state._fsp--;
@@ -6803,7 +6797,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                                      
                                             newCompositeNode(grammarAccess.getTypeListAccess().getRETURN_ATTRIBUTESParserRuleCall_1_1_1_2()); 
                                         
-                                    pushFollow(FOLLOW_ruleRETURN_ATTRIBUTES_in_ruleTypeList5461);
+                                    pushFollow(FOLLOW_ruleRETURN_ATTRIBUTES_in_ruleTypeList5459);
                                     ruleRETURN_ATTRIBUTES();
 
                                     state._fsp--;
@@ -6832,7 +6826,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                             	case 1 :
                             	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2373:5: otherlv_6= ',' ( (lv_types_7_0= ruleTypeUse ) ) ( (lv_typelists_8_0= ruleTypeList ) )? ( ruleRETURN_ATTRIBUTES )?
                             	    {
-                            	    otherlv_6=(Token)match(input,30,FOLLOW_30_in_ruleTypeList5475); 
+                            	    otherlv_6=(Token)match(input,30,FOLLOW_30_in_ruleTypeList5473); 
 
                             	        	newLeafNode(otherlv_6, grammarAccess.getTypeListAccess().getCommaKeyword_1_1_1_3_0());
                             	        
@@ -6845,7 +6839,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                             	     
                             	    	        newCompositeNode(grammarAccess.getTypeListAccess().getTypesTypeUseParserRuleCall_1_1_1_3_1_0()); 
                             	    	    
-                            	    pushFollow(FOLLOW_ruleTypeUse_in_ruleTypeList5496);
+                            	    pushFollow(FOLLOW_ruleTypeUse_in_ruleTypeList5494);
                             	    lv_types_7_0=ruleTypeUse();
 
                             	    state._fsp--;
@@ -6884,7 +6878,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                             	             
                             	            	        newCompositeNode(grammarAccess.getTypeListAccess().getTypelistsTypeListParserRuleCall_1_1_1_3_2_0()); 
                             	            	    
-                            	            pushFollow(FOLLOW_ruleTypeList_in_ruleTypeList5517);
+                            	            pushFollow(FOLLOW_ruleTypeList_in_ruleTypeList5515);
                             	            lv_typelists_8_0=ruleTypeList();
 
                             	            state._fsp--;
@@ -6923,7 +6917,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                             	             
                             	                    newCompositeNode(grammarAccess.getTypeListAccess().getRETURN_ATTRIBUTESParserRuleCall_1_1_1_3_3()); 
                             	                
-                            	            pushFollow(FOLLOW_ruleRETURN_ATTRIBUTES_in_ruleTypeList5535);
+                            	            pushFollow(FOLLOW_ruleRETURN_ATTRIBUTES_in_ruleTypeList5533);
                             	            ruleRETURN_ATTRIBUTES();
 
                             	            state._fsp--;
@@ -6996,7 +6990,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2421:9: otherlv_10= ')'
                             {
-                            otherlv_10=(Token)match(input,61,FOLLOW_61_in_ruleTypeList5553); 
+                            otherlv_10=(Token)match(input,61,FOLLOW_61_in_ruleTypeList5551); 
 
                                 	newLeafNode(otherlv_10, grammarAccess.getTypeListAccess().getRightParenthesisKeyword_1_1_2_0());
                                 
@@ -7006,7 +7000,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                         case 2 :
                             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2426:7: otherlv_11= ')*'
                             {
-                            otherlv_11=(Token)match(input,62,FOLLOW_62_in_ruleTypeList5571); 
+                            otherlv_11=(Token)match(input,62,FOLLOW_62_in_ruleTypeList5569); 
 
                                 	newLeafNode(otherlv_11, grammarAccess.getTypeListAccess().getRightParenthesisAsteriskKeyword_1_1_2_1());
                                 
@@ -7016,7 +7010,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                         case 3 :
                             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2431:7: otherlv_12= ')**'
                             {
-                            otherlv_12=(Token)match(input,63,FOLLOW_63_in_ruleTypeList5589); 
+                            otherlv_12=(Token)match(input,63,FOLLOW_63_in_ruleTypeList5587); 
 
                                 	newLeafNode(otherlv_12, grammarAccess.getTypeListAccess().getRightParenthesisAsteriskAsteriskKeyword_1_1_2_2());
                                 
@@ -7026,7 +7020,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                         case 4 :
                             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2436:7: otherlv_13= ')***'
                             {
-                            otherlv_13=(Token)match(input,64,FOLLOW_64_in_ruleTypeList5607); 
+                            otherlv_13=(Token)match(input,64,FOLLOW_64_in_ruleTypeList5605); 
 
                                 	newLeafNode(otherlv_13, grammarAccess.getTypeListAccess().getRightParenthesisAsteriskAsteriskAsteriskKeyword_1_1_2_3());
                                 
@@ -7036,7 +7030,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                         case 5 :
                             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2441:7: otherlv_14= ')****'
                             {
-                            otherlv_14=(Token)match(input,65,FOLLOW_65_in_ruleTypeList5625); 
+                            otherlv_14=(Token)match(input,65,FOLLOW_65_in_ruleTypeList5623); 
 
                                 	newLeafNode(otherlv_14, grammarAccess.getTypeListAccess().getRightParenthesisAsteriskAsteriskAsteriskAsteriskKeyword_1_1_2_4());
                                 
@@ -7046,7 +7040,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                         case 6 :
                             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2446:7: otherlv_15= ')*****'
                             {
-                            otherlv_15=(Token)match(input,66,FOLLOW_66_in_ruleTypeList5643); 
+                            otherlv_15=(Token)match(input,66,FOLLOW_66_in_ruleTypeList5641); 
 
                                 	newLeafNode(otherlv_15, grammarAccess.getTypeListAccess().getRightParenthesisAsteriskAsteriskAsteriskAsteriskAsteriskKeyword_1_1_2_5());
                                 
@@ -7098,13 +7092,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2460:2: iv_ruleFunctionBody= ruleFunctionBody EOF
             {
              newCompositeNode(grammarAccess.getFunctionBodyRule()); 
-            pushFollow(FOLLOW_ruleFunctionBody_in_entryRuleFunctionBody5682);
+            pushFollow(FOLLOW_ruleFunctionBody_in_entryRuleFunctionBody5680);
             iv_ruleFunctionBody=ruleFunctionBody();
 
             state._fsp--;
 
              current =iv_ruleFunctionBody; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFunctionBody5692); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFunctionBody5690); 
 
             }
 
@@ -7163,7 +7157,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getFunctionBodyAccess().getMetaMetadataValueParserRuleCall_0_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleMetadataValue_in_ruleFunctionBody5738);
+            	    pushFollow(FOLLOW_ruleMetadataValue_in_ruleFunctionBody5736);
             	    lv_meta_0_0=ruleMetadataValue();
 
             	    state._fsp--;
@@ -7191,7 +7185,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_1=(Token)match(input,56,FOLLOW_56_in_ruleFunctionBody5751); 
+            otherlv_1=(Token)match(input,56,FOLLOW_56_in_ruleFunctionBody5749); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getFunctionBodyAccess().getLeftCurlyBracketKeyword_1());
                 
@@ -7217,7 +7211,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getFunctionBodyAccess().getBlocksBasicBlockParserRuleCall_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleBasicBlock_in_ruleFunctionBody5772);
+            	    pushFollow(FOLLOW_ruleBasicBlock_in_ruleFunctionBody5770);
             	    lv_blocks_2_0=ruleBasicBlock();
 
             	    state._fsp--;
@@ -7249,7 +7243,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 cnt73++;
             } while (true);
 
-            otherlv_3=(Token)match(input,57,FOLLOW_57_in_ruleFunctionBody5785); 
+            otherlv_3=(Token)match(input,57,FOLLOW_57_in_ruleFunctionBody5783); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getFunctionBodyAccess().getRightCurlyBracketKeyword_3());
                 
@@ -7274,7 +7268,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleBasicBlock"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2523:1: entryRuleBasicBlock returns [EObject current=null] : iv_ruleBasicBlock= ruleBasicBlock EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2525:1: entryRuleBasicBlock returns [EObject current=null] : iv_ruleBasicBlock= ruleBasicBlock EOF ;
     public final EObject entryRuleBasicBlock() throws RecognitionException {
         EObject current = null;
 
@@ -7282,8 +7276,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2524:2: (iv_ruleBasicBlock= ruleBasicBlock EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2525:2: iv_ruleBasicBlock= ruleBasicBlock EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2526:2: (iv_ruleBasicBlock= ruleBasicBlock EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2527:2: iv_ruleBasicBlock= ruleBasicBlock EOF
             {
              newCompositeNode(grammarAccess.getBasicBlockRule()); 
             pushFollow(FOLLOW_ruleBasicBlock_in_entryRuleBasicBlock5821);
@@ -7310,7 +7304,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleBasicBlock"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2532:1: ruleBasicBlock returns [EObject current=null] : ( ( ( (lv_label_0_0= ruleID_FQN ) ) otherlv_1= ':' ) ( ( (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleInstruction ) ) )* ( ( (lv_retadr_3_0= RULE_VALID_ID ) ) otherlv_4= '=' )? ( (lv_terminator_5_0= ruleRet_Instr ) ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2534:1: ruleBasicBlock returns [EObject current=null] : ( ( ( (lv_label_0_0= ruleID_FQN ) ) otherlv_1= ':' ) ( ( (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleStd_Instr ) ) )* ( ( (lv_retadr_3_0= RULE_VALID_ID ) ) otherlv_4= '=' )? ( (lv_terminator_5_0= ruleRet_Instr ) ) ) ;
     public final EObject ruleBasicBlock() throws RecognitionException {
         EObject current = null;
 
@@ -7329,20 +7323,20 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2535:28: ( ( ( ( (lv_label_0_0= ruleID_FQN ) ) otherlv_1= ':' ) ( ( (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleInstruction ) ) )* ( ( (lv_retadr_3_0= RULE_VALID_ID ) ) otherlv_4= '=' )? ( (lv_terminator_5_0= ruleRet_Instr ) ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2536:1: ( ( ( (lv_label_0_0= ruleID_FQN ) ) otherlv_1= ':' ) ( ( (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleInstruction ) ) )* ( ( (lv_retadr_3_0= RULE_VALID_ID ) ) otherlv_4= '=' )? ( (lv_terminator_5_0= ruleRet_Instr ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2537:28: ( ( ( ( (lv_label_0_0= ruleID_FQN ) ) otherlv_1= ':' ) ( ( (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleStd_Instr ) ) )* ( ( (lv_retadr_3_0= RULE_VALID_ID ) ) otherlv_4= '=' )? ( (lv_terminator_5_0= ruleRet_Instr ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2538:1: ( ( ( (lv_label_0_0= ruleID_FQN ) ) otherlv_1= ':' ) ( ( (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleStd_Instr ) ) )* ( ( (lv_retadr_3_0= RULE_VALID_ID ) ) otherlv_4= '=' )? ( (lv_terminator_5_0= ruleRet_Instr ) ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2536:1: ( ( ( (lv_label_0_0= ruleID_FQN ) ) otherlv_1= ':' ) ( ( (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleInstruction ) ) )* ( ( (lv_retadr_3_0= RULE_VALID_ID ) ) otherlv_4= '=' )? ( (lv_terminator_5_0= ruleRet_Instr ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2536:2: ( ( (lv_label_0_0= ruleID_FQN ) ) otherlv_1= ':' ) ( ( (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleInstruction ) ) )* ( ( (lv_retadr_3_0= RULE_VALID_ID ) ) otherlv_4= '=' )? ( (lv_terminator_5_0= ruleRet_Instr ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2538:1: ( ( ( (lv_label_0_0= ruleID_FQN ) ) otherlv_1= ':' ) ( ( (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleStd_Instr ) ) )* ( ( (lv_retadr_3_0= RULE_VALID_ID ) ) otherlv_4= '=' )? ( (lv_terminator_5_0= ruleRet_Instr ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2538:2: ( ( (lv_label_0_0= ruleID_FQN ) ) otherlv_1= ':' ) ( ( (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleStd_Instr ) ) )* ( ( (lv_retadr_3_0= RULE_VALID_ID ) ) otherlv_4= '=' )? ( (lv_terminator_5_0= ruleRet_Instr ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2536:2: ( ( (lv_label_0_0= ruleID_FQN ) ) otherlv_1= ':' )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2536:3: ( (lv_label_0_0= ruleID_FQN ) ) otherlv_1= ':'
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2538:2: ( ( (lv_label_0_0= ruleID_FQN ) ) otherlv_1= ':' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2538:3: ( (lv_label_0_0= ruleID_FQN ) ) otherlv_1= ':'
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2536:3: ( (lv_label_0_0= ruleID_FQN ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2537:1: (lv_label_0_0= ruleID_FQN )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2538:3: ( (lv_label_0_0= ruleID_FQN ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2539:1: (lv_label_0_0= ruleID_FQN )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2537:1: (lv_label_0_0= ruleID_FQN )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2538:3: lv_label_0_0= ruleID_FQN
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2539:1: (lv_label_0_0= ruleID_FQN )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2540:3: lv_label_0_0= ruleID_FQN
             {
              
             	        newCompositeNode(grammarAccess.getBasicBlockAccess().getLabelID_FQNParserRuleCall_0_0_0()); 
@@ -7376,7 +7370,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2558:2: ( ( (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleInstruction ) ) )*
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2560:2: ( ( (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleStd_Instr ) ) )*
             loop75:
             do {
                 int alt75=2;
@@ -7404,12 +7398,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 switch (alt75) {
             	case 1 :
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2559:1: ( (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleInstruction ) )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2561:1: ( (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleStd_Instr ) )
             	    {
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2559:1: ( (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleInstruction ) )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2560:1: (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleInstruction )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2561:1: ( (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleStd_Instr ) )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2562:1: (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleStd_Instr )
             	    {
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2560:1: (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleInstruction )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2562:1: (lv_instructions_2_1= ruleInstructionUse | lv_instructions_2_2= ruleStd_Instr )
             	    int alt74=2;
             	    int LA74_0 = input.LA(1);
 
@@ -7427,7 +7421,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             	    }
             	    switch (alt74) {
             	        case 1 :
-            	            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2561:3: lv_instructions_2_1= ruleInstructionUse
+            	            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2563:3: lv_instructions_2_1= ruleInstructionUse
             	            {
             	             
             	            	        newCompositeNode(grammarAccess.getBasicBlockAccess().getInstructionsInstructionUseParserRuleCall_1_0_0()); 
@@ -7452,13 +7446,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             	            }
             	            break;
             	        case 2 :
-            	            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2576:8: lv_instructions_2_2= ruleInstruction
+            	            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2578:8: lv_instructions_2_2= ruleStd_Instr
             	            {
             	             
-            	            	        newCompositeNode(grammarAccess.getBasicBlockAccess().getInstructionsInstructionParserRuleCall_1_0_1()); 
+            	            	        newCompositeNode(grammarAccess.getBasicBlockAccess().getInstructionsStd_InstrParserRuleCall_1_0_1()); 
             	            	    
-            	            pushFollow(FOLLOW_ruleInstruction_in_ruleBasicBlock5933);
-            	            lv_instructions_2_2=ruleInstruction();
+            	            pushFollow(FOLLOW_ruleStd_Instr_in_ruleBasicBlock5933);
+            	            lv_instructions_2_2=ruleStd_Instr();
 
             	            state._fsp--;
 
@@ -7470,7 +7464,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             	                   			current, 
             	                   			"instructions",
             	                    		lv_instructions_2_2, 
-            	                    		"Instruction");
+            	                    		"Std_Instr");
             	            	        afterParserOrEnumRuleCall();
             	            	    
 
@@ -7491,7 +7485,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2594:3: ( ( (lv_retadr_3_0= RULE_VALID_ID ) ) otherlv_4= '=' )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2596:3: ( ( (lv_retadr_3_0= RULE_VALID_ID ) ) otherlv_4= '=' )?
             int alt76=2;
             int LA76_0 = input.LA(1);
 
@@ -7500,13 +7494,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt76) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2594:4: ( (lv_retadr_3_0= RULE_VALID_ID ) ) otherlv_4= '='
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2596:4: ( (lv_retadr_3_0= RULE_VALID_ID ) ) otherlv_4= '='
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2594:4: ( (lv_retadr_3_0= RULE_VALID_ID ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2595:1: (lv_retadr_3_0= RULE_VALID_ID )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2596:4: ( (lv_retadr_3_0= RULE_VALID_ID ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2597:1: (lv_retadr_3_0= RULE_VALID_ID )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2595:1: (lv_retadr_3_0= RULE_VALID_ID )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2596:3: lv_retadr_3_0= RULE_VALID_ID
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2597:1: (lv_retadr_3_0= RULE_VALID_ID )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2598:3: lv_retadr_3_0= RULE_VALID_ID
                     {
                     lv_retadr_3_0=(Token)match(input,RULE_VALID_ID,FOLLOW_RULE_VALID_ID_in_ruleBasicBlock5955); 
 
@@ -7538,11 +7532,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2616:3: ( (lv_terminator_5_0= ruleRet_Instr ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2617:1: (lv_terminator_5_0= ruleRet_Instr )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2618:3: ( (lv_terminator_5_0= ruleRet_Instr ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2619:1: (lv_terminator_5_0= ruleRet_Instr )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2617:1: (lv_terminator_5_0= ruleRet_Instr )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2618:3: lv_terminator_5_0= ruleRet_Instr
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2619:1: (lv_terminator_5_0= ruleRet_Instr )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2620:3: lv_terminator_5_0= ruleRet_Instr
             {
              
             	        newCompositeNode(grammarAccess.getBasicBlockAccess().getTerminatorRet_InstrParserRuleCall_3_0()); 
@@ -7590,7 +7584,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleInstructionUse"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2642:1: entryRuleInstructionUse returns [EObject current=null] : iv_ruleInstructionUse= ruleInstructionUse EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2644:1: entryRuleInstructionUse returns [EObject current=null] : iv_ruleInstructionUse= ruleInstructionUse EOF ;
     public final EObject entryRuleInstructionUse() throws RecognitionException {
         EObject current = null;
 
@@ -7598,8 +7592,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2643:2: (iv_ruleInstructionUse= ruleInstructionUse EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2644:2: iv_ruleInstructionUse= ruleInstructionUse EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2645:2: (iv_ruleInstructionUse= ruleInstructionUse EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2646:2: iv_ruleInstructionUse= ruleInstructionUse EOF
             {
              newCompositeNode(grammarAccess.getInstructionUseRule()); 
             pushFollow(FOLLOW_ruleInstructionUse_in_entryRuleInstructionUse6031);
@@ -7626,7 +7620,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleInstructionUse"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2651:1: ruleInstructionUse returns [EObject current=null] : ( ( (lv_reg_or_var_0_0= RULE_VALID_ID ) ) otherlv_1= '=' ( (lv_instruction_2_0= ruleInstruction ) ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2653:1: ruleInstructionUse returns [EObject current=null] : ( ( (lv_reg_or_var_0_0= RULE_VALID_ID ) ) otherlv_1= '=' ( (lv_instruction_2_0= ruleStd_Instr ) ) ) ;
     public final EObject ruleInstructionUse() throws RecognitionException {
         EObject current = null;
 
@@ -7638,17 +7632,17 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2654:28: ( ( ( (lv_reg_or_var_0_0= RULE_VALID_ID ) ) otherlv_1= '=' ( (lv_instruction_2_0= ruleInstruction ) ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2655:1: ( ( (lv_reg_or_var_0_0= RULE_VALID_ID ) ) otherlv_1= '=' ( (lv_instruction_2_0= ruleInstruction ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2656:28: ( ( ( (lv_reg_or_var_0_0= RULE_VALID_ID ) ) otherlv_1= '=' ( (lv_instruction_2_0= ruleStd_Instr ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2657:1: ( ( (lv_reg_or_var_0_0= RULE_VALID_ID ) ) otherlv_1= '=' ( (lv_instruction_2_0= ruleStd_Instr ) ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2655:1: ( ( (lv_reg_or_var_0_0= RULE_VALID_ID ) ) otherlv_1= '=' ( (lv_instruction_2_0= ruleInstruction ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2655:2: ( (lv_reg_or_var_0_0= RULE_VALID_ID ) ) otherlv_1= '=' ( (lv_instruction_2_0= ruleInstruction ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2657:1: ( ( (lv_reg_or_var_0_0= RULE_VALID_ID ) ) otherlv_1= '=' ( (lv_instruction_2_0= ruleStd_Instr ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2657:2: ( (lv_reg_or_var_0_0= RULE_VALID_ID ) ) otherlv_1= '=' ( (lv_instruction_2_0= ruleStd_Instr ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2655:2: ( (lv_reg_or_var_0_0= RULE_VALID_ID ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2656:1: (lv_reg_or_var_0_0= RULE_VALID_ID )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2657:2: ( (lv_reg_or_var_0_0= RULE_VALID_ID ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2658:1: (lv_reg_or_var_0_0= RULE_VALID_ID )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2656:1: (lv_reg_or_var_0_0= RULE_VALID_ID )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2657:3: lv_reg_or_var_0_0= RULE_VALID_ID
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2658:1: (lv_reg_or_var_0_0= RULE_VALID_ID )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2659:3: lv_reg_or_var_0_0= RULE_VALID_ID
             {
             lv_reg_or_var_0_0=(Token)match(input,RULE_VALID_ID,FOLLOW_RULE_VALID_ID_in_ruleInstructionUse6083); 
 
@@ -7674,17 +7668,17 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_1, grammarAccess.getInstructionUseAccess().getEqualsSignKeyword_1());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2677:1: ( (lv_instruction_2_0= ruleInstruction ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2678:1: (lv_instruction_2_0= ruleInstruction )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2679:1: ( (lv_instruction_2_0= ruleStd_Instr ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2680:1: (lv_instruction_2_0= ruleStd_Instr )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2678:1: (lv_instruction_2_0= ruleInstruction )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2679:3: lv_instruction_2_0= ruleInstruction
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2680:1: (lv_instruction_2_0= ruleStd_Instr )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2681:3: lv_instruction_2_0= ruleStd_Instr
             {
              
-            	        newCompositeNode(grammarAccess.getInstructionUseAccess().getInstructionInstructionParserRuleCall_2_0()); 
+            	        newCompositeNode(grammarAccess.getInstructionUseAccess().getInstructionStd_InstrParserRuleCall_2_0()); 
             	    
-            pushFollow(FOLLOW_ruleInstruction_in_ruleInstructionUse6121);
-            lv_instruction_2_0=ruleInstruction();
+            pushFollow(FOLLOW_ruleStd_Instr_in_ruleInstructionUse6121);
+            lv_instruction_2_0=ruleStd_Instr();
 
             state._fsp--;
 
@@ -7696,7 +7690,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                    			current, 
                    			"instruction",
                     		lv_instruction_2_0, 
-                    		"Instruction");
+                    		"Std_Instr");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -7726,7 +7720,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleRet_Instr"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2703:1: entryRuleRet_Instr returns [EObject current=null] : iv_ruleRet_Instr= ruleRet_Instr EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2705:1: entryRuleRet_Instr returns [EObject current=null] : iv_ruleRet_Instr= ruleRet_Instr EOF ;
     public final EObject entryRuleRet_Instr() throws RecognitionException {
         EObject current = null;
 
@@ -7734,8 +7728,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2704:2: (iv_ruleRet_Instr= ruleRet_Instr EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2705:2: iv_ruleRet_Instr= ruleRet_Instr EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2706:2: (iv_ruleRet_Instr= ruleRet_Instr EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2707:2: iv_ruleRet_Instr= ruleRet_Instr EOF
             {
              newCompositeNode(grammarAccess.getRet_InstrRule()); 
             pushFollow(FOLLOW_ruleRet_Instr_in_entryRuleRet_Instr6157);
@@ -7762,7 +7756,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRet_Instr"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2712:1: ruleRet_Instr returns [EObject current=null] : (this_Return_0= ruleReturn | this_Branch_1= ruleBranch | this_Switch_2= ruleSwitch | this_IndirectBranch_3= ruleIndirectBranch | this_Invoke_4= ruleInvoke | this_Resume_5= ruleResume | this_Unreachable_6= ruleUnreachable ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2714:1: ruleRet_Instr returns [EObject current=null] : (this_Return_0= ruleReturn | this_Branch_1= ruleBranch | this_Switch_2= ruleSwitch | this_IndirectBranch_3= ruleIndirectBranch | this_Invoke_4= ruleInvoke | this_Resume_5= ruleResume | this_Unreachable_6= ruleUnreachable ) ;
     public final EObject ruleRet_Instr() throws RecognitionException {
         EObject current = null;
 
@@ -7784,10 +7778,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2715:28: ( (this_Return_0= ruleReturn | this_Branch_1= ruleBranch | this_Switch_2= ruleSwitch | this_IndirectBranch_3= ruleIndirectBranch | this_Invoke_4= ruleInvoke | this_Resume_5= ruleResume | this_Unreachable_6= ruleUnreachable ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2716:1: (this_Return_0= ruleReturn | this_Branch_1= ruleBranch | this_Switch_2= ruleSwitch | this_IndirectBranch_3= ruleIndirectBranch | this_Invoke_4= ruleInvoke | this_Resume_5= ruleResume | this_Unreachable_6= ruleUnreachable )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2717:28: ( (this_Return_0= ruleReturn | this_Branch_1= ruleBranch | this_Switch_2= ruleSwitch | this_IndirectBranch_3= ruleIndirectBranch | this_Invoke_4= ruleInvoke | this_Resume_5= ruleResume | this_Unreachable_6= ruleUnreachable ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2718:1: (this_Return_0= ruleReturn | this_Branch_1= ruleBranch | this_Switch_2= ruleSwitch | this_IndirectBranch_3= ruleIndirectBranch | this_Invoke_4= ruleInvoke | this_Resume_5= ruleResume | this_Unreachable_6= ruleUnreachable )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2716:1: (this_Return_0= ruleReturn | this_Branch_1= ruleBranch | this_Switch_2= ruleSwitch | this_IndirectBranch_3= ruleIndirectBranch | this_Invoke_4= ruleInvoke | this_Resume_5= ruleResume | this_Unreachable_6= ruleUnreachable )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2718:1: (this_Return_0= ruleReturn | this_Branch_1= ruleBranch | this_Switch_2= ruleSwitch | this_IndirectBranch_3= ruleIndirectBranch | this_Invoke_4= ruleInvoke | this_Resume_5= ruleResume | this_Unreachable_6= ruleUnreachable )
             int alt77=7;
             switch ( input.LA(1) ) {
             case 125:
@@ -7834,7 +7828,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             switch (alt77) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2717:5: this_Return_0= ruleReturn
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2719:5: this_Return_0= ruleReturn
                     {
                      
                             newCompositeNode(grammarAccess.getRet_InstrAccess().getReturnParserRuleCall_0()); 
@@ -7852,7 +7846,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2727:5: this_Branch_1= ruleBranch
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2729:5: this_Branch_1= ruleBranch
                     {
                      
                             newCompositeNode(grammarAccess.getRet_InstrAccess().getBranchParserRuleCall_1()); 
@@ -7870,7 +7864,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2737:5: this_Switch_2= ruleSwitch
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2739:5: this_Switch_2= ruleSwitch
                     {
                      
                             newCompositeNode(grammarAccess.getRet_InstrAccess().getSwitchParserRuleCall_2()); 
@@ -7888,7 +7882,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2747:5: this_IndirectBranch_3= ruleIndirectBranch
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2749:5: this_IndirectBranch_3= ruleIndirectBranch
                     {
                      
                             newCompositeNode(grammarAccess.getRet_InstrAccess().getIndirectBranchParserRuleCall_3()); 
@@ -7906,7 +7900,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2757:5: this_Invoke_4= ruleInvoke
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2759:5: this_Invoke_4= ruleInvoke
                     {
                      
                             newCompositeNode(grammarAccess.getRet_InstrAccess().getInvokeParserRuleCall_4()); 
@@ -7924,7 +7918,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2767:5: this_Resume_5= ruleResume
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2769:5: this_Resume_5= ruleResume
                     {
                      
                             newCompositeNode(grammarAccess.getRet_InstrAccess().getResumeParserRuleCall_5()); 
@@ -7942,7 +7936,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2777:5: this_Unreachable_6= ruleUnreachable
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2779:5: this_Unreachable_6= ruleUnreachable
                     {
                      
                             newCompositeNode(grammarAccess.getRet_InstrAccess().getUnreachableParserRuleCall_6()); 
@@ -7979,26 +7973,26 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleRet_Instr"
 
 
-    // $ANTLR start "entryRuleInstruction"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2793:1: entryRuleInstruction returns [EObject current=null] : iv_ruleInstruction= ruleInstruction EOF ;
-    public final EObject entryRuleInstruction() throws RecognitionException {
+    // $ANTLR start "entryRuleStd_Instr"
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2795:1: entryRuleStd_Instr returns [EObject current=null] : iv_ruleStd_Instr= ruleStd_Instr EOF ;
+    public final EObject entryRuleStd_Instr() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleInstruction = null;
+        EObject iv_ruleStd_Instr = null;
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2794:2: (iv_ruleInstruction= ruleInstruction EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2795:2: iv_ruleInstruction= ruleInstruction EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2796:2: (iv_ruleStd_Instr= ruleStd_Instr EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2797:2: iv_ruleStd_Instr= ruleStd_Instr EOF
             {
-             newCompositeNode(grammarAccess.getInstructionRule()); 
-            pushFollow(FOLLOW_ruleInstruction_in_entryRuleInstruction6411);
-            iv_ruleInstruction=ruleInstruction();
+             newCompositeNode(grammarAccess.getStd_InstrRule()); 
+            pushFollow(FOLLOW_ruleStd_Instr_in_entryRuleStd_Instr6411);
+            iv_ruleStd_Instr=ruleStd_Instr();
 
             state._fsp--;
 
-             current =iv_ruleInstruction; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInstruction6421); 
+             current =iv_ruleStd_Instr; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleStd_Instr6421); 
 
             }
 
@@ -8012,12 +8006,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleInstruction"
+    // $ANTLR end "entryRuleStd_Instr"
 
 
-    // $ANTLR start "ruleInstruction"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2802:1: ruleInstruction returns [EObject current=null] : ( ( (otherlv_0= 'volatile' )? this_Load_1= ruleLoad ) | ( (otherlv_2= 'volatile' )? this_Store_3= ruleStore ) | this_Fence_4= ruleFence | this_GetElementPtr_5= ruleGetElementPtr | this_LOGICAL_OP_6= ruleLOGICAL_OP | this_ARITHMETIC_OP_7= ruleARITHMETIC_OP | this_Compare_8= ruleCompare | this_Cast_9= ruleCast | this_ShuffleVector_10= ruleShuffleVector | this_InsertElement_11= ruleInsertElement | this_ExtractElement_12= ruleExtractElement | this_InsertValue_13= ruleInsertValue | this_ExtractValue_14= ruleExtractValue | this_Alloc_15= ruleAlloc | this_CmpXchg_16= ruleCmpXchg | this_AtomicRMW_17= ruleAtomicRMW | this_PHI_18= rulePHI | this_Select_19= ruleSelect | this_Call_20= ruleCall | this_VA_Arg_21= ruleVA_Arg | this_LandingPad_22= ruleLandingPad ) ;
-    public final EObject ruleInstruction() throws RecognitionException {
+    // $ANTLR start "ruleStd_Instr"
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2804:1: ruleStd_Instr returns [EObject current=null] : ( ( (otherlv_0= 'volatile' )? this_Load_1= ruleLoad ) | ( (otherlv_2= 'volatile' )? this_Store_3= ruleStore ) | this_Fence_4= ruleFence | this_GetElementPtr_5= ruleGetElementPtr | this_LOGICAL_OP_6= ruleLOGICAL_OP | this_ARITHMETIC_OP_7= ruleARITHMETIC_OP | this_Compare_8= ruleCompare | this_Cast_9= ruleCast | this_ShuffleVector_10= ruleShuffleVector | this_InsertElement_11= ruleInsertElement | this_ExtractElement_12= ruleExtractElement | this_InsertValue_13= ruleInsertValue | this_ExtractValue_14= ruleExtractValue | this_Alloc_15= ruleAlloc | this_CmpXchg_16= ruleCmpXchg | this_AtomicRMW_17= ruleAtomicRMW | this_PHI_18= rulePHI | this_Select_19= ruleSelect | this_Call_20= ruleCall | this_VA_Arg_21= ruleVA_Arg | this_LandingPad_22= ruleLandingPad ) ;
+    public final EObject ruleStd_Instr() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
@@ -8068,20 +8062,20 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2805:28: ( ( ( (otherlv_0= 'volatile' )? this_Load_1= ruleLoad ) | ( (otherlv_2= 'volatile' )? this_Store_3= ruleStore ) | this_Fence_4= ruleFence | this_GetElementPtr_5= ruleGetElementPtr | this_LOGICAL_OP_6= ruleLOGICAL_OP | this_ARITHMETIC_OP_7= ruleARITHMETIC_OP | this_Compare_8= ruleCompare | this_Cast_9= ruleCast | this_ShuffleVector_10= ruleShuffleVector | this_InsertElement_11= ruleInsertElement | this_ExtractElement_12= ruleExtractElement | this_InsertValue_13= ruleInsertValue | this_ExtractValue_14= ruleExtractValue | this_Alloc_15= ruleAlloc | this_CmpXchg_16= ruleCmpXchg | this_AtomicRMW_17= ruleAtomicRMW | this_PHI_18= rulePHI | this_Select_19= ruleSelect | this_Call_20= ruleCall | this_VA_Arg_21= ruleVA_Arg | this_LandingPad_22= ruleLandingPad ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2806:1: ( ( (otherlv_0= 'volatile' )? this_Load_1= ruleLoad ) | ( (otherlv_2= 'volatile' )? this_Store_3= ruleStore ) | this_Fence_4= ruleFence | this_GetElementPtr_5= ruleGetElementPtr | this_LOGICAL_OP_6= ruleLOGICAL_OP | this_ARITHMETIC_OP_7= ruleARITHMETIC_OP | this_Compare_8= ruleCompare | this_Cast_9= ruleCast | this_ShuffleVector_10= ruleShuffleVector | this_InsertElement_11= ruleInsertElement | this_ExtractElement_12= ruleExtractElement | this_InsertValue_13= ruleInsertValue | this_ExtractValue_14= ruleExtractValue | this_Alloc_15= ruleAlloc | this_CmpXchg_16= ruleCmpXchg | this_AtomicRMW_17= ruleAtomicRMW | this_PHI_18= rulePHI | this_Select_19= ruleSelect | this_Call_20= ruleCall | this_VA_Arg_21= ruleVA_Arg | this_LandingPad_22= ruleLandingPad )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2807:28: ( ( ( (otherlv_0= 'volatile' )? this_Load_1= ruleLoad ) | ( (otherlv_2= 'volatile' )? this_Store_3= ruleStore ) | this_Fence_4= ruleFence | this_GetElementPtr_5= ruleGetElementPtr | this_LOGICAL_OP_6= ruleLOGICAL_OP | this_ARITHMETIC_OP_7= ruleARITHMETIC_OP | this_Compare_8= ruleCompare | this_Cast_9= ruleCast | this_ShuffleVector_10= ruleShuffleVector | this_InsertElement_11= ruleInsertElement | this_ExtractElement_12= ruleExtractElement | this_InsertValue_13= ruleInsertValue | this_ExtractValue_14= ruleExtractValue | this_Alloc_15= ruleAlloc | this_CmpXchg_16= ruleCmpXchg | this_AtomicRMW_17= ruleAtomicRMW | this_PHI_18= rulePHI | this_Select_19= ruleSelect | this_Call_20= ruleCall | this_VA_Arg_21= ruleVA_Arg | this_LandingPad_22= ruleLandingPad ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2808:1: ( ( (otherlv_0= 'volatile' )? this_Load_1= ruleLoad ) | ( (otherlv_2= 'volatile' )? this_Store_3= ruleStore ) | this_Fence_4= ruleFence | this_GetElementPtr_5= ruleGetElementPtr | this_LOGICAL_OP_6= ruleLOGICAL_OP | this_ARITHMETIC_OP_7= ruleARITHMETIC_OP | this_Compare_8= ruleCompare | this_Cast_9= ruleCast | this_ShuffleVector_10= ruleShuffleVector | this_InsertElement_11= ruleInsertElement | this_ExtractElement_12= ruleExtractElement | this_InsertValue_13= ruleInsertValue | this_ExtractValue_14= ruleExtractValue | this_Alloc_15= ruleAlloc | this_CmpXchg_16= ruleCmpXchg | this_AtomicRMW_17= ruleAtomicRMW | this_PHI_18= rulePHI | this_Select_19= ruleSelect | this_Call_20= ruleCall | this_VA_Arg_21= ruleVA_Arg | this_LandingPad_22= ruleLandingPad )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2806:1: ( ( (otherlv_0= 'volatile' )? this_Load_1= ruleLoad ) | ( (otherlv_2= 'volatile' )? this_Store_3= ruleStore ) | this_Fence_4= ruleFence | this_GetElementPtr_5= ruleGetElementPtr | this_LOGICAL_OP_6= ruleLOGICAL_OP | this_ARITHMETIC_OP_7= ruleARITHMETIC_OP | this_Compare_8= ruleCompare | this_Cast_9= ruleCast | this_ShuffleVector_10= ruleShuffleVector | this_InsertElement_11= ruleInsertElement | this_ExtractElement_12= ruleExtractElement | this_InsertValue_13= ruleInsertValue | this_ExtractValue_14= ruleExtractValue | this_Alloc_15= ruleAlloc | this_CmpXchg_16= ruleCmpXchg | this_AtomicRMW_17= ruleAtomicRMW | this_PHI_18= rulePHI | this_Select_19= ruleSelect | this_Call_20= ruleCall | this_VA_Arg_21= ruleVA_Arg | this_LandingPad_22= ruleLandingPad )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2808:1: ( ( (otherlv_0= 'volatile' )? this_Load_1= ruleLoad ) | ( (otherlv_2= 'volatile' )? this_Store_3= ruleStore ) | this_Fence_4= ruleFence | this_GetElementPtr_5= ruleGetElementPtr | this_LOGICAL_OP_6= ruleLOGICAL_OP | this_ARITHMETIC_OP_7= ruleARITHMETIC_OP | this_Compare_8= ruleCompare | this_Cast_9= ruleCast | this_ShuffleVector_10= ruleShuffleVector | this_InsertElement_11= ruleInsertElement | this_ExtractElement_12= ruleExtractElement | this_InsertValue_13= ruleInsertValue | this_ExtractValue_14= ruleExtractValue | this_Alloc_15= ruleAlloc | this_CmpXchg_16= ruleCmpXchg | this_AtomicRMW_17= ruleAtomicRMW | this_PHI_18= rulePHI | this_Select_19= ruleSelect | this_Call_20= ruleCall | this_VA_Arg_21= ruleVA_Arg | this_LandingPad_22= ruleLandingPad )
             int alt80=21;
             alt80 = dfa80.predict(input);
             switch (alt80) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2806:2: ( (otherlv_0= 'volatile' )? this_Load_1= ruleLoad )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2808:2: ( (otherlv_0= 'volatile' )? this_Load_1= ruleLoad )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2806:2: ( (otherlv_0= 'volatile' )? this_Load_1= ruleLoad )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2806:3: (otherlv_0= 'volatile' )? this_Load_1= ruleLoad
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2808:2: ( (otherlv_0= 'volatile' )? this_Load_1= ruleLoad )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2808:3: (otherlv_0= 'volatile' )? this_Load_1= ruleLoad
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2806:3: (otherlv_0= 'volatile' )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2808:3: (otherlv_0= 'volatile' )?
                     int alt78=2;
                     int LA78_0 = input.LA(1);
 
@@ -8090,11 +8084,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt78) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2806:5: otherlv_0= 'volatile'
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2808:5: otherlv_0= 'volatile'
                             {
-                            otherlv_0=(Token)match(input,68,FOLLOW_68_in_ruleInstruction6460); 
+                            otherlv_0=(Token)match(input,68,FOLLOW_68_in_ruleStd_Instr6460); 
 
-                                	newLeafNode(otherlv_0, grammarAccess.getInstructionAccess().getVolatileKeyword_0_0());
+                                	newLeafNode(otherlv_0, grammarAccess.getStd_InstrAccess().getVolatileKeyword_0_0());
                                 
 
                             }
@@ -8103,9 +8097,9 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
 
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getLoadParserRuleCall_0_1()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getLoadParserRuleCall_0_1()); 
                         
-                    pushFollow(FOLLOW_ruleLoad_in_ruleInstruction6484);
+                    pushFollow(FOLLOW_ruleLoad_in_ruleStd_Instr6484);
                     this_Load_1=ruleLoad();
 
                     state._fsp--;
@@ -8121,12 +8115,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2820:6: ( (otherlv_2= 'volatile' )? this_Store_3= ruleStore )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2822:6: ( (otherlv_2= 'volatile' )? this_Store_3= ruleStore )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2820:6: ( (otherlv_2= 'volatile' )? this_Store_3= ruleStore )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2820:7: (otherlv_2= 'volatile' )? this_Store_3= ruleStore
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2822:6: ( (otherlv_2= 'volatile' )? this_Store_3= ruleStore )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2822:7: (otherlv_2= 'volatile' )? this_Store_3= ruleStore
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2820:7: (otherlv_2= 'volatile' )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2822:7: (otherlv_2= 'volatile' )?
                     int alt79=2;
                     int LA79_0 = input.LA(1);
 
@@ -8135,11 +8129,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt79) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2820:9: otherlv_2= 'volatile'
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2822:9: otherlv_2= 'volatile'
                             {
-                            otherlv_2=(Token)match(input,68,FOLLOW_68_in_ruleInstruction6504); 
+                            otherlv_2=(Token)match(input,68,FOLLOW_68_in_ruleStd_Instr6504); 
 
-                                	newLeafNode(otherlv_2, grammarAccess.getInstructionAccess().getVolatileKeyword_1_0());
+                                	newLeafNode(otherlv_2, grammarAccess.getStd_InstrAccess().getVolatileKeyword_1_0());
                                 
 
                             }
@@ -8148,9 +8142,9 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
 
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getStoreParserRuleCall_1_1()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getStoreParserRuleCall_1_1()); 
                         
-                    pushFollow(FOLLOW_ruleStore_in_ruleInstruction6528);
+                    pushFollow(FOLLOW_ruleStore_in_ruleStd_Instr6528);
                     this_Store_3=ruleStore();
 
                     state._fsp--;
@@ -8166,12 +8160,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2835:5: this_Fence_4= ruleFence
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2837:5: this_Fence_4= ruleFence
                     {
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getFenceParserRuleCall_2()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getFenceParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleFence_in_ruleInstruction6556);
+                    pushFollow(FOLLOW_ruleFence_in_ruleStd_Instr6556);
                     this_Fence_4=ruleFence();
 
                     state._fsp--;
@@ -8184,12 +8178,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2845:5: this_GetElementPtr_5= ruleGetElementPtr
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2847:5: this_GetElementPtr_5= ruleGetElementPtr
                     {
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getGetElementPtrParserRuleCall_3()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getGetElementPtrParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleGetElementPtr_in_ruleInstruction6583);
+                    pushFollow(FOLLOW_ruleGetElementPtr_in_ruleStd_Instr6583);
                     this_GetElementPtr_5=ruleGetElementPtr();
 
                     state._fsp--;
@@ -8202,12 +8196,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2855:5: this_LOGICAL_OP_6= ruleLOGICAL_OP
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2857:5: this_LOGICAL_OP_6= ruleLOGICAL_OP
                     {
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getLOGICAL_OPParserRuleCall_4()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getLOGICAL_OPParserRuleCall_4()); 
                         
-                    pushFollow(FOLLOW_ruleLOGICAL_OP_in_ruleInstruction6610);
+                    pushFollow(FOLLOW_ruleLOGICAL_OP_in_ruleStd_Instr6610);
                     this_LOGICAL_OP_6=ruleLOGICAL_OP();
 
                     state._fsp--;
@@ -8220,12 +8214,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2865:5: this_ARITHMETIC_OP_7= ruleARITHMETIC_OP
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2867:5: this_ARITHMETIC_OP_7= ruleARITHMETIC_OP
                     {
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getARITHMETIC_OPParserRuleCall_5()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getARITHMETIC_OPParserRuleCall_5()); 
                         
-                    pushFollow(FOLLOW_ruleARITHMETIC_OP_in_ruleInstruction6637);
+                    pushFollow(FOLLOW_ruleARITHMETIC_OP_in_ruleStd_Instr6637);
                     this_ARITHMETIC_OP_7=ruleARITHMETIC_OP();
 
                     state._fsp--;
@@ -8238,12 +8232,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2875:5: this_Compare_8= ruleCompare
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2877:5: this_Compare_8= ruleCompare
                     {
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getCompareParserRuleCall_6()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getCompareParserRuleCall_6()); 
                         
-                    pushFollow(FOLLOW_ruleCompare_in_ruleInstruction6664);
+                    pushFollow(FOLLOW_ruleCompare_in_ruleStd_Instr6664);
                     this_Compare_8=ruleCompare();
 
                     state._fsp--;
@@ -8256,12 +8250,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2885:5: this_Cast_9= ruleCast
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2887:5: this_Cast_9= ruleCast
                     {
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getCastParserRuleCall_7()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getCastParserRuleCall_7()); 
                         
-                    pushFollow(FOLLOW_ruleCast_in_ruleInstruction6691);
+                    pushFollow(FOLLOW_ruleCast_in_ruleStd_Instr6691);
                     this_Cast_9=ruleCast();
 
                     state._fsp--;
@@ -8274,12 +8268,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 9 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2895:5: this_ShuffleVector_10= ruleShuffleVector
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2897:5: this_ShuffleVector_10= ruleShuffleVector
                     {
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getShuffleVectorParserRuleCall_8()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getShuffleVectorParserRuleCall_8()); 
                         
-                    pushFollow(FOLLOW_ruleShuffleVector_in_ruleInstruction6718);
+                    pushFollow(FOLLOW_ruleShuffleVector_in_ruleStd_Instr6718);
                     this_ShuffleVector_10=ruleShuffleVector();
 
                     state._fsp--;
@@ -8292,12 +8286,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 10 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2905:5: this_InsertElement_11= ruleInsertElement
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2907:5: this_InsertElement_11= ruleInsertElement
                     {
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getInsertElementParserRuleCall_9()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getInsertElementParserRuleCall_9()); 
                         
-                    pushFollow(FOLLOW_ruleInsertElement_in_ruleInstruction6745);
+                    pushFollow(FOLLOW_ruleInsertElement_in_ruleStd_Instr6745);
                     this_InsertElement_11=ruleInsertElement();
 
                     state._fsp--;
@@ -8310,12 +8304,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 11 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2915:5: this_ExtractElement_12= ruleExtractElement
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2917:5: this_ExtractElement_12= ruleExtractElement
                     {
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getExtractElementParserRuleCall_10()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getExtractElementParserRuleCall_10()); 
                         
-                    pushFollow(FOLLOW_ruleExtractElement_in_ruleInstruction6772);
+                    pushFollow(FOLLOW_ruleExtractElement_in_ruleStd_Instr6772);
                     this_ExtractElement_12=ruleExtractElement();
 
                     state._fsp--;
@@ -8328,12 +8322,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 12 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2925:5: this_InsertValue_13= ruleInsertValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2927:5: this_InsertValue_13= ruleInsertValue
                     {
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getInsertValueParserRuleCall_11()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getInsertValueParserRuleCall_11()); 
                         
-                    pushFollow(FOLLOW_ruleInsertValue_in_ruleInstruction6799);
+                    pushFollow(FOLLOW_ruleInsertValue_in_ruleStd_Instr6799);
                     this_InsertValue_13=ruleInsertValue();
 
                     state._fsp--;
@@ -8346,12 +8340,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 13 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2935:5: this_ExtractValue_14= ruleExtractValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2937:5: this_ExtractValue_14= ruleExtractValue
                     {
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getExtractValueParserRuleCall_12()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getExtractValueParserRuleCall_12()); 
                         
-                    pushFollow(FOLLOW_ruleExtractValue_in_ruleInstruction6826);
+                    pushFollow(FOLLOW_ruleExtractValue_in_ruleStd_Instr6826);
                     this_ExtractValue_14=ruleExtractValue();
 
                     state._fsp--;
@@ -8364,12 +8358,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 14 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2945:5: this_Alloc_15= ruleAlloc
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2947:5: this_Alloc_15= ruleAlloc
                     {
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getAllocParserRuleCall_13()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getAllocParserRuleCall_13()); 
                         
-                    pushFollow(FOLLOW_ruleAlloc_in_ruleInstruction6853);
+                    pushFollow(FOLLOW_ruleAlloc_in_ruleStd_Instr6853);
                     this_Alloc_15=ruleAlloc();
 
                     state._fsp--;
@@ -8382,12 +8376,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 15 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2955:5: this_CmpXchg_16= ruleCmpXchg
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2957:5: this_CmpXchg_16= ruleCmpXchg
                     {
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getCmpXchgParserRuleCall_14()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getCmpXchgParserRuleCall_14()); 
                         
-                    pushFollow(FOLLOW_ruleCmpXchg_in_ruleInstruction6880);
+                    pushFollow(FOLLOW_ruleCmpXchg_in_ruleStd_Instr6880);
                     this_CmpXchg_16=ruleCmpXchg();
 
                     state._fsp--;
@@ -8400,12 +8394,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 16 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2965:5: this_AtomicRMW_17= ruleAtomicRMW
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2967:5: this_AtomicRMW_17= ruleAtomicRMW
                     {
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getAtomicRMWParserRuleCall_15()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getAtomicRMWParserRuleCall_15()); 
                         
-                    pushFollow(FOLLOW_ruleAtomicRMW_in_ruleInstruction6907);
+                    pushFollow(FOLLOW_ruleAtomicRMW_in_ruleStd_Instr6907);
                     this_AtomicRMW_17=ruleAtomicRMW();
 
                     state._fsp--;
@@ -8418,12 +8412,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 17 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2975:5: this_PHI_18= rulePHI
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2977:5: this_PHI_18= rulePHI
                     {
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getPHIParserRuleCall_16()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getPHIParserRuleCall_16()); 
                         
-                    pushFollow(FOLLOW_rulePHI_in_ruleInstruction6934);
+                    pushFollow(FOLLOW_rulePHI_in_ruleStd_Instr6934);
                     this_PHI_18=rulePHI();
 
                     state._fsp--;
@@ -8436,12 +8430,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 18 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2985:5: this_Select_19= ruleSelect
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2987:5: this_Select_19= ruleSelect
                     {
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getSelectParserRuleCall_17()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getSelectParserRuleCall_17()); 
                         
-                    pushFollow(FOLLOW_ruleSelect_in_ruleInstruction6961);
+                    pushFollow(FOLLOW_ruleSelect_in_ruleStd_Instr6961);
                     this_Select_19=ruleSelect();
 
                     state._fsp--;
@@ -8454,12 +8448,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 19 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2995:5: this_Call_20= ruleCall
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:2997:5: this_Call_20= ruleCall
                     {
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getCallParserRuleCall_18()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getCallParserRuleCall_18()); 
                         
-                    pushFollow(FOLLOW_ruleCall_in_ruleInstruction6988);
+                    pushFollow(FOLLOW_ruleCall_in_ruleStd_Instr6988);
                     this_Call_20=ruleCall();
 
                     state._fsp--;
@@ -8472,12 +8466,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 20 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3005:5: this_VA_Arg_21= ruleVA_Arg
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3007:5: this_VA_Arg_21= ruleVA_Arg
                     {
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getVA_ArgParserRuleCall_19()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getVA_ArgParserRuleCall_19()); 
                         
-                    pushFollow(FOLLOW_ruleVA_Arg_in_ruleInstruction7015);
+                    pushFollow(FOLLOW_ruleVA_Arg_in_ruleStd_Instr7015);
                     this_VA_Arg_21=ruleVA_Arg();
 
                     state._fsp--;
@@ -8490,12 +8484,12 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 21 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3015:5: this_LandingPad_22= ruleLandingPad
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3017:5: this_LandingPad_22= ruleLandingPad
                     {
                      
-                            newCompositeNode(grammarAccess.getInstructionAccess().getLandingPadParserRuleCall_20()); 
+                            newCompositeNode(grammarAccess.getStd_InstrAccess().getLandingPadParserRuleCall_20()); 
                         
-                    pushFollow(FOLLOW_ruleLandingPad_in_ruleInstruction7042);
+                    pushFollow(FOLLOW_ruleLandingPad_in_ruleStd_Instr7042);
                     this_LandingPad_22=ruleLandingPad();
 
                     state._fsp--;
@@ -8524,11 +8518,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleInstruction"
+    // $ANTLR end "ruleStd_Instr"
 
 
     // $ANTLR start "entryRuleARITHMETIC_OP"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3031:1: entryRuleARITHMETIC_OP returns [EObject current=null] : iv_ruleARITHMETIC_OP= ruleARITHMETIC_OP EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3033:1: entryRuleARITHMETIC_OP returns [EObject current=null] : iv_ruleARITHMETIC_OP= ruleARITHMETIC_OP EOF ;
     public final EObject entryRuleARITHMETIC_OP() throws RecognitionException {
         EObject current = null;
 
@@ -8536,8 +8530,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3032:2: (iv_ruleARITHMETIC_OP= ruleARITHMETIC_OP EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3033:2: iv_ruleARITHMETIC_OP= ruleARITHMETIC_OP EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3034:2: (iv_ruleARITHMETIC_OP= ruleARITHMETIC_OP EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3035:2: iv_ruleARITHMETIC_OP= ruleARITHMETIC_OP EOF
             {
              newCompositeNode(grammarAccess.getARITHMETIC_OPRule()); 
             pushFollow(FOLLOW_ruleARITHMETIC_OP_in_entryRuleARITHMETIC_OP7077);
@@ -8564,7 +8558,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleARITHMETIC_OP"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3040:1: ruleARITHMETIC_OP returns [EObject current=null] : ( (otherlv_0= 'add' | otherlv_1= 'fadd' | otherlv_2= 'sub' | otherlv_3= 'fsub' | otherlv_4= 'mul' | otherlv_5= 'fmul' | otherlv_6= 'udiv' | otherlv_7= 'sdiv' | otherlv_8= 'fdiv' | otherlv_9= 'urem' | otherlv_10= 'srem' | otherlv_11= 'frem' ) ( (otherlv_12= 'nsw' | otherlv_13= 'nuw' ) (otherlv_14= 'nuw' | otherlv_15= 'nsw' )? )? ( (lv_optype_16_0= ruleTypeUse ) ) ( (lv_value1_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_value2_19_0= ruleValue ) ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3042:1: ruleARITHMETIC_OP returns [EObject current=null] : ( (otherlv_0= 'add' | otherlv_1= 'fadd' | otherlv_2= 'sub' | otherlv_3= 'fsub' | otherlv_4= 'mul' | otherlv_5= 'fmul' | otherlv_6= 'udiv' | otherlv_7= 'sdiv' | otherlv_8= 'fdiv' | otherlv_9= 'urem' | otherlv_10= 'srem' | otherlv_11= 'frem' ) ( (otherlv_12= 'nsw' | otherlv_13= 'nuw' ) (otherlv_14= 'nuw' | otherlv_15= 'nsw' )? )? ( (lv_optype_16_0= ruleTypeUse ) ) ( (lv_value1_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_value2_19_0= ruleValue ) ) ) ;
     public final EObject ruleARITHMETIC_OP() throws RecognitionException {
         EObject current = null;
 
@@ -8595,13 +8589,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3043:28: ( ( (otherlv_0= 'add' | otherlv_1= 'fadd' | otherlv_2= 'sub' | otherlv_3= 'fsub' | otherlv_4= 'mul' | otherlv_5= 'fmul' | otherlv_6= 'udiv' | otherlv_7= 'sdiv' | otherlv_8= 'fdiv' | otherlv_9= 'urem' | otherlv_10= 'srem' | otherlv_11= 'frem' ) ( (otherlv_12= 'nsw' | otherlv_13= 'nuw' ) (otherlv_14= 'nuw' | otherlv_15= 'nsw' )? )? ( (lv_optype_16_0= ruleTypeUse ) ) ( (lv_value1_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_value2_19_0= ruleValue ) ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3044:1: ( (otherlv_0= 'add' | otherlv_1= 'fadd' | otherlv_2= 'sub' | otherlv_3= 'fsub' | otherlv_4= 'mul' | otherlv_5= 'fmul' | otherlv_6= 'udiv' | otherlv_7= 'sdiv' | otherlv_8= 'fdiv' | otherlv_9= 'urem' | otherlv_10= 'srem' | otherlv_11= 'frem' ) ( (otherlv_12= 'nsw' | otherlv_13= 'nuw' ) (otherlv_14= 'nuw' | otherlv_15= 'nsw' )? )? ( (lv_optype_16_0= ruleTypeUse ) ) ( (lv_value1_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_value2_19_0= ruleValue ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3045:28: ( ( (otherlv_0= 'add' | otherlv_1= 'fadd' | otherlv_2= 'sub' | otherlv_3= 'fsub' | otherlv_4= 'mul' | otherlv_5= 'fmul' | otherlv_6= 'udiv' | otherlv_7= 'sdiv' | otherlv_8= 'fdiv' | otherlv_9= 'urem' | otherlv_10= 'srem' | otherlv_11= 'frem' ) ( (otherlv_12= 'nsw' | otherlv_13= 'nuw' ) (otherlv_14= 'nuw' | otherlv_15= 'nsw' )? )? ( (lv_optype_16_0= ruleTypeUse ) ) ( (lv_value1_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_value2_19_0= ruleValue ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3046:1: ( (otherlv_0= 'add' | otherlv_1= 'fadd' | otherlv_2= 'sub' | otherlv_3= 'fsub' | otherlv_4= 'mul' | otherlv_5= 'fmul' | otherlv_6= 'udiv' | otherlv_7= 'sdiv' | otherlv_8= 'fdiv' | otherlv_9= 'urem' | otherlv_10= 'srem' | otherlv_11= 'frem' ) ( (otherlv_12= 'nsw' | otherlv_13= 'nuw' ) (otherlv_14= 'nuw' | otherlv_15= 'nsw' )? )? ( (lv_optype_16_0= ruleTypeUse ) ) ( (lv_value1_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_value2_19_0= ruleValue ) ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3044:1: ( (otherlv_0= 'add' | otherlv_1= 'fadd' | otherlv_2= 'sub' | otherlv_3= 'fsub' | otherlv_4= 'mul' | otherlv_5= 'fmul' | otherlv_6= 'udiv' | otherlv_7= 'sdiv' | otherlv_8= 'fdiv' | otherlv_9= 'urem' | otherlv_10= 'srem' | otherlv_11= 'frem' ) ( (otherlv_12= 'nsw' | otherlv_13= 'nuw' ) (otherlv_14= 'nuw' | otherlv_15= 'nsw' )? )? ( (lv_optype_16_0= ruleTypeUse ) ) ( (lv_value1_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_value2_19_0= ruleValue ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3044:2: (otherlv_0= 'add' | otherlv_1= 'fadd' | otherlv_2= 'sub' | otherlv_3= 'fsub' | otherlv_4= 'mul' | otherlv_5= 'fmul' | otherlv_6= 'udiv' | otherlv_7= 'sdiv' | otherlv_8= 'fdiv' | otherlv_9= 'urem' | otherlv_10= 'srem' | otherlv_11= 'frem' ) ( (otherlv_12= 'nsw' | otherlv_13= 'nuw' ) (otherlv_14= 'nuw' | otherlv_15= 'nsw' )? )? ( (lv_optype_16_0= ruleTypeUse ) ) ( (lv_value1_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_value2_19_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3046:1: ( (otherlv_0= 'add' | otherlv_1= 'fadd' | otherlv_2= 'sub' | otherlv_3= 'fsub' | otherlv_4= 'mul' | otherlv_5= 'fmul' | otherlv_6= 'udiv' | otherlv_7= 'sdiv' | otherlv_8= 'fdiv' | otherlv_9= 'urem' | otherlv_10= 'srem' | otherlv_11= 'frem' ) ( (otherlv_12= 'nsw' | otherlv_13= 'nuw' ) (otherlv_14= 'nuw' | otherlv_15= 'nsw' )? )? ( (lv_optype_16_0= ruleTypeUse ) ) ( (lv_value1_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_value2_19_0= ruleValue ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3046:2: (otherlv_0= 'add' | otherlv_1= 'fadd' | otherlv_2= 'sub' | otherlv_3= 'fsub' | otherlv_4= 'mul' | otherlv_5= 'fmul' | otherlv_6= 'udiv' | otherlv_7= 'sdiv' | otherlv_8= 'fdiv' | otherlv_9= 'urem' | otherlv_10= 'srem' | otherlv_11= 'frem' ) ( (otherlv_12= 'nsw' | otherlv_13= 'nuw' ) (otherlv_14= 'nuw' | otherlv_15= 'nsw' )? )? ( (lv_optype_16_0= ruleTypeUse ) ) ( (lv_value1_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_value2_19_0= ruleValue ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3044:2: (otherlv_0= 'add' | otherlv_1= 'fadd' | otherlv_2= 'sub' | otherlv_3= 'fsub' | otherlv_4= 'mul' | otherlv_5= 'fmul' | otherlv_6= 'udiv' | otherlv_7= 'sdiv' | otherlv_8= 'fdiv' | otherlv_9= 'urem' | otherlv_10= 'srem' | otherlv_11= 'frem' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3046:2: (otherlv_0= 'add' | otherlv_1= 'fadd' | otherlv_2= 'sub' | otherlv_3= 'fsub' | otherlv_4= 'mul' | otherlv_5= 'fmul' | otherlv_6= 'udiv' | otherlv_7= 'sdiv' | otherlv_8= 'fdiv' | otherlv_9= 'urem' | otherlv_10= 'srem' | otherlv_11= 'frem' )
             int alt81=12;
             switch ( input.LA(1) ) {
             case 69:
@@ -8673,7 +8667,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             switch (alt81) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3044:4: otherlv_0= 'add'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3046:4: otherlv_0= 'add'
                     {
                     otherlv_0=(Token)match(input,69,FOLLOW_69_in_ruleARITHMETIC_OP7125); 
 
@@ -8683,7 +8677,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3049:7: otherlv_1= 'fadd'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3051:7: otherlv_1= 'fadd'
                     {
                     otherlv_1=(Token)match(input,70,FOLLOW_70_in_ruleARITHMETIC_OP7143); 
 
@@ -8693,7 +8687,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3054:7: otherlv_2= 'sub'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3056:7: otherlv_2= 'sub'
                     {
                     otherlv_2=(Token)match(input,71,FOLLOW_71_in_ruleARITHMETIC_OP7161); 
 
@@ -8703,7 +8697,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3059:7: otherlv_3= 'fsub'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3061:7: otherlv_3= 'fsub'
                     {
                     otherlv_3=(Token)match(input,72,FOLLOW_72_in_ruleARITHMETIC_OP7179); 
 
@@ -8713,7 +8707,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3064:7: otherlv_4= 'mul'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3066:7: otherlv_4= 'mul'
                     {
                     otherlv_4=(Token)match(input,73,FOLLOW_73_in_ruleARITHMETIC_OP7197); 
 
@@ -8723,7 +8717,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3069:7: otherlv_5= 'fmul'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3071:7: otherlv_5= 'fmul'
                     {
                     otherlv_5=(Token)match(input,74,FOLLOW_74_in_ruleARITHMETIC_OP7215); 
 
@@ -8733,7 +8727,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3074:7: otherlv_6= 'udiv'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3076:7: otherlv_6= 'udiv'
                     {
                     otherlv_6=(Token)match(input,75,FOLLOW_75_in_ruleARITHMETIC_OP7233); 
 
@@ -8743,7 +8737,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3079:7: otherlv_7= 'sdiv'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3081:7: otherlv_7= 'sdiv'
                     {
                     otherlv_7=(Token)match(input,76,FOLLOW_76_in_ruleARITHMETIC_OP7251); 
 
@@ -8753,7 +8747,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 9 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3084:7: otherlv_8= 'fdiv'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3086:7: otherlv_8= 'fdiv'
                     {
                     otherlv_8=(Token)match(input,77,FOLLOW_77_in_ruleARITHMETIC_OP7269); 
 
@@ -8763,7 +8757,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 10 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3089:7: otherlv_9= 'urem'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3091:7: otherlv_9= 'urem'
                     {
                     otherlv_9=(Token)match(input,78,FOLLOW_78_in_ruleARITHMETIC_OP7287); 
 
@@ -8773,7 +8767,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 11 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3094:7: otherlv_10= 'srem'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3096:7: otherlv_10= 'srem'
                     {
                     otherlv_10=(Token)match(input,79,FOLLOW_79_in_ruleARITHMETIC_OP7305); 
 
@@ -8783,7 +8777,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 12 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3099:7: otherlv_11= 'frem'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3101:7: otherlv_11= 'frem'
                     {
                     otherlv_11=(Token)match(input,80,FOLLOW_80_in_ruleARITHMETIC_OP7323); 
 
@@ -8795,7 +8789,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3103:2: ( (otherlv_12= 'nsw' | otherlv_13= 'nuw' ) (otherlv_14= 'nuw' | otherlv_15= 'nsw' )? )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3105:2: ( (otherlv_12= 'nsw' | otherlv_13= 'nuw' ) (otherlv_14= 'nuw' | otherlv_15= 'nsw' )? )?
             int alt84=2;
             int LA84_0 = input.LA(1);
 
@@ -8804,9 +8798,9 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt84) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3103:3: (otherlv_12= 'nsw' | otherlv_13= 'nuw' ) (otherlv_14= 'nuw' | otherlv_15= 'nsw' )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3105:3: (otherlv_12= 'nsw' | otherlv_13= 'nuw' ) (otherlv_14= 'nuw' | otherlv_15= 'nsw' )?
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3103:3: (otherlv_12= 'nsw' | otherlv_13= 'nuw' )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3105:3: (otherlv_12= 'nsw' | otherlv_13= 'nuw' )
                     int alt82=2;
                     int LA82_0 = input.LA(1);
 
@@ -8824,7 +8818,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt82) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3103:5: otherlv_12= 'nsw'
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3105:5: otherlv_12= 'nsw'
                             {
                             otherlv_12=(Token)match(input,81,FOLLOW_81_in_ruleARITHMETIC_OP7338); 
 
@@ -8834,7 +8828,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3108:7: otherlv_13= 'nuw'
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3110:7: otherlv_13= 'nuw'
                             {
                             otherlv_13=(Token)match(input,82,FOLLOW_82_in_ruleARITHMETIC_OP7356); 
 
@@ -8846,7 +8840,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3112:2: (otherlv_14= 'nuw' | otherlv_15= 'nsw' )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3114:2: (otherlv_14= 'nuw' | otherlv_15= 'nsw' )?
                     int alt83=3;
                     int LA83_0 = input.LA(1);
 
@@ -8858,7 +8852,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt83) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3112:4: otherlv_14= 'nuw'
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3114:4: otherlv_14= 'nuw'
                             {
                             otherlv_14=(Token)match(input,82,FOLLOW_82_in_ruleARITHMETIC_OP7370); 
 
@@ -8868,7 +8862,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3117:7: otherlv_15= 'nsw'
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3119:7: otherlv_15= 'nsw'
                             {
                             otherlv_15=(Token)match(input,81,FOLLOW_81_in_ruleARITHMETIC_OP7388); 
 
@@ -8886,11 +8880,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3121:5: ( (lv_optype_16_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3122:1: (lv_optype_16_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3123:5: ( (lv_optype_16_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3124:1: (lv_optype_16_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3122:1: (lv_optype_16_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3123:3: lv_optype_16_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3124:1: (lv_optype_16_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3125:3: lv_optype_16_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getARITHMETIC_OPAccess().getOptypeTypeUseParserRuleCall_2_0()); 
@@ -8917,11 +8911,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3139:2: ( (lv_value1_17_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3140:1: (lv_value1_17_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3141:2: ( (lv_value1_17_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3142:1: (lv_value1_17_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3140:1: (lv_value1_17_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3141:3: lv_value1_17_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3142:1: (lv_value1_17_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3143:3: lv_value1_17_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getARITHMETIC_OPAccess().getValue1ValueParserRuleCall_3_0()); 
@@ -8952,11 +8946,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_18, grammarAccess.getARITHMETIC_OPAccess().getCommaKeyword_4());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3161:1: ( (lv_value2_19_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3162:1: (lv_value2_19_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3163:1: ( (lv_value2_19_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3164:1: (lv_value2_19_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3162:1: (lv_value2_19_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3163:3: lv_value2_19_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3164:1: (lv_value2_19_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3165:3: lv_value2_19_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getARITHMETIC_OPAccess().getValue2ValueParserRuleCall_5_0()); 
@@ -9004,7 +8998,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleLOGICAL_OP"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3187:1: entryRuleLOGICAL_OP returns [EObject current=null] : iv_ruleLOGICAL_OP= ruleLOGICAL_OP EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3189:1: entryRuleLOGICAL_OP returns [EObject current=null] : iv_ruleLOGICAL_OP= ruleLOGICAL_OP EOF ;
     public final EObject entryRuleLOGICAL_OP() throws RecognitionException {
         EObject current = null;
 
@@ -9012,8 +9006,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3188:2: (iv_ruleLOGICAL_OP= ruleLOGICAL_OP EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3189:2: iv_ruleLOGICAL_OP= ruleLOGICAL_OP EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3190:2: (iv_ruleLOGICAL_OP= ruleLOGICAL_OP EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3191:2: iv_ruleLOGICAL_OP= ruleLOGICAL_OP EOF
             {
              newCompositeNode(grammarAccess.getLOGICAL_OPRule()); 
             pushFollow(FOLLOW_ruleLOGICAL_OP_in_entryRuleLOGICAL_OP7503);
@@ -9040,7 +9034,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLOGICAL_OP"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3196:1: ruleLOGICAL_OP returns [EObject current=null] : ( (otherlv_0= 'shl' | otherlv_1= 'lshr' | otherlv_2= 'ashr' | otherlv_3= 'and' | otherlv_4= 'or' | otherlv_5= 'xor' ) ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_value1_7_0= ruleValue ) ) otherlv_8= ',' ( (lv_value2_9_0= ruleValue ) ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3198:1: ruleLOGICAL_OP returns [EObject current=null] : ( (otherlv_0= 'shl' | otherlv_1= 'lshr' | otherlv_2= 'ashr' | otherlv_3= 'and' | otherlv_4= 'or' | otherlv_5= 'xor' ) ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_value1_7_0= ruleValue ) ) otherlv_8= ',' ( (lv_value2_9_0= ruleValue ) ) ) ;
     public final EObject ruleLOGICAL_OP() throws RecognitionException {
         EObject current = null;
 
@@ -9061,13 +9055,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3199:28: ( ( (otherlv_0= 'shl' | otherlv_1= 'lshr' | otherlv_2= 'ashr' | otherlv_3= 'and' | otherlv_4= 'or' | otherlv_5= 'xor' ) ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_value1_7_0= ruleValue ) ) otherlv_8= ',' ( (lv_value2_9_0= ruleValue ) ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3200:1: ( (otherlv_0= 'shl' | otherlv_1= 'lshr' | otherlv_2= 'ashr' | otherlv_3= 'and' | otherlv_4= 'or' | otherlv_5= 'xor' ) ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_value1_7_0= ruleValue ) ) otherlv_8= ',' ( (lv_value2_9_0= ruleValue ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3201:28: ( ( (otherlv_0= 'shl' | otherlv_1= 'lshr' | otherlv_2= 'ashr' | otherlv_3= 'and' | otherlv_4= 'or' | otherlv_5= 'xor' ) ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_value1_7_0= ruleValue ) ) otherlv_8= ',' ( (lv_value2_9_0= ruleValue ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3202:1: ( (otherlv_0= 'shl' | otherlv_1= 'lshr' | otherlv_2= 'ashr' | otherlv_3= 'and' | otherlv_4= 'or' | otherlv_5= 'xor' ) ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_value1_7_0= ruleValue ) ) otherlv_8= ',' ( (lv_value2_9_0= ruleValue ) ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3200:1: ( (otherlv_0= 'shl' | otherlv_1= 'lshr' | otherlv_2= 'ashr' | otherlv_3= 'and' | otherlv_4= 'or' | otherlv_5= 'xor' ) ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_value1_7_0= ruleValue ) ) otherlv_8= ',' ( (lv_value2_9_0= ruleValue ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3200:2: (otherlv_0= 'shl' | otherlv_1= 'lshr' | otherlv_2= 'ashr' | otherlv_3= 'and' | otherlv_4= 'or' | otherlv_5= 'xor' ) ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_value1_7_0= ruleValue ) ) otherlv_8= ',' ( (lv_value2_9_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3202:1: ( (otherlv_0= 'shl' | otherlv_1= 'lshr' | otherlv_2= 'ashr' | otherlv_3= 'and' | otherlv_4= 'or' | otherlv_5= 'xor' ) ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_value1_7_0= ruleValue ) ) otherlv_8= ',' ( (lv_value2_9_0= ruleValue ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3202:2: (otherlv_0= 'shl' | otherlv_1= 'lshr' | otherlv_2= 'ashr' | otherlv_3= 'and' | otherlv_4= 'or' | otherlv_5= 'xor' ) ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_value1_7_0= ruleValue ) ) otherlv_8= ',' ( (lv_value2_9_0= ruleValue ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3200:2: (otherlv_0= 'shl' | otherlv_1= 'lshr' | otherlv_2= 'ashr' | otherlv_3= 'and' | otherlv_4= 'or' | otherlv_5= 'xor' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3202:2: (otherlv_0= 'shl' | otherlv_1= 'lshr' | otherlv_2= 'ashr' | otherlv_3= 'and' | otherlv_4= 'or' | otherlv_5= 'xor' )
             int alt85=6;
             switch ( input.LA(1) ) {
             case 83:
@@ -9109,7 +9103,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             switch (alt85) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3200:4: otherlv_0= 'shl'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3202:4: otherlv_0= 'shl'
                     {
                     otherlv_0=(Token)match(input,83,FOLLOW_83_in_ruleLOGICAL_OP7551); 
 
@@ -9119,7 +9113,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3205:7: otherlv_1= 'lshr'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3207:7: otherlv_1= 'lshr'
                     {
                     otherlv_1=(Token)match(input,84,FOLLOW_84_in_ruleLOGICAL_OP7569); 
 
@@ -9129,7 +9123,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3210:7: otherlv_2= 'ashr'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3212:7: otherlv_2= 'ashr'
                     {
                     otherlv_2=(Token)match(input,85,FOLLOW_85_in_ruleLOGICAL_OP7587); 
 
@@ -9139,7 +9133,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3215:7: otherlv_3= 'and'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3217:7: otherlv_3= 'and'
                     {
                     otherlv_3=(Token)match(input,86,FOLLOW_86_in_ruleLOGICAL_OP7605); 
 
@@ -9149,7 +9143,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3220:7: otherlv_4= 'or'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3222:7: otherlv_4= 'or'
                     {
                     otherlv_4=(Token)match(input,87,FOLLOW_87_in_ruleLOGICAL_OP7623); 
 
@@ -9159,7 +9153,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3225:7: otherlv_5= 'xor'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3227:7: otherlv_5= 'xor'
                     {
                     otherlv_5=(Token)match(input,88,FOLLOW_88_in_ruleLOGICAL_OP7641); 
 
@@ -9171,11 +9165,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3229:2: ( (lv_optype_6_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3230:1: (lv_optype_6_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3231:2: ( (lv_optype_6_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3232:1: (lv_optype_6_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3230:1: (lv_optype_6_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3231:3: lv_optype_6_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3232:1: (lv_optype_6_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3233:3: lv_optype_6_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getLOGICAL_OPAccess().getOptypeTypeUseParserRuleCall_1_0()); 
@@ -9202,11 +9196,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3247:2: ( (lv_value1_7_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3248:1: (lv_value1_7_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3249:2: ( (lv_value1_7_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3250:1: (lv_value1_7_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3248:1: (lv_value1_7_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3249:3: lv_value1_7_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3250:1: (lv_value1_7_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3251:3: lv_value1_7_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getLOGICAL_OPAccess().getValue1ValueParserRuleCall_2_0()); 
@@ -9237,11 +9231,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_8, grammarAccess.getLOGICAL_OPAccess().getCommaKeyword_3());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3269:1: ( (lv_value2_9_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3270:1: (lv_value2_9_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3271:1: ( (lv_value2_9_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3272:1: (lv_value2_9_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3270:1: (lv_value2_9_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3271:3: lv_value2_9_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3272:1: (lv_value2_9_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3273:3: lv_value2_9_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getLOGICAL_OPAccess().getValue2ValueParserRuleCall_4_0()); 
@@ -9289,7 +9283,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleCast"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3295:1: entryRuleCast returns [EObject current=null] : iv_ruleCast= ruleCast EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3297:1: entryRuleCast returns [EObject current=null] : iv_ruleCast= ruleCast EOF ;
     public final EObject entryRuleCast() throws RecognitionException {
         EObject current = null;
 
@@ -9297,8 +9291,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3296:2: (iv_ruleCast= ruleCast EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3297:2: iv_ruleCast= ruleCast EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3298:2: (iv_ruleCast= ruleCast EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3299:2: iv_ruleCast= ruleCast EOF
             {
              newCompositeNode(grammarAccess.getCastRule()); 
             pushFollow(FOLLOW_ruleCast_in_entryRuleCast7753);
@@ -9325,7 +9319,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCast"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3304:1: ruleCast returns [EObject current=null] : ( ruleCast_OP ( (otherlv_1= '(' ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) ) ( (lv_value_3_0= ruleValue ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleTypeUse ) ) otherlv_6= ')' ) | ( ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) ) ( (lv_value_8_0= ruleValue ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleTypeUse ) ) ) ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3306:1: ruleCast returns [EObject current=null] : ( ruleCast_OP ( (otherlv_1= '(' ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) ) ( (lv_value_3_0= ruleValue ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleTypeUse ) ) otherlv_6= ')' ) | ( ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) ) ( (lv_value_8_0= ruleValue ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleTypeUse ) ) ) ) ) ;
     public final EObject ruleCast() throws RecognitionException {
         EObject current = null;
 
@@ -9353,11 +9347,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3307:28: ( ( ruleCast_OP ( (otherlv_1= '(' ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) ) ( (lv_value_3_0= ruleValue ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleTypeUse ) ) otherlv_6= ')' ) | ( ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) ) ( (lv_value_8_0= ruleValue ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleTypeUse ) ) ) ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3308:1: ( ruleCast_OP ( (otherlv_1= '(' ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) ) ( (lv_value_3_0= ruleValue ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleTypeUse ) ) otherlv_6= ')' ) | ( ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) ) ( (lv_value_8_0= ruleValue ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleTypeUse ) ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3309:28: ( ( ruleCast_OP ( (otherlv_1= '(' ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) ) ( (lv_value_3_0= ruleValue ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleTypeUse ) ) otherlv_6= ')' ) | ( ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) ) ( (lv_value_8_0= ruleValue ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleTypeUse ) ) ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3310:1: ( ruleCast_OP ( (otherlv_1= '(' ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) ) ( (lv_value_3_0= ruleValue ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleTypeUse ) ) otherlv_6= ')' ) | ( ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) ) ( (lv_value_8_0= ruleValue ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleTypeUse ) ) ) ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3308:1: ( ruleCast_OP ( (otherlv_1= '(' ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) ) ( (lv_value_3_0= ruleValue ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleTypeUse ) ) otherlv_6= ')' ) | ( ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) ) ( (lv_value_8_0= ruleValue ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleTypeUse ) ) ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3309:5: ruleCast_OP ( (otherlv_1= '(' ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) ) ( (lv_value_3_0= ruleValue ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleTypeUse ) ) otherlv_6= ')' ) | ( ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) ) ( (lv_value_8_0= ruleValue ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleTypeUse ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3310:1: ( ruleCast_OP ( (otherlv_1= '(' ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) ) ( (lv_value_3_0= ruleValue ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleTypeUse ) ) otherlv_6= ')' ) | ( ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) ) ( (lv_value_8_0= ruleValue ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleTypeUse ) ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3311:5: ruleCast_OP ( (otherlv_1= '(' ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) ) ( (lv_value_3_0= ruleValue ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleTypeUse ) ) otherlv_6= ')' ) | ( ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) ) ( (lv_value_8_0= ruleValue ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleTypeUse ) ) ) )
             {
              
                     newCompositeNode(grammarAccess.getCastAccess().getCast_OPParserRuleCall_0()); 
@@ -9370,7 +9364,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
              
                     afterParserOrEnumRuleCall();
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3316:1: ( (otherlv_1= '(' ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) ) ( (lv_value_3_0= ruleValue ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleTypeUse ) ) otherlv_6= ')' ) | ( ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) ) ( (lv_value_8_0= ruleValue ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleTypeUse ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3318:1: ( (otherlv_1= '(' ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) ) ( (lv_value_3_0= ruleValue ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleTypeUse ) ) otherlv_6= ')' ) | ( ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) ) ( (lv_value_8_0= ruleValue ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleTypeUse ) ) ) )
             int alt88=2;
             int LA88_0 = input.LA(1);
 
@@ -9388,22 +9382,22 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt88) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3316:2: (otherlv_1= '(' ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) ) ( (lv_value_3_0= ruleValue ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleTypeUse ) ) otherlv_6= ')' )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3318:2: (otherlv_1= '(' ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) ) ( (lv_value_3_0= ruleValue ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleTypeUse ) ) otherlv_6= ')' )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3316:2: (otherlv_1= '(' ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) ) ( (lv_value_3_0= ruleValue ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleTypeUse ) ) otherlv_6= ')' )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3316:4: otherlv_1= '(' ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) ) ( (lv_value_3_0= ruleValue ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleTypeUse ) ) otherlv_6= ')'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3318:2: (otherlv_1= '(' ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) ) ( (lv_value_3_0= ruleValue ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleTypeUse ) ) otherlv_6= ')' )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3318:4: otherlv_1= '(' ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) ) ( (lv_value_3_0= ruleValue ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleTypeUse ) ) otherlv_6= ')'
                     {
                     otherlv_1=(Token)match(input,60,FOLLOW_60_in_ruleCast7817); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getCastAccess().getLeftParenthesisKeyword_1_0_0());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3320:1: ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3321:1: ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3322:1: ( ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3323:1: ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3321:1: ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3322:1: (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3323:1: ( (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3324:1: (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3322:1: (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3324:1: (lv_from_2_1= ruleTypeUse | lv_from_2_2= ruleAggregate_Types )
                     int alt86=2;
                     int LA86_0 = input.LA(1);
 
@@ -9421,7 +9415,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt86) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3323:3: lv_from_2_1= ruleTypeUse
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3325:3: lv_from_2_1= ruleTypeUse
                             {
                              
                             	        newCompositeNode(grammarAccess.getCastAccess().getFromTypeUseParserRuleCall_1_0_1_0_0()); 
@@ -9446,7 +9440,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3338:8: lv_from_2_2= ruleAggregate_Types
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3340:8: lv_from_2_2= ruleAggregate_Types
                             {
                              
                             	        newCompositeNode(grammarAccess.getCastAccess().getFromAggregate_TypesParserRuleCall_1_0_1_0_1()); 
@@ -9479,11 +9473,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3356:2: ( (lv_value_3_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3357:1: (lv_value_3_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3358:2: ( (lv_value_3_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3359:1: (lv_value_3_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3357:1: (lv_value_3_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3358:3: lv_value_3_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3359:1: (lv_value_3_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3360:3: lv_value_3_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getCastAccess().getValueValueParserRuleCall_1_0_2_0()); 
@@ -9514,11 +9508,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                         	newLeafNode(otherlv_4, grammarAccess.getCastAccess().getToKeyword_1_0_3());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3378:1: ( (lv_to_5_0= ruleTypeUse ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3379:1: (lv_to_5_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3380:1: ( (lv_to_5_0= ruleTypeUse ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3381:1: (lv_to_5_0= ruleTypeUse )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3379:1: (lv_to_5_0= ruleTypeUse )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3380:3: lv_to_5_0= ruleTypeUse
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3381:1: (lv_to_5_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3382:3: lv_to_5_0= ruleTypeUse
                     {
                      
                     	        newCompositeNode(grammarAccess.getCastAccess().getToTypeUseParserRuleCall_1_0_4_0()); 
@@ -9556,18 +9550,18 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3401:6: ( ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) ) ( (lv_value_8_0= ruleValue ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleTypeUse ) ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3403:6: ( ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) ) ( (lv_value_8_0= ruleValue ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleTypeUse ) ) )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3401:6: ( ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) ) ( (lv_value_8_0= ruleValue ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleTypeUse ) ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3401:7: ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) ) ( (lv_value_8_0= ruleValue ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleTypeUse ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3403:6: ( ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) ) ( (lv_value_8_0= ruleValue ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleTypeUse ) ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3403:7: ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) ) ( (lv_value_8_0= ruleValue ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleTypeUse ) )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3401:7: ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3402:1: ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3403:7: ( ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3404:1: ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3402:1: ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3403:1: (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3404:1: ( (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3405:1: (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3403:1: (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3405:1: (lv_from_7_1= ruleTypeUse | lv_from_7_2= ruleAggregate_Types )
                     int alt87=2;
                     int LA87_0 = input.LA(1);
 
@@ -9585,7 +9579,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt87) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3404:3: lv_from_7_1= ruleTypeUse
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3406:3: lv_from_7_1= ruleTypeUse
                             {
                              
                             	        newCompositeNode(grammarAccess.getCastAccess().getFromTypeUseParserRuleCall_1_1_0_0_0()); 
@@ -9610,7 +9604,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3419:8: lv_from_7_2= ruleAggregate_Types
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3421:8: lv_from_7_2= ruleAggregate_Types
                             {
                              
                             	        newCompositeNode(grammarAccess.getCastAccess().getFromAggregate_TypesParserRuleCall_1_1_0_0_1()); 
@@ -9643,11 +9637,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3437:2: ( (lv_value_8_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3438:1: (lv_value_8_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3439:2: ( (lv_value_8_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3440:1: (lv_value_8_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3438:1: (lv_value_8_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3439:3: lv_value_8_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3440:1: (lv_value_8_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3441:3: lv_value_8_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getCastAccess().getValueValueParserRuleCall_1_1_1_0()); 
@@ -9678,11 +9672,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                         	newLeafNode(otherlv_9, grammarAccess.getCastAccess().getToKeyword_1_1_2());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3459:1: ( (lv_to_10_0= ruleTypeUse ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3460:1: (lv_to_10_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3461:1: ( (lv_to_10_0= ruleTypeUse ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3462:1: (lv_to_10_0= ruleTypeUse )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3460:1: (lv_to_10_0= ruleTypeUse )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3461:3: lv_to_10_0= ruleTypeUse
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3462:1: (lv_to_10_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3463:3: lv_to_10_0= ruleTypeUse
                     {
                      
                     	        newCompositeNode(grammarAccess.getCastAccess().getToTypeUseParserRuleCall_1_1_3_0()); 
@@ -9739,7 +9733,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleMetadataValue"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3485:1: entryRuleMetadataValue returns [String current=null] : iv_ruleMetadataValue= ruleMetadataValue EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3487:1: entryRuleMetadataValue returns [String current=null] : iv_ruleMetadataValue= ruleMetadataValue EOF ;
     public final String entryRuleMetadataValue() throws RecognitionException {
         String current = null;
 
@@ -9747,8 +9741,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3486:2: (iv_ruleMetadataValue= ruleMetadataValue EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3487:2: iv_ruleMetadataValue= ruleMetadataValue EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3488:2: (iv_ruleMetadataValue= ruleMetadataValue EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3489:2: iv_ruleMetadataValue= ruleMetadataValue EOF
             {
              newCompositeNode(grammarAccess.getMetadataValueRule()); 
             pushFollow(FOLLOW_ruleMetadataValue_in_entryRuleMetadataValue8074);
@@ -9775,7 +9769,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMetadataValue"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3494:1: ruleMetadataValue returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( ( (kw= '!' this_INT_1= RULE_INT ) | (kw= '!{' this_ID_FQN_3= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_6= ruleID_FQN ) ) (kw= '=' ( (kw= '!' this_INT_9= RULE_INT ) | (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_14= ruleID_FQN ) | (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? ) ) )? ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3496:1: ruleMetadataValue returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( ( (kw= '!' this_INT_1= RULE_INT ) | (kw= '!{' this_ID_FQN_3= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_6= ruleID_FQN ) ) (kw= '=' ( (kw= '!' this_INT_9= RULE_INT ) | (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_14= ruleID_FQN ) | (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? ) ) )? ) ;
     public final AntlrDatatypeRuleToken ruleMetadataValue() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -9800,13 +9794,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3497:28: ( ( ( (kw= '!' this_INT_1= RULE_INT ) | (kw= '!{' this_ID_FQN_3= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_6= ruleID_FQN ) ) (kw= '=' ( (kw= '!' this_INT_9= RULE_INT ) | (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_14= ruleID_FQN ) | (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? ) ) )? ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3498:1: ( ( (kw= '!' this_INT_1= RULE_INT ) | (kw= '!{' this_ID_FQN_3= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_6= ruleID_FQN ) ) (kw= '=' ( (kw= '!' this_INT_9= RULE_INT ) | (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_14= ruleID_FQN ) | (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? ) ) )? )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3499:28: ( ( ( (kw= '!' this_INT_1= RULE_INT ) | (kw= '!{' this_ID_FQN_3= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_6= ruleID_FQN ) ) (kw= '=' ( (kw= '!' this_INT_9= RULE_INT ) | (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_14= ruleID_FQN ) | (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? ) ) )? ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3500:1: ( ( (kw= '!' this_INT_1= RULE_INT ) | (kw= '!{' this_ID_FQN_3= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_6= ruleID_FQN ) ) (kw= '=' ( (kw= '!' this_INT_9= RULE_INT ) | (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_14= ruleID_FQN ) | (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? ) ) )? )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3498:1: ( ( (kw= '!' this_INT_1= RULE_INT ) | (kw= '!{' this_ID_FQN_3= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_6= ruleID_FQN ) ) (kw= '=' ( (kw= '!' this_INT_9= RULE_INT ) | (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_14= ruleID_FQN ) | (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? ) ) )? )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3498:2: ( (kw= '!' this_INT_1= RULE_INT ) | (kw= '!{' this_ID_FQN_3= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_6= ruleID_FQN ) ) (kw= '=' ( (kw= '!' this_INT_9= RULE_INT ) | (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_14= ruleID_FQN ) | (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? ) ) )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3500:1: ( ( (kw= '!' this_INT_1= RULE_INT ) | (kw= '!{' this_ID_FQN_3= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_6= ruleID_FQN ) ) (kw= '=' ( (kw= '!' this_INT_9= RULE_INT ) | (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_14= ruleID_FQN ) | (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? ) ) )? )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3500:2: ( (kw= '!' this_INT_1= RULE_INT ) | (kw= '!{' this_ID_FQN_3= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_6= ruleID_FQN ) ) (kw= '=' ( (kw= '!' this_INT_9= RULE_INT ) | (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_14= ruleID_FQN ) | (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? ) ) )?
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3498:2: ( (kw= '!' this_INT_1= RULE_INT ) | (kw= '!{' this_ID_FQN_3= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_6= ruleID_FQN ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3500:2: ( (kw= '!' this_INT_1= RULE_INT ) | (kw= '!{' this_ID_FQN_3= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_6= ruleID_FQN ) )
             int alt89=3;
             int LA89_0 = input.LA(1);
 
@@ -9837,10 +9831,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt89) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3498:3: (kw= '!' this_INT_1= RULE_INT )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3500:3: (kw= '!' this_INT_1= RULE_INT )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3498:3: (kw= '!' this_INT_1= RULE_INT )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3499:2: kw= '!' this_INT_1= RULE_INT
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3500:3: (kw= '!' this_INT_1= RULE_INT )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3501:2: kw= '!' this_INT_1= RULE_INT
                     {
                     kw=(Token)match(input,90,FOLLOW_90_in_ruleMetadataValue8125); 
 
@@ -9861,10 +9855,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3512:6: (kw= '!{' this_ID_FQN_3= ruleID_FQN kw= '}' )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3514:6: (kw= '!{' this_ID_FQN_3= ruleID_FQN kw= '}' )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3512:6: (kw= '!{' this_ID_FQN_3= ruleID_FQN kw= '}' )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3513:2: kw= '!{' this_ID_FQN_3= ruleID_FQN kw= '}'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3514:6: (kw= '!{' this_ID_FQN_3= ruleID_FQN kw= '}' )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3515:2: kw= '!{' this_ID_FQN_3= ruleID_FQN kw= '}'
                     {
                     kw=(Token)match(input,91,FOLLOW_91_in_ruleMetadataValue8166); 
 
@@ -9897,10 +9891,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3536:6: (kw= '!' this_ID_FQN_6= ruleID_FQN )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3538:6: (kw= '!' this_ID_FQN_6= ruleID_FQN )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3536:6: (kw= '!' this_ID_FQN_6= ruleID_FQN )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3537:2: kw= '!' this_ID_FQN_6= ruleID_FQN
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3538:6: (kw= '!' this_ID_FQN_6= ruleID_FQN )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3539:2: kw= '!' this_ID_FQN_6= ruleID_FQN
                     {
                     kw=(Token)match(input,90,FOLLOW_90_in_ruleMetadataValue8227); 
 
@@ -9930,7 +9924,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3553:3: (kw= '=' ( (kw= '!' this_INT_9= RULE_INT ) | (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_14= ruleID_FQN ) | (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? ) ) )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3555:3: (kw= '=' ( (kw= '!' this_INT_9= RULE_INT ) | (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_14= ruleID_FQN ) | (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? ) ) )?
             int alt95=2;
             int LA95_0 = input.LA(1);
 
@@ -9939,25 +9933,25 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt95) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3554:2: kw= '=' ( (kw= '!' this_INT_9= RULE_INT ) | (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_14= ruleID_FQN ) | (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3556:2: kw= '=' ( (kw= '!' this_INT_9= RULE_INT ) | (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_14= ruleID_FQN ) | (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? ) )
                     {
                     kw=(Token)match(input,27,FOLLOW_27_in_ruleMetadataValue8270); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getMetadataValueAccess().getEqualsSignKeyword_1_0()); 
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3559:1: ( (kw= '!' this_INT_9= RULE_INT ) | (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_14= ruleID_FQN ) | (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3561:1: ( (kw= '!' this_INT_9= RULE_INT ) | (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' ) | (kw= '!' this_ID_FQN_14= ruleID_FQN ) | (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? ) )
                     int alt94=4;
                     switch ( input.LA(1) ) {
                     case 90:
                         {
                         int LA94_1 = input.LA(2);
 
-                        if ( (LA94_1==RULE_INT) ) {
-                            alt94=1;
-                        }
-                        else if ( ((LA94_1>=RULE_INT_TYPE && LA94_1<=RULE_ID)||(LA94_1>=15 && LA94_1<=20)) ) {
+                        if ( ((LA94_1>=RULE_INT_TYPE && LA94_1<=RULE_ID)||(LA94_1>=15 && LA94_1<=20)) ) {
                             alt94=3;
+                        }
+                        else if ( (LA94_1==RULE_INT) ) {
+                            alt94=1;
                         }
                         else {
                             NoViableAltException nvae =
@@ -9986,10 +9980,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     switch (alt94) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3559:2: (kw= '!' this_INT_9= RULE_INT )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3561:2: (kw= '!' this_INT_9= RULE_INT )
                             {
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3559:2: (kw= '!' this_INT_9= RULE_INT )
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3560:2: kw= '!' this_INT_9= RULE_INT
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3561:2: (kw= '!' this_INT_9= RULE_INT )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3562:2: kw= '!' this_INT_9= RULE_INT
                             {
                             kw=(Token)match(input,90,FOLLOW_90_in_ruleMetadataValue8285); 
 
@@ -10010,10 +10004,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3573:6: (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3575:6: (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' )
                             {
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3573:6: (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' )
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3574:2: kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}'
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3575:6: (kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}' )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3576:2: kw= '!{' this_ID_FQN_11= ruleID_FQN kw= '}'
                             {
                             kw=(Token)match(input,91,FOLLOW_91_in_ruleMetadataValue8326); 
 
@@ -10046,10 +10040,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 3 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3597:6: (kw= '!' this_ID_FQN_14= ruleID_FQN )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3599:6: (kw= '!' this_ID_FQN_14= ruleID_FQN )
                             {
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3597:6: (kw= '!' this_ID_FQN_14= ruleID_FQN )
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3598:2: kw= '!' this_ID_FQN_14= ruleID_FQN
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3599:6: (kw= '!' this_ID_FQN_14= ruleID_FQN )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3600:2: kw= '!' this_ID_FQN_14= ruleID_FQN
                             {
                             kw=(Token)match(input,90,FOLLOW_90_in_ruleMetadataValue8387); 
 
@@ -10077,17 +10071,17 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 4 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3615:6: (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3617:6: (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? )
                             {
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3615:6: (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? )
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3616:2: kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )?
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3617:6: (kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )? )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3618:2: kw= 'metadata' ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )?
                             {
                             kw=(Token)match(input,92,FOLLOW_92_in_ruleMetadataValue8435); 
 
                                     current.merge(kw);
                                     newLeafNode(kw, grammarAccess.getMetadataValueAccess().getMetadataKeyword_1_1_3_0()); 
                                 
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3621:1: ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )?
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3623:1: ( ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}' )?
                             int alt93=2;
                             int LA93_0 = input.LA(1);
 
@@ -10101,22 +10095,22 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                             else if ( (LA93_0==91) ) {
                                 int LA93_2 = input.LA(2);
 
-                                if ( (LA93_2==RULE_INT_TYPE) ) {
+                                if ( (LA93_2==92) ) {
+                                    alt93=1;
+                                }
+                                else if ( (LA93_2==RULE_INT_TYPE) ) {
                                     int LA93_5 = input.LA(3);
 
                                     if ( (LA93_5==RULE_INT) ) {
                                         alt93=1;
                                     }
                                 }
-                                else if ( (LA93_2==92) ) {
-                                    alt93=1;
-                                }
                             }
                             switch (alt93) {
                                 case 1 :
-                                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3621:2: ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}'
+                                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3623:2: ( (kw= '!' kw= '{' ) | kw= '!{' ) ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) ) kw= '}'
                                     {
-                                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3621:2: ( (kw= '!' kw= '{' ) | kw= '!{' )
+                                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3623:2: ( (kw= '!' kw= '{' ) | kw= '!{' )
                                     int alt90=2;
                                     int LA90_0 = input.LA(1);
 
@@ -10134,10 +10128,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                                     }
                                     switch (alt90) {
                                         case 1 :
-                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3621:3: (kw= '!' kw= '{' )
+                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3623:3: (kw= '!' kw= '{' )
                                             {
-                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3621:3: (kw= '!' kw= '{' )
-                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3622:2: kw= '!' kw= '{'
+                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3623:3: (kw= '!' kw= '{' )
+                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3624:2: kw= '!' kw= '{'
                                             {
                                             kw=(Token)match(input,90,FOLLOW_90_in_ruleMetadataValue8451); 
 
@@ -10156,7 +10150,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                                             }
                                             break;
                                         case 2 :
-                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3635:2: kw= '!{'
+                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3637:2: kw= '!{'
                                             {
                                             kw=(Token)match(input,91,FOLLOW_91_in_ruleMetadataValue8484); 
 
@@ -10169,7 +10163,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                                     }
 
-                                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3640:2: ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) )
+                                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3642:2: ( (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? ) | (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT ) )
                                     int alt92=2;
                                     int LA92_0 = input.LA(1);
 
@@ -10187,10 +10181,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                                     }
                                     switch (alt92) {
                                         case 1 :
-                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3640:3: (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? )
+                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3642:3: (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? )
                                             {
-                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3640:3: (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? )
-                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3641:2: kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )?
+                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3642:3: (kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )? )
+                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3643:2: kw= 'metadata' kw= '!' this_STRING_21= RULE_STRING (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )?
                                             {
                                             kw=(Token)match(input,92,FOLLOW_92_in_ruleMetadataValue8500); 
 
@@ -10209,7 +10203,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                                              
                                                 newLeafNode(this_STRING_21, grammarAccess.getMetadataValueAccess().getSTRINGTerminalRuleCall_1_1_3_1_1_0_2()); 
                                                 
-                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3659:1: (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )?
+                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3661:1: (kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT ) )?
                                             int alt91=2;
                                             int LA91_0 = input.LA(1);
 
@@ -10218,15 +10212,15 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                                             }
                                             switch (alt91) {
                                                 case 1 :
-                                                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3660:2: kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT )
+                                                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3662:2: kw= ',' (kw= 'metadata' kw= '!' this_INT_25= RULE_INT )
                                                     {
                                                     kw=(Token)match(input,30,FOLLOW_30_in_ruleMetadataValue8547); 
 
                                                             current.merge(kw);
                                                             newLeafNode(kw, grammarAccess.getMetadataValueAccess().getCommaKeyword_1_1_3_1_1_0_3_0()); 
                                                         
-                                                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3665:1: (kw= 'metadata' kw= '!' this_INT_25= RULE_INT )
-                                                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3666:2: kw= 'metadata' kw= '!' this_INT_25= RULE_INT
+                                                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3667:1: (kw= 'metadata' kw= '!' this_INT_25= RULE_INT )
+                                                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3668:2: kw= 'metadata' kw= '!' this_INT_25= RULE_INT
                                                     {
                                                     kw=(Token)match(input,92,FOLLOW_92_in_ruleMetadataValue8561); 
 
@@ -10261,10 +10255,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                                             }
                                             break;
                                         case 2 :
-                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3685:6: (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT )
+                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3687:6: (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT )
                                             {
-                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3685:6: (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT )
-                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3685:11: this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT
+                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3687:6: (this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT )
+                                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3687:11: this_INT_TYPE_26= RULE_INT_TYPE this_INT_27= RULE_INT kw= ',' this_INT_TYPE_29= RULE_INT_TYPE this_INT_30= RULE_INT
                                             {
                                             this_INT_TYPE_26=(Token)match(input,RULE_INT_TYPE,FOLLOW_RULE_INT_TYPE_in_ruleMetadataValue8620); 
 
@@ -10355,7 +10349,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleALIGNMENT"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3733:1: entryRuleALIGNMENT returns [String current=null] : iv_ruleALIGNMENT= ruleALIGNMENT EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3735:1: entryRuleALIGNMENT returns [String current=null] : iv_ruleALIGNMENT= ruleALIGNMENT EOF ;
     public final String entryRuleALIGNMENT() throws RecognitionException {
         String current = null;
 
@@ -10363,8 +10357,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3734:2: (iv_ruleALIGNMENT= ruleALIGNMENT EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3735:2: iv_ruleALIGNMENT= ruleALIGNMENT EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3736:2: (iv_ruleALIGNMENT= ruleALIGNMENT EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3737:2: iv_ruleALIGNMENT= ruleALIGNMENT EOF
             {
              newCompositeNode(grammarAccess.getALIGNMENTRule()); 
             pushFollow(FOLLOW_ruleALIGNMENT_in_entryRuleALIGNMENT8760);
@@ -10391,7 +10385,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleALIGNMENT"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3742:1: ruleALIGNMENT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'align' this_INT_1= RULE_INT ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3744:1: ruleALIGNMENT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'align' this_INT_1= RULE_INT ) ;
     public final AntlrDatatypeRuleToken ruleALIGNMENT() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -10401,11 +10395,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3745:28: ( (kw= 'align' this_INT_1= RULE_INT ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3746:1: (kw= 'align' this_INT_1= RULE_INT )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3747:28: ( (kw= 'align' this_INT_1= RULE_INT ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3748:1: (kw= 'align' this_INT_1= RULE_INT )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3746:1: (kw= 'align' this_INT_1= RULE_INT )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3747:2: kw= 'align' this_INT_1= RULE_INT
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3748:1: (kw= 'align' this_INT_1= RULE_INT )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3749:2: kw= 'align' this_INT_1= RULE_INT
             {
             kw=(Token)match(input,93,FOLLOW_93_in_ruleALIGNMENT8809); 
 
@@ -10440,7 +10434,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleGetElementPtr"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3767:1: entryRuleGetElementPtr returns [EObject current=null] : iv_ruleGetElementPtr= ruleGetElementPtr EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3769:1: entryRuleGetElementPtr returns [EObject current=null] : iv_ruleGetElementPtr= ruleGetElementPtr EOF ;
     public final EObject entryRuleGetElementPtr() throws RecognitionException {
         EObject current = null;
 
@@ -10448,8 +10442,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3768:2: (iv_ruleGetElementPtr= ruleGetElementPtr EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3769:2: iv_ruleGetElementPtr= ruleGetElementPtr EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3770:2: (iv_ruleGetElementPtr= ruleGetElementPtr EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3771:2: iv_ruleGetElementPtr= ruleGetElementPtr EOF
             {
              newCompositeNode(grammarAccess.getGetElementPtrRule()); 
             pushFollow(FOLLOW_ruleGetElementPtr_in_entryRuleGetElementPtr8869);
@@ -10476,7 +10470,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleGetElementPtr"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3776:1: ruleGetElementPtr returns [EObject current=null] : (this_GetElementPtr1_0= ruleGetElementPtr1 | this_GetElementPtr2_1= ruleGetElementPtr2 ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3778:1: ruleGetElementPtr returns [EObject current=null] : (this_GetElementPtr1_0= ruleGetElementPtr1 | this_GetElementPtr2_1= ruleGetElementPtr2 ) ;
     public final EObject ruleGetElementPtr() throws RecognitionException {
         EObject current = null;
 
@@ -10488,10 +10482,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3779:28: ( (this_GetElementPtr1_0= ruleGetElementPtr1 | this_GetElementPtr2_1= ruleGetElementPtr2 ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3780:1: (this_GetElementPtr1_0= ruleGetElementPtr1 | this_GetElementPtr2_1= ruleGetElementPtr2 )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3781:28: ( (this_GetElementPtr1_0= ruleGetElementPtr1 | this_GetElementPtr2_1= ruleGetElementPtr2 ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3782:1: (this_GetElementPtr1_0= ruleGetElementPtr1 | this_GetElementPtr2_1= ruleGetElementPtr2 )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3780:1: (this_GetElementPtr1_0= ruleGetElementPtr1 | this_GetElementPtr2_1= ruleGetElementPtr2 )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3782:1: (this_GetElementPtr1_0= ruleGetElementPtr1 | this_GetElementPtr2_1= ruleGetElementPtr2 )
             int alt96=2;
             int LA96_0 = input.LA(1);
 
@@ -10515,11 +10509,6 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     }
                     break;
-                case 60:
-                    {
-                    alt96=2;
-                    }
-                    break;
                 case RULE_INT_TYPE:
                 case RULE_VALID_ID:
                 case 19:
@@ -10540,6 +10529,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     alt96=1;
                     }
                     break;
+                case 60:
+                    {
+                    alt96=2;
+                    }
+                    break;
                 default:
                     NoViableAltException nvae =
                         new NoViableAltException("", 96, 1, input);
@@ -10556,7 +10550,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt96) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3781:5: this_GetElementPtr1_0= ruleGetElementPtr1
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3783:5: this_GetElementPtr1_0= ruleGetElementPtr1
                     {
                      
                             newCompositeNode(grammarAccess.getGetElementPtrAccess().getGetElementPtr1ParserRuleCall_0()); 
@@ -10574,7 +10568,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3791:5: this_GetElementPtr2_1= ruleGetElementPtr2
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3793:5: this_GetElementPtr2_1= ruleGetElementPtr2
                     {
                      
                             newCompositeNode(grammarAccess.getGetElementPtrAccess().getGetElementPtr2ParserRuleCall_1()); 
@@ -10612,7 +10606,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleGetElementPtr1"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3807:1: entryRuleGetElementPtr1 returns [EObject current=null] : iv_ruleGetElementPtr1= ruleGetElementPtr1 EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3809:1: entryRuleGetElementPtr1 returns [EObject current=null] : iv_ruleGetElementPtr1= ruleGetElementPtr1 EOF ;
     public final EObject entryRuleGetElementPtr1() throws RecognitionException {
         EObject current = null;
 
@@ -10620,8 +10614,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3808:2: (iv_ruleGetElementPtr1= ruleGetElementPtr1 EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3809:2: iv_ruleGetElementPtr1= ruleGetElementPtr1 EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3810:2: (iv_ruleGetElementPtr1= ruleGetElementPtr1 EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3811:2: iv_ruleGetElementPtr1= ruleGetElementPtr1 EOF
             {
              newCompositeNode(grammarAccess.getGetElementPtr1Rule()); 
             pushFollow(FOLLOW_ruleGetElementPtr1_in_entryRuleGetElementPtr18988);
@@ -10648,7 +10642,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleGetElementPtr1"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3816:1: ruleGetElementPtr1 returns [EObject current=null] : (otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? ( ( ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) ) ) ( (lv_aggregatename_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_indTypes_5_0= ruleTypeUse ) ) ( (lv_indizies_6_0= ruleValue ) ) )* ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3818:1: ruleGetElementPtr1 returns [EObject current=null] : (otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? ( ( ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) ) ) ( (lv_aggregatename_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_indTypes_5_0= ruleTypeUse ) ) ( (lv_indizies_6_0= ruleValue ) ) )* ) ) ;
     public final EObject ruleGetElementPtr1() throws RecognitionException {
         EObject current = null;
 
@@ -10669,17 +10663,17 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3819:28: ( (otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? ( ( ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) ) ) ( (lv_aggregatename_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_indTypes_5_0= ruleTypeUse ) ) ( (lv_indizies_6_0= ruleValue ) ) )* ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3820:1: (otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? ( ( ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) ) ) ( (lv_aggregatename_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_indTypes_5_0= ruleTypeUse ) ) ( (lv_indizies_6_0= ruleValue ) ) )* ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3821:28: ( (otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? ( ( ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) ) ) ( (lv_aggregatename_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_indTypes_5_0= ruleTypeUse ) ) ( (lv_indizies_6_0= ruleValue ) ) )* ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3822:1: (otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? ( ( ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) ) ) ( (lv_aggregatename_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_indTypes_5_0= ruleTypeUse ) ) ( (lv_indizies_6_0= ruleValue ) ) )* ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3820:1: (otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? ( ( ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) ) ) ( (lv_aggregatename_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_indTypes_5_0= ruleTypeUse ) ) ( (lv_indizies_6_0= ruleValue ) ) )* ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3820:3: otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? ( ( ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) ) ) ( (lv_aggregatename_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_indTypes_5_0= ruleTypeUse ) ) ( (lv_indizies_6_0= ruleValue ) ) )* )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3822:1: (otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? ( ( ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) ) ) ( (lv_aggregatename_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_indTypes_5_0= ruleTypeUse ) ) ( (lv_indizies_6_0= ruleValue ) ) )* ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3822:3: otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? ( ( ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) ) ) ( (lv_aggregatename_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_indTypes_5_0= ruleTypeUse ) ) ( (lv_indizies_6_0= ruleValue ) ) )* )
             {
             otherlv_0=(Token)match(input,94,FOLLOW_94_in_ruleGetElementPtr19035); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getGetElementPtr1Access().getGetelementptrKeyword_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3824:1: (otherlv_1= 'inbounds' )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3826:1: (otherlv_1= 'inbounds' )?
             int alt97=2;
             int LA97_0 = input.LA(1);
 
@@ -10688,7 +10682,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt97) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3824:3: otherlv_1= 'inbounds'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3826:3: otherlv_1= 'inbounds'
                     {
                     otherlv_1=(Token)match(input,95,FOLLOW_95_in_ruleGetElementPtr19048); 
 
@@ -10700,16 +10694,16 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3828:3: ( ( ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) ) ) ( (lv_aggregatename_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_indTypes_5_0= ruleTypeUse ) ) ( (lv_indizies_6_0= ruleValue ) ) )* )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3828:4: ( ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) ) ) ( (lv_aggregatename_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_indTypes_5_0= ruleTypeUse ) ) ( (lv_indizies_6_0= ruleValue ) ) )*
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3830:3: ( ( ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) ) ) ( (lv_aggregatename_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_indTypes_5_0= ruleTypeUse ) ) ( (lv_indizies_6_0= ruleValue ) ) )* )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3830:4: ( ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) ) ) ( (lv_aggregatename_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_indTypes_5_0= ruleTypeUse ) ) ( (lv_indizies_6_0= ruleValue ) ) )*
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3828:4: ( ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3829:1: ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3830:4: ( ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3831:1: ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3829:1: ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3830:1: (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3831:1: ( (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3832:1: (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3830:1: (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3832:1: (lv_aggregate_2_1= ruleTypeUse | lv_aggregate_2_2= ruleArray )
             int alt98=2;
             int LA98_0 = input.LA(1);
 
@@ -10727,7 +10721,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt98) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3831:3: lv_aggregate_2_1= ruleTypeUse
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3833:3: lv_aggregate_2_1= ruleTypeUse
                     {
                      
                     	        newCompositeNode(grammarAccess.getGetElementPtr1Access().getAggregateTypeUseParserRuleCall_2_0_0_0()); 
@@ -10752,7 +10746,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3846:8: lv_aggregate_2_2= ruleArray
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3848:8: lv_aggregate_2_2= ruleArray
                     {
                      
                     	        newCompositeNode(grammarAccess.getGetElementPtr1Access().getAggregateArrayParserRuleCall_2_0_0_1()); 
@@ -10785,11 +10779,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3864:2: ( (lv_aggregatename_3_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3865:1: (lv_aggregatename_3_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3866:2: ( (lv_aggregatename_3_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3867:1: (lv_aggregatename_3_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3865:1: (lv_aggregatename_3_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3866:3: lv_aggregatename_3_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3867:1: (lv_aggregatename_3_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3868:3: lv_aggregatename_3_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getGetElementPtr1Access().getAggregatenameValueParserRuleCall_2_1_0()); 
@@ -10816,7 +10810,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3882:2: (otherlv_4= ',' ( (lv_indTypes_5_0= ruleTypeUse ) ) ( (lv_indizies_6_0= ruleValue ) ) )*
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3884:2: (otherlv_4= ',' ( (lv_indTypes_5_0= ruleTypeUse ) ) ( (lv_indizies_6_0= ruleValue ) ) )*
             loop99:
             do {
                 int alt99=2;
@@ -10829,17 +10823,17 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 switch (alt99) {
             	case 1 :
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3882:4: otherlv_4= ',' ( (lv_indTypes_5_0= ruleTypeUse ) ) ( (lv_indizies_6_0= ruleValue ) )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3884:4: otherlv_4= ',' ( (lv_indTypes_5_0= ruleTypeUse ) ) ( (lv_indizies_6_0= ruleValue ) )
             	    {
             	    otherlv_4=(Token)match(input,30,FOLLOW_30_in_ruleGetElementPtr19130); 
 
             	        	newLeafNode(otherlv_4, grammarAccess.getGetElementPtr1Access().getCommaKeyword_2_2_0());
             	        
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3886:1: ( (lv_indTypes_5_0= ruleTypeUse ) )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3887:1: (lv_indTypes_5_0= ruleTypeUse )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3888:1: ( (lv_indTypes_5_0= ruleTypeUse ) )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3889:1: (lv_indTypes_5_0= ruleTypeUse )
             	    {
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3887:1: (lv_indTypes_5_0= ruleTypeUse )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3888:3: lv_indTypes_5_0= ruleTypeUse
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3889:1: (lv_indTypes_5_0= ruleTypeUse )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3890:3: lv_indTypes_5_0= ruleTypeUse
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getGetElementPtr1Access().getIndTypesTypeUseParserRuleCall_2_2_1_0()); 
@@ -10866,11 +10860,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3904:2: ( (lv_indizies_6_0= ruleValue ) )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3905:1: (lv_indizies_6_0= ruleValue )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3906:2: ( (lv_indizies_6_0= ruleValue ) )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3907:1: (lv_indizies_6_0= ruleValue )
             	    {
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3905:1: (lv_indizies_6_0= ruleValue )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3906:3: lv_indizies_6_0= ruleValue
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3907:1: (lv_indizies_6_0= ruleValue )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3908:3: lv_indizies_6_0= ruleValue
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getGetElementPtr1Access().getIndiziesValueParserRuleCall_2_2_2_0()); 
@@ -10930,7 +10924,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleGetElementPtr2"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3930:1: entryRuleGetElementPtr2 returns [EObject current=null] : iv_ruleGetElementPtr2= ruleGetElementPtr2 EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3932:1: entryRuleGetElementPtr2 returns [EObject current=null] : iv_ruleGetElementPtr2= ruleGetElementPtr2 EOF ;
     public final EObject entryRuleGetElementPtr2() throws RecognitionException {
         EObject current = null;
 
@@ -10938,8 +10932,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3931:2: (iv_ruleGetElementPtr2= ruleGetElementPtr2 EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3932:2: iv_ruleGetElementPtr2= ruleGetElementPtr2 EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3933:2: (iv_ruleGetElementPtr2= ruleGetElementPtr2 EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3934:2: iv_ruleGetElementPtr2= ruleGetElementPtr2 EOF
             {
              newCompositeNode(grammarAccess.getGetElementPtr2Rule()); 
             pushFollow(FOLLOW_ruleGetElementPtr2_in_entryRuleGetElementPtr29211);
@@ -10966,7 +10960,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleGetElementPtr2"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3939:1: ruleGetElementPtr2 returns [EObject current=null] : (otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? (otherlv_2= '(' ( ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) ) ) ( (lv_aggregatename_4_0= ruleValue ) ) (otherlv_5= ',' ( (lv_indTypes_6_0= ruleTypeUse ) ) ( (lv_indizies_7_0= ruleValue ) ) )* otherlv_8= ')' ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3941:1: ruleGetElementPtr2 returns [EObject current=null] : (otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? (otherlv_2= '(' ( ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) ) ) ( (lv_aggregatename_4_0= ruleValue ) ) (otherlv_5= ',' ( (lv_indTypes_6_0= ruleTypeUse ) ) ( (lv_indizies_7_0= ruleValue ) ) )* otherlv_8= ')' ) ) ;
     public final EObject ruleGetElementPtr2() throws RecognitionException {
         EObject current = null;
 
@@ -10989,17 +10983,17 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3942:28: ( (otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? (otherlv_2= '(' ( ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) ) ) ( (lv_aggregatename_4_0= ruleValue ) ) (otherlv_5= ',' ( (lv_indTypes_6_0= ruleTypeUse ) ) ( (lv_indizies_7_0= ruleValue ) ) )* otherlv_8= ')' ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3943:1: (otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? (otherlv_2= '(' ( ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) ) ) ( (lv_aggregatename_4_0= ruleValue ) ) (otherlv_5= ',' ( (lv_indTypes_6_0= ruleTypeUse ) ) ( (lv_indizies_7_0= ruleValue ) ) )* otherlv_8= ')' ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3944:28: ( (otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? (otherlv_2= '(' ( ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) ) ) ( (lv_aggregatename_4_0= ruleValue ) ) (otherlv_5= ',' ( (lv_indTypes_6_0= ruleTypeUse ) ) ( (lv_indizies_7_0= ruleValue ) ) )* otherlv_8= ')' ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3945:1: (otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? (otherlv_2= '(' ( ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) ) ) ( (lv_aggregatename_4_0= ruleValue ) ) (otherlv_5= ',' ( (lv_indTypes_6_0= ruleTypeUse ) ) ( (lv_indizies_7_0= ruleValue ) ) )* otherlv_8= ')' ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3943:1: (otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? (otherlv_2= '(' ( ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) ) ) ( (lv_aggregatename_4_0= ruleValue ) ) (otherlv_5= ',' ( (lv_indTypes_6_0= ruleTypeUse ) ) ( (lv_indizies_7_0= ruleValue ) ) )* otherlv_8= ')' ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3943:3: otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? (otherlv_2= '(' ( ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) ) ) ( (lv_aggregatename_4_0= ruleValue ) ) (otherlv_5= ',' ( (lv_indTypes_6_0= ruleTypeUse ) ) ( (lv_indizies_7_0= ruleValue ) ) )* otherlv_8= ')' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3945:1: (otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? (otherlv_2= '(' ( ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) ) ) ( (lv_aggregatename_4_0= ruleValue ) ) (otherlv_5= ',' ( (lv_indTypes_6_0= ruleTypeUse ) ) ( (lv_indizies_7_0= ruleValue ) ) )* otherlv_8= ')' ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3945:3: otherlv_0= 'getelementptr' (otherlv_1= 'inbounds' )? (otherlv_2= '(' ( ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) ) ) ( (lv_aggregatename_4_0= ruleValue ) ) (otherlv_5= ',' ( (lv_indTypes_6_0= ruleTypeUse ) ) ( (lv_indizies_7_0= ruleValue ) ) )* otherlv_8= ')' )
             {
             otherlv_0=(Token)match(input,94,FOLLOW_94_in_ruleGetElementPtr29258); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getGetElementPtr2Access().getGetelementptrKeyword_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3947:1: (otherlv_1= 'inbounds' )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3949:1: (otherlv_1= 'inbounds' )?
             int alt100=2;
             int LA100_0 = input.LA(1);
 
@@ -11008,7 +11002,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt100) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3947:3: otherlv_1= 'inbounds'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3949:3: otherlv_1= 'inbounds'
                     {
                     otherlv_1=(Token)match(input,95,FOLLOW_95_in_ruleGetElementPtr29271); 
 
@@ -11020,20 +11014,20 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3951:3: (otherlv_2= '(' ( ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) ) ) ( (lv_aggregatename_4_0= ruleValue ) ) (otherlv_5= ',' ( (lv_indTypes_6_0= ruleTypeUse ) ) ( (lv_indizies_7_0= ruleValue ) ) )* otherlv_8= ')' )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3951:5: otherlv_2= '(' ( ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) ) ) ( (lv_aggregatename_4_0= ruleValue ) ) (otherlv_5= ',' ( (lv_indTypes_6_0= ruleTypeUse ) ) ( (lv_indizies_7_0= ruleValue ) ) )* otherlv_8= ')'
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3953:3: (otherlv_2= '(' ( ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) ) ) ( (lv_aggregatename_4_0= ruleValue ) ) (otherlv_5= ',' ( (lv_indTypes_6_0= ruleTypeUse ) ) ( (lv_indizies_7_0= ruleValue ) ) )* otherlv_8= ')' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3953:5: otherlv_2= '(' ( ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) ) ) ( (lv_aggregatename_4_0= ruleValue ) ) (otherlv_5= ',' ( (lv_indTypes_6_0= ruleTypeUse ) ) ( (lv_indizies_7_0= ruleValue ) ) )* otherlv_8= ')'
             {
             otherlv_2=(Token)match(input,60,FOLLOW_60_in_ruleGetElementPtr29286); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getGetElementPtr2Access().getLeftParenthesisKeyword_2_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3955:1: ( ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3956:1: ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3957:1: ( ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3958:1: ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3956:1: ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3957:1: (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3958:1: ( (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3959:1: (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3957:1: (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3959:1: (lv_aggregate_3_1= ruleTypeUse | lv_aggregate_3_2= ruleArray )
             int alt101=2;
             int LA101_0 = input.LA(1);
 
@@ -11051,7 +11045,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt101) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3958:3: lv_aggregate_3_1= ruleTypeUse
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3960:3: lv_aggregate_3_1= ruleTypeUse
                     {
                      
                     	        newCompositeNode(grammarAccess.getGetElementPtr2Access().getAggregateTypeUseParserRuleCall_2_1_0_0()); 
@@ -11076,7 +11070,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3973:8: lv_aggregate_3_2= ruleArray
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3975:8: lv_aggregate_3_2= ruleArray
                     {
                      
                     	        newCompositeNode(grammarAccess.getGetElementPtr2Access().getAggregateArrayParserRuleCall_2_1_0_1()); 
@@ -11109,11 +11103,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3991:2: ( (lv_aggregatename_4_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3992:1: (lv_aggregatename_4_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3993:2: ( (lv_aggregatename_4_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3994:1: (lv_aggregatename_4_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3992:1: (lv_aggregatename_4_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3993:3: lv_aggregatename_4_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3994:1: (lv_aggregatename_4_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:3995:3: lv_aggregatename_4_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getGetElementPtr2Access().getAggregatenameValueParserRuleCall_2_2_0()); 
@@ -11140,7 +11134,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4009:2: (otherlv_5= ',' ( (lv_indTypes_6_0= ruleTypeUse ) ) ( (lv_indizies_7_0= ruleValue ) ) )*
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4011:2: (otherlv_5= ',' ( (lv_indTypes_6_0= ruleTypeUse ) ) ( (lv_indizies_7_0= ruleValue ) ) )*
             loop102:
             do {
                 int alt102=2;
@@ -11153,17 +11147,17 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 switch (alt102) {
             	case 1 :
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4009:4: otherlv_5= ',' ( (lv_indTypes_6_0= ruleTypeUse ) ) ( (lv_indizies_7_0= ruleValue ) )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4011:4: otherlv_5= ',' ( (lv_indTypes_6_0= ruleTypeUse ) ) ( (lv_indizies_7_0= ruleValue ) )
             	    {
             	    otherlv_5=(Token)match(input,30,FOLLOW_30_in_ruleGetElementPtr29365); 
 
             	        	newLeafNode(otherlv_5, grammarAccess.getGetElementPtr2Access().getCommaKeyword_2_3_0());
             	        
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4013:1: ( (lv_indTypes_6_0= ruleTypeUse ) )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4014:1: (lv_indTypes_6_0= ruleTypeUse )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4015:1: ( (lv_indTypes_6_0= ruleTypeUse ) )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4016:1: (lv_indTypes_6_0= ruleTypeUse )
             	    {
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4014:1: (lv_indTypes_6_0= ruleTypeUse )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4015:3: lv_indTypes_6_0= ruleTypeUse
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4016:1: (lv_indTypes_6_0= ruleTypeUse )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4017:3: lv_indTypes_6_0= ruleTypeUse
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getGetElementPtr2Access().getIndTypesTypeUseParserRuleCall_2_3_1_0()); 
@@ -11190,11 +11184,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4031:2: ( (lv_indizies_7_0= ruleValue ) )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4032:1: (lv_indizies_7_0= ruleValue )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4033:2: ( (lv_indizies_7_0= ruleValue ) )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4034:1: (lv_indizies_7_0= ruleValue )
             	    {
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4032:1: (lv_indizies_7_0= ruleValue )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4033:3: lv_indizies_7_0= ruleValue
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4034:1: (lv_indizies_7_0= ruleValue )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4035:3: lv_indizies_7_0= ruleValue
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getGetElementPtr2Access().getIndiziesValueParserRuleCall_2_3_2_0()); 
@@ -11258,7 +11252,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleExtractValue"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4061:1: entryRuleExtractValue returns [EObject current=null] : iv_ruleExtractValue= ruleExtractValue EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4063:1: entryRuleExtractValue returns [EObject current=null] : iv_ruleExtractValue= ruleExtractValue EOF ;
     public final EObject entryRuleExtractValue() throws RecognitionException {
         EObject current = null;
 
@@ -11266,8 +11260,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4062:2: (iv_ruleExtractValue= ruleExtractValue EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4063:2: iv_ruleExtractValue= ruleExtractValue EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4064:2: (iv_ruleExtractValue= ruleExtractValue EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4065:2: iv_ruleExtractValue= ruleExtractValue EOF
             {
              newCompositeNode(grammarAccess.getExtractValueRule()); 
             pushFollow(FOLLOW_ruleExtractValue_in_entryRuleExtractValue9458);
@@ -11294,7 +11288,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleExtractValue"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4070:1: ruleExtractValue returns [EObject current=null] : (otherlv_0= 'extractvalue' ( ( (lv_array_1_0= ruleArray ) ) | ( (lv_struct_2_0= ruleStructure ) ) ) ( (lv_value_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_index_5_0= RULE_INT ) ) )+ ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4072:1: ruleExtractValue returns [EObject current=null] : (otherlv_0= 'extractvalue' ( ( (lv_array_1_0= ruleArray ) ) | ( (lv_struct_2_0= ruleStructure ) ) ) ( (lv_value_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_index_5_0= RULE_INT ) ) )+ ) ;
     public final EObject ruleExtractValue() throws RecognitionException {
         EObject current = null;
 
@@ -11311,17 +11305,17 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4073:28: ( (otherlv_0= 'extractvalue' ( ( (lv_array_1_0= ruleArray ) ) | ( (lv_struct_2_0= ruleStructure ) ) ) ( (lv_value_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_index_5_0= RULE_INT ) ) )+ ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4074:1: (otherlv_0= 'extractvalue' ( ( (lv_array_1_0= ruleArray ) ) | ( (lv_struct_2_0= ruleStructure ) ) ) ( (lv_value_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_index_5_0= RULE_INT ) ) )+ )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4075:28: ( (otherlv_0= 'extractvalue' ( ( (lv_array_1_0= ruleArray ) ) | ( (lv_struct_2_0= ruleStructure ) ) ) ( (lv_value_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_index_5_0= RULE_INT ) ) )+ ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4076:1: (otherlv_0= 'extractvalue' ( ( (lv_array_1_0= ruleArray ) ) | ( (lv_struct_2_0= ruleStructure ) ) ) ( (lv_value_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_index_5_0= RULE_INT ) ) )+ )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4074:1: (otherlv_0= 'extractvalue' ( ( (lv_array_1_0= ruleArray ) ) | ( (lv_struct_2_0= ruleStructure ) ) ) ( (lv_value_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_index_5_0= RULE_INT ) ) )+ )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4074:3: otherlv_0= 'extractvalue' ( ( (lv_array_1_0= ruleArray ) ) | ( (lv_struct_2_0= ruleStructure ) ) ) ( (lv_value_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_index_5_0= RULE_INT ) ) )+
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4076:1: (otherlv_0= 'extractvalue' ( ( (lv_array_1_0= ruleArray ) ) | ( (lv_struct_2_0= ruleStructure ) ) ) ( (lv_value_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_index_5_0= RULE_INT ) ) )+ )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4076:3: otherlv_0= 'extractvalue' ( ( (lv_array_1_0= ruleArray ) ) | ( (lv_struct_2_0= ruleStructure ) ) ) ( (lv_value_3_0= ruleValue ) ) (otherlv_4= ',' ( (lv_index_5_0= RULE_INT ) ) )+
             {
             otherlv_0=(Token)match(input,96,FOLLOW_96_in_ruleExtractValue9505); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getExtractValueAccess().getExtractvalueKeyword_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4078:1: ( ( (lv_array_1_0= ruleArray ) ) | ( (lv_struct_2_0= ruleStructure ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4080:1: ( ( (lv_array_1_0= ruleArray ) ) | ( (lv_struct_2_0= ruleStructure ) ) )
             int alt103=2;
             int LA103_0 = input.LA(1);
 
@@ -11339,13 +11333,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt103) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4078:2: ( (lv_array_1_0= ruleArray ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4080:2: ( (lv_array_1_0= ruleArray ) )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4078:2: ( (lv_array_1_0= ruleArray ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4079:1: (lv_array_1_0= ruleArray )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4080:2: ( (lv_array_1_0= ruleArray ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4081:1: (lv_array_1_0= ruleArray )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4079:1: (lv_array_1_0= ruleArray )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4080:3: lv_array_1_0= ruleArray
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4081:1: (lv_array_1_0= ruleArray )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4082:3: lv_array_1_0= ruleArray
                     {
                      
                     	        newCompositeNode(grammarAccess.getExtractValueAccess().getArrayArrayParserRuleCall_1_0_0()); 
@@ -11376,13 +11370,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4097:6: ( (lv_struct_2_0= ruleStructure ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4099:6: ( (lv_struct_2_0= ruleStructure ) )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4097:6: ( (lv_struct_2_0= ruleStructure ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4098:1: (lv_struct_2_0= ruleStructure )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4099:6: ( (lv_struct_2_0= ruleStructure ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4100:1: (lv_struct_2_0= ruleStructure )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4098:1: (lv_struct_2_0= ruleStructure )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4099:3: lv_struct_2_0= ruleStructure
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4100:1: (lv_struct_2_0= ruleStructure )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4101:3: lv_struct_2_0= ruleStructure
                     {
                      
                     	        newCompositeNode(grammarAccess.getExtractValueAccess().getStructStructureParserRuleCall_1_1_0()); 
@@ -11415,11 +11409,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4115:3: ( (lv_value_3_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4116:1: (lv_value_3_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4117:3: ( (lv_value_3_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4118:1: (lv_value_3_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4116:1: (lv_value_3_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4117:3: lv_value_3_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4118:1: (lv_value_3_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4119:3: lv_value_3_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getExtractValueAccess().getValueValueParserRuleCall_2_0()); 
@@ -11446,7 +11440,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4133:2: (otherlv_4= ',' ( (lv_index_5_0= RULE_INT ) ) )+
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4135:2: (otherlv_4= ',' ( (lv_index_5_0= RULE_INT ) ) )+
             int cnt104=0;
             loop104:
             do {
@@ -11460,17 +11454,17 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 switch (alt104) {
             	case 1 :
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4133:4: otherlv_4= ',' ( (lv_index_5_0= RULE_INT ) )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4135:4: otherlv_4= ',' ( (lv_index_5_0= RULE_INT ) )
             	    {
             	    otherlv_4=(Token)match(input,30,FOLLOW_30_in_ruleExtractValue9589); 
 
             	        	newLeafNode(otherlv_4, grammarAccess.getExtractValueAccess().getCommaKeyword_3_0());
             	        
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4137:1: ( (lv_index_5_0= RULE_INT ) )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4138:1: (lv_index_5_0= RULE_INT )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4139:1: ( (lv_index_5_0= RULE_INT ) )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4140:1: (lv_index_5_0= RULE_INT )
             	    {
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4138:1: (lv_index_5_0= RULE_INT )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4139:3: lv_index_5_0= RULE_INT
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4140:1: (lv_index_5_0= RULE_INT )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4141:3: lv_index_5_0= RULE_INT
             	    {
             	    lv_index_5_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleExtractValue9606); 
 
@@ -11526,7 +11520,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleInsertValue"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4163:1: entryRuleInsertValue returns [EObject current=null] : iv_ruleInsertValue= ruleInsertValue EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4165:1: entryRuleInsertValue returns [EObject current=null] : iv_ruleInsertValue= ruleInsertValue EOF ;
     public final EObject entryRuleInsertValue() throws RecognitionException {
         EObject current = null;
 
@@ -11534,8 +11528,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4164:2: (iv_ruleInsertValue= ruleInsertValue EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4165:2: iv_ruleInsertValue= ruleInsertValue EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4166:2: (iv_ruleInsertValue= ruleInsertValue EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4167:2: iv_ruleInsertValue= ruleInsertValue EOF
             {
              newCompositeNode(grammarAccess.getInsertValueRule()); 
             pushFollow(FOLLOW_ruleInsertValue_in_entryRuleInsertValue9649);
@@ -11562,7 +11556,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleInsertValue"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4172:1: ruleInsertValue returns [EObject current=null] : (otherlv_0= 'insertvalue' ( (lv_struct_1_0= ruleStructure ) ) ( (lv_value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_inserttype_4_0= ruleTypeUse ) ) ( (lv_insertvalue_5_0= ruleValue ) ) (otherlv_6= ',' ( (lv_index_7_0= RULE_INT ) ) )+ ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4174:1: ruleInsertValue returns [EObject current=null] : (otherlv_0= 'insertvalue' ( (lv_struct_1_0= ruleStructure ) ) ( (lv_value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_inserttype_4_0= ruleTypeUse ) ) ( (lv_insertvalue_5_0= ruleValue ) ) (otherlv_6= ',' ( (lv_index_7_0= RULE_INT ) ) )+ ) ;
     public final EObject ruleInsertValue() throws RecognitionException {
         EObject current = null;
 
@@ -11582,21 +11576,21 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4175:28: ( (otherlv_0= 'insertvalue' ( (lv_struct_1_0= ruleStructure ) ) ( (lv_value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_inserttype_4_0= ruleTypeUse ) ) ( (lv_insertvalue_5_0= ruleValue ) ) (otherlv_6= ',' ( (lv_index_7_0= RULE_INT ) ) )+ ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4176:1: (otherlv_0= 'insertvalue' ( (lv_struct_1_0= ruleStructure ) ) ( (lv_value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_inserttype_4_0= ruleTypeUse ) ) ( (lv_insertvalue_5_0= ruleValue ) ) (otherlv_6= ',' ( (lv_index_7_0= RULE_INT ) ) )+ )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4177:28: ( (otherlv_0= 'insertvalue' ( (lv_struct_1_0= ruleStructure ) ) ( (lv_value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_inserttype_4_0= ruleTypeUse ) ) ( (lv_insertvalue_5_0= ruleValue ) ) (otherlv_6= ',' ( (lv_index_7_0= RULE_INT ) ) )+ ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4178:1: (otherlv_0= 'insertvalue' ( (lv_struct_1_0= ruleStructure ) ) ( (lv_value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_inserttype_4_0= ruleTypeUse ) ) ( (lv_insertvalue_5_0= ruleValue ) ) (otherlv_6= ',' ( (lv_index_7_0= RULE_INT ) ) )+ )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4176:1: (otherlv_0= 'insertvalue' ( (lv_struct_1_0= ruleStructure ) ) ( (lv_value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_inserttype_4_0= ruleTypeUse ) ) ( (lv_insertvalue_5_0= ruleValue ) ) (otherlv_6= ',' ( (lv_index_7_0= RULE_INT ) ) )+ )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4176:3: otherlv_0= 'insertvalue' ( (lv_struct_1_0= ruleStructure ) ) ( (lv_value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_inserttype_4_0= ruleTypeUse ) ) ( (lv_insertvalue_5_0= ruleValue ) ) (otherlv_6= ',' ( (lv_index_7_0= RULE_INT ) ) )+
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4178:1: (otherlv_0= 'insertvalue' ( (lv_struct_1_0= ruleStructure ) ) ( (lv_value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_inserttype_4_0= ruleTypeUse ) ) ( (lv_insertvalue_5_0= ruleValue ) ) (otherlv_6= ',' ( (lv_index_7_0= RULE_INT ) ) )+ )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4178:3: otherlv_0= 'insertvalue' ( (lv_struct_1_0= ruleStructure ) ) ( (lv_value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_inserttype_4_0= ruleTypeUse ) ) ( (lv_insertvalue_5_0= ruleValue ) ) (otherlv_6= ',' ( (lv_index_7_0= RULE_INT ) ) )+
             {
             otherlv_0=(Token)match(input,97,FOLLOW_97_in_ruleInsertValue9696); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getInsertValueAccess().getInsertvalueKeyword_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4180:1: ( (lv_struct_1_0= ruleStructure ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4181:1: (lv_struct_1_0= ruleStructure )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4182:1: ( (lv_struct_1_0= ruleStructure ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4183:1: (lv_struct_1_0= ruleStructure )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4181:1: (lv_struct_1_0= ruleStructure )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4182:3: lv_struct_1_0= ruleStructure
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4183:1: (lv_struct_1_0= ruleStructure )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4184:3: lv_struct_1_0= ruleStructure
             {
              
             	        newCompositeNode(grammarAccess.getInsertValueAccess().getStructStructureParserRuleCall_1_0()); 
@@ -11623,11 +11617,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4198:2: ( (lv_value_2_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4199:1: (lv_value_2_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4200:2: ( (lv_value_2_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4201:1: (lv_value_2_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4199:1: (lv_value_2_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4200:3: lv_value_2_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4201:1: (lv_value_2_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4202:3: lv_value_2_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getInsertValueAccess().getValueValueParserRuleCall_2_0()); 
@@ -11658,11 +11652,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_3, grammarAccess.getInsertValueAccess().getCommaKeyword_3());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4220:1: ( (lv_inserttype_4_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4221:1: (lv_inserttype_4_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4222:1: ( (lv_inserttype_4_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4223:1: (lv_inserttype_4_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4221:1: (lv_inserttype_4_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4222:3: lv_inserttype_4_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4223:1: (lv_inserttype_4_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4224:3: lv_inserttype_4_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getInsertValueAccess().getInserttypeTypeUseParserRuleCall_4_0()); 
@@ -11689,11 +11683,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4238:2: ( (lv_insertvalue_5_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4239:1: (lv_insertvalue_5_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4240:2: ( (lv_insertvalue_5_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4241:1: (lv_insertvalue_5_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4239:1: (lv_insertvalue_5_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4240:3: lv_insertvalue_5_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4241:1: (lv_insertvalue_5_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4242:3: lv_insertvalue_5_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getInsertValueAccess().getInsertvalueValueParserRuleCall_5_0()); 
@@ -11720,7 +11714,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4256:2: (otherlv_6= ',' ( (lv_index_7_0= RULE_INT ) ) )+
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4258:2: (otherlv_6= ',' ( (lv_index_7_0= RULE_INT ) ) )+
             int cnt105=0;
             loop105:
             do {
@@ -11734,17 +11728,17 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 switch (alt105) {
             	case 1 :
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4256:4: otherlv_6= ',' ( (lv_index_7_0= RULE_INT ) )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4258:4: otherlv_6= ',' ( (lv_index_7_0= RULE_INT ) )
             	    {
             	    otherlv_6=(Token)match(input,30,FOLLOW_30_in_ruleInsertValue9805); 
 
             	        	newLeafNode(otherlv_6, grammarAccess.getInsertValueAccess().getCommaKeyword_6_0());
             	        
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4260:1: ( (lv_index_7_0= RULE_INT ) )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4261:1: (lv_index_7_0= RULE_INT )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4262:1: ( (lv_index_7_0= RULE_INT ) )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4263:1: (lv_index_7_0= RULE_INT )
             	    {
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4261:1: (lv_index_7_0= RULE_INT )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4262:3: lv_index_7_0= RULE_INT
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4263:1: (lv_index_7_0= RULE_INT )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4264:3: lv_index_7_0= RULE_INT
             	    {
             	    lv_index_7_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleInsertValue9822); 
 
@@ -11800,7 +11794,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleFence"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4286:1: entryRuleFence returns [EObject current=null] : iv_ruleFence= ruleFence EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4288:1: entryRuleFence returns [EObject current=null] : iv_ruleFence= ruleFence EOF ;
     public final EObject entryRuleFence() throws RecognitionException {
         EObject current = null;
 
@@ -11808,8 +11802,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4287:2: (iv_ruleFence= ruleFence EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4288:2: iv_ruleFence= ruleFence EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4289:2: (iv_ruleFence= ruleFence EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4290:2: iv_ruleFence= ruleFence EOF
             {
              newCompositeNode(grammarAccess.getFenceRule()); 
             pushFollow(FOLLOW_ruleFence_in_entryRuleFence9865);
@@ -11836,7 +11830,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFence"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4295:1: ruleFence returns [EObject current=null] : (otherlv_0= 'fence' (otherlv_1= 'singlethread' )? ( (lv_ordering_2_0= ruleATOMIC_ORDERING ) ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4297:1: ruleFence returns [EObject current=null] : (otherlv_0= 'fence' (otherlv_1= 'singlethread' )? ( (lv_ordering_2_0= ruleATOMIC_ORDERING ) ) ) ;
     public final EObject ruleFence() throws RecognitionException {
         EObject current = null;
 
@@ -11848,17 +11842,17 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4298:28: ( (otherlv_0= 'fence' (otherlv_1= 'singlethread' )? ( (lv_ordering_2_0= ruleATOMIC_ORDERING ) ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4299:1: (otherlv_0= 'fence' (otherlv_1= 'singlethread' )? ( (lv_ordering_2_0= ruleATOMIC_ORDERING ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4300:28: ( (otherlv_0= 'fence' (otherlv_1= 'singlethread' )? ( (lv_ordering_2_0= ruleATOMIC_ORDERING ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4301:1: (otherlv_0= 'fence' (otherlv_1= 'singlethread' )? ( (lv_ordering_2_0= ruleATOMIC_ORDERING ) ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4299:1: (otherlv_0= 'fence' (otherlv_1= 'singlethread' )? ( (lv_ordering_2_0= ruleATOMIC_ORDERING ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4299:3: otherlv_0= 'fence' (otherlv_1= 'singlethread' )? ( (lv_ordering_2_0= ruleATOMIC_ORDERING ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4301:1: (otherlv_0= 'fence' (otherlv_1= 'singlethread' )? ( (lv_ordering_2_0= ruleATOMIC_ORDERING ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4301:3: otherlv_0= 'fence' (otherlv_1= 'singlethread' )? ( (lv_ordering_2_0= ruleATOMIC_ORDERING ) )
             {
             otherlv_0=(Token)match(input,98,FOLLOW_98_in_ruleFence9912); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getFenceAccess().getFenceKeyword_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4303:1: (otherlv_1= 'singlethread' )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4305:1: (otherlv_1= 'singlethread' )?
             int alt106=2;
             int LA106_0 = input.LA(1);
 
@@ -11867,7 +11861,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt106) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4303:3: otherlv_1= 'singlethread'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4305:3: otherlv_1= 'singlethread'
                     {
                     otherlv_1=(Token)match(input,99,FOLLOW_99_in_ruleFence9925); 
 
@@ -11879,11 +11873,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4307:3: ( (lv_ordering_2_0= ruleATOMIC_ORDERING ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4308:1: (lv_ordering_2_0= ruleATOMIC_ORDERING )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4309:3: ( (lv_ordering_2_0= ruleATOMIC_ORDERING ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4310:1: (lv_ordering_2_0= ruleATOMIC_ORDERING )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4308:1: (lv_ordering_2_0= ruleATOMIC_ORDERING )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4309:3: lv_ordering_2_0= ruleATOMIC_ORDERING
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4310:1: (lv_ordering_2_0= ruleATOMIC_ORDERING )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4311:3: lv_ordering_2_0= ruleATOMIC_ORDERING
             {
              
             	        newCompositeNode(grammarAccess.getFenceAccess().getOrderingATOMIC_ORDERINGParserRuleCall_2_0()); 
@@ -11931,7 +11925,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleCmpXchg"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4333:1: entryRuleCmpXchg returns [EObject current=null] : iv_ruleCmpXchg= ruleCmpXchg EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4335:1: entryRuleCmpXchg returns [EObject current=null] : iv_ruleCmpXchg= ruleCmpXchg EOF ;
     public final EObject entryRuleCmpXchg() throws RecognitionException {
         EObject current = null;
 
@@ -11939,8 +11933,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4334:2: (iv_ruleCmpXchg= ruleCmpXchg EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4335:2: iv_ruleCmpXchg= ruleCmpXchg EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4336:2: (iv_ruleCmpXchg= ruleCmpXchg EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4337:2: iv_ruleCmpXchg= ruleCmpXchg EOF
             {
              newCompositeNode(grammarAccess.getCmpXchgRule()); 
             pushFollow(FOLLOW_ruleCmpXchg_in_entryRuleCmpXchg9984);
@@ -11967,7 +11961,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCmpXchg"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4342:1: ruleCmpXchg returns [EObject current=null] : (otherlv_0= 'cmpxchg' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_adress_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_comparetype_5_0= ruleTypeUse ) ) ( (lv_comparevalue_6_0= ruleValue ) ) otherlv_7= ',' ( (lv_newtype_8_0= ruleTypeUse ) ) ( (lv_newvalue_9_0= ruleValue ) ) (otherlv_10= 'singlethread' )? ( (lv_ordering_11_0= ruleATOMIC_ORDERING ) ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4344:1: ruleCmpXchg returns [EObject current=null] : (otherlv_0= 'cmpxchg' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_adress_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_comparetype_5_0= ruleTypeUse ) ) ( (lv_comparevalue_6_0= ruleValue ) ) otherlv_7= ',' ( (lv_newtype_8_0= ruleTypeUse ) ) ( (lv_newvalue_9_0= ruleValue ) ) (otherlv_10= 'singlethread' )? ( (lv_ordering_11_0= ruleATOMIC_ORDERING ) ) ) ;
     public final EObject ruleCmpXchg() throws RecognitionException {
         EObject current = null;
 
@@ -11994,17 +11988,17 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4345:28: ( (otherlv_0= 'cmpxchg' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_adress_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_comparetype_5_0= ruleTypeUse ) ) ( (lv_comparevalue_6_0= ruleValue ) ) otherlv_7= ',' ( (lv_newtype_8_0= ruleTypeUse ) ) ( (lv_newvalue_9_0= ruleValue ) ) (otherlv_10= 'singlethread' )? ( (lv_ordering_11_0= ruleATOMIC_ORDERING ) ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4346:1: (otherlv_0= 'cmpxchg' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_adress_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_comparetype_5_0= ruleTypeUse ) ) ( (lv_comparevalue_6_0= ruleValue ) ) otherlv_7= ',' ( (lv_newtype_8_0= ruleTypeUse ) ) ( (lv_newvalue_9_0= ruleValue ) ) (otherlv_10= 'singlethread' )? ( (lv_ordering_11_0= ruleATOMIC_ORDERING ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4347:28: ( (otherlv_0= 'cmpxchg' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_adress_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_comparetype_5_0= ruleTypeUse ) ) ( (lv_comparevalue_6_0= ruleValue ) ) otherlv_7= ',' ( (lv_newtype_8_0= ruleTypeUse ) ) ( (lv_newvalue_9_0= ruleValue ) ) (otherlv_10= 'singlethread' )? ( (lv_ordering_11_0= ruleATOMIC_ORDERING ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4348:1: (otherlv_0= 'cmpxchg' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_adress_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_comparetype_5_0= ruleTypeUse ) ) ( (lv_comparevalue_6_0= ruleValue ) ) otherlv_7= ',' ( (lv_newtype_8_0= ruleTypeUse ) ) ( (lv_newvalue_9_0= ruleValue ) ) (otherlv_10= 'singlethread' )? ( (lv_ordering_11_0= ruleATOMIC_ORDERING ) ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4346:1: (otherlv_0= 'cmpxchg' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_adress_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_comparetype_5_0= ruleTypeUse ) ) ( (lv_comparevalue_6_0= ruleValue ) ) otherlv_7= ',' ( (lv_newtype_8_0= ruleTypeUse ) ) ( (lv_newvalue_9_0= ruleValue ) ) (otherlv_10= 'singlethread' )? ( (lv_ordering_11_0= ruleATOMIC_ORDERING ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4346:3: otherlv_0= 'cmpxchg' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_adress_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_comparetype_5_0= ruleTypeUse ) ) ( (lv_comparevalue_6_0= ruleValue ) ) otherlv_7= ',' ( (lv_newtype_8_0= ruleTypeUse ) ) ( (lv_newvalue_9_0= ruleValue ) ) (otherlv_10= 'singlethread' )? ( (lv_ordering_11_0= ruleATOMIC_ORDERING ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4348:1: (otherlv_0= 'cmpxchg' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_adress_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_comparetype_5_0= ruleTypeUse ) ) ( (lv_comparevalue_6_0= ruleValue ) ) otherlv_7= ',' ( (lv_newtype_8_0= ruleTypeUse ) ) ( (lv_newvalue_9_0= ruleValue ) ) (otherlv_10= 'singlethread' )? ( (lv_ordering_11_0= ruleATOMIC_ORDERING ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4348:3: otherlv_0= 'cmpxchg' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_adress_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_comparetype_5_0= ruleTypeUse ) ) ( (lv_comparevalue_6_0= ruleValue ) ) otherlv_7= ',' ( (lv_newtype_8_0= ruleTypeUse ) ) ( (lv_newvalue_9_0= ruleValue ) ) (otherlv_10= 'singlethread' )? ( (lv_ordering_11_0= ruleATOMIC_ORDERING ) )
             {
             otherlv_0=(Token)match(input,100,FOLLOW_100_in_ruleCmpXchg10031); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getCmpXchgAccess().getCmpxchgKeyword_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4350:1: (otherlv_1= 'volatile' )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4352:1: (otherlv_1= 'volatile' )?
             int alt107=2;
             int LA107_0 = input.LA(1);
 
@@ -12013,7 +12007,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt107) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4350:3: otherlv_1= 'volatile'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4352:3: otherlv_1= 'volatile'
                     {
                     otherlv_1=(Token)match(input,68,FOLLOW_68_in_ruleCmpXchg10044); 
 
@@ -12025,11 +12019,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4354:3: ( (lv_adresstype_2_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4355:1: (lv_adresstype_2_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4356:3: ( (lv_adresstype_2_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4357:1: (lv_adresstype_2_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4355:1: (lv_adresstype_2_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4356:3: lv_adresstype_2_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4357:1: (lv_adresstype_2_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4358:3: lv_adresstype_2_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getCmpXchgAccess().getAdresstypeTypeUseParserRuleCall_2_0()); 
@@ -12056,11 +12050,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4372:2: ( (lv_adress_3_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4373:1: (lv_adress_3_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4374:2: ( (lv_adress_3_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4375:1: (lv_adress_3_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4373:1: (lv_adress_3_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4374:3: lv_adress_3_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4375:1: (lv_adress_3_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4376:3: lv_adress_3_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getCmpXchgAccess().getAdressValueParserRuleCall_3_0()); 
@@ -12091,11 +12085,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_4, grammarAccess.getCmpXchgAccess().getCommaKeyword_4());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4394:1: ( (lv_comparetype_5_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4395:1: (lv_comparetype_5_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4396:1: ( (lv_comparetype_5_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4397:1: (lv_comparetype_5_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4395:1: (lv_comparetype_5_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4396:3: lv_comparetype_5_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4397:1: (lv_comparetype_5_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4398:3: lv_comparetype_5_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getCmpXchgAccess().getComparetypeTypeUseParserRuleCall_5_0()); 
@@ -12122,11 +12116,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4412:2: ( (lv_comparevalue_6_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4413:1: (lv_comparevalue_6_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4414:2: ( (lv_comparevalue_6_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4415:1: (lv_comparevalue_6_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4413:1: (lv_comparevalue_6_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4414:3: lv_comparevalue_6_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4415:1: (lv_comparevalue_6_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4416:3: lv_comparevalue_6_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getCmpXchgAccess().getComparevalueValueParserRuleCall_6_0()); 
@@ -12157,11 +12151,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_7, grammarAccess.getCmpXchgAccess().getCommaKeyword_7());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4434:1: ( (lv_newtype_8_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4435:1: (lv_newtype_8_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4436:1: ( (lv_newtype_8_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4437:1: (lv_newtype_8_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4435:1: (lv_newtype_8_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4436:3: lv_newtype_8_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4437:1: (lv_newtype_8_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4438:3: lv_newtype_8_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getCmpXchgAccess().getNewtypeTypeUseParserRuleCall_8_0()); 
@@ -12188,11 +12182,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4452:2: ( (lv_newvalue_9_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4453:1: (lv_newvalue_9_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4454:2: ( (lv_newvalue_9_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4455:1: (lv_newvalue_9_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4453:1: (lv_newvalue_9_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4454:3: lv_newvalue_9_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4455:1: (lv_newvalue_9_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4456:3: lv_newvalue_9_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getCmpXchgAccess().getNewvalueValueParserRuleCall_9_0()); 
@@ -12219,7 +12213,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4470:2: (otherlv_10= 'singlethread' )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4472:2: (otherlv_10= 'singlethread' )?
             int alt108=2;
             int LA108_0 = input.LA(1);
 
@@ -12228,7 +12222,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt108) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4470:4: otherlv_10= 'singlethread'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4472:4: otherlv_10= 'singlethread'
                     {
                     otherlv_10=(Token)match(input,99,FOLLOW_99_in_ruleCmpXchg10209); 
 
@@ -12240,11 +12234,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4474:3: ( (lv_ordering_11_0= ruleATOMIC_ORDERING ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4475:1: (lv_ordering_11_0= ruleATOMIC_ORDERING )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4476:3: ( (lv_ordering_11_0= ruleATOMIC_ORDERING ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4477:1: (lv_ordering_11_0= ruleATOMIC_ORDERING )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4475:1: (lv_ordering_11_0= ruleATOMIC_ORDERING )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4476:3: lv_ordering_11_0= ruleATOMIC_ORDERING
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4477:1: (lv_ordering_11_0= ruleATOMIC_ORDERING )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4478:3: lv_ordering_11_0= ruleATOMIC_ORDERING
             {
              
             	        newCompositeNode(grammarAccess.getCmpXchgAccess().getOrderingATOMIC_ORDERINGParserRuleCall_11_0()); 
@@ -12292,7 +12286,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAtomicRMW"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4500:1: entryRuleAtomicRMW returns [EObject current=null] : iv_ruleAtomicRMW= ruleAtomicRMW EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4502:1: entryRuleAtomicRMW returns [EObject current=null] : iv_ruleAtomicRMW= ruleAtomicRMW EOF ;
     public final EObject entryRuleAtomicRMW() throws RecognitionException {
         EObject current = null;
 
@@ -12300,8 +12294,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4501:2: (iv_ruleAtomicRMW= ruleAtomicRMW EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4502:2: iv_ruleAtomicRMW= ruleAtomicRMW EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4503:2: (iv_ruleAtomicRMW= ruleAtomicRMW EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4504:2: iv_ruleAtomicRMW= ruleAtomicRMW EOF
             {
              newCompositeNode(grammarAccess.getAtomicRMWRule()); 
             pushFollow(FOLLOW_ruleAtomicRMW_in_entryRuleAtomicRMW10268);
@@ -12328,7 +12322,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAtomicRMW"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4509:1: ruleAtomicRMW returns [EObject current=null] : (otherlv_0= 'atomicrmw' (otherlv_1= 'volatile' )? ruleBIN_OP ( (lv_adresstype_3_0= ruleTypeUse ) ) ( (lv_adress_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_opvalue_7_0= ruleValue ) ) (otherlv_8= 'singlethread' )? ( (lv_ordering_9_0= ruleATOMIC_ORDERING ) ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4511:1: ruleAtomicRMW returns [EObject current=null] : (otherlv_0= 'atomicrmw' (otherlv_1= 'volatile' )? ruleBIN_OP ( (lv_adresstype_3_0= ruleTypeUse ) ) ( (lv_adress_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_opvalue_7_0= ruleValue ) ) (otherlv_8= 'singlethread' )? ( (lv_ordering_9_0= ruleATOMIC_ORDERING ) ) ) ;
     public final EObject ruleAtomicRMW() throws RecognitionException {
         EObject current = null;
 
@@ -12350,17 +12344,17 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4512:28: ( (otherlv_0= 'atomicrmw' (otherlv_1= 'volatile' )? ruleBIN_OP ( (lv_adresstype_3_0= ruleTypeUse ) ) ( (lv_adress_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_opvalue_7_0= ruleValue ) ) (otherlv_8= 'singlethread' )? ( (lv_ordering_9_0= ruleATOMIC_ORDERING ) ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4513:1: (otherlv_0= 'atomicrmw' (otherlv_1= 'volatile' )? ruleBIN_OP ( (lv_adresstype_3_0= ruleTypeUse ) ) ( (lv_adress_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_opvalue_7_0= ruleValue ) ) (otherlv_8= 'singlethread' )? ( (lv_ordering_9_0= ruleATOMIC_ORDERING ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4514:28: ( (otherlv_0= 'atomicrmw' (otherlv_1= 'volatile' )? ruleBIN_OP ( (lv_adresstype_3_0= ruleTypeUse ) ) ( (lv_adress_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_opvalue_7_0= ruleValue ) ) (otherlv_8= 'singlethread' )? ( (lv_ordering_9_0= ruleATOMIC_ORDERING ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4515:1: (otherlv_0= 'atomicrmw' (otherlv_1= 'volatile' )? ruleBIN_OP ( (lv_adresstype_3_0= ruleTypeUse ) ) ( (lv_adress_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_opvalue_7_0= ruleValue ) ) (otherlv_8= 'singlethread' )? ( (lv_ordering_9_0= ruleATOMIC_ORDERING ) ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4513:1: (otherlv_0= 'atomicrmw' (otherlv_1= 'volatile' )? ruleBIN_OP ( (lv_adresstype_3_0= ruleTypeUse ) ) ( (lv_adress_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_opvalue_7_0= ruleValue ) ) (otherlv_8= 'singlethread' )? ( (lv_ordering_9_0= ruleATOMIC_ORDERING ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4513:3: otherlv_0= 'atomicrmw' (otherlv_1= 'volatile' )? ruleBIN_OP ( (lv_adresstype_3_0= ruleTypeUse ) ) ( (lv_adress_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_opvalue_7_0= ruleValue ) ) (otherlv_8= 'singlethread' )? ( (lv_ordering_9_0= ruleATOMIC_ORDERING ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4515:1: (otherlv_0= 'atomicrmw' (otherlv_1= 'volatile' )? ruleBIN_OP ( (lv_adresstype_3_0= ruleTypeUse ) ) ( (lv_adress_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_opvalue_7_0= ruleValue ) ) (otherlv_8= 'singlethread' )? ( (lv_ordering_9_0= ruleATOMIC_ORDERING ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4515:3: otherlv_0= 'atomicrmw' (otherlv_1= 'volatile' )? ruleBIN_OP ( (lv_adresstype_3_0= ruleTypeUse ) ) ( (lv_adress_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_optype_6_0= ruleTypeUse ) ) ( (lv_opvalue_7_0= ruleValue ) ) (otherlv_8= 'singlethread' )? ( (lv_ordering_9_0= ruleATOMIC_ORDERING ) )
             {
             otherlv_0=(Token)match(input,101,FOLLOW_101_in_ruleAtomicRMW10315); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getAtomicRMWAccess().getAtomicrmwKeyword_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4517:1: (otherlv_1= 'volatile' )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4519:1: (otherlv_1= 'volatile' )?
             int alt109=2;
             int LA109_0 = input.LA(1);
 
@@ -12369,7 +12363,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt109) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4517:3: otherlv_1= 'volatile'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4519:3: otherlv_1= 'volatile'
                     {
                     otherlv_1=(Token)match(input,68,FOLLOW_68_in_ruleAtomicRMW10328); 
 
@@ -12392,11 +12386,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
              
                     afterParserOrEnumRuleCall();
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4529:1: ( (lv_adresstype_3_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4530:1: (lv_adresstype_3_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4531:1: ( (lv_adresstype_3_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4532:1: (lv_adresstype_3_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4530:1: (lv_adresstype_3_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4531:3: lv_adresstype_3_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4532:1: (lv_adresstype_3_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4533:3: lv_adresstype_3_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getAtomicRMWAccess().getAdresstypeTypeUseParserRuleCall_3_0()); 
@@ -12423,11 +12417,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4547:2: ( (lv_adress_4_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4548:1: (lv_adress_4_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4549:2: ( (lv_adress_4_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4550:1: (lv_adress_4_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4548:1: (lv_adress_4_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4549:3: lv_adress_4_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4550:1: (lv_adress_4_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4551:3: lv_adress_4_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getAtomicRMWAccess().getAdressValueParserRuleCall_4_0()); 
@@ -12458,11 +12452,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_5, grammarAccess.getAtomicRMWAccess().getCommaKeyword_5());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4569:1: ( (lv_optype_6_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4570:1: (lv_optype_6_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4571:1: ( (lv_optype_6_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4572:1: (lv_optype_6_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4570:1: (lv_optype_6_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4571:3: lv_optype_6_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4572:1: (lv_optype_6_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4573:3: lv_optype_6_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getAtomicRMWAccess().getOptypeTypeUseParserRuleCall_6_0()); 
@@ -12489,11 +12483,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4587:2: ( (lv_opvalue_7_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4588:1: (lv_opvalue_7_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4589:2: ( (lv_opvalue_7_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4590:1: (lv_opvalue_7_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4588:1: (lv_opvalue_7_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4589:3: lv_opvalue_7_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4590:1: (lv_opvalue_7_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4591:3: lv_opvalue_7_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getAtomicRMWAccess().getOpvalueValueParserRuleCall_7_0()); 
@@ -12520,7 +12514,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4605:2: (otherlv_8= 'singlethread' )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4607:2: (otherlv_8= 'singlethread' )?
             int alt110=2;
             int LA110_0 = input.LA(1);
 
@@ -12529,7 +12523,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt110) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4605:4: otherlv_8= 'singlethread'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4607:4: otherlv_8= 'singlethread'
                     {
                     otherlv_8=(Token)match(input,99,FOLLOW_99_in_ruleAtomicRMW10454); 
 
@@ -12541,11 +12535,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4609:3: ( (lv_ordering_9_0= ruleATOMIC_ORDERING ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4610:1: (lv_ordering_9_0= ruleATOMIC_ORDERING )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4611:3: ( (lv_ordering_9_0= ruleATOMIC_ORDERING ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4612:1: (lv_ordering_9_0= ruleATOMIC_ORDERING )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4610:1: (lv_ordering_9_0= ruleATOMIC_ORDERING )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4611:3: lv_ordering_9_0= ruleATOMIC_ORDERING
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4612:1: (lv_ordering_9_0= ruleATOMIC_ORDERING )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4613:3: lv_ordering_9_0= ruleATOMIC_ORDERING
             {
              
             	        newCompositeNode(grammarAccess.getAtomicRMWAccess().getOrderingATOMIC_ORDERINGParserRuleCall_9_0()); 
@@ -12593,7 +12587,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleLoad"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4635:1: entryRuleLoad returns [EObject current=null] : iv_ruleLoad= ruleLoad EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4637:1: entryRuleLoad returns [EObject current=null] : iv_ruleLoad= ruleLoad EOF ;
     public final EObject entryRuleLoad() throws RecognitionException {
         EObject current = null;
 
@@ -12601,8 +12595,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4636:2: (iv_ruleLoad= ruleLoad EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4637:2: iv_ruleLoad= ruleLoad EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4638:2: (iv_ruleLoad= ruleLoad EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4639:2: iv_ruleLoad= ruleLoad EOF
             {
              newCompositeNode(grammarAccess.getLoadRule()); 
             pushFollow(FOLLOW_ruleLoad_in_entryRuleLoad10513);
@@ -12629,7 +12623,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLoad"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4644:1: ruleLoad returns [EObject current=null] : ( (otherlv_0= 'load' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_adress_4_0= ruleValue ) ) (otherlv_5= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* ) | (otherlv_8= 'load' otherlv_9= 'atomic' (otherlv_10= 'volatile' )? ( (lv_adresstype_11_0= ruleTypeUse ) ) ( (lv_adress_12_0= ruleValue ) ) ( (lv_types_13_0= ruleTypeList ) )? (otherlv_14= 'singlethread' )? ( (lv_ordering_15_0= ruleATOMIC_ORDERING ) ) (otherlv_16= ',' otherlv_17= 'align' ( (lv_index_18_0= RULE_INT ) ) )? ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4646:1: ruleLoad returns [EObject current=null] : ( (otherlv_0= 'load' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_adress_4_0= ruleValue ) ) (otherlv_5= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* ) | (otherlv_8= 'load' otherlv_9= 'atomic' (otherlv_10= 'volatile' )? ( (lv_adresstype_11_0= ruleTypeUse ) ) ( (lv_adress_12_0= ruleValue ) ) ( (lv_types_13_0= ruleTypeList ) )? (otherlv_14= 'singlethread' )? ( (lv_ordering_15_0= ruleATOMIC_ORDERING ) ) (otherlv_16= ',' otherlv_17= 'align' ( (lv_index_18_0= RULE_INT ) ) )? ) ) ;
     public final EObject ruleLoad() throws RecognitionException {
         EObject current = null;
 
@@ -12661,10 +12655,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4647:28: ( ( (otherlv_0= 'load' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_adress_4_0= ruleValue ) ) (otherlv_5= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* ) | (otherlv_8= 'load' otherlv_9= 'atomic' (otherlv_10= 'volatile' )? ( (lv_adresstype_11_0= ruleTypeUse ) ) ( (lv_adress_12_0= ruleValue ) ) ( (lv_types_13_0= ruleTypeList ) )? (otherlv_14= 'singlethread' )? ( (lv_ordering_15_0= ruleATOMIC_ORDERING ) ) (otherlv_16= ',' otherlv_17= 'align' ( (lv_index_18_0= RULE_INT ) ) )? ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4648:1: ( (otherlv_0= 'load' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_adress_4_0= ruleValue ) ) (otherlv_5= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* ) | (otherlv_8= 'load' otherlv_9= 'atomic' (otherlv_10= 'volatile' )? ( (lv_adresstype_11_0= ruleTypeUse ) ) ( (lv_adress_12_0= ruleValue ) ) ( (lv_types_13_0= ruleTypeList ) )? (otherlv_14= 'singlethread' )? ( (lv_ordering_15_0= ruleATOMIC_ORDERING ) ) (otherlv_16= ',' otherlv_17= 'align' ( (lv_index_18_0= RULE_INT ) ) )? ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4649:28: ( ( (otherlv_0= 'load' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_adress_4_0= ruleValue ) ) (otherlv_5= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* ) | (otherlv_8= 'load' otherlv_9= 'atomic' (otherlv_10= 'volatile' )? ( (lv_adresstype_11_0= ruleTypeUse ) ) ( (lv_adress_12_0= ruleValue ) ) ( (lv_types_13_0= ruleTypeList ) )? (otherlv_14= 'singlethread' )? ( (lv_ordering_15_0= ruleATOMIC_ORDERING ) ) (otherlv_16= ',' otherlv_17= 'align' ( (lv_index_18_0= RULE_INT ) ) )? ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4650:1: ( (otherlv_0= 'load' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_adress_4_0= ruleValue ) ) (otherlv_5= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* ) | (otherlv_8= 'load' otherlv_9= 'atomic' (otherlv_10= 'volatile' )? ( (lv_adresstype_11_0= ruleTypeUse ) ) ( (lv_adress_12_0= ruleValue ) ) ( (lv_types_13_0= ruleTypeList ) )? (otherlv_14= 'singlethread' )? ( (lv_ordering_15_0= ruleATOMIC_ORDERING ) ) (otherlv_16= ',' otherlv_17= 'align' ( (lv_index_18_0= RULE_INT ) ) )? ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4648:1: ( (otherlv_0= 'load' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_adress_4_0= ruleValue ) ) (otherlv_5= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* ) | (otherlv_8= 'load' otherlv_9= 'atomic' (otherlv_10= 'volatile' )? ( (lv_adresstype_11_0= ruleTypeUse ) ) ( (lv_adress_12_0= ruleValue ) ) ( (lv_types_13_0= ruleTypeList ) )? (otherlv_14= 'singlethread' )? ( (lv_ordering_15_0= ruleATOMIC_ORDERING ) ) (otherlv_16= ',' otherlv_17= 'align' ( (lv_index_18_0= RULE_INT ) ) )? ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4650:1: ( (otherlv_0= 'load' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_adress_4_0= ruleValue ) ) (otherlv_5= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* ) | (otherlv_8= 'load' otherlv_9= 'atomic' (otherlv_10= 'volatile' )? ( (lv_adresstype_11_0= ruleTypeUse ) ) ( (lv_adress_12_0= ruleValue ) ) ( (lv_types_13_0= ruleTypeList ) )? (otherlv_14= 'singlethread' )? ( (lv_ordering_15_0= ruleATOMIC_ORDERING ) ) (otherlv_16= ',' otherlv_17= 'align' ( (lv_index_18_0= RULE_INT ) ) )? ) )
             int alt120=2;
             int LA120_0 = input.LA(1);
 
@@ -12692,16 +12686,16 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt120) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4648:2: (otherlv_0= 'load' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_adress_4_0= ruleValue ) ) (otherlv_5= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4650:2: (otherlv_0= 'load' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_adress_4_0= ruleValue ) ) (otherlv_5= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4648:2: (otherlv_0= 'load' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_adress_4_0= ruleValue ) ) (otherlv_5= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4648:4: otherlv_0= 'load' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_adress_4_0= ruleValue ) ) (otherlv_5= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )*
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4650:2: (otherlv_0= 'load' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_adress_4_0= ruleValue ) ) (otherlv_5= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4650:4: otherlv_0= 'load' (otherlv_1= 'volatile' )? ( (lv_adresstype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_adress_4_0= ruleValue ) ) (otherlv_5= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )*
                     {
                     otherlv_0=(Token)match(input,102,FOLLOW_102_in_ruleLoad10561); 
 
                         	newLeafNode(otherlv_0, grammarAccess.getLoadAccess().getLoadKeyword_0_0());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4652:1: (otherlv_1= 'volatile' )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4654:1: (otherlv_1= 'volatile' )?
                     int alt111=2;
                     int LA111_0 = input.LA(1);
 
@@ -12710,7 +12704,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt111) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4652:3: otherlv_1= 'volatile'
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4654:3: otherlv_1= 'volatile'
                             {
                             otherlv_1=(Token)match(input,68,FOLLOW_68_in_ruleLoad10574); 
 
@@ -12722,11 +12716,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4656:3: ( (lv_adresstype_2_0= ruleTypeUse ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4657:1: (lv_adresstype_2_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4658:3: ( (lv_adresstype_2_0= ruleTypeUse ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4659:1: (lv_adresstype_2_0= ruleTypeUse )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4657:1: (lv_adresstype_2_0= ruleTypeUse )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4658:3: lv_adresstype_2_0= ruleTypeUse
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4659:1: (lv_adresstype_2_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4660:3: lv_adresstype_2_0= ruleTypeUse
                     {
                      
                     	        newCompositeNode(grammarAccess.getLoadAccess().getAdresstypeTypeUseParserRuleCall_0_2_0()); 
@@ -12753,7 +12747,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4674:2: ( (lv_types_3_0= ruleTypeList ) )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4676:2: ( (lv_types_3_0= ruleTypeList ) )?
                     int alt112=2;
                     int LA112_0 = input.LA(1);
 
@@ -12762,10 +12756,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt112) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4675:1: (lv_types_3_0= ruleTypeList )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4677:1: (lv_types_3_0= ruleTypeList )
                             {
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4675:1: (lv_types_3_0= ruleTypeList )
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4676:3: lv_types_3_0= ruleTypeList
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4677:1: (lv_types_3_0= ruleTypeList )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4678:3: lv_types_3_0= ruleTypeList
                             {
                              
                             	        newCompositeNode(grammarAccess.getLoadAccess().getTypesTypeListParserRuleCall_0_3_0()); 
@@ -12795,11 +12789,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4692:3: ( (lv_adress_4_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4693:1: (lv_adress_4_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4694:3: ( (lv_adress_4_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4695:1: (lv_adress_4_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4693:1: (lv_adress_4_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4694:3: lv_adress_4_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4695:1: (lv_adress_4_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4696:3: lv_adress_4_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getLoadAccess().getAdressValueParserRuleCall_0_4_0()); 
@@ -12826,7 +12820,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4710:2: (otherlv_5= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )*
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4712:2: (otherlv_5= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )*
                     loop115:
                     do {
                         int alt115=2;
@@ -12839,13 +12833,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                         switch (alt115) {
                     	case 1 :
-                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4710:4: otherlv_5= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ )
+                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4712:4: otherlv_5= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ )
                     	    {
                     	    otherlv_5=(Token)match(input,30,FOLLOW_30_in_ruleLoad10653); 
 
                     	        	newLeafNode(otherlv_5, grammarAccess.getLoadAccess().getCommaKeyword_0_5_0());
                     	        
-                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4714:1: ( ruleALIGNMENT | ( ruleMetadataValue )+ )
+                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4716:1: ( ruleALIGNMENT | ( ruleMetadataValue )+ )
                     	    int alt114=2;
                     	    int LA114_0 = input.LA(1);
 
@@ -12863,7 +12857,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     	    }
                     	    switch (alt114) {
                     	        case 1 :
-                    	            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4715:5: ruleALIGNMENT
+                    	            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4717:5: ruleALIGNMENT
                     	            {
                     	             
                     	                    newCompositeNode(grammarAccess.getLoadAccess().getALIGNMENTParserRuleCall_0_5_1_0()); 
@@ -12880,9 +12874,9 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     	            }
                     	            break;
                     	        case 2 :
-                    	            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4723:6: ( ruleMetadataValue )+
+                    	            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4725:6: ( ruleMetadataValue )+
                     	            {
-                    	            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4723:6: ( ruleMetadataValue )+
+                    	            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4725:6: ( ruleMetadataValue )+
                     	            int cnt113=0;
                     	            loop113:
                     	            do {
@@ -12896,7 +12890,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     	                switch (alt113) {
                     	            	case 1 :
-                    	            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4724:5: ruleMetadataValue
+                    	            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4726:5: ruleMetadataValue
                     	            	    {
                     	            	     
                     	            	            newCompositeNode(grammarAccess.getLoadAccess().getMetadataValueParserRuleCall_0_5_1_1()); 
@@ -12944,10 +12938,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4732:6: (otherlv_8= 'load' otherlv_9= 'atomic' (otherlv_10= 'volatile' )? ( (lv_adresstype_11_0= ruleTypeUse ) ) ( (lv_adress_12_0= ruleValue ) ) ( (lv_types_13_0= ruleTypeList ) )? (otherlv_14= 'singlethread' )? ( (lv_ordering_15_0= ruleATOMIC_ORDERING ) ) (otherlv_16= ',' otherlv_17= 'align' ( (lv_index_18_0= RULE_INT ) ) )? )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4734:6: (otherlv_8= 'load' otherlv_9= 'atomic' (otherlv_10= 'volatile' )? ( (lv_adresstype_11_0= ruleTypeUse ) ) ( (lv_adress_12_0= ruleValue ) ) ( (lv_types_13_0= ruleTypeList ) )? (otherlv_14= 'singlethread' )? ( (lv_ordering_15_0= ruleATOMIC_ORDERING ) ) (otherlv_16= ',' otherlv_17= 'align' ( (lv_index_18_0= RULE_INT ) ) )? )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4732:6: (otherlv_8= 'load' otherlv_9= 'atomic' (otherlv_10= 'volatile' )? ( (lv_adresstype_11_0= ruleTypeUse ) ) ( (lv_adress_12_0= ruleValue ) ) ( (lv_types_13_0= ruleTypeList ) )? (otherlv_14= 'singlethread' )? ( (lv_ordering_15_0= ruleATOMIC_ORDERING ) ) (otherlv_16= ',' otherlv_17= 'align' ( (lv_index_18_0= RULE_INT ) ) )? )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4732:8: otherlv_8= 'load' otherlv_9= 'atomic' (otherlv_10= 'volatile' )? ( (lv_adresstype_11_0= ruleTypeUse ) ) ( (lv_adress_12_0= ruleValue ) ) ( (lv_types_13_0= ruleTypeList ) )? (otherlv_14= 'singlethread' )? ( (lv_ordering_15_0= ruleATOMIC_ORDERING ) ) (otherlv_16= ',' otherlv_17= 'align' ( (lv_index_18_0= RULE_INT ) ) )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4734:6: (otherlv_8= 'load' otherlv_9= 'atomic' (otherlv_10= 'volatile' )? ( (lv_adresstype_11_0= ruleTypeUse ) ) ( (lv_adress_12_0= ruleValue ) ) ( (lv_types_13_0= ruleTypeList ) )? (otherlv_14= 'singlethread' )? ( (lv_ordering_15_0= ruleATOMIC_ORDERING ) ) (otherlv_16= ',' otherlv_17= 'align' ( (lv_index_18_0= RULE_INT ) ) )? )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4734:8: otherlv_8= 'load' otherlv_9= 'atomic' (otherlv_10= 'volatile' )? ( (lv_adresstype_11_0= ruleTypeUse ) ) ( (lv_adress_12_0= ruleValue ) ) ( (lv_types_13_0= ruleTypeList ) )? (otherlv_14= 'singlethread' )? ( (lv_ordering_15_0= ruleATOMIC_ORDERING ) ) (otherlv_16= ',' otherlv_17= 'align' ( (lv_index_18_0= RULE_INT ) ) )?
                     {
                     otherlv_8=(Token)match(input,102,FOLLOW_102_in_ruleLoad10716); 
 
@@ -12957,7 +12951,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                         	newLeafNode(otherlv_9, grammarAccess.getLoadAccess().getAtomicKeyword_1_1());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4740:1: (otherlv_10= 'volatile' )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4742:1: (otherlv_10= 'volatile' )?
                     int alt116=2;
                     int LA116_0 = input.LA(1);
 
@@ -12966,7 +12960,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt116) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4740:3: otherlv_10= 'volatile'
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4742:3: otherlv_10= 'volatile'
                             {
                             otherlv_10=(Token)match(input,68,FOLLOW_68_in_ruleLoad10741); 
 
@@ -12978,11 +12972,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4744:3: ( (lv_adresstype_11_0= ruleTypeUse ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4745:1: (lv_adresstype_11_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4746:3: ( (lv_adresstype_11_0= ruleTypeUse ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4747:1: (lv_adresstype_11_0= ruleTypeUse )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4745:1: (lv_adresstype_11_0= ruleTypeUse )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4746:3: lv_adresstype_11_0= ruleTypeUse
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4747:1: (lv_adresstype_11_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4748:3: lv_adresstype_11_0= ruleTypeUse
                     {
                      
                     	        newCompositeNode(grammarAccess.getLoadAccess().getAdresstypeTypeUseParserRuleCall_1_3_0()); 
@@ -13009,11 +13003,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4762:2: ( (lv_adress_12_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4763:1: (lv_adress_12_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4764:2: ( (lv_adress_12_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4765:1: (lv_adress_12_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4763:1: (lv_adress_12_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4764:3: lv_adress_12_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4765:1: (lv_adress_12_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4766:3: lv_adress_12_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getLoadAccess().getAdressValueParserRuleCall_1_4_0()); 
@@ -13040,7 +13034,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4780:2: ( (lv_types_13_0= ruleTypeList ) )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4782:2: ( (lv_types_13_0= ruleTypeList ) )?
                     int alt117=2;
                     int LA117_0 = input.LA(1);
 
@@ -13049,10 +13043,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt117) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4781:1: (lv_types_13_0= ruleTypeList )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4783:1: (lv_types_13_0= ruleTypeList )
                             {
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4781:1: (lv_types_13_0= ruleTypeList )
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4782:3: lv_types_13_0= ruleTypeList
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4783:1: (lv_types_13_0= ruleTypeList )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4784:3: lv_types_13_0= ruleTypeList
                             {
                              
                             	        newCompositeNode(grammarAccess.getLoadAccess().getTypesTypeListParserRuleCall_1_5_0()); 
@@ -13082,7 +13076,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4798:3: (otherlv_14= 'singlethread' )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4800:3: (otherlv_14= 'singlethread' )?
                     int alt118=2;
                     int LA118_0 = input.LA(1);
 
@@ -13091,7 +13085,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt118) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4798:5: otherlv_14= 'singlethread'
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4800:5: otherlv_14= 'singlethread'
                             {
                             otherlv_14=(Token)match(input,99,FOLLOW_99_in_ruleLoad10820); 
 
@@ -13103,11 +13097,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4802:3: ( (lv_ordering_15_0= ruleATOMIC_ORDERING ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4803:1: (lv_ordering_15_0= ruleATOMIC_ORDERING )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4804:3: ( (lv_ordering_15_0= ruleATOMIC_ORDERING ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4805:1: (lv_ordering_15_0= ruleATOMIC_ORDERING )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4803:1: (lv_ordering_15_0= ruleATOMIC_ORDERING )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4804:3: lv_ordering_15_0= ruleATOMIC_ORDERING
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4805:1: (lv_ordering_15_0= ruleATOMIC_ORDERING )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4806:3: lv_ordering_15_0= ruleATOMIC_ORDERING
                     {
                      
                     	        newCompositeNode(grammarAccess.getLoadAccess().getOrderingATOMIC_ORDERINGParserRuleCall_1_7_0()); 
@@ -13134,7 +13128,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4820:2: (otherlv_16= ',' otherlv_17= 'align' ( (lv_index_18_0= RULE_INT ) ) )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4822:2: (otherlv_16= ',' otherlv_17= 'align' ( (lv_index_18_0= RULE_INT ) ) )?
                     int alt119=2;
                     int LA119_0 = input.LA(1);
 
@@ -13143,7 +13137,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt119) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4820:4: otherlv_16= ',' otherlv_17= 'align' ( (lv_index_18_0= RULE_INT ) )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4822:4: otherlv_16= ',' otherlv_17= 'align' ( (lv_index_18_0= RULE_INT ) )
                             {
                             otherlv_16=(Token)match(input,30,FOLLOW_30_in_ruleLoad10856); 
 
@@ -13153,11 +13147,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                                 	newLeafNode(otherlv_17, grammarAccess.getLoadAccess().getAlignKeyword_1_8_1());
                                 
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4828:1: ( (lv_index_18_0= RULE_INT ) )
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4829:1: (lv_index_18_0= RULE_INT )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4830:1: ( (lv_index_18_0= RULE_INT ) )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4831:1: (lv_index_18_0= RULE_INT )
                             {
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4829:1: (lv_index_18_0= RULE_INT )
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4830:3: lv_index_18_0= RULE_INT
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4831:1: (lv_index_18_0= RULE_INT )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4832:3: lv_index_18_0= RULE_INT
                             {
                             lv_index_18_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleLoad10885); 
 
@@ -13212,7 +13206,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleStore"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4854:1: entryRuleStore returns [EObject current=null] : iv_ruleStore= ruleStore EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4856:1: entryRuleStore returns [EObject current=null] : iv_ruleStore= ruleStore EOF ;
     public final EObject entryRuleStore() throws RecognitionException {
         EObject current = null;
 
@@ -13220,8 +13214,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4855:2: (iv_ruleStore= ruleStore EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4856:2: iv_ruleStore= ruleStore EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4857:2: (iv_ruleStore= ruleStore EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4858:2: iv_ruleStore= ruleStore EOF
             {
              newCompositeNode(grammarAccess.getStoreRule()); 
             pushFollow(FOLLOW_ruleStore_in_entryRuleStore10929);
@@ -13248,7 +13242,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStore"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4863:1: ruleStore returns [EObject current=null] : ( (otherlv_0= 'store' (otherlv_1= 'volatile' )? ( (lv_newtype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_newvalue_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_adresstype_6_0= ruleTypeUse ) ) ( (lv_types_7_0= ruleTypeList ) )? ( (lv_adress_8_0= ruleValue ) ) (otherlv_9= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* ) | (otherlv_12= 'store' otherlv_13= 'atomic' (otherlv_14= 'volatile' )? ( (lv_newtype_15_0= ruleTypeUse ) ) ( (lv_types_16_0= ruleTypeList ) )? ( (lv_newvalue_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_adresstype_19_0= ruleTypeUse ) ) ( (lv_types_20_0= ruleTypeList ) )? ( (lv_adress_21_0= ruleValue ) ) (otherlv_22= 'singlethread' )? ( (lv_ordering_23_0= ruleATOMIC_ORDERING ) ) (otherlv_24= ',' otherlv_25= 'align' ( (lv_index_26_0= RULE_INT ) ) )? ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4865:1: ruleStore returns [EObject current=null] : ( (otherlv_0= 'store' (otherlv_1= 'volatile' )? ( (lv_newtype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_newvalue_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_adresstype_6_0= ruleTypeUse ) ) ( (lv_types_7_0= ruleTypeList ) )? ( (lv_adress_8_0= ruleValue ) ) (otherlv_9= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* ) | (otherlv_12= 'store' otherlv_13= 'atomic' (otherlv_14= 'volatile' )? ( (lv_newtype_15_0= ruleTypeUse ) ) ( (lv_types_16_0= ruleTypeList ) )? ( (lv_newvalue_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_adresstype_19_0= ruleTypeUse ) ) ( (lv_types_20_0= ruleTypeList ) )? ( (lv_adress_21_0= ruleValue ) ) (otherlv_22= 'singlethread' )? ( (lv_ordering_23_0= ruleATOMIC_ORDERING ) ) (otherlv_24= ',' otherlv_25= 'align' ( (lv_index_26_0= RULE_INT ) ) )? ) ) ;
     public final EObject ruleStore() throws RecognitionException {
         EObject current = null;
 
@@ -13294,10 +13288,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4866:28: ( ( (otherlv_0= 'store' (otherlv_1= 'volatile' )? ( (lv_newtype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_newvalue_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_adresstype_6_0= ruleTypeUse ) ) ( (lv_types_7_0= ruleTypeList ) )? ( (lv_adress_8_0= ruleValue ) ) (otherlv_9= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* ) | (otherlv_12= 'store' otherlv_13= 'atomic' (otherlv_14= 'volatile' )? ( (lv_newtype_15_0= ruleTypeUse ) ) ( (lv_types_16_0= ruleTypeList ) )? ( (lv_newvalue_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_adresstype_19_0= ruleTypeUse ) ) ( (lv_types_20_0= ruleTypeList ) )? ( (lv_adress_21_0= ruleValue ) ) (otherlv_22= 'singlethread' )? ( (lv_ordering_23_0= ruleATOMIC_ORDERING ) ) (otherlv_24= ',' otherlv_25= 'align' ( (lv_index_26_0= RULE_INT ) ) )? ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4867:1: ( (otherlv_0= 'store' (otherlv_1= 'volatile' )? ( (lv_newtype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_newvalue_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_adresstype_6_0= ruleTypeUse ) ) ( (lv_types_7_0= ruleTypeList ) )? ( (lv_adress_8_0= ruleValue ) ) (otherlv_9= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* ) | (otherlv_12= 'store' otherlv_13= 'atomic' (otherlv_14= 'volatile' )? ( (lv_newtype_15_0= ruleTypeUse ) ) ( (lv_types_16_0= ruleTypeList ) )? ( (lv_newvalue_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_adresstype_19_0= ruleTypeUse ) ) ( (lv_types_20_0= ruleTypeList ) )? ( (lv_adress_21_0= ruleValue ) ) (otherlv_22= 'singlethread' )? ( (lv_ordering_23_0= ruleATOMIC_ORDERING ) ) (otherlv_24= ',' otherlv_25= 'align' ( (lv_index_26_0= RULE_INT ) ) )? ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4868:28: ( ( (otherlv_0= 'store' (otherlv_1= 'volatile' )? ( (lv_newtype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_newvalue_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_adresstype_6_0= ruleTypeUse ) ) ( (lv_types_7_0= ruleTypeList ) )? ( (lv_adress_8_0= ruleValue ) ) (otherlv_9= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* ) | (otherlv_12= 'store' otherlv_13= 'atomic' (otherlv_14= 'volatile' )? ( (lv_newtype_15_0= ruleTypeUse ) ) ( (lv_types_16_0= ruleTypeList ) )? ( (lv_newvalue_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_adresstype_19_0= ruleTypeUse ) ) ( (lv_types_20_0= ruleTypeList ) )? ( (lv_adress_21_0= ruleValue ) ) (otherlv_22= 'singlethread' )? ( (lv_ordering_23_0= ruleATOMIC_ORDERING ) ) (otherlv_24= ',' otherlv_25= 'align' ( (lv_index_26_0= RULE_INT ) ) )? ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4869:1: ( (otherlv_0= 'store' (otherlv_1= 'volatile' )? ( (lv_newtype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_newvalue_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_adresstype_6_0= ruleTypeUse ) ) ( (lv_types_7_0= ruleTypeList ) )? ( (lv_adress_8_0= ruleValue ) ) (otherlv_9= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* ) | (otherlv_12= 'store' otherlv_13= 'atomic' (otherlv_14= 'volatile' )? ( (lv_newtype_15_0= ruleTypeUse ) ) ( (lv_types_16_0= ruleTypeList ) )? ( (lv_newvalue_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_adresstype_19_0= ruleTypeUse ) ) ( (lv_types_20_0= ruleTypeList ) )? ( (lv_adress_21_0= ruleValue ) ) (otherlv_22= 'singlethread' )? ( (lv_ordering_23_0= ruleATOMIC_ORDERING ) ) (otherlv_24= ',' otherlv_25= 'align' ( (lv_index_26_0= RULE_INT ) ) )? ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4867:1: ( (otherlv_0= 'store' (otherlv_1= 'volatile' )? ( (lv_newtype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_newvalue_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_adresstype_6_0= ruleTypeUse ) ) ( (lv_types_7_0= ruleTypeList ) )? ( (lv_adress_8_0= ruleValue ) ) (otherlv_9= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* ) | (otherlv_12= 'store' otherlv_13= 'atomic' (otherlv_14= 'volatile' )? ( (lv_newtype_15_0= ruleTypeUse ) ) ( (lv_types_16_0= ruleTypeList ) )? ( (lv_newvalue_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_adresstype_19_0= ruleTypeUse ) ) ( (lv_types_20_0= ruleTypeList ) )? ( (lv_adress_21_0= ruleValue ) ) (otherlv_22= 'singlethread' )? ( (lv_ordering_23_0= ruleATOMIC_ORDERING ) ) (otherlv_24= ',' otherlv_25= 'align' ( (lv_index_26_0= RULE_INT ) ) )? ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4869:1: ( (otherlv_0= 'store' (otherlv_1= 'volatile' )? ( (lv_newtype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_newvalue_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_adresstype_6_0= ruleTypeUse ) ) ( (lv_types_7_0= ruleTypeList ) )? ( (lv_adress_8_0= ruleValue ) ) (otherlv_9= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* ) | (otherlv_12= 'store' otherlv_13= 'atomic' (otherlv_14= 'volatile' )? ( (lv_newtype_15_0= ruleTypeUse ) ) ( (lv_types_16_0= ruleTypeList ) )? ( (lv_newvalue_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_adresstype_19_0= ruleTypeUse ) ) ( (lv_types_20_0= ruleTypeList ) )? ( (lv_adress_21_0= ruleValue ) ) (otherlv_22= 'singlethread' )? ( (lv_ordering_23_0= ruleATOMIC_ORDERING ) ) (otherlv_24= ',' otherlv_25= 'align' ( (lv_index_26_0= RULE_INT ) ) )? ) )
             int alt132=2;
             int LA132_0 = input.LA(1);
 
@@ -13325,16 +13319,16 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt132) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4867:2: (otherlv_0= 'store' (otherlv_1= 'volatile' )? ( (lv_newtype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_newvalue_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_adresstype_6_0= ruleTypeUse ) ) ( (lv_types_7_0= ruleTypeList ) )? ( (lv_adress_8_0= ruleValue ) ) (otherlv_9= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4869:2: (otherlv_0= 'store' (otherlv_1= 'volatile' )? ( (lv_newtype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_newvalue_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_adresstype_6_0= ruleTypeUse ) ) ( (lv_types_7_0= ruleTypeList ) )? ( (lv_adress_8_0= ruleValue ) ) (otherlv_9= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4867:2: (otherlv_0= 'store' (otherlv_1= 'volatile' )? ( (lv_newtype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_newvalue_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_adresstype_6_0= ruleTypeUse ) ) ( (lv_types_7_0= ruleTypeList ) )? ( (lv_adress_8_0= ruleValue ) ) (otherlv_9= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4867:4: otherlv_0= 'store' (otherlv_1= 'volatile' )? ( (lv_newtype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_newvalue_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_adresstype_6_0= ruleTypeUse ) ) ( (lv_types_7_0= ruleTypeList ) )? ( (lv_adress_8_0= ruleValue ) ) (otherlv_9= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )*
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4869:2: (otherlv_0= 'store' (otherlv_1= 'volatile' )? ( (lv_newtype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_newvalue_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_adresstype_6_0= ruleTypeUse ) ) ( (lv_types_7_0= ruleTypeList ) )? ( (lv_adress_8_0= ruleValue ) ) (otherlv_9= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )* )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4869:4: otherlv_0= 'store' (otherlv_1= 'volatile' )? ( (lv_newtype_2_0= ruleTypeUse ) ) ( (lv_types_3_0= ruleTypeList ) )? ( (lv_newvalue_4_0= ruleValue ) ) otherlv_5= ',' ( (lv_adresstype_6_0= ruleTypeUse ) ) ( (lv_types_7_0= ruleTypeList ) )? ( (lv_adress_8_0= ruleValue ) ) (otherlv_9= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )*
                     {
                     otherlv_0=(Token)match(input,104,FOLLOW_104_in_ruleStore10977); 
 
                         	newLeafNode(otherlv_0, grammarAccess.getStoreAccess().getStoreKeyword_0_0());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4871:1: (otherlv_1= 'volatile' )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4873:1: (otherlv_1= 'volatile' )?
                     int alt121=2;
                     int LA121_0 = input.LA(1);
 
@@ -13343,7 +13337,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt121) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4871:3: otherlv_1= 'volatile'
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4873:3: otherlv_1= 'volatile'
                             {
                             otherlv_1=(Token)match(input,68,FOLLOW_68_in_ruleStore10990); 
 
@@ -13355,11 +13349,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4875:3: ( (lv_newtype_2_0= ruleTypeUse ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4876:1: (lv_newtype_2_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4877:3: ( (lv_newtype_2_0= ruleTypeUse ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4878:1: (lv_newtype_2_0= ruleTypeUse )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4876:1: (lv_newtype_2_0= ruleTypeUse )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4877:3: lv_newtype_2_0= ruleTypeUse
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4878:1: (lv_newtype_2_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4879:3: lv_newtype_2_0= ruleTypeUse
                     {
                      
                     	        newCompositeNode(grammarAccess.getStoreAccess().getNewtypeTypeUseParserRuleCall_0_2_0()); 
@@ -13386,7 +13380,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4893:2: ( (lv_types_3_0= ruleTypeList ) )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4895:2: ( (lv_types_3_0= ruleTypeList ) )?
                     int alt122=2;
                     int LA122_0 = input.LA(1);
 
@@ -13395,10 +13389,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt122) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4894:1: (lv_types_3_0= ruleTypeList )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4896:1: (lv_types_3_0= ruleTypeList )
                             {
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4894:1: (lv_types_3_0= ruleTypeList )
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4895:3: lv_types_3_0= ruleTypeList
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4896:1: (lv_types_3_0= ruleTypeList )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4897:3: lv_types_3_0= ruleTypeList
                             {
                              
                             	        newCompositeNode(grammarAccess.getStoreAccess().getTypesTypeListParserRuleCall_0_3_0()); 
@@ -13428,11 +13422,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4911:3: ( (lv_newvalue_4_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4912:1: (lv_newvalue_4_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4913:3: ( (lv_newvalue_4_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4914:1: (lv_newvalue_4_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4912:1: (lv_newvalue_4_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4913:3: lv_newvalue_4_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4914:1: (lv_newvalue_4_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4915:3: lv_newvalue_4_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getStoreAccess().getNewvalueValueParserRuleCall_0_4_0()); 
@@ -13463,11 +13457,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                         	newLeafNode(otherlv_5, grammarAccess.getStoreAccess().getCommaKeyword_0_5());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4933:1: ( (lv_adresstype_6_0= ruleTypeUse ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4934:1: (lv_adresstype_6_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4935:1: ( (lv_adresstype_6_0= ruleTypeUse ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4936:1: (lv_adresstype_6_0= ruleTypeUse )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4934:1: (lv_adresstype_6_0= ruleTypeUse )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4935:3: lv_adresstype_6_0= ruleTypeUse
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4936:1: (lv_adresstype_6_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4937:3: lv_adresstype_6_0= ruleTypeUse
                     {
                      
                     	        newCompositeNode(grammarAccess.getStoreAccess().getAdresstypeTypeUseParserRuleCall_0_6_0()); 
@@ -13494,7 +13488,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4951:2: ( (lv_types_7_0= ruleTypeList ) )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4953:2: ( (lv_types_7_0= ruleTypeList ) )?
                     int alt123=2;
                     int LA123_0 = input.LA(1);
 
@@ -13503,10 +13497,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt123) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4952:1: (lv_types_7_0= ruleTypeList )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4954:1: (lv_types_7_0= ruleTypeList )
                             {
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4952:1: (lv_types_7_0= ruleTypeList )
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4953:3: lv_types_7_0= ruleTypeList
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4954:1: (lv_types_7_0= ruleTypeList )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4955:3: lv_types_7_0= ruleTypeList
                             {
                              
                             	        newCompositeNode(grammarAccess.getStoreAccess().getTypesTypeListParserRuleCall_0_7_0()); 
@@ -13536,11 +13530,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4969:3: ( (lv_adress_8_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4970:1: (lv_adress_8_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4971:3: ( (lv_adress_8_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4972:1: (lv_adress_8_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4970:1: (lv_adress_8_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4971:3: lv_adress_8_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4972:1: (lv_adress_8_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4973:3: lv_adress_8_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getStoreAccess().getAdressValueParserRuleCall_0_8_0()); 
@@ -13567,7 +13561,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4987:2: (otherlv_9= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )*
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4989:2: (otherlv_9= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ ) )*
                     loop126:
                     do {
                         int alt126=2;
@@ -13580,13 +13574,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                         switch (alt126) {
                     	case 1 :
-                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4987:4: otherlv_9= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ )
+                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4989:4: otherlv_9= ',' ( ruleALIGNMENT | ( ruleMetadataValue )+ )
                     	    {
                     	    otherlv_9=(Token)match(input,30,FOLLOW_30_in_ruleStore11145); 
 
                     	        	newLeafNode(otherlv_9, grammarAccess.getStoreAccess().getCommaKeyword_0_9_0());
                     	        
-                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4991:1: ( ruleALIGNMENT | ( ruleMetadataValue )+ )
+                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4993:1: ( ruleALIGNMENT | ( ruleMetadataValue )+ )
                     	    int alt125=2;
                     	    int LA125_0 = input.LA(1);
 
@@ -13604,7 +13598,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     	    }
                     	    switch (alt125) {
                     	        case 1 :
-                    	            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4992:5: ruleALIGNMENT
+                    	            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:4994:5: ruleALIGNMENT
                     	            {
                     	             
                     	                    newCompositeNode(grammarAccess.getStoreAccess().getALIGNMENTParserRuleCall_0_9_1_0()); 
@@ -13621,9 +13615,9 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     	            }
                     	            break;
                     	        case 2 :
-                    	            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5000:6: ( ruleMetadataValue )+
+                    	            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5002:6: ( ruleMetadataValue )+
                     	            {
-                    	            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5000:6: ( ruleMetadataValue )+
+                    	            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5002:6: ( ruleMetadataValue )+
                     	            int cnt124=0;
                     	            loop124:
                     	            do {
@@ -13637,7 +13631,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     	                switch (alt124) {
                     	            	case 1 :
-                    	            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5001:5: ruleMetadataValue
+                    	            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5003:5: ruleMetadataValue
                     	            	    {
                     	            	     
                     	            	            newCompositeNode(grammarAccess.getStoreAccess().getMetadataValueParserRuleCall_0_9_1_1()); 
@@ -13685,10 +13679,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5009:6: (otherlv_12= 'store' otherlv_13= 'atomic' (otherlv_14= 'volatile' )? ( (lv_newtype_15_0= ruleTypeUse ) ) ( (lv_types_16_0= ruleTypeList ) )? ( (lv_newvalue_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_adresstype_19_0= ruleTypeUse ) ) ( (lv_types_20_0= ruleTypeList ) )? ( (lv_adress_21_0= ruleValue ) ) (otherlv_22= 'singlethread' )? ( (lv_ordering_23_0= ruleATOMIC_ORDERING ) ) (otherlv_24= ',' otherlv_25= 'align' ( (lv_index_26_0= RULE_INT ) ) )? )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5011:6: (otherlv_12= 'store' otherlv_13= 'atomic' (otherlv_14= 'volatile' )? ( (lv_newtype_15_0= ruleTypeUse ) ) ( (lv_types_16_0= ruleTypeList ) )? ( (lv_newvalue_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_adresstype_19_0= ruleTypeUse ) ) ( (lv_types_20_0= ruleTypeList ) )? ( (lv_adress_21_0= ruleValue ) ) (otherlv_22= 'singlethread' )? ( (lv_ordering_23_0= ruleATOMIC_ORDERING ) ) (otherlv_24= ',' otherlv_25= 'align' ( (lv_index_26_0= RULE_INT ) ) )? )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5009:6: (otherlv_12= 'store' otherlv_13= 'atomic' (otherlv_14= 'volatile' )? ( (lv_newtype_15_0= ruleTypeUse ) ) ( (lv_types_16_0= ruleTypeList ) )? ( (lv_newvalue_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_adresstype_19_0= ruleTypeUse ) ) ( (lv_types_20_0= ruleTypeList ) )? ( (lv_adress_21_0= ruleValue ) ) (otherlv_22= 'singlethread' )? ( (lv_ordering_23_0= ruleATOMIC_ORDERING ) ) (otherlv_24= ',' otherlv_25= 'align' ( (lv_index_26_0= RULE_INT ) ) )? )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5009:8: otherlv_12= 'store' otherlv_13= 'atomic' (otherlv_14= 'volatile' )? ( (lv_newtype_15_0= ruleTypeUse ) ) ( (lv_types_16_0= ruleTypeList ) )? ( (lv_newvalue_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_adresstype_19_0= ruleTypeUse ) ) ( (lv_types_20_0= ruleTypeList ) )? ( (lv_adress_21_0= ruleValue ) ) (otherlv_22= 'singlethread' )? ( (lv_ordering_23_0= ruleATOMIC_ORDERING ) ) (otherlv_24= ',' otherlv_25= 'align' ( (lv_index_26_0= RULE_INT ) ) )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5011:6: (otherlv_12= 'store' otherlv_13= 'atomic' (otherlv_14= 'volatile' )? ( (lv_newtype_15_0= ruleTypeUse ) ) ( (lv_types_16_0= ruleTypeList ) )? ( (lv_newvalue_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_adresstype_19_0= ruleTypeUse ) ) ( (lv_types_20_0= ruleTypeList ) )? ( (lv_adress_21_0= ruleValue ) ) (otherlv_22= 'singlethread' )? ( (lv_ordering_23_0= ruleATOMIC_ORDERING ) ) (otherlv_24= ',' otherlv_25= 'align' ( (lv_index_26_0= RULE_INT ) ) )? )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5011:8: otherlv_12= 'store' otherlv_13= 'atomic' (otherlv_14= 'volatile' )? ( (lv_newtype_15_0= ruleTypeUse ) ) ( (lv_types_16_0= ruleTypeList ) )? ( (lv_newvalue_17_0= ruleValue ) ) otherlv_18= ',' ( (lv_adresstype_19_0= ruleTypeUse ) ) ( (lv_types_20_0= ruleTypeList ) )? ( (lv_adress_21_0= ruleValue ) ) (otherlv_22= 'singlethread' )? ( (lv_ordering_23_0= ruleATOMIC_ORDERING ) ) (otherlv_24= ',' otherlv_25= 'align' ( (lv_index_26_0= RULE_INT ) ) )?
                     {
                     otherlv_12=(Token)match(input,104,FOLLOW_104_in_ruleStore11208); 
 
@@ -13698,7 +13692,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                         	newLeafNode(otherlv_13, grammarAccess.getStoreAccess().getAtomicKeyword_1_1());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5017:1: (otherlv_14= 'volatile' )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5019:1: (otherlv_14= 'volatile' )?
                     int alt127=2;
                     int LA127_0 = input.LA(1);
 
@@ -13707,7 +13701,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt127) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5017:3: otherlv_14= 'volatile'
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5019:3: otherlv_14= 'volatile'
                             {
                             otherlv_14=(Token)match(input,68,FOLLOW_68_in_ruleStore11233); 
 
@@ -13719,11 +13713,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5021:3: ( (lv_newtype_15_0= ruleTypeUse ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5022:1: (lv_newtype_15_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5023:3: ( (lv_newtype_15_0= ruleTypeUse ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5024:1: (lv_newtype_15_0= ruleTypeUse )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5022:1: (lv_newtype_15_0= ruleTypeUse )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5023:3: lv_newtype_15_0= ruleTypeUse
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5024:1: (lv_newtype_15_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5025:3: lv_newtype_15_0= ruleTypeUse
                     {
                      
                     	        newCompositeNode(grammarAccess.getStoreAccess().getNewtypeTypeUseParserRuleCall_1_3_0()); 
@@ -13750,7 +13744,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5039:2: ( (lv_types_16_0= ruleTypeList ) )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5041:2: ( (lv_types_16_0= ruleTypeList ) )?
                     int alt128=2;
                     int LA128_0 = input.LA(1);
 
@@ -13759,10 +13753,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt128) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5040:1: (lv_types_16_0= ruleTypeList )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5042:1: (lv_types_16_0= ruleTypeList )
                             {
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5040:1: (lv_types_16_0= ruleTypeList )
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5041:3: lv_types_16_0= ruleTypeList
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5042:1: (lv_types_16_0= ruleTypeList )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5043:3: lv_types_16_0= ruleTypeList
                             {
                              
                             	        newCompositeNode(grammarAccess.getStoreAccess().getTypesTypeListParserRuleCall_1_4_0()); 
@@ -13792,11 +13786,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5057:3: ( (lv_newvalue_17_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5058:1: (lv_newvalue_17_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5059:3: ( (lv_newvalue_17_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5060:1: (lv_newvalue_17_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5058:1: (lv_newvalue_17_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5059:3: lv_newvalue_17_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5060:1: (lv_newvalue_17_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5061:3: lv_newvalue_17_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getStoreAccess().getNewvalueValueParserRuleCall_1_5_0()); 
@@ -13827,11 +13821,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                         	newLeafNode(otherlv_18, grammarAccess.getStoreAccess().getCommaKeyword_1_6());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5079:1: ( (lv_adresstype_19_0= ruleTypeUse ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5080:1: (lv_adresstype_19_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5081:1: ( (lv_adresstype_19_0= ruleTypeUse ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5082:1: (lv_adresstype_19_0= ruleTypeUse )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5080:1: (lv_adresstype_19_0= ruleTypeUse )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5081:3: lv_adresstype_19_0= ruleTypeUse
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5082:1: (lv_adresstype_19_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5083:3: lv_adresstype_19_0= ruleTypeUse
                     {
                      
                     	        newCompositeNode(grammarAccess.getStoreAccess().getAdresstypeTypeUseParserRuleCall_1_7_0()); 
@@ -13858,7 +13852,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5097:2: ( (lv_types_20_0= ruleTypeList ) )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5099:2: ( (lv_types_20_0= ruleTypeList ) )?
                     int alt129=2;
                     int LA129_0 = input.LA(1);
 
@@ -13867,10 +13861,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt129) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5098:1: (lv_types_20_0= ruleTypeList )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5100:1: (lv_types_20_0= ruleTypeList )
                             {
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5098:1: (lv_types_20_0= ruleTypeList )
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5099:3: lv_types_20_0= ruleTypeList
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5100:1: (lv_types_20_0= ruleTypeList )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5101:3: lv_types_20_0= ruleTypeList
                             {
                              
                             	        newCompositeNode(grammarAccess.getStoreAccess().getTypesTypeListParserRuleCall_1_8_0()); 
@@ -13900,11 +13894,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5115:3: ( (lv_adress_21_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5116:1: (lv_adress_21_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5117:3: ( (lv_adress_21_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5118:1: (lv_adress_21_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5116:1: (lv_adress_21_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5117:3: lv_adress_21_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5118:1: (lv_adress_21_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5119:3: lv_adress_21_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getStoreAccess().getAdressValueParserRuleCall_1_9_0()); 
@@ -13931,7 +13925,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5133:2: (otherlv_22= 'singlethread' )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5135:2: (otherlv_22= 'singlethread' )?
                     int alt130=2;
                     int LA130_0 = input.LA(1);
 
@@ -13940,7 +13934,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt130) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5133:4: otherlv_22= 'singlethread'
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5135:4: otherlv_22= 'singlethread'
                             {
                             otherlv_22=(Token)match(input,99,FOLLOW_99_in_ruleStore11388); 
 
@@ -13952,11 +13946,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5137:3: ( (lv_ordering_23_0= ruleATOMIC_ORDERING ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5138:1: (lv_ordering_23_0= ruleATOMIC_ORDERING )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5139:3: ( (lv_ordering_23_0= ruleATOMIC_ORDERING ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5140:1: (lv_ordering_23_0= ruleATOMIC_ORDERING )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5138:1: (lv_ordering_23_0= ruleATOMIC_ORDERING )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5139:3: lv_ordering_23_0= ruleATOMIC_ORDERING
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5140:1: (lv_ordering_23_0= ruleATOMIC_ORDERING )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5141:3: lv_ordering_23_0= ruleATOMIC_ORDERING
                     {
                      
                     	        newCompositeNode(grammarAccess.getStoreAccess().getOrderingATOMIC_ORDERINGParserRuleCall_1_11_0()); 
@@ -13983,7 +13977,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5155:2: (otherlv_24= ',' otherlv_25= 'align' ( (lv_index_26_0= RULE_INT ) ) )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5157:2: (otherlv_24= ',' otherlv_25= 'align' ( (lv_index_26_0= RULE_INT ) ) )?
                     int alt131=2;
                     int LA131_0 = input.LA(1);
 
@@ -13992,7 +13986,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt131) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5155:4: otherlv_24= ',' otherlv_25= 'align' ( (lv_index_26_0= RULE_INT ) )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5157:4: otherlv_24= ',' otherlv_25= 'align' ( (lv_index_26_0= RULE_INT ) )
                             {
                             otherlv_24=(Token)match(input,30,FOLLOW_30_in_ruleStore11424); 
 
@@ -14002,11 +13996,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                                 	newLeafNode(otherlv_25, grammarAccess.getStoreAccess().getAlignKeyword_1_12_1());
                                 
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5163:1: ( (lv_index_26_0= RULE_INT ) )
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5164:1: (lv_index_26_0= RULE_INT )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5165:1: ( (lv_index_26_0= RULE_INT ) )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5166:1: (lv_index_26_0= RULE_INT )
                             {
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5164:1: (lv_index_26_0= RULE_INT )
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5165:3: lv_index_26_0= RULE_INT
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5166:1: (lv_index_26_0= RULE_INT )
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5167:3: lv_index_26_0= RULE_INT
                             {
                             lv_index_26_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleStore11453); 
 
@@ -14061,7 +14055,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleCall"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5189:1: entryRuleCall returns [EObject current=null] : iv_ruleCall= ruleCall EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5191:1: entryRuleCall returns [EObject current=null] : iv_ruleCall= ruleCall EOF ;
     public final EObject entryRuleCall() throws RecognitionException {
         EObject current = null;
 
@@ -14069,8 +14063,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5190:2: (iv_ruleCall= ruleCall EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5191:2: iv_ruleCall= ruleCall EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5192:2: (iv_ruleCall= ruleCall EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5193:2: iv_ruleCall= ruleCall EOF
             {
              newCompositeNode(grammarAccess.getCallRule()); 
             pushFollow(FOLLOW_ruleCall_in_entryRuleCall11497);
@@ -14097,7 +14091,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCall"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5198:1: ruleCall returns [EObject current=null] : ( (otherlv_0= 'tail' )? otherlv_1= 'call' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_adresstype_4_0= ruleTypeUse ) ) ( ( (lv_adress_5_0= ruleValue ) ) | (otherlv_6= 'asm' (otherlv_7= 'sideeffect' )? this_STRING_8= RULE_STRING otherlv_9= ',' this_STRING_10= RULE_STRING ) ) ( (lv_pList_11_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* (otherlv_13= ',' otherlv_14= '!srcloc' otherlv_15= '!' this_INT_16= RULE_INT )* ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5200:1: ruleCall returns [EObject current=null] : ( (otherlv_0= 'tail' )? otherlv_1= 'call' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_adresstype_4_0= ruleTypeUse ) ) ( ( (lv_adress_5_0= ruleValue ) ) | (otherlv_6= 'asm' (otherlv_7= 'sideeffect' )? this_STRING_8= RULE_STRING otherlv_9= ',' this_STRING_10= RULE_STRING ) ) ( (lv_pList_11_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* (otherlv_13= ',' otherlv_14= '!srcloc' otherlv_15= '!' this_INT_16= RULE_INT )* ) ;
     public final EObject ruleCall() throws RecognitionException {
         EObject current = null;
 
@@ -14122,13 +14116,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5201:28: ( ( (otherlv_0= 'tail' )? otherlv_1= 'call' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_adresstype_4_0= ruleTypeUse ) ) ( ( (lv_adress_5_0= ruleValue ) ) | (otherlv_6= 'asm' (otherlv_7= 'sideeffect' )? this_STRING_8= RULE_STRING otherlv_9= ',' this_STRING_10= RULE_STRING ) ) ( (lv_pList_11_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* (otherlv_13= ',' otherlv_14= '!srcloc' otherlv_15= '!' this_INT_16= RULE_INT )* ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5202:1: ( (otherlv_0= 'tail' )? otherlv_1= 'call' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_adresstype_4_0= ruleTypeUse ) ) ( ( (lv_adress_5_0= ruleValue ) ) | (otherlv_6= 'asm' (otherlv_7= 'sideeffect' )? this_STRING_8= RULE_STRING otherlv_9= ',' this_STRING_10= RULE_STRING ) ) ( (lv_pList_11_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* (otherlv_13= ',' otherlv_14= '!srcloc' otherlv_15= '!' this_INT_16= RULE_INT )* )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5203:28: ( ( (otherlv_0= 'tail' )? otherlv_1= 'call' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_adresstype_4_0= ruleTypeUse ) ) ( ( (lv_adress_5_0= ruleValue ) ) | (otherlv_6= 'asm' (otherlv_7= 'sideeffect' )? this_STRING_8= RULE_STRING otherlv_9= ',' this_STRING_10= RULE_STRING ) ) ( (lv_pList_11_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* (otherlv_13= ',' otherlv_14= '!srcloc' otherlv_15= '!' this_INT_16= RULE_INT )* ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5204:1: ( (otherlv_0= 'tail' )? otherlv_1= 'call' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_adresstype_4_0= ruleTypeUse ) ) ( ( (lv_adress_5_0= ruleValue ) ) | (otherlv_6= 'asm' (otherlv_7= 'sideeffect' )? this_STRING_8= RULE_STRING otherlv_9= ',' this_STRING_10= RULE_STRING ) ) ( (lv_pList_11_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* (otherlv_13= ',' otherlv_14= '!srcloc' otherlv_15= '!' this_INT_16= RULE_INT )* )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5202:1: ( (otherlv_0= 'tail' )? otherlv_1= 'call' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_adresstype_4_0= ruleTypeUse ) ) ( ( (lv_adress_5_0= ruleValue ) ) | (otherlv_6= 'asm' (otherlv_7= 'sideeffect' )? this_STRING_8= RULE_STRING otherlv_9= ',' this_STRING_10= RULE_STRING ) ) ( (lv_pList_11_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* (otherlv_13= ',' otherlv_14= '!srcloc' otherlv_15= '!' this_INT_16= RULE_INT )* )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5202:2: (otherlv_0= 'tail' )? otherlv_1= 'call' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_adresstype_4_0= ruleTypeUse ) ) ( ( (lv_adress_5_0= ruleValue ) ) | (otherlv_6= 'asm' (otherlv_7= 'sideeffect' )? this_STRING_8= RULE_STRING otherlv_9= ',' this_STRING_10= RULE_STRING ) ) ( (lv_pList_11_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* (otherlv_13= ',' otherlv_14= '!srcloc' otherlv_15= '!' this_INT_16= RULE_INT )*
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5204:1: ( (otherlv_0= 'tail' )? otherlv_1= 'call' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_adresstype_4_0= ruleTypeUse ) ) ( ( (lv_adress_5_0= ruleValue ) ) | (otherlv_6= 'asm' (otherlv_7= 'sideeffect' )? this_STRING_8= RULE_STRING otherlv_9= ',' this_STRING_10= RULE_STRING ) ) ( (lv_pList_11_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* (otherlv_13= ',' otherlv_14= '!srcloc' otherlv_15= '!' this_INT_16= RULE_INT )* )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5204:2: (otherlv_0= 'tail' )? otherlv_1= 'call' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_adresstype_4_0= ruleTypeUse ) ) ( ( (lv_adress_5_0= ruleValue ) ) | (otherlv_6= 'asm' (otherlv_7= 'sideeffect' )? this_STRING_8= RULE_STRING otherlv_9= ',' this_STRING_10= RULE_STRING ) ) ( (lv_pList_11_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* (otherlv_13= ',' otherlv_14= '!srcloc' otherlv_15= '!' this_INT_16= RULE_INT )*
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5202:2: (otherlv_0= 'tail' )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5204:2: (otherlv_0= 'tail' )?
             int alt133=2;
             int LA133_0 = input.LA(1);
 
@@ -14137,7 +14131,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt133) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5202:4: otherlv_0= 'tail'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5204:4: otherlv_0= 'tail'
                     {
                     otherlv_0=(Token)match(input,105,FOLLOW_105_in_ruleCall11545); 
 
@@ -14153,7 +14147,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_1, grammarAccess.getCallAccess().getCallKeyword_1());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5210:1: ( ruleCallingConv )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5212:1: ( ruleCallingConv )?
             int alt134=2;
             int LA134_0 = input.LA(1);
 
@@ -14162,7 +14156,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt134) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5211:5: ruleCallingConv
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5213:5: ruleCallingConv
                     {
                      
                             newCompositeNode(grammarAccess.getCallAccess().getCallingConvParserRuleCall_2()); 
@@ -14181,7 +14175,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5218:3: ( ruleRETURN_ATTRIBUTES )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5220:3: ( ruleRETURN_ATTRIBUTES )?
             int alt135=2;
             int LA135_0 = input.LA(1);
 
@@ -14190,7 +14184,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt135) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5219:5: ruleRETURN_ATTRIBUTES
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5221:5: ruleRETURN_ATTRIBUTES
                     {
                      
                             newCompositeNode(grammarAccess.getCallAccess().getRETURN_ATTRIBUTESParserRuleCall_3()); 
@@ -14209,11 +14203,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5226:3: ( (lv_adresstype_4_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5227:1: (lv_adresstype_4_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5228:3: ( (lv_adresstype_4_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5229:1: (lv_adresstype_4_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5227:1: (lv_adresstype_4_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5228:3: lv_adresstype_4_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5229:1: (lv_adresstype_4_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5230:3: lv_adresstype_4_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getCallAccess().getAdresstypeTypeUseParserRuleCall_4_0()); 
@@ -14240,7 +14234,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5244:2: ( ( (lv_adress_5_0= ruleValue ) ) | (otherlv_6= 'asm' (otherlv_7= 'sideeffect' )? this_STRING_8= RULE_STRING otherlv_9= ',' this_STRING_10= RULE_STRING ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5246:2: ( ( (lv_adress_5_0= ruleValue ) ) | (otherlv_6= 'asm' (otherlv_7= 'sideeffect' )? this_STRING_8= RULE_STRING otherlv_9= ',' this_STRING_10= RULE_STRING ) )
             int alt137=2;
             int LA137_0 = input.LA(1);
 
@@ -14258,13 +14252,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt137) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5244:3: ( (lv_adress_5_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5246:3: ( (lv_adress_5_0= ruleValue ) )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5244:3: ( (lv_adress_5_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5245:1: (lv_adress_5_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5246:3: ( (lv_adress_5_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5247:1: (lv_adress_5_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5245:1: (lv_adress_5_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5246:3: lv_adress_5_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5247:1: (lv_adress_5_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5248:3: lv_adress_5_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getCallAccess().getAdressValueParserRuleCall_5_0_0()); 
@@ -14295,16 +14289,16 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5263:6: (otherlv_6= 'asm' (otherlv_7= 'sideeffect' )? this_STRING_8= RULE_STRING otherlv_9= ',' this_STRING_10= RULE_STRING )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5265:6: (otherlv_6= 'asm' (otherlv_7= 'sideeffect' )? this_STRING_8= RULE_STRING otherlv_9= ',' this_STRING_10= RULE_STRING )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5263:6: (otherlv_6= 'asm' (otherlv_7= 'sideeffect' )? this_STRING_8= RULE_STRING otherlv_9= ',' this_STRING_10= RULE_STRING )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5263:8: otherlv_6= 'asm' (otherlv_7= 'sideeffect' )? this_STRING_8= RULE_STRING otherlv_9= ',' this_STRING_10= RULE_STRING
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5265:6: (otherlv_6= 'asm' (otherlv_7= 'sideeffect' )? this_STRING_8= RULE_STRING otherlv_9= ',' this_STRING_10= RULE_STRING )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5265:8: otherlv_6= 'asm' (otherlv_7= 'sideeffect' )? this_STRING_8= RULE_STRING otherlv_9= ',' this_STRING_10= RULE_STRING
                     {
                     otherlv_6=(Token)match(input,23,FOLLOW_23_in_ruleCall11657); 
 
                         	newLeafNode(otherlv_6, grammarAccess.getCallAccess().getAsmKeyword_5_1_0());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5267:1: (otherlv_7= 'sideeffect' )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5269:1: (otherlv_7= 'sideeffect' )?
                     int alt136=2;
                     int LA136_0 = input.LA(1);
 
@@ -14313,7 +14307,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt136) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5267:3: otherlv_7= 'sideeffect'
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5269:3: otherlv_7= 'sideeffect'
                             {
                             otherlv_7=(Token)match(input,107,FOLLOW_107_in_ruleCall11670); 
 
@@ -14346,11 +14340,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5283:3: ( (lv_pList_11_0= ruleParameterList ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5284:1: (lv_pList_11_0= ruleParameterList )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5285:3: ( (lv_pList_11_0= ruleParameterList ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5286:1: (lv_pList_11_0= ruleParameterList )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5284:1: (lv_pList_11_0= ruleParameterList )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5285:3: lv_pList_11_0= ruleParameterList
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5286:1: (lv_pList_11_0= ruleParameterList )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5287:3: lv_pList_11_0= ruleParameterList
             {
              
             	        newCompositeNode(grammarAccess.getCallAccess().getPListParameterListParserRuleCall_6_0()); 
@@ -14377,7 +14371,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5301:2: ( ruleFUNCTION_ATTRIBUTES )*
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5303:2: ( ruleFUNCTION_ATTRIBUTES )*
             loop138:
             do {
                 int alt138=2;
@@ -14390,7 +14384,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 switch (alt138) {
             	case 1 :
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5302:5: ruleFUNCTION_ATTRIBUTES
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5304:5: ruleFUNCTION_ATTRIBUTES
             	    {
             	     
             	            newCompositeNode(grammarAccess.getCallAccess().getFUNCTION_ATTRIBUTESParserRuleCall_7()); 
@@ -14412,7 +14406,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5309:3: (otherlv_13= ',' otherlv_14= '!srcloc' otherlv_15= '!' this_INT_16= RULE_INT )*
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5311:3: (otherlv_13= ',' otherlv_14= '!srcloc' otherlv_15= '!' this_INT_16= RULE_INT )*
             loop139:
             do {
                 int alt139=2;
@@ -14425,7 +14419,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 switch (alt139) {
             	case 1 :
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5309:5: otherlv_13= ',' otherlv_14= '!srcloc' otherlv_15= '!' this_INT_16= RULE_INT
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5311:5: otherlv_13= ',' otherlv_14= '!srcloc' otherlv_15= '!' this_INT_16= RULE_INT
             	    {
             	    otherlv_13=(Token)match(input,30,FOLLOW_30_in_ruleCall11758); 
 
@@ -14473,7 +14467,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAlloc"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5333:1: entryRuleAlloc returns [EObject current=null] : iv_ruleAlloc= ruleAlloc EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5335:1: entryRuleAlloc returns [EObject current=null] : iv_ruleAlloc= ruleAlloc EOF ;
     public final EObject entryRuleAlloc() throws RecognitionException {
         EObject current = null;
 
@@ -14481,8 +14475,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5334:2: (iv_ruleAlloc= ruleAlloc EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5335:2: iv_ruleAlloc= ruleAlloc EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5336:2: (iv_ruleAlloc= ruleAlloc EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5337:2: iv_ruleAlloc= ruleAlloc EOF
             {
              newCompositeNode(grammarAccess.getAllocRule()); 
             pushFollow(FOLLOW_ruleAlloc_in_entryRuleAlloc11830);
@@ -14509,7 +14503,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAlloc"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5342:1: ruleAlloc returns [EObject current=null] : (otherlv_0= 'alloca' ( ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_typelist_2_0= ruleTypeList ) )? ) (otherlv_3= ',' ( (lv_numelementstype_4_0= ruleTypeUse ) ) ( (lv_numelementsvalue_5_0= ruleValue ) ) )? (otherlv_6= ',' ruleALIGNMENT )? ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5344:1: ruleAlloc returns [EObject current=null] : (otherlv_0= 'alloca' ( ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_typelist_2_0= ruleTypeList ) )? ) (otherlv_3= ',' ( (lv_numelementstype_4_0= ruleTypeUse ) ) ( (lv_numelementsvalue_5_0= ruleValue ) ) )? (otherlv_6= ',' ruleALIGNMENT )? ) ;
     public final EObject ruleAlloc() throws RecognitionException {
         EObject current = null;
 
@@ -14528,24 +14522,24 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5345:28: ( (otherlv_0= 'alloca' ( ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_typelist_2_0= ruleTypeList ) )? ) (otherlv_3= ',' ( (lv_numelementstype_4_0= ruleTypeUse ) ) ( (lv_numelementsvalue_5_0= ruleValue ) ) )? (otherlv_6= ',' ruleALIGNMENT )? ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5346:1: (otherlv_0= 'alloca' ( ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_typelist_2_0= ruleTypeList ) )? ) (otherlv_3= ',' ( (lv_numelementstype_4_0= ruleTypeUse ) ) ( (lv_numelementsvalue_5_0= ruleValue ) ) )? (otherlv_6= ',' ruleALIGNMENT )? )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5347:28: ( (otherlv_0= 'alloca' ( ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_typelist_2_0= ruleTypeList ) )? ) (otherlv_3= ',' ( (lv_numelementstype_4_0= ruleTypeUse ) ) ( (lv_numelementsvalue_5_0= ruleValue ) ) )? (otherlv_6= ',' ruleALIGNMENT )? ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5348:1: (otherlv_0= 'alloca' ( ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_typelist_2_0= ruleTypeList ) )? ) (otherlv_3= ',' ( (lv_numelementstype_4_0= ruleTypeUse ) ) ( (lv_numelementsvalue_5_0= ruleValue ) ) )? (otherlv_6= ',' ruleALIGNMENT )? )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5346:1: (otherlv_0= 'alloca' ( ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_typelist_2_0= ruleTypeList ) )? ) (otherlv_3= ',' ( (lv_numelementstype_4_0= ruleTypeUse ) ) ( (lv_numelementsvalue_5_0= ruleValue ) ) )? (otherlv_6= ',' ruleALIGNMENT )? )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5346:3: otherlv_0= 'alloca' ( ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_typelist_2_0= ruleTypeList ) )? ) (otherlv_3= ',' ( (lv_numelementstype_4_0= ruleTypeUse ) ) ( (lv_numelementsvalue_5_0= ruleValue ) ) )? (otherlv_6= ',' ruleALIGNMENT )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5348:1: (otherlv_0= 'alloca' ( ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_typelist_2_0= ruleTypeList ) )? ) (otherlv_3= ',' ( (lv_numelementstype_4_0= ruleTypeUse ) ) ( (lv_numelementsvalue_5_0= ruleValue ) ) )? (otherlv_6= ',' ruleALIGNMENT )? )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5348:3: otherlv_0= 'alloca' ( ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_typelist_2_0= ruleTypeList ) )? ) (otherlv_3= ',' ( (lv_numelementstype_4_0= ruleTypeUse ) ) ( (lv_numelementsvalue_5_0= ruleValue ) ) )? (otherlv_6= ',' ruleALIGNMENT )?
             {
             otherlv_0=(Token)match(input,109,FOLLOW_109_in_ruleAlloc11877); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getAllocAccess().getAllocaKeyword_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5350:1: ( ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_typelist_2_0= ruleTypeList ) )? )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5350:2: ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_typelist_2_0= ruleTypeList ) )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5352:1: ( ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_typelist_2_0= ruleTypeList ) )? )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5352:2: ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_typelist_2_0= ruleTypeList ) )?
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5350:2: ( (lv_type_1_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5351:1: (lv_type_1_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5352:2: ( (lv_type_1_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5353:1: (lv_type_1_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5351:1: (lv_type_1_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5352:3: lv_type_1_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5353:1: (lv_type_1_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5354:3: lv_type_1_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getAllocAccess().getTypeTypeUseParserRuleCall_1_0_0()); 
@@ -14572,7 +14566,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5368:2: ( (lv_typelist_2_0= ruleTypeList ) )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5370:2: ( (lv_typelist_2_0= ruleTypeList ) )?
             int alt140=2;
             int LA140_0 = input.LA(1);
 
@@ -14581,10 +14575,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt140) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5369:1: (lv_typelist_2_0= ruleTypeList )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5371:1: (lv_typelist_2_0= ruleTypeList )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5369:1: (lv_typelist_2_0= ruleTypeList )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5370:3: lv_typelist_2_0= ruleTypeList
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5371:1: (lv_typelist_2_0= ruleTypeList )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5372:3: lv_typelist_2_0= ruleTypeList
                     {
                      
                     	        newCompositeNode(grammarAccess.getAllocAccess().getTypelistTypeListParserRuleCall_1_1_0()); 
@@ -14617,7 +14611,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5386:4: (otherlv_3= ',' ( (lv_numelementstype_4_0= ruleTypeUse ) ) ( (lv_numelementsvalue_5_0= ruleValue ) ) )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5388:4: (otherlv_3= ',' ( (lv_numelementstype_4_0= ruleTypeUse ) ) ( (lv_numelementsvalue_5_0= ruleValue ) ) )?
             int alt141=2;
             int LA141_0 = input.LA(1);
 
@@ -14630,17 +14624,17 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt141) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5386:6: otherlv_3= ',' ( (lv_numelementstype_4_0= ruleTypeUse ) ) ( (lv_numelementsvalue_5_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5388:6: otherlv_3= ',' ( (lv_numelementstype_4_0= ruleTypeUse ) ) ( (lv_numelementsvalue_5_0= ruleValue ) )
                     {
                     otherlv_3=(Token)match(input,30,FOLLOW_30_in_ruleAlloc11935); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getAllocAccess().getCommaKeyword_2_0());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5390:1: ( (lv_numelementstype_4_0= ruleTypeUse ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5391:1: (lv_numelementstype_4_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5392:1: ( (lv_numelementstype_4_0= ruleTypeUse ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5393:1: (lv_numelementstype_4_0= ruleTypeUse )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5391:1: (lv_numelementstype_4_0= ruleTypeUse )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5392:3: lv_numelementstype_4_0= ruleTypeUse
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5393:1: (lv_numelementstype_4_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5394:3: lv_numelementstype_4_0= ruleTypeUse
                     {
                      
                     	        newCompositeNode(grammarAccess.getAllocAccess().getNumelementstypeTypeUseParserRuleCall_2_1_0()); 
@@ -14667,11 +14661,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5408:2: ( (lv_numelementsvalue_5_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5409:1: (lv_numelementsvalue_5_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5410:2: ( (lv_numelementsvalue_5_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5411:1: (lv_numelementsvalue_5_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5409:1: (lv_numelementsvalue_5_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5410:3: lv_numelementsvalue_5_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5411:1: (lv_numelementsvalue_5_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5412:3: lv_numelementsvalue_5_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getAllocAccess().getNumelementsvalueValueParserRuleCall_2_2_0()); 
@@ -14704,7 +14698,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5426:4: (otherlv_6= ',' ruleALIGNMENT )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5428:4: (otherlv_6= ',' ruleALIGNMENT )?
             int alt142=2;
             int LA142_0 = input.LA(1);
 
@@ -14713,7 +14707,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt142) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5426:6: otherlv_6= ',' ruleALIGNMENT
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5428:6: otherlv_6= ',' ruleALIGNMENT
                     {
                     otherlv_6=(Token)match(input,30,FOLLOW_30_in_ruleAlloc11992); 
 
@@ -14757,7 +14751,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRulePHI"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5446:1: entryRulePHI returns [EObject current=null] : iv_rulePHI= rulePHI EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5448:1: entryRulePHI returns [EObject current=null] : iv_rulePHI= rulePHI EOF ;
     public final EObject entryRulePHI() throws RecognitionException {
         EObject current = null;
 
@@ -14765,8 +14759,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5447:2: (iv_rulePHI= rulePHI EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5448:2: iv_rulePHI= rulePHI EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5449:2: (iv_rulePHI= rulePHI EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5450:2: iv_rulePHI= rulePHI EOF
             {
              newCompositeNode(grammarAccess.getPHIRule()); 
             pushFollow(FOLLOW_rulePHI_in_entryRulePHI12045);
@@ -14793,7 +14787,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePHI"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5455:1: rulePHI returns [EObject current=null] : (otherlv_0= 'phi' ( (lv_type_1_0= ruleTypeUse ) ) otherlv_2= '[' ( (lv_firstclass_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_values_5_0= ruleValue ) ) otherlv_6= ']' (otherlv_7= ',' otherlv_8= '[' ( (lv_firstclass_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_values_11_0= ruleValue ) ) otherlv_12= ']' )* ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5457:1: rulePHI returns [EObject current=null] : (otherlv_0= 'phi' ( (lv_type_1_0= ruleTypeUse ) ) otherlv_2= '[' ( (lv_firstclass_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_values_5_0= ruleValue ) ) otherlv_6= ']' (otherlv_7= ',' otherlv_8= '[' ( (lv_firstclass_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_values_11_0= ruleValue ) ) otherlv_12= ']' )* ) ;
     public final EObject rulePHI() throws RecognitionException {
         EObject current = null;
 
@@ -14819,21 +14813,21 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5458:28: ( (otherlv_0= 'phi' ( (lv_type_1_0= ruleTypeUse ) ) otherlv_2= '[' ( (lv_firstclass_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_values_5_0= ruleValue ) ) otherlv_6= ']' (otherlv_7= ',' otherlv_8= '[' ( (lv_firstclass_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_values_11_0= ruleValue ) ) otherlv_12= ']' )* ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5459:1: (otherlv_0= 'phi' ( (lv_type_1_0= ruleTypeUse ) ) otherlv_2= '[' ( (lv_firstclass_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_values_5_0= ruleValue ) ) otherlv_6= ']' (otherlv_7= ',' otherlv_8= '[' ( (lv_firstclass_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_values_11_0= ruleValue ) ) otherlv_12= ']' )* )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5460:28: ( (otherlv_0= 'phi' ( (lv_type_1_0= ruleTypeUse ) ) otherlv_2= '[' ( (lv_firstclass_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_values_5_0= ruleValue ) ) otherlv_6= ']' (otherlv_7= ',' otherlv_8= '[' ( (lv_firstclass_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_values_11_0= ruleValue ) ) otherlv_12= ']' )* ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5461:1: (otherlv_0= 'phi' ( (lv_type_1_0= ruleTypeUse ) ) otherlv_2= '[' ( (lv_firstclass_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_values_5_0= ruleValue ) ) otherlv_6= ']' (otherlv_7= ',' otherlv_8= '[' ( (lv_firstclass_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_values_11_0= ruleValue ) ) otherlv_12= ']' )* )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5459:1: (otherlv_0= 'phi' ( (lv_type_1_0= ruleTypeUse ) ) otherlv_2= '[' ( (lv_firstclass_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_values_5_0= ruleValue ) ) otherlv_6= ']' (otherlv_7= ',' otherlv_8= '[' ( (lv_firstclass_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_values_11_0= ruleValue ) ) otherlv_12= ']' )* )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5459:3: otherlv_0= 'phi' ( (lv_type_1_0= ruleTypeUse ) ) otherlv_2= '[' ( (lv_firstclass_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_values_5_0= ruleValue ) ) otherlv_6= ']' (otherlv_7= ',' otherlv_8= '[' ( (lv_firstclass_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_values_11_0= ruleValue ) ) otherlv_12= ']' )*
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5461:1: (otherlv_0= 'phi' ( (lv_type_1_0= ruleTypeUse ) ) otherlv_2= '[' ( (lv_firstclass_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_values_5_0= ruleValue ) ) otherlv_6= ']' (otherlv_7= ',' otherlv_8= '[' ( (lv_firstclass_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_values_11_0= ruleValue ) ) otherlv_12= ']' )* )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5461:3: otherlv_0= 'phi' ( (lv_type_1_0= ruleTypeUse ) ) otherlv_2= '[' ( (lv_firstclass_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_values_5_0= ruleValue ) ) otherlv_6= ']' (otherlv_7= ',' otherlv_8= '[' ( (lv_firstclass_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_values_11_0= ruleValue ) ) otherlv_12= ']' )*
             {
             otherlv_0=(Token)match(input,110,FOLLOW_110_in_rulePHI12092); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getPHIAccess().getPhiKeyword_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5463:1: ( (lv_type_1_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5464:1: (lv_type_1_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5465:1: ( (lv_type_1_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5466:1: (lv_type_1_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5464:1: (lv_type_1_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5465:3: lv_type_1_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5466:1: (lv_type_1_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5467:3: lv_type_1_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getPHIAccess().getTypeTypeUseParserRuleCall_1_0()); 
@@ -14864,11 +14858,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_2, grammarAccess.getPHIAccess().getLeftSquareBracketKeyword_2());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5485:1: ( (lv_firstclass_3_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5486:1: (lv_firstclass_3_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5487:1: ( (lv_firstclass_3_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5488:1: (lv_firstclass_3_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5486:1: (lv_firstclass_3_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5487:3: lv_firstclass_3_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5488:1: (lv_firstclass_3_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5489:3: lv_firstclass_3_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getPHIAccess().getFirstclassValueParserRuleCall_3_0()); 
@@ -14899,11 +14893,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_4, grammarAccess.getPHIAccess().getCommaKeyword_4());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5507:1: ( (lv_values_5_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5508:1: (lv_values_5_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5509:1: ( (lv_values_5_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5510:1: (lv_values_5_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5508:1: (lv_values_5_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5509:3: lv_values_5_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5510:1: (lv_values_5_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5511:3: lv_values_5_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getPHIAccess().getValuesValueParserRuleCall_5_0()); 
@@ -14934,7 +14928,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_6, grammarAccess.getPHIAccess().getRightSquareBracketKeyword_6());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5529:1: (otherlv_7= ',' otherlv_8= '[' ( (lv_firstclass_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_values_11_0= ruleValue ) ) otherlv_12= ']' )*
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5531:1: (otherlv_7= ',' otherlv_8= '[' ( (lv_firstclass_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_values_11_0= ruleValue ) ) otherlv_12= ']' )*
             loop143:
             do {
                 int alt143=2;
@@ -14947,7 +14941,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 switch (alt143) {
             	case 1 :
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5529:3: otherlv_7= ',' otherlv_8= '[' ( (lv_firstclass_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_values_11_0= ruleValue ) ) otherlv_12= ']'
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5531:3: otherlv_7= ',' otherlv_8= '[' ( (lv_firstclass_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_values_11_0= ruleValue ) ) otherlv_12= ']'
             	    {
             	    otherlv_7=(Token)match(input,30,FOLLOW_30_in_rulePHI12204); 
 
@@ -14957,11 +14951,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             	        	newLeafNode(otherlv_8, grammarAccess.getPHIAccess().getLeftSquareBracketKeyword_7_1());
             	        
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5537:1: ( (lv_firstclass_9_0= ruleValue ) )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5538:1: (lv_firstclass_9_0= ruleValue )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5539:1: ( (lv_firstclass_9_0= ruleValue ) )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5540:1: (lv_firstclass_9_0= ruleValue )
             	    {
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5538:1: (lv_firstclass_9_0= ruleValue )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5539:3: lv_firstclass_9_0= ruleValue
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5540:1: (lv_firstclass_9_0= ruleValue )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5541:3: lv_firstclass_9_0= ruleValue
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getPHIAccess().getFirstclassValueParserRuleCall_7_2_0()); 
@@ -14992,11 +14986,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             	        	newLeafNode(otherlv_10, grammarAccess.getPHIAccess().getCommaKeyword_7_3());
             	        
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5559:1: ( (lv_values_11_0= ruleValue ) )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5560:1: (lv_values_11_0= ruleValue )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5561:1: ( (lv_values_11_0= ruleValue ) )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5562:1: (lv_values_11_0= ruleValue )
             	    {
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5560:1: (lv_values_11_0= ruleValue )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5561:3: lv_values_11_0= ruleValue
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5562:1: (lv_values_11_0= ruleValue )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5563:3: lv_values_11_0= ruleValue
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getPHIAccess().getValuesValueParserRuleCall_7_4_0()); 
@@ -15057,7 +15051,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleLandingPad"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5589:1: entryRuleLandingPad returns [EObject current=null] : iv_ruleLandingPad= ruleLandingPad EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5591:1: entryRuleLandingPad returns [EObject current=null] : iv_ruleLandingPad= ruleLandingPad EOF ;
     public final EObject entryRuleLandingPad() throws RecognitionException {
         EObject current = null;
 
@@ -15065,8 +15059,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5590:2: (iv_ruleLandingPad= ruleLandingPad EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5591:2: iv_ruleLandingPad= ruleLandingPad EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5592:2: (iv_ruleLandingPad= ruleLandingPad EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5593:2: iv_ruleLandingPad= ruleLandingPad EOF
             {
              newCompositeNode(grammarAccess.getLandingPadRule()); 
             pushFollow(FOLLOW_ruleLandingPad_in_entryRuleLandingPad12320);
@@ -15093,7 +15087,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLandingPad"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5598:1: ruleLandingPad returns [EObject current=null] : (otherlv_0= 'landingpad' ( (lv_struct_1_0= ruleStructure ) ) otherlv_2= 'personality' ( (lv_personalitytype_3_0= ruleTypeUse ) ) ( (lv_personalityvalue_4_0= ruleValue ) ) ( (otherlv_5= 'cleanup' ( (lv_clause_6_0= ruleClause ) )* ) | ( (lv_clause_7_0= ruleClause ) )+ ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5600:1: ruleLandingPad returns [EObject current=null] : (otherlv_0= 'landingpad' ( (lv_struct_1_0= ruleStructure ) ) otherlv_2= 'personality' ( (lv_personalitytype_3_0= ruleTypeUse ) ) ( (lv_personalityvalue_4_0= ruleValue ) ) ( (otherlv_5= 'cleanup' ( (lv_clause_6_0= ruleClause ) )* ) | ( (lv_clause_7_0= ruleClause ) )+ ) ) ;
     public final EObject ruleLandingPad() throws RecognitionException {
         EObject current = null;
 
@@ -15114,21 +15108,21 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5601:28: ( (otherlv_0= 'landingpad' ( (lv_struct_1_0= ruleStructure ) ) otherlv_2= 'personality' ( (lv_personalitytype_3_0= ruleTypeUse ) ) ( (lv_personalityvalue_4_0= ruleValue ) ) ( (otherlv_5= 'cleanup' ( (lv_clause_6_0= ruleClause ) )* ) | ( (lv_clause_7_0= ruleClause ) )+ ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5602:1: (otherlv_0= 'landingpad' ( (lv_struct_1_0= ruleStructure ) ) otherlv_2= 'personality' ( (lv_personalitytype_3_0= ruleTypeUse ) ) ( (lv_personalityvalue_4_0= ruleValue ) ) ( (otherlv_5= 'cleanup' ( (lv_clause_6_0= ruleClause ) )* ) | ( (lv_clause_7_0= ruleClause ) )+ ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5603:28: ( (otherlv_0= 'landingpad' ( (lv_struct_1_0= ruleStructure ) ) otherlv_2= 'personality' ( (lv_personalitytype_3_0= ruleTypeUse ) ) ( (lv_personalityvalue_4_0= ruleValue ) ) ( (otherlv_5= 'cleanup' ( (lv_clause_6_0= ruleClause ) )* ) | ( (lv_clause_7_0= ruleClause ) )+ ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5604:1: (otherlv_0= 'landingpad' ( (lv_struct_1_0= ruleStructure ) ) otherlv_2= 'personality' ( (lv_personalitytype_3_0= ruleTypeUse ) ) ( (lv_personalityvalue_4_0= ruleValue ) ) ( (otherlv_5= 'cleanup' ( (lv_clause_6_0= ruleClause ) )* ) | ( (lv_clause_7_0= ruleClause ) )+ ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5602:1: (otherlv_0= 'landingpad' ( (lv_struct_1_0= ruleStructure ) ) otherlv_2= 'personality' ( (lv_personalitytype_3_0= ruleTypeUse ) ) ( (lv_personalityvalue_4_0= ruleValue ) ) ( (otherlv_5= 'cleanup' ( (lv_clause_6_0= ruleClause ) )* ) | ( (lv_clause_7_0= ruleClause ) )+ ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5602:3: otherlv_0= 'landingpad' ( (lv_struct_1_0= ruleStructure ) ) otherlv_2= 'personality' ( (lv_personalitytype_3_0= ruleTypeUse ) ) ( (lv_personalityvalue_4_0= ruleValue ) ) ( (otherlv_5= 'cleanup' ( (lv_clause_6_0= ruleClause ) )* ) | ( (lv_clause_7_0= ruleClause ) )+ )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5604:1: (otherlv_0= 'landingpad' ( (lv_struct_1_0= ruleStructure ) ) otherlv_2= 'personality' ( (lv_personalitytype_3_0= ruleTypeUse ) ) ( (lv_personalityvalue_4_0= ruleValue ) ) ( (otherlv_5= 'cleanup' ( (lv_clause_6_0= ruleClause ) )* ) | ( (lv_clause_7_0= ruleClause ) )+ ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5604:3: otherlv_0= 'landingpad' ( (lv_struct_1_0= ruleStructure ) ) otherlv_2= 'personality' ( (lv_personalitytype_3_0= ruleTypeUse ) ) ( (lv_personalityvalue_4_0= ruleValue ) ) ( (otherlv_5= 'cleanup' ( (lv_clause_6_0= ruleClause ) )* ) | ( (lv_clause_7_0= ruleClause ) )+ )
             {
             otherlv_0=(Token)match(input,111,FOLLOW_111_in_ruleLandingPad12367); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getLandingPadAccess().getLandingpadKeyword_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5606:1: ( (lv_struct_1_0= ruleStructure ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5607:1: (lv_struct_1_0= ruleStructure )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5608:1: ( (lv_struct_1_0= ruleStructure ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5609:1: (lv_struct_1_0= ruleStructure )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5607:1: (lv_struct_1_0= ruleStructure )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5608:3: lv_struct_1_0= ruleStructure
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5609:1: (lv_struct_1_0= ruleStructure )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5610:3: lv_struct_1_0= ruleStructure
             {
              
             	        newCompositeNode(grammarAccess.getLandingPadAccess().getStructStructureParserRuleCall_1_0()); 
@@ -15159,11 +15153,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_2, grammarAccess.getLandingPadAccess().getPersonalityKeyword_2());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5628:1: ( (lv_personalitytype_3_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5629:1: (lv_personalitytype_3_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5630:1: ( (lv_personalitytype_3_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5631:1: (lv_personalitytype_3_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5629:1: (lv_personalitytype_3_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5630:3: lv_personalitytype_3_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5631:1: (lv_personalitytype_3_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5632:3: lv_personalitytype_3_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getLandingPadAccess().getPersonalitytypeTypeUseParserRuleCall_3_0()); 
@@ -15190,11 +15184,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5646:2: ( (lv_personalityvalue_4_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5647:1: (lv_personalityvalue_4_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5648:2: ( (lv_personalityvalue_4_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5649:1: (lv_personalityvalue_4_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5647:1: (lv_personalityvalue_4_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5648:3: lv_personalityvalue_4_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5649:1: (lv_personalityvalue_4_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5650:3: lv_personalityvalue_4_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getLandingPadAccess().getPersonalityvalueValueParserRuleCall_4_0()); 
@@ -15221,7 +15215,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5664:2: ( (otherlv_5= 'cleanup' ( (lv_clause_6_0= ruleClause ) )* ) | ( (lv_clause_7_0= ruleClause ) )+ )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5666:2: ( (otherlv_5= 'cleanup' ( (lv_clause_6_0= ruleClause ) )* ) | ( (lv_clause_7_0= ruleClause ) )+ )
             int alt146=2;
             int LA146_0 = input.LA(1);
 
@@ -15239,16 +15233,16 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt146) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5664:3: (otherlv_5= 'cleanup' ( (lv_clause_6_0= ruleClause ) )* )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5666:3: (otherlv_5= 'cleanup' ( (lv_clause_6_0= ruleClause ) )* )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5664:3: (otherlv_5= 'cleanup' ( (lv_clause_6_0= ruleClause ) )* )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5664:5: otherlv_5= 'cleanup' ( (lv_clause_6_0= ruleClause ) )*
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5666:3: (otherlv_5= 'cleanup' ( (lv_clause_6_0= ruleClause ) )* )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5666:5: otherlv_5= 'cleanup' ( (lv_clause_6_0= ruleClause ) )*
                     {
                     otherlv_5=(Token)match(input,113,FOLLOW_113_in_ruleLandingPad12456); 
 
                         	newLeafNode(otherlv_5, grammarAccess.getLandingPadAccess().getCleanupKeyword_5_0_0());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5668:1: ( (lv_clause_6_0= ruleClause ) )*
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5670:1: ( (lv_clause_6_0= ruleClause ) )*
                     loop144:
                     do {
                         int alt144=2;
@@ -15261,10 +15255,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                         switch (alt144) {
                     	case 1 :
-                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5669:1: (lv_clause_6_0= ruleClause )
+                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5671:1: (lv_clause_6_0= ruleClause )
                     	    {
-                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5669:1: (lv_clause_6_0= ruleClause )
-                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5670:3: lv_clause_6_0= ruleClause
+                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5671:1: (lv_clause_6_0= ruleClause )
+                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5672:3: lv_clause_6_0= ruleClause
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getLandingPadAccess().getClauseClauseParserRuleCall_5_0_1_0()); 
@@ -15304,9 +15298,9 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5687:6: ( (lv_clause_7_0= ruleClause ) )+
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5689:6: ( (lv_clause_7_0= ruleClause ) )+
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5687:6: ( (lv_clause_7_0= ruleClause ) )+
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5689:6: ( (lv_clause_7_0= ruleClause ) )+
                     int cnt145=0;
                     loop145:
                     do {
@@ -15320,10 +15314,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                         switch (alt145) {
                     	case 1 :
-                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5688:1: (lv_clause_7_0= ruleClause )
+                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5690:1: (lv_clause_7_0= ruleClause )
                     	    {
-                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5688:1: (lv_clause_7_0= ruleClause )
-                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5689:3: lv_clause_7_0= ruleClause
+                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5690:1: (lv_clause_7_0= ruleClause )
+                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5691:3: lv_clause_7_0= ruleClause
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getLandingPadAccess().getClauseClauseParserRuleCall_5_1_0()); 
@@ -15387,7 +15381,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleClause"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5713:1: entryRuleClause returns [EObject current=null] : iv_ruleClause= ruleClause EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5715:1: entryRuleClause returns [EObject current=null] : iv_ruleClause= ruleClause EOF ;
     public final EObject entryRuleClause() throws RecognitionException {
         EObject current = null;
 
@@ -15395,8 +15389,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5714:2: (iv_ruleClause= ruleClause EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5715:2: iv_ruleClause= ruleClause EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5716:2: (iv_ruleClause= ruleClause EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5717:2: iv_ruleClause= ruleClause EOF
             {
              newCompositeNode(grammarAccess.getClauseRule()); 
             pushFollow(FOLLOW_ruleClause_in_entryRuleClause12544);
@@ -15423,7 +15417,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleClause"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5722:1: ruleClause returns [EObject current=null] : ( (otherlv_0= 'catch' ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_value_2_0= ruleValue ) ) ) | (otherlv_3= 'filter' ( (lv_filterarray_4_0= ruleArray ) ) ( (lv_constant_5_0= ruleValue ) ) ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5724:1: ruleClause returns [EObject current=null] : ( (otherlv_0= 'catch' ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_value_2_0= ruleValue ) ) ) | (otherlv_3= 'filter' ( (lv_filterarray_4_0= ruleArray ) ) ( (lv_constant_5_0= ruleValue ) ) ) ) ;
     public final EObject ruleClause() throws RecognitionException {
         EObject current = null;
 
@@ -15441,10 +15435,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5725:28: ( ( (otherlv_0= 'catch' ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_value_2_0= ruleValue ) ) ) | (otherlv_3= 'filter' ( (lv_filterarray_4_0= ruleArray ) ) ( (lv_constant_5_0= ruleValue ) ) ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5726:1: ( (otherlv_0= 'catch' ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_value_2_0= ruleValue ) ) ) | (otherlv_3= 'filter' ( (lv_filterarray_4_0= ruleArray ) ) ( (lv_constant_5_0= ruleValue ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5727:28: ( ( (otherlv_0= 'catch' ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_value_2_0= ruleValue ) ) ) | (otherlv_3= 'filter' ( (lv_filterarray_4_0= ruleArray ) ) ( (lv_constant_5_0= ruleValue ) ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5728:1: ( (otherlv_0= 'catch' ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_value_2_0= ruleValue ) ) ) | (otherlv_3= 'filter' ( (lv_filterarray_4_0= ruleArray ) ) ( (lv_constant_5_0= ruleValue ) ) ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5726:1: ( (otherlv_0= 'catch' ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_value_2_0= ruleValue ) ) ) | (otherlv_3= 'filter' ( (lv_filterarray_4_0= ruleArray ) ) ( (lv_constant_5_0= ruleValue ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5728:1: ( (otherlv_0= 'catch' ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_value_2_0= ruleValue ) ) ) | (otherlv_3= 'filter' ( (lv_filterarray_4_0= ruleArray ) ) ( (lv_constant_5_0= ruleValue ) ) ) )
             int alt147=2;
             int LA147_0 = input.LA(1);
 
@@ -15462,20 +15456,20 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt147) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5726:2: (otherlv_0= 'catch' ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_value_2_0= ruleValue ) ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5728:2: (otherlv_0= 'catch' ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_value_2_0= ruleValue ) ) )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5726:2: (otherlv_0= 'catch' ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_value_2_0= ruleValue ) ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5726:4: otherlv_0= 'catch' ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_value_2_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5728:2: (otherlv_0= 'catch' ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_value_2_0= ruleValue ) ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5728:4: otherlv_0= 'catch' ( (lv_type_1_0= ruleTypeUse ) ) ( (lv_value_2_0= ruleValue ) )
                     {
                     otherlv_0=(Token)match(input,15,FOLLOW_15_in_ruleClause12592); 
 
                         	newLeafNode(otherlv_0, grammarAccess.getClauseAccess().getCatchKeyword_0_0());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5730:1: ( (lv_type_1_0= ruleTypeUse ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5731:1: (lv_type_1_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5732:1: ( (lv_type_1_0= ruleTypeUse ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5733:1: (lv_type_1_0= ruleTypeUse )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5731:1: (lv_type_1_0= ruleTypeUse )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5732:3: lv_type_1_0= ruleTypeUse
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5733:1: (lv_type_1_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5734:3: lv_type_1_0= ruleTypeUse
                     {
                      
                     	        newCompositeNode(grammarAccess.getClauseAccess().getTypeTypeUseParserRuleCall_0_1_0()); 
@@ -15502,11 +15496,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5748:2: ( (lv_value_2_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5749:1: (lv_value_2_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5750:2: ( (lv_value_2_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5751:1: (lv_value_2_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5749:1: (lv_value_2_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5750:3: lv_value_2_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5751:1: (lv_value_2_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5752:3: lv_value_2_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getClauseAccess().getValueValueParserRuleCall_0_2_0()); 
@@ -15540,20 +15534,20 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5767:6: (otherlv_3= 'filter' ( (lv_filterarray_4_0= ruleArray ) ) ( (lv_constant_5_0= ruleValue ) ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5769:6: (otherlv_3= 'filter' ( (lv_filterarray_4_0= ruleArray ) ) ( (lv_constant_5_0= ruleValue ) ) )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5767:6: (otherlv_3= 'filter' ( (lv_filterarray_4_0= ruleArray ) ) ( (lv_constant_5_0= ruleValue ) ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5767:8: otherlv_3= 'filter' ( (lv_filterarray_4_0= ruleArray ) ) ( (lv_constant_5_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5769:6: (otherlv_3= 'filter' ( (lv_filterarray_4_0= ruleArray ) ) ( (lv_constant_5_0= ruleValue ) ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5769:8: otherlv_3= 'filter' ( (lv_filterarray_4_0= ruleArray ) ) ( (lv_constant_5_0= ruleValue ) )
                     {
                     otherlv_3=(Token)match(input,114,FOLLOW_114_in_ruleClause12654); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getClauseAccess().getFilterKeyword_1_0());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5771:1: ( (lv_filterarray_4_0= ruleArray ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5772:1: (lv_filterarray_4_0= ruleArray )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5773:1: ( (lv_filterarray_4_0= ruleArray ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5774:1: (lv_filterarray_4_0= ruleArray )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5772:1: (lv_filterarray_4_0= ruleArray )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5773:3: lv_filterarray_4_0= ruleArray
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5774:1: (lv_filterarray_4_0= ruleArray )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5775:3: lv_filterarray_4_0= ruleArray
                     {
                      
                     	        newCompositeNode(grammarAccess.getClauseAccess().getFilterarrayArrayParserRuleCall_1_1_0()); 
@@ -15580,11 +15574,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5789:2: ( (lv_constant_5_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5790:1: (lv_constant_5_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5791:2: ( (lv_constant_5_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5792:1: (lv_constant_5_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5790:1: (lv_constant_5_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5791:3: lv_constant_5_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5792:1: (lv_constant_5_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5793:3: lv_constant_5_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getClauseAccess().getConstantValueParserRuleCall_1_2_0()); 
@@ -15638,7 +15632,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSelect"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5815:1: entryRuleSelect returns [EObject current=null] : iv_ruleSelect= ruleSelect EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5817:1: entryRuleSelect returns [EObject current=null] : iv_ruleSelect= ruleSelect EOF ;
     public final EObject entryRuleSelect() throws RecognitionException {
         EObject current = null;
 
@@ -15646,8 +15640,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5816:2: (iv_ruleSelect= ruleSelect EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5817:2: iv_ruleSelect= ruleSelect EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5818:2: (iv_ruleSelect= ruleSelect EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5819:2: iv_ruleSelect= ruleSelect EOF
             {
              newCompositeNode(grammarAccess.getSelectRule()); 
             pushFollow(FOLLOW_ruleSelect_in_entryRuleSelect12733);
@@ -15674,7 +15668,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSelect"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5824:1: ruleSelect returns [EObject current=null] : (otherlv_0= 'select' ( (lv_conditiontype_1_0= ruleTypeUse ) ) ( (lv_conditionvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val1type_4_0= ruleTypeUse ) ) ( (lv_val1value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_val2type_7_0= ruleTypeUse ) ) ( (lv_val2value_8_0= ruleValue ) ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5826:1: ruleSelect returns [EObject current=null] : (otherlv_0= 'select' ( (lv_conditiontype_1_0= ruleTypeUse ) ) ( (lv_conditionvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val1type_4_0= ruleTypeUse ) ) ( (lv_val1value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_val2type_7_0= ruleTypeUse ) ) ( (lv_val2value_8_0= ruleValue ) ) ) ;
     public final EObject ruleSelect() throws RecognitionException {
         EObject current = null;
 
@@ -15697,21 +15691,21 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5827:28: ( (otherlv_0= 'select' ( (lv_conditiontype_1_0= ruleTypeUse ) ) ( (lv_conditionvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val1type_4_0= ruleTypeUse ) ) ( (lv_val1value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_val2type_7_0= ruleTypeUse ) ) ( (lv_val2value_8_0= ruleValue ) ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5828:1: (otherlv_0= 'select' ( (lv_conditiontype_1_0= ruleTypeUse ) ) ( (lv_conditionvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val1type_4_0= ruleTypeUse ) ) ( (lv_val1value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_val2type_7_0= ruleTypeUse ) ) ( (lv_val2value_8_0= ruleValue ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5829:28: ( (otherlv_0= 'select' ( (lv_conditiontype_1_0= ruleTypeUse ) ) ( (lv_conditionvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val1type_4_0= ruleTypeUse ) ) ( (lv_val1value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_val2type_7_0= ruleTypeUse ) ) ( (lv_val2value_8_0= ruleValue ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5830:1: (otherlv_0= 'select' ( (lv_conditiontype_1_0= ruleTypeUse ) ) ( (lv_conditionvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val1type_4_0= ruleTypeUse ) ) ( (lv_val1value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_val2type_7_0= ruleTypeUse ) ) ( (lv_val2value_8_0= ruleValue ) ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5828:1: (otherlv_0= 'select' ( (lv_conditiontype_1_0= ruleTypeUse ) ) ( (lv_conditionvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val1type_4_0= ruleTypeUse ) ) ( (lv_val1value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_val2type_7_0= ruleTypeUse ) ) ( (lv_val2value_8_0= ruleValue ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5828:3: otherlv_0= 'select' ( (lv_conditiontype_1_0= ruleTypeUse ) ) ( (lv_conditionvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val1type_4_0= ruleTypeUse ) ) ( (lv_val1value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_val2type_7_0= ruleTypeUse ) ) ( (lv_val2value_8_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5830:1: (otherlv_0= 'select' ( (lv_conditiontype_1_0= ruleTypeUse ) ) ( (lv_conditionvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val1type_4_0= ruleTypeUse ) ) ( (lv_val1value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_val2type_7_0= ruleTypeUse ) ) ( (lv_val2value_8_0= ruleValue ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5830:3: otherlv_0= 'select' ( (lv_conditiontype_1_0= ruleTypeUse ) ) ( (lv_conditionvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val1type_4_0= ruleTypeUse ) ) ( (lv_val1value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_val2type_7_0= ruleTypeUse ) ) ( (lv_val2value_8_0= ruleValue ) )
             {
             otherlv_0=(Token)match(input,115,FOLLOW_115_in_ruleSelect12780); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getSelectAccess().getSelectKeyword_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5832:1: ( (lv_conditiontype_1_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5833:1: (lv_conditiontype_1_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5834:1: ( (lv_conditiontype_1_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5835:1: (lv_conditiontype_1_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5833:1: (lv_conditiontype_1_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5834:3: lv_conditiontype_1_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5835:1: (lv_conditiontype_1_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5836:3: lv_conditiontype_1_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getSelectAccess().getConditiontypeTypeUseParserRuleCall_1_0()); 
@@ -15738,11 +15732,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5850:2: ( (lv_conditionvalue_2_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5851:1: (lv_conditionvalue_2_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5852:2: ( (lv_conditionvalue_2_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5853:1: (lv_conditionvalue_2_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5851:1: (lv_conditionvalue_2_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5852:3: lv_conditionvalue_2_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5853:1: (lv_conditionvalue_2_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5854:3: lv_conditionvalue_2_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getSelectAccess().getConditionvalueValueParserRuleCall_2_0()); 
@@ -15773,11 +15767,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_3, grammarAccess.getSelectAccess().getCommaKeyword_3());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5872:1: ( (lv_val1type_4_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5873:1: (lv_val1type_4_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5874:1: ( (lv_val1type_4_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5875:1: (lv_val1type_4_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5873:1: (lv_val1type_4_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5874:3: lv_val1type_4_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5875:1: (lv_val1type_4_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5876:3: lv_val1type_4_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getSelectAccess().getVal1typeTypeUseParserRuleCall_4_0()); 
@@ -15804,11 +15798,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5890:2: ( (lv_val1value_5_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5891:1: (lv_val1value_5_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5892:2: ( (lv_val1value_5_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5893:1: (lv_val1value_5_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5891:1: (lv_val1value_5_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5892:3: lv_val1value_5_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5893:1: (lv_val1value_5_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5894:3: lv_val1value_5_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getSelectAccess().getVal1valueValueParserRuleCall_5_0()); 
@@ -15839,11 +15833,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_6, grammarAccess.getSelectAccess().getCommaKeyword_6());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5912:1: ( (lv_val2type_7_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5913:1: (lv_val2type_7_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5914:1: ( (lv_val2type_7_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5915:1: (lv_val2type_7_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5913:1: (lv_val2type_7_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5914:3: lv_val2type_7_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5915:1: (lv_val2type_7_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5916:3: lv_val2type_7_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getSelectAccess().getVal2typeTypeUseParserRuleCall_7_0()); 
@@ -15870,11 +15864,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5930:2: ( (lv_val2value_8_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5931:1: (lv_val2value_8_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5932:2: ( (lv_val2value_8_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5933:1: (lv_val2value_8_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5931:1: (lv_val2value_8_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5932:3: lv_val2value_8_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5933:1: (lv_val2value_8_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5934:3: lv_val2value_8_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getSelectAccess().getVal2valueValueParserRuleCall_8_0()); 
@@ -15922,7 +15916,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVA_Arg"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5956:1: entryRuleVA_Arg returns [EObject current=null] : iv_ruleVA_Arg= ruleVA_Arg EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5958:1: entryRuleVA_Arg returns [EObject current=null] : iv_ruleVA_Arg= ruleVA_Arg EOF ;
     public final EObject entryRuleVA_Arg() throws RecognitionException {
         EObject current = null;
 
@@ -15930,8 +15924,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5957:2: (iv_ruleVA_Arg= ruleVA_Arg EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5958:2: iv_ruleVA_Arg= ruleVA_Arg EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5959:2: (iv_ruleVA_Arg= ruleVA_Arg EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5960:2: iv_ruleVA_Arg= ruleVA_Arg EOF
             {
              newCompositeNode(grammarAccess.getVA_ArgRule()); 
             pushFollow(FOLLOW_ruleVA_Arg_in_entryRuleVA_Arg12966);
@@ -15958,7 +15952,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVA_Arg"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5965:1: ruleVA_Arg returns [EObject current=null] : (otherlv_0= 'va_arg' ( (lv_listtype_1_0= ruleTypeUse ) ) ( (lv_listvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_argType_4_0= ruleTypeUse ) ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5967:1: ruleVA_Arg returns [EObject current=null] : (otherlv_0= 'va_arg' ( (lv_listtype_1_0= ruleTypeUse ) ) ( (lv_listvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_argType_4_0= ruleTypeUse ) ) ) ;
     public final EObject ruleVA_Arg() throws RecognitionException {
         EObject current = null;
 
@@ -15974,21 +15968,21 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5968:28: ( (otherlv_0= 'va_arg' ( (lv_listtype_1_0= ruleTypeUse ) ) ( (lv_listvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_argType_4_0= ruleTypeUse ) ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5969:1: (otherlv_0= 'va_arg' ( (lv_listtype_1_0= ruleTypeUse ) ) ( (lv_listvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_argType_4_0= ruleTypeUse ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5970:28: ( (otherlv_0= 'va_arg' ( (lv_listtype_1_0= ruleTypeUse ) ) ( (lv_listvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_argType_4_0= ruleTypeUse ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5971:1: (otherlv_0= 'va_arg' ( (lv_listtype_1_0= ruleTypeUse ) ) ( (lv_listvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_argType_4_0= ruleTypeUse ) ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5969:1: (otherlv_0= 'va_arg' ( (lv_listtype_1_0= ruleTypeUse ) ) ( (lv_listvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_argType_4_0= ruleTypeUse ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5969:3: otherlv_0= 'va_arg' ( (lv_listtype_1_0= ruleTypeUse ) ) ( (lv_listvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_argType_4_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5971:1: (otherlv_0= 'va_arg' ( (lv_listtype_1_0= ruleTypeUse ) ) ( (lv_listvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_argType_4_0= ruleTypeUse ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5971:3: otherlv_0= 'va_arg' ( (lv_listtype_1_0= ruleTypeUse ) ) ( (lv_listvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_argType_4_0= ruleTypeUse ) )
             {
             otherlv_0=(Token)match(input,116,FOLLOW_116_in_ruleVA_Arg13013); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getVA_ArgAccess().getVa_argKeyword_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5973:1: ( (lv_listtype_1_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5974:1: (lv_listtype_1_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5975:1: ( (lv_listtype_1_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5976:1: (lv_listtype_1_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5974:1: (lv_listtype_1_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5975:3: lv_listtype_1_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5976:1: (lv_listtype_1_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5977:3: lv_listtype_1_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getVA_ArgAccess().getListtypeTypeUseParserRuleCall_1_0()); 
@@ -16015,11 +16009,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5991:2: ( (lv_listvalue_2_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5992:1: (lv_listvalue_2_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5993:2: ( (lv_listvalue_2_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5994:1: (lv_listvalue_2_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5992:1: (lv_listvalue_2_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5993:3: lv_listvalue_2_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5994:1: (lv_listvalue_2_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:5995:3: lv_listvalue_2_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getVA_ArgAccess().getListvalueValueParserRuleCall_2_0()); 
@@ -16050,11 +16044,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_3, grammarAccess.getVA_ArgAccess().getCommaKeyword_3());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6013:1: ( (lv_argType_4_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6014:1: (lv_argType_4_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6015:1: ( (lv_argType_4_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6016:1: (lv_argType_4_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6014:1: (lv_argType_4_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6015:3: lv_argType_4_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6016:1: (lv_argType_4_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6017:3: lv_argType_4_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getVA_ArgAccess().getArgTypeTypeUseParserRuleCall_4_0()); 
@@ -16102,7 +16096,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleExtractElement"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6039:1: entryRuleExtractElement returns [EObject current=null] : iv_ruleExtractElement= ruleExtractElement EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6041:1: entryRuleExtractElement returns [EObject current=null] : iv_ruleExtractElement= ruleExtractElement EOF ;
     public final EObject entryRuleExtractElement() throws RecognitionException {
         EObject current = null;
 
@@ -16110,8 +16104,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6040:2: (iv_ruleExtractElement= ruleExtractElement EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6041:2: iv_ruleExtractElement= ruleExtractElement EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6042:2: (iv_ruleExtractElement= ruleExtractElement EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6043:2: iv_ruleExtractElement= ruleExtractElement EOF
             {
              newCompositeNode(grammarAccess.getExtractElementRule()); 
             pushFollow(FOLLOW_ruleExtractElement_in_entryRuleExtractElement13124);
@@ -16138,7 +16132,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleExtractElement"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6048:1: ruleExtractElement returns [EObject current=null] : (otherlv_0= 'extractelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_indextype_4_0= ruleTypeUse ) ) ( (lv_index_5_0= ruleValue ) ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6050:1: ruleExtractElement returns [EObject current=null] : (otherlv_0= 'extractelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_indextype_4_0= ruleTypeUse ) ) ( (lv_index_5_0= ruleValue ) ) ) ;
     public final EObject ruleExtractElement() throws RecognitionException {
         EObject current = null;
 
@@ -16156,21 +16150,21 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6051:28: ( (otherlv_0= 'extractelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_indextype_4_0= ruleTypeUse ) ) ( (lv_index_5_0= ruleValue ) ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6052:1: (otherlv_0= 'extractelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_indextype_4_0= ruleTypeUse ) ) ( (lv_index_5_0= ruleValue ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6053:28: ( (otherlv_0= 'extractelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_indextype_4_0= ruleTypeUse ) ) ( (lv_index_5_0= ruleValue ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6054:1: (otherlv_0= 'extractelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_indextype_4_0= ruleTypeUse ) ) ( (lv_index_5_0= ruleValue ) ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6052:1: (otherlv_0= 'extractelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_indextype_4_0= ruleTypeUse ) ) ( (lv_index_5_0= ruleValue ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6052:3: otherlv_0= 'extractelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_indextype_4_0= ruleTypeUse ) ) ( (lv_index_5_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6054:1: (otherlv_0= 'extractelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_indextype_4_0= ruleTypeUse ) ) ( (lv_index_5_0= ruleValue ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6054:3: otherlv_0= 'extractelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_indextype_4_0= ruleTypeUse ) ) ( (lv_index_5_0= ruleValue ) )
             {
             otherlv_0=(Token)match(input,117,FOLLOW_117_in_ruleExtractElement13171); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getExtractElementAccess().getExtractelementKeyword_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6056:1: ( (lv_vectortype_1_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6057:1: (lv_vectortype_1_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6058:1: ( (lv_vectortype_1_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6059:1: (lv_vectortype_1_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6057:1: (lv_vectortype_1_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6058:3: lv_vectortype_1_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6059:1: (lv_vectortype_1_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6060:3: lv_vectortype_1_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getExtractElementAccess().getVectortypeTypeUseParserRuleCall_1_0()); 
@@ -16197,11 +16191,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6074:2: ( (lv_vectorvalue_2_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6075:1: (lv_vectorvalue_2_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6076:2: ( (lv_vectorvalue_2_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6077:1: (lv_vectorvalue_2_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6075:1: (lv_vectorvalue_2_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6076:3: lv_vectorvalue_2_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6077:1: (lv_vectorvalue_2_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6078:3: lv_vectorvalue_2_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getExtractElementAccess().getVectorvalueValueParserRuleCall_2_0()); 
@@ -16232,11 +16226,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_3, grammarAccess.getExtractElementAccess().getCommaKeyword_3());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6096:1: ( (lv_indextype_4_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6097:1: (lv_indextype_4_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6098:1: ( (lv_indextype_4_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6099:1: (lv_indextype_4_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6097:1: (lv_indextype_4_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6098:3: lv_indextype_4_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6099:1: (lv_indextype_4_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6100:3: lv_indextype_4_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getExtractElementAccess().getIndextypeTypeUseParserRuleCall_4_0()); 
@@ -16263,11 +16257,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6114:2: ( (lv_index_5_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6115:1: (lv_index_5_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6116:2: ( (lv_index_5_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6117:1: (lv_index_5_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6115:1: (lv_index_5_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6116:3: lv_index_5_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6117:1: (lv_index_5_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6118:3: lv_index_5_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getExtractElementAccess().getIndexValueParserRuleCall_5_0()); 
@@ -16315,7 +16309,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleInsertElement"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6140:1: entryRuleInsertElement returns [EObject current=null] : iv_ruleInsertElement= ruleInsertElement EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6142:1: entryRuleInsertElement returns [EObject current=null] : iv_ruleInsertElement= ruleInsertElement EOF ;
     public final EObject entryRuleInsertElement() throws RecognitionException {
         EObject current = null;
 
@@ -16323,8 +16317,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6141:2: (iv_ruleInsertElement= ruleInsertElement EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6142:2: iv_ruleInsertElement= ruleInsertElement EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6143:2: (iv_ruleInsertElement= ruleInsertElement EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6144:2: iv_ruleInsertElement= ruleInsertElement EOF
             {
              newCompositeNode(grammarAccess.getInsertElementRule()); 
             pushFollow(FOLLOW_ruleInsertElement_in_entryRuleInsertElement13303);
@@ -16351,7 +16345,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleInsertElement"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6149:1: ruleInsertElement returns [EObject current=null] : (otherlv_0= 'insertelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_scalartype_4_0= ruleTypeUse ) ) ( (lv_scalarvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_indextype_7_0= ruleTypeUse ) ) ( (lv_index_8_0= ruleValue ) ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6151:1: ruleInsertElement returns [EObject current=null] : (otherlv_0= 'insertelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_scalartype_4_0= ruleTypeUse ) ) ( (lv_scalarvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_indextype_7_0= ruleTypeUse ) ) ( (lv_index_8_0= ruleValue ) ) ) ;
     public final EObject ruleInsertElement() throws RecognitionException {
         EObject current = null;
 
@@ -16374,21 +16368,21 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6152:28: ( (otherlv_0= 'insertelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_scalartype_4_0= ruleTypeUse ) ) ( (lv_scalarvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_indextype_7_0= ruleTypeUse ) ) ( (lv_index_8_0= ruleValue ) ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6153:1: (otherlv_0= 'insertelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_scalartype_4_0= ruleTypeUse ) ) ( (lv_scalarvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_indextype_7_0= ruleTypeUse ) ) ( (lv_index_8_0= ruleValue ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6154:28: ( (otherlv_0= 'insertelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_scalartype_4_0= ruleTypeUse ) ) ( (lv_scalarvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_indextype_7_0= ruleTypeUse ) ) ( (lv_index_8_0= ruleValue ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6155:1: (otherlv_0= 'insertelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_scalartype_4_0= ruleTypeUse ) ) ( (lv_scalarvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_indextype_7_0= ruleTypeUse ) ) ( (lv_index_8_0= ruleValue ) ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6153:1: (otherlv_0= 'insertelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_scalartype_4_0= ruleTypeUse ) ) ( (lv_scalarvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_indextype_7_0= ruleTypeUse ) ) ( (lv_index_8_0= ruleValue ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6153:3: otherlv_0= 'insertelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_scalartype_4_0= ruleTypeUse ) ) ( (lv_scalarvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_indextype_7_0= ruleTypeUse ) ) ( (lv_index_8_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6155:1: (otherlv_0= 'insertelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_scalartype_4_0= ruleTypeUse ) ) ( (lv_scalarvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_indextype_7_0= ruleTypeUse ) ) ( (lv_index_8_0= ruleValue ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6155:3: otherlv_0= 'insertelement' ( (lv_vectortype_1_0= ruleTypeUse ) ) ( (lv_vectorvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_scalartype_4_0= ruleTypeUse ) ) ( (lv_scalarvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_indextype_7_0= ruleTypeUse ) ) ( (lv_index_8_0= ruleValue ) )
             {
             otherlv_0=(Token)match(input,118,FOLLOW_118_in_ruleInsertElement13350); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getInsertElementAccess().getInsertelementKeyword_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6157:1: ( (lv_vectortype_1_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6158:1: (lv_vectortype_1_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6159:1: ( (lv_vectortype_1_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6160:1: (lv_vectortype_1_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6158:1: (lv_vectortype_1_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6159:3: lv_vectortype_1_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6160:1: (lv_vectortype_1_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6161:3: lv_vectortype_1_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getInsertElementAccess().getVectortypeTypeUseParserRuleCall_1_0()); 
@@ -16415,11 +16409,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6175:2: ( (lv_vectorvalue_2_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6176:1: (lv_vectorvalue_2_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6177:2: ( (lv_vectorvalue_2_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6178:1: (lv_vectorvalue_2_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6176:1: (lv_vectorvalue_2_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6177:3: lv_vectorvalue_2_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6178:1: (lv_vectorvalue_2_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6179:3: lv_vectorvalue_2_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getInsertElementAccess().getVectorvalueValueParserRuleCall_2_0()); 
@@ -16450,11 +16444,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_3, grammarAccess.getInsertElementAccess().getCommaKeyword_3());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6197:1: ( (lv_scalartype_4_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6198:1: (lv_scalartype_4_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6199:1: ( (lv_scalartype_4_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6200:1: (lv_scalartype_4_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6198:1: (lv_scalartype_4_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6199:3: lv_scalartype_4_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6200:1: (lv_scalartype_4_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6201:3: lv_scalartype_4_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getInsertElementAccess().getScalartypeTypeUseParserRuleCall_4_0()); 
@@ -16481,11 +16475,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6215:2: ( (lv_scalarvalue_5_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6216:1: (lv_scalarvalue_5_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6217:2: ( (lv_scalarvalue_5_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6218:1: (lv_scalarvalue_5_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6216:1: (lv_scalarvalue_5_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6217:3: lv_scalarvalue_5_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6218:1: (lv_scalarvalue_5_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6219:3: lv_scalarvalue_5_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getInsertElementAccess().getScalarvalueValueParserRuleCall_5_0()); 
@@ -16516,11 +16510,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_6, grammarAccess.getInsertElementAccess().getCommaKeyword_6());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6237:1: ( (lv_indextype_7_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6238:1: (lv_indextype_7_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6239:1: ( (lv_indextype_7_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6240:1: (lv_indextype_7_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6238:1: (lv_indextype_7_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6239:3: lv_indextype_7_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6240:1: (lv_indextype_7_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6241:3: lv_indextype_7_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getInsertElementAccess().getIndextypeTypeUseParserRuleCall_7_0()); 
@@ -16547,11 +16541,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6255:2: ( (lv_index_8_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6256:1: (lv_index_8_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6257:2: ( (lv_index_8_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6258:1: (lv_index_8_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6256:1: (lv_index_8_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6257:3: lv_index_8_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6258:1: (lv_index_8_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6259:3: lv_index_8_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getInsertElementAccess().getIndexValueParserRuleCall_8_0()); 
@@ -16599,7 +16593,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleShuffleVector"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6281:1: entryRuleShuffleVector returns [EObject current=null] : iv_ruleShuffleVector= ruleShuffleVector EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6283:1: entryRuleShuffleVector returns [EObject current=null] : iv_ruleShuffleVector= ruleShuffleVector EOF ;
     public final EObject entryRuleShuffleVector() throws RecognitionException {
         EObject current = null;
 
@@ -16607,8 +16601,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6282:2: (iv_ruleShuffleVector= ruleShuffleVector EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6283:2: iv_ruleShuffleVector= ruleShuffleVector EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6284:2: (iv_ruleShuffleVector= ruleShuffleVector EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6285:2: iv_ruleShuffleVector= ruleShuffleVector EOF
             {
              newCompositeNode(grammarAccess.getShuffleVectorRule()); 
             pushFollow(FOLLOW_ruleShuffleVector_in_entryRuleShuffleVector13536);
@@ -16635,7 +16629,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleShuffleVector"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6290:1: ruleShuffleVector returns [EObject current=null] : (otherlv_0= 'shufflevector' ( (lv_val1type_1_0= ruleTypeUse ) ) ( (lv_val1value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val2type_4_0= ruleTypeUse ) ) ( (lv_val2value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_masktype_7_0= ruleTypeUse ) ) ( (lv_maskvalue_8_0= ruleValue ) ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6292:1: ruleShuffleVector returns [EObject current=null] : (otherlv_0= 'shufflevector' ( (lv_val1type_1_0= ruleTypeUse ) ) ( (lv_val1value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val2type_4_0= ruleTypeUse ) ) ( (lv_val2value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_masktype_7_0= ruleTypeUse ) ) ( (lv_maskvalue_8_0= ruleValue ) ) ) ;
     public final EObject ruleShuffleVector() throws RecognitionException {
         EObject current = null;
 
@@ -16658,21 +16652,21 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6293:28: ( (otherlv_0= 'shufflevector' ( (lv_val1type_1_0= ruleTypeUse ) ) ( (lv_val1value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val2type_4_0= ruleTypeUse ) ) ( (lv_val2value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_masktype_7_0= ruleTypeUse ) ) ( (lv_maskvalue_8_0= ruleValue ) ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6294:1: (otherlv_0= 'shufflevector' ( (lv_val1type_1_0= ruleTypeUse ) ) ( (lv_val1value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val2type_4_0= ruleTypeUse ) ) ( (lv_val2value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_masktype_7_0= ruleTypeUse ) ) ( (lv_maskvalue_8_0= ruleValue ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6295:28: ( (otherlv_0= 'shufflevector' ( (lv_val1type_1_0= ruleTypeUse ) ) ( (lv_val1value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val2type_4_0= ruleTypeUse ) ) ( (lv_val2value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_masktype_7_0= ruleTypeUse ) ) ( (lv_maskvalue_8_0= ruleValue ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6296:1: (otherlv_0= 'shufflevector' ( (lv_val1type_1_0= ruleTypeUse ) ) ( (lv_val1value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val2type_4_0= ruleTypeUse ) ) ( (lv_val2value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_masktype_7_0= ruleTypeUse ) ) ( (lv_maskvalue_8_0= ruleValue ) ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6294:1: (otherlv_0= 'shufflevector' ( (lv_val1type_1_0= ruleTypeUse ) ) ( (lv_val1value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val2type_4_0= ruleTypeUse ) ) ( (lv_val2value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_masktype_7_0= ruleTypeUse ) ) ( (lv_maskvalue_8_0= ruleValue ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6294:3: otherlv_0= 'shufflevector' ( (lv_val1type_1_0= ruleTypeUse ) ) ( (lv_val1value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val2type_4_0= ruleTypeUse ) ) ( (lv_val2value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_masktype_7_0= ruleTypeUse ) ) ( (lv_maskvalue_8_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6296:1: (otherlv_0= 'shufflevector' ( (lv_val1type_1_0= ruleTypeUse ) ) ( (lv_val1value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val2type_4_0= ruleTypeUse ) ) ( (lv_val2value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_masktype_7_0= ruleTypeUse ) ) ( (lv_maskvalue_8_0= ruleValue ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6296:3: otherlv_0= 'shufflevector' ( (lv_val1type_1_0= ruleTypeUse ) ) ( (lv_val1value_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_val2type_4_0= ruleTypeUse ) ) ( (lv_val2value_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_masktype_7_0= ruleTypeUse ) ) ( (lv_maskvalue_8_0= ruleValue ) )
             {
             otherlv_0=(Token)match(input,119,FOLLOW_119_in_ruleShuffleVector13583); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getShuffleVectorAccess().getShufflevectorKeyword_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6298:1: ( (lv_val1type_1_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6299:1: (lv_val1type_1_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6300:1: ( (lv_val1type_1_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6301:1: (lv_val1type_1_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6299:1: (lv_val1type_1_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6300:3: lv_val1type_1_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6301:1: (lv_val1type_1_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6302:3: lv_val1type_1_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getShuffleVectorAccess().getVal1typeTypeUseParserRuleCall_1_0()); 
@@ -16699,11 +16693,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6316:2: ( (lv_val1value_2_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6317:1: (lv_val1value_2_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6318:2: ( (lv_val1value_2_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6319:1: (lv_val1value_2_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6317:1: (lv_val1value_2_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6318:3: lv_val1value_2_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6319:1: (lv_val1value_2_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6320:3: lv_val1value_2_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getShuffleVectorAccess().getVal1valueValueParserRuleCall_2_0()); 
@@ -16734,11 +16728,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_3, grammarAccess.getShuffleVectorAccess().getCommaKeyword_3());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6338:1: ( (lv_val2type_4_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6339:1: (lv_val2type_4_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6340:1: ( (lv_val2type_4_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6341:1: (lv_val2type_4_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6339:1: (lv_val2type_4_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6340:3: lv_val2type_4_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6341:1: (lv_val2type_4_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6342:3: lv_val2type_4_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getShuffleVectorAccess().getVal2typeTypeUseParserRuleCall_4_0()); 
@@ -16765,11 +16759,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6356:2: ( (lv_val2value_5_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6357:1: (lv_val2value_5_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6358:2: ( (lv_val2value_5_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6359:1: (lv_val2value_5_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6357:1: (lv_val2value_5_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6358:3: lv_val2value_5_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6359:1: (lv_val2value_5_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6360:3: lv_val2value_5_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getShuffleVectorAccess().getVal2valueValueParserRuleCall_5_0()); 
@@ -16800,11 +16794,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_6, grammarAccess.getShuffleVectorAccess().getCommaKeyword_6());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6378:1: ( (lv_masktype_7_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6379:1: (lv_masktype_7_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6380:1: ( (lv_masktype_7_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6381:1: (lv_masktype_7_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6379:1: (lv_masktype_7_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6380:3: lv_masktype_7_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6381:1: (lv_masktype_7_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6382:3: lv_masktype_7_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getShuffleVectorAccess().getMasktypeTypeUseParserRuleCall_7_0()); 
@@ -16831,11 +16825,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6396:2: ( (lv_maskvalue_8_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6397:1: (lv_maskvalue_8_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6398:2: ( (lv_maskvalue_8_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6399:1: (lv_maskvalue_8_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6397:1: (lv_maskvalue_8_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6398:3: lv_maskvalue_8_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6399:1: (lv_maskvalue_8_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6400:3: lv_maskvalue_8_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getShuffleVectorAccess().getMaskvalueValueParserRuleCall_8_0()); 
@@ -16883,7 +16877,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleCompare"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6422:1: entryRuleCompare returns [EObject current=null] : iv_ruleCompare= ruleCompare EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6424:1: entryRuleCompare returns [EObject current=null] : iv_ruleCompare= ruleCompare EOF ;
     public final EObject entryRuleCompare() throws RecognitionException {
         EObject current = null;
 
@@ -16891,8 +16885,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6423:2: (iv_ruleCompare= ruleCompare EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6424:2: iv_ruleCompare= ruleCompare EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6425:2: (iv_ruleCompare= ruleCompare EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6426:2: iv_ruleCompare= ruleCompare EOF
             {
              newCompositeNode(grammarAccess.getCompareRule()); 
             pushFollow(FOLLOW_ruleCompare_in_entryRuleCompare13769);
@@ -16919,7 +16913,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCompare"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6431:1: ruleCompare returns [EObject current=null] : ( (otherlv_0= 'icmp' ruleI_PREDICATES ( (lv_comptype_2_0= ruleTypeUse ) ) ( (lv_value1_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_value2_5_0= ruleValue ) ) ) | (otherlv_6= 'fcmp' ruleF_PREDICATES ( (lv_comptype_8_0= ruleTypeUse ) ) ( (lv_value1_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_value2_11_0= ruleValue ) ) ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6433:1: ruleCompare returns [EObject current=null] : ( (otherlv_0= 'icmp' ruleI_PREDICATES ( (lv_comptype_2_0= ruleTypeUse ) ) ( (lv_value1_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_value2_5_0= ruleValue ) ) ) | (otherlv_6= 'fcmp' ruleF_PREDICATES ( (lv_comptype_8_0= ruleTypeUse ) ) ( (lv_value1_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_value2_11_0= ruleValue ) ) ) ) ;
     public final EObject ruleCompare() throws RecognitionException {
         EObject current = null;
 
@@ -16943,10 +16937,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6434:28: ( ( (otherlv_0= 'icmp' ruleI_PREDICATES ( (lv_comptype_2_0= ruleTypeUse ) ) ( (lv_value1_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_value2_5_0= ruleValue ) ) ) | (otherlv_6= 'fcmp' ruleF_PREDICATES ( (lv_comptype_8_0= ruleTypeUse ) ) ( (lv_value1_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_value2_11_0= ruleValue ) ) ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6435:1: ( (otherlv_0= 'icmp' ruleI_PREDICATES ( (lv_comptype_2_0= ruleTypeUse ) ) ( (lv_value1_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_value2_5_0= ruleValue ) ) ) | (otherlv_6= 'fcmp' ruleF_PREDICATES ( (lv_comptype_8_0= ruleTypeUse ) ) ( (lv_value1_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_value2_11_0= ruleValue ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6436:28: ( ( (otherlv_0= 'icmp' ruleI_PREDICATES ( (lv_comptype_2_0= ruleTypeUse ) ) ( (lv_value1_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_value2_5_0= ruleValue ) ) ) | (otherlv_6= 'fcmp' ruleF_PREDICATES ( (lv_comptype_8_0= ruleTypeUse ) ) ( (lv_value1_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_value2_11_0= ruleValue ) ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6437:1: ( (otherlv_0= 'icmp' ruleI_PREDICATES ( (lv_comptype_2_0= ruleTypeUse ) ) ( (lv_value1_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_value2_5_0= ruleValue ) ) ) | (otherlv_6= 'fcmp' ruleF_PREDICATES ( (lv_comptype_8_0= ruleTypeUse ) ) ( (lv_value1_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_value2_11_0= ruleValue ) ) ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6435:1: ( (otherlv_0= 'icmp' ruleI_PREDICATES ( (lv_comptype_2_0= ruleTypeUse ) ) ( (lv_value1_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_value2_5_0= ruleValue ) ) ) | (otherlv_6= 'fcmp' ruleF_PREDICATES ( (lv_comptype_8_0= ruleTypeUse ) ) ( (lv_value1_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_value2_11_0= ruleValue ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6437:1: ( (otherlv_0= 'icmp' ruleI_PREDICATES ( (lv_comptype_2_0= ruleTypeUse ) ) ( (lv_value1_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_value2_5_0= ruleValue ) ) ) | (otherlv_6= 'fcmp' ruleF_PREDICATES ( (lv_comptype_8_0= ruleTypeUse ) ) ( (lv_value1_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_value2_11_0= ruleValue ) ) ) )
             int alt148=2;
             int LA148_0 = input.LA(1);
 
@@ -16964,10 +16958,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt148) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6435:2: (otherlv_0= 'icmp' ruleI_PREDICATES ( (lv_comptype_2_0= ruleTypeUse ) ) ( (lv_value1_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_value2_5_0= ruleValue ) ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6437:2: (otherlv_0= 'icmp' ruleI_PREDICATES ( (lv_comptype_2_0= ruleTypeUse ) ) ( (lv_value1_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_value2_5_0= ruleValue ) ) )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6435:2: (otherlv_0= 'icmp' ruleI_PREDICATES ( (lv_comptype_2_0= ruleTypeUse ) ) ( (lv_value1_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_value2_5_0= ruleValue ) ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6435:4: otherlv_0= 'icmp' ruleI_PREDICATES ( (lv_comptype_2_0= ruleTypeUse ) ) ( (lv_value1_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_value2_5_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6437:2: (otherlv_0= 'icmp' ruleI_PREDICATES ( (lv_comptype_2_0= ruleTypeUse ) ) ( (lv_value1_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_value2_5_0= ruleValue ) ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6437:4: otherlv_0= 'icmp' ruleI_PREDICATES ( (lv_comptype_2_0= ruleTypeUse ) ) ( (lv_value1_3_0= ruleValue ) ) otherlv_4= ',' ( (lv_value2_5_0= ruleValue ) )
                     {
                     otherlv_0=(Token)match(input,120,FOLLOW_120_in_ruleCompare13817); 
 
@@ -16984,11 +16978,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                      
                             afterParserOrEnumRuleCall();
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6447:1: ( (lv_comptype_2_0= ruleTypeUse ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6448:1: (lv_comptype_2_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6449:1: ( (lv_comptype_2_0= ruleTypeUse ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6450:1: (lv_comptype_2_0= ruleTypeUse )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6448:1: (lv_comptype_2_0= ruleTypeUse )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6449:3: lv_comptype_2_0= ruleTypeUse
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6450:1: (lv_comptype_2_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6451:3: lv_comptype_2_0= ruleTypeUse
                     {
                      
                     	        newCompositeNode(grammarAccess.getCompareAccess().getComptypeTypeUseParserRuleCall_0_2_0()); 
@@ -17015,11 +17009,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6465:2: ( (lv_value1_3_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6466:1: (lv_value1_3_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6467:2: ( (lv_value1_3_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6468:1: (lv_value1_3_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6466:1: (lv_value1_3_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6467:3: lv_value1_3_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6468:1: (lv_value1_3_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6469:3: lv_value1_3_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getCompareAccess().getValue1ValueParserRuleCall_0_3_0()); 
@@ -17050,11 +17044,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                         	newLeafNode(otherlv_4, grammarAccess.getCompareAccess().getCommaKeyword_0_4());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6487:1: ( (lv_value2_5_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6488:1: (lv_value2_5_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6489:1: ( (lv_value2_5_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6490:1: (lv_value2_5_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6488:1: (lv_value2_5_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6489:3: lv_value2_5_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6490:1: (lv_value2_5_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6491:3: lv_value2_5_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getCompareAccess().getValue2ValueParserRuleCall_0_5_0()); 
@@ -17088,10 +17082,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6506:6: (otherlv_6= 'fcmp' ruleF_PREDICATES ( (lv_comptype_8_0= ruleTypeUse ) ) ( (lv_value1_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_value2_11_0= ruleValue ) ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6508:6: (otherlv_6= 'fcmp' ruleF_PREDICATES ( (lv_comptype_8_0= ruleTypeUse ) ) ( (lv_value1_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_value2_11_0= ruleValue ) ) )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6506:6: (otherlv_6= 'fcmp' ruleF_PREDICATES ( (lv_comptype_8_0= ruleTypeUse ) ) ( (lv_value1_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_value2_11_0= ruleValue ) ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6506:8: otherlv_6= 'fcmp' ruleF_PREDICATES ( (lv_comptype_8_0= ruleTypeUse ) ) ( (lv_value1_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_value2_11_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6508:6: (otherlv_6= 'fcmp' ruleF_PREDICATES ( (lv_comptype_8_0= ruleTypeUse ) ) ( (lv_value1_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_value2_11_0= ruleValue ) ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6508:8: otherlv_6= 'fcmp' ruleF_PREDICATES ( (lv_comptype_8_0= ruleTypeUse ) ) ( (lv_value1_9_0= ruleValue ) ) otherlv_10= ',' ( (lv_value2_11_0= ruleValue ) )
                     {
                     otherlv_6=(Token)match(input,121,FOLLOW_121_in_ruleCompare13927); 
 
@@ -17108,11 +17102,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                      
                             afterParserOrEnumRuleCall();
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6518:1: ( (lv_comptype_8_0= ruleTypeUse ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6519:1: (lv_comptype_8_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6520:1: ( (lv_comptype_8_0= ruleTypeUse ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6521:1: (lv_comptype_8_0= ruleTypeUse )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6519:1: (lv_comptype_8_0= ruleTypeUse )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6520:3: lv_comptype_8_0= ruleTypeUse
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6521:1: (lv_comptype_8_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6522:3: lv_comptype_8_0= ruleTypeUse
                     {
                      
                     	        newCompositeNode(grammarAccess.getCompareAccess().getComptypeTypeUseParserRuleCall_1_2_0()); 
@@ -17139,11 +17133,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6536:2: ( (lv_value1_9_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6537:1: (lv_value1_9_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6538:2: ( (lv_value1_9_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6539:1: (lv_value1_9_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6537:1: (lv_value1_9_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6538:3: lv_value1_9_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6539:1: (lv_value1_9_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6540:3: lv_value1_9_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getCompareAccess().getValue1ValueParserRuleCall_1_3_0()); 
@@ -17174,11 +17168,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                         	newLeafNode(otherlv_10, grammarAccess.getCompareAccess().getCommaKeyword_1_4());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6558:1: ( (lv_value2_11_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6559:1: (lv_value2_11_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6560:1: ( (lv_value2_11_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6561:1: (lv_value2_11_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6559:1: (lv_value2_11_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6560:3: lv_value2_11_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6561:1: (lv_value2_11_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6562:3: lv_value2_11_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getCompareAccess().getValue2ValueParserRuleCall_1_5_0()); 
@@ -17232,7 +17226,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleIndirectBranch"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6584:1: entryRuleIndirectBranch returns [EObject current=null] : iv_ruleIndirectBranch= ruleIndirectBranch EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6586:1: entryRuleIndirectBranch returns [EObject current=null] : iv_ruleIndirectBranch= ruleIndirectBranch EOF ;
     public final EObject entryRuleIndirectBranch() throws RecognitionException {
         EObject current = null;
 
@@ -17240,8 +17234,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6585:2: (iv_ruleIndirectBranch= ruleIndirectBranch EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6586:2: iv_ruleIndirectBranch= ruleIndirectBranch EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6587:2: (iv_ruleIndirectBranch= ruleIndirectBranch EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6588:2: iv_ruleIndirectBranch= ruleIndirectBranch EOF
             {
              newCompositeNode(grammarAccess.getIndirectBranchRule()); 
             pushFollow(FOLLOW_ruleIndirectBranch_in_entryRuleIndirectBranch14054);
@@ -17268,7 +17262,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleIndirectBranch"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6593:1: ruleIndirectBranch returns [EObject current=null] : (otherlv_0= 'indirectbr' ( (lv_adresstype_1_0= ruleTypeUse ) ) ( (lv_adress_2_0= ruleValue ) ) otherlv_3= ',' otherlv_4= '[' ( ( (lv_labeltype_5_0= ruleTypeUse ) ) ( (lv_labels_6_0= ruleValue ) ) (otherlv_7= ',' ( (lv_labeltype_8_0= ruleTypeUse ) ) ( (lv_labels_9_0= ruleValue ) ) )* )? otherlv_10= ']' ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6595:1: ruleIndirectBranch returns [EObject current=null] : (otherlv_0= 'indirectbr' ( (lv_adresstype_1_0= ruleTypeUse ) ) ( (lv_adress_2_0= ruleValue ) ) otherlv_3= ',' otherlv_4= '[' ( ( (lv_labeltype_5_0= ruleTypeUse ) ) ( (lv_labels_6_0= ruleValue ) ) (otherlv_7= ',' ( (lv_labeltype_8_0= ruleTypeUse ) ) ( (lv_labels_9_0= ruleValue ) ) )* )? otherlv_10= ']' ) ;
     public final EObject ruleIndirectBranch() throws RecognitionException {
         EObject current = null;
 
@@ -17293,21 +17287,21 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6596:28: ( (otherlv_0= 'indirectbr' ( (lv_adresstype_1_0= ruleTypeUse ) ) ( (lv_adress_2_0= ruleValue ) ) otherlv_3= ',' otherlv_4= '[' ( ( (lv_labeltype_5_0= ruleTypeUse ) ) ( (lv_labels_6_0= ruleValue ) ) (otherlv_7= ',' ( (lv_labeltype_8_0= ruleTypeUse ) ) ( (lv_labels_9_0= ruleValue ) ) )* )? otherlv_10= ']' ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6597:1: (otherlv_0= 'indirectbr' ( (lv_adresstype_1_0= ruleTypeUse ) ) ( (lv_adress_2_0= ruleValue ) ) otherlv_3= ',' otherlv_4= '[' ( ( (lv_labeltype_5_0= ruleTypeUse ) ) ( (lv_labels_6_0= ruleValue ) ) (otherlv_7= ',' ( (lv_labeltype_8_0= ruleTypeUse ) ) ( (lv_labels_9_0= ruleValue ) ) )* )? otherlv_10= ']' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6598:28: ( (otherlv_0= 'indirectbr' ( (lv_adresstype_1_0= ruleTypeUse ) ) ( (lv_adress_2_0= ruleValue ) ) otherlv_3= ',' otherlv_4= '[' ( ( (lv_labeltype_5_0= ruleTypeUse ) ) ( (lv_labels_6_0= ruleValue ) ) (otherlv_7= ',' ( (lv_labeltype_8_0= ruleTypeUse ) ) ( (lv_labels_9_0= ruleValue ) ) )* )? otherlv_10= ']' ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6599:1: (otherlv_0= 'indirectbr' ( (lv_adresstype_1_0= ruleTypeUse ) ) ( (lv_adress_2_0= ruleValue ) ) otherlv_3= ',' otherlv_4= '[' ( ( (lv_labeltype_5_0= ruleTypeUse ) ) ( (lv_labels_6_0= ruleValue ) ) (otherlv_7= ',' ( (lv_labeltype_8_0= ruleTypeUse ) ) ( (lv_labels_9_0= ruleValue ) ) )* )? otherlv_10= ']' )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6597:1: (otherlv_0= 'indirectbr' ( (lv_adresstype_1_0= ruleTypeUse ) ) ( (lv_adress_2_0= ruleValue ) ) otherlv_3= ',' otherlv_4= '[' ( ( (lv_labeltype_5_0= ruleTypeUse ) ) ( (lv_labels_6_0= ruleValue ) ) (otherlv_7= ',' ( (lv_labeltype_8_0= ruleTypeUse ) ) ( (lv_labels_9_0= ruleValue ) ) )* )? otherlv_10= ']' )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6597:3: otherlv_0= 'indirectbr' ( (lv_adresstype_1_0= ruleTypeUse ) ) ( (lv_adress_2_0= ruleValue ) ) otherlv_3= ',' otherlv_4= '[' ( ( (lv_labeltype_5_0= ruleTypeUse ) ) ( (lv_labels_6_0= ruleValue ) ) (otherlv_7= ',' ( (lv_labeltype_8_0= ruleTypeUse ) ) ( (lv_labels_9_0= ruleValue ) ) )* )? otherlv_10= ']'
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6599:1: (otherlv_0= 'indirectbr' ( (lv_adresstype_1_0= ruleTypeUse ) ) ( (lv_adress_2_0= ruleValue ) ) otherlv_3= ',' otherlv_4= '[' ( ( (lv_labeltype_5_0= ruleTypeUse ) ) ( (lv_labels_6_0= ruleValue ) ) (otherlv_7= ',' ( (lv_labeltype_8_0= ruleTypeUse ) ) ( (lv_labels_9_0= ruleValue ) ) )* )? otherlv_10= ']' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6599:3: otherlv_0= 'indirectbr' ( (lv_adresstype_1_0= ruleTypeUse ) ) ( (lv_adress_2_0= ruleValue ) ) otherlv_3= ',' otherlv_4= '[' ( ( (lv_labeltype_5_0= ruleTypeUse ) ) ( (lv_labels_6_0= ruleValue ) ) (otherlv_7= ',' ( (lv_labeltype_8_0= ruleTypeUse ) ) ( (lv_labels_9_0= ruleValue ) ) )* )? otherlv_10= ']'
             {
             otherlv_0=(Token)match(input,122,FOLLOW_122_in_ruleIndirectBranch14101); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getIndirectBranchAccess().getIndirectbrKeyword_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6601:1: ( (lv_adresstype_1_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6602:1: (lv_adresstype_1_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6603:1: ( (lv_adresstype_1_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6604:1: (lv_adresstype_1_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6602:1: (lv_adresstype_1_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6603:3: lv_adresstype_1_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6604:1: (lv_adresstype_1_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6605:3: lv_adresstype_1_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getIndirectBranchAccess().getAdresstypeTypeUseParserRuleCall_1_0()); 
@@ -17334,11 +17328,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6619:2: ( (lv_adress_2_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6620:1: (lv_adress_2_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6621:2: ( (lv_adress_2_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6622:1: (lv_adress_2_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6620:1: (lv_adress_2_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6621:3: lv_adress_2_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6622:1: (lv_adress_2_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6623:3: lv_adress_2_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getIndirectBranchAccess().getAdressValueParserRuleCall_2_0()); 
@@ -17373,7 +17367,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_4, grammarAccess.getIndirectBranchAccess().getLeftSquareBracketKeyword_4());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6645:1: ( ( (lv_labeltype_5_0= ruleTypeUse ) ) ( (lv_labels_6_0= ruleValue ) ) (otherlv_7= ',' ( (lv_labeltype_8_0= ruleTypeUse ) ) ( (lv_labels_9_0= ruleValue ) ) )* )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6647:1: ( ( (lv_labeltype_5_0= ruleTypeUse ) ) ( (lv_labels_6_0= ruleValue ) ) (otherlv_7= ',' ( (lv_labeltype_8_0= ruleTypeUse ) ) ( (lv_labels_9_0= ruleValue ) ) )* )?
             int alt150=2;
             int LA150_0 = input.LA(1);
 
@@ -17382,13 +17376,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt150) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6645:2: ( (lv_labeltype_5_0= ruleTypeUse ) ) ( (lv_labels_6_0= ruleValue ) ) (otherlv_7= ',' ( (lv_labeltype_8_0= ruleTypeUse ) ) ( (lv_labels_9_0= ruleValue ) ) )*
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6647:2: ( (lv_labeltype_5_0= ruleTypeUse ) ) ( (lv_labels_6_0= ruleValue ) ) (otherlv_7= ',' ( (lv_labeltype_8_0= ruleTypeUse ) ) ( (lv_labels_9_0= ruleValue ) ) )*
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6645:2: ( (lv_labeltype_5_0= ruleTypeUse ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6646:1: (lv_labeltype_5_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6647:2: ( (lv_labeltype_5_0= ruleTypeUse ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6648:1: (lv_labeltype_5_0= ruleTypeUse )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6646:1: (lv_labeltype_5_0= ruleTypeUse )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6647:3: lv_labeltype_5_0= ruleTypeUse
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6648:1: (lv_labeltype_5_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6649:3: lv_labeltype_5_0= ruleTypeUse
                     {
                      
                     	        newCompositeNode(grammarAccess.getIndirectBranchAccess().getLabeltypeTypeUseParserRuleCall_5_0_0()); 
@@ -17415,11 +17409,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6663:2: ( (lv_labels_6_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6664:1: (lv_labels_6_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6665:2: ( (lv_labels_6_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6666:1: (lv_labels_6_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6664:1: (lv_labels_6_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6665:3: lv_labels_6_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6666:1: (lv_labels_6_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6667:3: lv_labels_6_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getIndirectBranchAccess().getLabelsValueParserRuleCall_5_1_0()); 
@@ -17446,7 +17440,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6681:2: (otherlv_7= ',' ( (lv_labeltype_8_0= ruleTypeUse ) ) ( (lv_labels_9_0= ruleValue ) ) )*
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6683:2: (otherlv_7= ',' ( (lv_labeltype_8_0= ruleTypeUse ) ) ( (lv_labels_9_0= ruleValue ) ) )*
                     loop149:
                     do {
                         int alt149=2;
@@ -17459,17 +17453,17 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                         switch (alt149) {
                     	case 1 :
-                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6681:4: otherlv_7= ',' ( (lv_labeltype_8_0= ruleTypeUse ) ) ( (lv_labels_9_0= ruleValue ) )
+                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6683:4: otherlv_7= ',' ( (lv_labeltype_8_0= ruleTypeUse ) ) ( (lv_labels_9_0= ruleValue ) )
                     	    {
                     	    otherlv_7=(Token)match(input,30,FOLLOW_30_in_ruleIndirectBranch14223); 
 
                     	        	newLeafNode(otherlv_7, grammarAccess.getIndirectBranchAccess().getCommaKeyword_5_2_0());
                     	        
-                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6685:1: ( (lv_labeltype_8_0= ruleTypeUse ) )
-                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6686:1: (lv_labeltype_8_0= ruleTypeUse )
+                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6687:1: ( (lv_labeltype_8_0= ruleTypeUse ) )
+                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6688:1: (lv_labeltype_8_0= ruleTypeUse )
                     	    {
-                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6686:1: (lv_labeltype_8_0= ruleTypeUse )
-                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6687:3: lv_labeltype_8_0= ruleTypeUse
+                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6688:1: (lv_labeltype_8_0= ruleTypeUse )
+                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6689:3: lv_labeltype_8_0= ruleTypeUse
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getIndirectBranchAccess().getLabeltypeTypeUseParserRuleCall_5_2_1_0()); 
@@ -17496,11 +17490,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     	    }
 
-                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6703:2: ( (lv_labels_9_0= ruleValue ) )
-                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6704:1: (lv_labels_9_0= ruleValue )
+                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6705:2: ( (lv_labels_9_0= ruleValue ) )
+                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6706:1: (lv_labels_9_0= ruleValue )
                     	    {
-                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6704:1: (lv_labels_9_0= ruleValue )
-                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6705:3: lv_labels_9_0= ruleValue
+                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6706:1: (lv_labels_9_0= ruleValue )
+                    	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6707:3: lv_labels_9_0= ruleValue
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getIndirectBranchAccess().getLabelsValueParserRuleCall_5_2_2_0()); 
@@ -17567,7 +17561,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSwitch"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6733:1: entryRuleSwitch returns [EObject current=null] : iv_ruleSwitch= ruleSwitch EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6735:1: entryRuleSwitch returns [EObject current=null] : iv_ruleSwitch= ruleSwitch EOF ;
     public final EObject entryRuleSwitch() throws RecognitionException {
         EObject current = null;
 
@@ -17575,8 +17569,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6734:2: (iv_ruleSwitch= ruleSwitch EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6735:2: iv_ruleSwitch= ruleSwitch EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6736:2: (iv_ruleSwitch= ruleSwitch EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6737:2: iv_ruleSwitch= ruleSwitch EOF
             {
              newCompositeNode(grammarAccess.getSwitchRule()); 
             pushFollow(FOLLOW_ruleSwitch_in_entryRuleSwitch14317);
@@ -17603,7 +17597,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSwitch"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6742:1: ruleSwitch returns [EObject current=null] : (otherlv_0= 'switch' ( (lv_comptype_1_0= ruleTypeUse ) ) ( (lv_compvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_defaulttype_4_0= ruleTypeUse ) ) ( (lv_defaultvalue_5_0= ruleValue ) ) otherlv_6= '[' ( ( (lv_jtypes_7_0= ruleTypeUse ) ) ( (lv_jvalues_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_destinationtypes_10_0= ruleTypeUse ) ) ( (lv_destinations_11_0= ruleValue ) ) )+ otherlv_12= ']' ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6744:1: ruleSwitch returns [EObject current=null] : (otherlv_0= 'switch' ( (lv_comptype_1_0= ruleTypeUse ) ) ( (lv_compvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_defaulttype_4_0= ruleTypeUse ) ) ( (lv_defaultvalue_5_0= ruleValue ) ) otherlv_6= '[' ( ( (lv_jtypes_7_0= ruleTypeUse ) ) ( (lv_jvalues_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_destinationtypes_10_0= ruleTypeUse ) ) ( (lv_destinations_11_0= ruleValue ) ) )+ otherlv_12= ']' ) ;
     public final EObject ruleSwitch() throws RecognitionException {
         EObject current = null;
 
@@ -17632,21 +17626,21 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6745:28: ( (otherlv_0= 'switch' ( (lv_comptype_1_0= ruleTypeUse ) ) ( (lv_compvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_defaulttype_4_0= ruleTypeUse ) ) ( (lv_defaultvalue_5_0= ruleValue ) ) otherlv_6= '[' ( ( (lv_jtypes_7_0= ruleTypeUse ) ) ( (lv_jvalues_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_destinationtypes_10_0= ruleTypeUse ) ) ( (lv_destinations_11_0= ruleValue ) ) )+ otherlv_12= ']' ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6746:1: (otherlv_0= 'switch' ( (lv_comptype_1_0= ruleTypeUse ) ) ( (lv_compvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_defaulttype_4_0= ruleTypeUse ) ) ( (lv_defaultvalue_5_0= ruleValue ) ) otherlv_6= '[' ( ( (lv_jtypes_7_0= ruleTypeUse ) ) ( (lv_jvalues_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_destinationtypes_10_0= ruleTypeUse ) ) ( (lv_destinations_11_0= ruleValue ) ) )+ otherlv_12= ']' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6747:28: ( (otherlv_0= 'switch' ( (lv_comptype_1_0= ruleTypeUse ) ) ( (lv_compvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_defaulttype_4_0= ruleTypeUse ) ) ( (lv_defaultvalue_5_0= ruleValue ) ) otherlv_6= '[' ( ( (lv_jtypes_7_0= ruleTypeUse ) ) ( (lv_jvalues_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_destinationtypes_10_0= ruleTypeUse ) ) ( (lv_destinations_11_0= ruleValue ) ) )+ otherlv_12= ']' ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6748:1: (otherlv_0= 'switch' ( (lv_comptype_1_0= ruleTypeUse ) ) ( (lv_compvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_defaulttype_4_0= ruleTypeUse ) ) ( (lv_defaultvalue_5_0= ruleValue ) ) otherlv_6= '[' ( ( (lv_jtypes_7_0= ruleTypeUse ) ) ( (lv_jvalues_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_destinationtypes_10_0= ruleTypeUse ) ) ( (lv_destinations_11_0= ruleValue ) ) )+ otherlv_12= ']' )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6746:1: (otherlv_0= 'switch' ( (lv_comptype_1_0= ruleTypeUse ) ) ( (lv_compvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_defaulttype_4_0= ruleTypeUse ) ) ( (lv_defaultvalue_5_0= ruleValue ) ) otherlv_6= '[' ( ( (lv_jtypes_7_0= ruleTypeUse ) ) ( (lv_jvalues_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_destinationtypes_10_0= ruleTypeUse ) ) ( (lv_destinations_11_0= ruleValue ) ) )+ otherlv_12= ']' )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6746:3: otherlv_0= 'switch' ( (lv_comptype_1_0= ruleTypeUse ) ) ( (lv_compvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_defaulttype_4_0= ruleTypeUse ) ) ( (lv_defaultvalue_5_0= ruleValue ) ) otherlv_6= '[' ( ( (lv_jtypes_7_0= ruleTypeUse ) ) ( (lv_jvalues_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_destinationtypes_10_0= ruleTypeUse ) ) ( (lv_destinations_11_0= ruleValue ) ) )+ otherlv_12= ']'
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6748:1: (otherlv_0= 'switch' ( (lv_comptype_1_0= ruleTypeUse ) ) ( (lv_compvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_defaulttype_4_0= ruleTypeUse ) ) ( (lv_defaultvalue_5_0= ruleValue ) ) otherlv_6= '[' ( ( (lv_jtypes_7_0= ruleTypeUse ) ) ( (lv_jvalues_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_destinationtypes_10_0= ruleTypeUse ) ) ( (lv_destinations_11_0= ruleValue ) ) )+ otherlv_12= ']' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6748:3: otherlv_0= 'switch' ( (lv_comptype_1_0= ruleTypeUse ) ) ( (lv_compvalue_2_0= ruleValue ) ) otherlv_3= ',' ( (lv_defaulttype_4_0= ruleTypeUse ) ) ( (lv_defaultvalue_5_0= ruleValue ) ) otherlv_6= '[' ( ( (lv_jtypes_7_0= ruleTypeUse ) ) ( (lv_jvalues_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_destinationtypes_10_0= ruleTypeUse ) ) ( (lv_destinations_11_0= ruleValue ) ) )+ otherlv_12= ']'
             {
             otherlv_0=(Token)match(input,18,FOLLOW_18_in_ruleSwitch14364); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getSwitchAccess().getSwitchKeyword_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6750:1: ( (lv_comptype_1_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6751:1: (lv_comptype_1_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6752:1: ( (lv_comptype_1_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6753:1: (lv_comptype_1_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6751:1: (lv_comptype_1_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6752:3: lv_comptype_1_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6753:1: (lv_comptype_1_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6754:3: lv_comptype_1_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getSwitchAccess().getComptypeTypeUseParserRuleCall_1_0()); 
@@ -17673,11 +17667,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6768:2: ( (lv_compvalue_2_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6769:1: (lv_compvalue_2_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6770:2: ( (lv_compvalue_2_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6771:1: (lv_compvalue_2_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6769:1: (lv_compvalue_2_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6770:3: lv_compvalue_2_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6771:1: (lv_compvalue_2_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6772:3: lv_compvalue_2_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getSwitchAccess().getCompvalueValueParserRuleCall_2_0()); 
@@ -17708,11 +17702,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_3, grammarAccess.getSwitchAccess().getCommaKeyword_3());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6790:1: ( (lv_defaulttype_4_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6791:1: (lv_defaulttype_4_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6792:1: ( (lv_defaulttype_4_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6793:1: (lv_defaulttype_4_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6791:1: (lv_defaulttype_4_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6792:3: lv_defaulttype_4_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6793:1: (lv_defaulttype_4_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6794:3: lv_defaulttype_4_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getSwitchAccess().getDefaulttypeTypeUseParserRuleCall_4_0()); 
@@ -17739,11 +17733,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6808:2: ( (lv_defaultvalue_5_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6809:1: (lv_defaultvalue_5_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6810:2: ( (lv_defaultvalue_5_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6811:1: (lv_defaultvalue_5_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6809:1: (lv_defaultvalue_5_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6810:3: lv_defaultvalue_5_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6811:1: (lv_defaultvalue_5_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6812:3: lv_defaultvalue_5_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getSwitchAccess().getDefaultvalueValueParserRuleCall_5_0()); 
@@ -17774,7 +17768,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_6, grammarAccess.getSwitchAccess().getLeftSquareBracketKeyword_6());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6830:1: ( ( (lv_jtypes_7_0= ruleTypeUse ) ) ( (lv_jvalues_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_destinationtypes_10_0= ruleTypeUse ) ) ( (lv_destinations_11_0= ruleValue ) ) )+
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6832:1: ( ( (lv_jtypes_7_0= ruleTypeUse ) ) ( (lv_jvalues_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_destinationtypes_10_0= ruleTypeUse ) ) ( (lv_destinations_11_0= ruleValue ) ) )+
             int cnt151=0;
             loop151:
             do {
@@ -17788,13 +17782,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 switch (alt151) {
             	case 1 :
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6830:2: ( (lv_jtypes_7_0= ruleTypeUse ) ) ( (lv_jvalues_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_destinationtypes_10_0= ruleTypeUse ) ) ( (lv_destinations_11_0= ruleValue ) )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6832:2: ( (lv_jtypes_7_0= ruleTypeUse ) ) ( (lv_jvalues_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_destinationtypes_10_0= ruleTypeUse ) ) ( (lv_destinations_11_0= ruleValue ) )
             	    {
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6830:2: ( (lv_jtypes_7_0= ruleTypeUse ) )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6831:1: (lv_jtypes_7_0= ruleTypeUse )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6832:2: ( (lv_jtypes_7_0= ruleTypeUse ) )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6833:1: (lv_jtypes_7_0= ruleTypeUse )
             	    {
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6831:1: (lv_jtypes_7_0= ruleTypeUse )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6832:3: lv_jtypes_7_0= ruleTypeUse
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6833:1: (lv_jtypes_7_0= ruleTypeUse )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6834:3: lv_jtypes_7_0= ruleTypeUse
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getSwitchAccess().getJtypesTypeUseParserRuleCall_7_0_0()); 
@@ -17821,11 +17815,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6848:2: ( (lv_jvalues_8_0= ruleValue ) )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6849:1: (lv_jvalues_8_0= ruleValue )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6850:2: ( (lv_jvalues_8_0= ruleValue ) )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6851:1: (lv_jvalues_8_0= ruleValue )
             	    {
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6849:1: (lv_jvalues_8_0= ruleValue )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6850:3: lv_jvalues_8_0= ruleValue
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6851:1: (lv_jvalues_8_0= ruleValue )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6852:3: lv_jvalues_8_0= ruleValue
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getSwitchAccess().getJvaluesValueParserRuleCall_7_1_0()); 
@@ -17856,11 +17850,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             	        	newLeafNode(otherlv_9, grammarAccess.getSwitchAccess().getCommaKeyword_7_2());
             	        
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6870:1: ( (lv_destinationtypes_10_0= ruleTypeUse ) )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6871:1: (lv_destinationtypes_10_0= ruleTypeUse )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6872:1: ( (lv_destinationtypes_10_0= ruleTypeUse ) )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6873:1: (lv_destinationtypes_10_0= ruleTypeUse )
             	    {
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6871:1: (lv_destinationtypes_10_0= ruleTypeUse )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6872:3: lv_destinationtypes_10_0= ruleTypeUse
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6873:1: (lv_destinationtypes_10_0= ruleTypeUse )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6874:3: lv_destinationtypes_10_0= ruleTypeUse
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getSwitchAccess().getDestinationtypesTypeUseParserRuleCall_7_3_0()); 
@@ -17887,11 +17881,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6888:2: ( (lv_destinations_11_0= ruleValue ) )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6889:1: (lv_destinations_11_0= ruleValue )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6890:2: ( (lv_destinations_11_0= ruleValue ) )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6891:1: (lv_destinations_11_0= ruleValue )
             	    {
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6889:1: (lv_destinations_11_0= ruleValue )
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6890:3: lv_destinations_11_0= ruleValue
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6891:1: (lv_destinations_11_0= ruleValue )
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6892:3: lv_destinations_11_0= ruleValue
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getSwitchAccess().getDestinationsValueParserRuleCall_7_4_0()); 
@@ -17956,7 +17950,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleInvoke"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6918:1: entryRuleInvoke returns [EObject current=null] : iv_ruleInvoke= ruleInvoke EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6920:1: entryRuleInvoke returns [EObject current=null] : iv_ruleInvoke= ruleInvoke EOF ;
     public final EObject entryRuleInvoke() throws RecognitionException {
         EObject current = null;
 
@@ -17964,8 +17958,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6919:2: (iv_ruleInvoke= ruleInvoke EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6920:2: iv_ruleInvoke= ruleInvoke EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6921:2: (iv_ruleInvoke= ruleInvoke EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6922:2: iv_ruleInvoke= ruleInvoke EOF
             {
              newCompositeNode(grammarAccess.getInvokeRule()); 
             pushFollow(FOLLOW_ruleInvoke_in_entryRuleInvoke14619);
@@ -17992,7 +17986,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleInvoke"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6927:1: ruleInvoke returns [EObject current=null] : (otherlv_0= 'invoke' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_functiontype_3_0= ruleTypeUse ) ) ( (lv_name_4_0= ruleAddress ) ) ( (lv_pList_5_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* otherlv_7= 'to' ( (lv_totype_8_0= ruleTypeUse ) ) ( (lv_tovalue_9_0= ruleValue ) ) otherlv_10= 'unwind' ( (lv_unwindtype_11_0= ruleTypeUse ) ) ( (lv_unwindvalue_12_0= ruleValue ) ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6929:1: ruleInvoke returns [EObject current=null] : (otherlv_0= 'invoke' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_functiontype_3_0= ruleTypeUse ) ) ( (lv_name_4_0= ruleAddress ) ) ( (lv_pList_5_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* otherlv_7= 'to' ( (lv_totype_8_0= ruleTypeUse ) ) ( (lv_tovalue_9_0= ruleValue ) ) otherlv_10= 'unwind' ( (lv_unwindtype_11_0= ruleTypeUse ) ) ( (lv_unwindvalue_12_0= ruleValue ) ) ) ;
     public final EObject ruleInvoke() throws RecognitionException {
         EObject current = null;
 
@@ -18017,17 +18011,17 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6930:28: ( (otherlv_0= 'invoke' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_functiontype_3_0= ruleTypeUse ) ) ( (lv_name_4_0= ruleAddress ) ) ( (lv_pList_5_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* otherlv_7= 'to' ( (lv_totype_8_0= ruleTypeUse ) ) ( (lv_tovalue_9_0= ruleValue ) ) otherlv_10= 'unwind' ( (lv_unwindtype_11_0= ruleTypeUse ) ) ( (lv_unwindvalue_12_0= ruleValue ) ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6931:1: (otherlv_0= 'invoke' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_functiontype_3_0= ruleTypeUse ) ) ( (lv_name_4_0= ruleAddress ) ) ( (lv_pList_5_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* otherlv_7= 'to' ( (lv_totype_8_0= ruleTypeUse ) ) ( (lv_tovalue_9_0= ruleValue ) ) otherlv_10= 'unwind' ( (lv_unwindtype_11_0= ruleTypeUse ) ) ( (lv_unwindvalue_12_0= ruleValue ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6932:28: ( (otherlv_0= 'invoke' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_functiontype_3_0= ruleTypeUse ) ) ( (lv_name_4_0= ruleAddress ) ) ( (lv_pList_5_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* otherlv_7= 'to' ( (lv_totype_8_0= ruleTypeUse ) ) ( (lv_tovalue_9_0= ruleValue ) ) otherlv_10= 'unwind' ( (lv_unwindtype_11_0= ruleTypeUse ) ) ( (lv_unwindvalue_12_0= ruleValue ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6933:1: (otherlv_0= 'invoke' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_functiontype_3_0= ruleTypeUse ) ) ( (lv_name_4_0= ruleAddress ) ) ( (lv_pList_5_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* otherlv_7= 'to' ( (lv_totype_8_0= ruleTypeUse ) ) ( (lv_tovalue_9_0= ruleValue ) ) otherlv_10= 'unwind' ( (lv_unwindtype_11_0= ruleTypeUse ) ) ( (lv_unwindvalue_12_0= ruleValue ) ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6931:1: (otherlv_0= 'invoke' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_functiontype_3_0= ruleTypeUse ) ) ( (lv_name_4_0= ruleAddress ) ) ( (lv_pList_5_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* otherlv_7= 'to' ( (lv_totype_8_0= ruleTypeUse ) ) ( (lv_tovalue_9_0= ruleValue ) ) otherlv_10= 'unwind' ( (lv_unwindtype_11_0= ruleTypeUse ) ) ( (lv_unwindvalue_12_0= ruleValue ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6931:3: otherlv_0= 'invoke' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_functiontype_3_0= ruleTypeUse ) ) ( (lv_name_4_0= ruleAddress ) ) ( (lv_pList_5_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* otherlv_7= 'to' ( (lv_totype_8_0= ruleTypeUse ) ) ( (lv_tovalue_9_0= ruleValue ) ) otherlv_10= 'unwind' ( (lv_unwindtype_11_0= ruleTypeUse ) ) ( (lv_unwindvalue_12_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6933:1: (otherlv_0= 'invoke' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_functiontype_3_0= ruleTypeUse ) ) ( (lv_name_4_0= ruleAddress ) ) ( (lv_pList_5_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* otherlv_7= 'to' ( (lv_totype_8_0= ruleTypeUse ) ) ( (lv_tovalue_9_0= ruleValue ) ) otherlv_10= 'unwind' ( (lv_unwindtype_11_0= ruleTypeUse ) ) ( (lv_unwindvalue_12_0= ruleValue ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6933:3: otherlv_0= 'invoke' ( ruleCallingConv )? ( ruleRETURN_ATTRIBUTES )? ( (lv_functiontype_3_0= ruleTypeUse ) ) ( (lv_name_4_0= ruleAddress ) ) ( (lv_pList_5_0= ruleParameterList ) ) ( ruleFUNCTION_ATTRIBUTES )* otherlv_7= 'to' ( (lv_totype_8_0= ruleTypeUse ) ) ( (lv_tovalue_9_0= ruleValue ) ) otherlv_10= 'unwind' ( (lv_unwindtype_11_0= ruleTypeUse ) ) ( (lv_unwindvalue_12_0= ruleValue ) )
             {
             otherlv_0=(Token)match(input,16,FOLLOW_16_in_ruleInvoke14666); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getInvokeAccess().getInvokeKeyword_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6935:1: ( ruleCallingConv )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6937:1: ( ruleCallingConv )?
             int alt152=2;
             int LA152_0 = input.LA(1);
 
@@ -18036,7 +18030,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt152) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6936:5: ruleCallingConv
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6938:5: ruleCallingConv
                     {
                      
                             newCompositeNode(grammarAccess.getInvokeAccess().getCallingConvParserRuleCall_1()); 
@@ -18055,7 +18049,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6943:3: ( ruleRETURN_ATTRIBUTES )?
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6945:3: ( ruleRETURN_ATTRIBUTES )?
             int alt153=2;
             int LA153_0 = input.LA(1);
 
@@ -18064,7 +18058,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt153) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6944:5: ruleRETURN_ATTRIBUTES
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6946:5: ruleRETURN_ATTRIBUTES
                     {
                      
                             newCompositeNode(grammarAccess.getInvokeAccess().getRETURN_ATTRIBUTESParserRuleCall_2()); 
@@ -18083,11 +18077,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6951:3: ( (lv_functiontype_3_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6952:1: (lv_functiontype_3_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6953:3: ( (lv_functiontype_3_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6954:1: (lv_functiontype_3_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6952:1: (lv_functiontype_3_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6953:3: lv_functiontype_3_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6954:1: (lv_functiontype_3_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6955:3: lv_functiontype_3_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getInvokeAccess().getFunctiontypeTypeUseParserRuleCall_3_0()); 
@@ -18114,11 +18108,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6969:2: ( (lv_name_4_0= ruleAddress ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6970:1: (lv_name_4_0= ruleAddress )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6971:2: ( (lv_name_4_0= ruleAddress ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6972:1: (lv_name_4_0= ruleAddress )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6970:1: (lv_name_4_0= ruleAddress )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6971:3: lv_name_4_0= ruleAddress
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6972:1: (lv_name_4_0= ruleAddress )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6973:3: lv_name_4_0= ruleAddress
             {
              
             	        newCompositeNode(grammarAccess.getInvokeAccess().getNameAddressParserRuleCall_4_0()); 
@@ -18145,11 +18139,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6987:2: ( (lv_pList_5_0= ruleParameterList ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6988:1: (lv_pList_5_0= ruleParameterList )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6989:2: ( (lv_pList_5_0= ruleParameterList ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6990:1: (lv_pList_5_0= ruleParameterList )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6988:1: (lv_pList_5_0= ruleParameterList )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6989:3: lv_pList_5_0= ruleParameterList
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6990:1: (lv_pList_5_0= ruleParameterList )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:6991:3: lv_pList_5_0= ruleParameterList
             {
              
             	        newCompositeNode(grammarAccess.getInvokeAccess().getPListParameterListParserRuleCall_5_0()); 
@@ -18176,7 +18170,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7005:2: ( ruleFUNCTION_ATTRIBUTES )*
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7007:2: ( ruleFUNCTION_ATTRIBUTES )*
             loop154:
             do {
                 int alt154=2;
@@ -18189,7 +18183,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 switch (alt154) {
             	case 1 :
-            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7006:5: ruleFUNCTION_ATTRIBUTES
+            	    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7008:5: ruleFUNCTION_ATTRIBUTES
             	    {
             	     
             	            newCompositeNode(grammarAccess.getInvokeAccess().getFUNCTION_ATTRIBUTESParserRuleCall_6()); 
@@ -18215,11 +18209,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_7, grammarAccess.getInvokeAccess().getToKeyword_7());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7017:1: ( (lv_totype_8_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7018:1: (lv_totype_8_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7019:1: ( (lv_totype_8_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7020:1: (lv_totype_8_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7018:1: (lv_totype_8_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7019:3: lv_totype_8_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7020:1: (lv_totype_8_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7021:3: lv_totype_8_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getInvokeAccess().getTotypeTypeUseParserRuleCall_8_0()); 
@@ -18246,11 +18240,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7035:2: ( (lv_tovalue_9_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7036:1: (lv_tovalue_9_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7037:2: ( (lv_tovalue_9_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7038:1: (lv_tovalue_9_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7036:1: (lv_tovalue_9_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7037:3: lv_tovalue_9_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7038:1: (lv_tovalue_9_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7039:3: lv_tovalue_9_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getInvokeAccess().getTovalueValueParserRuleCall_9_0()); 
@@ -18281,11 +18275,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_10, grammarAccess.getInvokeAccess().getUnwindKeyword_10());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7057:1: ( (lv_unwindtype_11_0= ruleTypeUse ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7058:1: (lv_unwindtype_11_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7059:1: ( (lv_unwindtype_11_0= ruleTypeUse ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7060:1: (lv_unwindtype_11_0= ruleTypeUse )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7058:1: (lv_unwindtype_11_0= ruleTypeUse )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7059:3: lv_unwindtype_11_0= ruleTypeUse
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7060:1: (lv_unwindtype_11_0= ruleTypeUse )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7061:3: lv_unwindtype_11_0= ruleTypeUse
             {
              
             	        newCompositeNode(grammarAccess.getInvokeAccess().getUnwindtypeTypeUseParserRuleCall_11_0()); 
@@ -18312,11 +18306,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7075:2: ( (lv_unwindvalue_12_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7076:1: (lv_unwindvalue_12_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7077:2: ( (lv_unwindvalue_12_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7078:1: (lv_unwindvalue_12_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7076:1: (lv_unwindvalue_12_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7077:3: lv_unwindvalue_12_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7078:1: (lv_unwindvalue_12_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7079:3: lv_unwindvalue_12_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getInvokeAccess().getUnwindvalueValueParserRuleCall_12_0()); 
@@ -18364,7 +18358,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleResume"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7101:1: entryRuleResume returns [EObject current=null] : iv_ruleResume= ruleResume EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7103:1: entryRuleResume returns [EObject current=null] : iv_ruleResume= ruleResume EOF ;
     public final EObject entryRuleResume() throws RecognitionException {
         EObject current = null;
 
@@ -18372,8 +18366,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7102:2: (iv_ruleResume= ruleResume EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7103:2: iv_ruleResume= ruleResume EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7104:2: (iv_ruleResume= ruleResume EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7105:2: iv_ruleResume= ruleResume EOF
             {
              newCompositeNode(grammarAccess.getResumeRule()); 
             pushFollow(FOLLOW_ruleResume_in_entryRuleResume14927);
@@ -18400,7 +18394,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleResume"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7110:1: ruleResume returns [EObject current=null] : (otherlv_0= 'resume' ( (lv_resumestruct_1_0= ruleStructure ) ) ( (lv_resumevalue_2_0= ruleValue ) ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7112:1: ruleResume returns [EObject current=null] : (otherlv_0= 'resume' ( (lv_resumestruct_1_0= ruleStructure ) ) ( (lv_resumevalue_2_0= ruleValue ) ) ) ;
     public final EObject ruleResume() throws RecognitionException {
         EObject current = null;
 
@@ -18413,21 +18407,21 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7113:28: ( (otherlv_0= 'resume' ( (lv_resumestruct_1_0= ruleStructure ) ) ( (lv_resumevalue_2_0= ruleValue ) ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7114:1: (otherlv_0= 'resume' ( (lv_resumestruct_1_0= ruleStructure ) ) ( (lv_resumevalue_2_0= ruleValue ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7115:28: ( (otherlv_0= 'resume' ( (lv_resumestruct_1_0= ruleStructure ) ) ( (lv_resumevalue_2_0= ruleValue ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7116:1: (otherlv_0= 'resume' ( (lv_resumestruct_1_0= ruleStructure ) ) ( (lv_resumevalue_2_0= ruleValue ) ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7114:1: (otherlv_0= 'resume' ( (lv_resumestruct_1_0= ruleStructure ) ) ( (lv_resumevalue_2_0= ruleValue ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7114:3: otherlv_0= 'resume' ( (lv_resumestruct_1_0= ruleStructure ) ) ( (lv_resumevalue_2_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7116:1: (otherlv_0= 'resume' ( (lv_resumestruct_1_0= ruleStructure ) ) ( (lv_resumevalue_2_0= ruleValue ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7116:3: otherlv_0= 'resume' ( (lv_resumestruct_1_0= ruleStructure ) ) ( (lv_resumevalue_2_0= ruleValue ) )
             {
             otherlv_0=(Token)match(input,17,FOLLOW_17_in_ruleResume14974); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getResumeAccess().getResumeKeyword_0());
                 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7118:1: ( (lv_resumestruct_1_0= ruleStructure ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7119:1: (lv_resumestruct_1_0= ruleStructure )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7120:1: ( (lv_resumestruct_1_0= ruleStructure ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7121:1: (lv_resumestruct_1_0= ruleStructure )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7119:1: (lv_resumestruct_1_0= ruleStructure )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7120:3: lv_resumestruct_1_0= ruleStructure
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7121:1: (lv_resumestruct_1_0= ruleStructure )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7122:3: lv_resumestruct_1_0= ruleStructure
             {
              
             	        newCompositeNode(grammarAccess.getResumeAccess().getResumestructStructureParserRuleCall_1_0()); 
@@ -18454,11 +18448,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7136:2: ( (lv_resumevalue_2_0= ruleValue ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7137:1: (lv_resumevalue_2_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7138:2: ( (lv_resumevalue_2_0= ruleValue ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7139:1: (lv_resumevalue_2_0= ruleValue )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7137:1: (lv_resumevalue_2_0= ruleValue )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7138:3: lv_resumevalue_2_0= ruleValue
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7139:1: (lv_resumevalue_2_0= ruleValue )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7140:3: lv_resumevalue_2_0= ruleValue
             {
              
             	        newCompositeNode(grammarAccess.getResumeAccess().getResumevalueValueParserRuleCall_2_0()); 
@@ -18506,7 +18500,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleUnreachable"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7162:1: entryRuleUnreachable returns [EObject current=null] : iv_ruleUnreachable= ruleUnreachable EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7164:1: entryRuleUnreachable returns [EObject current=null] : iv_ruleUnreachable= ruleUnreachable EOF ;
     public final EObject entryRuleUnreachable() throws RecognitionException {
         EObject current = null;
 
@@ -18514,8 +18508,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7163:2: (iv_ruleUnreachable= ruleUnreachable EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7164:2: iv_ruleUnreachable= ruleUnreachable EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7165:2: (iv_ruleUnreachable= ruleUnreachable EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7166:2: iv_ruleUnreachable= ruleUnreachable EOF
             {
              newCompositeNode(grammarAccess.getUnreachableRule()); 
             pushFollow(FOLLOW_ruleUnreachable_in_entryRuleUnreachable15052);
@@ -18542,7 +18536,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleUnreachable"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7171:1: ruleUnreachable returns [EObject current=null] : ( () otherlv_1= 'unreachable' ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7173:1: ruleUnreachable returns [EObject current=null] : ( () otherlv_1= 'unreachable' ) ;
     public final EObject ruleUnreachable() throws RecognitionException {
         EObject current = null;
 
@@ -18551,14 +18545,14 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7174:28: ( ( () otherlv_1= 'unreachable' ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7175:1: ( () otherlv_1= 'unreachable' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7176:28: ( ( () otherlv_1= 'unreachable' ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7177:1: ( () otherlv_1= 'unreachable' )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7175:1: ( () otherlv_1= 'unreachable' )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7175:2: () otherlv_1= 'unreachable'
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7177:1: ( () otherlv_1= 'unreachable' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7177:2: () otherlv_1= 'unreachable'
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7175:2: ()
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7176:5: 
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7177:2: ()
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7178:5: 
             {
 
                     current = forceCreateModelElement(
@@ -18593,7 +18587,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleReturn"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7193:1: entryRuleReturn returns [EObject current=null] : iv_ruleReturn= ruleReturn EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7195:1: entryRuleReturn returns [EObject current=null] : iv_ruleReturn= ruleReturn EOF ;
     public final EObject entryRuleReturn() throws RecognitionException {
         EObject current = null;
 
@@ -18601,8 +18595,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7194:2: (iv_ruleReturn= ruleReturn EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7195:2: iv_ruleReturn= ruleReturn EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7196:2: (iv_ruleReturn= ruleReturn EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7197:2: iv_ruleReturn= ruleReturn EOF
             {
              newCompositeNode(grammarAccess.getReturnRule()); 
             pushFollow(FOLLOW_ruleReturn_in_entryRuleReturn15144);
@@ -18629,7 +18623,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleReturn"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7202:1: ruleReturn returns [EObject current=null] : ( ( () otherlv_1= 'ret' otherlv_2= 'void' (otherlv_3= ',' otherlv_4= '!dbg' otherlv_5= '!' this_INT_6= RULE_INT )? ) | (otherlv_7= 'ret' ( (lv_returntype_8_0= ruleTypeUse ) ) ( (lv_returnvalue_9_0= ruleValue ) ) (otherlv_10= ',' otherlv_11= '!dbg' otherlv_12= '!' this_INT_13= RULE_INT )? ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7204:1: ruleReturn returns [EObject current=null] : ( ( () otherlv_1= 'ret' otherlv_2= 'void' (otherlv_3= ',' otherlv_4= '!dbg' otherlv_5= '!' this_INT_6= RULE_INT )? ) | (otherlv_7= 'ret' ( (lv_returntype_8_0= ruleTypeUse ) ) ( (lv_returnvalue_9_0= ruleValue ) ) (otherlv_10= ',' otherlv_11= '!dbg' otherlv_12= '!' this_INT_13= RULE_INT )? ) ) ;
     public final EObject ruleReturn() throws RecognitionException {
         EObject current = null;
 
@@ -18652,10 +18646,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7205:28: ( ( ( () otherlv_1= 'ret' otherlv_2= 'void' (otherlv_3= ',' otherlv_4= '!dbg' otherlv_5= '!' this_INT_6= RULE_INT )? ) | (otherlv_7= 'ret' ( (lv_returntype_8_0= ruleTypeUse ) ) ( (lv_returnvalue_9_0= ruleValue ) ) (otherlv_10= ',' otherlv_11= '!dbg' otherlv_12= '!' this_INT_13= RULE_INT )? ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7206:1: ( ( () otherlv_1= 'ret' otherlv_2= 'void' (otherlv_3= ',' otherlv_4= '!dbg' otherlv_5= '!' this_INT_6= RULE_INT )? ) | (otherlv_7= 'ret' ( (lv_returntype_8_0= ruleTypeUse ) ) ( (lv_returnvalue_9_0= ruleValue ) ) (otherlv_10= ',' otherlv_11= '!dbg' otherlv_12= '!' this_INT_13= RULE_INT )? ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7207:28: ( ( ( () otherlv_1= 'ret' otherlv_2= 'void' (otherlv_3= ',' otherlv_4= '!dbg' otherlv_5= '!' this_INT_6= RULE_INT )? ) | (otherlv_7= 'ret' ( (lv_returntype_8_0= ruleTypeUse ) ) ( (lv_returnvalue_9_0= ruleValue ) ) (otherlv_10= ',' otherlv_11= '!dbg' otherlv_12= '!' this_INT_13= RULE_INT )? ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7208:1: ( ( () otherlv_1= 'ret' otherlv_2= 'void' (otherlv_3= ',' otherlv_4= '!dbg' otherlv_5= '!' this_INT_6= RULE_INT )? ) | (otherlv_7= 'ret' ( (lv_returntype_8_0= ruleTypeUse ) ) ( (lv_returnvalue_9_0= ruleValue ) ) (otherlv_10= ',' otherlv_11= '!dbg' otherlv_12= '!' this_INT_13= RULE_INT )? ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7206:1: ( ( () otherlv_1= 'ret' otherlv_2= 'void' (otherlv_3= ',' otherlv_4= '!dbg' otherlv_5= '!' this_INT_6= RULE_INT )? ) | (otherlv_7= 'ret' ( (lv_returntype_8_0= ruleTypeUse ) ) ( (lv_returnvalue_9_0= ruleValue ) ) (otherlv_10= ',' otherlv_11= '!dbg' otherlv_12= '!' this_INT_13= RULE_INT )? ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7208:1: ( ( () otherlv_1= 'ret' otherlv_2= 'void' (otherlv_3= ',' otherlv_4= '!dbg' otherlv_5= '!' this_INT_6= RULE_INT )? ) | (otherlv_7= 'ret' ( (lv_returntype_8_0= ruleTypeUse ) ) ( (lv_returnvalue_9_0= ruleValue ) ) (otherlv_10= ',' otherlv_11= '!dbg' otherlv_12= '!' this_INT_13= RULE_INT )? ) )
             int alt157=2;
             int LA157_0 = input.LA(1);
 
@@ -18669,6 +18663,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     case RULE_VALID_ID:
                     case RULE_POINTER:
                     case RULE_INT:
+                    case 40:
                     case 41:
                     case 42:
                     case 43:
@@ -18695,11 +18690,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                         {
                         int LA157_4 = input.LA(4);
 
-                        if ( (LA157_4==EOF||(LA157_4>=RULE_INT_TYPE && LA157_4<=RULE_ID)||(LA157_4>=15 && LA157_4<=20)||LA157_4==30||LA157_4==57) ) {
-                            alt157=2;
-                        }
-                        else if ( (LA157_4==21||LA157_4==67) ) {
+                        if ( (LA157_4==21||LA157_4==67) ) {
                             alt157=1;
+                        }
+                        else if ( (LA157_4==EOF||(LA157_4>=RULE_INT_TYPE && LA157_4<=RULE_ID)||(LA157_4>=15 && LA157_4<=20)||LA157_4==30||LA157_4==57) ) {
+                            alt157=2;
                         }
                         else {
                             NoViableAltException nvae =
@@ -18766,13 +18761,13 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt157) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7206:2: ( () otherlv_1= 'ret' otherlv_2= 'void' (otherlv_3= ',' otherlv_4= '!dbg' otherlv_5= '!' this_INT_6= RULE_INT )? )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7208:2: ( () otherlv_1= 'ret' otherlv_2= 'void' (otherlv_3= ',' otherlv_4= '!dbg' otherlv_5= '!' this_INT_6= RULE_INT )? )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7206:2: ( () otherlv_1= 'ret' otherlv_2= 'void' (otherlv_3= ',' otherlv_4= '!dbg' otherlv_5= '!' this_INT_6= RULE_INT )? )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7206:3: () otherlv_1= 'ret' otherlv_2= 'void' (otherlv_3= ',' otherlv_4= '!dbg' otherlv_5= '!' this_INT_6= RULE_INT )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7208:2: ( () otherlv_1= 'ret' otherlv_2= 'void' (otherlv_3= ',' otherlv_4= '!dbg' otherlv_5= '!' this_INT_6= RULE_INT )? )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7208:3: () otherlv_1= 'ret' otherlv_2= 'void' (otherlv_3= ',' otherlv_4= '!dbg' otherlv_5= '!' this_INT_6= RULE_INT )?
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7206:3: ()
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7207:5: 
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7208:3: ()
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7209:5: 
                     {
 
                             current = forceCreateModelElement(
@@ -18790,7 +18785,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                         	newLeafNode(otherlv_2, grammarAccess.getReturnAccess().getVoidKeyword_0_2());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7220:1: (otherlv_3= ',' otherlv_4= '!dbg' otherlv_5= '!' this_INT_6= RULE_INT )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7222:1: (otherlv_3= ',' otherlv_4= '!dbg' otherlv_5= '!' this_INT_6= RULE_INT )?
                     int alt155=2;
                     int LA155_0 = input.LA(1);
 
@@ -18799,7 +18794,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt155) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7220:3: otherlv_3= ',' otherlv_4= '!dbg' otherlv_5= '!' this_INT_6= RULE_INT
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7222:3: otherlv_3= ',' otherlv_4= '!dbg' otherlv_5= '!' this_INT_6= RULE_INT
                             {
                             otherlv_3=(Token)match(input,30,FOLLOW_30_in_ruleReturn15226); 
 
@@ -18830,20 +18825,20 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7237:6: (otherlv_7= 'ret' ( (lv_returntype_8_0= ruleTypeUse ) ) ( (lv_returnvalue_9_0= ruleValue ) ) (otherlv_10= ',' otherlv_11= '!dbg' otherlv_12= '!' this_INT_13= RULE_INT )? )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7239:6: (otherlv_7= 'ret' ( (lv_returntype_8_0= ruleTypeUse ) ) ( (lv_returnvalue_9_0= ruleValue ) ) (otherlv_10= ',' otherlv_11= '!dbg' otherlv_12= '!' this_INT_13= RULE_INT )? )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7237:6: (otherlv_7= 'ret' ( (lv_returntype_8_0= ruleTypeUse ) ) ( (lv_returnvalue_9_0= ruleValue ) ) (otherlv_10= ',' otherlv_11= '!dbg' otherlv_12= '!' this_INT_13= RULE_INT )? )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7237:8: otherlv_7= 'ret' ( (lv_returntype_8_0= ruleTypeUse ) ) ( (lv_returnvalue_9_0= ruleValue ) ) (otherlv_10= ',' otherlv_11= '!dbg' otherlv_12= '!' this_INT_13= RULE_INT )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7239:6: (otherlv_7= 'ret' ( (lv_returntype_8_0= ruleTypeUse ) ) ( (lv_returnvalue_9_0= ruleValue ) ) (otherlv_10= ',' otherlv_11= '!dbg' otherlv_12= '!' this_INT_13= RULE_INT )? )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7239:8: otherlv_7= 'ret' ( (lv_returntype_8_0= ruleTypeUse ) ) ( (lv_returnvalue_9_0= ruleValue ) ) (otherlv_10= ',' otherlv_11= '!dbg' otherlv_12= '!' this_INT_13= RULE_INT )?
                     {
                     otherlv_7=(Token)match(input,125,FOLLOW_125_in_ruleReturn15282); 
 
                         	newLeafNode(otherlv_7, grammarAccess.getReturnAccess().getRetKeyword_1_0());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7241:1: ( (lv_returntype_8_0= ruleTypeUse ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7242:1: (lv_returntype_8_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7243:1: ( (lv_returntype_8_0= ruleTypeUse ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7244:1: (lv_returntype_8_0= ruleTypeUse )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7242:1: (lv_returntype_8_0= ruleTypeUse )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7243:3: lv_returntype_8_0= ruleTypeUse
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7244:1: (lv_returntype_8_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7245:3: lv_returntype_8_0= ruleTypeUse
                     {
                      
                     	        newCompositeNode(grammarAccess.getReturnAccess().getReturntypeTypeUseParserRuleCall_1_1_0()); 
@@ -18870,11 +18865,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7259:2: ( (lv_returnvalue_9_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7260:1: (lv_returnvalue_9_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7261:2: ( (lv_returnvalue_9_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7262:1: (lv_returnvalue_9_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7260:1: (lv_returnvalue_9_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7261:3: lv_returnvalue_9_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7262:1: (lv_returnvalue_9_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7263:3: lv_returnvalue_9_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getReturnAccess().getReturnvalueValueParserRuleCall_1_2_0()); 
@@ -18901,7 +18896,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7277:2: (otherlv_10= ',' otherlv_11= '!dbg' otherlv_12= '!' this_INT_13= RULE_INT )?
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7279:2: (otherlv_10= ',' otherlv_11= '!dbg' otherlv_12= '!' this_INT_13= RULE_INT )?
                     int alt156=2;
                     int LA156_0 = input.LA(1);
 
@@ -18910,7 +18905,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt156) {
                         case 1 :
-                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7277:4: otherlv_10= ',' otherlv_11= '!dbg' otherlv_12= '!' this_INT_13= RULE_INT
+                            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7279:4: otherlv_10= ',' otherlv_11= '!dbg' otherlv_12= '!' this_INT_13= RULE_INT
                             {
                             otherlv_10=(Token)match(input,30,FOLLOW_30_in_ruleReturn15337); 
 
@@ -18961,7 +18956,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleBranch"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7301:1: entryRuleBranch returns [EObject current=null] : iv_ruleBranch= ruleBranch EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7303:1: entryRuleBranch returns [EObject current=null] : iv_ruleBranch= ruleBranch EOF ;
     public final EObject entryRuleBranch() throws RecognitionException {
         EObject current = null;
 
@@ -18969,8 +18964,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7302:2: (iv_ruleBranch= ruleBranch EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7303:2: iv_ruleBranch= ruleBranch EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7304:2: (iv_ruleBranch= ruleBranch EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7305:2: iv_ruleBranch= ruleBranch EOF
             {
              newCompositeNode(grammarAccess.getBranchRule()); 
             pushFollow(FOLLOW_ruleBranch_in_entryRuleBranch15410);
@@ -18997,7 +18992,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleBranch"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7310:1: ruleBranch returns [EObject current=null] : ( (otherlv_0= 'br' otherlv_1= 'label' ( (lv_destination_2_0= ruleValue ) ) ) | (otherlv_3= 'br' this_INT_TYPE_4= RULE_INT_TYPE ( (lv_condvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_labelTruetype_7_0= ruleTypeUse ) ) ( (lv_labelTrue_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_labelFalsetype_10_0= ruleTypeUse ) ) ( (lv_labelFalse_11_0= ruleValue ) ) ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7312:1: ruleBranch returns [EObject current=null] : ( (otherlv_0= 'br' otherlv_1= 'label' ( (lv_destination_2_0= ruleValue ) ) ) | (otherlv_3= 'br' this_INT_TYPE_4= RULE_INT_TYPE ( (lv_condvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_labelTruetype_7_0= ruleTypeUse ) ) ( (lv_labelTrue_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_labelFalsetype_10_0= ruleTypeUse ) ) ( (lv_labelFalse_11_0= ruleValue ) ) ) ) ;
     public final EObject ruleBranch() throws RecognitionException {
         EObject current = null;
 
@@ -19023,10 +19018,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7313:28: ( ( (otherlv_0= 'br' otherlv_1= 'label' ( (lv_destination_2_0= ruleValue ) ) ) | (otherlv_3= 'br' this_INT_TYPE_4= RULE_INT_TYPE ( (lv_condvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_labelTruetype_7_0= ruleTypeUse ) ) ( (lv_labelTrue_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_labelFalsetype_10_0= ruleTypeUse ) ) ( (lv_labelFalse_11_0= ruleValue ) ) ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7314:1: ( (otherlv_0= 'br' otherlv_1= 'label' ( (lv_destination_2_0= ruleValue ) ) ) | (otherlv_3= 'br' this_INT_TYPE_4= RULE_INT_TYPE ( (lv_condvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_labelTruetype_7_0= ruleTypeUse ) ) ( (lv_labelTrue_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_labelFalsetype_10_0= ruleTypeUse ) ) ( (lv_labelFalse_11_0= ruleValue ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7315:28: ( ( (otherlv_0= 'br' otherlv_1= 'label' ( (lv_destination_2_0= ruleValue ) ) ) | (otherlv_3= 'br' this_INT_TYPE_4= RULE_INT_TYPE ( (lv_condvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_labelTruetype_7_0= ruleTypeUse ) ) ( (lv_labelTrue_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_labelFalsetype_10_0= ruleTypeUse ) ) ( (lv_labelFalse_11_0= ruleValue ) ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7316:1: ( (otherlv_0= 'br' otherlv_1= 'label' ( (lv_destination_2_0= ruleValue ) ) ) | (otherlv_3= 'br' this_INT_TYPE_4= RULE_INT_TYPE ( (lv_condvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_labelTruetype_7_0= ruleTypeUse ) ) ( (lv_labelTrue_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_labelFalsetype_10_0= ruleTypeUse ) ) ( (lv_labelFalse_11_0= ruleValue ) ) ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7314:1: ( (otherlv_0= 'br' otherlv_1= 'label' ( (lv_destination_2_0= ruleValue ) ) ) | (otherlv_3= 'br' this_INT_TYPE_4= RULE_INT_TYPE ( (lv_condvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_labelTruetype_7_0= ruleTypeUse ) ) ( (lv_labelTrue_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_labelFalsetype_10_0= ruleTypeUse ) ) ( (lv_labelFalse_11_0= ruleValue ) ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7316:1: ( (otherlv_0= 'br' otherlv_1= 'label' ( (lv_destination_2_0= ruleValue ) ) ) | (otherlv_3= 'br' this_INT_TYPE_4= RULE_INT_TYPE ( (lv_condvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_labelTruetype_7_0= ruleTypeUse ) ) ( (lv_labelTrue_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_labelFalsetype_10_0= ruleTypeUse ) ) ( (lv_labelFalse_11_0= ruleValue ) ) ) )
             int alt158=2;
             int LA158_0 = input.LA(1);
 
@@ -19054,10 +19049,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             }
             switch (alt158) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7314:2: (otherlv_0= 'br' otherlv_1= 'label' ( (lv_destination_2_0= ruleValue ) ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7316:2: (otherlv_0= 'br' otherlv_1= 'label' ( (lv_destination_2_0= ruleValue ) ) )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7314:2: (otherlv_0= 'br' otherlv_1= 'label' ( (lv_destination_2_0= ruleValue ) ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7314:4: otherlv_0= 'br' otherlv_1= 'label' ( (lv_destination_2_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7316:2: (otherlv_0= 'br' otherlv_1= 'label' ( (lv_destination_2_0= ruleValue ) ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7316:4: otherlv_0= 'br' otherlv_1= 'label' ( (lv_destination_2_0= ruleValue ) )
                     {
                     otherlv_0=(Token)match(input,127,FOLLOW_127_in_ruleBranch15458); 
 
@@ -19067,11 +19062,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                         	newLeafNode(otherlv_1, grammarAccess.getBranchAccess().getLabelKeyword_0_1());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7322:1: ( (lv_destination_2_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7323:1: (lv_destination_2_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7324:1: ( (lv_destination_2_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7325:1: (lv_destination_2_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7323:1: (lv_destination_2_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7324:3: lv_destination_2_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7325:1: (lv_destination_2_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7326:3: lv_destination_2_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getBranchAccess().getDestinationValueParserRuleCall_0_2_0()); 
@@ -19105,10 +19100,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7341:6: (otherlv_3= 'br' this_INT_TYPE_4= RULE_INT_TYPE ( (lv_condvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_labelTruetype_7_0= ruleTypeUse ) ) ( (lv_labelTrue_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_labelFalsetype_10_0= ruleTypeUse ) ) ( (lv_labelFalse_11_0= ruleValue ) ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7343:6: (otherlv_3= 'br' this_INT_TYPE_4= RULE_INT_TYPE ( (lv_condvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_labelTruetype_7_0= ruleTypeUse ) ) ( (lv_labelTrue_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_labelFalsetype_10_0= ruleTypeUse ) ) ( (lv_labelFalse_11_0= ruleValue ) ) )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7341:6: (otherlv_3= 'br' this_INT_TYPE_4= RULE_INT_TYPE ( (lv_condvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_labelTruetype_7_0= ruleTypeUse ) ) ( (lv_labelTrue_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_labelFalsetype_10_0= ruleTypeUse ) ) ( (lv_labelFalse_11_0= ruleValue ) ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7341:8: otherlv_3= 'br' this_INT_TYPE_4= RULE_INT_TYPE ( (lv_condvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_labelTruetype_7_0= ruleTypeUse ) ) ( (lv_labelTrue_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_labelFalsetype_10_0= ruleTypeUse ) ) ( (lv_labelFalse_11_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7343:6: (otherlv_3= 'br' this_INT_TYPE_4= RULE_INT_TYPE ( (lv_condvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_labelTruetype_7_0= ruleTypeUse ) ) ( (lv_labelTrue_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_labelFalsetype_10_0= ruleTypeUse ) ) ( (lv_labelFalse_11_0= ruleValue ) ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7343:8: otherlv_3= 'br' this_INT_TYPE_4= RULE_INT_TYPE ( (lv_condvalue_5_0= ruleValue ) ) otherlv_6= ',' ( (lv_labelTruetype_7_0= ruleTypeUse ) ) ( (lv_labelTrue_8_0= ruleValue ) ) otherlv_9= ',' ( (lv_labelFalsetype_10_0= ruleTypeUse ) ) ( (lv_labelFalse_11_0= ruleValue ) )
                     {
                     otherlv_3=(Token)match(input,127,FOLLOW_127_in_ruleBranch15511); 
 
@@ -19118,11 +19113,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                      
                         newLeafNode(this_INT_TYPE_4, grammarAccess.getBranchAccess().getINT_TYPETerminalRuleCall_1_1()); 
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7349:1: ( (lv_condvalue_5_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7350:1: (lv_condvalue_5_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7351:1: ( (lv_condvalue_5_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7352:1: (lv_condvalue_5_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7350:1: (lv_condvalue_5_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7351:3: lv_condvalue_5_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7352:1: (lv_condvalue_5_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7353:3: lv_condvalue_5_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getBranchAccess().getCondvalueValueParserRuleCall_1_2_0()); 
@@ -19153,11 +19148,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                         	newLeafNode(otherlv_6, grammarAccess.getBranchAccess().getCommaKeyword_1_3());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7371:1: ( (lv_labelTruetype_7_0= ruleTypeUse ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7372:1: (lv_labelTruetype_7_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7373:1: ( (lv_labelTruetype_7_0= ruleTypeUse ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7374:1: (lv_labelTruetype_7_0= ruleTypeUse )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7372:1: (lv_labelTruetype_7_0= ruleTypeUse )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7373:3: lv_labelTruetype_7_0= ruleTypeUse
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7374:1: (lv_labelTruetype_7_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7375:3: lv_labelTruetype_7_0= ruleTypeUse
                     {
                      
                     	        newCompositeNode(grammarAccess.getBranchAccess().getLabelTruetypeTypeUseParserRuleCall_1_4_0()); 
@@ -19184,11 +19179,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7389:2: ( (lv_labelTrue_8_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7390:1: (lv_labelTrue_8_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7391:2: ( (lv_labelTrue_8_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7392:1: (lv_labelTrue_8_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7390:1: (lv_labelTrue_8_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7391:3: lv_labelTrue_8_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7392:1: (lv_labelTrue_8_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7393:3: lv_labelTrue_8_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getBranchAccess().getLabelTrueValueParserRuleCall_1_5_0()); 
@@ -19219,11 +19214,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                         	newLeafNode(otherlv_9, grammarAccess.getBranchAccess().getCommaKeyword_1_6());
                         
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7411:1: ( (lv_labelFalsetype_10_0= ruleTypeUse ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7412:1: (lv_labelFalsetype_10_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7413:1: ( (lv_labelFalsetype_10_0= ruleTypeUse ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7414:1: (lv_labelFalsetype_10_0= ruleTypeUse )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7412:1: (lv_labelFalsetype_10_0= ruleTypeUse )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7413:3: lv_labelFalsetype_10_0= ruleTypeUse
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7414:1: (lv_labelFalsetype_10_0= ruleTypeUse )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7415:3: lv_labelFalsetype_10_0= ruleTypeUse
                     {
                      
                     	        newCompositeNode(grammarAccess.getBranchAccess().getLabelFalsetypeTypeUseParserRuleCall_1_7_0()); 
@@ -19250,11 +19245,11 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7429:2: ( (lv_labelFalse_11_0= ruleValue ) )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7430:1: (lv_labelFalse_11_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7431:2: ( (lv_labelFalse_11_0= ruleValue ) )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7432:1: (lv_labelFalse_11_0= ruleValue )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7430:1: (lv_labelFalse_11_0= ruleValue )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7431:3: lv_labelFalse_11_0= ruleValue
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7432:1: (lv_labelFalse_11_0= ruleValue )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7433:3: lv_labelFalse_11_0= ruleValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getBranchAccess().getLabelFalseValueParserRuleCall_1_8_0()); 
@@ -19308,7 +19303,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleATOMIC_ORDERING"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7455:1: entryRuleATOMIC_ORDERING returns [String current=null] : iv_ruleATOMIC_ORDERING= ruleATOMIC_ORDERING EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7457:1: entryRuleATOMIC_ORDERING returns [String current=null] : iv_ruleATOMIC_ORDERING= ruleATOMIC_ORDERING EOF ;
     public final String entryRuleATOMIC_ORDERING() throws RecognitionException {
         String current = null;
 
@@ -19316,8 +19311,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7456:2: (iv_ruleATOMIC_ORDERING= ruleATOMIC_ORDERING EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7457:2: iv_ruleATOMIC_ORDERING= ruleATOMIC_ORDERING EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7458:2: (iv_ruleATOMIC_ORDERING= ruleATOMIC_ORDERING EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7459:2: iv_ruleATOMIC_ORDERING= ruleATOMIC_ORDERING EOF
             {
              newCompositeNode(grammarAccess.getATOMIC_ORDERINGRule()); 
             pushFollow(FOLLOW_ruleATOMIC_ORDERING_in_entryRuleATOMIC_ORDERING15688);
@@ -19344,7 +19339,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleATOMIC_ORDERING"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7464:1: ruleATOMIC_ORDERING returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'unordered' | kw= 'monotonic' | kw= 'aquire' | kw= 'release' | kw= 'acq_rel' | kw= 'seq_cst' ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7466:1: ruleATOMIC_ORDERING returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'unordered' | kw= 'monotonic' | kw= 'aquire' | kw= 'release' | kw= 'acq_rel' | kw= 'seq_cst' ) ;
     public final AntlrDatatypeRuleToken ruleATOMIC_ORDERING() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -19353,10 +19348,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7467:28: ( (kw= 'unordered' | kw= 'monotonic' | kw= 'aquire' | kw= 'release' | kw= 'acq_rel' | kw= 'seq_cst' ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7468:1: (kw= 'unordered' | kw= 'monotonic' | kw= 'aquire' | kw= 'release' | kw= 'acq_rel' | kw= 'seq_cst' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7469:28: ( (kw= 'unordered' | kw= 'monotonic' | kw= 'aquire' | kw= 'release' | kw= 'acq_rel' | kw= 'seq_cst' ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7470:1: (kw= 'unordered' | kw= 'monotonic' | kw= 'aquire' | kw= 'release' | kw= 'acq_rel' | kw= 'seq_cst' )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7468:1: (kw= 'unordered' | kw= 'monotonic' | kw= 'aquire' | kw= 'release' | kw= 'acq_rel' | kw= 'seq_cst' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7470:1: (kw= 'unordered' | kw= 'monotonic' | kw= 'aquire' | kw= 'release' | kw= 'acq_rel' | kw= 'seq_cst' )
             int alt159=6;
             switch ( input.LA(1) ) {
             case 128:
@@ -19398,7 +19393,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             switch (alt159) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7469:2: kw= 'unordered'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7471:2: kw= 'unordered'
                     {
                     kw=(Token)match(input,128,FOLLOW_128_in_ruleATOMIC_ORDERING15737); 
 
@@ -19409,7 +19404,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7476:2: kw= 'monotonic'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7478:2: kw= 'monotonic'
                     {
                     kw=(Token)match(input,129,FOLLOW_129_in_ruleATOMIC_ORDERING15756); 
 
@@ -19420,7 +19415,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7483:2: kw= 'aquire'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7485:2: kw= 'aquire'
                     {
                     kw=(Token)match(input,130,FOLLOW_130_in_ruleATOMIC_ORDERING15775); 
 
@@ -19431,7 +19426,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7490:2: kw= 'release'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7492:2: kw= 'release'
                     {
                     kw=(Token)match(input,131,FOLLOW_131_in_ruleATOMIC_ORDERING15794); 
 
@@ -19442,7 +19437,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7497:2: kw= 'acq_rel'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7499:2: kw= 'acq_rel'
                     {
                     kw=(Token)match(input,132,FOLLOW_132_in_ruleATOMIC_ORDERING15813); 
 
@@ -19453,7 +19448,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7504:2: kw= 'seq_cst'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7506:2: kw= 'seq_cst'
                     {
                     kw=(Token)match(input,133,FOLLOW_133_in_ruleATOMIC_ORDERING15832); 
 
@@ -19484,7 +19479,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleBIN_OP"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7517:1: entryRuleBIN_OP returns [String current=null] : iv_ruleBIN_OP= ruleBIN_OP EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7519:1: entryRuleBIN_OP returns [String current=null] : iv_ruleBIN_OP= ruleBIN_OP EOF ;
     public final String entryRuleBIN_OP() throws RecognitionException {
         String current = null;
 
@@ -19492,8 +19487,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7518:2: (iv_ruleBIN_OP= ruleBIN_OP EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7519:2: iv_ruleBIN_OP= ruleBIN_OP EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7520:2: (iv_ruleBIN_OP= ruleBIN_OP EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7521:2: iv_ruleBIN_OP= ruleBIN_OP EOF
             {
              newCompositeNode(grammarAccess.getBIN_OPRule()); 
             pushFollow(FOLLOW_ruleBIN_OP_in_entryRuleBIN_OP15873);
@@ -19520,7 +19515,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleBIN_OP"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7526:1: ruleBIN_OP returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'xchg' | kw= 'add' | kw= 'sub' | kw= 'and' | kw= 'nand' | kw= 'or' | kw= 'xor' | kw= 'max' | kw= 'min' | kw= 'umax' | kw= 'umin' ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7528:1: ruleBIN_OP returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'xchg' | kw= 'add' | kw= 'sub' | kw= 'and' | kw= 'nand' | kw= 'or' | kw= 'xor' | kw= 'max' | kw= 'min' | kw= 'umax' | kw= 'umin' ) ;
     public final AntlrDatatypeRuleToken ruleBIN_OP() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -19529,10 +19524,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7529:28: ( (kw= 'xchg' | kw= 'add' | kw= 'sub' | kw= 'and' | kw= 'nand' | kw= 'or' | kw= 'xor' | kw= 'max' | kw= 'min' | kw= 'umax' | kw= 'umin' ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7530:1: (kw= 'xchg' | kw= 'add' | kw= 'sub' | kw= 'and' | kw= 'nand' | kw= 'or' | kw= 'xor' | kw= 'max' | kw= 'min' | kw= 'umax' | kw= 'umin' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7531:28: ( (kw= 'xchg' | kw= 'add' | kw= 'sub' | kw= 'and' | kw= 'nand' | kw= 'or' | kw= 'xor' | kw= 'max' | kw= 'min' | kw= 'umax' | kw= 'umin' ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7532:1: (kw= 'xchg' | kw= 'add' | kw= 'sub' | kw= 'and' | kw= 'nand' | kw= 'or' | kw= 'xor' | kw= 'max' | kw= 'min' | kw= 'umax' | kw= 'umin' )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7530:1: (kw= 'xchg' | kw= 'add' | kw= 'sub' | kw= 'and' | kw= 'nand' | kw= 'or' | kw= 'xor' | kw= 'max' | kw= 'min' | kw= 'umax' | kw= 'umin' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7532:1: (kw= 'xchg' | kw= 'add' | kw= 'sub' | kw= 'and' | kw= 'nand' | kw= 'or' | kw= 'xor' | kw= 'max' | kw= 'min' | kw= 'umax' | kw= 'umin' )
             int alt160=11;
             switch ( input.LA(1) ) {
             case 134:
@@ -19599,7 +19594,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             switch (alt160) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7531:2: kw= 'xchg'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7533:2: kw= 'xchg'
                     {
                     kw=(Token)match(input,134,FOLLOW_134_in_ruleBIN_OP15922); 
 
@@ -19610,7 +19605,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7538:2: kw= 'add'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7540:2: kw= 'add'
                     {
                     kw=(Token)match(input,69,FOLLOW_69_in_ruleBIN_OP15941); 
 
@@ -19621,7 +19616,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7545:2: kw= 'sub'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7547:2: kw= 'sub'
                     {
                     kw=(Token)match(input,71,FOLLOW_71_in_ruleBIN_OP15960); 
 
@@ -19632,7 +19627,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7552:2: kw= 'and'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7554:2: kw= 'and'
                     {
                     kw=(Token)match(input,86,FOLLOW_86_in_ruleBIN_OP15979); 
 
@@ -19643,7 +19638,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7559:2: kw= 'nand'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7561:2: kw= 'nand'
                     {
                     kw=(Token)match(input,135,FOLLOW_135_in_ruleBIN_OP15998); 
 
@@ -19654,7 +19649,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7566:2: kw= 'or'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7568:2: kw= 'or'
                     {
                     kw=(Token)match(input,87,FOLLOW_87_in_ruleBIN_OP16017); 
 
@@ -19665,7 +19660,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7573:2: kw= 'xor'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7575:2: kw= 'xor'
                     {
                     kw=(Token)match(input,88,FOLLOW_88_in_ruleBIN_OP16036); 
 
@@ -19676,7 +19671,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7580:2: kw= 'max'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7582:2: kw= 'max'
                     {
                     kw=(Token)match(input,136,FOLLOW_136_in_ruleBIN_OP16055); 
 
@@ -19687,7 +19682,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 9 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7587:2: kw= 'min'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7589:2: kw= 'min'
                     {
                     kw=(Token)match(input,137,FOLLOW_137_in_ruleBIN_OP16074); 
 
@@ -19698,7 +19693,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 10 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7594:2: kw= 'umax'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7596:2: kw= 'umax'
                     {
                     kw=(Token)match(input,138,FOLLOW_138_in_ruleBIN_OP16093); 
 
@@ -19709,7 +19704,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 11 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7601:2: kw= 'umin'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7603:2: kw= 'umin'
                     {
                     kw=(Token)match(input,139,FOLLOW_139_in_ruleBIN_OP16112); 
 
@@ -19740,7 +19735,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleRETURN_ATTRIBUTES"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7614:1: entryRuleRETURN_ATTRIBUTES returns [String current=null] : iv_ruleRETURN_ATTRIBUTES= ruleRETURN_ATTRIBUTES EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7616:1: entryRuleRETURN_ATTRIBUTES returns [String current=null] : iv_ruleRETURN_ATTRIBUTES= ruleRETURN_ATTRIBUTES EOF ;
     public final String entryRuleRETURN_ATTRIBUTES() throws RecognitionException {
         String current = null;
 
@@ -19748,8 +19743,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7615:2: (iv_ruleRETURN_ATTRIBUTES= ruleRETURN_ATTRIBUTES EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7616:2: iv_ruleRETURN_ATTRIBUTES= ruleRETURN_ATTRIBUTES EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7617:2: (iv_ruleRETURN_ATTRIBUTES= ruleRETURN_ATTRIBUTES EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7618:2: iv_ruleRETURN_ATTRIBUTES= ruleRETURN_ATTRIBUTES EOF
             {
              newCompositeNode(grammarAccess.getRETURN_ATTRIBUTESRule()); 
             pushFollow(FOLLOW_ruleRETURN_ATTRIBUTES_in_entryRuleRETURN_ATTRIBUTES16153);
@@ -19776,7 +19771,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRETURN_ATTRIBUTES"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7623:1: ruleRETURN_ATTRIBUTES returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'zeroext' | kw= 'signext' | kw= 'inreg' | kw= 'byval' | kw= 'sret' | kw= 'noalias' | kw= 'nocapture' | kw= 'nest' ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7625:1: ruleRETURN_ATTRIBUTES returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'zeroext' | kw= 'signext' | kw= 'inreg' | kw= 'byval' | kw= 'sret' | kw= 'noalias' | kw= 'nocapture' | kw= 'nest' ) ;
     public final AntlrDatatypeRuleToken ruleRETURN_ATTRIBUTES() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -19785,10 +19780,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7626:28: ( (kw= 'zeroext' | kw= 'signext' | kw= 'inreg' | kw= 'byval' | kw= 'sret' | kw= 'noalias' | kw= 'nocapture' | kw= 'nest' ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7627:1: (kw= 'zeroext' | kw= 'signext' | kw= 'inreg' | kw= 'byval' | kw= 'sret' | kw= 'noalias' | kw= 'nocapture' | kw= 'nest' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7628:28: ( (kw= 'zeroext' | kw= 'signext' | kw= 'inreg' | kw= 'byval' | kw= 'sret' | kw= 'noalias' | kw= 'nocapture' | kw= 'nest' ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7629:1: (kw= 'zeroext' | kw= 'signext' | kw= 'inreg' | kw= 'byval' | kw= 'sret' | kw= 'noalias' | kw= 'nocapture' | kw= 'nest' )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7627:1: (kw= 'zeroext' | kw= 'signext' | kw= 'inreg' | kw= 'byval' | kw= 'sret' | kw= 'noalias' | kw= 'nocapture' | kw= 'nest' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7629:1: (kw= 'zeroext' | kw= 'signext' | kw= 'inreg' | kw= 'byval' | kw= 'sret' | kw= 'noalias' | kw= 'nocapture' | kw= 'nest' )
             int alt161=8;
             switch ( input.LA(1) ) {
             case 140:
@@ -19840,7 +19835,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             switch (alt161) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7628:2: kw= 'zeroext'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7630:2: kw= 'zeroext'
                     {
                     kw=(Token)match(input,140,FOLLOW_140_in_ruleRETURN_ATTRIBUTES16202); 
 
@@ -19851,7 +19846,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7635:2: kw= 'signext'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7637:2: kw= 'signext'
                     {
                     kw=(Token)match(input,141,FOLLOW_141_in_ruleRETURN_ATTRIBUTES16221); 
 
@@ -19862,7 +19857,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7642:2: kw= 'inreg'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7644:2: kw= 'inreg'
                     {
                     kw=(Token)match(input,142,FOLLOW_142_in_ruleRETURN_ATTRIBUTES16240); 
 
@@ -19873,7 +19868,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7649:2: kw= 'byval'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7651:2: kw= 'byval'
                     {
                     kw=(Token)match(input,143,FOLLOW_143_in_ruleRETURN_ATTRIBUTES16259); 
 
@@ -19884,7 +19879,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7656:2: kw= 'sret'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7658:2: kw= 'sret'
                     {
                     kw=(Token)match(input,144,FOLLOW_144_in_ruleRETURN_ATTRIBUTES16278); 
 
@@ -19895,7 +19890,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7663:2: kw= 'noalias'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7665:2: kw= 'noalias'
                     {
                     kw=(Token)match(input,145,FOLLOW_145_in_ruleRETURN_ATTRIBUTES16297); 
 
@@ -19906,7 +19901,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7670:2: kw= 'nocapture'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7672:2: kw= 'nocapture'
                     {
                     kw=(Token)match(input,146,FOLLOW_146_in_ruleRETURN_ATTRIBUTES16316); 
 
@@ -19917,7 +19912,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7677:2: kw= 'nest'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7679:2: kw= 'nest'
                     {
                     kw=(Token)match(input,147,FOLLOW_147_in_ruleRETURN_ATTRIBUTES16335); 
 
@@ -19948,7 +19943,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleCallingConv"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7690:1: entryRuleCallingConv returns [String current=null] : iv_ruleCallingConv= ruleCallingConv EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7692:1: entryRuleCallingConv returns [String current=null] : iv_ruleCallingConv= ruleCallingConv EOF ;
     public final String entryRuleCallingConv() throws RecognitionException {
         String current = null;
 
@@ -19956,8 +19951,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7691:2: (iv_ruleCallingConv= ruleCallingConv EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7692:2: iv_ruleCallingConv= ruleCallingConv EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7693:2: (iv_ruleCallingConv= ruleCallingConv EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7694:2: iv_ruleCallingConv= ruleCallingConv EOF
             {
              newCompositeNode(grammarAccess.getCallingConvRule()); 
             pushFollow(FOLLOW_ruleCallingConv_in_entryRuleCallingConv16376);
@@ -19984,7 +19979,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCallingConv"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7699:1: ruleCallingConv returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'ccc' | kw= 'fastcc' | kw= 'coldcc' | kw= 'x86_stdcallcc' | kw= 'x86_fastcallcc' | kw= 'x86_thiscallcc' | kw= 'arm_apcscc' | kw= 'arm_aapcscc' | kw= 'arm_aapcs_vfpcc' | kw= 'msp430_intrcc' | kw= 'ptx_kernel' | kw= 'ptx_device' | kw= 'spir_func' | kw= 'spir_kernel' | (kw= 'cc' kw= '<' this_INT_16= RULE_INT kw= '>' this_INT_18= RULE_INT ) ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7701:1: ruleCallingConv returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'ccc' | kw= 'fastcc' | kw= 'coldcc' | kw= 'x86_stdcallcc' | kw= 'x86_fastcallcc' | kw= 'x86_thiscallcc' | kw= 'arm_apcscc' | kw= 'arm_aapcscc' | kw= 'arm_aapcs_vfpcc' | kw= 'msp430_intrcc' | kw= 'ptx_kernel' | kw= 'ptx_device' | kw= 'spir_func' | kw= 'spir_kernel' | (kw= 'cc' kw= '<' this_INT_16= RULE_INT kw= '>' this_INT_18= RULE_INT ) ) ;
     public final AntlrDatatypeRuleToken ruleCallingConv() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -19995,10 +19990,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7702:28: ( (kw= 'ccc' | kw= 'fastcc' | kw= 'coldcc' | kw= 'x86_stdcallcc' | kw= 'x86_fastcallcc' | kw= 'x86_thiscallcc' | kw= 'arm_apcscc' | kw= 'arm_aapcscc' | kw= 'arm_aapcs_vfpcc' | kw= 'msp430_intrcc' | kw= 'ptx_kernel' | kw= 'ptx_device' | kw= 'spir_func' | kw= 'spir_kernel' | (kw= 'cc' kw= '<' this_INT_16= RULE_INT kw= '>' this_INT_18= RULE_INT ) ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7703:1: (kw= 'ccc' | kw= 'fastcc' | kw= 'coldcc' | kw= 'x86_stdcallcc' | kw= 'x86_fastcallcc' | kw= 'x86_thiscallcc' | kw= 'arm_apcscc' | kw= 'arm_aapcscc' | kw= 'arm_aapcs_vfpcc' | kw= 'msp430_intrcc' | kw= 'ptx_kernel' | kw= 'ptx_device' | kw= 'spir_func' | kw= 'spir_kernel' | (kw= 'cc' kw= '<' this_INT_16= RULE_INT kw= '>' this_INT_18= RULE_INT ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7704:28: ( (kw= 'ccc' | kw= 'fastcc' | kw= 'coldcc' | kw= 'x86_stdcallcc' | kw= 'x86_fastcallcc' | kw= 'x86_thiscallcc' | kw= 'arm_apcscc' | kw= 'arm_aapcscc' | kw= 'arm_aapcs_vfpcc' | kw= 'msp430_intrcc' | kw= 'ptx_kernel' | kw= 'ptx_device' | kw= 'spir_func' | kw= 'spir_kernel' | (kw= 'cc' kw= '<' this_INT_16= RULE_INT kw= '>' this_INT_18= RULE_INT ) ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7705:1: (kw= 'ccc' | kw= 'fastcc' | kw= 'coldcc' | kw= 'x86_stdcallcc' | kw= 'x86_fastcallcc' | kw= 'x86_thiscallcc' | kw= 'arm_apcscc' | kw= 'arm_aapcscc' | kw= 'arm_aapcs_vfpcc' | kw= 'msp430_intrcc' | kw= 'ptx_kernel' | kw= 'ptx_device' | kw= 'spir_func' | kw= 'spir_kernel' | (kw= 'cc' kw= '<' this_INT_16= RULE_INT kw= '>' this_INT_18= RULE_INT ) )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7703:1: (kw= 'ccc' | kw= 'fastcc' | kw= 'coldcc' | kw= 'x86_stdcallcc' | kw= 'x86_fastcallcc' | kw= 'x86_thiscallcc' | kw= 'arm_apcscc' | kw= 'arm_aapcscc' | kw= 'arm_aapcs_vfpcc' | kw= 'msp430_intrcc' | kw= 'ptx_kernel' | kw= 'ptx_device' | kw= 'spir_func' | kw= 'spir_kernel' | (kw= 'cc' kw= '<' this_INT_16= RULE_INT kw= '>' this_INT_18= RULE_INT ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7705:1: (kw= 'ccc' | kw= 'fastcc' | kw= 'coldcc' | kw= 'x86_stdcallcc' | kw= 'x86_fastcallcc' | kw= 'x86_thiscallcc' | kw= 'arm_apcscc' | kw= 'arm_aapcscc' | kw= 'arm_aapcs_vfpcc' | kw= 'msp430_intrcc' | kw= 'ptx_kernel' | kw= 'ptx_device' | kw= 'spir_func' | kw= 'spir_kernel' | (kw= 'cc' kw= '<' this_INT_16= RULE_INT kw= '>' this_INT_18= RULE_INT ) )
             int alt162=15;
             switch ( input.LA(1) ) {
             case 148:
@@ -20085,7 +20080,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             switch (alt162) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7704:2: kw= 'ccc'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7706:2: kw= 'ccc'
                     {
                     kw=(Token)match(input,148,FOLLOW_148_in_ruleCallingConv16425); 
 
@@ -20096,7 +20091,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7711:2: kw= 'fastcc'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7713:2: kw= 'fastcc'
                     {
                     kw=(Token)match(input,149,FOLLOW_149_in_ruleCallingConv16444); 
 
@@ -20107,7 +20102,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7718:2: kw= 'coldcc'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7720:2: kw= 'coldcc'
                     {
                     kw=(Token)match(input,150,FOLLOW_150_in_ruleCallingConv16463); 
 
@@ -20118,7 +20113,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7725:2: kw= 'x86_stdcallcc'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7727:2: kw= 'x86_stdcallcc'
                     {
                     kw=(Token)match(input,151,FOLLOW_151_in_ruleCallingConv16482); 
 
@@ -20129,7 +20124,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7732:2: kw= 'x86_fastcallcc'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7734:2: kw= 'x86_fastcallcc'
                     {
                     kw=(Token)match(input,152,FOLLOW_152_in_ruleCallingConv16501); 
 
@@ -20140,7 +20135,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7739:2: kw= 'x86_thiscallcc'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7741:2: kw= 'x86_thiscallcc'
                     {
                     kw=(Token)match(input,153,FOLLOW_153_in_ruleCallingConv16520); 
 
@@ -20151,7 +20146,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7746:2: kw= 'arm_apcscc'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7748:2: kw= 'arm_apcscc'
                     {
                     kw=(Token)match(input,154,FOLLOW_154_in_ruleCallingConv16539); 
 
@@ -20162,7 +20157,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7753:2: kw= 'arm_aapcscc'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7755:2: kw= 'arm_aapcscc'
                     {
                     kw=(Token)match(input,155,FOLLOW_155_in_ruleCallingConv16558); 
 
@@ -20173,7 +20168,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 9 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7760:2: kw= 'arm_aapcs_vfpcc'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7762:2: kw= 'arm_aapcs_vfpcc'
                     {
                     kw=(Token)match(input,156,FOLLOW_156_in_ruleCallingConv16577); 
 
@@ -20184,7 +20179,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 10 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7767:2: kw= 'msp430_intrcc'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7769:2: kw= 'msp430_intrcc'
                     {
                     kw=(Token)match(input,157,FOLLOW_157_in_ruleCallingConv16596); 
 
@@ -20195,7 +20190,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 11 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7774:2: kw= 'ptx_kernel'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7776:2: kw= 'ptx_kernel'
                     {
                     kw=(Token)match(input,158,FOLLOW_158_in_ruleCallingConv16615); 
 
@@ -20206,7 +20201,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 12 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7781:2: kw= 'ptx_device'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7783:2: kw= 'ptx_device'
                     {
                     kw=(Token)match(input,159,FOLLOW_159_in_ruleCallingConv16634); 
 
@@ -20217,7 +20212,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 13 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7788:2: kw= 'spir_func'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7790:2: kw= 'spir_func'
                     {
                     kw=(Token)match(input,160,FOLLOW_160_in_ruleCallingConv16653); 
 
@@ -20228,7 +20223,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 14 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7795:2: kw= 'spir_kernel'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7797:2: kw= 'spir_kernel'
                     {
                     kw=(Token)match(input,161,FOLLOW_161_in_ruleCallingConv16672); 
 
@@ -20239,10 +20234,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 15 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7801:6: (kw= 'cc' kw= '<' this_INT_16= RULE_INT kw= '>' this_INT_18= RULE_INT )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7803:6: (kw= 'cc' kw= '<' this_INT_16= RULE_INT kw= '>' this_INT_18= RULE_INT )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7801:6: (kw= 'cc' kw= '<' this_INT_16= RULE_INT kw= '>' this_INT_18= RULE_INT )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7802:2: kw= 'cc' kw= '<' this_INT_16= RULE_INT kw= '>' this_INT_18= RULE_INT
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7803:6: (kw= 'cc' kw= '<' this_INT_16= RULE_INT kw= '>' this_INT_18= RULE_INT )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7804:2: kw= 'cc' kw= '<' this_INT_16= RULE_INT kw= '>' this_INT_18= RULE_INT
                     {
                     kw=(Token)match(input,162,FOLLOW_162_in_ruleCallingConv16692); 
 
@@ -20300,7 +20295,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleFUNCTION_ATTRIBUTES"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7841:1: entryRuleFUNCTION_ATTRIBUTES returns [String current=null] : iv_ruleFUNCTION_ATTRIBUTES= ruleFUNCTION_ATTRIBUTES EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7843:1: entryRuleFUNCTION_ATTRIBUTES returns [String current=null] : iv_ruleFUNCTION_ATTRIBUTES= ruleFUNCTION_ATTRIBUTES EOF ;
     public final String entryRuleFUNCTION_ATTRIBUTES() throws RecognitionException {
         String current = null;
 
@@ -20308,8 +20303,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7842:2: (iv_ruleFUNCTION_ATTRIBUTES= ruleFUNCTION_ATTRIBUTES EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7843:2: iv_ruleFUNCTION_ATTRIBUTES= ruleFUNCTION_ATTRIBUTES EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7844:2: (iv_ruleFUNCTION_ATTRIBUTES= ruleFUNCTION_ATTRIBUTES EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7845:2: iv_ruleFUNCTION_ATTRIBUTES= ruleFUNCTION_ATTRIBUTES EOF
             {
              newCompositeNode(grammarAccess.getFUNCTION_ATTRIBUTESRule()); 
             pushFollow(FOLLOW_ruleFUNCTION_ATTRIBUTES_in_entryRuleFUNCTION_ATTRIBUTES16800);
@@ -20336,7 +20331,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFUNCTION_ATTRIBUTES"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7850:1: ruleFUNCTION_ATTRIBUTES returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'address_safety' | (kw= 'alignstack' kw= '(' kw= '<' this_INT_4= RULE_INT kw= '>' kw= ')' ) | kw= 'alwaysinline' | kw= 'nonlazybind' | kw= 'inlinehint' | kw= 'naked' | kw= 'noimplicitfloat' | kw= 'noinline' | kw= 'noredzone' | kw= 'noreturn' | kw= 'nounwind' | kw= 'optsize' | kw= 'readnone' | kw= 'readonly' | kw= 'returns_twice' | kw= 'ssp' | kw= 'sspreq' | kw= 'uwtable' ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7852:1: ruleFUNCTION_ATTRIBUTES returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'address_safety' | (kw= 'alignstack' kw= '(' kw= '<' this_INT_4= RULE_INT kw= '>' kw= ')' ) | kw= 'alwaysinline' | kw= 'nonlazybind' | kw= 'inlinehint' | kw= 'naked' | kw= 'noimplicitfloat' | kw= 'noinline' | kw= 'noredzone' | kw= 'noreturn' | kw= 'nounwind' | kw= 'optsize' | kw= 'readnone' | kw= 'readonly' | kw= 'returns_twice' | kw= 'ssp' | kw= 'sspreq' | kw= 'uwtable' ) ;
     public final AntlrDatatypeRuleToken ruleFUNCTION_ATTRIBUTES() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -20346,10 +20341,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7853:28: ( (kw= 'address_safety' | (kw= 'alignstack' kw= '(' kw= '<' this_INT_4= RULE_INT kw= '>' kw= ')' ) | kw= 'alwaysinline' | kw= 'nonlazybind' | kw= 'inlinehint' | kw= 'naked' | kw= 'noimplicitfloat' | kw= 'noinline' | kw= 'noredzone' | kw= 'noreturn' | kw= 'nounwind' | kw= 'optsize' | kw= 'readnone' | kw= 'readonly' | kw= 'returns_twice' | kw= 'ssp' | kw= 'sspreq' | kw= 'uwtable' ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7854:1: (kw= 'address_safety' | (kw= 'alignstack' kw= '(' kw= '<' this_INT_4= RULE_INT kw= '>' kw= ')' ) | kw= 'alwaysinline' | kw= 'nonlazybind' | kw= 'inlinehint' | kw= 'naked' | kw= 'noimplicitfloat' | kw= 'noinline' | kw= 'noredzone' | kw= 'noreturn' | kw= 'nounwind' | kw= 'optsize' | kw= 'readnone' | kw= 'readonly' | kw= 'returns_twice' | kw= 'ssp' | kw= 'sspreq' | kw= 'uwtable' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7855:28: ( (kw= 'address_safety' | (kw= 'alignstack' kw= '(' kw= '<' this_INT_4= RULE_INT kw= '>' kw= ')' ) | kw= 'alwaysinline' | kw= 'nonlazybind' | kw= 'inlinehint' | kw= 'naked' | kw= 'noimplicitfloat' | kw= 'noinline' | kw= 'noredzone' | kw= 'noreturn' | kw= 'nounwind' | kw= 'optsize' | kw= 'readnone' | kw= 'readonly' | kw= 'returns_twice' | kw= 'ssp' | kw= 'sspreq' | kw= 'uwtable' ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7856:1: (kw= 'address_safety' | (kw= 'alignstack' kw= '(' kw= '<' this_INT_4= RULE_INT kw= '>' kw= ')' ) | kw= 'alwaysinline' | kw= 'nonlazybind' | kw= 'inlinehint' | kw= 'naked' | kw= 'noimplicitfloat' | kw= 'noinline' | kw= 'noredzone' | kw= 'noreturn' | kw= 'nounwind' | kw= 'optsize' | kw= 'readnone' | kw= 'readonly' | kw= 'returns_twice' | kw= 'ssp' | kw= 'sspreq' | kw= 'uwtable' )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7854:1: (kw= 'address_safety' | (kw= 'alignstack' kw= '(' kw= '<' this_INT_4= RULE_INT kw= '>' kw= ')' ) | kw= 'alwaysinline' | kw= 'nonlazybind' | kw= 'inlinehint' | kw= 'naked' | kw= 'noimplicitfloat' | kw= 'noinline' | kw= 'noredzone' | kw= 'noreturn' | kw= 'nounwind' | kw= 'optsize' | kw= 'readnone' | kw= 'readonly' | kw= 'returns_twice' | kw= 'ssp' | kw= 'sspreq' | kw= 'uwtable' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7856:1: (kw= 'address_safety' | (kw= 'alignstack' kw= '(' kw= '<' this_INT_4= RULE_INT kw= '>' kw= ')' ) | kw= 'alwaysinline' | kw= 'nonlazybind' | kw= 'inlinehint' | kw= 'naked' | kw= 'noimplicitfloat' | kw= 'noinline' | kw= 'noredzone' | kw= 'noreturn' | kw= 'nounwind' | kw= 'optsize' | kw= 'readnone' | kw= 'readonly' | kw= 'returns_twice' | kw= 'ssp' | kw= 'sspreq' | kw= 'uwtable' )
             int alt163=18;
             switch ( input.LA(1) ) {
             case 163:
@@ -20451,7 +20446,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             switch (alt163) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7855:2: kw= 'address_safety'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7857:2: kw= 'address_safety'
                     {
                     kw=(Token)match(input,163,FOLLOW_163_in_ruleFUNCTION_ATTRIBUTES16849); 
 
@@ -20462,10 +20457,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7861:6: (kw= 'alignstack' kw= '(' kw= '<' this_INT_4= RULE_INT kw= '>' kw= ')' )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7863:6: (kw= 'alignstack' kw= '(' kw= '<' this_INT_4= RULE_INT kw= '>' kw= ')' )
                     {
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7861:6: (kw= 'alignstack' kw= '(' kw= '<' this_INT_4= RULE_INT kw= '>' kw= ')' )
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7862:2: kw= 'alignstack' kw= '(' kw= '<' this_INT_4= RULE_INT kw= '>' kw= ')'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7863:6: (kw= 'alignstack' kw= '(' kw= '<' this_INT_4= RULE_INT kw= '>' kw= ')' )
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7864:2: kw= 'alignstack' kw= '(' kw= '<' this_INT_4= RULE_INT kw= '>' kw= ')'
                     {
                     kw=(Token)match(input,164,FOLLOW_164_in_ruleFUNCTION_ATTRIBUTES16869); 
 
@@ -20506,7 +20501,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7900:2: kw= 'alwaysinline'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7902:2: kw= 'alwaysinline'
                     {
                     kw=(Token)match(input,165,FOLLOW_165_in_ruleFUNCTION_ATTRIBUTES16961); 
 
@@ -20517,7 +20512,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7907:2: kw= 'nonlazybind'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7909:2: kw= 'nonlazybind'
                     {
                     kw=(Token)match(input,166,FOLLOW_166_in_ruleFUNCTION_ATTRIBUTES16980); 
 
@@ -20528,7 +20523,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7914:2: kw= 'inlinehint'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7916:2: kw= 'inlinehint'
                     {
                     kw=(Token)match(input,167,FOLLOW_167_in_ruleFUNCTION_ATTRIBUTES16999); 
 
@@ -20539,7 +20534,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7921:2: kw= 'naked'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7923:2: kw= 'naked'
                     {
                     kw=(Token)match(input,168,FOLLOW_168_in_ruleFUNCTION_ATTRIBUTES17018); 
 
@@ -20550,7 +20545,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7928:2: kw= 'noimplicitfloat'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7930:2: kw= 'noimplicitfloat'
                     {
                     kw=(Token)match(input,169,FOLLOW_169_in_ruleFUNCTION_ATTRIBUTES17037); 
 
@@ -20561,7 +20556,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7935:2: kw= 'noinline'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7937:2: kw= 'noinline'
                     {
                     kw=(Token)match(input,170,FOLLOW_170_in_ruleFUNCTION_ATTRIBUTES17056); 
 
@@ -20572,7 +20567,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 9 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7942:2: kw= 'noredzone'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7944:2: kw= 'noredzone'
                     {
                     kw=(Token)match(input,171,FOLLOW_171_in_ruleFUNCTION_ATTRIBUTES17075); 
 
@@ -20583,7 +20578,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 10 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7949:2: kw= 'noreturn'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7951:2: kw= 'noreturn'
                     {
                     kw=(Token)match(input,172,FOLLOW_172_in_ruleFUNCTION_ATTRIBUTES17094); 
 
@@ -20594,7 +20589,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 11 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7956:2: kw= 'nounwind'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7958:2: kw= 'nounwind'
                     {
                     kw=(Token)match(input,173,FOLLOW_173_in_ruleFUNCTION_ATTRIBUTES17113); 
 
@@ -20605,7 +20600,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 12 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7963:2: kw= 'optsize'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7965:2: kw= 'optsize'
                     {
                     kw=(Token)match(input,174,FOLLOW_174_in_ruleFUNCTION_ATTRIBUTES17132); 
 
@@ -20616,7 +20611,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 13 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7970:2: kw= 'readnone'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7972:2: kw= 'readnone'
                     {
                     kw=(Token)match(input,175,FOLLOW_175_in_ruleFUNCTION_ATTRIBUTES17151); 
 
@@ -20627,7 +20622,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 14 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7977:2: kw= 'readonly'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7979:2: kw= 'readonly'
                     {
                     kw=(Token)match(input,176,FOLLOW_176_in_ruleFUNCTION_ATTRIBUTES17170); 
 
@@ -20638,7 +20633,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 15 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7984:2: kw= 'returns_twice'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7986:2: kw= 'returns_twice'
                     {
                     kw=(Token)match(input,177,FOLLOW_177_in_ruleFUNCTION_ATTRIBUTES17189); 
 
@@ -20649,7 +20644,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 16 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7991:2: kw= 'ssp'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7993:2: kw= 'ssp'
                     {
                     kw=(Token)match(input,178,FOLLOW_178_in_ruleFUNCTION_ATTRIBUTES17208); 
 
@@ -20660,7 +20655,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 17 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:7998:2: kw= 'sspreq'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8000:2: kw= 'sspreq'
                     {
                     kw=(Token)match(input,179,FOLLOW_179_in_ruleFUNCTION_ATTRIBUTES17227); 
 
@@ -20671,7 +20666,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 18 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8005:2: kw= 'uwtable'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8007:2: kw= 'uwtable'
                     {
                     kw=(Token)match(input,180,FOLLOW_180_in_ruleFUNCTION_ATTRIBUTES17246); 
 
@@ -20702,7 +20697,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleCast_OP"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8018:1: entryRuleCast_OP returns [String current=null] : iv_ruleCast_OP= ruleCast_OP EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8020:1: entryRuleCast_OP returns [String current=null] : iv_ruleCast_OP= ruleCast_OP EOF ;
     public final String entryRuleCast_OP() throws RecognitionException {
         String current = null;
 
@@ -20710,8 +20705,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8019:2: (iv_ruleCast_OP= ruleCast_OP EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8020:2: iv_ruleCast_OP= ruleCast_OP EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8021:2: (iv_ruleCast_OP= ruleCast_OP EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8022:2: iv_ruleCast_OP= ruleCast_OP EOF
             {
              newCompositeNode(grammarAccess.getCast_OPRule()); 
             pushFollow(FOLLOW_ruleCast_OP_in_entryRuleCast_OP17287);
@@ -20738,7 +20733,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCast_OP"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8027:1: ruleCast_OP returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'trunc' | kw= 'zext' | kw= 'sext' | kw= 'fptrunc' | kw= 'fpext' | kw= 'fptoui' | kw= 'fptosi' | kw= 'uitofp' | kw= 'sitofp' | kw= 'ptrtoint' | kw= 'inttoptr' | kw= 'bitcast' ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8029:1: ruleCast_OP returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'trunc' | kw= 'zext' | kw= 'sext' | kw= 'fptrunc' | kw= 'fpext' | kw= 'fptoui' | kw= 'fptosi' | kw= 'uitofp' | kw= 'sitofp' | kw= 'ptrtoint' | kw= 'inttoptr' | kw= 'bitcast' ) ;
     public final AntlrDatatypeRuleToken ruleCast_OP() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -20747,10 +20742,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8030:28: ( (kw= 'trunc' | kw= 'zext' | kw= 'sext' | kw= 'fptrunc' | kw= 'fpext' | kw= 'fptoui' | kw= 'fptosi' | kw= 'uitofp' | kw= 'sitofp' | kw= 'ptrtoint' | kw= 'inttoptr' | kw= 'bitcast' ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8031:1: (kw= 'trunc' | kw= 'zext' | kw= 'sext' | kw= 'fptrunc' | kw= 'fpext' | kw= 'fptoui' | kw= 'fptosi' | kw= 'uitofp' | kw= 'sitofp' | kw= 'ptrtoint' | kw= 'inttoptr' | kw= 'bitcast' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8032:28: ( (kw= 'trunc' | kw= 'zext' | kw= 'sext' | kw= 'fptrunc' | kw= 'fpext' | kw= 'fptoui' | kw= 'fptosi' | kw= 'uitofp' | kw= 'sitofp' | kw= 'ptrtoint' | kw= 'inttoptr' | kw= 'bitcast' ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8033:1: (kw= 'trunc' | kw= 'zext' | kw= 'sext' | kw= 'fptrunc' | kw= 'fpext' | kw= 'fptoui' | kw= 'fptosi' | kw= 'uitofp' | kw= 'sitofp' | kw= 'ptrtoint' | kw= 'inttoptr' | kw= 'bitcast' )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8031:1: (kw= 'trunc' | kw= 'zext' | kw= 'sext' | kw= 'fptrunc' | kw= 'fpext' | kw= 'fptoui' | kw= 'fptosi' | kw= 'uitofp' | kw= 'sitofp' | kw= 'ptrtoint' | kw= 'inttoptr' | kw= 'bitcast' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8033:1: (kw= 'trunc' | kw= 'zext' | kw= 'sext' | kw= 'fptrunc' | kw= 'fpext' | kw= 'fptoui' | kw= 'fptosi' | kw= 'uitofp' | kw= 'sitofp' | kw= 'ptrtoint' | kw= 'inttoptr' | kw= 'bitcast' )
             int alt164=12;
             switch ( input.LA(1) ) {
             case 181:
@@ -20822,7 +20817,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             switch (alt164) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8032:2: kw= 'trunc'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8034:2: kw= 'trunc'
                     {
                     kw=(Token)match(input,181,FOLLOW_181_in_ruleCast_OP17336); 
 
@@ -20833,7 +20828,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8039:2: kw= 'zext'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8041:2: kw= 'zext'
                     {
                     kw=(Token)match(input,182,FOLLOW_182_in_ruleCast_OP17355); 
 
@@ -20844,7 +20839,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8046:2: kw= 'sext'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8048:2: kw= 'sext'
                     {
                     kw=(Token)match(input,183,FOLLOW_183_in_ruleCast_OP17374); 
 
@@ -20855,7 +20850,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8053:2: kw= 'fptrunc'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8055:2: kw= 'fptrunc'
                     {
                     kw=(Token)match(input,184,FOLLOW_184_in_ruleCast_OP17393); 
 
@@ -20866,7 +20861,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8060:2: kw= 'fpext'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8062:2: kw= 'fpext'
                     {
                     kw=(Token)match(input,185,FOLLOW_185_in_ruleCast_OP17412); 
 
@@ -20877,7 +20872,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8067:2: kw= 'fptoui'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8069:2: kw= 'fptoui'
                     {
                     kw=(Token)match(input,186,FOLLOW_186_in_ruleCast_OP17431); 
 
@@ -20888,7 +20883,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8074:2: kw= 'fptosi'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8076:2: kw= 'fptosi'
                     {
                     kw=(Token)match(input,187,FOLLOW_187_in_ruleCast_OP17450); 
 
@@ -20899,7 +20894,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8081:2: kw= 'uitofp'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8083:2: kw= 'uitofp'
                     {
                     kw=(Token)match(input,188,FOLLOW_188_in_ruleCast_OP17469); 
 
@@ -20910,7 +20905,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 9 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8088:2: kw= 'sitofp'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8090:2: kw= 'sitofp'
                     {
                     kw=(Token)match(input,189,FOLLOW_189_in_ruleCast_OP17488); 
 
@@ -20921,7 +20916,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 10 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8095:2: kw= 'ptrtoint'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8097:2: kw= 'ptrtoint'
                     {
                     kw=(Token)match(input,190,FOLLOW_190_in_ruleCast_OP17507); 
 
@@ -20932,7 +20927,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 11 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8102:2: kw= 'inttoptr'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8104:2: kw= 'inttoptr'
                     {
                     kw=(Token)match(input,191,FOLLOW_191_in_ruleCast_OP17526); 
 
@@ -20943,7 +20938,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 12 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8109:2: kw= 'bitcast'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8111:2: kw= 'bitcast'
                     {
                     kw=(Token)match(input,192,FOLLOW_192_in_ruleCast_OP17545); 
 
@@ -20974,7 +20969,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleI_PREDICATES"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8122:1: entryRuleI_PREDICATES returns [String current=null] : iv_ruleI_PREDICATES= ruleI_PREDICATES EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8124:1: entryRuleI_PREDICATES returns [String current=null] : iv_ruleI_PREDICATES= ruleI_PREDICATES EOF ;
     public final String entryRuleI_PREDICATES() throws RecognitionException {
         String current = null;
 
@@ -20982,8 +20977,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8123:2: (iv_ruleI_PREDICATES= ruleI_PREDICATES EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8124:2: iv_ruleI_PREDICATES= ruleI_PREDICATES EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8125:2: (iv_ruleI_PREDICATES= ruleI_PREDICATES EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8126:2: iv_ruleI_PREDICATES= ruleI_PREDICATES EOF
             {
              newCompositeNode(grammarAccess.getI_PREDICATESRule()); 
             pushFollow(FOLLOW_ruleI_PREDICATES_in_entryRuleI_PREDICATES17586);
@@ -21010,7 +21005,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleI_PREDICATES"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8131:1: ruleI_PREDICATES returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'eq' | kw= 'ne' | kw= 'ugt' | kw= 'uge' | kw= 'ult' | kw= 'ule' | kw= 'sgt' | kw= 'sge' | kw= 'slt' | kw= 'sle' ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8133:1: ruleI_PREDICATES returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'eq' | kw= 'ne' | kw= 'ugt' | kw= 'uge' | kw= 'ult' | kw= 'ule' | kw= 'sgt' | kw= 'sge' | kw= 'slt' | kw= 'sle' ) ;
     public final AntlrDatatypeRuleToken ruleI_PREDICATES() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -21019,10 +21014,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8134:28: ( (kw= 'eq' | kw= 'ne' | kw= 'ugt' | kw= 'uge' | kw= 'ult' | kw= 'ule' | kw= 'sgt' | kw= 'sge' | kw= 'slt' | kw= 'sle' ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8135:1: (kw= 'eq' | kw= 'ne' | kw= 'ugt' | kw= 'uge' | kw= 'ult' | kw= 'ule' | kw= 'sgt' | kw= 'sge' | kw= 'slt' | kw= 'sle' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8136:28: ( (kw= 'eq' | kw= 'ne' | kw= 'ugt' | kw= 'uge' | kw= 'ult' | kw= 'ule' | kw= 'sgt' | kw= 'sge' | kw= 'slt' | kw= 'sle' ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8137:1: (kw= 'eq' | kw= 'ne' | kw= 'ugt' | kw= 'uge' | kw= 'ult' | kw= 'ule' | kw= 'sgt' | kw= 'sge' | kw= 'slt' | kw= 'sle' )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8135:1: (kw= 'eq' | kw= 'ne' | kw= 'ugt' | kw= 'uge' | kw= 'ult' | kw= 'ule' | kw= 'sgt' | kw= 'sge' | kw= 'slt' | kw= 'sle' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8137:1: (kw= 'eq' | kw= 'ne' | kw= 'ugt' | kw= 'uge' | kw= 'ult' | kw= 'ule' | kw= 'sgt' | kw= 'sge' | kw= 'slt' | kw= 'sle' )
             int alt165=10;
             switch ( input.LA(1) ) {
             case 193:
@@ -21084,7 +21079,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             switch (alt165) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8136:2: kw= 'eq'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8138:2: kw= 'eq'
                     {
                     kw=(Token)match(input,193,FOLLOW_193_in_ruleI_PREDICATES17635); 
 
@@ -21095,7 +21090,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8143:2: kw= 'ne'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8145:2: kw= 'ne'
                     {
                     kw=(Token)match(input,194,FOLLOW_194_in_ruleI_PREDICATES17654); 
 
@@ -21106,7 +21101,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8150:2: kw= 'ugt'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8152:2: kw= 'ugt'
                     {
                     kw=(Token)match(input,195,FOLLOW_195_in_ruleI_PREDICATES17673); 
 
@@ -21117,7 +21112,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8157:2: kw= 'uge'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8159:2: kw= 'uge'
                     {
                     kw=(Token)match(input,196,FOLLOW_196_in_ruleI_PREDICATES17692); 
 
@@ -21128,7 +21123,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8164:2: kw= 'ult'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8166:2: kw= 'ult'
                     {
                     kw=(Token)match(input,197,FOLLOW_197_in_ruleI_PREDICATES17711); 
 
@@ -21139,7 +21134,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8171:2: kw= 'ule'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8173:2: kw= 'ule'
                     {
                     kw=(Token)match(input,198,FOLLOW_198_in_ruleI_PREDICATES17730); 
 
@@ -21150,7 +21145,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8178:2: kw= 'sgt'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8180:2: kw= 'sgt'
                     {
                     kw=(Token)match(input,199,FOLLOW_199_in_ruleI_PREDICATES17749); 
 
@@ -21161,7 +21156,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8185:2: kw= 'sge'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8187:2: kw= 'sge'
                     {
                     kw=(Token)match(input,200,FOLLOW_200_in_ruleI_PREDICATES17768); 
 
@@ -21172,7 +21167,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 9 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8192:2: kw= 'slt'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8194:2: kw= 'slt'
                     {
                     kw=(Token)match(input,201,FOLLOW_201_in_ruleI_PREDICATES17787); 
 
@@ -21183,7 +21178,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 10 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8199:2: kw= 'sle'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8201:2: kw= 'sle'
                     {
                     kw=(Token)match(input,202,FOLLOW_202_in_ruleI_PREDICATES17806); 
 
@@ -21214,7 +21209,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleF_PREDICATES"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8212:1: entryRuleF_PREDICATES returns [String current=null] : iv_ruleF_PREDICATES= ruleF_PREDICATES EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8214:1: entryRuleF_PREDICATES returns [String current=null] : iv_ruleF_PREDICATES= ruleF_PREDICATES EOF ;
     public final String entryRuleF_PREDICATES() throws RecognitionException {
         String current = null;
 
@@ -21222,8 +21217,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8213:2: (iv_ruleF_PREDICATES= ruleF_PREDICATES EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8214:2: iv_ruleF_PREDICATES= ruleF_PREDICATES EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8215:2: (iv_ruleF_PREDICATES= ruleF_PREDICATES EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8216:2: iv_ruleF_PREDICATES= ruleF_PREDICATES EOF
             {
              newCompositeNode(grammarAccess.getF_PREDICATESRule()); 
             pushFollow(FOLLOW_ruleF_PREDICATES_in_entryRuleF_PREDICATES17847);
@@ -21250,7 +21245,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleF_PREDICATES"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8221:1: ruleF_PREDICATES returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'false' | kw= 'oeq' | kw= 'ogt' | kw= 'oge' | kw= 'olt' | kw= 'ole' | kw= 'one' | kw= 'ord' | kw= 'ueq' | kw= 'ugt' | kw= 'uge' | kw= 'ult' | kw= 'ule' | kw= 'une' | kw= 'uno' | kw= 'true' ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8223:1: ruleF_PREDICATES returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'false' | kw= 'oeq' | kw= 'ogt' | kw= 'oge' | kw= 'olt' | kw= 'ole' | kw= 'one' | kw= 'ord' | kw= 'ueq' | kw= 'ugt' | kw= 'uge' | kw= 'ult' | kw= 'ule' | kw= 'une' | kw= 'uno' | kw= 'true' ) ;
     public final AntlrDatatypeRuleToken ruleF_PREDICATES() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -21259,10 +21254,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8224:28: ( (kw= 'false' | kw= 'oeq' | kw= 'ogt' | kw= 'oge' | kw= 'olt' | kw= 'ole' | kw= 'one' | kw= 'ord' | kw= 'ueq' | kw= 'ugt' | kw= 'uge' | kw= 'ult' | kw= 'ule' | kw= 'une' | kw= 'uno' | kw= 'true' ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8225:1: (kw= 'false' | kw= 'oeq' | kw= 'ogt' | kw= 'oge' | kw= 'olt' | kw= 'ole' | kw= 'one' | kw= 'ord' | kw= 'ueq' | kw= 'ugt' | kw= 'uge' | kw= 'ult' | kw= 'ule' | kw= 'une' | kw= 'uno' | kw= 'true' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8226:28: ( (kw= 'false' | kw= 'oeq' | kw= 'ogt' | kw= 'oge' | kw= 'olt' | kw= 'ole' | kw= 'one' | kw= 'ord' | kw= 'ueq' | kw= 'ugt' | kw= 'uge' | kw= 'ult' | kw= 'ule' | kw= 'une' | kw= 'uno' | kw= 'true' ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8227:1: (kw= 'false' | kw= 'oeq' | kw= 'ogt' | kw= 'oge' | kw= 'olt' | kw= 'ole' | kw= 'one' | kw= 'ord' | kw= 'ueq' | kw= 'ugt' | kw= 'uge' | kw= 'ult' | kw= 'ule' | kw= 'une' | kw= 'uno' | kw= 'true' )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8225:1: (kw= 'false' | kw= 'oeq' | kw= 'ogt' | kw= 'oge' | kw= 'olt' | kw= 'ole' | kw= 'one' | kw= 'ord' | kw= 'ueq' | kw= 'ugt' | kw= 'uge' | kw= 'ult' | kw= 'ule' | kw= 'une' | kw= 'uno' | kw= 'true' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8227:1: (kw= 'false' | kw= 'oeq' | kw= 'ogt' | kw= 'oge' | kw= 'olt' | kw= 'ole' | kw= 'one' | kw= 'ord' | kw= 'ueq' | kw= 'ugt' | kw= 'uge' | kw= 'ult' | kw= 'ule' | kw= 'une' | kw= 'uno' | kw= 'true' )
             int alt166=16;
             switch ( input.LA(1) ) {
             case 20:
@@ -21354,7 +21349,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             switch (alt166) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8226:2: kw= 'false'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8228:2: kw= 'false'
                     {
                     kw=(Token)match(input,20,FOLLOW_20_in_ruleF_PREDICATES17896); 
 
@@ -21365,7 +21360,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8233:2: kw= 'oeq'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8235:2: kw= 'oeq'
                     {
                     kw=(Token)match(input,203,FOLLOW_203_in_ruleF_PREDICATES17915); 
 
@@ -21376,7 +21371,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8240:2: kw= 'ogt'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8242:2: kw= 'ogt'
                     {
                     kw=(Token)match(input,204,FOLLOW_204_in_ruleF_PREDICATES17934); 
 
@@ -21387,7 +21382,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8247:2: kw= 'oge'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8249:2: kw= 'oge'
                     {
                     kw=(Token)match(input,205,FOLLOW_205_in_ruleF_PREDICATES17953); 
 
@@ -21398,7 +21393,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8254:2: kw= 'olt'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8256:2: kw= 'olt'
                     {
                     kw=(Token)match(input,206,FOLLOW_206_in_ruleF_PREDICATES17972); 
 
@@ -21409,7 +21404,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8261:2: kw= 'ole'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8263:2: kw= 'ole'
                     {
                     kw=(Token)match(input,207,FOLLOW_207_in_ruleF_PREDICATES17991); 
 
@@ -21420,7 +21415,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8268:2: kw= 'one'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8270:2: kw= 'one'
                     {
                     kw=(Token)match(input,208,FOLLOW_208_in_ruleF_PREDICATES18010); 
 
@@ -21431,7 +21426,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8275:2: kw= 'ord'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8277:2: kw= 'ord'
                     {
                     kw=(Token)match(input,209,FOLLOW_209_in_ruleF_PREDICATES18029); 
 
@@ -21442,7 +21437,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 9 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8282:2: kw= 'ueq'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8284:2: kw= 'ueq'
                     {
                     kw=(Token)match(input,210,FOLLOW_210_in_ruleF_PREDICATES18048); 
 
@@ -21453,7 +21448,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 10 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8289:2: kw= 'ugt'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8291:2: kw= 'ugt'
                     {
                     kw=(Token)match(input,195,FOLLOW_195_in_ruleF_PREDICATES18067); 
 
@@ -21464,7 +21459,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 11 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8296:2: kw= 'uge'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8298:2: kw= 'uge'
                     {
                     kw=(Token)match(input,196,FOLLOW_196_in_ruleF_PREDICATES18086); 
 
@@ -21475,7 +21470,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 12 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8303:2: kw= 'ult'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8305:2: kw= 'ult'
                     {
                     kw=(Token)match(input,197,FOLLOW_197_in_ruleF_PREDICATES18105); 
 
@@ -21486,7 +21481,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 13 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8310:2: kw= 'ule'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8312:2: kw= 'ule'
                     {
                     kw=(Token)match(input,198,FOLLOW_198_in_ruleF_PREDICATES18124); 
 
@@ -21497,7 +21492,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 14 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8317:2: kw= 'une'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8319:2: kw= 'une'
                     {
                     kw=(Token)match(input,211,FOLLOW_211_in_ruleF_PREDICATES18143); 
 
@@ -21508,7 +21503,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 15 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8324:2: kw= 'uno'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8326:2: kw= 'uno'
                     {
                     kw=(Token)match(input,212,FOLLOW_212_in_ruleF_PREDICATES18162); 
 
@@ -21519,7 +21514,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 16 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8331:2: kw= 'true'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8333:2: kw= 'true'
                     {
                     kw=(Token)match(input,19,FOLLOW_19_in_ruleF_PREDICATES18181); 
 
@@ -21550,7 +21545,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVISIBILITY"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8344:1: entryRuleVISIBILITY returns [String current=null] : iv_ruleVISIBILITY= ruleVISIBILITY EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8346:1: entryRuleVISIBILITY returns [String current=null] : iv_ruleVISIBILITY= ruleVISIBILITY EOF ;
     public final String entryRuleVISIBILITY() throws RecognitionException {
         String current = null;
 
@@ -21558,8 +21553,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8345:2: (iv_ruleVISIBILITY= ruleVISIBILITY EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8346:2: iv_ruleVISIBILITY= ruleVISIBILITY EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8347:2: (iv_ruleVISIBILITY= ruleVISIBILITY EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8348:2: iv_ruleVISIBILITY= ruleVISIBILITY EOF
             {
              newCompositeNode(grammarAccess.getVISIBILITYRule()); 
             pushFollow(FOLLOW_ruleVISIBILITY_in_entryRuleVISIBILITY18222);
@@ -21586,7 +21581,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVISIBILITY"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8353:1: ruleVISIBILITY returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'default' | kw= 'hidden' | kw= 'protected' ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8355:1: ruleVISIBILITY returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'default' | kw= 'hidden' | kw= 'protected' ) ;
     public final AntlrDatatypeRuleToken ruleVISIBILITY() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -21595,10 +21590,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8356:28: ( (kw= 'default' | kw= 'hidden' | kw= 'protected' ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8357:1: (kw= 'default' | kw= 'hidden' | kw= 'protected' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8358:28: ( (kw= 'default' | kw= 'hidden' | kw= 'protected' ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8359:1: (kw= 'default' | kw= 'hidden' | kw= 'protected' )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8357:1: (kw= 'default' | kw= 'hidden' | kw= 'protected' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8359:1: (kw= 'default' | kw= 'hidden' | kw= 'protected' )
             int alt167=3;
             switch ( input.LA(1) ) {
             case 213:
@@ -21625,7 +21620,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             switch (alt167) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8358:2: kw= 'default'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8360:2: kw= 'default'
                     {
                     kw=(Token)match(input,213,FOLLOW_213_in_ruleVISIBILITY18271); 
 
@@ -21636,7 +21631,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8365:2: kw= 'hidden'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8367:2: kw= 'hidden'
                     {
                     kw=(Token)match(input,214,FOLLOW_214_in_ruleVISIBILITY18290); 
 
@@ -21647,7 +21642,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8372:2: kw= 'protected'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8374:2: kw= 'protected'
                     {
                     kw=(Token)match(input,215,FOLLOW_215_in_ruleVISIBILITY18309); 
 
@@ -21678,7 +21673,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleLINKAGE"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8385:1: entryRuleLINKAGE returns [String current=null] : iv_ruleLINKAGE= ruleLINKAGE EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8387:1: entryRuleLINKAGE returns [String current=null] : iv_ruleLINKAGE= ruleLINKAGE EOF ;
     public final String entryRuleLINKAGE() throws RecognitionException {
         String current = null;
 
@@ -21686,8 +21681,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8386:2: (iv_ruleLINKAGE= ruleLINKAGE EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8387:2: iv_ruleLINKAGE= ruleLINKAGE EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8388:2: (iv_ruleLINKAGE= ruleLINKAGE EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8389:2: iv_ruleLINKAGE= ruleLINKAGE EOF
             {
              newCompositeNode(grammarAccess.getLINKAGERule()); 
             pushFollow(FOLLOW_ruleLINKAGE_in_entryRuleLINKAGE18350);
@@ -21714,7 +21709,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLINKAGE"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8394:1: ruleLINKAGE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'private' | kw= 'linker_private' | kw= 'linker_private_weak' | kw= 'available_externally' | kw= 'linkonce' | kw= 'common' | kw= 'appending' | kw= 'extern_weak' | kw= 'linkonce_odr' | kw= 'linkonce_odr_auto_hide' | kw= 'dllimport' | kw= 'dllexport' | this_ALIAS_LINKAGE_12= ruleALIAS_LINKAGE ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8396:1: ruleLINKAGE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'private' | kw= 'linker_private' | kw= 'linker_private_weak' | kw= 'available_externally' | kw= 'linkonce' | kw= 'common' | kw= 'appending' | kw= 'extern_weak' | kw= 'linkonce_odr' | kw= 'linkonce_odr_auto_hide' | kw= 'dllimport' | kw= 'dllexport' | this_ALIAS_LINKAGE_12= ruleALIAS_LINKAGE ) ;
     public final AntlrDatatypeRuleToken ruleLINKAGE() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -21725,10 +21720,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8397:28: ( (kw= 'private' | kw= 'linker_private' | kw= 'linker_private_weak' | kw= 'available_externally' | kw= 'linkonce' | kw= 'common' | kw= 'appending' | kw= 'extern_weak' | kw= 'linkonce_odr' | kw= 'linkonce_odr_auto_hide' | kw= 'dllimport' | kw= 'dllexport' | this_ALIAS_LINKAGE_12= ruleALIAS_LINKAGE ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8398:1: (kw= 'private' | kw= 'linker_private' | kw= 'linker_private_weak' | kw= 'available_externally' | kw= 'linkonce' | kw= 'common' | kw= 'appending' | kw= 'extern_weak' | kw= 'linkonce_odr' | kw= 'linkonce_odr_auto_hide' | kw= 'dllimport' | kw= 'dllexport' | this_ALIAS_LINKAGE_12= ruleALIAS_LINKAGE )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8399:28: ( (kw= 'private' | kw= 'linker_private' | kw= 'linker_private_weak' | kw= 'available_externally' | kw= 'linkonce' | kw= 'common' | kw= 'appending' | kw= 'extern_weak' | kw= 'linkonce_odr' | kw= 'linkonce_odr_auto_hide' | kw= 'dllimport' | kw= 'dllexport' | this_ALIAS_LINKAGE_12= ruleALIAS_LINKAGE ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8400:1: (kw= 'private' | kw= 'linker_private' | kw= 'linker_private_weak' | kw= 'available_externally' | kw= 'linkonce' | kw= 'common' | kw= 'appending' | kw= 'extern_weak' | kw= 'linkonce_odr' | kw= 'linkonce_odr_auto_hide' | kw= 'dllimport' | kw= 'dllexport' | this_ALIAS_LINKAGE_12= ruleALIAS_LINKAGE )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8398:1: (kw= 'private' | kw= 'linker_private' | kw= 'linker_private_weak' | kw= 'available_externally' | kw= 'linkonce' | kw= 'common' | kw= 'appending' | kw= 'extern_weak' | kw= 'linkonce_odr' | kw= 'linkonce_odr_auto_hide' | kw= 'dllimport' | kw= 'dllexport' | this_ALIAS_LINKAGE_12= ruleALIAS_LINKAGE )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8400:1: (kw= 'private' | kw= 'linker_private' | kw= 'linker_private_weak' | kw= 'available_externally' | kw= 'linkonce' | kw= 'common' | kw= 'appending' | kw= 'extern_weak' | kw= 'linkonce_odr' | kw= 'linkonce_odr_auto_hide' | kw= 'dllimport' | kw= 'dllexport' | this_ALIAS_LINKAGE_12= ruleALIAS_LINKAGE )
             int alt168=13;
             switch ( input.LA(1) ) {
             case 216:
@@ -21808,7 +21803,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             switch (alt168) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8399:2: kw= 'private'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8401:2: kw= 'private'
                     {
                     kw=(Token)match(input,216,FOLLOW_216_in_ruleLINKAGE18399); 
 
@@ -21819,7 +21814,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8406:2: kw= 'linker_private'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8408:2: kw= 'linker_private'
                     {
                     kw=(Token)match(input,217,FOLLOW_217_in_ruleLINKAGE18418); 
 
@@ -21830,7 +21825,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8413:2: kw= 'linker_private_weak'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8415:2: kw= 'linker_private_weak'
                     {
                     kw=(Token)match(input,218,FOLLOW_218_in_ruleLINKAGE18437); 
 
@@ -21841,7 +21836,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8420:2: kw= 'available_externally'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8422:2: kw= 'available_externally'
                     {
                     kw=(Token)match(input,219,FOLLOW_219_in_ruleLINKAGE18456); 
 
@@ -21852,7 +21847,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8427:2: kw= 'linkonce'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8429:2: kw= 'linkonce'
                     {
                     kw=(Token)match(input,220,FOLLOW_220_in_ruleLINKAGE18475); 
 
@@ -21863,7 +21858,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8434:2: kw= 'common'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8436:2: kw= 'common'
                     {
                     kw=(Token)match(input,221,FOLLOW_221_in_ruleLINKAGE18494); 
 
@@ -21874,7 +21869,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8441:2: kw= 'appending'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8443:2: kw= 'appending'
                     {
                     kw=(Token)match(input,222,FOLLOW_222_in_ruleLINKAGE18513); 
 
@@ -21885,7 +21880,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8448:2: kw= 'extern_weak'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8450:2: kw= 'extern_weak'
                     {
                     kw=(Token)match(input,223,FOLLOW_223_in_ruleLINKAGE18532); 
 
@@ -21896,7 +21891,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 9 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8455:2: kw= 'linkonce_odr'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8457:2: kw= 'linkonce_odr'
                     {
                     kw=(Token)match(input,224,FOLLOW_224_in_ruleLINKAGE18551); 
 
@@ -21907,7 +21902,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 10 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8462:2: kw= 'linkonce_odr_auto_hide'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8464:2: kw= 'linkonce_odr_auto_hide'
                     {
                     kw=(Token)match(input,225,FOLLOW_225_in_ruleLINKAGE18570); 
 
@@ -21918,7 +21913,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 11 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8469:2: kw= 'dllimport'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8471:2: kw= 'dllimport'
                     {
                     kw=(Token)match(input,226,FOLLOW_226_in_ruleLINKAGE18589); 
 
@@ -21929,7 +21924,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 12 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8476:2: kw= 'dllexport'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8478:2: kw= 'dllexport'
                     {
                     kw=(Token)match(input,227,FOLLOW_227_in_ruleLINKAGE18608); 
 
@@ -21940,7 +21935,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 13 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8483:5: this_ALIAS_LINKAGE_12= ruleALIAS_LINKAGE
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8485:5: this_ALIAS_LINKAGE_12= ruleALIAS_LINKAGE
                     {
                      
                             newCompositeNode(grammarAccess.getLINKAGEAccess().getALIAS_LINKAGEParserRuleCall_12()); 
@@ -21980,7 +21975,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleALIAS_LINKAGE"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8501:1: entryRuleALIAS_LINKAGE returns [String current=null] : iv_ruleALIAS_LINKAGE= ruleALIAS_LINKAGE EOF ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8503:1: entryRuleALIAS_LINKAGE returns [String current=null] : iv_ruleALIAS_LINKAGE= ruleALIAS_LINKAGE EOF ;
     public final String entryRuleALIAS_LINKAGE() throws RecognitionException {
         String current = null;
 
@@ -21988,8 +21983,8 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8502:2: (iv_ruleALIAS_LINKAGE= ruleALIAS_LINKAGE EOF )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8503:2: iv_ruleALIAS_LINKAGE= ruleALIAS_LINKAGE EOF
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8504:2: (iv_ruleALIAS_LINKAGE= ruleALIAS_LINKAGE EOF )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8505:2: iv_ruleALIAS_LINKAGE= ruleALIAS_LINKAGE EOF
             {
              newCompositeNode(grammarAccess.getALIAS_LINKAGERule()); 
             pushFollow(FOLLOW_ruleALIAS_LINKAGE_in_entryRuleALIAS_LINKAGE18682);
@@ -22016,7 +22011,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleALIAS_LINKAGE"
-    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8510:1: ruleALIAS_LINKAGE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'external' | kw= 'internal' | kw= 'weak' | kw= 'weak_odr' ) ;
+    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8512:1: ruleALIAS_LINKAGE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'external' | kw= 'internal' | kw= 'weak' | kw= 'weak_odr' ) ;
     public final AntlrDatatypeRuleToken ruleALIAS_LINKAGE() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -22025,10 +22020,10 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8513:28: ( (kw= 'external' | kw= 'internal' | kw= 'weak' | kw= 'weak_odr' ) )
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8514:1: (kw= 'external' | kw= 'internal' | kw= 'weak' | kw= 'weak_odr' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8515:28: ( (kw= 'external' | kw= 'internal' | kw= 'weak' | kw= 'weak_odr' ) )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8516:1: (kw= 'external' | kw= 'internal' | kw= 'weak' | kw= 'weak_odr' )
             {
-            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8514:1: (kw= 'external' | kw= 'internal' | kw= 'weak' | kw= 'weak_odr' )
+            // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8516:1: (kw= 'external' | kw= 'internal' | kw= 'weak' | kw= 'weak_odr' )
             int alt169=4;
             switch ( input.LA(1) ) {
             case 228:
@@ -22060,7 +22055,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
 
             switch (alt169) {
                 case 1 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8515:2: kw= 'external'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8517:2: kw= 'external'
                     {
                     kw=(Token)match(input,228,FOLLOW_228_in_ruleALIAS_LINKAGE18731); 
 
@@ -22071,7 +22066,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8522:2: kw= 'internal'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8524:2: kw= 'internal'
                     {
                     kw=(Token)match(input,229,FOLLOW_229_in_ruleALIAS_LINKAGE18750); 
 
@@ -22082,7 +22077,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8529:2: kw= 'weak'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8531:2: kw= 'weak'
                     {
                     kw=(Token)match(input,230,FOLLOW_230_in_ruleALIAS_LINKAGE18769); 
 
@@ -22093,7 +22088,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8536:2: kw= 'weak_odr'
+                    // ../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/parser/antlr/internal/InternalLLVM.g:8538:2: kw= 'weak_odr'
                     {
                     kw=(Token)match(input,231,FOLLOW_231_in_ruleALIAS_LINKAGE18788); 
 
@@ -22197,7 +22192,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
             this.transition = DFA80_transition;
         }
         public String getDescription() {
-            return "2806:1: ( ( (otherlv_0= 'volatile' )? this_Load_1= ruleLoad ) | ( (otherlv_2= 'volatile' )? this_Store_3= ruleStore ) | this_Fence_4= ruleFence | this_GetElementPtr_5= ruleGetElementPtr | this_LOGICAL_OP_6= ruleLOGICAL_OP | this_ARITHMETIC_OP_7= ruleARITHMETIC_OP | this_Compare_8= ruleCompare | this_Cast_9= ruleCast | this_ShuffleVector_10= ruleShuffleVector | this_InsertElement_11= ruleInsertElement | this_ExtractElement_12= ruleExtractElement | this_InsertValue_13= ruleInsertValue | this_ExtractValue_14= ruleExtractValue | this_Alloc_15= ruleAlloc | this_CmpXchg_16= ruleCmpXchg | this_AtomicRMW_17= ruleAtomicRMW | this_PHI_18= rulePHI | this_Select_19= ruleSelect | this_Call_20= ruleCall | this_VA_Arg_21= ruleVA_Arg | this_LandingPad_22= ruleLandingPad )";
+            return "2808:1: ( ( (otherlv_0= 'volatile' )? this_Load_1= ruleLoad ) | ( (otherlv_2= 'volatile' )? this_Store_3= ruleStore ) | this_Fence_4= ruleFence | this_GetElementPtr_5= ruleGetElementPtr | this_LOGICAL_OP_6= ruleLOGICAL_OP | this_ARITHMETIC_OP_7= ruleARITHMETIC_OP | this_Compare_8= ruleCompare | this_Cast_9= ruleCast | this_ShuffleVector_10= ruleShuffleVector | this_InsertElement_11= ruleInsertElement | this_ExtractElement_12= ruleExtractElement | this_InsertValue_13= ruleInsertValue | this_ExtractValue_14= ruleExtractValue | this_Alloc_15= ruleAlloc | this_CmpXchg_16= ruleCmpXchg | this_AtomicRMW_17= ruleAtomicRMW | this_PHI_18= rulePHI | this_Select_19= ruleSelect | this_Call_20= ruleCall | this_VA_Arg_21= ruleVA_Arg | this_LandingPad_22= ruleLandingPad )";
         }
     }
  
@@ -22317,148 +22312,148 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleTypeUse_in_ruleAliasDefinition2456 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleTypeUse_in_entryRuleTypeUse2492 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleTypeUse2502 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePredefined_in_ruleTypeUse2550 = new BitSet(new long[]{0x0000000000000102L});
-    public static final BitSet FOLLOW_ruleAddressUse_in_ruleTypeUse2578 = new BitSet(new long[]{0x0000010000000102L});
+    public static final BitSet FOLLOW_rulePredefined_in_ruleTypeUse2550 = new BitSet(new long[]{0x0000010000000102L});
+    public static final BitSet FOLLOW_ruleAddressUse_in_ruleTypeUse2577 = new BitSet(new long[]{0x0000010000000102L});
     public static final BitSet FOLLOW_40_in_ruleTypeUse2590 = new BitSet(new long[]{0x0000000000000102L});
-    public static final BitSet FOLLOW_RULE_OREST_in_ruleTypeUse2606 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAddressUse_in_entryRuleAddressUse2643 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAddressUse2653 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_VALID_ID_in_ruleAddressUse2698 = new BitSet(new long[]{0x0000000000000402L});
-    public static final BitSet FOLLOW_RULE_POINTER_in_ruleAddressUse2715 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAddress_in_entryRuleAddress2757 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAddress2767 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_VALID_ID_in_ruleAddress2808 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePredefined_in_entryRulePredefined2848 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePredefined2858 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePredefined_Types_in_rulePredefined2904 = new BitSet(new long[]{0x0000000000000402L});
-    public static final BitSet FOLLOW_RULE_POINTER_in_rulePredefined2921 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrimitive_Type_in_entryRulePrimitive_Type2964 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePrimitive_Type2975 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_41_in_rulePrimitive_Type3013 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_42_in_rulePrimitive_Type3032 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rulePrimitive_Type3051 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_44_in_rulePrimitive_Type3070 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_rulePrimitive_Type3089 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rulePrimitive_Type3108 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInitializers_in_entryRuleInitializers3149 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInitializers3160 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_45_in_ruleInitializers3197 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFloatingPoint_Type_in_entryRuleFloatingPoint_Type3237 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFloatingPoint_Type3248 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_46_in_ruleFloatingPoint_Type3286 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_ruleFloatingPoint_Type3305 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_ruleFloatingPoint_Type3324 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_49_in_ruleFloatingPoint_Type3343 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_50_in_ruleFloatingPoint_Type3362 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_51_in_ruleFloatingPoint_Type3381 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePredefined_Types_in_entryRulePredefined_Types3422 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePredefined_Types3433 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrimitive_Type_in_rulePredefined_Types3480 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_TYPE_in_rulePredefined_Types3506 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFloatingPoint_Type_in_rulePredefined_Types3539 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVector_in_entryRuleVector3584 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleVector3594 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_52_in_ruleVector3631 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleVector3642 = new BitSet(new long[]{0x0020000000000000L});
-    public static final BitSet FOLLOW_53_in_ruleVector3653 = new BitSet(new long[]{0x000FDE0000180210L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_ruleVector3674 = new BitSet(new long[]{0x0040000000000000L});
-    public static final BitSet FOLLOW_54_in_ruleVector3686 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleArray_in_entryRuleArray3722 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleArray3732 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_ruleArray3780 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleArray3791 = new BitSet(new long[]{0x0020000000000000L});
-    public static final BitSet FOLLOW_53_in_ruleArray3802 = new BitSet(new long[]{0x000FDE0000180210L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_ruleArray3823 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_31_in_ruleArray3835 = new BitSet(new long[]{0x0000000000000402L});
-    public static final BitSet FOLLOW_55_in_ruleArray3854 = new BitSet(new long[]{0x0000000000000402L});
-    public static final BitSet FOLLOW_29_in_ruleArray3873 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_31_in_ruleArray3885 = new BitSet(new long[]{0x0000000000000402L});
-    public static final BitSet FOLLOW_RULE_POINTER_in_ruleArray3899 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAggregate_Types_in_entryRuleAggregate_Types3936 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAggregate_Types3946 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStructure_in_ruleAggregate_Types3993 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleArray_in_ruleAggregate_Types4020 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVector_in_ruleAggregate_Types4047 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleConstant_in_entryRuleConstant4082 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleConstant4092 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleConstant4133 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNonConstantValue_in_entryRuleNonConstantValue4173 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNonConstantValue4183 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_VALID_ID_in_ruleNonConstantValue4225 = new BitSet(new long[]{0x0000000000000402L});
-    public static final BitSet FOLLOW_RULE_POINTER_in_ruleNonConstantValue4247 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_entryRuleValue4289 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleValue4299 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleValue4346 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrimitive_Type_in_ruleValue4367 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInitializers_in_ruleValue4388 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCast_in_ruleValue4417 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGetElementPtr2_in_ruleValue4444 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleConstant_in_ruleValue4471 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNonConstantValue_in_ruleValue4498 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValueStruct_in_entryRuleValueStruct4533 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleValueStruct4543 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_56_in_ruleValueStruct4580 = new BitSet(new long[]{0x000FDE0000180210L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_ruleValueStruct4601 = new BitSet(new long[]{0x01003E0000180A80L,0x0000000040000000L,0xFFE0000000000000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_ruleValue_in_ruleValueStruct4622 = new BitSet(new long[]{0x0200000040000000L});
-    public static final BitSet FOLLOW_30_in_ruleValueStruct4635 = new BitSet(new long[]{0x000FDE0000180210L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_ruleValueStruct4656 = new BitSet(new long[]{0x01003E0000180A80L,0x0000000040000000L,0xFFE0000000000000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_ruleValue_in_ruleValueStruct4677 = new BitSet(new long[]{0x0200000040000000L});
-    public static final BitSet FOLLOW_57_in_ruleValueStruct4691 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStructure_in_entryRuleStructure4727 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleStructure4737 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_56_in_ruleStructure4783 = new BitSet(new long[]{0x020FDE0000180210L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_ruleStructure4805 = new BitSet(new long[]{0x0200000040000000L});
-    public static final BitSet FOLLOW_30_in_ruleStructure4818 = new BitSet(new long[]{0x019FDE0E20180210L,0x0000000000000000L,0x0000000000000000L,0x000000FFFF000000L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_ruleStructure4841 = new BitSet(new long[]{0x0200000040000000L});
-    public static final BitSet FOLLOW_ruleAggregate_Types_in_ruleStructure4860 = new BitSet(new long[]{0x0200000040000000L});
-    public static final BitSet FOLLOW_57_in_ruleStructure4879 = new BitSet(new long[]{0x0000000000000402L});
-    public static final BitSet FOLLOW_RULE_POINTER_in_ruleStructure4891 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpaque_in_entryRuleOpaque4929 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleOpaque4940 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_58_in_ruleOpaque4977 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParameterList_in_entryRuleParameterList5016 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleParameterList5026 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_59_in_ruleParameterList5073 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_60_in_ruleParameterList5092 = new BitSet(new long[]{0x200FDE0000180210L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_ruleParameterList5114 = new BitSet(new long[]{0x19003E0000180A80L,0x0000000040000000L,0xFFE00000000FF000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_ruleTypeList_in_ruleParameterList5135 = new BitSet(new long[]{0x01003E0000180A80L,0x0000000040000000L,0xFFE00000000FF000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_ruleRETURN_ATTRIBUTES_in_ruleParameterList5153 = new BitSet(new long[]{0x01003E0000180A80L,0x0000000040000000L,0xFFE00000000FF000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_ruleValue_in_ruleParameterList5175 = new BitSet(new long[]{0x2000000040000000L});
-    public static final BitSet FOLLOW_30_in_ruleParameterList5188 = new BitSet(new long[]{0x000FDE0000180210L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_ruleParameterList5209 = new BitSet(new long[]{0x19003E0000180A80L,0x0000000040000000L,0xFFE00000000FF000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_ruleTypeList_in_ruleParameterList5230 = new BitSet(new long[]{0x01003E0000180A80L,0x0000000040000000L,0xFFE00000000FF000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_ruleRETURN_ATTRIBUTES_in_ruleParameterList5248 = new BitSet(new long[]{0x01003E0000180A80L,0x0000000040000000L,0xFFE00000000FF000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_ruleValue_in_ruleParameterList5270 = new BitSet(new long[]{0x2000000040000000L});
-    public static final BitSet FOLLOW_61_in_ruleParameterList5286 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeList_in_entryRuleTypeList5324 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTypeList5334 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_59_in_ruleTypeList5381 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_60_in_ruleTypeList5400 = new BitSet(new long[]{0xE00FDE0000180210L,0x0000000000000007L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_ruleTypeList5422 = new BitSet(new long[]{0xF800000040000000L,0x0000000000000007L,0x00000000000FF000L});
-    public static final BitSet FOLLOW_ruleTypeList_in_ruleTypeList5443 = new BitSet(new long[]{0xE000000040000000L,0x0000000000000007L,0x00000000000FF000L});
-    public static final BitSet FOLLOW_ruleRETURN_ATTRIBUTES_in_ruleTypeList5461 = new BitSet(new long[]{0xE000000040000000L,0x0000000000000007L});
-    public static final BitSet FOLLOW_30_in_ruleTypeList5475 = new BitSet(new long[]{0x000FDE0000180210L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_ruleTypeList5496 = new BitSet(new long[]{0xF800000040000000L,0x0000000000000007L,0x00000000000FF000L});
-    public static final BitSet FOLLOW_ruleTypeList_in_ruleTypeList5517 = new BitSet(new long[]{0xE000000040000000L,0x0000000000000007L,0x00000000000FF000L});
-    public static final BitSet FOLLOW_ruleRETURN_ATTRIBUTES_in_ruleTypeList5535 = new BitSet(new long[]{0xE000000040000000L,0x0000000000000007L});
-    public static final BitSet FOLLOW_61_in_ruleTypeList5553 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_62_in_ruleTypeList5571 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_63_in_ruleTypeList5589 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_64_in_ruleTypeList5607 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_65_in_ruleTypeList5625 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_66_in_ruleTypeList5643 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFunctionBody_in_entryRuleFunctionBody5682 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFunctionBody5692 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMetadataValue_in_ruleFunctionBody5738 = new BitSet(new long[]{0x0100005011400200L,0x000000000C000000L});
-    public static final BitSet FOLLOW_56_in_ruleFunctionBody5751 = new BitSet(new long[]{0x00000000001F8030L});
-    public static final BitSet FOLLOW_ruleBasicBlock_in_ruleFunctionBody5772 = new BitSet(new long[]{0x02000000001F8030L});
-    public static final BitSet FOLLOW_57_in_ruleFunctionBody5785 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_OREST_in_ruleTypeUse2604 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAddressUse_in_entryRuleAddressUse2641 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAddressUse2651 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_VALID_ID_in_ruleAddressUse2696 = new BitSet(new long[]{0x0000000000000402L});
+    public static final BitSet FOLLOW_RULE_POINTER_in_ruleAddressUse2713 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAddress_in_entryRuleAddress2755 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAddress2765 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_VALID_ID_in_ruleAddress2806 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePredefined_in_entryRulePredefined2846 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePredefined2856 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePredefined_Types_in_rulePredefined2902 = new BitSet(new long[]{0x0000000000000402L});
+    public static final BitSet FOLLOW_RULE_POINTER_in_rulePredefined2919 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrimitive_Type_in_entryRulePrimitive_Type2962 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePrimitive_Type2973 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_41_in_rulePrimitive_Type3011 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_42_in_rulePrimitive_Type3030 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_rulePrimitive_Type3049 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_44_in_rulePrimitive_Type3068 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_rulePrimitive_Type3087 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_rulePrimitive_Type3106 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInitializers_in_entryRuleInitializers3147 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInitializers3158 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_45_in_ruleInitializers3195 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFloatingPoint_Type_in_entryRuleFloatingPoint_Type3235 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFloatingPoint_Type3246 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_46_in_ruleFloatingPoint_Type3284 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_ruleFloatingPoint_Type3303 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_ruleFloatingPoint_Type3322 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_49_in_ruleFloatingPoint_Type3341 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_50_in_ruleFloatingPoint_Type3360 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_51_in_ruleFloatingPoint_Type3379 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePredefined_Types_in_entryRulePredefined_Types3420 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePredefined_Types3431 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrimitive_Type_in_rulePredefined_Types3478 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_TYPE_in_rulePredefined_Types3504 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFloatingPoint_Type_in_rulePredefined_Types3537 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVector_in_entryRuleVector3582 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleVector3592 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_52_in_ruleVector3629 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleVector3640 = new BitSet(new long[]{0x0020000000000000L});
+    public static final BitSet FOLLOW_53_in_ruleVector3651 = new BitSet(new long[]{0x000FDE0000180210L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_ruleVector3672 = new BitSet(new long[]{0x0040000000000000L});
+    public static final BitSet FOLLOW_54_in_ruleVector3684 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArray_in_entryRuleArray3720 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleArray3730 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_ruleArray3778 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleArray3789 = new BitSet(new long[]{0x0020000000000000L});
+    public static final BitSet FOLLOW_53_in_ruleArray3800 = new BitSet(new long[]{0x000FDE0000180210L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_ruleArray3821 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_31_in_ruleArray3833 = new BitSet(new long[]{0x0000000000000402L});
+    public static final BitSet FOLLOW_55_in_ruleArray3852 = new BitSet(new long[]{0x0000000000000402L});
+    public static final BitSet FOLLOW_29_in_ruleArray3871 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_31_in_ruleArray3883 = new BitSet(new long[]{0x0000000000000402L});
+    public static final BitSet FOLLOW_RULE_POINTER_in_ruleArray3897 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAggregate_Types_in_entryRuleAggregate_Types3934 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAggregate_Types3944 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStructure_in_ruleAggregate_Types3991 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArray_in_ruleAggregate_Types4018 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVector_in_ruleAggregate_Types4045 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleConstant_in_entryRuleConstant4080 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleConstant4090 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleConstant4131 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNonConstantValue_in_entryRuleNonConstantValue4171 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNonConstantValue4181 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_VALID_ID_in_ruleNonConstantValue4223 = new BitSet(new long[]{0x0000000000000402L});
+    public static final BitSet FOLLOW_RULE_POINTER_in_ruleNonConstantValue4245 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_entryRuleValue4287 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleValue4297 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleValue4344 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrimitive_Type_in_ruleValue4365 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInitializers_in_ruleValue4386 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCast_in_ruleValue4415 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleGetElementPtr2_in_ruleValue4442 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleConstant_in_ruleValue4469 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNonConstantValue_in_ruleValue4496 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValueStruct_in_entryRuleValueStruct4531 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleValueStruct4541 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_56_in_ruleValueStruct4578 = new BitSet(new long[]{0x000FDE0000180210L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_ruleValueStruct4599 = new BitSet(new long[]{0x01003E0000180A80L,0x0000000040000000L,0xFFE0000000000000L,0x0000000000000001L});
+    public static final BitSet FOLLOW_ruleValue_in_ruleValueStruct4620 = new BitSet(new long[]{0x0200000040000000L});
+    public static final BitSet FOLLOW_30_in_ruleValueStruct4633 = new BitSet(new long[]{0x000FDE0000180210L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_ruleValueStruct4654 = new BitSet(new long[]{0x01003E0000180A80L,0x0000000040000000L,0xFFE0000000000000L,0x0000000000000001L});
+    public static final BitSet FOLLOW_ruleValue_in_ruleValueStruct4675 = new BitSet(new long[]{0x0200000040000000L});
+    public static final BitSet FOLLOW_57_in_ruleValueStruct4689 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStructure_in_entryRuleStructure4725 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleStructure4735 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_56_in_ruleStructure4781 = new BitSet(new long[]{0x020FDE0000180210L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_ruleStructure4803 = new BitSet(new long[]{0x0200000040000000L});
+    public static final BitSet FOLLOW_30_in_ruleStructure4816 = new BitSet(new long[]{0x019FDE0E20180210L,0x0000000000000000L,0x0000000000000000L,0x000000FFFF000000L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_ruleStructure4839 = new BitSet(new long[]{0x0200000040000000L});
+    public static final BitSet FOLLOW_ruleAggregate_Types_in_ruleStructure4858 = new BitSet(new long[]{0x0200000040000000L});
+    public static final BitSet FOLLOW_57_in_ruleStructure4877 = new BitSet(new long[]{0x0000000000000402L});
+    public static final BitSet FOLLOW_RULE_POINTER_in_ruleStructure4889 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpaque_in_entryRuleOpaque4927 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleOpaque4938 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_58_in_ruleOpaque4975 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleParameterList_in_entryRuleParameterList5014 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleParameterList5024 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_59_in_ruleParameterList5071 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_60_in_ruleParameterList5090 = new BitSet(new long[]{0x200FDE0000180210L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_ruleParameterList5112 = new BitSet(new long[]{0x19003E0000180A80L,0x0000000040000000L,0xFFE00000000FF000L,0x0000000000000001L});
+    public static final BitSet FOLLOW_ruleTypeList_in_ruleParameterList5133 = new BitSet(new long[]{0x01003E0000180A80L,0x0000000040000000L,0xFFE00000000FF000L,0x0000000000000001L});
+    public static final BitSet FOLLOW_ruleRETURN_ATTRIBUTES_in_ruleParameterList5151 = new BitSet(new long[]{0x01003E0000180A80L,0x0000000040000000L,0xFFE00000000FF000L,0x0000000000000001L});
+    public static final BitSet FOLLOW_ruleValue_in_ruleParameterList5173 = new BitSet(new long[]{0x2000000040000000L});
+    public static final BitSet FOLLOW_30_in_ruleParameterList5186 = new BitSet(new long[]{0x000FDE0000180210L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_ruleParameterList5207 = new BitSet(new long[]{0x19003E0000180A80L,0x0000000040000000L,0xFFE00000000FF000L,0x0000000000000001L});
+    public static final BitSet FOLLOW_ruleTypeList_in_ruleParameterList5228 = new BitSet(new long[]{0x01003E0000180A80L,0x0000000040000000L,0xFFE00000000FF000L,0x0000000000000001L});
+    public static final BitSet FOLLOW_ruleRETURN_ATTRIBUTES_in_ruleParameterList5246 = new BitSet(new long[]{0x01003E0000180A80L,0x0000000040000000L,0xFFE00000000FF000L,0x0000000000000001L});
+    public static final BitSet FOLLOW_ruleValue_in_ruleParameterList5268 = new BitSet(new long[]{0x2000000040000000L});
+    public static final BitSet FOLLOW_61_in_ruleParameterList5284 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeList_in_entryRuleTypeList5322 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTypeList5332 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_59_in_ruleTypeList5379 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_60_in_ruleTypeList5398 = new BitSet(new long[]{0xE00FDE0000180210L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_ruleTypeList5420 = new BitSet(new long[]{0xF800000040000000L,0x0000000000000007L,0x00000000000FF000L});
+    public static final BitSet FOLLOW_ruleTypeList_in_ruleTypeList5441 = new BitSet(new long[]{0xE000000040000000L,0x0000000000000007L,0x00000000000FF000L});
+    public static final BitSet FOLLOW_ruleRETURN_ATTRIBUTES_in_ruleTypeList5459 = new BitSet(new long[]{0xE000000040000000L,0x0000000000000007L});
+    public static final BitSet FOLLOW_30_in_ruleTypeList5473 = new BitSet(new long[]{0x000FDE0000180210L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_ruleTypeList5494 = new BitSet(new long[]{0xF800000040000000L,0x0000000000000007L,0x00000000000FF000L});
+    public static final BitSet FOLLOW_ruleTypeList_in_ruleTypeList5515 = new BitSet(new long[]{0xE000000040000000L,0x0000000000000007L,0x00000000000FF000L});
+    public static final BitSet FOLLOW_ruleRETURN_ATTRIBUTES_in_ruleTypeList5533 = new BitSet(new long[]{0xE000000040000000L,0x0000000000000007L});
+    public static final BitSet FOLLOW_61_in_ruleTypeList5551 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_62_in_ruleTypeList5569 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_63_in_ruleTypeList5587 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_64_in_ruleTypeList5605 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_65_in_ruleTypeList5623 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_66_in_ruleTypeList5641 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFunctionBody_in_entryRuleFunctionBody5680 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFunctionBody5690 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMetadataValue_in_ruleFunctionBody5736 = new BitSet(new long[]{0x0100005011400200L,0x000000000C000000L});
+    public static final BitSet FOLLOW_56_in_ruleFunctionBody5749 = new BitSet(new long[]{0x00000000001F8030L});
+    public static final BitSet FOLLOW_ruleBasicBlock_in_ruleFunctionBody5770 = new BitSet(new long[]{0x02000000001F8030L});
+    public static final BitSet FOLLOW_57_in_ruleFunctionBody5783 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleBasicBlock_in_entryRuleBasicBlock5821 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleBasicBlock5831 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleID_FQN_in_ruleBasicBlock5878 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
     public static final BitSet FOLLOW_67_in_ruleBasicBlock5890 = new BitSet(new long[]{0x0000000000070200L,0xB7F8E77741F9FFF0L,0xFFE0000000000000L,0x0000000000000001L});
     public static final BitSet FOLLOW_ruleInstructionUse_in_ruleBasicBlock5914 = new BitSet(new long[]{0x0000000000070200L,0xB7F8E77741F9FFF0L,0xFFE0000000000000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_ruleInstruction_in_ruleBasicBlock5933 = new BitSet(new long[]{0x0000000000070200L,0xB7F8E77741F9FFF0L,0xFFE0000000000000L,0x0000000000000001L});
+    public static final BitSet FOLLOW_ruleStd_Instr_in_ruleBasicBlock5933 = new BitSet(new long[]{0x0000000000070200L,0xB7F8E77741F9FFF0L,0xFFE0000000000000L,0x0000000000000001L});
     public static final BitSet FOLLOW_RULE_VALID_ID_in_ruleBasicBlock5955 = new BitSet(new long[]{0x0000000008000000L});
     public static final BitSet FOLLOW_27_in_ruleBasicBlock5972 = new BitSet(new long[]{0x0000000000070200L,0xB7F8E77741F9FFF0L,0xFFE0000000000000L,0x0000000000000001L});
     public static final BitSet FOLLOW_ruleRet_Instr_in_ruleBasicBlock5995 = new BitSet(new long[]{0x0000000000000002L});
@@ -22466,7 +22461,7 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_EOF_in_entryRuleInstructionUse6041 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_VALID_ID_in_ruleInstructionUse6083 = new BitSet(new long[]{0x0000000008000000L});
     public static final BitSet FOLLOW_27_in_ruleInstructionUse6100 = new BitSet(new long[]{0x0000000000000200L,0x03F8E77741F9FFF0L,0xFFE0000000000000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_ruleInstruction_in_ruleInstructionUse6121 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStd_Instr_in_ruleInstructionUse6121 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleRet_Instr_in_entryRuleRet_Instr6157 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleRet_Instr6167 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleReturn_in_ruleRet_Instr6214 = new BitSet(new long[]{0x0000000000000002L});
@@ -22476,31 +22471,31 @@ public class InternalLLVMParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleInvoke_in_ruleRet_Instr6322 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleResume_in_ruleRet_Instr6349 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleUnreachable_in_ruleRet_Instr6376 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInstruction_in_entryRuleInstruction6411 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInstruction6421 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_68_in_ruleInstruction6460 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000010L});
-    public static final BitSet FOLLOW_ruleLoad_in_ruleInstruction6484 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_68_in_ruleInstruction6504 = new BitSet(new long[]{0x0000000000000000L,0x0000010000000010L});
-    public static final BitSet FOLLOW_ruleStore_in_ruleInstruction6528 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFence_in_ruleInstruction6556 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGetElementPtr_in_ruleInstruction6583 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLOGICAL_OP_in_ruleInstruction6610 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleARITHMETIC_OP_in_ruleInstruction6637 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCompare_in_ruleInstruction6664 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCast_in_ruleInstruction6691 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleShuffleVector_in_ruleInstruction6718 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInsertElement_in_ruleInstruction6745 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExtractElement_in_ruleInstruction6772 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInsertValue_in_ruleInstruction6799 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExtractValue_in_ruleInstruction6826 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAlloc_in_ruleInstruction6853 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCmpXchg_in_ruleInstruction6880 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAtomicRMW_in_ruleInstruction6907 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePHI_in_ruleInstruction6934 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSelect_in_ruleInstruction6961 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCall_in_ruleInstruction6988 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVA_Arg_in_ruleInstruction7015 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLandingPad_in_ruleInstruction7042 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStd_Instr_in_entryRuleStd_Instr6411 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleStd_Instr6421 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_68_in_ruleStd_Instr6460 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000010L});
+    public static final BitSet FOLLOW_ruleLoad_in_ruleStd_Instr6484 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_68_in_ruleStd_Instr6504 = new BitSet(new long[]{0x0000000000000000L,0x0000010000000010L});
+    public static final BitSet FOLLOW_ruleStore_in_ruleStd_Instr6528 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFence_in_ruleStd_Instr6556 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleGetElementPtr_in_ruleStd_Instr6583 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLOGICAL_OP_in_ruleStd_Instr6610 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleARITHMETIC_OP_in_ruleStd_Instr6637 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCompare_in_ruleStd_Instr6664 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCast_in_ruleStd_Instr6691 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleShuffleVector_in_ruleStd_Instr6718 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInsertElement_in_ruleStd_Instr6745 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExtractElement_in_ruleStd_Instr6772 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInsertValue_in_ruleStd_Instr6799 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExtractValue_in_ruleStd_Instr6826 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAlloc_in_ruleStd_Instr6853 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCmpXchg_in_ruleStd_Instr6880 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAtomicRMW_in_ruleStd_Instr6907 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePHI_in_ruleStd_Instr6934 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSelect_in_ruleStd_Instr6961 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCall_in_ruleStd_Instr6988 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVA_Arg_in_ruleStd_Instr7015 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLandingPad_in_ruleStd_Instr7042 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleARITHMETIC_OP_in_entryRuleARITHMETIC_OP7077 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleARITHMETIC_OP7087 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_69_in_ruleARITHMETIC_OP7125 = new BitSet(new long[]{0x000FDE0000180210L,0x0000000000060000L});

@@ -6,6 +6,7 @@ import de.upb.llvm_parser.llvm.GetElementPtr;
 import de.upb.llvm_parser.llvm.GetElementPtr2;
 import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.Std_Instr;
 import de.upb.llvm_parser.llvm.TypeUse;
 import de.upb.llvm_parser.llvm.Value;
 
@@ -334,6 +335,11 @@ public class GetElementPtr2Impl extends ValueImpl implements GetElementPtr2 {
 				default: return -1;
 			}
 		}
+		if (baseClass == Std_Instr.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
 		if (baseClass == GetElementPtr.class) {
 			switch (derivedFeatureID) {
 				case LlvmPackage.GET_ELEMENT_PTR2__AGGREGATE: return LlvmPackage.GET_ELEMENT_PTR__AGGREGATE;
@@ -354,6 +360,11 @@ public class GetElementPtr2Impl extends ValueImpl implements GetElementPtr2 {
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == Instruction.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == Std_Instr.class) {
 			switch (baseFeatureID) {
 				default: return -1;
 			}

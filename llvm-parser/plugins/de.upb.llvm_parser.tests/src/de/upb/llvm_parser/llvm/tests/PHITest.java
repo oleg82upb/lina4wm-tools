@@ -13,7 +13,7 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class PHITest extends InstructionTest {
+public class PHITest extends Std_InstrTest {
 
 	/**
 	 * <!-- begin-user-doc -->

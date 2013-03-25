@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class LOGICAL_OPImpl extends InstructionImpl implements LOGICAL_OP {
+public class LOGICAL_OPImpl extends Std_InstrImpl implements LOGICAL_OP {
 	/**
 	 * The cached value of the '{@link #getOptype() <em>Optype</em>}' containment reference.
 	 * <!-- begin-user-doc -->

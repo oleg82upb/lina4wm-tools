@@ -79,10 +79,11 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 			case LlvmPackage.PARAMETER_LIST: return createParameterList();
 			case LlvmPackage.TYPE_LIST: return createTypeList();
 			case LlvmPackage.FUNCTION_BODY: return createFunctionBody();
+			case LlvmPackage.INSTRUCTION: return createInstruction();
 			case LlvmPackage.BASIC_BLOCK: return createBasicBlock();
 			case LlvmPackage.INSTRUCTION_USE: return createInstructionUse();
 			case LlvmPackage.RET_INSTR: return createRet_Instr();
-			case LlvmPackage.INSTRUCTION: return createInstruction();
+			case LlvmPackage.STD_INSTR: return createStd_Instr();
 			case LlvmPackage.ARITHMETIC_OP: return createARITHMETIC_OP();
 			case LlvmPackage.LOGICAL_OP: return createLOGICAL_OP();
 			case LlvmPackage.CAST: return createCast();
@@ -354,6 +355,16 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Instruction createInstruction() {
+		InstructionImpl instruction = new InstructionImpl();
+		return instruction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public BasicBlock createBasicBlock() {
 		BasicBlockImpl basicBlock = new BasicBlockImpl();
 		return basicBlock;
@@ -384,9 +395,9 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Instruction createInstruction() {
-		InstructionImpl instruction = new InstructionImpl();
-		return instruction;
+	public Std_Instr createStd_Instr() {
+		Std_InstrImpl std_Instr = new Std_InstrImpl();
+		return std_Instr;
 	}
 
 	/**

@@ -647,6 +647,29 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.Std_Instr} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected Std_InstrItemProvider std_InstrItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.Std_Instr}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStd_InstrAdapter() {
+		if (std_InstrItemProvider == null) {
+			std_InstrItemProvider = new Std_InstrItemProvider(this);
+		}
+
+		return std_InstrItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.TypeList} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1527,10 +1550,11 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 		if (parameterListItemProvider != null) parameterListItemProvider.dispose();
 		if (typeListItemProvider != null) typeListItemProvider.dispose();
 		if (functionBodyItemProvider != null) functionBodyItemProvider.dispose();
+		if (instructionItemProvider != null) instructionItemProvider.dispose();
 		if (basicBlockItemProvider != null) basicBlockItemProvider.dispose();
 		if (instructionUseItemProvider != null) instructionUseItemProvider.dispose();
 		if (ret_InstrItemProvider != null) ret_InstrItemProvider.dispose();
-		if (instructionItemProvider != null) instructionItemProvider.dispose();
+		if (std_InstrItemProvider != null) std_InstrItemProvider.dispose();
 		if (arithmetiC_OPItemProvider != null) arithmetiC_OPItemProvider.dispose();
 		if (logicaL_OPItemProvider != null) logicaL_OPItemProvider.dispose();
 		if (castItemProvider != null) castItemProvider.dispose();

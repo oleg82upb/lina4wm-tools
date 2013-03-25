@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Store extends Instruction {
+public interface Store extends Std_Instr {
 	/**
 	 * Returns the value of the '<em><b>Newtype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

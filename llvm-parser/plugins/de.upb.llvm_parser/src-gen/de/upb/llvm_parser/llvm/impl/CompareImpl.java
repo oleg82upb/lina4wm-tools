@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class CompareImpl extends InstructionImpl implements Compare {
+public class CompareImpl extends Std_InstrImpl implements Compare {
 	/**
 	 * The cached value of the '{@link #getComptype() <em>Comptype</em>}' containment reference.
 	 * <!-- begin-user-doc -->

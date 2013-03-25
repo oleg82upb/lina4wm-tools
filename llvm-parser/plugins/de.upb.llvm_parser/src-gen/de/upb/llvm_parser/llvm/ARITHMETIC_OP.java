@@ -21,7 +21,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface ARITHMETIC_OP extends Instruction {
+public interface ARITHMETIC_OP extends Std_Instr {
 	/**
 	 * Returns the value of the '<em><b>Optype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

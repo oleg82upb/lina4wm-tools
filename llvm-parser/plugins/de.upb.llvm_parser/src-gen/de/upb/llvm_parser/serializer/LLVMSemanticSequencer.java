@@ -78,7 +78,8 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		if(semanticObject.eClass().getEPackage() == LlvmPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case LlvmPackage.ARITHMETIC_OP:
 				if(context == grammarAccess.getARITHMETIC_OPRule() ||
-				   context == grammarAccess.getInstructionRule()) {
+				   context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getStd_InstrRule()) {
 					sequence_ARITHMETIC_OP(context, (ARITHMETIC_OP) semanticObject); 
 					return; 
 				}
@@ -106,7 +107,8 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				else break;
 			case LlvmPackage.ALLOC:
 				if(context == grammarAccess.getAllocRule() ||
-				   context == grammarAccess.getInstructionRule()) {
+				   context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getStd_InstrRule()) {
 					sequence_Alloc(context, (Alloc) semanticObject); 
 					return; 
 				}
@@ -120,7 +122,8 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				else break;
 			case LlvmPackage.ATOMIC_RMW:
 				if(context == grammarAccess.getAtomicRMWRule() ||
-				   context == grammarAccess.getInstructionRule()) {
+				   context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getStd_InstrRule()) {
 					sequence_AtomicRMW(context, (AtomicRMW) semanticObject); 
 					return; 
 				}
@@ -133,6 +136,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				else break;
 			case LlvmPackage.BRANCH:
 				if(context == grammarAccess.getBranchRule() ||
+				   context == grammarAccess.getInstructionRule() ||
 				   context == grammarAccess.getRet_InstrRule()) {
 					sequence_Branch(context, (Branch) semanticObject); 
 					return; 
@@ -140,7 +144,8 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				else break;
 			case LlvmPackage.CALL:
 				if(context == grammarAccess.getCallRule() ||
-				   context == grammarAccess.getInstructionRule()) {
+				   context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getStd_InstrRule()) {
 					sequence_Call(context, (Call) semanticObject); 
 					return; 
 				}
@@ -148,6 +153,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case LlvmPackage.CAST:
 				if(context == grammarAccess.getCastRule() ||
 				   context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getStd_InstrRule() ||
 				   context == grammarAccess.getValueRule()) {
 					sequence_Cast(context, (Cast) semanticObject); 
 					return; 
@@ -161,14 +167,16 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				else break;
 			case LlvmPackage.CMP_XCHG:
 				if(context == grammarAccess.getCmpXchgRule() ||
-				   context == grammarAccess.getInstructionRule()) {
+				   context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getStd_InstrRule()) {
 					sequence_CmpXchg(context, (CmpXchg) semanticObject); 
 					return; 
 				}
 				else break;
 			case LlvmPackage.COMPARE:
 				if(context == grammarAccess.getCompareRule() ||
-				   context == grammarAccess.getInstructionRule()) {
+				   context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getStd_InstrRule()) {
 					sequence_Compare(context, (Compare) semanticObject); 
 					return; 
 				}
@@ -182,21 +190,24 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				else break;
 			case LlvmPackage.EXTRACT_ELEMENT:
 				if(context == grammarAccess.getExtractElementRule() ||
-				   context == grammarAccess.getInstructionRule()) {
+				   context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getStd_InstrRule()) {
 					sequence_ExtractElement(context, (ExtractElement) semanticObject); 
 					return; 
 				}
 				else break;
 			case LlvmPackage.EXTRACT_VALUE:
 				if(context == grammarAccess.getExtractValueRule() ||
-				   context == grammarAccess.getInstructionRule()) {
+				   context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getStd_InstrRule()) {
 					sequence_ExtractValue(context, (ExtractValue) semanticObject); 
 					return; 
 				}
 				else break;
 			case LlvmPackage.FENCE:
 				if(context == grammarAccess.getFenceRule() ||
-				   context == grammarAccess.getInstructionRule()) {
+				   context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getStd_InstrRule()) {
 					sequence_Fence(context, (Fence) semanticObject); 
 					return; 
 				}
@@ -218,7 +229,8 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case LlvmPackage.GET_ELEMENT_PTR1:
 				if(context == grammarAccess.getGetElementPtrRule() ||
 				   context == grammarAccess.getGetElementPtr1Rule() ||
-				   context == grammarAccess.getInstructionRule()) {
+				   context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getStd_InstrRule()) {
 					sequence_GetElementPtr1(context, (GetElementPtr1) semanticObject); 
 					return; 
 				}
@@ -227,6 +239,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				if(context == grammarAccess.getGetElementPtrRule() ||
 				   context == grammarAccess.getGetElementPtr2Rule() ||
 				   context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getStd_InstrRule() ||
 				   context == grammarAccess.getValueRule()) {
 					sequence_GetElementPtr2(context, (GetElementPtr2) semanticObject); 
 					return; 
@@ -242,6 +255,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				else break;
 			case LlvmPackage.INDIRECT_BRANCH:
 				if(context == grammarAccess.getIndirectBranchRule() ||
+				   context == grammarAccess.getInstructionRule() ||
 				   context == grammarAccess.getRet_InstrRule()) {
 					sequence_IndirectBranch(context, (IndirectBranch) semanticObject); 
 					return; 
@@ -249,14 +263,16 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				else break;
 			case LlvmPackage.INSERT_ELEMENT:
 				if(context == grammarAccess.getInsertElementRule() ||
-				   context == grammarAccess.getInstructionRule()) {
+				   context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getStd_InstrRule()) {
 					sequence_InsertElement(context, (InsertElement) semanticObject); 
 					return; 
 				}
 				else break;
 			case LlvmPackage.INSERT_VALUE:
 				if(context == grammarAccess.getInsertValueRule() ||
-				   context == grammarAccess.getInstructionRule()) {
+				   context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getStd_InstrRule()) {
 					sequence_InsertValue(context, (InsertValue) semanticObject); 
 					return; 
 				}
@@ -268,7 +284,8 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				}
 				else break;
 			case LlvmPackage.INVOKE:
-				if(context == grammarAccess.getInvokeRule() ||
+				if(context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getInvokeRule() ||
 				   context == grammarAccess.getRet_InstrRule()) {
 					sequence_Invoke(context, (Invoke) semanticObject); 
 					return; 
@@ -282,21 +299,24 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				else break;
 			case LlvmPackage.LOGICAL_OP:
 				if(context == grammarAccess.getInstructionRule() ||
-				   context == grammarAccess.getLOGICAL_OPRule()) {
+				   context == grammarAccess.getLOGICAL_OPRule() ||
+				   context == grammarAccess.getStd_InstrRule()) {
 					sequence_LOGICAL_OP(context, (LOGICAL_OP) semanticObject); 
 					return; 
 				}
 				else break;
 			case LlvmPackage.LANDING_PAD:
 				if(context == grammarAccess.getInstructionRule() ||
-				   context == grammarAccess.getLandingPadRule()) {
+				   context == grammarAccess.getLandingPadRule() ||
+				   context == grammarAccess.getStd_InstrRule()) {
 					sequence_LandingPad(context, (LandingPad) semanticObject); 
 					return; 
 				}
 				else break;
 			case LlvmPackage.LOAD:
 				if(context == grammarAccess.getInstructionRule() ||
-				   context == grammarAccess.getLoadRule()) {
+				   context == grammarAccess.getLoadRule() ||
+				   context == grammarAccess.getStd_InstrRule()) {
 					sequence_Load(context, (Load) semanticObject); 
 					return; 
 				}
@@ -317,7 +337,8 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				else break;
 			case LlvmPackage.PHI:
 				if(context == grammarAccess.getInstructionRule() ||
-				   context == grammarAccess.getPHIRule()) {
+				   context == grammarAccess.getPHIRule() ||
+				   context == grammarAccess.getStd_InstrRule()) {
 					sequence_PHI(context, (PHI) semanticObject); 
 					return; 
 				}
@@ -336,14 +357,16 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				}
 				else break;
 			case LlvmPackage.RESUME:
-				if(context == grammarAccess.getResumeRule() ||
+				if(context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getResumeRule() ||
 				   context == grammarAccess.getRet_InstrRule()) {
 					sequence_Resume(context, (Resume) semanticObject); 
 					return; 
 				}
 				else break;
 			case LlvmPackage.RETURN:
-				if(context == grammarAccess.getRet_InstrRule() ||
+				if(context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getRet_InstrRule() ||
 				   context == grammarAccess.getReturnRule()) {
 					sequence_Return(context, (Return) semanticObject); 
 					return; 
@@ -351,20 +374,23 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				else break;
 			case LlvmPackage.SELECT:
 				if(context == grammarAccess.getInstructionRule() ||
-				   context == grammarAccess.getSelectRule()) {
+				   context == grammarAccess.getSelectRule() ||
+				   context == grammarAccess.getStd_InstrRule()) {
 					sequence_Select(context, (Select) semanticObject); 
 					return; 
 				}
 				else break;
 			case LlvmPackage.SHUFFLE_VECTOR:
 				if(context == grammarAccess.getInstructionRule() ||
-				   context == grammarAccess.getShuffleVectorRule()) {
+				   context == grammarAccess.getShuffleVectorRule() ||
+				   context == grammarAccess.getStd_InstrRule()) {
 					sequence_ShuffleVector(context, (ShuffleVector) semanticObject); 
 					return; 
 				}
 				else break;
 			case LlvmPackage.STORE:
 				if(context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getStd_InstrRule() ||
 				   context == grammarAccess.getStoreRule()) {
 					sequence_Store(context, (Store) semanticObject); 
 					return; 
@@ -378,7 +404,8 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				}
 				else break;
 			case LlvmPackage.SWITCH:
-				if(context == grammarAccess.getRet_InstrRule() ||
+				if(context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getRet_InstrRule() ||
 				   context == grammarAccess.getSwitchRule()) {
 					sequence_Switch(context, (Switch) semanticObject); 
 					return; 
@@ -406,7 +433,8 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				}
 				else break;
 			case LlvmPackage.UNREACHABLE:
-				if(context == grammarAccess.getRet_InstrRule() ||
+				if(context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getRet_InstrRule() ||
 				   context == grammarAccess.getUnreachableRule()) {
 					sequence_Unreachable(context, (Unreachable) semanticObject); 
 					return; 
@@ -414,6 +442,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				else break;
 			case LlvmPackage.VA_ARG:
 				if(context == grammarAccess.getInstructionRule() ||
+				   context == grammarAccess.getStd_InstrRule() ||
 				   context == grammarAccess.getVA_ArgRule()) {
 					sequence_VA_Arg(context, (VA_Arg) semanticObject); 
 					return; 
@@ -546,7 +575,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (label=ID_FQN (instructions+=InstructionUse | instructions+=Instruction)* retadr=VALID_ID? terminator=Ret_Instr)
+	 *     (label=ID_FQN (instructions+=InstructionUse | instructions+=Std_Instr)* retadr=VALID_ID? terminator=Ret_Instr)
 	 */
 	protected void sequence_BasicBlock(EObject context, BasicBlock semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -809,7 +838,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (reg_or_var=VALID_ID instruction=Instruction)
+	 *     (reg_or_var=VALID_ID instruction=Std_Instr)
 	 */
 	protected void sequence_InstructionUse(EObject context, InstructionUse semanticObject) {
 		if(errorAcceptor != null) {
@@ -821,7 +850,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getInstructionUseAccess().getReg_or_varVALID_IDTerminalRuleCall_0_0(), semanticObject.getReg_or_var());
-		feeder.accept(grammarAccess.getInstructionUseAccess().getInstructionInstructionParserRuleCall_2_0(), semanticObject.getInstruction());
+		feeder.accept(grammarAccess.getInstructionUseAccess().getInstructionStd_InstrParserRuleCall_2_0(), semanticObject.getInstruction());
 		feeder.finish();
 	}
 	

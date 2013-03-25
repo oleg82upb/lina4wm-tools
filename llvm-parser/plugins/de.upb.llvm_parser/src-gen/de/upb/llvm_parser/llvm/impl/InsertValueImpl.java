@@ -39,7 +39,7 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
  *
  * @generated
  */
-public class InsertValueImpl extends InstructionImpl implements InsertValue {
+public class InsertValueImpl extends Std_InstrImpl implements InsertValue {
 	/**
 	 * The cached value of the '{@link #getStruct() <em>Struct</em>}' containment reference.
 	 * <!-- begin-user-doc -->
