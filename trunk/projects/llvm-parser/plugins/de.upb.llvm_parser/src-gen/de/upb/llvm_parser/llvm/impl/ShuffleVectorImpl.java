@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class ShuffleVectorImpl extends InstructionImpl implements ShuffleVector {
+public class ShuffleVectorImpl extends Std_InstrImpl implements ShuffleVector {
 	/**
 	 * The cached value of the '{@link #getVal1type() <em>Val1type</em>}' containment reference.
 	 * <!-- begin-user-doc -->

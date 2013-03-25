@@ -13,7 +13,7 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ARITHMETIC_OPTest extends InstructionTest {
+public class ARITHMETIC_OPTest extends Std_InstrTest {
 
 	/**
 	 * <!-- begin-user-doc -->

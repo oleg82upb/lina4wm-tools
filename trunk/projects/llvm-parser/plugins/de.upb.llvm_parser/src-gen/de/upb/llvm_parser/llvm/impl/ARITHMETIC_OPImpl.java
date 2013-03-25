@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class ARITHMETIC_OPImpl extends InstructionImpl implements ARITHMETIC_OP {
+public class ARITHMETIC_OPImpl extends Std_InstrImpl implements ARITHMETIC_OP {
 	/**
 	 * The cached value of the '{@link #getOptype() <em>Optype</em>}' containment reference.
 	 * <!-- begin-user-doc -->

@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface GetElementPtr extends Instruction {
+public interface GetElementPtr extends Std_Instr {
 	/**
 	 * Returns the value of the '<em><b>Aggregate</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

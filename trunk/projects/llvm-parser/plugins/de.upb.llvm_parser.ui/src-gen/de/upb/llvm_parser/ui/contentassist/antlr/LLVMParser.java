@@ -61,9 +61,10 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getParameterListAccess().getAlternatives_1(), "rule__ParameterList__Alternatives_1");
 					put(grammarAccess.getTypeListAccess().getAlternatives_1(), "rule__TypeList__Alternatives_1");
 					put(grammarAccess.getTypeListAccess().getAlternatives_1_1_2(), "rule__TypeList__Alternatives_1_1_2");
+					put(grammarAccess.getInstructionAccess().getAlternatives(), "rule__Instruction__Alternatives");
 					put(grammarAccess.getBasicBlockAccess().getInstructionsAlternatives_1_0(), "rule__BasicBlock__InstructionsAlternatives_1_0");
 					put(grammarAccess.getRet_InstrAccess().getAlternatives(), "rule__Ret_Instr__Alternatives");
-					put(grammarAccess.getInstructionAccess().getAlternatives(), "rule__Instruction__Alternatives");
+					put(grammarAccess.getStd_InstrAccess().getAlternatives(), "rule__Std_Instr__Alternatives");
 					put(grammarAccess.getARITHMETIC_OPAccess().getAlternatives_0(), "rule__ARITHMETIC_OP__Alternatives_0");
 					put(grammarAccess.getARITHMETIC_OPAccess().getAlternatives_1_0(), "rule__ARITHMETIC_OP__Alternatives_1_0");
 					put(grammarAccess.getARITHMETIC_OPAccess().getAlternatives_1_1(), "rule__ARITHMETIC_OP__Alternatives_1_1");
@@ -118,7 +119,6 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getFunctionDefinitionAccess().getGroup_1_10(), "rule__FunctionDefinition__Group_1_10__0");
 					put(grammarAccess.getAliasDefinitionAccess().getGroup(), "rule__AliasDefinition__Group__0");
 					put(grammarAccess.getTypeUseAccess().getGroup(), "rule__TypeUse__Group__0");
-					put(grammarAccess.getTypeUseAccess().getGroup_0_1(), "rule__TypeUse__Group_0_1__0");
 					put(grammarAccess.getAddressUseAccess().getGroup(), "rule__AddressUse__Group__0");
 					put(grammarAccess.getPredefinedAccess().getGroup(), "rule__Predefined__Group__0");
 					put(grammarAccess.getVectorAccess().getGroup(), "rule__Vector__Group__0");
@@ -145,8 +145,8 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBasicBlockAccess().getGroup_0(), "rule__BasicBlock__Group_0__0");
 					put(grammarAccess.getBasicBlockAccess().getGroup_2(), "rule__BasicBlock__Group_2__0");
 					put(grammarAccess.getInstructionUseAccess().getGroup(), "rule__InstructionUse__Group__0");
-					put(grammarAccess.getInstructionAccess().getGroup_0(), "rule__Instruction__Group_0__0");
-					put(grammarAccess.getInstructionAccess().getGroup_1(), "rule__Instruction__Group_1__0");
+					put(grammarAccess.getStd_InstrAccess().getGroup_0(), "rule__Std_Instr__Group_0__0");
+					put(grammarAccess.getStd_InstrAccess().getGroup_1(), "rule__Std_Instr__Group_1__0");
 					put(grammarAccess.getARITHMETIC_OPAccess().getGroup(), "rule__ARITHMETIC_OP__Group__0");
 					put(grammarAccess.getARITHMETIC_OPAccess().getGroup_1(), "rule__ARITHMETIC_OP__Group_1__0");
 					put(grammarAccess.getLOGICAL_OPAccess().getGroup(), "rule__LOGICAL_OP__Group__0");

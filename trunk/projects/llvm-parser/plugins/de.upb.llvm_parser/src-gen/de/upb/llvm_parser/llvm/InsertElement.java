@@ -24,7 +24,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface InsertElement extends Instruction {
+public interface InsertElement extends Std_Instr {
 	/**
 	 * Returns the value of the '<em><b>Vectortype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

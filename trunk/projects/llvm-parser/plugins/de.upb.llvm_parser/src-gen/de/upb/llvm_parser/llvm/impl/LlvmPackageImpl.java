@@ -46,6 +46,7 @@ import de.upb.llvm_parser.llvm.Ret_Instr;
 import de.upb.llvm_parser.llvm.Return;
 import de.upb.llvm_parser.llvm.Select;
 import de.upb.llvm_parser.llvm.ShuffleVector;
+import de.upb.llvm_parser.llvm.Std_Instr;
 import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.Structure;
 import de.upb.llvm_parser.llvm.Switch;
@@ -239,6 +240,13 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass instructionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass basicBlockEClass = null;
 
 	/**
@@ -260,7 +268,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass instructionEClass = null;
+	private EClass std_InstrEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1094,6 +1102,15 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getInstruction() {
+		return instructionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBasicBlock() {
 		return basicBlockEClass;
 	}
@@ -1175,8 +1192,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getInstruction() {
-		return instructionEClass;
+	public EClass getStd_Instr() {
+		return std_InstrEClass;
 	}
 
 	/**
@@ -2668,6 +2685,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		createEAttribute(functionBodyEClass, FUNCTION_BODY__META);
 		createEReference(functionBodyEClass, FUNCTION_BODY__BLOCKS);
 
+		instructionEClass = createEClass(INSTRUCTION);
+
 		basicBlockEClass = createEClass(BASIC_BLOCK);
 		createEAttribute(basicBlockEClass, BASIC_BLOCK__LABEL);
 		createEReference(basicBlockEClass, BASIC_BLOCK__INSTRUCTIONS);
@@ -2680,7 +2699,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 
 		ret_InstrEClass = createEClass(RET_INSTR);
 
-		instructionEClass = createEClass(INSTRUCTION);
+		std_InstrEClass = createEClass(STD_INSTR);
 
 		arithmetiC_OPEClass = createEClass(ARITHMETIC_OP);
 		createEReference(arithmetiC_OPEClass, ARITHMETIC_OP__OPTYPE);
@@ -2908,31 +2927,33 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		constantEClass.getESuperTypes().add(this.getValue());
 		nonConstantValueEClass.getESuperTypes().add(this.getValue());
 		structureEClass.getESuperTypes().add(this.getAggregate_Types());
-		arithmetiC_OPEClass.getESuperTypes().add(this.getInstruction());
-		logicaL_OPEClass.getESuperTypes().add(this.getInstruction());
+		ret_InstrEClass.getESuperTypes().add(this.getInstruction());
+		std_InstrEClass.getESuperTypes().add(this.getInstruction());
+		arithmetiC_OPEClass.getESuperTypes().add(this.getStd_Instr());
+		logicaL_OPEClass.getESuperTypes().add(this.getStd_Instr());
 		castEClass.getESuperTypes().add(this.getValue());
-		castEClass.getESuperTypes().add(this.getInstruction());
-		getElementPtrEClass.getESuperTypes().add(this.getInstruction());
+		castEClass.getESuperTypes().add(this.getStd_Instr());
+		getElementPtrEClass.getESuperTypes().add(this.getStd_Instr());
 		getElementPtr1EClass.getESuperTypes().add(this.getGetElementPtr());
 		getElementPtr2EClass.getESuperTypes().add(this.getValue());
 		getElementPtr2EClass.getESuperTypes().add(this.getGetElementPtr());
-		extractValueEClass.getESuperTypes().add(this.getInstruction());
-		insertValueEClass.getESuperTypes().add(this.getInstruction());
-		fenceEClass.getESuperTypes().add(this.getInstruction());
-		cmpXchgEClass.getESuperTypes().add(this.getInstruction());
-		atomicRMWEClass.getESuperTypes().add(this.getInstruction());
-		loadEClass.getESuperTypes().add(this.getInstruction());
-		storeEClass.getESuperTypes().add(this.getInstruction());
-		callEClass.getESuperTypes().add(this.getInstruction());
-		allocEClass.getESuperTypes().add(this.getInstruction());
-		phiEClass.getESuperTypes().add(this.getInstruction());
-		landingPadEClass.getESuperTypes().add(this.getInstruction());
-		selectEClass.getESuperTypes().add(this.getInstruction());
-		vA_ArgEClass.getESuperTypes().add(this.getInstruction());
-		extractElementEClass.getESuperTypes().add(this.getInstruction());
-		insertElementEClass.getESuperTypes().add(this.getInstruction());
-		shuffleVectorEClass.getESuperTypes().add(this.getInstruction());
-		compareEClass.getESuperTypes().add(this.getInstruction());
+		extractValueEClass.getESuperTypes().add(this.getStd_Instr());
+		insertValueEClass.getESuperTypes().add(this.getStd_Instr());
+		fenceEClass.getESuperTypes().add(this.getStd_Instr());
+		cmpXchgEClass.getESuperTypes().add(this.getStd_Instr());
+		atomicRMWEClass.getESuperTypes().add(this.getStd_Instr());
+		loadEClass.getESuperTypes().add(this.getStd_Instr());
+		storeEClass.getESuperTypes().add(this.getStd_Instr());
+		callEClass.getESuperTypes().add(this.getStd_Instr());
+		allocEClass.getESuperTypes().add(this.getStd_Instr());
+		phiEClass.getESuperTypes().add(this.getStd_Instr());
+		landingPadEClass.getESuperTypes().add(this.getStd_Instr());
+		selectEClass.getESuperTypes().add(this.getStd_Instr());
+		vA_ArgEClass.getESuperTypes().add(this.getStd_Instr());
+		extractElementEClass.getESuperTypes().add(this.getStd_Instr());
+		insertElementEClass.getESuperTypes().add(this.getStd_Instr());
+		shuffleVectorEClass.getESuperTypes().add(this.getStd_Instr());
+		compareEClass.getESuperTypes().add(this.getStd_Instr());
 		indirectBranchEClass.getESuperTypes().add(this.getRet_Instr());
 		switchEClass.getESuperTypes().add(this.getRet_Instr());
 		invokeEClass.getESuperTypes().add(this.getRet_Instr());
@@ -3026,6 +3047,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		initEAttribute(getFunctionBody_Meta(), ecorePackage.getEString(), "meta", null, 0, -1, FunctionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunctionBody_Blocks(), this.getBasicBlock(), null, "blocks", null, 0, -1, FunctionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(instructionEClass, Instruction.class, "Instruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(basicBlockEClass, BasicBlock.class, "BasicBlock", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBasicBlock_Label(), ecorePackage.getEString(), "label", null, 0, 1, BasicBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBasicBlock_Instructions(), ecorePackage.getEObject(), null, "instructions", null, 0, -1, BasicBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3034,11 +3057,11 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 
 		initEClass(instructionUseEClass, InstructionUse.class, "InstructionUse", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getInstructionUse_Reg_or_var(), ecorePackage.getEString(), "reg_or_var", null, 0, 1, InstructionUse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getInstructionUse_Instruction(), this.getInstruction(), null, "instruction", null, 0, 1, InstructionUse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstructionUse_Instruction(), this.getStd_Instr(), null, "instruction", null, 0, 1, InstructionUse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(ret_InstrEClass, Ret_Instr.class, "Ret_Instr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(instructionEClass, Instruction.class, "Instruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(std_InstrEClass, Std_Instr.class, "Std_Instr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(arithmetiC_OPEClass, de.upb.llvm_parser.llvm.ARITHMETIC_OP.class, "ARITHMETIC_OP", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getARITHMETIC_OP_Optype(), this.getTypeUse(), null, "optype", null, 0, 1, de.upb.llvm_parser.llvm.ARITHMETIC_OP.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

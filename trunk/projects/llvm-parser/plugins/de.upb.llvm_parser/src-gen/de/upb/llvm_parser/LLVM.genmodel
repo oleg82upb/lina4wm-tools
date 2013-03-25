@@ -88,6 +88,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//FunctionBody/meta"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//FunctionBody/blocks"/>
     </genClasses>
+    <genClasses ecoreClass="LLVM.ecore#//Instruction"/>
     <genClasses ecoreClass="LLVM.ecore#//BasicBlock">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//BasicBlock/label"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//BasicBlock/instructions"/>
@@ -99,7 +100,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//InstructionUse/instruction"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//Ret_Instr"/>
-    <genClasses ecoreClass="LLVM.ecore#//Instruction"/>
+    <genClasses ecoreClass="LLVM.ecore#//Std_Instr"/>
     <genClasses ecoreClass="LLVM.ecore#//ARITHMETIC_OP">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ARITHMETIC_OP/optype"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ARITHMETIC_OP/value1"/>

@@ -266,6 +266,11 @@ public class StructureItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
+				 LlvmFactory.eINSTANCE.createInstruction()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.STRUCTURE__TYPES,
 				 LlvmFactory.eINSTANCE.createBasicBlock()));
 
 		newChildDescriptors.add
@@ -281,7 +286,7 @@ public class StructureItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createInstruction()));
+				 LlvmFactory.eINSTANCE.createStd_Instr()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -21,7 +21,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface VA_Arg extends Instruction {
+public interface VA_Arg extends Std_Instr {
 	/**
 	 * Returns the value of the '<em><b>Listtype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

@@ -13,7 +13,7 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class AtomicRMWTest extends InstructionTest {
+public class AtomicRMWTest extends Std_InstrTest {
 
 	/**
 	 * <!-- begin-user-doc -->

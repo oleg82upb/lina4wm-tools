@@ -2,9 +2,9 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
-import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.InstructionUse;
 import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.Std_Instr;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -58,7 +58,7 @@ public class InstructionUseImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 * @ordered
 	 */
-	protected Instruction instruction;
+	protected Std_Instr instruction;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -105,7 +105,7 @@ public class InstructionUseImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Instruction getInstruction() {
+	public Std_Instr getInstruction() {
 		return instruction;
 	}
 
@@ -114,8 +114,8 @@ public class InstructionUseImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetInstruction(Instruction newInstruction, NotificationChain msgs) {
-		Instruction oldInstruction = instruction;
+	public NotificationChain basicSetInstruction(Std_Instr newInstruction, NotificationChain msgs) {
+		Std_Instr oldInstruction = instruction;
 		instruction = newInstruction;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INSTRUCTION_USE__INSTRUCTION, oldInstruction, newInstruction);
@@ -129,7 +129,7 @@ public class InstructionUseImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInstruction(Instruction newInstruction) {
+	public void setInstruction(Std_Instr newInstruction) {
 		if (newInstruction != instruction) {
 			NotificationChain msgs = null;
 			if (instruction != null)
@@ -185,7 +185,7 @@ public class InstructionUseImpl extends MinimalEObjectImpl.Container implements 
 				setReg_or_var((String)newValue);
 				return;
 			case LlvmPackage.INSTRUCTION_USE__INSTRUCTION:
-				setInstruction((Instruction)newValue);
+				setInstruction((Std_Instr)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -203,7 +203,7 @@ public class InstructionUseImpl extends MinimalEObjectImpl.Container implements 
 				setReg_or_var(REG_OR_VAR_EDEFAULT);
 				return;
 			case LlvmPackage.INSTRUCTION_USE__INSTRUCTION:
-				setInstruction((Instruction)null);
+				setInstruction((Std_Instr)null);
 				return;
 		}
 		super.eUnset(featureID);

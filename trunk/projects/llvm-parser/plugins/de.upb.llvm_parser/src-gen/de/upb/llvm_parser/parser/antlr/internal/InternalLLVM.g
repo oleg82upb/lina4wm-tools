@@ -1156,22 +1156,22 @@ ruleTypeUse returns [EObject current=null]
         afterParserOrEnumRuleCall();
     }
 
-    |(
+    |
     { 
-        newCompositeNode(grammarAccess.getTypeUseAccess().getAddressUseParserRuleCall_0_1_0()); 
+        newCompositeNode(grammarAccess.getTypeUseAccess().getAddressUseParserRuleCall_0_1()); 
     }
     this_AddressUse_1=ruleAddressUse
     { 
         $current = $this_AddressUse_1.current; 
         afterParserOrEnumRuleCall();
     }
-(	otherlv_2='()*' 
+)(	otherlv_2='()*' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getTypeUseAccess().getLeftParenthesisRightParenthesisAsteriskKeyword_0_1_1());
+    	newLeafNode(otherlv_2, grammarAccess.getTypeUseAccess().getLeftParenthesisRightParenthesisAsteriskKeyword_1());
     }
-)?))(this_OREST_3=RULE_OREST
+)?(this_OREST_3=RULE_OREST
     { 
-    newLeafNode(this_OREST_3, grammarAccess.getTypeUseAccess().getORESTTerminalRuleCall_1()); 
+    newLeafNode(this_OREST_3, grammarAccess.getTypeUseAccess().getORESTTerminalRuleCall_2()); 
     }
 )?)
 ;
@@ -2519,6 +2519,8 @@ ruleFunctionBody returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleBasicBlock
 entryRuleBasicBlock returns [EObject current=null] 
 	:
@@ -2574,9 +2576,9 @@ ruleBasicBlock returns [EObject current=null]
 	    }
 
     |		{ 
-	        newCompositeNode(grammarAccess.getBasicBlockAccess().getInstructionsInstructionParserRuleCall_1_0_1()); 
+	        newCompositeNode(grammarAccess.getBasicBlockAccess().getInstructionsStd_InstrParserRuleCall_1_0_1()); 
 	    }
-		lv_instructions_2_2=ruleInstruction		{
+		lv_instructions_2_2=ruleStd_Instr		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getBasicBlockRule());
 	        }
@@ -2584,7 +2586,7 @@ ruleBasicBlock returns [EObject current=null]
        			$current, 
        			"instructions",
         		lv_instructions_2_2, 
-        		"Instruction");
+        		"Std_Instr");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2677,9 +2679,9 @@ ruleInstructionUse returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getInstructionUseAccess().getInstructionInstructionParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getInstructionUseAccess().getInstructionStd_InstrParserRuleCall_2_0()); 
 	    }
-		lv_instruction_2_0=ruleInstruction		{
+		lv_instruction_2_0=ruleStd_Instr		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getInstructionUseRule());
 	        }
@@ -2687,7 +2689,7 @@ ruleInstructionUse returns [EObject current=null]
        			$current, 
        			"instruction",
         		lv_instruction_2_0, 
-        		"Instruction");
+        		"Std_Instr");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2789,27 +2791,27 @@ ruleRet_Instr returns [EObject current=null]
 
 
 
-// Entry rule entryRuleInstruction
-entryRuleInstruction returns [EObject current=null] 
+// Entry rule entryRuleStd_Instr
+entryRuleStd_Instr returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getInstructionRule()); }
-	 iv_ruleInstruction=ruleInstruction 
-	 { $current=$iv_ruleInstruction.current; } 
+	{ newCompositeNode(grammarAccess.getStd_InstrRule()); }
+	 iv_ruleStd_Instr=ruleStd_Instr 
+	 { $current=$iv_ruleStd_Instr.current; } 
 	 EOF 
 ;
 
-// Rule Instruction
-ruleInstruction returns [EObject current=null] 
+// Rule Std_Instr
+ruleStd_Instr returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
 (((	otherlv_0='volatile' 
     {
-    	newLeafNode(otherlv_0, grammarAccess.getInstructionAccess().getVolatileKeyword_0_0());
+    	newLeafNode(otherlv_0, grammarAccess.getStd_InstrAccess().getVolatileKeyword_0_0());
     }
 )?
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getLoadParserRuleCall_0_1()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getLoadParserRuleCall_0_1()); 
     }
     this_Load_1=ruleLoad
     { 
@@ -2819,11 +2821,11 @@ ruleInstruction returns [EObject current=null]
 )
     |((	otherlv_2='volatile' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getInstructionAccess().getVolatileKeyword_1_0());
+    	newLeafNode(otherlv_2, grammarAccess.getStd_InstrAccess().getVolatileKeyword_1_0());
     }
 )?
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getStoreParserRuleCall_1_1()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getStoreParserRuleCall_1_1()); 
     }
     this_Store_3=ruleStore
     { 
@@ -2833,7 +2835,7 @@ ruleInstruction returns [EObject current=null]
 )
     |
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getFenceParserRuleCall_2()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getFenceParserRuleCall_2()); 
     }
     this_Fence_4=ruleFence
     { 
@@ -2843,7 +2845,7 @@ ruleInstruction returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getGetElementPtrParserRuleCall_3()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getGetElementPtrParserRuleCall_3()); 
     }
     this_GetElementPtr_5=ruleGetElementPtr
     { 
@@ -2853,7 +2855,7 @@ ruleInstruction returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getLOGICAL_OPParserRuleCall_4()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getLOGICAL_OPParserRuleCall_4()); 
     }
     this_LOGICAL_OP_6=ruleLOGICAL_OP
     { 
@@ -2863,7 +2865,7 @@ ruleInstruction returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getARITHMETIC_OPParserRuleCall_5()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getARITHMETIC_OPParserRuleCall_5()); 
     }
     this_ARITHMETIC_OP_7=ruleARITHMETIC_OP
     { 
@@ -2873,7 +2875,7 @@ ruleInstruction returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getCompareParserRuleCall_6()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getCompareParserRuleCall_6()); 
     }
     this_Compare_8=ruleCompare
     { 
@@ -2883,7 +2885,7 @@ ruleInstruction returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getCastParserRuleCall_7()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getCastParserRuleCall_7()); 
     }
     this_Cast_9=ruleCast
     { 
@@ -2893,7 +2895,7 @@ ruleInstruction returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getShuffleVectorParserRuleCall_8()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getShuffleVectorParserRuleCall_8()); 
     }
     this_ShuffleVector_10=ruleShuffleVector
     { 
@@ -2903,7 +2905,7 @@ ruleInstruction returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getInsertElementParserRuleCall_9()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getInsertElementParserRuleCall_9()); 
     }
     this_InsertElement_11=ruleInsertElement
     { 
@@ -2913,7 +2915,7 @@ ruleInstruction returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getExtractElementParserRuleCall_10()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getExtractElementParserRuleCall_10()); 
     }
     this_ExtractElement_12=ruleExtractElement
     { 
@@ -2923,7 +2925,7 @@ ruleInstruction returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getInsertValueParserRuleCall_11()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getInsertValueParserRuleCall_11()); 
     }
     this_InsertValue_13=ruleInsertValue
     { 
@@ -2933,7 +2935,7 @@ ruleInstruction returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getExtractValueParserRuleCall_12()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getExtractValueParserRuleCall_12()); 
     }
     this_ExtractValue_14=ruleExtractValue
     { 
@@ -2943,7 +2945,7 @@ ruleInstruction returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getAllocParserRuleCall_13()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getAllocParserRuleCall_13()); 
     }
     this_Alloc_15=ruleAlloc
     { 
@@ -2953,7 +2955,7 @@ ruleInstruction returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getCmpXchgParserRuleCall_14()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getCmpXchgParserRuleCall_14()); 
     }
     this_CmpXchg_16=ruleCmpXchg
     { 
@@ -2963,7 +2965,7 @@ ruleInstruction returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getAtomicRMWParserRuleCall_15()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getAtomicRMWParserRuleCall_15()); 
     }
     this_AtomicRMW_17=ruleAtomicRMW
     { 
@@ -2973,7 +2975,7 @@ ruleInstruction returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getPHIParserRuleCall_16()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getPHIParserRuleCall_16()); 
     }
     this_PHI_18=rulePHI
     { 
@@ -2983,7 +2985,7 @@ ruleInstruction returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getSelectParserRuleCall_17()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getSelectParserRuleCall_17()); 
     }
     this_Select_19=ruleSelect
     { 
@@ -2993,7 +2995,7 @@ ruleInstruction returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getCallParserRuleCall_18()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getCallParserRuleCall_18()); 
     }
     this_Call_20=ruleCall
     { 
@@ -3003,7 +3005,7 @@ ruleInstruction returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getVA_ArgParserRuleCall_19()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getVA_ArgParserRuleCall_19()); 
     }
     this_VA_Arg_21=ruleVA_Arg
     { 
@@ -3013,7 +3015,7 @@ ruleInstruction returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getInstructionAccess().getLandingPadParserRuleCall_20()); 
+        newCompositeNode(grammarAccess.getStd_InstrAccess().getLandingPadParserRuleCall_20()); 
     }
     this_LandingPad_22=ruleLandingPad
     { 

@@ -15,15 +15,7 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class Ret_InstrTest extends TestCase {
-
-	/**
-	 * The fixture for this Ret Instr test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected Ret_Instr fixture = null;
+public class Ret_InstrTest extends InstructionTest {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -45,23 +37,14 @@ public class Ret_InstrTest extends TestCase {
 	}
 
 	/**
-	 * Sets the fixture for this Ret Instr test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(Ret_Instr fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this Ret Instr test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected Ret_Instr getFixture() {
-		return fixture;
+		return (Ret_Instr)fixture;
 	}
 
 	/**

@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class VA_ArgImpl extends InstructionImpl implements VA_Arg {
+public class VA_ArgImpl extends Std_InstrImpl implements VA_Arg {
 	/**
 	 * The cached value of the '{@link #getListtype() <em>Listtype</em>}' containment reference.
 	 * <!-- begin-user-doc -->

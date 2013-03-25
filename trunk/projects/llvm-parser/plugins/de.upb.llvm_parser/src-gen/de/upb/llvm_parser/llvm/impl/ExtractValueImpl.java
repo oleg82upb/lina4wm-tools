@@ -38,7 +38,7 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
  *
  * @generated
  */
-public class ExtractValueImpl extends InstructionImpl implements ExtractValue {
+public class ExtractValueImpl extends Std_InstrImpl implements ExtractValue {
 	/**
 	 * The cached value of the '{@link #getArray() <em>Array</em>}' containment reference.
 	 * <!-- begin-user-doc -->

@@ -13,7 +13,7 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class FenceTest extends InstructionTest {
+public class FenceTest extends Std_InstrTest {
 
 	/**
 	 * <!-- begin-user-doc -->

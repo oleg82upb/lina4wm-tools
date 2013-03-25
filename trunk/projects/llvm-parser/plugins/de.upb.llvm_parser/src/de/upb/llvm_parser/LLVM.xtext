@@ -142,19 +142,21 @@ FunctionBody:
 	meta+=MetadataValue*
 	'{' blocks+=BasicBlock+ '}'
 	;
-
+Instruction:
+	Std_Instr | Ret_Instr
+;
 BasicBlock:
 	(label=ID_FQN ':')
-	instructions+=(InstructionUse | Instruction)*
+	instructions+=(InstructionUse | Std_Instr)*
 	(retadr=VALID_ID '=')? terminator=Ret_Instr;
 
 InstructionUse:
-	reg_or_var=VALID_ID '=' instruction=Instruction;
+	reg_or_var=VALID_ID '=' instruction=Std_Instr;
 
 Ret_Instr:
 	Return | Branch | Switch | IndirectBranch | Invoke | Resume | Unreachable;
 
-Instruction:
+Std_Instr:
 	('volatile'? Load) | ('volatile'? Store) | Fence | GetElementPtr | LOGICAL_OP | ARITHMETIC_OP | Compare |
 	Cast | ShuffleVector | InsertElement | ExtractElement | InsertValue | ExtractValue | Alloc |
 	CmpXchg | AtomicRMW | PHI | Select | Call | VA_Arg | LandingPad;

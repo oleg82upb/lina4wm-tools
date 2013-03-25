@@ -721,36 +721,32 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
 		private final RuleCall cPredefinedParserRuleCall_0_0 = (RuleCall)cAlternatives_0.eContents().get(0);
-		private final Group cGroup_0_1 = (Group)cAlternatives_0.eContents().get(1);
-		private final RuleCall cAddressUseParserRuleCall_0_1_0 = (RuleCall)cGroup_0_1.eContents().get(0);
-		private final Keyword cLeftParenthesisRightParenthesisAsteriskKeyword_0_1_1 = (Keyword)cGroup_0_1.eContents().get(1);
-		private final RuleCall cORESTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final RuleCall cAddressUseParserRuleCall_0_1 = (RuleCall)cAlternatives_0.eContents().get(1);
+		private final Keyword cLeftParenthesisRightParenthesisAsteriskKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final RuleCall cORESTTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//TypeUse:
 		//
-		//	(Predefined | AddressUse "()*"?) OREST?;
+		//	(Predefined | AddressUse) "()*"? OREST?;
 		public ParserRule getRule() { return rule; }
 
-		//(Predefined | AddressUse "()*"?) OREST?
+		//(Predefined | AddressUse) "()*"? OREST?
 		public Group getGroup() { return cGroup; }
 
-		//Predefined | AddressUse "()*"?
+		//Predefined | AddressUse
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//Predefined
 		public RuleCall getPredefinedParserRuleCall_0_0() { return cPredefinedParserRuleCall_0_0; }
 
-		//AddressUse "()*"?
-		public Group getGroup_0_1() { return cGroup_0_1; }
-
 		//AddressUse
-		public RuleCall getAddressUseParserRuleCall_0_1_0() { return cAddressUseParserRuleCall_0_1_0; }
+		public RuleCall getAddressUseParserRuleCall_0_1() { return cAddressUseParserRuleCall_0_1; }
 
 		//"()*"?
-		public Keyword getLeftParenthesisRightParenthesisAsteriskKeyword_0_1_1() { return cLeftParenthesisRightParenthesisAsteriskKeyword_0_1_1; }
+		public Keyword getLeftParenthesisRightParenthesisAsteriskKeyword_1() { return cLeftParenthesisRightParenthesisAsteriskKeyword_1; }
 
 		//OREST?
-		public RuleCall getORESTTerminalRuleCall_1() { return cORESTTerminalRuleCall_1; }
+		public RuleCall getORESTTerminalRuleCall_2() { return cORESTTerminalRuleCall_2; }
 	}
 
 	public class AddressUseElements extends AbstractParserRuleElementFinder {
@@ -1586,6 +1582,27 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 
+	public class InstructionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Instruction");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cStd_InstrParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cRet_InstrParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//Instruction:
+		//
+		//	Std_Instr | Ret_Instr;
+		public ParserRule getRule() { return rule; }
+
+		//Std_Instr | Ret_Instr
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//Std_Instr
+		public RuleCall getStd_InstrParserRuleCall_0() { return cStd_InstrParserRuleCall_0; }
+
+		//Ret_Instr
+		public RuleCall getRet_InstrParserRuleCall_1() { return cRet_InstrParserRuleCall_1; }
+	}
+
 	public class BasicBlockElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BasicBlock");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1596,7 +1613,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cInstructionsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final Alternatives cInstructionsAlternatives_1_0 = (Alternatives)cInstructionsAssignment_1.eContents().get(0);
 		private final RuleCall cInstructionsInstructionUseParserRuleCall_1_0_0 = (RuleCall)cInstructionsAlternatives_1_0.eContents().get(0);
-		private final RuleCall cInstructionsInstructionParserRuleCall_1_0_1 = (RuleCall)cInstructionsAlternatives_1_0.eContents().get(1);
+		private final RuleCall cInstructionsStd_InstrParserRuleCall_1_0_1 = (RuleCall)cInstructionsAlternatives_1_0.eContents().get(1);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Assignment cRetadrAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
 		private final RuleCall cRetadrVALID_IDTerminalRuleCall_2_0_0 = (RuleCall)cRetadrAssignment_2_0.eContents().get(0);
@@ -1606,10 +1623,10 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//BasicBlock:
 		//
-		//	(label=ID_FQN ":") instructions+=(InstructionUse | Instruction)* (retadr=VALID_ID "=")? terminator=Ret_Instr;
+		//	(label=ID_FQN ":") instructions+=(InstructionUse | Std_Instr)* (retadr=VALID_ID "=")? terminator=Ret_Instr;
 		public ParserRule getRule() { return rule; }
 
-		//(label=ID_FQN ":") instructions+=(InstructionUse | Instruction)* (retadr=VALID_ID "=")? terminator=Ret_Instr
+		//(label=ID_FQN ":") instructions+=(InstructionUse | Std_Instr)* (retadr=VALID_ID "=")? terminator=Ret_Instr
 		public Group getGroup() { return cGroup; }
 
 		//label=ID_FQN ":"
@@ -1624,17 +1641,17 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//":"
 		public Keyword getColonKeyword_0_1() { return cColonKeyword_0_1; }
 
-		//instructions+=(InstructionUse | Instruction)*
+		//instructions+=(InstructionUse | Std_Instr)*
 		public Assignment getInstructionsAssignment_1() { return cInstructionsAssignment_1; }
 
-		//InstructionUse | Instruction
+		//InstructionUse | Std_Instr
 		public Alternatives getInstructionsAlternatives_1_0() { return cInstructionsAlternatives_1_0; }
 
 		//InstructionUse
 		public RuleCall getInstructionsInstructionUseParserRuleCall_1_0_0() { return cInstructionsInstructionUseParserRuleCall_1_0_0; }
 
-		//Instruction
-		public RuleCall getInstructionsInstructionParserRuleCall_1_0_1() { return cInstructionsInstructionParserRuleCall_1_0_1; }
+		//Std_Instr
+		public RuleCall getInstructionsStd_InstrParserRuleCall_1_0_1() { return cInstructionsStd_InstrParserRuleCall_1_0_1; }
 
 		//(retadr=VALID_ID "=")?
 		public Group getGroup_2() { return cGroup_2; }
@@ -1662,14 +1679,14 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cReg_or_varVALID_IDTerminalRuleCall_0_0 = (RuleCall)cReg_or_varAssignment_0.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cInstructionAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cInstructionInstructionParserRuleCall_2_0 = (RuleCall)cInstructionAssignment_2.eContents().get(0);
+		private final RuleCall cInstructionStd_InstrParserRuleCall_2_0 = (RuleCall)cInstructionAssignment_2.eContents().get(0);
 		
 		//InstructionUse:
 		//
-		//	reg_or_var=VALID_ID "=" instruction=Instruction;
+		//	reg_or_var=VALID_ID "=" instruction=Std_Instr;
 		public ParserRule getRule() { return rule; }
 
-		//reg_or_var=VALID_ID "=" instruction=Instruction
+		//reg_or_var=VALID_ID "=" instruction=Std_Instr
 		public Group getGroup() { return cGroup; }
 
 		//reg_or_var=VALID_ID
@@ -1681,11 +1698,11 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//"="
 		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
 
-		//instruction=Instruction
+		//instruction=Std_Instr
 		public Assignment getInstructionAssignment_2() { return cInstructionAssignment_2; }
 
-		//Instruction
-		public RuleCall getInstructionInstructionParserRuleCall_2_0() { return cInstructionInstructionParserRuleCall_2_0; }
+		//Std_Instr
+		public RuleCall getInstructionStd_InstrParserRuleCall_2_0() { return cInstructionStd_InstrParserRuleCall_2_0; }
 	}
 
 	public class Ret_InstrElements extends AbstractParserRuleElementFinder {
@@ -1729,8 +1746,8 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getUnreachableParserRuleCall_6() { return cUnreachableParserRuleCall_6; }
 	}
 
-	public class InstructionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Instruction");
+	public class Std_InstrElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Std_Instr");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Keyword cVolatileKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
@@ -1758,7 +1775,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cVA_ArgParserRuleCall_19 = (RuleCall)cAlternatives.eContents().get(19);
 		private final RuleCall cLandingPadParserRuleCall_20 = (RuleCall)cAlternatives.eContents().get(20);
 		
-		//Instruction:
+		//Std_Instr:
 		//
 		//	"volatile"? Load | "volatile"? Store | Fence | GetElementPtr | LOGICAL_OP | ARITHMETIC_OP | Compare | Cast |
 		//
@@ -5367,10 +5384,11 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 	private ParameterListElements pParameterList;
 	private TypeListElements pTypeList;
 	private FunctionBodyElements pFunctionBody;
+	private InstructionElements pInstruction;
 	private BasicBlockElements pBasicBlock;
 	private InstructionUseElements pInstructionUse;
 	private Ret_InstrElements pRet_Instr;
-	private InstructionElements pInstruction;
+	private Std_InstrElements pStd_Instr;
 	private ARITHMETIC_OPElements pARITHMETIC_OP;
 	private LOGICAL_OPElements pLOGICAL_OP;
 	private CastElements pCast;
@@ -5624,7 +5642,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 
 	//TypeUse:
 	//
-	//	(Predefined | AddressUse "()*"?) OREST?;
+	//	(Predefined | AddressUse) "()*"? OREST?;
 	public TypeUseElements getTypeUseAccess() {
 		return (pTypeUse != null) ? pTypeUse : (pTypeUse = new TypeUseElements());
 	}
@@ -5846,9 +5864,20 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		return getFunctionBodyAccess().getRule();
 	}
 
+	//Instruction:
+	//
+	//	Std_Instr | Ret_Instr;
+	public InstructionElements getInstructionAccess() {
+		return (pInstruction != null) ? pInstruction : (pInstruction = new InstructionElements());
+	}
+	
+	public ParserRule getInstructionRule() {
+		return getInstructionAccess().getRule();
+	}
+
 	//BasicBlock:
 	//
-	//	(label=ID_FQN ":") instructions+=(InstructionUse | Instruction)* (retadr=VALID_ID "=")? terminator=Ret_Instr;
+	//	(label=ID_FQN ":") instructions+=(InstructionUse | Std_Instr)* (retadr=VALID_ID "=")? terminator=Ret_Instr;
 	public BasicBlockElements getBasicBlockAccess() {
 		return (pBasicBlock != null) ? pBasicBlock : (pBasicBlock = new BasicBlockElements());
 	}
@@ -5859,7 +5888,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 
 	//InstructionUse:
 	//
-	//	reg_or_var=VALID_ID "=" instruction=Instruction;
+	//	reg_or_var=VALID_ID "=" instruction=Std_Instr;
 	public InstructionUseElements getInstructionUseAccess() {
 		return (pInstructionUse != null) ? pInstructionUse : (pInstructionUse = new InstructionUseElements());
 	}
@@ -5879,19 +5908,19 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		return getRet_InstrAccess().getRule();
 	}
 
-	//Instruction:
+	//Std_Instr:
 	//
 	//	"volatile"? Load | "volatile"? Store | Fence | GetElementPtr | LOGICAL_OP | ARITHMETIC_OP | Compare | Cast |
 	//
 	//	ShuffleVector | InsertElement | ExtractElement | InsertValue | ExtractValue | Alloc | CmpXchg | AtomicRMW | PHI |
 	//
 	//	Select | Call | VA_Arg | LandingPad;
-	public InstructionElements getInstructionAccess() {
-		return (pInstruction != null) ? pInstruction : (pInstruction = new InstructionElements());
+	public Std_InstrElements getStd_InstrAccess() {
+		return (pStd_Instr != null) ? pStd_Instr : (pStd_Instr = new Std_InstrElements());
 	}
 	
-	public ParserRule getInstructionRule() {
-		return getInstructionAccess().getRule();
+	public ParserRule getStd_InstrRule() {
+		return getStd_InstrAccess().getRule();
 	}
 
 	//ARITHMETIC_OP:

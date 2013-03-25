@@ -266,6 +266,11 @@ public class CastItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
+				 LlvmFactory.eINSTANCE.createInstruction()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CAST__FROM,
 				 LlvmFactory.eINSTANCE.createBasicBlock()));
 
 		newChildDescriptors.add
@@ -281,7 +286,7 @@ public class CastItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createInstruction()));
+				 LlvmFactory.eINSTANCE.createStd_Instr()));
 
 		newChildDescriptors.add
 			(createChildParameter

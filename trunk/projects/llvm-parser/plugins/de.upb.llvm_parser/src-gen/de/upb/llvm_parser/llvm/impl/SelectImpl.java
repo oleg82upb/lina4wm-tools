@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class SelectImpl extends InstructionImpl implements Select {
+public class SelectImpl extends Std_InstrImpl implements Select {
 	/**
 	 * The cached value of the '{@link #getConditiontype() <em>Conditiontype</em>}' containment reference.
 	 * <!-- begin-user-doc -->

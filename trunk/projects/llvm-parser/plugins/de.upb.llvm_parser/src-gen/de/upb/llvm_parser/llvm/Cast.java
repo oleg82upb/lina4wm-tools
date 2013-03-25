@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Cast extends Value, Instruction {
+public interface Cast extends Value, Std_Instr {
 	/**
 	 * Returns the value of the '<em><b>From</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

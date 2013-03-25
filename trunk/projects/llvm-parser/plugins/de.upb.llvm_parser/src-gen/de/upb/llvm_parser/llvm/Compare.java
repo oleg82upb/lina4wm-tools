@@ -21,7 +21,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface Compare extends Instruction {
+public interface Compare extends Std_Instr {
 	/**
 	 * Returns the value of the '<em><b>Comptype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

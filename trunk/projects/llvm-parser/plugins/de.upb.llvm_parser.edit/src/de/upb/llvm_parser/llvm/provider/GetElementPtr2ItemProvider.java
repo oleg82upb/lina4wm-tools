@@ -270,6 +270,11 @@ public class GetElementPtr2ItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createInstruction()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createBasicBlock()));
 
 		newChildDescriptors.add
@@ -285,7 +290,7 @@ public class GetElementPtr2ItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
-				 LlvmFactory.eINSTANCE.createInstruction()));
+				 LlvmFactory.eINSTANCE.createStd_Instr()));
 
 		newChildDescriptors.add
 			(createChildParameter

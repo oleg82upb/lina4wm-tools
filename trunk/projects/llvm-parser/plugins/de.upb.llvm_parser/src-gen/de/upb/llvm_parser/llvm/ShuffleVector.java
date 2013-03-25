@@ -24,7 +24,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface ShuffleVector extends Instruction {
+public interface ShuffleVector extends Std_Instr {
 	/**
 	 * Returns the value of the '<em><b>Val1type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
