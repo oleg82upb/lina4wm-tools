@@ -69,12 +69,12 @@ public interface ControlFlowDiagram extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Start</em>' containment reference.
-	 * @see #setStart(StartLocation)
+	 * @see #setStart(ControlFlowLocation)
 	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getControlFlowDiagram_Start()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	StartLocation getStart();
+	ControlFlowLocation getStart();
 
 	/**
 	 * Sets the value of the '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getStart <em>Start</em>}' containment reference.
@@ -84,7 +84,7 @@ public interface ControlFlowDiagram extends EObject {
 	 * @see #getStart()
 	 * @generated
 	 */
-	void setStart(StartLocation value);
+	void setStart(ControlFlowLocation value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

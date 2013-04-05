@@ -58,15 +58,6 @@ public interface ControlflowFactory extends EFactory {
 	GuardedTransition createGuardedTransition();
 
 	/**
-	 * Returns a new object of class '<em>Start Location</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Start Location</em>'.
-	 * @generated
-	 */
-	StartLocation createStartLocation();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

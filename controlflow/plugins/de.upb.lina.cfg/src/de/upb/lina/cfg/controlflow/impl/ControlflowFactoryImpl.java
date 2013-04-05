@@ -60,7 +60,6 @@ public class ControlflowFactoryImpl extends EFactoryImpl implements ControlflowF
 			case ControlflowPackage.CONTROL_FLOW_LOCATION: return createControlFlowLocation();
 			case ControlflowPackage.TRANSITION: return createTransition();
 			case ControlflowPackage.GUARDED_TRANSITION: return createGuardedTransition();
-			case ControlflowPackage.START_LOCATION: return createStartLocation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -104,16 +103,6 @@ public class ControlflowFactoryImpl extends EFactoryImpl implements ControlflowF
 	public GuardedTransition createGuardedTransition() {
 		GuardedTransitionImpl guardedTransition = new GuardedTransitionImpl();
 		return guardedTransition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public StartLocation createStartLocation() {
-		StartLocationImpl startLocation = new StartLocationImpl();
-		return startLocation;
 	}
 
 	/**

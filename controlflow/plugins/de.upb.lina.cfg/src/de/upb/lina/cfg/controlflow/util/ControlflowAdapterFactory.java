@@ -84,10 +84,6 @@ public class ControlflowAdapterFactory extends AdapterFactoryImpl {
 				return createGuardedTransitionAdapter();
 			}
 			@Override
-			public Adapter caseStartLocation(StartLocation object) {
-				return createStartLocationAdapter();
-			}
-			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -160,20 +156,6 @@ public class ControlflowAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createGuardedTransitionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.controlflow.StartLocation <em>Start Location</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.lina.cfg.controlflow.StartLocation
-	 * @generated
-	 */
-	public Adapter createStartLocationAdapter() {
 		return null;
 	}
 

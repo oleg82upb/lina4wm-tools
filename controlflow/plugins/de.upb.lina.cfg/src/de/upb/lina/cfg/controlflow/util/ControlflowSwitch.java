@@ -91,13 +91,6 @@ public class ControlflowSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ControlflowPackage.START_LOCATION: {
-				StartLocation startLocation = (StartLocation)theEObject;
-				T result = caseStartLocation(startLocation);
-				if (result == null) result = caseControlFlowLocation(startLocation);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -159,21 +152,6 @@ public class ControlflowSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseGuardedTransition(GuardedTransition object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Start Location</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Start Location</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStartLocation(StartLocation object) {
 		return null;
 	}
 

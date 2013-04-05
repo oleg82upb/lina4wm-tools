@@ -26,7 +26,6 @@ import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.ControlflowFactory;
 import de.upb.lina.cfg.controlflow.GuardedTransition;
-import de.upb.lina.cfg.controlflow.StartLocation;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.Branch;
@@ -109,7 +108,7 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 		ControlFlowLocation act = addStartLocation(cfg, pc);
 		HashMap<BasicBlock, ControlFlowLocation> done = new HashMap<BasicBlock, ControlFlowLocation>();
 		cfg.setName(function.getAddress().getName());
-		cfg.setStart((StartLocation) act);
+		cfg.setStart(act);
 		ControlFlowLocation temp;
 		EList<BasicBlock> blocks = function.getBody().getBlocks();
 		for (BasicBlock b : blocks) {
@@ -228,8 +227,8 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 		return null;
 	}
 
-	private StartLocation addStartLocation(ControlFlowDiagram diag, ProgramCounter pc) {
-		StartLocation start = ControlflowFactory.eINSTANCE.createStartLocation();
+	private ControlFlowLocation addStartLocation(ControlFlowDiagram diag, ProgramCounter pc) {
+		ControlFlowLocation start = ControlflowFactory.eINSTANCE.createControlFlowLocation();
 		start.setDiagram(diag);
 		start.setPc(pc.next());
 		diag.getLocations().add(start);
