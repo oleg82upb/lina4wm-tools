@@ -285,62 +285,6 @@ public interface ControlflowPackage extends EPackage {
 	int GUARDED_TRANSITION_FEATURE_COUNT = TRANSITION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.StartLocationImpl <em>Start Location</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.upb.lina.cfg.controlflow.impl.StartLocationImpl
-	 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getStartLocation()
-	 * @generated
-	 */
-	int START_LOCATION = 4;
-
-	/**
-	 * The feature id for the '<em><b>Pc</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int START_LOCATION__PC = CONTROL_FLOW_LOCATION__PC;
-
-	/**
-	 * The feature id for the '<em><b>Diagram</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int START_LOCATION__DIAGRAM = CONTROL_FLOW_LOCATION__DIAGRAM;
-
-	/**
-	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int START_LOCATION__INCOMING = CONTROL_FLOW_LOCATION__INCOMING;
-
-	/**
-	 * The feature id for the '<em><b>Outgoing</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int START_LOCATION__OUTGOING = CONTROL_FLOW_LOCATION__OUTGOING;
-
-	/**
-	 * The number of structural features of the '<em>Start Location</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int START_LOCATION_FEATURE_COUNT = CONTROL_FLOW_LOCATION_FEATURE_COUNT + 0;
-
-
-	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram <em>Control Flow Diagram</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -524,16 +468,6 @@ public interface ControlflowPackage extends EPackage {
 	EAttribute getGuardedTransition_Condition();
 
 	/**
-	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.StartLocation <em>Start Location</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Start Location</em>'.
-	 * @see de.upb.lina.cfg.controlflow.StartLocation
-	 * @generated
-	 */
-	EClass getStartLocation();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -698,16 +632,6 @@ public interface ControlflowPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute GUARDED_TRANSITION__CONDITION = eINSTANCE.getGuardedTransition_Condition();
-
-		/**
-		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.StartLocationImpl <em>Start Location</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.upb.lina.cfg.controlflow.impl.StartLocationImpl
-		 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getStartLocation()
-		 * @generated
-		 */
-		EClass START_LOCATION = eINSTANCE.getStartLocation();
 
 	}
 

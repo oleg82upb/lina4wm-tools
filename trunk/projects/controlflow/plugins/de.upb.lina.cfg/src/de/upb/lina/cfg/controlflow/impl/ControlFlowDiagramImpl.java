@@ -2,28 +2,23 @@
  */
 package de.upb.lina.cfg.controlflow.impl;
 
-import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
-import de.upb.lina.cfg.controlflow.ControlFlowLocation;
-import de.upb.lina.cfg.controlflow.ControlflowPackage;
-import de.upb.lina.cfg.controlflow.StartLocation;
-import de.upb.lina.cfg.controlflow.Transition;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
+import de.upb.lina.cfg.controlflow.ControlFlowLocation;
+import de.upb.lina.cfg.controlflow.ControlflowPackage;
+import de.upb.lina.cfg.controlflow.Transition;
 
 /**
  * <!-- begin-user-doc -->
@@ -70,7 +65,7 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * @generated
 	 * @ordered
 	 */
-	protected StartLocation start;
+	protected ControlFlowLocation start;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -140,7 +135,7 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StartLocation getStart() {
+	public ControlFlowLocation getStart() {
 		return start;
 	}
 
@@ -149,8 +144,8 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetStart(StartLocation newStart, NotificationChain msgs) {
-		StartLocation oldStart = start;
+	public NotificationChain basicSetStart(ControlFlowLocation newStart, NotificationChain msgs) {
+		ControlFlowLocation oldStart = start;
 		start = newStart;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ControlflowPackage.CONTROL_FLOW_DIAGRAM__START, oldStart, newStart);
@@ -164,7 +159,7 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setStart(StartLocation newStart) {
+	public void setStart(ControlFlowLocation newStart) {
 		if (newStart != start) {
 			NotificationChain msgs = null;
 			if (start != null)
@@ -270,7 +265,7 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 				getTransitions().addAll((Collection<? extends Transition>)newValue);
 				return;
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__START:
-				setStart((StartLocation)newValue);
+				setStart((ControlFlowLocation)newValue);
 				return;
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__NAME:
 				setName((String)newValue);
@@ -294,7 +289,7 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 				getTransitions().clear();
 				return;
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__START:
-				setStart((StartLocation)null);
+				setStart((ControlFlowLocation)null);
 				return;
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__NAME:
 				setName(NAME_EDEFAULT);

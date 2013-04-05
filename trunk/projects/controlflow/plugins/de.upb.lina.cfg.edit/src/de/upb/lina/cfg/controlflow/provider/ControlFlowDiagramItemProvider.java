@@ -189,11 +189,6 @@ public class ControlFlowDiagramItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__LOCATIONS,
-				 ControlflowFactory.eINSTANCE.createStartLocation()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__TRANSITIONS,
 				 ControlflowFactory.eINSTANCE.createTransition()));
 
@@ -205,7 +200,7 @@ public class ControlFlowDiagramItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__START,
-				 ControlflowFactory.eINSTANCE.createStartLocation()));
+				 ControlflowFactory.eINSTANCE.createControlFlowLocation()));
 	}
 
 	/**
