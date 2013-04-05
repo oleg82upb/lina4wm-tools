@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="de.upb.lina.cfg.controlflow.presentation.ControlflowModelWizardID"
+            name="%_UI_ControlflowModelWizard_label"
+            class="de.upb.lina.cfg.controlflow.presentation.ControlflowModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ControlflowModelFile.gif">
+         <description>%_UI_ControlflowModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="de.upb.lina.cfg.controlflow.presentation.ControlflowEditorID"
+            name="%_UI_ControlflowEditor_label"
+            icon="icons/full/obj16/ControlflowModelFile.gif"
+            extensions="cfg"
+            class="de.upb.lina.cfg.controlflow.presentation.ControlflowEditor"
+            contributorClass="de.upb.lina.cfg.controlflow.presentation.ControlflowActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
