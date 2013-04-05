@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: de.upb.lina.cfg;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ de.upb.llvm_parser;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Import-Package: org.eclipse.ui.plugin
+Export-Package: de.upb.lina.cfg.controlflow,
+ de.upb.lina.cfg.controlflow.impl,
+ de.upb.lina.cfg.controlflow.util

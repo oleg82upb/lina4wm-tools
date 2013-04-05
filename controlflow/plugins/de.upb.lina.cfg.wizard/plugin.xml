@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="Lina Wizards"
+            id="de.upb.lina.cfgwizard">
+      </category>
+      <wizard
+            name="New ControlFlowGraph"
+            icon="icons/sample.gif"
+            category="de.upb.lina.cfgwizard"
+            class="de.upb.lina.cfgwizard.wizards.NewCfgWizard"
+            id="de.upb.lina.cfgwizard.wizards.NewCfgWizard">
+      </wizard>
+   </extension>
+</plugin>

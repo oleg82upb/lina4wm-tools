@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.upb.de/lina/cfg/controlflow"
+            class="controlflow.ControlflowPackage"
+            genModel="model/controlflow.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.upb.de/llvm_parser/llvm"
+            class="llvm.LlvmPackage"
+            genModel="model/controlflow.genmodel"/>
+   </extension>
+
+</plugin>
