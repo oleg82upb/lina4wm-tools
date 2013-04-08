@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -34,24 +35,22 @@ import de.upb.llvm_parser.llvm.IndirectBranch;
 import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.InstructionUse;
 import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.NonConstantValue;
 import de.upb.llvm_parser.llvm.Ret_Instr;
 import de.upb.llvm_parser.llvm.Switch;
 import de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl;
 import de.upb.llvm_parser.llvm.impl.InstructionUseImpl;
 import de.upb.llvm_parser.llvm.impl.LLVMImpl;
 import de.upb.llvm_parser.llvm.impl.Ret_InstrImpl;
-import de.upb.llvm_parser.llvm.impl.Std_InstrImpl;
 
 public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 
 	private LLVMImpl ast = null;
 	private Path cfgpath = null;
 	private ArrayList<ControlFlowDiagram> list = new ArrayList<ControlFlowDiagram>();
-	private String OB = "[";
-	private String CB = "]";
-	private String sTrueConst = "true";
-	private String sFalseConst = "false";
-	private String sDefaultConst = "default";
+	private String sTrueConst = "[true]";
+	private String sFalseConst = "[false]";
+	private String sDefaultConst = "[default]";
 
 	public CFGWorkspaceOperation(EObject ast, String path) {
 		super();
@@ -72,7 +71,8 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 			int a_elem = ast.getElements().size();
 			for (int i = 0; i < a_elem; i++) {
 				if (ast.getElements().get(i) instanceof FunctionDefinitionImpl) {
-					list.add(createCFG((FunctionDefinition) ast.getElements().get(i)));
+					if (((FunctionDefinition) ast.getElements().get(i)).getBody() != null)
+						list.add(createCFG((FunctionDefinition) ast.getElements().get(i)));
 				}
 			}
 			for (ControlFlowDiagram cfg : list) {
@@ -105,13 +105,14 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 
 		ControlflowFactory caf = ControlflowFactory.eINSTANCE;
 		ControlFlowDiagram cfg = caf.createControlFlowDiagram();
-		ControlFlowLocation act = addStartLocation(cfg, pc);
 		HashMap<BasicBlock, ControlFlowLocation> done = new HashMap<BasicBlock, ControlFlowLocation>();
 		cfg.setName(function.getAddress().getName());
-		cfg.setStart(act);
-		ControlFlowLocation temp;
+		ControlFlowLocation act, temp;
 		EList<BasicBlock> blocks = function.getBody().getBlocks();
 		for (BasicBlock b : blocks) {
+			act = addControlFlowLocation(cfg, pc);
+			if (cfg.getStart() == null)
+				cfg.setStart(act);
 			done.put(b, act);
 			for (int i = 0; i < b.getInstructions().size(); i++) {
 				if (b.getInstructions().get(i) instanceof InstructionUseImpl) {
@@ -131,31 +132,32 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 					Transition t = addTransition(cfg, term);
 					act.getOutgoing().add(t);
 					t.setSource(act);
+				} else {
+					GuardedTransition t = addGuardedTransition(cfg, term);
+					t.setCondition((((Branch) term).getCondvalue()) + " = " + sTrueConst);
+					GuardedTransition f = addGuardedTransition(cfg, term);
+					f.setCondition((((Branch) term).getCondvalue()) + " = " + sFalseConst);
+					act.getOutgoing().add(t);
+					t.setSource(act);
+					act.getOutgoing().add(f);
+					f.setSource(act);
 				}
-				GuardedTransition t = addGuardedTransition(cfg, term);
-				t.setCondition(((Branch) term).getCondvalue() + " " + OB + sTrueConst + CB);
-				GuardedTransition f = addGuardedTransition(cfg, term);
-				f.setCondition(((Branch) term).getCondvalue() + " " + OB + sFalseConst + CB);
-				act.getOutgoing().add(t);
-				t.setSource(act);
-				act.getOutgoing().add(f);
-				f.setSource(act);
 
 			} else if (type.equals(LlvmPackage.eINSTANCE.getSwitch())) {
 				GuardedTransition def = addGuardedTransition(cfg, term);
-				def.setCondition(((Switch) term).getCompvalue() + " " + OB + sDefaultConst + CB);
+				def.setCondition(((Switch) term).getCompvalue() + sDefaultConst);
 				act.getOutgoing().add(def);
 				def.setSource(act);
 				for (int i = 0; i < ((Switch) term).getJvalues().size(); i++) {
 					GuardedTransition jump = addGuardedTransition(cfg, term);
-					jump.setCondition(((Switch) term).getCompvalue() + " " + OB + ((Switch) term).getJvalues().get(i) + CB);
+					jump.setCondition(((Switch) term).getCompvalue().toString() + ((Switch) term).getJvalues().get(i).toString());
 					act.getOutgoing().add(jump);
 					jump.setSource(act);
 				}
 			} else if (type.equals(LlvmPackage.eINSTANCE.getIndirectBranch())) {
 				for (int i = 0; i < ((IndirectBranch) term).getLabels().size(); i++) {
 					GuardedTransition jump = addGuardedTransition(cfg, term);
-					jump.setCondition(((Switch) term).getCompvalue() + " " + OB + ((IndirectBranch) term).getLabels().get(i) + CB);
+					jump.setCondition(((Switch) term).getCompvalue().toString() + ((IndirectBranch) term).getLabels().get(i).toString());
 					act.getOutgoing().add(jump);
 					jump.setSource(act);
 				}
@@ -163,6 +165,7 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 				// } else if (type.equals(LlvmPackage.eINSTANCE.getInvoke())) {
 			} else if (type.equals(LlvmPackage.eINSTANCE.getUnreachable())) {
 				// } else if (type.equals(LlvmPackage.eINSTANCE.getReturn())) {
+				System.out.println("Generated unreachable?");
 			} else {
 			}
 
@@ -174,24 +177,54 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 			// act.getIncoming().add(t);
 
 		}
-		EList<Transition> guards = cfg.getTransitions();
-		for (Transition t : guards) {
-			if (t instanceof GuardedTransition) {
-				ControlFlowLocation cfl = searchBlock(done, ((GuardedTransition) t));
-				((GuardedTransition) t).setTarget(cfl);
+		EList<Transition> transitions = cfg.getTransitions();
+		for (Transition t : transitions) {
+			if (t.getTarget() == null) {
+				ControlFlowLocation cfl;
+				if (t instanceof GuardedTransition) {
+					cfl = searchGTBlock(done, (GuardedTransition) t);
+				} else {
+					cfl = searchNGTBlock(done, t);
+				}
+				t.setTarget(cfl);
 				cfl.getIncoming().add(t);
 			}
 		}
 		return cfg;
 	}
 
-	private ControlFlowLocation searchBlock(HashMap<BasicBlock, ControlFlowLocation> done, GuardedTransition destination) {
-		// Set<BasicBlock> blocks = done.keySet();
-		// for (BasicBlock b : blocks) {
-		// if (b.getLabel().equals(destination))
-		// return done.get(b);
-		// }
-		// System.out.println("Not found BasicBlock " + destination);
+	private ControlFlowLocation searchNGTBlock(HashMap<BasicBlock, ControlFlowLocation> done, Transition destination) {
+
+		Set<BasicBlock> blocks = done.keySet();
+		if (destination.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getBranch())) {
+			for (BasicBlock b : blocks) {
+				if (b.getLabel().equals(((NonConstantValue) ((Branch) destination.getInstruction()).getDestination()).getName().substring(1))) {
+					return done.get(b);
+				}
+			}
+		}
+		System.out.println("Not found BasicBlock " + destination);
+		return null;
+	}
+
+	private ControlFlowLocation searchGTBlock(HashMap<BasicBlock, ControlFlowLocation> done, GuardedTransition destination) {
+		Set<BasicBlock> blocks = done.keySet();
+		if (destination.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getBranch())) {
+			if (destination.getCondition().contains(sTrueConst)) {
+				for (BasicBlock b : blocks) {
+					if (b.getLabel().equals(((NonConstantValue) ((Branch) destination.getInstruction()).getLabelTrue()).getName().substring(1))) {
+						return done.get(b);
+					}
+				}
+			} else if (destination.getCondition().contains(sFalseConst)) {
+				for (BasicBlock b : blocks) {
+					if (b.getLabel().equals(((NonConstantValue) ((Branch) destination.getInstruction()).getLabelFalse()).getName().substring(1))) {
+						return done.get(b);
+					}
+				}
+			}
+		}
+		System.out.println("Not found BasicBlock " + destination);
 		return null;
 	}
 
@@ -204,15 +237,11 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 	}
 
 	private Transition addTransition(ControlFlowDiagram diag, Instruction i) {
-		if (i instanceof Std_InstrImpl) {
-			Transition transition = ControlflowFactory.eINSTANCE.createTransition();
-			transition.setInstruction(i);
-			transition.setDiagram(diag);
-			diag.getTransitions().add(transition);
-			return transition;
-		}
-		System.out.println("Class Conflict: <Instruction - Transition>" + i.toString());
-		return null;
+		Transition transition = ControlflowFactory.eINSTANCE.createTransition();
+		transition.setInstruction(i);
+		transition.setDiagram(diag);
+		diag.getTransitions().add(transition);
+		return transition;
 	}
 
 	private GuardedTransition addGuardedTransition(ControlFlowDiagram diag, Instruction i) {
@@ -225,14 +254,6 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 		}
 		System.out.println("Class conflict: <Instruction-GuardedTransition>" + i.toString());
 		return null;
-	}
-
-	private ControlFlowLocation addStartLocation(ControlFlowDiagram diag, ProgramCounter pc) {
-		ControlFlowLocation start = ControlflowFactory.eINSTANCE.createControlFlowLocation();
-		start.setDiagram(diag);
-		start.setPc(pc.next());
-		diag.getLocations().add(start);
-		return start;
 	}
 
 	private void refreshWorkspace() {
