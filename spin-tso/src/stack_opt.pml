@@ -115,19 +115,28 @@ inline alloca(type, targetRegister)
 //------push-optimized--------
 inline push(this, v){
 
-short this_addr,v_addr, n, ss, v0, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v16, v18, v19, v21;
+short this_addr,v_addr, n, ss, v0, v1, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v16, v18, v19, v21;
 
 entry: 
 atomic{
 	alloca(Ptr, this_addr);
 	alloca(I32, v_addr);
+	alloca(Ptr, v0);
 	alloca(Ptr, n);
 	alloca(Ptr, ss);
-	alloca(Node, v0); //new Node();	
+	
 }
 	write(this_addr, this);
 	write(v_addr, v);
-	read(v0, v3);	
+	
+	alloca(Node, v1)
+	// %1 = call i8* @_Znwj(i32 8)                     ; <i8*> [#uses=1]
+  	// %2 = bitcast i8* %1 to %struct.Node*            ; <%struct.Node*> [#uses=1]
+  	// store %struct.Node* %2, %struct.Node** %0, align 4
+  	write (v0, v1);
+  
+	read(v0, v3);
+	
 	read(v0, v4);
 	write(n, v4);
 	read(n, v5);
@@ -223,7 +232,7 @@ proctype process1(chan ch){
 	short returnvalue;
 	//pop(returnvalue);
 	push(this, 666);
-	//push(this, 444);
+	push(this, 444);
 	pop(returnvalue);
 }
 
