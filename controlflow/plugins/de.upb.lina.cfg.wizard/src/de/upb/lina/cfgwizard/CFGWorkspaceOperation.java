@@ -34,6 +34,7 @@ import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.IndirectBranch;
 import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.InstructionUse;
+import de.upb.llvm_parser.llvm.Invoke;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.NonConstantValue;
 import de.upb.llvm_parser.llvm.Ret_Instr;
@@ -51,6 +52,8 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 	private String sTrueConst = "[true]";
 	private String sFalseConst = "[false]";
 	private String sDefaultConst = "[default]";
+	private String sResumeConst = "[resume]";
+	private String sExcConst = "[exception]";
 
 	public CFGWorkspaceOperation(EObject ast, String path) {
 		super();
@@ -162,7 +165,15 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 					jump.setSource(act);
 				}
 				// } else if (type.equals(LlvmPackage.eINSTANCE.getResume())) {
-				// } else if (type.equals(LlvmPackage.eINSTANCE.getInvoke())) {
+			} else if (type.equals(LlvmPackage.eINSTANCE.getInvoke())) {
+				GuardedTransition resume = addGuardedTransition(cfg, term);
+				resume.setCondition(((Invoke) term).getName() + " -> " + sResumeConst);
+				resume.setSource(act);
+				act.getOutgoing().add(resume);
+				GuardedTransition exception = addGuardedTransition(cfg, term);
+				exception.setCondition(((Invoke) term).getName() + " -> " + sExcConst);
+				exception.setSource(act);
+				act.getOutgoing().add(exception);
 			} else if (type.equals(LlvmPackage.eINSTANCE.getUnreachable())) {
 				// } else if (type.equals(LlvmPackage.eINSTANCE.getReturn())) {
 				System.out.println("Generated unreachable?");
@@ -219,6 +230,20 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 			} else if (destination.getCondition().contains(sFalseConst)) {
 				for (BasicBlock b : blocks) {
 					if (b.getLabel().equals(((NonConstantValue) ((Branch) destination.getInstruction()).getLabelFalse()).getName().substring(1))) {
+						return done.get(b);
+					}
+				}
+			}
+		} else if (destination.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getInvoke())) {
+			if (destination.getCondition().contains(sResumeConst)) {
+				for (BasicBlock b : blocks) {
+					if (b.getLabel().equals(((NonConstantValue) ((Invoke) destination.getInstruction()).getTovalue()).getName().substring(1))) {
+						return done.get(b);
+					}
+				}
+			} else if (destination.getCondition().contains(sExcConst)) {
+				for (BasicBlock b : blocks) {
+					if (b.getLabel().equals(((NonConstantValue) ((Invoke) destination.getInstruction()).getUnwindvalue()).getName().substring(1))) {
 						return done.get(b);
 					}
 				}
