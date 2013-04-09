@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -48,6 +49,7 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 
 	private LLVMImpl ast = null;
 	private Path cfgpath = null;
+	private int reordering;
 	private ArrayList<ControlFlowDiagram> list = new ArrayList<ControlFlowDiagram>();
 	private String sTrueConst = "[true]";
 	private String sFalseConst = "[false]";
@@ -55,11 +57,12 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 	private String sResumeConst = "[resume]";
 	private String sExcConst = "[exception]";
 
-	public CFGWorkspaceOperation(EObject ast, String path) {
+	public CFGWorkspaceOperation(EObject ast, String path, int reordering) {
 		super();
 		if (ast instanceof LLVMImpl)
 			this.ast = (LLVMImpl) ast;
 		cfgpath = new Path(path);
+		this.reordering = reordering;
 	}
 
 	@Override
@@ -78,11 +81,9 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 						list.add(createCFG((FunctionDefinition) ast.getElements().get(i)));
 				}
 			}
-			for (ControlFlowDiagram cfg : list) {
-				EList<Transition> tlist = cfg.getTransitions();
-				for (Transition transition : cfg.getTransitions()) {
-					System.out.println(transition.getInstruction());
-				}
+
+			if (reordering == 1) {
+				addTSO(list);
 			}
 
 			ResourceSet resSet = new ResourceSetImpl();
@@ -290,5 +291,12 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 				System.out.println("Error on refreshing Workspace - perform F5 by your own.");
 				e.printStackTrace();
 			}
+	}
+
+	private void addTSO(ArrayList<ControlFlowDiagram> list) {
+		for (ControlFlowDiagram cfg : list) {
+			ControlFlowLocation start = cfg.getStart();
+			Set<Transition> may = new TreeSet<Transition>();
+		}
 	}
 }
