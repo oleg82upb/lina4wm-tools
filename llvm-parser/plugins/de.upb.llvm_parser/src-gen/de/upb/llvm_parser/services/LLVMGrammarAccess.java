@@ -803,23 +803,23 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Predefined");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cTypePredefined_TypesParserRuleCall_0_0 = (RuleCall)cTypeAssignment_0.eContents().get(0);
+		private final RuleCall cTypePredefinedTypeParserRuleCall_0_0 = (RuleCall)cTypeAssignment_0.eContents().get(0);
 		private final Assignment cPointerAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cPointerPOINTERTerminalRuleCall_1_0 = (RuleCall)cPointerAssignment_1.eContents().get(0);
 		
 		//Predefined:
 		//
-		//	type=Predefined_Types pointer=POINTER?;
+		//	type=PredefinedType pointer=POINTER?;
 		public ParserRule getRule() { return rule; }
 
-		//type=Predefined_Types pointer=POINTER?
+		//type=PredefinedType pointer=POINTER?
 		public Group getGroup() { return cGroup; }
 
-		//type=Predefined_Types
+		//type=PredefinedType
 		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
 
-		//Predefined_Types
-		public RuleCall getTypePredefined_TypesParserRuleCall_0_0() { return cTypePredefined_TypesParserRuleCall_0_0; }
+		//PredefinedType
+		public RuleCall getTypePredefinedTypeParserRuleCall_0_0() { return cTypePredefinedTypeParserRuleCall_0_0; }
 
 		//pointer=POINTER?
 		public Assignment getPointerAssignment_1() { return cPointerAssignment_1; }
@@ -828,8 +828,8 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getPointerPOINTERTerminalRuleCall_1_0() { return cPointerPOINTERTerminalRuleCall_1_0; }
 	}
 
-	public class Primitive_TypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Primitive_Type");
+	public class PrimitiveTypeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PrimitiveType");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cVoidKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cNullKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
@@ -838,7 +838,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cTrueKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		private final Keyword cFalseKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
 		
-		//Primitive_Type:
+		//PrimitiveType:
 		//
 		//	"void" | "null" | "label" | "undef" | "true" | "false";
 		public ParserRule getRule() { return rule; }
@@ -915,23 +915,23 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getPpc_fp128Keyword_5() { return cPpc_fp128Keyword_5; }
 	}
 
-	public class Predefined_TypesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Predefined_Types");
+	public class PredefinedTypeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PredefinedType");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cPrimitive_TypeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cPrimitiveTypeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cINT_TYPETerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cFloatingPoint_TypeParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//Predefined_Types:
+		//PredefinedType:
 		//
-		//	Primitive_Type | INT_TYPE | FloatingPoint_Type;
+		//	PrimitiveType | INT_TYPE | FloatingPoint_Type;
 		public ParserRule getRule() { return rule; }
 
-		//Primitive_Type | INT_TYPE | FloatingPoint_Type
+		//PrimitiveType | INT_TYPE | FloatingPoint_Type
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//Primitive_Type
-		public RuleCall getPrimitive_TypeParserRuleCall_0() { return cPrimitive_TypeParserRuleCall_0; }
+		//PrimitiveType
+		public RuleCall getPrimitiveTypeParserRuleCall_0() { return cPrimitiveTypeParserRuleCall_0; }
 
 		//INT_TYPE
 		public RuleCall getINT_TYPETerminalRuleCall_1() { return cINT_TYPETerminalRuleCall_1; }
@@ -1124,35 +1124,35 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Action cValueAction_0_0 = (Action)cGroup_0.eContents().get(0);
 		private final Alternatives cAlternatives_0_1 = (Alternatives)cGroup_0.eContents().get(1);
 		private final RuleCall cSTRINGTerminalRuleCall_0_1_0 = (RuleCall)cAlternatives_0_1.eContents().get(0);
-		private final RuleCall cPrimitive_TypeParserRuleCall_0_1_1 = (RuleCall)cAlternatives_0_1.eContents().get(1);
+		private final RuleCall cPrimitiveTypeParserRuleCall_0_1_1 = (RuleCall)cAlternatives_0_1.eContents().get(1);
 		private final RuleCall cInitializersParserRuleCall_0_1_2 = (RuleCall)cAlternatives_0_1.eContents().get(2);
 		private final RuleCall cCastParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cGetElementPtr2ParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cNestedGetElementPtrParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cConstantParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cNonConstantValueParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//Value:
 		//
-		//	{Value} (STRING | Primitive_Type | Initializers) | Cast | GetElementPtr2 | Constant | NonConstantValue;
+		//	{Value} (STRING | PrimitiveType | Initializers) | Cast | NestedGetElementPtr | Constant | NonConstantValue;
 		public ParserRule getRule() { return rule; }
 
-		//{Value} (STRING | Primitive_Type | Initializers) | Cast | GetElementPtr2 | Constant | NonConstantValue
+		//{Value} (STRING | PrimitiveType | Initializers) | Cast | NestedGetElementPtr | Constant | NonConstantValue
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//{Value} (STRING | Primitive_Type | Initializers)
+		//{Value} (STRING | PrimitiveType | Initializers)
 		public Group getGroup_0() { return cGroup_0; }
 
 		//{Value}
 		public Action getValueAction_0_0() { return cValueAction_0_0; }
 
-		//STRING | Primitive_Type | Initializers
+		//STRING | PrimitiveType | Initializers
 		public Alternatives getAlternatives_0_1() { return cAlternatives_0_1; }
 
 		//STRING
 		public RuleCall getSTRINGTerminalRuleCall_0_1_0() { return cSTRINGTerminalRuleCall_0_1_0; }
 
-		//Primitive_Type
-		public RuleCall getPrimitive_TypeParserRuleCall_0_1_1() { return cPrimitive_TypeParserRuleCall_0_1_1; }
+		//PrimitiveType
+		public RuleCall getPrimitiveTypeParserRuleCall_0_1_1() { return cPrimitiveTypeParserRuleCall_0_1_1; }
 
 		//Initializers
 		public RuleCall getInitializersParserRuleCall_0_1_2() { return cInitializersParserRuleCall_0_1_2; }
@@ -1160,8 +1160,8 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//Cast
 		public RuleCall getCastParserRuleCall_1() { return cCastParserRuleCall_1; }
 
-		//GetElementPtr2
-		public RuleCall getGetElementPtr2ParserRuleCall_2() { return cGetElementPtr2ParserRuleCall_2; }
+		//NestedGetElementPtr
+		public RuleCall getNestedGetElementPtrParserRuleCall_2() { return cNestedGetElementPtrParserRuleCall_2; }
 
 		//Constant
 		public RuleCall getConstantParserRuleCall_3() { return cConstantParserRuleCall_3; }
@@ -1585,22 +1585,22 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 	public class InstructionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Instruction");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cStd_InstrParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cRet_InstrParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cStandartInstructionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cReturnInstructionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Instruction:
 		//
-		//	Std_Instr | Ret_Instr;
+		//	StandartInstruction | ReturnInstruction;
 		public ParserRule getRule() { return rule; }
 
-		//Std_Instr | Ret_Instr
+		//StandartInstruction | ReturnInstruction
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//Std_Instr
-		public RuleCall getStd_InstrParserRuleCall_0() { return cStd_InstrParserRuleCall_0; }
+		//StandartInstruction
+		public RuleCall getStandartInstructionParserRuleCall_0() { return cStandartInstructionParserRuleCall_0; }
 
-		//Ret_Instr
-		public RuleCall getRet_InstrParserRuleCall_1() { return cRet_InstrParserRuleCall_1; }
+		//ReturnInstruction
+		public RuleCall getReturnInstructionParserRuleCall_1() { return cReturnInstructionParserRuleCall_1; }
 	}
 
 	public class BasicBlockElements extends AbstractParserRuleElementFinder {
@@ -1613,20 +1613,24 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cInstructionsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final Alternatives cInstructionsAlternatives_1_0 = (Alternatives)cInstructionsAssignment_1.eContents().get(0);
 		private final RuleCall cInstructionsInstructionUseParserRuleCall_1_0_0 = (RuleCall)cInstructionsAlternatives_1_0.eContents().get(0);
-		private final RuleCall cInstructionsStd_InstrParserRuleCall_1_0_1 = (RuleCall)cInstructionsAlternatives_1_0.eContents().get(1);
+		private final RuleCall cInstructionsStandartInstructionParserRuleCall_1_0_1 = (RuleCall)cInstructionsAlternatives_1_0.eContents().get(1);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Assignment cRetadrAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
 		private final RuleCall cRetadrVALID_IDTerminalRuleCall_2_0_0 = (RuleCall)cRetadrAssignment_2_0.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
 		private final Assignment cTerminatorAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cTerminatorRet_InstrParserRuleCall_3_0 = (RuleCall)cTerminatorAssignment_3.eContents().get(0);
+		private final RuleCall cTerminatorReturnInstructionParserRuleCall_3_0 = (RuleCall)cTerminatorAssignment_3.eContents().get(0);
 		
 		//BasicBlock:
 		//
-		//	(label=ID_FQN ":") instructions+=(InstructionUse | Std_Instr)* (retadr=VALID_ID "=")? terminator=Ret_Instr;
+		//	(label=ID_FQN ":") instructions+=(InstructionUse | StandartInstruction)* (retadr=VALID_ID "=")?
+		//
+		//	terminator=ReturnInstruction;
 		public ParserRule getRule() { return rule; }
 
-		//(label=ID_FQN ":") instructions+=(InstructionUse | Std_Instr)* (retadr=VALID_ID "=")? terminator=Ret_Instr
+		//(label=ID_FQN ":") instructions+=(InstructionUse | StandartInstruction)* (retadr=VALID_ID "=")?
+		//
+		//terminator=ReturnInstruction
 		public Group getGroup() { return cGroup; }
 
 		//label=ID_FQN ":"
@@ -1641,17 +1645,17 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//":"
 		public Keyword getColonKeyword_0_1() { return cColonKeyword_0_1; }
 
-		//instructions+=(InstructionUse | Std_Instr)*
+		//instructions+=(InstructionUse | StandartInstruction)*
 		public Assignment getInstructionsAssignment_1() { return cInstructionsAssignment_1; }
 
-		//InstructionUse | Std_Instr
+		//InstructionUse | StandartInstruction
 		public Alternatives getInstructionsAlternatives_1_0() { return cInstructionsAlternatives_1_0; }
 
 		//InstructionUse
 		public RuleCall getInstructionsInstructionUseParserRuleCall_1_0_0() { return cInstructionsInstructionUseParserRuleCall_1_0_0; }
 
-		//Std_Instr
-		public RuleCall getInstructionsStd_InstrParserRuleCall_1_0_1() { return cInstructionsStd_InstrParserRuleCall_1_0_1; }
+		//StandartInstruction
+		public RuleCall getInstructionsStandartInstructionParserRuleCall_1_0_1() { return cInstructionsStandartInstructionParserRuleCall_1_0_1; }
 
 		//(retadr=VALID_ID "=")?
 		public Group getGroup_2() { return cGroup_2; }
@@ -1665,11 +1669,11 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//"="
 		public Keyword getEqualsSignKeyword_2_1() { return cEqualsSignKeyword_2_1; }
 
-		//terminator=Ret_Instr
+		//terminator=ReturnInstruction
 		public Assignment getTerminatorAssignment_3() { return cTerminatorAssignment_3; }
 
-		//Ret_Instr
-		public RuleCall getTerminatorRet_InstrParserRuleCall_3_0() { return cTerminatorRet_InstrParserRuleCall_3_0; }
+		//ReturnInstruction
+		public RuleCall getTerminatorReturnInstructionParserRuleCall_3_0() { return cTerminatorReturnInstructionParserRuleCall_3_0; }
 	}
 
 	public class InstructionUseElements extends AbstractParserRuleElementFinder {
@@ -1679,14 +1683,14 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cReg_or_varVALID_IDTerminalRuleCall_0_0 = (RuleCall)cReg_or_varAssignment_0.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cInstructionAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cInstructionStd_InstrParserRuleCall_2_0 = (RuleCall)cInstructionAssignment_2.eContents().get(0);
+		private final RuleCall cInstructionStandartInstructionParserRuleCall_2_0 = (RuleCall)cInstructionAssignment_2.eContents().get(0);
 		
 		//InstructionUse:
 		//
-		//	reg_or_var=VALID_ID "=" instruction=Std_Instr;
+		//	reg_or_var=VALID_ID "=" instruction=StandartInstruction;
 		public ParserRule getRule() { return rule; }
 
-		//reg_or_var=VALID_ID "=" instruction=Std_Instr
+		//reg_or_var=VALID_ID "=" instruction=StandartInstruction
 		public Group getGroup() { return cGroup; }
 
 		//reg_or_var=VALID_ID
@@ -1698,15 +1702,15 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//"="
 		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
 
-		//instruction=Std_Instr
+		//instruction=StandartInstruction
 		public Assignment getInstructionAssignment_2() { return cInstructionAssignment_2; }
 
-		//Std_Instr
-		public RuleCall getInstructionStd_InstrParserRuleCall_2_0() { return cInstructionStd_InstrParserRuleCall_2_0; }
+		//StandartInstruction
+		public RuleCall getInstructionStandartInstructionParserRuleCall_2_0() { return cInstructionStandartInstructionParserRuleCall_2_0; }
 	}
 
-	public class Ret_InstrElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Ret_Instr");
+	public class ReturnInstructionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ReturnInstruction");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cReturnParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cBranchParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -1716,7 +1720,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cResumeParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		private final RuleCall cUnreachableParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
 		
-		//Ret_Instr:
+		//ReturnInstruction:
 		//
 		//	Return | Branch | Switch | IndirectBranch | Invoke | Resume | Unreachable;
 		public ParserRule getRule() { return rule; }
@@ -1746,8 +1750,8 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getUnreachableParserRuleCall_6() { return cUnreachableParserRuleCall_6; }
 	}
 
-	public class Std_InstrElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Std_Instr");
+	public class StandartInstructionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StandartInstruction");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Keyword cVolatileKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
@@ -1757,8 +1761,8 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cStoreParserRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		private final RuleCall cFenceParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cGetElementPtrParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cLOGICAL_OPParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
-		private final RuleCall cARITHMETIC_OPParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cLogicOperationParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cArithmeticOperationParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		private final RuleCall cCompareParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
 		private final RuleCall cCastParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
 		private final RuleCall cShuffleVectorParserRuleCall_8 = (RuleCall)cAlternatives.eContents().get(8);
@@ -1769,26 +1773,26 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAllocParserRuleCall_13 = (RuleCall)cAlternatives.eContents().get(13);
 		private final RuleCall cCmpXchgParserRuleCall_14 = (RuleCall)cAlternatives.eContents().get(14);
 		private final RuleCall cAtomicRMWParserRuleCall_15 = (RuleCall)cAlternatives.eContents().get(15);
-		private final RuleCall cPHIParserRuleCall_16 = (RuleCall)cAlternatives.eContents().get(16);
+		private final RuleCall cPhiParserRuleCall_16 = (RuleCall)cAlternatives.eContents().get(16);
 		private final RuleCall cSelectParserRuleCall_17 = (RuleCall)cAlternatives.eContents().get(17);
 		private final RuleCall cCallParserRuleCall_18 = (RuleCall)cAlternatives.eContents().get(18);
-		private final RuleCall cVA_ArgParserRuleCall_19 = (RuleCall)cAlternatives.eContents().get(19);
+		private final RuleCall cVariableAttributeAccessParserRuleCall_19 = (RuleCall)cAlternatives.eContents().get(19);
 		private final RuleCall cLandingPadParserRuleCall_20 = (RuleCall)cAlternatives.eContents().get(20);
 		
-		//Std_Instr:
+		//StandartInstruction:
 		//
-		//	"volatile"? Load | "volatile"? Store | Fence | GetElementPtr | LOGICAL_OP | ARITHMETIC_OP | Compare | Cast |
+		//	"volatile"? Load | "volatile"? Store | Fence | GetElementPtr | LogicOperation | ArithmeticOperation | Compare | Cast
 		//
-		//	ShuffleVector | InsertElement | ExtractElement | InsertValue | ExtractValue | Alloc | CmpXchg | AtomicRMW | PHI |
+		//	| ShuffleVector | InsertElement | ExtractElement | InsertValue | ExtractValue | Alloc | CmpXchg | AtomicRMW | Phi |
 		//
-		//	Select | Call | VA_Arg | LandingPad;
+		//	Select | Call | VariableAttributeAccess | LandingPad;
 		public ParserRule getRule() { return rule; }
 
-		//"volatile"? Load | "volatile"? Store | Fence | GetElementPtr | LOGICAL_OP | ARITHMETIC_OP | Compare | Cast |
+		//"volatile"? Load | "volatile"? Store | Fence | GetElementPtr | LogicOperation | ArithmeticOperation | Compare | Cast |
 		//
-		//ShuffleVector | InsertElement | ExtractElement | InsertValue | ExtractValue | Alloc | CmpXchg | AtomicRMW | PHI |
+		//ShuffleVector | InsertElement | ExtractElement | InsertValue | ExtractValue | Alloc | CmpXchg | AtomicRMW | Phi |
 		//
-		//Select | Call | VA_Arg | LandingPad
+		//Select | Call | VariableAttributeAccess | LandingPad
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"volatile"? Load
@@ -1815,11 +1819,11 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//GetElementPtr
 		public RuleCall getGetElementPtrParserRuleCall_3() { return cGetElementPtrParserRuleCall_3; }
 
-		//LOGICAL_OP
-		public RuleCall getLOGICAL_OPParserRuleCall_4() { return cLOGICAL_OPParserRuleCall_4; }
+		//LogicOperation
+		public RuleCall getLogicOperationParserRuleCall_4() { return cLogicOperationParserRuleCall_4; }
 
-		//ARITHMETIC_OP
-		public RuleCall getARITHMETIC_OPParserRuleCall_5() { return cARITHMETIC_OPParserRuleCall_5; }
+		//ArithmeticOperation
+		public RuleCall getArithmeticOperationParserRuleCall_5() { return cArithmeticOperationParserRuleCall_5; }
 
 		//Compare
 		public RuleCall getCompareParserRuleCall_6() { return cCompareParserRuleCall_6; }
@@ -1851,8 +1855,8 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//AtomicRMW
 		public RuleCall getAtomicRMWParserRuleCall_15() { return cAtomicRMWParserRuleCall_15; }
 
-		//PHI
-		public RuleCall getPHIParserRuleCall_16() { return cPHIParserRuleCall_16; }
+		//Phi
+		public RuleCall getPhiParserRuleCall_16() { return cPhiParserRuleCall_16; }
 
 		//Select
 		public RuleCall getSelectParserRuleCall_17() { return cSelectParserRuleCall_17; }
@@ -1860,15 +1864,15 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//Call
 		public RuleCall getCallParserRuleCall_18() { return cCallParserRuleCall_18; }
 
-		//VA_Arg
-		public RuleCall getVA_ArgParserRuleCall_19() { return cVA_ArgParserRuleCall_19; }
+		//VariableAttributeAccess
+		public RuleCall getVariableAttributeAccessParserRuleCall_19() { return cVariableAttributeAccessParserRuleCall_19; }
 
 		//LandingPad
 		public RuleCall getLandingPadParserRuleCall_20() { return cLandingPadParserRuleCall_20; }
 	}
 
-	public class ARITHMETIC_OPElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ARITHMETIC_OP");
+	public class ArithmeticOperationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ArithmeticOperation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
 		private final Keyword cAddKeyword_0_0 = (Keyword)cAlternatives_0.eContents().get(0);
@@ -1898,7 +1902,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cValue2Assignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cValue2ValueParserRuleCall_5_0 = (RuleCall)cValue2Assignment_5.eContents().get(0);
 		
-		//ARITHMETIC_OP:
+		//ArithmeticOperation:
 		//
 		//	("add" | "fadd" | "sub" | "fsub" | "mul" | "fmul" | "udiv" | "sdiv" | "fdiv" | "urem" | "srem" | "frem") (("nsw" |
 		//
@@ -1992,8 +1996,8 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getValue2ValueParserRuleCall_5_0() { return cValue2ValueParserRuleCall_5_0; }
 	}
 
-	public class LOGICAL_OPElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LOGICAL_OP");
+	public class LogicOperationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LogicOperation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
 		private final Keyword cShlKeyword_0_0 = (Keyword)cAlternatives_0.eContents().get(0);
@@ -2010,7 +2014,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cValue2Assignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cValue2ValueParserRuleCall_4_0 = (RuleCall)cValue2Assignment_4.eContents().get(0);
 		
-		//LOGICAL_OP:
+		//LogicOperation:
 		//
 		//	("shl" | "lshr" | "ashr" | "and" | "or" | "xor") optype=TypeUse value1=Value "," value2=Value;
 		public ParserRule getRule() { return rule; }
@@ -2426,27 +2430,6 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class GetElementPtrElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "GetElementPtr");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cGetElementPtr1ParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cGetElementPtr2ParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//GetElementPtr:
-		//
-		//	GetElementPtr1 | GetElementPtr2;
-		public ParserRule getRule() { return rule; }
-
-		//GetElementPtr1 | GetElementPtr2
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//GetElementPtr1
-		public RuleCall getGetElementPtr1ParserRuleCall_0() { return cGetElementPtr1ParserRuleCall_0; }
-
-		//GetElementPtr2
-		public RuleCall getGetElementPtr2ParserRuleCall_1() { return cGetElementPtr2ParserRuleCall_1; }
-	}
-
-	public class GetElementPtr1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "GetElementPtr1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cGetelementptrKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cInboundsKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -2464,7 +2447,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cIndiziesAssignment_2_2_2 = (Assignment)cGroup_2_2.eContents().get(2);
 		private final RuleCall cIndiziesValueParserRuleCall_2_2_2_0 = (RuleCall)cIndiziesAssignment_2_2_2.eContents().get(0);
 		
-		//GetElementPtr1:
+		//GetElementPtr:
 		//
 		//	"getelementptr" "inbounds"? (aggregate=(TypeUse | Array) aggregatename=Value ("," indTypes+=TypeUse
 		//
@@ -2520,8 +2503,8 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getIndiziesValueParserRuleCall_2_2_2_0() { return cIndiziesValueParserRuleCall_2_2_2_0; }
 	}
 
-	public class GetElementPtr2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "GetElementPtr2");
+	public class NestedGetElementPtrElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NestedGetElementPtr");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cGetelementptrKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cInboundsKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -2541,7 +2524,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cIndiziesValueParserRuleCall_2_3_2_0 = (RuleCall)cIndiziesAssignment_2_3_2.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_2_4 = (Keyword)cGroup_2.eContents().get(4);
 		
-		//GetElementPtr2:
+		//NestedGetElementPtr:
 		//
 		//	"getelementptr" "inbounds"? ("(" aggregate=(TypeUse | Array) aggregatename=Value ("," indTypes+=TypeUse
 		//
@@ -3478,8 +3461,8 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getALIGNMENTParserRuleCall_3_1() { return cALIGNMENTParserRuleCall_3_1; }
 	}
 
-	public class PHIElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PHI");
+	public class PhiElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Phi");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cPhiKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -3501,7 +3484,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cValuesValueParserRuleCall_7_4_0 = (RuleCall)cValuesAssignment_7_4.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_7_5 = (Keyword)cGroup_7.eContents().get(5);
 		
-		//PHI:
+		//Phi:
 		//
 		//	"phi" type=TypeUse "[" firstclass+=Value "," values+=Value "]" ("," "[" firstclass+=Value "," values+=Value "]")*;
 		public ParserRule getRule() { return rule; }
@@ -3782,8 +3765,8 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getVal2valueValueParserRuleCall_8_0() { return cVal2valueValueParserRuleCall_8_0; }
 	}
 
-	public class VA_ArgElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VA_Arg");
+	public class VariableAttributeAccessElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VariableAttributeAccess");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cVa_argKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cListtypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -3794,7 +3777,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cArgTypeAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cArgTypeTypeUseParserRuleCall_4_0 = (RuleCall)cArgTypeAssignment_4.eContents().get(0);
 		
-		//VA_Arg:
+		//VariableAttributeAccess:
 		//
 		//	"va_arg" listtype=TypeUse listvalue=Value "," argType=TypeUse;
 		public ParserRule getRule() { return rule; }
@@ -5368,10 +5351,10 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 	private AddressUseElements pAddressUse;
 	private AddressElements pAddress;
 	private PredefinedElements pPredefined;
-	private Primitive_TypeElements pPrimitive_Type;
+	private PrimitiveTypeElements pPrimitiveType;
 	private InitializersElements pInitializers;
 	private FloatingPoint_TypeElements pFloatingPoint_Type;
-	private Predefined_TypesElements pPredefined_Types;
+	private PredefinedTypeElements pPredefinedType;
 	private VectorElements pVector;
 	private ArrayElements pArray;
 	private Aggregate_TypesElements pAggregate_Types;
@@ -5387,16 +5370,15 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 	private InstructionElements pInstruction;
 	private BasicBlockElements pBasicBlock;
 	private InstructionUseElements pInstructionUse;
-	private Ret_InstrElements pRet_Instr;
-	private Std_InstrElements pStd_Instr;
-	private ARITHMETIC_OPElements pARITHMETIC_OP;
-	private LOGICAL_OPElements pLOGICAL_OP;
+	private ReturnInstructionElements pReturnInstruction;
+	private StandartInstructionElements pStandartInstruction;
+	private ArithmeticOperationElements pArithmeticOperation;
+	private LogicOperationElements pLogicOperation;
 	private CastElements pCast;
 	private MetadataValueElements pMetadataValue;
 	private ALIGNMENTElements pALIGNMENT;
 	private GetElementPtrElements pGetElementPtr;
-	private GetElementPtr1Elements pGetElementPtr1;
-	private GetElementPtr2Elements pGetElementPtr2;
+	private NestedGetElementPtrElements pNestedGetElementPtr;
 	private ExtractValueElements pExtractValue;
 	private InsertValueElements pInsertValue;
 	private FenceElements pFence;
@@ -5406,11 +5388,11 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 	private StoreElements pStore;
 	private CallElements pCall;
 	private AllocElements pAlloc;
-	private PHIElements pPHI;
+	private PhiElements pPhi;
 	private LandingPadElements pLandingPad;
 	private ClauseElements pClause;
 	private SelectElements pSelect;
-	private VA_ArgElements pVA_Arg;
+	private VariableAttributeAccessElements pVariableAttributeAccess;
 	private ExtractElementElements pExtractElement;
 	private InsertElementElements pInsertElement;
 	private ShuffleVectorElements pShuffleVector;
@@ -5675,7 +5657,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 
 	//Predefined:
 	//
-	//	type=Predefined_Types pointer=POINTER?;
+	//	type=PredefinedType pointer=POINTER?;
 	public PredefinedElements getPredefinedAccess() {
 		return (pPredefined != null) ? pPredefined : (pPredefined = new PredefinedElements());
 	}
@@ -5684,15 +5666,15 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		return getPredefinedAccess().getRule();
 	}
 
-	//Primitive_Type:
+	//PrimitiveType:
 	//
 	//	"void" | "null" | "label" | "undef" | "true" | "false";
-	public Primitive_TypeElements getPrimitive_TypeAccess() {
-		return (pPrimitive_Type != null) ? pPrimitive_Type : (pPrimitive_Type = new Primitive_TypeElements());
+	public PrimitiveTypeElements getPrimitiveTypeAccess() {
+		return (pPrimitiveType != null) ? pPrimitiveType : (pPrimitiveType = new PrimitiveTypeElements());
 	}
 	
-	public ParserRule getPrimitive_TypeRule() {
-		return getPrimitive_TypeAccess().getRule();
+	public ParserRule getPrimitiveTypeRule() {
+		return getPrimitiveTypeAccess().getRule();
 	}
 
 	//Initializers:
@@ -5717,15 +5699,15 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		return getFloatingPoint_TypeAccess().getRule();
 	}
 
-	//Predefined_Types:
+	//PredefinedType:
 	//
-	//	Primitive_Type | INT_TYPE | FloatingPoint_Type;
-	public Predefined_TypesElements getPredefined_TypesAccess() {
-		return (pPredefined_Types != null) ? pPredefined_Types : (pPredefined_Types = new Predefined_TypesElements());
+	//	PrimitiveType | INT_TYPE | FloatingPoint_Type;
+	public PredefinedTypeElements getPredefinedTypeAccess() {
+		return (pPredefinedType != null) ? pPredefinedType : (pPredefinedType = new PredefinedTypeElements());
 	}
 	
-	public ParserRule getPredefined_TypesRule() {
-		return getPredefined_TypesAccess().getRule();
+	public ParserRule getPredefinedTypeRule() {
+		return getPredefinedTypeAccess().getRule();
 	}
 
 	//Vector:
@@ -5785,7 +5767,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 
 	//Value:
 	//
-	//	{Value} (STRING | Primitive_Type | Initializers) | Cast | GetElementPtr2 | Constant | NonConstantValue;
+	//	{Value} (STRING | PrimitiveType | Initializers) | Cast | NestedGetElementPtr | Constant | NonConstantValue;
 	public ValueElements getValueAccess() {
 		return (pValue != null) ? pValue : (pValue = new ValueElements());
 	}
@@ -5866,7 +5848,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 
 	//Instruction:
 	//
-	//	Std_Instr | Ret_Instr;
+	//	StandartInstruction | ReturnInstruction;
 	public InstructionElements getInstructionAccess() {
 		return (pInstruction != null) ? pInstruction : (pInstruction = new InstructionElements());
 	}
@@ -5877,7 +5859,9 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 
 	//BasicBlock:
 	//
-	//	(label=ID_FQN ":") instructions+=(InstructionUse | Std_Instr)* (retadr=VALID_ID "=")? terminator=Ret_Instr;
+	//	(label=ID_FQN ":") instructions+=(InstructionUse | StandartInstruction)* (retadr=VALID_ID "=")?
+	//
+	//	terminator=ReturnInstruction;
 	public BasicBlockElements getBasicBlockAccess() {
 		return (pBasicBlock != null) ? pBasicBlock : (pBasicBlock = new BasicBlockElements());
 	}
@@ -5888,7 +5872,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 
 	//InstructionUse:
 	//
-	//	reg_or_var=VALID_ID "=" instruction=Std_Instr;
+	//	reg_or_var=VALID_ID "=" instruction=StandartInstruction;
 	public InstructionUseElements getInstructionUseAccess() {
 		return (pInstructionUse != null) ? pInstructionUse : (pInstructionUse = new InstructionUseElements());
 	}
@@ -5897,54 +5881,54 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		return getInstructionUseAccess().getRule();
 	}
 
-	//Ret_Instr:
+	//ReturnInstruction:
 	//
 	//	Return | Branch | Switch | IndirectBranch | Invoke | Resume | Unreachable;
-	public Ret_InstrElements getRet_InstrAccess() {
-		return (pRet_Instr != null) ? pRet_Instr : (pRet_Instr = new Ret_InstrElements());
+	public ReturnInstructionElements getReturnInstructionAccess() {
+		return (pReturnInstruction != null) ? pReturnInstruction : (pReturnInstruction = new ReturnInstructionElements());
 	}
 	
-	public ParserRule getRet_InstrRule() {
-		return getRet_InstrAccess().getRule();
+	public ParserRule getReturnInstructionRule() {
+		return getReturnInstructionAccess().getRule();
 	}
 
-	//Std_Instr:
+	//StandartInstruction:
 	//
-	//	"volatile"? Load | "volatile"? Store | Fence | GetElementPtr | LOGICAL_OP | ARITHMETIC_OP | Compare | Cast |
+	//	"volatile"? Load | "volatile"? Store | Fence | GetElementPtr | LogicOperation | ArithmeticOperation | Compare | Cast
 	//
-	//	ShuffleVector | InsertElement | ExtractElement | InsertValue | ExtractValue | Alloc | CmpXchg | AtomicRMW | PHI |
+	//	| ShuffleVector | InsertElement | ExtractElement | InsertValue | ExtractValue | Alloc | CmpXchg | AtomicRMW | Phi |
 	//
-	//	Select | Call | VA_Arg | LandingPad;
-	public Std_InstrElements getStd_InstrAccess() {
-		return (pStd_Instr != null) ? pStd_Instr : (pStd_Instr = new Std_InstrElements());
+	//	Select | Call | VariableAttributeAccess | LandingPad;
+	public StandartInstructionElements getStandartInstructionAccess() {
+		return (pStandartInstruction != null) ? pStandartInstruction : (pStandartInstruction = new StandartInstructionElements());
 	}
 	
-	public ParserRule getStd_InstrRule() {
-		return getStd_InstrAccess().getRule();
+	public ParserRule getStandartInstructionRule() {
+		return getStandartInstructionAccess().getRule();
 	}
 
-	//ARITHMETIC_OP:
+	//ArithmeticOperation:
 	//
 	//	("add" | "fadd" | "sub" | "fsub" | "mul" | "fmul" | "udiv" | "sdiv" | "fdiv" | "urem" | "srem" | "frem") (("nsw" |
 	//
 	//	"nuw") ("nuw" | "nsw")?)? optype=TypeUse value1=Value "," value2=Value;
-	public ARITHMETIC_OPElements getARITHMETIC_OPAccess() {
-		return (pARITHMETIC_OP != null) ? pARITHMETIC_OP : (pARITHMETIC_OP = new ARITHMETIC_OPElements());
+	public ArithmeticOperationElements getArithmeticOperationAccess() {
+		return (pArithmeticOperation != null) ? pArithmeticOperation : (pArithmeticOperation = new ArithmeticOperationElements());
 	}
 	
-	public ParserRule getARITHMETIC_OPRule() {
-		return getARITHMETIC_OPAccess().getRule();
+	public ParserRule getArithmeticOperationRule() {
+		return getArithmeticOperationAccess().getRule();
 	}
 
-	//LOGICAL_OP:
+	//LogicOperation:
 	//
 	//	("shl" | "lshr" | "ashr" | "and" | "or" | "xor") optype=TypeUse value1=Value "," value2=Value;
-	public LOGICAL_OPElements getLOGICAL_OPAccess() {
-		return (pLOGICAL_OP != null) ? pLOGICAL_OP : (pLOGICAL_OP = new LOGICAL_OPElements());
+	public LogicOperationElements getLogicOperationAccess() {
+		return (pLogicOperation != null) ? pLogicOperation : (pLogicOperation = new LogicOperationElements());
 	}
 	
-	public ParserRule getLOGICAL_OPRule() {
-		return getLOGICAL_OPAccess().getRule();
+	public ParserRule getLogicOperationRule() {
+		return getLogicOperationAccess().getRule();
 	}
 
 	//Cast:
@@ -5988,7 +5972,9 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 
 	//GetElementPtr:
 	//
-	//	GetElementPtr1 | GetElementPtr2;
+	//	"getelementptr" "inbounds"? (aggregate=(TypeUse | Array) aggregatename=Value ("," indTypes+=TypeUse
+	//
+	//	indizies+=Value)*);
 	public GetElementPtrElements getGetElementPtrAccess() {
 		return (pGetElementPtr != null) ? pGetElementPtr : (pGetElementPtr = new GetElementPtrElements());
 	}
@@ -5997,30 +5983,17 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		return getGetElementPtrAccess().getRule();
 	}
 
-	//GetElementPtr1:
-	//
-	//	"getelementptr" "inbounds"? (aggregate=(TypeUse | Array) aggregatename=Value ("," indTypes+=TypeUse
-	//
-	//	indizies+=Value)*);
-	public GetElementPtr1Elements getGetElementPtr1Access() {
-		return (pGetElementPtr1 != null) ? pGetElementPtr1 : (pGetElementPtr1 = new GetElementPtr1Elements());
-	}
-	
-	public ParserRule getGetElementPtr1Rule() {
-		return getGetElementPtr1Access().getRule();
-	}
-
-	//GetElementPtr2:
+	//NestedGetElementPtr:
 	//
 	//	"getelementptr" "inbounds"? ("(" aggregate=(TypeUse | Array) aggregatename=Value ("," indTypes+=TypeUse
 	//
 	//	indizies+=Value)* ")");
-	public GetElementPtr2Elements getGetElementPtr2Access() {
-		return (pGetElementPtr2 != null) ? pGetElementPtr2 : (pGetElementPtr2 = new GetElementPtr2Elements());
+	public NestedGetElementPtrElements getNestedGetElementPtrAccess() {
+		return (pNestedGetElementPtr != null) ? pNestedGetElementPtr : (pNestedGetElementPtr = new NestedGetElementPtrElements());
 	}
 	
-	public ParserRule getGetElementPtr2Rule() {
-		return getGetElementPtr2Access().getRule();
+	public ParserRule getNestedGetElementPtrRule() {
+		return getNestedGetElementPtrAccess().getRule();
 	}
 
 	//ExtractValue:
@@ -6138,15 +6111,15 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		return getAllocAccess().getRule();
 	}
 
-	//PHI:
+	//Phi:
 	//
 	//	"phi" type=TypeUse "[" firstclass+=Value "," values+=Value "]" ("," "[" firstclass+=Value "," values+=Value "]")*;
-	public PHIElements getPHIAccess() {
-		return (pPHI != null) ? pPHI : (pPHI = new PHIElements());
+	public PhiElements getPhiAccess() {
+		return (pPhi != null) ? pPhi : (pPhi = new PhiElements());
 	}
 	
-	public ParserRule getPHIRule() {
-		return getPHIAccess().getRule();
+	public ParserRule getPhiRule() {
+		return getPhiAccess().getRule();
 	}
 
 	//LandingPad:
@@ -6186,15 +6159,15 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		return getSelectAccess().getRule();
 	}
 
-	//VA_Arg:
+	//VariableAttributeAccess:
 	//
 	//	"va_arg" listtype=TypeUse listvalue=Value "," argType=TypeUse;
-	public VA_ArgElements getVA_ArgAccess() {
-		return (pVA_Arg != null) ? pVA_Arg : (pVA_Arg = new VA_ArgElements());
+	public VariableAttributeAccessElements getVariableAttributeAccessAccess() {
+		return (pVariableAttributeAccess != null) ? pVariableAttributeAccess : (pVariableAttributeAccess = new VariableAttributeAccessElements());
 	}
 	
-	public ParserRule getVA_ArgRule() {
-		return getVA_ArgAccess().getRule();
+	public ParserRule getVariableAttributeAccessRule() {
+		return getVariableAttributeAccessAccess().getRule();
 	}
 
 	//ExtractElement:

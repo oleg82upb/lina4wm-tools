@@ -172,20 +172,20 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 				return createInstructionUseAdapter();
 			}
 			@Override
-			public Adapter caseRet_Instr(Ret_Instr object) {
-				return createRet_InstrAdapter();
+			public Adapter caseReturnInstruction(ReturnInstruction object) {
+				return createReturnInstructionAdapter();
 			}
 			@Override
-			public Adapter caseStd_Instr(Std_Instr object) {
-				return createStd_InstrAdapter();
+			public Adapter caseStandartInstruction(StandartInstruction object) {
+				return createStandartInstructionAdapter();
 			}
 			@Override
-			public Adapter caseARITHMETIC_OP(ARITHMETIC_OP object) {
-				return createARITHMETIC_OPAdapter();
+			public Adapter caseArithmeticOperation(ArithmeticOperation object) {
+				return createArithmeticOperationAdapter();
 			}
 			@Override
-			public Adapter caseLOGICAL_OP(LOGICAL_OP object) {
-				return createLOGICAL_OPAdapter();
+			public Adapter caseLogicOperation(LogicOperation object) {
+				return createLogicOperationAdapter();
 			}
 			@Override
 			public Adapter caseCast(Cast object) {
@@ -196,12 +196,8 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 				return createGetElementPtrAdapter();
 			}
 			@Override
-			public Adapter caseGetElementPtr1(GetElementPtr1 object) {
-				return createGetElementPtr1Adapter();
-			}
-			@Override
-			public Adapter caseGetElementPtr2(GetElementPtr2 object) {
-				return createGetElementPtr2Adapter();
+			public Adapter caseNestedGetElementPtr(NestedGetElementPtr object) {
+				return createNestedGetElementPtrAdapter();
 			}
 			@Override
 			public Adapter caseExtractValue(ExtractValue object) {
@@ -240,8 +236,8 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 				return createAllocAdapter();
 			}
 			@Override
-			public Adapter casePHI(PHI object) {
-				return createPHIAdapter();
+			public Adapter casePhi(Phi object) {
+				return createPhiAdapter();
 			}
 			@Override
 			public Adapter caseLandingPad(LandingPad object) {
@@ -256,8 +252,8 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 				return createSelectAdapter();
 			}
 			@Override
-			public Adapter caseVA_Arg(VA_Arg object) {
-				return createVA_ArgAdapter();
+			public Adapter caseVariableAttributeAccess(VariableAttributeAccess object) {
+				return createVariableAttributeAccessAdapter();
 			}
 			@Override
 			public Adapter caseExtractElement(ExtractElement object) {
@@ -688,58 +684,58 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Ret_Instr <em>Ret Instr</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ReturnInstruction <em>Return Instruction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Ret_Instr
+	 * @see de.upb.llvm_parser.llvm.ReturnInstruction
 	 * @generated
 	 */
-	public Adapter createRet_InstrAdapter() {
+	public Adapter createReturnInstructionAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Std_Instr <em>Std Instr</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.StandartInstruction <em>Standart Instruction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Std_Instr
+	 * @see de.upb.llvm_parser.llvm.StandartInstruction
 	 * @generated
 	 */
-	public Adapter createStd_InstrAdapter() {
+	public Adapter createStandartInstructionAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ARITHMETIC_OP <em>ARITHMETIC OP</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ArithmeticOperation <em>Arithmetic Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.ARITHMETIC_OP
+	 * @see de.upb.llvm_parser.llvm.ArithmeticOperation
 	 * @generated
 	 */
-	public Adapter createARITHMETIC_OPAdapter() {
+	public Adapter createArithmeticOperationAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.LOGICAL_OP <em>LOGICAL OP</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.LogicOperation <em>Logic Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.LOGICAL_OP
+	 * @see de.upb.llvm_parser.llvm.LogicOperation
 	 * @generated
 	 */
-	public Adapter createLOGICAL_OPAdapter() {
+	public Adapter createLogicOperationAdapter() {
 		return null;
 	}
 
@@ -772,30 +768,16 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.GetElementPtr1 <em>Get Element Ptr1</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.NestedGetElementPtr <em>Nested Get Element Ptr</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.GetElementPtr1
+	 * @see de.upb.llvm_parser.llvm.NestedGetElementPtr
 	 * @generated
 	 */
-	public Adapter createGetElementPtr1Adapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.GetElementPtr2 <em>Get Element Ptr2</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.GetElementPtr2
-	 * @generated
-	 */
-	public Adapter createGetElementPtr2Adapter() {
+	public Adapter createNestedGetElementPtrAdapter() {
 		return null;
 	}
 
@@ -926,16 +908,16 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.PHI <em>PHI</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Phi <em>Phi</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.PHI
+	 * @see de.upb.llvm_parser.llvm.Phi
 	 * @generated
 	 */
-	public Adapter createPHIAdapter() {
+	public Adapter createPhiAdapter() {
 		return null;
 	}
 
@@ -982,16 +964,16 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.VA_Arg <em>VA Arg</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.VariableAttributeAccess <em>Variable Attribute Access</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.VA_Arg
+	 * @see de.upb.llvm_parser.llvm.VariableAttributeAccess
 	 * @generated
 	 */
-	public Adapter createVA_ArgAdapter() {
+	public Adapter createVariableAttributeAccessAdapter() {
 		return null;
 	}
 

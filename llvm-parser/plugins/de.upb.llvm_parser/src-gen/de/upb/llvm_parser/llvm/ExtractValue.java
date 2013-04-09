@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ExtractValue extends Std_Instr {
+public interface ExtractValue extends StandartInstruction {
 	/**
 	 * Returns the value of the '<em><b>Array</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

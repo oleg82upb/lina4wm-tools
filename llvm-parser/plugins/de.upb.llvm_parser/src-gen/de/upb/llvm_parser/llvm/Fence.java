@@ -19,7 +19,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface Fence extends Std_Instr {
+public interface Fence extends StandartInstruction {
 	/**
 	 * Returns the value of the '<em><b>Ordering</b></em>' attribute.
 	 * <!-- begin-user-doc -->

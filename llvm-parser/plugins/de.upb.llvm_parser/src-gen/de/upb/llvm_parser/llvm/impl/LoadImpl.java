@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class LoadImpl extends Std_InstrImpl implements Load {
+public class LoadImpl extends StandartInstructionImpl implements Load {
 	/**
 	 * The cached value of the '{@link #getAdresstype() <em>Adresstype</em>}' containment reference.
 	 * <!-- begin-user-doc -->

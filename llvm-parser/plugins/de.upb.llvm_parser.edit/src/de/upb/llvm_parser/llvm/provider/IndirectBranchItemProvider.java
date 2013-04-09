@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class IndirectBranchItemProvider
-	extends Ret_InstrItemProvider
+	extends ReturnInstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -188,7 +188,7 @@ public class IndirectBranchItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESS,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -228,7 +228,7 @@ public class IndirectBranchItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELS,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 	}
 
 	/**

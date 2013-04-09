@@ -13,7 +13,7 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class UnreachableTest extends Ret_InstrTest {
+public class UnreachableTest extends ReturnInstructionTest {
 
 	/**
 	 * <!-- begin-user-doc -->

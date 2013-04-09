@@ -286,22 +286,22 @@ public class GlobalDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE,
-				 LlvmFactory.eINSTANCE.createRet_Instr()));
+				 LlvmFactory.eINSTANCE.createReturnInstruction()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE,
-				 LlvmFactory.eINSTANCE.createStd_Instr()));
+				 LlvmFactory.eINSTANCE.createStandartInstruction()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE,
-				 LlvmFactory.eINSTANCE.createARITHMETIC_OP()));
+				 LlvmFactory.eINSTANCE.createArithmeticOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE,
-				 LlvmFactory.eINSTANCE.createLOGICAL_OP()));
+				 LlvmFactory.eINSTANCE.createLogicOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -316,12 +316,7 @@ public class GlobalDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr1()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -371,7 +366,7 @@ public class GlobalDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE,
-				 LlvmFactory.eINSTANCE.createPHI()));
+				 LlvmFactory.eINSTANCE.createPhi()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -391,7 +386,7 @@ public class GlobalDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE,
-				 LlvmFactory.eINSTANCE.createVA_Arg()));
+				 LlvmFactory.eINSTANCE.createVariableAttributeAccess()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -581,22 +576,22 @@ public class GlobalDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__VALUE,
-				 LlvmFactory.eINSTANCE.createRet_Instr()));
+				 LlvmFactory.eINSTANCE.createReturnInstruction()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__VALUE,
-				 LlvmFactory.eINSTANCE.createStd_Instr()));
+				 LlvmFactory.eINSTANCE.createStandartInstruction()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__VALUE,
-				 LlvmFactory.eINSTANCE.createARITHMETIC_OP()));
+				 LlvmFactory.eINSTANCE.createArithmeticOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__VALUE,
-				 LlvmFactory.eINSTANCE.createLOGICAL_OP()));
+				 LlvmFactory.eINSTANCE.createLogicOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -611,12 +606,7 @@ public class GlobalDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__VALUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr1()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.GLOBAL_DEFINITION__VALUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -666,7 +656,7 @@ public class GlobalDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__VALUE,
-				 LlvmFactory.eINSTANCE.createPHI()));
+				 LlvmFactory.eINSTANCE.createPhi()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -686,7 +676,7 @@ public class GlobalDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__VALUE,
-				 LlvmFactory.eINSTANCE.createVA_Arg()));
+				 LlvmFactory.eINSTANCE.createVariableAttributeAccess()));
 
 		newChildDescriptors.add
 			(createChildParameter

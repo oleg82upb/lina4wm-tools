@@ -187,7 +187,7 @@ public class ValueStructItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.VALUE_STRUCT__VALUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 	}
 
 	/**

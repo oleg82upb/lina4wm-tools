@@ -32,7 +32,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class AtomicRMWItemProvider
-	extends Std_InstrItemProvider
+	extends StandartInstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -219,7 +219,7 @@ public class AtomicRMWItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ATOMIC_RMW__ADRESS,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -259,7 +259,7 @@ public class AtomicRMWItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ATOMIC_RMW__OPVALUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 	}
 
 	/**

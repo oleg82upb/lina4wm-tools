@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class ShuffleVectorItemProvider
-	extends Std_InstrItemProvider
+	extends StandartInstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -192,7 +192,7 @@ public class ShuffleVectorItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1VALUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -232,7 +232,7 @@ public class ShuffleVectorItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2VALUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -272,7 +272,7 @@ public class ShuffleVectorItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SHUFFLE_VECTOR__MASKVALUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 	}
 
 	/**

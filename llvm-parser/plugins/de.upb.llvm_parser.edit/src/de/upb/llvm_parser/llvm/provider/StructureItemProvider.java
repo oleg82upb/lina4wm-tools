@@ -13,18 +13,14 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -281,22 +277,22 @@ public class StructureItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createRet_Instr()));
+				 LlvmFactory.eINSTANCE.createReturnInstruction()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createStd_Instr()));
+				 LlvmFactory.eINSTANCE.createStandartInstruction()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createARITHMETIC_OP()));
+				 LlvmFactory.eINSTANCE.createArithmeticOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createLOGICAL_OP()));
+				 LlvmFactory.eINSTANCE.createLogicOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -311,12 +307,7 @@ public class StructureItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createGetElementPtr1()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -366,7 +357,7 @@ public class StructureItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createPHI()));
+				 LlvmFactory.eINSTANCE.createPhi()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -386,7 +377,7 @@ public class StructureItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createVA_Arg()));
+				 LlvmFactory.eINSTANCE.createVariableAttributeAccess()));
 
 		newChildDescriptors.add
 			(createChildParameter

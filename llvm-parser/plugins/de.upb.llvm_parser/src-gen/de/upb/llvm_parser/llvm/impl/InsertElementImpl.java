@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class InsertElementImpl extends Std_InstrImpl implements InsertElement {
+public class InsertElementImpl extends StandartInstructionImpl implements InsertElement {
 	/**
 	 * The cached value of the '{@link #getVectortype() <em>Vectortype</em>}' containment reference.
 	 * <!-- begin-user-doc -->

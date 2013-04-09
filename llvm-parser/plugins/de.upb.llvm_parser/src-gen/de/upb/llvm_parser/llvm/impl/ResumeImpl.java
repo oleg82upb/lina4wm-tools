@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class ResumeImpl extends Ret_InstrImpl implements Resume {
+public class ResumeImpl extends ReturnInstructionImpl implements Resume {
 	/**
 	 * The cached value of the '{@link #getResumestruct() <em>Resumestruct</em>}' containment reference.
 	 * <!-- begin-user-doc -->

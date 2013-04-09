@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class FenceImpl extends Std_InstrImpl implements Fence {
+public class FenceImpl extends StandartInstructionImpl implements Fence {
 	/**
 	 * The default value of the '{@link #getOrdering() <em>Ordering</em>}' attribute.
 	 * <!-- begin-user-doc -->

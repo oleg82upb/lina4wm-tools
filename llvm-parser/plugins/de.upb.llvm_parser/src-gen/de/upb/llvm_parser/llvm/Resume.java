@@ -20,7 +20,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface Resume extends Ret_Instr {
+public interface Resume extends ReturnInstruction {
 	/**
 	 * Returns the value of the '<em><b>Resumestruct</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

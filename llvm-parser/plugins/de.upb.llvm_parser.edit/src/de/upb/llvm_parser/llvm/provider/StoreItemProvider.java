@@ -32,7 +32,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class StoreItemProvider
-	extends Std_InstrItemProvider
+	extends StandartInstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -250,7 +250,7 @@ public class StoreItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.STORE__NEWVALUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -290,7 +290,7 @@ public class StoreItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.STORE__ADRESS,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 	}
 
 	/**

@@ -20,7 +20,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface Return extends Ret_Instr {
+public interface Return extends ReturnInstruction {
 	/**
 	 * Returns the value of the '<em><b>Returntype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

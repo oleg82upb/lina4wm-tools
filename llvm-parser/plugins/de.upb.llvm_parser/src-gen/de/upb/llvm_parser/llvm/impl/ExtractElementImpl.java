@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class ExtractElementImpl extends Std_InstrImpl implements ExtractElement {
+public class ExtractElementImpl extends StandartInstructionImpl implements ExtractElement {
 	/**
 	 * The cached value of the '{@link #getVectortype() <em>Vectortype</em>}' containment reference.
 	 * <!-- begin-user-doc -->

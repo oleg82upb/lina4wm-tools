@@ -24,7 +24,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface InsertValue extends Std_Instr {
+public interface InsertValue extends StandartInstruction {
 	/**
 	 * Returns the value of the '<em><b>Struct</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

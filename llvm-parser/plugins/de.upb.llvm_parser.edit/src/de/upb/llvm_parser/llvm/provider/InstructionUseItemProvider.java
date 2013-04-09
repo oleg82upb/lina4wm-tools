@@ -181,17 +181,17 @@ public class InstructionUseItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSTRUCTION_USE__INSTRUCTION,
-				 LlvmFactory.eINSTANCE.createStd_Instr()));
+				 LlvmFactory.eINSTANCE.createStandartInstruction()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSTRUCTION_USE__INSTRUCTION,
-				 LlvmFactory.eINSTANCE.createARITHMETIC_OP()));
+				 LlvmFactory.eINSTANCE.createArithmeticOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSTRUCTION_USE__INSTRUCTION,
-				 LlvmFactory.eINSTANCE.createLOGICAL_OP()));
+				 LlvmFactory.eINSTANCE.createLogicOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -202,16 +202,6 @@ public class InstructionUseItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.INSTRUCTION_USE__INSTRUCTION,
 				 LlvmFactory.eINSTANCE.createGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSTRUCTION_USE__INSTRUCTION,
-				 LlvmFactory.eINSTANCE.createGetElementPtr1()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSTRUCTION_USE__INSTRUCTION,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -261,7 +251,7 @@ public class InstructionUseItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSTRUCTION_USE__INSTRUCTION,
-				 LlvmFactory.eINSTANCE.createPHI()));
+				 LlvmFactory.eINSTANCE.createPhi()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -276,7 +266,7 @@ public class InstructionUseItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSTRUCTION_USE__INSTRUCTION,
-				 LlvmFactory.eINSTANCE.createVA_Arg()));
+				 LlvmFactory.eINSTANCE.createVariableAttributeAccess()));
 
 		newChildDescriptors.add
 			(createChildParameter

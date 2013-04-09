@@ -5,8 +5,6 @@ package de.upb.llvm_parser.llvm.tests;
 import de.upb.llvm_parser.llvm.AliasDefinition;
 import de.upb.llvm_parser.llvm.LlvmFactory;
 
-import junit.framework.TestCase;
-
 import junit.textui.TestRunner;
 
 /**

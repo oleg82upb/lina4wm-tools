@@ -36,7 +36,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class InvokeImpl extends Ret_InstrImpl implements Invoke {
+public class InvokeImpl extends ReturnInstructionImpl implements Invoke {
 	/**
 	 * The cached value of the '{@link #getFunctiontype() <em>Functiontype</em>}' containment reference.
 	 * <!-- begin-user-doc -->

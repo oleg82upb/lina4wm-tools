@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class UnreachableImpl extends Ret_InstrImpl implements Unreachable {
+public class UnreachableImpl extends ReturnInstructionImpl implements Unreachable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

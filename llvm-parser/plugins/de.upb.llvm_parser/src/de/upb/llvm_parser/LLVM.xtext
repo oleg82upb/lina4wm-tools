@@ -87,9 +87,9 @@ Address:
 	name=VALID_ID;
 
 Predefined:
-	type=Predefined_Types (pointer=POINTER)?;
+	type=PredefinedType (pointer=POINTER)?;
 
-Primitive_Type:
+PrimitiveType:
 	'void' | 'null' | 'label' | 'undef' | 'true' | 'false';
 
 Initializers:
@@ -98,8 +98,8 @@ Initializers:
 FloatingPoint_Type:
 	'half' | 'float' | 'double' | 'x86_fp80' | 'fp128' | 'ppc_fp128';
 
-Predefined_Types:
-	Primitive_Type | INT_TYPE | FloatingPoint_Type;
+PredefinedType:
+	PrimitiveType | INT_TYPE | FloatingPoint_Type;
 
 Vector:
 	'<' INT 'x' type=TypeUse '>';
@@ -117,7 +117,7 @@ NonConstantValue:
 	name=VALID_ID (pointer=POINTER)?;
 
 Value:
-	{Value} (STRING| Primitive_Type | Initializers) | Cast | GetElementPtr2 | Constant | NonConstantValue;
+	{Value} (STRING| PrimitiveType | Initializers) | Cast | NestedGetElementPtr | Constant | NonConstantValue;
 
 ValueStruct:
 	'{' types+=TypeUse value+=Value (',' types+=TypeUse value+=Value)* '}';
@@ -143,30 +143,30 @@ FunctionBody:
 	'{' blocks+=BasicBlock+ '}'
 	;
 Instruction:
-	Std_Instr | Ret_Instr
+	StandartInstruction | ReturnInstruction
 ;
 BasicBlock:
 	(label=ID_FQN ':')
-	instructions+=(InstructionUse | Std_Instr)*
-	(retadr=VALID_ID '=')? terminator=Ret_Instr;
+	instructions+=(InstructionUse | StandartInstruction)*
+	(retadr=VALID_ID '=')? terminator=ReturnInstruction;
 
 InstructionUse:
-	reg_or_var=VALID_ID '=' instruction=Std_Instr;
+	reg_or_var=VALID_ID '=' instruction=StandartInstruction;
 
-Ret_Instr:
+ReturnInstruction:
 	Return | Branch | Switch | IndirectBranch | Invoke | Resume | Unreachable;
 
-Std_Instr:
-	('volatile'? Load) | ('volatile'? Store) | Fence | GetElementPtr | LOGICAL_OP | ARITHMETIC_OP | Compare |
+StandartInstruction:
+	('volatile'? Load) | ('volatile'? Store) | Fence | GetElementPtr | LogicOperation | ArithmeticOperation | Compare |
 	Cast | ShuffleVector | InsertElement | ExtractElement | InsertValue | ExtractValue | Alloc |
-	CmpXchg | AtomicRMW | PHI | Select | Call | VA_Arg | LandingPad;
+	CmpXchg | AtomicRMW | Phi | Select | Call | VariableAttributeAccess | LandingPad;
 
-ARITHMETIC_OP:
+ArithmeticOperation:
 	('add' | 'fadd' | 'sub' | 'fsub' | 'mul' | 'fmul' | 'udiv' | 'sdiv' | 'fdiv' | 'urem' | 'srem' | 'frem') (('nsw' |
 	'nuw') ('nuw' | 'nsw')?)?
 	optype=TypeUse value1=Value ',' value2=Value;
 
-LOGICAL_OP:
+LogicOperation:
 	('shl' | 'lshr' | 'ashr' | 'and' | 'or' | 'xor') optype=TypeUse value1=Value ',' value2=Value;
 
 Cast:
@@ -185,13 +185,10 @@ ALIGNMENT:
 ;
 
 GetElementPtr:
-	GetElementPtr1 | GetElementPtr2
-	; 
-GetElementPtr1:
 	'getelementptr' 'inbounds'? 
 		(aggregate=(TypeUse|Array) aggregatename=Value(',' indTypes+=TypeUse indizies+=Value)*)
 ;
-GetElementPtr2:
+NestedGetElementPtr:
 	'getelementptr' 'inbounds'? 
 		('('aggregate=(TypeUse|Array) aggregatename=Value(',' indTypes+=TypeUse indizies+=Value)*')')
 ;
@@ -237,7 +234,7 @@ Call:
 Alloc:
 	'alloca' ((type=TypeUse typelist=TypeList?)) (',' numelementstype=TypeUse numelementsvalue=Value)? (',' ALIGNMENT)?;
 
-PHI:
+Phi:
 	'phi' type=TypeUse '[' firstclass+=Value ',' values+=Value ']' (',' '[' firstclass+=Value ',' values+=Value ']')*;
 
 LandingPad:
@@ -252,7 +249,7 @@ Select:
 	'select' conditiontype=TypeUse conditionvalue=Value ',' val1type=TypeUse val1value=Value ',' val2type=TypeUse
 	val2value=Value;
 
-VA_Arg:
+VariableAttributeAccess:
 	'va_arg' listtype=TypeUse listvalue=Value ',' argType=TypeUse;
 
 ExtractElement:

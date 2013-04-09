@@ -13,7 +13,7 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class InvokeTest extends Ret_InstrTest {
+public class InvokeTest extends ReturnInstructionTest {
 
 	/**
 	 * <!-- begin-user-doc -->

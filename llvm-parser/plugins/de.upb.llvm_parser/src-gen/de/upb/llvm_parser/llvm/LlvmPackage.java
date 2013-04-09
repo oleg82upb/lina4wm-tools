@@ -1000,52 +1000,52 @@ public interface LlvmPackage extends EPackage {
 	int INSTRUCTION_USE_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.Ret_InstrImpl <em>Ret Instr</em>}' class.
+	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ReturnInstructionImpl <em>Return Instruction</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.upb.llvm_parser.llvm.impl.Ret_InstrImpl
-	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getRet_Instr()
+	 * @see de.upb.llvm_parser.llvm.impl.ReturnInstructionImpl
+	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getReturnInstruction()
 	 * @generated
 	 */
-	int RET_INSTR = 26;
+	int RETURN_INSTRUCTION = 26;
 
 	/**
-	 * The number of structural features of the '<em>Ret Instr</em>' class.
+	 * The number of structural features of the '<em>Return Instruction</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RET_INSTR_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 0;
+	int RETURN_INSTRUCTION_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.Std_InstrImpl <em>Std Instr</em>}' class.
+	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.StandartInstructionImpl <em>Standart Instruction</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.upb.llvm_parser.llvm.impl.Std_InstrImpl
-	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getStd_Instr()
+	 * @see de.upb.llvm_parser.llvm.impl.StandartInstructionImpl
+	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getStandartInstruction()
 	 * @generated
 	 */
-	int STD_INSTR = 27;
+	int STANDART_INSTRUCTION = 27;
 
 	/**
-	 * The number of structural features of the '<em>Std Instr</em>' class.
+	 * The number of structural features of the '<em>Standart Instruction</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STD_INSTR_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 0;
+	int STANDART_INSTRUCTION_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ARITHMETIC_OPImpl <em>ARITHMETIC OP</em>}' class.
+	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationImpl <em>Arithmetic Operation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.upb.llvm_parser.llvm.impl.ARITHMETIC_OPImpl
-	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getARITHMETIC_OP()
+	 * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationImpl
+	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperation()
 	 * @generated
 	 */
-	int ARITHMETIC_OP = 28;
+	int ARITHMETIC_OPERATION = 28;
 
 	/**
 	 * The feature id for the '<em><b>Optype</b></em>' containment reference.
@@ -1054,7 +1054,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARITHMETIC_OP__OPTYPE = STD_INSTR_FEATURE_COUNT + 0;
+	int ARITHMETIC_OPERATION__OPTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Value1</b></em>' containment reference.
@@ -1063,7 +1063,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARITHMETIC_OP__VALUE1 = STD_INSTR_FEATURE_COUNT + 1;
+	int ARITHMETIC_OPERATION__VALUE1 = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Value2</b></em>' containment reference.
@@ -1072,26 +1072,26 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARITHMETIC_OP__VALUE2 = STD_INSTR_FEATURE_COUNT + 2;
+	int ARITHMETIC_OPERATION__VALUE2 = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>ARITHMETIC OP</em>' class.
+	 * The number of structural features of the '<em>Arithmetic Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARITHMETIC_OP_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 3;
+	int ARITHMETIC_OPERATION_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.LOGICAL_OPImpl <em>LOGICAL OP</em>}' class.
+	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.LogicOperationImpl <em>Logic Operation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.upb.llvm_parser.llvm.impl.LOGICAL_OPImpl
-	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLOGICAL_OP()
+	 * @see de.upb.llvm_parser.llvm.impl.LogicOperationImpl
+	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLogicOperation()
 	 * @generated
 	 */
-	int LOGICAL_OP = 29;
+	int LOGIC_OPERATION = 29;
 
 	/**
 	 * The feature id for the '<em><b>Optype</b></em>' containment reference.
@@ -1100,7 +1100,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGICAL_OP__OPTYPE = STD_INSTR_FEATURE_COUNT + 0;
+	int LOGIC_OPERATION__OPTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Value1</b></em>' containment reference.
@@ -1109,7 +1109,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGICAL_OP__VALUE1 = STD_INSTR_FEATURE_COUNT + 1;
+	int LOGIC_OPERATION__VALUE1 = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Value2</b></em>' containment reference.
@@ -1118,16 +1118,16 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGICAL_OP__VALUE2 = STD_INSTR_FEATURE_COUNT + 2;
+	int LOGIC_OPERATION__VALUE2 = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>LOGICAL OP</em>' class.
+	 * The number of structural features of the '<em>Logic Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOGICAL_OP_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 3;
+	int LOGIC_OPERATION_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.CastImpl <em>Cast</em>}' class.
@@ -1192,7 +1192,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GET_ELEMENT_PTR__AGGREGATE = STD_INSTR_FEATURE_COUNT + 0;
+	int GET_ELEMENT_PTR__AGGREGATE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Aggregatename</b></em>' containment reference.
@@ -1201,7 +1201,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GET_ELEMENT_PTR__AGGREGATENAME = STD_INSTR_FEATURE_COUNT + 1;
+	int GET_ELEMENT_PTR__AGGREGATENAME = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Ind Types</b></em>' containment reference list.
@@ -1210,7 +1210,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GET_ELEMENT_PTR__IND_TYPES = STD_INSTR_FEATURE_COUNT + 2;
+	int GET_ELEMENT_PTR__IND_TYPES = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Indizies</b></em>' containment reference list.
@@ -1219,7 +1219,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GET_ELEMENT_PTR__INDIZIES = STD_INSTR_FEATURE_COUNT + 3;
+	int GET_ELEMENT_PTR__INDIZIES = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Get Element Ptr</em>' class.
@@ -1228,72 +1228,17 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GET_ELEMENT_PTR_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 4;
+	int GET_ELEMENT_PTR_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.GetElementPtr1Impl <em>Get Element Ptr1</em>}' class.
+	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.NestedGetElementPtrImpl <em>Nested Get Element Ptr</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.upb.llvm_parser.llvm.impl.GetElementPtr1Impl
-	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getGetElementPtr1()
+	 * @see de.upb.llvm_parser.llvm.impl.NestedGetElementPtrImpl
+	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getNestedGetElementPtr()
 	 * @generated
 	 */
-	int GET_ELEMENT_PTR1 = 32;
-
-	/**
-	 * The feature id for the '<em><b>Aggregate</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GET_ELEMENT_PTR1__AGGREGATE = GET_ELEMENT_PTR__AGGREGATE;
-
-	/**
-	 * The feature id for the '<em><b>Aggregatename</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GET_ELEMENT_PTR1__AGGREGATENAME = GET_ELEMENT_PTR__AGGREGATENAME;
-
-	/**
-	 * The feature id for the '<em><b>Ind Types</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GET_ELEMENT_PTR1__IND_TYPES = GET_ELEMENT_PTR__IND_TYPES;
-
-	/**
-	 * The feature id for the '<em><b>Indizies</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GET_ELEMENT_PTR1__INDIZIES = GET_ELEMENT_PTR__INDIZIES;
-
-	/**
-	 * The number of structural features of the '<em>Get Element Ptr1</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GET_ELEMENT_PTR1_FEATURE_COUNT = GET_ELEMENT_PTR_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.GetElementPtr2Impl <em>Get Element Ptr2</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.upb.llvm_parser.llvm.impl.GetElementPtr2Impl
-	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getGetElementPtr2()
-	 * @generated
-	 */
-	int GET_ELEMENT_PTR2 = 33;
+	int NESTED_GET_ELEMENT_PTR = 32;
 
 	/**
 	 * The feature id for the '<em><b>Aggregate</b></em>' containment reference.
@@ -1302,7 +1247,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GET_ELEMENT_PTR2__AGGREGATE = VALUE_FEATURE_COUNT + 0;
+	int NESTED_GET_ELEMENT_PTR__AGGREGATE = VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Aggregatename</b></em>' containment reference.
@@ -1311,7 +1256,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GET_ELEMENT_PTR2__AGGREGATENAME = VALUE_FEATURE_COUNT + 1;
+	int NESTED_GET_ELEMENT_PTR__AGGREGATENAME = VALUE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Ind Types</b></em>' containment reference list.
@@ -1320,7 +1265,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GET_ELEMENT_PTR2__IND_TYPES = VALUE_FEATURE_COUNT + 2;
+	int NESTED_GET_ELEMENT_PTR__IND_TYPES = VALUE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Indizies</b></em>' containment reference list.
@@ -1329,16 +1274,16 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GET_ELEMENT_PTR2__INDIZIES = VALUE_FEATURE_COUNT + 3;
+	int NESTED_GET_ELEMENT_PTR__INDIZIES = VALUE_FEATURE_COUNT + 3;
 
 	/**
-	 * The number of structural features of the '<em>Get Element Ptr2</em>' class.
+	 * The number of structural features of the '<em>Nested Get Element Ptr</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GET_ELEMENT_PTR2_FEATURE_COUNT = VALUE_FEATURE_COUNT + 4;
+	int NESTED_GET_ELEMENT_PTR_FEATURE_COUNT = VALUE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ExtractValueImpl <em>Extract Value</em>}' class.
@@ -1348,7 +1293,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getExtractValue()
 	 * @generated
 	 */
-	int EXTRACT_VALUE = 34;
+	int EXTRACT_VALUE = 33;
 
 	/**
 	 * The feature id for the '<em><b>Array</b></em>' containment reference.
@@ -1357,7 +1302,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTRACT_VALUE__ARRAY = STD_INSTR_FEATURE_COUNT + 0;
+	int EXTRACT_VALUE__ARRAY = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Struct</b></em>' containment reference.
@@ -1366,7 +1311,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTRACT_VALUE__STRUCT = STD_INSTR_FEATURE_COUNT + 1;
+	int EXTRACT_VALUE__STRUCT = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -1375,7 +1320,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTRACT_VALUE__VALUE = STD_INSTR_FEATURE_COUNT + 2;
+	int EXTRACT_VALUE__VALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Index</b></em>' attribute list.
@@ -1384,7 +1329,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTRACT_VALUE__INDEX = STD_INSTR_FEATURE_COUNT + 3;
+	int EXTRACT_VALUE__INDEX = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Extract Value</em>' class.
@@ -1393,7 +1338,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTRACT_VALUE_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 4;
+	int EXTRACT_VALUE_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.InsertValueImpl <em>Insert Value</em>}' class.
@@ -1403,7 +1348,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getInsertValue()
 	 * @generated
 	 */
-	int INSERT_VALUE = 35;
+	int INSERT_VALUE = 34;
 
 	/**
 	 * The feature id for the '<em><b>Struct</b></em>' containment reference.
@@ -1412,7 +1357,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSERT_VALUE__STRUCT = STD_INSTR_FEATURE_COUNT + 0;
+	int INSERT_VALUE__STRUCT = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -1421,7 +1366,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSERT_VALUE__VALUE = STD_INSTR_FEATURE_COUNT + 1;
+	int INSERT_VALUE__VALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Inserttype</b></em>' containment reference.
@@ -1430,7 +1375,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSERT_VALUE__INSERTTYPE = STD_INSTR_FEATURE_COUNT + 2;
+	int INSERT_VALUE__INSERTTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Insertvalue</b></em>' containment reference.
@@ -1439,7 +1384,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSERT_VALUE__INSERTVALUE = STD_INSTR_FEATURE_COUNT + 3;
+	int INSERT_VALUE__INSERTVALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Index</b></em>' attribute list.
@@ -1448,7 +1393,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSERT_VALUE__INDEX = STD_INSTR_FEATURE_COUNT + 4;
+	int INSERT_VALUE__INDEX = STANDART_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Insert Value</em>' class.
@@ -1457,7 +1402,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSERT_VALUE_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 5;
+	int INSERT_VALUE_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.FenceImpl <em>Fence</em>}' class.
@@ -1467,7 +1412,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getFence()
 	 * @generated
 	 */
-	int FENCE = 36;
+	int FENCE = 35;
 
 	/**
 	 * The feature id for the '<em><b>Ordering</b></em>' attribute.
@@ -1476,7 +1421,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FENCE__ORDERING = STD_INSTR_FEATURE_COUNT + 0;
+	int FENCE__ORDERING = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Fence</em>' class.
@@ -1485,7 +1430,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FENCE_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 1;
+	int FENCE_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.CmpXchgImpl <em>Cmp Xchg</em>}' class.
@@ -1495,7 +1440,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getCmpXchg()
 	 * @generated
 	 */
-	int CMP_XCHG = 37;
+	int CMP_XCHG = 36;
 
 	/**
 	 * The feature id for the '<em><b>Adresstype</b></em>' containment reference.
@@ -1504,7 +1449,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CMP_XCHG__ADRESSTYPE = STD_INSTR_FEATURE_COUNT + 0;
+	int CMP_XCHG__ADRESSTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Adress</b></em>' containment reference.
@@ -1513,7 +1458,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CMP_XCHG__ADRESS = STD_INSTR_FEATURE_COUNT + 1;
+	int CMP_XCHG__ADRESS = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Comparetype</b></em>' containment reference.
@@ -1522,7 +1467,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CMP_XCHG__COMPARETYPE = STD_INSTR_FEATURE_COUNT + 2;
+	int CMP_XCHG__COMPARETYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Comparevalue</b></em>' containment reference.
@@ -1531,7 +1476,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CMP_XCHG__COMPAREVALUE = STD_INSTR_FEATURE_COUNT + 3;
+	int CMP_XCHG__COMPAREVALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Newtype</b></em>' containment reference.
@@ -1540,7 +1485,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CMP_XCHG__NEWTYPE = STD_INSTR_FEATURE_COUNT + 4;
+	int CMP_XCHG__NEWTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Newvalue</b></em>' containment reference.
@@ -1549,7 +1494,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CMP_XCHG__NEWVALUE = STD_INSTR_FEATURE_COUNT + 5;
+	int CMP_XCHG__NEWVALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Ordering</b></em>' attribute.
@@ -1558,7 +1503,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CMP_XCHG__ORDERING = STD_INSTR_FEATURE_COUNT + 6;
+	int CMP_XCHG__ORDERING = STANDART_INSTRUCTION_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Cmp Xchg</em>' class.
@@ -1567,7 +1512,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CMP_XCHG_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 7;
+	int CMP_XCHG_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRMWImpl <em>Atomic RMW</em>}' class.
@@ -1577,7 +1522,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRMW()
 	 * @generated
 	 */
-	int ATOMIC_RMW = 38;
+	int ATOMIC_RMW = 37;
 
 	/**
 	 * The feature id for the '<em><b>Adresstype</b></em>' containment reference.
@@ -1586,7 +1531,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATOMIC_RMW__ADRESSTYPE = STD_INSTR_FEATURE_COUNT + 0;
+	int ATOMIC_RMW__ADRESSTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Adress</b></em>' containment reference.
@@ -1595,7 +1540,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATOMIC_RMW__ADRESS = STD_INSTR_FEATURE_COUNT + 1;
+	int ATOMIC_RMW__ADRESS = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Optype</b></em>' containment reference.
@@ -1604,7 +1549,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATOMIC_RMW__OPTYPE = STD_INSTR_FEATURE_COUNT + 2;
+	int ATOMIC_RMW__OPTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Opvalue</b></em>' containment reference.
@@ -1613,7 +1558,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATOMIC_RMW__OPVALUE = STD_INSTR_FEATURE_COUNT + 3;
+	int ATOMIC_RMW__OPVALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Ordering</b></em>' attribute.
@@ -1622,7 +1567,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATOMIC_RMW__ORDERING = STD_INSTR_FEATURE_COUNT + 4;
+	int ATOMIC_RMW__ORDERING = STANDART_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Atomic RMW</em>' class.
@@ -1631,7 +1576,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATOMIC_RMW_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 5;
+	int ATOMIC_RMW_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.LoadImpl <em>Load</em>}' class.
@@ -1641,7 +1586,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLoad()
 	 * @generated
 	 */
-	int LOAD = 39;
+	int LOAD = 38;
 
 	/**
 	 * The feature id for the '<em><b>Adresstype</b></em>' containment reference.
@@ -1650,7 +1595,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOAD__ADRESSTYPE = STD_INSTR_FEATURE_COUNT + 0;
+	int LOAD__ADRESSTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Types</b></em>' containment reference.
@@ -1659,7 +1604,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOAD__TYPES = STD_INSTR_FEATURE_COUNT + 1;
+	int LOAD__TYPES = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Adress</b></em>' containment reference.
@@ -1668,7 +1613,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOAD__ADRESS = STD_INSTR_FEATURE_COUNT + 2;
+	int LOAD__ADRESS = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Ordering</b></em>' attribute.
@@ -1677,7 +1622,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOAD__ORDERING = STD_INSTR_FEATURE_COUNT + 3;
+	int LOAD__ORDERING = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Index</b></em>' attribute.
@@ -1686,7 +1631,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOAD__INDEX = STD_INSTR_FEATURE_COUNT + 4;
+	int LOAD__INDEX = STANDART_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Load</em>' class.
@@ -1695,7 +1640,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOAD_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 5;
+	int LOAD_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.StoreImpl <em>Store</em>}' class.
@@ -1705,7 +1650,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getStore()
 	 * @generated
 	 */
-	int STORE = 40;
+	int STORE = 39;
 
 	/**
 	 * The feature id for the '<em><b>Newtype</b></em>' containment reference.
@@ -1714,7 +1659,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORE__NEWTYPE = STD_INSTR_FEATURE_COUNT + 0;
+	int STORE__NEWTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Types</b></em>' containment reference list.
@@ -1723,7 +1668,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORE__TYPES = STD_INSTR_FEATURE_COUNT + 1;
+	int STORE__TYPES = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Newvalue</b></em>' containment reference.
@@ -1732,7 +1677,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORE__NEWVALUE = STD_INSTR_FEATURE_COUNT + 2;
+	int STORE__NEWVALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Adresstype</b></em>' containment reference.
@@ -1741,7 +1686,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORE__ADRESSTYPE = STD_INSTR_FEATURE_COUNT + 3;
+	int STORE__ADRESSTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Adress</b></em>' containment reference.
@@ -1750,7 +1695,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORE__ADRESS = STD_INSTR_FEATURE_COUNT + 4;
+	int STORE__ADRESS = STANDART_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Ordering</b></em>' attribute.
@@ -1759,7 +1704,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORE__ORDERING = STD_INSTR_FEATURE_COUNT + 5;
+	int STORE__ORDERING = STANDART_INSTRUCTION_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Index</b></em>' attribute.
@@ -1768,7 +1713,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORE__INDEX = STD_INSTR_FEATURE_COUNT + 6;
+	int STORE__INDEX = STANDART_INSTRUCTION_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Store</em>' class.
@@ -1777,7 +1722,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORE_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 7;
+	int STORE_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.CallImpl <em>Call</em>}' class.
@@ -1787,7 +1732,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getCall()
 	 * @generated
 	 */
-	int CALL = 41;
+	int CALL = 40;
 
 	/**
 	 * The feature id for the '<em><b>Adresstype</b></em>' containment reference.
@@ -1796,7 +1741,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL__ADRESSTYPE = STD_INSTR_FEATURE_COUNT + 0;
+	int CALL__ADRESSTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Adress</b></em>' containment reference.
@@ -1805,7 +1750,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL__ADRESS = STD_INSTR_FEATURE_COUNT + 1;
+	int CALL__ADRESS = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>PList</b></em>' containment reference.
@@ -1814,7 +1759,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL__PLIST = STD_INSTR_FEATURE_COUNT + 2;
+	int CALL__PLIST = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Call</em>' class.
@@ -1823,7 +1768,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 3;
+	int CALL_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.AllocImpl <em>Alloc</em>}' class.
@@ -1833,7 +1778,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAlloc()
 	 * @generated
 	 */
-	int ALLOC = 42;
+	int ALLOC = 41;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -1842,7 +1787,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ALLOC__TYPE = STD_INSTR_FEATURE_COUNT + 0;
+	int ALLOC__TYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Typelist</b></em>' containment reference.
@@ -1851,7 +1796,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ALLOC__TYPELIST = STD_INSTR_FEATURE_COUNT + 1;
+	int ALLOC__TYPELIST = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Numelementstype</b></em>' containment reference.
@@ -1860,7 +1805,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ALLOC__NUMELEMENTSTYPE = STD_INSTR_FEATURE_COUNT + 2;
+	int ALLOC__NUMELEMENTSTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Numelementsvalue</b></em>' containment reference.
@@ -1869,7 +1814,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ALLOC__NUMELEMENTSVALUE = STD_INSTR_FEATURE_COUNT + 3;
+	int ALLOC__NUMELEMENTSVALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Alloc</em>' class.
@@ -1878,17 +1823,17 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ALLOC_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 4;
+	int ALLOC_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.PHIImpl <em>PHI</em>}' class.
+	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.PhiImpl <em>Phi</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.upb.llvm_parser.llvm.impl.PHIImpl
-	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getPHI()
+	 * @see de.upb.llvm_parser.llvm.impl.PhiImpl
+	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getPhi()
 	 * @generated
 	 */
-	int PHI = 43;
+	int PHI = 42;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -1897,7 +1842,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PHI__TYPE = STD_INSTR_FEATURE_COUNT + 0;
+	int PHI__TYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Firstclass</b></em>' containment reference list.
@@ -1906,7 +1851,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PHI__FIRSTCLASS = STD_INSTR_FEATURE_COUNT + 1;
+	int PHI__FIRSTCLASS = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -1915,16 +1860,16 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PHI__VALUES = STD_INSTR_FEATURE_COUNT + 2;
+	int PHI__VALUES = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>PHI</em>' class.
+	 * The number of structural features of the '<em>Phi</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PHI_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 3;
+	int PHI_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl <em>Landing Pad</em>}' class.
@@ -1934,7 +1879,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLandingPad()
 	 * @generated
 	 */
-	int LANDING_PAD = 44;
+	int LANDING_PAD = 43;
 
 	/**
 	 * The feature id for the '<em><b>Struct</b></em>' containment reference.
@@ -1943,7 +1888,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LANDING_PAD__STRUCT = STD_INSTR_FEATURE_COUNT + 0;
+	int LANDING_PAD__STRUCT = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Personalitytype</b></em>' containment reference.
@@ -1952,7 +1897,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LANDING_PAD__PERSONALITYTYPE = STD_INSTR_FEATURE_COUNT + 1;
+	int LANDING_PAD__PERSONALITYTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Personalityvalue</b></em>' containment reference.
@@ -1961,7 +1906,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LANDING_PAD__PERSONALITYVALUE = STD_INSTR_FEATURE_COUNT + 2;
+	int LANDING_PAD__PERSONALITYVALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Clause</b></em>' containment reference list.
@@ -1970,7 +1915,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LANDING_PAD__CLAUSE = STD_INSTR_FEATURE_COUNT + 3;
+	int LANDING_PAD__CLAUSE = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Landing Pad</em>' class.
@@ -1979,7 +1924,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LANDING_PAD_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 4;
+	int LANDING_PAD_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ClauseImpl <em>Clause</em>}' class.
@@ -1989,7 +1934,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getClause()
 	 * @generated
 	 */
-	int CLAUSE = 45;
+	int CLAUSE = 44;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -2044,7 +1989,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getSelect()
 	 * @generated
 	 */
-	int SELECT = 46;
+	int SELECT = 45;
 
 	/**
 	 * The feature id for the '<em><b>Conditiontype</b></em>' containment reference.
@@ -2053,7 +1998,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SELECT__CONDITIONTYPE = STD_INSTR_FEATURE_COUNT + 0;
+	int SELECT__CONDITIONTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Conditionvalue</b></em>' containment reference.
@@ -2062,7 +2007,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SELECT__CONDITIONVALUE = STD_INSTR_FEATURE_COUNT + 1;
+	int SELECT__CONDITIONVALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Val1type</b></em>' containment reference.
@@ -2071,7 +2016,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SELECT__VAL1TYPE = STD_INSTR_FEATURE_COUNT + 2;
+	int SELECT__VAL1TYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Val1value</b></em>' containment reference.
@@ -2080,7 +2025,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SELECT__VAL1VALUE = STD_INSTR_FEATURE_COUNT + 3;
+	int SELECT__VAL1VALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Val2type</b></em>' containment reference.
@@ -2089,7 +2034,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SELECT__VAL2TYPE = STD_INSTR_FEATURE_COUNT + 4;
+	int SELECT__VAL2TYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Val2value</b></em>' containment reference.
@@ -2098,7 +2043,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SELECT__VAL2VALUE = STD_INSTR_FEATURE_COUNT + 5;
+	int SELECT__VAL2VALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Select</em>' class.
@@ -2107,17 +2052,17 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SELECT_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 6;
+	int SELECT_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 6;
 
 	/**
-	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.VA_ArgImpl <em>VA Arg</em>}' class.
+	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.VariableAttributeAccessImpl <em>Variable Attribute Access</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.upb.llvm_parser.llvm.impl.VA_ArgImpl
-	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getVA_Arg()
+	 * @see de.upb.llvm_parser.llvm.impl.VariableAttributeAccessImpl
+	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getVariableAttributeAccess()
 	 * @generated
 	 */
-	int VA_ARG = 47;
+	int VARIABLE_ATTRIBUTE_ACCESS = 46;
 
 	/**
 	 * The feature id for the '<em><b>Listtype</b></em>' containment reference.
@@ -2126,7 +2071,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VA_ARG__LISTTYPE = STD_INSTR_FEATURE_COUNT + 0;
+	int VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Listvalue</b></em>' containment reference.
@@ -2135,7 +2080,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VA_ARG__LISTVALUE = STD_INSTR_FEATURE_COUNT + 1;
+	int VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Arg Type</b></em>' containment reference.
@@ -2144,16 +2089,16 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VA_ARG__ARG_TYPE = STD_INSTR_FEATURE_COUNT + 2;
+	int VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>VA Arg</em>' class.
+	 * The number of structural features of the '<em>Variable Attribute Access</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VA_ARG_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 3;
+	int VARIABLE_ATTRIBUTE_ACCESS_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ExtractElementImpl <em>Extract Element</em>}' class.
@@ -2163,7 +2108,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getExtractElement()
 	 * @generated
 	 */
-	int EXTRACT_ELEMENT = 48;
+	int EXTRACT_ELEMENT = 47;
 
 	/**
 	 * The feature id for the '<em><b>Vectortype</b></em>' containment reference.
@@ -2172,7 +2117,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTRACT_ELEMENT__VECTORTYPE = STD_INSTR_FEATURE_COUNT + 0;
+	int EXTRACT_ELEMENT__VECTORTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Vectorvalue</b></em>' containment reference.
@@ -2181,7 +2126,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTRACT_ELEMENT__VECTORVALUE = STD_INSTR_FEATURE_COUNT + 1;
+	int EXTRACT_ELEMENT__VECTORVALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Indextype</b></em>' containment reference.
@@ -2190,7 +2135,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTRACT_ELEMENT__INDEXTYPE = STD_INSTR_FEATURE_COUNT + 2;
+	int EXTRACT_ELEMENT__INDEXTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Index</b></em>' containment reference.
@@ -2199,7 +2144,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTRACT_ELEMENT__INDEX = STD_INSTR_FEATURE_COUNT + 3;
+	int EXTRACT_ELEMENT__INDEX = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Extract Element</em>' class.
@@ -2208,7 +2153,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTRACT_ELEMENT_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 4;
+	int EXTRACT_ELEMENT_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.InsertElementImpl <em>Insert Element</em>}' class.
@@ -2218,7 +2163,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getInsertElement()
 	 * @generated
 	 */
-	int INSERT_ELEMENT = 49;
+	int INSERT_ELEMENT = 48;
 
 	/**
 	 * The feature id for the '<em><b>Vectortype</b></em>' containment reference.
@@ -2227,7 +2172,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSERT_ELEMENT__VECTORTYPE = STD_INSTR_FEATURE_COUNT + 0;
+	int INSERT_ELEMENT__VECTORTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Vectorvalue</b></em>' containment reference.
@@ -2236,7 +2181,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSERT_ELEMENT__VECTORVALUE = STD_INSTR_FEATURE_COUNT + 1;
+	int INSERT_ELEMENT__VECTORVALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Scalartype</b></em>' containment reference.
@@ -2245,7 +2190,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSERT_ELEMENT__SCALARTYPE = STD_INSTR_FEATURE_COUNT + 2;
+	int INSERT_ELEMENT__SCALARTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Scalarvalue</b></em>' containment reference.
@@ -2254,7 +2199,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSERT_ELEMENT__SCALARVALUE = STD_INSTR_FEATURE_COUNT + 3;
+	int INSERT_ELEMENT__SCALARVALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Indextype</b></em>' containment reference.
@@ -2263,7 +2208,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSERT_ELEMENT__INDEXTYPE = STD_INSTR_FEATURE_COUNT + 4;
+	int INSERT_ELEMENT__INDEXTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Index</b></em>' containment reference.
@@ -2272,7 +2217,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSERT_ELEMENT__INDEX = STD_INSTR_FEATURE_COUNT + 5;
+	int INSERT_ELEMENT__INDEX = STANDART_INSTRUCTION_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Insert Element</em>' class.
@@ -2281,7 +2226,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSERT_ELEMENT_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 6;
+	int INSERT_ELEMENT_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ShuffleVectorImpl <em>Shuffle Vector</em>}' class.
@@ -2291,7 +2236,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getShuffleVector()
 	 * @generated
 	 */
-	int SHUFFLE_VECTOR = 50;
+	int SHUFFLE_VECTOR = 49;
 
 	/**
 	 * The feature id for the '<em><b>Val1type</b></em>' containment reference.
@@ -2300,7 +2245,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SHUFFLE_VECTOR__VAL1TYPE = STD_INSTR_FEATURE_COUNT + 0;
+	int SHUFFLE_VECTOR__VAL1TYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Val1value</b></em>' containment reference.
@@ -2309,7 +2254,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SHUFFLE_VECTOR__VAL1VALUE = STD_INSTR_FEATURE_COUNT + 1;
+	int SHUFFLE_VECTOR__VAL1VALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Val2type</b></em>' containment reference.
@@ -2318,7 +2263,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SHUFFLE_VECTOR__VAL2TYPE = STD_INSTR_FEATURE_COUNT + 2;
+	int SHUFFLE_VECTOR__VAL2TYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Val2value</b></em>' containment reference.
@@ -2327,7 +2272,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SHUFFLE_VECTOR__VAL2VALUE = STD_INSTR_FEATURE_COUNT + 3;
+	int SHUFFLE_VECTOR__VAL2VALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Masktype</b></em>' containment reference.
@@ -2336,7 +2281,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SHUFFLE_VECTOR__MASKTYPE = STD_INSTR_FEATURE_COUNT + 4;
+	int SHUFFLE_VECTOR__MASKTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Maskvalue</b></em>' containment reference.
@@ -2345,7 +2290,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SHUFFLE_VECTOR__MASKVALUE = STD_INSTR_FEATURE_COUNT + 5;
+	int SHUFFLE_VECTOR__MASKVALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Shuffle Vector</em>' class.
@@ -2354,7 +2299,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SHUFFLE_VECTOR_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 6;
+	int SHUFFLE_VECTOR_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.CompareImpl <em>Compare</em>}' class.
@@ -2364,7 +2309,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getCompare()
 	 * @generated
 	 */
-	int COMPARE = 51;
+	int COMPARE = 50;
 
 	/**
 	 * The feature id for the '<em><b>Comptype</b></em>' containment reference.
@@ -2373,7 +2318,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPARE__COMPTYPE = STD_INSTR_FEATURE_COUNT + 0;
+	int COMPARE__COMPTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Value1</b></em>' containment reference.
@@ -2382,7 +2327,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPARE__VALUE1 = STD_INSTR_FEATURE_COUNT + 1;
+	int COMPARE__VALUE1 = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Value2</b></em>' containment reference.
@@ -2391,7 +2336,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPARE__VALUE2 = STD_INSTR_FEATURE_COUNT + 2;
+	int COMPARE__VALUE2 = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Compare</em>' class.
@@ -2400,7 +2345,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPARE_FEATURE_COUNT = STD_INSTR_FEATURE_COUNT + 3;
+	int COMPARE_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.IndirectBranchImpl <em>Indirect Branch</em>}' class.
@@ -2410,7 +2355,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getIndirectBranch()
 	 * @generated
 	 */
-	int INDIRECT_BRANCH = 52;
+	int INDIRECT_BRANCH = 51;
 
 	/**
 	 * The feature id for the '<em><b>Adresstype</b></em>' containment reference.
@@ -2419,7 +2364,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INDIRECT_BRANCH__ADRESSTYPE = RET_INSTR_FEATURE_COUNT + 0;
+	int INDIRECT_BRANCH__ADRESSTYPE = RETURN_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Adress</b></em>' containment reference.
@@ -2428,7 +2373,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INDIRECT_BRANCH__ADRESS = RET_INSTR_FEATURE_COUNT + 1;
+	int INDIRECT_BRANCH__ADRESS = RETURN_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Labeltype</b></em>' containment reference list.
@@ -2437,7 +2382,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INDIRECT_BRANCH__LABELTYPE = RET_INSTR_FEATURE_COUNT + 2;
+	int INDIRECT_BRANCH__LABELTYPE = RETURN_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
@@ -2446,7 +2391,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INDIRECT_BRANCH__LABELS = RET_INSTR_FEATURE_COUNT + 3;
+	int INDIRECT_BRANCH__LABELS = RETURN_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Indirect Branch</em>' class.
@@ -2455,7 +2400,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INDIRECT_BRANCH_FEATURE_COUNT = RET_INSTR_FEATURE_COUNT + 4;
+	int INDIRECT_BRANCH_FEATURE_COUNT = RETURN_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.SwitchImpl <em>Switch</em>}' class.
@@ -2465,7 +2410,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getSwitch()
 	 * @generated
 	 */
-	int SWITCH = 53;
+	int SWITCH = 52;
 
 	/**
 	 * The feature id for the '<em><b>Comptype</b></em>' containment reference.
@@ -2474,7 +2419,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH__COMPTYPE = RET_INSTR_FEATURE_COUNT + 0;
+	int SWITCH__COMPTYPE = RETURN_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Compvalue</b></em>' containment reference.
@@ -2483,7 +2428,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH__COMPVALUE = RET_INSTR_FEATURE_COUNT + 1;
+	int SWITCH__COMPVALUE = RETURN_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Defaulttype</b></em>' containment reference.
@@ -2492,7 +2437,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH__DEFAULTTYPE = RET_INSTR_FEATURE_COUNT + 2;
+	int SWITCH__DEFAULTTYPE = RETURN_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Defaultvalue</b></em>' containment reference.
@@ -2501,7 +2446,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH__DEFAULTVALUE = RET_INSTR_FEATURE_COUNT + 3;
+	int SWITCH__DEFAULTVALUE = RETURN_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Jtypes</b></em>' containment reference list.
@@ -2510,7 +2455,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH__JTYPES = RET_INSTR_FEATURE_COUNT + 4;
+	int SWITCH__JTYPES = RETURN_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Jvalues</b></em>' containment reference list.
@@ -2519,7 +2464,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH__JVALUES = RET_INSTR_FEATURE_COUNT + 5;
+	int SWITCH__JVALUES = RETURN_INSTRUCTION_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Destinationtypes</b></em>' containment reference list.
@@ -2528,7 +2473,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH__DESTINATIONTYPES = RET_INSTR_FEATURE_COUNT + 6;
+	int SWITCH__DESTINATIONTYPES = RETURN_INSTRUCTION_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Destinations</b></em>' containment reference list.
@@ -2537,7 +2482,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH__DESTINATIONS = RET_INSTR_FEATURE_COUNT + 7;
+	int SWITCH__DESTINATIONS = RETURN_INSTRUCTION_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Switch</em>' class.
@@ -2546,7 +2491,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH_FEATURE_COUNT = RET_INSTR_FEATURE_COUNT + 8;
+	int SWITCH_FEATURE_COUNT = RETURN_INSTRUCTION_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.InvokeImpl <em>Invoke</em>}' class.
@@ -2556,7 +2501,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getInvoke()
 	 * @generated
 	 */
-	int INVOKE = 54;
+	int INVOKE = 53;
 
 	/**
 	 * The feature id for the '<em><b>Functiontype</b></em>' containment reference.
@@ -2565,7 +2510,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INVOKE__FUNCTIONTYPE = RET_INSTR_FEATURE_COUNT + 0;
+	int INVOKE__FUNCTIONTYPE = RETURN_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' containment reference.
@@ -2574,7 +2519,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INVOKE__NAME = RET_INSTR_FEATURE_COUNT + 1;
+	int INVOKE__NAME = RETURN_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>PList</b></em>' containment reference.
@@ -2583,7 +2528,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INVOKE__PLIST = RET_INSTR_FEATURE_COUNT + 2;
+	int INVOKE__PLIST = RETURN_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Totype</b></em>' containment reference.
@@ -2592,7 +2537,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INVOKE__TOTYPE = RET_INSTR_FEATURE_COUNT + 3;
+	int INVOKE__TOTYPE = RETURN_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Tovalue</b></em>' containment reference.
@@ -2601,7 +2546,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INVOKE__TOVALUE = RET_INSTR_FEATURE_COUNT + 4;
+	int INVOKE__TOVALUE = RETURN_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Unwindtype</b></em>' containment reference.
@@ -2610,7 +2555,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INVOKE__UNWINDTYPE = RET_INSTR_FEATURE_COUNT + 5;
+	int INVOKE__UNWINDTYPE = RETURN_INSTRUCTION_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Unwindvalue</b></em>' containment reference.
@@ -2619,7 +2564,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INVOKE__UNWINDVALUE = RET_INSTR_FEATURE_COUNT + 6;
+	int INVOKE__UNWINDVALUE = RETURN_INSTRUCTION_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Invoke</em>' class.
@@ -2628,7 +2573,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INVOKE_FEATURE_COUNT = RET_INSTR_FEATURE_COUNT + 7;
+	int INVOKE_FEATURE_COUNT = RETURN_INSTRUCTION_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ResumeImpl <em>Resume</em>}' class.
@@ -2638,7 +2583,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getResume()
 	 * @generated
 	 */
-	int RESUME = 55;
+	int RESUME = 54;
 
 	/**
 	 * The feature id for the '<em><b>Resumestruct</b></em>' containment reference.
@@ -2647,7 +2592,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESUME__RESUMESTRUCT = RET_INSTR_FEATURE_COUNT + 0;
+	int RESUME__RESUMESTRUCT = RETURN_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Resumevalue</b></em>' containment reference.
@@ -2656,7 +2601,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESUME__RESUMEVALUE = RET_INSTR_FEATURE_COUNT + 1;
+	int RESUME__RESUMEVALUE = RETURN_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Resume</em>' class.
@@ -2665,7 +2610,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESUME_FEATURE_COUNT = RET_INSTR_FEATURE_COUNT + 2;
+	int RESUME_FEATURE_COUNT = RETURN_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.UnreachableImpl <em>Unreachable</em>}' class.
@@ -2675,7 +2620,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getUnreachable()
 	 * @generated
 	 */
-	int UNREACHABLE = 56;
+	int UNREACHABLE = 55;
 
 	/**
 	 * The number of structural features of the '<em>Unreachable</em>' class.
@@ -2684,7 +2629,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNREACHABLE_FEATURE_COUNT = RET_INSTR_FEATURE_COUNT + 0;
+	int UNREACHABLE_FEATURE_COUNT = RETURN_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ReturnImpl <em>Return</em>}' class.
@@ -2694,7 +2639,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getReturn()
 	 * @generated
 	 */
-	int RETURN = 57;
+	int RETURN = 56;
 
 	/**
 	 * The feature id for the '<em><b>Returntype</b></em>' containment reference.
@@ -2703,7 +2648,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RETURN__RETURNTYPE = RET_INSTR_FEATURE_COUNT + 0;
+	int RETURN__RETURNTYPE = RETURN_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Returnvalue</b></em>' containment reference.
@@ -2712,7 +2657,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RETURN__RETURNVALUE = RET_INSTR_FEATURE_COUNT + 1;
+	int RETURN__RETURNVALUE = RETURN_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Return</em>' class.
@@ -2721,7 +2666,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RETURN_FEATURE_COUNT = RET_INSTR_FEATURE_COUNT + 2;
+	int RETURN_FEATURE_COUNT = RETURN_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.BranchImpl <em>Branch</em>}' class.
@@ -2731,7 +2676,7 @@ public interface LlvmPackage extends EPackage {
 	 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getBranch()
 	 * @generated
 	 */
-	int BRANCH = 58;
+	int BRANCH = 57;
 
 	/**
 	 * The feature id for the '<em><b>Destination</b></em>' containment reference.
@@ -2740,7 +2685,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BRANCH__DESTINATION = RET_INSTR_FEATURE_COUNT + 0;
+	int BRANCH__DESTINATION = RETURN_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Condvalue</b></em>' containment reference.
@@ -2749,7 +2694,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BRANCH__CONDVALUE = RET_INSTR_FEATURE_COUNT + 1;
+	int BRANCH__CONDVALUE = RETURN_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Label Truetype</b></em>' containment reference.
@@ -2758,7 +2703,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BRANCH__LABEL_TRUETYPE = RET_INSTR_FEATURE_COUNT + 2;
+	int BRANCH__LABEL_TRUETYPE = RETURN_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Label True</b></em>' containment reference.
@@ -2767,7 +2712,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BRANCH__LABEL_TRUE = RET_INSTR_FEATURE_COUNT + 3;
+	int BRANCH__LABEL_TRUE = RETURN_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Label Falsetype</b></em>' containment reference.
@@ -2776,7 +2721,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BRANCH__LABEL_FALSETYPE = RET_INSTR_FEATURE_COUNT + 4;
+	int BRANCH__LABEL_FALSETYPE = RETURN_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Label False</b></em>' containment reference.
@@ -2785,7 +2730,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BRANCH__LABEL_FALSE = RET_INSTR_FEATURE_COUNT + 5;
+	int BRANCH__LABEL_FALSE = RETURN_INSTRUCTION_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Branch</em>' class.
@@ -2794,7 +2739,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BRANCH_FEATURE_COUNT = RET_INSTR_FEATURE_COUNT + 6;
+	int BRANCH_FEATURE_COUNT = RETURN_INSTRUCTION_FEATURE_COUNT + 6;
 
 
 	/**
@@ -3542,110 +3487,110 @@ public interface LlvmPackage extends EPackage {
 	EReference getInstructionUse_Instruction();
 
 	/**
-	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.Ret_Instr <em>Ret Instr</em>}'.
+	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ReturnInstruction <em>Return Instruction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Ret Instr</em>'.
-	 * @see de.upb.llvm_parser.llvm.Ret_Instr
+	 * @return the meta object for class '<em>Return Instruction</em>'.
+	 * @see de.upb.llvm_parser.llvm.ReturnInstruction
 	 * @generated
 	 */
-	EClass getRet_Instr();
+	EClass getReturnInstruction();
 
 	/**
-	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.Std_Instr <em>Std Instr</em>}'.
+	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.StandartInstruction <em>Standart Instruction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Std Instr</em>'.
-	 * @see de.upb.llvm_parser.llvm.Std_Instr
+	 * @return the meta object for class '<em>Standart Instruction</em>'.
+	 * @see de.upb.llvm_parser.llvm.StandartInstruction
 	 * @generated
 	 */
-	EClass getStd_Instr();
+	EClass getStandartInstruction();
 
 	/**
-	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ARITHMETIC_OP <em>ARITHMETIC OP</em>}'.
+	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ArithmeticOperation <em>Arithmetic Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>ARITHMETIC OP</em>'.
-	 * @see de.upb.llvm_parser.llvm.ARITHMETIC_OP
+	 * @return the meta object for class '<em>Arithmetic Operation</em>'.
+	 * @see de.upb.llvm_parser.llvm.ArithmeticOperation
 	 * @generated
 	 */
-	EClass getARITHMETIC_OP();
+	EClass getArithmeticOperation();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.ARITHMETIC_OP#getOptype <em>Optype</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.ArithmeticOperation#getOptype <em>Optype</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Optype</em>'.
-	 * @see de.upb.llvm_parser.llvm.ARITHMETIC_OP#getOptype()
-	 * @see #getARITHMETIC_OP()
+	 * @see de.upb.llvm_parser.llvm.ArithmeticOperation#getOptype()
+	 * @see #getArithmeticOperation()
 	 * @generated
 	 */
-	EReference getARITHMETIC_OP_Optype();
+	EReference getArithmeticOperation_Optype();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.ARITHMETIC_OP#getValue1 <em>Value1</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.ArithmeticOperation#getValue1 <em>Value1</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Value1</em>'.
-	 * @see de.upb.llvm_parser.llvm.ARITHMETIC_OP#getValue1()
-	 * @see #getARITHMETIC_OP()
+	 * @see de.upb.llvm_parser.llvm.ArithmeticOperation#getValue1()
+	 * @see #getArithmeticOperation()
 	 * @generated
 	 */
-	EReference getARITHMETIC_OP_Value1();
+	EReference getArithmeticOperation_Value1();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.ARITHMETIC_OP#getValue2 <em>Value2</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.ArithmeticOperation#getValue2 <em>Value2</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Value2</em>'.
-	 * @see de.upb.llvm_parser.llvm.ARITHMETIC_OP#getValue2()
-	 * @see #getARITHMETIC_OP()
+	 * @see de.upb.llvm_parser.llvm.ArithmeticOperation#getValue2()
+	 * @see #getArithmeticOperation()
 	 * @generated
 	 */
-	EReference getARITHMETIC_OP_Value2();
+	EReference getArithmeticOperation_Value2();
 
 	/**
-	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.LOGICAL_OP <em>LOGICAL OP</em>}'.
+	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.LogicOperation <em>Logic Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>LOGICAL OP</em>'.
-	 * @see de.upb.llvm_parser.llvm.LOGICAL_OP
+	 * @return the meta object for class '<em>Logic Operation</em>'.
+	 * @see de.upb.llvm_parser.llvm.LogicOperation
 	 * @generated
 	 */
-	EClass getLOGICAL_OP();
+	EClass getLogicOperation();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.LOGICAL_OP#getOptype <em>Optype</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.LogicOperation#getOptype <em>Optype</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Optype</em>'.
-	 * @see de.upb.llvm_parser.llvm.LOGICAL_OP#getOptype()
-	 * @see #getLOGICAL_OP()
+	 * @see de.upb.llvm_parser.llvm.LogicOperation#getOptype()
+	 * @see #getLogicOperation()
 	 * @generated
 	 */
-	EReference getLOGICAL_OP_Optype();
+	EReference getLogicOperation_Optype();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.LOGICAL_OP#getValue1 <em>Value1</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.LogicOperation#getValue1 <em>Value1</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Value1</em>'.
-	 * @see de.upb.llvm_parser.llvm.LOGICAL_OP#getValue1()
-	 * @see #getLOGICAL_OP()
+	 * @see de.upb.llvm_parser.llvm.LogicOperation#getValue1()
+	 * @see #getLogicOperation()
 	 * @generated
 	 */
-	EReference getLOGICAL_OP_Value1();
+	EReference getLogicOperation_Value1();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.LOGICAL_OP#getValue2 <em>Value2</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.LogicOperation#getValue2 <em>Value2</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Value2</em>'.
-	 * @see de.upb.llvm_parser.llvm.LOGICAL_OP#getValue2()
-	 * @see #getLOGICAL_OP()
+	 * @see de.upb.llvm_parser.llvm.LogicOperation#getValue2()
+	 * @see #getLogicOperation()
 	 * @generated
 	 */
-	EReference getLOGICAL_OP_Value2();
+	EReference getLogicOperation_Value2();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.Cast <em>Cast</em>}'.
@@ -3745,24 +3690,58 @@ public interface LlvmPackage extends EPackage {
 	EReference getGetElementPtr_Indizies();
 
 	/**
-	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.GetElementPtr1 <em>Get Element Ptr1</em>}'.
+	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.NestedGetElementPtr <em>Nested Get Element Ptr</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Get Element Ptr1</em>'.
-	 * @see de.upb.llvm_parser.llvm.GetElementPtr1
+	 * @return the meta object for class '<em>Nested Get Element Ptr</em>'.
+	 * @see de.upb.llvm_parser.llvm.NestedGetElementPtr
 	 * @generated
 	 */
-	EClass getGetElementPtr1();
+	EClass getNestedGetElementPtr();
 
 	/**
-	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.GetElementPtr2 <em>Get Element Ptr2</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.NestedGetElementPtr#getAggregate <em>Aggregate</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Get Element Ptr2</em>'.
-	 * @see de.upb.llvm_parser.llvm.GetElementPtr2
+	 * @return the meta object for the containment reference '<em>Aggregate</em>'.
+	 * @see de.upb.llvm_parser.llvm.NestedGetElementPtr#getAggregate()
+	 * @see #getNestedGetElementPtr()
 	 * @generated
 	 */
-	EClass getGetElementPtr2();
+	EReference getNestedGetElementPtr_Aggregate();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.NestedGetElementPtr#getAggregatename <em>Aggregatename</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Aggregatename</em>'.
+	 * @see de.upb.llvm_parser.llvm.NestedGetElementPtr#getAggregatename()
+	 * @see #getNestedGetElementPtr()
+	 * @generated
+	 */
+	EReference getNestedGetElementPtr_Aggregatename();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.NestedGetElementPtr#getIndTypes <em>Ind Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Ind Types</em>'.
+	 * @see de.upb.llvm_parser.llvm.NestedGetElementPtr#getIndTypes()
+	 * @see #getNestedGetElementPtr()
+	 * @generated
+	 */
+	EReference getNestedGetElementPtr_IndTypes();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.NestedGetElementPtr#getIndizies <em>Indizies</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Indizies</em>'.
+	 * @see de.upb.llvm_parser.llvm.NestedGetElementPtr#getIndizies()
+	 * @see #getNestedGetElementPtr()
+	 * @generated
+	 */
+	EReference getNestedGetElementPtr_Indizies();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ExtractValue <em>Extract Value</em>}'.
@@ -4306,47 +4285,47 @@ public interface LlvmPackage extends EPackage {
 	EReference getAlloc_Numelementsvalue();
 
 	/**
-	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.PHI <em>PHI</em>}'.
+	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.Phi <em>Phi</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>PHI</em>'.
-	 * @see de.upb.llvm_parser.llvm.PHI
+	 * @return the meta object for class '<em>Phi</em>'.
+	 * @see de.upb.llvm_parser.llvm.Phi
 	 * @generated
 	 */
-	EClass getPHI();
+	EClass getPhi();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.PHI#getType <em>Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.Phi#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Type</em>'.
-	 * @see de.upb.llvm_parser.llvm.PHI#getType()
-	 * @see #getPHI()
+	 * @see de.upb.llvm_parser.llvm.Phi#getType()
+	 * @see #getPhi()
 	 * @generated
 	 */
-	EReference getPHI_Type();
+	EReference getPhi_Type();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.PHI#getFirstclass <em>Firstclass</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.Phi#getFirstclass <em>Firstclass</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Firstclass</em>'.
-	 * @see de.upb.llvm_parser.llvm.PHI#getFirstclass()
-	 * @see #getPHI()
+	 * @see de.upb.llvm_parser.llvm.Phi#getFirstclass()
+	 * @see #getPhi()
 	 * @generated
 	 */
-	EReference getPHI_Firstclass();
+	EReference getPhi_Firstclass();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.PHI#getValues <em>Values</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.Phi#getValues <em>Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Values</em>'.
-	 * @see de.upb.llvm_parser.llvm.PHI#getValues()
-	 * @see #getPHI()
+	 * @see de.upb.llvm_parser.llvm.Phi#getValues()
+	 * @see #getPhi()
 	 * @generated
 	 */
-	EReference getPHI_Values();
+	EReference getPhi_Values();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.LandingPad <em>Landing Pad</em>}'.
@@ -4533,47 +4512,47 @@ public interface LlvmPackage extends EPackage {
 	EReference getSelect_Val2value();
 
 	/**
-	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.VA_Arg <em>VA Arg</em>}'.
+	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.VariableAttributeAccess <em>Variable Attribute Access</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>VA Arg</em>'.
-	 * @see de.upb.llvm_parser.llvm.VA_Arg
+	 * @return the meta object for class '<em>Variable Attribute Access</em>'.
+	 * @see de.upb.llvm_parser.llvm.VariableAttributeAccess
 	 * @generated
 	 */
-	EClass getVA_Arg();
+	EClass getVariableAttributeAccess();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.VA_Arg#getListtype <em>Listtype</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.VariableAttributeAccess#getListtype <em>Listtype</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Listtype</em>'.
-	 * @see de.upb.llvm_parser.llvm.VA_Arg#getListtype()
-	 * @see #getVA_Arg()
+	 * @see de.upb.llvm_parser.llvm.VariableAttributeAccess#getListtype()
+	 * @see #getVariableAttributeAccess()
 	 * @generated
 	 */
-	EReference getVA_Arg_Listtype();
+	EReference getVariableAttributeAccess_Listtype();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.VA_Arg#getListvalue <em>Listvalue</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.VariableAttributeAccess#getListvalue <em>Listvalue</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Listvalue</em>'.
-	 * @see de.upb.llvm_parser.llvm.VA_Arg#getListvalue()
-	 * @see #getVA_Arg()
+	 * @see de.upb.llvm_parser.llvm.VariableAttributeAccess#getListvalue()
+	 * @see #getVariableAttributeAccess()
 	 * @generated
 	 */
-	EReference getVA_Arg_Listvalue();
+	EReference getVariableAttributeAccess_Listvalue();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.VA_Arg#getArgType <em>Arg Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.VariableAttributeAccess#getArgType <em>Arg Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Arg Type</em>'.
-	 * @see de.upb.llvm_parser.llvm.VA_Arg#getArgType()
-	 * @see #getVA_Arg()
+	 * @see de.upb.llvm_parser.llvm.VariableAttributeAccess#getArgType()
+	 * @see #getVariableAttributeAccess()
 	 * @generated
 	 */
-	EReference getVA_Arg_ArgType();
+	EReference getVariableAttributeAccess_ArgType();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ExtractElement <em>Extract Element</em>}'.
@@ -5848,68 +5827,34 @@ public interface LlvmPackage extends EPackage {
 		EReference INSTRUCTION_USE__INSTRUCTION = eINSTANCE.getInstructionUse_Instruction();
 
 		/**
-		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.Ret_InstrImpl <em>Ret Instr</em>}' class.
+		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ReturnInstructionImpl <em>Return Instruction</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.upb.llvm_parser.llvm.impl.Ret_InstrImpl
-		 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getRet_Instr()
+		 * @see de.upb.llvm_parser.llvm.impl.ReturnInstructionImpl
+		 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getReturnInstruction()
 		 * @generated
 		 */
-		EClass RET_INSTR = eINSTANCE.getRet_Instr();
+		EClass RETURN_INSTRUCTION = eINSTANCE.getReturnInstruction();
 
 		/**
-		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.Std_InstrImpl <em>Std Instr</em>}' class.
+		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.StandartInstructionImpl <em>Standart Instruction</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.upb.llvm_parser.llvm.impl.Std_InstrImpl
-		 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getStd_Instr()
+		 * @see de.upb.llvm_parser.llvm.impl.StandartInstructionImpl
+		 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getStandartInstruction()
 		 * @generated
 		 */
-		EClass STD_INSTR = eINSTANCE.getStd_Instr();
+		EClass STANDART_INSTRUCTION = eINSTANCE.getStandartInstruction();
 
 		/**
-		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ARITHMETIC_OPImpl <em>ARITHMETIC OP</em>}' class.
+		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationImpl <em>Arithmetic Operation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.upb.llvm_parser.llvm.impl.ARITHMETIC_OPImpl
-		 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getARITHMETIC_OP()
+		 * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationImpl
+		 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperation()
 		 * @generated
 		 */
-		EClass ARITHMETIC_OP = eINSTANCE.getARITHMETIC_OP();
-
-		/**
-		 * The meta object literal for the '<em><b>Optype</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ARITHMETIC_OP__OPTYPE = eINSTANCE.getARITHMETIC_OP_Optype();
-
-		/**
-		 * The meta object literal for the '<em><b>Value1</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ARITHMETIC_OP__VALUE1 = eINSTANCE.getARITHMETIC_OP_Value1();
-
-		/**
-		 * The meta object literal for the '<em><b>Value2</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ARITHMETIC_OP__VALUE2 = eINSTANCE.getARITHMETIC_OP_Value2();
-
-		/**
-		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.LOGICAL_OPImpl <em>LOGICAL OP</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.upb.llvm_parser.llvm.impl.LOGICAL_OPImpl
-		 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLOGICAL_OP()
-		 * @generated
-		 */
-		EClass LOGICAL_OP = eINSTANCE.getLOGICAL_OP();
+		EClass ARITHMETIC_OPERATION = eINSTANCE.getArithmeticOperation();
 
 		/**
 		 * The meta object literal for the '<em><b>Optype</b></em>' containment reference feature.
@@ -5917,7 +5862,7 @@ public interface LlvmPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LOGICAL_OP__OPTYPE = eINSTANCE.getLOGICAL_OP_Optype();
+		EReference ARITHMETIC_OPERATION__OPTYPE = eINSTANCE.getArithmeticOperation_Optype();
 
 		/**
 		 * The meta object literal for the '<em><b>Value1</b></em>' containment reference feature.
@@ -5925,7 +5870,7 @@ public interface LlvmPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LOGICAL_OP__VALUE1 = eINSTANCE.getLOGICAL_OP_Value1();
+		EReference ARITHMETIC_OPERATION__VALUE1 = eINSTANCE.getArithmeticOperation_Value1();
 
 		/**
 		 * The meta object literal for the '<em><b>Value2</b></em>' containment reference feature.
@@ -5933,7 +5878,41 @@ public interface LlvmPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LOGICAL_OP__VALUE2 = eINSTANCE.getLOGICAL_OP_Value2();
+		EReference ARITHMETIC_OPERATION__VALUE2 = eINSTANCE.getArithmeticOperation_Value2();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.LogicOperationImpl <em>Logic Operation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.llvm_parser.llvm.impl.LogicOperationImpl
+		 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLogicOperation()
+		 * @generated
+		 */
+		EClass LOGIC_OPERATION = eINSTANCE.getLogicOperation();
+
+		/**
+		 * The meta object literal for the '<em><b>Optype</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOGIC_OPERATION__OPTYPE = eINSTANCE.getLogicOperation_Optype();
+
+		/**
+		 * The meta object literal for the '<em><b>Value1</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOGIC_OPERATION__VALUE1 = eINSTANCE.getLogicOperation_Value1();
+
+		/**
+		 * The meta object literal for the '<em><b>Value2</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOGIC_OPERATION__VALUE2 = eINSTANCE.getLogicOperation_Value2();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.CastImpl <em>Cast</em>}' class.
@@ -6012,24 +5991,46 @@ public interface LlvmPackage extends EPackage {
 		EReference GET_ELEMENT_PTR__INDIZIES = eINSTANCE.getGetElementPtr_Indizies();
 
 		/**
-		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.GetElementPtr1Impl <em>Get Element Ptr1</em>}' class.
+		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.NestedGetElementPtrImpl <em>Nested Get Element Ptr</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.upb.llvm_parser.llvm.impl.GetElementPtr1Impl
-		 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getGetElementPtr1()
+		 * @see de.upb.llvm_parser.llvm.impl.NestedGetElementPtrImpl
+		 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getNestedGetElementPtr()
 		 * @generated
 		 */
-		EClass GET_ELEMENT_PTR1 = eINSTANCE.getGetElementPtr1();
+		EClass NESTED_GET_ELEMENT_PTR = eINSTANCE.getNestedGetElementPtr();
 
 		/**
-		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.GetElementPtr2Impl <em>Get Element Ptr2</em>}' class.
+		 * The meta object literal for the '<em><b>Aggregate</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.upb.llvm_parser.llvm.impl.GetElementPtr2Impl
-		 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getGetElementPtr2()
 		 * @generated
 		 */
-		EClass GET_ELEMENT_PTR2 = eINSTANCE.getGetElementPtr2();
+		EReference NESTED_GET_ELEMENT_PTR__AGGREGATE = eINSTANCE.getNestedGetElementPtr_Aggregate();
+
+		/**
+		 * The meta object literal for the '<em><b>Aggregatename</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NESTED_GET_ELEMENT_PTR__AGGREGATENAME = eINSTANCE.getNestedGetElementPtr_Aggregatename();
+
+		/**
+		 * The meta object literal for the '<em><b>Ind Types</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NESTED_GET_ELEMENT_PTR__IND_TYPES = eINSTANCE.getNestedGetElementPtr_IndTypes();
+
+		/**
+		 * The meta object literal for the '<em><b>Indizies</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NESTED_GET_ELEMENT_PTR__INDIZIES = eINSTANCE.getNestedGetElementPtr_Indizies();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ExtractValueImpl <em>Extract Value</em>}' class.
@@ -6450,14 +6451,14 @@ public interface LlvmPackage extends EPackage {
 		EReference ALLOC__NUMELEMENTSVALUE = eINSTANCE.getAlloc_Numelementsvalue();
 
 		/**
-		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.PHIImpl <em>PHI</em>}' class.
+		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.PhiImpl <em>Phi</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.upb.llvm_parser.llvm.impl.PHIImpl
-		 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getPHI()
+		 * @see de.upb.llvm_parser.llvm.impl.PhiImpl
+		 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getPhi()
 		 * @generated
 		 */
-		EClass PHI = eINSTANCE.getPHI();
+		EClass PHI = eINSTANCE.getPhi();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
@@ -6465,7 +6466,7 @@ public interface LlvmPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PHI__TYPE = eINSTANCE.getPHI_Type();
+		EReference PHI__TYPE = eINSTANCE.getPhi_Type();
 
 		/**
 		 * The meta object literal for the '<em><b>Firstclass</b></em>' containment reference list feature.
@@ -6473,7 +6474,7 @@ public interface LlvmPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PHI__FIRSTCLASS = eINSTANCE.getPHI_Firstclass();
+		EReference PHI__FIRSTCLASS = eINSTANCE.getPhi_Firstclass();
 
 		/**
 		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.
@@ -6481,7 +6482,7 @@ public interface LlvmPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PHI__VALUES = eINSTANCE.getPHI_Values();
+		EReference PHI__VALUES = eINSTANCE.getPhi_Values();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.LandingPadImpl <em>Landing Pad</em>}' class.
@@ -6626,14 +6627,14 @@ public interface LlvmPackage extends EPackage {
 		EReference SELECT__VAL2VALUE = eINSTANCE.getSelect_Val2value();
 
 		/**
-		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.VA_ArgImpl <em>VA Arg</em>}' class.
+		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.VariableAttributeAccessImpl <em>Variable Attribute Access</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.upb.llvm_parser.llvm.impl.VA_ArgImpl
-		 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getVA_Arg()
+		 * @see de.upb.llvm_parser.llvm.impl.VariableAttributeAccessImpl
+		 * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getVariableAttributeAccess()
 		 * @generated
 		 */
-		EClass VA_ARG = eINSTANCE.getVA_Arg();
+		EClass VARIABLE_ATTRIBUTE_ACCESS = eINSTANCE.getVariableAttributeAccess();
 
 		/**
 		 * The meta object literal for the '<em><b>Listtype</b></em>' containment reference feature.
@@ -6641,7 +6642,7 @@ public interface LlvmPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VA_ARG__LISTTYPE = eINSTANCE.getVA_Arg_Listtype();
+		EReference VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE = eINSTANCE.getVariableAttributeAccess_Listtype();
 
 		/**
 		 * The meta object literal for the '<em><b>Listvalue</b></em>' containment reference feature.
@@ -6649,7 +6650,7 @@ public interface LlvmPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VA_ARG__LISTVALUE = eINSTANCE.getVA_Arg_Listvalue();
+		EReference VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE = eINSTANCE.getVariableAttributeAccess_Listvalue();
 
 		/**
 		 * The meta object literal for the '<em><b>Arg Type</b></em>' containment reference feature.
@@ -6657,7 +6658,7 @@ public interface LlvmPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VA_ARG__ARG_TYPE = eINSTANCE.getVA_Arg_ArgType();
+		EReference VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE = eINSTANCE.getVariableAttributeAccess_ArgType();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ExtractElementImpl <em>Extract Element</em>}' class.
