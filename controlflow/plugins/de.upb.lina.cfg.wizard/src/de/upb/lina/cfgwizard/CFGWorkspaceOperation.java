@@ -38,14 +38,18 @@ import de.upb.llvm_parser.llvm.InstructionUse;
 import de.upb.llvm_parser.llvm.Invoke;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.NonConstantValue;
-import de.upb.llvm_parser.llvm.Ret_Instr;
+import de.upb.llvm_parser.llvm.ReturnInstruction;
 import de.upb.llvm_parser.llvm.Switch;
 import de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl;
 import de.upb.llvm_parser.llvm.impl.InstructionUseImpl;
 import de.upb.llvm_parser.llvm.impl.LLVMImpl;
-import de.upb.llvm_parser.llvm.impl.Ret_InstrImpl;
+import de.upb.llvm_parser.llvm.impl.ReturnInstructionImpl;
+import de.upb.llvm_parser.llvm.impl.StandartInstructionImpl;
 
 public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
+
+	private final boolean EXCT = false; // Shall exception handling be added to
+										// i.e. Invoke function
 
 	private LLVMImpl ast = null;
 	private Path cfgpath = null;
@@ -54,7 +58,7 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 	private String sTrueConst = "[true]";
 	private String sFalseConst = "[false]";
 	private String sDefaultConst = "[default]";
-	private String sResumeConst = "[resume]";
+	private String sNormalConst = "[normal]";
 	private String sExcConst = "[exception]";
 
 	public CFGWorkspaceOperation(EObject ast, String path, int reordering) {
@@ -90,8 +94,8 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 			Resource resource = resSet.createResource(URI.createFileURI(cfgpath.toOSString()));
 
 			for (ControlFlowDiagram cfg : list) {
-				resource.getContents().add(cfg);
 				EcoreUtil.resolveAll(cfg);
+				resource.getContents().add(cfg);
 			}
 
 			resource.save(Collections.EMPTY_MAP);
@@ -119,17 +123,23 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 				cfg.setStart(act);
 			done.put(b, act);
 			for (int i = 0; i < b.getInstructions().size(); i++) {
+				Transition t;
 				if (b.getInstructions().get(i) instanceof InstructionUseImpl) {
-					Transition t = addTransition(cfg, ((InstructionUse) b.getInstructions().get(i)).getInstruction());
-					act.getOutgoing().add(t);
-					temp = act;
-					act = addControlFlowLocation(cfg, pc);
-					act.getIncoming().add(temp.getOutgoing().get(temp.getOutgoing().size() - 1));
-					t.setSource(temp);
-					t.setTarget(act);
+					t = addTransition(cfg, ((InstructionUse) b.getInstructions().get(i)).getInstruction());
+				} else if (b.getInstructions().get(i) instanceof StandartInstructionImpl) {
+					t = addTransition(cfg, ((Instruction) b.getInstructions().get(i)));
+				} else {
+					System.out.println("Unknown Instruction");
+					return null;
 				}
+				act.getOutgoing().add(t);
+				temp = act;
+				act = addControlFlowLocation(cfg, pc);
+				act.getIncoming().add(temp.getOutgoing().get(temp.getOutgoing().size() - 1));
+				t.setSource(temp);
+				t.setTarget(act);
 			}
-			Ret_Instr term = b.getTerminator();
+			ReturnInstruction term = b.getTerminator();
 			EClass type = term.eClass();
 			if (type.equals(LlvmPackage.eINSTANCE.getBranch())) {
 				if (((Branch) term).getDestination() != null) {
@@ -165,28 +175,26 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 					act.getOutgoing().add(jump);
 					jump.setSource(act);
 				}
-				// } else if (type.equals(LlvmPackage.eINSTANCE.getResume())) {
+			} else if (type.equals(LlvmPackage.eINSTANCE.getResume())) {
+				// No transition right now
 			} else if (type.equals(LlvmPackage.eINSTANCE.getInvoke())) {
-				GuardedTransition resume = addGuardedTransition(cfg, term);
-				resume.setCondition(((Invoke) term).getName() + " -> " + sResumeConst);
-				resume.setSource(act);
-				act.getOutgoing().add(resume);
-				GuardedTransition exception = addGuardedTransition(cfg, term);
-				exception.setCondition(((Invoke) term).getName() + " -> " + sExcConst);
-				exception.setSource(act);
-				act.getOutgoing().add(exception);
+				GuardedTransition ret = addGuardedTransition(cfg, term);
+				ret.setCondition(((Invoke) term).getName() + " -> " + sNormalConst);
+				ret.setSource(act);
+				act.getOutgoing().add(ret);
+				if (EXCT) {
+					GuardedTransition exception = addGuardedTransition(cfg, term);
+					exception.setCondition(((Invoke) term).getName() + " -> " + sExcConst);
+					exception.setSource(act);
+					act.getOutgoing().add(exception);
+				}
 			} else if (type.equals(LlvmPackage.eINSTANCE.getUnreachable())) {
-				// } else if (type.equals(LlvmPackage.eINSTANCE.getReturn())) {
-				System.out.println("Generated unreachable?");
+				// No transition right now
+			} else if (type.equals(LlvmPackage.eINSTANCE.getReturn())) {
+				// No transition right now
 			} else {
+				System.out.println("Not Handled Terminator" + term);
 			}
-
-			// Ret_Instr term = b.getTerminator();
-			// GuardedTransition t = addGuardedTransition(cfg, term);
-			// temp = act;
-			// t.setSource(temp);
-			// act = addCondition(t, term, pc);
-			// act.getIncoming().add(t);
 
 		}
 		EList<Transition> transitions = cfg.getTransitions();
@@ -236,7 +244,7 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 				}
 			}
 		} else if (destination.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getInvoke())) {
-			if (destination.getCondition().contains(sResumeConst)) {
+			if (destination.getCondition().contains(sNormalConst)) {
 				for (BasicBlock b : blocks) {
 					if (b.getLabel().equals(((NonConstantValue) ((Invoke) destination.getInstruction()).getTovalue()).getName().substring(1))) {
 						return done.get(b);
@@ -271,7 +279,7 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 	}
 
 	private GuardedTransition addGuardedTransition(ControlFlowDiagram diag, Instruction i) {
-		if (i instanceof Ret_InstrImpl) {
+		if (i instanceof ReturnInstructionImpl) {
 			GuardedTransition transition = ControlflowFactory.eINSTANCE.createGuardedTransition();
 			transition.setInstruction(i);
 			transition.setDiagram(diag);
@@ -297,6 +305,10 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 		for (ControlFlowDiagram cfg : list) {
 			ControlFlowLocation start = cfg.getStart();
 			Set<Transition> may = new TreeSet<Transition>();
+			ControlFlowLocation act = start;
+			while (!act.getOutgoing().isEmpty()) {
+
+			}
 		}
 	}
 }
