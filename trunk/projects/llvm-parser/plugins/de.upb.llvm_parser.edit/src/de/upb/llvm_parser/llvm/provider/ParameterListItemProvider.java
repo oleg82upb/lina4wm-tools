@@ -194,7 +194,7 @@ public class ParameterListItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.PARAMETER_LIST__VARIABLES,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 	}
 
 	/**

@@ -4,7 +4,7 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.Ret_Instr;
+import de.upb.llvm_parser.llvm.ReturnInstruction;
 
 import java.util.Collection;
 
@@ -98,7 +98,7 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
 	 * @generated
 	 * @ordered
 	 */
-	protected Ret_Instr terminator;
+	protected ReturnInstruction terminator;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -178,7 +178,7 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Ret_Instr getTerminator() {
+	public ReturnInstruction getTerminator() {
 		return terminator;
 	}
 
@@ -187,8 +187,8 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTerminator(Ret_Instr newTerminator, NotificationChain msgs) {
-		Ret_Instr oldTerminator = terminator;
+	public NotificationChain basicSetTerminator(ReturnInstruction newTerminator, NotificationChain msgs) {
+		ReturnInstruction oldTerminator = terminator;
 		terminator = newTerminator;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.BASIC_BLOCK__TERMINATOR, oldTerminator, newTerminator);
@@ -202,7 +202,7 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTerminator(Ret_Instr newTerminator) {
+	public void setTerminator(ReturnInstruction newTerminator) {
 		if (newTerminator != terminator) {
 			NotificationChain msgs = null;
 			if (terminator != null)
@@ -272,7 +272,7 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
 				setRetadr((String)newValue);
 				return;
 			case LlvmPackage.BASIC_BLOCK__TERMINATOR:
-				setTerminator((Ret_Instr)newValue);
+				setTerminator((ReturnInstruction)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -296,7 +296,7 @@ public class BasicBlockImpl extends MinimalEObjectImpl.Container implements Basi
 				setRetadr(RETADR_EDEFAULT);
 				return;
 			case LlvmPackage.BASIC_BLOCK__TERMINATOR:
-				setTerminator((Ret_Instr)null);
+				setTerminator((ReturnInstruction)null);
 				return;
 		}
 		super.eUnset(featureID);

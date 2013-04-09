@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class SelectItemProvider
-	extends Std_InstrItemProvider
+	extends StandartInstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -192,7 +192,7 @@ public class SelectItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SELECT__CONDITIONVALUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -232,7 +232,7 @@ public class SelectItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SELECT__VAL1VALUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -272,7 +272,7 @@ public class SelectItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SELECT__VAL2VALUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 	}
 
 	/**

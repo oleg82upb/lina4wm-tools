@@ -32,7 +32,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class ExtractValueItemProvider
-	extends Std_InstrItemProvider
+	extends StandartInstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -209,7 +209,7 @@ public class ExtractValueItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.EXTRACT_VALUE__VALUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 	}
 
 }

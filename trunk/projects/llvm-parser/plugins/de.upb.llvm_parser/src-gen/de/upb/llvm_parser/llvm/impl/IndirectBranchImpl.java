@@ -38,7 +38,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class IndirectBranchImpl extends Ret_InstrImpl implements IndirectBranch {
+public class IndirectBranchImpl extends ReturnInstructionImpl implements IndirectBranch {
 	/**
 	 * The cached value of the '{@link #getAdresstype() <em>Adresstype</em>}' containment reference.
 	 * <!-- begin-user-doc -->

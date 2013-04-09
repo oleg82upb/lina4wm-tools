@@ -281,22 +281,22 @@ public class CastItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createRet_Instr()));
+				 LlvmFactory.eINSTANCE.createReturnInstruction()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createStd_Instr()));
+				 LlvmFactory.eINSTANCE.createStandartInstruction()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createARITHMETIC_OP()));
+				 LlvmFactory.eINSTANCE.createArithmeticOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createLOGICAL_OP()));
+				 LlvmFactory.eINSTANCE.createLogicOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -311,12 +311,7 @@ public class CastItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createGetElementPtr1()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -366,7 +361,7 @@ public class CastItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createPHI()));
+				 LlvmFactory.eINSTANCE.createPhi()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -386,7 +381,7 @@ public class CastItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createVA_Arg()));
+				 LlvmFactory.eINSTANCE.createVariableAttributeAccess()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -466,7 +461,7 @@ public class CastItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__VALUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter

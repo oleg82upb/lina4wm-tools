@@ -13,7 +13,7 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class CmpXchgTest extends Std_InstrTest {
+public class CmpXchgTest extends StandartInstructionTest {
 
 	/**
 	 * <!-- begin-user-doc -->

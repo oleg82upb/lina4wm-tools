@@ -13,7 +13,7 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class SelectTest extends Std_InstrTest {
+public class SelectTest extends StandartInstructionTest {
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class CallItemProvider
-	extends Std_InstrItemProvider
+	extends StandartInstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -186,7 +186,7 @@ public class CallItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CALL__ADRESS,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter

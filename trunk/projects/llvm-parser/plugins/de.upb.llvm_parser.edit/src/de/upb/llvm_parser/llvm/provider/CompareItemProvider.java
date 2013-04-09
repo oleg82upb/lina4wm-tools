@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class CompareItemProvider
-	extends Std_InstrItemProvider
+	extends StandartInstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -186,7 +186,7 @@ public class CompareItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.COMPARE__VALUE1,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -211,7 +211,7 @@ public class CompareItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.COMPARE__VALUE2,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 	}
 
 	/**

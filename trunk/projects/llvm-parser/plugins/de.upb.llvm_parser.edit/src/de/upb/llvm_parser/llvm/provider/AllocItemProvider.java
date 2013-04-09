@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class AllocItemProvider
-	extends Std_InstrItemProvider
+	extends StandartInstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -208,7 +208,7 @@ public class AllocItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ALLOC__NUMELEMENTSVALUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 	}
 
 	/**

@@ -13,7 +13,7 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class SwitchTest extends Ret_InstrTest {
+public class SwitchTest extends ReturnInstructionTest {
 
 	/**
 	 * <!-- begin-user-doc -->

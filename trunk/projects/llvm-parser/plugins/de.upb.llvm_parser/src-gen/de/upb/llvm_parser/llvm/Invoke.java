@@ -25,7 +25,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface Invoke extends Ret_Instr {
+public interface Invoke extends ReturnInstruction {
 	/**
 	 * Returns the value of the '<em><b>Functiontype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

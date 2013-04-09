@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class BranchItemProvider
-	extends Ret_InstrItemProvider
+	extends ReturnInstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -177,7 +177,7 @@ public class BranchItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.BRANCH__DESTINATION,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -202,7 +202,7 @@ public class BranchItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.BRANCH__CONDVALUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -242,7 +242,7 @@ public class BranchItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.BRANCH__LABEL_TRUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -282,7 +282,7 @@ public class BranchItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.BRANCH__LABEL_FALSE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 	}
 
 	/**

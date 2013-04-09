@@ -256,40 +256,40 @@ public interface LlvmFactory extends EFactory {
 	InstructionUse createInstructionUse();
 
 	/**
-	 * Returns a new object of class '<em>Ret Instr</em>'.
+	 * Returns a new object of class '<em>Return Instruction</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Ret Instr</em>'.
+	 * @return a new object of class '<em>Return Instruction</em>'.
 	 * @generated
 	 */
-	Ret_Instr createRet_Instr();
+	ReturnInstruction createReturnInstruction();
 
 	/**
-	 * Returns a new object of class '<em>Std Instr</em>'.
+	 * Returns a new object of class '<em>Standart Instruction</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Std Instr</em>'.
+	 * @return a new object of class '<em>Standart Instruction</em>'.
 	 * @generated
 	 */
-	Std_Instr createStd_Instr();
+	StandartInstruction createStandartInstruction();
 
 	/**
-	 * Returns a new object of class '<em>ARITHMETIC OP</em>'.
+	 * Returns a new object of class '<em>Arithmetic Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>ARITHMETIC OP</em>'.
+	 * @return a new object of class '<em>Arithmetic Operation</em>'.
 	 * @generated
 	 */
-	ARITHMETIC_OP createARITHMETIC_OP();
+	ArithmeticOperation createArithmeticOperation();
 
 	/**
-	 * Returns a new object of class '<em>LOGICAL OP</em>'.
+	 * Returns a new object of class '<em>Logic Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>LOGICAL OP</em>'.
+	 * @return a new object of class '<em>Logic Operation</em>'.
 	 * @generated
 	 */
-	LOGICAL_OP createLOGICAL_OP();
+	LogicOperation createLogicOperation();
 
 	/**
 	 * Returns a new object of class '<em>Cast</em>'.
@@ -310,22 +310,13 @@ public interface LlvmFactory extends EFactory {
 	GetElementPtr createGetElementPtr();
 
 	/**
-	 * Returns a new object of class '<em>Get Element Ptr1</em>'.
+	 * Returns a new object of class '<em>Nested Get Element Ptr</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Get Element Ptr1</em>'.
+	 * @return a new object of class '<em>Nested Get Element Ptr</em>'.
 	 * @generated
 	 */
-	GetElementPtr1 createGetElementPtr1();
-
-	/**
-	 * Returns a new object of class '<em>Get Element Ptr2</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Get Element Ptr2</em>'.
-	 * @generated
-	 */
-	GetElementPtr2 createGetElementPtr2();
+	NestedGetElementPtr createNestedGetElementPtr();
 
 	/**
 	 * Returns a new object of class '<em>Extract Value</em>'.
@@ -409,13 +400,13 @@ public interface LlvmFactory extends EFactory {
 	Alloc createAlloc();
 
 	/**
-	 * Returns a new object of class '<em>PHI</em>'.
+	 * Returns a new object of class '<em>Phi</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>PHI</em>'.
+	 * @return a new object of class '<em>Phi</em>'.
 	 * @generated
 	 */
-	PHI createPHI();
+	Phi createPhi();
 
 	/**
 	 * Returns a new object of class '<em>Landing Pad</em>'.
@@ -445,13 +436,13 @@ public interface LlvmFactory extends EFactory {
 	Select createSelect();
 
 	/**
-	 * Returns a new object of class '<em>VA Arg</em>'.
+	 * Returns a new object of class '<em>Variable Attribute Access</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>VA Arg</em>'.
+	 * @return a new object of class '<em>Variable Attribute Access</em>'.
 	 * @generated
 	 */
-	VA_Arg createVA_Arg();
+	VariableAttributeAccess createVariableAttributeAccess();
 
 	/**
 	 * Returns a new object of class '<em>Extract Element</em>'.

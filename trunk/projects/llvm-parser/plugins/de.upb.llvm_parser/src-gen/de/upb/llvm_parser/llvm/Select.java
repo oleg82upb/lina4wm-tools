@@ -24,7 +24,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface Select extends Std_Instr {
+public interface Select extends StandartInstruction {
 	/**
 	 * Returns the value of the '<em><b>Conditiontype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

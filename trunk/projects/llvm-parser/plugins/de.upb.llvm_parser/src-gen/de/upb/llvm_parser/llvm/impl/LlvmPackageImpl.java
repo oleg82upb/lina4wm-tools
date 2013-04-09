@@ -8,6 +8,7 @@ import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.Aggregate_Types;
 import de.upb.llvm_parser.llvm.AliasDefinition;
 import de.upb.llvm_parser.llvm.Alloc;
+import de.upb.llvm_parser.llvm.ArithmeticOperation;
 import de.upb.llvm_parser.llvm.Array;
 import de.upb.llvm_parser.llvm.AtomicRMW;
 import de.upb.llvm_parser.llvm.BasicBlock;
@@ -24,8 +25,6 @@ import de.upb.llvm_parser.llvm.Fence;
 import de.upb.llvm_parser.llvm.FunctionBody;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.GetElementPtr;
-import de.upb.llvm_parser.llvm.GetElementPtr1;
-import de.upb.llvm_parser.llvm.GetElementPtr2;
 import de.upb.llvm_parser.llvm.GlobalDefinition;
 import de.upb.llvm_parser.llvm.IndirectBranch;
 import de.upb.llvm_parser.llvm.InsertElement;
@@ -37,16 +36,19 @@ import de.upb.llvm_parser.llvm.LandingPad;
 import de.upb.llvm_parser.llvm.LlvmFactory;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Load;
+import de.upb.llvm_parser.llvm.LogicOperation;
 import de.upb.llvm_parser.llvm.MainLevelEntity;
+import de.upb.llvm_parser.llvm.NestedGetElementPtr;
 import de.upb.llvm_parser.llvm.NonConstantValue;
 import de.upb.llvm_parser.llvm.ParameterList;
+import de.upb.llvm_parser.llvm.Phi;
 import de.upb.llvm_parser.llvm.Predefined;
 import de.upb.llvm_parser.llvm.Resume;
-import de.upb.llvm_parser.llvm.Ret_Instr;
 import de.upb.llvm_parser.llvm.Return;
+import de.upb.llvm_parser.llvm.ReturnInstruction;
 import de.upb.llvm_parser.llvm.Select;
 import de.upb.llvm_parser.llvm.ShuffleVector;
-import de.upb.llvm_parser.llvm.Std_Instr;
+import de.upb.llvm_parser.llvm.StandartInstruction;
 import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.Structure;
 import de.upb.llvm_parser.llvm.Switch;
@@ -55,9 +57,9 @@ import de.upb.llvm_parser.llvm.TypeDefinition;
 import de.upb.llvm_parser.llvm.TypeList;
 import de.upb.llvm_parser.llvm.TypeUse;
 import de.upb.llvm_parser.llvm.Unreachable;
-import de.upb.llvm_parser.llvm.VA_Arg;
 import de.upb.llvm_parser.llvm.Value;
 import de.upb.llvm_parser.llvm.ValueStruct;
+import de.upb.llvm_parser.llvm.VariableAttributeAccess;
 import de.upb.llvm_parser.llvm.Vector;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -261,28 +263,28 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass ret_InstrEClass = null;
+	private EClass returnInstructionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass std_InstrEClass = null;
+	private EClass standartInstructionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass arithmetiC_OPEClass = null;
+	private EClass arithmeticOperationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass logicaL_OPEClass = null;
+	private EClass logicOperationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -303,14 +305,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass getElementPtr1EClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass getElementPtr2EClass = null;
+	private EClass nestedGetElementPtrEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -408,7 +403,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass vA_ArgEClass = null;
+	private EClass variableAttributeAccessEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1183,8 +1178,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getRet_Instr() {
-		return ret_InstrEClass;
+	public EClass getReturnInstruction() {
+		return returnInstructionEClass;
 	}
 
 	/**
@@ -1192,8 +1187,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getStd_Instr() {
-		return std_InstrEClass;
+	public EClass getStandartInstruction() {
+		return standartInstructionEClass;
 	}
 
 	/**
@@ -1201,8 +1196,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getARITHMETIC_OP() {
-		return arithmetiC_OPEClass;
+	public EClass getArithmeticOperation() {
+		return arithmeticOperationEClass;
 	}
 
 	/**
@@ -1210,8 +1205,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getARITHMETIC_OP_Optype() {
-		return (EReference)arithmetiC_OPEClass.getEStructuralFeatures().get(0);
+	public EReference getArithmeticOperation_Optype() {
+		return (EReference)arithmeticOperationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1219,8 +1214,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getARITHMETIC_OP_Value1() {
-		return (EReference)arithmetiC_OPEClass.getEStructuralFeatures().get(1);
+	public EReference getArithmeticOperation_Value1() {
+		return (EReference)arithmeticOperationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1228,8 +1223,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getARITHMETIC_OP_Value2() {
-		return (EReference)arithmetiC_OPEClass.getEStructuralFeatures().get(2);
+	public EReference getArithmeticOperation_Value2() {
+		return (EReference)arithmeticOperationEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1237,8 +1232,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getLOGICAL_OP() {
-		return logicaL_OPEClass;
+	public EClass getLogicOperation() {
+		return logicOperationEClass;
 	}
 
 	/**
@@ -1246,8 +1241,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLOGICAL_OP_Optype() {
-		return (EReference)logicaL_OPEClass.getEStructuralFeatures().get(0);
+	public EReference getLogicOperation_Optype() {
+		return (EReference)logicOperationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1255,8 +1250,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLOGICAL_OP_Value1() {
-		return (EReference)logicaL_OPEClass.getEStructuralFeatures().get(1);
+	public EReference getLogicOperation_Value1() {
+		return (EReference)logicOperationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1264,8 +1259,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLOGICAL_OP_Value2() {
-		return (EReference)logicaL_OPEClass.getEStructuralFeatures().get(2);
+	public EReference getLogicOperation_Value2() {
+		return (EReference)logicOperationEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1354,8 +1349,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getGetElementPtr1() {
-		return getElementPtr1EClass;
+	public EClass getNestedGetElementPtr() {
+		return nestedGetElementPtrEClass;
 	}
 
 	/**
@@ -1363,8 +1358,35 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getGetElementPtr2() {
-		return getElementPtr2EClass;
+	public EReference getNestedGetElementPtr_Aggregate() {
+		return (EReference)nestedGetElementPtrEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getNestedGetElementPtr_Aggregatename() {
+		return (EReference)nestedGetElementPtrEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getNestedGetElementPtr_IndTypes() {
+		return (EReference)nestedGetElementPtrEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getNestedGetElementPtr_Indizies() {
+		return (EReference)nestedGetElementPtrEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1822,7 +1844,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getPHI() {
+	public EClass getPhi() {
 		return phiEClass;
 	}
 
@@ -1831,7 +1853,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPHI_Type() {
+	public EReference getPhi_Type() {
 		return (EReference)phiEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1840,7 +1862,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPHI_Firstclass() {
+	public EReference getPhi_Firstclass() {
 		return (EReference)phiEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1849,7 +1871,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPHI_Values() {
+	public EReference getPhi_Values() {
 		return (EReference)phiEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -2011,8 +2033,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getVA_Arg() {
-		return vA_ArgEClass;
+	public EClass getVariableAttributeAccess() {
+		return variableAttributeAccessEClass;
 	}
 
 	/**
@@ -2020,8 +2042,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getVA_Arg_Listtype() {
-		return (EReference)vA_ArgEClass.getEStructuralFeatures().get(0);
+	public EReference getVariableAttributeAccess_Listtype() {
+		return (EReference)variableAttributeAccessEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2029,8 +2051,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getVA_Arg_Listvalue() {
-		return (EReference)vA_ArgEClass.getEStructuralFeatures().get(1);
+	public EReference getVariableAttributeAccess_Listvalue() {
+		return (EReference)variableAttributeAccessEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2038,8 +2060,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getVA_Arg_ArgType() {
-		return (EReference)vA_ArgEClass.getEStructuralFeatures().get(2);
+	public EReference getVariableAttributeAccess_ArgType() {
+		return (EReference)variableAttributeAccessEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2697,19 +2719,19 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		createEAttribute(instructionUseEClass, INSTRUCTION_USE__REG_OR_VAR);
 		createEReference(instructionUseEClass, INSTRUCTION_USE__INSTRUCTION);
 
-		ret_InstrEClass = createEClass(RET_INSTR);
+		returnInstructionEClass = createEClass(RETURN_INSTRUCTION);
 
-		std_InstrEClass = createEClass(STD_INSTR);
+		standartInstructionEClass = createEClass(STANDART_INSTRUCTION);
 
-		arithmetiC_OPEClass = createEClass(ARITHMETIC_OP);
-		createEReference(arithmetiC_OPEClass, ARITHMETIC_OP__OPTYPE);
-		createEReference(arithmetiC_OPEClass, ARITHMETIC_OP__VALUE1);
-		createEReference(arithmetiC_OPEClass, ARITHMETIC_OP__VALUE2);
+		arithmeticOperationEClass = createEClass(ARITHMETIC_OPERATION);
+		createEReference(arithmeticOperationEClass, ARITHMETIC_OPERATION__OPTYPE);
+		createEReference(arithmeticOperationEClass, ARITHMETIC_OPERATION__VALUE1);
+		createEReference(arithmeticOperationEClass, ARITHMETIC_OPERATION__VALUE2);
 
-		logicaL_OPEClass = createEClass(LOGICAL_OP);
-		createEReference(logicaL_OPEClass, LOGICAL_OP__OPTYPE);
-		createEReference(logicaL_OPEClass, LOGICAL_OP__VALUE1);
-		createEReference(logicaL_OPEClass, LOGICAL_OP__VALUE2);
+		logicOperationEClass = createEClass(LOGIC_OPERATION);
+		createEReference(logicOperationEClass, LOGIC_OPERATION__OPTYPE);
+		createEReference(logicOperationEClass, LOGIC_OPERATION__VALUE1);
+		createEReference(logicOperationEClass, LOGIC_OPERATION__VALUE2);
 
 		castEClass = createEClass(CAST);
 		createEReference(castEClass, CAST__FROM);
@@ -2722,9 +2744,11 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		createEReference(getElementPtrEClass, GET_ELEMENT_PTR__IND_TYPES);
 		createEReference(getElementPtrEClass, GET_ELEMENT_PTR__INDIZIES);
 
-		getElementPtr1EClass = createEClass(GET_ELEMENT_PTR1);
-
-		getElementPtr2EClass = createEClass(GET_ELEMENT_PTR2);
+		nestedGetElementPtrEClass = createEClass(NESTED_GET_ELEMENT_PTR);
+		createEReference(nestedGetElementPtrEClass, NESTED_GET_ELEMENT_PTR__AGGREGATE);
+		createEReference(nestedGetElementPtrEClass, NESTED_GET_ELEMENT_PTR__AGGREGATENAME);
+		createEReference(nestedGetElementPtrEClass, NESTED_GET_ELEMENT_PTR__IND_TYPES);
+		createEReference(nestedGetElementPtrEClass, NESTED_GET_ELEMENT_PTR__INDIZIES);
 
 		extractValueEClass = createEClass(EXTRACT_VALUE);
 		createEReference(extractValueEClass, EXTRACT_VALUE__ARRAY);
@@ -2810,10 +2834,10 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		createEReference(selectEClass, SELECT__VAL2TYPE);
 		createEReference(selectEClass, SELECT__VAL2VALUE);
 
-		vA_ArgEClass = createEClass(VA_ARG);
-		createEReference(vA_ArgEClass, VA_ARG__LISTTYPE);
-		createEReference(vA_ArgEClass, VA_ARG__LISTVALUE);
-		createEReference(vA_ArgEClass, VA_ARG__ARG_TYPE);
+		variableAttributeAccessEClass = createEClass(VARIABLE_ATTRIBUTE_ACCESS);
+		createEReference(variableAttributeAccessEClass, VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE);
+		createEReference(variableAttributeAccessEClass, VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE);
+		createEReference(variableAttributeAccessEClass, VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE);
 
 		extractElementEClass = createEClass(EXTRACT_ELEMENT);
 		createEReference(extractElementEClass, EXTRACT_ELEMENT__VECTORTYPE);
@@ -2927,40 +2951,38 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		constantEClass.getESuperTypes().add(this.getValue());
 		nonConstantValueEClass.getESuperTypes().add(this.getValue());
 		structureEClass.getESuperTypes().add(this.getAggregate_Types());
-		ret_InstrEClass.getESuperTypes().add(this.getInstruction());
-		std_InstrEClass.getESuperTypes().add(this.getInstruction());
-		arithmetiC_OPEClass.getESuperTypes().add(this.getStd_Instr());
-		logicaL_OPEClass.getESuperTypes().add(this.getStd_Instr());
+		returnInstructionEClass.getESuperTypes().add(this.getInstruction());
+		standartInstructionEClass.getESuperTypes().add(this.getInstruction());
+		arithmeticOperationEClass.getESuperTypes().add(this.getStandartInstruction());
+		logicOperationEClass.getESuperTypes().add(this.getStandartInstruction());
 		castEClass.getESuperTypes().add(this.getValue());
-		castEClass.getESuperTypes().add(this.getStd_Instr());
-		getElementPtrEClass.getESuperTypes().add(this.getStd_Instr());
-		getElementPtr1EClass.getESuperTypes().add(this.getGetElementPtr());
-		getElementPtr2EClass.getESuperTypes().add(this.getValue());
-		getElementPtr2EClass.getESuperTypes().add(this.getGetElementPtr());
-		extractValueEClass.getESuperTypes().add(this.getStd_Instr());
-		insertValueEClass.getESuperTypes().add(this.getStd_Instr());
-		fenceEClass.getESuperTypes().add(this.getStd_Instr());
-		cmpXchgEClass.getESuperTypes().add(this.getStd_Instr());
-		atomicRMWEClass.getESuperTypes().add(this.getStd_Instr());
-		loadEClass.getESuperTypes().add(this.getStd_Instr());
-		storeEClass.getESuperTypes().add(this.getStd_Instr());
-		callEClass.getESuperTypes().add(this.getStd_Instr());
-		allocEClass.getESuperTypes().add(this.getStd_Instr());
-		phiEClass.getESuperTypes().add(this.getStd_Instr());
-		landingPadEClass.getESuperTypes().add(this.getStd_Instr());
-		selectEClass.getESuperTypes().add(this.getStd_Instr());
-		vA_ArgEClass.getESuperTypes().add(this.getStd_Instr());
-		extractElementEClass.getESuperTypes().add(this.getStd_Instr());
-		insertElementEClass.getESuperTypes().add(this.getStd_Instr());
-		shuffleVectorEClass.getESuperTypes().add(this.getStd_Instr());
-		compareEClass.getESuperTypes().add(this.getStd_Instr());
-		indirectBranchEClass.getESuperTypes().add(this.getRet_Instr());
-		switchEClass.getESuperTypes().add(this.getRet_Instr());
-		invokeEClass.getESuperTypes().add(this.getRet_Instr());
-		resumeEClass.getESuperTypes().add(this.getRet_Instr());
-		unreachableEClass.getESuperTypes().add(this.getRet_Instr());
-		returnEClass.getESuperTypes().add(this.getRet_Instr());
-		branchEClass.getESuperTypes().add(this.getRet_Instr());
+		castEClass.getESuperTypes().add(this.getStandartInstruction());
+		getElementPtrEClass.getESuperTypes().add(this.getStandartInstruction());
+		nestedGetElementPtrEClass.getESuperTypes().add(this.getValue());
+		extractValueEClass.getESuperTypes().add(this.getStandartInstruction());
+		insertValueEClass.getESuperTypes().add(this.getStandartInstruction());
+		fenceEClass.getESuperTypes().add(this.getStandartInstruction());
+		cmpXchgEClass.getESuperTypes().add(this.getStandartInstruction());
+		atomicRMWEClass.getESuperTypes().add(this.getStandartInstruction());
+		loadEClass.getESuperTypes().add(this.getStandartInstruction());
+		storeEClass.getESuperTypes().add(this.getStandartInstruction());
+		callEClass.getESuperTypes().add(this.getStandartInstruction());
+		allocEClass.getESuperTypes().add(this.getStandartInstruction());
+		phiEClass.getESuperTypes().add(this.getStandartInstruction());
+		landingPadEClass.getESuperTypes().add(this.getStandartInstruction());
+		selectEClass.getESuperTypes().add(this.getStandartInstruction());
+		variableAttributeAccessEClass.getESuperTypes().add(this.getStandartInstruction());
+		extractElementEClass.getESuperTypes().add(this.getStandartInstruction());
+		insertElementEClass.getESuperTypes().add(this.getStandartInstruction());
+		shuffleVectorEClass.getESuperTypes().add(this.getStandartInstruction());
+		compareEClass.getESuperTypes().add(this.getStandartInstruction());
+		indirectBranchEClass.getESuperTypes().add(this.getReturnInstruction());
+		switchEClass.getESuperTypes().add(this.getReturnInstruction());
+		invokeEClass.getESuperTypes().add(this.getReturnInstruction());
+		resumeEClass.getESuperTypes().add(this.getReturnInstruction());
+		unreachableEClass.getESuperTypes().add(this.getReturnInstruction());
+		returnEClass.getESuperTypes().add(this.getReturnInstruction());
+		branchEClass.getESuperTypes().add(this.getReturnInstruction());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(llvmEClass, de.upb.llvm_parser.llvm.LLVM.class, "LLVM", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3053,25 +3075,25 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		initEAttribute(getBasicBlock_Label(), ecorePackage.getEString(), "label", null, 0, 1, BasicBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBasicBlock_Instructions(), ecorePackage.getEObject(), null, "instructions", null, 0, -1, BasicBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBasicBlock_Retadr(), ecorePackage.getEString(), "retadr", null, 0, 1, BasicBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBasicBlock_Terminator(), this.getRet_Instr(), null, "terminator", null, 0, 1, BasicBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBasicBlock_Terminator(), this.getReturnInstruction(), null, "terminator", null, 0, 1, BasicBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(instructionUseEClass, InstructionUse.class, "InstructionUse", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getInstructionUse_Reg_or_var(), ecorePackage.getEString(), "reg_or_var", null, 0, 1, InstructionUse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getInstructionUse_Instruction(), this.getStd_Instr(), null, "instruction", null, 0, 1, InstructionUse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstructionUse_Instruction(), this.getStandartInstruction(), null, "instruction", null, 0, 1, InstructionUse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(ret_InstrEClass, Ret_Instr.class, "Ret_Instr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(returnInstructionEClass, ReturnInstruction.class, "ReturnInstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(std_InstrEClass, Std_Instr.class, "Std_Instr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(standartInstructionEClass, StandartInstruction.class, "StandartInstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(arithmetiC_OPEClass, de.upb.llvm_parser.llvm.ARITHMETIC_OP.class, "ARITHMETIC_OP", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getARITHMETIC_OP_Optype(), this.getTypeUse(), null, "optype", null, 0, 1, de.upb.llvm_parser.llvm.ARITHMETIC_OP.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getARITHMETIC_OP_Value1(), this.getValue(), null, "value1", null, 0, 1, de.upb.llvm_parser.llvm.ARITHMETIC_OP.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getARITHMETIC_OP_Value2(), this.getValue(), null, "value2", null, 0, 1, de.upb.llvm_parser.llvm.ARITHMETIC_OP.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(arithmeticOperationEClass, ArithmeticOperation.class, "ArithmeticOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getArithmeticOperation_Optype(), this.getTypeUse(), null, "optype", null, 0, 1, ArithmeticOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArithmeticOperation_Value1(), this.getValue(), null, "value1", null, 0, 1, ArithmeticOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArithmeticOperation_Value2(), this.getValue(), null, "value2", null, 0, 1, ArithmeticOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(logicaL_OPEClass, de.upb.llvm_parser.llvm.LOGICAL_OP.class, "LOGICAL_OP", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLOGICAL_OP_Optype(), this.getTypeUse(), null, "optype", null, 0, 1, de.upb.llvm_parser.llvm.LOGICAL_OP.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLOGICAL_OP_Value1(), this.getValue(), null, "value1", null, 0, 1, de.upb.llvm_parser.llvm.LOGICAL_OP.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLOGICAL_OP_Value2(), this.getValue(), null, "value2", null, 0, 1, de.upb.llvm_parser.llvm.LOGICAL_OP.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(logicOperationEClass, LogicOperation.class, "LogicOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLogicOperation_Optype(), this.getTypeUse(), null, "optype", null, 0, 1, LogicOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLogicOperation_Value1(), this.getValue(), null, "value1", null, 0, 1, LogicOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLogicOperation_Value2(), this.getValue(), null, "value2", null, 0, 1, LogicOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(castEClass, Cast.class, "Cast", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCast_From(), ecorePackage.getEObject(), null, "from", null, 0, 1, Cast.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3084,9 +3106,11 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		initEReference(getGetElementPtr_IndTypes(), this.getTypeUse(), null, "indTypes", null, 0, -1, GetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGetElementPtr_Indizies(), this.getValue(), null, "indizies", null, 0, -1, GetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(getElementPtr1EClass, GetElementPtr1.class, "GetElementPtr1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(getElementPtr2EClass, GetElementPtr2.class, "GetElementPtr2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(nestedGetElementPtrEClass, NestedGetElementPtr.class, "NestedGetElementPtr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getNestedGetElementPtr_Aggregate(), ecorePackage.getEObject(), null, "aggregate", null, 0, 1, NestedGetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNestedGetElementPtr_Aggregatename(), this.getValue(), null, "aggregatename", null, 0, 1, NestedGetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNestedGetElementPtr_IndTypes(), this.getTypeUse(), null, "indTypes", null, 0, -1, NestedGetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNestedGetElementPtr_Indizies(), this.getValue(), null, "indizies", null, 0, -1, NestedGetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(extractValueEClass, ExtractValue.class, "ExtractValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExtractValue_Array(), this.getArray(), null, "array", null, 0, 1, ExtractValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3147,10 +3171,10 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		initEReference(getAlloc_Numelementstype(), this.getTypeUse(), null, "numelementstype", null, 0, 1, Alloc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAlloc_Numelementsvalue(), this.getValue(), null, "numelementsvalue", null, 0, 1, Alloc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(phiEClass, de.upb.llvm_parser.llvm.PHI.class, "PHI", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPHI_Type(), this.getTypeUse(), null, "type", null, 0, 1, de.upb.llvm_parser.llvm.PHI.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPHI_Firstclass(), this.getValue(), null, "firstclass", null, 0, -1, de.upb.llvm_parser.llvm.PHI.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPHI_Values(), this.getValue(), null, "values", null, 0, -1, de.upb.llvm_parser.llvm.PHI.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(phiEClass, Phi.class, "Phi", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPhi_Type(), this.getTypeUse(), null, "type", null, 0, 1, Phi.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPhi_Firstclass(), this.getValue(), null, "firstclass", null, 0, -1, Phi.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPhi_Values(), this.getValue(), null, "values", null, 0, -1, Phi.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(landingPadEClass, LandingPad.class, "LandingPad", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLandingPad_Struct(), this.getStructure(), null, "struct", null, 0, 1, LandingPad.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3172,10 +3196,10 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		initEReference(getSelect_Val2type(), this.getTypeUse(), null, "val2type", null, 0, 1, Select.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSelect_Val2value(), this.getValue(), null, "val2value", null, 0, 1, Select.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(vA_ArgEClass, VA_Arg.class, "VA_Arg", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVA_Arg_Listtype(), this.getTypeUse(), null, "listtype", null, 0, 1, VA_Arg.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVA_Arg_Listvalue(), this.getValue(), null, "listvalue", null, 0, 1, VA_Arg.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVA_Arg_ArgType(), this.getTypeUse(), null, "argType", null, 0, 1, VA_Arg.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(variableAttributeAccessEClass, VariableAttributeAccess.class, "VariableAttributeAccess", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVariableAttributeAccess_Listtype(), this.getTypeUse(), null, "listtype", null, 0, 1, VariableAttributeAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVariableAttributeAccess_Listvalue(), this.getValue(), null, "listvalue", null, 0, 1, VariableAttributeAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVariableAttributeAccess_ArgType(), this.getTypeUse(), null, "argType", null, 0, 1, VariableAttributeAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(extractElementEClass, ExtractElement.class, "ExtractElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExtractElement_Vectortype(), this.getTypeUse(), null, "vectortype", null, 0, 1, ExtractElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

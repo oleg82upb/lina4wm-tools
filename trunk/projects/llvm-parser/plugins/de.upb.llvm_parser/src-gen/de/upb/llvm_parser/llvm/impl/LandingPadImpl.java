@@ -40,7 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class LandingPadImpl extends Std_InstrImpl implements LandingPad {
+public class LandingPadImpl extends StandartInstructionImpl implements LandingPad {
 	/**
 	 * The cached value of the '{@link #getStruct() <em>Struct</em>}' containment reference.
 	 * <!-- begin-user-doc -->

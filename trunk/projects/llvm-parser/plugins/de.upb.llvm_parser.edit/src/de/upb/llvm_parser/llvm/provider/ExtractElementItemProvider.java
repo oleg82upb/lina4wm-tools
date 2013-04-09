@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class ExtractElementItemProvider
-	extends Std_InstrItemProvider
+	extends StandartInstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -188,7 +188,7 @@ public class ExtractElementItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.EXTRACT_ELEMENT__VECTORVALUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -228,7 +228,7 @@ public class ExtractElementItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.EXTRACT_ELEMENT__INDEX,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 	}
 
 	/**

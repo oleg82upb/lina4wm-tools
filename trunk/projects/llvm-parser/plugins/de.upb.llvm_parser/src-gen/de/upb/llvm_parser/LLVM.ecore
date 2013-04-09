@@ -117,17 +117,17 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="retadr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="terminator" eType="#//Ret_Instr"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="terminator" eType="#//ReturnInstruction"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InstructionUse">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="reg_or_var" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="instruction" eType="#//Std_Instr"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instruction" eType="#//StandartInstruction"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Ret_Instr" eSuperTypes="#//Instruction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Std_Instr" eSuperTypes="#//Instruction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ARITHMETIC_OP" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="ReturnInstruction" eSuperTypes="#//Instruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StandartInstruction" eSuperTypes="#//Instruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArithmeticOperation" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="optype" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value1" eType="#//Value"
@@ -135,7 +135,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value2" eType="#//Value"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LOGICAL_OP" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="LogicOperation" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="optype" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value1" eType="#//Value"
@@ -143,7 +143,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value2" eType="#//Value"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Cast" eSuperTypes="#//Value #//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="Cast" eSuperTypes="#//Value #//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"
@@ -151,7 +151,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//TypeUse"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GetElementPtr" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="GetElementPtr" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="aggregate" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="aggregatename" eType="#//Value"
@@ -161,9 +161,17 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="indizies" upperBound="-1"
         eType="#//Value" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GetElementPtr1" eSuperTypes="#//GetElementPtr"/>
-  <eClassifiers xsi:type="ecore:EClass" name="GetElementPtr2" eSuperTypes="#//Value #//GetElementPtr"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ExtractValue" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="NestedGetElementPtr" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aggregate" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aggregatename" eType="#//Value"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="indTypes" upperBound="-1"
+        eType="#//TypeUse" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="indizies" upperBound="-1"
+        eType="#//Value" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExtractValue" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="array" eType="#//Array"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="struct" eType="#//Structure"
@@ -173,7 +181,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InsertValue" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="InsertValue" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="struct" eType="#//Structure"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"
@@ -185,10 +193,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Fence" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="Fence" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ordering" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CmpXchg" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="CmpXchg" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="adresstype" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="adress" eType="#//Value"
@@ -203,7 +211,7 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ordering" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AtomicRMW" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicRMW" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="adresstype" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="adress" eType="#//Value"
@@ -214,7 +222,7 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ordering" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Load" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="Load" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="adresstype" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="types" eType="#//TypeList"
@@ -224,7 +232,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ordering" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Store" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="Store" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="newtype" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
@@ -238,7 +246,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ordering" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Call" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="Call" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="adresstype" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="adress" eType="#//Value"
@@ -246,7 +254,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="pList" eType="#//ParameterList"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Alloc" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="Alloc" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typelist" eType="#//TypeList"
@@ -256,7 +264,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="numelementsvalue" eType="#//Value"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PHI" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="Phi" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="firstclass" upperBound="-1"
@@ -264,7 +272,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
         eType="#//Value" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LandingPad" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="LandingPad" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="struct" eType="#//Structure"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="personalitytype" eType="#//TypeUse"
@@ -284,7 +292,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="constant" eType="#//Value"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Select" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="Select" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="conditiontype" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="conditionvalue" eType="#//Value"
@@ -298,7 +306,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="val2value" eType="#//Value"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VA_Arg" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="VariableAttributeAccess" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="listtype" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="listvalue" eType="#//Value"
@@ -306,7 +314,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="argType" eType="#//TypeUse"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExtractElement" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="ExtractElement" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="vectortype" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="vectorvalue" eType="#//Value"
@@ -316,7 +324,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//Value"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InsertElement" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="InsertElement" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="vectortype" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="vectorvalue" eType="#//Value"
@@ -330,7 +338,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//Value"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ShuffleVector" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="ShuffleVector" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="val1type" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="val1value" eType="#//Value"
@@ -344,7 +352,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="maskvalue" eType="#//Value"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Compare" eSuperTypes="#//Std_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="Compare" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="comptype" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value1" eType="#//Value"
@@ -352,7 +360,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value2" eType="#//Value"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IndirectBranch" eSuperTypes="#//Ret_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="IndirectBranch" eSuperTypes="#//ReturnInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="adresstype" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="adress" eType="#//Value"
@@ -362,7 +370,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="labels" upperBound="-1"
         eType="#//Value" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Switch" eSuperTypes="#//Ret_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="Switch" eSuperTypes="#//ReturnInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="comptype" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="compvalue" eType="#//Value"
@@ -380,7 +388,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="destinations" upperBound="-1"
         eType="#//Value" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Invoke" eSuperTypes="#//Ret_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="Invoke" eSuperTypes="#//ReturnInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="functiontype" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//Address"
@@ -396,20 +404,20 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="unwindvalue" eType="#//Value"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Resume" eSuperTypes="#//Ret_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="Resume" eSuperTypes="#//ReturnInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="resumestruct" eType="#//Structure"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="resumevalue" eType="#//Value"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Unreachable" eSuperTypes="#//Ret_Instr"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Return" eSuperTypes="#//Ret_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="Unreachable" eSuperTypes="#//ReturnInstruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Return" eSuperTypes="#//ReturnInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="returntype" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="returnvalue" eType="#//Value"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Branch" eSuperTypes="#//Ret_Instr">
+  <eClassifiers xsi:type="ecore:EClass" name="Branch" eSuperTypes="#//ReturnInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="destination" eType="#//Value"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="condvalue" eType="#//Value"

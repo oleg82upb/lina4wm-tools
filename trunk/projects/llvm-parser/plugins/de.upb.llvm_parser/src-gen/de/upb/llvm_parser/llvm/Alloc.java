@@ -22,7 +22,7 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface Alloc extends Std_Instr {
+public interface Alloc extends StandartInstruction {
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

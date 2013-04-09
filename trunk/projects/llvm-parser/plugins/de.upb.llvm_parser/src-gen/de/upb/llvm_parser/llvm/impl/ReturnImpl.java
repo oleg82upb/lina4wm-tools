@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class ReturnImpl extends Ret_InstrImpl implements Return {
+public class ReturnImpl extends ReturnInstructionImpl implements Return {
 	/**
 	 * The cached value of the '{@link #getReturntype() <em>Returntype</em>}' containment reference.
 	 * <!-- begin-user-doc -->

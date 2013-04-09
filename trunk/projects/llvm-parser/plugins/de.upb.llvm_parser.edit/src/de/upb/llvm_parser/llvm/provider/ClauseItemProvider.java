@@ -191,7 +191,7 @@ public class ClauseItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CLAUSE__VALUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -221,7 +221,7 @@ public class ClauseItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CLAUSE__CONSTANT,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 	}
 
 	/**

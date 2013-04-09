@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface IndirectBranch extends Ret_Instr {
+public interface IndirectBranch extends ReturnInstruction {
 	/**
 	 * Returns the value of the '<em><b>Adresstype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

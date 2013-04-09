@@ -13,7 +13,7 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ResumeTest extends Ret_InstrTest {
+public class ResumeTest extends ReturnInstructionTest {
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -27,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Switch extends Ret_Instr {
+public interface Switch extends ReturnInstruction {
 	/**
 	 * Returns the value of the '<em><b>Comptype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

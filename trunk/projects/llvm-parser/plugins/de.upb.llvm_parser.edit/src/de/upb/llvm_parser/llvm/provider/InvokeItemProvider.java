@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class InvokeItemProvider
-	extends Ret_InstrItemProvider
+	extends ReturnInstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -219,7 +219,7 @@ public class InvokeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INVOKE__TOVALUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -259,7 +259,7 @@ public class InvokeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INVOKE__UNWINDVALUE,
-				 LlvmFactory.eINSTANCE.createGetElementPtr2()));
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 	}
 
 	/**

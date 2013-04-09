@@ -13,7 +13,7 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class AllocTest extends Std_InstrTest {
+public class AllocTest extends StandartInstructionTest {
 
 	/**
 	 * <!-- begin-user-doc -->

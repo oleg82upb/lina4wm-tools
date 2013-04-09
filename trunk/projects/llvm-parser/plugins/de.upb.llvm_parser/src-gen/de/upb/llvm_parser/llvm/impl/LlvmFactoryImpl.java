@@ -82,14 +82,13 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 			case LlvmPackage.INSTRUCTION: return createInstruction();
 			case LlvmPackage.BASIC_BLOCK: return createBasicBlock();
 			case LlvmPackage.INSTRUCTION_USE: return createInstructionUse();
-			case LlvmPackage.RET_INSTR: return createRet_Instr();
-			case LlvmPackage.STD_INSTR: return createStd_Instr();
-			case LlvmPackage.ARITHMETIC_OP: return createARITHMETIC_OP();
-			case LlvmPackage.LOGICAL_OP: return createLOGICAL_OP();
+			case LlvmPackage.RETURN_INSTRUCTION: return createReturnInstruction();
+			case LlvmPackage.STANDART_INSTRUCTION: return createStandartInstruction();
+			case LlvmPackage.ARITHMETIC_OPERATION: return createArithmeticOperation();
+			case LlvmPackage.LOGIC_OPERATION: return createLogicOperation();
 			case LlvmPackage.CAST: return createCast();
 			case LlvmPackage.GET_ELEMENT_PTR: return createGetElementPtr();
-			case LlvmPackage.GET_ELEMENT_PTR1: return createGetElementPtr1();
-			case LlvmPackage.GET_ELEMENT_PTR2: return createGetElementPtr2();
+			case LlvmPackage.NESTED_GET_ELEMENT_PTR: return createNestedGetElementPtr();
 			case LlvmPackage.EXTRACT_VALUE: return createExtractValue();
 			case LlvmPackage.INSERT_VALUE: return createInsertValue();
 			case LlvmPackage.FENCE: return createFence();
@@ -99,11 +98,11 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 			case LlvmPackage.STORE: return createStore();
 			case LlvmPackage.CALL: return createCall();
 			case LlvmPackage.ALLOC: return createAlloc();
-			case LlvmPackage.PHI: return createPHI();
+			case LlvmPackage.PHI: return createPhi();
 			case LlvmPackage.LANDING_PAD: return createLandingPad();
 			case LlvmPackage.CLAUSE: return createClause();
 			case LlvmPackage.SELECT: return createSelect();
-			case LlvmPackage.VA_ARG: return createVA_Arg();
+			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS: return createVariableAttributeAccess();
 			case LlvmPackage.EXTRACT_ELEMENT: return createExtractElement();
 			case LlvmPackage.INSERT_ELEMENT: return createInsertElement();
 			case LlvmPackage.SHUFFLE_VECTOR: return createShuffleVector();
@@ -385,9 +384,9 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Ret_Instr createRet_Instr() {
-		Ret_InstrImpl ret_Instr = new Ret_InstrImpl();
-		return ret_Instr;
+	public ReturnInstruction createReturnInstruction() {
+		ReturnInstructionImpl returnInstruction = new ReturnInstructionImpl();
+		return returnInstruction;
 	}
 
 	/**
@@ -395,9 +394,9 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Std_Instr createStd_Instr() {
-		Std_InstrImpl std_Instr = new Std_InstrImpl();
-		return std_Instr;
+	public StandartInstruction createStandartInstruction() {
+		StandartInstructionImpl standartInstruction = new StandartInstructionImpl();
+		return standartInstruction;
 	}
 
 	/**
@@ -405,9 +404,9 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ARITHMETIC_OP createARITHMETIC_OP() {
-		ARITHMETIC_OPImpl arithmetiC_OP = new ARITHMETIC_OPImpl();
-		return arithmetiC_OP;
+	public ArithmeticOperation createArithmeticOperation() {
+		ArithmeticOperationImpl arithmeticOperation = new ArithmeticOperationImpl();
+		return arithmeticOperation;
 	}
 
 	/**
@@ -415,9 +414,9 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LOGICAL_OP createLOGICAL_OP() {
-		LOGICAL_OPImpl logicaL_OP = new LOGICAL_OPImpl();
-		return logicaL_OP;
+	public LogicOperation createLogicOperation() {
+		LogicOperationImpl logicOperation = new LogicOperationImpl();
+		return logicOperation;
 	}
 
 	/**
@@ -445,19 +444,9 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GetElementPtr1 createGetElementPtr1() {
-		GetElementPtr1Impl getElementPtr1 = new GetElementPtr1Impl();
-		return getElementPtr1;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public GetElementPtr2 createGetElementPtr2() {
-		GetElementPtr2Impl getElementPtr2 = new GetElementPtr2Impl();
-		return getElementPtr2;
+	public NestedGetElementPtr createNestedGetElementPtr() {
+		NestedGetElementPtrImpl nestedGetElementPtr = new NestedGetElementPtrImpl();
+		return nestedGetElementPtr;
 	}
 
 	/**
@@ -555,8 +544,8 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PHI createPHI() {
-		PHIImpl phi = new PHIImpl();
+	public Phi createPhi() {
+		PhiImpl phi = new PhiImpl();
 		return phi;
 	}
 
@@ -595,9 +584,9 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VA_Arg createVA_Arg() {
-		VA_ArgImpl vA_Arg = new VA_ArgImpl();
-		return vA_Arg;
+	public VariableAttributeAccess createVariableAttributeAccess() {
+		VariableAttributeAccessImpl variableAttributeAccess = new VariableAttributeAccessImpl();
+		return variableAttributeAccess;
 	}
 
 	/**

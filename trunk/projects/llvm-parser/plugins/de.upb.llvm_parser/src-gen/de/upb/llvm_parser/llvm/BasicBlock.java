@@ -103,12 +103,12 @@ public interface BasicBlock extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Terminator</em>' containment reference.
-	 * @see #setTerminator(Ret_Instr)
+	 * @see #setTerminator(ReturnInstruction)
 	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getBasicBlock_Terminator()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Ret_Instr getTerminator();
+	ReturnInstruction getTerminator();
 
 	/**
 	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.BasicBlock#getTerminator <em>Terminator</em>}' containment reference.
@@ -118,6 +118,6 @@ public interface BasicBlock extends EObject {
 	 * @see #getTerminator()
 	 * @generated
 	 */
-	void setTerminator(Ret_Instr value);
+	void setTerminator(ReturnInstruction value);
 
 } // BasicBlock

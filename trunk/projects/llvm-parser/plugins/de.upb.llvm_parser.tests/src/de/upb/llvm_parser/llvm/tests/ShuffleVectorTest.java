@@ -13,7 +13,7 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ShuffleVectorTest extends Std_InstrTest {
+public class ShuffleVectorTest extends StandartInstructionTest {
 
 	/**
 	 * <!-- begin-user-doc -->

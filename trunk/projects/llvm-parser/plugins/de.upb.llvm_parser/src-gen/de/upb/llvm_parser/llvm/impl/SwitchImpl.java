@@ -42,7 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class SwitchImpl extends Ret_InstrImpl implements Switch {
+public class SwitchImpl extends ReturnInstructionImpl implements Switch {
 	/**
 	 * The cached value of the '{@link #getComptype() <em>Comptype</em>}' containment reference.
 	 * <!-- begin-user-doc -->
