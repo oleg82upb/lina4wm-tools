@@ -329,7 +329,7 @@
               class="de.upb.llvm_parser.ui.contentassist.LLVMASTAssistant"
               enablesFor="1"
               id="de.upb.llvm_parser.ui.action1"
-              label="Save AST"
+              label="Save Abstract Syntax Tree Model"
               menubarPath="additions">
         </action>
      </objectContribution>
