@@ -2,36 +2,32 @@
  */
 package de.upb.lina.cfg.controlflow.impl;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.controlflow.GuardedTransition;
 
-import de.upb.llvm_parser.llvm.Ret_Instr;
-
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Guarded Transition</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Guarded Transition</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.lina.cfg.controlflow.impl.GuardedTransitionImpl#getCondition <em>Condition</em>}</li>
+ * <li>
+ * {@link de.upb.lina.cfg.controlflow.impl.GuardedTransitionImpl#getCondition
+ * <em>Condition</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class GuardedTransitionImpl extends TransitionImpl implements GuardedTransition {
 	/**
-	 * The default value of the '{@link #getCondition() <em>Condition</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getCondition() <em>Condition</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getCondition()
 	 * @generated
 	 * @ordered
@@ -39,9 +35,9 @@ public class GuardedTransitionImpl extends TransitionImpl implements GuardedTran
 	protected static final String CONDITION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getCondition() <em>Condition</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getCondition()
 	 * @generated
 	 * @ordered
@@ -49,8 +45,8 @@ public class GuardedTransitionImpl extends TransitionImpl implements GuardedTran
 	protected String condition = CONDITION_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected GuardedTransitionImpl() {
@@ -58,8 +54,8 @@ public class GuardedTransitionImpl extends TransitionImpl implements GuardedTran
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -68,8 +64,8 @@ public class GuardedTransitionImpl extends TransitionImpl implements GuardedTran
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getCondition() {
@@ -77,8 +73,8 @@ public class GuardedTransitionImpl extends TransitionImpl implements GuardedTran
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setCondition(String newCondition) {
@@ -89,71 +85,72 @@ public class GuardedTransitionImpl extends TransitionImpl implements GuardedTran
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ControlflowPackage.GUARDED_TRANSITION__CONDITION:
-				return getCondition();
+		case ControlflowPackage.GUARDED_TRANSITION__CONDITION:
+			return getCondition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ControlflowPackage.GUARDED_TRANSITION__CONDITION:
-				setCondition((String)newValue);
-				return;
+		case ControlflowPackage.GUARDED_TRANSITION__CONDITION:
+			setCondition((String) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ControlflowPackage.GUARDED_TRANSITION__CONDITION:
-				setCondition(CONDITION_EDEFAULT);
-				return;
+		case ControlflowPackage.GUARDED_TRANSITION__CONDITION:
+			setCondition(CONDITION_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ControlflowPackage.GUARDED_TRANSITION__CONDITION:
-				return CONDITION_EDEFAULT == null ? condition != null : !CONDITION_EDEFAULT.equals(condition);
+		case ControlflowPackage.GUARDED_TRANSITION__CONDITION:
+			return CONDITION_EDEFAULT == null ? condition != null : !CONDITION_EDEFAULT.equals(condition);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (condition: ");
@@ -162,4 +159,4 @@ public class GuardedTransitionImpl extends TransitionImpl implements GuardedTran
 		return result.toString();
 	}
 
-} //GuardedTransitionImpl
+} // GuardedTransitionImpl

@@ -2,33 +2,32 @@
  */
 package de.upb.lina.cfg.controlflow;
 
-import de.upb.llvm_parser.llvm.Ret_Instr;
-
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Guarded Transition</b></em>'.
- * <!-- end-user-doc -->
- *
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>Guarded Transition</b></em>'. <!-- end-user-doc -->
+ * 
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.lina.cfg.controlflow.GuardedTransition#getCondition <em>Condition</em>}</li>
+ * <li>{@link de.upb.lina.cfg.controlflow.GuardedTransition#getCondition <em>
+ * Condition</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getGuardedTransition()
  * @model
  * @generated
  */
 public interface GuardedTransition extends Transition {
 	/**
-	 * Returns the value of the '<em><b>Condition</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Condition</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Condition</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Condition</em>' attribute isn't clear, there
+	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Condition</em>' attribute.
 	 * @see #setCondition(String)
 	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getGuardedTransition_Condition()
@@ -38,10 +37,13 @@ public interface GuardedTransition extends Transition {
 	String getCondition();
 
 	/**
-	 * Sets the value of the '{@link de.upb.lina.cfg.controlflow.GuardedTransition#getCondition <em>Condition</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Condition</em>' attribute.
+	 * Sets the value of the '
+	 * {@link de.upb.lina.cfg.controlflow.GuardedTransition#getCondition
+	 * <em>Condition</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Condition</em>' attribute.
 	 * @see #getCondition()
 	 * @generated
 	 */
