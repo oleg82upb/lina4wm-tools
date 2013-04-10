@@ -1,0 +1,7 @@
+# Tracing options for the de.upb.lina.cfg.diagram plug-in
+
+# Common issues
+de.upb.lina.cfg.diagram/debug=false
+
+# Visual IDs
+de.upb.lina.cfg.diagram/debug/visualID=false
