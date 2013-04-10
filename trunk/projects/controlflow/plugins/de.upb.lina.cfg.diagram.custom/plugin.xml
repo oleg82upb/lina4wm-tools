@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
+      <editpartProvider
+            class="de.upb.lina.cfg.controlflow.diagram.providers.CustomControlFlowEditPartProvider">
+         <Priority
+               name="Low">
+         </Priority>
+         <object
+               class="org.eclipse.gmf.runtime.notation.Edge"
+               id="generated-links">
+            <method
+                  name="getType()"
+                  value="4001">
+            </method>
+         </object>
+         <context
+               views="generated-diagram,generated-nodes,generated-links,generated-labels,generated-compartments">
+         </context>
+      </editpartProvider>
+   </extension>
+
+</plugin>
