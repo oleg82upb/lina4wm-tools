@@ -5,15 +5,14 @@ package de.upb.lina.cfg.controlflow;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Guarded Transition</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link de.upb.lina.cfg.controlflow.GuardedTransition#getCondition <em>
- * Condition</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.GuardedTransition#getCondition <em>Condition</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getGuardedTransition()
  * @model
  * @generated

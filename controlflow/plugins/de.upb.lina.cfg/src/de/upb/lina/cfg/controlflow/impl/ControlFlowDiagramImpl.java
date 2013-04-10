@@ -58,7 +58,7 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	protected EList<Transition> transitions;
 
 	/**
-	 * The cached value of the '{@link #getStart() <em>Start</em>}' containment reference.
+	 * The cached value of the '{@link #getStart() <em>Start</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getStart()
@@ -113,7 +113,7 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 */
 	public EList<ControlFlowLocation> getLocations() {
 		if (locations == null) {
-			locations = new EObjectContainmentEList<ControlFlowLocation>(ControlFlowLocation.class, this, ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCATIONS);
+			locations = new EObjectContainmentWithInverseEList<ControlFlowLocation>(ControlFlowLocation.class, this, ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCATIONS, ControlflowPackage.CONTROL_FLOW_LOCATION__DIAGRAM);
 		}
 		return locations;
 	}
@@ -136,6 +136,14 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * @generated
 	 */
 	public ControlFlowLocation getStart() {
+		if (start != null && start.eIsProxy()) {
+			InternalEObject oldStart = (InternalEObject)start;
+			start = (ControlFlowLocation)eResolveProxy(oldStart);
+			if (start != oldStart) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ControlflowPackage.CONTROL_FLOW_DIAGRAM__START, oldStart, start));
+			}
+		}
 		return start;
 	}
 
@@ -144,14 +152,8 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetStart(ControlFlowLocation newStart, NotificationChain msgs) {
-		ControlFlowLocation oldStart = start;
-		start = newStart;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ControlflowPackage.CONTROL_FLOW_DIAGRAM__START, oldStart, newStart);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public ControlFlowLocation basicGetStart() {
+		return start;
 	}
 
 	/**
@@ -160,17 +162,10 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * @generated
 	 */
 	public void setStart(ControlFlowLocation newStart) {
-		if (newStart != start) {
-			NotificationChain msgs = null;
-			if (start != null)
-				msgs = ((InternalEObject)start).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ControlflowPackage.CONTROL_FLOW_DIAGRAM__START, null, msgs);
-			if (newStart != null)
-				msgs = ((InternalEObject)newStart).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ControlflowPackage.CONTROL_FLOW_DIAGRAM__START, null, msgs);
-			msgs = basicSetStart(newStart, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ControlflowPackage.CONTROL_FLOW_DIAGRAM__START, newStart, newStart));
+		ControlFlowLocation oldStart = start;
+		start = newStart;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ControlflowPackage.CONTROL_FLOW_DIAGRAM__START, oldStart, start));
 	}
 
 	/**
@@ -203,6 +198,8 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCATIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLocations()).basicAdd(otherEnd, msgs);
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__TRANSITIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTransitions()).basicAdd(otherEnd, msgs);
 		}
@@ -221,8 +218,6 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 				return ((InternalEList<?>)getLocations()).basicRemove(otherEnd, msgs);
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__TRANSITIONS:
 				return ((InternalEList<?>)getTransitions()).basicRemove(otherEnd, msgs);
-			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__START:
-				return basicSetStart(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -240,7 +235,8 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__TRANSITIONS:
 				return getTransitions();
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__START:
-				return getStart();
+				if (resolve) return getStart();
+				return basicGetStart();
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__NAME:
 				return getName();
 		}

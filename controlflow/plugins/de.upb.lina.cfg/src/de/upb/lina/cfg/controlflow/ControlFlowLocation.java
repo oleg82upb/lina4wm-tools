@@ -53,26 +53,28 @@ public interface ControlFlowLocation extends EObject {
 	void setPc(int value);
 
 	/**
-	 * Returns the value of the '<em><b>Diagram</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Diagram</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getLocations <em>Locations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Diagram</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Diagram</em>' containment reference.
+	 * @return the value of the '<em>Diagram</em>' container reference.
 	 * @see #setDiagram(ControlFlowDiagram)
 	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getControlFlowLocation_Diagram()
-	 * @model containment="true" required="true"
+	 * @see de.upb.lina.cfg.controlflow.ControlFlowDiagram#getLocations
+	 * @model opposite="locations" transient="false"
 	 * @generated
 	 */
 	ControlFlowDiagram getDiagram();
 
 	/**
-	 * Sets the value of the '{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getDiagram <em>Diagram</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getDiagram <em>Diagram</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Diagram</em>' containment reference.
+	 * @param value the new value of the '<em>Diagram</em>' container reference.
 	 * @see #getDiagram()
 	 * @generated
 	 */

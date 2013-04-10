@@ -84,7 +84,7 @@ public interface ControlflowPackage extends EPackage {
 	int CONTROL_FLOW_DIAGRAM__TRANSITIONS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Start</b></em>' containment reference.
+	 * The feature id for the '<em><b>Start</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -130,7 +130,7 @@ public interface ControlflowPackage extends EPackage {
 	int CONTROL_FLOW_LOCATION__PC = 0;
 
 	/**
-	 * The feature id for the '<em><b>Diagram</b></em>' containment reference.
+	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -317,10 +317,10 @@ public interface ControlflowPackage extends EPackage {
 	EReference getControlFlowDiagram_Transitions();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getStart <em>Start</em>}'.
+	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getStart <em>Start</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Start</em>'.
+	 * @return the meta object for the reference '<em>Start</em>'.
 	 * @see de.upb.lina.cfg.controlflow.ControlFlowDiagram#getStart()
 	 * @see #getControlFlowDiagram()
 	 * @generated
@@ -360,10 +360,10 @@ public interface ControlflowPackage extends EPackage {
 	EAttribute getControlFlowLocation_Pc();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getDiagram <em>Diagram</em>}'.
+	 * Returns the meta object for the container reference '{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getDiagram <em>Diagram</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Diagram</em>'.
+	 * @return the meta object for the container reference '<em>Diagram</em>'.
 	 * @see de.upb.lina.cfg.controlflow.ControlFlowLocation#getDiagram()
 	 * @see #getControlFlowLocation()
 	 * @generated
@@ -516,7 +516,7 @@ public interface ControlflowPackage extends EPackage {
 		EReference CONTROL_FLOW_DIAGRAM__TRANSITIONS = eINSTANCE.getControlFlowDiagram_Transitions();
 
 		/**
-		 * The meta object literal for the '<em><b>Start</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Start</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -550,7 +550,7 @@ public interface ControlflowPackage extends EPackage {
 		EAttribute CONTROL_FLOW_LOCATION__PC = eINSTANCE.getControlFlowLocation_Pc();
 
 		/**
-		 * The meta object literal for the '<em><b>Diagram</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Diagram</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

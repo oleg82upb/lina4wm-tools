@@ -29,6 +29,7 @@ public interface ControlFlowDiagram extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Locations</b></em>' containment reference list.
 	 * The list contents are of type {@link de.upb.lina.cfg.controlflow.ControlFlowLocation}.
+	 * It is bidirectional and its opposite is '{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getDiagram <em>Diagram</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Locations</em>' containment reference list isn't clear,
@@ -37,7 +38,8 @@ public interface ControlFlowDiagram extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Locations</em>' containment reference list.
 	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getControlFlowDiagram_Locations()
-	 * @model containment="true"
+	 * @see de.upb.lina.cfg.controlflow.ControlFlowLocation#getDiagram
+	 * @model opposite="diagram" containment="true"
 	 * @generated
 	 */
 	EList<ControlFlowLocation> getLocations();
@@ -61,26 +63,26 @@ public interface ControlFlowDiagram extends EObject {
 	EList<Transition> getTransitions();
 
 	/**
-	 * Returns the value of the '<em><b>Start</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Start</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Start</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Start</em>' containment reference.
+	 * @return the value of the '<em>Start</em>' reference.
 	 * @see #setStart(ControlFlowLocation)
 	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getControlFlowDiagram_Start()
-	 * @model containment="true" required="true"
+	 * @model
 	 * @generated
 	 */
 	ControlFlowLocation getStart();
 
 	/**
-	 * Sets the value of the '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getStart <em>Start</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getStart <em>Start</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Start</em>' containment reference.
+	 * @param value the new value of the '<em>Start</em>' reference.
 	 * @see #getStart()
 	 * @generated
 	 */
