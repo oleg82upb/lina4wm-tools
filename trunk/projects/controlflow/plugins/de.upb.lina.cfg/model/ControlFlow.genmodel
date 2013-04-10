@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.upb.lina.cfg/src" modelPluginID="de.upb.lina.cfg"
-    modelName="ControlFlow" importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0"
+    modelName="ControlFlow" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
     copyrightFields="false" usedGenPackages="../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.genmodel#//llvm">
   <foreignModel>ControlFlow.ecore</foreignModel>
   <genPackages prefix="Controlflow" basePackage="de.upb.lina.cfg" disposableProviderFactory="true"
-      ecorePackage="ControlFlow.ecore#/">
+      fileExtensions="cfg" ecorePackage="ControlFlow.ecore#/">
     <genClasses ecoreClass="ControlFlow.ecore#//ControlFlowDiagram">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//ControlFlowDiagram/locations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//ControlFlowDiagram/transitions"/>
@@ -14,7 +14,7 @@
     </genClasses>
     <genClasses ecoreClass="ControlFlow.ecore#//ControlFlowLocation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ControlFlow.ecore#//ControlFlowLocation/pc"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//ControlFlowLocation/diagram"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ControlFlow.ecore#//ControlFlowLocation/diagram"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//ControlFlowLocation/incoming"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//ControlFlowLocation/outgoing"/>
     </genClasses>

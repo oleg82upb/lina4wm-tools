@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -58,16 +59,6 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 * @ordered
 	 */
 	protected int pc = PC_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getDiagram() <em>Diagram</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDiagram()
-	 * @generated
-	 * @ordered
-	 */
-	protected ControlFlowDiagram diagram;
 
 	/**
 	 * The cached value of the '{@link #getIncoming() <em>Incoming</em>}' reference list.
@@ -135,7 +126,8 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 * @generated
 	 */
 	public ControlFlowDiagram getDiagram() {
-		return diagram;
+		if (eContainerFeatureID() != ControlflowPackage.CONTROL_FLOW_LOCATION__DIAGRAM) return null;
+		return (ControlFlowDiagram)eContainer();
 	}
 
 	/**
@@ -144,12 +136,7 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 * @generated
 	 */
 	public NotificationChain basicSetDiagram(ControlFlowDiagram newDiagram, NotificationChain msgs) {
-		ControlFlowDiagram oldDiagram = diagram;
-		diagram = newDiagram;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ControlflowPackage.CONTROL_FLOW_LOCATION__DIAGRAM, oldDiagram, newDiagram);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
+		msgs = eBasicSetContainer((InternalEObject)newDiagram, ControlflowPackage.CONTROL_FLOW_LOCATION__DIAGRAM, msgs);
 		return msgs;
 	}
 
@@ -159,12 +146,14 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 * @generated
 	 */
 	public void setDiagram(ControlFlowDiagram newDiagram) {
-		if (newDiagram != diagram) {
+		if (newDiagram != eInternalContainer() || (eContainerFeatureID() != ControlflowPackage.CONTROL_FLOW_LOCATION__DIAGRAM && newDiagram != null)) {
+			if (EcoreUtil.isAncestor(this, newDiagram))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (diagram != null)
-				msgs = ((InternalEObject)diagram).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ControlflowPackage.CONTROL_FLOW_LOCATION__DIAGRAM, null, msgs);
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
 			if (newDiagram != null)
-				msgs = ((InternalEObject)newDiagram).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ControlflowPackage.CONTROL_FLOW_LOCATION__DIAGRAM, null, msgs);
+				msgs = ((InternalEObject)newDiagram).eInverseAdd(this, ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCATIONS, ControlFlowDiagram.class, msgs);
 			msgs = basicSetDiagram(newDiagram, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -202,12 +191,42 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ControlflowPackage.CONTROL_FLOW_LOCATION__DIAGRAM:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetDiagram((ControlFlowDiagram)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__DIAGRAM:
 				return basicSetDiagram(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case ControlflowPackage.CONTROL_FLOW_LOCATION__DIAGRAM:
+				return eInternalContainer().eInverseRemove(this, ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCATIONS, ControlFlowDiagram.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -292,7 +311,7 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__PC:
 				return pc != PC_EDEFAULT;
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__DIAGRAM:
-				return diagram != null;
+				return getDiagram() != null;
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__INCOMING:
 				return incoming != null && !incoming.isEmpty();
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__OUTGOING:

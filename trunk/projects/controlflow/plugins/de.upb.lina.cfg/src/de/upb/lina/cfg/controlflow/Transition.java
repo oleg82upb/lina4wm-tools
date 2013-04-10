@@ -117,7 +117,7 @@ public interface Transition extends EObject {
 	 * @see #setDiagram(ControlFlowDiagram)
 	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getTransition_Diagram()
 	 * @see de.upb.lina.cfg.controlflow.ControlFlowDiagram#getTransitions
-	 * @model opposite="transitions" required="true" transient="false"
+	 * @model opposite="transitions" transient="false"
 	 * @generated
 	 */
 	ControlFlowDiagram getDiagram();
