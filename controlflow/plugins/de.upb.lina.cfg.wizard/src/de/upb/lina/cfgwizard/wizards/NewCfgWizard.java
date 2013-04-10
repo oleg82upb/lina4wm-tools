@@ -24,6 +24,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 
 import de.upb.lina.cfgwizard.CFGWorkspaceOperation;
+import de.upb.llvm_parser.llvm.LlvmPackage;
 
 /**
  * This is a sample new wizard. Its role is to create a new file resource in the
@@ -126,7 +127,8 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 		// monitor.worked(1);
 
 		monitor.beginTask("Transforming LLVM to CFG...", 3);
-
+		
+		LlvmPackage.eINSTANCE.getNsURI();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Path astpath = new Path(page.getAstLocation());
 		Resource llvmast = getResource(resourceSet, astpath.toOSString());
