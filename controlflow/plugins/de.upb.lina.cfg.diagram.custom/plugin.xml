@@ -21,5 +21,14 @@
          </context>
       </editpartProvider>
    </extension>
+   <extension
+         point="org.eclipse.gmf.runtime.diagram.ui.layoutProviders">
+      <layoutProvider
+            class="de.upb.lina.cfg.controlflow.diagram.providers.ControlFlowLayoutProvider">
+         <Priority
+               name="Highest">
+         </Priority>
+      </layoutProvider>
+   </extension>
 
 </plugin>
