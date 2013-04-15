@@ -21,11 +21,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="instruction" unique="false"
-        lowerBound="1" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Instruction"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
-        eType="#//ControlFlowLocation"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
-        eType="#//ControlFlowLocation"/>
+        eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Instruction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//ControlFlowLocation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//ControlFlowLocation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="diagram" eType="#//ControlFlowDiagram"
         eOpposite="#//ControlFlowDiagram/transitions"/>
   </eClassifiers>
