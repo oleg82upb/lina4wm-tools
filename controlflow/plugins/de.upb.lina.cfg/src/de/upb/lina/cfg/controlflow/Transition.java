@@ -37,7 +37,7 @@ public interface Transition extends EObject {
 	 * @return the value of the '<em>Instruction</em>' reference.
 	 * @see #setInstruction(Instruction)
 	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getTransition_Instruction()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Instruction getInstruction();
@@ -63,7 +63,7 @@ public interface Transition extends EObject {
 	 * @return the value of the '<em>Source</em>' reference.
 	 * @see #setSource(ControlFlowLocation)
 	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getTransition_Source()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	ControlFlowLocation getSource();
@@ -89,7 +89,7 @@ public interface Transition extends EObject {
 	 * @return the value of the '<em>Target</em>' reference.
 	 * @see #setTarget(ControlFlowLocation)
 	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getTransition_Target()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	ControlFlowLocation getTarget();
