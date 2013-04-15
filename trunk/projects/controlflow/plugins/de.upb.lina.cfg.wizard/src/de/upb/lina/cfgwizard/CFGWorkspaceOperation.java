@@ -40,6 +40,7 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.NonConstantValue;
 import de.upb.llvm_parser.llvm.ReturnInstruction;
 import de.upb.llvm_parser.llvm.Switch;
+import de.upb.llvm_parser.llvm.impl.BranchImpl;
 import de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl;
 import de.upb.llvm_parser.llvm.impl.InstructionUseImpl;
 import de.upb.llvm_parser.llvm.impl.LLVMImpl;
@@ -49,8 +50,9 @@ import de.upb.llvm_parser.llvm.impl.StandartInstructionImpl;
 public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 
 	private final boolean EXCT = false; // Shall exception handling be added to
-										// i.e. Invoke function
-
+										// i.e. Invoke function?
+	private final boolean SINGLEBRANCH = false; // Shall be useless branches be
+												// inside the cfg?
 	private LLVMImpl ast = null;
 	private Path cfgpath = null;
 	private int reordering;
@@ -89,6 +91,10 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 			if (reordering == 1) {
 				addTSO(list);
 			}
+			/* remove [CFL] ->Branch-> [CFL] single in/out */
+			if (SINGLEBRANCH) {
+				removeSingleBranches(list);
+			}
 
 			ResourceSet resSet = new ResourceSetImpl();
 			Resource resource = resSet.createResource(URI.createFileURI(cfgpath.toOSString()));
@@ -103,6 +109,35 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+
+	}
+
+	private void removeSingleBranches(ArrayList<ControlFlowDiagram> cfgs) {
+		for (ControlFlowDiagram cfg : cfgs) {
+			EList<Transition> list = cfg.getTransitions();
+			for (int i = 0; i < list.size(); i++) {
+				Transition transition = list.get(i);
+				if (transition.getInstruction() instanceof BranchImpl) {
+					if (((Branch) transition.getInstruction()).getDestination() != null) {
+						for (Transition tr1 : transition.getSource().getIncoming()) {
+							tr1.setTarget(transition.getTarget());
+							transition.getTarget().getIncoming().add(tr1);
+						}
+						transition.getSource().getIncoming().clear();
+						transition.getSource().setDiagram(null);
+						transition.getSource().getOutgoing().clear();
+						transition.getTarget().getIncoming().remove(transition);
+						cfg.getLocations().remove(transition.getSource());
+						cfg.getTransitions().remove(transition);
+						transition.setSource(null);
+						transition.setTarget(null);
+						transition.setDiagram(null);
+						transition.setInstruction(null);
+						i--;
+					}
+				}
+			}
 		}
 
 	}
@@ -191,7 +226,13 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 			} else if (type.equals(LlvmPackage.eINSTANCE.getUnreachable())) {
 				// No transition right now
 			} else if (type.equals(LlvmPackage.eINSTANCE.getReturn())) {
-				// No transition right now
+				Transition t = addTransition(cfg, term);
+				act.getOutgoing().add(t);
+				temp = act;
+				act = addControlFlowLocation(cfg, pc);
+				act.getIncoming().add(temp.getOutgoing().get(temp.getOutgoing().size() - 1));
+				t.setSource(temp);
+				t.setTarget(act);
 			} else {
 				System.out.println("Not Handled Terminator" + term);
 			}
