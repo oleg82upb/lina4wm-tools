@@ -5,8 +5,8 @@ date: 02.2013
 abstract MSqueue implementation
 */
 
-#define BUFF_SIZE 20 	//size of Buffer
-#define MEM_SIZE 40	//size of memory
+#define BUFF_SIZE 9 	//size of Buffer
+#define MEM_SIZE 27	//size of memory
  
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 #include "x86_tso_buffer.pml"
@@ -17,24 +17,45 @@ abstract MSqueue implementation
 short asQueue[ASSIZE];
 hidden byte asHead = 0;
 hidden byte asTail = 0;
-hidden byte asIsEmpty = true; 
+//hidden byte asIsEmpty = true; 
 
 
 inline asEnqueue(asValue)
 {
 	
 	atomic{
-	assert(!(((asTail+1) % ASSIZE) == asHead && !asIsEmpty));	//make sure, Queue array is never full
+	//assert(!(((asTail+1) % ASSIZE) == asHead && !asIsEmpty));	//make sure, Queue array is never full
+	assert(asTail < ASSIZE);
 	asTail = (asTail+1) % ASSIZE;								//move tail
 	asQueue[asTail] = asValue;									//set new value in the queue
-	asIsEmpty = false;											//Queue is no longer empty
+	//asIsEmpty = false;											//Queue is no longer empty
 	
 	}
 }
 
 inline asDequeueFail()
 {
-	assert (asIsEmpty == true);
+	//assert (asIsEmpty == true);
+	assert (asHead == asTail);
+}
+
+inline readPrep4Fail(adr, target, sfBit)
+{
+	atomic{
+	read(adr, target);
+	sfBit = (asHead == asTail);
+	} 
+}
+
+inline readPotFail(adr, target, sfBit)
+{
+	atomic{
+	read(adr, target);
+	if 
+		::target == NULL -> assert(sfBit);
+		::else -> skip;
+	fi
+	}
 }
 
 //asValue the value we expect to be at the place head is pointing to
@@ -45,10 +66,10 @@ inline asDequeue(asValue, asReturn)
 		asQueue[asHead] = 0;							//remove element from queue
 		asHead = (asHead+1) % ASSIZE;						//move head to the next in line
 		assert (asQueue[asHead] == memory[asValue]);  	//asValue must be the element head is poniting to
-		if
-		:: asHead == (asTail+1) % ASSIZE -> asIsEmpty = true;	//mark queue as empty if last element is dequeued
-		:: else -> skip
-		fi;
+		//if
+		//:: asHead == (asTail+1) % ASSIZE -> asIsEmpty = true;	//mark queue as empty if last element is dequeued
+		//:: else -> skip
+		//fi;
 	}
 }
 
@@ -91,13 +112,14 @@ inline casLPDequeue(adr, oldValue, newValue, returnValue)
 #define Node  1	//= {0,1};
 #define I32  0 		// = {0};
 #define Ptr  0
-#define I1	0		//or better a boolean variable?
+//#define I1	0		//or better a boolean variable?
 short memUse = 1; 	//shows to the next free cell in memory
 byte this; 		//Queue instance pointer
 
 
 chan channelT1 = [0] of {mtype, short, short, short};
 chan channelT2 = [0] of {mtype, short, short, short};
+chan channelT3 = [0] of {mtype, short, short, short};
 
 inline getelementptr(type, instance, offset, targetRegister)
 {
@@ -233,7 +255,8 @@ doBody:
 	write(localTail, v1);
 	read(localHead, v2);
 	getelementptr(Node, v2, 1, next2);
-	read(next2, v3);
+	bit ok = false;
+	readPrep4Fail(next2, v3, ok);
 	write(next, v3);
 	read(localHead, v4);
 	getelementptr(Queue, this1, 0, head3);
@@ -253,7 +276,7 @@ if_then:
 	fi;
 	
 if_then5:
-	read(next, v8);
+	readPotFail(next, v8, ok);
 	if
 	:: v8 == NULL -> 	write(retval, false);			//queue is empty
 						goto end_return;
@@ -292,20 +315,32 @@ end_return:
 }
 //---------------------------------------------------------------------------------------------------------------------------------------
 proctype process1(chan ch){
-	short returnval, v;
+	//short returnval, n;
 	enqueue(this, 555);
-	enqueue(this, 666);
+	//dequeue(returnval,n);
+	//enqueue(this, 666);
 	//dequeue(returnval, v);
 	//dequeue(returnval, v);
 }
 
 proctype process2(chan ch){
-	short returnval2, returnval3, n;
+	short returnval, n;
+	dequeue(returnval,n);
 	//enqueue(this, 777);
+	//dequeue(returnval,n);
 	//enqueue(this, 888);
-	dequeue(returnval2,n);
-	dequeue(returnval3,n);
-	skip;
+	
+	//dequeue(returnval3,n);
+}
+
+proctype process3(chan ch){
+	//short returnval, n;
+	//dequeue(returnval,n);
+	enqueue(this, 777);
+	//dequeue(returnval,n);
+	//enqueue(this, 888);
+	
+	//dequeue(returnval3,n);
 }
 
 init{
@@ -317,6 +352,8 @@ atomic{
 	run bufferProcess(channelT1);
 	run process2(channelT2);
 	run bufferProcess(channelT2);
+	run process3(channelT3);
+	run bufferProcess(channelT3);
 	}
 }
 
