@@ -38,40 +38,33 @@ inline mfence()
 inline cas(adr, oldValue, newValue, returnValue) 
 {
 	// 2 steps for the executing process, but atomic on memory
-	bit success;
+	
 	ch ! iCas, adr, oldValue, newValue;
+	atomic{
+	bit success;
 	ch ? iCas, adr, success, _; 
 	returnValue = success;
+	}
 }
 
 inline writeB() {
-	/* if
-		//buffer full, need to flush first
-	:: (((tail+1) % BUFF_SIZE) == head && !isEmpty) -> flushB()	
-	:: else -> isEmpty = false; skip;
-	fi
-		-> */	
-	assert(!(((tail+1) % BUFF_SIZE) == head && !isEmpty)); //buffer should never be full
-	isEmpty = false;
- 	tail = (tail+1) % BUFF_SIZE;
+	atomic{
+	assert(tail < BUFF_SIZE);
 	buffer[tail].line[0] = address;
 	buffer[tail].line[1] = value;
+	tail++;
+	}
 }
 
 
 inline readB() {
-	short i = tail;
-	if 
-		:: tail < head && !isEmpty -> i = i + BUFF_SIZE;
-	   	:: else -> skip;
-	fi
-	->
+	short i = tail-1;
 	do
-	:: i >= head  -> 
+	:: i >= 0  -> 
 			if
 			/* if an address in the buffer is equivalent to the searched -> return value*/
-			::buffer[i%BUFF_SIZE].line[0] == address 
-				->  channel ! iRead,address,buffer[i%BUFF_SIZE].line[1],NULL;
+			::buffer[i].line[0] == address 
+				->  channel ! iRead,address,buffer[i].line[1],NULL;
 					i = 0;
 					break;
 			::else -> i--;
@@ -86,26 +79,34 @@ inline readB() {
 
 
 inline flushB() {
-	/*write value in memory: memory[address] = value*/
-	memory[buffer[head].line[0]] = buffer[head].line[1];
-	/*empty write buffer*/
-	buffer[head].line[0] = 0;
-	buffer[head].line[1] = 0;
-						
-	/*moving head*/
-	head = (head+1) % BUFF_SIZE;
-			
-	if
-	::(head == ((tail+1) % BUFF_SIZE))-> isEmpty = true;
+atomic{
+	
+	if 
+	:: (tail > 0) ->	{
+		//write value in memory: memory[address] = value
+		memory[buffer[0].line[0]] = buffer[0].line[1];
+		//move all content one step further
+		int i;
+		for (i : 1 .. tail-1) {
+			buffer[i-1].line[0] = buffer[i].line[0];
+			buffer[i-1].line[1] = buffer[i].line[1];
+		} 
+		//remove duplicate tail
+		buffer[tail-1].line[0] = 0;
+		buffer[tail-1].line[1] = 0;
+		tail--;
+		i = 0;
+		}
 	:: else -> skip;
 	fi;
+	}
 }
 
 inline mfenceB() {
 	do
 	:: atomic{
 			if
-			::isEmpty -> break;
+			::(tail<=0) -> break;	//tail > 0 iff buffer not empty
 			::else -> flushB() 
 			fi
 		}
@@ -118,8 +119,8 @@ inline casB()
 	atomic{ 
 		bit result = false;
 		if 
-			:: memory[address] == old 
-				-> 	memory[address] = new;
+			:: memory[address] == value 
+				-> 	memory[address] = newValue;
 					result = true;
 			:: else -> skip;
 		fi
@@ -133,46 +134,28 @@ inline casB()
 proctype bufferProcess(chan channel)
 {		
 	/*start resp. end of queue*/
-	short head = 0;
-	short tail = -1;
-	bit isEmpty = true;
+	short tail = 0;
 
 	short address = 0;
 	short value = 0; 
-	short old = 0;
-	short new = 0;
+	short newValue = 0;
 	
 	/*writebuffer*/
 	matrix buffer [BUFF_SIZE];
 
 	
 end:	do 
-		::	/*
-		atomic{ 
-				if
-				//WRITE
-				:: channel ? iWrite(address,value, _) -> writeB();
-				//READ
-				:: channel ? iRead, address, value, _ -> readB();
-				//FLUSH
-				:: !isEmpty -> flushB();
-				//FENCE
-				:: channel ? iMfence, _, _ ,_ -> mfenceB();
-				//COMPARE AND SWAP
-				:: channel ? iCas, address , old, new -> casB();
-				fi
-			} */
-			if
+		::	if
 				//WRITE
 				:: atomic{channel ? iWrite(address,value, _) -> writeB();}
 				//READ
 				:: atomic{channel ? iRead, address, value, _ -> readB();}
 				//FLUSH
-				:: atomic{!isEmpty -> flushB();}
+				:: atomic{(tail > 0) -> flushB();}  //tail > 0  iff not empty
 				//FENCE
 				:: channel ? iMfence, _, _ ,_ -> mfenceB();
 				//COMPARE AND SWAP
-				:: channel ? iCas, address , old, new -> casB();
+				:: channel ? iCas, address , value, newValue -> casB();
 			fi
 		od
 }
