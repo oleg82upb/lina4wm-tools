@@ -935,17 +935,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getNonConstantValue_Name() {
-		return (EAttribute)nonConstantValueEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getNonConstantValue_Pointer() {
-		return (EAttribute)nonConstantValueEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)nonConstantValueEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -955,6 +946,15 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 */
 	public EClass getValue() {
 		return valueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getValue_Name() {
+		return (EAttribute)valueEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2682,10 +2682,10 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		createEAttribute(constantEClass, CONSTANT__VALUE);
 
 		nonConstantValueEClass = createEClass(NON_CONSTANT_VALUE);
-		createEAttribute(nonConstantValueEClass, NON_CONSTANT_VALUE__NAME);
 		createEAttribute(nonConstantValueEClass, NON_CONSTANT_VALUE__POINTER);
 
 		valueEClass = createEClass(VALUE);
+		createEAttribute(valueEClass, VALUE__NAME);
 
 		valueStructEClass = createEClass(VALUE_STRUCT);
 		createEReference(valueStructEClass, VALUE_STRUCT__TYPES);
@@ -3044,10 +3044,10 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		initEAttribute(getConstant_Value(), ecorePackage.getEInt(), "value", null, 0, 1, Constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(nonConstantValueEClass, NonConstantValue.class, "NonConstantValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getNonConstantValue_Name(), ecorePackage.getEString(), "name", null, 0, 1, NonConstantValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNonConstantValue_Pointer(), ecorePackage.getEString(), "pointer", null, 0, 1, NonConstantValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(valueEClass, Value.class, "Value", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getValue_Name(), ecorePackage.getEString(), "name", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(valueStructEClass, ValueStruct.class, "ValueStruct", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getValueStruct_Types(), this.getTypeUse(), null, "types", null, 0, -1, ValueStruct.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

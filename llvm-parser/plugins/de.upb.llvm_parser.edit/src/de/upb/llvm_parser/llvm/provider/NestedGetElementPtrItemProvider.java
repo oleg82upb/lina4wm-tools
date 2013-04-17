@@ -114,7 +114,10 @@ public class NestedGetElementPtrItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_NestedGetElementPtr_type");
+		String label = ((NestedGetElementPtr)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_NestedGetElementPtr_type") :
+			getString("_UI_NestedGetElementPtr_type") + " " + label;
 	}
 
 	/**

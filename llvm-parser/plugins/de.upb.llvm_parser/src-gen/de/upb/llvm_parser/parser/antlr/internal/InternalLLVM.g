@@ -1831,36 +1831,65 @@ ruleValue returns [EObject current=null]
             grammarAccess.getValueAccess().getValueAction_0_0(),
             $current);
     }
-)(this_STRING_1=RULE_STRING
-    { 
-    newLeafNode(this_STRING_1, grammarAccess.getValueAccess().getSTRINGTerminalRuleCall_0_1_0()); 
-    }
+)(
+(
+(
+		lv_name_1_1=RULE_STRING
+		{
+			newLeafNode(lv_name_1_1, grammarAccess.getValueAccess().getNameSTRINGTerminalRuleCall_0_1_0_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getValueRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_1_1, 
+        		"STRING");
+	    }
 
-    |
-    { 
-        newCompositeNode(grammarAccess.getValueAccess().getPrimitiveTypeParserRuleCall_0_1_1()); 
-    }
-rulePrimitiveType
-    { 
-        afterParserOrEnumRuleCall();
-    }
+    |		{ 
+	        newCompositeNode(grammarAccess.getValueAccess().getNamePrimitiveTypeParserRuleCall_0_1_0_1()); 
+	    }
+		lv_name_1_2=rulePrimitiveType		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getValueRule());
+	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_1_2, 
+        		"PrimitiveType");
+	        afterParserOrEnumRuleCall();
+	    }
 
-    |
-    { 
-        newCompositeNode(grammarAccess.getValueAccess().getInitializersParserRuleCall_0_1_2()); 
-    }
-ruleInitializers
-    { 
-        afterParserOrEnumRuleCall();
-    }
+    |		{ 
+	        newCompositeNode(grammarAccess.getValueAccess().getNameInitializersParserRuleCall_0_1_0_2()); 
+	    }
+		lv_name_1_3=ruleInitializers		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getValueRule());
+	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_1_3, 
+        		"Initializers");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+
+)
 ))
     |
     { 
         newCompositeNode(grammarAccess.getValueAccess().getCastParserRuleCall_1()); 
     }
-    this_Cast_4=ruleCast
+    this_Cast_2=ruleCast
     { 
-        $current = $this_Cast_4.current; 
+        $current = $this_Cast_2.current; 
         afterParserOrEnumRuleCall();
     }
 
@@ -1868,9 +1897,9 @@ ruleInitializers
     { 
         newCompositeNode(grammarAccess.getValueAccess().getNestedGetElementPtrParserRuleCall_2()); 
     }
-    this_NestedGetElementPtr_5=ruleNestedGetElementPtr
+    this_NestedGetElementPtr_3=ruleNestedGetElementPtr
     { 
-        $current = $this_NestedGetElementPtr_5.current; 
+        $current = $this_NestedGetElementPtr_3.current; 
         afterParserOrEnumRuleCall();
     }
 
@@ -1878,9 +1907,9 @@ ruleInitializers
     { 
         newCompositeNode(grammarAccess.getValueAccess().getConstantParserRuleCall_3()); 
     }
-    this_Constant_6=ruleConstant
+    this_Constant_4=ruleConstant
     { 
-        $current = $this_Constant_6.current; 
+        $current = $this_Constant_4.current; 
         afterParserOrEnumRuleCall();
     }
 
@@ -1888,9 +1917,9 @@ ruleInitializers
     { 
         newCompositeNode(grammarAccess.getValueAccess().getNonConstantValueParserRuleCall_4()); 
     }
-    this_NonConstantValue_7=ruleNonConstantValue
+    this_NonConstantValue_5=ruleNonConstantValue
     { 
-        $current = $this_NonConstantValue_7.current; 
+        $current = $this_NonConstantValue_5.current; 
         afterParserOrEnumRuleCall();
     }
 )

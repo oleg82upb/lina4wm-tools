@@ -113,7 +113,10 @@ public class CastItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Cast_type");
+		String label = ((Cast)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Cast_type") :
+			getString("_UI_Cast_type") + " " + label;
 	}
 
 	/**

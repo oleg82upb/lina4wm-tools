@@ -2861,27 +2861,27 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Value__Alternatives_0_1
+rule__Value__NameAlternatives_0_1_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getValueAccess().getSTRINGTerminalRuleCall_0_1_0()); }
+{ before(grammarAccess.getValueAccess().getNameSTRINGTerminalRuleCall_0_1_0_0()); }
 	RULE_STRING
-{ after(grammarAccess.getValueAccess().getSTRINGTerminalRuleCall_0_1_0()); }
+{ after(grammarAccess.getValueAccess().getNameSTRINGTerminalRuleCall_0_1_0_0()); }
 )
 
     |(
-{ before(grammarAccess.getValueAccess().getPrimitiveTypeParserRuleCall_0_1_1()); }
+{ before(grammarAccess.getValueAccess().getNamePrimitiveTypeParserRuleCall_0_1_0_1()); }
 	rulePrimitiveType
-{ after(grammarAccess.getValueAccess().getPrimitiveTypeParserRuleCall_0_1_1()); }
+{ after(grammarAccess.getValueAccess().getNamePrimitiveTypeParserRuleCall_0_1_0_1()); }
 )
 
     |(
-{ before(grammarAccess.getValueAccess().getInitializersParserRuleCall_0_1_2()); }
+{ before(grammarAccess.getValueAccess().getNameInitializersParserRuleCall_0_1_0_2()); }
 	ruleInitializers
-{ after(grammarAccess.getValueAccess().getInitializersParserRuleCall_0_1_2()); }
+{ after(grammarAccess.getValueAccess().getNameInitializersParserRuleCall_0_1_0_2()); }
 )
 
 ;
@@ -8053,9 +8053,9 @@ rule__Value__Group_0__1__Impl
     }
 :
 (
-{ before(grammarAccess.getValueAccess().getAlternatives_0_1()); }
-(rule__Value__Alternatives_0_1)
-{ after(grammarAccess.getValueAccess().getAlternatives_0_1()); }
+{ before(grammarAccess.getValueAccess().getNameAssignment_0_1()); }
+(rule__Value__NameAssignment_0_1)
+{ after(grammarAccess.getValueAccess().getNameAssignment_0_1()); }
 )
 
 ;
@@ -22118,6 +22118,22 @@ rule__NonConstantValue__PointerAssignment_1
 (
 { before(grammarAccess.getNonConstantValueAccess().getPointerPOINTERTerminalRuleCall_1_0()); }
 	RULE_POINTER{ after(grammarAccess.getNonConstantValueAccess().getPointerPOINTERTerminalRuleCall_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Value__NameAssignment_0_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getValueAccess().getNameAlternatives_0_1_0()); }
+(rule__Value__NameAlternatives_0_1_0)
+{ after(grammarAccess.getValueAccess().getNameAlternatives_0_1_0()); }
 )
 
 ;

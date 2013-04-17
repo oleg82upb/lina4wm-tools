@@ -103,8 +103,10 @@ public class ConstantItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		Constant constant = (Constant)object;
-		return getString("_UI_Constant_type") + " " + constant.getValue();
+		String label = ((Constant)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Constant_type") :
+			getString("_UI_Constant_type") + " " + label;
 	}
 
 	/**
