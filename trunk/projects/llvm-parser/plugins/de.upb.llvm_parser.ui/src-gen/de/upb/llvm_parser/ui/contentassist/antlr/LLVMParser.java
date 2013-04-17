@@ -76,6 +76,7 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMetadataValueAccess().getAlternatives_1_1(), "rule__MetadataValue__Alternatives_1_1");
 					put(grammarAccess.getMetadataValueAccess().getAlternatives_1_1_3_1_0(), "rule__MetadataValue__Alternatives_1_1_3_1_0");
 					put(grammarAccess.getMetadataValueAccess().getAlternatives_1_1_3_1_1(), "rule__MetadataValue__Alternatives_1_1_3_1_1");
+					put(grammarAccess.getMetadataValueAccess().getAlternatives_1_1_3_1_1_0_3_1(), "rule__MetadataValue__Alternatives_1_1_3_1_1_0_3_1");
 					put(grammarAccess.getGetElementPtrAccess().getAggregateAlternatives_2_0_0(), "rule__GetElementPtr__AggregateAlternatives_2_0_0");
 					put(grammarAccess.getNestedGetElementPtrAccess().getAggregateAlternatives_2_1_0(), "rule__NestedGetElementPtr__AggregateAlternatives_2_1_0");
 					put(grammarAccess.getExtractValueAccess().getAlternatives_1(), "rule__ExtractValue__Alternatives_1");
@@ -165,7 +166,7 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMetadataValueAccess().getGroup_1_1_3_1_0_0(), "rule__MetadataValue__Group_1_1_3_1_0_0__0");
 					put(grammarAccess.getMetadataValueAccess().getGroup_1_1_3_1_1_0(), "rule__MetadataValue__Group_1_1_3_1_1_0__0");
 					put(grammarAccess.getMetadataValueAccess().getGroup_1_1_3_1_1_0_3(), "rule__MetadataValue__Group_1_1_3_1_1_0_3__0");
-					put(grammarAccess.getMetadataValueAccess().getGroup_1_1_3_1_1_0_3_1(), "rule__MetadataValue__Group_1_1_3_1_1_0_3_1__0");
+					put(grammarAccess.getMetadataValueAccess().getGroup_1_1_3_1_1_0_3_1_0(), "rule__MetadataValue__Group_1_1_3_1_1_0_3_1_0__0");
 					put(grammarAccess.getMetadataValueAccess().getGroup_1_1_3_1_1_1(), "rule__MetadataValue__Group_1_1_3_1_1_1__0");
 					put(grammarAccess.getALIGNMENTAccess().getGroup(), "rule__ALIGNMENT__Group__0");
 					put(grammarAccess.getGetElementPtrAccess().getGroup(), "rule__GetElementPtr__Group__0");

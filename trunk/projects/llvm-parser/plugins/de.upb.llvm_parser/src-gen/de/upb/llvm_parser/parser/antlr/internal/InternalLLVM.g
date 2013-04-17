@@ -3693,39 +3693,46 @@ ruleMetadataValue returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getMetadataValueAccess().getCommaKeyword_1_1_3_1_1_0_3_0()); 
     }
-(
+((
 	kw='metadata' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getMetadataValueAccess().getMetadataKeyword_1_1_3_1_1_0_3_1_0()); 
+        newLeafNode(kw, grammarAccess.getMetadataValueAccess().getMetadataKeyword_1_1_3_1_1_0_3_1_0_0()); 
     }
 
 	kw='!' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getMetadataValueAccess().getExclamationMarkKeyword_1_1_3_1_1_0_3_1_1()); 
+        newLeafNode(kw, grammarAccess.getMetadataValueAccess().getExclamationMarkKeyword_1_1_3_1_1_0_3_1_0_1()); 
     }
     this_INT_25=RULE_INT    {
 		$current.merge(this_INT_25);
     }
 
     { 
-    newLeafNode(this_INT_25, grammarAccess.getMetadataValueAccess().getINTTerminalRuleCall_1_1_3_1_1_0_3_1_2()); 
+    newLeafNode(this_INT_25, grammarAccess.getMetadataValueAccess().getINTTerminalRuleCall_1_1_3_1_1_0_3_1_0_2()); 
+    }
+)
+    |
+	kw='null' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getMetadataValueAccess().getNullKeyword_1_1_3_1_1_0_3_1_1()); 
     }
 ))?)
-    |(    this_INT_TYPE_26=RULE_INT_TYPE    {
-		$current.merge(this_INT_TYPE_26);
+    |(    this_INT_TYPE_27=RULE_INT_TYPE    {
+		$current.merge(this_INT_TYPE_27);
     }
 
     { 
-    newLeafNode(this_INT_TYPE_26, grammarAccess.getMetadataValueAccess().getINT_TYPETerminalRuleCall_1_1_3_1_1_1_0()); 
+    newLeafNode(this_INT_TYPE_27, grammarAccess.getMetadataValueAccess().getINT_TYPETerminalRuleCall_1_1_3_1_1_1_0()); 
     }
-    this_INT_27=RULE_INT    {
-		$current.merge(this_INT_27);
+    this_INT_28=RULE_INT    {
+		$current.merge(this_INT_28);
     }
 
     { 
-    newLeafNode(this_INT_27, grammarAccess.getMetadataValueAccess().getINTTerminalRuleCall_1_1_3_1_1_1_1()); 
+    newLeafNode(this_INT_28, grammarAccess.getMetadataValueAccess().getINTTerminalRuleCall_1_1_3_1_1_1_1()); 
     }
 
 	kw=',' 
@@ -3733,19 +3740,19 @@ ruleMetadataValue returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getMetadataValueAccess().getCommaKeyword_1_1_3_1_1_1_2()); 
     }
-    this_INT_TYPE_29=RULE_INT_TYPE    {
-		$current.merge(this_INT_TYPE_29);
+    this_INT_TYPE_30=RULE_INT_TYPE    {
+		$current.merge(this_INT_TYPE_30);
     }
 
     { 
-    newLeafNode(this_INT_TYPE_29, grammarAccess.getMetadataValueAccess().getINT_TYPETerminalRuleCall_1_1_3_1_1_1_3()); 
+    newLeafNode(this_INT_TYPE_30, grammarAccess.getMetadataValueAccess().getINT_TYPETerminalRuleCall_1_1_3_1_1_1_3()); 
     }
-    this_INT_30=RULE_INT    {
-		$current.merge(this_INT_30);
+    this_INT_31=RULE_INT    {
+		$current.merge(this_INT_31);
     }
 
     { 
-    newLeafNode(this_INT_30, grammarAccess.getMetadataValueAccess().getINTTerminalRuleCall_1_1_3_1_1_1_4()); 
+    newLeafNode(this_INT_31, grammarAccess.getMetadataValueAccess().getINTTerminalRuleCall_1_1_3_1_1_1_4()); 
     }
 ))
 	kw='}' 

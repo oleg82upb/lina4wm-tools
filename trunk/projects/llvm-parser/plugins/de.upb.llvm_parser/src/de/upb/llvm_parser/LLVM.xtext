@@ -178,7 +178,7 @@ MetadataValue:
 	(('!' INT) |
 	('!{' ID_FQN '}') |
 	('!' ID_FQN) |
-	'metadata' (('!' '{' | '!{') (('metadata' '!' STRING (',' ('metadata' '!' INT))?)|(INT_TYPE INT ',' INT_TYPE INT)) '}')?))?;
+	'metadata' (('!' '{' | '!{') (('metadata' '!' STRING (',' (('metadata' '!' INT)|'null'))?)|(INT_TYPE INT ',' INT_TYPE INT)) '}')?))?;
 
 ALIGNMENT:
 	'align' INT //must be a power of 2
