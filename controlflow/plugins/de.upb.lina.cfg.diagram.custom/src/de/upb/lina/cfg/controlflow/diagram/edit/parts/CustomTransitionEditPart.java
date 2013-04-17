@@ -12,11 +12,12 @@ import de.upb.lina.cfg.controlflow.Transition;
 
 /**
  * @author Oleg Travkin
- *
+ * 
  */
 public class CustomTransitionEditPart extends TransitionEditPart {
-
+	private CustomLabelingUtil labelutil = new CustomLabelingUtil();
 	private static String EMPTY = "null";
+
 	/**
 	 * @param view
 	 */
@@ -29,35 +30,27 @@ public class CustomTransitionEditPart extends TransitionEditPart {
 		TransitionFigure figure = new TransitionFigure();
 
 		String labelText = null;
-		if(this.getModel() != null)
-		{
+		if (this.getModel() != null) {
 			Transition t = null;
-			if(this.getModel() instanceof Connector)
-			{
+			if (this.getModel() instanceof Connector) {
 				Connector c = (Connector) this.getModel();
 				EObject o = c.getElement();
-				if(o instanceof Transition)
-				{
-					t = (Transition) o; 
+				if (o instanceof Transition) {
+					t = (Transition) o;
 				}
 			}
 			labelText = getTransitionLabelStringFor(t);
-		}
-		else {
+		} else {
 			labelText = EMPTY;
 		}
-		
 		figure.getTransitionLabel().setText(labelText);
 		return figure;
 	}
-	
+
 	protected String getTransitionLabelStringFor(Transition t) {
 		if (t == null) {
 			return EMPTY;
 		}
-		
-		//TODO provide more information than just the kind of instruction, but also parameters...
-		return t.getInstruction().eClass().getName();
+		return labelutil.getTransitionLabel(t);
 	}
-	
 }
