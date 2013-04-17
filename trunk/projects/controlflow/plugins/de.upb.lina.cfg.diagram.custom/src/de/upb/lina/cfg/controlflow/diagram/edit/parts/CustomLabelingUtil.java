@@ -4,7 +4,10 @@ import org.eclipse.emf.ecore.EClass;
 
 import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.Transition;
+import de.upb.llvm_parser.llvm.Call;
+import de.upb.llvm_parser.llvm.CmpXchg;
 import de.upb.llvm_parser.llvm.Constant;
+import de.upb.llvm_parser.llvm.GetElementPtr;
 import de.upb.llvm_parser.llvm.InstructionUse;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Load;
@@ -38,6 +41,27 @@ public class CustomLabelingUtil {
 			if (t instanceof GuardedTransition) {
 				result += ((GuardedTransition) t).getCondition();
 			}
+		}
+		// GetElementPtr
+		if (type.equals(LlvmPackage.eINSTANCE.getGetElementPtr())) {
+			GetElementPtr instr = (GetElementPtr) t.getInstruction();
+			result += addValue(instr.getAggregatename());
+			for (int i = 0; i < instr.getIndizies().size(); i++) {
+				result += addValue(instr.getIndizies().get(i));
+			}
+			// OFFENE FRAGE: Typ der Struktur mit angeben?
+		}
+		// CmpXchg
+		if (type.equals(LlvmPackage.eINSTANCE.getCmpXchg())) {
+			CmpXchg instr = (CmpXchg) t.getInstruction();
+			result += addValue(instr.getAdress());
+			result += addValue(instr.getComparevalue());
+			result += addValue(instr.getNewvalue());
+		}
+		// Call
+		if (type.equals(LlvmPackage.eINSTANCE.getCall())) {
+			Call instr = (Call) t.getInstruction();
+			result += addValue(instr.getAdress());
 		}
 		return result;
 	}
