@@ -87,7 +87,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_TypeList_RightParenthesisAsteriskAsteriskAsteriskAsteriskAsteriskKeyword_1_1_2_5_or_RightParenthesisAsteriskAsteriskAsteriskAsteriskKeyword_1_1_2_4_or_RightParenthesisAsteriskAsteriskAsteriskKeyword_1_1_2_3_or_RightParenthesisAsteriskAsteriskKeyword_1_1_2_2_or_RightParenthesisAsteriskKeyword_1_1_2_1_or_RightParenthesisKeyword_1_1_2_0;
 	protected AbstractElementAlias match_TypeUse_LeftParenthesisRightParenthesisAsteriskKeyword_1_q;
 	protected AbstractElementAlias match_TypeUse_ORESTTerminalRuleCall_2_q;
-	protected AbstractElementAlias match_Value_InitializersParserRuleCall_0_1_2_or_PrimitiveTypeParserRuleCall_0_1_1_or_STRINGTerminalRuleCall_0_1_0;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
@@ -160,7 +159,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_TypeList_RightParenthesisAsteriskAsteriskAsteriskAsteriskAsteriskKeyword_1_1_2_5_or_RightParenthesisAsteriskAsteriskAsteriskAsteriskKeyword_1_1_2_4_or_RightParenthesisAsteriskAsteriskAsteriskKeyword_1_1_2_3_or_RightParenthesisAsteriskAsteriskKeyword_1_1_2_2_or_RightParenthesisAsteriskKeyword_1_1_2_1_or_RightParenthesisKeyword_1_1_2_0 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getTypeListAccess().getRightParenthesisAsteriskAsteriskAsteriskAsteriskAsteriskKeyword_1_1_2_5()), new TokenAlias(false, false, grammarAccess.getTypeListAccess().getRightParenthesisAsteriskAsteriskAsteriskAsteriskKeyword_1_1_2_4()), new TokenAlias(false, false, grammarAccess.getTypeListAccess().getRightParenthesisAsteriskAsteriskAsteriskKeyword_1_1_2_3()), new TokenAlias(false, false, grammarAccess.getTypeListAccess().getRightParenthesisAsteriskAsteriskKeyword_1_1_2_2()), new TokenAlias(false, false, grammarAccess.getTypeListAccess().getRightParenthesisAsteriskKeyword_1_1_2_1()), new TokenAlias(false, false, grammarAccess.getTypeListAccess().getRightParenthesisKeyword_1_1_2_0()));
 		match_TypeUse_LeftParenthesisRightParenthesisAsteriskKeyword_1_q = new TokenAlias(false, true, grammarAccess.getTypeUseAccess().getLeftParenthesisRightParenthesisAsteriskKeyword_1());
 		match_TypeUse_ORESTTerminalRuleCall_2_q = new TokenAlias(false, true, grammarAccess.getTypeUseAccess().getORESTTerminalRuleCall_2());
-		match_Value_InitializersParserRuleCall_0_1_2_or_PrimitiveTypeParserRuleCall_0_1_1_or_STRINGTerminalRuleCall_0_1_0 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getValueAccess().getInitializersParserRuleCall_0_1_2()), new TokenAlias(false, false, grammarAccess.getValueAccess().getPrimitiveTypeParserRuleCall_0_1_1()), new TokenAlias(false, false, grammarAccess.getValueAccess().getSTRINGTerminalRuleCall_0_1_0()));
 	}
 	
 	@Override
@@ -185,8 +183,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 			return getINT_TYPEToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getI_PREDICATESRule())
 			return getI_PREDICATESToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getInitializersRule())
-			return getInitializersToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getLINKAGERule())
 			return getLINKAGEToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getMetadataValueRule())
@@ -197,8 +193,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 			return getOpaqueToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getPOINTERRule())
 			return getPOINTERToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getPrimitiveTypeRule())
-			return getPrimitiveTypeToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getRETURN_ATTRIBUTESRule())
 			return getRETURN_ATTRIBUTESToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getSL_COMMENTRule())
@@ -317,16 +311,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	}
 	
 	/**
-	 * Initializers:
-	 * 	'zeroinitializer';
-	 */
-	protected String getInitializersToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "zeroinitializer";
-	}
-	
-	/**
 	 * LINKAGE:
 	 * 	'private' | 'linker_private' | 'linker_private_weak' | 'available_externally' | 'linkonce' | 'common' | 'appending' |
 	 * 	'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' | 'dllimport' | 'dllexport' | ALIAS_LINKAGE;
@@ -380,16 +364,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 		if (node != null)
 			return getTokenText(node);
 		return "*";
-	}
-	
-	/**
-	 * PrimitiveType:
-	 * 	'void' | 'null' | 'label' | 'undef' | 'true' | 'false';
-	 */
-	protected String getPrimitiveTypeToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "void";
 	}
 	
 	/**
@@ -575,8 +549,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_TypeUse_LeftParenthesisRightParenthesisAsteriskKeyword_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_TypeUse_ORESTTerminalRuleCall_2_q.equals(syntax))
 				emit_TypeUse_ORESTTerminalRuleCall_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Value_InitializersParserRuleCall_0_1_2_or_PrimitiveTypeParserRuleCall_0_1_1_or_STRINGTerminalRuleCall_0_1_0.equals(syntax))
-				emit_Value_InitializersParserRuleCall_0_1_2_or_PrimitiveTypeParserRuleCall_0_1_1_or_STRINGTerminalRuleCall_0_1_0(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -624,18 +596,18 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * Syntax:
 	 *     (
-	     'udiv' | 
-	     'urem' | 
-	     'mul' | 
-	     'add' | 
-	     'srem' | 
-	     'fsub' | 
-	     'sdiv' | 
 	     'frem' | 
-	     'fdiv' | 
-	     'fmul' | 
+	     'fsub' | 
+	     'sub' | 
 	     'fadd' | 
-	     'sub'
+	     'add' | 
+	     'mul' | 
+	     'udiv' | 
+	     'sdiv' | 
+	     'fmul' | 
+	     'srem' | 
+	     'urem' | 
+	     'fdiv'
 	 )
 	 */
 	protected void emit_ArithmeticOperation_AddKeyword_0_0_or_FaddKeyword_0_1_or_FdivKeyword_0_8_or_FmulKeyword_0_5_or_FremKeyword_0_11_or_FsubKeyword_0_3_or_MulKeyword_0_4_or_SdivKeyword_0_7_or_SremKeyword_0_10_or_SubKeyword_0_2_or_UdivKeyword_0_6_or_UremKeyword_0_9(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -644,7 +616,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     (('nsw' | 'nuw') ('nsw' | 'nuw')?)?
+	 *     (('nuw' | 'nsw') ('nuw' | 'nsw')?)?
 	 */
 	protected void emit_ArithmeticOperation_____NswKeyword_1_0_0_or_NuwKeyword_1_0_1_____NswKeyword_1_1_1_or_NuwKeyword_1_1_0__q__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -652,7 +624,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     (('nsw' | 'nuw') ('nsw'? | 'nuw'?))?
+	 *     (('nuw' | 'nsw') ('nuw'? | 'nsw'?))?
 	 */
 	protected void emit_ArithmeticOperation_____NswKeyword_1_0_0_or_NuwKeyword_1_0_1_____NswKeyword_1_1_1_q_or_NuwKeyword_1_1_0_q____q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -660,7 +632,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     '[]' | ('[' ']')
+	 *     ('[' ']') | '[]'
 	 */
 	protected void emit_Array_LeftSquareBracketRightSquareBracketKeyword_1_1_or___LeftSquareBracketKeyword_1_2_0_RightSquareBracketKeyword_1_2_1__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -908,7 +880,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     ('constant' | 'unnamed_addr' | 'global' | LINKAGE)*
+	 *     ('constant' | LINKAGE | 'unnamed_addr' | 'global')*
 	 */
 	protected void emit_GlobalDefinition___ConstantKeyword_2_3_or_GlobalKeyword_2_1_or_LINKAGEParserRuleCall_2_0_or_Unnamed_addrKeyword_2_2__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -964,7 +936,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     (',' (MetadataValue+ | ALIGNMENT))*
+	 *     (',' (ALIGNMENT | MetadataValue+))*
 	 */
 	protected void emit_Load___CommaKeyword_0_5_0___ALIGNMENTParserRuleCall_0_5_1_0_or_MetadataValueParserRuleCall_0_5_1_1_p____a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -973,12 +945,12 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * Syntax:
 	 *     (
-	     'lshr' | 
 	     'shl' | 
+	     'or' | 
 	     'xor' | 
 	     'and' | 
-	     'or' | 
-	     'ashr'
+	     'ashr' | 
+	     'lshr'
 	 )
 	 */
 	protected void emit_LogicOperation_AndKeyword_0_3_or_AshrKeyword_0_2_or_LshrKeyword_0_1_or_OrKeyword_0_4_or_ShlKeyword_0_0_or_XorKeyword_0_5(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -1075,7 +1047,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     (',' (MetadataValue+ | ALIGNMENT))*
+	 *     (',' (ALIGNMENT | MetadataValue+))*
 	 */
 	protected void emit_Store___CommaKeyword_0_9_0___ALIGNMENTParserRuleCall_0_9_1_0_or_MetadataValueParserRuleCall_0_9_1_1_p____a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -1091,7 +1063,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     'triple' | 'datalayout'
+	 *     'datalayout' | 'triple'
 	 */
 	protected void emit_TopLevelEntity_DatalayoutKeyword_1_1_0_or_TripleKeyword_1_1_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -1104,11 +1076,11 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	     (
 	         '(' 
 	         (
-	             ')' | 
-	             ')***' | 
 	             ')*****' | 
+	             ')***' | 
 	             ')*' | 
 	             ')****' | 
+	             ')' | 
 	             ')**'
 	         )
 	     )
@@ -1137,12 +1109,12 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * Syntax:
 	 *     (
-	     ')' | 
 	     ')***' | 
 	     ')*****' | 
 	     ')*' | 
 	     ')****' | 
-	     ')**'
+	     ')**' | 
+	     ')'
 	 )
 	 */
 	protected void emit_TypeList_RightParenthesisAsteriskAsteriskAsteriskAsteriskAsteriskKeyword_1_1_2_5_or_RightParenthesisAsteriskAsteriskAsteriskAsteriskKeyword_1_1_2_4_or_RightParenthesisAsteriskAsteriskAsteriskKeyword_1_1_2_3_or_RightParenthesisAsteriskAsteriskKeyword_1_1_2_2_or_RightParenthesisAsteriskKeyword_1_1_2_1_or_RightParenthesisKeyword_1_1_2_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -1162,14 +1134,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     OREST?
 	 */
 	protected void emit_TypeUse_ORESTTerminalRuleCall_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Syntax:
-	 *     PrimitiveType | Initializers | STRING
-	 */
-	protected void emit_Value_InitializersParserRuleCall_0_1_2_or_PrimitiveTypeParserRuleCall_0_1_1_or_STRINGTerminalRuleCall_0_1_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

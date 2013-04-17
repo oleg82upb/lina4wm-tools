@@ -117,7 +117,7 @@ NonConstantValue:
 	name=VALID_ID (pointer=POINTER)?;
 
 Value:
-	{Value} (STRING| PrimitiveType | Initializers) | Cast | NestedGetElementPtr | Constant | NonConstantValue;
+	{Value} name= (STRING| PrimitiveType | Initializers) | Cast | NestedGetElementPtr | Constant | NonConstantValue;
 
 ValueStruct:
 	'{' types+=TypeUse value+=Value (',' types+=TypeUse value+=Value)* '}';

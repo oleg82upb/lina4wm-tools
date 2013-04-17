@@ -192,8 +192,8 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
     public static final int T__56=56;
     public static final int T__199=199;
     public static final int T__57=57;
-    public static final int T__58=58;
     public static final int T__198=198;
+    public static final int T__58=58;
     public static final int T__51=51;
     public static final int T__197=197;
     public static final int T__52=52;
@@ -8496,9 +8496,9 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Value__Alternatives"
 
 
-    // $ANTLR start "rule__Value__Alternatives_0_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:2864:1: rule__Value__Alternatives_0_1 : ( ( RULE_STRING ) | ( rulePrimitiveType ) | ( ruleInitializers ) );
-    public final void rule__Value__Alternatives_0_1() throws RecognitionException {
+    // $ANTLR start "rule__Value__NameAlternatives_0_1_0"
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:2864:1: rule__Value__NameAlternatives_0_1_0 : ( ( RULE_STRING ) | ( rulePrimitiveType ) | ( ruleInitializers ) );
+    public final void rule__Value__NameAlternatives_0_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -8540,9 +8540,9 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
                     // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:2869:1: ( RULE_STRING )
                     // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:2870:1: RULE_STRING
                     {
-                     before(grammarAccess.getValueAccess().getSTRINGTerminalRuleCall_0_1_0()); 
-                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Value__Alternatives_0_16215); 
-                     after(grammarAccess.getValueAccess().getSTRINGTerminalRuleCall_0_1_0()); 
+                     before(grammarAccess.getValueAccess().getNameSTRINGTerminalRuleCall_0_1_0_0()); 
+                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Value__NameAlternatives_0_1_06215); 
+                     after(grammarAccess.getValueAccess().getNameSTRINGTerminalRuleCall_0_1_0_0()); 
 
                     }
 
@@ -8555,13 +8555,13 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
                     // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:2875:6: ( rulePrimitiveType )
                     // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:2876:1: rulePrimitiveType
                     {
-                     before(grammarAccess.getValueAccess().getPrimitiveTypeParserRuleCall_0_1_1()); 
-                    pushFollow(FOLLOW_rulePrimitiveType_in_rule__Value__Alternatives_0_16232);
+                     before(grammarAccess.getValueAccess().getNamePrimitiveTypeParserRuleCall_0_1_0_1()); 
+                    pushFollow(FOLLOW_rulePrimitiveType_in_rule__Value__NameAlternatives_0_1_06232);
                     rulePrimitiveType();
 
                     state._fsp--;
 
-                     after(grammarAccess.getValueAccess().getPrimitiveTypeParserRuleCall_0_1_1()); 
+                     after(grammarAccess.getValueAccess().getNamePrimitiveTypeParserRuleCall_0_1_0_1()); 
 
                     }
 
@@ -8574,13 +8574,13 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
                     // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:2881:6: ( ruleInitializers )
                     // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:2882:1: ruleInitializers
                     {
-                     before(grammarAccess.getValueAccess().getInitializersParserRuleCall_0_1_2()); 
-                    pushFollow(FOLLOW_ruleInitializers_in_rule__Value__Alternatives_0_16249);
+                     before(grammarAccess.getValueAccess().getNameInitializersParserRuleCall_0_1_0_2()); 
+                    pushFollow(FOLLOW_ruleInitializers_in_rule__Value__NameAlternatives_0_1_06249);
                     ruleInitializers();
 
                     state._fsp--;
 
-                     after(grammarAccess.getValueAccess().getInitializersParserRuleCall_0_1_2()); 
+                     after(grammarAccess.getValueAccess().getNameInitializersParserRuleCall_0_1_0_2()); 
 
                     }
 
@@ -8601,7 +8601,7 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Value__Alternatives_0_1"
+    // $ANTLR end "rule__Value__NameAlternatives_0_1_0"
 
 
     // $ANTLR start "rule__Structure__TypesAlternatives_2_1_1_0"
@@ -10556,11 +10556,11 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
             if ( (LA36_0==193) ) {
                 int LA36_1 = input.LA(2);
 
-                if ( (LA36_1==RULE_INT) ) {
-                    alt36=1;
-                }
-                else if ( ((LA36_1>=RULE_INT_TYPE && LA36_1<=RULE_ID)||(LA36_1>=17 && LA36_1<=22)) ) {
+                if ( ((LA36_1>=RULE_INT_TYPE && LA36_1<=RULE_ID)||(LA36_1>=17 && LA36_1<=22)) ) {
                     alt36=3;
+                }
+                else if ( (LA36_1==RULE_INT) ) {
+                    alt36=1;
                 }
                 else {
                     NoViableAltException nvae =
@@ -10685,11 +10685,11 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
                 {
                 int LA37_1 = input.LA(2);
 
-                if ( ((LA37_1>=RULE_INT_TYPE && LA37_1<=RULE_ID)||(LA37_1>=17 && LA37_1<=22)) ) {
-                    alt37=3;
-                }
-                else if ( (LA37_1==RULE_INT) ) {
+                if ( (LA37_1==RULE_INT) ) {
                     alt37=1;
+                }
+                else if ( ((LA37_1>=RULE_INT_TYPE && LA37_1<=RULE_ID)||(LA37_1>=17 && LA37_1<=22)) ) {
+                    alt37=3;
                 }
                 else {
                     NoViableAltException nvae =
@@ -11269,11 +11269,11 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
             if ( (LA43_0==204) ) {
                 int LA43_1 = input.LA(2);
 
-                if ( (LA43_1==RULE_INT_TYPE||LA43_1==RULE_VALID_ID||(LA43_1>=21 && LA43_1<=22)||(LA43_1>=28 && LA43_1<=37)||LA43_1==191) ) {
-                    alt43=1;
-                }
-                else if ( (LA43_1==205) ) {
+                if ( (LA43_1==205) ) {
                     alt43=2;
+                }
+                else if ( (LA43_1==RULE_INT_TYPE||LA43_1==RULE_VALID_ID||(LA43_1>=21 && LA43_1<=22)||(LA43_1>=28 && LA43_1<=37)||LA43_1==191) ) {
+                    alt43=1;
                 }
                 else {
                     NoViableAltException nvae =
@@ -11498,11 +11498,11 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
             if ( (LA46_0==206) ) {
                 int LA46_1 = input.LA(2);
 
-                if ( (LA46_1==RULE_INT_TYPE||LA46_1==RULE_VALID_ID||(LA46_1>=21 && LA46_1<=22)||(LA46_1>=28 && LA46_1<=37)||LA46_1==191) ) {
-                    alt46=1;
-                }
-                else if ( (LA46_1==205) ) {
+                if ( (LA46_1==205) ) {
                     alt46=2;
+                }
+                else if ( (LA46_1==RULE_INT_TYPE||LA46_1==RULE_VALID_ID||(LA46_1>=21 && LA46_1<=22)||(LA46_1>=28 && LA46_1<=37)||LA46_1==191) ) {
+                    alt46=1;
                 }
                 else {
                     NoViableAltException nvae =
@@ -12136,6 +12136,55 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
                 if ( (LA54_1==28) ) {
                     switch ( input.LA(3) ) {
+                    case EOF:
+                    case RULE_INT_TYPE:
+                    case RULE_ID:
+                    case 17:
+                    case 18:
+                    case 19:
+                    case 20:
+                    case 177:
+                    case 188:
+                        {
+                        alt54=1;
+                        }
+                        break;
+                    case 21:
+                        {
+                        int LA54_5 = input.LA(4);
+
+                        if ( (LA54_5==169||LA54_5==190) ) {
+                            alt54=1;
+                        }
+                        else if ( (LA54_5==EOF||(LA54_5>=RULE_INT_TYPE && LA54_5<=RULE_ID)||(LA54_5>=17 && LA54_5<=22)||LA54_5==177||LA54_5==188) ) {
+                            alt54=2;
+                        }
+                        else {
+                            NoViableAltException nvae =
+                                new NoViableAltException("", 54, 5, input);
+
+                            throw nvae;
+                        }
+                        }
+                        break;
+                    case 22:
+                        {
+                        int LA54_6 = input.LA(4);
+
+                        if ( (LA54_6==169||LA54_6==190) ) {
+                            alt54=1;
+                        }
+                        else if ( (LA54_6==EOF||(LA54_6>=RULE_INT_TYPE && LA54_6<=RULE_ID)||(LA54_6>=17 && LA54_6<=22)||LA54_6==177||LA54_6==188) ) {
+                            alt54=2;
+                        }
+                        else {
+                            NoViableAltException nvae =
+                                new NoViableAltException("", 54, 6, input);
+
+                            throw nvae;
+                        }
+                        }
+                        break;
                     case RULE_OREST:
                     case RULE_STRING:
                     case RULE_INT:
@@ -12162,55 +12211,6 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
                     case 196:
                         {
                         alt54=2;
-                        }
-                        break;
-                    case 21:
-                        {
-                        int LA54_4 = input.LA(4);
-
-                        if ( (LA54_4==169||LA54_4==190) ) {
-                            alt54=1;
-                        }
-                        else if ( (LA54_4==EOF||(LA54_4>=RULE_INT_TYPE && LA54_4<=RULE_ID)||(LA54_4>=17 && LA54_4<=22)||LA54_4==177||LA54_4==188) ) {
-                            alt54=2;
-                        }
-                        else {
-                            NoViableAltException nvae =
-                                new NoViableAltException("", 54, 4, input);
-
-                            throw nvae;
-                        }
-                        }
-                        break;
-                    case 22:
-                        {
-                        int LA54_5 = input.LA(4);
-
-                        if ( (LA54_5==169||LA54_5==190) ) {
-                            alt54=1;
-                        }
-                        else if ( (LA54_5==EOF||(LA54_5>=RULE_INT_TYPE && LA54_5<=RULE_ID)||(LA54_5>=17 && LA54_5<=22)||LA54_5==177||LA54_5==188) ) {
-                            alt54=2;
-                        }
-                        else {
-                            NoViableAltException nvae =
-                                new NoViableAltException("", 54, 5, input);
-
-                            throw nvae;
-                        }
-                        }
-                        break;
-                    case EOF:
-                    case RULE_INT_TYPE:
-                    case RULE_ID:
-                    case 17:
-                    case 18:
-                    case 19:
-                    case 20:
-                    case 177:
-                    case 188:
-                        {
-                        alt54=1;
                         }
                         break;
                     default:
@@ -12319,11 +12319,11 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
             if ( (LA55_0==229) ) {
                 int LA55_1 = input.LA(2);
 
-                if ( (LA55_1==30) ) {
-                    alt55=1;
-                }
-                else if ( (LA55_1==RULE_INT_TYPE) ) {
+                if ( (LA55_1==RULE_INT_TYPE) ) {
                     alt55=2;
+                }
+                else if ( (LA55_1==30) ) {
+                    alt55=1;
                 }
                 else {
                     NoViableAltException nvae =
@@ -23374,31 +23374,31 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Value__Group_0__1__Impl"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:8050:1: rule__Value__Group_0__1__Impl : ( ( rule__Value__Alternatives_0_1 ) ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:8050:1: rule__Value__Group_0__1__Impl : ( ( rule__Value__NameAssignment_0_1 ) ) ;
     public final void rule__Value__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:8054:1: ( ( ( rule__Value__Alternatives_0_1 ) ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:8055:1: ( ( rule__Value__Alternatives_0_1 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:8054:1: ( ( ( rule__Value__NameAssignment_0_1 ) ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:8055:1: ( ( rule__Value__NameAssignment_0_1 ) )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:8055:1: ( ( rule__Value__Alternatives_0_1 ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:8056:1: ( rule__Value__Alternatives_0_1 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:8055:1: ( ( rule__Value__NameAssignment_0_1 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:8056:1: ( rule__Value__NameAssignment_0_1 )
             {
-             before(grammarAccess.getValueAccess().getAlternatives_0_1()); 
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:8057:1: ( rule__Value__Alternatives_0_1 )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:8057:2: rule__Value__Alternatives_0_1
+             before(grammarAccess.getValueAccess().getNameAssignment_0_1()); 
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:8057:1: ( rule__Value__NameAssignment_0_1 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:8057:2: rule__Value__NameAssignment_0_1
             {
-            pushFollow(FOLLOW_rule__Value__Alternatives_0_1_in_rule__Value__Group_0__1__Impl17364);
-            rule__Value__Alternatives_0_1();
+            pushFollow(FOLLOW_rule__Value__NameAssignment_0_1_in_rule__Value__Group_0__1__Impl17364);
+            rule__Value__NameAssignment_0_1();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getValueAccess().getAlternatives_0_1()); 
+             after(grammarAccess.getValueAccess().getNameAssignment_0_1()); 
 
             }
 
@@ -32445,15 +32445,15 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
             else if ( (LA123_0==66) ) {
                 int LA123_2 = input.LA(2);
 
-                if ( (LA123_2==RULE_INT_TYPE) ) {
+                if ( (LA123_2==194) ) {
+                    alt123=1;
+                }
+                else if ( (LA123_2==RULE_INT_TYPE) ) {
                     int LA123_5 = input.LA(3);
 
                     if ( (LA123_5==RULE_INT) ) {
                         alt123=1;
                     }
-                }
-                else if ( (LA123_2==194) ) {
-                    alt123=1;
                 }
             }
             switch (alt123) {
@@ -59914,21 +59914,68 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__NonConstantValue__PointerAssignment_1"
 
 
+    // $ANTLR start "rule__Value__NameAssignment_0_1"
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22128:1: rule__Value__NameAssignment_0_1 : ( ( rule__Value__NameAlternatives_0_1_0 ) ) ;
+    public final void rule__Value__NameAssignment_0_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22132:1: ( ( ( rule__Value__NameAlternatives_0_1_0 ) ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22133:1: ( ( rule__Value__NameAlternatives_0_1_0 ) )
+            {
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22133:1: ( ( rule__Value__NameAlternatives_0_1_0 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22134:1: ( rule__Value__NameAlternatives_0_1_0 )
+            {
+             before(grammarAccess.getValueAccess().getNameAlternatives_0_1_0()); 
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22135:1: ( rule__Value__NameAlternatives_0_1_0 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22135:2: rule__Value__NameAlternatives_0_1_0
+            {
+            pushFollow(FOLLOW_rule__Value__NameAlternatives_0_1_0_in_rule__Value__NameAssignment_0_145198);
+            rule__Value__NameAlternatives_0_1_0();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getValueAccess().getNameAlternatives_0_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Value__NameAssignment_0_1"
+
+
     // $ANTLR start "rule__ValueStruct__TypesAssignment_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22128:1: rule__ValueStruct__TypesAssignment_1 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22144:1: rule__ValueStruct__TypesAssignment_1 : ( ruleTypeUse ) ;
     public final void rule__ValueStruct__TypesAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22132:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22133:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22148:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22149:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22133:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22134:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22149:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22150:1: ruleTypeUse
             {
              before(grammarAccess.getValueStructAccess().getTypesTypeUseParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__ValueStruct__TypesAssignment_145198);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__ValueStruct__TypesAssignment_145231);
             ruleTypeUse();
 
             state._fsp--;
@@ -59956,20 +60003,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ValueStruct__ValueAssignment_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22143:1: rule__ValueStruct__ValueAssignment_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22159:1: rule__ValueStruct__ValueAssignment_2 : ( ruleValue ) ;
     public final void rule__ValueStruct__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22147:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22148:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22163:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22164:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22148:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22149:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22164:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22165:1: ruleValue
             {
              before(grammarAccess.getValueStructAccess().getValueValueParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__ValueStruct__ValueAssignment_245229);
+            pushFollow(FOLLOW_ruleValue_in_rule__ValueStruct__ValueAssignment_245262);
             ruleValue();
 
             state._fsp--;
@@ -59997,20 +60044,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ValueStruct__TypesAssignment_3_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22158:1: rule__ValueStruct__TypesAssignment_3_1 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22174:1: rule__ValueStruct__TypesAssignment_3_1 : ( ruleTypeUse ) ;
     public final void rule__ValueStruct__TypesAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22162:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22163:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22178:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22179:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22163:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22164:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22179:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22180:1: ruleTypeUse
             {
              before(grammarAccess.getValueStructAccess().getTypesTypeUseParserRuleCall_3_1_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__ValueStruct__TypesAssignment_3_145260);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__ValueStruct__TypesAssignment_3_145293);
             ruleTypeUse();
 
             state._fsp--;
@@ -60038,20 +60085,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ValueStruct__ValueAssignment_3_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22173:1: rule__ValueStruct__ValueAssignment_3_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22189:1: rule__ValueStruct__ValueAssignment_3_2 : ( ruleValue ) ;
     public final void rule__ValueStruct__ValueAssignment_3_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22177:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22178:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22193:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22194:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22178:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22179:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22194:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22195:1: ruleValue
             {
              before(grammarAccess.getValueStructAccess().getValueValueParserRuleCall_3_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__ValueStruct__ValueAssignment_3_245291);
+            pushFollow(FOLLOW_ruleValue_in_rule__ValueStruct__ValueAssignment_3_245324);
             ruleValue();
 
             state._fsp--;
@@ -60079,20 +60126,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Structure__TypesAssignment_2_0"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22188:1: rule__Structure__TypesAssignment_2_0 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22204:1: rule__Structure__TypesAssignment_2_0 : ( ruleTypeUse ) ;
     public final void rule__Structure__TypesAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22192:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22193:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22208:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22209:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22193:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22194:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22209:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22210:1: ruleTypeUse
             {
              before(grammarAccess.getStructureAccess().getTypesTypeUseParserRuleCall_2_0_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Structure__TypesAssignment_2_045322);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Structure__TypesAssignment_2_045355);
             ruleTypeUse();
 
             state._fsp--;
@@ -60120,23 +60167,23 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Structure__TypesAssignment_2_1_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22203:1: rule__Structure__TypesAssignment_2_1_1 : ( ( rule__Structure__TypesAlternatives_2_1_1_0 ) ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22219:1: rule__Structure__TypesAssignment_2_1_1 : ( ( rule__Structure__TypesAlternatives_2_1_1_0 ) ) ;
     public final void rule__Structure__TypesAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22207:1: ( ( ( rule__Structure__TypesAlternatives_2_1_1_0 ) ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22208:1: ( ( rule__Structure__TypesAlternatives_2_1_1_0 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22223:1: ( ( ( rule__Structure__TypesAlternatives_2_1_1_0 ) ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22224:1: ( ( rule__Structure__TypesAlternatives_2_1_1_0 ) )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22208:1: ( ( rule__Structure__TypesAlternatives_2_1_1_0 ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22209:1: ( rule__Structure__TypesAlternatives_2_1_1_0 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22224:1: ( ( rule__Structure__TypesAlternatives_2_1_1_0 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22225:1: ( rule__Structure__TypesAlternatives_2_1_1_0 )
             {
              before(grammarAccess.getStructureAccess().getTypesAlternatives_2_1_1_0()); 
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22210:1: ( rule__Structure__TypesAlternatives_2_1_1_0 )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22210:2: rule__Structure__TypesAlternatives_2_1_1_0
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22226:1: ( rule__Structure__TypesAlternatives_2_1_1_0 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22226:2: rule__Structure__TypesAlternatives_2_1_1_0
             {
-            pushFollow(FOLLOW_rule__Structure__TypesAlternatives_2_1_1_0_in_rule__Structure__TypesAssignment_2_1_145353);
+            pushFollow(FOLLOW_rule__Structure__TypesAlternatives_2_1_1_0_in_rule__Structure__TypesAssignment_2_1_145386);
             rule__Structure__TypesAlternatives_2_1_1_0();
 
             state._fsp--;
@@ -60167,20 +60214,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ParameterList__TypesAssignment_1_1_1_0"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22219:1: rule__ParameterList__TypesAssignment_1_1_1_0 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22235:1: rule__ParameterList__TypesAssignment_1_1_1_0 : ( ruleTypeUse ) ;
     public final void rule__ParameterList__TypesAssignment_1_1_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22223:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22224:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22239:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22240:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22224:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22225:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22240:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22241:1: ruleTypeUse
             {
              before(grammarAccess.getParameterListAccess().getTypesTypeUseParserRuleCall_1_1_1_0_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__ParameterList__TypesAssignment_1_1_1_045386);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__ParameterList__TypesAssignment_1_1_1_045419);
             ruleTypeUse();
 
             state._fsp--;
@@ -60208,20 +60255,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ParameterList__ListsAssignment_1_1_1_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22234:1: rule__ParameterList__ListsAssignment_1_1_1_1 : ( ruleTypeList ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22250:1: rule__ParameterList__ListsAssignment_1_1_1_1 : ( ruleTypeList ) ;
     public final void rule__ParameterList__ListsAssignment_1_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22238:1: ( ( ruleTypeList ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22239:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22254:1: ( ( ruleTypeList ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22255:1: ( ruleTypeList )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22239:1: ( ruleTypeList )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22240:1: ruleTypeList
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22255:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22256:1: ruleTypeList
             {
              before(grammarAccess.getParameterListAccess().getListsTypeListParserRuleCall_1_1_1_1_0()); 
-            pushFollow(FOLLOW_ruleTypeList_in_rule__ParameterList__ListsAssignment_1_1_1_145417);
+            pushFollow(FOLLOW_ruleTypeList_in_rule__ParameterList__ListsAssignment_1_1_1_145450);
             ruleTypeList();
 
             state._fsp--;
@@ -60249,20 +60296,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ParameterList__VariablesAssignment_1_1_1_3"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22249:1: rule__ParameterList__VariablesAssignment_1_1_1_3 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22265:1: rule__ParameterList__VariablesAssignment_1_1_1_3 : ( ruleValue ) ;
     public final void rule__ParameterList__VariablesAssignment_1_1_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22253:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22254:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22269:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22270:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22254:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22255:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22270:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22271:1: ruleValue
             {
              before(grammarAccess.getParameterListAccess().getVariablesValueParserRuleCall_1_1_1_3_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__ParameterList__VariablesAssignment_1_1_1_345448);
+            pushFollow(FOLLOW_ruleValue_in_rule__ParameterList__VariablesAssignment_1_1_1_345481);
             ruleValue();
 
             state._fsp--;
@@ -60290,20 +60337,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ParameterList__TypesAssignment_1_1_1_4_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22264:1: rule__ParameterList__TypesAssignment_1_1_1_4_1 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22280:1: rule__ParameterList__TypesAssignment_1_1_1_4_1 : ( ruleTypeUse ) ;
     public final void rule__ParameterList__TypesAssignment_1_1_1_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22268:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22269:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22284:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22285:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22269:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22270:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22285:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22286:1: ruleTypeUse
             {
              before(grammarAccess.getParameterListAccess().getTypesTypeUseParserRuleCall_1_1_1_4_1_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__ParameterList__TypesAssignment_1_1_1_4_145479);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__ParameterList__TypesAssignment_1_1_1_4_145512);
             ruleTypeUse();
 
             state._fsp--;
@@ -60331,20 +60378,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ParameterList__ListsAssignment_1_1_1_4_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22279:1: rule__ParameterList__ListsAssignment_1_1_1_4_2 : ( ruleTypeList ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22295:1: rule__ParameterList__ListsAssignment_1_1_1_4_2 : ( ruleTypeList ) ;
     public final void rule__ParameterList__ListsAssignment_1_1_1_4_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22283:1: ( ( ruleTypeList ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22284:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22299:1: ( ( ruleTypeList ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22300:1: ( ruleTypeList )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22284:1: ( ruleTypeList )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22285:1: ruleTypeList
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22300:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22301:1: ruleTypeList
             {
              before(grammarAccess.getParameterListAccess().getListsTypeListParserRuleCall_1_1_1_4_2_0()); 
-            pushFollow(FOLLOW_ruleTypeList_in_rule__ParameterList__ListsAssignment_1_1_1_4_245510);
+            pushFollow(FOLLOW_ruleTypeList_in_rule__ParameterList__ListsAssignment_1_1_1_4_245543);
             ruleTypeList();
 
             state._fsp--;
@@ -60372,20 +60419,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ParameterList__VariablesAssignment_1_1_1_4_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22294:1: rule__ParameterList__VariablesAssignment_1_1_1_4_4 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22310:1: rule__ParameterList__VariablesAssignment_1_1_1_4_4 : ( ruleValue ) ;
     public final void rule__ParameterList__VariablesAssignment_1_1_1_4_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22298:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22299:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22314:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22315:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22299:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22300:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22315:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22316:1: ruleValue
             {
              before(grammarAccess.getParameterListAccess().getVariablesValueParserRuleCall_1_1_1_4_4_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__ParameterList__VariablesAssignment_1_1_1_4_445541);
+            pushFollow(FOLLOW_ruleValue_in_rule__ParameterList__VariablesAssignment_1_1_1_4_445574);
             ruleValue();
 
             state._fsp--;
@@ -60413,20 +60460,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeList__TypesAssignment_1_1_1_0"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22309:1: rule__TypeList__TypesAssignment_1_1_1_0 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22325:1: rule__TypeList__TypesAssignment_1_1_1_0 : ( ruleTypeUse ) ;
     public final void rule__TypeList__TypesAssignment_1_1_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22313:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22314:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22329:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22330:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22314:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22315:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22330:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22331:1: ruleTypeUse
             {
              before(grammarAccess.getTypeListAccess().getTypesTypeUseParserRuleCall_1_1_1_0_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__TypeList__TypesAssignment_1_1_1_045572);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__TypeList__TypesAssignment_1_1_1_045605);
             ruleTypeUse();
 
             state._fsp--;
@@ -60454,20 +60501,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeList__TypelistsAssignment_1_1_1_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22324:1: rule__TypeList__TypelistsAssignment_1_1_1_1 : ( ruleTypeList ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22340:1: rule__TypeList__TypelistsAssignment_1_1_1_1 : ( ruleTypeList ) ;
     public final void rule__TypeList__TypelistsAssignment_1_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22328:1: ( ( ruleTypeList ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22329:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22344:1: ( ( ruleTypeList ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22345:1: ( ruleTypeList )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22329:1: ( ruleTypeList )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22330:1: ruleTypeList
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22345:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22346:1: ruleTypeList
             {
              before(grammarAccess.getTypeListAccess().getTypelistsTypeListParserRuleCall_1_1_1_1_0()); 
-            pushFollow(FOLLOW_ruleTypeList_in_rule__TypeList__TypelistsAssignment_1_1_1_145603);
+            pushFollow(FOLLOW_ruleTypeList_in_rule__TypeList__TypelistsAssignment_1_1_1_145636);
             ruleTypeList();
 
             state._fsp--;
@@ -60495,20 +60542,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeList__TypesAssignment_1_1_1_3_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22339:1: rule__TypeList__TypesAssignment_1_1_1_3_1 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22355:1: rule__TypeList__TypesAssignment_1_1_1_3_1 : ( ruleTypeUse ) ;
     public final void rule__TypeList__TypesAssignment_1_1_1_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22343:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22344:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22359:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22360:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22344:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22345:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22360:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22361:1: ruleTypeUse
             {
              before(grammarAccess.getTypeListAccess().getTypesTypeUseParserRuleCall_1_1_1_3_1_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__TypeList__TypesAssignment_1_1_1_3_145634);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__TypeList__TypesAssignment_1_1_1_3_145667);
             ruleTypeUse();
 
             state._fsp--;
@@ -60536,20 +60583,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeList__TypelistsAssignment_1_1_1_3_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22354:1: rule__TypeList__TypelistsAssignment_1_1_1_3_2 : ( ruleTypeList ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22370:1: rule__TypeList__TypelistsAssignment_1_1_1_3_2 : ( ruleTypeList ) ;
     public final void rule__TypeList__TypelistsAssignment_1_1_1_3_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22358:1: ( ( ruleTypeList ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22359:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22374:1: ( ( ruleTypeList ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22375:1: ( ruleTypeList )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22359:1: ( ruleTypeList )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22360:1: ruleTypeList
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22375:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22376:1: ruleTypeList
             {
              before(grammarAccess.getTypeListAccess().getTypelistsTypeListParserRuleCall_1_1_1_3_2_0()); 
-            pushFollow(FOLLOW_ruleTypeList_in_rule__TypeList__TypelistsAssignment_1_1_1_3_245665);
+            pushFollow(FOLLOW_ruleTypeList_in_rule__TypeList__TypelistsAssignment_1_1_1_3_245698);
             ruleTypeList();
 
             state._fsp--;
@@ -60577,20 +60624,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionBody__MetaAssignment_0"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22369:1: rule__FunctionBody__MetaAssignment_0 : ( ruleMetadataValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22385:1: rule__FunctionBody__MetaAssignment_0 : ( ruleMetadataValue ) ;
     public final void rule__FunctionBody__MetaAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22373:1: ( ( ruleMetadataValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22374:1: ( ruleMetadataValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22389:1: ( ( ruleMetadataValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22390:1: ( ruleMetadataValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22374:1: ( ruleMetadataValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22375:1: ruleMetadataValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22390:1: ( ruleMetadataValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22391:1: ruleMetadataValue
             {
              before(grammarAccess.getFunctionBodyAccess().getMetaMetadataValueParserRuleCall_0_0()); 
-            pushFollow(FOLLOW_ruleMetadataValue_in_rule__FunctionBody__MetaAssignment_045696);
+            pushFollow(FOLLOW_ruleMetadataValue_in_rule__FunctionBody__MetaAssignment_045729);
             ruleMetadataValue();
 
             state._fsp--;
@@ -60618,20 +60665,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FunctionBody__BlocksAssignment_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22384:1: rule__FunctionBody__BlocksAssignment_2 : ( ruleBasicBlock ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22400:1: rule__FunctionBody__BlocksAssignment_2 : ( ruleBasicBlock ) ;
     public final void rule__FunctionBody__BlocksAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22388:1: ( ( ruleBasicBlock ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22389:1: ( ruleBasicBlock )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22404:1: ( ( ruleBasicBlock ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22405:1: ( ruleBasicBlock )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22389:1: ( ruleBasicBlock )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22390:1: ruleBasicBlock
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22405:1: ( ruleBasicBlock )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22406:1: ruleBasicBlock
             {
              before(grammarAccess.getFunctionBodyAccess().getBlocksBasicBlockParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleBasicBlock_in_rule__FunctionBody__BlocksAssignment_245727);
+            pushFollow(FOLLOW_ruleBasicBlock_in_rule__FunctionBody__BlocksAssignment_245760);
             ruleBasicBlock();
 
             state._fsp--;
@@ -60659,20 +60706,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BasicBlock__LabelAssignment_0_0"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22399:1: rule__BasicBlock__LabelAssignment_0_0 : ( ruleID_FQN ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22415:1: rule__BasicBlock__LabelAssignment_0_0 : ( ruleID_FQN ) ;
     public final void rule__BasicBlock__LabelAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22403:1: ( ( ruleID_FQN ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22404:1: ( ruleID_FQN )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22419:1: ( ( ruleID_FQN ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22420:1: ( ruleID_FQN )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22404:1: ( ruleID_FQN )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22405:1: ruleID_FQN
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22420:1: ( ruleID_FQN )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22421:1: ruleID_FQN
             {
              before(grammarAccess.getBasicBlockAccess().getLabelID_FQNParserRuleCall_0_0_0()); 
-            pushFollow(FOLLOW_ruleID_FQN_in_rule__BasicBlock__LabelAssignment_0_045758);
+            pushFollow(FOLLOW_ruleID_FQN_in_rule__BasicBlock__LabelAssignment_0_045791);
             ruleID_FQN();
 
             state._fsp--;
@@ -60700,23 +60747,23 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BasicBlock__InstructionsAssignment_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22414:1: rule__BasicBlock__InstructionsAssignment_1 : ( ( rule__BasicBlock__InstructionsAlternatives_1_0 ) ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22430:1: rule__BasicBlock__InstructionsAssignment_1 : ( ( rule__BasicBlock__InstructionsAlternatives_1_0 ) ) ;
     public final void rule__BasicBlock__InstructionsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22418:1: ( ( ( rule__BasicBlock__InstructionsAlternatives_1_0 ) ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22419:1: ( ( rule__BasicBlock__InstructionsAlternatives_1_0 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22434:1: ( ( ( rule__BasicBlock__InstructionsAlternatives_1_0 ) ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22435:1: ( ( rule__BasicBlock__InstructionsAlternatives_1_0 ) )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22419:1: ( ( rule__BasicBlock__InstructionsAlternatives_1_0 ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22420:1: ( rule__BasicBlock__InstructionsAlternatives_1_0 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22435:1: ( ( rule__BasicBlock__InstructionsAlternatives_1_0 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22436:1: ( rule__BasicBlock__InstructionsAlternatives_1_0 )
             {
              before(grammarAccess.getBasicBlockAccess().getInstructionsAlternatives_1_0()); 
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22421:1: ( rule__BasicBlock__InstructionsAlternatives_1_0 )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22421:2: rule__BasicBlock__InstructionsAlternatives_1_0
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22437:1: ( rule__BasicBlock__InstructionsAlternatives_1_0 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22437:2: rule__BasicBlock__InstructionsAlternatives_1_0
             {
-            pushFollow(FOLLOW_rule__BasicBlock__InstructionsAlternatives_1_0_in_rule__BasicBlock__InstructionsAssignment_145789);
+            pushFollow(FOLLOW_rule__BasicBlock__InstructionsAlternatives_1_0_in_rule__BasicBlock__InstructionsAssignment_145822);
             rule__BasicBlock__InstructionsAlternatives_1_0();
 
             state._fsp--;
@@ -60747,20 +60794,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BasicBlock__RetadrAssignment_2_0"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22430:1: rule__BasicBlock__RetadrAssignment_2_0 : ( RULE_VALID_ID ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22446:1: rule__BasicBlock__RetadrAssignment_2_0 : ( RULE_VALID_ID ) ;
     public final void rule__BasicBlock__RetadrAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22434:1: ( ( RULE_VALID_ID ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22435:1: ( RULE_VALID_ID )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22450:1: ( ( RULE_VALID_ID ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22451:1: ( RULE_VALID_ID )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22435:1: ( RULE_VALID_ID )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22436:1: RULE_VALID_ID
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22451:1: ( RULE_VALID_ID )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22452:1: RULE_VALID_ID
             {
              before(grammarAccess.getBasicBlockAccess().getRetadrVALID_IDTerminalRuleCall_2_0_0()); 
-            match(input,RULE_VALID_ID,FOLLOW_RULE_VALID_ID_in_rule__BasicBlock__RetadrAssignment_2_045822); 
+            match(input,RULE_VALID_ID,FOLLOW_RULE_VALID_ID_in_rule__BasicBlock__RetadrAssignment_2_045855); 
              after(grammarAccess.getBasicBlockAccess().getRetadrVALID_IDTerminalRuleCall_2_0_0()); 
 
             }
@@ -60784,20 +60831,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BasicBlock__TerminatorAssignment_3"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22445:1: rule__BasicBlock__TerminatorAssignment_3 : ( ruleReturnInstruction ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22461:1: rule__BasicBlock__TerminatorAssignment_3 : ( ruleReturnInstruction ) ;
     public final void rule__BasicBlock__TerminatorAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22449:1: ( ( ruleReturnInstruction ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22450:1: ( ruleReturnInstruction )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22465:1: ( ( ruleReturnInstruction ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22466:1: ( ruleReturnInstruction )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22450:1: ( ruleReturnInstruction )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22451:1: ruleReturnInstruction
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22466:1: ( ruleReturnInstruction )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22467:1: ruleReturnInstruction
             {
              before(grammarAccess.getBasicBlockAccess().getTerminatorReturnInstructionParserRuleCall_3_0()); 
-            pushFollow(FOLLOW_ruleReturnInstruction_in_rule__BasicBlock__TerminatorAssignment_345853);
+            pushFollow(FOLLOW_ruleReturnInstruction_in_rule__BasicBlock__TerminatorAssignment_345886);
             ruleReturnInstruction();
 
             state._fsp--;
@@ -60825,20 +60872,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InstructionUse__Reg_or_varAssignment_0"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22460:1: rule__InstructionUse__Reg_or_varAssignment_0 : ( RULE_VALID_ID ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22476:1: rule__InstructionUse__Reg_or_varAssignment_0 : ( RULE_VALID_ID ) ;
     public final void rule__InstructionUse__Reg_or_varAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22464:1: ( ( RULE_VALID_ID ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22465:1: ( RULE_VALID_ID )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22480:1: ( ( RULE_VALID_ID ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22481:1: ( RULE_VALID_ID )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22465:1: ( RULE_VALID_ID )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22466:1: RULE_VALID_ID
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22481:1: ( RULE_VALID_ID )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22482:1: RULE_VALID_ID
             {
              before(grammarAccess.getInstructionUseAccess().getReg_or_varVALID_IDTerminalRuleCall_0_0()); 
-            match(input,RULE_VALID_ID,FOLLOW_RULE_VALID_ID_in_rule__InstructionUse__Reg_or_varAssignment_045884); 
+            match(input,RULE_VALID_ID,FOLLOW_RULE_VALID_ID_in_rule__InstructionUse__Reg_or_varAssignment_045917); 
              after(grammarAccess.getInstructionUseAccess().getReg_or_varVALID_IDTerminalRuleCall_0_0()); 
 
             }
@@ -60862,20 +60909,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InstructionUse__InstructionAssignment_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22475:1: rule__InstructionUse__InstructionAssignment_2 : ( ruleStandartInstruction ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22491:1: rule__InstructionUse__InstructionAssignment_2 : ( ruleStandartInstruction ) ;
     public final void rule__InstructionUse__InstructionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22479:1: ( ( ruleStandartInstruction ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22480:1: ( ruleStandartInstruction )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22495:1: ( ( ruleStandartInstruction ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22496:1: ( ruleStandartInstruction )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22480:1: ( ruleStandartInstruction )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22481:1: ruleStandartInstruction
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22496:1: ( ruleStandartInstruction )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22497:1: ruleStandartInstruction
             {
              before(grammarAccess.getInstructionUseAccess().getInstructionStandartInstructionParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleStandartInstruction_in_rule__InstructionUse__InstructionAssignment_245915);
+            pushFollow(FOLLOW_ruleStandartInstruction_in_rule__InstructionUse__InstructionAssignment_245948);
             ruleStandartInstruction();
 
             state._fsp--;
@@ -60903,20 +60950,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArithmeticOperation__OptypeAssignment_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22490:1: rule__ArithmeticOperation__OptypeAssignment_2 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22506:1: rule__ArithmeticOperation__OptypeAssignment_2 : ( ruleTypeUse ) ;
     public final void rule__ArithmeticOperation__OptypeAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22494:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22495:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22510:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22511:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22495:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22496:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22511:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22512:1: ruleTypeUse
             {
              before(grammarAccess.getArithmeticOperationAccess().getOptypeTypeUseParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__ArithmeticOperation__OptypeAssignment_245946);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__ArithmeticOperation__OptypeAssignment_245979);
             ruleTypeUse();
 
             state._fsp--;
@@ -60944,20 +60991,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArithmeticOperation__Value1Assignment_3"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22505:1: rule__ArithmeticOperation__Value1Assignment_3 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22521:1: rule__ArithmeticOperation__Value1Assignment_3 : ( ruleValue ) ;
     public final void rule__ArithmeticOperation__Value1Assignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22509:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22510:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22525:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22526:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22510:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22511:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22526:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22527:1: ruleValue
             {
              before(grammarAccess.getArithmeticOperationAccess().getValue1ValueParserRuleCall_3_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__ArithmeticOperation__Value1Assignment_345977);
+            pushFollow(FOLLOW_ruleValue_in_rule__ArithmeticOperation__Value1Assignment_346010);
             ruleValue();
 
             state._fsp--;
@@ -60985,20 +61032,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ArithmeticOperation__Value2Assignment_5"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22520:1: rule__ArithmeticOperation__Value2Assignment_5 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22536:1: rule__ArithmeticOperation__Value2Assignment_5 : ( ruleValue ) ;
     public final void rule__ArithmeticOperation__Value2Assignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22524:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22525:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22540:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22541:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22525:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22526:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22541:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22542:1: ruleValue
             {
              before(grammarAccess.getArithmeticOperationAccess().getValue2ValueParserRuleCall_5_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__ArithmeticOperation__Value2Assignment_546008);
+            pushFollow(FOLLOW_ruleValue_in_rule__ArithmeticOperation__Value2Assignment_546041);
             ruleValue();
 
             state._fsp--;
@@ -61026,20 +61073,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LogicOperation__OptypeAssignment_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22535:1: rule__LogicOperation__OptypeAssignment_1 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22551:1: rule__LogicOperation__OptypeAssignment_1 : ( ruleTypeUse ) ;
     public final void rule__LogicOperation__OptypeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22539:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22540:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22555:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22556:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22540:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22541:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22556:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22557:1: ruleTypeUse
             {
              before(grammarAccess.getLogicOperationAccess().getOptypeTypeUseParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__LogicOperation__OptypeAssignment_146039);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__LogicOperation__OptypeAssignment_146072);
             ruleTypeUse();
 
             state._fsp--;
@@ -61067,20 +61114,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LogicOperation__Value1Assignment_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22550:1: rule__LogicOperation__Value1Assignment_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22566:1: rule__LogicOperation__Value1Assignment_2 : ( ruleValue ) ;
     public final void rule__LogicOperation__Value1Assignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22554:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22555:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22570:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22571:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22555:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22556:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22571:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22572:1: ruleValue
             {
              before(grammarAccess.getLogicOperationAccess().getValue1ValueParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__LogicOperation__Value1Assignment_246070);
+            pushFollow(FOLLOW_ruleValue_in_rule__LogicOperation__Value1Assignment_246103);
             ruleValue();
 
             state._fsp--;
@@ -61108,20 +61155,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LogicOperation__Value2Assignment_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22565:1: rule__LogicOperation__Value2Assignment_4 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22581:1: rule__LogicOperation__Value2Assignment_4 : ( ruleValue ) ;
     public final void rule__LogicOperation__Value2Assignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22569:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22570:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22585:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22586:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22570:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22571:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22586:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22587:1: ruleValue
             {
              before(grammarAccess.getLogicOperationAccess().getValue2ValueParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__LogicOperation__Value2Assignment_446101);
+            pushFollow(FOLLOW_ruleValue_in_rule__LogicOperation__Value2Assignment_446134);
             ruleValue();
 
             state._fsp--;
@@ -61149,23 +61196,23 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Cast__FromAssignment_1_0_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22580:1: rule__Cast__FromAssignment_1_0_1 : ( ( rule__Cast__FromAlternatives_1_0_1_0 ) ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22596:1: rule__Cast__FromAssignment_1_0_1 : ( ( rule__Cast__FromAlternatives_1_0_1_0 ) ) ;
     public final void rule__Cast__FromAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22584:1: ( ( ( rule__Cast__FromAlternatives_1_0_1_0 ) ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22585:1: ( ( rule__Cast__FromAlternatives_1_0_1_0 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22600:1: ( ( ( rule__Cast__FromAlternatives_1_0_1_0 ) ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22601:1: ( ( rule__Cast__FromAlternatives_1_0_1_0 ) )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22585:1: ( ( rule__Cast__FromAlternatives_1_0_1_0 ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22586:1: ( rule__Cast__FromAlternatives_1_0_1_0 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22601:1: ( ( rule__Cast__FromAlternatives_1_0_1_0 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22602:1: ( rule__Cast__FromAlternatives_1_0_1_0 )
             {
              before(grammarAccess.getCastAccess().getFromAlternatives_1_0_1_0()); 
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22587:1: ( rule__Cast__FromAlternatives_1_0_1_0 )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22587:2: rule__Cast__FromAlternatives_1_0_1_0
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22603:1: ( rule__Cast__FromAlternatives_1_0_1_0 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22603:2: rule__Cast__FromAlternatives_1_0_1_0
             {
-            pushFollow(FOLLOW_rule__Cast__FromAlternatives_1_0_1_0_in_rule__Cast__FromAssignment_1_0_146132);
+            pushFollow(FOLLOW_rule__Cast__FromAlternatives_1_0_1_0_in_rule__Cast__FromAssignment_1_0_146165);
             rule__Cast__FromAlternatives_1_0_1_0();
 
             state._fsp--;
@@ -61196,20 +61243,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Cast__ValueAssignment_1_0_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22596:1: rule__Cast__ValueAssignment_1_0_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22612:1: rule__Cast__ValueAssignment_1_0_2 : ( ruleValue ) ;
     public final void rule__Cast__ValueAssignment_1_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22600:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22601:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22616:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22617:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22601:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22602:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22617:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22618:1: ruleValue
             {
              before(grammarAccess.getCastAccess().getValueValueParserRuleCall_1_0_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Cast__ValueAssignment_1_0_246165);
+            pushFollow(FOLLOW_ruleValue_in_rule__Cast__ValueAssignment_1_0_246198);
             ruleValue();
 
             state._fsp--;
@@ -61237,20 +61284,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Cast__ToAssignment_1_0_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22611:1: rule__Cast__ToAssignment_1_0_4 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22627:1: rule__Cast__ToAssignment_1_0_4 : ( ruleTypeUse ) ;
     public final void rule__Cast__ToAssignment_1_0_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22615:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22616:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22631:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22632:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22616:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22617:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22632:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22633:1: ruleTypeUse
             {
              before(grammarAccess.getCastAccess().getToTypeUseParserRuleCall_1_0_4_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Cast__ToAssignment_1_0_446196);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Cast__ToAssignment_1_0_446229);
             ruleTypeUse();
 
             state._fsp--;
@@ -61278,23 +61325,23 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Cast__FromAssignment_1_1_0"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22626:1: rule__Cast__FromAssignment_1_1_0 : ( ( rule__Cast__FromAlternatives_1_1_0_0 ) ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22642:1: rule__Cast__FromAssignment_1_1_0 : ( ( rule__Cast__FromAlternatives_1_1_0_0 ) ) ;
     public final void rule__Cast__FromAssignment_1_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22630:1: ( ( ( rule__Cast__FromAlternatives_1_1_0_0 ) ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22631:1: ( ( rule__Cast__FromAlternatives_1_1_0_0 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22646:1: ( ( ( rule__Cast__FromAlternatives_1_1_0_0 ) ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22647:1: ( ( rule__Cast__FromAlternatives_1_1_0_0 ) )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22631:1: ( ( rule__Cast__FromAlternatives_1_1_0_0 ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22632:1: ( rule__Cast__FromAlternatives_1_1_0_0 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22647:1: ( ( rule__Cast__FromAlternatives_1_1_0_0 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22648:1: ( rule__Cast__FromAlternatives_1_1_0_0 )
             {
              before(grammarAccess.getCastAccess().getFromAlternatives_1_1_0_0()); 
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22633:1: ( rule__Cast__FromAlternatives_1_1_0_0 )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22633:2: rule__Cast__FromAlternatives_1_1_0_0
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22649:1: ( rule__Cast__FromAlternatives_1_1_0_0 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22649:2: rule__Cast__FromAlternatives_1_1_0_0
             {
-            pushFollow(FOLLOW_rule__Cast__FromAlternatives_1_1_0_0_in_rule__Cast__FromAssignment_1_1_046227);
+            pushFollow(FOLLOW_rule__Cast__FromAlternatives_1_1_0_0_in_rule__Cast__FromAssignment_1_1_046260);
             rule__Cast__FromAlternatives_1_1_0_0();
 
             state._fsp--;
@@ -61325,20 +61372,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Cast__ValueAssignment_1_1_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22642:1: rule__Cast__ValueAssignment_1_1_1 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22658:1: rule__Cast__ValueAssignment_1_1_1 : ( ruleValue ) ;
     public final void rule__Cast__ValueAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22646:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22647:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22662:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22663:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22647:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22648:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22663:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22664:1: ruleValue
             {
              before(grammarAccess.getCastAccess().getValueValueParserRuleCall_1_1_1_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Cast__ValueAssignment_1_1_146260);
+            pushFollow(FOLLOW_ruleValue_in_rule__Cast__ValueAssignment_1_1_146293);
             ruleValue();
 
             state._fsp--;
@@ -61366,20 +61413,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Cast__ToAssignment_1_1_3"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22657:1: rule__Cast__ToAssignment_1_1_3 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22673:1: rule__Cast__ToAssignment_1_1_3 : ( ruleTypeUse ) ;
     public final void rule__Cast__ToAssignment_1_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22661:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22662:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22677:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22678:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22662:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22663:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22678:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22679:1: ruleTypeUse
             {
              before(grammarAccess.getCastAccess().getToTypeUseParserRuleCall_1_1_3_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Cast__ToAssignment_1_1_346291);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Cast__ToAssignment_1_1_346324);
             ruleTypeUse();
 
             state._fsp--;
@@ -61407,23 +61454,23 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetElementPtr__AggregateAssignment_2_0"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22672:1: rule__GetElementPtr__AggregateAssignment_2_0 : ( ( rule__GetElementPtr__AggregateAlternatives_2_0_0 ) ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22688:1: rule__GetElementPtr__AggregateAssignment_2_0 : ( ( rule__GetElementPtr__AggregateAlternatives_2_0_0 ) ) ;
     public final void rule__GetElementPtr__AggregateAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22676:1: ( ( ( rule__GetElementPtr__AggregateAlternatives_2_0_0 ) ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22677:1: ( ( rule__GetElementPtr__AggregateAlternatives_2_0_0 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22692:1: ( ( ( rule__GetElementPtr__AggregateAlternatives_2_0_0 ) ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22693:1: ( ( rule__GetElementPtr__AggregateAlternatives_2_0_0 ) )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22677:1: ( ( rule__GetElementPtr__AggregateAlternatives_2_0_0 ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22678:1: ( rule__GetElementPtr__AggregateAlternatives_2_0_0 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22693:1: ( ( rule__GetElementPtr__AggregateAlternatives_2_0_0 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22694:1: ( rule__GetElementPtr__AggregateAlternatives_2_0_0 )
             {
              before(grammarAccess.getGetElementPtrAccess().getAggregateAlternatives_2_0_0()); 
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22679:1: ( rule__GetElementPtr__AggregateAlternatives_2_0_0 )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22679:2: rule__GetElementPtr__AggregateAlternatives_2_0_0
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22695:1: ( rule__GetElementPtr__AggregateAlternatives_2_0_0 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22695:2: rule__GetElementPtr__AggregateAlternatives_2_0_0
             {
-            pushFollow(FOLLOW_rule__GetElementPtr__AggregateAlternatives_2_0_0_in_rule__GetElementPtr__AggregateAssignment_2_046322);
+            pushFollow(FOLLOW_rule__GetElementPtr__AggregateAlternatives_2_0_0_in_rule__GetElementPtr__AggregateAssignment_2_046355);
             rule__GetElementPtr__AggregateAlternatives_2_0_0();
 
             state._fsp--;
@@ -61454,20 +61501,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetElementPtr__AggregatenameAssignment_2_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22688:1: rule__GetElementPtr__AggregatenameAssignment_2_1 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22704:1: rule__GetElementPtr__AggregatenameAssignment_2_1 : ( ruleValue ) ;
     public final void rule__GetElementPtr__AggregatenameAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22692:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22693:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22708:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22709:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22693:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22694:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22709:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22710:1: ruleValue
             {
              before(grammarAccess.getGetElementPtrAccess().getAggregatenameValueParserRuleCall_2_1_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__GetElementPtr__AggregatenameAssignment_2_146355);
+            pushFollow(FOLLOW_ruleValue_in_rule__GetElementPtr__AggregatenameAssignment_2_146388);
             ruleValue();
 
             state._fsp--;
@@ -61495,20 +61542,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetElementPtr__IndTypesAssignment_2_2_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22703:1: rule__GetElementPtr__IndTypesAssignment_2_2_1 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22719:1: rule__GetElementPtr__IndTypesAssignment_2_2_1 : ( ruleTypeUse ) ;
     public final void rule__GetElementPtr__IndTypesAssignment_2_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22707:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22708:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22723:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22724:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22708:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22709:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22724:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22725:1: ruleTypeUse
             {
              before(grammarAccess.getGetElementPtrAccess().getIndTypesTypeUseParserRuleCall_2_2_1_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__GetElementPtr__IndTypesAssignment_2_2_146386);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__GetElementPtr__IndTypesAssignment_2_2_146419);
             ruleTypeUse();
 
             state._fsp--;
@@ -61536,20 +61583,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetElementPtr__IndiziesAssignment_2_2_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22718:1: rule__GetElementPtr__IndiziesAssignment_2_2_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22734:1: rule__GetElementPtr__IndiziesAssignment_2_2_2 : ( ruleValue ) ;
     public final void rule__GetElementPtr__IndiziesAssignment_2_2_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22722:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22723:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22738:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22739:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22723:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22724:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22739:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22740:1: ruleValue
             {
              before(grammarAccess.getGetElementPtrAccess().getIndiziesValueParserRuleCall_2_2_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__GetElementPtr__IndiziesAssignment_2_2_246417);
+            pushFollow(FOLLOW_ruleValue_in_rule__GetElementPtr__IndiziesAssignment_2_2_246450);
             ruleValue();
 
             state._fsp--;
@@ -61577,23 +61624,23 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__NestedGetElementPtr__AggregateAssignment_2_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22733:1: rule__NestedGetElementPtr__AggregateAssignment_2_1 : ( ( rule__NestedGetElementPtr__AggregateAlternatives_2_1_0 ) ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22749:1: rule__NestedGetElementPtr__AggregateAssignment_2_1 : ( ( rule__NestedGetElementPtr__AggregateAlternatives_2_1_0 ) ) ;
     public final void rule__NestedGetElementPtr__AggregateAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22737:1: ( ( ( rule__NestedGetElementPtr__AggregateAlternatives_2_1_0 ) ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22738:1: ( ( rule__NestedGetElementPtr__AggregateAlternatives_2_1_0 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22753:1: ( ( ( rule__NestedGetElementPtr__AggregateAlternatives_2_1_0 ) ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22754:1: ( ( rule__NestedGetElementPtr__AggregateAlternatives_2_1_0 ) )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22738:1: ( ( rule__NestedGetElementPtr__AggregateAlternatives_2_1_0 ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22739:1: ( rule__NestedGetElementPtr__AggregateAlternatives_2_1_0 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22754:1: ( ( rule__NestedGetElementPtr__AggregateAlternatives_2_1_0 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22755:1: ( rule__NestedGetElementPtr__AggregateAlternatives_2_1_0 )
             {
              before(grammarAccess.getNestedGetElementPtrAccess().getAggregateAlternatives_2_1_0()); 
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22740:1: ( rule__NestedGetElementPtr__AggregateAlternatives_2_1_0 )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22740:2: rule__NestedGetElementPtr__AggregateAlternatives_2_1_0
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22756:1: ( rule__NestedGetElementPtr__AggregateAlternatives_2_1_0 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22756:2: rule__NestedGetElementPtr__AggregateAlternatives_2_1_0
             {
-            pushFollow(FOLLOW_rule__NestedGetElementPtr__AggregateAlternatives_2_1_0_in_rule__NestedGetElementPtr__AggregateAssignment_2_146448);
+            pushFollow(FOLLOW_rule__NestedGetElementPtr__AggregateAlternatives_2_1_0_in_rule__NestedGetElementPtr__AggregateAssignment_2_146481);
             rule__NestedGetElementPtr__AggregateAlternatives_2_1_0();
 
             state._fsp--;
@@ -61624,20 +61671,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__NestedGetElementPtr__AggregatenameAssignment_2_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22749:1: rule__NestedGetElementPtr__AggregatenameAssignment_2_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22765:1: rule__NestedGetElementPtr__AggregatenameAssignment_2_2 : ( ruleValue ) ;
     public final void rule__NestedGetElementPtr__AggregatenameAssignment_2_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22753:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22754:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22769:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22770:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22754:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22755:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22770:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22771:1: ruleValue
             {
              before(grammarAccess.getNestedGetElementPtrAccess().getAggregatenameValueParserRuleCall_2_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__NestedGetElementPtr__AggregatenameAssignment_2_246481);
+            pushFollow(FOLLOW_ruleValue_in_rule__NestedGetElementPtr__AggregatenameAssignment_2_246514);
             ruleValue();
 
             state._fsp--;
@@ -61665,20 +61712,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__NestedGetElementPtr__IndTypesAssignment_2_3_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22764:1: rule__NestedGetElementPtr__IndTypesAssignment_2_3_1 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22780:1: rule__NestedGetElementPtr__IndTypesAssignment_2_3_1 : ( ruleTypeUse ) ;
     public final void rule__NestedGetElementPtr__IndTypesAssignment_2_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22768:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22769:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22784:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22785:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22769:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22770:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22785:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22786:1: ruleTypeUse
             {
              before(grammarAccess.getNestedGetElementPtrAccess().getIndTypesTypeUseParserRuleCall_2_3_1_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__NestedGetElementPtr__IndTypesAssignment_2_3_146512);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__NestedGetElementPtr__IndTypesAssignment_2_3_146545);
             ruleTypeUse();
 
             state._fsp--;
@@ -61706,20 +61753,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__NestedGetElementPtr__IndiziesAssignment_2_3_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22779:1: rule__NestedGetElementPtr__IndiziesAssignment_2_3_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22795:1: rule__NestedGetElementPtr__IndiziesAssignment_2_3_2 : ( ruleValue ) ;
     public final void rule__NestedGetElementPtr__IndiziesAssignment_2_3_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22783:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22784:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22799:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22800:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22784:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22785:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22800:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22801:1: ruleValue
             {
              before(grammarAccess.getNestedGetElementPtrAccess().getIndiziesValueParserRuleCall_2_3_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__NestedGetElementPtr__IndiziesAssignment_2_3_246543);
+            pushFollow(FOLLOW_ruleValue_in_rule__NestedGetElementPtr__IndiziesAssignment_2_3_246576);
             ruleValue();
 
             state._fsp--;
@@ -61747,20 +61794,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExtractValue__ArrayAssignment_1_0"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22794:1: rule__ExtractValue__ArrayAssignment_1_0 : ( ruleArray ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22810:1: rule__ExtractValue__ArrayAssignment_1_0 : ( ruleArray ) ;
     public final void rule__ExtractValue__ArrayAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22798:1: ( ( ruleArray ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22799:1: ( ruleArray )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22814:1: ( ( ruleArray ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22815:1: ( ruleArray )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22799:1: ( ruleArray )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22800:1: ruleArray
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22815:1: ( ruleArray )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22816:1: ruleArray
             {
              before(grammarAccess.getExtractValueAccess().getArrayArrayParserRuleCall_1_0_0()); 
-            pushFollow(FOLLOW_ruleArray_in_rule__ExtractValue__ArrayAssignment_1_046574);
+            pushFollow(FOLLOW_ruleArray_in_rule__ExtractValue__ArrayAssignment_1_046607);
             ruleArray();
 
             state._fsp--;
@@ -61788,20 +61835,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExtractValue__StructAssignment_1_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22809:1: rule__ExtractValue__StructAssignment_1_1 : ( ruleStructure ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22825:1: rule__ExtractValue__StructAssignment_1_1 : ( ruleStructure ) ;
     public final void rule__ExtractValue__StructAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22813:1: ( ( ruleStructure ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22814:1: ( ruleStructure )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22829:1: ( ( ruleStructure ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22830:1: ( ruleStructure )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22814:1: ( ruleStructure )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22815:1: ruleStructure
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22830:1: ( ruleStructure )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22831:1: ruleStructure
             {
              before(grammarAccess.getExtractValueAccess().getStructStructureParserRuleCall_1_1_0()); 
-            pushFollow(FOLLOW_ruleStructure_in_rule__ExtractValue__StructAssignment_1_146605);
+            pushFollow(FOLLOW_ruleStructure_in_rule__ExtractValue__StructAssignment_1_146638);
             ruleStructure();
 
             state._fsp--;
@@ -61829,20 +61876,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExtractValue__ValueAssignment_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22824:1: rule__ExtractValue__ValueAssignment_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22840:1: rule__ExtractValue__ValueAssignment_2 : ( ruleValue ) ;
     public final void rule__ExtractValue__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22828:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22829:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22844:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22845:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22829:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22830:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22845:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22846:1: ruleValue
             {
              before(grammarAccess.getExtractValueAccess().getValueValueParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__ExtractValue__ValueAssignment_246636);
+            pushFollow(FOLLOW_ruleValue_in_rule__ExtractValue__ValueAssignment_246669);
             ruleValue();
 
             state._fsp--;
@@ -61870,20 +61917,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExtractValue__IndexAssignment_3_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22839:1: rule__ExtractValue__IndexAssignment_3_1 : ( RULE_INT ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22855:1: rule__ExtractValue__IndexAssignment_3_1 : ( RULE_INT ) ;
     public final void rule__ExtractValue__IndexAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22843:1: ( ( RULE_INT ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22844:1: ( RULE_INT )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22859:1: ( ( RULE_INT ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22860:1: ( RULE_INT )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22844:1: ( RULE_INT )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22845:1: RULE_INT
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22860:1: ( RULE_INT )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22861:1: RULE_INT
             {
              before(grammarAccess.getExtractValueAccess().getIndexINTTerminalRuleCall_3_1_0()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__ExtractValue__IndexAssignment_3_146667); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__ExtractValue__IndexAssignment_3_146700); 
              after(grammarAccess.getExtractValueAccess().getIndexINTTerminalRuleCall_3_1_0()); 
 
             }
@@ -61907,20 +61954,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InsertValue__StructAssignment_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22854:1: rule__InsertValue__StructAssignment_1 : ( ruleStructure ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22870:1: rule__InsertValue__StructAssignment_1 : ( ruleStructure ) ;
     public final void rule__InsertValue__StructAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22858:1: ( ( ruleStructure ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22859:1: ( ruleStructure )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22874:1: ( ( ruleStructure ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22875:1: ( ruleStructure )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22859:1: ( ruleStructure )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22860:1: ruleStructure
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22875:1: ( ruleStructure )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22876:1: ruleStructure
             {
              before(grammarAccess.getInsertValueAccess().getStructStructureParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleStructure_in_rule__InsertValue__StructAssignment_146698);
+            pushFollow(FOLLOW_ruleStructure_in_rule__InsertValue__StructAssignment_146731);
             ruleStructure();
 
             state._fsp--;
@@ -61948,20 +61995,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InsertValue__ValueAssignment_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22869:1: rule__InsertValue__ValueAssignment_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22885:1: rule__InsertValue__ValueAssignment_2 : ( ruleValue ) ;
     public final void rule__InsertValue__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22873:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22874:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22889:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22890:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22874:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22875:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22890:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22891:1: ruleValue
             {
              before(grammarAccess.getInsertValueAccess().getValueValueParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__InsertValue__ValueAssignment_246729);
+            pushFollow(FOLLOW_ruleValue_in_rule__InsertValue__ValueAssignment_246762);
             ruleValue();
 
             state._fsp--;
@@ -61989,20 +62036,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InsertValue__InserttypeAssignment_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22884:1: rule__InsertValue__InserttypeAssignment_4 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22900:1: rule__InsertValue__InserttypeAssignment_4 : ( ruleTypeUse ) ;
     public final void rule__InsertValue__InserttypeAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22888:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22889:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22904:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22905:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22889:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22890:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22905:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22906:1: ruleTypeUse
             {
              before(grammarAccess.getInsertValueAccess().getInserttypeTypeUseParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__InsertValue__InserttypeAssignment_446760);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__InsertValue__InserttypeAssignment_446793);
             ruleTypeUse();
 
             state._fsp--;
@@ -62030,20 +62077,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InsertValue__InsertvalueAssignment_5"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22899:1: rule__InsertValue__InsertvalueAssignment_5 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22915:1: rule__InsertValue__InsertvalueAssignment_5 : ( ruleValue ) ;
     public final void rule__InsertValue__InsertvalueAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22903:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22904:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22919:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22920:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22904:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22905:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22920:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22921:1: ruleValue
             {
              before(grammarAccess.getInsertValueAccess().getInsertvalueValueParserRuleCall_5_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__InsertValue__InsertvalueAssignment_546791);
+            pushFollow(FOLLOW_ruleValue_in_rule__InsertValue__InsertvalueAssignment_546824);
             ruleValue();
 
             state._fsp--;
@@ -62071,20 +62118,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InsertValue__IndexAssignment_6_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22914:1: rule__InsertValue__IndexAssignment_6_1 : ( RULE_INT ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22930:1: rule__InsertValue__IndexAssignment_6_1 : ( RULE_INT ) ;
     public final void rule__InsertValue__IndexAssignment_6_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22918:1: ( ( RULE_INT ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22919:1: ( RULE_INT )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22934:1: ( ( RULE_INT ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22935:1: ( RULE_INT )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22919:1: ( RULE_INT )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22920:1: RULE_INT
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22935:1: ( RULE_INT )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22936:1: RULE_INT
             {
              before(grammarAccess.getInsertValueAccess().getIndexINTTerminalRuleCall_6_1_0()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__InsertValue__IndexAssignment_6_146822); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__InsertValue__IndexAssignment_6_146855); 
              after(grammarAccess.getInsertValueAccess().getIndexINTTerminalRuleCall_6_1_0()); 
 
             }
@@ -62108,20 +62155,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Fence__OrderingAssignment_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22929:1: rule__Fence__OrderingAssignment_2 : ( ruleATOMIC_ORDERING ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22945:1: rule__Fence__OrderingAssignment_2 : ( ruleATOMIC_ORDERING ) ;
     public final void rule__Fence__OrderingAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22933:1: ( ( ruleATOMIC_ORDERING ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22934:1: ( ruleATOMIC_ORDERING )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22949:1: ( ( ruleATOMIC_ORDERING ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22950:1: ( ruleATOMIC_ORDERING )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22934:1: ( ruleATOMIC_ORDERING )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22935:1: ruleATOMIC_ORDERING
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22950:1: ( ruleATOMIC_ORDERING )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22951:1: ruleATOMIC_ORDERING
             {
              before(grammarAccess.getFenceAccess().getOrderingATOMIC_ORDERINGParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleATOMIC_ORDERING_in_rule__Fence__OrderingAssignment_246853);
+            pushFollow(FOLLOW_ruleATOMIC_ORDERING_in_rule__Fence__OrderingAssignment_246886);
             ruleATOMIC_ORDERING();
 
             state._fsp--;
@@ -62149,20 +62196,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__CmpXchg__AdresstypeAssignment_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22944:1: rule__CmpXchg__AdresstypeAssignment_2 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22960:1: rule__CmpXchg__AdresstypeAssignment_2 : ( ruleTypeUse ) ;
     public final void rule__CmpXchg__AdresstypeAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22948:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22949:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22964:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22965:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22949:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22950:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22965:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22966:1: ruleTypeUse
             {
              before(grammarAccess.getCmpXchgAccess().getAdresstypeTypeUseParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__CmpXchg__AdresstypeAssignment_246884);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__CmpXchg__AdresstypeAssignment_246917);
             ruleTypeUse();
 
             state._fsp--;
@@ -62190,20 +62237,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__CmpXchg__AdressAssignment_3"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22959:1: rule__CmpXchg__AdressAssignment_3 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22975:1: rule__CmpXchg__AdressAssignment_3 : ( ruleValue ) ;
     public final void rule__CmpXchg__AdressAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22963:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22964:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22979:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22980:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22964:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22965:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22980:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22981:1: ruleValue
             {
              before(grammarAccess.getCmpXchgAccess().getAdressValueParserRuleCall_3_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__CmpXchg__AdressAssignment_346915);
+            pushFollow(FOLLOW_ruleValue_in_rule__CmpXchg__AdressAssignment_346948);
             ruleValue();
 
             state._fsp--;
@@ -62231,20 +62278,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__CmpXchg__ComparetypeAssignment_5"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22974:1: rule__CmpXchg__ComparetypeAssignment_5 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22990:1: rule__CmpXchg__ComparetypeAssignment_5 : ( ruleTypeUse ) ;
     public final void rule__CmpXchg__ComparetypeAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22978:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22979:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22994:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22995:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22979:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22980:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22995:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22996:1: ruleTypeUse
             {
              before(grammarAccess.getCmpXchgAccess().getComparetypeTypeUseParserRuleCall_5_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__CmpXchg__ComparetypeAssignment_546946);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__CmpXchg__ComparetypeAssignment_546979);
             ruleTypeUse();
 
             state._fsp--;
@@ -62272,20 +62319,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__CmpXchg__ComparevalueAssignment_6"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22989:1: rule__CmpXchg__ComparevalueAssignment_6 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23005:1: rule__CmpXchg__ComparevalueAssignment_6 : ( ruleValue ) ;
     public final void rule__CmpXchg__ComparevalueAssignment_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22993:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22994:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23009:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23010:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22994:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22995:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23010:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23011:1: ruleValue
             {
              before(grammarAccess.getCmpXchgAccess().getComparevalueValueParserRuleCall_6_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__CmpXchg__ComparevalueAssignment_646977);
+            pushFollow(FOLLOW_ruleValue_in_rule__CmpXchg__ComparevalueAssignment_647010);
             ruleValue();
 
             state._fsp--;
@@ -62313,20 +62360,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__CmpXchg__NewtypeAssignment_8"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23004:1: rule__CmpXchg__NewtypeAssignment_8 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23020:1: rule__CmpXchg__NewtypeAssignment_8 : ( ruleTypeUse ) ;
     public final void rule__CmpXchg__NewtypeAssignment_8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23008:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23009:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23024:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23025:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23009:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23010:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23025:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23026:1: ruleTypeUse
             {
              before(grammarAccess.getCmpXchgAccess().getNewtypeTypeUseParserRuleCall_8_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__CmpXchg__NewtypeAssignment_847008);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__CmpXchg__NewtypeAssignment_847041);
             ruleTypeUse();
 
             state._fsp--;
@@ -62354,20 +62401,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__CmpXchg__NewvalueAssignment_9"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23019:1: rule__CmpXchg__NewvalueAssignment_9 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23035:1: rule__CmpXchg__NewvalueAssignment_9 : ( ruleValue ) ;
     public final void rule__CmpXchg__NewvalueAssignment_9() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23023:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23024:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23039:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23040:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23024:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23025:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23040:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23041:1: ruleValue
             {
              before(grammarAccess.getCmpXchgAccess().getNewvalueValueParserRuleCall_9_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__CmpXchg__NewvalueAssignment_947039);
+            pushFollow(FOLLOW_ruleValue_in_rule__CmpXchg__NewvalueAssignment_947072);
             ruleValue();
 
             state._fsp--;
@@ -62395,20 +62442,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__CmpXchg__OrderingAssignment_11"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23034:1: rule__CmpXchg__OrderingAssignment_11 : ( ruleATOMIC_ORDERING ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23050:1: rule__CmpXchg__OrderingAssignment_11 : ( ruleATOMIC_ORDERING ) ;
     public final void rule__CmpXchg__OrderingAssignment_11() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23038:1: ( ( ruleATOMIC_ORDERING ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23039:1: ( ruleATOMIC_ORDERING )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23054:1: ( ( ruleATOMIC_ORDERING ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23055:1: ( ruleATOMIC_ORDERING )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23039:1: ( ruleATOMIC_ORDERING )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23040:1: ruleATOMIC_ORDERING
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23055:1: ( ruleATOMIC_ORDERING )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23056:1: ruleATOMIC_ORDERING
             {
              before(grammarAccess.getCmpXchgAccess().getOrderingATOMIC_ORDERINGParserRuleCall_11_0()); 
-            pushFollow(FOLLOW_ruleATOMIC_ORDERING_in_rule__CmpXchg__OrderingAssignment_1147070);
+            pushFollow(FOLLOW_ruleATOMIC_ORDERING_in_rule__CmpXchg__OrderingAssignment_1147103);
             ruleATOMIC_ORDERING();
 
             state._fsp--;
@@ -62436,20 +62483,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AtomicRMW__AdresstypeAssignment_3"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23049:1: rule__AtomicRMW__AdresstypeAssignment_3 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23065:1: rule__AtomicRMW__AdresstypeAssignment_3 : ( ruleTypeUse ) ;
     public final void rule__AtomicRMW__AdresstypeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23053:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23054:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23069:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23070:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23054:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23055:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23070:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23071:1: ruleTypeUse
             {
              before(grammarAccess.getAtomicRMWAccess().getAdresstypeTypeUseParserRuleCall_3_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__AtomicRMW__AdresstypeAssignment_347101);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__AtomicRMW__AdresstypeAssignment_347134);
             ruleTypeUse();
 
             state._fsp--;
@@ -62477,20 +62524,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AtomicRMW__AdressAssignment_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23064:1: rule__AtomicRMW__AdressAssignment_4 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23080:1: rule__AtomicRMW__AdressAssignment_4 : ( ruleValue ) ;
     public final void rule__AtomicRMW__AdressAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23068:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23069:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23084:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23085:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23069:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23070:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23085:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23086:1: ruleValue
             {
              before(grammarAccess.getAtomicRMWAccess().getAdressValueParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__AtomicRMW__AdressAssignment_447132);
+            pushFollow(FOLLOW_ruleValue_in_rule__AtomicRMW__AdressAssignment_447165);
             ruleValue();
 
             state._fsp--;
@@ -62518,20 +62565,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AtomicRMW__OptypeAssignment_6"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23079:1: rule__AtomicRMW__OptypeAssignment_6 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23095:1: rule__AtomicRMW__OptypeAssignment_6 : ( ruleTypeUse ) ;
     public final void rule__AtomicRMW__OptypeAssignment_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23083:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23084:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23099:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23100:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23084:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23085:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23100:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23101:1: ruleTypeUse
             {
              before(grammarAccess.getAtomicRMWAccess().getOptypeTypeUseParserRuleCall_6_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__AtomicRMW__OptypeAssignment_647163);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__AtomicRMW__OptypeAssignment_647196);
             ruleTypeUse();
 
             state._fsp--;
@@ -62559,20 +62606,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AtomicRMW__OpvalueAssignment_7"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23094:1: rule__AtomicRMW__OpvalueAssignment_7 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23110:1: rule__AtomicRMW__OpvalueAssignment_7 : ( ruleValue ) ;
     public final void rule__AtomicRMW__OpvalueAssignment_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23098:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23099:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23114:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23115:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23099:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23100:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23115:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23116:1: ruleValue
             {
              before(grammarAccess.getAtomicRMWAccess().getOpvalueValueParserRuleCall_7_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__AtomicRMW__OpvalueAssignment_747194);
+            pushFollow(FOLLOW_ruleValue_in_rule__AtomicRMW__OpvalueAssignment_747227);
             ruleValue();
 
             state._fsp--;
@@ -62600,20 +62647,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AtomicRMW__OrderingAssignment_9"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23109:1: rule__AtomicRMW__OrderingAssignment_9 : ( ruleATOMIC_ORDERING ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23125:1: rule__AtomicRMW__OrderingAssignment_9 : ( ruleATOMIC_ORDERING ) ;
     public final void rule__AtomicRMW__OrderingAssignment_9() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23113:1: ( ( ruleATOMIC_ORDERING ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23114:1: ( ruleATOMIC_ORDERING )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23129:1: ( ( ruleATOMIC_ORDERING ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23130:1: ( ruleATOMIC_ORDERING )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23114:1: ( ruleATOMIC_ORDERING )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23115:1: ruleATOMIC_ORDERING
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23130:1: ( ruleATOMIC_ORDERING )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23131:1: ruleATOMIC_ORDERING
             {
              before(grammarAccess.getAtomicRMWAccess().getOrderingATOMIC_ORDERINGParserRuleCall_9_0()); 
-            pushFollow(FOLLOW_ruleATOMIC_ORDERING_in_rule__AtomicRMW__OrderingAssignment_947225);
+            pushFollow(FOLLOW_ruleATOMIC_ORDERING_in_rule__AtomicRMW__OrderingAssignment_947258);
             ruleATOMIC_ORDERING();
 
             state._fsp--;
@@ -62641,20 +62688,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Load__AdresstypeAssignment_0_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23124:1: rule__Load__AdresstypeAssignment_0_2 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23140:1: rule__Load__AdresstypeAssignment_0_2 : ( ruleTypeUse ) ;
     public final void rule__Load__AdresstypeAssignment_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23128:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23129:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23144:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23145:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23129:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23130:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23145:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23146:1: ruleTypeUse
             {
              before(grammarAccess.getLoadAccess().getAdresstypeTypeUseParserRuleCall_0_2_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Load__AdresstypeAssignment_0_247256);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Load__AdresstypeAssignment_0_247289);
             ruleTypeUse();
 
             state._fsp--;
@@ -62682,20 +62729,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Load__TypesAssignment_0_3"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23139:1: rule__Load__TypesAssignment_0_3 : ( ruleTypeList ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23155:1: rule__Load__TypesAssignment_0_3 : ( ruleTypeList ) ;
     public final void rule__Load__TypesAssignment_0_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23143:1: ( ( ruleTypeList ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23144:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23159:1: ( ( ruleTypeList ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23160:1: ( ruleTypeList )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23144:1: ( ruleTypeList )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23145:1: ruleTypeList
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23160:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23161:1: ruleTypeList
             {
              before(grammarAccess.getLoadAccess().getTypesTypeListParserRuleCall_0_3_0()); 
-            pushFollow(FOLLOW_ruleTypeList_in_rule__Load__TypesAssignment_0_347287);
+            pushFollow(FOLLOW_ruleTypeList_in_rule__Load__TypesAssignment_0_347320);
             ruleTypeList();
 
             state._fsp--;
@@ -62723,20 +62770,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Load__AdressAssignment_0_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23154:1: rule__Load__AdressAssignment_0_4 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23170:1: rule__Load__AdressAssignment_0_4 : ( ruleValue ) ;
     public final void rule__Load__AdressAssignment_0_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23158:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23159:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23174:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23175:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23159:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23160:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23175:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23176:1: ruleValue
             {
              before(grammarAccess.getLoadAccess().getAdressValueParserRuleCall_0_4_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Load__AdressAssignment_0_447318);
+            pushFollow(FOLLOW_ruleValue_in_rule__Load__AdressAssignment_0_447351);
             ruleValue();
 
             state._fsp--;
@@ -62764,20 +62811,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Load__AdresstypeAssignment_1_3"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23169:1: rule__Load__AdresstypeAssignment_1_3 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23185:1: rule__Load__AdresstypeAssignment_1_3 : ( ruleTypeUse ) ;
     public final void rule__Load__AdresstypeAssignment_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23173:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23174:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23189:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23190:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23174:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23175:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23190:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23191:1: ruleTypeUse
             {
              before(grammarAccess.getLoadAccess().getAdresstypeTypeUseParserRuleCall_1_3_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Load__AdresstypeAssignment_1_347349);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Load__AdresstypeAssignment_1_347382);
             ruleTypeUse();
 
             state._fsp--;
@@ -62805,20 +62852,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Load__AdressAssignment_1_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23184:1: rule__Load__AdressAssignment_1_4 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23200:1: rule__Load__AdressAssignment_1_4 : ( ruleValue ) ;
     public final void rule__Load__AdressAssignment_1_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23188:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23189:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23204:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23205:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23189:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23190:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23205:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23206:1: ruleValue
             {
              before(grammarAccess.getLoadAccess().getAdressValueParserRuleCall_1_4_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Load__AdressAssignment_1_447380);
+            pushFollow(FOLLOW_ruleValue_in_rule__Load__AdressAssignment_1_447413);
             ruleValue();
 
             state._fsp--;
@@ -62846,20 +62893,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Load__TypesAssignment_1_5"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23199:1: rule__Load__TypesAssignment_1_5 : ( ruleTypeList ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23215:1: rule__Load__TypesAssignment_1_5 : ( ruleTypeList ) ;
     public final void rule__Load__TypesAssignment_1_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23203:1: ( ( ruleTypeList ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23204:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23219:1: ( ( ruleTypeList ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23220:1: ( ruleTypeList )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23204:1: ( ruleTypeList )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23205:1: ruleTypeList
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23220:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23221:1: ruleTypeList
             {
              before(grammarAccess.getLoadAccess().getTypesTypeListParserRuleCall_1_5_0()); 
-            pushFollow(FOLLOW_ruleTypeList_in_rule__Load__TypesAssignment_1_547411);
+            pushFollow(FOLLOW_ruleTypeList_in_rule__Load__TypesAssignment_1_547444);
             ruleTypeList();
 
             state._fsp--;
@@ -62887,20 +62934,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Load__OrderingAssignment_1_7"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23214:1: rule__Load__OrderingAssignment_1_7 : ( ruleATOMIC_ORDERING ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23230:1: rule__Load__OrderingAssignment_1_7 : ( ruleATOMIC_ORDERING ) ;
     public final void rule__Load__OrderingAssignment_1_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23218:1: ( ( ruleATOMIC_ORDERING ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23219:1: ( ruleATOMIC_ORDERING )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23234:1: ( ( ruleATOMIC_ORDERING ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23235:1: ( ruleATOMIC_ORDERING )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23219:1: ( ruleATOMIC_ORDERING )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23220:1: ruleATOMIC_ORDERING
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23235:1: ( ruleATOMIC_ORDERING )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23236:1: ruleATOMIC_ORDERING
             {
              before(grammarAccess.getLoadAccess().getOrderingATOMIC_ORDERINGParserRuleCall_1_7_0()); 
-            pushFollow(FOLLOW_ruleATOMIC_ORDERING_in_rule__Load__OrderingAssignment_1_747442);
+            pushFollow(FOLLOW_ruleATOMIC_ORDERING_in_rule__Load__OrderingAssignment_1_747475);
             ruleATOMIC_ORDERING();
 
             state._fsp--;
@@ -62928,20 +62975,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Load__IndexAssignment_1_8_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23229:1: rule__Load__IndexAssignment_1_8_2 : ( RULE_INT ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23245:1: rule__Load__IndexAssignment_1_8_2 : ( RULE_INT ) ;
     public final void rule__Load__IndexAssignment_1_8_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23233:1: ( ( RULE_INT ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23234:1: ( RULE_INT )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23249:1: ( ( RULE_INT ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23250:1: ( RULE_INT )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23234:1: ( RULE_INT )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23235:1: RULE_INT
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23250:1: ( RULE_INT )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23251:1: RULE_INT
             {
              before(grammarAccess.getLoadAccess().getIndexINTTerminalRuleCall_1_8_2_0()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__Load__IndexAssignment_1_8_247473); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__Load__IndexAssignment_1_8_247506); 
              after(grammarAccess.getLoadAccess().getIndexINTTerminalRuleCall_1_8_2_0()); 
 
             }
@@ -62965,20 +63012,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Store__NewtypeAssignment_0_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23244:1: rule__Store__NewtypeAssignment_0_2 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23260:1: rule__Store__NewtypeAssignment_0_2 : ( ruleTypeUse ) ;
     public final void rule__Store__NewtypeAssignment_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23248:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23249:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23264:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23265:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23249:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23250:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23265:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23266:1: ruleTypeUse
             {
              before(grammarAccess.getStoreAccess().getNewtypeTypeUseParserRuleCall_0_2_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Store__NewtypeAssignment_0_247504);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Store__NewtypeAssignment_0_247537);
             ruleTypeUse();
 
             state._fsp--;
@@ -63006,20 +63053,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Store__TypesAssignment_0_3"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23259:1: rule__Store__TypesAssignment_0_3 : ( ruleTypeList ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23275:1: rule__Store__TypesAssignment_0_3 : ( ruleTypeList ) ;
     public final void rule__Store__TypesAssignment_0_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23263:1: ( ( ruleTypeList ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23264:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23279:1: ( ( ruleTypeList ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23280:1: ( ruleTypeList )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23264:1: ( ruleTypeList )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23265:1: ruleTypeList
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23280:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23281:1: ruleTypeList
             {
              before(grammarAccess.getStoreAccess().getTypesTypeListParserRuleCall_0_3_0()); 
-            pushFollow(FOLLOW_ruleTypeList_in_rule__Store__TypesAssignment_0_347535);
+            pushFollow(FOLLOW_ruleTypeList_in_rule__Store__TypesAssignment_0_347568);
             ruleTypeList();
 
             state._fsp--;
@@ -63047,20 +63094,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Store__NewvalueAssignment_0_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23274:1: rule__Store__NewvalueAssignment_0_4 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23290:1: rule__Store__NewvalueAssignment_0_4 : ( ruleValue ) ;
     public final void rule__Store__NewvalueAssignment_0_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23278:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23279:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23294:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23295:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23279:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23280:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23295:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23296:1: ruleValue
             {
              before(grammarAccess.getStoreAccess().getNewvalueValueParserRuleCall_0_4_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Store__NewvalueAssignment_0_447566);
+            pushFollow(FOLLOW_ruleValue_in_rule__Store__NewvalueAssignment_0_447599);
             ruleValue();
 
             state._fsp--;
@@ -63088,20 +63135,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Store__AdresstypeAssignment_0_6"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23289:1: rule__Store__AdresstypeAssignment_0_6 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23305:1: rule__Store__AdresstypeAssignment_0_6 : ( ruleTypeUse ) ;
     public final void rule__Store__AdresstypeAssignment_0_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23293:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23294:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23309:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23310:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23294:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23295:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23310:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23311:1: ruleTypeUse
             {
              before(grammarAccess.getStoreAccess().getAdresstypeTypeUseParserRuleCall_0_6_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Store__AdresstypeAssignment_0_647597);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Store__AdresstypeAssignment_0_647630);
             ruleTypeUse();
 
             state._fsp--;
@@ -63129,20 +63176,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Store__TypesAssignment_0_7"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23304:1: rule__Store__TypesAssignment_0_7 : ( ruleTypeList ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23320:1: rule__Store__TypesAssignment_0_7 : ( ruleTypeList ) ;
     public final void rule__Store__TypesAssignment_0_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23308:1: ( ( ruleTypeList ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23309:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23324:1: ( ( ruleTypeList ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23325:1: ( ruleTypeList )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23309:1: ( ruleTypeList )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23310:1: ruleTypeList
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23325:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23326:1: ruleTypeList
             {
              before(grammarAccess.getStoreAccess().getTypesTypeListParserRuleCall_0_7_0()); 
-            pushFollow(FOLLOW_ruleTypeList_in_rule__Store__TypesAssignment_0_747628);
+            pushFollow(FOLLOW_ruleTypeList_in_rule__Store__TypesAssignment_0_747661);
             ruleTypeList();
 
             state._fsp--;
@@ -63170,20 +63217,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Store__AdressAssignment_0_8"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23319:1: rule__Store__AdressAssignment_0_8 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23335:1: rule__Store__AdressAssignment_0_8 : ( ruleValue ) ;
     public final void rule__Store__AdressAssignment_0_8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23323:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23324:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23339:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23340:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23324:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23325:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23340:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23341:1: ruleValue
             {
              before(grammarAccess.getStoreAccess().getAdressValueParserRuleCall_0_8_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Store__AdressAssignment_0_847659);
+            pushFollow(FOLLOW_ruleValue_in_rule__Store__AdressAssignment_0_847692);
             ruleValue();
 
             state._fsp--;
@@ -63211,20 +63258,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Store__NewtypeAssignment_1_3"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23334:1: rule__Store__NewtypeAssignment_1_3 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23350:1: rule__Store__NewtypeAssignment_1_3 : ( ruleTypeUse ) ;
     public final void rule__Store__NewtypeAssignment_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23338:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23339:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23354:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23355:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23339:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23340:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23355:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23356:1: ruleTypeUse
             {
              before(grammarAccess.getStoreAccess().getNewtypeTypeUseParserRuleCall_1_3_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Store__NewtypeAssignment_1_347690);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Store__NewtypeAssignment_1_347723);
             ruleTypeUse();
 
             state._fsp--;
@@ -63252,20 +63299,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Store__TypesAssignment_1_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23349:1: rule__Store__TypesAssignment_1_4 : ( ruleTypeList ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23365:1: rule__Store__TypesAssignment_1_4 : ( ruleTypeList ) ;
     public final void rule__Store__TypesAssignment_1_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23353:1: ( ( ruleTypeList ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23354:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23369:1: ( ( ruleTypeList ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23370:1: ( ruleTypeList )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23354:1: ( ruleTypeList )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23355:1: ruleTypeList
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23370:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23371:1: ruleTypeList
             {
              before(grammarAccess.getStoreAccess().getTypesTypeListParserRuleCall_1_4_0()); 
-            pushFollow(FOLLOW_ruleTypeList_in_rule__Store__TypesAssignment_1_447721);
+            pushFollow(FOLLOW_ruleTypeList_in_rule__Store__TypesAssignment_1_447754);
             ruleTypeList();
 
             state._fsp--;
@@ -63293,20 +63340,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Store__NewvalueAssignment_1_5"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23364:1: rule__Store__NewvalueAssignment_1_5 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23380:1: rule__Store__NewvalueAssignment_1_5 : ( ruleValue ) ;
     public final void rule__Store__NewvalueAssignment_1_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23368:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23369:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23384:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23385:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23369:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23370:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23385:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23386:1: ruleValue
             {
              before(grammarAccess.getStoreAccess().getNewvalueValueParserRuleCall_1_5_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Store__NewvalueAssignment_1_547752);
+            pushFollow(FOLLOW_ruleValue_in_rule__Store__NewvalueAssignment_1_547785);
             ruleValue();
 
             state._fsp--;
@@ -63334,20 +63381,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Store__AdresstypeAssignment_1_7"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23379:1: rule__Store__AdresstypeAssignment_1_7 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23395:1: rule__Store__AdresstypeAssignment_1_7 : ( ruleTypeUse ) ;
     public final void rule__Store__AdresstypeAssignment_1_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23383:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23384:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23399:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23400:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23384:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23385:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23400:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23401:1: ruleTypeUse
             {
              before(grammarAccess.getStoreAccess().getAdresstypeTypeUseParserRuleCall_1_7_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Store__AdresstypeAssignment_1_747783);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Store__AdresstypeAssignment_1_747816);
             ruleTypeUse();
 
             state._fsp--;
@@ -63375,20 +63422,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Store__TypesAssignment_1_8"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23394:1: rule__Store__TypesAssignment_1_8 : ( ruleTypeList ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23410:1: rule__Store__TypesAssignment_1_8 : ( ruleTypeList ) ;
     public final void rule__Store__TypesAssignment_1_8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23398:1: ( ( ruleTypeList ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23399:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23414:1: ( ( ruleTypeList ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23415:1: ( ruleTypeList )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23399:1: ( ruleTypeList )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23400:1: ruleTypeList
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23415:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23416:1: ruleTypeList
             {
              before(grammarAccess.getStoreAccess().getTypesTypeListParserRuleCall_1_8_0()); 
-            pushFollow(FOLLOW_ruleTypeList_in_rule__Store__TypesAssignment_1_847814);
+            pushFollow(FOLLOW_ruleTypeList_in_rule__Store__TypesAssignment_1_847847);
             ruleTypeList();
 
             state._fsp--;
@@ -63416,20 +63463,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Store__AdressAssignment_1_9"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23409:1: rule__Store__AdressAssignment_1_9 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23425:1: rule__Store__AdressAssignment_1_9 : ( ruleValue ) ;
     public final void rule__Store__AdressAssignment_1_9() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23413:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23414:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23429:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23430:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23414:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23415:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23430:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23431:1: ruleValue
             {
              before(grammarAccess.getStoreAccess().getAdressValueParserRuleCall_1_9_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Store__AdressAssignment_1_947845);
+            pushFollow(FOLLOW_ruleValue_in_rule__Store__AdressAssignment_1_947878);
             ruleValue();
 
             state._fsp--;
@@ -63457,20 +63504,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Store__OrderingAssignment_1_11"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23424:1: rule__Store__OrderingAssignment_1_11 : ( ruleATOMIC_ORDERING ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23440:1: rule__Store__OrderingAssignment_1_11 : ( ruleATOMIC_ORDERING ) ;
     public final void rule__Store__OrderingAssignment_1_11() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23428:1: ( ( ruleATOMIC_ORDERING ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23429:1: ( ruleATOMIC_ORDERING )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23444:1: ( ( ruleATOMIC_ORDERING ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23445:1: ( ruleATOMIC_ORDERING )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23429:1: ( ruleATOMIC_ORDERING )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23430:1: ruleATOMIC_ORDERING
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23445:1: ( ruleATOMIC_ORDERING )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23446:1: ruleATOMIC_ORDERING
             {
              before(grammarAccess.getStoreAccess().getOrderingATOMIC_ORDERINGParserRuleCall_1_11_0()); 
-            pushFollow(FOLLOW_ruleATOMIC_ORDERING_in_rule__Store__OrderingAssignment_1_1147876);
+            pushFollow(FOLLOW_ruleATOMIC_ORDERING_in_rule__Store__OrderingAssignment_1_1147909);
             ruleATOMIC_ORDERING();
 
             state._fsp--;
@@ -63498,20 +63545,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Store__IndexAssignment_1_12_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23439:1: rule__Store__IndexAssignment_1_12_2 : ( RULE_INT ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23455:1: rule__Store__IndexAssignment_1_12_2 : ( RULE_INT ) ;
     public final void rule__Store__IndexAssignment_1_12_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23443:1: ( ( RULE_INT ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23444:1: ( RULE_INT )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23459:1: ( ( RULE_INT ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23460:1: ( RULE_INT )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23444:1: ( RULE_INT )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23445:1: RULE_INT
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23460:1: ( RULE_INT )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23461:1: RULE_INT
             {
              before(grammarAccess.getStoreAccess().getIndexINTTerminalRuleCall_1_12_2_0()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__Store__IndexAssignment_1_12_247907); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__Store__IndexAssignment_1_12_247940); 
              after(grammarAccess.getStoreAccess().getIndexINTTerminalRuleCall_1_12_2_0()); 
 
             }
@@ -63535,20 +63582,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Call__AdresstypeAssignment_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23454:1: rule__Call__AdresstypeAssignment_4 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23470:1: rule__Call__AdresstypeAssignment_4 : ( ruleTypeUse ) ;
     public final void rule__Call__AdresstypeAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23458:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23459:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23474:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23475:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23459:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23460:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23475:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23476:1: ruleTypeUse
             {
              before(grammarAccess.getCallAccess().getAdresstypeTypeUseParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Call__AdresstypeAssignment_447938);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Call__AdresstypeAssignment_447971);
             ruleTypeUse();
 
             state._fsp--;
@@ -63576,20 +63623,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Call__AdressAssignment_5_0"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23469:1: rule__Call__AdressAssignment_5_0 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23485:1: rule__Call__AdressAssignment_5_0 : ( ruleValue ) ;
     public final void rule__Call__AdressAssignment_5_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23473:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23474:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23489:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23490:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23474:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23475:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23490:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23491:1: ruleValue
             {
              before(grammarAccess.getCallAccess().getAdressValueParserRuleCall_5_0_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Call__AdressAssignment_5_047969);
+            pushFollow(FOLLOW_ruleValue_in_rule__Call__AdressAssignment_5_048002);
             ruleValue();
 
             state._fsp--;
@@ -63617,20 +63664,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Call__PListAssignment_6"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23484:1: rule__Call__PListAssignment_6 : ( ruleParameterList ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23500:1: rule__Call__PListAssignment_6 : ( ruleParameterList ) ;
     public final void rule__Call__PListAssignment_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23488:1: ( ( ruleParameterList ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23489:1: ( ruleParameterList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23504:1: ( ( ruleParameterList ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23505:1: ( ruleParameterList )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23489:1: ( ruleParameterList )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23490:1: ruleParameterList
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23505:1: ( ruleParameterList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23506:1: ruleParameterList
             {
              before(grammarAccess.getCallAccess().getPListParameterListParserRuleCall_6_0()); 
-            pushFollow(FOLLOW_ruleParameterList_in_rule__Call__PListAssignment_648000);
+            pushFollow(FOLLOW_ruleParameterList_in_rule__Call__PListAssignment_648033);
             ruleParameterList();
 
             state._fsp--;
@@ -63658,20 +63705,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Alloc__TypeAssignment_1_0"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23499:1: rule__Alloc__TypeAssignment_1_0 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23515:1: rule__Alloc__TypeAssignment_1_0 : ( ruleTypeUse ) ;
     public final void rule__Alloc__TypeAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23503:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23504:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23519:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23520:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23504:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23505:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23520:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23521:1: ruleTypeUse
             {
              before(grammarAccess.getAllocAccess().getTypeTypeUseParserRuleCall_1_0_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Alloc__TypeAssignment_1_048031);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Alloc__TypeAssignment_1_048064);
             ruleTypeUse();
 
             state._fsp--;
@@ -63699,20 +63746,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Alloc__TypelistAssignment_1_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23514:1: rule__Alloc__TypelistAssignment_1_1 : ( ruleTypeList ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23530:1: rule__Alloc__TypelistAssignment_1_1 : ( ruleTypeList ) ;
     public final void rule__Alloc__TypelistAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23518:1: ( ( ruleTypeList ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23519:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23534:1: ( ( ruleTypeList ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23535:1: ( ruleTypeList )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23519:1: ( ruleTypeList )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23520:1: ruleTypeList
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23535:1: ( ruleTypeList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23536:1: ruleTypeList
             {
              before(grammarAccess.getAllocAccess().getTypelistTypeListParserRuleCall_1_1_0()); 
-            pushFollow(FOLLOW_ruleTypeList_in_rule__Alloc__TypelistAssignment_1_148062);
+            pushFollow(FOLLOW_ruleTypeList_in_rule__Alloc__TypelistAssignment_1_148095);
             ruleTypeList();
 
             state._fsp--;
@@ -63740,20 +63787,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Alloc__NumelementstypeAssignment_2_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23529:1: rule__Alloc__NumelementstypeAssignment_2_1 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23545:1: rule__Alloc__NumelementstypeAssignment_2_1 : ( ruleTypeUse ) ;
     public final void rule__Alloc__NumelementstypeAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23533:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23534:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23549:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23550:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23534:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23535:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23550:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23551:1: ruleTypeUse
             {
              before(grammarAccess.getAllocAccess().getNumelementstypeTypeUseParserRuleCall_2_1_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Alloc__NumelementstypeAssignment_2_148093);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Alloc__NumelementstypeAssignment_2_148126);
             ruleTypeUse();
 
             state._fsp--;
@@ -63781,20 +63828,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Alloc__NumelementsvalueAssignment_2_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23544:1: rule__Alloc__NumelementsvalueAssignment_2_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23560:1: rule__Alloc__NumelementsvalueAssignment_2_2 : ( ruleValue ) ;
     public final void rule__Alloc__NumelementsvalueAssignment_2_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23548:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23549:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23564:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23565:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23549:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23550:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23565:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23566:1: ruleValue
             {
              before(grammarAccess.getAllocAccess().getNumelementsvalueValueParserRuleCall_2_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Alloc__NumelementsvalueAssignment_2_248124);
+            pushFollow(FOLLOW_ruleValue_in_rule__Alloc__NumelementsvalueAssignment_2_248157);
             ruleValue();
 
             state._fsp--;
@@ -63822,20 +63869,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Phi__TypeAssignment_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23559:1: rule__Phi__TypeAssignment_1 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23575:1: rule__Phi__TypeAssignment_1 : ( ruleTypeUse ) ;
     public final void rule__Phi__TypeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23563:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23564:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23579:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23580:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23564:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23565:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23580:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23581:1: ruleTypeUse
             {
              before(grammarAccess.getPhiAccess().getTypeTypeUseParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Phi__TypeAssignment_148155);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Phi__TypeAssignment_148188);
             ruleTypeUse();
 
             state._fsp--;
@@ -63863,20 +63910,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Phi__FirstclassAssignment_3"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23574:1: rule__Phi__FirstclassAssignment_3 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23590:1: rule__Phi__FirstclassAssignment_3 : ( ruleValue ) ;
     public final void rule__Phi__FirstclassAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23578:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23579:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23594:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23595:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23579:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23580:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23595:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23596:1: ruleValue
             {
              before(grammarAccess.getPhiAccess().getFirstclassValueParserRuleCall_3_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Phi__FirstclassAssignment_348186);
+            pushFollow(FOLLOW_ruleValue_in_rule__Phi__FirstclassAssignment_348219);
             ruleValue();
 
             state._fsp--;
@@ -63904,20 +63951,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Phi__ValuesAssignment_5"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23589:1: rule__Phi__ValuesAssignment_5 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23605:1: rule__Phi__ValuesAssignment_5 : ( ruleValue ) ;
     public final void rule__Phi__ValuesAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23593:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23594:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23609:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23610:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23594:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23595:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23610:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23611:1: ruleValue
             {
              before(grammarAccess.getPhiAccess().getValuesValueParserRuleCall_5_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Phi__ValuesAssignment_548217);
+            pushFollow(FOLLOW_ruleValue_in_rule__Phi__ValuesAssignment_548250);
             ruleValue();
 
             state._fsp--;
@@ -63945,20 +63992,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Phi__FirstclassAssignment_7_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23604:1: rule__Phi__FirstclassAssignment_7_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23620:1: rule__Phi__FirstclassAssignment_7_2 : ( ruleValue ) ;
     public final void rule__Phi__FirstclassAssignment_7_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23608:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23609:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23624:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23625:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23609:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23610:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23625:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23626:1: ruleValue
             {
              before(grammarAccess.getPhiAccess().getFirstclassValueParserRuleCall_7_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Phi__FirstclassAssignment_7_248248);
+            pushFollow(FOLLOW_ruleValue_in_rule__Phi__FirstclassAssignment_7_248281);
             ruleValue();
 
             state._fsp--;
@@ -63986,20 +64033,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Phi__ValuesAssignment_7_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23619:1: rule__Phi__ValuesAssignment_7_4 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23635:1: rule__Phi__ValuesAssignment_7_4 : ( ruleValue ) ;
     public final void rule__Phi__ValuesAssignment_7_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23623:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23624:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23639:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23640:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23624:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23625:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23640:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23641:1: ruleValue
             {
              before(grammarAccess.getPhiAccess().getValuesValueParserRuleCall_7_4_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Phi__ValuesAssignment_7_448279);
+            pushFollow(FOLLOW_ruleValue_in_rule__Phi__ValuesAssignment_7_448312);
             ruleValue();
 
             state._fsp--;
@@ -64027,20 +64074,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LandingPad__StructAssignment_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23634:1: rule__LandingPad__StructAssignment_1 : ( ruleStructure ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23650:1: rule__LandingPad__StructAssignment_1 : ( ruleStructure ) ;
     public final void rule__LandingPad__StructAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23638:1: ( ( ruleStructure ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23639:1: ( ruleStructure )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23654:1: ( ( ruleStructure ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23655:1: ( ruleStructure )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23639:1: ( ruleStructure )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23640:1: ruleStructure
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23655:1: ( ruleStructure )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23656:1: ruleStructure
             {
              before(grammarAccess.getLandingPadAccess().getStructStructureParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleStructure_in_rule__LandingPad__StructAssignment_148310);
+            pushFollow(FOLLOW_ruleStructure_in_rule__LandingPad__StructAssignment_148343);
             ruleStructure();
 
             state._fsp--;
@@ -64068,20 +64115,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LandingPad__PersonalitytypeAssignment_3"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23649:1: rule__LandingPad__PersonalitytypeAssignment_3 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23665:1: rule__LandingPad__PersonalitytypeAssignment_3 : ( ruleTypeUse ) ;
     public final void rule__LandingPad__PersonalitytypeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23653:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23654:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23669:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23670:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23654:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23655:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23670:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23671:1: ruleTypeUse
             {
              before(grammarAccess.getLandingPadAccess().getPersonalitytypeTypeUseParserRuleCall_3_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__LandingPad__PersonalitytypeAssignment_348341);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__LandingPad__PersonalitytypeAssignment_348374);
             ruleTypeUse();
 
             state._fsp--;
@@ -64109,20 +64156,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LandingPad__PersonalityvalueAssignment_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23664:1: rule__LandingPad__PersonalityvalueAssignment_4 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23680:1: rule__LandingPad__PersonalityvalueAssignment_4 : ( ruleValue ) ;
     public final void rule__LandingPad__PersonalityvalueAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23668:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23669:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23684:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23685:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23669:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23670:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23685:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23686:1: ruleValue
             {
              before(grammarAccess.getLandingPadAccess().getPersonalityvalueValueParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__LandingPad__PersonalityvalueAssignment_448372);
+            pushFollow(FOLLOW_ruleValue_in_rule__LandingPad__PersonalityvalueAssignment_448405);
             ruleValue();
 
             state._fsp--;
@@ -64150,20 +64197,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LandingPad__ClauseAssignment_5_0_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23679:1: rule__LandingPad__ClauseAssignment_5_0_1 : ( ruleClause ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23695:1: rule__LandingPad__ClauseAssignment_5_0_1 : ( ruleClause ) ;
     public final void rule__LandingPad__ClauseAssignment_5_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23683:1: ( ( ruleClause ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23684:1: ( ruleClause )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23699:1: ( ( ruleClause ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23700:1: ( ruleClause )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23684:1: ( ruleClause )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23685:1: ruleClause
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23700:1: ( ruleClause )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23701:1: ruleClause
             {
              before(grammarAccess.getLandingPadAccess().getClauseClauseParserRuleCall_5_0_1_0()); 
-            pushFollow(FOLLOW_ruleClause_in_rule__LandingPad__ClauseAssignment_5_0_148403);
+            pushFollow(FOLLOW_ruleClause_in_rule__LandingPad__ClauseAssignment_5_0_148436);
             ruleClause();
 
             state._fsp--;
@@ -64191,20 +64238,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LandingPad__ClauseAssignment_5_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23694:1: rule__LandingPad__ClauseAssignment_5_1 : ( ruleClause ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23710:1: rule__LandingPad__ClauseAssignment_5_1 : ( ruleClause ) ;
     public final void rule__LandingPad__ClauseAssignment_5_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23698:1: ( ( ruleClause ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23699:1: ( ruleClause )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23714:1: ( ( ruleClause ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23715:1: ( ruleClause )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23699:1: ( ruleClause )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23700:1: ruleClause
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23715:1: ( ruleClause )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23716:1: ruleClause
             {
              before(grammarAccess.getLandingPadAccess().getClauseClauseParserRuleCall_5_1_0()); 
-            pushFollow(FOLLOW_ruleClause_in_rule__LandingPad__ClauseAssignment_5_148434);
+            pushFollow(FOLLOW_ruleClause_in_rule__LandingPad__ClauseAssignment_5_148467);
             ruleClause();
 
             state._fsp--;
@@ -64232,20 +64279,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Clause__TypeAssignment_0_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23709:1: rule__Clause__TypeAssignment_0_1 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23725:1: rule__Clause__TypeAssignment_0_1 : ( ruleTypeUse ) ;
     public final void rule__Clause__TypeAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23713:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23714:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23729:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23730:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23714:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23715:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23730:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23731:1: ruleTypeUse
             {
              before(grammarAccess.getClauseAccess().getTypeTypeUseParserRuleCall_0_1_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Clause__TypeAssignment_0_148465);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Clause__TypeAssignment_0_148498);
             ruleTypeUse();
 
             state._fsp--;
@@ -64273,20 +64320,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Clause__ValueAssignment_0_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23724:1: rule__Clause__ValueAssignment_0_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23740:1: rule__Clause__ValueAssignment_0_2 : ( ruleValue ) ;
     public final void rule__Clause__ValueAssignment_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23728:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23729:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23744:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23745:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23729:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23730:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23745:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23746:1: ruleValue
             {
              before(grammarAccess.getClauseAccess().getValueValueParserRuleCall_0_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Clause__ValueAssignment_0_248496);
+            pushFollow(FOLLOW_ruleValue_in_rule__Clause__ValueAssignment_0_248529);
             ruleValue();
 
             state._fsp--;
@@ -64314,20 +64361,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Clause__FilterarrayAssignment_1_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23739:1: rule__Clause__FilterarrayAssignment_1_1 : ( ruleArray ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23755:1: rule__Clause__FilterarrayAssignment_1_1 : ( ruleArray ) ;
     public final void rule__Clause__FilterarrayAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23743:1: ( ( ruleArray ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23744:1: ( ruleArray )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23759:1: ( ( ruleArray ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23760:1: ( ruleArray )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23744:1: ( ruleArray )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23745:1: ruleArray
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23760:1: ( ruleArray )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23761:1: ruleArray
             {
              before(grammarAccess.getClauseAccess().getFilterarrayArrayParserRuleCall_1_1_0()); 
-            pushFollow(FOLLOW_ruleArray_in_rule__Clause__FilterarrayAssignment_1_148527);
+            pushFollow(FOLLOW_ruleArray_in_rule__Clause__FilterarrayAssignment_1_148560);
             ruleArray();
 
             state._fsp--;
@@ -64355,20 +64402,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Clause__ConstantAssignment_1_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23754:1: rule__Clause__ConstantAssignment_1_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23770:1: rule__Clause__ConstantAssignment_1_2 : ( ruleValue ) ;
     public final void rule__Clause__ConstantAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23758:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23759:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23774:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23775:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23759:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23760:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23775:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23776:1: ruleValue
             {
              before(grammarAccess.getClauseAccess().getConstantValueParserRuleCall_1_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Clause__ConstantAssignment_1_248558);
+            pushFollow(FOLLOW_ruleValue_in_rule__Clause__ConstantAssignment_1_248591);
             ruleValue();
 
             state._fsp--;
@@ -64396,20 +64443,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Select__ConditiontypeAssignment_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23769:1: rule__Select__ConditiontypeAssignment_1 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23785:1: rule__Select__ConditiontypeAssignment_1 : ( ruleTypeUse ) ;
     public final void rule__Select__ConditiontypeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23773:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23774:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23789:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23790:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23774:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23775:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23790:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23791:1: ruleTypeUse
             {
              before(grammarAccess.getSelectAccess().getConditiontypeTypeUseParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Select__ConditiontypeAssignment_148589);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Select__ConditiontypeAssignment_148622);
             ruleTypeUse();
 
             state._fsp--;
@@ -64437,20 +64484,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Select__ConditionvalueAssignment_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23784:1: rule__Select__ConditionvalueAssignment_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23800:1: rule__Select__ConditionvalueAssignment_2 : ( ruleValue ) ;
     public final void rule__Select__ConditionvalueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23788:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23789:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23804:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23805:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23789:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23790:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23805:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23806:1: ruleValue
             {
              before(grammarAccess.getSelectAccess().getConditionvalueValueParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Select__ConditionvalueAssignment_248620);
+            pushFollow(FOLLOW_ruleValue_in_rule__Select__ConditionvalueAssignment_248653);
             ruleValue();
 
             state._fsp--;
@@ -64478,20 +64525,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Select__Val1typeAssignment_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23799:1: rule__Select__Val1typeAssignment_4 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23815:1: rule__Select__Val1typeAssignment_4 : ( ruleTypeUse ) ;
     public final void rule__Select__Val1typeAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23803:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23804:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23819:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23820:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23804:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23805:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23820:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23821:1: ruleTypeUse
             {
              before(grammarAccess.getSelectAccess().getVal1typeTypeUseParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Select__Val1typeAssignment_448651);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Select__Val1typeAssignment_448684);
             ruleTypeUse();
 
             state._fsp--;
@@ -64519,20 +64566,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Select__Val1valueAssignment_5"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23814:1: rule__Select__Val1valueAssignment_5 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23830:1: rule__Select__Val1valueAssignment_5 : ( ruleValue ) ;
     public final void rule__Select__Val1valueAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23818:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23819:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23834:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23835:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23819:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23820:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23835:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23836:1: ruleValue
             {
              before(grammarAccess.getSelectAccess().getVal1valueValueParserRuleCall_5_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Select__Val1valueAssignment_548682);
+            pushFollow(FOLLOW_ruleValue_in_rule__Select__Val1valueAssignment_548715);
             ruleValue();
 
             state._fsp--;
@@ -64560,20 +64607,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Select__Val2typeAssignment_7"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23829:1: rule__Select__Val2typeAssignment_7 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23845:1: rule__Select__Val2typeAssignment_7 : ( ruleTypeUse ) ;
     public final void rule__Select__Val2typeAssignment_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23833:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23834:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23849:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23850:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23834:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23835:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23850:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23851:1: ruleTypeUse
             {
              before(grammarAccess.getSelectAccess().getVal2typeTypeUseParserRuleCall_7_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Select__Val2typeAssignment_748713);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Select__Val2typeAssignment_748746);
             ruleTypeUse();
 
             state._fsp--;
@@ -64601,20 +64648,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Select__Val2valueAssignment_8"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23844:1: rule__Select__Val2valueAssignment_8 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23860:1: rule__Select__Val2valueAssignment_8 : ( ruleValue ) ;
     public final void rule__Select__Val2valueAssignment_8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23848:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23849:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23864:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23865:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23849:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23850:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23865:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23866:1: ruleValue
             {
              before(grammarAccess.getSelectAccess().getVal2valueValueParserRuleCall_8_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Select__Val2valueAssignment_848744);
+            pushFollow(FOLLOW_ruleValue_in_rule__Select__Val2valueAssignment_848777);
             ruleValue();
 
             state._fsp--;
@@ -64642,20 +64689,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__VariableAttributeAccess__ListtypeAssignment_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23859:1: rule__VariableAttributeAccess__ListtypeAssignment_1 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23875:1: rule__VariableAttributeAccess__ListtypeAssignment_1 : ( ruleTypeUse ) ;
     public final void rule__VariableAttributeAccess__ListtypeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23863:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23864:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23879:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23880:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23864:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23865:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23880:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23881:1: ruleTypeUse
             {
              before(grammarAccess.getVariableAttributeAccessAccess().getListtypeTypeUseParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__VariableAttributeAccess__ListtypeAssignment_148775);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__VariableAttributeAccess__ListtypeAssignment_148808);
             ruleTypeUse();
 
             state._fsp--;
@@ -64683,20 +64730,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__VariableAttributeAccess__ListvalueAssignment_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23874:1: rule__VariableAttributeAccess__ListvalueAssignment_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23890:1: rule__VariableAttributeAccess__ListvalueAssignment_2 : ( ruleValue ) ;
     public final void rule__VariableAttributeAccess__ListvalueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23878:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23879:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23894:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23895:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23879:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23880:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23895:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23896:1: ruleValue
             {
              before(grammarAccess.getVariableAttributeAccessAccess().getListvalueValueParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__VariableAttributeAccess__ListvalueAssignment_248806);
+            pushFollow(FOLLOW_ruleValue_in_rule__VariableAttributeAccess__ListvalueAssignment_248839);
             ruleValue();
 
             state._fsp--;
@@ -64724,20 +64771,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__VariableAttributeAccess__ArgTypeAssignment_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23889:1: rule__VariableAttributeAccess__ArgTypeAssignment_4 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23905:1: rule__VariableAttributeAccess__ArgTypeAssignment_4 : ( ruleTypeUse ) ;
     public final void rule__VariableAttributeAccess__ArgTypeAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23893:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23894:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23909:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23910:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23894:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23895:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23910:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23911:1: ruleTypeUse
             {
              before(grammarAccess.getVariableAttributeAccessAccess().getArgTypeTypeUseParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__VariableAttributeAccess__ArgTypeAssignment_448837);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__VariableAttributeAccess__ArgTypeAssignment_448870);
             ruleTypeUse();
 
             state._fsp--;
@@ -64765,20 +64812,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExtractElement__VectortypeAssignment_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23904:1: rule__ExtractElement__VectortypeAssignment_1 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23920:1: rule__ExtractElement__VectortypeAssignment_1 : ( ruleTypeUse ) ;
     public final void rule__ExtractElement__VectortypeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23908:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23909:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23924:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23925:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23909:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23910:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23925:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23926:1: ruleTypeUse
             {
              before(grammarAccess.getExtractElementAccess().getVectortypeTypeUseParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__ExtractElement__VectortypeAssignment_148868);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__ExtractElement__VectortypeAssignment_148901);
             ruleTypeUse();
 
             state._fsp--;
@@ -64806,20 +64853,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExtractElement__VectorvalueAssignment_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23919:1: rule__ExtractElement__VectorvalueAssignment_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23935:1: rule__ExtractElement__VectorvalueAssignment_2 : ( ruleValue ) ;
     public final void rule__ExtractElement__VectorvalueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23923:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23924:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23939:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23940:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23924:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23925:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23940:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23941:1: ruleValue
             {
              before(grammarAccess.getExtractElementAccess().getVectorvalueValueParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__ExtractElement__VectorvalueAssignment_248899);
+            pushFollow(FOLLOW_ruleValue_in_rule__ExtractElement__VectorvalueAssignment_248932);
             ruleValue();
 
             state._fsp--;
@@ -64847,20 +64894,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExtractElement__IndextypeAssignment_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23934:1: rule__ExtractElement__IndextypeAssignment_4 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23950:1: rule__ExtractElement__IndextypeAssignment_4 : ( ruleTypeUse ) ;
     public final void rule__ExtractElement__IndextypeAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23938:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23939:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23954:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23955:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23939:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23940:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23955:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23956:1: ruleTypeUse
             {
              before(grammarAccess.getExtractElementAccess().getIndextypeTypeUseParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__ExtractElement__IndextypeAssignment_448930);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__ExtractElement__IndextypeAssignment_448963);
             ruleTypeUse();
 
             state._fsp--;
@@ -64888,20 +64935,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExtractElement__IndexAssignment_5"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23949:1: rule__ExtractElement__IndexAssignment_5 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23965:1: rule__ExtractElement__IndexAssignment_5 : ( ruleValue ) ;
     public final void rule__ExtractElement__IndexAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23953:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23954:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23969:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23970:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23954:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23955:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23970:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23971:1: ruleValue
             {
              before(grammarAccess.getExtractElementAccess().getIndexValueParserRuleCall_5_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__ExtractElement__IndexAssignment_548961);
+            pushFollow(FOLLOW_ruleValue_in_rule__ExtractElement__IndexAssignment_548994);
             ruleValue();
 
             state._fsp--;
@@ -64929,20 +64976,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InsertElement__VectortypeAssignment_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23964:1: rule__InsertElement__VectortypeAssignment_1 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23980:1: rule__InsertElement__VectortypeAssignment_1 : ( ruleTypeUse ) ;
     public final void rule__InsertElement__VectortypeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23968:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23969:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23984:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23985:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23969:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23970:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23985:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23986:1: ruleTypeUse
             {
              before(grammarAccess.getInsertElementAccess().getVectortypeTypeUseParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__InsertElement__VectortypeAssignment_148992);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__InsertElement__VectortypeAssignment_149025);
             ruleTypeUse();
 
             state._fsp--;
@@ -64970,20 +65017,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InsertElement__VectorvalueAssignment_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23979:1: rule__InsertElement__VectorvalueAssignment_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23995:1: rule__InsertElement__VectorvalueAssignment_2 : ( ruleValue ) ;
     public final void rule__InsertElement__VectorvalueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23983:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23984:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23999:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24000:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23984:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23985:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24000:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24001:1: ruleValue
             {
              before(grammarAccess.getInsertElementAccess().getVectorvalueValueParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__InsertElement__VectorvalueAssignment_249023);
+            pushFollow(FOLLOW_ruleValue_in_rule__InsertElement__VectorvalueAssignment_249056);
             ruleValue();
 
             state._fsp--;
@@ -65011,20 +65058,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InsertElement__ScalartypeAssignment_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23994:1: rule__InsertElement__ScalartypeAssignment_4 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24010:1: rule__InsertElement__ScalartypeAssignment_4 : ( ruleTypeUse ) ;
     public final void rule__InsertElement__ScalartypeAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23998:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23999:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24014:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24015:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:23999:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24000:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24015:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24016:1: ruleTypeUse
             {
              before(grammarAccess.getInsertElementAccess().getScalartypeTypeUseParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__InsertElement__ScalartypeAssignment_449054);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__InsertElement__ScalartypeAssignment_449087);
             ruleTypeUse();
 
             state._fsp--;
@@ -65052,20 +65099,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InsertElement__ScalarvalueAssignment_5"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24009:1: rule__InsertElement__ScalarvalueAssignment_5 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24025:1: rule__InsertElement__ScalarvalueAssignment_5 : ( ruleValue ) ;
     public final void rule__InsertElement__ScalarvalueAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24013:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24014:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24029:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24030:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24014:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24015:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24030:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24031:1: ruleValue
             {
              before(grammarAccess.getInsertElementAccess().getScalarvalueValueParserRuleCall_5_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__InsertElement__ScalarvalueAssignment_549085);
+            pushFollow(FOLLOW_ruleValue_in_rule__InsertElement__ScalarvalueAssignment_549118);
             ruleValue();
 
             state._fsp--;
@@ -65093,20 +65140,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InsertElement__IndextypeAssignment_7"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24024:1: rule__InsertElement__IndextypeAssignment_7 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24040:1: rule__InsertElement__IndextypeAssignment_7 : ( ruleTypeUse ) ;
     public final void rule__InsertElement__IndextypeAssignment_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24028:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24029:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24044:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24045:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24029:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24030:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24045:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24046:1: ruleTypeUse
             {
              before(grammarAccess.getInsertElementAccess().getIndextypeTypeUseParserRuleCall_7_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__InsertElement__IndextypeAssignment_749116);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__InsertElement__IndextypeAssignment_749149);
             ruleTypeUse();
 
             state._fsp--;
@@ -65134,20 +65181,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InsertElement__IndexAssignment_8"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24039:1: rule__InsertElement__IndexAssignment_8 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24055:1: rule__InsertElement__IndexAssignment_8 : ( ruleValue ) ;
     public final void rule__InsertElement__IndexAssignment_8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24043:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24044:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24059:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24060:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24044:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24045:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24060:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24061:1: ruleValue
             {
              before(grammarAccess.getInsertElementAccess().getIndexValueParserRuleCall_8_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__InsertElement__IndexAssignment_849147);
+            pushFollow(FOLLOW_ruleValue_in_rule__InsertElement__IndexAssignment_849180);
             ruleValue();
 
             state._fsp--;
@@ -65175,20 +65222,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ShuffleVector__Val1typeAssignment_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24054:1: rule__ShuffleVector__Val1typeAssignment_1 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24070:1: rule__ShuffleVector__Val1typeAssignment_1 : ( ruleTypeUse ) ;
     public final void rule__ShuffleVector__Val1typeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24058:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24059:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24074:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24075:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24059:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24060:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24075:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24076:1: ruleTypeUse
             {
              before(grammarAccess.getShuffleVectorAccess().getVal1typeTypeUseParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__ShuffleVector__Val1typeAssignment_149178);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__ShuffleVector__Val1typeAssignment_149211);
             ruleTypeUse();
 
             state._fsp--;
@@ -65216,20 +65263,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ShuffleVector__Val1valueAssignment_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24069:1: rule__ShuffleVector__Val1valueAssignment_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24085:1: rule__ShuffleVector__Val1valueAssignment_2 : ( ruleValue ) ;
     public final void rule__ShuffleVector__Val1valueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24073:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24074:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24089:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24090:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24074:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24075:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24090:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24091:1: ruleValue
             {
              before(grammarAccess.getShuffleVectorAccess().getVal1valueValueParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__ShuffleVector__Val1valueAssignment_249209);
+            pushFollow(FOLLOW_ruleValue_in_rule__ShuffleVector__Val1valueAssignment_249242);
             ruleValue();
 
             state._fsp--;
@@ -65257,20 +65304,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ShuffleVector__Val2typeAssignment_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24084:1: rule__ShuffleVector__Val2typeAssignment_4 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24100:1: rule__ShuffleVector__Val2typeAssignment_4 : ( ruleTypeUse ) ;
     public final void rule__ShuffleVector__Val2typeAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24088:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24089:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24104:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24105:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24089:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24090:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24105:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24106:1: ruleTypeUse
             {
              before(grammarAccess.getShuffleVectorAccess().getVal2typeTypeUseParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__ShuffleVector__Val2typeAssignment_449240);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__ShuffleVector__Val2typeAssignment_449273);
             ruleTypeUse();
 
             state._fsp--;
@@ -65298,20 +65345,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ShuffleVector__Val2valueAssignment_5"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24099:1: rule__ShuffleVector__Val2valueAssignment_5 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24115:1: rule__ShuffleVector__Val2valueAssignment_5 : ( ruleValue ) ;
     public final void rule__ShuffleVector__Val2valueAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24103:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24104:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24119:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24120:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24104:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24105:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24120:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24121:1: ruleValue
             {
              before(grammarAccess.getShuffleVectorAccess().getVal2valueValueParserRuleCall_5_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__ShuffleVector__Val2valueAssignment_549271);
+            pushFollow(FOLLOW_ruleValue_in_rule__ShuffleVector__Val2valueAssignment_549304);
             ruleValue();
 
             state._fsp--;
@@ -65339,20 +65386,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ShuffleVector__MasktypeAssignment_7"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24114:1: rule__ShuffleVector__MasktypeAssignment_7 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24130:1: rule__ShuffleVector__MasktypeAssignment_7 : ( ruleTypeUse ) ;
     public final void rule__ShuffleVector__MasktypeAssignment_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24118:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24119:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24134:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24135:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24119:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24120:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24135:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24136:1: ruleTypeUse
             {
              before(grammarAccess.getShuffleVectorAccess().getMasktypeTypeUseParserRuleCall_7_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__ShuffleVector__MasktypeAssignment_749302);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__ShuffleVector__MasktypeAssignment_749335);
             ruleTypeUse();
 
             state._fsp--;
@@ -65380,20 +65427,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ShuffleVector__MaskvalueAssignment_8"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24129:1: rule__ShuffleVector__MaskvalueAssignment_8 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24145:1: rule__ShuffleVector__MaskvalueAssignment_8 : ( ruleValue ) ;
     public final void rule__ShuffleVector__MaskvalueAssignment_8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24133:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24134:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24149:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24150:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24134:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24135:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24150:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24151:1: ruleValue
             {
              before(grammarAccess.getShuffleVectorAccess().getMaskvalueValueParserRuleCall_8_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__ShuffleVector__MaskvalueAssignment_849333);
+            pushFollow(FOLLOW_ruleValue_in_rule__ShuffleVector__MaskvalueAssignment_849366);
             ruleValue();
 
             state._fsp--;
@@ -65421,20 +65468,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Compare__ComptypeAssignment_0_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24144:1: rule__Compare__ComptypeAssignment_0_2 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24160:1: rule__Compare__ComptypeAssignment_0_2 : ( ruleTypeUse ) ;
     public final void rule__Compare__ComptypeAssignment_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24148:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24149:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24164:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24165:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24149:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24150:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24165:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24166:1: ruleTypeUse
             {
              before(grammarAccess.getCompareAccess().getComptypeTypeUseParserRuleCall_0_2_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Compare__ComptypeAssignment_0_249364);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Compare__ComptypeAssignment_0_249397);
             ruleTypeUse();
 
             state._fsp--;
@@ -65462,20 +65509,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Compare__Value1Assignment_0_3"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24159:1: rule__Compare__Value1Assignment_0_3 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24175:1: rule__Compare__Value1Assignment_0_3 : ( ruleValue ) ;
     public final void rule__Compare__Value1Assignment_0_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24163:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24164:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24179:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24180:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24164:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24165:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24180:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24181:1: ruleValue
             {
              before(grammarAccess.getCompareAccess().getValue1ValueParserRuleCall_0_3_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Compare__Value1Assignment_0_349395);
+            pushFollow(FOLLOW_ruleValue_in_rule__Compare__Value1Assignment_0_349428);
             ruleValue();
 
             state._fsp--;
@@ -65503,20 +65550,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Compare__Value2Assignment_0_5"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24174:1: rule__Compare__Value2Assignment_0_5 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24190:1: rule__Compare__Value2Assignment_0_5 : ( ruleValue ) ;
     public final void rule__Compare__Value2Assignment_0_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24178:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24179:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24194:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24195:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24179:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24180:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24195:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24196:1: ruleValue
             {
              before(grammarAccess.getCompareAccess().getValue2ValueParserRuleCall_0_5_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Compare__Value2Assignment_0_549426);
+            pushFollow(FOLLOW_ruleValue_in_rule__Compare__Value2Assignment_0_549459);
             ruleValue();
 
             state._fsp--;
@@ -65544,20 +65591,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Compare__ComptypeAssignment_1_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24189:1: rule__Compare__ComptypeAssignment_1_2 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24205:1: rule__Compare__ComptypeAssignment_1_2 : ( ruleTypeUse ) ;
     public final void rule__Compare__ComptypeAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24193:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24194:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24209:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24210:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24194:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24195:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24210:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24211:1: ruleTypeUse
             {
              before(grammarAccess.getCompareAccess().getComptypeTypeUseParserRuleCall_1_2_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Compare__ComptypeAssignment_1_249457);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Compare__ComptypeAssignment_1_249490);
             ruleTypeUse();
 
             state._fsp--;
@@ -65585,20 +65632,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Compare__Value1Assignment_1_3"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24204:1: rule__Compare__Value1Assignment_1_3 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24220:1: rule__Compare__Value1Assignment_1_3 : ( ruleValue ) ;
     public final void rule__Compare__Value1Assignment_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24208:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24209:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24224:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24225:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24209:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24210:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24225:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24226:1: ruleValue
             {
              before(grammarAccess.getCompareAccess().getValue1ValueParserRuleCall_1_3_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Compare__Value1Assignment_1_349488);
+            pushFollow(FOLLOW_ruleValue_in_rule__Compare__Value1Assignment_1_349521);
             ruleValue();
 
             state._fsp--;
@@ -65626,20 +65673,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Compare__Value2Assignment_1_5"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24219:1: rule__Compare__Value2Assignment_1_5 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24235:1: rule__Compare__Value2Assignment_1_5 : ( ruleValue ) ;
     public final void rule__Compare__Value2Assignment_1_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24223:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24224:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24239:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24240:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24224:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24225:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24240:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24241:1: ruleValue
             {
              before(grammarAccess.getCompareAccess().getValue2ValueParserRuleCall_1_5_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Compare__Value2Assignment_1_549519);
+            pushFollow(FOLLOW_ruleValue_in_rule__Compare__Value2Assignment_1_549552);
             ruleValue();
 
             state._fsp--;
@@ -65667,20 +65714,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IndirectBranch__AdresstypeAssignment_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24234:1: rule__IndirectBranch__AdresstypeAssignment_1 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24250:1: rule__IndirectBranch__AdresstypeAssignment_1 : ( ruleTypeUse ) ;
     public final void rule__IndirectBranch__AdresstypeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24238:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24239:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24254:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24255:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24239:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24240:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24255:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24256:1: ruleTypeUse
             {
              before(grammarAccess.getIndirectBranchAccess().getAdresstypeTypeUseParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__IndirectBranch__AdresstypeAssignment_149550);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__IndirectBranch__AdresstypeAssignment_149583);
             ruleTypeUse();
 
             state._fsp--;
@@ -65708,20 +65755,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IndirectBranch__AdressAssignment_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24249:1: rule__IndirectBranch__AdressAssignment_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24265:1: rule__IndirectBranch__AdressAssignment_2 : ( ruleValue ) ;
     public final void rule__IndirectBranch__AdressAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24253:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24254:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24269:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24270:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24254:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24255:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24270:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24271:1: ruleValue
             {
              before(grammarAccess.getIndirectBranchAccess().getAdressValueParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__IndirectBranch__AdressAssignment_249581);
+            pushFollow(FOLLOW_ruleValue_in_rule__IndirectBranch__AdressAssignment_249614);
             ruleValue();
 
             state._fsp--;
@@ -65749,20 +65796,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IndirectBranch__LabeltypeAssignment_5_0"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24264:1: rule__IndirectBranch__LabeltypeAssignment_5_0 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24280:1: rule__IndirectBranch__LabeltypeAssignment_5_0 : ( ruleTypeUse ) ;
     public final void rule__IndirectBranch__LabeltypeAssignment_5_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24268:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24269:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24284:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24285:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24269:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24270:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24285:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24286:1: ruleTypeUse
             {
              before(grammarAccess.getIndirectBranchAccess().getLabeltypeTypeUseParserRuleCall_5_0_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__IndirectBranch__LabeltypeAssignment_5_049612);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__IndirectBranch__LabeltypeAssignment_5_049645);
             ruleTypeUse();
 
             state._fsp--;
@@ -65790,20 +65837,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IndirectBranch__LabelsAssignment_5_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24279:1: rule__IndirectBranch__LabelsAssignment_5_1 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24295:1: rule__IndirectBranch__LabelsAssignment_5_1 : ( ruleValue ) ;
     public final void rule__IndirectBranch__LabelsAssignment_5_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24283:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24284:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24299:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24300:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24284:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24285:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24300:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24301:1: ruleValue
             {
              before(grammarAccess.getIndirectBranchAccess().getLabelsValueParserRuleCall_5_1_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__IndirectBranch__LabelsAssignment_5_149643);
+            pushFollow(FOLLOW_ruleValue_in_rule__IndirectBranch__LabelsAssignment_5_149676);
             ruleValue();
 
             state._fsp--;
@@ -65831,20 +65878,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IndirectBranch__LabeltypeAssignment_5_2_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24294:1: rule__IndirectBranch__LabeltypeAssignment_5_2_1 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24310:1: rule__IndirectBranch__LabeltypeAssignment_5_2_1 : ( ruleTypeUse ) ;
     public final void rule__IndirectBranch__LabeltypeAssignment_5_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24298:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24299:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24314:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24315:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24299:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24300:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24315:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24316:1: ruleTypeUse
             {
              before(grammarAccess.getIndirectBranchAccess().getLabeltypeTypeUseParserRuleCall_5_2_1_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__IndirectBranch__LabeltypeAssignment_5_2_149674);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__IndirectBranch__LabeltypeAssignment_5_2_149707);
             ruleTypeUse();
 
             state._fsp--;
@@ -65872,20 +65919,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IndirectBranch__LabelsAssignment_5_2_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24309:1: rule__IndirectBranch__LabelsAssignment_5_2_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24325:1: rule__IndirectBranch__LabelsAssignment_5_2_2 : ( ruleValue ) ;
     public final void rule__IndirectBranch__LabelsAssignment_5_2_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24313:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24314:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24329:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24330:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24314:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24315:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24330:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24331:1: ruleValue
             {
              before(grammarAccess.getIndirectBranchAccess().getLabelsValueParserRuleCall_5_2_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__IndirectBranch__LabelsAssignment_5_2_249705);
+            pushFollow(FOLLOW_ruleValue_in_rule__IndirectBranch__LabelsAssignment_5_2_249738);
             ruleValue();
 
             state._fsp--;
@@ -65913,20 +65960,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Switch__ComptypeAssignment_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24324:1: rule__Switch__ComptypeAssignment_1 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24340:1: rule__Switch__ComptypeAssignment_1 : ( ruleTypeUse ) ;
     public final void rule__Switch__ComptypeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24328:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24329:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24344:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24345:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24329:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24330:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24345:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24346:1: ruleTypeUse
             {
              before(grammarAccess.getSwitchAccess().getComptypeTypeUseParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Switch__ComptypeAssignment_149736);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Switch__ComptypeAssignment_149769);
             ruleTypeUse();
 
             state._fsp--;
@@ -65954,20 +66001,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Switch__CompvalueAssignment_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24339:1: rule__Switch__CompvalueAssignment_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24355:1: rule__Switch__CompvalueAssignment_2 : ( ruleValue ) ;
     public final void rule__Switch__CompvalueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24343:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24344:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24359:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24360:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24344:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24345:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24360:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24361:1: ruleValue
             {
              before(grammarAccess.getSwitchAccess().getCompvalueValueParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Switch__CompvalueAssignment_249767);
+            pushFollow(FOLLOW_ruleValue_in_rule__Switch__CompvalueAssignment_249800);
             ruleValue();
 
             state._fsp--;
@@ -65995,20 +66042,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Switch__DefaulttypeAssignment_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24354:1: rule__Switch__DefaulttypeAssignment_4 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24370:1: rule__Switch__DefaulttypeAssignment_4 : ( ruleTypeUse ) ;
     public final void rule__Switch__DefaulttypeAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24358:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24359:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24374:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24375:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24359:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24360:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24375:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24376:1: ruleTypeUse
             {
              before(grammarAccess.getSwitchAccess().getDefaulttypeTypeUseParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Switch__DefaulttypeAssignment_449798);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Switch__DefaulttypeAssignment_449831);
             ruleTypeUse();
 
             state._fsp--;
@@ -66036,20 +66083,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Switch__DefaultvalueAssignment_5"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24369:1: rule__Switch__DefaultvalueAssignment_5 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24385:1: rule__Switch__DefaultvalueAssignment_5 : ( ruleValue ) ;
     public final void rule__Switch__DefaultvalueAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24373:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24374:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24389:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24390:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24374:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24375:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24390:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24391:1: ruleValue
             {
              before(grammarAccess.getSwitchAccess().getDefaultvalueValueParserRuleCall_5_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Switch__DefaultvalueAssignment_549829);
+            pushFollow(FOLLOW_ruleValue_in_rule__Switch__DefaultvalueAssignment_549862);
             ruleValue();
 
             state._fsp--;
@@ -66077,20 +66124,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Switch__JtypesAssignment_7_0"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24384:1: rule__Switch__JtypesAssignment_7_0 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24400:1: rule__Switch__JtypesAssignment_7_0 : ( ruleTypeUse ) ;
     public final void rule__Switch__JtypesAssignment_7_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24388:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24389:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24404:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24405:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24389:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24390:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24405:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24406:1: ruleTypeUse
             {
              before(grammarAccess.getSwitchAccess().getJtypesTypeUseParserRuleCall_7_0_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Switch__JtypesAssignment_7_049860);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Switch__JtypesAssignment_7_049893);
             ruleTypeUse();
 
             state._fsp--;
@@ -66118,20 +66165,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Switch__JvaluesAssignment_7_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24399:1: rule__Switch__JvaluesAssignment_7_1 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24415:1: rule__Switch__JvaluesAssignment_7_1 : ( ruleValue ) ;
     public final void rule__Switch__JvaluesAssignment_7_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24403:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24404:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24419:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24420:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24404:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24405:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24420:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24421:1: ruleValue
             {
              before(grammarAccess.getSwitchAccess().getJvaluesValueParserRuleCall_7_1_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Switch__JvaluesAssignment_7_149891);
+            pushFollow(FOLLOW_ruleValue_in_rule__Switch__JvaluesAssignment_7_149924);
             ruleValue();
 
             state._fsp--;
@@ -66159,20 +66206,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Switch__DestinationtypesAssignment_7_3"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24414:1: rule__Switch__DestinationtypesAssignment_7_3 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24430:1: rule__Switch__DestinationtypesAssignment_7_3 : ( ruleTypeUse ) ;
     public final void rule__Switch__DestinationtypesAssignment_7_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24418:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24419:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24434:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24435:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24419:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24420:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24435:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24436:1: ruleTypeUse
             {
              before(grammarAccess.getSwitchAccess().getDestinationtypesTypeUseParserRuleCall_7_3_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Switch__DestinationtypesAssignment_7_349922);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Switch__DestinationtypesAssignment_7_349955);
             ruleTypeUse();
 
             state._fsp--;
@@ -66200,20 +66247,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Switch__DestinationsAssignment_7_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24429:1: rule__Switch__DestinationsAssignment_7_4 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24445:1: rule__Switch__DestinationsAssignment_7_4 : ( ruleValue ) ;
     public final void rule__Switch__DestinationsAssignment_7_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24433:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24434:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24449:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24450:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24434:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24435:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24450:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24451:1: ruleValue
             {
              before(grammarAccess.getSwitchAccess().getDestinationsValueParserRuleCall_7_4_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Switch__DestinationsAssignment_7_449953);
+            pushFollow(FOLLOW_ruleValue_in_rule__Switch__DestinationsAssignment_7_449986);
             ruleValue();
 
             state._fsp--;
@@ -66241,20 +66288,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Invoke__FunctiontypeAssignment_3"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24444:1: rule__Invoke__FunctiontypeAssignment_3 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24460:1: rule__Invoke__FunctiontypeAssignment_3 : ( ruleTypeUse ) ;
     public final void rule__Invoke__FunctiontypeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24448:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24449:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24464:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24465:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24449:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24450:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24465:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24466:1: ruleTypeUse
             {
              before(grammarAccess.getInvokeAccess().getFunctiontypeTypeUseParserRuleCall_3_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Invoke__FunctiontypeAssignment_349984);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Invoke__FunctiontypeAssignment_350017);
             ruleTypeUse();
 
             state._fsp--;
@@ -66282,20 +66329,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Invoke__NameAssignment_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24459:1: rule__Invoke__NameAssignment_4 : ( ruleAddress ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24475:1: rule__Invoke__NameAssignment_4 : ( ruleAddress ) ;
     public final void rule__Invoke__NameAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24463:1: ( ( ruleAddress ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24464:1: ( ruleAddress )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24479:1: ( ( ruleAddress ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24480:1: ( ruleAddress )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24464:1: ( ruleAddress )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24465:1: ruleAddress
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24480:1: ( ruleAddress )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24481:1: ruleAddress
             {
              before(grammarAccess.getInvokeAccess().getNameAddressParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleAddress_in_rule__Invoke__NameAssignment_450015);
+            pushFollow(FOLLOW_ruleAddress_in_rule__Invoke__NameAssignment_450048);
             ruleAddress();
 
             state._fsp--;
@@ -66323,20 +66370,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Invoke__PListAssignment_5"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24474:1: rule__Invoke__PListAssignment_5 : ( ruleParameterList ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24490:1: rule__Invoke__PListAssignment_5 : ( ruleParameterList ) ;
     public final void rule__Invoke__PListAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24478:1: ( ( ruleParameterList ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24479:1: ( ruleParameterList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24494:1: ( ( ruleParameterList ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24495:1: ( ruleParameterList )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24479:1: ( ruleParameterList )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24480:1: ruleParameterList
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24495:1: ( ruleParameterList )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24496:1: ruleParameterList
             {
              before(grammarAccess.getInvokeAccess().getPListParameterListParserRuleCall_5_0()); 
-            pushFollow(FOLLOW_ruleParameterList_in_rule__Invoke__PListAssignment_550046);
+            pushFollow(FOLLOW_ruleParameterList_in_rule__Invoke__PListAssignment_550079);
             ruleParameterList();
 
             state._fsp--;
@@ -66364,20 +66411,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Invoke__TotypeAssignment_8"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24489:1: rule__Invoke__TotypeAssignment_8 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24505:1: rule__Invoke__TotypeAssignment_8 : ( ruleTypeUse ) ;
     public final void rule__Invoke__TotypeAssignment_8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24493:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24494:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24509:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24510:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24494:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24495:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24510:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24511:1: ruleTypeUse
             {
              before(grammarAccess.getInvokeAccess().getTotypeTypeUseParserRuleCall_8_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Invoke__TotypeAssignment_850077);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Invoke__TotypeAssignment_850110);
             ruleTypeUse();
 
             state._fsp--;
@@ -66405,20 +66452,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Invoke__TovalueAssignment_9"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24504:1: rule__Invoke__TovalueAssignment_9 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24520:1: rule__Invoke__TovalueAssignment_9 : ( ruleValue ) ;
     public final void rule__Invoke__TovalueAssignment_9() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24508:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24509:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24524:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24525:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24509:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24510:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24525:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24526:1: ruleValue
             {
              before(grammarAccess.getInvokeAccess().getTovalueValueParserRuleCall_9_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Invoke__TovalueAssignment_950108);
+            pushFollow(FOLLOW_ruleValue_in_rule__Invoke__TovalueAssignment_950141);
             ruleValue();
 
             state._fsp--;
@@ -66446,20 +66493,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Invoke__UnwindtypeAssignment_11"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24519:1: rule__Invoke__UnwindtypeAssignment_11 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24535:1: rule__Invoke__UnwindtypeAssignment_11 : ( ruleTypeUse ) ;
     public final void rule__Invoke__UnwindtypeAssignment_11() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24523:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24524:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24539:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24540:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24524:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24525:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24540:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24541:1: ruleTypeUse
             {
              before(grammarAccess.getInvokeAccess().getUnwindtypeTypeUseParserRuleCall_11_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Invoke__UnwindtypeAssignment_1150139);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Invoke__UnwindtypeAssignment_1150172);
             ruleTypeUse();
 
             state._fsp--;
@@ -66487,20 +66534,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Invoke__UnwindvalueAssignment_12"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24534:1: rule__Invoke__UnwindvalueAssignment_12 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24550:1: rule__Invoke__UnwindvalueAssignment_12 : ( ruleValue ) ;
     public final void rule__Invoke__UnwindvalueAssignment_12() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24538:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24539:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24554:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24555:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24539:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24540:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24555:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24556:1: ruleValue
             {
              before(grammarAccess.getInvokeAccess().getUnwindvalueValueParserRuleCall_12_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Invoke__UnwindvalueAssignment_1250170);
+            pushFollow(FOLLOW_ruleValue_in_rule__Invoke__UnwindvalueAssignment_1250203);
             ruleValue();
 
             state._fsp--;
@@ -66528,20 +66575,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Resume__ResumestructAssignment_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24549:1: rule__Resume__ResumestructAssignment_1 : ( ruleStructure ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24565:1: rule__Resume__ResumestructAssignment_1 : ( ruleStructure ) ;
     public final void rule__Resume__ResumestructAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24553:1: ( ( ruleStructure ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24554:1: ( ruleStructure )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24569:1: ( ( ruleStructure ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24570:1: ( ruleStructure )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24554:1: ( ruleStructure )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24555:1: ruleStructure
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24570:1: ( ruleStructure )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24571:1: ruleStructure
             {
              before(grammarAccess.getResumeAccess().getResumestructStructureParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleStructure_in_rule__Resume__ResumestructAssignment_150201);
+            pushFollow(FOLLOW_ruleStructure_in_rule__Resume__ResumestructAssignment_150234);
             ruleStructure();
 
             state._fsp--;
@@ -66569,20 +66616,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Resume__ResumevalueAssignment_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24564:1: rule__Resume__ResumevalueAssignment_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24580:1: rule__Resume__ResumevalueAssignment_2 : ( ruleValue ) ;
     public final void rule__Resume__ResumevalueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24568:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24569:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24584:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24585:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24569:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24570:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24585:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24586:1: ruleValue
             {
              before(grammarAccess.getResumeAccess().getResumevalueValueParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Resume__ResumevalueAssignment_250232);
+            pushFollow(FOLLOW_ruleValue_in_rule__Resume__ResumevalueAssignment_250265);
             ruleValue();
 
             state._fsp--;
@@ -66610,20 +66657,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Return__ReturntypeAssignment_1_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24579:1: rule__Return__ReturntypeAssignment_1_1 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24595:1: rule__Return__ReturntypeAssignment_1_1 : ( ruleTypeUse ) ;
     public final void rule__Return__ReturntypeAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24583:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24584:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24599:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24600:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24584:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24585:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24600:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24601:1: ruleTypeUse
             {
              before(grammarAccess.getReturnAccess().getReturntypeTypeUseParserRuleCall_1_1_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Return__ReturntypeAssignment_1_150263);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Return__ReturntypeAssignment_1_150296);
             ruleTypeUse();
 
             state._fsp--;
@@ -66651,20 +66698,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Return__ReturnvalueAssignment_1_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24594:1: rule__Return__ReturnvalueAssignment_1_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24610:1: rule__Return__ReturnvalueAssignment_1_2 : ( ruleValue ) ;
     public final void rule__Return__ReturnvalueAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24598:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24599:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24614:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24615:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24599:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24600:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24615:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24616:1: ruleValue
             {
              before(grammarAccess.getReturnAccess().getReturnvalueValueParserRuleCall_1_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Return__ReturnvalueAssignment_1_250294);
+            pushFollow(FOLLOW_ruleValue_in_rule__Return__ReturnvalueAssignment_1_250327);
             ruleValue();
 
             state._fsp--;
@@ -66692,20 +66739,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Branch__DestinationAssignment_0_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24609:1: rule__Branch__DestinationAssignment_0_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24625:1: rule__Branch__DestinationAssignment_0_2 : ( ruleValue ) ;
     public final void rule__Branch__DestinationAssignment_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24613:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24614:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24629:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24630:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24614:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24615:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24630:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24631:1: ruleValue
             {
              before(grammarAccess.getBranchAccess().getDestinationValueParserRuleCall_0_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Branch__DestinationAssignment_0_250325);
+            pushFollow(FOLLOW_ruleValue_in_rule__Branch__DestinationAssignment_0_250358);
             ruleValue();
 
             state._fsp--;
@@ -66733,20 +66780,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Branch__CondvalueAssignment_1_2"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24624:1: rule__Branch__CondvalueAssignment_1_2 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24640:1: rule__Branch__CondvalueAssignment_1_2 : ( ruleValue ) ;
     public final void rule__Branch__CondvalueAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24628:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24629:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24644:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24645:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24629:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24630:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24645:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24646:1: ruleValue
             {
              before(grammarAccess.getBranchAccess().getCondvalueValueParserRuleCall_1_2_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Branch__CondvalueAssignment_1_250356);
+            pushFollow(FOLLOW_ruleValue_in_rule__Branch__CondvalueAssignment_1_250389);
             ruleValue();
 
             state._fsp--;
@@ -66774,20 +66821,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Branch__LabelTruetypeAssignment_1_4"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24639:1: rule__Branch__LabelTruetypeAssignment_1_4 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24655:1: rule__Branch__LabelTruetypeAssignment_1_4 : ( ruleTypeUse ) ;
     public final void rule__Branch__LabelTruetypeAssignment_1_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24643:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24644:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24659:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24660:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24644:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24645:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24660:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24661:1: ruleTypeUse
             {
              before(grammarAccess.getBranchAccess().getLabelTruetypeTypeUseParserRuleCall_1_4_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Branch__LabelTruetypeAssignment_1_450387);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Branch__LabelTruetypeAssignment_1_450420);
             ruleTypeUse();
 
             state._fsp--;
@@ -66815,20 +66862,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Branch__LabelTrueAssignment_1_5"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24654:1: rule__Branch__LabelTrueAssignment_1_5 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24670:1: rule__Branch__LabelTrueAssignment_1_5 : ( ruleValue ) ;
     public final void rule__Branch__LabelTrueAssignment_1_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24658:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24659:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24674:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24675:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24659:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24660:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24675:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24676:1: ruleValue
             {
              before(grammarAccess.getBranchAccess().getLabelTrueValueParserRuleCall_1_5_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Branch__LabelTrueAssignment_1_550418);
+            pushFollow(FOLLOW_ruleValue_in_rule__Branch__LabelTrueAssignment_1_550451);
             ruleValue();
 
             state._fsp--;
@@ -66856,20 +66903,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Branch__LabelFalsetypeAssignment_1_7"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24669:1: rule__Branch__LabelFalsetypeAssignment_1_7 : ( ruleTypeUse ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24685:1: rule__Branch__LabelFalsetypeAssignment_1_7 : ( ruleTypeUse ) ;
     public final void rule__Branch__LabelFalsetypeAssignment_1_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24673:1: ( ( ruleTypeUse ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24674:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24689:1: ( ( ruleTypeUse ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24690:1: ( ruleTypeUse )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24674:1: ( ruleTypeUse )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24675:1: ruleTypeUse
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24690:1: ( ruleTypeUse )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24691:1: ruleTypeUse
             {
              before(grammarAccess.getBranchAccess().getLabelFalsetypeTypeUseParserRuleCall_1_7_0()); 
-            pushFollow(FOLLOW_ruleTypeUse_in_rule__Branch__LabelFalsetypeAssignment_1_750449);
+            pushFollow(FOLLOW_ruleTypeUse_in_rule__Branch__LabelFalsetypeAssignment_1_750482);
             ruleTypeUse();
 
             state._fsp--;
@@ -66897,20 +66944,20 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Branch__LabelFalseAssignment_1_8"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24684:1: rule__Branch__LabelFalseAssignment_1_8 : ( ruleValue ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24700:1: rule__Branch__LabelFalseAssignment_1_8 : ( ruleValue ) ;
     public final void rule__Branch__LabelFalseAssignment_1_8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24688:1: ( ( ruleValue ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24689:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24704:1: ( ( ruleValue ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24705:1: ( ruleValue )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24689:1: ( ruleValue )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24690:1: ruleValue
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24705:1: ( ruleValue )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:24706:1: ruleValue
             {
              before(grammarAccess.getBranchAccess().getLabelFalseValueParserRuleCall_1_8_0()); 
-            pushFollow(FOLLOW_ruleValue_in_rule__Branch__LabelFalseAssignment_1_850480);
+            pushFollow(FOLLOW_ruleValue_in_rule__Branch__LabelFalseAssignment_1_850513);
             ruleValue();
 
             state._fsp--;
@@ -67314,9 +67361,9 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleNestedGetElementPtr_in_rule__Value__Alternatives6149 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleConstant_in_rule__Value__Alternatives6166 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleNonConstantValue_in_rule__Value__Alternatives6183 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__Value__Alternatives_0_16215 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrimitiveType_in_rule__Value__Alternatives_0_16232 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInitializers_in_rule__Value__Alternatives_0_16249 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__Value__NameAlternatives_0_1_06215 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrimitiveType_in_rule__Value__NameAlternatives_0_1_06232 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInitializers_in_rule__Value__NameAlternatives_0_1_06249 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleTypeUse_in_rule__Structure__TypesAlternatives_2_1_1_06281 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleAggregate_Types_in_rule__Structure__TypesAlternatives_2_1_1_06298 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_39_in_rule__ParameterList__Alternatives_16331 = new BitSet(new long[]{0x0000000000000002L});
@@ -67811,7 +67858,7 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__Value__Group_0__0__Impl_in_rule__Value__Group_0__017276 = new BitSet(new long[]{0x00000000F0608080L});
     public static final BitSet FOLLOW_rule__Value__Group_0__1_in_rule__Value__Group_0__017279 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Value__Group_0__1__Impl_in_rule__Value__Group_0__117337 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Value__Alternatives_0_1_in_rule__Value__Group_0__1__Impl17364 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Value__NameAssignment_0_1_in_rule__Value__Group_0__1__Impl17364 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ValueStruct__Group__0__Impl_in_rule__ValueStruct__Group__017398 = new BitSet(new long[]{0x0000003FF0600810L});
     public static final BitSet FOLLOW_rule__ValueStruct__Group__1_in_rule__ValueStruct__Group__017401 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_187_in_rule__ValueStruct__Group__0__Impl17429 = new BitSet(new long[]{0x0000000000000002L});
@@ -69031,176 +69078,177 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_RULE_INT_in_rule__Constant__ValueAssignment45105 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_VALID_ID_in_rule__NonConstantValue__NameAssignment_045136 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_POINTER_in_rule__NonConstantValue__PointerAssignment_145167 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ValueStruct__TypesAssignment_145198 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__ValueStruct__ValueAssignment_245229 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ValueStruct__TypesAssignment_3_145260 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__ValueStruct__ValueAssignment_3_245291 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Structure__TypesAssignment_2_045322 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Structure__TypesAlternatives_2_1_1_0_in_rule__Structure__TypesAssignment_2_1_145353 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ParameterList__TypesAssignment_1_1_1_045386 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeList_in_rule__ParameterList__ListsAssignment_1_1_1_145417 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__ParameterList__VariablesAssignment_1_1_1_345448 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ParameterList__TypesAssignment_1_1_1_4_145479 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeList_in_rule__ParameterList__ListsAssignment_1_1_1_4_245510 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__ParameterList__VariablesAssignment_1_1_1_4_445541 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__TypeList__TypesAssignment_1_1_1_045572 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeList_in_rule__TypeList__TypelistsAssignment_1_1_1_145603 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__TypeList__TypesAssignment_1_1_1_3_145634 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeList_in_rule__TypeList__TypelistsAssignment_1_1_1_3_245665 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMetadataValue_in_rule__FunctionBody__MetaAssignment_045696 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleBasicBlock_in_rule__FunctionBody__BlocksAssignment_245727 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleID_FQN_in_rule__BasicBlock__LabelAssignment_0_045758 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BasicBlock__InstructionsAlternatives_1_0_in_rule__BasicBlock__InstructionsAssignment_145789 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_VALID_ID_in_rule__BasicBlock__RetadrAssignment_2_045822 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleReturnInstruction_in_rule__BasicBlock__TerminatorAssignment_345853 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_VALID_ID_in_rule__InstructionUse__Reg_or_varAssignment_045884 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStandartInstruction_in_rule__InstructionUse__InstructionAssignment_245915 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ArithmeticOperation__OptypeAssignment_245946 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__ArithmeticOperation__Value1Assignment_345977 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__ArithmeticOperation__Value2Assignment_546008 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__LogicOperation__OptypeAssignment_146039 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__LogicOperation__Value1Assignment_246070 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__LogicOperation__Value2Assignment_446101 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Cast__FromAlternatives_1_0_1_0_in_rule__Cast__FromAssignment_1_0_146132 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Cast__ValueAssignment_1_0_246165 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Cast__ToAssignment_1_0_446196 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Cast__FromAlternatives_1_1_0_0_in_rule__Cast__FromAssignment_1_1_046227 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Cast__ValueAssignment_1_1_146260 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Cast__ToAssignment_1_1_346291 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__GetElementPtr__AggregateAlternatives_2_0_0_in_rule__GetElementPtr__AggregateAssignment_2_046322 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__GetElementPtr__AggregatenameAssignment_2_146355 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__GetElementPtr__IndTypesAssignment_2_2_146386 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__GetElementPtr__IndiziesAssignment_2_2_246417 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NestedGetElementPtr__AggregateAlternatives_2_1_0_in_rule__NestedGetElementPtr__AggregateAssignment_2_146448 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__NestedGetElementPtr__AggregatenameAssignment_2_246481 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__NestedGetElementPtr__IndTypesAssignment_2_3_146512 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__NestedGetElementPtr__IndiziesAssignment_2_3_246543 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleArray_in_rule__ExtractValue__ArrayAssignment_1_046574 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStructure_in_rule__ExtractValue__StructAssignment_1_146605 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__ExtractValue__ValueAssignment_246636 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__ExtractValue__IndexAssignment_3_146667 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStructure_in_rule__InsertValue__StructAssignment_146698 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__InsertValue__ValueAssignment_246729 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__InsertValue__InserttypeAssignment_446760 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__InsertValue__InsertvalueAssignment_546791 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__InsertValue__IndexAssignment_6_146822 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleATOMIC_ORDERING_in_rule__Fence__OrderingAssignment_246853 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__CmpXchg__AdresstypeAssignment_246884 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__CmpXchg__AdressAssignment_346915 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__CmpXchg__ComparetypeAssignment_546946 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__CmpXchg__ComparevalueAssignment_646977 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__CmpXchg__NewtypeAssignment_847008 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__CmpXchg__NewvalueAssignment_947039 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleATOMIC_ORDERING_in_rule__CmpXchg__OrderingAssignment_1147070 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__AtomicRMW__AdresstypeAssignment_347101 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__AtomicRMW__AdressAssignment_447132 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__AtomicRMW__OptypeAssignment_647163 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__AtomicRMW__OpvalueAssignment_747194 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleATOMIC_ORDERING_in_rule__AtomicRMW__OrderingAssignment_947225 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Load__AdresstypeAssignment_0_247256 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeList_in_rule__Load__TypesAssignment_0_347287 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Load__AdressAssignment_0_447318 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Load__AdresstypeAssignment_1_347349 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Load__AdressAssignment_1_447380 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeList_in_rule__Load__TypesAssignment_1_547411 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleATOMIC_ORDERING_in_rule__Load__OrderingAssignment_1_747442 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__Load__IndexAssignment_1_8_247473 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Store__NewtypeAssignment_0_247504 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeList_in_rule__Store__TypesAssignment_0_347535 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Store__NewvalueAssignment_0_447566 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Store__AdresstypeAssignment_0_647597 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeList_in_rule__Store__TypesAssignment_0_747628 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Store__AdressAssignment_0_847659 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Store__NewtypeAssignment_1_347690 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeList_in_rule__Store__TypesAssignment_1_447721 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Store__NewvalueAssignment_1_547752 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Store__AdresstypeAssignment_1_747783 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeList_in_rule__Store__TypesAssignment_1_847814 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Store__AdressAssignment_1_947845 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleATOMIC_ORDERING_in_rule__Store__OrderingAssignment_1_1147876 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__Store__IndexAssignment_1_12_247907 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Call__AdresstypeAssignment_447938 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Call__AdressAssignment_5_047969 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParameterList_in_rule__Call__PListAssignment_648000 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Alloc__TypeAssignment_1_048031 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeList_in_rule__Alloc__TypelistAssignment_1_148062 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Alloc__NumelementstypeAssignment_2_148093 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Alloc__NumelementsvalueAssignment_2_248124 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Phi__TypeAssignment_148155 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Phi__FirstclassAssignment_348186 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Phi__ValuesAssignment_548217 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Phi__FirstclassAssignment_7_248248 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Phi__ValuesAssignment_7_448279 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStructure_in_rule__LandingPad__StructAssignment_148310 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__LandingPad__PersonalitytypeAssignment_348341 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__LandingPad__PersonalityvalueAssignment_448372 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleClause_in_rule__LandingPad__ClauseAssignment_5_0_148403 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleClause_in_rule__LandingPad__ClauseAssignment_5_148434 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Clause__TypeAssignment_0_148465 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Clause__ValueAssignment_0_248496 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleArray_in_rule__Clause__FilterarrayAssignment_1_148527 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Clause__ConstantAssignment_1_248558 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Select__ConditiontypeAssignment_148589 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Select__ConditionvalueAssignment_248620 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Select__Val1typeAssignment_448651 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Select__Val1valueAssignment_548682 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Select__Val2typeAssignment_748713 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Select__Val2valueAssignment_848744 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__VariableAttributeAccess__ListtypeAssignment_148775 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__VariableAttributeAccess__ListvalueAssignment_248806 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__VariableAttributeAccess__ArgTypeAssignment_448837 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ExtractElement__VectortypeAssignment_148868 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__ExtractElement__VectorvalueAssignment_248899 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ExtractElement__IndextypeAssignment_448930 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__ExtractElement__IndexAssignment_548961 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__InsertElement__VectortypeAssignment_148992 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__InsertElement__VectorvalueAssignment_249023 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__InsertElement__ScalartypeAssignment_449054 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__InsertElement__ScalarvalueAssignment_549085 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__InsertElement__IndextypeAssignment_749116 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__InsertElement__IndexAssignment_849147 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ShuffleVector__Val1typeAssignment_149178 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__ShuffleVector__Val1valueAssignment_249209 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ShuffleVector__Val2typeAssignment_449240 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__ShuffleVector__Val2valueAssignment_549271 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ShuffleVector__MasktypeAssignment_749302 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__ShuffleVector__MaskvalueAssignment_849333 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Compare__ComptypeAssignment_0_249364 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Compare__Value1Assignment_0_349395 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Compare__Value2Assignment_0_549426 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Compare__ComptypeAssignment_1_249457 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Compare__Value1Assignment_1_349488 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Compare__Value2Assignment_1_549519 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__IndirectBranch__AdresstypeAssignment_149550 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__IndirectBranch__AdressAssignment_249581 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__IndirectBranch__LabeltypeAssignment_5_049612 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__IndirectBranch__LabelsAssignment_5_149643 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__IndirectBranch__LabeltypeAssignment_5_2_149674 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__IndirectBranch__LabelsAssignment_5_2_249705 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Switch__ComptypeAssignment_149736 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Switch__CompvalueAssignment_249767 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Switch__DefaulttypeAssignment_449798 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Switch__DefaultvalueAssignment_549829 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Switch__JtypesAssignment_7_049860 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Switch__JvaluesAssignment_7_149891 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Switch__DestinationtypesAssignment_7_349922 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Switch__DestinationsAssignment_7_449953 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Invoke__FunctiontypeAssignment_349984 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAddress_in_rule__Invoke__NameAssignment_450015 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParameterList_in_rule__Invoke__PListAssignment_550046 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Invoke__TotypeAssignment_850077 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Invoke__TovalueAssignment_950108 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Invoke__UnwindtypeAssignment_1150139 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Invoke__UnwindvalueAssignment_1250170 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStructure_in_rule__Resume__ResumestructAssignment_150201 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Resume__ResumevalueAssignment_250232 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Return__ReturntypeAssignment_1_150263 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Return__ReturnvalueAssignment_1_250294 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Branch__DestinationAssignment_0_250325 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Branch__CondvalueAssignment_1_250356 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Branch__LabelTruetypeAssignment_1_450387 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Branch__LabelTrueAssignment_1_550418 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Branch__LabelFalsetypeAssignment_1_750449 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValue_in_rule__Branch__LabelFalseAssignment_1_850480 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Value__NameAlternatives_0_1_0_in_rule__Value__NameAssignment_0_145198 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ValueStruct__TypesAssignment_145231 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__ValueStruct__ValueAssignment_245262 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ValueStruct__TypesAssignment_3_145293 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__ValueStruct__ValueAssignment_3_245324 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Structure__TypesAssignment_2_045355 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Structure__TypesAlternatives_2_1_1_0_in_rule__Structure__TypesAssignment_2_1_145386 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ParameterList__TypesAssignment_1_1_1_045419 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeList_in_rule__ParameterList__ListsAssignment_1_1_1_145450 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__ParameterList__VariablesAssignment_1_1_1_345481 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ParameterList__TypesAssignment_1_1_1_4_145512 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeList_in_rule__ParameterList__ListsAssignment_1_1_1_4_245543 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__ParameterList__VariablesAssignment_1_1_1_4_445574 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__TypeList__TypesAssignment_1_1_1_045605 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeList_in_rule__TypeList__TypelistsAssignment_1_1_1_145636 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__TypeList__TypesAssignment_1_1_1_3_145667 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeList_in_rule__TypeList__TypelistsAssignment_1_1_1_3_245698 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMetadataValue_in_rule__FunctionBody__MetaAssignment_045729 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleBasicBlock_in_rule__FunctionBody__BlocksAssignment_245760 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleID_FQN_in_rule__BasicBlock__LabelAssignment_0_045791 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__BasicBlock__InstructionsAlternatives_1_0_in_rule__BasicBlock__InstructionsAssignment_145822 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_VALID_ID_in_rule__BasicBlock__RetadrAssignment_2_045855 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleReturnInstruction_in_rule__BasicBlock__TerminatorAssignment_345886 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_VALID_ID_in_rule__InstructionUse__Reg_or_varAssignment_045917 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStandartInstruction_in_rule__InstructionUse__InstructionAssignment_245948 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ArithmeticOperation__OptypeAssignment_245979 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__ArithmeticOperation__Value1Assignment_346010 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__ArithmeticOperation__Value2Assignment_546041 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__LogicOperation__OptypeAssignment_146072 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__LogicOperation__Value1Assignment_246103 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__LogicOperation__Value2Assignment_446134 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Cast__FromAlternatives_1_0_1_0_in_rule__Cast__FromAssignment_1_0_146165 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Cast__ValueAssignment_1_0_246198 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Cast__ToAssignment_1_0_446229 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Cast__FromAlternatives_1_1_0_0_in_rule__Cast__FromAssignment_1_1_046260 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Cast__ValueAssignment_1_1_146293 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Cast__ToAssignment_1_1_346324 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__GetElementPtr__AggregateAlternatives_2_0_0_in_rule__GetElementPtr__AggregateAssignment_2_046355 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__GetElementPtr__AggregatenameAssignment_2_146388 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__GetElementPtr__IndTypesAssignment_2_2_146419 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__GetElementPtr__IndiziesAssignment_2_2_246450 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NestedGetElementPtr__AggregateAlternatives_2_1_0_in_rule__NestedGetElementPtr__AggregateAssignment_2_146481 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__NestedGetElementPtr__AggregatenameAssignment_2_246514 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__NestedGetElementPtr__IndTypesAssignment_2_3_146545 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__NestedGetElementPtr__IndiziesAssignment_2_3_246576 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArray_in_rule__ExtractValue__ArrayAssignment_1_046607 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStructure_in_rule__ExtractValue__StructAssignment_1_146638 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__ExtractValue__ValueAssignment_246669 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__ExtractValue__IndexAssignment_3_146700 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStructure_in_rule__InsertValue__StructAssignment_146731 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__InsertValue__ValueAssignment_246762 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__InsertValue__InserttypeAssignment_446793 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__InsertValue__InsertvalueAssignment_546824 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__InsertValue__IndexAssignment_6_146855 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleATOMIC_ORDERING_in_rule__Fence__OrderingAssignment_246886 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__CmpXchg__AdresstypeAssignment_246917 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__CmpXchg__AdressAssignment_346948 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__CmpXchg__ComparetypeAssignment_546979 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__CmpXchg__ComparevalueAssignment_647010 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__CmpXchg__NewtypeAssignment_847041 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__CmpXchg__NewvalueAssignment_947072 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleATOMIC_ORDERING_in_rule__CmpXchg__OrderingAssignment_1147103 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__AtomicRMW__AdresstypeAssignment_347134 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__AtomicRMW__AdressAssignment_447165 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__AtomicRMW__OptypeAssignment_647196 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__AtomicRMW__OpvalueAssignment_747227 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleATOMIC_ORDERING_in_rule__AtomicRMW__OrderingAssignment_947258 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Load__AdresstypeAssignment_0_247289 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeList_in_rule__Load__TypesAssignment_0_347320 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Load__AdressAssignment_0_447351 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Load__AdresstypeAssignment_1_347382 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Load__AdressAssignment_1_447413 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeList_in_rule__Load__TypesAssignment_1_547444 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleATOMIC_ORDERING_in_rule__Load__OrderingAssignment_1_747475 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__Load__IndexAssignment_1_8_247506 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Store__NewtypeAssignment_0_247537 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeList_in_rule__Store__TypesAssignment_0_347568 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Store__NewvalueAssignment_0_447599 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Store__AdresstypeAssignment_0_647630 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeList_in_rule__Store__TypesAssignment_0_747661 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Store__AdressAssignment_0_847692 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Store__NewtypeAssignment_1_347723 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeList_in_rule__Store__TypesAssignment_1_447754 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Store__NewvalueAssignment_1_547785 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Store__AdresstypeAssignment_1_747816 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeList_in_rule__Store__TypesAssignment_1_847847 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Store__AdressAssignment_1_947878 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleATOMIC_ORDERING_in_rule__Store__OrderingAssignment_1_1147909 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__Store__IndexAssignment_1_12_247940 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Call__AdresstypeAssignment_447971 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Call__AdressAssignment_5_048002 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleParameterList_in_rule__Call__PListAssignment_648033 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Alloc__TypeAssignment_1_048064 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeList_in_rule__Alloc__TypelistAssignment_1_148095 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Alloc__NumelementstypeAssignment_2_148126 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Alloc__NumelementsvalueAssignment_2_248157 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Phi__TypeAssignment_148188 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Phi__FirstclassAssignment_348219 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Phi__ValuesAssignment_548250 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Phi__FirstclassAssignment_7_248281 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Phi__ValuesAssignment_7_448312 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStructure_in_rule__LandingPad__StructAssignment_148343 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__LandingPad__PersonalitytypeAssignment_348374 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__LandingPad__PersonalityvalueAssignment_448405 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleClause_in_rule__LandingPad__ClauseAssignment_5_0_148436 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleClause_in_rule__LandingPad__ClauseAssignment_5_148467 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Clause__TypeAssignment_0_148498 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Clause__ValueAssignment_0_248529 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArray_in_rule__Clause__FilterarrayAssignment_1_148560 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Clause__ConstantAssignment_1_248591 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Select__ConditiontypeAssignment_148622 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Select__ConditionvalueAssignment_248653 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Select__Val1typeAssignment_448684 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Select__Val1valueAssignment_548715 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Select__Val2typeAssignment_748746 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Select__Val2valueAssignment_848777 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__VariableAttributeAccess__ListtypeAssignment_148808 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__VariableAttributeAccess__ListvalueAssignment_248839 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__VariableAttributeAccess__ArgTypeAssignment_448870 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ExtractElement__VectortypeAssignment_148901 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__ExtractElement__VectorvalueAssignment_248932 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ExtractElement__IndextypeAssignment_448963 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__ExtractElement__IndexAssignment_548994 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__InsertElement__VectortypeAssignment_149025 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__InsertElement__VectorvalueAssignment_249056 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__InsertElement__ScalartypeAssignment_449087 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__InsertElement__ScalarvalueAssignment_549118 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__InsertElement__IndextypeAssignment_749149 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__InsertElement__IndexAssignment_849180 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ShuffleVector__Val1typeAssignment_149211 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__ShuffleVector__Val1valueAssignment_249242 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ShuffleVector__Val2typeAssignment_449273 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__ShuffleVector__Val2valueAssignment_549304 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__ShuffleVector__MasktypeAssignment_749335 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__ShuffleVector__MaskvalueAssignment_849366 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Compare__ComptypeAssignment_0_249397 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Compare__Value1Assignment_0_349428 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Compare__Value2Assignment_0_549459 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Compare__ComptypeAssignment_1_249490 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Compare__Value1Assignment_1_349521 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Compare__Value2Assignment_1_549552 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__IndirectBranch__AdresstypeAssignment_149583 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__IndirectBranch__AdressAssignment_249614 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__IndirectBranch__LabeltypeAssignment_5_049645 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__IndirectBranch__LabelsAssignment_5_149676 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__IndirectBranch__LabeltypeAssignment_5_2_149707 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__IndirectBranch__LabelsAssignment_5_2_249738 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Switch__ComptypeAssignment_149769 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Switch__CompvalueAssignment_249800 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Switch__DefaulttypeAssignment_449831 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Switch__DefaultvalueAssignment_549862 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Switch__JtypesAssignment_7_049893 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Switch__JvaluesAssignment_7_149924 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Switch__DestinationtypesAssignment_7_349955 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Switch__DestinationsAssignment_7_449986 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Invoke__FunctiontypeAssignment_350017 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAddress_in_rule__Invoke__NameAssignment_450048 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleParameterList_in_rule__Invoke__PListAssignment_550079 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Invoke__TotypeAssignment_850110 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Invoke__TovalueAssignment_950141 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Invoke__UnwindtypeAssignment_1150172 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Invoke__UnwindvalueAssignment_1250203 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStructure_in_rule__Resume__ResumestructAssignment_150234 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Resume__ResumevalueAssignment_250265 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Return__ReturntypeAssignment_1_150296 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Return__ReturnvalueAssignment_1_250327 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Branch__DestinationAssignment_0_250358 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Branch__CondvalueAssignment_1_250389 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Branch__LabelTruetypeAssignment_1_450420 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Branch__LabelTrueAssignment_1_550451 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTypeUse_in_rule__Branch__LabelFalsetypeAssignment_1_750482 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValue_in_rule__Branch__LabelFalseAssignment_1_850513 = new BitSet(new long[]{0x0000000000000002L});
 
 }

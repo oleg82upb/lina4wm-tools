@@ -629,10 +629,12 @@
               <classifier xsi:type="ecore:EClass" href="http://www.upb.de/llvm_parser/llvm#//Value"/>
             </type>
           </elements>
-          <elements xsi:type="xtext:Alternatives">
-            <elements xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
-            <elements xsi:type="xtext:RuleCall" rule="/0/@rules.20"/>
-            <elements xsi:type="xtext:RuleCall" rule="/0/@rules.21"/>
+          <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+            <terminal xsi:type="xtext:Alternatives">
+              <elements xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
+              <elements xsi:type="xtext:RuleCall" rule="/0/@rules.20"/>
+              <elements xsi:type="xtext:RuleCall" rule="/0/@rules.21"/>
+            </terminal>
           </elements>
         </elements>
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.43"/>

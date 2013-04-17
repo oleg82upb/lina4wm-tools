@@ -630,13 +630,22 @@ public interface LlvmPackage extends EPackage {
 	int VALUE = 17;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE__NAME = 0;
+
+	/**
 	 * The number of structural features of the '<em>Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VALUE_FEATURE_COUNT = 0;
+	int VALUE_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ConstantImpl <em>Constant</em>}' class.
@@ -647,6 +656,15 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 */
 	int CONSTANT = 15;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT__NAME = VALUE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -683,7 +701,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NON_CONSTANT_VALUE__NAME = VALUE_FEATURE_COUNT + 0;
+	int NON_CONSTANT_VALUE__NAME = VALUE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Pointer</b></em>' attribute.
@@ -692,7 +710,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NON_CONSTANT_VALUE__POINTER = VALUE_FEATURE_COUNT + 1;
+	int NON_CONSTANT_VALUE__POINTER = VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Non Constant Value</em>' class.
@@ -701,7 +719,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NON_CONSTANT_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 2;
+	int NON_CONSTANT_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ValueStructImpl <em>Value Struct</em>}' class.
@@ -1140,6 +1158,15 @@ public interface LlvmPackage extends EPackage {
 	int CAST = 30;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAST__NAME = VALUE__NAME;
+
+	/**
 	 * The feature id for the '<em><b>From</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1239,6 +1266,15 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 */
 	int NESTED_GET_ELEMENT_PTR = 32;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NESTED_GET_ELEMENT_PTR__NAME = VALUE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Aggregate</b></em>' containment reference.
@@ -3199,17 +3235,6 @@ public interface LlvmPackage extends EPackage {
 	EClass getNonConstantValue();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.upb.llvm_parser.llvm.NonConstantValue#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.upb.llvm_parser.llvm.NonConstantValue#getName()
-	 * @see #getNonConstantValue()
-	 * @generated
-	 */
-	EAttribute getNonConstantValue_Name();
-
-	/**
 	 * Returns the meta object for the attribute '{@link de.upb.llvm_parser.llvm.NonConstantValue#getPointer <em>Pointer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3229,6 +3254,17 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getValue();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.upb.llvm_parser.llvm.Value#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.upb.llvm_parser.llvm.Value#getName()
+	 * @see #getValue()
+	 * @generated
+	 */
+	EAttribute getValue_Name();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ValueStruct <em>Value Struct</em>}'.
@@ -5593,14 +5629,6 @@ public interface LlvmPackage extends EPackage {
 		EClass NON_CONSTANT_VALUE = eINSTANCE.getNonConstantValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NON_CONSTANT_VALUE__NAME = eINSTANCE.getNonConstantValue_Name();
-
-		/**
 		 * The meta object literal for the '<em><b>Pointer</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5617,6 +5645,14 @@ public interface LlvmPackage extends EPackage {
 		 * @generated
 		 */
 		EClass VALUE = eINSTANCE.getValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VALUE__NAME = eINSTANCE.getValue_Name();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ValueStructImpl <em>Value Struct</em>}' class.
