@@ -31,6 +31,7 @@ import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.Branch;
+import de.upb.llvm_parser.llvm.Constant;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.IndirectBranch;
 import de.upb.llvm_parser.llvm.Instruction;
@@ -40,6 +41,7 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.NonConstantValue;
 import de.upb.llvm_parser.llvm.ReturnInstruction;
 import de.upb.llvm_parser.llvm.Switch;
+import de.upb.llvm_parser.llvm.Value;
 import de.upb.llvm_parser.llvm.impl.BranchImpl;
 import de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl;
 import de.upb.llvm_parser.llvm.impl.InstructionUseImpl;
@@ -183,9 +185,9 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 					t.setSource(act);
 				} else {
 					GuardedTransition t = addGuardedTransition(cfg, term);
-					t.setCondition((((Branch) term).getCondvalue()) + " = " + sTrueConst);
+					t.setCondition(addValue(((Branch) term).getCondvalue()) + " = " + sTrueConst);
 					GuardedTransition f = addGuardedTransition(cfg, term);
-					f.setCondition((((Branch) term).getCondvalue()) + " = " + sFalseConst);
+					f.setCondition(addValue(((Branch) term).getCondvalue()) + " = " + sFalseConst);
 					act.getOutgoing().add(t);
 					t.setSource(act);
 					act.getOutgoing().add(f);
@@ -340,6 +342,23 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 				System.out.println("Error on refreshing Workspace - perform F5 by your own.");
 				e.printStackTrace();
 			}
+	}
+
+	private String addValue(Value value) {
+		String result = "";
+		if (value.eClass().equals(LlvmPackage.eINSTANCE.getNonConstantValue())) {
+			NonConstantValue ncv = (NonConstantValue) value;
+			result = ncv.getName();
+			if (ncv.getPointer() != null)
+				result += ncv.getPointer();
+
+		} else if (value.eClass().equals(LlvmPackage.eINSTANCE.getConstant())) {
+			Constant constant = (Constant) value;
+			result += constant.getValue();
+		} else {
+			result = value.getName();
+		}
+		return (result + " ");
 	}
 
 	private void addTSO(ArrayList<ControlFlowDiagram> list) {
