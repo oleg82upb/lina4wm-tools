@@ -3,9 +3,15 @@
  */
 package de.upb.llvm_parser;
 
+import org.eclipse.xtext.conversion.IValueConverterService;
+
 /**
- * Use this class to register components to be used at runtime / without the Equinox extension registry.
+ * Use this class to register components to be used at runtime / without the
+ * Equinox extension registry.
  */
 public class LLVMRuntimeModule extends de.upb.llvm_parser.AbstractLLVMRuntimeModule {
-
+	@Override
+	public Class<? extends IValueConverterService> bindIValueConverterService() {
+		return MyTerminalConverters.class;
+	}
 }
