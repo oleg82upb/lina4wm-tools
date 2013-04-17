@@ -201,14 +201,14 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 				def.setSource(act);
 				for (int i = 0; i < ((Switch) term).getJvalues().size(); i++) {
 					GuardedTransition jump = addGuardedTransition(cfg, term);
-					jump.setCondition(((Switch) term).getCompvalue().toString() + ((Switch) term).getJvalues().get(i).toString());
+					jump.setCondition(addValue(((Switch) term).getCompvalue()) + addValue(((Switch) term).getJvalues().get(i)));
 					act.getOutgoing().add(jump);
 					jump.setSource(act);
 				}
 			} else if (type.equals(LlvmPackage.eINSTANCE.getIndirectBranch())) {
 				for (int i = 0; i < ((IndirectBranch) term).getLabels().size(); i++) {
 					GuardedTransition jump = addGuardedTransition(cfg, term);
-					jump.setCondition(((Switch) term).getCompvalue().toString() + ((IndirectBranch) term).getLabels().get(i).toString());
+					jump.setCondition(addValue(((IndirectBranch) term).getAdress()) + addValue(((IndirectBranch) term).getLabels().get(i)));
 					act.getOutgoing().add(jump);
 					jump.setSource(act);
 				}
