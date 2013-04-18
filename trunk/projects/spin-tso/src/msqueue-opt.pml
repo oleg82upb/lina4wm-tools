@@ -1,8 +1,25 @@
+/*
+author: Annika Mütze <muetze.annika@gmail.com>
+date: 04.2013
+
+optimized MSqueue implementation
+*/
+
+#define BUFF_SIZE 20 	//size of Buffer
+#define MEM_SIZE 40	//size of memory
+ 
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+#include "x86_tso_buffer.pml"
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+	
+	// abstract implementation missing!!!!!!!!
+	
+
+
 //Types for LLVM, actually their length in size of pointers and values
-#define Queue  0 	//= {0};
+#define MSQueue  1 	//= {0};
 #define Node  1	//= {0,1};
-#define I32  0 		// = {0};
-#define Ptr  0
 short memUse = 1; 	//shows to the next free cell in memory
 byte this; 		//Queue instance pointer
 
@@ -32,18 +49,19 @@ inline alloca(type, targetRegister)
 }
 
 //--------------------------------------------------------------------------------------------------------------
-
+//------------ enqueue optimized ----------------
 inline enqueue (this, value){	// enqueue element v at the end of the queue
 
-short tail, v0, v3, v4, v5, v6, v7, v11, v13, next3
+short tail, node, v0, v1, v3, v4, v5, v6, v7, v11, v13, next3, next2;
 invoke_content:
 
-//write(val, value);
 //... allocate????
-//
-	write(v0, NULL);
-	getelementptr(Queue, this, 1, tail);
-	
+	alloca(Node, node);
+	write(node, value);
+	getelementptr(Node, node, 1, next2);
+	write(next2, NULL);
+	getelementptr(MSQueue, this, 1, tail)
+	->
 
 doBody:
 	read(tail, v3);
@@ -55,21 +73,22 @@ doBody:
 	:: else -> goto doBody;
 	fi;
 	
-ifThen:
+if_then:
 	if
 	::v4 == NULL -> goto if_then6;
 	:: else -> goto if_else;
 	fi;
 	
 if_then6:
-	cas(v6, 0, v1, v7)
+	// %7 = cmpxchg i32* %6, i32 0, i32 %1 seq_cst
+	cas(next3, v4, node, v7)				//v4???? because cpp code:CAS(&localTail->next, next, node)
 	if
 	:: v7 == true -> goto do_end;
 	::else -> goto doBody;
 	fi;
 	
 if_else:
-	cas(tail, v3,v4, v11);
+	cas(tail, v3, v4, v11);
 	goto doBody;
 	
 do_end:
@@ -78,8 +97,9 @@ do_end:
 }
 
 //--------------------------------------------------------------------------------------------------------------
+// ---------- dequeue optimized --------------
 
-inline dequeue(returnvalue){			// dequeue first element in queue
+inline dequeue(returnvalue){			// dequeues first element in queue
 short head, tail, next2, v2, v3, v4, v5, v8, v9, v12;
 
 entry: 
@@ -108,7 +128,7 @@ ifThen:
 				if
 				:: v12 == true -> goto return1;
 				:: else -> goto doBody;
-				fi
+				fi;
 	fi;
 
 ifThen5:
@@ -125,4 +145,37 @@ return1:
 	write(returnvalue, true);
 
 }	
+
+//------------------------------------------------------------------------------
+	
+proctype process1(chan ch){
+	short returnvalue;
+	enqueue(this, 222);
+}
+
+proctype process2(chan ch){
+	skip;
+}
+
+init{
+atomic{
+	alloca(MSQueue, this)
+	alloca(Node, memory[1]);
+	memory[2] = memory[1];
+	run process1(channelT1);
+	run bufferProcess(channelT1);
+	run process2(channelT2);
+	run bufferProcess(channelT2);
+	}
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
