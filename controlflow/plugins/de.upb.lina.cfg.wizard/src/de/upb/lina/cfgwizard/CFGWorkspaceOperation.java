@@ -93,9 +93,19 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 			if (reordering == 1) {
 				addTSO(list);
 			}
-			/* remove [CFL] ->Branch-> [CFL] single in/out */
-			if (SINGLEBRANCH) {
+			if (!SINGLEBRANCH) {
 				removeSingleBranches(list);
+			}
+			for (ControlFlowDiagram cfg : list) {
+				ControlFlowLocation loose = findLooseGraph(cfg);
+				while (loose != null) {
+					EList<Transition> saveT = loose.getOutgoing();
+					for (Transition t : saveT) {
+						deleteTransition(t);
+					}
+					deleteLoc(loose);
+					loose = findLooseGraph(cfg);
+				}
 			}
 
 			ResourceSet resSet = new ResourceSetImpl();
@@ -115,6 +125,19 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 
 	}
 
+	private void deleteTransition(Transition t) {
+		t.setDiagram(null);
+		t.setSource(null);
+		t.getTarget().getIncoming().remove(t);
+		t.setTarget(null);
+		t.setInstruction(null);
+	}
+
+	private void deleteLoc(ControlFlowLocation loose) {
+		loose.setDiagram(null);
+		loose.getOutgoing().clear();
+	}
+
 	private void removeSingleBranches(ArrayList<ControlFlowDiagram> cfgs) {
 		for (ControlFlowDiagram cfg : cfgs) {
 			EList<Transition> list = cfg.getTransitions();
@@ -130,8 +153,6 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 						transition.getSource().setDiagram(null);
 						transition.getSource().getOutgoing().clear();
 						transition.getTarget().getIncoming().remove(transition);
-						cfg.getLocations().remove(transition.getSource());
-						cfg.getTransitions().remove(transition);
 						transition.setSource(null);
 						transition.setTarget(null);
 						transition.setDiagram(null);
@@ -141,7 +162,16 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 				}
 			}
 		}
+	}
 
+	private ControlFlowLocation findLooseGraph(ControlFlowDiagram cfg) {
+		EList<ControlFlowLocation> locs = cfg.getLocations();
+		for (ControlFlowLocation loc : locs) {
+			if (loc.getIncoming().isEmpty() && !(loc.equals(cfg.getStart()))) {
+				return loc;
+			}
+		}
+		return null;
 	}
 
 	private ControlFlowDiagram createCFG(FunctionDefinition function) {
