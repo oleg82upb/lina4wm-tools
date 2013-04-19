@@ -146,7 +146,7 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 				act.getOutgoing().add(t);
 				temp = act;
 				act = addControlFlowLocation(cfg, pc);
-				act.getIncoming().add(temp.getOutgoing().get(temp.getOutgoing().size() - 1));
+				act.getIncoming().add(t);
 				t.setSource(temp);
 				t.setTarget(act);
 			}
@@ -206,11 +206,11 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 				act.getOutgoing().add(t);
 				temp = act;
 				act = addControlFlowLocation(cfg, pc);
-				act.getIncoming().add(temp.getOutgoing().get(temp.getOutgoing().size() - 1));
+				act.getIncoming().add(t);
 				t.setSource(temp);
 				t.setTarget(act);
 			} else {
-				System.out.println("Not Handled Terminator" + term);
+				System.out.println("Unexpected Terminator" + term);
 			}
 
 		}

@@ -8,17 +8,21 @@ import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.ArithmeticOperation;
+import de.upb.llvm_parser.llvm.AtomicRMW;
 import de.upb.llvm_parser.llvm.Call;
 import de.upb.llvm_parser.llvm.Cast;
 import de.upb.llvm_parser.llvm.CmpXchg;
 import de.upb.llvm_parser.llvm.Compare;
 import de.upb.llvm_parser.llvm.Constant;
+import de.upb.llvm_parser.llvm.Fence;
 import de.upb.llvm_parser.llvm.GetElementPtr;
 import de.upb.llvm_parser.llvm.InstructionUse;
+import de.upb.llvm_parser.llvm.Invoke;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Load;
 import de.upb.llvm_parser.llvm.LogicOperation;
 import de.upb.llvm_parser.llvm.NonConstantValue;
+import de.upb.llvm_parser.llvm.ParameterList;
 import de.upb.llvm_parser.llvm.Predefined;
 import de.upb.llvm_parser.llvm.Return;
 import de.upb.llvm_parser.llvm.Store;
@@ -75,6 +79,7 @@ public class CustomLabelingUtil {
 			result += type.getName() + " ";
 			Call instr = (Call) t.getInstruction();
 			result += addValue(instr.getAdress());
+			result += addParameterList(instr.getPList());
 		}
 		// Alloc
 		else if (type.equals(LlvmPackage.eINSTANCE.getAlloc())) {
@@ -178,19 +183,109 @@ public class CustomLabelingUtil {
 		// Return
 		else if (type.equals(LlvmPackage.eINSTANCE.getReturn())) {
 			result += type.getName();
-			result += addValue(((Return) t.getInstruction()).getReturnvalue());
+			if (((Return) t.getInstruction()).getReturnvalue() != null) {
+				result += addValue(((Return) t.getInstruction()).getReturnvalue());
+			} else {
+				result += " void";
+			}
 		}
 		// Cast
 		else if (type.equals(LlvmPackage.eINSTANCE.getCast())) {
 			Cast instr = (Cast) t.getInstruction();
 			result += ("( " + addType(instr.getFrom()) + "->" + addType(instr.getTo()) + " )" + addValue(instr.getValue()));
 		}
+		// Invoke
+		else if (type.equals(LlvmPackage.eINSTANCE.getInvoke())) {
+			result += type.getName();
+			Invoke instr = (Invoke) t.getInstruction();
+			result += instr.getName().getName();
+			result += addParameterList(instr.getPList());
+		}
+		// Fence
+		else if (type.equals(LlvmPackage.eINSTANCE.getFence())) {
+			result += type.getName();
+			Fence instr = (Fence) t.getInstruction();
+			result += instr.getOrdering();
+		}
+		// AtomicRMW
+		else if (type.equals(LlvmPackage.eINSTANCE.getAtomicRMW())) {
+			result += "atomic( ";
+			AtomicRMW instr = (AtomicRMW) t.getInstruction();
+			String operation = instr.getOperation();
+			if (operation.equals("xchg")) {
+				result += addValue(instr.getAdress());
+				result += " = ";
+				result += addValue(instr.getOpvalue());
+			} else if (operation.equals("add")) {
+				result += addValue(instr.getAdress());
+				result += " = ";
+				result += addValue(instr.getAdress());
+				result += " + ";
+				result += addValue(instr.getOpvalue());
+			} else if (operation.equals("sub")) {
+				result += addValue(instr.getAdress());
+				result += " = ";
+				result += addValue(instr.getAdress());
+				result += " - ";
+				result += addValue(instr.getOpvalue());
+			} else if (operation.equals("and")) {
+				result += addValue(instr.getAdress());
+				result += " = ";
+				result += addValue(instr.getAdress());
+				result += " & ";
+				result += addValue(instr.getOpvalue());
+			} else if (operation.equals("nand")) {
+				result += addValue(instr.getAdress());
+				result += " = ";
+				result += addValue(instr.getAdress());
+				result += " !& ";
+				result += addValue(instr.getOpvalue());
+			} else if (operation.equals("or")) {
+				result += addValue(instr.getAdress());
+				result += " = ";
+				result += addValue(instr.getAdress());
+				result += " | ";
+				result += addValue(instr.getOpvalue());
+			} else if (operation.equals("xor")) {
+				result += addValue(instr.getAdress());
+				result += " = ";
+				result += addValue(instr.getAdress());
+				result += " ^ ";
+				result += addValue(instr.getOpvalue());
+			} else if (operation.equals("max") || operation.equals("umax")) {
+				result += addValue(instr.getAdress());
+				result += " = ";
+				result += addValue(instr.getAdress());
+				result += " > ";
+				result += addValue(instr.getOpvalue());
+				result += " ? ";
+				result += addValue(instr.getAdress());
+				result += " : ";
+				result += addValue(instr.getOpvalue());
+			} else if (operation.equals("min") || operation.equals("umin")) {
+				result += addValue(instr.getAdress());
+				result += " = ";
+				result += addValue(instr.getAdress());
+				result += " < ";
+				result += addValue(instr.getOpvalue());
+				result += " ? ";
+				result += addValue(instr.getAdress());
+				result += " : ";
+				result += addValue(instr.getOpvalue());
+			}
+			result += " )";
+		}
 		// not-implemented
 		else {
 			result += type.getName();
 		}
 		return result;
+	}
 
+	private String addParameterList(ParameterList pList) {
+		String result = "";
+		// TODO Auto-generated method stub
+		return result;
 	}
 
 	private String addType(EObject type) {
