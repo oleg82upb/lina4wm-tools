@@ -16,6 +16,7 @@ import de.upb.llvm_parser.llvm.Value;
 public interface LogicOperationValidator {
 	boolean validate();
 
+	boolean validateOperation(String value);
 	boolean validateOptype(TypeUse value);
 	boolean validateValue1(Value value);
 	boolean validateValue2(Value value);

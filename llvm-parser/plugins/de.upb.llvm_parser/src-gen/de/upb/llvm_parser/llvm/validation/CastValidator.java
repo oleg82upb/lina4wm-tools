@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface CastValidator {
 	boolean validate();
 
+	boolean validateOperation(String value);
 	boolean validateFrom(EObject value);
 	boolean validateValue(Value value);
 	boolean validateTo(TypeUse value);

@@ -108,16 +108,19 @@ Package llvm <http://www.upb.de/llvm_parser/llvm>
   Class StandartInstruction -> Instruction
 
   Class ArithmeticOperation -> StandartInstruction
+    Attribute operation : EString
     Reference optype : TypeUse
     Reference value1 : Value
     Reference value2 : Value
 
   Class LogicOperation -> StandartInstruction
+    Attribute operation : EString
     Reference optype : TypeUse
     Reference value1 : Value
     Reference value2 : Value
 
   Class Cast -> Value, StandartInstruction
+    Attribute operation : EString
     Reference from : EObject
     Reference value : Value
     Reference to : TypeUse
@@ -246,6 +249,7 @@ Package llvm <http://www.upb.de/llvm_parser/llvm>
     Reference maskvalue : Value
 
   Class Compare -> StandartInstruction
+    Attribute pred : EString
     Reference comptype : TypeUse
     Reference value1 : Value
     Reference value2 : Value

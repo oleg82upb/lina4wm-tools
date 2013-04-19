@@ -15,12 +15,14 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -58,8 +60,31 @@ public class CompareItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addPredPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Pred feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPredPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Compare_pred_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Compare_pred_feature", "_UI_Compare_type"),
+				 LlvmPackage.Literals.COMPARE__PRED,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -113,7 +138,10 @@ public class CompareItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Compare_type");
+		String label = ((Compare)object).getPred();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Compare_type") :
+			getString("_UI_Compare_type") + " " + label;
 	}
 
 	/**
@@ -128,6 +156,9 @@ public class CompareItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Compare.class)) {
+			case LlvmPackage.COMPARE__PRED:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case LlvmPackage.COMPARE__COMPTYPE:
 			case LlvmPackage.COMPARE__VALUE1:
 			case LlvmPackage.COMPARE__VALUE2:

@@ -103,16 +103,19 @@
     <genClasses ecoreClass="LLVM.ecore#//ReturnInstruction"/>
     <genClasses ecoreClass="LLVM.ecore#//StandartInstruction"/>
     <genClasses ecoreClass="LLVM.ecore#//ArithmeticOperation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//ArithmeticOperation/operation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ArithmeticOperation/optype"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ArithmeticOperation/value1"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ArithmeticOperation/value2"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//LogicOperation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//LogicOperation/operation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//LogicOperation/optype"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//LogicOperation/value1"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//LogicOperation/value2"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//Cast">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Cast/operation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Cast/from"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Cast/value"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Cast/to"/>
@@ -241,6 +244,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ShuffleVector/maskvalue"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//Compare">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Compare/pred"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Compare/comptype"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Compare/value1"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Compare/value2"/>

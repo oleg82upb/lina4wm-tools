@@ -15,12 +15,14 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -58,8 +60,31 @@ public class LogicOperationItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addOperationPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Operation feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addOperationPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_LogicOperation_operation_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_LogicOperation_operation_feature", "_UI_LogicOperation_type"),
+				 LlvmPackage.Literals.LOGIC_OPERATION__OPERATION,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -113,7 +138,10 @@ public class LogicOperationItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_LogicOperation_type");
+		String label = ((LogicOperation)object).getOperation();
+		return label == null || label.length() == 0 ?
+			getString("_UI_LogicOperation_type") :
+			getString("_UI_LogicOperation_type") + " " + label;
 	}
 
 	/**
@@ -128,6 +156,9 @@ public class LogicOperationItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(LogicOperation.class)) {
+			case LlvmPackage.LOGIC_OPERATION__OPERATION:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case LlvmPackage.LOGIC_OPERATION__OPTYPE:
 			case LlvmPackage.LOGIC_OPERATION__VALUE1:
 			case LlvmPackage.LOGIC_OPERATION__VALUE2:

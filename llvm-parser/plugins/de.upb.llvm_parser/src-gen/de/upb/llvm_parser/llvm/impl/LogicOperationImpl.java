@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.LogicOperationImpl#getOperation <em>Operation</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LogicOperationImpl#getOptype <em>Optype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LogicOperationImpl#getValue1 <em>Value1</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LogicOperationImpl#getValue2 <em>Value2</em>}</li>
@@ -31,6 +32,26 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * @generated
  */
 public class LogicOperationImpl extends StandartInstructionImpl implements LogicOperation {
+	/**
+	 * The default value of the '{@link #getOperation() <em>Operation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOperation()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String OPERATION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getOperation() <em>Operation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOperation()
+	 * @generated
+	 * @ordered
+	 */
+	protected String operation = OPERATION_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getOptype() <em>Optype</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -78,6 +99,27 @@ public class LogicOperationImpl extends StandartInstructionImpl implements Logic
 	@Override
 	protected EClass eStaticClass() {
 		return LlvmPackage.Literals.LOGIC_OPERATION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getOperation() {
+		return operation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOperation(String newOperation) {
+		String oldOperation = operation;
+		operation = newOperation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOGIC_OPERATION__OPERATION, oldOperation, operation));
 	}
 
 	/**
@@ -235,6 +277,8 @@ public class LogicOperationImpl extends StandartInstructionImpl implements Logic
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case LlvmPackage.LOGIC_OPERATION__OPERATION:
+				return getOperation();
 			case LlvmPackage.LOGIC_OPERATION__OPTYPE:
 				return getOptype();
 			case LlvmPackage.LOGIC_OPERATION__VALUE1:
@@ -253,6 +297,9 @@ public class LogicOperationImpl extends StandartInstructionImpl implements Logic
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case LlvmPackage.LOGIC_OPERATION__OPERATION:
+				setOperation((String)newValue);
+				return;
 			case LlvmPackage.LOGIC_OPERATION__OPTYPE:
 				setOptype((TypeUse)newValue);
 				return;
@@ -274,6 +321,9 @@ public class LogicOperationImpl extends StandartInstructionImpl implements Logic
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case LlvmPackage.LOGIC_OPERATION__OPERATION:
+				setOperation(OPERATION_EDEFAULT);
+				return;
 			case LlvmPackage.LOGIC_OPERATION__OPTYPE:
 				setOptype((TypeUse)null);
 				return;
@@ -295,6 +345,8 @@ public class LogicOperationImpl extends StandartInstructionImpl implements Logic
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case LlvmPackage.LOGIC_OPERATION__OPERATION:
+				return OPERATION_EDEFAULT == null ? operation != null : !OPERATION_EDEFAULT.equals(operation);
 			case LlvmPackage.LOGIC_OPERATION__OPTYPE:
 				return optype != null;
 			case LlvmPackage.LOGIC_OPERATION__VALUE1:
@@ -303,6 +355,22 @@ public class LogicOperationImpl extends StandartInstructionImpl implements Logic
 				return value2 != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (operation: ");
+		result.append(operation);
+		result.append(')');
+		return result.toString();
 	}
 
 } //LogicOperationImpl

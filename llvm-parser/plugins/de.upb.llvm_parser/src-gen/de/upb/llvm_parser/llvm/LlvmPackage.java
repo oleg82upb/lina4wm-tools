@@ -1066,13 +1066,22 @@ public interface LlvmPackage extends EPackage {
 	int ARITHMETIC_OPERATION = 28;
 
 	/**
+	 * The feature id for the '<em><b>Operation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARITHMETIC_OPERATION__OPERATION = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Optype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARITHMETIC_OPERATION__OPTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
+	int ARITHMETIC_OPERATION__OPTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Value1</b></em>' containment reference.
@@ -1081,7 +1090,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARITHMETIC_OPERATION__VALUE1 = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
+	int ARITHMETIC_OPERATION__VALUE1 = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Value2</b></em>' containment reference.
@@ -1090,7 +1099,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARITHMETIC_OPERATION__VALUE2 = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
+	int ARITHMETIC_OPERATION__VALUE2 = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Arithmetic Operation</em>' class.
@@ -1099,7 +1108,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARITHMETIC_OPERATION_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
+	int ARITHMETIC_OPERATION_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.LogicOperationImpl <em>Logic Operation</em>}' class.
@@ -1112,13 +1121,22 @@ public interface LlvmPackage extends EPackage {
 	int LOGIC_OPERATION = 29;
 
 	/**
+	 * The feature id for the '<em><b>Operation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOGIC_OPERATION__OPERATION = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Optype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIC_OPERATION__OPTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
+	int LOGIC_OPERATION__OPTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Value1</b></em>' containment reference.
@@ -1127,7 +1145,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIC_OPERATION__VALUE1 = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
+	int LOGIC_OPERATION__VALUE1 = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Value2</b></em>' containment reference.
@@ -1136,7 +1154,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIC_OPERATION__VALUE2 = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
+	int LOGIC_OPERATION__VALUE2 = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Logic Operation</em>' class.
@@ -1145,7 +1163,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIC_OPERATION_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
+	int LOGIC_OPERATION_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.CastImpl <em>Cast</em>}' class.
@@ -1167,13 +1185,22 @@ public interface LlvmPackage extends EPackage {
 	int CAST__NAME = VALUE__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Operation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAST__OPERATION = VALUE_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>From</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CAST__FROM = VALUE_FEATURE_COUNT + 0;
+	int CAST__FROM = VALUE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -1182,7 +1209,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CAST__VALUE = VALUE_FEATURE_COUNT + 1;
+	int CAST__VALUE = VALUE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>To</b></em>' containment reference.
@@ -1191,7 +1218,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CAST__TO = VALUE_FEATURE_COUNT + 2;
+	int CAST__TO = VALUE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Cast</em>' class.
@@ -1200,7 +1227,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CAST_FEATURE_COUNT = VALUE_FEATURE_COUNT + 3;
+	int CAST_FEATURE_COUNT = VALUE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.GetElementPtrImpl <em>Get Element Ptr</em>}' class.
@@ -2348,13 +2375,22 @@ public interface LlvmPackage extends EPackage {
 	int COMPARE = 50;
 
 	/**
+	 * The feature id for the '<em><b>Pred</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPARE__PRED = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Comptype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPARE__COMPTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
+	int COMPARE__COMPTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Value1</b></em>' containment reference.
@@ -2363,7 +2399,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPARE__VALUE1 = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
+	int COMPARE__VALUE1 = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Value2</b></em>' containment reference.
@@ -2372,7 +2408,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPARE__VALUE2 = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
+	int COMPARE__VALUE2 = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Compare</em>' class.
@@ -2381,7 +2417,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPARE_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
+	int COMPARE_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.IndirectBranchImpl <em>Indirect Branch</em>}' class.
@@ -3553,6 +3589,17 @@ public interface LlvmPackage extends EPackage {
 	EClass getArithmeticOperation();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.upb.llvm_parser.llvm.ArithmeticOperation#getOperation <em>Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Operation</em>'.
+	 * @see de.upb.llvm_parser.llvm.ArithmeticOperation#getOperation()
+	 * @see #getArithmeticOperation()
+	 * @generated
+	 */
+	EAttribute getArithmeticOperation_Operation();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.ArithmeticOperation#getOptype <em>Optype</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3596,6 +3643,17 @@ public interface LlvmPackage extends EPackage {
 	EClass getLogicOperation();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.upb.llvm_parser.llvm.LogicOperation#getOperation <em>Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Operation</em>'.
+	 * @see de.upb.llvm_parser.llvm.LogicOperation#getOperation()
+	 * @see #getLogicOperation()
+	 * @generated
+	 */
+	EAttribute getLogicOperation_Operation();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.LogicOperation#getOptype <em>Optype</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3637,6 +3695,17 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCast();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.upb.llvm_parser.llvm.Cast#getOperation <em>Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Operation</em>'.
+	 * @see de.upb.llvm_parser.llvm.Cast#getOperation()
+	 * @see #getCast()
+	 * @generated
+	 */
+	EAttribute getCast_Operation();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.Cast#getFrom <em>From</em>}'.
@@ -4807,6 +4876,17 @@ public interface LlvmPackage extends EPackage {
 	EClass getCompare();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.upb.llvm_parser.llvm.Compare#getPred <em>Pred</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Pred</em>'.
+	 * @see de.upb.llvm_parser.llvm.Compare#getPred()
+	 * @see #getCompare()
+	 * @generated
+	 */
+	EAttribute getCompare_Pred();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.Compare#getComptype <em>Comptype</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5893,6 +5973,14 @@ public interface LlvmPackage extends EPackage {
 		EClass ARITHMETIC_OPERATION = eINSTANCE.getArithmeticOperation();
 
 		/**
+		 * The meta object literal for the '<em><b>Operation</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARITHMETIC_OPERATION__OPERATION = eINSTANCE.getArithmeticOperation_Operation();
+
+		/**
 		 * The meta object literal for the '<em><b>Optype</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5927,6 +6015,14 @@ public interface LlvmPackage extends EPackage {
 		EClass LOGIC_OPERATION = eINSTANCE.getLogicOperation();
 
 		/**
+		 * The meta object literal for the '<em><b>Operation</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LOGIC_OPERATION__OPERATION = eINSTANCE.getLogicOperation_Operation();
+
+		/**
 		 * The meta object literal for the '<em><b>Optype</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5959,6 +6055,14 @@ public interface LlvmPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CAST = eINSTANCE.getCast();
+
+		/**
+		 * The meta object literal for the '<em><b>Operation</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CAST__OPERATION = eINSTANCE.getCast_Operation();
 
 		/**
 		 * The meta object literal for the '<em><b>From</b></em>' containment reference feature.
@@ -6863,6 +6967,14 @@ public interface LlvmPackage extends EPackage {
 		 * @generated
 		 */
 		EClass COMPARE = eINSTANCE.getCompare();
+
+		/**
+		 * The meta object literal for the '<em><b>Pred</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPARE__PRED = eINSTANCE.getCompare_Pred();
 
 		/**
 		 * The meta object literal for the '<em><b>Comptype</b></em>' containment reference feature.

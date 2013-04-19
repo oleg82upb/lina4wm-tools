@@ -1205,8 +1205,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getArithmeticOperation_Optype() {
-		return (EReference)arithmeticOperationEClass.getEStructuralFeatures().get(0);
+	public EAttribute getArithmeticOperation_Operation() {
+		return (EAttribute)arithmeticOperationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1214,7 +1214,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getArithmeticOperation_Value1() {
+	public EReference getArithmeticOperation_Optype() {
 		return (EReference)arithmeticOperationEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1223,8 +1223,17 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getArithmeticOperation_Value2() {
+	public EReference getArithmeticOperation_Value1() {
 		return (EReference)arithmeticOperationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getArithmeticOperation_Value2() {
+		return (EReference)arithmeticOperationEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1241,8 +1250,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLogicOperation_Optype() {
-		return (EReference)logicOperationEClass.getEStructuralFeatures().get(0);
+	public EAttribute getLogicOperation_Operation() {
+		return (EAttribute)logicOperationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1250,7 +1259,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLogicOperation_Value1() {
+	public EReference getLogicOperation_Optype() {
 		return (EReference)logicOperationEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1259,8 +1268,17 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLogicOperation_Value2() {
+	public EReference getLogicOperation_Value1() {
 		return (EReference)logicOperationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getLogicOperation_Value2() {
+		return (EReference)logicOperationEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1277,8 +1295,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCast_From() {
-		return (EReference)castEClass.getEStructuralFeatures().get(0);
+	public EAttribute getCast_Operation() {
+		return (EAttribute)castEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1286,7 +1304,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCast_Value() {
+	public EReference getCast_From() {
 		return (EReference)castEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1295,8 +1313,17 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCast_To() {
+	public EReference getCast_Value() {
 		return (EReference)castEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCast_To() {
+		return (EReference)castEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -2249,8 +2276,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCompare_Comptype() {
-		return (EReference)compareEClass.getEStructuralFeatures().get(0);
+	public EAttribute getCompare_Pred() {
+		return (EAttribute)compareEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2258,7 +2285,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCompare_Value1() {
+	public EReference getCompare_Comptype() {
 		return (EReference)compareEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -2267,8 +2294,17 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCompare_Value2() {
+	public EReference getCompare_Value1() {
 		return (EReference)compareEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCompare_Value2() {
+		return (EReference)compareEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -2724,16 +2760,19 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		standartInstructionEClass = createEClass(STANDART_INSTRUCTION);
 
 		arithmeticOperationEClass = createEClass(ARITHMETIC_OPERATION);
+		createEAttribute(arithmeticOperationEClass, ARITHMETIC_OPERATION__OPERATION);
 		createEReference(arithmeticOperationEClass, ARITHMETIC_OPERATION__OPTYPE);
 		createEReference(arithmeticOperationEClass, ARITHMETIC_OPERATION__VALUE1);
 		createEReference(arithmeticOperationEClass, ARITHMETIC_OPERATION__VALUE2);
 
 		logicOperationEClass = createEClass(LOGIC_OPERATION);
+		createEAttribute(logicOperationEClass, LOGIC_OPERATION__OPERATION);
 		createEReference(logicOperationEClass, LOGIC_OPERATION__OPTYPE);
 		createEReference(logicOperationEClass, LOGIC_OPERATION__VALUE1);
 		createEReference(logicOperationEClass, LOGIC_OPERATION__VALUE2);
 
 		castEClass = createEClass(CAST);
+		createEAttribute(castEClass, CAST__OPERATION);
 		createEReference(castEClass, CAST__FROM);
 		createEReference(castEClass, CAST__VALUE);
 		createEReference(castEClass, CAST__TO);
@@ -2862,6 +2901,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		createEReference(shuffleVectorEClass, SHUFFLE_VECTOR__MASKVALUE);
 
 		compareEClass = createEClass(COMPARE);
+		createEAttribute(compareEClass, COMPARE__PRED);
 		createEReference(compareEClass, COMPARE__COMPTYPE);
 		createEReference(compareEClass, COMPARE__VALUE1);
 		createEReference(compareEClass, COMPARE__VALUE2);
@@ -3086,16 +3126,19 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		initEClass(standartInstructionEClass, StandartInstruction.class, "StandartInstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(arithmeticOperationEClass, ArithmeticOperation.class, "ArithmeticOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getArithmeticOperation_Operation(), ecorePackage.getEString(), "operation", null, 0, 1, ArithmeticOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArithmeticOperation_Optype(), this.getTypeUse(), null, "optype", null, 0, 1, ArithmeticOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArithmeticOperation_Value1(), this.getValue(), null, "value1", null, 0, 1, ArithmeticOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArithmeticOperation_Value2(), this.getValue(), null, "value2", null, 0, 1, ArithmeticOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(logicOperationEClass, LogicOperation.class, "LogicOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getLogicOperation_Operation(), ecorePackage.getEString(), "operation", null, 0, 1, LogicOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLogicOperation_Optype(), this.getTypeUse(), null, "optype", null, 0, 1, LogicOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLogicOperation_Value1(), this.getValue(), null, "value1", null, 0, 1, LogicOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLogicOperation_Value2(), this.getValue(), null, "value2", null, 0, 1, LogicOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(castEClass, Cast.class, "Cast", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCast_Operation(), ecorePackage.getEString(), "operation", null, 0, 1, Cast.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCast_From(), ecorePackage.getEObject(), null, "from", null, 0, 1, Cast.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCast_Value(), this.getValue(), null, "value", null, 0, 1, Cast.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCast_To(), this.getTypeUse(), null, "to", null, 0, 1, Cast.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3224,6 +3267,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		initEReference(getShuffleVector_Maskvalue(), this.getValue(), null, "maskvalue", null, 0, 1, ShuffleVector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(compareEClass, Compare.class, "Compare", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCompare_Pred(), ecorePackage.getEString(), "pred", null, 0, 1, Compare.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompare_Comptype(), this.getTypeUse(), null, "comptype", null, 0, 1, Compare.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompare_Value1(), this.getValue(), null, "value1", null, 0, 1, Compare.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompare_Value2(), this.getValue(), null, "value2", null, 0, 1, Compare.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
