@@ -51,6 +51,6 @@ public class CustomTransitionEditPart extends TransitionEditPart {
 		if (t == null) {
 			return EMPTY;
 		}
-		return labelutil.getTransitionLabel(t);
+		return labelutil.getNewTransitionLabel(t);
 	}
 }
