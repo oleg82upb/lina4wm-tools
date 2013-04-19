@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
-import java.util.TreeSet;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -42,7 +41,6 @@ import de.upb.llvm_parser.llvm.NonConstantValue;
 import de.upb.llvm_parser.llvm.ReturnInstruction;
 import de.upb.llvm_parser.llvm.Switch;
 import de.upb.llvm_parser.llvm.Value;
-import de.upb.llvm_parser.llvm.impl.BranchImpl;
 import de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl;
 import de.upb.llvm_parser.llvm.impl.InstructionUseImpl;
 import de.upb.llvm_parser.llvm.impl.LLVMImpl;
@@ -90,22 +88,17 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 				}
 			}
 
-			if (reordering == 1) {
-				addTSO(list);
-			}
+			CFGUtil cfgutil = new CFGUtil();
 			if (!SINGLEBRANCH) {
-				removeSingleBranches(list);
+				cfgutil.removeSingleBranches(list);
 			}
-			for (ControlFlowDiagram cfg : list) {
-				ControlFlowLocation loose = findLooseGraph(cfg);
-				while (loose != null) {
-					EList<Transition> saveT = loose.getOutgoing();
-					for (Transition t : saveT) {
-						deleteTransition(t);
-					}
-					deleteLoc(loose);
-					loose = findLooseGraph(cfg);
-				}
+			if (!EXCT) {
+				cfgutil.deleteLooseGraphs(list);
+			}
+
+			ReorderingUtil rutil = new ReorderingUtil();
+			if (reordering == 1) {
+				rutil.addTSO(list);
 			}
 
 			ResourceSet resSet = new ResourceSetImpl();
@@ -123,55 +116,6 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 			e.printStackTrace();
 		}
 
-	}
-
-	private void deleteTransition(Transition t) {
-		t.setDiagram(null);
-		t.setSource(null);
-		t.getTarget().getIncoming().remove(t);
-		t.setTarget(null);
-		t.setInstruction(null);
-	}
-
-	private void deleteLoc(ControlFlowLocation loose) {
-		loose.setDiagram(null);
-		loose.getOutgoing().clear();
-	}
-
-	private void removeSingleBranches(ArrayList<ControlFlowDiagram> cfgs) {
-		for (ControlFlowDiagram cfg : cfgs) {
-			EList<Transition> list = cfg.getTransitions();
-			for (int i = 0; i < list.size(); i++) {
-				Transition transition = list.get(i);
-				if (transition.getInstruction() instanceof BranchImpl) {
-					if (((Branch) transition.getInstruction()).getDestination() != null) {
-						for (Transition tr1 : transition.getSource().getIncoming()) {
-							tr1.setTarget(transition.getTarget());
-							transition.getTarget().getIncoming().add(tr1);
-						}
-						transition.getSource().getIncoming().clear();
-						transition.getSource().setDiagram(null);
-						transition.getSource().getOutgoing().clear();
-						transition.getTarget().getIncoming().remove(transition);
-						transition.setSource(null);
-						transition.setTarget(null);
-						transition.setDiagram(null);
-						transition.setInstruction(null);
-						i--;
-					}
-				}
-			}
-		}
-	}
-
-	private ControlFlowLocation findLooseGraph(ControlFlowDiagram cfg) {
-		EList<ControlFlowLocation> locs = cfg.getLocations();
-		for (ControlFlowLocation loc : locs) {
-			if (loc.getIncoming().isEmpty() && !(loc.equals(cfg.getStart()))) {
-				return loc;
-			}
-		}
-		return null;
 	}
 
 	private ControlFlowDiagram createCFG(FunctionDefinition function) {
@@ -389,16 +333,5 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 			result = value.getName();
 		}
 		return (result + " ");
-	}
-
-	private void addTSO(ArrayList<ControlFlowDiagram> list) {
-		for (ControlFlowDiagram cfg : list) {
-			ControlFlowLocation start = cfg.getStart();
-			Set<Transition> may = new TreeSet<Transition>();
-			ControlFlowLocation act = start;
-			while (!act.getOutgoing().isEmpty()) {
-
-			}
-		}
 	}
 }
