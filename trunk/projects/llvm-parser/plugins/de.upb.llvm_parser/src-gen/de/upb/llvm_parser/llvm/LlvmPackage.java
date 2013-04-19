@@ -1588,13 +1588,22 @@ public interface LlvmPackage extends EPackage {
 	int ATOMIC_RMW = 37;
 
 	/**
+	 * The feature id for the '<em><b>Operation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATOMIC_RMW__OPERATION = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Adresstype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATOMIC_RMW__ADRESSTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 0;
+	int ATOMIC_RMW__ADRESSTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Adress</b></em>' containment reference.
@@ -1603,7 +1612,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATOMIC_RMW__ADRESS = STANDART_INSTRUCTION_FEATURE_COUNT + 1;
+	int ATOMIC_RMW__ADRESS = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Optype</b></em>' containment reference.
@@ -1612,7 +1621,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATOMIC_RMW__OPTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 2;
+	int ATOMIC_RMW__OPTYPE = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Opvalue</b></em>' containment reference.
@@ -1621,7 +1630,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATOMIC_RMW__OPVALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 3;
+	int ATOMIC_RMW__OPVALUE = STANDART_INSTRUCTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Ordering</b></em>' attribute.
@@ -1630,7 +1639,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATOMIC_RMW__ORDERING = STANDART_INSTRUCTION_FEATURE_COUNT + 4;
+	int ATOMIC_RMW__ORDERING = STANDART_INSTRUCTION_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Atomic RMW</em>' class.
@@ -1639,7 +1648,7 @@ public interface LlvmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATOMIC_RMW_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 5;
+	int ATOMIC_RMW_FEATURE_COUNT = STANDART_INSTRUCTION_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.LoadImpl <em>Load</em>}' class.
@@ -4086,6 +4095,17 @@ public interface LlvmPackage extends EPackage {
 	EClass getAtomicRMW();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.upb.llvm_parser.llvm.AtomicRMW#getOperation <em>Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Operation</em>'.
+	 * @see de.upb.llvm_parser.llvm.AtomicRMW#getOperation()
+	 * @see #getAtomicRMW()
+	 * @generated
+	 */
+	EAttribute getAtomicRMW_Operation();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.AtomicRMW#getAdresstype <em>Adresstype</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6357,6 +6377,14 @@ public interface LlvmPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ATOMIC_RMW = eINSTANCE.getAtomicRMW();
+
+		/**
+		 * The meta object literal for the '<em><b>Operation</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATOMIC_RMW__OPERATION = eINSTANCE.getAtomicRMW_Operation();
 
 		/**
 		 * The meta object literal for the '<em><b>Adresstype</b></em>' containment reference feature.

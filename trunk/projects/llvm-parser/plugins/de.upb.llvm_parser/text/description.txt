@@ -163,6 +163,7 @@ Package llvm <http://www.upb.de/llvm_parser/llvm>
     Attribute ordering : EString
 
   Class AtomicRMW -> StandartInstruction
+    Attribute operation : EString
     Reference adresstype : TypeUse
     Reference adress : Value
     Reference optype : TypeUse

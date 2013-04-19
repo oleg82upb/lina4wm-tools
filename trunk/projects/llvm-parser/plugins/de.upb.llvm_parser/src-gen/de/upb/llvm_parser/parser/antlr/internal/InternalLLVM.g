@@ -4666,15 +4666,25 @@ ruleAtomicRMW returns [EObject current=null]
     {
     	newLeafNode(otherlv_1, grammarAccess.getAtomicRMWAccess().getVolatileKeyword_1());
     }
-)?
-    { 
-        newCompositeNode(grammarAccess.getAtomicRMWAccess().getBIN_OPParserRuleCall_2()); 
-    }
-ruleBIN_OP
-    { 
-        afterParserOrEnumRuleCall();
-    }
+)?(
 (
+		{ 
+	        newCompositeNode(grammarAccess.getAtomicRMWAccess().getOperationBIN_OPParserRuleCall_2_0()); 
+	    }
+		lv_operation_2_0=ruleBIN_OP		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAtomicRMWRule());
+	        }
+       		set(
+       			$current, 
+       			"operation",
+        		lv_operation_2_0, 
+        		"BIN_OP");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
 (
 		{ 
 	        newCompositeNode(grammarAccess.getAtomicRMWAccess().getAdresstypeTypeUseParserRuleCall_3_0()); 

@@ -60,9 +60,32 @@ public class AtomicRMWItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addOperationPropertyDescriptor(object);
 			addOrderingPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Operation feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addOperationPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AtomicRMW_operation_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AtomicRMW_operation_feature", "_UI_AtomicRMW_type"),
+				 LlvmPackage.Literals.ATOMIC_RMW__OPERATION,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -139,7 +162,7 @@ public class AtomicRMWItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((AtomicRMW)object).getOrdering();
+		String label = ((AtomicRMW)object).getOperation();
 		return label == null || label.length() == 0 ?
 			getString("_UI_AtomicRMW_type") :
 			getString("_UI_AtomicRMW_type") + " " + label;
@@ -157,6 +180,7 @@ public class AtomicRMWItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(AtomicRMW.class)) {
+			case LlvmPackage.ATOMIC_RMW__OPERATION:
 			case LlvmPackage.ATOMIC_RMW__ORDERING:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

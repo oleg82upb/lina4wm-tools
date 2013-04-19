@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.AtomicRMWImpl#getOperation <em>Operation</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.AtomicRMWImpl#getAdresstype <em>Adresstype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.AtomicRMWImpl#getAdress <em>Adress</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.AtomicRMWImpl#getOptype <em>Optype</em>}</li>
@@ -33,6 +34,26 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * @generated
  */
 public class AtomicRMWImpl extends StandartInstructionImpl implements AtomicRMW {
+	/**
+	 * The default value of the '{@link #getOperation() <em>Operation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOperation()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String OPERATION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getOperation() <em>Operation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOperation()
+	 * @generated
+	 * @ordered
+	 */
+	protected String operation = OPERATION_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getAdresstype() <em>Adresstype</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -110,6 +131,27 @@ public class AtomicRMWImpl extends StandartInstructionImpl implements AtomicRMW 
 	@Override
 	protected EClass eStaticClass() {
 		return LlvmPackage.Literals.ATOMIC_RMW;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getOperation() {
+		return operation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOperation(String newOperation) {
+		String oldOperation = operation;
+		operation = newOperation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ATOMIC_RMW__OPERATION, oldOperation, operation));
 	}
 
 	/**
@@ -333,6 +375,8 @@ public class AtomicRMWImpl extends StandartInstructionImpl implements AtomicRMW 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case LlvmPackage.ATOMIC_RMW__OPERATION:
+				return getOperation();
 			case LlvmPackage.ATOMIC_RMW__ADRESSTYPE:
 				return getAdresstype();
 			case LlvmPackage.ATOMIC_RMW__ADRESS:
@@ -355,6 +399,9 @@ public class AtomicRMWImpl extends StandartInstructionImpl implements AtomicRMW 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case LlvmPackage.ATOMIC_RMW__OPERATION:
+				setOperation((String)newValue);
+				return;
 			case LlvmPackage.ATOMIC_RMW__ADRESSTYPE:
 				setAdresstype((TypeUse)newValue);
 				return;
@@ -382,6 +429,9 @@ public class AtomicRMWImpl extends StandartInstructionImpl implements AtomicRMW 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case LlvmPackage.ATOMIC_RMW__OPERATION:
+				setOperation(OPERATION_EDEFAULT);
+				return;
 			case LlvmPackage.ATOMIC_RMW__ADRESSTYPE:
 				setAdresstype((TypeUse)null);
 				return;
@@ -409,6 +459,8 @@ public class AtomicRMWImpl extends StandartInstructionImpl implements AtomicRMW 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case LlvmPackage.ATOMIC_RMW__OPERATION:
+				return OPERATION_EDEFAULT == null ? operation != null : !OPERATION_EDEFAULT.equals(operation);
 			case LlvmPackage.ATOMIC_RMW__ADRESSTYPE:
 				return adresstype != null;
 			case LlvmPackage.ATOMIC_RMW__ADRESS:
@@ -433,7 +485,9 @@ public class AtomicRMWImpl extends StandartInstructionImpl implements AtomicRMW 
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (ordering: ");
+		result.append(" (operation: ");
+		result.append(operation);
+		result.append(", ordering: ");
 		result.append(ordering);
 		result.append(')');
 		return result.toString();

@@ -548,10 +548,19 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (adresstype=TypeUse adress=Value optype=TypeUse opvalue=Value ordering=ATOMIC_ORDERING)
+	 *     (
+	 *         operation=BIN_OP 
+	 *         adresstype=TypeUse 
+	 *         adress=Value 
+	 *         optype=TypeUse 
+	 *         opvalue=Value 
+	 *         ordering=ATOMIC_ORDERING
+	 *     )
 	 */
 	protected void sequence_AtomicRMW(EObject context, AtomicRMW semanticObject) {
 		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.ATOMIC_RMW__OPERATION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.ATOMIC_RMW__OPERATION));
 			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.ATOMIC_RMW__ADRESSTYPE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.ATOMIC_RMW__ADRESSTYPE));
 			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.ATOMIC_RMW__ADRESS) == ValueTransient.YES)
@@ -565,6 +574,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getAtomicRMWAccess().getOperationBIN_OPParserRuleCall_2_0(), semanticObject.getOperation());
 		feeder.accept(grammarAccess.getAtomicRMWAccess().getAdresstypeTypeUseParserRuleCall_3_0(), semanticObject.getAdresstype());
 		feeder.accept(grammarAccess.getAtomicRMWAccess().getAdressValueParserRuleCall_4_0(), semanticObject.getAdress());
 		feeder.accept(grammarAccess.getAtomicRMWAccess().getOptypeTypeUseParserRuleCall_6_0(), semanticObject.getOptype());

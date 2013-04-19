@@ -158,6 +158,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//CmpXchg/ordering"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//AtomicRMW">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//AtomicRMW/operation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//AtomicRMW/adresstype"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//AtomicRMW/adress"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//AtomicRMW/optype"/>

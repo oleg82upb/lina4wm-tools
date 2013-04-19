@@ -208,7 +208,7 @@ CmpXchg:
 	ordering=ATOMIC_ORDERING;
 
 AtomicRMW:
-	'atomicrmw' 'volatile'? BIN_OP adresstype=TypeUse adress=Value ',' optype=TypeUse opvalue=Value 'singlethread'?
+	'atomicrmw' 'volatile'? operation = BIN_OP adresstype=TypeUse adress=Value ',' optype=TypeUse opvalue=Value 'singlethread'?
 	ordering=ATOMIC_ORDERING;
 
 Load:
