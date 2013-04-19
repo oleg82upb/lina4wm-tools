@@ -2871,7 +2871,8 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cAtomicrmwKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cVolatileKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final RuleCall cBIN_OPParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final Assignment cOperationAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cOperationBIN_OPParserRuleCall_2_0 = (RuleCall)cOperationAssignment_2.eContents().get(0);
 		private final Assignment cAdresstypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cAdresstypeTypeUseParserRuleCall_3_0 = (RuleCall)cAdresstypeAssignment_3.eContents().get(0);
 		private final Assignment cAdressAssignment_4 = (Assignment)cGroup.eContents().get(4);
@@ -2887,14 +2888,14 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//AtomicRMW:
 		//
-		//	"atomicrmw" "volatile"? BIN_OP adresstype=TypeUse adress=Value "," optype=TypeUse opvalue=Value "singlethread"?
+		//	"atomicrmw" "volatile"? operation=BIN_OP adresstype=TypeUse adress=Value "," optype=TypeUse opvalue=Value
 		//
-		//	ordering=ATOMIC_ORDERING;
+		//	"singlethread"? ordering=ATOMIC_ORDERING;
 		public ParserRule getRule() { return rule; }
 
-		//"atomicrmw" "volatile"? BIN_OP adresstype=TypeUse adress=Value "," optype=TypeUse opvalue=Value "singlethread"?
+		//"atomicrmw" "volatile"? operation=BIN_OP adresstype=TypeUse adress=Value "," optype=TypeUse opvalue=Value
 		//
-		//ordering=ATOMIC_ORDERING
+		//"singlethread"? ordering=ATOMIC_ORDERING
 		public Group getGroup() { return cGroup; }
 
 		//"atomicrmw"
@@ -2903,8 +2904,11 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//"volatile"?
 		public Keyword getVolatileKeyword_1() { return cVolatileKeyword_1; }
 
+		//operation=BIN_OP
+		public Assignment getOperationAssignment_2() { return cOperationAssignment_2; }
+
 		//BIN_OP
-		public RuleCall getBIN_OPParserRuleCall_2() { return cBIN_OPParserRuleCall_2; }
+		public RuleCall getOperationBIN_OPParserRuleCall_2_0() { return cOperationBIN_OPParserRuleCall_2_0; }
 
 		//adresstype=TypeUse
 		public Assignment getAdresstypeAssignment_3() { return cAdresstypeAssignment_3; }
@@ -6078,9 +6082,9 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 
 	//AtomicRMW:
 	//
-	//	"atomicrmw" "volatile"? BIN_OP adresstype=TypeUse adress=Value "," optype=TypeUse opvalue=Value "singlethread"?
+	//	"atomicrmw" "volatile"? operation=BIN_OP adresstype=TypeUse adress=Value "," optype=TypeUse opvalue=Value
 	//
-	//	ordering=ATOMIC_ORDERING;
+	//	"singlethread"? ordering=ATOMIC_ORDERING;
 	public AtomicRMWElements getAtomicRMWAccess() {
 		return (pAtomicRMW != null) ? pAtomicRMW : (pAtomicRMW = new AtomicRMWElements());
 	}

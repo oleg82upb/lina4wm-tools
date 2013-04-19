@@ -323,6 +323,7 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getCmpXchgAccess().getNewtypeAssignment_8(), "rule__CmpXchg__NewtypeAssignment_8");
 					put(grammarAccess.getCmpXchgAccess().getNewvalueAssignment_9(), "rule__CmpXchg__NewvalueAssignment_9");
 					put(grammarAccess.getCmpXchgAccess().getOrderingAssignment_11(), "rule__CmpXchg__OrderingAssignment_11");
+					put(grammarAccess.getAtomicRMWAccess().getOperationAssignment_2(), "rule__AtomicRMW__OperationAssignment_2");
 					put(grammarAccess.getAtomicRMWAccess().getAdresstypeAssignment_3(), "rule__AtomicRMW__AdresstypeAssignment_3");
 					put(grammarAccess.getAtomicRMWAccess().getAdressAssignment_4(), "rule__AtomicRMW__AdressAssignment_4");
 					put(grammarAccess.getAtomicRMWAccess().getOptypeAssignment_6(), "rule__AtomicRMW__OptypeAssignment_6");

@@ -16,6 +16,7 @@ import de.upb.llvm_parser.llvm.Value;
 public interface AtomicRMWValidator {
 	boolean validate();
 
+	boolean validateOperation(String value);
 	boolean validateAdresstype(TypeUse value);
 	boolean validateAdress(Value value);
 	boolean validateOptype(TypeUse value);

@@ -13853,9 +13853,9 @@ rule__AtomicRMW__Group__2__Impl
     }
 :
 (
-{ before(grammarAccess.getAtomicRMWAccess().getBIN_OPParserRuleCall_2()); }
-	ruleBIN_OP
-{ after(grammarAccess.getAtomicRMWAccess().getBIN_OPParserRuleCall_2()); }
+{ before(grammarAccess.getAtomicRMWAccess().getOperationAssignment_2()); }
+(rule__AtomicRMW__OperationAssignment_2)
+{ after(grammarAccess.getAtomicRMWAccess().getOperationAssignment_2()); }
 )
 
 ;
@@ -23126,6 +23126,21 @@ rule__CmpXchg__OrderingAssignment_11
 (
 { before(grammarAccess.getCmpXchgAccess().getOrderingATOMIC_ORDERINGParserRuleCall_11_0()); }
 	ruleATOMIC_ORDERING{ after(grammarAccess.getCmpXchgAccess().getOrderingATOMIC_ORDERINGParserRuleCall_11_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__AtomicRMW__OperationAssignment_2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getAtomicRMWAccess().getOperationBIN_OPParserRuleCall_2_0()); }
+	ruleBIN_OP{ after(grammarAccess.getAtomicRMWAccess().getOperationBIN_OPParserRuleCall_2_0()); }
 )
 
 ;

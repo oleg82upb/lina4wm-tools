@@ -1619,8 +1619,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAtomicRMW_Adresstype() {
-		return (EReference)atomicRMWEClass.getEStructuralFeatures().get(0);
+	public EAttribute getAtomicRMW_Operation() {
+		return (EAttribute)atomicRMWEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1628,7 +1628,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAtomicRMW_Adress() {
+	public EReference getAtomicRMW_Adresstype() {
 		return (EReference)atomicRMWEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1637,7 +1637,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAtomicRMW_Optype() {
+	public EReference getAtomicRMW_Adress() {
 		return (EReference)atomicRMWEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1646,7 +1646,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAtomicRMW_Opvalue() {
+	public EReference getAtomicRMW_Optype() {
 		return (EReference)atomicRMWEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1655,8 +1655,17 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAtomicRMW_Opvalue() {
+		return (EReference)atomicRMWEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getAtomicRMW_Ordering() {
-		return (EAttribute)atomicRMWEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)atomicRMWEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -2815,6 +2824,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		createEAttribute(cmpXchgEClass, CMP_XCHG__ORDERING);
 
 		atomicRMWEClass = createEClass(ATOMIC_RMW);
+		createEAttribute(atomicRMWEClass, ATOMIC_RMW__OPERATION);
 		createEReference(atomicRMWEClass, ATOMIC_RMW__ADRESSTYPE);
 		createEReference(atomicRMWEClass, ATOMIC_RMW__ADRESS);
 		createEReference(atomicRMWEClass, ATOMIC_RMW__OPTYPE);
@@ -3181,6 +3191,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage {
 		initEAttribute(getCmpXchg_Ordering(), ecorePackage.getEString(), "ordering", null, 0, 1, CmpXchg.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(atomicRMWEClass, AtomicRMW.class, "AtomicRMW", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAtomicRMW_Operation(), ecorePackage.getEString(), "operation", null, 0, 1, AtomicRMW.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAtomicRMW_Adresstype(), this.getTypeUse(), null, "adresstype", null, 0, 1, AtomicRMW.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAtomicRMW_Adress(), this.getValue(), null, "adress", null, 0, 1, AtomicRMW.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAtomicRMW_Optype(), this.getTypeUse(), null, "optype", null, 0, 1, AtomicRMW.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
