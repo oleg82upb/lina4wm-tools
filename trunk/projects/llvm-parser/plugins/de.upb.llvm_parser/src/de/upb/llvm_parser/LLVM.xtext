@@ -162,15 +162,15 @@ StandartInstruction:
 	CmpXchg | AtomicRMW | Phi | Select | Call | VariableAttributeAccess | LandingPad;
 
 ArithmeticOperation:
-	('add' | 'fadd' | 'sub' | 'fsub' | 'mul' | 'fmul' | 'udiv' | 'sdiv' | 'fdiv' | 'urem' | 'srem' | 'frem') (('nsw' |
+	operation = ('add' | 'fadd' | 'sub' | 'fsub' | 'mul' | 'fmul' | 'udiv' | 'sdiv' | 'fdiv' | 'urem' | 'srem' | 'frem') (('nsw' |
 	'nuw') ('nuw' | 'nsw')?)?
 	optype=TypeUse value1=Value ',' value2=Value;
 
 LogicOperation:
-	('shl' | 'lshr' | 'ashr' | 'and' | 'or' | 'xor') optype=TypeUse value1=Value ',' value2=Value;
+	operation = ('shl' | 'lshr' | 'ashr' | 'and' | 'or' | 'xor') optype=TypeUse value1=Value ',' value2=Value;
 
 Cast:
-	Cast_OP (('(' from=(TypeUse|Aggregate_Types) value=Value 'to' to=TypeUse ')') | (from=(TypeUse|Aggregate_Types) value=Value 'to' to=TypeUse));
+	operation = Cast_OP (('(' from=(TypeUse|Aggregate_Types) value=Value 'to' to=TypeUse ')') | (from=(TypeUse|Aggregate_Types) value=Value 'to' to=TypeUse));
 
 MetadataValue:
 	(('!' INT) | ('!{' ID_FQN '}') | ('!' ID_FQN))
@@ -264,8 +264,8 @@ ShuffleVector:
 	maskvalue=Value;
 
 Compare:
-	'icmp' I_PREDICATES comptype=TypeUse value1=Value ',' value2=Value |
-	'fcmp' F_PREDICATES comptype=TypeUse value1=Value ',' value2=Value;
+	'icmp' pred = I_PREDICATES comptype=TypeUse value1=Value ',' value2=Value |
+	'fcmp' pred = F_PREDICATES comptype=TypeUse value1=Value ',' value2=Value;
 
 IndirectBranch:
 	'indirectbr' adresstype=TypeUse adress=Value ',' '[' (labeltype+=TypeUse labels+=Value (',' labeltype+=TypeUse labels+=Value)*)? ']';

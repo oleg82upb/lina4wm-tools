@@ -11,6 +11,7 @@ package de.upb.llvm_parser.llvm;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link de.upb.llvm_parser.llvm.LogicOperation#getOperation <em>Operation</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.LogicOperation#getOptype <em>Optype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.LogicOperation#getValue1 <em>Value1</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.LogicOperation#getValue2 <em>Value2</em>}</li>
@@ -22,6 +23,32 @@ package de.upb.llvm_parser.llvm;
  * @generated
  */
 public interface LogicOperation extends StandartInstruction {
+	/**
+	 * Returns the value of the '<em><b>Operation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Operation</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Operation</em>' attribute.
+	 * @see #setOperation(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLogicOperation_Operation()
+	 * @model
+	 * @generated
+	 */
+	String getOperation();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.LogicOperation#getOperation <em>Operation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Operation</em>' attribute.
+	 * @see #getOperation()
+	 * @generated
+	 */
+	void setOperation(String value);
+
 	/**
 	 * Returns the value of the '<em><b>Optype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

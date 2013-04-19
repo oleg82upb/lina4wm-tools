@@ -129,6 +129,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ReturnInstruction" eSuperTypes="#//Instruction"/>
   <eClassifiers xsi:type="ecore:EClass" name="StandartInstruction" eSuperTypes="#//Instruction"/>
   <eClassifiers xsi:type="ecore:EClass" name="ArithmeticOperation" eSuperTypes="#//StandartInstruction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="optype" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value1" eType="#//Value"
@@ -137,6 +138,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LogicOperation" eSuperTypes="#//StandartInstruction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="optype" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value1" eType="#//Value"
@@ -145,6 +147,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Cast" eSuperTypes="#//Value #//StandartInstruction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"
@@ -354,6 +357,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Compare" eSuperTypes="#//StandartInstruction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pred" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="comptype" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value1" eType="#//Value"

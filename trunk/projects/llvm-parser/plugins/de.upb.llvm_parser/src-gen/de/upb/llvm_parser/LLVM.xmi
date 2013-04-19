@@ -910,19 +910,21 @@
         <classifier xsi:type="ecore:EClass" href="http://www.upb.de/llvm_parser/llvm#//ArithmeticOperation"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Alternatives">
-          <elements xsi:type="xtext:Keyword" value="add"/>
-          <elements xsi:type="xtext:Keyword" value="fadd"/>
-          <elements xsi:type="xtext:Keyword" value="sub"/>
-          <elements xsi:type="xtext:Keyword" value="fsub"/>
-          <elements xsi:type="xtext:Keyword" value="mul"/>
-          <elements xsi:type="xtext:Keyword" value="fmul"/>
-          <elements xsi:type="xtext:Keyword" value="udiv"/>
-          <elements xsi:type="xtext:Keyword" value="sdiv"/>
-          <elements xsi:type="xtext:Keyword" value="fdiv"/>
-          <elements xsi:type="xtext:Keyword" value="urem"/>
-          <elements xsi:type="xtext:Keyword" value="srem"/>
-          <elements xsi:type="xtext:Keyword" value="frem"/>
+        <elements xsi:type="xtext:Assignment" feature="operation" operator="=">
+          <terminal xsi:type="xtext:Alternatives">
+            <elements xsi:type="xtext:Keyword" value="add"/>
+            <elements xsi:type="xtext:Keyword" value="fadd"/>
+            <elements xsi:type="xtext:Keyword" value="sub"/>
+            <elements xsi:type="xtext:Keyword" value="fsub"/>
+            <elements xsi:type="xtext:Keyword" value="mul"/>
+            <elements xsi:type="xtext:Keyword" value="fmul"/>
+            <elements xsi:type="xtext:Keyword" value="udiv"/>
+            <elements xsi:type="xtext:Keyword" value="sdiv"/>
+            <elements xsi:type="xtext:Keyword" value="fdiv"/>
+            <elements xsi:type="xtext:Keyword" value="urem"/>
+            <elements xsi:type="xtext:Keyword" value="srem"/>
+            <elements xsi:type="xtext:Keyword" value="frem"/>
+          </terminal>
         </elements>
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Alternatives">
@@ -951,13 +953,15 @@
         <classifier xsi:type="ecore:EClass" href="http://www.upb.de/llvm_parser/llvm#//LogicOperation"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Alternatives">
-          <elements xsi:type="xtext:Keyword" value="shl"/>
-          <elements xsi:type="xtext:Keyword" value="lshr"/>
-          <elements xsi:type="xtext:Keyword" value="ashr"/>
-          <elements xsi:type="xtext:Keyword" value="and"/>
-          <elements xsi:type="xtext:Keyword" value="or"/>
-          <elements xsi:type="xtext:Keyword" value="xor"/>
+        <elements xsi:type="xtext:Assignment" feature="operation" operator="=">
+          <terminal xsi:type="xtext:Alternatives">
+            <elements xsi:type="xtext:Keyword" value="shl"/>
+            <elements xsi:type="xtext:Keyword" value="lshr"/>
+            <elements xsi:type="xtext:Keyword" value="ashr"/>
+            <elements xsi:type="xtext:Keyword" value="and"/>
+            <elements xsi:type="xtext:Keyword" value="or"/>
+            <elements xsi:type="xtext:Keyword" value="xor"/>
+          </terminal>
         </elements>
         <elements xsi:type="xtext:Assignment" feature="optype" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
@@ -976,7 +980,9 @@
         <classifier xsi:type="ecore:EClass" href="http://www.upb.de/llvm_parser/llvm#//Cast"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.78"/>
+        <elements xsi:type="xtext:Assignment" feature="operation" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.78"/>
+        </elements>
         <elements xsi:type="xtext:Alternatives">
           <elements xsi:type="xtext:Group">
             <elements xsi:type="xtext:Keyword" value="("/>
@@ -1689,7 +1695,9 @@
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:Group">
           <elements xsi:type="xtext:Keyword" value="icmp"/>
-          <elements xsi:type="xtext:RuleCall" rule="/0/@rules.79"/>
+          <elements xsi:type="xtext:Assignment" feature="pred" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.79"/>
+          </elements>
           <elements xsi:type="xtext:Assignment" feature="comptype" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
           </elements>
@@ -1703,7 +1711,9 @@
         </elements>
         <elements xsi:type="xtext:Group">
           <elements xsi:type="xtext:Keyword" value="fcmp"/>
-          <elements xsi:type="xtext:RuleCall" rule="/0/@rules.80"/>
+          <elements xsi:type="xtext:Assignment" feature="pred" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.80"/>
+          </elements>
           <elements xsi:type="xtext:Assignment" feature="comptype" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
           </elements>

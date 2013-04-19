@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.CastImpl#getOperation <em>Operation</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.CastImpl#getFrom <em>From</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.CastImpl#getValue <em>Value</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.CastImpl#getTo <em>To</em>}</li>
@@ -32,6 +33,26 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * @generated
  */
 public class CastImpl extends ValueImpl implements Cast {
+	/**
+	 * The default value of the '{@link #getOperation() <em>Operation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOperation()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String OPERATION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getOperation() <em>Operation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOperation()
+	 * @generated
+	 * @ordered
+	 */
+	protected String operation = OPERATION_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getFrom() <em>From</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -79,6 +100,27 @@ public class CastImpl extends ValueImpl implements Cast {
 	@Override
 	protected EClass eStaticClass() {
 		return LlvmPackage.Literals.CAST;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getOperation() {
+		return operation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOperation(String newOperation) {
+		String oldOperation = operation;
+		operation = newOperation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CAST__OPERATION, oldOperation, operation));
 	}
 
 	/**
@@ -236,6 +278,8 @@ public class CastImpl extends ValueImpl implements Cast {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case LlvmPackage.CAST__OPERATION:
+				return getOperation();
 			case LlvmPackage.CAST__FROM:
 				return getFrom();
 			case LlvmPackage.CAST__VALUE:
@@ -254,6 +298,9 @@ public class CastImpl extends ValueImpl implements Cast {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case LlvmPackage.CAST__OPERATION:
+				setOperation((String)newValue);
+				return;
 			case LlvmPackage.CAST__FROM:
 				setFrom((EObject)newValue);
 				return;
@@ -275,6 +322,9 @@ public class CastImpl extends ValueImpl implements Cast {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case LlvmPackage.CAST__OPERATION:
+				setOperation(OPERATION_EDEFAULT);
+				return;
 			case LlvmPackage.CAST__FROM:
 				setFrom((EObject)null);
 				return;
@@ -296,6 +346,8 @@ public class CastImpl extends ValueImpl implements Cast {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case LlvmPackage.CAST__OPERATION:
+				return OPERATION_EDEFAULT == null ? operation != null : !OPERATION_EDEFAULT.equals(operation);
 			case LlvmPackage.CAST__FROM:
 				return from != null;
 			case LlvmPackage.CAST__VALUE:
@@ -304,6 +356,22 @@ public class CastImpl extends ValueImpl implements Cast {
 				return to != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (operation: ");
+		result.append(operation);
+		result.append(')');
+		return result.toString();
 	}
 
 } //CastImpl

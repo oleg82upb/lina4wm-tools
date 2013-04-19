@@ -16,6 +16,7 @@ import de.upb.llvm_parser.llvm.Value;
 public interface CompareValidator {
 	boolean validate();
 
+	boolean validatePred(String value);
 	boolean validateComptype(TypeUse value);
 	boolean validateValue1(Value value);
 	boolean validateValue2(Value value);

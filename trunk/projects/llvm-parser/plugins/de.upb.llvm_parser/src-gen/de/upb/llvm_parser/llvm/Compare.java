@@ -11,6 +11,7 @@ package de.upb.llvm_parser.llvm;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link de.upb.llvm_parser.llvm.Compare#getPred <em>Pred</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Compare#getComptype <em>Comptype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Compare#getValue1 <em>Value1</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Compare#getValue2 <em>Value2</em>}</li>
@@ -22,6 +23,32 @@ package de.upb.llvm_parser.llvm;
  * @generated
  */
 public interface Compare extends StandartInstruction {
+	/**
+	 * Returns the value of the '<em><b>Pred</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Pred</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Pred</em>' attribute.
+	 * @see #setPred(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCompare_Pred()
+	 * @model
+	 * @generated
+	 */
+	String getPred();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Compare#getPred <em>Pred</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Pred</em>' attribute.
+	 * @see #getPred()
+	 * @generated
+	 */
+	void setPred(String value);
+
 	/**
 	 * Returns the value of the '<em><b>Comptype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

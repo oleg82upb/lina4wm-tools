@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link de.upb.llvm_parser.llvm.Cast#getOperation <em>Operation</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Cast#getFrom <em>From</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Cast#getValue <em>Value</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Cast#getTo <em>To</em>}</li>
@@ -23,6 +24,32 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Cast extends Value, StandartInstruction {
+	/**
+	 * Returns the value of the '<em><b>Operation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Operation</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Operation</em>' attribute.
+	 * @see #setOperation(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCast_Operation()
+	 * @model
+	 * @generated
+	 */
+	String getOperation();
+
+	/**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Cast#getOperation <em>Operation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Operation</em>' attribute.
+	 * @see #getOperation()
+	 * @generated
+	 */
+	void setOperation(String value);
+
 	/**
 	 * Returns the value of the '<em><b>From</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

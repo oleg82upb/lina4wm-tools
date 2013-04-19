@@ -1878,19 +1878,20 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 	public class ArithmeticOperationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ArithmeticOperation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
-		private final Keyword cAddKeyword_0_0 = (Keyword)cAlternatives_0.eContents().get(0);
-		private final Keyword cFaddKeyword_0_1 = (Keyword)cAlternatives_0.eContents().get(1);
-		private final Keyword cSubKeyword_0_2 = (Keyword)cAlternatives_0.eContents().get(2);
-		private final Keyword cFsubKeyword_0_3 = (Keyword)cAlternatives_0.eContents().get(3);
-		private final Keyword cMulKeyword_0_4 = (Keyword)cAlternatives_0.eContents().get(4);
-		private final Keyword cFmulKeyword_0_5 = (Keyword)cAlternatives_0.eContents().get(5);
-		private final Keyword cUdivKeyword_0_6 = (Keyword)cAlternatives_0.eContents().get(6);
-		private final Keyword cSdivKeyword_0_7 = (Keyword)cAlternatives_0.eContents().get(7);
-		private final Keyword cFdivKeyword_0_8 = (Keyword)cAlternatives_0.eContents().get(8);
-		private final Keyword cUremKeyword_0_9 = (Keyword)cAlternatives_0.eContents().get(9);
-		private final Keyword cSremKeyword_0_10 = (Keyword)cAlternatives_0.eContents().get(10);
-		private final Keyword cFremKeyword_0_11 = (Keyword)cAlternatives_0.eContents().get(11);
+		private final Assignment cOperationAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Alternatives cOperationAlternatives_0_0 = (Alternatives)cOperationAssignment_0.eContents().get(0);
+		private final Keyword cOperationAddKeyword_0_0_0 = (Keyword)cOperationAlternatives_0_0.eContents().get(0);
+		private final Keyword cOperationFaddKeyword_0_0_1 = (Keyword)cOperationAlternatives_0_0.eContents().get(1);
+		private final Keyword cOperationSubKeyword_0_0_2 = (Keyword)cOperationAlternatives_0_0.eContents().get(2);
+		private final Keyword cOperationFsubKeyword_0_0_3 = (Keyword)cOperationAlternatives_0_0.eContents().get(3);
+		private final Keyword cOperationMulKeyword_0_0_4 = (Keyword)cOperationAlternatives_0_0.eContents().get(4);
+		private final Keyword cOperationFmulKeyword_0_0_5 = (Keyword)cOperationAlternatives_0_0.eContents().get(5);
+		private final Keyword cOperationUdivKeyword_0_0_6 = (Keyword)cOperationAlternatives_0_0.eContents().get(6);
+		private final Keyword cOperationSdivKeyword_0_0_7 = (Keyword)cOperationAlternatives_0_0.eContents().get(7);
+		private final Keyword cOperationFdivKeyword_0_0_8 = (Keyword)cOperationAlternatives_0_0.eContents().get(8);
+		private final Keyword cOperationUremKeyword_0_0_9 = (Keyword)cOperationAlternatives_0_0.eContents().get(9);
+		private final Keyword cOperationSremKeyword_0_0_10 = (Keyword)cOperationAlternatives_0_0.eContents().get(10);
+		private final Keyword cOperationFremKeyword_0_0_11 = (Keyword)cOperationAlternatives_0_0.eContents().get(11);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Alternatives cAlternatives_1_0 = (Alternatives)cGroup_1.eContents().get(0);
 		private final Keyword cNswKeyword_1_0_0 = (Keyword)cAlternatives_1_0.eContents().get(0);
@@ -1908,54 +1909,57 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ArithmeticOperation:
 		//
-		//	("add" | "fadd" | "sub" | "fsub" | "mul" | "fmul" | "udiv" | "sdiv" | "fdiv" | "urem" | "srem" | "frem") (("nsw" |
+		//	operation=("add" | "fadd" | "sub" | "fsub" | "mul" | "fmul" | "udiv" | "sdiv" | "fdiv" | "urem" | "srem" | "frem")
 		//
-		//	"nuw") ("nuw" | "nsw")?)? optype=TypeUse value1=Value "," value2=Value;
+		//	(("nsw" | "nuw") ("nuw" | "nsw")?)? optype=TypeUse value1=Value "," value2=Value;
 		public ParserRule getRule() { return rule; }
 
-		//("add" | "fadd" | "sub" | "fsub" | "mul" | "fmul" | "udiv" | "sdiv" | "fdiv" | "urem" | "srem" | "frem") (("nsw" |
+		//operation=("add" | "fadd" | "sub" | "fsub" | "mul" | "fmul" | "udiv" | "sdiv" | "fdiv" | "urem" | "srem" | "frem")
 		//
-		//"nuw") ("nuw" | "nsw")?)? optype=TypeUse value1=Value "," value2=Value
+		//(("nsw" | "nuw") ("nuw" | "nsw")?)? optype=TypeUse value1=Value "," value2=Value
 		public Group getGroup() { return cGroup; }
 
+		//operation=("add" | "fadd" | "sub" | "fsub" | "mul" | "fmul" | "udiv" | "sdiv" | "fdiv" | "urem" | "srem" | "frem")
+		public Assignment getOperationAssignment_0() { return cOperationAssignment_0; }
+
 		//"add" | "fadd" | "sub" | "fsub" | "mul" | "fmul" | "udiv" | "sdiv" | "fdiv" | "urem" | "srem" | "frem"
-		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+		public Alternatives getOperationAlternatives_0_0() { return cOperationAlternatives_0_0; }
 
 		//"add"
-		public Keyword getAddKeyword_0_0() { return cAddKeyword_0_0; }
+		public Keyword getOperationAddKeyword_0_0_0() { return cOperationAddKeyword_0_0_0; }
 
 		//"fadd"
-		public Keyword getFaddKeyword_0_1() { return cFaddKeyword_0_1; }
+		public Keyword getOperationFaddKeyword_0_0_1() { return cOperationFaddKeyword_0_0_1; }
 
 		//"sub"
-		public Keyword getSubKeyword_0_2() { return cSubKeyword_0_2; }
+		public Keyword getOperationSubKeyword_0_0_2() { return cOperationSubKeyword_0_0_2; }
 
 		//"fsub"
-		public Keyword getFsubKeyword_0_3() { return cFsubKeyword_0_3; }
+		public Keyword getOperationFsubKeyword_0_0_3() { return cOperationFsubKeyword_0_0_3; }
 
 		//"mul"
-		public Keyword getMulKeyword_0_4() { return cMulKeyword_0_4; }
+		public Keyword getOperationMulKeyword_0_0_4() { return cOperationMulKeyword_0_0_4; }
 
 		//"fmul"
-		public Keyword getFmulKeyword_0_5() { return cFmulKeyword_0_5; }
+		public Keyword getOperationFmulKeyword_0_0_5() { return cOperationFmulKeyword_0_0_5; }
 
 		//"udiv"
-		public Keyword getUdivKeyword_0_6() { return cUdivKeyword_0_6; }
+		public Keyword getOperationUdivKeyword_0_0_6() { return cOperationUdivKeyword_0_0_6; }
 
 		//"sdiv"
-		public Keyword getSdivKeyword_0_7() { return cSdivKeyword_0_7; }
+		public Keyword getOperationSdivKeyword_0_0_7() { return cOperationSdivKeyword_0_0_7; }
 
 		//"fdiv"
-		public Keyword getFdivKeyword_0_8() { return cFdivKeyword_0_8; }
+		public Keyword getOperationFdivKeyword_0_0_8() { return cOperationFdivKeyword_0_0_8; }
 
 		//"urem"
-		public Keyword getUremKeyword_0_9() { return cUremKeyword_0_9; }
+		public Keyword getOperationUremKeyword_0_0_9() { return cOperationUremKeyword_0_0_9; }
 
 		//"srem"
-		public Keyword getSremKeyword_0_10() { return cSremKeyword_0_10; }
+		public Keyword getOperationSremKeyword_0_0_10() { return cOperationSremKeyword_0_0_10; }
 
 		//"frem"
-		public Keyword getFremKeyword_0_11() { return cFremKeyword_0_11; }
+		public Keyword getOperationFremKeyword_0_0_11() { return cOperationFremKeyword_0_0_11; }
 
 		//(("nsw" | "nuw") ("nuw" | "nsw")?)?
 		public Group getGroup_1() { return cGroup_1; }
@@ -2003,13 +2007,14 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 	public class LogicOperationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LogicOperation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
-		private final Keyword cShlKeyword_0_0 = (Keyword)cAlternatives_0.eContents().get(0);
-		private final Keyword cLshrKeyword_0_1 = (Keyword)cAlternatives_0.eContents().get(1);
-		private final Keyword cAshrKeyword_0_2 = (Keyword)cAlternatives_0.eContents().get(2);
-		private final Keyword cAndKeyword_0_3 = (Keyword)cAlternatives_0.eContents().get(3);
-		private final Keyword cOrKeyword_0_4 = (Keyword)cAlternatives_0.eContents().get(4);
-		private final Keyword cXorKeyword_0_5 = (Keyword)cAlternatives_0.eContents().get(5);
+		private final Assignment cOperationAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Alternatives cOperationAlternatives_0_0 = (Alternatives)cOperationAssignment_0.eContents().get(0);
+		private final Keyword cOperationShlKeyword_0_0_0 = (Keyword)cOperationAlternatives_0_0.eContents().get(0);
+		private final Keyword cOperationLshrKeyword_0_0_1 = (Keyword)cOperationAlternatives_0_0.eContents().get(1);
+		private final Keyword cOperationAshrKeyword_0_0_2 = (Keyword)cOperationAlternatives_0_0.eContents().get(2);
+		private final Keyword cOperationAndKeyword_0_0_3 = (Keyword)cOperationAlternatives_0_0.eContents().get(3);
+		private final Keyword cOperationOrKeyword_0_0_4 = (Keyword)cOperationAlternatives_0_0.eContents().get(4);
+		private final Keyword cOperationXorKeyword_0_0_5 = (Keyword)cOperationAlternatives_0_0.eContents().get(5);
 		private final Assignment cOptypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cOptypeTypeUseParserRuleCall_1_0 = (RuleCall)cOptypeAssignment_1.eContents().get(0);
 		private final Assignment cValue1Assignment_2 = (Assignment)cGroup.eContents().get(2);
@@ -2020,32 +2025,35 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//LogicOperation:
 		//
-		//	("shl" | "lshr" | "ashr" | "and" | "or" | "xor") optype=TypeUse value1=Value "," value2=Value;
+		//	operation=("shl" | "lshr" | "ashr" | "and" | "or" | "xor") optype=TypeUse value1=Value "," value2=Value;
 		public ParserRule getRule() { return rule; }
 
-		//("shl" | "lshr" | "ashr" | "and" | "or" | "xor") optype=TypeUse value1=Value "," value2=Value
+		//operation=("shl" | "lshr" | "ashr" | "and" | "or" | "xor") optype=TypeUse value1=Value "," value2=Value
 		public Group getGroup() { return cGroup; }
 
+		//operation=("shl" | "lshr" | "ashr" | "and" | "or" | "xor")
+		public Assignment getOperationAssignment_0() { return cOperationAssignment_0; }
+
 		//"shl" | "lshr" | "ashr" | "and" | "or" | "xor"
-		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+		public Alternatives getOperationAlternatives_0_0() { return cOperationAlternatives_0_0; }
 
 		//"shl"
-		public Keyword getShlKeyword_0_0() { return cShlKeyword_0_0; }
+		public Keyword getOperationShlKeyword_0_0_0() { return cOperationShlKeyword_0_0_0; }
 
 		//"lshr"
-		public Keyword getLshrKeyword_0_1() { return cLshrKeyword_0_1; }
+		public Keyword getOperationLshrKeyword_0_0_1() { return cOperationLshrKeyword_0_0_1; }
 
 		//"ashr"
-		public Keyword getAshrKeyword_0_2() { return cAshrKeyword_0_2; }
+		public Keyword getOperationAshrKeyword_0_0_2() { return cOperationAshrKeyword_0_0_2; }
 
 		//"and"
-		public Keyword getAndKeyword_0_3() { return cAndKeyword_0_3; }
+		public Keyword getOperationAndKeyword_0_0_3() { return cOperationAndKeyword_0_0_3; }
 
 		//"or"
-		public Keyword getOrKeyword_0_4() { return cOrKeyword_0_4; }
+		public Keyword getOperationOrKeyword_0_0_4() { return cOperationOrKeyword_0_0_4; }
 
 		//"xor"
-		public Keyword getXorKeyword_0_5() { return cXorKeyword_0_5; }
+		public Keyword getOperationXorKeyword_0_0_5() { return cOperationXorKeyword_0_0_5; }
 
 		//optype=TypeUse
 		public Assignment getOptypeAssignment_1() { return cOptypeAssignment_1; }
@@ -2072,7 +2080,8 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 	public class CastElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Cast");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cCast_OPParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Assignment cOperationAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cOperationCast_OPParserRuleCall_0_0 = (RuleCall)cOperationAssignment_0.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
 		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
@@ -2099,18 +2108,21 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Cast:
 		//
-		//	Cast_OP ("(" from=(TypeUse | Aggregate_Types) value=Value "to" to=TypeUse ")" | from=(TypeUse | Aggregate_Types)
+		//	operation=Cast_OP ("(" from=(TypeUse | Aggregate_Types) value=Value "to" to=TypeUse ")" | from=(TypeUse |
 		//
-		//	value=Value "to" to=TypeUse);
+		//	Aggregate_Types) value=Value "to" to=TypeUse);
 		public ParserRule getRule() { return rule; }
 
-		//Cast_OP ("(" from=(TypeUse | Aggregate_Types) value=Value "to" to=TypeUse ")" | from=(TypeUse | Aggregate_Types)
+		//operation=Cast_OP ("(" from=(TypeUse | Aggregate_Types) value=Value "to" to=TypeUse ")" | from=(TypeUse |
 		//
-		//value=Value "to" to=TypeUse)
+		//Aggregate_Types) value=Value "to" to=TypeUse)
 		public Group getGroup() { return cGroup; }
 
+		//operation=Cast_OP
+		public Assignment getOperationAssignment_0() { return cOperationAssignment_0; }
+
 		//Cast_OP
-		public RuleCall getCast_OPParserRuleCall_0() { return cCast_OPParserRuleCall_0; }
+		public RuleCall getOperationCast_OPParserRuleCall_0_0() { return cOperationCast_OPParserRuleCall_0_0; }
 
 		//"(" from=(TypeUse | Aggregate_Types) value=Value "to" to=TypeUse ")" | from=(TypeUse | Aggregate_Types) value=Value "to"
 		//
@@ -4036,7 +4048,8 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Keyword cIcmpKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
-		private final RuleCall cI_PREDICATESParserRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
+		private final Assignment cPredAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cPredI_PREDICATESParserRuleCall_0_1_0 = (RuleCall)cPredAssignment_0_1.eContents().get(0);
 		private final Assignment cComptypeAssignment_0_2 = (Assignment)cGroup_0.eContents().get(2);
 		private final RuleCall cComptypeTypeUseParserRuleCall_0_2_0 = (RuleCall)cComptypeAssignment_0_2.eContents().get(0);
 		private final Assignment cValue1Assignment_0_3 = (Assignment)cGroup_0.eContents().get(3);
@@ -4046,7 +4059,8 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cValue2ValueParserRuleCall_0_5_0 = (RuleCall)cValue2Assignment_0_5.eContents().get(0);
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
 		private final Keyword cFcmpKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final RuleCall cF_PREDICATESParserRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
+		private final Assignment cPredAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cPredF_PREDICATESParserRuleCall_1_1_0 = (RuleCall)cPredAssignment_1_1.eContents().get(0);
 		private final Assignment cComptypeAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cComptypeTypeUseParserRuleCall_1_2_0 = (RuleCall)cComptypeAssignment_1_2.eContents().get(0);
 		private final Assignment cValue1Assignment_1_3 = (Assignment)cGroup_1.eContents().get(3);
@@ -4057,24 +4071,27 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Compare:
 		//
-		//	"icmp" I_PREDICATES comptype=TypeUse value1=Value "," value2=Value | "fcmp" F_PREDICATES comptype=TypeUse
+		//	"icmp" pred=I_PREDICATES comptype=TypeUse value1=Value "," value2=Value | "fcmp" pred=F_PREDICATES comptype=TypeUse
 		//
 		//	value1=Value "," value2=Value;
 		public ParserRule getRule() { return rule; }
 
-		//"icmp" I_PREDICATES comptype=TypeUse value1=Value "," value2=Value | "fcmp" F_PREDICATES comptype=TypeUse value1=Value
+		//"icmp" pred=I_PREDICATES comptype=TypeUse value1=Value "," value2=Value | "fcmp" pred=F_PREDICATES comptype=TypeUse
 		//
-		//"," value2=Value
+		//value1=Value "," value2=Value
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"icmp" I_PREDICATES comptype=TypeUse value1=Value "," value2=Value
+		//"icmp" pred=I_PREDICATES comptype=TypeUse value1=Value "," value2=Value
 		public Group getGroup_0() { return cGroup_0; }
 
 		//"icmp"
 		public Keyword getIcmpKeyword_0_0() { return cIcmpKeyword_0_0; }
 
+		//pred=I_PREDICATES
+		public Assignment getPredAssignment_0_1() { return cPredAssignment_0_1; }
+
 		//I_PREDICATES
-		public RuleCall getI_PREDICATESParserRuleCall_0_1() { return cI_PREDICATESParserRuleCall_0_1; }
+		public RuleCall getPredI_PREDICATESParserRuleCall_0_1_0() { return cPredI_PREDICATESParserRuleCall_0_1_0; }
 
 		//comptype=TypeUse
 		public Assignment getComptypeAssignment_0_2() { return cComptypeAssignment_0_2; }
@@ -4097,14 +4114,17 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//Value
 		public RuleCall getValue2ValueParserRuleCall_0_5_0() { return cValue2ValueParserRuleCall_0_5_0; }
 
-		//"fcmp" F_PREDICATES comptype=TypeUse value1=Value "," value2=Value
+		//"fcmp" pred=F_PREDICATES comptype=TypeUse value1=Value "," value2=Value
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"fcmp"
 		public Keyword getFcmpKeyword_1_0() { return cFcmpKeyword_1_0; }
 
+		//pred=F_PREDICATES
+		public Assignment getPredAssignment_1_1() { return cPredAssignment_1_1; }
+
 		//F_PREDICATES
-		public RuleCall getF_PREDICATESParserRuleCall_1_1() { return cF_PREDICATESParserRuleCall_1_1; }
+		public RuleCall getPredF_PREDICATESParserRuleCall_1_1_0() { return cPredF_PREDICATESParserRuleCall_1_1_0; }
 
 		//comptype=TypeUse
 		public Assignment getComptypeAssignment_1_2() { return cComptypeAssignment_1_2; }
@@ -5923,9 +5943,9 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 
 	//ArithmeticOperation:
 	//
-	//	("add" | "fadd" | "sub" | "fsub" | "mul" | "fmul" | "udiv" | "sdiv" | "fdiv" | "urem" | "srem" | "frem") (("nsw" |
+	//	operation=("add" | "fadd" | "sub" | "fsub" | "mul" | "fmul" | "udiv" | "sdiv" | "fdiv" | "urem" | "srem" | "frem")
 	//
-	//	"nuw") ("nuw" | "nsw")?)? optype=TypeUse value1=Value "," value2=Value;
+	//	(("nsw" | "nuw") ("nuw" | "nsw")?)? optype=TypeUse value1=Value "," value2=Value;
 	public ArithmeticOperationElements getArithmeticOperationAccess() {
 		return (pArithmeticOperation != null) ? pArithmeticOperation : (pArithmeticOperation = new ArithmeticOperationElements());
 	}
@@ -5936,7 +5956,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 
 	//LogicOperation:
 	//
-	//	("shl" | "lshr" | "ashr" | "and" | "or" | "xor") optype=TypeUse value1=Value "," value2=Value;
+	//	operation=("shl" | "lshr" | "ashr" | "and" | "or" | "xor") optype=TypeUse value1=Value "," value2=Value;
 	public LogicOperationElements getLogicOperationAccess() {
 		return (pLogicOperation != null) ? pLogicOperation : (pLogicOperation = new LogicOperationElements());
 	}
@@ -5947,9 +5967,9 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 
 	//Cast:
 	//
-	//	Cast_OP ("(" from=(TypeUse | Aggregate_Types) value=Value "to" to=TypeUse ")" | from=(TypeUse | Aggregate_Types)
+	//	operation=Cast_OP ("(" from=(TypeUse | Aggregate_Types) value=Value "to" to=TypeUse ")" | from=(TypeUse |
 	//
-	//	value=Value "to" to=TypeUse);
+	//	Aggregate_Types) value=Value "to" to=TypeUse);
 	public CastElements getCastAccess() {
 		return (pCast != null) ? pCast : (pCast = new CastElements());
 	}
@@ -6223,7 +6243,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 
 	//Compare:
 	//
-	//	"icmp" I_PREDICATES comptype=TypeUse value1=Value "," value2=Value | "fcmp" F_PREDICATES comptype=TypeUse
+	//	"icmp" pred=I_PREDICATES comptype=TypeUse value1=Value "," value2=Value | "fcmp" pred=F_PREDICATES comptype=TypeUse
 	//
 	//	value1=Value "," value2=Value;
 	public CompareElements getCompareAccess() {
