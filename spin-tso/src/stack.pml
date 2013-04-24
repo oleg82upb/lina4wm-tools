@@ -177,10 +177,8 @@ doCond:
 	read(ss, v7);
 	//ptrtoint ...
 	read(n, v9);
-	atomic{
 	casLPPush(head2, v7, v9, v11, v);
 	
-	}
 	if 
 		:: v11 == false -> goto doBody;
 		:: else -> skip;
