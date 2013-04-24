@@ -157,9 +157,8 @@ bb:
 	read(ss, v16);
 	read(this_addr, v18);
 	getelementptr(Stack, v18, 0, v19);
-	atomic{
 	casLPPush(v19, v16, v14, v21, v);		// v21= CAS(this_addr,ss, n) 
-	}
+	
 	if 
 		:: v21 == false -> goto bb;
 		:: else -> skip;
