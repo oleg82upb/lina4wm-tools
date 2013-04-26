@@ -25,60 +25,23 @@
         eType="#//Instruction" eOpposite="#//Instruction/function"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Label" abstract="true" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="instruction" eType="#//Instruction"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//Function"
         eOpposite="#//Function/labels"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instruction" eType="#//Instruction"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Instruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetregister" eType="#//Variable"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//Function"
         eOpposite="#//Function/instructions"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instruction" eType="#//InstructionEnum"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MemoryInstruction" abstract="true" eSuperTypes="#//Instruction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="LocalInstruction" eSuperTypes="#//Instruction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Alloca" eSuperTypes="#//MemoryInstruction">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicRMW" eSuperTypes="#//Trinary">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operation" eType="#//AtomicEnum"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AtomicRMW" eSuperTypes="#//MemoryInstruction">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="addresstype" eType="#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="address" eType="#//Variable"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="valuetype" eType="#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArithmeticOperation" eSuperTypes="#//Trinary">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operation" eType="#//ArithmeticEnum"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CompareAndSwap" eSuperTypes="#//MemoryInstruction">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="addresstype" eType="#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="address" eType="#//Variable"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="comparetype" eType="#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="compare" eType="#//Value"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="newtype" eType="#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="new" eType="#//Value"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Fence" eSuperTypes="#//MemoryInstruction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="GetElementPtr" eSuperTypes="#//MemoryInstruction">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="indicies" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="aggregate" eType="#//Value"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Load" eSuperTypes="#//MemoryInstruction">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="addresstype" eType="#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="address" eType="#//Variable"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Store" eSuperTypes="#//MemoryInstruction">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="valuetype" eType="#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="addresstype" eType="#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="address" eType="#//Variable"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ArithmeticOperation" eSuperTypes="#//LocalInstruction">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="valuetype1" eType="#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value1" eType="#//Value"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="valuetype2" eType="#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value2" eType="#//Value"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Call" eSuperTypes="#//LocalInstruction">
+  <eClassifiers xsi:type="ecore:EClass" name="Call" eSuperTypes="#//Unary">
     <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//Function"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameter">
       <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
@@ -86,38 +49,60 @@
       </eGenericType>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Cast" eSuperTypes="#//LocalInstruction">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="cast" eType="#//Value"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Compare" eSuperTypes="#//Trinary">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operation" eType="#//CompareEnum"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Compare" eSuperTypes="#//LocalInstruction">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="valuetype1" eType="#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value1" eType="#//Value"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="valuetype2" eType="#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value2" eType="#//Value"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ConditionalBranch" eSuperTypes="#//LocalInstruction">
+  <eClassifiers xsi:type="ecore:EClass" name="ConditionalBranch" eSuperTypes="#//Unary">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass LLL_Expression.ecore#//Expression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trueLabel" eType="#//Label"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="falseLabel" eType="#//Label"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Goto" eSuperTypes="#//LocalInstruction">
+  <eClassifiers xsi:type="ecore:EClass" name="Goto" eSuperTypes="#//Unary">
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Label"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LogicOperation" eSuperTypes="#//LocalInstruction">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="valuetype1" eType="#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value1" eType="#//Value"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="valuetype2" eType="#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value2" eType="#//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicOperation" eSuperTypes="#//Trinary">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operation" eType="#//LogicEnum"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Return" eSuperTypes="#//LocalInstruction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Constant" eSuperTypes="#//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constant" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Type"/>
-  <eClassifiers xsi:type="ecore:EClass" name="PredefinedInteger" eSuperTypes="#//Type"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SelfdefinedType" eSuperTypes="#//Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Predefined" abstract="true" eSuperTypes="#//Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SelfdefinedType" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PreInteger" eSuperTypes="#//Predefined"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PreFloat" eSuperTypes="#//Predefined"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Primitive" eSuperTypes="#//Predefined"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="LogicEnum"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="ArithmeticEnum"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="InstructionEnum">
+    <eLiterals name="Alloca"/>
+    <eLiterals name="Return" value="1"/>
+    <eLiterals name="Load" value="2"/>
+    <eLiterals name="Store" value="3"/>
+    <eLiterals name="Fence" value="4"/>
+    <eLiterals name="CompareAndSwap" value="5"/>
+    <eLiterals name="Cast" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CompareEnum"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Unary" eSuperTypes="#//Instruction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="param1" eType="#//Value"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Binary" eSuperTypes="#//Instruction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="param2" eType="#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="param1" eType="#//Value"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Trinary" eSuperTypes="#//Instruction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="param3" eType="#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="param2" eType="#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="param1" eType="#//Value"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AtomicEnum"/>
 </ecore:EPackage>
