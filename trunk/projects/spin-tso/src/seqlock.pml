@@ -6,8 +6,8 @@ date: 05.2013
 Lseqlock (abstracted from: "Show No Weakness: Sequentially Consistent Specifications of TSO Libraries; Alexey Gotsman1 , Madanlal Musuvathi2 , and Hongseok Yang3
 */
 
-#define BUFF_SIZE 8 	//size of Buffer
-#define MEM_SIZE 10	//size of memory
+#define BUFF_SIZE 7 	//size of Buffer
+#define MEM_SIZE 5	//size of memory
  
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 #include "x86_tso_buffer.pml"
@@ -30,7 +30,7 @@ inline writeSeqL( d1, d2)
 	write(c, c_new +1);
 	write(x1, d1);
 	write(x2, d2);
-	read(c, c_new)									//Alternative: read(c, c_new); c_new = c_new +1; write(c, c_new);
+	read(c, c_new)						
 	write(c, c_new +1);
 }
 
@@ -47,9 +47,9 @@ loop:
 	
 	read(x1,d1);
 	read(x2,d2);
-	read(c, counter)						//Problem here!!! Alternative: leave this line out
+	read(c, counter)						
 	if
-	:: counter != c0 -> goto loop;				// Alternative: if:: c_new != c0 ->goto loop;
+	:: counter != c0 -> goto loop;				
 	:: else -> skip;
 	fi;
 };
