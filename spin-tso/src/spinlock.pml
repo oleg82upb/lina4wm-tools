@@ -1,6 +1,3 @@
-/*
-	trying to specify the LLVM-compiled Treiber Stack implementation  
-*/
 
 #define BUFF_SIZE 2 	//size of Buffer
 #define MEM_SIZE 5	//size of memory
