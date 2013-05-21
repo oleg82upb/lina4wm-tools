@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="lll" nsURI="http://www.upb.de/lina/lll" nsPrefix="de.upb.lina">
+  <eClassifiers xsi:type="ecore:EClass" name="Program">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
+        eType="#//Function" containment="true" eOpposite="#//Function/program"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="globalVariablesOrValues"
+        upperBound="-1" eType="#//VariableOrValue" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="program" eType="#//Program"
+        eOpposite="#//Program/functions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variablesOrValues" upperBound="-1"
+        eType="#//VariableOrValue" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="labels" upperBound="-1"
+        eType="#//Label" containment="true" eOpposite="#//Label/function"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1"
+        eType="#//Instruction" containment="true" eOpposite="#//Instruction/function"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//Parameter" containment="true" eOpposite="#//Parameter/function"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Label" abstract="true" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//Function"
+        eOpposite="#//Function/labels"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instruction" eType="#//Instruction"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Instruction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instructionResult" eType="#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//Function"
+        eOpposite="#//Function/instructions"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instruction" eType="#//InstructionEnum"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//Parameter" containment="true" eOpposite="#//Parameter/instruction"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Call" eSuperTypes="#//Instruction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invokedFunction" eType="#//Function"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConditionalBranch" eSuperTypes="#//Goto">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseTarget" eType="#//Label"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass ../../de.upb.lina.lll.expressions/src-gen/de/upb/lina/lll/Expressions.ecore#//LExpression"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Goto" eSuperTypes="#//Instruction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Label"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableOrValue" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constant" eSuperTypes="#//VariableOrValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//VariableOrValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleType" abstract="true" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//PrimitiveType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComplexType" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="InstructionEnum">
+    <eLiterals name="Alloca"/>
+    <eLiterals name="Return" value="1"/>
+    <eLiterals name="Load" value="2"/>
+    <eLiterals name="Store" value="3"/>
+    <eLiterals name="Fence" value="4"/>
+    <eLiterals name="CompareAndSwap" value="5"/>
+    <eLiterals name="GetElementPointer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//VariableOrValue"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//Function"
+        eOpposite="#//Function/parameters"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instruction" eType="#//Instruction"
+        eOpposite="#//Instruction/parameters"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PrimitiveType">
+    <eLiterals name="bool"/>
+    <eLiterals name="char"/>
+    <eLiterals name="int"/>
+    <eLiterals name="float"/>
+    <eLiterals name="void"/>
+    <eLiterals name="pointer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalInstruction" eSuperTypes="#//Instruction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../de.upb.lina.lll.expressions/src-gen/de/upb/lina/lll/Expressions.ecore#//Expression"/>
+  </eClassifiers>
+</ecore:EPackage>
