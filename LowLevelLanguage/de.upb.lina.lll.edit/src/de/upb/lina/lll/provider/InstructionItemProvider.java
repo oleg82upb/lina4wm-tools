@@ -4,7 +4,6 @@ package de.upb.lina.lll.provider;
 
 
 import de.upb.lina.lll.Instruction;
-import de.upb.lina.lll.InstructionEnum;
 import de.upb.lina.lll.LllFactory;
 import de.upb.lina.lll.LllPackage;
 
@@ -25,7 +24,6 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
@@ -65,7 +63,6 @@ public class InstructionItemProvider
 			super.getPropertyDescriptors(object);
 
 			addInstructionResultPropertyDescriptor(object);
-			addInstructionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -88,28 +85,6 @@ public class InstructionItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Instruction feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addInstructionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Instruction_instruction_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Instruction_instruction_feature", "_UI_Instruction_type"),
-				 LllPackage.Literals.INSTRUCTION__INSTRUCTION,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -163,11 +138,7 @@ public class InstructionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		InstructionEnum labelValue = ((Instruction)object).getInstruction();
-		String label = labelValue == null ? null : labelValue.toString();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Instruction_type") :
-			getString("_UI_Instruction_type") + " " + label;
+		return getString("_UI_Instruction_type");
 	}
 
 	/**
@@ -182,9 +153,6 @@ public class InstructionItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Instruction.class)) {
-			case LllPackage.INSTRUCTION__INSTRUCTION:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
 			case LllPackage.INSTRUCTION__PARAMETERS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -206,7 +174,12 @@ public class InstructionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LllPackage.Literals.INSTRUCTION__PARAMETERS,
-				 LllFactory.eINSTANCE.createParameter()));
+				 LllFactory.eINSTANCE.createConstant()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LllPackage.Literals.INSTRUCTION__PARAMETERS,
+				 LllFactory.eINSTANCE.createVariable()));
 	}
 
 	/**

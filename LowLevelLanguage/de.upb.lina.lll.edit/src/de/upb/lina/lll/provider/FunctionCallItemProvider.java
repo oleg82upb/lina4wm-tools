@@ -3,8 +3,6 @@
 package de.upb.lina.lll.provider;
 
 
-import de.upb.lina.lll.Call;
-import de.upb.lina.lll.InstructionEnum;
 import de.upb.lina.lll.LllPackage;
 
 import java.util.Collection;
@@ -22,12 +20,12 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 /**
- * This is the item provider adapter for a {@link de.upb.lina.lll.Call} object.
+ * This is the item provider adapter for a {@link de.upb.lina.lll.FunctionCall} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class CallItemProvider
+public class FunctionCallItemProvider
 	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -41,7 +39,7 @@ public class CallItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CallItemProvider(AdapterFactory adapterFactory) {
+	public FunctionCallItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -72,9 +70,9 @@ public class CallItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Call_invokedFunction_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Call_invokedFunction_feature", "_UI_Call_type"),
-				 LllPackage.Literals.CALL__INVOKED_FUNCTION,
+				 getString("_UI_FunctionCall_invokedFunction_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FunctionCall_invokedFunction_feature", "_UI_FunctionCall_type"),
+				 LllPackage.Literals.FUNCTION_CALL__INVOKED_FUNCTION,
 				 true,
 				 false,
 				 true,
@@ -84,14 +82,14 @@ public class CallItemProvider
 	}
 
 	/**
-	 * This returns Call.gif.
+	 * This returns FunctionCall.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Call"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/FunctionCall"));
 	}
 
 	/**
@@ -102,11 +100,7 @@ public class CallItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		InstructionEnum labelValue = ((Call)object).getInstruction();
-		String label = labelValue == null ? null : labelValue.toString();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Call_type") :
-			getString("_UI_Call_type") + " " + label;
+		return getString("_UI_FunctionCall_type");
 	}
 
 	/**

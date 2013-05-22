@@ -2,8 +2,9 @@
  */
 package de.upb.lina.lll.impl;
 
-import de.upb.lina.lll.Constant;
 import de.upb.lina.lll.LllPackage;
+import de.upb.lina.lll.MemoryInstruction;
+import de.upb.lina.lll.MemoryInstructionType;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -13,44 +14,44 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Constant</b></em>'.
+ * An implementation of the model object '<em><b>Memory Instruction</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.lina.lll.impl.ConstantImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link de.upb.lina.lll.impl.MemoryInstructionImpl#getInstructionType <em>Instruction Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ConstantImpl extends VariableOrValueImpl implements Constant {
+public class MemoryInstructionImpl extends InstructionImpl implements MemoryInstruction {
 	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The default value of the '{@link #getInstructionType() <em>Instruction Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getInstructionType()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String VALUE_EDEFAULT = null;
+	protected static final MemoryInstructionType INSTRUCTION_TYPE_EDEFAULT = MemoryInstructionType.ALLOCA;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The cached value of the '{@link #getInstructionType() <em>Instruction Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getInstructionType()
 	 * @generated
 	 * @ordered
 	 */
-	protected String value = VALUE_EDEFAULT;
+	protected MemoryInstructionType instructionType = INSTRUCTION_TYPE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ConstantImpl() {
+	protected MemoryInstructionImpl() {
 		super();
 	}
 
@@ -61,7 +62,7 @@ public class ConstantImpl extends VariableOrValueImpl implements Constant {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return LllPackage.Literals.CONSTANT;
+		return LllPackage.Literals.MEMORY_INSTRUCTION;
 	}
 
 	/**
@@ -69,8 +70,8 @@ public class ConstantImpl extends VariableOrValueImpl implements Constant {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getValue() {
-		return value;
+	public MemoryInstructionType getInstructionType() {
+		return instructionType;
 	}
 
 	/**
@@ -78,11 +79,11 @@ public class ConstantImpl extends VariableOrValueImpl implements Constant {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(String newValue) {
-		String oldValue = value;
-		value = newValue;
+	public void setInstructionType(MemoryInstructionType newInstructionType) {
+		MemoryInstructionType oldInstructionType = instructionType;
+		instructionType = newInstructionType == null ? INSTRUCTION_TYPE_EDEFAULT : newInstructionType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LllPackage.CONSTANT__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, LllPackage.MEMORY_INSTRUCTION__INSTRUCTION_TYPE, oldInstructionType, instructionType));
 	}
 
 	/**
@@ -93,8 +94,8 @@ public class ConstantImpl extends VariableOrValueImpl implements Constant {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case LllPackage.CONSTANT__VALUE:
-				return getValue();
+			case LllPackage.MEMORY_INSTRUCTION__INSTRUCTION_TYPE:
+				return getInstructionType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -107,8 +108,8 @@ public class ConstantImpl extends VariableOrValueImpl implements Constant {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case LllPackage.CONSTANT__VALUE:
-				setValue((String)newValue);
+			case LllPackage.MEMORY_INSTRUCTION__INSTRUCTION_TYPE:
+				setInstructionType((MemoryInstructionType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -122,8 +123,8 @@ public class ConstantImpl extends VariableOrValueImpl implements Constant {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case LllPackage.CONSTANT__VALUE:
-				setValue(VALUE_EDEFAULT);
+			case LllPackage.MEMORY_INSTRUCTION__INSTRUCTION_TYPE:
+				setInstructionType(INSTRUCTION_TYPE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -137,8 +138,8 @@ public class ConstantImpl extends VariableOrValueImpl implements Constant {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case LllPackage.CONSTANT__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case LllPackage.MEMORY_INSTRUCTION__INSTRUCTION_TYPE:
+				return instructionType != INSTRUCTION_TYPE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -153,10 +154,10 @@ public class ConstantImpl extends VariableOrValueImpl implements Constant {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (value: ");
-		result.append(value);
+		result.append(" (instructionType: ");
+		result.append(instructionType);
 		result.append(')');
 		return result.toString();
 	}
 
-} //ConstantImpl
+} //MemoryInstructionImpl

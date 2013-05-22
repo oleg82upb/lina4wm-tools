@@ -59,16 +59,15 @@ public class LllFactoryImpl extends EFactoryImpl implements LllFactory {
 		switch (eClass.getClassifierID()) {
 			case LllPackage.PROGRAM: return createProgram();
 			case LllPackage.FUNCTION: return createFunction();
-			case LllPackage.INSTRUCTION: return createInstruction();
-			case LllPackage.CALL: return createCall();
+			case LllPackage.FUNCTION_CALL: return createFunctionCall();
 			case LllPackage.CONDITIONAL_BRANCH: return createConditionalBranch();
 			case LllPackage.GOTO: return createGoto();
 			case LllPackage.CONSTANT: return createConstant();
 			case LllPackage.VARIABLE: return createVariable();
 			case LllPackage.TYPE: return createType();
 			case LllPackage.COMPLEX_TYPE: return createComplexType();
-			case LllPackage.PARAMETER: return createParameter();
-			case LllPackage.LOCAL_INSTRUCTION: return createLocalInstruction();
+			case LllPackage.LOCAL_COMPUTATION: return createLocalComputation();
+			case LllPackage.MEMORY_INSTRUCTION: return createMemoryInstruction();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -82,8 +81,8 @@ public class LllFactoryImpl extends EFactoryImpl implements LllFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case LllPackage.INSTRUCTION_ENUM:
-				return createInstructionEnumFromString(eDataType, initialValue);
+			case LllPackage.MEMORY_INSTRUCTION_TYPE:
+				return createMemoryInstructionTypeFromString(eDataType, initialValue);
 			case LllPackage.PRIMITIVE_TYPE:
 				return createPrimitiveTypeFromString(eDataType, initialValue);
 			default:
@@ -99,8 +98,8 @@ public class LllFactoryImpl extends EFactoryImpl implements LllFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case LllPackage.INSTRUCTION_ENUM:
-				return convertInstructionEnumToString(eDataType, instanceValue);
+			case LllPackage.MEMORY_INSTRUCTION_TYPE:
+				return convertMemoryInstructionTypeToString(eDataType, instanceValue);
 			case LllPackage.PRIMITIVE_TYPE:
 				return convertPrimitiveTypeToString(eDataType, instanceValue);
 			default:
@@ -133,19 +132,9 @@ public class LllFactoryImpl extends EFactoryImpl implements LllFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Instruction createInstruction() {
-		InstructionImpl instruction = new InstructionImpl();
-		return instruction;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Call createCall() {
-		CallImpl call = new CallImpl();
-		return call;
+	public FunctionCall createFunctionCall() {
+		FunctionCallImpl functionCall = new FunctionCallImpl();
+		return functionCall;
 	}
 
 	/**
@@ -213,9 +202,9 @@ public class LllFactoryImpl extends EFactoryImpl implements LllFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Parameter createParameter() {
-		ParameterImpl parameter = new ParameterImpl();
-		return parameter;
+	public LocalComputation createLocalComputation() {
+		LocalComputationImpl localComputation = new LocalComputationImpl();
+		return localComputation;
 	}
 
 	/**
@@ -223,9 +212,9 @@ public class LllFactoryImpl extends EFactoryImpl implements LllFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LocalInstruction createLocalInstruction() {
-		LocalInstructionImpl localInstruction = new LocalInstructionImpl();
-		return localInstruction;
+	public MemoryInstruction createMemoryInstruction() {
+		MemoryInstructionImpl memoryInstruction = new MemoryInstructionImpl();
+		return memoryInstruction;
 	}
 
 	/**
@@ -233,8 +222,8 @@ public class LllFactoryImpl extends EFactoryImpl implements LllFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InstructionEnum createInstructionEnumFromString(EDataType eDataType, String initialValue) {
-		InstructionEnum result = InstructionEnum.get(initialValue);
+	public MemoryInstructionType createMemoryInstructionTypeFromString(EDataType eDataType, String initialValue) {
+		MemoryInstructionType result = MemoryInstructionType.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -244,7 +233,7 @@ public class LllFactoryImpl extends EFactoryImpl implements LllFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertInstructionEnumToString(EDataType eDataType, Object instanceValue) {
+	public String convertMemoryInstructionTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

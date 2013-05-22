@@ -11,7 +11,7 @@ package de.upb.lina.lll;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.lina.lll.Constant#getConstant <em>Constant</em>}</li>
+ *   <li>{@link de.upb.lina.lll.Constant#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -21,29 +21,29 @@ package de.upb.lina.lll;
  */
 public interface Constant extends VariableOrValue {
 	/**
-	 * Returns the value of the '<em><b>Constant</b></em>' attribute.
+	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Constant</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Value</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Constant</em>' attribute.
-	 * @see #setConstant(String)
-	 * @see de.upb.lina.lll.LllPackage#getConstant_Constant()
+	 * @return the value of the '<em>Value</em>' attribute.
+	 * @see #setValue(String)
+	 * @see de.upb.lina.lll.LllPackage#getConstant_Value()
 	 * @model
 	 * @generated
 	 */
-	String getConstant();
+	String getValue();
 
 	/**
-	 * Sets the value of the '{@link de.upb.lina.lll.Constant#getConstant <em>Constant</em>}' attribute.
+	 * Sets the value of the '{@link de.upb.lina.lll.Constant#getValue <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Constant</em>' attribute.
-	 * @see #getConstant()
+	 * @param value the new value of the '<em>Value</em>' attribute.
+	 * @see #getValue()
 	 * @generated
 	 */
-	void setConstant(String value);
+	void setValue(String value);
 
 } // Constant

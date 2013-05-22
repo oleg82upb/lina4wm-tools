@@ -2,31 +2,26 @@
  */
 package de.upb.lina.lll.impl;
 
-import de.upb.lina.lll.Function;
-import de.upb.lina.lll.Instruction;
-import de.upb.lina.lll.Label;
-import de.upb.lina.lll.LllPackage;
-import de.upb.lina.lll.Parameter;
-import de.upb.lina.lll.Program;
-import de.upb.lina.lll.VariableOrValue;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENamedElementImpl;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import de.upb.lina.lll.Function;
+import de.upb.lina.lll.Instruction;
+import de.upb.lina.lll.Label;
+import de.upb.lina.lll.LllPackage;
+import de.upb.lina.lll.Program;
+import de.upb.lina.lll.VariableOrValue;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,10 +31,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.lina.lll.impl.FunctionImpl#getProgram <em>Program</em>}</li>
- *   <li>{@link de.upb.lina.lll.impl.FunctionImpl#getVariablesOrValues <em>Variables Or Values</em>}</li>
+ *   <li>{@link de.upb.lina.lll.impl.FunctionImpl#getLocalVariablesOrValues <em>Local Variables Or Values</em>}</li>
  *   <li>{@link de.upb.lina.lll.impl.FunctionImpl#getLabels <em>Labels</em>}</li>
  *   <li>{@link de.upb.lina.lll.impl.FunctionImpl#getInstructions <em>Instructions</em>}</li>
- *   <li>{@link de.upb.lina.lll.impl.FunctionImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link de.upb.lina.lll.impl.FunctionImpl#getInputParameters <em>Input Parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -47,14 +42,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class FunctionImpl extends ENamedElementImpl implements Function {
 	/**
-	 * The cached value of the '{@link #getVariablesOrValues() <em>Variables Or Values</em>}' containment reference list.
+	 * The cached value of the '{@link #getLocalVariablesOrValues() <em>Local Variables Or Values</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getVariablesOrValues()
+	 * @see #getLocalVariablesOrValues()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<VariableOrValue> variablesOrValues;
+	protected EList<VariableOrValue> localVariablesOrValues;
 
 	/**
 	 * The cached value of the '{@link #getLabels() <em>Labels</em>}' containment reference list.
@@ -77,14 +72,14 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 	protected EList<Instruction> instructions;
 
 	/**
-	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * The cached value of the '{@link #getInputParameters() <em>Input Parameters</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getParameters()
+	 * @see #getInputParameters()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Parameter> parameters;
+	protected EList<VariableOrValue> inputParameters;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -151,11 +146,11 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<VariableOrValue> getVariablesOrValues() {
-		if (variablesOrValues == null) {
-			variablesOrValues = new EObjectContainmentEList<VariableOrValue>(VariableOrValue.class, this, LllPackage.FUNCTION__VARIABLES_OR_VALUES);
+	public EList<VariableOrValue> getLocalVariablesOrValues() {
+		if (localVariablesOrValues == null) {
+			localVariablesOrValues = new EObjectContainmentWithInverseEList<VariableOrValue>(VariableOrValue.class, this, LllPackage.FUNCTION__LOCAL_VARIABLES_OR_VALUES, LllPackage.VARIABLE_OR_VALUE__FUNCTION);
 		}
-		return variablesOrValues;
+		return localVariablesOrValues;
 	}
 
 	/**
@@ -187,11 +182,11 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Parameter> getParameters() {
-		if (parameters == null) {
-			parameters = new EObjectContainmentWithInverseEList<Parameter>(Parameter.class, this, LllPackage.FUNCTION__PARAMETERS, LllPackage.PARAMETER__FUNCTION);
+	public EList<VariableOrValue> getInputParameters() {
+		if (inputParameters == null) {
+			inputParameters = new EObjectResolvingEList<VariableOrValue>(VariableOrValue.class, this, LllPackage.FUNCTION__INPUT_PARAMETERS);
 		}
-		return parameters;
+		return inputParameters;
 	}
 
 	/**
@@ -207,12 +202,12 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetProgram((Program)otherEnd, msgs);
+			case LllPackage.FUNCTION__LOCAL_VARIABLES_OR_VALUES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLocalVariablesOrValues()).basicAdd(otherEnd, msgs);
 			case LllPackage.FUNCTION__LABELS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLabels()).basicAdd(otherEnd, msgs);
 			case LllPackage.FUNCTION__INSTRUCTIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInstructions()).basicAdd(otherEnd, msgs);
-			case LllPackage.FUNCTION__PARAMETERS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getParameters()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -227,14 +222,12 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 		switch (featureID) {
 			case LllPackage.FUNCTION__PROGRAM:
 				return basicSetProgram(null, msgs);
-			case LllPackage.FUNCTION__VARIABLES_OR_VALUES:
-				return ((InternalEList<?>)getVariablesOrValues()).basicRemove(otherEnd, msgs);
+			case LllPackage.FUNCTION__LOCAL_VARIABLES_OR_VALUES:
+				return ((InternalEList<?>)getLocalVariablesOrValues()).basicRemove(otherEnd, msgs);
 			case LllPackage.FUNCTION__LABELS:
 				return ((InternalEList<?>)getLabels()).basicRemove(otherEnd, msgs);
 			case LllPackage.FUNCTION__INSTRUCTIONS:
 				return ((InternalEList<?>)getInstructions()).basicRemove(otherEnd, msgs);
-			case LllPackage.FUNCTION__PARAMETERS:
-				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -263,14 +256,14 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 		switch (featureID) {
 			case LllPackage.FUNCTION__PROGRAM:
 				return getProgram();
-			case LllPackage.FUNCTION__VARIABLES_OR_VALUES:
-				return getVariablesOrValues();
+			case LllPackage.FUNCTION__LOCAL_VARIABLES_OR_VALUES:
+				return getLocalVariablesOrValues();
 			case LllPackage.FUNCTION__LABELS:
 				return getLabels();
 			case LllPackage.FUNCTION__INSTRUCTIONS:
 				return getInstructions();
-			case LllPackage.FUNCTION__PARAMETERS:
-				return getParameters();
+			case LllPackage.FUNCTION__INPUT_PARAMETERS:
+				return getInputParameters();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -287,9 +280,9 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 			case LllPackage.FUNCTION__PROGRAM:
 				setProgram((Program)newValue);
 				return;
-			case LllPackage.FUNCTION__VARIABLES_OR_VALUES:
-				getVariablesOrValues().clear();
-				getVariablesOrValues().addAll((Collection<? extends VariableOrValue>)newValue);
+			case LllPackage.FUNCTION__LOCAL_VARIABLES_OR_VALUES:
+				getLocalVariablesOrValues().clear();
+				getLocalVariablesOrValues().addAll((Collection<? extends VariableOrValue>)newValue);
 				return;
 			case LllPackage.FUNCTION__LABELS:
 				getLabels().clear();
@@ -299,9 +292,9 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 				getInstructions().clear();
 				getInstructions().addAll((Collection<? extends Instruction>)newValue);
 				return;
-			case LllPackage.FUNCTION__PARAMETERS:
-				getParameters().clear();
-				getParameters().addAll((Collection<? extends Parameter>)newValue);
+			case LllPackage.FUNCTION__INPUT_PARAMETERS:
+				getInputParameters().clear();
+				getInputParameters().addAll((Collection<? extends VariableOrValue>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -318,8 +311,8 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 			case LllPackage.FUNCTION__PROGRAM:
 				setProgram((Program)null);
 				return;
-			case LllPackage.FUNCTION__VARIABLES_OR_VALUES:
-				getVariablesOrValues().clear();
+			case LllPackage.FUNCTION__LOCAL_VARIABLES_OR_VALUES:
+				getLocalVariablesOrValues().clear();
 				return;
 			case LllPackage.FUNCTION__LABELS:
 				getLabels().clear();
@@ -327,8 +320,8 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 			case LllPackage.FUNCTION__INSTRUCTIONS:
 				getInstructions().clear();
 				return;
-			case LllPackage.FUNCTION__PARAMETERS:
-				getParameters().clear();
+			case LllPackage.FUNCTION__INPUT_PARAMETERS:
+				getInputParameters().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -344,14 +337,14 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 		switch (featureID) {
 			case LllPackage.FUNCTION__PROGRAM:
 				return getProgram() != null;
-			case LllPackage.FUNCTION__VARIABLES_OR_VALUES:
-				return variablesOrValues != null && !variablesOrValues.isEmpty();
+			case LllPackage.FUNCTION__LOCAL_VARIABLES_OR_VALUES:
+				return localVariablesOrValues != null && !localVariablesOrValues.isEmpty();
 			case LllPackage.FUNCTION__LABELS:
 				return labels != null && !labels.isEmpty();
 			case LllPackage.FUNCTION__INSTRUCTIONS:
 				return instructions != null && !instructions.isEmpty();
-			case LllPackage.FUNCTION__PARAMETERS:
-				return parameters != null && !parameters.isEmpty();
+			case LllPackage.FUNCTION__INPUT_PARAMETERS:
+				return inputParameters != null && !inputParameters.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

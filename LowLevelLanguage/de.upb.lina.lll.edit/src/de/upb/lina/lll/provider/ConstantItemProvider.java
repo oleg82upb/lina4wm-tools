@@ -57,25 +57,25 @@ public class ConstantItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addConstantPropertyDescriptor(object);
+			addValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Constant feature.
+	 * This adds a property descriptor for the Value feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addConstantPropertyDescriptor(Object object) {
+	protected void addValuePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Constant_constant_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Constant_constant_feature", "_UI_Constant_type"),
-				 LllPackage.Literals.CONSTANT__CONSTANT,
+				 getString("_UI_Constant_value_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Constant_value_feature", "_UI_Constant_type"),
+				 LllPackage.Literals.CONSTANT__VALUE,
 				 true,
 				 false,
 				 false,
@@ -103,7 +103,7 @@ public class ConstantItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Constant)object).getConstant();
+		String label = ((Constant)object).getValue();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Constant_type") :
 			getString("_UI_Constant_type") + " " + label;
@@ -121,7 +121,7 @@ public class ConstantItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Constant.class)) {
-			case LllPackage.CONSTANT__CONSTANT:
+			case LllPackage.CONSTANT__VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

@@ -3,7 +3,7 @@
 package de.upb.lina.lll.impl;
 
 import de.upb.lina.lll.LllPackage;
-import de.upb.lina.lll.LocalInstruction;
+import de.upb.lina.lll.LocalComputation;
 
 import de.upb.lina.lll.expressions.Expression;
 
@@ -16,18 +16,18 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Local Instruction</b></em>'.
+ * An implementation of the model object '<em><b>Local Computation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.lina.lll.impl.LocalInstructionImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link de.upb.lina.lll.impl.LocalComputationImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class LocalInstructionImpl extends InstructionImpl implements LocalInstruction {
+public class LocalComputationImpl extends InstructionImpl implements LocalComputation {
 	/**
 	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -43,7 +43,7 @@ public class LocalInstructionImpl extends InstructionImpl implements LocalInstru
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected LocalInstructionImpl() {
+	protected LocalComputationImpl() {
 		super();
 	}
 
@@ -54,7 +54,7 @@ public class LocalInstructionImpl extends InstructionImpl implements LocalInstru
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return LllPackage.Literals.LOCAL_INSTRUCTION;
+		return LllPackage.Literals.LOCAL_COMPUTATION;
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class LocalInstructionImpl extends InstructionImpl implements LocalInstru
 			expression = (Expression)eResolveProxy(oldExpression);
 			if (expression != oldExpression) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, LllPackage.LOCAL_INSTRUCTION__EXPRESSION, oldExpression, expression));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, LllPackage.LOCAL_COMPUTATION__EXPRESSION, oldExpression, expression));
 			}
 		}
 		return expression;
@@ -92,7 +92,7 @@ public class LocalInstructionImpl extends InstructionImpl implements LocalInstru
 		Expression oldExpression = expression;
 		expression = newExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LllPackage.LOCAL_INSTRUCTION__EXPRESSION, oldExpression, expression));
+			eNotify(new ENotificationImpl(this, Notification.SET, LllPackage.LOCAL_COMPUTATION__EXPRESSION, oldExpression, expression));
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class LocalInstructionImpl extends InstructionImpl implements LocalInstru
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case LllPackage.LOCAL_INSTRUCTION__EXPRESSION:
+			case LllPackage.LOCAL_COMPUTATION__EXPRESSION:
 				if (resolve) return getExpression();
 				return basicGetExpression();
 		}
@@ -118,7 +118,7 @@ public class LocalInstructionImpl extends InstructionImpl implements LocalInstru
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case LllPackage.LOCAL_INSTRUCTION__EXPRESSION:
+			case LllPackage.LOCAL_COMPUTATION__EXPRESSION:
 				setExpression((Expression)newValue);
 				return;
 		}
@@ -133,7 +133,7 @@ public class LocalInstructionImpl extends InstructionImpl implements LocalInstru
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case LllPackage.LOCAL_INSTRUCTION__EXPRESSION:
+			case LllPackage.LOCAL_COMPUTATION__EXPRESSION:
 				setExpression((Expression)null);
 				return;
 		}
@@ -148,10 +148,10 @@ public class LocalInstructionImpl extends InstructionImpl implements LocalInstru
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case LllPackage.LOCAL_INSTRUCTION__EXPRESSION:
+			case LllPackage.LOCAL_COMPUTATION__EXPRESSION:
 				return expression != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //LocalInstructionImpl
+} //LocalComputationImpl

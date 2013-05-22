@@ -2,8 +2,8 @@
  */
 package de.upb.lina.lll.impl;
 
-import de.upb.lina.lll.Call;
 import de.upb.lina.lll.Function;
+import de.upb.lina.lll.FunctionCall;
 import de.upb.lina.lll.LllPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -15,18 +15,18 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Call</b></em>'.
+ * An implementation of the model object '<em><b>Function Call</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.lina.lll.impl.CallImpl#getInvokedFunction <em>Invoked Function</em>}</li>
+ *   <li>{@link de.upb.lina.lll.impl.FunctionCallImpl#getInvokedFunction <em>Invoked Function</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class CallImpl extends InstructionImpl implements Call {
+public class FunctionCallImpl extends InstructionImpl implements FunctionCall {
 	/**
 	 * The cached value of the '{@link #getInvokedFunction() <em>Invoked Function</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -42,7 +42,7 @@ public class CallImpl extends InstructionImpl implements Call {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CallImpl() {
+	protected FunctionCallImpl() {
 		super();
 	}
 
@@ -53,7 +53,7 @@ public class CallImpl extends InstructionImpl implements Call {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return LllPackage.Literals.CALL;
+		return LllPackage.Literals.FUNCTION_CALL;
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class CallImpl extends InstructionImpl implements Call {
 			invokedFunction = (Function)eResolveProxy(oldInvokedFunction);
 			if (invokedFunction != oldInvokedFunction) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, LllPackage.CALL__INVOKED_FUNCTION, oldInvokedFunction, invokedFunction));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, LllPackage.FUNCTION_CALL__INVOKED_FUNCTION, oldInvokedFunction, invokedFunction));
 			}
 		}
 		return invokedFunction;
@@ -91,7 +91,7 @@ public class CallImpl extends InstructionImpl implements Call {
 		Function oldInvokedFunction = invokedFunction;
 		invokedFunction = newInvokedFunction;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LllPackage.CALL__INVOKED_FUNCTION, oldInvokedFunction, invokedFunction));
+			eNotify(new ENotificationImpl(this, Notification.SET, LllPackage.FUNCTION_CALL__INVOKED_FUNCTION, oldInvokedFunction, invokedFunction));
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class CallImpl extends InstructionImpl implements Call {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case LllPackage.CALL__INVOKED_FUNCTION:
+			case LllPackage.FUNCTION_CALL__INVOKED_FUNCTION:
 				if (resolve) return getInvokedFunction();
 				return basicGetInvokedFunction();
 		}
@@ -117,7 +117,7 @@ public class CallImpl extends InstructionImpl implements Call {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case LllPackage.CALL__INVOKED_FUNCTION:
+			case LllPackage.FUNCTION_CALL__INVOKED_FUNCTION:
 				setInvokedFunction((Function)newValue);
 				return;
 		}
@@ -132,7 +132,7 @@ public class CallImpl extends InstructionImpl implements Call {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case LllPackage.CALL__INVOKED_FUNCTION:
+			case LllPackage.FUNCTION_CALL__INVOKED_FUNCTION:
 				setInvokedFunction((Function)null);
 				return;
 		}
@@ -147,10 +147,10 @@ public class CallImpl extends InstructionImpl implements Call {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case LllPackage.CALL__INVOKED_FUNCTION:
+			case LllPackage.FUNCTION_CALL__INVOKED_FUNCTION:
 				return invokedFunction != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //CallImpl
+} //FunctionCallImpl

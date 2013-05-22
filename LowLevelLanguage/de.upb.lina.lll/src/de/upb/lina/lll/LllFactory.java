@@ -40,22 +40,13 @@ public interface LllFactory extends EFactory {
 	Function createFunction();
 
 	/**
-	 * Returns a new object of class '<em>Instruction</em>'.
+	 * Returns a new object of class '<em>Function Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Instruction</em>'.
+	 * @return a new object of class '<em>Function Call</em>'.
 	 * @generated
 	 */
-	Instruction createInstruction();
-
-	/**
-	 * Returns a new object of class '<em>Call</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Call</em>'.
-	 * @generated
-	 */
-	Call createCall();
+	FunctionCall createFunctionCall();
 
 	/**
 	 * Returns a new object of class '<em>Conditional Branch</em>'.
@@ -112,22 +103,22 @@ public interface LllFactory extends EFactory {
 	ComplexType createComplexType();
 
 	/**
-	 * Returns a new object of class '<em>Parameter</em>'.
+	 * Returns a new object of class '<em>Local Computation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Parameter</em>'.
+	 * @return a new object of class '<em>Local Computation</em>'.
 	 * @generated
 	 */
-	Parameter createParameter();
+	LocalComputation createLocalComputation();
 
 	/**
-	 * Returns a new object of class '<em>Local Instruction</em>'.
+	 * Returns a new object of class '<em>Memory Instruction</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Local Instruction</em>'.
+	 * @return a new object of class '<em>Memory Instruction</em>'.
 	 * @generated
 	 */
-	LocalInstruction createLocalInstruction();
+	MemoryInstruction createMemoryInstruction();
 
 	/**
 	 * Returns the package supported by this factory.

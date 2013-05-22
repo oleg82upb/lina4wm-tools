@@ -86,8 +86,8 @@ public class LllAdapterFactory extends AdapterFactoryImpl {
 				return createInstructionAdapter();
 			}
 			@Override
-			public Adapter caseCall(Call object) {
-				return createCallAdapter();
+			public Adapter caseFunctionCall(FunctionCall object) {
+				return createFunctionCallAdapter();
 			}
 			@Override
 			public Adapter caseConditionalBranch(ConditionalBranch object) {
@@ -122,12 +122,12 @@ public class LllAdapterFactory extends AdapterFactoryImpl {
 				return createComplexTypeAdapter();
 			}
 			@Override
-			public Adapter caseParameter(Parameter object) {
-				return createParameterAdapter();
+			public Adapter caseLocalComputation(LocalComputation object) {
+				return createLocalComputationAdapter();
 			}
 			@Override
-			public Adapter caseLocalInstruction(LocalInstruction object) {
-				return createLocalInstructionAdapter();
+			public Adapter caseMemoryInstruction(MemoryInstruction object) {
+				return createMemoryInstructionAdapter();
 			}
 			@Override
 			public Adapter caseEModelElement(EModelElement object) {
@@ -214,16 +214,16 @@ public class LllAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.lina.lll.Call <em>Call</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.upb.lina.lll.FunctionCall <em>Function Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.upb.lina.lll.Call
+	 * @see de.upb.lina.lll.FunctionCall
 	 * @generated
 	 */
-	public Adapter createCallAdapter() {
+	public Adapter createFunctionCallAdapter() {
 		return null;
 	}
 
@@ -340,30 +340,30 @@ public class LllAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.lina.lll.Parameter <em>Parameter</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.upb.lina.lll.LocalComputation <em>Local Computation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.upb.lina.lll.Parameter
+	 * @see de.upb.lina.lll.LocalComputation
 	 * @generated
 	 */
-	public Adapter createParameterAdapter() {
+	public Adapter createLocalComputationAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.lina.lll.LocalInstruction <em>Local Instruction</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.upb.lina.lll.MemoryInstruction <em>Memory Instruction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.upb.lina.lll.LocalInstruction
+	 * @see de.upb.lina.lll.MemoryInstruction
 	 * @generated
 	 */
-	public Adapter createLocalInstructionAdapter() {
+	public Adapter createMemoryInstructionAdapter() {
 		return null;
 	}
 

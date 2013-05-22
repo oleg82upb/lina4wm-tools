@@ -132,13 +132,13 @@ public interface LllPackage extends EPackage {
 	int FUNCTION__PROGRAM = EcorePackage.ENAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Variables Or Values</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Local Variables Or Values</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION__VARIABLES_OR_VALUES = EcorePackage.ENAMED_ELEMENT_FEATURE_COUNT + 1;
+	int FUNCTION__LOCAL_VARIABLES_OR_VALUES = EcorePackage.ENAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
@@ -159,13 +159,13 @@ public interface LllPackage extends EPackage {
 	int FUNCTION__INSTRUCTIONS = EcorePackage.ENAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Input Parameters</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION__PARAMETERS = EcorePackage.ENAMED_ELEMENT_FEATURE_COUNT + 4;
+	int FUNCTION__INPUT_PARAMETERS = EcorePackage.ENAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Function</em>' class.
@@ -260,22 +260,13 @@ public interface LllPackage extends EPackage {
 	int INSTRUCTION__FUNCTION = 1;
 
 	/**
-	 * The feature id for the '<em><b>Instruction</b></em>' attribute.
+	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTRUCTION__INSTRUCTION = 2;
-
-	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTRUCTION__PARAMETERS = 3;
+	int INSTRUCTION__PARAMETERS = 2;
 
 	/**
 	 * The number of structural features of the '<em>Instruction</em>' class.
@@ -284,17 +275,17 @@ public interface LllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTRUCTION_FEATURE_COUNT = 4;
+	int INSTRUCTION_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link de.upb.lina.lll.impl.CallImpl <em>Call</em>}' class.
+	 * The meta object id for the '{@link de.upb.lina.lll.impl.FunctionCallImpl <em>Function Call</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.upb.lina.lll.impl.CallImpl
-	 * @see de.upb.lina.lll.impl.LllPackageImpl#getCall()
+	 * @see de.upb.lina.lll.impl.FunctionCallImpl
+	 * @see de.upb.lina.lll.impl.LllPackageImpl#getFunctionCall()
 	 * @generated
 	 */
-	int CALL = 4;
+	int FUNCTION_CALL = 4;
 
 	/**
 	 * The feature id for the '<em><b>Instruction Result</b></em>' reference.
@@ -303,7 +294,7 @@ public interface LllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL__INSTRUCTION_RESULT = INSTRUCTION__INSTRUCTION_RESULT;
+	int FUNCTION_CALL__INSTRUCTION_RESULT = INSTRUCTION__INSTRUCTION_RESULT;
 
 	/**
 	 * The feature id for the '<em><b>Function</b></em>' container reference.
@@ -312,25 +303,16 @@ public interface LllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL__FUNCTION = INSTRUCTION__FUNCTION;
+	int FUNCTION_CALL__FUNCTION = INSTRUCTION__FUNCTION;
 
 	/**
-	 * The feature id for the '<em><b>Instruction</b></em>' attribute.
+	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALL__INSTRUCTION = INSTRUCTION__INSTRUCTION;
-
-	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL__PARAMETERS = INSTRUCTION__PARAMETERS;
+	int FUNCTION_CALL__PARAMETERS = INSTRUCTION__PARAMETERS;
 
 	/**
 	 * The feature id for the '<em><b>Invoked Function</b></em>' reference.
@@ -339,16 +321,16 @@ public interface LllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL__INVOKED_FUNCTION = INSTRUCTION_FEATURE_COUNT + 0;
+	int FUNCTION_CALL__INVOKED_FUNCTION = INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Call</em>' class.
+	 * The number of structural features of the '<em>Function Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 1;
+	int FUNCTION_CALL_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.lll.impl.GotoImpl <em>Goto</em>}' class.
@@ -379,16 +361,7 @@ public interface LllPackage extends EPackage {
 	int GOTO__FUNCTION = INSTRUCTION__FUNCTION;
 
 	/**
-	 * The feature id for the '<em><b>Instruction</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GOTO__INSTRUCTION = INSTRUCTION__INSTRUCTION;
-
-	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -443,16 +416,7 @@ public interface LllPackage extends EPackage {
 	int CONDITIONAL_BRANCH__FUNCTION = GOTO__FUNCTION;
 
 	/**
-	 * The feature id for the '<em><b>Instruction</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONDITIONAL_BRANCH__INSTRUCTION = GOTO__INSTRUCTION;
-
-	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -516,13 +480,22 @@ public interface LllPackage extends EPackage {
 	int VARIABLE_OR_VALUE__TYPE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Function</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_OR_VALUE__FUNCTION = 1;
+
+	/**
 	 * The number of structural features of the '<em>Variable Or Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_OR_VALUE_FEATURE_COUNT = 1;
+	int VARIABLE_OR_VALUE_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.lll.impl.ConstantImpl <em>Constant</em>}' class.
@@ -544,13 +517,22 @@ public interface LllPackage extends EPackage {
 	int CONSTANT__TYPE = VARIABLE_OR_VALUE__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
+	 * The feature id for the '<em><b>Function</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTANT__CONSTANT = VARIABLE_OR_VALUE_FEATURE_COUNT + 0;
+	int CONSTANT__FUNCTION = VARIABLE_OR_VALUE__FUNCTION;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT__VALUE = VARIABLE_OR_VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Constant</em>' class.
@@ -581,6 +563,15 @@ public interface LllPackage extends EPackage {
 	int VARIABLE__TYPE = VARIABLE_OR_VALUE__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Function</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE__FUNCTION = VARIABLE_OR_VALUE__FUNCTION;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -590,13 +581,22 @@ public interface LllPackage extends EPackage {
 	int VARIABLE__NAME = VARIABLE_OR_VALUE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Program</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE__PROGRAM = VARIABLE_OR_VALUE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_FEATURE_COUNT = VARIABLE_OR_VALUE_FEATURE_COUNT + 1;
+	int VARIABLE_FEATURE_COUNT = VARIABLE_OR_VALUE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.lll.impl.TypeImpl <em>Type</em>}' class.
@@ -674,69 +674,14 @@ public interface LllPackage extends EPackage {
 	int COMPLEX_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.upb.lina.lll.impl.ParameterImpl <em>Parameter</em>}' class.
+	 * The meta object id for the '{@link de.upb.lina.lll.impl.LocalComputationImpl <em>Local Computation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.upb.lina.lll.impl.ParameterImpl
-	 * @see de.upb.lina.lll.impl.LllPackageImpl#getParameter()
+	 * @see de.upb.lina.lll.impl.LocalComputationImpl
+	 * @see de.upb.lina.lll.impl.LllPackageImpl#getLocalComputation()
 	 * @generated
 	 */
-	int PARAMETER = 13;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__TYPE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__VALUE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Function</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__FUNCTION = 2;
-
-	/**
-	 * The feature id for the '<em><b>Instruction</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__INSTRUCTION = 3;
-
-	/**
-	 * The number of structural features of the '<em>Parameter</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER_FEATURE_COUNT = 4;
-
-	/**
-	 * The meta object id for the '{@link de.upb.lina.lll.impl.LocalInstructionImpl <em>Local Instruction</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.upb.lina.lll.impl.LocalInstructionImpl
-	 * @see de.upb.lina.lll.impl.LllPackageImpl#getLocalInstruction()
-	 * @generated
-	 */
-	int LOCAL_INSTRUCTION = 14;
+	int LOCAL_COMPUTATION = 13;
 
 	/**
 	 * The feature id for the '<em><b>Instruction Result</b></em>' reference.
@@ -745,7 +690,7 @@ public interface LllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_INSTRUCTION__INSTRUCTION_RESULT = INSTRUCTION__INSTRUCTION_RESULT;
+	int LOCAL_COMPUTATION__INSTRUCTION_RESULT = INSTRUCTION__INSTRUCTION_RESULT;
 
 	/**
 	 * The feature id for the '<em><b>Function</b></em>' container reference.
@@ -754,25 +699,16 @@ public interface LllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_INSTRUCTION__FUNCTION = INSTRUCTION__FUNCTION;
+	int LOCAL_COMPUTATION__FUNCTION = INSTRUCTION__FUNCTION;
 
 	/**
-	 * The feature id for the '<em><b>Instruction</b></em>' attribute.
+	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_INSTRUCTION__INSTRUCTION = INSTRUCTION__INSTRUCTION;
-
-	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCAL_INSTRUCTION__PARAMETERS = INSTRUCTION__PARAMETERS;
+	int LOCAL_COMPUTATION__PARAMETERS = INSTRUCTION__PARAMETERS;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' reference.
@@ -781,26 +717,81 @@ public interface LllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_INSTRUCTION__EXPRESSION = INSTRUCTION_FEATURE_COUNT + 0;
+	int LOCAL_COMPUTATION__EXPRESSION = INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Local Instruction</em>' class.
+	 * The number of structural features of the '<em>Local Computation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_INSTRUCTION_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 1;
+	int LOCAL_COMPUTATION_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.upb.lina.lll.InstructionEnum <em>Instruction Enum</em>}' enum.
+	 * The meta object id for the '{@link de.upb.lina.lll.impl.MemoryInstructionImpl <em>Memory Instruction</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.upb.lina.lll.InstructionEnum
-	 * @see de.upb.lina.lll.impl.LllPackageImpl#getInstructionEnum()
+	 * @see de.upb.lina.lll.impl.MemoryInstructionImpl
+	 * @see de.upb.lina.lll.impl.LllPackageImpl#getMemoryInstruction()
 	 * @generated
 	 */
-	int INSTRUCTION_ENUM = 15;
+	int MEMORY_INSTRUCTION = 14;
+
+	/**
+	 * The feature id for the '<em><b>Instruction Result</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMORY_INSTRUCTION__INSTRUCTION_RESULT = INSTRUCTION__INSTRUCTION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Function</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMORY_INSTRUCTION__FUNCTION = INSTRUCTION__FUNCTION;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMORY_INSTRUCTION__PARAMETERS = INSTRUCTION__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Instruction Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMORY_INSTRUCTION__INSTRUCTION_TYPE = INSTRUCTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Memory Instruction</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMORY_INSTRUCTION_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link de.upb.lina.lll.MemoryInstructionType <em>Memory Instruction Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.upb.lina.lll.MemoryInstructionType
+	 * @see de.upb.lina.lll.impl.LllPackageImpl#getMemoryInstructionType()
+	 * @generated
+	 */
+	int MEMORY_INSTRUCTION_TYPE = 15;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.lll.PrimitiveType <em>Primitive Type</em>}' enum.
@@ -867,15 +858,15 @@ public interface LllPackage extends EPackage {
 	EReference getFunction_Program();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.upb.lina.lll.Function#getVariablesOrValues <em>Variables Or Values</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.upb.lina.lll.Function#getLocalVariablesOrValues <em>Local Variables Or Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Variables Or Values</em>'.
-	 * @see de.upb.lina.lll.Function#getVariablesOrValues()
+	 * @return the meta object for the containment reference list '<em>Local Variables Or Values</em>'.
+	 * @see de.upb.lina.lll.Function#getLocalVariablesOrValues()
 	 * @see #getFunction()
 	 * @generated
 	 */
-	EReference getFunction_VariablesOrValues();
+	EReference getFunction_LocalVariablesOrValues();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.upb.lina.lll.Function#getLabels <em>Labels</em>}'.
@@ -900,15 +891,15 @@ public interface LllPackage extends EPackage {
 	EReference getFunction_Instructions();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.upb.lina.lll.Function#getParameters <em>Parameters</em>}'.
+	 * Returns the meta object for the reference list '{@link de.upb.lina.lll.Function#getInputParameters <em>Input Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
-	 * @see de.upb.lina.lll.Function#getParameters()
+	 * @return the meta object for the reference list '<em>Input Parameters</em>'.
+	 * @see de.upb.lina.lll.Function#getInputParameters()
 	 * @see #getFunction()
 	 * @generated
 	 */
-	EReference getFunction_Parameters();
+	EReference getFunction_InputParameters();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.lina.lll.Label <em>Label</em>}'.
@@ -975,21 +966,10 @@ public interface LllPackage extends EPackage {
 	EReference getInstruction_Function();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.upb.lina.lll.Instruction#getInstruction <em>Instruction</em>}'.
+	 * Returns the meta object for the reference list '{@link de.upb.lina.lll.Instruction#getParameters <em>Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Instruction</em>'.
-	 * @see de.upb.lina.lll.Instruction#getInstruction()
-	 * @see #getInstruction()
-	 * @generated
-	 */
-	EAttribute getInstruction_Instruction();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.upb.lina.lll.Instruction#getParameters <em>Parameters</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
+	 * @return the meta object for the reference list '<em>Parameters</em>'.
 	 * @see de.upb.lina.lll.Instruction#getParameters()
 	 * @see #getInstruction()
 	 * @generated
@@ -997,25 +977,25 @@ public interface LllPackage extends EPackage {
 	EReference getInstruction_Parameters();
 
 	/**
-	 * Returns the meta object for class '{@link de.upb.lina.lll.Call <em>Call</em>}'.
+	 * Returns the meta object for class '{@link de.upb.lina.lll.FunctionCall <em>Function Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Call</em>'.
-	 * @see de.upb.lina.lll.Call
+	 * @return the meta object for class '<em>Function Call</em>'.
+	 * @see de.upb.lina.lll.FunctionCall
 	 * @generated
 	 */
-	EClass getCall();
+	EClass getFunctionCall();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.upb.lina.lll.Call#getInvokedFunction <em>Invoked Function</em>}'.
+	 * Returns the meta object for the reference '{@link de.upb.lina.lll.FunctionCall#getInvokedFunction <em>Invoked Function</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Invoked Function</em>'.
-	 * @see de.upb.lina.lll.Call#getInvokedFunction()
-	 * @see #getCall()
+	 * @see de.upb.lina.lll.FunctionCall#getInvokedFunction()
+	 * @see #getFunctionCall()
 	 * @generated
 	 */
-	EReference getCall_InvokedFunction();
+	EReference getFunctionCall_InvokedFunction();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.lina.lll.ConditionalBranch <em>Conditional Branch</em>}'.
@@ -1092,6 +1072,17 @@ public interface LllPackage extends EPackage {
 	EReference getVariableOrValue_Type();
 
 	/**
+	 * Returns the meta object for the container reference '{@link de.upb.lina.lll.VariableOrValue#getFunction <em>Function</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Function</em>'.
+	 * @see de.upb.lina.lll.VariableOrValue#getFunction()
+	 * @see #getVariableOrValue()
+	 * @generated
+	 */
+	EReference getVariableOrValue_Function();
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.lll.Constant <em>Constant</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1102,15 +1093,15 @@ public interface LllPackage extends EPackage {
 	EClass getConstant();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.upb.lina.lll.Constant#getConstant <em>Constant</em>}'.
+	 * Returns the meta object for the attribute '{@link de.upb.lina.lll.Constant#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Constant</em>'.
-	 * @see de.upb.lina.lll.Constant#getConstant()
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see de.upb.lina.lll.Constant#getValue()
 	 * @see #getConstant()
 	 * @generated
 	 */
-	EAttribute getConstant_Constant();
+	EAttribute getConstant_Value();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.lina.lll.Variable <em>Variable</em>}'.
@@ -1132,6 +1123,17 @@ public interface LllPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getVariable_Name();
+
+	/**
+	 * Returns the meta object for the container reference '{@link de.upb.lina.lll.Variable#getProgram <em>Program</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Program</em>'.
+	 * @see de.upb.lina.lll.Variable#getProgram()
+	 * @see #getVariable()
+	 * @generated
+	 */
+	EReference getVariable_Program();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.lina.lll.Type <em>Type</em>}'.
@@ -1186,89 +1188,56 @@ public interface LllPackage extends EPackage {
 	EAttribute getComplexType_Name();
 
 	/**
-	 * Returns the meta object for class '{@link de.upb.lina.lll.Parameter <em>Parameter</em>}'.
+	 * Returns the meta object for class '{@link de.upb.lina.lll.LocalComputation <em>Local Computation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Parameter</em>'.
-	 * @see de.upb.lina.lll.Parameter
+	 * @return the meta object for class '<em>Local Computation</em>'.
+	 * @see de.upb.lina.lll.LocalComputation
 	 * @generated
 	 */
-	EClass getParameter();
+	EClass getLocalComputation();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.upb.lina.lll.Parameter#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see de.upb.lina.lll.Parameter#getType()
-	 * @see #getParameter()
-	 * @generated
-	 */
-	EReference getParameter_Type();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.upb.lina.lll.Parameter#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Value</em>'.
-	 * @see de.upb.lina.lll.Parameter#getValue()
-	 * @see #getParameter()
-	 * @generated
-	 */
-	EReference getParameter_Value();
-
-	/**
-	 * Returns the meta object for the container reference '{@link de.upb.lina.lll.Parameter#getFunction <em>Function</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Function</em>'.
-	 * @see de.upb.lina.lll.Parameter#getFunction()
-	 * @see #getParameter()
-	 * @generated
-	 */
-	EReference getParameter_Function();
-
-	/**
-	 * Returns the meta object for the container reference '{@link de.upb.lina.lll.Parameter#getInstruction <em>Instruction</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Instruction</em>'.
-	 * @see de.upb.lina.lll.Parameter#getInstruction()
-	 * @see #getParameter()
-	 * @generated
-	 */
-	EReference getParameter_Instruction();
-
-	/**
-	 * Returns the meta object for class '{@link de.upb.lina.lll.LocalInstruction <em>Local Instruction</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Local Instruction</em>'.
-	 * @see de.upb.lina.lll.LocalInstruction
-	 * @generated
-	 */
-	EClass getLocalInstruction();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.upb.lina.lll.LocalInstruction#getExpression <em>Expression</em>}'.
+	 * Returns the meta object for the reference '{@link de.upb.lina.lll.LocalComputation#getExpression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Expression</em>'.
-	 * @see de.upb.lina.lll.LocalInstruction#getExpression()
-	 * @see #getLocalInstruction()
+	 * @see de.upb.lina.lll.LocalComputation#getExpression()
+	 * @see #getLocalComputation()
 	 * @generated
 	 */
-	EReference getLocalInstruction_Expression();
+	EReference getLocalComputation_Expression();
 
 	/**
-	 * Returns the meta object for enum '{@link de.upb.lina.lll.InstructionEnum <em>Instruction Enum</em>}'.
+	 * Returns the meta object for class '{@link de.upb.lina.lll.MemoryInstruction <em>Memory Instruction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Instruction Enum</em>'.
-	 * @see de.upb.lina.lll.InstructionEnum
+	 * @return the meta object for class '<em>Memory Instruction</em>'.
+	 * @see de.upb.lina.lll.MemoryInstruction
 	 * @generated
 	 */
-	EEnum getInstructionEnum();
+	EClass getMemoryInstruction();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.upb.lina.lll.MemoryInstruction#getInstructionType <em>Instruction Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Instruction Type</em>'.
+	 * @see de.upb.lina.lll.MemoryInstruction#getInstructionType()
+	 * @see #getMemoryInstruction()
+	 * @generated
+	 */
+	EAttribute getMemoryInstruction_InstructionType();
+
+	/**
+	 * Returns the meta object for enum '{@link de.upb.lina.lll.MemoryInstructionType <em>Memory Instruction Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Memory Instruction Type</em>'.
+	 * @see de.upb.lina.lll.MemoryInstructionType
+	 * @generated
+	 */
+	EEnum getMemoryInstructionType();
 
 	/**
 	 * Returns the meta object for enum '{@link de.upb.lina.lll.PrimitiveType <em>Primitive Type</em>}'.
@@ -1347,12 +1316,12 @@ public interface LllPackage extends EPackage {
 		EReference FUNCTION__PROGRAM = eINSTANCE.getFunction_Program();
 
 		/**
-		 * The meta object literal for the '<em><b>Variables Or Values</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Local Variables Or Values</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FUNCTION__VARIABLES_OR_VALUES = eINSTANCE.getFunction_VariablesOrValues();
+		EReference FUNCTION__LOCAL_VARIABLES_OR_VALUES = eINSTANCE.getFunction_LocalVariablesOrValues();
 
 		/**
 		 * The meta object literal for the '<em><b>Labels</b></em>' containment reference list feature.
@@ -1371,12 +1340,12 @@ public interface LllPackage extends EPackage {
 		EReference FUNCTION__INSTRUCTIONS = eINSTANCE.getFunction_Instructions();
 
 		/**
-		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Input Parameters</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FUNCTION__PARAMETERS = eINSTANCE.getFunction_Parameters();
+		EReference FUNCTION__INPUT_PARAMETERS = eINSTANCE.getFunction_InputParameters();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.lll.impl.LabelImpl <em>Label</em>}' class.
@@ -1431,15 +1400,7 @@ public interface LllPackage extends EPackage {
 		EReference INSTRUCTION__FUNCTION = eINSTANCE.getInstruction_Function();
 
 		/**
-		 * The meta object literal for the '<em><b>Instruction</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute INSTRUCTION__INSTRUCTION = eINSTANCE.getInstruction_Instruction();
-
-		/**
-		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Parameters</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1447,14 +1408,14 @@ public interface LllPackage extends EPackage {
 		EReference INSTRUCTION__PARAMETERS = eINSTANCE.getInstruction_Parameters();
 
 		/**
-		 * The meta object literal for the '{@link de.upb.lina.lll.impl.CallImpl <em>Call</em>}' class.
+		 * The meta object literal for the '{@link de.upb.lina.lll.impl.FunctionCallImpl <em>Function Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.upb.lina.lll.impl.CallImpl
-		 * @see de.upb.lina.lll.impl.LllPackageImpl#getCall()
+		 * @see de.upb.lina.lll.impl.FunctionCallImpl
+		 * @see de.upb.lina.lll.impl.LllPackageImpl#getFunctionCall()
 		 * @generated
 		 */
-		EClass CALL = eINSTANCE.getCall();
+		EClass FUNCTION_CALL = eINSTANCE.getFunctionCall();
 
 		/**
 		 * The meta object literal for the '<em><b>Invoked Function</b></em>' reference feature.
@@ -1462,7 +1423,7 @@ public interface LllPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CALL__INVOKED_FUNCTION = eINSTANCE.getCall_InvokedFunction();
+		EReference FUNCTION_CALL__INVOKED_FUNCTION = eINSTANCE.getFunctionCall_InvokedFunction();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.lll.impl.ConditionalBranchImpl <em>Conditional Branch</em>}' class.
@@ -1527,6 +1488,14 @@ public interface LllPackage extends EPackage {
 		EReference VARIABLE_OR_VALUE__TYPE = eINSTANCE.getVariableOrValue_Type();
 
 		/**
+		 * The meta object literal for the '<em><b>Function</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE_OR_VALUE__FUNCTION = eINSTANCE.getVariableOrValue_Function();
+
+		/**
 		 * The meta object literal for the '{@link de.upb.lina.lll.impl.ConstantImpl <em>Constant</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1537,12 +1506,12 @@ public interface LllPackage extends EPackage {
 		EClass CONSTANT = eINSTANCE.getConstant();
 
 		/**
-		 * The meta object literal for the '<em><b>Constant</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONSTANT__CONSTANT = eINSTANCE.getConstant_Constant();
+		EAttribute CONSTANT__VALUE = eINSTANCE.getConstant_Value();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.lll.impl.VariableImpl <em>Variable</em>}' class.
@@ -1561,6 +1530,14 @@ public interface LllPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute VARIABLE__NAME = eINSTANCE.getVariable_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Program</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE__PROGRAM = eINSTANCE.getVariable_Program();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.lll.impl.TypeImpl <em>Type</em>}' class.
@@ -1609,56 +1586,14 @@ public interface LllPackage extends EPackage {
 		EAttribute COMPLEX_TYPE__NAME = eINSTANCE.getComplexType_Name();
 
 		/**
-		 * The meta object literal for the '{@link de.upb.lina.lll.impl.ParameterImpl <em>Parameter</em>}' class.
+		 * The meta object literal for the '{@link de.upb.lina.lll.impl.LocalComputationImpl <em>Local Computation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.upb.lina.lll.impl.ParameterImpl
-		 * @see de.upb.lina.lll.impl.LllPackageImpl#getParameter()
+		 * @see de.upb.lina.lll.impl.LocalComputationImpl
+		 * @see de.upb.lina.lll.impl.LllPackageImpl#getLocalComputation()
 		 * @generated
 		 */
-		EClass PARAMETER = eINSTANCE.getParameter();
-
-		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PARAMETER__TYPE = eINSTANCE.getParameter_Type();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PARAMETER__VALUE = eINSTANCE.getParameter_Value();
-
-		/**
-		 * The meta object literal for the '<em><b>Function</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PARAMETER__FUNCTION = eINSTANCE.getParameter_Function();
-
-		/**
-		 * The meta object literal for the '<em><b>Instruction</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PARAMETER__INSTRUCTION = eINSTANCE.getParameter_Instruction();
-
-		/**
-		 * The meta object literal for the '{@link de.upb.lina.lll.impl.LocalInstructionImpl <em>Local Instruction</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.upb.lina.lll.impl.LocalInstructionImpl
-		 * @see de.upb.lina.lll.impl.LllPackageImpl#getLocalInstruction()
-		 * @generated
-		 */
-		EClass LOCAL_INSTRUCTION = eINSTANCE.getLocalInstruction();
+		EClass LOCAL_COMPUTATION = eINSTANCE.getLocalComputation();
 
 		/**
 		 * The meta object literal for the '<em><b>Expression</b></em>' reference feature.
@@ -1666,17 +1601,35 @@ public interface LllPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LOCAL_INSTRUCTION__EXPRESSION = eINSTANCE.getLocalInstruction_Expression();
+		EReference LOCAL_COMPUTATION__EXPRESSION = eINSTANCE.getLocalComputation_Expression();
 
 		/**
-		 * The meta object literal for the '{@link de.upb.lina.lll.InstructionEnum <em>Instruction Enum</em>}' enum.
+		 * The meta object literal for the '{@link de.upb.lina.lll.impl.MemoryInstructionImpl <em>Memory Instruction</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.upb.lina.lll.InstructionEnum
-		 * @see de.upb.lina.lll.impl.LllPackageImpl#getInstructionEnum()
+		 * @see de.upb.lina.lll.impl.MemoryInstructionImpl
+		 * @see de.upb.lina.lll.impl.LllPackageImpl#getMemoryInstruction()
 		 * @generated
 		 */
-		EEnum INSTRUCTION_ENUM = eINSTANCE.getInstructionEnum();
+		EClass MEMORY_INSTRUCTION = eINSTANCE.getMemoryInstruction();
+
+		/**
+		 * The meta object literal for the '<em><b>Instruction Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEMORY_INSTRUCTION__INSTRUCTION_TYPE = eINSTANCE.getMemoryInstruction_InstructionType();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.lina.lll.MemoryInstructionType <em>Memory Instruction Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.lina.lll.MemoryInstructionType
+		 * @see de.upb.lina.lll.impl.LllPackageImpl#getMemoryInstructionType()
+		 * @generated
+		 */
+		EEnum MEMORY_INSTRUCTION_TYPE = eINSTANCE.getMemoryInstructionType();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.lll.PrimitiveType <em>Primitive Type</em>}' enum.

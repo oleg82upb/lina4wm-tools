@@ -2,29 +2,23 @@
  */
 package de.upb.lina.lll.impl;
 
-import de.upb.lina.lll.Function;
-import de.upb.lina.lll.Instruction;
-import de.upb.lina.lll.InstructionEnum;
-import de.upb.lina.lll.LllPackage;
-import de.upb.lina.lll.Parameter;
-import de.upb.lina.lll.Variable;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.InternalEList;
+
+import de.upb.lina.lll.Function;
+import de.upb.lina.lll.Instruction;
+import de.upb.lina.lll.LllPackage;
+import de.upb.lina.lll.Variable;
+import de.upb.lina.lll.VariableOrValue;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,14 +29,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link de.upb.lina.lll.impl.InstructionImpl#getInstructionResult <em>Instruction Result</em>}</li>
  *   <li>{@link de.upb.lina.lll.impl.InstructionImpl#getFunction <em>Function</em>}</li>
- *   <li>{@link de.upb.lina.lll.impl.InstructionImpl#getInstruction <em>Instruction</em>}</li>
  *   <li>{@link de.upb.lina.lll.impl.InstructionImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class InstructionImpl extends EObjectImpl implements Instruction {
+public abstract class InstructionImpl extends EObjectImpl implements Instruction {
 	/**
 	 * The cached value of the '{@link #getInstructionResult() <em>Instruction Result</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -54,34 +47,14 @@ public class InstructionImpl extends EObjectImpl implements Instruction {
 	protected Variable instructionResult;
 
 	/**
-	 * The default value of the '{@link #getInstruction() <em>Instruction</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInstruction()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final InstructionEnum INSTRUCTION_EDEFAULT = InstructionEnum.ALLOCA;
-
-	/**
-	 * The cached value of the '{@link #getInstruction() <em>Instruction</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInstruction()
-	 * @generated
-	 * @ordered
-	 */
-	protected InstructionEnum instruction = INSTRUCTION_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getParameters()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Parameter> parameters;
+	protected EList<VariableOrValue> parameters;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -186,30 +159,9 @@ public class InstructionImpl extends EObjectImpl implements Instruction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InstructionEnum getInstruction() {
-		return instruction;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setInstruction(InstructionEnum newInstruction) {
-		InstructionEnum oldInstruction = instruction;
-		instruction = newInstruction == null ? INSTRUCTION_EDEFAULT : newInstruction;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LllPackage.INSTRUCTION__INSTRUCTION, oldInstruction, instruction));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Parameter> getParameters() {
+	public EList<VariableOrValue> getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectContainmentWithInverseEList<Parameter>(Parameter.class, this, LllPackage.INSTRUCTION__PARAMETERS, LllPackage.PARAMETER__INSTRUCTION);
+			parameters = new EObjectResolvingEList<VariableOrValue>(VariableOrValue.class, this, LllPackage.INSTRUCTION__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -227,8 +179,6 @@ public class InstructionImpl extends EObjectImpl implements Instruction {
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetFunction((Function)otherEnd, msgs);
-			case LllPackage.INSTRUCTION__PARAMETERS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getParameters()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -243,8 +193,6 @@ public class InstructionImpl extends EObjectImpl implements Instruction {
 		switch (featureID) {
 			case LllPackage.INSTRUCTION__FUNCTION:
 				return basicSetFunction(null, msgs);
-			case LllPackage.INSTRUCTION__PARAMETERS:
-				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -276,8 +224,6 @@ public class InstructionImpl extends EObjectImpl implements Instruction {
 				return basicGetInstructionResult();
 			case LllPackage.INSTRUCTION__FUNCTION:
 				return getFunction();
-			case LllPackage.INSTRUCTION__INSTRUCTION:
-				return getInstruction();
 			case LllPackage.INSTRUCTION__PARAMETERS:
 				return getParameters();
 		}
@@ -299,12 +245,9 @@ public class InstructionImpl extends EObjectImpl implements Instruction {
 			case LllPackage.INSTRUCTION__FUNCTION:
 				setFunction((Function)newValue);
 				return;
-			case LllPackage.INSTRUCTION__INSTRUCTION:
-				setInstruction((InstructionEnum)newValue);
-				return;
 			case LllPackage.INSTRUCTION__PARAMETERS:
 				getParameters().clear();
-				getParameters().addAll((Collection<? extends Parameter>)newValue);
+				getParameters().addAll((Collection<? extends VariableOrValue>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -323,9 +266,6 @@ public class InstructionImpl extends EObjectImpl implements Instruction {
 				return;
 			case LllPackage.INSTRUCTION__FUNCTION:
 				setFunction((Function)null);
-				return;
-			case LllPackage.INSTRUCTION__INSTRUCTION:
-				setInstruction(INSTRUCTION_EDEFAULT);
 				return;
 			case LllPackage.INSTRUCTION__PARAMETERS:
 				getParameters().clear();
@@ -346,28 +286,10 @@ public class InstructionImpl extends EObjectImpl implements Instruction {
 				return instructionResult != null;
 			case LllPackage.INSTRUCTION__FUNCTION:
 				return getFunction() != null;
-			case LllPackage.INSTRUCTION__INSTRUCTION:
-				return instruction != INSTRUCTION_EDEFAULT;
 			case LllPackage.INSTRUCTION__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (instruction: ");
-		result.append(instruction);
-		result.append(')');
-		return result.toString();
 	}
 
 } //InstructionImpl

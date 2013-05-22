@@ -10,14 +10,14 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Instruction Enum</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Memory Instruction Type</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see de.upb.lina.lll.LllPackage#getInstructionEnum()
+ * @see de.upb.lina.lll.LllPackage#getMemoryInstructionType()
  * @model
  * @generated
  */
-public enum InstructionEnum implements Enumerator {
+public enum MemoryInstructionType implements Enumerator {
 	/**
 	 * The '<em><b>Alloca</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -27,16 +27,6 @@ public enum InstructionEnum implements Enumerator {
 	 * @ordered
 	 */
 	ALLOCA(0, "Alloca", "Alloca"),
-
-	/**
-	 * The '<em><b>Return</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #RETURN_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	RETURN(1, "Return", "Return"),
 
 	/**
 	 * The '<em><b>Load</b></em>' literal object.
@@ -102,21 +92,6 @@ public enum InstructionEnum implements Enumerator {
 	 * @ordered
 	 */
 	public static final int ALLOCA_VALUE = 0;
-
-	/**
-	 * The '<em><b>Return</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Return</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #RETURN
-	 * @model name="Return"
-	 * @generated
-	 * @ordered
-	 */
-	public static final int RETURN_VALUE = 1;
 
 	/**
 	 * The '<em><b>Load</b></em>' literal value.
@@ -194,15 +169,14 @@ public enum InstructionEnum implements Enumerator {
 	public static final int GET_ELEMENT_POINTER_VALUE = 0;
 
 	/**
-	 * An array of all the '<em><b>Instruction Enum</b></em>' enumerators.
+	 * An array of all the '<em><b>Memory Instruction Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final InstructionEnum[] VALUES_ARRAY =
-		new InstructionEnum[] {
+	private static final MemoryInstructionType[] VALUES_ARRAY =
+		new MemoryInstructionType[] {
 			ALLOCA,
-			RETURN,
 			LOAD,
 			STORE,
 			FENCE,
@@ -211,22 +185,22 @@ public enum InstructionEnum implements Enumerator {
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>Instruction Enum</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>Memory Instruction Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<InstructionEnum> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<MemoryInstructionType> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Instruction Enum</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>Memory Instruction Type</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static InstructionEnum get(String literal) {
+	public static MemoryInstructionType get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			InstructionEnum result = VALUES_ARRAY[i];
+			MemoryInstructionType result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -235,14 +209,14 @@ public enum InstructionEnum implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Instruction Enum</b></em>' literal with the specified name.
+	 * Returns the '<em><b>Memory Instruction Type</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static InstructionEnum getByName(String name) {
+	public static MemoryInstructionType getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			InstructionEnum result = VALUES_ARRAY[i];
+			MemoryInstructionType result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -251,15 +225,14 @@ public enum InstructionEnum implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Instruction Enum</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>Memory Instruction Type</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static InstructionEnum get(int value) {
+	public static MemoryInstructionType get(int value) {
 		switch (value) {
 			case ALLOCA_VALUE: return ALLOCA;
-			case RETURN_VALUE: return RETURN;
 			case LOAD_VALUE: return LOAD;
 			case STORE_VALUE: return STORE;
 			case FENCE_VALUE: return FENCE;
@@ -295,7 +268,7 @@ public enum InstructionEnum implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private InstructionEnum(int value, String name, String literal) {
+	private MemoryInstructionType(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -339,4 +312,4 @@ public enum InstructionEnum implements Enumerator {
 		return literal;
 	}
 	
-} //InstructionEnum
+} //MemoryInstructionType
