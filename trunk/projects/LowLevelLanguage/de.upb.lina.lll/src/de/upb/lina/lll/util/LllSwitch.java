@@ -96,10 +96,10 @@ public class LllSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case LllPackage.CALL: {
-				Call call = (Call)theEObject;
-				T result = caseCall(call);
-				if (result == null) result = caseInstruction(call);
+			case LllPackage.FUNCTION_CALL: {
+				FunctionCall functionCall = (FunctionCall)theEObject;
+				T result = caseFunctionCall(functionCall);
+				if (result == null) result = caseInstruction(functionCall);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -158,16 +158,17 @@ public class LllSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case LllPackage.PARAMETER: {
-				Parameter parameter = (Parameter)theEObject;
-				T result = caseParameter(parameter);
+			case LllPackage.LOCAL_COMPUTATION: {
+				LocalComputation localComputation = (LocalComputation)theEObject;
+				T result = caseLocalComputation(localComputation);
+				if (result == null) result = caseInstruction(localComputation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case LllPackage.LOCAL_INSTRUCTION: {
-				LocalInstruction localInstruction = (LocalInstruction)theEObject;
-				T result = caseLocalInstruction(localInstruction);
-				if (result == null) result = caseInstruction(localInstruction);
+			case LllPackage.MEMORY_INSTRUCTION: {
+				MemoryInstruction memoryInstruction = (MemoryInstruction)theEObject;
+				T result = caseMemoryInstruction(memoryInstruction);
+				if (result == null) result = caseInstruction(memoryInstruction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -236,17 +237,17 @@ public class LllSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Call</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Function Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Call</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Function Call</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCall(Call object) {
+	public T caseFunctionCall(FunctionCall object) {
 		return null;
 	}
 
@@ -371,32 +372,32 @@ public class LllSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Parameter</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Local Computation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Parameter</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Local Computation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseParameter(Parameter object) {
+	public T caseLocalComputation(LocalComputation object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Local Instruction</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Memory Instruction</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Local Instruction</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Memory Instruction</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseLocalInstruction(LocalInstruction object) {
+	public T caseMemoryInstruction(MemoryInstruction object) {
 		return null;
 	}
 

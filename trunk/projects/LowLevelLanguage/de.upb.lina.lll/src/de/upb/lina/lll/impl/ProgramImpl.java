@@ -5,6 +5,7 @@ package de.upb.lina.lll.impl;
 import de.upb.lina.lll.Function;
 import de.upb.lina.lll.LllPackage;
 import de.upb.lina.lll.Program;
+import de.upb.lina.lll.Variable;
 import de.upb.lina.lll.VariableOrValue;
 
 import java.util.Collection;
@@ -55,7 +56,7 @@ public class ProgramImpl extends EObjectImpl implements Program {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<VariableOrValue> globalVariablesOrValues;
+	protected EList<Variable> globalVariablesOrValues;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -93,9 +94,9 @@ public class ProgramImpl extends EObjectImpl implements Program {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<VariableOrValue> getGlobalVariablesOrValues() {
+	public EList<Variable> getGlobalVariablesOrValues() {
 		if (globalVariablesOrValues == null) {
-			globalVariablesOrValues = new EObjectContainmentEList<VariableOrValue>(VariableOrValue.class, this, LllPackage.PROGRAM__GLOBAL_VARIABLES_OR_VALUES);
+			globalVariablesOrValues = new EObjectContainmentWithInverseEList<Variable>(Variable.class, this, LllPackage.PROGRAM__GLOBAL_VARIABLES_OR_VALUES, LllPackage.VARIABLE__PROGRAM);
 		}
 		return globalVariablesOrValues;
 	}
@@ -111,6 +112,8 @@ public class ProgramImpl extends EObjectImpl implements Program {
 		switch (featureID) {
 			case LllPackage.PROGRAM__FUNCTIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getFunctions()).basicAdd(otherEnd, msgs);
+			case LllPackage.PROGRAM__GLOBAL_VARIABLES_OR_VALUES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGlobalVariablesOrValues()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -162,7 +165,7 @@ public class ProgramImpl extends EObjectImpl implements Program {
 				return;
 			case LllPackage.PROGRAM__GLOBAL_VARIABLES_OR_VALUES:
 				getGlobalVariablesOrValues().clear();
-				getGlobalVariablesOrValues().addAll((Collection<? extends VariableOrValue>)newValue);
+				getGlobalVariablesOrValues().addAll((Collection<? extends Variable>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

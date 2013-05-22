@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.lina.lll.impl.ConstantImpl#getConstant <em>Constant</em>}</li>
+ *   <li>{@link de.upb.lina.lll.impl.ConstantImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,24 +26,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class ConstantImpl extends VariableOrValueImpl implements Constant {
 	/**
-	 * The default value of the '{@link #getConstant() <em>Constant</em>}' attribute.
+	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getConstant()
+	 * @see #getValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String CONSTANT_EDEFAULT = null;
+	protected static final String VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getConstant() <em>Constant</em>}' attribute.
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getConstant()
+	 * @see #getValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected String constant = CONSTANT_EDEFAULT;
+	protected String value = VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,8 +69,8 @@ public class ConstantImpl extends VariableOrValueImpl implements Constant {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getConstant() {
-		return constant;
+	public String getValue() {
+		return value;
 	}
 
 	/**
@@ -78,11 +78,11 @@ public class ConstantImpl extends VariableOrValueImpl implements Constant {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setConstant(String newConstant) {
-		String oldConstant = constant;
-		constant = newConstant;
+	public void setValue(String newValue) {
+		String oldValue = value;
+		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LllPackage.CONSTANT__CONSTANT, oldConstant, constant));
+			eNotify(new ENotificationImpl(this, Notification.SET, LllPackage.CONSTANT__VALUE, oldValue, value));
 	}
 
 	/**
@@ -93,8 +93,8 @@ public class ConstantImpl extends VariableOrValueImpl implements Constant {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case LllPackage.CONSTANT__CONSTANT:
-				return getConstant();
+			case LllPackage.CONSTANT__VALUE:
+				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -107,8 +107,8 @@ public class ConstantImpl extends VariableOrValueImpl implements Constant {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case LllPackage.CONSTANT__CONSTANT:
-				setConstant((String)newValue);
+			case LllPackage.CONSTANT__VALUE:
+				setValue((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -122,8 +122,8 @@ public class ConstantImpl extends VariableOrValueImpl implements Constant {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case LllPackage.CONSTANT__CONSTANT:
-				setConstant(CONSTANT_EDEFAULT);
+			case LllPackage.CONSTANT__VALUE:
+				setValue(VALUE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -137,8 +137,8 @@ public class ConstantImpl extends VariableOrValueImpl implements Constant {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case LllPackage.CONSTANT__CONSTANT:
-				return CONSTANT_EDEFAULT == null ? constant != null : !CONSTANT_EDEFAULT.equals(constant);
+			case LllPackage.CONSTANT__VALUE:
+				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -153,8 +153,8 @@ public class ConstantImpl extends VariableOrValueImpl implements Constant {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (constant: ");
-		result.append(constant);
+		result.append(" (value: ");
+		result.append(value);
 		result.append(')');
 		return result.toString();
 	}

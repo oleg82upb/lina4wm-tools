@@ -2,17 +2,20 @@
  */
 package de.upb.lina.lll.impl;
 
+import de.upb.lina.lll.Function;
 import de.upb.lina.lll.LllPackage;
 import de.upb.lina.lll.Type;
 import de.upb.lina.lll.VariableOrValue;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,6 +25,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.lina.lll.impl.VariableOrValueImpl#getType <em>Type</em>}</li>
+ *   <li>{@link de.upb.lina.lll.impl.VariableOrValueImpl#getFunction <em>Function</em>}</li>
  * </ul>
  * </p>
  *
@@ -100,12 +104,99 @@ public abstract class VariableOrValueImpl extends EObjectImpl implements Variabl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Function getFunction() {
+		if (eContainerFeatureID() != LllPackage.VARIABLE_OR_VALUE__FUNCTION) return null;
+		return (Function)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetFunction(Function newFunction, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newFunction, LllPackage.VARIABLE_OR_VALUE__FUNCTION, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFunction(Function newFunction) {
+		if (newFunction != eInternalContainer() || (eContainerFeatureID() != LllPackage.VARIABLE_OR_VALUE__FUNCTION && newFunction != null)) {
+			if (EcoreUtil.isAncestor(this, newFunction))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newFunction != null)
+				msgs = ((InternalEObject)newFunction).eInverseAdd(this, LllPackage.FUNCTION__LOCAL_VARIABLES_OR_VALUES, Function.class, msgs);
+			msgs = basicSetFunction(newFunction, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LllPackage.VARIABLE_OR_VALUE__FUNCTION, newFunction, newFunction));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case LllPackage.VARIABLE_OR_VALUE__FUNCTION:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetFunction((Function)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case LllPackage.VARIABLE_OR_VALUE__FUNCTION:
+				return basicSetFunction(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case LllPackage.VARIABLE_OR_VALUE__FUNCTION:
+				return eInternalContainer().eInverseRemove(this, LllPackage.FUNCTION__LOCAL_VARIABLES_OR_VALUES, Function.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case LllPackage.VARIABLE_OR_VALUE__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case LllPackage.VARIABLE_OR_VALUE__FUNCTION:
+				return getFunction();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -120,6 +211,9 @@ public abstract class VariableOrValueImpl extends EObjectImpl implements Variabl
 		switch (featureID) {
 			case LllPackage.VARIABLE_OR_VALUE__TYPE:
 				setType((Type)newValue);
+				return;
+			case LllPackage.VARIABLE_OR_VALUE__FUNCTION:
+				setFunction((Function)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -136,6 +230,9 @@ public abstract class VariableOrValueImpl extends EObjectImpl implements Variabl
 			case LllPackage.VARIABLE_OR_VALUE__TYPE:
 				setType((Type)null);
 				return;
+			case LllPackage.VARIABLE_OR_VALUE__FUNCTION:
+				setFunction((Function)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -150,6 +247,8 @@ public abstract class VariableOrValueImpl extends EObjectImpl implements Variabl
 		switch (featureID) {
 			case LllPackage.VARIABLE_OR_VALUE__TYPE:
 				return type != null;
+			case LllPackage.VARIABLE_OR_VALUE__FUNCTION:
+				return getFunction() != null;
 		}
 		return super.eIsSet(featureID);
 	}

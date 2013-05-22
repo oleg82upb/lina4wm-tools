@@ -5,21 +5,21 @@ package de.upb.lina.lll;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Call</b></em>'.
+ * A representation of the model object '<em><b>Function Call</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.lina.lll.Call#getInvokedFunction <em>Invoked Function</em>}</li>
+ *   <li>{@link de.upb.lina.lll.FunctionCall#getInvokedFunction <em>Invoked Function</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.upb.lina.lll.LllPackage#getCall()
+ * @see de.upb.lina.lll.LllPackage#getFunctionCall()
  * @model
  * @generated
  */
-public interface Call extends Instruction {
+public interface FunctionCall extends Instruction {
 	/**
 	 * Returns the value of the '<em><b>Invoked Function</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -30,14 +30,14 @@ public interface Call extends Instruction {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Invoked Function</em>' reference.
 	 * @see #setInvokedFunction(Function)
-	 * @see de.upb.lina.lll.LllPackage#getCall_InvokedFunction()
+	 * @see de.upb.lina.lll.LllPackage#getFunctionCall_InvokedFunction()
 	 * @model
 	 * @generated
 	 */
 	Function getInvokedFunction();
 
 	/**
-	 * Sets the value of the '{@link de.upb.lina.lll.Call#getInvokedFunction <em>Invoked Function</em>}' reference.
+	 * Sets the value of the '{@link de.upb.lina.lll.FunctionCall#getInvokedFunction <em>Invoked Function</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Invoked Function</em>' reference.
@@ -46,4 +46,4 @@ public interface Call extends Instruction {
 	 */
 	void setInvokedFunction(Function value);
 
-} // Call
+} // FunctionCall

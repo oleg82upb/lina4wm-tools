@@ -6,14 +6,13 @@
   <foreignModel>LLL.ecore</foreignModel>
   <genPackages prefix="Lll" basePackage="de.upb.lina" disposableProviderFactory="true"
       ecorePackage="LLL.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="LLL.ecore#//InstructionEnum">
-      <genEnumLiterals ecoreEnumLiteral="LLL.ecore#//InstructionEnum/Alloca"/>
-      <genEnumLiterals ecoreEnumLiteral="LLL.ecore#//InstructionEnum/Return"/>
-      <genEnumLiterals ecoreEnumLiteral="LLL.ecore#//InstructionEnum/Load"/>
-      <genEnumLiterals ecoreEnumLiteral="LLL.ecore#//InstructionEnum/Store"/>
-      <genEnumLiterals ecoreEnumLiteral="LLL.ecore#//InstructionEnum/Fence"/>
-      <genEnumLiterals ecoreEnumLiteral="LLL.ecore#//InstructionEnum/CompareAndSwap"/>
-      <genEnumLiterals ecoreEnumLiteral="LLL.ecore#//InstructionEnum/GetElementPointer"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="LLL.ecore#//MemoryInstructionType">
+      <genEnumLiterals ecoreEnumLiteral="LLL.ecore#//MemoryInstructionType/Alloca"/>
+      <genEnumLiterals ecoreEnumLiteral="LLL.ecore#//MemoryInstructionType/Load"/>
+      <genEnumLiterals ecoreEnumLiteral="LLL.ecore#//MemoryInstructionType/Store"/>
+      <genEnumLiterals ecoreEnumLiteral="LLL.ecore#//MemoryInstructionType/Fence"/>
+      <genEnumLiterals ecoreEnumLiteral="LLL.ecore#//MemoryInstructionType/CompareAndSwap"/>
+      <genEnumLiterals ecoreEnumLiteral="LLL.ecore#//MemoryInstructionType/GetElementPointer"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="LLL.ecore#//PrimitiveType">
       <genEnumLiterals ecoreEnumLiteral="LLL.ecore#//PrimitiveType/bool"/>
@@ -29,10 +28,10 @@
     </genClasses>
     <genClasses ecoreClass="LLL.ecore#//Function">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference LLL.ecore#//Function/program"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLL.ecore#//Function/variablesOrValues"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLL.ecore#//Function/localVariablesOrValues"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLL.ecore#//Function/labels"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLL.ecore#//Function/instructions"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLL.ecore#//Function/parameters"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LLL.ecore#//Function/inputParameters"/>
     </genClasses>
     <genClasses image="false" ecoreClass="LLL.ecore#//Label">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference LLL.ecore#//Label/function"/>
@@ -41,11 +40,10 @@
     <genClasses ecoreClass="LLL.ecore#//Instruction">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LLL.ecore#//Instruction/instructionResult"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference LLL.ecore#//Instruction/function"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLL.ecore#//Instruction/instruction"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLL.ecore#//Instruction/parameters"/>
     </genClasses>
-    <genClasses ecoreClass="LLL.ecore#//Call">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LLL.ecore#//Call/invokedFunction"/>
+    <genClasses ecoreClass="LLL.ecore#//FunctionCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LLL.ecore#//FunctionCall/invokedFunction"/>
     </genClasses>
     <genClasses ecoreClass="LLL.ecore#//ConditionalBranch">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LLL.ecore#//ConditionalBranch/elseTarget"/>
@@ -56,12 +54,14 @@
     </genClasses>
     <genClasses image="false" ecoreClass="LLL.ecore#//VariableOrValue">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LLL.ecore#//VariableOrValue/type"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference LLL.ecore#//VariableOrValue/function"/>
     </genClasses>
     <genClasses ecoreClass="LLL.ecore#//Constant">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLL.ecore#//Constant/constant"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLL.ecore#//Constant/value"/>
     </genClasses>
     <genClasses ecoreClass="LLL.ecore#//Variable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLL.ecore#//Variable/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference LLL.ecore#//Variable/program"/>
     </genClasses>
     <genClasses ecoreClass="LLL.ecore#//Type"/>
     <genClasses image="false" ecoreClass="LLL.ecore#//SimpleType">
@@ -70,14 +70,11 @@
     <genClasses ecoreClass="LLL.ecore#//ComplexType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLL.ecore#//ComplexType/name"/>
     </genClasses>
-    <genClasses ecoreClass="LLL.ecore#//Parameter">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LLL.ecore#//Parameter/type"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LLL.ecore#//Parameter/value"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference LLL.ecore#//Parameter/function"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference LLL.ecore#//Parameter/instruction"/>
+    <genClasses ecoreClass="LLL.ecore#//LocalComputation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LLL.ecore#//LocalComputation/expression"/>
     </genClasses>
-    <genClasses ecoreClass="LLL.ecore#//LocalInstruction">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LLL.ecore#//LocalInstruction/expression"/>
+    <genClasses ecoreClass="LLL.ecore#//MemoryInstruction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLL.ecore#//MemoryInstruction/instructionType"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

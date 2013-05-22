@@ -2,36 +2,34 @@
  */
 package de.upb.lina.lll.impl;
 
-import de.upb.lina.lll.Call;
-import de.upb.lina.lll.ComplexType;
-import de.upb.lina.lll.ConditionalBranch;
-import de.upb.lina.lll.Constant;
-import de.upb.lina.lll.Function;
-import de.upb.lina.lll.Goto;
-import de.upb.lina.lll.Instruction;
-import de.upb.lina.lll.InstructionEnum;
-import de.upb.lina.lll.Label;
-import de.upb.lina.lll.LllFactory;
-import de.upb.lina.lll.LllPackage;
-import de.upb.lina.lll.LocalInstruction;
-import de.upb.lina.lll.Parameter;
-import de.upb.lina.lll.PrimitiveType;
-import de.upb.lina.lll.Program;
-import de.upb.lina.lll.SimpleType;
-import de.upb.lina.lll.Type;
-import de.upb.lina.lll.Variable;
-import de.upb.lina.lll.VariableOrValue;
-
-import de.upb.lina.lll.expressions.ExpressionsPackage;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
+import de.upb.lina.lll.ComplexType;
+import de.upb.lina.lll.ConditionalBranch;
+import de.upb.lina.lll.Constant;
+import de.upb.lina.lll.Function;
+import de.upb.lina.lll.FunctionCall;
+import de.upb.lina.lll.Goto;
+import de.upb.lina.lll.Instruction;
+import de.upb.lina.lll.Label;
+import de.upb.lina.lll.LllFactory;
+import de.upb.lina.lll.LllPackage;
+import de.upb.lina.lll.LocalComputation;
+import de.upb.lina.lll.MemoryInstruction;
+import de.upb.lina.lll.MemoryInstructionType;
+import de.upb.lina.lll.PrimitiveType;
+import de.upb.lina.lll.Program;
+import de.upb.lina.lll.SimpleType;
+import de.upb.lina.lll.Type;
+import de.upb.lina.lll.Variable;
+import de.upb.lina.lll.VariableOrValue;
+import de.upb.lina.lll.expressions.ExpressionsPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -73,7 +71,7 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass callEClass = null;
+	private EClass functionCallEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -136,21 +134,21 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass parameterEClass = null;
+	private EClass localComputationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass localInstructionEClass = null;
+	private EClass memoryInstructionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum instructionEnumEEnum = null;
+	private EEnum memoryInstructionTypeEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -274,7 +272,7 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFunction_VariablesOrValues() {
+	public EReference getFunction_LocalVariablesOrValues() {
 		return (EReference)functionEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -301,7 +299,7 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFunction_Parameters() {
+	public EReference getFunction_InputParameters() {
 		return (EReference)functionEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -364,17 +362,8 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getInstruction_Instruction() {
-		return (EAttribute)instructionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getInstruction_Parameters() {
-		return (EReference)instructionEClass.getEStructuralFeatures().get(3);
+		return (EReference)instructionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -382,8 +371,8 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getCall() {
-		return callEClass;
+	public EClass getFunctionCall() {
+		return functionCallEClass;
 	}
 
 	/**
@@ -391,8 +380,8 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCall_InvokedFunction() {
-		return (EReference)callEClass.getEStructuralFeatures().get(0);
+	public EReference getFunctionCall_InvokedFunction() {
+		return (EReference)functionCallEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -463,6 +452,15 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getVariableOrValue_Function() {
+		return (EReference)variableOrValueEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getConstant() {
 		return constantEClass;
 	}
@@ -472,7 +470,7 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getConstant_Constant() {
+	public EAttribute getConstant_Value() {
 		return (EAttribute)constantEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -492,6 +490,15 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 	 */
 	public EAttribute getVariable_Name() {
 		return (EAttribute)variableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVariable_Program() {
+		return (EReference)variableEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -544,8 +551,8 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getParameter() {
-		return parameterEClass;
+	public EClass getLocalComputation() {
+		return localComputationEClass;
 	}
 
 	/**
@@ -553,8 +560,8 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getParameter_Type() {
-		return (EReference)parameterEClass.getEStructuralFeatures().get(0);
+	public EReference getLocalComputation_Expression() {
+		return (EReference)localComputationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -562,8 +569,8 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getParameter_Value() {
-		return (EReference)parameterEClass.getEStructuralFeatures().get(1);
+	public EClass getMemoryInstruction() {
+		return memoryInstructionEClass;
 	}
 
 	/**
@@ -571,8 +578,8 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getParameter_Function() {
-		return (EReference)parameterEClass.getEStructuralFeatures().get(2);
+	public EAttribute getMemoryInstruction_InstructionType() {
+		return (EAttribute)memoryInstructionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -580,35 +587,8 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getParameter_Instruction() {
-		return (EReference)parameterEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getLocalInstruction() {
-		return localInstructionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getLocalInstruction_Expression() {
-		return (EReference)localInstructionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EEnum getInstructionEnum() {
-		return instructionEnumEEnum;
+	public EEnum getMemoryInstructionType() {
+		return memoryInstructionTypeEEnum;
 	}
 
 	/**
@@ -654,10 +634,10 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 
 		functionEClass = createEClass(FUNCTION);
 		createEReference(functionEClass, FUNCTION__PROGRAM);
-		createEReference(functionEClass, FUNCTION__VARIABLES_OR_VALUES);
+		createEReference(functionEClass, FUNCTION__LOCAL_VARIABLES_OR_VALUES);
 		createEReference(functionEClass, FUNCTION__LABELS);
 		createEReference(functionEClass, FUNCTION__INSTRUCTIONS);
-		createEReference(functionEClass, FUNCTION__PARAMETERS);
+		createEReference(functionEClass, FUNCTION__INPUT_PARAMETERS);
 
 		labelEClass = createEClass(LABEL);
 		createEReference(labelEClass, LABEL__FUNCTION);
@@ -666,11 +646,10 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 		instructionEClass = createEClass(INSTRUCTION);
 		createEReference(instructionEClass, INSTRUCTION__INSTRUCTION_RESULT);
 		createEReference(instructionEClass, INSTRUCTION__FUNCTION);
-		createEAttribute(instructionEClass, INSTRUCTION__INSTRUCTION);
 		createEReference(instructionEClass, INSTRUCTION__PARAMETERS);
 
-		callEClass = createEClass(CALL);
-		createEReference(callEClass, CALL__INVOKED_FUNCTION);
+		functionCallEClass = createEClass(FUNCTION_CALL);
+		createEReference(functionCallEClass, FUNCTION_CALL__INVOKED_FUNCTION);
 
 		conditionalBranchEClass = createEClass(CONDITIONAL_BRANCH);
 		createEReference(conditionalBranchEClass, CONDITIONAL_BRANCH__ELSE_TARGET);
@@ -681,12 +660,14 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 
 		variableOrValueEClass = createEClass(VARIABLE_OR_VALUE);
 		createEReference(variableOrValueEClass, VARIABLE_OR_VALUE__TYPE);
+		createEReference(variableOrValueEClass, VARIABLE_OR_VALUE__FUNCTION);
 
 		constantEClass = createEClass(CONSTANT);
-		createEAttribute(constantEClass, CONSTANT__CONSTANT);
+		createEAttribute(constantEClass, CONSTANT__VALUE);
 
 		variableEClass = createEClass(VARIABLE);
 		createEAttribute(variableEClass, VARIABLE__NAME);
+		createEReference(variableEClass, VARIABLE__PROGRAM);
 
 		typeEClass = createEClass(TYPE);
 
@@ -696,17 +677,14 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 		complexTypeEClass = createEClass(COMPLEX_TYPE);
 		createEAttribute(complexTypeEClass, COMPLEX_TYPE__NAME);
 
-		parameterEClass = createEClass(PARAMETER);
-		createEReference(parameterEClass, PARAMETER__TYPE);
-		createEReference(parameterEClass, PARAMETER__VALUE);
-		createEReference(parameterEClass, PARAMETER__FUNCTION);
-		createEReference(parameterEClass, PARAMETER__INSTRUCTION);
+		localComputationEClass = createEClass(LOCAL_COMPUTATION);
+		createEReference(localComputationEClass, LOCAL_COMPUTATION__EXPRESSION);
 
-		localInstructionEClass = createEClass(LOCAL_INSTRUCTION);
-		createEReference(localInstructionEClass, LOCAL_INSTRUCTION__EXPRESSION);
+		memoryInstructionEClass = createEClass(MEMORY_INSTRUCTION);
+		createEAttribute(memoryInstructionEClass, MEMORY_INSTRUCTION__INSTRUCTION_TYPE);
 
 		// Create enums
-		instructionEnumEEnum = createEEnum(INSTRUCTION_ENUM);
+		memoryInstructionTypeEEnum = createEEnum(MEMORY_INSTRUCTION_TYPE);
 		primitiveTypeEEnum = createEEnum(PRIMITIVE_TYPE);
 	}
 
@@ -744,39 +722,39 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 		// Add supertypes to classes
 		functionEClass.getESuperTypes().add(theEcorePackage.getENamedElement());
 		labelEClass.getESuperTypes().add(theEcorePackage.getENamedElement());
-		callEClass.getESuperTypes().add(this.getInstruction());
+		functionCallEClass.getESuperTypes().add(this.getInstruction());
 		conditionalBranchEClass.getESuperTypes().add(this.getGoto());
 		gotoEClass.getESuperTypes().add(this.getInstruction());
 		constantEClass.getESuperTypes().add(this.getVariableOrValue());
 		variableEClass.getESuperTypes().add(this.getVariableOrValue());
 		simpleTypeEClass.getESuperTypes().add(this.getType());
 		complexTypeEClass.getESuperTypes().add(this.getType());
-		localInstructionEClass.getESuperTypes().add(this.getInstruction());
+		localComputationEClass.getESuperTypes().add(this.getInstruction());
+		memoryInstructionEClass.getESuperTypes().add(this.getInstruction());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(programEClass, Program.class, "Program", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProgram_Functions(), this.getFunction(), this.getFunction_Program(), "functions", null, 0, -1, Program.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProgram_GlobalVariablesOrValues(), this.getVariableOrValue(), null, "globalVariablesOrValues", null, 0, -1, Program.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProgram_GlobalVariablesOrValues(), this.getVariable(), this.getVariable_Program(), "globalVariablesOrValues", null, 0, -1, Program.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(functionEClass, Function.class, "Function", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFunction_Program(), this.getProgram(), this.getProgram_Functions(), "program", null, 0, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunction_VariablesOrValues(), this.getVariableOrValue(), null, "variablesOrValues", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFunction_LocalVariablesOrValues(), this.getVariableOrValue(), this.getVariableOrValue_Function(), "localVariablesOrValues", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunction_Labels(), this.getLabel(), this.getLabel_Function(), "labels", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunction_Instructions(), this.getInstruction(), this.getInstruction_Function(), "instructions", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunction_Parameters(), this.getParameter(), this.getParameter_Function(), "parameters", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFunction_InputParameters(), this.getVariableOrValue(), null, "inputParameters", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(labelEClass, Label.class, "Label", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLabel_Function(), this.getFunction(), this.getFunction_Labels(), "function", null, 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLabel_Instruction(), this.getInstruction(), null, "instruction", null, 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(instructionEClass, Instruction.class, "Instruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(instructionEClass, Instruction.class, "Instruction", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInstruction_InstructionResult(), this.getVariable(), null, "instructionResult", null, 0, 1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInstruction_Function(), this.getFunction(), this.getFunction_Instructions(), "function", null, 0, 1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getInstruction_Instruction(), this.getInstructionEnum(), "instruction", null, 0, 1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getInstruction_Parameters(), this.getParameter(), this.getParameter_Instruction(), "parameters", null, 0, -1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstruction_Parameters(), this.getVariableOrValue(), null, "parameters", null, 0, -1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(callEClass, Call.class, "Call", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCall_InvokedFunction(), this.getFunction(), null, "invokedFunction", null, 0, 1, Call.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(functionCallEClass, FunctionCall.class, "FunctionCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFunctionCall_InvokedFunction(), this.getFunction(), null, "invokedFunction", null, 0, 1, FunctionCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(conditionalBranchEClass, ConditionalBranch.class, "ConditionalBranch", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getConditionalBranch_ElseTarget(), this.getLabel(), null, "elseTarget", null, 0, 1, ConditionalBranch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -787,12 +765,14 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 
 		initEClass(variableOrValueEClass, VariableOrValue.class, "VariableOrValue", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVariableOrValue_Type(), this.getType(), null, "type", null, 0, 1, VariableOrValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVariableOrValue_Function(), this.getFunction(), this.getFunction_LocalVariablesOrValues(), "function", null, 0, 1, VariableOrValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(constantEClass, Constant.class, "Constant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getConstant_Constant(), ecorePackage.getEString(), "constant", null, 0, 1, Constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConstant_Value(), ecorePackage.getEString(), "value", null, 0, 1, Constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variableEClass, Variable.class, "Variable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVariable_Program(), this.getProgram(), this.getProgram_GlobalVariablesOrValues(), "program", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -802,24 +782,20 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 		initEClass(complexTypeEClass, ComplexType.class, "ComplexType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getComplexType_Name(), ecorePackage.getEString(), "name", null, 0, 1, ComplexType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getParameter_Type(), this.getType(), null, "type", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getParameter_Value(), this.getVariableOrValue(), null, "value", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getParameter_Function(), this.getFunction(), this.getFunction_Parameters(), "function", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getParameter_Instruction(), this.getInstruction(), this.getInstruction_Parameters(), "instruction", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(localComputationEClass, LocalComputation.class, "LocalComputation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLocalComputation_Expression(), theExpressionsPackage.getExpression(), null, "expression", null, 0, 1, LocalComputation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(localInstructionEClass, LocalInstruction.class, "LocalInstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLocalInstruction_Expression(), theExpressionsPackage.getExpression(), null, "expression", null, 0, 1, LocalInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(memoryInstructionEClass, MemoryInstruction.class, "MemoryInstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMemoryInstruction_InstructionType(), this.getMemoryInstructionType(), "instructionType", null, 0, 1, MemoryInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
-		initEEnum(instructionEnumEEnum, InstructionEnum.class, "InstructionEnum");
-		addEEnumLiteral(instructionEnumEEnum, InstructionEnum.ALLOCA);
-		addEEnumLiteral(instructionEnumEEnum, InstructionEnum.RETURN);
-		addEEnumLiteral(instructionEnumEEnum, InstructionEnum.LOAD);
-		addEEnumLiteral(instructionEnumEEnum, InstructionEnum.STORE);
-		addEEnumLiteral(instructionEnumEEnum, InstructionEnum.FENCE);
-		addEEnumLiteral(instructionEnumEEnum, InstructionEnum.COMPARE_AND_SWAP);
-		addEEnumLiteral(instructionEnumEEnum, InstructionEnum.GET_ELEMENT_POINTER);
+		initEEnum(memoryInstructionTypeEEnum, MemoryInstructionType.class, "MemoryInstructionType");
+		addEEnumLiteral(memoryInstructionTypeEEnum, MemoryInstructionType.ALLOCA);
+		addEEnumLiteral(memoryInstructionTypeEEnum, MemoryInstructionType.LOAD);
+		addEEnumLiteral(memoryInstructionTypeEEnum, MemoryInstructionType.STORE);
+		addEEnumLiteral(memoryInstructionTypeEEnum, MemoryInstructionType.FENCE);
+		addEEnumLiteral(memoryInstructionTypeEEnum, MemoryInstructionType.COMPARE_AND_SWAP);
+		addEEnumLiteral(memoryInstructionTypeEEnum, MemoryInstructionType.GET_ELEMENT_POINTER);
 
 		initEEnum(primitiveTypeEEnum, PrimitiveType.class, "PrimitiveType");
 		addEEnumLiteral(primitiveTypeEEnum, PrimitiveType.BOOL);

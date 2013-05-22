@@ -44,7 +44,8 @@ public interface Program extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Global Variables Or Values</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.lina.lll.VariableOrValue}.
+	 * The list contents are of type {@link de.upb.lina.lll.Variable}.
+	 * It is bidirectional and its opposite is '{@link de.upb.lina.lll.Variable#getProgram <em>Program</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Global Variables Or Values</em>' containment reference list isn't clear,
@@ -53,9 +54,10 @@ public interface Program extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Global Variables Or Values</em>' containment reference list.
 	 * @see de.upb.lina.lll.LllPackage#getProgram_GlobalVariablesOrValues()
-	 * @model containment="true"
+	 * @see de.upb.lina.lll.Variable#getProgram
+	 * @model opposite="program" containment="true"
 	 * @generated
 	 */
-	EList<VariableOrValue> getGlobalVariablesOrValues();
+	EList<Variable> getGlobalVariablesOrValues();
 
 } // Program

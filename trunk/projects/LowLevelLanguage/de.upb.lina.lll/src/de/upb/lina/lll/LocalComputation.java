@@ -6,21 +6,21 @@ import de.upb.lina.lll.expressions.Expression;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Local Instruction</b></em>'.
+ * A representation of the model object '<em><b>Local Computation</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.lina.lll.LocalInstruction#getExpression <em>Expression</em>}</li>
+ *   <li>{@link de.upb.lina.lll.LocalComputation#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.upb.lina.lll.LllPackage#getLocalInstruction()
+ * @see de.upb.lina.lll.LllPackage#getLocalComputation()
  * @model
  * @generated
  */
-public interface LocalInstruction extends Instruction {
+public interface LocalComputation extends Instruction {
 	/**
 	 * Returns the value of the '<em><b>Expression</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -31,14 +31,14 @@ public interface LocalInstruction extends Instruction {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Expression</em>' reference.
 	 * @see #setExpression(Expression)
-	 * @see de.upb.lina.lll.LllPackage#getLocalInstruction_Expression()
+	 * @see de.upb.lina.lll.LllPackage#getLocalComputation_Expression()
 	 * @model
 	 * @generated
 	 */
 	Expression getExpression();
 
 	/**
-	 * Sets the value of the '{@link de.upb.lina.lll.LocalInstruction#getExpression <em>Expression</em>}' reference.
+	 * Sets the value of the '{@link de.upb.lina.lll.LocalComputation#getExpression <em>Expression</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Expression</em>' reference.
@@ -47,4 +47,4 @@ public interface LocalInstruction extends Instruction {
 	 */
 	void setExpression(Expression value);
 
-} // LocalInstruction
+} // LocalComputation

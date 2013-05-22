@@ -3,8 +3,6 @@
 package de.upb.lina.lll.provider;
 
 
-import de.upb.lina.lll.ConditionalBranch;
-import de.upb.lina.lll.InstructionEnum;
 import de.upb.lina.lll.LllPackage;
 
 import java.util.Collection;
@@ -125,11 +123,7 @@ public class ConditionalBranchItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		InstructionEnum labelValue = ((ConditionalBranch)object).getInstruction();
-		String label = labelValue == null ? null : labelValue.toString();
-		return label == null || label.length() == 0 ?
-			getString("_UI_ConditionalBranch_type") :
-			getString("_UI_ConditionalBranch_type") + " " + label;
+		return getString("_UI_ConditionalBranch_type");
 	}
 
 	/**

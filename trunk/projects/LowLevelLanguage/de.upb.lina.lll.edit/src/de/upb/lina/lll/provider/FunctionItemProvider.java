@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.eclipse.emf.ecore.provider.ENamedElementItemProvider;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -62,8 +63,31 @@ public class FunctionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addInputParametersPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Input Parameters feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addInputParametersPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Function_inputParameters_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Function_inputParameters_feature", "_UI_Function_type"),
+				 LllPackage.Literals.FUNCTION__INPUT_PARAMETERS,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -78,10 +102,9 @@ public class FunctionItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(LllPackage.Literals.FUNCTION__VARIABLES_OR_VALUES);
+			childrenFeatures.add(LllPackage.Literals.FUNCTION__LOCAL_VARIABLES_OR_VALUES);
 			childrenFeatures.add(LllPackage.Literals.FUNCTION__LABELS);
 			childrenFeatures.add(LllPackage.Literals.FUNCTION__INSTRUCTIONS);
-			childrenFeatures.add(LllPackage.Literals.FUNCTION__PARAMETERS);
 		}
 		return childrenFeatures;
 	}
@@ -136,10 +159,9 @@ public class FunctionItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Function.class)) {
-			case LllPackage.FUNCTION__VARIABLES_OR_VALUES:
+			case LllPackage.FUNCTION__LOCAL_VARIABLES_OR_VALUES:
 			case LllPackage.FUNCTION__LABELS:
 			case LllPackage.FUNCTION__INSTRUCTIONS:
-			case LllPackage.FUNCTION__PARAMETERS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -159,23 +181,18 @@ public class FunctionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LllPackage.Literals.FUNCTION__VARIABLES_OR_VALUES,
+				(LllPackage.Literals.FUNCTION__LOCAL_VARIABLES_OR_VALUES,
 				 LllFactory.eINSTANCE.createConstant()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LllPackage.Literals.FUNCTION__VARIABLES_OR_VALUES,
+				(LllPackage.Literals.FUNCTION__LOCAL_VARIABLES_OR_VALUES,
 				 LllFactory.eINSTANCE.createVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LllPackage.Literals.FUNCTION__INSTRUCTIONS,
-				 LllFactory.eINSTANCE.createInstruction()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LllPackage.Literals.FUNCTION__INSTRUCTIONS,
-				 LllFactory.eINSTANCE.createCall()));
+				 LllFactory.eINSTANCE.createFunctionCall()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -190,12 +207,12 @@ public class FunctionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LllPackage.Literals.FUNCTION__INSTRUCTIONS,
-				 LllFactory.eINSTANCE.createLocalInstruction()));
+				 LllFactory.eINSTANCE.createLocalComputation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LllPackage.Literals.FUNCTION__PARAMETERS,
-				 LllFactory.eINSTANCE.createParameter()));
+				(LllPackage.Literals.FUNCTION__INSTRUCTIONS,
+				 LllFactory.eINSTANCE.createMemoryInstruction()));
 	}
 
 	/**

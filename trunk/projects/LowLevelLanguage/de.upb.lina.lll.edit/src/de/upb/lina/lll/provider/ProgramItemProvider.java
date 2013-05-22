@@ -157,11 +157,6 @@ public class ProgramItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LllPackage.Literals.PROGRAM__GLOBAL_VARIABLES_OR_VALUES,
-				 LllFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LllPackage.Literals.PROGRAM__GLOBAL_VARIABLES_OR_VALUES,
 				 LllFactory.eINSTANCE.createVariable()));
 	}
 

@@ -15,10 +15,10 @@ import org.eclipse.emf.ecore.ENamedElement;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.lina.lll.Function#getProgram <em>Program</em>}</li>
- *   <li>{@link de.upb.lina.lll.Function#getVariablesOrValues <em>Variables Or Values</em>}</li>
+ *   <li>{@link de.upb.lina.lll.Function#getLocalVariablesOrValues <em>Local Variables Or Values</em>}</li>
  *   <li>{@link de.upb.lina.lll.Function#getLabels <em>Labels</em>}</li>
  *   <li>{@link de.upb.lina.lll.Function#getInstructions <em>Instructions</em>}</li>
- *   <li>{@link de.upb.lina.lll.Function#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link de.upb.lina.lll.Function#getInputParameters <em>Input Parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,20 +56,22 @@ public interface Function extends ENamedElement {
 	void setProgram(Program value);
 
 	/**
-	 * Returns the value of the '<em><b>Variables Or Values</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Local Variables Or Values</b></em>' containment reference list.
 	 * The list contents are of type {@link de.upb.lina.lll.VariableOrValue}.
+	 * It is bidirectional and its opposite is '{@link de.upb.lina.lll.VariableOrValue#getFunction <em>Function</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Variables Or Values</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Local Variables Or Values</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Variables Or Values</em>' containment reference list.
-	 * @see de.upb.lina.lll.LllPackage#getFunction_VariablesOrValues()
-	 * @model containment="true"
+	 * @return the value of the '<em>Local Variables Or Values</em>' containment reference list.
+	 * @see de.upb.lina.lll.LllPackage#getFunction_LocalVariablesOrValues()
+	 * @see de.upb.lina.lll.VariableOrValue#getFunction
+	 * @model opposite="function" containment="true"
 	 * @generated
 	 */
-	EList<VariableOrValue> getVariablesOrValues();
+	EList<VariableOrValue> getLocalVariablesOrValues();
 
 	/**
 	 * Returns the value of the '<em><b>Labels</b></em>' containment reference list.
@@ -108,21 +110,19 @@ public interface Function extends ENamedElement {
 	EList<Instruction> getInstructions();
 
 	/**
-	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.lina.lll.Parameter}.
-	 * It is bidirectional and its opposite is '{@link de.upb.lina.lll.Parameter#getFunction <em>Function</em>}'.
+	 * Returns the value of the '<em><b>Input Parameters</b></em>' reference list.
+	 * The list contents are of type {@link de.upb.lina.lll.VariableOrValue}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Input Parameters</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parameters</em>' containment reference list.
-	 * @see de.upb.lina.lll.LllPackage#getFunction_Parameters()
-	 * @see de.upb.lina.lll.Parameter#getFunction
-	 * @model opposite="function" containment="true"
+	 * @return the value of the '<em>Input Parameters</em>' reference list.
+	 * @see de.upb.lina.lll.LllPackage#getFunction_InputParameters()
+	 * @model
 	 * @generated
 	 */
-	EList<Parameter> getParameters();
+	EList<VariableOrValue> getInputParameters();
 
 } // Function

@@ -118,49 +118,26 @@ public class LllItemProviderAdapterFactory extends LllAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.upb.lina.lll.Instruction} instances.
+	 * This keeps track of the one adapter used for all {@link de.upb.lina.lll.FunctionCall} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected InstructionItemProvider instructionItemProvider;
+	protected FunctionCallItemProvider functionCallItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link de.upb.lina.lll.Instruction}.
+	 * This creates an adapter for a {@link de.upb.lina.lll.FunctionCall}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createInstructionAdapter() {
-		if (instructionItemProvider == null) {
-			instructionItemProvider = new InstructionItemProvider(this);
+	public Adapter createFunctionCallAdapter() {
+		if (functionCallItemProvider == null) {
+			functionCallItemProvider = new FunctionCallItemProvider(this);
 		}
 
-		return instructionItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link de.upb.lina.lll.Call} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected CallItemProvider callItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link de.upb.lina.lll.Call}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createCallAdapter() {
-		if (callItemProvider == null) {
-			callItemProvider = new CallItemProvider(this);
-		}
-
-		return callItemProvider;
+		return functionCallItemProvider;
 	}
 
 	/**
@@ -302,49 +279,49 @@ public class LllItemProviderAdapterFactory extends LllAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.upb.lina.lll.Parameter} instances.
+	 * This keeps track of the one adapter used for all {@link de.upb.lina.lll.LocalComputation} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ParameterItemProvider parameterItemProvider;
+	protected LocalComputationItemProvider localComputationItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link de.upb.lina.lll.Parameter}.
+	 * This creates an adapter for a {@link de.upb.lina.lll.LocalComputation}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createParameterAdapter() {
-		if (parameterItemProvider == null) {
-			parameterItemProvider = new ParameterItemProvider(this);
+	public Adapter createLocalComputationAdapter() {
+		if (localComputationItemProvider == null) {
+			localComputationItemProvider = new LocalComputationItemProvider(this);
 		}
 
-		return parameterItemProvider;
+		return localComputationItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.upb.lina.lll.LocalInstruction} instances.
+	 * This keeps track of the one adapter used for all {@link de.upb.lina.lll.MemoryInstruction} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected LocalInstructionItemProvider localInstructionItemProvider;
+	protected MemoryInstructionItemProvider memoryInstructionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link de.upb.lina.lll.LocalInstruction}.
+	 * This creates an adapter for a {@link de.upb.lina.lll.MemoryInstruction}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createLocalInstructionAdapter() {
-		if (localInstructionItemProvider == null) {
-			localInstructionItemProvider = new LocalInstructionItemProvider(this);
+	public Adapter createMemoryInstructionAdapter() {
+		if (memoryInstructionItemProvider == null) {
+			memoryInstructionItemProvider = new MemoryInstructionItemProvider(this);
 		}
 
-		return localInstructionItemProvider;
+		return memoryInstructionItemProvider;
 	}
 
 	/**
@@ -448,16 +425,15 @@ public class LllItemProviderAdapterFactory extends LllAdapterFactory implements 
 	public void dispose() {
 		if (programItemProvider != null) programItemProvider.dispose();
 		if (functionItemProvider != null) functionItemProvider.dispose();
-		if (instructionItemProvider != null) instructionItemProvider.dispose();
-		if (callItemProvider != null) callItemProvider.dispose();
+		if (functionCallItemProvider != null) functionCallItemProvider.dispose();
 		if (conditionalBranchItemProvider != null) conditionalBranchItemProvider.dispose();
 		if (gotoItemProvider != null) gotoItemProvider.dispose();
 		if (constantItemProvider != null) constantItemProvider.dispose();
 		if (variableItemProvider != null) variableItemProvider.dispose();
 		if (typeItemProvider != null) typeItemProvider.dispose();
 		if (complexTypeItemProvider != null) complexTypeItemProvider.dispose();
-		if (parameterItemProvider != null) parameterItemProvider.dispose();
-		if (localInstructionItemProvider != null) localInstructionItemProvider.dispose();
+		if (localComputationItemProvider != null) localComputationItemProvider.dispose();
+		if (memoryInstructionItemProvider != null) memoryInstructionItemProvider.dispose();
 	}
 
 }
