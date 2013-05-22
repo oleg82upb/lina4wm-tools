@@ -123,7 +123,7 @@ public class VariableImpl extends VariableOrValueImpl implements Variable {
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newProgram != null)
-				msgs = ((InternalEObject)newProgram).eInverseAdd(this, LllPackage.PROGRAM__GLOBAL_VARIABLES_OR_VALUES, Program.class, msgs);
+				msgs = ((InternalEObject)newProgram).eInverseAdd(this, LllPackage.PROGRAM__GLOBAL_VARIABLES, Program.class, msgs);
 			msgs = basicSetProgram(newProgram, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -170,7 +170,7 @@ public class VariableImpl extends VariableOrValueImpl implements Variable {
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case LllPackage.VARIABLE__PROGRAM:
-				return eInternalContainer().eInverseRemove(this, LllPackage.PROGRAM__GLOBAL_VARIABLES_OR_VALUES, Program.class, msgs);
+				return eInternalContainer().eInverseRemove(this, LllPackage.PROGRAM__GLOBAL_VARIABLES, Program.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

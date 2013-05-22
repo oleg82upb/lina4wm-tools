@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.lina.lll.impl.ProgramImpl#getFunctions <em>Functions</em>}</li>
- *   <li>{@link de.upb.lina.lll.impl.ProgramImpl#getGlobalVariablesOrValues <em>Global Variables Or Values</em>}</li>
+ *   <li>{@link de.upb.lina.lll.impl.ProgramImpl#getGlobalVariables <em>Global Variables</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,14 +49,14 @@ public class ProgramImpl extends EObjectImpl implements Program {
 	protected EList<Function> functions;
 
 	/**
-	 * The cached value of the '{@link #getGlobalVariablesOrValues() <em>Global Variables Or Values</em>}' containment reference list.
+	 * The cached value of the '{@link #getGlobalVariables() <em>Global Variables</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getGlobalVariablesOrValues()
+	 * @see #getGlobalVariables()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Variable> globalVariablesOrValues;
+	protected EList<Variable> globalVariables;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -94,11 +94,11 @@ public class ProgramImpl extends EObjectImpl implements Program {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Variable> getGlobalVariablesOrValues() {
-		if (globalVariablesOrValues == null) {
-			globalVariablesOrValues = new EObjectContainmentWithInverseEList<Variable>(Variable.class, this, LllPackage.PROGRAM__GLOBAL_VARIABLES_OR_VALUES, LllPackage.VARIABLE__PROGRAM);
+	public EList<Variable> getGlobalVariables() {
+		if (globalVariables == null) {
+			globalVariables = new EObjectContainmentWithInverseEList<Variable>(Variable.class, this, LllPackage.PROGRAM__GLOBAL_VARIABLES, LllPackage.VARIABLE__PROGRAM);
 		}
-		return globalVariablesOrValues;
+		return globalVariables;
 	}
 
 	/**
@@ -112,8 +112,8 @@ public class ProgramImpl extends EObjectImpl implements Program {
 		switch (featureID) {
 			case LllPackage.PROGRAM__FUNCTIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getFunctions()).basicAdd(otherEnd, msgs);
-			case LllPackage.PROGRAM__GLOBAL_VARIABLES_OR_VALUES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGlobalVariablesOrValues()).basicAdd(otherEnd, msgs);
+			case LllPackage.PROGRAM__GLOBAL_VARIABLES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGlobalVariables()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -128,8 +128,8 @@ public class ProgramImpl extends EObjectImpl implements Program {
 		switch (featureID) {
 			case LllPackage.PROGRAM__FUNCTIONS:
 				return ((InternalEList<?>)getFunctions()).basicRemove(otherEnd, msgs);
-			case LllPackage.PROGRAM__GLOBAL_VARIABLES_OR_VALUES:
-				return ((InternalEList<?>)getGlobalVariablesOrValues()).basicRemove(otherEnd, msgs);
+			case LllPackage.PROGRAM__GLOBAL_VARIABLES:
+				return ((InternalEList<?>)getGlobalVariables()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -144,8 +144,8 @@ public class ProgramImpl extends EObjectImpl implements Program {
 		switch (featureID) {
 			case LllPackage.PROGRAM__FUNCTIONS:
 				return getFunctions();
-			case LllPackage.PROGRAM__GLOBAL_VARIABLES_OR_VALUES:
-				return getGlobalVariablesOrValues();
+			case LllPackage.PROGRAM__GLOBAL_VARIABLES:
+				return getGlobalVariables();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -163,9 +163,9 @@ public class ProgramImpl extends EObjectImpl implements Program {
 				getFunctions().clear();
 				getFunctions().addAll((Collection<? extends Function>)newValue);
 				return;
-			case LllPackage.PROGRAM__GLOBAL_VARIABLES_OR_VALUES:
-				getGlobalVariablesOrValues().clear();
-				getGlobalVariablesOrValues().addAll((Collection<? extends Variable>)newValue);
+			case LllPackage.PROGRAM__GLOBAL_VARIABLES:
+				getGlobalVariables().clear();
+				getGlobalVariables().addAll((Collection<? extends Variable>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -182,8 +182,8 @@ public class ProgramImpl extends EObjectImpl implements Program {
 			case LllPackage.PROGRAM__FUNCTIONS:
 				getFunctions().clear();
 				return;
-			case LllPackage.PROGRAM__GLOBAL_VARIABLES_OR_VALUES:
-				getGlobalVariablesOrValues().clear();
+			case LllPackage.PROGRAM__GLOBAL_VARIABLES:
+				getGlobalVariables().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -199,8 +199,8 @@ public class ProgramImpl extends EObjectImpl implements Program {
 		switch (featureID) {
 			case LllPackage.PROGRAM__FUNCTIONS:
 				return functions != null && !functions.isEmpty();
-			case LllPackage.PROGRAM__GLOBAL_VARIABLES_OR_VALUES:
-				return globalVariablesOrValues != null && !globalVariablesOrValues.isEmpty();
+			case LllPackage.PROGRAM__GLOBAL_VARIABLES:
+				return globalVariables != null && !globalVariables.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
