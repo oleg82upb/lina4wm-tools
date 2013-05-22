@@ -24,7 +24,7 @@
     </genEnums>
     <genClasses ecoreClass="LLL.ecore#//Program">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLL.ecore#//Program/functions"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLL.ecore#//Program/globalVariablesOrValues"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLL.ecore#//Program/globalVariables"/>
     </genClasses>
     <genClasses ecoreClass="LLL.ecore#//Function">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference LLL.ecore#//Function/program"/>

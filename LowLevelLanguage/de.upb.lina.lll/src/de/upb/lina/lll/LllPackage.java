@@ -77,13 +77,13 @@ public interface LllPackage extends EPackage {
 	int PROGRAM__FUNCTIONS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Global Variables Or Values</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Global Variables</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROGRAM__GLOBAL_VARIABLES_OR_VALUES = 1;
+	int PROGRAM__GLOBAL_VARIABLES = 1;
 
 	/**
 	 * The number of structural features of the '<em>Program</em>' class.
@@ -826,15 +826,15 @@ public interface LllPackage extends EPackage {
 	EReference getProgram_Functions();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.upb.lina.lll.Program#getGlobalVariablesOrValues <em>Global Variables Or Values</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.upb.lina.lll.Program#getGlobalVariables <em>Global Variables</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Global Variables Or Values</em>'.
-	 * @see de.upb.lina.lll.Program#getGlobalVariablesOrValues()
+	 * @return the meta object for the containment reference list '<em>Global Variables</em>'.
+	 * @see de.upb.lina.lll.Program#getGlobalVariables()
 	 * @see #getProgram()
 	 * @generated
 	 */
-	EReference getProgram_GlobalVariablesOrValues();
+	EReference getProgram_GlobalVariables();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.lina.lll.Function <em>Function</em>}'.
@@ -1290,12 +1290,12 @@ public interface LllPackage extends EPackage {
 		EReference PROGRAM__FUNCTIONS = eINSTANCE.getProgram_Functions();
 
 		/**
-		 * The meta object literal for the '<em><b>Global Variables Or Values</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Global Variables</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROGRAM__GLOBAL_VARIABLES_OR_VALUES = eINSTANCE.getProgram_GlobalVariablesOrValues();
+		EReference PROGRAM__GLOBAL_VARIABLES = eINSTANCE.getProgram_GlobalVariables();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.lll.impl.FunctionImpl <em>Function</em>}' class.

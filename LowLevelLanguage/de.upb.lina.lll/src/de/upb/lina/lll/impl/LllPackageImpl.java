@@ -245,7 +245,7 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getProgram_GlobalVariablesOrValues() {
+	public EReference getProgram_GlobalVariables() {
 		return (EReference)programEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -630,7 +630,7 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 		// Create classes and their features
 		programEClass = createEClass(PROGRAM);
 		createEReference(programEClass, PROGRAM__FUNCTIONS);
-		createEReference(programEClass, PROGRAM__GLOBAL_VARIABLES_OR_VALUES);
+		createEReference(programEClass, PROGRAM__GLOBAL_VARIABLES);
 
 		functionEClass = createEClass(FUNCTION);
 		createEReference(functionEClass, FUNCTION__PROGRAM);
@@ -735,7 +735,7 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(programEClass, Program.class, "Program", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProgram_Functions(), this.getFunction(), this.getFunction_Program(), "functions", null, 0, -1, Program.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProgram_GlobalVariablesOrValues(), this.getVariable(), this.getVariable_Program(), "globalVariablesOrValues", null, 0, -1, Program.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProgram_GlobalVariables(), this.getVariable(), this.getVariable_Program(), "globalVariables", null, 0, -1, Program.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(functionEClass, Function.class, "Function", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFunction_Program(), this.getProgram(), this.getProgram_Functions(), "program", null, 0, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -772,7 +772,7 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 
 		initEClass(variableEClass, Variable.class, "Variable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVariable_Program(), this.getProgram(), this.getProgram_GlobalVariablesOrValues(), "program", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVariable_Program(), this.getProgram(), this.getProgram_GlobalVariables(), "program", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

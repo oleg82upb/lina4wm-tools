@@ -78,7 +78,7 @@ public class ProgramItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LllPackage.Literals.PROGRAM__FUNCTIONS);
-			childrenFeatures.add(LllPackage.Literals.PROGRAM__GLOBAL_VARIABLES_OR_VALUES);
+			childrenFeatures.add(LllPackage.Literals.PROGRAM__GLOBAL_VARIABLES);
 		}
 		return childrenFeatures;
 	}
@@ -131,7 +131,7 @@ public class ProgramItemProvider
 
 		switch (notification.getFeatureID(Program.class)) {
 			case LllPackage.PROGRAM__FUNCTIONS:
-			case LllPackage.PROGRAM__GLOBAL_VARIABLES_OR_VALUES:
+			case LllPackage.PROGRAM__GLOBAL_VARIABLES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -156,7 +156,7 @@ public class ProgramItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LllPackage.Literals.PROGRAM__GLOBAL_VARIABLES_OR_VALUES,
+				(LllPackage.Literals.PROGRAM__GLOBAL_VARIABLES,
 				 LllFactory.eINSTANCE.createVariable()));
 	}
 

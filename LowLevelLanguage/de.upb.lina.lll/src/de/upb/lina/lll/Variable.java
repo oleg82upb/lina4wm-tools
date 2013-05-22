@@ -49,7 +49,7 @@ public interface Variable extends VariableOrValue {
 
 	/**
 	 * Returns the value of the '<em><b>Program</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link de.upb.lina.lll.Program#getGlobalVariablesOrValues <em>Global Variables Or Values</em>}'.
+	 * It is bidirectional and its opposite is '{@link de.upb.lina.lll.Program#getGlobalVariables <em>Global Variables</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Program</em>' container reference isn't clear,
@@ -59,8 +59,8 @@ public interface Variable extends VariableOrValue {
 	 * @return the value of the '<em>Program</em>' container reference.
 	 * @see #setProgram(Program)
 	 * @see de.upb.lina.lll.LllPackage#getVariable_Program()
-	 * @see de.upb.lina.lll.Program#getGlobalVariablesOrValues
-	 * @model opposite="globalVariablesOrValues" transient="false"
+	 * @see de.upb.lina.lll.Program#getGlobalVariables
+	 * @model opposite="globalVariables" transient="false"
 	 * @generated
 	 */
 	Program getProgram();

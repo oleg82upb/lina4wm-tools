@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.lina.lll.Program#getFunctions <em>Functions</em>}</li>
- *   <li>{@link de.upb.lina.lll.Program#getGlobalVariablesOrValues <em>Global Variables Or Values</em>}</li>
+ *   <li>{@link de.upb.lina.lll.Program#getGlobalVariables <em>Global Variables</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,21 +43,21 @@ public interface Program extends EObject {
 	EList<Function> getFunctions();
 
 	/**
-	 * Returns the value of the '<em><b>Global Variables Or Values</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Global Variables</b></em>' containment reference list.
 	 * The list contents are of type {@link de.upb.lina.lll.Variable}.
 	 * It is bidirectional and its opposite is '{@link de.upb.lina.lll.Variable#getProgram <em>Program</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Global Variables Or Values</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Global Variables</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Global Variables Or Values</em>' containment reference list.
-	 * @see de.upb.lina.lll.LllPackage#getProgram_GlobalVariablesOrValues()
+	 * @return the value of the '<em>Global Variables</em>' containment reference list.
+	 * @see de.upb.lina.lll.LllPackage#getProgram_GlobalVariables()
 	 * @see de.upb.lina.lll.Variable#getProgram
 	 * @model opposite="program" containment="true"
 	 * @generated
 	 */
-	EList<Variable> getGlobalVariablesOrValues();
+	EList<Variable> getGlobalVariables();
 
 } // Program

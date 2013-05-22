@@ -4,8 +4,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Program">
     <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
         eType="#//Function" containment="true" eOpposite="#//Function/program"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="globalVariablesOrValues"
-        upperBound="-1" eType="#//Variable" containment="true" eOpposite="#//Variable/program"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="globalVariables" upperBound="-1"
+        eType="#//Variable" containment="true" eOpposite="#//Variable/program"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="program" eType="#//Program"
@@ -52,7 +52,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//VariableOrValue">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="program" eType="#//Program"
-        eOpposite="#//Program/globalVariablesOrValues"/>
+        eOpposite="#//Program/globalVariables"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Type"/>
   <eClassifiers xsi:type="ecore:EClass" name="SimpleType" abstract="true" eSuperTypes="#//Type">

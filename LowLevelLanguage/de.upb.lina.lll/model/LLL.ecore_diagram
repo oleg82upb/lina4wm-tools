@@ -311,7 +311,7 @@
       <layoutConstraint xmi:type="notation:Location" xmi:id="_AGcNZsH4EeK97M3E8nHsoA" y="60"/>
     </children>
     <styles xmi:type="notation:FontStyle" xmi:id="_AGcNYcH4EeK97M3E8nHsoA" fontName="Segoe UI"/>
-    <element xmi:type="ecore:EReference" href="LLL.ecore#//Program/globalVariablesOrValues"/>
+    <element xmi:type="ecore:EReference" href="LLL.ecore#//Program/globalVariables"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_AGcNYsH4EeK97M3E8nHsoA" points="[0, 0, 517, 403]$[0, -231, 517, 172]$[-179, -292, 338, 111]$[-181, -343, 336, 60]$[-517, -403, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_AHvN5cH4EeK97M3E8nHsoA" id="(0.47692307692307695,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_AHvN5sH4EeK97M3E8nHsoA" id="(0.660377358490566,1.0)"/>
