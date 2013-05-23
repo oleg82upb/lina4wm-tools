@@ -18,4 +18,6 @@ Import-Package: org.eclipse.emf.common,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.resource,
  org.eclipse.emf.ecore.util,
- org.eclipse.emf.ecore.xmi
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.jdt.internal.ui.viewsupport,
+ org.eclipse.ui.navigator.resources

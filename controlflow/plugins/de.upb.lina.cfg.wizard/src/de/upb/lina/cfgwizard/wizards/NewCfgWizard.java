@@ -19,10 +19,13 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.ui.IMemento;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
+import org.eclipse.ui.XMLMemento;
 
+import de.upb.lina.cfgwizard.CFGActivator;
 import de.upb.lina.cfgwizard.CFGWorkspaceOperation;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
@@ -40,6 +43,7 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	private ISelection selection;
 	private IWorkspace iw = ResourcesPlugin.getWorkspace();
 	private IPath root = iw.getRoot().getLocation();
+	public final static String MEMENTO__KEY = "CFGSelection";
 
 	/**
 	 * Constructor for NewCfgWizard.
@@ -47,6 +51,19 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	public NewCfgWizard() {
 		super();
 		setNeedsProgressMonitor(true);
+	}
+
+	protected synchronized void saveState() {
+		XMLMemento memento = XMLMemento.createWriteRoot(MEMENTO__KEY);
+		IMemento child = memento.createChild(MEMENTO__KEY);
+		writeSelectionState(child);
+		CFGActivator.saveMementoToFile(memento);
+	}
+
+	private void writeSelectionState(IMemento memento) {
+		memento.putString("astloc", page.getAstLocation());
+		memento.putString("container", page.getContainerName());
+		memento.putString("newfile", page.getFileName());
 	}
 
 	/**
@@ -65,6 +82,7 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	public boolean performFinish() {
 		final String containerName = page.getContainerName();
 		final String fileName = page.getFileName();
+		this.saveState();
 		IRunnableWithProgress op = new IRunnableWithProgress() {
 			public void run(IProgressMonitor monitor) throws InvocationTargetException {
 				try {
@@ -127,7 +145,7 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 		// monitor.worked(1);
 
 		monitor.beginTask("Transforming LLVM to CFG...", 3);
-		
+
 		LlvmPackage.eINSTANCE.getNsURI();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Path astpath = new Path(page.getAstLocation());

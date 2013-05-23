@@ -36,6 +36,8 @@ public class CFGUtil {
 							tr1.setTarget(transition.getTarget());
 							transition.getTarget().getIncoming().add(tr1);
 						}
+						if (cfg.getStart() == transition.getSource())
+							cfg.setStart(transition.getTarget());
 						transition.getSource().getIncoming().clear();
 						transition.getSource().setDiagram(null);
 						transition.getSource().getOutgoing().clear();
