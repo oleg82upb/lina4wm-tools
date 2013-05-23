@@ -6,16 +6,20 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jdt.internal.ui.viewsupport.FilteredElementTreeSelectionDialog;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogPage;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -35,6 +39,7 @@ import org.eclipse.ui.IMemento;
 import org.eclipse.ui.WorkbenchException;
 import org.eclipse.ui.XMLMemento;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
+import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
@@ -47,6 +52,7 @@ import de.upb.lina.cfgwizard.CFGActivator;
  */
 
 public class SelectionPage extends WizardPage {
+	private final static String FILE_EXT = "llvm";
 	private Image ok = new Image(Display.getCurrent(), getClass().getResourceAsStream("ok.gif"));
 	private Image nok = new Image(Display.getCurrent(), getClass().getResourceAsStream("error.gif"));
 	String newfile = "";
@@ -213,16 +219,25 @@ public class SelectionPage extends WizardPage {
 	 * the container field.
 	 */
 
-	@SuppressWarnings("restriction")
 	private void handleElementBrowse(Text textf) {
-		FilteredElementTreeSelectionDialog dialog = new FilteredElementTreeSelectionDialog(getShell(), new WorkbenchLabelProvider(),
+		ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(getShell(), new WorkbenchLabelProvider(),
 				new BaseWorkbenchContentProvider());
-		// ResourcePatternFilter pf = new ResourcePatternFilter();
-		// String[] filters = { "*.llvm" };
-		// pf.setPatterns(filters);
-		// pf.setPattern("*.llvm");
-		// dialog.addFilter(pf);
-		dialog.setInitialFilter("*.llvm");
+
+		dialog.addFilter(new ViewerFilter() {
+			
+			@Override
+			public boolean select(Viewer viewer, Object parentElement, Object element) {
+				if(element instanceof IFolder || element instanceof IProject) {
+					return true;
+				}
+				if(element instanceof IFile)
+				{
+					IFile file = (IFile) element;
+					return FILE_EXT.equals(file.getFileExtension());
+				}
+				return false;
+			}
+		});
 		dialog.setTitle("Tree Selection");
 		dialog.setMessage("Please select an AST:");
 		dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
