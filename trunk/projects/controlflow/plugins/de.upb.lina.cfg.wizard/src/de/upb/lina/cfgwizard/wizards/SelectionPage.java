@@ -1,6 +1,9 @@
 package de.upb.lina.cfgwizard.wizards;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IResource;
@@ -8,10 +11,11 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.jdt.internal.ui.viewsupport.FilteredElementTreeSelectionDialog;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.IDialogPage;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -25,17 +29,16 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IMemento;
+import org.eclipse.ui.WorkbenchException;
+import org.eclipse.ui.XMLMemento;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
-import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
-import org.eclipse.ui.dialogs.FileSelectionDialog;
-import org.eclipse.ui.dialogs.ResourceListSelectionDialog;
-import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
-import org.eclipse.ui.views.navigator.ResourceSorter;
+
+import de.upb.lina.cfgwizard.CFGActivator;
 
 /**
  * The "New" wizard page allows setting the container for the new file as well
@@ -44,18 +47,19 @@ import org.eclipse.ui.views.navigator.ResourceSorter;
  */
 
 public class SelectionPage extends WizardPage {
-	private Image      ok        = new Image(Display.getCurrent(), getClass().getResourceAsStream("ok.gif"));
-	private Image      nok       = new Image(Display.getCurrent(), getClass().getResourceAsStream("error.gif"));
-	String newfile ="";
-	String containerloc ="";
+	private Image ok = new Image(Display.getCurrent(), getClass().getResourceAsStream("ok.gif"));
+	private Image nok = new Image(Display.getCurrent(), getClass().getResourceAsStream("error.gif"));
+	String newfile = "";
+	String containerloc = "";
 	private Text containerText;
 	private Text fileText;
 	private ISelection selection;
 	private int reordering = 0;
-	private Combo combo; 
-	
+	private Combo combo;
+
 	private Text astFile;
-	String astloc="";
+	String astloc = "";
+	private IMemento memento;
 
 	/**
 	 * Constructor for SampleNewWizardPage.
@@ -73,13 +77,14 @@ public class SelectionPage extends WizardPage {
 	 * @see IDialogPage#createControl(Composite)
 	 */
 	public void createControl(Composite parent) {
+		memento = loadState();
 		/* init */
 		final Composite container = new Composite(parent, SWT.NULL);
 		GridLayout layout = new GridLayout();
 		container.setLayout(layout);
 		layout.numColumns = 3;
 		layout.verticalSpacing = 9;
-		
+
 		/* AST select */
 		Label label = new Label(container, SWT.NULL);
 		label.setText("&AST-File:");
@@ -99,7 +104,7 @@ public class SelectionPage extends WizardPage {
 				handleElementBrowse(astFile);
 			}
 		});
-		
+
 		/* container select */
 		Label label1 = new Label(container, SWT.NULL);
 		label1.setText("&Container:");
@@ -119,50 +124,74 @@ public class SelectionPage extends WizardPage {
 				handleContainerBrowse(containerText);
 			}
 		});
-		
+
 		/* new_file name */
 		label = new Label(container, SWT.NULL);
 		label.setText("&File name:");
 		fileText = new Text(container, SWT.BORDER | SWT.SINGLE);
 		fileText.setLayoutData(gd);
+
 		fileText.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
 				dialogChanged(container);
 			}
 		});
 		new Label(container, SWT.NULL).setText("");
-		
+
 		/* ordering select */
 		new Label(container, SWT.NULL).setText("Reordering:");
 		combo = new Combo(container, SWT.NULL);
-		String[] orderings = new String[]{"SC", "TSO"};
-		    for(int i=0; i<orderings.length; i++)
-		      combo.add(orderings[i]);
+		String[] orderings = new String[] { "SC", "TSO" };
+		for (int i = 0; i < orderings.length; i++)
+			combo.add(orderings[i]);
 		combo.addModifyListener(new ModifyListener() {
-			
 			public void modifyText(ModifyEvent e) {
-				reordering=combo.getSelectionIndex();
+				reordering = combo.getSelectionIndex();
 			}
 		});
-		
+		// Since only SC is implemented, the Combobox is disabled
+		combo.select(0);
+		combo.setEnabled(false);
+		setControl(container);
+		if (memento != null) {
+			astFile.setText(memento.getString("astloc"));
+			dialogChanged(container);
+			containerText.setText(memento.getString("container"));
+			dialogChanged(container);
+			fileText.setText(memento.getString("newfile"));
+			dialogChanged(container);
+		}
 		initialize();
 		dialogChanged(container);
-		setControl(container);
+
 	}
+
+	// @Override
+	// public void setVisible(boolean visible) {
+	// super.setVisible(visible);
+	// if (memento != null) {
+	// astFile.setText(memento.getString("astloc"));
+	// containerText.setText(memento.getString("container"));
+	// fileText.setText(memento.getString("newfile"));
+	// combo.select(0);
+	// }
+	// }
 
 	/**
 	 * Tests if the current workbench selection is a suitable container to use.
 	 */
 
 	private void initialize() {
+		if (memento != null) {
+			return;
+		}
 		astFile.setText("");
 		astloc = "";
 		fileText.setText("new_file.cfg");
 		combo.select(0);
 		this.newfile = this.fileText.getText();
-		
-		if (selection != null && selection.isEmpty() == false
-				&& selection instanceof IStructuredSelection) {
+
+		if (selection != null && selection.isEmpty() == false && selection instanceof IStructuredSelection) {
 			IStructuredSelection ssel = (IStructuredSelection) selection;
 			if (ssel.size() > 1)
 				return;
@@ -177,7 +206,6 @@ public class SelectionPage extends WizardPage {
 			}
 		}
 		this.containerloc = this.containerText.getText();
-
 	}
 
 	/**
@@ -185,36 +213,43 @@ public class SelectionPage extends WizardPage {
 	 * the container field.
 	 */
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("restriction")
 	private void handleElementBrowse(Text textf) {
-		ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(getShell(),new WorkbenchLabelProvider(),
-			    new BaseWorkbenchContentProvider());
-
+		FilteredElementTreeSelectionDialog dialog = new FilteredElementTreeSelectionDialog(getShell(), new WorkbenchLabelProvider(),
+				new BaseWorkbenchContentProvider());
+		// ResourcePatternFilter pf = new ResourcePatternFilter();
+		// String[] filters = { "*.llvm" };
+		// pf.setPatterns(filters);
+		// pf.setPattern("*.llvm");
+		// dialog.addFilter(pf);
+		dialog.setInitialFilter("*.llvm");
 		dialog.setTitle("Tree Selection");
 		dialog.setMessage("Please select an AST:");
 		dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
 		dialog.setDoubleClickSelects(true);
-		dialog.setSorter(new ResourceSorter(ResourceSorter.TYPE));
+		// dialog.setSorter(new ResourceSorter(ResourceSorter.TYPE));
 		if (dialog.open() == Dialog.OK) {
 			Object[] result = dialog.getResult();
 			if (result.length == 1) {
 				String s = result[0].toString();
 				char c = s.charAt(0);
-				if(c==('P')||c==('L'))
-					s= s.substring(1);
+				if (c == ('P') || c == ('L'))
+					s = s.substring(1);
 				textf.setText(s);
 			}
 		}
 	}
+
 	private void handleContainerBrowse(Text textf) {
-		ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(),ResourcesPlugin.getWorkspace().getRoot(),false,"Please select new file location.");
+		ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot(), false,
+				"Please select new file location.");
 		if (dialog.open() == Dialog.OK) {
 			Object[] result = dialog.getResult();
 			if (result.length == 1) {
 				String s = result[0].toString();
 				char c = s.charAt(0);
-				if(c==('P')||c==('L'))
-					s= s.substring(1);
+				if (c == ('P') || c == ('L'))
+					s = s.substring(1);
 				textf.setText(s);
 			}
 		}
@@ -225,19 +260,19 @@ public class SelectionPage extends WizardPage {
 	 */
 
 	private void dialogChanged(Composite container) {
-		this.astloc=this.astFile.getText();
+		this.astloc = this.astFile.getText();
 		this.containerloc = this.containerText.getText();
 		this.newfile = this.fileText.getText();
 		setDescription("Please Select next");
-		
-		int result = (checkastfile()+checkastmeta()+checkcfgmeta());
-		if(result >=300){
+
+		int result = (checkastfile() + checkastmeta() + checkcfgmeta());
+		if (result >= 300) {
 			updateStatus("Please Select an AST-File (*.llvm)");
 			return;
-		}else if(result>=200){
+		} else if (result >= 200) {
 			updateStatus("The specified path refers no exisiting AST-file.");
 			return;
-		}else if(result>=100){
+		} else if (result >= 100) {
 			updateStatus("The AST-File extension has to be type of *.llvm");
 			return;
 		}
@@ -250,38 +285,41 @@ public class SelectionPage extends WizardPage {
 		setErrorMessage(message);
 		setPageComplete(message == null);
 	}
-	
-	private void updateDescription(String message){
+
+	private void updateDescription(String message) {
 		setMessage(message, INFORMATION);
 		setPageComplete(false);
 	}
-		
+
 	public String getAstLocation() {
 		return astloc;
 	}
-	
-	public int checkastfile(){
+
+	public int checkastfile() {
 		if (getAstLocation().length() == 0) {
 			return 300;
 		}
 		IWorkspace iw = ResourcesPlugin.getWorkspace();
 		IPath root = iw.getRoot().getLocation();
 		Path p = new Path(getAstLocation());
-		File ast = new File(root+p.toOSString());
-		if(!ast.exists()){
+		File ast = new File(root + p.toOSString());
+		if (!ast.exists()) {
 			return 200;
 		}
-		if (getAstLocation().substring(getAstLocation().length()-4).equalsIgnoreCase("llvm") == false) {
+		if (getAstLocation().substring(getAstLocation().length() - 4).equalsIgnoreCase("llvm") == false) {
 			return 100;
 		}
 		return 0;
 	}
-	public int checkastmeta(){
+
+	public int checkastmeta() {
 		return 0;
 	}
-	public int checkcfgmeta(){
+
+	public int checkcfgmeta() {
 		return 0;
 	}
+
 	public String getContainerName() {
 		return containerloc;
 	}
@@ -289,15 +327,30 @@ public class SelectionPage extends WizardPage {
 	public String getFileName() {
 		return newfile;
 	}
-	
+
 	/**
 	 * 
-	 * @return reordering
-	 * 0 - SC
-	 * 1 - TSO
+	 * @return reordering 0 - SC 1 - TSO
 	 */
 	public int getReordering() {
 
 		return reordering;
+	}
+
+	protected synchronized IMemento loadState() {
+		{
+			try {
+				XMLMemento memento = XMLMemento.createReadRoot(new BufferedReader(new FileReader(CFGActivator.getStateFile())));
+				IMemento thisMemento = memento.getChild(NewCfgWizard.MEMENTO__KEY);
+				if (thisMemento != null) {
+					return thisMemento;
+				}
+			} catch (WorkbenchException we) {
+				// ignoreit
+			} catch (FileNotFoundException fnfe) {
+				// ignore
+			}
+			return null;
+		}
 	}
 }
