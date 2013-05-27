@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.ENamedElement;
  * </p>
  *
  * @see de.upb.lina.lll.LllPackage#getLabel()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface Label extends ENamedElement {

@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *
  * @generated
  */
-public abstract class LabelImpl extends ENamedElementImpl implements Label {
+public class LabelImpl extends ENamedElementImpl implements Label {
 	/**
 	 * The cached value of the '{@link #getInstruction() <em>Instruction</em>}' reference.
 	 * <!-- begin-user-doc -->

@@ -40,6 +40,15 @@ public interface LllFactory extends EFactory {
 	Function createFunction();
 
 	/**
+	 * Returns a new object of class '<em>Label</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Label</em>'.
+	 * @generated
+	 */
+	Label createLabel();
+
+	/**
 	 * Returns a new object of class '<em>Function Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -85,13 +94,13 @@ public interface LllFactory extends EFactory {
 	Variable createVariable();
 
 	/**
-	 * Returns a new object of class '<em>Type</em>'.
+	 * Returns a new object of class '<em>Simple Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type</em>'.
+	 * @return a new object of class '<em>Simple Type</em>'.
 	 * @generated
 	 */
-	Type createType();
+	SimpleType createSimpleType();
 
 	/**
 	 * Returns a new object of class '<em>Complex Type</em>'.

@@ -118,6 +118,29 @@ public class LllItemProviderAdapterFactory extends LllAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.lina.lll.Label} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LabelItemProvider labelItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.lina.lll.Label}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createLabelAdapter() {
+		if (labelItemProvider == null) {
+			labelItemProvider = new LabelItemProvider(this);
+		}
+
+		return labelItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link de.upb.lina.lll.FunctionCall} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -233,26 +256,26 @@ public class LllItemProviderAdapterFactory extends LllAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.upb.lina.lll.Type} instances.
+	 * This keeps track of the one adapter used for all {@link de.upb.lina.lll.SimpleType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TypeItemProvider typeItemProvider;
+	protected SimpleTypeItemProvider simpleTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link de.upb.lina.lll.Type}.
+	 * This creates an adapter for a {@link de.upb.lina.lll.SimpleType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createTypeAdapter() {
-		if (typeItemProvider == null) {
-			typeItemProvider = new TypeItemProvider(this);
+	public Adapter createSimpleTypeAdapter() {
+		if (simpleTypeItemProvider == null) {
+			simpleTypeItemProvider = new SimpleTypeItemProvider(this);
 		}
 
-		return typeItemProvider;
+		return simpleTypeItemProvider;
 	}
 
 	/**
@@ -425,12 +448,13 @@ public class LllItemProviderAdapterFactory extends LllAdapterFactory implements 
 	public void dispose() {
 		if (programItemProvider != null) programItemProvider.dispose();
 		if (functionItemProvider != null) functionItemProvider.dispose();
+		if (labelItemProvider != null) labelItemProvider.dispose();
 		if (functionCallItemProvider != null) functionCallItemProvider.dispose();
 		if (conditionalBranchItemProvider != null) conditionalBranchItemProvider.dispose();
 		if (gotoItemProvider != null) gotoItemProvider.dispose();
 		if (constantItemProvider != null) constantItemProvider.dispose();
 		if (variableItemProvider != null) variableItemProvider.dispose();
-		if (typeItemProvider != null) typeItemProvider.dispose();
+		if (simpleTypeItemProvider != null) simpleTypeItemProvider.dispose();
 		if (complexTypeItemProvider != null) complexTypeItemProvider.dispose();
 		if (localComputationItemProvider != null) localComputationItemProvider.dispose();
 		if (memoryInstructionItemProvider != null) memoryInstructionItemProvider.dispose();

@@ -16,7 +16,7 @@ package de.upb.lina.lll;
  * </p>
  *
  * @see de.upb.lina.lll.LllPackage#getSimpleType()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface SimpleType extends Type {
