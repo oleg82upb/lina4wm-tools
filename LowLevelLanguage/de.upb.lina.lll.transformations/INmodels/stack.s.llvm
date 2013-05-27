@@ -1,0 +1,999 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<llvm:LLVM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:llvm="http://www.upb.de/llvm_parser/llvm">
+  <elements xsi:type="llvm:TopLevelEntity" target="e-p:32:32:32-i1:8:8-i8:8:8-i16:16:16-i32:32:32-i64:32:64-f32:32:32-f64:32:64-v64:64:64-v128:128:128-a0:0:64-f80:32:32-n8:16:32"/>
+  <elements xsi:type="llvm:TopLevelEntity" target="i386-linux-gnu"/>
+  <elements xsi:type="llvm:TypeDefinition">
+    <address name="%struct.Node"/>
+    <struct>
+      <types xsi:type="llvm:Predefined" type="i32"/>
+      <types xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+    </struct>
+  </elements>
+  <elements xsi:type="llvm:TypeDefinition">
+    <address name="%struct.Stack"/>
+    <struct>
+      <types xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+    </struct>
+  </elements>
+  <elements xsi:type="llvm:FunctionDefinition">
+    <returnType xsi:type="llvm:Predefined" type="void"/>
+    <address name="@_ZN5StackC2Ev"/>
+    <pl>
+      <types xsi:type="llvm:AddressUse" pointer="*" address="//@elements.3/@address"/>
+      <variables xsi:type="llvm:NonConstantValue" name="%this"/>
+    </pl>
+    <body>
+      <blocks label="entry">
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%this_addr">
+          <instruction xsi:type="llvm:Alloc">
+            <type xsi:type="llvm:AddressUse" pointer="*" address="//@elements.3/@address"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%&quot;alloca point&quot;">
+          <instruction xsi:type="llvm:Cast" operation="bitcast">
+            <from xsi:type="llvm:Predefined" type="i32"/>
+            <value xsi:type="llvm:Constant"/>
+            <to xsi:type="llvm:Predefined" type="i32"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:AddressUse" pointer="*" address="//@elements.3/@address"/>
+          <newvalue xsi:type="llvm:NonConstantValue" name="%this"/>
+          <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.3/@address"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%this_addr"/>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%0">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.3/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%this_addr"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%1">
+          <instruction xsi:type="llvm:GetElementPtr">
+            <aggregate xsi:type="llvm:AddressUse" pointer="*" address="//@elements.3/@address"/>
+            <aggregatename xsi:type="llvm:NonConstantValue" name="%0"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indizies xsi:type="llvm:Constant"/>
+            <indizies xsi:type="llvm:Constant"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          <newvalue name="null"/>
+          <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%1"/>
+        </instructions>
+        <terminator xsi:type="llvm:Branch">
+          <destination xsi:type="llvm:NonConstantValue" name="%return"/>
+        </terminator>
+      </blocks>
+      <blocks label="return">
+        <terminator xsi:type="llvm:Return"/>
+      </blocks>
+    </body>
+  </elements>
+  <elements xsi:type="llvm:FunctionDefinition">
+    <returnType xsi:type="llvm:Predefined" type="void"/>
+    <address name="@_ZN4NodeC1Ev"/>
+    <pl>
+      <types xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+      <variables xsi:type="llvm:NonConstantValue" name="%this"/>
+    </pl>
+    <body>
+      <blocks label="entry">
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%this_addr">
+          <instruction xsi:type="llvm:Alloc">
+            <type xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%&quot;alloca point&quot;">
+          <instruction xsi:type="llvm:Cast" operation="bitcast">
+            <from xsi:type="llvm:Predefined" type="i32"/>
+            <value xsi:type="llvm:Constant"/>
+            <to xsi:type="llvm:Predefined" type="i32"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          <newvalue xsi:type="llvm:NonConstantValue" name="%this"/>
+          <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%this_addr"/>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%0">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%this_addr"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%1">
+          <instruction xsi:type="llvm:GetElementPtr">
+            <aggregate xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+            <aggregatename xsi:type="llvm:NonConstantValue" name="%0"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indizies xsi:type="llvm:Constant"/>
+            <indizies xsi:type="llvm:Constant"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:Predefined" type="i32"/>
+          <newvalue xsi:type="llvm:Constant"/>
+          <adresstype xsi:type="llvm:Predefined" type="i32*"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%1"/>
+        </instructions>
+        <terminator xsi:type="llvm:Branch">
+          <destination xsi:type="llvm:NonConstantValue" name="%return"/>
+        </terminator>
+      </blocks>
+      <blocks label="return">
+        <terminator xsi:type="llvm:Return"/>
+      </blocks>
+    </body>
+  </elements>
+  <elements xsi:type="llvm:FunctionDefinition">
+    <returnType xsi:type="llvm:Predefined" type="void"/>
+    <address name="@_ZN5StackC1Ev"/>
+    <pl>
+      <types xsi:type="llvm:AddressUse" pointer="*" address="//@elements.3/@address"/>
+      <variables xsi:type="llvm:NonConstantValue" name="%this"/>
+    </pl>
+    <body>
+      <blocks label="entry">
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%this_addr">
+          <instruction xsi:type="llvm:Alloc">
+            <type xsi:type="llvm:AddressUse" pointer="*" address="//@elements.3/@address"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%&quot;alloca point&quot;">
+          <instruction xsi:type="llvm:Cast" operation="bitcast">
+            <from xsi:type="llvm:Predefined" type="i32"/>
+            <value xsi:type="llvm:Constant"/>
+            <to xsi:type="llvm:Predefined" type="i32"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:AddressUse" pointer="*" address="//@elements.3/@address"/>
+          <newvalue xsi:type="llvm:NonConstantValue" name="%this"/>
+          <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.3/@address"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%this_addr"/>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%0">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.3/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%this_addr"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%1">
+          <instruction xsi:type="llvm:GetElementPtr">
+            <aggregate xsi:type="llvm:AddressUse" pointer="*" address="//@elements.3/@address"/>
+            <aggregatename xsi:type="llvm:NonConstantValue" name="%0"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indizies xsi:type="llvm:Constant"/>
+            <indizies xsi:type="llvm:Constant"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          <newvalue name="null"/>
+          <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%1"/>
+        </instructions>
+        <terminator xsi:type="llvm:Branch">
+          <destination xsi:type="llvm:NonConstantValue" name="%return"/>
+        </terminator>
+      </blocks>
+      <blocks label="return">
+        <terminator xsi:type="llvm:Return"/>
+      </blocks>
+    </body>
+  </elements>
+  <elements xsi:type="llvm:FunctionDefinition">
+    <returnType xsi:type="llvm:Predefined" type="i32"/>
+    <address name="@main"/>
+    <pl/>
+    <body>
+      <blocks label="entry">
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%retval">
+          <instruction xsi:type="llvm:Alloc">
+            <type xsi:type="llvm:Predefined" type="i32"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%0">
+          <instruction xsi:type="llvm:Alloc">
+            <type xsi:type="llvm:Predefined" type="i32"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%&quot;alloca point&quot;">
+          <instruction xsi:type="llvm:Cast" operation="bitcast">
+            <from xsi:type="llvm:Predefined" type="i32"/>
+            <value xsi:type="llvm:Constant"/>
+            <to xsi:type="llvm:Predefined" type="i32"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:Predefined" type="i32"/>
+          <newvalue xsi:type="llvm:Constant"/>
+          <adresstype xsi:type="llvm:Predefined" type="i32*"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%0"/>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%1">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:Predefined" type="i32*"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%0"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:Predefined" type="i32"/>
+          <newvalue xsi:type="llvm:NonConstantValue" name="%1"/>
+          <adresstype xsi:type="llvm:Predefined" type="i32*"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%retval"/>
+        </instructions>
+        <terminator xsi:type="llvm:Branch">
+          <destination xsi:type="llvm:NonConstantValue" name="%return"/>
+        </terminator>
+      </blocks>
+      <blocks label="return">
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%retval1">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:Predefined" type="i32*"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%retval"/>
+          </instruction>
+        </instructions>
+        <terminator xsi:type="llvm:Return">
+          <returntype xsi:type="llvm:Predefined" type="i32"/>
+          <returnvalue xsi:type="llvm:NonConstantValue" name="%retval1"/>
+        </terminator>
+      </blocks>
+    </body>
+  </elements>
+  <elements xsi:type="llvm:FunctionDefinition">
+    <returnType xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+    <address name="@_ZN5Stack3popEv"/>
+    <pl>
+      <types xsi:type="llvm:AddressUse" pointer="*" address="//@elements.3/@address"/>
+      <variables xsi:type="llvm:NonConstantValue" name="%this"/>
+    </pl>
+    <body>
+      <blocks label="entry">
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%this_addr">
+          <instruction xsi:type="llvm:Alloc">
+            <type xsi:type="llvm:AddressUse" pointer="*" address="//@elements.3/@address"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%retval">
+          <instruction xsi:type="llvm:Alloc">
+            <type xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%0">
+          <instruction xsi:type="llvm:Alloc">
+            <type xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%retval.5">
+          <instruction xsi:type="llvm:Alloc">
+            <type xsi:type="llvm:Predefined" type="i8"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%ss">
+          <instruction xsi:type="llvm:Alloc">
+            <type xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%ssn">
+          <instruction xsi:type="llvm:Alloc">
+            <type xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%lv">
+          <instruction xsi:type="llvm:Alloc">
+            <type xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%&quot;alloca point&quot;">
+          <instruction xsi:type="llvm:Cast" operation="bitcast">
+            <from xsi:type="llvm:Predefined" type="i32"/>
+            <value xsi:type="llvm:Constant"/>
+            <to xsi:type="llvm:Predefined" type="i32"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:AddressUse" pointer="*" address="//@elements.3/@address"/>
+          <newvalue xsi:type="llvm:NonConstantValue" name="%this"/>
+          <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.3/@address"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%this_addr"/>
+        </instructions>
+        <terminator xsi:type="llvm:Branch">
+          <destination xsi:type="llvm:NonConstantValue" name="%bb"/>
+        </terminator>
+      </blocks>
+      <blocks label="bb">
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%1">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.3/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%this_addr"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%2">
+          <instruction xsi:type="llvm:GetElementPtr">
+            <aggregate xsi:type="llvm:AddressUse" pointer="*" address="//@elements.3/@address"/>
+            <aggregatename xsi:type="llvm:NonConstantValue" name="%1"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indizies xsi:type="llvm:Constant"/>
+            <indizies xsi:type="llvm:Constant"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%3">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%2"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          <newvalue xsi:type="llvm:NonConstantValue" name="%3"/>
+          <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%ss"/>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%4">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%ss"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%5">
+          <instruction xsi:type="llvm:Compare" pred="eq">
+            <comptype xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+            <value1 xsi:type="llvm:NonConstantValue" name="%4"/>
+            <value2 name="null"/>
+          </instruction>
+        </instructions>
+        <terminator xsi:type="llvm:Branch">
+          <condvalue xsi:type="llvm:NonConstantValue" name="%5"/>
+          <labelTruetype xsi:type="llvm:Predefined" type="label"/>
+          <labelTrue xsi:type="llvm:NonConstantValue" name="%bb1"/>
+          <labelFalsetype xsi:type="llvm:Predefined" type="label"/>
+          <labelFalse xsi:type="llvm:NonConstantValue" name="%bb2"/>
+        </terminator>
+      </blocks>
+      <blocks label="bb1">
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          <newvalue name="null"/>
+          <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%0"/>
+        </instructions>
+        <terminator xsi:type="llvm:Branch">
+          <destination xsi:type="llvm:NonConstantValue" name="%bb6"/>
+        </terminator>
+      </blocks>
+      <blocks label="bb2">
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%6">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%ss"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%7">
+          <instruction xsi:type="llvm:GetElementPtr">
+            <aggregate xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+            <aggregatename xsi:type="llvm:NonConstantValue" name="%6"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indizies xsi:type="llvm:Constant"/>
+            <indizies xsi:type="llvm:Constant" value="1"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%8">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%7"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          <newvalue xsi:type="llvm:NonConstantValue" name="%8"/>
+          <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%ssn"/>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%9">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%ssn"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%10">
+          <instruction xsi:type="llvm:Cast" operation="ptrtoint">
+            <from xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+            <value xsi:type="llvm:NonConstantValue" name="%9"/>
+            <to xsi:type="llvm:Predefined" type="i32"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%11">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%ss"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%12">
+          <instruction xsi:type="llvm:Cast" operation="ptrtoint">
+            <from xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+            <value xsi:type="llvm:NonConstantValue" name="%11"/>
+            <to xsi:type="llvm:Predefined" type="i32"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%13">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.3/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%this_addr"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%14">
+          <instruction xsi:type="llvm:GetElementPtr">
+            <aggregate xsi:type="llvm:AddressUse" pointer="*" address="//@elements.3/@address"/>
+            <aggregatename xsi:type="llvm:NonConstantValue" name="%13"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indizies xsi:type="llvm:Constant"/>
+            <indizies xsi:type="llvm:Constant"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%15">
+          <instruction xsi:type="llvm:Cast" operation="bitcast">
+            <from xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <value xsi:type="llvm:NonConstantValue" name="%14"/>
+            <to xsi:type="llvm:Predefined" type="i32*"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Call">
+          <adresstype xsi:type="llvm:Predefined" type="void"/>
+          <adress xsi:type="llvm:NonConstantValue" name="@llvm.memory.barrier"/>
+          <pList>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <variables name="true"/>
+            <variables name="true"/>
+            <variables name="true"/>
+            <variables name="true"/>
+            <variables name="true"/>
+          </pList>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%16">
+          <instruction xsi:type="llvm:Call">
+            <adresstype xsi:type="llvm:Predefined" type="i32"/>
+            <adress xsi:type="llvm:NonConstantValue" name="@llvm.atomic.cmp.swap.i32.p0i32"/>
+            <pList>
+              <types xsi:type="llvm:Predefined" type="i32*"/>
+              <types xsi:type="llvm:Predefined" type="i32"/>
+              <types xsi:type="llvm:Predefined" type="i32"/>
+              <variables xsi:type="llvm:NonConstantValue" name="%15"/>
+              <variables xsi:type="llvm:NonConstantValue" name="%12"/>
+              <variables xsi:type="llvm:NonConstantValue" name="%10"/>
+            </pList>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Call">
+          <adresstype xsi:type="llvm:Predefined" type="void"/>
+          <adress xsi:type="llvm:NonConstantValue" name="@llvm.memory.barrier"/>
+          <pList>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <variables name="true"/>
+            <variables name="true"/>
+            <variables name="true"/>
+            <variables name="true"/>
+            <variables name="true"/>
+          </pList>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%17">
+          <instruction xsi:type="llvm:Compare" pred="eq">
+            <comptype xsi:type="llvm:Predefined" type="i32"/>
+            <value1 xsi:type="llvm:NonConstantValue" name="%16"/>
+            <value2 xsi:type="llvm:NonConstantValue" name="%12"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%18">
+          <instruction xsi:type="llvm:Cast" operation="zext">
+            <from xsi:type="llvm:Predefined" type="i1"/>
+            <value xsi:type="llvm:NonConstantValue" name="%17"/>
+            <to xsi:type="llvm:Predefined" type="i8"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%toBool">
+          <instruction xsi:type="llvm:Compare" pred="ne">
+            <comptype xsi:type="llvm:Predefined" type="i8"/>
+            <value1 xsi:type="llvm:NonConstantValue" name="%18"/>
+            <value2 xsi:type="llvm:Constant"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%toBoolnot">
+          <instruction xsi:type="llvm:LogicOperation" operation="xor">
+            <optype xsi:type="llvm:Predefined" type="i1"/>
+            <value1 xsi:type="llvm:NonConstantValue" name="%toBool"/>
+            <value2 name="true"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%toBoolnot3">
+          <instruction xsi:type="llvm:Cast" operation="zext">
+            <from xsi:type="llvm:Predefined" type="i1"/>
+            <value xsi:type="llvm:NonConstantValue" name="%toBoolnot"/>
+            <to xsi:type="llvm:Predefined" type="i8"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:Predefined" type="i8"/>
+          <newvalue xsi:type="llvm:NonConstantValue" name="%toBoolnot3"/>
+          <adresstype xsi:type="llvm:Predefined" type="i8*"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%retval.5"/>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%19">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:Predefined" type="i8*"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%retval.5"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%toBool4">
+          <instruction xsi:type="llvm:Compare" pred="ne">
+            <comptype xsi:type="llvm:Predefined" type="i8"/>
+            <value1 xsi:type="llvm:NonConstantValue" name="%19"/>
+            <value2 xsi:type="llvm:Constant"/>
+          </instruction>
+        </instructions>
+        <terminator xsi:type="llvm:Branch">
+          <condvalue xsi:type="llvm:NonConstantValue" name="%toBool4"/>
+          <labelTruetype xsi:type="llvm:Predefined" type="label"/>
+          <labelTrue xsi:type="llvm:NonConstantValue" name="%bb"/>
+          <labelFalsetype xsi:type="llvm:Predefined" type="label"/>
+          <labelFalse xsi:type="llvm:NonConstantValue" name="%bb5"/>
+        </terminator>
+      </blocks>
+      <blocks label="bb5">
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%20">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%ss"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          <newvalue xsi:type="llvm:NonConstantValue" name="%20"/>
+          <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%0"/>
+        </instructions>
+        <terminator xsi:type="llvm:Branch">
+          <destination xsi:type="llvm:NonConstantValue" name="%bb6"/>
+        </terminator>
+      </blocks>
+      <blocks label="bb6">
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%21">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%0"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          <newvalue xsi:type="llvm:NonConstantValue" name="%21"/>
+          <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%retval"/>
+        </instructions>
+        <terminator xsi:type="llvm:Branch">
+          <destination xsi:type="llvm:NonConstantValue" name="%return"/>
+        </terminator>
+      </blocks>
+      <blocks label="return">
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%retval7">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%retval"/>
+          </instruction>
+        </instructions>
+        <terminator xsi:type="llvm:Return">
+          <returntype xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          <returnvalue xsi:type="llvm:NonConstantValue" name="%retval7"/>
+        </terminator>
+      </blocks>
+    </body>
+  </elements>
+  <elements xsi:type="llvm:FunctionDefinition">
+    <returnType xsi:type="llvm:Predefined" type="void"/>
+    <address name="@llvm.memory.barrier"/>
+    <tList>
+      <types xsi:type="llvm:Predefined" type="i1"/>
+      <types xsi:type="llvm:Predefined" type="i1"/>
+      <types xsi:type="llvm:Predefined" type="i1"/>
+      <types xsi:type="llvm:Predefined" type="i1"/>
+      <types xsi:type="llvm:Predefined" type="i1"/>
+    </tList>
+  </elements>
+  <elements xsi:type="llvm:FunctionDefinition">
+    <returnType xsi:type="llvm:Predefined" type="i32"/>
+    <address name="@llvm.atomic.cmp.swap.i32.p0i32"/>
+    <tList>
+      <types xsi:type="llvm:Predefined" type="i32*"/>
+      <types xsi:type="llvm:Predefined" type="i32"/>
+      <types xsi:type="llvm:Predefined" type="i32"/>
+    </tList>
+  </elements>
+  <elements xsi:type="llvm:FunctionDefinition">
+    <returnType xsi:type="llvm:Predefined" type="void"/>
+    <address name="@_ZN5Stack4pushEi"/>
+    <pl>
+      <types xsi:type="llvm:AddressUse" pointer="*" address="//@elements.3/@address"/>
+      <types xsi:type="llvm:Predefined" type="i32"/>
+      <variables xsi:type="llvm:NonConstantValue" name="%this"/>
+      <variables xsi:type="llvm:NonConstantValue" name="%v"/>
+    </pl>
+    <body>
+      <blocks label="entry">
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%this_addr">
+          <instruction xsi:type="llvm:Alloc">
+            <type xsi:type="llvm:AddressUse" pointer="*" address="//@elements.3/@address"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%v_addr">
+          <instruction xsi:type="llvm:Alloc">
+            <type xsi:type="llvm:Predefined" type="i32"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%retval.0">
+          <instruction xsi:type="llvm:Alloc">
+            <type xsi:type="llvm:Predefined" type="i8"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%0">
+          <instruction xsi:type="llvm:Alloc">
+            <type xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%n">
+          <instruction xsi:type="llvm:Alloc">
+            <type xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%ss">
+          <instruction xsi:type="llvm:Alloc">
+            <type xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%&quot;alloca point&quot;">
+          <instruction xsi:type="llvm:Cast" operation="bitcast">
+            <from xsi:type="llvm:Predefined" type="i32"/>
+            <value xsi:type="llvm:Constant"/>
+            <to xsi:type="llvm:Predefined" type="i32"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:AddressUse" pointer="*" address="//@elements.3/@address"/>
+          <newvalue xsi:type="llvm:NonConstantValue" name="%this"/>
+          <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.3/@address"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%this_addr"/>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:Predefined" type="i32"/>
+          <newvalue xsi:type="llvm:NonConstantValue" name="%v"/>
+          <adresstype xsi:type="llvm:Predefined" type="i32*"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%v_addr"/>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%1">
+          <instruction xsi:type="llvm:Call">
+            <adresstype xsi:type="llvm:Predefined" type="i8*"/>
+            <adress xsi:type="llvm:NonConstantValue" name="@_Znwj"/>
+            <pList>
+              <types xsi:type="llvm:Predefined" type="i32"/>
+              <variables xsi:type="llvm:Constant" value="8"/>
+            </pList>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%2">
+          <instruction xsi:type="llvm:Cast" operation="bitcast">
+            <from xsi:type="llvm:Predefined" type="i8*"/>
+            <value xsi:type="llvm:NonConstantValue" name="%1"/>
+            <to xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          <newvalue xsi:type="llvm:NonConstantValue" name="%2"/>
+          <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%0"/>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%3">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%0"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Call">
+          <adresstype xsi:type="llvm:Predefined" type="void"/>
+          <adress xsi:type="llvm:NonConstantValue" name="@_ZN4NodeC1Ev"/>
+          <pList>
+            <types xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+            <variables xsi:type="llvm:NonConstantValue" name="%3"/>
+          </pList>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%4">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%0"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          <newvalue xsi:type="llvm:NonConstantValue" name="%4"/>
+          <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%n"/>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%5">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%n"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%6">
+          <instruction xsi:type="llvm:GetElementPtr">
+            <aggregate xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+            <aggregatename xsi:type="llvm:NonConstantValue" name="%5"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indizies xsi:type="llvm:Constant"/>
+            <indizies xsi:type="llvm:Constant"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%7">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:Predefined" type="i32*"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%v_addr"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:Predefined" type="i32"/>
+          <newvalue xsi:type="llvm:NonConstantValue" name="%7"/>
+          <adresstype xsi:type="llvm:Predefined" type="i32*"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%6"/>
+        </instructions>
+        <terminator xsi:type="llvm:Branch">
+          <destination xsi:type="llvm:NonConstantValue" name="%bb"/>
+        </terminator>
+      </blocks>
+      <blocks label="bb">
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%8">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.3/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%this_addr"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%9">
+          <instruction xsi:type="llvm:GetElementPtr">
+            <aggregate xsi:type="llvm:AddressUse" pointer="*" address="//@elements.3/@address"/>
+            <aggregatename xsi:type="llvm:NonConstantValue" name="%8"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indizies xsi:type="llvm:Constant"/>
+            <indizies xsi:type="llvm:Constant"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%10">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%9"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          <newvalue xsi:type="llvm:NonConstantValue" name="%10"/>
+          <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%ss"/>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%11">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%n"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%12">
+          <instruction xsi:type="llvm:GetElementPtr">
+            <aggregate xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+            <aggregatename xsi:type="llvm:NonConstantValue" name="%11"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indizies xsi:type="llvm:Constant"/>
+            <indizies xsi:type="llvm:Constant" value="1"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%13">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%ss"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+          <newvalue xsi:type="llvm:NonConstantValue" name="%13"/>
+          <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%12"/>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%14">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%n"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%15">
+          <instruction xsi:type="llvm:Cast" operation="ptrtoint">
+            <from xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+            <value xsi:type="llvm:NonConstantValue" name="%14"/>
+            <to xsi:type="llvm:Predefined" type="i32"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%16">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%ss"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%17">
+          <instruction xsi:type="llvm:Cast" operation="ptrtoint">
+            <from xsi:type="llvm:AddressUse" pointer="*" address="//@elements.2/@address"/>
+            <value xsi:type="llvm:NonConstantValue" name="%16"/>
+            <to xsi:type="llvm:Predefined" type="i32"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%18">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:AddressUse" pointer="**" address="//@elements.3/@address"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%this_addr"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%19">
+          <instruction xsi:type="llvm:GetElementPtr">
+            <aggregate xsi:type="llvm:AddressUse" pointer="*" address="//@elements.3/@address"/>
+            <aggregatename xsi:type="llvm:NonConstantValue" name="%18"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indTypes xsi:type="llvm:Predefined" type="i32"/>
+            <indizies xsi:type="llvm:Constant"/>
+            <indizies xsi:type="llvm:Constant"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%20">
+          <instruction xsi:type="llvm:Cast" operation="bitcast">
+            <from xsi:type="llvm:AddressUse" pointer="**" address="//@elements.2/@address"/>
+            <value xsi:type="llvm:NonConstantValue" name="%19"/>
+            <to xsi:type="llvm:Predefined" type="i32*"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Call">
+          <adresstype xsi:type="llvm:Predefined" type="void"/>
+          <adress xsi:type="llvm:NonConstantValue" name="@llvm.memory.barrier"/>
+          <pList>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <variables name="true"/>
+            <variables name="true"/>
+            <variables name="true"/>
+            <variables name="true"/>
+            <variables name="true"/>
+          </pList>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%21">
+          <instruction xsi:type="llvm:Call">
+            <adresstype xsi:type="llvm:Predefined" type="i32"/>
+            <adress xsi:type="llvm:NonConstantValue" name="@llvm.atomic.cmp.swap.i32.p0i32"/>
+            <pList>
+              <types xsi:type="llvm:Predefined" type="i32*"/>
+              <types xsi:type="llvm:Predefined" type="i32"/>
+              <types xsi:type="llvm:Predefined" type="i32"/>
+              <variables xsi:type="llvm:NonConstantValue" name="%20"/>
+              <variables xsi:type="llvm:NonConstantValue" name="%17"/>
+              <variables xsi:type="llvm:NonConstantValue" name="%15"/>
+            </pList>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Call">
+          <adresstype xsi:type="llvm:Predefined" type="void"/>
+          <adress xsi:type="llvm:NonConstantValue" name="@llvm.memory.barrier"/>
+          <pList>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <types xsi:type="llvm:Predefined" type="i1"/>
+            <variables name="true"/>
+            <variables name="true"/>
+            <variables name="true"/>
+            <variables name="true"/>
+            <variables name="true"/>
+          </pList>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%22">
+          <instruction xsi:type="llvm:Compare" pred="eq">
+            <comptype xsi:type="llvm:Predefined" type="i32"/>
+            <value1 xsi:type="llvm:NonConstantValue" name="%21"/>
+            <value2 xsi:type="llvm:NonConstantValue" name="%17"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%23">
+          <instruction xsi:type="llvm:Cast" operation="zext">
+            <from xsi:type="llvm:Predefined" type="i1"/>
+            <value xsi:type="llvm:NonConstantValue" name="%22"/>
+            <to xsi:type="llvm:Predefined" type="i8"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%toBool">
+          <instruction xsi:type="llvm:Compare" pred="ne">
+            <comptype xsi:type="llvm:Predefined" type="i8"/>
+            <value1 xsi:type="llvm:NonConstantValue" name="%23"/>
+            <value2 xsi:type="llvm:Constant"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%toBoolnot">
+          <instruction xsi:type="llvm:LogicOperation" operation="xor">
+            <optype xsi:type="llvm:Predefined" type="i1"/>
+            <value1 xsi:type="llvm:NonConstantValue" name="%toBool"/>
+            <value2 name="true"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%toBoolnot1">
+          <instruction xsi:type="llvm:Cast" operation="zext">
+            <from xsi:type="llvm:Predefined" type="i1"/>
+            <value xsi:type="llvm:NonConstantValue" name="%toBoolnot"/>
+            <to xsi:type="llvm:Predefined" type="i8"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:Predefined" type="i8"/>
+          <newvalue xsi:type="llvm:NonConstantValue" name="%toBoolnot1"/>
+          <adresstype xsi:type="llvm:Predefined" type="i8*"/>
+          <adress xsi:type="llvm:NonConstantValue" name="%retval.0"/>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%24">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:Predefined" type="i8*"/>
+            <adress xsi:type="llvm:NonConstantValue" name="%retval.0"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%toBool2">
+          <instruction xsi:type="llvm:Compare" pred="ne">
+            <comptype xsi:type="llvm:Predefined" type="i8"/>
+            <value1 xsi:type="llvm:NonConstantValue" name="%24"/>
+            <value2 xsi:type="llvm:Constant"/>
+          </instruction>
+        </instructions>
+        <terminator xsi:type="llvm:Branch">
+          <condvalue xsi:type="llvm:NonConstantValue" name="%toBool2"/>
+          <labelTruetype xsi:type="llvm:Predefined" type="label"/>
+          <labelTrue xsi:type="llvm:NonConstantValue" name="%bb"/>
+          <labelFalsetype xsi:type="llvm:Predefined" type="label"/>
+          <labelFalse xsi:type="llvm:NonConstantValue" name="%bb3"/>
+        </terminator>
+      </blocks>
+      <blocks label="bb3">
+        <terminator xsi:type="llvm:Branch">
+          <destination xsi:type="llvm:NonConstantValue" name="%return"/>
+        </terminator>
+      </blocks>
+      <blocks label="return">
+        <terminator xsi:type="llvm:Return"/>
+      </blocks>
+    </body>
+  </elements>
+  <elements xsi:type="llvm:FunctionDefinition">
+    <returnType xsi:type="llvm:Predefined" type="i8*"/>
+    <address name="@_Znwj"/>
+    <tList>
+      <types xsi:type="llvm:Predefined" type="i32"/>
+    </tList>
+  </elements>
+</llvm:LLVM>

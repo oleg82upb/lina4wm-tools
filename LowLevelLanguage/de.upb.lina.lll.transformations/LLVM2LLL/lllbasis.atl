@@ -1,0 +1,312 @@
+-- @path LLVM=/de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore
+-- @path LLL=/de.upb.lina.lll/model/LLL.ecore
+
+
+module lllbasis;
+create lll: LLL from llvm: LLVM;
+
+--****************************************--
+--                                        --
+--                 Helpers                --
+--                                        --
+--****************************************--
+helper def: stringcut(input: String, char: String): String =
+	if input.lastIndexOf(char) > -1 then
+		input.substring(input.lastIndexOf(char) + 2, input.size())
+	else
+		input
+	endif;
+
+--****************************************--
+--                                        --
+--                  Form                  --
+--                                        --
+--****************************************--
+rule Program {
+	from
+		in_llvm: LLVM!LLVM
+	using {
+		lllfunctions: Set(LLVM!FunctionDefinition) = in_llvm.elements -> select(t | t.oclIsTypeOf(LLVM!FunctionDefinition));
+	}
+	to
+		program: LLL!Program (
+			functions <- lllfunctions -> collect(fun | thisModule.resolveTemp(fun, 'lllfunction'))
+		)
+}
+
+rule functions {
+	from
+		inFunction: LLVM!FunctionDefinition
+	using {
+		fBody: LLVM!FunctionBody = inFunction.body;
+		fBlocks: Sequence(LLVM!BasicBlock) = if fBody.oclIsUndefined() then
+			OclUndefined
+		else
+			fBody.blocks -> collect(t | t) -> flatten()
+		endif;
+
+		inst: OrderedSet(LLVM!Instruction) = if fBlocks.oclIsUndefined() then
+			OclUndefined
+		else
+			fBlocks-> collect(b | b.instructions.append(b.terminator)).flatten().debug()
+		endif;
+	}
+	to
+		lllfunction: LLL!Function (
+			name <- inFunction.address.name.debug(),
+			instructions <- if inst.oclIsUndefined() then OclUndefined else inst -> collect(i | thisModule.resolveTemp(i, 'outI')) endif,
+			labels <- if fBlocks.oclIsUndefined() then OclUndefined else fBlocks -> collect(b | thisModule.bindLabel(b, lllfunction)) endif
+		)
+}
+
+rule bindLabel(block:LLVM!BasicBlock, lllfunction:LLL!Function) {
+	to 
+		bbLabel : LLL!Label (
+			function <- lllfunction,
+			instruction <- thisModule.resolveTemp(block.instructions.first(), 'outI'),
+			name <- block.label
+		)
+	do {
+		bbLabel;
+	}
+}
+
+--rule BasicBlock {
+--	from
+--		bb: LLVM!BasicBlock
+--	to
+--		bbLabel: LLL!Label (
+--			name <- bb.label,
+--			instruction <- if bb.instructions.first().oclIsUndefined() then
+--					bb.terminator
+--				else
+--					bb.instructions.first()
+--				endif
+--		)
+--}
+
+--****************************************--
+--                                        --
+--                 Values                 --
+--                                        --
+--****************************************--
+rule Constant {
+	from
+		con: LLVM!Constant
+	to
+		outV: LLL!Constant (
+			value <- con.value.toString()
+		)
+}
+
+rule NonConstantValue {
+	from
+		ncv: LLVM!NonConstantValue
+	to
+		outV: LLL!Variable (
+			name <- thisModule.stringcut(thisModule.stringcut(thisModule.stringcut(ncv.name, '%'), '@'), '!')
+		)
+}
+
+rule Value {
+	from
+		value: LLVM!Value (
+			not value.oclIsTypeOf(LLVM!Constant) and not value.oclIsTypeOf(LLVM!NonConstantValue) and not value.name.oclIsUndefined()
+		)
+	to
+		outV: LLL!Variable (
+			name <- thisModule.stringcut(thisModule.stringcut(thisModule.stringcut(value.name, '%'), '@'), '!')
+		)
+}
+
+--****************************************--
+--                                        --
+--                  Type                  --
+--                                        --
+--****************************************--
+rule PredefinedInteger {
+	from
+		predef: LLVM!Predefined (
+			predef.type.startsWith('i')
+		)
+	to
+		outT: LLL!SimpleType (
+			type <- if predef.type.endsWith('*') then #pointer else if predef.type = 'i1' then #bool else #int endif endif
+		)
+}
+
+rule Address__ComplexType {
+	from
+		address: LLVM!Address (
+			not address.name.endsWith('*')
+		)
+	to
+		outT: LLL!ComplexType (
+			name <- thisModule.stringcut(thisModule.stringcut(thisModule.stringcut(address.name, '%'), '@'), '!')
+		)
+}
+
+rule Address__Pointer {
+	from
+		address: LLVM!Address (
+			address.name.endsWith('*')
+		)
+	to
+		outT: LLL!SimpleType (
+			type <-  #pointer
+		)
+}
+
+lazy rule ValueType {
+	from
+		intype: LLL!Type
+	to
+		outvalue: LLL!Constant (
+			type <- intype
+		)
+}
+
+--****************************************--
+--                                        --
+--              Instructions              --
+--                                        --
+--****************************************--
+rule LoadUse {
+	from
+		insUse: LLVM!InstructionUse (
+			insUse.instruction.oclIsTypeOf(LLVM!Load)
+		)
+	to
+		outI: LLL!MemoryInstruction (
+			instructionType <- #Load,
+			parameters <- thisModule.resolveTemp(insUse.instruction.adress, 'outV').refSetValue('type', thisModule.resolveTemp(insUse.instruction.adresstype, 'outT')),
+			instructionResult <- intReg
+		),
+		intReg: LLL!Variable (
+			name <- thisModule.stringcut(thisModule.stringcut(thisModule.stringcut(insUse.reg_or_var, '%'), '@'), '!')
+		)
+}
+
+rule AllocUse {
+	from
+		insUse: LLVM!InstructionUse (
+			insUse.instruction.oclIsTypeOf(LLVM!Alloc)
+		)
+	to
+		outI: LLL!MemoryInstruction (
+			instructionType <- #Alloca,
+			parameters <- if insUse.instruction.numelementsvalue.oclIsUndefined() then
+					thisModule.createAllocaParam(insUse.instruction)
+				else
+					thisModule.resolveTemp(insUse.instruction.numelementsvalue, 'outV').refSetValue('type', thisModule.resolveTemp(insUse.instruction.type, 'outT'))
+				endif,
+			instructionResult <- intReg
+		),
+		intReg: LLL!Variable (
+			name <- thisModule.stringcut(thisModule.stringcut(thisModule.stringcut(insUse.reg_or_var, '%'), '@'), '!')
+		)
+}
+
+rule PhiUse {
+	from
+		insUse: LLVM!InstructionUse (
+			insUse.instruction.oclIsTypeOf(LLVM!Phi)
+		)
+	to
+		outI: LLL!LocalComputation (
+			parameters <- OrderedSet{thisModule.resolveTemp(insUse.instruction.firstclass.first(), 'outV').refSetValue('type', thisModule.resolveTemp(insUse.instruction.type,
+					'outT')),
+						thisModule.resolveTemp(insUse.instruction.values.first(), 'outV'),
+						thisModule.resolveTemp(insUse.instruction.firstclass.at(2), 'outV'),
+						thisModule.resolveTemp(insUse.instruction.values.at(2), 'outV')},
+			instructionResult <- intReg
+		),
+		intReg: LLL!Variable (
+			name <- thisModule.stringcut(thisModule.stringcut(thisModule.stringcut(insUse.reg_or_var, '%'), '@'), '!')
+		)
+}
+
+rule Load {
+	from
+		instruction: LLVM!Load
+	to
+		outI: LLL!MemoryInstruction (
+			instructionType <- #Load,
+			parameters <- thisModule.resolveTemp(instruction.adress, 'outV').refSetValue('type', thisModule.resolveTemp(instruction.adresstype, 'outT'))
+		)
+}
+
+rule Store {
+	from
+		instruction: LLVM!Store
+	to
+		outI: LLL!MemoryInstruction (
+			instructionType <- #Store,
+			parameters <- OrderedSet{thisModule.resolveTemp(instruction.newvalue, 'outV').refSetValue('type', thisModule.resolveTemp(instruction.newtype, 'outT')),
+						thisModule.resolveTemp(instruction.adress, 'outV').refSetValue('type', thisModule.resolveTemp(instruction.adresstype, 'outT'))}
+		)
+}
+
+rule Alloc {
+	from
+		instruction: LLVM!Alloc
+	to
+		outI: LLL!MemoryInstruction (
+			instructionType <- #Alloca,
+			parameters <- if instruction.numelementsvalue.oclIsUndefined() then
+					thisModule.createAllocaParam(instruction)
+				else
+					OrderedSet{thisModule.createAllocaParam(instruction),
+							thisModule.resolveTemp(instruction.numelementsvalue, 'outV').refSetValue('type', thisModule.resolveTemp(instruction.numelementstype, 'outT'))}
+				endif
+		)
+}
+
+lazy rule createAllocaParam {
+	from
+		instruction: LLVM!Alloc
+	to
+		intParam: LLL!Constant (
+			type <- instruction.type,
+			value <- OclUndefined
+		)
+}
+
+rule Branch {
+	from
+		instruction: LLVM!Branch (
+			instruction.destination.oclIsUndefined()
+		)
+	to
+		outI: LLL!ConditionalBranch (
+			elseTarget <- LLL!Label.allInstances() -> select(i | i.name = thisModule.resolveTemp(instruction.labelFalse,'outV').name and i.function.instructions.includes(thisModule.resolveTemp(instruction, 'outI'))),
+			target <- LLL!Label.allInstances() -> select(i | (i.name = thisModule.resolveTemp(instruction.labelTrue,'outV').name)and i.function.instructions.includes(thisModule.resolveTemp(instruction, 'outI')))
+			
+		)
+}
+
+rule Goto {
+	from
+		instruction: LLVM!Branch (
+			not instruction.destination.oclIsUndefined()
+		)
+	to
+		outI: LLL!Goto (
+			target <- LLL!Label.allInstances() -> select(i | (i.name = thisModule.resolveTemp(instruction.destination,'outV').name)and i.function.instructions.includes(thisModule.resolveTemp(instruction, 'outI')))
+		)
+}
+
+rule Return {
+	from
+		instruction: LLVM!Return
+	to
+		outI:LLL!LocalComputation(
+			instructionResult <- return  
+		),
+		return :LLL!Variable(
+			name <- 'return '+if instruction.returnvalue.oclIsUndefined() then '' else thisModule.resolveTemp(instruction.returnvalue, 'outV').name endif,
+			type <- thisModule.resolveTemp(instruction.returntype, 'outT')
+		)
+		
+		
+}
