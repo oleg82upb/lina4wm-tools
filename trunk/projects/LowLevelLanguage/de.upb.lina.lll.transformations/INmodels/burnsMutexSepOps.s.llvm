@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="ASCII"?>
+<llvm:LLVM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:llvm="http://www.upb.de/llvm_parser/llvm">
+  <elements xsi:type="llvm:TopLevelEntity" target="e-p:32:32:32-i1:8:8-i8:8:8-i16:16:16-i32:32:32-i64:32:64-f32:32:32-f64:32:64-v64:64:64-v128:128:128-a0:0:64-f80:32:32-n8:16:32-S128"/>
+  <elements xsi:type="llvm:TopLevelEntity" target="i386-pc-linux-gnu"/>
+  <elements xsi:type="llvm:GlobalDefinition">
+    <adress name="@f0"/>
+    <type xsi:type="llvm:Predefined" type="i8"/>
+    <value xsi:type="llvm:Constant"/>
+  </elements>
+  <elements xsi:type="llvm:GlobalDefinition">
+    <adress name="@f1"/>
+    <type xsi:type="llvm:Predefined" type="i8"/>
+    <value xsi:type="llvm:Constant"/>
+  </elements>
+  <elements xsi:type="llvm:GlobalDefinition">
+    <adress name="@i"/>
+    <type xsi:type="llvm:Predefined" type="i32"/>
+    <value xsi:type="llvm:Constant"/>
+  </elements>
+  <elements xsi:type="llvm:FunctionDefinition">
+    <returnType xsi:type="llvm:Predefined" type="void"/>
+    <address name="@_Z5p1_aqv"/>
+    <pl/>
+    <body>
+      <blocks label="entry">
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:Predefined" type="i8"/>
+          <newvalue xsi:type="llvm:Constant" value="1"/>
+          <adresstype xsi:type="llvm:Predefined" type="i8*"/>
+          <adress xsi:type="llvm:NonConstantValue" name="@f0"/>
+        </instructions>
+        <terminator xsi:type="llvm:Branch">
+          <destination xsi:type="llvm:NonConstantValue" name="%while.cond"/>
+        </terminator>
+      </blocks>
+      <blocks label="while.cond">
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%0">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:Predefined" type="i8*"/>
+            <adress xsi:type="llvm:NonConstantValue" name="@f1"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%tobool">
+          <instruction xsi:type="llvm:Cast" operation="trunc">
+            <from xsi:type="llvm:Predefined" type="i8"/>
+            <value xsi:type="llvm:NonConstantValue" name="%0"/>
+            <to xsi:type="llvm:Predefined" type="i1"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%conv">
+          <instruction xsi:type="llvm:Cast" operation="zext">
+            <from xsi:type="llvm:Predefined" type="i1"/>
+            <value xsi:type="llvm:NonConstantValue" name="%tobool"/>
+            <to xsi:type="llvm:Predefined" type="i32"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%cmp">
+          <instruction xsi:type="llvm:Compare" pred="ne">
+            <comptype xsi:type="llvm:Predefined" type="i32"/>
+            <value1 xsi:type="llvm:NonConstantValue" name="%conv"/>
+            <value2 xsi:type="llvm:Constant"/>
+          </instruction>
+        </instructions>
+        <terminator xsi:type="llvm:Branch">
+          <condvalue xsi:type="llvm:NonConstantValue" name="%cmp"/>
+          <labelTruetype xsi:type="llvm:Predefined" type="label"/>
+          <labelTrue xsi:type="llvm:NonConstantValue" name="%while.body"/>
+          <labelFalsetype xsi:type="llvm:Predefined" type="label"/>
+          <labelFalse xsi:type="llvm:NonConstantValue" name="%while.end"/>
+        </terminator>
+      </blocks>
+      <blocks label="while.body">
+        <terminator xsi:type="llvm:Branch">
+          <destination xsi:type="llvm:NonConstantValue" name="%while.cond"/>
+        </terminator>
+      </blocks>
+      <blocks label="while.end">
+        <terminator xsi:type="llvm:Return"/>
+      </blocks>
+    </body>
+  </elements>
+  <elements xsi:type="llvm:FunctionDefinition">
+    <returnType xsi:type="llvm:Predefined" type="void"/>
+    <address name="@_Z6p1_relv"/>
+    <pl/>
+    <body>
+      <blocks label="entry">
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:Predefined" type="i8"/>
+          <newvalue xsi:type="llvm:Constant"/>
+          <adresstype xsi:type="llvm:Predefined" type="i8*"/>
+          <adress xsi:type="llvm:NonConstantValue" name="@f0"/>
+        </instructions>
+        <terminator xsi:type="llvm:Return"/>
+      </blocks>
+    </body>
+  </elements>
+  <elements xsi:type="llvm:FunctionDefinition">
+    <returnType xsi:type="llvm:Predefined" type="void"/>
+    <address name="@_Z5p2_aqv"/>
+    <pl/>
+    <body>
+      <blocks label="entry">
+        <terminator xsi:type="llvm:Branch">
+          <destination xsi:type="llvm:NonConstantValue" name="%retry"/>
+        </terminator>
+      </blocks>
+      <blocks label="retry">
+        <terminator xsi:type="llvm:Branch">
+          <destination xsi:type="llvm:NonConstantValue" name="%while.cond"/>
+        </terminator>
+      </blocks>
+      <blocks label="while.cond">
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%0">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:Predefined" type="i8*"/>
+            <adress xsi:type="llvm:NonConstantValue" name="@f0"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%tobool">
+          <instruction xsi:type="llvm:Cast" operation="trunc">
+            <from xsi:type="llvm:Predefined" type="i8"/>
+            <value xsi:type="llvm:NonConstantValue" name="%0"/>
+            <to xsi:type="llvm:Predefined" type="i1"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%conv">
+          <instruction xsi:type="llvm:Cast" operation="zext">
+            <from xsi:type="llvm:Predefined" type="i1"/>
+            <value xsi:type="llvm:NonConstantValue" name="%tobool"/>
+            <to xsi:type="llvm:Predefined" type="i32"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%cmp">
+          <instruction xsi:type="llvm:Compare" pred="ne">
+            <comptype xsi:type="llvm:Predefined" type="i32"/>
+            <value1 xsi:type="llvm:NonConstantValue" name="%conv"/>
+            <value2 xsi:type="llvm:Constant"/>
+          </instruction>
+        </instructions>
+        <terminator xsi:type="llvm:Branch">
+          <condvalue xsi:type="llvm:NonConstantValue" name="%cmp"/>
+          <labelTruetype xsi:type="llvm:Predefined" type="label"/>
+          <labelTrue xsi:type="llvm:NonConstantValue" name="%while.body"/>
+          <labelFalsetype xsi:type="llvm:Predefined" type="label"/>
+          <labelFalse xsi:type="llvm:NonConstantValue" name="%while.end"/>
+        </terminator>
+      </blocks>
+      <blocks label="while.body">
+        <terminator xsi:type="llvm:Branch">
+          <destination xsi:type="llvm:NonConstantValue" name="%while.cond"/>
+        </terminator>
+      </blocks>
+      <blocks label="while.end">
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:Predefined" type="i8"/>
+          <newvalue xsi:type="llvm:Constant" value="1"/>
+          <adresstype xsi:type="llvm:Predefined" type="i8*"/>
+          <adress xsi:type="llvm:NonConstantValue" name="@f1"/>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%1">
+          <instruction xsi:type="llvm:Load">
+            <adresstype xsi:type="llvm:Predefined" type="i8*"/>
+            <adress xsi:type="llvm:NonConstantValue" name="@f0"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%tobool1">
+          <instruction xsi:type="llvm:Cast" operation="trunc">
+            <from xsi:type="llvm:Predefined" type="i8"/>
+            <value xsi:type="llvm:NonConstantValue" name="%1"/>
+            <to xsi:type="llvm:Predefined" type="i1"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%conv2">
+          <instruction xsi:type="llvm:Cast" operation="zext">
+            <from xsi:type="llvm:Predefined" type="i1"/>
+            <value xsi:type="llvm:NonConstantValue" name="%tobool1"/>
+            <to xsi:type="llvm:Predefined" type="i32"/>
+          </instruction>
+        </instructions>
+        <instructions xsi:type="llvm:InstructionUse" reg_or_var="%cmp3">
+          <instruction xsi:type="llvm:Compare" pred="ne">
+            <comptype xsi:type="llvm:Predefined" type="i32"/>
+            <value1 xsi:type="llvm:NonConstantValue" name="%conv2"/>
+            <value2 xsi:type="llvm:Constant"/>
+          </instruction>
+        </instructions>
+        <terminator xsi:type="llvm:Branch">
+          <condvalue xsi:type="llvm:NonConstantValue" name="%cmp3"/>
+          <labelTruetype xsi:type="llvm:Predefined" type="label"/>
+          <labelTrue xsi:type="llvm:NonConstantValue" name="%if.then"/>
+          <labelFalsetype xsi:type="llvm:Predefined" type="label"/>
+          <labelFalse xsi:type="llvm:NonConstantValue" name="%if.end"/>
+        </terminator>
+      </blocks>
+      <blocks label="if.then">
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:Predefined" type="i8"/>
+          <newvalue xsi:type="llvm:Constant"/>
+          <adresstype xsi:type="llvm:Predefined" type="i8*"/>
+          <adress xsi:type="llvm:NonConstantValue" name="@f1"/>
+        </instructions>
+        <terminator xsi:type="llvm:Branch">
+          <destination xsi:type="llvm:NonConstantValue" name="%retry"/>
+        </terminator>
+      </blocks>
+      <blocks label="if.end">
+        <terminator xsi:type="llvm:Return"/>
+      </blocks>
+    </body>
+  </elements>
+  <elements xsi:type="llvm:FunctionDefinition">
+    <returnType xsi:type="llvm:Predefined" type="void"/>
+    <address name="@_Z6p2_relv"/>
+    <pl/>
+    <body>
+      <blocks label="entry">
+        <instructions xsi:type="llvm:Store">
+          <newtype xsi:type="llvm:Predefined" type="i8"/>
+          <newvalue xsi:type="llvm:Constant"/>
+          <adresstype xsi:type="llvm:Predefined" type="i8*"/>
+          <adress xsi:type="llvm:NonConstantValue" name="@f1"/>
+        </instructions>
+        <terminator xsi:type="llvm:Return"/>
+      </blocks>
+    </body>
+  </elements>
+  <elements xsi:type="llvm:FunctionDefinition">
+    <returnType xsi:type="llvm:Predefined" type="i32"/>
+    <address name="@main"/>
+    <pl/>
+    <body>
+      <blocks label="entry">
+        <terminator xsi:type="llvm:Return">
+          <returntype xsi:type="llvm:Predefined" type="i32"/>
+          <returnvalue xsi:type="llvm:Constant"/>
+        </terminator>
+      </blocks>
+    </body>
+  </elements>
+</llvm:LLVM>
