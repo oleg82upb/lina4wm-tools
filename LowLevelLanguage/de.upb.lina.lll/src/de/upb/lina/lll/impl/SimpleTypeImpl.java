@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public abstract class SimpleTypeImpl extends TypeImpl implements SimpleType {
+public class SimpleTypeImpl extends TypeImpl implements SimpleType {
 	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->

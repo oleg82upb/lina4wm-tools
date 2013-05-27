@@ -191,6 +191,11 @@ public class FunctionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LllPackage.Literals.FUNCTION__LABELS,
+				 LllFactory.eINSTANCE.createLabel()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LllPackage.Literals.FUNCTION__INSTRUCTIONS,
 				 LllFactory.eINSTANCE.createFunctionCall()));
 

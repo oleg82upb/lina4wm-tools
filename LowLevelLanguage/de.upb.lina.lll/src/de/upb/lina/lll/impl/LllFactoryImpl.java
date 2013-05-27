@@ -59,12 +59,13 @@ public class LllFactoryImpl extends EFactoryImpl implements LllFactory {
 		switch (eClass.getClassifierID()) {
 			case LllPackage.PROGRAM: return createProgram();
 			case LllPackage.FUNCTION: return createFunction();
+			case LllPackage.LABEL: return createLabel();
 			case LllPackage.FUNCTION_CALL: return createFunctionCall();
 			case LllPackage.CONDITIONAL_BRANCH: return createConditionalBranch();
 			case LllPackage.GOTO: return createGoto();
 			case LllPackage.CONSTANT: return createConstant();
 			case LllPackage.VARIABLE: return createVariable();
-			case LllPackage.TYPE: return createType();
+			case LllPackage.SIMPLE_TYPE: return createSimpleType();
 			case LllPackage.COMPLEX_TYPE: return createComplexType();
 			case LllPackage.LOCAL_COMPUTATION: return createLocalComputation();
 			case LllPackage.MEMORY_INSTRUCTION: return createMemoryInstruction();
@@ -132,6 +133,16 @@ public class LllFactoryImpl extends EFactoryImpl implements LllFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Label createLabel() {
+		LabelImpl label = new LabelImpl();
+		return label;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public FunctionCall createFunctionCall() {
 		FunctionCallImpl functionCall = new FunctionCallImpl();
 		return functionCall;
@@ -182,9 +193,9 @@ public class LllFactoryImpl extends EFactoryImpl implements LllFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type createType() {
-		TypeImpl type = new TypeImpl();
-		return type;
+	public SimpleType createSimpleType() {
+		SimpleTypeImpl simpleType = new SimpleTypeImpl();
+		return simpleType;
 	}
 
 	/**

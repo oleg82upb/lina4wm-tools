@@ -19,7 +19,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputParameters" upperBound="-1"
         eType="#//VariableOrValue"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Label" abstract="true" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Label" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//Function"
         eOpposite="#//Function/labels"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="instruction" eType="#//Instruction"/>
@@ -54,8 +54,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="program" eType="#//Program"
         eOpposite="#//Program/globalVariables"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Type"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SimpleType" abstract="true" eSuperTypes="#//Type">
+  <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleType" eSuperTypes="#//Type">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//PrimitiveType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComplexType" eSuperTypes="#//Type">
