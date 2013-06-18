@@ -159,7 +159,7 @@ public interface LllPackage extends EPackage {
 	int FUNCTION__INSTRUCTIONS = EcorePackage.ENAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Input Parameters</b></em>' reference list.
+	 * The feature id for the '<em><b>Input Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -937,10 +937,10 @@ public interface LllPackage extends EPackage {
 	EReference getFunction_Instructions();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.upb.lina.lll.Function#getInputParameters <em>Input Parameters</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.upb.lina.lll.Function#getInputParameters <em>Input Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Input Parameters</em>'.
+	 * @return the meta object for the containment reference list '<em>Input Parameters</em>'.
 	 * @see de.upb.lina.lll.Function#getInputParameters()
 	 * @see #getFunction()
 	 * @generated
@@ -1396,7 +1396,7 @@ public interface LllPackage extends EPackage {
 		EReference FUNCTION__INSTRUCTIONS = eINSTANCE.getFunction_Instructions();
 
 		/**
-		 * The meta object literal for the '<em><b>Input Parameters</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Input Parameters</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

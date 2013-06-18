@@ -1,9 +1,11 @@
 -- @path LLVM=/de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore
 -- @path LLL=/de.upb.lina.lll/model/LLL.ecore
+---- @path EXPR=/de.upb.lina.lll.expressions/src-gen/de/upb/lina/lll/Expressions.ecore
 
 
 module lllbasis;
 create lll: LLL from llvm: LLVM;
+--create lll: LLL,expr : EXPR from llvm: LLVM;
 
 --****************************************--
 --                                        --
@@ -67,10 +69,12 @@ rule Program {
 		in_llvm: LLVM!LLVM
 	using {
 		lllfunctions: Set(LLVM!FunctionDefinition) = in_llvm.elements -> select(t | t.oclIsTypeOf(LLVM!FunctionDefinition));
+		globals : Set(LLVM!GlobalDefinition) = in_llvm.elements -> select(g | g.oclIsTypeOf(LLVM!GlobalDefinition));
 	}
 	to
 		program: LLL!Program (
-			functions <- lllfunctions -> collect(fun | thisModule.resolveTemp(fun, 'lllfunction'))
+			functions <- lllfunctions -> collect(fun | thisModule.resolveTemp(fun, 'lllfunction')),
+			globalVariables <- globals -> collect(g | thisModule.resolveTemp(g, 'outV'))
 		)
 }
 
@@ -80,15 +84,15 @@ rule functions {
 	using {
 		fBody: LLVM!FunctionBody = inFunction.body;
 		fBlocks: Sequence(LLVM!BasicBlock) = if fBody.oclIsUndefined() then
-			OclUndefined
-		else
-			fBody.blocks -> collect(t | t) -> flatten()
-		endif;
+				OclUndefined
+			else
+				fBody.blocks -> collect(t | t) -> flatten()
+			endif;
 		inst: OrderedSet(LLVM!Instruction) = if fBlocks.oclIsUndefined() then
-			OclUndefined
-		else
-			fBlocks -> collect(b | b.instructions.append(b.terminator)).flatten()
-		endif;
+				OclUndefined
+			else
+				fBlocks -> collect(b | b.instructions.append(b.terminator)).flatten()
+			endif;
 	}
 	to
 		lllfunction: LLL!Function (
@@ -111,8 +115,17 @@ rule functions {
 								else
 									OclUndefined
 								endif)).excluding(OclUndefined)
-				endif
+				endif,
+			inputParameters <- if inFunction.pl.oclIsUndefined() then OclUndefined else inFunction.pl.variables -> collect(i | thisModule.getValue(i).refSetValue('type', thisModule.getType(inFunction.pl.types.at(inFunction.pl.variables.indexOf(i))))) endif
 		)
+}
+
+rule GlobalDef{
+	from global : LLVM!GlobalDefinition
+	to outV : LLL!Variable (
+		name <- thisModule.stringcut(thisModule.stringcut(global.adress.name, '%'), '@'),
+		type <- if global.type.oclIsTypeOf(LLVM!Array) then OclUndefined else thisModule.getType(global.type) endif
+	)
 }
 
 rule bindLabel(block: LLVM!BasicBlock, lllfunction: LLL!Function) {
@@ -258,15 +271,60 @@ rule PhiUse {
 		)
 }
 
---rule CompareUse {
---	from
---		insUse: LLVM!InstructionUse(insUse.instruction.oclIsTypeOf(LLVM!Compare))
---	to
---		cmpExpr :EXPR!(
---
+rule CompareUse {
+	from
+		insUse: LLVM!InstructionUse(insUse.instruction.oclIsTypeOf(LLVM!Compare))
+	to
+		outI :LLL!LocalComputation(
+--			expression <- 
+			instructionResult <- intReg
 
---		)
---}
+		),
+		intReg: LLL!Variable (
+			name <- thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(insUse.reg_or_var, '%'), '@'))
+		)
+}
+rule GetElementPtrUse {
+	from
+		insUse: LLVM!InstructionUse(insUse.instruction.oclIsTypeOf(LLVM!GetElementPtr) or insUse.instruction.oclIsTypeOf(LLVM!NestedGetElementPtr))
+	to
+		outI :LLL!MemoryInstruction(
+			instructionType <- #GetElementPointer,
+			parameters <- insUse.instruction.indizies -> collect(i | thisModule.getValue(i)).asOrderedSet().append(thisModule.getValue(insUse.instruction.aggregatename)),
+			instructionResult <- intReg
+
+		),
+		intReg: LLL!Variable (
+			name <- thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(insUse.reg_or_var, '%'), '@'))
+		)
+}
+
+rule CallUse{
+	from
+		insUse: LLVM!InstructionUse(insUse.instruction.oclIsTypeOf(LLVM!Call))
+	to
+		outI :LLL!FunctionCall(
+			invokedFunction <- LLL!Function.allInstances() -> select(i | i.name = insUse.instruction.adress.name).first(),
+			instructionResult <- intReg
+
+		),
+		intReg: LLL!Variable (
+			name <- thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(insUse.reg_or_var, '%'), '@'))
+		)
+}
+rule ArithmeticUse{
+	from insUse : LLVM!InstructionUse(insUse.instruction.oclIsTypeOf(LLVM!ArithmeticOperation))
+	to outI : LLL!LocalComputation(
+--		expression <- expr, 
+		instructionResult <- intReg
+	),
+		intReg: LLL!Variable (
+			name <- thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(insUse.reg_or_var, '%'), '@'))
+		)
+--		,
+--		expr : EXPR!Expression()
+}
+
 rule Store {
 	from
 		instruction: LLVM!Store
@@ -296,9 +354,10 @@ rule Branch {
 	to
 		outI: LLL!ConditionalBranch (
 			elseTarget <- LLL!Label.allInstances() -> select(i | i.name = thisModule.stringcut(instruction.labelFalse.name, '%') and i.function.instructions.includes(thisModule.
-					resolveTemp(instruction, 'outI'))),
+					resolveTemp(instruction, 'outI'))).first(),
 			target <- LLL!Label.allInstances() -> select(i | i.name = thisModule.stringcut(instruction.labelTrue.name, '%') and
-					i.function.instructions.includes(thisModule.resolveTemp(instruction, 'outI'))) --					,
+					i.function.instructions.includes(thisModule.resolveTemp(instruction, 'outI'))).first()
+--					,
 --			condition <- thisModule.resolveTemp(, 'cmpExpr')
 			
 		)
@@ -312,7 +371,7 @@ rule Goto {
 	to
 		outI: LLL!Goto (
 			target <- LLL!Label.allInstances() -> select(i | (i.name = thisModule.stringcut(instruction.destination.name, '%'))and i.function.instructions.includes(thisModule.
-					resolveTemp(instruction, 'outI')))
+					resolveTemp(instruction, 'outI'))).first()
 		)
 }
 

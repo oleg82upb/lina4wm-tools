@@ -110,7 +110,7 @@ public interface Function extends ENamedElement {
 	EList<Instruction> getInstructions();
 
 	/**
-	 * Returns the value of the '<em><b>Input Parameters</b></em>' reference list.
+	 * Returns the value of the '<em><b>Input Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link de.upb.lina.lll.VariableOrValue}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -118,9 +118,9 @@ public interface Function extends ENamedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Input Parameters</em>' reference list.
+	 * @return the value of the '<em>Input Parameters</em>' containment reference list.
 	 * @see de.upb.lina.lll.LllPackage#getFunction_InputParameters()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<VariableOrValue> getInputParameters();

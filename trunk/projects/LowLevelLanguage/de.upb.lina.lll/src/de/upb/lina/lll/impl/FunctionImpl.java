@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENamedElementImpl;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -72,7 +73,7 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 	protected EList<Instruction> instructions;
 
 	/**
-	 * The cached value of the '{@link #getInputParameters() <em>Input Parameters</em>}' reference list.
+	 * The cached value of the '{@link #getInputParameters() <em>Input Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getInputParameters()
@@ -184,7 +185,7 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 	 */
 	public EList<VariableOrValue> getInputParameters() {
 		if (inputParameters == null) {
-			inputParameters = new EObjectResolvingEList<VariableOrValue>(VariableOrValue.class, this, LllPackage.FUNCTION__INPUT_PARAMETERS);
+			inputParameters = new EObjectContainmentEList<VariableOrValue>(VariableOrValue.class, this, LllPackage.FUNCTION__INPUT_PARAMETERS);
 		}
 		return inputParameters;
 	}
@@ -228,6 +229,8 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 				return ((InternalEList<?>)getLabels()).basicRemove(otherEnd, msgs);
 			case LllPackage.FUNCTION__INSTRUCTIONS:
 				return ((InternalEList<?>)getInstructions()).basicRemove(otherEnd, msgs);
+			case LllPackage.FUNCTION__INPUT_PARAMETERS:
+				return ((InternalEList<?>)getInputParameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
