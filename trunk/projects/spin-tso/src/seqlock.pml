@@ -3,7 +3,7 @@
 author: Annika Mütze <muetze.annika@gmail.com>
 date: 05.2013
 
-Lseqlock (abstracted from: "Show No Weakness: Sequentially Consistent Specifications of TSO Libraries; Alexey Gotsman1 , Madanlal Musuvathi2 , and Hongseok Yang3
+Lseqlock (abstracted from: "Show No Weakness: Sequentially Consistent Specifications of TSO Libraries; Alexey Gotsman, Madanlal Musuvathi, and Hongseok Yang
 */
 
 #define BUFF_SIZE 7 	//size of Buffer
