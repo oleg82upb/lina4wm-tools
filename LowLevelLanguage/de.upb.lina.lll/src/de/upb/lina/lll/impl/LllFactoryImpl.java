@@ -69,6 +69,7 @@ public class LllFactoryImpl extends EFactoryImpl implements LllFactory {
 			case LllPackage.COMPLEX_TYPE: return createComplexType();
 			case LllPackage.LOCAL_COMPUTATION: return createLocalComputation();
 			case LllPackage.MEMORY_INSTRUCTION: return createMemoryInstruction();
+			case LllPackage.RETURN: return createReturn();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -226,6 +227,16 @@ public class LllFactoryImpl extends EFactoryImpl implements LllFactory {
 	public MemoryInstruction createMemoryInstruction() {
 		MemoryInstructionImpl memoryInstruction = new MemoryInstructionImpl();
 		return memoryInstruction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Return createReturn() {
+		ReturnImpl return_ = new ReturnImpl();
+		return return_;
 	}
 
 	/**

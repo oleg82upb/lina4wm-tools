@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public abstract class VariableOrValueImpl extends EObjectImpl implements VariableOrValue {
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getType()
@@ -67,14 +67,6 @@ public abstract class VariableOrValueImpl extends EObjectImpl implements Variabl
 	 * @generated
 	 */
 	public Type getType() {
-		if (type != null && type.eIsProxy()) {
-			InternalEObject oldType = (InternalEObject)type;
-			type = (Type)eResolveProxy(oldType);
-			if (type != oldType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, LllPackage.VARIABLE_OR_VALUE__TYPE, oldType, type));
-			}
-		}
 		return type;
 	}
 
@@ -83,8 +75,14 @@ public abstract class VariableOrValueImpl extends EObjectImpl implements Variabl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type basicGetType() {
-		return type;
+	public NotificationChain basicSetType(Type newType, NotificationChain msgs) {
+		Type oldType = type;
+		type = newType;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LllPackage.VARIABLE_OR_VALUE__TYPE, oldType, newType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -93,10 +91,17 @@ public abstract class VariableOrValueImpl extends EObjectImpl implements Variabl
 	 * @generated
 	 */
 	public void setType(Type newType) {
-		Type oldType = type;
-		type = newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LllPackage.VARIABLE_OR_VALUE__TYPE, oldType, type));
+		if (newType != type) {
+			NotificationChain msgs = null;
+			if (type != null)
+				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LllPackage.VARIABLE_OR_VALUE__TYPE, null, msgs);
+			if (newType != null)
+				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LllPackage.VARIABLE_OR_VALUE__TYPE, null, msgs);
+			msgs = basicSetType(newType, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LllPackage.VARIABLE_OR_VALUE__TYPE, newType, newType));
 	}
 
 	/**
@@ -164,6 +169,8 @@ public abstract class VariableOrValueImpl extends EObjectImpl implements Variabl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case LllPackage.VARIABLE_OR_VALUE__TYPE:
+				return basicSetType(null, msgs);
 			case LllPackage.VARIABLE_OR_VALUE__FUNCTION:
 				return basicSetFunction(null, msgs);
 		}
@@ -193,8 +200,7 @@ public abstract class VariableOrValueImpl extends EObjectImpl implements Variabl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case LllPackage.VARIABLE_OR_VALUE__TYPE:
-				if (resolve) return getType();
-				return basicGetType();
+				return getType();
 			case LllPackage.VARIABLE_OR_VALUE__FUNCTION:
 				return getFunction();
 		}

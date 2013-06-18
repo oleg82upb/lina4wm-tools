@@ -48,8 +48,15 @@ helper def: getType(inType: LLVM!TypeUse): OclAny =
 	endif;
 
 helper def: numberReg(input: String): String =
-	if input.regexReplaceAll('[0-9]+', '').size()>0 then input else 'v'+input endif
-;
+	if input.regexReplaceAll('[0-9]+', '').size()>0 then input else 'v' + input endif;
+
+helper def: getVariable(input: String): LLL!Variable =
+	LLL!Variable.allInstances() -> select(v | v.name = thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(input, '%'), '@'))) -> first();
+
+helper def: getConstant(input: String): LLL!Constant =
+	LLL!Constant.allInstances() -> select(c | c.value = thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(input, '%'), '@'))) -> first();
+
+
 --****************************************--
 --                                        --
 --                  Form                  --
@@ -260,7 +267,6 @@ rule PhiUse {
 
 --		)
 --}
-
 rule Store {
 	from
 		instruction: LLVM!Store
@@ -272,14 +278,13 @@ rule Store {
 		)
 }
 
-
 lazy rule createAllocaParam {
 	from
 		instruction: LLVM!Alloc
 	to
 		intParam: LLL!Constant (
 			type <- thisModule.getType(instruction.type),
-			value <- OclUndefined
+			value <- if instruction.numelementsvalue.oclIsUndefined() then '1' else thisModule.getValue(instruction.numelementsvalue) endif
 		)
 }
 
@@ -293,8 +298,7 @@ rule Branch {
 			elseTarget <- LLL!Label.allInstances() -> select(i | i.name = thisModule.stringcut(instruction.labelFalse.name, '%') and i.function.instructions.includes(thisModule.
 					resolveTemp(instruction, 'outI'))),
 			target <- LLL!Label.allInstances() -> select(i | i.name = thisModule.stringcut(instruction.labelTrue.name, '%') and
-					i.function.instructions.includes(thisModule.resolveTemp(instruction, 'outI'))) 
---					,
+					i.function.instructions.includes(thisModule.resolveTemp(instruction, 'outI'))) --					,
 --			condition <- thisModule.resolveTemp(, 'cmpExpr')
 			
 		)
@@ -314,17 +318,16 @@ rule Goto {
 
 rule Return {
 	from
-		instruction: LLVM!Return
+		instruction: LLVM!Return (instruction.returnvalue.oclIsUndefined())
 	to
-		outI: LLL!LocalComputation (
-			instructionResult <- return
-		),
-		return: LLL!Variable (
-			name <- 'return ' + if instruction.returnvalue.oclIsUndefined() then
-					''
-				else
-					instruction.returnvalue.name
-				endif,
-			type <- thisModule.getType(instruction.returntype)
+		outI: LLL!Return (
+		)
+}
+rule ReturnValue {
+	from
+		instruction: LLVM!Return (not instruction.returnvalue.oclIsUndefined())
+	to
+		outI: LLL!Return (
+			parameters <- thisModule.getValue(instruction.returnvalue).refSetValue('type', thisModule.getType(instruction.returntype))
 		)
 }

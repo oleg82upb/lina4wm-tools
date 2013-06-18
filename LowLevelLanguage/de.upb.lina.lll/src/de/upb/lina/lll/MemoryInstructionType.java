@@ -26,7 +26,7 @@ public enum MemoryInstructionType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	ALLOCA(0, "Alloca", "Alloca"),
+	ALLOCA(1, "Alloca", "Alloca"),
 
 	/**
 	 * The '<em><b>Load</b></em>' literal object.
@@ -91,7 +91,7 @@ public enum MemoryInstructionType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ALLOCA_VALUE = 0;
+	public static final int ALLOCA_VALUE = 1;
 
 	/**
 	 * The '<em><b>Load</b></em>' literal value.
@@ -237,6 +237,7 @@ public enum MemoryInstructionType implements Enumerator {
 			case STORE_VALUE: return STORE;
 			case FENCE_VALUE: return FENCE;
 			case COMPARE_AND_SWAP_VALUE: return COMPARE_AND_SWAP;
+			case GET_ELEMENT_POINTER_VALUE: return GET_ELEMENT_POINTER;
 		}
 		return null;
 	}

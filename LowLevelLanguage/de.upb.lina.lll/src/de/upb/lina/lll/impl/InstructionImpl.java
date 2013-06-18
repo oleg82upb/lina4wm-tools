@@ -11,9 +11,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import org.eclipse.emf.ecore.util.InternalEList;
 import de.upb.lina.lll.Function;
 import de.upb.lina.lll.Instruction;
 import de.upb.lina.lll.LllPackage;
@@ -37,7 +39,7 @@ import de.upb.lina.lll.VariableOrValue;
  */
 public abstract class InstructionImpl extends EObjectImpl implements Instruction {
 	/**
-	 * The cached value of the '{@link #getInstructionResult() <em>Instruction Result</em>}' reference.
+	 * The cached value of the '{@link #getInstructionResult() <em>Instruction Result</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getInstructionResult()
@@ -47,7 +49,7 @@ public abstract class InstructionImpl extends EObjectImpl implements Instruction
 	protected Variable instructionResult;
 
 	/**
-	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' reference list.
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getParameters()
@@ -81,14 +83,6 @@ public abstract class InstructionImpl extends EObjectImpl implements Instruction
 	 * @generated
 	 */
 	public Variable getInstructionResult() {
-		if (instructionResult != null && instructionResult.eIsProxy()) {
-			InternalEObject oldInstructionResult = (InternalEObject)instructionResult;
-			instructionResult = (Variable)eResolveProxy(oldInstructionResult);
-			if (instructionResult != oldInstructionResult) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, LllPackage.INSTRUCTION__INSTRUCTION_RESULT, oldInstructionResult, instructionResult));
-			}
-		}
 		return instructionResult;
 	}
 
@@ -97,8 +91,14 @@ public abstract class InstructionImpl extends EObjectImpl implements Instruction
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Variable basicGetInstructionResult() {
-		return instructionResult;
+	public NotificationChain basicSetInstructionResult(Variable newInstructionResult, NotificationChain msgs) {
+		Variable oldInstructionResult = instructionResult;
+		instructionResult = newInstructionResult;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LllPackage.INSTRUCTION__INSTRUCTION_RESULT, oldInstructionResult, newInstructionResult);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -107,10 +107,17 @@ public abstract class InstructionImpl extends EObjectImpl implements Instruction
 	 * @generated
 	 */
 	public void setInstructionResult(Variable newInstructionResult) {
-		Variable oldInstructionResult = instructionResult;
-		instructionResult = newInstructionResult;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LllPackage.INSTRUCTION__INSTRUCTION_RESULT, oldInstructionResult, instructionResult));
+		if (newInstructionResult != instructionResult) {
+			NotificationChain msgs = null;
+			if (instructionResult != null)
+				msgs = ((InternalEObject)instructionResult).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LllPackage.INSTRUCTION__INSTRUCTION_RESULT, null, msgs);
+			if (newInstructionResult != null)
+				msgs = ((InternalEObject)newInstructionResult).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LllPackage.INSTRUCTION__INSTRUCTION_RESULT, null, msgs);
+			msgs = basicSetInstructionResult(newInstructionResult, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LllPackage.INSTRUCTION__INSTRUCTION_RESULT, newInstructionResult, newInstructionResult));
 	}
 
 	/**
@@ -161,7 +168,7 @@ public abstract class InstructionImpl extends EObjectImpl implements Instruction
 	 */
 	public EList<VariableOrValue> getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectResolvingEList<VariableOrValue>(VariableOrValue.class, this, LllPackage.INSTRUCTION__PARAMETERS);
+			parameters = new EObjectContainmentEList<VariableOrValue>(VariableOrValue.class, this, LllPackage.INSTRUCTION__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -191,8 +198,12 @@ public abstract class InstructionImpl extends EObjectImpl implements Instruction
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case LllPackage.INSTRUCTION__INSTRUCTION_RESULT:
+				return basicSetInstructionResult(null, msgs);
 			case LllPackage.INSTRUCTION__FUNCTION:
 				return basicSetFunction(null, msgs);
+			case LllPackage.INSTRUCTION__PARAMETERS:
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -220,8 +231,7 @@ public abstract class InstructionImpl extends EObjectImpl implements Instruction
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case LllPackage.INSTRUCTION__INSTRUCTION_RESULT:
-				if (resolve) return getInstructionResult();
-				return basicGetInstructionResult();
+				return getInstructionResult();
 			case LllPackage.INSTRUCTION__FUNCTION:
 				return getFunction();
 			case LllPackage.INSTRUCTION__PARAMETERS:

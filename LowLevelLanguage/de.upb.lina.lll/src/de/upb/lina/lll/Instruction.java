@@ -26,26 +26,26 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Instruction extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Instruction Result</b></em>' reference.
+	 * Returns the value of the '<em><b>Instruction Result</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Instruction Result</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Instruction Result</em>' reference.
+	 * @return the value of the '<em>Instruction Result</em>' containment reference.
 	 * @see #setInstructionResult(Variable)
 	 * @see de.upb.lina.lll.LllPackage#getInstruction_InstructionResult()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	Variable getInstructionResult();
 
 	/**
-	 * Sets the value of the '{@link de.upb.lina.lll.Instruction#getInstructionResult <em>Instruction Result</em>}' reference.
+	 * Sets the value of the '{@link de.upb.lina.lll.Instruction#getInstructionResult <em>Instruction Result</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Instruction Result</em>' reference.
+	 * @param value the new value of the '<em>Instruction Result</em>' containment reference.
 	 * @see #getInstructionResult()
 	 * @generated
 	 */
@@ -80,7 +80,7 @@ public interface Instruction extends EObject {
 	void setFunction(Function value);
 
 	/**
-	 * Returns the value of the '<em><b>Parameters</b></em>' reference list.
+	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link de.upb.lina.lll.VariableOrValue}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -88,9 +88,9 @@ public interface Instruction extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parameters</em>' reference list.
+	 * @return the value of the '<em>Parameters</em>' containment reference list.
 	 * @see de.upb.lina.lll.LllPackage#getInstruction_Parameters()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<VariableOrValue> getParameters();

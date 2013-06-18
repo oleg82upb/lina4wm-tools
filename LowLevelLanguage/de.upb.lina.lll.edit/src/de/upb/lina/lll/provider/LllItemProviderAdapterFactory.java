@@ -348,6 +348,29 @@ public class LllItemProviderAdapterFactory extends LllAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.lina.lll.Return} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ReturnItemProvider returnItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.lina.lll.Return}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createReturnAdapter() {
+		if (returnItemProvider == null) {
+			returnItemProvider = new ReturnItemProvider(this);
+		}
+
+		return returnItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -458,6 +481,7 @@ public class LllItemProviderAdapterFactory extends LllAdapterFactory implements 
 		if (complexTypeItemProvider != null) complexTypeItemProvider.dispose();
 		if (localComputationItemProvider != null) localComputationItemProvider.dispose();
 		if (memoryInstructionItemProvider != null) memoryInstructionItemProvider.dispose();
+		if (returnItemProvider != null) returnItemProvider.dispose();
 	}
 
 }
