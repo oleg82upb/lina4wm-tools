@@ -25,6 +25,7 @@ import de.upb.lina.lll.MemoryInstruction;
 import de.upb.lina.lll.MemoryInstructionType;
 import de.upb.lina.lll.PrimitiveType;
 import de.upb.lina.lll.Program;
+import de.upb.lina.lll.Return;
 import de.upb.lina.lll.SimpleType;
 import de.upb.lina.lll.Type;
 import de.upb.lina.lll.Variable;
@@ -142,6 +143,13 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 	 * @generated
 	 */
 	private EClass memoryInstructionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass returnEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -587,6 +595,15 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getReturn() {
+		return returnEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getMemoryInstructionType() {
 		return memoryInstructionTypeEEnum;
 	}
@@ -683,6 +700,8 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 		memoryInstructionEClass = createEClass(MEMORY_INSTRUCTION);
 		createEAttribute(memoryInstructionEClass, MEMORY_INSTRUCTION__INSTRUCTION_TYPE);
 
+		returnEClass = createEClass(RETURN);
+
 		// Create enums
 		memoryInstructionTypeEEnum = createEEnum(MEMORY_INSTRUCTION_TYPE);
 		primitiveTypeEEnum = createEEnum(PRIMITIVE_TYPE);
@@ -731,6 +750,7 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 		complexTypeEClass.getESuperTypes().add(this.getType());
 		localComputationEClass.getESuperTypes().add(this.getInstruction());
 		memoryInstructionEClass.getESuperTypes().add(this.getInstruction());
+		returnEClass.getESuperTypes().add(this.getInstruction());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(programEClass, Program.class, "Program", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -749,9 +769,9 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 		initEReference(getLabel_Instruction(), this.getInstruction(), null, "instruction", null, 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(instructionEClass, Instruction.class, "Instruction", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInstruction_InstructionResult(), this.getVariable(), null, "instructionResult", null, 0, 1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstruction_InstructionResult(), this.getVariable(), null, "instructionResult", null, 0, 1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInstruction_Function(), this.getFunction(), this.getFunction_Instructions(), "function", null, 0, 1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getInstruction_Parameters(), this.getVariableOrValue(), null, "parameters", null, 0, -1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstruction_Parameters(), this.getVariableOrValue(), null, "parameters", null, 0, -1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(functionCallEClass, FunctionCall.class, "FunctionCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFunctionCall_InvokedFunction(), this.getFunction(), null, "invokedFunction", null, 0, 1, FunctionCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -764,7 +784,7 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 		initEReference(getGoto_Target(), this.getLabel(), null, "target", null, 0, 1, Goto.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variableOrValueEClass, VariableOrValue.class, "VariableOrValue", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVariableOrValue_Type(), this.getType(), null, "type", null, 0, 1, VariableOrValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVariableOrValue_Type(), this.getType(), null, "type", null, 0, 1, VariableOrValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVariableOrValue_Function(), this.getFunction(), this.getFunction_LocalVariablesOrValues(), "function", null, 0, 1, VariableOrValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(constantEClass, Constant.class, "Constant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -787,6 +807,8 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 
 		initEClass(memoryInstructionEClass, MemoryInstruction.class, "MemoryInstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMemoryInstruction_InstructionType(), this.getMemoryInstructionType(), "instructionType", null, 0, 1, MemoryInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(returnEClass, Return.class, "Return", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(memoryInstructionTypeEEnum, MemoryInstructionType.class, "MemoryInstructionType");

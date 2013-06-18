@@ -172,6 +172,13 @@ public class LllSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case LllPackage.RETURN: {
+				Return return_ = (Return)theEObject;
+				T result = caseReturn(return_);
+				if (result == null) result = caseInstruction(return_);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -398,6 +405,21 @@ public class LllSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMemoryInstruction(MemoryInstruction object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Return</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Return</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReturn(Return object) {
 		return null;
 	}
 

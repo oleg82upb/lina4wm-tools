@@ -1,378 +1,663 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:de.upb.lina="http://www.upb.de/lina/lll">
-  <de.upb.lina:Program>
-    <functions name="@_Z6Memberi">
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="retval"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="x.addr"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="i"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="mylength"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v0"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v1"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v2"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v3"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v4"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v5"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v6"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v7"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v8"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v9"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v10"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v11"/>
-      <labels name="entry" instruction="/0/@functions.0/@instructions.0"/>
-      <labels name="while.cond" instruction="/0/@functions.0/@instructions.10"/>
-      <labels name="while.body"/>
-      <labels name="while.cond1" instruction="/0/@functions.0/@instructions.14"/>
-      <labels name="while.body3" instruction="/0/@functions.0/@instructions.17"/>
-      <labels name="if.then" instruction="/0/@functions.0/@instructions.25"/>
-      <labels name="if.end"/>
-      <labels name="while.end" instruction="/0/@functions.0/@instructions.28"/>
-      <labels name="while.end5" instruction="/0/@functions.0/@instructions.31"/>
-      <labels name="return" instruction="/0/@functions.0/@instructions.33"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.0/@localVariablesOrValues.0" parameters="/4"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.0/@localVariablesOrValues.1" parameters="/6"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.0/@localVariablesOrValues.2" parameters="/8"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.0/@localVariablesOrValues.3" parameters="/10"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.0/@localVariablesOrValues.4" parameters="/12"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/48 /50" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/52 /54" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.0/@localVariablesOrValues.5" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/56 /58" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:Goto" target="/0/@functions.0/@labels.1"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.0/@localVariablesOrValues.6" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.0/@localVariablesOrValues.7" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:ConditionalBranch" target="/0/@functions.0/@labels.2" elseTarget="/0/@functions.0/@labels.8"/>
-      <instructions xsi:type="de.upb.lina:Goto" target="/0/@functions.0/@labels.3"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.0/@localVariablesOrValues.8" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.0/@localVariablesOrValues.9" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:ConditionalBranch" target="/0/@functions.0/@labels.4" elseTarget="/0/@functions.0/@labels.7"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.0/@localVariablesOrValues.10" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/60 /62" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.0/@localVariablesOrValues.11" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.0/@localVariablesOrValues.12" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/64 /66" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.0/@localVariablesOrValues.13" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.0/@localVariablesOrValues.14" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:ConditionalBranch" target="/0/@functions.0/@labels.5" elseTarget="/0/@functions.0/@labels.6"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/68 /70" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:Goto" target="/0/@functions.0/@labels.9"/>
-      <instructions xsi:type="de.upb.lina:Goto" target="/0/@functions.0/@labels.3"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.0/@localVariablesOrValues.15" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/72 /74" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:Goto" target="/0/@functions.0/@labels.1"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/76 /78" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:Goto" target="/0/@functions.0/@labels.9"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.0/@localVariablesOrValues.16" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:LocalComputation" instructionResult="/1"/>
-    </functions>
-    <functions name="@_Z6Inserti">
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="x.addr"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="i"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="mylength"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="added"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="saved_stack"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="nholes"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v0"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="vla"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v2"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v3"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v4"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v5"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v6"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v7"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v8"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v9"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v10"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v11"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v12"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v13"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v14"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v15"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v16"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v17"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v20"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v21"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v22"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v23"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v24"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v25"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v28"/>
-      <labels name="entry" instruction="/0/@functions.1/@instructions.0"/>
-      <labels name="while.cond" instruction="/0/@functions.1/@instructions.17"/>
-      <labels name="while.body" instruction="/0/@functions.1/@instructions.20"/>
-      <labels name="if.then" instruction="/0/@functions.1/@instructions.25"/>
-      <labels name="if.end" instruction="/0/@functions.1/@instructions.31"/>
-      <labels name="while.end"/>
-      <labels name="while.cond4" instruction="/0/@functions.1/@instructions.35"/>
-      <labels name="land.rhs" instruction="/0/@functions.1/@instructions.37"/>
-      <labels name="land.end" instruction="/0/@functions.1/@instructions.39"/>
-      <labels name="while.body6" instruction="/0/@functions.1/@instructions.41"/>
-      <labels name="while.end9"/>
-      <labels name="while.cond10" instruction="/0/@functions.1/@instructions.49"/>
-      <labels name="while.body12" instruction="/0/@functions.1/@instructions.51"/>
-      <labels name="while.end16" instruction="/0/@functions.1/@instructions.59"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.0" parameters="/14"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.1" parameters="/16"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.2" parameters="/18"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.3" parameters="/20"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.4" parameters="/22"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.5" parameters="/24"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.6" parameters="/26"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/80 /82" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.7" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/84 /86" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.8" parameters="/28"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/88 /90" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/92 /94" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.9" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/96 /98" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/100 /102" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:Goto" target="/0/@functions.1/@labels.1"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.10" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.11" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:ConditionalBranch" target="/0/@functions.1/@labels.2" elseTarget="/0/@functions.1/@labels.5"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.12" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.13" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/104 /106" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.14" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:ConditionalBranch" target="/0/@functions.1/@labels.3" elseTarget="/0/@functions.1/@labels.4"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.15" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/108 /110" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.16" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.17" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/112 /114" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:Goto" target="/0/@functions.1/@labels.4"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.18" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/116 /118" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:Goto" target="/0/@functions.1/@labels.1"/>
-      <instructions xsi:type="de.upb.lina:Goto" target="/0/@functions.1/@labels.6"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.19" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:ConditionalBranch" target="/0/@functions.1/@labels.8" elseTarget="/0/@functions.1/@labels.7"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.20" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:Goto" target="/0/@functions.1/@labels.8"/>
-      <instructions xsi:type="de.upb.lina:LocalComputation" instructionResult="/0/@functions.1/@localVariablesOrValues.21" parameters="/38 /40 /41 /42"/>
-      <instructions xsi:type="de.upb.lina:ConditionalBranch" target="/0/@functions.1/@labels.9" elseTarget="/0/@functions.1/@labels.10"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.22" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.23" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.24" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/120 /122" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.25" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/124 /126" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:Goto" target="/0/@functions.1/@labels.6"/>
-      <instructions xsi:type="de.upb.lina:Goto" target="/0/@functions.1/@labels.11"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.26" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:ConditionalBranch" target="/0/@functions.1/@labels.12" elseTarget="/0/@functions.1/@labels.13"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.27" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/128 /130" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.28" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/132 /134" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.29" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.30" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/136 /138" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:Goto" target="/0/@functions.1/@labels.11"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.1/@localVariablesOrValues.31" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:LocalComputation" instructionResult="/2"/>
-    </functions>
-    <functions name="@llvm.stacksave"/>
-    <functions name="@llvm.stackrestore"/>
-    <functions name="@_Z6Deletei">
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="x.addr"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="i"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="mylength"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="removed"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v0"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v1"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v2"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v3"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v4"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v5"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v6"/>
-      <localVariablesOrValues xsi:type="de.upb.lina:Variable" name="v9"/>
-      <labels name="entry" instruction="/0/@functions.4/@instructions.0"/>
-      <labels name="while.cond" instruction="/0/@functions.4/@instructions.9"/>
-      <labels name="land.rhs" instruction="/0/@functions.4/@instructions.11"/>
-      <labels name="land.end" instruction="/0/@functions.4/@instructions.14"/>
-      <labels name="while.body" instruction="/0/@functions.4/@instructions.16"/>
-      <labels name="while.end"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.4/@localVariablesOrValues.0" parameters="/30"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.4/@localVariablesOrValues.1" parameters="/32"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.4/@localVariablesOrValues.2" parameters="/34"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.4/@localVariablesOrValues.3" parameters="/36"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/140 /142" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.4/@localVariablesOrValues.4" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/144 /146" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/148 /150" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:Goto" target="/0/@functions.4/@labels.1"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.4/@localVariablesOrValues.5" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:ConditionalBranch" target="/0/@functions.4/@labels.3" elseTarget="/0/@functions.4/@labels.2"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.4/@localVariablesOrValues.6" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.4/@localVariablesOrValues.7" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:Goto" target="/0/@functions.4/@labels.3"/>
-      <instructions xsi:type="de.upb.lina:LocalComputation" instructionResult="/0/@functions.4/@localVariablesOrValues.8" parameters="/43 /45 /46 /47"/>
-      <instructions xsi:type="de.upb.lina:ConditionalBranch" target="/0/@functions.4/@labels.4" elseTarget="/0/@functions.4/@labels.5"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.4/@localVariablesOrValues.9" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.4/@localVariablesOrValues.10" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionResult="/0/@functions.4/@localVariablesOrValues.11" instructionType="Load"/>
-      <instructions xsi:type="de.upb.lina:MemoryInstruction" parameters="/152 /154" instructionType="Store"/>
-      <instructions xsi:type="de.upb.lina:Goto" target="/0/@functions.4/@labels.1"/>
-      <instructions xsi:type="de.upb.lina:LocalComputation" instructionResult="/3"/>
-    </functions>
-  </de.upb.lina:Program>
-  <de.upb.lina:Variable type="/156" name="return %11"/>
-  <de.upb.lina:Variable name="return "/>
-  <de.upb.lina:Variable name="return "/>
-  <de.upb.lina:Constant type="/5"/>
-  <de.upb.lina:SimpleType/>
-  <de.upb.lina:Constant type="/7"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Constant type="/9"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Constant type="/11"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Constant type="/13"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Constant type="/15"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Constant type="/17"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Constant type="/19"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Constant type="/21"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Constant type="/23"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Constant type="/25"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Constant type="/27"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/29" name="v0"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Constant type="/31"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Constant type="/33"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Constant type="/35"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Constant type="/37"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/39" name="false"/>
-  <de.upb.lina:SimpleType/>
-  <de.upb.lina:Variable name="while.cond4"/>
-  <de.upb.lina:Variable name="cmp5"/>
-  <de.upb.lina:Variable name="land.rhs"/>
-  <de.upb.lina:Variable type="/44" name="false"/>
-  <de.upb.lina:SimpleType/>
-  <de.upb.lina:Variable name="while.cond"/>
-  <de.upb.lina:Variable name="cmp"/>
-  <de.upb.lina:Variable name="land.rhs"/>
-  <de.upb.lina:Variable type="/49" name="x"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/51" name="x.addr"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Constant type="/53" value="0"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/55" name="i"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/57" name="v0"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/59" name="mylength"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/61" name="add"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/63" name="i"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/65" name="v7"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/67" name="v"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/69" name="true"/>
-  <de.upb.lina:SimpleType/>
-  <de.upb.lina:Variable type="/71" name="retval"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/73" name="v10"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/75" name="mylength"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/77" name="false"/>
-  <de.upb.lina:SimpleType/>
-  <de.upb.lina:Variable type="/79" name="retval"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/81" name="x"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/83" name="x.addr"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/85" name="v1"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/87" name="saved_stack"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Constant type="/89" value="0"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/91" name="added"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Constant type="/93" value="0"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/95" name="nholes"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/97" name="v2"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/99" name="mylength"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Constant type="/101" value="1"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/103" name="i"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/105" name="v6"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/107" name="v"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/109" name="add"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/111" name="nholes"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/113" name="v9"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/115" name="arrayidx2"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/117" name="add3"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/119" name="i"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/121" name="frombool"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/123" name="added"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/125" name="sub"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/127" name="nholes"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/129" name="add13"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/131" name="length"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/133" name="v23"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/135" name="i"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/137" name="frombool15"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/139" name="added"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/141" name="x"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/143" name="x.addr"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/145" name="v0"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/147" name="mylength"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Constant type="/149" value="1"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/151" name="i"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:Variable type="/153" name="add"/>
-  <de.upb.lina:SimpleType type="int"/>
-  <de.upb.lina:Variable type="/155" name="i"/>
-  <de.upb.lina:SimpleType type="pointer"/>
-  <de.upb.lina:SimpleType/>
-</xmi:XMI>
+<de.upb.lina:Program xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:de.upb.lina="http://www.upb.de/lina/lll">
+  <functions name="@_Z6Memberi">
+    <labels name="entry" instruction="//@functions.0/@instructions.0"/>
+    <labels name="while.cond" instruction="//@functions.0/@instructions.10"/>
+    <labels name="while.body"/>
+    <labels name="while.cond1" instruction="//@functions.0/@instructions.14"/>
+    <labels name="while.body3" instruction="//@functions.0/@instructions.17"/>
+    <labels name="if.then" instruction="//@functions.0/@instructions.25"/>
+    <labels name="if.end"/>
+    <labels name="while.end" instruction="//@functions.0/@instructions.28"/>
+    <labels name="while.end5" instruction="//@functions.0/@instructions.31"/>
+    <labels name="return" instruction="//@functions.0/@instructions.33"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction">
+      <instructionResult name="retval"/>
+      <parameters xsi:type="de.upb.lina:Constant" value="1">
+        <type xsi:type="de.upb.lina:SimpleType"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction">
+      <instructionResult name="x.addr"/>
+      <parameters xsi:type="de.upb.lina:Constant" value="1">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction">
+      <instructionResult name="i"/>
+      <parameters xsi:type="de.upb.lina:Constant" value="1">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction">
+      <instructionResult name="mylength"/>
+      <parameters xsi:type="de.upb.lina:Constant" value="1">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction">
+      <instructionResult name="v"/>
+      <parameters xsi:type="de.upb.lina:Constant" value="1">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="x">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="x.addr">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Constant" value="0">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="i">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v0"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="length">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="v0">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="mylength">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:Goto" target="//@functions.0/@labels.1"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v1"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="i">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v2"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="mylength">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:ConditionalBranch" target="//@functions.0/@labels.2" elseTarget="//@functions.0/@labels.8"/>
+    <instructions xsi:type="de.upb.lina:Goto" target="//@functions.0/@labels.3"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v3"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="i">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v4"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="mylength">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:ConditionalBranch" target="//@functions.0/@labels.4" elseTarget="//@functions.0/@labels.7"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v5"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="i">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="add">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="i">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v6"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="i">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v7"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="arrayidx">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="v7">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="v">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v8"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="v">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v9"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="x.addr">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:ConditionalBranch" target="//@functions.0/@labels.5" elseTarget="//@functions.0/@labels.6"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="true">
+        <type xsi:type="de.upb.lina:SimpleType"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="retval">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:Goto" target="//@functions.0/@labels.9"/>
+    <instructions xsi:type="de.upb.lina:Goto" target="//@functions.0/@labels.3"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v10"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="length">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="v10">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="mylength">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:Goto" target="//@functions.0/@labels.1"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="false">
+        <type xsi:type="de.upb.lina:SimpleType"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="retval">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:Goto" target="//@functions.0/@labels.9"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v11"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="retval">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:Return">
+      <parameters xsi:type="de.upb.lina:Variable" name="v11">
+        <type xsi:type="de.upb.lina:SimpleType"/>
+      </parameters>
+    </instructions>
+  </functions>
+  <functions name="@_Z6Inserti">
+    <labels name="entry" instruction="//@functions.1/@instructions.0"/>
+    <labels name="while.cond" instruction="//@functions.1/@instructions.17"/>
+    <labels name="while.body" instruction="//@functions.1/@instructions.20"/>
+    <labels name="if.then" instruction="//@functions.1/@instructions.25"/>
+    <labels name="if.end" instruction="//@functions.1/@instructions.31"/>
+    <labels name="while.end"/>
+    <labels name="while.cond4" instruction="//@functions.1/@instructions.35"/>
+    <labels name="land.rhs" instruction="//@functions.1/@instructions.37"/>
+    <labels name="land.end" instruction="//@functions.1/@instructions.39"/>
+    <labels name="while.body6" instruction="//@functions.1/@instructions.41"/>
+    <labels name="while.end9"/>
+    <labels name="while.cond10" instruction="//@functions.1/@instructions.49"/>
+    <labels name="while.body12" instruction="//@functions.1/@instructions.51"/>
+    <labels name="while.end16" instruction="//@functions.1/@instructions.59"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction">
+      <instructionResult name="x.addr"/>
+      <parameters xsi:type="de.upb.lina:Constant" value="1">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction">
+      <instructionResult name="i"/>
+      <parameters xsi:type="de.upb.lina:Constant" value="1">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction">
+      <instructionResult name="mylength"/>
+      <parameters xsi:type="de.upb.lina:Constant" value="1">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction">
+      <instructionResult name="added"/>
+      <parameters xsi:type="de.upb.lina:Constant" value="1">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction">
+      <instructionResult name="saved_stack"/>
+      <parameters xsi:type="de.upb.lina:Constant" value="1">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction">
+      <instructionResult name="nholes"/>
+      <parameters xsi:type="de.upb.lina:Constant" value="1">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction">
+      <instructionResult name="v"/>
+      <parameters xsi:type="de.upb.lina:Constant" value="1">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="x">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="x.addr">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v0"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="length">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="v1">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="saved_stack">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction">
+      <instructionResult name="vla"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="v0">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Constant" value="0">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="added">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Constant" value="0">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="nholes">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v2"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="length">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="v2">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="mylength">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Constant" value="1">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="i">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:Goto" target="//@functions.1/@labels.1"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v3"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="i">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v4"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="mylength">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:ConditionalBranch" target="//@functions.1/@labels.2" elseTarget="//@functions.1/@labels.5"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v5"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="i">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v6"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="arrayidx">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="v6">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="v">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v7"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="v">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:ConditionalBranch" target="//@functions.1/@labels.3" elseTarget="//@functions.1/@labels.4"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v8"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="nholes">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="add">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="nholes">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v9"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="i">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v10"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="nholes">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="v9">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="arrayidx2">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:Goto" target="//@functions.1/@labels.4"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v11"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="i">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="add3">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="i">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:Goto" target="//@functions.1/@labels.1"/>
+    <instructions xsi:type="de.upb.lina:Goto" target="//@functions.1/@labels.6"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v12"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="added">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:ConditionalBranch" target="//@functions.1/@labels.8" elseTarget="//@functions.1/@labels.7"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v13"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="nholes">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:Goto" target="//@functions.1/@labels.8"/>
+    <instructions xsi:type="de.upb.lina:LocalComputation">
+      <instructionResult name="v14"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="false">
+        <type xsi:type="de.upb.lina:SimpleType"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="while.cond4"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="cmp5"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="land.rhs"/>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:ConditionalBranch" target="//@functions.1/@labels.9" elseTarget="//@functions.1/@labels.10"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v15"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="nholes">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v16"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="arrayidx7">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v17"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="x.addr">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="frombool">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="added">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v20"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="nholes">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="sub">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="nholes">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:Goto" target="//@functions.1/@labels.6"/>
+    <instructions xsi:type="de.upb.lina:Goto" target="//@functions.1/@labels.11"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v21"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="added">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:ConditionalBranch" target="//@functions.1/@labels.12" elseTarget="//@functions.1/@labels.13"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v22"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="length">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="add13">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="length">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v23"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="length">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="v23">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="i">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v24"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="i">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v25"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="x.addr">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="frombool15">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="added">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:Goto" target="//@functions.1/@labels.11"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v28"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="saved_stack">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:Return"/>
+  </functions>
+  <functions name="@llvm.stacksave"/>
+  <functions name="@llvm.stackrestore"/>
+  <functions name="@_Z6Deletei">
+    <labels name="entry" instruction="//@functions.4/@instructions.0"/>
+    <labels name="while.cond" instruction="//@functions.4/@instructions.9"/>
+    <labels name="land.rhs" instruction="//@functions.4/@instructions.11"/>
+    <labels name="land.end" instruction="//@functions.4/@instructions.14"/>
+    <labels name="while.body" instruction="//@functions.4/@instructions.16"/>
+    <labels name="while.end"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction">
+      <instructionResult name="x.addr"/>
+      <parameters xsi:type="de.upb.lina:Constant" value="1">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction">
+      <instructionResult name="i"/>
+      <parameters xsi:type="de.upb.lina:Constant" value="1">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction">
+      <instructionResult name="mylength"/>
+      <parameters xsi:type="de.upb.lina:Constant" value="1">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction">
+      <instructionResult name="removed"/>
+      <parameters xsi:type="de.upb.lina:Constant" value="1">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="x">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="x.addr">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v0"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="length">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="v0">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="mylength">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Constant" value="1">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="i">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:Goto" target="//@functions.4/@labels.1"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v1"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="removed">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:ConditionalBranch" target="//@functions.4/@labels.3" elseTarget="//@functions.4/@labels.2"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v2"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="i">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v3"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="mylength">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:Goto" target="//@functions.4/@labels.3"/>
+    <instructions xsi:type="de.upb.lina:LocalComputation">
+      <instructionResult name="v4"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="false">
+        <type xsi:type="de.upb.lina:SimpleType"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="while.cond"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="cmp"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="land.rhs"/>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:ConditionalBranch" target="//@functions.4/@labels.4" elseTarget="//@functions.4/@labels.5"/>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v5"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="i">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v6"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="x.addr">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
+      <instructionResult name="v9"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="i">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
+      <parameters xsi:type="de.upb.lina:Variable" name="add">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="i">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:Goto" target="//@functions.4/@labels.1"/>
+    <instructions xsi:type="de.upb.lina:Return"/>
+  </functions>
+</de.upb.lina:Program>

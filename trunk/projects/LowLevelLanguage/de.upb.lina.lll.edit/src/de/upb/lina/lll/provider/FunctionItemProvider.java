@@ -218,6 +218,11 @@ public class FunctionItemProvider
 			(createChildParameter
 				(LllPackage.Literals.FUNCTION__INSTRUCTIONS,
 				 LllFactory.eINSTANCE.createMemoryInstruction()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LllPackage.Literals.FUNCTION__INSTRUCTIONS,
+				 LllFactory.eINSTANCE.createReturn()));
 	}
 
 	/**

@@ -62,8 +62,10 @@ Package lll <http://www.upb.de/lina/lll>
   Class MemoryInstruction -> Instruction
     Attribute instructionType : MemoryInstructionType
 
+  Class Return -> Instruction
+
   Enum MemoryInstructionType
-    Literal Alloca = 0
+    Literal Alloca = 1
     Literal Load = 2
     Literal Store = 3
     Literal Fence = 4

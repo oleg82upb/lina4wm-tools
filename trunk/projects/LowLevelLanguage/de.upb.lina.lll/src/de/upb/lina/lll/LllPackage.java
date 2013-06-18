@@ -242,7 +242,7 @@ public interface LllPackage extends EPackage {
 	int INSTRUCTION = 3;
 
 	/**
-	 * The feature id for the '<em><b>Instruction Result</b></em>' reference.
+	 * The feature id for the '<em><b>Instruction Result</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -260,7 +260,7 @@ public interface LllPackage extends EPackage {
 	int INSTRUCTION__FUNCTION = 1;
 
 	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -288,7 +288,7 @@ public interface LllPackage extends EPackage {
 	int FUNCTION_CALL = 4;
 
 	/**
-	 * The feature id for the '<em><b>Instruction Result</b></em>' reference.
+	 * The feature id for the '<em><b>Instruction Result</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -306,7 +306,7 @@ public interface LllPackage extends EPackage {
 	int FUNCTION_CALL__FUNCTION = INSTRUCTION__FUNCTION;
 
 	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -343,7 +343,7 @@ public interface LllPackage extends EPackage {
 	int GOTO = 6;
 
 	/**
-	 * The feature id for the '<em><b>Instruction Result</b></em>' reference.
+	 * The feature id for the '<em><b>Instruction Result</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -361,7 +361,7 @@ public interface LllPackage extends EPackage {
 	int GOTO__FUNCTION = INSTRUCTION__FUNCTION;
 
 	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -398,7 +398,7 @@ public interface LllPackage extends EPackage {
 	int CONDITIONAL_BRANCH = 5;
 
 	/**
-	 * The feature id for the '<em><b>Instruction Result</b></em>' reference.
+	 * The feature id for the '<em><b>Instruction Result</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -416,7 +416,7 @@ public interface LllPackage extends EPackage {
 	int CONDITIONAL_BRANCH__FUNCTION = GOTO__FUNCTION;
 
 	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -471,7 +471,7 @@ public interface LllPackage extends EPackage {
 	int VARIABLE_OR_VALUE = 7;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -508,7 +508,7 @@ public interface LllPackage extends EPackage {
 	int CONSTANT = 8;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -554,7 +554,7 @@ public interface LllPackage extends EPackage {
 	int VARIABLE = 9;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -684,7 +684,7 @@ public interface LllPackage extends EPackage {
 	int LOCAL_COMPUTATION = 13;
 
 	/**
-	 * The feature id for the '<em><b>Instruction Result</b></em>' reference.
+	 * The feature id for the '<em><b>Instruction Result</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -702,7 +702,7 @@ public interface LllPackage extends EPackage {
 	int LOCAL_COMPUTATION__FUNCTION = INSTRUCTION__FUNCTION;
 
 	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -739,7 +739,7 @@ public interface LllPackage extends EPackage {
 	int MEMORY_INSTRUCTION = 14;
 
 	/**
-	 * The feature id for the '<em><b>Instruction Result</b></em>' reference.
+	 * The feature id for the '<em><b>Instruction Result</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -757,7 +757,7 @@ public interface LllPackage extends EPackage {
 	int MEMORY_INSTRUCTION__FUNCTION = INSTRUCTION__FUNCTION;
 
 	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -784,6 +784,52 @@ public interface LllPackage extends EPackage {
 	int MEMORY_INSTRUCTION_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link de.upb.lina.lll.impl.ReturnImpl <em>Return</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.upb.lina.lll.impl.ReturnImpl
+	 * @see de.upb.lina.lll.impl.LllPackageImpl#getReturn()
+	 * @generated
+	 */
+	int RETURN = 15;
+
+	/**
+	 * The feature id for the '<em><b>Instruction Result</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RETURN__INSTRUCTION_RESULT = INSTRUCTION__INSTRUCTION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Function</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RETURN__FUNCTION = INSTRUCTION__FUNCTION;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RETURN__PARAMETERS = INSTRUCTION__PARAMETERS;
+
+	/**
+	 * The number of structural features of the '<em>Return</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RETURN_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link de.upb.lina.lll.MemoryInstructionType <em>Memory Instruction Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -791,7 +837,7 @@ public interface LllPackage extends EPackage {
 	 * @see de.upb.lina.lll.impl.LllPackageImpl#getMemoryInstructionType()
 	 * @generated
 	 */
-	int MEMORY_INSTRUCTION_TYPE = 15;
+	int MEMORY_INSTRUCTION_TYPE = 16;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.lll.PrimitiveType <em>Primitive Type</em>}' enum.
@@ -801,7 +847,7 @@ public interface LllPackage extends EPackage {
 	 * @see de.upb.lina.lll.impl.LllPackageImpl#getPrimitiveType()
 	 * @generated
 	 */
-	int PRIMITIVE_TYPE = 16;
+	int PRIMITIVE_TYPE = 17;
 
 
 	/**
@@ -944,10 +990,10 @@ public interface LllPackage extends EPackage {
 	EClass getInstruction();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.upb.lina.lll.Instruction#getInstructionResult <em>Instruction Result</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.upb.lina.lll.Instruction#getInstructionResult <em>Instruction Result</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Instruction Result</em>'.
+	 * @return the meta object for the containment reference '<em>Instruction Result</em>'.
 	 * @see de.upb.lina.lll.Instruction#getInstructionResult()
 	 * @see #getInstruction()
 	 * @generated
@@ -966,10 +1012,10 @@ public interface LllPackage extends EPackage {
 	EReference getInstruction_Function();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.upb.lina.lll.Instruction#getParameters <em>Parameters</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.upb.lina.lll.Instruction#getParameters <em>Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Parameters</em>'.
+	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
 	 * @see de.upb.lina.lll.Instruction#getParameters()
 	 * @see #getInstruction()
 	 * @generated
@@ -1061,10 +1107,10 @@ public interface LllPackage extends EPackage {
 	EClass getVariableOrValue();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.upb.lina.lll.VariableOrValue#getType <em>Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.upb.lina.lll.VariableOrValue#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @return the meta object for the containment reference '<em>Type</em>'.
 	 * @see de.upb.lina.lll.VariableOrValue#getType()
 	 * @see #getVariableOrValue()
 	 * @generated
@@ -1230,6 +1276,16 @@ public interface LllPackage extends EPackage {
 	EAttribute getMemoryInstruction_InstructionType();
 
 	/**
+	 * Returns the meta object for class '{@link de.upb.lina.lll.Return <em>Return</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Return</em>'.
+	 * @see de.upb.lina.lll.Return
+	 * @generated
+	 */
+	EClass getReturn();
+
+	/**
 	 * Returns the meta object for enum '{@link de.upb.lina.lll.MemoryInstructionType <em>Memory Instruction Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1384,7 +1440,7 @@ public interface LllPackage extends EPackage {
 		EClass INSTRUCTION = eINSTANCE.getInstruction();
 
 		/**
-		 * The meta object literal for the '<em><b>Instruction Result</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Instruction Result</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1400,7 +1456,7 @@ public interface LllPackage extends EPackage {
 		EReference INSTRUCTION__FUNCTION = eINSTANCE.getInstruction_Function();
 
 		/**
-		 * The meta object literal for the '<em><b>Parameters</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1480,7 +1536,7 @@ public interface LllPackage extends EPackage {
 		EClass VARIABLE_OR_VALUE = eINSTANCE.getVariableOrValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1620,6 +1676,16 @@ public interface LllPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MEMORY_INSTRUCTION__INSTRUCTION_TYPE = eINSTANCE.getMemoryInstruction_InstructionType();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.lina.lll.impl.ReturnImpl <em>Return</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.lina.lll.impl.ReturnImpl
+		 * @see de.upb.lina.lll.impl.LllPackageImpl#getReturn()
+		 * @generated
+		 */
+		EClass RETURN = eINSTANCE.getReturn();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.lll.MemoryInstructionType <em>Memory Instruction Type</em>}' enum.
