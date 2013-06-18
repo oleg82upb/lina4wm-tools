@@ -17,7 +17,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1"
         eType="#//Instruction" containment="true" eOpposite="#//Instruction/function"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputParameters" upperBound="-1"
-        eType="#//VariableOrValue"/>
+        eType="#//VariableOrValue" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Label" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//Function"
