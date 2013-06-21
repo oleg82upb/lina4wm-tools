@@ -1,10 +1,10 @@
 -- @path LLVM=/de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore
 -- @path LLL=/de.upb.lina.lll/model/LLL.ecore
----- @path EXPR=/de.upb.lina.lll.expressions/src-gen/de/upb/lina/lll/Expressions.ecore
+-- @path EXPR=/de.upb.lina.lll.expressions/src-gen/de/upb/lina/lll/Expressions.ecore
 
 
 module lllbasis;
-create lll: LLL from llvm: LLVM;
+create lll: LLL, expr:EXPR from llvm: LLVM;
 --create lll: LLL,expr : EXPR from llvm: LLVM;
 
 --****************************************--
@@ -284,6 +284,25 @@ rule CompareUse {
 			name <- thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(insUse.reg_or_var, '%'), '@'))
 		)
 }
+
+rule CompareAndChangeUse {
+	from
+		insUse: LLVM!InstructionUse(insUse.instruction.oclIsTypeOf(LLVM!CmpXchg))
+	to
+		outI :LLL!MemoryInstruction(
+			instructionType <- #CompareAndSwap,
+			parameters <- OrderedSet{thisModule.getValue(insUse.instruction.adress).refSetValue('type', thisModule.getType(insUse.instruction.adresstype)),
+					thisModule.getValue(insUse.instruction.comparevalue).refSetValue('type', thisModule.getType(insUse.instruction.comparetype)),
+					thisModule.getValue(insUse.instruction.newvalue).refSetValue('type', thisModule.getType(insUse.instruction.newtype))
+			},
+			instructionResult <- intReg
+
+		),
+		intReg: LLL!Variable (
+			name <- thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(insUse.reg_or_var, '%'), '@'))
+		)
+}
+
 rule GetElementPtrUse {
 	from
 		insUse: LLVM!InstructionUse(insUse.instruction.oclIsTypeOf(LLVM!GetElementPtr) or insUse.instruction.oclIsTypeOf(LLVM!NestedGetElementPtr))
@@ -322,7 +341,7 @@ rule ArithmeticUse{
 			name <- thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(insUse.reg_or_var, '%'), '@'))
 		)
 --		,
---		expr : EXPR!Expression()
+--		expr : EXPR!AExpression()
 }
 
 rule Store {
@@ -333,6 +352,15 @@ rule Store {
 			instructionType <- #Store,
 			parameters <- OrderedSet{thisModule.getValue(instruction.newvalue).refSetValue('type', thisModule.getType(instruction.newtype)),
 						thisModule.getValue(instruction.adress).refSetValue('type', thisModule.getType(instruction.adresstype))}
+		)
+}
+
+rule Fence {
+	from
+		instruction: LLVM!Fence
+	to
+		outI: LLL!MemoryInstruction(
+			instructionType <- #Fence
 		)
 }
 
