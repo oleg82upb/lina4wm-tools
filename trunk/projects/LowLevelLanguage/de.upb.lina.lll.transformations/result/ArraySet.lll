@@ -225,9 +225,9 @@
     <labels name="land.end" instruction="//@functions.1/@instructions.47"/>
     <labels name="while.body6" instruction="//@functions.1/@instructions.49"/>
     <labels name="while.end9"/>
-    <labels name="while.cond10" instruction="//@functions.1/@instructions.61"/>
-    <labels name="while.body12" instruction="//@functions.1/@instructions.63"/>
-    <labels name="while.end16" instruction="//@functions.1/@instructions.74"/>
+    <labels name="while.cond10" instruction="//@functions.1/@instructions.62"/>
+    <labels name="while.body12" instruction="//@functions.1/@instructions.64"/>
+    <labels name="while.end16" instruction="//@functions.1/@instructions.76"/>
     <instructions xsi:type="de.upb.lina:MemoryInstruction">
       <instructionResult name="x.addr"/>
       <parameters xsi:type="de.upb.lina:Constant" value="1">
@@ -510,6 +510,18 @@
         <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
       </parameters>
     </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="CompareAndSwap">
+      <instructionResult name="v18"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="arrayidx8">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Constant" value="0">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="v17">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+    </instructions>
     <instructions xsi:type="de.upb.lina:LocalComputation">
       <instructionResult name="v19"/>
     </instructions>
@@ -594,6 +606,18 @@
       <instructionResult name="v25"/>
       <parameters xsi:type="de.upb.lina:Variable" name="x.addr">
         <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="CompareAndSwap">
+      <instructionResult name="v26"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="arrayidx14">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Constant" value="0">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="v25">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
       </parameters>
     </instructions>
     <instructions xsi:type="de.upb.lina:LocalComputation">
@@ -732,6 +756,18 @@
       <instructionResult name="v6"/>
       <parameters xsi:type="de.upb.lina:Variable" name="x.addr">
         <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+    </instructions>
+    <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="CompareAndSwap">
+      <instructionResult name="v7"/>
+      <parameters xsi:type="de.upb.lina:Variable" name="arrayidx">
+        <type xsi:type="de.upb.lina:SimpleType" type="pointer"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Variable" name="v6">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
+      </parameters>
+      <parameters xsi:type="de.upb.lina:Constant" value="0">
+        <type xsi:type="de.upb.lina:SimpleType" type="int"/>
       </parameters>
     </instructions>
     <instructions xsi:type="de.upb.lina:LocalComputation">
