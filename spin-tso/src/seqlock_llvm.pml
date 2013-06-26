@@ -10,8 +10,8 @@ seqlock implementation
 	trying to specify the LLVM-compiled seqlock implementation (seqlock.s)
 */
 
-#define BUFF_SIZE 5 	//size of Buffer
-#define MEM_SIZE 10	//size of memory
+#define BUFF_SIZE 7 	//size of Buffer
+#define MEM_SIZE 15	//size of memory
  
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 #include "x86_tso_buffer.pml"
@@ -20,6 +20,7 @@ seqlock implementation
 //Types for LLVM, actually their length in size of pointers and values
 #define I32  0 		// = {0};
 #define Ptr  0
+#define Array 1
 short memUse = 1; 	//shows to the next free cell in memory
 byte this; 		// instance pointer
 
@@ -58,14 +59,14 @@ entry:
 	alloca(I32, word2_addr);
 	write(word1_addr, word1);
 	write(word2_addr, word2);
-	//???read(c,v0);
-	//? write(c,v0+1);
+		read(c,v0);
+		 write(c,v0+1);
 	read(word1_addr, v1);
-	//? write(x1,v1);
+		write(x1,v1);
 	read(word2_addr, v2);
-	//? write(x2,v2);
-	//? read(c,v3);
-	//? write(c, v3+1);
+		write(x2,v2);
+		read(c,v3);
+		write(c, v3+1);
 }
 
 
@@ -81,7 +82,7 @@ entry:
 	
 doBody1:
 	read(c,v0);
-	write(c0,0);
+	write(c0,v0);
 	->
 	
 doCond:
@@ -95,11 +96,11 @@ doCond:
 doEnd:
 	read(x1,v2);
 	read(word_addr, v3);
-	getelementptr(I32, v3, 0, arrayidx);
+	getelementptr(Array, v3, 0, arrayidx);
 	write(arrayidx, v2);
 	read(x2,v4);
 	read(word_addr,v5);
-	getelementptr(I32, v5, 1, arrayidx2);
+	getelementptr(Array, v5, 1, arrayidx2);
 	write(arrayidx2, v4);
 	->
 	
@@ -107,7 +108,7 @@ doCond3:
 	read(c, v6);
 	read(c0, v7);
 	if
-	:: (v6 != v7) -> goto doBody
+	:: (v6 != v7) -> goto doBody1;
 	:: else -> skip
 	fi;	
 }
@@ -117,7 +118,8 @@ proctype process1 (chan ch){
 }
 
 proctype process2(chan ch){
-	int array[2];
+	int array;
+	alloca(Array, array);
 	sread(array);
 }
 
@@ -132,6 +134,6 @@ init{
 		run process1(channelT1);
 		run bufferProcess(channelT1);
 		run process2(channelT2);
-		run bufferProcess(channelT1);
+		run bufferProcess(channelT2	);
 	}
 }		
