@@ -10,7 +10,7 @@ seqlock implementation
 	trying to specify the LLVM-compiled seqlock implementation (seqlock.s)
 */
 
-#define BUFF_SIZE 7 	//size of Buffer
+#define BUFF_SIZE 20 	//size of Buffer
 #define MEM_SIZE 15	//size of memory
  
 //-----------------------------------------------------------------------------------------------------------------------------------------------
@@ -21,8 +21,7 @@ seqlock implementation
 #define I32  0 		// = {0};
 #define Ptr  0
 #define Array 1
-short memUse = 1; 	//shows to the next free cell in memory
-byte this; 		// instance pointer
+short memUse = 4; 	//shows to the next free cell in memory
 
 
 chan channelT1 = [0] of {mtype, short, short, short};
@@ -49,47 +48,55 @@ inline alloca(type, targetRegister)
 	}
 }
 //--------------------------------------------------------------------------------------------------------------
-int x1,x2,c;
+
+//initalization of global variables?
+#define x1 1
+#define x2 2
+#define c 3
 
 inline swrite(word1, word2){
 
-int word1_addr, word2_addr, v0, v1, v2,v3;
+int word1_addr, word2_addr, v0, v1, v2, v3;
 entry:
-	alloca(I32, word1_addr);
-	alloca(I32, word2_addr);
+	atomic{
+		alloca(I32, word1_addr);
+		alloca(I32, word2_addr);
+	}
 	write(word1_addr, word1);
 	write(word2_addr, word2);
-		read(c,v0);
-		 write(c,v0+1);
+	read(c,v0);
+	write(c,v0+1);
 	read(word1_addr, v1);
-		write(x1,v1);
+	write(x1,v1);
 	read(word2_addr, v2);
-		write(x2,v2);
-		read(c,v3);
-		write(c, v3+1);
+	write(x2,v2);
+	read(c,v3);
+	write(c, v3+1);// wenn c gerade
 }
 
 
 
 inline sread(word){
-int word_addr, c0, v0, v1, v2, v3, v4, v5, v6, v7, rem, arrayidx, arrayidx2;
+int word_addr, c0, v0, v2, v3, v4, v5, v6, rem, arrayidx, arrayidx2;
 entry:
-	alloca(I32, word_addr);
-	alloca(I32, c0);
+	atomic{
+		alloca(I32, word_addr);
+		alloca(I32, c0);
+	}
 	write(word_addr, word);
-	write(c0,0);
+	c0 = 0;// write(c0,0); 
 	->
 	
 doBody1:
 	read(c,v0);
-	write(c0,v0);
+	c0 = v0;
+	//write(c0,v0);
 	->
 	
 doCond:
-	read(c0,v1);	
-	rem = v1 % 2;	//test if its divisible without remainder(engl."Rest") to  check whether c has changed
+	//read(c0,v1);	
 	if 
-	::(rem != 0) -> goto doBody1
+	::(!c0%2) -> goto doBody1
 	:: else -> goto doEnd
 	fi;
 
@@ -106,9 +113,8 @@ doEnd:
 	
 doCond3:
 	read(c, v6);
-	read(c0, v7);
 	if
-	:: (v6 != v7) -> goto doBody1;
+	:: (v6 != c0) -> goto doBody1;
 	:: else -> skip
 	fi;	
 }
@@ -118,18 +124,15 @@ proctype process1 (chan ch){
 }
 
 proctype process2(chan ch){
+	//initalization of array?
 	int array;
 	alloca(Array, array);
+	
 	sread(array);
 }
 
 
-init{
-	//initalization of array?
-	//initalization of global variables?
-	x1 = 0;
-	x2 = 0;
-	c = 0;
+init{		
 	atomic{
 		run process1(channelT1);
 		run bufferProcess(channelT1);
