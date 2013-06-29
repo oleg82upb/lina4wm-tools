@@ -49,14 +49,14 @@ inline alloca(type, targetRegister)
 }
 //--------------------------------------------------------------------------------------------------------------
 
-//initalization of global variables?
+//initalization of global variables
 #define x1 1
 #define x2 2
 #define c 3
 
 inline swrite(word1, word2){
 
-int word1_addr, word2_addr, v0, v1, v2, v3;
+short word1_addr, word2_addr, v0, v1, v2, v3;
 entry:
 	atomic{
 		alloca(I32, word1_addr);
@@ -71,30 +71,29 @@ entry:
 	read(word2_addr, v2);
 	write(x2,v2);
 	read(c,v3);
-	write(c, v3+1);// wenn c gerade
+	write(c, v3+1);
 }
 
 
 
 inline sread(word){
-int word_addr, c0, v0, v2, v3, v4, v5, v6, rem, arrayidx, arrayidx2;
+short word_addr, c0, v0, v2, v3, v4, v5, v6, rem, arrayidx, arrayidx2;
 entry:
 	atomic{
 		alloca(I32, word_addr);
 		alloca(I32, c0);
 	}
 	write(word_addr, word);
-	c0 = 0;// write(c0,0); 
+	c0 = 0;
 	->
 	
 doBody1:
 	read(c,v0);
 	c0 = v0;
-	//write(c0,v0);
 	->
 	
 doCond:
-	//read(c0,v1);	
+
 	if 
 	::(!c0%2) -> goto doBody1
 	:: else -> goto doEnd
@@ -124,7 +123,7 @@ proctype process1 (chan ch){
 }
 
 proctype process2(chan ch){
-	//initalization of array?
+	//initalization of array
 	int array;
 	alloca(Array, array);
 	
