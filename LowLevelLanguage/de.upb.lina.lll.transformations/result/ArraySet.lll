@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<de.upb.lina:Program xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:de.upb.lina="http://www.upb.de/lina/lll">
+<de.upb.lina:Program xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:de.upb.lina="http://www.upb.de/lina/lll" xmlns:expressions="http://www.upb.de/lina/lll/Expressions">
   <functions name="@_Z6Memberi">
     <labels name="entry" instruction="//@functions.0/@instructions.0"/>
     <labels name="while.cond" instruction="//@functions.0/@instructions.10"/>
@@ -86,6 +86,10 @@
     </instructions>
     <instructions xsi:type="de.upb.lina:LocalComputation">
       <instructionResult name="cmp"/>
+      <expression xsi:type="expressions:Equal">
+        <left xsi:type="expressions:StringValue" strValue="1"/>
+        <right xsi:type="expressions:StringValue" strValue="1"/>
+      </expression>
     </instructions>
     <instructions xsi:type="de.upb.lina:ConditionalBranch" target="//@functions.0/@labels.2" elseTarget="//@functions.0/@labels.8"/>
     <instructions xsi:type="de.upb.lina:Goto" target="//@functions.0/@labels.3"/>
@@ -103,6 +107,10 @@
     </instructions>
     <instructions xsi:type="de.upb.lina:LocalComputation">
       <instructionResult name="cmp2"/>
+      <expression xsi:type="expressions:Equal">
+        <left xsi:type="expressions:StringValue" strValue="1"/>
+        <right xsi:type="expressions:StringValue" strValue="1"/>
+      </expression>
     </instructions>
     <instructions xsi:type="de.upb.lina:ConditionalBranch" target="//@functions.0/@labels.4" elseTarget="//@functions.0/@labels.7"/>
     <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
@@ -162,6 +170,10 @@
     </instructions>
     <instructions xsi:type="de.upb.lina:LocalComputation">
       <instructionResult name="cmp4"/>
+      <expression xsi:type="expressions:Equal">
+        <left xsi:type="expressions:StringValue" strValue="1"/>
+        <right xsi:type="expressions:StringValue" strValue="1"/>
+      </expression>
     </instructions>
     <instructions xsi:type="de.upb.lina:ConditionalBranch" target="//@functions.0/@labels.5" elseTarget="//@functions.0/@labels.6"/>
     <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
@@ -354,6 +366,10 @@
     </instructions>
     <instructions xsi:type="de.upb.lina:LocalComputation">
       <instructionResult name="cmp"/>
+      <expression xsi:type="expressions:Equal">
+        <left xsi:type="expressions:StringValue" strValue="1"/>
+        <right xsi:type="expressions:StringValue" strValue="1"/>
+      </expression>
     </instructions>
     <instructions xsi:type="de.upb.lina:ConditionalBranch" target="//@functions.1/@labels.2" elseTarget="//@functions.1/@labels.5"/>
     <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
@@ -390,6 +406,10 @@
     </instructions>
     <instructions xsi:type="de.upb.lina:LocalComputation">
       <instructionResult name="cmp1"/>
+      <expression xsi:type="expressions:Equal">
+        <left xsi:type="expressions:StringValue" strValue="1"/>
+        <right xsi:type="expressions:StringValue" strValue="1"/>
+      </expression>
     </instructions>
     <instructions xsi:type="de.upb.lina:ConditionalBranch" target="//@functions.1/@labels.3" elseTarget="//@functions.1/@labels.4"/>
     <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
@@ -469,6 +489,10 @@
     </instructions>
     <instructions xsi:type="de.upb.lina:LocalComputation">
       <instructionResult name="cmp5"/>
+      <expression xsi:type="expressions:Equal">
+        <left xsi:type="expressions:StringValue" strValue="1"/>
+        <right xsi:type="expressions:StringValue" strValue="1"/>
+      </expression>
     </instructions>
     <instructions xsi:type="de.upb.lina:Goto" target="//@functions.1/@labels.8"/>
     <instructions xsi:type="de.upb.lina:LocalComputation">
@@ -524,6 +548,10 @@
     </instructions>
     <instructions xsi:type="de.upb.lina:LocalComputation">
       <instructionResult name="v19"/>
+      <expression xsi:type="expressions:Equal">
+        <left xsi:type="expressions:StringValue" strValue="1"/>
+        <right xsi:type="expressions:StringValue" strValue="1"/>
+      </expression>
     </instructions>
     <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
       <parameters xsi:type="de.upb.lina:Variable" name="frombool">
@@ -622,6 +650,10 @@
     </instructions>
     <instructions xsi:type="de.upb.lina:LocalComputation">
       <instructionResult name="v27"/>
+      <expression xsi:type="expressions:Equal">
+        <left xsi:type="expressions:StringValue" strValue="1"/>
+        <right xsi:type="expressions:StringValue" strValue="1"/>
+      </expression>
     </instructions>
     <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Store">
       <parameters xsi:type="de.upb.lina:Variable" name="frombool15">
@@ -728,6 +760,10 @@
     </instructions>
     <instructions xsi:type="de.upb.lina:LocalComputation">
       <instructionResult name="cmp"/>
+      <expression xsi:type="expressions:Equal">
+        <left xsi:type="expressions:StringValue" strValue="1"/>
+        <right xsi:type="expressions:StringValue" strValue="1"/>
+      </expression>
     </instructions>
     <instructions xsi:type="de.upb.lina:Goto" target="//@functions.4/@labels.3"/>
     <instructions xsi:type="de.upb.lina:LocalComputation">
@@ -772,6 +808,10 @@
     </instructions>
     <instructions xsi:type="de.upb.lina:LocalComputation">
       <instructionResult name="v8"/>
+      <expression xsi:type="expressions:Equal">
+        <left xsi:type="expressions:StringValue" strValue="1"/>
+        <right xsi:type="expressions:StringValue" strValue="1"/>
+      </expression>
     </instructions>
     <instructions xsi:type="de.upb.lina:MemoryInstruction" instructionType="Load">
       <instructionResult name="v9"/>

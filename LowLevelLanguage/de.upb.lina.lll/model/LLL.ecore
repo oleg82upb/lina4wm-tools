@@ -37,7 +37,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConditionalBranch" eSuperTypes="#//Goto">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elseTarget" eType="#//Label"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass ../../de.upb.lina.lll.expressions/src-gen/de/upb/lina/lll/Expressions.ecore#//LExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass ../../de.upb.lina.lll.expressions/src-gen/de/upb/lina/lll/Expressions.ecore#//LExpression"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Goto" eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Label"/>
@@ -79,7 +80,8 @@
     <eLiterals name="pointer"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LocalComputation" eSuperTypes="#//Instruction">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../de.upb.lina.lll.expressions/src-gen/de/upb/lina/lll/Expressions.ecore#//Expression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../de.upb.lina.lll.expressions/src-gen/de/upb/lina/lll/Expressions.ecore#//Expression"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MemoryInstruction" eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="instructionType" eType="#//MemoryInstructionType"/>

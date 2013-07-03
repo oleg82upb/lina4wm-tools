@@ -10,6 +10,7 @@ import de.upb.lina.lll.expressions.LExpression;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -41,7 +42,7 @@ public class ConditionalBranchImpl extends GotoImpl implements ConditionalBranch
 	protected Label elseTarget;
 
 	/**
-	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' reference.
+	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getCondition()
@@ -113,14 +114,6 @@ public class ConditionalBranchImpl extends GotoImpl implements ConditionalBranch
 	 * @generated
 	 */
 	public LExpression getCondition() {
-		if (condition != null && condition.eIsProxy()) {
-			InternalEObject oldCondition = (InternalEObject)condition;
-			condition = (LExpression)eResolveProxy(oldCondition);
-			if (condition != oldCondition) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, LllPackage.CONDITIONAL_BRANCH__CONDITION, oldCondition, condition));
-			}
-		}
 		return condition;
 	}
 
@@ -129,8 +122,14 @@ public class ConditionalBranchImpl extends GotoImpl implements ConditionalBranch
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LExpression basicGetCondition() {
-		return condition;
+	public NotificationChain basicSetCondition(LExpression newCondition, NotificationChain msgs) {
+		LExpression oldCondition = condition;
+		condition = newCondition;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LllPackage.CONDITIONAL_BRANCH__CONDITION, oldCondition, newCondition);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -139,10 +138,31 @@ public class ConditionalBranchImpl extends GotoImpl implements ConditionalBranch
 	 * @generated
 	 */
 	public void setCondition(LExpression newCondition) {
-		LExpression oldCondition = condition;
-		condition = newCondition;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LllPackage.CONDITIONAL_BRANCH__CONDITION, oldCondition, condition));
+		if (newCondition != condition) {
+			NotificationChain msgs = null;
+			if (condition != null)
+				msgs = ((InternalEObject)condition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LllPackage.CONDITIONAL_BRANCH__CONDITION, null, msgs);
+			if (newCondition != null)
+				msgs = ((InternalEObject)newCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LllPackage.CONDITIONAL_BRANCH__CONDITION, null, msgs);
+			msgs = basicSetCondition(newCondition, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LllPackage.CONDITIONAL_BRANCH__CONDITION, newCondition, newCondition));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case LllPackage.CONDITIONAL_BRANCH__CONDITION:
+				return basicSetCondition(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -157,8 +177,7 @@ public class ConditionalBranchImpl extends GotoImpl implements ConditionalBranch
 				if (resolve) return getElseTarget();
 				return basicGetElseTarget();
 			case LllPackage.CONDITIONAL_BRANCH__CONDITION:
-				if (resolve) return getCondition();
-				return basicGetCondition();
+				return getCondition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

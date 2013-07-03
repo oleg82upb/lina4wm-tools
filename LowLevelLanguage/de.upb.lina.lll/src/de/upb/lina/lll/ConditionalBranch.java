@@ -49,26 +49,26 @@ public interface ConditionalBranch extends Goto {
 	void setElseTarget(Label value);
 
 	/**
-	 * Returns the value of the '<em><b>Condition</b></em>' reference.
+	 * Returns the value of the '<em><b>Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Condition</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Condition</em>' reference.
+	 * @return the value of the '<em>Condition</em>' containment reference.
 	 * @see #setCondition(LExpression)
 	 * @see de.upb.lina.lll.LllPackage#getConditionalBranch_Condition()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	LExpression getCondition();
 
 	/**
-	 * Sets the value of the '{@link de.upb.lina.lll.ConditionalBranch#getCondition <em>Condition</em>}' reference.
+	 * Sets the value of the '{@link de.upb.lina.lll.ConditionalBranch#getCondition <em>Condition</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Condition</em>' reference.
+	 * @param value the new value of the '<em>Condition</em>' containment reference.
 	 * @see #getCondition()
 	 * @generated
 	 */
