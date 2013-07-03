@@ -1,10 +1,10 @@
 -- @path LLVM=/de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore
 -- @path LLL=/de.upb.lina.lll/model/LLL.ecore
--- @path EXPR=/de.upb.lina.lll.expressions/src-gen/de/upb/lina/lll/Expressions.ecore
+-- @atlcompiler atl2010
 
 
 module lllbasis;
-create lll: LLL, expr:EXPR from llvm: LLVM;
+create lll: LLL from llvm: LLVM;
 --create lll: LLL,expr : EXPR from llvm: LLVM;
 
 --****************************************--
@@ -276,12 +276,23 @@ rule CompareUse {
 		insUse: LLVM!InstructionUse(insUse.instruction.oclIsTypeOf(LLVM!Compare))
 	to
 		outI :LLL!LocalComputation(
---			expression <- 
+			expression <-  lexpr,  
 			instructionResult <- intReg
 
 		),
 		intReg: LLL!Variable (
 			name <- thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(insUse.reg_or_var, '%'), '@'))
+		),
+		lexpr : LLL!"expressions::Equal"(
+			left <- left,
+			right <- right
+		
+		),
+		left : LLL!"expressions::StringValue"(
+			strValue <- '1'  
+		),
+		right : LLL!"expressions::StringValue"(
+			strValue <- '1'  
 		)
 }
 
@@ -385,8 +396,6 @@ rule Branch {
 					resolveTemp(instruction, 'outI'))).first(),
 			target <- LLL!Label.allInstances() -> select(i | i.name = thisModule.stringcut(instruction.labelTrue.name, '%') and
 					i.function.instructions.includes(thisModule.resolveTemp(instruction, 'outI'))).first()
---					,
---			condition <- thisModule.resolveTemp(, 'cmpExpr')
 			
 		)
 }

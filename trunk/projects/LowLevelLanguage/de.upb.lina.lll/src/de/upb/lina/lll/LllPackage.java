@@ -443,7 +443,7 @@ public interface LllPackage extends EPackage {
 	int CONDITIONAL_BRANCH__ELSE_TARGET = GOTO_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Condition</b></em>' reference.
+	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -711,7 +711,7 @@ public interface LllPackage extends EPackage {
 	int LOCAL_COMPUTATION__PARAMETERS = INSTRUCTION__PARAMETERS;
 
 	/**
-	 * The feature id for the '<em><b>Expression</b></em>' reference.
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1065,10 +1065,10 @@ public interface LllPackage extends EPackage {
 	EReference getConditionalBranch_ElseTarget();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.upb.lina.lll.ConditionalBranch#getCondition <em>Condition</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.upb.lina.lll.ConditionalBranch#getCondition <em>Condition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Condition</em>'.
+	 * @return the meta object for the containment reference '<em>Condition</em>'.
 	 * @see de.upb.lina.lll.ConditionalBranch#getCondition()
 	 * @see #getConditionalBranch()
 	 * @generated
@@ -1244,10 +1244,10 @@ public interface LllPackage extends EPackage {
 	EClass getLocalComputation();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.upb.lina.lll.LocalComputation#getExpression <em>Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.upb.lina.lll.LocalComputation#getExpression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Expression</em>'.
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
 	 * @see de.upb.lina.lll.LocalComputation#getExpression()
 	 * @see #getLocalComputation()
 	 * @generated
@@ -1500,7 +1500,7 @@ public interface LllPackage extends EPackage {
 		EReference CONDITIONAL_BRANCH__ELSE_TARGET = eINSTANCE.getConditionalBranch_ElseTarget();
 
 		/**
-		 * The meta object literal for the '<em><b>Condition</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1652,7 +1652,7 @@ public interface LllPackage extends EPackage {
 		EClass LOCAL_COMPUTATION = eINSTANCE.getLocalComputation();
 
 		/**
-		 * The meta object literal for the '<em><b>Expression</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

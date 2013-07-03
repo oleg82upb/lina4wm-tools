@@ -1,0 +1,106 @@
+-- @path MM=/de.upb.lina.lll/model/LLL.ecore
+-- @nsURI EXPR=http://www.upb.de/lina/lll/Expressions
+-- @atlcompiler atl2010
+
+module refinement;
+create OUT: MM refining IN: MM;
+
+rule BranchCompare {
+	from
+		b: MM!LocalComputation (
+			b.expression.oclIsTypeOf(MM!"expressions::Equal").debug(b.expression.oclType()) and if thisModule.CompInstructions(b).at(thisModule.CompInstructions(b).indexOf(b) + 1).oclIsTypeOf(MM!ConditionalBranch) then
+			if thisModule.CompInstructions(b).at(thisModule.CompInstructions(b).indexOf(b) + 1).condition.oclIsUndefined() then
+				true
+			else
+				false
+			endif
+		else
+			false
+		endif
+		)
+--@deprecated?
+--	using {
+--		instructions: OrderedSet(MM!Instruction) = b.refImmediateComposite().instructions;
+--	}
+	to
+		c: MM!LocalComputation (
+			expression <- thisModule.CompInstructions(b).at(thisModule.CompInstructions(b).indexOf(b) + 1).refSetValue('condition', b.expression).condition
+		)
+}
+
+-- Drop iff b has LExpression and if the following ConditionlBransh already has its Expression
+rule CompareDrop {
+	-- 2nd Iteration
+	from
+		b: MM!LocalComputation (
+			b.expression.oclIsTypeOf(MM!"expressions::Equal") and if thisModule.CompInstructions(b).at(thisModule.CompInstructions(b).indexOf(b) + 1).oclIsTypeOf(MM!ConditionalBranch) then
+			if not thisModule.CompInstructions(b).at(thisModule.CompInstructions(b).indexOf(b) + 1).condition.oclIsUndefined() then
+				false
+			else
+				true
+			endif
+		else
+			false
+		endif
+		)
+--@deprecated?
+--	using {
+--		instructions: OrderedSet(MM!Instruction) = b.refImmediateComposite().instructions;
+--	}
+	to
+		drop
+}
+helper def : CompInstructions(b:MM!Instruction) : OrderedSet(MM!Instruction) = b.refImmediateComposite().instructions;
+
+--lazy rule LazyDelete {
+--	from
+--		input: OclAny
+--	to
+--
+
+--}
+--rule ArithmeticCompostion{
+--	from
+--		b: MM!LocalComputation( instructions.at(instructions.indexOf(b)+1).oclIsTypeOf(MM!LocalComputation)
+--		)
+--	using {
+--		instructions: OrderedSet(MM!Instruction) = b.refImmediateComposite().instructions;
+--	}
+--	to	c: MM!LocalComputation(expression <- )
+--
+
+--}
+-- Select Branch that is only target of a jump once.
+--@deprecated?
+--rule DeleteBranch {
+--	from
+--		b: MM!Goto (
+--			targetsA.count(b) + targetsB.count(b) + targetsC.count(b) = 1
+--		)
+--	using {
+--		targetsA: Set(MM!Instruction) = MM!Goto.allInstances() -> select(goto | goto.target.instruction.oclIsTypeOf(MM!Goto)) -> collect(i | i.target.instruction);
+--		targetsB: Set(MM!Instruction) = MM!ConditionalBranch.allInstances() -> select(cb1 | cb1.target.oclIsTypeOf(MM!Goto)) -> collect(i | i.target.instruction);
+--		targetsC: Set(MM!Instruction) = MM!ConditionalBranch.allInstances() -> select(cb2 | cb2.target.oclIsTypeOf(MM!Goto)) -> collect(i | i.target.instruction);
+--	}
+--	to
+--		
+--}
+--rule DeleteBranch {
+--	from
+--		b: MM!Goto (
+--			thisModule.iTargetA().count(b) + thisModule.iTargetB().count(b) + thisModule.iTargetC().count(b) = 1
+--		)
+--	to
+--		
+--}
+
+rule DeleteNoUse{
+	from
+		ex : MM!"expressions::Equal" (ex.refImmediateComposite().debug('BATZ').oclIsTypeOf(MM!Program))
+	to
+		drop
+}
+
+helper def : iTargetA() : Set(MM!Instruction) = MM!Goto.allInstances() -> select(goto | goto.target.instruction.oclIsTypeOf(MM!Goto)) -> collect(i | i.target.instruction);
+helper def : iTargetB() : Set(MM!Instruction) = MM!ConditionalBranch.allInstances() -> select(cb1 | cb1.target.instruction.oclIsTypeOf(MM!Goto)) -> collect(i | i.target.instruction);
+helper def : iTargetC() : Set(MM!Instruction) = MM!ConditionalBranch.allInstances() -> select(cb2 | cb2.elseTarget.instruction.oclIsTypeOf(MM!Goto)) -> collect(i | i.target.instruction);
