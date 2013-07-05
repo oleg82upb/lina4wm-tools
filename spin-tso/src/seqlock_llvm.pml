@@ -10,27 +10,25 @@ seqlock implementation
 	trying to specify the LLVM-compiled seqlock implementation (seqlock.s)
 */
 
-#define BUFF_SIZE 8 	//size of Buffer
-#define MEM_SIZE 11	//size of memory
+#define BUFF_SIZE 12 	//size of Buffer
+#define MEM_SIZE 15	//size of memory
+//initalization of global variables
+#define x1 1
+#define x2 2
+#define c 3
  
 //--------------------------------------------------------------------------------------------------------------
 //abstract spezification
 short val1, val2;	//abstract specification values
-short temp1, temp2; //globale Variable fürs zwischenspeichern
 
-inline asWrite(w1,w2){
+
+inline asWrite(){
 atomic{
-	val1 = w1;
-	val2 = w2;
+	val1 = memory[x1];
+	val2 = memory[x2];
 	}
 }
-	
-inline rememberValue(w1,w2){
-	atomic{
-		temp1 = w1;
-		temp2 = w2;
-	}	//werte in globalen Zwischenspeicher
-}
+
 
 inline asRead(value1, value2){
 atomic{
@@ -74,10 +72,6 @@ inline alloca(type, targetRegister)
 	}
 }
 //-------------------------------------------------------------------------------------------------
-//initalization of global variables
-#define x1 1
-#define x2 2
-#define c 3
 
 inline swrite(word1, word2){
 short word1_addr, word2_addr, v0, v1, v2, v3;
@@ -141,15 +135,23 @@ doCond3:
 }
 
 proctype process1 (chan ch){
-	swrite(3,5);
+	short i;
+	//for (i : 1 .. 2) 
+	{
+			swrite(1,1);
+			swrite(2,2);
+			mfence();
+		} 
 }
 
 proctype process2(chan ch){
 	//initalization of array
-	int array;
+	short array,i;
 	alloca(Array, array);
 	
-	sread(array);
+	for (i : 1 .. 2) {
+			sread(array);
+		}
 }
 
 
