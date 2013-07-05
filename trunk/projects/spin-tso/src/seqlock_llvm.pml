@@ -10,12 +10,38 @@ seqlock implementation
 	trying to specify the LLVM-compiled seqlock implementation (seqlock.s)
 */
 
-#define BUFF_SIZE 20 	//size of Buffer
-#define MEM_SIZE 15	//size of memory
+#define BUFF_SIZE 8 	//size of Buffer
+#define MEM_SIZE 11	//size of memory
+ 
+//--------------------------------------------------------------------------------------------------------------
+//abstract spezification
+short val1, val2;	//abstract specification values
+short temp1, temp2; //globale Variable fürs zwischenspeichern
+
+inline asWrite(w1,w2){
+atomic{
+	val1 = w1;
+	val2 = w2;
+	}
+}
+	
+inline rememberValue(w1,w2){
+	atomic{
+		temp1 = w1;
+		temp2 = w2;
+	}	//werte in globalen Zwischenspeicher
+}
+
+inline asRead(value1, value2){
+atomic{
+	assert( val1 == value1 && val2 == value2);
+	}
+}
+//--------------------------------------------------------------------------------------------------------------
  
 //-----------------------------------------------------------------------------------------------------------------------------------------------
-#include "x86_tso_buffer.pml"
-
+//#include "x86_tso_buffer.pml"
+#include "LPbuffer_TSO.pml"
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 //Types for LLVM, actually their length in size of pointers and values
 #define I32  0 		// = {0};
@@ -47,16 +73,15 @@ inline alloca(type, targetRegister)
 	assert(memUse < MEM_SIZE);
 	}
 }
-//--------------------------------------------------------------------------------------------------------------
-
+//-------------------------------------------------------------------------------------------------
 //initalization of global variables
 #define x1 1
 #define x2 2
 #define c 3
 
 inline swrite(word1, word2){
-
 short word1_addr, word2_addr, v0, v1, v2, v3;
+
 entry:
 	atomic{
 		alloca(I32, word1_addr);
@@ -71,31 +96,29 @@ entry:
 	read(word2_addr, v2);
 	write(x2,v2);
 	read(c,v3);
-	write(c, v3+1);
+	writeLP(c, v3+1, 1, word1, word2);
 }
 
 
 
 inline sread(word){
-short word_addr, c0, v0, v2, v3, v4, v5, v6, rem, arrayidx, arrayidx2;
+short word_addr, v0, v2, v3, v4, v5, v6, rem, arrayidx, arrayidx2;
+
 entry:
 	atomic{
 		alloca(I32, word_addr);
-		alloca(I32, c0);
 	}
 	write(word_addr, word);
-	c0 = 0;
 	->
 	
 doBody1:
 	read(c,v0);
-	c0 = v0;
 	->
 	
 doCond:
 
 	if 
-	::(!c0%2) -> goto doBody1
+	::(v0%2) -> goto doBody1
 	:: else -> goto doEnd
 	fi;
 
@@ -107,14 +130,13 @@ doEnd:
 	read(x2,v4);
 	read(word_addr,v5);
 	getelementptr(Array, v5, 1, arrayidx2);
-	write(arrayidx2, v4);
-	->
+	write(arrayidx2, v4);	
 	
 doCond3:
-	read(c, v6);
+	readLP(c, v6, v2, v4, v0);
 	if
-	:: (v6 != c0) -> goto doBody1;
-	:: else -> skip
+	:: (v6 != v0) -> goto doBody1;
+	:: else -> skip				
 	fi;	
 }
 

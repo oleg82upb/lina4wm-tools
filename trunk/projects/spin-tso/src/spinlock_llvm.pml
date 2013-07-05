@@ -110,8 +110,10 @@ critical_sec: printf("crit\n");	//do something...
 proctype process2 (chan ch){
 	short returnvalue;
 	tryaquire(returnvalue);
-	critical_sec: printf("crit\n");
-	release();
+	if
+	:: returnvalue -> critical_sec: printf("crit\n");release();
+	::else ->skip
+	fi;
 }
 
 init{
@@ -126,4 +128,7 @@ atomic{
 
 ltl neverBothInCrit{ [] !(process1 @ critical_sec && process2 @critical_sec)};
 
+//ac vorher 0 hinter id
+//try _> vorher 0 wenn fkt , assert (vorher != 0)
+//release (vorher eigenen Id hinterher 0) 
 	
