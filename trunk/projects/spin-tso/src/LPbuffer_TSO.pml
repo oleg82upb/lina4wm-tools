@@ -22,7 +22,6 @@ inline write(adr, newValue)
 
 inline writeLP(adr, newValue, isLP, value1, value2)
 {
-	rememberValue(value1, value2);
 	ch ! iWrite, adr, newValue, isLP;
 }
 
@@ -110,7 +109,7 @@ atomic{
 		
 		// triggering abstract operation during LP flush here
 		if
-			:: buffer[0].line[2] == 1 -> asWrite(temp1,temp2);
+			:: buffer[0].line[2] == 1 -> asWrite();
 			:: else -> skip;
 		fi;
 		
