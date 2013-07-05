@@ -124,6 +124,7 @@ atomic{
 		//remove duplicate tail
 		buffer[tail-1].line[0] = 0;
 		buffer[tail-1].line[1] = 0;
+		buffer[tail-1].line[2] = 0;
 		tail--;
 		i = 0;
 		}
