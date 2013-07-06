@@ -20,7 +20,7 @@ inline write(adr, newValue)
 	ch ! iWrite, adr, newValue, NULL;
 }
 
-inline writeLP(adr, newValue, isLP, value1, value2)
+inline writeLP(adr, newValue, isLP)
 {
 	ch ! iWrite, adr, newValue, isLP;
 }
