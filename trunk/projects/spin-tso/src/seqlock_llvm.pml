@@ -90,13 +90,13 @@ entry:
 	read(word2_addr, v2);
 	write(x2,v2);
 	read(c,v3);
-	writeLP(c, v3+1, 1, word1, word2);
+	writeLP(c, v3+1, 1);
 }
 
 
 
 inline sread(word){
-short word_addr, v0, v2, v3, v4, v5, v6, rem, arrayidx, arrayidx2;
+short word_addr, v0, v2, v3, v4, v5, v6, arrayidx, arrayidx2;
 
 entry:
 	atomic{
@@ -135,7 +135,7 @@ doCond3:
 }
 
 proctype process1 (chan ch){
-	short i;
+	//short i;
 	//for (i : 1 .. 2) 
 	{
 			swrite(1,1);
