@@ -6,9 +6,68 @@
 
 #define BUFF_SIZE 5 	//size of Buffer
 #define MEM_SIZE 10	//size of memory
+ //----------------------------------------------------------------------------------------------------------------------------------------------
+ //abstract specification
+ short owner = -1;	//initial set to -1, means no process is in its critical section
+ 
+inline casLPAquire(adr, oldValue, newValue, returnValue){
+	// 2 steps for the executing process, but atomic on memory
+	bit success;
+	ch ! iCas, adr, oldValue, newValue;
+	atomic{
+	ch ? iCas, adr, success, _; 
+	returnValue = success;
+	if 	
+	:: success -> assert(owner == -1);
+				 asAquire();
+	:: else -> assert(owner != -1);
+	fi
+	}
+}
+
+
+inline casLPTry(adr, oldValue, newValue, returnValue){
+	// 2 steps for the executing process, but atomic on memory
+	bit success;
+	ch ! iCas, adr, oldValue, newValue;
+	atomic{
+	ch ? iCas, adr, success, _; 
+	returnValue = success;
+	if 	
+	:: success -> assert(owner == -1);
+				 asTryAquire();
+	:: else -> assert(owner != -1);
+	fi
+	}
+}
+ 
+ 
+inline asAquire(){
+ 
+ 	owner = _pid; 
+}
+
+inline asWrite(){
+	asRelease()
+}
+
+inline asRelease(){
+	atomic{	
+ 		assert(owner ==_pid-1);		//legitim?
+ 		owner = -1;
+ 	}
+}
+ 
+inline asTryAquire(){
+ 
+	owner = _pid; 
+}
+ 
+ 
+ 
  
 //-----------------------------------------------------------------------------------------------------------------------------------------------
-#include "x86_tso_buffer.pml"
+#include "LPbuffer_TSO.pml"
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 //Deklaration of Pointertypes, channels and usefull functions
@@ -20,8 +79,7 @@ short memUse = 2; 	//shows to the next free cell in memory, initialized to 2 bec
 chan channelT1 = [0] of {mtype, short, short, short};
 chan channelT2 = [0] of {mtype, short, short, short};
 
-inline getelementptr(type, instance, offset, targetRegister)
-{
+inline getelementptr(type, instance, offset, targetRegister){
 	atomic{
 	//simplified version of what llvm does.
 	//we don't need the type as long as we assume our memory to hold only values/pointers etc of equal length. 
@@ -31,8 +89,7 @@ inline getelementptr(type, instance, offset, targetRegister)
 	}
 }
 
-inline alloca(type, targetRegister)
-{
+inline alloca(type, targetRegister){
 	atomic{
 	//need c_Code here, but for now we could use this to statically define used addresses
 	targetRegister = memUse;
@@ -50,7 +107,7 @@ short v0, v2;
 
 whileBody:
 
-	cas(ptrX,1,0,v0); //cas(adr, oldValue, newValue, returnValue) 
+	casLPAquire(ptrX,1,0,v0); 			//cas(adr, oldValue, newValue, returnValue) 
 	if
 	::(v0 == 1) -> goto End;
 	:: else -> goto whileCond1;
@@ -59,7 +116,7 @@ whileBody:
 whileCond1:
 	read(ptrX, v2);
 	if
-	:: v2 == 0 -> goto whileCond1;
+	:: v2 == 0 -> goto whileCond1;		//endlessloop???
 	:: else -> goto whileBody;
 	fi;
 	
@@ -69,15 +126,15 @@ End:
 
 inline release(){
 
-	write(ptrX,1);
+	writeLP(ptrX,1,1);
 }
-
+/*Alternative:
 inline tryaquire(returnvalue){
 short retval, v0, v2;
 
 entry:
 	alloca(I32, retval);
-	cas(ptrX,1,0,v0);
+	casLPTry(ptrX,1,0,v0);
 	if
 	:: v0 == 1 	-> 	write(retval, 1); goto End;
 	:: else 	-> 	write(retval, 0); goto End;
@@ -85,21 +142,20 @@ entry:
 
 End:
 	read(retval, returnvalue);
-	
+*/	
 
-/*Alternative: 
-inline tryaquire(returnvalue){
+inline tryaquire(retval){
 short v0, v2;
 
 entry:
-	CAS(ptrX,1,0,v0);
+	casLPTry(ptrX,1,0,v0);
 	if
-	:: v0 == 1 	-> 	write(returnvalue, 1);
-	:: else 	-> 	write(returnvalue, 0);
+	:: v0 == 1 	-> 	write(retval, 1);
+	:: else 	-> 	write(retval, 0);
 	fi;
-*/
-
 }
+
+
 proctype process1 (chan ch){
 	aquire();
 critical_sec: printf("crit\n");	//do something...
@@ -127,8 +183,3 @@ atomic{
 }
 
 ltl neverBothInCrit{ [] !(process1 @ critical_sec && process2 @critical_sec)};
-
-//ac vorher 0 hinter id
-//try _> vorher 0 wenn fkt , assert (vorher != 0)
-//release (vorher eigenen Id hinterher 0) 
-	
