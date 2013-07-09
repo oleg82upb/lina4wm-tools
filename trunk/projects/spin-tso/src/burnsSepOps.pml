@@ -6,11 +6,12 @@ date: 05.2013
 Burns Mutex SepOps implementation
 */
 
-#define BUFF_SIZE 4 	//size of Buffer
-#define MEM_SIZE 5	//size of memory
- 
+#define BUFF_SIZE 2 	//size of Buffer
+#define MEM_SIZE 3	//size of memory
+#define f0 1
+#define f1 2
 //-----------------------------------------------------------------------------------------------------------------------------------------------
-#include "x86_tso_buffer.pml"
+#include "burnsSepOps_TSO.pml"
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 		//declaration of the variables
@@ -18,7 +19,8 @@ Burns Mutex SepOps implementation
 chan channelT1 = [0] of {mtype, short, short, short};
 chan channelT2 = [0] of {mtype, short, short, short};
 
-bool f0,f1				// global f0, f1
+
+
 
 
 inline p1_aq()
@@ -26,9 +28,9 @@ inline p1_aq()
 	bool v0;
 entry: 
 	write(f0,1);
-
+	mfence();
 whileCond:
-	read(f1, v0);
+	readLP(f1, v0, 1);
 	if
 	:: v0 != 0 -> goto whileCond;
 	::else -> skip;
@@ -37,7 +39,7 @@ whileCond:
 
 inline p1_rel()
 {
-	write(f0, 0);
+	writeLP(f0, 0);
 }
 
 inline p2_aq()
@@ -47,12 +49,13 @@ retry:
 	read(f0, v0);
 	if
 	:: (v0 != 0) -> goto retry;
-	:: else -> goto whileEnd;
+	:: else -> skip;
 	fi;
 
 whileEnd:
 	write(f1, 1);
-	read(f0, v1);
+	mfence();
+	readLP(f0, v1, 2);
 	if
 	:: v1 != 0 -> write(f1, 0);
 				 goto retry;
@@ -63,20 +66,22 @@ whileEnd:
 
 inline p2_rel()
 {
-	write(f1,0);
+	writeLP(f1,0);
 }
 //----------------------------------------------------------------------
 
 proctype process1(chan ch){
+	do :: 
 	p1_aq();
-	printf("P1 in critical section\n");
 	p1_rel();
+	od;
 }
 
 proctype process2(chan ch){
+	do:: 
 	p2_aq();
-	printf("P2 in critical section\n");
 	p2_rel();
+	od;
 }
 
 
