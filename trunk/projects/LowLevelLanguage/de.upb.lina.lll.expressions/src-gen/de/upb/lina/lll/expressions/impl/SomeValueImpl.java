@@ -19,24 +19,24 @@ import org.eclipse.emf.ecore.EClass;
 public class SomeValueImpl extends CExpressionImpl implements SomeValue
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected SomeValueImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return ExpressionsPackage.Literals.SOME_VALUE;
-  }
+		return ExpressionsPackage.Literals.SOME_VALUE;
+	}
 
 } //SomeValueImpl

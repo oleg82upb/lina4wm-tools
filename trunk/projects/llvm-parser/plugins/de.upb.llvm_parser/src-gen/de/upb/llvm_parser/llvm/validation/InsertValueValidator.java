@@ -8,6 +8,8 @@ import de.upb.llvm_parser.llvm.Structure;
 import de.upb.llvm_parser.llvm.TypeUse;
 import de.upb.llvm_parser.llvm.Value;
 
+import java.math.BigDecimal;
+
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -23,5 +25,5 @@ public interface InsertValueValidator {
 	boolean validateValue(Value value);
 	boolean validateInserttype(TypeUse value);
 	boolean validateInsertvalue(Value value);
-	boolean validateIndex(EList<Integer> value);
+	boolean validateIndex(EList<BigDecimal> value);
 }

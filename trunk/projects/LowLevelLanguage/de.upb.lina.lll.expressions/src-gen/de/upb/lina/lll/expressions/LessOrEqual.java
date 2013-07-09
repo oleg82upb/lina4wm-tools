@@ -23,55 +23,55 @@ package de.upb.lina.lll.expressions;
 public interface LessOrEqual extends CExpression
 {
   /**
-   * Returns the value of the '<em><b>Left</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Left</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Left</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Left</em>' containment reference.
-   * @see #setLeft(SomeValue)
-   * @see de.upb.lina.lll.expressions.ExpressionsPackage#getLessOrEqual_Left()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Left</em>' containment reference.
+	 * @see #setLeft(SomeValue)
+	 * @see de.upb.lina.lll.expressions.ExpressionsPackage#getLessOrEqual_Left()
+	 * @model containment="true"
+	 * @generated
+	 */
   SomeValue getLeft();
 
   /**
-   * Sets the value of the '{@link de.upb.lina.lll.expressions.LessOrEqual#getLeft <em>Left</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.lina.lll.expressions.LessOrEqual#getLeft <em>Left</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Left</em>' containment reference.
-   * @see #getLeft()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Left</em>' containment reference.
+	 * @see #getLeft()
+	 * @generated
+	 */
   void setLeft(SomeValue value);
 
   /**
-   * Returns the value of the '<em><b>Right</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Right</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Right</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Right</em>' containment reference.
-   * @see #setRight(SomeValue)
-   * @see de.upb.lina.lll.expressions.ExpressionsPackage#getLessOrEqual_Right()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Right</em>' containment reference.
+	 * @see #setRight(SomeValue)
+	 * @see de.upb.lina.lll.expressions.ExpressionsPackage#getLessOrEqual_Right()
+	 * @model containment="true"
+	 * @generated
+	 */
   SomeValue getRight();
 
   /**
-   * Sets the value of the '{@link de.upb.lina.lll.expressions.LessOrEqual#getRight <em>Right</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.lina.lll.expressions.LessOrEqual#getRight <em>Right</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Right</em>' containment reference.
-   * @see #getRight()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Right</em>' containment reference.
+	 * @see #getRight()
+	 * @generated
+	 */
   void setRight(SomeValue value);
 
 } // LessOrEqual

@@ -19,24 +19,24 @@ import org.eclipse.emf.ecore.EClass;
 public class AExpressionImpl extends ExpressionImpl implements AExpression
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected AExpressionImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return ExpressionsPackage.Literals.AEXPRESSION;
-  }
+		return ExpressionsPackage.Literals.AEXPRESSION;
+	}
 
 } //AExpressionImpl

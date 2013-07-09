@@ -2,6 +2,8 @@
  */
 package de.upb.llvm_parser.llvm;
 
+import java.math.BigDecimal;
+
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -104,7 +106,7 @@ public interface ExtractValue extends StandartInstruction {
 
 	/**
 	 * Returns the value of the '<em><b>Index</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.Integer}.
+	 * The list contents are of type {@link java.math.BigDecimal}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Index</em>' attribute list isn't clear,
@@ -116,6 +118,6 @@ public interface ExtractValue extends StandartInstruction {
 	 * @model unique="false"
 	 * @generated
 	 */
-	EList<Integer> getIndex();
+	EList<BigDecimal> getIndex();
 
 } // ExtractValue

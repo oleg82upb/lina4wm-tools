@@ -8,6 +8,8 @@ import de.upb.llvm_parser.llvm.TypeList;
 import de.upb.llvm_parser.llvm.TypeUse;
 import de.upb.llvm_parser.llvm.Value;
 
+import java.math.BigDecimal;
+
 /**
  * A sample validator interface for {@link de.upb.llvm_parser.llvm.Load}.
  * This doesn't really do anything, and it's not a real EMF artifact.
@@ -21,5 +23,5 @@ public interface LoadValidator {
 	boolean validateTypes(TypeList value);
 	boolean validateAdress(Value value);
 	boolean validateOrdering(String value);
-	boolean validateIndex(int value);
+	boolean validateIndex(BigDecimal value);
 }

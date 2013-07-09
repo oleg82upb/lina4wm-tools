@@ -101,6 +101,8 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVISIBILITYAccess().getAlternatives(), "rule__VISIBILITY__Alternatives");
 					put(grammarAccess.getLINKAGEAccess().getAlternatives(), "rule__LINKAGE__Alternatives");
 					put(grammarAccess.getALIAS_LINKAGEAccess().getAlternatives(), "rule__ALIAS_LINKAGE__Alternatives");
+					put(grammarAccess.getNUMBERAccess().getGroup(), "rule__NUMBER__Group__0");
+					put(grammarAccess.getNUMBERAccess().getGroup_2(), "rule__NUMBER__Group_2__0");
 					put(grammarAccess.getID_FQNAccess().getGroup(), "rule__ID_FQN__Group__0");
 					put(grammarAccess.getID_FQNAccess().getGroup_1(), "rule__ID_FQN__Group_1__0");
 					put(grammarAccess.getAbstractElementAccess().getGroup_0(), "rule__AbstractElement__Group_0__0");

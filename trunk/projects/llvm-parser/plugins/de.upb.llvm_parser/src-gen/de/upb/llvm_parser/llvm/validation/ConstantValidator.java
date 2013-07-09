@@ -4,6 +4,7 @@
  */
 package de.upb.llvm_parser.llvm.validation;
 
+import java.math.BigDecimal;
 
 /**
  * A sample validator interface for {@link de.upb.llvm_parser.llvm.Constant}.
@@ -14,5 +15,5 @@ package de.upb.llvm_parser.llvm.validation;
 public interface ConstantValidator {
 	boolean validate();
 
-	boolean validateValue(int value);
+	boolean validateValue(BigDecimal value);
 }

@@ -2,6 +2,7 @@
  */
 package de.upb.lina.lll.expressions;
 
+import java.math.BigDecimal;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,29 +23,29 @@ package de.upb.lina.lll.expressions;
 public interface NumberValue extends AExpression
 {
   /**
-   * Returns the value of the '<em><b>Num Value</b></em>' attribute.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Num Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Num Value</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Num Value</em>' attribute.
-   * @see #setNumValue(int)
-   * @see de.upb.lina.lll.expressions.ExpressionsPackage#getNumberValue_NumValue()
-   * @model
-   * @generated
-   */
-  int getNumValue();
+	 * @return the value of the '<em>Num Value</em>' attribute.
+	 * @see #setNumValue(BigDecimal)
+	 * @see de.upb.lina.lll.expressions.ExpressionsPackage#getNumberValue_NumValue()
+	 * @model
+	 * @generated
+	 */
+  BigDecimal getNumValue();
 
   /**
-   * Sets the value of the '{@link de.upb.lina.lll.expressions.NumberValue#getNumValue <em>Num Value</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.lina.lll.expressions.NumberValue#getNumValue <em>Num Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Num Value</em>' attribute.
-   * @see #getNumValue()
-   * @generated
-   */
-  void setNumValue(int value);
+	 * @param value the new value of the '<em>Num Value</em>' attribute.
+	 * @see #getNumValue()
+	 * @generated
+	 */
+  void setNumValue(BigDecimal value);
 
 } // NumberValue

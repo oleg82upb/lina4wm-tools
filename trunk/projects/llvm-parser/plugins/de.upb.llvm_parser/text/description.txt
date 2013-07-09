@@ -63,7 +63,7 @@ Package llvm <http://www.upb.de/llvm_parser/llvm>
   Class Aggregate_Types
 
   Class Constant -> Value
-    Attribute value : EInt
+    Attribute value : EBigDecimal
 
   Class NonConstantValue -> Value
     Attribute pointer : EString
@@ -141,14 +141,14 @@ Package llvm <http://www.upb.de/llvm_parser/llvm>
     Reference array : Array
     Reference struct : Structure
     Reference value : Value
-    Attribute index : EInt<<0..*>>
+    Attribute index : EBigDecimal<<0..*>>
 
   Class InsertValue -> StandartInstruction
     Reference struct : Structure
     Reference value : Value
     Reference inserttype : TypeUse
     Reference insertvalue : Value
-    Attribute index : EInt<<0..*>>
+    Attribute index : EBigDecimal<<0..*>>
 
   Class Fence -> StandartInstruction
     Attribute ordering : EString
@@ -175,7 +175,7 @@ Package llvm <http://www.upb.de/llvm_parser/llvm>
     Reference types : TypeList
     Reference adress : Value
     Attribute ordering : EString
-    Attribute index : EInt
+    Attribute index : EBigDecimal
 
   Class Store -> StandartInstruction
     Reference newtype : TypeUse
@@ -184,7 +184,7 @@ Package llvm <http://www.upb.de/llvm_parser/llvm>
     Reference adresstype : TypeUse
     Reference adress : Value
     Attribute ordering : EString
-    Attribute index : EInt
+    Attribute index : EBigDecimal
 
   Class Call -> StandartInstruction
     Reference adresstype : TypeUse

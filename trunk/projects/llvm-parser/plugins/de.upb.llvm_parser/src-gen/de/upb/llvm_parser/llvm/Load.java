@@ -2,6 +2,7 @@
  */
 package de.upb.llvm_parser.llvm;
 
+import java.math.BigDecimal;
 
 /**
  * <!-- begin-user-doc -->
@@ -137,12 +138,12 @@ public interface Load extends StandartInstruction {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Index</em>' attribute.
-	 * @see #setIndex(int)
+	 * @see #setIndex(BigDecimal)
 	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLoad_Index()
 	 * @model
 	 * @generated
 	 */
-	int getIndex();
+	BigDecimal getIndex();
 
 	/**
 	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Load#getIndex <em>Index</em>}' attribute.
@@ -152,6 +153,6 @@ public interface Load extends StandartInstruction {
 	 * @see #getIndex()
 	 * @generated
 	 */
-	void setIndex(int value);
+	void setIndex(BigDecimal value);
 
 } // Load
