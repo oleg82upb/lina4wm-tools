@@ -5,8 +5,6 @@ package de.upb.lina.lll.expressions.impl;
 import de.upb.lina.lll.expressions.ExpressionsPackage;
 import de.upb.lina.lll.expressions.NumberValue;
 
-import java.math.BigDecimal;
-
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -36,7 +34,7 @@ public class NumberValueImpl extends AExpressionImpl implements NumberValue
    * @generated
    * @ordered
    */
-  protected static final BigDecimal NUM_VALUE_EDEFAULT = null;
+  protected static final int NUM_VALUE_EDEFAULT = 0;
 
   /**
    * The cached value of the '{@link #getNumValue() <em>Num Value</em>}' attribute.
@@ -46,7 +44,7 @@ public class NumberValueImpl extends AExpressionImpl implements NumberValue
    * @generated
    * @ordered
    */
-  protected BigDecimal numValue = NUM_VALUE_EDEFAULT;
+  protected int numValue = NUM_VALUE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -74,7 +72,7 @@ public class NumberValueImpl extends AExpressionImpl implements NumberValue
    * <!-- end-user-doc -->
    * @generated
    */
-  public BigDecimal getNumValue()
+  public int getNumValue()
   {
     return numValue;
   }
@@ -84,9 +82,9 @@ public class NumberValueImpl extends AExpressionImpl implements NumberValue
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setNumValue(BigDecimal newNumValue)
+  public void setNumValue(int newNumValue)
   {
-    BigDecimal oldNumValue = numValue;
+    int oldNumValue = numValue;
     numValue = newNumValue;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.NUMBER_VALUE__NUM_VALUE, oldNumValue, numValue));
@@ -119,7 +117,7 @@ public class NumberValueImpl extends AExpressionImpl implements NumberValue
     switch (featureID)
     {
       case ExpressionsPackage.NUMBER_VALUE__NUM_VALUE:
-        setNumValue((BigDecimal)newValue);
+        setNumValue((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -153,7 +151,7 @@ public class NumberValueImpl extends AExpressionImpl implements NumberValue
     switch (featureID)
     {
       case ExpressionsPackage.NUMBER_VALUE__NUM_VALUE:
-        return NUM_VALUE_EDEFAULT == null ? numValue != null : !NUM_VALUE_EDEFAULT.equals(numValue);
+        return numValue != NUM_VALUE_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }

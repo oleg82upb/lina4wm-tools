@@ -2,7 +2,6 @@
  */
 package de.upb.lina.lll.expressions;
 
-import java.math.BigDecimal;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,12 +30,12 @@ public interface NumberValue extends AExpression
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Num Value</em>' attribute.
-   * @see #setNumValue(BigDecimal)
+   * @see #setNumValue(int)
    * @see de.upb.lina.lll.expressions.ExpressionsPackage#getNumberValue_NumValue()
    * @model
    * @generated
    */
-  BigDecimal getNumValue();
+  int getNumValue();
 
   /**
    * Sets the value of the '{@link de.upb.lina.lll.expressions.NumberValue#getNumValue <em>Num Value</em>}' attribute.
@@ -46,6 +45,6 @@ public interface NumberValue extends AExpression
    * @see #getNumValue()
    * @generated
    */
-  void setNumValue(BigDecimal value);
+  void setNumValue(int value);
 
 } // NumberValue

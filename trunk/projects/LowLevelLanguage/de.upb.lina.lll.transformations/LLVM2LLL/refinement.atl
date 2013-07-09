@@ -2,13 +2,15 @@
 -- @nsURI EXPR=http://www.upb.de/lina/lll/Expressions
 -- @atlcompiler atl2010
 
+
 module refinement;
 create OUT: MM refining IN: MM;
 
 rule BranchCompare {
 	from
 		b: MM!LocalComputation (
-			b.expression.oclIsTypeOf(MM!"expressions::Equal").debug(b.expression.oclType()) and if thisModule.CompInstructions(b).at(thisModule.CompInstructions(b).indexOf(b) + 1).oclIsTypeOf(MM!ConditionalBranch) then
+			b.expression.oclIsTypeOf(MM!"expressions::Equal").debug(b.expression.oclType()) and if thisModule.CompInstructions(b).at(thisModule.CompInstructions(b).indexOf(b) + 1).
+					oclIsTypeOf(MM!ConditionalBranch) then
 			if thisModule.CompInstructions(b).at(thisModule.CompInstructions(b).indexOf(b) + 1).condition.oclIsUndefined() then
 				true
 			else
@@ -18,10 +20,6 @@ rule BranchCompare {
 			false
 		endif
 		)
---@deprecated?
---	using {
---		instructions: OrderedSet(MM!Instruction) = b.refImmediateComposite().instructions;
---	}
 	to
 		c: MM!LocalComputation (
 			expression <- thisModule.CompInstructions(b).at(thisModule.CompInstructions(b).indexOf(b) + 1).refSetValue('condition', b.expression).condition
@@ -33,7 +31,8 @@ rule CompareDrop {
 	-- 2nd Iteration
 	from
 		b: MM!LocalComputation (
-			b.expression.oclIsTypeOf(MM!"expressions::Equal") and if thisModule.CompInstructions(b).at(thisModule.CompInstructions(b).indexOf(b) + 1).oclIsTypeOf(MM!ConditionalBranch) then
+			b.expression.oclIsTypeOf(MM!"expressions::Equal") and if thisModule.CompInstructions(b).at(thisModule.CompInstructions(b).indexOf(b) + 1).
+					oclIsTypeOf(MM!ConditionalBranch) then
 			if not thisModule.CompInstructions(b).at(thisModule.CompInstructions(b).indexOf(b) + 1).condition.oclIsUndefined() then
 				false
 			else
@@ -43,22 +42,24 @@ rule CompareDrop {
 			false
 		endif
 		)
---@deprecated?
---	using {
---		instructions: OrderedSet(MM!Instruction) = b.refImmediateComposite().instructions;
---	}
 	to
-		drop
+		
 }
-helper def : CompInstructions(b:MM!Instruction) : OrderedSet(MM!Instruction) = b.refImmediateComposite().instructions;
 
+helper def: CompInstructions(b: MM!Instruction): OrderedSet(MM!Instruction) =
+	b.refImmediateComposite().instructions;
+
+-- LAZY RULES ARE NOT SUPPORTED FOR REFINING MODE ...  ATL SDK - ATLAS Transformation Language SDK
+		-- Version: 3.3.1.v201209061455	org.eclipse.m2m.atl.sdk.feature.group	Eclipse Modeling Project
 --lazy rule LazyDelete {
 --	from
 --		input: OclAny
 --	to
+--		drop
 --
-
 --}
+
+-- Only takes the actual and the next Instruction to combine eventually
 --rule ArithmeticCompostion{
 --	from
 --		b: MM!LocalComputation( instructions.at(instructions.indexOf(b)+1).oclIsTypeOf(MM!LocalComputation)
@@ -68,10 +69,10 @@ helper def : CompInstructions(b:MM!Instruction) : OrderedSet(MM!Instruction) = b
 --	}
 --	to	c: MM!LocalComputation(expression <- )
 --
-
 --}
+
 -- Select Branch that is only target of a jump once.
---@deprecated?
+-- @deprecated?
 --rule DeleteBranch {
 --	from
 --		b: MM!Goto (
@@ -83,7 +84,8 @@ helper def : CompInstructions(b:MM!Instruction) : OrderedSet(MM!Instruction) = b
 --		targetsC: Set(MM!Instruction) = MM!ConditionalBranch.allInstances() -> select(cb2 | cb2.target.oclIsTypeOf(MM!Goto)) -> collect(i | i.target.instruction);
 --	}
 --	to
---		
+--	(HOW TO DROP THE LABEL?)
+
 --}
 --rule DeleteBranch {
 --	from
@@ -91,16 +93,23 @@ helper def : CompInstructions(b:MM!Instruction) : OrderedSet(MM!Instruction) = b
 --			thisModule.iTargetA().count(b) + thisModule.iTargetB().count(b) + thisModule.iTargetC().count(b) = 1
 --		)
 --	to
---		
---}
+--
 
-rule DeleteNoUse{
+--}
+rule DeleteNoUse {
 	from
-		ex : MM!"expressions::Equal" (ex.refImmediateComposite().debug('BATZ').oclIsTypeOf(MM!Program))
+		ex: MM!"expressions::Equal" (
+			ex.refImmediateComposite().debug('BATZ').oclIsTypeOf(MM!Program)
+		)
 	to
-		drop
+		
 }
 
-helper def : iTargetA() : Set(MM!Instruction) = MM!Goto.allInstances() -> select(goto | goto.target.instruction.oclIsTypeOf(MM!Goto)) -> collect(i | i.target.instruction);
-helper def : iTargetB() : Set(MM!Instruction) = MM!ConditionalBranch.allInstances() -> select(cb1 | cb1.target.instruction.oclIsTypeOf(MM!Goto)) -> collect(i | i.target.instruction);
-helper def : iTargetC() : Set(MM!Instruction) = MM!ConditionalBranch.allInstances() -> select(cb2 | cb2.elseTarget.instruction.oclIsTypeOf(MM!Goto)) -> collect(i | i.target.instruction);
+helper def: iTargetA(): Set(MM!Instruction) =
+	MM!Goto.allInstances() -> select(goto | goto.target.instruction.oclIsTypeOf(MM!Goto)) -> collect(i | i.target.instruction);
+
+helper def: iTargetB(): Set(MM!Instruction) =
+	MM!ConditionalBranch.allInstances() -> select(cb1 | cb1.target.instruction.oclIsTypeOf(MM!Goto)) -> collect(i | i.target.instruction);
+
+helper def: iTargetC(): Set(MM!Instruction) =
+	MM!ConditionalBranch.allInstances() -> select(cb2 | cb2.elseTarget.instruction.oclIsTypeOf(MM!Goto)) -> collect(i | i.target.instruction);

@@ -72,6 +72,29 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.lina.lll.expressions.Expression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExpressionItemProvider expressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.lina.lll.expressions.Expression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExpressionAdapter() {
+		if (expressionItemProvider == null) {
+			expressionItemProvider = new ExpressionItemProvider(this);
+		}
+
+		return expressionItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link de.upb.lina.lll.expressions.LExpression} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -791,6 +814,7 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	 * @generated
 	 */
 	public void dispose() {
+		if (expressionItemProvider != null) expressionItemProvider.dispose();
 		if (lExpressionItemProvider != null) lExpressionItemProvider.dispose();
 		if (cExpressionItemProvider != null) cExpressionItemProvider.dispose();
 		if (someValueItemProvider != null) someValueItemProvider.dispose();
