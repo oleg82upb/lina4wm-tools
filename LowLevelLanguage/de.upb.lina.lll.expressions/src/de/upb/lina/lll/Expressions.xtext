@@ -87,7 +87,7 @@ NumberValue:
 	numValue = NUMBER
 	;
 
-NUMBER returns EInt:
+NUMBER returns EBigDecimal:
 	INT ('.' INT)?;
 	
 BooleanValue: 

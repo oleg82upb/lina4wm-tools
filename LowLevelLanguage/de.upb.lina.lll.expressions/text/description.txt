@@ -18,7 +18,7 @@ Package expressions <http://www.upb.de/lina/lll/Expressions>
   Class AExpression -> Expression, SomeValue
 
   Class NumberValue -> AExpression
-    Attribute numValue : EInt
+    Attribute numValue : EBigDecimal
 
   Class BooleanValue -> LExpression, SomeValue
     Attribute value : EBoolean

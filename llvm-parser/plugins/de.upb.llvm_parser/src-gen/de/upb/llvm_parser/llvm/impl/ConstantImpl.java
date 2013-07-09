@@ -5,6 +5,8 @@ package de.upb.llvm_parser.llvm.impl;
 import de.upb.llvm_parser.llvm.Constant;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
+import java.math.BigDecimal;
+
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -33,7 +35,7 @@ public class ConstantImpl extends ValueImpl implements Constant {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int VALUE_EDEFAULT = 0;
+	protected static final BigDecimal VALUE_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -43,7 +45,7 @@ public class ConstantImpl extends ValueImpl implements Constant {
 	 * @generated
 	 * @ordered
 	 */
-	protected int value = VALUE_EDEFAULT;
+	protected BigDecimal value = VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,7 +71,7 @@ public class ConstantImpl extends ValueImpl implements Constant {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getValue() {
+	public BigDecimal getValue() {
 		return value;
 	}
 
@@ -78,8 +80,8 @@ public class ConstantImpl extends ValueImpl implements Constant {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(int newValue) {
-		int oldValue = value;
+	public void setValue(BigDecimal newValue) {
+		BigDecimal oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CONSTANT__VALUE, oldValue, value));
@@ -108,7 +110,7 @@ public class ConstantImpl extends ValueImpl implements Constant {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case LlvmPackage.CONSTANT__VALUE:
-				setValue((Integer)newValue);
+				setValue((BigDecimal)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -138,7 +140,7 @@ public class ConstantImpl extends ValueImpl implements Constant {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case LlvmPackage.CONSTANT__VALUE:
-				return value != VALUE_EDEFAULT;
+				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
 	}

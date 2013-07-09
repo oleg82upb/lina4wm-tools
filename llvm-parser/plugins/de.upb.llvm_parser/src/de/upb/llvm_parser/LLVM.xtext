@@ -1,13 +1,13 @@
 grammar de.upb.llvm_parser.LLVM with org.eclipse.xtext.common.Terminals
 
-import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+import "http://www.eclipse.org/emf/2002/Ecore"
 generate llvm "http://www.upb.de/llvm_parser/llvm"
 
 LLVM:
 	elements+=AbstractElement*;
 
-terminal INT returns ecore::EInt:
-	'-'? ('0'..'9')+;
+NUMBER returns EBigDecimal:
+	'-'? INT ('.' INT)?;
 
 terminal VALID_ID:
 	((('%' | '@') '.'*
@@ -102,16 +102,16 @@ PredefinedType:
 	PrimitiveType | INT_TYPE | FloatingPoint_Type;
 
 Vector:
-	'<' INT 'x' type=TypeUse '>';
+	'<' NUMBER 'x' type=TypeUse '>';
 
 Array:
-	{Array} ('[' INT 'x' type=TypeUse ']' | '[]' | '[' ']') POINTER?;
+	{Array} ('[' NUMBER 'x' type=TypeUse ']' | '[]' | '[' ']') POINTER?;
 
 Aggregate_Types:
 	Structure | Array | Vector;
 
 Constant:
-	value=INT;
+	value=NUMBER;
 
 NonConstantValue:
 	name=VALID_ID (pointer=POINTER)?;
@@ -173,15 +173,15 @@ Cast:
 	operation = Cast_OP (('(' from=(TypeUse|Aggregate_Types) value=Value 'to' to=TypeUse ')') | (from=(TypeUse|Aggregate_Types) value=Value 'to' to=TypeUse));
 
 MetadataValue:
-	(('!' INT) | ('!{' ID_FQN '}') | ('!' ID_FQN))
+	(('!' NUMBER) | ('!{' ID_FQN '}') | ('!' ID_FQN))
 	('='
-	(('!' INT) |
+	(('!' NUMBER) |
 	('!{' ID_FQN '}') |
 	('!' ID_FQN) |
-	'metadata' (('!' '{' | '!{') (('metadata' '!' STRING (',' (('metadata' '!' INT)|'null'))?)|(INT_TYPE INT ',' INT_TYPE INT)) '}')?))?;
+	'metadata' (('!' '{' | '!{') (('metadata' '!' STRING (',' (('metadata' '!' NUMBER)|'null'))?)|(INT_TYPE NUMBER ',' INT_TYPE NUMBER)) '}')?))?;
 
 ALIGNMENT:
-	'align' INT //must be a power of 2
+	'align' NUMBER //must be a power of 2
 ;
 
 GetElementPtr:
@@ -194,10 +194,10 @@ NestedGetElementPtr:
 ;
 	
 ExtractValue:
-	'extractvalue' (array=Array | struct=Structure) value=Value (',' index+=INT)+;
+	'extractvalue' (array=Array | struct=Structure) value=Value (',' index+=NUMBER)+;
 
 InsertValue:
-	'insertvalue' struct=Structure value=Value ',' inserttype=TypeUse insertvalue=Value (',' index+=INT)+;
+	'insertvalue' struct=Structure value=Value ',' inserttype=TypeUse insertvalue=Value (',' index+=NUMBER)+;
 
 Fence:
 	'fence' 'singlethread'? ordering=ATOMIC_ORDERING;
@@ -215,7 +215,7 @@ Load:
 	'load' 'volatile'? adresstype=TypeUse (types=TypeList)? adress=Value (',' ((ALIGNMENT) | (MetadataValue)+))* |
 	'load' 'atomic' 'volatile'? adresstype=TypeUse adress=Value (types=TypeList)? 'singlethread'?
 	ordering=ATOMIC_ORDERING (',' 'align'
-	index=INT)?;
+	index=NUMBER)?;
 
 Store:
 	'store' 'volatile'? newtype=(TypeUse) (types+=TypeList)? (newvalue=Value) ','
@@ -225,11 +225,11 @@ Store:
 	'store' 'atomic' 'volatile'? newtype=TypeUse (types+=TypeList)? newvalue=Value ',' adresstype=TypeUse
 	(types+=TypeList)? adress=Value 'singlethread'?
 	ordering=ATOMIC_ORDERING (','
-	'align' index=INT)?;
+	'align' index=NUMBER)?;
 
 Call:
 	'tail'? 'call' CallingConv? RETURN_ATTRIBUTES? adresstype=TypeUse ((adress=Value) | 'asm' 'sideeffect'? STRING ','
-	STRING) pList=ParameterList FUNCTION_ATTRIBUTES* (',' '!srcloc' '!' INT)*;
+	STRING) pList=ParameterList FUNCTION_ATTRIBUTES* (',' '!srcloc' '!' NUMBER)*;
 
 Alloc:
 	'alloca' ((type=TypeUse typelist=TypeList?)) (',' numelementstype=TypeUse numelementsvalue=Value)? (',' ALIGNMENT)?;
@@ -285,7 +285,7 @@ Unreachable:
 	{Unreachable} 'unreachable';
 
 Return:
-	{Return} 'ret' 'void' (',' '!dbg' '!' INT)? | 'ret' returntype=TypeUse returnvalue=Value (',' '!dbg' '!' INT)?;
+	{Return} 'ret' 'void' (',' '!dbg' '!' NUMBER)? | 'ret' returntype=TypeUse returnvalue=Value (',' '!dbg' '!' NUMBER)?;
 
 Branch:
 	('br' 'label' destination=Value) | 
@@ -302,11 +302,11 @@ RETURN_ATTRIBUTES:
 
 CallingConv:
 	'ccc' | 'fastcc' | 'coldcc' | 'x86_stdcallcc' | 'x86_fastcallcc' | 'x86_thiscallcc' | 'arm_apcscc' | 'arm_aapcscc' |
-	'arm_aapcs_vfpcc' | 'msp430_intrcc' | 'ptx_kernel' | 'ptx_device' | 'spir_func' | 'spir_kernel' | 'cc' '<' INT '>'
-	INT;
+	'arm_aapcs_vfpcc' | 'msp430_intrcc' | 'ptx_kernel' | 'ptx_device' | 'spir_func' | 'spir_kernel' | 'cc' '<' NUMBER '>'
+	NUMBER;
 
 FUNCTION_ATTRIBUTES:
-	'address_safety' | 'alignstack' '(' '<' INT '>' ')' | 'alwaysinline' | 'nonlazybind' | 'inlinehint' | 'naked' |
+	'address_safety' | 'alignstack' '(' '<' NUMBER '>' ')' | 'alwaysinline' | 'nonlazybind' | 'inlinehint' | 'naked' |
 	'noimplicitfloat' | 'noinline' | 'noredzone' | 'noreturn' | 'nounwind' | 'optsize' | 'readnone' | 'readonly' |
 	'returns_twice' | 'ssp' | 'sspreq' | 'uwtable';
 

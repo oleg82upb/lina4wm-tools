@@ -74,7 +74,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Aggregate_Types"/>
   <eClassifiers xsi:type="ecore:EClass" name="Constant" eSuperTypes="#//Value">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NonConstantValue" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="pointer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -183,7 +183,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" unique="false" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InsertValue" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="struct" eType="#//Structure"
@@ -195,7 +195,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="insertvalue" eType="#//Value"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" unique="false" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Fence" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ordering" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -235,7 +235,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="adress" eType="#//Value"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ordering" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Store" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="newtype" eType="#//TypeUse"
@@ -249,7 +249,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="adress" eType="#//Value"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ordering" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Call" eSuperTypes="#//StandartInstruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="adresstype" eType="#//TypeUse"

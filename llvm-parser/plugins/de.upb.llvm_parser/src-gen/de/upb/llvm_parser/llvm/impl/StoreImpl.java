@@ -8,6 +8,8 @@ import de.upb.llvm_parser.llvm.TypeList;
 import de.upb.llvm_parser.llvm.TypeUse;
 import de.upb.llvm_parser.llvm.Value;
 
+import java.math.BigDecimal;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -121,7 +123,7 @@ public class StoreImpl extends StandartInstructionImpl implements Store {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int INDEX_EDEFAULT = 0;
+	protected static final BigDecimal INDEX_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute.
@@ -131,7 +133,7 @@ public class StoreImpl extends StandartInstructionImpl implements Store {
 	 * @generated
 	 * @ordered
 	 */
-	protected int index = INDEX_EDEFAULT;
+	protected BigDecimal index = INDEX_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -362,7 +364,7 @@ public class StoreImpl extends StandartInstructionImpl implements Store {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getIndex() {
+	public BigDecimal getIndex() {
 		return index;
 	}
 
@@ -371,8 +373,8 @@ public class StoreImpl extends StandartInstructionImpl implements Store {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIndex(int newIndex) {
-		int oldIndex = index;
+	public void setIndex(BigDecimal newIndex) {
+		BigDecimal oldIndex = index;
 		index = newIndex;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.STORE__INDEX, oldIndex, index));
@@ -455,7 +457,7 @@ public class StoreImpl extends StandartInstructionImpl implements Store {
 				setOrdering((String)newValue);
 				return;
 			case LlvmPackage.STORE__INDEX:
-				setIndex((Integer)newValue);
+				setIndex((BigDecimal)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -515,7 +517,7 @@ public class StoreImpl extends StandartInstructionImpl implements Store {
 			case LlvmPackage.STORE__ORDERING:
 				return ORDERING_EDEFAULT == null ? ordering != null : !ORDERING_EDEFAULT.equals(ordering);
 			case LlvmPackage.STORE__INDEX:
-				return index != INDEX_EDEFAULT;
+				return INDEX_EDEFAULT == null ? index != null : !INDEX_EDEFAULT.equals(index);
 		}
 		return super.eIsSet(featureID);
 	}

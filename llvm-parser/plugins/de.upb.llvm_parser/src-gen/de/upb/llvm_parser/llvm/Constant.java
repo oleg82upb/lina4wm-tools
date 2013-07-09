@@ -2,6 +2,7 @@
  */
 package de.upb.llvm_parser.llvm;
 
+import java.math.BigDecimal;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,12 +30,12 @@ public interface Constant extends Value {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(int)
+	 * @see #setValue(BigDecimal)
 	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getConstant_Value()
 	 * @model
 	 * @generated
 	 */
-	int getValue();
+	BigDecimal getValue();
 
 	/**
 	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Constant#getValue <em>Value</em>}' attribute.
@@ -44,6 +45,6 @@ public interface Constant extends Value {
 	 * @see #getValue()
 	 * @generated
 	 */
-	void setValue(int value);
+	void setValue(BigDecimal value);
 
 } // Constant

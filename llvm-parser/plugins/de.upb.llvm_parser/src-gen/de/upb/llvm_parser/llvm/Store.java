@@ -2,6 +2,8 @@
  */
 package de.upb.llvm_parser.llvm;
 
+import java.math.BigDecimal;
+
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -182,12 +184,12 @@ public interface Store extends StandartInstruction {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Index</em>' attribute.
-	 * @see #setIndex(int)
+	 * @see #setIndex(BigDecimal)
 	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getStore_Index()
 	 * @model
 	 * @generated
 	 */
-	int getIndex();
+	BigDecimal getIndex();
 
 	/**
 	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Store#getIndex <em>Index</em>}' attribute.
@@ -197,6 +199,6 @@ public interface Store extends StandartInstruction {
 	 * @see #getIndex()
 	 * @generated
 	 */
-	void setIndex(int value);
+	void setIndex(BigDecimal value);
 
 } // Store

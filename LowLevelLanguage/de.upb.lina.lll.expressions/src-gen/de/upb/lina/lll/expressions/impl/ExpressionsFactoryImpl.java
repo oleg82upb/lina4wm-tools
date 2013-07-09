@@ -21,410 +21,406 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsFactory
 {
   /**
-   * Creates the default factory implementation.
-   * <!-- begin-user-doc -->
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public static ExpressionsFactory init()
   {
-    try
-    {
-      ExpressionsFactory theExpressionsFactory = (ExpressionsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.upb.de/lina/lll/Expressions"); 
-      if (theExpressionsFactory != null)
-      {
-        return theExpressionsFactory;
-      }
-    }
-    catch (Exception exception)
-    {
-      EcorePlugin.INSTANCE.log(exception);
-    }
-    return new ExpressionsFactoryImpl();
-  }
+		try {
+			ExpressionsFactory theExpressionsFactory = (ExpressionsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.upb.de/lina/lll/Expressions"); 
+			if (theExpressionsFactory != null) {
+				return theExpressionsFactory;
+			}
+		}
+		catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new ExpressionsFactoryImpl();
+	}
 
   /**
-   * Creates an instance of the factory.
-   * <!-- begin-user-doc -->
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public ExpressionsFactoryImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public EObject create(EClass eClass)
   {
-    switch (eClass.getClassifierID())
-    {
-      case ExpressionsPackage.EXPRESSION: return createExpression();
-      case ExpressionsPackage.LEXPRESSION: return createLExpression();
-      case ExpressionsPackage.CEXPRESSION: return createCExpression();
-      case ExpressionsPackage.SOME_VALUE: return createSomeValue();
-      case ExpressionsPackage.AEXPRESSION: return createAExpression();
-      case ExpressionsPackage.NUMBER_VALUE: return createNumberValue();
-      case ExpressionsPackage.BOOLEAN_VALUE: return createBooleanValue();
-      case ExpressionsPackage.STRING_VALUE: return createStringValue();
-      case ExpressionsPackage.VARIABLE: return createVariable();
-      case ExpressionsPackage.EQUIVALENT: return createEquivalent();
-      case ExpressionsPackage.IMPLY: return createImply();
-      case ExpressionsPackage.OR: return createOr();
-      case ExpressionsPackage.XOR: return createXor();
-      case ExpressionsPackage.AND: return createAnd();
-      case ExpressionsPackage.NOT: return createNot();
-      case ExpressionsPackage.LESS_OR_EQUAL: return createLessOrEqual();
-      case ExpressionsPackage.LESS: return createLess();
-      case ExpressionsPackage.GREATER_OR_EQUAL: return createGreaterOrEqual();
-      case ExpressionsPackage.GREATER: return createGreater();
-      case ExpressionsPackage.EQUAL: return createEqual();
-      case ExpressionsPackage.UNEQUAL: return createUnequal();
-      case ExpressionsPackage.APPROX: return createApprox();
-      case ExpressionsPackage.PLUS: return createPlus();
-      case ExpressionsPackage.MINUS: return createMinus();
-      case ExpressionsPackage.MULTI: return createMulti();
-      case ExpressionsPackage.DIV: return createDiv();
-      case ExpressionsPackage.MOD: return createMod();
-      case ExpressionsPackage.POW: return createPow();
-      default:
-        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-    }
-  }
+		switch (eClass.getClassifierID()) {
+			case ExpressionsPackage.EXPRESSION: return createExpression();
+			case ExpressionsPackage.LEXPRESSION: return createLExpression();
+			case ExpressionsPackage.CEXPRESSION: return createCExpression();
+			case ExpressionsPackage.SOME_VALUE: return createSomeValue();
+			case ExpressionsPackage.AEXPRESSION: return createAExpression();
+			case ExpressionsPackage.NUMBER_VALUE: return createNumberValue();
+			case ExpressionsPackage.BOOLEAN_VALUE: return createBooleanValue();
+			case ExpressionsPackage.STRING_VALUE: return createStringValue();
+			case ExpressionsPackage.VARIABLE: return createVariable();
+			case ExpressionsPackage.EQUIVALENT: return createEquivalent();
+			case ExpressionsPackage.IMPLY: return createImply();
+			case ExpressionsPackage.OR: return createOr();
+			case ExpressionsPackage.XOR: return createXor();
+			case ExpressionsPackage.AND: return createAnd();
+			case ExpressionsPackage.NOT: return createNot();
+			case ExpressionsPackage.LESS_OR_EQUAL: return createLessOrEqual();
+			case ExpressionsPackage.LESS: return createLess();
+			case ExpressionsPackage.GREATER_OR_EQUAL: return createGreaterOrEqual();
+			case ExpressionsPackage.GREATER: return createGreater();
+			case ExpressionsPackage.EQUAL: return createEqual();
+			case ExpressionsPackage.UNEQUAL: return createUnequal();
+			case ExpressionsPackage.APPROX: return createApprox();
+			case ExpressionsPackage.PLUS: return createPlus();
+			case ExpressionsPackage.MINUS: return createMinus();
+			case ExpressionsPackage.MULTI: return createMulti();
+			case ExpressionsPackage.DIV: return createDiv();
+			case ExpressionsPackage.MOD: return createMod();
+			case ExpressionsPackage.POW: return createPow();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Expression createExpression()
   {
-    ExpressionImpl expression = new ExpressionImpl();
-    return expression;
-  }
+		ExpressionImpl expression = new ExpressionImpl();
+		return expression;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public LExpression createLExpression()
   {
-    LExpressionImpl lExpression = new LExpressionImpl();
-    return lExpression;
-  }
+		LExpressionImpl lExpression = new LExpressionImpl();
+		return lExpression;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public CExpression createCExpression()
   {
-    CExpressionImpl cExpression = new CExpressionImpl();
-    return cExpression;
-  }
+		CExpressionImpl cExpression = new CExpressionImpl();
+		return cExpression;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public SomeValue createSomeValue()
   {
-    SomeValueImpl someValue = new SomeValueImpl();
-    return someValue;
-  }
+		SomeValueImpl someValue = new SomeValueImpl();
+		return someValue;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public AExpression createAExpression()
   {
-    AExpressionImpl aExpression = new AExpressionImpl();
-    return aExpression;
-  }
+		AExpressionImpl aExpression = new AExpressionImpl();
+		return aExpression;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public NumberValue createNumberValue()
   {
-    NumberValueImpl numberValue = new NumberValueImpl();
-    return numberValue;
-  }
+		NumberValueImpl numberValue = new NumberValueImpl();
+		return numberValue;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public BooleanValue createBooleanValue()
   {
-    BooleanValueImpl booleanValue = new BooleanValueImpl();
-    return booleanValue;
-  }
+		BooleanValueImpl booleanValue = new BooleanValueImpl();
+		return booleanValue;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public StringValue createStringValue()
   {
-    StringValueImpl stringValue = new StringValueImpl();
-    return stringValue;
-  }
+		StringValueImpl stringValue = new StringValueImpl();
+		return stringValue;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Variable createVariable()
   {
-    VariableImpl variable = new VariableImpl();
-    return variable;
-  }
+		VariableImpl variable = new VariableImpl();
+		return variable;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Equivalent createEquivalent()
   {
-    EquivalentImpl equivalent = new EquivalentImpl();
-    return equivalent;
-  }
+		EquivalentImpl equivalent = new EquivalentImpl();
+		return equivalent;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Imply createImply()
   {
-    ImplyImpl imply = new ImplyImpl();
-    return imply;
-  }
+		ImplyImpl imply = new ImplyImpl();
+		return imply;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Or createOr()
   {
-    OrImpl or = new OrImpl();
-    return or;
-  }
+		OrImpl or = new OrImpl();
+		return or;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Xor createXor()
   {
-    XorImpl xor = new XorImpl();
-    return xor;
-  }
+		XorImpl xor = new XorImpl();
+		return xor;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public And createAnd()
   {
-    AndImpl and = new AndImpl();
-    return and;
-  }
+		AndImpl and = new AndImpl();
+		return and;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Not createNot()
   {
-    NotImpl not = new NotImpl();
-    return not;
-  }
+		NotImpl not = new NotImpl();
+		return not;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public LessOrEqual createLessOrEqual()
   {
-    LessOrEqualImpl lessOrEqual = new LessOrEqualImpl();
-    return lessOrEqual;
-  }
+		LessOrEqualImpl lessOrEqual = new LessOrEqualImpl();
+		return lessOrEqual;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Less createLess()
   {
-    LessImpl less = new LessImpl();
-    return less;
-  }
+		LessImpl less = new LessImpl();
+		return less;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public GreaterOrEqual createGreaterOrEqual()
   {
-    GreaterOrEqualImpl greaterOrEqual = new GreaterOrEqualImpl();
-    return greaterOrEqual;
-  }
+		GreaterOrEqualImpl greaterOrEqual = new GreaterOrEqualImpl();
+		return greaterOrEqual;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Greater createGreater()
   {
-    GreaterImpl greater = new GreaterImpl();
-    return greater;
-  }
+		GreaterImpl greater = new GreaterImpl();
+		return greater;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Equal createEqual()
   {
-    EqualImpl equal = new EqualImpl();
-    return equal;
-  }
+		EqualImpl equal = new EqualImpl();
+		return equal;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Unequal createUnequal()
   {
-    UnequalImpl unequal = new UnequalImpl();
-    return unequal;
-  }
+		UnequalImpl unequal = new UnequalImpl();
+		return unequal;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Approx createApprox()
   {
-    ApproxImpl approx = new ApproxImpl();
-    return approx;
-  }
+		ApproxImpl approx = new ApproxImpl();
+		return approx;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Plus createPlus()
   {
-    PlusImpl plus = new PlusImpl();
-    return plus;
-  }
+		PlusImpl plus = new PlusImpl();
+		return plus;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Minus createMinus()
   {
-    MinusImpl minus = new MinusImpl();
-    return minus;
-  }
+		MinusImpl minus = new MinusImpl();
+		return minus;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Multi createMulti()
   {
-    MultiImpl multi = new MultiImpl();
-    return multi;
-  }
+		MultiImpl multi = new MultiImpl();
+		return multi;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Div createDiv()
   {
-    DivImpl div = new DivImpl();
-    return div;
-  }
+		DivImpl div = new DivImpl();
+		return div;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Mod createMod()
   {
-    ModImpl mod = new ModImpl();
-    return mod;
-  }
+		ModImpl mod = new ModImpl();
+		return mod;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Pow createPow()
   {
-    PowImpl pow = new PowImpl();
-    return pow;
-  }
+		PowImpl pow = new PowImpl();
+		return pow;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public ExpressionsPackage getExpressionsPackage()
   {
-    return (ExpressionsPackage)getEPackage();
-  }
+		return (ExpressionsPackage)getEPackage();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @deprecated
-   * @generated
-   */
+	 * @deprecated
+	 * @generated
+	 */
   @Deprecated
   public static ExpressionsPackage getPackage()
   {
-    return ExpressionsPackage.eINSTANCE;
-  }
+		return ExpressionsPackage.eINSTANCE;
+	}
 
 } //ExpressionsFactoryImpl

@@ -8,6 +8,8 @@ import de.upb.llvm_parser.llvm.Structure;
 import de.upb.llvm_parser.llvm.TypeUse;
 import de.upb.llvm_parser.llvm.Value;
 
+import java.math.BigDecimal;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -88,7 +90,7 @@ public class InsertValueImpl extends StandartInstructionImpl implements InsertVa
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Integer> index;
+	protected EList<BigDecimal> index;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -286,9 +288,9 @@ public class InsertValueImpl extends StandartInstructionImpl implements InsertVa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Integer> getIndex() {
+	public EList<BigDecimal> getIndex() {
 		if (index == null) {
-			index = new EDataTypeEList<Integer>(Integer.class, this, LlvmPackage.INSERT_VALUE__INDEX);
+			index = new EDataTypeEList<BigDecimal>(BigDecimal.class, this, LlvmPackage.INSERT_VALUE__INDEX);
 		}
 		return index;
 	}
@@ -358,7 +360,7 @@ public class InsertValueImpl extends StandartInstructionImpl implements InsertVa
 				return;
 			case LlvmPackage.INSERT_VALUE__INDEX:
 				getIndex().clear();
-				getIndex().addAll((Collection<? extends Integer>)newValue);
+				getIndex().addAll((Collection<? extends BigDecimal>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

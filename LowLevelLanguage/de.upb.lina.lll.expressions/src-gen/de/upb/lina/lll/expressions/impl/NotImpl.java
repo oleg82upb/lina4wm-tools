@@ -30,164 +30,157 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 public class NotImpl extends LExpressionImpl implements Not
 {
   /**
-   * The cached value of the '{@link #getNot() <em>Not</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getNot() <em>Not</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNot()
-   * @generated
-   * @ordered
-   */
+	 * @see #getNot()
+	 * @generated
+	 * @ordered
+	 */
   protected LExpression not;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected NotImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return ExpressionsPackage.Literals.NOT;
-  }
+		return ExpressionsPackage.Literals.NOT;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public LExpression getNot()
   {
-    return not;
-  }
+		return not;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public NotificationChain basicSetNot(LExpression newNot, NotificationChain msgs)
   {
-    LExpression oldNot = not;
-    not = newNot;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.NOT__NOT, oldNot, newNot);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		LExpression oldNot = not;
+		not = newNot;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.NOT__NOT, oldNot, newNot);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setNot(LExpression newNot)
   {
-    if (newNot != not)
-    {
-      NotificationChain msgs = null;
-      if (not != null)
-        msgs = ((InternalEObject)not).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.NOT__NOT, null, msgs);
-      if (newNot != null)
-        msgs = ((InternalEObject)newNot).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.NOT__NOT, null, msgs);
-      msgs = basicSetNot(newNot, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.NOT__NOT, newNot, newNot));
-  }
+		if (newNot != not) {
+			NotificationChain msgs = null;
+			if (not != null)
+				msgs = ((InternalEObject)not).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.NOT__NOT, null, msgs);
+			if (newNot != null)
+				msgs = ((InternalEObject)newNot).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.NOT__NOT, null, msgs);
+			msgs = basicSetNot(newNot, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.NOT__NOT, newNot, newNot));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case ExpressionsPackage.NOT__NOT:
-        return basicSetNot(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case ExpressionsPackage.NOT__NOT:
+				return basicSetNot(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case ExpressionsPackage.NOT__NOT:
-        return getNot();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case ExpressionsPackage.NOT__NOT:
+				return getNot();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case ExpressionsPackage.NOT__NOT:
-        setNot((LExpression)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case ExpressionsPackage.NOT__NOT:
+				setNot((LExpression)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case ExpressionsPackage.NOT__NOT:
-        setNot((LExpression)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case ExpressionsPackage.NOT__NOT:
+				setNot((LExpression)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case ExpressionsPackage.NOT__NOT:
-        return not != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case ExpressionsPackage.NOT__NOT:
+				return not != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //NotImpl

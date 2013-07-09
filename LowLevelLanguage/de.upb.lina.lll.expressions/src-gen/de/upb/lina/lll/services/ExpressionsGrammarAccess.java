@@ -720,7 +720,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cINTTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		//NUMBER returns EInt:
+		//NUMBER returns EBigDecimal:
 		//
 		//	INT ("." INT)?;
 		public ParserRule getRule() { return rule; }
@@ -1093,7 +1093,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		return getNumberValueAccess().getRule();
 	}
 
-	//NUMBER returns EInt:
+	//NUMBER returns EBigDecimal:
 	//
 	//	INT ("." INT)?;
 	public NUMBERElements getNUMBERAccess() {

@@ -22,29 +22,29 @@ package de.upb.lina.lll.expressions;
 public interface Not extends LExpression
 {
   /**
-   * Returns the value of the '<em><b>Not</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Not</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Not</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Not</em>' containment reference.
-   * @see #setNot(LExpression)
-   * @see de.upb.lina.lll.expressions.ExpressionsPackage#getNot_Not()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Not</em>' containment reference.
+	 * @see #setNot(LExpression)
+	 * @see de.upb.lina.lll.expressions.ExpressionsPackage#getNot_Not()
+	 * @model containment="true"
+	 * @generated
+	 */
   LExpression getNot();
 
   /**
-   * Sets the value of the '{@link de.upb.lina.lll.expressions.Not#getNot <em>Not</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.lina.lll.expressions.Not#getNot <em>Not</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Not</em>' containment reference.
-   * @see #getNot()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Not</em>' containment reference.
+	 * @see #getNot()
+	 * @generated
+	 */
   void setNot(LExpression value);
 
 } // Not

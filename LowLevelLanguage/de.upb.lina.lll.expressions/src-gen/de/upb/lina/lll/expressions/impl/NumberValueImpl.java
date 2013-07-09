@@ -5,6 +5,8 @@ package de.upb.lina.lll.expressions.impl;
 import de.upb.lina.lll.expressions.ExpressionsPackage;
 import de.upb.lina.lll.expressions.NumberValue;
 
+import java.math.BigDecimal;
+
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -27,150 +29,146 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 public class NumberValueImpl extends AExpressionImpl implements NumberValue
 {
   /**
-   * The default value of the '{@link #getNumValue() <em>Num Value</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getNumValue() <em>Num Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNumValue()
-   * @generated
-   * @ordered
-   */
-  protected static final int NUM_VALUE_EDEFAULT = 0;
+	 * @see #getNumValue()
+	 * @generated
+	 * @ordered
+	 */
+  protected static final BigDecimal NUM_VALUE_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getNumValue() <em>Num Value</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getNumValue() <em>Num Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNumValue()
-   * @generated
-   * @ordered
-   */
-  protected int numValue = NUM_VALUE_EDEFAULT;
+	 * @see #getNumValue()
+	 * @generated
+	 * @ordered
+	 */
+  protected BigDecimal numValue = NUM_VALUE_EDEFAULT;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected NumberValueImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return ExpressionsPackage.Literals.NUMBER_VALUE;
-  }
+		return ExpressionsPackage.Literals.NUMBER_VALUE;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public int getNumValue()
+	 * @generated
+	 */
+  public BigDecimal getNumValue()
   {
-    return numValue;
-  }
+		return numValue;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setNumValue(int newNumValue)
+	 * @generated
+	 */
+  public void setNumValue(BigDecimal newNumValue)
   {
-    int oldNumValue = numValue;
-    numValue = newNumValue;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.NUMBER_VALUE__NUM_VALUE, oldNumValue, numValue));
-  }
+		BigDecimal oldNumValue = numValue;
+		numValue = newNumValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.NUMBER_VALUE__NUM_VALUE, oldNumValue, numValue));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case ExpressionsPackage.NUMBER_VALUE__NUM_VALUE:
-        return getNumValue();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case ExpressionsPackage.NUMBER_VALUE__NUM_VALUE:
+				return getNumValue();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case ExpressionsPackage.NUMBER_VALUE__NUM_VALUE:
-        setNumValue((Integer)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case ExpressionsPackage.NUMBER_VALUE__NUM_VALUE:
+				setNumValue((BigDecimal)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case ExpressionsPackage.NUMBER_VALUE__NUM_VALUE:
-        setNumValue(NUM_VALUE_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case ExpressionsPackage.NUMBER_VALUE__NUM_VALUE:
+				setNumValue(NUM_VALUE_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case ExpressionsPackage.NUMBER_VALUE__NUM_VALUE:
-        return numValue != NUM_VALUE_EDEFAULT;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case ExpressionsPackage.NUMBER_VALUE__NUM_VALUE:
+				return NUM_VALUE_EDEFAULT == null ? numValue != null : !NUM_VALUE_EDEFAULT.equals(numValue);
+		}
+		return super.eIsSet(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String toString()
   {
-    if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (numValue: ");
-    result.append(numValue);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (numValue: ");
+		result.append(numValue);
+		result.append(')');
+		return result.toString();
+	}
 
 } //NumberValueImpl

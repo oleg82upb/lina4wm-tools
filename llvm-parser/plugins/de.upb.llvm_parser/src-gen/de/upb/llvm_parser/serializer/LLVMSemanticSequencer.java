@@ -685,7 +685,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     value=INT
+	 *     value=NUMBER
 	 */
 	protected void sequence_Constant(EObject context, Constant semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -719,7 +719,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((array=Array | struct=Structure) value=Value index+=INT+)
+	 *     ((array=Array | struct=Structure) value=Value index+=NUMBER+)
 	 */
 	protected void sequence_ExtractValue(EObject context, ExtractValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -827,7 +827,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (struct=Structure value=Value inserttype=TypeUse insertvalue=Value index+=INT+)
+	 *     (struct=Structure value=Value inserttype=TypeUse insertvalue=Value index+=NUMBER+)
 	 */
 	protected void sequence_InsertValue(EObject context, InsertValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -915,7 +915,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((adresstype=TypeUse types=TypeList? adress=Value) | (adresstype=TypeUse adress=Value types=TypeList? ordering=ATOMIC_ORDERING index=INT?))
+	 *     ((adresstype=TypeUse types=TypeList? adress=Value) | (adresstype=TypeUse adress=Value types=TypeList? ordering=ATOMIC_ORDERING index=NUMBER?))
 	 */
 	protected void sequence_Load(EObject context, Load semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1120,7 +1120,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *             types+=TypeList? 
 	 *             adress=Value 
 	 *             ordering=ATOMIC_ORDERING 
-	 *             index=INT?
+	 *             index=NUMBER?
 	 *         )
 	 *     )
 	 */

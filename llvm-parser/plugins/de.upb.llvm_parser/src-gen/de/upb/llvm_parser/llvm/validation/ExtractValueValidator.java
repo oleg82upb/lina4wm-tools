@@ -8,6 +8,8 @@ import de.upb.llvm_parser.llvm.Array;
 import de.upb.llvm_parser.llvm.Structure;
 import de.upb.llvm_parser.llvm.Value;
 
+import java.math.BigDecimal;
+
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -22,5 +24,5 @@ public interface ExtractValueValidator {
 	boolean validateArray(Array value);
 	boolean validateStruct(Structure value);
 	boolean validateValue(Value value);
-	boolean validateIndex(EList<Integer> value);
+	boolean validateIndex(EList<BigDecimal> value);
 }

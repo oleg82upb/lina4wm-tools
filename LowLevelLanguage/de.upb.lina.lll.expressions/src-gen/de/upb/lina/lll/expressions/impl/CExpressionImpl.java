@@ -19,24 +19,24 @@ import org.eclipse.emf.ecore.EClass;
 public class CExpressionImpl extends LExpressionImpl implements CExpression
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected CExpressionImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return ExpressionsPackage.Literals.CEXPRESSION;
-  }
+		return ExpressionsPackage.Literals.CEXPRESSION;
+	}
 
 } //CExpressionImpl

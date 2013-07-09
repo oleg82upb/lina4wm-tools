@@ -19,24 +19,24 @@ import org.eclipse.emf.ecore.EClass;
 public class LExpressionImpl extends ExpressionImpl implements LExpression
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected LExpressionImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return ExpressionsPackage.Literals.LEXPRESSION;
-  }
+		return ExpressionsPackage.Literals.LEXPRESSION;
+	}
 
 } //LExpressionImpl
