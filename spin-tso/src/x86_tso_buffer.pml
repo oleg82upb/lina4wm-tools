@@ -23,10 +23,8 @@ inline write(adr, newValue)
 inline read(adr, target)
 {
 	atomic{
-	short readValue;
 	ch ! iRead, adr, NULL, NULL;
-	ch ? iRead, adr, readValue, NULL;
-	target = readValue;
+	ch ? iRead, adr, target, NULL;
 	}
 }
 
@@ -35,15 +33,13 @@ inline mfence()
 	ch ! iMfence, NULL, NULL, NULL;
 }	
 
-inline cas(adr, oldValue, newValue, returnValue) 
+inline cas(adr, oldValue, newValue, successBit) 
 {
 	// 2 steps for the executing process, but atomic on memory
 	
 	ch ! iCas, adr, oldValue, newValue;
 	atomic{
-	bit success;
-	ch ? iCas, adr, success, _; 
-	returnValue = success;
+	ch ? iCas, adr, successBit, _; 
 	}
 }
 
@@ -58,7 +54,7 @@ inline writeB() {
 
 
 inline readB() {
-	short i = tail-1;
+	i = tail-1;
 	do
 	:: i >= 0  -> 
 			if
@@ -86,7 +82,7 @@ atomic{
 		//write value in memory: memory[address] = value
 		memory[buffer[0].line[0]] = buffer[0].line[1];
 		//move all content one step further
-		int i;
+		
 		for (i : 1 .. tail-1) {
 			buffer[i-1].line[0] = buffer[i].line[0];
 			buffer[i-1].line[1] = buffer[i].line[1];
@@ -135,7 +131,7 @@ proctype bufferProcess(chan channel)
 {		
 	/*start resp. end of queue*/
 	short tail = 0;
-
+	short i = 0;
 	short address = 0;
 	short value = 0; 
 	short newValue = 0;
