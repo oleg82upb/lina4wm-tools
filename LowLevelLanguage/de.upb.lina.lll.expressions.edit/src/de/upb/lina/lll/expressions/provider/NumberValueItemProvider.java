@@ -81,7 +81,7 @@ public class NumberValueItemProvider
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -105,11 +105,8 @@ public class NumberValueItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		BigDecimal labelValue = ((NumberValue)object).getNumValue();
-		String label = labelValue == null ? null : labelValue.toString();
-		return label == null || label.length() == 0 ?
-			getString("_UI_NumberValue_type") :
-			getString("_UI_NumberValue_type") + " " + label;
+		NumberValue numberValue = (NumberValue)object;
+		return getString("_UI_NumberValue_type") + " " + numberValue.getNumValue();
 	}
 
 	/**

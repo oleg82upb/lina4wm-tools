@@ -76,5 +76,6 @@
     <genClasses ecoreClass="LLL.ecore#//MemoryInstruction">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLL.ecore#//MemoryInstruction/instructionType"/>
     </genClasses>
+    <genClasses ecoreClass="LLL.ecore#//Return"/>
   </genPackages>
 </genmodel:GenModel>

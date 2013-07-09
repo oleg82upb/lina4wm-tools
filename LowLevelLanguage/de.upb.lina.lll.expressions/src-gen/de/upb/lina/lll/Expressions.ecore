@@ -8,7 +8,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="SomeValue" eSuperTypes="#//CExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="AExpression" eSuperTypes="#//Expression #//SomeValue"/>
   <eClassifiers xsi:type="ecore:EClass" name="NumberValue" eSuperTypes="#//AExpression">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanValue" eSuperTypes="#//LExpression #//SomeValue">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
