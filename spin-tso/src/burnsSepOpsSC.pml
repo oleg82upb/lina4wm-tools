@@ -11,16 +11,45 @@ Burns Mutex SepOps implementation
 #define f0 1
 #define f1 2
 //-----------------------------------------------------------------------------------------------------------------------------------------------
-#include "burnsSepOps_TSO.pml"
+#include "sc-model.pml"
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 		//declaration of the variables
 
-chan channelT1 = [0] of {mtype, short, short, short};
-chan channelT2 = [0] of {mtype, short, short, short};
 
 
+short as = 0;
+inline asAcquire(p)
+{
+atomic{
+assert(as == 0);
+as = p;}
+}
+inline asRelease(p)
+{
+atomic{
+assert(as == p);
+as = 0;
+}
+}
 
+inline readLP(f, r, p)
+{
+atomic{
+	read(f, r);
+	if :: r == 0 -> asAcquire(p);
+	   :: else -> skip;
+	fi;}
+}
+
+
+inline writeLP(adr, newValue)
+{
+atomic{
+	write(adr,newValue);
+	asRelease(adr);
+	}
+}
 
 
 inline p1_aq()
@@ -28,7 +57,7 @@ inline p1_aq()
 	bool v0;
 entry: 
 	write(f0,1);
-	mfence();
+	//mfence();
 whileCond:
 	readLP(f1, v0, 1);
 	if
@@ -54,7 +83,7 @@ retry:
 
 whileEnd:
 	write(f1, 1);
-	mfence();
+	//mfence();
 	readLP(f0, v1, 2);
 	if
 	:: v1 != 0 -> write(f1, 0);
@@ -70,14 +99,14 @@ inline p2_rel()
 }
 //----------------------------------------------------------------------
 
-proctype process1(chan ch){
+proctype process1(){
 	do :: 
 	p1_aq();
 	p1_rel();
 	od;
 }
 
-proctype process2(chan ch){
+proctype process2(){
 	do:: 
 	p2_aq();
 	p2_rel();
@@ -88,9 +117,7 @@ proctype process2(chan ch){
 init 
 {
 atomic{
-	run process1(channelT1);
-	run bufferProcess(channelT1);
-	run process2(channelT2);
-	run bufferProcess(channelT2);
+	run process1();
+	run process2();
 	}
 }
