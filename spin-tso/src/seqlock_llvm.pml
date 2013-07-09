@@ -11,7 +11,7 @@ seqlock implementation
 */
 
 #define BUFF_SIZE 12 	//size of Buffer
-#define MEM_SIZE 15	//size of memory
+#define MEM_SIZE 13	//size of memory
 //initalization of global variables
 #define x1 1
 #define x2 2
@@ -39,14 +39,14 @@ atomic{
  
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 //#include "x86_tso_buffer.pml"
-#include "LPbuffer_TSO.pml"
+#include "seqlock_llvm_TSO.pml"
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 //Types for LLVM, actually their length in size of pointers and values
 #define I32  0 		// = {0};
 #define Ptr  0
 #define Array 1
 short memUse = 4; 	//shows to the next free cell in memory
-
+short arrayp1, arrayp2;
 
 chan channelT1 = [0] of {mtype, short, short, short};
 chan channelT2 = [0] of {mtype, short, short, short};
@@ -103,20 +103,13 @@ entry:
 		alloca(I32, word_addr);
 	}
 	write(word_addr, word);
-	->
 	
-doBody1:
-	read(c,v0);
-	->
-	
-doCond:
+doBody1: read(c,v0);
 
 	if 
 	::(v0%2) -> goto doBody1
-	:: else -> goto doEnd
+	:: else -> skip;
 	fi;
-
-doEnd:
 	read(x1,v2);
 	read(word_addr, v3);
 	getelementptr(Array, v3, 0, arrayidx);
@@ -126,7 +119,6 @@ doEnd:
 	getelementptr(Array, v5, 1, arrayidx2);
 	write(arrayidx2, v4);	
 	
-doCond3:
 	readLP(c, v6, v2, v4, v0);
 	if
 	:: (v6 != v0) -> goto doBody1;
@@ -140,26 +132,32 @@ proctype process1 (chan ch){
 	{
 			swrite(1,1);
 			swrite(2,2);
-			mfence();
-		} 
+			//mfence();
+	} 
 }
 
 proctype process2(chan ch){
-	//initalization of array
-	short array,i;
-	alloca(Array, array);
-	
-	for (i : 1 .. 2) {
-			sread(array);
-		}
+
+	sread(arrayp1);
+	sread(arrayp1);
+	//for (i : 1 .. 2) {sread(array);}		
 }
 
+proctype process3(chan ch){
+	sread(arrayp2);
+	
+	//for (i : 1 .. 2) {sread(array);}		
+}
 
 init{		
 	atomic{
+		alloca(Array, arrayp1);
+		//alloca(Array, arrayp2);
 		run process1(channelT1);
 		run bufferProcess(channelT1);
 		run process2(channelT2);
 		run bufferProcess(channelT2	);
+		//run process3(channelT3);
+		//run bufferProcess(channelT3	);
 	}
 }		
