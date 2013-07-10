@@ -33,8 +33,8 @@ inline cas(adr, oldValue, newValue, returnValue) {
 				memory[adr] = newValue;
 				returnValue = true;
 				}
-		:: returnValue = false;
-	fi
+		:: else -> returnValue = false;
+	fi;
 	}
 }
 		
