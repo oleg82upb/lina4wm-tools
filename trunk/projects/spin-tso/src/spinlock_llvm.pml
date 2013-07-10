@@ -4,38 +4,30 @@
 *subject: spinlock implementation: specification of the LLVM-compiled spinlock implementation (spinlock.s)
 */
 
-#define BUFF_SIZE 5 	//size of Buffer
-#define MEM_SIZE 10	//size of memory
+#define BUFF_SIZE 1 	//size of Buffer
+#define MEM_SIZE 2	//size of memory
  //----------------------------------------------------------------------------------------------------------------------------------------------
  //abstract specification
  short owner = -1;	//initial set to -1, means no process is in its critical section
  
-inline casLPAquire(adr, oldValue, newValue, returnValue){
-	// 2 steps for the executing process, but atomic on memory
-	bit success;
+inline casLPAquire(adr, oldValue, newValue, successBit){
 	ch ! iCas, adr, oldValue, newValue;
 	atomic{
-	ch ? iCas, adr, success, _; 
-	returnValue = success;
+	ch ? iCas, adr, successBit, _; 
 	if 	
-	:: success -> assert(owner == -1);
-				 asAquire();
+	:: successBit -> asAquire();
 	:: else -> assert(owner != -1);
 	fi
 	}
 }
 
 
-inline casLPTry(adr, oldValue, newValue, returnValue){
-	// 2 steps for the executing process, but atomic on memory
-	bit success;
+inline casLPTry(adr, oldValue, newValue, successBit){
 	ch ! iCas, adr, oldValue, newValue;
 	atomic{
-	ch ? iCas, adr, success, _; 
-	returnValue = success;
+	ch ? iCas, adr, successBit, _;
 	if 	
-	:: success -> assert(owner == -1);
-				 asTryAquire();
+	:: successBit -> asAquire();
 	:: else -> assert(owner != -1);
 	fi
 	}
@@ -43,7 +35,7 @@ inline casLPTry(adr, oldValue, newValue, returnValue){
  
  
 inline asAquire(){
- 
+ 	assert(owner == -1);
  	owner = _pid; 
 }
 
@@ -53,21 +45,17 @@ inline asWrite(){
 
 inline asRelease(){
 	atomic{	
- 		assert(owner ==_pid-1);		//legitim?
+ 		assert(owner == (_pid - 1)); // buffer proc's pid is always increased by 1 
  		owner = -1;
  	}
 }
  
-inline asTryAquire(){
- 
-	owner = _pid; 
-}
  
  
  
  
 //-----------------------------------------------------------------------------------------------------------------------------------------------
-#include "LPbuffer_TSO.pml"
+#include "spinlock_llvm_TSO.pml"
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 //Deklaration of Pointertypes, channels and usefull functions
@@ -78,6 +66,8 @@ short memUse = 2; 	//shows to the next free cell in memory, initialized to 2 bec
 
 chan channelT1 = [0] of {mtype, short, short, short};
 chan channelT2 = [0] of {mtype, short, short, short};
+chan channelT3 = [0] of {mtype, short, short, short};
+chan channelT4 = [0] of {mtype, short, short, short};
 
 inline getelementptr(type, instance, offset, targetRegister){
 	atomic{
@@ -106,11 +96,10 @@ inline aquire(){
 short v0, v2;
 
 whileBody:
-
 	casLPAquire(ptrX,1,0,v0); 			//cas(adr, oldValue, newValue, returnValue) 
 	if
 	::(v0 == 1) -> goto End;
-	:: else -> goto whileCond1;
+	:: else -> skip;
 	fi;
 
 whileCond1:
@@ -145,41 +134,69 @@ End:
 */	
 
 inline tryaquire(retval){
-short v0, v2;
 
-entry:
-	casLPTry(ptrX,1,0,v0);
-	if
-	:: v0 == 1 	-> 	write(retval, 1);
-	:: else 	-> 	write(retval, 0);
-	fi;
+	//alloca(I32, returnValue);
+	casLPTry(ptrX,1,0,retval);
+//originally the compiled program looks like this and has an "alloc" for returnValue: 
+//	write(returnValue,casResult);
+//	read(returnValue, retval);
 }
 
 
 proctype process1 (chan ch){
+	bit returnvalue;
+	do ::
 	aquire();
-critical_sec: printf("crit\n");	//do something...
 	release();
-	//skip;
+	:: tryaquire(returnvalue);
+		if
+		:: returnvalue -> release();
+		::else ->skip
+		fi;
+	od;;
 }
 
 proctype process2 (chan ch){
-	short returnvalue;
+	bit returnvalue;
+	do::
 	tryaquire(returnvalue);
 	if
-	:: returnvalue -> critical_sec: printf("crit\n");release();
+	:: returnvalue -> release();
 	::else ->skip
 	fi;
+	od;
+}
+
+proctype process3 (chan ch){
+	do ::
+	aquire();
+	release();
+	od;;
+}
+
+proctype process4 (chan ch){
+	bit returnvalue;
+	do::
+	tryaquire(returnvalue);
+	if
+	:: returnvalue -> release();
+	::else ->skip
+	fi;
+	od;
 }
 
 init{
-	memory[1] = 1;
+	memory[ptrX] = 1;
 atomic{
 	run process1(channelT1);
 	run bufferProcess(channelT1);
-	run process2(channelT2);
+	run process1(channelT2);
 	run bufferProcess(channelT2);
+	run process3(channelT3);
+	run bufferProcess(channelT3);
+	run process4(channelT4);
+	run bufferProcess(channelT4);
 	}
 }
 
-ltl neverBothInCrit{ [] !(process1 @ critical_sec && process2 @critical_sec)};
+//ltl neverBothInCrit{ [] !(process1 @ critical_sec && process2 @critical_sec)};
