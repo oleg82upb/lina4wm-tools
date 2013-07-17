@@ -168,13 +168,22 @@ public interface LllPackage extends EPackage {
 	int FUNCTION__INPUT_PARAMETERS = EcorePackage.ENAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION__RETURN_TYPE = EcorePackage.ENAMED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Function</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_FEATURE_COUNT = EcorePackage.ENAMED_ELEMENT_FEATURE_COUNT + 5;
+	int FUNCTION_FEATURE_COUNT = EcorePackage.ENAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.lll.impl.LabelImpl <em>Label</em>}' class.
@@ -948,6 +957,17 @@ public interface LllPackage extends EPackage {
 	EReference getFunction_InputParameters();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link de.upb.lina.lll.Function#getReturnType <em>Return Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Return Type</em>'.
+	 * @see de.upb.lina.lll.Function#getReturnType()
+	 * @see #getFunction()
+	 * @generated
+	 */
+	EReference getFunction_ReturnType();
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.lll.Label <em>Label</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1402,6 +1422,14 @@ public interface LllPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FUNCTION__INPUT_PARAMETERS = eINSTANCE.getFunction_InputParameters();
+
+		/**
+		 * The meta object literal for the '<em><b>Return Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FUNCTION__RETURN_TYPE = eINSTANCE.getFunction_ReturnType();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.lll.impl.LabelImpl <em>Label</em>}' class.

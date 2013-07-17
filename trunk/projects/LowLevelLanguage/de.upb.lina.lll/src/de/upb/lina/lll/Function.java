@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.ENamedElement;
  *   <li>{@link de.upb.lina.lll.Function#getLabels <em>Labels</em>}</li>
  *   <li>{@link de.upb.lina.lll.Function#getInstructions <em>Instructions</em>}</li>
  *   <li>{@link de.upb.lina.lll.Function#getInputParameters <em>Input Parameters</em>}</li>
+ *   <li>{@link de.upb.lina.lll.Function#getReturnType <em>Return Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -124,5 +125,31 @@ public interface Function extends ENamedElement {
 	 * @generated
 	 */
 	EList<VariableOrValue> getInputParameters();
+
+	/**
+	 * Returns the value of the '<em><b>Return Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Return Type</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Return Type</em>' containment reference.
+	 * @see #setReturnType(Type)
+	 * @see de.upb.lina.lll.LllPackage#getFunction_ReturnType()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Type getReturnType();
+
+	/**
+	 * Sets the value of the '{@link de.upb.lina.lll.Function#getReturnType <em>Return Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Return Type</em>' containment reference.
+	 * @see #getReturnType()
+	 * @generated
+	 */
+	void setReturnType(Type value);
 
 } // Function

@@ -7,6 +7,7 @@ package de.upb.lina.lll.validation;
 import de.upb.lina.lll.Instruction;
 import de.upb.lina.lll.Label;
 import de.upb.lina.lll.Program;
+import de.upb.lina.lll.Type;
 import de.upb.lina.lll.VariableOrValue;
 
 import org.eclipse.emf.common.util.EList;
@@ -25,4 +26,6 @@ public interface FunctionValidator {
 	boolean validateLabels(EList<Label> value);
 	boolean validateInstructions(EList<Instruction> value);
 	boolean validateInputParameters(EList<VariableOrValue> value);
+
+	boolean validateReturnType(Type value);
 }

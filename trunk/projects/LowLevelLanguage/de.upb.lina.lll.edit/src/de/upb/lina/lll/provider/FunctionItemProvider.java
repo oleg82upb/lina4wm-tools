@@ -105,6 +105,7 @@ public class FunctionItemProvider
 			childrenFeatures.add(LllPackage.Literals.FUNCTION__LOCAL_VARIABLES_OR_VALUES);
 			childrenFeatures.add(LllPackage.Literals.FUNCTION__LABELS);
 			childrenFeatures.add(LllPackage.Literals.FUNCTION__INSTRUCTIONS);
+			childrenFeatures.add(LllPackage.Literals.FUNCTION__RETURN_TYPE);
 		}
 		return childrenFeatures;
 	}
@@ -162,6 +163,7 @@ public class FunctionItemProvider
 			case LllPackage.FUNCTION__LOCAL_VARIABLES_OR_VALUES:
 			case LllPackage.FUNCTION__LABELS:
 			case LllPackage.FUNCTION__INSTRUCTIONS:
+			case LllPackage.FUNCTION__RETURN_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -223,6 +225,16 @@ public class FunctionItemProvider
 			(createChildParameter
 				(LllPackage.Literals.FUNCTION__INSTRUCTIONS,
 				 LllFactory.eINSTANCE.createReturn()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LllPackage.Literals.FUNCTION__RETURN_TYPE,
+				 LllFactory.eINSTANCE.createSimpleType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LllPackage.Literals.FUNCTION__RETURN_TYPE,
+				 LllFactory.eINSTANCE.createComplexType()));
 	}
 
 	/**

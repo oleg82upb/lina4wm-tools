@@ -316,6 +316,15 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getFunction_ReturnType() {
+		return (EReference)functionEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getLabel() {
 		return labelEClass;
 	}
@@ -655,6 +664,7 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 		createEReference(functionEClass, FUNCTION__LABELS);
 		createEReference(functionEClass, FUNCTION__INSTRUCTIONS);
 		createEReference(functionEClass, FUNCTION__INPUT_PARAMETERS);
+		createEReference(functionEClass, FUNCTION__RETURN_TYPE);
 
 		labelEClass = createEClass(LABEL);
 		createEReference(labelEClass, LABEL__FUNCTION);
@@ -763,6 +773,7 @@ public class LllPackageImpl extends EPackageImpl implements LllPackage {
 		initEReference(getFunction_Labels(), this.getLabel(), this.getLabel_Function(), "labels", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunction_Instructions(), this.getInstruction(), this.getInstruction_Function(), "instructions", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunction_InputParameters(), this.getVariableOrValue(), null, "inputParameters", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFunction_ReturnType(), this.getType(), null, "returnType", null, 0, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(labelEClass, Label.class, "Label", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLabel_Function(), this.getFunction(), this.getFunction_Labels(), "function", null, 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
