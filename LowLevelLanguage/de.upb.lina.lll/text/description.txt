@@ -17,6 +17,7 @@ Package lll <http://www.upb.de/lina/lll>
     Reference labels : Label<<0..*>>
     Reference instructions : Instruction<<0..*>>
     Reference inputParameters : VariableOrValue<<0..*>>
+    Reference returnType : Type
 
   Class Label -> ENamedElement
     Reference function : Function

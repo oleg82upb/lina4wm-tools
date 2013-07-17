@@ -22,6 +22,7 @@ import de.upb.lina.lll.Instruction;
 import de.upb.lina.lll.Label;
 import de.upb.lina.lll.LllPackage;
 import de.upb.lina.lll.Program;
+import de.upb.lina.lll.Type;
 import de.upb.lina.lll.VariableOrValue;
 
 /**
@@ -36,6 +37,7 @@ import de.upb.lina.lll.VariableOrValue;
  *   <li>{@link de.upb.lina.lll.impl.FunctionImpl#getLabels <em>Labels</em>}</li>
  *   <li>{@link de.upb.lina.lll.impl.FunctionImpl#getInstructions <em>Instructions</em>}</li>
  *   <li>{@link de.upb.lina.lll.impl.FunctionImpl#getInputParameters <em>Input Parameters</em>}</li>
+ *   <li>{@link de.upb.lina.lll.impl.FunctionImpl#getReturnType <em>Return Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -81,6 +83,16 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 	 * @ordered
 	 */
 	protected EList<VariableOrValue> inputParameters;
+
+	/**
+	 * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReturnType()
+	 * @generated
+	 * @ordered
+	 */
+	protected Type returnType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -195,6 +207,49 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Type getReturnType() {
+		return returnType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetReturnType(Type newReturnType, NotificationChain msgs) {
+		Type oldReturnType = returnType;
+		returnType = newReturnType;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LllPackage.FUNCTION__RETURN_TYPE, oldReturnType, newReturnType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReturnType(Type newReturnType) {
+		if (newReturnType != returnType) {
+			NotificationChain msgs = null;
+			if (returnType != null)
+				msgs = ((InternalEObject)returnType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LllPackage.FUNCTION__RETURN_TYPE, null, msgs);
+			if (newReturnType != null)
+				msgs = ((InternalEObject)newReturnType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LllPackage.FUNCTION__RETURN_TYPE, null, msgs);
+			msgs = basicSetReturnType(newReturnType, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LllPackage.FUNCTION__RETURN_TYPE, newReturnType, newReturnType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -231,6 +286,8 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 				return ((InternalEList<?>)getInstructions()).basicRemove(otherEnd, msgs);
 			case LllPackage.FUNCTION__INPUT_PARAMETERS:
 				return ((InternalEList<?>)getInputParameters()).basicRemove(otherEnd, msgs);
+			case LllPackage.FUNCTION__RETURN_TYPE:
+				return basicSetReturnType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -267,6 +324,8 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 				return getInstructions();
 			case LllPackage.FUNCTION__INPUT_PARAMETERS:
 				return getInputParameters();
+			case LllPackage.FUNCTION__RETURN_TYPE:
+				return getReturnType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -299,6 +358,9 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 				getInputParameters().clear();
 				getInputParameters().addAll((Collection<? extends VariableOrValue>)newValue);
 				return;
+			case LllPackage.FUNCTION__RETURN_TYPE:
+				setReturnType((Type)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -326,6 +388,9 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 			case LllPackage.FUNCTION__INPUT_PARAMETERS:
 				getInputParameters().clear();
 				return;
+			case LllPackage.FUNCTION__RETURN_TYPE:
+				setReturnType((Type)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -348,6 +413,8 @@ public class FunctionImpl extends ENamedElementImpl implements Function {
 				return instructions != null && !instructions.isEmpty();
 			case LllPackage.FUNCTION__INPUT_PARAMETERS:
 				return inputParameters != null && !inputParameters.isEmpty();
+			case LllPackage.FUNCTION__RETURN_TYPE:
+				return returnType != null;
 		}
 		return super.eIsSet(featureID);
 	}
