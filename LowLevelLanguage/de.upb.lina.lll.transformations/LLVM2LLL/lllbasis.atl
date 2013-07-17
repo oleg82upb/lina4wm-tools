@@ -42,10 +42,24 @@ helper def: getType(inType: LLVM!TypeUse): OclAny =
 				thisModule.createAddress__ComplexType(inType)
 			endif
 		else
-			if (inType.oclIsTypeOf(LLVM!Predefined)) and inType.type.startsWith('i') then
-				thisModule.createPredefinedInteger(inType)
+			if (inType.oclIsTypeOf(LLVM!Predefined)) then
+				if inType.type.startsWith('i') then
+					thisModule.createPredefinedInteger(inType)
+				else
+					if inType.type = 'void' then
+						OclUndefined
+					else
+						OclUndefined.debug('no i.., no void')
+					endif
+				endif
 			else
-				OclUndefined
+				if inType.oclIsTypeOf(LLVM!AddressUse) then
+					LLL!ComplexType.allInstances() -> select(c | c.name = thisModule.
+							stringcut(thisModule.stringcut(inType.address.name, '%'),
+							'@')).first()
+				else
+					OclUndefined.debug('No AddressUse')
+				endif
 			endif
 		endif
 	endif;
@@ -54,8 +68,9 @@ helper def: numberReg(input: String): String =
 	if input.regexReplaceAll('[0-9]+', '').size()>0 then input else 'v' + input endif;
 
 helper def: getVariable(input: String): LLL!"lll::Variable" =
-	LLL!"lll::Variable".allInstances() -> select(v | v.name = thisModule.numberReg(thisModule.
-			stringcut(thisModule.stringcut(input, '%'), '@'))) -> first();
+	LLL!"lll::Variable".allInstances() -> select(v | v.name = thisModule.
+			numberReg(thisModule.stringcut(thisModule.stringcut(input, '%'), '@'))) ->
+			first();
 
 helper def: getConstant(input: String): LLL!Constant =
 	LLL!Constant.allInstances() -> select(c | c.value = thisModule.numberReg(thisModule.
@@ -81,6 +96,61 @@ helper def: getAExpr(input: LLVM!ArithmeticOperation): LLL!"expressions::AExpres
 		endif
 	endif;
 
+helper def: getLExpr(input: LLVM!LogicOperation): LLL!"expressions::LExpression" =
+	if input.operation = 'and' then
+		thisModule.getAnd(input)
+	else
+		if input.operation = 'or' then
+			thisModule.getOr(input)
+		else
+			if input.operation = 'xor' then
+				thisModule.getXor(input)
+			else
+				OclUndefined --NOT SUPPORTED BY LLL: shl, ashr, lshr
+				
+			endif
+		endif
+	endif;
+
+lazy rule getAnd {
+	from
+		input: LLVM!LogicOperation
+	to
+		outAExpr: LLL!"expressions::And" (
+			left <- thisModule.getExValue(input.value1),
+			right <- thisModule.getExValue(input.value2)
+		)
+}
+
+lazy rule getXor {
+	from
+		input: LLVM!LogicOperation
+	to
+		outAExpr: LLL!"expressions::Xor" (
+			left <- thisModule.getExValue(input.value1),
+			right <- thisModule.getExValue(input.value2)
+		)
+}
+
+lazy rule getOr {
+	from
+		input: LLVM!LogicOperation
+	to
+		outAExpr: LLL!"expressions::Or" (
+			left <- thisModule.getExValue(input.value1),
+			right <- thisModule.getExValue(input.value2)
+		)
+}
+
+lazy rule getNot {
+	from
+		input: LLL!"expressions::LExpression"
+	to
+		outAExpr: LLL!"expressions::Not" (
+			not <- input
+		)
+}
+
 helper def: getExValue(input: LLVM!Value): LLL!"expressions::AExpression" =
 	if (input.oclIsTypeOf(LLVM!Constant)) then
 		LLL!"expressions::NumberValue".newInstance().refSetValue('numValue', input.value)
@@ -90,7 +160,7 @@ helper def: getExValue(input: LLVM!Value): LLL!"expressions::AExpression" =
 					numberReg(thisModule.stringcut(thisModule.stringcut(input.name, '%'),
 					'@')))
 		else
-			LLL!"expressions::Variable".newInstance().refGetValue('varName', thisModule.
+			LLL!"expressions::Variable".newInstance().refSetValue('varName', thisModule.
 					numberReg(thisModule.stringcut(thisModule.stringcut(input.name, '%'),
 					'@')))
 		endif
@@ -175,76 +245,97 @@ helper def: getCExpr(input: LLVM!Compare): LLL!"expressions::CExpression" =
 
 lazy rule getEqual {
 	from
-		input : LLVM!Compare
-	to 
-		outCExpr : LLL!"expressions::Equal" (
-			
+		input: LLVM!Compare
+	to
+		outCExpr: LLL!"expressions::Equal" (
+			left <- thisModule.getExValue(input.value1),
+			right <- thisModule.getExValue(input.value2)
 		)
 }
+
 lazy rule getNotEqual {
 	from
-		input : LLVM!Compare
-	to 
-		outCExpr : LLL!"expressions::Unequal" (
-			
+		input: LLVM!Compare
+	to
+		outCExpr: LLL!"expressions::Unequal" (
+			left <- thisModule.getExValue(input.value1),
+			right <- thisModule.getExValue(input.value2)
 		)
 }
+
 lazy rule getGreaterThen {
 	from
-		input : LLVM!Compare
-	to 
-		outCExpr : LLL!"expressions::Greater" (
-			
+		input: LLVM!Compare
+	to
+		outCExpr: LLL!"expressions::Greater" (
+			left <- thisModule.getExValue(input.value1),
+			right <- thisModule.getExValue(input.value2)
 		)
 }
+
 lazy rule getGreaterEqual {
 	from
-		input : LLVM!Compare
-	to 
-		outCExpr : LLL!"expressions::GreaterOrEqual" (
-			
+		input: LLVM!Compare
+	to
+		outCExpr: LLL!"expressions::GreaterOrEqual" (
+			left <- thisModule.getExValue(input.value1),
+			right <- thisModule.getExValue(input.value2)
 		)
 }
+
 lazy rule getLessThen {
 	from
-		input : LLVM!Compare
-	to 
-		outCExpr : LLL!"expressions::Less" (
-			
+		input: LLVM!Compare
+	to
+		outCExpr: LLL!"expressions::Less" (
+			left <- thisModule.getExValue(input.value1),
+			right <- thisModule.getExValue(input.value2)
 		)
 }
+
 lazy rule getLessEqual {
 	from
-		input : LLVM!Compare
-	to 
-		outCExpr : LLL!"expressions::LessOrEqual" (
-			
+		input: LLVM!Compare
+	to
+		outCExpr: LLL!"expressions::LessOrEqual" (
+			left <- thisModule.getExValue(input.value1),
+			right <- thisModule.getExValue(input.value2)
 		)
 }
+
 lazy rule getTrue {
 	from
-		input : LLVM!Compare
-	to 
-		outCExpr : LLL!"expressions::BooleanValue" (
-			
+		input: LLVM!Compare
+	to
+		outCExpr: LLL!"expressions::BooleanValue" (
+			value <- true
 		)
 }
+
 lazy rule getFalse {
 	from
-		input : LLVM!Compare
-	to 
-		outCExpr : LLL!"expressions::BooleanValue" (
-			
+		input: LLVM!Compare
+	to
+		outCExpr: LLL!"expressions::BooleanValue" (
+			value <- false
 		)
 }
 
-
 --****************************************--
-
 --                                        --
 --                  Form                  --
 --                                        --
 --****************************************--
+rule TypeDefinition2TypeDefinition {
+	from
+		gType: LLVM!TypeDefinition
+	to
+		outT: LLL!ComplexType (
+			name <- thisModule.stringcut(thisModule.stringcut(gType.address.name, '%'),
+					'@')
+		)
+}
+
 rule LLVM2Program {
 	from
 		in_llvm: LLVM!LLVM
@@ -289,7 +380,8 @@ rule LLVMFunctions2Functions {
 			labels <- if fBlocks.oclIsUndefined() then
 					OclUndefined
 				else
-					fBlocks -> collect(b | thisModule.BasicBlockLabel2FunctionInstructionLabel(b, lllfunction))
+					fBlocks -> collect(b | thisModule.
+							BasicBlockLabel2FunctionInstructionLabel(b, lllfunction))
 				endif,
 			localVariablesOrValues <- if fBlocks.oclIsUndefined() then
 					OclUndefined
@@ -307,6 +399,11 @@ rule LLVMFunctions2Functions {
 					inFunction.pl.variables -> collect(i | thisModule.getValue(i).
 							refSetValue('type', thisModule.getType(inFunction.pl.types.
 							at(inFunction.pl.variables.indexOf(i)))))
+				endif,
+			returnType <- if inFunction.returnType.oclIsUndefined() then
+					OclUndefined
+				else
+					thisModule.getType(inFunction.returnType)
 				endif
 		)
 }
@@ -492,22 +589,12 @@ rule CompareRegister2LC {
 		)
 	to
 		outI: LLL!LocalComputation (
-			expression <- lexpr,
+			expression <- thisModule.getCExpr(insUse.instruction),
 			instructionResult <- intReg
 		),
 		intReg: LLL!"lll::Variable" (
 			name <- thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(insUse.
 					reg_or_var, '%'), '@'))
-		),
-		lexpr: LLL!"expressions::Equal" (
-			left <- left,
-			right <- right
-		),
-		left: LLL!"expressions::StringValue" (
-			strValue <- '1'
-		),
-		right: LLL!"expressions::StringValue" (
-			strValue <- '1'
 		)
 }
 
@@ -588,6 +675,22 @@ rule ArithmeticUse2LC {
 		)
 }
 
+rule LogicalUse2LC {
+	from
+		insUse: LLVM!InstructionUse (
+			insUse.instruction.oclIsTypeOf(LLVM!LogicOperation)
+		)
+	to
+		outI: LLL!LocalComputation (
+			expression <- thisModule.getLExpr(insUse.instruction),
+			instructionResult <- intReg
+		),
+		intReg: LLL!"lll::Variable" (
+			name <- thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(insUse.
+					reg_or_var, '%'), '@'))
+		)
+}
+
 rule LLVMStore2Store {
 	from
 		instruction: LLVM!Store
@@ -624,6 +727,41 @@ lazy rule createAllocaParam {
 		)
 }
 
+rule Cast2LC {
+	from
+		insUse: LLVM!InstructionUse (
+			insUse.instruction.oclIsTypeOf(LLVM!Cast)
+		)
+	to
+		outI: LLL!LocalComputation (
+			expression <- expr,
+			instructionResult <- intReg
+		),
+		expr: LLL!"expressions::StringValue" (
+			strValue <- 'cast ' + thisModule.numberReg(thisModule.stringcut(thisModule.
+					stringcut(insUse.instruction.value.name, '%'), '@')) + '(' +
+					thisModule.numberReg(thisModule.stringcut(thisModule.stringcut((if
+					insUse.instruction.from.oclIsTypeOf(LLVM!AddressUse) then
+								insUse.instruction.from.address.toString()
+							else
+								insUse.instruction.from.type.toString()
+							endif), '%'), '@')) + ')' + ' to ' + thisModule.
+									numberReg(thisModule.stringcut(thisModule.
+									stringcut(insUse.reg_or_var, '%'), '@')) + '(' +
+									thisModule.numberReg(thisModule.stringcut(thisModule.stringcut((
+						if insUse.instruction.to.oclIsTypeOf(LLVM!AddressUse) then
+								insUse.instruction.to.address.toString()
+							else
+								insUse.instruction.to.type.toString()
+							endif
+					), '%'), '@')) + ')'
+		),
+		intReg: LLL!"lll::Variable" (
+			name <- thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(insUse.
+					reg_or_var, '%'), '@'))
+		)
+}
+
 rule LLVMBranch2ConditionBranch {
 	from
 		instruction: LLVM!Branch (
@@ -638,7 +776,8 @@ rule LLVMBranch2ConditionBranch {
 			target <- LLL!Label.allInstances() -> select(i | i.name = thisModule.
 					stringcut(instruction.labelTrue.name, '%') and i.function.
 					instructions.includes(thisModule.resolveTemp(instruction, 'outI'))).
-					first()
+					first(),
+			instructionResult <- thisModule.getValue(instruction.condvalue)
 		)
 }
 
@@ -675,5 +814,75 @@ rule LLVMReturn2ReturnWValue {
 		outI: LLL!Return (
 			parameters <- thisModule.getValue(instruction.returnvalue).
 					refSetValue('type', thisModule.getType(instruction.returntype))
+		)
+}
+
+rule LPad2LC {
+	from
+		insUse: LLVM!InstructionUse (
+			insUse.instruction.oclIsTypeOf(LLVM!LandingPad)
+		)
+	to
+		outI: LLL!LocalComputation (
+			instructionResult <- intReg,
+			expression <- expr
+		),
+		expr: LLL!"expressions::StringValue" (
+			strValue <- 'landingpad ' + thisModule.numberReg(thisModule.
+					stringcut(thisModule.stringcut(insUse.reg_or_var, '%'), '@'))
+		),
+		intReg: LLL!"lll::Variable" (
+			name <- thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(insUse.
+					reg_or_var, '%'), '@'))
+		)
+}
+
+rule InsertValue2LC {
+	from
+		insUse: LLVM!InstructionUse (
+			insUse.instruction.oclIsTypeOf(LLVM!InsertValue)
+		)
+	to
+		outI: LLL!LocalComputation (
+			instructionResult <- intReg,
+			expression <- expr
+		),
+		expr: LLL!"expressions::Equal" (
+			left <- leftex,
+			right <- rightex
+		),
+		leftex: LLL!"expressions::Variable" (
+			varName <- (thisModule.numberReg(thisModule.stringcut(thisModule.
+					stringcut(insUse.instruction.value.name, '%'), '@')) + '.' + insUse.
+					instruction.index.toString())
+		),
+		rightex: LLL!"expressions::Variable" (
+			varName <- thisModule.numberReg(thisModule.stringcut(thisModule.
+					stringcut(insUse.instruction.insertvalue.name, '%'), '@'))
+		),
+		intReg: LLL!"lll::Variable" (
+			name <- thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(insUse.
+					reg_or_var, '%'), '@'))
+		)
+}
+
+rule ExtractValue2LC {
+	from
+		insUse: LLVM!InstructionUse (
+			insUse.instruction.oclIsTypeOf(LLVM!ExtractValue)
+		)
+	to
+		outI: LLL!LocalComputation (
+			instructionResult <- intReg,
+			expression <- expr
+		),
+		expr: LLL!"expressions::Variable" (
+			varName <- (thisModule.numberReg(thisModule.stringcut(thisModule.
+					stringcut(insUse.instruction.value.name, '%'), '@')) + '.' + insUse.
+					instruction.index.toString())
+		),
+		intReg: LLL!"lll::Variable" (
+			name <- thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(insUse.
+					reg_or_var, '%'), '@'))
 		)
 }
