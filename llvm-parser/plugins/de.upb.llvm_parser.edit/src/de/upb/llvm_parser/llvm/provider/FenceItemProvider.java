@@ -54,7 +54,8 @@ public class FenceItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addOrderingPropertyDescriptor(object);
@@ -120,7 +121,8 @@ public class FenceItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Fence.class)) {
+		switch (notification.getFeatureID(Fence.class))
+		{
 			case LlvmPackage.FENCE__ORDERING:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

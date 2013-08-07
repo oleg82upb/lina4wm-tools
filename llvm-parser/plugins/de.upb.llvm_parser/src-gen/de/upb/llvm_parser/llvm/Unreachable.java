@@ -13,5 +13,6 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface Unreachable extends ReturnInstruction {
+public interface Unreachable extends ReturnInstruction
+{
 } // Unreachable

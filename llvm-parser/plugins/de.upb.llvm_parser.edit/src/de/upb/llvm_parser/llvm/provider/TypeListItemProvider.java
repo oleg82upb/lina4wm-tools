@@ -58,7 +58,8 @@ public class TypeListItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -75,7 +76,8 @@ public class TypeListItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.TYPE_LIST__TYPES);
 			childrenFeatures.add(LlvmPackage.Literals.TYPE_LIST__TYPELISTS);
@@ -129,7 +131,8 @@ public class TypeListItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(TypeList.class)) {
+		switch (notification.getFeatureID(TypeList.class))
+		{
 			case LlvmPackage.TYPE_LIST__TYPES:
 			case LlvmPackage.TYPE_LIST__TYPELISTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));

@@ -55,7 +55,8 @@ public class InvokeItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -72,7 +73,8 @@ public class InvokeItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.INVOKE__FUNCTIONTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.INVOKE__NAME);
@@ -131,7 +133,8 @@ public class InvokeItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Invoke.class)) {
+		switch (notification.getFeatureID(Invoke.class))
+		{
 			case LlvmPackage.INVOKE__FUNCTIONTYPE:
 			case LlvmPackage.INVOKE__NAME:
 			case LlvmPackage.INVOKE__PLIST:
@@ -280,7 +283,8 @@ public class InvokeItemProvider
 			childFeature == LlvmPackage.Literals.INVOKE__TOVALUE ||
 			childFeature == LlvmPackage.Literals.INVOKE__UNWINDVALUE;
 
-		if (qualify) {
+		if (qualify)
+		{
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

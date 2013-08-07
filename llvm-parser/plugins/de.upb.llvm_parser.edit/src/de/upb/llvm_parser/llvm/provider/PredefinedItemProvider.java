@@ -54,7 +54,8 @@ public class PredefinedItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addTypePropertyDescriptor(object);
@@ -120,7 +121,8 @@ public class PredefinedItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Predefined.class)) {
+		switch (notification.getFeatureID(Predefined.class))
+		{
 			case LlvmPackage.PREDEFINED__TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

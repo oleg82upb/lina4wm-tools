@@ -55,7 +55,8 @@ public class PhiItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -72,7 +73,8 @@ public class PhiItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.PHI__TYPE);
 			childrenFeatures.add(LlvmPackage.Literals.PHI__FIRSTCLASS);
@@ -127,7 +129,8 @@ public class PhiItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Phi.class)) {
+		switch (notification.getFeatureID(Phi.class))
+		{
 			case LlvmPackage.PHI__TYPE:
 			case LlvmPackage.PHI__FIRSTCLASS:
 			case LlvmPackage.PHI__VALUES:
@@ -229,7 +232,8 @@ public class PhiItemProvider
 			childFeature == LlvmPackage.Literals.PHI__FIRSTCLASS ||
 			childFeature == LlvmPackage.Literals.PHI__VALUES;
 
-		if (qualify) {
+		if (qualify)
+		{
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

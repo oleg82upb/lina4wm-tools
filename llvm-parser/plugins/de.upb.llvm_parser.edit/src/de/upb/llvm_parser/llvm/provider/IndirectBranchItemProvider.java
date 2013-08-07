@@ -55,7 +55,8 @@ public class IndirectBranchItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -72,7 +73,8 @@ public class IndirectBranchItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESSTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESS);
@@ -128,7 +130,8 @@ public class IndirectBranchItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(IndirectBranch.class)) {
+		switch (notification.getFeatureID(IndirectBranch.class))
+		{
 			case LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE:
 			case LlvmPackage.INDIRECT_BRANCH__ADRESS:
 			case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
@@ -248,7 +251,8 @@ public class IndirectBranchItemProvider
 			childFeature == LlvmPackage.Literals.INDIRECT_BRANCH__ADRESS ||
 			childFeature == LlvmPackage.Literals.INDIRECT_BRANCH__LABELS;
 
-		if (qualify) {
+		if (qualify)
+		{
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

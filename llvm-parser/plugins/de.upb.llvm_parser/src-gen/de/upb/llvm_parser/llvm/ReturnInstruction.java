@@ -13,5 +13,6 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface ReturnInstruction extends Instruction {
+public interface ReturnInstruction extends Instruction
+{
 } // ReturnInstruction

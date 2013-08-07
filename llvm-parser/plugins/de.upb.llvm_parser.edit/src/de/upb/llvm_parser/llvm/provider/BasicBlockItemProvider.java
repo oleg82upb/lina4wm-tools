@@ -60,7 +60,8 @@ public class BasicBlockItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addLabelPropertyDescriptor(object);
@@ -123,7 +124,8 @@ public class BasicBlockItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS);
 			childrenFeatures.add(LlvmPackage.Literals.BASIC_BLOCK__TERMINATOR);
@@ -180,7 +182,8 @@ public class BasicBlockItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BasicBlock.class)) {
+		switch (notification.getFeatureID(BasicBlock.class))
+		{
 			case LlvmPackage.BASIC_BLOCK__LABEL:
 			case LlvmPackage.BASIC_BLOCK__RETADR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
@@ -293,6 +296,11 @@ public class BasicBlockItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
 				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -550,7 +558,8 @@ public class BasicBlockItemProvider
 			childFeature == LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS ||
 			childFeature == LlvmPackage.Literals.BASIC_BLOCK__TERMINATOR;
 
-		if (qualify) {
+		if (qualify)
+		{
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

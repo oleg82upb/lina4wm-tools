@@ -57,7 +57,8 @@ public class CompareItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addPredPropertyDescriptor(object);
@@ -97,7 +98,8 @@ public class CompareItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.COMPARE__COMPTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.COMPARE__VALUE1);
@@ -155,7 +157,8 @@ public class CompareItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Compare.class)) {
+		switch (notification.getFeatureID(Compare.class))
+		{
 			case LlvmPackage.COMPARE__PRED:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
@@ -260,7 +263,8 @@ public class CompareItemProvider
 			childFeature == LlvmPackage.Literals.COMPARE__VALUE1 ||
 			childFeature == LlvmPackage.Literals.COMPARE__VALUE2;
 
-		if (qualify) {
+		if (qualify)
+		{
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

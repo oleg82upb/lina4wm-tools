@@ -40,6 +40,7 @@ import de.upb.llvm_parser.llvm.NonConstantValue;
 import de.upb.llvm_parser.llvm.ParameterList;
 import de.upb.llvm_parser.llvm.Phi;
 import de.upb.llvm_parser.llvm.Predefined;
+import de.upb.llvm_parser.llvm.PrimitiveValue;
 import de.upb.llvm_parser.llvm.Resume;
 import de.upb.llvm_parser.llvm.Return;
 import de.upb.llvm_parser.llvm.Select;
@@ -51,7 +52,6 @@ import de.upb.llvm_parser.llvm.TopLevelEntity;
 import de.upb.llvm_parser.llvm.TypeDefinition;
 import de.upb.llvm_parser.llvm.TypeList;
 import de.upb.llvm_parser.llvm.Unreachable;
-import de.upb.llvm_parser.llvm.Value;
 import de.upb.llvm_parser.llvm.ValueStruct;
 import de.upb.llvm_parser.llvm.VariableAttributeAccess;
 import de.upb.llvm_parser.llvm.Vector;
@@ -352,6 +352,12 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 					return; 
 				}
 				else break;
+			case LlvmPackage.PRIMITIVE_VALUE:
+				if(context == grammarAccess.getPrimitiveValueRule()) {
+					sequence_PrimitiveValue(context, (PrimitiveValue) semanticObject); 
+					return; 
+				}
+				else break;
 			case LlvmPackage.RESUME:
 				if(context == grammarAccess.getInstructionRule() ||
 				   context == grammarAccess.getResumeRule() ||
@@ -433,12 +439,6 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				   context == grammarAccess.getReturnInstructionRule() ||
 				   context == grammarAccess.getUnreachableRule()) {
 					sequence_Unreachable(context, (Unreachable) semanticObject); 
-					return; 
-				}
-				else break;
-			case LlvmPackage.VALUE:
-				if(context == grammarAccess.getValueRule()) {
-					sequence_Value(context, (Value) semanticObject); 
 					return; 
 				}
 				else break;
@@ -688,7 +688,14 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     value=NUMBER
 	 */
 	protected void sequence_Constant(EObject context, Constant semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.CONSTANT__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.CONSTANT__VALUE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getConstantAccess().getValueNUMBERParserRuleCall_0(), semanticObject.getValue());
+		feeder.finish();
 	}
 	
 	
@@ -999,6 +1006,15 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
+	 *     (name=STRING | name=PrimitiveType | name=Initializers)
+	 */
+	protected void sequence_PrimitiveValue(EObject context, PrimitiveValue semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (resumestruct=Structure resumevalue=Value)
 	 */
 	protected void sequence_Resume(EObject context, Resume semanticObject) {
@@ -1194,15 +1210,6 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     (types+=TypeUse value+=Value (types+=TypeUse value+=Value)*)
 	 */
 	protected void sequence_ValueStruct(EObject context, ValueStruct semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (name=STRING | name=PrimitiveType | name=Initializers)
-	 */
-	protected void sequence_Value(EObject context, Value semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

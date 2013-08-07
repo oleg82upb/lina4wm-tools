@@ -57,7 +57,8 @@ public class LoadItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addOrderingPropertyDescriptor(object);
@@ -120,7 +121,8 @@ public class LoadItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.LOAD__ADRESSTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.LOAD__TYPES);
@@ -178,7 +180,8 @@ public class LoadItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Load.class)) {
+		switch (notification.getFeatureID(Load.class))
+		{
 			case LlvmPackage.LOAD__ORDERING:
 			case LlvmPackage.LOAD__INDEX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

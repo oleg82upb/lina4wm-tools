@@ -1866,6 +1866,8 @@ ruleNonConstantValue returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleValue
 entryRuleValue returns [EObject current=null] 
 	:
@@ -1880,101 +1882,43 @@ ruleValue returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(((
-    {
-        $current = forceCreateModelElement(
-            grammarAccess.getValueAccess().getValueAction_0_0(),
-            $current);
-    }
-)(
 (
-(
-		lv_name_1_1=RULE_STRING
-		{
-			newLeafNode(lv_name_1_1, grammarAccess.getValueAccess().getNameSTRINGTerminalRuleCall_0_1_0_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getValueRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_1_1, 
-        		"STRING");
-	    }
-
-    |		{ 
-	        newCompositeNode(grammarAccess.getValueAccess().getNamePrimitiveTypeParserRuleCall_0_1_0_1()); 
-	    }
-		lv_name_1_2=rulePrimitiveType		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getValueRule());
-	        }
-       		set(
-       			$current, 
-       			"name",
-        		lv_name_1_2, 
-        		"PrimitiveType");
-	        afterParserOrEnumRuleCall();
-	    }
-
-    |		{ 
-	        newCompositeNode(grammarAccess.getValueAccess().getNameInitializersParserRuleCall_0_1_0_2()); 
-	    }
-		lv_name_1_3=ruleInitializers		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getValueRule());
-	        }
-       		set(
-       			$current, 
-       			"name",
-        		lv_name_1_3, 
-        		"Initializers");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-
-)
-))
-    |
     { 
-        newCompositeNode(grammarAccess.getValueAccess().getCastParserRuleCall_1()); 
+        newCompositeNode(grammarAccess.getValueAccess().getCastParserRuleCall_0()); 
     }
-    this_Cast_2=ruleCast
+    this_Cast_0=ruleCast
     { 
-        $current = $this_Cast_2.current; 
+        $current = $this_Cast_0.current; 
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        newCompositeNode(grammarAccess.getValueAccess().getNestedGetElementPtrParserRuleCall_2()); 
+        newCompositeNode(grammarAccess.getValueAccess().getNestedGetElementPtrParserRuleCall_1()); 
     }
-    this_NestedGetElementPtr_3=ruleNestedGetElementPtr
+    this_NestedGetElementPtr_1=ruleNestedGetElementPtr
     { 
-        $current = $this_NestedGetElementPtr_3.current; 
+        $current = $this_NestedGetElementPtr_1.current; 
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        newCompositeNode(grammarAccess.getValueAccess().getConstantParserRuleCall_3()); 
+        newCompositeNode(grammarAccess.getValueAccess().getConstantParserRuleCall_2()); 
     }
-    this_Constant_4=ruleConstant
+    this_Constant_2=ruleConstant
     { 
-        $current = $this_Constant_4.current; 
+        $current = $this_Constant_2.current; 
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        newCompositeNode(grammarAccess.getValueAccess().getNonConstantValueParserRuleCall_4()); 
+        newCompositeNode(grammarAccess.getValueAccess().getNonConstantValueParserRuleCall_3()); 
     }
-    this_NonConstantValue_5=ruleNonConstantValue
+    this_NonConstantValue_3=ruleNonConstantValue
     { 
-        $current = $this_NonConstantValue_5.current; 
+        $current = $this_NonConstantValue_3.current; 
         afterParserOrEnumRuleCall();
     }
 )

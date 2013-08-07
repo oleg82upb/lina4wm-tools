@@ -13,5 +13,6 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface StandartInstruction extends Instruction {
+public interface StandartInstruction extends Instruction
+{
 } // StandartInstruction

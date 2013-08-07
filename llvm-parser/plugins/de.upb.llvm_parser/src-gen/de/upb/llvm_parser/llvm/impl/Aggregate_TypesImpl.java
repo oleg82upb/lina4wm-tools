@@ -18,24 +18,27 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class Aggregate_TypesImpl extends MinimalEObjectImpl.Container implements Aggregate_Types {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected Aggregate_TypesImpl() {
-		super();
-	}
+public class Aggregate_TypesImpl extends MinimalEObjectImpl.Container implements Aggregate_Types
+{
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected Aggregate_TypesImpl()
+  {
+    super();
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return LlvmPackage.Literals.AGGREGATE_TYPES;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass()
+  {
+    return LlvmPackage.Literals.AGGREGATE_TYPES;
+  }
 
 } //Aggregate_TypesImpl

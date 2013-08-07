@@ -58,7 +58,8 @@ public class ValueStructItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -75,7 +76,8 @@ public class ValueStructItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.VALUE_STRUCT__TYPES);
 			childrenFeatures.add(LlvmPackage.Literals.VALUE_STRUCT__VALUE);
@@ -129,7 +131,8 @@ public class ValueStructItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ValueStruct.class)) {
+		switch (notification.getFeatureID(ValueStruct.class))
+		{
 			case LlvmPackage.VALUE_STRUCT__TYPES:
 			case LlvmPackage.VALUE_STRUCT__VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));

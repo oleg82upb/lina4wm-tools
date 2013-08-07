@@ -57,7 +57,8 @@ public class CastItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addOperationPropertyDescriptor(object);
@@ -97,7 +98,8 @@ public class CastItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.CAST__FROM);
 			childrenFeatures.add(LlvmPackage.Literals.CAST__VALUE);
@@ -138,7 +140,7 @@ public class CastItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Cast)object).getName();
+		String label = ((Cast)object).getOperation();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Cast_type") :
 			getString("_UI_Cast_type") + " " + label;
@@ -155,7 +157,8 @@ public class CastItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Cast.class)) {
+		switch (notification.getFeatureID(Cast.class))
+		{
 			case LlvmPackage.CAST__OPERATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
@@ -268,6 +271,11 @@ public class CastItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
 				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CAST__FROM,
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -526,7 +534,8 @@ public class CastItemProvider
 			childFeature == LlvmPackage.Literals.CAST__TO ||
 			childFeature == LlvmPackage.Literals.CAST__VALUE;
 
-		if (qualify) {
+		if (qualify)
+		{
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

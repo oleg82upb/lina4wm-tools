@@ -54,7 +54,8 @@ public class TopLevelEntityItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addModulePropertyDescriptor(object);
@@ -166,7 +167,8 @@ public class TopLevelEntityItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(TopLevelEntity.class)) {
+		switch (notification.getFeatureID(TopLevelEntity.class))
+		{
 			case LlvmPackage.TOP_LEVEL_ENTITY__MODULE:
 			case LlvmPackage.TOP_LEVEL_ENTITY__TARGET:
 			case LlvmPackage.TOP_LEVEL_ENTITY__LIBS:

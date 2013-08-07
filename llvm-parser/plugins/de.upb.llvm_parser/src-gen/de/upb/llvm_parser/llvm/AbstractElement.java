@@ -14,5 +14,6 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface AbstractElement extends EObject {
+public interface AbstractElement extends EObject
+{
 } // AbstractElement

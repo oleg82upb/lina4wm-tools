@@ -57,7 +57,8 @@ public class InsertValueItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addIndexPropertyDescriptor(object);
@@ -97,7 +98,8 @@ public class InsertValueItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.INSERT_VALUE__STRUCT);
 			childrenFeatures.add(LlvmPackage.Literals.INSERT_VALUE__VALUE);
@@ -153,7 +155,8 @@ public class InsertValueItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(InsertValue.class)) {
+		switch (notification.getFeatureID(InsertValue.class))
+		{
 			case LlvmPackage.INSERT_VALUE__INDEX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
@@ -264,7 +267,8 @@ public class InsertValueItemProvider
 			childFeature == LlvmPackage.Literals.INSERT_VALUE__VALUE ||
 			childFeature == LlvmPackage.Literals.INSERT_VALUE__INSERTVALUE;
 
-		if (qualify) {
+		if (qualify)
+		{
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

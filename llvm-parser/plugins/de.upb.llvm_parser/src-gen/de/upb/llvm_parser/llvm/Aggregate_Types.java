@@ -14,5 +14,6 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Aggregate_Types extends EObject {
+public interface Aggregate_Types extends EObject
+{
 } // Aggregate_Types

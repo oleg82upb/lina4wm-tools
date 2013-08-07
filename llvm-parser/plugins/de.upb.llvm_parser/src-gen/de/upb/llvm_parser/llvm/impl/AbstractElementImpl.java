@@ -18,24 +18,27 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class AbstractElementImpl extends MinimalEObjectImpl.Container implements AbstractElement {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AbstractElementImpl() {
-		super();
-	}
+public class AbstractElementImpl extends MinimalEObjectImpl.Container implements AbstractElement
+{
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected AbstractElementImpl()
+  {
+    super();
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return LlvmPackage.Literals.ABSTRACT_ELEMENT;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass()
+  {
+    return LlvmPackage.Literals.ABSTRACT_ELEMENT;
+  }
 
 } //AbstractElementImpl

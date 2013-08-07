@@ -22,21 +22,22 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Structure extends Aggregate_Types {
-	/**
-	 * Returns the value of the '<em><b>Types</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Types</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Types</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getStructure_Types()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<EObject> getTypes();
+public interface Structure extends Aggregate_Types
+{
+  /**
+   * Returns the value of the '<em><b>Types</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Types</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Types</em>' containment reference list.
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getStructure_Types()
+   * @model containment="true"
+   * @generated
+   */
+  EList<EObject> getTypes();
 
 } // Structure

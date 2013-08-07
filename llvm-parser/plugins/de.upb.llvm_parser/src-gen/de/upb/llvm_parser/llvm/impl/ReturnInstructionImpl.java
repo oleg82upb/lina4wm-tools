@@ -16,24 +16,27 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class ReturnInstructionImpl extends InstructionImpl implements ReturnInstruction {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ReturnInstructionImpl() {
-		super();
-	}
+public class ReturnInstructionImpl extends InstructionImpl implements ReturnInstruction
+{
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected ReturnInstructionImpl()
+  {
+    super();
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return LlvmPackage.Literals.RETURN_INSTRUCTION;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass()
+  {
+    return LlvmPackage.Literals.RETURN_INSTRUCTION;
+  }
 
 } //ReturnInstructionImpl

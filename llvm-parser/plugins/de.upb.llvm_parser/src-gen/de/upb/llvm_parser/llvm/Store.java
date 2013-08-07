@@ -28,177 +28,178 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Store extends StandartInstruction {
-	/**
-	 * Returns the value of the '<em><b>Newtype</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Newtype</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Newtype</em>' containment reference.
-	 * @see #setNewtype(TypeUse)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getStore_Newtype()
-	 * @model containment="true"
-	 * @generated
-	 */
-	TypeUse getNewtype();
+public interface Store extends StandartInstruction
+{
+  /**
+   * Returns the value of the '<em><b>Newtype</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Newtype</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Newtype</em>' containment reference.
+   * @see #setNewtype(TypeUse)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getStore_Newtype()
+   * @model containment="true"
+   * @generated
+   */
+  TypeUse getNewtype();
 
-	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Store#getNewtype <em>Newtype</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Newtype</em>' containment reference.
-	 * @see #getNewtype()
-	 * @generated
-	 */
-	void setNewtype(TypeUse value);
+  /**
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Store#getNewtype <em>Newtype</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Newtype</em>' containment reference.
+   * @see #getNewtype()
+   * @generated
+   */
+  void setNewtype(TypeUse value);
 
-	/**
-	 * Returns the value of the '<em><b>Types</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.TypeList}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Types</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Types</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getStore_Types()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<TypeList> getTypes();
+  /**
+   * Returns the value of the '<em><b>Types</b></em>' containment reference list.
+   * The list contents are of type {@link de.upb.llvm_parser.llvm.TypeList}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Types</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Types</em>' containment reference list.
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getStore_Types()
+   * @model containment="true"
+   * @generated
+   */
+  EList<TypeList> getTypes();
 
-	/**
-	 * Returns the value of the '<em><b>Newvalue</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Newvalue</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Newvalue</em>' containment reference.
-	 * @see #setNewvalue(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getStore_Newvalue()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Value getNewvalue();
+  /**
+   * Returns the value of the '<em><b>Newvalue</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Newvalue</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Newvalue</em>' containment reference.
+   * @see #setNewvalue(Value)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getStore_Newvalue()
+   * @model containment="true"
+   * @generated
+   */
+  Value getNewvalue();
 
-	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Store#getNewvalue <em>Newvalue</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Newvalue</em>' containment reference.
-	 * @see #getNewvalue()
-	 * @generated
-	 */
-	void setNewvalue(Value value);
+  /**
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Store#getNewvalue <em>Newvalue</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Newvalue</em>' containment reference.
+   * @see #getNewvalue()
+   * @generated
+   */
+  void setNewvalue(Value value);
 
-	/**
-	 * Returns the value of the '<em><b>Adresstype</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Adresstype</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Adresstype</em>' containment reference.
-	 * @see #setAdresstype(TypeUse)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getStore_Adresstype()
-	 * @model containment="true"
-	 * @generated
-	 */
-	TypeUse getAdresstype();
+  /**
+   * Returns the value of the '<em><b>Adresstype</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Adresstype</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Adresstype</em>' containment reference.
+   * @see #setAdresstype(TypeUse)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getStore_Adresstype()
+   * @model containment="true"
+   * @generated
+   */
+  TypeUse getAdresstype();
 
-	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Store#getAdresstype <em>Adresstype</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Adresstype</em>' containment reference.
-	 * @see #getAdresstype()
-	 * @generated
-	 */
-	void setAdresstype(TypeUse value);
+  /**
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Store#getAdresstype <em>Adresstype</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Adresstype</em>' containment reference.
+   * @see #getAdresstype()
+   * @generated
+   */
+  void setAdresstype(TypeUse value);
 
-	/**
-	 * Returns the value of the '<em><b>Adress</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Adress</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Adress</em>' containment reference.
-	 * @see #setAdress(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getStore_Adress()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Value getAdress();
+  /**
+   * Returns the value of the '<em><b>Adress</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Adress</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Adress</em>' containment reference.
+   * @see #setAdress(Value)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getStore_Adress()
+   * @model containment="true"
+   * @generated
+   */
+  Value getAdress();
 
-	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Store#getAdress <em>Adress</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Adress</em>' containment reference.
-	 * @see #getAdress()
-	 * @generated
-	 */
-	void setAdress(Value value);
+  /**
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Store#getAdress <em>Adress</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Adress</em>' containment reference.
+   * @see #getAdress()
+   * @generated
+   */
+  void setAdress(Value value);
 
-	/**
-	 * Returns the value of the '<em><b>Ordering</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Ordering</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Ordering</em>' attribute.
-	 * @see #setOrdering(String)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getStore_Ordering()
-	 * @model
-	 * @generated
-	 */
-	String getOrdering();
+  /**
+   * Returns the value of the '<em><b>Ordering</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Ordering</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Ordering</em>' attribute.
+   * @see #setOrdering(String)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getStore_Ordering()
+   * @model
+   * @generated
+   */
+  String getOrdering();
 
-	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Store#getOrdering <em>Ordering</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Ordering</em>' attribute.
-	 * @see #getOrdering()
-	 * @generated
-	 */
-	void setOrdering(String value);
+  /**
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Store#getOrdering <em>Ordering</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Ordering</em>' attribute.
+   * @see #getOrdering()
+   * @generated
+   */
+  void setOrdering(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Index</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Index</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Index</em>' attribute.
-	 * @see #setIndex(BigDecimal)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getStore_Index()
-	 * @model
-	 * @generated
-	 */
-	BigDecimal getIndex();
+  /**
+   * Returns the value of the '<em><b>Index</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Index</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Index</em>' attribute.
+   * @see #setIndex(BigDecimal)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getStore_Index()
+   * @model
+   * @generated
+   */
+  BigDecimal getIndex();
 
-	/**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Store#getIndex <em>Index</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Index</em>' attribute.
-	 * @see #getIndex()
-	 * @generated
-	 */
-	void setIndex(BigDecimal value);
+  /**
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Store#getIndex <em>Index</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Index</em>' attribute.
+   * @see #getIndex()
+   * @generated
+   */
+  void setIndex(BigDecimal value);
 
 } // Store

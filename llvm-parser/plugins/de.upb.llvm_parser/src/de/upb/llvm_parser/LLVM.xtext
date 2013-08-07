@@ -111,13 +111,16 @@ Aggregate_Types:
 	Structure | Array | Vector;
 
 Constant:
-	value=NUMBER;
+	value = NUMBER;
 
 NonConstantValue:
 	name=VALID_ID (pointer=POINTER)?;
+	
+PrimitiveValue:
+	name = (STRING| PrimitiveType | Initializers);
 
 Value:
-	{Value} name= (STRING| PrimitiveType | Initializers) | Cast | NestedGetElementPtr | Constant | NonConstantValue;
+	 Cast | NestedGetElementPtr | Constant | NonConstantValue;
 
 ValueStruct:
 	'{' types+=TypeUse value+=Value (',' types+=TypeUse value+=Value)* '}';

@@ -55,7 +55,8 @@ public class ShuffleVectorItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -72,7 +73,8 @@ public class ShuffleVectorItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1TYPE);
 			childrenFeatures.add(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1VALUE);
@@ -130,7 +132,8 @@ public class ShuffleVectorItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ShuffleVector.class)) {
+		switch (notification.getFeatureID(ShuffleVector.class))
+		{
 			case LlvmPackage.SHUFFLE_VECTOR__VAL1TYPE:
 			case LlvmPackage.SHUFFLE_VECTOR__VAL1VALUE:
 			case LlvmPackage.SHUFFLE_VECTOR__VAL2TYPE:
@@ -294,7 +297,8 @@ public class ShuffleVectorItemProvider
 			childFeature == LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2VALUE ||
 			childFeature == LlvmPackage.Literals.SHUFFLE_VECTOR__MASKVALUE;
 
-		if (qualify) {
+		if (qualify)
+		{
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

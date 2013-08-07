@@ -64,11 +64,13 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Constant/value"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//NonConstantValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//NonConstantValue/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//NonConstantValue/pointer"/>
     </genClasses>
-    <genClasses ecoreClass="LLVM.ecore#//Value">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Value/name"/>
+    <genClasses ecoreClass="LLVM.ecore#//PrimitiveValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//PrimitiveValue/name"/>
     </genClasses>
+    <genClasses ecoreClass="LLVM.ecore#//Value"/>
     <genClasses ecoreClass="LLVM.ecore#//ValueStruct">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ValueStruct/types"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ValueStruct/value"/>

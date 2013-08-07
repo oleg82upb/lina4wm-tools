@@ -55,7 +55,8 @@ public class StructureItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -72,7 +73,8 @@ public class StructureItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.STRUCTURE__TYPES);
 		}
@@ -125,7 +127,8 @@ public class StructureItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Structure.class)) {
+		switch (notification.getFeatureID(Structure.class))
+		{
 			case LlvmPackage.STRUCTURE__TYPES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -233,6 +236,11 @@ public class StructureItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
 				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.STRUCTURE__TYPES,
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
