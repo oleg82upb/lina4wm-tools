@@ -54,7 +54,8 @@ public class MainLevelEntityItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addMetaPropertyDescriptor(object);
@@ -117,7 +118,8 @@ public class MainLevelEntityItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(MainLevelEntity.class)) {
+		switch (notification.getFeatureID(MainLevelEntity.class))
+		{
 			case LlvmPackage.MAIN_LEVEL_ENTITY__META:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

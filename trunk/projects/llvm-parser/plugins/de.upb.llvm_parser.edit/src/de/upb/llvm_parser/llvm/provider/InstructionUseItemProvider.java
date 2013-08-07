@@ -60,7 +60,8 @@ public class InstructionUseItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addReg_or_varPropertyDescriptor(object);
@@ -100,7 +101,8 @@ public class InstructionUseItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.INSTRUCTION_USE__INSTRUCTION);
 		}
@@ -156,7 +158,8 @@ public class InstructionUseItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(InstructionUse.class)) {
+		switch (notification.getFeatureID(InstructionUse.class))
+		{
 			case LlvmPackage.INSTRUCTION_USE__REG_OR_VAR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

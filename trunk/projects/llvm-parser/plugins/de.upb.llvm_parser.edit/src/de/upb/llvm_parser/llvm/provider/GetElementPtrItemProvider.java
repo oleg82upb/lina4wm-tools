@@ -55,7 +55,8 @@ public class GetElementPtrItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -72,7 +73,8 @@ public class GetElementPtrItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE);
 			childrenFeatures.add(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATENAME);
@@ -128,7 +130,8 @@ public class GetElementPtrItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(GetElementPtr.class)) {
+		switch (notification.getFeatureID(GetElementPtr.class))
+		{
 			case LlvmPackage.GET_ELEMENT_PTR__AGGREGATE:
 			case LlvmPackage.GET_ELEMENT_PTR__AGGREGATENAME:
 			case LlvmPackage.GET_ELEMENT_PTR__IND_TYPES:
@@ -239,6 +242,11 @@ public class GetElementPtrItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -523,7 +531,8 @@ public class GetElementPtrItemProvider
 			childFeature == LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATENAME ||
 			childFeature == LlvmPackage.Literals.GET_ELEMENT_PTR__INDIZIES;
 
-		if (qualify) {
+		if (qualify)
+		{
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

@@ -55,7 +55,8 @@ public class AllocItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -72,7 +73,8 @@ public class AllocItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.ALLOC__TYPE);
 			childrenFeatures.add(LlvmPackage.Literals.ALLOC__TYPELIST);
@@ -128,7 +130,8 @@ public class AllocItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Alloc.class)) {
+		switch (notification.getFeatureID(Alloc.class))
+		{
 			case LlvmPackage.ALLOC__TYPE:
 			case LlvmPackage.ALLOC__TYPELIST:
 			case LlvmPackage.ALLOC__NUMELEMENTSTYPE:
@@ -226,7 +229,8 @@ public class AllocItemProvider
 			childFeature == LlvmPackage.Literals.ALLOC__TYPE ||
 			childFeature == LlvmPackage.Literals.ALLOC__NUMELEMENTSTYPE;
 
-		if (qualify) {
+		if (qualify)
+		{
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

@@ -57,7 +57,8 @@ public class StoreItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addOrderingPropertyDescriptor(object);
@@ -120,7 +121,8 @@ public class StoreItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.STORE__NEWTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.STORE__TYPES);
@@ -180,7 +182,8 @@ public class StoreItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Store.class)) {
+		switch (notification.getFeatureID(Store.class))
+		{
 			case LlvmPackage.STORE__ORDERING:
 			case LlvmPackage.STORE__INDEX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
@@ -310,7 +313,8 @@ public class StoreItemProvider
 			childFeature == LlvmPackage.Literals.STORE__NEWVALUE ||
 			childFeature == LlvmPackage.Literals.STORE__ADRESS;
 
-		if (qualify) {
+		if (qualify)
+		{
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

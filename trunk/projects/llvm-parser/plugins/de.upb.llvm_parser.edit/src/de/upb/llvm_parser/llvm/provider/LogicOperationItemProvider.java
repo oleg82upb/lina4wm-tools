@@ -57,7 +57,8 @@ public class LogicOperationItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addOperationPropertyDescriptor(object);
@@ -97,7 +98,8 @@ public class LogicOperationItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.LOGIC_OPERATION__OPTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.LOGIC_OPERATION__VALUE1);
@@ -155,7 +157,8 @@ public class LogicOperationItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(LogicOperation.class)) {
+		switch (notification.getFeatureID(LogicOperation.class))
+		{
 			case LlvmPackage.LOGIC_OPERATION__OPERATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
@@ -260,7 +263,8 @@ public class LogicOperationItemProvider
 			childFeature == LlvmPackage.Literals.LOGIC_OPERATION__VALUE1 ||
 			childFeature == LlvmPackage.Literals.LOGIC_OPERATION__VALUE2;
 
-		if (qualify) {
+		if (qualify)
+		{
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

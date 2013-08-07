@@ -55,7 +55,8 @@ public class GlobalDefinitionItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -72,7 +73,8 @@ public class GlobalDefinitionItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.GLOBAL_DEFINITION__ADRESS);
 			childrenFeatures.add(LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE);
@@ -127,7 +129,8 @@ public class GlobalDefinitionItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(GlobalDefinition.class)) {
+		switch (notification.getFeatureID(GlobalDefinition.class))
+		{
 			case LlvmPackage.GLOBAL_DEFINITION__ADRESS:
 			case LlvmPackage.GLOBAL_DEFINITION__TYPE:
 			case LlvmPackage.GLOBAL_DEFINITION__VALUE:
@@ -242,6 +245,11 @@ public class GlobalDefinitionItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE,
 				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE,
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -532,6 +540,11 @@ public class GlobalDefinitionItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.GLOBAL_DEFINITION__VALUE,
 				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GLOBAL_DEFINITION__VALUE,
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -750,7 +763,8 @@ public class GlobalDefinitionItemProvider
 			childFeature == LlvmPackage.Literals.GLOBAL_DEFINITION__TYPE ||
 			childFeature == LlvmPackage.Literals.GLOBAL_DEFINITION__VALUE;
 
-		if (qualify) {
+		if (qualify)
+		{
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

@@ -20,21 +20,22 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface MainLevelEntity extends AbstractElement {
-	/**
-	 * Returns the value of the '<em><b>Meta</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Meta</em>' attribute list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Meta</em>' attribute list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getMainLevelEntity_Meta()
-	 * @model unique="false"
-	 * @generated
-	 */
-	EList<String> getMeta();
+public interface MainLevelEntity extends AbstractElement
+{
+  /**
+   * Returns the value of the '<em><b>Meta</b></em>' attribute list.
+   * The list contents are of type {@link java.lang.String}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Meta</em>' attribute list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Meta</em>' attribute list.
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getMainLevelEntity_Meta()
+   * @model unique="false"
+   * @generated
+   */
+  EList<String> getMeta();
 
 } // MainLevelEntity

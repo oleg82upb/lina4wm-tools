@@ -57,7 +57,8 @@ public class ExtractValueItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addIndexPropertyDescriptor(object);
@@ -97,7 +98,8 @@ public class ExtractValueItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.EXTRACT_VALUE__ARRAY);
 			childrenFeatures.add(LlvmPackage.Literals.EXTRACT_VALUE__STRUCT);
@@ -152,7 +154,8 @@ public class ExtractValueItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ExtractValue.class)) {
+		switch (notification.getFeatureID(ExtractValue.class))
+		{
 			case LlvmPackage.EXTRACT_VALUE__INDEX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

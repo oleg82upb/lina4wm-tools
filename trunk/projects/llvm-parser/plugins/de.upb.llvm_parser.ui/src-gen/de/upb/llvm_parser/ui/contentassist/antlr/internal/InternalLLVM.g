@@ -702,6 +702,8 @@ finally {
 
 
 
+
+
 // Entry rule entryRuleValue
 entryRuleValue 
 :
@@ -2849,67 +2851,34 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+
 rule__Value__Alternatives
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getValueAccess().getGroup_0()); }
-(rule__Value__Group_0__0)
-{ after(grammarAccess.getValueAccess().getGroup_0()); }
-)
-
-    |(
-{ before(grammarAccess.getValueAccess().getCastParserRuleCall_1()); }
+{ before(grammarAccess.getValueAccess().getCastParserRuleCall_0()); }
 	ruleCast
-{ after(grammarAccess.getValueAccess().getCastParserRuleCall_1()); }
+{ after(grammarAccess.getValueAccess().getCastParserRuleCall_0()); }
 )
 
     |(
-{ before(grammarAccess.getValueAccess().getNestedGetElementPtrParserRuleCall_2()); }
+{ before(grammarAccess.getValueAccess().getNestedGetElementPtrParserRuleCall_1()); }
 	ruleNestedGetElementPtr
-{ after(grammarAccess.getValueAccess().getNestedGetElementPtrParserRuleCall_2()); }
+{ after(grammarAccess.getValueAccess().getNestedGetElementPtrParserRuleCall_1()); }
 )
 
     |(
-{ before(grammarAccess.getValueAccess().getConstantParserRuleCall_3()); }
+{ before(grammarAccess.getValueAccess().getConstantParserRuleCall_2()); }
 	ruleConstant
-{ after(grammarAccess.getValueAccess().getConstantParserRuleCall_3()); }
+{ after(grammarAccess.getValueAccess().getConstantParserRuleCall_2()); }
 )
 
     |(
-{ before(grammarAccess.getValueAccess().getNonConstantValueParserRuleCall_4()); }
+{ before(grammarAccess.getValueAccess().getNonConstantValueParserRuleCall_3()); }
 	ruleNonConstantValue
-{ after(grammarAccess.getValueAccess().getNonConstantValueParserRuleCall_4()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Value__NameAlternatives_0_1_0
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getValueAccess().getNameSTRINGTerminalRuleCall_0_1_0_0()); }
-	RULE_STRING
-{ after(grammarAccess.getValueAccess().getNameSTRINGTerminalRuleCall_0_1_0_0()); }
-)
-
-    |(
-{ before(grammarAccess.getValueAccess().getNamePrimitiveTypeParserRuleCall_0_1_0_1()); }
-	rulePrimitiveType
-{ after(grammarAccess.getValueAccess().getNamePrimitiveTypeParserRuleCall_0_1_0_1()); }
-)
-
-    |(
-{ before(grammarAccess.getValueAccess().getNameInitializersParserRuleCall_0_1_0_2()); }
-	ruleInitializers
-{ after(grammarAccess.getValueAccess().getNameInitializersParserRuleCall_0_1_0_2()); }
+{ after(grammarAccess.getValueAccess().getNonConstantValueParserRuleCall_3()); }
 )
 
 ;
@@ -8202,69 +8171,6 @@ rule__NonConstantValue__Group__1__Impl
 { before(grammarAccess.getNonConstantValueAccess().getPointerAssignment_1()); }
 (rule__NonConstantValue__PointerAssignment_1)?
 { after(grammarAccess.getNonConstantValueAccess().getPointerAssignment_1()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-
-
-
-
-rule__Value__Group_0__0
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-	rule__Value__Group_0__0__Impl
-	rule__Value__Group_0__1
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Value__Group_0__0__Impl
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getValueAccess().getValueAction_0_0()); }
-(
-
-)
-{ after(grammarAccess.getValueAccess().getValueAction_0_0()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-rule__Value__Group_0__1
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-	rule__Value__Group_0__1__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Value__Group_0__1__Impl
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getValueAccess().getNameAssignment_0_1()); }
-(rule__Value__NameAssignment_0_1)
-{ after(grammarAccess.getValueAccess().getNameAssignment_0_1()); }
 )
 
 ;
@@ -22334,21 +22240,6 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Value__NameAssignment_0_1
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getValueAccess().getNameAlternatives_0_1_0()); }
-(rule__Value__NameAlternatives_0_1_0)
-{ after(grammarAccess.getValueAccess().getNameAlternatives_0_1_0()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
 
 rule__ValueStruct__TypesAssignment_1
     @init {

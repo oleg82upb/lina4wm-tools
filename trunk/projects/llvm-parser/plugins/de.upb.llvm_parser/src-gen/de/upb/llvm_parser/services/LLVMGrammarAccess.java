@@ -1150,61 +1150,66 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getPointerPOINTERTerminalRuleCall_1_0() { return cPointerPOINTERTerminalRuleCall_1_0; }
 	}
 
+	public class PrimitiveValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PrimitiveValue");
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final Alternatives cNameAlternatives_0 = (Alternatives)cNameAssignment.eContents().get(0);
+		private final RuleCall cNameSTRINGTerminalRuleCall_0_0 = (RuleCall)cNameAlternatives_0.eContents().get(0);
+		private final RuleCall cNamePrimitiveTypeParserRuleCall_0_1 = (RuleCall)cNameAlternatives_0.eContents().get(1);
+		private final RuleCall cNameInitializersParserRuleCall_0_2 = (RuleCall)cNameAlternatives_0.eContents().get(2);
+		
+		//PrimitiveValue:
+		//
+		//	name=(STRING | PrimitiveType | Initializers);
+		public ParserRule getRule() { return rule; }
+
+		//name=(STRING | PrimitiveType | Initializers)
+		public Assignment getNameAssignment() { return cNameAssignment; }
+
+		//STRING | PrimitiveType | Initializers
+		public Alternatives getNameAlternatives_0() { return cNameAlternatives_0; }
+
+		//STRING
+		public RuleCall getNameSTRINGTerminalRuleCall_0_0() { return cNameSTRINGTerminalRuleCall_0_0; }
+
+		//PrimitiveType
+		public RuleCall getNamePrimitiveTypeParserRuleCall_0_1() { return cNamePrimitiveTypeParserRuleCall_0_1; }
+
+		//Initializers
+		public RuleCall getNameInitializersParserRuleCall_0_2() { return cNameInitializersParserRuleCall_0_2; }
+	}
+
 	public class ValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Value");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Action cValueAction_0_0 = (Action)cGroup_0.eContents().get(0);
-		private final Assignment cNameAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final Alternatives cNameAlternatives_0_1_0 = (Alternatives)cNameAssignment_0_1.eContents().get(0);
-		private final RuleCall cNameSTRINGTerminalRuleCall_0_1_0_0 = (RuleCall)cNameAlternatives_0_1_0.eContents().get(0);
-		private final RuleCall cNamePrimitiveTypeParserRuleCall_0_1_0_1 = (RuleCall)cNameAlternatives_0_1_0.eContents().get(1);
-		private final RuleCall cNameInitializersParserRuleCall_0_1_0_2 = (RuleCall)cNameAlternatives_0_1_0.eContents().get(2);
-		private final RuleCall cCastParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cNestedGetElementPtrParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cConstantParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cNonConstantValueParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cCastParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cNestedGetElementPtrParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cConstantParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cNonConstantValueParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
-		//Value:
+		//Value: //{Value} name= (STRING| PrimitiveType | Initializers |
 		//
-		//	{Value} name=(STRING | PrimitiveType | Initializers) | Cast | NestedGetElementPtr | Constant | NonConstantValue;
+		//	Cast | NestedGetElementPtr | Constant | NonConstantValue;
 		public ParserRule getRule() { return rule; }
 
-		//{Value} name=(STRING | PrimitiveType | Initializers) | Cast | NestedGetElementPtr | Constant | NonConstantValue
+		////{Value} name= (STRING| PrimitiveType | Initializers |
+		//
+		//Cast | NestedGetElementPtr | Constant | NonConstantValue
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//{Value} name=(STRING | PrimitiveType | Initializers)
-		public Group getGroup_0() { return cGroup_0; }
-
-		//{Value}
-		public Action getValueAction_0_0() { return cValueAction_0_0; }
-
-		//name=(STRING | PrimitiveType | Initializers)
-		public Assignment getNameAssignment_0_1() { return cNameAssignment_0_1; }
-
-		//STRING | PrimitiveType | Initializers
-		public Alternatives getNameAlternatives_0_1_0() { return cNameAlternatives_0_1_0; }
-
-		//STRING
-		public RuleCall getNameSTRINGTerminalRuleCall_0_1_0_0() { return cNameSTRINGTerminalRuleCall_0_1_0_0; }
-
-		//PrimitiveType
-		public RuleCall getNamePrimitiveTypeParserRuleCall_0_1_0_1() { return cNamePrimitiveTypeParserRuleCall_0_1_0_1; }
-
-		//Initializers
-		public RuleCall getNameInitializersParserRuleCall_0_1_0_2() { return cNameInitializersParserRuleCall_0_1_0_2; }
-
+		////{Value} name= (STRING| PrimitiveType | Initializers |
+		//
 		//Cast
-		public RuleCall getCastParserRuleCall_1() { return cCastParserRuleCall_1; }
+		public RuleCall getCastParserRuleCall_0() { return cCastParserRuleCall_0; }
 
 		//NestedGetElementPtr
-		public RuleCall getNestedGetElementPtrParserRuleCall_2() { return cNestedGetElementPtrParserRuleCall_2; }
+		public RuleCall getNestedGetElementPtrParserRuleCall_1() { return cNestedGetElementPtrParserRuleCall_1; }
 
 		//Constant
-		public RuleCall getConstantParserRuleCall_3() { return cConstantParserRuleCall_3; }
+		public RuleCall getConstantParserRuleCall_2() { return cConstantParserRuleCall_2; }
 
 		//NonConstantValue
-		public RuleCall getNonConstantValueParserRuleCall_4() { return cNonConstantValueParserRuleCall_4; }
+		public RuleCall getNonConstantValueParserRuleCall_3() { return cNonConstantValueParserRuleCall_3; }
 	}
 
 	public class ValueStructElements extends AbstractParserRuleElementFinder {
@@ -5435,6 +5440,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 	private Aggregate_TypesElements pAggregate_Types;
 	private ConstantElements pConstant;
 	private NonConstantValueElements pNonConstantValue;
+	private PrimitiveValueElements pPrimitiveValue;
 	private ValueElements pValue;
 	private ValueStructElements pValueStruct;
 	private StructureElements pStructure;
@@ -5844,9 +5850,20 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		return getNonConstantValueAccess().getRule();
 	}
 
-	//Value:
+	//PrimitiveValue:
 	//
-	//	{Value} name=(STRING | PrimitiveType | Initializers) | Cast | NestedGetElementPtr | Constant | NonConstantValue;
+	//	name=(STRING | PrimitiveType | Initializers);
+	public PrimitiveValueElements getPrimitiveValueAccess() {
+		return (pPrimitiveValue != null) ? pPrimitiveValue : (pPrimitiveValue = new PrimitiveValueElements());
+	}
+	
+	public ParserRule getPrimitiveValueRule() {
+		return getPrimitiveValueAccess().getRule();
+	}
+
+	//Value: //{Value} name= (STRING| PrimitiveType | Initializers |
+	//
+	//	Cast | NestedGetElementPtr | Constant | NonConstantValue;
 	public ValueElements getValueAccess() {
 		return (pValue != null) ? pValue : (pValue = new ValueElements());
 	}

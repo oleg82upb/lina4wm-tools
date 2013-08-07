@@ -57,7 +57,8 @@ public class AtomicRMWItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addOperationPropertyDescriptor(object);
@@ -120,7 +121,8 @@ public class AtomicRMWItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.ATOMIC_RMW__ADRESSTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.ATOMIC_RMW__ADRESS);
@@ -179,7 +181,8 @@ public class AtomicRMWItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(AtomicRMW.class)) {
+		switch (notification.getFeatureID(AtomicRMW.class))
+		{
 			case LlvmPackage.ATOMIC_RMW__OPERATION:
 			case LlvmPackage.ATOMIC_RMW__ORDERING:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
@@ -303,7 +306,8 @@ public class AtomicRMWItemProvider
 			childFeature == LlvmPackage.Literals.ATOMIC_RMW__ADRESS ||
 			childFeature == LlvmPackage.Literals.ATOMIC_RMW__OPVALUE;
 
-		if (qualify) {
+		if (qualify)
+		{
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

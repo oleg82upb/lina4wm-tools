@@ -37,7 +37,8 @@ public final class LLVMEditPlugin extends EMFPlugin {
 	 */
 	public LLVMEditPlugin() {
 		super
-		  (new ResourceLocator [] {
+		  (new ResourceLocator [] 
+		   {
 		   });
 	}
 

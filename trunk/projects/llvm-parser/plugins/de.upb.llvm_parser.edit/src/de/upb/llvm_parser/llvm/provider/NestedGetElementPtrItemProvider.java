@@ -55,7 +55,8 @@ public class NestedGetElementPtrItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -72,7 +73,8 @@ public class NestedGetElementPtrItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE);
 			childrenFeatures.add(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATENAME);
@@ -114,10 +116,7 @@ public class NestedGetElementPtrItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((NestedGetElementPtr)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_NestedGetElementPtr_type") :
-			getString("_UI_NestedGetElementPtr_type") + " " + label;
+		return getString("_UI_NestedGetElementPtr_type");
 	}
 
 	/**
@@ -131,7 +130,8 @@ public class NestedGetElementPtrItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(NestedGetElementPtr.class)) {
+		switch (notification.getFeatureID(NestedGetElementPtr.class))
+		{
 			case LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGREGATE:
 			case LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGREGATENAME:
 			case LlvmPackage.NESTED_GET_ELEMENT_PTR__IND_TYPES:
@@ -242,6 +242,11 @@ public class NestedGetElementPtrItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -526,7 +531,8 @@ public class NestedGetElementPtrItemProvider
 			childFeature == LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATENAME ||
 			childFeature == LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__INDIZIES;
 
-		if (qualify) {
+		if (qualify)
+		{
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

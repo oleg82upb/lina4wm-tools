@@ -55,7 +55,8 @@ public class TypeDefinitionItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -72,7 +73,8 @@ public class TypeDefinitionItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.TYPE_DEFINITION__ADDRESS);
 			childrenFeatures.add(LlvmPackage.Literals.TYPE_DEFINITION__STRUCT);
@@ -126,7 +128,8 @@ public class TypeDefinitionItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(TypeDefinition.class)) {
+		switch (notification.getFeatureID(TypeDefinition.class))
+		{
 			case LlvmPackage.TYPE_DEFINITION__ADDRESS:
 			case LlvmPackage.TYPE_DEFINITION__STRUCT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));

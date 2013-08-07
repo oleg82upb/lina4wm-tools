@@ -60,7 +60,8 @@ public class FunctionBodyItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addMetaPropertyDescriptor(object);
@@ -100,7 +101,8 @@ public class FunctionBodyItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.FUNCTION_BODY__BLOCKS);
 		}
@@ -153,7 +155,8 @@ public class FunctionBodyItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(FunctionBody.class)) {
+		switch (notification.getFeatureID(FunctionBody.class))
+		{
 			case LlvmPackage.FUNCTION_BODY__META:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

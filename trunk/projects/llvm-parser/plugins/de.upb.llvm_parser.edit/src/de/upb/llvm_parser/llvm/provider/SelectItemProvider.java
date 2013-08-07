@@ -55,7 +55,8 @@ public class SelectItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -72,7 +73,8 @@ public class SelectItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.SELECT__CONDITIONTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.SELECT__CONDITIONVALUE);
@@ -130,7 +132,8 @@ public class SelectItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Select.class)) {
+		switch (notification.getFeatureID(Select.class))
+		{
 			case LlvmPackage.SELECT__CONDITIONTYPE:
 			case LlvmPackage.SELECT__CONDITIONVALUE:
 			case LlvmPackage.SELECT__VAL1TYPE:
@@ -294,7 +297,8 @@ public class SelectItemProvider
 			childFeature == LlvmPackage.Literals.SELECT__VAL1VALUE ||
 			childFeature == LlvmPackage.Literals.SELECT__VAL2VALUE;
 
-		if (qualify) {
+		if (qualify)
+		{
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

@@ -57,7 +57,8 @@ public class TypeUseItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addPointerPropertyDescriptor(object);
@@ -123,7 +124,8 @@ public class TypeUseItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(TypeUse.class)) {
+		switch (notification.getFeatureID(TypeUse.class))
+		{
 			case LlvmPackage.TYPE_USE__POINTER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

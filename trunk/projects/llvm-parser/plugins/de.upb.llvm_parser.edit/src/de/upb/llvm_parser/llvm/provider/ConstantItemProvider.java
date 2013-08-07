@@ -6,6 +6,7 @@ package de.upb.llvm_parser.llvm.provider;
 import de.upb.llvm_parser.llvm.Constant;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
@@ -54,7 +55,8 @@ public class ConstantItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addValuePropertyDescriptor(object);
@@ -103,7 +105,8 @@ public class ConstantItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Constant)object).getName();
+		BigDecimal labelValue = ((Constant)object).getValue();
+		String label = labelValue == null ? null : labelValue.toString();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Constant_type") :
 			getString("_UI_Constant_type") + " " + label;
@@ -120,7 +123,8 @@ public class ConstantItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Constant.class)) {
+		switch (notification.getFeatureID(Constant.class))
+		{
 			case LlvmPackage.CONSTANT__VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

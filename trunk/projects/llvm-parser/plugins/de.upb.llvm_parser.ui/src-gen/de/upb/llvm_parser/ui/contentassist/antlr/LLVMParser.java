@@ -55,8 +55,8 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPredefinedTypeAccess().getAlternatives(), "rule__PredefinedType__Alternatives");
 					put(grammarAccess.getArrayAccess().getAlternatives_1(), "rule__Array__Alternatives_1");
 					put(grammarAccess.getAggregate_TypesAccess().getAlternatives(), "rule__Aggregate_Types__Alternatives");
+					put(grammarAccess.getPrimitiveValueAccess().getNameAlternatives_0(), "rule__PrimitiveValue__NameAlternatives_0");
 					put(grammarAccess.getValueAccess().getAlternatives(), "rule__Value__Alternatives");
-					put(grammarAccess.getValueAccess().getNameAlternatives_0_1_0(), "rule__Value__NameAlternatives_0_1_0");
 					put(grammarAccess.getStructureAccess().getTypesAlternatives_2_1_1_0(), "rule__Structure__TypesAlternatives_2_1_1_0");
 					put(grammarAccess.getParameterListAccess().getAlternatives_1(), "rule__ParameterList__Alternatives_1");
 					put(grammarAccess.getTypeListAccess().getAlternatives_1(), "rule__TypeList__Alternatives_1");
@@ -128,7 +128,6 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getArrayAccess().getGroup_1_0(), "rule__Array__Group_1_0__0");
 					put(grammarAccess.getArrayAccess().getGroup_1_2(), "rule__Array__Group_1_2__0");
 					put(grammarAccess.getNonConstantValueAccess().getGroup(), "rule__NonConstantValue__Group__0");
-					put(grammarAccess.getValueAccess().getGroup_0(), "rule__Value__Group_0__0");
 					put(grammarAccess.getValueStructAccess().getGroup(), "rule__ValueStruct__Group__0");
 					put(grammarAccess.getValueStructAccess().getGroup_3(), "rule__ValueStruct__Group_3__0");
 					put(grammarAccess.getStructureAccess().getGroup(), "rule__Structure__Group__0");
@@ -260,7 +259,7 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getConstantAccess().getValueAssignment(), "rule__Constant__ValueAssignment");
 					put(grammarAccess.getNonConstantValueAccess().getNameAssignment_0(), "rule__NonConstantValue__NameAssignment_0");
 					put(grammarAccess.getNonConstantValueAccess().getPointerAssignment_1(), "rule__NonConstantValue__PointerAssignment_1");
-					put(grammarAccess.getValueAccess().getNameAssignment_0_1(), "rule__Value__NameAssignment_0_1");
+					put(grammarAccess.getPrimitiveValueAccess().getNameAssignment(), "rule__PrimitiveValue__NameAssignment");
 					put(grammarAccess.getValueStructAccess().getTypesAssignment_1(), "rule__ValueStruct__TypesAssignment_1");
 					put(grammarAccess.getValueStructAccess().getValueAssignment_2(), "rule__ValueStruct__ValueAssignment_2");
 					put(grammarAccess.getValueStructAccess().getTypesAssignment_3_1(), "rule__ValueStruct__TypesAssignment_3_1");

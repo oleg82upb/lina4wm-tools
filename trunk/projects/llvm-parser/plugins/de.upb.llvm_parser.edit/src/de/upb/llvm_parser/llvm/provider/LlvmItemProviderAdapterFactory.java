@@ -87,7 +87,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createLLVMAdapter() {
-		if (llvmItemProvider == null) {
+		if (llvmItemProvider == null)
+		{
 			llvmItemProvider = new LLVMItemProvider(this);
 		}
 
@@ -110,7 +111,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createAbstractElementAdapter() {
-		if (abstractElementItemProvider == null) {
+		if (abstractElementItemProvider == null)
+		{
 			abstractElementItemProvider = new AbstractElementItemProvider(this);
 		}
 
@@ -133,7 +135,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createTopLevelEntityAdapter() {
-		if (topLevelEntityItemProvider == null) {
+		if (topLevelEntityItemProvider == null)
+		{
 			topLevelEntityItemProvider = new TopLevelEntityItemProvider(this);
 		}
 
@@ -156,7 +159,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createMainLevelEntityAdapter() {
-		if (mainLevelEntityItemProvider == null) {
+		if (mainLevelEntityItemProvider == null)
+		{
 			mainLevelEntityItemProvider = new MainLevelEntityItemProvider(this);
 		}
 
@@ -179,7 +183,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createTypeDefinitionAdapter() {
-		if (typeDefinitionItemProvider == null) {
+		if (typeDefinitionItemProvider == null)
+		{
 			typeDefinitionItemProvider = new TypeDefinitionItemProvider(this);
 		}
 
@@ -202,7 +207,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createGlobalDefinitionAdapter() {
-		if (globalDefinitionItemProvider == null) {
+		if (globalDefinitionItemProvider == null)
+		{
 			globalDefinitionItemProvider = new GlobalDefinitionItemProvider(this);
 		}
 
@@ -225,7 +231,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createFunctionDefinitionAdapter() {
-		if (functionDefinitionItemProvider == null) {
+		if (functionDefinitionItemProvider == null)
+		{
 			functionDefinitionItemProvider = new FunctionDefinitionItemProvider(this);
 		}
 
@@ -248,7 +255,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createAliasDefinitionAdapter() {
-		if (aliasDefinitionItemProvider == null) {
+		if (aliasDefinitionItemProvider == null)
+		{
 			aliasDefinitionItemProvider = new AliasDefinitionItemProvider(this);
 		}
 
@@ -271,7 +279,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createTypeUseAdapter() {
-		if (typeUseItemProvider == null) {
+		if (typeUseItemProvider == null)
+		{
 			typeUseItemProvider = new TypeUseItemProvider(this);
 		}
 
@@ -294,7 +303,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createAddressUseAdapter() {
-		if (addressUseItemProvider == null) {
+		if (addressUseItemProvider == null)
+		{
 			addressUseItemProvider = new AddressUseItemProvider(this);
 		}
 
@@ -317,7 +327,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createAddressAdapter() {
-		if (addressItemProvider == null) {
+		if (addressItemProvider == null)
+		{
 			addressItemProvider = new AddressItemProvider(this);
 		}
 
@@ -340,7 +351,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createPredefinedAdapter() {
-		if (predefinedItemProvider == null) {
+		if (predefinedItemProvider == null)
+		{
 			predefinedItemProvider = new PredefinedItemProvider(this);
 		}
 
@@ -363,7 +375,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createVectorAdapter() {
-		if (vectorItemProvider == null) {
+		if (vectorItemProvider == null)
+		{
 			vectorItemProvider = new VectorItemProvider(this);
 		}
 
@@ -386,7 +399,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createArrayAdapter() {
-		if (arrayItemProvider == null) {
+		if (arrayItemProvider == null)
+		{
 			arrayItemProvider = new ArrayItemProvider(this);
 		}
 
@@ -409,7 +423,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createAggregate_TypesAdapter() {
-		if (aggregate_TypesItemProvider == null) {
+		if (aggregate_TypesItemProvider == null)
+		{
 			aggregate_TypesItemProvider = new Aggregate_TypesItemProvider(this);
 		}
 
@@ -432,7 +447,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createConstantAdapter() {
-		if (constantItemProvider == null) {
+		if (constantItemProvider == null)
+		{
 			constantItemProvider = new ConstantItemProvider(this);
 		}
 
@@ -455,11 +471,37 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createNonConstantValueAdapter() {
-		if (nonConstantValueItemProvider == null) {
+		if (nonConstantValueItemProvider == null)
+		{
 			nonConstantValueItemProvider = new NonConstantValueItemProvider(this);
 		}
 
 		return nonConstantValueItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.PrimitiveValue} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PrimitiveValueItemProvider primitiveValueItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.PrimitiveValue}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPrimitiveValueAdapter()
+	{
+		if (primitiveValueItemProvider == null)
+		{
+			primitiveValueItemProvider = new PrimitiveValueItemProvider(this);
+		}
+
+		return primitiveValueItemProvider;
 	}
 
 	/**
@@ -478,7 +520,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createValueAdapter() {
-		if (valueItemProvider == null) {
+		if (valueItemProvider == null)
+		{
 			valueItemProvider = new ValueItemProvider(this);
 		}
 
@@ -501,7 +544,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createValueStructAdapter() {
-		if (valueStructItemProvider == null) {
+		if (valueStructItemProvider == null)
+		{
 			valueStructItemProvider = new ValueStructItemProvider(this);
 		}
 
@@ -524,7 +568,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createStructureAdapter() {
-		if (structureItemProvider == null) {
+		if (structureItemProvider == null)
+		{
 			structureItemProvider = new StructureItemProvider(this);
 		}
 
@@ -547,7 +592,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createParameterListAdapter() {
-		if (parameterListItemProvider == null) {
+		if (parameterListItemProvider == null)
+		{
 			parameterListItemProvider = new ParameterListItemProvider(this);
 		}
 
@@ -570,7 +616,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createTypeListAdapter() {
-		if (typeListItemProvider == null) {
+		if (typeListItemProvider == null)
+		{
 			typeListItemProvider = new TypeListItemProvider(this);
 		}
 
@@ -593,7 +640,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createFunctionBodyAdapter() {
-		if (functionBodyItemProvider == null) {
+		if (functionBodyItemProvider == null)
+		{
 			functionBodyItemProvider = new FunctionBodyItemProvider(this);
 		}
 
@@ -616,7 +664,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createInstructionAdapter() {
-		if (instructionItemProvider == null) {
+		if (instructionItemProvider == null)
+		{
 			instructionItemProvider = new InstructionItemProvider(this);
 		}
 
@@ -639,7 +688,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createBasicBlockAdapter() {
-		if (basicBlockItemProvider == null) {
+		if (basicBlockItemProvider == null)
+		{
 			basicBlockItemProvider = new BasicBlockItemProvider(this);
 		}
 
@@ -662,7 +712,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createInstructionUseAdapter() {
-		if (instructionUseItemProvider == null) {
+		if (instructionUseItemProvider == null)
+		{
 			instructionUseItemProvider = new InstructionUseItemProvider(this);
 		}
 
@@ -685,7 +736,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createReturnInstructionAdapter() {
-		if (returnInstructionItemProvider == null) {
+		if (returnInstructionItemProvider == null)
+		{
 			returnInstructionItemProvider = new ReturnInstructionItemProvider(this);
 		}
 
@@ -708,7 +760,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createStandartInstructionAdapter() {
-		if (standartInstructionItemProvider == null) {
+		if (standartInstructionItemProvider == null)
+		{
 			standartInstructionItemProvider = new StandartInstructionItemProvider(this);
 		}
 
@@ -731,7 +784,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createArithmeticOperationAdapter() {
-		if (arithmeticOperationItemProvider == null) {
+		if (arithmeticOperationItemProvider == null)
+		{
 			arithmeticOperationItemProvider = new ArithmeticOperationItemProvider(this);
 		}
 
@@ -754,7 +808,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createLogicOperationAdapter() {
-		if (logicOperationItemProvider == null) {
+		if (logicOperationItemProvider == null)
+		{
 			logicOperationItemProvider = new LogicOperationItemProvider(this);
 		}
 
@@ -777,7 +832,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createCastAdapter() {
-		if (castItemProvider == null) {
+		if (castItemProvider == null)
+		{
 			castItemProvider = new CastItemProvider(this);
 		}
 
@@ -800,7 +856,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createGetElementPtrAdapter() {
-		if (getElementPtrItemProvider == null) {
+		if (getElementPtrItemProvider == null)
+		{
 			getElementPtrItemProvider = new GetElementPtrItemProvider(this);
 		}
 
@@ -823,7 +880,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createNestedGetElementPtrAdapter() {
-		if (nestedGetElementPtrItemProvider == null) {
+		if (nestedGetElementPtrItemProvider == null)
+		{
 			nestedGetElementPtrItemProvider = new NestedGetElementPtrItemProvider(this);
 		}
 
@@ -846,7 +904,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createExtractValueAdapter() {
-		if (extractValueItemProvider == null) {
+		if (extractValueItemProvider == null)
+		{
 			extractValueItemProvider = new ExtractValueItemProvider(this);
 		}
 
@@ -869,7 +928,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createInsertValueAdapter() {
-		if (insertValueItemProvider == null) {
+		if (insertValueItemProvider == null)
+		{
 			insertValueItemProvider = new InsertValueItemProvider(this);
 		}
 
@@ -892,7 +952,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createFenceAdapter() {
-		if (fenceItemProvider == null) {
+		if (fenceItemProvider == null)
+		{
 			fenceItemProvider = new FenceItemProvider(this);
 		}
 
@@ -915,7 +976,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createCmpXchgAdapter() {
-		if (cmpXchgItemProvider == null) {
+		if (cmpXchgItemProvider == null)
+		{
 			cmpXchgItemProvider = new CmpXchgItemProvider(this);
 		}
 
@@ -938,7 +1000,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createAtomicRMWAdapter() {
-		if (atomicRMWItemProvider == null) {
+		if (atomicRMWItemProvider == null)
+		{
 			atomicRMWItemProvider = new AtomicRMWItemProvider(this);
 		}
 
@@ -961,7 +1024,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createLoadAdapter() {
-		if (loadItemProvider == null) {
+		if (loadItemProvider == null)
+		{
 			loadItemProvider = new LoadItemProvider(this);
 		}
 
@@ -984,7 +1048,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createStoreAdapter() {
-		if (storeItemProvider == null) {
+		if (storeItemProvider == null)
+		{
 			storeItemProvider = new StoreItemProvider(this);
 		}
 
@@ -1007,7 +1072,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createCallAdapter() {
-		if (callItemProvider == null) {
+		if (callItemProvider == null)
+		{
 			callItemProvider = new CallItemProvider(this);
 		}
 
@@ -1030,7 +1096,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createAllocAdapter() {
-		if (allocItemProvider == null) {
+		if (allocItemProvider == null)
+		{
 			allocItemProvider = new AllocItemProvider(this);
 		}
 
@@ -1053,7 +1120,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createPhiAdapter() {
-		if (phiItemProvider == null) {
+		if (phiItemProvider == null)
+		{
 			phiItemProvider = new PhiItemProvider(this);
 		}
 
@@ -1076,7 +1144,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createLandingPadAdapter() {
-		if (landingPadItemProvider == null) {
+		if (landingPadItemProvider == null)
+		{
 			landingPadItemProvider = new LandingPadItemProvider(this);
 		}
 
@@ -1099,7 +1168,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createClauseAdapter() {
-		if (clauseItemProvider == null) {
+		if (clauseItemProvider == null)
+		{
 			clauseItemProvider = new ClauseItemProvider(this);
 		}
 
@@ -1122,7 +1192,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createSelectAdapter() {
-		if (selectItemProvider == null) {
+		if (selectItemProvider == null)
+		{
 			selectItemProvider = new SelectItemProvider(this);
 		}
 
@@ -1145,7 +1216,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createVariableAttributeAccessAdapter() {
-		if (variableAttributeAccessItemProvider == null) {
+		if (variableAttributeAccessItemProvider == null)
+		{
 			variableAttributeAccessItemProvider = new VariableAttributeAccessItemProvider(this);
 		}
 
@@ -1168,7 +1240,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createExtractElementAdapter() {
-		if (extractElementItemProvider == null) {
+		if (extractElementItemProvider == null)
+		{
 			extractElementItemProvider = new ExtractElementItemProvider(this);
 		}
 
@@ -1191,7 +1264,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createInsertElementAdapter() {
-		if (insertElementItemProvider == null) {
+		if (insertElementItemProvider == null)
+		{
 			insertElementItemProvider = new InsertElementItemProvider(this);
 		}
 
@@ -1214,7 +1288,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createShuffleVectorAdapter() {
-		if (shuffleVectorItemProvider == null) {
+		if (shuffleVectorItemProvider == null)
+		{
 			shuffleVectorItemProvider = new ShuffleVectorItemProvider(this);
 		}
 
@@ -1237,7 +1312,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createCompareAdapter() {
-		if (compareItemProvider == null) {
+		if (compareItemProvider == null)
+		{
 			compareItemProvider = new CompareItemProvider(this);
 		}
 
@@ -1260,7 +1336,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createIndirectBranchAdapter() {
-		if (indirectBranchItemProvider == null) {
+		if (indirectBranchItemProvider == null)
+		{
 			indirectBranchItemProvider = new IndirectBranchItemProvider(this);
 		}
 
@@ -1283,7 +1360,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createSwitchAdapter() {
-		if (switchItemProvider == null) {
+		if (switchItemProvider == null)
+		{
 			switchItemProvider = new SwitchItemProvider(this);
 		}
 
@@ -1306,7 +1384,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createInvokeAdapter() {
-		if (invokeItemProvider == null) {
+		if (invokeItemProvider == null)
+		{
 			invokeItemProvider = new InvokeItemProvider(this);
 		}
 
@@ -1329,7 +1408,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createResumeAdapter() {
-		if (resumeItemProvider == null) {
+		if (resumeItemProvider == null)
+		{
 			resumeItemProvider = new ResumeItemProvider(this);
 		}
 
@@ -1352,7 +1432,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createUnreachableAdapter() {
-		if (unreachableItemProvider == null) {
+		if (unreachableItemProvider == null)
+		{
 			unreachableItemProvider = new UnreachableItemProvider(this);
 		}
 
@@ -1375,7 +1456,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createReturnAdapter() {
-		if (returnItemProvider == null) {
+		if (returnItemProvider == null)
+		{
 			returnItemProvider = new ReturnItemProvider(this);
 		}
 
@@ -1398,7 +1480,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Adapter createBranchAdapter() {
-		if (branchItemProvider == null) {
+		if (branchItemProvider == null)
+		{
 			branchItemProvider = new BranchItemProvider(this);
 		}
 
@@ -1453,9 +1536,11 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	 */
 	@Override
 	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
+		if (isFactoryForType(type))
+		{
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter)))
+			{
 				return adapter;
 			}
 		}
@@ -1492,7 +1577,8 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null) {
+		if (parentAdapterFactory != null)
+		{
 			parentAdapterFactory.fireNotifyChanged(notification);
 		}
 	}
@@ -1521,6 +1607,7 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 		if (aggregate_TypesItemProvider != null) aggregate_TypesItemProvider.dispose();
 		if (constantItemProvider != null) constantItemProvider.dispose();
 		if (nonConstantValueItemProvider != null) nonConstantValueItemProvider.dispose();
+		if (primitiveValueItemProvider != null) primitiveValueItemProvider.dispose();
 		if (valueItemProvider != null) valueItemProvider.dispose();
 		if (valueStructItemProvider != null) valueStructItemProvider.dispose();
 		if (structureItemProvider != null) structureItemProvider.dispose();

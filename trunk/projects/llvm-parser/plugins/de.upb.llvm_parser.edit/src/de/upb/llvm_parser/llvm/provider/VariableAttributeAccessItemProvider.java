@@ -55,7 +55,8 @@ public class VariableAttributeAccessItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -72,7 +73,8 @@ public class VariableAttributeAccessItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE);
@@ -127,7 +129,8 @@ public class VariableAttributeAccessItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(VariableAttributeAccess.class)) {
+		switch (notification.getFeatureID(VariableAttributeAccess.class))
+		{
 			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE:
 			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE:
 			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE:
@@ -219,7 +222,8 @@ public class VariableAttributeAccessItemProvider
 			childFeature == LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE ||
 			childFeature == LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE;
 
-		if (qualify) {
+		if (qualify)
+		{
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
