@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="de.upb.lina.history.checker.Contribution"
+            nameFilter="*.history"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               class="de.upb.lina.history.checker.CheckAction"
+               icon="icons/fujaba_icon.gif"
+               id="de.upb.lina.history.checker.checkAction"
+               label="Check History"
+               menubarPath="additions"
+               tooltip="Check for linearizable Histories">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
