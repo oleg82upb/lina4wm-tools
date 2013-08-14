@@ -2,21 +2,28 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
+import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Load;
-import de.upb.llvm_parser.llvm.TypeList;
-import de.upb.llvm_parser.llvm.TypeUse;
-import de.upb.llvm_parser.llvm.Value;
+import de.upb.llvm_parser.llvm.MetaArgValue;
+import de.upb.llvm_parser.llvm.Parameter;
 
 import java.math.BigDecimal;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,442 +32,466 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getAdresstype <em>Adresstype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getTypes <em>Types</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getAdress <em>Adress</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getResult <em>Result</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#isVolatile <em>Volatile</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getAddress <em>Address</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getAlign <em>Align</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getMeta <em>Meta</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getOrdering <em>Ordering</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getIndex <em>Index</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class LoadImpl extends StandartInstructionImpl implements Load
+public class LoadImpl extends InstructionImpl implements Load
 {
   /**
-   * The cached value of the '{@link #getAdresstype() <em>Adresstype</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getResult() <em>Result</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAdresstype()
-   * @generated
-   * @ordered
-   */
-  protected TypeUse adresstype;
+	 * @see #getResult()
+	 * @generated
+	 * @ordered
+	 */
+  protected Address result;
 
   /**
-   * The cached value of the '{@link #getTypes() <em>Types</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #isVolatile() <em>Volatile</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTypes()
-   * @generated
-   * @ordered
-   */
-  protected TypeList types;
+	 * @see #isVolatile()
+	 * @generated
+	 * @ordered
+	 */
+  protected static final boolean VOLATILE_EDEFAULT = false;
 
   /**
-   * The cached value of the '{@link #getAdress() <em>Adress</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #isVolatile() <em>Volatile</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAdress()
-   * @generated
-   * @ordered
-   */
-  protected Value adress;
+	 * @see #isVolatile()
+	 * @generated
+	 * @ordered
+	 */
+  protected boolean volatile_ = VOLATILE_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getOrdering() <em>Ordering</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getAddress() <em>Address</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getOrdering()
-   * @generated
-   * @ordered
-   */
+	 * @see #getAddress()
+	 * @generated
+	 * @ordered
+	 */
+  protected Parameter address;
+
+  /**
+	 * The default value of the '{@link #getAlign() <em>Align</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getAlign()
+	 * @generated
+	 * @ordered
+	 */
+  protected static final BigDecimal ALIGN_EDEFAULT = null;
+
+  /**
+	 * The cached value of the '{@link #getAlign() <em>Align</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getAlign()
+	 * @generated
+	 * @ordered
+	 */
+  protected BigDecimal align = ALIGN_EDEFAULT;
+
+  /**
+	 * The cached value of the '{@link #getMeta() <em>Meta</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getMeta()
+	 * @generated
+	 * @ordered
+	 */
+  protected EList<MetaArgValue> meta;
+
+  /**
+	 * The default value of the '{@link #getOrdering() <em>Ordering</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getOrdering()
+	 * @generated
+	 * @ordered
+	 */
   protected static final String ORDERING_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getOrdering() <em>Ordering</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getOrdering() <em>Ordering</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getOrdering()
-   * @generated
-   * @ordered
-   */
+	 * @see #getOrdering()
+	 * @generated
+	 * @ordered
+	 */
   protected String ordering = ORDERING_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIndex()
-   * @generated
-   * @ordered
-   */
-  protected static final BigDecimal INDEX_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getIndex()
-   * @generated
-   * @ordered
-   */
-  protected BigDecimal index = INDEX_EDEFAULT;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected LoadImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return LlvmPackage.Literals.LOAD;
-  }
+		return LlvmPackage.Literals.LOAD;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypeUse getAdresstype()
+	 * @generated
+	 */
+  public Address getResult()
   {
-    return adresstype;
-  }
+		return result;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetAdresstype(TypeUse newAdresstype, NotificationChain msgs)
+	 * @generated
+	 */
+  public NotificationChain basicSetResult(Address newResult, NotificationChain msgs)
   {
-    TypeUse oldAdresstype = adresstype;
-    adresstype = newAdresstype;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__ADRESSTYPE, oldAdresstype, newAdresstype);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		Address oldResult = result;
+		result = newResult;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__RESULT, oldResult, newResult);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setAdresstype(TypeUse newAdresstype)
+	 * @generated
+	 */
+  public void setResult(Address newResult)
   {
-    if (newAdresstype != adresstype)
-    {
-      NotificationChain msgs = null;
-      if (adresstype != null)
-        msgs = ((InternalEObject)adresstype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LOAD__ADRESSTYPE, null, msgs);
-      if (newAdresstype != null)
-        msgs = ((InternalEObject)newAdresstype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LOAD__ADRESSTYPE, null, msgs);
-      msgs = basicSetAdresstype(newAdresstype, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__ADRESSTYPE, newAdresstype, newAdresstype));
-  }
+		if (newResult != result)
+		{
+			NotificationChain msgs = null;
+			if (result != null)
+				msgs = ((InternalEObject)result).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LOAD__RESULT, null, msgs);
+			if (newResult != null)
+				msgs = ((InternalEObject)newResult).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LOAD__RESULT, null, msgs);
+			msgs = basicSetResult(newResult, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__RESULT, newResult, newResult));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypeList getTypes()
+	 * @generated
+	 */
+  public boolean isVolatile()
   {
-    return types;
-  }
+		return volatile_;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetTypes(TypeList newTypes, NotificationChain msgs)
+	 * @generated
+	 */
+  public void setVolatile(boolean newVolatile)
   {
-    TypeList oldTypes = types;
-    types = newTypes;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__TYPES, oldTypes, newTypes);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		boolean oldVolatile = volatile_;
+		volatile_ = newVolatile;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__VOLATILE, oldVolatile, volatile_));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setTypes(TypeList newTypes)
+	 * @generated
+	 */
+  public Parameter getAddress()
   {
-    if (newTypes != types)
-    {
-      NotificationChain msgs = null;
-      if (types != null)
-        msgs = ((InternalEObject)types).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LOAD__TYPES, null, msgs);
-      if (newTypes != null)
-        msgs = ((InternalEObject)newTypes).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LOAD__TYPES, null, msgs);
-      msgs = basicSetTypes(newTypes, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__TYPES, newTypes, newTypes));
-  }
+		return address;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public Value getAdress()
+	 * @generated
+	 */
+  public NotificationChain basicSetAddress(Parameter newAddress, NotificationChain msgs)
   {
-    return adress;
-  }
+		Parameter oldAddress = address;
+		address = newAddress;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__ADDRESS, oldAddress, newAddress);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetAdress(Value newAdress, NotificationChain msgs)
+	 * @generated
+	 */
+  public void setAddress(Parameter newAddress)
   {
-    Value oldAdress = adress;
-    adress = newAdress;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__ADRESS, oldAdress, newAdress);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		if (newAddress != address)
+		{
+			NotificationChain msgs = null;
+			if (address != null)
+				msgs = ((InternalEObject)address).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LOAD__ADDRESS, null, msgs);
+			if (newAddress != null)
+				msgs = ((InternalEObject)newAddress).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LOAD__ADDRESS, null, msgs);
+			msgs = basicSetAddress(newAddress, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__ADDRESS, newAddress, newAddress));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setAdress(Value newAdress)
+	 * @generated
+	 */
+  public BigDecimal getAlign()
   {
-    if (newAdress != adress)
-    {
-      NotificationChain msgs = null;
-      if (adress != null)
-        msgs = ((InternalEObject)adress).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LOAD__ADRESS, null, msgs);
-      if (newAdress != null)
-        msgs = ((InternalEObject)newAdress).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.LOAD__ADRESS, null, msgs);
-      msgs = basicSetAdress(newAdress, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__ADRESS, newAdress, newAdress));
-  }
+		return align;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
+  public void setAlign(BigDecimal newAlign)
+  {
+		BigDecimal oldAlign = align;
+		align = newAlign;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__ALIGN, oldAlign, align));
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EList<MetaArgValue> getMeta()
+  {
+		if (meta == null)
+		{
+			meta = new EObjectContainmentEList<MetaArgValue>(MetaArgValue.class, this, LlvmPackage.LOAD__META);
+		}
+		return meta;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
   public String getOrdering()
   {
-    return ordering;
-  }
+		return ordering;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setOrdering(String newOrdering)
   {
-    String oldOrdering = ordering;
-    ordering = newOrdering;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__ORDERING, oldOrdering, ordering));
-  }
+		String oldOrdering = ordering;
+		ordering = newOrdering;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__ORDERING, oldOrdering, ordering));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public BigDecimal getIndex()
-  {
-    return index;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setIndex(BigDecimal newIndex)
-  {
-    BigDecimal oldIndex = index;
-    index = newIndex;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__INDEX, oldIndex, index));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.LOAD__ADRESSTYPE:
-        return basicSetAdresstype(null, msgs);
-      case LlvmPackage.LOAD__TYPES:
-        return basicSetTypes(null, msgs);
-      case LlvmPackage.LOAD__ADRESS:
-        return basicSetAdress(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.LOAD__RESULT:
+				return basicSetResult(null, msgs);
+			case LlvmPackage.LOAD__ADDRESS:
+				return basicSetAddress(null, msgs);
+			case LlvmPackage.LOAD__META:
+				return ((InternalEList<?>)getMeta()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.LOAD__ADRESSTYPE:
-        return getAdresstype();
-      case LlvmPackage.LOAD__TYPES:
-        return getTypes();
-      case LlvmPackage.LOAD__ADRESS:
-        return getAdress();
-      case LlvmPackage.LOAD__ORDERING:
-        return getOrdering();
-      case LlvmPackage.LOAD__INDEX:
-        return getIndex();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.LOAD__RESULT:
+				return getResult();
+			case LlvmPackage.LOAD__VOLATILE:
+				return isVolatile();
+			case LlvmPackage.LOAD__ADDRESS:
+				return getAddress();
+			case LlvmPackage.LOAD__ALIGN:
+				return getAlign();
+			case LlvmPackage.LOAD__META:
+				return getMeta();
+			case LlvmPackage.LOAD__ORDERING:
+				return getOrdering();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.LOAD__ADRESSTYPE:
-        setAdresstype((TypeUse)newValue);
-        return;
-      case LlvmPackage.LOAD__TYPES:
-        setTypes((TypeList)newValue);
-        return;
-      case LlvmPackage.LOAD__ADRESS:
-        setAdress((Value)newValue);
-        return;
-      case LlvmPackage.LOAD__ORDERING:
-        setOrdering((String)newValue);
-        return;
-      case LlvmPackage.LOAD__INDEX:
-        setIndex((BigDecimal)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.LOAD__RESULT:
+				setResult((Address)newValue);
+				return;
+			case LlvmPackage.LOAD__VOLATILE:
+				setVolatile((Boolean)newValue);
+				return;
+			case LlvmPackage.LOAD__ADDRESS:
+				setAddress((Parameter)newValue);
+				return;
+			case LlvmPackage.LOAD__ALIGN:
+				setAlign((BigDecimal)newValue);
+				return;
+			case LlvmPackage.LOAD__META:
+				getMeta().clear();
+				getMeta().addAll((Collection<? extends MetaArgValue>)newValue);
+				return;
+			case LlvmPackage.LOAD__ORDERING:
+				setOrdering((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.LOAD__ADRESSTYPE:
-        setAdresstype((TypeUse)null);
-        return;
-      case LlvmPackage.LOAD__TYPES:
-        setTypes((TypeList)null);
-        return;
-      case LlvmPackage.LOAD__ADRESS:
-        setAdress((Value)null);
-        return;
-      case LlvmPackage.LOAD__ORDERING:
-        setOrdering(ORDERING_EDEFAULT);
-        return;
-      case LlvmPackage.LOAD__INDEX:
-        setIndex(INDEX_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.LOAD__RESULT:
+				setResult((Address)null);
+				return;
+			case LlvmPackage.LOAD__VOLATILE:
+				setVolatile(VOLATILE_EDEFAULT);
+				return;
+			case LlvmPackage.LOAD__ADDRESS:
+				setAddress((Parameter)null);
+				return;
+			case LlvmPackage.LOAD__ALIGN:
+				setAlign(ALIGN_EDEFAULT);
+				return;
+			case LlvmPackage.LOAD__META:
+				getMeta().clear();
+				return;
+			case LlvmPackage.LOAD__ORDERING:
+				setOrdering(ORDERING_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.LOAD__ADRESSTYPE:
-        return adresstype != null;
-      case LlvmPackage.LOAD__TYPES:
-        return types != null;
-      case LlvmPackage.LOAD__ADRESS:
-        return adress != null;
-      case LlvmPackage.LOAD__ORDERING:
-        return ORDERING_EDEFAULT == null ? ordering != null : !ORDERING_EDEFAULT.equals(ordering);
-      case LlvmPackage.LOAD__INDEX:
-        return INDEX_EDEFAULT == null ? index != null : !INDEX_EDEFAULT.equals(index);
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.LOAD__RESULT:
+				return result != null;
+			case LlvmPackage.LOAD__VOLATILE:
+				return volatile_ != VOLATILE_EDEFAULT;
+			case LlvmPackage.LOAD__ADDRESS:
+				return address != null;
+			case LlvmPackage.LOAD__ALIGN:
+				return ALIGN_EDEFAULT == null ? align != null : !ALIGN_EDEFAULT.equals(align);
+			case LlvmPackage.LOAD__META:
+				return meta != null && !meta.isEmpty();
+			case LlvmPackage.LOAD__ORDERING:
+				return ORDERING_EDEFAULT == null ? ordering != null : !ORDERING_EDEFAULT.equals(ordering);
+		}
+		return super.eIsSet(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String toString()
   {
-    if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (ordering: ");
-    result.append(ordering);
-    result.append(", index: ");
-    result.append(index);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (volatile: ");
+		result.append(volatile_);
+		result.append(", align: ");
+		result.append(align);
+		result.append(", ordering: ");
+		result.append(ordering);
+		result.append(')');
+		return result.toString();
+	}
 
 } //LoadImpl

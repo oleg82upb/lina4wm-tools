@@ -24,12 +24,28 @@ terminal VALID_ID:
 
 terminal INT_TYPE:
 	'i' ('0'..'9')+ POINTER?;
+	
+terminal BOOL:
+	'true' | 'false'
+;
+	
+terminal PRIMITIVE_VALUE:
+		'void' | 'null' | 'label' | 'undef' | '...' ;
+		
+
+		
+terminal FLOATING_POINT_TYPE:
+	'half' | 'float' | 'double' | 'x86_fp80' | 'fp128' | 'ppc_fp128';
+	
+
+terminal INITIALIZER:
+	'zeroinitializer';
 
 terminal STRING:
 	'c'?'"' ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '"' | "'" | '\\') | !('\\' | '"'))* '"' |
 	'c'?"'" ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '"' | "'" | '\\') | !('\\' | "'"))* "'";
 
-terminal OREST:
+terminal UNKNOWN_TYPE:
 	'(...)' POINTER?;
 
 terminal SL_COMMENT:
@@ -37,9 +53,62 @@ terminal SL_COMMENT:
 
 terminal POINTER:
 	'*'+;
+	
+terminal METADATA:
+	'!'('a'..'z' | 'A'..'Z' | '_' | '0'..'9')+ 
+	| '!"' -> '"'
+;
+	
+//Key Words
+terminal F_PREDICATES:
+	'oeq' | 'ogt' | 'oge' | 'olt' | 'ole' | 'one' | 'ord' |
+	'ueq' | 'ugt' | 'uge' | 'ult' | 'ule' | 'une' | 'uno' ;
+	
+terminal ATOMIC_ORDERING:
+	'unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst';
 
-ID_FQN:
-	(INT_TYPE|ID | 'catch' | 'invoke' | 'resume' | 'switch' | 'true' | 'false') ('.' (INT_TYPE|ID | 'catch' | 'invoke' | 'resume' | 'switch' | 'true' | 'false'))*;
+terminal BIN_OP:
+	('xchg' | 'add' | 'sub' | 'and' | 'nand' | 'or' | 'xor' | 'max' | 'min' | 'umax' | 'umin');
+
+terminal RETURN_ATTRIBUTES:
+	'zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest';
+
+CallingConv:
+	'ccc' | 'fastcc' | 'coldcc' | 'x86_stdcallcc' | 'x86_fastcallcc' | 'x86_thiscallcc' | 'arm_apcscc' | 'arm_aapcscc' |
+	'arm_aapcs_vfpcc' | 'msp430_intrcc' | 'ptx_kernel' | 'ptx_device' | 'spir_func' | 'spir_kernel' | 'cc' '<' NUMBER '>'
+	NUMBER;
+
+FUNCTION_ATTRIBUTES:
+	'address_safety' | 'alignstack' '(' '<' NUMBER '>' ')' | 'alwaysinline' | 'nonlazybind' | 'inlinehint' | 'naked' |
+	'noimplicitfloat' | 'noinline' | 'noredzone' | 'noreturn' | 'nounwind' | 'optsize' | 'readnone' | 'readonly' |
+	'returns_twice' | 'ssp' | 'sspreq' | 'uwtable';
+
+terminal CAST_OP:
+	'trunc' | 'zext' | 'sext' | 'fptrunc' | 'fpext' | 'fptoui' | 'fptosi' | 'uitofp' | 'sitofp' | 'ptrtoint' | 'inttoptr'
+	| 'bitcast';
+
+terminal I_PREDICATES:
+	'eq' | 'ne' | 'ugt' | 'uge' | 'ult' | 'ule' | 'sgt' | 'sge' | 'slt' | 'sle';
+
+
+terminal VISIBILITY:
+	'default' | 'hidden' | 'protected';
+
+terminal LINKAGE:
+	'private' | 'linker_private' | 'linker_private_weak' | 'available_externally' | 'linkonce' | 'common' | 'appending' |
+	'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' | 'dllimport' | 'dllexport' ;
+
+terminal ALIAS_LINKAGE:
+	'external' | 'internal' | 'weak' | 'weak_odr';
+
+KEYWORDS:
+	ALIAS_LINKAGE | ATOMIC_ORDERING | BIN_OP | RETURN_ATTRIBUTES | CAST_OP | I_PREDICATES | VISIBILITY | LINKAGE 
+;
+
+LABEL_ID:
+	(KEYWORDS | INT_TYPE|ID|BOOL  | 'catch' | 'invoke' | 'resume' | 'switch') ('.' (KEYWORDS|INT_TYPE|ID|BOOL | 'catch' | 'invoke' | 'resume' | 'switch'))*;
+	
+
 
 AbstractElement:
 	TopLevelEntity SL_COMMENT? |
@@ -58,69 +127,64 @@ MainLevelEntity:
 	| GlobalDefinition
 	| FunctionDefinition
 	| AliasDefinition
-	| meta += MetadataValue;
+	| MetadataValue
+	;
 
 TypeDefinition:
-	(address=Address '=' (('type' (struct=Structure | Opaque))));
+	(address=Address '=' (('type' (struct=Structure | 'opaque'))));
 
 GlobalDefinition:
-	adress=Address '=' (LINKAGE | 'global' | 'unnamed_addr' | 'constant')* type = (TypeUse|Aggregate_Types) value=(ValueStruct|Value)?
-	(',' ALIGNMENT)?;
+	adress=Address '=' (LINKAGE | ALIAS_LINKAGE | 'global' | 'unnamed_addr' | 'constant')* type = (TypeUse|Aggregate_Types) value=(ValueStruct|Value)?
+	(',' 'align' align = NUMBER)?;
 
 FunctionDefinition:
-	('define' LINKAGE? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=(TypeUse)
-	address=Address pl=ParameterList 'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ALIGNMENT?
-	body=FunctionBody) | 
-	('declare' LINKAGE? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=(TypeUse)
-	address=Address (tList=TypeList | OREST) 'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ALIGNMENT?);
+	('define' (LINKAGE| ALIAS_LINKAGE)? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=TypeUse
+	address=Address parameter=FunctionParameterList 'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ('align' align = NUMBER)?
+	body=FunctionBody) 
+	| 
+	('declare' (LINKAGE| ALIAS_LINKAGE)? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=TypeUse
+	address=Address parameter=FunctionParameterList 'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ('align' align = NUMBER)?);
 
 AliasDefinition:
 	address=Address '=' 'alias' ALIAS_LINKAGE? VISIBILITY? aliastype=TypeUse aliasvalue=Value aliasee=(TypeUse);
 
+
+
 TypeUse:
-	(Predefined | AddressUse) ('()*')? OREST?;
+	(Predefined | AddressUse) functionInput=UNKNOWN_TYPE?
+	;
 
 AddressUse:
-	address=[Address|VALID_ID] (pointer=POINTER)?;
+	address=[Address|VALID_ID] (pointer=POINTER)?
+	;
 
 Address:
 	name=VALID_ID;
 
 Predefined:
-	type=PredefinedType (pointer=POINTER)?;
+	type=(PRIMITIVE_VALUE | INT_TYPE | FLOATING_POINT_TYPE) (pointer=POINTER)?
+	;
 
-PrimitiveType:
-	'void' | 'null' | 'label' | 'undef' | 'true' | 'false';
 
-Initializers:
-	'zeroinitializer';
 
-FloatingPoint_Type:
-	'half' | 'float' | 'double' | 'x86_fp80' | 'fp128' | 'ppc_fp128';
-
-PredefinedType:
-	PrimitiveType | INT_TYPE | FloatingPoint_Type;
 
 Vector:
-	'<' NUMBER 'x' type=TypeUse '>';
+	'<' length=NUMBER 'x' type=TypeUse '>';
 
 Array:
-	{Array} ('[' NUMBER 'x' type=TypeUse ']' | '[]' | '[' ']') POINTER?;
+	{Array} ('[' length=NUMBER 'x' type=TypeUse ']' | '[]' | '[' ']') POINTER?;
 
 Aggregate_Types:
 	Structure | Array | Vector;
 
 Constant:
 	value = NUMBER;
-
-NonConstantValue:
-	name=VALID_ID (pointer=POINTER)?;
 	
 PrimitiveValue:
-	name = (STRING| PrimitiveType | Initializers);
+	value = (STRING| PRIMITIVE_VALUE | INITIALIZER | BOOL);
 
 Value:
-	 Cast | NestedGetElementPtr | Constant | NonConstantValue;
+	 NestedCast | NestedGetElementPtr | Constant | AddressUse | PrimitiveValue;
 
 ValueStruct:
 	'{' types+=TypeUse value+=Value (',' types+=TypeUse value+=Value)* '}';
@@ -128,67 +192,73 @@ ValueStruct:
 Structure:
 	{Structure} '{' (types+=TypeUse (',' types+=(TypeUse|Aggregate_Types))*)? '}' POINTER?;
 
-Opaque:
-	'opaque';
+
+Parameter:
+	type = TypeUse RETURN_ATTRIBUTES* value = Value?
+;
 
 ParameterList:
-	{ParameterList} (('()')|('('
-	(types+=TypeUse (Lists+=TypeList)? RETURN_ATTRIBUTES* variables+=Value
-	(',' types+=TypeUse (Lists+=TypeList)? RETURN_ATTRIBUTES* variables+=Value)*)?
-	')'));
+	{ParameterList}
+	('()' | '('	((params+=Parameter (',' params+=Parameter)*)?) ')');
 
-TypeList:
-	{TypeList} ('()' | ('(' (types+=TypeUse (typelists+=TypeList)? RETURN_ATTRIBUTES? (',' types+=TypeUse
-	(typelists+=TypeList)? RETURN_ATTRIBUTES?)*)? (')' | ')*' | ')**' | ')***' | ')****' | ')*****')));
+FunctionParameter:
+	type = TypeUse RETURN_ATTRIBUTES* (value = Address)?
+;
+
+FunctionParameterList:
+	{FunctionParameterList} 
+	( '()'   
+		| '(' ( params+=FunctionParameter (',' params+=FunctionParameter)*)? ')'
+	);
+
 
 FunctionBody:
 	meta+=MetadataValue*
 	'{' blocks+=BasicBlock+ '}'
 	;
 Instruction:
-	StandartInstruction | ReturnInstruction
+	Store |  Load | GetElementPtr | Alloc | CmpXchg | AtomicRMW    
+	| Fence | Return | Branch | Switch | IndirectBranch | Invoke | Resume | Unreachable 
+	| LogicOperation | ArithmeticOperation | Compare 
+	| Cast | ShuffleVector | InsertElement | ExtractElement | InsertValue | ExtractValue  
+	| Phi | Select | Call | VariableAttributeAccess | LandingPad
 ;
 BasicBlock:
-	(label=ID_FQN ':')
-	instructions+=(InstructionUse | StandartInstruction)*
-	(retadr=VALID_ID '=')? terminator=ReturnInstruction;
+	(label=LABEL_ID ':')
+	(instructions+= Instruction)+
+;
 
-InstructionUse:
-	reg_or_var=VALID_ID '=' instruction=StandartInstruction;
-
-ReturnInstruction:
-	Return | Branch | Switch | IndirectBranch | Invoke | Resume | Unreachable;
-
-StandartInstruction:
-	('volatile'? Load) | ('volatile'? Store) | Fence | GetElementPtr | LogicOperation | ArithmeticOperation | Compare |
-	Cast | ShuffleVector | InsertElement | ExtractElement | InsertValue | ExtractValue | Alloc |
-	CmpXchg | AtomicRMW | Phi | Select | Call | VariableAttributeAccess | LandingPad;
 
 ArithmeticOperation:
-	operation = ('add' | 'fadd' | 'sub' | 'fsub' | 'mul' | 'fmul' | 'udiv' | 'sdiv' | 'fdiv' | 'urem' | 'srem' | 'frem') (('nsw' |
+	result=Address '=' operation = ('add' | 'fadd' | 'sub' | 'fsub' | 'mul' | 'fmul' | 'udiv' | 'sdiv' | 'fdiv' | 'urem' | 'srem' | 'frem') (('nsw' |
 	'nuw') ('nuw' | 'nsw')?)?
 	optype=TypeUse value1=Value ',' value2=Value;
 
 LogicOperation:
-	operation = ('shl' | 'lshr' | 'ashr' | 'and' | 'or' | 'xor') optype=TypeUse value1=Value ',' value2=Value;
+	result=Address '=' operation = ('shl' | 'lshr' | 'ashr' | 'and' | 'or' | 'xor') optype=TypeUse value1=Value ',' value2=Value;
 
 Cast:
-	operation = Cast_OP (('(' from=(TypeUse|Aggregate_Types) value=Value 'to' to=TypeUse ')') | (from=(TypeUse|Aggregate_Types) value=Value 'to' to=TypeUse));
+	result=Address '=' operation = CAST_OP from=(TypeUse|Aggregate_Types) value=Value 'to' to=TypeUse;
 
-MetadataValue:
-	(('!' NUMBER) | ('!{' ID_FQN '}') | ('!' ID_FQN))
-	('='
-	(('!' NUMBER) |
-	('!{' ID_FQN '}') |
-	('!' ID_FQN) |
-	'metadata' (('!' '{' | '!{') (('metadata' '!' STRING (',' (('metadata' '!' NUMBER)|'null'))?)|(INT_TYPE NUMBER ',' INT_TYPE NUMBER)) '}')?))?;
-
-ALIGNMENT:
-	'align' NUMBER //must be a power of 2
+NestedCast: 
+	operation = CAST_OP '(' from=(TypeUse|Aggregate_Types) value=Value 'to' to=TypeUse ')' 
 ;
 
+MetaArgValue:
+	arg=METADATA value=(METADATA|STRING)
+;
+Meta:
+	'metadata' meta=(METADATA) | arg=Predefined? value=Value
+;
+
+MetadataValue:
+	nodeId=METADATA	'=' 
+	'metadata'? ('!' '{' | '!{')  values+=Meta (',' values+=Meta)* '}'
+; 
+
+
 GetElementPtr:
-	'getelementptr' 'inbounds'? 
+	result=Address '=' 'getelementptr' 'inbounds'? 
 		(aggregate=(TypeUse|Array) aggregatename=Value(',' indTypes+=TypeUse indizies+=Value)*)
 ;
 NestedGetElementPtr:
@@ -197,78 +267,76 @@ NestedGetElementPtr:
 ;
 	
 ExtractValue:
-	'extractvalue' (array=Array | struct=Structure) value=Value (',' index+=NUMBER)+;
+	result=Address '=' 'extractvalue' (array=Array | struct=Structure) value=Value (',' index+=NUMBER)+;
 
 InsertValue:
-	'insertvalue' struct=Structure value=Value ',' inserttype=TypeUse insertvalue=Value (',' index+=NUMBER)+;
+	result=Address '=' 'insertvalue' struct=Structure value=Value ',' inserttype=TypeUse insertvalue=Value (',' index+=NUMBER)+;
 
 Fence:
 	'fence' 'singlethread'? ordering=ATOMIC_ORDERING;
 
 CmpXchg:
-	'cmpxchg' 'volatile'? adresstype=TypeUse adress=Value ',' comparetype=TypeUse comparevalue=Value ',' newtype=TypeUse
+	result=Address '=' 'cmpxchg' (volatile?='volatile')? adresstype=TypeUse adress=Value ',' comparetype=TypeUse comparevalue=Value ',' newtype=TypeUse
 	newvalue=Value 'singlethread'?
 	ordering=ATOMIC_ORDERING;
 
 AtomicRMW:
-	'atomicrmw' 'volatile'? operation = BIN_OP adresstype=TypeUse adress=Value ',' optype=TypeUse opvalue=Value 'singlethread'?
+	result=Address '=' 'atomicrmw' (volatile?='volatile')? operation = BIN_OP adresstype=TypeUse adress=Value ',' optype=TypeUse opvalue=Value 'singlethread'?
 	ordering=ATOMIC_ORDERING;
 
 Load:
-	'load' 'volatile'? adresstype=TypeUse (types=TypeList)? adress=Value (',' ((ALIGNMENT) | (MetadataValue)+))* |
-	'load' 'atomic' 'volatile'? adresstype=TypeUse adress=Value (types=TypeList)? 'singlethread'?
-	ordering=ATOMIC_ORDERING (',' 'align'
-	index=NUMBER)?;
+	result=Address '=' ( volatile?='volatile' 'load'  | 'load' (volatile?='volatile')?) address=Parameter (',' 'align' align = NUMBER)?  (',' meta+=MetaArgValue)* 
+	|
+	result=Address '=' 'load' atomic?='atomic' (volatile?='volatile'?)? address=Parameter 'singlethread'? ordering=ATOMIC_ORDERING (',' 'align' align = NUMBER)?;
 
 Store:
-	'store' 'volatile'? newtype=(TypeUse) (types+=TypeList)? (newvalue=Value) ','
-	adresstype=TypeUse (types+=TypeList)? adress=Value (',' ((ALIGNMENT) |
-	(MetadataValue)+))* 
+	(volatile?='volatile' 'store' | 'store' (volatile?='volatile')?) targetAddress=Parameter ',' value=Parameter  (',' 'align' align = NUMBER)? (',' meta+=MetaArgValue)*     
 	|
-	'store' 'atomic' 'volatile'? newtype=TypeUse (types+=TypeList)? newvalue=Value ',' adresstype=TypeUse
-	(types+=TypeList)? adress=Value 'singlethread'?
-	ordering=ATOMIC_ORDERING (','
-	'align' index=NUMBER)?;
+	'store' atomic?='atomic' (volatile?='volatile')? targetAddress=Parameter ',' value=Parameter 'singlethread'? ordering=ATOMIC_ORDERING (',' 'align' align = NUMBER)?;
 
 Call:
-	'tail'? 'call' CallingConv? RETURN_ATTRIBUTES? adresstype=TypeUse ((adress=Value) | 'asm' 'sideeffect'? STRING ','
+	(result=Address '=')? 'tail'? 'call' CallingConv? RETURN_ATTRIBUTES? adresstype=TypeUse ((adress=Value) | 'asm' 'sideeffect'? STRING ','
 	STRING) pList=ParameterList FUNCTION_ATTRIBUTES* (',' '!srcloc' '!' NUMBER)*;
 
 Alloc:
-	'alloca' ((type=TypeUse typelist=TypeList?)) (',' numelementstype=TypeUse numelementsvalue=Value)? (',' ALIGNMENT)?;
+	result=Address '=' 'alloca' ((type=TypeUse typelist=ParameterList?)) (',' numelementstype=TypeUse numelementsvalue=Value)? (',' 'align' align = NUMBER)?;
+
+PhiCase:
+	value= Value ',' label = VALID_ID
+;
 
 Phi:
-	'phi' type=TypeUse '[' firstclass+=Value ',' values+=Value ']' (',' '[' firstclass+=Value ',' values+=Value ']')*;
+	result=Address '=' 'phi' type=TypeUse '[' cases+=PhiCase ']' (',' '[' cases+=PhiCase ']')*;
 
 LandingPad:
-	'landingpad' struct=Structure 'personality' personalitytype=TypeUse
+	result=Address '=' 'landingpad' struct=Structure 'personality' personalitytype=TypeUse
 	personalityvalue=Value ('cleanup' clause+=Clause* | clause+=Clause+);
 
 Clause:
-	'catch' type=TypeUse value=Value |
-	'filter' filterarray=Array (constant=Value);
+	'catch' type=TypeUse value=Value 
+	| 'filter' filterarray=Array (constant=Value);
 
 Select:
-	'select' conditiontype=TypeUse conditionvalue=Value ',' val1type=TypeUse val1value=Value ',' val2type=TypeUse
+	result=Address '=' 'select' conditiontype=TypeUse conditionvalue=Value ',' val1type=TypeUse val1value=Value ',' val2type=TypeUse
 	val2value=Value;
 
 VariableAttributeAccess:
-	'va_arg' listtype=TypeUse listvalue=Value ',' argType=TypeUse;
+	result=Address '=' 'va_arg' listtype=TypeUse listvalue=Value ',' argType=TypeUse;
 
 ExtractElement:
-	'extractelement' vectortype=TypeUse vectorvalue=Value ',' indextype=TypeUse index=Value;
+	result=Address '=' 'extractelement' vectortype=TypeUse vectorvalue=Value ',' indextype=TypeUse index=Value;
 
 InsertElement:
-	'insertelement' vectortype=TypeUse vectorvalue=Value ',' scalartype=TypeUse scalarvalue=Value ',' indextype=TypeUse
+	result=Address '=' 'insertelement' vectortype=TypeUse vectorvalue=Value ',' scalartype=TypeUse scalarvalue=Value ',' indextype=TypeUse
 	index=Value;
 
 ShuffleVector:
-	'shufflevector' val1type=TypeUse val1value=Value ',' val2type=TypeUse val2value=Value ',' masktype=TypeUse
+	result=Address '=' 'shufflevector' val1type=TypeUse val1value=Value ',' val2type=TypeUse val2value=Value ',' masktype=TypeUse
 	maskvalue=Value;
 
 Compare:
-	'icmp' pred = I_PREDICATES comptype=TypeUse value1=Value ',' value2=Value |
-	'fcmp' pred = F_PREDICATES comptype=TypeUse value1=Value ',' value2=Value;
+	result=Address '=' ('icmp' pred = I_PREDICATES comptype=TypeUse value1=Value ',' value2=Value |
+	'fcmp' pred = (F_PREDICATES| BOOL) comptype=TypeUse value1=Value ',' value2=Value);
 
 IndirectBranch:
 	'indirectbr' adresstype=TypeUse adress=Value ',' '[' (labeltype+=TypeUse labels+=Value (',' labeltype+=TypeUse labels+=Value)*)? ']';
@@ -279,7 +347,7 @@ Switch:
 Invoke:
 	'invoke' CallingConv? RETURN_ATTRIBUTES? functiontype=TypeUse name=Address pList=ParameterList
 	FUNCTION_ATTRIBUTES* 'to'
-	totype=TypeUse tovalue=Value 'unwind' unwindtype=TypeUse unwindvalue=Value;
+	'label' toTarget=VALID_ID 'unwind' 'label'unwindCase=VALID_ID;
 
 Resume:
 	'resume' resumestruct=Structure resumevalue=Value;
@@ -288,48 +356,9 @@ Unreachable:
 	{Unreachable} 'unreachable';
 
 Return:
-	{Return} 'ret' 'void' (',' '!dbg' '!' NUMBER)? | 'ret' returntype=TypeUse returnvalue=Value (',' '!dbg' '!' NUMBER)?;
+	'ret' returntype=Predefined (',' '!dbg' '!' NUMBER)? | 'ret' returntype=TypeUse returnvalue=Value (',' '!dbg' '!' NUMBER)?;
 
 Branch:
-	('br' 'label' destination=Value) | 
-	('br' INT_TYPE condvalue=Value ',' labelTruetype=TypeUse	labelTrue=Value	',' labelFalsetype=TypeUse labelFalse=Value);
+	('br' 'label' destination=VALID_ID) | 
+	('br' INT_TYPE condvalue=Value ',' 'label'	labelTrue=VALID_ID	',' 'label' labelFalse=VALID_ID);
 
-ATOMIC_ORDERING:
-	'unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst';
-
-BIN_OP:
-	('xchg' | 'add' | 'sub' | 'and' | 'nand' | 'or' | 'xor' | 'max' | 'min' | 'umax' | 'umin');
-
-RETURN_ATTRIBUTES:
-	'zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest';
-
-CallingConv:
-	'ccc' | 'fastcc' | 'coldcc' | 'x86_stdcallcc' | 'x86_fastcallcc' | 'x86_thiscallcc' | 'arm_apcscc' | 'arm_aapcscc' |
-	'arm_aapcs_vfpcc' | 'msp430_intrcc' | 'ptx_kernel' | 'ptx_device' | 'spir_func' | 'spir_kernel' | 'cc' '<' NUMBER '>'
-	NUMBER;
-
-FUNCTION_ATTRIBUTES:
-	'address_safety' | 'alignstack' '(' '<' NUMBER '>' ')' | 'alwaysinline' | 'nonlazybind' | 'inlinehint' | 'naked' |
-	'noimplicitfloat' | 'noinline' | 'noredzone' | 'noreturn' | 'nounwind' | 'optsize' | 'readnone' | 'readonly' |
-	'returns_twice' | 'ssp' | 'sspreq' | 'uwtable';
-
-Cast_OP:
-	'trunc' | 'zext' | 'sext' | 'fptrunc' | 'fpext' | 'fptoui' | 'fptosi' | 'uitofp' | 'sitofp' | 'ptrtoint' | 'inttoptr'
-	| 'bitcast';
-
-I_PREDICATES:
-	'eq' | 'ne' | 'ugt' | 'uge' | 'ult' | 'ule' | 'sgt' | 'sge' | 'slt' | 'sle';
-
-F_PREDICATES:
-	'false' | 'oeq' | 'ogt' | 'oge' | 'olt' | 'ole' | 'one' | 'ord' |
-	'ueq' | 'ugt' | 'uge' | 'ult' | 'ule' | 'une' | 'uno' | 'true';
-
-VISIBILITY:
-	'default' | 'hidden' | 'protected';
-
-LINKAGE:
-	'private' | 'linker_private' | 'linker_private_weak' | 'available_externally' | 'linkonce' | 'common' | 'appending' |
-	'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' | 'dllimport' | 'dllexport' | ALIAS_LINKAGE;
-
-ALIAS_LINKAGE:
-	'external' | 'internal' | 'weak' | 'weak_odr';

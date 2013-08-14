@@ -11,6 +11,8 @@ package de.upb.llvm_parser.llvm;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link de.upb.llvm_parser.llvm.CmpXchg#getResult <em>Result</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.CmpXchg#isVolatile <em>Volatile</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.CmpXchg#getAdresstype <em>Adresstype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.CmpXchg#getAdress <em>Adress</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.CmpXchg#getComparetype <em>Comparetype</em>}</li>
@@ -25,188 +27,240 @@ package de.upb.llvm_parser.llvm;
  * @model
  * @generated
  */
-public interface CmpXchg extends StandartInstruction
+public interface CmpXchg extends Instruction
 {
   /**
-   * Returns the value of the '<em><b>Adresstype</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Result</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Result</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+	 * @return the value of the '<em>Result</em>' containment reference.
+	 * @see #setResult(Address)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCmpXchg_Result()
+	 * @model containment="true"
+	 * @generated
+	 */
+  Address getResult();
+
+  /**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.CmpXchg#getResult <em>Result</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Result</em>' containment reference.
+	 * @see #getResult()
+	 * @generated
+	 */
+  void setResult(Address value);
+
+  /**
+	 * Returns the value of the '<em><b>Volatile</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Volatile</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+	 * @return the value of the '<em>Volatile</em>' attribute.
+	 * @see #setVolatile(boolean)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCmpXchg_Volatile()
+	 * @model
+	 * @generated
+	 */
+  boolean isVolatile();
+
+  /**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.CmpXchg#isVolatile <em>Volatile</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Volatile</em>' attribute.
+	 * @see #isVolatile()
+	 * @generated
+	 */
+  void setVolatile(boolean value);
+
+  /**
+	 * Returns the value of the '<em><b>Adresstype</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Adresstype</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Adresstype</em>' containment reference.
-   * @see #setAdresstype(TypeUse)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getCmpXchg_Adresstype()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Adresstype</em>' containment reference.
+	 * @see #setAdresstype(TypeUse)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCmpXchg_Adresstype()
+	 * @model containment="true"
+	 * @generated
+	 */
   TypeUse getAdresstype();
 
   /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.CmpXchg#getAdresstype <em>Adresstype</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.CmpXchg#getAdresstype <em>Adresstype</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Adresstype</em>' containment reference.
-   * @see #getAdresstype()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Adresstype</em>' containment reference.
+	 * @see #getAdresstype()
+	 * @generated
+	 */
   void setAdresstype(TypeUse value);
 
   /**
-   * Returns the value of the '<em><b>Adress</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Adress</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Adress</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Adress</em>' containment reference.
-   * @see #setAdress(Value)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getCmpXchg_Adress()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Adress</em>' containment reference.
+	 * @see #setAdress(Value)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCmpXchg_Adress()
+	 * @model containment="true"
+	 * @generated
+	 */
   Value getAdress();
 
   /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.CmpXchg#getAdress <em>Adress</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.CmpXchg#getAdress <em>Adress</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Adress</em>' containment reference.
-   * @see #getAdress()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Adress</em>' containment reference.
+	 * @see #getAdress()
+	 * @generated
+	 */
   void setAdress(Value value);
 
   /**
-   * Returns the value of the '<em><b>Comparetype</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Comparetype</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Comparetype</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Comparetype</em>' containment reference.
-   * @see #setComparetype(TypeUse)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getCmpXchg_Comparetype()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Comparetype</em>' containment reference.
+	 * @see #setComparetype(TypeUse)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCmpXchg_Comparetype()
+	 * @model containment="true"
+	 * @generated
+	 */
   TypeUse getComparetype();
 
   /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.CmpXchg#getComparetype <em>Comparetype</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.CmpXchg#getComparetype <em>Comparetype</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Comparetype</em>' containment reference.
-   * @see #getComparetype()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Comparetype</em>' containment reference.
+	 * @see #getComparetype()
+	 * @generated
+	 */
   void setComparetype(TypeUse value);
 
   /**
-   * Returns the value of the '<em><b>Comparevalue</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Comparevalue</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Comparevalue</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Comparevalue</em>' containment reference.
-   * @see #setComparevalue(Value)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getCmpXchg_Comparevalue()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Comparevalue</em>' containment reference.
+	 * @see #setComparevalue(Value)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCmpXchg_Comparevalue()
+	 * @model containment="true"
+	 * @generated
+	 */
   Value getComparevalue();
 
   /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.CmpXchg#getComparevalue <em>Comparevalue</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.CmpXchg#getComparevalue <em>Comparevalue</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Comparevalue</em>' containment reference.
-   * @see #getComparevalue()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Comparevalue</em>' containment reference.
+	 * @see #getComparevalue()
+	 * @generated
+	 */
   void setComparevalue(Value value);
 
   /**
-   * Returns the value of the '<em><b>Newtype</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Newtype</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Newtype</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Newtype</em>' containment reference.
-   * @see #setNewtype(TypeUse)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getCmpXchg_Newtype()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Newtype</em>' containment reference.
+	 * @see #setNewtype(TypeUse)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCmpXchg_Newtype()
+	 * @model containment="true"
+	 * @generated
+	 */
   TypeUse getNewtype();
 
   /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.CmpXchg#getNewtype <em>Newtype</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.CmpXchg#getNewtype <em>Newtype</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Newtype</em>' containment reference.
-   * @see #getNewtype()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Newtype</em>' containment reference.
+	 * @see #getNewtype()
+	 * @generated
+	 */
   void setNewtype(TypeUse value);
 
   /**
-   * Returns the value of the '<em><b>Newvalue</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Newvalue</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Newvalue</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Newvalue</em>' containment reference.
-   * @see #setNewvalue(Value)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getCmpXchg_Newvalue()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Newvalue</em>' containment reference.
+	 * @see #setNewvalue(Value)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCmpXchg_Newvalue()
+	 * @model containment="true"
+	 * @generated
+	 */
   Value getNewvalue();
 
   /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.CmpXchg#getNewvalue <em>Newvalue</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.CmpXchg#getNewvalue <em>Newvalue</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Newvalue</em>' containment reference.
-   * @see #getNewvalue()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Newvalue</em>' containment reference.
+	 * @see #getNewvalue()
+	 * @generated
+	 */
   void setNewvalue(Value value);
 
   /**
-   * Returns the value of the '<em><b>Ordering</b></em>' attribute.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Ordering</b></em>' attribute.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Ordering</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Ordering</em>' attribute.
-   * @see #setOrdering(String)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getCmpXchg_Ordering()
-   * @model
-   * @generated
-   */
+	 * @return the value of the '<em>Ordering</em>' attribute.
+	 * @see #setOrdering(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCmpXchg_Ordering()
+	 * @model
+	 * @generated
+	 */
   String getOrdering();
 
   /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.CmpXchg#getOrdering <em>Ordering</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.CmpXchg#getOrdering <em>Ordering</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Ordering</em>' attribute.
-   * @see #getOrdering()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Ordering</em>' attribute.
+	 * @see #getOrdering()
+	 * @generated
+	 */
   void setOrdering(String value);
 
 } // CmpXchg

@@ -2,10 +2,11 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
+import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Phi;
+import de.upb.llvm_parser.llvm.PhiCase;
 import de.upb.llvm_parser.llvm.TypeUse;
-import de.upb.llvm_parser.llvm.Value;
 
 import java.util.Collection;
 
@@ -29,250 +30,283 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.PhiImpl#getResult <em>Result</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.PhiImpl#getType <em>Type</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.PhiImpl#getFirstclass <em>Firstclass</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.PhiImpl#getValues <em>Values</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.PhiImpl#getCases <em>Cases</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class PhiImpl extends StandartInstructionImpl implements Phi
+public class PhiImpl extends InstructionImpl implements Phi
 {
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getResult() <em>Result</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getType()
-   * @generated
-   * @ordered
-   */
+	 * @see #getResult()
+	 * @generated
+	 * @ordered
+	 */
+  protected Address result;
+
+  /**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
   protected TypeUse type;
 
   /**
-   * The cached value of the '{@link #getFirstclass() <em>Firstclass</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getCases() <em>Cases</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getFirstclass()
-   * @generated
-   * @ordered
-   */
-  protected EList<Value> firstclass;
+	 * @see #getCases()
+	 * @generated
+	 * @ordered
+	 */
+  protected EList<PhiCase> cases;
 
   /**
-   * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValues()
-   * @generated
-   * @ordered
-   */
-  protected EList<Value> values;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected PhiImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return LlvmPackage.Literals.PHI;
-  }
+		return LlvmPackage.Literals.PHI;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
+  public Address getResult()
+  {
+		return result;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public NotificationChain basicSetResult(Address newResult, NotificationChain msgs)
+  {
+		Address oldResult = result;
+		result = newResult;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.PHI__RESULT, oldResult, newResult);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public void setResult(Address newResult)
+  {
+		if (newResult != result)
+		{
+			NotificationChain msgs = null;
+			if (result != null)
+				msgs = ((InternalEObject)result).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.PHI__RESULT, null, msgs);
+			if (newResult != null)
+				msgs = ((InternalEObject)newResult).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.PHI__RESULT, null, msgs);
+			msgs = basicSetResult(newResult, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.PHI__RESULT, newResult, newResult));
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
   public TypeUse getType()
   {
-    return type;
-  }
+		return type;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public NotificationChain basicSetType(TypeUse newType, NotificationChain msgs)
   {
-    TypeUse oldType = type;
-    type = newType;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.PHI__TYPE, oldType, newType);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		TypeUse oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.PHI__TYPE, oldType, newType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setType(TypeUse newType)
   {
-    if (newType != type)
-    {
-      NotificationChain msgs = null;
-      if (type != null)
-        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.PHI__TYPE, null, msgs);
-      if (newType != null)
-        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.PHI__TYPE, null, msgs);
-      msgs = basicSetType(newType, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.PHI__TYPE, newType, newType));
-  }
+		if (newType != type)
+		{
+			NotificationChain msgs = null;
+			if (type != null)
+				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.PHI__TYPE, null, msgs);
+			if (newType != null)
+				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.PHI__TYPE, null, msgs);
+			msgs = basicSetType(newType, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.PHI__TYPE, newType, newType));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<Value> getFirstclass()
+	 * @generated
+	 */
+  public EList<PhiCase> getCases()
   {
-    if (firstclass == null)
-    {
-      firstclass = new EObjectContainmentEList<Value>(Value.class, this, LlvmPackage.PHI__FIRSTCLASS);
-    }
-    return firstclass;
-  }
+		if (cases == null)
+		{
+			cases = new EObjectContainmentEList<PhiCase>(PhiCase.class, this, LlvmPackage.PHI__CASES);
+		}
+		return cases;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<Value> getValues()
-  {
-    if (values == null)
-    {
-      values = new EObjectContainmentEList<Value>(Value.class, this, LlvmPackage.PHI__VALUES);
-    }
-    return values;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.PHI__TYPE:
-        return basicSetType(null, msgs);
-      case LlvmPackage.PHI__FIRSTCLASS:
-        return ((InternalEList<?>)getFirstclass()).basicRemove(otherEnd, msgs);
-      case LlvmPackage.PHI__VALUES:
-        return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.PHI__RESULT:
+				return basicSetResult(null, msgs);
+			case LlvmPackage.PHI__TYPE:
+				return basicSetType(null, msgs);
+			case LlvmPackage.PHI__CASES:
+				return ((InternalEList<?>)getCases()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.PHI__TYPE:
-        return getType();
-      case LlvmPackage.PHI__FIRSTCLASS:
-        return getFirstclass();
-      case LlvmPackage.PHI__VALUES:
-        return getValues();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.PHI__RESULT:
+				return getResult();
+			case LlvmPackage.PHI__TYPE:
+				return getType();
+			case LlvmPackage.PHI__CASES:
+				return getCases();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.PHI__TYPE:
-        setType((TypeUse)newValue);
-        return;
-      case LlvmPackage.PHI__FIRSTCLASS:
-        getFirstclass().clear();
-        getFirstclass().addAll((Collection<? extends Value>)newValue);
-        return;
-      case LlvmPackage.PHI__VALUES:
-        getValues().clear();
-        getValues().addAll((Collection<? extends Value>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.PHI__RESULT:
+				setResult((Address)newValue);
+				return;
+			case LlvmPackage.PHI__TYPE:
+				setType((TypeUse)newValue);
+				return;
+			case LlvmPackage.PHI__CASES:
+				getCases().clear();
+				getCases().addAll((Collection<? extends PhiCase>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.PHI__TYPE:
-        setType((TypeUse)null);
-        return;
-      case LlvmPackage.PHI__FIRSTCLASS:
-        getFirstclass().clear();
-        return;
-      case LlvmPackage.PHI__VALUES:
-        getValues().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.PHI__RESULT:
+				setResult((Address)null);
+				return;
+			case LlvmPackage.PHI__TYPE:
+				setType((TypeUse)null);
+				return;
+			case LlvmPackage.PHI__CASES:
+				getCases().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.PHI__TYPE:
-        return type != null;
-      case LlvmPackage.PHI__FIRSTCLASS:
-        return firstclass != null && !firstclass.isEmpty();
-      case LlvmPackage.PHI__VALUES:
-        return values != null && !values.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.PHI__RESULT:
+				return result != null;
+			case LlvmPackage.PHI__TYPE:
+				return type != null;
+			case LlvmPackage.PHI__CASES:
+				return cases != null && !cases.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //PhiImpl

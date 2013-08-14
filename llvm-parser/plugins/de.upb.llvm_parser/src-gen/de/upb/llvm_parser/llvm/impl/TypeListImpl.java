@@ -37,169 +37,169 @@ import org.eclipse.emf.ecore.util.InternalEList;
 public class TypeListImpl extends MinimalEObjectImpl.Container implements TypeList
 {
   /**
-   * The cached value of the '{@link #getTypes() <em>Types</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getTypes() <em>Types</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTypes()
-   * @generated
-   * @ordered
-   */
+	 * @see #getTypes()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<TypeUse> types;
 
   /**
-   * The cached value of the '{@link #getTypelists() <em>Typelists</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getTypelists() <em>Typelists</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTypelists()
-   * @generated
-   * @ordered
-   */
+	 * @see #getTypelists()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<TypeList> typelists;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected TypeListImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return LlvmPackage.Literals.TYPE_LIST;
-  }
+		return LlvmPackage.Literals.TYPE_LIST;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EList<TypeUse> getTypes()
   {
-    if (types == null)
-    {
-      types = new EObjectContainmentEList<TypeUse>(TypeUse.class, this, LlvmPackage.TYPE_LIST__TYPES);
-    }
-    return types;
-  }
+		if (types == null)
+		{
+			types = new EObjectContainmentEList<TypeUse>(TypeUse.class, this, LlvmPackage.TYPE_LIST__TYPES);
+		}
+		return types;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EList<TypeList> getTypelists()
   {
-    if (typelists == null)
-    {
-      typelists = new EObjectContainmentEList<TypeList>(TypeList.class, this, LlvmPackage.TYPE_LIST__TYPELISTS);
-    }
-    return typelists;
-  }
+		if (typelists == null)
+		{
+			typelists = new EObjectContainmentEList<TypeList>(TypeList.class, this, LlvmPackage.TYPE_LIST__TYPELISTS);
+		}
+		return typelists;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.TYPE_LIST__TYPES:
-        return ((InternalEList<?>)getTypes()).basicRemove(otherEnd, msgs);
-      case LlvmPackage.TYPE_LIST__TYPELISTS:
-        return ((InternalEList<?>)getTypelists()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.TYPE_LIST__TYPES:
+				return ((InternalEList<?>)getTypes()).basicRemove(otherEnd, msgs);
+			case LlvmPackage.TYPE_LIST__TYPELISTS:
+				return ((InternalEList<?>)getTypelists()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.TYPE_LIST__TYPES:
-        return getTypes();
-      case LlvmPackage.TYPE_LIST__TYPELISTS:
-        return getTypelists();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.TYPE_LIST__TYPES:
+				return getTypes();
+			case LlvmPackage.TYPE_LIST__TYPELISTS:
+				return getTypelists();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.TYPE_LIST__TYPES:
-        getTypes().clear();
-        getTypes().addAll((Collection<? extends TypeUse>)newValue);
-        return;
-      case LlvmPackage.TYPE_LIST__TYPELISTS:
-        getTypelists().clear();
-        getTypelists().addAll((Collection<? extends TypeList>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.TYPE_LIST__TYPES:
+				getTypes().clear();
+				getTypes().addAll((Collection<? extends TypeUse>)newValue);
+				return;
+			case LlvmPackage.TYPE_LIST__TYPELISTS:
+				getTypelists().clear();
+				getTypelists().addAll((Collection<? extends TypeList>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.TYPE_LIST__TYPES:
-        getTypes().clear();
-        return;
-      case LlvmPackage.TYPE_LIST__TYPELISTS:
-        getTypelists().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.TYPE_LIST__TYPES:
+				getTypes().clear();
+				return;
+			case LlvmPackage.TYPE_LIST__TYPELISTS:
+				getTypelists().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.TYPE_LIST__TYPES:
-        return types != null && !types.isEmpty();
-      case LlvmPackage.TYPE_LIST__TYPELISTS:
-        return typelists != null && !typelists.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.TYPE_LIST__TYPES:
+				return types != null && !types.isEmpty();
+			case LlvmPackage.TYPE_LIST__TYPELISTS:
+				return typelists != null && !typelists.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //TypeListImpl
