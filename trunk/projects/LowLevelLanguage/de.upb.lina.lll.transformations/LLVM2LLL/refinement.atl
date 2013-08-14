@@ -11,6 +11,7 @@ helper def: getInstructions(input: MM!Instruction): OrderedSet(MM!Instruction) =
 rule BranchCompare {
 	from
 		b: MM!ConditionalBranch (
+			(b.oclIsTypeOf(MM!ConditionalBranch))and
 			b.condition.oclIsUndefined()
 		)
 	to
@@ -24,18 +25,27 @@ rule BranchCompare {
 								false)
 					else
 						if thisModule.getBranchLC(b).expression.
-								oclIsTypeOf(MM!"expressions::StringValue") then
-							MM!"expressions::StringValue".newInstance().
-									refSetValue('strValue', thisModule.getBranchLC(b).
-									instructionResult.name)
+								oclIsTypeOf(MM!"expressions::Variable") then
+							MM!"expressions::Variable".newInstance().
+									refSetValue('varName', thisModule.getBranchLC(b).
+									expression.varName)
 						else
 							thisModule.getBranchLC(b).expression
 						endif
 					endif
 				endif
+
 		)
 }
 
+-- This Helper would be helpful, but LLL-Instruction->parameters cant contain
+-- expressions-Variable
+--helper def: EhasNU(input :MM!"expressions::Variable"): Boolean =
+--	not MM!LocalComputation.allInstances() -> select(i |
+-- i.parameters.indexOf(input)).isEmpty();
+--helper def: VhasNU(input :String, instr: MM!Instruction): Boolean =
+--	not MM!LocalComputation.allInstances() -> select(i | i.parameters.includes()and
+-- i.function=instr.function).isEmpty();
 helper def: getBranchLC(input: MM!ConditionalBranch): MM!Instruction =
 	thisModule.getInstructions(input) -> select(ea | ea.oclIsTypeOf(MM!LocalComputation))
 			-> select(i | i.instructionResult.name = input.instructionResult.name).
@@ -49,7 +59,6 @@ rule DropLC {
 					oclIsUndefined()
 		)
 	to
-		
 }
 
 -- LAZY RULES ARE NOT SUPPORTED FOR REFINING MODE ...  ATL SDK - ATLAS Transformation
@@ -67,13 +76,16 @@ rule DropLC {
 --
 
 --}
+
+
 rule DeleteNoUse {
 	from
-		ex: MM!"expressions::Equal" (
-			ex.refImmediateComposite().debug('BATZ').oclIsTypeOf(MM!Program)
+		ex: MM!"expressions::Expression" (
+			ex.refImmediateComposite().oclIsTypeOf(MM!Program)
 		)
 	to
 }
+
 
 helper def: iTargetA(): Set(MM!Instruction) =
 	MM!Goto.allInstances() -> select(goto | goto.target.instruction.oclIsTypeOf(MM!Goto))

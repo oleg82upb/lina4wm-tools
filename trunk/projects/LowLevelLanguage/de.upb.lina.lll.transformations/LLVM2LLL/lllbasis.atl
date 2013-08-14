@@ -428,7 +428,11 @@ rule BasicBlockLabel2FunctionInstructionLabel(block: LLVM!BasicBlock, lllfunctio
 	to
 		bbLabel: LLL!Label (
 			function <- lllfunction,
-			instruction <- thisModule.resolveTemp(block.instructions.first(), 'outI'),
+			instruction <- thisModule.resolveTemp(
+				if block.instructions.first().oclIsUndefined()
+				then block.terminator
+				else block.instructions.first() endif
+				, 'outI'),
 			name <- block.label
 		)
 	do {
@@ -737,24 +741,8 @@ rule Cast2LC {
 			expression <- expr,
 			instructionResult <- intReg
 		),
-		expr: LLL!"expressions::StringValue" (
-			strValue <- 'cast ' + thisModule.numberReg(thisModule.stringcut(thisModule.
-					stringcut(insUse.instruction.value.name, '%'), '@')) + '(' +
-					thisModule.numberReg(thisModule.stringcut(thisModule.stringcut((if
-					insUse.instruction.from.oclIsTypeOf(LLVM!AddressUse) then
-								insUse.instruction.from.address.toString()
-							else
-								insUse.instruction.from.type.toString()
-							endif), '%'), '@')) + ')' + ' to ' + thisModule.
-									numberReg(thisModule.stringcut(thisModule.
-									stringcut(insUse.reg_or_var, '%'), '@')) + '(' +
-									thisModule.numberReg(thisModule.stringcut(thisModule.stringcut((
-						if insUse.instruction.to.oclIsTypeOf(LLVM!AddressUse) then
-								insUse.instruction.to.address.toString()
-							else
-								insUse.instruction.to.type.toString()
-							endif
-					), '%'), '@')) + ')'
+		expr: LLL!"expressions::Variable" (
+			varName <- thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(insUse.instruction.value.name, '%'), '@'))
 		),
 		intReg: LLL!"lll::Variable" (
 			name <- thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(insUse.

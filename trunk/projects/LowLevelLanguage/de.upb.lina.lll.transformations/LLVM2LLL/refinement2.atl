@@ -1,0 +1,73 @@
+-- @nsURI MM=http://www.upb.de/lina/lll
+-- @atlcompiler atl2010
+
+
+module refinement;
+create OUT: MM refining IN: MM;
+
+rule BranchBasicBlock0 {
+	from
+		cb: MM!ConditionalBranch (
+			cb.target.instruction.oclIsTypeOf(MM!Goto) or cb.elseTarget.instruction.
+					oclIsTypeOf(MM!Goto)
+		)
+	to
+		cbout: MM!ConditionalBranch (
+			target <- if cb.target.instruction.oclIsTypeOf(MM!Goto) then
+					cb.target.instruction.target.debug('1')
+				else
+					cb.target
+				endif,
+			elseTarget <- if cb.elseTarget.instruction.oclIsTypeOf(MM!Goto)then
+					cb.elseTarget.instruction.target.debug('2')
+				else
+					cb.elseTarget
+				endif
+		)
+}
+
+rule BranchBasicBlock1 {
+	from
+		inputGoto: MM!Goto (
+			(inputGoto.oclIsTypeOf(MM!Goto))and
+			inputGoto.target.instruction.oclIsTypeOf(MM!Goto)
+		)
+	to
+		outputGoto: MM!Goto (
+			target <- inputGoto.target.instruction.target.debug('3')
+		)
+}
+
+rule BranchBasicBlock2 {
+	from
+		inputGoto: MM!Goto (
+			(inputGoto.oclIsTypeOf(MM!Goto))and not
+			thisModule.getLabels(inputGoto) -> select(a | (a.instruction = inputGoto)
+					and (thisModule.cb1Target(a) + thisModule.gTarget(a) + thisModule.
+					cb2Target(a)) = 0).isEmpty().debug('5')
+		)
+	to
+		drop
+
+}
+rule BranchBasicBlock3 {
+	from
+		label: MM!Label (
+			label.instruction.oclIsUndefined()
+		)
+	to
+		drop
+}
+
+
+helper def: getLabels(input: MM!Instruction): OrderedSet(MM!Label) =
+	input.refImmediateComposite().labels;
+
+helper def: gTarget(input: MM!Label): Integer =
+	MM!Goto.allInstances() -> collect(g | g.target).count(input);
+
+helper def: cb1Target(input: MM!Label): Integer =
+	MM!ConditionalBranch.allInstances() -> collect(g | g.target).count(input);
+
+helper def: cb2Target(input: MM!Label): Integer =
+	MM!ConditionalBranch.allInstances() -> collect(g | g.elseTarget).count(input);
