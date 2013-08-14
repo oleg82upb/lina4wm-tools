@@ -38,312 +38,312 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class IndirectBranchImpl extends ReturnInstructionImpl implements IndirectBranch
+public class IndirectBranchImpl extends InstructionImpl implements IndirectBranch
 {
   /**
-   * The cached value of the '{@link #getAdresstype() <em>Adresstype</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getAdresstype() <em>Adresstype</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAdresstype()
-   * @generated
-   * @ordered
-   */
+	 * @see #getAdresstype()
+	 * @generated
+	 * @ordered
+	 */
   protected TypeUse adresstype;
 
   /**
-   * The cached value of the '{@link #getAdress() <em>Adress</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getAdress() <em>Adress</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAdress()
-   * @generated
-   * @ordered
-   */
+	 * @see #getAdress()
+	 * @generated
+	 * @ordered
+	 */
   protected Value adress;
 
   /**
-   * The cached value of the '{@link #getLabeltype() <em>Labeltype</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getLabeltype() <em>Labeltype</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLabeltype()
-   * @generated
-   * @ordered
-   */
+	 * @see #getLabeltype()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<TypeUse> labeltype;
 
   /**
-   * The cached value of the '{@link #getLabels() <em>Labels</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getLabels() <em>Labels</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLabels()
-   * @generated
-   * @ordered
-   */
+	 * @see #getLabels()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<Value> labels;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected IndirectBranchImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return LlvmPackage.Literals.INDIRECT_BRANCH;
-  }
+		return LlvmPackage.Literals.INDIRECT_BRANCH;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public TypeUse getAdresstype()
   {
-    return adresstype;
-  }
+		return adresstype;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public NotificationChain basicSetAdresstype(TypeUse newAdresstype, NotificationChain msgs)
   {
-    TypeUse oldAdresstype = adresstype;
-    adresstype = newAdresstype;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE, oldAdresstype, newAdresstype);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		TypeUse oldAdresstype = adresstype;
+		adresstype = newAdresstype;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE, oldAdresstype, newAdresstype);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setAdresstype(TypeUse newAdresstype)
   {
-    if (newAdresstype != adresstype)
-    {
-      NotificationChain msgs = null;
-      if (adresstype != null)
-        msgs = ((InternalEObject)adresstype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE, null, msgs);
-      if (newAdresstype != null)
-        msgs = ((InternalEObject)newAdresstype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE, null, msgs);
-      msgs = basicSetAdresstype(newAdresstype, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE, newAdresstype, newAdresstype));
-  }
+		if (newAdresstype != adresstype)
+		{
+			NotificationChain msgs = null;
+			if (adresstype != null)
+				msgs = ((InternalEObject)adresstype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE, null, msgs);
+			if (newAdresstype != null)
+				msgs = ((InternalEObject)newAdresstype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE, null, msgs);
+			msgs = basicSetAdresstype(newAdresstype, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE, newAdresstype, newAdresstype));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Value getAdress()
   {
-    return adress;
-  }
+		return adress;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public NotificationChain basicSetAdress(Value newAdress, NotificationChain msgs)
   {
-    Value oldAdress = adress;
-    adress = newAdress;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__ADRESS, oldAdress, newAdress);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		Value oldAdress = adress;
+		adress = newAdress;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__ADRESS, oldAdress, newAdress);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setAdress(Value newAdress)
   {
-    if (newAdress != adress)
-    {
-      NotificationChain msgs = null;
-      if (adress != null)
-        msgs = ((InternalEObject)adress).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__ADRESS, null, msgs);
-      if (newAdress != null)
-        msgs = ((InternalEObject)newAdress).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__ADRESS, null, msgs);
-      msgs = basicSetAdress(newAdress, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__ADRESS, newAdress, newAdress));
-  }
+		if (newAdress != adress)
+		{
+			NotificationChain msgs = null;
+			if (adress != null)
+				msgs = ((InternalEObject)adress).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__ADRESS, null, msgs);
+			if (newAdress != null)
+				msgs = ((InternalEObject)newAdress).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__ADRESS, null, msgs);
+			msgs = basicSetAdress(newAdress, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__ADRESS, newAdress, newAdress));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EList<TypeUse> getLabeltype()
   {
-    if (labeltype == null)
-    {
-      labeltype = new EObjectContainmentEList<TypeUse>(TypeUse.class, this, LlvmPackage.INDIRECT_BRANCH__LABELTYPE);
-    }
-    return labeltype;
-  }
+		if (labeltype == null)
+		{
+			labeltype = new EObjectContainmentEList<TypeUse>(TypeUse.class, this, LlvmPackage.INDIRECT_BRANCH__LABELTYPE);
+		}
+		return labeltype;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EList<Value> getLabels()
   {
-    if (labels == null)
-    {
-      labels = new EObjectContainmentEList<Value>(Value.class, this, LlvmPackage.INDIRECT_BRANCH__LABELS);
-    }
-    return labels;
-  }
+		if (labels == null)
+		{
+			labels = new EObjectContainmentEList<Value>(Value.class, this, LlvmPackage.INDIRECT_BRANCH__LABELS);
+		}
+		return labels;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE:
-        return basicSetAdresstype(null, msgs);
-      case LlvmPackage.INDIRECT_BRANCH__ADRESS:
-        return basicSetAdress(null, msgs);
-      case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
-        return ((InternalEList<?>)getLabeltype()).basicRemove(otherEnd, msgs);
-      case LlvmPackage.INDIRECT_BRANCH__LABELS:
-        return ((InternalEList<?>)getLabels()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE:
+				return basicSetAdresstype(null, msgs);
+			case LlvmPackage.INDIRECT_BRANCH__ADRESS:
+				return basicSetAdress(null, msgs);
+			case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
+				return ((InternalEList<?>)getLabeltype()).basicRemove(otherEnd, msgs);
+			case LlvmPackage.INDIRECT_BRANCH__LABELS:
+				return ((InternalEList<?>)getLabels()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE:
-        return getAdresstype();
-      case LlvmPackage.INDIRECT_BRANCH__ADRESS:
-        return getAdress();
-      case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
-        return getLabeltype();
-      case LlvmPackage.INDIRECT_BRANCH__LABELS:
-        return getLabels();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE:
+				return getAdresstype();
+			case LlvmPackage.INDIRECT_BRANCH__ADRESS:
+				return getAdress();
+			case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
+				return getLabeltype();
+			case LlvmPackage.INDIRECT_BRANCH__LABELS:
+				return getLabels();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE:
-        setAdresstype((TypeUse)newValue);
-        return;
-      case LlvmPackage.INDIRECT_BRANCH__ADRESS:
-        setAdress((Value)newValue);
-        return;
-      case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
-        getLabeltype().clear();
-        getLabeltype().addAll((Collection<? extends TypeUse>)newValue);
-        return;
-      case LlvmPackage.INDIRECT_BRANCH__LABELS:
-        getLabels().clear();
-        getLabels().addAll((Collection<? extends Value>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE:
+				setAdresstype((TypeUse)newValue);
+				return;
+			case LlvmPackage.INDIRECT_BRANCH__ADRESS:
+				setAdress((Value)newValue);
+				return;
+			case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
+				getLabeltype().clear();
+				getLabeltype().addAll((Collection<? extends TypeUse>)newValue);
+				return;
+			case LlvmPackage.INDIRECT_BRANCH__LABELS:
+				getLabels().clear();
+				getLabels().addAll((Collection<? extends Value>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE:
-        setAdresstype((TypeUse)null);
-        return;
-      case LlvmPackage.INDIRECT_BRANCH__ADRESS:
-        setAdress((Value)null);
-        return;
-      case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
-        getLabeltype().clear();
-        return;
-      case LlvmPackage.INDIRECT_BRANCH__LABELS:
-        getLabels().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE:
+				setAdresstype((TypeUse)null);
+				return;
+			case LlvmPackage.INDIRECT_BRANCH__ADRESS:
+				setAdress((Value)null);
+				return;
+			case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
+				getLabeltype().clear();
+				return;
+			case LlvmPackage.INDIRECT_BRANCH__LABELS:
+				getLabels().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE:
-        return adresstype != null;
-      case LlvmPackage.INDIRECT_BRANCH__ADRESS:
-        return adress != null;
-      case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
-        return labeltype != null && !labeltype.isEmpty();
-      case LlvmPackage.INDIRECT_BRANCH__LABELS:
-        return labels != null && !labels.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE:
+				return adresstype != null;
+			case LlvmPackage.INDIRECT_BRANCH__ADRESS:
+				return adress != null;
+			case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
+				return labeltype != null && !labeltype.isEmpty();
+			case LlvmPackage.INDIRECT_BRANCH__LABELS:
+				return labels != null && !labels.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //IndirectBranchImpl

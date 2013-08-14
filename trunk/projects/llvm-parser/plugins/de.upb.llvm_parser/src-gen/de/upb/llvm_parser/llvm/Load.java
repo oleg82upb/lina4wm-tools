@@ -4,6 +4,8 @@ package de.upb.llvm_parser.llvm;
 
 import java.math.BigDecimal;
 
+import org.eclipse.emf.common.util.EList;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Load</b></em>'.
@@ -12,11 +14,12 @@ import java.math.BigDecimal;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.Load#getAdresstype <em>Adresstype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Load#getTypes <em>Types</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Load#getAdress <em>Adress</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Load#getResult <em>Result</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Load#isVolatile <em>Volatile</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Load#getAddress <em>Address</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Load#getAlign <em>Align</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Load#getMeta <em>Meta</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Load#getOrdering <em>Ordering</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Load#getIndex <em>Index</em>}</li>
  * </ul>
  * </p>
  *
@@ -24,136 +27,152 @@ import java.math.BigDecimal;
  * @model
  * @generated
  */
-public interface Load extends StandartInstruction
+public interface Load extends Instruction
 {
   /**
-   * Returns the value of the '<em><b>Adresstype</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Result</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Adresstype</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Result</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Adresstype</em>' containment reference.
-   * @see #setAdresstype(TypeUse)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getLoad_Adresstype()
-   * @model containment="true"
-   * @generated
-   */
-  TypeUse getAdresstype();
+	 * @return the value of the '<em>Result</em>' containment reference.
+	 * @see #setResult(Address)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLoad_Result()
+	 * @model containment="true"
+	 * @generated
+	 */
+  Address getResult();
 
   /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Load#getAdresstype <em>Adresstype</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Load#getResult <em>Result</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Adresstype</em>' containment reference.
-   * @see #getAdresstype()
-   * @generated
-   */
-  void setAdresstype(TypeUse value);
+	 * @param value the new value of the '<em>Result</em>' containment reference.
+	 * @see #getResult()
+	 * @generated
+	 */
+  void setResult(Address value);
 
   /**
-   * Returns the value of the '<em><b>Types</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Volatile</b></em>' attribute.
+	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Types</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Volatile</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Types</em>' containment reference.
-   * @see #setTypes(TypeList)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getLoad_Types()
-   * @model containment="true"
-   * @generated
-   */
-  TypeList getTypes();
+	 * @return the value of the '<em>Volatile</em>' attribute.
+	 * @see #setVolatile(boolean)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLoad_Volatile()
+	 * @model
+	 * @generated
+	 */
+  boolean isVolatile();
 
   /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Load#getTypes <em>Types</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Load#isVolatile <em>Volatile</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Types</em>' containment reference.
-   * @see #getTypes()
-   * @generated
-   */
-  void setTypes(TypeList value);
+	 * @param value the new value of the '<em>Volatile</em>' attribute.
+	 * @see #isVolatile()
+	 * @generated
+	 */
+  void setVolatile(boolean value);
 
   /**
-   * Returns the value of the '<em><b>Adress</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Address</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Adress</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Address</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Adress</em>' containment reference.
-   * @see #setAdress(Value)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getLoad_Adress()
-   * @model containment="true"
-   * @generated
-   */
-  Value getAdress();
+	 * @return the value of the '<em>Address</em>' containment reference.
+	 * @see #setAddress(Parameter)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLoad_Address()
+	 * @model containment="true"
+	 * @generated
+	 */
+  Parameter getAddress();
 
   /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Load#getAdress <em>Adress</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Load#getAddress <em>Address</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Adress</em>' containment reference.
-   * @see #getAdress()
-   * @generated
-   */
-  void setAdress(Value value);
+	 * @param value the new value of the '<em>Address</em>' containment reference.
+	 * @see #getAddress()
+	 * @generated
+	 */
+  void setAddress(Parameter value);
 
   /**
-   * Returns the value of the '<em><b>Ordering</b></em>' attribute.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Align</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Align</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+	 * @return the value of the '<em>Align</em>' attribute.
+	 * @see #setAlign(BigDecimal)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLoad_Align()
+	 * @model
+	 * @generated
+	 */
+  BigDecimal getAlign();
+
+  /**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Load#getAlign <em>Align</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Align</em>' attribute.
+	 * @see #getAlign()
+	 * @generated
+	 */
+  void setAlign(BigDecimal value);
+
+  /**
+	 * Returns the value of the '<em><b>Meta</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.MetaArgValue}.
+	 * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Meta</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+	 * @return the value of the '<em>Meta</em>' containment reference list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLoad_Meta()
+	 * @model containment="true"
+	 * @generated
+	 */
+  EList<MetaArgValue> getMeta();
+
+  /**
+	 * Returns the value of the '<em><b>Ordering</b></em>' attribute.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Ordering</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Ordering</em>' attribute.
-   * @see #setOrdering(String)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getLoad_Ordering()
-   * @model
-   * @generated
-   */
+	 * @return the value of the '<em>Ordering</em>' attribute.
+	 * @see #setOrdering(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLoad_Ordering()
+	 * @model
+	 * @generated
+	 */
   String getOrdering();
 
   /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Load#getOrdering <em>Ordering</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Load#getOrdering <em>Ordering</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Ordering</em>' attribute.
-   * @see #getOrdering()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Ordering</em>' attribute.
+	 * @see #getOrdering()
+	 * @generated
+	 */
   void setOrdering(String value);
-
-  /**
-   * Returns the value of the '<em><b>Index</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Index</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Index</em>' attribute.
-   * @see #setIndex(BigDecimal)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getLoad_Index()
-   * @model
-   * @generated
-   */
-  BigDecimal getIndex();
-
-  /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Load#getIndex <em>Index</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Index</em>' attribute.
-   * @see #getIndex()
-   * @generated
-   */
-  void setIndex(BigDecimal value);
 
 } // Load

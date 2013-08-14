@@ -3,8 +3,8 @@
 package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.BasicBlock;
+import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.ReturnInstruction;
 
 import java.util.Collection;
 
@@ -14,7 +14,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -32,8 +31,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.BasicBlockImpl#getLabel <em>Label</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.BasicBlockImpl#getInstructions <em>Instructions</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.BasicBlockImpl#getRetadr <em>Retadr</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.BasicBlockImpl#getTerminator <em>Terminator</em>}</li>
  * </ul>
  * </p>
  *
@@ -42,327 +39,202 @@ import org.eclipse.emf.ecore.util.InternalEList;
 public class BasicBlockImpl extends MinimalEObjectImpl.Container implements BasicBlock
 {
   /**
-   * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLabel()
-   * @generated
-   * @ordered
-   */
+	 * @see #getLabel()
+	 * @generated
+	 * @ordered
+	 */
   protected static final String LABEL_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLabel()
-   * @generated
-   * @ordered
-   */
+	 * @see #getLabel()
+	 * @generated
+	 * @ordered
+	 */
   protected String label = LABEL_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getInstructions() <em>Instructions</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getInstructions() <em>Instructions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getInstructions()
-   * @generated
-   * @ordered
-   */
-  protected EList<EObject> instructions;
+	 * @see #getInstructions()
+	 * @generated
+	 * @ordered
+	 */
+  protected EList<Instruction> instructions;
 
   /**
-   * The default value of the '{@link #getRetadr() <em>Retadr</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRetadr()
-   * @generated
-   * @ordered
-   */
-  protected static final String RETADR_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getRetadr() <em>Retadr</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getRetadr()
-   * @generated
-   * @ordered
-   */
-  protected String retadr = RETADR_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getTerminator() <em>Terminator</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTerminator()
-   * @generated
-   * @ordered
-   */
-  protected ReturnInstruction terminator;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected BasicBlockImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return LlvmPackage.Literals.BASIC_BLOCK;
-  }
+		return LlvmPackage.Literals.BASIC_BLOCK;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public String getLabel()
   {
-    return label;
-  }
+		return label;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setLabel(String newLabel)
   {
-    String oldLabel = label;
-    label = newLabel;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.BASIC_BLOCK__LABEL, oldLabel, label));
-  }
+		String oldLabel = label;
+		label = newLabel;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.BASIC_BLOCK__LABEL, oldLabel, label));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<EObject> getInstructions()
+	 * @generated
+	 */
+  public EList<Instruction> getInstructions()
   {
-    if (instructions == null)
-    {
-      instructions = new EObjectContainmentEList<EObject>(EObject.class, this, LlvmPackage.BASIC_BLOCK__INSTRUCTIONS);
-    }
-    return instructions;
-  }
+		if (instructions == null)
+		{
+			instructions = new EObjectContainmentEList<Instruction>(Instruction.class, this, LlvmPackage.BASIC_BLOCK__INSTRUCTIONS);
+		}
+		return instructions;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getRetadr()
-  {
-    return retadr;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setRetadr(String newRetadr)
-  {
-    String oldRetadr = retadr;
-    retadr = newRetadr;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.BASIC_BLOCK__RETADR, oldRetadr, retadr));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ReturnInstruction getTerminator()
-  {
-    return terminator;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetTerminator(ReturnInstruction newTerminator, NotificationChain msgs)
-  {
-    ReturnInstruction oldTerminator = terminator;
-    terminator = newTerminator;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.BASIC_BLOCK__TERMINATOR, oldTerminator, newTerminator);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setTerminator(ReturnInstruction newTerminator)
-  {
-    if (newTerminator != terminator)
-    {
-      NotificationChain msgs = null;
-      if (terminator != null)
-        msgs = ((InternalEObject)terminator).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.BASIC_BLOCK__TERMINATOR, null, msgs);
-      if (newTerminator != null)
-        msgs = ((InternalEObject)newTerminator).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.BASIC_BLOCK__TERMINATOR, null, msgs);
-      msgs = basicSetTerminator(newTerminator, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.BASIC_BLOCK__TERMINATOR, newTerminator, newTerminator));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
-        return ((InternalEList<?>)getInstructions()).basicRemove(otherEnd, msgs);
-      case LlvmPackage.BASIC_BLOCK__TERMINATOR:
-        return basicSetTerminator(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
+				return ((InternalEList<?>)getInstructions()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.BASIC_BLOCK__LABEL:
-        return getLabel();
-      case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
-        return getInstructions();
-      case LlvmPackage.BASIC_BLOCK__RETADR:
-        return getRetadr();
-      case LlvmPackage.BASIC_BLOCK__TERMINATOR:
-        return getTerminator();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.BASIC_BLOCK__LABEL:
+				return getLabel();
+			case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
+				return getInstructions();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.BASIC_BLOCK__LABEL:
-        setLabel((String)newValue);
-        return;
-      case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
-        getInstructions().clear();
-        getInstructions().addAll((Collection<? extends EObject>)newValue);
-        return;
-      case LlvmPackage.BASIC_BLOCK__RETADR:
-        setRetadr((String)newValue);
-        return;
-      case LlvmPackage.BASIC_BLOCK__TERMINATOR:
-        setTerminator((ReturnInstruction)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.BASIC_BLOCK__LABEL:
+				setLabel((String)newValue);
+				return;
+			case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
+				getInstructions().clear();
+				getInstructions().addAll((Collection<? extends Instruction>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.BASIC_BLOCK__LABEL:
-        setLabel(LABEL_EDEFAULT);
-        return;
-      case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
-        getInstructions().clear();
-        return;
-      case LlvmPackage.BASIC_BLOCK__RETADR:
-        setRetadr(RETADR_EDEFAULT);
-        return;
-      case LlvmPackage.BASIC_BLOCK__TERMINATOR:
-        setTerminator((ReturnInstruction)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.BASIC_BLOCK__LABEL:
+				setLabel(LABEL_EDEFAULT);
+				return;
+			case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
+				getInstructions().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.BASIC_BLOCK__LABEL:
-        return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
-      case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
-        return instructions != null && !instructions.isEmpty();
-      case LlvmPackage.BASIC_BLOCK__RETADR:
-        return RETADR_EDEFAULT == null ? retadr != null : !RETADR_EDEFAULT.equals(retadr);
-      case LlvmPackage.BASIC_BLOCK__TERMINATOR:
-        return terminator != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.BASIC_BLOCK__LABEL:
+				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
+			case LlvmPackage.BASIC_BLOCK__INSTRUCTIONS:
+				return instructions != null && !instructions.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String toString()
   {
-    if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (label: ");
-    result.append(label);
-    result.append(", retadr: ");
-    result.append(retadr);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (label: ");
+		result.append(label);
+		result.append(')');
+		return result.toString();
+	}
 
 } //BasicBlockImpl

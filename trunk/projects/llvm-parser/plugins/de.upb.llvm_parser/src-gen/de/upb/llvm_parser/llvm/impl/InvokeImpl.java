@@ -7,7 +7,6 @@ import de.upb.llvm_parser.llvm.Invoke;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.ParameterList;
 import de.upb.llvm_parser.llvm.TypeUse;
-import de.upb.llvm_parser.llvm.Value;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -27,596 +26,439 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link de.upb.llvm_parser.llvm.impl.InvokeImpl#getFunctiontype <em>Functiontype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.InvokeImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.InvokeImpl#getPList <em>PList</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.InvokeImpl#getTotype <em>Totype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.InvokeImpl#getTovalue <em>Tovalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.InvokeImpl#getUnwindtype <em>Unwindtype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.InvokeImpl#getUnwindvalue <em>Unwindvalue</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.InvokeImpl#getToTarget <em>To Target</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.InvokeImpl#getUnwindCase <em>Unwind Case</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class InvokeImpl extends ReturnInstructionImpl implements Invoke
+public class InvokeImpl extends InstructionImpl implements Invoke
 {
   /**
-   * The cached value of the '{@link #getFunctiontype() <em>Functiontype</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getFunctiontype() <em>Functiontype</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getFunctiontype()
-   * @generated
-   * @ordered
-   */
+	 * @see #getFunctiontype()
+	 * @generated
+	 * @ordered
+	 */
   protected TypeUse functiontype;
 
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getName() <em>Name</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
   protected Address name;
 
   /**
-   * The cached value of the '{@link #getPList() <em>PList</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getPList() <em>PList</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getPList()
-   * @generated
-   * @ordered
-   */
+	 * @see #getPList()
+	 * @generated
+	 * @ordered
+	 */
   protected ParameterList pList;
 
   /**
-   * The cached value of the '{@link #getTotype() <em>Totype</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getToTarget() <em>To Target</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTotype()
-   * @generated
-   * @ordered
-   */
-  protected TypeUse totype;
+	 * @see #getToTarget()
+	 * @generated
+	 * @ordered
+	 */
+  protected static final String TO_TARGET_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getTovalue() <em>Tovalue</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getToTarget() <em>To Target</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTovalue()
-   * @generated
-   * @ordered
-   */
-  protected Value tovalue;
+	 * @see #getToTarget()
+	 * @generated
+	 * @ordered
+	 */
+  protected String toTarget = TO_TARGET_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getUnwindtype() <em>Unwindtype</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getUnwindCase() <em>Unwind Case</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getUnwindtype()
-   * @generated
-   * @ordered
-   */
-  protected TypeUse unwindtype;
+	 * @see #getUnwindCase()
+	 * @generated
+	 * @ordered
+	 */
+  protected static final String UNWIND_CASE_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getUnwindvalue() <em>Unwindvalue</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getUnwindCase() <em>Unwind Case</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getUnwindvalue()
-   * @generated
-   * @ordered
-   */
-  protected Value unwindvalue;
+	 * @see #getUnwindCase()
+	 * @generated
+	 * @ordered
+	 */
+  protected String unwindCase = UNWIND_CASE_EDEFAULT;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected InvokeImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return LlvmPackage.Literals.INVOKE;
-  }
+		return LlvmPackage.Literals.INVOKE;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public TypeUse getFunctiontype()
   {
-    return functiontype;
-  }
+		return functiontype;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public NotificationChain basicSetFunctiontype(TypeUse newFunctiontype, NotificationChain msgs)
   {
-    TypeUse oldFunctiontype = functiontype;
-    functiontype = newFunctiontype;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__FUNCTIONTYPE, oldFunctiontype, newFunctiontype);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		TypeUse oldFunctiontype = functiontype;
+		functiontype = newFunctiontype;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__FUNCTIONTYPE, oldFunctiontype, newFunctiontype);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setFunctiontype(TypeUse newFunctiontype)
   {
-    if (newFunctiontype != functiontype)
-    {
-      NotificationChain msgs = null;
-      if (functiontype != null)
-        msgs = ((InternalEObject)functiontype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__FUNCTIONTYPE, null, msgs);
-      if (newFunctiontype != null)
-        msgs = ((InternalEObject)newFunctiontype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__FUNCTIONTYPE, null, msgs);
-      msgs = basicSetFunctiontype(newFunctiontype, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__FUNCTIONTYPE, newFunctiontype, newFunctiontype));
-  }
+		if (newFunctiontype != functiontype)
+		{
+			NotificationChain msgs = null;
+			if (functiontype != null)
+				msgs = ((InternalEObject)functiontype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__FUNCTIONTYPE, null, msgs);
+			if (newFunctiontype != null)
+				msgs = ((InternalEObject)newFunctiontype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__FUNCTIONTYPE, null, msgs);
+			msgs = basicSetFunctiontype(newFunctiontype, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__FUNCTIONTYPE, newFunctiontype, newFunctiontype));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Address getName()
   {
-    return name;
-  }
+		return name;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public NotificationChain basicSetName(Address newName, NotificationChain msgs)
   {
-    Address oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__NAME, oldName, newName);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		Address oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__NAME, oldName, newName);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setName(Address newName)
   {
-    if (newName != name)
-    {
-      NotificationChain msgs = null;
-      if (name != null)
-        msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__NAME, null, msgs);
-      if (newName != null)
-        msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__NAME, null, msgs);
-      msgs = basicSetName(newName, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__NAME, newName, newName));
-  }
+		if (newName != name)
+		{
+			NotificationChain msgs = null;
+			if (name != null)
+				msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__NAME, null, msgs);
+			if (newName != null)
+				msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__NAME, null, msgs);
+			msgs = basicSetName(newName, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__NAME, newName, newName));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public ParameterList getPList()
   {
-    return pList;
-  }
+		return pList;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public NotificationChain basicSetPList(ParameterList newPList, NotificationChain msgs)
   {
-    ParameterList oldPList = pList;
-    pList = newPList;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__PLIST, oldPList, newPList);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		ParameterList oldPList = pList;
+		pList = newPList;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__PLIST, oldPList, newPList);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setPList(ParameterList newPList)
   {
-    if (newPList != pList)
-    {
-      NotificationChain msgs = null;
-      if (pList != null)
-        msgs = ((InternalEObject)pList).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__PLIST, null, msgs);
-      if (newPList != null)
-        msgs = ((InternalEObject)newPList).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__PLIST, null, msgs);
-      msgs = basicSetPList(newPList, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__PLIST, newPList, newPList));
-  }
+		if (newPList != pList)
+		{
+			NotificationChain msgs = null;
+			if (pList != null)
+				msgs = ((InternalEObject)pList).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__PLIST, null, msgs);
+			if (newPList != null)
+				msgs = ((InternalEObject)newPList).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__PLIST, null, msgs);
+			msgs = basicSetPList(newPList, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__PLIST, newPList, newPList));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypeUse getTotype()
+	 * @generated
+	 */
+  public String getToTarget()
   {
-    return totype;
-  }
+		return toTarget;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetTotype(TypeUse newTotype, NotificationChain msgs)
+	 * @generated
+	 */
+  public void setToTarget(String newToTarget)
   {
-    TypeUse oldTotype = totype;
-    totype = newTotype;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__TOTYPE, oldTotype, newTotype);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		String oldToTarget = toTarget;
+		toTarget = newToTarget;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__TO_TARGET, oldToTarget, toTarget));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setTotype(TypeUse newTotype)
+	 * @generated
+	 */
+  public String getUnwindCase()
   {
-    if (newTotype != totype)
-    {
-      NotificationChain msgs = null;
-      if (totype != null)
-        msgs = ((InternalEObject)totype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__TOTYPE, null, msgs);
-      if (newTotype != null)
-        msgs = ((InternalEObject)newTotype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__TOTYPE, null, msgs);
-      msgs = basicSetTotype(newTotype, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__TOTYPE, newTotype, newTotype));
-  }
+		return unwindCase;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public Value getTovalue()
+	 * @generated
+	 */
+  public void setUnwindCase(String newUnwindCase)
   {
-    return tovalue;
-  }
+		String oldUnwindCase = unwindCase;
+		unwindCase = newUnwindCase;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__UNWIND_CASE, oldUnwindCase, unwindCase));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetTovalue(Value newTovalue, NotificationChain msgs)
-  {
-    Value oldTovalue = tovalue;
-    tovalue = newTovalue;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__TOVALUE, oldTovalue, newTovalue);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setTovalue(Value newTovalue)
-  {
-    if (newTovalue != tovalue)
-    {
-      NotificationChain msgs = null;
-      if (tovalue != null)
-        msgs = ((InternalEObject)tovalue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__TOVALUE, null, msgs);
-      if (newTovalue != null)
-        msgs = ((InternalEObject)newTovalue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__TOVALUE, null, msgs);
-      msgs = basicSetTovalue(newTovalue, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__TOVALUE, newTovalue, newTovalue));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypeUse getUnwindtype()
-  {
-    return unwindtype;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetUnwindtype(TypeUse newUnwindtype, NotificationChain msgs)
-  {
-    TypeUse oldUnwindtype = unwindtype;
-    unwindtype = newUnwindtype;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__UNWINDTYPE, oldUnwindtype, newUnwindtype);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setUnwindtype(TypeUse newUnwindtype)
-  {
-    if (newUnwindtype != unwindtype)
-    {
-      NotificationChain msgs = null;
-      if (unwindtype != null)
-        msgs = ((InternalEObject)unwindtype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__UNWINDTYPE, null, msgs);
-      if (newUnwindtype != null)
-        msgs = ((InternalEObject)newUnwindtype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__UNWINDTYPE, null, msgs);
-      msgs = basicSetUnwindtype(newUnwindtype, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__UNWINDTYPE, newUnwindtype, newUnwindtype));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Value getUnwindvalue()
-  {
-    return unwindvalue;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetUnwindvalue(Value newUnwindvalue, NotificationChain msgs)
-  {
-    Value oldUnwindvalue = unwindvalue;
-    unwindvalue = newUnwindvalue;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__UNWINDVALUE, oldUnwindvalue, newUnwindvalue);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setUnwindvalue(Value newUnwindvalue)
-  {
-    if (newUnwindvalue != unwindvalue)
-    {
-      NotificationChain msgs = null;
-      if (unwindvalue != null)
-        msgs = ((InternalEObject)unwindvalue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__UNWINDVALUE, null, msgs);
-      if (newUnwindvalue != null)
-        msgs = ((InternalEObject)newUnwindvalue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__UNWINDVALUE, null, msgs);
-      msgs = basicSetUnwindvalue(newUnwindvalue, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__UNWINDVALUE, newUnwindvalue, newUnwindvalue));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.INVOKE__FUNCTIONTYPE:
-        return basicSetFunctiontype(null, msgs);
-      case LlvmPackage.INVOKE__NAME:
-        return basicSetName(null, msgs);
-      case LlvmPackage.INVOKE__PLIST:
-        return basicSetPList(null, msgs);
-      case LlvmPackage.INVOKE__TOTYPE:
-        return basicSetTotype(null, msgs);
-      case LlvmPackage.INVOKE__TOVALUE:
-        return basicSetTovalue(null, msgs);
-      case LlvmPackage.INVOKE__UNWINDTYPE:
-        return basicSetUnwindtype(null, msgs);
-      case LlvmPackage.INVOKE__UNWINDVALUE:
-        return basicSetUnwindvalue(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.INVOKE__FUNCTIONTYPE:
+				return basicSetFunctiontype(null, msgs);
+			case LlvmPackage.INVOKE__NAME:
+				return basicSetName(null, msgs);
+			case LlvmPackage.INVOKE__PLIST:
+				return basicSetPList(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.INVOKE__FUNCTIONTYPE:
-        return getFunctiontype();
-      case LlvmPackage.INVOKE__NAME:
-        return getName();
-      case LlvmPackage.INVOKE__PLIST:
-        return getPList();
-      case LlvmPackage.INVOKE__TOTYPE:
-        return getTotype();
-      case LlvmPackage.INVOKE__TOVALUE:
-        return getTovalue();
-      case LlvmPackage.INVOKE__UNWINDTYPE:
-        return getUnwindtype();
-      case LlvmPackage.INVOKE__UNWINDVALUE:
-        return getUnwindvalue();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.INVOKE__FUNCTIONTYPE:
+				return getFunctiontype();
+			case LlvmPackage.INVOKE__NAME:
+				return getName();
+			case LlvmPackage.INVOKE__PLIST:
+				return getPList();
+			case LlvmPackage.INVOKE__TO_TARGET:
+				return getToTarget();
+			case LlvmPackage.INVOKE__UNWIND_CASE:
+				return getUnwindCase();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.INVOKE__FUNCTIONTYPE:
-        setFunctiontype((TypeUse)newValue);
-        return;
-      case LlvmPackage.INVOKE__NAME:
-        setName((Address)newValue);
-        return;
-      case LlvmPackage.INVOKE__PLIST:
-        setPList((ParameterList)newValue);
-        return;
-      case LlvmPackage.INVOKE__TOTYPE:
-        setTotype((TypeUse)newValue);
-        return;
-      case LlvmPackage.INVOKE__TOVALUE:
-        setTovalue((Value)newValue);
-        return;
-      case LlvmPackage.INVOKE__UNWINDTYPE:
-        setUnwindtype((TypeUse)newValue);
-        return;
-      case LlvmPackage.INVOKE__UNWINDVALUE:
-        setUnwindvalue((Value)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.INVOKE__FUNCTIONTYPE:
+				setFunctiontype((TypeUse)newValue);
+				return;
+			case LlvmPackage.INVOKE__NAME:
+				setName((Address)newValue);
+				return;
+			case LlvmPackage.INVOKE__PLIST:
+				setPList((ParameterList)newValue);
+				return;
+			case LlvmPackage.INVOKE__TO_TARGET:
+				setToTarget((String)newValue);
+				return;
+			case LlvmPackage.INVOKE__UNWIND_CASE:
+				setUnwindCase((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.INVOKE__FUNCTIONTYPE:
-        setFunctiontype((TypeUse)null);
-        return;
-      case LlvmPackage.INVOKE__NAME:
-        setName((Address)null);
-        return;
-      case LlvmPackage.INVOKE__PLIST:
-        setPList((ParameterList)null);
-        return;
-      case LlvmPackage.INVOKE__TOTYPE:
-        setTotype((TypeUse)null);
-        return;
-      case LlvmPackage.INVOKE__TOVALUE:
-        setTovalue((Value)null);
-        return;
-      case LlvmPackage.INVOKE__UNWINDTYPE:
-        setUnwindtype((TypeUse)null);
-        return;
-      case LlvmPackage.INVOKE__UNWINDVALUE:
-        setUnwindvalue((Value)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.INVOKE__FUNCTIONTYPE:
+				setFunctiontype((TypeUse)null);
+				return;
+			case LlvmPackage.INVOKE__NAME:
+				setName((Address)null);
+				return;
+			case LlvmPackage.INVOKE__PLIST:
+				setPList((ParameterList)null);
+				return;
+			case LlvmPackage.INVOKE__TO_TARGET:
+				setToTarget(TO_TARGET_EDEFAULT);
+				return;
+			case LlvmPackage.INVOKE__UNWIND_CASE:
+				setUnwindCase(UNWIND_CASE_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.INVOKE__FUNCTIONTYPE:
-        return functiontype != null;
-      case LlvmPackage.INVOKE__NAME:
-        return name != null;
-      case LlvmPackage.INVOKE__PLIST:
-        return pList != null;
-      case LlvmPackage.INVOKE__TOTYPE:
-        return totype != null;
-      case LlvmPackage.INVOKE__TOVALUE:
-        return tovalue != null;
-      case LlvmPackage.INVOKE__UNWINDTYPE:
-        return unwindtype != null;
-      case LlvmPackage.INVOKE__UNWINDVALUE:
-        return unwindvalue != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.INVOKE__FUNCTIONTYPE:
+				return functiontype != null;
+			case LlvmPackage.INVOKE__NAME:
+				return name != null;
+			case LlvmPackage.INVOKE__PLIST:
+				return pList != null;
+			case LlvmPackage.INVOKE__TO_TARGET:
+				return TO_TARGET_EDEFAULT == null ? toTarget != null : !TO_TARGET_EDEFAULT.equals(toTarget);
+			case LlvmPackage.INVOKE__UNWIND_CASE:
+				return UNWIND_CASE_EDEFAULT == null ? unwindCase != null : !UNWIND_CASE_EDEFAULT.equals(unwindCase);
+		}
+		return super.eIsSet(featureID);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  @Override
+  public String toString()
+  {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (toTarget: ");
+		result.append(toTarget);
+		result.append(", unwindCase: ");
+		result.append(unwindCase);
+		result.append(')');
+		return result.toString();
+	}
 
 } //InvokeImpl

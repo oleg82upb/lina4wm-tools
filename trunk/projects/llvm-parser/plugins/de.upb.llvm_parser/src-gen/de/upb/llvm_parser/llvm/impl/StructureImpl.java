@@ -34,132 +34,132 @@ import org.eclipse.emf.ecore.util.InternalEList;
 public class StructureImpl extends Aggregate_TypesImpl implements Structure
 {
   /**
-   * The cached value of the '{@link #getTypes() <em>Types</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getTypes() <em>Types</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTypes()
-   * @generated
-   * @ordered
-   */
+	 * @see #getTypes()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<EObject> types;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected StructureImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return LlvmPackage.Literals.STRUCTURE;
-  }
+		return LlvmPackage.Literals.STRUCTURE;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EList<EObject> getTypes()
   {
-    if (types == null)
-    {
-      types = new EObjectContainmentEList<EObject>(EObject.class, this, LlvmPackage.STRUCTURE__TYPES);
-    }
-    return types;
-  }
+		if (types == null)
+		{
+			types = new EObjectContainmentEList<EObject>(EObject.class, this, LlvmPackage.STRUCTURE__TYPES);
+		}
+		return types;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.STRUCTURE__TYPES:
-        return ((InternalEList<?>)getTypes()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.STRUCTURE__TYPES:
+				return ((InternalEList<?>)getTypes()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.STRUCTURE__TYPES:
-        return getTypes();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.STRUCTURE__TYPES:
+				return getTypes();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.STRUCTURE__TYPES:
-        getTypes().clear();
-        getTypes().addAll((Collection<? extends EObject>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.STRUCTURE__TYPES:
+				getTypes().clear();
+				getTypes().addAll((Collection<? extends EObject>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.STRUCTURE__TYPES:
-        getTypes().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.STRUCTURE__TYPES:
+				getTypes().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.STRUCTURE__TYPES:
-        return types != null && !types.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.STRUCTURE__TYPES:
+				return types != null && !types.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //StructureImpl

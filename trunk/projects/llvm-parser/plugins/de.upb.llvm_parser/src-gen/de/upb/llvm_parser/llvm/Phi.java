@@ -12,9 +12,9 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link de.upb.llvm_parser.llvm.Phi#getResult <em>Result</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Phi#getType <em>Type</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Phi#getFirstclass <em>Firstclass</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Phi#getValues <em>Values</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Phi#getCases <em>Cases</em>}</li>
  * </ul>
  * </p>
  *
@@ -22,64 +22,74 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Phi extends StandartInstruction
+public interface Phi extends Instruction
 {
   /**
-   * Returns the value of the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Result</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Result</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+	 * @return the value of the '<em>Result</em>' containment reference.
+	 * @see #setResult(Address)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getPhi_Result()
+	 * @model containment="true"
+	 * @generated
+	 */
+  Address getResult();
+
+  /**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Phi#getResult <em>Result</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Result</em>' containment reference.
+	 * @see #getResult()
+	 * @generated
+	 */
+  void setResult(Address value);
+
+  /**
+	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Type</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' containment reference.
-   * @see #setType(TypeUse)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getPhi_Type()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Type</em>' containment reference.
+	 * @see #setType(TypeUse)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getPhi_Type()
+	 * @model containment="true"
+	 * @generated
+	 */
   TypeUse getType();
 
   /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Phi#getType <em>Type</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Phi#getType <em>Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' containment reference.
-   * @see #getType()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Type</em>' containment reference.
+	 * @see #getType()
+	 * @generated
+	 */
   void setType(TypeUse value);
 
   /**
-   * Returns the value of the '<em><b>Firstclass</b></em>' containment reference list.
-   * The list contents are of type {@link de.upb.llvm_parser.llvm.Value}.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Cases</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.PhiCase}.
+	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Firstclass</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Cases</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Firstclass</em>' containment reference list.
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getPhi_Firstclass()
-   * @model containment="true"
-   * @generated
-   */
-  EList<Value> getFirstclass();
-
-  /**
-   * Returns the value of the '<em><b>Values</b></em>' containment reference list.
-   * The list contents are of type {@link de.upb.llvm_parser.llvm.Value}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Values</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Values</em>' containment reference list.
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getPhi_Values()
-   * @model containment="true"
-   * @generated
-   */
-  EList<Value> getValues();
+	 * @return the value of the '<em>Cases</em>' containment reference list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getPhi_Cases()
+	 * @model containment="true"
+	 * @generated
+	 */
+  EList<PhiCase> getCases();
 
 } // Phi

@@ -35,243 +35,243 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
 public class TopLevelEntityImpl extends AbstractElementImpl implements TopLevelEntity
 {
   /**
-   * The default value of the '{@link #getModule() <em>Module</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getModule() <em>Module</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getModule()
-   * @generated
-   * @ordered
-   */
+	 * @see #getModule()
+	 * @generated
+	 * @ordered
+	 */
   protected static final String MODULE_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getModule() <em>Module</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getModule() <em>Module</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getModule()
-   * @generated
-   * @ordered
-   */
+	 * @see #getModule()
+	 * @generated
+	 * @ordered
+	 */
   protected String module = MODULE_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getTarget() <em>Target</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getTarget() <em>Target</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTarget()
-   * @generated
-   * @ordered
-   */
+	 * @see #getTarget()
+	 * @generated
+	 * @ordered
+	 */
   protected static final String TARGET_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getTarget() <em>Target</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getTarget() <em>Target</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTarget()
-   * @generated
-   * @ordered
-   */
+	 * @see #getTarget()
+	 * @generated
+	 * @ordered
+	 */
   protected String target = TARGET_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getLibs() <em>Libs</em>}' attribute list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getLibs() <em>Libs</em>}' attribute list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLibs()
-   * @generated
-   * @ordered
-   */
+	 * @see #getLibs()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<String> libs;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected TopLevelEntityImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return LlvmPackage.Literals.TOP_LEVEL_ENTITY;
-  }
+		return LlvmPackage.Literals.TOP_LEVEL_ENTITY;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public String getModule()
   {
-    return module;
-  }
+		return module;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setModule(String newModule)
   {
-    String oldModule = module;
-    module = newModule;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.TOP_LEVEL_ENTITY__MODULE, oldModule, module));
-  }
+		String oldModule = module;
+		module = newModule;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.TOP_LEVEL_ENTITY__MODULE, oldModule, module));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public String getTarget()
   {
-    return target;
-  }
+		return target;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setTarget(String newTarget)
   {
-    String oldTarget = target;
-    target = newTarget;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.TOP_LEVEL_ENTITY__TARGET, oldTarget, target));
-  }
+		String oldTarget = target;
+		target = newTarget;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.TOP_LEVEL_ENTITY__TARGET, oldTarget, target));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EList<String> getLibs()
   {
-    if (libs == null)
-    {
-      libs = new EDataTypeEList<String>(String.class, this, LlvmPackage.TOP_LEVEL_ENTITY__LIBS);
-    }
-    return libs;
-  }
+		if (libs == null)
+		{
+			libs = new EDataTypeEList<String>(String.class, this, LlvmPackage.TOP_LEVEL_ENTITY__LIBS);
+		}
+		return libs;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.TOP_LEVEL_ENTITY__MODULE:
-        return getModule();
-      case LlvmPackage.TOP_LEVEL_ENTITY__TARGET:
-        return getTarget();
-      case LlvmPackage.TOP_LEVEL_ENTITY__LIBS:
-        return getLibs();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.TOP_LEVEL_ENTITY__MODULE:
+				return getModule();
+			case LlvmPackage.TOP_LEVEL_ENTITY__TARGET:
+				return getTarget();
+			case LlvmPackage.TOP_LEVEL_ENTITY__LIBS:
+				return getLibs();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.TOP_LEVEL_ENTITY__MODULE:
-        setModule((String)newValue);
-        return;
-      case LlvmPackage.TOP_LEVEL_ENTITY__TARGET:
-        setTarget((String)newValue);
-        return;
-      case LlvmPackage.TOP_LEVEL_ENTITY__LIBS:
-        getLibs().clear();
-        getLibs().addAll((Collection<? extends String>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.TOP_LEVEL_ENTITY__MODULE:
+				setModule((String)newValue);
+				return;
+			case LlvmPackage.TOP_LEVEL_ENTITY__TARGET:
+				setTarget((String)newValue);
+				return;
+			case LlvmPackage.TOP_LEVEL_ENTITY__LIBS:
+				getLibs().clear();
+				getLibs().addAll((Collection<? extends String>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.TOP_LEVEL_ENTITY__MODULE:
-        setModule(MODULE_EDEFAULT);
-        return;
-      case LlvmPackage.TOP_LEVEL_ENTITY__TARGET:
-        setTarget(TARGET_EDEFAULT);
-        return;
-      case LlvmPackage.TOP_LEVEL_ENTITY__LIBS:
-        getLibs().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.TOP_LEVEL_ENTITY__MODULE:
+				setModule(MODULE_EDEFAULT);
+				return;
+			case LlvmPackage.TOP_LEVEL_ENTITY__TARGET:
+				setTarget(TARGET_EDEFAULT);
+				return;
+			case LlvmPackage.TOP_LEVEL_ENTITY__LIBS:
+				getLibs().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case LlvmPackage.TOP_LEVEL_ENTITY__MODULE:
-        return MODULE_EDEFAULT == null ? module != null : !MODULE_EDEFAULT.equals(module);
-      case LlvmPackage.TOP_LEVEL_ENTITY__TARGET:
-        return TARGET_EDEFAULT == null ? target != null : !TARGET_EDEFAULT.equals(target);
-      case LlvmPackage.TOP_LEVEL_ENTITY__LIBS:
-        return libs != null && !libs.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID)
+		{
+			case LlvmPackage.TOP_LEVEL_ENTITY__MODULE:
+				return MODULE_EDEFAULT == null ? module != null : !MODULE_EDEFAULT.equals(module);
+			case LlvmPackage.TOP_LEVEL_ENTITY__TARGET:
+				return TARGET_EDEFAULT == null ? target != null : !TARGET_EDEFAULT.equals(target);
+			case LlvmPackage.TOP_LEVEL_ENTITY__LIBS:
+				return libs != null && !libs.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String toString()
   {
-    if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (module: ");
-    result.append(module);
-    result.append(", target: ");
-    result.append(target);
-    result.append(", libs: ");
-    result.append(libs);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (module: ");
+		result.append(module);
+		result.append(", target: ");
+		result.append(target);
+		result.append(", libs: ");
+		result.append(libs);
+		result.append(')');
+		return result.toString();
+	}
 
 } //TopLevelEntityImpl
