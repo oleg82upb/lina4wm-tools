@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class InsertElementItemProvider
-	extends StandartInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -76,6 +76,7 @@ public class InsertElementItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.INSERT_ELEMENT__RESULT);
 			childrenFeatures.add(LlvmPackage.Literals.INSERT_ELEMENT__VECTORTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.INSERT_ELEMENT__VECTORVALUE);
 			childrenFeatures.add(LlvmPackage.Literals.INSERT_ELEMENT__SCALARTYPE);
@@ -134,6 +135,7 @@ public class InsertElementItemProvider
 
 		switch (notification.getFeatureID(InsertElement.class))
 		{
+			case LlvmPackage.INSERT_ELEMENT__RESULT:
 			case LlvmPackage.INSERT_ELEMENT__VECTORTYPE:
 			case LlvmPackage.INSERT_ELEMENT__VECTORVALUE:
 			case LlvmPackage.INSERT_ELEMENT__SCALARTYPE:
@@ -159,6 +161,11 @@ public class InsertElementItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.INSERT_ELEMENT__RESULT,
+				 LlvmFactory.eINSTANCE.createAddress()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.INSERT_ELEMENT__VECTORTYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -175,6 +182,11 @@ public class InsertElementItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSERT_ELEMENT__VECTORVALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.INSERT_ELEMENT__VECTORVALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -185,12 +197,12 @@ public class InsertElementItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSERT_ELEMENT__VECTORVALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSERT_ELEMENT__VECTORVALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -215,6 +227,11 @@ public class InsertElementItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSERT_ELEMENT__SCALARVALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.INSERT_ELEMENT__SCALARVALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -225,12 +242,12 @@ public class InsertElementItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSERT_ELEMENT__SCALARVALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSERT_ELEMENT__SCALARVALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -255,6 +272,11 @@ public class InsertElementItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSERT_ELEMENT__INDEX,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.INSERT_ELEMENT__INDEX,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -265,12 +287,12 @@ public class InsertElementItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSERT_ELEMENT__INDEX,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSERT_ELEMENT__INDEX,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter

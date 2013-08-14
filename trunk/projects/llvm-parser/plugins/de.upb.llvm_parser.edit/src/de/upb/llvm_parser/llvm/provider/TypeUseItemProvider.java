@@ -61,9 +61,33 @@ public class TypeUseItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
+			addFunctionInputPropertyDescriptor(object);
 			addPointerPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Function Input feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addFunctionInputPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TypeUse_functionInput_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TypeUse_functionInput_feature", "_UI_TypeUse_type"),
+				 LlvmPackage.Literals.TYPE_USE__FUNCTION_INPUT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -72,7 +96,8 @@ public class TypeUseItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addPointerPropertyDescriptor(Object object) {
+	protected void addPointerPropertyDescriptor(Object object)
+	{
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
@@ -107,7 +132,7 @@ public class TypeUseItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((TypeUse)object).getPointer();
+		String label = ((TypeUse)object).getFunctionInput();
 		return label == null || label.length() == 0 ?
 			getString("_UI_TypeUse_type") :
 			getString("_UI_TypeUse_type") + " " + label;
@@ -126,6 +151,7 @@ public class TypeUseItemProvider
 
 		switch (notification.getFeatureID(TypeUse.class))
 		{
+			case LlvmPackage.TYPE_USE__FUNCTION_INPUT:
 			case LlvmPackage.TYPE_USE__POINTER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

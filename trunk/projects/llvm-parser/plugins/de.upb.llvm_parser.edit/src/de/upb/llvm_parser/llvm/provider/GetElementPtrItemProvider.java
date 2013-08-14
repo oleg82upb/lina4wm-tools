@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class GetElementPtrItemProvider
-	extends StandartInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -76,6 +76,7 @@ public class GetElementPtrItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.GET_ELEMENT_PTR__RESULT);
 			childrenFeatures.add(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE);
 			childrenFeatures.add(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATENAME);
 			childrenFeatures.add(LlvmPackage.Literals.GET_ELEMENT_PTR__IND_TYPES);
@@ -132,6 +133,7 @@ public class GetElementPtrItemProvider
 
 		switch (notification.getFeatureID(GetElementPtr.class))
 		{
+			case LlvmPackage.GET_ELEMENT_PTR__RESULT:
 			case LlvmPackage.GET_ELEMENT_PTR__AGGREGATE:
 			case LlvmPackage.GET_ELEMENT_PTR__AGGREGATENAME:
 			case LlvmPackage.GET_ELEMENT_PTR__IND_TYPES:
@@ -152,6 +154,11 @@ public class GetElementPtrItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__RESULT,
+				 LlvmFactory.eINSTANCE.createAddress()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -241,11 +248,6 @@ public class GetElementPtrItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
@@ -261,7 +263,22 @@ public class GetElementPtrItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createParameterList()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createFunctionParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createFunctionParameterList()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -286,21 +303,6 @@ public class GetElementPtrItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
-				 LlvmFactory.eINSTANCE.createInstructionUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
-				 LlvmFactory.eINSTANCE.createReturnInstruction()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
-				 LlvmFactory.eINSTANCE.createStandartInstruction()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createArithmeticOperation()));
 
 		newChildDescriptors.add
@@ -312,6 +314,26 @@ public class GetElementPtrItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createNestedCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createMetaArgValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createMeta()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createMetadataValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -367,6 +389,11 @@ public class GetElementPtrItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createAlloc()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createPhiCase()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -451,6 +478,11 @@ public class GetElementPtrItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATENAME,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATENAME,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -461,12 +493,12 @@ public class GetElementPtrItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATENAME,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATENAME,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -491,6 +523,11 @@ public class GetElementPtrItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GET_ELEMENT_PTR__INDIZIES,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.GET_ELEMENT_PTR__INDIZIES,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -501,12 +538,12 @@ public class GetElementPtrItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GET_ELEMENT_PTR__INDIZIES,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.GET_ELEMENT_PTR__INDIZIES,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -526,6 +563,7 @@ public class GetElementPtrItemProvider
 		Object childObject = child;
 
 		boolean qualify =
+			childFeature == LlvmPackage.Literals.GET_ELEMENT_PTR__RESULT ||
 			childFeature == LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATE ||
 			childFeature == LlvmPackage.Literals.GET_ELEMENT_PTR__IND_TYPES ||
 			childFeature == LlvmPackage.Literals.GET_ELEMENT_PTR__AGGREGATENAME ||

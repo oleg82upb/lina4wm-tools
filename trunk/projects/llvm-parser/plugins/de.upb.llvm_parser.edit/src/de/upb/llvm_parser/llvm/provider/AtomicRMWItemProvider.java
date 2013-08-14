@@ -32,7 +32,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class AtomicRMWItemProvider
-	extends StandartInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -61,10 +61,34 @@ public class AtomicRMWItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
+			addVolatilePropertyDescriptor(object);
 			addOperationPropertyDescriptor(object);
 			addOrderingPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Volatile feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVolatilePropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AtomicRMW_volatile_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AtomicRMW_volatile_feature", "_UI_AtomicRMW_type"),
+				 LlvmPackage.Literals.ATOMIC_RMW__VOLATILE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -124,6 +148,7 @@ public class AtomicRMWItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.ATOMIC_RMW__RESULT);
 			childrenFeatures.add(LlvmPackage.Literals.ATOMIC_RMW__ADRESSTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.ATOMIC_RMW__ADRESS);
 			childrenFeatures.add(LlvmPackage.Literals.ATOMIC_RMW__OPTYPE);
@@ -164,10 +189,8 @@ public class AtomicRMWItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((AtomicRMW)object).getOperation();
-		return label == null || label.length() == 0 ?
-			getString("_UI_AtomicRMW_type") :
-			getString("_UI_AtomicRMW_type") + " " + label;
+		AtomicRMW atomicRMW = (AtomicRMW)object;
+		return getString("_UI_AtomicRMW_type") + " " + atomicRMW.isVolatile();
 	}
 
 	/**
@@ -183,10 +206,12 @@ public class AtomicRMWItemProvider
 
 		switch (notification.getFeatureID(AtomicRMW.class))
 		{
+			case LlvmPackage.ATOMIC_RMW__VOLATILE:
 			case LlvmPackage.ATOMIC_RMW__OPERATION:
 			case LlvmPackage.ATOMIC_RMW__ORDERING:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case LlvmPackage.ATOMIC_RMW__RESULT:
 			case LlvmPackage.ATOMIC_RMW__ADRESSTYPE:
 			case LlvmPackage.ATOMIC_RMW__ADRESS:
 			case LlvmPackage.ATOMIC_RMW__OPTYPE:
@@ -210,6 +235,11 @@ public class AtomicRMWItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.ATOMIC_RMW__RESULT,
+				 LlvmFactory.eINSTANCE.createAddress()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.ATOMIC_RMW__ADRESSTYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -226,6 +256,11 @@ public class AtomicRMWItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ATOMIC_RMW__ADRESS,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.ATOMIC_RMW__ADRESS,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -236,12 +271,12 @@ public class AtomicRMWItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ATOMIC_RMW__ADRESS,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ATOMIC_RMW__ADRESS,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -266,6 +301,11 @@ public class AtomicRMWItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ATOMIC_RMW__OPVALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.ATOMIC_RMW__OPVALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -276,12 +316,12 @@ public class AtomicRMWItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ATOMIC_RMW__OPVALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ATOMIC_RMW__OPVALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter

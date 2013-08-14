@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class CallItemProvider
-	extends StandartInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -76,6 +76,7 @@ public class CallItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.CALL__RESULT);
 			childrenFeatures.add(LlvmPackage.Literals.CALL__ADRESSTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.CALL__ADRESS);
 			childrenFeatures.add(LlvmPackage.Literals.CALL__PLIST);
@@ -131,6 +132,7 @@ public class CallItemProvider
 
 		switch (notification.getFeatureID(Call.class))
 		{
+			case LlvmPackage.CALL__RESULT:
 			case LlvmPackage.CALL__ADRESSTYPE:
 			case LlvmPackage.CALL__ADRESS:
 			case LlvmPackage.CALL__PLIST:
@@ -153,6 +155,11 @@ public class CallItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.CALL__RESULT,
+				 LlvmFactory.eINSTANCE.createAddress()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.CALL__ADRESSTYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -169,6 +176,11 @@ public class CallItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CALL__ADRESS,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CALL__ADRESS,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -179,12 +191,12 @@ public class CallItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CALL__ADRESS,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CALL__ADRESS,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -195,6 +207,31 @@ public class CallItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.CALL__PLIST,
 				 LlvmFactory.eINSTANCE.createParameterList()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection)
+	{
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == LlvmPackage.Literals.CALL__ADRESSTYPE ||
+			childFeature == LlvmPackage.Literals.CALL__ADRESS;
+
+		if (qualify)
+		{
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

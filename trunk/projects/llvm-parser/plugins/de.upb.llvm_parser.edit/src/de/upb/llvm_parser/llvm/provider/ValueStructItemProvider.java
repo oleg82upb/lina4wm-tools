@@ -170,6 +170,11 @@ public class ValueStructItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.VALUE_STRUCT__VALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.VALUE_STRUCT__VALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -180,17 +185,42 @@ public class ValueStructItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.VALUE_STRUCT__VALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.VALUE_STRUCT__VALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.VALUE_STRUCT__VALUE,
 				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection)
+	{
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == LlvmPackage.Literals.VALUE_STRUCT__TYPES ||
+			childFeature == LlvmPackage.Literals.VALUE_STRUCT__VALUE;
+
+		if (qualify)
+		{
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

@@ -32,7 +32,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class ExtractValueItemProvider
-	extends StandartInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -101,6 +101,7 @@ public class ExtractValueItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.EXTRACT_VALUE__RESULT);
 			childrenFeatures.add(LlvmPackage.Literals.EXTRACT_VALUE__ARRAY);
 			childrenFeatures.add(LlvmPackage.Literals.EXTRACT_VALUE__STRUCT);
 			childrenFeatures.add(LlvmPackage.Literals.EXTRACT_VALUE__VALUE);
@@ -159,6 +160,7 @@ public class ExtractValueItemProvider
 			case LlvmPackage.EXTRACT_VALUE__INDEX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case LlvmPackage.EXTRACT_VALUE__RESULT:
 			case LlvmPackage.EXTRACT_VALUE__ARRAY:
 			case LlvmPackage.EXTRACT_VALUE__STRUCT:
 			case LlvmPackage.EXTRACT_VALUE__VALUE:
@@ -181,6 +183,11 @@ public class ExtractValueItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.EXTRACT_VALUE__RESULT,
+				 LlvmFactory.eINSTANCE.createAddress()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.EXTRACT_VALUE__ARRAY,
 				 LlvmFactory.eINSTANCE.createArray()));
 
@@ -188,6 +195,11 @@ public class ExtractValueItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.EXTRACT_VALUE__STRUCT,
 				 LlvmFactory.eINSTANCE.createStructure()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.EXTRACT_VALUE__VALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -202,12 +214,12 @@ public class ExtractValueItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.EXTRACT_VALUE__VALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.EXTRACT_VALUE__VALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -184,6 +184,11 @@ public class LLVMItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.LLVM__ELEMENTS,
 				 LlvmFactory.eINSTANCE.createAliasDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.LLVM__ELEMENTS,
+				 LlvmFactory.eINSTANCE.createMetadataValue()));
 	}
 
 	/**

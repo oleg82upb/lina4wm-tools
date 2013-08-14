@@ -32,7 +32,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class InsertValueItemProvider
-	extends StandartInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -101,6 +101,7 @@ public class InsertValueItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.INSERT_VALUE__RESULT);
 			childrenFeatures.add(LlvmPackage.Literals.INSERT_VALUE__STRUCT);
 			childrenFeatures.add(LlvmPackage.Literals.INSERT_VALUE__VALUE);
 			childrenFeatures.add(LlvmPackage.Literals.INSERT_VALUE__INSERTTYPE);
@@ -160,6 +161,7 @@ public class InsertValueItemProvider
 			case LlvmPackage.INSERT_VALUE__INDEX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case LlvmPackage.INSERT_VALUE__RESULT:
 			case LlvmPackage.INSERT_VALUE__STRUCT:
 			case LlvmPackage.INSERT_VALUE__VALUE:
 			case LlvmPackage.INSERT_VALUE__INSERTTYPE:
@@ -183,8 +185,18 @@ public class InsertValueItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.INSERT_VALUE__RESULT,
+				 LlvmFactory.eINSTANCE.createAddress()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.INSERT_VALUE__STRUCT,
 				 LlvmFactory.eINSTANCE.createStructure()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.INSERT_VALUE__VALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -199,12 +211,12 @@ public class InsertValueItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSERT_VALUE__VALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSERT_VALUE__VALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -229,6 +241,11 @@ public class InsertValueItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSERT_VALUE__INSERTVALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.INSERT_VALUE__INSERTVALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -239,12 +256,12 @@ public class InsertValueItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSERT_VALUE__INSERTVALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSERT_VALUE__INSERTVALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -265,6 +282,7 @@ public class InsertValueItemProvider
 
 		boolean qualify =
 			childFeature == LlvmPackage.Literals.INSERT_VALUE__VALUE ||
+			childFeature == LlvmPackage.Literals.INSERT_VALUE__INSERTTYPE ||
 			childFeature == LlvmPackage.Literals.INSERT_VALUE__INSERTVALUE;
 
 		if (qualify)

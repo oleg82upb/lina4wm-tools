@@ -7,6 +7,7 @@ import de.upb.llvm_parser.llvm.LlvmFactory;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Store;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
@@ -32,7 +33,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class StoreItemProvider
-	extends StandartInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -61,10 +62,57 @@ public class StoreItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
+			addVolatilePropertyDescriptor(object);
+			addAlignPropertyDescriptor(object);
 			addOrderingPropertyDescriptor(object);
-			addIndexPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Volatile feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVolatilePropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Store_volatile_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Store_volatile_feature", "_UI_Store_type"),
+				 LlvmPackage.Literals.STORE__VOLATILE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Align feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAlignPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Store_align_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Store_align_feature", "_UI_Store_type"),
+				 LlvmPackage.Literals.STORE__ALIGN,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -90,28 +138,6 @@ public class StoreItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Index feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addIndexPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Store_index_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Store_index_feature", "_UI_Store_type"),
-				 LlvmPackage.Literals.STORE__INDEX,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -124,11 +150,9 @@ public class StoreItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(LlvmPackage.Literals.STORE__NEWTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.STORE__TYPES);
-			childrenFeatures.add(LlvmPackage.Literals.STORE__NEWVALUE);
-			childrenFeatures.add(LlvmPackage.Literals.STORE__ADRESSTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.STORE__ADRESS);
+			childrenFeatures.add(LlvmPackage.Literals.STORE__TARGET_ADDRESS);
+			childrenFeatures.add(LlvmPackage.Literals.STORE__VALUE);
+			childrenFeatures.add(LlvmPackage.Literals.STORE__META);
 		}
 		return childrenFeatures;
 	}
@@ -165,10 +189,8 @@ public class StoreItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Store)object).getOrdering();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Store_type") :
-			getString("_UI_Store_type") + " " + label;
+		Store store = (Store)object;
+		return getString("_UI_Store_type") + " " + store.isVolatile();
 	}
 
 	/**
@@ -184,15 +206,14 @@ public class StoreItemProvider
 
 		switch (notification.getFeatureID(Store.class))
 		{
+			case LlvmPackage.STORE__VOLATILE:
+			case LlvmPackage.STORE__ALIGN:
 			case LlvmPackage.STORE__ORDERING:
-			case LlvmPackage.STORE__INDEX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case LlvmPackage.STORE__NEWTYPE:
-			case LlvmPackage.STORE__TYPES:
-			case LlvmPackage.STORE__NEWVALUE:
-			case LlvmPackage.STORE__ADRESSTYPE:
-			case LlvmPackage.STORE__ADRESS:
+			case LlvmPackage.STORE__TARGET_ADDRESS:
+			case LlvmPackage.STORE__VALUE:
+			case LlvmPackage.STORE__META:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -212,88 +233,18 @@ public class StoreItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.STORE__NEWTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
+				(LlvmPackage.Literals.STORE__TARGET_ADDRESS,
+				 LlvmFactory.eINSTANCE.createParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.STORE__NEWTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
+				(LlvmPackage.Literals.STORE__VALUE,
+				 LlvmFactory.eINSTANCE.createParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.STORE__NEWTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STORE__TYPES,
-				 LlvmFactory.eINSTANCE.createTypeList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STORE__NEWVALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STORE__NEWVALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STORE__NEWVALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STORE__NEWVALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STORE__NEWVALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STORE__ADRESSTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STORE__ADRESSTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STORE__ADRESSTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STORE__ADRESS,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STORE__ADRESS,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STORE__ADRESS,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STORE__ADRESS,
-				 LlvmFactory.eINSTANCE.createCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STORE__ADRESS,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
+				(LlvmPackage.Literals.STORE__META,
+				 LlvmFactory.eINSTANCE.createMetaArgValue()));
 	}
 
 	/**
@@ -308,10 +259,8 @@ public class StoreItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == LlvmPackage.Literals.STORE__NEWTYPE ||
-			childFeature == LlvmPackage.Literals.STORE__ADRESSTYPE ||
-			childFeature == LlvmPackage.Literals.STORE__NEWVALUE ||
-			childFeature == LlvmPackage.Literals.STORE__ADRESS;
+			childFeature == LlvmPackage.Literals.STORE__TARGET_ADDRESS ||
+			childFeature == LlvmPackage.Literals.STORE__VALUE;
 
 		if (qualify)
 		{

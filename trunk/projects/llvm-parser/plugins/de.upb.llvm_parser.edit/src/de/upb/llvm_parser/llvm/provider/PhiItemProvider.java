@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class PhiItemProvider
-	extends StandartInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -76,9 +76,9 @@ public class PhiItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.PHI__RESULT);
 			childrenFeatures.add(LlvmPackage.Literals.PHI__TYPE);
-			childrenFeatures.add(LlvmPackage.Literals.PHI__FIRSTCLASS);
-			childrenFeatures.add(LlvmPackage.Literals.PHI__VALUES);
+			childrenFeatures.add(LlvmPackage.Literals.PHI__CASES);
 		}
 		return childrenFeatures;
 	}
@@ -131,9 +131,9 @@ public class PhiItemProvider
 
 		switch (notification.getFeatureID(Phi.class))
 		{
+			case LlvmPackage.PHI__RESULT:
 			case LlvmPackage.PHI__TYPE:
-			case LlvmPackage.PHI__FIRSTCLASS:
-			case LlvmPackage.PHI__VALUES:
+			case LlvmPackage.PHI__CASES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -153,6 +153,11 @@ public class PhiItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.PHI__RESULT,
+				 LlvmFactory.eINSTANCE.createAddress()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.PHI__TYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -168,77 +173,8 @@ public class PhiItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.PHI__FIRSTCLASS,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.PHI__FIRSTCLASS,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.PHI__FIRSTCLASS,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.PHI__FIRSTCLASS,
-				 LlvmFactory.eINSTANCE.createCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.PHI__FIRSTCLASS,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.PHI__VALUES,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.PHI__VALUES,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.PHI__VALUES,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.PHI__VALUES,
-				 LlvmFactory.eINSTANCE.createCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.PHI__VALUES,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == LlvmPackage.Literals.PHI__FIRSTCLASS ||
-			childFeature == LlvmPackage.Literals.PHI__VALUES;
-
-		if (qualify)
-		{
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
+				(LlvmPackage.Literals.PHI__CASES,
+				 LlvmFactory.eINSTANCE.createPhiCase()));
 	}
 
 }

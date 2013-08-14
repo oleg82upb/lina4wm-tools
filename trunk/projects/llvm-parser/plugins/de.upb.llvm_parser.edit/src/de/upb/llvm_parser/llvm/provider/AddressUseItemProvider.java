@@ -102,7 +102,7 @@ public class AddressUseItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((AddressUse)object).getPointer();
+		String label = ((AddressUse)object).getFunctionInput();
 		return label == null || label.length() == 0 ?
 			getString("_UI_AddressUse_type") :
 			getString("_UI_AddressUse_type") + " " + label;

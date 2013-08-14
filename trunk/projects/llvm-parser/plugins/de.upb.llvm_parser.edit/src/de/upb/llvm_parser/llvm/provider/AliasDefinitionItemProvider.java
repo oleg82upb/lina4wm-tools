@@ -176,6 +176,11 @@ public class AliasDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ALIAS_DEFINITION__ALIASVALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.ALIAS_DEFINITION__ALIASVALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -186,12 +191,12 @@ public class AliasDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ALIAS_DEFINITION__ALIASVALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ALIAS_DEFINITION__ALIASVALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -227,7 +232,8 @@ public class AliasDefinitionItemProvider
 
 		boolean qualify =
 			childFeature == LlvmPackage.Literals.ALIAS_DEFINITION__ALIASTYPE ||
-			childFeature == LlvmPackage.Literals.ALIAS_DEFINITION__ALIASEE;
+			childFeature == LlvmPackage.Literals.ALIAS_DEFINITION__ALIASEE ||
+			childFeature == LlvmPackage.Literals.ALIAS_DEFINITION__ALIASVALUE;
 
 		if (qualify)
 		{

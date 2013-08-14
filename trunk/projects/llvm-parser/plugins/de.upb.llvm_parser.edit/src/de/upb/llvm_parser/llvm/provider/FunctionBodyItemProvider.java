@@ -64,31 +64,8 @@ public class FunctionBodyItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
-			addMetaPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Meta feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addMetaPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_FunctionBody_meta_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_FunctionBody_meta_feature", "_UI_FunctionBody_type"),
-				 LlvmPackage.Literals.FUNCTION_BODY__META,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -104,6 +81,7 @@ public class FunctionBodyItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.FUNCTION_BODY__META);
 			childrenFeatures.add(LlvmPackage.Literals.FUNCTION_BODY__BLOCKS);
 		}
 		return childrenFeatures;
@@ -158,8 +136,6 @@ public class FunctionBodyItemProvider
 		switch (notification.getFeatureID(FunctionBody.class))
 		{
 			case LlvmPackage.FUNCTION_BODY__META:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
 			case LlvmPackage.FUNCTION_BODY__BLOCKS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -177,6 +153,11 @@ public class FunctionBodyItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.FUNCTION_BODY__META,
+				 LlvmFactory.eINSTANCE.createMetadataValue()));
 
 		newChildDescriptors.add
 			(createChildParameter

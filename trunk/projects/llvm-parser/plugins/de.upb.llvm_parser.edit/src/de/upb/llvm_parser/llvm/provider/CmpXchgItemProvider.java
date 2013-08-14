@@ -32,7 +32,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class CmpXchgItemProvider
-	extends StandartInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -61,9 +61,33 @@ public class CmpXchgItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
+			addVolatilePropertyDescriptor(object);
 			addOrderingPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Volatile feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVolatilePropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_CmpXchg_volatile_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_CmpXchg_volatile_feature", "_UI_CmpXchg_type"),
+				 LlvmPackage.Literals.CMP_XCHG__VOLATILE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -101,6 +125,7 @@ public class CmpXchgItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.CMP_XCHG__RESULT);
 			childrenFeatures.add(LlvmPackage.Literals.CMP_XCHG__ADRESSTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.CMP_XCHG__ADRESS);
 			childrenFeatures.add(LlvmPackage.Literals.CMP_XCHG__COMPARETYPE);
@@ -143,10 +168,8 @@ public class CmpXchgItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((CmpXchg)object).getOrdering();
-		return label == null || label.length() == 0 ?
-			getString("_UI_CmpXchg_type") :
-			getString("_UI_CmpXchg_type") + " " + label;
+		CmpXchg cmpXchg = (CmpXchg)object;
+		return getString("_UI_CmpXchg_type") + " " + cmpXchg.isVolatile();
 	}
 
 	/**
@@ -162,9 +185,11 @@ public class CmpXchgItemProvider
 
 		switch (notification.getFeatureID(CmpXchg.class))
 		{
+			case LlvmPackage.CMP_XCHG__VOLATILE:
 			case LlvmPackage.CMP_XCHG__ORDERING:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case LlvmPackage.CMP_XCHG__RESULT:
 			case LlvmPackage.CMP_XCHG__ADRESSTYPE:
 			case LlvmPackage.CMP_XCHG__ADRESS:
 			case LlvmPackage.CMP_XCHG__COMPARETYPE:
@@ -190,6 +215,11 @@ public class CmpXchgItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.CMP_XCHG__RESULT,
+				 LlvmFactory.eINSTANCE.createAddress()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.CMP_XCHG__ADRESSTYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -206,6 +236,11 @@ public class CmpXchgItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CMP_XCHG__ADRESS,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CMP_XCHG__ADRESS,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -216,12 +251,12 @@ public class CmpXchgItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CMP_XCHG__ADRESS,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CMP_XCHG__ADRESS,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -246,6 +281,11 @@ public class CmpXchgItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CMP_XCHG__COMPAREVALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CMP_XCHG__COMPAREVALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -256,12 +296,12 @@ public class CmpXchgItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CMP_XCHG__COMPAREVALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CMP_XCHG__COMPAREVALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -286,6 +326,11 @@ public class CmpXchgItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CMP_XCHG__NEWVALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CMP_XCHG__NEWVALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -296,12 +341,12 @@ public class CmpXchgItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CMP_XCHG__NEWVALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CMP_XCHG__NEWVALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
