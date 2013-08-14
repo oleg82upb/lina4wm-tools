@@ -3,16 +3,21 @@
 -- @atlcompiler atl2010
 
 
+-- 1st Transformation
+
+-- Basis Transformation von LLVM zu LLL
+
 module lllbasis;
 create lll: LLL from llvm: LLVM;
-
---create lll: LLL,expr : EXPR from llvm: LLVM;
 
 --****************************************--
 --                                        --
 --                 Helpers                --
 --                                        --
 --****************************************--
+
+-- Sucht in einem String 'input' nach einem Zeichen 'char' und gibt einen neuen String
+		-- zurück, der das alles nach dem Zeichen beinhaltet.
 helper def: stringcut(input: String, char: String): String =
 	if input.lastIndexOf(char) > -1 then
 		input.substring(input.lastIndexOf(char) + 2, input.size())
@@ -20,6 +25,8 @@ helper def: stringcut(input: String, char: String): String =
 		input
 	endif;
 
+-- Wird benötigt um ein Value zu bekommen. Basierend auf LLVM!Value wird, je nach
+		-- LLVM!Klasse, eine Konstante oder Variable erstellt.
 helper def: getValue(inValue: LLVM!Value): OclAny =
 	if (inValue.oclIsTypeOf(LLVM!Constant)) then
 		thisModule.createConstant(inValue)
@@ -31,6 +38,8 @@ helper def: getValue(inValue: LLVM!Value): OclAny =
 		endif
 	endif;
 
+-- Wie helper getValue. Es wird basierend auf LLVM!TypeUse unterschieden zwischen einem
+		-- Simple und Complex Typ unterschieden
 helper def: getType(inType: LLVM!TypeUse): OclAny =
 	if (inType.oclIsUndefined()) then
 		OclUndefined
@@ -64,18 +73,23 @@ helper def: getType(inType: LLVM!TypeUse): OclAny =
 		endif
 	endif;
 
+-- Wenn der input String nur aus Zahlen besteht, wird ein 'v' davor gesetzt
 helper def: numberReg(input: String): String =
 	if input.regexReplaceAll('[0-9]+', '').size()>0 then input else 'v' + input endif;
 
-helper def: getVariable(input: String): LLL!"lll::Variable" =
-	LLL!"lll::Variable".allInstances() -> select(v | v.name = thisModule.
-			numberReg(thisModule.stringcut(thisModule.stringcut(input, '%'), '@'))) ->
-			first();
-
-helper def: getConstant(input: String): LLL!Constant =
-	LLL!Constant.allInstances() -> select(c | c.value = thisModule.numberReg(thisModule.
-			stringcut(thisModule.stringcut(input, '%'), '@'))) -> first();
-
+-- Helper wird aktuell nicht mehr benutzt, vielleicht später nützlich
+-- Sucht nach einer schon geparsten Variable deren Name gleich dem input String ist.
+--helper def: getVariable(input: String): LLL!"lll::Variable" =
+--	LLL!"lll::Variable".allInstances() -> select(v | v.name = thisModule.
+--			numberReg(thisModule.stringcut(thisModule.stringcut(input, '%'), '@'))) ->
+--			first();
+-- Helper wird aktuell nicht mehr benutzt, vielleicht später nützlich
+-- Sucht nach einer schon geparsten Konstante deren Name gleich dem input String ist.
+--helper def: getConstant(input: String): LLL!Constant =
+--	LLL!Constant.allInstances() -> select(c | c.value = thisModule.numberReg(thisModule.
+--			stringcut(thisModule.stringcut(input, '%'), '@'))) -> first();
+-- Helper wird benutzt um zu einer Arithmetischen Operation den equivalenten
+		-- Arithmetischen Ausdruck zu bauen
 helper def: getAExpr(input: LLVM!ArithmeticOperation): LLL!"expressions::AExpression" =
 	if input.operation = 'add' or input.operation = 'fadd' then
 		thisModule.getPlus(input)
@@ -96,6 +110,8 @@ helper def: getAExpr(input: LLVM!ArithmeticOperation): LLL!"expressions::AExpres
 		endif
 	endif;
 
+-- Helper wird benutzt um zu einer Logischen Operation den equivalenten Logischen
+		-- Ausdruck zu bauen
 helper def: getLExpr(input: LLVM!LogicOperation): LLL!"expressions::LExpression" =
 	if input.operation = 'and' then
 		thisModule.getAnd(input)
@@ -151,6 +167,8 @@ lazy rule getNot {
 		)
 }
 
+-- Wird benutzt um basierend auf der LLVM!Value eine passende Variable(o.ä.) für einen
+		-- Ausdruck zu bauen.
 helper def: getExValue(input: LLVM!Value): LLL!"expressions::AExpression" =
 	if (input.oclIsTypeOf(LLVM!Constant)) then
 		LLL!"expressions::NumberValue".newInstance().refSetValue('numValue', input.value)
@@ -206,6 +224,8 @@ lazy rule getDiv {
 		)
 }
 
+-- Helper wird benutzt um zu einer Vergleichsoperation den equivalenten vergleichenden
+		-- Ausdruck zu bauen
 helper def: getCExpr(input: LLVM!Compare): LLL!"expressions::CExpression" =
 	if input.pred = 'eq' or input.pred = 'oeq' or input.pred = 'ueq' then
 		thisModule.getEqual(input)
@@ -303,6 +323,8 @@ lazy rule getLessEqual {
 		)
 }
 
+-- gehört eigentlich zu den Values, jedoch wird es nur hier verwendet
+-- Bspl(llvm): br true, label a1, label a2
 lazy rule getTrue {
 	from
 		input: LLVM!Compare
@@ -423,16 +445,19 @@ rule GlobalDefinition2GlobalVariables {
 		)
 }
 
+-- Called rule, die einem Label die Funktion und die erste Instruction eines BasicBlocks
+		-- zuweist
 rule BasicBlockLabel2FunctionInstructionLabel(block: LLVM!BasicBlock, lllfunction:
 		LLL!Function) {
 	to
 		bbLabel: LLL!Label (
 			function <- lllfunction,
-			instruction <- thisModule.resolveTemp(
-				if block.instructions.first().oclIsUndefined()
-				then block.terminator
-				else block.instructions.first() endif
-				, 'outI'),
+			instruction <- thisModule.resolveTemp(if block.instructions.first().
+					oclIsUndefined() then
+						block.terminator
+					else
+						block.instructions.first()
+					endif, 'outI'),
 			name <- block.label
 		)
 	do {
@@ -742,7 +767,8 @@ rule Cast2LC {
 			instructionResult <- intReg
 		),
 		expr: LLL!"expressions::Variable" (
-			varName <- thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(insUse.instruction.value.name, '%'), '@'))
+			varName <- thisModule.numberReg(thisModule.stringcut(thisModule.
+					stringcut(insUse.instruction.value.name, '%'), '@'))
 		),
 		intReg: LLL!"lll::Variable" (
 			name <- thisModule.numberReg(thisModule.stringcut(thisModule.stringcut(insUse.
@@ -757,6 +783,9 @@ rule LLVMBranch2ConditionBranch {
 		)
 	to
 		outI: LLL!ConditionalBranch (
+			-- um das richtige Label zu bekommen werden alle LLL!Labels die es gibt
+					-- angeschaut und es wird genau das ausgewählt, welches innerhalb der
+					-- gleichen Funktion ist und den gleichen Namen hat wie im llvm-code.
 			elseTarget <- LLL!Label.allInstances() -> select(i | i.name = thisModule.
 					stringcut(instruction.labelFalse.name, '%') and i.function.
 					instructions.includes(thisModule.resolveTemp(instruction, 'outI'))).
@@ -765,6 +794,8 @@ rule LLVMBranch2ConditionBranch {
 					stringcut(instruction.labelTrue.name, '%') and i.function.
 					instructions.includes(thisModule.resolveTemp(instruction, 'outI'))).
 					first(),
+			-- Dies wird für das refinment genutzt. Da die Condition OclUndefined bleibt,
+					-- muss jedoch festgehalten werden auf welche Variable geprüft wird.
 			instructionResult <- thisModule.getValue(instruction.condvalue)
 		)
 }

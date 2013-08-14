@@ -2,9 +2,47 @@
 -- @atlcompiler atl2010
 
 
+-- LAZY RULES ARE NOT SUPPORTED FOR REFINING MODE ...  ATL SDK - ATLAS Transformation
+-- Language SDK
+-- Version: 3.3.1.v201209061455	org.eclipse.m2m.atl.sdk.feature.group	Eclipse
+-- Modeling Project
+
+-- ALSO NOT SUPPORTED: Iterativ constrains like 'using' and called rules.
+
+-- 2. Refinement
+-- Muss mind. 3 mal ausgeführt werden.
+
+-- 1. Iteration:
+-- Change Target of a Branching Instruction to skip a unused Branch
+
+-- 2. Iteration:
+-- Remove Goto Instruction, if it is unreachable
+
+-- 3. Iteration
+-- Remove a unused labels
+
+
 module refinement;
 create OUT: MM refining IN: MM;
 
+-- Sammle alle Labels, die in der gleichen Funktion sind, wie die input Instruction
+helper def: getLabels(input: MM!Instruction): OrderedSet(MM!Label) =
+	input.refImmediateComposite().labels;
+
+-- Prüfe ob es Gotos gibt, die das input Label als Ziel haben
+helper def: gTarget(input: MM!Label): Integer =
+	MM!Goto.allInstances() -> collect(g | g.target).count(input);
+
+-- Prüfe ob es Conditional Branches (true case) gibt, die das input Label als Ziel haben
+helper def: cb1Target(input: MM!Label): Integer =
+	MM!ConditionalBranch.allInstances() -> collect(g | g.target).count(input);
+
+-- Prüfe ob es Conditional Branches (false case) gibt, die das input Label als Ziel haben
+helper def: cb2Target(input: MM!Label): Integer =
+	MM!ConditionalBranch.allInstances() -> collect(g | g.elseTarget).count(input);
+
+
+-- Check the targets of Conditional Branches
 rule BranchBasicBlock0 {
 	from
 		cb: MM!ConditionalBranch (
@@ -26,6 +64,7 @@ rule BranchBasicBlock0 {
 		)
 }
 
+-- Check the Target of Gotos
 rule BranchBasicBlock1 {
 	from
 		inputGoto: MM!Goto (
@@ -38,6 +77,7 @@ rule BranchBasicBlock1 {
 		)
 }
 
+-- Remove the unreachable Goto Instruction
 rule BranchBasicBlock2 {
 	from
 		inputGoto: MM!Goto (
@@ -50,6 +90,8 @@ rule BranchBasicBlock2 {
 		drop
 
 }
+
+-- Remove the unused Labels
 rule BranchBasicBlock3 {
 	from
 		label: MM!Label (
@@ -58,16 +100,3 @@ rule BranchBasicBlock3 {
 	to
 		drop
 }
-
-
-helper def: getLabels(input: MM!Instruction): OrderedSet(MM!Label) =
-	input.refImmediateComposite().labels;
-
-helper def: gTarget(input: MM!Label): Integer =
-	MM!Goto.allInstances() -> collect(g | g.target).count(input);
-
-helper def: cb1Target(input: MM!Label): Integer =
-	MM!ConditionalBranch.allInstances() -> collect(g | g.target).count(input);
-
-helper def: cb2Target(input: MM!Label): Integer =
-	MM!ConditionalBranch.allInstances() -> collect(g | g.elseTarget).count(input);
