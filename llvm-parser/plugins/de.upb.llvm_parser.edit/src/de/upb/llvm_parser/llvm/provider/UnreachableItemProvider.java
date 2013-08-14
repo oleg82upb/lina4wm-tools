@@ -23,7 +23,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * @generated
  */
 public class UnreachableItemProvider
-	extends ReturnInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,

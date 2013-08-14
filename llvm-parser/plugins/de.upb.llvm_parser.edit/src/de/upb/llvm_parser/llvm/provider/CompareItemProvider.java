@@ -32,7 +32,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class CompareItemProvider
-	extends StandartInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -101,6 +101,7 @@ public class CompareItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.COMPARE__RESULT);
 			childrenFeatures.add(LlvmPackage.Literals.COMPARE__COMPTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.COMPARE__VALUE1);
 			childrenFeatures.add(LlvmPackage.Literals.COMPARE__VALUE2);
@@ -162,6 +163,7 @@ public class CompareItemProvider
 			case LlvmPackage.COMPARE__PRED:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case LlvmPackage.COMPARE__RESULT:
 			case LlvmPackage.COMPARE__COMPTYPE:
 			case LlvmPackage.COMPARE__VALUE1:
 			case LlvmPackage.COMPARE__VALUE2:
@@ -184,6 +186,11 @@ public class CompareItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.COMPARE__RESULT,
+				 LlvmFactory.eINSTANCE.createAddress()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.COMPARE__COMPTYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -200,6 +207,11 @@ public class CompareItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.COMPARE__VALUE1,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.COMPARE__VALUE1,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -210,12 +222,12 @@ public class CompareItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.COMPARE__VALUE1,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.COMPARE__VALUE1,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -225,6 +237,11 @@ public class CompareItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.COMPARE__VALUE2,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.COMPARE__VALUE2,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -235,12 +252,12 @@ public class CompareItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.COMPARE__VALUE2,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.COMPARE__VALUE2,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -260,6 +277,7 @@ public class CompareItemProvider
 		Object childObject = child;
 
 		boolean qualify =
+			childFeature == LlvmPackage.Literals.COMPARE__COMPTYPE ||
 			childFeature == LlvmPackage.Literals.COMPARE__VALUE1 ||
 			childFeature == LlvmPackage.Literals.COMPARE__VALUE2;
 

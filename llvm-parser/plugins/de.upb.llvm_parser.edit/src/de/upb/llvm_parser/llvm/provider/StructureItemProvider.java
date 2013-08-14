@@ -235,11 +235,6 @@ public class StructureItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STRUCTURE__TYPES,
 				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
@@ -255,7 +250,22 @@ public class StructureItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
+				 LlvmFactory.eINSTANCE.createParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.STRUCTURE__TYPES,
 				 LlvmFactory.eINSTANCE.createParameterList()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.STRUCTURE__TYPES,
+				 LlvmFactory.eINSTANCE.createFunctionParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.STRUCTURE__TYPES,
+				 LlvmFactory.eINSTANCE.createFunctionParameterList()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -280,21 +290,6 @@ public class StructureItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createInstructionUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createReturnInstruction()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createStandartInstruction()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STRUCTURE__TYPES,
 				 LlvmFactory.eINSTANCE.createArithmeticOperation()));
 
 		newChildDescriptors.add
@@ -306,6 +301,26 @@ public class StructureItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.STRUCTURE__TYPES,
+				 LlvmFactory.eINSTANCE.createNestedCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.STRUCTURE__TYPES,
+				 LlvmFactory.eINSTANCE.createMetaArgValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.STRUCTURE__TYPES,
+				 LlvmFactory.eINSTANCE.createMeta()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.STRUCTURE__TYPES,
+				 LlvmFactory.eINSTANCE.createMetadataValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -361,6 +376,11 @@ public class StructureItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
 				 LlvmFactory.eINSTANCE.createAlloc()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.STRUCTURE__TYPES,
+				 LlvmFactory.eINSTANCE.createPhiCase()));
 
 		newChildDescriptors.add
 			(createChildParameter

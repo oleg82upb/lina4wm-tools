@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class VariableAttributeAccessItemProvider
-	extends StandartInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -76,6 +76,7 @@ public class VariableAttributeAccessItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__RESULT);
 			childrenFeatures.add(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE);
 			childrenFeatures.add(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE);
@@ -131,6 +132,7 @@ public class VariableAttributeAccessItemProvider
 
 		switch (notification.getFeatureID(VariableAttributeAccess.class))
 		{
+			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__RESULT:
 			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE:
 			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE:
 			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE:
@@ -153,6 +155,11 @@ public class VariableAttributeAccessItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__RESULT,
+				 LlvmFactory.eINSTANCE.createAddress()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -169,6 +176,11 @@ public class VariableAttributeAccessItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -179,12 +191,12 @@ public class VariableAttributeAccessItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -220,7 +232,8 @@ public class VariableAttributeAccessItemProvider
 
 		boolean qualify =
 			childFeature == LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE ||
-			childFeature == LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE;
+			childFeature == LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE ||
+			childFeature == LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE;
 
 		if (qualify)
 		{

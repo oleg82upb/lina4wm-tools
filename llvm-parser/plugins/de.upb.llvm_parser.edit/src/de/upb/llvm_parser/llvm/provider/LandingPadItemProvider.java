@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class LandingPadItemProvider
-	extends StandartInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -76,6 +76,7 @@ public class LandingPadItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.LANDING_PAD__RESULT);
 			childrenFeatures.add(LlvmPackage.Literals.LANDING_PAD__STRUCT);
 			childrenFeatures.add(LlvmPackage.Literals.LANDING_PAD__PERSONALITYTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.LANDING_PAD__PERSONALITYVALUE);
@@ -132,6 +133,7 @@ public class LandingPadItemProvider
 
 		switch (notification.getFeatureID(LandingPad.class))
 		{
+			case LlvmPackage.LANDING_PAD__RESULT:
 			case LlvmPackage.LANDING_PAD__STRUCT:
 			case LlvmPackage.LANDING_PAD__PERSONALITYTYPE:
 			case LlvmPackage.LANDING_PAD__PERSONALITYVALUE:
@@ -152,6 +154,11 @@ public class LandingPadItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.LANDING_PAD__RESULT,
+				 LlvmFactory.eINSTANCE.createAddress()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -176,6 +183,11 @@ public class LandingPadItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.LANDING_PAD__PERSONALITYVALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.LANDING_PAD__PERSONALITYVALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -186,12 +198,12 @@ public class LandingPadItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.LANDING_PAD__PERSONALITYVALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.LANDING_PAD__PERSONALITYVALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -202,6 +214,31 @@ public class LandingPadItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.LANDING_PAD__CLAUSE,
 				 LlvmFactory.eINSTANCE.createClause()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection)
+	{
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == LlvmPackage.Literals.LANDING_PAD__PERSONALITYTYPE ||
+			childFeature == LlvmPackage.Literals.LANDING_PAD__PERSONALITYVALUE;
+
+		if (qualify)
+		{
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

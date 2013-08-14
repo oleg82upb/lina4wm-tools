@@ -15,12 +15,14 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -30,7 +32,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class InvokeItemProvider
-	extends ReturnInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -59,8 +61,56 @@ public class InvokeItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
+			addToTargetPropertyDescriptor(object);
+			addUnwindCasePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the To Target feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addToTargetPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Invoke_toTarget_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Invoke_toTarget_feature", "_UI_Invoke_type"),
+				 LlvmPackage.Literals.INVOKE__TO_TARGET,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Unwind Case feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addUnwindCasePropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Invoke_unwindCase_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Invoke_unwindCase_feature", "_UI_Invoke_type"),
+				 LlvmPackage.Literals.INVOKE__UNWIND_CASE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -79,10 +129,6 @@ public class InvokeItemProvider
 			childrenFeatures.add(LlvmPackage.Literals.INVOKE__FUNCTIONTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.INVOKE__NAME);
 			childrenFeatures.add(LlvmPackage.Literals.INVOKE__PLIST);
-			childrenFeatures.add(LlvmPackage.Literals.INVOKE__TOTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.INVOKE__TOVALUE);
-			childrenFeatures.add(LlvmPackage.Literals.INVOKE__UNWINDTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.INVOKE__UNWINDVALUE);
 		}
 		return childrenFeatures;
 	}
@@ -119,7 +165,10 @@ public class InvokeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Invoke_type");
+		String label = ((Invoke)object).getToTarget();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Invoke_type") :
+			getString("_UI_Invoke_type") + " " + label;
 	}
 
 	/**
@@ -135,13 +184,13 @@ public class InvokeItemProvider
 
 		switch (notification.getFeatureID(Invoke.class))
 		{
+			case LlvmPackage.INVOKE__TO_TARGET:
+			case LlvmPackage.INVOKE__UNWIND_CASE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case LlvmPackage.INVOKE__FUNCTIONTYPE:
 			case LlvmPackage.INVOKE__NAME:
 			case LlvmPackage.INVOKE__PLIST:
-			case LlvmPackage.INVOKE__TOTYPE:
-			case LlvmPackage.INVOKE__TOVALUE:
-			case LlvmPackage.INVOKE__UNWINDTYPE:
-			case LlvmPackage.INVOKE__UNWINDVALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -183,113 +232,6 @@ public class InvokeItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.INVOKE__PLIST,
 				 LlvmFactory.eINSTANCE.createParameterList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INVOKE__TOTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INVOKE__TOTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INVOKE__TOTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INVOKE__TOVALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INVOKE__TOVALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INVOKE__TOVALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INVOKE__TOVALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INVOKE__TOVALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INVOKE__UNWINDTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INVOKE__UNWINDTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INVOKE__UNWINDTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INVOKE__UNWINDVALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INVOKE__UNWINDVALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INVOKE__UNWINDVALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INVOKE__UNWINDVALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INVOKE__UNWINDVALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == LlvmPackage.Literals.INVOKE__FUNCTIONTYPE ||
-			childFeature == LlvmPackage.Literals.INVOKE__TOTYPE ||
-			childFeature == LlvmPackage.Literals.INVOKE__UNWINDTYPE ||
-			childFeature == LlvmPackage.Literals.INVOKE__TOVALUE ||
-			childFeature == LlvmPackage.Literals.INVOKE__UNWINDVALUE;
-
-		if (qualify)
-		{
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

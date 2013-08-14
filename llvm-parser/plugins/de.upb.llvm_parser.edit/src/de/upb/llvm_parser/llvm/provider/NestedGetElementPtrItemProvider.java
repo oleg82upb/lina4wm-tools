@@ -241,11 +241,6 @@ public class NestedGetElementPtrItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
@@ -261,7 +256,22 @@ public class NestedGetElementPtrItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createParameterList()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createFunctionParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createFunctionParameterList()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -286,21 +296,6 @@ public class NestedGetElementPtrItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE,
-				 LlvmFactory.eINSTANCE.createInstructionUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE,
-				 LlvmFactory.eINSTANCE.createReturnInstruction()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE,
-				 LlvmFactory.eINSTANCE.createStandartInstruction()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createArithmeticOperation()));
 
 		newChildDescriptors.add
@@ -312,6 +307,26 @@ public class NestedGetElementPtrItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createNestedCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createMetaArgValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createMeta()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createMetadataValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -367,6 +382,11 @@ public class NestedGetElementPtrItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE,
 				 LlvmFactory.eINSTANCE.createAlloc()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATE,
+				 LlvmFactory.eINSTANCE.createPhiCase()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -451,6 +471,11 @@ public class NestedGetElementPtrItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATENAME,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATENAME,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -461,12 +486,12 @@ public class NestedGetElementPtrItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATENAME,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__AGGREGATENAME,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -491,6 +516,11 @@ public class NestedGetElementPtrItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__INDIZIES,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__INDIZIES,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -501,12 +531,12 @@ public class NestedGetElementPtrItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__INDIZIES,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.NESTED_GET_ELEMENT_PTR__INDIZIES,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter

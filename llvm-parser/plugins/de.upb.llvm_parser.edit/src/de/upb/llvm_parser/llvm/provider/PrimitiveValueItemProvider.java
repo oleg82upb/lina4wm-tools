@@ -32,7 +32,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class PrimitiveValueItemProvider
-	extends ItemProviderAdapter
+	extends ValueItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -64,26 +64,26 @@ public class PrimitiveValueItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
+			addValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
+	 * This adds a property descriptor for the Value feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNamePropertyDescriptor(Object object)
+	protected void addValuePropertyDescriptor(Object object)
 	{
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_PrimitiveValue_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_PrimitiveValue_name_feature", "_UI_PrimitiveValue_type"),
-				 LlvmPackage.Literals.PRIMITIVE_VALUE__NAME,
+				 getString("_UI_PrimitiveValue_value_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PrimitiveValue_value_feature", "_UI_PrimitiveValue_type"),
+				 LlvmPackage.Literals.PRIMITIVE_VALUE__VALUE,
 				 true,
 				 false,
 				 false,
@@ -113,7 +113,7 @@ public class PrimitiveValueItemProvider
 	@Override
 	public String getText(Object object)
 	{
-		String label = ((PrimitiveValue)object).getName();
+		String label = ((PrimitiveValue)object).getValue();
 		return label == null || label.length() == 0 ?
 			getString("_UI_PrimitiveValue_type") :
 			getString("_UI_PrimitiveValue_type") + " " + label;
@@ -133,7 +133,7 @@ public class PrimitiveValueItemProvider
 
 		switch (notification.getFeatureID(PrimitiveValue.class))
 		{
-			case LlvmPackage.PRIMITIVE_VALUE__NAME:
+			case LlvmPackage.PRIMITIVE_VALUE__VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -151,18 +151,6 @@ public class PrimitiveValueItemProvider
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object)
 	{
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator()
-	{
-		return LLVMEditPlugin.INSTANCE;
 	}
 
 }

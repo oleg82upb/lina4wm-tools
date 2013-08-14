@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class SwitchItemProvider
-	extends ReturnInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -179,6 +179,11 @@ public class SwitchItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SWITCH__COMPVALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__COMPVALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -189,12 +194,12 @@ public class SwitchItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SWITCH__COMPVALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SWITCH__COMPVALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -219,6 +224,11 @@ public class SwitchItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SWITCH__DEFAULTVALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__DEFAULTVALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -229,12 +239,12 @@ public class SwitchItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SWITCH__DEFAULTVALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SWITCH__DEFAULTVALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -259,6 +269,11 @@ public class SwitchItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SWITCH__JVALUES,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__JVALUES,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -269,12 +284,12 @@ public class SwitchItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SWITCH__JVALUES,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SWITCH__JVALUES,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -299,6 +314,11 @@ public class SwitchItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SWITCH__DESTINATIONS,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SWITCH__DESTINATIONS,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -309,12 +329,12 @@ public class SwitchItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SWITCH__DESTINATIONS,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SWITCH__DESTINATIONS,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter

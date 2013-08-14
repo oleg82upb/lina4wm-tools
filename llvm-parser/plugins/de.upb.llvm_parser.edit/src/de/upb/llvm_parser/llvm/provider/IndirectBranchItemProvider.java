@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class IndirectBranchItemProvider
-	extends ReturnInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -171,6 +171,11 @@ public class IndirectBranchItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESS,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESS,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -181,12 +186,12 @@ public class IndirectBranchItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESS,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESS,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -211,6 +216,11 @@ public class IndirectBranchItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELS,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELS,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -221,12 +231,12 @@ public class IndirectBranchItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELS,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELS,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter

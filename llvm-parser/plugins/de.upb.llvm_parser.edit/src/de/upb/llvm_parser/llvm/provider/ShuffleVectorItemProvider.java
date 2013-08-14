@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class ShuffleVectorItemProvider
-	extends StandartInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -76,6 +76,7 @@ public class ShuffleVectorItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.SHUFFLE_VECTOR__RESULT);
 			childrenFeatures.add(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1TYPE);
 			childrenFeatures.add(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1VALUE);
 			childrenFeatures.add(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2TYPE);
@@ -134,6 +135,7 @@ public class ShuffleVectorItemProvider
 
 		switch (notification.getFeatureID(ShuffleVector.class))
 		{
+			case LlvmPackage.SHUFFLE_VECTOR__RESULT:
 			case LlvmPackage.SHUFFLE_VECTOR__VAL1TYPE:
 			case LlvmPackage.SHUFFLE_VECTOR__VAL1VALUE:
 			case LlvmPackage.SHUFFLE_VECTOR__VAL2TYPE:
@@ -159,6 +161,11 @@ public class ShuffleVectorItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.SHUFFLE_VECTOR__RESULT,
+				 LlvmFactory.eINSTANCE.createAddress()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1TYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -175,6 +182,11 @@ public class ShuffleVectorItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1VALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1VALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -185,12 +197,12 @@ public class ShuffleVectorItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1VALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1VALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -215,6 +227,11 @@ public class ShuffleVectorItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2VALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2VALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -225,12 +242,12 @@ public class ShuffleVectorItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2VALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2VALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -255,6 +272,11 @@ public class ShuffleVectorItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SHUFFLE_VECTOR__MASKVALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SHUFFLE_VECTOR__MASKVALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -265,12 +287,12 @@ public class ShuffleVectorItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SHUFFLE_VECTOR__MASKVALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SHUFFLE_VECTOR__MASKVALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter

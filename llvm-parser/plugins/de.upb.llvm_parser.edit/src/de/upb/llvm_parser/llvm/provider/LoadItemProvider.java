@@ -7,6 +7,7 @@ import de.upb.llvm_parser.llvm.LlvmFactory;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Load;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
@@ -32,7 +33,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class LoadItemProvider
-	extends StandartInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -61,10 +62,57 @@ public class LoadItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
+			addVolatilePropertyDescriptor(object);
+			addAlignPropertyDescriptor(object);
 			addOrderingPropertyDescriptor(object);
-			addIndexPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Volatile feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVolatilePropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Load_volatile_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Load_volatile_feature", "_UI_Load_type"),
+				 LlvmPackage.Literals.LOAD__VOLATILE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Align feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAlignPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Load_align_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Load_align_feature", "_UI_Load_type"),
+				 LlvmPackage.Literals.LOAD__ALIGN,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -90,28 +138,6 @@ public class LoadItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Index feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addIndexPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Load_index_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Load_index_feature", "_UI_Load_type"),
-				 LlvmPackage.Literals.LOAD__INDEX,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -124,9 +150,9 @@ public class LoadItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(LlvmPackage.Literals.LOAD__ADRESSTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.LOAD__TYPES);
-			childrenFeatures.add(LlvmPackage.Literals.LOAD__ADRESS);
+			childrenFeatures.add(LlvmPackage.Literals.LOAD__RESULT);
+			childrenFeatures.add(LlvmPackage.Literals.LOAD__ADDRESS);
+			childrenFeatures.add(LlvmPackage.Literals.LOAD__META);
 		}
 		return childrenFeatures;
 	}
@@ -163,10 +189,8 @@ public class LoadItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Load)object).getOrdering();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Load_type") :
-			getString("_UI_Load_type") + " " + label;
+		Load load = (Load)object;
+		return getString("_UI_Load_type") + " " + load.isVolatile();
 	}
 
 	/**
@@ -182,13 +206,14 @@ public class LoadItemProvider
 
 		switch (notification.getFeatureID(Load.class))
 		{
+			case LlvmPackage.LOAD__VOLATILE:
+			case LlvmPackage.LOAD__ALIGN:
 			case LlvmPackage.LOAD__ORDERING:
-			case LlvmPackage.LOAD__INDEX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case LlvmPackage.LOAD__ADRESSTYPE:
-			case LlvmPackage.LOAD__TYPES:
-			case LlvmPackage.LOAD__ADRESS:
+			case LlvmPackage.LOAD__RESULT:
+			case LlvmPackage.LOAD__ADDRESS:
+			case LlvmPackage.LOAD__META:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -208,48 +233,18 @@ public class LoadItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.LOAD__ADRESSTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
+				(LlvmPackage.Literals.LOAD__RESULT,
+				 LlvmFactory.eINSTANCE.createAddress()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.LOAD__ADRESSTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
+				(LlvmPackage.Literals.LOAD__ADDRESS,
+				 LlvmFactory.eINSTANCE.createParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.LOAD__ADRESSTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.LOAD__TYPES,
-				 LlvmFactory.eINSTANCE.createTypeList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.LOAD__ADRESS,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.LOAD__ADRESS,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.LOAD__ADRESS,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.LOAD__ADRESS,
-				 LlvmFactory.eINSTANCE.createCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.LOAD__ADRESS,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
+				(LlvmPackage.Literals.LOAD__META,
+				 LlvmFactory.eINSTANCE.createMetaArgValue()));
 	}
 
 }

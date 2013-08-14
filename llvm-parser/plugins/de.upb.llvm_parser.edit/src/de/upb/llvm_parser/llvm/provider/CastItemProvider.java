@@ -32,7 +32,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class CastItemProvider
-	extends ValueItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -101,6 +101,7 @@ public class CastItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.CAST__RESULT);
 			childrenFeatures.add(LlvmPackage.Literals.CAST__FROM);
 			childrenFeatures.add(LlvmPackage.Literals.CAST__VALUE);
 			childrenFeatures.add(LlvmPackage.Literals.CAST__TO);
@@ -162,6 +163,7 @@ public class CastItemProvider
 			case LlvmPackage.CAST__OPERATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case LlvmPackage.CAST__RESULT:
 			case LlvmPackage.CAST__FROM:
 			case LlvmPackage.CAST__VALUE:
 			case LlvmPackage.CAST__TO:
@@ -181,6 +183,11 @@ public class CastItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CAST__RESULT,
+				 LlvmFactory.eINSTANCE.createAddress()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -270,11 +277,6 @@ public class CastItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CAST__FROM,
 				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
@@ -290,7 +292,22 @@ public class CastItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
+				 LlvmFactory.eINSTANCE.createParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CAST__FROM,
 				 LlvmFactory.eINSTANCE.createParameterList()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CAST__FROM,
+				 LlvmFactory.eINSTANCE.createFunctionParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CAST__FROM,
+				 LlvmFactory.eINSTANCE.createFunctionParameterList()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -315,21 +332,6 @@ public class CastItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createInstructionUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createReturnInstruction()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createStandartInstruction()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CAST__FROM,
 				 LlvmFactory.eINSTANCE.createArithmeticOperation()));
 
 		newChildDescriptors.add
@@ -341,6 +343,26 @@ public class CastItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
 				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CAST__FROM,
+				 LlvmFactory.eINSTANCE.createNestedCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CAST__FROM,
+				 LlvmFactory.eINSTANCE.createMetaArgValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CAST__FROM,
+				 LlvmFactory.eINSTANCE.createMeta()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CAST__FROM,
+				 LlvmFactory.eINSTANCE.createMetadataValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -396,6 +418,11 @@ public class CastItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
 				 LlvmFactory.eINSTANCE.createAlloc()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CAST__FROM,
+				 LlvmFactory.eINSTANCE.createPhiCase()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -480,6 +507,11 @@ public class CastItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__VALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CAST__VALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -490,12 +522,12 @@ public class CastItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__VALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__VALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -530,6 +562,7 @@ public class CastItemProvider
 		Object childObject = child;
 
 		boolean qualify =
+			childFeature == LlvmPackage.Literals.CAST__RESULT ||
 			childFeature == LlvmPackage.Literals.CAST__FROM ||
 			childFeature == LlvmPackage.Literals.CAST__TO ||
 			childFeature == LlvmPackage.Literals.CAST__VALUE;

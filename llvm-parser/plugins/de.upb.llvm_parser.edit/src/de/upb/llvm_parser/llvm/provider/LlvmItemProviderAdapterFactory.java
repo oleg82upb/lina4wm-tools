@@ -456,30 +456,6 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.NonConstantValue} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected NonConstantValueItemProvider nonConstantValueItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.NonConstantValue}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createNonConstantValueAdapter() {
-		if (nonConstantValueItemProvider == null)
-		{
-			nonConstantValueItemProvider = new NonConstantValueItemProvider(this);
-		}
-
-		return nonConstantValueItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.PrimitiveValue} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -577,6 +553,31 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.Parameter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ParameterItemProvider parameterItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.Parameter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createParameterAdapter()
+	{
+		if (parameterItemProvider == null)
+		{
+			parameterItemProvider = new ParameterItemProvider(this);
+		}
+
+		return parameterItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.ParameterList} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -598,6 +599,56 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 		}
 
 		return parameterListItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.FunctionParameter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FunctionParameterItemProvider functionParameterItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.FunctionParameter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createFunctionParameterAdapter()
+	{
+		if (functionParameterItemProvider == null)
+		{
+			functionParameterItemProvider = new FunctionParameterItemProvider(this);
+		}
+
+		return functionParameterItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.FunctionParameterList} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FunctionParameterListItemProvider functionParameterListItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.FunctionParameterList}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createFunctionParameterListAdapter()
+	{
+		if (functionParameterListItemProvider == null)
+		{
+			functionParameterListItemProvider = new FunctionParameterListItemProvider(this);
+		}
+
+		return functionParameterListItemProvider;
 	}
 
 	/**
@@ -697,78 +748,6 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.InstructionUse} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected InstructionUseItemProvider instructionUseItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.InstructionUse}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createInstructionUseAdapter() {
-		if (instructionUseItemProvider == null)
-		{
-			instructionUseItemProvider = new InstructionUseItemProvider(this);
-		}
-
-		return instructionUseItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.ReturnInstruction} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ReturnInstructionItemProvider returnInstructionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.ReturnInstruction}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createReturnInstructionAdapter() {
-		if (returnInstructionItemProvider == null)
-		{
-			returnInstructionItemProvider = new ReturnInstructionItemProvider(this);
-		}
-
-		return returnInstructionItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.StandartInstruction} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected StandartInstructionItemProvider standartInstructionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.StandartInstruction}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createStandartInstructionAdapter() {
-		if (standartInstructionItemProvider == null)
-		{
-			standartInstructionItemProvider = new StandartInstructionItemProvider(this);
-		}
-
-		return standartInstructionItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.ArithmeticOperation} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -838,6 +817,106 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 		}
 
 		return castItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.NestedCast} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NestedCastItemProvider nestedCastItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.NestedCast}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNestedCastAdapter()
+	{
+		if (nestedCastItemProvider == null)
+		{
+			nestedCastItemProvider = new NestedCastItemProvider(this);
+		}
+
+		return nestedCastItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.MetaArgValue} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MetaArgValueItemProvider metaArgValueItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.MetaArgValue}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMetaArgValueAdapter()
+	{
+		if (metaArgValueItemProvider == null)
+		{
+			metaArgValueItemProvider = new MetaArgValueItemProvider(this);
+		}
+
+		return metaArgValueItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.Meta} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MetaItemProvider metaItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.Meta}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMetaAdapter()
+	{
+		if (metaItemProvider == null)
+		{
+			metaItemProvider = new MetaItemProvider(this);
+		}
+
+		return metaItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.MetadataValue} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MetadataValueItemProvider metadataValueItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.MetadataValue}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMetadataValueAdapter()
+	{
+		if (metadataValueItemProvider == null)
+		{
+			metadataValueItemProvider = new MetadataValueItemProvider(this);
+		}
+
+		return metadataValueItemProvider;
 	}
 
 	/**
@@ -1102,6 +1181,31 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 		}
 
 		return allocItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.PhiCase} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PhiCaseItemProvider phiCaseItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.PhiCase}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPhiCaseAdapter()
+	{
+		if (phiCaseItemProvider == null)
+		{
+			phiCaseItemProvider = new PhiCaseItemProvider(this);
+		}
+
+		return phiCaseItemProvider;
 	}
 
 	/**
@@ -1606,22 +1710,25 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 		if (arrayItemProvider != null) arrayItemProvider.dispose();
 		if (aggregate_TypesItemProvider != null) aggregate_TypesItemProvider.dispose();
 		if (constantItemProvider != null) constantItemProvider.dispose();
-		if (nonConstantValueItemProvider != null) nonConstantValueItemProvider.dispose();
 		if (primitiveValueItemProvider != null) primitiveValueItemProvider.dispose();
 		if (valueItemProvider != null) valueItemProvider.dispose();
 		if (valueStructItemProvider != null) valueStructItemProvider.dispose();
 		if (structureItemProvider != null) structureItemProvider.dispose();
+		if (parameterItemProvider != null) parameterItemProvider.dispose();
 		if (parameterListItemProvider != null) parameterListItemProvider.dispose();
+		if (functionParameterItemProvider != null) functionParameterItemProvider.dispose();
+		if (functionParameterListItemProvider != null) functionParameterListItemProvider.dispose();
 		if (typeListItemProvider != null) typeListItemProvider.dispose();
 		if (functionBodyItemProvider != null) functionBodyItemProvider.dispose();
 		if (instructionItemProvider != null) instructionItemProvider.dispose();
 		if (basicBlockItemProvider != null) basicBlockItemProvider.dispose();
-		if (instructionUseItemProvider != null) instructionUseItemProvider.dispose();
-		if (returnInstructionItemProvider != null) returnInstructionItemProvider.dispose();
-		if (standartInstructionItemProvider != null) standartInstructionItemProvider.dispose();
 		if (arithmeticOperationItemProvider != null) arithmeticOperationItemProvider.dispose();
 		if (logicOperationItemProvider != null) logicOperationItemProvider.dispose();
 		if (castItemProvider != null) castItemProvider.dispose();
+		if (nestedCastItemProvider != null) nestedCastItemProvider.dispose();
+		if (metaArgValueItemProvider != null) metaArgValueItemProvider.dispose();
+		if (metaItemProvider != null) metaItemProvider.dispose();
+		if (metadataValueItemProvider != null) metadataValueItemProvider.dispose();
 		if (getElementPtrItemProvider != null) getElementPtrItemProvider.dispose();
 		if (nestedGetElementPtrItemProvider != null) nestedGetElementPtrItemProvider.dispose();
 		if (extractValueItemProvider != null) extractValueItemProvider.dispose();
@@ -1633,6 +1740,7 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 		if (storeItemProvider != null) storeItemProvider.dispose();
 		if (callItemProvider != null) callItemProvider.dispose();
 		if (allocItemProvider != null) allocItemProvider.dispose();
+		if (phiCaseItemProvider != null) phiCaseItemProvider.dispose();
 		if (phiItemProvider != null) phiItemProvider.dispose();
 		if (landingPadItemProvider != null) landingPadItemProvider.dispose();
 		if (clauseItemProvider != null) clauseItemProvider.dispose();

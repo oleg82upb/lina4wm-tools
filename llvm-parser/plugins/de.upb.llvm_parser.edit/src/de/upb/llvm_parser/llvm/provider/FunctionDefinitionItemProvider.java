@@ -7,6 +7,7 @@ import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LlvmFactory;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,12 +16,14 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -59,8 +62,32 @@ public class FunctionDefinitionItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
+			addAlignPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Align feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAlignPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FunctionDefinition_align_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FunctionDefinition_align_feature", "_UI_FunctionDefinition_type"),
+				 LlvmPackage.Literals.FUNCTION_DEFINITION__ALIGN,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -78,9 +105,8 @@ public class FunctionDefinitionItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.FUNCTION_DEFINITION__RETURN_TYPE);
 			childrenFeatures.add(LlvmPackage.Literals.FUNCTION_DEFINITION__ADDRESS);
-			childrenFeatures.add(LlvmPackage.Literals.FUNCTION_DEFINITION__PL);
+			childrenFeatures.add(LlvmPackage.Literals.FUNCTION_DEFINITION__PARAMETER);
 			childrenFeatures.add(LlvmPackage.Literals.FUNCTION_DEFINITION__BODY);
-			childrenFeatures.add(LlvmPackage.Literals.FUNCTION_DEFINITION__TLIST);
 		}
 		return childrenFeatures;
 	}
@@ -117,7 +143,11 @@ public class FunctionDefinitionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_FunctionDefinition_type");
+		BigDecimal labelValue = ((FunctionDefinition)object).getAlign();
+		String label = labelValue == null ? null : labelValue.toString();
+		return label == null || label.length() == 0 ?
+			getString("_UI_FunctionDefinition_type") :
+			getString("_UI_FunctionDefinition_type") + " " + label;
 	}
 
 	/**
@@ -133,11 +163,13 @@ public class FunctionDefinitionItemProvider
 
 		switch (notification.getFeatureID(FunctionDefinition.class))
 		{
+			case LlvmPackage.FUNCTION_DEFINITION__ALIGN:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case LlvmPackage.FUNCTION_DEFINITION__RETURN_TYPE:
 			case LlvmPackage.FUNCTION_DEFINITION__ADDRESS:
-			case LlvmPackage.FUNCTION_DEFINITION__PL:
+			case LlvmPackage.FUNCTION_DEFINITION__PARAMETER:
 			case LlvmPackage.FUNCTION_DEFINITION__BODY:
-			case LlvmPackage.FUNCTION_DEFINITION__TLIST:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -177,18 +209,13 @@ public class FunctionDefinitionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.FUNCTION_DEFINITION__PL,
-				 LlvmFactory.eINSTANCE.createParameterList()));
+				(LlvmPackage.Literals.FUNCTION_DEFINITION__PARAMETER,
+				 LlvmFactory.eINSTANCE.createFunctionParameterList()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.FUNCTION_DEFINITION__BODY,
 				 LlvmFactory.eINSTANCE.createFunctionBody()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.FUNCTION_DEFINITION__TLIST,
-				 LlvmFactory.eINSTANCE.createTypeList()));
 	}
 
 }

@@ -32,7 +32,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class ArithmeticOperationItemProvider
-	extends StandartInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -101,6 +101,7 @@ public class ArithmeticOperationItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.ARITHMETIC_OPERATION__RESULT);
 			childrenFeatures.add(LlvmPackage.Literals.ARITHMETIC_OPERATION__OPTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.ARITHMETIC_OPERATION__VALUE1);
 			childrenFeatures.add(LlvmPackage.Literals.ARITHMETIC_OPERATION__VALUE2);
@@ -162,6 +163,7 @@ public class ArithmeticOperationItemProvider
 			case LlvmPackage.ARITHMETIC_OPERATION__OPERATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case LlvmPackage.ARITHMETIC_OPERATION__RESULT:
 			case LlvmPackage.ARITHMETIC_OPERATION__OPTYPE:
 			case LlvmPackage.ARITHMETIC_OPERATION__VALUE1:
 			case LlvmPackage.ARITHMETIC_OPERATION__VALUE2:
@@ -184,6 +186,11 @@ public class ArithmeticOperationItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.ARITHMETIC_OPERATION__RESULT,
+				 LlvmFactory.eINSTANCE.createAddress()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.ARITHMETIC_OPERATION__OPTYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -200,6 +207,11 @@ public class ArithmeticOperationItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ARITHMETIC_OPERATION__VALUE1,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.ARITHMETIC_OPERATION__VALUE1,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -210,12 +222,12 @@ public class ArithmeticOperationItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ARITHMETIC_OPERATION__VALUE1,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ARITHMETIC_OPERATION__VALUE1,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -225,6 +237,11 @@ public class ArithmeticOperationItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ARITHMETIC_OPERATION__VALUE2,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.ARITHMETIC_OPERATION__VALUE2,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -235,12 +252,12 @@ public class ArithmeticOperationItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ARITHMETIC_OPERATION__VALUE2,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ARITHMETIC_OPERATION__VALUE2,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -260,6 +277,7 @@ public class ArithmeticOperationItemProvider
 		Object childObject = child;
 
 		boolean qualify =
+			childFeature == LlvmPackage.Literals.ARITHMETIC_OPERATION__OPTYPE ||
 			childFeature == LlvmPackage.Literals.ARITHMETIC_OPERATION__VALUE1 ||
 			childFeature == LlvmPackage.Literals.ARITHMETIC_OPERATION__VALUE2;
 

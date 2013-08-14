@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class SelectItemProvider
-	extends StandartInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -76,6 +76,7 @@ public class SelectItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.SELECT__RESULT);
 			childrenFeatures.add(LlvmPackage.Literals.SELECT__CONDITIONTYPE);
 			childrenFeatures.add(LlvmPackage.Literals.SELECT__CONDITIONVALUE);
 			childrenFeatures.add(LlvmPackage.Literals.SELECT__VAL1TYPE);
@@ -134,6 +135,7 @@ public class SelectItemProvider
 
 		switch (notification.getFeatureID(Select.class))
 		{
+			case LlvmPackage.SELECT__RESULT:
 			case LlvmPackage.SELECT__CONDITIONTYPE:
 			case LlvmPackage.SELECT__CONDITIONVALUE:
 			case LlvmPackage.SELECT__VAL1TYPE:
@@ -159,6 +161,11 @@ public class SelectItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.SELECT__RESULT,
+				 LlvmFactory.eINSTANCE.createAddress()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.SELECT__CONDITIONTYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -175,6 +182,11 @@ public class SelectItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SELECT__CONDITIONVALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SELECT__CONDITIONVALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -185,12 +197,12 @@ public class SelectItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SELECT__CONDITIONVALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SELECT__CONDITIONVALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -215,6 +227,11 @@ public class SelectItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SELECT__VAL1VALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SELECT__VAL1VALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -225,12 +242,12 @@ public class SelectItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SELECT__VAL1VALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SELECT__VAL1VALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -255,6 +272,11 @@ public class SelectItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SELECT__VAL2VALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.SELECT__VAL2VALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -265,12 +287,12 @@ public class SelectItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SELECT__VAL2VALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.SELECT__VAL2VALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -58,31 +58,8 @@ public class MainLevelEntityItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
-			addMetaPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Meta feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addMetaPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_MainLevelEntity_meta_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_MainLevelEntity_meta_feature", "_UI_MainLevelEntity_type"),
-				 LlvmPackage.Literals.MAIN_LEVEL_ENTITY__META,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -117,13 +94,6 @@ public class MainLevelEntityItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(MainLevelEntity.class))
-		{
-			case LlvmPackage.MAIN_LEVEL_ENTITY__META:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 

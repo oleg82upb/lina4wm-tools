@@ -7,6 +7,7 @@ import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.LlvmFactory;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,12 +16,14 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -30,7 +33,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class AllocItemProvider
-	extends StandartInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -59,8 +62,32 @@ public class AllocItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
+			addAlignPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Align feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAlignPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Alloc_align_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Alloc_align_feature", "_UI_Alloc_type"),
+				 LlvmPackage.Literals.ALLOC__ALIGN,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -76,6 +103,7 @@ public class AllocItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(LlvmPackage.Literals.ALLOC__RESULT);
 			childrenFeatures.add(LlvmPackage.Literals.ALLOC__TYPE);
 			childrenFeatures.add(LlvmPackage.Literals.ALLOC__TYPELIST);
 			childrenFeatures.add(LlvmPackage.Literals.ALLOC__NUMELEMENTSTYPE);
@@ -116,7 +144,11 @@ public class AllocItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Alloc_type");
+		BigDecimal labelValue = ((Alloc)object).getAlign();
+		String label = labelValue == null ? null : labelValue.toString();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Alloc_type") :
+			getString("_UI_Alloc_type") + " " + label;
 	}
 
 	/**
@@ -132,6 +164,10 @@ public class AllocItemProvider
 
 		switch (notification.getFeatureID(Alloc.class))
 		{
+			case LlvmPackage.ALLOC__ALIGN:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case LlvmPackage.ALLOC__RESULT:
 			case LlvmPackage.ALLOC__TYPE:
 			case LlvmPackage.ALLOC__TYPELIST:
 			case LlvmPackage.ALLOC__NUMELEMENTSTYPE:
@@ -155,6 +191,11 @@ public class AllocItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(LlvmPackage.Literals.ALLOC__RESULT,
+				 LlvmFactory.eINSTANCE.createAddress()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(LlvmPackage.Literals.ALLOC__TYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
@@ -171,7 +212,7 @@ public class AllocItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ALLOC__TYPELIST,
-				 LlvmFactory.eINSTANCE.createTypeList()));
+				 LlvmFactory.eINSTANCE.createParameterList()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -191,6 +232,11 @@ public class AllocItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ALLOC__NUMELEMENTSVALUE,
+				 LlvmFactory.eINSTANCE.createAddressUse()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.ALLOC__NUMELEMENTSVALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
@@ -201,12 +247,12 @@ public class AllocItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ALLOC__NUMELEMENTSVALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.ALLOC__NUMELEMENTSVALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -227,7 +273,8 @@ public class AllocItemProvider
 
 		boolean qualify =
 			childFeature == LlvmPackage.Literals.ALLOC__TYPE ||
-			childFeature == LlvmPackage.Literals.ALLOC__NUMELEMENTSTYPE;
+			childFeature == LlvmPackage.Literals.ALLOC__NUMELEMENTSTYPE ||
+			childFeature == LlvmPackage.Literals.ALLOC__NUMELEMENTSVALUE;
 
 		if (qualify)
 		{

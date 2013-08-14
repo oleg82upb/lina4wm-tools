@@ -79,9 +79,7 @@ public class ParameterListItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(LlvmPackage.Literals.PARAMETER_LIST__TYPES);
-			childrenFeatures.add(LlvmPackage.Literals.PARAMETER_LIST__LISTS);
-			childrenFeatures.add(LlvmPackage.Literals.PARAMETER_LIST__VARIABLES);
+			childrenFeatures.add(LlvmPackage.Literals.PARAMETER_LIST__PARAMS);
 		}
 		return childrenFeatures;
 	}
@@ -134,9 +132,7 @@ public class ParameterListItemProvider
 
 		switch (notification.getFeatureID(ParameterList.class))
 		{
-			case LlvmPackage.PARAMETER_LIST__TYPES:
-			case LlvmPackage.PARAMETER_LIST__LISTS:
-			case LlvmPackage.PARAMETER_LIST__VARIABLES:
+			case LlvmPackage.PARAMETER_LIST__PARAMS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -156,48 +152,8 @@ public class ParameterListItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.PARAMETER_LIST__TYPES,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.PARAMETER_LIST__TYPES,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.PARAMETER_LIST__TYPES,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.PARAMETER_LIST__LISTS,
-				 LlvmFactory.eINSTANCE.createTypeList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.PARAMETER_LIST__VARIABLES,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.PARAMETER_LIST__VARIABLES,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.PARAMETER_LIST__VARIABLES,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.PARAMETER_LIST__VARIABLES,
-				 LlvmFactory.eINSTANCE.createCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.PARAMETER_LIST__VARIABLES,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
+				(LlvmPackage.Literals.PARAMETER_LIST__PARAMS,
+				 LlvmFactory.eINSTANCE.createParameter()));
 	}
 
 	/**

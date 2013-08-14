@@ -104,7 +104,7 @@ public class PredefinedItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Predefined)object).getPointer();
+		String label = ((Predefined)object).getFunctionInput();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Predefined_type") :
 			getString("_UI_Predefined_type") + " " + label;

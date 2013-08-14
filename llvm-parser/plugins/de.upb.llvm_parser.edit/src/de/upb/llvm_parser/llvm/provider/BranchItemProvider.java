@@ -15,12 +15,14 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -30,7 +32,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class BranchItemProvider
-	extends ReturnInstructionItemProvider
+	extends InstructionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -59,8 +61,80 @@ public class BranchItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
+			addDestinationPropertyDescriptor(object);
+			addLabelTruePropertyDescriptor(object);
+			addLabelFalsePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Destination feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDestinationPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Branch_destination_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Branch_destination_feature", "_UI_Branch_type"),
+				 LlvmPackage.Literals.BRANCH__DESTINATION,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Label True feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLabelTruePropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Branch_labelTrue_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Branch_labelTrue_feature", "_UI_Branch_type"),
+				 LlvmPackage.Literals.BRANCH__LABEL_TRUE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Label False feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLabelFalsePropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Branch_labelFalse_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Branch_labelFalse_feature", "_UI_Branch_type"),
+				 LlvmPackage.Literals.BRANCH__LABEL_FALSE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -76,12 +150,7 @@ public class BranchItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(LlvmPackage.Literals.BRANCH__DESTINATION);
 			childrenFeatures.add(LlvmPackage.Literals.BRANCH__CONDVALUE);
-			childrenFeatures.add(LlvmPackage.Literals.BRANCH__LABEL_TRUETYPE);
-			childrenFeatures.add(LlvmPackage.Literals.BRANCH__LABEL_TRUE);
-			childrenFeatures.add(LlvmPackage.Literals.BRANCH__LABEL_FALSETYPE);
-			childrenFeatures.add(LlvmPackage.Literals.BRANCH__LABEL_FALSE);
 		}
 		return childrenFeatures;
 	}
@@ -118,7 +187,10 @@ public class BranchItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Branch_type");
+		String label = ((Branch)object).getDestination();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Branch_type") :
+			getString("_UI_Branch_type") + " " + label;
 	}
 
 	/**
@@ -135,11 +207,11 @@ public class BranchItemProvider
 		switch (notification.getFeatureID(Branch.class))
 		{
 			case LlvmPackage.BRANCH__DESTINATION:
-			case LlvmPackage.BRANCH__CONDVALUE:
-			case LlvmPackage.BRANCH__LABEL_TRUETYPE:
 			case LlvmPackage.BRANCH__LABEL_TRUE:
-			case LlvmPackage.BRANCH__LABEL_FALSETYPE:
 			case LlvmPackage.BRANCH__LABEL_FALSE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case LlvmPackage.BRANCH__CONDVALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -159,161 +231,33 @@ public class BranchItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__DESTINATION,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__DESTINATION,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__DESTINATION,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__DESTINATION,
-				 LlvmFactory.eINSTANCE.createCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__DESTINATION,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(LlvmPackage.Literals.BRANCH__CONDVALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__CONDVALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__CONDVALUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__CONDVALUE,
-				 LlvmFactory.eINSTANCE.createCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__CONDVALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__LABEL_TRUETYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__LABEL_TRUETYPE,
 				 LlvmFactory.eINSTANCE.createAddressUse()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__LABEL_TRUETYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__LABEL_TRUE,
+				(LlvmPackage.Literals.BRANCH__CONDVALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__LABEL_TRUE,
+				(LlvmPackage.Literals.BRANCH__CONDVALUE,
 				 LlvmFactory.eINSTANCE.createConstant()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__LABEL_TRUE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
+				(LlvmPackage.Literals.BRANCH__CONDVALUE,
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__LABEL_TRUE,
-				 LlvmFactory.eINSTANCE.createCast()));
+				(LlvmPackage.Literals.BRANCH__CONDVALUE,
+				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__LABEL_TRUE,
+				(LlvmPackage.Literals.BRANCH__CONDVALUE,
 				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__LABEL_FALSETYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__LABEL_FALSETYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__LABEL_FALSETYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__LABEL_FALSE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__LABEL_FALSE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__LABEL_FALSE,
-				 LlvmFactory.eINSTANCE.createNonConstantValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__LABEL_FALSE,
-				 LlvmFactory.eINSTANCE.createCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__LABEL_FALSE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == LlvmPackage.Literals.BRANCH__DESTINATION ||
-			childFeature == LlvmPackage.Literals.BRANCH__CONDVALUE ||
-			childFeature == LlvmPackage.Literals.BRANCH__LABEL_TRUE ||
-			childFeature == LlvmPackage.Literals.BRANCH__LABEL_FALSE ||
-			childFeature == LlvmPackage.Literals.BRANCH__LABEL_TRUETYPE ||
-			childFeature == LlvmPackage.Literals.BRANCH__LABEL_FALSETYPE;
-
-		if (qualify)
-		{
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }
