@@ -1,14 +1,39 @@
 -- @nsURI MM=http://www.upb.de/lina/lll
 -- @atlcompiler atl2010
 
+-- LAZY RULES ARE NOT SUPPORTED FOR REFINING MODE ...  ATL SDK - ATLAS Transformation
+-- Language SDK
+-- Version: 3.3.1.v201209061455	org.eclipse.m2m.atl.sdk.feature.group	Eclipse
+-- Modeling Project
 
+-- ALSO NOT SUPPORTED: Iterativ constrains like 'using' and called rules.
+
+-- 1. Refinement
+-- Muss mind. 2 mal ausgeführt werden.
+
+-- 1. Iteration:
+-- Set Condition of a Conditional Branch
+
+-- 2. Iteration:
+-- Eventually remove the Instruction, thats responsible for the Condition of the Conditional Branch 
+	
 module refinement;
 create OUT: MM refining IN: MM;
 
+-- This Helper just collect all Instructions of the Function, the input-Instruction is contained 
 helper def: getInstructions(input: MM!Instruction): OrderedSet(MM!Instruction) =
 	input.refImmediateComposite().instructions;
 
+-- Selects the Instruction, that is responsible for the Condition of a Conditional Branch
+helper def: getBranchLC(input: MM!ConditionalBranch): MM!Instruction =
+	thisModule.getInstructions(input) -> select(ea | ea.oclIsTypeOf(MM!LocalComputation))
+			-> select(i | i.instructionResult.name = input.instructionResult.name).
+			debug().first();
+
+
 rule BranchCompare {
+	-- Es werden die Conditional Branches ausgewählt, deren Conditions nicht gesetzt sind. 
+	-- Und diese wird ersetzt durch eine, deren Condition gesetzt ist.
 	from
 		b: MM!ConditionalBranch (
 			(b.oclIsTypeOf(MM!ConditionalBranch))and
@@ -16,14 +41,14 @@ rule BranchCompare {
 		)
 	to
 		c: MM!ConditionalBranch (
-			condition <- if b.instructionResult.name = 'true' then
+			condition <- if b.instructionResult.name = 'true' then -- br true
 					MM!"expressions::BooleanValue".newInstance().refSetValue('value',
 							true)
 				else
-					if b.instructionResult.name = 'false' then
+					if b.instructionResult.name = 'false' then -- br false
 						MM!"expressions::BooleanValue".newInstance().refSetValue('value',
 								false)
-					else
+					else -- Hier wird unterschieden ob es sich um eine CompareInstruction oder einen Cast handelt.
 						if thisModule.getBranchLC(b).expression.
 								oclIsTypeOf(MM!"expressions::Variable") then
 							MM!"expressions::Variable".newInstance().
@@ -34,24 +59,10 @@ rule BranchCompare {
 						endif
 					endif
 				endif
-
 		)
 }
 
--- This Helper would be helpful, but LLL-Instruction->parameters cant contain
--- expressions-Variable
---helper def: EhasNU(input :MM!"expressions::Variable"): Boolean =
---	not MM!LocalComputation.allInstances() -> select(i |
--- i.parameters.indexOf(input)).isEmpty();
---helper def: VhasNU(input :String, instr: MM!Instruction): Boolean =
---	not MM!LocalComputation.allInstances() -> select(i | i.parameters.includes()and
--- i.function=instr.function).isEmpty();
-helper def: getBranchLC(input: MM!ConditionalBranch): MM!Instruction =
-	thisModule.getInstructions(input) -> select(ea | ea.oclIsTypeOf(MM!LocalComputation))
-			-> select(i | i.instructionResult.name = input.instructionResult.name).
-			debug().first();
-
---
+-- LocalComputaions, die keine Expression haben oder nirgends contained sind werden entfernt
 rule DropLC {
 	from
 		input: MM!LocalComputation (
@@ -59,42 +70,15 @@ rule DropLC {
 					oclIsUndefined()
 		)
 	to
+		drop
 }
 
--- LAZY RULES ARE NOT SUPPORTED FOR REFINING MODE ...  ATL SDK - ATLAS Transformation
--- Language SDK
--- Version: 3.3.1.v201209061455	org.eclipse.m2m.atl.sdk.feature.group	Eclipse
--- Modeling Project
----- Select Branch that is only target of a jump once.
---rule DeleteBranch {
---	from
---		b: MM!Goto (
---			thisModule.iTargetA().count(b) + thisModule.iTargetB().count(b) +
--- 			thisModule.iTargetC().count(b) = 1
---		)
---	to
---
-
---}
-
-
+-- Expressions, die nirgends contained ist werden entfernt
 rule DeleteNoUse {
 	from
 		ex: MM!"expressions::Expression" (
 			ex.refImmediateComposite().oclIsTypeOf(MM!Program)
 		)
 	to
+		drop
 }
-
-
-helper def: iTargetA(): Set(MM!Instruction) =
-	MM!Goto.allInstances() -> select(goto | goto.target.instruction.oclIsTypeOf(MM!Goto))
-			-> collect(i | i.target.instruction);
-
-helper def: iTargetB(): Set(MM!Instruction) =
-	MM!ConditionalBranch.allInstances() -> select(cb1 | cb1.target.instruction.
-			oclIsTypeOf(MM!Goto)) -> collect(i | i.target.instruction);
-
-helper def: iTargetC(): Set(MM!Instruction) =
-	MM!ConditionalBranch.allInstances() -> select(cb2 | cb2.elseTarget.instruction.
-			oclIsTypeOf(MM!Goto)) -> collect(i | i.target.instruction);
