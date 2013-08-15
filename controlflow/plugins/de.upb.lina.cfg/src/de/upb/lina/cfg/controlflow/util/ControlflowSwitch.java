@@ -38,7 +38,8 @@ public class ControlflowSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public ControlflowSwitch() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = ControlflowPackage.eINSTANCE;
 		}
 	}
@@ -65,26 +66,31 @@ public class ControlflowSwitch<T> extends Switch<T> {
 	 */
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
-		switch (classifierID) {
-			case ControlflowPackage.CONTROL_FLOW_DIAGRAM: {
+		switch (classifierID)
+		{
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM:
+			{
 				ControlFlowDiagram controlFlowDiagram = (ControlFlowDiagram)theEObject;
 				T result = caseControlFlowDiagram(controlFlowDiagram);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ControlflowPackage.CONTROL_FLOW_LOCATION: {
+			case ControlflowPackage.CONTROL_FLOW_LOCATION:
+			{
 				ControlFlowLocation controlFlowLocation = (ControlFlowLocation)theEObject;
 				T result = caseControlFlowLocation(controlFlowLocation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ControlflowPackage.TRANSITION: {
+			case ControlflowPackage.TRANSITION:
+			{
 				Transition transition = (Transition)theEObject;
 				T result = caseTransition(transition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ControlflowPackage.GUARDED_TRANSITION: {
+			case ControlflowPackage.GUARDED_TRANSITION:
+			{
 				GuardedTransition guardedTransition = (GuardedTransition)theEObject;
 				T result = caseGuardedTransition(guardedTransition);
 				if (result == null) result = caseTransition(guardedTransition);
