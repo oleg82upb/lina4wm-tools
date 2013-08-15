@@ -54,6 +54,7 @@ public interface Transition extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getOutgoing <em>Outgoing</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Source</em>' reference isn't clear,
@@ -63,7 +64,8 @@ public interface Transition extends EObject {
 	 * @return the value of the '<em>Source</em>' reference.
 	 * @see #setSource(ControlFlowLocation)
 	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getTransition_Source()
-	 * @model
+	 * @see de.upb.lina.cfg.controlflow.ControlFlowLocation#getOutgoing
+	 * @model opposite="outgoing"
 	 * @generated
 	 */
 	ControlFlowLocation getSource();
@@ -80,6 +82,7 @@ public interface Transition extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getIncoming <em>Incoming</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Target</em>' reference isn't clear,
@@ -89,7 +92,8 @@ public interface Transition extends EObject {
 	 * @return the value of the '<em>Target</em>' reference.
 	 * @see #setTarget(ControlFlowLocation)
 	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getTransition_Target()
-	 * @model
+	 * @see de.upb.lina.cfg.controlflow.ControlFlowLocation#getIncoming
+	 * @model opposite="incoming"
 	 * @generated
 	 */
 	ControlFlowLocation getTarget();
