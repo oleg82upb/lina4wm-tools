@@ -173,7 +173,7 @@ public class LlvmSwitch<T> extends Switch<T>
 			{
 				Vector vector = (Vector)theEObject;
 				T result = caseVector(vector);
-				if (result == null) result = caseAggregate_Types(vector);
+				if (result == null) result = caseAggregate_Type(vector);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -181,14 +181,14 @@ public class LlvmSwitch<T> extends Switch<T>
 			{
 				Array array = (Array)theEObject;
 				T result = caseArray(array);
-				if (result == null) result = caseAggregate_Types(array);
+				if (result == null) result = caseAggregate_Type(array);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case LlvmPackage.AGGREGATE_TYPES:
+			case LlvmPackage.AGGREGATE_TYPE:
 			{
-				Aggregate_Types aggregate_Types = (Aggregate_Types)theEObject;
-				T result = caseAggregate_Types(aggregate_Types);
+				Aggregate_Type aggregate_Type = (Aggregate_Type)theEObject;
+				T result = caseAggregate_Type(aggregate_Type);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -226,7 +226,7 @@ public class LlvmSwitch<T> extends Switch<T>
 			{
 				Structure structure = (Structure)theEObject;
 				T result = caseStructure(structure);
-				if (result == null) result = caseAggregate_Types(structure);
+				if (result == null) result = caseAggregate_Type(structure);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -255,13 +255,6 @@ public class LlvmSwitch<T> extends Switch<T>
 			{
 				FunctionParameterList functionParameterList = (FunctionParameterList)theEObject;
 				T result = caseFunctionParameterList(functionParameterList);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case LlvmPackage.TYPE_LIST:
-			{
-				TypeList typeList = (TypeList)theEObject;
-				T result = caseTypeList(typeList);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -354,22 +347,6 @@ public class LlvmSwitch<T> extends Switch<T>
 				NestedGetElementPtr nestedGetElementPtr = (NestedGetElementPtr)theEObject;
 				T result = caseNestedGetElementPtr(nestedGetElementPtr);
 				if (result == null) result = caseValue(nestedGetElementPtr);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case LlvmPackage.EXTRACT_VALUE:
-			{
-				ExtractValue extractValue = (ExtractValue)theEObject;
-				T result = caseExtractValue(extractValue);
-				if (result == null) result = caseInstruction(extractValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case LlvmPackage.INSERT_VALUE:
-			{
-				InsertValue insertValue = (InsertValue)theEObject;
-				T result = caseInsertValue(insertValue);
-				if (result == null) result = caseInstruction(insertValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -475,6 +452,22 @@ public class LlvmSwitch<T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case LlvmPackage.EXTRACT_VALUE:
+			{
+				ExtractValue extractValue = (ExtractValue)theEObject;
+				T result = caseExtractValue(extractValue);
+				if (result == null) result = caseInstruction(extractValue);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.INSERT_VALUE:
+			{
+				InsertValue insertValue = (InsertValue)theEObject;
+				T result = caseInsertValue(insertValue);
+				if (result == null) result = caseInstruction(insertValue);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case LlvmPackage.EXTRACT_ELEMENT:
 			{
 				ExtractElement extractElement = (ExtractElement)theEObject;
@@ -520,6 +513,13 @@ public class LlvmSwitch<T> extends Switch<T>
 				de.upb.llvm_parser.llvm.Switch switch_ = (de.upb.llvm_parser.llvm.Switch)theEObject;
 				T result = caseSwitch(switch_);
 				if (result == null) result = caseInstruction(switch_);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LlvmPackage.SWITCH_CASE:
+			{
+				SwitchCase switchCase = (SwitchCase)theEObject;
+				T result = caseSwitchCase(switchCase);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -792,17 +792,17 @@ public class LlvmSwitch<T> extends Switch<T>
 	}
 
   /**
-	 * Returns the result of interpreting the object as an instance of '<em>Aggregate Types</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Aggregate Type</em>'.
 	 * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Aggregate Types</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Aggregate Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-  public T caseAggregate_Types(Aggregate_Types object)
+  public T caseAggregate_Type(Aggregate_Type object)
   {
 		return null;
 	}
@@ -947,22 +947,6 @@ public class LlvmSwitch<T> extends Switch<T>
 	 * @generated
 	 */
   public T caseFunctionParameterList(FunctionParameterList object)
-  {
-		return null;
-	}
-
-  /**
-	 * Returns the result of interpreting the object as an instance of '<em>Type List</em>'.
-	 * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type List</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-  public T caseTypeList(TypeList object)
   {
 		return null;
 	}
@@ -1155,38 +1139,6 @@ public class LlvmSwitch<T> extends Switch<T>
 	 * @generated
 	 */
   public T caseNestedGetElementPtr(NestedGetElementPtr object)
-  {
-		return null;
-	}
-
-  /**
-	 * Returns the result of interpreting the object as an instance of '<em>Extract Value</em>'.
-	 * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Extract Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-  public T caseExtractValue(ExtractValue object)
-  {
-		return null;
-	}
-
-  /**
-	 * Returns the result of interpreting the object as an instance of '<em>Insert Value</em>'.
-	 * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Insert Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-  public T caseInsertValue(InsertValue object)
   {
 		return null;
 	}
@@ -1400,6 +1352,38 @@ public class LlvmSwitch<T> extends Switch<T>
 	}
 
   /**
+	 * Returns the result of interpreting the object as an instance of '<em>Extract Value</em>'.
+	 * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Extract Value</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+  public T caseExtractValue(ExtractValue object)
+  {
+		return null;
+	}
+
+  /**
+	 * Returns the result of interpreting the object as an instance of '<em>Insert Value</em>'.
+	 * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Insert Value</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+  public T caseInsertValue(InsertValue object)
+  {
+		return null;
+	}
+
+  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Extract Element</em>'.
 	 * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1491,6 +1475,22 @@ public class LlvmSwitch<T> extends Switch<T>
 	 * @generated
 	 */
   public T caseSwitch(de.upb.llvm_parser.llvm.Switch object)
+  {
+		return null;
+	}
+
+  /**
+	 * Returns the result of interpreting the object as an instance of '<em>Switch Case</em>'.
+	 * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Switch Case</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+  public T caseSwitchCase(SwitchCase object)
   {
 		return null;
 	}

@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class ArrayImpl extends Aggregate_TypesImpl implements Array
+public class ArrayImpl extends Aggregate_TypeImpl implements Array
 {
   /**
 	 * The default value of the '{@link #getLength() <em>Length</em>}' attribute.

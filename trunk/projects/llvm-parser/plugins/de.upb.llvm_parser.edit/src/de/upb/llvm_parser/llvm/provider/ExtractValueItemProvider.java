@@ -102,9 +102,7 @@ public class ExtractValueItemProvider
 		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.EXTRACT_VALUE__RESULT);
-			childrenFeatures.add(LlvmPackage.Literals.EXTRACT_VALUE__ARRAY);
-			childrenFeatures.add(LlvmPackage.Literals.EXTRACT_VALUE__STRUCT);
-			childrenFeatures.add(LlvmPackage.Literals.EXTRACT_VALUE__VALUE);
+			childrenFeatures.add(LlvmPackage.Literals.EXTRACT_VALUE__AGGERATE);
 		}
 		return childrenFeatures;
 	}
@@ -161,9 +159,7 @@ public class ExtractValueItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case LlvmPackage.EXTRACT_VALUE__RESULT:
-			case LlvmPackage.EXTRACT_VALUE__ARRAY:
-			case LlvmPackage.EXTRACT_VALUE__STRUCT:
-			case LlvmPackage.EXTRACT_VALUE__VALUE:
+			case LlvmPackage.EXTRACT_VALUE__AGGERATE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -188,43 +184,8 @@ public class ExtractValueItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_VALUE__ARRAY,
-				 LlvmFactory.eINSTANCE.createArray()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_VALUE__STRUCT,
-				 LlvmFactory.eINSTANCE.createStructure()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_VALUE__VALUE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_VALUE__VALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_VALUE__VALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_VALUE__VALUE,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_VALUE__VALUE,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_VALUE__VALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
+				(LlvmPackage.Literals.EXTRACT_VALUE__AGGERATE,
+				 LlvmFactory.eINSTANCE.createParameter()));
 	}
 
 }

@@ -4,8 +4,7 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.IndirectBranch;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.TypeUse;
-import de.upb.llvm_parser.llvm.Value;
+import de.upb.llvm_parser.llvm.Parameter;
 
 import java.util.Collection;
 
@@ -19,8 +18,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,10 +27,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.IndirectBranchImpl#getAdresstype <em>Adresstype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.IndirectBranchImpl#getAdress <em>Adress</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.IndirectBranchImpl#getLabeltype <em>Labeltype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.IndirectBranchImpl#getLabels <em>Labels</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.IndirectBranchImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.IndirectBranchImpl#getPotTargetLabels <em>Pot Target Labels</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,44 +37,24 @@ import org.eclipse.emf.ecore.util.InternalEList;
 public class IndirectBranchImpl extends InstructionImpl implements IndirectBranch
 {
   /**
-	 * The cached value of the '{@link #getAdresstype() <em>Adresstype</em>}' containment reference.
+	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getAdresstype()
+	 * @see #getTarget()
 	 * @generated
 	 * @ordered
 	 */
-  protected TypeUse adresstype;
+  protected Parameter target;
 
   /**
-	 * The cached value of the '{@link #getAdress() <em>Adress</em>}' containment reference.
+	 * The cached value of the '{@link #getPotTargetLabels() <em>Pot Target Labels</em>}' attribute list.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getAdress()
+	 * @see #getPotTargetLabels()
 	 * @generated
 	 * @ordered
 	 */
-  protected Value adress;
-
-  /**
-	 * The cached value of the '{@link #getLabeltype() <em>Labeltype</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getLabeltype()
-	 * @generated
-	 * @ordered
-	 */
-  protected EList<TypeUse> labeltype;
-
-  /**
-	 * The cached value of the '{@link #getLabels() <em>Labels</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getLabels()
-	 * @generated
-	 * @ordered
-	 */
-  protected EList<Value> labels;
+  protected EList<String> potTargetLabels;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -106,9 +82,9 @@ public class IndirectBranchImpl extends InstructionImpl implements IndirectBranc
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public TypeUse getAdresstype()
+  public Parameter getTarget()
   {
-		return adresstype;
+		return target;
 	}
 
   /**
@@ -116,13 +92,13 @@ public class IndirectBranchImpl extends InstructionImpl implements IndirectBranc
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetAdresstype(TypeUse newAdresstype, NotificationChain msgs)
+  public NotificationChain basicSetTarget(Parameter newTarget, NotificationChain msgs)
   {
-		TypeUse oldAdresstype = adresstype;
-		adresstype = newAdresstype;
+		Parameter oldTarget = target;
+		target = newTarget;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE, oldAdresstype, newAdresstype);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__TARGET, oldTarget, newTarget);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -133,20 +109,20 @@ public class IndirectBranchImpl extends InstructionImpl implements IndirectBranc
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setAdresstype(TypeUse newAdresstype)
+  public void setTarget(Parameter newTarget)
   {
-		if (newAdresstype != adresstype)
+		if (newTarget != target)
 		{
 			NotificationChain msgs = null;
-			if (adresstype != null)
-				msgs = ((InternalEObject)adresstype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE, null, msgs);
-			if (newAdresstype != null)
-				msgs = ((InternalEObject)newAdresstype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE, null, msgs);
-			msgs = basicSetAdresstype(newAdresstype, msgs);
+			if (target != null)
+				msgs = ((InternalEObject)target).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__TARGET, null, msgs);
+			if (newTarget != null)
+				msgs = ((InternalEObject)newTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__TARGET, null, msgs);
+			msgs = basicSetTarget(newTarget, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE, newAdresstype, newAdresstype));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__TARGET, newTarget, newTarget));
 	}
 
   /**
@@ -154,75 +130,13 @@ public class IndirectBranchImpl extends InstructionImpl implements IndirectBranc
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public Value getAdress()
+  public EList<String> getPotTargetLabels()
   {
-		return adress;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public NotificationChain basicSetAdress(Value newAdress, NotificationChain msgs)
-  {
-		Value oldAdress = adress;
-		adress = newAdress;
-		if (eNotificationRequired())
+		if (potTargetLabels == null)
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__ADRESS, oldAdress, newAdress);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+			potTargetLabels = new EDataTypeEList<String>(String.class, this, LlvmPackage.INDIRECT_BRANCH__POT_TARGET_LABELS);
 		}
-		return msgs;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setAdress(Value newAdress)
-  {
-		if (newAdress != adress)
-		{
-			NotificationChain msgs = null;
-			if (adress != null)
-				msgs = ((InternalEObject)adress).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__ADRESS, null, msgs);
-			if (newAdress != null)
-				msgs = ((InternalEObject)newAdress).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__ADRESS, null, msgs);
-			msgs = basicSetAdress(newAdress, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__ADRESS, newAdress, newAdress));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EList<TypeUse> getLabeltype()
-  {
-		if (labeltype == null)
-		{
-			labeltype = new EObjectContainmentEList<TypeUse>(TypeUse.class, this, LlvmPackage.INDIRECT_BRANCH__LABELTYPE);
-		}
-		return labeltype;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EList<Value> getLabels()
-  {
-		if (labels == null)
-		{
-			labels = new EObjectContainmentEList<Value>(Value.class, this, LlvmPackage.INDIRECT_BRANCH__LABELS);
-		}
-		return labels;
+		return potTargetLabels;
 	}
 
   /**
@@ -235,14 +149,8 @@ public class IndirectBranchImpl extends InstructionImpl implements IndirectBranc
   {
 		switch (featureID)
 		{
-			case LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE:
-				return basicSetAdresstype(null, msgs);
-			case LlvmPackage.INDIRECT_BRANCH__ADRESS:
-				return basicSetAdress(null, msgs);
-			case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
-				return ((InternalEList<?>)getLabeltype()).basicRemove(otherEnd, msgs);
-			case LlvmPackage.INDIRECT_BRANCH__LABELS:
-				return ((InternalEList<?>)getLabels()).basicRemove(otherEnd, msgs);
+			case LlvmPackage.INDIRECT_BRANCH__TARGET:
+				return basicSetTarget(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -257,14 +165,10 @@ public class IndirectBranchImpl extends InstructionImpl implements IndirectBranc
   {
 		switch (featureID)
 		{
-			case LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE:
-				return getAdresstype();
-			case LlvmPackage.INDIRECT_BRANCH__ADRESS:
-				return getAdress();
-			case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
-				return getLabeltype();
-			case LlvmPackage.INDIRECT_BRANCH__LABELS:
-				return getLabels();
+			case LlvmPackage.INDIRECT_BRANCH__TARGET:
+				return getTarget();
+			case LlvmPackage.INDIRECT_BRANCH__POT_TARGET_LABELS:
+				return getPotTargetLabels();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -280,19 +184,12 @@ public class IndirectBranchImpl extends InstructionImpl implements IndirectBranc
   {
 		switch (featureID)
 		{
-			case LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE:
-				setAdresstype((TypeUse)newValue);
+			case LlvmPackage.INDIRECT_BRANCH__TARGET:
+				setTarget((Parameter)newValue);
 				return;
-			case LlvmPackage.INDIRECT_BRANCH__ADRESS:
-				setAdress((Value)newValue);
-				return;
-			case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
-				getLabeltype().clear();
-				getLabeltype().addAll((Collection<? extends TypeUse>)newValue);
-				return;
-			case LlvmPackage.INDIRECT_BRANCH__LABELS:
-				getLabels().clear();
-				getLabels().addAll((Collection<? extends Value>)newValue);
+			case LlvmPackage.INDIRECT_BRANCH__POT_TARGET_LABELS:
+				getPotTargetLabels().clear();
+				getPotTargetLabels().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -308,17 +205,11 @@ public class IndirectBranchImpl extends InstructionImpl implements IndirectBranc
   {
 		switch (featureID)
 		{
-			case LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE:
-				setAdresstype((TypeUse)null);
+			case LlvmPackage.INDIRECT_BRANCH__TARGET:
+				setTarget((Parameter)null);
 				return;
-			case LlvmPackage.INDIRECT_BRANCH__ADRESS:
-				setAdress((Value)null);
-				return;
-			case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
-				getLabeltype().clear();
-				return;
-			case LlvmPackage.INDIRECT_BRANCH__LABELS:
-				getLabels().clear();
+			case LlvmPackage.INDIRECT_BRANCH__POT_TARGET_LABELS:
+				getPotTargetLabels().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -334,16 +225,29 @@ public class IndirectBranchImpl extends InstructionImpl implements IndirectBranc
   {
 		switch (featureID)
 		{
-			case LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE:
-				return adresstype != null;
-			case LlvmPackage.INDIRECT_BRANCH__ADRESS:
-				return adress != null;
-			case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
-				return labeltype != null && !labeltype.isEmpty();
-			case LlvmPackage.INDIRECT_BRANCH__LABELS:
-				return labels != null && !labels.isEmpty();
+			case LlvmPackage.INDIRECT_BRANCH__TARGET:
+				return target != null;
+			case LlvmPackage.INDIRECT_BRANCH__POT_TARGET_LABELS:
+				return potTargetLabels != null && !potTargetLabels.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  @Override
+  public String toString()
+  {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (potTargetLabels: ");
+		result.append(potTargetLabels);
+		result.append(')');
+		return result.toString();
 	}
 
 } //IndirectBranchImpl

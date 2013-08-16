@@ -15,12 +15,14 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -59,8 +61,32 @@ public class IndirectBranchItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
+			addPotTargetLabelsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Pot Target Labels feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPotTargetLabelsPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_IndirectBranch_potTargetLabels_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_IndirectBranch_potTargetLabels_feature", "_UI_IndirectBranch_type"),
+				 LlvmPackage.Literals.INDIRECT_BRANCH__POT_TARGET_LABELS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -76,10 +102,7 @@ public class IndirectBranchItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESSTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESS);
-			childrenFeatures.add(LlvmPackage.Literals.INDIRECT_BRANCH__LABELTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.INDIRECT_BRANCH__LABELS);
+			childrenFeatures.add(LlvmPackage.Literals.INDIRECT_BRANCH__TARGET);
 		}
 		return childrenFeatures;
 	}
@@ -132,10 +155,10 @@ public class IndirectBranchItemProvider
 
 		switch (notification.getFeatureID(IndirectBranch.class))
 		{
-			case LlvmPackage.INDIRECT_BRANCH__ADRESSTYPE:
-			case LlvmPackage.INDIRECT_BRANCH__ADRESS:
-			case LlvmPackage.INDIRECT_BRANCH__LABELTYPE:
-			case LlvmPackage.INDIRECT_BRANCH__LABELS:
+			case LlvmPackage.INDIRECT_BRANCH__POT_TARGET_LABELS:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case LlvmPackage.INDIRECT_BRANCH__TARGET:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -155,119 +178,8 @@ public class IndirectBranchItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESSTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESSTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESSTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESS,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESS,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESS,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESS,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESS,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INDIRECT_BRANCH__ADRESS,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELS,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELS,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELS,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELS,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELS,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INDIRECT_BRANCH__LABELS,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == LlvmPackage.Literals.INDIRECT_BRANCH__ADRESSTYPE ||
-			childFeature == LlvmPackage.Literals.INDIRECT_BRANCH__LABELTYPE ||
-			childFeature == LlvmPackage.Literals.INDIRECT_BRANCH__ADRESS ||
-			childFeature == LlvmPackage.Literals.INDIRECT_BRANCH__LABELS;
-
-		if (qualify)
-		{
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
+				(LlvmPackage.Literals.INDIRECT_BRANCH__TARGET,
+				 LlvmFactory.eINSTANCE.createParameter()));
 	}
 
 }

@@ -4,13 +4,13 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Parameter;
-import de.upb.llvm_parser.llvm.TypeUse;
 import de.upb.llvm_parser.llvm.Value;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -40,7 +40,7 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 	 * @generated
 	 * @ordered
 	 */
-  protected TypeUse type;
+  protected EObject type;
 
   /**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
@@ -78,7 +78,7 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public TypeUse getType()
+  public EObject getType()
   {
 		return type;
 	}
@@ -88,9 +88,9 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetType(TypeUse newType, NotificationChain msgs)
+  public NotificationChain basicSetType(EObject newType, NotificationChain msgs)
   {
-		TypeUse oldType = type;
+		EObject oldType = type;
 		type = newType;
 		if (eNotificationRequired())
 		{
@@ -105,7 +105,7 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setType(TypeUse newType)
+  public void setType(EObject newType)
   {
 		if (newType != type)
 		{
@@ -216,7 +216,7 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 		switch (featureID)
 		{
 			case LlvmPackage.PARAMETER__TYPE:
-				setType((TypeUse)newValue);
+				setType((EObject)newValue);
 				return;
 			case LlvmPackage.PARAMETER__VALUE:
 				setValue((Value)newValue);
@@ -236,7 +236,7 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 		switch (featureID)
 		{
 			case LlvmPackage.PARAMETER__TYPE:
-				setType((TypeUse)null);
+				setType((EObject)null);
 				return;
 			case LlvmPackage.PARAMETER__VALUE:
 				setValue((Value)null);

@@ -78,7 +78,7 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
 			case LlvmPackage.PREDEFINED: return createPredefined();
 			case LlvmPackage.VECTOR: return createVector();
 			case LlvmPackage.ARRAY: return createArray();
-			case LlvmPackage.AGGREGATE_TYPES: return createAggregate_Types();
+			case LlvmPackage.AGGREGATE_TYPE: return createAggregate_Type();
 			case LlvmPackage.CONSTANT: return createConstant();
 			case LlvmPackage.PRIMITIVE_VALUE: return createPrimitiveValue();
 			case LlvmPackage.VALUE: return createValue();
@@ -88,7 +88,6 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
 			case LlvmPackage.PARAMETER_LIST: return createParameterList();
 			case LlvmPackage.FUNCTION_PARAMETER: return createFunctionParameter();
 			case LlvmPackage.FUNCTION_PARAMETER_LIST: return createFunctionParameterList();
-			case LlvmPackage.TYPE_LIST: return createTypeList();
 			case LlvmPackage.FUNCTION_BODY: return createFunctionBody();
 			case LlvmPackage.INSTRUCTION: return createInstruction();
 			case LlvmPackage.BASIC_BLOCK: return createBasicBlock();
@@ -101,8 +100,6 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
 			case LlvmPackage.METADATA_VALUE: return createMetadataValue();
 			case LlvmPackage.GET_ELEMENT_PTR: return createGetElementPtr();
 			case LlvmPackage.NESTED_GET_ELEMENT_PTR: return createNestedGetElementPtr();
-			case LlvmPackage.EXTRACT_VALUE: return createExtractValue();
-			case LlvmPackage.INSERT_VALUE: return createInsertValue();
 			case LlvmPackage.FENCE: return createFence();
 			case LlvmPackage.CMP_XCHG: return createCmpXchg();
 			case LlvmPackage.ATOMIC_RMW: return createAtomicRMW();
@@ -116,12 +113,15 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
 			case LlvmPackage.CLAUSE: return createClause();
 			case LlvmPackage.SELECT: return createSelect();
 			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS: return createVariableAttributeAccess();
+			case LlvmPackage.EXTRACT_VALUE: return createExtractValue();
+			case LlvmPackage.INSERT_VALUE: return createInsertValue();
 			case LlvmPackage.EXTRACT_ELEMENT: return createExtractElement();
 			case LlvmPackage.INSERT_ELEMENT: return createInsertElement();
 			case LlvmPackage.SHUFFLE_VECTOR: return createShuffleVector();
 			case LlvmPackage.COMPARE: return createCompare();
 			case LlvmPackage.INDIRECT_BRANCH: return createIndirectBranch();
 			case LlvmPackage.SWITCH: return createSwitch();
+			case LlvmPackage.SWITCH_CASE: return createSwitchCase();
 			case LlvmPackage.INVOKE: return createInvoke();
 			case LlvmPackage.RESUME: return createResume();
 			case LlvmPackage.UNREACHABLE: return createUnreachable();
@@ -291,10 +291,10 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public Aggregate_Types createAggregate_Types()
+  public Aggregate_Type createAggregate_Type()
   {
-		Aggregate_TypesImpl aggregate_Types = new Aggregate_TypesImpl();
-		return aggregate_Types;
+		Aggregate_TypeImpl aggregate_Type = new Aggregate_TypeImpl();
+		return aggregate_Type;
 	}
 
   /**
@@ -394,17 +394,6 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
   {
 		FunctionParameterListImpl functionParameterList = new FunctionParameterListImpl();
 		return functionParameterList;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public TypeList createTypeList()
-  {
-		TypeListImpl typeList = new TypeListImpl();
-		return typeList;
 	}
 
   /**
@@ -537,28 +526,6 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
   {
 		NestedGetElementPtrImpl nestedGetElementPtr = new NestedGetElementPtrImpl();
 		return nestedGetElementPtr;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public ExtractValue createExtractValue()
-  {
-		ExtractValueImpl extractValue = new ExtractValueImpl();
-		return extractValue;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public InsertValue createInsertValue()
-  {
-		InsertValueImpl insertValue = new InsertValueImpl();
-		return insertValue;
 	}
 
   /**
@@ -709,6 +676,28 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
    * <!-- end-user-doc -->
 	 * @generated
 	 */
+  public ExtractValue createExtractValue()
+  {
+		ExtractValueImpl extractValue = new ExtractValueImpl();
+		return extractValue;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public InsertValue createInsertValue()
+  {
+		InsertValueImpl insertValue = new InsertValueImpl();
+		return insertValue;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
   public ExtractElement createExtractElement()
   {
 		ExtractElementImpl extractElement = new ExtractElementImpl();
@@ -768,6 +757,17 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
   {
 		SwitchImpl switch_ = new SwitchImpl();
 		return switch_;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public SwitchCase createSwitchCase()
+  {
+		SwitchCaseImpl switchCase = new SwitchCaseImpl();
+		return switchCase;
 	}
 
   /**

@@ -209,16 +209,6 @@ public class BasicBlockItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createExtractValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
-				 LlvmFactory.eINSTANCE.createInsertValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
 				 LlvmFactory.eINSTANCE.createFence()));
 
 		newChildDescriptors.add
@@ -270,6 +260,16 @@ public class BasicBlockItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
 				 LlvmFactory.eINSTANCE.createVariableAttributeAccess()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
+				 LlvmFactory.eINSTANCE.createExtractValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.BASIC_BLOCK__INSTRUCTIONS,
+				 LlvmFactory.eINSTANCE.createInsertValue()));
 
 		newChildDescriptors.add
 			(createChildParameter

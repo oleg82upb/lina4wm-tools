@@ -149,13 +149,13 @@ public interface LlvmFactory extends EFactory
   Array createArray();
 
   /**
-	 * Returns a new object of class '<em>Aggregate Types</em>'.
+	 * Returns a new object of class '<em>Aggregate Type</em>'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Aggregate Types</em>'.
+	 * @return a new object of class '<em>Aggregate Type</em>'.
 	 * @generated
 	 */
-  Aggregate_Types createAggregate_Types();
+  Aggregate_Type createAggregate_Type();
 
   /**
 	 * Returns a new object of class '<em>Constant</em>'.
@@ -237,15 +237,6 @@ public interface LlvmFactory extends EFactory
 	 * @generated
 	 */
   FunctionParameterList createFunctionParameterList();
-
-  /**
-	 * Returns a new object of class '<em>Type List</em>'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type List</em>'.
-	 * @generated
-	 */
-  TypeList createTypeList();
 
   /**
 	 * Returns a new object of class '<em>Function Body</em>'.
@@ -354,24 +345,6 @@ public interface LlvmFactory extends EFactory
 	 * @generated
 	 */
   NestedGetElementPtr createNestedGetElementPtr();
-
-  /**
-	 * Returns a new object of class '<em>Extract Value</em>'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Extract Value</em>'.
-	 * @generated
-	 */
-  ExtractValue createExtractValue();
-
-  /**
-	 * Returns a new object of class '<em>Insert Value</em>'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Insert Value</em>'.
-	 * @generated
-	 */
-  InsertValue createInsertValue();
 
   /**
 	 * Returns a new object of class '<em>Fence</em>'.
@@ -491,6 +464,24 @@ public interface LlvmFactory extends EFactory
   VariableAttributeAccess createVariableAttributeAccess();
 
   /**
+	 * Returns a new object of class '<em>Extract Value</em>'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Extract Value</em>'.
+	 * @generated
+	 */
+  ExtractValue createExtractValue();
+
+  /**
+	 * Returns a new object of class '<em>Insert Value</em>'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Insert Value</em>'.
+	 * @generated
+	 */
+  InsertValue createInsertValue();
+
+  /**
 	 * Returns a new object of class '<em>Extract Element</em>'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -543,6 +534,15 @@ public interface LlvmFactory extends EFactory
 	 * @generated
 	 */
   Switch createSwitch();
+
+  /**
+	 * Returns a new object of class '<em>Switch Case</em>'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Switch Case</em>'.
+	 * @generated
+	 */
+  SwitchCase createSwitchCase();
 
   /**
 	 * Returns a new object of class '<em>Invoke</em>'.

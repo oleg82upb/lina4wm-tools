@@ -62,8 +62,7 @@ public class BranchItemProvider
 			super.getPropertyDescriptors(object);
 
 			addDestinationPropertyDescriptor(object);
-			addLabelTruePropertyDescriptor(object);
-			addLabelFalsePropertyDescriptor(object);
+			addElseDestinationPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -92,43 +91,20 @@ public class BranchItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Label True feature.
+	 * This adds a property descriptor for the Else Destination feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addLabelTruePropertyDescriptor(Object object)
+	protected void addElseDestinationPropertyDescriptor(Object object)
 	{
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Branch_labelTrue_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Branch_labelTrue_feature", "_UI_Branch_type"),
-				 LlvmPackage.Literals.BRANCH__LABEL_TRUE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Label False feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addLabelFalsePropertyDescriptor(Object object)
-	{
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Branch_labelFalse_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Branch_labelFalse_feature", "_UI_Branch_type"),
-				 LlvmPackage.Literals.BRANCH__LABEL_FALSE,
+				 getString("_UI_Branch_elseDestination_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Branch_elseDestination_feature", "_UI_Branch_type"),
+				 LlvmPackage.Literals.BRANCH__ELSE_DESTINATION,
 				 true,
 				 false,
 				 false,
@@ -150,7 +126,7 @@ public class BranchItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(LlvmPackage.Literals.BRANCH__CONDVALUE);
+			childrenFeatures.add(LlvmPackage.Literals.BRANCH__CONDITION);
 		}
 		return childrenFeatures;
 	}
@@ -207,11 +183,10 @@ public class BranchItemProvider
 		switch (notification.getFeatureID(Branch.class))
 		{
 			case LlvmPackage.BRANCH__DESTINATION:
-			case LlvmPackage.BRANCH__LABEL_TRUE:
-			case LlvmPackage.BRANCH__LABEL_FALSE:
+			case LlvmPackage.BRANCH__ELSE_DESTINATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case LlvmPackage.BRANCH__CONDVALUE:
+			case LlvmPackage.BRANCH__CONDITION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -231,32 +206,32 @@ public class BranchItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__CONDVALUE,
+				(LlvmPackage.Literals.BRANCH__CONDITION,
 				 LlvmFactory.eINSTANCE.createAddressUse()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__CONDVALUE,
+				(LlvmPackage.Literals.BRANCH__CONDITION,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__CONDVALUE,
+				(LlvmPackage.Literals.BRANCH__CONDITION,
 				 LlvmFactory.eINSTANCE.createConstant()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__CONDVALUE,
+				(LlvmPackage.Literals.BRANCH__CONDITION,
 				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__CONDVALUE,
+				(LlvmPackage.Literals.BRANCH__CONDITION,
 				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.BRANCH__CONDVALUE,
+				(LlvmPackage.Literals.BRANCH__CONDITION,
 				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 	}
 

@@ -134,8 +134,7 @@ TypeDefinition:
 	(address=Address '=' (('type' (struct=Structure | 'opaque'))));
 
 GlobalDefinition:
-	adress=Address '=' (LINKAGE | ALIAS_LINKAGE | 'global' | 'unnamed_addr' | 'constant')* type = (TypeUse|Aggregate_Types) value=(ValueStruct|Value)?
-	(',' 'align' align = NUMBER)?;
+	address=Address '=' (LINKAGE | ALIAS_LINKAGE | 'global' | 'unnamed_addr' | 'constant')* value=Parameter (',' 'align' align = NUMBER)?;
 
 FunctionDefinition:
 	('define' (LINKAGE| ALIAS_LINKAGE)? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=TypeUse
@@ -151,8 +150,8 @@ AliasDefinition:
 
 
 TypeUse:
-	(Predefined | AddressUse) functionInput=UNKNOWN_TYPE?
-	;
+	(Predefined | AddressUse) functionInput=UNKNOWN_TYPE?	
+;
 
 AddressUse:
 	address=[Address|VALID_ID] (pointer=POINTER)?
@@ -174,7 +173,7 @@ Vector:
 Array:
 	{Array} ('[' length=NUMBER 'x' type=TypeUse ']' | '[]' | '[' ']') POINTER?;
 
-Aggregate_Types:
+Aggregate_Type:
 	Structure | Array | Vector;
 
 Constant:
@@ -190,11 +189,11 @@ ValueStruct:
 	'{' types+=TypeUse value+=Value (',' types+=TypeUse value+=Value)* '}';
 
 Structure:
-	{Structure} '{' (types+=TypeUse (',' types+=(TypeUse|Aggregate_Types))*)? '}' POINTER?;
+	{Structure} '{' (types+=TypeUse (',' types+=(TypeUse|Aggregate_Type))*)? '}' POINTER?;
 
 
 Parameter:
-	type = TypeUse RETURN_ATTRIBUTES* value = Value?
+	type = (TypeUse | Aggregate_Type) /*RETURN_ATTRIBUTES* */ value = Value? RETURN_ATTRIBUTES*
 ;
 
 ParameterList:
@@ -238,10 +237,10 @@ LogicOperation:
 	result=Address '=' operation = ('shl' | 'lshr' | 'ashr' | 'and' | 'or' | 'xor') optype=TypeUse value1=Value ',' value2=Value;
 
 Cast:
-	result=Address '=' operation = CAST_OP from=(TypeUse|Aggregate_Types) value=Value 'to' to=TypeUse;
+	result=Address '=' operation = CAST_OP from=(TypeUse|Aggregate_Type) value=Value 'to' to=TypeUse;
 
 NestedCast: 
-	operation = CAST_OP '(' from=(TypeUse|Aggregate_Types) value=Value 'to' to=TypeUse ')' 
+	operation = CAST_OP '(' from=(TypeUse|Aggregate_Type) value=Value 'to' to=TypeUse ')' 
 ;
 
 MetaArgValue:
@@ -259,30 +258,23 @@ MetadataValue:
 
 GetElementPtr:
 	result=Address '=' 'getelementptr' 'inbounds'? 
-		(aggregate=(TypeUse|Array) aggregatename=Value(',' indTypes+=TypeUse indizies+=Value)*)
+		(aggerate=Parameter (',' indTypes+=TypeUse indizies+=Value)*)
 ;
 NestedGetElementPtr:
 	'getelementptr' 'inbounds'? 
-		('('aggregate=(TypeUse|Array) aggregatename=Value(',' indTypes+=TypeUse indizies+=Value)*')')
+		('(' aggerate=Parameter (',' indTypes+=TypeUse indizies+=Value)*')')
 ;
-	
-ExtractValue:
-	result=Address '=' 'extractvalue' (array=Array | struct=Structure) value=Value (',' index+=NUMBER)+;
 
-InsertValue:
-	result=Address '=' 'insertvalue' struct=Structure value=Value ',' inserttype=TypeUse insertvalue=Value (',' index+=NUMBER)+;
+
 
 Fence:
 	'fence' 'singlethread'? ordering=ATOMIC_ORDERING;
 
 CmpXchg:
-	result=Address '=' 'cmpxchg' (volatile?='volatile')? adresstype=TypeUse adress=Value ',' comparetype=TypeUse comparevalue=Value ',' newtype=TypeUse
-	newvalue=Value 'singlethread'?
-	ordering=ATOMIC_ORDERING;
+	result=Address '=' 'cmpxchg' (volatile?='volatile')? address=Parameter ',' value=Parameter',' newValue=Parameter 'singlethread'? ordering=ATOMIC_ORDERING;
 
 AtomicRMW:
-	result=Address '=' 'atomicrmw' (volatile?='volatile')? operation = BIN_OP adresstype=TypeUse adress=Value ',' optype=TypeUse opvalue=Value 'singlethread'?
-	ordering=ATOMIC_ORDERING;
+	result=Address '=' 'atomicrmw' (volatile?='volatile')? operation = BIN_OP address=Parameter ',' argument=Parameter 'singlethread'? ordering=ATOMIC_ORDERING;
 
 Load:
 	result=Address '=' ( volatile?='volatile' 'load'  | 'load' (volatile?='volatile')?) address=Parameter (',' 'align' align = NUMBER)?  (',' meta+=MetaArgValue)* 
@@ -294,12 +286,14 @@ Store:
 	|
 	'store' atomic?='atomic' (volatile?='volatile')? targetAddress=Parameter ',' value=Parameter 'singlethread'? ordering=ATOMIC_ORDERING (',' 'align' align = NUMBER)?;
 
+//FIXME: no support for call of functions with a function as a result type
 Call:
-	(result=Address '=')? 'tail'? 'call' CallingConv? RETURN_ATTRIBUTES? adresstype=TypeUse ((adress=Value) | 'asm' 'sideeffect'? STRING ','
-	STRING) pList=ParameterList FUNCTION_ATTRIBUTES* (',' '!srcloc' '!' NUMBER)*;
+	(result=Address '=')? 'tail'? 'call' CallingConv? RETURN_ATTRIBUTES? 
+	function=Parameter //(('asm' 'sideeffect'? STRING ',' STRING) 
+	pList=ParameterList FUNCTION_ATTRIBUTES* (',' '!srcloc' '!' NUMBER)*;
 
 Alloc:
-	result=Address '=' 'alloca' ((type=TypeUse typelist=ParameterList?)) (',' numelementstype=TypeUse numelementsvalue=Value)? (',' 'align' align = NUMBER)?;
+	result=Address '=' 'alloca' type=TypeUse (',' numOfElements=Parameter)? (',' 'align' align = NUMBER)?;
 
 PhiCase:
 	value= Value ',' label = VALID_ID
@@ -317,48 +311,62 @@ Clause:
 	| 'filter' filterarray=Array (constant=Value);
 
 Select:
-	result=Address '=' 'select' conditiontype=TypeUse conditionvalue=Value ',' val1type=TypeUse val1value=Value ',' val2type=TypeUse
-	val2value=Value;
+	result=Address '=' 'select' condition=Parameter ',' trueValue=Parameter ',' elseValue=Parameter;
 
 VariableAttributeAccess:
-	result=Address '=' 'va_arg' listtype=TypeUse listvalue=Value ',' argType=TypeUse;
+	result=Address '=' 'va_arg' vaList= Parameter',' aType=TypeUse;
 
+
+//FIXME TODO
+
+//...Value for structs and arrays 
+ExtractValue:
+	result=Address '=' 'extractvalue' aggerate=Parameter (',' index+=NUMBER)+;
+
+InsertValue:
+	result=Address '=' 'insertvalue' aggerate=Parameter',' value=Parameter (',' index+=NUMBER)+;
+
+//...Element for vectors
 ExtractElement:
-	result=Address '=' 'extractelement' vectortype=TypeUse vectorvalue=Value ',' indextype=TypeUse index=Value;
+	result=Address '=' 'extractelement'vector=Parameter ',' index=Parameter
+;
 
 InsertElement:
-	result=Address '=' 'insertelement' vectortype=TypeUse vectorvalue=Value ',' scalartype=TypeUse scalarvalue=Value ',' indextype=TypeUse
-	index=Value;
+	result=Address '=' 'insertelement' vector=Parameter ',' value=Parameter ',' index=Parameter
+;
+
 
 ShuffleVector:
-	result=Address '=' 'shufflevector' val1type=TypeUse val1value=Value ',' val2type=TypeUse val2value=Value ',' masktype=TypeUse
-	maskvalue=Value;
+	result=Address '=' 'shufflevector' value1=Parameter ',' value2=Parameter ',' mask=Parameter;
 
 Compare:
-	result=Address '=' ('icmp' pred = I_PREDICATES comptype=TypeUse value1=Value ',' value2=Value |
-	'fcmp' pred = (F_PREDICATES| BOOL) comptype=TypeUse value1=Value ',' value2=Value);
+	result=Address '=' (('icmp' | 'fcmp') cond = (I_PREDICATES | F_PREDICATES| BOOL) opType=TypeUse operand1=Value ',' operand2=Value);
 
 IndirectBranch:
-	'indirectbr' adresstype=TypeUse adress=Value ',' '[' (labeltype+=TypeUse labels+=Value (',' labeltype+=TypeUse labels+=Value)*)? ']';
+	'indirectbr' target=Parameter ',' '[' ('label' potTargetLabels+=VALID_ID (',' 'label' potTargetLabels+=VALID_ID)*)? ']';
 
 Switch:
-	'switch' comptype=TypeUse compvalue=Value ',' defaulttype=TypeUse defaultvalue=Value '[' (jtypes+=TypeUse jvalues+=Value ',' destinationtypes+=TypeUse destinations+=Value)+ ']';
+	'switch' caseValue=Parameter ',' 'label' defaultCase=VALID_ID '[' (cases+= SwitchCase)* ']';
+	
+SwitchCase:
+	caseValue = Parameter ',' 'label' destination=VALID_ID
+;
 
 Invoke:
-	'invoke' CallingConv? RETURN_ATTRIBUTES? functiontype=TypeUse name=Address pList=ParameterList
-	FUNCTION_ATTRIBUTES* 'to'
-	'label' toTarget=VALID_ID 'unwind' 'label'unwindCase=VALID_ID;
+	'invoke' CallingConv? RETURN_ATTRIBUTES? returnType=TypeUse name=Address pList=ParameterList
+	FUNCTION_ATTRIBUTES* 'to' 'label' targetLabel=VALID_ID 'unwind' 'label' unwindTargetLabel=VALID_ID;
 
 Resume:
-	'resume' resumestruct=Structure resumevalue=Value;
+	'resume' type=Structure value=Value;
 
 Unreachable:
 	{Unreachable} 'unreachable';
 
 Return:
-	'ret' returntype=Predefined (',' '!dbg' '!' NUMBER)? | 'ret' returntype=TypeUse returnvalue=Value (',' '!dbg' '!' NUMBER)?;
+	'ret' value=Parameter (',' '!dbg' '!' NUMBER)?
+;
 
 Branch:
 	('br' 'label' destination=VALID_ID) | 
-	('br' INT_TYPE condvalue=Value ',' 'label'	labelTrue=VALID_ID	',' 'label' labelFalse=VALID_ID);
+	('br' INT_TYPE condition=Value ',' 'label'	destination=VALID_ID	',' 'label' elseDestination=VALID_ID);
 

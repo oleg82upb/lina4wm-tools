@@ -21,7 +21,7 @@ import java.math.BigDecimal;
  * @model
  * @generated
  */
-public interface Vector extends Aggregate_Types
+public interface Vector extends Aggregate_Type
 {
   /**
 	 * Returns the value of the '<em><b>Length</b></em>' attribute.

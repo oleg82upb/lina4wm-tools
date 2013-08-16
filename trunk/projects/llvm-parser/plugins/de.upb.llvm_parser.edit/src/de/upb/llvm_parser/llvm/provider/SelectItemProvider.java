@@ -77,12 +77,9 @@ public class SelectItemProvider
 		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.SELECT__RESULT);
-			childrenFeatures.add(LlvmPackage.Literals.SELECT__CONDITIONTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.SELECT__CONDITIONVALUE);
-			childrenFeatures.add(LlvmPackage.Literals.SELECT__VAL1TYPE);
-			childrenFeatures.add(LlvmPackage.Literals.SELECT__VAL1VALUE);
-			childrenFeatures.add(LlvmPackage.Literals.SELECT__VAL2TYPE);
-			childrenFeatures.add(LlvmPackage.Literals.SELECT__VAL2VALUE);
+			childrenFeatures.add(LlvmPackage.Literals.SELECT__CONDITION);
+			childrenFeatures.add(LlvmPackage.Literals.SELECT__TRUE_VALUE);
+			childrenFeatures.add(LlvmPackage.Literals.SELECT__ELSE_VALUE);
 		}
 		return childrenFeatures;
 	}
@@ -136,12 +133,9 @@ public class SelectItemProvider
 		switch (notification.getFeatureID(Select.class))
 		{
 			case LlvmPackage.SELECT__RESULT:
-			case LlvmPackage.SELECT__CONDITIONTYPE:
-			case LlvmPackage.SELECT__CONDITIONVALUE:
-			case LlvmPackage.SELECT__VAL1TYPE:
-			case LlvmPackage.SELECT__VAL1VALUE:
-			case LlvmPackage.SELECT__VAL2TYPE:
-			case LlvmPackage.SELECT__VAL2VALUE:
+			case LlvmPackage.SELECT__CONDITION:
+			case LlvmPackage.SELECT__TRUE_VALUE:
+			case LlvmPackage.SELECT__ELSE_VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -166,138 +160,18 @@ public class SelectItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.SELECT__CONDITIONTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
+				(LlvmPackage.Literals.SELECT__CONDITION,
+				 LlvmFactory.eINSTANCE.createParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.SELECT__CONDITIONTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
+				(LlvmPackage.Literals.SELECT__TRUE_VALUE,
+				 LlvmFactory.eINSTANCE.createParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.SELECT__CONDITIONTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__CONDITIONVALUE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__CONDITIONVALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__CONDITIONVALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__CONDITIONVALUE,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__CONDITIONVALUE,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__CONDITIONVALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__VAL1TYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__VAL1TYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__VAL1TYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__VAL1VALUE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__VAL1VALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__VAL1VALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__VAL1VALUE,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__VAL1VALUE,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__VAL1VALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__VAL2TYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__VAL2TYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__VAL2TYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__VAL2VALUE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__VAL2VALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__VAL2VALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__VAL2VALUE,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__VAL2VALUE,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SELECT__VAL2VALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
+				(LlvmPackage.Literals.SELECT__ELSE_VALUE,
+				 LlvmFactory.eINSTANCE.createParameter()));
 	}
 
 	/**
@@ -312,12 +186,9 @@ public class SelectItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == LlvmPackage.Literals.SELECT__CONDITIONTYPE ||
-			childFeature == LlvmPackage.Literals.SELECT__VAL1TYPE ||
-			childFeature == LlvmPackage.Literals.SELECT__VAL2TYPE ||
-			childFeature == LlvmPackage.Literals.SELECT__CONDITIONVALUE ||
-			childFeature == LlvmPackage.Literals.SELECT__VAL1VALUE ||
-			childFeature == LlvmPackage.Literals.SELECT__VAL2VALUE;
+			childFeature == LlvmPackage.Literals.SELECT__CONDITION ||
+			childFeature == LlvmPackage.Literals.SELECT__TRUE_VALUE ||
+			childFeature == LlvmPackage.Literals.SELECT__ELSE_VALUE;
 
 		if (qualify)
 		{

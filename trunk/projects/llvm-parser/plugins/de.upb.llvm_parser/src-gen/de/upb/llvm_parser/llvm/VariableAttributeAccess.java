@@ -12,9 +12,8 @@ package de.upb.llvm_parser.llvm;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.VariableAttributeAccess#getResult <em>Result</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.VariableAttributeAccess#getListtype <em>Listtype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.VariableAttributeAccess#getListvalue <em>Listvalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.VariableAttributeAccess#getArgType <em>Arg Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.VariableAttributeAccess#getVaList <em>Va List</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.VariableAttributeAccess#getAType <em>AType</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,81 +50,55 @@ public interface VariableAttributeAccess extends Instruction
   void setResult(Address value);
 
   /**
-	 * Returns the value of the '<em><b>Listtype</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Va List</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Listtype</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Va List</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Listtype</em>' containment reference.
-	 * @see #setListtype(TypeUse)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getVariableAttributeAccess_Listtype()
+	 * @return the value of the '<em>Va List</em>' containment reference.
+	 * @see #setVaList(Parameter)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getVariableAttributeAccess_VaList()
 	 * @model containment="true"
 	 * @generated
 	 */
-  TypeUse getListtype();
+  Parameter getVaList();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.VariableAttributeAccess#getListtype <em>Listtype</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.VariableAttributeAccess#getVaList <em>Va List</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Listtype</em>' containment reference.
-	 * @see #getListtype()
+	 * @param value the new value of the '<em>Va List</em>' containment reference.
+	 * @see #getVaList()
 	 * @generated
 	 */
-  void setListtype(TypeUse value);
+  void setVaList(Parameter value);
 
   /**
-	 * Returns the value of the '<em><b>Listvalue</b></em>' containment reference.
+	 * Returns the value of the '<em><b>AType</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Listvalue</em>' containment reference isn't clear,
+   * If the meaning of the '<em>AType</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Listvalue</em>' containment reference.
-	 * @see #setListvalue(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getVariableAttributeAccess_Listvalue()
+	 * @return the value of the '<em>AType</em>' containment reference.
+	 * @see #setAType(TypeUse)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getVariableAttributeAccess_AType()
 	 * @model containment="true"
 	 * @generated
 	 */
-  Value getListvalue();
+  TypeUse getAType();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.VariableAttributeAccess#getListvalue <em>Listvalue</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.VariableAttributeAccess#getAType <em>AType</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Listvalue</em>' containment reference.
-	 * @see #getListvalue()
+	 * @param value the new value of the '<em>AType</em>' containment reference.
+	 * @see #getAType()
 	 * @generated
 	 */
-  void setListvalue(Value value);
-
-  /**
-	 * Returns the value of the '<em><b>Arg Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Arg Type</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Arg Type</em>' containment reference.
-	 * @see #setArgType(TypeUse)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getVariableAttributeAccess_ArgType()
-	 * @model containment="true"
-	 * @generated
-	 */
-  TypeUse getArgType();
-
-  /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.VariableAttributeAccess#getArgType <em>Arg Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Arg Type</em>' containment reference.
-	 * @see #getArgType()
-	 * @generated
-	 */
-  void setArgType(TypeUse value);
+  void setAType(TypeUse value);
 
 } // VariableAttributeAccess

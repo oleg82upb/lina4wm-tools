@@ -14,10 +14,8 @@ package de.upb.llvm_parser.llvm;
  *   <li>{@link de.upb.llvm_parser.llvm.AtomicRMW#getResult <em>Result</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.AtomicRMW#isVolatile <em>Volatile</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.AtomicRMW#getOperation <em>Operation</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.AtomicRMW#getAdresstype <em>Adresstype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.AtomicRMW#getAdress <em>Adress</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.AtomicRMW#getOptype <em>Optype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.AtomicRMW#getOpvalue <em>Opvalue</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.AtomicRMW#getAddress <em>Address</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.AtomicRMW#getArgument <em>Argument</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.AtomicRMW#getOrdering <em>Ordering</em>}</li>
  * </ul>
  * </p>
@@ -107,108 +105,56 @@ public interface AtomicRMW extends Instruction
   void setOperation(String value);
 
   /**
-	 * Returns the value of the '<em><b>Adresstype</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Address</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Adresstype</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Address</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Adresstype</em>' containment reference.
-	 * @see #setAdresstype(TypeUse)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getAtomicRMW_Adresstype()
+	 * @return the value of the '<em>Address</em>' containment reference.
+	 * @see #setAddress(Parameter)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getAtomicRMW_Address()
 	 * @model containment="true"
 	 * @generated
 	 */
-  TypeUse getAdresstype();
+  Parameter getAddress();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.AtomicRMW#getAdresstype <em>Adresstype</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.AtomicRMW#getAddress <em>Address</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Adresstype</em>' containment reference.
-	 * @see #getAdresstype()
+	 * @param value the new value of the '<em>Address</em>' containment reference.
+	 * @see #getAddress()
 	 * @generated
 	 */
-  void setAdresstype(TypeUse value);
+  void setAddress(Parameter value);
 
   /**
-	 * Returns the value of the '<em><b>Adress</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Argument</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Adress</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Argument</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Adress</em>' containment reference.
-	 * @see #setAdress(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getAtomicRMW_Adress()
+	 * @return the value of the '<em>Argument</em>' containment reference.
+	 * @see #setArgument(Parameter)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getAtomicRMW_Argument()
 	 * @model containment="true"
 	 * @generated
 	 */
-  Value getAdress();
+  Parameter getArgument();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.AtomicRMW#getAdress <em>Adress</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.AtomicRMW#getArgument <em>Argument</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Adress</em>' containment reference.
-	 * @see #getAdress()
+	 * @param value the new value of the '<em>Argument</em>' containment reference.
+	 * @see #getArgument()
 	 * @generated
 	 */
-  void setAdress(Value value);
-
-  /**
-	 * Returns the value of the '<em><b>Optype</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Optype</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Optype</em>' containment reference.
-	 * @see #setOptype(TypeUse)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getAtomicRMW_Optype()
-	 * @model containment="true"
-	 * @generated
-	 */
-  TypeUse getOptype();
-
-  /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.AtomicRMW#getOptype <em>Optype</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Optype</em>' containment reference.
-	 * @see #getOptype()
-	 * @generated
-	 */
-  void setOptype(TypeUse value);
-
-  /**
-	 * Returns the value of the '<em><b>Opvalue</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Opvalue</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Opvalue</em>' containment reference.
-	 * @see #setOpvalue(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getAtomicRMW_Opvalue()
-	 * @model containment="true"
-	 * @generated
-	 */
-  Value getOpvalue();
-
-  /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.AtomicRMW#getOpvalue <em>Opvalue</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Opvalue</em>' containment reference.
-	 * @see #getOpvalue()
-	 * @generated
-	 */
-  void setOpvalue(Value value);
+  void setArgument(Parameter value);
 
   /**
 	 * Returns the value of the '<em><b>Ordering</b></em>' attribute.

@@ -4,8 +4,6 @@ package de.upb.llvm_parser.llvm;
 
 import java.math.BigDecimal;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Global Definition</b></em>'.
@@ -14,8 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.GlobalDefinition#getAdress <em>Adress</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.GlobalDefinition#getType <em>Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.GlobalDefinition#getAddress <em>Address</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.GlobalDefinition#getValue <em>Value</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.GlobalDefinition#getAlign <em>Align</em>}</li>
  * </ul>
@@ -28,56 +25,30 @@ import org.eclipse.emf.ecore.EObject;
 public interface GlobalDefinition extends MainLevelEntity
 {
   /**
-	 * Returns the value of the '<em><b>Adress</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Address</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Adress</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Address</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Adress</em>' containment reference.
-	 * @see #setAdress(Address)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getGlobalDefinition_Adress()
+	 * @return the value of the '<em>Address</em>' containment reference.
+	 * @see #setAddress(Address)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getGlobalDefinition_Address()
 	 * @model containment="true"
 	 * @generated
 	 */
-  Address getAdress();
+  Address getAddress();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.GlobalDefinition#getAdress <em>Adress</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.GlobalDefinition#getAddress <em>Address</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Adress</em>' containment reference.
-	 * @see #getAdress()
+	 * @param value the new value of the '<em>Address</em>' containment reference.
+	 * @see #getAddress()
 	 * @generated
 	 */
-  void setAdress(Address value);
-
-  /**
-	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' containment reference.
-	 * @see #setType(EObject)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getGlobalDefinition_Type()
-	 * @model containment="true"
-	 * @generated
-	 */
-  EObject getType();
-
-  /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.GlobalDefinition#getType <em>Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' containment reference.
-	 * @see #getType()
-	 * @generated
-	 */
-  void setType(EObject value);
+  void setAddress(Address value);
 
   /**
 	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
@@ -88,12 +59,12 @@ public interface GlobalDefinition extends MainLevelEntity
    * </p>
    * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(EObject)
+	 * @see #setValue(Parameter)
 	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getGlobalDefinition_Value()
 	 * @model containment="true"
 	 * @generated
 	 */
-  EObject getValue();
+  Parameter getValue();
 
   /**
 	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.GlobalDefinition#getValue <em>Value</em>}' containment reference.
@@ -103,7 +74,7 @@ public interface GlobalDefinition extends MainLevelEntity
 	 * @see #getValue()
 	 * @generated
 	 */
-  void setValue(EObject value);
+  void setValue(Parameter value);
 
   /**
 	 * Returns the value of the '<em><b>Align</b></em>' attribute.

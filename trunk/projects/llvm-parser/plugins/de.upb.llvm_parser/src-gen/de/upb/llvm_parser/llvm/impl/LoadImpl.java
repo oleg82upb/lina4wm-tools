@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getAddress <em>Address</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getAlign <em>Align</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getMeta <em>Meta</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#isAtomic <em>Atomic</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.LoadImpl#getOrdering <em>Ordering</em>}</li>
  * </ul>
  * </p>
@@ -114,6 +115,26 @@ public class LoadImpl extends InstructionImpl implements Load
 	 * @ordered
 	 */
   protected EList<MetaArgValue> meta;
+
+  /**
+	 * The default value of the '{@link #isAtomic() <em>Atomic</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #isAtomic()
+	 * @generated
+	 * @ordered
+	 */
+  protected static final boolean ATOMIC_EDEFAULT = false;
+
+  /**
+	 * The cached value of the '{@link #isAtomic() <em>Atomic</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #isAtomic()
+	 * @generated
+	 * @ordered
+	 */
+  protected boolean atomic = ATOMIC_EDEFAULT;
 
   /**
 	 * The default value of the '{@link #getOrdering() <em>Ordering</em>}' attribute.
@@ -317,6 +338,29 @@ public class LoadImpl extends InstructionImpl implements Load
    * <!-- end-user-doc -->
 	 * @generated
 	 */
+  public boolean isAtomic()
+  {
+		return atomic;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public void setAtomic(boolean newAtomic)
+  {
+		boolean oldAtomic = atomic;
+		atomic = newAtomic;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__ATOMIC, oldAtomic, atomic));
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
   public String getOrdering()
   {
 		return ordering;
@@ -375,6 +419,8 @@ public class LoadImpl extends InstructionImpl implements Load
 				return getAlign();
 			case LlvmPackage.LOAD__META:
 				return getMeta();
+			case LlvmPackage.LOAD__ATOMIC:
+				return isAtomic();
 			case LlvmPackage.LOAD__ORDERING:
 				return getOrdering();
 		}
@@ -408,6 +454,9 @@ public class LoadImpl extends InstructionImpl implements Load
 				getMeta().clear();
 				getMeta().addAll((Collection<? extends MetaArgValue>)newValue);
 				return;
+			case LlvmPackage.LOAD__ATOMIC:
+				setAtomic((Boolean)newValue);
+				return;
 			case LlvmPackage.LOAD__ORDERING:
 				setOrdering((String)newValue);
 				return;
@@ -440,6 +489,9 @@ public class LoadImpl extends InstructionImpl implements Load
 			case LlvmPackage.LOAD__META:
 				getMeta().clear();
 				return;
+			case LlvmPackage.LOAD__ATOMIC:
+				setAtomic(ATOMIC_EDEFAULT);
+				return;
 			case LlvmPackage.LOAD__ORDERING:
 				setOrdering(ORDERING_EDEFAULT);
 				return;
@@ -467,6 +519,8 @@ public class LoadImpl extends InstructionImpl implements Load
 				return ALIGN_EDEFAULT == null ? align != null : !ALIGN_EDEFAULT.equals(align);
 			case LlvmPackage.LOAD__META:
 				return meta != null && !meta.isEmpty();
+			case LlvmPackage.LOAD__ATOMIC:
+				return atomic != ATOMIC_EDEFAULT;
 			case LlvmPackage.LOAD__ORDERING:
 				return ORDERING_EDEFAULT == null ? ordering != null : !ORDERING_EDEFAULT.equals(ordering);
 		}
@@ -488,6 +542,8 @@ public class LoadImpl extends InstructionImpl implements Load
 		result.append(volatile_);
 		result.append(", align: ");
 		result.append(align);
+		result.append(", atomic: ");
+		result.append(atomic);
 		result.append(", ordering: ");
 		result.append(ordering);
 		result.append(')');

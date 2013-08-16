@@ -64,6 +64,7 @@ public class StoreItemProvider
 
 			addVolatilePropertyDescriptor(object);
 			addAlignPropertyDescriptor(object);
+			addAtomicPropertyDescriptor(object);
 			addOrderingPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -111,6 +112,29 @@ public class StoreItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Atomic feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAtomicPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Store_atomic_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Store_atomic_feature", "_UI_Store_type"),
+				 LlvmPackage.Literals.STORE__ATOMIC,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -208,6 +232,7 @@ public class StoreItemProvider
 		{
 			case LlvmPackage.STORE__VOLATILE:
 			case LlvmPackage.STORE__ALIGN:
+			case LlvmPackage.STORE__ATOMIC:
 			case LlvmPackage.STORE__ORDERING:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

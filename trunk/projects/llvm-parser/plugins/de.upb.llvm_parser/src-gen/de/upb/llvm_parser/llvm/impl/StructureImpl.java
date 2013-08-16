@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class StructureImpl extends Aggregate_TypesImpl implements Structure
+public class StructureImpl extends Aggregate_TypeImpl implements Structure
 {
   /**
 	 * The cached value of the '{@link #getTypes() <em>Types</em>}' containment reference list.

@@ -61,27 +61,27 @@ public class InvokeItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
-			addToTargetPropertyDescriptor(object);
-			addUnwindCasePropertyDescriptor(object);
+			addTargetLabelPropertyDescriptor(object);
+			addUnwindTargetLabelPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the To Target feature.
+	 * This adds a property descriptor for the Target Label feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addToTargetPropertyDescriptor(Object object)
+	protected void addTargetLabelPropertyDescriptor(Object object)
 	{
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Invoke_toTarget_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Invoke_toTarget_feature", "_UI_Invoke_type"),
-				 LlvmPackage.Literals.INVOKE__TO_TARGET,
+				 getString("_UI_Invoke_targetLabel_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Invoke_targetLabel_feature", "_UI_Invoke_type"),
+				 LlvmPackage.Literals.INVOKE__TARGET_LABEL,
 				 true,
 				 false,
 				 false,
@@ -91,20 +91,20 @@ public class InvokeItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Unwind Case feature.
+	 * This adds a property descriptor for the Unwind Target Label feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addUnwindCasePropertyDescriptor(Object object)
+	protected void addUnwindTargetLabelPropertyDescriptor(Object object)
 	{
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Invoke_unwindCase_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Invoke_unwindCase_feature", "_UI_Invoke_type"),
-				 LlvmPackage.Literals.INVOKE__UNWIND_CASE,
+				 getString("_UI_Invoke_unwindTargetLabel_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Invoke_unwindTargetLabel_feature", "_UI_Invoke_type"),
+				 LlvmPackage.Literals.INVOKE__UNWIND_TARGET_LABEL,
 				 true,
 				 false,
 				 false,
@@ -126,7 +126,7 @@ public class InvokeItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(LlvmPackage.Literals.INVOKE__FUNCTIONTYPE);
+			childrenFeatures.add(LlvmPackage.Literals.INVOKE__RETURN_TYPE);
 			childrenFeatures.add(LlvmPackage.Literals.INVOKE__NAME);
 			childrenFeatures.add(LlvmPackage.Literals.INVOKE__PLIST);
 		}
@@ -165,7 +165,7 @@ public class InvokeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Invoke)object).getToTarget();
+		String label = ((Invoke)object).getTargetLabel();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Invoke_type") :
 			getString("_UI_Invoke_type") + " " + label;
@@ -184,11 +184,11 @@ public class InvokeItemProvider
 
 		switch (notification.getFeatureID(Invoke.class))
 		{
-			case LlvmPackage.INVOKE__TO_TARGET:
-			case LlvmPackage.INVOKE__UNWIND_CASE:
+			case LlvmPackage.INVOKE__TARGET_LABEL:
+			case LlvmPackage.INVOKE__UNWIND_TARGET_LABEL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case LlvmPackage.INVOKE__FUNCTIONTYPE:
+			case LlvmPackage.INVOKE__RETURN_TYPE:
 			case LlvmPackage.INVOKE__NAME:
 			case LlvmPackage.INVOKE__PLIST:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
@@ -210,17 +210,17 @@ public class InvokeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.INVOKE__FUNCTIONTYPE,
+				(LlvmPackage.Literals.INVOKE__RETURN_TYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.INVOKE__FUNCTIONTYPE,
+				(LlvmPackage.Literals.INVOKE__RETURN_TYPE,
 				 LlvmFactory.eINSTANCE.createAddressUse()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.INVOKE__FUNCTIONTYPE,
+				(LlvmPackage.Literals.INVOKE__RETURN_TYPE,
 				 LlvmFactory.eINSTANCE.createPredefined()));
 
 		newChildDescriptors.add

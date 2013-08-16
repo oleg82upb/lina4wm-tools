@@ -53,9 +53,9 @@ import de.upb.llvm_parser.llvm.ShuffleVector;
 import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.Structure;
 import de.upb.llvm_parser.llvm.Switch;
+import de.upb.llvm_parser.llvm.SwitchCase;
 import de.upb.llvm_parser.llvm.TopLevelEntity;
 import de.upb.llvm_parser.llvm.TypeDefinition;
-import de.upb.llvm_parser.llvm.TypeList;
 import de.upb.llvm_parser.llvm.Unreachable;
 import de.upb.llvm_parser.llvm.ValueStruct;
 import de.upb.llvm_parser.llvm.VariableAttributeAccess;
@@ -121,7 +121,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				}
 				else break;
 			case LlvmPackage.ARRAY:
-				if(context == grammarAccess.getAggregate_TypesRule() ||
+				if(context == grammarAccess.getAggregate_TypeRule() ||
 				   context == grammarAccess.getArrayRule()) {
 					sequence_Array(context, (Array) semanticObject); 
 					return; 
@@ -417,7 +417,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				}
 				else break;
 			case LlvmPackage.STRUCTURE:
-				if(context == grammarAccess.getAggregate_TypesRule() ||
+				if(context == grammarAccess.getAggregate_TypeRule() ||
 				   context == grammarAccess.getStructureRule()) {
 					sequence_Structure(context, (Structure) semanticObject); 
 					return; 
@@ -427,6 +427,12 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				if(context == grammarAccess.getInstructionRule() ||
 				   context == grammarAccess.getSwitchRule()) {
 					sequence_Switch(context, (Switch) semanticObject); 
+					return; 
+				}
+				else break;
+			case LlvmPackage.SWITCH_CASE:
+				if(context == grammarAccess.getSwitchCaseRule()) {
+					sequence_SwitchCase(context, (SwitchCase) semanticObject); 
 					return; 
 				}
 				else break;
@@ -442,12 +448,6 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				   context == grammarAccess.getMainLevelEntityRule() ||
 				   context == grammarAccess.getTypeDefinitionRule()) {
 					sequence_TypeDefinition(context, (TypeDefinition) semanticObject); 
-					return; 
-				}
-				else break;
-			case LlvmPackage.TYPE_LIST:
-				if(context == grammarAccess.getTypeListRule()) {
-					sequence_TypeList(context, (TypeList) semanticObject); 
 					return; 
 				}
 				else break;
@@ -472,7 +472,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				}
 				else break;
 			case LlvmPackage.VECTOR:
-				if(context == grammarAccess.getAggregate_TypesRule() ||
+				if(context == grammarAccess.getAggregate_TypeRule() ||
 				   context == grammarAccess.getVectorRule()) {
 					sequence_Vector(context, (Vector) semanticObject); 
 					return; 
@@ -543,7 +543,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (result=Address type=TypeUse typelist=ParameterList? (numelementstype=TypeUse numelementsvalue=Value)? align=NUMBER?)
+	 *     (result=Address type=TypeUse numOfElements=Parameter? align=NUMBER?)
 	 */
 	protected void sequence_Alloc(EObject context, Alloc semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -593,10 +593,8 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *         result=Address 
 	 *         volatile?='volatile'? 
 	 *         operation=BIN_OP 
-	 *         adresstype=TypeUse 
-	 *         adress=Value 
-	 *         optype=TypeUse 
-	 *         opvalue=Value 
+	 *         address=Parameter 
+	 *         argument=Parameter 
 	 *         ordering=ATOMIC_ORDERING
 	 *     )
 	 */
@@ -616,7 +614,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (destination=VALID_ID | (condvalue=Value labelTrue=VALID_ID labelFalse=VALID_ID))
+	 *     (destination=VALID_ID | (condition=Value destination=VALID_ID elseDestination=VALID_ID))
 	 */
 	protected void sequence_Branch(EObject context, Branch semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -625,7 +623,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (result=Address? adresstype=TypeUse adress=Value? pList=ParameterList)
+	 *     (result=Address? function=Parameter pList=ParameterList)
 	 */
 	protected void sequence_Call(EObject context, Call semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -634,7 +632,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (result=Address operation=CAST_OP (from=TypeUse | from=Aggregate_Types) value=Value to=TypeUse)
+	 *     (result=Address operation=CAST_OP (from=TypeUse | from=Aggregate_Type) value=Value to=TypeUse)
 	 */
 	protected void sequence_Cast(EObject context, Cast semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -655,12 +653,9 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     (
 	 *         result=Address 
 	 *         volatile?='volatile'? 
-	 *         adresstype=TypeUse 
-	 *         adress=Value 
-	 *         comparetype=TypeUse 
-	 *         comparevalue=Value 
-	 *         newtype=TypeUse 
-	 *         newvalue=Value 
+	 *         address=Parameter 
+	 *         value=Parameter 
+	 *         newValue=Parameter 
 	 *         ordering=ATOMIC_ORDERING
 	 *     )
 	 */
@@ -671,10 +666,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         result=Address 
-	 *         ((pred=I_PREDICATES comptype=TypeUse value1=Value value2=Value) | ((pred=F_PREDICATES | pred=BOOL) comptype=TypeUse value1=Value value2=Value))
-	 *     )
+	 *     (result=Address (cond=I_PREDICATES | cond=F_PREDICATES | cond=BOOL) opType=TypeUse operand1=Value operand2=Value)
 	 */
 	protected void sequence_Compare(EObject context, Compare semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -699,35 +691,29 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (result=Address vectortype=TypeUse vectorvalue=Value indextype=TypeUse index=Value)
+	 *     (result=Address vector=Parameter index=Parameter)
 	 */
 	protected void sequence_ExtractElement(EObject context, ExtractElement semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.EXTRACT_ELEMENT__RESULT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.EXTRACT_ELEMENT__RESULT));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.EXTRACT_ELEMENT__VECTORTYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.EXTRACT_ELEMENT__VECTORTYPE));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.EXTRACT_ELEMENT__VECTORVALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.EXTRACT_ELEMENT__VECTORVALUE));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.EXTRACT_ELEMENT__INDEXTYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.EXTRACT_ELEMENT__INDEXTYPE));
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.EXTRACT_ELEMENT__VECTOR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.EXTRACT_ELEMENT__VECTOR));
 			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.EXTRACT_ELEMENT__INDEX) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.EXTRACT_ELEMENT__INDEX));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getExtractElementAccess().getResultAddressParserRuleCall_0_0(), semanticObject.getResult());
-		feeder.accept(grammarAccess.getExtractElementAccess().getVectortypeTypeUseParserRuleCall_3_0(), semanticObject.getVectortype());
-		feeder.accept(grammarAccess.getExtractElementAccess().getVectorvalueValueParserRuleCall_4_0(), semanticObject.getVectorvalue());
-		feeder.accept(grammarAccess.getExtractElementAccess().getIndextypeTypeUseParserRuleCall_6_0(), semanticObject.getIndextype());
-		feeder.accept(grammarAccess.getExtractElementAccess().getIndexValueParserRuleCall_7_0(), semanticObject.getIndex());
+		feeder.accept(grammarAccess.getExtractElementAccess().getVectorParameterParserRuleCall_3_0(), semanticObject.getVector());
+		feeder.accept(grammarAccess.getExtractElementAccess().getIndexParameterParserRuleCall_5_0(), semanticObject.getIndex());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (result=Address (array=Array | struct=Structure) value=Value index+=NUMBER+)
+	 *     (result=Address aggerate=Parameter index+=NUMBER+)
 	 */
 	protected void sequence_ExtractValue(EObject context, ExtractValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -791,7 +777,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (result=Address (aggregate=TypeUse | aggregate=Array) aggregatename=Value (indTypes+=TypeUse indizies+=Value)*)
+	 *     (result=Address aggerate=Parameter (indTypes+=TypeUse indizies+=Value)*)
 	 */
 	protected void sequence_GetElementPtr(EObject context, GetElementPtr semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -800,7 +786,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (adress=Address (type=TypeUse | type=Aggregate_Types) (value=ValueStruct | value=Value)? align=NUMBER?)
+	 *     (address=Address value=Parameter align=NUMBER?)
 	 */
 	protected void sequence_GlobalDefinition(EObject context, GlobalDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -809,7 +795,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (adresstype=TypeUse adress=Value (labeltype+=TypeUse labels+=Value (labeltype+=TypeUse labels+=Value)*)?)
+	 *     (target=Parameter (potTargetLabels+=VALID_ID potTargetLabels+=VALID_ID*)?)
 	 */
 	protected void sequence_IndirectBranch(EObject context, IndirectBranch semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -818,56 +804,32 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         result=Address 
-	 *         vectortype=TypeUse 
-	 *         vectorvalue=Value 
-	 *         scalartype=TypeUse 
-	 *         scalarvalue=Value 
-	 *         indextype=TypeUse 
-	 *         index=Value
-	 *     )
+	 *     (result=Address vector=Parameter value=Parameter index=Parameter)
 	 */
 	protected void sequence_InsertElement(EObject context, InsertElement semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.INSERT_ELEMENT__RESULT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.INSERT_ELEMENT__RESULT));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.INSERT_ELEMENT__VECTORTYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.INSERT_ELEMENT__VECTORTYPE));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.INSERT_ELEMENT__VECTORVALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.INSERT_ELEMENT__VECTORVALUE));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.INSERT_ELEMENT__SCALARTYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.INSERT_ELEMENT__SCALARTYPE));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.INSERT_ELEMENT__SCALARVALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.INSERT_ELEMENT__SCALARVALUE));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.INSERT_ELEMENT__INDEXTYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.INSERT_ELEMENT__INDEXTYPE));
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.INSERT_ELEMENT__VECTOR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.INSERT_ELEMENT__VECTOR));
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.INSERT_ELEMENT__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.INSERT_ELEMENT__VALUE));
 			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.INSERT_ELEMENT__INDEX) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.INSERT_ELEMENT__INDEX));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getInsertElementAccess().getResultAddressParserRuleCall_0_0(), semanticObject.getResult());
-		feeder.accept(grammarAccess.getInsertElementAccess().getVectortypeTypeUseParserRuleCall_3_0(), semanticObject.getVectortype());
-		feeder.accept(grammarAccess.getInsertElementAccess().getVectorvalueValueParserRuleCall_4_0(), semanticObject.getVectorvalue());
-		feeder.accept(grammarAccess.getInsertElementAccess().getScalartypeTypeUseParserRuleCall_6_0(), semanticObject.getScalartype());
-		feeder.accept(grammarAccess.getInsertElementAccess().getScalarvalueValueParserRuleCall_7_0(), semanticObject.getScalarvalue());
-		feeder.accept(grammarAccess.getInsertElementAccess().getIndextypeTypeUseParserRuleCall_9_0(), semanticObject.getIndextype());
-		feeder.accept(grammarAccess.getInsertElementAccess().getIndexValueParserRuleCall_10_0(), semanticObject.getIndex());
+		feeder.accept(grammarAccess.getInsertElementAccess().getVectorParameterParserRuleCall_3_0(), semanticObject.getVector());
+		feeder.accept(grammarAccess.getInsertElementAccess().getValueParameterParserRuleCall_5_0(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getInsertElementAccess().getIndexParameterParserRuleCall_7_0(), semanticObject.getIndex());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         result=Address 
-	 *         struct=Structure 
-	 *         value=Value 
-	 *         inserttype=TypeUse 
-	 *         insertvalue=Value 
-	 *         index+=NUMBER+
-	 *     )
+	 *     (result=Address aggerate=Parameter value=Parameter index+=NUMBER+)
 	 */
 	protected void sequence_InsertValue(EObject context, InsertValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -876,28 +838,28 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (functiontype=TypeUse name=Address pList=ParameterList toTarget=VALID_ID unwindCase=VALID_ID)
+	 *     (returnType=TypeUse name=Address pList=ParameterList targetLabel=VALID_ID unwindTargetLabel=VALID_ID)
 	 */
 	protected void sequence_Invoke(EObject context, Invoke semanticObject) {
 		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.INVOKE__FUNCTIONTYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.INVOKE__FUNCTIONTYPE));
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.INVOKE__RETURN_TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.INVOKE__RETURN_TYPE));
 			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.INVOKE__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.INVOKE__NAME));
 			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.INVOKE__PLIST) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.INVOKE__PLIST));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.INVOKE__TO_TARGET) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.INVOKE__TO_TARGET));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.INVOKE__UNWIND_CASE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.INVOKE__UNWIND_CASE));
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.INVOKE__TARGET_LABEL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.INVOKE__TARGET_LABEL));
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.INVOKE__UNWIND_TARGET_LABEL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.INVOKE__UNWIND_TARGET_LABEL));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getInvokeAccess().getFunctiontypeTypeUseParserRuleCall_3_0(), semanticObject.getFunctiontype());
+		feeder.accept(grammarAccess.getInvokeAccess().getReturnTypeTypeUseParserRuleCall_3_0(), semanticObject.getReturnType());
 		feeder.accept(grammarAccess.getInvokeAccess().getNameAddressParserRuleCall_4_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getInvokeAccess().getPListParameterListParserRuleCall_5_0(), semanticObject.getPList());
-		feeder.accept(grammarAccess.getInvokeAccess().getToTargetVALID_IDTerminalRuleCall_9_0(), semanticObject.getToTarget());
-		feeder.accept(grammarAccess.getInvokeAccess().getUnwindCaseVALID_IDTerminalRuleCall_12_0(), semanticObject.getUnwindCase());
+		feeder.accept(grammarAccess.getInvokeAccess().getTargetLabelVALID_IDTerminalRuleCall_9_0(), semanticObject.getTargetLabel());
+		feeder.accept(grammarAccess.getInvokeAccess().getUnwindTargetLabelVALID_IDTerminalRuleCall_12_0(), semanticObject.getUnwindTargetLabel());
 		feeder.finish();
 	}
 	
@@ -924,7 +886,14 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 * Constraint:
 	 *     (
 	 *         (result=Address (volatile?='volatile' | volatile?='volatile'?) address=Parameter align=NUMBER? meta+=MetaArgValue*) | 
-	 *         (result=Address volatile?='volatile'? address=Parameter ordering=ATOMIC_ORDERING align=NUMBER?)
+	 *         (
+	 *             result=Address 
+	 *             atomic?='atomic' 
+	 *             volatile?='volatile'? 
+	 *             address=Parameter 
+	 *             ordering=ATOMIC_ORDERING 
+	 *             align=NUMBER?
+	 *         )
 	 *     )
 	 */
 	protected void sequence_Load(EObject context, Load semanticObject) {
@@ -983,7 +952,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (operation=CAST_OP (from=TypeUse | from=Aggregate_Types) value=Value to=TypeUse)
+	 *     (operation=CAST_OP (from=TypeUse | from=Aggregate_Type) value=Value to=TypeUse)
 	 */
 	protected void sequence_NestedCast(EObject context, NestedCast semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -992,7 +961,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((aggregate=TypeUse | aggregate=Array) aggregatename=Value (indTypes+=TypeUse indizies+=Value)*)
+	 *     (aggerate=Parameter (indTypes+=TypeUse indizies+=Value)*)
 	 */
 	protected void sequence_NestedGetElementPtr(EObject context, NestedGetElementPtr semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1010,7 +979,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (type=TypeUse value=Value?)
+	 *     ((type=TypeUse | type=Aggregate_Type) value=Value?)
 	 */
 	protected void sequence_Parameter(EObject context, Parameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1074,112 +1043,85 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (resumestruct=Structure resumevalue=Value)
+	 *     (type=Structure value=Value)
 	 */
 	protected void sequence_Resume(EObject context, Resume semanticObject) {
 		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.RESUME__RESUMESTRUCT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.RESUME__RESUMESTRUCT));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.RESUME__RESUMEVALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.RESUME__RESUMEVALUE));
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.RESUME__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.RESUME__TYPE));
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.RESUME__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.RESUME__VALUE));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getResumeAccess().getResumestructStructureParserRuleCall_1_0(), semanticObject.getResumestruct());
-		feeder.accept(grammarAccess.getResumeAccess().getResumevalueValueParserRuleCall_2_0(), semanticObject.getResumevalue());
+		feeder.accept(grammarAccess.getResumeAccess().getTypeStructureParserRuleCall_1_0(), semanticObject.getType());
+		feeder.accept(grammarAccess.getResumeAccess().getValueValueParserRuleCall_2_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (returntype=Predefined | (returntype=TypeUse returnvalue=Value))
+	 *     value=Parameter
 	 */
 	protected void sequence_Return(EObject context, Return semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.RETURN__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.RETURN__VALUE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getReturnAccess().getValueParameterParserRuleCall_1_0(), semanticObject.getValue());
+		feeder.finish();
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         result=Address 
-	 *         conditiontype=TypeUse 
-	 *         conditionvalue=Value 
-	 *         val1type=TypeUse 
-	 *         val1value=Value 
-	 *         val2type=TypeUse 
-	 *         val2value=Value
-	 *     )
+	 *     (result=Address condition=Parameter trueValue=Parameter elseValue=Parameter)
 	 */
 	protected void sequence_Select(EObject context, Select semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SELECT__RESULT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SELECT__RESULT));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SELECT__CONDITIONTYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SELECT__CONDITIONTYPE));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SELECT__CONDITIONVALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SELECT__CONDITIONVALUE));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SELECT__VAL1TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SELECT__VAL1TYPE));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SELECT__VAL1VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SELECT__VAL1VALUE));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SELECT__VAL2TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SELECT__VAL2TYPE));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SELECT__VAL2VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SELECT__VAL2VALUE));
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SELECT__CONDITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SELECT__CONDITION));
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SELECT__TRUE_VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SELECT__TRUE_VALUE));
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SELECT__ELSE_VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SELECT__ELSE_VALUE));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getSelectAccess().getResultAddressParserRuleCall_0_0(), semanticObject.getResult());
-		feeder.accept(grammarAccess.getSelectAccess().getConditiontypeTypeUseParserRuleCall_3_0(), semanticObject.getConditiontype());
-		feeder.accept(grammarAccess.getSelectAccess().getConditionvalueValueParserRuleCall_4_0(), semanticObject.getConditionvalue());
-		feeder.accept(grammarAccess.getSelectAccess().getVal1typeTypeUseParserRuleCall_6_0(), semanticObject.getVal1type());
-		feeder.accept(grammarAccess.getSelectAccess().getVal1valueValueParserRuleCall_7_0(), semanticObject.getVal1value());
-		feeder.accept(grammarAccess.getSelectAccess().getVal2typeTypeUseParserRuleCall_9_0(), semanticObject.getVal2type());
-		feeder.accept(grammarAccess.getSelectAccess().getVal2valueValueParserRuleCall_10_0(), semanticObject.getVal2value());
+		feeder.accept(grammarAccess.getSelectAccess().getConditionParameterParserRuleCall_3_0(), semanticObject.getCondition());
+		feeder.accept(grammarAccess.getSelectAccess().getTrueValueParameterParserRuleCall_5_0(), semanticObject.getTrueValue());
+		feeder.accept(grammarAccess.getSelectAccess().getElseValueParameterParserRuleCall_7_0(), semanticObject.getElseValue());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         result=Address 
-	 *         val1type=TypeUse 
-	 *         val1value=Value 
-	 *         val2type=TypeUse 
-	 *         val2value=Value 
-	 *         masktype=TypeUse 
-	 *         maskvalue=Value
-	 *     )
+	 *     (result=Address value1=Parameter value2=Parameter mask=Parameter)
 	 */
 	protected void sequence_ShuffleVector(EObject context, ShuffleVector semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__RESULT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__RESULT));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1TYPE));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1VALUE));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2TYPE));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2VALUE));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__MASKTYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__MASKTYPE));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__MASKVALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__MASKVALUE));
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__VALUE1) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__VALUE1));
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__VALUE2) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__VALUE2));
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__MASK) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SHUFFLE_VECTOR__MASK));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getShuffleVectorAccess().getResultAddressParserRuleCall_0_0(), semanticObject.getResult());
-		feeder.accept(grammarAccess.getShuffleVectorAccess().getVal1typeTypeUseParserRuleCall_3_0(), semanticObject.getVal1type());
-		feeder.accept(grammarAccess.getShuffleVectorAccess().getVal1valueValueParserRuleCall_4_0(), semanticObject.getVal1value());
-		feeder.accept(grammarAccess.getShuffleVectorAccess().getVal2typeTypeUseParserRuleCall_6_0(), semanticObject.getVal2type());
-		feeder.accept(grammarAccess.getShuffleVectorAccess().getVal2valueValueParserRuleCall_7_0(), semanticObject.getVal2value());
-		feeder.accept(grammarAccess.getShuffleVectorAccess().getMasktypeTypeUseParserRuleCall_9_0(), semanticObject.getMasktype());
-		feeder.accept(grammarAccess.getShuffleVectorAccess().getMaskvalueValueParserRuleCall_10_0(), semanticObject.getMaskvalue());
+		feeder.accept(grammarAccess.getShuffleVectorAccess().getValue1ParameterParserRuleCall_3_0(), semanticObject.getValue1());
+		feeder.accept(grammarAccess.getShuffleVectorAccess().getValue2ParameterParserRuleCall_5_0(), semanticObject.getValue2());
+		feeder.accept(grammarAccess.getShuffleVectorAccess().getMaskParameterParserRuleCall_7_0(), semanticObject.getMask());
 		feeder.finish();
 	}
 	
@@ -1188,7 +1130,14 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 * Constraint:
 	 *     (
 	 *         ((volatile?='volatile' | volatile?='volatile'?) targetAddress=Parameter value=Parameter align=NUMBER? meta+=MetaArgValue*) | 
-	 *         (volatile?='volatile'? targetAddress=Parameter value=Parameter ordering=ATOMIC_ORDERING align=NUMBER?)
+	 *         (
+	 *             atomic?='atomic' 
+	 *             volatile?='volatile'? 
+	 *             targetAddress=Parameter 
+	 *             value=Parameter 
+	 *             ordering=ATOMIC_ORDERING 
+	 *             align=NUMBER?
+	 *         )
 	 *     )
 	 */
 	protected void sequence_Store(EObject context, Store semanticObject) {
@@ -1198,7 +1147,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((types+=TypeUse (types+=TypeUse | types+=Aggregate_Types)*)?)
+	 *     ((types+=TypeUse (types+=TypeUse | types+=Aggregate_Type)*)?)
 	 */
 	protected void sequence_Structure(EObject context, Structure semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1207,13 +1156,26 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         comptype=TypeUse 
-	 *         compvalue=Value 
-	 *         defaulttype=TypeUse 
-	 *         defaultvalue=Value 
-	 *         (jtypes+=TypeUse jvalues+=Value destinationtypes+=TypeUse destinations+=Value)+
-	 *     )
+	 *     (caseValue=Parameter destination=VALID_ID)
+	 */
+	protected void sequence_SwitchCase(EObject context, SwitchCase semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SWITCH_CASE__CASE_VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SWITCH_CASE__CASE_VALUE));
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.SWITCH_CASE__DESTINATION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.SWITCH_CASE__DESTINATION));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getSwitchCaseAccess().getCaseValueParameterParserRuleCall_0_0(), semanticObject.getCaseValue());
+		feeder.accept(grammarAccess.getSwitchCaseAccess().getDestinationVALID_IDTerminalRuleCall_3_0(), semanticObject.getDestination());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (caseValue=Parameter defaultCase=VALID_ID cases+=SwitchCase*)
 	 */
 	protected void sequence_Switch(EObject context, Switch semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1240,15 +1202,6 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((types+=TypeUse typelists+=TypeList? (types+=TypeUse typelists+=TypeList?)*)?)
-	 */
-	protected void sequence_TypeList(EObject context, TypeList semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
 	 *     {Unreachable}
 	 */
 	protected void sequence_Unreachable(EObject context, Unreachable semanticObject) {
@@ -1267,25 +1220,22 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (result=Address listtype=TypeUse listvalue=Value argType=TypeUse)
+	 *     (result=Address vaList=Parameter aType=TypeUse)
 	 */
 	protected void sequence_VariableAttributeAccess(EObject context, VariableAttributeAccess semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__RESULT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__RESULT));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE));
-			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE));
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__VA_LIST) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__VA_LIST));
+			if(transientValues.isValueTransient(semanticObject, LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__ATYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__ATYPE));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getVariableAttributeAccessAccess().getResultAddressParserRuleCall_0_0(), semanticObject.getResult());
-		feeder.accept(grammarAccess.getVariableAttributeAccessAccess().getListtypeTypeUseParserRuleCall_3_0(), semanticObject.getListtype());
-		feeder.accept(grammarAccess.getVariableAttributeAccessAccess().getListvalueValueParserRuleCall_4_0(), semanticObject.getListvalue());
-		feeder.accept(grammarAccess.getVariableAttributeAccessAccess().getArgTypeTypeUseParserRuleCall_6_0(), semanticObject.getArgType());
+		feeder.accept(grammarAccess.getVariableAttributeAccessAccess().getVaListParameterParserRuleCall_3_0(), semanticObject.getVaList());
+		feeder.accept(grammarAccess.getVariableAttributeAccessAccess().getATypeTypeUseParserRuleCall_5_0(), semanticObject.getAType());
 		feeder.finish();
 	}
 	

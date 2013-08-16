@@ -12,12 +12,9 @@ package de.upb.llvm_parser.llvm;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.Select#getResult <em>Result</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Select#getConditiontype <em>Conditiontype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Select#getConditionvalue <em>Conditionvalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Select#getVal1type <em>Val1type</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Select#getVal1value <em>Val1value</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Select#getVal2type <em>Val2type</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Select#getVal2value <em>Val2value</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Select#getCondition <em>Condition</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Select#getTrueValue <em>True Value</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Select#getElseValue <em>Else Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,159 +51,81 @@ public interface Select extends Instruction
   void setResult(Address value);
 
   /**
-	 * Returns the value of the '<em><b>Conditiontype</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Conditiontype</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Condition</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Conditiontype</em>' containment reference.
-	 * @see #setConditiontype(TypeUse)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSelect_Conditiontype()
+	 * @return the value of the '<em>Condition</em>' containment reference.
+	 * @see #setCondition(Parameter)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSelect_Condition()
 	 * @model containment="true"
 	 * @generated
 	 */
-  TypeUse getConditiontype();
+  Parameter getCondition();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Select#getConditiontype <em>Conditiontype</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Select#getCondition <em>Condition</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Conditiontype</em>' containment reference.
-	 * @see #getConditiontype()
+	 * @param value the new value of the '<em>Condition</em>' containment reference.
+	 * @see #getCondition()
 	 * @generated
 	 */
-  void setConditiontype(TypeUse value);
+  void setCondition(Parameter value);
 
   /**
-	 * Returns the value of the '<em><b>Conditionvalue</b></em>' containment reference.
+	 * Returns the value of the '<em><b>True Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Conditionvalue</em>' containment reference isn't clear,
+   * If the meaning of the '<em>True Value</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Conditionvalue</em>' containment reference.
-	 * @see #setConditionvalue(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSelect_Conditionvalue()
+	 * @return the value of the '<em>True Value</em>' containment reference.
+	 * @see #setTrueValue(Parameter)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSelect_TrueValue()
 	 * @model containment="true"
 	 * @generated
 	 */
-  Value getConditionvalue();
+  Parameter getTrueValue();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Select#getConditionvalue <em>Conditionvalue</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Select#getTrueValue <em>True Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Conditionvalue</em>' containment reference.
-	 * @see #getConditionvalue()
+	 * @param value the new value of the '<em>True Value</em>' containment reference.
+	 * @see #getTrueValue()
 	 * @generated
 	 */
-  void setConditionvalue(Value value);
+  void setTrueValue(Parameter value);
 
   /**
-	 * Returns the value of the '<em><b>Val1type</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Else Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Val1type</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Else Value</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Val1type</em>' containment reference.
-	 * @see #setVal1type(TypeUse)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSelect_Val1type()
+	 * @return the value of the '<em>Else Value</em>' containment reference.
+	 * @see #setElseValue(Parameter)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSelect_ElseValue()
 	 * @model containment="true"
 	 * @generated
 	 */
-  TypeUse getVal1type();
+  Parameter getElseValue();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Select#getVal1type <em>Val1type</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Select#getElseValue <em>Else Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Val1type</em>' containment reference.
-	 * @see #getVal1type()
+	 * @param value the new value of the '<em>Else Value</em>' containment reference.
+	 * @see #getElseValue()
 	 * @generated
 	 */
-  void setVal1type(TypeUse value);
-
-  /**
-	 * Returns the value of the '<em><b>Val1value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val1value</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Val1value</em>' containment reference.
-	 * @see #setVal1value(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSelect_Val1value()
-	 * @model containment="true"
-	 * @generated
-	 */
-  Value getVal1value();
-
-  /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Select#getVal1value <em>Val1value</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Val1value</em>' containment reference.
-	 * @see #getVal1value()
-	 * @generated
-	 */
-  void setVal1value(Value value);
-
-  /**
-	 * Returns the value of the '<em><b>Val2type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val2type</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Val2type</em>' containment reference.
-	 * @see #setVal2type(TypeUse)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSelect_Val2type()
-	 * @model containment="true"
-	 * @generated
-	 */
-  TypeUse getVal2type();
-
-  /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Select#getVal2type <em>Val2type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Val2type</em>' containment reference.
-	 * @see #getVal2type()
-	 * @generated
-	 */
-  void setVal2type(TypeUse value);
-
-  /**
-	 * Returns the value of the '<em><b>Val2value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val2value</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Val2value</em>' containment reference.
-	 * @see #setVal2value(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSelect_Val2value()
-	 * @model containment="true"
-	 * @generated
-	 */
-  Value getVal2value();
-
-  /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Select#getVal2value <em>Val2value</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Val2value</em>' containment reference.
-	 * @see #getVal2value()
-	 * @generated
-	 */
-  void setVal2value(Value value);
+  void setElseValue(Parameter value);
 
 } // Select

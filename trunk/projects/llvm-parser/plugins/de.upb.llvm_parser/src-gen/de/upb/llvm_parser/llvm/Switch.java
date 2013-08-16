@@ -12,14 +12,9 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.Switch#getComptype <em>Comptype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Switch#getCompvalue <em>Compvalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Switch#getDefaulttype <em>Defaulttype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Switch#getDefaultvalue <em>Defaultvalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Switch#getJtypes <em>Jtypes</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Switch#getJvalues <em>Jvalues</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Switch#getDestinationtypes <em>Destinationtypes</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Switch#getDestinations <em>Destinations</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Switch#getCaseValue <em>Case Value</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Switch#getDefaultCase <em>Default Case</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Switch#getCases <em>Cases</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,171 +25,71 @@ import org.eclipse.emf.common.util.EList;
 public interface Switch extends Instruction
 {
   /**
-	 * Returns the value of the '<em><b>Comptype</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Case Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Comptype</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Case Value</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Comptype</em>' containment reference.
-	 * @see #setComptype(TypeUse)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_Comptype()
+	 * @return the value of the '<em>Case Value</em>' containment reference.
+	 * @see #setCaseValue(Parameter)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_CaseValue()
 	 * @model containment="true"
 	 * @generated
 	 */
-  TypeUse getComptype();
+  Parameter getCaseValue();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Switch#getComptype <em>Comptype</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Switch#getCaseValue <em>Case Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Comptype</em>' containment reference.
-	 * @see #getComptype()
+	 * @param value the new value of the '<em>Case Value</em>' containment reference.
+	 * @see #getCaseValue()
 	 * @generated
 	 */
-  void setComptype(TypeUse value);
+  void setCaseValue(Parameter value);
 
   /**
-	 * Returns the value of the '<em><b>Compvalue</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Default Case</b></em>' attribute.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Compvalue</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Default Case</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Compvalue</em>' containment reference.
-	 * @see #setCompvalue(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_Compvalue()
-	 * @model containment="true"
+	 * @return the value of the '<em>Default Case</em>' attribute.
+	 * @see #setDefaultCase(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_DefaultCase()
+	 * @model
 	 * @generated
 	 */
-  Value getCompvalue();
+  String getDefaultCase();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Switch#getCompvalue <em>Compvalue</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Switch#getDefaultCase <em>Default Case</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Compvalue</em>' containment reference.
-	 * @see #getCompvalue()
+	 * @param value the new value of the '<em>Default Case</em>' attribute.
+	 * @see #getDefaultCase()
 	 * @generated
 	 */
-  void setCompvalue(Value value);
+  void setDefaultCase(String value);
 
   /**
-	 * Returns the value of the '<em><b>Defaulttype</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Cases</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.SwitchCase}.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Defaulttype</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Cases</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Defaulttype</em>' containment reference.
-	 * @see #setDefaulttype(TypeUse)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_Defaulttype()
+	 * @return the value of the '<em>Cases</em>' containment reference list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_Cases()
 	 * @model containment="true"
 	 * @generated
 	 */
-  TypeUse getDefaulttype();
-
-  /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Switch#getDefaulttype <em>Defaulttype</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Defaulttype</em>' containment reference.
-	 * @see #getDefaulttype()
-	 * @generated
-	 */
-  void setDefaulttype(TypeUse value);
-
-  /**
-	 * Returns the value of the '<em><b>Defaultvalue</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Defaultvalue</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Defaultvalue</em>' containment reference.
-	 * @see #setDefaultvalue(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_Defaultvalue()
-	 * @model containment="true"
-	 * @generated
-	 */
-  Value getDefaultvalue();
-
-  /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Switch#getDefaultvalue <em>Defaultvalue</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Defaultvalue</em>' containment reference.
-	 * @see #getDefaultvalue()
-	 * @generated
-	 */
-  void setDefaultvalue(Value value);
-
-  /**
-	 * Returns the value of the '<em><b>Jtypes</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.TypeUse}.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Jtypes</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Jtypes</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_Jtypes()
-	 * @model containment="true"
-	 * @generated
-	 */
-  EList<TypeUse> getJtypes();
-
-  /**
-	 * Returns the value of the '<em><b>Jvalues</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.Value}.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Jvalues</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Jvalues</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_Jvalues()
-	 * @model containment="true"
-	 * @generated
-	 */
-  EList<Value> getJvalues();
-
-  /**
-	 * Returns the value of the '<em><b>Destinationtypes</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.TypeUse}.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Destinationtypes</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Destinationtypes</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_Destinationtypes()
-	 * @model containment="true"
-	 * @generated
-	 */
-  EList<TypeUse> getDestinationtypes();
-
-  /**
-	 * Returns the value of the '<em><b>Destinations</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.Value}.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Destinations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Destinations</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getSwitch_Destinations()
-	 * @model containment="true"
-	 * @generated
-	 */
-  EList<Value> getDestinations();
+  EList<SwitchCase> getCases();
 
 } // Switch

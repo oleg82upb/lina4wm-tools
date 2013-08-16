@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class VectorImpl extends Aggregate_TypesImpl implements Vector
+public class VectorImpl extends Aggregate_TypeImpl implements Vector
 {
   /**
 	 * The default value of the '{@link #getLength() <em>Length</em>}' attribute.

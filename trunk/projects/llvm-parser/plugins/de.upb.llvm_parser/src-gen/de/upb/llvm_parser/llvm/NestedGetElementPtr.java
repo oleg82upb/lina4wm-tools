@@ -4,8 +4,6 @@ package de.upb.llvm_parser.llvm;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Nested Get Element Ptr</b></em>'.
@@ -14,8 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.NestedGetElementPtr#getAggregate <em>Aggregate</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.NestedGetElementPtr#getAggregatename <em>Aggregatename</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.NestedGetElementPtr#getAggerate <em>Aggerate</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.NestedGetElementPtr#getIndTypes <em>Ind Types</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.NestedGetElementPtr#getIndizies <em>Indizies</em>}</li>
  * </ul>
@@ -28,56 +25,30 @@ import org.eclipse.emf.ecore.EObject;
 public interface NestedGetElementPtr extends Value
 {
   /**
-	 * Returns the value of the '<em><b>Aggregate</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Aggerate</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Aggregate</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Aggerate</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Aggregate</em>' containment reference.
-	 * @see #setAggregate(EObject)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getNestedGetElementPtr_Aggregate()
+	 * @return the value of the '<em>Aggerate</em>' containment reference.
+	 * @see #setAggerate(Parameter)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getNestedGetElementPtr_Aggerate()
 	 * @model containment="true"
 	 * @generated
 	 */
-  EObject getAggregate();
+  Parameter getAggerate();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.NestedGetElementPtr#getAggregate <em>Aggregate</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.NestedGetElementPtr#getAggerate <em>Aggerate</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Aggregate</em>' containment reference.
-	 * @see #getAggregate()
+	 * @param value the new value of the '<em>Aggerate</em>' containment reference.
+	 * @see #getAggerate()
 	 * @generated
 	 */
-  void setAggregate(EObject value);
-
-  /**
-	 * Returns the value of the '<em><b>Aggregatename</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Aggregatename</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Aggregatename</em>' containment reference.
-	 * @see #setAggregatename(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getNestedGetElementPtr_Aggregatename()
-	 * @model containment="true"
-	 * @generated
-	 */
-  Value getAggregatename();
-
-  /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.NestedGetElementPtr#getAggregatename <em>Aggregatename</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Aggregatename</em>' containment reference.
-	 * @see #getAggregatename()
-	 * @generated
-	 */
-  void setAggregatename(Value value);
+  void setAggerate(Parameter value);
 
   /**
 	 * Returns the value of the '<em><b>Ind Types</b></em>' containment reference list.

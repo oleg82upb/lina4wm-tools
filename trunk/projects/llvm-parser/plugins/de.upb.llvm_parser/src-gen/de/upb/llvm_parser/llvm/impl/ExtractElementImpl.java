@@ -5,8 +5,7 @@ package de.upb.llvm_parser.llvm.impl;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.ExtractElement;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.TypeUse;
-import de.upb.llvm_parser.llvm.Value;
+import de.upb.llvm_parser.llvm.Parameter;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -24,9 +23,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.ExtractElementImpl#getResult <em>Result</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ExtractElementImpl#getVectortype <em>Vectortype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ExtractElementImpl#getVectorvalue <em>Vectorvalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ExtractElementImpl#getIndextype <em>Indextype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.ExtractElementImpl#getVector <em>Vector</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.ExtractElementImpl#getIndex <em>Index</em>}</li>
  * </ul>
  * </p>
@@ -46,34 +43,14 @@ public class ExtractElementImpl extends InstructionImpl implements ExtractElemen
   protected Address result;
 
   /**
-	 * The cached value of the '{@link #getVectortype() <em>Vectortype</em>}' containment reference.
+	 * The cached value of the '{@link #getVector() <em>Vector</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getVectortype()
+	 * @see #getVector()
 	 * @generated
 	 * @ordered
 	 */
-  protected TypeUse vectortype;
-
-  /**
-	 * The cached value of the '{@link #getVectorvalue() <em>Vectorvalue</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getVectorvalue()
-	 * @generated
-	 * @ordered
-	 */
-  protected Value vectorvalue;
-
-  /**
-	 * The cached value of the '{@link #getIndextype() <em>Indextype</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getIndextype()
-	 * @generated
-	 * @ordered
-	 */
-  protected TypeUse indextype;
+  protected Parameter vector;
 
   /**
 	 * The cached value of the '{@link #getIndex() <em>Index</em>}' containment reference.
@@ -83,7 +60,7 @@ public class ExtractElementImpl extends InstructionImpl implements ExtractElemen
 	 * @generated
 	 * @ordered
 	 */
-  protected Value index;
+  protected Parameter index;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -159,9 +136,9 @@ public class ExtractElementImpl extends InstructionImpl implements ExtractElemen
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public TypeUse getVectortype()
+  public Parameter getVector()
   {
-		return vectortype;
+		return vector;
 	}
 
   /**
@@ -169,13 +146,13 @@ public class ExtractElementImpl extends InstructionImpl implements ExtractElemen
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetVectortype(TypeUse newVectortype, NotificationChain msgs)
+  public NotificationChain basicSetVector(Parameter newVector, NotificationChain msgs)
   {
-		TypeUse oldVectortype = vectortype;
-		vectortype = newVectortype;
+		Parameter oldVector = vector;
+		vector = newVector;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.EXTRACT_ELEMENT__VECTORTYPE, oldVectortype, newVectortype);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.EXTRACT_ELEMENT__VECTOR, oldVector, newVector);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -186,20 +163,20 @@ public class ExtractElementImpl extends InstructionImpl implements ExtractElemen
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setVectortype(TypeUse newVectortype)
+  public void setVector(Parameter newVector)
   {
-		if (newVectortype != vectortype)
+		if (newVector != vector)
 		{
 			NotificationChain msgs = null;
-			if (vectortype != null)
-				msgs = ((InternalEObject)vectortype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.EXTRACT_ELEMENT__VECTORTYPE, null, msgs);
-			if (newVectortype != null)
-				msgs = ((InternalEObject)newVectortype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.EXTRACT_ELEMENT__VECTORTYPE, null, msgs);
-			msgs = basicSetVectortype(newVectortype, msgs);
+			if (vector != null)
+				msgs = ((InternalEObject)vector).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.EXTRACT_ELEMENT__VECTOR, null, msgs);
+			if (newVector != null)
+				msgs = ((InternalEObject)newVector).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.EXTRACT_ELEMENT__VECTOR, null, msgs);
+			msgs = basicSetVector(newVector, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.EXTRACT_ELEMENT__VECTORTYPE, newVectortype, newVectortype));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.EXTRACT_ELEMENT__VECTOR, newVector, newVector));
 	}
 
   /**
@@ -207,103 +184,7 @@ public class ExtractElementImpl extends InstructionImpl implements ExtractElemen
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public Value getVectorvalue()
-  {
-		return vectorvalue;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public NotificationChain basicSetVectorvalue(Value newVectorvalue, NotificationChain msgs)
-  {
-		Value oldVectorvalue = vectorvalue;
-		vectorvalue = newVectorvalue;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.EXTRACT_ELEMENT__VECTORVALUE, oldVectorvalue, newVectorvalue);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setVectorvalue(Value newVectorvalue)
-  {
-		if (newVectorvalue != vectorvalue)
-		{
-			NotificationChain msgs = null;
-			if (vectorvalue != null)
-				msgs = ((InternalEObject)vectorvalue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.EXTRACT_ELEMENT__VECTORVALUE, null, msgs);
-			if (newVectorvalue != null)
-				msgs = ((InternalEObject)newVectorvalue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.EXTRACT_ELEMENT__VECTORVALUE, null, msgs);
-			msgs = basicSetVectorvalue(newVectorvalue, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.EXTRACT_ELEMENT__VECTORVALUE, newVectorvalue, newVectorvalue));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public TypeUse getIndextype()
-  {
-		return indextype;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public NotificationChain basicSetIndextype(TypeUse newIndextype, NotificationChain msgs)
-  {
-		TypeUse oldIndextype = indextype;
-		indextype = newIndextype;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.EXTRACT_ELEMENT__INDEXTYPE, oldIndextype, newIndextype);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setIndextype(TypeUse newIndextype)
-  {
-		if (newIndextype != indextype)
-		{
-			NotificationChain msgs = null;
-			if (indextype != null)
-				msgs = ((InternalEObject)indextype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.EXTRACT_ELEMENT__INDEXTYPE, null, msgs);
-			if (newIndextype != null)
-				msgs = ((InternalEObject)newIndextype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.EXTRACT_ELEMENT__INDEXTYPE, null, msgs);
-			msgs = basicSetIndextype(newIndextype, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.EXTRACT_ELEMENT__INDEXTYPE, newIndextype, newIndextype));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public Value getIndex()
+  public Parameter getIndex()
   {
 		return index;
 	}
@@ -313,9 +194,9 @@ public class ExtractElementImpl extends InstructionImpl implements ExtractElemen
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetIndex(Value newIndex, NotificationChain msgs)
+  public NotificationChain basicSetIndex(Parameter newIndex, NotificationChain msgs)
   {
-		Value oldIndex = index;
+		Parameter oldIndex = index;
 		index = newIndex;
 		if (eNotificationRequired())
 		{
@@ -330,7 +211,7 @@ public class ExtractElementImpl extends InstructionImpl implements ExtractElemen
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setIndex(Value newIndex)
+  public void setIndex(Parameter newIndex)
   {
 		if (newIndex != index)
 		{
@@ -358,12 +239,8 @@ public class ExtractElementImpl extends InstructionImpl implements ExtractElemen
 		{
 			case LlvmPackage.EXTRACT_ELEMENT__RESULT:
 				return basicSetResult(null, msgs);
-			case LlvmPackage.EXTRACT_ELEMENT__VECTORTYPE:
-				return basicSetVectortype(null, msgs);
-			case LlvmPackage.EXTRACT_ELEMENT__VECTORVALUE:
-				return basicSetVectorvalue(null, msgs);
-			case LlvmPackage.EXTRACT_ELEMENT__INDEXTYPE:
-				return basicSetIndextype(null, msgs);
+			case LlvmPackage.EXTRACT_ELEMENT__VECTOR:
+				return basicSetVector(null, msgs);
 			case LlvmPackage.EXTRACT_ELEMENT__INDEX:
 				return basicSetIndex(null, msgs);
 		}
@@ -382,12 +259,8 @@ public class ExtractElementImpl extends InstructionImpl implements ExtractElemen
 		{
 			case LlvmPackage.EXTRACT_ELEMENT__RESULT:
 				return getResult();
-			case LlvmPackage.EXTRACT_ELEMENT__VECTORTYPE:
-				return getVectortype();
-			case LlvmPackage.EXTRACT_ELEMENT__VECTORVALUE:
-				return getVectorvalue();
-			case LlvmPackage.EXTRACT_ELEMENT__INDEXTYPE:
-				return getIndextype();
+			case LlvmPackage.EXTRACT_ELEMENT__VECTOR:
+				return getVector();
 			case LlvmPackage.EXTRACT_ELEMENT__INDEX:
 				return getIndex();
 		}
@@ -407,17 +280,11 @@ public class ExtractElementImpl extends InstructionImpl implements ExtractElemen
 			case LlvmPackage.EXTRACT_ELEMENT__RESULT:
 				setResult((Address)newValue);
 				return;
-			case LlvmPackage.EXTRACT_ELEMENT__VECTORTYPE:
-				setVectortype((TypeUse)newValue);
-				return;
-			case LlvmPackage.EXTRACT_ELEMENT__VECTORVALUE:
-				setVectorvalue((Value)newValue);
-				return;
-			case LlvmPackage.EXTRACT_ELEMENT__INDEXTYPE:
-				setIndextype((TypeUse)newValue);
+			case LlvmPackage.EXTRACT_ELEMENT__VECTOR:
+				setVector((Parameter)newValue);
 				return;
 			case LlvmPackage.EXTRACT_ELEMENT__INDEX:
-				setIndex((Value)newValue);
+				setIndex((Parameter)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -436,17 +303,11 @@ public class ExtractElementImpl extends InstructionImpl implements ExtractElemen
 			case LlvmPackage.EXTRACT_ELEMENT__RESULT:
 				setResult((Address)null);
 				return;
-			case LlvmPackage.EXTRACT_ELEMENT__VECTORTYPE:
-				setVectortype((TypeUse)null);
-				return;
-			case LlvmPackage.EXTRACT_ELEMENT__VECTORVALUE:
-				setVectorvalue((Value)null);
-				return;
-			case LlvmPackage.EXTRACT_ELEMENT__INDEXTYPE:
-				setIndextype((TypeUse)null);
+			case LlvmPackage.EXTRACT_ELEMENT__VECTOR:
+				setVector((Parameter)null);
 				return;
 			case LlvmPackage.EXTRACT_ELEMENT__INDEX:
-				setIndex((Value)null);
+				setIndex((Parameter)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -464,12 +325,8 @@ public class ExtractElementImpl extends InstructionImpl implements ExtractElemen
 		{
 			case LlvmPackage.EXTRACT_ELEMENT__RESULT:
 				return result != null;
-			case LlvmPackage.EXTRACT_ELEMENT__VECTORTYPE:
-				return vectortype != null;
-			case LlvmPackage.EXTRACT_ELEMENT__VECTORVALUE:
-				return vectorvalue != null;
-			case LlvmPackage.EXTRACT_ELEMENT__INDEXTYPE:
-				return indextype != null;
+			case LlvmPackage.EXTRACT_ELEMENT__VECTOR:
+				return vector != null;
 			case LlvmPackage.EXTRACT_ELEMENT__INDEX:
 				return index != null;
 		}

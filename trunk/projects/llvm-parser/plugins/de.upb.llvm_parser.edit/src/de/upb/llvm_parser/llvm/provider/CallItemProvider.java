@@ -77,8 +77,7 @@ public class CallItemProvider
 		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.CALL__RESULT);
-			childrenFeatures.add(LlvmPackage.Literals.CALL__ADRESSTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.CALL__ADRESS);
+			childrenFeatures.add(LlvmPackage.Literals.CALL__FUNCTION);
 			childrenFeatures.add(LlvmPackage.Literals.CALL__PLIST);
 		}
 		return childrenFeatures;
@@ -133,8 +132,7 @@ public class CallItemProvider
 		switch (notification.getFeatureID(Call.class))
 		{
 			case LlvmPackage.CALL__RESULT:
-			case LlvmPackage.CALL__ADRESSTYPE:
-			case LlvmPackage.CALL__ADRESS:
+			case LlvmPackage.CALL__FUNCTION:
 			case LlvmPackage.CALL__PLIST:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -160,78 +158,13 @@ public class CallItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.CALL__ADRESSTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CALL__ADRESSTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CALL__ADRESSTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CALL__ADRESS,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CALL__ADRESS,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CALL__ADRESS,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CALL__ADRESS,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CALL__ADRESS,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CALL__ADRESS,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
+				(LlvmPackage.Literals.CALL__FUNCTION,
+				 LlvmFactory.eINSTANCE.createParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CALL__PLIST,
 				 LlvmFactory.eINSTANCE.createParameterList()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection)
-	{
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == LlvmPackage.Literals.CALL__ADRESSTYPE ||
-			childFeature == LlvmPackage.Literals.CALL__ADRESS;
-
-		if (qualify)
-		{
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

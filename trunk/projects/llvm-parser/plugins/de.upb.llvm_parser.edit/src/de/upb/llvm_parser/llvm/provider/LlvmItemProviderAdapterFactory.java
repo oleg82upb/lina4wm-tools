@@ -408,27 +408,28 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.Aggregate_Types} instances.
+	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.Aggregate_Type} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Aggregate_TypesItemProvider aggregate_TypesItemProvider;
+	protected Aggregate_TypeItemProvider aggregate_TypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.Aggregate_Types}.
+	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.Aggregate_Type}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createAggregate_TypesAdapter() {
-		if (aggregate_TypesItemProvider == null)
+	public Adapter createAggregate_TypeAdapter()
+	{
+		if (aggregate_TypeItemProvider == null)
 		{
-			aggregate_TypesItemProvider = new Aggregate_TypesItemProvider(this);
+			aggregate_TypeItemProvider = new Aggregate_TypeItemProvider(this);
 		}
 
-		return aggregate_TypesItemProvider;
+		return aggregate_TypeItemProvider;
 	}
 
 	/**
@@ -649,30 +650,6 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 		}
 
 		return functionParameterListItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.TypeList} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected TypeListItemProvider typeListItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.TypeList}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createTypeListAdapter() {
-		if (typeListItemProvider == null)
-		{
-			typeListItemProvider = new TypeListItemProvider(this);
-		}
-
-		return typeListItemProvider;
 	}
 
 	/**
@@ -1473,6 +1450,31 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.SwitchCase} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SwitchCaseItemProvider switchCaseItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.llvm_parser.llvm.SwitchCase}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSwitchCaseAdapter()
+	{
+		if (switchCaseItemProvider == null)
+		{
+			switchCaseItemProvider = new SwitchCaseItemProvider(this);
+		}
+
+		return switchCaseItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link de.upb.llvm_parser.llvm.Invoke} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1708,7 +1710,7 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 		if (predefinedItemProvider != null) predefinedItemProvider.dispose();
 		if (vectorItemProvider != null) vectorItemProvider.dispose();
 		if (arrayItemProvider != null) arrayItemProvider.dispose();
-		if (aggregate_TypesItemProvider != null) aggregate_TypesItemProvider.dispose();
+		if (aggregate_TypeItemProvider != null) aggregate_TypeItemProvider.dispose();
 		if (constantItemProvider != null) constantItemProvider.dispose();
 		if (primitiveValueItemProvider != null) primitiveValueItemProvider.dispose();
 		if (valueItemProvider != null) valueItemProvider.dispose();
@@ -1718,7 +1720,6 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 		if (parameterListItemProvider != null) parameterListItemProvider.dispose();
 		if (functionParameterItemProvider != null) functionParameterItemProvider.dispose();
 		if (functionParameterListItemProvider != null) functionParameterListItemProvider.dispose();
-		if (typeListItemProvider != null) typeListItemProvider.dispose();
 		if (functionBodyItemProvider != null) functionBodyItemProvider.dispose();
 		if (instructionItemProvider != null) instructionItemProvider.dispose();
 		if (basicBlockItemProvider != null) basicBlockItemProvider.dispose();
@@ -1731,8 +1732,6 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 		if (metadataValueItemProvider != null) metadataValueItemProvider.dispose();
 		if (getElementPtrItemProvider != null) getElementPtrItemProvider.dispose();
 		if (nestedGetElementPtrItemProvider != null) nestedGetElementPtrItemProvider.dispose();
-		if (extractValueItemProvider != null) extractValueItemProvider.dispose();
-		if (insertValueItemProvider != null) insertValueItemProvider.dispose();
 		if (fenceItemProvider != null) fenceItemProvider.dispose();
 		if (cmpXchgItemProvider != null) cmpXchgItemProvider.dispose();
 		if (atomicRMWItemProvider != null) atomicRMWItemProvider.dispose();
@@ -1746,12 +1745,15 @@ public class LlvmItemProviderAdapterFactory extends LlvmAdapterFactory implement
 		if (clauseItemProvider != null) clauseItemProvider.dispose();
 		if (selectItemProvider != null) selectItemProvider.dispose();
 		if (variableAttributeAccessItemProvider != null) variableAttributeAccessItemProvider.dispose();
+		if (extractValueItemProvider != null) extractValueItemProvider.dispose();
+		if (insertValueItemProvider != null) insertValueItemProvider.dispose();
 		if (extractElementItemProvider != null) extractElementItemProvider.dispose();
 		if (insertElementItemProvider != null) insertElementItemProvider.dispose();
 		if (shuffleVectorItemProvider != null) shuffleVectorItemProvider.dispose();
 		if (compareItemProvider != null) compareItemProvider.dispose();
 		if (indirectBranchItemProvider != null) indirectBranchItemProvider.dispose();
 		if (switchItemProvider != null) switchItemProvider.dispose();
+		if (switchCaseItemProvider != null) switchCaseItemProvider.dispose();
 		if (invokeItemProvider != null) invokeItemProvider.dispose();
 		if (resumeItemProvider != null) resumeItemProvider.dispose();
 		if (unreachableItemProvider != null) unreachableItemProvider.dispose();

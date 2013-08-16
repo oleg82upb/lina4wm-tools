@@ -5,9 +5,7 @@ package de.upb.llvm_parser.llvm.impl;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.InsertValue;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.Structure;
-import de.upb.llvm_parser.llvm.TypeUse;
-import de.upb.llvm_parser.llvm.Value;
+import de.upb.llvm_parser.llvm.Parameter;
 
 import java.math.BigDecimal;
 
@@ -33,10 +31,8 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.InsertValueImpl#getResult <em>Result</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.InsertValueImpl#getStruct <em>Struct</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.InsertValueImpl#getAggerate <em>Aggerate</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.InsertValueImpl#getValue <em>Value</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.InsertValueImpl#getInserttype <em>Inserttype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.InsertValueImpl#getInsertvalue <em>Insertvalue</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.InsertValueImpl#getIndex <em>Index</em>}</li>
  * </ul>
  * </p>
@@ -56,14 +52,14 @@ public class InsertValueImpl extends InstructionImpl implements InsertValue
   protected Address result;
 
   /**
-	 * The cached value of the '{@link #getStruct() <em>Struct</em>}' containment reference.
+	 * The cached value of the '{@link #getAggerate() <em>Aggerate</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getStruct()
+	 * @see #getAggerate()
 	 * @generated
 	 * @ordered
 	 */
-  protected Structure struct;
+  protected Parameter aggerate;
 
   /**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
@@ -73,27 +69,7 @@ public class InsertValueImpl extends InstructionImpl implements InsertValue
 	 * @generated
 	 * @ordered
 	 */
-  protected Value value;
-
-  /**
-	 * The cached value of the '{@link #getInserttype() <em>Inserttype</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getInserttype()
-	 * @generated
-	 * @ordered
-	 */
-  protected TypeUse inserttype;
-
-  /**
-	 * The cached value of the '{@link #getInsertvalue() <em>Insertvalue</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getInsertvalue()
-	 * @generated
-	 * @ordered
-	 */
-  protected Value insertvalue;
+  protected Parameter value;
 
   /**
 	 * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute list.
@@ -179,9 +155,9 @@ public class InsertValueImpl extends InstructionImpl implements InsertValue
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public Structure getStruct()
+  public Parameter getAggerate()
   {
-		return struct;
+		return aggerate;
 	}
 
   /**
@@ -189,13 +165,13 @@ public class InsertValueImpl extends InstructionImpl implements InsertValue
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetStruct(Structure newStruct, NotificationChain msgs)
+  public NotificationChain basicSetAggerate(Parameter newAggerate, NotificationChain msgs)
   {
-		Structure oldStruct = struct;
-		struct = newStruct;
+		Parameter oldAggerate = aggerate;
+		aggerate = newAggerate;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_VALUE__STRUCT, oldStruct, newStruct);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_VALUE__AGGERATE, oldAggerate, newAggerate);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -206,20 +182,20 @@ public class InsertValueImpl extends InstructionImpl implements InsertValue
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setStruct(Structure newStruct)
+  public void setAggerate(Parameter newAggerate)
   {
-		if (newStruct != struct)
+		if (newAggerate != aggerate)
 		{
 			NotificationChain msgs = null;
-			if (struct != null)
-				msgs = ((InternalEObject)struct).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_VALUE__STRUCT, null, msgs);
-			if (newStruct != null)
-				msgs = ((InternalEObject)newStruct).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_VALUE__STRUCT, null, msgs);
-			msgs = basicSetStruct(newStruct, msgs);
+			if (aggerate != null)
+				msgs = ((InternalEObject)aggerate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_VALUE__AGGERATE, null, msgs);
+			if (newAggerate != null)
+				msgs = ((InternalEObject)newAggerate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_VALUE__AGGERATE, null, msgs);
+			msgs = basicSetAggerate(newAggerate, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_VALUE__STRUCT, newStruct, newStruct));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_VALUE__AGGERATE, newAggerate, newAggerate));
 	}
 
   /**
@@ -227,7 +203,7 @@ public class InsertValueImpl extends InstructionImpl implements InsertValue
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public Value getValue()
+  public Parameter getValue()
   {
 		return value;
 	}
@@ -237,9 +213,9 @@ public class InsertValueImpl extends InstructionImpl implements InsertValue
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetValue(Value newValue, NotificationChain msgs)
+  public NotificationChain basicSetValue(Parameter newValue, NotificationChain msgs)
   {
-		Value oldValue = value;
+		Parameter oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
 		{
@@ -254,7 +230,7 @@ public class InsertValueImpl extends InstructionImpl implements InsertValue
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setValue(Value newValue)
+  public void setValue(Parameter newValue)
   {
 		if (newValue != value)
 		{
@@ -268,102 +244,6 @@ public class InsertValueImpl extends InstructionImpl implements InsertValue
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_VALUE__VALUE, newValue, newValue));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public TypeUse getInserttype()
-  {
-		return inserttype;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public NotificationChain basicSetInserttype(TypeUse newInserttype, NotificationChain msgs)
-  {
-		TypeUse oldInserttype = inserttype;
-		inserttype = newInserttype;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_VALUE__INSERTTYPE, oldInserttype, newInserttype);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setInserttype(TypeUse newInserttype)
-  {
-		if (newInserttype != inserttype)
-		{
-			NotificationChain msgs = null;
-			if (inserttype != null)
-				msgs = ((InternalEObject)inserttype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_VALUE__INSERTTYPE, null, msgs);
-			if (newInserttype != null)
-				msgs = ((InternalEObject)newInserttype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_VALUE__INSERTTYPE, null, msgs);
-			msgs = basicSetInserttype(newInserttype, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_VALUE__INSERTTYPE, newInserttype, newInserttype));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public Value getInsertvalue()
-  {
-		return insertvalue;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public NotificationChain basicSetInsertvalue(Value newInsertvalue, NotificationChain msgs)
-  {
-		Value oldInsertvalue = insertvalue;
-		insertvalue = newInsertvalue;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_VALUE__INSERTVALUE, oldInsertvalue, newInsertvalue);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setInsertvalue(Value newInsertvalue)
-  {
-		if (newInsertvalue != insertvalue)
-		{
-			NotificationChain msgs = null;
-			if (insertvalue != null)
-				msgs = ((InternalEObject)insertvalue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_VALUE__INSERTVALUE, null, msgs);
-			if (newInsertvalue != null)
-				msgs = ((InternalEObject)newInsertvalue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_VALUE__INSERTVALUE, null, msgs);
-			msgs = basicSetInsertvalue(newInsertvalue, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_VALUE__INSERTVALUE, newInsertvalue, newInsertvalue));
 	}
 
   /**
@@ -392,14 +272,10 @@ public class InsertValueImpl extends InstructionImpl implements InsertValue
 		{
 			case LlvmPackage.INSERT_VALUE__RESULT:
 				return basicSetResult(null, msgs);
-			case LlvmPackage.INSERT_VALUE__STRUCT:
-				return basicSetStruct(null, msgs);
+			case LlvmPackage.INSERT_VALUE__AGGERATE:
+				return basicSetAggerate(null, msgs);
 			case LlvmPackage.INSERT_VALUE__VALUE:
 				return basicSetValue(null, msgs);
-			case LlvmPackage.INSERT_VALUE__INSERTTYPE:
-				return basicSetInserttype(null, msgs);
-			case LlvmPackage.INSERT_VALUE__INSERTVALUE:
-				return basicSetInsertvalue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -416,14 +292,10 @@ public class InsertValueImpl extends InstructionImpl implements InsertValue
 		{
 			case LlvmPackage.INSERT_VALUE__RESULT:
 				return getResult();
-			case LlvmPackage.INSERT_VALUE__STRUCT:
-				return getStruct();
+			case LlvmPackage.INSERT_VALUE__AGGERATE:
+				return getAggerate();
 			case LlvmPackage.INSERT_VALUE__VALUE:
 				return getValue();
-			case LlvmPackage.INSERT_VALUE__INSERTTYPE:
-				return getInserttype();
-			case LlvmPackage.INSERT_VALUE__INSERTVALUE:
-				return getInsertvalue();
 			case LlvmPackage.INSERT_VALUE__INDEX:
 				return getIndex();
 		}
@@ -444,17 +316,11 @@ public class InsertValueImpl extends InstructionImpl implements InsertValue
 			case LlvmPackage.INSERT_VALUE__RESULT:
 				setResult((Address)newValue);
 				return;
-			case LlvmPackage.INSERT_VALUE__STRUCT:
-				setStruct((Structure)newValue);
+			case LlvmPackage.INSERT_VALUE__AGGERATE:
+				setAggerate((Parameter)newValue);
 				return;
 			case LlvmPackage.INSERT_VALUE__VALUE:
-				setValue((Value)newValue);
-				return;
-			case LlvmPackage.INSERT_VALUE__INSERTTYPE:
-				setInserttype((TypeUse)newValue);
-				return;
-			case LlvmPackage.INSERT_VALUE__INSERTVALUE:
-				setInsertvalue((Value)newValue);
+				setValue((Parameter)newValue);
 				return;
 			case LlvmPackage.INSERT_VALUE__INDEX:
 				getIndex().clear();
@@ -477,17 +343,11 @@ public class InsertValueImpl extends InstructionImpl implements InsertValue
 			case LlvmPackage.INSERT_VALUE__RESULT:
 				setResult((Address)null);
 				return;
-			case LlvmPackage.INSERT_VALUE__STRUCT:
-				setStruct((Structure)null);
+			case LlvmPackage.INSERT_VALUE__AGGERATE:
+				setAggerate((Parameter)null);
 				return;
 			case LlvmPackage.INSERT_VALUE__VALUE:
-				setValue((Value)null);
-				return;
-			case LlvmPackage.INSERT_VALUE__INSERTTYPE:
-				setInserttype((TypeUse)null);
-				return;
-			case LlvmPackage.INSERT_VALUE__INSERTVALUE:
-				setInsertvalue((Value)null);
+				setValue((Parameter)null);
 				return;
 			case LlvmPackage.INSERT_VALUE__INDEX:
 				getIndex().clear();
@@ -508,14 +368,10 @@ public class InsertValueImpl extends InstructionImpl implements InsertValue
 		{
 			case LlvmPackage.INSERT_VALUE__RESULT:
 				return result != null;
-			case LlvmPackage.INSERT_VALUE__STRUCT:
-				return struct != null;
+			case LlvmPackage.INSERT_VALUE__AGGERATE:
+				return aggerate != null;
 			case LlvmPackage.INSERT_VALUE__VALUE:
 				return value != null;
-			case LlvmPackage.INSERT_VALUE__INSERTTYPE:
-				return inserttype != null;
-			case LlvmPackage.INSERT_VALUE__INSERTVALUE:
-				return insertvalue != null;
 			case LlvmPackage.INSERT_VALUE__INDEX:
 				return index != null && !index.isEmpty();
 		}
