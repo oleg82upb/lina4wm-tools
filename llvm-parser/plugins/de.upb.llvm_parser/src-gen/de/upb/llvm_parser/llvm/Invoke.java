@@ -11,11 +11,11 @@ package de.upb.llvm_parser.llvm;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.Invoke#getFunctiontype <em>Functiontype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Invoke#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Invoke#getName <em>Name</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Invoke#getPList <em>PList</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Invoke#getToTarget <em>To Target</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Invoke#getUnwindCase <em>Unwind Case</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Invoke#getTargetLabel <em>Target Label</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Invoke#getUnwindTargetLabel <em>Unwind Target Label</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,30 +26,30 @@ package de.upb.llvm_parser.llvm;
 public interface Invoke extends Instruction
 {
   /**
-	 * Returns the value of the '<em><b>Functiontype</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Return Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Functiontype</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Return Type</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Functiontype</em>' containment reference.
-	 * @see #setFunctiontype(TypeUse)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_Functiontype()
+	 * @return the value of the '<em>Return Type</em>' containment reference.
+	 * @see #setReturnType(TypeUse)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_ReturnType()
 	 * @model containment="true"
 	 * @generated
 	 */
-  TypeUse getFunctiontype();
+  TypeUse getReturnType();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getFunctiontype <em>Functiontype</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getReturnType <em>Return Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Functiontype</em>' containment reference.
-	 * @see #getFunctiontype()
+	 * @param value the new value of the '<em>Return Type</em>' containment reference.
+	 * @see #getReturnType()
 	 * @generated
 	 */
-  void setFunctiontype(TypeUse value);
+  void setReturnType(TypeUse value);
 
   /**
 	 * Returns the value of the '<em><b>Name</b></em>' containment reference.
@@ -104,55 +104,55 @@ public interface Invoke extends Instruction
   void setPList(ParameterList value);
 
   /**
-	 * Returns the value of the '<em><b>To Target</b></em>' attribute.
+	 * Returns the value of the '<em><b>Target Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>To Target</em>' attribute isn't clear,
+   * If the meaning of the '<em>Target Label</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>To Target</em>' attribute.
-	 * @see #setToTarget(String)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_ToTarget()
+	 * @return the value of the '<em>Target Label</em>' attribute.
+	 * @see #setTargetLabel(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_TargetLabel()
 	 * @model
 	 * @generated
 	 */
-  String getToTarget();
+  String getTargetLabel();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getToTarget <em>To Target</em>}' attribute.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getTargetLabel <em>Target Label</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>To Target</em>' attribute.
-	 * @see #getToTarget()
+	 * @param value the new value of the '<em>Target Label</em>' attribute.
+	 * @see #getTargetLabel()
 	 * @generated
 	 */
-  void setToTarget(String value);
+  void setTargetLabel(String value);
 
   /**
-	 * Returns the value of the '<em><b>Unwind Case</b></em>' attribute.
+	 * Returns the value of the '<em><b>Unwind Target Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Unwind Case</em>' attribute isn't clear,
+   * If the meaning of the '<em>Unwind Target Label</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Unwind Case</em>' attribute.
-	 * @see #setUnwindCase(String)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_UnwindCase()
+	 * @return the value of the '<em>Unwind Target Label</em>' attribute.
+	 * @see #setUnwindTargetLabel(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInvoke_UnwindTargetLabel()
 	 * @model
 	 * @generated
 	 */
-  String getUnwindCase();
+  String getUnwindTargetLabel();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getUnwindCase <em>Unwind Case</em>}' attribute.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Invoke#getUnwindTargetLabel <em>Unwind Target Label</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Unwind Case</em>' attribute.
-	 * @see #getUnwindCase()
+	 * @param value the new value of the '<em>Unwind Target Label</em>' attribute.
+	 * @see #getUnwindTargetLabel()
 	 * @generated
 	 */
-  void setUnwindCase(String value);
+  void setUnwindTargetLabel(String value);
 
 } // Invoke

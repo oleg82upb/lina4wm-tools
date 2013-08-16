@@ -102,10 +102,8 @@ public class InsertValueItemProvider
 		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.INSERT_VALUE__RESULT);
-			childrenFeatures.add(LlvmPackage.Literals.INSERT_VALUE__STRUCT);
+			childrenFeatures.add(LlvmPackage.Literals.INSERT_VALUE__AGGERATE);
 			childrenFeatures.add(LlvmPackage.Literals.INSERT_VALUE__VALUE);
-			childrenFeatures.add(LlvmPackage.Literals.INSERT_VALUE__INSERTTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.INSERT_VALUE__INSERTVALUE);
 		}
 		return childrenFeatures;
 	}
@@ -162,10 +160,8 @@ public class InsertValueItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case LlvmPackage.INSERT_VALUE__RESULT:
-			case LlvmPackage.INSERT_VALUE__STRUCT:
+			case LlvmPackage.INSERT_VALUE__AGGERATE:
 			case LlvmPackage.INSERT_VALUE__VALUE:
-			case LlvmPackage.INSERT_VALUE__INSERTTYPE:
-			case LlvmPackage.INSERT_VALUE__INSERTVALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -190,83 +186,13 @@ public class InsertValueItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.INSERT_VALUE__STRUCT,
-				 LlvmFactory.eINSTANCE.createStructure()));
+				(LlvmPackage.Literals.INSERT_VALUE__AGGERATE,
+				 LlvmFactory.eINSTANCE.createParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSERT_VALUE__VALUE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_VALUE__VALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_VALUE__VALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_VALUE__VALUE,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_VALUE__VALUE,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_VALUE__VALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_VALUE__INSERTTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_VALUE__INSERTTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_VALUE__INSERTTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_VALUE__INSERTVALUE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_VALUE__INSERTVALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_VALUE__INSERTVALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_VALUE__INSERTVALUE,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_VALUE__INSERTVALUE,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_VALUE__INSERTVALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
+				 LlvmFactory.eINSTANCE.createParameter()));
 	}
 
 	/**
@@ -281,9 +207,8 @@ public class InsertValueItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == LlvmPackage.Literals.INSERT_VALUE__VALUE ||
-			childFeature == LlvmPackage.Literals.INSERT_VALUE__INSERTTYPE ||
-			childFeature == LlvmPackage.Literals.INSERT_VALUE__INSERTVALUE;
+			childFeature == LlvmPackage.Literals.INSERT_VALUE__AGGERATE ||
+			childFeature == LlvmPackage.Literals.INSERT_VALUE__VALUE;
 
 		if (qualify)
 		{

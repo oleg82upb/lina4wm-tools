@@ -12,10 +12,10 @@ package de.upb.llvm_parser.llvm;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.Compare#getResult <em>Result</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Compare#getPred <em>Pred</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Compare#getComptype <em>Comptype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Compare#getValue1 <em>Value1</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Compare#getValue2 <em>Value2</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Compare#getCond <em>Cond</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Compare#getOpType <em>Op Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Compare#getOperand1 <em>Operand1</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Compare#getOperand2 <em>Operand2</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,107 +52,107 @@ public interface Compare extends Instruction
   void setResult(Address value);
 
   /**
-	 * Returns the value of the '<em><b>Pred</b></em>' attribute.
+	 * Returns the value of the '<em><b>Cond</b></em>' attribute.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Pred</em>' attribute isn't clear,
+   * If the meaning of the '<em>Cond</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Pred</em>' attribute.
-	 * @see #setPred(String)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCompare_Pred()
+	 * @return the value of the '<em>Cond</em>' attribute.
+	 * @see #setCond(String)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCompare_Cond()
 	 * @model
 	 * @generated
 	 */
-  String getPred();
+  String getCond();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Compare#getPred <em>Pred</em>}' attribute.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Compare#getCond <em>Cond</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Pred</em>' attribute.
-	 * @see #getPred()
+	 * @param value the new value of the '<em>Cond</em>' attribute.
+	 * @see #getCond()
 	 * @generated
 	 */
-  void setPred(String value);
+  void setCond(String value);
 
   /**
-	 * Returns the value of the '<em><b>Comptype</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Op Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Comptype</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Op Type</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Comptype</em>' containment reference.
-	 * @see #setComptype(TypeUse)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCompare_Comptype()
+	 * @return the value of the '<em>Op Type</em>' containment reference.
+	 * @see #setOpType(TypeUse)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCompare_OpType()
 	 * @model containment="true"
 	 * @generated
 	 */
-  TypeUse getComptype();
+  TypeUse getOpType();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Compare#getComptype <em>Comptype</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Compare#getOpType <em>Op Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Comptype</em>' containment reference.
-	 * @see #getComptype()
+	 * @param value the new value of the '<em>Op Type</em>' containment reference.
+	 * @see #getOpType()
 	 * @generated
 	 */
-  void setComptype(TypeUse value);
+  void setOpType(TypeUse value);
 
   /**
-	 * Returns the value of the '<em><b>Value1</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Operand1</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Value1</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Operand1</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value1</em>' containment reference.
-	 * @see #setValue1(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCompare_Value1()
+	 * @return the value of the '<em>Operand1</em>' containment reference.
+	 * @see #setOperand1(Value)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCompare_Operand1()
 	 * @model containment="true"
 	 * @generated
 	 */
-  Value getValue1();
+  Value getOperand1();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Compare#getValue1 <em>Value1</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Compare#getOperand1 <em>Operand1</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value1</em>' containment reference.
-	 * @see #getValue1()
+	 * @param value the new value of the '<em>Operand1</em>' containment reference.
+	 * @see #getOperand1()
 	 * @generated
 	 */
-  void setValue1(Value value);
+  void setOperand1(Value value);
 
   /**
-	 * Returns the value of the '<em><b>Value2</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Operand2</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Value2</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Operand2</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value2</em>' containment reference.
-	 * @see #setValue2(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCompare_Value2()
+	 * @return the value of the '<em>Operand2</em>' containment reference.
+	 * @see #setOperand2(Value)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCompare_Operand2()
 	 * @model containment="true"
 	 * @generated
 	 */
-  Value getValue2();
+  Value getOperand2();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Compare#getValue2 <em>Value2</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Compare#getOperand2 <em>Operand2</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value2</em>' containment reference.
-	 * @see #getValue2()
+	 * @param value the new value of the '<em>Operand2</em>' containment reference.
+	 * @see #getOperand2()
 	 * @generated
 	 */
-  void setValue2(Value value);
+  void setOperand2(Value value);
 
 } // Compare

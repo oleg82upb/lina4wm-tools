@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.upb.llvm_parser.llvm.impl.StoreImpl#getValue <em>Value</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.StoreImpl#getAlign <em>Align</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.StoreImpl#getMeta <em>Meta</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.StoreImpl#isAtomic <em>Atomic</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.StoreImpl#getOrdering <em>Ordering</em>}</li>
  * </ul>
  * </p>
@@ -113,6 +114,26 @@ public class StoreImpl extends InstructionImpl implements Store
 	 * @ordered
 	 */
   protected EList<MetaArgValue> meta;
+
+  /**
+	 * The default value of the '{@link #isAtomic() <em>Atomic</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #isAtomic()
+	 * @generated
+	 * @ordered
+	 */
+  protected static final boolean ATOMIC_EDEFAULT = false;
+
+  /**
+	 * The cached value of the '{@link #isAtomic() <em>Atomic</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #isAtomic()
+	 * @generated
+	 * @ordered
+	 */
+  protected boolean atomic = ATOMIC_EDEFAULT;
 
   /**
 	 * The default value of the '{@link #getOrdering() <em>Ordering</em>}' attribute.
@@ -316,6 +337,29 @@ public class StoreImpl extends InstructionImpl implements Store
    * <!-- end-user-doc -->
 	 * @generated
 	 */
+  public boolean isAtomic()
+  {
+		return atomic;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public void setAtomic(boolean newAtomic)
+  {
+		boolean oldAtomic = atomic;
+		atomic = newAtomic;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.STORE__ATOMIC, oldAtomic, atomic));
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
   public String getOrdering()
   {
 		return ordering;
@@ -374,6 +418,8 @@ public class StoreImpl extends InstructionImpl implements Store
 				return getAlign();
 			case LlvmPackage.STORE__META:
 				return getMeta();
+			case LlvmPackage.STORE__ATOMIC:
+				return isAtomic();
 			case LlvmPackage.STORE__ORDERING:
 				return getOrdering();
 		}
@@ -407,6 +453,9 @@ public class StoreImpl extends InstructionImpl implements Store
 				getMeta().clear();
 				getMeta().addAll((Collection<? extends MetaArgValue>)newValue);
 				return;
+			case LlvmPackage.STORE__ATOMIC:
+				setAtomic((Boolean)newValue);
+				return;
 			case LlvmPackage.STORE__ORDERING:
 				setOrdering((String)newValue);
 				return;
@@ -439,6 +488,9 @@ public class StoreImpl extends InstructionImpl implements Store
 			case LlvmPackage.STORE__META:
 				getMeta().clear();
 				return;
+			case LlvmPackage.STORE__ATOMIC:
+				setAtomic(ATOMIC_EDEFAULT);
+				return;
 			case LlvmPackage.STORE__ORDERING:
 				setOrdering(ORDERING_EDEFAULT);
 				return;
@@ -466,6 +518,8 @@ public class StoreImpl extends InstructionImpl implements Store
 				return ALIGN_EDEFAULT == null ? align != null : !ALIGN_EDEFAULT.equals(align);
 			case LlvmPackage.STORE__META:
 				return meta != null && !meta.isEmpty();
+			case LlvmPackage.STORE__ATOMIC:
+				return atomic != ATOMIC_EDEFAULT;
 			case LlvmPackage.STORE__ORDERING:
 				return ORDERING_EDEFAULT == null ? ordering != null : !ORDERING_EDEFAULT.equals(ordering);
 		}
@@ -487,6 +541,8 @@ public class StoreImpl extends InstructionImpl implements Store
 		result.append(volatile_);
 		result.append(", align: ");
 		result.append(align);
+		result.append(", atomic: ");
+		result.append(atomic);
 		result.append(", ordering: ");
 		result.append(ordering);
 		result.append(')');

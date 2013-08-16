@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.upb.llvm_parser.llvm.Load#getAddress <em>Address</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Load#getAlign <em>Align</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Load#getMeta <em>Meta</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Load#isAtomic <em>Atomic</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Load#getOrdering <em>Ordering</em>}</li>
  * </ul>
  * </p>
@@ -148,6 +149,32 @@ public interface Load extends Instruction
 	 * @generated
 	 */
   EList<MetaArgValue> getMeta();
+
+  /**
+	 * Returns the value of the '<em><b>Atomic</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Atomic</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+	 * @return the value of the '<em>Atomic</em>' attribute.
+	 * @see #setAtomic(boolean)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getLoad_Atomic()
+	 * @model
+	 * @generated
+	 */
+  boolean isAtomic();
+
+  /**
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Load#isAtomic <em>Atomic</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Atomic</em>' attribute.
+	 * @see #isAtomic()
+	 * @generated
+	 */
+  void setAtomic(boolean value);
 
   /**
 	 * Returns the value of the '<em><b>Ordering</b></em>' attribute.

@@ -252,7 +252,7 @@ public class CastItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createAggregate_Types()));
+				 LlvmFactory.eINSTANCE.createAggregate_Type()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -308,11 +308,6 @@ public class CastItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
 				 LlvmFactory.eINSTANCE.createFunctionParameterList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createTypeList()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -373,16 +368,6 @@ public class CastItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
 				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createExtractValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CAST__FROM,
-				 LlvmFactory.eINSTANCE.createInsertValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -452,6 +437,16 @@ public class CastItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
+				 LlvmFactory.eINSTANCE.createExtractValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CAST__FROM,
+				 LlvmFactory.eINSTANCE.createInsertValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CAST__FROM,
 				 LlvmFactory.eINSTANCE.createExtractElement()));
 
 		newChildDescriptors.add
@@ -478,6 +473,11 @@ public class CastItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.CAST__FROM,
 				 LlvmFactory.eINSTANCE.createSwitch()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.CAST__FROM,
+				 LlvmFactory.eINSTANCE.createSwitchCase()));
 
 		newChildDescriptors.add
 			(createChildParameter

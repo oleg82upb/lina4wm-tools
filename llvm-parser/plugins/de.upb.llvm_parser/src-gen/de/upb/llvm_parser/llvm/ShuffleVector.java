@@ -12,12 +12,9 @@ package de.upb.llvm_parser.llvm;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.ShuffleVector#getResult <em>Result</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.ShuffleVector#getVal1type <em>Val1type</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.ShuffleVector#getVal1value <em>Val1value</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.ShuffleVector#getVal2type <em>Val2type</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.ShuffleVector#getVal2value <em>Val2value</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.ShuffleVector#getMasktype <em>Masktype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.ShuffleVector#getMaskvalue <em>Maskvalue</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.ShuffleVector#getValue1 <em>Value1</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.ShuffleVector#getValue2 <em>Value2</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.ShuffleVector#getMask <em>Mask</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,159 +51,81 @@ public interface ShuffleVector extends Instruction
   void setResult(Address value);
 
   /**
-	 * Returns the value of the '<em><b>Val1type</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Value1</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Val1type</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Value1</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Val1type</em>' containment reference.
-	 * @see #setVal1type(TypeUse)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getShuffleVector_Val1type()
+	 * @return the value of the '<em>Value1</em>' containment reference.
+	 * @see #setValue1(Parameter)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getShuffleVector_Value1()
 	 * @model containment="true"
 	 * @generated
 	 */
-  TypeUse getVal1type();
+  Parameter getValue1();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ShuffleVector#getVal1type <em>Val1type</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ShuffleVector#getValue1 <em>Value1</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Val1type</em>' containment reference.
-	 * @see #getVal1type()
+	 * @param value the new value of the '<em>Value1</em>' containment reference.
+	 * @see #getValue1()
 	 * @generated
 	 */
-  void setVal1type(TypeUse value);
+  void setValue1(Parameter value);
 
   /**
-	 * Returns the value of the '<em><b>Val1value</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Value2</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Val1value</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Value2</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Val1value</em>' containment reference.
-	 * @see #setVal1value(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getShuffleVector_Val1value()
+	 * @return the value of the '<em>Value2</em>' containment reference.
+	 * @see #setValue2(Parameter)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getShuffleVector_Value2()
 	 * @model containment="true"
 	 * @generated
 	 */
-  Value getVal1value();
+  Parameter getValue2();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ShuffleVector#getVal1value <em>Val1value</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ShuffleVector#getValue2 <em>Value2</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Val1value</em>' containment reference.
-	 * @see #getVal1value()
+	 * @param value the new value of the '<em>Value2</em>' containment reference.
+	 * @see #getValue2()
 	 * @generated
 	 */
-  void setVal1value(Value value);
+  void setValue2(Parameter value);
 
   /**
-	 * Returns the value of the '<em><b>Val2type</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Mask</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Val2type</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Mask</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Val2type</em>' containment reference.
-	 * @see #setVal2type(TypeUse)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getShuffleVector_Val2type()
+	 * @return the value of the '<em>Mask</em>' containment reference.
+	 * @see #setMask(Parameter)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getShuffleVector_Mask()
 	 * @model containment="true"
 	 * @generated
 	 */
-  TypeUse getVal2type();
+  Parameter getMask();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ShuffleVector#getVal2type <em>Val2type</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ShuffleVector#getMask <em>Mask</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Val2type</em>' containment reference.
-	 * @see #getVal2type()
+	 * @param value the new value of the '<em>Mask</em>' containment reference.
+	 * @see #getMask()
 	 * @generated
 	 */
-  void setVal2type(TypeUse value);
-
-  /**
-	 * Returns the value of the '<em><b>Val2value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val2value</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Val2value</em>' containment reference.
-	 * @see #setVal2value(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getShuffleVector_Val2value()
-	 * @model containment="true"
-	 * @generated
-	 */
-  Value getVal2value();
-
-  /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ShuffleVector#getVal2value <em>Val2value</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Val2value</em>' containment reference.
-	 * @see #getVal2value()
-	 * @generated
-	 */
-  void setVal2value(Value value);
-
-  /**
-	 * Returns the value of the '<em><b>Masktype</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Masktype</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Masktype</em>' containment reference.
-	 * @see #setMasktype(TypeUse)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getShuffleVector_Masktype()
-	 * @model containment="true"
-	 * @generated
-	 */
-  TypeUse getMasktype();
-
-  /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ShuffleVector#getMasktype <em>Masktype</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Masktype</em>' containment reference.
-	 * @see #getMasktype()
-	 * @generated
-	 */
-  void setMasktype(TypeUse value);
-
-  /**
-	 * Returns the value of the '<em><b>Maskvalue</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Maskvalue</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Maskvalue</em>' containment reference.
-	 * @see #setMaskvalue(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getShuffleVector_Maskvalue()
-	 * @model containment="true"
-	 * @generated
-	 */
-  Value getMaskvalue();
-
-  /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ShuffleVector#getMaskvalue <em>Maskvalue</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Maskvalue</em>' containment reference.
-	 * @see #getMaskvalue()
-	 * @generated
-	 */
-  void setMaskvalue(Value value);
+  void setMask(Parameter value);
 
 } // ShuffleVector

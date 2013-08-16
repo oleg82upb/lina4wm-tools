@@ -24,10 +24,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.CompareImpl#getResult <em>Result</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.CompareImpl#getPred <em>Pred</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.CompareImpl#getComptype <em>Comptype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.CompareImpl#getValue1 <em>Value1</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.CompareImpl#getValue2 <em>Value2</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.CompareImpl#getCond <em>Cond</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.CompareImpl#getOpType <em>Op Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.CompareImpl#getOperand1 <em>Operand1</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.CompareImpl#getOperand2 <em>Operand2</em>}</li>
  * </ul>
  * </p>
  *
@@ -46,54 +46,54 @@ public class CompareImpl extends InstructionImpl implements Compare
   protected Address result;
 
   /**
-	 * The default value of the '{@link #getPred() <em>Pred</em>}' attribute.
+	 * The default value of the '{@link #getCond() <em>Cond</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getPred()
+	 * @see #getCond()
 	 * @generated
 	 * @ordered
 	 */
-  protected static final String PRED_EDEFAULT = null;
+  protected static final String COND_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getPred() <em>Pred</em>}' attribute.
+	 * The cached value of the '{@link #getCond() <em>Cond</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getPred()
+	 * @see #getCond()
 	 * @generated
 	 * @ordered
 	 */
-  protected String pred = PRED_EDEFAULT;
+  protected String cond = COND_EDEFAULT;
 
   /**
-	 * The cached value of the '{@link #getComptype() <em>Comptype</em>}' containment reference.
+	 * The cached value of the '{@link #getOpType() <em>Op Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getComptype()
+	 * @see #getOpType()
 	 * @generated
 	 * @ordered
 	 */
-  protected TypeUse comptype;
+  protected TypeUse opType;
 
   /**
-	 * The cached value of the '{@link #getValue1() <em>Value1</em>}' containment reference.
+	 * The cached value of the '{@link #getOperand1() <em>Operand1</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getValue1()
+	 * @see #getOperand1()
 	 * @generated
 	 * @ordered
 	 */
-  protected Value value1;
+  protected Value operand1;
 
   /**
-	 * The cached value of the '{@link #getValue2() <em>Value2</em>}' containment reference.
+	 * The cached value of the '{@link #getOperand2() <em>Operand2</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getValue2()
+	 * @see #getOperand2()
 	 * @generated
 	 * @ordered
 	 */
-  protected Value value2;
+  protected Value operand2;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -169,9 +169,9 @@ public class CompareImpl extends InstructionImpl implements Compare
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getPred()
+  public String getCond()
   {
-		return pred;
+		return cond;
 	}
 
   /**
@@ -179,12 +179,12 @@ public class CompareImpl extends InstructionImpl implements Compare
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setPred(String newPred)
+  public void setCond(String newCond)
   {
-		String oldPred = pred;
-		pred = newPred;
+		String oldCond = cond;
+		cond = newCond;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.COMPARE__PRED, oldPred, pred));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.COMPARE__COND, oldCond, cond));
 	}
 
   /**
@@ -192,9 +192,9 @@ public class CompareImpl extends InstructionImpl implements Compare
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public TypeUse getComptype()
+  public TypeUse getOpType()
   {
-		return comptype;
+		return opType;
 	}
 
   /**
@@ -202,13 +202,13 @@ public class CompareImpl extends InstructionImpl implements Compare
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetComptype(TypeUse newComptype, NotificationChain msgs)
+  public NotificationChain basicSetOpType(TypeUse newOpType, NotificationChain msgs)
   {
-		TypeUse oldComptype = comptype;
-		comptype = newComptype;
+		TypeUse oldOpType = opType;
+		opType = newOpType;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.COMPARE__COMPTYPE, oldComptype, newComptype);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.COMPARE__OP_TYPE, oldOpType, newOpType);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -219,20 +219,20 @@ public class CompareImpl extends InstructionImpl implements Compare
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setComptype(TypeUse newComptype)
+  public void setOpType(TypeUse newOpType)
   {
-		if (newComptype != comptype)
+		if (newOpType != opType)
 		{
 			NotificationChain msgs = null;
-			if (comptype != null)
-				msgs = ((InternalEObject)comptype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.COMPARE__COMPTYPE, null, msgs);
-			if (newComptype != null)
-				msgs = ((InternalEObject)newComptype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.COMPARE__COMPTYPE, null, msgs);
-			msgs = basicSetComptype(newComptype, msgs);
+			if (opType != null)
+				msgs = ((InternalEObject)opType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.COMPARE__OP_TYPE, null, msgs);
+			if (newOpType != null)
+				msgs = ((InternalEObject)newOpType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.COMPARE__OP_TYPE, null, msgs);
+			msgs = basicSetOpType(newOpType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.COMPARE__COMPTYPE, newComptype, newComptype));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.COMPARE__OP_TYPE, newOpType, newOpType));
 	}
 
   /**
@@ -240,9 +240,9 @@ public class CompareImpl extends InstructionImpl implements Compare
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public Value getValue1()
+  public Value getOperand1()
   {
-		return value1;
+		return operand1;
 	}
 
   /**
@@ -250,13 +250,13 @@ public class CompareImpl extends InstructionImpl implements Compare
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetValue1(Value newValue1, NotificationChain msgs)
+  public NotificationChain basicSetOperand1(Value newOperand1, NotificationChain msgs)
   {
-		Value oldValue1 = value1;
-		value1 = newValue1;
+		Value oldOperand1 = operand1;
+		operand1 = newOperand1;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.COMPARE__VALUE1, oldValue1, newValue1);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.COMPARE__OPERAND1, oldOperand1, newOperand1);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -267,20 +267,20 @@ public class CompareImpl extends InstructionImpl implements Compare
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setValue1(Value newValue1)
+  public void setOperand1(Value newOperand1)
   {
-		if (newValue1 != value1)
+		if (newOperand1 != operand1)
 		{
 			NotificationChain msgs = null;
-			if (value1 != null)
-				msgs = ((InternalEObject)value1).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.COMPARE__VALUE1, null, msgs);
-			if (newValue1 != null)
-				msgs = ((InternalEObject)newValue1).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.COMPARE__VALUE1, null, msgs);
-			msgs = basicSetValue1(newValue1, msgs);
+			if (operand1 != null)
+				msgs = ((InternalEObject)operand1).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.COMPARE__OPERAND1, null, msgs);
+			if (newOperand1 != null)
+				msgs = ((InternalEObject)newOperand1).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.COMPARE__OPERAND1, null, msgs);
+			msgs = basicSetOperand1(newOperand1, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.COMPARE__VALUE1, newValue1, newValue1));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.COMPARE__OPERAND1, newOperand1, newOperand1));
 	}
 
   /**
@@ -288,9 +288,9 @@ public class CompareImpl extends InstructionImpl implements Compare
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public Value getValue2()
+  public Value getOperand2()
   {
-		return value2;
+		return operand2;
 	}
 
   /**
@@ -298,13 +298,13 @@ public class CompareImpl extends InstructionImpl implements Compare
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetValue2(Value newValue2, NotificationChain msgs)
+  public NotificationChain basicSetOperand2(Value newOperand2, NotificationChain msgs)
   {
-		Value oldValue2 = value2;
-		value2 = newValue2;
+		Value oldOperand2 = operand2;
+		operand2 = newOperand2;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.COMPARE__VALUE2, oldValue2, newValue2);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.COMPARE__OPERAND2, oldOperand2, newOperand2);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -315,20 +315,20 @@ public class CompareImpl extends InstructionImpl implements Compare
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setValue2(Value newValue2)
+  public void setOperand2(Value newOperand2)
   {
-		if (newValue2 != value2)
+		if (newOperand2 != operand2)
 		{
 			NotificationChain msgs = null;
-			if (value2 != null)
-				msgs = ((InternalEObject)value2).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.COMPARE__VALUE2, null, msgs);
-			if (newValue2 != null)
-				msgs = ((InternalEObject)newValue2).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.COMPARE__VALUE2, null, msgs);
-			msgs = basicSetValue2(newValue2, msgs);
+			if (operand2 != null)
+				msgs = ((InternalEObject)operand2).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.COMPARE__OPERAND2, null, msgs);
+			if (newOperand2 != null)
+				msgs = ((InternalEObject)newOperand2).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.COMPARE__OPERAND2, null, msgs);
+			msgs = basicSetOperand2(newOperand2, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.COMPARE__VALUE2, newValue2, newValue2));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.COMPARE__OPERAND2, newOperand2, newOperand2));
 	}
 
   /**
@@ -343,12 +343,12 @@ public class CompareImpl extends InstructionImpl implements Compare
 		{
 			case LlvmPackage.COMPARE__RESULT:
 				return basicSetResult(null, msgs);
-			case LlvmPackage.COMPARE__COMPTYPE:
-				return basicSetComptype(null, msgs);
-			case LlvmPackage.COMPARE__VALUE1:
-				return basicSetValue1(null, msgs);
-			case LlvmPackage.COMPARE__VALUE2:
-				return basicSetValue2(null, msgs);
+			case LlvmPackage.COMPARE__OP_TYPE:
+				return basicSetOpType(null, msgs);
+			case LlvmPackage.COMPARE__OPERAND1:
+				return basicSetOperand1(null, msgs);
+			case LlvmPackage.COMPARE__OPERAND2:
+				return basicSetOperand2(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -365,14 +365,14 @@ public class CompareImpl extends InstructionImpl implements Compare
 		{
 			case LlvmPackage.COMPARE__RESULT:
 				return getResult();
-			case LlvmPackage.COMPARE__PRED:
-				return getPred();
-			case LlvmPackage.COMPARE__COMPTYPE:
-				return getComptype();
-			case LlvmPackage.COMPARE__VALUE1:
-				return getValue1();
-			case LlvmPackage.COMPARE__VALUE2:
-				return getValue2();
+			case LlvmPackage.COMPARE__COND:
+				return getCond();
+			case LlvmPackage.COMPARE__OP_TYPE:
+				return getOpType();
+			case LlvmPackage.COMPARE__OPERAND1:
+				return getOperand1();
+			case LlvmPackage.COMPARE__OPERAND2:
+				return getOperand2();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -390,17 +390,17 @@ public class CompareImpl extends InstructionImpl implements Compare
 			case LlvmPackage.COMPARE__RESULT:
 				setResult((Address)newValue);
 				return;
-			case LlvmPackage.COMPARE__PRED:
-				setPred((String)newValue);
+			case LlvmPackage.COMPARE__COND:
+				setCond((String)newValue);
 				return;
-			case LlvmPackage.COMPARE__COMPTYPE:
-				setComptype((TypeUse)newValue);
+			case LlvmPackage.COMPARE__OP_TYPE:
+				setOpType((TypeUse)newValue);
 				return;
-			case LlvmPackage.COMPARE__VALUE1:
-				setValue1((Value)newValue);
+			case LlvmPackage.COMPARE__OPERAND1:
+				setOperand1((Value)newValue);
 				return;
-			case LlvmPackage.COMPARE__VALUE2:
-				setValue2((Value)newValue);
+			case LlvmPackage.COMPARE__OPERAND2:
+				setOperand2((Value)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -419,17 +419,17 @@ public class CompareImpl extends InstructionImpl implements Compare
 			case LlvmPackage.COMPARE__RESULT:
 				setResult((Address)null);
 				return;
-			case LlvmPackage.COMPARE__PRED:
-				setPred(PRED_EDEFAULT);
+			case LlvmPackage.COMPARE__COND:
+				setCond(COND_EDEFAULT);
 				return;
-			case LlvmPackage.COMPARE__COMPTYPE:
-				setComptype((TypeUse)null);
+			case LlvmPackage.COMPARE__OP_TYPE:
+				setOpType((TypeUse)null);
 				return;
-			case LlvmPackage.COMPARE__VALUE1:
-				setValue1((Value)null);
+			case LlvmPackage.COMPARE__OPERAND1:
+				setOperand1((Value)null);
 				return;
-			case LlvmPackage.COMPARE__VALUE2:
-				setValue2((Value)null);
+			case LlvmPackage.COMPARE__OPERAND2:
+				setOperand2((Value)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -447,14 +447,14 @@ public class CompareImpl extends InstructionImpl implements Compare
 		{
 			case LlvmPackage.COMPARE__RESULT:
 				return result != null;
-			case LlvmPackage.COMPARE__PRED:
-				return PRED_EDEFAULT == null ? pred != null : !PRED_EDEFAULT.equals(pred);
-			case LlvmPackage.COMPARE__COMPTYPE:
-				return comptype != null;
-			case LlvmPackage.COMPARE__VALUE1:
-				return value1 != null;
-			case LlvmPackage.COMPARE__VALUE2:
-				return value2 != null;
+			case LlvmPackage.COMPARE__COND:
+				return COND_EDEFAULT == null ? cond != null : !COND_EDEFAULT.equals(cond);
+			case LlvmPackage.COMPARE__OP_TYPE:
+				return opType != null;
+			case LlvmPackage.COMPARE__OPERAND1:
+				return operand1 != null;
+			case LlvmPackage.COMPARE__OPERAND2:
+				return operand2 != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -470,8 +470,8 @@ public class CompareImpl extends InstructionImpl implements Compare
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (pred: ");
-		result.append(pred);
+		result.append(" (cond: ");
+		result.append(cond);
 		result.append(')');
 		return result.toString();
 	}

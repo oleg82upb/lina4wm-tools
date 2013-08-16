@@ -23,11 +23,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.InvokeImpl#getFunctiontype <em>Functiontype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.InvokeImpl#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.InvokeImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.InvokeImpl#getPList <em>PList</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.InvokeImpl#getToTarget <em>To Target</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.InvokeImpl#getUnwindCase <em>Unwind Case</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.InvokeImpl#getTargetLabel <em>Target Label</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.InvokeImpl#getUnwindTargetLabel <em>Unwind Target Label</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,14 +36,14 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 public class InvokeImpl extends InstructionImpl implements Invoke
 {
   /**
-	 * The cached value of the '{@link #getFunctiontype() <em>Functiontype</em>}' containment reference.
+	 * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getFunctiontype()
+	 * @see #getReturnType()
 	 * @generated
 	 * @ordered
 	 */
-  protected TypeUse functiontype;
+  protected TypeUse returnType;
 
   /**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' containment reference.
@@ -66,44 +66,44 @@ public class InvokeImpl extends InstructionImpl implements Invoke
   protected ParameterList pList;
 
   /**
-	 * The default value of the '{@link #getToTarget() <em>To Target</em>}' attribute.
+	 * The default value of the '{@link #getTargetLabel() <em>Target Label</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getToTarget()
+	 * @see #getTargetLabel()
 	 * @generated
 	 * @ordered
 	 */
-  protected static final String TO_TARGET_EDEFAULT = null;
+  protected static final String TARGET_LABEL_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getToTarget() <em>To Target</em>}' attribute.
+	 * The cached value of the '{@link #getTargetLabel() <em>Target Label</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getToTarget()
+	 * @see #getTargetLabel()
 	 * @generated
 	 * @ordered
 	 */
-  protected String toTarget = TO_TARGET_EDEFAULT;
+  protected String targetLabel = TARGET_LABEL_EDEFAULT;
 
   /**
-	 * The default value of the '{@link #getUnwindCase() <em>Unwind Case</em>}' attribute.
+	 * The default value of the '{@link #getUnwindTargetLabel() <em>Unwind Target Label</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getUnwindCase()
+	 * @see #getUnwindTargetLabel()
 	 * @generated
 	 * @ordered
 	 */
-  protected static final String UNWIND_CASE_EDEFAULT = null;
+  protected static final String UNWIND_TARGET_LABEL_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getUnwindCase() <em>Unwind Case</em>}' attribute.
+	 * The cached value of the '{@link #getUnwindTargetLabel() <em>Unwind Target Label</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getUnwindCase()
+	 * @see #getUnwindTargetLabel()
 	 * @generated
 	 * @ordered
 	 */
-  protected String unwindCase = UNWIND_CASE_EDEFAULT;
+  protected String unwindTargetLabel = UNWIND_TARGET_LABEL_EDEFAULT;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -131,9 +131,9 @@ public class InvokeImpl extends InstructionImpl implements Invoke
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public TypeUse getFunctiontype()
+  public TypeUse getReturnType()
   {
-		return functiontype;
+		return returnType;
 	}
 
   /**
@@ -141,13 +141,13 @@ public class InvokeImpl extends InstructionImpl implements Invoke
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetFunctiontype(TypeUse newFunctiontype, NotificationChain msgs)
+  public NotificationChain basicSetReturnType(TypeUse newReturnType, NotificationChain msgs)
   {
-		TypeUse oldFunctiontype = functiontype;
-		functiontype = newFunctiontype;
+		TypeUse oldReturnType = returnType;
+		returnType = newReturnType;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__FUNCTIONTYPE, oldFunctiontype, newFunctiontype);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__RETURN_TYPE, oldReturnType, newReturnType);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -158,20 +158,20 @@ public class InvokeImpl extends InstructionImpl implements Invoke
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setFunctiontype(TypeUse newFunctiontype)
+  public void setReturnType(TypeUse newReturnType)
   {
-		if (newFunctiontype != functiontype)
+		if (newReturnType != returnType)
 		{
 			NotificationChain msgs = null;
-			if (functiontype != null)
-				msgs = ((InternalEObject)functiontype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__FUNCTIONTYPE, null, msgs);
-			if (newFunctiontype != null)
-				msgs = ((InternalEObject)newFunctiontype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__FUNCTIONTYPE, null, msgs);
-			msgs = basicSetFunctiontype(newFunctiontype, msgs);
+			if (returnType != null)
+				msgs = ((InternalEObject)returnType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__RETURN_TYPE, null, msgs);
+			if (newReturnType != null)
+				msgs = ((InternalEObject)newReturnType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INVOKE__RETURN_TYPE, null, msgs);
+			msgs = basicSetReturnType(newReturnType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__FUNCTIONTYPE, newFunctiontype, newFunctiontype));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__RETURN_TYPE, newReturnType, newReturnType));
 	}
 
   /**
@@ -275,9 +275,9 @@ public class InvokeImpl extends InstructionImpl implements Invoke
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getToTarget()
+  public String getTargetLabel()
   {
-		return toTarget;
+		return targetLabel;
 	}
 
   /**
@@ -285,12 +285,12 @@ public class InvokeImpl extends InstructionImpl implements Invoke
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setToTarget(String newToTarget)
+  public void setTargetLabel(String newTargetLabel)
   {
-		String oldToTarget = toTarget;
-		toTarget = newToTarget;
+		String oldTargetLabel = targetLabel;
+		targetLabel = newTargetLabel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__TO_TARGET, oldToTarget, toTarget));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__TARGET_LABEL, oldTargetLabel, targetLabel));
 	}
 
   /**
@@ -298,9 +298,9 @@ public class InvokeImpl extends InstructionImpl implements Invoke
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getUnwindCase()
+  public String getUnwindTargetLabel()
   {
-		return unwindCase;
+		return unwindTargetLabel;
 	}
 
   /**
@@ -308,12 +308,12 @@ public class InvokeImpl extends InstructionImpl implements Invoke
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setUnwindCase(String newUnwindCase)
+  public void setUnwindTargetLabel(String newUnwindTargetLabel)
   {
-		String oldUnwindCase = unwindCase;
-		unwindCase = newUnwindCase;
+		String oldUnwindTargetLabel = unwindTargetLabel;
+		unwindTargetLabel = newUnwindTargetLabel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__UNWIND_CASE, oldUnwindCase, unwindCase));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INVOKE__UNWIND_TARGET_LABEL, oldUnwindTargetLabel, unwindTargetLabel));
 	}
 
   /**
@@ -326,8 +326,8 @@ public class InvokeImpl extends InstructionImpl implements Invoke
   {
 		switch (featureID)
 		{
-			case LlvmPackage.INVOKE__FUNCTIONTYPE:
-				return basicSetFunctiontype(null, msgs);
+			case LlvmPackage.INVOKE__RETURN_TYPE:
+				return basicSetReturnType(null, msgs);
 			case LlvmPackage.INVOKE__NAME:
 				return basicSetName(null, msgs);
 			case LlvmPackage.INVOKE__PLIST:
@@ -346,16 +346,16 @@ public class InvokeImpl extends InstructionImpl implements Invoke
   {
 		switch (featureID)
 		{
-			case LlvmPackage.INVOKE__FUNCTIONTYPE:
-				return getFunctiontype();
+			case LlvmPackage.INVOKE__RETURN_TYPE:
+				return getReturnType();
 			case LlvmPackage.INVOKE__NAME:
 				return getName();
 			case LlvmPackage.INVOKE__PLIST:
 				return getPList();
-			case LlvmPackage.INVOKE__TO_TARGET:
-				return getToTarget();
-			case LlvmPackage.INVOKE__UNWIND_CASE:
-				return getUnwindCase();
+			case LlvmPackage.INVOKE__TARGET_LABEL:
+				return getTargetLabel();
+			case LlvmPackage.INVOKE__UNWIND_TARGET_LABEL:
+				return getUnwindTargetLabel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -370,8 +370,8 @@ public class InvokeImpl extends InstructionImpl implements Invoke
   {
 		switch (featureID)
 		{
-			case LlvmPackage.INVOKE__FUNCTIONTYPE:
-				setFunctiontype((TypeUse)newValue);
+			case LlvmPackage.INVOKE__RETURN_TYPE:
+				setReturnType((TypeUse)newValue);
 				return;
 			case LlvmPackage.INVOKE__NAME:
 				setName((Address)newValue);
@@ -379,11 +379,11 @@ public class InvokeImpl extends InstructionImpl implements Invoke
 			case LlvmPackage.INVOKE__PLIST:
 				setPList((ParameterList)newValue);
 				return;
-			case LlvmPackage.INVOKE__TO_TARGET:
-				setToTarget((String)newValue);
+			case LlvmPackage.INVOKE__TARGET_LABEL:
+				setTargetLabel((String)newValue);
 				return;
-			case LlvmPackage.INVOKE__UNWIND_CASE:
-				setUnwindCase((String)newValue);
+			case LlvmPackage.INVOKE__UNWIND_TARGET_LABEL:
+				setUnwindTargetLabel((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -399,8 +399,8 @@ public class InvokeImpl extends InstructionImpl implements Invoke
   {
 		switch (featureID)
 		{
-			case LlvmPackage.INVOKE__FUNCTIONTYPE:
-				setFunctiontype((TypeUse)null);
+			case LlvmPackage.INVOKE__RETURN_TYPE:
+				setReturnType((TypeUse)null);
 				return;
 			case LlvmPackage.INVOKE__NAME:
 				setName((Address)null);
@@ -408,11 +408,11 @@ public class InvokeImpl extends InstructionImpl implements Invoke
 			case LlvmPackage.INVOKE__PLIST:
 				setPList((ParameterList)null);
 				return;
-			case LlvmPackage.INVOKE__TO_TARGET:
-				setToTarget(TO_TARGET_EDEFAULT);
+			case LlvmPackage.INVOKE__TARGET_LABEL:
+				setTargetLabel(TARGET_LABEL_EDEFAULT);
 				return;
-			case LlvmPackage.INVOKE__UNWIND_CASE:
-				setUnwindCase(UNWIND_CASE_EDEFAULT);
+			case LlvmPackage.INVOKE__UNWIND_TARGET_LABEL:
+				setUnwindTargetLabel(UNWIND_TARGET_LABEL_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -428,16 +428,16 @@ public class InvokeImpl extends InstructionImpl implements Invoke
   {
 		switch (featureID)
 		{
-			case LlvmPackage.INVOKE__FUNCTIONTYPE:
-				return functiontype != null;
+			case LlvmPackage.INVOKE__RETURN_TYPE:
+				return returnType != null;
 			case LlvmPackage.INVOKE__NAME:
 				return name != null;
 			case LlvmPackage.INVOKE__PLIST:
 				return pList != null;
-			case LlvmPackage.INVOKE__TO_TARGET:
-				return TO_TARGET_EDEFAULT == null ? toTarget != null : !TO_TARGET_EDEFAULT.equals(toTarget);
-			case LlvmPackage.INVOKE__UNWIND_CASE:
-				return UNWIND_CASE_EDEFAULT == null ? unwindCase != null : !UNWIND_CASE_EDEFAULT.equals(unwindCase);
+			case LlvmPackage.INVOKE__TARGET_LABEL:
+				return TARGET_LABEL_EDEFAULT == null ? targetLabel != null : !TARGET_LABEL_EDEFAULT.equals(targetLabel);
+			case LlvmPackage.INVOKE__UNWIND_TARGET_LABEL:
+				return UNWIND_TARGET_LABEL_EDEFAULT == null ? unwindTargetLabel != null : !UNWIND_TARGET_LABEL_EDEFAULT.equals(unwindTargetLabel);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -453,10 +453,10 @@ public class InvokeImpl extends InstructionImpl implements Invoke
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (toTarget: ");
-		result.append(toTarget);
-		result.append(", unwindCase: ");
-		result.append(unwindCase);
+		result.append(" (targetLabel: ");
+		result.append(targetLabel);
+		result.append(", unwindTargetLabel: ");
+		result.append(unwindTargetLabel);
 		result.append(')');
 		return result.toString();
 	}

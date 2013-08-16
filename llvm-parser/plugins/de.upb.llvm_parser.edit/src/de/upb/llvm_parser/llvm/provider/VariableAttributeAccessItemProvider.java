@@ -77,9 +77,8 @@ public class VariableAttributeAccessItemProvider
 		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__RESULT);
-			childrenFeatures.add(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE);
-			childrenFeatures.add(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE);
+			childrenFeatures.add(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__VA_LIST);
+			childrenFeatures.add(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__ATYPE);
 		}
 		return childrenFeatures;
 	}
@@ -133,9 +132,8 @@ public class VariableAttributeAccessItemProvider
 		switch (notification.getFeatureID(VariableAttributeAccess.class))
 		{
 			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__RESULT:
-			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE:
-			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE:
-			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE:
+			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__VA_LIST:
+			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ATYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -160,88 +158,23 @@ public class VariableAttributeAccessItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE,
+				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__VA_LIST,
+				 LlvmFactory.eINSTANCE.createParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__ATYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE,
+				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__ATYPE,
 				 LlvmFactory.eINSTANCE.createAddressUse()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE,
+				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__ATYPE,
 				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE ||
-			childFeature == LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE ||
-			childFeature == LlvmPackage.Literals.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE;
-
-		if (qualify)
-		{
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

@@ -22,8 +22,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ResumeImpl#getResumestruct <em>Resumestruct</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ResumeImpl#getResumevalue <em>Resumevalue</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.ResumeImpl#getType <em>Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.ResumeImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,24 +32,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 public class ResumeImpl extends InstructionImpl implements Resume
 {
   /**
-	 * The cached value of the '{@link #getResumestruct() <em>Resumestruct</em>}' containment reference.
+	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getResumestruct()
+	 * @see #getType()
 	 * @generated
 	 * @ordered
 	 */
-  protected Structure resumestruct;
+  protected Structure type;
 
   /**
-	 * The cached value of the '{@link #getResumevalue() <em>Resumevalue</em>}' containment reference.
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getResumevalue()
+	 * @see #getValue()
 	 * @generated
 	 * @ordered
 	 */
-  protected Value resumevalue;
+  protected Value value;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -77,9 +77,9 @@ public class ResumeImpl extends InstructionImpl implements Resume
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public Structure getResumestruct()
+  public Structure getType()
   {
-		return resumestruct;
+		return type;
 	}
 
   /**
@@ -87,13 +87,13 @@ public class ResumeImpl extends InstructionImpl implements Resume
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetResumestruct(Structure newResumestruct, NotificationChain msgs)
+  public NotificationChain basicSetType(Structure newType, NotificationChain msgs)
   {
-		Structure oldResumestruct = resumestruct;
-		resumestruct = newResumestruct;
+		Structure oldType = type;
+		type = newType;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.RESUME__RESUMESTRUCT, oldResumestruct, newResumestruct);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.RESUME__TYPE, oldType, newType);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -104,20 +104,20 @@ public class ResumeImpl extends InstructionImpl implements Resume
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setResumestruct(Structure newResumestruct)
+  public void setType(Structure newType)
   {
-		if (newResumestruct != resumestruct)
+		if (newType != type)
 		{
 			NotificationChain msgs = null;
-			if (resumestruct != null)
-				msgs = ((InternalEObject)resumestruct).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.RESUME__RESUMESTRUCT, null, msgs);
-			if (newResumestruct != null)
-				msgs = ((InternalEObject)newResumestruct).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.RESUME__RESUMESTRUCT, null, msgs);
-			msgs = basicSetResumestruct(newResumestruct, msgs);
+			if (type != null)
+				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.RESUME__TYPE, null, msgs);
+			if (newType != null)
+				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.RESUME__TYPE, null, msgs);
+			msgs = basicSetType(newType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.RESUME__RESUMESTRUCT, newResumestruct, newResumestruct));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.RESUME__TYPE, newType, newType));
 	}
 
   /**
@@ -125,9 +125,9 @@ public class ResumeImpl extends InstructionImpl implements Resume
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public Value getResumevalue()
+  public Value getValue()
   {
-		return resumevalue;
+		return value;
 	}
 
   /**
@@ -135,13 +135,13 @@ public class ResumeImpl extends InstructionImpl implements Resume
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetResumevalue(Value newResumevalue, NotificationChain msgs)
+  public NotificationChain basicSetValue(Value newValue, NotificationChain msgs)
   {
-		Value oldResumevalue = resumevalue;
-		resumevalue = newResumevalue;
+		Value oldValue = value;
+		value = newValue;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.RESUME__RESUMEVALUE, oldResumevalue, newResumevalue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.RESUME__VALUE, oldValue, newValue);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -152,20 +152,20 @@ public class ResumeImpl extends InstructionImpl implements Resume
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setResumevalue(Value newResumevalue)
+  public void setValue(Value newValue)
   {
-		if (newResumevalue != resumevalue)
+		if (newValue != value)
 		{
 			NotificationChain msgs = null;
-			if (resumevalue != null)
-				msgs = ((InternalEObject)resumevalue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.RESUME__RESUMEVALUE, null, msgs);
-			if (newResumevalue != null)
-				msgs = ((InternalEObject)newResumevalue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.RESUME__RESUMEVALUE, null, msgs);
-			msgs = basicSetResumevalue(newResumevalue, msgs);
+			if (value != null)
+				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.RESUME__VALUE, null, msgs);
+			if (newValue != null)
+				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.RESUME__VALUE, null, msgs);
+			msgs = basicSetValue(newValue, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.RESUME__RESUMEVALUE, newResumevalue, newResumevalue));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.RESUME__VALUE, newValue, newValue));
 	}
 
   /**
@@ -178,10 +178,10 @@ public class ResumeImpl extends InstructionImpl implements Resume
   {
 		switch (featureID)
 		{
-			case LlvmPackage.RESUME__RESUMESTRUCT:
-				return basicSetResumestruct(null, msgs);
-			case LlvmPackage.RESUME__RESUMEVALUE:
-				return basicSetResumevalue(null, msgs);
+			case LlvmPackage.RESUME__TYPE:
+				return basicSetType(null, msgs);
+			case LlvmPackage.RESUME__VALUE:
+				return basicSetValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -196,10 +196,10 @@ public class ResumeImpl extends InstructionImpl implements Resume
   {
 		switch (featureID)
 		{
-			case LlvmPackage.RESUME__RESUMESTRUCT:
-				return getResumestruct();
-			case LlvmPackage.RESUME__RESUMEVALUE:
-				return getResumevalue();
+			case LlvmPackage.RESUME__TYPE:
+				return getType();
+			case LlvmPackage.RESUME__VALUE:
+				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -214,11 +214,11 @@ public class ResumeImpl extends InstructionImpl implements Resume
   {
 		switch (featureID)
 		{
-			case LlvmPackage.RESUME__RESUMESTRUCT:
-				setResumestruct((Structure)newValue);
+			case LlvmPackage.RESUME__TYPE:
+				setType((Structure)newValue);
 				return;
-			case LlvmPackage.RESUME__RESUMEVALUE:
-				setResumevalue((Value)newValue);
+			case LlvmPackage.RESUME__VALUE:
+				setValue((Value)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -234,11 +234,11 @@ public class ResumeImpl extends InstructionImpl implements Resume
   {
 		switch (featureID)
 		{
-			case LlvmPackage.RESUME__RESUMESTRUCT:
-				setResumestruct((Structure)null);
+			case LlvmPackage.RESUME__TYPE:
+				setType((Structure)null);
 				return;
-			case LlvmPackage.RESUME__RESUMEVALUE:
-				setResumevalue((Value)null);
+			case LlvmPackage.RESUME__VALUE:
+				setValue((Value)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -254,10 +254,10 @@ public class ResumeImpl extends InstructionImpl implements Resume
   {
 		switch (featureID)
 		{
-			case LlvmPackage.RESUME__RESUMESTRUCT:
-				return resumestruct != null;
-			case LlvmPackage.RESUME__RESUMEVALUE:
-				return resumevalue != null;
+			case LlvmPackage.RESUME__TYPE:
+				return type != null;
+			case LlvmPackage.RESUME__VALUE:
+				return value != null;
 		}
 		return super.eIsSet(featureID);
 	}

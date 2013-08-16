@@ -77,9 +77,7 @@ public class ExtractElementItemProvider
 		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.EXTRACT_ELEMENT__RESULT);
-			childrenFeatures.add(LlvmPackage.Literals.EXTRACT_ELEMENT__VECTORTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.EXTRACT_ELEMENT__VECTORVALUE);
-			childrenFeatures.add(LlvmPackage.Literals.EXTRACT_ELEMENT__INDEXTYPE);
+			childrenFeatures.add(LlvmPackage.Literals.EXTRACT_ELEMENT__VECTOR);
 			childrenFeatures.add(LlvmPackage.Literals.EXTRACT_ELEMENT__INDEX);
 		}
 		return childrenFeatures;
@@ -134,9 +132,7 @@ public class ExtractElementItemProvider
 		switch (notification.getFeatureID(ExtractElement.class))
 		{
 			case LlvmPackage.EXTRACT_ELEMENT__RESULT:
-			case LlvmPackage.EXTRACT_ELEMENT__VECTORTYPE:
-			case LlvmPackage.EXTRACT_ELEMENT__VECTORVALUE:
-			case LlvmPackage.EXTRACT_ELEMENT__INDEXTYPE:
+			case LlvmPackage.EXTRACT_ELEMENT__VECTOR:
 			case LlvmPackage.EXTRACT_ELEMENT__INDEX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -162,93 +158,13 @@ public class ExtractElementItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_ELEMENT__VECTORTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_ELEMENT__VECTORTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_ELEMENT__VECTORTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_ELEMENT__VECTORVALUE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_ELEMENT__VECTORVALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_ELEMENT__VECTORVALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_ELEMENT__VECTORVALUE,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_ELEMENT__VECTORVALUE,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_ELEMENT__VECTORVALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_ELEMENT__INDEXTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_ELEMENT__INDEXTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_ELEMENT__INDEXTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
+				(LlvmPackage.Literals.EXTRACT_ELEMENT__VECTOR,
+				 LlvmFactory.eINSTANCE.createParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.EXTRACT_ELEMENT__INDEX,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_ELEMENT__INDEX,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_ELEMENT__INDEX,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_ELEMENT__INDEX,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_ELEMENT__INDEX,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.EXTRACT_ELEMENT__INDEX,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
+				 LlvmFactory.eINSTANCE.createParameter()));
 	}
 
 	/**
@@ -263,9 +179,7 @@ public class ExtractElementItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == LlvmPackage.Literals.EXTRACT_ELEMENT__VECTORTYPE ||
-			childFeature == LlvmPackage.Literals.EXTRACT_ELEMENT__INDEXTYPE ||
-			childFeature == LlvmPackage.Literals.EXTRACT_ELEMENT__VECTORVALUE ||
+			childFeature == LlvmPackage.Literals.EXTRACT_ELEMENT__VECTOR ||
 			childFeature == LlvmPackage.Literals.EXTRACT_ELEMENT__INDEX;
 
 		if (qualify)

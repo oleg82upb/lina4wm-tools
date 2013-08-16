@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class StructureItemProvider
-	extends Aggregate_TypesItemProvider
+	extends Aggregate_TypeItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -210,7 +210,7 @@ public class StructureItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createAggregate_Types()));
+				 LlvmFactory.eINSTANCE.createAggregate_Type()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -266,11 +266,6 @@ public class StructureItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
 				 LlvmFactory.eINSTANCE.createFunctionParameterList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createTypeList()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -331,16 +326,6 @@ public class StructureItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
 				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createExtractValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.STRUCTURE__TYPES,
-				 LlvmFactory.eINSTANCE.createInsertValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -410,6 +395,16 @@ public class StructureItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
+				 LlvmFactory.eINSTANCE.createExtractValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.STRUCTURE__TYPES,
+				 LlvmFactory.eINSTANCE.createInsertValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.STRUCTURE__TYPES,
 				 LlvmFactory.eINSTANCE.createExtractElement()));
 
 		newChildDescriptors.add
@@ -436,6 +431,11 @@ public class StructureItemProvider
 			(createChildParameter
 				(LlvmPackage.Literals.STRUCTURE__TYPES,
 				 LlvmFactory.eINSTANCE.createSwitch()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.STRUCTURE__TYPES,
+				 LlvmFactory.eINSTANCE.createSwitchCase()));
 
 		newChildDescriptors.add
 			(createChildParameter

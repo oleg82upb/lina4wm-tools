@@ -76,8 +76,8 @@ public class ResumeItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(LlvmPackage.Literals.RESUME__RESUMESTRUCT);
-			childrenFeatures.add(LlvmPackage.Literals.RESUME__RESUMEVALUE);
+			childrenFeatures.add(LlvmPackage.Literals.RESUME__TYPE);
+			childrenFeatures.add(LlvmPackage.Literals.RESUME__VALUE);
 		}
 		return childrenFeatures;
 	}
@@ -130,8 +130,8 @@ public class ResumeItemProvider
 
 		switch (notification.getFeatureID(Resume.class))
 		{
-			case LlvmPackage.RESUME__RESUMESTRUCT:
-			case LlvmPackage.RESUME__RESUMEVALUE:
+			case LlvmPackage.RESUME__TYPE:
+			case LlvmPackage.RESUME__VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -151,37 +151,37 @@ public class ResumeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.RESUME__RESUMESTRUCT,
+				(LlvmPackage.Literals.RESUME__TYPE,
 				 LlvmFactory.eINSTANCE.createStructure()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.RESUME__RESUMEVALUE,
+				(LlvmPackage.Literals.RESUME__VALUE,
 				 LlvmFactory.eINSTANCE.createAddressUse()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.RESUME__RESUMEVALUE,
+				(LlvmPackage.Literals.RESUME__VALUE,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.RESUME__RESUMEVALUE,
+				(LlvmPackage.Literals.RESUME__VALUE,
 				 LlvmFactory.eINSTANCE.createConstant()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.RESUME__RESUMEVALUE,
+				(LlvmPackage.Literals.RESUME__VALUE,
 				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.RESUME__RESUMEVALUE,
+				(LlvmPackage.Literals.RESUME__VALUE,
 				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.RESUME__RESUMEVALUE,
+				(LlvmPackage.Literals.RESUME__VALUE,
 				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 	}
 

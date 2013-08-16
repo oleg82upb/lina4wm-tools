@@ -145,9 +145,9 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
 				return createArrayAdapter();
 			}
 			@Override
-			public Adapter caseAggregate_Types(Aggregate_Types object)
+			public Adapter caseAggregate_Type(Aggregate_Type object)
 			{
-				return createAggregate_TypesAdapter();
+				return createAggregate_TypeAdapter();
 			}
 			@Override
 			public Adapter caseConstant(Constant object)
@@ -193,11 +193,6 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
 			public Adapter caseFunctionParameterList(FunctionParameterList object)
 			{
 				return createFunctionParameterListAdapter();
-			}
-			@Override
-			public Adapter caseTypeList(TypeList object)
-			{
-				return createTypeListAdapter();
 			}
 			@Override
 			public Adapter caseFunctionBody(FunctionBody object)
@@ -258,16 +253,6 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
 			public Adapter caseNestedGetElementPtr(NestedGetElementPtr object)
 			{
 				return createNestedGetElementPtrAdapter();
-			}
-			@Override
-			public Adapter caseExtractValue(ExtractValue object)
-			{
-				return createExtractValueAdapter();
-			}
-			@Override
-			public Adapter caseInsertValue(InsertValue object)
-			{
-				return createInsertValueAdapter();
 			}
 			@Override
 			public Adapter caseFence(Fence object)
@@ -335,6 +320,16 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
 				return createVariableAttributeAccessAdapter();
 			}
 			@Override
+			public Adapter caseExtractValue(ExtractValue object)
+			{
+				return createExtractValueAdapter();
+			}
+			@Override
+			public Adapter caseInsertValue(InsertValue object)
+			{
+				return createInsertValueAdapter();
+			}
+			@Override
 			public Adapter caseExtractElement(ExtractElement object)
 			{
 				return createExtractElementAdapter();
@@ -363,6 +358,11 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
 			public Adapter caseSwitch(Switch object)
 			{
 				return createSwitchAdapter();
+			}
+			@Override
+			public Adapter caseSwitchCase(SwitchCase object)
+			{
+				return createSwitchCaseAdapter();
 			}
 			@Override
 			public Adapter caseInvoke(Invoke object)
@@ -622,16 +622,16 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
 	}
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Aggregate_Types <em>Aggregate Types</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Aggregate_Type <em>Aggregate Type</em>}'.
 	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Aggregate_Types
+	 * @see de.upb.llvm_parser.llvm.Aggregate_Type
 	 * @generated
 	 */
-  public Adapter createAggregate_TypesAdapter()
+  public Adapter createAggregate_TypeAdapter()
   {
 		return null;
 	}
@@ -767,21 +767,6 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
   public Adapter createFunctionParameterListAdapter()
-  {
-		return null;
-	}
-
-  /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.TypeList <em>Type List</em>}'.
-	 * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.TypeList
-	 * @generated
-	 */
-  public Adapter createTypeListAdapter()
   {
 		return null;
 	}
@@ -962,36 +947,6 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
   public Adapter createNestedGetElementPtrAdapter()
-  {
-		return null;
-	}
-
-  /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ExtractValue <em>Extract Value</em>}'.
-	 * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.ExtractValue
-	 * @generated
-	 */
-  public Adapter createExtractValueAdapter()
-  {
-		return null;
-	}
-
-  /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.InsertValue <em>Insert Value</em>}'.
-	 * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.InsertValue
-	 * @generated
-	 */
-  public Adapter createInsertValueAdapter()
   {
 		return null;
 	}
@@ -1192,6 +1147,36 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
 	}
 
   /**
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ExtractValue <em>Extract Value</em>}'.
+	 * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.llvm_parser.llvm.ExtractValue
+	 * @generated
+	 */
+  public Adapter createExtractValueAdapter()
+  {
+		return null;
+	}
+
+  /**
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.InsertValue <em>Insert Value</em>}'.
+	 * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.llvm_parser.llvm.InsertValue
+	 * @generated
+	 */
+  public Adapter createInsertValueAdapter()
+  {
+		return null;
+	}
+
+  /**
 	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ExtractElement <em>Extract Element</em>}'.
 	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1277,6 +1262,21 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
   public Adapter createSwitchAdapter()
+  {
+		return null;
+	}
+
+  /**
+	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.SwitchCase <em>Switch Case</em>}'.
+	 * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.llvm_parser.llvm.SwitchCase
+	 * @generated
+	 */
+  public Adapter createSwitchCaseAdapter()
   {
 		return null;
 	}

@@ -2,7 +2,7 @@
  */
 package de.upb.llvm_parser.llvm.impl;
 
-import de.upb.llvm_parser.llvm.Aggregate_Types;
+import de.upb.llvm_parser.llvm.Aggregate_Type;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
 import org.eclipse.emf.ecore.EClass;
@@ -11,21 +11,21 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Aggregate Types</b></em>'.
+ * An implementation of the model object '<em><b>Aggregate Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class Aggregate_TypesImpl extends MinimalEObjectImpl.Container implements Aggregate_Types
+public class Aggregate_TypeImpl extends MinimalEObjectImpl.Container implements Aggregate_Type
 {
   /**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected Aggregate_TypesImpl()
+  protected Aggregate_TypeImpl()
   {
 		super();
 	}
@@ -38,7 +38,7 @@ public class Aggregate_TypesImpl extends MinimalEObjectImpl.Container implements
   @Override
   protected EClass eStaticClass()
   {
-		return LlvmPackage.Literals.AGGREGATE_TYPES;
+		return LlvmPackage.Literals.AGGREGATE_TYPE;
 	}
 
-} //Aggregate_TypesImpl
+} //Aggregate_TypeImpl

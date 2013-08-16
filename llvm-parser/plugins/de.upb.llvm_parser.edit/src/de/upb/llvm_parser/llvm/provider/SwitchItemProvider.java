@@ -15,12 +15,14 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -59,8 +61,32 @@ public class SwitchItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
+			addDefaultCasePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Default Case feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDefaultCasePropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Switch_defaultCase_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Switch_defaultCase_feature", "_UI_Switch_type"),
+				 LlvmPackage.Literals.SWITCH__DEFAULT_CASE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -76,14 +102,8 @@ public class SwitchItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(LlvmPackage.Literals.SWITCH__COMPTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.SWITCH__COMPVALUE);
-			childrenFeatures.add(LlvmPackage.Literals.SWITCH__DEFAULTTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.SWITCH__DEFAULTVALUE);
-			childrenFeatures.add(LlvmPackage.Literals.SWITCH__JTYPES);
-			childrenFeatures.add(LlvmPackage.Literals.SWITCH__JVALUES);
-			childrenFeatures.add(LlvmPackage.Literals.SWITCH__DESTINATIONTYPES);
-			childrenFeatures.add(LlvmPackage.Literals.SWITCH__DESTINATIONS);
+			childrenFeatures.add(LlvmPackage.Literals.SWITCH__CASE_VALUE);
+			childrenFeatures.add(LlvmPackage.Literals.SWITCH__CASES);
 		}
 		return childrenFeatures;
 	}
@@ -120,7 +140,10 @@ public class SwitchItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Switch_type");
+		String label = ((Switch)object).getDefaultCase();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Switch_type") :
+			getString("_UI_Switch_type") + " " + label;
 	}
 
 	/**
@@ -136,14 +159,11 @@ public class SwitchItemProvider
 
 		switch (notification.getFeatureID(Switch.class))
 		{
-			case LlvmPackage.SWITCH__COMPTYPE:
-			case LlvmPackage.SWITCH__COMPVALUE:
-			case LlvmPackage.SWITCH__DEFAULTTYPE:
-			case LlvmPackage.SWITCH__DEFAULTVALUE:
-			case LlvmPackage.SWITCH__JTYPES:
-			case LlvmPackage.SWITCH__JVALUES:
-			case LlvmPackage.SWITCH__DESTINATIONTYPES:
-			case LlvmPackage.SWITCH__DESTINATIONS:
+			case LlvmPackage.SWITCH__DEFAULT_CASE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case LlvmPackage.SWITCH__CASE_VALUE:
+			case LlvmPackage.SWITCH__CASES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -163,213 +183,13 @@ public class SwitchItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__COMPTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
+				(LlvmPackage.Literals.SWITCH__CASE_VALUE,
+				 LlvmFactory.eINSTANCE.createParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__COMPTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__COMPTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__COMPVALUE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__COMPVALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__COMPVALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__COMPVALUE,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__COMPVALUE,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__COMPVALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__DEFAULTTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__DEFAULTTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__DEFAULTTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__DEFAULTVALUE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__DEFAULTVALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__DEFAULTVALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__DEFAULTVALUE,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__DEFAULTVALUE,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__DEFAULTVALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__JTYPES,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__JTYPES,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__JTYPES,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__JVALUES,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__JVALUES,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__JVALUES,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__JVALUES,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__JVALUES,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__JVALUES,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__DESTINATIONTYPES,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__DESTINATIONTYPES,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__DESTINATIONTYPES,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__DESTINATIONS,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__DESTINATIONS,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__DESTINATIONS,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__DESTINATIONS,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__DESTINATIONS,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SWITCH__DESTINATIONS,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == LlvmPackage.Literals.SWITCH__COMPTYPE ||
-			childFeature == LlvmPackage.Literals.SWITCH__DEFAULTTYPE ||
-			childFeature == LlvmPackage.Literals.SWITCH__JTYPES ||
-			childFeature == LlvmPackage.Literals.SWITCH__DESTINATIONTYPES ||
-			childFeature == LlvmPackage.Literals.SWITCH__COMPVALUE ||
-			childFeature == LlvmPackage.Literals.SWITCH__DEFAULTVALUE ||
-			childFeature == LlvmPackage.Literals.SWITCH__JVALUES ||
-			childFeature == LlvmPackage.Literals.SWITCH__DESTINATIONS;
-
-		if (qualify)
-		{
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
+				(LlvmPackage.Literals.SWITCH__CASES,
+				 LlvmFactory.eINSTANCE.createSwitchCase()));
 	}
 
 }

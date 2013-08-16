@@ -61,25 +61,26 @@ public class CompareItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
-			addPredPropertyDescriptor(object);
+			addCondPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Pred feature.
+	 * This adds a property descriptor for the Cond feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addPredPropertyDescriptor(Object object) {
+	protected void addCondPropertyDescriptor(Object object)
+	{
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Compare_pred_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Compare_pred_feature", "_UI_Compare_type"),
-				 LlvmPackage.Literals.COMPARE__PRED,
+				 getString("_UI_Compare_cond_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Compare_cond_feature", "_UI_Compare_type"),
+				 LlvmPackage.Literals.COMPARE__COND,
 				 true,
 				 false,
 				 false,
@@ -102,9 +103,9 @@ public class CompareItemProvider
 		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.COMPARE__RESULT);
-			childrenFeatures.add(LlvmPackage.Literals.COMPARE__COMPTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.COMPARE__VALUE1);
-			childrenFeatures.add(LlvmPackage.Literals.COMPARE__VALUE2);
+			childrenFeatures.add(LlvmPackage.Literals.COMPARE__OP_TYPE);
+			childrenFeatures.add(LlvmPackage.Literals.COMPARE__OPERAND1);
+			childrenFeatures.add(LlvmPackage.Literals.COMPARE__OPERAND2);
 		}
 		return childrenFeatures;
 	}
@@ -141,7 +142,7 @@ public class CompareItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Compare)object).getPred();
+		String label = ((Compare)object).getCond();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Compare_type") :
 			getString("_UI_Compare_type") + " " + label;
@@ -160,13 +161,13 @@ public class CompareItemProvider
 
 		switch (notification.getFeatureID(Compare.class))
 		{
-			case LlvmPackage.COMPARE__PRED:
+			case LlvmPackage.COMPARE__COND:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case LlvmPackage.COMPARE__RESULT:
-			case LlvmPackage.COMPARE__COMPTYPE:
-			case LlvmPackage.COMPARE__VALUE1:
-			case LlvmPackage.COMPARE__VALUE2:
+			case LlvmPackage.COMPARE__OP_TYPE:
+			case LlvmPackage.COMPARE__OPERAND1:
+			case LlvmPackage.COMPARE__OPERAND2:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -191,77 +192,77 @@ public class CompareItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.COMPARE__COMPTYPE,
+				(LlvmPackage.Literals.COMPARE__OP_TYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.COMPARE__COMPTYPE,
+				(LlvmPackage.Literals.COMPARE__OP_TYPE,
 				 LlvmFactory.eINSTANCE.createAddressUse()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.COMPARE__COMPTYPE,
+				(LlvmPackage.Literals.COMPARE__OP_TYPE,
 				 LlvmFactory.eINSTANCE.createPredefined()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.COMPARE__VALUE1,
+				(LlvmPackage.Literals.COMPARE__OPERAND1,
 				 LlvmFactory.eINSTANCE.createAddressUse()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.COMPARE__VALUE1,
+				(LlvmPackage.Literals.COMPARE__OPERAND1,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.COMPARE__VALUE1,
+				(LlvmPackage.Literals.COMPARE__OPERAND1,
 				 LlvmFactory.eINSTANCE.createConstant()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.COMPARE__VALUE1,
+				(LlvmPackage.Literals.COMPARE__OPERAND1,
 				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.COMPARE__VALUE1,
+				(LlvmPackage.Literals.COMPARE__OPERAND1,
 				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.COMPARE__VALUE1,
+				(LlvmPackage.Literals.COMPARE__OPERAND1,
 				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.COMPARE__VALUE2,
+				(LlvmPackage.Literals.COMPARE__OPERAND2,
 				 LlvmFactory.eINSTANCE.createAddressUse()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.COMPARE__VALUE2,
+				(LlvmPackage.Literals.COMPARE__OPERAND2,
 				 LlvmFactory.eINSTANCE.createValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.COMPARE__VALUE2,
+				(LlvmPackage.Literals.COMPARE__OPERAND2,
 				 LlvmFactory.eINSTANCE.createConstant()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.COMPARE__VALUE2,
+				(LlvmPackage.Literals.COMPARE__OPERAND2,
 				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.COMPARE__VALUE2,
+				(LlvmPackage.Literals.COMPARE__OPERAND2,
 				 LlvmFactory.eINSTANCE.createNestedCast()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.COMPARE__VALUE2,
+				(LlvmPackage.Literals.COMPARE__OPERAND2,
 				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
 	}
 
@@ -277,9 +278,9 @@ public class CompareItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == LlvmPackage.Literals.COMPARE__COMPTYPE ||
-			childFeature == LlvmPackage.Literals.COMPARE__VALUE1 ||
-			childFeature == LlvmPackage.Literals.COMPARE__VALUE2;
+			childFeature == LlvmPackage.Literals.COMPARE__OP_TYPE ||
+			childFeature == LlvmPackage.Literals.COMPARE__OPERAND1 ||
+			childFeature == LlvmPackage.Literals.COMPARE__OPERAND2;
 
 		if (qualify)
 		{

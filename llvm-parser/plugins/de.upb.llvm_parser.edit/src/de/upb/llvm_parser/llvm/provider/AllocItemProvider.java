@@ -105,9 +105,7 @@ public class AllocItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.ALLOC__RESULT);
 			childrenFeatures.add(LlvmPackage.Literals.ALLOC__TYPE);
-			childrenFeatures.add(LlvmPackage.Literals.ALLOC__TYPELIST);
-			childrenFeatures.add(LlvmPackage.Literals.ALLOC__NUMELEMENTSTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.ALLOC__NUMELEMENTSVALUE);
+			childrenFeatures.add(LlvmPackage.Literals.ALLOC__NUM_OF_ELEMENTS);
 		}
 		return childrenFeatures;
 	}
@@ -169,9 +167,7 @@ public class AllocItemProvider
 				return;
 			case LlvmPackage.ALLOC__RESULT:
 			case LlvmPackage.ALLOC__TYPE:
-			case LlvmPackage.ALLOC__TYPELIST:
-			case LlvmPackage.ALLOC__NUMELEMENTSTYPE:
-			case LlvmPackage.ALLOC__NUMELEMENTSVALUE:
+			case LlvmPackage.ALLOC__NUM_OF_ELEMENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -211,78 +207,8 @@ public class AllocItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.ALLOC__TYPELIST,
-				 LlvmFactory.eINSTANCE.createParameterList()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ALLOC__NUMELEMENTSTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ALLOC__NUMELEMENTSTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ALLOC__NUMELEMENTSTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ALLOC__NUMELEMENTSVALUE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ALLOC__NUMELEMENTSVALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ALLOC__NUMELEMENTSVALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ALLOC__NUMELEMENTSVALUE,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ALLOC__NUMELEMENTSVALUE,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ALLOC__NUMELEMENTSVALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == LlvmPackage.Literals.ALLOC__TYPE ||
-			childFeature == LlvmPackage.Literals.ALLOC__NUMELEMENTSTYPE ||
-			childFeature == LlvmPackage.Literals.ALLOC__NUMELEMENTSVALUE;
-
-		if (qualify)
-		{
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
+				(LlvmPackage.Literals.ALLOC__NUM_OF_ELEMENTS,
+				 LlvmFactory.eINSTANCE.createParameter()));
 	}
 
 }

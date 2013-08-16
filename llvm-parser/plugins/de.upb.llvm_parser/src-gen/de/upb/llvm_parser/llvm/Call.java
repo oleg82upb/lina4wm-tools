@@ -12,8 +12,7 @@ package de.upb.llvm_parser.llvm;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.Call#getResult <em>Result</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Call#getAdresstype <em>Adresstype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Call#getAdress <em>Adress</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Call#getFunction <em>Function</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Call#getPList <em>PList</em>}</li>
  * </ul>
  * </p>
@@ -51,56 +50,30 @@ public interface Call extends Instruction
   void setResult(Address value);
 
   /**
-	 * Returns the value of the '<em><b>Adresstype</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Function</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Adresstype</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Function</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Adresstype</em>' containment reference.
-	 * @see #setAdresstype(TypeUse)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCall_Adresstype()
+	 * @return the value of the '<em>Function</em>' containment reference.
+	 * @see #setFunction(Parameter)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCall_Function()
 	 * @model containment="true"
 	 * @generated
 	 */
-  TypeUse getAdresstype();
+  Parameter getFunction();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Call#getAdresstype <em>Adresstype</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Call#getFunction <em>Function</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Adresstype</em>' containment reference.
-	 * @see #getAdresstype()
+	 * @param value the new value of the '<em>Function</em>' containment reference.
+	 * @see #getFunction()
 	 * @generated
 	 */
-  void setAdresstype(TypeUse value);
-
-  /**
-	 * Returns the value of the '<em><b>Adress</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Adress</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Adress</em>' containment reference.
-	 * @see #setAdress(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getCall_Adress()
-	 * @model containment="true"
-	 * @generated
-	 */
-  Value getAdress();
-
-  /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Call#getAdress <em>Adress</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Adress</em>' containment reference.
-	 * @see #getAdress()
-	 * @generated
-	 */
-  void setAdress(Value value);
+  void setFunction(Parameter value);
 
   /**
 	 * Returns the value of the '<em><b>PList</b></em>' containment reference.

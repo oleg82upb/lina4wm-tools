@@ -22,9 +22,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.BranchImpl#getDestination <em>Destination</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.BranchImpl#getCondvalue <em>Condvalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.BranchImpl#getLabelTrue <em>Label True</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.BranchImpl#getLabelFalse <em>Label False</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.BranchImpl#getCondition <em>Condition</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.BranchImpl#getElseDestination <em>Else Destination</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,54 +52,34 @@ public class BranchImpl extends InstructionImpl implements Branch
   protected String destination = DESTINATION_EDEFAULT;
 
   /**
-	 * The cached value of the '{@link #getCondvalue() <em>Condvalue</em>}' containment reference.
+	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getCondvalue()
+	 * @see #getCondition()
 	 * @generated
 	 * @ordered
 	 */
-  protected Value condvalue;
+  protected Value condition;
 
   /**
-	 * The default value of the '{@link #getLabelTrue() <em>Label True</em>}' attribute.
+	 * The default value of the '{@link #getElseDestination() <em>Else Destination</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getLabelTrue()
+	 * @see #getElseDestination()
 	 * @generated
 	 * @ordered
 	 */
-  protected static final String LABEL_TRUE_EDEFAULT = null;
+  protected static final String ELSE_DESTINATION_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getLabelTrue() <em>Label True</em>}' attribute.
+	 * The cached value of the '{@link #getElseDestination() <em>Else Destination</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getLabelTrue()
+	 * @see #getElseDestination()
 	 * @generated
 	 * @ordered
 	 */
-  protected String labelTrue = LABEL_TRUE_EDEFAULT;
-
-  /**
-	 * The default value of the '{@link #getLabelFalse() <em>Label False</em>}' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getLabelFalse()
-	 * @generated
-	 * @ordered
-	 */
-  protected static final String LABEL_FALSE_EDEFAULT = null;
-
-  /**
-	 * The cached value of the '{@link #getLabelFalse() <em>Label False</em>}' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getLabelFalse()
-	 * @generated
-	 * @ordered
-	 */
-  protected String labelFalse = LABEL_FALSE_EDEFAULT;
+  protected String elseDestination = ELSE_DESTINATION_EDEFAULT;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -151,9 +130,9 @@ public class BranchImpl extends InstructionImpl implements Branch
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public Value getCondvalue()
+  public Value getCondition()
   {
-		return condvalue;
+		return condition;
 	}
 
   /**
@@ -161,13 +140,13 @@ public class BranchImpl extends InstructionImpl implements Branch
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetCondvalue(Value newCondvalue, NotificationChain msgs)
+  public NotificationChain basicSetCondition(Value newCondition, NotificationChain msgs)
   {
-		Value oldCondvalue = condvalue;
-		condvalue = newCondvalue;
+		Value oldCondition = condition;
+		condition = newCondition;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.BRANCH__CONDVALUE, oldCondvalue, newCondvalue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.BRANCH__CONDITION, oldCondition, newCondition);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -178,20 +157,20 @@ public class BranchImpl extends InstructionImpl implements Branch
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setCondvalue(Value newCondvalue)
+  public void setCondition(Value newCondition)
   {
-		if (newCondvalue != condvalue)
+		if (newCondition != condition)
 		{
 			NotificationChain msgs = null;
-			if (condvalue != null)
-				msgs = ((InternalEObject)condvalue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.BRANCH__CONDVALUE, null, msgs);
-			if (newCondvalue != null)
-				msgs = ((InternalEObject)newCondvalue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.BRANCH__CONDVALUE, null, msgs);
-			msgs = basicSetCondvalue(newCondvalue, msgs);
+			if (condition != null)
+				msgs = ((InternalEObject)condition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.BRANCH__CONDITION, null, msgs);
+			if (newCondition != null)
+				msgs = ((InternalEObject)newCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.BRANCH__CONDITION, null, msgs);
+			msgs = basicSetCondition(newCondition, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.BRANCH__CONDVALUE, newCondvalue, newCondvalue));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.BRANCH__CONDITION, newCondition, newCondition));
 	}
 
   /**
@@ -199,9 +178,9 @@ public class BranchImpl extends InstructionImpl implements Branch
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getLabelTrue()
+  public String getElseDestination()
   {
-		return labelTrue;
+		return elseDestination;
 	}
 
   /**
@@ -209,35 +188,12 @@ public class BranchImpl extends InstructionImpl implements Branch
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setLabelTrue(String newLabelTrue)
+  public void setElseDestination(String newElseDestination)
   {
-		String oldLabelTrue = labelTrue;
-		labelTrue = newLabelTrue;
+		String oldElseDestination = elseDestination;
+		elseDestination = newElseDestination;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.BRANCH__LABEL_TRUE, oldLabelTrue, labelTrue));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public String getLabelFalse()
-  {
-		return labelFalse;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setLabelFalse(String newLabelFalse)
-  {
-		String oldLabelFalse = labelFalse;
-		labelFalse = newLabelFalse;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.BRANCH__LABEL_FALSE, oldLabelFalse, labelFalse));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.BRANCH__ELSE_DESTINATION, oldElseDestination, elseDestination));
 	}
 
   /**
@@ -250,8 +206,8 @@ public class BranchImpl extends InstructionImpl implements Branch
   {
 		switch (featureID)
 		{
-			case LlvmPackage.BRANCH__CONDVALUE:
-				return basicSetCondvalue(null, msgs);
+			case LlvmPackage.BRANCH__CONDITION:
+				return basicSetCondition(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -268,12 +224,10 @@ public class BranchImpl extends InstructionImpl implements Branch
 		{
 			case LlvmPackage.BRANCH__DESTINATION:
 				return getDestination();
-			case LlvmPackage.BRANCH__CONDVALUE:
-				return getCondvalue();
-			case LlvmPackage.BRANCH__LABEL_TRUE:
-				return getLabelTrue();
-			case LlvmPackage.BRANCH__LABEL_FALSE:
-				return getLabelFalse();
+			case LlvmPackage.BRANCH__CONDITION:
+				return getCondition();
+			case LlvmPackage.BRANCH__ELSE_DESTINATION:
+				return getElseDestination();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -291,14 +245,11 @@ public class BranchImpl extends InstructionImpl implements Branch
 			case LlvmPackage.BRANCH__DESTINATION:
 				setDestination((String)newValue);
 				return;
-			case LlvmPackage.BRANCH__CONDVALUE:
-				setCondvalue((Value)newValue);
+			case LlvmPackage.BRANCH__CONDITION:
+				setCondition((Value)newValue);
 				return;
-			case LlvmPackage.BRANCH__LABEL_TRUE:
-				setLabelTrue((String)newValue);
-				return;
-			case LlvmPackage.BRANCH__LABEL_FALSE:
-				setLabelFalse((String)newValue);
+			case LlvmPackage.BRANCH__ELSE_DESTINATION:
+				setElseDestination((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -317,14 +268,11 @@ public class BranchImpl extends InstructionImpl implements Branch
 			case LlvmPackage.BRANCH__DESTINATION:
 				setDestination(DESTINATION_EDEFAULT);
 				return;
-			case LlvmPackage.BRANCH__CONDVALUE:
-				setCondvalue((Value)null);
+			case LlvmPackage.BRANCH__CONDITION:
+				setCondition((Value)null);
 				return;
-			case LlvmPackage.BRANCH__LABEL_TRUE:
-				setLabelTrue(LABEL_TRUE_EDEFAULT);
-				return;
-			case LlvmPackage.BRANCH__LABEL_FALSE:
-				setLabelFalse(LABEL_FALSE_EDEFAULT);
+			case LlvmPackage.BRANCH__ELSE_DESTINATION:
+				setElseDestination(ELSE_DESTINATION_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -342,12 +290,10 @@ public class BranchImpl extends InstructionImpl implements Branch
 		{
 			case LlvmPackage.BRANCH__DESTINATION:
 				return DESTINATION_EDEFAULT == null ? destination != null : !DESTINATION_EDEFAULT.equals(destination);
-			case LlvmPackage.BRANCH__CONDVALUE:
-				return condvalue != null;
-			case LlvmPackage.BRANCH__LABEL_TRUE:
-				return LABEL_TRUE_EDEFAULT == null ? labelTrue != null : !LABEL_TRUE_EDEFAULT.equals(labelTrue);
-			case LlvmPackage.BRANCH__LABEL_FALSE:
-				return LABEL_FALSE_EDEFAULT == null ? labelFalse != null : !LABEL_FALSE_EDEFAULT.equals(labelFalse);
+			case LlvmPackage.BRANCH__CONDITION:
+				return condition != null;
+			case LlvmPackage.BRANCH__ELSE_DESTINATION:
+				return ELSE_DESTINATION_EDEFAULT == null ? elseDestination != null : !ELSE_DESTINATION_EDEFAULT.equals(elseDestination);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -365,10 +311,8 @@ public class BranchImpl extends InstructionImpl implements Branch
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (destination: ");
 		result.append(destination);
-		result.append(", labelTrue: ");
-		result.append(labelTrue);
-		result.append(", labelFalse: ");
-		result.append(labelFalse);
+		result.append(", elseDestination: ");
+		result.append(elseDestination);
 		result.append(')');
 		return result.toString();
 	}

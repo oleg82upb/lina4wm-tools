@@ -11,8 +11,7 @@ package de.upb.llvm_parser.llvm;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.Return#getReturntype <em>Returntype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Return#getReturnvalue <em>Returnvalue</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Return#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -23,55 +22,29 @@ package de.upb.llvm_parser.llvm;
 public interface Return extends Instruction
 {
   /**
-	 * Returns the value of the '<em><b>Returntype</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Returntype</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Value</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Returntype</em>' containment reference.
-	 * @see #setReturntype(TypeUse)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getReturn_Returntype()
+	 * @return the value of the '<em>Value</em>' containment reference.
+	 * @see #setValue(Parameter)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getReturn_Value()
 	 * @model containment="true"
 	 * @generated
 	 */
-  TypeUse getReturntype();
+  Parameter getValue();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Return#getReturntype <em>Returntype</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Return#getValue <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Returntype</em>' containment reference.
-	 * @see #getReturntype()
+	 * @param value the new value of the '<em>Value</em>' containment reference.
+	 * @see #getValue()
 	 * @generated
 	 */
-  void setReturntype(TypeUse value);
-
-  /**
-	 * Returns the value of the '<em><b>Returnvalue</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Returnvalue</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Returnvalue</em>' containment reference.
-	 * @see #setReturnvalue(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getReturn_Returnvalue()
-	 * @model containment="true"
-	 * @generated
-	 */
-  Value getReturnvalue();
-
-  /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Return#getReturnvalue <em>Returnvalue</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Returnvalue</em>' containment reference.
-	 * @see #getReturnvalue()
-	 * @generated
-	 */
-  void setReturnvalue(Value value);
+  void setValue(Parameter value);
 
 } // Return

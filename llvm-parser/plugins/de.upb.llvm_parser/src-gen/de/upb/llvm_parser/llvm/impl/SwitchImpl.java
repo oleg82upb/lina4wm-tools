@@ -3,9 +3,9 @@
 package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.Switch;
-import de.upb.llvm_parser.llvm.TypeUse;
-import de.upb.llvm_parser.llvm.Value;
+import de.upb.llvm_parser.llvm.SwitchCase;
 
 import java.util.Collection;
 
@@ -29,14 +29,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getComptype <em>Comptype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getCompvalue <em>Compvalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getDefaulttype <em>Defaulttype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getDefaultvalue <em>Defaultvalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getJtypes <em>Jtypes</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getJvalues <em>Jvalues</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getDestinationtypes <em>Destinationtypes</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getDestinations <em>Destinations</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getCaseValue <em>Case Value</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getDefaultCase <em>Default Case</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.SwitchImpl#getCases <em>Cases</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,84 +40,44 @@ import org.eclipse.emf.ecore.util.InternalEList;
 public class SwitchImpl extends InstructionImpl implements Switch
 {
   /**
-	 * The cached value of the '{@link #getComptype() <em>Comptype</em>}' containment reference.
+	 * The cached value of the '{@link #getCaseValue() <em>Case Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getComptype()
+	 * @see #getCaseValue()
 	 * @generated
 	 * @ordered
 	 */
-  protected TypeUse comptype;
+  protected Parameter caseValue;
 
   /**
-	 * The cached value of the '{@link #getCompvalue() <em>Compvalue</em>}' containment reference.
+	 * The default value of the '{@link #getDefaultCase() <em>Default Case</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getCompvalue()
+	 * @see #getDefaultCase()
 	 * @generated
 	 * @ordered
 	 */
-  protected Value compvalue;
+  protected static final String DEFAULT_CASE_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getDefaulttype() <em>Defaulttype</em>}' containment reference.
+	 * The cached value of the '{@link #getDefaultCase() <em>Default Case</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getDefaulttype()
+	 * @see #getDefaultCase()
 	 * @generated
 	 * @ordered
 	 */
-  protected TypeUse defaulttype;
+  protected String defaultCase = DEFAULT_CASE_EDEFAULT;
 
   /**
-	 * The cached value of the '{@link #getDefaultvalue() <em>Defaultvalue</em>}' containment reference.
+	 * The cached value of the '{@link #getCases() <em>Cases</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getDefaultvalue()
+	 * @see #getCases()
 	 * @generated
 	 * @ordered
 	 */
-  protected Value defaultvalue;
-
-  /**
-	 * The cached value of the '{@link #getJtypes() <em>Jtypes</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getJtypes()
-	 * @generated
-	 * @ordered
-	 */
-  protected EList<TypeUse> jtypes;
-
-  /**
-	 * The cached value of the '{@link #getJvalues() <em>Jvalues</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getJvalues()
-	 * @generated
-	 * @ordered
-	 */
-  protected EList<Value> jvalues;
-
-  /**
-	 * The cached value of the '{@link #getDestinationtypes() <em>Destinationtypes</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getDestinationtypes()
-	 * @generated
-	 * @ordered
-	 */
-  protected EList<TypeUse> destinationtypes;
-
-  /**
-	 * The cached value of the '{@link #getDestinations() <em>Destinations</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getDestinations()
-	 * @generated
-	 * @ordered
-	 */
-  protected EList<Value> destinations;
+  protected EList<SwitchCase> cases;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -150,9 +105,9 @@ public class SwitchImpl extends InstructionImpl implements Switch
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public TypeUse getComptype()
+  public Parameter getCaseValue()
   {
-		return comptype;
+		return caseValue;
 	}
 
   /**
@@ -160,13 +115,13 @@ public class SwitchImpl extends InstructionImpl implements Switch
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetComptype(TypeUse newComptype, NotificationChain msgs)
+  public NotificationChain basicSetCaseValue(Parameter newCaseValue, NotificationChain msgs)
   {
-		TypeUse oldComptype = comptype;
-		comptype = newComptype;
+		Parameter oldCaseValue = caseValue;
+		caseValue = newCaseValue;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__COMPTYPE, oldComptype, newComptype);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__CASE_VALUE, oldCaseValue, newCaseValue);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -177,20 +132,20 @@ public class SwitchImpl extends InstructionImpl implements Switch
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setComptype(TypeUse newComptype)
+  public void setCaseValue(Parameter newCaseValue)
   {
-		if (newComptype != comptype)
+		if (newCaseValue != caseValue)
 		{
 			NotificationChain msgs = null;
-			if (comptype != null)
-				msgs = ((InternalEObject)comptype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SWITCH__COMPTYPE, null, msgs);
-			if (newComptype != null)
-				msgs = ((InternalEObject)newComptype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SWITCH__COMPTYPE, null, msgs);
-			msgs = basicSetComptype(newComptype, msgs);
+			if (caseValue != null)
+				msgs = ((InternalEObject)caseValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SWITCH__CASE_VALUE, null, msgs);
+			if (newCaseValue != null)
+				msgs = ((InternalEObject)newCaseValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SWITCH__CASE_VALUE, null, msgs);
+			msgs = basicSetCaseValue(newCaseValue, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__COMPTYPE, newComptype, newComptype));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__CASE_VALUE, newCaseValue, newCaseValue));
 	}
 
   /**
@@ -198,9 +153,9 @@ public class SwitchImpl extends InstructionImpl implements Switch
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public Value getCompvalue()
+  public String getDefaultCase()
   {
-		return compvalue;
+		return defaultCase;
 	}
 
   /**
@@ -208,189 +163,26 @@ public class SwitchImpl extends InstructionImpl implements Switch
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetCompvalue(Value newCompvalue, NotificationChain msgs)
+  public void setDefaultCase(String newDefaultCase)
   {
-		Value oldCompvalue = compvalue;
-		compvalue = newCompvalue;
+		String oldDefaultCase = defaultCase;
+		defaultCase = newDefaultCase;
 		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__DEFAULT_CASE, oldDefaultCase, defaultCase));
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EList<SwitchCase> getCases()
+  {
+		if (cases == null)
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__COMPVALUE, oldCompvalue, newCompvalue);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+			cases = new EObjectContainmentEList<SwitchCase>(SwitchCase.class, this, LlvmPackage.SWITCH__CASES);
 		}
-		return msgs;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setCompvalue(Value newCompvalue)
-  {
-		if (newCompvalue != compvalue)
-		{
-			NotificationChain msgs = null;
-			if (compvalue != null)
-				msgs = ((InternalEObject)compvalue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SWITCH__COMPVALUE, null, msgs);
-			if (newCompvalue != null)
-				msgs = ((InternalEObject)newCompvalue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SWITCH__COMPVALUE, null, msgs);
-			msgs = basicSetCompvalue(newCompvalue, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__COMPVALUE, newCompvalue, newCompvalue));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public TypeUse getDefaulttype()
-  {
-		return defaulttype;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public NotificationChain basicSetDefaulttype(TypeUse newDefaulttype, NotificationChain msgs)
-  {
-		TypeUse oldDefaulttype = defaulttype;
-		defaulttype = newDefaulttype;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__DEFAULTTYPE, oldDefaulttype, newDefaulttype);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setDefaulttype(TypeUse newDefaulttype)
-  {
-		if (newDefaulttype != defaulttype)
-		{
-			NotificationChain msgs = null;
-			if (defaulttype != null)
-				msgs = ((InternalEObject)defaulttype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SWITCH__DEFAULTTYPE, null, msgs);
-			if (newDefaulttype != null)
-				msgs = ((InternalEObject)newDefaulttype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SWITCH__DEFAULTTYPE, null, msgs);
-			msgs = basicSetDefaulttype(newDefaulttype, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__DEFAULTTYPE, newDefaulttype, newDefaulttype));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public Value getDefaultvalue()
-  {
-		return defaultvalue;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public NotificationChain basicSetDefaultvalue(Value newDefaultvalue, NotificationChain msgs)
-  {
-		Value oldDefaultvalue = defaultvalue;
-		defaultvalue = newDefaultvalue;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__DEFAULTVALUE, oldDefaultvalue, newDefaultvalue);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setDefaultvalue(Value newDefaultvalue)
-  {
-		if (newDefaultvalue != defaultvalue)
-		{
-			NotificationChain msgs = null;
-			if (defaultvalue != null)
-				msgs = ((InternalEObject)defaultvalue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SWITCH__DEFAULTVALUE, null, msgs);
-			if (newDefaultvalue != null)
-				msgs = ((InternalEObject)newDefaultvalue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SWITCH__DEFAULTVALUE, null, msgs);
-			msgs = basicSetDefaultvalue(newDefaultvalue, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SWITCH__DEFAULTVALUE, newDefaultvalue, newDefaultvalue));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EList<TypeUse> getJtypes()
-  {
-		if (jtypes == null)
-		{
-			jtypes = new EObjectContainmentEList<TypeUse>(TypeUse.class, this, LlvmPackage.SWITCH__JTYPES);
-		}
-		return jtypes;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EList<Value> getJvalues()
-  {
-		if (jvalues == null)
-		{
-			jvalues = new EObjectContainmentEList<Value>(Value.class, this, LlvmPackage.SWITCH__JVALUES);
-		}
-		return jvalues;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EList<TypeUse> getDestinationtypes()
-  {
-		if (destinationtypes == null)
-		{
-			destinationtypes = new EObjectContainmentEList<TypeUse>(TypeUse.class, this, LlvmPackage.SWITCH__DESTINATIONTYPES);
-		}
-		return destinationtypes;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EList<Value> getDestinations()
-  {
-		if (destinations == null)
-		{
-			destinations = new EObjectContainmentEList<Value>(Value.class, this, LlvmPackage.SWITCH__DESTINATIONS);
-		}
-		return destinations;
+		return cases;
 	}
 
   /**
@@ -403,22 +195,10 @@ public class SwitchImpl extends InstructionImpl implements Switch
   {
 		switch (featureID)
 		{
-			case LlvmPackage.SWITCH__COMPTYPE:
-				return basicSetComptype(null, msgs);
-			case LlvmPackage.SWITCH__COMPVALUE:
-				return basicSetCompvalue(null, msgs);
-			case LlvmPackage.SWITCH__DEFAULTTYPE:
-				return basicSetDefaulttype(null, msgs);
-			case LlvmPackage.SWITCH__DEFAULTVALUE:
-				return basicSetDefaultvalue(null, msgs);
-			case LlvmPackage.SWITCH__JTYPES:
-				return ((InternalEList<?>)getJtypes()).basicRemove(otherEnd, msgs);
-			case LlvmPackage.SWITCH__JVALUES:
-				return ((InternalEList<?>)getJvalues()).basicRemove(otherEnd, msgs);
-			case LlvmPackage.SWITCH__DESTINATIONTYPES:
-				return ((InternalEList<?>)getDestinationtypes()).basicRemove(otherEnd, msgs);
-			case LlvmPackage.SWITCH__DESTINATIONS:
-				return ((InternalEList<?>)getDestinations()).basicRemove(otherEnd, msgs);
+			case LlvmPackage.SWITCH__CASE_VALUE:
+				return basicSetCaseValue(null, msgs);
+			case LlvmPackage.SWITCH__CASES:
+				return ((InternalEList<?>)getCases()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -433,22 +213,12 @@ public class SwitchImpl extends InstructionImpl implements Switch
   {
 		switch (featureID)
 		{
-			case LlvmPackage.SWITCH__COMPTYPE:
-				return getComptype();
-			case LlvmPackage.SWITCH__COMPVALUE:
-				return getCompvalue();
-			case LlvmPackage.SWITCH__DEFAULTTYPE:
-				return getDefaulttype();
-			case LlvmPackage.SWITCH__DEFAULTVALUE:
-				return getDefaultvalue();
-			case LlvmPackage.SWITCH__JTYPES:
-				return getJtypes();
-			case LlvmPackage.SWITCH__JVALUES:
-				return getJvalues();
-			case LlvmPackage.SWITCH__DESTINATIONTYPES:
-				return getDestinationtypes();
-			case LlvmPackage.SWITCH__DESTINATIONS:
-				return getDestinations();
+			case LlvmPackage.SWITCH__CASE_VALUE:
+				return getCaseValue();
+			case LlvmPackage.SWITCH__DEFAULT_CASE:
+				return getDefaultCase();
+			case LlvmPackage.SWITCH__CASES:
+				return getCases();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -464,33 +234,15 @@ public class SwitchImpl extends InstructionImpl implements Switch
   {
 		switch (featureID)
 		{
-			case LlvmPackage.SWITCH__COMPTYPE:
-				setComptype((TypeUse)newValue);
+			case LlvmPackage.SWITCH__CASE_VALUE:
+				setCaseValue((Parameter)newValue);
 				return;
-			case LlvmPackage.SWITCH__COMPVALUE:
-				setCompvalue((Value)newValue);
+			case LlvmPackage.SWITCH__DEFAULT_CASE:
+				setDefaultCase((String)newValue);
 				return;
-			case LlvmPackage.SWITCH__DEFAULTTYPE:
-				setDefaulttype((TypeUse)newValue);
-				return;
-			case LlvmPackage.SWITCH__DEFAULTVALUE:
-				setDefaultvalue((Value)newValue);
-				return;
-			case LlvmPackage.SWITCH__JTYPES:
-				getJtypes().clear();
-				getJtypes().addAll((Collection<? extends TypeUse>)newValue);
-				return;
-			case LlvmPackage.SWITCH__JVALUES:
-				getJvalues().clear();
-				getJvalues().addAll((Collection<? extends Value>)newValue);
-				return;
-			case LlvmPackage.SWITCH__DESTINATIONTYPES:
-				getDestinationtypes().clear();
-				getDestinationtypes().addAll((Collection<? extends TypeUse>)newValue);
-				return;
-			case LlvmPackage.SWITCH__DESTINATIONS:
-				getDestinations().clear();
-				getDestinations().addAll((Collection<? extends Value>)newValue);
+			case LlvmPackage.SWITCH__CASES:
+				getCases().clear();
+				getCases().addAll((Collection<? extends SwitchCase>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -506,29 +258,14 @@ public class SwitchImpl extends InstructionImpl implements Switch
   {
 		switch (featureID)
 		{
-			case LlvmPackage.SWITCH__COMPTYPE:
-				setComptype((TypeUse)null);
+			case LlvmPackage.SWITCH__CASE_VALUE:
+				setCaseValue((Parameter)null);
 				return;
-			case LlvmPackage.SWITCH__COMPVALUE:
-				setCompvalue((Value)null);
+			case LlvmPackage.SWITCH__DEFAULT_CASE:
+				setDefaultCase(DEFAULT_CASE_EDEFAULT);
 				return;
-			case LlvmPackage.SWITCH__DEFAULTTYPE:
-				setDefaulttype((TypeUse)null);
-				return;
-			case LlvmPackage.SWITCH__DEFAULTVALUE:
-				setDefaultvalue((Value)null);
-				return;
-			case LlvmPackage.SWITCH__JTYPES:
-				getJtypes().clear();
-				return;
-			case LlvmPackage.SWITCH__JVALUES:
-				getJvalues().clear();
-				return;
-			case LlvmPackage.SWITCH__DESTINATIONTYPES:
-				getDestinationtypes().clear();
-				return;
-			case LlvmPackage.SWITCH__DESTINATIONS:
-				getDestinations().clear();
+			case LlvmPackage.SWITCH__CASES:
+				getCases().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -544,24 +281,31 @@ public class SwitchImpl extends InstructionImpl implements Switch
   {
 		switch (featureID)
 		{
-			case LlvmPackage.SWITCH__COMPTYPE:
-				return comptype != null;
-			case LlvmPackage.SWITCH__COMPVALUE:
-				return compvalue != null;
-			case LlvmPackage.SWITCH__DEFAULTTYPE:
-				return defaulttype != null;
-			case LlvmPackage.SWITCH__DEFAULTVALUE:
-				return defaultvalue != null;
-			case LlvmPackage.SWITCH__JTYPES:
-				return jtypes != null && !jtypes.isEmpty();
-			case LlvmPackage.SWITCH__JVALUES:
-				return jvalues != null && !jvalues.isEmpty();
-			case LlvmPackage.SWITCH__DESTINATIONTYPES:
-				return destinationtypes != null && !destinationtypes.isEmpty();
-			case LlvmPackage.SWITCH__DESTINATIONS:
-				return destinations != null && !destinations.isEmpty();
+			case LlvmPackage.SWITCH__CASE_VALUE:
+				return caseValue != null;
+			case LlvmPackage.SWITCH__DEFAULT_CASE:
+				return DEFAULT_CASE_EDEFAULT == null ? defaultCase != null : !DEFAULT_CASE_EDEFAULT.equals(defaultCase);
+			case LlvmPackage.SWITCH__CASES:
+				return cases != null && !cases.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  @Override
+  public String toString()
+  {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (defaultCase: ");
+		result.append(defaultCase);
+		result.append(')');
+		return result.toString();
 	}
 
 } //SwitchImpl

@@ -5,9 +5,8 @@ package de.upb.llvm_parser.llvm.impl;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.Call;
 import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.ParameterList;
-import de.upb.llvm_parser.llvm.TypeUse;
-import de.upb.llvm_parser.llvm.Value;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -25,8 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.CallImpl#getResult <em>Result</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.CallImpl#getAdresstype <em>Adresstype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.CallImpl#getAdress <em>Adress</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.CallImpl#getFunction <em>Function</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.CallImpl#getPList <em>PList</em>}</li>
  * </ul>
  * </p>
@@ -46,24 +44,14 @@ public class CallImpl extends InstructionImpl implements Call
   protected Address result;
 
   /**
-	 * The cached value of the '{@link #getAdresstype() <em>Adresstype</em>}' containment reference.
+	 * The cached value of the '{@link #getFunction() <em>Function</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getAdresstype()
+	 * @see #getFunction()
 	 * @generated
 	 * @ordered
 	 */
-  protected TypeUse adresstype;
-
-  /**
-	 * The cached value of the '{@link #getAdress() <em>Adress</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getAdress()
-	 * @generated
-	 * @ordered
-	 */
-  protected Value adress;
+  protected Parameter function;
 
   /**
 	 * The cached value of the '{@link #getPList() <em>PList</em>}' containment reference.
@@ -149,9 +137,9 @@ public class CallImpl extends InstructionImpl implements Call
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public TypeUse getAdresstype()
+  public Parameter getFunction()
   {
-		return adresstype;
+		return function;
 	}
 
   /**
@@ -159,13 +147,13 @@ public class CallImpl extends InstructionImpl implements Call
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetAdresstype(TypeUse newAdresstype, NotificationChain msgs)
+  public NotificationChain basicSetFunction(Parameter newFunction, NotificationChain msgs)
   {
-		TypeUse oldAdresstype = adresstype;
-		adresstype = newAdresstype;
+		Parameter oldFunction = function;
+		function = newFunction;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.CALL__ADRESSTYPE, oldAdresstype, newAdresstype);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.CALL__FUNCTION, oldFunction, newFunction);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -176,68 +164,20 @@ public class CallImpl extends InstructionImpl implements Call
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setAdresstype(TypeUse newAdresstype)
+  public void setFunction(Parameter newFunction)
   {
-		if (newAdresstype != adresstype)
+		if (newFunction != function)
 		{
 			NotificationChain msgs = null;
-			if (adresstype != null)
-				msgs = ((InternalEObject)adresstype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CALL__ADRESSTYPE, null, msgs);
-			if (newAdresstype != null)
-				msgs = ((InternalEObject)newAdresstype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CALL__ADRESSTYPE, null, msgs);
-			msgs = basicSetAdresstype(newAdresstype, msgs);
+			if (function != null)
+				msgs = ((InternalEObject)function).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CALL__FUNCTION, null, msgs);
+			if (newFunction != null)
+				msgs = ((InternalEObject)newFunction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CALL__FUNCTION, null, msgs);
+			msgs = basicSetFunction(newFunction, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CALL__ADRESSTYPE, newAdresstype, newAdresstype));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public Value getAdress()
-  {
-		return adress;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public NotificationChain basicSetAdress(Value newAdress, NotificationChain msgs)
-  {
-		Value oldAdress = adress;
-		adress = newAdress;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.CALL__ADRESS, oldAdress, newAdress);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setAdress(Value newAdress)
-  {
-		if (newAdress != adress)
-		{
-			NotificationChain msgs = null;
-			if (adress != null)
-				msgs = ((InternalEObject)adress).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CALL__ADRESS, null, msgs);
-			if (newAdress != null)
-				msgs = ((InternalEObject)newAdress).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.CALL__ADRESS, null, msgs);
-			msgs = basicSetAdress(newAdress, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CALL__ADRESS, newAdress, newAdress));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.CALL__FUNCTION, newFunction, newFunction));
 	}
 
   /**
@@ -300,10 +240,8 @@ public class CallImpl extends InstructionImpl implements Call
 		{
 			case LlvmPackage.CALL__RESULT:
 				return basicSetResult(null, msgs);
-			case LlvmPackage.CALL__ADRESSTYPE:
-				return basicSetAdresstype(null, msgs);
-			case LlvmPackage.CALL__ADRESS:
-				return basicSetAdress(null, msgs);
+			case LlvmPackage.CALL__FUNCTION:
+				return basicSetFunction(null, msgs);
 			case LlvmPackage.CALL__PLIST:
 				return basicSetPList(null, msgs);
 		}
@@ -322,10 +260,8 @@ public class CallImpl extends InstructionImpl implements Call
 		{
 			case LlvmPackage.CALL__RESULT:
 				return getResult();
-			case LlvmPackage.CALL__ADRESSTYPE:
-				return getAdresstype();
-			case LlvmPackage.CALL__ADRESS:
-				return getAdress();
+			case LlvmPackage.CALL__FUNCTION:
+				return getFunction();
 			case LlvmPackage.CALL__PLIST:
 				return getPList();
 		}
@@ -345,11 +281,8 @@ public class CallImpl extends InstructionImpl implements Call
 			case LlvmPackage.CALL__RESULT:
 				setResult((Address)newValue);
 				return;
-			case LlvmPackage.CALL__ADRESSTYPE:
-				setAdresstype((TypeUse)newValue);
-				return;
-			case LlvmPackage.CALL__ADRESS:
-				setAdress((Value)newValue);
+			case LlvmPackage.CALL__FUNCTION:
+				setFunction((Parameter)newValue);
 				return;
 			case LlvmPackage.CALL__PLIST:
 				setPList((ParameterList)newValue);
@@ -371,11 +304,8 @@ public class CallImpl extends InstructionImpl implements Call
 			case LlvmPackage.CALL__RESULT:
 				setResult((Address)null);
 				return;
-			case LlvmPackage.CALL__ADRESSTYPE:
-				setAdresstype((TypeUse)null);
-				return;
-			case LlvmPackage.CALL__ADRESS:
-				setAdress((Value)null);
+			case LlvmPackage.CALL__FUNCTION:
+				setFunction((Parameter)null);
 				return;
 			case LlvmPackage.CALL__PLIST:
 				setPList((ParameterList)null);
@@ -396,10 +326,8 @@ public class CallImpl extends InstructionImpl implements Call
 		{
 			case LlvmPackage.CALL__RESULT:
 				return result != null;
-			case LlvmPackage.CALL__ADRESSTYPE:
-				return adresstype != null;
-			case LlvmPackage.CALL__ADRESS:
-				return adress != null;
+			case LlvmPackage.CALL__FUNCTION:
+				return function != null;
 			case LlvmPackage.CALL__PLIST:
 				return pList != null;
 		}

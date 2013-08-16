@@ -164,6 +164,46 @@ public class ParameterItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createLLVM()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createAbstractElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createTopLevelEntity()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createMainLevelEntity()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createTypeDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createGlobalDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createFunctionDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createAliasDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
 				 LlvmFactory.eINSTANCE.createTypeUse()));
 
 		newChildDescriptors.add
@@ -174,7 +214,267 @@ public class ParameterItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createAddress()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
 				 LlvmFactory.eINSTANCE.createPredefined()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createAggregate_Type()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createVector()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createArray()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createConstant()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createValueStruct()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createStructure()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createParameterList()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createFunctionParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createFunctionParameterList()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createFunctionBody()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createInstruction()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createBasicBlock()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createArithmeticOperation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createLogicOperation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createNestedCast()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createMetaArgValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createMeta()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createMetadataValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createGetElementPtr()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createFence()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createCmpXchg()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createAtomicRMW()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createLoad()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createStore()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createAlloc()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createPhiCase()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createPhi()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createLandingPad()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createClause()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createSelect()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createVariableAttributeAccess()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createExtractValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createInsertValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createExtractElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createInsertElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createShuffleVector()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createCompare()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createIndirectBranch()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createSwitch()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createSwitchCase()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createInvoke()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createResume()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createUnreachable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createReturn()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(LlvmPackage.Literals.PARAMETER__TYPE,
+				 LlvmFactory.eINSTANCE.createBranch()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -5,9 +5,8 @@ package de.upb.llvm_parser.llvm.impl;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.ParameterList;
+import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.TypeUse;
-import de.upb.llvm_parser.llvm.Value;
 
 import java.math.BigDecimal;
 
@@ -28,9 +27,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.AllocImpl#getResult <em>Result</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.AllocImpl#getType <em>Type</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.AllocImpl#getTypelist <em>Typelist</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.AllocImpl#getNumelementstype <em>Numelementstype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.AllocImpl#getNumelementsvalue <em>Numelementsvalue</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.AllocImpl#getNumOfElements <em>Num Of Elements</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.AllocImpl#getAlign <em>Align</em>}</li>
  * </ul>
  * </p>
@@ -60,34 +57,14 @@ public class AllocImpl extends InstructionImpl implements Alloc
   protected TypeUse type;
 
   /**
-	 * The cached value of the '{@link #getTypelist() <em>Typelist</em>}' containment reference.
+	 * The cached value of the '{@link #getNumOfElements() <em>Num Of Elements</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getTypelist()
+	 * @see #getNumOfElements()
 	 * @generated
 	 * @ordered
 	 */
-  protected ParameterList typelist;
-
-  /**
-	 * The cached value of the '{@link #getNumelementstype() <em>Numelementstype</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getNumelementstype()
-	 * @generated
-	 * @ordered
-	 */
-  protected TypeUse numelementstype;
-
-  /**
-	 * The cached value of the '{@link #getNumelementsvalue() <em>Numelementsvalue</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getNumelementsvalue()
-	 * @generated
-	 * @ordered
-	 */
-  protected Value numelementsvalue;
+  protected Parameter numOfElements;
 
   /**
 	 * The default value of the '{@link #getAlign() <em>Align</em>}' attribute.
@@ -231,9 +208,9 @@ public class AllocImpl extends InstructionImpl implements Alloc
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public ParameterList getTypelist()
+  public Parameter getNumOfElements()
   {
-		return typelist;
+		return numOfElements;
 	}
 
   /**
@@ -241,13 +218,13 @@ public class AllocImpl extends InstructionImpl implements Alloc
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetTypelist(ParameterList newTypelist, NotificationChain msgs)
+  public NotificationChain basicSetNumOfElements(Parameter newNumOfElements, NotificationChain msgs)
   {
-		ParameterList oldTypelist = typelist;
-		typelist = newTypelist;
+		Parameter oldNumOfElements = numOfElements;
+		numOfElements = newNumOfElements;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.ALLOC__TYPELIST, oldTypelist, newTypelist);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.ALLOC__NUM_OF_ELEMENTS, oldNumOfElements, newNumOfElements);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -258,116 +235,20 @@ public class AllocImpl extends InstructionImpl implements Alloc
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setTypelist(ParameterList newTypelist)
+  public void setNumOfElements(Parameter newNumOfElements)
   {
-		if (newTypelist != typelist)
+		if (newNumOfElements != numOfElements)
 		{
 			NotificationChain msgs = null;
-			if (typelist != null)
-				msgs = ((InternalEObject)typelist).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ALLOC__TYPELIST, null, msgs);
-			if (newTypelist != null)
-				msgs = ((InternalEObject)newTypelist).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ALLOC__TYPELIST, null, msgs);
-			msgs = basicSetTypelist(newTypelist, msgs);
+			if (numOfElements != null)
+				msgs = ((InternalEObject)numOfElements).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ALLOC__NUM_OF_ELEMENTS, null, msgs);
+			if (newNumOfElements != null)
+				msgs = ((InternalEObject)newNumOfElements).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ALLOC__NUM_OF_ELEMENTS, null, msgs);
+			msgs = basicSetNumOfElements(newNumOfElements, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ALLOC__TYPELIST, newTypelist, newTypelist));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public TypeUse getNumelementstype()
-  {
-		return numelementstype;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public NotificationChain basicSetNumelementstype(TypeUse newNumelementstype, NotificationChain msgs)
-  {
-		TypeUse oldNumelementstype = numelementstype;
-		numelementstype = newNumelementstype;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.ALLOC__NUMELEMENTSTYPE, oldNumelementstype, newNumelementstype);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setNumelementstype(TypeUse newNumelementstype)
-  {
-		if (newNumelementstype != numelementstype)
-		{
-			NotificationChain msgs = null;
-			if (numelementstype != null)
-				msgs = ((InternalEObject)numelementstype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ALLOC__NUMELEMENTSTYPE, null, msgs);
-			if (newNumelementstype != null)
-				msgs = ((InternalEObject)newNumelementstype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ALLOC__NUMELEMENTSTYPE, null, msgs);
-			msgs = basicSetNumelementstype(newNumelementstype, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ALLOC__NUMELEMENTSTYPE, newNumelementstype, newNumelementstype));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public Value getNumelementsvalue()
-  {
-		return numelementsvalue;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public NotificationChain basicSetNumelementsvalue(Value newNumelementsvalue, NotificationChain msgs)
-  {
-		Value oldNumelementsvalue = numelementsvalue;
-		numelementsvalue = newNumelementsvalue;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.ALLOC__NUMELEMENTSVALUE, oldNumelementsvalue, newNumelementsvalue);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setNumelementsvalue(Value newNumelementsvalue)
-  {
-		if (newNumelementsvalue != numelementsvalue)
-		{
-			NotificationChain msgs = null;
-			if (numelementsvalue != null)
-				msgs = ((InternalEObject)numelementsvalue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ALLOC__NUMELEMENTSVALUE, null, msgs);
-			if (newNumelementsvalue != null)
-				msgs = ((InternalEObject)newNumelementsvalue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ALLOC__NUMELEMENTSVALUE, null, msgs);
-			msgs = basicSetNumelementsvalue(newNumelementsvalue, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ALLOC__NUMELEMENTSVALUE, newNumelementsvalue, newNumelementsvalue));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ALLOC__NUM_OF_ELEMENTS, newNumOfElements, newNumOfElements));
 	}
 
   /**
@@ -407,12 +288,8 @@ public class AllocImpl extends InstructionImpl implements Alloc
 				return basicSetResult(null, msgs);
 			case LlvmPackage.ALLOC__TYPE:
 				return basicSetType(null, msgs);
-			case LlvmPackage.ALLOC__TYPELIST:
-				return basicSetTypelist(null, msgs);
-			case LlvmPackage.ALLOC__NUMELEMENTSTYPE:
-				return basicSetNumelementstype(null, msgs);
-			case LlvmPackage.ALLOC__NUMELEMENTSVALUE:
-				return basicSetNumelementsvalue(null, msgs);
+			case LlvmPackage.ALLOC__NUM_OF_ELEMENTS:
+				return basicSetNumOfElements(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -431,12 +308,8 @@ public class AllocImpl extends InstructionImpl implements Alloc
 				return getResult();
 			case LlvmPackage.ALLOC__TYPE:
 				return getType();
-			case LlvmPackage.ALLOC__TYPELIST:
-				return getTypelist();
-			case LlvmPackage.ALLOC__NUMELEMENTSTYPE:
-				return getNumelementstype();
-			case LlvmPackage.ALLOC__NUMELEMENTSVALUE:
-				return getNumelementsvalue();
+			case LlvmPackage.ALLOC__NUM_OF_ELEMENTS:
+				return getNumOfElements();
 			case LlvmPackage.ALLOC__ALIGN:
 				return getAlign();
 		}
@@ -459,14 +332,8 @@ public class AllocImpl extends InstructionImpl implements Alloc
 			case LlvmPackage.ALLOC__TYPE:
 				setType((TypeUse)newValue);
 				return;
-			case LlvmPackage.ALLOC__TYPELIST:
-				setTypelist((ParameterList)newValue);
-				return;
-			case LlvmPackage.ALLOC__NUMELEMENTSTYPE:
-				setNumelementstype((TypeUse)newValue);
-				return;
-			case LlvmPackage.ALLOC__NUMELEMENTSVALUE:
-				setNumelementsvalue((Value)newValue);
+			case LlvmPackage.ALLOC__NUM_OF_ELEMENTS:
+				setNumOfElements((Parameter)newValue);
 				return;
 			case LlvmPackage.ALLOC__ALIGN:
 				setAlign((BigDecimal)newValue);
@@ -491,14 +358,8 @@ public class AllocImpl extends InstructionImpl implements Alloc
 			case LlvmPackage.ALLOC__TYPE:
 				setType((TypeUse)null);
 				return;
-			case LlvmPackage.ALLOC__TYPELIST:
-				setTypelist((ParameterList)null);
-				return;
-			case LlvmPackage.ALLOC__NUMELEMENTSTYPE:
-				setNumelementstype((TypeUse)null);
-				return;
-			case LlvmPackage.ALLOC__NUMELEMENTSVALUE:
-				setNumelementsvalue((Value)null);
+			case LlvmPackage.ALLOC__NUM_OF_ELEMENTS:
+				setNumOfElements((Parameter)null);
 				return;
 			case LlvmPackage.ALLOC__ALIGN:
 				setAlign(ALIGN_EDEFAULT);
@@ -521,12 +382,8 @@ public class AllocImpl extends InstructionImpl implements Alloc
 				return result != null;
 			case LlvmPackage.ALLOC__TYPE:
 				return type != null;
-			case LlvmPackage.ALLOC__TYPELIST:
-				return typelist != null;
-			case LlvmPackage.ALLOC__NUMELEMENTSTYPE:
-				return numelementstype != null;
-			case LlvmPackage.ALLOC__NUMELEMENTSVALUE:
-				return numelementsvalue != null;
+			case LlvmPackage.ALLOC__NUM_OF_ELEMENTS:
+				return numOfElements != null;
 			case LlvmPackage.ALLOC__ALIGN:
 				return ALIGN_EDEFAULT == null ? align != null : !ALIGN_EDEFAULT.equals(align);
 		}

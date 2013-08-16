@@ -149,10 +149,8 @@ public class AtomicRMWItemProvider
 		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.ATOMIC_RMW__RESULT);
-			childrenFeatures.add(LlvmPackage.Literals.ATOMIC_RMW__ADRESSTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.ATOMIC_RMW__ADRESS);
-			childrenFeatures.add(LlvmPackage.Literals.ATOMIC_RMW__OPTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.ATOMIC_RMW__OPVALUE);
+			childrenFeatures.add(LlvmPackage.Literals.ATOMIC_RMW__ADDRESS);
+			childrenFeatures.add(LlvmPackage.Literals.ATOMIC_RMW__ARGUMENT);
 		}
 		return childrenFeatures;
 	}
@@ -212,10 +210,8 @@ public class AtomicRMWItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case LlvmPackage.ATOMIC_RMW__RESULT:
-			case LlvmPackage.ATOMIC_RMW__ADRESSTYPE:
-			case LlvmPackage.ATOMIC_RMW__ADRESS:
-			case LlvmPackage.ATOMIC_RMW__OPTYPE:
-			case LlvmPackage.ATOMIC_RMW__OPVALUE:
+			case LlvmPackage.ATOMIC_RMW__ADDRESS:
+			case LlvmPackage.ATOMIC_RMW__ARGUMENT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -240,93 +236,13 @@ public class AtomicRMWItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.ATOMIC_RMW__ADRESSTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
+				(LlvmPackage.Literals.ATOMIC_RMW__ADDRESS,
+				 LlvmFactory.eINSTANCE.createParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.ATOMIC_RMW__ADRESSTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ATOMIC_RMW__ADRESSTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ATOMIC_RMW__ADRESS,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ATOMIC_RMW__ADRESS,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ATOMIC_RMW__ADRESS,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ATOMIC_RMW__ADRESS,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ATOMIC_RMW__ADRESS,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ATOMIC_RMW__ADRESS,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ATOMIC_RMW__OPTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ATOMIC_RMW__OPTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ATOMIC_RMW__OPTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ATOMIC_RMW__OPVALUE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ATOMIC_RMW__OPVALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ATOMIC_RMW__OPVALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ATOMIC_RMW__OPVALUE,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ATOMIC_RMW__OPVALUE,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.ATOMIC_RMW__OPVALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
+				(LlvmPackage.Literals.ATOMIC_RMW__ARGUMENT,
+				 LlvmFactory.eINSTANCE.createParameter()));
 	}
 
 	/**
@@ -341,10 +257,8 @@ public class AtomicRMWItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == LlvmPackage.Literals.ATOMIC_RMW__ADRESSTYPE ||
-			childFeature == LlvmPackage.Literals.ATOMIC_RMW__OPTYPE ||
-			childFeature == LlvmPackage.Literals.ATOMIC_RMW__ADRESS ||
-			childFeature == LlvmPackage.Literals.ATOMIC_RMW__OPVALUE;
+			childFeature == LlvmPackage.Literals.ATOMIC_RMW__ADDRESS ||
+			childFeature == LlvmPackage.Literals.ATOMIC_RMW__ARGUMENT;
 
 		if (qualify)
 		{

@@ -12,10 +12,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.IndirectBranch#getAdresstype <em>Adresstype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.IndirectBranch#getAdress <em>Adress</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.IndirectBranch#getLabeltype <em>Labeltype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.IndirectBranch#getLabels <em>Labels</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.IndirectBranch#getTarget <em>Target</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.IndirectBranch#getPotTargetLabels <em>Pot Target Labels</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,87 +24,45 @@ import org.eclipse.emf.common.util.EList;
 public interface IndirectBranch extends Instruction
 {
   /**
-	 * Returns the value of the '<em><b>Adresstype</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Target</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Adresstype</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Target</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Adresstype</em>' containment reference.
-	 * @see #setAdresstype(TypeUse)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getIndirectBranch_Adresstype()
+	 * @return the value of the '<em>Target</em>' containment reference.
+	 * @see #setTarget(Parameter)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getIndirectBranch_Target()
 	 * @model containment="true"
 	 * @generated
 	 */
-  TypeUse getAdresstype();
+  Parameter getTarget();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.IndirectBranch#getAdresstype <em>Adresstype</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.IndirectBranch#getTarget <em>Target</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Adresstype</em>' containment reference.
-	 * @see #getAdresstype()
+	 * @param value the new value of the '<em>Target</em>' containment reference.
+	 * @see #getTarget()
 	 * @generated
 	 */
-  void setAdresstype(TypeUse value);
+  void setTarget(Parameter value);
 
   /**
-	 * Returns the value of the '<em><b>Adress</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Pot Target Labels</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Adress</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Pot Target Labels</em>' attribute list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Adress</em>' containment reference.
-	 * @see #setAdress(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getIndirectBranch_Adress()
-	 * @model containment="true"
+	 * @return the value of the '<em>Pot Target Labels</em>' attribute list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getIndirectBranch_PotTargetLabels()
+	 * @model unique="false"
 	 * @generated
 	 */
-  Value getAdress();
-
-  /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.IndirectBranch#getAdress <em>Adress</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Adress</em>' containment reference.
-	 * @see #getAdress()
-	 * @generated
-	 */
-  void setAdress(Value value);
-
-  /**
-	 * Returns the value of the '<em><b>Labeltype</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.TypeUse}.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Labeltype</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Labeltype</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getIndirectBranch_Labeltype()
-	 * @model containment="true"
-	 * @generated
-	 */
-  EList<TypeUse> getLabeltype();
-
-  /**
-	 * Returns the value of the '<em><b>Labels</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.Value}.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Labels</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Labels</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getIndirectBranch_Labels()
-	 * @model containment="true"
-	 * @generated
-	 */
-  EList<Value> getLabels();
+  EList<String> getPotTargetLabels();
 
 } // IndirectBranch

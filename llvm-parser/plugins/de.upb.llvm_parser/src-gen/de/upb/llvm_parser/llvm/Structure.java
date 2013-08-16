@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Structure extends Aggregate_Types
+public interface Structure extends Aggregate_Type
 {
   /**
 	 * Returns the value of the '<em><b>Types</b></em>' containment reference list.

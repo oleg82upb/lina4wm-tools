@@ -11,8 +11,8 @@ package de.upb.llvm_parser.llvm;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.Resume#getResumestruct <em>Resumestruct</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.Resume#getResumevalue <em>Resumevalue</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Resume#getType <em>Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Resume#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -23,55 +23,55 @@ package de.upb.llvm_parser.llvm;
 public interface Resume extends Instruction
 {
   /**
-	 * Returns the value of the '<em><b>Resumestruct</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Resumestruct</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Type</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Resumestruct</em>' containment reference.
-	 * @see #setResumestruct(Structure)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getResume_Resumestruct()
+	 * @return the value of the '<em>Type</em>' containment reference.
+	 * @see #setType(Structure)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getResume_Type()
 	 * @model containment="true"
 	 * @generated
 	 */
-  Structure getResumestruct();
+  Structure getType();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Resume#getResumestruct <em>Resumestruct</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Resume#getType <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Resumestruct</em>' containment reference.
-	 * @see #getResumestruct()
+	 * @param value the new value of the '<em>Type</em>' containment reference.
+	 * @see #getType()
 	 * @generated
 	 */
-  void setResumestruct(Structure value);
+  void setType(Structure value);
 
   /**
-	 * Returns the value of the '<em><b>Resumevalue</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Resumevalue</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Value</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Resumevalue</em>' containment reference.
-	 * @see #setResumevalue(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getResume_Resumevalue()
+	 * @return the value of the '<em>Value</em>' containment reference.
+	 * @see #setValue(Value)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getResume_Value()
 	 * @model containment="true"
 	 * @generated
 	 */
-  Value getResumevalue();
+  Value getValue();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Resume#getResumevalue <em>Resumevalue</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Resume#getValue <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Resumevalue</em>' containment reference.
-	 * @see #getResumevalue()
+	 * @param value the new value of the '<em>Value</em>' containment reference.
+	 * @see #getValue()
 	 * @generated
 	 */
-  void setResumevalue(Value value);
+  void setValue(Value value);
 
 } // Resume

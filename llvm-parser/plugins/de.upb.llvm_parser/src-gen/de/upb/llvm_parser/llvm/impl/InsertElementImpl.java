@@ -5,8 +5,7 @@ package de.upb.llvm_parser.llvm.impl;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.InsertElement;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.TypeUse;
-import de.upb.llvm_parser.llvm.Value;
+import de.upb.llvm_parser.llvm.Parameter;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -24,11 +23,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.InsertElementImpl#getResult <em>Result</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.InsertElementImpl#getVectortype <em>Vectortype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.InsertElementImpl#getVectorvalue <em>Vectorvalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.InsertElementImpl#getScalartype <em>Scalartype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.InsertElementImpl#getScalarvalue <em>Scalarvalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.InsertElementImpl#getIndextype <em>Indextype</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.InsertElementImpl#getVector <em>Vector</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.InsertElementImpl#getValue <em>Value</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.InsertElementImpl#getIndex <em>Index</em>}</li>
  * </ul>
  * </p>
@@ -48,54 +44,24 @@ public class InsertElementImpl extends InstructionImpl implements InsertElement
   protected Address result;
 
   /**
-	 * The cached value of the '{@link #getVectortype() <em>Vectortype</em>}' containment reference.
+	 * The cached value of the '{@link #getVector() <em>Vector</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getVectortype()
+	 * @see #getVector()
 	 * @generated
 	 * @ordered
 	 */
-  protected TypeUse vectortype;
+  protected Parameter vector;
 
   /**
-	 * The cached value of the '{@link #getVectorvalue() <em>Vectorvalue</em>}' containment reference.
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getVectorvalue()
+	 * @see #getValue()
 	 * @generated
 	 * @ordered
 	 */
-  protected Value vectorvalue;
-
-  /**
-	 * The cached value of the '{@link #getScalartype() <em>Scalartype</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getScalartype()
-	 * @generated
-	 * @ordered
-	 */
-  protected TypeUse scalartype;
-
-  /**
-	 * The cached value of the '{@link #getScalarvalue() <em>Scalarvalue</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getScalarvalue()
-	 * @generated
-	 * @ordered
-	 */
-  protected Value scalarvalue;
-
-  /**
-	 * The cached value of the '{@link #getIndextype() <em>Indextype</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getIndextype()
-	 * @generated
-	 * @ordered
-	 */
-  protected TypeUse indextype;
+  protected Parameter value;
 
   /**
 	 * The cached value of the '{@link #getIndex() <em>Index</em>}' containment reference.
@@ -105,7 +71,7 @@ public class InsertElementImpl extends InstructionImpl implements InsertElement
 	 * @generated
 	 * @ordered
 	 */
-  protected Value index;
+  protected Parameter index;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -181,9 +147,9 @@ public class InsertElementImpl extends InstructionImpl implements InsertElement
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public TypeUse getVectortype()
+  public Parameter getVector()
   {
-		return vectortype;
+		return vector;
 	}
 
   /**
@@ -191,13 +157,13 @@ public class InsertElementImpl extends InstructionImpl implements InsertElement
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetVectortype(TypeUse newVectortype, NotificationChain msgs)
+  public NotificationChain basicSetVector(Parameter newVector, NotificationChain msgs)
   {
-		TypeUse oldVectortype = vectortype;
-		vectortype = newVectortype;
+		Parameter oldVector = vector;
+		vector = newVector;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_ELEMENT__VECTORTYPE, oldVectortype, newVectortype);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_ELEMENT__VECTOR, oldVector, newVector);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -208,20 +174,20 @@ public class InsertElementImpl extends InstructionImpl implements InsertElement
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setVectortype(TypeUse newVectortype)
+  public void setVector(Parameter newVector)
   {
-		if (newVectortype != vectortype)
+		if (newVector != vector)
 		{
 			NotificationChain msgs = null;
-			if (vectortype != null)
-				msgs = ((InternalEObject)vectortype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_ELEMENT__VECTORTYPE, null, msgs);
-			if (newVectortype != null)
-				msgs = ((InternalEObject)newVectortype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_ELEMENT__VECTORTYPE, null, msgs);
-			msgs = basicSetVectortype(newVectortype, msgs);
+			if (vector != null)
+				msgs = ((InternalEObject)vector).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_ELEMENT__VECTOR, null, msgs);
+			if (newVector != null)
+				msgs = ((InternalEObject)newVector).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_ELEMENT__VECTOR, null, msgs);
+			msgs = basicSetVector(newVector, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_ELEMENT__VECTORTYPE, newVectortype, newVectortype));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_ELEMENT__VECTOR, newVector, newVector));
 	}
 
   /**
@@ -229,9 +195,9 @@ public class InsertElementImpl extends InstructionImpl implements InsertElement
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public Value getVectorvalue()
+  public Parameter getValue()
   {
-		return vectorvalue;
+		return value;
 	}
 
   /**
@@ -239,13 +205,13 @@ public class InsertElementImpl extends InstructionImpl implements InsertElement
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetVectorvalue(Value newVectorvalue, NotificationChain msgs)
+  public NotificationChain basicSetValue(Parameter newValue, NotificationChain msgs)
   {
-		Value oldVectorvalue = vectorvalue;
-		vectorvalue = newVectorvalue;
+		Parameter oldValue = value;
+		value = newValue;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_ELEMENT__VECTORVALUE, oldVectorvalue, newVectorvalue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_ELEMENT__VALUE, oldValue, newValue);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -256,20 +222,20 @@ public class InsertElementImpl extends InstructionImpl implements InsertElement
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setVectorvalue(Value newVectorvalue)
+  public void setValue(Parameter newValue)
   {
-		if (newVectorvalue != vectorvalue)
+		if (newValue != value)
 		{
 			NotificationChain msgs = null;
-			if (vectorvalue != null)
-				msgs = ((InternalEObject)vectorvalue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_ELEMENT__VECTORVALUE, null, msgs);
-			if (newVectorvalue != null)
-				msgs = ((InternalEObject)newVectorvalue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_ELEMENT__VECTORVALUE, null, msgs);
-			msgs = basicSetVectorvalue(newVectorvalue, msgs);
+			if (value != null)
+				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_ELEMENT__VALUE, null, msgs);
+			if (newValue != null)
+				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_ELEMENT__VALUE, null, msgs);
+			msgs = basicSetValue(newValue, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_ELEMENT__VECTORVALUE, newVectorvalue, newVectorvalue));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_ELEMENT__VALUE, newValue, newValue));
 	}
 
   /**
@@ -277,151 +243,7 @@ public class InsertElementImpl extends InstructionImpl implements InsertElement
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public TypeUse getScalartype()
-  {
-		return scalartype;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public NotificationChain basicSetScalartype(TypeUse newScalartype, NotificationChain msgs)
-  {
-		TypeUse oldScalartype = scalartype;
-		scalartype = newScalartype;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_ELEMENT__SCALARTYPE, oldScalartype, newScalartype);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setScalartype(TypeUse newScalartype)
-  {
-		if (newScalartype != scalartype)
-		{
-			NotificationChain msgs = null;
-			if (scalartype != null)
-				msgs = ((InternalEObject)scalartype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_ELEMENT__SCALARTYPE, null, msgs);
-			if (newScalartype != null)
-				msgs = ((InternalEObject)newScalartype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_ELEMENT__SCALARTYPE, null, msgs);
-			msgs = basicSetScalartype(newScalartype, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_ELEMENT__SCALARTYPE, newScalartype, newScalartype));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public Value getScalarvalue()
-  {
-		return scalarvalue;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public NotificationChain basicSetScalarvalue(Value newScalarvalue, NotificationChain msgs)
-  {
-		Value oldScalarvalue = scalarvalue;
-		scalarvalue = newScalarvalue;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_ELEMENT__SCALARVALUE, oldScalarvalue, newScalarvalue);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setScalarvalue(Value newScalarvalue)
-  {
-		if (newScalarvalue != scalarvalue)
-		{
-			NotificationChain msgs = null;
-			if (scalarvalue != null)
-				msgs = ((InternalEObject)scalarvalue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_ELEMENT__SCALARVALUE, null, msgs);
-			if (newScalarvalue != null)
-				msgs = ((InternalEObject)newScalarvalue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_ELEMENT__SCALARVALUE, null, msgs);
-			msgs = basicSetScalarvalue(newScalarvalue, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_ELEMENT__SCALARVALUE, newScalarvalue, newScalarvalue));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public TypeUse getIndextype()
-  {
-		return indextype;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public NotificationChain basicSetIndextype(TypeUse newIndextype, NotificationChain msgs)
-  {
-		TypeUse oldIndextype = indextype;
-		indextype = newIndextype;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_ELEMENT__INDEXTYPE, oldIndextype, newIndextype);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setIndextype(TypeUse newIndextype)
-  {
-		if (newIndextype != indextype)
-		{
-			NotificationChain msgs = null;
-			if (indextype != null)
-				msgs = ((InternalEObject)indextype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_ELEMENT__INDEXTYPE, null, msgs);
-			if (newIndextype != null)
-				msgs = ((InternalEObject)newIndextype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INSERT_ELEMENT__INDEXTYPE, null, msgs);
-			msgs = basicSetIndextype(newIndextype, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INSERT_ELEMENT__INDEXTYPE, newIndextype, newIndextype));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public Value getIndex()
+  public Parameter getIndex()
   {
 		return index;
 	}
@@ -431,9 +253,9 @@ public class InsertElementImpl extends InstructionImpl implements InsertElement
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetIndex(Value newIndex, NotificationChain msgs)
+  public NotificationChain basicSetIndex(Parameter newIndex, NotificationChain msgs)
   {
-		Value oldIndex = index;
+		Parameter oldIndex = index;
 		index = newIndex;
 		if (eNotificationRequired())
 		{
@@ -448,7 +270,7 @@ public class InsertElementImpl extends InstructionImpl implements InsertElement
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setIndex(Value newIndex)
+  public void setIndex(Parameter newIndex)
   {
 		if (newIndex != index)
 		{
@@ -476,16 +298,10 @@ public class InsertElementImpl extends InstructionImpl implements InsertElement
 		{
 			case LlvmPackage.INSERT_ELEMENT__RESULT:
 				return basicSetResult(null, msgs);
-			case LlvmPackage.INSERT_ELEMENT__VECTORTYPE:
-				return basicSetVectortype(null, msgs);
-			case LlvmPackage.INSERT_ELEMENT__VECTORVALUE:
-				return basicSetVectorvalue(null, msgs);
-			case LlvmPackage.INSERT_ELEMENT__SCALARTYPE:
-				return basicSetScalartype(null, msgs);
-			case LlvmPackage.INSERT_ELEMENT__SCALARVALUE:
-				return basicSetScalarvalue(null, msgs);
-			case LlvmPackage.INSERT_ELEMENT__INDEXTYPE:
-				return basicSetIndextype(null, msgs);
+			case LlvmPackage.INSERT_ELEMENT__VECTOR:
+				return basicSetVector(null, msgs);
+			case LlvmPackage.INSERT_ELEMENT__VALUE:
+				return basicSetValue(null, msgs);
 			case LlvmPackage.INSERT_ELEMENT__INDEX:
 				return basicSetIndex(null, msgs);
 		}
@@ -504,16 +320,10 @@ public class InsertElementImpl extends InstructionImpl implements InsertElement
 		{
 			case LlvmPackage.INSERT_ELEMENT__RESULT:
 				return getResult();
-			case LlvmPackage.INSERT_ELEMENT__VECTORTYPE:
-				return getVectortype();
-			case LlvmPackage.INSERT_ELEMENT__VECTORVALUE:
-				return getVectorvalue();
-			case LlvmPackage.INSERT_ELEMENT__SCALARTYPE:
-				return getScalartype();
-			case LlvmPackage.INSERT_ELEMENT__SCALARVALUE:
-				return getScalarvalue();
-			case LlvmPackage.INSERT_ELEMENT__INDEXTYPE:
-				return getIndextype();
+			case LlvmPackage.INSERT_ELEMENT__VECTOR:
+				return getVector();
+			case LlvmPackage.INSERT_ELEMENT__VALUE:
+				return getValue();
 			case LlvmPackage.INSERT_ELEMENT__INDEX:
 				return getIndex();
 		}
@@ -533,23 +343,14 @@ public class InsertElementImpl extends InstructionImpl implements InsertElement
 			case LlvmPackage.INSERT_ELEMENT__RESULT:
 				setResult((Address)newValue);
 				return;
-			case LlvmPackage.INSERT_ELEMENT__VECTORTYPE:
-				setVectortype((TypeUse)newValue);
+			case LlvmPackage.INSERT_ELEMENT__VECTOR:
+				setVector((Parameter)newValue);
 				return;
-			case LlvmPackage.INSERT_ELEMENT__VECTORVALUE:
-				setVectorvalue((Value)newValue);
-				return;
-			case LlvmPackage.INSERT_ELEMENT__SCALARTYPE:
-				setScalartype((TypeUse)newValue);
-				return;
-			case LlvmPackage.INSERT_ELEMENT__SCALARVALUE:
-				setScalarvalue((Value)newValue);
-				return;
-			case LlvmPackage.INSERT_ELEMENT__INDEXTYPE:
-				setIndextype((TypeUse)newValue);
+			case LlvmPackage.INSERT_ELEMENT__VALUE:
+				setValue((Parameter)newValue);
 				return;
 			case LlvmPackage.INSERT_ELEMENT__INDEX:
-				setIndex((Value)newValue);
+				setIndex((Parameter)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -568,23 +369,14 @@ public class InsertElementImpl extends InstructionImpl implements InsertElement
 			case LlvmPackage.INSERT_ELEMENT__RESULT:
 				setResult((Address)null);
 				return;
-			case LlvmPackage.INSERT_ELEMENT__VECTORTYPE:
-				setVectortype((TypeUse)null);
+			case LlvmPackage.INSERT_ELEMENT__VECTOR:
+				setVector((Parameter)null);
 				return;
-			case LlvmPackage.INSERT_ELEMENT__VECTORVALUE:
-				setVectorvalue((Value)null);
-				return;
-			case LlvmPackage.INSERT_ELEMENT__SCALARTYPE:
-				setScalartype((TypeUse)null);
-				return;
-			case LlvmPackage.INSERT_ELEMENT__SCALARVALUE:
-				setScalarvalue((Value)null);
-				return;
-			case LlvmPackage.INSERT_ELEMENT__INDEXTYPE:
-				setIndextype((TypeUse)null);
+			case LlvmPackage.INSERT_ELEMENT__VALUE:
+				setValue((Parameter)null);
 				return;
 			case LlvmPackage.INSERT_ELEMENT__INDEX:
-				setIndex((Value)null);
+				setIndex((Parameter)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -602,16 +394,10 @@ public class InsertElementImpl extends InstructionImpl implements InsertElement
 		{
 			case LlvmPackage.INSERT_ELEMENT__RESULT:
 				return result != null;
-			case LlvmPackage.INSERT_ELEMENT__VECTORTYPE:
-				return vectortype != null;
-			case LlvmPackage.INSERT_ELEMENT__VECTORVALUE:
-				return vectorvalue != null;
-			case LlvmPackage.INSERT_ELEMENT__SCALARTYPE:
-				return scalartype != null;
-			case LlvmPackage.INSERT_ELEMENT__SCALARVALUE:
-				return scalarvalue != null;
-			case LlvmPackage.INSERT_ELEMENT__INDEXTYPE:
-				return indextype != null;
+			case LlvmPackage.INSERT_ELEMENT__VECTOR:
+				return vector != null;
+			case LlvmPackage.INSERT_ELEMENT__VALUE:
+				return value != null;
 			case LlvmPackage.INSERT_ELEMENT__INDEX:
 				return index != null;
 		}

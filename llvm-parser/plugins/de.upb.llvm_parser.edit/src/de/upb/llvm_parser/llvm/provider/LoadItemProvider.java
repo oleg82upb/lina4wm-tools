@@ -64,6 +64,7 @@ public class LoadItemProvider
 
 			addVolatilePropertyDescriptor(object);
 			addAlignPropertyDescriptor(object);
+			addAtomicPropertyDescriptor(object);
 			addOrderingPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -111,6 +112,29 @@ public class LoadItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Atomic feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAtomicPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Load_atomic_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Load_atomic_feature", "_UI_Load_type"),
+				 LlvmPackage.Literals.LOAD__ATOMIC,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -208,6 +232,7 @@ public class LoadItemProvider
 		{
 			case LlvmPackage.LOAD__VOLATILE:
 			case LlvmPackage.LOAD__ALIGN:
+			case LlvmPackage.LOAD__ATOMIC:
 			case LlvmPackage.LOAD__ORDERING:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

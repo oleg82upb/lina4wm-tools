@@ -77,11 +77,8 @@ public class InsertElementItemProvider
 		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.INSERT_ELEMENT__RESULT);
-			childrenFeatures.add(LlvmPackage.Literals.INSERT_ELEMENT__VECTORTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.INSERT_ELEMENT__VECTORVALUE);
-			childrenFeatures.add(LlvmPackage.Literals.INSERT_ELEMENT__SCALARTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.INSERT_ELEMENT__SCALARVALUE);
-			childrenFeatures.add(LlvmPackage.Literals.INSERT_ELEMENT__INDEXTYPE);
+			childrenFeatures.add(LlvmPackage.Literals.INSERT_ELEMENT__VECTOR);
+			childrenFeatures.add(LlvmPackage.Literals.INSERT_ELEMENT__VALUE);
 			childrenFeatures.add(LlvmPackage.Literals.INSERT_ELEMENT__INDEX);
 		}
 		return childrenFeatures;
@@ -136,11 +133,8 @@ public class InsertElementItemProvider
 		switch (notification.getFeatureID(InsertElement.class))
 		{
 			case LlvmPackage.INSERT_ELEMENT__RESULT:
-			case LlvmPackage.INSERT_ELEMENT__VECTORTYPE:
-			case LlvmPackage.INSERT_ELEMENT__VECTORVALUE:
-			case LlvmPackage.INSERT_ELEMENT__SCALARTYPE:
-			case LlvmPackage.INSERT_ELEMENT__SCALARVALUE:
-			case LlvmPackage.INSERT_ELEMENT__INDEXTYPE:
+			case LlvmPackage.INSERT_ELEMENT__VECTOR:
+			case LlvmPackage.INSERT_ELEMENT__VALUE:
 			case LlvmPackage.INSERT_ELEMENT__INDEX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -166,138 +160,18 @@ public class InsertElementItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__VECTORTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
+				(LlvmPackage.Literals.INSERT_ELEMENT__VECTOR,
+				 LlvmFactory.eINSTANCE.createParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__VECTORTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__VECTORTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__VECTORVALUE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__VECTORVALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__VECTORVALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__VECTORVALUE,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__VECTORVALUE,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__VECTORVALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__SCALARTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__SCALARTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__SCALARTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__SCALARVALUE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__SCALARVALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__SCALARVALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__SCALARVALUE,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__SCALARVALUE,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__SCALARVALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__INDEXTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__INDEXTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__INDEXTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
+				(LlvmPackage.Literals.INSERT_ELEMENT__VALUE,
+				 LlvmFactory.eINSTANCE.createParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(LlvmPackage.Literals.INSERT_ELEMENT__INDEX,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__INDEX,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__INDEX,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__INDEX,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__INDEX,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.INSERT_ELEMENT__INDEX,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
+				 LlvmFactory.eINSTANCE.createParameter()));
 	}
 
 	/**
@@ -312,11 +186,8 @@ public class InsertElementItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == LlvmPackage.Literals.INSERT_ELEMENT__VECTORTYPE ||
-			childFeature == LlvmPackage.Literals.INSERT_ELEMENT__SCALARTYPE ||
-			childFeature == LlvmPackage.Literals.INSERT_ELEMENT__INDEXTYPE ||
-			childFeature == LlvmPackage.Literals.INSERT_ELEMENT__VECTORVALUE ||
-			childFeature == LlvmPackage.Literals.INSERT_ELEMENT__SCALARVALUE ||
+			childFeature == LlvmPackage.Literals.INSERT_ELEMENT__VECTOR ||
+			childFeature == LlvmPackage.Literals.INSERT_ELEMENT__VALUE ||
 			childFeature == LlvmPackage.Literals.INSERT_ELEMENT__INDEX;
 
 		if (qualify)

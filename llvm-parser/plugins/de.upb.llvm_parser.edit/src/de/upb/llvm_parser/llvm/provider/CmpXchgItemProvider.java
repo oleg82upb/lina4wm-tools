@@ -126,12 +126,9 @@ public class CmpXchgItemProvider
 		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.CMP_XCHG__RESULT);
-			childrenFeatures.add(LlvmPackage.Literals.CMP_XCHG__ADRESSTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.CMP_XCHG__ADRESS);
-			childrenFeatures.add(LlvmPackage.Literals.CMP_XCHG__COMPARETYPE);
-			childrenFeatures.add(LlvmPackage.Literals.CMP_XCHG__COMPAREVALUE);
-			childrenFeatures.add(LlvmPackage.Literals.CMP_XCHG__NEWTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.CMP_XCHG__NEWVALUE);
+			childrenFeatures.add(LlvmPackage.Literals.CMP_XCHG__ADDRESS);
+			childrenFeatures.add(LlvmPackage.Literals.CMP_XCHG__VALUE);
+			childrenFeatures.add(LlvmPackage.Literals.CMP_XCHG__NEW_VALUE);
 		}
 		return childrenFeatures;
 	}
@@ -190,12 +187,9 @@ public class CmpXchgItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case LlvmPackage.CMP_XCHG__RESULT:
-			case LlvmPackage.CMP_XCHG__ADRESSTYPE:
-			case LlvmPackage.CMP_XCHG__ADRESS:
-			case LlvmPackage.CMP_XCHG__COMPARETYPE:
-			case LlvmPackage.CMP_XCHG__COMPAREVALUE:
-			case LlvmPackage.CMP_XCHG__NEWTYPE:
-			case LlvmPackage.CMP_XCHG__NEWVALUE:
+			case LlvmPackage.CMP_XCHG__ADDRESS:
+			case LlvmPackage.CMP_XCHG__VALUE:
+			case LlvmPackage.CMP_XCHG__NEW_VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -220,138 +214,18 @@ public class CmpXchgItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__ADRESSTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
+				(LlvmPackage.Literals.CMP_XCHG__ADDRESS,
+				 LlvmFactory.eINSTANCE.createParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__ADRESSTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
+				(LlvmPackage.Literals.CMP_XCHG__VALUE,
+				 LlvmFactory.eINSTANCE.createParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__ADRESSTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__ADRESS,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__ADRESS,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__ADRESS,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__ADRESS,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__ADRESS,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__ADRESS,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__COMPARETYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__COMPARETYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__COMPARETYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__COMPAREVALUE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__COMPAREVALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__COMPAREVALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__COMPAREVALUE,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__COMPAREVALUE,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__COMPAREVALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__NEWTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__NEWTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__NEWTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__NEWVALUE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__NEWVALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__NEWVALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__NEWVALUE,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__NEWVALUE,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.CMP_XCHG__NEWVALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
+				(LlvmPackage.Literals.CMP_XCHG__NEW_VALUE,
+				 LlvmFactory.eINSTANCE.createParameter()));
 	}
 
 	/**
@@ -366,12 +240,9 @@ public class CmpXchgItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == LlvmPackage.Literals.CMP_XCHG__ADRESSTYPE ||
-			childFeature == LlvmPackage.Literals.CMP_XCHG__COMPARETYPE ||
-			childFeature == LlvmPackage.Literals.CMP_XCHG__NEWTYPE ||
-			childFeature == LlvmPackage.Literals.CMP_XCHG__ADRESS ||
-			childFeature == LlvmPackage.Literals.CMP_XCHG__COMPAREVALUE ||
-			childFeature == LlvmPackage.Literals.CMP_XCHG__NEWVALUE;
+			childFeature == LlvmPackage.Literals.CMP_XCHG__ADDRESS ||
+			childFeature == LlvmPackage.Literals.CMP_XCHG__VALUE ||
+			childFeature == LlvmPackage.Literals.CMP_XCHG__NEW_VALUE;
 
 		if (qualify)
 		{

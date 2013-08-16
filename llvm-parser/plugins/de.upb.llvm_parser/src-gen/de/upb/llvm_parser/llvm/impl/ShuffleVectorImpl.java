@@ -4,9 +4,8 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.ShuffleVector;
-import de.upb.llvm_parser.llvm.TypeUse;
-import de.upb.llvm_parser.llvm.Value;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -24,12 +23,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.ShuffleVectorImpl#getResult <em>Result</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ShuffleVectorImpl#getVal1type <em>Val1type</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ShuffleVectorImpl#getVal1value <em>Val1value</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ShuffleVectorImpl#getVal2type <em>Val2type</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ShuffleVectorImpl#getVal2value <em>Val2value</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ShuffleVectorImpl#getMasktype <em>Masktype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ShuffleVectorImpl#getMaskvalue <em>Maskvalue</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.ShuffleVectorImpl#getValue1 <em>Value1</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.ShuffleVectorImpl#getValue2 <em>Value2</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.ShuffleVectorImpl#getMask <em>Mask</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,64 +44,34 @@ public class ShuffleVectorImpl extends InstructionImpl implements ShuffleVector
   protected Address result;
 
   /**
-	 * The cached value of the '{@link #getVal1type() <em>Val1type</em>}' containment reference.
+	 * The cached value of the '{@link #getValue1() <em>Value1</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getVal1type()
+	 * @see #getValue1()
 	 * @generated
 	 * @ordered
 	 */
-  protected TypeUse val1type;
+  protected Parameter value1;
 
   /**
-	 * The cached value of the '{@link #getVal1value() <em>Val1value</em>}' containment reference.
+	 * The cached value of the '{@link #getValue2() <em>Value2</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getVal1value()
+	 * @see #getValue2()
 	 * @generated
 	 * @ordered
 	 */
-  protected Value val1value;
+  protected Parameter value2;
 
   /**
-	 * The cached value of the '{@link #getVal2type() <em>Val2type</em>}' containment reference.
+	 * The cached value of the '{@link #getMask() <em>Mask</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getVal2type()
+	 * @see #getMask()
 	 * @generated
 	 * @ordered
 	 */
-  protected TypeUse val2type;
-
-  /**
-	 * The cached value of the '{@link #getVal2value() <em>Val2value</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getVal2value()
-	 * @generated
-	 * @ordered
-	 */
-  protected Value val2value;
-
-  /**
-	 * The cached value of the '{@link #getMasktype() <em>Masktype</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getMasktype()
-	 * @generated
-	 * @ordered
-	 */
-  protected TypeUse masktype;
-
-  /**
-	 * The cached value of the '{@link #getMaskvalue() <em>Maskvalue</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getMaskvalue()
-	 * @generated
-	 * @ordered
-	 */
-  protected Value maskvalue;
+  protected Parameter mask;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -181,9 +147,9 @@ public class ShuffleVectorImpl extends InstructionImpl implements ShuffleVector
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public TypeUse getVal1type()
+  public Parameter getValue1()
   {
-		return val1type;
+		return value1;
 	}
 
   /**
@@ -191,13 +157,13 @@ public class ShuffleVectorImpl extends InstructionImpl implements ShuffleVector
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetVal1type(TypeUse newVal1type, NotificationChain msgs)
+  public NotificationChain basicSetValue1(Parameter newValue1, NotificationChain msgs)
   {
-		TypeUse oldVal1type = val1type;
-		val1type = newVal1type;
+		Parameter oldValue1 = value1;
+		value1 = newValue1;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SHUFFLE_VECTOR__VAL1TYPE, oldVal1type, newVal1type);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SHUFFLE_VECTOR__VALUE1, oldValue1, newValue1);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -208,20 +174,20 @@ public class ShuffleVectorImpl extends InstructionImpl implements ShuffleVector
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setVal1type(TypeUse newVal1type)
+  public void setValue1(Parameter newValue1)
   {
-		if (newVal1type != val1type)
+		if (newValue1 != value1)
 		{
 			NotificationChain msgs = null;
-			if (val1type != null)
-				msgs = ((InternalEObject)val1type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SHUFFLE_VECTOR__VAL1TYPE, null, msgs);
-			if (newVal1type != null)
-				msgs = ((InternalEObject)newVal1type).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SHUFFLE_VECTOR__VAL1TYPE, null, msgs);
-			msgs = basicSetVal1type(newVal1type, msgs);
+			if (value1 != null)
+				msgs = ((InternalEObject)value1).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SHUFFLE_VECTOR__VALUE1, null, msgs);
+			if (newValue1 != null)
+				msgs = ((InternalEObject)newValue1).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SHUFFLE_VECTOR__VALUE1, null, msgs);
+			msgs = basicSetValue1(newValue1, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SHUFFLE_VECTOR__VAL1TYPE, newVal1type, newVal1type));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SHUFFLE_VECTOR__VALUE1, newValue1, newValue1));
 	}
 
   /**
@@ -229,9 +195,9 @@ public class ShuffleVectorImpl extends InstructionImpl implements ShuffleVector
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public Value getVal1value()
+  public Parameter getValue2()
   {
-		return val1value;
+		return value2;
 	}
 
   /**
@@ -239,13 +205,13 @@ public class ShuffleVectorImpl extends InstructionImpl implements ShuffleVector
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetVal1value(Value newVal1value, NotificationChain msgs)
+  public NotificationChain basicSetValue2(Parameter newValue2, NotificationChain msgs)
   {
-		Value oldVal1value = val1value;
-		val1value = newVal1value;
+		Parameter oldValue2 = value2;
+		value2 = newValue2;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SHUFFLE_VECTOR__VAL1VALUE, oldVal1value, newVal1value);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SHUFFLE_VECTOR__VALUE2, oldValue2, newValue2);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -256,20 +222,20 @@ public class ShuffleVectorImpl extends InstructionImpl implements ShuffleVector
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setVal1value(Value newVal1value)
+  public void setValue2(Parameter newValue2)
   {
-		if (newVal1value != val1value)
+		if (newValue2 != value2)
 		{
 			NotificationChain msgs = null;
-			if (val1value != null)
-				msgs = ((InternalEObject)val1value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SHUFFLE_VECTOR__VAL1VALUE, null, msgs);
-			if (newVal1value != null)
-				msgs = ((InternalEObject)newVal1value).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SHUFFLE_VECTOR__VAL1VALUE, null, msgs);
-			msgs = basicSetVal1value(newVal1value, msgs);
+			if (value2 != null)
+				msgs = ((InternalEObject)value2).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SHUFFLE_VECTOR__VALUE2, null, msgs);
+			if (newValue2 != null)
+				msgs = ((InternalEObject)newValue2).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SHUFFLE_VECTOR__VALUE2, null, msgs);
+			msgs = basicSetValue2(newValue2, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SHUFFLE_VECTOR__VAL1VALUE, newVal1value, newVal1value));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SHUFFLE_VECTOR__VALUE2, newValue2, newValue2));
 	}
 
   /**
@@ -277,9 +243,9 @@ public class ShuffleVectorImpl extends InstructionImpl implements ShuffleVector
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public TypeUse getVal2type()
+  public Parameter getMask()
   {
-		return val2type;
+		return mask;
 	}
 
   /**
@@ -287,13 +253,13 @@ public class ShuffleVectorImpl extends InstructionImpl implements ShuffleVector
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetVal2type(TypeUse newVal2type, NotificationChain msgs)
+  public NotificationChain basicSetMask(Parameter newMask, NotificationChain msgs)
   {
-		TypeUse oldVal2type = val2type;
-		val2type = newVal2type;
+		Parameter oldMask = mask;
+		mask = newMask;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SHUFFLE_VECTOR__VAL2TYPE, oldVal2type, newVal2type);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SHUFFLE_VECTOR__MASK, oldMask, newMask);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -304,164 +270,20 @@ public class ShuffleVectorImpl extends InstructionImpl implements ShuffleVector
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setVal2type(TypeUse newVal2type)
+  public void setMask(Parameter newMask)
   {
-		if (newVal2type != val2type)
+		if (newMask != mask)
 		{
 			NotificationChain msgs = null;
-			if (val2type != null)
-				msgs = ((InternalEObject)val2type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SHUFFLE_VECTOR__VAL2TYPE, null, msgs);
-			if (newVal2type != null)
-				msgs = ((InternalEObject)newVal2type).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SHUFFLE_VECTOR__VAL2TYPE, null, msgs);
-			msgs = basicSetVal2type(newVal2type, msgs);
+			if (mask != null)
+				msgs = ((InternalEObject)mask).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SHUFFLE_VECTOR__MASK, null, msgs);
+			if (newMask != null)
+				msgs = ((InternalEObject)newMask).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SHUFFLE_VECTOR__MASK, null, msgs);
+			msgs = basicSetMask(newMask, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SHUFFLE_VECTOR__VAL2TYPE, newVal2type, newVal2type));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public Value getVal2value()
-  {
-		return val2value;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public NotificationChain basicSetVal2value(Value newVal2value, NotificationChain msgs)
-  {
-		Value oldVal2value = val2value;
-		val2value = newVal2value;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SHUFFLE_VECTOR__VAL2VALUE, oldVal2value, newVal2value);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setVal2value(Value newVal2value)
-  {
-		if (newVal2value != val2value)
-		{
-			NotificationChain msgs = null;
-			if (val2value != null)
-				msgs = ((InternalEObject)val2value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SHUFFLE_VECTOR__VAL2VALUE, null, msgs);
-			if (newVal2value != null)
-				msgs = ((InternalEObject)newVal2value).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SHUFFLE_VECTOR__VAL2VALUE, null, msgs);
-			msgs = basicSetVal2value(newVal2value, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SHUFFLE_VECTOR__VAL2VALUE, newVal2value, newVal2value));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public TypeUse getMasktype()
-  {
-		return masktype;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public NotificationChain basicSetMasktype(TypeUse newMasktype, NotificationChain msgs)
-  {
-		TypeUse oldMasktype = masktype;
-		masktype = newMasktype;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SHUFFLE_VECTOR__MASKTYPE, oldMasktype, newMasktype);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setMasktype(TypeUse newMasktype)
-  {
-		if (newMasktype != masktype)
-		{
-			NotificationChain msgs = null;
-			if (masktype != null)
-				msgs = ((InternalEObject)masktype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SHUFFLE_VECTOR__MASKTYPE, null, msgs);
-			if (newMasktype != null)
-				msgs = ((InternalEObject)newMasktype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SHUFFLE_VECTOR__MASKTYPE, null, msgs);
-			msgs = basicSetMasktype(newMasktype, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SHUFFLE_VECTOR__MASKTYPE, newMasktype, newMasktype));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public Value getMaskvalue()
-  {
-		return maskvalue;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public NotificationChain basicSetMaskvalue(Value newMaskvalue, NotificationChain msgs)
-  {
-		Value oldMaskvalue = maskvalue;
-		maskvalue = newMaskvalue;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.SHUFFLE_VECTOR__MASKVALUE, oldMaskvalue, newMaskvalue);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setMaskvalue(Value newMaskvalue)
-  {
-		if (newMaskvalue != maskvalue)
-		{
-			NotificationChain msgs = null;
-			if (maskvalue != null)
-				msgs = ((InternalEObject)maskvalue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SHUFFLE_VECTOR__MASKVALUE, null, msgs);
-			if (newMaskvalue != null)
-				msgs = ((InternalEObject)newMaskvalue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.SHUFFLE_VECTOR__MASKVALUE, null, msgs);
-			msgs = basicSetMaskvalue(newMaskvalue, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SHUFFLE_VECTOR__MASKVALUE, newMaskvalue, newMaskvalue));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.SHUFFLE_VECTOR__MASK, newMask, newMask));
 	}
 
   /**
@@ -476,18 +298,12 @@ public class ShuffleVectorImpl extends InstructionImpl implements ShuffleVector
 		{
 			case LlvmPackage.SHUFFLE_VECTOR__RESULT:
 				return basicSetResult(null, msgs);
-			case LlvmPackage.SHUFFLE_VECTOR__VAL1TYPE:
-				return basicSetVal1type(null, msgs);
-			case LlvmPackage.SHUFFLE_VECTOR__VAL1VALUE:
-				return basicSetVal1value(null, msgs);
-			case LlvmPackage.SHUFFLE_VECTOR__VAL2TYPE:
-				return basicSetVal2type(null, msgs);
-			case LlvmPackage.SHUFFLE_VECTOR__VAL2VALUE:
-				return basicSetVal2value(null, msgs);
-			case LlvmPackage.SHUFFLE_VECTOR__MASKTYPE:
-				return basicSetMasktype(null, msgs);
-			case LlvmPackage.SHUFFLE_VECTOR__MASKVALUE:
-				return basicSetMaskvalue(null, msgs);
+			case LlvmPackage.SHUFFLE_VECTOR__VALUE1:
+				return basicSetValue1(null, msgs);
+			case LlvmPackage.SHUFFLE_VECTOR__VALUE2:
+				return basicSetValue2(null, msgs);
+			case LlvmPackage.SHUFFLE_VECTOR__MASK:
+				return basicSetMask(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -504,18 +320,12 @@ public class ShuffleVectorImpl extends InstructionImpl implements ShuffleVector
 		{
 			case LlvmPackage.SHUFFLE_VECTOR__RESULT:
 				return getResult();
-			case LlvmPackage.SHUFFLE_VECTOR__VAL1TYPE:
-				return getVal1type();
-			case LlvmPackage.SHUFFLE_VECTOR__VAL1VALUE:
-				return getVal1value();
-			case LlvmPackage.SHUFFLE_VECTOR__VAL2TYPE:
-				return getVal2type();
-			case LlvmPackage.SHUFFLE_VECTOR__VAL2VALUE:
-				return getVal2value();
-			case LlvmPackage.SHUFFLE_VECTOR__MASKTYPE:
-				return getMasktype();
-			case LlvmPackage.SHUFFLE_VECTOR__MASKVALUE:
-				return getMaskvalue();
+			case LlvmPackage.SHUFFLE_VECTOR__VALUE1:
+				return getValue1();
+			case LlvmPackage.SHUFFLE_VECTOR__VALUE2:
+				return getValue2();
+			case LlvmPackage.SHUFFLE_VECTOR__MASK:
+				return getMask();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -533,23 +343,14 @@ public class ShuffleVectorImpl extends InstructionImpl implements ShuffleVector
 			case LlvmPackage.SHUFFLE_VECTOR__RESULT:
 				setResult((Address)newValue);
 				return;
-			case LlvmPackage.SHUFFLE_VECTOR__VAL1TYPE:
-				setVal1type((TypeUse)newValue);
+			case LlvmPackage.SHUFFLE_VECTOR__VALUE1:
+				setValue1((Parameter)newValue);
 				return;
-			case LlvmPackage.SHUFFLE_VECTOR__VAL1VALUE:
-				setVal1value((Value)newValue);
+			case LlvmPackage.SHUFFLE_VECTOR__VALUE2:
+				setValue2((Parameter)newValue);
 				return;
-			case LlvmPackage.SHUFFLE_VECTOR__VAL2TYPE:
-				setVal2type((TypeUse)newValue);
-				return;
-			case LlvmPackage.SHUFFLE_VECTOR__VAL2VALUE:
-				setVal2value((Value)newValue);
-				return;
-			case LlvmPackage.SHUFFLE_VECTOR__MASKTYPE:
-				setMasktype((TypeUse)newValue);
-				return;
-			case LlvmPackage.SHUFFLE_VECTOR__MASKVALUE:
-				setMaskvalue((Value)newValue);
+			case LlvmPackage.SHUFFLE_VECTOR__MASK:
+				setMask((Parameter)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -568,23 +369,14 @@ public class ShuffleVectorImpl extends InstructionImpl implements ShuffleVector
 			case LlvmPackage.SHUFFLE_VECTOR__RESULT:
 				setResult((Address)null);
 				return;
-			case LlvmPackage.SHUFFLE_VECTOR__VAL1TYPE:
-				setVal1type((TypeUse)null);
+			case LlvmPackage.SHUFFLE_VECTOR__VALUE1:
+				setValue1((Parameter)null);
 				return;
-			case LlvmPackage.SHUFFLE_VECTOR__VAL1VALUE:
-				setVal1value((Value)null);
+			case LlvmPackage.SHUFFLE_VECTOR__VALUE2:
+				setValue2((Parameter)null);
 				return;
-			case LlvmPackage.SHUFFLE_VECTOR__VAL2TYPE:
-				setVal2type((TypeUse)null);
-				return;
-			case LlvmPackage.SHUFFLE_VECTOR__VAL2VALUE:
-				setVal2value((Value)null);
-				return;
-			case LlvmPackage.SHUFFLE_VECTOR__MASKTYPE:
-				setMasktype((TypeUse)null);
-				return;
-			case LlvmPackage.SHUFFLE_VECTOR__MASKVALUE:
-				setMaskvalue((Value)null);
+			case LlvmPackage.SHUFFLE_VECTOR__MASK:
+				setMask((Parameter)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -602,18 +394,12 @@ public class ShuffleVectorImpl extends InstructionImpl implements ShuffleVector
 		{
 			case LlvmPackage.SHUFFLE_VECTOR__RESULT:
 				return result != null;
-			case LlvmPackage.SHUFFLE_VECTOR__VAL1TYPE:
-				return val1type != null;
-			case LlvmPackage.SHUFFLE_VECTOR__VAL1VALUE:
-				return val1value != null;
-			case LlvmPackage.SHUFFLE_VECTOR__VAL2TYPE:
-				return val2type != null;
-			case LlvmPackage.SHUFFLE_VECTOR__VAL2VALUE:
-				return val2value != null;
-			case LlvmPackage.SHUFFLE_VECTOR__MASKTYPE:
-				return masktype != null;
-			case LlvmPackage.SHUFFLE_VECTOR__MASKVALUE:
-				return maskvalue != null;
+			case LlvmPackage.SHUFFLE_VECTOR__VALUE1:
+				return value1 != null;
+			case LlvmPackage.SHUFFLE_VECTOR__VALUE2:
+				return value2 != null;
+			case LlvmPackage.SHUFFLE_VECTOR__MASK:
+				return mask != null;
 		}
 		return super.eIsSet(featureID);
 	}

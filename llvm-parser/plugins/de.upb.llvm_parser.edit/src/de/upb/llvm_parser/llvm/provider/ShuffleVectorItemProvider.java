@@ -77,12 +77,9 @@ public class ShuffleVectorItemProvider
 		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(LlvmPackage.Literals.SHUFFLE_VECTOR__RESULT);
-			childrenFeatures.add(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1TYPE);
-			childrenFeatures.add(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1VALUE);
-			childrenFeatures.add(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2TYPE);
-			childrenFeatures.add(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2VALUE);
-			childrenFeatures.add(LlvmPackage.Literals.SHUFFLE_VECTOR__MASKTYPE);
-			childrenFeatures.add(LlvmPackage.Literals.SHUFFLE_VECTOR__MASKVALUE);
+			childrenFeatures.add(LlvmPackage.Literals.SHUFFLE_VECTOR__VALUE1);
+			childrenFeatures.add(LlvmPackage.Literals.SHUFFLE_VECTOR__VALUE2);
+			childrenFeatures.add(LlvmPackage.Literals.SHUFFLE_VECTOR__MASK);
 		}
 		return childrenFeatures;
 	}
@@ -136,12 +133,9 @@ public class ShuffleVectorItemProvider
 		switch (notification.getFeatureID(ShuffleVector.class))
 		{
 			case LlvmPackage.SHUFFLE_VECTOR__RESULT:
-			case LlvmPackage.SHUFFLE_VECTOR__VAL1TYPE:
-			case LlvmPackage.SHUFFLE_VECTOR__VAL1VALUE:
-			case LlvmPackage.SHUFFLE_VECTOR__VAL2TYPE:
-			case LlvmPackage.SHUFFLE_VECTOR__VAL2VALUE:
-			case LlvmPackage.SHUFFLE_VECTOR__MASKTYPE:
-			case LlvmPackage.SHUFFLE_VECTOR__MASKVALUE:
+			case LlvmPackage.SHUFFLE_VECTOR__VALUE1:
+			case LlvmPackage.SHUFFLE_VECTOR__VALUE2:
+			case LlvmPackage.SHUFFLE_VECTOR__MASK:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -166,138 +160,18 @@ public class ShuffleVectorItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1TYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
+				(LlvmPackage.Literals.SHUFFLE_VECTOR__VALUE1,
+				 LlvmFactory.eINSTANCE.createParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1TYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
+				(LlvmPackage.Literals.SHUFFLE_VECTOR__VALUE2,
+				 LlvmFactory.eINSTANCE.createParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1TYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1VALUE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1VALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1VALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1VALUE,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1VALUE,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1VALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2TYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2TYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2TYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2VALUE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2VALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2VALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2VALUE,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2VALUE,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2VALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__MASKTYPE,
-				 LlvmFactory.eINSTANCE.createTypeUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__MASKTYPE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__MASKTYPE,
-				 LlvmFactory.eINSTANCE.createPredefined()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__MASKVALUE,
-				 LlvmFactory.eINSTANCE.createAddressUse()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__MASKVALUE,
-				 LlvmFactory.eINSTANCE.createValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__MASKVALUE,
-				 LlvmFactory.eINSTANCE.createConstant()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__MASKVALUE,
-				 LlvmFactory.eINSTANCE.createPrimitiveValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__MASKVALUE,
-				 LlvmFactory.eINSTANCE.createNestedCast()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(LlvmPackage.Literals.SHUFFLE_VECTOR__MASKVALUE,
-				 LlvmFactory.eINSTANCE.createNestedGetElementPtr()));
+				(LlvmPackage.Literals.SHUFFLE_VECTOR__MASK,
+				 LlvmFactory.eINSTANCE.createParameter()));
 	}
 
 	/**
@@ -312,12 +186,9 @@ public class ShuffleVectorItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1TYPE ||
-			childFeature == LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2TYPE ||
-			childFeature == LlvmPackage.Literals.SHUFFLE_VECTOR__MASKTYPE ||
-			childFeature == LlvmPackage.Literals.SHUFFLE_VECTOR__VAL1VALUE ||
-			childFeature == LlvmPackage.Literals.SHUFFLE_VECTOR__VAL2VALUE ||
-			childFeature == LlvmPackage.Literals.SHUFFLE_VECTOR__MASKVALUE;
+			childFeature == LlvmPackage.Literals.SHUFFLE_VECTOR__VALUE1 ||
+			childFeature == LlvmPackage.Literals.SHUFFLE_VECTOR__VALUE2 ||
+			childFeature == LlvmPackage.Literals.SHUFFLE_VECTOR__MASK;
 
 		if (qualify)
 		{

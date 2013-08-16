@@ -15,9 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.ExtractValue#getResult <em>Result</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.ExtractValue#getArray <em>Array</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.ExtractValue#getStruct <em>Struct</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.ExtractValue#getValue <em>Value</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.ExtractValue#getAggerate <em>Aggerate</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.ExtractValue#getIndex <em>Index</em>}</li>
  * </ul>
  * </p>
@@ -55,82 +53,30 @@ public interface ExtractValue extends Instruction
   void setResult(Address value);
 
   /**
-	 * Returns the value of the '<em><b>Array</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Aggerate</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Array</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Aggerate</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Array</em>' containment reference.
-	 * @see #setArray(Array)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getExtractValue_Array()
+	 * @return the value of the '<em>Aggerate</em>' containment reference.
+	 * @see #setAggerate(Parameter)
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getExtractValue_Aggerate()
 	 * @model containment="true"
 	 * @generated
 	 */
-  Array getArray();
+  Parameter getAggerate();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ExtractValue#getArray <em>Array</em>}' containment reference.
+	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ExtractValue#getAggerate <em>Aggerate</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Array</em>' containment reference.
-	 * @see #getArray()
+	 * @param value the new value of the '<em>Aggerate</em>' containment reference.
+	 * @see #getAggerate()
 	 * @generated
 	 */
-  void setArray(Array value);
-
-  /**
-	 * Returns the value of the '<em><b>Struct</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Struct</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Struct</em>' containment reference.
-	 * @see #setStruct(Structure)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getExtractValue_Struct()
-	 * @model containment="true"
-	 * @generated
-	 */
-  Structure getStruct();
-
-  /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ExtractValue#getStruct <em>Struct</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Struct</em>' containment reference.
-	 * @see #getStruct()
-	 * @generated
-	 */
-  void setStruct(Structure value);
-
-  /**
-	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Value</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(Value)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getExtractValue_Value()
-	 * @model containment="true"
-	 * @generated
-	 */
-  Value getValue();
-
-  /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.ExtractValue#getValue <em>Value</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' containment reference.
-	 * @see #getValue()
-	 * @generated
-	 */
-  void setValue(Value value);
+  void setAggerate(Parameter value);
 
   /**
 	 * Returns the value of the '<em><b>Index</b></em>' attribute list.

@@ -4,8 +4,8 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.TypeUse;
-import de.upb.llvm_parser.llvm.Value;
 import de.upb.llvm_parser.llvm.VariableAttributeAccess;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -24,9 +24,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.VariableAttributeAccessImpl#getResult <em>Result</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.VariableAttributeAccessImpl#getListtype <em>Listtype</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.VariableAttributeAccessImpl#getListvalue <em>Listvalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.VariableAttributeAccessImpl#getArgType <em>Arg Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.VariableAttributeAccessImpl#getVaList <em>Va List</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.VariableAttributeAccessImpl#getAType <em>AType</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,34 +44,24 @@ public class VariableAttributeAccessImpl extends InstructionImpl implements Vari
   protected Address result;
 
   /**
-	 * The cached value of the '{@link #getListtype() <em>Listtype</em>}' containment reference.
+	 * The cached value of the '{@link #getVaList() <em>Va List</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getListtype()
+	 * @see #getVaList()
 	 * @generated
 	 * @ordered
 	 */
-  protected TypeUse listtype;
+  protected Parameter vaList;
 
   /**
-	 * The cached value of the '{@link #getListvalue() <em>Listvalue</em>}' containment reference.
+	 * The cached value of the '{@link #getAType() <em>AType</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getListvalue()
+	 * @see #getAType()
 	 * @generated
 	 * @ordered
 	 */
-  protected Value listvalue;
-
-  /**
-	 * The cached value of the '{@link #getArgType() <em>Arg Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getArgType()
-	 * @generated
-	 * @ordered
-	 */
-  protected TypeUse argType;
+  protected TypeUse aType;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -148,9 +137,9 @@ public class VariableAttributeAccessImpl extends InstructionImpl implements Vari
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public TypeUse getListtype()
+  public Parameter getVaList()
   {
-		return listtype;
+		return vaList;
 	}
 
   /**
@@ -158,13 +147,13 @@ public class VariableAttributeAccessImpl extends InstructionImpl implements Vari
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetListtype(TypeUse newListtype, NotificationChain msgs)
+  public NotificationChain basicSetVaList(Parameter newVaList, NotificationChain msgs)
   {
-		TypeUse oldListtype = listtype;
-		listtype = newListtype;
+		Parameter oldVaList = vaList;
+		vaList = newVaList;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE, oldListtype, newListtype);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__VA_LIST, oldVaList, newVaList);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -175,20 +164,20 @@ public class VariableAttributeAccessImpl extends InstructionImpl implements Vari
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setListtype(TypeUse newListtype)
+  public void setVaList(Parameter newVaList)
   {
-		if (newListtype != listtype)
+		if (newVaList != vaList)
 		{
 			NotificationChain msgs = null;
-			if (listtype != null)
-				msgs = ((InternalEObject)listtype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE, null, msgs);
-			if (newListtype != null)
-				msgs = ((InternalEObject)newListtype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE, null, msgs);
-			msgs = basicSetListtype(newListtype, msgs);
+			if (vaList != null)
+				msgs = ((InternalEObject)vaList).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__VA_LIST, null, msgs);
+			if (newVaList != null)
+				msgs = ((InternalEObject)newVaList).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__VA_LIST, null, msgs);
+			msgs = basicSetVaList(newVaList, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE, newListtype, newListtype));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__VA_LIST, newVaList, newVaList));
 	}
 
   /**
@@ -196,9 +185,9 @@ public class VariableAttributeAccessImpl extends InstructionImpl implements Vari
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public Value getListvalue()
+  public TypeUse getAType()
   {
-		return listvalue;
+		return aType;
 	}
 
   /**
@@ -206,13 +195,13 @@ public class VariableAttributeAccessImpl extends InstructionImpl implements Vari
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetListvalue(Value newListvalue, NotificationChain msgs)
+  public NotificationChain basicSetAType(TypeUse newAType, NotificationChain msgs)
   {
-		Value oldListvalue = listvalue;
-		listvalue = newListvalue;
+		TypeUse oldAType = aType;
+		aType = newAType;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE, oldListvalue, newListvalue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ATYPE, oldAType, newAType);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -223,68 +212,20 @@ public class VariableAttributeAccessImpl extends InstructionImpl implements Vari
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setListvalue(Value newListvalue)
+  public void setAType(TypeUse newAType)
   {
-		if (newListvalue != listvalue)
+		if (newAType != aType)
 		{
 			NotificationChain msgs = null;
-			if (listvalue != null)
-				msgs = ((InternalEObject)listvalue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE, null, msgs);
-			if (newListvalue != null)
-				msgs = ((InternalEObject)newListvalue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE, null, msgs);
-			msgs = basicSetListvalue(newListvalue, msgs);
+			if (aType != null)
+				msgs = ((InternalEObject)aType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ATYPE, null, msgs);
+			if (newAType != null)
+				msgs = ((InternalEObject)newAType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ATYPE, null, msgs);
+			msgs = basicSetAType(newAType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE, newListvalue, newListvalue));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public TypeUse getArgType()
-  {
-		return argType;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public NotificationChain basicSetArgType(TypeUse newArgType, NotificationChain msgs)
-  {
-		TypeUse oldArgType = argType;
-		argType = newArgType;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE, oldArgType, newArgType);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setArgType(TypeUse newArgType)
-  {
-		if (newArgType != argType)
-		{
-			NotificationChain msgs = null;
-			if (argType != null)
-				msgs = ((InternalEObject)argType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE, null, msgs);
-			if (newArgType != null)
-				msgs = ((InternalEObject)newArgType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE, null, msgs);
-			msgs = basicSetArgType(newArgType, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE, newArgType, newArgType));
+			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ATYPE, newAType, newAType));
 	}
 
   /**
@@ -299,12 +240,10 @@ public class VariableAttributeAccessImpl extends InstructionImpl implements Vari
 		{
 			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__RESULT:
 				return basicSetResult(null, msgs);
-			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE:
-				return basicSetListtype(null, msgs);
-			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE:
-				return basicSetListvalue(null, msgs);
-			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE:
-				return basicSetArgType(null, msgs);
+			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__VA_LIST:
+				return basicSetVaList(null, msgs);
+			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ATYPE:
+				return basicSetAType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -321,12 +260,10 @@ public class VariableAttributeAccessImpl extends InstructionImpl implements Vari
 		{
 			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__RESULT:
 				return getResult();
-			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE:
-				return getListtype();
-			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE:
-				return getListvalue();
-			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE:
-				return getArgType();
+			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__VA_LIST:
+				return getVaList();
+			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ATYPE:
+				return getAType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -344,14 +281,11 @@ public class VariableAttributeAccessImpl extends InstructionImpl implements Vari
 			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__RESULT:
 				setResult((Address)newValue);
 				return;
-			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE:
-				setListtype((TypeUse)newValue);
+			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__VA_LIST:
+				setVaList((Parameter)newValue);
 				return;
-			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE:
-				setListvalue((Value)newValue);
-				return;
-			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE:
-				setArgType((TypeUse)newValue);
+			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ATYPE:
+				setAType((TypeUse)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -370,14 +304,11 @@ public class VariableAttributeAccessImpl extends InstructionImpl implements Vari
 			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__RESULT:
 				setResult((Address)null);
 				return;
-			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE:
-				setListtype((TypeUse)null);
+			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__VA_LIST:
+				setVaList((Parameter)null);
 				return;
-			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE:
-				setListvalue((Value)null);
-				return;
-			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE:
-				setArgType((TypeUse)null);
+			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ATYPE:
+				setAType((TypeUse)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -395,12 +326,10 @@ public class VariableAttributeAccessImpl extends InstructionImpl implements Vari
 		{
 			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__RESULT:
 				return result != null;
-			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTTYPE:
-				return listtype != null;
-			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__LISTVALUE:
-				return listvalue != null;
-			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ARG_TYPE:
-				return argType != null;
+			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__VA_LIST:
+				return vaList != null;
+			case LlvmPackage.VARIABLE_ATTRIBUTE_ACCESS__ATYPE:
+				return aType != null;
 		}
 		return super.eIsSet(featureID);
 	}
