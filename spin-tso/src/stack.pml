@@ -9,7 +9,7 @@ abstract Treiber Stack implementation
 	trying to specify the LLVM-compiled Treiber Stack implementation  
 */
 
-#define BUFF_SIZE 13 	//size of Buffer
+#define BUFF_SIZE 16 	//size of Buffer
 #define MEM_SIZE 43	//size of memory
  
 //-----------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,25 +52,25 @@ inline asPush(asValue)
 inline readLPPopFail(adr, target)
 {
 	atomic{
-	short readValue;
+	//short readValue;
 	ch ! iRead, adr, NULL, NULL;
-	ch ? iRead, adr, readValue, NULL;
-	target = readValue;
+	ch ? iRead, adr, target, NULL;
+	//target = readValue;
 	if 
-		:: readValue == NULL -> asPopFail();
+		:: target == NULL -> asPopFail();
 		:: else -> skip;
 	fi
 	}
 }
 
-inline casLPPop(adr, oldValue, newValue, returnValue) 
+inline casLPPop(adr, oldValue, newValue, success) 
 {
 	// 2 steps for the executing process, but atomic on memory
-	bit success;
+	//bit success;
 	ch ! iCas, adr, oldValue, newValue;
 	atomic{
 	ch ? iCas, adr, success, _; 
-	returnValue = success;
+	//returnValue = success;
 	if 
 		:: success -> asPop(oldValue, success); //if successfull, then the popped value is the oldValue
 		:: else -> skip;
@@ -79,14 +79,14 @@ inline casLPPop(adr, oldValue, newValue, returnValue)
 	}
 }
 
-inline casLPPush(adr, oldValue, newValue, returnValue, controlValue) 
+inline casLPPush(adr, oldValue, newValue, success, controlValue) 
 {
 	// 2 steps for the executing process, but atomic on memory
-	bit success;
+	//bit success;
 	ch ! iCas, adr, oldValue, newValue;
 	atomic{
 	ch ? iCas, adr, success, _; 
-	returnValue = success;
+	//returnValue = success;
 	if 	:: success -> asPush(controlValue);
 		:: else -> skip;
 	fi
@@ -244,35 +244,37 @@ retLabel:
 }
 
 proctype process1(chan ch){
-	short returnvalue;
-	//push(this, 333);
-	//push(this, 111);
-	pop(returnvalue);
-	//push(this, 666);
-	pop(returnvalue);
-	pop(returnvalue);
-	//push(this, 777);
+	//short returnvalue;
+	push(this, 333);
+	push(this, 111);
+	//pop(returnvalue);
+	push(this, 666);
+	//pop(returnvalue);
+	//pop(returnvalue);
+	push(this, 777);
 	//push(this, 888);
 
 }
 
 proctype process2(chan ch){
-	//short returnvalue2;
+	short returnvalue2;
 	//push(this, 555);
 	//push(this, 111);
-	//pop(returnvalue2);
+	pop(returnvalue2);
+	pop(returnvalue2);
+	pop(returnvalue2);
 	//push(this, 999);
-	//pop(returnvalue2);
-	skip;
+	pop(returnvalue2);
+	//skip;
 }
 
-//proctype process3(chan ch){
-	//short returnValue;
+proctype process3(chan ch){
+	short returnValue;
 	//push(this, 555);
-	//push(this, 222);
-	//pop(returnValue);
+	push(this, 222);
+	pop(returnValue);
 	//skip;
-//}
+}
 
 //proctype process4(chan ch){
 	//short returnValue;

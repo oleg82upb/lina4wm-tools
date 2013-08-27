@@ -10,7 +10,7 @@ abstract Treiber Stack implementation
 */
 
 //#define BUFF_SIZE 6 	//size of Buffer
-#define MEM_SIZE 33	//size of memory
+#define MEM_SIZE 43	//size of memory
  
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 #include "sc-model.pml"
@@ -23,7 +23,7 @@ short asStack[ASSIZE];
 hidden byte asTop = 0;
 
 //asValue the value we expect to be on top of the stack
-inline asPop(asValue, asReturn) //can leave out the returnValue????????????????????????????????
+inline asPop(asValue) //can leave out the returnValue????????????????????????????????
 {
 	atomic
 	{
@@ -52,39 +52,32 @@ inline asPush(asValue)
 inline readLPPopFail(adr, target)
 {
 	atomic{
-	short readValue;
-	read(adr, readValue);
-	target = readValue;
+	read(adr, target);
 	if 
-		:: readValue == NULL -> asPopFail();
+		:: target == NULL -> asPopFail();
 		:: else -> skip;
 	fi
 	}
 }
 
-inline casLPPop(adr, oldValue, newValue, returnValue) 
+inline casLPPop(adr, oldValue, newValue, successBit) 
 {
 	// 2 steps for the executing process, but atomic on memory
 	atomic{
-	bit success;
-	cas(adr, oldValue,newValue,success);
-	returnValue = success;
+	cas(adr, oldValue,newValue,successBit);
 	if 
-		:: success -> asPop(oldValue, success); //if successfull, then the popped value is the oldValue
+		:: successBit -> asPop(oldValue); //if successfull, then the popped value is the oldValue
 		:: else -> skip;
 	fi
 	}
 }
 
-inline casLPPush(adr, oldValue, newValue, returnValue, controlValue) 
+inline casLPPush(adr, oldValue, newValue, successBit, controlValue) 
 {
-	// 2 steps for the executing process, but atomic on memory
-	bit success;
-	
+
 	atomic{
-	cas(adr, oldValue,newValue,success);
-	returnValue = success;
-	if 	:: success -> asPush(controlValue);
+	cas(adr, oldValue,newValue,successBit);
+	if 	:: successBit -> asPush(controlValue);
 		:: else -> skip;
 	fi
 	}
@@ -181,10 +174,9 @@ doCond:
 	if 
 		:: v11 == false -> goto doBody;
 		:: else -> skip;
-	fi
+	fi;
 //doEnd: 
 //	skip; //done
-
 }
 
 
@@ -192,7 +184,7 @@ doCond:
 
 inline pop(returnvalue)
 {
-	short retval, head, head2, thisAddr, ss, ssn, this1, v0, v1, v2, v3, v4, v5, v7, v9, v11, next;			//some more v_i still missing
+	short retval, head, head2, thisAddr, ss, ssn, this1, v0, v1, v2, v3, v5, v7, v9, v11, next;			//some more v_i still missing
 	
 entry:
 atomic {
@@ -214,7 +206,7 @@ doBody:
 	:: v1 == NULL -> write(retval, NULL);
 					 goto retLabel;
 	:: else -> skip;
-	fi
+	fi;
 	->
 ifend:
 	read (ss,v2);
@@ -232,34 +224,35 @@ doCond:
 	if
 	:: v9 == false -> goto doBody
 	:: else skip;
-	fi
-	->
+	fi;
+
 			
 retLabel: 
 	read(ss,v11);									//v11 in llvm
 	write(retval, v11);								//v11 in llvm
 	read(retval, returnvalue);
-	
 }
 
 proctype process1(){
-	short returnvalue;
+	//short returnvalue;
 	push(this, 111);
-	pop(returnvalue);
-	//push(this, 21);
-	//push(this, 22);
-	//push(this, 23);
+	//pop(returnvalue);
+	push(this, 21);
+	push(this, 22);
+	push(this, 23);
 	//pop(returnvalue);
 
 }
 
 proctype process2(){
 	short returnvalue;
-	push(this, 555);
+	//push(this, 555);
 	pop(returnvalue);
-	//pop(returnvalue);
-	//pop(returnvalue);
-	//pop(returnvalue);
+	
+	pop(returnvalue);
+	
+	pop(returnvalue);
+	pop(returnvalue);
 	//push(this, 22);
 	//pop(returnvalue);
 }
@@ -287,7 +280,7 @@ atomic{
 	//run bufferProcess(channelT1);
 	run process2();
 	//run bufferProcess(channelT2);
-	run process3();
+	//run process3();
 	//run bufferProcess(channelT3);
 	//run process4();
 	//run bufferProcess(channelT4);
