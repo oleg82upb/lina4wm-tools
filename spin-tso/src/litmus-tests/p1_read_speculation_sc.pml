@@ -9,7 +9,7 @@
 #define ADRESSE_Y 2
 #define BUFF_SIZE 4 	//size of Buffer
 #define MEM_SIZE 4		//size of memory 
-#include "sc-model.pml"
+#include "../sc-model.pml"
 
 
 short r1 = 0;

@@ -10,8 +10,7 @@
 #define ADRESSE_Y 2
 #define BUFF_SIZE 4 	//size of Buffer
 #define MEM_SIZE 4		//size of memory 
-#include "x86_tso_buffer.pml"
-//#include "x86_tso_buffer.pml"
+#include "../x86_tso_buffer.pml"
 
 
 /*channel who send the reads and writes: (messagetype, address, value, extra)*/

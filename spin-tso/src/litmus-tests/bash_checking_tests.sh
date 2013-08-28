@@ -8,9 +8,9 @@
 
 #!/bin/bash
 
-cd workspace/projects/src/litmus-tests;
+#cd workspace/projects/src/litmus-tests;
 
-# Demonstriert den Befehl read zum zeilenweisen Lesen einer Datei
+#zeilenweises Lesen einer Datei
 if [ $# -lt 1 ]
 then
    echo "usage: $0 datei_zum_lesen"

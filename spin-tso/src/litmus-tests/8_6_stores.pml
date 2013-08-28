@@ -9,7 +9,7 @@ Litmus-Test: Stores Are Transitively Visible
 #define ADRESSE_Y 2
 #define BUFF_SIZE 5 	//size of Buffer
 #define MEM_SIZE 5		//size of memory 
-#include "x86_tso_buffer.pml"
+#include "../x86_tso_buffer.pml"
 
 
 /*Channel der die reads und writes verschickt (Type (also write,read); Adresse; Wert;... )*/
