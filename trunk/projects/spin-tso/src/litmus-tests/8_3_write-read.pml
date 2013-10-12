@@ -10,7 +10,9 @@
 #define ADRESSE_Y 2
 #define BUFF_SIZE 4 	//size of Buffer
 #define MEM_SIZE 4		//size of memory 
-#include "../x86_tso_buffer.pml"
+
+#define PROC_NUMBER 2
+#include "../x86_tso_buffer_globalarray.pml"
 
 
 /*channel who send the reads and writes: (messagetype, address, value, extra)*/
@@ -38,8 +40,8 @@ init
 {
 atomic{
 	run process1(channelT1);
-	run process2(channelT2);
 	run bufferProcess(channelT1);
+	run process2(channelT2);
 	run bufferProcess(channelT2);
 	}	
 }

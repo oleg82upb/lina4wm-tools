@@ -51,8 +51,8 @@ inline cas(adr, oldValue, newValue, successBit)
 inline writeB() {
 	atomic{
 	assert(tail < BUFF_SIZE);
-	proc[ _pid -(_pid/2)].buffer[tail].line[0] = address;
-	proc[ _pid -(_pid/2)].buffer[tail].line[1] = value;
+	proc[ _pid-(_pid/2)].buffer[tail].line[0] = address;
+	proc[ _pid-(_pid/2)].buffer[tail].line[1] = value;
 	tail++;
 	}
 }
@@ -64,7 +64,7 @@ inline readB() {
 	:: i >= 0  -> 
 			if
 			/* if an address in the buffer is equivalent to the searched -> return value*/
-			::proc[ _pid -(_pid/2)].buffer[i].line[0] == address 
+			::proc[ _pid-(_pid/2)].buffer[i].line[0] == address 
 				->  channel ! iRead,address,proc[ _pid-(_pid/2)].buffer[i].line[1],NULL;
 					i = 0;
 					break;
@@ -85,7 +85,7 @@ atomic{
 	if 
 	:: (tail > 0) ->	{
 		//write value in memory: memory[address] = value
-		memory[proc[ _pid -(_pid/2)].buffer[0].line[0]] = proc[ _pid-(_pid/2)].buffer[0].line[1];
+		memory[proc[ _pid-(_pid/2)].buffer[0].line[0]] = proc[ _pid-(_pid/2)].buffer[0].line[1];
 		//move all content one step further
 		
 		for (i : 1 .. tail-1) {
