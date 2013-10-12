@@ -9,7 +9,9 @@ Litmus-Test: Stores Are Transitively Visible
 #define ADRESSE_Y 2
 #define BUFF_SIZE 5 	//size of Buffer
 #define MEM_SIZE 5		//size of memory 
-#include "../x86_tso_buffer.pml"
+
+#define PROC_NUMBER 3
+#include "../x86_tso_buffer_globalarray.pml"
 
 
 /*Channel der die reads und writes verschickt (Type (also write,read); Adresse; Wert;... )*/
@@ -45,10 +47,10 @@ proctype process3(chan ch)
 init {
 	atomic{
 	run process1(channelT1);
-	run process2(channelT2);
-	run process3(channelT3);
 	run bufferProcess(channelT1);
+	run process2(channelT2);
 	run bufferProcess(channelT2);
+	run process3(channelT3);
 	run bufferProcess(channelT3)
 	}
 }
