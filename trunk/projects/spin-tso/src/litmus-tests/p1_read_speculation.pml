@@ -72,8 +72,9 @@ ltl check_9 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 ==
 ltl check_10 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 == 0) && (r3 == 2))))};
 ltl check_11 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 == 2) && (r3 == 0))))};
 ltl check_12 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 == 2) && (r3 == 2))))};
-ltl check_13 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 0) && (r2 == 2) && (r3 == 1))))};
+ltl check_13 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 1) && (r2 == 2) && (r3 == 1))))};
 ltl check_14 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 1) && (r2 == 1) && (r3 == 2))))};
 ltl check_15 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 1) && (r2 == 0) && (r3 == 2))))};
 ltl check_16 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 1) && (r2 == 2) && (r3 == 0))))};
 ltl check_17 {[] ((process1 @ done && process3 @ done) -> (!( (r1 == 1) && (r2 == 2) && (r3 == 2))))};
+
