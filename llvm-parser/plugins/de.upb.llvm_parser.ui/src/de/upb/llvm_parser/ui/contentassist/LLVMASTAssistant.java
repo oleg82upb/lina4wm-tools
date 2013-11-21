@@ -6,10 +6,12 @@ import java.util.Iterator;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -17,15 +19,14 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.SaveAsDialog;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
 
 import de.upb.llvm_parser.ui.LLVMUtil;
 
@@ -46,71 +47,74 @@ public class LLVMASTAssistant extends XtextResource implements
 	 * 
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
-	public void run(IAction action) {
-		IWorkbenchWindow window = PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow();
+	public void run(IAction action)
+	{
+		Shell currentShell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
-		if (this.selection == null || this.selection instanceof IFile) {
-			MessageDialog.openError(window.getShell(), "Wrong Selection",
-					"Please select a file with .s extension");
+		if (this.selection == null || this.selection instanceof IFile)
+		{
+			MessageDialog.openError(currentShell, "Wrong Selection", "Please select a file with .s extension");
 			return;
 		}
 
 		IFile file = (IFile) this.selection.getFirstElement();
- 
-		String loc = getLocation((IFile) file, window);
-		if (loc == null)
-			return;
-		
-		XtextResourceSet xtextResourceSet = new XtextResourceSet();
-		URI uri = URI.createURI(((IFile) file).getFullPath().toString());
-		Resource resource = xtextResourceSet.getResource(uri, true);
-		if(resource instanceof LazyLinkingResource)
+		SaveAsDialog sad = new SaveAsDialog(currentShell);
+		sad.setOriginalName(file.getName() + ".llvm");
+		sad.open();
+
+		IPath filePath = sad.getResult();
+		if (filePath == null)
 		{
-			LazyLinkingResource llr = (LazyLinkingResource) resource; 
-			Iterator<INode> i = llr.getParseResult().getSyntaxErrors().iterator();
-			if(i.hasNext())
-			{
-				MessageBox messageBox = new MessageBox(window.getShell(),
-						SWT.ICON_QUESTION | SWT.YES | SWT.NO);
-				messageBox
-						.setMessage("There are errors located on selected file.\n"
-								+ "Do really want to save the AST-file?");
-				messageBox.setText("Syntax Errors");
-				if (messageBox.open() == SWT.NO) {
-					return;
-				}
-			}
+			return;
 		}
-		Resource newResource = xtextResourceSet.createResource(URI.createFileURI(loc));
-		xtextResourceSet.getResources().add(newResource);
+
+		Resource content = parseFile(currentShell, file);
+		if(content == null)
+		{
+			return;
+		}
 		
-		EObject ast = resource.getContents().get(0);
+		EObject ast = content.getContents().get(0);
 		EcoreUtil.resolveAll(ast);
-		newResource.getContents().add(ast);
 		
-		try {
+		ResourceSetImpl rset = new ResourceSetImpl();
+		URI uri = URI.createPlatformResourceURI(filePath.toString(), true);
+		Resource newResource = rset.createResource(uri, "llvm");
+		rset.getResources().add(newResource);
+		newResource.getContents().add(ast);
+
+		try
+		{
 			newResource.save(Collections.EMPTY_MAP);
 			ResourcesPlugin.getWorkspace().getRoot().refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			LLVMUtil.logError(e, "An error occured while saving parse result");
 		}
 	}
 
-	/**
-	 * @param llvmFile
-	 * @param window
-	 * Saves the parsed Model of llvmFile to a serialized llvm-File containing the AST of the Model. 
-	 */
-	private String getLocation(IFile llvmFile, IWorkbenchWindow window) {
-		/* Dialog for target file location */
-		SaveAsDialog sad = new SaveAsDialog(window.getShell());
-		sad.setOriginalName(llvmFile.getName()+".llvm");
-		sad.open();
-		if(sad.getResult()==null)
-			return null;
-		String location = sad.getResult().toOSString();
-			return location;
+	private Resource parseFile(Shell currentShell, IFile file)
+	{
+		ResourceSetImpl xtextResourceSet = new ResourceSetImpl();
+		URI uri = URI.createURI(((IFile) file).getFullPath().toString());
+		Resource resource = xtextResourceSet.getResource(uri, true);
+		if (resource instanceof LazyLinkingResource)
+		{
+			LazyLinkingResource llr = (LazyLinkingResource) resource;
+			Iterator<INode> i = llr.getParseResult().getSyntaxErrors().iterator();
+			if (i.hasNext())
+			{
+				MessageBox messageBox = new MessageBox(currentShell, SWT.ICON_QUESTION | SWT.YES | SWT.NO);
+				messageBox.setMessage("There are errors located on selected file.\n"
+						+ "Do really want to save the AST-file?");
+				messageBox.setText("Syntax Errors");
+				if (messageBox.open() == SWT.NO)
+				{
+					return null;
+				}
+			}
+		}
+		return resource;
 	}
 
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
