@@ -30,7 +30,7 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
   {
 		try
 		{
-			LlvmFactory theLlvmFactory = (LlvmFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.upb.de/llvm_parser/llvm"); 
+			LlvmFactory theLlvmFactory = (LlvmFactory)EPackage.Registry.INSTANCE.getEFactory(LlvmPackage.eNS_URI);
 			if (theLlvmFactory != null)
 			{
 				return theLlvmFactory;

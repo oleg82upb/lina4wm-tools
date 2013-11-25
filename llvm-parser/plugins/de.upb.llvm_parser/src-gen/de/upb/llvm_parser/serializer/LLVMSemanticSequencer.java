@@ -580,7 +580,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((length=NUMBER type=TypeUse)?)
+	 *     ((length=NUMBER (type=TypeUse | type=Aggregate_Type))?)
 	 */
 	protected void sequence_Array(EObject context, Array semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -979,7 +979,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((type=TypeUse | type=Aggregate_Type) value=Value?)
+	 *     ((type=TypeUse | type=Aggregate_Type) (value=Value | value=Value?))
 	 */
 	protected void sequence_Parameter(EObject context, Parameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1147,7 +1147,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((types+=TypeUse (types+=TypeUse | types+=Aggregate_Type)*)?)
+	 *     (((types+=TypeUse | types+=Aggregate_Type) (types+=TypeUse | types+=Aggregate_Type)*)?)
 	 */
 	protected void sequence_Structure(EObject context, Structure semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
