@@ -1920,20 +1920,38 @@ ruleArray returns [EObject current=null]
     }
 (
 (
+(
 		{ 
-	        newCompositeNode(grammarAccess.getArrayAccess().getTypeTypeUseParserRuleCall_1_0_3_0()); 
+	        newCompositeNode(grammarAccess.getArrayAccess().getTypeTypeUseParserRuleCall_1_0_3_0_0()); 
 	    }
-		lv_type_4_0=ruleTypeUse		{
+		lv_type_4_1=ruleTypeUse		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getArrayRule());
 	        }
        		set(
        			$current, 
        			"type",
-        		lv_type_4_0, 
+        		lv_type_4_1, 
         		"TypeUse");
 	        afterParserOrEnumRuleCall();
 	    }
+
+    |		{ 
+	        newCompositeNode(grammarAccess.getArrayAccess().getTypeAggregate_TypeParserRuleCall_1_0_3_0_1()); 
+	    }
+		lv_type_4_2=ruleAggregate_Type		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getArrayRule());
+	        }
+       		set(
+       			$current, 
+       			"type",
+        		lv_type_4_2, 
+        		"Aggregate_Type");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 
 )
 )	otherlv_5=']' 
@@ -2239,20 +2257,38 @@ ruleStructure returns [EObject current=null]
     }
 ((
 (
+(
 		{ 
-	        newCompositeNode(grammarAccess.getStructureAccess().getTypesTypeUseParserRuleCall_2_0_0()); 
+	        newCompositeNode(grammarAccess.getStructureAccess().getTypesTypeUseParserRuleCall_2_0_0_0()); 
 	    }
-		lv_types_2_0=ruleTypeUse		{
+		lv_types_2_1=ruleTypeUse		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStructureRule());
 	        }
        		add(
        			$current, 
        			"types",
-        		lv_types_2_0, 
+        		lv_types_2_1, 
         		"TypeUse");
 	        afterParserOrEnumRuleCall();
 	    }
+
+    |		{ 
+	        newCompositeNode(grammarAccess.getStructureAccess().getTypesAggregate_TypeParserRuleCall_2_0_0_1()); 
+	    }
+		lv_types_2_2=ruleAggregate_Type		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getStructureRule());
+	        }
+       		add(
+       			$current, 
+       			"types",
+        		lv_types_2_2, 
+        		"Aggregate_Type");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 
 )
 )(	otherlv_3=',' 
@@ -2360,29 +2396,52 @@ ruleParameter returns [EObject current=null]
 )
 
 )
-)(
+)(((this_RETURN_ATTRIBUTES_1=RULE_RETURN_ATTRIBUTES
+    { 
+    newLeafNode(this_RETURN_ATTRIBUTES_1, grammarAccess.getParameterAccess().getRETURN_ATTRIBUTESTerminalRuleCall_1_0_0()); 
+    }
+)+(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getParameterAccess().getValueValueParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getParameterAccess().getValueValueParserRuleCall_1_0_1_0()); 
 	    }
-		lv_value_1_0=ruleValue		{
+		lv_value_2_0=ruleValue		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParameterRule());
 	        }
        		set(
        			$current, 
        			"value",
-        		lv_value_1_0, 
+        		lv_value_2_0, 
         		"Value");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)?(this_RETURN_ATTRIBUTES_2=RULE_RETURN_ATTRIBUTES
+))
+    |((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getParameterAccess().getValueValueParserRuleCall_1_1_0_0()); 
+	    }
+		lv_value_3_0=ruleValue		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getParameterRule());
+	        }
+       		set(
+       			$current, 
+       			"value",
+        		lv_value_3_0, 
+        		"Value");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)?(this_RETURN_ATTRIBUTES_4=RULE_RETURN_ATTRIBUTES
     { 
-    newLeafNode(this_RETURN_ATTRIBUTES_2, grammarAccess.getParameterAccess().getRETURN_ATTRIBUTESTerminalRuleCall_2()); 
+    newLeafNode(this_RETURN_ATTRIBUTES_4, grammarAccess.getParameterAccess().getRETURN_ATTRIBUTESTerminalRuleCall_1_1_1()); 
     }
-)*)
+)*)))
 ;
 
 

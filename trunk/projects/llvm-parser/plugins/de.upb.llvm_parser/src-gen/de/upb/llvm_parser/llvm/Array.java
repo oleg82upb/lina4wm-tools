@@ -4,6 +4,8 @@ package de.upb.llvm_parser.llvm;
 
 import java.math.BigDecimal;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Array</b></em>'.
@@ -58,12 +60,12 @@ public interface Array extends Aggregate_Type
    * </p>
    * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' containment reference.
-	 * @see #setType(TypeUse)
+	 * @see #setType(EObject)
 	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getArray_Type()
 	 * @model containment="true"
 	 * @generated
 	 */
-  TypeUse getType();
+  EObject getType();
 
   /**
 	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.Array#getType <em>Type</em>}' containment reference.
@@ -73,6 +75,6 @@ public interface Array extends Aggregate_Type
 	 * @see #getType()
 	 * @generated
 	 */
-  void setType(TypeUse value);
+  void setType(EObject value);
 
 } // Array

@@ -2858,10 +2858,10 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_VALID_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:15: ( ( ( '%' | '@' ) ( '.' )* ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | RULE_STRING ) | '(' RULE_VALID_ID ( RULE_POINTER )? ')' ) ( '.' ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | '(' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ ( RULE_POINTER )? ')' ) )* )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:17: ( ( '%' | '@' ) ( '.' )* ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | RULE_STRING ) | '(' RULE_VALID_ID ( RULE_POINTER )? ')' ) ( '.' ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | '(' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ ( RULE_POINTER )? ')' ) )*
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:15: ( ( ( '%' | '@' ) ( '.' )* ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | RULE_STRING ) | '(' RULE_VALID_ID ( RULE_POINTER )? ')' ) ( '.' ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | '(' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ ( RULE_POINTER )? ')' ) )* )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:17: ( ( '%' | '@' ) ( '.' )* ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | RULE_STRING ) | '(' RULE_VALID_ID ( RULE_POINTER )? ')' ) ( '.' ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | '(' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ ( RULE_POINTER )? ')' ) )*
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:17: ( ( '%' | '@' ) ( '.' )* ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | RULE_STRING ) | '(' RULE_VALID_ID ( RULE_POINTER )? ')' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:17: ( ( '%' | '@' ) ( '.' )* ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | RULE_STRING ) | '(' RULE_VALID_ID ( RULE_POINTER )? ')' )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -2879,7 +2879,7 @@ public class InternalLLVMLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:18: ( '%' | '@' ) ( '.' )* ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | RULE_STRING )
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:18: ( '%' | '@' ) ( '.' )* ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | RULE_STRING )
                     {
                     if ( input.LA(1)=='%'||input.LA(1)=='@' ) {
                         input.consume();
@@ -2890,7 +2890,7 @@ public class InternalLLVMLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:28: ( '.' )*
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:28: ( '.' )*
                     loop1:
                     do {
                         int alt1=2;
@@ -2903,7 +2903,7 @@ public class InternalLLVMLexer extends Lexer {
 
                         switch (alt1) {
                     	case 1 :
-                    	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:28: '.'
+                    	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:28: '.'
                     	    {
                     	    match('.'); 
 
@@ -2915,7 +2915,7 @@ public class InternalLLVMLexer extends Lexer {
                         }
                     } while (true);
 
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:33: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | RULE_STRING )
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:33: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | RULE_STRING )
                     int alt3=2;
                     switch ( input.LA(1) ) {
                     case 'c':
@@ -3010,9 +3010,9 @@ public class InternalLLVMLexer extends Lexer {
 
                     switch (alt3) {
                         case 1 :
-                            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:34: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+
+                            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:34: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+
                             {
-                            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:34: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+
+                            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:34: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+
                             int cnt2=0;
                             loop2:
                             do {
@@ -3054,7 +3054,7 @@ public class InternalLLVMLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:68: RULE_STRING
+                            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:68: RULE_STRING
                             {
                             mRULE_STRING(); 
 
@@ -3067,11 +3067,11 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:81: '(' RULE_VALID_ID ( RULE_POINTER )? ')'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:81: '(' RULE_VALID_ID ( RULE_POINTER )? ')'
                     {
                     match('('); 
                     mRULE_VALID_ID(); 
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:99: ( RULE_POINTER )?
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:99: ( RULE_POINTER )?
                     int alt4=2;
                     int LA4_0 = input.LA(1);
 
@@ -3080,7 +3080,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     switch (alt4) {
                         case 1 :
-                            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:99: RULE_POINTER
+                            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:99: RULE_POINTER
                             {
                             mRULE_POINTER(); 
 
@@ -3096,7 +3096,7 @@ public class InternalLLVMLexer extends Lexer {
 
             }
 
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:118: ( '.' ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | '(' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ ( RULE_POINTER )? ')' ) )*
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:118: ( '.' ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | '(' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ ( RULE_POINTER )? ')' ) )*
             loop10:
             do {
                 int alt10=2;
@@ -3109,10 +3109,10 @@ public class InternalLLVMLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:119: '.' ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | '(' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ ( RULE_POINTER )? ')' )
+            	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:119: '.' ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | '(' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ ( RULE_POINTER )? ')' )
             	    {
             	    match('.'); 
-            	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:123: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | '(' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ ( RULE_POINTER )? ')' )
+            	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:123: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | '(' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ ( RULE_POINTER )? ')' )
             	    int alt9=2;
             	    int LA9_0 = input.LA(1);
 
@@ -3130,9 +3130,9 @@ public class InternalLLVMLexer extends Lexer {
             	    }
             	    switch (alt9) {
             	        case 1 :
-            	            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:124: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+
+            	            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:124: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+
             	            {
-            	            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:124: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+
+            	            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:124: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+
             	            int cnt6=0;
             	            loop6:
             	            do {
@@ -3174,10 +3174,10 @@ public class InternalLLVMLexer extends Lexer {
             	            }
             	            break;
             	        case 2 :
-            	            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:158: '(' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ ( RULE_POINTER )? ')'
+            	            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:158: '(' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ ( RULE_POINTER )? ')'
             	            {
             	            match('('); 
-            	            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:162: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+
+            	            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:162: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+
             	            int cnt7=0;
             	            loop7:
             	            do {
@@ -3215,7 +3215,7 @@ public class InternalLLVMLexer extends Lexer {
             	                cnt7++;
             	            } while (true);
 
-            	            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:196: ( RULE_POINTER )?
+            	            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:196: ( RULE_POINTER )?
             	            int alt8=2;
             	            int LA8_0 = input.LA(1);
 
@@ -3224,7 +3224,7 @@ public class InternalLLVMLexer extends Lexer {
             	            }
             	            switch (alt8) {
             	                case 1 :
-            	                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21850:196: RULE_POINTER
+            	                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22031:196: RULE_POINTER
             	                    {
             	                    mRULE_POINTER(); 
 
@@ -3265,11 +3265,11 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_INT_TYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21852:15: ( 'i' ( '0' .. '9' )+ ( RULE_POINTER )? )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21852:17: 'i' ( '0' .. '9' )+ ( RULE_POINTER )?
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22033:15: ( 'i' ( '0' .. '9' )+ ( RULE_POINTER )? )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22033:17: 'i' ( '0' .. '9' )+ ( RULE_POINTER )?
             {
             match('i'); 
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21852:21: ( '0' .. '9' )+
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22033:21: ( '0' .. '9' )+
             int cnt11=0;
             loop11:
             do {
@@ -3283,7 +3283,7 @@ public class InternalLLVMLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21852:22: '0' .. '9'
+            	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22033:22: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -3299,7 +3299,7 @@ public class InternalLLVMLexer extends Lexer {
                 cnt11++;
             } while (true);
 
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21852:33: ( RULE_POINTER )?
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22033:33: ( RULE_POINTER )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -3308,7 +3308,7 @@ public class InternalLLVMLexer extends Lexer {
             }
             switch (alt12) {
                 case 1 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21852:33: RULE_POINTER
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22033:33: RULE_POINTER
                     {
                     mRULE_POINTER(); 
 
@@ -3333,10 +3333,10 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_BOOL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21854:11: ( ( 'true' | 'false' ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21854:13: ( 'true' | 'false' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22035:11: ( ( 'true' | 'false' ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22035:13: ( 'true' | 'false' )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21854:13: ( 'true' | 'false' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22035:13: ( 'true' | 'false' )
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -3354,7 +3354,7 @@ public class InternalLLVMLexer extends Lexer {
             }
             switch (alt13) {
                 case 1 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21854:14: 'true'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22035:14: 'true'
                     {
                     match("true"); 
 
@@ -3362,7 +3362,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21854:21: 'false'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22035:21: 'false'
                     {
                     match("false"); 
 
@@ -3388,10 +3388,10 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_PRIMITIVE_VALUE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21856:22: ( ( 'void' | 'null' | 'label' | 'undef' | '...' ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21856:24: ( 'void' | 'null' | 'label' | 'undef' | '...' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22037:22: ( ( 'void' | 'null' | 'label' | 'undef' | '...' ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22037:24: ( 'void' | 'null' | 'label' | 'undef' | '...' )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21856:24: ( 'void' | 'null' | 'label' | 'undef' | '...' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22037:24: ( 'void' | 'null' | 'label' | 'undef' | '...' )
             int alt14=5;
             switch ( input.LA(1) ) {
             case 'v':
@@ -3428,7 +3428,7 @@ public class InternalLLVMLexer extends Lexer {
 
             switch (alt14) {
                 case 1 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21856:25: 'void'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22037:25: 'void'
                     {
                     match("void"); 
 
@@ -3436,7 +3436,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21856:32: 'null'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22037:32: 'null'
                     {
                     match("null"); 
 
@@ -3444,7 +3444,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21856:39: 'label'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22037:39: 'label'
                     {
                     match("label"); 
 
@@ -3452,7 +3452,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21856:47: 'undef'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22037:47: 'undef'
                     {
                     match("undef"); 
 
@@ -3460,7 +3460,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21856:55: '...'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22037:55: '...'
                     {
                     match("..."); 
 
@@ -3486,10 +3486,10 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_FLOATING_POINT_TYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21858:26: ( ( 'half' | 'float' | 'double' | 'x86_fp80' | 'fp128' | 'ppc_fp128' ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21858:28: ( 'half' | 'float' | 'double' | 'x86_fp80' | 'fp128' | 'ppc_fp128' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22039:26: ( ( 'half' | 'float' | 'double' | 'x86_fp80' | 'fp128' | 'ppc_fp128' ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22039:28: ( 'half' | 'float' | 'double' | 'x86_fp80' | 'fp128' | 'ppc_fp128' )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21858:28: ( 'half' | 'float' | 'double' | 'x86_fp80' | 'fp128' | 'ppc_fp128' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22039:28: ( 'half' | 'float' | 'double' | 'x86_fp80' | 'fp128' | 'ppc_fp128' )
             int alt15=6;
             switch ( input.LA(1) ) {
             case 'h':
@@ -3539,7 +3539,7 @@ public class InternalLLVMLexer extends Lexer {
 
             switch (alt15) {
                 case 1 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21858:29: 'half'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22039:29: 'half'
                     {
                     match("half"); 
 
@@ -3547,7 +3547,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21858:36: 'float'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22039:36: 'float'
                     {
                     match("float"); 
 
@@ -3555,7 +3555,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21858:44: 'double'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22039:44: 'double'
                     {
                     match("double"); 
 
@@ -3563,7 +3563,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21858:53: 'x86_fp80'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22039:53: 'x86_fp80'
                     {
                     match("x86_fp80"); 
 
@@ -3571,7 +3571,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21858:64: 'fp128'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22039:64: 'fp128'
                     {
                     match("fp128"); 
 
@@ -3579,7 +3579,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21858:72: 'ppc_fp128'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22039:72: 'ppc_fp128'
                     {
                     match("ppc_fp128"); 
 
@@ -3605,8 +3605,8 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_INITIALIZER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21860:18: ( 'zeroinitializer' )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21860:20: 'zeroinitializer'
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22041:18: ( 'zeroinitializer' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22041:20: 'zeroinitializer'
             {
             match("zeroinitializer"); 
 
@@ -3626,10 +3626,10 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21862:13: ( ( ( 'c' )? '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | ( 'c' )? '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21862:15: ( ( 'c' )? '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | ( 'c' )? '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22043:13: ( ( ( 'c' )? '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | ( 'c' )? '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22043:15: ( ( 'c' )? '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | ( 'c' )? '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21862:15: ( ( 'c' )? '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | ( 'c' )? '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22043:15: ( ( 'c' )? '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | ( 'c' )? '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt20=2;
             switch ( input.LA(1) ) {
             case 'c':
@@ -3669,9 +3669,9 @@ public class InternalLLVMLexer extends Lexer {
 
             switch (alt20) {
                 case 1 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21862:16: ( 'c' )? '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22043:16: ( 'c' )? '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21862:16: ( 'c' )?
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22043:16: ( 'c' )?
                     int alt16=2;
                     int LA16_0 = input.LA(1);
 
@@ -3680,7 +3680,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     switch (alt16) {
                         case 1 :
-                            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21862:16: 'c'
+                            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22043:16: 'c'
                             {
                             match('c'); 
 
@@ -3690,7 +3690,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
 
                     match('\"'); 
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21862:25: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22043:25: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop17:
                     do {
                         int alt17=3;
@@ -3706,7 +3706,7 @@ public class InternalLLVMLexer extends Lexer {
 
                         switch (alt17) {
                     	case 1 :
-                    	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21862:26: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' )
+                    	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22043:26: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='0'||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -3722,7 +3722,7 @@ public class InternalLLVMLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21862:75: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22043:75: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -3747,9 +3747,9 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21862:95: ( 'c' )? '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22043:95: ( 'c' )? '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21862:95: ( 'c' )?
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22043:95: ( 'c' )?
                     int alt18=2;
                     int LA18_0 = input.LA(1);
 
@@ -3758,7 +3758,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     switch (alt18) {
                         case 1 :
-                            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21862:95: 'c'
+                            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22043:95: 'c'
                             {
                             match('c'); 
 
@@ -3768,7 +3768,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
 
                     match('\''); 
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21862:105: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22043:105: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop19:
                     do {
                         int alt19=3;
@@ -3784,7 +3784,7 @@ public class InternalLLVMLexer extends Lexer {
 
                         switch (alt19) {
                     	case 1 :
-                    	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21862:106: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' )
+                    	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22043:106: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='0'||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -3800,7 +3800,7 @@ public class InternalLLVMLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21862:155: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22043:155: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -3843,12 +3843,12 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_UNKNOWN_TYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21864:19: ( '(...)' ( RULE_POINTER )? )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21864:21: '(...)' ( RULE_POINTER )?
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22045:19: ( '(...)' ( RULE_POINTER )? )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22045:21: '(...)' ( RULE_POINTER )?
             {
             match("(...)"); 
 
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21864:29: ( RULE_POINTER )?
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22045:29: ( RULE_POINTER )?
             int alt21=2;
             int LA21_0 = input.LA(1);
 
@@ -3857,7 +3857,7 @@ public class InternalLLVMLexer extends Lexer {
             }
             switch (alt21) {
                 case 1 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21864:29: RULE_POINTER
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22045:29: RULE_POINTER
                     {
                     mRULE_POINTER(); 
 
@@ -3882,11 +3882,11 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21866:17: ( ';' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21866:19: ';' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22047:17: ( ';' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22047:19: ';' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match(';'); 
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21866:23: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22047:23: (~ ( ( '\\n' | '\\r' ) ) )*
             loop22:
             do {
                 int alt22=2;
@@ -3899,7 +3899,7 @@ public class InternalLLVMLexer extends Lexer {
 
                 switch (alt22) {
             	case 1 :
-            	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21866:23: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22047:23: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -3919,7 +3919,7 @@ public class InternalLLVMLexer extends Lexer {
                 }
             } while (true);
 
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21866:39: ( ( '\\r' )? '\\n' )?
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22047:39: ( ( '\\r' )? '\\n' )?
             int alt24=2;
             int LA24_0 = input.LA(1);
 
@@ -3928,9 +3928,9 @@ public class InternalLLVMLexer extends Lexer {
             }
             switch (alt24) {
                 case 1 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21866:40: ( '\\r' )? '\\n'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22047:40: ( '\\r' )? '\\n'
                     {
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21866:40: ( '\\r' )?
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22047:40: ( '\\r' )?
                     int alt23=2;
                     int LA23_0 = input.LA(1);
 
@@ -3939,7 +3939,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     switch (alt23) {
                         case 1 :
-                            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21866:40: '\\r'
+                            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22047:40: '\\r'
                             {
                             match('\r'); 
 
@@ -3971,10 +3971,10 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_POINTER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21868:14: ( ( '*' )+ )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21868:16: ( '*' )+
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22049:14: ( ( '*' )+ )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22049:16: ( '*' )+
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21868:16: ( '*' )+
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22049:16: ( '*' )+
             int cnt25=0;
             loop25:
             do {
@@ -3988,7 +3988,7 @@ public class InternalLLVMLexer extends Lexer {
 
                 switch (alt25) {
             	case 1 :
-            	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21868:16: '*'
+            	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22049:16: '*'
             	    {
             	    match('*'); 
 
@@ -4020,10 +4020,10 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_METADATA;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21870:15: ( ( '!' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | '!\"' ( options {greedy=false; } : . )* '\"' ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21870:17: ( '!' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | '!\"' ( options {greedy=false; } : . )* '\"' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22051:15: ( ( '!' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | '!\"' ( options {greedy=false; } : . )* '\"' ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22051:17: ( '!' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | '!\"' ( options {greedy=false; } : . )* '\"' )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21870:17: ( '!' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | '!\"' ( options {greedy=false; } : . )* '\"' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22051:17: ( '!' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ | '!\"' ( options {greedy=false; } : . )* '\"' )
             int alt28=2;
             int LA28_0 = input.LA(1);
 
@@ -4051,10 +4051,10 @@ public class InternalLLVMLexer extends Lexer {
             }
             switch (alt28) {
                 case 1 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21870:18: '!' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22051:18: '!' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+
                     {
                     match('!'); 
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21870:22: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22051:22: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+
                     int cnt26=0;
                     loop26:
                     do {
@@ -4096,11 +4096,11 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21870:56: '!\"' ( options {greedy=false; } : . )* '\"'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22051:56: '!\"' ( options {greedy=false; } : . )* '\"'
                     {
                     match("!\""); 
 
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21870:61: ( options {greedy=false; } : . )*
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22051:61: ( options {greedy=false; } : . )*
                     loop27:
                     do {
                         int alt27=2;
@@ -4116,7 +4116,7 @@ public class InternalLLVMLexer extends Lexer {
 
                         switch (alt27) {
                     	case 1 :
-                    	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21870:89: .
+                    	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22051:89: .
                     	    {
                     	    matchAny(); 
 
@@ -4151,15 +4151,15 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_F_PREDICATES;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21872:19: ( ( 'oeq' | 'ogt' | 'oge' | 'olt' | 'ole' | 'one' | 'ord' | 'ueq' | 'ugt' | 'uge' | 'ult' | 'ule' | 'une' | 'uno' ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21872:21: ( 'oeq' | 'ogt' | 'oge' | 'olt' | 'ole' | 'one' | 'ord' | 'ueq' | 'ugt' | 'uge' | 'ult' | 'ule' | 'une' | 'uno' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22053:19: ( ( 'oeq' | 'ogt' | 'oge' | 'olt' | 'ole' | 'one' | 'ord' | 'ueq' | 'ugt' | 'uge' | 'ult' | 'ule' | 'une' | 'uno' ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22053:21: ( 'oeq' | 'ogt' | 'oge' | 'olt' | 'ole' | 'one' | 'ord' | 'ueq' | 'ugt' | 'uge' | 'ult' | 'ule' | 'une' | 'uno' )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21872:21: ( 'oeq' | 'ogt' | 'oge' | 'olt' | 'ole' | 'one' | 'ord' | 'ueq' | 'ugt' | 'uge' | 'ult' | 'ule' | 'une' | 'uno' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22053:21: ( 'oeq' | 'ogt' | 'oge' | 'olt' | 'ole' | 'one' | 'ord' | 'ueq' | 'ugt' | 'uge' | 'ult' | 'ule' | 'une' | 'uno' )
             int alt29=14;
             alt29 = dfa29.predict(input);
             switch (alt29) {
                 case 1 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21872:22: 'oeq'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22053:22: 'oeq'
                     {
                     match("oeq"); 
 
@@ -4167,7 +4167,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21872:28: 'ogt'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22053:28: 'ogt'
                     {
                     match("ogt"); 
 
@@ -4175,7 +4175,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21872:34: 'oge'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22053:34: 'oge'
                     {
                     match("oge"); 
 
@@ -4183,7 +4183,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21872:40: 'olt'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22053:40: 'olt'
                     {
                     match("olt"); 
 
@@ -4191,7 +4191,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21872:46: 'ole'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22053:46: 'ole'
                     {
                     match("ole"); 
 
@@ -4199,7 +4199,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21872:52: 'one'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22053:52: 'one'
                     {
                     match("one"); 
 
@@ -4207,7 +4207,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21872:58: 'ord'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22053:58: 'ord'
                     {
                     match("ord"); 
 
@@ -4215,7 +4215,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 8 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21872:64: 'ueq'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22053:64: 'ueq'
                     {
                     match("ueq"); 
 
@@ -4223,7 +4223,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 9 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21872:70: 'ugt'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22053:70: 'ugt'
                     {
                     match("ugt"); 
 
@@ -4231,7 +4231,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 10 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21872:76: 'uge'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22053:76: 'uge'
                     {
                     match("uge"); 
 
@@ -4239,7 +4239,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 11 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21872:82: 'ult'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22053:82: 'ult'
                     {
                     match("ult"); 
 
@@ -4247,7 +4247,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 12 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21872:88: 'ule'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22053:88: 'ule'
                     {
                     match("ule"); 
 
@@ -4255,7 +4255,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 13 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21872:94: 'une'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22053:94: 'une'
                     {
                     match("une"); 
 
@@ -4263,7 +4263,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 14 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21872:100: 'uno'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22053:100: 'uno'
                     {
                     match("uno"); 
 
@@ -4289,10 +4289,10 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_ATOMIC_ORDERING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21874:22: ( ( 'unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst' ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21874:24: ( 'unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22055:22: ( ( 'unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst' ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22055:24: ( 'unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst' )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21874:24: ( 'unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22055:24: ( 'unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst' )
             int alt30=6;
             switch ( input.LA(1) ) {
             case 'u':
@@ -4342,7 +4342,7 @@ public class InternalLLVMLexer extends Lexer {
 
             switch (alt30) {
                 case 1 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21874:25: 'unordered'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22055:25: 'unordered'
                     {
                     match("unordered"); 
 
@@ -4350,7 +4350,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21874:37: 'monotonic'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22055:37: 'monotonic'
                     {
                     match("monotonic"); 
 
@@ -4358,7 +4358,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21874:49: 'aquire'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22055:49: 'aquire'
                     {
                     match("aquire"); 
 
@@ -4366,7 +4366,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21874:58: 'release'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22055:58: 'release'
                     {
                     match("release"); 
 
@@ -4374,7 +4374,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21874:68: 'acq_rel'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22055:68: 'acq_rel'
                     {
                     match("acq_rel"); 
 
@@ -4382,7 +4382,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21874:78: 'seq_cst'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22055:78: 'seq_cst'
                     {
                     match("seq_cst"); 
 
@@ -4408,15 +4408,15 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_BIN_OP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21876:13: ( ( 'xchg' | 'add' | 'sub' | 'and' | 'nand' | 'or' | 'xor' | 'max' | 'min' | 'umax' | 'umin' ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21876:15: ( 'xchg' | 'add' | 'sub' | 'and' | 'nand' | 'or' | 'xor' | 'max' | 'min' | 'umax' | 'umin' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22057:13: ( ( 'xchg' | 'add' | 'sub' | 'and' | 'nand' | 'or' | 'xor' | 'max' | 'min' | 'umax' | 'umin' ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22057:15: ( 'xchg' | 'add' | 'sub' | 'and' | 'nand' | 'or' | 'xor' | 'max' | 'min' | 'umax' | 'umin' )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21876:15: ( 'xchg' | 'add' | 'sub' | 'and' | 'nand' | 'or' | 'xor' | 'max' | 'min' | 'umax' | 'umin' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22057:15: ( 'xchg' | 'add' | 'sub' | 'and' | 'nand' | 'or' | 'xor' | 'max' | 'min' | 'umax' | 'umin' )
             int alt31=11;
             alt31 = dfa31.predict(input);
             switch (alt31) {
                 case 1 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21876:16: 'xchg'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22057:16: 'xchg'
                     {
                     match("xchg"); 
 
@@ -4424,7 +4424,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21876:23: 'add'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22057:23: 'add'
                     {
                     match("add"); 
 
@@ -4432,7 +4432,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21876:29: 'sub'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22057:29: 'sub'
                     {
                     match("sub"); 
 
@@ -4440,7 +4440,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21876:35: 'and'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22057:35: 'and'
                     {
                     match("and"); 
 
@@ -4448,7 +4448,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21876:41: 'nand'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22057:41: 'nand'
                     {
                     match("nand"); 
 
@@ -4456,7 +4456,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21876:48: 'or'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22057:48: 'or'
                     {
                     match("or"); 
 
@@ -4464,7 +4464,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21876:53: 'xor'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22057:53: 'xor'
                     {
                     match("xor"); 
 
@@ -4472,7 +4472,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 8 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21876:59: 'max'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22057:59: 'max'
                     {
                     match("max"); 
 
@@ -4480,7 +4480,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 9 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21876:65: 'min'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22057:65: 'min'
                     {
                     match("min"); 
 
@@ -4488,7 +4488,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 10 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21876:71: 'umax'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22057:71: 'umax'
                     {
                     match("umax"); 
 
@@ -4496,7 +4496,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 11 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21876:78: 'umin'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22057:78: 'umin'
                     {
                     match("umin"); 
 
@@ -4522,15 +4522,15 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_RETURN_ATTRIBUTES;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21878:24: ( ( 'zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest' ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21878:26: ( 'zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22059:24: ( ( 'zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest' ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22059:26: ( 'zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest' )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21878:26: ( 'zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22059:26: ( 'zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest' )
             int alt32=8;
             alt32 = dfa32.predict(input);
             switch (alt32) {
                 case 1 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21878:27: 'zeroext'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22059:27: 'zeroext'
                     {
                     match("zeroext"); 
 
@@ -4538,7 +4538,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21878:37: 'signext'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22059:37: 'signext'
                     {
                     match("signext"); 
 
@@ -4546,7 +4546,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21878:47: 'inreg'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22059:47: 'inreg'
                     {
                     match("inreg"); 
 
@@ -4554,7 +4554,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21878:55: 'byval'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22059:55: 'byval'
                     {
                     match("byval"); 
 
@@ -4562,7 +4562,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21878:63: 'sret'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22059:63: 'sret'
                     {
                     match("sret"); 
 
@@ -4570,7 +4570,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21878:70: 'noalias'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22059:70: 'noalias'
                     {
                     match("noalias"); 
 
@@ -4578,7 +4578,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21878:80: 'nocapture'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22059:80: 'nocapture'
                     {
                     match("nocapture"); 
 
@@ -4586,7 +4586,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 8 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21878:92: 'nest'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22059:92: 'nest'
                     {
                     match("nest"); 
 
@@ -4612,15 +4612,15 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_CAST_OP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21880:14: ( ( 'trunc' | 'zext' | 'sext' | 'fptrunc' | 'fpext' | 'fptoui' | 'fptosi' | 'uitofp' | 'sitofp' | 'ptrtoint' | 'inttoptr' | 'bitcast' ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21880:16: ( 'trunc' | 'zext' | 'sext' | 'fptrunc' | 'fpext' | 'fptoui' | 'fptosi' | 'uitofp' | 'sitofp' | 'ptrtoint' | 'inttoptr' | 'bitcast' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22061:14: ( ( 'trunc' | 'zext' | 'sext' | 'fptrunc' | 'fpext' | 'fptoui' | 'fptosi' | 'uitofp' | 'sitofp' | 'ptrtoint' | 'inttoptr' | 'bitcast' ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22061:16: ( 'trunc' | 'zext' | 'sext' | 'fptrunc' | 'fpext' | 'fptoui' | 'fptosi' | 'uitofp' | 'sitofp' | 'ptrtoint' | 'inttoptr' | 'bitcast' )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21880:16: ( 'trunc' | 'zext' | 'sext' | 'fptrunc' | 'fpext' | 'fptoui' | 'fptosi' | 'uitofp' | 'sitofp' | 'ptrtoint' | 'inttoptr' | 'bitcast' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22061:16: ( 'trunc' | 'zext' | 'sext' | 'fptrunc' | 'fpext' | 'fptoui' | 'fptosi' | 'uitofp' | 'sitofp' | 'ptrtoint' | 'inttoptr' | 'bitcast' )
             int alt33=12;
             alt33 = dfa33.predict(input);
             switch (alt33) {
                 case 1 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21880:17: 'trunc'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22061:17: 'trunc'
                     {
                     match("trunc"); 
 
@@ -4628,7 +4628,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21880:25: 'zext'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22061:25: 'zext'
                     {
                     match("zext"); 
 
@@ -4636,7 +4636,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21880:32: 'sext'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22061:32: 'sext'
                     {
                     match("sext"); 
 
@@ -4644,7 +4644,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21880:39: 'fptrunc'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22061:39: 'fptrunc'
                     {
                     match("fptrunc"); 
 
@@ -4652,7 +4652,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21880:49: 'fpext'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22061:49: 'fpext'
                     {
                     match("fpext"); 
 
@@ -4660,7 +4660,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21880:57: 'fptoui'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22061:57: 'fptoui'
                     {
                     match("fptoui"); 
 
@@ -4668,7 +4668,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21880:66: 'fptosi'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22061:66: 'fptosi'
                     {
                     match("fptosi"); 
 
@@ -4676,7 +4676,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 8 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21880:75: 'uitofp'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22061:75: 'uitofp'
                     {
                     match("uitofp"); 
 
@@ -4684,7 +4684,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 9 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21880:84: 'sitofp'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22061:84: 'sitofp'
                     {
                     match("sitofp"); 
 
@@ -4692,7 +4692,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 10 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21880:93: 'ptrtoint'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22061:93: 'ptrtoint'
                     {
                     match("ptrtoint"); 
 
@@ -4700,7 +4700,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 11 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21880:104: 'inttoptr'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22061:104: 'inttoptr'
                     {
                     match("inttoptr"); 
 
@@ -4708,7 +4708,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 12 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21880:115: 'bitcast'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22061:115: 'bitcast'
                     {
                     match("bitcast"); 
 
@@ -4734,15 +4734,15 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_I_PREDICATES;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21882:19: ( ( 'eq' | 'ne' | 'ugt' | 'uge' | 'ult' | 'ule' | 'sgt' | 'sge' | 'slt' | 'sle' ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21882:21: ( 'eq' | 'ne' | 'ugt' | 'uge' | 'ult' | 'ule' | 'sgt' | 'sge' | 'slt' | 'sle' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22063:19: ( ( 'eq' | 'ne' | 'ugt' | 'uge' | 'ult' | 'ule' | 'sgt' | 'sge' | 'slt' | 'sle' ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22063:21: ( 'eq' | 'ne' | 'ugt' | 'uge' | 'ult' | 'ule' | 'sgt' | 'sge' | 'slt' | 'sle' )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21882:21: ( 'eq' | 'ne' | 'ugt' | 'uge' | 'ult' | 'ule' | 'sgt' | 'sge' | 'slt' | 'sle' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22063:21: ( 'eq' | 'ne' | 'ugt' | 'uge' | 'ult' | 'ule' | 'sgt' | 'sge' | 'slt' | 'sle' )
             int alt34=10;
             alt34 = dfa34.predict(input);
             switch (alt34) {
                 case 1 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21882:22: 'eq'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22063:22: 'eq'
                     {
                     match("eq"); 
 
@@ -4750,7 +4750,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21882:27: 'ne'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22063:27: 'ne'
                     {
                     match("ne"); 
 
@@ -4758,7 +4758,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21882:32: 'ugt'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22063:32: 'ugt'
                     {
                     match("ugt"); 
 
@@ -4766,7 +4766,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21882:38: 'uge'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22063:38: 'uge'
                     {
                     match("uge"); 
 
@@ -4774,7 +4774,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21882:44: 'ult'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22063:44: 'ult'
                     {
                     match("ult"); 
 
@@ -4782,7 +4782,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21882:50: 'ule'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22063:50: 'ule'
                     {
                     match("ule"); 
 
@@ -4790,7 +4790,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21882:56: 'sgt'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22063:56: 'sgt'
                     {
                     match("sgt"); 
 
@@ -4798,7 +4798,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 8 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21882:62: 'sge'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22063:62: 'sge'
                     {
                     match("sge"); 
 
@@ -4806,7 +4806,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 9 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21882:68: 'slt'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22063:68: 'slt'
                     {
                     match("slt"); 
 
@@ -4814,7 +4814,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 10 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21882:74: 'sle'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22063:74: 'sle'
                     {
                     match("sle"); 
 
@@ -4840,10 +4840,10 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_VISIBILITY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21884:17: ( ( 'default' | 'hidden' | 'protected' ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21884:19: ( 'default' | 'hidden' | 'protected' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22065:17: ( ( 'default' | 'hidden' | 'protected' ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22065:19: ( 'default' | 'hidden' | 'protected' )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21884:19: ( 'default' | 'hidden' | 'protected' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22065:19: ( 'default' | 'hidden' | 'protected' )
             int alt35=3;
             switch ( input.LA(1) ) {
             case 'd':
@@ -4870,7 +4870,7 @@ public class InternalLLVMLexer extends Lexer {
 
             switch (alt35) {
                 case 1 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21884:20: 'default'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22065:20: 'default'
                     {
                     match("default"); 
 
@@ -4878,7 +4878,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21884:30: 'hidden'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22065:30: 'hidden'
                     {
                     match("hidden"); 
 
@@ -4886,7 +4886,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21884:39: 'protected'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22065:39: 'protected'
                     {
                     match("protected"); 
 
@@ -4912,15 +4912,15 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_LINKAGE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21886:14: ( ( 'private' | 'linker_private' | 'linker_private_weak' | 'available_externally' | 'linkonce' | 'common' | 'appending' | 'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' | 'dllimport' | 'dllexport' ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21886:16: ( 'private' | 'linker_private' | 'linker_private_weak' | 'available_externally' | 'linkonce' | 'common' | 'appending' | 'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' | 'dllimport' | 'dllexport' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22067:14: ( ( 'private' | 'linker_private' | 'linker_private_weak' | 'available_externally' | 'linkonce' | 'common' | 'appending' | 'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' | 'dllimport' | 'dllexport' ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22067:16: ( 'private' | 'linker_private' | 'linker_private_weak' | 'available_externally' | 'linkonce' | 'common' | 'appending' | 'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' | 'dllimport' | 'dllexport' )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21886:16: ( 'private' | 'linker_private' | 'linker_private_weak' | 'available_externally' | 'linkonce' | 'common' | 'appending' | 'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' | 'dllimport' | 'dllexport' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22067:16: ( 'private' | 'linker_private' | 'linker_private_weak' | 'available_externally' | 'linkonce' | 'common' | 'appending' | 'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' | 'dllimport' | 'dllexport' )
             int alt36=12;
             alt36 = dfa36.predict(input);
             switch (alt36) {
                 case 1 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21886:17: 'private'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22067:17: 'private'
                     {
                     match("private"); 
 
@@ -4928,7 +4928,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21886:27: 'linker_private'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22067:27: 'linker_private'
                     {
                     match("linker_private"); 
 
@@ -4936,7 +4936,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21886:44: 'linker_private_weak'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22067:44: 'linker_private_weak'
                     {
                     match("linker_private_weak"); 
 
@@ -4944,7 +4944,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21886:66: 'available_externally'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22067:66: 'available_externally'
                     {
                     match("available_externally"); 
 
@@ -4952,7 +4952,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21886:89: 'linkonce'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22067:89: 'linkonce'
                     {
                     match("linkonce"); 
 
@@ -4960,7 +4960,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21886:100: 'common'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22067:100: 'common'
                     {
                     match("common"); 
 
@@ -4968,7 +4968,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21886:109: 'appending'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22067:109: 'appending'
                     {
                     match("appending"); 
 
@@ -4976,7 +4976,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 8 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21886:121: 'extern_weak'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22067:121: 'extern_weak'
                     {
                     match("extern_weak"); 
 
@@ -4984,7 +4984,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 9 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21886:135: 'linkonce_odr'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22067:135: 'linkonce_odr'
                     {
                     match("linkonce_odr"); 
 
@@ -4992,7 +4992,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 10 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21886:150: 'linkonce_odr_auto_hide'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22067:150: 'linkonce_odr_auto_hide'
                     {
                     match("linkonce_odr_auto_hide"); 
 
@@ -5000,7 +5000,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 11 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21886:175: 'dllimport'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22067:175: 'dllimport'
                     {
                     match("dllimport"); 
 
@@ -5008,7 +5008,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 12 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21886:187: 'dllexport'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22067:187: 'dllexport'
                     {
                     match("dllexport"); 
 
@@ -5034,10 +5034,10 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_ALIAS_LINKAGE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21888:20: ( ( 'external' | 'internal' | 'weak' | 'weak_odr' ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21888:22: ( 'external' | 'internal' | 'weak' | 'weak_odr' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22069:20: ( ( 'external' | 'internal' | 'weak' | 'weak_odr' ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22069:22: ( 'external' | 'internal' | 'weak' | 'weak_odr' )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21888:22: ( 'external' | 'internal' | 'weak' | 'weak_odr' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22069:22: ( 'external' | 'internal' | 'weak' | 'weak_odr' )
             int alt37=4;
             switch ( input.LA(1) ) {
             case 'e':
@@ -5100,7 +5100,7 @@ public class InternalLLVMLexer extends Lexer {
 
             switch (alt37) {
                 case 1 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21888:23: 'external'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22069:23: 'external'
                     {
                     match("external"); 
 
@@ -5108,7 +5108,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21888:34: 'internal'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22069:34: 'internal'
                     {
                     match("internal"); 
 
@@ -5116,7 +5116,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21888:45: 'weak'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22069:45: 'weak'
                     {
                     match("weak"); 
 
@@ -5124,7 +5124,7 @@ public class InternalLLVMLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21888:52: 'weak_odr'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22069:52: 'weak_odr'
                     {
                     match("weak_odr"); 
 
@@ -5150,10 +5150,10 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21890:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21890:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22071:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22071:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21890:11: ( '^' )?
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22071:11: ( '^' )?
             int alt38=2;
             int LA38_0 = input.LA(1);
 
@@ -5162,7 +5162,7 @@ public class InternalLLVMLexer extends Lexer {
             }
             switch (alt38) {
                 case 1 :
-                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21890:11: '^'
+                    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22071:11: '^'
                     {
                     match('^'); 
 
@@ -5180,7 +5180,7 @@ public class InternalLLVMLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21890:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22071:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop39:
             do {
                 int alt39=2;
@@ -5229,10 +5229,10 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21892:10: ( ( '0' .. '9' )+ )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21892:12: ( '0' .. '9' )+
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22073:10: ( ( '0' .. '9' )+ )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22073:12: ( '0' .. '9' )+
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21892:12: ( '0' .. '9' )+
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22073:12: ( '0' .. '9' )+
             int cnt40=0;
             loop40:
             do {
@@ -5246,7 +5246,7 @@ public class InternalLLVMLexer extends Lexer {
 
                 switch (alt40) {
             	case 1 :
-            	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21892:13: '0' .. '9'
+            	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22073:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -5278,12 +5278,12 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21894:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21894:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22075:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22075:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21894:24: ( options {greedy=false; } : . )*
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22075:24: ( options {greedy=false; } : . )*
             loop41:
             do {
                 int alt41=2;
@@ -5308,7 +5308,7 @@ public class InternalLLVMLexer extends Lexer {
 
                 switch (alt41) {
             	case 1 :
-            	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21894:52: .
+            	    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22075:52: .
             	    {
             	    matchAny(); 
 
@@ -5338,10 +5338,10 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21896:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21896:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22077:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22077:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21896:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22077:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt42=0;
             loop42:
             do {
@@ -5395,8 +5395,8 @@ public class InternalLLVMLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21898:16: ( . )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21898:18: .
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22079:16: ( . )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:22079:18: .
             {
             matchAny(); 
 
@@ -6567,7 +6567,7 @@ public class InternalLLVMLexer extends Lexer {
             this.transition = DFA29_transition;
         }
         public String getDescription() {
-            return "21872:21: ( 'oeq' | 'ogt' | 'oge' | 'olt' | 'ole' | 'one' | 'ord' | 'ueq' | 'ugt' | 'uge' | 'ult' | 'ule' | 'une' | 'uno' )";
+            return "22053:21: ( 'oeq' | 'ogt' | 'oge' | 'olt' | 'ole' | 'one' | 'ord' | 'ueq' | 'ugt' | 'uge' | 'ult' | 'ule' | 'une' | 'uno' )";
         }
     }
     static final String DFA31_eotS =
@@ -6634,7 +6634,7 @@ public class InternalLLVMLexer extends Lexer {
             this.transition = DFA31_transition;
         }
         public String getDescription() {
-            return "21876:15: ( 'xchg' | 'add' | 'sub' | 'and' | 'nand' | 'or' | 'xor' | 'max' | 'min' | 'umax' | 'umin' )";
+            return "22057:15: ( 'xchg' | 'add' | 'sub' | 'and' | 'nand' | 'or' | 'xor' | 'max' | 'min' | 'umax' | 'umin' )";
         }
     }
     static final String DFA32_eotS =
@@ -6695,7 +6695,7 @@ public class InternalLLVMLexer extends Lexer {
             this.transition = DFA32_transition;
         }
         public String getDescription() {
-            return "21878:26: ( 'zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest' )";
+            return "22059:26: ( 'zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest' )";
         }
     }
     static final String DFA33_eotS =
@@ -6765,7 +6765,7 @@ public class InternalLLVMLexer extends Lexer {
             this.transition = DFA33_transition;
         }
         public String getDescription() {
-            return "21880:16: ( 'trunc' | 'zext' | 'sext' | 'fptrunc' | 'fpext' | 'fptoui' | 'fptosi' | 'uitofp' | 'sitofp' | 'ptrtoint' | 'inttoptr' | 'bitcast' )";
+            return "22061:16: ( 'trunc' | 'zext' | 'sext' | 'fptrunc' | 'fpext' | 'fptoui' | 'fptosi' | 'uitofp' | 'sitofp' | 'ptrtoint' | 'inttoptr' | 'bitcast' )";
         }
     }
     static final String DFA34_eotS =
@@ -6830,7 +6830,7 @@ public class InternalLLVMLexer extends Lexer {
             this.transition = DFA34_transition;
         }
         public String getDescription() {
-            return "21882:21: ( 'eq' | 'ne' | 'ugt' | 'uge' | 'ult' | 'ule' | 'sgt' | 'sge' | 'slt' | 'sle' )";
+            return "22063:21: ( 'eq' | 'ne' | 'ugt' | 'uge' | 'ult' | 'ule' | 'sgt' | 'sge' | 'slt' | 'sle' )";
         }
     }
     static final String DFA36_eotS =
@@ -6924,7 +6924,7 @@ public class InternalLLVMLexer extends Lexer {
             this.transition = DFA36_transition;
         }
         public String getDescription() {
-            return "21886:16: ( 'private' | 'linker_private' | 'linker_private_weak' | 'available_externally' | 'linkonce' | 'common' | 'appending' | 'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' | 'dllimport' | 'dllexport' )";
+            return "22067:16: ( 'private' | 'linker_private' | 'linker_private_weak' | 'available_externally' | 'linkonce' | 'common' | 'appending' | 'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' | 'dllimport' | 'dllexport' )";
         }
     }
     static final String DFA43_eotS =

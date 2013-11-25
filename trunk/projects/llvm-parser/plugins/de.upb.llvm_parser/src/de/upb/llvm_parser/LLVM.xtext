@@ -171,7 +171,7 @@ Vector:
 	'<' length=NUMBER 'x' type=TypeUse '>';
 
 Array:
-	{Array} ('[' length=NUMBER 'x' type=TypeUse ']' | '[]' | '[' ']') POINTER?;
+	{Array} ('[' length=NUMBER 'x' type=(TypeUse|Aggregate_Type) ']' | '[]' | '[' ']') POINTER?;
 
 Aggregate_Type:
 	Structure | Array | Vector;
@@ -189,11 +189,11 @@ ValueStruct:
 	'{' types+=TypeUse value+=Value (',' types+=TypeUse value+=Value)* '}';
 
 Structure:
-	{Structure} '{' (types+=TypeUse (',' types+=(TypeUse|Aggregate_Type))*)? '}' POINTER?;
+	{Structure} '{' (types+=(TypeUse|Aggregate_Type) (',' types+=(TypeUse|Aggregate_Type))*)? '}' POINTER?;
 
 
 Parameter:
-	type = (TypeUse | Aggregate_Type) /*RETURN_ATTRIBUTES* */ value = Value? RETURN_ATTRIBUTES*
+	type = (TypeUse | Aggregate_Type) (RETURN_ATTRIBUTES+ value = Value | value = Value? RETURN_ATTRIBUTES*)
 ;
 
 ParameterList:

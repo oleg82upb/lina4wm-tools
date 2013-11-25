@@ -4,7 +4,6 @@ package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.Array;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.TypeUse;
 
 import java.math.BigDecimal;
 
@@ -12,6 +11,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -60,7 +60,7 @@ public class ArrayImpl extends Aggregate_TypeImpl implements Array
 	 * @generated
 	 * @ordered
 	 */
-  protected TypeUse type;
+  protected EObject type;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -111,7 +111,7 @@ public class ArrayImpl extends Aggregate_TypeImpl implements Array
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public TypeUse getType()
+  public EObject getType()
   {
 		return type;
 	}
@@ -121,9 +121,9 @@ public class ArrayImpl extends Aggregate_TypeImpl implements Array
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetType(TypeUse newType, NotificationChain msgs)
+  public NotificationChain basicSetType(EObject newType, NotificationChain msgs)
   {
-		TypeUse oldType = type;
+		EObject oldType = type;
 		type = newType;
 		if (eNotificationRequired())
 		{
@@ -138,7 +138,7 @@ public class ArrayImpl extends Aggregate_TypeImpl implements Array
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setType(TypeUse newType)
+  public void setType(EObject newType)
   {
 		if (newType != type)
 		{
@@ -202,7 +202,7 @@ public class ArrayImpl extends Aggregate_TypeImpl implements Array
 				setLength((BigDecimal)newValue);
 				return;
 			case LlvmPackage.ARRAY__TYPE:
-				setType((TypeUse)newValue);
+				setType((EObject)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -222,7 +222,7 @@ public class ArrayImpl extends Aggregate_TypeImpl implements Array
 				setLength(LENGTH_EDEFAULT);
 				return;
 			case LlvmPackage.ARRAY__TYPE:
-				setType((TypeUse)null);
+				setType((EObject)null);
 				return;
 		}
 		super.eUnset(featureID);
