@@ -219,6 +219,7 @@ public class LlvmSwitch<T> extends Switch<T>
 			{
 				ValueStruct valueStruct = (ValueStruct)theEObject;
 				T result = caseValueStruct(valueStruct);
+				if (result == null) result = caseValue(valueStruct);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

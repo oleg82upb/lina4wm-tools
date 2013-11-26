@@ -4,8 +4,6 @@ package de.upb.llvm_parser.llvm;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Value Struct</b></em>'.
@@ -14,8 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.ValueStruct#getTypes <em>Types</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.ValueStruct#getValue <em>Value</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.ValueStruct#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
  *
@@ -23,38 +20,22 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface ValueStruct extends EObject
+public interface ValueStruct extends Value
 {
   /**
-	 * Returns the value of the '<em><b>Types</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.TypeUse}.
+	 * Returns the value of the '<em><b>Values</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.Parameter}.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Types</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Values</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Types</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getValueStruct_Types()
+	 * @return the value of the '<em>Values</em>' containment reference list.
+	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getValueStruct_Values()
 	 * @model containment="true"
 	 * @generated
 	 */
-  EList<TypeUse> getTypes();
-
-  /**
-	 * Returns the value of the '<em><b>Value</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.Value}.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Value</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getValueStruct_Value()
-	 * @model containment="true"
-	 * @generated
-	 */
-  EList<Value> getValue();
+  EList<Parameter> getValues();
 
 } // ValueStruct

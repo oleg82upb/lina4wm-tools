@@ -3,8 +3,7 @@
 package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.TypeUse;
-import de.upb.llvm_parser.llvm.Value;
+import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.ValueStruct;
 
 import java.util.Collection;
@@ -16,8 +15,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -28,34 +25,23 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ValueStructImpl#getTypes <em>Types</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.ValueStructImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.ValueStructImpl#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ValueStructImpl extends MinimalEObjectImpl.Container implements ValueStruct
+public class ValueStructImpl extends ValueImpl implements ValueStruct
 {
   /**
-	 * The cached value of the '{@link #getTypes() <em>Types</em>}' containment reference list.
+	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getTypes()
+	 * @see #getValues()
 	 * @generated
 	 * @ordered
 	 */
-  protected EList<TypeUse> types;
-
-  /**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
-  protected EList<Value> value;
+  protected EList<Parameter> values;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -83,27 +69,13 @@ public class ValueStructImpl extends MinimalEObjectImpl.Container implements Val
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EList<TypeUse> getTypes()
+  public EList<Parameter> getValues()
   {
-		if (types == null)
+		if (values == null)
 		{
-			types = new EObjectContainmentEList<TypeUse>(TypeUse.class, this, LlvmPackage.VALUE_STRUCT__TYPES);
+			values = new EObjectContainmentEList<Parameter>(Parameter.class, this, LlvmPackage.VALUE_STRUCT__VALUES);
 		}
-		return types;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EList<Value> getValue()
-  {
-		if (value == null)
-		{
-			value = new EObjectContainmentEList<Value>(Value.class, this, LlvmPackage.VALUE_STRUCT__VALUE);
-		}
-		return value;
+		return values;
 	}
 
   /**
@@ -116,10 +88,8 @@ public class ValueStructImpl extends MinimalEObjectImpl.Container implements Val
   {
 		switch (featureID)
 		{
-			case LlvmPackage.VALUE_STRUCT__TYPES:
-				return ((InternalEList<?>)getTypes()).basicRemove(otherEnd, msgs);
-			case LlvmPackage.VALUE_STRUCT__VALUE:
-				return ((InternalEList<?>)getValue()).basicRemove(otherEnd, msgs);
+			case LlvmPackage.VALUE_STRUCT__VALUES:
+				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -134,10 +104,8 @@ public class ValueStructImpl extends MinimalEObjectImpl.Container implements Val
   {
 		switch (featureID)
 		{
-			case LlvmPackage.VALUE_STRUCT__TYPES:
-				return getTypes();
-			case LlvmPackage.VALUE_STRUCT__VALUE:
-				return getValue();
+			case LlvmPackage.VALUE_STRUCT__VALUES:
+				return getValues();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -153,13 +121,9 @@ public class ValueStructImpl extends MinimalEObjectImpl.Container implements Val
   {
 		switch (featureID)
 		{
-			case LlvmPackage.VALUE_STRUCT__TYPES:
-				getTypes().clear();
-				getTypes().addAll((Collection<? extends TypeUse>)newValue);
-				return;
-			case LlvmPackage.VALUE_STRUCT__VALUE:
-				getValue().clear();
-				getValue().addAll((Collection<? extends Value>)newValue);
+			case LlvmPackage.VALUE_STRUCT__VALUES:
+				getValues().clear();
+				getValues().addAll((Collection<? extends Parameter>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -175,11 +139,8 @@ public class ValueStructImpl extends MinimalEObjectImpl.Container implements Val
   {
 		switch (featureID)
 		{
-			case LlvmPackage.VALUE_STRUCT__TYPES:
-				getTypes().clear();
-				return;
-			case LlvmPackage.VALUE_STRUCT__VALUE:
-				getValue().clear();
+			case LlvmPackage.VALUE_STRUCT__VALUES:
+				getValues().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -195,10 +156,8 @@ public class ValueStructImpl extends MinimalEObjectImpl.Container implements Val
   {
 		switch (featureID)
 		{
-			case LlvmPackage.VALUE_STRUCT__TYPES:
-				return types != null && !types.isEmpty();
-			case LlvmPackage.VALUE_STRUCT__VALUE:
-				return value != null && !value.isEmpty();
+			case LlvmPackage.VALUE_STRUCT__VALUES:
+				return values != null && !values.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
