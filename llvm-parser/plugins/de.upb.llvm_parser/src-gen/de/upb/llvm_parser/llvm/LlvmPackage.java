@@ -706,22 +706,13 @@ public interface LlvmPackage extends EPackage
   int VALUE_STRUCT = 18;
 
   /**
-	 * The feature id for the '<em><b>Types</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int VALUE_STRUCT__TYPES = 0;
-
-  /**
-	 * The feature id for the '<em><b>Value</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int VALUE_STRUCT__VALUE = 1;
+  int VALUE_STRUCT__VALUES = VALUE_FEATURE_COUNT + 0;
 
   /**
 	 * The number of structural features of the '<em>Value Struct</em>' class.
@@ -730,7 +721,7 @@ public interface LlvmPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-  int VALUE_STRUCT_FEATURE_COUNT = 2;
+  int VALUE_STRUCT_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
 
   /**
 	 * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.StructureImpl <em>Structure</em>}' class.
@@ -3339,26 +3330,15 @@ public interface LlvmPackage extends EPackage
   EClass getValueStruct();
 
   /**
-	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.ValueStruct#getTypes <em>Types</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.ValueStruct#getValues <em>Values</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Types</em>'.
-	 * @see de.upb.llvm_parser.llvm.ValueStruct#getTypes()
+	 * @return the meta object for the containment reference list '<em>Values</em>'.
+	 * @see de.upb.llvm_parser.llvm.ValueStruct#getValues()
 	 * @see #getValueStruct()
 	 * @generated
 	 */
-  EReference getValueStruct_Types();
-
-  /**
-	 * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.ValueStruct#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Value</em>'.
-	 * @see de.upb.llvm_parser.llvm.ValueStruct#getValue()
-	 * @see #getValueStruct()
-	 * @generated
-	 */
-  EReference getValueStruct_Value();
+  EReference getValueStruct_Values();
 
   /**
 	 * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.Structure <em>Structure</em>}'.
@@ -5786,20 +5766,12 @@ public interface LlvmPackage extends EPackage
     EClass VALUE_STRUCT = eINSTANCE.getValueStruct();
 
     /**
-		 * The meta object literal for the '<em><b>Types</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 		 * @generated
 		 */
-    EReference VALUE_STRUCT__TYPES = eINSTANCE.getValueStruct_Types();
-
-    /**
-		 * The meta object literal for the '<em><b>Value</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-		 * @generated
-		 */
-    EReference VALUE_STRUCT__VALUE = eINSTANCE.getValueStruct_Value();
+    EReference VALUE_STRUCT__VALUES = eINSTANCE.getValueStruct_Values();
 
     /**
 		 * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.StructureImpl <em>Structure</em>}' class.

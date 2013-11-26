@@ -459,7 +459,8 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				}
 				else break;
 			case LlvmPackage.VALUE_STRUCT:
-				if(context == grammarAccess.getValueStructRule()) {
+				if(context == grammarAccess.getValueRule() ||
+				   context == grammarAccess.getValueStructRule()) {
 					sequence_ValueStruct(context, (ValueStruct) semanticObject); 
 					return; 
 				}
@@ -748,8 +749,8 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (
-	 *         (returnType=TypeUse address=Address parameter=FunctionParameterList align=NUMBER? body=FunctionBody) | 
-	 *         (returnType=TypeUse address=Address parameter=FunctionParameterList align=NUMBER?)
+	 *         (returnType=TypeUse address=Address parameter=FunctionParameterList? align=NUMBER? body=FunctionBody) | 
+	 *         (returnType=TypeUse address=Address parameter=FunctionParameterList? align=NUMBER?)
 	 *     )
 	 */
 	protected void sequence_FunctionDefinition(EObject context, FunctionDefinition semanticObject) {
@@ -759,7 +760,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((params+=FunctionParameter params+=FunctionParameter*)?)
+	 *     (params+=FunctionParameter params+=FunctionParameter*)
 	 */
 	protected void sequence_FunctionParameterList(EObject context, FunctionParameterList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1211,7 +1212,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (types+=TypeUse value+=Value (types+=TypeUse value+=Value)*)
+	 *     (values+=Parameter values+=Parameter*)
 	 */
 	protected void sequence_ValueStruct(EObject context, ValueStruct semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

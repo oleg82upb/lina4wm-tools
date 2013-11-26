@@ -1071,19 +1071,9 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getValueStruct_Types()
+  public EReference getValueStruct_Values()
   {
 		return (EReference)valueStructEClass.getEStructuralFeatures().get(0);
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EReference getValueStruct_Value()
-  {
-		return (EReference)valueStructEClass.getEStructuralFeatures().get(1);
 	}
 
   /**
@@ -3022,8 +3012,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
 		valueEClass = createEClass(VALUE);
 
 		valueStructEClass = createEClass(VALUE_STRUCT);
-		createEReference(valueStructEClass, VALUE_STRUCT__TYPES);
-		createEReference(valueStructEClass, VALUE_STRUCT__VALUE);
+		createEReference(valueStructEClass, VALUE_STRUCT__VALUES);
 
 		structureEClass = createEClass(STRUCTURE);
 		createEReference(structureEClass, STRUCTURE__TYPES);
@@ -3296,6 +3285,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
 		arrayEClass.getESuperTypes().add(this.getAggregate_Type());
 		constantEClass.getESuperTypes().add(this.getValue());
 		primitiveValueEClass.getESuperTypes().add(this.getValue());
+		valueStructEClass.getESuperTypes().add(this.getValue());
 		structureEClass.getESuperTypes().add(this.getAggregate_Type());
 		arithmeticOperationEClass.getESuperTypes().add(this.getInstruction());
 		logicOperationEClass.getESuperTypes().add(this.getInstruction());
@@ -3396,8 +3386,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
 		initEClass(valueEClass, Value.class, "Value", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(valueStructEClass, ValueStruct.class, "ValueStruct", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getValueStruct_Types(), this.getTypeUse(), null, "types", null, 0, -1, ValueStruct.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getValueStruct_Value(), this.getValue(), null, "value", null, 0, -1, ValueStruct.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getValueStruct_Values(), this.getParameter(), null, "values", null, 0, -1, ValueStruct.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(structureEClass, Structure.class, "Structure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStructure_Types(), ecorePackage.getEObject(), null, "types", null, 0, -1, Structure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

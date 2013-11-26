@@ -71,8 +71,7 @@
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//Value"/>
     <genClasses ecoreClass="LLVM.ecore#//ValueStruct">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ValueStruct/types"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ValueStruct/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ValueStruct/values"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//Structure">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Structure/types"/>

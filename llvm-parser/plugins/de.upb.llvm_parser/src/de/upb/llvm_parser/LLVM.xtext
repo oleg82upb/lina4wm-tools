@@ -10,17 +10,32 @@ NUMBER returns EBigDecimal:
 	'-'? INT ('.' INT)?;
 
 terminal VALID_ID:
-	((('%' | '@') '.'*
+	(
 		(
-			(('a'..'z' | 'A'..'Z' | '_' | '0'..'9')+) | STRING
-		)
-	) | ('(' VALID_ID POINTER? ')'))
+			('%' | '@') 
+			(
+				(
+					('a'..'z' | 'A'..'Z' | '_' | '.' | '0'..'9')+
+					//(ID | '_' | '.')+
+				) 
+				| STRING
+			)
+		) 
+		//| ('(' VALID_ID POINTER? ')')		frisst doch nur pointer weg
+	)
 	
-	('.'
-		(
-			( ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')+) |('(' ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')+ POINTER? ')')
-		)
-	)*;
+//	('.' 
+//		(
+//			(
+//				('a'..'z' | 'A'..'Z' | '_' | '0'..'9')+
+//			) 
+//			| 
+//			(
+//				'(' ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')+ POINTER? ')'
+//			)
+//		)
+//	)*
+	;
 
 terminal INT_TYPE:
 	'i' ('0'..'9')+ POINTER?;
@@ -138,11 +153,12 @@ GlobalDefinition:
 
 FunctionDefinition:
 	('define' (LINKAGE| ALIAS_LINKAGE)? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=TypeUse
-	address=Address parameter=FunctionParameterList 'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ('align' align = NUMBER)?
+	address=Address ('()' | '(' parameter=FunctionParameterList? ')') 'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ('align' align = NUMBER)?
 	body=FunctionBody) 
 	| 
 	('declare' (LINKAGE| ALIAS_LINKAGE)? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=TypeUse
-	address=Address parameter=FunctionParameterList 'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ('align' align = NUMBER)?);
+	address=Address ('()' | '(' parameter=FunctionParameterList? ')') 'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ('align' align = NUMBER)?)
+;
 
 AliasDefinition:
 	address=Address '=' 'alias' ALIAS_LINKAGE? VISIBILITY? aliastype=TypeUse aliasvalue=Value aliasee=(TypeUse);
@@ -183,10 +199,10 @@ PrimitiveValue:
 	value = (STRING| PRIMITIVE_VALUE | INITIALIZER | BOOL);
 
 Value:
-	 NestedCast | NestedGetElementPtr | Constant | AddressUse | PrimitiveValue;
+	 NestedCast | NestedGetElementPtr | Constant | AddressUse | PrimitiveValue | ValueStruct;
 
 ValueStruct:
-	'{' types+=TypeUse value+=Value (',' types+=TypeUse value+=Value)* '}';
+	'{' values+=Parameter (',' values+=Parameter)* '}';
 
 Structure:
 	{Structure} '{' (types+=(TypeUse|Aggregate_Type) (',' types+=(TypeUse|Aggregate_Type))*)? '}' POINTER?;
@@ -206,9 +222,8 @@ FunctionParameter:
 
 FunctionParameterList:
 	{FunctionParameterList} 
-	( '()'   
-		| '(' ( params+=FunctionParameter (',' params+=FunctionParameter)*)? ')'
-	);
+	params+=FunctionParameter (',' params+=FunctionParameter)* 
+;
 
 
 FunctionBody:
