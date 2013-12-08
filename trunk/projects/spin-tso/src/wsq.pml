@@ -1,21 +1,69 @@
+/*
+author: Annika Mütze <muetze.annika@gmail.com>
+date: 12.2013
 
-alloca(struct_item_t, wsq);
-short top, bottom
+workstealing queue implementation
+*/
+/*
+	trying to specify the LLVM-compiled workstealingqueue implementation (wsq.s)
+*/
 
-inline expand(return)
-{	
-	short newsize, newitems, newq, i, size, size3, size6, ap, ap2, arrayindex, arrayindex2, rem ,rem2;
+#define BUFF_SIZE 12 	//size of Buffer
+#define MEM_SIZE 13	//size of memory
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+#include "x86_tso_buffer.pml"
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//Types for LLVM, actually their length in size of pointers and values
+#define I32  0 		// = {0};
+#define Ptr  0
+#define struct_item_t 1
+short memUse = 2; 	//shows to the next free cell in memory
+
+//global variable declaration
+#define wsq 1
+short top, bottom;
+
+chan channelT1 = [0] of {mtype, short, short, short};
+chan channelT2 = [0] of {mtype, short, short, short};
+
+
+inline getelementptr(type, instance, offset, targetRegister)
+{
+	atomic{
+	//simplified version of what llvm does.
+	//offset directly correspond to adding it to instance address. 
+	assert(offset <= type); //offset shouldn't be greater than the type range
+	targetRegister = instance + offset;
+	}
+}
+
+inline alloca(type, targetRegister)
+{
+	atomic{
+	targetRegister = memUse;
+	memUse = memUse + type + 1;
+	assert(memUse < MEM_SIZE);
+	}
+}
+//-------------------------------------------------------------------------------------------------
+
+inline expand(returnval){
+	
+	short newsize, newitems, newq, i, size, size3, size6, ap, ap2, arrayindex, arrayindex2, rem, rem2;
 	short v0, v1, v2, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23;
+
+entry:	
 	atomic{
 		alloca(I32, newsize);
 		alloca(Ptr, newitems);
-		alloca(struct_item_t, newq);
-		alloca(I32,i);
+		alloca(Ptr, newq);
+		alloca(I32, i);
 	}
 	read(wsq,v0);
 	getelementptr(struct_item_t, v0, 0,size);
 	read(size,v1);
-	v1=v1*2
+	v1=v1*2;
 	write(newsize,v1);
 	read(newsize,v2);
 	alloca(4*v2,newitems);//eig Pointer auf newitems
@@ -72,20 +120,20 @@ forEnd:
 	read(newq, v22);
 	write(wsq, v22);
 	read(newq, v23);
-	return = v23;		
+	returnval = v23;		
 }	
 
 
 inline push(task)
 {
-	short task_addr, b, t, q, size, size2, sub, sub1, return, rem, ap, arrayindex;
+	short task_addr, b, t, q, size, size2, sub, sub1, returnval, rem, ap, arrayindex;
 	short v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13;
 entry:
 	atomic{
 		alloca(I32,task_addr);
 		alloca(I32,b);
 		alloca(I32,t);
-		alloca(struct_item_t,q);
+		alloca(Ptr,q);
 	}
 	write(task_addr,task);
 	read(bottom, v0);
@@ -102,8 +150,8 @@ entry:
 	read(size, v6);
 	sub1 = v6 - 1;
 	if
-	::(sub <= sub1) -> 	expand(return);//  return irgendwo deklarieren???
-						write(q, return); 
+	::(sub <= sub1) -> 	expand(returnval);//  return irgendwo deklarieren???
+						write(q, returnval); 
 	:: else -> break;
 	fi;
 	
@@ -123,13 +171,114 @@ entry:
 	write(bottom, v13);	
 }	
 	
-inline take()
+inline take(returnvalue)
 {
+	atomic{
+		alloca(I32, retval);
+		alloca(I32, b);
+		alloca(Ptr, q);
+		alloca(I32, t);
+		alloca(I32, task);
+	}
+	read(bottom, v0);
+	v0 = v0 - 1;
+	write(b, v0);
+	read(wsq, v1);
+	write(q, v1);
+	read(b, v2);
+	write(bottom, v2);
+	read(top, v3);
+	write(t, v3);
+	read(b, v4);
+	read(t, v5);
+	if
+	:: (v4 < v5) -> goto ifThen;
+	:: else -> goto ifEnd;
+	fi;
 	
+ifThen:
+	read(t, v6);
+	write(bottom, v6);
+	write(retval, 42);
+	goto returnState;
 	
+ifEnd:
+	read(b, v7);
+	read(q, v8);
+	getelementptr(struct_item_t, v8, 0, size);
+	read(size, v9);
+	rem = v7 % v9;
+	read(q, v10);
+	getelementptr(struct_item_t, v10, 1, ap);
+	read(ap, v11);
+	getelementptr(I32, v11, rem, arrayindex);
+	read(arrayindex, v12);
+	write(task, v12);
+	read(b, v13);
+	read(t, v14);
+	if
+	::(v13 > v14) -> 	read(task, v15);
+						write(retval, v15);
+						goto returnState;
+	:: else -> goto ifEnd3;
+	fi;
+	
+ifEnd3:
+	read(t, v16);
+	read(t, v17);
+	v17 = v17 + 1;
+	Cas(top, v16, v17, v18);
+	if
+	:: (v16 == v18) -> goto ifEnd5;
+	:: else -> write(retval, 42); goto returnState;
+	fi;
+
+ifEnd5:
+	read(t, v20);
+	v20 = v20 + 1;
+	write(bottom, v20);
+	read(task, v21);
+	write(retval, v21);
+	goto returnState;
+	
+returnState:
+	read(retval, v22);
+	returnvalue = v22; 
 }
 
+inline steal(){
 
-init {
+entry:
+	atomic{
+		alloca(I32, retval);
+		alloca(I32, t);
+		alloca(I32, b);
+		alloca(Ptr, q);
+		alloca(I32, task);
+	}
+	read(top, v0);
+	write(t, v0);
+	read(bottom, v1);
+	write(b,v1);
+	read(wsq, v2);
+	
+		
+
+proctype process1 (chan ch){
+	push(5); 
 }
+
+proctype process2 (chan ch){
+	push(7); 
+}
+init{		
+	atomic{
+		run process1(channelT1);
+		run bufferProcess(channelT1);
+		run process2(channelT2);
+		run bufferProcess(channelT2	);
+		//run process3(channelT3);
+		//run bufferProcess(channelT3	);
+	}
+}	
 
