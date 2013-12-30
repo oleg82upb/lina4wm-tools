@@ -8,8 +8,8 @@ workstealing queue implementation
 	trying to specify the LLVM-compiled workstealingqueue implementation (wsq.s)
 */
 
-#define BUFF_SIZE 5 	//size of Buffer
-#define MEM_SIZE 15	//size of memory
+#define BUFF_SIZE 10 	//size of Buffer
+#define MEM_SIZE 58	//size of memory
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 #include "x86_tso_buffer.pml"
@@ -23,7 +23,8 @@ short memUse = 1; 	//shows to the next free cell in memory
 
 
 //global variable declaration
-short wsq_ptr, top, bottom;
+short wsq_ptr = NULL
+short top, bottom;
 
 chan channelT1 = [0] of {mtype, short, short, short};
 chan channelT2 = [0] of {mtype, short, short, short};
@@ -51,23 +52,27 @@ inline alloca(type, targetRegister)
 
 inline expand(returnval){
 	
-	short exp_newsize, exp_newitems, exp_newq, j, exp_size, exp_size3, exp_size6, exp_ap, exp_ap2, exp_arrayindex, exp_arrayindex2;
+	short exp_newsize, exp_newitems, exp_newitems_ptr, exp_newq, exp_newq_ptr, j, exp_size, exp_size3, exp_size6, exp_ap, exp_ap2, exp_arrayindex, exp_arrayindex2;
 	short exp_v0, exp_v1, exp_v2, exp_v5, exp_v6, exp_v7, exp_v8, exp_v9, exp_v10, exp_v11, exp_v12, exp_v13, exp_v14, exp_v15, exp_v16, exp_v17, exp_v18, exp_v19, exp_v20, exp_v21, exp_v22, exp_v23;
 
 entry:	
 	atomic{
 		alloca(I32, exp_newsize);
-		//alloca(Ptr, exp_newitems);
-		alloca(item_t, exp_newq);
-		
+		alloca(Ptr, exp_newitems_ptr);
+		alloca(Ptr, exp_newq_ptr);
 		alloca(I32, j);
 	}
-	getelementptr(item_t, wsq_ptr, 0, exp_size);
+	read(wsq_ptr, exp_v0);
+	getelementptr(item_t, exp_v0, 0, exp_size);
 	read(exp_size, exp_v1);
-	write(exp_newsize, 2*exp_v1);	//isn't it local aswell? so just alloca (exp_v1*2, newitems);
-	alloca(exp_newsize, exp_newitems); //creats an array of size newsize
-	read(top,exp_v5);
-	write(j,exp_v5);
+	write(exp_newsize, 2*exp_v1);
+	read(exp_newsize, exp_v2);
+	alloca(exp_v2, exp_newitems); //creats an array of size newsize
+	memory[exp_newitems_ptr] = exp_newitems; //????
+	alloca(item_t, exp_newq);
+	memory[exp_newq_ptr] = exp_newq;
+	read(top, exp_v5);
+	write(j, exp_v5);
 	
 forCond:
 	read(j, exp_v6);
@@ -80,25 +85,20 @@ forCond:
 
 forBody:
 	read(j, exp_v8);
-	getelementptr(item_t, wsq_ptr, 0, exp_size3);
+	read(wsq_ptr, exp_v9);
+	getelementptr(item_t, exp_v9, 0, exp_size3);
 	read(exp_size3, exp_v10);
-	getelementptr(item_t, wsq_ptr, 1, exp_ap);
+	read(wsq_ptr, exp_v11);
+	getelementptr(item_t, exp_v11, 1, exp_ap);
 	read(exp_ap, exp_v12);
 	getelementptr(exp_v10, exp_v12, exp_v8  % exp_v10, exp_arrayindex); // exp_v10 is the size of the "old" wsq_ptr. so loop through this array which has no more than exp_v10 entries.
 	read(exp_arrayindex, exp_v13); //exp_13 holds the value which stands in the array at the certain place
 	read(j, exp_v14);
 	read(exp_newsize, exp_v15);
-	read(exp_newitems, exp_v16);
-	getelementptr(exp_newsize, exp_v16, exp_v14 % exp_v15, exp_arrayindex2);
+	read(exp_newitems_ptr, exp_v16);
+	getelementptr(exp_v15, exp_v16, exp_v14 % exp_v15, exp_arrayindex2);
 	write(exp_arrayindex2, exp_v13); //should write the contain of the old array in the newone
-//--------------------------	
-/*alternative? Pointerproblem!
-	forInc:	
-	j = j+1;
-	goto forCond;
-*/
-//--------------------------
-	
+
 forInc:
 	read(j, exp_v17);
 	exp_v17 = exp_v17 + 1;
@@ -107,22 +107,23 @@ forInc:
 
 forEnd:
 	read(exp_newsize, exp_v18);
-	getelementptr(item_t, exp_newq, 0, exp_size6);
+	read(exp_newq_ptr, exp_v19);
+	getelementptr(item_t, exp_v19, 0, exp_size6);
 	write(exp_size6, exp_v18);
-	//read(exp_newitems, exp_v20);
-	getelementptr(item_t, exp_newq, 1, exp_ap2);
-	write(exp_ap2, exp_newitems);  //exp_ap2 = exp_newitems;
-	read(exp_newq, exp_v22);
-	write(wsq_ptr, exp_v22);
-	//wsq_ptr = exp_newq;
-	read(exp_newq, exp_v23);
+	read(exp_newitems_ptr, exp_v20);
+	read(exp_newq_ptr, exp_v21); //could be left out and reuse exp_v19 because it's local
+	getelementptr(item_t, exp_v21, 1, exp_ap2);
+	write(exp_ap2, exp_v20);  //exp_ap2 = exp_newitems;
+	read(exp_newq_ptr, exp_v22);
+	write(wsq_ptr, exp_v22); //wsq_ptr = exp_newq_ptr;
+	read(exp_newq_ptr, exp_v23);
 	returnval = exp_v23;		
 }	
 
 
 inline push(task)
 {
-	short task_addr, b, t, q, size, size2, sub, sub1, returnval, returnvalue, ap, arrayindex;
+	short task_addr, b, t, q, size, size2, sub, sub1, returnval, ap, arrayindex;
 	short v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13;
 entry:
 	atomic{
@@ -261,6 +262,7 @@ entry:
 
 proctype process1 (chan ch){
 	push(333); 
+	push(444);
 }
 /*
 proctype process2 (chan ch){
@@ -269,19 +271,17 @@ proctype process2 (chan ch){
 */
 init{
 	short wsq;
-	atomic{
 		alloca(Ptr, wsq_ptr);
-		memory[wsq_ptr] = memUse;
 		alloca(item_t, wsq);
+		memory[wsq_ptr] = wsq;
 		alloca(I32, top);
 		memory[top]=0;
 		alloca(I32, bottom);
 		memory[bottom]=0;
-		memory[wsq] = 2; //size = 1
+		memory[wsq] = 1; //size = 1
 		memory[wsq+1] = 6; //ap Pointer points to memorypart of size "memory[wsq]"(= size of wsq) 
-		memory[6]=0;
-		memUse = memUse + memory[wsq] + 1;
-		}
+		//memory[6]=0; not neccessary because memory is initialized
+		memUse = memUse + memory[wsq];
 	atomic{
 		run process1(channelT1);
 		run bufferProcess(channelT1);
