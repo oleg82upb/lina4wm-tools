@@ -9,7 +9,7 @@ workstealing queue implementation
 */
 
 #define BUFF_SIZE 10 	//size of Buffer
-#define MEM_SIZE 58	//size of memory
+#define MEM_SIZE 90	//size of memory
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 #include "x86_tso_buffer.pml"
@@ -18,7 +18,8 @@ workstealing queue implementation
 #define I32  0 		// = {0};
 #define Ptr  0
 #define item_t 1	// stands for typedef item_t{short size; short* ap};
-
+#define EMPTY 42
+#define ABORT 1337
 short memUse = 1; 	//shows to the next free cell in memory
 
 
@@ -51,6 +52,8 @@ inline alloca(type, targetRegister)
 //-------------------------------------------------------------------------------------------------
 
 inline expand(returnval){
+	
+	printf("EXPAND()\n");
 	
 	short exp_newsize, exp_newitems, exp_newitems_ptr, exp_newq, exp_newq_ptr, j, exp_size, exp_size3, exp_size6, exp_ap, exp_ap2, exp_arrayindex, exp_arrayindex2;
 	short exp_v0, exp_v1, exp_v2, exp_v5, exp_v6, exp_v7, exp_v8, exp_v9, exp_v10, exp_v11, exp_v12, exp_v13, exp_v14, exp_v15, exp_v16, exp_v17, exp_v18, exp_v19, exp_v20, exp_v21, exp_v22, exp_v23;
@@ -117,20 +120,22 @@ forEnd:
 	read(exp_newq_ptr, exp_v22);
 	write(wsq_ptr, exp_v22); //wsq_ptr = exp_newq_ptr;
 	read(exp_newq_ptr, exp_v23);
-	returnval = exp_v23;		
+	returnval = exp_v23;	
+	printf("Queue enlarged \n");	
 }	
 
 
 inline push(task)
 {
-	short task_addr, b, t, q, size, size2, sub, sub1, returnval, ap, arrayindex;
+	printf("PUSH %d\n",task);
+	short task_addr, b, t, q_ptr, size, size2, sub, sub1, returnval, ap, arrayindex;
 	short v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13;
 entry:
 	atomic{
 		alloca(I32, task_addr);
 		alloca(I32, b);
 		alloca(I32, t);
-		alloca(Ptr, q);
+		alloca(Ptr, q_ptr);
 	}
 	write(task_addr,task);
 	read(bottom, v0);
@@ -138,26 +143,26 @@ entry:
 	read(top, v1);
 	write(t, v1);
 	read(wsq_ptr, v2);
-	write(q, v2);
+	write(q_ptr, v2);
 	read(b, v3);
 	read(t, v4);
 	sub = v3 - v4;
-	read(q, v5);
+	read(q_ptr, v5);
 	getelementptr(item_t, v5, 0, size);
 	read(size, v6);
 	sub1 = v6 - 1;
 	if
 	::(v3-v4 >= v6-1) -> 	expand(returnval);//  return irgendwo deklarieren???
-						write(q, returnval); 
+							write(q_ptr, returnval); 
 	:: else -> skip;
 	fi;
 	
 	read(task_addr, v7);
 	read(b, v8);
-	read(q, v9);
+	read(q_ptr, v9);
 	getelementptr(item_t, v9, 0, size2);
 	read(size2, v10);
-	read(q, v11);
+	read(q_ptr, v11);
 	getelementptr(item_t, v11, 1, ap);
 	read(ap, v12); //ap is pointer
 	getelementptr(v10, v12, v8 % v10, arrayindex);
@@ -165,14 +170,18 @@ entry:
 	read(b, v13);
 	v13 = v13 +1;
 	write(bottom, v13);	
+	printf("Finished PUSHing %d\n",task);
 }	
 	
 inline take(returnvalue)
 {
+	printf("ENTERING take()\n");
+	short retval, b, t, q_ptr, task, size, ap, arrayindex;
+	short v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22;
 	atomic{
 		alloca(I32, retval);
 		alloca(I32, b);
-		alloca(item_t, q);
+		alloca(Ptr, q_ptr);
 		alloca(I32, t);
 		alloca(I32, task);
 	}
@@ -180,7 +189,7 @@ inline take(returnvalue)
 	v0 = v0 - 1;
 	write(b, v0);
 	read(wsq_ptr, v1);
-	write(q, v1);
+	write(q_ptr, v1);
 	read(b, v2);
 	write(bottom, v2);
 	read(top, v3);
@@ -188,26 +197,22 @@ inline take(returnvalue)
 	read(b, v4);
 	read(t, v5);
 	if
-	:: (v4 < v5) -> goto ifThen;
+	:: (v4 < v5) -> 	read(t, v6);
+						write(bottom, v6);
+						write(retval, EMPTY);
+						goto returnLabel;
 	:: else -> goto ifEnd;
 	fi;
 	
-ifThen:
-	read(t, v6);
-	write(bottom, v6);
-	write(retval, 42);
-	goto returnState;
-	
 ifEnd:
 	read(b, v7);
-	read(q, v8);
+	read(q_ptr, v8);
 	getelementptr(item_t, v8, 0, size);
 	read(size, v9);
-	rem = v7 % v9;
-	read(q, v10);
+	read(q_ptr, v10);
 	getelementptr(item_t, v10, 1, ap);
 	read(ap, v11);
-	getelementptr(I32, v11, rem, arrayindex);
+	getelementptr(v9, v11, v7 % v9, arrayindex);
 	read(arrayindex, v12);
 	write(task, v12);
 	read(b, v13);
@@ -215,7 +220,7 @@ ifEnd:
 	if
 	::(v13 > v14) -> 	read(task, v15);
 						write(retval, v15);
-						goto returnState;
+						goto returnLabel;
 	:: else -> goto ifEnd3;
 	fi;
 	
@@ -223,10 +228,10 @@ ifEnd3:
 	read(t, v16);
 	read(t, v17);
 	v17 = v17 + 1;
-	Cas(top, v16, v17, v18);
+	cas(top, v16, v17, v18);
 	if
 	:: (v16 == v18) -> goto ifEnd5;
-	:: else -> write(retval, 42); goto returnState;
+	:: else -> write(retval, EMPTY); goto returnLabel;
 	fi;
 
 ifEnd5:
@@ -235,21 +240,25 @@ ifEnd5:
 	write(bottom, v20);
 	read(task, v21);
 	write(retval, v21);
-	goto returnState;
+	goto returnLabel;
 	
-returnState:
+returnLabel:
 	read(retval, v22);
 	returnvalue = v22; 
+	printf("LEAVING take()\n");
 }
 
-inline steal(){
+inline steal(returnvalue){
+	printf("ENTERING steal()\n");
+	short retval, t, b, q_ptr, task, size, ap, arrayindex;
+	short v0, v1, v2, v3, v4, v5, v6, v7,v8, v9, v10, v11, v12, v13, v14, v15, v16;
 
 entry:
 	atomic{
 		alloca(I32, retval);
 		alloca(I32, t);
 		alloca(I32, b);
-		alloca(item_t, q);
+		alloca(Ptr, q_ptr);
 		alloca(I32, task);
 	}
 	read(top, v0);
@@ -257,18 +266,61 @@ entry:
 	read(bottom, v1);
 	write(b,v1);
 	read(wsq_ptr, v2);
+	write(q_ptr, v2);
+	read(t,v3);
+	read(b, v4);
+	if
+	::(v3 >= v4) -> write(retval,EMPTY); goto returnLabel;
+	::else -> goto ifEnd;
+	fi;
 	
-}		
+ifEnd:
+	read(t,v5);
+	read(q_ptr, v6);
+	getelementptr(item_t, v6, 0, size);
+	read(size, v7);
+	read(q_ptr, v8);
+	getelementptr(item_t, v8, 1, ap);
+	read(ap,v9);
+	getelementptr(v7, v9, v5 % v7, arrayindex);
+	read(arrayindex, v10);
+	write(task, v10);
+	read(t, v11);
+	v12 = v11+1;
+	cas(top, v11, v12, v13);
+	if
+	::(v13 == true) -> 	read(task, v15); 
+						write(retval, v15);
+	::else -> write(retval, ABORT);
+			 goto returnLabel;
+	fi;
+	
+returnLabel:
+	read(retval, v16);
+	returnvalue = v16;
+	printf("LEAVING steal()\n");
+
+}
+	
+	
 
 proctype process1 (chan ch){
+	short svalue;
 	push(333); 
 	push(444);
+	//push(666);
+	steal(svalue);
+	printf("svalue: %d\n", svalue);
 }
-/*
-proctype process2 (chan ch){
-	push(7); 
+
+ proctype process2 (chan ch){
+ 	short tvalue;
+	push(555); 
+	push(777);
+	take(tvalue);
+	printf("tvalue: %d\n", tvalue);
 }
-*/
+
 init{
 	short wsq;
 		alloca(Ptr, wsq_ptr);
@@ -285,11 +337,9 @@ init{
 	atomic{
 		run process1(channelT1);
 		run bufferProcess(channelT1);
-	//	run process2(channelT2);
-		//run bufferProcess(channelT2	);
+		run process2(channelT2);
+		run bufferProcess(channelT2);
 		//run process3(channelT3);
 		//run bufferProcess(channelT3);
-	}
-	
+	}	
 }	
-
