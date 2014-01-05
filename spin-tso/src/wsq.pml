@@ -8,12 +8,79 @@ workstealing queue implementation
 	trying to specify the LLVM-compiled workstealingqueue implementation (wsq.s)
 */
 
-#define BUFF_SIZE 10 	//size of Buffer
-#define MEM_SIZE 90	//size of memory
-
+#define BUFF_SIZE 18	//size of Buffer
+#define MEM_SIZE 60	//size of memory
+#define MAX_QUEUE_SIZE 17
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 #include "x86_tso_buffer.pml"
 //-----------------------------------------------------------------------------------------------------------------------------------------------
+/* abstract Queue implementation as array*/
+byte asSize = 1;
+short asQueue[MAX_QUEUE_SIZE];   //Promlem promela intends const.
+hidden byte asTop = 0;
+hidden byte asBottom = 0;
+
+
+inline asExpand(){
+	assert(asSize*2 <= MAX_QUEUE_SIZE);
+	asSize = 2*asSize;
+}
+
+
+inline asPush(asValue)
+{
+	
+	atomic{
+			if
+			::(asBottom - asTop >= asSize) -> asExpand();
+			:: else 
+					-> assert(asBottom < asSize); 
+					asQueue[asBottom] = asValue;			//set new value in the queue
+					asBottom = (asBottom+1);					//move tail
+					printf("-----------------   value written --------------\n");
+			fi;
+		}
+}
+
+
+inline asEmpty()
+{
+	assert (asTop == asBottom);
+}
+
+inline asPopBottom(task)
+{
+	atomic
+	{
+		asBottom = (asBottom-1);					//move bottom to the next in line
+		if
+		::(asQueue[asBottom] == task) -> asQueue[asBottom] = 0;						//remove element from queue
+										printf("---- TAKE successful ----\n");  	//asValue must be the element top is pointing to
+		:: (task == 42) -> printf("---- EMPTY: nothing to TAKE ----\n"); 
+		:: else -> printf("MISTAKE!!!\n");
+		fi;
+		
+	}
+}
+
+//task the value we expect to be at the place top is pointing to
+inline asPopTop(task)
+{
+	atomic
+	{	
+		if
+		:: (asQueue[asTop] == task) ->	asQueue[asTop] = 0;					//remove element from queue	
+										asTop = (asTop+1);					//move top to the next in line
+										printf("---- steal successful ----\n"); 	//asValue must be the element top is pointing to
+		:: task == 42 -> printf("---- EMPTY: nothing to steal ----\n");
+		:: task == 1337 -> printf("---- ABORT: cas failed ----\n");
+		::else -> printf("MISSTEAl!!!\n");
+		fi;
+	}
+}
+
+
+//--------------------------------------------------------------------------------
 //Types for LLVM, actually their length in size of pointers and values
 #define I32  0 		// = {0};
 #define Ptr  0
@@ -120,7 +187,8 @@ forEnd:
 	read(exp_newq_ptr, exp_v22);
 	write(wsq_ptr, exp_v22); //wsq_ptr = exp_newq_ptr;
 	read(exp_newq_ptr, exp_v23);
-	returnval = exp_v23;	
+	returnval = exp_v23;
+	asExpand();	
 	printf("Queue enlarged \n");	
 }	
 
@@ -128,7 +196,7 @@ forEnd:
 inline push(task)
 {
 	printf("PUSH %d\n",task);
-	short task_addr, b, t, q_ptr, size, size2, sub, sub1, returnval, ap, arrayindex;
+	short task_addr, b, t, q_ptr, size, size2, returnval, ap, arrayindex;
 	short v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13;
 entry:
 	atomic{
@@ -146,13 +214,11 @@ entry:
 	write(q_ptr, v2);
 	read(b, v3);
 	read(t, v4);
-	sub = v3 - v4;
 	read(q_ptr, v5);
 	getelementptr(item_t, v5, 0, size);
 	read(size, v6);
-	sub1 = v6 - 1;
 	if
-	::(v3-v4 >= v6-1) -> 	expand(returnval);//  return irgendwo deklarieren???
+	::(v3-v4 >= v6-1) -> 	expand(returnval);
 							write(q_ptr, returnval); 
 	:: else -> skip;
 	fi;
@@ -170,6 +236,7 @@ entry:
 	read(b, v13);
 	v13 = v13 +1;
 	write(bottom, v13);	
+	asPush(task);
 	printf("Finished PUSHing %d\n",task);
 }	
 	
@@ -226,11 +293,10 @@ ifEnd:
 	
 ifEnd3:
 	read(t, v16);
-	read(t, v17);
-	v17 = v17 + 1;
+	v17 = v16 + 1;
 	cas(top, v16, v17, v18);
 	if
-	:: (v16 == v18) -> goto ifEnd5;
+	:: (v18 == true) -> goto ifEnd5;
 	:: else -> write(retval, EMPTY); goto returnLabel;
 	fi;
 
@@ -245,6 +311,7 @@ ifEnd5:
 returnLabel:
 	read(retval, v22);
 	returnvalue = v22; 
+	asPopBottom(v22);
 	printf("LEAVING take()\n");
 }
 
@@ -292,12 +359,13 @@ ifEnd:
 	::(v13 == true) -> 	read(task, v15); 
 						write(retval, v15);
 	::else -> write(retval, ABORT);
-			 goto returnLabel;
+			  goto returnLabel;
 	fi;
 	
 returnLabel:
 	read(retval, v16);
 	returnvalue = v16;
+	asPopTop(v16);
 	printf("LEAVING steal()\n");
 
 }
@@ -307,16 +375,20 @@ returnLabel:
 proctype process1 (chan ch){
 	short svalue;
 	push(333); 
+	mfence();
 	push(444);
 	//push(666);
+	mfence();
 	steal(svalue);
 	printf("svalue: %d\n", svalue);
+	
 }
 
  proctype process2 (chan ch){
  	short tvalue;
 	push(555); 
-	push(777);
+	mfence();
+	//push(777);
 	take(tvalue);
 	printf("tvalue: %d\n", tvalue);
 }
