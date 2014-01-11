@@ -7,14 +7,23 @@ workstealing queue implementation
 /*
 	trying to specify the LLVM-compiled workstealingqueue implementation (wsq.s)
 */
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//global variable declaration
+short wsq_ptr;
+short top, bottom;
+#define EMPTY 42
+#define ABORT 1337
+//-----------------------------------------------------------------------------------------------------------------------------------------------
 
-#define BUFF_SIZE 18	//size of Buffer
-#define MEM_SIZE 60	//size of memory
+#define BUFF_SIZE 15	//size of Buffer
+#define MEM_SIZE 88	//size of memory
 #define MAX_QUEUE_SIZE 17
 //-----------------------------------------------------------------------------------------------------------------------------------------------
-#include "x86_tso_buffer.pml"
-//-----------------------------------------------------------------------------------------------------------------------------------------------
 /* abstract Queue implementation as array*/
+
+
+
+
 byte asSize = 1;
 short asQueue[MAX_QUEUE_SIZE];   //Promlem promela intends const.
 hidden byte asTop = 0;
@@ -33,21 +42,31 @@ inline asPush(asValue)
 	atomic{
 			if
 			::(asBottom - asTop >= asSize) -> asExpand();
-			:: else 
-					-> assert(asBottom < asSize); 
-					asQueue[asBottom] = asValue;			//set new value in the queue
-					asBottom = (asBottom+1);					//move tail
-					printf("-----------------   value written --------------\n");
-			fi;
+			::else -> skip;
+			fi -> 
+			assert(asBottom < asSize); 
+			asQueue[asBottom] = memory[memory[memory[wsq_ptr]+1] + asValue-1];			//set new value in the queue, asValue = newlocalbottom; so look at place where ap = memory[wsq_ptr]+1 is pointing to
+			asBottom = (asBottom+1);				//move tail
+			printf("-----------------   value written --------------\n");
 		}
 }
 
 
-inline asEmpty()
+
+inline casLPtake(top, t, new_t, success, task)
 {
-	assert (asTop == asBottom);
+	// 2 steps for the executing process, but atomic on memory
+	
+	ch ! iCas, top, t, new_t;
+	atomic{
+	ch ? iCas, top, success, _;
+	if 	:: success -> asPopBottom(task); printf("popBottom CAS success\n")
+		:: else -> printf("---- EMPTY: nothing to TAKE ----\n"); skip;  //cas may fail
+	fi; 
+	}
 }
 
+//abstract TAKE()
 inline asPopBottom(task)
 {
 	atomic
@@ -56,14 +75,27 @@ inline asPopBottom(task)
 		if
 		::(asQueue[asBottom] == task) -> asQueue[asBottom] = 0;						//remove element from queue
 										printf("---- TAKE successful ----\n");  	//asValue must be the element top is pointing to
-		:: (task == 42) -> printf("---- EMPTY: nothing to TAKE ----\n"); 
+		:: (task == EMPTY) -> printf("---- EMPTY: nothing to TAKE ----\n"); 
 		:: else -> printf("MISTAKE!!!\n");
 		fi;
 		
 	}
 }
 
-//task the value we expect to be at the place top is pointing to
+inline casLPsteal(top, t, new_t, success, task){
+	// 2 steps for the executing process, but atomic on memory
+	
+	ch ! iCas, top, t, new_t;
+	atomic{
+		ch ? iCas, top, success, _;
+		if 	:: success -> asPopTop(task); printf("popTop CAS success\n")
+			:: else -> printf("---- ABORT: nothing to steal ----\n"); skip;  //cas may fail
+		fi; 
+	}
+}
+
+//abstract steal()
+//task is the value we expect to be at the place top is pointing to
 inline asPopTop(task)
 {
 	atomic
@@ -73,30 +105,26 @@ inline asPopTop(task)
 										asTop = (asTop+1);					//move top to the next in line
 										printf("---- steal successful ----\n"); 	//asValue must be the element top is pointing to
 		:: task == 42 -> printf("---- EMPTY: nothing to steal ----\n");
-		:: task == 1337 -> printf("---- ABORT: cas failed ----\n");
-		::else -> printf("MISSTEAl!!!\n");
+		:: else -> printf("MISSTEAL!!!\n");
 		fi;
 	}
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+#include "tso_buffer_wsq.pml"
+//-----------------------------------------------------------------------------------------------------------------------------------------------
 
-//--------------------------------------------------------------------------------
 //Types for LLVM, actually their length in size of pointers and values
 #define I32  0 		// = {0};
 #define Ptr  0
 #define item_t 1	// stands for typedef item_t{short size; short* ap};
-#define EMPTY 42
-#define ABORT 1337
+
 short memUse = 1; 	//shows to the next free cell in memory
 
 
-//global variable declaration
-short wsq_ptr = NULL
-short top, bottom;
-
 chan channelT1 = [0] of {mtype, short, short, short};
 chan channelT2 = [0] of {mtype, short, short, short};
-
+//chan channelT3 = [0] of {mtype, short, short, short};
 
 inline getelementptr(type, instance, offset, targetRegister)
 {
@@ -186,9 +214,7 @@ forEnd:
 	write(exp_ap2, exp_v20);  //exp_ap2 = exp_newitems;
 	read(exp_newq_ptr, exp_v22);
 	write(wsq_ptr, exp_v22); //wsq_ptr = exp_newq_ptr;
-	read(exp_newq_ptr, exp_v23);
-	returnval = exp_v23;
-	asExpand();	
+	returnval = exp_v22;
 	printf("Queue enlarged \n");	
 }	
 
@@ -235,16 +261,15 @@ entry:
 	write(arrayindex, v7);
 	read(b, v13);
 	v13 = v13 +1;
-	write(bottom, v13);	
-	asPush(task);
+	writeLP(bottom, v13, 1);						//LP
 	printf("Finished PUSHing %d\n",task);
 }	
 	
 inline take(returnvalue)
 {
 	printf("ENTERING take()\n");
-	short retval, b, t, q_ptr, task, size, ap, arrayindex;
-	short v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22;
+	short retval, b, t, q_ptr, task, size, ap, arrayindex, success;
+	short v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v19, v20, v21, v22;
 	atomic{
 		alloca(I32, retval);
 		alloca(I32, b);
@@ -266,7 +291,7 @@ inline take(returnvalue)
 	if
 	:: (v4 < v5) -> 	read(t, v6);
 						write(bottom, v6);
-						write(retval, EMPTY);
+						writeLP(retval, EMPTY, 2);
 						goto returnLabel;
 	:: else -> goto ifEnd;
 	fi;
@@ -286,7 +311,7 @@ ifEnd:
 	read(t, v14);
 	if
 	::(v13 > v14) -> 	read(task, v15);
-						write(retval, v15);
+						writeLP(retval, v15, 2);				//LP			//possible reduction: write(retval = v12)???
 						goto returnLabel;
 	:: else -> goto ifEnd3;
 	fi;
@@ -294,9 +319,9 @@ ifEnd:
 ifEnd3:
 	read(t, v16);
 	v17 = v16 + 1;
-	cas(top, v16, v17, v18);
+	casLPtake(top, v16, v17, success, v12);		//LP				//v12 = content of task(because variable task ist allocated)
 	if
-	:: (v18 == true) -> goto ifEnd5;
+	:: (success) -> goto ifEnd5;
 	:: else -> write(retval, EMPTY); goto returnLabel;
 	fi;
 
@@ -311,14 +336,13 @@ ifEnd5:
 returnLabel:
 	read(retval, v22);
 	returnvalue = v22; 
-	asPopBottom(v22);
 	printf("LEAVING take()\n");
 }
 
 inline steal(returnvalue){
 	printf("ENTERING steal()\n");
-	short retval, t, b, q_ptr, task, size, ap, arrayindex;
-	short v0, v1, v2, v3, v4, v5, v6, v7,v8, v9, v10, v11, v12, v13, v14, v15, v16;
+	short retval, t, b, q_ptr, task, size, ap, arrayindex, success;
+	short v0, v1, v2, v3, v4, v5, v6, v7,v8, v9, v10, v11, v12, v14, v15, v16;
 
 entry:
 	atomic{
@@ -337,7 +361,7 @@ entry:
 	read(t,v3);
 	read(b, v4);
 	if
-	::(v3 >= v4) -> write(retval,EMPTY); goto returnLabel;
+	::(v3 >= v4) -> writeLP(retval, EMPTY, 3); goto returnLabel;
 	::else -> goto ifEnd;
 	fi;
 	
@@ -354,10 +378,10 @@ ifEnd:
 	write(task, v10);
 	read(t, v11);
 	v12 = v11+1;
-	cas(top, v11, v12, v13);
+	casLPsteal(top, v11, v12, success, v10);
 	if
-	::(v13 == true) -> 	read(task, v15); 
-						write(retval, v15);
+	::(success == true) -> 	read(task, v15); 
+							write(retval, v15);
 	::else -> write(retval, ABORT);
 			  goto returnLabel;
 	fi;
@@ -365,7 +389,6 @@ ifEnd:
 returnLabel:
 	read(retval, v16);
 	returnvalue = v16;
-	asPopTop(v16);
 	printf("LEAVING steal()\n");
 
 }
@@ -373,25 +396,28 @@ returnLabel:
 	
 
 proctype process1 (chan ch){
-	short svalue;
-	push(333); 
-	mfence();
-	push(444);
-	//push(666);
-	mfence();
-	steal(svalue);
-	printf("svalue: %d\n", svalue);
-	
-}
-
- proctype process2 (chan ch){
- 	short tvalue;
+	short tvalue;
 	push(555); 
-	mfence();
-	//push(777);
+	push(777);
 	take(tvalue);
+	push(999);
+	
 	printf("tvalue: %d\n", tvalue);
 }
+
+ proctype process2 (chan ch) {
+ 	short svalue, s2, s3;
+	steal(svalue);printf("svalue: %d\n", svalue);
+	steal(s2);printf("svalue: %d\n", s2);
+	
+}
+/* 
+proctype process3 (chan ch){
+	short stealval;
+	steal(stealval);
+	printf("stealval: %d\n", stealval);
+}
+*/
 
 init{
 	short wsq;
@@ -407,7 +433,7 @@ init{
 		//memory[6]=0; not neccessary because memory is initialized
 		memUse = memUse + memory[wsq];
 	atomic{
-		run process1(channelT1);
+		run process1(channelT1); 
 		run bufferProcess(channelT1);
 		run process2(channelT2);
 		run bufferProcess(channelT2);
