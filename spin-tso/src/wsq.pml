@@ -24,27 +24,33 @@ short top, bottom;
 
 
 
-byte asSize = 1;
+//byte asSize = 1;
 short asQueue[MAX_QUEUE_SIZE];   //Promlem promela intends const.
 hidden byte asTop = 0;
 hidden byte asBottom = 0;
 
 
+/*
 inline asExpand(){
 	assert(asSize*2 <= MAX_QUEUE_SIZE);
 	asSize = 2*asSize;
 }
+*/
+
+inline asEmpty(){
+	assert (asTop == asBottom);
+	assert (asQueue[asTop] == 0);
+}
 
 
-inline asPush(asValue)
-{
-	
+inline asPush(asValue){
 	atomic{
-			if
+			/*if
 			::(asBottom - asTop >= asSize) -> asExpand();
 			::else -> skip;
 			fi -> 
-			assert(asBottom < asSize); 
+			*/
+			assert(asBottom < MAX_QUEUE_SIZE); 
 			asQueue[asBottom] = memory[memory[memory[wsq_ptr]+1] + asValue-1];			//set new value in the queue, asValue = newlocalbottom; so look at place where ap = memory[wsq_ptr]+1 is pointing to
 			asBottom = (asBottom+1);				//move tail
 			printf("-----------------   value written --------------\n");
@@ -52,33 +58,49 @@ inline asPush(asValue)
 }
 
 
+inline readLPTake(t, v5 ,v4){
+	atomic{ 
+		read(t, v5);
+		if 	:: v4 < v5 -> asEmpty(); printf("---- EMPTY: nothing to TAKE ----\n");
+			:: else -> skip;
+		fi;
+	}
+}
 
-inline casLPtake(top, t, new_t, success, task)
-{
+inline casLPtake(top, t, new_t, success, task){
 	// 2 steps for the executing process, but atomic on memory
 	
 	ch ! iCas, top, t, new_t;
 	atomic{
 	ch ? iCas, top, success, _;
 	if 	:: success -> asPopBottom(task); printf("popBottom CAS success\n")
-		:: else -> printf("---- EMPTY: nothing to TAKE ----\n"); skip;  //cas may fail
+		:: else -> asEmpty(); printf("---- EMPTY: nothing to TAKE ----\n"); skip;  //cas may fail
 	fi; 
 	}
 }
 
+
 //abstract TAKE()
-inline asPopBottom(task)
-{
-	atomic
-	{
+inline asPopBottom(task){
+	atomic{
 		asBottom = (asBottom-1);					//move bottom to the next in line
+		assert((asQueue[asBottom] == task)|| (task == EMPTY));
 		if
 		::(asQueue[asBottom] == task) -> asQueue[asBottom] = 0;						//remove element from queue
 										printf("---- TAKE successful ----\n");  	//asValue must be the element top is pointing to
-		:: (task == EMPTY) -> printf("---- EMPTY: nothing to TAKE ----\n"); 
+		:: (task == EMPTY) -> asEmpty(); printf("---- EMPTY: nothing to TAKE ----\n"); 
 		:: else -> printf("MISTAKE!!!\n");
-		fi;
-		
+		fi;	
+	}
+}
+
+
+inline readLPSteal(b, v4, v3){
+	atomic{ 
+	read(b, v4);
+	if 	:: v3 >= v4 -> asEmpty(); printf("---- EMPTY: nothing to steal ----\n");
+		:: else -> skip;
+	fi;
 	}
 }
 
@@ -96,15 +118,13 @@ inline casLPsteal(top, t, new_t, success, task){
 
 //abstract steal()
 //task is the value we expect to be at the place top is pointing to
-inline asPopTop(task)
-{
-	atomic
-	{	
+inline asPopTop(task){
+	atomic{	
+		assert(asQueue[asTop] == task);
 		if
 		:: (asQueue[asTop] == task) ->	asQueue[asTop] = 0;					//remove element from queue	
 										asTop = (asTop+1);					//move top to the next in line
 										printf("---- steal successful ----\n"); 	//asValue must be the element top is pointing to
-		:: task == 42 -> printf("---- EMPTY: nothing to steal ----\n");
 		:: else -> printf("MISSTEAL!!!\n");
 		fi;
 	}
@@ -112,6 +132,7 @@ inline asPopTop(task)
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 #include "tso_buffer_wsq.pml"
+//#include "sc-model.pml"
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 
 //Types for LLVM, actually their length in size of pointers and values
@@ -165,7 +186,7 @@ entry:
 	read(exp_size, exp_v1);
 	write(exp_newsize, 2*exp_v1);
 	read(exp_newsize, exp_v2);
-	alloca(exp_v2, exp_newitems); //creats an array of size newsize
+	alloca(exp_v2, exp_newitems); //creates an array of size newsize
 	memory[exp_newitems_ptr] = exp_newitems; //????
 	alloca(item_t, exp_newq);
 	memory[exp_newq_ptr] = exp_newq;
@@ -287,11 +308,11 @@ inline take(returnvalue)
 	read(top, v3);
 	write(t, v3);
 	read(b, v4);
-	read(t, v5);
+	readLPTake(t, v5 ,v4);			//LP
 	if
-	:: (v4 < v5) -> 	read(t, v6);
+	:: (v4 < v5) -> 	read(t, v6);			//possible reduction
 						write(bottom, v6);
-						writeLP(retval, EMPTY, 2);
+						write(retval, EMPTY);
 						goto returnLabel;
 	:: else -> goto ifEnd;
 	fi;
@@ -308,10 +329,10 @@ ifEnd:
 	read(arrayindex, v12);
 	write(task, v12);
 	read(b, v13);
-	read(t, v14);
+	read(t, v14);				//LP???
 	if
 	::(v13 > v14) -> 	read(task, v15);
-						writeLP(retval, v15, 2);				//LP			//possible reduction: write(retval = v12)???
+						writeLP(retval, v15, v12);		//LP???				//possible reduction: write(retval = v12)???
 						goto returnLabel;
 	:: else -> goto ifEnd3;
 	fi;
@@ -352,16 +373,17 @@ entry:
 		alloca(Ptr, q_ptr);
 		alloca(I32, task);
 	}
-	read(top, v0);
-	write(t, v0);
-	read(bottom, v1);
+	read(top, v0);		//here could be the Problem!!!!!! if push is running in parallel 
+	write(t, v0);		//somewhere here could be a problem... LPfail here????
+	read(bottom, v1); 
 	write(b,v1);
 	read(wsq_ptr, v2);
 	write(q_ptr, v2);
 	read(t,v3);
-	read(b, v4);
+	readLPSteal(b, v4, v3);			//LP
 	if
-	::(v3 >= v4) -> writeLP(retval, EMPTY, 3); goto returnLabel;
+	::(v3 >= v4) -> write(retval, EMPTY); 
+					goto returnLabel;
 	::else -> goto ifEnd;
 	fi;
 	
@@ -398,8 +420,11 @@ returnLabel:
 proctype process1 (chan ch){
 	short tvalue;
 	push(555); 
+	//mfence();
 	push(777);
+	mfence();
 	take(tvalue);
+	//mfence();
 	push(999);
 	
 	printf("tvalue: %d\n", tvalue);
@@ -408,7 +433,7 @@ proctype process1 (chan ch){
  proctype process2 (chan ch) {
  	short svalue, s2, s3;
 	steal(svalue);printf("svalue: %d\n", svalue);
-	steal(s2);printf("svalue: %d\n", s2);
+	//steal(s2);printf("svalue: %d\n", s2);
 	
 }
 /* 
@@ -428,7 +453,7 @@ init{
 		memory[top]=0;
 		alloca(I32, bottom);
 		memory[bottom]=0;
-		memory[wsq] = 1; //size = 1
+		memory[wsq] = 3; //size = 1
 		memory[wsq+1] = 6; //ap Pointer points to memorypart of size "memory[wsq]"(= size of wsq) 
 		//memory[6]=0; not neccessary because memory is initialized
 		memUse = memUse + memory[wsq];
