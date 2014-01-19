@@ -93,7 +93,6 @@ atomic{
 		if
 			:: buffer[0].line[2] == 1 -> asPush(buffer[0].line[1]);
 			:: buffer[0].line[2] == 2 -> asPopBottom(buffer[0].line[1]);
-			:: buffer[0].line[2] == 3 -> asPopTop(buffer[0].line[1]);
 			:: else -> skip;
 		fi;
 		
