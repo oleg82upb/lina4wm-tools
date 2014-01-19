@@ -15,9 +15,9 @@ short top, bottom;
 #define ABORT 1337
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 
-#define BUFF_SIZE 15	//size of Buffer
-#define MEM_SIZE 88	//size of memory
-#define MAX_QUEUE_SIZE 17
+#define BUFF_SIZE 14	//size of Buffer
+#define MEM_SIZE 40	//size of memory
+#define MAX_QUEUE_SIZE 10
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 /* abstract Queue implementation as array*/
 
@@ -95,11 +95,16 @@ inline asPopBottom(task){
 }
 
 
-inline readLPSteal(b, v4, v3){
+inline readLPStealFail(b, v4, v3){
 	atomic{ 
 	read(b, v4);
-	if 	:: v3 >= v4 -> asEmpty(); printf("---- EMPTY: nothing to steal ----\n");
-		:: else -> skip;
+	if
+		:: (b == bottom) ->
+			if 	
+				:: v3 >= v4 -> asEmpty(); printf("---- EMPTY: nothing to steal ----\n");
+				:: else -> skip;
+			fi;
+		::else -> printf("Empty failed\n");
 	fi;
 	}
 }
@@ -172,7 +177,7 @@ inline expand(returnval){
 	printf("EXPAND()\n");
 	
 	short exp_newsize, exp_newitems, exp_newitems_ptr, exp_newq, exp_newq_ptr, j, exp_size, exp_size3, exp_size6, exp_ap, exp_ap2, exp_arrayindex, exp_arrayindex2;
-	short exp_v0, exp_v1, exp_v2, exp_v5, exp_v6, exp_v7, exp_v8, exp_v9, exp_v10, exp_v11, exp_v12, exp_v13, exp_v14, exp_v15, exp_v16, exp_v17, exp_v18, exp_v19, exp_v20, exp_v21, exp_v22, exp_v23;
+	short exp_v0, exp_v1, exp_v2, exp_v5, exp_v6, exp_v7, exp_v8, exp_v9, exp_v10, exp_v11, exp_v12, exp_v13, exp_v14, exp_v15, exp_v16, exp_v17, exp_v18, exp_v19, exp_v20, exp_v21, exp_v22;
 
 entry:	
 	atomic{
@@ -290,7 +295,7 @@ inline take(returnvalue)
 {
 	printf("ENTERING take()\n");
 	short retval, b, t, q_ptr, task, size, ap, arrayindex, success;
-	short v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v19, v20, v21, v22;
+	short v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v20, v21, v22;
 	atomic{
 		alloca(I32, retval);
 		alloca(I32, b);
@@ -363,7 +368,7 @@ returnLabel:
 inline steal(returnvalue){
 	printf("ENTERING steal()\n");
 	short retval, t, b, q_ptr, task, size, ap, arrayindex, success;
-	short v0, v1, v2, v3, v4, v5, v6, v7,v8, v9, v10, v11, v12, v14, v15, v16;
+	short v0, v1, v2, v3, v4, v5, v6, v7,v8, v9, v10, v11, v12, v15, v16;
 
 entry:
 	atomic{
@@ -374,13 +379,13 @@ entry:
 		alloca(I32, task);
 	}
 	read(top, v0);		//here could be the Problem!!!!!! if push is running in parallel 
-	write(t, v0);		//somewhere here could be a problem... LPfail here????
-	read(bottom, v1); 
+	write(t, v0);		// LPfail here????
+	read(bottom, v1); //if bottom changes after this point LP differs????
 	write(b,v1);
 	read(wsq_ptr, v2);
 	write(q_ptr, v2);
 	read(t,v3);
-	readLPSteal(b, v4, v3);			//LP
+	readLPStealFail(b, v4, v3);			//if bottom hasent changed LP is here
 	if
 	::(v3 >= v4) -> write(retval, EMPTY); 
 					goto returnLabel;
@@ -418,31 +423,29 @@ returnLabel:
 	
 
 proctype process1 (chan ch){
-	short tvalue;
+	short tvalue1, tvalue2;
 	push(555); 
 	//mfence();
-	push(777);
+	take(tvalue2);
 	mfence();
-	take(tvalue);
-	//mfence();
+	//push(777);
 	push(999);
-	
-	printf("tvalue: %d\n", tvalue);
+	take(tvalue1);
 }
 
  proctype process2 (chan ch) {
- 	short svalue, s2, s3;
-	steal(svalue);printf("svalue: %d\n", svalue);
+ 	short svalue;
+	steal(svalue); printf("svalue: %d\n", svalue);
 	//steal(s2);printf("svalue: %d\n", s2);
-	
+	skip;
 }
-/* 
+
 proctype process3 (chan ch){
 	short stealval;
 	steal(stealval);
 	printf("stealval: %d\n", stealval);
 }
-*/
+
 
 init{
 	short wsq;
@@ -453,7 +456,7 @@ init{
 		memory[top]=0;
 		alloca(I32, bottom);
 		memory[bottom]=0;
-		memory[wsq] = 3; //size = 1
+		memory[wsq] = 3; //initial size = 3
 		memory[wsq+1] = 6; //ap Pointer points to memorypart of size "memory[wsq]"(= size of wsq) 
 		//memory[6]=0; not neccessary because memory is initialized
 		memUse = memUse + memory[wsq];
