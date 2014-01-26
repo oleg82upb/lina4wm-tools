@@ -1,8 +1,6 @@
 
 #define NULL 0
 
-/*Array welches die  Queue darstellt (Form: 3-dimensionales Array der Laenge SIZE) das heißt (nx3)-Matrix*/
-typedef matrix{short line [3]}
 /*Speicher*/
 short memory[MEM_SIZE];
 
@@ -11,7 +9,7 @@ inline write(adr, value)
 {
 	memory[adr] = value;
 }
-
+	
 inline read(adr, target)
 {
 	target = memory[adr];
@@ -28,13 +26,13 @@ inline mfence() {
 	
 inline cas(adr, oldValue, newValue, returnValue) {
 	atomic{
-	if 	:: memory[adr] == oldValue
-			-> {
-				memory[adr] = newValue;
-				returnValue = true;
-				}
-		:: else -> returnValue = false;
-	fi;
+		if 	:: memory[adr] == oldValue
+				-> {
+					memory[adr] = newValue;
+					returnValue = true;
+					}
+			:: else -> returnValue = false;
+		fi;
 	}
 }
 		

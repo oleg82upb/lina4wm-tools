@@ -15,9 +15,8 @@ short top, bottom;
 #define ABORT 1337
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 
-#define BUFF_SIZE 14	//size of Buffer
-#define MEM_SIZE 40	//size of memory
-#define MAX_QUEUE_SIZE 10
+#define MEM_SIZE 50	//size of memory
+#define MAX_QUEUE_SIZE 5
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 /* abstract Queue implementation as array*/
 
@@ -37,6 +36,32 @@ inline asExpand(){
 	asSize = 2*asSize;
 }
 */
+inline writeLP(adr, value, type)
+{
+	atomic{
+		write(adr,value);
+		if	:: type == 1 -> asPush(value);
+			:: type == 2 -> asPopBottom(value);
+			:: else -> skip;
+		fi;
+	}
+} 
+
+
+inline writeFlagTake(bottom, v2){
+	atomic{
+		write(bottom, v2);
+		flag = 1;
+	}
+}
+
+inline readFlagTake(retval, v22){
+	atomic{
+		read(retval, v22);
+		flag = 0;
+	}
+}
+
 
 inline asEmpty(){
 	assert (asTop == asBottom);
@@ -71,9 +96,8 @@ inline readLPTake(t, v5 ,v4){
 inline casLPtake(top, t, new_t, success, task){
 	// 2 steps for the executing process, but atomic on memory
 	
-	ch ! iCas, top, t, new_t;
 	atomic{
-		ch ? iCas, top, success, _;
+		cas(top, t, new_t, success);
 		if 	:: success -> asPopBottom(task); printf("popBottom CAS success\n")
 			:: else -> asEmpty(); printf("---- EMPTY: nothing to TAKE ----\n"); skip;  //cas may fail
 		fi; 
@@ -96,26 +120,25 @@ inline asPopBottom(task){
 }
 
 
-inline readLPStealFail(b, v4, v3){
+inline readLPSteal(bottom, v1, v0){
 	atomic{ 
-	read(b, v4);
-	if
-		:: (v4 == memory[bottom]) ->
-			if 	
-				:: v3 >= v4 -> asEmpty(); printf("---- EMPTY: nothing to steal ----\n");
-				:: else -> skip;
-			fi;
-		::else -> printf("Empty failed\n");
+	read(bottom, v1);
+	
+	if 	
+		:: (v0 >= v1)
+			->	if
+					::(flag == 0) -> asEmpty(); printf("---- EMPTY: nothing to steal ----\n");
+					::else -> printf("!!!!! Empty failed !!!!!!   \n");
+				fi
+		:: else -> printf("there is something to steal  \n");
 	fi;
 	}
 }
 
 inline casLPsteal(top, t, new_t, success, task){
 	// 2 steps for the executing process, but atomic on memory
-	
-	ch ! iCas, top, t, new_t;
 	atomic{
-		ch ? iCas, top, success, _;
+		cas(top, t, new_t, success);
 		if 	:: success -> asPopTop(task); printf("popTop CAS success\n")
 			:: else -> printf("---- ABORT: nothing to steal ----\n"); skip;  //cas may fail
 		fi; 
@@ -137,7 +160,7 @@ inline asPopTop(task){
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
-#include "tso_buffer_wsq.pml"
+#include "sc-model.pml"
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 
 //Types for LLVM, actually their length in size of pointers and values
@@ -147,10 +170,6 @@ inline asPopTop(task){
 
 short memUse = 1; 	//shows to the next free cell in memory
 
-
-chan channelT1 = [0] of {mtype, short, short, short};
-chan channelT2 = [0] of {mtype, short, short, short};
-//chan channelT3 = [0] of {mtype, short, short, short};
 
 inline getelementptr(type, instance, offset, targetRegister)
 {
@@ -308,7 +327,7 @@ inline take(returnvalue)
 	read(wsq_ptr, v1);
 	write(q_ptr, v1);
 	read(b, v2);
-    write(bottom, v2);         
+    writeFlagTake(bottom, v2); //here is the problem if take reduces bottom and steal still running in parallel        
 	read(top, v3);
 	write(t, v3);
 	read(b, v4);
@@ -333,7 +352,7 @@ ifEnd:
 	read(arrayindex, v12);
 	write(task, v12);
 	read(b, v13);
-	read(t, v14);				//LP???
+	read(t, v14);				
 	if
 	::(v13 > v14) -> 	read(task, v15);
 						writeLP(retval, v15, v12);		//LP???				//possible reduction: write(retval = v12)???
@@ -359,7 +378,7 @@ ifEnd5:
 	goto returnLabel;
 	
 returnLabel:
-	read(retval, v22);
+	readFlagTake(retval, v22);
 	returnvalue = v22; 
 	printf("LEAVING take()\n");
 }
@@ -377,14 +396,14 @@ entry:
 		alloca(Ptr, q_ptr);
 		alloca(I32, task);
 	}
-	read(top, v0);		//here could be the Problem!!!!!! if push is running in parallel 
+	read(top, v0);		//here could be the Problem!!!!!! if push amd take() is running in parallel 
 	write(t, v0);		// LPfail here????
-	readLP(bottom, v1, v0); //if bottom changes after this point LP differs????
+	readLPSteal(bottom, v1, v0); //if bottom changes after this point LP differs????
 	write(b,v1);
 	read(wsq_ptr, v2);
 	write(q_ptr, v2);
 	read(t,v3);
-	read(b, v4);			//if bottom hasn't changed LP is here
+	read(b, v4);
 	if
 	::(v3 >= v4) -> write(retval, EMPTY); 
 					goto returnLabel;
@@ -421,30 +440,30 @@ returnLabel:
 	
 	
 
-proctype process1 (chan ch){
+proctype process1 (){
 	short tvalue1, tvalue2;
 	push(555); 
 	//mfence();
 	take(tvalue2);
 	mfence();
-	//push(777);
-	push(999);
+	push(777);
+	//push(999);
 	take(tvalue1);
 }
 
- proctype process2 (chan ch) {
+proctype process2 () {
  	short svalue;
 	steal(svalue); printf("svalue: %d\n", svalue);
 	//steal(s2);printf("svalue: %d\n", s2);
 	skip;
 }
 
-proctype process3 (chan ch){
+/* proctype process3 (){
 	short stealval;
 	steal(stealval);
 	printf("stealval: %d\n", stealval);
 }
-
+*/
 
 init{
 	short wsq;
@@ -460,11 +479,8 @@ init{
 		//memory[6]=0; not neccessary because memory is initialized
 		memUse = memUse + memory[wsq];
 	atomic{
-		run process1(channelT1); 
-		run bufferProcess(channelT1);
-		run process2(channelT2);
-		run bufferProcess(channelT2);
-		//run process3(channelT3);
-		//run bufferProcess(channelT3);
+		run process1(); 
+		run process2();
+		//run process3();
 	}	
 }	
