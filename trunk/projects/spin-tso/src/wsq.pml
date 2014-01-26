@@ -28,6 +28,7 @@ short top, bottom;
 short asQueue[MAX_QUEUE_SIZE];   //Promlem promela intends const.
 hidden byte asTop = 0;
 hidden byte asBottom = 0;
+bool flag = 0;
 
 
 /*
@@ -72,10 +73,10 @@ inline casLPtake(top, t, new_t, success, task){
 	
 	ch ! iCas, top, t, new_t;
 	atomic{
-	ch ? iCas, top, success, _;
-	if 	:: success -> asPopBottom(task); printf("popBottom CAS success\n")
-		:: else -> asEmpty(); printf("---- EMPTY: nothing to TAKE ----\n"); skip;  //cas may fail
-	fi; 
+		ch ? iCas, top, success, _;
+		if 	:: success -> asPopBottom(task); printf("popBottom CAS success\n")
+			:: else -> asEmpty(); printf("---- EMPTY: nothing to TAKE ----\n"); skip;  //cas may fail
+		fi; 
 	}
 }
 
@@ -99,7 +100,7 @@ inline readLPStealFail(b, v4, v3){
 	atomic{ 
 	read(b, v4);
 	if
-		:: (b == bottom) ->
+		:: (v4 == memory[bottom]) ->
 			if 	
 				:: v3 >= v4 -> asEmpty(); printf("---- EMPTY: nothing to steal ----\n");
 				:: else -> skip;
@@ -137,7 +138,6 @@ inline asPopTop(task){
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 #include "tso_buffer_wsq.pml"
-//#include "sc-model.pml"
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 
 //Types for LLVM, actually their length in size of pointers and values
@@ -304,12 +304,11 @@ inline take(returnvalue)
 		alloca(I32, task);
 	}
 	read(bottom, v0);
-	v0 = v0 - 1;
-	write(b, v0);
+	write(b, v0 - 1);
 	read(wsq_ptr, v1);
 	write(q_ptr, v1);
 	read(b, v2);
-	write(bottom, v2);
+    write(bottom, v2);         
 	read(top, v3);
 	write(t, v3);
 	read(b, v4);
@@ -380,12 +379,12 @@ entry:
 	}
 	read(top, v0);		//here could be the Problem!!!!!! if push is running in parallel 
 	write(t, v0);		// LPfail here????
-	read(bottom, v1); //if bottom changes after this point LP differs????
+	readLP(bottom, v1, v0); //if bottom changes after this point LP differs????
 	write(b,v1);
 	read(wsq_ptr, v2);
 	write(q_ptr, v2);
 	read(t,v3);
-	readLPStealFail(b, v4, v3);			//if bottom hasent changed LP is here
+	read(b, v4);			//if bottom hasn't changed LP is here
 	if
 	::(v3 >= v4) -> write(retval, EMPTY); 
 					goto returnLabel;
