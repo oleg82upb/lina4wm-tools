@@ -192,7 +192,7 @@ inline expand(returnval){
 	printf("EXPAND()\n");
 	
 	short exp_newsize, exp_newitems, exp_newitems_ptr, exp_newq, exp_newq_ptr, j, exp_size, exp_size3, exp_size6, exp_ap, exp_ap2, exp_arrayindex, exp_arrayindex2;
-	short exp_v0, exp_v1, exp_v2, exp_v5, exp_v6, exp_v7, exp_v9, exp_v10, exp_v11, exp_v12, exp_v13, exp_v14, exp_v15, exp_v16, exp_v17, exp_v18, exp_v19, exp_v20, exp_v21, exp_v22;
+	short exp_v0, exp_v1, exp_v2, exp_v5, exp_v6, exp_v7, exp_v9, exp_v10, exp_v12, exp_v13, exp_v16, exp_v19, exp_v20;
 
 entry:	
 	atomic{
@@ -223,38 +223,39 @@ forCond:
 	->
 
 forBody:
+	//read(j, exp_v8); v8 == v6
 	read(wsq_ptr, exp_v9);
 	getelementptr(item_t, exp_v9, 0, exp_size3);
 	read(exp_size3, exp_v10);
-	read(wsq_ptr, exp_v11);
-	getelementptr(item_t, exp_v11, 1, exp_ap);
+	//read(wsq_ptr, exp_v11); v11 == v9
+	getelementptr(item_t, exp_v9, 1, exp_ap);
 	read(exp_ap, exp_v12);
 	getelementptr(exp_v10, exp_v12, exp_v6  % exp_v10, exp_arrayindex); // exp_v10 is the size of the "old" wsq_ptr. so loop through this array which has no more than exp_v10 entries.
 	read(exp_arrayindex, exp_v13); //exp_13 holds the value which stands in the array at the certain place
-	read(j, exp_v14);
-	read(exp_newsize, exp_v15);
+	//read(j, exp_v14); v14 == v8 == v6
+	//read(exp_newsize, exp_v15); v15 == v2
 	read(exp_newitems_ptr, exp_v16);
-	getelementptr(exp_v15, exp_v16, exp_v14 % exp_v15, exp_arrayindex2);
+	getelementptr(exp_v2, exp_v16, exp_v6 % exp_v2, exp_arrayindex2);
 	write(exp_arrayindex2, exp_v13); //should write the contain of the old array in the newone
 
 forInc:
-	read(j, exp_v17);
-	exp_v17 = exp_v17 + 1;
-	write(j, exp_v17); 
+	//read(j, exp_v17); v17 == v6
+	//exp_v17 = exp_v17 + 1;
+	write(j, exp_v6 + 1); 
 	goto forCond;	
 
 forEnd:
-	read(exp_newsize, exp_v18);
+	//read(exp_newsize, exp_v18); v18 == v2
 	read(exp_newq_ptr, exp_v19);
 	getelementptr(item_t, exp_v19, 0, exp_size6);
-	write(exp_size6, exp_v18);
+	write(exp_size6, exp_v2);
 	read(exp_newitems_ptr, exp_v20);
-	read(exp_newq_ptr, exp_v21); //could be left out and reuse exp_v19 because it's local
-	getelementptr(item_t, exp_v21, 1, exp_ap2);
+	//read(exp_newq_ptr, exp_v21); v21 == v19 
+	getelementptr(item_t, exp_v19, 1, exp_ap2);
 	write(exp_ap2, exp_v20);  //exp_ap2 = exp_newitems;
-	read(exp_newq_ptr, exp_v22);
-	write(wsq_ptr, exp_v22); //wsq_ptr = exp_newq_ptr;
-	returnval = exp_v22;
+	//read(exp_newq_ptr, exp_v22); v22 == v19
+	write(wsq_ptr, exp_v19); //wsq_ptr = exp_newq_ptr;
+	returnval = exp_v19;
 	printf("Queue enlarged \n");	
 }	
 
@@ -263,7 +264,7 @@ inline push(task)
 {
 	printf("PUSH %d\n",task);
 	short task_addr, b, t, q_ptr, size, size2, returnval, ap, arrayindex;
-	short v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13;
+	short v0, v1, v2, v3, v4, v5, v6, v7, v9, v10, v12;
 entry:
 	atomic{
 		alloca(I32, task_addr);
@@ -290,18 +291,18 @@ entry:
 	fi;
 	
 	read(task_addr, v7);
-	read(b, v8);
+	// read(b, v8); v8 == v3
 	read(q_ptr, v9);
 	getelementptr(item_t, v9, 0, size2);
 	read(size2, v10);
-	read(q_ptr, v11);
-	getelementptr(item_t, v11, 1, ap);
+	//read(q_ptr, v11); v11 == v9
+	getelementptr(item_t, v9, 1, ap);
 	read(ap, v12); //ap is pointer
-	getelementptr(v10, v12, v8 % v10, arrayindex);
+	getelementptr(v10, v12, v3 % v10, arrayindex);
 	write(arrayindex, v7);
-	read(b, v13);
-	v13 = v13 +1;
-	writeLP(bottom, v13, 1);						//LP
+	//read(b, v13); v13 == v3
+	//v13 = v13 +1;
+	writeLP(bottom, v3 + 1, 1);						//LP
 	printf("Finished PUSHing %d\n",task);
 }	
 	
@@ -309,7 +310,7 @@ inline take(returnvalue)
 {
 	printf("ENTERING take()\n");
 	short retval, b, t, q_ptr, task, size, ap, arrayindex, success;
-	short v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v20, v21, v22;
+	short v0, v1, v2, v3, v5, v8, v9, v11, v12, v15, v21, v22;
 	atomic{
 		alloca(I32, retval);
 		alloca(I32, b);
@@ -322,52 +323,53 @@ inline take(returnvalue)
 	read(wsq_ptr, v1);
 	write(q_ptr, v1);
 	read(b, v2);
-    writeFlagTake(bottom, v2);         
+    writeFlagTake(bottom, v2); 
+    //mfence();        
 	read(top, v3);
 	write(t, v3);
-	read(b, v4);
-	readLPTake(t, v5 ,v4);			//LP
+	//read(b, v4); v4 == v2
+	readLPTake(t, v5 ,v2);			//LP
 	if
-	:: (v4 < v5) -> 	read(t, v6);			//possible reduction
-						write(bottom, v6);
+	:: (v2 < v5) -> 	//read(t, v6);	v6 == v3
+						write(bottom, v5);
 						write(retval, EMPTY);
 						goto returnLabel;
 	:: else -> goto ifEnd;
 	fi;
 	
 ifEnd:
-	read(b, v7);
+	//read(b, v7); v7 == v2
 	read(q_ptr, v8);
 	getelementptr(item_t, v8, 0, size);
 	read(size, v9);
-	read(q_ptr, v10);
-	getelementptr(item_t, v10, 1, ap);
+	//read(q_ptr, v10);
+	getelementptr(item_t, v8, 1, ap);
 	read(ap, v11);
-	getelementptr(v9, v11, v7 % v9, arrayindex);
+	getelementptr(v9, v11, v2 % v9, arrayindex);
 	read(arrayindex, v12);
 	write(task, v12);
-	read(b, v13);
-	read(t, v14);			
+	//read(b, v13);
+	//read(t, v14);			
 	if
-	::(v13 > v14) -> 	read(task, v15);
-						writeLP(retval, v15, v12);		//LP???				//possible reduction: write(retval = v12)???
-						goto returnLabel;
+	::(v2 > v5) -> 	read(task, v15);
+					writeLP(retval, v15, v12);		//LP???				//possible reduction: write(retval = v12)???
+					goto returnLabel;
 	:: else -> goto ifEnd3;
 	fi;
 	
 ifEnd3:
-	read(t, v16);
-	v17 = v16 + 1;
-	casLPtake(top, v16, v17, success, v12);		//LP				//v12 = content of task(because variable task ist allocated)
+	//read(t, v16); v16 == v5
+	//v17 = v16 + 1;
+	casLPtake(top, v5, v5 + 1, success, v12);		//LP				//v12 = content of task(because variable task ist allocated)
 	if
 	:: (success) -> goto ifEnd5;
 	:: else -> write(retval, EMPTY); goto returnLabel;
 	fi;
 
 ifEnd5:
-	read(t, v20);
-	v20 = v20 + 1;
-	write(bottom, v20);
+	//read(t, v20);
+	//v20 = v20 + 1;
+	write(bottom, v5 + 1);
 	read(task, v21);
 	write(retval, v21);
 	goto returnLabel;
@@ -381,7 +383,7 @@ returnLabel:
 inline steal(returnvalue){
 	printf("ENTERING steal()\n");
 	short retval, t, b, q_ptr, task, size, ap, arrayindex, success;
-	short v0, v1, v2, v3, v4, v5, v6, v7,v8, v9, v10, v11, v12, v15, v16;
+	short v0, v1, v2, v3, v4, v6, v7, v9, v10, v15, v16;
 
 entry:
 	atomic{
@@ -406,19 +408,19 @@ entry:
 	fi;
 	
 ifEnd:
-	read(t,v5);
+	//read(t,v5); v5 == v3
 	read(q_ptr, v6);
 	getelementptr(item_t, v6, 0, size);
 	read(size, v7);
-	read(q_ptr, v8);
-	getelementptr(item_t, v8, 1, ap);
+	//read(q_ptr, v8); v8 == v6
+	getelementptr(item_t, v6, 1, ap);
 	read(ap,v9);
-	getelementptr(v7, v9, v5 % v7, arrayindex);
+	getelementptr(v7, v9, v3 % v7, arrayindex);
 	read(arrayindex, v10);
 	write(task, v10);
-	read(t, v11);
-	v12 = v11+1;
-	casLPsteal(top, v11, v12, success, v10);
+	//read(t, v11); v11 == v3
+	//v12 = v11+1;
+	casLPsteal(top, v3, v3 + 1, success, v10);
 	if
 	::(success == true) -> 	read(task, v15); 
 							write(retval, v15);
@@ -453,7 +455,7 @@ proctype process1 (chan ch){
 	skip;
 }
 
-/* proctype process3 (chan ch){
+/*proctype process3 (chan ch){
 	short stealval;
 	steal(stealval);
 	printf("stealval: %d\n", stealval);
