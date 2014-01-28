@@ -38,6 +38,20 @@ inline asExpand(){
 }
 */
 
+inline writeFlagTake(bottom, v2){
+	atomic{
+		write(bottom, v2);
+		flag = 1;
+	}
+}
+
+inline readFlagTake(retval, v22){
+	atomic{
+		read(retval, v22);
+		flag = 0;
+	}
+}
+
 inline asEmpty(){
 	assert (asTop == asBottom);
 	assert (asQueue[asTop] == 0);
@@ -96,17 +110,18 @@ inline asPopBottom(task){
 }
 
 
-inline readLPStealFail(b, v4, v3){
+inline readLPSteal(bot, v1, v0){
 	atomic{ 
-	read(b, v4);
-	if
-		:: (v4 == memory[bottom]) ->
-			if 	
-				:: v3 >= v4 -> asEmpty(); printf("---- EMPTY: nothing to steal ----\n");
-				:: else -> skip;
-			fi;
-		::else -> printf("Empty failed\n");
-	fi;
+		read(bot, v1);
+	
+		if 	
+			:: (v0 >= v1)
+				->	if
+						::(flag == 0) -> asEmpty(); printf("---- EMPTY: nothing to steal ----\n");
+						::else -> printf("!!!!! Empty failed !!!!!!   \n");
+					fi
+			:: else -> printf("there is something to steal  \n");
+		fi;
 	}
 }
 
@@ -177,7 +192,7 @@ inline expand(returnval){
 	printf("EXPAND()\n");
 	
 	short exp_newsize, exp_newitems, exp_newitems_ptr, exp_newq, exp_newq_ptr, j, exp_size, exp_size3, exp_size6, exp_ap, exp_ap2, exp_arrayindex, exp_arrayindex2;
-	short exp_v0, exp_v1, exp_v2, exp_v5, exp_v6, exp_v7, exp_v8, exp_v9, exp_v10, exp_v11, exp_v12, exp_v13, exp_v14, exp_v15, exp_v16, exp_v17, exp_v18, exp_v19, exp_v20, exp_v21, exp_v22;
+	short exp_v0, exp_v1, exp_v2, exp_v5, exp_v6, exp_v7, exp_v9, exp_v10, exp_v11, exp_v12, exp_v13, exp_v14, exp_v15, exp_v16, exp_v17, exp_v18, exp_v19, exp_v20, exp_v21, exp_v22;
 
 entry:	
 	atomic{
@@ -192,7 +207,7 @@ entry:
 	write(exp_newsize, 2*exp_v1);
 	read(exp_newsize, exp_v2);
 	alloca(exp_v2, exp_newitems); //creates an array of size newsize
-	memory[exp_newitems_ptr] = exp_newitems; //????
+	memory[exp_newitems_ptr] = exp_newitems;
 	alloca(item_t, exp_newq);
 	memory[exp_newq_ptr] = exp_newq;
 	read(top, exp_v5);
@@ -208,14 +223,13 @@ forCond:
 	->
 
 forBody:
-	read(j, exp_v8);
 	read(wsq_ptr, exp_v9);
 	getelementptr(item_t, exp_v9, 0, exp_size3);
 	read(exp_size3, exp_v10);
 	read(wsq_ptr, exp_v11);
 	getelementptr(item_t, exp_v11, 1, exp_ap);
 	read(exp_ap, exp_v12);
-	getelementptr(exp_v10, exp_v12, exp_v8  % exp_v10, exp_arrayindex); // exp_v10 is the size of the "old" wsq_ptr. so loop through this array which has no more than exp_v10 entries.
+	getelementptr(exp_v10, exp_v12, exp_v6  % exp_v10, exp_arrayindex); // exp_v10 is the size of the "old" wsq_ptr. so loop through this array which has no more than exp_v10 entries.
 	read(exp_arrayindex, exp_v13); //exp_13 holds the value which stands in the array at the certain place
 	read(j, exp_v14);
 	read(exp_newsize, exp_v15);
@@ -308,7 +322,7 @@ inline take(returnvalue)
 	read(wsq_ptr, v1);
 	write(q_ptr, v1);
 	read(b, v2);
-    write(bottom, v2);         
+    writeFlagTake(bottom, v2);         
 	read(top, v3);
 	write(t, v3);
 	read(b, v4);
@@ -333,7 +347,7 @@ ifEnd:
 	read(arrayindex, v12);
 	write(task, v12);
 	read(b, v13);
-	read(t, v14);				//LP???
+	read(t, v14);			
 	if
 	::(v13 > v14) -> 	read(task, v15);
 						writeLP(retval, v15, v12);		//LP???				//possible reduction: write(retval = v12)???
@@ -359,7 +373,7 @@ ifEnd5:
 	goto returnLabel;
 	
 returnLabel:
-	read(retval, v22);
+	readFlagTake(retval, v22);
 	returnvalue = v22; 
 	printf("LEAVING take()\n");
 }
@@ -379,7 +393,7 @@ entry:
 	}
 	read(top, v0);		//here could be the Problem!!!!!! if push is running in parallel 
 	write(t, v0);		// LPfail here????
-	readLP(bottom, v1, v0); //if bottom changes after this point LP differs????
+	readLPSteal(bottom, v1, v0); //if bottom changes after this point LP differs????
 	write(b,v1);
 	read(wsq_ptr, v2);
 	write(q_ptr, v2);
@@ -425,7 +439,7 @@ proctype process1 (chan ch){
 	short tvalue1, tvalue2;
 	push(555); 
 	//mfence();
-	take(tvalue2);
+	//take(tvalue2);
 	mfence();
 	//push(777);
 	push(999);
@@ -439,12 +453,12 @@ proctype process1 (chan ch){
 	skip;
 }
 
-proctype process3 (chan ch){
+/* proctype process3 (chan ch){
 	short stealval;
 	steal(stealval);
 	printf("stealval: %d\n", stealval);
 }
-
+*/
 
 init{
 	short wsq;
