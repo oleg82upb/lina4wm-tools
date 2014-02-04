@@ -45,13 +45,6 @@ inline writeFlagTake(bottom, v2){
 	}
 }
 
-inline readFlagTake(retval, v22){
-	atomic{
-		read(retval, v22);
-		flag = 0;
-	}
-}
-
 inline asEmpty(){
 	assert (asTop == asBottom);
 	assert (asQueue[asTop] == 0);
@@ -98,6 +91,8 @@ inline casLPtake(top, t, new_t, success, task){
 //abstract TAKE()
 inline asPopBottom(task){
 	atomic{
+		flag = 0;
+		printf("FLAG: %d\n", flag);
 		asBottom = (asBottom-1);					//move bottom to the next in line
 		assert((asQueue[asBottom] == task)|| (task == EMPTY));
 		if
@@ -361,7 +356,7 @@ ifEnd3:
 	casLPtake(top, v16, v17, success, v12);		//LP				//v12 = content of task(because variable task ist allocated)
 	if
 	:: (success) -> goto ifEnd5;
-	:: else -> write(retval, EMPTY); goto returnLabel;
+	:: else -> write(task, EMPTY); goto ifEnd5;
 	fi;
 
 ifEnd5:
@@ -373,7 +368,7 @@ ifEnd5:
 	goto returnLabel;
 	
 returnLabel:
-	readFlagTake(retval, v22);
+	read(retval, v22);
 	returnvalue = v22; 
 	printf("LEAVING take()\n");
 }
