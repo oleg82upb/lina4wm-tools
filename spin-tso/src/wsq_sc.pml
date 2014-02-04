@@ -55,13 +55,6 @@ inline writeFlagTake(bottom, v2){
 	}
 }
 
-inline readFlagTake(retval, v22){
-	atomic{
-		read(retval, v22);
-		flag = 0;
-	}
-}
-
 
 inline asEmpty(){
 	assert (asTop == asBottom);
@@ -108,6 +101,8 @@ inline casLPtake(top, t, new_t, success, task){
 //abstract TAKE()
 inline asPopBottom(task){
 	atomic{
+		flag = 0;
+		printf("FLAG: %d\n", flag);
 		asBottom = (asBottom-1);					//move bottom to the next in line
 		assert((asQueue[asBottom] == task)|| (task == EMPTY));
 		if
@@ -345,7 +340,7 @@ ifEnd3:
 	casLPtake(top, v5, v5 + 1, success, v12);		//LP				//v12 = content of task(because variable task ist allocated)
 	if
 	:: (success) -> goto ifEnd5;
-	:: else -> write(retval, EMPTY); goto returnLabel;
+	:: else -> write(task, EMPTY); goto ifEnd5;
 	fi;
 
 ifEnd5:
@@ -355,7 +350,7 @@ ifEnd5:
 	goto returnLabel;
 	
 returnLabel:
-	readFlagTake(retval, v22);
+	read(retval, v22);
 	returnvalue = v22; 
 	printf("LEAVING take()\n");
 }
@@ -416,8 +411,9 @@ returnLabel:
 
 proctype process1 (){
 	short tvalue1, tvalue2;
+	take(tvalue1);
 	push(555); 
-	//take(tvalue2);
+	take(tvalue2);
 	push(777);
 	//push(999);
 	take(tvalue1);
@@ -430,12 +426,12 @@ proctype process2 () {
 	skip;
 }
 
-/* proctype process3 (){
+ proctype process3 (){
 	short stealval;
 	steal(stealval);
 	printf("stealval: %d\n", stealval);
 }
-*/
+
 
 init{
 	short wsq;
@@ -453,6 +449,6 @@ init{
 	atomic{
 		run process1(); 
 		run process2();
-		//run process3();
+		run process3();
 	}	
 }	

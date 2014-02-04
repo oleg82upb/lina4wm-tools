@@ -15,8 +15,8 @@ short top, bottom;
 #define ABORT 1337
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 
-#define BUFF_SIZE 14	//size of Buffer
-#define MEM_SIZE 40	//size of memory
+#define BUFF_SIZE 18	//size of Buffer
+#define MEM_SIZE 50	//size of memory
 #define MAX_QUEUE_SIZE 10
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 /* abstract Queue implementation as array*/
@@ -40,17 +40,13 @@ inline asExpand(){
 
 inline writeFlagTake(bottom, v2){
 	atomic{
-		write(bottom, v2);
 		flag = 1;
+		printf("FLAG: %d\n", flag);
+		write(bottom, v2);
+		
 	}
 }
 
-inline readFlagTake(retval, v22){
-	atomic{
-		read(retval, v22);
-		flag = 0;
-	}
-}
 
 inline asEmpty(){
 	assert (asTop == asBottom);
@@ -98,6 +94,8 @@ inline casLPtake(top, t, new_t, success, task){
 //abstract TAKE()
 inline asPopBottom(task){
 	atomic{
+		flag = 0;
+		printf("FLAG: %d\n", flag);
 		asBottom = (asBottom-1);					//move bottom to the next in line
 		assert((asQueue[asBottom] == task)|| (task == EMPTY));
 		if
@@ -165,7 +163,7 @@ short memUse = 1; 	//shows to the next free cell in memory
 
 chan channelT1 = [0] of {mtype, short, short, short};
 chan channelT2 = [0] of {mtype, short, short, short};
-//chan channelT3 = [0] of {mtype, short, short, short};
+chan channelT3 = [0] of {mtype, short, short, short};
 
 inline getelementptr(type, instance, offset, targetRegister)
 {
@@ -363,7 +361,7 @@ ifEnd3:
 	casLPtake(top, v5, v5 + 1, success, v12);		//LP				//v12 = content of task(because variable task ist allocated)
 	if
 	:: (success) -> goto ifEnd5;
-	:: else -> write(retval, EMPTY); goto returnLabel;
+	:: else -> write(task, EMPTY); goto ifEnd5;
 	fi;
 
 ifEnd5:
@@ -375,7 +373,7 @@ ifEnd5:
 	goto returnLabel;
 	
 returnLabel:
-	readFlagTake(retval, v22);
+	read(retval, v22);
 	returnvalue = v22; 
 	printf("LEAVING take()\n");
 }
@@ -442,26 +440,27 @@ proctype process1 (chan ch){
 	push(555); 
 	//mfence();
 	//take(tvalue2);
-	mfence();
-	//push(777);
-	push(999);
-	take(tvalue1);
+	//mfence();
+	push(777);
+	//push(999);
+	//mfence()
+	//take(tvalue1);
 }
-
+/* 
  proctype process2 (chan ch) {
- 	short svalue;
+ 	short svalue, s2;
 	steal(svalue); printf("svalue: %d\n", svalue);
 	//steal(s2);printf("svalue: %d\n", s2);
-	skip;
+	//skip;
 }
 
-/*proctype process3 (chan ch){
+proctype process3 (chan ch){
 	short stealval;
 	steal(stealval);
 	printf("stealval: %d\n", stealval);
 }
-*/
 
+*/ 
 init{
 	short wsq;
 		alloca(Ptr, wsq_ptr);
@@ -478,8 +477,8 @@ init{
 	atomic{
 		run process1(channelT1); 
 		run bufferProcess(channelT1);
-		run process2(channelT2);
-		run bufferProcess(channelT2);
+		//run process2(channelT2);
+		//run bufferProcess(channelT2);
 		//run process3(channelT3);
 		//run bufferProcess(channelT3);
 	}	
