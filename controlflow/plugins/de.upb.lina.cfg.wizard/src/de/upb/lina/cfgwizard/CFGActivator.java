@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.XMLMemento;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -110,5 +112,20 @@ public class CFGActivator extends AbstractUIPlugin implements BundleActivator {
 				stateFile.delete();
 			}
 		}
+	}
+	
+	public static void logError(String message, Throwable exception)
+	   {
+	      if (message == null && exception != null)
+	      {
+	         message = exception.getMessage();
+	      }
+
+	      log(IStatus.ERROR, message, exception);
+	   }
+	
+	public static void log(int severity, String message, Throwable throwable)
+	{
+		getDefault().getLog().log(new Status(severity, PLUGIN_ID, message, throwable));
 	}
 }
