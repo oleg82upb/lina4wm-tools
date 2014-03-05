@@ -25,6 +25,9 @@ public class CFGUtil {
 		}
 	}
 
+	/**FIXME ConcurrentModificationException
+	 * @param cfgs
+	 */
 	public void removeSingleBranches(ArrayList<ControlFlowDiagram> cfgs) {
 		for (ControlFlowDiagram cfg : cfgs) {
 			EList<Transition> list = cfg.getTransitions();

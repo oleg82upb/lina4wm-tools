@@ -86,9 +86,25 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 		IRunnableWithProgress op = new IRunnableWithProgress() {
 			public void run(IProgressMonitor monitor) throws InvocationTargetException {
 				try {
-					doFinish(containerName, fileName, monitor);
-				} catch (CoreException e) {
-					throw new InvocationTargetException(e);
+					int reordering = page.getReordering();
+					String astfileloc = page.getAstLocation();
+
+					Path astfilep = new Path(astfileloc);
+
+					File astfile = new File(root + astfilep.toOSString());
+
+					monitor.beginTask("Transforming LLVM to CFG...", 3);
+
+					LlvmPackage.eINSTANCE.getNsURI();
+					ResourceSet resourceSet = new ResourceSetImpl();
+					Path astpath = new Path(page.getAstLocation());
+					Resource llvmast = getResource(resourceSet, astpath.toOSString());
+					EObject ast = llvmast.getContents().get(0);
+					new CFGWorkspaceOperation(ast, (page.getContainerName() + "/" + page.getFileName()), reordering).run(monitor);
+
+					monitor.worked(1);
+				} catch (Exception e) {
+					CFGActivator.logError(e.getMessage(), e);
 				} finally {
 					monitor.done();
 				}
@@ -97,11 +113,9 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 
 		try {
 			getContainer().run(true, false, op);
-		} catch (InterruptedException e) {
-			return false;
-		} catch (InvocationTargetException e) {
-			Throwable realException = e.getTargetException();
-			MessageDialog.openError(getShell(), "Error", realException.getMessage());
+		} catch (Exception e) {
+			CFGActivator.logError(e.getMessage(), e);
+			MessageDialog.openError(getShell(), "Error", e.getMessage());
 			return false;
 		}
 
@@ -151,14 +165,14 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 		Path astpath = new Path(page.getAstLocation());
 		Resource llvmast = getResource(resourceSet, astpath.toOSString());
 		EObject ast = llvmast.getContents().get(0);
-		try {
-			new CFGWorkspaceOperation(ast, (page.getContainerName() + "/" + page.getFileName()), reordering).run(monitor);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ReflectiveOperationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			new CFGWorkspaceOperation(ast, (page.getContainerName() + "/" + page.getFileName()), reordering).run(monitor);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		} catch (ReflectiveOperationException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		monitor.worked(1);
 
 		// monitor.setTaskName("Opening file for editing...");
