@@ -3,7 +3,47 @@
  */
 package de.upb.llvm_parser.scoping;
 
+import java.util.ArrayList;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+
+import com.google.common.base.Function;
+
+import de.upb.llvm_parser.llvm.AbstractElement;
+import de.upb.llvm_parser.llvm.AddressUse;
+import de.upb.llvm_parser.llvm.AliasDefinition;
+import de.upb.llvm_parser.llvm.Alloc;
+import de.upb.llvm_parser.llvm.ArithmeticOperation;
+import de.upb.llvm_parser.llvm.AtomicRMW;
+import de.upb.llvm_parser.llvm.BasicBlock;
+import de.upb.llvm_parser.llvm.CmpXchg;
+import de.upb.llvm_parser.llvm.Compare;
+import de.upb.llvm_parser.llvm.ExtractElement;
+import de.upb.llvm_parser.llvm.ExtractValue;
+import de.upb.llvm_parser.llvm.FunctionBody;
+import de.upb.llvm_parser.llvm.FunctionDefinition;
+import de.upb.llvm_parser.llvm.FunctionParameter;
+import de.upb.llvm_parser.llvm.GetElementPtr;
+import de.upb.llvm_parser.llvm.GlobalDefinition;
+import de.upb.llvm_parser.llvm.InsertElement;
+import de.upb.llvm_parser.llvm.InsertValue;
+import de.upb.llvm_parser.llvm.Instruction;
+import de.upb.llvm_parser.llvm.LLVM;
+import de.upb.llvm_parser.llvm.LandingPad;
+import de.upb.llvm_parser.llvm.Load;
+import de.upb.llvm_parser.llvm.LogicOperation;
+import de.upb.llvm_parser.llvm.Parameter;
+import de.upb.llvm_parser.llvm.ParameterList;
+import de.upb.llvm_parser.llvm.Phi;
+import de.upb.llvm_parser.llvm.Select;
+import de.upb.llvm_parser.llvm.ShuffleVector;
+import de.upb.llvm_parser.llvm.TypeDefinition;
+import de.upb.llvm_parser.llvm.VariableAttributeAccess;
 
 /**
  * This class contains custom scoping description.
@@ -13,5 +53,170 @@ import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
  *
  */
 public class LLVMScopeProvider extends AbstractDeclarativeScopeProvider {
-
+	
+	
+	
+	
+	public IScope scope_AddressUse_address(Parameter param, EReference ref)
+	{		ArrayList<EObject> l = new ArrayList<EObject>();
+		
+		
+		EObject container = param.eContainer();
+		if(container instanceof ParameterList)
+		{
+			container = container.eContainer();
+		}
+		
+		if(container instanceof Instruction)
+		{
+			EObject i = container.eContainer();
+			if(i instanceof BasicBlock)
+			{
+				EObject f = i.eContainer();
+				if(f instanceof FunctionBody)
+				{
+					
+					l = collectElementsInScope((FunctionDefinition) f.eContainer(), param);
+					return Scopes.scopeFor(l, delegateGetScope(param, ref));
+				}
+			} 
+		}
+		
+		
+		//fall back to implementation of super class
+		IScope scope = polymorphicFindScopeForClassName(param, ref);
+		if (scope == null) {
+			scope = delegateGetScope(param, ref);
+		}
+		return scope;
+	}
+	
+	
+	private ArrayList<EObject> collectElementsInScope(FunctionDefinition f, Parameter param)
+	{
+		ArrayList<EObject> l = new ArrayList<EObject>();
+		
+		
+		//we take only previously defined addresses into account
+		//and therefor break once we reach the instruction containing address use 
+		Instruction containerOfParam = (Instruction) param.eContainer();
+		boolean instructionReached = false;
+		
+		for(BasicBlock bb : f.getBody().getBlocks())
+		{
+			for(Instruction i : bb.getInstructions())
+			{
+				if(i instanceof Alloc)
+				{
+					
+					l.add(((Alloc) i).getResult());
+				}
+				else if (i instanceof ArithmeticOperation)
+				{
+					l.add(((Alloc) i).getResult());
+				}
+				else if (i instanceof AtomicRMW)
+				{
+					l.add(((AtomicRMW) i).getResult());
+				}
+				else if (i instanceof CmpXchg)
+				{
+					l.add(((CmpXchg) i).getResult());
+				}
+				else if (i instanceof Compare)
+				{
+					l.add(((Compare) i).getResult());
+				}
+				else if (i instanceof ExtractElement)
+				{
+					l.add(((ExtractElement) i).getResult());
+				}
+				else if (i instanceof ExtractValue)
+				{
+					l.add(((ExtractValue) i).getResult());
+				}
+				else if (i instanceof GetElementPtr)
+				{
+					l.add(((GetElementPtr) i).getResult());
+				}
+				else if (i instanceof InsertElement)
+				{
+					l.add(((InsertElement) i).getResult());
+				}
+				else if (i instanceof InsertValue)
+				{
+					l.add(((InsertValue) i).getResult());
+				}
+				else if (i instanceof LandingPad)
+				{
+					l.add(((LandingPad) i).getResult());
+				}
+				else if (i instanceof Load)
+				{
+					l.add(((Load) i).getResult());
+				}
+				else if (i instanceof LogicOperation)
+				{
+					l.add(((LogicOperation) i).getResult());
+				}
+				else if (i instanceof Phi)
+				{
+					l.add(((Phi) i).getResult());
+				}
+				else if (i instanceof Select)
+				{
+					l.add(((Select) i).getResult());
+				}
+				else if (i instanceof ShuffleVector)
+				{
+					l.add(((ShuffleVector) i).getResult());
+				}
+				else if (i instanceof VariableAttributeAccess)
+				{
+					l.add(((VariableAttributeAccess) i).getResult());
+				}
+				
+				if(i == containerOfParam)
+				{
+					instructionReached = true;
+					break;
+				}
+			}
+			if(instructionReached)
+			{
+				break;
+			}
+			
+		}
+		
+		//collect globally defined addresses
+		LLVM llvm = (LLVM) f.eContainer();
+		for (AbstractElement e : llvm.getElements())
+		{
+			if(e instanceof TypeDefinition)
+			{
+				
+				l.add(((TypeDefinition)e).getAddress());
+			}
+			else if (e instanceof GlobalDefinition)
+			{
+				l.add(((GlobalDefinition) e).getAddress());
+			}
+			else if (e instanceof FunctionDefinition)
+			{
+				l.add(((FunctionDefinition) e).getAddress());
+			}
+			else if (e instanceof AliasDefinition)
+			{
+				l.add(((AliasDefinition) e).getAddress());
+			}
+				
+		}
+		for(FunctionParameter fp : f.getParameter().getParams())
+		{
+			l.add(fp.getValue());
+		}
+		
+		return l;
+	}
 }
