@@ -15,43 +15,39 @@ mtype = {iWrite, iRead , iMfence, iCas};
 short memory[MEM_SIZE];
 
 
-inline write(adr, newValue)
-{
+inline write(adr, newValue){
 	ch ! iWrite, adr, newValue, NULL;
 }
 
 short as = 0;
-inline asAcquire(p)
-{
-atomic{
-assert(as == 0);
-as = p;}
-}
-inline asRelease(p)
-{
-atomic{
-assert(as == p);
-as = 0;
-}
+inline asAcquire(p){
+	atomic{
+		assert(as == 0);
+		as = p;
+	}
 }
 
-inline readLP(f, r, p)
-{
-atomic{
-	read(f, r);
-	if :: r == 0 -> asAcquire(p);
-	   :: else -> skip;
-	fi;}
+inline asRelease(p){
+	atomic{
+		assert(as == p);
+		as = 0;
+		}
+}
+
+inline readLP(f, r, p){
+	atomic{
+		read(f, r);
+		if :: r == 0 -> asAcquire(p);
+	   	:: else -> skip;
+		fi;}
 }
 
 
-inline writeLP(adr, newValue)
-{
+inline writeLP(adr, newValue){
 	ch ! iWrite, adr, newValue, 1;
 }
 
-inline read(adr, target)
-{
+inline read(adr, target){
 	atomic{
 	ch ! iRead, adr, NULL, NULL;
 	ch ? iRead, adr, target, NULL;
