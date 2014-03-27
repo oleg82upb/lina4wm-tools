@@ -44,10 +44,10 @@ inline cas(adr, oldValue, newValue, successBit)
 
 inline writeB() {
 	atomic{
-	assert(tail < BUFF_SIZE);
-	buffer[tail].line[0] = address;
-	buffer[tail].line[1] = value;
-	tail++;
+		assert(tail < BUFF_SIZE);
+		buffer[tail].line[0] = address;
+		buffer[tail].line[1] = value;
+		tail++;
 	}
 }
 
