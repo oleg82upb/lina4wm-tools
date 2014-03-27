@@ -1,6 +1,6 @@
 #define SIZE 5 			//size of Buffer
 #define MAX_SIZE 5		//size of memory 
-#include "buffer.pml"
+#include "x86_tso_buffer.pml"
 
 /*Channel der die reads und writes verschickt (Type (also write,read); Adresse; Wert;... )*/
 chan bufferChannel1 = [0] of {mtype, short, short, short};
