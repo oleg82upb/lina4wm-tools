@@ -30,7 +30,10 @@ inline read(adr, target)
 
 inline mfence()
 {
+	atomic{
 	ch ! iMfence, NULL, NULL, NULL;
+	//ch ? iMfence, NULL, NULL, NULL;
+	}
 }	
 
 inline cas(adr, oldValue, newValue, successBit) 
@@ -38,6 +41,7 @@ inline cas(adr, oldValue, newValue, successBit)
 	// 2 steps for the executing process, but atomic on memory
 	atomic{
 	ch ! iCas, adr, oldValue, newValue;
+	//ch ? iMfence, _, _, _;
 	ch ? iCas, adr, successBit, _; 
 	}
 }
@@ -105,7 +109,8 @@ inline mfenceB() {
 			::(tail<=0) -> break;	//tail > 0 iff buffer not empty
 			::else -> flushB() 
 			fi
-	od
+	od;
+	//channel ! iMfence, NULL, NULL, NULL;
 	}
 }
 	

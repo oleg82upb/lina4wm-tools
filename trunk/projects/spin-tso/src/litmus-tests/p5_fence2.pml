@@ -12,7 +12,7 @@
 #define MEM_SIZE 5		//size of memory 
 
 #define PROC_NUMBER 2
-#include "../x86_tso_buffer_globalarray.pml"
+#include "../x86_tso_buffer.pml"
 
 /*Channel der die reads und writes verschickt (Type (also write,read); Adresse; Wert;... )*/
 chan channelT1 = [0] of {mtype, short, short, short};
@@ -48,21 +48,21 @@ init{
 		}
 }
 /*not allowed r2 = 0, r4 = 0;*/
-ltl check_0 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 1 && r2 == 0 && r3 == 1 && r4 == 0)))};
+ltl check_0 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 1 && r2 == 0 && r3 == 1 && r4 == 0)))}; //no
 	
-ltl check_1 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 1 && r2 == 0 && r3 == 0 && r4 == 0)))}; 
-ltl check_2 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 1 && r2 == 0 && r3 == 0 && r4 == 1)))};
+ltl check_1 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 1 && r2 == 0 && r3 == 0 && r4 == 0)))}; //no
+ltl check_2 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 1 && r2 == 0 && r3 == 0 && r4 == 1)))}; //no
 
-ltl check_3 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 1 && r2 == 1 && r3 == 0 && r4 == 0)))};
-ltl check_4 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 1 && r2 == 0 && r3 == 1 && r4 == 1)))};
-ltl check_5 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 1 && r2 == 1 && r3 == 1 && r4 == 0)))};
-ltl check_6 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 1 && r2 == 1 && r3 == 0 && r4 == 1)))};
-ltl check_7 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 1 && r2 == 1 && r3 == 1 && r4 == 1)))};
-ltl check_8 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 0 && r2 == 0 && r3 == 0 && r4 == 0)))};
-ltl check_9 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 0 && r2 == 0 && r3 == 0 && r4 == 1)))};
-ltl check_10 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 0 && r2 == 0 && r3 == 1 && r4 == 0)))};
-ltl check_11 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 0 && r2 == 1 && r3 == 0 && r4 == 0)))};
-ltl check_12 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 0 && r2 == 0 && r3 == 1 && r4 == 1)))};
-ltl check_13 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 0 && r2 == 1 && r3 == 1 && r4 == 0)))};
-ltl check_14 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 0 && r2 == 1 && r3 == 0 && r4 == 1)))};
-ltl check_15 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 0 && r2 == 1 && r3 == 1 && r4 == 1)))};
+ltl check_3 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 1 && r2 == 1 && r3 == 0 && r4 == 0)))};//no
+ltl check_4 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 1 && r2 == 0 && r3 == 1 && r4 == 1)))};//yes
+ltl check_5 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 1 && r2 == 1 && r3 == 1 && r4 == 0)))};//yes
+ltl check_6 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 1 && r2 == 1 && r3 == 0 && r4 == 1)))};//no
+ltl check_7 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 1 && r2 == 1 && r3 == 1 && r4 == 1)))};//yes
+ltl check_8 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 0 && r2 == 0 && r3 == 0 && r4 == 0)))};//no
+ltl check_9 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 0 && r2 == 0 && r3 == 0 && r4 == 1)))};//no
+ltl check_10 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 0 && r2 == 0 && r3 == 1 && r4 == 0)))};//no
+ltl check_11 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 0 && r2 == 1 && r3 == 0 && r4 == 0)))};//no
+ltl check_12 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 0 && r2 == 0 && r3 == 1 && r4 == 1)))};//no
+ltl check_13 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 0 && r2 == 1 && r3 == 1 && r4 == 0)))};//no
+ltl check_14 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 0 && r2 == 1 && r3 == 0 && r4 == 1)))};//no
+ltl check_15 { [] ((process1 @ done && process2 @ done) ->( ! (r1 == 0 && r2 == 1 && r3 == 1 && r4 == 1)))};//no

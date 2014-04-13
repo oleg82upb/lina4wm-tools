@@ -12,7 +12,7 @@
 #define MEM_SIZE 5		//size of memory 
 
 #define PROC_NUMBER 2
-#include "../x86_tso_buffer_globalarray.pml"
+#include "../x86_tso_buffer.pml"
 
 /*Channel der die reads und writes verschickt (Type (also write,read); Adresse; Wert;... )*/
 chan channelT1 = [0] of {mtype, short, short, short};

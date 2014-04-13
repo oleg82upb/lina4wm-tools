@@ -8,7 +8,7 @@
 
 #!/bin/bash
 
-cd workspace/projects/src/litmus-tests;
+cd workspace/spin-tso/src/litmus-tests;
 
 #zeilenweises Lesen einer Datei
 if [ $# -lt 1 ]
