@@ -1,8 +1,8 @@
 /*
 * author: Annika Mütze <muetze.annika@gmail.com>
-* date: 11.2012
+* date: 04.2014
 *
-*Lithmustest: Fence instruction
+*Test: Cas()
 * 
 */
 
@@ -21,16 +21,16 @@ short r1 = 0;
 short r2 = 0;
 
 proctype process1(chan ch){
-	
+	bit success;
 	write(ADRESSE_X, 1);
-	mfence();
-	read(ADRESSE_Y, r1);
+	cas(ADRESSE_X, 1, 0, success);
+	read(ADRESSE_X, r1);
 	done : skip;
 }
 proctype process2(chan ch){
-	
-	write(ADRESSE_Y, 1);
-	mfence();
+	bit suc;
+	write(ADRESSE_X, 1);
+	cas(ADRESSE_X, 0, 42, suc);
 	read(ADRESSE_X, r2);
 	done : skip;
 }
@@ -44,15 +44,7 @@ init{
 		}
 }
 
-	/*reordering not allowed with fences
-	*
-	*(r1 == 0) && (r2 == 0) not allowed
-	*(r1 == 1) && (r2 == 0) ok
-	*(r1 == 0) && (r2 == 1) ok
-	*(r1 == 1) && (r2 == 1) ok */
-	
 
-ltl check_0 { [] ((process1 @ done && process2 @ done) ->  !(r1 == 0 && r2 == 0))};
-ltl check_1 { [] ((process1 @ done && process2 @ done) ->  !(r1 == 0 && r2 == 1))};
-ltl check_2 { [] ((process1 @ done && process2 @ done) ->  !(r1 == 1 && r2 == 0))};
-ltl check_3 { [] ((process1 @ done && process2 @ done) ->  !(r1 == 1 && r2 == 1))};
+ltl check_0 { [] ((process1 @ done && process2 @ done) ->  !(r1 == 1 && r2 == 0))}; //no
+ltl check_1 { [] ((process1 @ done && process2 @ done) ->  !(r1 == 0 && r2 == 42))}; //ok
+ltl check_2 { [] ((process1 @ done && process2 @ done) ->  !(r1 == 0 && r2 == 1))}; //ok
