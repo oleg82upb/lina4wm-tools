@@ -32,7 +32,7 @@ inline mfence()
 {
 	atomic{
 	ch ! iMfence, NULL, NULL, NULL;
-	//ch ? iMfence, NULL, NULL, NULL;
+	ch ? iMfence, NULL, NULL, NULL;
 	}
 }	
 
@@ -41,18 +41,15 @@ inline cas(adr, oldValue, newValue, successBit)
 	// 2 steps for the executing process, but atomic on memory
 	atomic{
 	ch ! iCas, adr, oldValue, newValue;
-	//ch ? iMfence, _, _, _;
 	ch ? iCas, adr, successBit, _; 
 	}
 }
 
 inline writeB() {
-	atomic{
 		assert(tail < BUFF_SIZE);
 		buffer[tail].line[0] = address;
 		buffer[tail].line[1] = value;
 		tail++;
-	}
 }
 
 
@@ -78,8 +75,6 @@ inline readB() {
 
 
 inline flushB() {
-atomic{
-	
 	if 
 	:: (tail > 0) ->	{
 		//write value in memory: memory[address] = value
@@ -98,11 +93,9 @@ atomic{
 		}
 	:: else -> skip;
 	fi;
-	}
 }
 
 inline mfenceB() {
-	atomic{
 	do
 	:: 
 			if
@@ -110,14 +103,16 @@ inline mfenceB() {
 			::else -> flushB() 
 			fi
 	od;
-	//channel ! iMfence, NULL, NULL, NULL;
-	}
+}
+
+inline fenceWithResponse() {
+	mfenceB();
+	channel ! iMfence, NULL, NULL, NULL;
 }
 	
 inline casB() 
 {
-	mfenceB();	//buffer must be empty
-	atomic{ 
+		mfenceB();	//buffer must be empty 
 		bit result = false;
 		if 
 			:: memory[address] == value 
@@ -127,9 +122,7 @@ inline casB()
 		fi
 		->
 		channel ! iCas, address, result, NULL;
-		//reducing state space from here on
-	}
-	
+		//reducing state space from here on	
 }
 
 proctype bufferProcess(chan channel)
@@ -154,9 +147,9 @@ end:	do
 				//FLUSH
 				:: atomic{(tail > 0) -> flushB();}  //tail > 0  iff not empty
 				//FENCE
-				:: channel ? iMfence, _, _ ,_ -> mfenceB();
+				:: atomic{channel ? iMfence, _, _ ,_ -> fenceWithResponse();}
 				//COMPARE AND SWAP
-				:: atomic{channel ? iCas, address , value, newValue -> casB()};
+				:: atomic{channel ? iCas, address , value, newValue -> casB();}
 			fi
 		od
 }
