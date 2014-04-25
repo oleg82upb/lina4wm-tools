@@ -77,11 +77,12 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 			ReorderingUtil rutil = new ReorderingUtil();
 			if (reordering == 1) {
 				rutil.addTSO(list);
+				
 			}
 
 			//store resulting cfg
 			ResourceSet resSet = new ResourceSetImpl();
-			Resource resource = resSet.createResource(URI.createFileURI(cfgpath.toOSString()));
+			Resource resource = resSet.createResource(URI.createURI(cfgpath.toOSString()));
 
 			for (ControlFlowDiagram cfg : list) {
 				EcoreUtil.resolveAll(cfg);

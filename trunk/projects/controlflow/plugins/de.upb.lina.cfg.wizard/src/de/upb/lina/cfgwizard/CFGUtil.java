@@ -39,8 +39,9 @@ public class CFGUtil {
 							tr1.setTarget(transition.getTarget());
 							transition.getTarget().getIncoming().add(tr1);
 						}
-						if (cfg.getStart() == transition.getSource())
+						if (cfg.getStart() == transition.getSource()){
 							cfg.setStart(transition.getTarget());
+						}
 						transition.getSource().getIncoming().clear();
 						transition.getSource().setDiagram(null);
 						transition.getSource().getOutgoing().clear();
@@ -66,6 +67,10 @@ public class CFGUtil {
 		return null;
 	}
 
+	/**
+	 * Deletes the given transition.
+	 * @param t transition to be deleted
+	 */
 	private void deleteTransition(Transition t) {
 		t.setDiagram(null);
 		t.setSource(null);
@@ -74,6 +79,10 @@ public class CFGUtil {
 		t.setInstruction(null);
 	}
 
+	/**
+	 * Deletes the given ControlFlowLocation.
+	 * @param loose location to be deleted
+	 */
 	private void deleteLoc(ControlFlowLocation loose) {
 		loose.setDiagram(null);
 		loose.getOutgoing().clear();

@@ -113,7 +113,11 @@ public class CFGActivator extends AbstractUIPlugin implements BundleActivator {
 			}
 		}
 	}
-	
+	/**
+	 * Logs the error message combined with the thrown exception.
+	 * @param message error message to be logged
+	 * @param exception thrown exception to be logged
+	 */
 	public static void logError(String message, Throwable exception)
 	   {
 	      if (message == null && exception != null)
@@ -124,6 +128,12 @@ public class CFGActivator extends AbstractUIPlugin implements BundleActivator {
 	      log(IStatus.ERROR, message, exception);
 	   }
 	
+	/**
+	 * Logs the message and a given throwable
+	 * @param severity 
+	 * @param message message to be logged
+	 * @param throwable throwable to be logged
+	 */
 	public static void log(int severity, String message, Throwable throwable)
 	{
 		getDefault().getLog().log(new Status(severity, PLUGIN_ID, message, throwable));
