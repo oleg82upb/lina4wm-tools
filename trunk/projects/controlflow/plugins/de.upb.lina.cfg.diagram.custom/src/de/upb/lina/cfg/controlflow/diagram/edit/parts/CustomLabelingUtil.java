@@ -9,6 +9,7 @@ import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.ArithmeticOperation;
 import de.upb.llvm_parser.llvm.AtomicRMW;
+import de.upb.llvm_parser.llvm.Branch;
 import de.upb.llvm_parser.llvm.Call;
 import de.upb.llvm_parser.llvm.Cast;
 import de.upb.llvm_parser.llvm.CmpXchg;
@@ -53,6 +54,9 @@ public class CustomLabelingUtil {
         else if (type.equals(LlvmPackage.eINSTANCE.getBranch())) {
                 if (t instanceof GuardedTransition) {
                         result += "[" + (((GuardedTransition) t).getCondition().replace("[", ""));
+                }else{
+                	Branch br = (Branch)t.getInstruction();
+                	result += type.getName() +" " + br.getDestination()+" ";
                 }
         }
         // GetElementPtr
