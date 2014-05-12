@@ -79,7 +79,11 @@ public class CustomLabelingUtil {
         else if (type.equals(LlvmPackage.eINSTANCE.getCall())) {
                 
                 Call instr = (Call) t.getInstruction();
-                result += instr.getResult().getName() + " = ";
+                if(instr.getResult() != null){
+                	result += instr.getResult().getName() + " = ";
+                }else{
+                	result += "void ";
+                }
                 result += type.getName() + " ";
                 result += addValue(instr.getFunction());
                 result += addParameterList(instr.getPList());
