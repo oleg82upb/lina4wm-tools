@@ -86,15 +86,15 @@ public class ControlFlowNavigatorLabelProvider extends LabelProvider implements
 	 */
 	public Image getImage(View view) {
 		switch (ControlFlowVisualIDRegistry.getVisualID(view)) {
+		case ControlFlowDiagramEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Diagram?http://www.upb.de/lina/cfg/controlflow?ControlFlowDiagram", ControlFlowElementTypes.ControlFlowDiagram_1000); //$NON-NLS-1$
 		case ControlFlowLocationEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?TopLevelNode?http://www.upb.de/lina/cfg/controlflow?ControlFlowLocation", ControlFlowElementTypes.ControlFlowLocation_2001); //$NON-NLS-1$
 		case TransitionEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?Link?http://www.upb.de/lina/cfg/controlflow?Transition", ControlFlowElementTypes.Transition_4001); //$NON-NLS-1$
-		case ControlFlowDiagramEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?Diagram?http://www.upb.de/lina/cfg/controlflow?ControlFlowDiagram", ControlFlowElementTypes.ControlFlowDiagram_1000); //$NON-NLS-1$
 		}
 		return getImage("Navigator?UnknownElement", null); //$NON-NLS-1$
 	}
@@ -147,12 +147,12 @@ public class ControlFlowNavigatorLabelProvider extends LabelProvider implements
 			return getUnresolvedDomainElementProxyText(view);
 		}
 		switch (ControlFlowVisualIDRegistry.getVisualID(view)) {
+		case ControlFlowDiagramEditPart.VISUAL_ID:
+			return getControlFlowDiagram_1000Text(view);
 		case ControlFlowLocationEditPart.VISUAL_ID:
 			return getControlFlowLocation_2001Text(view);
 		case TransitionEditPart.VISUAL_ID:
 			return getTransition_4001Text(view);
-		case ControlFlowDiagramEditPart.VISUAL_ID:
-			return getControlFlowDiagram_1000Text(view);
 		}
 		return getUnknownElementText(view);
 	}
