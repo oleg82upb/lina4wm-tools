@@ -5,6 +5,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.management.RuntimeErrorException;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -37,7 +39,6 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Switch;
 import de.upb.llvm_parser.llvm.SwitchCase;
 import de.upb.llvm_parser.llvm.Value;
-import de.upb.llvm_parser.llvm.impl.AddressUseImpl;
 import de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl;
 
 public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
@@ -56,39 +57,35 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 	}
 
 	@Override
-	protected void execute(IProgressMonitor monitor) throws CoreException,
-			InvocationTargetException, InterruptedException {
+	protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
 		if (monitor == null)
 			monitor = new NullProgressMonitor();
 		if (ast == null) {
-			throw new InterruptedException(
-					"Now specified LLVM Object inside the ast.");
+			throw new InterruptedException("Now specified LLVM Object inside the ast.");
 		}
 
 		try {
 			int a_elem = ast.getElements().size();
-
-			// generating cfg for each function
+			
+			//generating cfg for each function
 			for (int i = 0; i < a_elem; i++) {
 				if (ast.getElements().get(i) instanceof FunctionDefinitionImpl) {
-					if (((FunctionDefinition) ast.getElements().get(i))
-							.getBody() != null)
-						list.add(createCFG((FunctionDefinition) ast
-								.getElements().get(i)));
+					if (((FunctionDefinition) ast.getElements().get(i)).getBody() != null)
+						list.add(createCFG((FunctionDefinition) ast.getElements().get(i)));
 				}
 			}
 
-			// adding TSO control flow
+			//adding TSO control flow
 			ReorderingUtil rutil = new ReorderingUtil();
 			if (reordering == 1) {
 				rutil.addTSO(list);
-
+				
 			}
 
-			// store resulting cfg
+			//store resulting cfg
 			ResourceSet resSet = new ResourceSetImpl();
-			Resource resource = resSet.createResource(URI.createURI(cfgpath
-					.toOSString()));
+			String osString = cfgpath.toPortableString();
+			Resource resource = resSet.createResource(URI.createURI(osString));
 
 			for (ControlFlowDiagram cfg : list) {
 				EcoreUtil.resolveAll(cfg);
@@ -107,218 +104,233 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 	private ControlFlowDiagram createCFG(FunctionDefinition function) {
 
 		ProgramCounter pc = new ProgramCounter();
-		ControlFlowDiagram cfg = ControlflowFactory.eINSTANCE
-				.createControlFlowDiagram();
+		ControlFlowDiagram cfg = ControlflowFactory.eINSTANCE.createControlFlowDiagram();
 
 		cfg.setName(function.getAddress().getName());
 
 		EList<BasicBlock> blocks = function.getBody().getBlocks();
-		for (BasicBlock b : blocks) {
+		for (BasicBlock b : blocks)
+		{
 			ControlFlowLocation location = createControlFlowLocation(cfg, pc);
-			if (cfg.getStart() == null) {
+			if (cfg.getStart() == null)
+			{
 				cfg.setStart(location);
 			}
+			
 
-			for (Instruction instr : b.getInstructions()) {
+			for (Instruction instr : b.getInstructions())
+			{
 				Transition t = createTransition(cfg, instr);
-				ControlFlowLocation nextLocation = createControlFlowLocation(
-						cfg, pc);
+				ControlFlowLocation nextLocation = createControlFlowLocation(cfg, pc);
+
 				t.setSource(location);
 				t.setTarget(nextLocation);
 				location = nextLocation;
 			}
 		}
+		
 
-		//TODO: fix this (find out how)
-		// if (type.equals(LlvmPackage.eINSTANCE.getIndirectBranch()))
-		// {
-		// for (int i = 0; i < ((IndirectBranch) instr).getLabels().size(); i++)
-		// {
-		// GuardedTransition jump = createGuardedTransition(cfg, instr);
-		// jump.setCondition(valueToString(((IndirectBranch) instr).getAdress())
-		// + valueToString(((IndirectBranch) instr).getLabels().get(i)));
-		// location.getOutgoing().add(jump);
-		// jump.setSource(location);
-		// }
-		// }
-
+//		if (type.equals(LlvmPackage.eINSTANCE.getIndirectBranch()))
+//		{
+//			for (int i = 0; i < ((IndirectBranch) instr).getLabels().size(); i++)
+//			{
+//				GuardedTransition jump = createGuardedTransition(cfg, instr);
+//				jump.setCondition(valueToString(((IndirectBranch) instr).getAdress())
+//						+ valueToString(((IndirectBranch) instr).getLabels().get(i)));
+//				location.getOutgoing().add(jump);
+//				jump.setSource(location);
+//			}
+//		} 
+		
 		ArrayList<Transition> newTransitions = new ArrayList<Transition>();
-		for (Transition t : cfg.getTransitions()) {
-			if (t.getInstruction() instanceof Branch) {
+		for (Transition t : cfg.getTransitions())
+		{			
+			if(t.getInstruction() instanceof Branch)
+			{
 				Branch br = (Branch) t.getInstruction();
-				//check Destination
-				ControlFlowLocation target = findLabeledLocation(cfg, function,
-						br.getDestination().substring(1));
-				if (!t.getTarget().equals(target)) {
-					t.setTarget(target);
-				}
-				
-				
-				if (br.getElseDestination() != null) {
-					
-					// replace transition with guarded
-					GuardedTransition trueCase = ControlflowFactory.eINSTANCE
-							.createGuardedTransition();
+				if (br.getDestination() != null && br.getElseDestination() != null)
+				{
+					//replace transition with guarded
+					GuardedTransition trueCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
 					trueCase.setInstruction(t.getInstruction());
-					GuardedTransition elseCase = ControlflowFactory.eINSTANCE
-							.createGuardedTransition();
+					GuardedTransition elseCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
 					elseCase.setInstruction(t.getInstruction());
 					newTransitions.add(trueCase);
 					newTransitions.add(elseCase);
-
+					
 					trueCase.setSource(t.getSource());
 					elseCase.setSource(t.getSource());
-					trueCase.setCondition("["+ valueToString(br.getCondition()) + "]");
+					trueCase.setCondition("[" + valueToString(br.getCondition()) + "]");
 					elseCase.setCondition("[else]");
 					t.setSource(null);
 					t.setTarget(null);
-
-					trueCase.setTarget(findLabeledLocation(cfg, function, br
-							.getDestination().substring(1)));
-					elseCase.setTarget(findLabeledLocation(cfg, function, br
-							.getElseDestination().substring(1)));
 					
+					trueCase.setTarget(findLabeledLocation(cfg, function, br.getDestination().substring(1)));
+					elseCase.setTarget(findLabeledLocation(cfg, function, br.getElseDestination().substring(1)));
+				} else if(br.getDestination() != null)
+				{
+					//check Destination
+					ControlFlowLocation source = findLabeledLocation(cfg, function, br.getDestination().substring(1));
+					if(!t.getTarget().equals(source))
+					{
+						t.setTarget(source);
+					}
 				}
-			} else if (t.getInstruction() instanceof IndirectBranch) {
-				// TODO: target depends on register content -> condition of
-				// control flow guards unclear
-				throw new RuntimeException(
-						"IndirectBranch found. Handling of such is not implemented yet");
-			} else if (t.getInstruction() instanceof Switch) {
-				// replace normal transition by guarded one
+				else
+				{
+					throw new RuntimeException("NO DESTINATION FOR BRANCH");
+				}
+			}
+			else if (t.getInstruction() instanceof IndirectBranch)
+			{
+				//TODO: target depends on register content -> condition of control flow guards unclear
+				throw new RuntimeException("IndirectBranch found. Handling of such is not implemented yet");
+			}
+			else if (t.getInstruction() instanceof Switch)
+			{
+				//replace normal transition by guarded one
 				Switch sw = (Switch) t.getInstruction();
-				GuardedTransition newT = ControlflowFactory.eINSTANCE
-						.createGuardedTransition();
+				GuardedTransition newT = ControlflowFactory.eINSTANCE.createGuardedTransition();
 				newT.setCondition("else");
 				newT.setSource(t.getSource());
-				ControlFlowLocation defaultTarget = findLabeledLocation(cfg,
-						function, sw.getDefaultCase().substring(1));
+				ControlFlowLocation defaultTarget = findLabeledLocation(cfg, function, sw.getDefaultCase().substring(1));
 				newT.setTarget(defaultTarget);
-
+				
 				newTransitions.add(newT);
-
-				// add other cases
-				for (SwitchCase sc : sw.getCases()) {
-					GuardedTransition otherCase = ControlflowFactory.eINSTANCE
-							.createGuardedTransition();
+				
+				//add other cases
+				for (SwitchCase sc : sw.getCases())
+				{
+					GuardedTransition otherCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
 					otherCase.setSource(t.getSource());
-					otherCase.setCondition(valueToString(sc.getCaseValue()
-							.getValue()));
-					ControlFlowLocation target = findLabeledLocation(cfg,
-							function, sc.getDestination().substring(1));
+					otherCase.setCondition(valueToString(sc.getCaseValue().getValue()));
+					ControlFlowLocation target = findLabeledLocation(cfg, function, sc.getDestination().substring(1));
 					otherCase.setTarget(target);
-
+					
 					newTransitions.add(otherCase);
 				}
-
-				// will be cleaned up later
+				
+				
+				//will be cleaned up later
 				t.setSource(null);
 				t.setTarget(null);
-
-			} else if (t.getInstruction() instanceof Invoke) {
-				// do nothing
+				
+				
+			}
+			else if (t.getInstruction() instanceof Invoke)
+			{
+				//do nothing
 			}
 		}
-
-		// has to be done separately in order to not modify collection while
-		// iterating
-		for (Transition t : newTransitions) {
-			t.setDiagram(cfg);
+		
+		//has to be done separately in order to not modify collection while iterating
+		for (Transition t : newTransitions)
+		{
+			t.setDiagram(cfg);			
 		}
-
+		
+		
 		cleanUp(cfg);
 		return cfg;
 	}
-
-	/**
-	 * Searches for the block with label destLabel and returns preceeding
-	 * location of the transition that is corresponding to the first instruction
-	 * of the block.
+	
+	/**Searches for the block with label destLabel and returns preceeding location of the transition that is 
+	 * corresponding to the first instruction of the block.  
 	 * 
 	 * @param cfg
 	 * @param function
 	 * @param destLabel
 	 * @return
 	 */
-	private ControlFlowLocation findLabeledLocation(ControlFlowDiagram cfg,
-			FunctionDefinition function, String destLabel) {
+	private ControlFlowLocation findLabeledLocation(ControlFlowDiagram cfg, FunctionDefinition function, String destLabel)
+	{
 		Instruction dest = getInstructionWithLabel(function, destLabel);
 		Transition destTrans = findCorrespondingTransition(cfg, dest);
 		return destTrans.getSource();
 	}
-
+		
 	/**
 	 * Removes locations and transitions if not connected
-	 * 
 	 * @param cfl
 	 */
-	private void cleanUp(ControlFlowDiagram cfg) {
+	private void cleanUp(ControlFlowDiagram cfg)
+	{
 		ArrayList<ControlFlowLocation> locations = new ArrayList<ControlFlowLocation>();
-		for (ControlFlowLocation location : cfg.getLocations()) {
-			if (location.getIncoming().isEmpty()
-					&& location.getOutgoing().isEmpty()) {
+		for(ControlFlowLocation location : cfg.getLocations())
+		{
+			if(location.getIncoming().isEmpty() && location.getOutgoing().isEmpty())
+			{
 				locations.add(location);
 			}
 		}
-
-		for (ControlFlowLocation location : locations) {
-			location.setDiagram(null); // remove
+		
+		for (ControlFlowLocation location : locations)
+		{
+			location.setDiagram(null); //remove
 		}
-
-		ArrayList<Transition> transitions = new ArrayList<Transition>();
-		for (Transition t : cfg.getTransitions()) {
-			// should not happen
-			if (t.getSource() == null || t.getTarget() == null) {
+		
+		
+		ArrayList<Transition> transitions  = new ArrayList<Transition>();
+		for(Transition t : cfg.getTransitions())
+		{
+			//should not happen
+			if(t.getSource() == null || t.getTarget() ==  null)
+			{
 				transitions.add(t);
 			}
 		}
-		for (Transition t : transitions) {
+		for(Transition t : transitions)
+		{
 			t.setDiagram(null);
 			t.setSource(null);
 			t.setTarget(null);
 		}
 	}
+	
 
 	/**
 	 * @param function
 	 * @param destLabel
 	 * @return instruction corresponding to the label
 	 */
-	private Instruction getInstructionWithLabel(FunctionDefinition function,
-			String destLabel) {
-		for (BasicBlock b : function.getBody().getBlocks()) {
-			if (destLabel.equals(b.getLabel())) {
+	private Instruction getInstructionWithLabel(FunctionDefinition function, String destLabel)
+	{
+		for(BasicBlock b :function.getBody().getBlocks())
+		{
+			if(destLabel.equals(b.getLabel()))
+			{
 				return b.getInstructions().get(0);
 			}
 		}
 		return null;
 	}
-
+	
 	/**
 	 * 
 	 * @param cfg
 	 * @param i
 	 * @return CFG transition corresponding to instruction i
 	 */
-	private Transition findCorrespondingTransition(ControlFlowDiagram cfg,
-			Instruction i) {
-		for (Transition t : cfg.getTransitions()) {
-			if (i.equals(t.getInstruction())) {
+	private Transition findCorrespondingTransition(ControlFlowDiagram cfg, Instruction i)
+	{
+		for(Transition t : cfg.getTransitions())
+		{
+			if(i.equals(t.getInstruction()))
+			{
 				return t;
 			}
 		}
 		return null;
 	}
 
+
 	/**
 	 * @param diag
 	 * @param pc
 	 * @return
 	 */
-	private ControlFlowLocation createControlFlowLocation(
-			ControlFlowDiagram diag, ProgramCounter pc) {
-		ControlFlowLocation loc = ControlflowFactory.eINSTANCE
-				.createControlFlowLocation();
+	private ControlFlowLocation createControlFlowLocation(ControlFlowDiagram diag, ProgramCounter pc) {
+		ControlFlowLocation loc = ControlflowFactory.eINSTANCE.createControlFlowLocation();
 		loc.setPc(pc.next());
 		loc.setDiagram(diag);
 		return loc;
@@ -336,28 +348,27 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 		return transition;
 	}
 
+
+	/**
+	 * 
+	 */
 	private void refreshWorkspace() {
-		IProject[] iProjects = ResourcesPlugin.getWorkspace().getRoot()
-				.getProjects();
+		IProject[] iProjects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
 		for (int i = 0; i < iProjects.length; i++)
 			try {
-				iProjects[i].refreshLocal(0,
-						new org.eclipse.core.runtime.NullProgressMonitor());
+				iProjects[i].refreshLocal(0, new org.eclipse.core.runtime.NullProgressMonitor());
 			} catch (CoreException e) {
 				CFGActivator.logError(e.getMessage(), e);
 			}
 	}
 
-	private String valueToString(Value value) {
-		if (value.eClass().equals(LlvmPackage.eINSTANCE.getConstant())) {
+	private String valueToString(Value value)
+	{
+		if (value.eClass().equals(LlvmPackage.eINSTANCE.getConstant()))
+		{
 			Constant constant = (Constant) value;
 			return constant.getValue().toString();
-		}
-
-		if (value instanceof AddressUseImpl) {
-			AddressUseImpl aui = (AddressUseImpl) value;
-			return aui.getAddress().getName();
-		}
+		} 
 		return value.toString();
 	}
 }
