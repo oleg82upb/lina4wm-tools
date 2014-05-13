@@ -192,6 +192,9 @@ public class ControlFlowNavigatorContentProvider implements
 					topViews.add((View) o);
 				}
 			}
+			result.addAll(createNavigatorItems(
+					selectViewsByType(topViews,
+							ControlFlowDiagramEditPart.MODEL_ID), file, false));
 			return result.toArray();
 		}
 
@@ -216,6 +219,28 @@ public class ControlFlowNavigatorContentProvider implements
 	 */
 	private Object[] getViewChildren(View view, Object parentElement) {
 		switch (ControlFlowVisualIDRegistry.getVisualID(view)) {
+
+		case ControlFlowDiagramEditPart.VISUAL_ID: {
+			LinkedList<ControlFlowAbstractNavigatorItem> result = new LinkedList<ControlFlowAbstractNavigatorItem>();
+			Diagram sv = (Diagram) view;
+			ControlFlowNavigatorGroup links = new ControlFlowNavigatorGroup(
+					Messages.NavigatorGroupName_ControlFlowDiagram_1000_links,
+					"icons/linksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Collection<View> connectedViews;
+			connectedViews = getChildrenByType(Collections.singleton(sv),
+					ControlFlowVisualIDRegistry
+							.getType(ControlFlowLocationEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getDiagramLinksByType(Collections.singleton(sv),
+					ControlFlowVisualIDRegistry
+							.getType(TransitionEditPart.VISUAL_ID));
+			links.addChildren(createNavigatorItems(connectedViews, links, false));
+			if (!links.isEmpty()) {
+				result.add(links);
+			}
+			return result.toArray();
+		}
 
 		case ControlFlowLocationEditPart.VISUAL_ID: {
 			LinkedList<ControlFlowAbstractNavigatorItem> result = new LinkedList<ControlFlowAbstractNavigatorItem>();
@@ -271,28 +296,6 @@ public class ControlFlowNavigatorContentProvider implements
 			}
 			if (!source.isEmpty()) {
 				result.add(source);
-			}
-			return result.toArray();
-		}
-
-		case ControlFlowDiagramEditPart.VISUAL_ID: {
-			LinkedList<ControlFlowAbstractNavigatorItem> result = new LinkedList<ControlFlowAbstractNavigatorItem>();
-			Diagram sv = (Diagram) view;
-			ControlFlowNavigatorGroup links = new ControlFlowNavigatorGroup(
-					Messages.NavigatorGroupName_ControlFlowDiagram_1000_links,
-					"icons/linksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection<View> connectedViews;
-			connectedViews = getChildrenByType(Collections.singleton(sv),
-					ControlFlowVisualIDRegistry
-							.getType(ControlFlowLocationEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getDiagramLinksByType(Collections.singleton(sv),
-					ControlFlowVisualIDRegistry
-							.getType(TransitionEditPart.VISUAL_ID));
-			links.addChildren(createNavigatorItems(connectedViews, links, false));
-			if (!links.isEmpty()) {
-				result.add(links);
 			}
 			return result.toArray();
 		}
