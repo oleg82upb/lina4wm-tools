@@ -164,6 +164,29 @@ public class ControlflowItemProviderAdapterFactory extends ControlflowAdapterFac
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.lina.cfg.controlflow.MultiTransition} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MultiTransitionItemProvider multiTransitionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.lina.cfg.controlflow.MultiTransition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMultiTransitionAdapter() {
+		if (multiTransitionItemProvider == null) {
+			multiTransitionItemProvider = new MultiTransitionItemProvider(this);
+		}
+
+		return multiTransitionItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -266,6 +289,7 @@ public class ControlflowItemProviderAdapterFactory extends ControlflowAdapterFac
 		if (controlFlowLocationItemProvider != null) controlFlowLocationItemProvider.dispose();
 		if (transitionItemProvider != null) transitionItemProvider.dispose();
 		if (guardedTransitionItemProvider != null) guardedTransitionItemProvider.dispose();
+		if (multiTransitionItemProvider != null) multiTransitionItemProvider.dispose();
 	}
 
 }

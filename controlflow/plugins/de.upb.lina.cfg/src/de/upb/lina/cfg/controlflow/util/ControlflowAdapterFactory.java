@@ -35,8 +35,7 @@ public class ControlflowAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public ControlflowAdapterFactory() {
-		if (modelPackage == null)
-		{
+		if (modelPackage == null) {
 			modelPackage = ControlflowPackage.eINSTANCE;
 		}
 	}
@@ -51,12 +50,10 @@ public class ControlflowAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage)
-		{
+		if (object == modelPackage) {
 			return true;
 		}
-		if (object instanceof EObject)
-		{
+		if (object instanceof EObject) {
 			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -69,31 +66,29 @@ public class ControlflowAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected ControlflowSwitch<Adapter> modelSwitch =
-		new ControlflowSwitch<Adapter>()
-		{
+		new ControlflowSwitch<Adapter>() {
 			@Override
-			public Adapter caseControlFlowDiagram(ControlFlowDiagram object)
-			{
+			public Adapter caseControlFlowDiagram(ControlFlowDiagram object) {
 				return createControlFlowDiagramAdapter();
 			}
 			@Override
-			public Adapter caseControlFlowLocation(ControlFlowLocation object)
-			{
+			public Adapter caseControlFlowLocation(ControlFlowLocation object) {
 				return createControlFlowLocationAdapter();
 			}
 			@Override
-			public Adapter caseTransition(Transition object)
-			{
+			public Adapter caseTransition(Transition object) {
 				return createTransitionAdapter();
 			}
 			@Override
-			public Adapter caseGuardedTransition(GuardedTransition object)
-			{
+			public Adapter caseGuardedTransition(GuardedTransition object) {
 				return createGuardedTransitionAdapter();
 			}
 			@Override
-			public Adapter defaultCase(EObject object)
-			{
+			public Adapter caseMultiTransition(MultiTransition object) {
+				return createMultiTransitionAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
 		};
@@ -165,6 +160,20 @@ public class ControlflowAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createGuardedTransitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.controlflow.MultiTransition <em>Multi Transition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.lina.cfg.controlflow.MultiTransition
+	 * @generated
+	 */
+	public Adapter createMultiTransitionAdapter() {
 		return null;
 	}
 

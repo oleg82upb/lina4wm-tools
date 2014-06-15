@@ -38,8 +38,7 @@ public class ControlflowSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public ControlflowSwitch() {
-		if (modelPackage == null)
-		{
+		if (modelPackage == null) {
 			modelPackage = ControlflowPackage.eINSTANCE;
 		}
 	}
@@ -66,34 +65,36 @@ public class ControlflowSwitch<T> extends Switch<T> {
 	 */
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
-		switch (classifierID)
-		{
-			case ControlflowPackage.CONTROL_FLOW_DIAGRAM:
-			{
+		switch (classifierID) {
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM: {
 				ControlFlowDiagram controlFlowDiagram = (ControlFlowDiagram)theEObject;
 				T result = caseControlFlowDiagram(controlFlowDiagram);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ControlflowPackage.CONTROL_FLOW_LOCATION:
-			{
+			case ControlflowPackage.CONTROL_FLOW_LOCATION: {
 				ControlFlowLocation controlFlowLocation = (ControlFlowLocation)theEObject;
 				T result = caseControlFlowLocation(controlFlowLocation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ControlflowPackage.TRANSITION:
-			{
+			case ControlflowPackage.TRANSITION: {
 				Transition transition = (Transition)theEObject;
 				T result = caseTransition(transition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ControlflowPackage.GUARDED_TRANSITION:
-			{
+			case ControlflowPackage.GUARDED_TRANSITION: {
 				GuardedTransition guardedTransition = (GuardedTransition)theEObject;
 				T result = caseGuardedTransition(guardedTransition);
 				if (result == null) result = caseTransition(guardedTransition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ControlflowPackage.MULTI_TRANSITION: {
+				MultiTransition multiTransition = (MultiTransition)theEObject;
+				T result = caseMultiTransition(multiTransition);
+				if (result == null) result = caseTransition(multiTransition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -158,6 +159,21 @@ public class ControlflowSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseGuardedTransition(GuardedTransition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Multi Transition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Multi Transition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMultiTransition(MultiTransition object) {
 		return null;
 	}
 

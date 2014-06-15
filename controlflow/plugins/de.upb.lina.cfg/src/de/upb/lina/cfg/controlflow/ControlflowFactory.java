@@ -58,6 +58,15 @@ public interface ControlflowFactory extends EFactory {
 	GuardedTransition createGuardedTransition();
 
 	/**
+	 * Returns a new object of class '<em>Multi Transition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Multi Transition</em>'.
+	 * @generated
+	 */
+	MultiTransition createMultiTransition();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
