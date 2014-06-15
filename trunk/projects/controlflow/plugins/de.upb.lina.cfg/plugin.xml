@@ -20,4 +20,12 @@
             genModel="model/controlflow.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ControlFlow -->
+      <package
+            uri="http://www.upb.de/lina/cfg/controlflow"
+            class="de.upb.lina.cfg.controlflow.ControlflowPackage"
+            genModel="model/ControlFlow.genmodel"/>
+   </extension>
+
 </plugin>

@@ -13,6 +13,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -24,6 +25,7 @@ import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.ControlflowFactory;
 import de.upb.lina.cfg.controlflow.GuardedTransition;
+import de.upb.lina.cfg.controlflow.MultiTransition;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.Branch;
@@ -112,13 +114,14 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 
 		cfg.setName(function.getAddress().getName());
 
+		//create the naive normal cfg
 		EList<BasicBlock> blocks = function.getBody().getBlocks();
 		for (BasicBlock b : blocks) {
 			ControlFlowLocation location = createControlFlowLocation(cfg, pc);
 			if (cfg.getStart() == null) {
 				cfg.setStart(location);
 			}
-
+			//correct
 			for (Instruction instr : b.getInstructions()) {
 				Transition t = createTransition(cfg, instr);
 				ControlFlowLocation nextLocation = createControlFlowLocation(
@@ -126,6 +129,34 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 				t.setSource(location);
 				t.setTarget(nextLocation);
 				location = nextLocation;
+			}
+			// end of correct
+			
+//			EList<Instruction> ints = b.getInstructions();
+//			for(int i = 0; i< ints.size(); i++){
+//				Instruction current = ints.get(i);
+//				Instruction next; 
+//				ArrayList <Instruction> toMulti = new ArrayList<Instruction>();
+//				toMulti.add(current);
+//				if(i+1 < ints.size()){
+//					int k = 0;
+//					next = ints.get(i+1);
+//					if(next.eClass() == current.eClass() && current.equals(LlvmPackage.eINSTANCE.getLoad()) && next.equals(LlvmPackage.eINSTANCE.getStore())){
+//						toMulti.add(next);
+//						i+=2;
+//					}
+//				}
+//				
+//				
+//				
+//			}
+			
+			EClass last = b.getInstructions().get(0).eClass();
+			ArrayList<Instruction> instructs = new ArrayList<Instruction>();
+			for (Instruction instr : b.getInstructions()) {
+				
+				
+				last = instr.eClass();
 			}
 		}
 
@@ -156,27 +187,58 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 				
 				if (br.getElseDestination() != null) {
 					
-					// replace transition with guarded
-					GuardedTransition trueCase = ControlflowFactory.eINSTANCE
-							.createGuardedTransition();
-					trueCase.setInstruction(t.getInstruction());
-					GuardedTransition elseCase = ControlflowFactory.eINSTANCE
-							.createGuardedTransition();
-					elseCase.setInstruction(t.getInstruction());
-					newTransitions.add(trueCase);
-					newTransitions.add(elseCase);
+//					// replace transition with guarded
+//					GuardedTransition trueCase = ControlflowFactory.eINSTANCE
+//							.createGuardedTransition();
+//					trueCase.setInstruction(t.getInstruction());
+//					GuardedTransition elseCase = ControlflowFactory.eINSTANCE
+//							.createGuardedTransition();
+//					elseCase.setInstruction(t.getInstruction());
+//					newTransitions.add(trueCase);
+//					newTransitions.add(elseCase);
+//
+//					Transition equalCalc = t.getSource().getIncoming().get(0);
+//					
+//					trueCase.setSource(equalCalc.getSource());
+//					elseCase.setSource(equalCalc.getSource());
+//					
+//					//TODO: FIX THIS, this is still wrong...
+//					//delete the source of the compare transition
+//					trueCase.setCondition("["+getLabelWithInstruction(function, br) +"]");
+//					t.
+//					
+//					//trueCase.setCondition("["+ valueToString(br.getCondition()) + "]");
+//					elseCase.setCondition("[else]");
+//					t.setSource(null);
+//					t.setTarget(null);
+//
+//					
+//					trueCase.setTarget(findLabeledLocation(cfg, function, br
+//							.getDestination().substring(1)));
+//					elseCase.setTarget(findLabeledLocation(cfg, function, br
+//							.getElseDestination().substring(1)));
+					
+					 // replace transition with guarded
+                    GuardedTransition trueCase = ControlflowFactory.eINSTANCE
+                                    .createGuardedTransition();
+                    trueCase.setInstruction(t.getInstruction());
+                    GuardedTransition elseCase = ControlflowFactory.eINSTANCE
+                                    .createGuardedTransition();
+                    elseCase.setInstruction(t.getInstruction());
+                    newTransitions.add(trueCase);
+                    newTransitions.add(elseCase);
 
-					trueCase.setSource(t.getSource());
-					elseCase.setSource(t.getSource());
-					trueCase.setCondition("["+ valueToString(br.getCondition()) + "]");
-					elseCase.setCondition("[else]");
-					t.setSource(null);
-					t.setTarget(null);
+                    trueCase.setSource(t.getSource());
+                    elseCase.setSource(t.getSource());
+                    trueCase.setCondition("["+ valueToString(br.getCondition()) + "]");
+                    elseCase.setCondition("[else]");
+                    t.setSource(null);
+                    t.setTarget(null);
 
-					trueCase.setTarget(findLabeledLocation(cfg, function, br
-							.getDestination().substring(1)));
-					elseCase.setTarget(findLabeledLocation(cfg, function, br
-							.getElseDestination().substring(1)));
+                    trueCase.setTarget(findLabeledLocation(cfg, function, br
+                                    .getDestination().substring(1)));
+                    elseCase.setTarget(findLabeledLocation(cfg, function, br
+                                    .getElseDestination().substring(1)));
 					
 				}
 			} else if (t.getInstruction() instanceof IndirectBranch) {
@@ -218,7 +280,35 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 			} else if (t.getInstruction() instanceof Invoke) {
 				// do nothing
 			}
-		}
+		} //end for 
+		
+		//sum things up
+//		List<Transition> multis = new ArrayList<Transition>();
+//		
+//		for(Transition t: cfg.getTransitions()){
+//			if(!(t instanceof GuardedTransition)){
+//				Transition current = t;
+//				Transition next = t; 
+//				Transition before = t;
+//		
+//				//check if it has a successor
+//				if(t.getTarget().getOutgoing() != null && !t.getTarget().getOutgoing().isEmpty()){
+//					next = t.getTarget().getOutgoing().get(0);
+//				}
+//				
+//				//check if it has a precessor
+//				if(t.getSource().getIncoming() != null && !t.getSource().getIncoming().isEmpty()){
+//					before = next = t.getTarget().getOutgoing().get(0);
+//				}
+//				
+//				List<Transition> thingsToAddToMulti = new ArrayList<Transition>();
+//				while(next != t && next != null){
+//					if(){
+//						
+//					}
+//				}
+//			}
+//		}
 
 		// has to be done separately in order to not modify collection while
 		// iterating
@@ -293,6 +383,23 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 		}
 		return null;
 	}
+	
+	/**
+	 * @param function
+	 * @param destLabel
+	 * @return instruction corresponding to the label
+	 */
+	private String getLabelWithInstruction(FunctionDefinition function,
+			Instruction i) {
+		System.out.println("Iso: " + i.toString());
+		for (BasicBlock b : function.getBody().getBlocks()) {
+			if (i.equals(b.getInstructions().get(0))) {
+				return b.getLabel();
+			}
+			System.out.println(b.getInstructions().get(0).toString());
+		}
+		return null;
+	}
 
 	/**
 	 * 
@@ -332,6 +439,13 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 	private Transition createTransition(ControlFlowDiagram diag, Instruction i) {
 		Transition transition = ControlflowFactory.eINSTANCE.createTransition();
 		transition.setInstruction(i);
+		transition.setDiagram(diag);
+		return transition;
+	}
+	
+	private Transition createMultiTransition(ControlFlowDiagram diag, ArrayList <Instruction> instructions) {
+		MultiTransition transition = ControlflowFactory.eINSTANCE.createMultiTransition();
+		transition.getInstructions().addAll(instructions);
 		transition.setDiagram(diag);
 		return transition;
 	}

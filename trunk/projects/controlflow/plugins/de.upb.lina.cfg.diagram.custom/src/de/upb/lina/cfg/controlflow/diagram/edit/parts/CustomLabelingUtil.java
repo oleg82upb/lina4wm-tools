@@ -32,6 +32,11 @@ import de.upb.llvm_parser.llvm.impl.PredefinedImpl;
 
 public class CustomLabelingUtil {
 
+	/**
+	 * Gets called to get a label for the given transition
+	 * @param t transition that needs a label
+	 * @return label for the transition
+	 */
 	public String getNewTransitionLabel(Transition t) {
 		String result = "";
 		EClass type = t.getInstruction().eClass();
@@ -142,7 +147,7 @@ public class CustomLabelingUtil {
         // Compare
         else if (type.equals(LlvmPackage.eINSTANCE.getCompare())) {
                 Compare instr = (Compare) t.getInstruction();
-                result += instr.getResult().getName() + " = ";
+                result += instr.getResult().getName() + " == ";
                 String compare = instr.getCond();
                 if (compare.equals("false")) {
                         result += "false";
@@ -297,12 +302,22 @@ public class CustomLabelingUtil {
         return result;
 	}
 
+	/**
+	 * TODO: Find out what this does.
+	 * @param pList
+	 * @return 
+	 */
 	private String addParameterList(ParameterList pList) {
 		String result = "";
 		// TODO Auto-generated method stub
 		return result;
 	}
 
+	/**
+	 * Adds a type
+	 * @param type the type to add to the String.
+	 * @return concatenated String
+	 */
 	private String addType(EObject type) {
 		String result;
 		if (type instanceof PredefinedImpl) {
@@ -321,6 +336,11 @@ public class CustomLabelingUtil {
 		return result;
 	}
 
+	/**
+	 * Add a value to the String
+	 * @param value
+	 * @return the concatenated String
+	 */
 	private String addValue(Value value) {
 		String result = "";
 		

@@ -13,6 +13,7 @@ import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.ControlflowFactory;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.controlflow.GuardedTransition;
+import de.upb.lina.cfg.controlflow.MultiTransition;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
@@ -50,6 +51,13 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * @generated
 	 */
 	private EClass guardedTransitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass multiTransitionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -273,6 +281,24 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getMultiTransition() {
+		return multiTransitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMultiTransition_Instructions() {
+		return (EReference)multiTransitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ControlflowFactory getControlflowFactory() {
 		return (ControlflowFactory)getEFactoryInstance();
 	}
@@ -316,6 +342,9 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 
 		guardedTransitionEClass = createEClass(GUARDED_TRANSITION);
 		createEAttribute(guardedTransitionEClass, GUARDED_TRANSITION__CONDITION);
+
+		multiTransitionEClass = createEClass(MULTI_TRANSITION);
+		createEReference(multiTransitionEClass, MULTI_TRANSITION__INSTRUCTIONS);
 	}
 
 	/**
@@ -350,6 +379,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 
 		// Add supertypes to classes
 		guardedTransitionEClass.getESuperTypes().add(this.getTransition());
+		multiTransitionEClass.getESuperTypes().add(this.getTransition());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(controlFlowDiagramEClass, ControlFlowDiagram.class, "ControlFlowDiagram", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -372,6 +402,9 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 
 		initEClass(guardedTransitionEClass, GuardedTransition.class, "GuardedTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGuardedTransition_Condition(), ecorePackage.getEString(), "condition", null, 0, 1, GuardedTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(multiTransitionEClass, MultiTransition.class, "MultiTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMultiTransition_Instructions(), theLlvmPackage.getInstruction(), null, "instructions", null, 0, -1, MultiTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

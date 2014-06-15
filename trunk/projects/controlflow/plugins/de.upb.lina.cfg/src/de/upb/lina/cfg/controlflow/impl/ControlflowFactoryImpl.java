@@ -26,16 +26,13 @@ public class ControlflowFactoryImpl extends EFactoryImpl implements ControlflowF
 	 * @generated
 	 */
 	public static ControlflowFactory init() {
-		try
-		{
-			ControlflowFactory theControlflowFactory = (ControlflowFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.upb.de/lina/cfg/controlflow"); 
-			if (theControlflowFactory != null)
-			{
+		try {
+			ControlflowFactory theControlflowFactory = (ControlflowFactory)EPackage.Registry.INSTANCE.getEFactory(ControlflowPackage.eNS_URI);
+			if (theControlflowFactory != null) {
 				return theControlflowFactory;
 			}
 		}
-		catch (Exception exception)
-		{
+		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new ControlflowFactoryImpl();
@@ -58,12 +55,12 @@ public class ControlflowFactoryImpl extends EFactoryImpl implements ControlflowF
 	 */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID())
-		{
+		switch (eClass.getClassifierID()) {
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM: return createControlFlowDiagram();
 			case ControlflowPackage.CONTROL_FLOW_LOCATION: return createControlFlowLocation();
 			case ControlflowPackage.TRANSITION: return createTransition();
 			case ControlflowPackage.GUARDED_TRANSITION: return createGuardedTransition();
+			case ControlflowPackage.MULTI_TRANSITION: return createMultiTransition();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -107,6 +104,16 @@ public class ControlflowFactoryImpl extends EFactoryImpl implements ControlflowF
 	public GuardedTransition createGuardedTransition() {
 		GuardedTransitionImpl guardedTransition = new GuardedTransitionImpl();
 		return guardedTransition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MultiTransition createMultiTransition() {
+		MultiTransitionImpl multiTransition = new MultiTransitionImpl();
+		return multiTransition;
 	}
 
 	/**

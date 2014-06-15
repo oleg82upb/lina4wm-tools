@@ -285,6 +285,70 @@ public interface ControlflowPackage extends EPackage {
 	int GUARDED_TRANSITION_FEATURE_COUNT = TRANSITION_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.MultiTransitionImpl <em>Multi Transition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.upb.lina.cfg.controlflow.impl.MultiTransitionImpl
+	 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getMultiTransition()
+	 * @generated
+	 */
+	int MULTI_TRANSITION = 4;
+
+	/**
+	 * The feature id for the '<em><b>Instruction</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_TRANSITION__INSTRUCTION = TRANSITION__INSTRUCTION;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_TRANSITION__SOURCE = TRANSITION__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_TRANSITION__TARGET = TRANSITION__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_TRANSITION__DIAGRAM = TRANSITION__DIAGRAM;
+
+	/**
+	 * The feature id for the '<em><b>Instructions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_TRANSITION__INSTRUCTIONS = TRANSITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Multi Transition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_TRANSITION_FEATURE_COUNT = TRANSITION_FEATURE_COUNT + 1;
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram <em>Control Flow Diagram</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -468,6 +532,27 @@ public interface ControlflowPackage extends EPackage {
 	EAttribute getGuardedTransition_Condition();
 
 	/**
+	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.MultiTransition <em>Multi Transition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Multi Transition</em>'.
+	 * @see de.upb.lina.cfg.controlflow.MultiTransition
+	 * @generated
+	 */
+	EClass getMultiTransition();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.upb.lina.cfg.controlflow.MultiTransition#getInstructions <em>Instructions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Instructions</em>'.
+	 * @see de.upb.lina.cfg.controlflow.MultiTransition#getInstructions()
+	 * @see #getMultiTransition()
+	 * @generated
+	 */
+	EReference getMultiTransition_Instructions();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -632,6 +717,24 @@ public interface ControlflowPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute GUARDED_TRANSITION__CONDITION = eINSTANCE.getGuardedTransition_Condition();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.MultiTransitionImpl <em>Multi Transition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.lina.cfg.controlflow.impl.MultiTransitionImpl
+		 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getMultiTransition()
+		 * @generated
+		 */
+		EClass MULTI_TRANSITION = eINSTANCE.getMultiTransition();
+
+		/**
+		 * The meta object literal for the '<em><b>Instructions</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MULTI_TRANSITION__INSTRUCTIONS = eINSTANCE.getMultiTransition_Instructions();
 
 	}
 
