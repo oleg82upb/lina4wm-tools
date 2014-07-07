@@ -187,6 +187,29 @@ public class ControlflowItemProviderAdapterFactory extends ControlflowAdapterFac
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.lina.cfg.controlflow.CFLBuffer} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CFLBufferItemProvider cflBufferItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.lina.cfg.controlflow.CFLBuffer}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCFLBufferAdapter() {
+		if (cflBufferItemProvider == null) {
+			cflBufferItemProvider = new CFLBufferItemProvider(this);
+		}
+
+		return cflBufferItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -290,6 +313,7 @@ public class ControlflowItemProviderAdapterFactory extends ControlflowAdapterFac
 		if (transitionItemProvider != null) transitionItemProvider.dispose();
 		if (guardedTransitionItemProvider != null) guardedTransitionItemProvider.dispose();
 		if (multiTransitionItemProvider != null) multiTransitionItemProvider.dispose();
+		if (cflBufferItemProvider != null) cflBufferItemProvider.dispose();
 	}
 
 }
