@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Stack;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -130,6 +132,7 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 				t.setTarget(nextLocation);
 				location = nextLocation;
 			}
+			
 			// end of correct
 			
 //			EList<Instruction> ints = b.getInstructions();
@@ -367,6 +370,54 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 			t.setSource(null);
 			t.setTarget(null);
 		}
+	}
+	
+	
+	public void fillBufferWithDFS(ControlFlowDiagram cfg){
+		//TODO: change to enum
+		//0 = white = not visited
+		//1 = grey = visited
+		//2 = black = visited and done
+		HashMap<ControlFlowLocation,Integer> colors = new HashMap<ControlFlowLocation, Integer>();
+		Stack<ControlFlowLocation> stack = new Stack<ControlFlowLocation>();
+		ArrayList<ControlFlowLocation> locations = new ArrayList<ControlFlowLocation>();
+		ControlFlowLocation start = null;
+		
+		//init colors
+		for(ControlFlowLocation l: locations){
+			if(start == null){
+				start = l;
+				colors.put(start, 1);
+			}else{
+				colors.put(l, 0);
+			}
+		}
+		
+		while(!stack.isEmpty()){
+			ControlFlowLocation u = stack.peek();
+			ArrayList<ControlFlowLocation> adjacents = getAdjacentNodes(u);
+			if(adjacents.isEmpty()){
+				colors.put(u, 2);
+				stack.pop();
+			}else{
+				ControlFlowLocation v = adjacents.get(0);
+				adjacents.remove(v);
+				if(colors.get(v) == 0){
+					colors.put(v, 1);
+					stack.push(v);
+					//TODO fill buffer here, depending on what is in the buffer before :D
+				}
+			}
+		}
+		
+	}
+	
+	public ArrayList<ControlFlowLocation> getAdjacentNodes(ControlFlowLocation l){
+		ArrayList<ControlFlowLocation> adjacents = new ArrayList<ControlFlowLocation>();
+		for(Transition t:l.getOutgoing()){
+			adjacents.add(t.getTarget());
+		}
+		return adjacents;
 	}
 
 	/**

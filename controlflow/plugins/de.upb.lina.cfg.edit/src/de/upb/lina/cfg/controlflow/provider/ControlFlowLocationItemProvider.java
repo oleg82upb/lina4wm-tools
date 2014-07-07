@@ -66,6 +66,7 @@ public class ControlFlowLocationItemProvider
 			addPcPropertyDescriptor(object);
 			addIncomingPropertyDescriptor(object);
 			addOutgoingPropertyDescriptor(object);
+			addBufferPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -128,6 +129,28 @@ public class ControlFlowLocationItemProvider
 				 getString("_UI_ControlFlowLocation_outgoing_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ControlFlowLocation_outgoing_feature", "_UI_ControlFlowLocation_type"),
 				 ControlflowPackage.Literals.CONTROL_FLOW_LOCATION__OUTGOING,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Buffer feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addBufferPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ControlFlowLocation_buffer_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ControlFlowLocation_buffer_feature", "_UI_ControlFlowLocation_type"),
+				 ControlflowPackage.Literals.CONTROL_FLOW_LOCATION__BUFFER,
 				 true,
 				 false,
 				 true,

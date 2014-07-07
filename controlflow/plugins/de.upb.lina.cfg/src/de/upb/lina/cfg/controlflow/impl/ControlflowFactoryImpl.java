@@ -61,6 +61,7 @@ public class ControlflowFactoryImpl extends EFactoryImpl implements ControlflowF
 			case ControlflowPackage.TRANSITION: return createTransition();
 			case ControlflowPackage.GUARDED_TRANSITION: return createGuardedTransition();
 			case ControlflowPackage.MULTI_TRANSITION: return createMultiTransition();
+			case ControlflowPackage.CFL_BUFFER: return createCFLBuffer();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -114,6 +115,16 @@ public class ControlflowFactoryImpl extends EFactoryImpl implements ControlflowF
 	public MultiTransition createMultiTransition() {
 		MultiTransitionImpl multiTransition = new MultiTransitionImpl();
 		return multiTransition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CFLBuffer createCFLBuffer() {
+		CFLBufferImpl cflBuffer = new CFLBufferImpl();
+		return cflBuffer;
 	}
 
 	/**
