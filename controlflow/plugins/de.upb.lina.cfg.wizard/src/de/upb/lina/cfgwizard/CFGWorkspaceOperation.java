@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Stack;
 
 import org.eclipse.core.resources.IProject;
@@ -373,44 +374,111 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 	}
 	
 	
-	public void fillBufferWithDFS(ControlFlowDiagram cfg){
-		//TODO: change to enum
-		//0 = white = not visited
-		//1 = grey = visited
-		//2 = black = visited and done
-		HashMap<ControlFlowLocation,Integer> colors = new HashMap<ControlFlowLocation, Integer>();
-		Stack<ControlFlowLocation> stack = new Stack<ControlFlowLocation>();
-		ArrayList<ControlFlowLocation> locations = new ArrayList<ControlFlowLocation>();
-		ControlFlowLocation start = null;
+//	public void fillBufferWithDFS(ControlFlowDiagram cfg){
+//		//TODO: change to enum
+//		//0 = white = not visited
+//		//1 = grey = visited
+//		//2 = black = visited and done
+//		HashMap<ControlFlowLocation,Integer> colors = new HashMap<ControlFlowLocation, Integer>();
+//		Stack<ControlFlowLocation> stack = new Stack<ControlFlowLocation>();
+//		ArrayList<ControlFlowLocation> locations = new ArrayList<ControlFlowLocation>();
+//		ControlFlowLocation start = null;
+//		
+//		//init colors
+//		for(ControlFlowLocation l: locations){
+//			if(start == null){
+//				start = l;
+//				colors.put(start, 1);
+//			}else{
+//				colors.put(l, 0);
+//			}
+//		}
+//		
+//		while(!stack.isEmpty()){
+//			ControlFlowLocation u = stack.peek();
+//			ArrayList<ControlFlowLocation> adjacents = getAdjacentNodes(u);
+//			if(adjacents.isEmpty()){
+//				colors.put(u, 2);
+//				stack.pop();
+//			}else{
+//				ControlFlowLocation v = adjacents.get(0);
+//				adjacents.remove(v);
+//				if(colors.get(v) == 0){
+//					colors.put(v, 1);
+//					stack.push(v);
+//					//TODO fill buffer here, depending on what is in the buffer before :D
+//				}
+//			}
+//		}
+//		
+//	}
+	
+	public void seq(List<Instruction> instructions, FunctionDefinition def){
+		//empty list
+		if(instructions.size() <1){
+			return;
+		}
+		Instruction first = instructions.get(0);
+		instructions.remove(first);
 		
-		//init colors
-		for(ControlFlowLocation l: locations){
-			if(start == null){
-				start = l;
-				colors.put(start, 1);
-			}else{
-				colors.put(l, 0);
+		
+		if(instructions.size() == 1 ){
+			//ret
+			if(first.eClass().equals(LlvmPackage.eINSTANCE.getReturn())){
+				//do nothing, already created
+				return;
 			}
 		}
 		
-		while(!stack.isEmpty()){
-			ControlFlowLocation u = stack.peek();
-			ArrayList<ControlFlowLocation> adjacents = getAdjacentNodes(u);
-			if(adjacents.isEmpty()){
-				colors.put(u, 2);
-				stack.pop();
-			}else{
-				ControlFlowLocation v = adjacents.get(0);
-				adjacents.remove(v);
-				if(colors.get(v) == 0){
-					colors.put(v, 1);
-					stack.push(v);
-					//TODO fill buffer here, depending on what is in the buffer before :D
-				}
+		//write
+		if(first.eClass().equals(LlvmPackage.eINSTANCE.getStore())){
+			ArrayList<Instruction> writeSeq = new ArrayList<Instruction>();
+			writeSeq.add(first);
+			del(def ,writeSeq, instructions);
+			
+		//branch	
+		}else if(first.eClass().equals(LlvmPackage.eINSTANCE.getBranch())){
+			Branch branch = (Branch)first;
+			Instruction ifInstruction = getInstructionWithLabel(def,branch.getDestination().substring(1));
+			Instruction elseInstruction = getInstructionWithLabel(def,branch.getElseDestination().substring(1));
+			
+			//if part
+			ArrayList<Instruction> ifCopy = new ArrayList<Instruction>(instructions.size());
+			Collections.copy(ifCopy, instructions);		
+			for(int i = 0; !ifCopy.get(i).equals(ifInstruction); i++){
+				ifCopy.remove(i);
 			}
+			seq(ifCopy, def);
+			
+			//else part
+			ArrayList<Instruction> elseCopy = new ArrayList<Instruction>(instructions.size());
+			Collections.copy(ifCopy, instructions);
+			for(int i = 0; !ifCopy.get(i).equals(elseInstruction); i++){
+				elseCopy.remove(i);
+			}
+			seq(elseCopy, def);
+			
+			//LOOPS!!!!
+		//}else if(){
+		
+//		}
+					
+		}else{
+			//cmd-seq
+			//TODO create nodes accordingly
 		}
 		
 	}
+	
+	public void del(FunctionDefinition def , List<Instruction> writeSeq, List<Instruction> rest){
+		if(writeSeq.size()>0){
+//			flush(writeSeq, rest);
+//			prog(writeSeq, rest);
+		}else{
+			seq(rest, def);
+		}
+	}
+	
 	
 	public ArrayList<ControlFlowLocation> getAdjacentNodes(ControlFlowLocation l){
 		ArrayList<ControlFlowLocation> adjacents = new ArrayList<ControlFlowLocation>();
