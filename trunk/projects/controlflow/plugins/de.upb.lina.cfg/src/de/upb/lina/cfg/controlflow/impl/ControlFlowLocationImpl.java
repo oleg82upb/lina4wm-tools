@@ -2,29 +2,23 @@
  */
 package de.upb.lina.cfg.controlflow.impl;
 
-import de.upb.lina.cfg.controlflow.CFLBuffer;
-import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
-import de.upb.lina.cfg.controlflow.ControlFlowLocation;
-import de.upb.lina.cfg.controlflow.ControlflowPackage;
-import de.upb.lina.cfg.controlflow.Transition;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
+import de.upb.lina.cfg.controlflow.ControlFlowLocation;
+import de.upb.lina.cfg.controlflow.ControlflowPackage;
+import de.upb.lina.cfg.controlflow.Transition;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,7 +31,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowLocationImpl#getDiagram <em>Diagram</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowLocationImpl#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowLocationImpl#getOutgoing <em>Outgoing</em>}</li>
- *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowLocationImpl#getBuffer <em>Buffer</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,16 +76,6 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 * @ordered
 	 */
 	protected EList<Transition> outgoing;
-
-	/**
-	 * The cached value of the '{@link #getBuffer() <em>Buffer</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBuffer()
-	 * @generated
-	 * @ordered
-	 */
-	protected CFLBuffer buffer;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -204,44 +187,6 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CFLBuffer getBuffer() {
-		if (buffer != null && buffer.eIsProxy()) {
-			InternalEObject oldBuffer = (InternalEObject)buffer;
-			buffer = (CFLBuffer)eResolveProxy(oldBuffer);
-			if (buffer != oldBuffer) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ControlflowPackage.CONTROL_FLOW_LOCATION__BUFFER, oldBuffer, buffer));
-			}
-		}
-		return buffer;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CFLBuffer basicGetBuffer() {
-		return buffer;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setBuffer(CFLBuffer newBuffer) {
-		CFLBuffer oldBuffer = buffer;
-		buffer = newBuffer;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ControlflowPackage.CONTROL_FLOW_LOCATION__BUFFER, oldBuffer, buffer));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -306,9 +251,6 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 				return getIncoming();
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__OUTGOING:
 				return getOutgoing();
-			case ControlflowPackage.CONTROL_FLOW_LOCATION__BUFFER:
-				if (resolve) return getBuffer();
-				return basicGetBuffer();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -336,9 +278,6 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 				getOutgoing().clear();
 				getOutgoing().addAll((Collection<? extends Transition>)newValue);
 				return;
-			case ControlflowPackage.CONTROL_FLOW_LOCATION__BUFFER:
-				setBuffer((CFLBuffer)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -363,9 +302,6 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__OUTGOING:
 				getOutgoing().clear();
 				return;
-			case ControlflowPackage.CONTROL_FLOW_LOCATION__BUFFER:
-				setBuffer((CFLBuffer)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -386,8 +322,6 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 				return incoming != null && !incoming.isEmpty();
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__OUTGOING:
 				return outgoing != null && !outgoing.isEmpty();
-			case ControlflowPackage.CONTROL_FLOW_LOCATION__BUFFER:
-				return buffer != null;
 		}
 		return super.eIsSet(featureID);
 	}

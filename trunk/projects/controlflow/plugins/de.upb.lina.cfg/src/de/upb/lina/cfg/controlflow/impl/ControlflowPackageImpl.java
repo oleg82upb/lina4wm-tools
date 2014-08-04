@@ -2,7 +2,6 @@
  */
 package de.upb.lina.cfg.controlflow.impl;
 
-import de.upb.lina.cfg.controlflow.CFLBuffer;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -59,13 +58,6 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * @generated
 	 */
 	private EClass multiTransitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass cflBufferEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -226,15 +218,6 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getControlFlowLocation_Buffer() {
-		return (EReference)controlFlowLocationEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getTransition() {
 		return transitionEClass;
 	}
@@ -316,24 +299,6 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getCFLBuffer() {
-		return cflBufferEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCFLBuffer_BufferedInstructions() {
-		return (EReference)cflBufferEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ControlflowFactory getControlflowFactory() {
 		return (ControlflowFactory)getEFactoryInstance();
 	}
@@ -368,7 +333,6 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		createEReference(controlFlowLocationEClass, CONTROL_FLOW_LOCATION__DIAGRAM);
 		createEReference(controlFlowLocationEClass, CONTROL_FLOW_LOCATION__INCOMING);
 		createEReference(controlFlowLocationEClass, CONTROL_FLOW_LOCATION__OUTGOING);
-		createEReference(controlFlowLocationEClass, CONTROL_FLOW_LOCATION__BUFFER);
 
 		transitionEClass = createEClass(TRANSITION);
 		createEReference(transitionEClass, TRANSITION__INSTRUCTION);
@@ -381,9 +345,6 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 
 		multiTransitionEClass = createEClass(MULTI_TRANSITION);
 		createEReference(multiTransitionEClass, MULTI_TRANSITION__INSTRUCTIONS);
-
-		cflBufferEClass = createEClass(CFL_BUFFER);
-		createEReference(cflBufferEClass, CFL_BUFFER__BUFFERED_INSTRUCTIONS);
 	}
 
 	/**
@@ -432,7 +393,6 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		initEReference(getControlFlowLocation_Diagram(), this.getControlFlowDiagram(), this.getControlFlowDiagram_Locations(), "diagram", null, 0, 1, ControlFlowLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getControlFlowLocation_Incoming(), this.getTransition(), this.getTransition_Target(), "incoming", null, 0, -1, ControlFlowLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getControlFlowLocation_Outgoing(), this.getTransition(), this.getTransition_Source(), "outgoing", null, 0, -1, ControlFlowLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getControlFlowLocation_Buffer(), this.getCFLBuffer(), null, "buffer", null, 0, 1, ControlFlowLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransition_Instruction(), theLlvmPackage.getInstruction(), null, "instruction", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -445,9 +405,6 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 
 		initEClass(multiTransitionEClass, MultiTransition.class, "MultiTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMultiTransition_Instructions(), theLlvmPackage.getInstruction(), null, "instructions", null, 0, -1, MultiTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(cflBufferEClass, CFLBuffer.class, "CFLBuffer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCFLBuffer_BufferedInstructions(), theLlvmPackage.getInstruction(), null, "bufferedInstructions", null, 0, -1, CFLBuffer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -18,7 +18,6 @@
         eType="#//Transition" eOpposite="#//Transition/target"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
         eType="#//Transition" eOpposite="#//Transition/source"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="buffer" eType="#//CFLBuffer"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="instruction" unique="false"
@@ -36,9 +35,5 @@
   <eClassifiers xsi:type="ecore:EClass" name="MultiTransition" eSuperTypes="#//Transition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" unique="false"
         upperBound="-1" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Instruction"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CFLBuffer">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bufferedInstructions" upperBound="-1"
-        eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Instruction"/>
   </eClassifiers>
 </ecore:EPackage>
