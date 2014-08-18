@@ -31,13 +31,13 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.gmf.runtime.diagram.ui.render,
  org.eclipse.gmf.runtime.diagram.ui.resources.editor,
  org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide,
- org.eclipse.gmf.tooling.runtime;visibility:=reexport,
- org.eclipse.draw2d;visibility:=reexport,
- org.eclipse.gmf.runtime.draw2d.ui;visibility:=reexport,
- de.upb.lina.cfg;visibility:=reexport,
- de.upb.lina.cfg.edit;visibility:=reexport,
- de.upb.llvm_parser;visibility:=reexport,
- de.upb.llvm_parser.edit;visibility:=reexport,
- org.eclipse.gef;visibility:=reexport
+ org.eclipse.gmf.tooling.runtime,
+ org.eclipse.draw2d,
+ org.eclipse.gmf.runtime.draw2d.ui,
+ de.upb.lina.cfg,
+ de.upb.lina.cfg.edit,
+ de.upb.llvm_parser,
+ de.upb.llvm_parser.edit,
+ org.eclipse.gef
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
