@@ -17,7 +17,7 @@
             </method>
          </object>
          <context
-               views="generated-diagram,generated-nodes,generated-links,generated-labels,generated-compartments">
+               views="generated-links">
          </context>
       </editpartProvider>
    </extension>
