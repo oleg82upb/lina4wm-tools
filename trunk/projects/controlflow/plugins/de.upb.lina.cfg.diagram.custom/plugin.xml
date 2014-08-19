@@ -30,5 +30,19 @@
          </Priority>
       </layoutProvider>
    </extension>
+   <extension
+         id="view-provider"
+         point="org.eclipse.gmf.runtime.diagram.core.viewProviders">
+      <viewProvider
+            class="de.upb.lina.cfg.controlflow.diagram.providers.CustomControlFlowViewProvider">
+         <Priority
+               name="Low">
+         </Priority>
+         <context
+               semanticHints="4001"
+               viewClass="org.eclipse.gmf.runtime.notation.Edge">
+         </context>
+      </viewProvider>
+   </extension>
 
 </plugin>
