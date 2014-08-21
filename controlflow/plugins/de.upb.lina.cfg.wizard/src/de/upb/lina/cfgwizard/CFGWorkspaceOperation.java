@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Stack;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -16,7 +15,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -39,6 +37,7 @@ import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.Invoke;
 import de.upb.llvm_parser.llvm.LLVM;
 import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.Switch;
 import de.upb.llvm_parser.llvm.SwitchCase;
 import de.upb.llvm_parser.llvm.Value;
@@ -51,6 +50,7 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 	private Path cfgpath = null;
 	private int reordering;
 	private ArrayList<ControlFlowDiagram> list = new ArrayList<ControlFlowDiagram>();
+	private HashMap<ControlFlowLocation, Buffer> buffers = new HashMap<ControlFlowLocation, Buffer>();
 
 	public CFGWorkspaceOperation(EObject ast, String path, int reordering) {
 		super();
@@ -72,23 +72,38 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 
 		try {
 			int a_elem = ast.getElements().size();
-
+			
 			// generating cfg for each function
 			for (int i = 0; i < a_elem; i++) {
 				if (ast.getElements().get(i) instanceof FunctionDefinitionImpl) {
 					if (((FunctionDefinition) ast.getElements().get(i))
 							.getBody() != null)
-						list.add(createCFG((FunctionDefinition) ast
-								.getElements().get(i)));
+						if(reordering == 1){
+							ReorderingUtil reord = new ReorderingUtil();
+							list.add(reord.createReachibilityGraph((FunctionDefinition) ast
+									.getElements().get(i)));
+						}else{
+							list.add(createCFG((FunctionDefinition) ast
+									.getElements().get(i)));
+						}
 				}
 			}
 
-			// adding TSO control flow
-			ReorderingUtil rutil = new ReorderingUtil();
-			if (reordering == 1) {
-				rutil.addTSO(list);
+//			// generating cfg for each function
+//			for (int i = 0; i < a_elem; i++) {
+//				if (ast.getElements().get(i) instanceof FunctionDefinitionImpl) {
+//					if (((FunctionDefinition) ast.getElements().get(i))
+//							.getBody() != null)
+//						list.add(createCFG((FunctionDefinition) ast
+//								.getElements().get(i)));
+//				}
+//			}
 
-			}
+//			// adding TSO control flow
+//			ReorderingUtil rutil = new ReorderingUtil();
+//			if (reordering == 1) {
+//				rutil.addTSO(list);
+//			}
 
 			// store resulting cfg
 			ResourceSet resSet = new ResourceSetImpl();
@@ -110,7 +125,7 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 	}
 
 	private ControlFlowDiagram createCFG(FunctionDefinition function) {
-
+//		//START OF CORRECT
 		ProgramCounter pc = new ProgramCounter();
 		ControlFlowDiagram cfg = ControlflowFactory.eINSTANCE
 				.createControlFlowDiagram();
@@ -133,36 +148,21 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 				t.setTarget(nextLocation);
 				location = nextLocation;
 			}
-			
-			// end of correct
-			
-//			EList<Instruction> ints = b.getInstructions();
-//			for(int i = 0; i< ints.size(); i++){
-//				Instruction current = ints.get(i);
-//				Instruction next; 
-//				ArrayList <Instruction> toMulti = new ArrayList<Instruction>();
-//				toMulti.add(current);
-//				if(i+1 < ints.size()){
-//					int k = 0;
-//					next = ints.get(i+1);
-//					if(next.eClass() == current.eClass() && current.equals(LlvmPackage.eINSTANCE.getLoad()) && next.equals(LlvmPackage.eINSTANCE.getStore())){
-//						toMulti.add(next);
-//						i+=2;
-//					}
-//				}
-//				
-//				
-//				
-//			}
-			
-			EClass last = b.getInstructions().get(0).eClass();
-			ArrayList<Instruction> instructs = new ArrayList<Instruction>();
-			for (Instruction instr : b.getInstructions()) {
-				
-				
-				last = instr.eClass();
-			}
 		}
+		//END OF CORRECT
+		
+		//Reachibility Graph
+//		createReachabilityGraph(function, pc, cfg);
+		
+		//output
+//		for(ControlFlowLocation loc: buffers.keySet()){
+//			System.out.println("Location: "+ loc.getPc());
+//			for(BufferPair pair: buffers.get(loc).getBuffer()){
+//				System.out.println(pair.toString());
+//			}
+//			System.out.println("----------------------");
+//		}
+//		
 
 		//TODO: fix this (find out how)
 		// if (type.equals(LlvmPackage.eINSTANCE.getIndirectBranch()))
@@ -286,33 +286,6 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 			}
 		} //end for 
 		
-		//sum things up
-//		List<Transition> multis = new ArrayList<Transition>();
-//		
-//		for(Transition t: cfg.getTransitions()){
-//			if(!(t instanceof GuardedTransition)){
-//				Transition current = t;
-//				Transition next = t; 
-//				Transition before = t;
-//		
-//				//check if it has a successor
-//				if(t.getTarget().getOutgoing() != null && !t.getTarget().getOutgoing().isEmpty()){
-//					next = t.getTarget().getOutgoing().get(0);
-//				}
-//				
-//				//check if it has a precessor
-//				if(t.getSource().getIncoming() != null && !t.getSource().getIncoming().isEmpty()){
-//					before = next = t.getTarget().getOutgoing().get(0);
-//				}
-//				
-//				List<Transition> thingsToAddToMulti = new ArrayList<Transition>();
-//				while(next != t && next != null){
-//					if(){
-//						
-//					}
-//				}
-//			}
-//		}
 
 		// has to be done separately in order to not modify collection while
 		// iterating
@@ -372,46 +345,6 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 			t.setTarget(null);
 		}
 	}
-	
-	
-//	public void fillBufferWithDFS(ControlFlowDiagram cfg){
-//		//TODO: change to enum
-//		//0 = white = not visited
-//		//1 = grey = visited
-//		//2 = black = visited and done
-//		HashMap<ControlFlowLocation,Integer> colors = new HashMap<ControlFlowLocation, Integer>();
-//		Stack<ControlFlowLocation> stack = new Stack<ControlFlowLocation>();
-//		ArrayList<ControlFlowLocation> locations = new ArrayList<ControlFlowLocation>();
-//		ControlFlowLocation start = null;
-//		
-//		//init colors
-//		for(ControlFlowLocation l: locations){
-//			if(start == null){
-//				start = l;
-//				colors.put(start, 1);
-//			}else{
-//				colors.put(l, 0);
-//			}
-//		}
-//		
-//		while(!stack.isEmpty()){
-//			ControlFlowLocation u = stack.peek();
-//			ArrayList<ControlFlowLocation> adjacents = getAdjacentNodes(u);
-//			if(adjacents.isEmpty()){
-//				colors.put(u, 2);
-//				stack.pop();
-//			}else{
-//				ControlFlowLocation v = adjacents.get(0);
-//				adjacents.remove(v);
-//				if(colors.get(v) == 0){
-//					colors.put(v, 1);
-//					stack.push(v);
-//					//TODO fill buffer here, depending on what is in the buffer before :D
-//				}
-//			}
-//		}
-//		
-//	}
 	
 	public void seq(List<Instruction> instructions, FunctionDefinition def){
 		//empty list
@@ -535,6 +468,15 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 		}
 		return null;
 	}
+	
+	private ControlFlowLocation findControlFlowLocation(int pc, Buffer buffer, ControlFlowDiagram cfg){
+		for(ControlFlowLocation l: cfg.getLocations()){
+			if(l.getPc() == pc && buffers.get(l).equals(buffer)){
+				return l;
+			}
+		}
+		return null;
+	}
 
 	/**
 	 * @param diag
@@ -593,4 +535,70 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 		}
 		return value.toString();
 	}
+	
+//	public void createReachabilityGraph(FunctionDefinition function, ProgramCounter pcc, ControlFlowDiagram cfgraph){
+//		ProgramCounter pc = pcc;
+//		ControlFlowDiagram cfg = cfgraph;
+////		ControlFlowDiagram cfg = ControlflowFactory.eINSTANCE
+////				.createControlFlowDiagram();
+////
+////		cfg.setName(function.getAddress().getName());
+//
+//		EList<BasicBlock> blocks = function.getBody().getBlocks();
+//		for (BasicBlock b : blocks) {
+//			ControlFlowLocation location = createControlFlowLocation(cfg, pc);
+//			//First location
+//			if (cfg.getStart() == null) {
+//				cfg.setStart(location);
+//				buffers.put(location, new Buffer());		
+//			}
+//			
+//			//correct
+//			for (Instruction instr : b.getInstructions()) {
+//				Transition t = createTransition(cfg, instr);
+//				//dealWithInstruction(instr);
+//				ControlFlowLocation nextLocation = createControlFlowLocation(
+//						cfg, pc);
+//				Buffer newBuffer = new Buffer(buffers.get(location));
+//				
+//				
+//				//store buffer
+//				if(instr.eClass().equals(LlvmPackage.eINSTANCE.getStore())){
+//					Store store = (Store)instr;
+//					newBuffer.addBufferPair(new BufferPair(store.getTargetAddress(), store.getValue()));
+//				}
+//				
+//				if(instr.eClass().equals(LlvmPackage.eINSTANCE.getLoad())){
+//					
+//				}
+//				
+//				//flushes?!
+////				if(instr.eClass().equals(LlvmPackage.eINSTANCE.get)){
+////					
+////				}
+//				
+//				buffers.put(nextLocation, newBuffer);
+//				t.setSource(location);
+//				t.setTarget(nextLocation);
+//				location = nextLocation;
+//			}
+//		}
+//	}
+	
+//	public ControlFlowLocation getNextLocation(Instruction instruct, ControlFlowLocation oldLocation, ProgramCounter pc, ControlFlowDiagram cfg){
+//		if(instruct.eClass().equals(LlvmPackage.eINSTANCE.getStore())){
+//			//TODO: NULL CHECK!!
+//			Buffer newBuffer = new Buffer(buffers.get(oldLocation));
+//			ControlFlowLocation next = findControlFlowLocation(pc.next(), newBuffer, cfg);
+//			if(next == null){
+//				next = createControlFlowLocation(cfg, pc);
+//				//Create edge accordinlgy
+//			}else{
+//				//Check if edge is already existing for some reason we do not know yet
+//			}
+//			
+//		}
+//		
+//		return null;
+//	}
 }

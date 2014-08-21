@@ -88,6 +88,18 @@ public class ControlflowAdapterFactory extends AdapterFactoryImpl {
 				return createMultiTransitionAdapter();
 			}
 			@Override
+			public Adapter caseFlushTransition(FlushTransition object) {
+				return createFlushTransitionAdapter();
+			}
+			@Override
+			public Adapter caseAddressValuePair(AddressValuePair object) {
+				return createAddressValuePairAdapter();
+			}
+			@Override
+			public Adapter caseStoreBuffer(StoreBuffer object) {
+				return createStoreBufferAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -174,6 +186,48 @@ public class ControlflowAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMultiTransitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.controlflow.FlushTransition <em>Flush Transition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.lina.cfg.controlflow.FlushTransition
+	 * @generated
+	 */
+	public Adapter createFlushTransitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.controlflow.AddressValuePair <em>Address Value Pair</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.lina.cfg.controlflow.AddressValuePair
+	 * @generated
+	 */
+	public Adapter createAddressValuePairAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.controlflow.StoreBuffer <em>Store Buffer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.lina.cfg.controlflow.StoreBuffer
+	 * @generated
+	 */
+	public Adapter createStoreBufferAdapter() {
 		return null;
 	}
 

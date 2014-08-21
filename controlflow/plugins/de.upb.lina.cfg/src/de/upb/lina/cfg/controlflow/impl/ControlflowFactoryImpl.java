@@ -61,6 +61,9 @@ public class ControlflowFactoryImpl extends EFactoryImpl implements ControlflowF
 			case ControlflowPackage.TRANSITION: return createTransition();
 			case ControlflowPackage.GUARDED_TRANSITION: return createGuardedTransition();
 			case ControlflowPackage.MULTI_TRANSITION: return createMultiTransition();
+			case ControlflowPackage.FLUSH_TRANSITION: return createFlushTransition();
+			case ControlflowPackage.ADDRESS_VALUE_PAIR: return createAddressValuePair();
+			case ControlflowPackage.STORE_BUFFER: return createStoreBuffer();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -114,6 +117,36 @@ public class ControlflowFactoryImpl extends EFactoryImpl implements ControlflowF
 	public MultiTransition createMultiTransition() {
 		MultiTransitionImpl multiTransition = new MultiTransitionImpl();
 		return multiTransition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FlushTransition createFlushTransition() {
+		FlushTransitionImpl flushTransition = new FlushTransitionImpl();
+		return flushTransition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AddressValuePair createAddressValuePair() {
+		AddressValuePairImpl addressValuePair = new AddressValuePairImpl();
+		return addressValuePair;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StoreBuffer createStoreBuffer() {
+		StoreBufferImpl storeBuffer = new StoreBufferImpl();
+		return storeBuffer;
 	}
 
 	/**

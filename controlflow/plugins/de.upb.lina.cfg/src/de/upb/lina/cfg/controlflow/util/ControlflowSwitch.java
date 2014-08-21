@@ -98,6 +98,25 @@ public class ControlflowSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ControlflowPackage.FLUSH_TRANSITION: {
+				FlushTransition flushTransition = (FlushTransition)theEObject;
+				T result = caseFlushTransition(flushTransition);
+				if (result == null) result = caseTransition(flushTransition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ControlflowPackage.ADDRESS_VALUE_PAIR: {
+				AddressValuePair addressValuePair = (AddressValuePair)theEObject;
+				T result = caseAddressValuePair(addressValuePair);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ControlflowPackage.STORE_BUFFER: {
+				StoreBuffer storeBuffer = (StoreBuffer)theEObject;
+				T result = caseStoreBuffer(storeBuffer);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -174,6 +193,51 @@ public class ControlflowSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMultiTransition(MultiTransition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Flush Transition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Flush Transition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFlushTransition(FlushTransition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Address Value Pair</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Address Value Pair</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAddressValuePair(AddressValuePair object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Store Buffer</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Store Buffer</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStoreBuffer(StoreBuffer object) {
 		return null;
 	}
 

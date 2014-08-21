@@ -155,9 +155,9 @@ public class SelectionPage extends WizardPage {
 				reordering = combo.getSelectionIndex();
 			}
 		});
-		// Since only SC is implemented, the Combobox is disabled
+		
 		combo.select(0);
-		combo.setEnabled(false);
+		combo.setEnabled(true);
 		setControl(container);
 		if (memento != null) {
 			astFile.setText(memento.getString("astloc"));

@@ -157,13 +157,22 @@ public interface ControlflowPackage extends EPackage {
 	int CONTROL_FLOW_LOCATION__OUTGOING = 3;
 
 	/**
+	 * The feature id for the '<em><b>Buffer</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROL_FLOW_LOCATION__BUFFER = 4;
+
+	/**
 	 * The number of structural features of the '<em>Control Flow Location</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_LOCATION_FEATURE_COUNT = 4;
+	int CONTROL_FLOW_LOCATION_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.TransitionImpl <em>Transition</em>}' class.
@@ -349,6 +358,126 @@ public interface ControlflowPackage extends EPackage {
 	int MULTI_TRANSITION_FEATURE_COUNT = TRANSITION_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.FlushTransitionImpl <em>Flush Transition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.upb.lina.cfg.controlflow.impl.FlushTransitionImpl
+	 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getFlushTransition()
+	 * @generated
+	 */
+	int FLUSH_TRANSITION = 5;
+
+	/**
+	 * The feature id for the '<em><b>Instruction</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLUSH_TRANSITION__INSTRUCTION = TRANSITION__INSTRUCTION;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLUSH_TRANSITION__SOURCE = TRANSITION__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLUSH_TRANSITION__TARGET = TRANSITION__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLUSH_TRANSITION__DIAGRAM = TRANSITION__DIAGRAM;
+
+	/**
+	 * The number of structural features of the '<em>Flush Transition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLUSH_TRANSITION_FEATURE_COUNT = TRANSITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.AddressValuePairImpl <em>Address Value Pair</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.upb.lina.cfg.controlflow.impl.AddressValuePairImpl
+	 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getAddressValuePair()
+	 * @generated
+	 */
+	int ADDRESS_VALUE_PAIR = 6;
+
+	/**
+	 * The feature id for the '<em><b>Mem Address</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDRESS_VALUE_PAIR__MEM_ADDRESS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Mem Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDRESS_VALUE_PAIR__MEM_VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Address Value Pair</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDRESS_VALUE_PAIR_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.StoreBufferImpl <em>Store Buffer</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.upb.lina.cfg.controlflow.impl.StoreBufferImpl
+	 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getStoreBuffer()
+	 * @generated
+	 */
+	int STORE_BUFFER = 7;
+
+	/**
+	 * The feature id for the '<em><b>Buffer</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORE_BUFFER__BUFFER = 0;
+
+	/**
+	 * The number of structural features of the '<em>Store Buffer</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORE_BUFFER_FEATURE_COUNT = 1;
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram <em>Control Flow Diagram</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -457,6 +586,17 @@ public interface ControlflowPackage extends EPackage {
 	EReference getControlFlowLocation_Outgoing();
 
 	/**
+	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getBuffer <em>Buffer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Buffer</em>'.
+	 * @see de.upb.lina.cfg.controlflow.ControlFlowLocation#getBuffer()
+	 * @see #getControlFlowLocation()
+	 * @generated
+	 */
+	EReference getControlFlowLocation_Buffer();
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.Transition <em>Transition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -551,6 +691,69 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMultiTransition_Instructions();
+
+	/**
+	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.FlushTransition <em>Flush Transition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Flush Transition</em>'.
+	 * @see de.upb.lina.cfg.controlflow.FlushTransition
+	 * @generated
+	 */
+	EClass getFlushTransition();
+
+	/**
+	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.AddressValuePair <em>Address Value Pair</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Address Value Pair</em>'.
+	 * @see de.upb.lina.cfg.controlflow.AddressValuePair
+	 * @generated
+	 */
+	EClass getAddressValuePair();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.controlflow.AddressValuePair#getMemAddress <em>Mem Address</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Mem Address</em>'.
+	 * @see de.upb.lina.cfg.controlflow.AddressValuePair#getMemAddress()
+	 * @see #getAddressValuePair()
+	 * @generated
+	 */
+	EReference getAddressValuePair_MemAddress();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.controlflow.AddressValuePair#getMemValue <em>Mem Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Mem Value</em>'.
+	 * @see de.upb.lina.cfg.controlflow.AddressValuePair#getMemValue()
+	 * @see #getAddressValuePair()
+	 * @generated
+	 */
+	EReference getAddressValuePair_MemValue();
+
+	/**
+	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.StoreBuffer <em>Store Buffer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Store Buffer</em>'.
+	 * @see de.upb.lina.cfg.controlflow.StoreBuffer
+	 * @generated
+	 */
+	EClass getStoreBuffer();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.upb.lina.cfg.controlflow.StoreBuffer#getBuffer <em>Buffer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Buffer</em>'.
+	 * @see de.upb.lina.cfg.controlflow.StoreBuffer#getBuffer()
+	 * @see #getStoreBuffer()
+	 * @generated
+	 */
+	EReference getStoreBuffer_Buffer();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -659,6 +862,14 @@ public interface ControlflowPackage extends EPackage {
 		EReference CONTROL_FLOW_LOCATION__OUTGOING = eINSTANCE.getControlFlowLocation_Outgoing();
 
 		/**
+		 * The meta object literal for the '<em><b>Buffer</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTROL_FLOW_LOCATION__BUFFER = eINSTANCE.getControlFlowLocation_Buffer();
+
+		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.TransitionImpl <em>Transition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -735,6 +946,60 @@ public interface ControlflowPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MULTI_TRANSITION__INSTRUCTIONS = eINSTANCE.getMultiTransition_Instructions();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.FlushTransitionImpl <em>Flush Transition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.lina.cfg.controlflow.impl.FlushTransitionImpl
+		 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getFlushTransition()
+		 * @generated
+		 */
+		EClass FLUSH_TRANSITION = eINSTANCE.getFlushTransition();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.AddressValuePairImpl <em>Address Value Pair</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.lina.cfg.controlflow.impl.AddressValuePairImpl
+		 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getAddressValuePair()
+		 * @generated
+		 */
+		EClass ADDRESS_VALUE_PAIR = eINSTANCE.getAddressValuePair();
+
+		/**
+		 * The meta object literal for the '<em><b>Mem Address</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ADDRESS_VALUE_PAIR__MEM_ADDRESS = eINSTANCE.getAddressValuePair_MemAddress();
+
+		/**
+		 * The meta object literal for the '<em><b>Mem Value</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ADDRESS_VALUE_PAIR__MEM_VALUE = eINSTANCE.getAddressValuePair_MemValue();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.StoreBufferImpl <em>Store Buffer</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.lina.cfg.controlflow.impl.StoreBufferImpl
+		 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getStoreBuffer()
+		 * @generated
+		 */
+		EClass STORE_BUFFER = eINSTANCE.getStoreBuffer();
+
+		/**
+		 * The meta object literal for the '<em><b>Buffer</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STORE_BUFFER__BUFFER = eINSTANCE.getStoreBuffer_Buffer();
 
 	}
 
