@@ -3,6 +3,8 @@ package de.upb.lina.cfg.controlflow.diagram.edit.parts;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
+import de.upb.lina.cfg.controlflow.ControlflowPackage;
+import de.upb.lina.cfg.controlflow.FlushTransition;
 import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.llvm_parser.llvm.AddressUse;
@@ -32,6 +34,8 @@ import de.upb.llvm_parser.llvm.impl.PredefinedImpl;
 
 public class CustomLabelingUtil {
 
+	
+	
 	/**
 	 * Gets called to get a label for the given transition
 	 * @param t transition that needs a label
@@ -39,7 +43,25 @@ public class CustomLabelingUtil {
 	 */
 	public String getNewTransitionLabel(Transition t) {
 		String result = "";
+		if(t.getInstruction() == null){
+			return "flush";
+		}
+		
+		EClass transTyp = t.eClass();
+		if(transTyp.equals(ControlflowPackage.eINSTANCE.getFlushTransition())){
+			return "flush";
+		}
+		
+		if(t instanceof FlushTransition){
+			return "flush";
+		}
+		
+		
 		EClass type = t.getInstruction().eClass();
+		//lets only label stores and loads for now
+//		if(!(type.equals(LlvmPackage.eINSTANCE.getLoad()) || type.equals(LlvmPackage.eINSTANCE.getStore()) || (type.equals(LlvmPackage.eINSTANCE.getFence())))){
+//			return result;
+//		}
 		
 		// Load
         if (type.equals(LlvmPackage.eINSTANCE.getLoad())) {

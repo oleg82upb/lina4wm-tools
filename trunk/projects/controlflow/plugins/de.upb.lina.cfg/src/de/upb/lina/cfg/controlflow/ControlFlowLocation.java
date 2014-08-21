@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getDiagram <em>Diagram</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getOutgoing <em>Outgoing</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getBuffer <em>Buffer</em>}</li>
  * </ul>
  * </p>
  *
@@ -115,5 +116,31 @@ public interface ControlFlowLocation extends EObject {
 	 * @generated
 	 */
 	EList<Transition> getOutgoing();
+
+	/**
+	 * Returns the value of the '<em><b>Buffer</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Buffer</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Buffer</em>' reference.
+	 * @see #setBuffer(StoreBuffer)
+	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getControlFlowLocation_Buffer()
+	 * @model
+	 * @generated
+	 */
+	StoreBuffer getBuffer();
+
+	/**
+	 * Sets the value of the '{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getBuffer <em>Buffer</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Buffer</em>' reference.
+	 * @see #getBuffer()
+	 * @generated
+	 */
+	void setBuffer(StoreBuffer value);
 
 } // ControlFlowLocation

@@ -67,6 +67,33 @@ public interface ControlflowFactory extends EFactory {
 	MultiTransition createMultiTransition();
 
 	/**
+	 * Returns a new object of class '<em>Flush Transition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Flush Transition</em>'.
+	 * @generated
+	 */
+	FlushTransition createFlushTransition();
+
+	/**
+	 * Returns a new object of class '<em>Address Value Pair</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Address Value Pair</em>'.
+	 * @generated
+	 */
+	AddressValuePair createAddressValuePair();
+
+	/**
+	 * Returns a new object of class '<em>Store Buffer</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Store Buffer</em>'.
+	 * @generated
+	 */
+	StoreBuffer createStoreBuffer();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
