@@ -43,9 +43,6 @@ public class CustomLabelingUtil {
 	 */
 	public String getNewTransitionLabel(Transition t) {
 		String result = "";
-		if(t.getInstruction() == null){
-			return "flush";
-		}
 		
 		EClass transTyp = t.eClass();
 		if(transTyp.equals(ControlflowPackage.eINSTANCE.getFlushTransition())){
@@ -56,6 +53,9 @@ public class CustomLabelingUtil {
 			return "flush";
 		}
 		
+		if(t.getInstruction() == null){
+			return "DAS IST LEER";
+		}
 		
 		EClass type = t.getInstruction().eClass();
 		//lets only label stores and loads for now
