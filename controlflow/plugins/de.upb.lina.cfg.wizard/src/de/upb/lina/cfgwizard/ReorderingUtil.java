@@ -246,7 +246,7 @@ public class ReorderingUtil {
 	private ControlFlowLocation createControlFlowLocation(
 			ControlFlowDiagram diag, int pc, StoreBuffer buffer) {
 		for(ControlFlowLocation l: diag.getLocations()){
-			if(l.getPc() == pc && l.getBuffer().getBuffer().equals(buffer)){
+			if(l.getPc() == pc && l.getBuffer().getBuffer().equals(buffer.getBuffer())){
 				return l;
 			}
 		}
