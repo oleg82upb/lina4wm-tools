@@ -12,30 +12,30 @@ import de.upb.lina.cfg.controlflow.diagram.part.ControlFlowDiagramEditorPlugin;
 /**
  * @generated
  */
-public class ControlFlowDomainNavigatorLabelProvider implements
-		ICommonLabelProvider {
+public class ControlFlowDomainNavigatorLabelProvider implements ICommonLabelProvider
+{
 
 	/**
 	 * @generated
 	 */
 	private AdapterFactoryLabelProvider myAdapterFactoryLabelProvider = new AdapterFactoryLabelProvider(
-			ControlFlowDiagramEditorPlugin.getInstance()
-					.getItemProvidersAdapterFactory());
+			ControlFlowDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory());
 
 	/**
 	 * @generated
 	 */
-	public void init(ICommonContentExtensionSite aConfig) {
+	public void init(ICommonContentExtensionSite aConfig)
+	{
 	}
 
 	/**
 	 * @generated
 	 */
-	public Image getImage(Object element) {
-		if (element instanceof ControlFlowDomainNavigatorItem) {
-			return myAdapterFactoryLabelProvider
-					.getImage(((ControlFlowDomainNavigatorItem) element)
-							.getEObject());
+	public Image getImage(Object element)
+	{
+		if (element instanceof ControlFlowDomainNavigatorItem)
+		{
+			return myAdapterFactoryLabelProvider.getImage(((ControlFlowDomainNavigatorItem) element).getEObject());
 		}
 		return null;
 	}
@@ -43,11 +43,11 @@ public class ControlFlowDomainNavigatorLabelProvider implements
 	/**
 	 * @generated
 	 */
-	public String getText(Object element) {
-		if (element instanceof ControlFlowDomainNavigatorItem) {
-			return myAdapterFactoryLabelProvider
-					.getText(((ControlFlowDomainNavigatorItem) element)
-							.getEObject());
+	public String getText(Object element)
+	{
+		if (element instanceof ControlFlowDomainNavigatorItem)
+		{
+			return myAdapterFactoryLabelProvider.getText(((ControlFlowDomainNavigatorItem) element).getEObject());
 		}
 		return null;
 	}
@@ -55,47 +55,54 @@ public class ControlFlowDomainNavigatorLabelProvider implements
 	/**
 	 * @generated
 	 */
-	public void addListener(ILabelProviderListener listener) {
+	public void addListener(ILabelProviderListener listener)
+	{
 		myAdapterFactoryLabelProvider.addListener(listener);
 	}
 
 	/**
 	 * @generated
 	 */
-	public void dispose() {
+	public void dispose()
+	{
 		myAdapterFactoryLabelProvider.dispose();
 	}
 
 	/**
 	 * @generated
 	 */
-	public boolean isLabelProperty(Object element, String property) {
+	public boolean isLabelProperty(Object element, String property)
+	{
 		return myAdapterFactoryLabelProvider.isLabelProperty(element, property);
 	}
 
 	/**
 	 * @generated
 	 */
-	public void removeListener(ILabelProviderListener listener) {
+	public void removeListener(ILabelProviderListener listener)
+	{
 		myAdapterFactoryLabelProvider.removeListener(listener);
 	}
 
 	/**
 	 * @generated
 	 */
-	public void restoreState(IMemento aMemento) {
+	public void restoreState(IMemento aMemento)
+	{
 	}
 
 	/**
 	 * @generated
 	 */
-	public void saveState(IMemento aMemento) {
+	public void saveState(IMemento aMemento)
+	{
 	}
 
 	/**
 	 * @generated
 	 */
-	public String getDescription(Object anElement) {
+	public String getDescription(Object anElement)
+	{
 		return null;
 	}
 

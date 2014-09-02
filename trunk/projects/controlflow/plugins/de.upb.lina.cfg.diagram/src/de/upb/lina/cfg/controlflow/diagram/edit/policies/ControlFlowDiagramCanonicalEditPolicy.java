@@ -42,15 +42,18 @@ import de.upb.lina.cfg.controlflow.diagram.part.ControlFlowVisualIDRegistry;
 /**
  * @generated
  */
-public class ControlFlowDiagramCanonicalEditPolicy extends CanonicalEditPolicy {
+public class ControlFlowDiagramCanonicalEditPolicy extends CanonicalEditPolicy
+{
 
 	/**
 	 * @generated
 	 */
-	protected void refreshOnActivate() {
+	protected void refreshOnActivate()
+	{
 		// Need to activate editpart children before invoking the canonical refresh for EditParts to add event listeners
 		List<?> c = getHost().getChildren();
-		for (int i = 0; i < c.size(); i++) {
+		for (int i = 0; i < c.size(); i++)
+		{
 			((EditPart) c.get(i)).activate();
 		}
 		super.refreshOnActivate();
@@ -59,7 +62,8 @@ public class ControlFlowDiagramCanonicalEditPolicy extends CanonicalEditPolicy {
 	/**
 	 * @generated
 	 */
-	protected EStructuralFeature getFeatureToSynchronize() {
+	protected EStructuralFeature getFeatureToSynchronize()
+	{
 		return ControlflowPackage.eINSTANCE.getControlFlowDiagram_Locations();
 	}
 
@@ -67,12 +71,14 @@ public class ControlFlowDiagramCanonicalEditPolicy extends CanonicalEditPolicy {
 	 * @generated
 	 */
 	@SuppressWarnings("rawtypes")
-	protected List getSemanticChildrenList() {
+	protected List getSemanticChildrenList()
+	{
 		View viewObject = (View) getHost().getModel();
 		LinkedList<EObject> result = new LinkedList<EObject>();
 		List<ControlFlowNodeDescriptor> childDescriptors = ControlFlowDiagramUpdater
 				.getControlFlowDiagram_1000SemanticChildren(viewObject);
-		for (ControlFlowNodeDescriptor d : childDescriptors) {
+		for (ControlFlowNodeDescriptor d : childDescriptors)
+		{
 			result.add(d.getModelElement());
 		}
 		return result;
@@ -81,36 +87,38 @@ public class ControlFlowDiagramCanonicalEditPolicy extends CanonicalEditPolicy {
 	/**
 	 * @generated
 	 */
-	protected boolean isOrphaned(Collection<EObject> semanticChildren,
-			final View view) {
-		return isMyDiagramElement(view)
-				&& !semanticChildren.contains(view.getElement());
+	protected boolean isOrphaned(Collection<EObject> semanticChildren, final View view)
+	{
+		return isMyDiagramElement(view) && !semanticChildren.contains(view.getElement());
 	}
 
 	/**
 	 * @generated
 	 */
-	private boolean isMyDiagramElement(View view) {
-		return ControlFlowLocationEditPart.VISUAL_ID == ControlFlowVisualIDRegistry
-				.getVisualID(view);
+	private boolean isMyDiagramElement(View view)
+	{
+		return ControlFlowLocationEditPart.VISUAL_ID == ControlFlowVisualIDRegistry.getVisualID(view);
 	}
 
 	/**
 	 * @generated
 	 */
-	protected void refreshSemantic() {
-		if (resolveSemanticElement() == null) {
+	protected void refreshSemantic()
+	{
+		if (resolveSemanticElement() == null)
+		{
 			return;
 		}
 		LinkedList<IAdaptable> createdViews = new LinkedList<IAdaptable>();
 		List<ControlFlowNodeDescriptor> childDescriptors = ControlFlowDiagramUpdater
-				.getControlFlowDiagram_1000SemanticChildren((View) getHost()
-						.getModel());
+				.getControlFlowDiagram_1000SemanticChildren((View) getHost().getModel());
 		LinkedList<View> orphaned = new LinkedList<View>();
 		// we care to check only views we recognize as ours
 		LinkedList<View> knownViewChildren = new LinkedList<View>();
-		for (View v : getViewChildren()) {
-			if (isMyDiagramElement(v)) {
+		for (View v : getViewChildren())
+		{
+			if (isMyDiagramElement(v))
+			{
 				knownViewChildren.add(v);
 			}
 		}
@@ -119,16 +127,19 @@ public class ControlFlowDiagramCanonicalEditPolicy extends CanonicalEditPolicy {
 		// iteration happens over list of desired semantic elements, trying to find best matching View, while original CEP
 		// iterates views, potentially losing view (size/bounds) information - i.e. if there are few views to reference same EObject, only last one 
 		// to answer isOrphaned == true will be used for the domain element representation, see #cleanCanonicalSemanticChildren()
-		for (Iterator<ControlFlowNodeDescriptor> descriptorsIterator = childDescriptors
-				.iterator(); descriptorsIterator.hasNext();) {
+		for (Iterator<ControlFlowNodeDescriptor> descriptorsIterator = childDescriptors.iterator(); descriptorsIterator
+				.hasNext();)
+		{
 			ControlFlowNodeDescriptor next = descriptorsIterator.next();
-			String hint = ControlFlowVisualIDRegistry.getType(next
-					.getVisualID());
+			String hint = ControlFlowVisualIDRegistry.getType(next.getVisualID());
 			LinkedList<View> perfectMatch = new LinkedList<View>(); // both semanticElement and hint match that of NodeDescriptor
-			for (View childView : getViewChildren()) {
+			for (View childView : getViewChildren())
+			{
 				EObject semanticElement = childView.getElement();
-				if (next.getModelElement().equals(semanticElement)) {
-					if (hint.equals(childView.getType())) {
+				if (next.getModelElement().equals(semanticElement))
+				{
+					if (hint.equals(childView.getType()))
+					{
 						perfectMatch.add(childView);
 						// actually, can stop iteration over view children here, but
 						// may want to use not the first view but last one as a 'real' match (the way original CEP does
@@ -136,7 +147,8 @@ public class ControlFlowDiagramCanonicalEditPolicy extends CanonicalEditPolicy {
 					}
 				}
 			}
-			if (perfectMatch.size() > 0) {
+			if (perfectMatch.size() > 0)
+			{
 				descriptorsIterator.remove(); // precise match found no need to create anything for the NodeDescriptor
 				// use only one view (first or last?), keep rest as orphaned for further consideration
 				knownViewChildren.remove(perfectMatch.getFirst());
@@ -148,14 +160,12 @@ public class ControlFlowDiagramCanonicalEditPolicy extends CanonicalEditPolicy {
 		//
 		ArrayList<CreateViewRequest.ViewDescriptor> viewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>(
 				childDescriptors.size());
-		for (ControlFlowNodeDescriptor next : childDescriptors) {
-			String hint = ControlFlowVisualIDRegistry.getType(next
-					.getVisualID());
-			IAdaptable elementAdapter = new CanonicalElementAdapter(
-					next.getModelElement(), hint);
-			CreateViewRequest.ViewDescriptor descriptor = new CreateViewRequest.ViewDescriptor(
-					elementAdapter, Node.class, hint, ViewUtil.APPEND, false,
-					host().getDiagramPreferencesHint());
+		for (ControlFlowNodeDescriptor next : childDescriptors)
+		{
+			String hint = ControlFlowVisualIDRegistry.getType(next.getVisualID());
+			IAdaptable elementAdapter = new CanonicalElementAdapter(next.getModelElement(), hint);
+			CreateViewRequest.ViewDescriptor descriptor = new CreateViewRequest.ViewDescriptor(elementAdapter,
+					Node.class, hint, ViewUtil.APPEND, false, host().getDiagramPreferencesHint());
 			viewDescriptors.add(descriptor);
 		}
 
@@ -163,24 +173,25 @@ public class ControlFlowDiagramCanonicalEditPolicy extends CanonicalEditPolicy {
 		//
 		CreateViewRequest request = getCreateViewRequest(viewDescriptors);
 		Command cmd = getCreateViewCommand(request);
-		if (cmd != null && cmd.canExecute()) {
-			SetViewMutabilityCommand.makeMutable(
-					new EObjectAdapter(host().getNotationView())).execute();
+		if (cmd != null && cmd.canExecute())
+		{
+			SetViewMutabilityCommand.makeMutable(new EObjectAdapter(host().getNotationView())).execute();
 			executeCommand(cmd);
 			@SuppressWarnings("unchecked")
 			List<IAdaptable> nl = (List<IAdaptable>) request.getNewObject();
 			createdViews.addAll(nl);
 		}
-		if (changed || createdViews.size() > 0) {
+		if (changed || createdViews.size() > 0)
+		{
 			postProcessRefreshSemantic(createdViews);
 		}
 
 		Collection<IAdaptable> createdConnectionViews = refreshConnections();
 
-		if (createdViews.size() > 1) {
+		if (createdViews.size() > 1)
+		{
 			// perform a layout of the container
-			DeferredLayoutCommand layoutCmd = new DeferredLayoutCommand(host()
-					.getEditingDomain(), createdViews, host());
+			DeferredLayoutCommand layoutCmd = new DeferredLayoutCommand(host().getEditingDomain(), createdViews, host());
 			executeCommand(new ICommandProxy(layoutCmd));
 		}
 
@@ -192,19 +203,19 @@ public class ControlFlowDiagramCanonicalEditPolicy extends CanonicalEditPolicy {
 	/**
 	 * @generated
 	 */
-	private Collection<IAdaptable> refreshConnections() {
+	private Collection<IAdaptable> refreshConnections()
+	{
 		Domain2Notation domain2NotationMap = new Domain2Notation();
-		Collection<ControlFlowLinkDescriptor> linkDescriptors = collectAllLinks(
-				getDiagram(), domain2NotationMap);
+		Collection<ControlFlowLinkDescriptor> linkDescriptors = collectAllLinks(getDiagram(), domain2NotationMap);
 		Collection existingLinks = new LinkedList(getDiagram().getEdges());
-		for (Iterator linksIterator = existingLinks.iterator(); linksIterator
-				.hasNext();) {
+		for (Iterator linksIterator = existingLinks.iterator(); linksIterator.hasNext();)
+		{
 			Edge nextDiagramLink = (Edge) linksIterator.next();
-			int diagramLinkVisualID = ControlFlowVisualIDRegistry
-					.getVisualID(nextDiagramLink);
-			if (diagramLinkVisualID == -1) {
-				if (nextDiagramLink.getSource() != null
-						&& nextDiagramLink.getTarget() != null) {
+			int diagramLinkVisualID = ControlFlowVisualIDRegistry.getVisualID(nextDiagramLink);
+			if (diagramLinkVisualID == -1)
+			{
+				if (nextDiagramLink.getSource() != null && nextDiagramLink.getTarget() != null)
+				{
 					linksIterator.remove();
 				}
 				continue;
@@ -212,16 +223,15 @@ public class ControlFlowDiagramCanonicalEditPolicy extends CanonicalEditPolicy {
 			EObject diagramLinkObject = nextDiagramLink.getElement();
 			EObject diagramLinkSrc = nextDiagramLink.getSource().getElement();
 			EObject diagramLinkDst = nextDiagramLink.getTarget().getElement();
-			for (Iterator<ControlFlowLinkDescriptor> linkDescriptorsIterator = linkDescriptors
-					.iterator(); linkDescriptorsIterator.hasNext();) {
-				ControlFlowLinkDescriptor nextLinkDescriptor = linkDescriptorsIterator
-						.next();
+			for (Iterator<ControlFlowLinkDescriptor> linkDescriptorsIterator = linkDescriptors.iterator(); linkDescriptorsIterator
+					.hasNext();)
+			{
+				ControlFlowLinkDescriptor nextLinkDescriptor = linkDescriptorsIterator.next();
 				if (diagramLinkObject == nextLinkDescriptor.getModelElement()
 						&& diagramLinkSrc == nextLinkDescriptor.getSource()
-						&& diagramLinkDst == nextLinkDescriptor
-								.getDestination()
-						&& diagramLinkVisualID == nextLinkDescriptor
-								.getVisualID()) {
+						&& diagramLinkDst == nextLinkDescriptor.getDestination()
+						&& diagramLinkVisualID == nextLinkDescriptor.getVisualID())
+				{
 					linksIterator.remove();
 					linkDescriptorsIterator.remove();
 					break;
@@ -235,47 +245,46 @@ public class ControlFlowDiagramCanonicalEditPolicy extends CanonicalEditPolicy {
 	/**
 	 * @generated
 	 */
-	private Collection<ControlFlowLinkDescriptor> collectAllLinks(View view,
-			Domain2Notation domain2NotationMap) {
-		if (!ControlFlowDiagramEditPart.MODEL_ID
-				.equals(ControlFlowVisualIDRegistry.getModelID(view))) {
+	private Collection<ControlFlowLinkDescriptor> collectAllLinks(View view, Domain2Notation domain2NotationMap)
+	{
+		if (!ControlFlowDiagramEditPart.MODEL_ID.equals(ControlFlowVisualIDRegistry.getModelID(view)))
+		{
 			return Collections.emptyList();
 		}
 		LinkedList<ControlFlowLinkDescriptor> result = new LinkedList<ControlFlowLinkDescriptor>();
 		switch (ControlFlowVisualIDRegistry.getVisualID(view)) {
 		case ControlFlowDiagramEditPart.VISUAL_ID: {
-			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(ControlFlowDiagramUpdater
-						.getControlFlowDiagram_1000ContainedLinks(view));
+			if (!domain2NotationMap.containsKey(view.getElement()))
+			{
+				result.addAll(ControlFlowDiagramUpdater.getControlFlowDiagram_1000ContainedLinks(view));
 			}
 			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
 		case ControlFlowLocationEditPart.VISUAL_ID: {
-			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(ControlFlowDiagramUpdater
-						.getControlFlowLocation_2001ContainedLinks(view));
+			if (!domain2NotationMap.containsKey(view.getElement()))
+			{
+				result.addAll(ControlFlowDiagramUpdater.getControlFlowLocation_2001ContainedLinks(view));
 			}
 			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
 		case TransitionEditPart.VISUAL_ID: {
-			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(ControlFlowDiagramUpdater
-						.getTransition_4001ContainedLinks(view));
+			if (!domain2NotationMap.containsKey(view.getElement()))
+			{
+				result.addAll(ControlFlowDiagramUpdater.getTransition_4001ContainedLinks(view));
 			}
 			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
 		}
-		for (Iterator children = view.getChildren().iterator(); children
-				.hasNext();) {
-			result.addAll(collectAllLinks((View) children.next(),
-					domain2NotationMap));
+		for (Iterator children = view.getChildren().iterator(); children.hasNext();)
+		{
+			result.addAll(collectAllLinks((View) children.next(), domain2NotationMap));
 		}
-		for (Iterator edges = view.getSourceEdges().iterator(); edges.hasNext();) {
-			result.addAll(collectAllLinks((View) edges.next(),
-					domain2NotationMap));
+		for (Iterator edges = view.getSourceEdges().iterator(); edges.hasNext();)
+		{
+			result.addAll(collectAllLinks((View) edges.next(), domain2NotationMap));
 		}
 		return result;
 	}
@@ -283,36 +292,35 @@ public class ControlFlowDiagramCanonicalEditPolicy extends CanonicalEditPolicy {
 	/**
 	 * @generated
 	 */
-	private Collection<IAdaptable> createConnections(
-			Collection<ControlFlowLinkDescriptor> linkDescriptors,
-			Domain2Notation domain2NotationMap) {
+	private Collection<IAdaptable> createConnections(Collection<ControlFlowLinkDescriptor> linkDescriptors,
+			Domain2Notation domain2NotationMap)
+	{
 		LinkedList<IAdaptable> adapters = new LinkedList<IAdaptable>();
-		for (ControlFlowLinkDescriptor nextLinkDescriptor : linkDescriptors) {
-			EditPart sourceEditPart = getSourceEditPart(nextLinkDescriptor,
-					domain2NotationMap);
-			EditPart targetEditPart = getTargetEditPart(nextLinkDescriptor,
-					domain2NotationMap);
-			if (sourceEditPart == null || targetEditPart == null) {
+		for (ControlFlowLinkDescriptor nextLinkDescriptor : linkDescriptors)
+		{
+			EditPart sourceEditPart = getSourceEditPart(nextLinkDescriptor, domain2NotationMap);
+			EditPart targetEditPart = getTargetEditPart(nextLinkDescriptor, domain2NotationMap);
+			if (sourceEditPart == null || targetEditPart == null)
+			{
 				continue;
 			}
 			CreateConnectionViewRequest.ConnectionViewDescriptor descriptor = new CreateConnectionViewRequest.ConnectionViewDescriptor(
-					nextLinkDescriptor.getSemanticAdapter(),
-					ControlFlowVisualIDRegistry.getType(nextLinkDescriptor
+					nextLinkDescriptor.getSemanticAdapter(), ControlFlowVisualIDRegistry.getType(nextLinkDescriptor
 							.getVisualID()), ViewUtil.APPEND, false,
-					((IGraphicalEditPart) getHost())
-							.getDiagramPreferencesHint());
-			CreateConnectionViewRequest ccr = new CreateConnectionViewRequest(
-					descriptor);
+					((IGraphicalEditPart) getHost()).getDiagramPreferencesHint());
+			CreateConnectionViewRequest ccr = new CreateConnectionViewRequest(descriptor);
 			ccr.setType(RequestConstants.REQ_CONNECTION_START);
 			ccr.setSourceEditPart(sourceEditPart);
 			sourceEditPart.getCommand(ccr);
 			ccr.setTargetEditPart(targetEditPart);
 			ccr.setType(RequestConstants.REQ_CONNECTION_END);
 			Command cmd = targetEditPart.getCommand(ccr);
-			if (cmd != null && cmd.canExecute()) {
+			if (cmd != null && cmd.canExecute())
+			{
 				executeCommand(cmd);
 				IAdaptable viewAdapter = (IAdaptable) ccr.getNewObject();
-				if (viewAdapter != null) {
+				if (viewAdapter != null)
+				{
 					adapters.add(viewAdapter);
 				}
 			}
@@ -323,12 +331,12 @@ public class ControlFlowDiagramCanonicalEditPolicy extends CanonicalEditPolicy {
 	/**
 	 * @generated
 	 */
-	private EditPart getEditPart(EObject domainModelElement,
-			Domain2Notation domain2NotationMap) {
+	private EditPart getEditPart(EObject domainModelElement, Domain2Notation domain2NotationMap)
+	{
 		View view = (View) domain2NotationMap.get(domainModelElement);
-		if (view != null) {
-			return (EditPart) getHost().getViewer().getEditPartRegistry()
-					.get(view);
+		if (view != null)
+		{
+			return (EditPart) getHost().getViewer().getEditPartRegistry().get(view);
 		}
 		return null;
 	}
@@ -336,36 +344,38 @@ public class ControlFlowDiagramCanonicalEditPolicy extends CanonicalEditPolicy {
 	/**
 	 * @generated
 	 */
-	private Diagram getDiagram() {
+	private Diagram getDiagram()
+	{
 		return ((View) getHost().getModel()).getDiagram();
 	}
 
 	/**
 	 * @generated
 	 */
-	private EditPart getSourceEditPart(UpdaterLinkDescriptor descriptor,
-			Domain2Notation domain2NotationMap) {
+	private EditPart getSourceEditPart(UpdaterLinkDescriptor descriptor, Domain2Notation domain2NotationMap)
+	{
 		return getEditPart(descriptor.getSource(), domain2NotationMap);
 	}
 
 	/**
 	 * @generated
 	 */
-	private EditPart getTargetEditPart(UpdaterLinkDescriptor descriptor,
-			Domain2Notation domain2NotationMap) {
+	private EditPart getTargetEditPart(UpdaterLinkDescriptor descriptor, Domain2Notation domain2NotationMap)
+	{
 		return getEditPart(descriptor.getDestination(), domain2NotationMap);
 	}
 
 	/**
 	 * @generated
 	 */
-	protected final EditPart getHintedEditPart(EObject domainModelElement,
-			Domain2Notation domain2NotationMap, int hintVisualId) {
+	protected final EditPart getHintedEditPart(EObject domainModelElement, Domain2Notation domain2NotationMap,
+			int hintVisualId)
+	{
 		View view = (View) domain2NotationMap.getHinted(domainModelElement,
 				ControlFlowVisualIDRegistry.getType(hintVisualId));
-		if (view != null) {
-			return (EditPart) getHost().getViewer().getEditPartRegistry()
-					.get(view);
+		if (view != null)
+		{
+			return (EditPart) getHost().getViewer().getEditPartRegistry().get(view);
 		}
 		return null;
 	}
@@ -374,26 +384,31 @@ public class ControlFlowDiagramCanonicalEditPolicy extends CanonicalEditPolicy {
 	 * @generated
 	 */
 	@SuppressWarnings("serial")
-	protected static class Domain2Notation extends HashMap<EObject, View> {
+	protected static class Domain2Notation extends HashMap<EObject, View>
+	{
 		/**
 		 * @generated
 		 */
-		public boolean containsDomainElement(EObject domainElement) {
+		public boolean containsDomainElement(EObject domainElement)
+		{
 			return this.containsKey(domainElement);
 		}
 
 		/**
 		 * @generated
 		 */
-		public View getHinted(EObject domainEObject, String hint) {
+		public View getHinted(EObject domainEObject, String hint)
+		{
 			return this.get(domainEObject);
 		}
 
 		/**
 		 * @generated
 		 */
-		public void putView(EObject domainElement, View view) {
-			if (!containsKey(view.getElement())) {
+		public void putView(EObject domainElement, View view)
+		{
+			if (!containsKey(view.getElement()))
+			{
 				this.put(domainElement, view);
 			}
 		}

@@ -21,8 +21,9 @@ import org.eclipse.gmf.tooling.runtime.edit.policies.labels.IRefreshableFeedback
 /**
  * @generated
  */
-public class ControlFlowTextNonResizableEditPolicy extends
-		NonResizableEditPolicyEx implements IRefreshableFeedbackEditPolicy {
+public class ControlFlowTextNonResizableEditPolicy extends NonResizableEditPolicyEx implements
+		IRefreshableFeedbackEditPolicy
+{
 
 	/**
 	 * @generated
@@ -42,11 +43,14 @@ public class ControlFlowTextNonResizableEditPolicy extends
 	/**
 	 * @generated
 	 */
-	protected void showPrimarySelection() {
-		if (getHostFigure() instanceof WrappingLabel) {
+	protected void showPrimarySelection()
+	{
+		if (getHostFigure() instanceof WrappingLabel)
+		{
 			((WrappingLabel) getHostFigure()).setSelected(true);
 			((WrappingLabel) getHostFigure()).setFocus(true);
-		} else {
+		} else
+		{
 			showSelection();
 			showFocus();
 		}
@@ -55,11 +59,14 @@ public class ControlFlowTextNonResizableEditPolicy extends
 	/**
 	 * @generated
 	 */
-	protected void showSelection() {
-		if (getHostFigure() instanceof WrappingLabel) {
+	protected void showSelection()
+	{
+		if (getHostFigure() instanceof WrappingLabel)
+		{
 			((WrappingLabel) getHostFigure()).setSelected(true);
 			((WrappingLabel) getHostFigure()).setFocus(false);
-		} else {
+		} else
+		{
 			hideSelection();
 			addFeedback(selectionFeedbackFigure = createSelectionFeedbackFigure());
 			getHostFigure().addFigureListener(getHostPositionListener());
@@ -71,12 +78,16 @@ public class ControlFlowTextNonResizableEditPolicy extends
 	/**
 	 * @generated
 	 */
-	protected void hideSelection() {
-		if (getHostFigure() instanceof WrappingLabel) {
+	protected void hideSelection()
+	{
+		if (getHostFigure() instanceof WrappingLabel)
+		{
 			((WrappingLabel) getHostFigure()).setSelected(false);
 			((WrappingLabel) getHostFigure()).setFocus(false);
-		} else {
-			if (selectionFeedbackFigure != null) {
+		} else
+		{
+			if (selectionFeedbackFigure != null)
+			{
 				removeFeedback(selectionFeedbackFigure);
 				getHostFigure().removeFigureListener(getHostPositionListener());
 				selectionFeedbackFigure = null;
@@ -88,10 +99,13 @@ public class ControlFlowTextNonResizableEditPolicy extends
 	/**
 	 * @generated
 	 */
-	protected void showFocus() {
-		if (getHostFigure() instanceof WrappingLabel) {
+	protected void showFocus()
+	{
+		if (getHostFigure() instanceof WrappingLabel)
+		{
 			((WrappingLabel) getHostFigure()).setFocus(true);
-		} else {
+		} else
+		{
 			hideFocus();
 			addFeedback(focusFeedbackFigure = createFocusFeedbackFigure());
 			refreshFocusFeedback();
@@ -101,11 +115,15 @@ public class ControlFlowTextNonResizableEditPolicy extends
 	/**
 	 * @generated
 	 */
-	protected void hideFocus() {
-		if (getHostFigure() instanceof WrappingLabel) {
+	protected void hideFocus()
+	{
+		if (getHostFigure() instanceof WrappingLabel)
+		{
 			((WrappingLabel) getHostFigure()).setFocus(false);
-		} else {
-			if (focusFeedbackFigure != null) {
+		} else
+		{
+			if (focusFeedbackFigure != null)
+			{
 				removeFeedback(focusFeedbackFigure);
 				focusFeedbackFigure = null;
 			}
@@ -115,12 +133,15 @@ public class ControlFlowTextNonResizableEditPolicy extends
 	/**
 	 * @generated
 	 */
-	protected Rectangle getFeedbackBounds() {
+	protected Rectangle getFeedbackBounds()
+	{
 		Rectangle bounds;
-		if (getHostFigure() instanceof Label) {
+		if (getHostFigure() instanceof Label)
+		{
 			bounds = ((Label) getHostFigure()).getTextBounds();
 			bounds.intersect(getHostFigure().getBounds());
-		} else {
+		} else
+		{
 			bounds = getHostFigure().getBounds().getCopy();
 		}
 		getHostFigure().getParent().translateToAbsolute(bounds);
@@ -131,16 +152,17 @@ public class ControlFlowTextNonResizableEditPolicy extends
 	/**
 	 * @generated
 	 */
-	protected IFigure createSelectionFeedbackFigure() {
-		if (getHostFigure() instanceof Label) {
+	protected IFigure createSelectionFeedbackFigure()
+	{
+		if (getHostFigure() instanceof Label)
+		{
 			Label feedbackFigure = new Label();
 			feedbackFigure.setOpaque(true);
-			feedbackFigure
-					.setBackgroundColor(ColorConstants.menuBackgroundSelected);
-			feedbackFigure
-					.setForegroundColor(ColorConstants.menuForegroundSelected);
+			feedbackFigure.setBackgroundColor(ColorConstants.menuBackgroundSelected);
+			feedbackFigure.setForegroundColor(ColorConstants.menuForegroundSelected);
 			return feedbackFigure;
-		} else {
+		} else
+		{
 			RectangleFigure feedbackFigure = new RectangleFigure();
 			feedbackFigure.setFill(false);
 			return feedbackFigure;
@@ -150,10 +172,13 @@ public class ControlFlowTextNonResizableEditPolicy extends
 	/**
 	 * @generated
 	 */
-	protected IFigure createFocusFeedbackFigure() {
-		return new Figure() {
+	protected IFigure createFocusFeedbackFigure()
+	{
+		return new Figure()
+		{
 
-			protected void paintFigure(Graphics graphics) {
+			protected void paintFigure(Graphics graphics)
+			{
 				graphics.drawFocus(getBounds().getResized(-1, -1));
 			}
 		};
@@ -162,7 +187,8 @@ public class ControlFlowTextNonResizableEditPolicy extends
 	/**
 	 * @generated
 	 */
-	protected void updateLabel(Label target) {
+	protected void updateLabel(Label target)
+	{
 		Label source = (Label) getHostFigure();
 		target.setText(source.getText());
 		target.setTextAlignment(source.getTextAlignment());
@@ -172,14 +198,17 @@ public class ControlFlowTextNonResizableEditPolicy extends
 	/**
 	 * @generated
 	 */
-	protected void refreshSelectionFeedback() {
-		if (selectionFeedbackFigure != null) {
-			if (selectionFeedbackFigure instanceof Label) {
+	protected void refreshSelectionFeedback()
+	{
+		if (selectionFeedbackFigure != null)
+		{
+			if (selectionFeedbackFigure instanceof Label)
+			{
 				updateLabel((Label) selectionFeedbackFigure);
 				selectionFeedbackFigure.setBounds(getFeedbackBounds());
-			} else {
-				selectionFeedbackFigure.setBounds(getFeedbackBounds().expand(5,
-						5));
+			} else
+			{
+				selectionFeedbackFigure.setBounds(getFeedbackBounds().expand(5, 5));
 			}
 		}
 	}
@@ -187,8 +216,10 @@ public class ControlFlowTextNonResizableEditPolicy extends
 	/**
 	 * @generated
 	 */
-	protected void refreshFocusFeedback() {
-		if (focusFeedbackFigure != null) {
+	protected void refreshFocusFeedback()
+	{
+		if (focusFeedbackFigure != null)
+		{
 			focusFeedbackFigure.setBounds(getFeedbackBounds());
 		}
 	}
@@ -197,7 +228,8 @@ public class ControlFlowTextNonResizableEditPolicy extends
 	 * @generated
 	 */
 	@Override
-	public void refreshFeedback() {
+	public void refreshFeedback()
+	{
 		refreshSelectionFeedback();
 		refreshFocusFeedback();
 	}
@@ -205,10 +237,14 @@ public class ControlFlowTextNonResizableEditPolicy extends
 	/**
 	 * @generated
 	 */
-	private FigureListener getHostPositionListener() {
-		if (hostPositionListener == null) {
-			hostPositionListener = new FigureListener() {
-				public void figureMoved(IFigure source) {
+	private FigureListener getHostPositionListener()
+	{
+		if (hostPositionListener == null)
+		{
+			hostPositionListener = new FigureListener()
+			{
+				public void figureMoved(IFigure source)
+				{
 					refreshFeedback();
 				}
 			};
@@ -219,7 +255,8 @@ public class ControlFlowTextNonResizableEditPolicy extends
 	/**
 	 * @generated
 	 */
-	protected List createSelectionHandles() {
+	protected List createSelectionHandles()
+	{
 		MoveHandle moveHandle = new MoveHandle((GraphicalEditPart) getHost());
 		moveHandle.setBorder(null);
 		moveHandle.setDragTracker(new DragEditPartsTrackerEx(getHost()));

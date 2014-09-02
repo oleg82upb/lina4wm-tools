@@ -12,13 +12,16 @@ import de.upb.lina.cfg.controlflow.diagram.part.ControlFlowVisualIDRegistry;
 /**
  * @generated
  */
-public class ControlFlowEditPartFactory implements EditPartFactory {
+public class ControlFlowEditPartFactory implements EditPartFactory
+{
 
 	/**
 	 * @generated
 	 */
-	public EditPart createEditPart(EditPart context, Object model) {
-		if (model instanceof View) {
+	public EditPart createEditPart(EditPart context, Object model)
+	{
+		if (model instanceof View)
+		{
 			View view = (View) model;
 			switch (ControlFlowVisualIDRegistry.getVisualID(view)) {
 
@@ -45,7 +48,8 @@ public class ControlFlowEditPartFactory implements EditPartFactory {
 	/**
 	 * @generated
 	 */
-	private EditPart createUnrecognizedEditPart(EditPart context, Object model) {
+	private EditPart createUnrecognizedEditPart(EditPart context, Object model)
+	{
 		// Handle creation of unrecognized child node EditParts here
 		return null;
 	}
@@ -53,10 +57,9 @@ public class ControlFlowEditPartFactory implements EditPartFactory {
 	/**
 	 * @generated
 	 */
-	public static CellEditorLocator getTextCellEditorLocator(
-			ITextAwareEditPart source) {
-		return CellEditorLocatorAccess.INSTANCE
-				.getTextCellEditorLocator(source);
+	public static CellEditorLocator getTextCellEditorLocator(ITextAwareEditPart source)
+	{
+		return CellEditorLocatorAccess.INSTANCE.getTextCellEditorLocator(source);
 	}
 
 }

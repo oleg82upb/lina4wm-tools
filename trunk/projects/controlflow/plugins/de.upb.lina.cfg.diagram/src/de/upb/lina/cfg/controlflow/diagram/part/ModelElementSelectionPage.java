@@ -22,20 +22,22 @@ import org.eclipse.swt.widgets.Label;
  * Wizard page that allows to select element from model.
  * @generated
  */
-public class ModelElementSelectionPage extends DefaultModelElementSelectionPage {
+public class ModelElementSelectionPage extends DefaultModelElementSelectionPage
+{
 	/**
 	 * @generated
 	 */
-	public ModelElementSelectionPage(String pageName) {
-		super(ControlFlowDiagramEditorPlugin.getInstance()
-				.getItemProvidersAdapterFactory(), pageName);
+	public ModelElementSelectionPage(String pageName)
+	{
+		super(ControlFlowDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory(), pageName);
 	}
 
 	/**
 	 * Override to provide custom model element description.
 	 * @generated
 	 */
-	protected String getSelectionTitle() {
+	protected String getSelectionTitle()
+	{
 		return Messages.ModelElementSelectionPageMessage;
 	}
 

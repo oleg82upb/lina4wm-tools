@@ -5,19 +5,22 @@ import org.eclipse.osgi.util.NLS;
 /**
  * @generated
  */
-public class Messages extends NLS {
+public class Messages extends NLS
+{
 
 	/**
 	 * @generated
 	 */
-	static {
+	static
+	{
 		NLS.initializeMessages("messages", Messages.class); //$NON-NLS-1$
 	}
 
 	/**
 	 * @generated
 	 */
-	private Messages() {
+	private Messages()
+	{
 	}
 
 	/**

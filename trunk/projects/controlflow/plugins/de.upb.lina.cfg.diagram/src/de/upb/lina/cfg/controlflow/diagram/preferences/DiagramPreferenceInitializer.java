@@ -8,12 +8,14 @@ import de.upb.lina.cfg.controlflow.diagram.part.ControlFlowDiagramEditorPlugin;
 /**
  * @generated
  */
-public class DiagramPreferenceInitializer extends AbstractPreferenceInitializer {
+public class DiagramPreferenceInitializer extends AbstractPreferenceInitializer
+{
 
 	/**
 	 * @generated
 	 */
-	public void initializeDefaultPreferences() {
+	public void initializeDefaultPreferences()
+	{
 		IPreferenceStore store = getPreferenceStore();
 		DiagramGeneralPreferencePage.initDefaults(store);
 		DiagramAppearancePreferencePage.initDefaults(store);
@@ -26,8 +28,8 @@ public class DiagramPreferenceInitializer extends AbstractPreferenceInitializer 
 	/**
 	 * @generated
 	 */
-	protected IPreferenceStore getPreferenceStore() {
-		return ControlFlowDiagramEditorPlugin.getInstance()
-				.getPreferenceStore();
+	protected IPreferenceStore getPreferenceStore()
+	{
+		return ControlFlowDiagramEditorPlugin.getInstance().getPreferenceStore();
 	}
 }

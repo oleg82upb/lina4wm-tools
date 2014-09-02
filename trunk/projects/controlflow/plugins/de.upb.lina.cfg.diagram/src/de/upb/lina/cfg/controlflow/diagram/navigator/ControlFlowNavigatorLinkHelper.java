@@ -27,25 +27,28 @@ import de.upb.lina.cfg.controlflow.diagram.part.ControlFlowDiagramEditorPlugin;
 /**
  * @generated
  */
-public class ControlFlowNavigatorLinkHelper implements ILinkHelper {
+public class ControlFlowNavigatorLinkHelper implements ILinkHelper
+{
 
 	/**
 	 * @generated
 	 */
-	private static IEditorInput getEditorInput(Diagram diagram) {
+	private static IEditorInput getEditorInput(Diagram diagram)
+	{
 		Resource diagramResource = diagram.eResource();
-		for (EObject nextEObject : diagramResource.getContents()) {
-			if (nextEObject == diagram) {
-				return new FileEditorInput(
-						WorkspaceSynchronizer.getFile(diagramResource));
+		for (EObject nextEObject : diagramResource.getContents())
+		{
+			if (nextEObject == diagram)
+			{
+				return new FileEditorInput(WorkspaceSynchronizer.getFile(diagramResource));
 			}
-			if (nextEObject instanceof Diagram) {
+			if (nextEObject instanceof Diagram)
+			{
 				break;
 			}
 		}
 		URI uri = EcoreUtil.getURI(diagram);
-		String editorName = uri.lastSegment() + '#'
-				+ diagram.eResource().getContents().indexOf(diagram);
+		String editorName = uri.lastSegment() + '#' + diagram.eResource().getContents().indexOf(diagram);
 		IEditorInput editorInput = new URIEditorInput(uri, editorName);
 		return editorInput;
 	}
@@ -53,21 +56,23 @@ public class ControlFlowNavigatorLinkHelper implements ILinkHelper {
 	/**
 	 * @generated
 	 */
-	public IStructuredSelection findSelection(IEditorInput anInput) {
-		IDiagramDocument document = ControlFlowDiagramEditorPlugin
-				.getInstance().getDocumentProvider()
+	public IStructuredSelection findSelection(IEditorInput anInput)
+	{
+		IDiagramDocument document = ControlFlowDiagramEditorPlugin.getInstance().getDocumentProvider()
 				.getDiagramDocument(anInput);
-		if (document == null) {
+		if (document == null)
+		{
 			return StructuredSelection.EMPTY;
 		}
 		Diagram diagram = document.getDiagram();
-		if (diagram == null || diagram.eResource() == null) {
+		if (diagram == null || diagram.eResource() == null)
+		{
 			return StructuredSelection.EMPTY;
 		}
 		IFile file = WorkspaceSynchronizer.getFile(diagram.eResource());
-		if (file != null) {
-			ControlFlowNavigatorItem item = new ControlFlowNavigatorItem(
-					diagram, file, false);
+		if (file != null)
+		{
+			ControlFlowNavigatorItem item = new ControlFlowNavigatorItem(diagram, file, false);
 			return new StructuredSelection(item);
 		}
 		return StructuredSelection.EMPTY;
@@ -76,51 +81,55 @@ public class ControlFlowNavigatorLinkHelper implements ILinkHelper {
 	/**
 	 * @generated
 	 */
-	public void activateEditor(IWorkbenchPage aPage,
-			IStructuredSelection aSelection) {
-		if (aSelection == null || aSelection.isEmpty()) {
+	public void activateEditor(IWorkbenchPage aPage, IStructuredSelection aSelection)
+	{
+		if (aSelection == null || aSelection.isEmpty())
+		{
 			return;
 		}
-		if (false == aSelection.getFirstElement() instanceof ControlFlowAbstractNavigatorItem) {
+		if (false == aSelection.getFirstElement() instanceof ControlFlowAbstractNavigatorItem)
+		{
 			return;
 		}
 
 		ControlFlowAbstractNavigatorItem abstractNavigatorItem = (ControlFlowAbstractNavigatorItem) aSelection
 				.getFirstElement();
 		View navigatorView = null;
-		if (abstractNavigatorItem instanceof ControlFlowNavigatorItem) {
-			navigatorView = ((ControlFlowNavigatorItem) abstractNavigatorItem)
-					.getView();
-		} else if (abstractNavigatorItem instanceof ControlFlowNavigatorGroup) {
+		if (abstractNavigatorItem instanceof ControlFlowNavigatorItem)
+		{
+			navigatorView = ((ControlFlowNavigatorItem) abstractNavigatorItem).getView();
+		} else if (abstractNavigatorItem instanceof ControlFlowNavigatorGroup)
+		{
 			ControlFlowNavigatorGroup navigatorGroup = (ControlFlowNavigatorGroup) abstractNavigatorItem;
-			if (navigatorGroup.getParent() instanceof ControlFlowNavigatorItem) {
-				navigatorView = ((ControlFlowNavigatorItem) navigatorGroup
-						.getParent()).getView();
+			if (navigatorGroup.getParent() instanceof ControlFlowNavigatorItem)
+			{
+				navigatorView = ((ControlFlowNavigatorItem) navigatorGroup.getParent()).getView();
 			}
 		}
-		if (navigatorView == null) {
+		if (navigatorView == null)
+		{
 			return;
 		}
 		IEditorInput editorInput = getEditorInput(navigatorView.getDiagram());
 		IEditorPart editor = aPage.findEditor(editorInput);
-		if (editor == null) {
+		if (editor == null)
+		{
 			return;
 		}
 		aPage.bringToTop(editor);
-		if (editor instanceof DiagramEditor) {
+		if (editor instanceof DiagramEditor)
+		{
 			DiagramEditor diagramEditor = (DiagramEditor) editor;
-			ResourceSet diagramEditorResourceSet = diagramEditor
-					.getEditingDomain().getResourceSet();
-			EObject selectedView = diagramEditorResourceSet.getEObject(
-					EcoreUtil.getURI(navigatorView), true);
-			if (selectedView == null) {
+			ResourceSet diagramEditorResourceSet = diagramEditor.getEditingDomain().getResourceSet();
+			EObject selectedView = diagramEditorResourceSet.getEObject(EcoreUtil.getURI(navigatorView), true);
+			if (selectedView == null)
+			{
 				return;
 			}
-			GraphicalViewer graphicalViewer = (GraphicalViewer) diagramEditor
-					.getAdapter(GraphicalViewer.class);
-			EditPart selectedEditPart = (EditPart) graphicalViewer
-					.getEditPartRegistry().get(selectedView);
-			if (selectedEditPart != null) {
+			GraphicalViewer graphicalViewer = (GraphicalViewer) diagramEditor.getAdapter(GraphicalViewer.class);
+			EditPart selectedEditPart = (EditPart) graphicalViewer.getEditPartRegistry().get(selectedView);
+			if (selectedEditPart != null)
+			{
 				graphicalViewer.select(selectedEditPart);
 			}
 		}

@@ -33,7 +33,8 @@ import de.upb.lina.cfg.controlflow.diagram.edit.parts.ControlFlowDiagramEditPart
 /**
  * @generated
  */
-public class ControlFlowNewDiagramFileWizard extends Wizard {
+public class ControlFlowNewDiagramFileWizard extends Wizard
+{
 
 	/**
 	 * @generated
@@ -53,33 +54,30 @@ public class ControlFlowNewDiagramFileWizard extends Wizard {
 	/**
 	 * @generated
 	 */
-	public ControlFlowNewDiagramFileWizard(URI domainModelURI,
-			EObject diagramRoot, TransactionalEditingDomain editingDomain) {
+	public ControlFlowNewDiagramFileWizard(URI domainModelURI, EObject diagramRoot,
+			TransactionalEditingDomain editingDomain)
+	{
 		assert domainModelURI != null : "Domain model uri must be specified"; //$NON-NLS-1$
 		assert diagramRoot != null : "Doagram root element must be specified"; //$NON-NLS-1$
 		assert editingDomain != null : "Editing domain must be specified"; //$NON-NLS-1$
 
-		myFileCreationPage = new WizardNewFileCreationPage(
-				Messages.ControlFlowNewDiagramFileWizard_CreationPageName,
+		myFileCreationPage = new WizardNewFileCreationPage(Messages.ControlFlowNewDiagramFileWizard_CreationPageName,
 				StructuredSelection.EMPTY);
-		myFileCreationPage
-				.setTitle(Messages.ControlFlowNewDiagramFileWizard_CreationPageTitle);
-		myFileCreationPage
-				.setDescription(NLS
-						.bind(Messages.ControlFlowNewDiagramFileWizard_CreationPageDescription,
-								ControlFlowDiagramEditPart.MODEL_ID));
+		myFileCreationPage.setTitle(Messages.ControlFlowNewDiagramFileWizard_CreationPageTitle);
+		myFileCreationPage.setDescription(NLS.bind(Messages.ControlFlowNewDiagramFileWizard_CreationPageDescription,
+				ControlFlowDiagramEditPart.MODEL_ID));
 		IPath filePath;
-		String fileName = URI.decode(domainModelURI.trimFileExtension()
-				.lastSegment());
-		if (domainModelURI.isPlatformResource()) {
-			filePath = new Path(domainModelURI.trimSegments(1)
-					.toPlatformString(true));
-		} else if (domainModelURI.isFile()) {
+		String fileName = URI.decode(domainModelURI.trimFileExtension().lastSegment());
+		if (domainModelURI.isPlatformResource())
+		{
+			filePath = new Path(domainModelURI.trimSegments(1).toPlatformString(true));
+		} else if (domainModelURI.isFile())
+		{
 			filePath = new Path(domainModelURI.trimSegments(1).toFileString());
-		} else {
+		} else
+		{
 			// TODO : use some default path
-			throw new IllegalArgumentException(
-					"Unsupported URI: " + domainModelURI); //$NON-NLS-1$
+			throw new IllegalArgumentException("Unsupported URI: " + domainModelURI); //$NON-NLS-1$
 		}
 		myFileCreationPage.setContainerFullPath(filePath);
 		myFileCreationPage.setFileName(ControlFlowDiagramEditorUtil
@@ -87,8 +85,7 @@ public class ControlFlowNewDiagramFileWizard extends Wizard {
 
 		diagramRootElementSelectionPage = new DiagramRootElementSelectionPage(
 				Messages.ControlFlowNewDiagramFileWizard_RootSelectionPageName);
-		diagramRootElementSelectionPage
-				.setTitle(Messages.ControlFlowNewDiagramFileWizard_RootSelectionPageTitle);
+		diagramRootElementSelectionPage.setTitle(Messages.ControlFlowNewDiagramFileWizard_RootSelectionPageTitle);
 		diagramRootElementSelectionPage
 				.setDescription(Messages.ControlFlowNewDiagramFileWizard_RootSelectionPageDescription);
 		diagramRootElementSelectionPage.setModelElement(diagramRoot);
@@ -99,7 +96,8 @@ public class ControlFlowNewDiagramFileWizard extends Wizard {
 	/**
 	 * @generated
 	 */
-	public void addPages() {
+	public void addPages()
+	{
 		addPage(myFileCreationPage);
 		addPage(diagramRootElementSelectionPage);
 	}
@@ -107,55 +105,49 @@ public class ControlFlowNewDiagramFileWizard extends Wizard {
 	/**
 	 * @generated
 	 */
-	public boolean performFinish() {
+	public boolean performFinish()
+	{
 		LinkedList<IFile> affectedFiles = new LinkedList<IFile>();
 		IFile diagramFile = myFileCreationPage.createNewFile();
 		ControlFlowDiagramEditorUtil.setCharset(diagramFile);
 		affectedFiles.add(diagramFile);
-		URI diagramModelURI = URI.createPlatformResourceURI(diagramFile
-				.getFullPath().toString(), true);
+		URI diagramModelURI = URI.createPlatformResourceURI(diagramFile.getFullPath().toString(), true);
 		ResourceSet resourceSet = myEditingDomain.getResourceSet();
-		final Resource diagramResource = resourceSet
-				.createResource(diagramModelURI);
-		AbstractTransactionalCommand command = new AbstractTransactionalCommand(
-				myEditingDomain,
-				Messages.ControlFlowNewDiagramFileWizard_InitDiagramCommand,
-				affectedFiles) {
+		final Resource diagramResource = resourceSet.createResource(diagramModelURI);
+		AbstractTransactionalCommand command = new AbstractTransactionalCommand(myEditingDomain,
+				Messages.ControlFlowNewDiagramFileWizard_InitDiagramCommand, affectedFiles)
+		{
 
-			protected CommandResult doExecuteWithResult(
-					IProgressMonitor monitor, IAdaptable info)
-					throws ExecutionException {
-				int diagramVID = ControlFlowVisualIDRegistry
-						.getDiagramVisualID(diagramRootElementSelectionPage
-								.getModelElement());
-				if (diagramVID != ControlFlowDiagramEditPart.VISUAL_ID) {
+			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
+					throws ExecutionException
+			{
+				int diagramVID = ControlFlowVisualIDRegistry.getDiagramVisualID(diagramRootElementSelectionPage
+						.getModelElement());
+				if (diagramVID != ControlFlowDiagramEditPart.VISUAL_ID)
+				{
 					return CommandResult
 							.newErrorCommandResult(Messages.ControlFlowNewDiagramFileWizard_IncorrectRootError);
 				}
-				Diagram diagram = ViewService
-						.createDiagram(
-								diagramRootElementSelectionPage
-										.getModelElement(),
-								ControlFlowDiagramEditPart.MODEL_ID,
-								ControlFlowDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+				Diagram diagram = ViewService.createDiagram(diagramRootElementSelectionPage.getModelElement(),
+						ControlFlowDiagramEditPart.MODEL_ID, ControlFlowDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
 				diagramResource.getContents().add(diagram);
 				return CommandResult.newOKCommandResult();
 			}
 		};
-		try {
-			OperationHistoryFactory.getOperationHistory().execute(command,
-					new NullProgressMonitor(), null);
+		try
+		{
+			OperationHistoryFactory.getOperationHistory().execute(command, new NullProgressMonitor(), null);
 			diagramResource.save(ControlFlowDiagramEditorUtil.getSaveOptions());
 			ControlFlowDiagramEditorUtil.openDiagram(diagramResource);
-		} catch (ExecutionException e) {
-			ControlFlowDiagramEditorPlugin.getInstance().logError(
-					"Unable to create model and diagram", e); //$NON-NLS-1$
-		} catch (IOException ex) {
-			ControlFlowDiagramEditorPlugin.getInstance().logError(
-					"Save operation failed for: " + diagramModelURI, ex); //$NON-NLS-1$
-		} catch (PartInitException ex) {
-			ControlFlowDiagramEditorPlugin.getInstance().logError(
-					"Unable to open editor", ex); //$NON-NLS-1$
+		} catch (ExecutionException e)
+		{
+			ControlFlowDiagramEditorPlugin.getInstance().logError("Unable to create model and diagram", e); //$NON-NLS-1$
+		} catch (IOException ex)
+		{
+			ControlFlowDiagramEditorPlugin.getInstance().logError("Save operation failed for: " + diagramModelURI, ex); //$NON-NLS-1$
+		} catch (PartInitException ex)
+		{
+			ControlFlowDiagramEditorPlugin.getInstance().logError("Unable to open editor", ex); //$NON-NLS-1$
 		}
 		return true;
 	}
@@ -163,38 +155,39 @@ public class ControlFlowNewDiagramFileWizard extends Wizard {
 	/**
 	 * @generated
 	 */
-	private static class DiagramRootElementSelectionPage extends
-			ModelElementSelectionPage {
+	private static class DiagramRootElementSelectionPage extends ModelElementSelectionPage
+	{
 
 		/**
 		 * @generated
 		 */
-		protected DiagramRootElementSelectionPage(String pageName) {
+		protected DiagramRootElementSelectionPage(String pageName)
+		{
 			super(pageName);
 		}
 
 		/**
 		 * @generated
 		 */
-		protected String getSelectionTitle() {
+		protected String getSelectionTitle()
+		{
 			return Messages.ControlFlowNewDiagramFileWizard_RootSelectionPageSelectionTitle;
 		}
 
 		/**
 		 * @generated
 		 */
-		protected boolean validatePage() {
-			if (getModelElement() == null) {
+		protected boolean validatePage()
+		{
+			if (getModelElement() == null)
+			{
 				setErrorMessage(Messages.ControlFlowNewDiagramFileWizard_RootSelectionPageNoSelectionMessage);
 				return false;
 			}
-			boolean result = ViewService
-					.getInstance()
-					.provides(
-							new CreateDiagramViewOperation(
-									new EObjectAdapter(getModelElement()),
-									ControlFlowDiagramEditPart.MODEL_ID,
-									ControlFlowDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT));
+			boolean result = ViewService.getInstance().provides(
+					new CreateDiagramViewOperation(new EObjectAdapter(getModelElement()),
+							ControlFlowDiagramEditPart.MODEL_ID,
+							ControlFlowDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT));
 			setErrorMessage(result ? null
 					: Messages.ControlFlowNewDiagramFileWizard_RootSelectionPageInvalidSelectionMessage);
 			return result;

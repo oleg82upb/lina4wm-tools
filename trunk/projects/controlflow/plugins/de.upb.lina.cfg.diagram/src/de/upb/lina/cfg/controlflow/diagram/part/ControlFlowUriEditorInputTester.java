@@ -6,14 +6,16 @@ import org.eclipse.emf.common.ui.URIEditorInput;
 /**
  * @generated
  */
-public class ControlFlowUriEditorInputTester extends PropertyTester {
+public class ControlFlowUriEditorInputTester extends PropertyTester
+{
 
 	/**
 	 * @generated
 	 */
-	public boolean test(Object receiver, String method, Object[] args,
-			Object expectedValue) {
-		if (false == receiver instanceof URIEditorInput) {
+	public boolean test(Object receiver, String method, Object[] args, Object expectedValue)
+	{
+		if (false == receiver instanceof URIEditorInput)
+		{
 			return false;
 		}
 		URIEditorInput editorInput = (URIEditorInput) receiver;

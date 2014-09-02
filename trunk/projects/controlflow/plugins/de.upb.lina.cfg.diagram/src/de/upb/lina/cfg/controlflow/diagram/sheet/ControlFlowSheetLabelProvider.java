@@ -15,15 +15,17 @@ import de.upb.lina.cfg.controlflow.diagram.providers.ControlFlowElementTypes;
 /**
  * @generated
  */
-public class ControlFlowSheetLabelProvider extends BaseLabelProvider implements
-		ILabelProvider {
+public class ControlFlowSheetLabelProvider extends BaseLabelProvider implements ILabelProvider
+{
 
 	/**
 	 * @generated
 	 */
-	public String getText(Object element) {
+	public String getText(Object element)
+	{
 		element = unwrap(element);
-		if (element instanceof ControlFlowNavigatorGroup) {
+		if (element instanceof ControlFlowNavigatorGroup)
+		{
 			return ((ControlFlowNavigatorGroup) element).getGroupName();
 		}
 		IElementType etype = getElementType(getView(element));
@@ -33,7 +35,8 @@ public class ControlFlowSheetLabelProvider extends BaseLabelProvider implements
 	/**
 	 * @generated
 	 */
-	public Image getImage(Object element) {
+	public Image getImage(Object element)
+	{
 		IElementType etype = getElementType(getView(unwrap(element)));
 		return etype == null ? null : ControlFlowElementTypes.getImage(etype);
 	}
@@ -41,8 +44,10 @@ public class ControlFlowSheetLabelProvider extends BaseLabelProvider implements
 	/**
 	 * @generated
 	 */
-	private Object unwrap(Object element) {
-		if (element instanceof IStructuredSelection) {
+	private Object unwrap(Object element)
+	{
+		if (element instanceof IStructuredSelection)
+		{
 			return ((IStructuredSelection) element).getFirstElement();
 		}
 		return element;
@@ -51,11 +56,14 @@ public class ControlFlowSheetLabelProvider extends BaseLabelProvider implements
 	/**
 	 * @generated
 	 */
-	private View getView(Object element) {
-		if (element instanceof View) {
+	private View getView(Object element)
+	{
+		if (element instanceof View)
+		{
 			return (View) element;
 		}
-		if (element instanceof IAdaptable) {
+		if (element instanceof IAdaptable)
+		{
 			return (View) ((IAdaptable) element).getAdapter(View.class);
 		}
 		return null;
@@ -64,16 +72,18 @@ public class ControlFlowSheetLabelProvider extends BaseLabelProvider implements
 	/**
 	 * @generated
 	 */
-	private IElementType getElementType(View view) {
+	private IElementType getElementType(View view)
+	{
 		// For intermediate views climb up the containment hierarchy to find the one associated with an element type.
-		while (view != null) {
+		while (view != null)
+		{
 			int vid = ControlFlowVisualIDRegistry.getVisualID(view);
 			IElementType etype = ControlFlowElementTypes.getElementType(vid);
-			if (etype != null) {
+			if (etype != null)
+			{
 				return etype;
 			}
-			view = view.eContainer() instanceof View ? (View) view.eContainer()
-					: null;
+			view = view.eContainer() instanceof View ? (View) view.eContainer() : null;
 		}
 		return null;
 	}

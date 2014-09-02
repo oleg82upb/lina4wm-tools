@@ -16,7 +16,8 @@ import de.upb.lina.cfg.controlflow.diagram.edit.policies.ControlFlowBaseItemSema
 /**
  * @generated
  */
-public class TransitionReorientCommand extends EditElementCommand {
+public class TransitionReorientCommand extends EditElementCommand
+{
 
 	/**
 	 * @generated
@@ -36,7 +37,8 @@ public class TransitionReorientCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	public TransitionReorientCommand(ReorientRelationshipRequest request) {
+	public TransitionReorientCommand(ReorientRelationshipRequest request)
+	{
 		super(request.getLabel(), request.getRelationship(), request);
 		reorientDirection = request.getDirection();
 		oldEnd = request.getOldRelationshipEnd();
@@ -46,14 +48,18 @@ public class TransitionReorientCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	public boolean canExecute() {
-		if (false == getElementToEdit() instanceof Transition) {
+	public boolean canExecute()
+	{
+		if (false == getElementToEdit() instanceof Transition)
+		{
 			return false;
 		}
-		if (reorientDirection == ReorientRelationshipRequest.REORIENT_SOURCE) {
+		if (reorientDirection == ReorientRelationshipRequest.REORIENT_SOURCE)
+		{
 			return canReorientSource();
 		}
-		if (reorientDirection == ReorientRelationshipRequest.REORIENT_TARGET) {
+		if (reorientDirection == ReorientRelationshipRequest.REORIENT_TARGET)
+		{
 			return canReorientTarget();
 		}
 		return false;
@@ -62,52 +68,56 @@ public class TransitionReorientCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	protected boolean canReorientSource() {
-		if (!(oldEnd instanceof ControlFlowLocation && newEnd instanceof ControlFlowLocation)) {
+	protected boolean canReorientSource()
+	{
+		if (!(oldEnd instanceof ControlFlowLocation && newEnd instanceof ControlFlowLocation))
+		{
 			return false;
 		}
 		ControlFlowLocation target = getLink().getTarget();
-		if (!(getLink().eContainer() instanceof ControlFlowDiagram)) {
+		if (!(getLink().eContainer() instanceof ControlFlowDiagram))
+		{
 			return false;
 		}
-		ControlFlowDiagram container = (ControlFlowDiagram) getLink()
-				.eContainer();
-		return ControlFlowBaseItemSemanticEditPolicy.getLinkConstraints()
-				.canExistTransition_4001(container, getLink(), getNewSource(),
-						target);
+		ControlFlowDiagram container = (ControlFlowDiagram) getLink().eContainer();
+		return ControlFlowBaseItemSemanticEditPolicy.getLinkConstraints().canExistTransition_4001(container, getLink(),
+				getNewSource(), target);
 	}
 
 	/**
 	 * @generated
 	 */
-	protected boolean canReorientTarget() {
-		if (!(oldEnd instanceof ControlFlowLocation && newEnd instanceof ControlFlowLocation)) {
+	protected boolean canReorientTarget()
+	{
+		if (!(oldEnd instanceof ControlFlowLocation && newEnd instanceof ControlFlowLocation))
+		{
 			return false;
 		}
 		ControlFlowLocation source = getLink().getSource();
-		if (!(getLink().eContainer() instanceof ControlFlowDiagram)) {
+		if (!(getLink().eContainer() instanceof ControlFlowDiagram))
+		{
 			return false;
 		}
-		ControlFlowDiagram container = (ControlFlowDiagram) getLink()
-				.eContainer();
-		return ControlFlowBaseItemSemanticEditPolicy.getLinkConstraints()
-				.canExistTransition_4001(container, getLink(), source,
-						getNewTarget());
+		ControlFlowDiagram container = (ControlFlowDiagram) getLink().eContainer();
+		return ControlFlowBaseItemSemanticEditPolicy.getLinkConstraints().canExistTransition_4001(container, getLink(),
+				source, getNewTarget());
 	}
 
 	/**
 	 * @generated
 	 */
-	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
-			IAdaptable info) throws ExecutionException {
-		if (!canExecute()) {
-			throw new ExecutionException(
-					"Invalid arguments in reorient link command"); //$NON-NLS-1$
+	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException
+	{
+		if (!canExecute())
+		{
+			throw new ExecutionException("Invalid arguments in reorient link command"); //$NON-NLS-1$
 		}
-		if (reorientDirection == ReorientRelationshipRequest.REORIENT_SOURCE) {
+		if (reorientDirection == ReorientRelationshipRequest.REORIENT_SOURCE)
+		{
 			return reorientSource();
 		}
-		if (reorientDirection == ReorientRelationshipRequest.REORIENT_TARGET) {
+		if (reorientDirection == ReorientRelationshipRequest.REORIENT_TARGET)
+		{
 			return reorientTarget();
 		}
 		throw new IllegalStateException();
@@ -116,7 +126,8 @@ public class TransitionReorientCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	protected CommandResult reorientSource() throws ExecutionException {
+	protected CommandResult reorientSource() throws ExecutionException
+	{
 		getLink().setSource(getNewSource());
 		return CommandResult.newOKCommandResult(getLink());
 	}
@@ -124,7 +135,8 @@ public class TransitionReorientCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	protected CommandResult reorientTarget() throws ExecutionException {
+	protected CommandResult reorientTarget() throws ExecutionException
+	{
 		getLink().setTarget(getNewTarget());
 		return CommandResult.newOKCommandResult(getLink());
 	}
@@ -132,35 +144,40 @@ public class TransitionReorientCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	protected Transition getLink() {
+	protected Transition getLink()
+	{
 		return (Transition) getElementToEdit();
 	}
 
 	/**
 	 * @generated
 	 */
-	protected ControlFlowLocation getOldSource() {
+	protected ControlFlowLocation getOldSource()
+	{
 		return (ControlFlowLocation) oldEnd;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected ControlFlowLocation getNewSource() {
+	protected ControlFlowLocation getNewSource()
+	{
 		return (ControlFlowLocation) newEnd;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected ControlFlowLocation getOldTarget() {
+	protected ControlFlowLocation getOldTarget()
+	{
 		return (ControlFlowLocation) oldEnd;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected ControlFlowLocation getNewTarget() {
+	protected ControlFlowLocation getNewTarget()
+	{
 		return (ControlFlowLocation) newEnd;
 	}
 }

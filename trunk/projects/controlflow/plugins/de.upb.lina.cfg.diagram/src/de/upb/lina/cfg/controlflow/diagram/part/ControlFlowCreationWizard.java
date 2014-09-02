@@ -17,7 +17,8 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 /**
  * @generated
  */
-public class ControlFlowCreationWizard extends Wizard implements INewWizard {
+public class ControlFlowCreationWizard extends Wizard implements INewWizard
+{
 
 	/**
 	 * @generated
@@ -52,43 +53,48 @@ public class ControlFlowCreationWizard extends Wizard implements INewWizard {
 	/**
 	 * @generated
 	 */
-	public IWorkbench getWorkbench() {
+	public IWorkbench getWorkbench()
+	{
 		return workbench;
 	}
 
 	/**
 	 * @generated
 	 */
-	public IStructuredSelection getSelection() {
+	public IStructuredSelection getSelection()
+	{
 		return selection;
 	}
 
 	/**
 	 * @generated
 	 */
-	public final Resource getDiagram() {
+	public final Resource getDiagram()
+	{
 		return diagram;
 	}
 
 	/**
 	 * @generated
 	 */
-	public final boolean isOpenNewlyCreatedDiagramEditor() {
+	public final boolean isOpenNewlyCreatedDiagramEditor()
+	{
 		return openNewlyCreatedDiagramEditor;
 	}
 
 	/**
 	 * @generated
 	 */
-	public void setOpenNewlyCreatedDiagramEditor(
-			boolean openNewlyCreatedDiagramEditor) {
+	public void setOpenNewlyCreatedDiagramEditor(boolean openNewlyCreatedDiagramEditor)
+	{
 		this.openNewlyCreatedDiagramEditor = openNewlyCreatedDiagramEditor;
 	}
 
 	/**
 	 * @generated
 	 */
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
+	public void init(IWorkbench workbench, IStructuredSelection selection)
+	{
 		this.workbench = workbench;
 		this.selection = selection;
 		setWindowTitle(Messages.ControlFlowCreationWizardTitle);
@@ -100,72 +106,71 @@ public class ControlFlowCreationWizard extends Wizard implements INewWizard {
 	/**
 	 * @generated
 	 */
-	public void addPages() {
-		diagramModelFilePage = new ControlFlowCreationWizardPage(
-				"DiagramModelFile", getSelection(), "cfg_diagram"); //$NON-NLS-1$ //$NON-NLS-2$
-		diagramModelFilePage
-				.setTitle(Messages.ControlFlowCreationWizard_DiagramModelFilePageTitle);
-		diagramModelFilePage
-				.setDescription(Messages.ControlFlowCreationWizard_DiagramModelFilePageDescription);
+	public void addPages()
+	{
+		diagramModelFilePage = new ControlFlowCreationWizardPage("DiagramModelFile", getSelection(), "cfg_diagram"); //$NON-NLS-1$ //$NON-NLS-2$
+		diagramModelFilePage.setTitle(Messages.ControlFlowCreationWizard_DiagramModelFilePageTitle);
+		diagramModelFilePage.setDescription(Messages.ControlFlowCreationWizard_DiagramModelFilePageDescription);
 		addPage(diagramModelFilePage);
 
-		domainModelFilePage = new ControlFlowCreationWizardPage(
-				"DomainModelFile", getSelection(), "cfg") { //$NON-NLS-1$ //$NON-NLS-2$
+		domainModelFilePage = new ControlFlowCreationWizardPage("DomainModelFile", getSelection(), "cfg") { //$NON-NLS-1$ //$NON-NLS-2$
 
-			public void setVisible(boolean visible) {
-				if (visible) {
+			public void setVisible(boolean visible)
+			{
+				if (visible)
+				{
 					String fileName = diagramModelFilePage.getFileName();
-					fileName = fileName.substring(0, fileName.length()
-							- ".cfg_diagram".length()); //$NON-NLS-1$
-					setFileName(ControlFlowDiagramEditorUtil.getUniqueFileName(
-							getContainerFullPath(), fileName, "cfg")); //$NON-NLS-1$
+					fileName = fileName.substring(0, fileName.length() - ".cfg_diagram".length()); //$NON-NLS-1$
+					setFileName(ControlFlowDiagramEditorUtil.getUniqueFileName(getContainerFullPath(), fileName, "cfg")); //$NON-NLS-1$
 				}
 				super.setVisible(visible);
 			}
 		};
-		domainModelFilePage
-				.setTitle(Messages.ControlFlowCreationWizard_DomainModelFilePageTitle);
-		domainModelFilePage
-				.setDescription(Messages.ControlFlowCreationWizard_DomainModelFilePageDescription);
+		domainModelFilePage.setTitle(Messages.ControlFlowCreationWizard_DomainModelFilePageTitle);
+		domainModelFilePage.setDescription(Messages.ControlFlowCreationWizard_DomainModelFilePageDescription);
 		addPage(domainModelFilePage);
 	}
 
 	/**
 	 * @generated
 	 */
-	public boolean performFinish() {
-		IRunnableWithProgress op = new WorkspaceModifyOperation(null) {
+	public boolean performFinish()
+	{
+		IRunnableWithProgress op = new WorkspaceModifyOperation(null)
+		{
 
-			protected void execute(IProgressMonitor monitor)
-					throws CoreException, InterruptedException {
-				diagram = ControlFlowDiagramEditorUtil.createDiagram(
-						diagramModelFilePage.getURI(),
+			protected void execute(IProgressMonitor monitor) throws CoreException, InterruptedException
+			{
+				diagram = ControlFlowDiagramEditorUtil.createDiagram(diagramModelFilePage.getURI(),
 						domainModelFilePage.getURI(), monitor);
-				if (isOpenNewlyCreatedDiagramEditor() && diagram != null) {
-					try {
+				if (isOpenNewlyCreatedDiagramEditor() && diagram != null)
+				{
+					try
+					{
 						ControlFlowDiagramEditorUtil.openDiagram(diagram);
-					} catch (PartInitException e) {
-						ErrorDialog
-								.openError(
-										getContainer().getShell(),
-										Messages.ControlFlowCreationWizardOpenEditorError,
-										null, e.getStatus());
+					} catch (PartInitException e)
+					{
+						ErrorDialog.openError(getContainer().getShell(),
+								Messages.ControlFlowCreationWizardOpenEditorError, null, e.getStatus());
 					}
 				}
 			}
 		};
-		try {
+		try
+		{
 			getContainer().run(false, true, op);
-		} catch (InterruptedException e) {
+		} catch (InterruptedException e)
+		{
 			return false;
-		} catch (InvocationTargetException e) {
-			if (e.getTargetException() instanceof CoreException) {
-				ErrorDialog.openError(getContainer().getShell(),
-						Messages.ControlFlowCreationWizardCreationError, null,
+		} catch (InvocationTargetException e)
+		{
+			if (e.getTargetException() instanceof CoreException)
+			{
+				ErrorDialog.openError(getContainer().getShell(), Messages.ControlFlowCreationWizardCreationError, null,
 						((CoreException) e.getTargetException()).getStatus());
-			} else {
-				ControlFlowDiagramEditorPlugin.getInstance().logError(
-						"Error creating diagram", e.getTargetException()); //$NON-NLS-1$
+			} else
+			{
+				ControlFlowDiagramEditorPlugin.getInstance().logError("Error creating diagram", e.getTargetException()); //$NON-NLS-1$
 			}
 			return false;
 		}

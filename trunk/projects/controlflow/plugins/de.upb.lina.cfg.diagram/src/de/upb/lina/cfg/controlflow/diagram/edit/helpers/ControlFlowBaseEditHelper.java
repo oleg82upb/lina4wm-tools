@@ -5,6 +5,7 @@ import org.eclipse.gmf.tooling.runtime.edit.helpers.GeneratedEditHelperBase;
 /**
  * @generated
  */
-public class ControlFlowBaseEditHelper extends GeneratedEditHelperBase {
+public class ControlFlowBaseEditHelper extends GeneratedEditHelperBase
+{
 
 }

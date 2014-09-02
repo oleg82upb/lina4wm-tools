@@ -9,31 +9,33 @@ import org.eclipse.gmf.runtime.notation.View;
 /**
  * @generated
  */
-public class ControlFlowNavigatorItem extends ControlFlowAbstractNavigatorItem {
+public class ControlFlowNavigatorItem extends ControlFlowAbstractNavigatorItem
+{
 
 	/**
 	 * @generated
 	 */
-	static {
+	static
+	{
 		final Class[] supportedTypes = new Class[] { View.class, EObject.class };
-		Platform.getAdapterManager().registerAdapters(
-				new IAdapterFactory() {
+		Platform.getAdapterManager().registerAdapters(new IAdapterFactory()
+		{
 
-					public Object getAdapter(Object adaptableObject,
-							Class adapterType) {
-						if (adaptableObject instanceof de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowNavigatorItem
-								&& (adapterType == View.class || adapterType == EObject.class)) {
-							return ((de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowNavigatorItem) adaptableObject)
-									.getView();
-						}
-						return null;
-					}
+			public Object getAdapter(Object adaptableObject, Class adapterType)
+			{
+				if (adaptableObject instanceof de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowNavigatorItem
+						&& (adapterType == View.class || adapterType == EObject.class))
+				{
+					return ((de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowNavigatorItem) adaptableObject).getView();
+				}
+				return null;
+			}
 
-					public Class[] getAdapterList() {
-						return supportedTypes;
-					}
-				},
-				de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowNavigatorItem.class);
+			public Class[] getAdapterList()
+			{
+				return supportedTypes;
+			}
+		}, de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowNavigatorItem.class);
 	}
 
 	/**
@@ -49,7 +51,8 @@ public class ControlFlowNavigatorItem extends ControlFlowAbstractNavigatorItem {
 	/**
 	 * @generated
 	 */
-	public ControlFlowNavigatorItem(View view, Object parent, boolean isLeaf) {
+	public ControlFlowNavigatorItem(View view, Object parent, boolean isLeaf)
+	{
 		super(parent);
 		myView = view;
 		myLeaf = isLeaf;
@@ -58,27 +61,29 @@ public class ControlFlowNavigatorItem extends ControlFlowAbstractNavigatorItem {
 	/**
 	 * @generated
 	 */
-	public View getView() {
+	public View getView()
+	{
 		return myView;
 	}
 
 	/**
 	 * @generated
 	 */
-	public boolean isLeaf() {
+	public boolean isLeaf()
+	{
 		return myLeaf;
 	}
 
 	/**
 	 * @generated
 	 */
-	public boolean equals(Object obj) {
-		if (obj instanceof de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowNavigatorItem) {
-			return EcoreUtil
-					.getURI(getView())
-					.equals(EcoreUtil
-							.getURI(((de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowNavigatorItem) obj)
-									.getView()));
+	public boolean equals(Object obj)
+	{
+		if (obj instanceof de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowNavigatorItem)
+		{
+			return EcoreUtil.getURI(getView()).equals(
+					EcoreUtil.getURI(((de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowNavigatorItem) obj)
+							.getView()));
 		}
 		return super.equals(obj);
 	}
@@ -86,7 +91,8 @@ public class ControlFlowNavigatorItem extends ControlFlowAbstractNavigatorItem {
 	/**
 	 * @generated
 	 */
-	public int hashCode() {
+	public int hashCode()
+	{
 		return EcoreUtil.getURI(getView()).hashCode();
 	}
 
