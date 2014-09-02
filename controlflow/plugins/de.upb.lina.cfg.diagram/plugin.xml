@@ -247,12 +247,17 @@
 
    <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders" id="modelassist-provider">
       <?gmfgen generated="true"?>
-      <modelingAssistantProvider class="de.upb.lina.cfg.controlflow.diagram.providers.ControlFlowModelingAssistantProvider">
+      <modelingAssistantProvider class="de.upb.lina.cfg.controlflow.diagram.providers.assistants.ControlFlowModelingAssistantProviderOfControlFlowDiagramEditPart">
          <Priority name="Lowest"/>
          <object class="de.upb.lina.cfg.controlflow.diagram.edit.parts.ControlFlowDiagramEditPart" id="ControlFlowDiagram_1000"/>
-         <object class="de.upb.lina.cfg.controlflow.diagram.edit.parts.ControlFlowLocationEditPart" id="ControlFlowLocation_2001"/>
-         <context elements="ControlFlowDiagram_1000,ControlFlowLocation_2001,"/>
+         <context elements="ControlFlowDiagram_1000"/>
       </modelingAssistantProvider>
+            <modelingAssistantProvider class="de.upb.lina.cfg.controlflow.diagram.providers.assistants.ControlFlowModelingAssistantProviderOfControlFlowLocationEditPart">
+         <Priority name="Lowest"/>
+         <object class="de.upb.lina.cfg.controlflow.diagram.edit.parts.ControlFlowLocationEditPart" id="ControlFlowLocation_2001"/>
+         <context elements="ControlFlowLocation_2001"/>
+      </modelingAssistantProvider>
+      
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders" id="icon-provider">

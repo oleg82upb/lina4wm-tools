@@ -12,8 +12,8 @@ import org.eclipse.ui.IWorkbenchPart;
 /**
  * @generated
  */
-public class DiagramEditorContextMenuProvider extends
-		DiagramContextMenuProvider {
+public class DiagramEditorContextMenuProvider extends DiagramContextMenuProvider
+{
 
 	/**
 	 * @generated
@@ -28,8 +28,8 @@ public class DiagramEditorContextMenuProvider extends
 	/**
 	 * @generated
 	 */
-	public DiagramEditorContextMenuProvider(IWorkbenchPart part,
-			EditPartViewer viewer) {
+	public DiagramEditorContextMenuProvider(IWorkbenchPart part, EditPartViewer viewer)
+	{
 		super(part, viewer);
 		this.part = part;
 		deleteAction = new DeleteElementAction(part);
@@ -39,8 +39,10 @@ public class DiagramEditorContextMenuProvider extends
 	/**
 	 * @generated
 	 */
-	public void dispose() {
-		if (deleteAction != null) {
+	public void dispose()
+	{
+		if (deleteAction != null)
+		{
 			deleteAction.dispose();
 			deleteAction = null;
 		}
@@ -50,26 +52,26 @@ public class DiagramEditorContextMenuProvider extends
 	/**
 	 * @generated
 	 */
-	public void buildContextMenu(final IMenuManager menu) {
+	public void buildContextMenu(final IMenuManager menu)
+	{
 		getViewer().flush();
-		try {
-			TransactionUtil.getEditingDomain(
-					(EObject) getViewer().getContents().getModel())
-					.runExclusive(new Runnable() {
+		try
+		{
+			TransactionUtil.getEditingDomain((EObject) getViewer().getContents().getModel()).runExclusive(
+					new Runnable()
+					{
 
-						public void run() {
-							ContributionItemService
-									.getInstance()
-									.contributeToPopupMenu(
-											DiagramEditorContextMenuProvider.this,
-											part);
+						public void run()
+						{
+							ContributionItemService.getInstance().contributeToPopupMenu(
+									DiagramEditorContextMenuProvider.this, part);
 							menu.remove(ActionIds.ACTION_DELETE_FROM_MODEL);
 							menu.appendToGroup("editGroup", deleteAction);
 						}
 					});
-		} catch (Exception e) {
-			ControlFlowDiagramEditorPlugin.getInstance().logError(
-					"Error building context menu", e);
+		} catch (Exception e)
+		{
+			ControlFlowDiagramEditorPlugin.getInstance().logError("Error building context menu", e);
 		}
 	}
 }

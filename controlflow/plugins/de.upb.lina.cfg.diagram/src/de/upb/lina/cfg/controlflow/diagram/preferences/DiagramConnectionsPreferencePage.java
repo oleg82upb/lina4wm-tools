@@ -7,13 +7,14 @@ import de.upb.lina.cfg.controlflow.diagram.part.ControlFlowDiagramEditorPlugin;
 /**
  * @generated
  */
-public class DiagramConnectionsPreferencePage extends ConnectionsPreferencePage {
+public class DiagramConnectionsPreferencePage extends ConnectionsPreferencePage
+{
 
 	/**
 	 * @generated
 	 */
-	public DiagramConnectionsPreferencePage() {
-		setPreferenceStore(ControlFlowDiagramEditorPlugin.getInstance()
-				.getPreferenceStore());
+	public DiagramConnectionsPreferencePage()
+	{
+		setPreferenceStore(ControlFlowDiagramEditorPlugin.getInstance().getPreferenceStore());
 	}
 }

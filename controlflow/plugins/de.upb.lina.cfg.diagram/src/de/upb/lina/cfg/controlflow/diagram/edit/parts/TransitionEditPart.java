@@ -16,8 +16,8 @@ import de.upb.lina.cfg.controlflow.diagram.edit.policies.TransitionItemSemanticE
 /**
  * @generated
  */
-public class TransitionEditPart extends ConnectionNodeEditPart implements
-		ITreeBranchEditPart {
+public class TransitionEditPart extends ConnectionNodeEditPart implements ITreeBranchEditPart
+{
 
 	/**
 	 * @generated
@@ -27,26 +27,28 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 	/**
 	 * @generated
 	 */
-	public TransitionEditPart(View view) {
+	public TransitionEditPart(View view)
+	{
 		super(view);
 	}
 
 	/**
 	 * @generated
 	 */
-	protected void createDefaultEditPolicies() {
+	protected void createDefaultEditPolicies()
+	{
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-				new TransitionItemSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new TransitionItemSemanticEditPolicy());
 	}
 
 	/**
 	 * @generated
 	 */
-	protected boolean addFixedChild(EditPart childEditPart) {
-		if (childEditPart instanceof WrappingLabelEditPart) {
-			((WrappingLabelEditPart) childEditPart).setLabel(getPrimaryShape()
-					.getTransitionLabel());
+	protected boolean addFixedChild(EditPart childEditPart)
+	{
+		if (childEditPart instanceof WrappingLabelEditPart)
+		{
+			((WrappingLabelEditPart) childEditPart).setLabel(getPrimaryShape().getTransitionLabel());
 			return true;
 		}
 		return false;
@@ -55,8 +57,10 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 	/**
 	 * @generated
 	 */
-	protected void addChildVisual(EditPart childEditPart, int index) {
-		if (addFixedChild(childEditPart)) {
+	protected void addChildVisual(EditPart childEditPart, int index)
+	{
+		if (addFixedChild(childEditPart))
+		{
 			return;
 		}
 		super.addChildVisual(childEditPart, index);
@@ -65,8 +69,10 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 	/**
 	 * @generated
 	 */
-	protected boolean removeFixedChild(EditPart childEditPart) {
-		if (childEditPart instanceof WrappingLabelEditPart) {
+	protected boolean removeFixedChild(EditPart childEditPart)
+	{
+		if (childEditPart instanceof WrappingLabelEditPart)
+		{
 			return true;
 		}
 		return false;
@@ -75,8 +81,10 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 	/**
 	 * @generated
 	 */
-	protected void removeChildVisual(EditPart childEditPart) {
-		if (removeFixedChild(childEditPart)) {
+	protected void removeChildVisual(EditPart childEditPart)
+	{
+		if (removeFixedChild(childEditPart))
+		{
 			return;
 		}
 		super.removeChildVisual(childEditPart);
@@ -91,21 +99,24 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 	 * @generated
 	 */
 
-	protected Connection createConnectionFigure() {
+	protected Connection createConnectionFigure()
+	{
 		return new TransitionFigure();
 	}
 
 	/**
 	 * @generated
 	 */
-	public TransitionFigure getPrimaryShape() {
+	public TransitionFigure getPrimaryShape()
+	{
 		return (TransitionFigure) getFigure();
 	}
 
 	/**
 	 * @generated
 	 */
-	public class TransitionFigure extends PolylineConnectionEx {
+	public class TransitionFigure extends PolylineConnectionEx
+	{
 
 		/**
 		 * @generated
@@ -115,7 +126,8 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 		/**
 		 * @generated
 		 */
-		public TransitionFigure() {
+		public TransitionFigure()
+		{
 
 			createContents();
 			setTargetDecoration(createTargetDecoration());
@@ -124,7 +136,8 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 		/**
 		 * @generated
 		 */
-		private void createContents() {
+		private void createContents()
+		{
 
 			fTransitionLabel = new WrappingLabel();
 
@@ -137,7 +150,8 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 		/**
 		 * @generated
 		 */
-		private RotatableDecoration createTargetDecoration() {
+		private RotatableDecoration createTargetDecoration()
+		{
 			PolylineDecoration df = new PolylineDecoration();
 			return df;
 		}
@@ -145,7 +159,8 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 		/**
 		 * @generated
 		 */
-		public WrappingLabel getTransitionLabel() {
+		public WrappingLabel getTransitionLabel()
+		{
 			return fTransitionLabel;
 		}
 

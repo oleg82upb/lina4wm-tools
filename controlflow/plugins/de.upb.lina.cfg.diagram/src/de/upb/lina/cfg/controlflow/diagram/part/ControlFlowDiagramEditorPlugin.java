@@ -15,6 +15,7 @@ import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
+import org.eclipse.gmf.tooling.runtime.LogHelper;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -27,7 +28,8 @@ import de.upb.lina.cfg.controlflow.provider.ControlflowItemProviderAdapterFactor
 /**
  * @generated
  */
-public class ControlFlowDiagramEditorPlugin extends AbstractUIPlugin {
+public class ControlFlowDiagramEditorPlugin extends AbstractUIPlugin
+{
 
 	/**
 	 * @generated
@@ -37,8 +39,12 @@ public class ControlFlowDiagramEditorPlugin extends AbstractUIPlugin {
 	/**
 	 * @generated
 	 */
-	public static final PreferencesHint DIAGRAM_PREFERENCES_HINT = new PreferencesHint(
-			ID);
+	private LogHelper myLogHelper;
+
+	/**
+	 * @generated
+	 */
+	public static final PreferencesHint DIAGRAM_PREFERENCES_HINT = new PreferencesHint(ID);
 
 	/**
 	 * @generated
@@ -68,24 +74,27 @@ public class ControlFlowDiagramEditorPlugin extends AbstractUIPlugin {
 	/**
 	 * @generated
 	 */
-	public ControlFlowDiagramEditorPlugin() {
+	public ControlFlowDiagramEditorPlugin()
+	{
 	}
 
 	/**
 	 * @generated
 	 */
-	public void start(BundleContext context) throws Exception {
+	public void start(BundleContext context) throws Exception
+	{
 		super.start(context);
 		instance = this;
-		PreferencesHint.registerPreferenceStore(DIAGRAM_PREFERENCES_HINT,
-				getPreferenceStore());
+		myLogHelper = new LogHelper(this);
+		PreferencesHint.registerPreferenceStore(DIAGRAM_PREFERENCES_HINT, getPreferenceStore());
 		adapterFactory = createAdapterFactory();
 	}
 
 	/**
 	 * @generated
 	 */
-	public void stop(BundleContext context) throws Exception {
+	public void stop(BundleContext context) throws Exception
+	{
 		adapterFactory.dispose();
 		adapterFactory = null;
 		linkConstraints = null;
@@ -97,14 +106,16 @@ public class ControlFlowDiagramEditorPlugin extends AbstractUIPlugin {
 	/**
 	 * @generated
 	 */
-	public static ControlFlowDiagramEditorPlugin getInstance() {
+	public static ControlFlowDiagramEditorPlugin getInstance()
+	{
 		return instance;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected ComposedAdapterFactory createAdapterFactory() {
+	protected ComposedAdapterFactory createAdapterFactory()
+	{
 		ArrayList<AdapterFactory> factories = new ArrayList<AdapterFactory>();
 		fillItemProviderFactories(factories);
 		return new ComposedAdapterFactory(factories);
@@ -113,10 +124,10 @@ public class ControlFlowDiagramEditorPlugin extends AbstractUIPlugin {
 	/**
 	 * @generated
 	 */
-	protected void fillItemProviderFactories(List<AdapterFactory> factories) {
+	protected void fillItemProviderFactories(List<AdapterFactory> factories)
+	{
 		factories.add(new ControlflowItemProviderAdapterFactory());
-		factories
-				.add(new de.upb.llvm_parser.llvm.provider.LlvmItemProviderAdapterFactory());
+		factories.add(new de.upb.llvm_parser.llvm.provider.LlvmItemProviderAdapterFactory());
 		factories.add(new ResourceItemProviderAdapterFactory());
 		factories.add(new ReflectiveItemProviderAdapterFactory());
 	}
@@ -124,19 +135,20 @@ public class ControlFlowDiagramEditorPlugin extends AbstractUIPlugin {
 	/**
 	 * @generated
 	 */
-	public AdapterFactory getItemProvidersAdapterFactory() {
+	public AdapterFactory getItemProvidersAdapterFactory()
+	{
 		return adapterFactory;
 	}
 
 	/**
 	 * @generated
 	 */
-	public ImageDescriptor getItemImageDescriptor(Object item) {
-		IItemLabelProvider labelProvider = (IItemLabelProvider) adapterFactory
-				.adapt(item, IItemLabelProvider.class);
-		if (labelProvider != null) {
-			return ExtendedImageRegistry.getInstance().getImageDescriptor(
-					labelProvider.getImage(item));
+	public ImageDescriptor getItemImageDescriptor(Object item)
+	{
+		IItemLabelProvider labelProvider = (IItemLabelProvider) adapterFactory.adapt(item, IItemLabelProvider.class);
+		if (labelProvider != null)
+		{
+			return ExtendedImageRegistry.getInstance().getImageDescriptor(labelProvider.getImage(item));
 		}
 		return null;
 	}
@@ -149,7 +161,8 @@ public class ControlFlowDiagramEditorPlugin extends AbstractUIPlugin {
 	 * @param path the path
 	 * @return the image descriptor
 	 */
-	public static ImageDescriptor getBundledImageDescriptor(String path) {
+	public static ImageDescriptor getBundledImageDescriptor(String path)
+	{
 		return AbstractUIPlugin.imageDescriptorFromPlugin(ID, path);
 	}
 
@@ -162,12 +175,15 @@ public class ControlFlowDiagramEditorPlugin extends AbstractUIPlugin {
 	 * @param path the path to image, either absolute (with plug-in id as first segment), or relative for bundled images
 	 * @return the image descriptor
 	 */
-	public static ImageDescriptor findImageDescriptor(String path) {
+	public static ImageDescriptor findImageDescriptor(String path)
+	{
 		final IPath p = new Path(path);
-		if (p.isAbsolute() && p.segmentCount() > 1) {
-			return AbstractUIPlugin.imageDescriptorFromPlugin(p.segment(0), p
-					.removeFirstSegments(1).makeAbsolute().toString());
-		} else {
+		if (p.isAbsolute() && p.segmentCount() > 1)
+		{
+			return AbstractUIPlugin.imageDescriptorFromPlugin(p.segment(0), p.removeFirstSegments(1).makeAbsolute()
+					.toString());
+		} else
+		{
 			return getBundledImageDescriptor(p.makeAbsolute().toString());
 		}
 	}
@@ -180,9 +196,11 @@ public class ControlFlowDiagramEditorPlugin extends AbstractUIPlugin {
 	 * @param path the path
 	 * @return image instance
 	 */
-	public Image getBundledImage(String path) {
+	public Image getBundledImage(String path)
+	{
 		Image image = getImageRegistry().get(path);
-		if (image == null) {
+		if (image == null)
+		{
 			getImageRegistry().put(path, getBundledImageDescriptor(path));
 			image = getImageRegistry().get(path);
 		}
@@ -194,15 +212,18 @@ public class ControlFlowDiagramEditorPlugin extends AbstractUIPlugin {
 	 *
 	 * @generated
 	 */
-	public static String getString(String key) {
+	public static String getString(String key)
+	{
 		return Platform.getResourceString(getInstance().getBundle(), "%" + key); //$NON-NLS-1$
 	}
 
 	/**
 	 * @generated
 	 */
-	public ControlFlowDocumentProvider getDocumentProvider() {
-		if (documentProvider == null) {
+	public ControlFlowDocumentProvider getDocumentProvider()
+	{
+		if (documentProvider == null)
+		{
 			documentProvider = new ControlFlowDocumentProvider();
 		}
 		return documentProvider;
@@ -211,84 +232,72 @@ public class ControlFlowDiagramEditorPlugin extends AbstractUIPlugin {
 	/**
 	 * @generated
 	 */
-	public ControlFlowBaseItemSemanticEditPolicy.LinkConstraints getLinkConstraints() {
+	public ControlFlowBaseItemSemanticEditPolicy.LinkConstraints getLinkConstraints()
+	{
 		return linkConstraints;
 	}
 
 	/**
 	 * @generated
 	 */
-	public void setLinkConstraints(
-			ControlFlowBaseItemSemanticEditPolicy.LinkConstraints lc) {
+	public void setLinkConstraints(ControlFlowBaseItemSemanticEditPolicy.LinkConstraints lc)
+	{
 		this.linkConstraints = lc;
 	}
 
 	/**
 	 * @generated
 	 */
-	public ElementInitializers getElementInitializers() {
+	public ElementInitializers getElementInitializers()
+	{
 		return initializers;
 	}
 
 	/**
 	 * @generated
 	 */
-	public void setElementInitializers(ElementInitializers i) {
+	public void setElementInitializers(ElementInitializers i)
+	{
 		this.initializers = i;
 	}
 
 	/**
 	 * @generated
 	 */
-	public void logError(String error) {
-		logError(error, null);
+	public void logError(String error)
+	{
+		getLogHelper().logError(error, null);
 	}
 
 	/**
 	 * @generated
 	 */
-	public void logError(String error, Throwable throwable) {
-		if (error == null && throwable != null) {
-			error = throwable.getMessage();
-		}
-		getLog().log(
-				new Status(IStatus.ERROR, ControlFlowDiagramEditorPlugin.ID,
-						IStatus.OK, error, throwable));
-		debug(error, throwable);
+	public void logError(String error, Throwable throwable)
+	{
+		getLogHelper().logError(error, throwable);
 	}
 
 	/**
 	 * @generated
 	 */
-	public void logInfo(String message) {
-		logInfo(message, null);
+	public void logInfo(String message)
+	{
+		getLogHelper().logInfo(message, null);
 	}
 
 	/**
 	 * @generated
 	 */
-	public void logInfo(String message, Throwable throwable) {
-		if (message == null && throwable != null) {
-			message = throwable.getMessage();
-		}
-		getLog().log(
-				new Status(IStatus.INFO, ControlFlowDiagramEditorPlugin.ID,
-						IStatus.OK, message, throwable));
-		debug(message, throwable);
+	public void logInfo(String message, Throwable throwable)
+	{
+		getLogHelper().logInfo(message, throwable);
 	}
 
 	/**
 	 * @generated
 	 */
-	private void debug(String message, Throwable throwable) {
-		if (!isDebugging()) {
-			return;
-		}
-		if (message != null) {
-			System.err.println(message);
-		}
-		if (throwable != null) {
-			throwable.printStackTrace();
-		}
+	public LogHelper getLogHelper()
+	{
+		return myLogHelper;
 	}
 }

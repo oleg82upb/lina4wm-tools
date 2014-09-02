@@ -4,13 +4,14 @@ package de.upb.lina.cfg.controlflow.provider;
 
 
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
-import de.upb.lina.cfg.controlflow.GuardedTransition;
 
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -19,24 +20,31 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
 /**
- * This is the item provider adapter for a {@link de.upb.lina.cfg.controlflow.GuardedTransition} object.
+ * This is the item provider adapter for a {@link de.upb.lina.cfg.controlflow.StoreBuffer} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class GuardedTransitionItemProvider
-	extends TransitionItemProvider {
+public class StoreBufferItemProvider 
+	extends ItemProviderAdapter
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
+		IItemPropertySource
+{
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GuardedTransitionItemProvider(AdapterFactory adapterFactory) {
+	public StoreBufferItemProvider(AdapterFactory adapterFactory)
+	{
 		super(adapterFactory);
 	}
 
@@ -47,47 +55,50 @@ public class GuardedTransitionItemProvider
 	 * @generated
 	 */
 	@Override
-	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
+	{
 		if (itemPropertyDescriptors == null)
 		{
 			super.getPropertyDescriptors(object);
 
-			addConditionPropertyDescriptor(object);
+			addBufferPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Condition feature.
+	 * This adds a property descriptor for the Buffer feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addConditionPropertyDescriptor(Object object) {
+	protected void addBufferPropertyDescriptor(Object object)
+	{
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_GuardedTransition_condition_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_GuardedTransition_condition_feature", "_UI_GuardedTransition_type"),
-				 ControlflowPackage.Literals.GUARDED_TRANSITION__CONDITION,
+				 getString("_UI_StoreBuffer_buffer_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StoreBuffer_buffer_feature", "_UI_StoreBuffer_type"),
+				 ControlflowPackage.Literals.STORE_BUFFER__BUFFER,
 				 true,
 				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 true,
+				 null,
 				 null,
 				 null));
 	}
 
 	/**
-	 * This returns GuardedTransition.gif.
+	 * This returns StoreBuffer.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/GuardedTransition"));
+	public Object getImage(Object object)
+	{
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/StoreBuffer"));
 	}
 
 	/**
@@ -97,12 +108,11 @@ public class GuardedTransitionItemProvider
 	 * @generated
 	 */
 	@Override
-	public String getText(Object object) {
-		String label = ((GuardedTransition)object).getCondition();
-		return label == null || label.length() == 0 ?
-			getString("_UI_GuardedTransition_type") :
-			getString("_UI_GuardedTransition_type") + " " + label;
+	public String getText(Object object)
+	{
+		return getString("_UI_StoreBuffer_type");
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -112,15 +122,9 @@ public class GuardedTransitionItemProvider
 	 * @generated
 	 */
 	@Override
-	public void notifyChanged(Notification notification) {
+	public void notifyChanged(Notification notification)
+	{
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(GuardedTransition.class))
-		{
-			case ControlflowPackage.GUARDED_TRANSITION__CONDITION:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 
@@ -132,8 +136,21 @@ public class GuardedTransitionItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object)
+	{
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator()
+	{
+		return ControlFlowEditPlugin.INSTANCE;
 	}
 
 }

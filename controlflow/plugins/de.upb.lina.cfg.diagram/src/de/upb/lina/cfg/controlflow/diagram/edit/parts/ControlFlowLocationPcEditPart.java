@@ -53,8 +53,8 @@ import de.upb.lina.cfg.controlflow.diagram.providers.ControlFlowParserProvider;
 /**
  * @generated
  */
-public class ControlFlowLocationPcEditPart extends CompartmentEditPart
-		implements ITextAwareEditPart {
+public class ControlFlowLocationPcEditPart extends CompartmentEditPart implements ITextAwareEditPart
+{
 
 	/**
 	 * @generated
@@ -89,32 +89,35 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	public ControlFlowLocationPcEditPart(View view) {
+	public ControlFlowLocationPcEditPart(View view)
+	{
 		super(view);
 	}
 
 	/**
 	 * @generated
 	 */
-	protected void createDefaultEditPolicies() {
+	protected void createDefaultEditPolicies()
+	{
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE,
-				new ControlFlowTextSelectionEditPolicy());
-		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
-				new LabelDirectEditPolicy());
-		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-				new DefaultNodeLabelDragPolicy());
+		installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE, new ControlFlowTextSelectionEditPolicy());
+		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new LabelDirectEditPolicy());
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new DefaultNodeLabelDragPolicy());
 	}
 
 	/**
 	 * @generated
 	 */
-	protected String getLabelTextHelper(IFigure figure) {
-		if (figure instanceof WrappingLabel) {
+	protected String getLabelTextHelper(IFigure figure)
+	{
+		if (figure instanceof WrappingLabel)
+		{
 			return ((WrappingLabel) figure).getText();
-		} else if (figure instanceof Label) {
+		} else if (figure instanceof Label)
+		{
 			return ((Label) figure).getText();
-		} else {
+		} else
+		{
 			return getLabelDelegate().getText();
 		}
 	}
@@ -122,12 +125,16 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	protected void setLabelTextHelper(IFigure figure, String text) {
-		if (figure instanceof WrappingLabel) {
+	protected void setLabelTextHelper(IFigure figure, String text)
+	{
+		if (figure instanceof WrappingLabel)
+		{
 			((WrappingLabel) figure).setText(text);
-		} else if (figure instanceof Label) {
+		} else if (figure instanceof Label)
+		{
 			((Label) figure).setText(text);
-		} else {
+		} else
+		{
 			getLabelDelegate().setText(text);
 		}
 	}
@@ -135,12 +142,16 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	protected Image getLabelIconHelper(IFigure figure) {
-		if (figure instanceof WrappingLabel) {
+	protected Image getLabelIconHelper(IFigure figure)
+	{
+		if (figure instanceof WrappingLabel)
+		{
 			return ((WrappingLabel) figure).getIcon();
-		} else if (figure instanceof Label) {
+		} else if (figure instanceof Label)
+		{
 			return ((Label) figure).getIcon();
-		} else {
+		} else
+		{
 			return getLabelDelegate().getIcon(0);
 		}
 	}
@@ -148,14 +159,18 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	protected void setLabelIconHelper(IFigure figure, Image icon) {
-		if (figure instanceof WrappingLabel) {
+	protected void setLabelIconHelper(IFigure figure, Image icon)
+	{
+		if (figure instanceof WrappingLabel)
+		{
 			((WrappingLabel) figure).setIcon(icon);
 			return;
-		} else if (figure instanceof Label) {
+		} else if (figure instanceof Label)
+		{
 			((Label) figure).setIcon(icon);
 			return;
-		} else {
+		} else
+		{
 			getLabelDelegate().setIcon(icon, 0);
 		}
 	}
@@ -163,7 +178,8 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	public void setLabel(WrappingLabel figure) {
+	public void setLabel(WrappingLabel figure)
+	{
 		unregisterVisuals();
 		setFigure(figure);
 		defaultText = getLabelTextHelper(figure);
@@ -175,43 +191,48 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	 * @generated
 	 */
 	@SuppressWarnings("rawtypes")
-	protected List getModelChildren() {
+	protected List getModelChildren()
+	{
 		return Collections.EMPTY_LIST;
 	}
 
 	/**
 	 * @generated
 	 */
-	public IGraphicalEditPart getChildBySemanticHint(String semanticHint) {
+	public IGraphicalEditPart getChildBySemanticHint(String semanticHint)
+	{
 		return null;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected EObject getParserElement() {
+	protected EObject getParserElement()
+	{
 		return resolveSemanticElement();
 	}
 
 	/**
 	 * @generated
 	 */
-	protected Image getLabelIcon() {
+	protected Image getLabelIcon()
+	{
 		return null;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected String getLabelText() {
+	protected String getLabelText()
+	{
 		String text = null;
 		EObject parserElement = getParserElement();
-		if (parserElement != null && getParser() != null) {
-			text = getParser().getPrintString(
-					new EObjectAdapter(parserElement),
-					getParserOptions().intValue());
+		if (parserElement != null && getParser() != null)
+		{
+			text = getParser().getPrintString(new EObjectAdapter(parserElement), getParserOptions().intValue());
 		}
-		if (text == null || text.length() == 0) {
+		if (text == null || text.length() == 0)
+		{
 			text = defaultText;
 		}
 		return text;
@@ -220,7 +241,8 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	public void setLabelText(String text) {
+	public void setLabelText(String text)
+	{
 		setLabelTextHelper(getFigure(), text);
 		refreshSelectionFeedback();
 	}
@@ -228,48 +250,51 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	public String getEditText() {
-		if (getParserElement() == null || getParser() == null) {
+	public String getEditText()
+	{
+		if (getParserElement() == null || getParser() == null)
+		{
 			return ""; //$NON-NLS-1$
 		}
-		return getParser().getEditString(
-				new EObjectAdapter(getParserElement()),
-				getParserOptions().intValue());
+		return getParser().getEditString(new EObjectAdapter(getParserElement()), getParserOptions().intValue());
 	}
 
 	/**
 	 * @generated
 	 */
-	protected boolean isEditable() {
+	protected boolean isEditable()
+	{
 		return false;
 	}
 
 	/**
 	 * @generated
 	 */
-	public ICellEditorValidator getEditTextValidator() {
-		return new ICellEditorValidator() {
+	public ICellEditorValidator getEditTextValidator()
+	{
+		return new ICellEditorValidator()
+		{
 
-			public String isValid(final Object value) {
-				if (value instanceof String) {
+			public String isValid(final Object value)
+			{
+				if (value instanceof String)
+				{
 					final EObject element = getParserElement();
 					final IParser parser = getParser();
-					try {
-						IParserEditStatus valid = (IParserEditStatus) getEditingDomain()
-								.runExclusive(
-										new RunnableWithResult.Impl<IParserEditStatus>() {
+					try
+					{
+						IParserEditStatus valid = (IParserEditStatus) getEditingDomain().runExclusive(
+								new RunnableWithResult.Impl<IParserEditStatus>()
+								{
 
-											public void run() {
-												setResult(parser
-														.isValidEditString(
-																new EObjectAdapter(
-																		element),
-																(String) value));
-											}
-										});
-						return valid.getCode() == ParserEditStatus.EDITABLE ? null
-								: valid.getMessage();
-					} catch (InterruptedException ie) {
+									public void run()
+									{
+										setResult(parser.isValidEditString(new EObjectAdapter(element), (String) value));
+									}
+								});
+						return valid.getCode() == ParserEditStatus.EDITABLE ? null : valid.getMessage();
+					} catch (InterruptedException ie)
+					{
 						ie.printStackTrace();
 					}
 				}
@@ -283,26 +308,30 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	public IContentAssistProcessor getCompletionProcessor() {
-		if (getParserElement() == null || getParser() == null) {
+	public IContentAssistProcessor getCompletionProcessor()
+	{
+		if (getParserElement() == null || getParser() == null)
+		{
 			return null;
 		}
-		return getParser().getCompletionProcessor(
-				new EObjectAdapter(getParserElement()));
+		return getParser().getCompletionProcessor(new EObjectAdapter(getParserElement()));
 	}
 
 	/**
 	 * @generated
 	 */
-	public ParserOptions getParserOptions() {
+	public ParserOptions getParserOptions()
+	{
 		return ParserOptions.NONE;
 	}
 
 	/**
 	 * @generated
 	 */
-	public IParser getParser() {
-		if (parser == null) {
+	public IParser getParser()
+	{
+		if (parser == null)
+		{
 			parser = ControlFlowParserProvider
 					.getParser(
 							ControlFlowElementTypes.ControlFlowLocation_2001,
@@ -316,10 +345,11 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	protected DirectEditManager getManager() {
-		if (manager == null) {
-			setManager(new TextDirectEditManager2(this, null,
-					ControlFlowEditPartFactory.getTextCellEditorLocator(this)));
+	protected DirectEditManager getManager()
+	{
+		if (manager == null)
+		{
+			setManager(new TextDirectEditManager(this, null, ControlFlowEditPartFactory.getTextCellEditorLocator(this)));
 		}
 		return manager;
 	}
@@ -327,37 +357,40 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	protected void setManager(DirectEditManager manager) {
+	protected void setManager(DirectEditManager manager)
+	{
 		this.manager = manager;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected void performDirectEdit() {
+	protected void performDirectEdit()
+	{
 		getManager().show();
 	}
 
 	/**
 	 * @generated
 	 */
-	protected void performDirectEdit(Point eventLocation) {
-		if (getManager().getClass() == TextDirectEditManager2.class) {
-			((TextDirectEditManager2) getManager()).show(eventLocation
-					.getSWTPoint());
+	protected void performDirectEdit(Point eventLocation)
+	{
+		if (getManager().getClass() == TextDirectEditManager.class)
+		{
+			((TextDirectEditManager) getManager()).show(eventLocation.getSWTPoint());
 		}
 	}
 
 	/**
 	 * @generated
 	 */
-	private void performDirectEdit(char initialCharacter) {
-		if (getManager() instanceof TextDirectEditManager) {
+	private void performDirectEdit(char initialCharacter)
+	{
+		if (getManager() instanceof TextDirectEditManager)
+		{
 			((TextDirectEditManager) getManager()).show(initialCharacter);
-		} else // 
-		if (getManager() instanceof TextDirectEditManager2) {
-			((TextDirectEditManager2) getManager()).show(initialCharacter);
-		} else //
+		} else
+		//
 		{
 			performDirectEdit();
 		}
@@ -366,31 +399,36 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	protected void performDirectEditRequest(Request request) {
+	protected void performDirectEditRequest(Request request)
+	{
 		final Request theRequest = request;
-		try {
-			getEditingDomain().runExclusive(new Runnable() {
+		try
+		{
+			getEditingDomain().runExclusive(new Runnable()
+			{
 
-				public void run() {
-					if (isActive() && isEditable()) {
-						if (theRequest
-								.getExtendedData()
-								.get(RequestConstants.REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character) {
-							Character initialChar = (Character) theRequest
-									.getExtendedData()
-									.get(RequestConstants.REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
+				public void run()
+				{
+					if (isActive() && isEditable())
+					{
+						if (theRequest.getExtendedData().get(RequestConstants.REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character)
+						{
+							Character initialChar = (Character) theRequest.getExtendedData().get(
+									RequestConstants.REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
 							performDirectEdit(initialChar.charValue());
-						} else if ((theRequest instanceof DirectEditRequest)
-								&& (getEditText().equals(getLabelText()))) {
+						} else if ((theRequest instanceof DirectEditRequest) && (getEditText().equals(getLabelText())))
+						{
 							DirectEditRequest editRequest = (DirectEditRequest) theRequest;
 							performDirectEdit(editRequest.getLocation());
-						} else {
+						} else
+						{
 							performDirectEdit();
 						}
 					}
 				}
 			});
-		} catch (InterruptedException e) {
+		} catch (InterruptedException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -398,7 +436,8 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	protected void refreshVisuals() {
+	protected void refreshVisuals()
+	{
 		super.refreshVisuals();
 		refreshLabel();
 		refreshFont();
@@ -410,7 +449,8 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	protected void refreshLabel() {
+	protected void refreshLabel()
+	{
 		setLabelTextHelper(getFigure(), getLabelText());
 		setLabelIconHelper(getFigure(), getLabelIcon());
 		refreshSelectionFeedback();
@@ -419,10 +459,11 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	protected void refreshUnderline() {
-		FontStyle style = (FontStyle) getFontStyleOwnerView().getStyle(
-				NotationPackage.eINSTANCE.getFontStyle());
-		if (style != null && getFigure() instanceof WrappingLabel) {
+	protected void refreshUnderline()
+	{
+		FontStyle style = (FontStyle) getFontStyleOwnerView().getStyle(NotationPackage.eINSTANCE.getFontStyle());
+		if (style != null && getFigure() instanceof WrappingLabel)
+		{
 			((WrappingLabel) getFigure()).setTextUnderline(style.isUnderline());
 		}
 	}
@@ -430,26 +471,25 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	protected void refreshStrikeThrough() {
-		FontStyle style = (FontStyle) getFontStyleOwnerView().getStyle(
-				NotationPackage.eINSTANCE.getFontStyle());
-		if (style != null && getFigure() instanceof WrappingLabel) {
-			((WrappingLabel) getFigure()).setTextStrikeThrough(style
-					.isStrikeThrough());
+	protected void refreshStrikeThrough()
+	{
+		FontStyle style = (FontStyle) getFontStyleOwnerView().getStyle(NotationPackage.eINSTANCE.getFontStyle());
+		if (style != null && getFigure() instanceof WrappingLabel)
+		{
+			((WrappingLabel) getFigure()).setTextStrikeThrough(style.isStrikeThrough());
 		}
 	}
 
 	/**
 	 * @generated
 	 */
-	protected void refreshFont() {
-		FontStyle style = (FontStyle) getFontStyleOwnerView().getStyle(
-				NotationPackage.eINSTANCE.getFontStyle());
-		if (style != null) {
-			FontData fontData = new FontData(style.getFontName(),
-					style.getFontHeight(), (style.isBold() ? SWT.BOLD
-							: SWT.NORMAL)
-							| (style.isItalic() ? SWT.ITALIC : SWT.NORMAL));
+	protected void refreshFont()
+	{
+		FontStyle style = (FontStyle) getFontStyleOwnerView().getStyle(NotationPackage.eINSTANCE.getFontStyle());
+		if (style != null)
+		{
+			FontData fontData = new FontData(style.getFontName(), style.getFontHeight(), (style.isBold() ? SWT.BOLD
+					: SWT.NORMAL) | (style.isItalic() ? SWT.ITALIC : SWT.NORMAL));
 			setFont(fontData);
 		}
 	}
@@ -457,7 +497,8 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	private void refreshSelectionFeedback() {
+	private void refreshSelectionFeedback()
+	{
 		requestEditPolicyFeedbackRefresh(EditPolicy.PRIMARY_DRAG_ROLE);
 		requestEditPolicyFeedbackRefresh(EditPolicy.SELECTION_FEEDBACK_ROLE);
 	}
@@ -465,9 +506,11 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	private void requestEditPolicyFeedbackRefresh(String editPolicyKey) {
+	private void requestEditPolicyFeedbackRefresh(String editPolicyKey)
+	{
 		Object editPolicy = getEditPolicy(editPolicyKey);
-		if (editPolicy instanceof IRefreshableFeedbackEditPolicy) {
+		if (editPolicy instanceof IRefreshableFeedbackEditPolicy)
+		{
 			((IRefreshableFeedbackEditPolicy) editPolicy).refreshFeedback();
 		}
 	}
@@ -475,23 +518,26 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	protected void setFontColor(Color color) {
+	protected void setFontColor(Color color)
+	{
 		getFigure().setForegroundColor(color);
 	}
 
 	/**
 	 * @generated
 	 */
-	protected void addSemanticListeners() {
-		if (getParser() instanceof ISemanticParser) {
+	protected void addSemanticListeners()
+	{
+		if (getParser() instanceof ISemanticParser)
+		{
 			EObject element = resolveSemanticElement();
-			parserElements = ((ISemanticParser) getParser())
-					.getSemanticElementsBeingParsed(element);
-			for (int i = 0; i < parserElements.size(); i++) {
-				addListenerFilter(
-						"SemanticModel" + i, this, (EObject) parserElements.get(i)); //$NON-NLS-1$
+			parserElements = ((ISemanticParser) getParser()).getSemanticElementsBeingParsed(element);
+			for (int i = 0; i < parserElements.size(); i++)
+			{
+				addListenerFilter("SemanticModel" + i, this, (EObject) parserElements.get(i)); //$NON-NLS-1$
 			}
-		} else {
+		} else
+		{
 			super.addSemanticListeners();
 		}
 	}
@@ -499,12 +545,16 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	protected void removeSemanticListeners() {
-		if (parserElements != null) {
-			for (int i = 0; i < parserElements.size(); i++) {
+	protected void removeSemanticListeners()
+	{
+		if (parserElements != null)
+		{
+			for (int i = 0; i < parserElements.size(); i++)
+			{
 				removeListenerFilter("SemanticModel" + i); //$NON-NLS-1$
 			}
-		} else {
+		} else
+		{
 			super.removeSemanticListeners();
 		}
 	}
@@ -512,11 +562,15 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	protected AccessibleEditPart getAccessibleEditPart() {
-		if (accessibleEP == null) {
-			accessibleEP = new AccessibleGraphicalEditPart() {
+	protected AccessibleEditPart getAccessibleEditPart()
+	{
+		if (accessibleEP == null)
+		{
+			accessibleEP = new AccessibleGraphicalEditPart()
+			{
 
-				public void getName(AccessibleEvent e) {
+				public void getName(AccessibleEvent e)
+				{
 					e.result = getLabelTextHelper(getFigure());
 				}
 			};
@@ -527,19 +581,24 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	private View getFontStyleOwnerView() {
+	private View getFontStyleOwnerView()
+	{
 		return getPrimaryView();
 	}
 
 	/**
 	 * @generated
 	 */
-	private ILabelDelegate getLabelDelegate() {
-		if (labelDelegate == null) {
+	private ILabelDelegate getLabelDelegate()
+	{
+		if (labelDelegate == null)
+		{
 			IFigure label = getFigure();
-			if (label instanceof WrappingLabel) {
+			if (label instanceof WrappingLabel)
+			{
 				labelDelegate = new WrappingLabelDelegate((WrappingLabel) label);
-			} else {
+			} else
+			{
 				labelDelegate = new SimpleLabelDelegate((Label) label);
 			}
 		}
@@ -550,8 +609,10 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	 * @generated
 	 */
 	@Override
-	public Object getAdapter(Class key) {
-		if (ILabelDelegate.class.equals(key)) {
+	public Object getAdapter(Class key)
+	{
+		if (ILabelDelegate.class.equals(key))
+		{
 			return getLabelDelegate();
 		}
 		return super.getAdapter(key);
@@ -560,7 +621,8 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	protected void addNotationalListeners() {
+	protected void addNotationalListeners()
+	{
 		super.addNotationalListeners();
 		addListenerFilter("PrimaryView", this, getPrimaryView()); //$NON-NLS-1$
 	}
@@ -568,7 +630,8 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	protected void removeNotationalListeners() {
+	protected void removeNotationalListeners()
+	{
 		super.removeNotationalListeners();
 		removeListenerFilter("PrimaryView"); //$NON-NLS-1$
 	}
@@ -576,37 +639,39 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	protected void handleNotificationEvent(Notification event) {
+	protected void handleNotificationEvent(Notification event)
+	{
 		Object feature = event.getFeature();
-		if (NotationPackage.eINSTANCE.getFontStyle_FontColor().equals(feature)) {
+		if (NotationPackage.eINSTANCE.getFontStyle_FontColor().equals(feature))
+		{
 			Integer c = (Integer) event.getNewValue();
 			setFontColor(DiagramColorRegistry.getInstance().getColor(c));
-		} else if (NotationPackage.eINSTANCE.getFontStyle_Underline().equals(
-				feature)) {
+		} else if (NotationPackage.eINSTANCE.getFontStyle_Underline().equals(feature))
+		{
 			refreshUnderline();
-		} else if (NotationPackage.eINSTANCE.getFontStyle_StrikeThrough()
-				.equals(feature)) {
+		} else if (NotationPackage.eINSTANCE.getFontStyle_StrikeThrough().equals(feature))
+		{
 			refreshStrikeThrough();
-		} else if (NotationPackage.eINSTANCE.getFontStyle_FontHeight().equals(
-				feature)
-				|| NotationPackage.eINSTANCE.getFontStyle_FontName().equals(
-						feature)
-				|| NotationPackage.eINSTANCE.getFontStyle_Bold()
-						.equals(feature)
-				|| NotationPackage.eINSTANCE.getFontStyle_Italic().equals(
-						feature)) {
+		} else if (NotationPackage.eINSTANCE.getFontStyle_FontHeight().equals(feature)
+				|| NotationPackage.eINSTANCE.getFontStyle_FontName().equals(feature)
+				|| NotationPackage.eINSTANCE.getFontStyle_Bold().equals(feature)
+				|| NotationPackage.eINSTANCE.getFontStyle_Italic().equals(feature))
+		{
 			refreshFont();
-		} else {
-			if (getParser() != null
-					&& getParser().isAffectingEvent(event,
-							getParserOptions().intValue())) {
+		} else
+		{
+			if (getParser() != null && getParser().isAffectingEvent(event, getParserOptions().intValue()))
+			{
 				refreshLabel();
 			}
-			if (getParser() instanceof ISemanticParser) {
+			if (getParser() instanceof ISemanticParser)
+			{
 				ISemanticParser modelParser = (ISemanticParser) getParser();
-				if (modelParser.areSemanticElementsAffected(null, event)) {
+				if (modelParser.areSemanticElementsAffected(null, event))
+				{
 					removeSemanticListeners();
-					if (resolveSemanticElement() != null) {
+					if (resolveSemanticElement() != null)
+					{
 						addSemanticListeners();
 					}
 					refreshLabel();
@@ -619,7 +684,8 @@ public class ControlFlowLocationPcEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	protected IFigure createFigure() {
+	protected IFigure createFigure()
+	{
 		// Parent should assign one using setLabel() method
 		return null;
 	}

@@ -19,12 +19,14 @@ import de.upb.lina.cfg.controlflow.ControlflowFactory;
 /**
  * @generated
  */
-public class ControlFlowLocationCreateCommand extends EditElementCommand {
+public class ControlFlowLocationCreateCommand extends EditElementCommand
+{
 
 	/**
 	 * @generated
 	 */
-	public ControlFlowLocationCreateCommand(CreateElementRequest req) {
+	public ControlFlowLocationCreateCommand(CreateElementRequest req)
+	{
 		super(req.getLabel(), null, req);
 	}
 
@@ -32,10 +34,11 @@ public class ControlFlowLocationCreateCommand extends EditElementCommand {
 	 * FIXME: replace with setElementToEdit()
 	 * @generated
 	 */
-	protected EObject getElementToEdit() {
-		EObject container = ((CreateElementRequest) getRequest())
-				.getContainer();
-		if (container instanceof View) {
+	protected EObject getElementToEdit()
+	{
+		EObject container = ((CreateElementRequest) getRequest()).getContainer();
+		if (container instanceof View)
+		{
 			container = ((View) container).getElement();
 		}
 		return container;
@@ -44,7 +47,8 @@ public class ControlFlowLocationCreateCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	public boolean canExecute() {
+	public boolean canExecute()
+	{
 		return true;
 
 	}
@@ -52,10 +56,9 @@ public class ControlFlowLocationCreateCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
-			IAdaptable info) throws ExecutionException {
-		ControlFlowLocation newElement = ControlflowFactory.eINSTANCE
-				.createControlFlowLocation();
+	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException
+	{
+		ControlFlowLocation newElement = ControlflowFactory.eINSTANCE.createControlFlowLocation();
 
 		ControlFlowDiagram owner = (ControlFlowDiagram) getElementToEdit();
 		owner.getLocations().add(newElement);
@@ -69,19 +72,16 @@ public class ControlFlowLocationCreateCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	protected void doConfigure(ControlFlowLocation newElement,
-			IProgressMonitor monitor, IAdaptable info)
-			throws ExecutionException {
-		IElementType elementType = ((CreateElementRequest) getRequest())
-				.getElementType();
-		ConfigureRequest configureRequest = new ConfigureRequest(
-				getEditingDomain(), newElement, elementType);
-		configureRequest.setClientContext(((CreateElementRequest) getRequest())
-				.getClientContext());
+	protected void doConfigure(ControlFlowLocation newElement, IProgressMonitor monitor, IAdaptable info)
+			throws ExecutionException
+	{
+		IElementType elementType = ((CreateElementRequest) getRequest()).getElementType();
+		ConfigureRequest configureRequest = new ConfigureRequest(getEditingDomain(), newElement, elementType);
+		configureRequest.setClientContext(((CreateElementRequest) getRequest()).getClientContext());
 		configureRequest.addParameters(getRequest().getParameters());
-		ICommand configureCommand = elementType
-				.getEditCommand(configureRequest);
-		if (configureCommand != null && configureCommand.canExecute()) {
+		ICommand configureCommand = elementType.getEditCommand(configureRequest);
+		if (configureCommand != null && configureCommand.canExecute())
+		{
 			configureCommand.execute(monitor, info);
 		}
 	}

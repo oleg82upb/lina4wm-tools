@@ -19,14 +19,15 @@ import de.upb.lina.cfg.controlflow.diagram.part.ControlFlowVisualIDRegistry;
 /**
  * @generated
  */
-public class ControlFlowEditPartProvider extends DefaultEditPartProvider {
+public class ControlFlowEditPartProvider extends DefaultEditPartProvider
+{
 
 	/**
 	 * @generated
 	 */
-	public ControlFlowEditPartProvider() {
-		super(new ControlFlowEditPartFactory(),
-				ControlFlowVisualIDRegistry.TYPED_INSTANCE,
+	public ControlFlowEditPartProvider()
+	{
+		super(new ControlFlowEditPartFactory(), ControlFlowVisualIDRegistry.TYPED_INSTANCE,
 				ControlFlowDiagramEditPart.MODEL_ID);
 	}
 }

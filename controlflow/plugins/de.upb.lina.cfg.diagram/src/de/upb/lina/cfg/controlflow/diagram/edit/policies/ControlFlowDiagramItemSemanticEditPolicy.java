@@ -13,22 +13,24 @@ import de.upb.lina.cfg.controlflow.diagram.providers.ControlFlowElementTypes;
 /**
  * @generated
  */
-public class ControlFlowDiagramItemSemanticEditPolicy extends
-		ControlFlowBaseItemSemanticEditPolicy {
+public class ControlFlowDiagramItemSemanticEditPolicy extends ControlFlowBaseItemSemanticEditPolicy
+{
 
 	/**
 	 * @generated
 	 */
-	public ControlFlowDiagramItemSemanticEditPolicy() {
+	public ControlFlowDiagramItemSemanticEditPolicy()
+	{
 		super(ControlFlowElementTypes.ControlFlowDiagram_1000);
 	}
 
 	/**
 	 * @generated
 	 */
-	protected Command getCreateCommand(CreateElementRequest req) {
-		if (ControlFlowElementTypes.ControlFlowLocation_2001 == req
-				.getElementType()) {
+	protected Command getCreateCommand(CreateElementRequest req)
+	{
+		if (ControlFlowElementTypes.ControlFlowLocation_2001 == req.getElementType())
+		{
 			return getGEFWrapper(new ControlFlowLocationCreateCommand(req));
 		}
 		return super.getCreateCommand(req);
@@ -37,27 +39,24 @@ public class ControlFlowDiagramItemSemanticEditPolicy extends
 	/**
 	 * @generated
 	 */
-	protected Command getDuplicateCommand(DuplicateElementsRequest req) {
-		TransactionalEditingDomain editingDomain = ((IGraphicalEditPart) getHost())
-				.getEditingDomain();
+	protected Command getDuplicateCommand(DuplicateElementsRequest req)
+	{
+		TransactionalEditingDomain editingDomain = ((IGraphicalEditPart) getHost()).getEditingDomain();
 		return getGEFWrapper(new DuplicateAnythingCommand(editingDomain, req));
 	}
 
 	/**
 	 * @generated
 	 */
-	private static class DuplicateAnythingCommand extends
-			DuplicateEObjectsCommand {
+	private static class DuplicateAnythingCommand extends DuplicateEObjectsCommand
+	{
 
 		/**
 		 * @generated
 		 */
-		public DuplicateAnythingCommand(
-				TransactionalEditingDomain editingDomain,
-				DuplicateElementsRequest req) {
-			super(editingDomain, req.getLabel(), req
-					.getElementsToBeDuplicated(), req
-					.getAllDuplicatedElementsMap());
+		public DuplicateAnythingCommand(TransactionalEditingDomain editingDomain, DuplicateElementsRequest req)
+		{
+			super(editingDomain, req.getLabel(), req.getElementsToBeDuplicated(), req.getAllDuplicatedElementsMap());
 		}
 
 	}

@@ -21,7 +21,8 @@ import de.upb.lina.cfg.controlflow.diagram.part.ControlFlowVisualIDRegistry;
 /**
  * @generated
  */
-public class ControlFlowDiagramEditPart extends DiagramEditPart {
+public class ControlFlowDiagramEditPart extends DiagramEditPart
+{
 
 	/**
 	 * @generated
@@ -36,22 +37,21 @@ public class ControlFlowDiagramEditPart extends DiagramEditPart {
 	/**
 	 * @generated
 	 */
-	public ControlFlowDiagramEditPart(View view) {
+	public ControlFlowDiagramEditPart(View view)
+	{
 		super(view);
 	}
 
 	/**
 	 * @generated
 	 */
-	protected void createDefaultEditPolicies() {
+	protected void createDefaultEditPolicies()
+	{
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-				new ControlFlowDiagramItemSemanticEditPolicy());
-		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE,
-				new ControlFlowDiagramCanonicalEditPolicy());
-		installEditPolicy(EditPolicyRoles.CREATION_ROLE,
-				new CreationEditPolicyWithCustomReparent(
-						ControlFlowVisualIDRegistry.TYPED_INSTANCE));
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new ControlFlowDiagramItemSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new ControlFlowDiagramCanonicalEditPolicy());
+		installEditPolicy(EditPolicyRoles.CREATION_ROLE, new CreationEditPolicyWithCustomReparent(
+				ControlFlowVisualIDRegistry.TYPED_INSTANCE));
 		// removeEditPolicy(org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.POPUPBAR_ROLE);
 	}
 

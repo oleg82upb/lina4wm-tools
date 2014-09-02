@@ -22,12 +22,14 @@ import org.eclipse.ui.PlatformUI;
 /**
  * @generated
  */
-public class DeleteElementAction extends DefaultDeleteElementAction {
+public class DeleteElementAction extends DefaultDeleteElementAction
+{
 
 	/**
 	 * @generated
 	 */
-	public DeleteElementAction(IWorkbenchPart part) {
+	public DeleteElementAction(IWorkbenchPart part)
+	{
 		super(part);
 	}
 }

@@ -21,8 +21,8 @@ import de.upb.lina.cfg.controlflow.diagram.part.ControlFlowVisualIDRegistry;
 /**
  * @generated
  */
-public class ControlFlowParserProvider extends AbstractProvider implements
-		IParserProvider {
+public class ControlFlowParserProvider extends AbstractProvider implements IParserProvider
+{
 
 	/**
 	 * @generated
@@ -32,10 +32,11 @@ public class ControlFlowParserProvider extends AbstractProvider implements
 	/**
 	 * @generated
 	 */
-	private IParser getControlFlowLocationPc_5001Parser() {
-		if (controlFlowLocationPc_5001Parser == null) {
-			EAttribute[] features = new EAttribute[] { ControlflowPackage.eINSTANCE
-					.getControlFlowLocation_Pc() };
+	private IParser getControlFlowLocationPc_5001Parser()
+	{
+		if (controlFlowLocationPc_5001Parser == null)
+		{
+			EAttribute[] features = new EAttribute[] { ControlflowPackage.eINSTANCE.getControlFlowLocation_Pc() };
 			MessageFormatParser parser = new MessageFormatParser(features);
 			controlFlowLocationPc_5001Parser = parser;
 		}
@@ -45,7 +46,8 @@ public class ControlFlowParserProvider extends AbstractProvider implements
 	/**
 	 * @generated
 	 */
-	protected IParser getParser(int visualID) {
+	protected IParser getParser(int visualID)
+	{
 		switch (visualID) {
 		case ControlFlowLocationPcEditPart.VISUAL_ID:
 			return getControlFlowLocationPc_5001Parser();
@@ -57,22 +59,24 @@ public class ControlFlowParserProvider extends AbstractProvider implements
 	 * Utility method that consults ParserService
 	 * @generated
 	 */
-	public static IParser getParser(IElementType type, EObject object,
-			String parserHint) {
-		return ParserService.getInstance().getParser(
-				new HintAdapter(type, object, parserHint));
+	public static IParser getParser(IElementType type, EObject object, String parserHint)
+	{
+		return ParserService.getInstance().getParser(new HintAdapter(type, object, parserHint));
 	}
 
 	/**
 	 * @generated
 	 */
-	public IParser getParser(IAdaptable hint) {
+	public IParser getParser(IAdaptable hint)
+	{
 		String vid = (String) hint.getAdapter(String.class);
-		if (vid != null) {
+		if (vid != null)
+		{
 			return getParser(ControlFlowVisualIDRegistry.getVisualID(vid));
 		}
 		View view = (View) hint.getAdapter(View.class);
-		if (view != null) {
+		if (view != null)
+		{
 			return getParser(ControlFlowVisualIDRegistry.getVisualID(view));
 		}
 		return null;
@@ -81,10 +85,13 @@ public class ControlFlowParserProvider extends AbstractProvider implements
 	/**
 	 * @generated
 	 */
-	public boolean provides(IOperation operation) {
-		if (operation instanceof GetParserOperation) {
+	public boolean provides(IOperation operation)
+	{
+		if (operation instanceof GetParserOperation)
+		{
 			IAdaptable hint = ((GetParserOperation) operation).getHint();
-			if (ControlFlowElementTypes.getElement(hint) == null) {
+			if (ControlFlowElementTypes.getElement(hint) == null)
+			{
 				return false;
 			}
 			return getParser(hint) != null;
@@ -95,7 +102,8 @@ public class ControlFlowParserProvider extends AbstractProvider implements
 	/**
 	 * @generated
 	 */
-	private static class HintAdapter extends ParserHintAdapter {
+	private static class HintAdapter extends ParserHintAdapter
+	{
 
 		/**
 		 * @generated
@@ -105,7 +113,8 @@ public class ControlFlowParserProvider extends AbstractProvider implements
 		/**
 		 * @generated
 		 */
-		public HintAdapter(IElementType type, EObject object, String parserHint) {
+		public HintAdapter(IElementType type, EObject object, String parserHint)
+		{
 			super(object, parserHint);
 			assert type != null;
 			elementType = type;
@@ -114,8 +123,10 @@ public class ControlFlowParserProvider extends AbstractProvider implements
 		/**
 		 * @generated
 		 */
-		public Object getAdapter(Class adapter) {
-			if (IElementType.class.equals(adapter)) {
+		public Object getAdapter(Class adapter)
+		{
+			if (IElementType.class.equals(adapter))
+			{
 				return elementType;
 			}
 			return super.getAdapter(adapter);

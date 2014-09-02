@@ -23,7 +23,8 @@ import de.upb.lina.cfg.controlflow.diagram.edit.parts.ControlFlowDiagramEditPart
 /**
  * @generated
  */
-public class ControlFlowInitDiagramFileAction implements IObjectActionDelegate {
+public class ControlFlowInitDiagramFileAction implements IObjectActionDelegate
+{
 
 	/**
 	 * @generated
@@ -38,60 +39,59 @@ public class ControlFlowInitDiagramFileAction implements IObjectActionDelegate {
 	/**
 	 * @generated
 	 */
-	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
+	public void setActivePart(IAction action, IWorkbenchPart targetPart)
+	{
 		this.targetPart = targetPart;
 	}
 
 	/**
 	 * @generated
 	 */
-	public void selectionChanged(IAction action, ISelection selection) {
+	public void selectionChanged(IAction action, ISelection selection)
+	{
 		domainModelURI = null;
 		action.setEnabled(false);
-		if (selection instanceof IStructuredSelection == false
-				|| selection.isEmpty()) {
+		if (selection instanceof IStructuredSelection == false || selection.isEmpty())
+		{
 			return;
 		}
-		IFile file = (IFile) ((IStructuredSelection) selection)
-				.getFirstElement();
-		domainModelURI = URI.createPlatformResourceURI(file.getFullPath()
-				.toString(), true);
+		IFile file = (IFile) ((IStructuredSelection) selection).getFirstElement();
+		domainModelURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 		action.setEnabled(true);
 	}
 
 	/**
 	 * @generated
 	 */
-	private Shell getShell() {
+	private Shell getShell()
+	{
 		return targetPart.getSite().getShell();
 	}
 
 	/**
 	 * @generated
 	 */
-	public void run(IAction action) {
-		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE
-				.createEditingDomain();
+	public void run(IAction action)
+	{
+		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE.createEditingDomain();
 		ResourceSet resourceSet = editingDomain.getResourceSet();
 		EObject diagramRoot = null;
-		try {
+		try
+		{
 			Resource resource = resourceSet.getResource(domainModelURI, true);
 			diagramRoot = (EObject) resource.getContents().get(0);
-		} catch (WrappedException ex) {
-			ControlFlowDiagramEditorPlugin.getInstance().logError(
-					"Unable to load resource: " + domainModelURI, ex); //$NON-NLS-1$
+		} catch (WrappedException ex)
+		{
+			ControlFlowDiagramEditorPlugin.getInstance().logError("Unable to load resource: " + domainModelURI, ex); //$NON-NLS-1$
 		}
-		if (diagramRoot == null) {
-			MessageDialog.openError(getShell(),
-					Messages.InitDiagramFile_ResourceErrorDialogTitle,
+		if (diagramRoot == null)
+		{
+			MessageDialog.openError(getShell(), Messages.InitDiagramFile_ResourceErrorDialogTitle,
 					Messages.InitDiagramFile_ResourceErrorDialogMessage);
 			return;
 		}
-		Wizard wizard = new ControlFlowNewDiagramFileWizard(domainModelURI,
-				diagramRoot, editingDomain);
-		wizard.setWindowTitle(NLS.bind(Messages.InitDiagramFile_WizardTitle,
-				ControlFlowDiagramEditPart.MODEL_ID));
-		ControlFlowDiagramEditorUtil.runWizard(getShell(), wizard,
-				"InitDiagramFile"); //$NON-NLS-1$
+		Wizard wizard = new ControlFlowNewDiagramFileWizard(domainModelURI, diagramRoot, editingDomain);
+		wizard.setWindowTitle(NLS.bind(Messages.InitDiagramFile_WizardTitle, ControlFlowDiagramEditPart.MODEL_ID));
+		ControlFlowDiagramEditorUtil.runWizard(getShell(), wizard, "InitDiagramFile"); //$NON-NLS-1$
 	}
 }
