@@ -17,8 +17,16 @@
             </method>
          </object>
          <context
-               views="generated-links">
+               views="generated-links,generated-labels">
          </context>
+         <object
+               class="org.eclipse.gmf.runtime.notation.Node"
+               id="generated-labels">
+            <method
+                  name="getType()"
+                  value="5001">
+            </method>
+         </object>
       </editpartProvider>
    </extension>
    <extension
