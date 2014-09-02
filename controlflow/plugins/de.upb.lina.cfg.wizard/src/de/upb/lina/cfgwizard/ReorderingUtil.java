@@ -66,7 +66,7 @@ public class ReorderingUtil {
 				instructions.add(i);
 			}
 		}
-		System.out.println(instructions.size());
+		//System.out.println(instructions.size());
 
 		//first node
 		ControlFlowLocation location = createControlFlowLocation(cfg, pc.next(), ControlflowFactory.eINSTANCE.createStoreBuffer());
