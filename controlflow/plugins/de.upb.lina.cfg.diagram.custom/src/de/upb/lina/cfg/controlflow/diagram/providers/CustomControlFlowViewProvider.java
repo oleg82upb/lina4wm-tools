@@ -8,6 +8,7 @@ import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.RGB;
 
+import de.upb.lina.cfg.controlflow.FlushTransition;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.CmpXchg;
@@ -22,7 +23,8 @@ public class CustomControlFlowViewProvider extends ControlFlowViewProvider
 	private final static RGB CAS = new RGB(0, 200, 200);
 	private final static RGB FENCE = new RGB(0, 0, 200);
 	private final static RGB ALLOCA = new RGB(200, 200, 0);
-
+	private final static RGB FLUSH = new RGB(100, 0, 0);
+	
 	/**
 	 * @generated
 	 */
@@ -55,6 +57,11 @@ public class CustomControlFlowViewProvider extends ControlFlowViewProvider
 		} else if (transitionElement instanceof Fence)
 		{
 			color = FENCE.hashCode();
+		}
+		
+		if(edge.getElement() instanceof FlushTransition)
+		{
+			color = FLUSH.hashCode();
 		}
 
 		if (color != style.getLineColor())

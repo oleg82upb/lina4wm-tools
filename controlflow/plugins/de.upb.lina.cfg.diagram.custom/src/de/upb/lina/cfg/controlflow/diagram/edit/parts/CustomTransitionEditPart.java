@@ -52,8 +52,6 @@ public class CustomTransitionEditPart extends TransitionEditPart
 			labelText = EMPTY;
 		}
 		figure.getTransitionLabel().setText(labelText);
-		figure.setForegroundColor(ColorConstants.darkGreen);
-		figure.setBackgroundColor(ColorConstants.darkGreen);
 		return figure;
 	}
 
