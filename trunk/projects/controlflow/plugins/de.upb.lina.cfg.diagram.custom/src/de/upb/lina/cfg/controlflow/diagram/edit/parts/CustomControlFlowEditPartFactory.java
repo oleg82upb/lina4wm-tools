@@ -24,6 +24,10 @@ public class CustomControlFlowEditPartFactory extends
 			if (ControlFlowVisualIDRegistry.getVisualID(view) == TransitionEditPart.VISUAL_ID) {
 				return new CustomTransitionEditPart(view);
 			}
+			
+			if (ControlFlowVisualIDRegistry.getVisualID(view) == ControlFlowLocationEditPart.VISUAL_ID) {
+				return new CustomControlFlowLocationEditPart(view);
+			}
 		}
 		return super.createEditPart(context, model);
 	}
