@@ -37,8 +37,8 @@ public class CustomControlFlowLocationPcEditPart extends ControlFlowLocationPcEd
 		ControlFlowLocation loc = (ControlFlowLocation)view.getElement();
 		System.out.println(loc.getBuffer());
 		if(loc.getBuffer() != null){
-			for(AddressValuePair pair:loc.getBuffer().getBuffer()){
-				label += "(" + addValue(pair.getMemAddress().getValue()) + ", " + addValue(pair.getMemValue().getValue())+")";
+			for(AddressValuePair pair:loc.getBuffer().getAddressValuePairs()){
+				label += "(" + addValue(pair.getAddress().getValue()) + ", " + addValue(pair.getValue().getValue())+")";
 			}
 		}
 		label += "]";

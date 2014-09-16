@@ -61,27 +61,27 @@ public class AddressValuePairItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
-			addMemAddressPropertyDescriptor(object);
-			addMemValuePropertyDescriptor(object);
+			addAddressPropertyDescriptor(object);
+			addValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Mem Address feature.
+	 * This adds a property descriptor for the Address feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addMemAddressPropertyDescriptor(Object object)
+	protected void addAddressPropertyDescriptor(Object object)
 	{
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_AddressValuePair_memAddress_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AddressValuePair_memAddress_feature", "_UI_AddressValuePair_type"),
-				 ControlflowPackage.Literals.ADDRESS_VALUE_PAIR__MEM_ADDRESS,
+				 getString("_UI_AddressValuePair_address_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AddressValuePair_address_feature", "_UI_AddressValuePair_type"),
+				 ControlflowPackage.Literals.ADDRESS_VALUE_PAIR__ADDRESS,
 				 true,
 				 false,
 				 true,
@@ -91,20 +91,20 @@ public class AddressValuePairItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Mem Value feature.
+	 * This adds a property descriptor for the Value feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addMemValuePropertyDescriptor(Object object)
+	protected void addValuePropertyDescriptor(Object object)
 	{
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_AddressValuePair_memValue_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AddressValuePair_memValue_feature", "_UI_AddressValuePair_type"),
-				 ControlflowPackage.Literals.ADDRESS_VALUE_PAIR__MEM_VALUE,
+				 getString("_UI_AddressValuePair_value_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AddressValuePair_value_feature", "_UI_AddressValuePair_type"),
+				 ControlflowPackage.Literals.ADDRESS_VALUE_PAIR__VALUE,
 				 true,
 				 false,
 				 true,

@@ -87,7 +87,7 @@ public class ReorderingUtil {
 			
 
 			//empty buffer
-			if(toExplore.getBuffer().getBuffer().isEmpty()){
+			if(toExplore.getBuffer().getAddressValuePairs().isEmpty()){
 				if(nextInstruction != null){
 					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction);
 				}
@@ -97,7 +97,7 @@ public class ReorderingUtil {
 				//if its synching just do x flushes
 				if(nextInstruction == null || isSynch(nextInstruction)){
 					ControlFlowLocation last = toExplore;
-					for(int i =0; i<toExplore.getBuffer().getBuffer().size(); i++){
+					for(int i =0; i<toExplore.getBuffer().getAddressValuePairs().size(); i++){
 						ControlFlowLocation nextLocation = createControlFlowLocation(cfg, toExplore.getPc(), createFlushedStoreBuffer(last.getBuffer()));
 						Transition transition = createFlushTransition(cfg);
 						transition.setSource(last);
@@ -201,21 +201,21 @@ public class ReorderingUtil {
 
 	private StoreBuffer createStoreBuffer(StoreBuffer oldBuffer, Instruction nextInstruction){
 		StoreBuffer buffer = ControlflowFactory.eINSTANCE.createStoreBuffer();
-		for(AddressValuePair pair: oldBuffer.getBuffer()){
+		for(AddressValuePair pair: oldBuffer.getAddressValuePairs()){
 			AddressValuePair newPair = ControlflowFactory.eINSTANCE.createAddressValuePair();
-			newPair.setMemAddress(pair.getMemAddress());
-			newPair.setMemValue(pair.getMemValue());
-			buffer.getBuffer().add(newPair);
+			newPair.setAddress(pair.getAddress());
+			newPair.setValue(pair.getValue());
+			buffer.getAddressValuePairs().add(newPair);
 		}
 
 		//add new buffer entry for store
 		if(nextInstruction.eClass().equals(LlvmPackage.eINSTANCE.getStore())){
 			Store store = (Store)nextInstruction;
 			AddressValuePair newPair = ControlflowFactory.eINSTANCE.createAddressValuePair();
-			newPair.setMemAddress(store.getTargetAddress());
-			newPair.setMemValue(store.getValue());
-			if(!buffer.getBuffer().contains(newPair)){
-				buffer.getBuffer().add(newPair);
+			newPair.setAddress(store.getTargetAddress());
+			newPair.setValue(store.getValue());
+			if(!buffer.getAddressValuePairs().contains(newPair)){
+				buffer.getAddressValuePairs().add(newPair);
 			}
 
 		}
@@ -226,13 +226,13 @@ public class ReorderingUtil {
 
 	private StoreBuffer createFlushedStoreBuffer(StoreBuffer oldBuffer){
 		StoreBuffer buffer = ControlflowFactory.eINSTANCE.createStoreBuffer();
-		for(AddressValuePair pair: oldBuffer.getBuffer()){
+		for(AddressValuePair pair: oldBuffer.getAddressValuePairs()){
 			AddressValuePair newPair = ControlflowFactory.eINSTANCE.createAddressValuePair();
-			newPair.setMemAddress(pair.getMemAddress());
-			newPair.setMemValue(pair.getMemValue());
-			buffer.getBuffer().add(newPair);
+			newPair.setAddress(pair.getAddress());
+			newPair.setValue(pair.getValue());
+			buffer.getAddressValuePairs().add(newPair);
 		}
-		buffer.getBuffer().remove(0);
+		buffer.getAddressValuePairs().remove(0);
 
 		return buffer;
 	}
@@ -246,7 +246,7 @@ public class ReorderingUtil {
 	private ControlFlowLocation createControlFlowLocation(
 			ControlFlowDiagram diag, int pc, StoreBuffer buffer) {
 		for(ControlFlowLocation l: diag.getLocations()){
-			if(l.getPc() == pc && l.getBuffer().getBuffer().equals(buffer.getBuffer())){
+			if(l.getPc() == pc && l.getBuffer().getAddressValuePairs().equals(buffer.getAddressValuePairs())){
 				return l;
 			}
 		}

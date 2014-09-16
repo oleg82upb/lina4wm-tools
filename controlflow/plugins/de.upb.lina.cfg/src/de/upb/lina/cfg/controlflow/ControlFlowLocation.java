@@ -118,26 +118,28 @@ public interface ControlFlowLocation extends EObject {
 	EList<Transition> getOutgoing();
 
 	/**
-	 * Returns the value of the '<em><b>Buffer</b></em>' reference.
+	 * Returns the value of the '<em><b>Buffer</b></em>' containment reference.
+	 * It is bidirectional and its opposite is '{@link de.upb.lina.cfg.controlflow.StoreBuffer#getLocation <em>Location</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Buffer</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Buffer</em>' reference.
+	 * @return the value of the '<em>Buffer</em>' containment reference.
 	 * @see #setBuffer(StoreBuffer)
 	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getControlFlowLocation_Buffer()
-	 * @model
+	 * @see de.upb.lina.cfg.controlflow.StoreBuffer#getLocation
+	 * @model opposite="location" containment="true"
 	 * @generated
 	 */
 	StoreBuffer getBuffer();
 
 	/**
-	 * Sets the value of the '{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getBuffer <em>Buffer</em>}' reference.
+	 * Sets the value of the '{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getBuffer <em>Buffer</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Buffer</em>' reference.
+	 * @param value the new value of the '<em>Buffer</em>' containment reference.
 	 * @see #getBuffer()
 	 * @generated
 	 */

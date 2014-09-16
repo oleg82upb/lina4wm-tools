@@ -157,7 +157,7 @@ public interface ControlflowPackage extends EPackage {
 	int CONTROL_FLOW_LOCATION__OUTGOING = 3;
 
 	/**
-	 * The feature id for the '<em><b>Buffer</b></em>' reference.
+	 * The feature id for the '<em><b>Buffer</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -423,22 +423,31 @@ public interface ControlflowPackage extends EPackage {
 	int ADDRESS_VALUE_PAIR = 6;
 
 	/**
-	 * The feature id for the '<em><b>Mem Address</b></em>' reference.
+	 * The feature id for the '<em><b>Address</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS_VALUE_PAIR__MEM_ADDRESS = 0;
+	int ADDRESS_VALUE_PAIR__ADDRESS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Mem Value</b></em>' reference.
+	 * The feature id for the '<em><b>Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS_VALUE_PAIR__MEM_VALUE = 1;
+	int ADDRESS_VALUE_PAIR__VALUE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Store Buffer</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDRESS_VALUE_PAIR__STORE_BUFFER = 2;
 
 	/**
 	 * The number of structural features of the '<em>Address Value Pair</em>' class.
@@ -447,7 +456,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS_VALUE_PAIR_FEATURE_COUNT = 2;
+	int ADDRESS_VALUE_PAIR_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.StoreBufferImpl <em>Store Buffer</em>}' class.
@@ -460,13 +469,22 @@ public interface ControlflowPackage extends EPackage {
 	int STORE_BUFFER = 7;
 
 	/**
-	 * The feature id for the '<em><b>Buffer</b></em>' reference list.
+	 * The feature id for the '<em><b>Address Value Pairs</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STORE_BUFFER__BUFFER = 0;
+	int STORE_BUFFER__ADDRESS_VALUE_PAIRS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORE_BUFFER__LOCATION = 1;
 
 	/**
 	 * The number of structural features of the '<em>Store Buffer</em>' class.
@@ -475,7 +493,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORE_BUFFER_FEATURE_COUNT = 1;
+	int STORE_BUFFER_FEATURE_COUNT = 2;
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram <em>Control Flow Diagram</em>}'.
@@ -586,10 +604,10 @@ public interface ControlflowPackage extends EPackage {
 	EReference getControlFlowLocation_Outgoing();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getBuffer <em>Buffer</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getBuffer <em>Buffer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Buffer</em>'.
+	 * @return the meta object for the containment reference '<em>Buffer</em>'.
 	 * @see de.upb.lina.cfg.controlflow.ControlFlowLocation#getBuffer()
 	 * @see #getControlFlowLocation()
 	 * @generated
@@ -713,26 +731,37 @@ public interface ControlflowPackage extends EPackage {
 	EClass getAddressValuePair();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.controlflow.AddressValuePair#getMemAddress <em>Mem Address</em>}'.
+	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.controlflow.AddressValuePair#getAddress <em>Address</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Mem Address</em>'.
-	 * @see de.upb.lina.cfg.controlflow.AddressValuePair#getMemAddress()
+	 * @return the meta object for the reference '<em>Address</em>'.
+	 * @see de.upb.lina.cfg.controlflow.AddressValuePair#getAddress()
 	 * @see #getAddressValuePair()
 	 * @generated
 	 */
-	EReference getAddressValuePair_MemAddress();
+	EReference getAddressValuePair_Address();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.controlflow.AddressValuePair#getMemValue <em>Mem Value</em>}'.
+	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.controlflow.AddressValuePair#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Mem Value</em>'.
-	 * @see de.upb.lina.cfg.controlflow.AddressValuePair#getMemValue()
+	 * @return the meta object for the reference '<em>Value</em>'.
+	 * @see de.upb.lina.cfg.controlflow.AddressValuePair#getValue()
 	 * @see #getAddressValuePair()
 	 * @generated
 	 */
-	EReference getAddressValuePair_MemValue();
+	EReference getAddressValuePair_Value();
+
+	/**
+	 * Returns the meta object for the container reference '{@link de.upb.lina.cfg.controlflow.AddressValuePair#getStoreBuffer <em>Store Buffer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Store Buffer</em>'.
+	 * @see de.upb.lina.cfg.controlflow.AddressValuePair#getStoreBuffer()
+	 * @see #getAddressValuePair()
+	 * @generated
+	 */
+	EReference getAddressValuePair_StoreBuffer();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.StoreBuffer <em>Store Buffer</em>}'.
@@ -745,15 +774,26 @@ public interface ControlflowPackage extends EPackage {
 	EClass getStoreBuffer();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.upb.lina.cfg.controlflow.StoreBuffer#getBuffer <em>Buffer</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.upb.lina.cfg.controlflow.StoreBuffer#getAddressValuePairs <em>Address Value Pairs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Buffer</em>'.
-	 * @see de.upb.lina.cfg.controlflow.StoreBuffer#getBuffer()
+	 * @return the meta object for the containment reference list '<em>Address Value Pairs</em>'.
+	 * @see de.upb.lina.cfg.controlflow.StoreBuffer#getAddressValuePairs()
 	 * @see #getStoreBuffer()
 	 * @generated
 	 */
-	EReference getStoreBuffer_Buffer();
+	EReference getStoreBuffer_AddressValuePairs();
+
+	/**
+	 * Returns the meta object for the container reference '{@link de.upb.lina.cfg.controlflow.StoreBuffer#getLocation <em>Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Location</em>'.
+	 * @see de.upb.lina.cfg.controlflow.StoreBuffer#getLocation()
+	 * @see #getStoreBuffer()
+	 * @generated
+	 */
+	EReference getStoreBuffer_Location();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -862,7 +902,7 @@ public interface ControlflowPackage extends EPackage {
 		EReference CONTROL_FLOW_LOCATION__OUTGOING = eINSTANCE.getControlFlowLocation_Outgoing();
 
 		/**
-		 * The meta object literal for the '<em><b>Buffer</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Buffer</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -968,20 +1008,28 @@ public interface ControlflowPackage extends EPackage {
 		EClass ADDRESS_VALUE_PAIR = eINSTANCE.getAddressValuePair();
 
 		/**
-		 * The meta object literal for the '<em><b>Mem Address</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Address</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ADDRESS_VALUE_PAIR__MEM_ADDRESS = eINSTANCE.getAddressValuePair_MemAddress();
+		EReference ADDRESS_VALUE_PAIR__ADDRESS = eINSTANCE.getAddressValuePair_Address();
 
 		/**
-		 * The meta object literal for the '<em><b>Mem Value</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ADDRESS_VALUE_PAIR__MEM_VALUE = eINSTANCE.getAddressValuePair_MemValue();
+		EReference ADDRESS_VALUE_PAIR__VALUE = eINSTANCE.getAddressValuePair_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Store Buffer</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ADDRESS_VALUE_PAIR__STORE_BUFFER = eINSTANCE.getAddressValuePair_StoreBuffer();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.StoreBufferImpl <em>Store Buffer</em>}' class.
@@ -994,12 +1042,20 @@ public interface ControlflowPackage extends EPackage {
 		EClass STORE_BUFFER = eINSTANCE.getStoreBuffer();
 
 		/**
-		 * The meta object literal for the '<em><b>Buffer</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Address Value Pairs</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STORE_BUFFER__BUFFER = eINSTANCE.getStoreBuffer_Buffer();
+		EReference STORE_BUFFER__ADDRESS_VALUE_PAIRS = eINSTANCE.getStoreBuffer_AddressValuePairs();
+
+		/**
+		 * The meta object literal for the '<em><b>Location</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STORE_BUFFER__LOCATION = eINSTANCE.getStoreBuffer_Location();
 
 	}
 

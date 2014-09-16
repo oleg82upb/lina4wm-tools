@@ -350,7 +350,8 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAddressValuePair_MemAddress() {
+	public EReference getAddressValuePair_Address()
+	{
 		return (EReference)addressValuePairEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -359,8 +360,19 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAddressValuePair_MemValue() {
+	public EReference getAddressValuePair_Value()
+	{
 		return (EReference)addressValuePairEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAddressValuePair_StoreBuffer()
+	{
+		return (EReference)addressValuePairEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -377,8 +389,19 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStoreBuffer_Buffer() {
+	public EReference getStoreBuffer_AddressValuePairs()
+	{
 		return (EReference)storeBufferEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStoreBuffer_Location()
+	{
+		return (EReference)storeBufferEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -437,11 +460,13 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		flushTransitionEClass = createEClass(FLUSH_TRANSITION);
 
 		addressValuePairEClass = createEClass(ADDRESS_VALUE_PAIR);
-		createEReference(addressValuePairEClass, ADDRESS_VALUE_PAIR__MEM_ADDRESS);
-		createEReference(addressValuePairEClass, ADDRESS_VALUE_PAIR__MEM_VALUE);
+		createEReference(addressValuePairEClass, ADDRESS_VALUE_PAIR__ADDRESS);
+		createEReference(addressValuePairEClass, ADDRESS_VALUE_PAIR__VALUE);
+		createEReference(addressValuePairEClass, ADDRESS_VALUE_PAIR__STORE_BUFFER);
 
 		storeBufferEClass = createEClass(STORE_BUFFER);
-		createEReference(storeBufferEClass, STORE_BUFFER__BUFFER);
+		createEReference(storeBufferEClass, STORE_BUFFER__ADDRESS_VALUE_PAIRS);
+		createEReference(storeBufferEClass, STORE_BUFFER__LOCATION);
 	}
 
 	/**
@@ -491,7 +516,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		initEReference(getControlFlowLocation_Diagram(), this.getControlFlowDiagram(), this.getControlFlowDiagram_Locations(), "diagram", null, 0, 1, ControlFlowLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getControlFlowLocation_Incoming(), this.getTransition(), this.getTransition_Target(), "incoming", null, 0, -1, ControlFlowLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getControlFlowLocation_Outgoing(), this.getTransition(), this.getTransition_Source(), "outgoing", null, 0, -1, ControlFlowLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getControlFlowLocation_Buffer(), this.getStoreBuffer(), null, "buffer", null, 0, 1, ControlFlowLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getControlFlowLocation_Buffer(), this.getStoreBuffer(), this.getStoreBuffer_Location(), "buffer", null, 0, 1, ControlFlowLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransition_Instruction(), theLlvmPackage.getInstruction(), null, "instruction", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -508,11 +533,13 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		initEClass(flushTransitionEClass, FlushTransition.class, "FlushTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(addressValuePairEClass, AddressValuePair.class, "AddressValuePair", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAddressValuePair_MemAddress(), theLlvmPackage.getParameter(), null, "memAddress", null, 0, 1, AddressValuePair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAddressValuePair_MemValue(), theLlvmPackage.getParameter(), null, "memValue", null, 0, 1, AddressValuePair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAddressValuePair_Address(), theLlvmPackage.getParameter(), null, "address", null, 0, 1, AddressValuePair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAddressValuePair_Value(), theLlvmPackage.getParameter(), null, "value", null, 0, 1, AddressValuePair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAddressValuePair_StoreBuffer(), this.getStoreBuffer(), this.getStoreBuffer_AddressValuePairs(), "storeBuffer", null, 0, 1, AddressValuePair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(storeBufferEClass, StoreBuffer.class, "StoreBuffer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStoreBuffer_Buffer(), this.getAddressValuePair(), null, "buffer", null, 0, -1, StoreBuffer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStoreBuffer_AddressValuePairs(), this.getAddressValuePair(), this.getAddressValuePair_StoreBuffer(), "addressValuePairs", null, 0, -1, StoreBuffer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStoreBuffer_Location(), this.getControlFlowLocation(), this.getControlFlowLocation_Buffer(), "location", null, 0, 1, StoreBuffer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
