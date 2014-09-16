@@ -5,12 +5,21 @@ package de.upb.lina.cfg.controlflow.diagram.edit.parts;
 
 import org.eclipse.gmf.runtime.notation.View;
 
+import de.upb.lina.cfg.controlflow.AddressValuePair;
+import de.upb.lina.cfg.controlflow.ControlFlowLocation;
+import de.upb.llvm_parser.llvm.Constant;
+import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.Value;
+import de.upb.llvm_parser.llvm.impl.AddressUseImpl;
+
 /**
- * @author Oleg Travkin
+ * @author Oleg Travkin, Alexander Hetzer
  *
  */
 public class CustomControlFlowLocationPcEditPart extends ControlFlowLocationPcEditPart
 {
+	
+	private View view;
 
 	/**
 	 * @param view
@@ -18,15 +27,42 @@ public class CustomControlFlowLocationPcEditPart extends ControlFlowLocationPcEd
 	public CustomControlFlowLocationPcEditPart(View view)
 	{
 		super(view);
-		
+		this.view = view;	
 	}
 
 	@Override
 	protected String getLabelText()
 	{
-		// TODO implement string representation of the store buffer
-		return super.getLabelText() + "WTF";
+		String label = "PC: "+super.getLabelText()+ " Buffer: [";
+		ControlFlowLocation loc = (ControlFlowLocation)view.getElement();
+		System.out.println(loc.getBuffer());
+		if(loc.getBuffer() != null){
+			for(AddressValuePair pair:loc.getBuffer().getBuffer()){
+				label += "(" + addValue(pair.getMemAddress().getValue()) + ", " + addValue(pair.getMemValue().getValue())+")";
+			}
+		}
+		label += "]";
+		return label;
 	}
+	
+	
+	private String addValue(Value value) {
+		String result = "";
+		
+		if(value instanceof AddressUseImpl){
+			AddressUseImpl aui = (AddressUseImpl)value;
+			result +=aui.getAddress().getName();
+		}
+
+		else if (value.eClass().equals(LlvmPackage.eINSTANCE.getConstant())) {
+			Constant constant = (Constant) value;
+			result += constant.getValue();
+		}
+		
+		return (result + ",");
+	}
+	
+	
 
 
 

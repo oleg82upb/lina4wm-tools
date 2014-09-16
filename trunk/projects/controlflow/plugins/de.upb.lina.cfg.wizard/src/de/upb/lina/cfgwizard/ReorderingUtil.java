@@ -128,7 +128,7 @@ public class ReorderingUtil {
 					//
 				}
 			}
-			System.out.println(toBeProcessed.size());
+			//System.out.println(toBeProcessed.size());
 			//last
 			toBeProcessed.remove(0);
 		}
@@ -252,8 +252,8 @@ public class ReorderingUtil {
 		}
 		ControlFlowLocation loc = ControlflowFactory.eINSTANCE
 				.createControlFlowLocation();
-		loc.setPc(pc);
 		loc.setBuffer(buffer);
+		loc.setPc(pc);
 		loc.setDiagram(diag);
 		return loc;
 	}
