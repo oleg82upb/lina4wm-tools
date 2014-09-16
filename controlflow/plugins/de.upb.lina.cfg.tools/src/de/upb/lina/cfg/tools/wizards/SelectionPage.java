@@ -1,4 +1,4 @@
-package de.upb.lina.cfgwizard.wizards;
+package de.upb.lina.cfg.tools.wizards;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -43,7 +43,7 @@ import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
-import de.upb.lina.cfgwizard.CFGActivator;
+import de.upb.lina.cfg.tools.CFGActivator;
 
 /**
  * The "New" wizard page allows setting the container for the new file as well

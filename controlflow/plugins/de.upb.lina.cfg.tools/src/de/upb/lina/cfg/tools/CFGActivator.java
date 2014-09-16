@@ -1,4 +1,4 @@
-package de.upb.lina.cfgwizard;
+package de.upb.lina.cfg.tools;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,7 +21,7 @@ import org.osgi.framework.BundleContext;
 public class CFGActivator extends AbstractUIPlugin implements BundleActivator {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "de.upb.lina.cfgwizard"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "de.upb.lina.cfg.tools"; //$NON-NLS-1$
 
 	// The shared instance
 	private static CFGActivator plugin;

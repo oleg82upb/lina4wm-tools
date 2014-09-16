@@ -1,4 +1,4 @@
-package de.upb.lina.cfgwizard.wizards;
+package de.upb.lina.cfg.tools.wizards;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -25,8 +25,8 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.XMLMemento;
 
-import de.upb.lina.cfgwizard.CFGActivator;
-import de.upb.lina.cfgwizard.CFGWorkspaceOperation;
+import de.upb.lina.cfg.tools.CFGActivator;
+import de.upb.lina.cfg.tools.CFGWorkspaceOperation;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
 /**
@@ -200,7 +200,7 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	// }
 	//
 	// private void throwCoreException(String message) throws CoreException {
-	// IStatus status = new Status(IStatus.ERROR, "de.upb.lina.cfgwizard",
+	// IStatus status = new Status(IStatus.ERROR, "de.upb.lina.cfg.tools",
 	// IStatus.OK, message, null);
 	// throw new CoreException(status);
 	// }
