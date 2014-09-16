@@ -26,13 +26,16 @@ public class ControlflowFactoryImpl extends EFactoryImpl implements ControlflowF
 	 * @generated
 	 */
 	public static ControlflowFactory init() {
-		try {
+		try
+		{
 			ControlflowFactory theControlflowFactory = (ControlflowFactory)EPackage.Registry.INSTANCE.getEFactory(ControlflowPackage.eNS_URI);
-			if (theControlflowFactory != null) {
+			if (theControlflowFactory != null)
+			{
 				return theControlflowFactory;
 			}
 		}
-		catch (Exception exception) {
+		catch (Exception exception)
+		{
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new ControlflowFactoryImpl();
@@ -55,7 +58,8 @@ public class ControlflowFactoryImpl extends EFactoryImpl implements ControlflowF
 	 */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
+		switch (eClass.getClassifierID())
+		{
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM: return createControlFlowDiagram();
 			case ControlflowPackage.CONTROL_FLOW_LOCATION: return createControlFlowLocation();
 			case ControlflowPackage.TRANSITION: return createTransition();

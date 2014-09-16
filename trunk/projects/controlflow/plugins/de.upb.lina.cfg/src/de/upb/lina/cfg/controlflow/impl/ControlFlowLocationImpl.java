@@ -80,7 +80,7 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	protected EList<Transition> outgoing;
 
 	/**
-	 * The cached value of the '{@link #getBuffer() <em>Buffer</em>}' reference.
+	 * The cached value of the '{@link #getBuffer() <em>Buffer</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getBuffer()
@@ -155,7 +155,8 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 * @generated
 	 */
 	public void setDiagram(ControlFlowDiagram newDiagram) {
-		if (newDiagram != eInternalContainer() || (eContainerFeatureID() != ControlflowPackage.CONTROL_FLOW_LOCATION__DIAGRAM && newDiagram != null)) {
+		if (newDiagram != eInternalContainer() || (eContainerFeatureID() != ControlflowPackage.CONTROL_FLOW_LOCATION__DIAGRAM && newDiagram != null))
+		{
 			if (EcoreUtil.isAncestor(this, newDiagram))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -176,7 +177,8 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 * @generated
 	 */
 	public EList<Transition> getIncoming() {
-		if (incoming == null) {
+		if (incoming == null)
+		{
 			incoming = new EObjectWithInverseResolvingEList<Transition>(Transition.class, this, ControlflowPackage.CONTROL_FLOW_LOCATION__INCOMING, ControlflowPackage.TRANSITION__TARGET);
 		}
 		return incoming;
@@ -188,7 +190,8 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 * @generated
 	 */
 	public EList<Transition> getOutgoing() {
-		if (outgoing == null) {
+		if (outgoing == null)
+		{
 			outgoing = new EObjectWithInverseResolvingEList<Transition>(Transition.class, this, ControlflowPackage.CONTROL_FLOW_LOCATION__OUTGOING, ControlflowPackage.TRANSITION__SOURCE);
 		}
 		return outgoing;
@@ -200,14 +203,6 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 * @generated
 	 */
 	public StoreBuffer getBuffer() {
-		if (buffer != null && buffer.eIsProxy()) {
-			InternalEObject oldBuffer = (InternalEObject)buffer;
-			buffer = (StoreBuffer)eResolveProxy(oldBuffer);
-			if (buffer != oldBuffer) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ControlflowPackage.CONTROL_FLOW_LOCATION__BUFFER, oldBuffer, buffer));
-			}
-		}
 		return buffer;
 	}
 
@@ -216,8 +211,16 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StoreBuffer basicGetBuffer() {
-		return buffer;
+	public NotificationChain basicSetBuffer(StoreBuffer newBuffer, NotificationChain msgs)
+	{
+		StoreBuffer oldBuffer = buffer;
+		buffer = newBuffer;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ControlflowPackage.CONTROL_FLOW_LOCATION__BUFFER, oldBuffer, newBuffer);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -226,10 +229,18 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 * @generated
 	 */
 	public void setBuffer(StoreBuffer newBuffer) {
-		StoreBuffer oldBuffer = buffer;
-		buffer = newBuffer;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ControlflowPackage.CONTROL_FLOW_LOCATION__BUFFER, oldBuffer, buffer));
+		if (newBuffer != buffer)
+		{
+			NotificationChain msgs = null;
+			if (buffer != null)
+				msgs = ((InternalEObject)buffer).eInverseRemove(this, ControlflowPackage.STORE_BUFFER__LOCATION, StoreBuffer.class, msgs);
+			if (newBuffer != null)
+				msgs = ((InternalEObject)newBuffer).eInverseAdd(this, ControlflowPackage.STORE_BUFFER__LOCATION, StoreBuffer.class, msgs);
+			msgs = basicSetBuffer(newBuffer, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ControlflowPackage.CONTROL_FLOW_LOCATION__BUFFER, newBuffer, newBuffer));
 	}
 
 	/**
@@ -240,7 +251,8 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__DIAGRAM:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -249,6 +261,10 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncoming()).basicAdd(otherEnd, msgs);
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__OUTGOING:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoing()).basicAdd(otherEnd, msgs);
+			case ControlflowPackage.CONTROL_FLOW_LOCATION__BUFFER:
+				if (buffer != null)
+					msgs = ((InternalEObject)buffer).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ControlflowPackage.CONTROL_FLOW_LOCATION__BUFFER, null, msgs);
+				return basicSetBuffer((StoreBuffer)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -260,13 +276,16 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__DIAGRAM:
 				return basicSetDiagram(null, msgs);
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__INCOMING:
 				return ((InternalEList<?>)getIncoming()).basicRemove(otherEnd, msgs);
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__OUTGOING:
 				return ((InternalEList<?>)getOutgoing()).basicRemove(otherEnd, msgs);
+			case ControlflowPackage.CONTROL_FLOW_LOCATION__BUFFER:
+				return basicSetBuffer(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -278,7 +297,8 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
+		switch (eContainerFeatureID())
+		{
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__DIAGRAM:
 				return eInternalContainer().eInverseRemove(this, ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCATIONS, ControlFlowDiagram.class, msgs);
 		}
@@ -292,7 +312,8 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__PC:
 				return getPc();
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__DIAGRAM:
@@ -302,8 +323,7 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__OUTGOING:
 				return getOutgoing();
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__BUFFER:
-				if (resolve) return getBuffer();
-				return basicGetBuffer();
+				return getBuffer();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -316,7 +336,8 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__PC:
 				setPc((Integer)newValue);
 				return;
@@ -345,7 +366,8 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__PC:
 				setPc(PC_EDEFAULT);
 				return;
@@ -372,7 +394,8 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__PC:
 				return pc != PC_EDEFAULT;
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__DIAGRAM:
