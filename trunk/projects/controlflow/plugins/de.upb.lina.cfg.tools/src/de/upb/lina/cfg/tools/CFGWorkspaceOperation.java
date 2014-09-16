@@ -1,4 +1,4 @@
-package de.upb.lina.cfgwizard;
+package de.upb.lina.cfg.tools;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

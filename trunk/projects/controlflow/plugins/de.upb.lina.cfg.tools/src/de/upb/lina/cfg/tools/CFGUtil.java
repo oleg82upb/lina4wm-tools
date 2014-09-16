@@ -1,4 +1,4 @@
-package de.upb.lina.cfgwizard;
+package de.upb.lina.cfg.tools;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package de.upb.lina.cfgwizard;
+package de.upb.lina.cfg.tools;
 
 import de.upb.llvm_parser.llvm.Constant;
 import de.upb.llvm_parser.llvm.LlvmPackage;

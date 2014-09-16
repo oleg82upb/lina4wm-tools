@@ -6,14 +6,14 @@
          point="org.eclipse.ui.newWizards">
       <category
             name="Lina Wizards"
-            id="de.upb.lina.cfgwizard">
+            id="de.upb.lina.cfg.tools">
       </category>
       <wizard
             name="New ControlFlowGraph"
             icon="icons/sample.gif"
-            category="de.upb.lina.cfgwizard"
-            class="de.upb.lina.cfgwizard.wizards.NewCfgWizard"
-            id="de.upb.lina.cfgwizard.wizards.NewCfgWizard">
+            category="de.upb.lina.cfg.tools"
+            class="de.upb.lina.cfg.tools.wizards.NewCfgWizard"
+            id="de.upb.lina.cfg.tools.wizards.NewCfgWizard">
       </wizard>
    </extension>
 </plugin>
