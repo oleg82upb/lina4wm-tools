@@ -33,11 +33,13 @@
     </genClasses>
     <genClasses ecoreClass="ControlFlow.ecore#//FlushTransition"/>
     <genClasses ecoreClass="ControlFlow.ecore#//AddressValuePair">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//AddressValuePair/memAddress"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//AddressValuePair/memValue"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//AddressValuePair/address"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//AddressValuePair/value"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ControlFlow.ecore#//AddressValuePair/storeBuffer"/>
     </genClasses>
     <genClasses ecoreClass="ControlFlow.ecore#//StoreBuffer">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//StoreBuffer/buffer"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//StoreBuffer/addressValuePairs"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ControlFlow.ecore#//StoreBuffer/location"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
