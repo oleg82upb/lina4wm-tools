@@ -2,6 +2,7 @@ package de.upb.lina.cfg.tools;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -128,7 +129,6 @@ public class ReorderingUtil {
 					//
 				}
 			}
-			//System.out.println(toBeProcessed.size());
 			//last
 			toBeProcessed.remove(0);
 		}
@@ -152,12 +152,15 @@ public class ReorderingUtil {
 				ControlFlowLocation trueLocation = createControlFlowLocation(cfg, pcInt, createStoreBuffer(toExplore.getBuffer(), getInstructionWithLabel(function, branch.getDestination().substring(1))));
 				trueCase.setSource(toExplore);
 				trueCase.setTarget(trueLocation);
+				trueCase.setCondition("["+ valueToString(branch.getCondition()) + "]");
+                
 				trueCase.setDiagram(cfg);
 				
 				ControlFlowLocation falseLocation = createControlFlowLocation(cfg, pcInt, createStoreBuffer(toExplore.getBuffer(), getInstructionWithLabel(function, branch.getDestination().substring(1))));
 				GuardedTransition falseCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
 				falseCase.setSource(toExplore);
 				falseCase.setTarget(falseLocation);
+				falseCase.setCondition("[else]");
 				falseCase.setDiagram(cfg);
 				
 				if(!toBeProcessed.contains(trueLocation)){
@@ -246,7 +249,7 @@ public class ReorderingUtil {
 	private ControlFlowLocation createControlFlowLocation(
 			ControlFlowDiagram diag, int pc, StoreBuffer buffer) {
 		for(ControlFlowLocation l: diag.getLocations()){
-			if(l.getPc() == pc && l.getBuffer().getAddressValuePairs().equals(buffer.getAddressValuePairs())){
+			if(isCorrectLocation(l, pc, buffer)){
 				return l;
 			}
 		}
@@ -256,6 +259,60 @@ public class ReorderingUtil {
 		loc.setPc(pc);
 		loc.setDiagram(diag);
 		return loc;
+	}
+	
+	private boolean isCorrectLocation(ControlFlowLocation l, int pc, StoreBuffer buffer){
+		if(l.getPc() == pc){
+			EList<AddressValuePair>pairsOfLocation = l.getBuffer().getAddressValuePairs();
+			EList<AddressValuePair>pairsOfCreatedBuffer = buffer.getAddressValuePairs();
+			if(pairsOfLocation.size() != pairsOfCreatedBuffer.size()){
+				return false;
+			}
+			for(AddressValuePair p: pairsOfCreatedBuffer){
+				for(AddressValuePair p2: pairsOfLocation){
+					Comparator<AddressValuePair> comparator = new Comparator<AddressValuePair>() {
+
+						@Override
+						public int compare(AddressValuePair o1, AddressValuePair o2) {
+							if(addValue(o1.getAddress().getValue()).compareToIgnoreCase(addValue(o2.getAddress().getValue())) != 0){
+									
+								return -2;
+							}
+							
+							if(addValue(o1.getValue().getValue()).compareToIgnoreCase(addValue(o2.getValue().getValue()))!= 0){
+								return 2;
+							}
+							
+							return 0;
+						}
+						
+						private String addValue(Value value) {
+							String result = "";
+							
+							if(value instanceof AddressUseImpl){
+								AddressUseImpl aui = (AddressUseImpl)value;
+								result +=aui.getAddress().getName();
+							}
+
+							else if (value.eClass().equals(LlvmPackage.eINSTANCE.getConstant())) {
+								Constant constant = (Constant) value;
+								result += constant.getValue();
+							}
+							
+							return (result);
+						}
+						
+					};
+					
+					if(comparator.compare(p, p2) != 0){
+						return false;
+					}
+				}
+			}
+		}else{
+			return false;
+		}
+		return true;
 	}
 
 	/**
