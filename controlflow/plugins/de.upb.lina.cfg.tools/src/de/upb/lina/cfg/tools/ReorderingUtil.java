@@ -35,6 +35,9 @@ public class ReorderingUtil {
 	private List<ControlFlowLocation> createdLocs = new ArrayList<ControlFlowLocation>();
 	private List<Transition> createdTransitions = new ArrayList<Transition>();
 	private List<Instruction> instructions = new ArrayList<Instruction>();
+	private List<ControlFlowLocation> processed = new ArrayList<ControlFlowLocation>();
+	
+	
 	
 	private FunctionDefinition function;
 
@@ -59,6 +62,7 @@ public class ReorderingUtil {
 
 		cfg.setName(function.getAddress().getName());
 		List<ControlFlowLocation> toBeProcessed = new ArrayList<ControlFlowLocation>();
+		processed = new ArrayList<ControlFlowLocation>();
 
 
 		EList<BasicBlock> blocks = function.getBody().getBlocks();
@@ -105,7 +109,7 @@ public class ReorderingUtil {
 						transition.setTarget(nextLocation);
 						last = nextLocation;
 					}
-					if(!toBeProcessed.contains(last)){
+					if(!isInList(toBeProcessed,last) && !isInList(processed,last)){
 						toBeProcessed.add(last);	
 					}
 				}else{
@@ -116,7 +120,7 @@ public class ReorderingUtil {
 					Transition transition = createFlushTransition(cfg);
 					transition.setSource(toExplore);
 					transition.setTarget(flushLocation);
-					if(!toBeProcessed.contains(flushLocation)){
+					if(!isInList(toBeProcessed,flushLocation) && !isInList(processed,flushLocation)){
 						toBeProcessed.add(flushLocation);
 					}
 
@@ -130,7 +134,9 @@ public class ReorderingUtil {
 				}
 			}
 			//last
+			ControlFlowLocation lastProcessed = toBeProcessed.get(0);
 			toBeProcessed.remove(0);
+			processed.add(lastProcessed);
 		}
 		
 		return cfg;
@@ -148,25 +154,29 @@ public class ReorderingUtil {
 			//no jump, real branch
 			if(branch.getElseDestination() != null){
 				GuardedTransition trueCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
-				int pcInt = toExplore.getPc()+1;
-				ControlFlowLocation trueLocation = createControlFlowLocation(cfg, pcInt, createStoreBuffer(toExplore.getBuffer(), getInstructionWithLabel(function, branch.getDestination().substring(1))));
+				
+				Instruction trueInstruction = getInstructionWithLabel(function, branch.getDestination().substring(1));
+				ControlFlowLocation trueLocation = createControlFlowLocation(cfg, getPcOfInstruction(trueInstruction), createStoreBuffer(toExplore.getBuffer(), trueInstruction));
 				trueCase.setSource(toExplore);
 				trueCase.setTarget(trueLocation);
+				trueCase.setInstruction(branch);
 				trueCase.setCondition("["+ valueToString(branch.getCondition()) + "]");
                 
 				trueCase.setDiagram(cfg);
 				
-				ControlFlowLocation falseLocation = createControlFlowLocation(cfg, pcInt, createStoreBuffer(toExplore.getBuffer(), getInstructionWithLabel(function, branch.getDestination().substring(1))));
+				Instruction elseInstruction = getInstructionWithLabel(function, branch.getElseDestination().substring(1));
+				ControlFlowLocation falseLocation = createControlFlowLocation(cfg, getPcOfInstruction(elseInstruction), createStoreBuffer(toExplore.getBuffer(), elseInstruction));
 				GuardedTransition falseCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
 				falseCase.setSource(toExplore);
 				falseCase.setTarget(falseLocation);
+				falseCase.setInstruction(branch);
 				falseCase.setCondition("[else]");
 				falseCase.setDiagram(cfg);
 				
-				if(!toBeProcessed.contains(trueLocation)){
+				if(!isInList(toBeProcessed,trueLocation) && !isInList(processed,trueLocation)){
 					toBeProcessed.add(trueLocation);
 				}
-				if(!toBeProcessed.contains(falseLocation)){
+				if(!isInList(toBeProcessed,falseLocation) && !isInList(processed,falseLocation)){
 					toBeProcessed.add(falseLocation);
 				}
 			}
@@ -175,10 +185,11 @@ public class ReorderingUtil {
 				//THIS SHIT MAKES PROBLEMS!!!!11111
 				//tobeProcessed becomes fuller and fuller and i do not know why yet
 				Transition t = createTransition(cfg, nextInstruction);
-				ControlFlowLocation nextLocation = createControlFlowLocation(cfg, toExplore.getPc()+1, createStoreBuffer(toExplore.getBuffer(), nextInstruction));
+				Instruction trueInstruction = getInstructionWithLabel(function, branch.getDestination().substring(1));
+				ControlFlowLocation nextLocation = createControlFlowLocation(cfg, getPcOfInstruction(trueInstruction), createStoreBuffer(toExplore.getBuffer(), nextInstruction));
 				t.setSource(toExplore);
 				t.setTarget(nextLocation);
-				if(!toBeProcessed.contains(nextLocation)){
+				if(!isInList(toBeProcessed,nextLocation) && !isInList(processed,nextLocation)){
 					toBeProcessed.add(nextLocation);
 				}
 			}
@@ -191,10 +202,21 @@ public class ReorderingUtil {
 			ControlFlowLocation nextLocation = createControlFlowLocation(cfg, toExplore.getPc()+1, createStoreBuffer(toExplore.getBuffer(), nextInstruction));
 			t.setSource(toExplore);
 			t.setTarget(nextLocation);
-			if(!toBeProcessed.contains(nextLocation)){
+			if(!isInList(toBeProcessed,nextLocation) && !isInList(processed,nextLocation)){
 				toBeProcessed.add(nextLocation);
 			}
 		}
+	}
+	
+	public int getPcOfInstruction(Instruction instruction){
+		for(int i = 0; i<instructions.size(); i++){
+			Instruction inst = instructions.get(i);
+			if(inst.equals(instruction)){
+				return i;
+			}
+		}
+		
+		return -1;
 	}
 
 	//TODO: Add other synching instructions
@@ -217,7 +239,7 @@ public class ReorderingUtil {
 			AddressValuePair newPair = ControlflowFactory.eINSTANCE.createAddressValuePair();
 			newPair.setAddress(store.getTargetAddress());
 			newPair.setValue(store.getValue());
-			if(!buffer.getAddressValuePairs().contains(newPair)){
+			if(!isAVPInList(buffer.getAddressValuePairs(), newPair)){
 				buffer.getAddressValuePairs().add(newPair);
 			}
 
@@ -399,5 +421,57 @@ public class ReorderingUtil {
 			return aui.getAddress().getName();
 		}
 		return value.toString();
+	}
+	
+	private boolean isInList(List<ControlFlowLocation> list, ControlFlowLocation location){
+		for(ControlFlowLocation loc: list){
+			if(isCorrectLocation(location, loc.getPc(), loc.getBuffer())){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean isAVPInList(List<AddressValuePair> list, AddressValuePair pair){
+		Comparator<AddressValuePair> comparator = new Comparator<AddressValuePair>() {
+
+			@Override
+			public int compare(AddressValuePair o1, AddressValuePair o2) {
+				if(addValue(o1.getAddress().getValue()).compareToIgnoreCase(addValue(o2.getAddress().getValue())) != 0){
+						
+					return -2;
+				}
+				
+				if(addValue(o1.getValue().getValue()).compareToIgnoreCase(addValue(o2.getValue().getValue()))!= 0){
+					return 2;
+				}
+				
+				return 0;
+			}
+			
+			private String addValue(Value value) {
+				String result = "";
+				
+				if(value instanceof AddressUseImpl){
+					AddressUseImpl aui = (AddressUseImpl)value;
+					result +=aui.getAddress().getName();
+				}
+
+				else if (value.eClass().equals(LlvmPackage.eINSTANCE.getConstant())) {
+					Constant constant = (Constant) value;
+					result += constant.getValue();
+				}
+				
+				return (result);
+			}
+			
+		};
+		
+		for(AddressValuePair p: list){
+			if(comparator.compare(p, pair) == 0){
+				return true;
+			}
+		}
+		return false;
 	}
 }

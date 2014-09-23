@@ -149,33 +149,6 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 				location = nextLocation;
 			}
 		}
-		//END OF CORRECT
-		
-		//Reachibility Graph
-//		createReachabilityGraph(function, pc, cfg);
-		
-		//output
-//		for(ControlFlowLocation loc: buffers.keySet()){
-//			System.out.println("Location: "+ loc.getPc());
-//			for(BufferPair pair: buffers.get(loc).getBuffer()){
-//				System.out.println(pair.toString());
-//			}
-//			System.out.println("----------------------");
-//		}
-//		
-
-		//TODO: fix this (find out how)
-		// if (type.equals(LlvmPackage.eINSTANCE.getIndirectBranch()))
-		// {
-		// for (int i = 0; i < ((IndirectBranch) instr).getLabels().size(); i++)
-		// {
-		// GuardedTransition jump = createGuardedTransition(cfg, instr);
-		// jump.setCondition(valueToString(((IndirectBranch) instr).getAdress())
-		// + valueToString(((IndirectBranch) instr).getLabels().get(i)));
-		// location.getOutgoing().add(jump);
-		// jump.setSource(location);
-		// }
-		// }
 
 		ArrayList<Transition> newTransitions = new ArrayList<Transition>();
 		for (Transition t : cfg.getTransitions()) {
