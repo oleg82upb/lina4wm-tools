@@ -59,7 +59,7 @@ public class CustomControlFlowLocationPcEditPart extends ControlFlowLocationPcEd
 			result += constant.getValue();
 		}
 		
-		return (result + ",");
+		return (result);
 	}
 	
 	
