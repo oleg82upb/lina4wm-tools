@@ -33,7 +33,7 @@ public class CustomControlFlowLocationPcEditPart extends ControlFlowLocationPcEd
 	@Override
 	protected String getLabelText()
 	{
-		String label = "PC: "+super.getLabelText()+ " Buffer: [";
+		String label = "PC:"+super.getLabelText()+ " <";
 		ControlFlowLocation loc = (ControlFlowLocation)view.getElement();
 		System.out.println(loc.getBuffer());
 		if(loc.getBuffer() != null){
@@ -41,7 +41,7 @@ public class CustomControlFlowLocationPcEditPart extends ControlFlowLocationPcEd
 				label += "(" + addValue(pair.getAddress().getValue()) + ", " + addValue(pair.getValue().getValue())+")";
 			}
 		}
-		label += "]";
+		label += ">";
 		return label;
 	}
 	
