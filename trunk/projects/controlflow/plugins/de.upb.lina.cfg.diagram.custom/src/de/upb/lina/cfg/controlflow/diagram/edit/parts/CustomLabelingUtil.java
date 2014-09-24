@@ -3,6 +3,7 @@ package de.upb.lina.cfg.controlflow.diagram.edit.parts;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
+import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.controlflow.FlushTransition;
 import de.upb.lina.cfg.controlflow.GuardedTransition;
@@ -45,11 +46,17 @@ public class CustomLabelingUtil {
 		String result = "";
 		
 		EClass transTyp = t.eClass();
-		if(transTyp.equals(ControlflowPackage.eINSTANCE.getFlushTransition())){
-			return "flush";
-		}
 		
 		if(t instanceof FlushTransition){
+			
+			if(!t.getSource().getBuffer().getAddressValuePairs().isEmpty())
+			{
+				AddressValuePair p = t.getSource().getBuffer().getAddressValuePairs().get(0);
+				String s = addValue(p.getAddress());
+				s +=  "," + addValue(p.getValue());
+				return "flush(" + s + ")";
+			}
+			
 			return "flush";
 		}
 		
