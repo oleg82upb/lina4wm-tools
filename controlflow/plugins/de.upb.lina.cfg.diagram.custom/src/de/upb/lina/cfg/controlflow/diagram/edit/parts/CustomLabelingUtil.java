@@ -4,7 +4,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 import de.upb.lina.cfg.controlflow.AddressValuePair;
-import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.controlflow.FlushTransition;
 import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.Transition;
@@ -26,7 +25,10 @@ import de.upb.llvm_parser.llvm.Load;
 import de.upb.llvm_parser.llvm.LogicOperation;
 import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.ParameterList;
+import de.upb.llvm_parser.llvm.Phi;
+import de.upb.llvm_parser.llvm.PhiCase;
 import de.upb.llvm_parser.llvm.Predefined;
+import de.upb.llvm_parser.llvm.PrimitiveValue;
 import de.upb.llvm_parser.llvm.Return;
 import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.Value;
@@ -323,6 +325,15 @@ public class CustomLabelingUtil {
                         result += addValue(instr.getArgument());
                 }
                 result += " )";
+        //phi
+        }else if(type.equals(LlvmPackage.eINSTANCE.getPhi())){
+        	Phi phiInstruction = (Phi)t.getInstruction();
+        	result += "phi(";
+        	for(PhiCase phiCase: phiInstruction.getCases()){
+        		result+= "[" + addValue(phiCase.getValue()) + ", " + phiCase.getLabel() + "], ";
+        	}
+        	result += ")";
+        	
         }
         // not-implemented
         else {
@@ -381,6 +392,11 @@ public class CustomLabelingUtil {
 		else if (value.eClass().equals(LlvmPackage.eINSTANCE.getConstant())) {
 			Constant constant = (Constant) value;
 			result += constant.getValue();
+		}
+		
+		else if(value.eClass().equals(LlvmPackage.eINSTANCE.getPrimitiveValue())){
+			PrimitiveValue val = (PrimitiveValue)value;
+			result += val.getValue();
 		}
 		
 		return (result + " ");
