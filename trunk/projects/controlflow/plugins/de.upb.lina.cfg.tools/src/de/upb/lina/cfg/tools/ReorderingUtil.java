@@ -32,8 +32,8 @@ import de.upb.llvm_parser.llvm.Value;
 import de.upb.llvm_parser.llvm.impl.AddressUseImpl;
 
 public class ReorderingUtil {
-	private List<ControlFlowLocation> createdLocs = new ArrayList<ControlFlowLocation>();
-	private List<Transition> createdTransitions = new ArrayList<Transition>();
+//	private List<ControlFlowLocation> createdLocs = new ArrayList<ControlFlowLocation>();
+//	private List<Transition> createdTransitions = new ArrayList<Transition>();
 	private List<Instruction> instructions = new ArrayList<Instruction>();
 	private List<ControlFlowLocation> processed = new ArrayList<ControlFlowLocation>();
 	
@@ -41,16 +41,16 @@ public class ReorderingUtil {
 	
 	private FunctionDefinition function;
 
-	public void addTSO(ArrayList<ControlFlowDiagram> list) {
-//		for (ControlFlowDiagram cfg : list) {
-//			ControlFlowLocation start = cfg.getStart();
-//			Set<Transition> may = new TreeSet<Transition>();
-//			ControlFlowLocation act = start;
-//			while (!act.getOutgoing().isEmpty()) {
-//
-//			}
-//		}
-	}
+//	public void addTSO(ArrayList<ControlFlowDiagram> list) {
+////		for (ControlFlowDiagram cfg : list) {
+////			ControlFlowLocation start = cfg.getStart();
+////			Set<Transition> may = new TreeSet<Transition>();
+////			ControlFlowLocation act = start;
+////			while (!act.getOutgoing().isEmpty()) {
+////
+////			}
+////		}
+//	}
 
 
 	public ControlFlowDiagram createReachibilityGraph(FunctionDefinition function){
@@ -71,7 +71,6 @@ public class ReorderingUtil {
 				instructions.add(i);
 			}
 		}
-		//System.out.println(instructions.size());
 
 		//first node
 		ControlFlowLocation location = createControlFlowLocation(cfg, pc.next(), ControlflowFactory.eINSTANCE.createStoreBuffer());
@@ -97,23 +96,40 @@ public class ReorderingUtil {
 					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction);
 				}
 
-				//buffer with entries
+			//buffer with entries
 			}else{
-				//if its synching just do x flushes
+				//if its synching or at the end just do x flushes
 				if(nextInstruction == null || isSynch(nextInstruction)){
 					ControlFlowLocation last = toExplore;
-					for(int i =0; i<toExplore.getBuffer().getAddressValuePairs().size(); i++){
-						ControlFlowLocation nextLocation = createControlFlowLocation(cfg, toExplore.getPc(), createFlushedStoreBuffer(last.getBuffer()));
-						Transition transition = createFlushTransition(cfg);
-						transition.setSource(last);
-						transition.setTarget(nextLocation);
-						last = nextLocation;
+					
+//					for(int i =0; i<toExplore.getBuffer().getAddressValuePairs().size(); i++){
+//						ControlFlowLocation nextLocation = createControlFlowLocation(cfg, toExplore.getPc(), createFlushedStoreBuffer(last.getBuffer()));
+//						Transition transition = createFlushTransition(cfg);
+//						transition.setSource(last);
+//						transition.setTarget(nextLocation);
+//						last = nextLocation;
+//					}
+					
+					//if there are no new instructions coming we are at the end
+//					if(nextInstruction != null){
+//						if(!isInList(toBeProcessed,last) && !isInList(processed,last)){
+//							toBeProcessed.add(last);	
+//						}
+//					}
+					
+					ControlFlowLocation nextLocation = createControlFlowLocation(cfg, toExplore.getPc(), createFlushedStoreBuffer(last.getBuffer()));
+					Transition transition = createFlushTransition(cfg);
+					transition.setSource(last);
+					transition.setTarget(nextLocation);
+					
+					if(!isInList(toBeProcessed,nextLocation) && !isInList(processed,nextLocation)){
+						toBeProcessed.add(nextLocation);	
 					}
-					if(!isInList(toBeProcessed,last) && !isInList(processed,last)){
-						toBeProcessed.add(last);	
-					}
+					
+					
+
+				//not synching -> we have to implement SC and possible flush
 				}else{
-					//TODO: see if we have to flush anyway as we read a var that is not flushed yet
 
 					//flush transition
 					ControlFlowLocation flushLocation = createControlFlowLocation(cfg, toExplore.getPc(), createFlushedStoreBuffer(toExplore.getBuffer()));
@@ -124,10 +140,8 @@ public class ReorderingUtil {
 						toBeProcessed.add(flushLocation);
 					}
 
-					//other options
-					if(nextInstruction != null){
-						addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction);
-					}
+					//other options -SC
+					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction);
 
 
 					//
@@ -180,13 +194,14 @@ public class ReorderingUtil {
 					toBeProcessed.add(falseLocation);
 				}
 			}
-				
+			
+			//jump
 			if(branch.getDestination() != null && branch.getElseDestination() == null){
 				//THIS SHIT MAKES PROBLEMS!!!!11111
 				//tobeProcessed becomes fuller and fuller and i do not know why yet
-				Transition t = createTransition(cfg, nextInstruction);
+				Transition t = createTransition(cfg, branch);
 				Instruction trueInstruction = getInstructionWithLabel(function, branch.getDestination().substring(1));
-				ControlFlowLocation nextLocation = createControlFlowLocation(cfg, getPcOfInstruction(trueInstruction), createStoreBuffer(toExplore.getBuffer(), nextInstruction));
+				ControlFlowLocation nextLocation = createControlFlowLocation(cfg, getPcOfInstruction(trueInstruction), createStoreBuffer(toExplore.getBuffer(), branch));
 				t.setSource(toExplore);
 				t.setTarget(nextLocation);
 				if(!isInList(toBeProcessed,nextLocation) && !isInList(processed,nextLocation)){
