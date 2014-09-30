@@ -89,22 +89,6 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 				}
 			}
 
-//			// generating cfg for each function
-//			for (int i = 0; i < a_elem; i++) {
-//				if (ast.getElements().get(i) instanceof FunctionDefinitionImpl) {
-//					if (((FunctionDefinition) ast.getElements().get(i))
-//							.getBody() != null)
-//						list.add(createCFG((FunctionDefinition) ast
-//								.getElements().get(i)));
-//				}
-//			}
-
-//			// adding TSO control flow
-//			ReorderingUtil rutil = new ReorderingUtil();
-//			if (reordering == 1) {
-//				rutil.addTSO(list);
-//			}
-
 			// store resulting cfg
 			ResourceSet resSet = new ResourceSetImpl();
 			Resource resource = resSet.createResource(URI.createURI(cfgpath
@@ -163,37 +147,6 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 				
 				
 				if (br.getElseDestination() != null) {
-					
-//					// replace transition with guarded
-//					GuardedTransition trueCase = ControlflowFactory.eINSTANCE
-//							.createGuardedTransition();
-//					trueCase.setInstruction(t.getInstruction());
-//					GuardedTransition elseCase = ControlflowFactory.eINSTANCE
-//							.createGuardedTransition();
-//					elseCase.setInstruction(t.getInstruction());
-//					newTransitions.add(trueCase);
-//					newTransitions.add(elseCase);
-//
-//					Transition equalCalc = t.getSource().getIncoming().get(0);
-//					
-//					trueCase.setSource(equalCalc.getSource());
-//					elseCase.setSource(equalCalc.getSource());
-//					
-//					//TODO: FIX THIS, this is still wrong...
-//					//delete the source of the compare transition
-//					trueCase.setCondition("["+getLabelWithInstruction(function, br) +"]");
-//					t.
-//					
-//					//trueCase.setCondition("["+ valueToString(br.getCondition()) + "]");
-//					elseCase.setCondition("[else]");
-//					t.setSource(null);
-//					t.setTarget(null);
-//
-//					
-//					trueCase.setTarget(findLabeledLocation(cfg, function, br
-//							.getDestination().substring(1)));
-//					elseCase.setTarget(findLabeledLocation(cfg, function, br
-//							.getElseDestination().substring(1)));
 					
 					 // replace transition with guarded
                     GuardedTransition trueCase = ControlflowFactory.eINSTANCE
@@ -319,72 +272,6 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 		}
 	}
 	
-	public void seq(List<Instruction> instructions, FunctionDefinition def){
-		//empty list
-		if(instructions.size() <1){
-			return;
-		}
-		Instruction first = instructions.get(0);
-		instructions.remove(first);
-		
-		
-		if(instructions.size() == 1 ){
-			//ret
-			if(first.eClass().equals(LlvmPackage.eINSTANCE.getReturn())){
-				//do nothing, already created
-				return;
-			}
-		}
-		
-		//write
-		if(first.eClass().equals(LlvmPackage.eINSTANCE.getStore())){
-			ArrayList<Instruction> writeSeq = new ArrayList<Instruction>();
-			writeSeq.add(first);
-			del(def ,writeSeq, instructions);
-			
-		//branch	
-		}else if(first.eClass().equals(LlvmPackage.eINSTANCE.getBranch())){
-			Branch branch = (Branch)first;
-			Instruction ifInstruction = getInstructionWithLabel(def,branch.getDestination().substring(1));
-			Instruction elseInstruction = getInstructionWithLabel(def,branch.getElseDestination().substring(1));
-			
-			//if part
-			ArrayList<Instruction> ifCopy = new ArrayList<Instruction>(instructions.size());
-			Collections.copy(ifCopy, instructions);		
-			for(int i = 0; !ifCopy.get(i).equals(ifInstruction); i++){
-				ifCopy.remove(i);
-			}
-			seq(ifCopy, def);
-			
-			//else part
-			ArrayList<Instruction> elseCopy = new ArrayList<Instruction>(instructions.size());
-			Collections.copy(ifCopy, instructions);
-			for(int i = 0; !ifCopy.get(i).equals(elseInstruction); i++){
-				elseCopy.remove(i);
-			}
-			seq(elseCopy, def);
-			
-			//LOOPS!!!!
-		//}else if(){
-		
-//		}
-					
-		}else{
-			//cmd-seq
-			//TODO create nodes accordingly
-		}
-		
-	}
-	
-	public void del(FunctionDefinition def , List<Instruction> writeSeq, List<Instruction> rest){
-		if(writeSeq.size()>0){
-//			flush(writeSeq, rest);
-//			prog(writeSeq, rest);
-		}else{
-			seq(rest, def);
-		}
-	}
-	
 	
 	public ArrayList<ControlFlowLocation> getAdjacentNodes(ControlFlowLocation l){
 		ArrayList<ControlFlowLocation> adjacents = new ArrayList<ControlFlowLocation>();
@@ -437,15 +324,6 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 		for (Transition t : cfg.getTransitions()) {
 			if (i.equals(t.getInstruction())) {
 				return t;
-			}
-		}
-		return null;
-	}
-	
-	private ControlFlowLocation findControlFlowLocation(int pc, Buffer buffer, ControlFlowDiagram cfg){
-		for(ControlFlowLocation l: cfg.getLocations()){
-			if(l.getPc() == pc && buffers.get(l).equals(buffer)){
-				return l;
 			}
 		}
 		return null;
@@ -508,70 +386,4 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 		}
 		return value.toString();
 	}
-	
-//	public void createReachabilityGraph(FunctionDefinition function, ProgramCounter pcc, ControlFlowDiagram cfgraph){
-//		ProgramCounter pc = pcc;
-//		ControlFlowDiagram cfg = cfgraph;
-////		ControlFlowDiagram cfg = ControlflowFactory.eINSTANCE
-////				.createControlFlowDiagram();
-////
-////		cfg.setName(function.getAddress().getName());
-//
-//		EList<BasicBlock> blocks = function.getBody().getBlocks();
-//		for (BasicBlock b : blocks) {
-//			ControlFlowLocation location = createControlFlowLocation(cfg, pc);
-//			//First location
-//			if (cfg.getStart() == null) {
-//				cfg.setStart(location);
-//				buffers.put(location, new Buffer());		
-//			}
-//			
-//			//correct
-//			for (Instruction instr : b.getInstructions()) {
-//				Transition t = createTransition(cfg, instr);
-//				//dealWithInstruction(instr);
-//				ControlFlowLocation nextLocation = createControlFlowLocation(
-//						cfg, pc);
-//				Buffer newBuffer = new Buffer(buffers.get(location));
-//				
-//				
-//				//store buffer
-//				if(instr.eClass().equals(LlvmPackage.eINSTANCE.getStore())){
-//					Store store = (Store)instr;
-//					newBuffer.addBufferPair(new BufferPair(store.getTargetAddress(), store.getValue()));
-//				}
-//				
-//				if(instr.eClass().equals(LlvmPackage.eINSTANCE.getLoad())){
-//					
-//				}
-//				
-//				//flushes?!
-////				if(instr.eClass().equals(LlvmPackage.eINSTANCE.get)){
-////					
-////				}
-//				
-//				buffers.put(nextLocation, newBuffer);
-//				t.setSource(location);
-//				t.setTarget(nextLocation);
-//				location = nextLocation;
-//			}
-//		}
-//	}
-	
-//	public ControlFlowLocation getNextLocation(Instruction instruct, ControlFlowLocation oldLocation, ProgramCounter pc, ControlFlowDiagram cfg){
-//		if(instruct.eClass().equals(LlvmPackage.eINSTANCE.getStore())){
-//			//TODO: NULL CHECK!!
-//			Buffer newBuffer = new Buffer(buffers.get(oldLocation));
-//			ControlFlowLocation next = findControlFlowLocation(pc.next(), newBuffer, cfg);
-//			if(next == null){
-//				next = createControlFlowLocation(cfg, pc);
-//				//Create edge accordinlgy
-//			}else{
-//				//Check if edge is already existing for some reason we do not know yet
-//			}
-//			
-//		}
-//		
-//		return null;
-//	}
 }
