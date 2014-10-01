@@ -9,22 +9,20 @@ import de.upb.lina.cfg.controlflow.diagram.providers.ControlFlowElementTypes;
 /**
  * @generated
  */
-public class TransitionItemSemanticEditPolicy extends ControlFlowBaseItemSemanticEditPolicy
-{
+public class TransitionItemSemanticEditPolicy extends
+		ControlFlowBaseItemSemanticEditPolicy {
 
 	/**
 	 * @generated
 	 */
-	public TransitionItemSemanticEditPolicy()
-	{
+	public TransitionItemSemanticEditPolicy() {
 		super(ControlFlowElementTypes.Transition_4001);
 	}
 
 	/**
 	 * @generated
 	 */
-	protected Command getDestroyElementCommand(DestroyElementRequest req)
-	{
+	protected Command getDestroyElementCommand(DestroyElementRequest req) {
 		return getGEFWrapper(new DestroyElementCommand(req));
 	}
 

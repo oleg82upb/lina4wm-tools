@@ -21,8 +21,7 @@ import de.upb.lina.cfg.controlflow.diagram.edit.policies.ControlFlowBaseItemSema
 /**
  * @generated
  */
-public class TransitionCreateCommand extends EditElementCommand
-{
+public class TransitionCreateCommand extends EditElementCommand {
 
 	/**
 	 * @generated
@@ -42,8 +41,8 @@ public class TransitionCreateCommand extends EditElementCommand
 	/**
 	 * @generated
 	 */
-	public TransitionCreateCommand(CreateRelationshipRequest request, EObject source, EObject target)
-	{
+	public TransitionCreateCommand(CreateRelationshipRequest request,
+			EObject source, EObject target) {
 		super(request.getLabel(), null, request);
 		this.source = source;
 		this.target = target;
@@ -53,41 +52,36 @@ public class TransitionCreateCommand extends EditElementCommand
 	/**
 	 * @generated
 	 */
-	public boolean canExecute()
-	{
-		if (source == null && target == null)
-		{
+	public boolean canExecute() {
+		if (source == null && target == null) {
 			return false;
 		}
-		if (source != null && false == source instanceof ControlFlowLocation)
-		{
+		if (source != null && false == source instanceof ControlFlowLocation) {
 			return false;
 		}
-		if (target != null && false == target instanceof ControlFlowLocation)
-		{
+		if (target != null && false == target instanceof ControlFlowLocation) {
 			return false;
 		}
-		if (getSource() == null)
-		{
+		if (getSource() == null) {
 			return true; // link creation is in progress; source is not defined yet
 		}
 		// target may be null here but it's possible to check constraint
-		if (getContainer() == null)
-		{
+		if (getContainer() == null) {
 			return false;
 		}
-		return ControlFlowBaseItemSemanticEditPolicy.getLinkConstraints().canCreateTransition_4001(getContainer(),
-				getSource(), getTarget());
+		return ControlFlowBaseItemSemanticEditPolicy.getLinkConstraints()
+				.canCreateTransition_4001(getContainer(), getSource(),
+						getTarget());
 	}
 
 	/**
 	 * @generated
 	 */
-	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException
-	{
-		if (!canExecute())
-		{
-			throw new ExecutionException("Invalid arguments in create link command"); //$NON-NLS-1$
+	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
+			IAdaptable info) throws ExecutionException {
+		if (!canExecute()) {
+			throw new ExecutionException(
+					"Invalid arguments in create link command"); //$NON-NLS-1$
 		}
 
 		Transition newElement = ControlflowFactory.eINSTANCE.createTransition();
@@ -103,18 +97,22 @@ public class TransitionCreateCommand extends EditElementCommand
 	/**
 	 * @generated
 	 */
-	protected void doConfigure(Transition newElement, IProgressMonitor monitor, IAdaptable info)
-			throws ExecutionException
-	{
-		IElementType elementType = ((CreateElementRequest) getRequest()).getElementType();
-		ConfigureRequest configureRequest = new ConfigureRequest(getEditingDomain(), newElement, elementType);
-		configureRequest.setClientContext(((CreateElementRequest) getRequest()).getClientContext());
+	protected void doConfigure(Transition newElement, IProgressMonitor monitor,
+			IAdaptable info) throws ExecutionException {
+		IElementType elementType = ((CreateElementRequest) getRequest())
+				.getElementType();
+		ConfigureRequest configureRequest = new ConfigureRequest(
+				getEditingDomain(), newElement, elementType);
+		configureRequest.setClientContext(((CreateElementRequest) getRequest())
+				.getClientContext());
 		configureRequest.addParameters(getRequest().getParameters());
-		configureRequest.setParameter(CreateRelationshipRequest.SOURCE, getSource());
-		configureRequest.setParameter(CreateRelationshipRequest.TARGET, getTarget());
-		ICommand configureCommand = elementType.getEditCommand(configureRequest);
-		if (configureCommand != null && configureCommand.canExecute())
-		{
+		configureRequest.setParameter(CreateRelationshipRequest.SOURCE,
+				getSource());
+		configureRequest.setParameter(CreateRelationshipRequest.TARGET,
+				getTarget());
+		ICommand configureCommand = elementType
+				.getEditCommand(configureRequest);
+		if (configureCommand != null && configureCommand.canExecute()) {
 			configureCommand.execute(monitor, info);
 		}
 	}
@@ -122,32 +120,28 @@ public class TransitionCreateCommand extends EditElementCommand
 	/**
 	 * @generated
 	 */
-	protected void setElementToEdit(EObject element)
-	{
+	protected void setElementToEdit(EObject element) {
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * @generated
 	 */
-	protected ControlFlowLocation getSource()
-	{
+	protected ControlFlowLocation getSource() {
 		return (ControlFlowLocation) source;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected ControlFlowLocation getTarget()
-	{
+	protected ControlFlowLocation getTarget() {
 		return (ControlFlowLocation) target;
 	}
 
 	/**
 	 * @generated
 	 */
-	public ControlFlowDiagram getContainer()
-	{
+	public ControlFlowDiagram getContainer() {
 		return container;
 	}
 
@@ -156,15 +150,14 @@ public class TransitionCreateCommand extends EditElementCommand
 	 * Modify with appropriate logic.
 	 * @generated
 	 */
-	private static ControlFlowDiagram deduceContainer(EObject source, EObject target)
-	{
+	private static ControlFlowDiagram deduceContainer(EObject source,
+			EObject target) {
 		// Find container element for the new link.
 		// Climb up by containment hierarchy starting from the source
 		// and return the first element that is instance of the container class.
-		for (EObject element = source; element != null; element = element.eContainer())
-		{
-			if (element instanceof ControlFlowDiagram)
-			{
+		for (EObject element = source; element != null; element = element
+				.eContainer()) {
+			if (element instanceof ControlFlowDiagram) {
 				return (ControlFlowDiagram) element;
 			}
 		}

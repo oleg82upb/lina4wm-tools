@@ -38,8 +38,7 @@ public class ControlflowSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public ControlflowSwitch() {
-		if (modelPackage == null)
-		{
+		if (modelPackage == null) {
 			modelPackage = ControlflowPackage.eINSTANCE;
 		}
 	}
@@ -66,62 +65,53 @@ public class ControlflowSwitch<T> extends Switch<T> {
 	 */
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
-		switch (classifierID)
-		{
-			case ControlflowPackage.CONTROL_FLOW_DIAGRAM:
-			{
+		switch (classifierID) {
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM: {
 				ControlFlowDiagram controlFlowDiagram = (ControlFlowDiagram)theEObject;
 				T result = caseControlFlowDiagram(controlFlowDiagram);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ControlflowPackage.CONTROL_FLOW_LOCATION:
-			{
+			case ControlflowPackage.CONTROL_FLOW_LOCATION: {
 				ControlFlowLocation controlFlowLocation = (ControlFlowLocation)theEObject;
 				T result = caseControlFlowLocation(controlFlowLocation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ControlflowPackage.TRANSITION:
-			{
+			case ControlflowPackage.TRANSITION: {
 				Transition transition = (Transition)theEObject;
 				T result = caseTransition(transition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ControlflowPackage.GUARDED_TRANSITION:
-			{
+			case ControlflowPackage.GUARDED_TRANSITION: {
 				GuardedTransition guardedTransition = (GuardedTransition)theEObject;
 				T result = caseGuardedTransition(guardedTransition);
 				if (result == null) result = caseTransition(guardedTransition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ControlflowPackage.MULTI_TRANSITION:
-			{
+			case ControlflowPackage.MULTI_TRANSITION: {
 				MultiTransition multiTransition = (MultiTransition)theEObject;
 				T result = caseMultiTransition(multiTransition);
 				if (result == null) result = caseTransition(multiTransition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ControlflowPackage.FLUSH_TRANSITION:
-			{
+			case ControlflowPackage.FLUSH_TRANSITION: {
 				FlushTransition flushTransition = (FlushTransition)theEObject;
 				T result = caseFlushTransition(flushTransition);
 				if (result == null) result = caseTransition(flushTransition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ControlflowPackage.ADDRESS_VALUE_PAIR:
-			{
+			case ControlflowPackage.ADDRESS_VALUE_PAIR: {
 				AddressValuePair addressValuePair = (AddressValuePair)theEObject;
 				T result = caseAddressValuePair(addressValuePair);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ControlflowPackage.STORE_BUFFER:
-			{
+			case ControlflowPackage.STORE_BUFFER: {
 				StoreBuffer storeBuffer = (StoreBuffer)theEObject;
 				T result = caseStoreBuffer(storeBuffer);
 				if (result == null) result = defaultCase(theEObject);

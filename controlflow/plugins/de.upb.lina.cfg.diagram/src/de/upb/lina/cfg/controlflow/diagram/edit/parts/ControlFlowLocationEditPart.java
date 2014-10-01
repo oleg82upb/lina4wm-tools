@@ -37,8 +37,7 @@ import de.upb.lina.cfg.controlflow.diagram.providers.ControlFlowElementTypes;
 /**
  * @generated
  */
-public class ControlFlowLocationEditPart extends ShapeNodeEditPart
-{
+public class ControlFlowLocationEditPart extends ShapeNodeEditPart {
 
 	/**
 	 * @generated
@@ -58,18 +57,17 @@ public class ControlFlowLocationEditPart extends ShapeNodeEditPart
 	/**
 	 * @generated
 	 */
-	public ControlFlowLocationEditPart(View view)
-	{
+	public ControlFlowLocationEditPart(View view) {
 		super(view);
 	}
 
 	/**
 	 * @generated
 	 */
-	protected void createDefaultEditPolicies()
-	{
+	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new ControlFlowLocationItemSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
+				new ControlFlowLocationItemSemanticEditPolicy());
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, createLayoutEditPolicy());
 		// XXX need an SCR to runtime to have another abstract superclass that would let children add reasonable editpolicies
 		// removeEditPolicy(org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.CONNECTION_HANDLES_ROLE);
@@ -78,28 +76,23 @@ public class ControlFlowLocationEditPart extends ShapeNodeEditPart
 	/**
 	 * @generated
 	 */
-	protected LayoutEditPolicy createLayoutEditPolicy()
-	{
-		org.eclipse.gmf.runtime.diagram.ui.editpolicies.LayoutEditPolicy lep = new org.eclipse.gmf.runtime.diagram.ui.editpolicies.LayoutEditPolicy()
-		{
+	protected LayoutEditPolicy createLayoutEditPolicy() {
+		org.eclipse.gmf.runtime.diagram.ui.editpolicies.LayoutEditPolicy lep = new org.eclipse.gmf.runtime.diagram.ui.editpolicies.LayoutEditPolicy() {
 
-			protected EditPolicy createChildEditPolicy(EditPart child)
-			{
-				EditPolicy result = child.getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
-				if (result == null)
-				{
+			protected EditPolicy createChildEditPolicy(EditPart child) {
+				EditPolicy result = child
+						.getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
+				if (result == null) {
 					result = new NonResizableEditPolicy();
 				}
 				return result;
 			}
 
-			protected Command getMoveChildrenCommand(Request request)
-			{
+			protected Command getMoveChildrenCommand(Request request) {
 				return null;
 			}
 
-			protected Command getCreateCommand(CreateRequest request)
-			{
+			protected Command getCreateCommand(CreateRequest request) {
 				return null;
 			}
 		};
@@ -109,28 +102,25 @@ public class ControlFlowLocationEditPart extends ShapeNodeEditPart
 	/**
 	 * @generated
 	 */
-	protected IFigure createNodeShape()
-	{
+	protected IFigure createNodeShape() {
 		return primaryShape = new ControlFlowLocationFigure();
 	}
 
 	/**
 	 * @generated
 	 */
-	public ControlFlowLocationFigure getPrimaryShape()
-	{
+	public ControlFlowLocationFigure getPrimaryShape() {
 		return (ControlFlowLocationFigure) primaryShape;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected boolean addFixedChild(EditPart childEditPart)
-	{
-		if (childEditPart instanceof ControlFlowLocationPcEditPart)
-		{
-			((ControlFlowLocationPcEditPart) childEditPart).setLabel(getPrimaryShape()
-					.getFigureControlFlowLocationPcFigure());
+	protected boolean addFixedChild(EditPart childEditPart) {
+		if (childEditPart instanceof ControlFlowLocationPcEditPart) {
+			((ControlFlowLocationPcEditPart) childEditPart)
+					.setLabel(getPrimaryShape()
+							.getFigureControlFlowLocationPcFigure());
 			return true;
 		}
 		return false;
@@ -139,10 +129,8 @@ public class ControlFlowLocationEditPart extends ShapeNodeEditPart
 	/**
 	 * @generated
 	 */
-	protected boolean removeFixedChild(EditPart childEditPart)
-	{
-		if (childEditPart instanceof ControlFlowLocationPcEditPart)
-		{
+	protected boolean removeFixedChild(EditPart childEditPart) {
+		if (childEditPart instanceof ControlFlowLocationPcEditPart) {
 			return true;
 		}
 		return false;
@@ -151,10 +139,8 @@ public class ControlFlowLocationEditPart extends ShapeNodeEditPart
 	/**
 	 * @generated
 	 */
-	protected void addChildVisual(EditPart childEditPart, int index)
-	{
-		if (addFixedChild(childEditPart))
-		{
+	protected void addChildVisual(EditPart childEditPart, int index) {
+		if (addFixedChild(childEditPart)) {
 			return;
 		}
 		super.addChildVisual(childEditPart, -1);
@@ -163,10 +149,8 @@ public class ControlFlowLocationEditPart extends ShapeNodeEditPart
 	/**
 	 * @generated
 	 */
-	protected void removeChildVisual(EditPart childEditPart)
-	{
-		if (removeFixedChild(childEditPart))
-		{
+	protected void removeChildVisual(EditPart childEditPart) {
+		if (removeFixedChild(childEditPart)) {
 			return;
 		}
 		super.removeChildVisual(childEditPart);
@@ -175,16 +159,14 @@ public class ControlFlowLocationEditPart extends ShapeNodeEditPart
 	/**
 	 * @generated
 	 */
-	protected IFigure getContentPaneFor(IGraphicalEditPart editPart)
-	{
+	protected IFigure getContentPaneFor(IGraphicalEditPart editPart) {
 		return getContentPane();
 	}
 
 	/**
 	 * @generated
 	 */
-	protected NodeFigure createNodePlate()
-	{
+	protected NodeFigure createNodePlate() {
 		DefaultSizeNodeFigure result = new DefaultSizeNodeFigure(30, 20);
 		return result;
 	}
@@ -197,8 +179,7 @@ public class ControlFlowLocationEditPart extends ShapeNodeEditPart
 	 * 
 	 * @generated
 	 */
-	protected NodeFigure createNodeFigure()
-	{
+	protected NodeFigure createNodeFigure() {
 		NodeFigure figure = createNodePlate();
 		figure.setLayoutManager(new StackLayout());
 		IFigure shape = createNodeShape();
@@ -213,10 +194,8 @@ public class ControlFlowLocationEditPart extends ShapeNodeEditPart
 	 * @param nodeShape instance of generated figure class
 	 * @generated
 	 */
-	protected IFigure setupContentPane(IFigure nodeShape)
-	{
-		if (nodeShape.getLayoutManager() == null)
-		{
+	protected IFigure setupContentPane(IFigure nodeShape) {
+		if (nodeShape.getLayoutManager() == null) {
 			ConstrainedToolbarLayout layout = new ConstrainedToolbarLayout();
 			layout.setSpacing(5);
 			nodeShape.setLayoutManager(layout);
@@ -227,10 +206,8 @@ public class ControlFlowLocationEditPart extends ShapeNodeEditPart
 	/**
 	 * @generated
 	 */
-	public IFigure getContentPane()
-	{
-		if (contentPane != null)
-		{
+	public IFigure getContentPane() {
+		if (contentPane != null) {
 			return contentPane;
 		}
 		return super.getContentPane();
@@ -239,10 +216,8 @@ public class ControlFlowLocationEditPart extends ShapeNodeEditPart
 	/**
 	 * @generated
 	 */
-	protected void setForegroundColor(Color color)
-	{
-		if (primaryShape != null)
-		{
+	protected void setForegroundColor(Color color) {
+		if (primaryShape != null) {
 			primaryShape.setForegroundColor(color);
 		}
 	}
@@ -250,10 +225,8 @@ public class ControlFlowLocationEditPart extends ShapeNodeEditPart
 	/**
 	 * @generated
 	 */
-	protected void setBackgroundColor(Color color)
-	{
-		if (primaryShape != null)
-		{
+	protected void setBackgroundColor(Color color) {
+		if (primaryShape != null) {
 			primaryShape.setBackgroundColor(color);
 		}
 	}
@@ -261,10 +234,8 @@ public class ControlFlowLocationEditPart extends ShapeNodeEditPart
 	/**
 	 * @generated
 	 */
-	protected void setLineWidth(int width)
-	{
-		if (primaryShape instanceof Shape)
-		{
+	protected void setLineWidth(int width) {
+		if (primaryShape instanceof Shape) {
 			((Shape) primaryShape).setLineWidth(width);
 		}
 	}
@@ -272,10 +243,8 @@ public class ControlFlowLocationEditPart extends ShapeNodeEditPart
 	/**
 	 * @generated
 	 */
-	protected void setLineType(int style)
-	{
-		if (primaryShape instanceof Shape)
-		{
+	protected void setLineType(int style) {
+		if (primaryShape instanceof Shape) {
 			((Shape) primaryShape).setLineStyle(style);
 		}
 	}
@@ -283,16 +252,67 @@ public class ControlFlowLocationEditPart extends ShapeNodeEditPart
 	/**
 	 * @generated
 	 */
-	public EditPart getPrimaryChildEditPart()
-	{
-		return getChildBySemanticHint(ControlFlowVisualIDRegistry.getType(ControlFlowLocationPcEditPart.VISUAL_ID));
+	public EditPart getPrimaryChildEditPart() {
+		return getChildBySemanticHint(ControlFlowVisualIDRegistry
+				.getType(ControlFlowLocationPcEditPart.VISUAL_ID));
 	}
 
 	/**
 	 * @generated
 	 */
-	public class ControlFlowLocationFigure extends RectangleFigure
-	{
+	public List<IElementType> getMARelTypesOnSource() {
+		ArrayList<IElementType> types = new ArrayList<IElementType>(1);
+		types.add(ControlFlowElementTypes.Transition_4001);
+		return types;
+	}
+
+	/**
+	 * @generated
+	 */
+	public List<IElementType> getMARelTypesOnSourceAndTarget(
+			IGraphicalEditPart targetEditPart) {
+		LinkedList<IElementType> types = new LinkedList<IElementType>();
+		if (targetEditPart instanceof de.upb.lina.cfg.controlflow.diagram.edit.parts.ControlFlowLocationEditPart) {
+			types.add(ControlFlowElementTypes.Transition_4001);
+		}
+		return types;
+	}
+
+	/**
+	 * @generated
+	 */
+	public List<IElementType> getMATypesForTarget(IElementType relationshipType) {
+		LinkedList<IElementType> types = new LinkedList<IElementType>();
+		if (relationshipType == ControlFlowElementTypes.Transition_4001) {
+			types.add(ControlFlowElementTypes.ControlFlowLocation_2001);
+		}
+		return types;
+	}
+
+	/**
+	 * @generated
+	 */
+	public List<IElementType> getMARelTypesOnTarget() {
+		ArrayList<IElementType> types = new ArrayList<IElementType>(1);
+		types.add(ControlFlowElementTypes.Transition_4001);
+		return types;
+	}
+
+	/**
+	 * @generated
+	 */
+	public List<IElementType> getMATypesForSource(IElementType relationshipType) {
+		LinkedList<IElementType> types = new LinkedList<IElementType>();
+		if (relationshipType == ControlFlowElementTypes.Transition_4001) {
+			types.add(ControlFlowElementTypes.ControlFlowLocation_2001);
+		}
+		return types;
+	}
+
+	/**
+	 * @generated
+	 */
+	public class ControlFlowLocationFigure extends RectangleFigure {
 
 		/**
 		 * @generated
@@ -307,31 +327,31 @@ public class ControlFlowLocationEditPart extends ShapeNodeEditPart
 		/**
 		 * @generated
 		 */
-		public ControlFlowLocationFigure()
-		{
+		public ControlFlowLocationFigure() {
 			this.setLayoutManager(new CenterLayout());
-			this.setMaximumSize(new Dimension(getMapMode().DPtoLP(30), getMapMode().DPtoLP(30)));
+			this.setMaximumSize(new Dimension(getMapMode().DPtoLP(30),
+					getMapMode().DPtoLP(30)));
 			createContents();
 		}
 
 		/**
 		 * @generated
 		 */
-		private void createContents()
-		{
+		private void createContents() {
 
 			fFigureControlFlowLocationPcFigure = new WrappingLabel();
 
 			fFigureControlFlowLocationPcFigure.setText(" ");
-			fFigureControlFlowLocationPcFigure.setPreferredSize(new Dimension(getMapMode().DPtoLP(30), getMapMode()
-					.DPtoLP(30)));
+			fFigureControlFlowLocationPcFigure.setPreferredSize(new Dimension(
+					getMapMode().DPtoLP(30), getMapMode().DPtoLP(30)));
 
 			this.add(fFigureControlFlowLocationPcFigure);
 
 			fCflBufferLabel = new WrappingLabel();
 
 			fCflBufferLabel.setText("");
-			fCflBufferLabel.setBorder(new LineBorder(null, getMapMode().DPtoLP(1)));
+			fCflBufferLabel.setBorder(new LineBorder(null, getMapMode().DPtoLP(
+					1)));
 
 			this.add(fCflBufferLabel);
 
@@ -340,16 +360,14 @@ public class ControlFlowLocationEditPart extends ShapeNodeEditPart
 		/**
 		 * @generated
 		 */
-		public WrappingLabel getFigureControlFlowLocationPcFigure()
-		{
+		public WrappingLabel getFigureControlFlowLocationPcFigure() {
 			return fFigureControlFlowLocationPcFigure;
 		}
 
 		/**
 		 * @generated
 		 */
-		public WrappingLabel getCflBufferLabel()
-		{
+		public WrappingLabel getCflBufferLabel() {
 			return fCflBufferLabel;
 		}
 

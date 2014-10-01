@@ -22,56 +22,51 @@ import de.upb.lina.cfg.controlflow.diagram.providers.ControlFlowElementTypes;
 /**
  * @generated
  */
-public class ControlFlowLocationItemSemanticEditPolicy extends ControlFlowBaseItemSemanticEditPolicy
-{
+public class ControlFlowLocationItemSemanticEditPolicy extends
+		ControlFlowBaseItemSemanticEditPolicy {
 
 	/**
 	 * @generated
 	 */
-	public ControlFlowLocationItemSemanticEditPolicy()
-	{
+	public ControlFlowLocationItemSemanticEditPolicy() {
 		super(ControlFlowElementTypes.ControlFlowLocation_2001);
 	}
 
 	/**
 	 * @generated
 	 */
-	protected Command getDestroyElementCommand(DestroyElementRequest req)
-	{
+	protected Command getDestroyElementCommand(DestroyElementRequest req) {
 		View view = (View) getHost().getModel();
-		CompositeTransactionalCommand cmd = new CompositeTransactionalCommand(getEditingDomain(), null);
+		CompositeTransactionalCommand cmd = new CompositeTransactionalCommand(
+				getEditingDomain(), null);
 		cmd.setTransactionNestingEnabled(false);
-		for (Iterator<?> it = view.getTargetEdges().iterator(); it.hasNext();)
-		{
+		for (Iterator<?> it = view.getTargetEdges().iterator(); it.hasNext();) {
 			Edge incomingLink = (Edge) it.next();
-			if (ControlFlowVisualIDRegistry.getVisualID(incomingLink) == TransitionEditPart.VISUAL_ID)
-			{
-				DestroyElementRequest r = new DestroyElementRequest(incomingLink.getElement(), false);
+			if (ControlFlowVisualIDRegistry.getVisualID(incomingLink) == TransitionEditPart.VISUAL_ID) {
+				DestroyElementRequest r = new DestroyElementRequest(
+						incomingLink.getElement(), false);
 				cmd.add(new DestroyElementCommand(r));
 				cmd.add(new DeleteCommand(getEditingDomain(), incomingLink));
 				continue;
 			}
 		}
-		for (Iterator<?> it = view.getSourceEdges().iterator(); it.hasNext();)
-		{
+		for (Iterator<?> it = view.getSourceEdges().iterator(); it.hasNext();) {
 			Edge outgoingLink = (Edge) it.next();
-			if (ControlFlowVisualIDRegistry.getVisualID(outgoingLink) == TransitionEditPart.VISUAL_ID)
-			{
-				DestroyElementRequest r = new DestroyElementRequest(outgoingLink.getElement(), false);
+			if (ControlFlowVisualIDRegistry.getVisualID(outgoingLink) == TransitionEditPart.VISUAL_ID) {
+				DestroyElementRequest r = new DestroyElementRequest(
+						outgoingLink.getElement(), false);
 				cmd.add(new DestroyElementCommand(r));
 				cmd.add(new DeleteCommand(getEditingDomain(), outgoingLink));
 				continue;
 			}
 		}
 		EAnnotation annotation = view.getEAnnotation("Shortcut"); //$NON-NLS-1$
-		if (annotation == null)
-		{
+		if (annotation == null) {
 			// there are indirectly referenced children, need extra commands: false
 			addDestroyShortcutsCommand(cmd, view);
 			// delete host element
 			cmd.add(new DestroyElementCommand(req));
-		} else
-		{
+		} else {
 			cmd.add(new DeleteCommand(getEditingDomain(), view));
 		}
 		return getGEFWrapper(cmd.reduce());
@@ -80,21 +75,21 @@ public class ControlFlowLocationItemSemanticEditPolicy extends ControlFlowBaseIt
 	/**
 	 * @generated
 	 */
-	protected Command getCreateRelationshipCommand(CreateRelationshipRequest req)
-	{
+	protected Command getCreateRelationshipCommand(CreateRelationshipRequest req) {
 		Command command = req.getTarget() == null ? getStartCreateRelationshipCommand(req)
 				: getCompleteCreateRelationshipCommand(req);
-		return command != null ? command : super.getCreateRelationshipCommand(req);
+		return command != null ? command : super
+				.getCreateRelationshipCommand(req);
 	}
 
 	/**
 	 * @generated
 	 */
-	protected Command getStartCreateRelationshipCommand(CreateRelationshipRequest req)
-	{
-		if (ControlFlowElementTypes.Transition_4001 == req.getElementType())
-		{
-			return getGEFWrapper(new TransitionCreateCommand(req, req.getSource(), req.getTarget()));
+	protected Command getStartCreateRelationshipCommand(
+			CreateRelationshipRequest req) {
+		if (ControlFlowElementTypes.Transition_4001 == req.getElementType()) {
+			return getGEFWrapper(new TransitionCreateCommand(req,
+					req.getSource(), req.getTarget()));
 		}
 		return null;
 	}
@@ -102,11 +97,11 @@ public class ControlFlowLocationItemSemanticEditPolicy extends ControlFlowBaseIt
 	/**
 	 * @generated
 	 */
-	protected Command getCompleteCreateRelationshipCommand(CreateRelationshipRequest req)
-	{
-		if (ControlFlowElementTypes.Transition_4001 == req.getElementType())
-		{
-			return getGEFWrapper(new TransitionCreateCommand(req, req.getSource(), req.getTarget()));
+	protected Command getCompleteCreateRelationshipCommand(
+			CreateRelationshipRequest req) {
+		if (ControlFlowElementTypes.Transition_4001 == req.getElementType()) {
+			return getGEFWrapper(new TransitionCreateCommand(req,
+					req.getSource(), req.getTarget()));
 		}
 		return null;
 	}
@@ -117,8 +112,8 @@ public class ControlFlowLocationItemSemanticEditPolicy extends ControlFlowBaseIt
 	 * 
 	 * @generated
 	 */
-	protected Command getReorientRelationshipCommand(ReorientRelationshipRequest req)
-	{
+	protected Command getReorientRelationshipCommand(
+			ReorientRelationshipRequest req) {
 		switch (getVisualID(req)) {
 		case TransitionEditPart.VISUAL_ID:
 			return getGEFWrapper(new TransitionReorientCommand(req));

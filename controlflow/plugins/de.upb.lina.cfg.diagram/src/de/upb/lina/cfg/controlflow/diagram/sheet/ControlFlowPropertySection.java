@@ -23,16 +23,15 @@ import org.eclipse.ui.views.properties.IPropertySourceProvider;
 /**
  * @generated
  */
-public class ControlFlowPropertySection extends DefaultPropertySection implements IPropertySourceProvider
-{
+public class ControlFlowPropertySection extends DefaultPropertySection
+		implements IPropertySourceProvider {
 
 	/**
 	 * Modify/unwrap selection.
 	 * @generated
 	 */
 	@Override
-	protected Object transformSelection(Object selected)
-	{
+	protected Object transformSelection(Object selected) {
 		selected = /*super.*/transformSelectionToDomain(selected);
 		return selected;
 	}

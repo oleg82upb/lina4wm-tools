@@ -30,29 +30,30 @@ import de.upb.lina.cfg.controlflow.diagram.providers.ControlFlowParserProvider;
 /**
  * @generated
  */
-public class ControlFlowNavigatorLabelProvider extends LabelProvider implements ICommonLabelProvider,
-		ITreePathLabelProvider
-{
+public class ControlFlowNavigatorLabelProvider extends LabelProvider implements
+		ICommonLabelProvider, ITreePathLabelProvider {
 
 	/**
 	 * @generated
 	 */
-	static
-	{
-		ControlFlowDiagramEditorPlugin.getInstance().getImageRegistry()
+	static {
+		ControlFlowDiagramEditorPlugin
+				.getInstance()
+				.getImageRegistry()
 				.put("Navigator?UnknownElement", ImageDescriptor.getMissingImageDescriptor()); //$NON-NLS-1$
-		ControlFlowDiagramEditorPlugin.getInstance().getImageRegistry()
+		ControlFlowDiagramEditorPlugin
+				.getInstance()
+				.getImageRegistry()
 				.put("Navigator?ImageNotFound", ImageDescriptor.getMissingImageDescriptor()); //$NON-NLS-1$
 	}
 
 	/**
 	 * @generated
 	 */
-	public void updateLabel(ViewerLabel label, TreePath elementPath)
-	{
+	public void updateLabel(ViewerLabel label, TreePath elementPath) {
 		Object element = elementPath.getLastSegment();
-		if (element instanceof ControlFlowNavigatorItem && !isOwnView(((ControlFlowNavigatorItem) element).getView()))
-		{
+		if (element instanceof ControlFlowNavigatorItem
+				&& !isOwnView(((ControlFlowNavigatorItem) element).getView())) {
 			return;
 		}
 		label.setText(getText(element));
@@ -62,19 +63,16 @@ public class ControlFlowNavigatorLabelProvider extends LabelProvider implements 
 	/**
 	 * @generated
 	 */
-	public Image getImage(Object element)
-	{
-		if (element instanceof ControlFlowNavigatorGroup)
-		{
+	public Image getImage(Object element) {
+		if (element instanceof ControlFlowNavigatorGroup) {
 			ControlFlowNavigatorGroup group = (ControlFlowNavigatorGroup) element;
-			return ControlFlowDiagramEditorPlugin.getInstance().getBundledImage(group.getIcon());
+			return ControlFlowDiagramEditorPlugin.getInstance()
+					.getBundledImage(group.getIcon());
 		}
 
-		if (element instanceof ControlFlowNavigatorItem)
-		{
+		if (element instanceof ControlFlowNavigatorItem) {
 			ControlFlowNavigatorItem navigatorItem = (ControlFlowNavigatorItem) element;
-			if (!isOwnView(navigatorItem.getView()))
-			{
+			if (!isOwnView(navigatorItem.getView())) {
 				return super.getImage(element);
 			}
 			return getImage(navigatorItem.getView());
@@ -86,8 +84,7 @@ public class ControlFlowNavigatorLabelProvider extends LabelProvider implements 
 	/**
 	 * @generated
 	 */
-	public Image getImage(View view)
-	{
+	public Image getImage(View view) {
 		switch (ControlFlowVisualIDRegistry.getVisualID(view)) {
 		case ControlFlowDiagramEditPart.VISUAL_ID:
 			return getImage(
@@ -105,18 +102,17 @@ public class ControlFlowNavigatorLabelProvider extends LabelProvider implements 
 	/**
 	 * @generated
 	 */
-	private Image getImage(String key, IElementType elementType)
-	{
-		ImageRegistry imageRegistry = ControlFlowDiagramEditorPlugin.getInstance().getImageRegistry();
+	private Image getImage(String key, IElementType elementType) {
+		ImageRegistry imageRegistry = ControlFlowDiagramEditorPlugin
+				.getInstance().getImageRegistry();
 		Image image = imageRegistry.get(key);
-		if (image == null && elementType != null && ControlFlowElementTypes.isKnownElementType(elementType))
-		{
+		if (image == null && elementType != null
+				&& ControlFlowElementTypes.isKnownElementType(elementType)) {
 			image = ControlFlowElementTypes.getImage(elementType);
 			imageRegistry.put(key, image);
 		}
 
-		if (image == null)
-		{
+		if (image == null) {
 			image = imageRegistry.get("Navigator?ImageNotFound"); //$NON-NLS-1$
 			imageRegistry.put(key, image);
 		}
@@ -126,19 +122,15 @@ public class ControlFlowNavigatorLabelProvider extends LabelProvider implements 
 	/**
 	 * @generated
 	 */
-	public String getText(Object element)
-	{
-		if (element instanceof ControlFlowNavigatorGroup)
-		{
+	public String getText(Object element) {
+		if (element instanceof ControlFlowNavigatorGroup) {
 			ControlFlowNavigatorGroup group = (ControlFlowNavigatorGroup) element;
 			return group.getGroupName();
 		}
 
-		if (element instanceof ControlFlowNavigatorItem)
-		{
+		if (element instanceof ControlFlowNavigatorItem) {
 			ControlFlowNavigatorItem navigatorItem = (ControlFlowNavigatorItem) element;
-			if (!isOwnView(navigatorItem.getView()))
-			{
+			if (!isOwnView(navigatorItem.getView())) {
 				return null;
 			}
 			return getText(navigatorItem.getView());
@@ -150,10 +142,8 @@ public class ControlFlowNavigatorLabelProvider extends LabelProvider implements 
 	/**
 	 * @generated
 	 */
-	public String getText(View view)
-	{
-		if (view.getElement() != null && view.getElement().eIsProxy())
-		{
+	public String getText(View view) {
+		if (view.getElement() != null && view.getElement().eIsProxy()) {
 			return getUnresolvedDomainElementProxyText(view);
 		}
 		switch (ControlFlowVisualIDRegistry.getVisualID(view)) {
@@ -170,18 +160,19 @@ public class ControlFlowNavigatorLabelProvider extends LabelProvider implements 
 	/**
 	 * @generated
 	 */
-	private String getControlFlowLocation_2001Text(View view)
-	{
-		IParser parser = ControlFlowParserProvider.getParser(ControlFlowElementTypes.ControlFlowLocation_2001,
-				view.getElement() != null ? view.getElement() : view,
-				ControlFlowVisualIDRegistry.getType(ControlFlowLocationPcEditPart.VISUAL_ID));
-		if (parser != null)
-		{
-			return parser.getPrintString(new EObjectAdapter(view.getElement() != null ? view.getElement() : view),
+	private String getControlFlowLocation_2001Text(View view) {
+		IParser parser = ControlFlowParserProvider.getParser(
+				ControlFlowElementTypes.ControlFlowLocation_2001, view
+						.getElement() != null ? view.getElement() : view,
+				ControlFlowVisualIDRegistry
+						.getType(ControlFlowLocationPcEditPart.VISUAL_ID));
+		if (parser != null) {
+			return parser.getPrintString(new EObjectAdapter(
+					view.getElement() != null ? view.getElement() : view),
 					ParserOptions.NONE.intValue());
-		} else
-		{
-			ControlFlowDiagramEditorPlugin.getInstance().logError("Parser was not found for label " + 5001); //$NON-NLS-1$
+		} else {
+			ControlFlowDiagramEditorPlugin.getInstance().logError(
+					"Parser was not found for label " + 5001); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 	}
@@ -189,18 +180,19 @@ public class ControlFlowNavigatorLabelProvider extends LabelProvider implements 
 	/**
 	 * @generated
 	 */
-	private String getTransition_4001Text(View view)
-	{
-		IParser parser = ControlFlowParserProvider.getParser(ControlFlowElementTypes.Transition_4001,
+	private String getTransition_4001Text(View view) {
+		IParser parser = ControlFlowParserProvider.getParser(
+				ControlFlowElementTypes.Transition_4001,
 				view.getElement() != null ? view.getElement() : view,
-				ControlFlowVisualIDRegistry.getType(WrappingLabelEditPart.VISUAL_ID));
-		if (parser != null)
-		{
-			return parser.getPrintString(new EObjectAdapter(view.getElement() != null ? view.getElement() : view),
+				ControlFlowVisualIDRegistry
+						.getType(WrappingLabelEditPart.VISUAL_ID));
+		if (parser != null) {
+			return parser.getPrintString(new EObjectAdapter(
+					view.getElement() != null ? view.getElement() : view),
 					ParserOptions.NONE.intValue());
-		} else
-		{
-			ControlFlowDiagramEditorPlugin.getInstance().logError("Parser was not found for label " + 6002); //$NON-NLS-1$
+		} else {
+			ControlFlowDiagramEditorPlugin.getInstance().logError(
+					"Parser was not found for label " + 6002); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 	}
@@ -208,15 +200,14 @@ public class ControlFlowNavigatorLabelProvider extends LabelProvider implements 
 	/**
 	 * @generated
 	 */
-	private String getControlFlowDiagram_1000Text(View view)
-	{
-		ControlFlowDiagram domainModelElement = (ControlFlowDiagram) view.getElement();
-		if (domainModelElement != null)
-		{
+	private String getControlFlowDiagram_1000Text(View view) {
+		ControlFlowDiagram domainModelElement = (ControlFlowDiagram) view
+				.getElement();
+		if (domainModelElement != null) {
 			return domainModelElement.getName();
-		} else
-		{
-			ControlFlowDiagramEditorPlugin.getInstance().logError("No domain element for view with visualID = " + 1000); //$NON-NLS-1$
+		} else {
+			ControlFlowDiagramEditorPlugin.getInstance().logError(
+					"No domain element for view with visualID = " + 1000); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 	}
@@ -224,54 +215,48 @@ public class ControlFlowNavigatorLabelProvider extends LabelProvider implements 
 	/**
 	 * @generated
 	 */
-	private String getUnknownElementText(View view)
-	{
+	private String getUnknownElementText(View view) {
 		return "<UnknownElement Visual_ID = " + view.getType() + ">"; //$NON-NLS-1$  //$NON-NLS-2$
 	}
 
 	/**
 	 * @generated
 	 */
-	private String getUnresolvedDomainElementProxyText(View view)
-	{
+	private String getUnresolvedDomainElementProxyText(View view) {
 		return "<Unresolved domain element Visual_ID = " + view.getType() + ">"; //$NON-NLS-1$  //$NON-NLS-2$
 	}
 
 	/**
 	 * @generated
 	 */
-	public void init(ICommonContentExtensionSite aConfig)
-	{
+	public void init(ICommonContentExtensionSite aConfig) {
 	}
 
 	/**
 	 * @generated
 	 */
-	public void restoreState(IMemento aMemento)
-	{
+	public void restoreState(IMemento aMemento) {
 	}
 
 	/**
 	 * @generated
 	 */
-	public void saveState(IMemento aMemento)
-	{
+	public void saveState(IMemento aMemento) {
 	}
 
 	/**
 	 * @generated
 	 */
-	public String getDescription(Object anElement)
-	{
+	public String getDescription(Object anElement) {
 		return null;
 	}
 
 	/**
 	 * @generated
 	 */
-	private boolean isOwnView(View view)
-	{
-		return ControlFlowDiagramEditPart.MODEL_ID.equals(ControlFlowVisualIDRegistry.getModelID(view));
+	private boolean isOwnView(View view) {
+		return ControlFlowDiagramEditPart.MODEL_ID
+				.equals(ControlFlowVisualIDRegistry.getModelID(view));
 	}
 
 }

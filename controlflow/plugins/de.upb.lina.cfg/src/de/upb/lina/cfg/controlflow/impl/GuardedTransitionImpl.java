@@ -82,8 +82,7 @@ public class GuardedTransitionImpl extends TransitionImpl implements GuardedTran
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.GUARDED_TRANSITION__CONDITION:
 				return getCondition();
 		}
@@ -96,8 +95,7 @@ public class GuardedTransitionImpl extends TransitionImpl implements GuardedTran
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.GUARDED_TRANSITION__CONDITION:
 				setCondition((String)newValue);
 				return;
@@ -111,8 +109,7 @@ public class GuardedTransitionImpl extends TransitionImpl implements GuardedTran
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.GUARDED_TRANSITION__CONDITION:
 				setCondition(CONDITION_EDEFAULT);
 				return;
@@ -126,8 +123,7 @@ public class GuardedTransitionImpl extends TransitionImpl implements GuardedTran
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.GUARDED_TRANSITION__CONDITION:
 				return CONDITION_EDEFAULT == null ? condition != null : !CONDITION_EDEFAULT.equals(condition);
 		}

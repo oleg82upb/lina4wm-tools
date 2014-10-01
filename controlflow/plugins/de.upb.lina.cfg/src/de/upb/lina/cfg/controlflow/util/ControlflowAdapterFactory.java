@@ -35,8 +35,7 @@ public class ControlflowAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public ControlflowAdapterFactory() {
-		if (modelPackage == null)
-		{
+		if (modelPackage == null) {
 			modelPackage = ControlflowPackage.eINSTANCE;
 		}
 	}
@@ -51,12 +50,10 @@ public class ControlflowAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage)
-		{
+		if (object == modelPackage) {
 			return true;
 		}
-		if (object instanceof EObject)
-		{
+		if (object instanceof EObject) {
 			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -69,51 +66,41 @@ public class ControlflowAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected ControlflowSwitch<Adapter> modelSwitch =
-		new ControlflowSwitch<Adapter>()
-		{
+		new ControlflowSwitch<Adapter>() {
 			@Override
-			public Adapter caseControlFlowDiagram(ControlFlowDiagram object)
-			{
+			public Adapter caseControlFlowDiagram(ControlFlowDiagram object) {
 				return createControlFlowDiagramAdapter();
 			}
 			@Override
-			public Adapter caseControlFlowLocation(ControlFlowLocation object)
-			{
+			public Adapter caseControlFlowLocation(ControlFlowLocation object) {
 				return createControlFlowLocationAdapter();
 			}
 			@Override
-			public Adapter caseTransition(Transition object)
-			{
+			public Adapter caseTransition(Transition object) {
 				return createTransitionAdapter();
 			}
 			@Override
-			public Adapter caseGuardedTransition(GuardedTransition object)
-			{
+			public Adapter caseGuardedTransition(GuardedTransition object) {
 				return createGuardedTransitionAdapter();
 			}
 			@Override
-			public Adapter caseMultiTransition(MultiTransition object)
-			{
+			public Adapter caseMultiTransition(MultiTransition object) {
 				return createMultiTransitionAdapter();
 			}
 			@Override
-			public Adapter caseFlushTransition(FlushTransition object)
-			{
+			public Adapter caseFlushTransition(FlushTransition object) {
 				return createFlushTransitionAdapter();
 			}
 			@Override
-			public Adapter caseAddressValuePair(AddressValuePair object)
-			{
+			public Adapter caseAddressValuePair(AddressValuePair object) {
 				return createAddressValuePairAdapter();
 			}
 			@Override
-			public Adapter caseStoreBuffer(StoreBuffer object)
-			{
+			public Adapter caseStoreBuffer(StoreBuffer object) {
 				return createStoreBufferAdapter();
 			}
 			@Override
-			public Adapter defaultCase(EObject object)
-			{
+			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
 		};

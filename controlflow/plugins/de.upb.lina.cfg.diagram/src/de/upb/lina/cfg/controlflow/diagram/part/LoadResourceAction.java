@@ -13,13 +13,11 @@ import org.eclipse.ui.handlers.HandlerUtil;
 /**
  * @generated
  */
-public class LoadResourceAction extends DefaultLoadResourceAction
-{
+public class LoadResourceAction extends DefaultLoadResourceAction {
 	/**
 	 * @generated
 	 */
-	public Object execute(ExecutionEvent event) throws ExecutionException
-	{
+	public Object execute(ExecutionEvent event) throws ExecutionException {
 		return super.execute(event);
 	}
 

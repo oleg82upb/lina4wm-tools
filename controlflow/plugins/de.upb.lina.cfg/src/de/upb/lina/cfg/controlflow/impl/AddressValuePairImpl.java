@@ -82,12 +82,10 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	 */
 	public Parameter getAddress()
 	{
-		if (address != null && address.eIsProxy())
-		{
+		if (address != null && address.eIsProxy()) {
 			InternalEObject oldAddress = (InternalEObject)address;
 			address = (Parameter)eResolveProxy(oldAddress);
-			if (address != oldAddress)
-			{
+			if (address != oldAddress) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ControlflowPackage.ADDRESS_VALUE_PAIR__ADDRESS, oldAddress, address));
 			}
@@ -125,12 +123,10 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	 */
 	public Parameter getValue()
 	{
-		if (value != null && value.eIsProxy())
-		{
+		if (value != null && value.eIsProxy()) {
 			InternalEObject oldValue = (InternalEObject)value;
 			value = (Parameter)eResolveProxy(oldValue);
-			if (value != oldValue)
-			{
+			if (value != oldValue) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ControlflowPackage.ADDRESS_VALUE_PAIR__VALUE, oldValue, value));
 			}
@@ -190,8 +186,7 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	 */
 	public void setStoreBuffer(StoreBuffer newStoreBuffer)
 	{
-		if (newStoreBuffer != eInternalContainer() || (eContainerFeatureID() != ControlflowPackage.ADDRESS_VALUE_PAIR__STORE_BUFFER && newStoreBuffer != null))
-		{
+		if (newStoreBuffer != eInternalContainer() || (eContainerFeatureID() != ControlflowPackage.ADDRESS_VALUE_PAIR__STORE_BUFFER && newStoreBuffer != null)) {
 			if (EcoreUtil.isAncestor(this, newStoreBuffer))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -214,8 +209,7 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.ADDRESS_VALUE_PAIR__STORE_BUFFER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -232,8 +226,7 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.ADDRESS_VALUE_PAIR__STORE_BUFFER:
 				return basicSetStoreBuffer(null, msgs);
 		}
@@ -248,8 +241,7 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
 	{
-		switch (eContainerFeatureID())
-		{
+		switch (eContainerFeatureID()) {
 			case ControlflowPackage.ADDRESS_VALUE_PAIR__STORE_BUFFER:
 				return eInternalContainer().eInverseRemove(this, ControlflowPackage.STORE_BUFFER__ADDRESS_VALUE_PAIRS, StoreBuffer.class, msgs);
 		}
@@ -272,8 +264,7 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.ADDRESS_VALUE_PAIR__ADDRESS:
 				if (resolve) return getAddress();
 				return basicGetAddress();
@@ -293,8 +284,7 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.ADDRESS_VALUE_PAIR__ADDRESS:
 				setAddress((Parameter)newValue);
 				return;
@@ -315,8 +305,7 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.ADDRESS_VALUE_PAIR__ADDRESS:
 				setAddress((Parameter)null);
 				return;
@@ -337,8 +326,7 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.ADDRESS_VALUE_PAIR__ADDRESS:
 				return address != null;
 			case ControlflowPackage.ADDRESS_VALUE_PAIR__VALUE:

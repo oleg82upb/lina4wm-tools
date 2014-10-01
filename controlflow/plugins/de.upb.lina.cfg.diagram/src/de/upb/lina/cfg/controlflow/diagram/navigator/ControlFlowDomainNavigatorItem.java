@@ -11,42 +11,40 @@ import org.eclipse.ui.views.properties.IPropertySourceProvider;
 /**
  * @generated
  */
-public class ControlFlowDomainNavigatorItem extends PlatformObject
-{
+public class ControlFlowDomainNavigatorItem extends PlatformObject {
 
 	/**
 	 * @generated
 	 */
-	static
-	{
-		final Class[] supportedTypes = new Class[] { EObject.class, IPropertySource.class };
-		Platform.getAdapterManager().registerAdapters(new IAdapterFactory()
-		{
+	static {
+		final Class[] supportedTypes = new Class[] { EObject.class,
+				IPropertySource.class };
+		Platform.getAdapterManager().registerAdapters(
+				new IAdapterFactory() {
 
-			public Object getAdapter(Object adaptableObject, Class adapterType)
-			{
-				if (adaptableObject instanceof de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowDomainNavigatorItem)
-				{
-					de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowDomainNavigatorItem domainNavigatorItem = (de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowDomainNavigatorItem) adaptableObject;
-					EObject eObject = domainNavigatorItem.getEObject();
-					if (adapterType == EObject.class)
-					{
-						return eObject;
+					public Object getAdapter(Object adaptableObject,
+							Class adapterType) {
+						if (adaptableObject instanceof de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowDomainNavigatorItem) {
+							de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowDomainNavigatorItem domainNavigatorItem = (de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowDomainNavigatorItem) adaptableObject;
+							EObject eObject = domainNavigatorItem.getEObject();
+							if (adapterType == EObject.class) {
+								return eObject;
+							}
+							if (adapterType == IPropertySource.class) {
+								return domainNavigatorItem
+										.getPropertySourceProvider()
+										.getPropertySource(eObject);
+							}
+						}
+
+						return null;
 					}
-					if (adapterType == IPropertySource.class)
-					{
-						return domainNavigatorItem.getPropertySourceProvider().getPropertySource(eObject);
+
+					public Class[] getAdapterList() {
+						return supportedTypes;
 					}
-				}
-
-				return null;
-			}
-
-			public Class[] getAdapterList()
-			{
-				return supportedTypes;
-			}
-		}, de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowDomainNavigatorItem.class);
+				},
+				de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowDomainNavigatorItem.class);
 	}
 
 	/**
@@ -67,8 +65,8 @@ public class ControlFlowDomainNavigatorItem extends PlatformObject
 	/**
 	 * @generated
 	 */
-	public ControlFlowDomainNavigatorItem(EObject eObject, Object parent, IPropertySourceProvider propertySourceProvider)
-	{
+	public ControlFlowDomainNavigatorItem(EObject eObject, Object parent,
+			IPropertySourceProvider propertySourceProvider) {
 		myParent = parent;
 		myEObject = eObject;
 		myPropertySourceProvider = propertySourceProvider;
@@ -77,34 +75,29 @@ public class ControlFlowDomainNavigatorItem extends PlatformObject
 	/**
 	 * @generated
 	 */
-	public Object getParent()
-	{
+	public Object getParent() {
 		return myParent;
 	}
 
 	/**
 	 * @generated
 	 */
-	public EObject getEObject()
-	{
+	public EObject getEObject() {
 		return myEObject;
 	}
 
 	/**
 	 * @generated
 	 */
-	public IPropertySourceProvider getPropertySourceProvider()
-	{
+	public IPropertySourceProvider getPropertySourceProvider() {
 		return myPropertySourceProvider;
 	}
 
 	/**
 	 * @generated
 	 */
-	public boolean equals(Object obj)
-	{
-		if (obj instanceof de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowDomainNavigatorItem)
-		{
+	public boolean equals(Object obj) {
+		if (obj instanceof de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowDomainNavigatorItem) {
 			return EcoreUtil
 					.getURI(getEObject())
 					.equals(EcoreUtil
@@ -117,8 +110,7 @@ public class ControlFlowDomainNavigatorItem extends PlatformObject
 	/**
 	 * @generated
 	 */
-	public int hashCode()
-	{
+	public int hashCode() {
 		return EcoreUtil.getURI(getEObject()).hashCode();
 	}
 

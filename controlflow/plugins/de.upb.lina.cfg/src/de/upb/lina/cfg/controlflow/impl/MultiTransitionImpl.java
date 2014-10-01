@@ -66,8 +66,7 @@ public class MultiTransitionImpl extends TransitionImpl implements MultiTransiti
 	 * @generated
 	 */
 	public EList<Instruction> getInstructions() {
-		if (instructions == null)
-		{
+		if (instructions == null) {
 			instructions = new EObjectResolvingEList<Instruction>(Instruction.class, this, ControlflowPackage.MULTI_TRANSITION__INSTRUCTIONS);
 		}
 		return instructions;
@@ -80,8 +79,7 @@ public class MultiTransitionImpl extends TransitionImpl implements MultiTransiti
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.MULTI_TRANSITION__INSTRUCTIONS:
 				return getInstructions();
 		}
@@ -96,8 +94,7 @@ public class MultiTransitionImpl extends TransitionImpl implements MultiTransiti
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.MULTI_TRANSITION__INSTRUCTIONS:
 				getInstructions().clear();
 				getInstructions().addAll((Collection<? extends Instruction>)newValue);
@@ -113,8 +110,7 @@ public class MultiTransitionImpl extends TransitionImpl implements MultiTransiti
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.MULTI_TRANSITION__INSTRUCTIONS:
 				getInstructions().clear();
 				return;
@@ -129,8 +125,7 @@ public class MultiTransitionImpl extends TransitionImpl implements MultiTransiti
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.MULTI_TRANSITION__INSTRUCTIONS:
 				return instructions != null && !instructions.isEmpty();
 		}

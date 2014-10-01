@@ -27,14 +27,12 @@ import de.upb.lina.cfg.controlflow.diagram.part.ControlFlowDiagramEditorPlugin;
 /**
  * @generated
  */
-public class ControlFlowElementTypes
-{
+public class ControlFlowElementTypes {
 
 	/**
 	 * @generated
 	 */
-	private ControlFlowElementTypes()
-	{
+	private ControlFlowElementTypes() {
 	}
 
 	/**
@@ -46,7 +44,8 @@ public class ControlFlowElementTypes
 	 * @generated
 	 */
 	private static DiagramElementTypeImages elementTypeImages = new DiagramElementTypeImages(
-			ControlFlowDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory());
+			ControlFlowDiagramEditorPlugin.getInstance()
+					.getItemProvidersAdapterFactory());
 
 	/**
 	 * @generated
@@ -69,32 +68,28 @@ public class ControlFlowElementTypes
 	/**
 	 * @generated
 	 */
-	public static ImageDescriptor getImageDescriptor(ENamedElement element)
-	{
+	public static ImageDescriptor getImageDescriptor(ENamedElement element) {
 		return elementTypeImages.getImageDescriptor(element);
 	}
 
 	/**
 	 * @generated
 	 */
-	public static Image getImage(ENamedElement element)
-	{
+	public static Image getImage(ENamedElement element) {
 		return elementTypeImages.getImage(element);
 	}
 
 	/**
 	 * @generated
 	 */
-	public static ImageDescriptor getImageDescriptor(IAdaptable hint)
-	{
+	public static ImageDescriptor getImageDescriptor(IAdaptable hint) {
 		return getImageDescriptor(getElement(hint));
 	}
 
 	/**
 	 * @generated
 	 */
-	public static Image getImage(IAdaptable hint)
-	{
+	public static Image getImage(IAdaptable hint) {
 		return getImage(getElement(hint));
 	}
 
@@ -103,18 +98,19 @@ public class ControlFlowElementTypes
 	 * 
 	 * @generated
 	 */
-	public static ENamedElement getElement(IAdaptable hint)
-	{
+	public static ENamedElement getElement(IAdaptable hint) {
 		Object type = hint.getAdapter(IElementType.class);
-		if (elements == null)
-		{
+		if (elements == null) {
 			elements = new IdentityHashMap<IElementType, ENamedElement>();
 
-			elements.put(ControlFlowDiagram_1000, ControlflowPackage.eINSTANCE.getControlFlowDiagram());
+			elements.put(ControlFlowDiagram_1000,
+					ControlflowPackage.eINSTANCE.getControlFlowDiagram());
 
-			elements.put(ControlFlowLocation_2001, ControlflowPackage.eINSTANCE.getControlFlowLocation());
+			elements.put(ControlFlowLocation_2001,
+					ControlflowPackage.eINSTANCE.getControlFlowLocation());
 
-			elements.put(Transition_4001, ControlflowPackage.eINSTANCE.getTransition());
+			elements.put(Transition_4001,
+					ControlflowPackage.eINSTANCE.getTransition());
 		}
 		return (ENamedElement) elements.get(type);
 	}
@@ -122,18 +118,15 @@ public class ControlFlowElementTypes
 	/**
 	 * @generated
 	 */
-	private static IElementType getElementType(String id)
-	{
+	private static IElementType getElementType(String id) {
 		return ElementTypeRegistry.getInstance().getType(id);
 	}
 
 	/**
 	 * @generated
 	 */
-	public static boolean isKnownElementType(IElementType elementType)
-	{
-		if (KNOWN_ELEMENT_TYPES == null)
-		{
+	public static boolean isKnownElementType(IElementType elementType) {
+		if (KNOWN_ELEMENT_TYPES == null) {
 			KNOWN_ELEMENT_TYPES = new HashSet<IElementType>();
 			KNOWN_ELEMENT_TYPES.add(ControlFlowDiagram_1000);
 			KNOWN_ELEMENT_TYPES.add(ControlFlowLocation_2001);
@@ -145,8 +138,7 @@ public class ControlFlowElementTypes
 	/**
 	 * @generated
 	 */
-	public static IElementType getElementType(int visualID)
-	{
+	public static IElementType getElementType(int visualID) {
 		switch (visualID) {
 		case ControlFlowDiagramEditPart.VISUAL_ID:
 			return ControlFlowDiagram_1000;
@@ -161,15 +153,14 @@ public class ControlFlowElementTypes
 	/**
 	 * @generated
 	 */
-	public static final DiagramElementTypes TYPED_INSTANCE = new DiagramElementTypes(elementTypeImages)
-	{
+	public static final DiagramElementTypes TYPED_INSTANCE = new DiagramElementTypes(
+			elementTypeImages) {
 
 		/**
 		 * @generated
 		 */
 		@Override
-		public boolean isKnownElementType(IElementType elementType)
-		{
+		public boolean isKnownElementType(IElementType elementType) {
 			return de.upb.lina.cfg.controlflow.diagram.providers.ControlFlowElementTypes
 					.isKnownElementType(elementType);
 		}
@@ -178,18 +169,19 @@ public class ControlFlowElementTypes
 		 * @generated
 		 */
 		@Override
-		public IElementType getElementTypeForVisualId(int visualID)
-		{
-			return de.upb.lina.cfg.controlflow.diagram.providers.ControlFlowElementTypes.getElementType(visualID);
+		public IElementType getElementTypeForVisualId(int visualID) {
+			return de.upb.lina.cfg.controlflow.diagram.providers.ControlFlowElementTypes
+					.getElementType(visualID);
 		}
 
 		/**
 		 * @generated
 		 */
 		@Override
-		public ENamedElement getDefiningNamedElement(IAdaptable elementTypeAdapter)
-		{
-			return de.upb.lina.cfg.controlflow.diagram.providers.ControlFlowElementTypes.getElement(elementTypeAdapter);
+		public ENamedElement getDefiningNamedElement(
+				IAdaptable elementTypeAdapter) {
+			return de.upb.lina.cfg.controlflow.diagram.providers.ControlFlowElementTypes
+					.getElement(elementTypeAdapter);
 		}
 	};
 
