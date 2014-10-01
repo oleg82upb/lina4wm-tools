@@ -331,7 +331,6 @@ public class CustomLabelingUtil {
 		}else if(type.equals(LlvmPackage.eINSTANCE.getPhi())){
 			Phi phiInstruction = (Phi)t.getInstruction();
 			result += "phi(";
-			//TODO: Find out, why pcs are not shown correctly
 			HashMap<String, Integer> incomingLabels = new HashMap<String, Integer>();
 			for(Transition incoming: t.getSource().getIncoming()){
 				if(incoming.getSource().getBlockLabel() != null){
