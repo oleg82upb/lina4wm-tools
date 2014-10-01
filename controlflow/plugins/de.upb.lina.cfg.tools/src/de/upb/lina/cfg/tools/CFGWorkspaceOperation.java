@@ -120,6 +120,7 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 		EList<BasicBlock> blocks = function.getBody().getBlocks();
 		for (BasicBlock b : blocks) {
 			ControlFlowLocation location = createControlFlowLocation(cfg, pc);
+			location.setBlockLabel(b.getLabel());
 			if (cfg.getStart() == null) {
 				cfg.setStart(location);
 			}
@@ -128,6 +129,7 @@ public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
 				Transition t = createTransition(cfg, instr);
 				ControlFlowLocation nextLocation = createControlFlowLocation(
 						cfg, pc);
+				nextLocation.setBlockLabel(b.getLabel());
 				t.setSource(location);
 				t.setTarget(nextLocation);
 				location = nextLocation;
