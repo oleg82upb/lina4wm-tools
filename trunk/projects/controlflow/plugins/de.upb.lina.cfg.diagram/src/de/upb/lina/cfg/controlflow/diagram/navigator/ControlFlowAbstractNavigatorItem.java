@@ -8,40 +8,35 @@ import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributo
 /**
  * @generated
  */
-public abstract class ControlFlowAbstractNavigatorItem extends PlatformObject
-{
+public abstract class ControlFlowAbstractNavigatorItem extends PlatformObject {
 
 	/**
 	 * @generated
 	 */
-	static
-	{
+	static {
 		final Class[] supportedTypes = new Class[] { ITabbedPropertySheetPageContributor.class };
-		final ITabbedPropertySheetPageContributor propertySheetPageContributor = new ITabbedPropertySheetPageContributor()
-		{
-			public String getContributorId()
-			{
+		final ITabbedPropertySheetPageContributor propertySheetPageContributor = new ITabbedPropertySheetPageContributor() {
+			public String getContributorId() {
 				return "de.upb.lina.cfg.diagram"; //$NON-NLS-1$
 			}
 		};
-		Platform.getAdapterManager().registerAdapters(new IAdapterFactory()
-		{
+		Platform.getAdapterManager().registerAdapters(
+				new IAdapterFactory() {
 
-			public Object getAdapter(Object adaptableObject, Class adapterType)
-			{
-				if (adaptableObject instanceof de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowAbstractNavigatorItem
-						&& adapterType == ITabbedPropertySheetPageContributor.class)
-				{
-					return propertySheetPageContributor;
-				}
-				return null;
-			}
+					public Object getAdapter(Object adaptableObject,
+							Class adapterType) {
+						if (adaptableObject instanceof de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowAbstractNavigatorItem
+								&& adapterType == ITabbedPropertySheetPageContributor.class) {
+							return propertySheetPageContributor;
+						}
+						return null;
+					}
 
-			public Class[] getAdapterList()
-			{
-				return supportedTypes;
-			}
-		}, de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowAbstractNavigatorItem.class);
+					public Class[] getAdapterList() {
+						return supportedTypes;
+					}
+				},
+				de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowAbstractNavigatorItem.class);
 	}
 
 	/**
@@ -52,16 +47,14 @@ public abstract class ControlFlowAbstractNavigatorItem extends PlatformObject
 	/**
 	 * @generated
 	 */
-	protected ControlFlowAbstractNavigatorItem(Object parent)
-	{
+	protected ControlFlowAbstractNavigatorItem(Object parent) {
 		myParent = parent;
 	}
 
 	/**
 	 * @generated
 	 */
-	public Object getParent()
-	{
+	public Object getParent() {
 		return myParent;
 	}
 

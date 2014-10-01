@@ -11,8 +11,7 @@ import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 /**
  * @generated
  */
-public class ControlFlowCreationWizardPage extends WizardNewFileCreationPage
-{
+public class ControlFlowCreationWizardPage extends WizardNewFileCreationPage {
 
 	/**
 	 * @generated
@@ -22,8 +21,8 @@ public class ControlFlowCreationWizardPage extends WizardNewFileCreationPage
 	/**
 	 * @generated
 	 */
-	public ControlFlowCreationWizardPage(String pageName, IStructuredSelection selection, String fileExtension)
-	{
+	public ControlFlowCreationWizardPage(String pageName,
+			IStructuredSelection selection, String fileExtension) {
 		super(pageName, selection);
 		this.fileExtension = fileExtension;
 	}
@@ -33,32 +32,27 @@ public class ControlFlowCreationWizardPage extends WizardNewFileCreationPage
 	 * 
 	 * @generated
 	 */
-	protected String getExtension()
-	{
+	protected String getExtension() {
 		return fileExtension;
 	}
 
 	/**
 	 * @generated
 	 */
-	public URI getURI()
-	{
+	public URI getURI() {
 		return URI.createPlatformResourceURI(getFilePath().toString(), false);
 	}
 
 	/**
 	 * @generated
 	 */
-	protected IPath getFilePath()
-	{
+	protected IPath getFilePath() {
 		IPath path = getContainerFullPath();
-		if (path == null)
-		{
+		if (path == null) {
 			path = new Path(""); //$NON-NLS-1$
 		}
 		String fileName = getFileName();
-		if (fileName != null)
-		{
+		if (fileName != null) {
 			path = path.append(fileName);
 		}
 		return path;
@@ -67,27 +61,26 @@ public class ControlFlowCreationWizardPage extends WizardNewFileCreationPage
 	/**
 	 * @generated
 	 */
-	public void createControl(Composite parent)
-	{
+	public void createControl(Composite parent) {
 		super.createControl(parent);
-		setFileName(ControlFlowDiagramEditorUtil.getUniqueFileName(getContainerFullPath(), getFileName(),
-				getExtension()));
+		setFileName(ControlFlowDiagramEditorUtil.getUniqueFileName(
+				getContainerFullPath(), getFileName(), getExtension()));
 		setPageComplete(validatePage());
 	}
 
 	/**
 	 * @generated
 	 */
-	protected boolean validatePage()
-	{
-		if (!super.validatePage())
-		{
+	protected boolean validatePage() {
+		if (!super.validatePage()) {
 			return false;
 		}
 		String extension = getExtension();
-		if (extension != null && !getFilePath().toString().endsWith("." + extension))
-		{
-			setErrorMessage(NLS.bind(Messages.ControlFlowCreationWizardPageExtensionError, extension));
+		if (extension != null
+				&& !getFilePath().toString().endsWith("." + extension)) {
+			setErrorMessage(NLS.bind(
+					Messages.ControlFlowCreationWizardPageExtensionError,
+					extension));
 			return false;
 		}
 		return true;

@@ -19,8 +19,7 @@ import de.upb.lina.cfg.controlflow.diagram.part.Messages;
 /**
  * @generated
  */
-public class MessageFormatParser extends AbstractAttributeParser
-{
+public class MessageFormatParser extends AbstractAttributeParser {
 
 	/**
 	 * @generated
@@ -50,31 +49,26 @@ public class MessageFormatParser extends AbstractAttributeParser
 	/**
 	 * @generated
 	 */
-	public MessageFormatParser(EAttribute[] features)
-	{
+	public MessageFormatParser(EAttribute[] features) {
 		super(features);
 	}
 
 	/**
 	 * @generated
 	 */
-	public MessageFormatParser(EAttribute[] features, EAttribute[] editableFeatures)
-	{
+	public MessageFormatParser(EAttribute[] features,
+			EAttribute[] editableFeatures) {
 		super(features, editableFeatures);
 	}
 
 	/**
 	 * @generated
 	 */
-	protected String getDefaultPattern()
-	{
-		if (defaultPattern == null)
-		{
+	protected String getDefaultPattern() {
+		if (defaultPattern == null) {
 			StringBuffer sb = new StringBuffer();
-			for (int i = 0; i < features.length; i++)
-			{
-				if (i > 0)
-				{
+			for (int i = 0; i < features.length; i++) {
+				if (i > 0) {
 					sb.append(' ');
 				}
 				sb.append('{');
@@ -89,8 +83,7 @@ public class MessageFormatParser extends AbstractAttributeParser
 	/**
 	 * @generated
 	 */
-	public void setViewPattern(String viewPattern)
-	{
+	public void setViewPattern(String viewPattern) {
 		super.setViewPattern(viewPattern);
 		viewProcessor = null;
 	}
@@ -98,8 +91,7 @@ public class MessageFormatParser extends AbstractAttributeParser
 	/**
 	 * @generated
 	 */
-	public void setEditorPattern(String editorPattern)
-	{
+	public void setEditorPattern(String editorPattern) {
 		super.setEditorPattern(editorPattern);
 		editorProcessor = null;
 	}
@@ -107,11 +99,11 @@ public class MessageFormatParser extends AbstractAttributeParser
 	/**
 	 * @generated
 	 */
-	protected MessageFormat getViewProcessor()
-	{
-		if (viewProcessor == null)
-		{
-			viewProcessor = new MessageFormat(getViewPattern() == null ? getDefaultPattern() : getViewPattern());
+	protected MessageFormat getViewProcessor() {
+		if (viewProcessor == null) {
+			viewProcessor = new MessageFormat(
+					getViewPattern() == null ? getDefaultPattern()
+							: getViewPattern());
 		}
 		return viewProcessor;
 	}
@@ -119,12 +111,11 @@ public class MessageFormatParser extends AbstractAttributeParser
 	/**
 	 * @generated
 	 */
-	protected MessageFormat getEditorProcessor()
-	{
-		if (editorProcessor == null)
-		{
-			editorProcessor = new MessageFormat(getEditorPattern() == null ? getDefaultEditablePattern()
-					: getEditorPattern());
+	protected MessageFormat getEditorProcessor() {
+		if (editorProcessor == null) {
+			editorProcessor = new MessageFormat(
+					getEditorPattern() == null ? getDefaultEditablePattern()
+							: getEditorPattern());
 		}
 		return editorProcessor;
 	}
@@ -132,15 +123,11 @@ public class MessageFormatParser extends AbstractAttributeParser
 	/**
 	 * @generated
 	 */
-	protected String getDefaultEditablePattern()
-	{
-		if (defaultEditablePattern == null)
-		{
+	protected String getDefaultEditablePattern() {
+		if (defaultEditablePattern == null) {
 			StringBuffer sb = new StringBuffer();
-			for (int i = 0; i < editableFeatures.length; i++)
-			{
-				if (i > 0)
-				{
+			for (int i = 0; i < editableFeatures.length; i++) {
+				if (i > 0) {
 					sb.append(' ');
 				}
 				sb.append('{');
@@ -155,8 +142,7 @@ public class MessageFormatParser extends AbstractAttributeParser
 	/**
 	 * @generated
 	 */
-	public void setEditPattern(String editPattern)
-	{
+	public void setEditPattern(String editPattern) {
 		super.setEditPattern(editPattern);
 		editProcessor = null;
 	}
@@ -164,11 +150,11 @@ public class MessageFormatParser extends AbstractAttributeParser
 	/**
 	 * @generated
 	 */
-	protected MessageFormat getEditProcessor()
-	{
-		if (editProcessor == null)
-		{
-			editProcessor = new MessageFormat(getEditPattern() == null ? getDefaultEditablePattern() : getEditPattern());
+	protected MessageFormat getEditProcessor() {
+		if (editProcessor == null) {
+			editProcessor = new MessageFormat(
+					getEditPattern() == null ? getDefaultEditablePattern()
+							: getEditPattern());
 		}
 		return editProcessor;
 	}
@@ -176,24 +162,24 @@ public class MessageFormatParser extends AbstractAttributeParser
 	/**
 	 * @generated
 	 */
-	public String getEditString(IAdaptable adapter, int flags)
-	{
+	public String getEditString(IAdaptable adapter, int flags) {
 		EObject element = (EObject) adapter.getAdapter(EObject.class);
-		return getEditorProcessor().format(getEditableValues(element), new StringBuffer(), new FieldPosition(0))
-				.toString();
+		return getEditorProcessor().format(getEditableValues(element),
+				new StringBuffer(), new FieldPosition(0)).toString();
 	}
 
 	/**
 	 * @generated
 	 */
-	public IParserEditStatus isValidEditString(IAdaptable adapter, String editString)
-	{
+	public IParserEditStatus isValidEditString(IAdaptable adapter,
+			String editString) {
 		ParsePosition pos = new ParsePosition(0);
 		Object[] values = getEditProcessor().parse(editString, pos);
-		if (values == null)
-		{
-			return new ParserEditStatus(ControlFlowDiagramEditorPlugin.ID, IParserEditStatus.UNEDITABLE, NLS.bind(
-					Messages.MessageFormatParser_InvalidInputError, new Integer(pos.getErrorIndex())));
+		if (values == null) {
+			return new ParserEditStatus(ControlFlowDiagramEditorPlugin.ID,
+					IParserEditStatus.UNEDITABLE, NLS.bind(
+							Messages.MessageFormatParser_InvalidInputError,
+							new Integer(pos.getErrorIndex())));
 		}
 		return validateNewValues(values);
 	}
@@ -201,19 +187,20 @@ public class MessageFormatParser extends AbstractAttributeParser
 	/**
 	 * @generated
 	 */
-	public ICommand getParseCommand(IAdaptable adapter, String newString, int flags)
-	{
-		Object[] values = getEditProcessor().parse(newString, new ParsePosition(0));
+	public ICommand getParseCommand(IAdaptable adapter, String newString,
+			int flags) {
+		Object[] values = getEditProcessor().parse(newString,
+				new ParsePosition(0));
 		return getParseCommand(adapter, values, flags);
 	}
 
 	/**
 	 * @generated
 	 */
-	public String getPrintString(IAdaptable adapter, int flags)
-	{
+	public String getPrintString(IAdaptable adapter, int flags) {
 		EObject element = (EObject) adapter.getAdapter(EObject.class);
-		return getViewProcessor().format(getValues(element), new StringBuffer(), new FieldPosition(0)).toString();
+		return getViewProcessor().format(getValues(element),
+				new StringBuffer(), new FieldPosition(0)).toString();
 	}
 
 }

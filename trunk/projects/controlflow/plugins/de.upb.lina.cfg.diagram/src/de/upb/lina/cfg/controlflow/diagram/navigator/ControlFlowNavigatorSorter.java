@@ -7,8 +7,7 @@ import de.upb.lina.cfg.controlflow.diagram.part.ControlFlowVisualIDRegistry;
 /**
  * @generated
  */
-public class ControlFlowNavigatorSorter extends ViewerSorter
-{
+public class ControlFlowNavigatorSorter extends ViewerSorter {
 
 	/**
 	 * @generated
@@ -18,10 +17,8 @@ public class ControlFlowNavigatorSorter extends ViewerSorter
 	/**
 	 * @generated
 	 */
-	public int category(Object element)
-	{
-		if (element instanceof ControlFlowNavigatorItem)
-		{
+	public int category(Object element) {
+		if (element instanceof ControlFlowNavigatorItem) {
 			ControlFlowNavigatorItem item = (ControlFlowNavigatorItem) element;
 			return ControlFlowVisualIDRegistry.getVisualID(item.getView());
 		}

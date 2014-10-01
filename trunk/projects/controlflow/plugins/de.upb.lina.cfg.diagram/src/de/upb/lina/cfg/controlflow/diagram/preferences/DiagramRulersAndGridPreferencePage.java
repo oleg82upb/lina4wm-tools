@@ -7,14 +7,13 @@ import de.upb.lina.cfg.controlflow.diagram.part.ControlFlowDiagramEditorPlugin;
 /**
  * @generated
  */
-public class DiagramRulersAndGridPreferencePage extends RulerGridPreferencePage
-{
+public class DiagramRulersAndGridPreferencePage extends RulerGridPreferencePage {
 
 	/**
 	 * @generated
 	 */
-	public DiagramRulersAndGridPreferencePage()
-	{
-		setPreferenceStore(ControlFlowDiagramEditorPlugin.getInstance().getPreferenceStore());
+	public DiagramRulersAndGridPreferencePage() {
+		setPreferenceStore(ControlFlowDiagramEditorPlugin.getInstance()
+				.getPreferenceStore());
 	}
 }

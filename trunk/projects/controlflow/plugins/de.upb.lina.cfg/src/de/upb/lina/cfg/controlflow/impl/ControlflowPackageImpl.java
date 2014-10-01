@@ -251,6 +251,15 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getControlFlowLocation_BlockLabel() {
+		return (EAttribute)controlFlowLocationEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTransition() {
 		return transitionEClass;
 	}
@@ -444,6 +453,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		createEReference(controlFlowLocationEClass, CONTROL_FLOW_LOCATION__INCOMING);
 		createEReference(controlFlowLocationEClass, CONTROL_FLOW_LOCATION__OUTGOING);
 		createEReference(controlFlowLocationEClass, CONTROL_FLOW_LOCATION__BUFFER);
+		createEAttribute(controlFlowLocationEClass, CONTROL_FLOW_LOCATION__BLOCK_LABEL);
 
 		transitionEClass = createEClass(TRANSITION);
 		createEReference(transitionEClass, TRANSITION__INSTRUCTION);
@@ -517,6 +527,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		initEReference(getControlFlowLocation_Incoming(), this.getTransition(), this.getTransition_Target(), "incoming", null, 0, -1, ControlFlowLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getControlFlowLocation_Outgoing(), this.getTransition(), this.getTransition_Source(), "outgoing", null, 0, -1, ControlFlowLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getControlFlowLocation_Buffer(), this.getStoreBuffer(), this.getStoreBuffer_Location(), "buffer", null, 0, 1, ControlFlowLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getControlFlowLocation_BlockLabel(), ecorePackage.getEString(), "blockLabel", null, 0, 1, ControlFlowLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransition_Instruction(), theLlvmPackage.getInstruction(), null, "instruction", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

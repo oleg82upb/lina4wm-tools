@@ -31,8 +31,7 @@ import de.upb.lina.cfg.controlflow.diagram.part.Messages;
 /**
  * @generated
  */
-public class ControlFlowNavigatorActionProvider extends CommonActionProvider
-{
+public class ControlFlowNavigatorActionProvider extends CommonActionProvider {
 
 	/**
 	 * @generated
@@ -47,15 +46,12 @@ public class ControlFlowNavigatorActionProvider extends CommonActionProvider
 	/**
 	 * @generated
 	 */
-	public void init(ICommonActionExtensionSite aSite)
-	{
+	public void init(ICommonActionExtensionSite aSite) {
 		super.init(aSite);
-		if (aSite.getViewSite() instanceof ICommonViewerWorkbenchSite)
-		{
+		if (aSite.getViewSite() instanceof ICommonViewerWorkbenchSite) {
 			myContribute = true;
 			makeActions((ICommonViewerWorkbenchSite) aSite.getViewSite());
-		} else
-		{
+		} else {
 			myContribute = false;
 		}
 	}
@@ -63,40 +59,36 @@ public class ControlFlowNavigatorActionProvider extends CommonActionProvider
 	/**
 	 * @generated
 	 */
-	private void makeActions(ICommonViewerWorkbenchSite viewerSite)
-	{
+	private void makeActions(ICommonViewerWorkbenchSite viewerSite) {
 		myOpenDiagramAction = new OpenDiagramAction(viewerSite);
 	}
 
 	/**
 	 * @generated
 	 */
-	public void fillActionBars(IActionBars actionBars)
-	{
-		if (!myContribute)
-		{
+	public void fillActionBars(IActionBars actionBars) {
+		if (!myContribute) {
 			return;
 		}
-		IStructuredSelection selection = (IStructuredSelection) getContext().getSelection();
+		IStructuredSelection selection = (IStructuredSelection) getContext()
+				.getSelection();
 		myOpenDiagramAction.selectionChanged(selection);
-		if (myOpenDiagramAction.isEnabled())
-		{
-			actionBars.setGlobalActionHandler(ICommonActionConstants.OPEN, myOpenDiagramAction);
+		if (myOpenDiagramAction.isEnabled()) {
+			actionBars.setGlobalActionHandler(ICommonActionConstants.OPEN,
+					myOpenDiagramAction);
 		}
 	}
 
 	/**
 	 * @generated
 	 */
-	public void fillContextMenu(IMenuManager menu)
-	{
+	public void fillContextMenu(IMenuManager menu) {
 	}
 
 	/**
 	 * @generated
 	 */
-	private static class OpenDiagramAction extends Action
-	{
+	private static class OpenDiagramAction extends Action {
 
 		/**
 		 * @generated
@@ -111,8 +103,7 @@ public class ControlFlowNavigatorActionProvider extends CommonActionProvider
 		/**
 		 * @generated
 		 */
-		public OpenDiagramAction(ICommonViewerWorkbenchSite viewerSite)
-		{
+		public OpenDiagramAction(ICommonViewerWorkbenchSite viewerSite) {
 			super(Messages.NavigatorActionProvider_OpenDiagramActionName);
 			myViewerSite = viewerSite;
 		}
@@ -120,24 +111,22 @@ public class ControlFlowNavigatorActionProvider extends CommonActionProvider
 		/**
 		 * @generated
 		 */
-		public final void selectionChanged(IStructuredSelection selection)
-		{
+		public final void selectionChanged(IStructuredSelection selection) {
 			myDiagram = null;
-			if (selection.size() == 1)
-			{
+			if (selection.size() == 1) {
 				Object selectedElement = selection.getFirstElement();
-				if (selectedElement instanceof ControlFlowNavigatorItem)
-				{
-					selectedElement = ((ControlFlowNavigatorItem) selectedElement).getView();
-				} else if (selectedElement instanceof IAdaptable)
-				{
-					selectedElement = ((IAdaptable) selectedElement).getAdapter(View.class);
+				if (selectedElement instanceof ControlFlowNavigatorItem) {
+					selectedElement = ((ControlFlowNavigatorItem) selectedElement)
+							.getView();
+				} else if (selectedElement instanceof IAdaptable) {
+					selectedElement = ((IAdaptable) selectedElement)
+							.getAdapter(View.class);
 				}
-				if (selectedElement instanceof Diagram)
-				{
+				if (selectedElement instanceof Diagram) {
 					Diagram diagram = (Diagram) selectedElement;
-					if (ControlFlowDiagramEditPart.MODEL_ID.equals(ControlFlowVisualIDRegistry.getModelID(diagram)))
-					{
+					if (ControlFlowDiagramEditPart.MODEL_ID
+							.equals(ControlFlowVisualIDRegistry
+									.getModelID(diagram))) {
 						myDiagram = diagram;
 					}
 				}
@@ -148,43 +137,38 @@ public class ControlFlowNavigatorActionProvider extends CommonActionProvider
 		/**
 		 * @generated
 		 */
-		public void run()
-		{
-			if (myDiagram == null || myDiagram.eResource() == null)
-			{
+		public void run() {
+			if (myDiagram == null || myDiagram.eResource() == null) {
 				return;
 			}
 
 			IEditorInput editorInput = getEditorInput(myDiagram);
 			IWorkbenchPage page = myViewerSite.getPage();
-			try
-			{
+			try {
 				page.openEditor(editorInput, ControlFlowDiagramEditor.ID);
-			} catch (PartInitException e)
-			{
-				ControlFlowDiagramEditorPlugin.getInstance().logError("Exception while openning diagram", e); //$NON-NLS-1$
+			} catch (PartInitException e) {
+				ControlFlowDiagramEditorPlugin.getInstance().logError(
+						"Exception while openning diagram", e); //$NON-NLS-1$
 			}
 		}
 
 		/**
 		 * @generated
 		 */
-		private static IEditorInput getEditorInput(Diagram diagram)
-		{
+		private static IEditorInput getEditorInput(Diagram diagram) {
 			Resource diagramResource = diagram.eResource();
-			for (EObject nextEObject : diagramResource.getContents())
-			{
-				if (nextEObject == diagram)
-				{
-					return new FileEditorInput(WorkspaceSynchronizer.getFile(diagramResource));
+			for (EObject nextEObject : diagramResource.getContents()) {
+				if (nextEObject == diagram) {
+					return new FileEditorInput(
+							WorkspaceSynchronizer.getFile(diagramResource));
 				}
-				if (nextEObject instanceof Diagram)
-				{
+				if (nextEObject instanceof Diagram) {
 					break;
 				}
 			}
 			URI uri = EcoreUtil.getURI(diagram);
-			String editorName = uri.lastSegment() + '#' + diagram.eResource().getContents().indexOf(diagram);
+			String editorName = uri.lastSegment() + '#'
+					+ diagram.eResource().getContents().indexOf(diagram);
 			IEditorInput editorInput = new URIEditorInput(uri, editorName);
 			return editorInput;
 		}

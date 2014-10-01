@@ -11,14 +11,13 @@ import org.eclipse.swt.graphics.Image;
 /**
  * @generated
  */
-public class ControlFlowIconProvider extends DefaultElementTypeIconProvider implements IIconProvider
-{
+public class ControlFlowIconProvider extends DefaultElementTypeIconProvider
+		implements IIconProvider {
 
 	/**
 	 * @generated
 	 */
-	public ControlFlowIconProvider()
-	{
+	public ControlFlowIconProvider() {
 		super(ControlFlowElementTypes.TYPED_INSTANCE);
 	}
 }

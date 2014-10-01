@@ -92,12 +92,10 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * @generated
 	 */
 	public Instruction getInstruction() {
-		if (instruction != null && instruction.eIsProxy())
-		{
+		if (instruction != null && instruction.eIsProxy()) {
 			InternalEObject oldInstruction = (InternalEObject)instruction;
 			instruction = (Instruction)eResolveProxy(oldInstruction);
-			if (instruction != oldInstruction)
-			{
+			if (instruction != oldInstruction) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ControlflowPackage.TRANSITION__INSTRUCTION, oldInstruction, instruction));
 			}
@@ -132,12 +130,10 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * @generated
 	 */
 	public ControlFlowLocation getSource() {
-		if (source != null && source.eIsProxy())
-		{
+		if (source != null && source.eIsProxy()) {
 			InternalEObject oldSource = (InternalEObject)source;
 			source = (ControlFlowLocation)eResolveProxy(oldSource);
-			if (source != oldSource)
-			{
+			if (source != oldSource) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ControlflowPackage.TRANSITION__SOURCE, oldSource, source));
 			}
@@ -163,8 +159,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	{
 		ControlFlowLocation oldSource = source;
 		source = newSource;
-		if (eNotificationRequired())
-		{
+		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ControlflowPackage.TRANSITION__SOURCE, oldSource, newSource);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -177,8 +172,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * @generated
 	 */
 	public void setSource(ControlFlowLocation newSource) {
-		if (newSource != source)
-		{
+		if (newSource != source) {
 			NotificationChain msgs = null;
 			if (source != null)
 				msgs = ((InternalEObject)source).eInverseRemove(this, ControlflowPackage.CONTROL_FLOW_LOCATION__OUTGOING, ControlFlowLocation.class, msgs);
@@ -197,12 +191,10 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * @generated
 	 */
 	public ControlFlowLocation getTarget() {
-		if (target != null && target.eIsProxy())
-		{
+		if (target != null && target.eIsProxy()) {
 			InternalEObject oldTarget = (InternalEObject)target;
 			target = (ControlFlowLocation)eResolveProxy(oldTarget);
-			if (target != oldTarget)
-			{
+			if (target != oldTarget) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ControlflowPackage.TRANSITION__TARGET, oldTarget, target));
 			}
@@ -228,8 +220,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	{
 		ControlFlowLocation oldTarget = target;
 		target = newTarget;
-		if (eNotificationRequired())
-		{
+		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ControlflowPackage.TRANSITION__TARGET, oldTarget, newTarget);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -242,8 +233,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * @generated
 	 */
 	public void setTarget(ControlFlowLocation newTarget) {
-		if (newTarget != target)
-		{
+		if (newTarget != target) {
 			NotificationChain msgs = null;
 			if (target != null)
 				msgs = ((InternalEObject)target).eInverseRemove(this, ControlflowPackage.CONTROL_FLOW_LOCATION__INCOMING, ControlFlowLocation.class, msgs);
@@ -282,8 +272,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * @generated
 	 */
 	public void setDiagram(ControlFlowDiagram newDiagram) {
-		if (newDiagram != eInternalContainer() || (eContainerFeatureID() != ControlflowPackage.TRANSITION__DIAGRAM && newDiagram != null))
-		{
+		if (newDiagram != eInternalContainer() || (eContainerFeatureID() != ControlflowPackage.TRANSITION__DIAGRAM && newDiagram != null)) {
 			if (EcoreUtil.isAncestor(this, newDiagram))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -305,8 +294,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.TRANSITION__SOURCE:
 				if (source != null)
 					msgs = ((InternalEObject)source).eInverseRemove(this, ControlflowPackage.CONTROL_FLOW_LOCATION__OUTGOING, ControlFlowLocation.class, msgs);
@@ -330,8 +318,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.TRANSITION__SOURCE:
 				return basicSetSource(null, msgs);
 			case ControlflowPackage.TRANSITION__TARGET:
@@ -349,8 +336,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID())
-		{
+		switch (eContainerFeatureID()) {
 			case ControlflowPackage.TRANSITION__DIAGRAM:
 				return eInternalContainer().eInverseRemove(this, ControlflowPackage.CONTROL_FLOW_DIAGRAM__TRANSITIONS, ControlFlowDiagram.class, msgs);
 		}
@@ -364,8 +350,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.TRANSITION__INSTRUCTION:
 				if (resolve) return getInstruction();
 				return basicGetInstruction();
@@ -388,8 +373,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.TRANSITION__INSTRUCTION:
 				setInstruction((Instruction)newValue);
 				return;
@@ -413,8 +397,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.TRANSITION__INSTRUCTION:
 				setInstruction((Instruction)null);
 				return;
@@ -438,8 +421,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case ControlflowPackage.TRANSITION__INSTRUCTION:
 				return instruction != null;
 			case ControlflowPackage.TRANSITION__SOURCE:

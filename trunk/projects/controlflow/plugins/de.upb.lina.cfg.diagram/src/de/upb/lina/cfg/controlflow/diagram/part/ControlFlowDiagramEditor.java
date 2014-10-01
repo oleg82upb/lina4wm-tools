@@ -46,8 +46,8 @@ import de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowNavigatorItem;
 /**
  * @generated
  */
-public class ControlFlowDiagramEditor extends DiagramDocumentEditor implements IGotoMarker
-{
+public class ControlFlowDiagramEditor extends DiagramDocumentEditor implements
+		IGotoMarker {
 
 	/**
 	 * @generated
@@ -62,24 +62,21 @@ public class ControlFlowDiagramEditor extends DiagramDocumentEditor implements I
 	/**
 	 * @generated
 	 */
-	public ControlFlowDiagramEditor()
-	{
+	public ControlFlowDiagramEditor() {
 		super(true);
 	}
 
 	/**
 	 * @generated
 	 */
-	protected String getContextID()
-	{
+	protected String getContextID() {
 		return CONTEXT_ID;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected PaletteRoot createPaletteRoot(PaletteRoot existingPaletteRoot)
-	{
+	protected PaletteRoot createPaletteRoot(PaletteRoot existingPaletteRoot) {
 		PaletteRoot root = super.createPaletteRoot(existingPaletteRoot);
 		new ControlFlowPaletteFactory().fillPalette(root);
 		return root;
@@ -88,16 +85,14 @@ public class ControlFlowDiagramEditor extends DiagramDocumentEditor implements I
 	/**
 	 * @generated
 	 */
-	protected PreferencesHint getPreferencesHint()
-	{
+	protected PreferencesHint getPreferencesHint() {
 		return ControlFlowDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT;
 	}
 
 	/**
 	 * @generated
 	 */
-	public String getContributorId()
-	{
+	public String getContributorId() {
 		return ControlFlowDiagramEditorPlugin.ID;
 	}
 
@@ -105,14 +100,10 @@ public class ControlFlowDiagramEditor extends DiagramDocumentEditor implements I
 	 * @generated
 	 */
 	@SuppressWarnings("rawtypes")
-	public Object getAdapter(Class type)
-	{
-		if (type == IShowInTargetList.class)
-		{
-			return new IShowInTargetList()
-			{
-				public String[] getShowInTargetIds()
-				{
+	public Object getAdapter(Class type) {
+		if (type == IShowInTargetList.class) {
+			return new IShowInTargetList() {
+				public String[] getShowInTargetIds() {
 					return new String[] { ProjectExplorer.VIEW_ID };
 				}
 			};
@@ -123,11 +114,11 @@ public class ControlFlowDiagramEditor extends DiagramDocumentEditor implements I
 	/**
 	 * @generated
 	 */
-	protected IDocumentProvider getDocumentProvider(IEditorInput input)
-	{
-		if (input instanceof IFileEditorInput || input instanceof URIEditorInput)
-		{
-			return ControlFlowDiagramEditorPlugin.getInstance().getDocumentProvider();
+	protected IDocumentProvider getDocumentProvider(IEditorInput input) {
+		if (input instanceof IFileEditorInput
+				|| input instanceof URIEditorInput) {
+			return ControlFlowDiagramEditorPlugin.getInstance()
+					.getDocumentProvider();
 		}
 		return super.getDocumentProvider(input);
 	}
@@ -135,11 +126,10 @@ public class ControlFlowDiagramEditor extends DiagramDocumentEditor implements I
 	/**
 	 * @generated
 	 */
-	public TransactionalEditingDomain getEditingDomain()
-	{
-		IDocument document = getEditorInput() != null ? getDocumentProvider().getDocument(getEditorInput()) : null;
-		if (document instanceof IDiagramDocument)
-		{
+	public TransactionalEditingDomain getEditingDomain() {
+		IDocument document = getEditorInput() != null ? getDocumentProvider()
+				.getDocument(getEditorInput()) : null;
+		if (document instanceof IDiagramDocument) {
 			return ((IDiagramDocument) document).getEditingDomain();
 		}
 		return super.getEditingDomain();
@@ -148,13 +138,12 @@ public class ControlFlowDiagramEditor extends DiagramDocumentEditor implements I
 	/**
 	 * @generated
 	 */
-	protected void setDocumentProvider(IEditorInput input)
-	{
-		if (input instanceof IFileEditorInput || input instanceof URIEditorInput)
-		{
-			setDocumentProvider(ControlFlowDiagramEditorPlugin.getInstance().getDocumentProvider());
-		} else
-		{
+	protected void setDocumentProvider(IEditorInput input) {
+		if (input instanceof IFileEditorInput
+				|| input instanceof URIEditorInput) {
+			setDocumentProvider(ControlFlowDiagramEditorPlugin.getInstance()
+					.getDocumentProvider());
+		} else {
 			super.setDocumentProvider(input);
 		}
 	}
@@ -162,66 +151,58 @@ public class ControlFlowDiagramEditor extends DiagramDocumentEditor implements I
 	/**
 	 * @generated
 	 */
-	public void gotoMarker(IMarker marker)
-	{
+	public void gotoMarker(IMarker marker) {
 		MarkerNavigationService.getInstance().gotoMarker(this, marker);
 	}
 
 	/**
 	 * @generated
 	 */
-	public boolean isSaveAsAllowed()
-	{
+	public boolean isSaveAsAllowed() {
 		return true;
 	}
 
 	/**
 	 * @generated
 	 */
-	public void doSaveAs()
-	{
+	public void doSaveAs() {
 		performSaveAs(new NullProgressMonitor());
 	}
 
 	/**
 	 * @generated
 	 */
-	protected void performSaveAs(IProgressMonitor progressMonitor)
-	{
+	protected void performSaveAs(IProgressMonitor progressMonitor) {
 		Shell shell = getSite().getShell();
 		IEditorInput input = getEditorInput();
 		SaveAsDialog dialog = new SaveAsDialog(shell);
-		IFile original = input instanceof IFileEditorInput ? ((IFileEditorInput) input).getFile() : null;
-		if (original != null)
-		{
+		IFile original = input instanceof IFileEditorInput ? ((IFileEditorInput) input)
+				.getFile() : null;
+		if (original != null) {
 			dialog.setOriginalFile(original);
 		}
 		dialog.create();
 		IDocumentProvider provider = getDocumentProvider();
-		if (provider == null)
-		{
+		if (provider == null) {
 			// editor has been programmatically closed while the dialog was open
 			return;
 		}
-		if (provider.isDeleted(input) && original != null)
-		{
-			String message = NLS.bind(Messages.ControlFlowDiagramEditor_SavingDeletedFile, original.getName());
+		if (provider.isDeleted(input) && original != null) {
+			String message = NLS.bind(
+					Messages.ControlFlowDiagramEditor_SavingDeletedFile,
+					original.getName());
 			dialog.setErrorMessage(null);
 			dialog.setMessage(message, IMessageProvider.WARNING);
 		}
-		if (dialog.open() == Window.CANCEL)
-		{
-			if (progressMonitor != null)
-			{
+		if (dialog.open() == Window.CANCEL) {
+			if (progressMonitor != null) {
 				progressMonitor.setCanceled(true);
 			}
 			return;
 		}
 		IPath filePath = dialog.getResult();
-		if (filePath == null)
-		{
-			if (progressMonitor != null)
-			{
+		if (filePath == null) {
+			if (progressMonitor != null) {
 				progressMonitor.setCanceled(true);
 			}
 			return;
@@ -230,43 +211,41 @@ public class ControlFlowDiagramEditor extends DiagramDocumentEditor implements I
 		IFile file = workspaceRoot.getFile(filePath);
 		final IEditorInput newInput = new FileEditorInput(file);
 		// Check if the editor is already open
-		IEditorMatchingStrategy matchingStrategy = getEditorDescriptor().getEditorMatchingStrategy();
-		IEditorReference[] editorRefs = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+		IEditorMatchingStrategy matchingStrategy = getEditorDescriptor()
+				.getEditorMatchingStrategy();
+		IEditorReference[] editorRefs = PlatformUI.getWorkbench()
+				.getActiveWorkbenchWindow().getActivePage()
 				.getEditorReferences();
-		for (int i = 0; i < editorRefs.length; i++)
-		{
-			if (matchingStrategy.matches(editorRefs[i], newInput))
-			{
-				MessageDialog.openWarning(shell, Messages.ControlFlowDiagramEditor_SaveAsErrorTitle,
+		for (int i = 0; i < editorRefs.length; i++) {
+			if (matchingStrategy.matches(editorRefs[i], newInput)) {
+				MessageDialog.openWarning(shell,
+						Messages.ControlFlowDiagramEditor_SaveAsErrorTitle,
 						Messages.ControlFlowDiagramEditor_SaveAsErrorMessage);
 				return;
 			}
 		}
 		boolean success = false;
-		try
-		{
+		try {
 			provider.aboutToChange(newInput);
-			getDocumentProvider(newInput).saveDocument(progressMonitor, newInput,
+			getDocumentProvider(newInput).saveDocument(progressMonitor,
+					newInput,
 					getDocumentProvider().getDocument(getEditorInput()), true);
 			success = true;
-		} catch (CoreException x)
-		{
+		} catch (CoreException x) {
 			IStatus status = x.getStatus();
-			if (status == null || status.getSeverity() != IStatus.CANCEL)
-			{
-				ErrorDialog.openError(shell, Messages.ControlFlowDiagramEditor_SaveErrorTitle,
-						Messages.ControlFlowDiagramEditor_SaveErrorMessage, x.getStatus());
+			if (status == null || status.getSeverity() != IStatus.CANCEL) {
+				ErrorDialog.openError(shell,
+						Messages.ControlFlowDiagramEditor_SaveErrorTitle,
+						Messages.ControlFlowDiagramEditor_SaveErrorMessage,
+						x.getStatus());
 			}
-		} finally
-		{
+		} finally {
 			provider.changed(newInput);
-			if (success)
-			{
+			if (success) {
 				setInput(newInput);
 			}
 		}
-		if (progressMonitor != null)
-		{
+		if (progressMonitor != null) {
 			progressMonitor.setCanceled(!success);
 		}
 	}
@@ -274,30 +253,26 @@ public class ControlFlowDiagramEditor extends DiagramDocumentEditor implements I
 	/**
 	 * @generated
 	 */
-	public ShowInContext getShowInContext()
-	{
+	public ShowInContext getShowInContext() {
 		return new ShowInContext(getEditorInput(), getNavigatorSelection());
 	}
 
 	/**
 	 * @generated
 	 */
-	private ISelection getNavigatorSelection()
-	{
+	private ISelection getNavigatorSelection() {
 		IDiagramDocument document = getDiagramDocument();
-		if (document == null)
-		{
+		if (document == null) {
 			return StructuredSelection.EMPTY;
 		}
 		Diagram diagram = document.getDiagram();
-		if (diagram == null || diagram.eResource() == null)
-		{
+		if (diagram == null || diagram.eResource() == null) {
 			return StructuredSelection.EMPTY;
 		}
 		IFile file = WorkspaceSynchronizer.getFile(diagram.eResource());
-		if (file != null)
-		{
-			ControlFlowNavigatorItem item = new ControlFlowNavigatorItem(diagram, file, false);
+		if (file != null) {
+			ControlFlowNavigatorItem item = new ControlFlowNavigatorItem(
+					diagram, file, false);
 			return new StructuredSelection(item);
 		}
 		return StructuredSelection.EMPTY;
@@ -306,13 +281,13 @@ public class ControlFlowDiagramEditor extends DiagramDocumentEditor implements I
 	/**
 	 * @generated
 	 */
-	protected void configureGraphicalViewer()
-	{
+	protected void configureGraphicalViewer() {
 		super.configureGraphicalViewer();
-		DiagramEditorContextMenuProvider provider = new DiagramEditorContextMenuProvider(this,
-				getDiagramGraphicalViewer());
+		DiagramEditorContextMenuProvider provider = new DiagramEditorContextMenuProvider(
+				this, getDiagramGraphicalViewer());
 		getDiagramGraphicalViewer().setContextMenu(provider);
-		getSite().registerContextMenu(ActionIds.DIAGRAM_EDITOR_CONTEXT_MENU, provider, getDiagramGraphicalViewer());
+		getSite().registerContextMenu(ActionIds.DIAGRAM_EDITOR_CONTEXT_MENU,
+				provider, getDiagramGraphicalViewer());
 	}
 
 }

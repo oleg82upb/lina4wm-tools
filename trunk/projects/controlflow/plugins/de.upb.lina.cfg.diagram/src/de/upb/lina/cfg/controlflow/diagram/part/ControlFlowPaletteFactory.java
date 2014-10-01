@@ -12,21 +12,17 @@ import org.eclipse.gmf.runtime.diagram.ui.tools.UnspecifiedTypeConnectionTool;
 import org.eclipse.gmf.runtime.diagram.ui.tools.UnspecifiedTypeCreationTool;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 
-import org.eclipse.gmf.tooling.runtime.part.DefaultLinkToolEntry;
-import org.eclipse.gmf.tooling.runtime.part.DefaultNodeToolEntry;
 import de.upb.lina.cfg.controlflow.diagram.providers.ControlFlowElementTypes;
 
 /**
  * @generated
  */
-public class ControlFlowPaletteFactory
-{
+public class ControlFlowPaletteFactory {
 
 	/**
 	 * @generated
 	 */
-	public void fillPalette(PaletteRoot paletteRoot)
-	{
+	public void fillPalette(PaletteRoot paletteRoot) {
 		paletteRoot.add(createControlflow1Group());
 	}
 
@@ -34,9 +30,9 @@ public class ControlFlowPaletteFactory
 	 * Creates "controlflow" palette tool group
 	 * @generated
 	 */
-	private PaletteContainer createControlflow1Group()
-	{
-		PaletteGroup paletteContainer = new PaletteGroup(Messages.Controlflow1Group_title);
+	private PaletteContainer createControlflow1Group() {
+		PaletteGroup paletteContainer = new PaletteGroup(
+				Messages.Controlflow1Group_title);
 		paletteContainer.setId("createControlflow1Group"); //$NON-NLS-1$
 		paletteContainer.add(createControlFlowLocation1CreationTool());
 		paletteContainer.add(createTransition2CreationTool());
@@ -46,13 +42,15 @@ public class ControlFlowPaletteFactory
 	/**
 	 * @generated
 	 */
-	private ToolEntry createControlFlowLocation1CreationTool()
-	{
-		DefaultNodeToolEntry entry = new DefaultNodeToolEntry(Messages.ControlFlowLocation1CreationTool_title,
+	private ToolEntry createControlFlowLocation1CreationTool() {
+		NodeToolEntry entry = new NodeToolEntry(
+				Messages.ControlFlowLocation1CreationTool_title,
 				Messages.ControlFlowLocation1CreationTool_desc,
-				Collections.singletonList(ControlFlowElementTypes.ControlFlowLocation_2001));
+				Collections
+						.singletonList(ControlFlowElementTypes.ControlFlowLocation_2001));
 		entry.setId("createControlFlowLocation1CreationTool"); //$NON-NLS-1$
-		entry.setSmallIcon(ControlFlowElementTypes.getImageDescriptor(ControlFlowElementTypes.ControlFlowLocation_2001));
+		entry.setSmallIcon(ControlFlowElementTypes
+				.getImageDescriptor(ControlFlowElementTypes.ControlFlowLocation_2001));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -60,14 +58,74 @@ public class ControlFlowPaletteFactory
 	/**
 	 * @generated
 	 */
-	private ToolEntry createTransition2CreationTool()
-	{
-		DefaultLinkToolEntry entry = new DefaultLinkToolEntry(Messages.Transition2CreationTool_title,
+	private ToolEntry createTransition2CreationTool() {
+		LinkToolEntry entry = new LinkToolEntry(
+				Messages.Transition2CreationTool_title,
 				Messages.Transition2CreationTool_desc,
-				Collections.singletonList(ControlFlowElementTypes.Transition_4001));
+				Collections
+						.singletonList(ControlFlowElementTypes.Transition_4001));
 		entry.setId("createTransition2CreationTool"); //$NON-NLS-1$
-		entry.setSmallIcon(ControlFlowElementTypes.getImageDescriptor(ControlFlowElementTypes.Transition_4001));
+		entry.setSmallIcon(ControlFlowElementTypes
+				.getImageDescriptor(ControlFlowElementTypes.Transition_4001));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
+	}
+
+	/**
+	 * @generated
+	 */
+	private static class NodeToolEntry extends ToolEntry {
+
+		/**
+		 * @generated
+		 */
+		private final List<IElementType> elementTypes;
+
+		/**
+		 * @generated
+		 */
+		private NodeToolEntry(String title, String description,
+				List<IElementType> elementTypes) {
+			super(title, description, null, null);
+			this.elementTypes = elementTypes;
+		}
+
+		/**
+		 * @generated
+		 */
+		public Tool createTool() {
+			Tool tool = new UnspecifiedTypeCreationTool(elementTypes);
+			tool.setProperties(getToolProperties());
+			return tool;
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	private static class LinkToolEntry extends ToolEntry {
+
+		/**
+		 * @generated
+		 */
+		private final List<IElementType> relationshipTypes;
+
+		/**
+		 * @generated
+		 */
+		private LinkToolEntry(String title, String description,
+				List<IElementType> relationshipTypes) {
+			super(title, description, null, null);
+			this.relationshipTypes = relationshipTypes;
+		}
+
+		/**
+		 * @generated
+		 */
+		public Tool createTool() {
+			Tool tool = new UnspecifiedTypeConnectionTool(relationshipTypes);
+			tool.setProperties(getToolProperties());
+			return tool;
+		}
 	}
 }

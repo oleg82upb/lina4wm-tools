@@ -6,8 +6,7 @@ import java.util.LinkedList;
 /**
  * @generated
  */
-public class ControlFlowNavigatorGroup extends ControlFlowAbstractNavigatorItem
-{
+public class ControlFlowNavigatorGroup extends ControlFlowAbstractNavigatorItem {
 
 	/**
 	 * @generated
@@ -27,8 +26,7 @@ public class ControlFlowNavigatorGroup extends ControlFlowAbstractNavigatorItem
 	/**
 	 * @generated
 	 */
-	ControlFlowNavigatorGroup(String groupName, String icon, Object parent)
-	{
+	ControlFlowNavigatorGroup(String groupName, String icon, Object parent) {
 		super(parent);
 		myGroupName = groupName;
 		myIcon = icon;
@@ -37,61 +35,52 @@ public class ControlFlowNavigatorGroup extends ControlFlowAbstractNavigatorItem
 	/**
 	 * @generated
 	 */
-	public String getGroupName()
-	{
+	public String getGroupName() {
 		return myGroupName;
 	}
 
 	/**
 	 * @generated
 	 */
-	public String getIcon()
-	{
+	public String getIcon() {
 		return myIcon;
 	}
 
 	/**
 	 * @generated
 	 */
-	public Object[] getChildren()
-	{
+	public Object[] getChildren() {
 		return myChildren.toArray();
 	}
 
 	/**
 	 * @generated
 	 */
-	public void addChildren(Collection children)
-	{
+	public void addChildren(Collection children) {
 		myChildren.addAll(children);
 	}
 
 	/**
 	 * @generated
 	 */
-	public void addChild(Object child)
-	{
+	public void addChild(Object child) {
 		myChildren.add(child);
 	}
 
 	/**
 	 * @generated
 	 */
-	public boolean isEmpty()
-	{
+	public boolean isEmpty() {
 		return myChildren.size() == 0;
 	}
 
 	/**
 	 * @generated
 	 */
-	public boolean equals(Object obj)
-	{
-		if (obj instanceof de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowNavigatorGroup)
-		{
+	public boolean equals(Object obj) {
+		if (obj instanceof de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowNavigatorGroup) {
 			de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowNavigatorGroup anotherGroup = (de.upb.lina.cfg.controlflow.diagram.navigator.ControlFlowNavigatorGroup) obj;
-			if (getGroupName().equals(anotherGroup.getGroupName()))
-			{
+			if (getGroupName().equals(anotherGroup.getGroupName())) {
 				return getParent().equals(anotherGroup.getParent());
 			}
 		}
@@ -101,8 +90,7 @@ public class ControlFlowNavigatorGroup extends ControlFlowAbstractNavigatorItem
 	/**
 	 * @generated
 	 */
-	public int hashCode()
-	{
+	public int hashCode() {
 		return getGroupName().hashCode();
 	}
 
