@@ -41,8 +41,7 @@ public final class ControlFlowEditorPlugin extends EMFPlugin {
 	 */
 	public ControlFlowEditorPlugin() {
 		super
-			(new ResourceLocator [] 
-			{
+			(new ResourceLocator [] {
 				LLVMEditPlugin.INSTANCE,
 			});
 	}

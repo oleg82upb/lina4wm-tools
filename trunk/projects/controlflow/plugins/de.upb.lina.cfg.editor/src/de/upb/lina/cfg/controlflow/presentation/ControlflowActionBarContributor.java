@@ -71,17 +71,13 @@ public class ControlflowActionBarContributor
 	 * @generated
 	 */
 	protected IAction showPropertiesViewAction =
-		new Action(ControlFlowEditorPlugin.INSTANCE.getString("_UI_ShowPropertiesView_menu_item"))
-		{
+		new Action(ControlFlowEditorPlugin.INSTANCE.getString("_UI_ShowPropertiesView_menu_item")) {
 			@Override
-			public void run()
-			{
-				try
-				{
+			public void run() {
+				try {
 					getPage().showView("org.eclipse.ui.views.PropertySheet");
 				}
-				catch (PartInitException exception)
-				{
+				catch (PartInitException exception) {
 					ControlFlowEditorPlugin.INSTANCE.log(exception);
 				}
 			}
@@ -95,22 +91,17 @@ public class ControlflowActionBarContributor
 	 * @generated
 	 */
 	protected IAction refreshViewerAction =
-		new Action(ControlFlowEditorPlugin.INSTANCE.getString("_UI_RefreshViewer_menu_item"))
-		{
+		new Action(ControlFlowEditorPlugin.INSTANCE.getString("_UI_RefreshViewer_menu_item")) {
 			@Override
-			public boolean isEnabled()
-			{
+			public boolean isEnabled() {
 				return activeEditorPart instanceof IViewerProvider;
 			}
 
 			@Override
-			public void run()
-			{
-				if (activeEditorPart instanceof IViewerProvider)
-				{
+			public void run() {
+				if (activeEditorPart instanceof IViewerProvider) {
 					Viewer viewer = ((IViewerProvider)activeEditorPart).getViewer();
-					if (viewer != null)
-					{
+					if (viewer != null) {
 						viewer.refresh();
 					}
 				}
@@ -207,10 +198,8 @@ public class ControlflowActionBarContributor
 		// Force an update because Eclipse hides empty menus now.
 		//
 		submenuManager.addMenuListener
-			(new IMenuListener()
-			 {
-				 public void menuAboutToShow(IMenuManager menuManager)
-				 {
+			(new IMenuListener() {
+				 public void menuAboutToShow(IMenuManager menuManager) {
 					 menuManager.updateAll(true);
 				 }
 			 });
@@ -231,23 +220,19 @@ public class ControlflowActionBarContributor
 
 		// Switch to the new selection provider.
 		//
-		if (selectionProvider != null)
-		{
+		if (selectionProvider != null) {
 			selectionProvider.removeSelectionChangedListener(this);
 		}
-		if (part == null)
-		{
+		if (part == null) {
 			selectionProvider = null;
 		}
-		else
-		{
+		else {
 			selectionProvider = part.getSite().getSelectionProvider();
 			selectionProvider.addSelectionChangedListener(this);
 
 			// Fake a selection changed event to update the menus.
 			//
-			if (selectionProvider.getSelection() != null)
-			{
+			if (selectionProvider.getSelection() != null) {
 				selectionChanged(new SelectionChangedEvent(selectionProvider, selectionProvider.getSelection()));
 			}
 		}
@@ -264,12 +249,10 @@ public class ControlflowActionBarContributor
 	public void selectionChanged(SelectionChangedEvent event) {
 		// Remove any menu items for old selection.
 		//
-		if (createChildMenuManager != null)
-		{
+		if (createChildMenuManager != null) {
 			depopulateManager(createChildMenuManager, createChildActions);
 		}
-		if (createSiblingMenuManager != null)
-		{
+		if (createSiblingMenuManager != null) {
 			depopulateManager(createSiblingMenuManager, createSiblingActions);
 		}
 
@@ -279,8 +262,7 @@ public class ControlflowActionBarContributor
 		Collection<?> newSiblingDescriptors = null;
 
 		ISelection selection = event.getSelection();
-		if (selection instanceof IStructuredSelection && ((IStructuredSelection)selection).size() == 1)
-		{
+		if (selection instanceof IStructuredSelection && ((IStructuredSelection)selection).size() == 1) {
 			Object object = ((IStructuredSelection)selection).getFirstElement();
 
 			EditingDomain domain = ((IEditingDomainProvider)activeEditorPart).getEditingDomain();
@@ -294,13 +276,11 @@ public class ControlflowActionBarContributor
 		createChildActions = generateCreateChildActions(newChildDescriptors, selection);
 		createSiblingActions = generateCreateSiblingActions(newSiblingDescriptors, selection);
 
-		if (createChildMenuManager != null)
-		{
+		if (createChildMenuManager != null) {
 			populateManager(createChildMenuManager, createChildActions, null);
 			createChildMenuManager.update(true);
 		}
-		if (createSiblingMenuManager != null)
-		{
+		if (createSiblingMenuManager != null) {
 			populateManager(createSiblingMenuManager, createSiblingActions, null);
 			createSiblingMenuManager.update(true);
 		}
@@ -315,10 +295,8 @@ public class ControlflowActionBarContributor
 	 */
 	protected Collection<IAction> generateCreateChildActions(Collection<?> descriptors, ISelection selection) {
 		Collection<IAction> actions = new ArrayList<IAction>();
-		if (descriptors != null)
-		{
-			for (Object descriptor : descriptors)
-			{
+		if (descriptors != null) {
+			for (Object descriptor : descriptors) {
 				actions.add(new CreateChildAction(activeEditorPart, selection, descriptor));
 			}
 		}
@@ -334,10 +312,8 @@ public class ControlflowActionBarContributor
 	 */
 	protected Collection<IAction> generateCreateSiblingActions(Collection<?> descriptors, ISelection selection) {
 		Collection<IAction> actions = new ArrayList<IAction>();
-		if (descriptors != null)
-		{
-			for (Object descriptor : descriptors)
-			{
+		if (descriptors != null) {
+			for (Object descriptor : descriptors) {
 				actions.add(new CreateSiblingAction(activeEditorPart, selection, descriptor));
 			}
 		}
@@ -354,16 +330,12 @@ public class ControlflowActionBarContributor
 	 * @generated
 	 */
 	protected void populateManager(IContributionManager manager, Collection<? extends IAction> actions, String contributionID) {
-		if (actions != null)
-		{
-			for (IAction action : actions)
-			{
-				if (contributionID != null)
-				{
+		if (actions != null) {
+			for (IAction action : actions) {
+				if (contributionID != null) {
 					manager.insertBefore(contributionID, action);
 				}
-				else
-				{
+				else {
 					manager.add(action);
 				}
 			}
@@ -378,26 +350,21 @@ public class ControlflowActionBarContributor
 	 * @generated
 	 */
 	protected void depopulateManager(IContributionManager manager, Collection<? extends IAction> actions) {
-		if (actions != null)
-		{
+		if (actions != null) {
 			IContributionItem[] items = manager.getItems();
-			for (int i = 0; i < items.length; i++)
-			{
+			for (int i = 0; i < items.length; i++) {
 				// Look into SubContributionItems
 				//
 				IContributionItem contributionItem = items[i];
-				while (contributionItem instanceof SubContributionItem)
-				{
+				while (contributionItem instanceof SubContributionItem) {
 					contributionItem = ((SubContributionItem)contributionItem).getInnerItem();
 				}
 
 				// Delete the ActionContributionItems with matching action.
 				//
-				if (contributionItem instanceof ActionContributionItem)
-				{
+				if (contributionItem instanceof ActionContributionItem) {
 					IAction action = ((ActionContributionItem)contributionItem).getAction();
-					if (actions.contains(action))
-					{
+					if (actions.contains(action)) {
 						manager.remove(contributionItem);
 					}
 				}
