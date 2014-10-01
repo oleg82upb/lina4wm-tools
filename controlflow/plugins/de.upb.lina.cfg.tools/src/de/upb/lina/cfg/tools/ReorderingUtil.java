@@ -84,7 +84,8 @@ public class ReorderingUtil {
 			}else{
 				//if its synching or at the end just do x flushes
 				//nextInstruction == null
-				if(nextInstruction.eClass().equals(LlvmPackage.eINSTANCE.getReturn()) || isSynch(nextInstruction)){
+				//nextInstruction.eClass().equals(LlvmPackage.eINSTANCE.getReturn())
+				if(nextInstruction == null || isSynch(nextInstruction)){
 					ControlFlowLocation last = toExplore;
 					
 //					for(int i =0; i<toExplore.getBuffer().getAddressValuePairs().size(); i++){
