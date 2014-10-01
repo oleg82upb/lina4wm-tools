@@ -48,8 +48,7 @@ public class GuardedTransitionItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addConditionPropertyDescriptor(object);
@@ -115,8 +114,7 @@ public class GuardedTransitionItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(GuardedTransition.class))
-		{
+		switch (notification.getFeatureID(GuardedTransition.class)) {
 			case ControlflowPackage.GUARDED_TRANSITION__CONDITION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

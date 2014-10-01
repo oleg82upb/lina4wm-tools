@@ -60,8 +60,7 @@ public class ControlFlowDiagramItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
@@ -101,8 +100,7 @@ public class ControlFlowDiagramItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__LOCATIONS);
 			childrenFeatures.add(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__TRANSITIONS);
@@ -160,8 +158,7 @@ public class ControlFlowDiagramItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ControlFlowDiagram.class))
-		{
+		switch (notification.getFeatureID(ControlFlowDiagram.class)) {
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
@@ -231,8 +228,7 @@ public class ControlFlowDiagramItemProvider
 			childFeature == ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__LOCATIONS ||
 			childFeature == ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__START;
 
-		if (qualify)
-		{
+		if (qualify) {
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
