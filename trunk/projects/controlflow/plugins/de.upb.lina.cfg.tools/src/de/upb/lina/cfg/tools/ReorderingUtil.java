@@ -32,25 +32,10 @@ import de.upb.llvm_parser.llvm.Value;
 import de.upb.llvm_parser.llvm.impl.AddressUseImpl;
 
 public class ReorderingUtil {
-//	private List<ControlFlowLocation> createdLocs = new ArrayList<ControlFlowLocation>();
-//	private List<Transition> createdTransitions = new ArrayList<Transition>();
 	private List<Instruction> instructions = new ArrayList<Instruction>();
 	private List<ControlFlowLocation> processed = new ArrayList<ControlFlowLocation>();
-	
-	
-	
+		
 	private FunctionDefinition function;
-
-//	public void addTSO(ArrayList<ControlFlowDiagram> list) {
-////		for (ControlFlowDiagram cfg : list) {
-////			ControlFlowLocation start = cfg.getStart();
-////			Set<Transition> may = new TreeSet<Transition>();
-////			ControlFlowLocation act = start;
-////			while (!act.getOutgoing().isEmpty()) {
-////
-////			}
-////		}
-//	}
 
 
 	public ControlFlowDiagram createReachibilityGraph(FunctionDefinition function){
@@ -83,7 +68,6 @@ public class ReorderingUtil {
 		while(!toBeProcessed.isEmpty()){
 			ControlFlowLocation toExplore = toBeProcessed.get(0);
 
-			//TODO: find the end of the programm
 			Instruction nextInstruction = null;
 			if(toExplore.getPc()<instructions.size()){
 				nextInstruction = instructions.get(toExplore.getPc());	
@@ -99,7 +83,8 @@ public class ReorderingUtil {
 			//buffer with entries
 			}else{
 				//if its synching or at the end just do x flushes
-				if(nextInstruction == null || isSynch(nextInstruction)){
+				//nextInstruction == null
+				if(nextInstruction.eClass().equals(LlvmPackage.eINSTANCE.getReturn()) || isSynch(nextInstruction)){
 					ControlFlowLocation last = toExplore;
 					
 //					for(int i =0; i<toExplore.getBuffer().getAddressValuePairs().size(); i++){
@@ -142,9 +127,6 @@ public class ReorderingUtil {
 
 					//other options -SC
 					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction);
-
-
-					//
 				}
 			}
 			//last
@@ -209,9 +191,13 @@ public class ReorderingUtil {
 				}
 			}
 		}else if(nextInstruction.eClass().equals(LlvmPackage.eINSTANCE.getSwitch())){
+			//TODO: add support for switches
 			
 		}else if(nextInstruction.eClass().equals(LlvmPackage.eINSTANCE.getIndirectBranch())){
-			
+			// TODO: target depends on register content -> condition of
+			// control flow guards unclear
+			throw new RuntimeException(
+					"IndirectBranch found. Handling of such is not implemented yet");
 		}else{
 			Transition t = createTransition(cfg, nextInstruction);
 			ControlFlowLocation nextLocation = createControlFlowLocation(cfg, toExplore.getPc()+1, createStoreBuffer(toExplore.getBuffer(), nextInstruction));
