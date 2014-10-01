@@ -44,15 +44,14 @@ import de.upb.llvm_parser.llvm.Value;
 import de.upb.llvm_parser.llvm.impl.AddressUseImpl;
 import de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl;
 
-public class CFGWorkspaceOperation extends WorkspaceModifyOperation {
+public class GraphCreationUtil extends WorkspaceModifyOperation {
 
 	private LLVM ast = null;
 	private Path cfgpath = null;
 	private int reordering;
 	private ArrayList<ControlFlowDiagram> list = new ArrayList<ControlFlowDiagram>();
-	private HashMap<ControlFlowLocation, Buffer> buffers = new HashMap<ControlFlowLocation, Buffer>();
 
-	public CFGWorkspaceOperation(EObject ast, String path, int reordering) {
+	public GraphCreationUtil(EObject ast, String path, int reordering) {
 		super();
 		if (ast instanceof LLVM)
 			this.ast = (LLVM) ast;

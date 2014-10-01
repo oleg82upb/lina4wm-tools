@@ -26,7 +26,7 @@ import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.XMLMemento;
 
 import de.upb.lina.cfg.tools.CFGActivator;
-import de.upb.lina.cfg.tools.CFGWorkspaceOperation;
+import de.upb.lina.cfg.tools.GraphCreationUtil;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
 /**
@@ -100,7 +100,7 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 					Path astpath = new Path(page.getAstLocation());
 					Resource llvmast = getResource(resourceSet, astpath.toOSString());
 					EObject ast = llvmast.getContents().get(0);
-					new CFGWorkspaceOperation(ast, (page.getContainerName() + "/" + page.getFileName()), reordering).run(monitor);
+					new GraphCreationUtil(ast, (page.getContainerName() + "/" + page.getFileName()), reordering).run(monitor);
 
 					monitor.worked(1);
 				} catch (Exception e) {
