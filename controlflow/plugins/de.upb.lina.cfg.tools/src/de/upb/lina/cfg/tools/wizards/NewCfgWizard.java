@@ -64,6 +64,7 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 		memento.putString("astloc", page.getAstLocation());
 		memento.putString("container", page.getContainerName());
 		memento.putString("newfile", page.getFileName());
+		memento.putInteger("reordering", page.getReordering());
 	}
 
 	/**

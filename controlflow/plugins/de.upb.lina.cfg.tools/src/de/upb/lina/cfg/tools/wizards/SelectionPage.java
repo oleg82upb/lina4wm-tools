@@ -166,6 +166,11 @@ public class SelectionPage extends WizardPage {
 			dialogChanged(container);
 			fileText.setText(memento.getString("newfile"));
 			dialogChanged(container);
+			try{
+				combo.select(memento.getInteger("reordering"));
+			}catch(NullPointerException ex){
+				System.out.println("Warning: Memento not setup correctly - this warning will disappear after creating one cfg.");
+			}
 		}
 		initialize();
 		dialogChanged(container);
