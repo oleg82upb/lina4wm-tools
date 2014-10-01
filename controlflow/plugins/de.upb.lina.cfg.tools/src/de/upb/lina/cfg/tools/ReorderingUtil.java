@@ -151,9 +151,6 @@ public class ReorderingUtil {
 			//jump
 			//&& branch.getElseDestination() == null
 			else if(branch.getDestination() != null){
-				//THIS SHIT MAKES PROBLEMS!!!!11111
-				//tobeProcessed becomes fuller and fuller and i do not know why yet
-				
 				Transition t = createTransition(cfg, branch);
 				Instruction trueInstruction = getInstructionWithLabel(function, branch.getDestination().substring(1));
 				ControlFlowLocation nextLocation = createControlFlowLocation(cfg, getPcOfInstruction(trueInstruction), createStoreBuffer(toExplore.getBuffer(), branch), findLabelByInstruction(function, nextInstruction));
@@ -218,9 +215,6 @@ public class ReorderingUtil {
 	}
 
 	private boolean isSynch(Instruction instruction){
-//		if(instruction == null){
-//			return false;
-//		}
 		return (instruction.eClass().equals(LlvmPackage.eINSTANCE.getFence()) || instruction.eClass().equals(LlvmPackage.eINSTANCE.getCmpXchg()));
 	}
 
