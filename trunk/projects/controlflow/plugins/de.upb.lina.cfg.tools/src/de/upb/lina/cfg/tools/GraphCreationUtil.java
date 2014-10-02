@@ -50,6 +50,7 @@ public class GraphCreationUtil extends WorkspaceModifyOperation {
 	private Path cfgpath = null;
 	private int reordering;
 	private ArrayList<ControlFlowDiagram> list = new ArrayList<ControlFlowDiagram>();
+	private WarningLogger warningLogger = new WarningLogger();
 
 	public GraphCreationUtil(EObject ast, String path, int reordering) {
 		super();
@@ -79,12 +80,18 @@ public class GraphCreationUtil extends WorkspaceModifyOperation {
 							.getBody() != null)
 						if(reordering == 1){
 							ReorderingUtil reord = new ReorderingUtil();
-							list.add(reord.createReachibilityGraph((FunctionDefinition) ast
-									.getElements().get(i)));
+								list.add(reord.createReachibilityGraph((FunctionDefinition) ast
+									.getElements().get(i), warningLogger));
 						}else{
 							list.add(createCFG((FunctionDefinition) ast
 									.getElements().get(i)));
 						}
+				}
+			}
+			
+			if(reordering == 1){
+				if(warningLogger.displayWarning()){
+					throw new IllegalArgumentException();
 				}
 			}
 
@@ -103,6 +110,8 @@ public class GraphCreationUtil extends WorkspaceModifyOperation {
 
 		} catch (IOException e) {
 			CFGActivator.logError(e.getMessage(), e);
+		} catch(IllegalArgumentException e){
+			CFGActivator.log(1, "User stopped the transformation due to a warning.", e);
 		}
 
 	}
