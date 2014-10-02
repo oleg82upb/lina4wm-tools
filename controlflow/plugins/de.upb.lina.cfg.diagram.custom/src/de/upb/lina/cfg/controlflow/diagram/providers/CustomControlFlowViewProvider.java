@@ -2,12 +2,16 @@ package de.upb.lina.cfg.controlflow.diagram.providers;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
+import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.LineStyle;
+import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.RGB;
 
+import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.FlushTransition;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.llvm_parser.llvm.Alloc;
@@ -24,6 +28,7 @@ public class CustomControlFlowViewProvider extends ControlFlowViewProvider
 	private final static RGB FENCE = new RGB(0, 0, 200);
 	private final static RGB ALLOCA = new RGB(200, 200, 0);
 	private final static RGB FLUSH = new RGB(100, 0, 0);
+	private final static RGB END_NODE = new RGB(171, 182, 242);
 	
 	/**
 	 * @generated
@@ -72,5 +77,23 @@ public class CustomControlFlowViewProvider extends ControlFlowViewProvider
 
 		return edge;
 	}
+	
+	public Node createControlFlowLocation_2001(EObject domainElement,
+			View containerView, int index, boolean persisted,
+			PreferencesHint preferencesHint) {
+		Node node = super.createControlFlowLocation_2001(domainElement, containerView, index, persisted, preferencesHint);
+		
+		ControlFlowLocation loc = ((ControlFlowLocation)node.getElement());
+		//end node
+		if(loc.getOutgoing().isEmpty() || loc.getIncoming().isEmpty()){
+			org.eclipse.swt.graphics.RGB fillRGB = END_NODE;
+			ViewUtil.setStructuralFeatureValue(node,
+					NotationPackage.eINSTANCE.getFillStyle_FillColor(),
+					FigureUtilities.RGBToInteger(fillRGB));
+		}
+		return node;
+		
+	}
+	
 
 }

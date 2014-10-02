@@ -50,6 +50,10 @@
                semanticHints="4001"
                viewClass="org.eclipse.gmf.runtime.notation.Edge">
          </context>
+         <context
+               semanticHints="2001"
+               viewClass="org.eclipse.gmf.runtime.notation.Node">
+         </context>
       </viewProvider>
    </extension>
 
