@@ -1,5 +1,6 @@
 package de.upb.lina.cfg.tools;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -254,6 +255,14 @@ public class GraphUtility {
 			}
 		}
 		return false;
+	}
+	
+	public ArrayList<ControlFlowLocation> getAdjacentNodes(ControlFlowLocation l){
+		ArrayList<ControlFlowLocation> adjacents = new ArrayList<ControlFlowLocation>();
+		for(Transition t:l.getOutgoing()){
+			adjacents.add(t.getTarget());
+		}
+		return adjacents;
 	}
 	
 	
