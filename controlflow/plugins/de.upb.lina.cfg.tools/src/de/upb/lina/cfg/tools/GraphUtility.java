@@ -176,12 +176,6 @@ public class GraphUtility {
 	}
 	
 	public String getBufferAsString(ControlFlowLocation nextLocation){
-//		String buffer = ""+nextLocation.getPc()+"<";
-//		for(AddressValuePair p: nextLocation.getBuffer().getAddressValuePairs()){
-//			buffer += "("+addValue(p.getAddress().getValue())+","+addValue(p.getValue().getValue())+")";
-//		}
-//		buffer +=">";
-//		return buffer;
 		return getBufferAsString(nextLocation.getBuffer(), nextLocation.getPc());
 	}
 	
