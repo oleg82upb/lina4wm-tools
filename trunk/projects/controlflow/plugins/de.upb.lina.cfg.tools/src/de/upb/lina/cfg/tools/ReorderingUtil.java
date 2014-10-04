@@ -93,9 +93,10 @@ public class ReorderingUtil {
 				addFlushOptions(cfg, toBeProcessed, toExplore, nextInstruction);
 
 				//create normal SC behavior
-				if(nextInstruction != null || (nextInstruction != null && !isSynch(nextInstruction))){
+				if(nextInstruction != null && !isSynch(nextInstruction)){
 					//other options -SC
 					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction);
+					System.out.println(!isSynch(nextInstruction));
 				}
 			}
 			//last
