@@ -12,9 +12,10 @@ public class WarningLogger {
 	private ArrayList<String> unflushedBuffersAfterReturn = new ArrayList<String>();
 	private ArrayList<String> placesInLoopWithoutFence = new ArrayList<String>();
 	private GraphUtility util = new GraphUtility();
+	private boolean showWarning;
 
-	public WarningLogger(){
-
+	public WarningLogger(boolean showWarning){
+		this.showWarning = showWarning;
 	}
 
 	public void logUnflushedBuffer(String methodName){

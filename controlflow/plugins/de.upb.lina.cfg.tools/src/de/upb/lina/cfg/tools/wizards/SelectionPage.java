@@ -373,4 +373,34 @@ public class SelectionPage extends WizardPage {
 			return null;
 		}
 	}
+
+	public String getNewfile() {
+		return newfile;
+	}
+
+	public void setNewfile(String newfile) {
+		this.newfile = newfile;
+	}
+
+	public String getContainerloc() {
+		return containerloc;
+	}
+
+	public void setContainerloc(String containerloc) {
+		this.containerloc = containerloc;
+	}
+
+	public String getAstloc() {
+		return astloc;
+	}
+
+	public void setAstloc(String astloc) {
+		this.astloc = astloc;
+	}
+
+	public void setReordering(int reordering) {
+		this.reordering = reordering;
+	}
+	
+	
 }

@@ -50,7 +50,7 @@ public class CreateGraphOperation extends WorkspaceModifyOperation {
 	private Path cfgpath = null;
 	private int reordering;
 	private ArrayList<ControlFlowDiagram> list = new ArrayList<ControlFlowDiagram>();
-	private WarningLogger warningLogger = new WarningLogger();
+	private WarningLogger warningLogger = new WarningLogger(true);
 
 	public CreateGraphOperation(EObject ast, String path, int reordering) {
 		super();
