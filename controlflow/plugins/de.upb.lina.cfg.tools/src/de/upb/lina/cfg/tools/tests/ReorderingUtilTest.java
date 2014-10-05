@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,6 +36,8 @@ public class ReorderingUtilTest {
 	@Before
 	public void setUp() throws Exception {
 		LlvmPackage.eINSTANCE.getNsURI();
+		//We still have a problem with the set here - resources are not found
+		//TODO: fix this
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Path astpath = new Path(astLoc);
 		Resource llvmast = getResource(resourceSet, astpath.toOSString());
@@ -69,7 +72,7 @@ public class ReorderingUtilTest {
 	//Change this to change the testset of llvm-files
 	@Parameters
 	public static List<Object[]> data() {
-		return Arrays.asList(new Object[][] { {"/Test/UnitTests/SimpleLoop.s.llvm"},{"/Test/UnitTests/Test1.s.llvm"}, {"/Test/UnitTests/SimpleNoFenceLoop.s.llvm"}});
+		return Arrays.asList(new Object[][] { {"Test/UnitTests/SimpleLoop.s.llvm"},{"/Test/UnitTests/Test1.s.llvm"}, {"/Test/UnitTests/SimpleNoFenceLoop.s.llvm"}});
 	}
 	
 	
