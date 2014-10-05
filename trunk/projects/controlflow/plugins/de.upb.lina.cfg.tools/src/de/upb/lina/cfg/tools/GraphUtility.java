@@ -20,6 +20,11 @@ import de.upb.llvm_parser.llvm.impl.AddressUseImpl;
 
 public class GraphUtility {
 	
+	/**
+	 * Returns the given value as a String
+	 * @param value to be transfored into a String
+	 * @return String of the given value
+	 */
 	public String addValue(Value value) {
 		String result = "";
 
@@ -41,6 +46,12 @@ public class GraphUtility {
 		return (result);
 	}
 	
+	/**
+	 * Returns the label under which the given instruction is listed
+	 * @param function function of the instruction
+	 * @param instruction instruction to look for
+	 * @return label of the instruction
+	 */
 	public String findLabelByInstruction(FunctionDefinition function, Instruction instruction){
 		if(instruction == null){
 			return "null";
@@ -53,6 +64,11 @@ public class GraphUtility {
 		return "null";
 	}
 	
+	/**
+	 * Transforms a value into a String.
+	 * @param value
+	 * @return
+	 */
 	public String valueToString(Value value) {
 		if (value.eClass().equals(LlvmPackage.eINSTANCE.getConstant())) {
 			Constant constant = (Constant) value;
@@ -72,7 +88,7 @@ public class GraphUtility {
 	}
 	
 	/**
-	 * 
+	 * Returns the transition that belongs to the instruction i in cfg
 	 * @param cfg
 	 * @param i
 	 * @return CFG transition corresponding to instruction i
@@ -88,6 +104,7 @@ public class GraphUtility {
 	}
 
 	/**
+	 * Returns the first instruction that is listed under the given label
 	 * @param function
 	 * @param destLabel
 	 * @return instruction corresponding to the label
@@ -119,6 +136,14 @@ public class GraphUtility {
 		return destTrans.getSource();
 	}
 	
+	/**
+	 * Checks weather l is equal to the given pc in combination with the given buffer
+	 * 
+	 * @param l
+	 * @param pc
+	 * @param buffer
+	 * @return
+	 */
 	public boolean isCorrectLocation(ControlFlowLocation l, int pc, StoreBuffer buffer){
 		return (getBufferAsString(l).equalsIgnoreCase(getBufferAsString(buffer, pc)));
 		
@@ -175,10 +200,22 @@ public class GraphUtility {
 //		return true;
 	}
 	
+	/**
+	 * Returns the given ControlFlowLocation as a String
+	 * 
+	 * @param nextLocation
+	 * @return
+	 */
 	public String getBufferAsString(ControlFlowLocation nextLocation){
 		return getBufferAsString(nextLocation.getBuffer(), nextLocation.getPc());
 	}
 	
+	/**
+	 * Returns the given buffer and pc as a String
+	 * @param buf
+	 * @param pc
+	 * @return
+	 */
 	public String getBufferAsString(StoreBuffer buf,  int pc){
 		String buffer = ""+pc+"<";
 		for(AddressValuePair p: buf.getAddressValuePairs()){
@@ -188,6 +225,13 @@ public class GraphUtility {
 		return buffer;
 	}
 	
+	/**
+	 * Returns the pc of the given instruction in the given list of all instructions
+	 * 
+	 * @param instruction
+	 * @param instructions
+	 * @return
+	 */
 	public int getPcOfInstruction(Instruction instruction, List<Instruction> instructions){
 		for(int i = 0; i<instructions.size(); i++){
 			Instruction inst = instructions.get(i);
@@ -199,6 +243,12 @@ public class GraphUtility {
 		return -1;
 	}
 	
+	/**
+	 * Checks wether the given location is contained in the given list
+	 * @param list
+	 * @param location
+	 * @return true if location in list, else false
+	 */
 	public boolean isInList(List<ControlFlowLocation> list, ControlFlowLocation location){
 		for(ControlFlowLocation loc: list){
 			if(isCorrectLocation(location, loc.getPc(), loc.getBuffer())){
@@ -208,6 +258,12 @@ public class GraphUtility {
 		return false;
 	}
 
+	/**
+	 * Checks wether the given pair is in the given list
+	 * @param list
+	 * @param pair
+	 * @return true if pair is in list, else false
+	 */
 	public boolean isAVPInList(List<AddressValuePair> list, AddressValuePair pair){
 		Comparator<AddressValuePair> comparator = new Comparator<AddressValuePair>() {
 
@@ -251,6 +307,11 @@ public class GraphUtility {
 		return false;
 	}
 	
+	/**
+	 * Retruns a list of all nodes that are adjacent to the given location
+	 * @param l
+	 * @return
+	 */
 	public ArrayList<ControlFlowLocation> getAdjacentNodes(ControlFlowLocation l){
 		ArrayList<ControlFlowLocation> adjacents = new ArrayList<ControlFlowLocation>();
 		for(Transition t:l.getOutgoing()){
