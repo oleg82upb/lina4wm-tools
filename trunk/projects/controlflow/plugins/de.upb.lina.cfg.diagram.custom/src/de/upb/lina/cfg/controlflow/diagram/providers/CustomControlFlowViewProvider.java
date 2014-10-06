@@ -85,7 +85,7 @@ public class CustomControlFlowViewProvider extends ControlFlowViewProvider
 		
 		ControlFlowLocation loc = ((ControlFlowLocation)node.getElement());
 		//end node or start node
-		if(loc.getOutgoing().isEmpty() || (loc.getBuffer().getAddressValuePairs().isEmpty() && loc.getPc() == 0)){
+		if(loc.getOutgoing().isEmpty() || (loc.getBuffer() != null && loc.getBuffer().getAddressValuePairs().isEmpty() && loc.getPc() == 0)){
 			org.eclipse.swt.graphics.RGB fillRGB = END_NODE;
 			ViewUtil.setStructuralFeatureValue(node,
 					NotationPackage.eINSTANCE.getFillStyle_FillColor(),
