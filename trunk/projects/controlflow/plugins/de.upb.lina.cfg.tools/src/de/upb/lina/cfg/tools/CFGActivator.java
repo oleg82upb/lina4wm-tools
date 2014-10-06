@@ -129,6 +129,21 @@ public class CFGActivator extends AbstractUIPlugin implements BundleActivator {
 	   }
 	
 	/**
+	 * Logs the warning message combined with the thrown exception.
+	 * @param message error message to be logged
+	 * @param exception thrown exception to be logged
+	 */
+	public static void logWarning(String message, Throwable exception)
+	   {
+	      if (message == null && exception != null)
+	      {
+	         message = exception.getMessage();
+	      }
+
+	      log(IStatus.WARNING, message, exception);
+	   }
+	
+	/**
 	 * Logs the message and a given throwable
 	 * @param severity 
 	 * @param message message to be logged

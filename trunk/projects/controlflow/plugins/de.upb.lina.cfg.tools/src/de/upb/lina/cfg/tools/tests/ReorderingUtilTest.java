@@ -1,5 +1,6 @@
 package de.upb.lina.cfg.tools.tests;
 
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,7 +10,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +17,8 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
+import de.upb.lina.cfg.controlflow.ControlflowPackage;
+import de.upb.lina.cfg.tools.CFGActivator;
 import de.upb.lina.cfg.tools.ReorderingUtil;
 import de.upb.lina.cfg.tools.WarningLogger;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
@@ -36,11 +38,16 @@ public class ReorderingUtilTest {
 	@Before
 	public void setUp() throws Exception {
 		LlvmPackage.eINSTANCE.getNsURI();
+		ControlflowPackage.eINSTANCE.getNsPrefix();
 		//We still have a problem with the set here - resources are not found
 		//TODO: fix this
+		
+		
 		ResourceSet resourceSet = new ResourceSetImpl();
-		Path astpath = new Path(astLoc);
-		Resource llvmast = getResource(resourceSet, astpath.toOSString());
+		String location = CFGActivator.getDefault().getBundle().getLocation();
+		Path astpath = new Path(CFGActivator.PLUGIN_ID + "/" + astLoc);
+		URI uri = URI.createPlatformPluginURI(astpath.toOSString(), true);
+		Resource llvmast = resourceSet.getResource(uri, true);
 		EObject ast = llvmast.getContents().get(0);
 		if (ast instanceof LLVM){
 			this.ast = (LLVM) ast;
@@ -50,7 +57,7 @@ public class ReorderingUtilTest {
 
 	@Test
 	public void testCreateReachibilityGraph() {
-		WarningLogger logger = new WarningLogger(false);
+		WarningLogger logger = new WarningLogger(false, null);
 		ReorderingUtil util = new ReorderingUtil();
 
 		ControlFlowDiagram diag = util.createReachibilityGraph((FunctionDefinition) ast.getElements().get(0), logger);
@@ -62,17 +69,11 @@ public class ReorderingUtilTest {
 		//addition: let data() read the data from a file -> we can define testcases in .txt
 	}
 
-	private Resource getResource(ResourceSet resourceSet, String osString) {
-		URI test = URI.createPlatformResourceURI(osString, true);
-		Resource r = resourceSet.getResource(test, true);
-		return r;
-	}
-
 
 	//Change this to change the testset of llvm-files
 	@Parameters
 	public static List<Object[]> data() {
-		return Arrays.asList(new Object[][] { {"Test/UnitTests/SimpleLoop.s.llvm"},{"/Test/UnitTests/Test1.s.llvm"}, {"/Test/UnitTests/SimpleNoFenceLoop.s.llvm"}});
+		return Arrays.asList(new Object[][] { {"testdata/stack_opt.s.llvm"},{"testdata/Test1.s.llvm"}, {"testdata/SimpleNoFenceLoop.s.llvm"}});
 	}
 	
 	
