@@ -38,7 +38,8 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
  * same extension, it will be able to open it.
  */
 
-public class NewCfgWizard extends Wizard implements INewWizard {
+public class NewCfgWizard extends Wizard implements INewWizard
+{
 	private SelectionPage page;
 	private ISelection selection;
 	private IWorkspace iw = ResourcesPlugin.getWorkspace();
@@ -48,19 +49,22 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	/**
 	 * Constructor for NewCfgWizard.
 	 */
-	public NewCfgWizard() {
+	public NewCfgWizard()
+	{
 		super();
 		setNeedsProgressMonitor(true);
 	}
 
-	protected synchronized void saveState() {
+	protected synchronized void saveState()
+	{
 		XMLMemento memento = XMLMemento.createWriteRoot(MEMENTO__KEY);
 		IMemento child = memento.createChild(MEMENTO__KEY);
 		writeSelectionState(child);
 		CFGActivator.saveMementoToFile(memento);
 	}
 
-	private void writeSelectionState(IMemento memento) {
+	private void writeSelectionState(IMemento memento)
+	{
 		memento.putString("astloc", page.getAstLocation());
 		memento.putString("container", page.getContainerName());
 		memento.putString("newfile", page.getFileName());
@@ -71,7 +75,8 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	 * Adding the page to the wizard.
 	 */
 
-	public void addPages() {
+	public void addPages()
+	{
 		page = new SelectionPage(selection);
 		addPage(page);
 	}
@@ -80,44 +85,61 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	 * This method is called when 'Finish' button is pressed in the wizard. We
 	 * will create an operation and run it using wizard as execution context.
 	 */
-	public boolean performFinish() {
-		final String containerName = page.getContainerName();
-		final String fileName = page.getFileName();
+	public boolean performFinish()
+	{
+
 		this.saveState();
-		IRunnableWithProgress op = new IRunnableWithProgress() {
-			public void run(IProgressMonitor monitor) throws InvocationTargetException {
-				try {
-					int reordering = page.getReordering();
-					String astfileloc = page.getAstLocation();
+		CreateGraphOperation cgo = new CreateGraphOperation(page.getAstLocation(),
+				(page.getContainerName() + "/" + page.getFileName()), page.getReordering(), this.getShell());
 
-					Path astfilep = new Path(astfileloc);
+		// IRunnableWithProgress op = new IRunnableWithProgress()
+		// {
+		// public void run(IProgressMonitor monitor) throws
+		// InvocationTargetException
+		// {
+		// try
+		// {
+		// int reordering = page.getReordering();
+		// // String astfileloc = page.getAstLocation();
+		// //
+		// // Path astfilep = new Path(astfileloc);
+		// //
+		// // File astfile = new File(root + astfilep.toOSString());
+		//
+		// monitor.beginTask("Transforming LLVM to CFG...", 3);
+		//
+		// LlvmPackage.eINSTANCE.getNsURI();
+		// ResourceSet resourceSet = new ResourceSetImpl();
+		// Path astpath = new Path(page.getAstLocation());
+		// Resource llvmast = getResource(resourceSet, astpath.toOSString());
+		// EObject ast = llvmast.getContents().get(0);
+		// new CreateGraphOperation(ast, (page.getContainerName() + "/" +
+		// page.getFileName()), reordering)
+		// .run(monitor);
+		//
+		// monitor.worked(1);
+		// } catch (Exception e)
+		// {
+		// CFGActivator.logError(e.getMessage(), e);
+		// } finally
+		// {
+		// monitor.done();
+		// }
+		// }
+		// };
 
-					File astfile = new File(root + astfilep.toOSString());
-
-					monitor.beginTask("Transforming LLVM to CFG...", 3);
-
-					LlvmPackage.eINSTANCE.getNsURI();
-					ResourceSet resourceSet = new ResourceSetImpl();
-					Path astpath = new Path(page.getAstLocation());
-					Resource llvmast = getResource(resourceSet, astpath.toOSString());
-					EObject ast = llvmast.getContents().get(0);
-					new CreateGraphOperation(ast, (page.getContainerName() + "/" + page.getFileName()), reordering).run(monitor);
-
-					monitor.worked(1);
-				} catch (Exception e) {
-					CFGActivator.logError(e.getMessage(), e);
-				} finally {
-					monitor.done();
-				}
+		try
+		{
+			getContainer().run(true, false, cgo);
+		} catch (Exception e)
+		{
+			if (cgo.getWarnings() != null)
+			{
+				MessageDialog.openWarning(getShell(), "Warning", cgo.getWarnings());
+			} else
+			{
+				CFGActivator.logError(cgo.getWarnings(), e);
 			}
-		};
-
-		try {
-			getContainer().run(true, false, op);
-		} catch (Exception e) {
-			CFGActivator.logError(e.getMessage(), e);
-			MessageDialog.openError(getShell(), "Error", e.getMessage());
-			return false;
 		}
 
 		return true;
@@ -129,7 +151,8 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	 * file.
 	 */
 
-	private void doFinish(String containerName, String fileName, IProgressMonitor monitor) throws CoreException {
+	private void doFinish(String containerName, String fileName, IProgressMonitor monitor) throws CoreException
+	{
 		// create a sample file
 		int reordering = page.getReordering();
 		String astfileloc = page.getAstLocation();
@@ -166,14 +189,15 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 		Path astpath = new Path(page.getAstLocation());
 		Resource llvmast = getResource(resourceSet, astpath.toOSString());
 		EObject ast = llvmast.getContents().get(0);
-//		try {
-//			new CFGWorkspaceOperation(ast, (page.getContainerName() + "/" + page.getFileName()), reordering).run(monitor);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		} catch (ReflectiveOperationException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		// try {
+		// new CFGWorkspaceOperation(ast, (page.getContainerName() + "/" +
+		// page.getFileName()), reordering).run(monitor);
+		// } catch (InterruptedException e) {
+		// e.printStackTrace();
+		// } catch (ReflectiveOperationException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 		monitor.worked(1);
 
 		// monitor.setTaskName("Opening file for editing...");
@@ -212,7 +236,8 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	 * 
 	 * @see IWorkbenchWizard#init(IWorkbench, IStructuredSelection)
 	 */
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
+	public void init(IWorkbench workbench, IStructuredSelection selection)
+	{
 		this.selection = selection;
 	}
 
@@ -263,7 +288,8 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	// ControlFlowFactory c;
 	// }
 
-	private Resource getResource(ResourceSet resourceSet, String osString) {
+	private Resource getResource(ResourceSet resourceSet, String osString)
+	{
 		URI test = URI.createPlatformResourceURI(osString, true);
 		Resource r = resourceSet.getResource(test, true);
 		return r;
