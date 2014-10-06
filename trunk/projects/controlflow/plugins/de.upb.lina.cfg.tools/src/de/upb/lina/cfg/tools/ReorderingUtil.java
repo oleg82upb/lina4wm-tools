@@ -23,6 +23,8 @@ import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Store;
+import de.upb.llvm_parser.llvm.Switch;
+import de.upb.llvm_parser.llvm.SwitchCase;
 import de.upb.llvm_parser.llvm.Value;
 import de.upb.llvm_parser.llvm.impl.AddressUseImpl;
 
@@ -96,7 +98,6 @@ public class ReorderingUtil {
 				if(nextInstruction != null && !isSynch(nextInstruction)){
 					//other options -SC
 					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction);
-					System.out.println(!isSynch(nextInstruction));
 				}
 			}
 			//last
@@ -174,8 +175,38 @@ public class ReorderingUtil {
 				}
 			}
 		}else if(nextInstruction.eClass().equals(LlvmPackage.eINSTANCE.getSwitch())){
-			//TODO: add support for switches
-
+			//TODO: check if switch implementation correct
+			Switch swit = (Switch)nextInstruction;
+			
+			Instruction defaultInstruction = util.getInstructionWithLabel(function, swit.getDefaultCase());
+			ControlFlowLocation defaultLocation = createControlFlowLocation(cfg, util.getPcOfInstruction(defaultInstruction, instructions), createStoreBuffer(toExplore.getBuffer(), defaultInstruction), util.findLabelByInstruction(function, nextInstruction));
+			
+			GuardedTransition defaultCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
+			defaultCase.setCondition("else");
+			defaultCase.setSource(toExplore);
+			defaultCase.setTarget(defaultLocation);
+			defaultCase.setDiagram(cfg);
+			defaultCase.setInstruction(swit);
+			
+			if(!util.isInList(toBeProcessed,defaultLocation) && !util.isInList(processed,defaultLocation)){
+				toBeProcessed.add(defaultLocation);
+			}
+			
+			for(SwitchCase sc: swit.getCases()){
+				Instruction caseInstruction = util.getInstructionWithLabel(function, util.valueToString(sc.getCaseValue().getValue()));
+				ControlFlowLocation caseLocation = createControlFlowLocation(cfg, util.getPcOfInstruction(caseInstruction, instructions), createStoreBuffer(toExplore.getBuffer(), caseInstruction), util.findLabelByInstruction(function, nextInstruction));
+				
+				GuardedTransition caseC = ControlflowFactory.eINSTANCE.createGuardedTransition();
+				caseC.setCondition("else");
+				caseC.setSource(toExplore);
+				caseC.setTarget(caseLocation);
+				caseC.setInstruction(swit);
+				caseC.setDiagram(cfg);
+				
+				if(!util.isInList(toBeProcessed,caseLocation) && !util.isInList(processed,caseLocation)){
+					toBeProcessed.add(caseLocation);
+				}
+			}
 		}else if(nextInstruction.eClass().equals(LlvmPackage.eINSTANCE.getIndirectBranch())){
 			// TODO: target depends on register content -> condition of
 			// control flow guards unclear
