@@ -83,8 +83,9 @@ public class CreateGraphOperation extends WorkspaceModifyOperation {
 								list.add(reord.createReachibilityGraph((FunctionDefinition) ast
 									.getElements().get(i), warningLogger));
 						}else{
-							SCUtil sc = new SCUtil();
-							list.add(sc.createCFG((FunctionDefinition) ast
+							SCUtilOld sc = new SCUtilOld();
+							SCUtil sc2 = new SCUtil();
+							list.add(sc2.createCFG((FunctionDefinition) ast
 									.getElements().get(i)));
 						}
 				}

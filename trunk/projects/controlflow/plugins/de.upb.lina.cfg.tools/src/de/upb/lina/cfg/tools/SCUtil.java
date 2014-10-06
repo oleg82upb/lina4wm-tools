@@ -1,175 +1,236 @@
 package de.upb.lina.cfg.tools;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 
+import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.ControlflowFactory;
 import de.upb.lina.cfg.controlflow.GuardedTransition;
-import de.upb.lina.cfg.controlflow.MultiTransition;
+import de.upb.lina.cfg.controlflow.StoreBuffer;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.Branch;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
-import de.upb.llvm_parser.llvm.IndirectBranch;
 import de.upb.llvm_parser.llvm.Instruction;
-import de.upb.llvm_parser.llvm.Invoke;
+import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.Switch;
 import de.upb.llvm_parser.llvm.SwitchCase;
 
 public class SCUtil {
 	private GraphUtility util = new GraphUtility();
+	private List<Instruction> instructions = new ArrayList<Instruction>();
+	private List<ControlFlowLocation> processed = new ArrayList<ControlFlowLocation>();
+
+	private FunctionDefinition function;
+	private boolean endProcess = false;
+	private WarningLogger warningLogger;
+	private boolean loopWithoutFence = false;
 	
 	public ControlFlowDiagram createCFG(FunctionDefinition function) {
-//		//START OF CORRECT
+		instructions = new ArrayList<Instruction>();
+		this.function = function;
+		this.warningLogger = warningLogger;
 		ProgramCounter pc = new ProgramCounter();
 		ControlFlowDiagram cfg = ControlflowFactory.eINSTANCE
 				.createControlFlowDiagram();
 
 		cfg.setName(function.getAddress().getName());
+		List<ControlFlowLocation> toBeProcessed = new ArrayList<ControlFlowLocation>();
+		processed = new ArrayList<ControlFlowLocation>();
 
-		//create the naive normal cfg
+		//Generate a list of all instructions
 		EList<BasicBlock> blocks = function.getBody().getBlocks();
 		for (BasicBlock b : blocks) {
-			ControlFlowLocation location = createControlFlowLocation(cfg, pc);
-			location.setBlockLabel(b.getLabel());
-			if (cfg.getStart() == null) {
-				cfg.setStart(location);
-			}
-			//correct
-			for (Instruction instr : b.getInstructions()) {
-				Transition t = createTransition(cfg, instr);
-				ControlFlowLocation nextLocation = createControlFlowLocation(
-						cfg, pc);
-				nextLocation.setBlockLabel(b.getLabel());
-				t.setSource(location);
-				t.setTarget(nextLocation);
-				location = nextLocation;
+			for(Instruction i: b.getInstructions()){
+				instructions.add(i);
 			}
 		}
 
-		ArrayList<Transition> newTransitions = new ArrayList<Transition>();
-		for (Transition t : cfg.getTransitions()) {
-			if (t.getInstruction() instanceof Branch) {
-				Branch br = (Branch) t.getInstruction();
-				//check Destination
-				ControlFlowLocation target = util.findLabeledLocation(cfg, function,
-						br.getDestination().substring(1));
-				if (!t.getTarget().equals(target)) {
-					t.setTarget(target);
-				}
-				
-				
-				if (br.getElseDestination() != null) {
-					
-					 // replace transition with guarded
-                    GuardedTransition trueCase = ControlflowFactory.eINSTANCE
-                                    .createGuardedTransition();
-                    trueCase.setInstruction(t.getInstruction());
-                    GuardedTransition elseCase = ControlflowFactory.eINSTANCE
-                                    .createGuardedTransition();
-                    elseCase.setInstruction(t.getInstruction());
-                    newTransitions.add(trueCase);
-                    newTransitions.add(elseCase);
-
-                    trueCase.setSource(t.getSource());
-                    elseCase.setSource(t.getSource());
-                    trueCase.setCondition("["+ util.valueToString(br.getCondition()) + "]");
-                    elseCase.setCondition("[else]");
-                    t.setSource(null);
-                    t.setTarget(null);
-
-                    trueCase.setTarget(util.findLabeledLocation(cfg, function, br
-                                    .getDestination().substring(1)));
-                    elseCase.setTarget(util.findLabeledLocation(cfg, function, br
-                                    .getElseDestination().substring(1)));
-					
-				}
-			} else if (t.getInstruction() instanceof IndirectBranch) {
-				// TODO: target depends on register content -> condition of
-				// control flow guards unclear
-				throw new RuntimeException(
-						"IndirectBranch found. Handling of such is not implemented yet");
-			} else if (t.getInstruction() instanceof Switch) {
-				// replace normal transition by guarded one
-				Switch sw = (Switch) t.getInstruction();
-				GuardedTransition newT = ControlflowFactory.eINSTANCE
-						.createGuardedTransition();
-				newT.setCondition("else");
-				newT.setSource(t.getSource());
-				ControlFlowLocation defaultTarget = util.findLabeledLocation(cfg,
-						function, sw.getDefaultCase().substring(1));
-				newT.setTarget(defaultTarget);
-
-				newTransitions.add(newT);
-
-				// add other cases
-				for (SwitchCase sc : sw.getCases()) {
-					GuardedTransition otherCase = ControlflowFactory.eINSTANCE
-							.createGuardedTransition();
-					otherCase.setSource(t.getSource());
-					otherCase.setCondition(util.valueToString(sc.getCaseValue()
-							.getValue()));
-					ControlFlowLocation target = util.findLabeledLocation(cfg,
-							function, sc.getDestination().substring(1));
-					otherCase.setTarget(target);
-
-					newTransitions.add(otherCase);
-				}
-
-				// will be cleaned up later
-				t.setSource(null);
-				t.setTarget(null);
-
-			} else if (t.getInstruction() instanceof Invoke) {
-				// do nothing
-			}
-		} //end for 
+		//first node
+		ControlFlowLocation location = createControlFlowLocation(cfg, pc.next(), ControlflowFactory.eINSTANCE.createStoreBuffer(), util.findLabelByInstruction(function,instructions.get(0)));
+		if (cfg.getStart() == null) {
+			cfg.setStart(location);
+			toBeProcessed.add(location);
+		}
 		
+		
+		//while we have still nodes to work on
+		while(!toBeProcessed.isEmpty() && !endProcess){
+			ControlFlowLocation toExplore = toBeProcessed.get(0);
 
-		// has to be done separately in order to not modify collection while
-		// iterating
-		for (Transition t : newTransitions) {
-			t.setDiagram(cfg);
+			//get the right instruction of our pc, null if we are at the end
+			Instruction nextInstruction = null;
+			if(toExplore.getPc()<instructions.size()){
+				nextInstruction = instructions.get(toExplore.getPc());	
+			}
+
+
+			//empty buffer
+			if(toExplore.getBuffer().getAddressValuePairs().isEmpty()){
+				if(nextInstruction != null){
+					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction);
+				}
+
+//			//buffer with entries
+//			}else{
+//				//possible flushes after a return
+//				if(nextInstruction == null){
+//					warningLogger.logUnflushedBuffer(function.getAddress().getName());
+//				}
+//				//create flush options, TSO behavior
+//				addFlushOptions(cfg, toBeProcessed, toExplore, nextInstruction);
+//
+//				//create normal SC behavior
+//				if(nextInstruction != null && !isSynch(nextInstruction)){
+//					//other options -SC
+//					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction);
+//				}
+			}
+			//last
+			ControlFlowLocation lastProcessed = toBeProcessed.get(0);
+			toBeProcessed.remove(0);
+			processed.add(lastProcessed);
 		}
-
-		cleanUp(cfg);
+		
 		return cfg;
 	}
+	
+	private void addNonFlushOptions(ProgramCounter pc, ControlFlowDiagram cfg,
+			List<ControlFlowLocation> toBeProcessed,
+			ControlFlowLocation toExplore, Instruction nextInstruction) {
 
-	/**
-	 * Removes locations and transitions if not connected
-	 * 
-	 * @param cfl
-	 */
-	private void cleanUp(ControlFlowDiagram cfg) {
-		ArrayList<ControlFlowLocation> locations = new ArrayList<ControlFlowLocation>();
-		for (ControlFlowLocation location : cfg.getLocations()) {
-			if (location.getIncoming().isEmpty()
-					&& location.getOutgoing().isEmpty()) {
-				locations.add(location);
+		//check for branches
+		if(nextInstruction.eClass().equals(LlvmPackage.eINSTANCE.getBranch())){
+			Branch branch = (Branch)nextInstruction;
+			//no jump, real branch
+			if(branch.getElseDestination() != null){
+				GuardedTransition trueCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
+
+				Instruction trueInstruction = util.getInstructionWithLabel(function, branch.getDestination().substring(1));
+				ControlFlowLocation trueLocation = createControlFlowLocation(cfg, util.getPcOfInstruction(trueInstruction, instructions), createStoreBuffer(toExplore.getBuffer(), trueInstruction), util.findLabelByInstruction(function, nextInstruction));
+				trueCase.setSource(toExplore);
+				trueCase.setTarget(trueLocation);
+				trueCase.setInstruction(branch);
+				trueCase.setCondition("["+ util.valueToString(branch.getCondition()) + "]");
+				trueCase.setDiagram(cfg);
+
+				Instruction elseInstruction = util.getInstructionWithLabel(function, branch.getElseDestination().substring(1));
+				ControlFlowLocation falseLocation = createControlFlowLocation(cfg, util.getPcOfInstruction(elseInstruction, instructions), createStoreBuffer(toExplore.getBuffer(), elseInstruction), util.findLabelByInstruction(function, nextInstruction));
+				GuardedTransition falseCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
+				falseCase.setSource(toExplore);
+				falseCase.setTarget(falseLocation);
+				falseCase.setInstruction(branch);
+				falseCase.setCondition("[else]");
+				falseCase.setDiagram(cfg);
+
+				if(!util.isInList(toBeProcessed,trueLocation) && !util.isInList(processed,trueLocation)){
+					toBeProcessed.add(trueLocation);
+				}
+				if(!util.isInList(toBeProcessed,falseLocation) && !util.isInList(processed,falseLocation)){
+					toBeProcessed.add(falseLocation);
+				}
 			}
-		}
 
-		for (ControlFlowLocation location : locations) {
-			location.setDiagram(null); // remove
-		}
-
-		ArrayList<Transition> transitions = new ArrayList<Transition>();
-		for (Transition t : cfg.getTransitions()) {
-			// should not happen
-			if (t.getSource() == null || t.getTarget() == null) {
-				transitions.add(t);
+			//jump
+			//&& branch.getElseDestination() == null
+			else if(branch.getDestination() != null){
+				Transition t = createTransition(cfg, branch);
+				Instruction trueInstruction = util.getInstructionWithLabel(function, branch.getDestination().substring(1));
+				ControlFlowLocation nextLocation = createControlFlowLocation(cfg, util.getPcOfInstruction(trueInstruction, instructions), createStoreBuffer(toExplore.getBuffer(), branch), util.findLabelByInstruction(function, nextInstruction));
+				t.setSource(toExplore);
+				t.setTarget(nextLocation);
+				if(!util.isInList(toBeProcessed,nextLocation) && !util.isInList(processed,nextLocation)){
+					toBeProcessed.add(nextLocation);
+				}
 			}
-		}
-		for (Transition t : transitions) {
-			t.setDiagram(null);
-			t.setSource(null);
-			t.setTarget(null);
+		}else if(nextInstruction.eClass().equals(LlvmPackage.eINSTANCE.getSwitch())){
+			//TODO: check if switch implementation correct
+			Switch swit = (Switch)nextInstruction;
+			
+			Instruction defaultInstruction = util.getInstructionWithLabel(function, swit.getDefaultCase());
+			ControlFlowLocation defaultLocation = createControlFlowLocation(cfg, util.getPcOfInstruction(defaultInstruction, instructions), createStoreBuffer(toExplore.getBuffer(), defaultInstruction), util.findLabelByInstruction(function, nextInstruction));
+			
+			GuardedTransition defaultCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
+			defaultCase.setCondition("else");
+			defaultCase.setSource(toExplore);
+			defaultCase.setTarget(defaultLocation);
+			defaultCase.setDiagram(cfg);
+			defaultCase.setInstruction(swit);
+			
+			if(!util.isInList(toBeProcessed,defaultLocation) && !util.isInList(processed,defaultLocation)){
+				toBeProcessed.add(defaultLocation);
+			}
+			
+			for(SwitchCase sc: swit.getCases()){
+				Instruction caseInstruction = util.getInstructionWithLabel(function, util.valueToString(sc.getCaseValue().getValue()));
+				ControlFlowLocation caseLocation = createControlFlowLocation(cfg, util.getPcOfInstruction(caseInstruction, instructions), createStoreBuffer(toExplore.getBuffer(), caseInstruction), util.findLabelByInstruction(function, nextInstruction));
+				
+				GuardedTransition caseC = ControlflowFactory.eINSTANCE.createGuardedTransition();
+				caseC.setCondition("else");
+				caseC.setSource(toExplore);
+				caseC.setTarget(caseLocation);
+				caseC.setInstruction(swit);
+				caseC.setDiagram(cfg);
+				
+				if(!util.isInList(toBeProcessed,caseLocation) && !util.isInList(processed,caseLocation)){
+					toBeProcessed.add(caseLocation);
+				}
+			}
+		}else if(nextInstruction.eClass().equals(LlvmPackage.eINSTANCE.getIndirectBranch())){
+			// TODO: target depends on register content -> condition of
+			// control flow guards unclear
+			throw new RuntimeException(
+					"IndirectBranch found. Handling of such is not implemented yet");
+		}else{
+			//normal writes will be dealt here
+			
+			Transition t = createTransition(cfg, nextInstruction);
+			ControlFlowLocation nextLocation = createControlFlowLocation(cfg, toExplore.getPc()+1, createStoreBuffer(toExplore.getBuffer(), nextInstruction), util.findLabelByInstruction(function, nextInstruction));
+			t.setSource(toExplore);
+			t.setTarget(nextLocation);
+			
+			//if we have a write we have to check if we have a loop without fence 
+			//See createStoreBuffer for more details
+			if(loopWithoutFence){
+				loopWithoutFence = false;
+				warningLogger.logPlaceInLoopWithoutFence(function.getAddress().getName(), toExplore, nextLocation, nextInstruction);
+			}
+			
+			if(!util.isInList(toBeProcessed,nextLocation) && !util.isInList(processed,nextLocation)){
+				toBeProcessed.add(nextLocation);
+			}
 		}
 	}
+
+	private StoreBuffer createStoreBuffer(StoreBuffer oldBuffer, Instruction nextInstruction){
+		StoreBuffer buffer = ControlflowFactory.eINSTANCE.createStoreBuffer();
+		//create deep copy
+		for(AddressValuePair pair: oldBuffer.getAddressValuePairs()){
+			AddressValuePair newPair = ControlflowFactory.eINSTANCE.createAddressValuePair();
+			newPair.setAddress(pair.getAddress());
+			newPair.setValue(pair.getValue());
+			buffer.getAddressValuePairs().add(newPair);
+		}
+
+//		//add new buffer entry for store
+//		if(nextInstruction.eClass().equals(LlvmPackage.eINSTANCE.getStore())){
+//			Store store = (Store)nextInstruction;
+//			AddressValuePair newPair = ControlflowFactory.eINSTANCE.createAddressValuePair();
+//			newPair.setAddress(store.getTargetAddress());
+//			newPair.setValue(store.getValue());
+//			if(!util.isAVPInList(buffer.getAddressValuePairs(), newPair)){
+//				buffer.getAddressValuePairs().add(newPair);
+//			}
+//		}
+
+		return buffer;
+	}
+
 
 	/**
 	 * @param diag
@@ -177,11 +238,18 @@ public class SCUtil {
 	 * @return
 	 */
 	private ControlFlowLocation createControlFlowLocation(
-			ControlFlowDiagram diag, ProgramCounter pc) {
+			ControlFlowDiagram diag, int pc, StoreBuffer buffer, String blockLabel) {
+		for(ControlFlowLocation l: diag.getLocations()){
+			if(util.isCorrectLocation(l, pc, buffer)){
+				return l;
+			}
+		}
 		ControlFlowLocation loc = ControlflowFactory.eINSTANCE
 				.createControlFlowLocation();
-		loc.setPc(pc.next());
+		loc.setBuffer(buffer);
+		loc.setPc(pc);
 		loc.setDiagram(diag);
+		loc.setBlockLabel(blockLabel);
 		return loc;
 	}
 
@@ -193,13 +261,6 @@ public class SCUtil {
 	private Transition createTransition(ControlFlowDiagram diag, Instruction i) {
 		Transition transition = ControlflowFactory.eINSTANCE.createTransition();
 		transition.setInstruction(i);
-		transition.setDiagram(diag);
-		return transition;
-	}
-	
-	private Transition createMultiTransition(ControlFlowDiagram diag, ArrayList <Instruction> instructions) {
-		MultiTransition transition = ControlflowFactory.eINSTANCE.createMultiTransition();
-		transition.getInstructions().addAll(instructions);
 		transition.setDiagram(diag);
 		return transition;
 	}
