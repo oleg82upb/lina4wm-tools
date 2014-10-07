@@ -35,7 +35,7 @@ public class CustomControlFlowLocationPcEditPart extends ControlFlowLocationPcEd
 	{
 		String label = "PC:"+super.getLabelText()+ " <";
 		ControlFlowLocation loc = (ControlFlowLocation)view.getElement();
-		System.out.println(loc.getBuffer());
+
 		if(loc.getBuffer() != null){
 			for(AddressValuePair pair:loc.getBuffer().getAddressValuePairs()){
 				label += "(" + addValue(pair.getAddress().getValue()) + ", " + addValue(pair.getValue().getValue())+")";
