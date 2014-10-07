@@ -169,7 +169,7 @@ public class SelectionPage extends WizardPage {
 			try{
 				combo.select(memento.getInteger("reordering"));
 			}catch(NullPointerException ex){
-				System.out.println("Warning: Memento not setup correctly - this warning will disappear after creating one cfg.");
+				CFGActivator.logWarning("Warning: Memento not setup correctly - this warning will disappear after creating one cfg.", ex);
 			}
 		}
 		initialize();
