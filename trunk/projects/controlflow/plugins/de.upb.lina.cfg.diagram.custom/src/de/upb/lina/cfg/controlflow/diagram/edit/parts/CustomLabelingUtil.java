@@ -1,9 +1,9 @@
 package de.upb.lina.cfg.controlflow.diagram.edit.parts;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 
 import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.FlushTransition;
@@ -33,13 +33,26 @@ import de.upb.llvm_parser.llvm.Predefined;
 import de.upb.llvm_parser.llvm.PrimitiveValue;
 import de.upb.llvm_parser.llvm.Return;
 import de.upb.llvm_parser.llvm.Store;
+import de.upb.llvm_parser.llvm.TypeUse;
 import de.upb.llvm_parser.llvm.Value;
 import de.upb.llvm_parser.llvm.impl.AddressUseImpl;
 import de.upb.llvm_parser.llvm.impl.PredefinedImpl;
 
 public class CustomLabelingUtil {
 
-
+	private static final String ASSIGN = " := ";
+	private static final String STORE = "STORE";
+	private static final String LOAD = "LOAD";
+	private static final String FLUSH = "FLUSH";
+	private static final String VOID = "void";
+	private static final String ALLOC = "alloc";
+	private static final String TRUE = "true";
+	private static final String FALSE = "false";
+	private static final String RETURN = "RET";
+	private static final String BRANCH = "GOTO";
+	
+	private static final String TODO = "TODO";
+	private static final String WS = " ";
 
 	/**
 	 * Gets called to get a label for the given transition
@@ -56,16 +69,16 @@ public class CustomLabelingUtil {
 			if(!t.getSource().getBuffer().getAddressValuePairs().isEmpty())
 			{
 				AddressValuePair p = t.getSource().getBuffer().getAddressValuePairs().get(0);
-				String s = addValue(p.getAddress());
-				s +=  "," + addValue(p.getValue());
-				return "flush(" + s + ")";
+				String s = toString(p.getAddress());
+				s +=  "," + toString(p.getValue());
+				return FLUSH + "(" + s + ")";
 			}
 
-			return "flush";
+			return FLUSH;
 		}
 
 		if(t.getInstruction() == null){
-			return "DAS IST LEER";
+			return TODO;
 		}
 
 		EClass type = t.getInstruction().eClass();
@@ -77,16 +90,16 @@ public class CustomLabelingUtil {
 		// Load
 		if (type.equals(LlvmPackage.eINSTANCE.getLoad())) {
 			Load instr = (Load) t.getInstruction();
-			result += instr.getResult().getName() + " = ";
-			result += type.getName() + " ";
-			result += addValue(instr.getAddress());
+			result += instr.getResult().getName() + ASSIGN;
+			result += LOAD + " ";
+			result += toString(instr.getAddress());
 		}
 		// Store
 		else if (type.equals(LlvmPackage.eINSTANCE.getStore())) {
 			Store instr = (Store) t.getInstruction();
-			result += type.getName() + " ";
-			result += addValue(instr.getTargetAddress());
-			result += addValue(instr.getValue());
+			result += STORE + WS;
+			result += toString(instr.getTargetAddress());
+			result += toString(instr.getValue());
 		}
 		// Branch
 		else if (type.equals(LlvmPackage.eINSTANCE.getBranch())) {
@@ -94,55 +107,55 @@ public class CustomLabelingUtil {
 				result += "[" + (((GuardedTransition) t).getCondition().replace("[", ""));
 			}else{
 				Branch br = (Branch)t.getInstruction();
-				result += type.getName() +" " + br.getDestination()+" ";
+				result += BRANCH + WS + br.getDestination()+WS;
 			}
 		}
 		// GetElementPtr
 		else if (type.equals(LlvmPackage.eINSTANCE.getGetElementPtr())) {
 			GetElementPtr instr = (GetElementPtr) t.getInstruction();
-			result += instr.getResult().getName() + " = ";
-			result += type.getName() + " ";
-			result += addValue(instr.getAggerate());
+			result += instr.getResult().getName() + ASSIGN;
+			result += type.getName() + WS;
+			result += toString(instr.getAggerate());
 			for (int i = 0; i < instr.getIndizies().size(); i++) {
-				result += addValue(instr.getIndizies().get(i));
+				result += toString(instr.getIndizies().get(i));
 			}
 		}
 		// CmpXchg
 		else if (type.equals(LlvmPackage.eINSTANCE.getCmpXchg())) {
 
 			CmpXchg instr = (CmpXchg) t.getInstruction();
-			result += instr.getResult().getName() + " = ";
-			result += type.getName() + " ";
-			result += addValue(instr.getAddress());
-			result += addValue(instr.getValue());
-			result += addValue(instr.getNewValue());
+			result += instr.getResult().getName() + ASSIGN;
+			result += "CAS(";
+			result += toString(instr.getAddress()) +", ";
+			result += toString(instr.getValue()) + ", ";
+			result += toString(instr.getNewValue()) + ")";
 		}
 		// Call
 		else if (type.equals(LlvmPackage.eINSTANCE.getCall())) {
 
 			Call instr = (Call) t.getInstruction();
 			if(instr.getResult() != null){
-				result += instr.getResult().getName() + " = ";
+				result += instr.getResult().getName() + ASSIGN;
 			}else{
-				result += "void ";
+				result += VOID + WS;
 			}
-			result += type.getName() + " ";
-			result += addValue(instr.getFunction());
-			result += addParameterList(instr.getPList());
+			result += type.getName() + WS;
+			result += toString(instr.getFunction());
+			result += toString(instr.getPList());
 		}
 		// Alloc
 		else if (type.equals(LlvmPackage.eINSTANCE.getAlloc())) {
 			Alloc instr = (Alloc) t.getInstruction();
-			result += instr.getResult().getName() + " = ";
-			result += type.getName() + " ";
-			result += addType(instr.getType());
+			result += instr.getResult().getName() + ASSIGN;
+			result += ALLOC + WS;
+			result += toString(instr.getType());
 		}
 		// Arithmetic Operations
 		else if (type.equals(LlvmPackage.eINSTANCE.getArithmeticOperation())) {
 			ArithmeticOperation instr = (ArithmeticOperation) t.getInstruction();
-			result += instr.getResult().getName() + " = ";
+			result += instr.getResult().getName() + ASSIGN;
 			String operation = instr.getOperation();
-			result += addValue(instr.getValue1()) + " ";
+			result += toString(instr.getValue1()) + WS;
 			if (operation.equals("add") || operation.equals("fadd")) {
 				result += "+ ";
 			} else if (operation.equals("sub") || operation.equals("fsub")) {
@@ -154,14 +167,14 @@ public class CustomLabelingUtil {
 			} else if (operation.equals("urem") || operation.equals("srem") || operation.equals("frem")) {
 				result += "% ";
 			}
-			result += addValue(instr.getValue2());
+			result += toString(instr.getValue2());
 		}
 		// Logical Operations
 		else if (type.equals(LlvmPackage.eINSTANCE.getLogicOperation())) {
 			LogicOperation instr = (LogicOperation) t.getInstruction();
-			result += instr.getResult().getName() + " = ";
+			result += instr.getResult().getName() + ASSIGN;
 			String operation = instr.getOperation();
-			result += addValue(instr.getValue1()) + " ";
+			result += toString(instr.getValue1()) + WS;
 			if (operation.equals("shl")) {
 				result += "<< ";
 			} else if (operation.equals("lshr")) {
@@ -175,23 +188,23 @@ public class CustomLabelingUtil {
 			} else if (operation.equals("xor")) {
 				result += "^ ";
 			}
-			result += addValue(instr.getValue2());
+			result += toString(instr.getValue2());
 		}
 		// Compare
 		else if (type.equals(LlvmPackage.eINSTANCE.getCompare())) {
 			Compare instr = (Compare) t.getInstruction();
-			result += instr.getResult().getName() + " == ";
+			result += instr.getResult().getName() + ASSIGN + "(";
 			String compare = instr.getCond();
-			if (compare.equals("false")) {
-				result += "false";
+			if (compare.equals(FALSE)) {
+				result += FALSE;
 				return result;
-			} else if (compare.equals("true")) {
-				result += "true";
+			} else if (compare.equals(TRUE)) {
+				result += TRUE;
 				return result;
 			}
-			result += addValue(instr.getOperand1()) + " ";
+			result += toString(instr.getOperand1()) + WS;
 			if (compare.equals("eq")) {
-				result += "= ";
+				result += "== ";
 			} else if (compare.equals("ne")) {
 				result += "!= ";
 			} else if (compare.equals("ugt") || compare.equals("sgt")) {
@@ -231,28 +244,28 @@ public class CustomLabelingUtil {
 			} else if (compare.equals("uno")) {
 				result += "not orderd ";
 			}
-			result += addValue(instr.getOperand2());
+			result += toString(instr.getOperand2()) + ")";
 		}
 		// Return
 		else if (type.equals(LlvmPackage.eINSTANCE.getReturn())) {
-			result += type.getName();
+			result += RETURN + WS;
 			if (((Return) t.getInstruction()).getValue().getValue() != null) {
-				result += addValue(((Return) t.getInstruction()).getValue());
+				result += toString(((Return) t.getInstruction()).getValue());
 			} else {
-				result += " void";
+				result += WS + VOID;
 			}
 		}
 		// Cast
 		else if (type.equals(LlvmPackage.eINSTANCE.getCast())) {
 			Cast instr = (Cast) t.getInstruction();
-			result += ("( " + addType(instr.getFrom()) + "->" + addType(instr.getTo()) + " )" + addValue(instr.getValue()));
+			result += (instr.getResult().getName() + ASSIGN + "(" + toString((TypeUse)instr.getFrom()) + "->" + toString(instr.getTo()) + ") " + toString(instr.getValue()));
 		}
 		// Invoke
 		else if (type.equals(LlvmPackage.eINSTANCE.getInvoke())) {
 			result += type.getName();
 			Invoke instr = (Invoke) t.getInstruction();
 			result += instr.getName().getName();
-			result += addParameterList(instr.getPList());
+			result += toString(instr.getPList());
 		}
 		// Fence
 		else if (type.equals(LlvmPackage.eINSTANCE.getFence())) {
@@ -266,65 +279,65 @@ public class CustomLabelingUtil {
 			AtomicRMW instr = (AtomicRMW) t.getInstruction();
 			String operation = instr.getOperation();
 			if (operation.equals("xchg")) {
-				result += addValue(instr.getAddress());
+				result += toString(instr.getAddress());
 				result += " = ";
-				result += addValue(instr.getArgument());
+				result += toString(instr.getArgument());
 			} else if (operation.equals("add")) {
-				result += addValue(instr.getAddress());
+				result += toString(instr.getAddress());
 				result += " = ";
-				result += addValue(instr.getAddress());
+				result += toString(instr.getAddress());
 				result += " + ";
-				result += addValue(instr.getArgument());
+				result += toString(instr.getArgument());
 			} else if (operation.equals("sub")) {
-				result += addValue(instr.getAddress());
+				result += toString(instr.getAddress());
 				result += " = ";
-				result += addValue(instr.getAddress());
+				result += toString(instr.getAddress());
 				result += " - ";
-				result += addValue(instr.getArgument());
+				result += toString(instr.getArgument());
 			} else if (operation.equals("and")) {
-				result += addValue(instr.getAddress());
+				result += toString(instr.getAddress());
 				result += " = ";
-				result += addValue(instr.getAddress());
+				result += toString(instr.getAddress());
 				result += " & ";
-				result += addValue(instr.getArgument());
+				result += toString(instr.getArgument());
 			} else if (operation.equals("nand")) {
-				result += addValue(instr.getAddress());
+				result += toString(instr.getAddress());
 				result += " = ";
-				result += addValue(instr.getAddress());
+				result += toString(instr.getAddress());
 				result += " !& ";
-				result += addValue(instr.getArgument());
+				result += toString(instr.getArgument());
 			} else if (operation.equals("or")) {
-				result += addValue(instr.getAddress());
+				result += toString(instr.getAddress());
 				result += " = ";
-				result += addValue(instr.getAddress());
+				result += toString(instr.getAddress());
 				result += " | ";
-				result += addValue(instr.getArgument());
+				result += toString(instr.getArgument());
 			} else if (operation.equals("xor")) {
-				result += addValue(instr.getAddress());
+				result += toString(instr.getAddress());
 				result += " = ";
-				result += addValue(instr.getAddress());
+				result += toString(instr.getAddress());
 				result += " ^ ";
-				result += addValue(instr.getArgument());
+				result += toString(instr.getArgument());
 			} else if (operation.equals("max") || operation.equals("umax")) {
-				result += addValue(instr.getAddress());
+				result += toString(instr.getAddress());
 				result += " = ";
-				result += addValue(instr.getAddress());
+				result += toString(instr.getAddress());
 				result += " > ";
-				result += addValue(instr.getArgument());
+				result += toString(instr.getArgument());
 				result += " ? ";
-				result += addValue(instr.getAddress());
+				result += toString(instr.getAddress());
 				result += " : ";
-				result += addValue(instr.getArgument());
+				result += toString(instr.getArgument());
 			} else if (operation.equals("min") || operation.equals("umin")) {
-				result += addValue(instr.getAddress());
+				result += toString(instr.getAddress());
 				result += " = ";
-				result += addValue(instr.getAddress());
+				result += toString(instr.getAddress());
 				result += " < ";
-				result += addValue(instr.getArgument());
+				result += toString(instr.getArgument());
 				result += " ? ";
-				result += addValue(instr.getAddress());
+				result += toString(instr.getAddress());
 				result += " : ";
-				result += addValue(instr.getArgument());
+				result += toString(instr.getArgument());
 			}
 			result += " )";
 			//phi
@@ -342,7 +355,7 @@ public class CustomLabelingUtil {
 				if(incomingLabels.containsKey(phiLabel)){
 					phiLabel += "(PC:"+incomingLabels.get(phiLabel)+")";
 				}
-				result+= "[" + addValue(phiCase.getValue()) + ", " + phiLabel + "], ";
+				result+= "[" + toString(phiCase.getValue()) + ", " + phiLabel + "], ";
 			}
 			result = result.substring(0,result.length()-2) + ")";
 
@@ -355,13 +368,25 @@ public class CustomLabelingUtil {
 	}
 
 	/**
-	 * TODO: Find out what this does.
+	 * creates string representation of the parameter list 
 	 * @param pList
 	 * @return 
 	 */
-	private String addParameterList(ParameterList pList) {
-		String result = "";
-		// TODO Auto-generated method stub
+	private String toString(ParameterList pList) {
+		String result = "(";
+		Iterator<Parameter> i = pList.getParams().iterator();
+		while (i.hasNext())
+		{
+			Parameter p = i.next();
+			if(i.hasNext())
+			{
+				result += toString(p) + ", ";
+			}
+			else {
+				result += toString(p);
+			}
+		}
+		result += ")";
 		return result;
 	}
 
@@ -370,7 +395,7 @@ public class CustomLabelingUtil {
 	 * @param type the type to add to the String.
 	 * @return concatenated String
 	 */
-	private String addType(EObject type) {
+	private String toString(TypeUse type) {
 		String result;
 		if (type instanceof PredefinedImpl) {
 			result = ((Predefined) type).getType();
@@ -393,7 +418,7 @@ public class CustomLabelingUtil {
 	 * @param value
 	 * @return the concatenated String
 	 */
-	private String addValue(Value value) {
+	private String toString(Value value) {
 		String result = "";
 
 		if(value instanceof AddressUseImpl){
@@ -410,11 +435,15 @@ public class CustomLabelingUtil {
 			PrimitiveValue val = (PrimitiveValue)value;
 			result += val.getValue();
 		}
+		else {
+			result += TODO;
+		}
 
-		return (result + " ");
+		return (result + WS);
 	}
 
-	private String addValue(Parameter val) {
-		return addValue(val.getValue());
+	private String toString(Parameter val) {
+		return toString(val.getValue());
 	}
 }
+
