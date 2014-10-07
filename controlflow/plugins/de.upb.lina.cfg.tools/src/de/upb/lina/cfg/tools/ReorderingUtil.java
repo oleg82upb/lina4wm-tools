@@ -36,14 +36,15 @@ public class ReorderingUtil {
 
 	private FunctionDefinition function;
 	private boolean endProcess = false;
-	private WarningLogger warningLogger;
 	private boolean loopWithoutFence = false;
+	private ArrayList<String> placesInLoopWithoutFence;
 
 
-	public ControlFlowDiagram createReachibilityGraph(FunctionDefinition function, WarningLogger warningLogger){
+	public ControlFlowDiagram createReachibilityGraph(FunctionDefinition function){
 		instructions = new ArrayList<Instruction>();
 		this.function = function;
-		this.warningLogger = warningLogger;
+		this.placesInLoopWithoutFence = new ArrayList<String>();
+		boolean containsFlushesAfterReturn = false;
 		ProgramCounter pc = new ProgramCounter();
 		ControlFlowDiagram cfg = ControlflowFactory.eINSTANCE
 				.createControlFlowDiagram();
@@ -74,9 +75,10 @@ public class ReorderingUtil {
 
 			//get the right instruction of our pc, null if we are at the end
 			Instruction nextInstruction = null;
-			if(toExplore.getPc()<instructions.size()){
+			if(toExplore.getPc() < instructions.size()){
 				nextInstruction = instructions.get(toExplore.getPc());	
 			}
+			//else it is the last location and no further program steps exist
 
 
 			//empty buffer
@@ -87,9 +89,11 @@ public class ReorderingUtil {
 
 			//buffer with entries
 			}else{
-				//possible flushes after a return
-				if(nextInstruction == null){
-					warningLogger.logUnflushedBuffer(function.getAddress().getName());
+				if(nextInstruction == null)
+				{
+					//possible flushes after a return
+					containsFlushesAfterReturn = true;
+//					CFGActivator.logWarning("Method " + function.getAddress().getName() + " potentially returns with a non-empty store buffer."  , null);
 				}
 				//create flush options, TSO behavior
 				addFlushOptions(cfg, toBeProcessed, toExplore, nextInstruction);
@@ -104,6 +108,11 @@ public class ReorderingUtil {
 			ControlFlowLocation lastProcessed = toBeProcessed.get(0);
 			toBeProcessed.remove(0);
 			processed.add(lastProcessed);
+		}
+		
+		if (containsFlushesAfterReturn)
+		{
+			CFGActivator.logWarning("Method " + function.getAddress().getName() + " potentially returns with a non-empty store buffer."  , null);
 		}
 		
 		return cfg;
@@ -224,7 +233,8 @@ public class ReorderingUtil {
 			//See createStoreBuffer for more details
 			if(loopWithoutFence){
 				loopWithoutFence = false;
-				warningLogger.logPlaceInLoopWithoutFence(function.getAddress().getName(), toExplore, nextLocation, nextInstruction);
+				reportLoopWithoutFence(function.getAddress().getName(), toExplore, nextLocation, nextInstruction);
+//				warningLogger.logPlaceInLoopWithoutFence(function.getAddress().getName(), toExplore, nextLocation, nextInstruction);
 			}
 			
 			if(!util.isInList(toBeProcessed,nextLocation) && !util.isInList(processed,nextLocation)){
@@ -326,5 +336,36 @@ public class ReorderingUtil {
 		FlushTransition transition = ControlflowFactory.eINSTANCE.createFlushTransition();
 		transition.setDiagram(diag);
 		return transition;
+	}
+	
+	private void reportLoopWithoutFence(String functionName, ControlFlowLocation locBeforeLatesFence,
+			ControlFlowLocation nextLocAfterWrite, Instruction instruction)
+	{
+		String error = functionName + " - between " + util.getBufferAsString(locBeforeLatesFence) + " and "
+				+ util.getBufferAsString(nextLocAfterWrite) + " caused by " + instruction.toString() + "\n";
+		if (!placesInLoopWithoutFence.contains(error))
+		{
+			placesInLoopWithoutFence.add(error);
+		}
+	}
+	
+	public String getWarnings()
+	{
+		
+		
+		String error = null;
+
+		if (!placesInLoopWithoutFence.isEmpty())
+		{
+			error = "Loops without fence have been found at: \n";
+			for (String s : placesInLoopWithoutFence)
+			{
+				error += s + "\n";
+			}
+			error += "\n";
+		}
+		
+		
+		return error;
 	}
 }

@@ -17,7 +17,6 @@ import de.upb.llvm_parser.llvm.Branch;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.Switch;
 import de.upb.llvm_parser.llvm.SwitchCase;
 
@@ -28,13 +27,10 @@ public class SCUtil {
 
 	private FunctionDefinition function;
 	private boolean endProcess = false;
-	private WarningLogger warningLogger;
-	private boolean loopWithoutFence = false;
 	
 	public ControlFlowDiagram createCFG(FunctionDefinition function) {
 		instructions = new ArrayList<Instruction>();
 		this.function = function;
-		this.warningLogger = warningLogger;
 		ProgramCounter pc = new ProgramCounter();
 		ControlFlowDiagram cfg = ControlflowFactory.eINSTANCE
 				.createControlFlowDiagram();
@@ -193,13 +189,6 @@ public class SCUtil {
 			ControlFlowLocation nextLocation = createControlFlowLocation(cfg, toExplore.getPc()+1, createStoreBuffer(toExplore.getBuffer(), nextInstruction), util.findLabelByInstruction(function, nextInstruction));
 			t.setSource(toExplore);
 			t.setTarget(nextLocation);
-			
-			//if we have a write we have to check if we have a loop without fence 
-			//See createStoreBuffer for more details
-			if(loopWithoutFence){
-				loopWithoutFence = false;
-				warningLogger.logPlaceInLoopWithoutFence(function.getAddress().getName(), toExplore, nextLocation, nextInstruction);
-			}
 			
 			if(!util.isInList(toBeProcessed,nextLocation) && !util.isInList(processed,nextLocation)){
 				toBeProcessed.add(nextLocation);
