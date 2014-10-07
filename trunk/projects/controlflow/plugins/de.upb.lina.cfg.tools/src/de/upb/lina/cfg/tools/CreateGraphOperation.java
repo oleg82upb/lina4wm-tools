@@ -34,11 +34,10 @@ public class CreateGraphOperation extends WorkspaceModifyOperation {
 	private LLVM ast = null;
 	private String astLocation;
 	private Shell shell;
-
+	private boolean warningsOccured = false;
 	private Path cfgpath = null;
 	private int reordering;
 	private ArrayList<ControlFlowDiagram> list = new ArrayList<ControlFlowDiagram>();
-	private WarningLogger warningLogger;
 
 //	public CreateGraphOperation(EObject ast, String path, int reordering) {
 //		super();
@@ -53,12 +52,11 @@ public class CreateGraphOperation extends WorkspaceModifyOperation {
 		this.astLocation = astLocation;
 		cfgpath = new Path(path);
 		this.reordering = reordering;
-		this.warningLogger = new WarningLogger(true, shell);
 	}
 	
-	public String getWarnings()
+	public boolean finishedWithoutWarnings()
 	{
-		return this.warningLogger.getWarnings();
+		return !warningsOccured;
 	}
 	
 	private LLVM loadAst()
@@ -97,8 +95,13 @@ public class CreateGraphOperation extends WorkspaceModifyOperation {
 							.getBody() != null)
 						if(reordering == 1){
 							ReorderingUtil reord = new ReorderingUtil();
-								list.add(reord.createReachibilityGraph((FunctionDefinition) ast
-									.getElements().get(i), warningLogger));
+								list.add(reord.createReachibilityGraph((FunctionDefinition) ast.getElements().get(i)));
+								
+								if(reord.getWarnings() != null)
+								{
+									warningsOccured = true;
+									CFGActivator.logWarning(reord.getWarnings(), null);
+								}
 						}else{
 //							SCUtilOld sc = new SCUtilOld();
 							SCUtil sc2 = new SCUtil();
@@ -132,12 +135,6 @@ public class CreateGraphOperation extends WorkspaceModifyOperation {
 		} catch(IllegalArgumentException e){
 			CFGActivator.log(IStatus.INFO, "User stopped the transformation due to a warning.", e);
 		}
-		finally{
-			if(warningLogger.getWarnings() != null){
-				throw new RuntimeException(warningLogger.getWarnings());
-			}
-		}
-
 	}
 
 	private void refreshWorkspace() {

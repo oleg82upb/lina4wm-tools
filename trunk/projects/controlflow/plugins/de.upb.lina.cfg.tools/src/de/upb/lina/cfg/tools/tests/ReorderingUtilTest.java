@@ -1,6 +1,5 @@
 package de.upb.lina.cfg.tools.tests;
 
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,7 +19,6 @@ import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.tools.CFGActivator;
 import de.upb.lina.cfg.tools.ReorderingUtil;
-import de.upb.lina.cfg.tools.WarningLogger;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LLVM;
 import de.upb.llvm_parser.llvm.LlvmPackage;
@@ -57,10 +55,9 @@ public class ReorderingUtilTest {
 
 	@Test
 	public void testCreateReachibilityGraph() {
-		WarningLogger logger = new WarningLogger(false, null);
 		ReorderingUtil util = new ReorderingUtil();
 
-		ControlFlowDiagram diag = util.createReachibilityGraph((FunctionDefinition) ast.getElements().get(0), logger);
+		ControlFlowDiagram diag = util.createReachibilityGraph((FunctionDefinition) ast.getElements().get(0));
 		
 		//TODO: We can check stuff here now
 		//Eg if the diag has enough nodes, etc...
