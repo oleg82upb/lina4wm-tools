@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ASCII"?>
+<llvm:LLVM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:llvm="http://www.upb.de/llvm_parser/llvm">
+  <elements xsi:type="llvm:FunctionDefinition">
+    <returnType xsi:type="llvm:Predefined" type="void"/>
+    <address name="@_Test"/>
+    <body>
+      <blocks label="entry">
+        <instructions xsi:type="llvm:ArithmeticOperation" operation="add">
+          <result name="%b"/>
+          <optype xsi:type="llvm:Predefined" type="i32"/>
+          <value1 xsi:type="llvm:Constant" value="5"/>
+          <value2 xsi:type="llvm:Constant" value="0"/>
+        </instructions>
+        <instructions xsi:type="llvm:Alloc">
+          <result name="%r1"/>
+          <type xsi:type="llvm:Predefined" type="i32"/>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <targetAddress>
+            <type xsi:type="llvm:Predefined" type="i32"/>
+            <value xsi:type="llvm:AddressUse" address="//@elements.0/@body/@blocks.0/@instructions.0/@result"/>
+          </targetAddress>
+          <value>
+            <type xsi:type="llvm:Predefined" type="i32*"/>
+            <value xsi:type="llvm:AddressUse" address="//@elements.0/@body/@blocks.0/@instructions.1/@result"/>
+          </value>
+        </instructions>
+        <instructions xsi:type="llvm:Load" align="4">
+          <result name="%0"/>
+          <address>
+            <type xsi:type="llvm:Predefined" type="i32*"/>
+            <value xsi:type="llvm:AddressUse" address="//@elements.0/@body/@blocks.0/@instructions.1/@result"/>
+          </address>
+          <meta arg="!tbaa" value="!0"/>
+        </instructions>
+        <instructions xsi:type="llvm:Fence" ordering="seq_cst"/>
+      </blocks>
+      <blocks label="return">
+        <instructions xsi:type="llvm:Return">
+          <value>
+            <type xsi:type="llvm:Predefined" type="void"/>
+          </value>
+        </instructions>
+      </blocks>
+    </body>
+  </elements>
+</llvm:LLVM>
