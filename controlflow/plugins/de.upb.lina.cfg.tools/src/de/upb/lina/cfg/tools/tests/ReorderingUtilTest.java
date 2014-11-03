@@ -1,5 +1,8 @@
 package de.upb.lina.cfg.tools.tests;
 
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,8 +19,10 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
+import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.tools.CFGActivator;
+import de.upb.lina.cfg.tools.GraphUtility;
 import de.upb.lina.cfg.tools.ReorderingUtil;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LLVM;
@@ -27,6 +32,7 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 public class ReorderingUtilTest {
 	private String astLoc;
 	private LLVM ast;
+	
 
 
 	public ReorderingUtilTest(String astLoc){
@@ -59,11 +65,8 @@ public class ReorderingUtilTest {
 
 		ControlFlowDiagram diag = util.createReachibilityGraph((FunctionDefinition) ast.getElements().get(0));
 		
-		//TODO: We can check stuff here now
-		//Eg if the diag has enough nodes, etc...
-		//it might be a good idea to define the things to check in the constructor
-		//so we can actually put the stuff to check as parameters into data()
-		//addition: let data() read the data from a file -> we can define testcases in .txt
+		
+		
 	}
 
 
