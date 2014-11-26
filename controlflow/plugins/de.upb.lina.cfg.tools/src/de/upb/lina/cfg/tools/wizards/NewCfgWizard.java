@@ -1,8 +1,15 @@
 package de.upb.lina.cfg.tools.wizards;
 
+import java.util.List;
+
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -13,8 +20,13 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.XMLMemento;
 
+import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.tools.CFGActivator;
+import de.upb.lina.cfg.tools.PreComputationChecker;
 import de.upb.lina.cfg.tools.CreateGraphOperation;
+import de.upb.lina.cfg.tools.SCUtil;
+import de.upb.llvm_parser.llvm.LLVM;
+import de.upb.llvm_parser.llvm.LlvmPackage;
 
 /**
  * This is a sample new wizard. Its role is to create a new file resource in the
@@ -97,6 +109,26 @@ public class NewCfgWizard extends Wizard implements INewWizard
 	}
 
 
+	@Override
+	public boolean canFinish() {
+		
+		if(!super.canFinish())
+		{
+			return false;
+		}
+		
+		PreComputationChecker checker = new PreComputationChecker(page.getAstLocation(), page.getReordering());
+		try {
+			 if(checker.checkforEarlyReads())
+				 page.setMessage("The selected Ast-File contains possible early reads.", 2);
+
+		} catch (InterruptedException e) {
+			
+			CFGActivator.logError(e.getMessage(), e);
+		}
+		return true;
+	}
+	
 	/**
 	 * We will accept the selection in the workbench to see if we can initialize
 	 * from it.
