@@ -37,33 +37,31 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
  * same extension, it will be able to open it.
  */
 
-public class NewCfgWizard extends Wizard implements INewWizard
-{
+public class NewCfgWizard extends Wizard implements INewWizard {
 	private SelectionPage page;
 	private ISelection selection;
 	private IWorkspace iw = ResourcesPlugin.getWorkspace();
 	private IPath root = iw.getRoot().getLocation();
 	public final static String MEMENTO__KEY = "CFGSelection";
+	private String astlocation;
+	private boolean containsEarlyReads = false;
 
 	/**
 	 * Constructor for NewCfgWizard.
 	 */
-	public NewCfgWizard()
-	{
+	public NewCfgWizard() {
 		super();
 		setNeedsProgressMonitor(true);
 	}
 
-	protected synchronized void saveState()
-	{
+	protected synchronized void saveState() {
 		XMLMemento memento = XMLMemento.createWriteRoot(MEMENTO__KEY);
 		IMemento child = memento.createChild(MEMENTO__KEY);
 		writeSelectionState(child);
 		CFGActivator.saveMementoToFile(memento);
 	}
 
-	private void writeSelectionState(IMemento memento)
-	{
+	private void writeSelectionState(IMemento memento) {
 		memento.putString("astloc", page.getAstLocation());
 		memento.putString("container", page.getContainerName());
 		memento.putString("newfile", page.getFileName());
@@ -74,8 +72,7 @@ public class NewCfgWizard extends Wizard implements INewWizard
 	 * Adding the page to the wizard.
 	 */
 
-	public void addPages()
-	{
+	public void addPages() {
 		page = new SelectionPage(selection);
 		addPage(page);
 	}
@@ -84,23 +81,22 @@ public class NewCfgWizard extends Wizard implements INewWizard
 	 * This method is called when 'Finish' button is pressed in the wizard. We
 	 * will create an operation and run it using wizard as execution context.
 	 */
-	public boolean performFinish()
-	{
+	public boolean performFinish() {
 
 		this.saveState();
 		CreateGraphOperation cgo = new CreateGraphOperation(page.getAstLocation(),
 				(page.getContainerName() + "/" + page.getFileName()), page.getReordering(), this.getShell());
 
-		try
-		{
+		try {
 			getContainer().run(true, false, cgo);
-		} catch (Exception e)
-		{
-			if (!cgo.finishedWithoutWarnings())
-			{
-				MessageDialog.openWarning(getShell(), "Warning", "The graph may contain loops without fences or flush transitions after return statement.\n Please check the error log for more details.");
-			} else
-			{
+		} catch (Exception e) {
+			if (!cgo.finishedWithoutWarnings()) {
+				MessageDialog
+						.openWarning(
+								getShell(),
+								"Warning",
+								"The graph may contain loops without fences or flush transitions after return statement.\n Please check the error log for more details.");
+			} else {
 				CFGActivator.logError(e.getMessage(), e);
 			}
 		}
@@ -108,35 +104,41 @@ public class NewCfgWizard extends Wizard implements INewWizard
 		return true;
 	}
 
-
 	@Override
 	public boolean canFinish() {
 		
-		if(!super.canFinish())
-		{
+		if (!super.canFinish()) {
 			return false;
 		}
-		
-		PreComputationChecker checker = new PreComputationChecker(page.getAstLocation(), page.getReordering());
-		try {
-			 if(checker.checkforEarlyReads())
-				 page.setMessage("The selected Ast-File contains possible early reads.", 2);
+		if (page.getReordering() == 1) {
+			if (astlocation == null || !astlocation.equals(page.getAstLocation())) {
+				astlocation = page.getAstLocation();
+				PreComputationChecker checker = new PreComputationChecker(page.getAstLocation(), page.getReordering());
+				try {
+					if (checker.checkforEarlyReads()){
+						containsEarlyReads = true;
+						page.setMessage("The selected Ast-File contains possible early reads.", 2);
+					}else{
+						containsEarlyReads = false;
+					}
+				} catch (InterruptedException e) {
 
-		} catch (InterruptedException e) {
-			
-			CFGActivator.logError(e.getMessage(), e);
+					CFGActivator.logError(e.getMessage(), e);
+				}
+			}
+			if(containsEarlyReads)
+			page.setMessage("The selected Ast-File contains possible early reads.", 2);
 		}
 		return true;
 	}
-	
+
 	/**
 	 * We will accept the selection in the workbench to see if we can initialize
 	 * from it.
 	 * 
 	 * @see IWorkbenchWizard#init(IWorkbench, IStructuredSelection)
 	 */
-	public void init(IWorkbench workbench, IStructuredSelection selection)
-	{
+	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 	}
 }
