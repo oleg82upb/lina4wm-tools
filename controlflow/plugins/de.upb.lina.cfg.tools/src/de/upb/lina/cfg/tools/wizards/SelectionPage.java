@@ -11,6 +11,7 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
@@ -99,8 +100,7 @@ public class SelectionPage extends WizardPage {
 		astFile.setLayoutData(gd);
 		astFile.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				dialogChanged(container);
-				checkastfile();
+				validateInput();
 			}
 		});
 		Button button = new Button(container, SWT.PUSH);
@@ -119,7 +119,7 @@ public class SelectionPage extends WizardPage {
 		containerText.setLayoutData(gd);
 		containerText.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				dialogChanged(container);
+				validateInput();
 			}
 		});
 
@@ -139,7 +139,7 @@ public class SelectionPage extends WizardPage {
 
 		fileText.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				dialogChanged(container);
+				validateInput();
 			}
 		});
 		new Label(container, SWT.NULL).setText("");
@@ -153,27 +153,30 @@ public class SelectionPage extends WizardPage {
 		combo.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
 				reordering = combo.getSelectionIndex();
+				validateInput();
 			}
 		});
-		
+
 		combo.select(0);
 		combo.setEnabled(true);
 		setControl(container);
 		if (memento != null) {
 			astFile.setText(memento.getString("astloc"));
-			dialogChanged(container);
+			validateInput();
 			containerText.setText(memento.getString("container"));
-			dialogChanged(container);
+			validateInput();
 			fileText.setText(memento.getString("newfile"));
-			dialogChanged(container);
-			try{
+			validateInput();
+			try {
 				combo.select(memento.getInteger("reordering"));
-			}catch(NullPointerException ex){
-				CFGActivator.logWarning("Warning: Memento not setup correctly - this warning will disappear after creating one cfg.", ex);
+			} catch (NullPointerException ex) {
+				CFGActivator.logWarning(
+						"Warning: Memento not setup correctly - this warning will disappear after creating one cfg.",
+						ex);
 			}
 		}
 		initialize();
-		dialogChanged(container);
+		validateInput();
 
 	}
 
@@ -229,14 +232,13 @@ public class SelectionPage extends WizardPage {
 				new BaseWorkbenchContentProvider());
 
 		dialog.addFilter(new ViewerFilter() {
-			
+
 			@Override
 			public boolean select(Viewer viewer, Object parentElement, Object element) {
-				if(element instanceof IFolder || element instanceof IProject) {
+				if (element instanceof IFolder || element instanceof IProject) {
 					return true;
 				}
-				if(element instanceof IFile)
-				{
+				if (element instanceof IFile) {
 					IFile file = (IFile) element;
 					return FILE_EXT.equals(file.getFileExtension());
 				}
@@ -261,8 +263,8 @@ public class SelectionPage extends WizardPage {
 	}
 
 	private void handleContainerBrowse(Text textf) {
-		ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot(), false,
-				"Please select new file location.");
+		ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), ResourcesPlugin.getWorkspace()
+				.getRoot(), false, "Please select new file location.");
 		if (dialog.open() == Dialog.OK) {
 			Object[] result = dialog.getResult();
 			if (result.length == 1) {
@@ -279,7 +281,7 @@ public class SelectionPage extends WizardPage {
 	 * Ensures that both text fields are set.
 	 */
 
-	private void dialogChanged(Composite container) {
+	private void validateInput() {
 		this.astloc = this.astFile.getText();
 		this.containerloc = this.containerText.getText();
 		this.newfile = this.fileText.getText();
@@ -294,6 +296,18 @@ public class SelectionPage extends WizardPage {
 			return;
 		} else if (result >= 100) {
 			updateStatus("The AST-File extension has to be type of *.llvm");
+			return;
+		}
+		if (!isValidContainer(containerText.getText())) {
+			if(!containerText.getText().startsWith("/")){
+				updateStatus("The container has to start with '/'.");
+			}else{
+				updateStatus("No valid container is selected.");
+			}
+			return;
+		}
+		if (!isValidcfgName(fileText.getText())) {
+			updateStatus("The filename has to end with '.cfg'.");
 			return;
 		}
 		updateDescription("Check your Input and hit finish.");
@@ -313,6 +327,28 @@ public class SelectionPage extends WizardPage {
 
 	public String getAstLocation() {
 		return astloc;
+	}
+
+	public boolean isValidContainer(String container) {
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+//		IPath path = root.getFullPath().append(container);
+		IResource file = root.findMember(container);
+		if (file != null && file.isAccessible() && !file.equals(root) && container.startsWith("/")) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isValidcfgName(String string) {
+		for (int i = string.length(); i > 0; i--) {
+			if (string.charAt(i - 1) == ' ') {
+				string = (String) string.subSequence(0, i - 1);
+			}
+			if (string.endsWith(".cfg"))
+				return true;
+		}
+
+		return false;
 	}
 
 	public int checkastfile() {
@@ -360,7 +396,8 @@ public class SelectionPage extends WizardPage {
 	protected synchronized IMemento loadState() {
 		{
 			try {
-				XMLMemento memento = XMLMemento.createReadRoot(new BufferedReader(new FileReader(CFGActivator.getStateFile())));
+				XMLMemento memento = XMLMemento.createReadRoot(new BufferedReader(new FileReader(CFGActivator
+						.getStateFile())));
 				IMemento thisMemento = memento.getChild(NewCfgWizard.MEMENTO__KEY);
 				if (thisMemento != null) {
 					return thisMemento;
@@ -389,6 +426,5 @@ public class SelectionPage extends WizardPage {
 	public String getAstloc() {
 		return astloc;
 	}
-	
-	
+
 }
