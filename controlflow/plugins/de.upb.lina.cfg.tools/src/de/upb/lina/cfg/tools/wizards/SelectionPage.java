@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -15,6 +16,11 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogPage;
 import org.eclipse.jface.viewers.ISelection;
@@ -287,7 +293,7 @@ public class SelectionPage extends WizardPage {
 		this.newfile = this.fileText.getText();
 		setDescription("Please Select next");
 
-		int result = (checkastfile() + checkastmeta() + checkcfgmeta());
+		int result = (checkastfile(getAstLocation()) + checkastmeta() + checkcfgmeta());
 		if (result >= 300) {
 			updateStatus("Please Select an AST-File (*.llvm)");
 			return;
@@ -307,7 +313,7 @@ public class SelectionPage extends WizardPage {
 			return;
 		}
 		if (!isValidcfgName(fileText.getText())) {
-			updateStatus("The filename has to end with '.cfg'.");
+			updateStatus("No valid filename.");
 			return;
 		}
 		updateDescription("Check your Input and hit finish.");
@@ -340,30 +346,58 @@ public class SelectionPage extends WizardPage {
 	}
 
 	public boolean isValidcfgName(String string) {
-		for (int i = string.length(); i > 0; i--) {
-			if (string.charAt(i - 1) == ' ') {
-				string = (String) string.subSequence(0, i - 1);
-			}
-			if (string.endsWith(".cfg"))
-				return true;
+//		for (int i = string.length(); i > 0; i--) {
+//			if (string.charAt(i - 1) == ' ') {
+//				string = (String) string.subSequence(0, i - 1);
+//			}else{
+//				break;
+//			}
+//		}
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		IPath path = root.getFullPath().append(string);
+		File file = path.toFile();
+		try {
+		       file.getCanonicalPath();
+		    }
+		    catch (IOException e) {
+		       return false;
+		    }
+		
+		if(string.contains(" ")){
+			return false;
 		}
+		if (string.endsWith(".cfg"))
+				return true;
 
 		return false;
 	}
 
-	public int checkastfile() {
-		if (getAstLocation().length() == 0) {
+	public int checkastfile(String astLocation) {
+		if (astLocation.length() == 0) {
 			return 300;
 		}
-		IWorkspace iw = ResourcesPlugin.getWorkspace();
-		IPath root = iw.getRoot().getLocation();
-		Path p = new Path(getAstLocation());
-		File ast = new File(root + p.toOSString());
-		if (!ast.exists()) {
+		if (astLocation.substring(astLocation.length() - 4).equalsIgnoreCase("llvm") == false) {
+			return 100;
+		}
+//		IWorkspace iw = ResourcesPlugin.getWorkspace();
+//		IPath root = iw.getRoot().getLocation();
+//		Path p = new Path(astLocation);
+//		File ast = new File(root + p.toOSString());
+//		if (!ast.exists()) {
+//			return 200;
+//		}
+		IWorkspaceRoot r = ResourcesPlugin.getWorkspace().getRoot();
+		IResource file = r.findMember(astLocation);
+		if (file == null || !file.isAccessible() || !astLocation.startsWith("/")) {
 			return 200;
 		}
-		if (getAstLocation().substring(getAstLocation().length() - 4).equalsIgnoreCase("llvm") == false) {
-			return 100;
+		try{
+		ResourceSet resourceSet = new ResourceSetImpl();
+		Path astpath = new Path(astLocation);
+		URI uri = URI.createPlatformResourceURI(astpath.toOSString(), true);
+		Resource llvmResource = resourceSet.getResource(uri, true);
+		}catch(WrappedException e){
+			return 200;
 		}
 		return 0;
 	}

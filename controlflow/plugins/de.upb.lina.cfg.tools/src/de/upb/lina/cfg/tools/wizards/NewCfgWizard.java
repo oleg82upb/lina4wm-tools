@@ -41,10 +41,12 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	private SelectionPage page;
 	private ISelection selection;
 	private IWorkspace iw = ResourcesPlugin.getWorkspace();
-	private IPath root = iw.getRoot().getLocation();
+	// private IPath root = iw.getRoot().getLocation();
 	public final static String MEMENTO__KEY = "CFGSelection";
 	private String astlocation;
 	private boolean containsEarlyReads = false;
+	private boolean containsloopWithoutFence = false;
+	private boolean interrupted = false;
 
 	/**
 	 * Constructor for NewCfgWizard.
@@ -106,28 +108,31 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 
 	@Override
 	public boolean canFinish() {
-		
+
 		if (!super.canFinish()) {
 			return false;
 		}
-		if (page.getReordering() == 1) {
-			if (astlocation == null || !astlocation.equals(page.getAstLocation())) {
-				astlocation = page.getAstLocation();
-				PreComputationChecker checker = new PreComputationChecker(page.getAstLocation(), page.getReordering());
-				try {
-					if (checker.checkforEarlyReads()){
-						containsEarlyReads = true;
-						page.setMessage("The selected Ast-File contains possible early reads.", 2);
-					}else{
-						containsEarlyReads = false;
-					}
-				} catch (InterruptedException e) {
+		try {
+			if (page.getReordering() == 1) {
+				if (astlocation == null || !astlocation.equals(page.getAstLocation())) {
+					astlocation = page.getAstLocation();
+					PreComputationChecker checker = new PreComputationChecker(page.getAstLocation(),
+							page.getReordering());
+					containsEarlyReads = checker.checkforEarlyReads();
+					containsloopWithoutFence = checker.checkforLoopWithoutFence();
 
-					CFGActivator.logError(e.getMessage(), e);
 				}
+				if (containsloopWithoutFence && astlocation.equals(page.getAstLocation())) {
+					page.setErrorMessage("The selected Ast-File contains a loop without fence");
+					return false;
+				}
+				if (containsEarlyReads)
+					page.setMessage("The selected Ast-File contains possible early reads.", 2);
 			}
-			if(containsEarlyReads)
-			page.setMessage("The selected Ast-File contains possible early reads.", 2);
+
+		} catch (InterruptedException e) {
+			CFGActivator.logError(e.getMessage(), e);
+			return false;
 		}
 		return true;
 	}
