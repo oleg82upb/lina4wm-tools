@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ASCII"?>
+<llvm:LLVM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:llvm="http://www.upb.de/llvm_parser/llvm">
+  <elements xsi:type="llvm:FunctionDefinition">
+    <returnType xsi:type="llvm:Predefined" type="void"/>
+    <address name="@_Test"/>
+    <body>
+      <blocks label="entry">
+        <instructions xsi:type="llvm:ArithmeticOperation" operation="add">
+          <result name="%b"/>
+          <optype xsi:type="llvm:Predefined" type="i32"/>
+          <value1 xsi:type="llvm:Constant" value="5"/>
+          <value2 xsi:type="llvm:Constant" value="0"/>
+        </instructions>
+        <instructions xsi:type="llvm:Alloc">
+          <result name="%r1"/>
+          <type xsi:type="llvm:Predefined" type="i32"/>
+        </instructions>
+        <instructions xsi:type="llvm:Store">
+          <targetAddress>
+            <type xsi:type="llvm:Predefined" type="i32"/>
+            <value xsi:type="llvm:AddressUse" address="//@elements.0/@body/@blocks.0/@instructions.0/@result"/>
+          </targetAddress>
+          <value>
+            <type xsi:type="llvm:Predefined" type="i32*"/>
+            <value xsi:type="llvm:AddressUse" address="//@elements.0/@body/@blocks.0/@instructions.1/@result"/>
+          </value>
+        </instructions>
+        <instructions xsi:type="llvm:Load" align="4">
+          <result name="%0"/>
+          <address>
+            <type xsi:type="llvm:Predefined" type="i32*"/>
+            <value xsi:type="llvm:AddressUse" address="//@elements.0/@body/@blocks.0/@instructions.1/@result"/>
+          </address>
+          <meta arg="!tbaa" value="!0"/>
+        </instructions>
+        <instructions xsi:type="llvm:ArithmeticOperation" operation="add">
+          <result name="%a"/>
+          <optype xsi:type="llvm:Predefined" type="i32"/>
+          <value1 xsi:type="llvm:Constant" value="1"/>
+          <value2 xsi:type="llvm:Constant" value="0"/>
+        </instructions>
+      </blocks>
+      <blocks label="loop">
+        <instructions xsi:type="llvm:CmpXchg" ordering="seq_cst">
+          <result name="%val_success"/>
+          <address>
+            <type xsi:type="llvm:Predefined" type="i32*"/>
+            <value xsi:type="llvm:AddressUse" address="//@elements.0/@body/@blocks.0/@instructions.1/@result"/>
+          </address>
+          <value>
+            <type xsi:type="llvm:Predefined" type="i32"/>
+            <value xsi:type="llvm:AddressUse" address="//@elements.0/@body/@blocks.0/@instructions.0/@result"/>
+          </value>
+          <newValue>
+            <type xsi:type="llvm:Predefined" type="i32"/>
+            <value xsi:type="llvm:AddressUse" address="//@elements.0/@body/@blocks.0/@instructions.4/@result"/>
+          </newValue>
+        </instructions>
+        <instructions xsi:type="llvm:ArithmeticOperation" operation="add">
+          <result name="%plus"/>
+          <optype xsi:type="llvm:Predefined" type="i32"/>
+          <value1 xsi:type="llvm:AddressUse" address="//@elements.0/@body/@blocks.0/@instructions.4/@result"/>
+          <value2 xsi:type="llvm:AddressUse" address="//@elements.0/@body/@blocks.0/@instructions.0/@result"/>
+        </instructions>
+        <instructions xsi:type="llvm:Compare" cond="eq">
+          <result name="%cond"/>
+          <opType xsi:type="llvm:Predefined" type="i32"/>
+          <operand1 xsi:type="llvm:AddressUse" address="//@elements.0/@body/@blocks.0/@instructions.4/@result"/>
+          <operand2 xsi:type="llvm:AddressUse" address="//@elements.0/@body/@blocks.0/@instructions.0/@result"/>
+        </instructions>
+        <instructions xsi:type="llvm:ArithmeticOperation" operation="add">
+          <result name="%a"/>
+          <optype xsi:type="llvm:Predefined" type="i32"/>
+          <value1 xsi:type="llvm:AddressUse" address="//@elements.0/@body/@blocks.0/@instructions.4/@result"/>
+          <value2 xsi:type="llvm:Constant" value="1"/>
+        </instructions>
+        <instructions xsi:type="llvm:Branch" destination="%return" elseDestination="%loop">
+          <condition xsi:type="llvm:AddressUse" address="//@elements.0/@body/@blocks.1/@instructions.2/@result"/>
+        </instructions>
+      </blocks>
+      <blocks label="return">
+        <instructions xsi:type="llvm:Return">
+          <value>
+            <type xsi:type="llvm:Predefined" type="void"/>
+          </value>
+        </instructions>
+      </blocks>
+    </body>
+  </elements>
+</llvm:LLVM>
