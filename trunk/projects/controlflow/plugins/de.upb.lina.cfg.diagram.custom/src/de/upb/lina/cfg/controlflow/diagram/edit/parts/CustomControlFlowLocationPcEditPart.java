@@ -9,6 +9,7 @@ import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.llvm_parser.llvm.Constant;
 import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.PrimitiveValue;
 import de.upb.llvm_parser.llvm.Value;
 import de.upb.llvm_parser.llvm.impl.AddressUseImpl;
 
@@ -46,9 +47,14 @@ public class CustomControlFlowLocationPcEditPart extends ControlFlowLocationPcEd
 	}
 	
 	
-	private String addValue(Value value) {
+	/**
+	 * Returns the given value as a String
+	 * @param value to be transfored into a String
+	 * @return String of the given value
+	 */
+	public String addValue(Value value) {
 		String result = "";
-		
+
 		if(value instanceof AddressUseImpl){
 			AddressUseImpl aui = (AddressUseImpl)value;
 			result +=aui.getAddress().getName();
@@ -59,9 +65,13 @@ public class CustomControlFlowLocationPcEditPart extends ControlFlowLocationPcEd
 			result += constant.getValue();
 		}
 		
+		else if(value.eClass().equals(LlvmPackage.eINSTANCE.getPrimitiveValue())){
+			PrimitiveValue val = (PrimitiveValue)value;
+			result += val.getValue();
+		}
+
 		return (result);
 	}
-	
 	
 
 
