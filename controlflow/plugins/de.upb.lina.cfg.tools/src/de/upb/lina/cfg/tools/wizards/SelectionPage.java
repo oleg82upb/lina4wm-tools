@@ -11,7 +11,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
@@ -294,7 +293,10 @@ public class SelectionPage extends WizardPage {
 		setDescription("Please Select next");
 
 		int result = (checkastfile(getAstLocation()) + checkastmeta() + checkcfgmeta());
-		if (result >= 300) {
+		if (result >= 400) {
+			updateStatus("The selected AST-File can not be loaded.");
+			return;
+		}else if (result >= 300) {
 			updateStatus("Please Select an AST-File (*.llvm)");
 			return;
 		} else if (result >= 200) {
@@ -304,6 +306,7 @@ public class SelectionPage extends WizardPage {
 			updateStatus("The AST-File extension has to be type of *.llvm");
 			return;
 		}
+		
 		if (!isValidContainer(containerText.getText())) {
 			if(!containerText.getText().startsWith("/")){
 				updateStatus("The container has to start with '/'.");
@@ -391,13 +394,14 @@ public class SelectionPage extends WizardPage {
 		if (file == null || !file.isAccessible() || !astLocation.startsWith("/")) {
 			return 200;
 		}
+		//check if ast-file can be loaded or if an exception occurs
 		try{
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Path astpath = new Path(astLocation);
 		URI uri = URI.createPlatformResourceURI(astpath.toOSString(), true);
 		Resource llvmResource = resourceSet.getResource(uri, true);
 		}catch(WrappedException e){
-			return 200;
+			return 400;
 		}
 		return 0;
 	}

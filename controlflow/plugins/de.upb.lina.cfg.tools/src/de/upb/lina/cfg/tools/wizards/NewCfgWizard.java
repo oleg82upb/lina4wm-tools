@@ -7,9 +7,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -24,7 +21,7 @@ import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.tools.CFGActivator;
 import de.upb.lina.cfg.tools.PreComputationChecker;
 import de.upb.lina.cfg.tools.CreateGraphOperation;
-import de.upb.lina.cfg.tools.SCUtil;
+import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LLVM;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
@@ -40,13 +37,13 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 public class NewCfgWizard extends Wizard implements INewWizard {
 	private SelectionPage page;
 	private ISelection selection;
-	private IWorkspace iw = ResourcesPlugin.getWorkspace();
+//	private IWorkspace iw = ResourcesPlugin.getWorkspace();
 	// private IPath root = iw.getRoot().getLocation();
 	public final static String MEMENTO__KEY = "CFGSelection";
 	private String astlocation;
 	private boolean containsEarlyReads = false;
 	private boolean containsloopWithoutFence = false;
-	private boolean interrupted = false;
+	private String funcWithEarlyReads = "";
 
 	/**
 	 * Constructor for NewCfgWizard.
@@ -108,7 +105,7 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 
 	@Override
 	public boolean canFinish() {
-
+		
 		if (!super.canFinish()) {
 			return false;
 		}
@@ -120,14 +117,19 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 							page.getReordering());
 					containsEarlyReads = checker.checkforEarlyReads();
 					containsloopWithoutFence = checker.checkforLoopWithoutFence();
-
+					List<FunctionDefinition> functions = checker.getFunctions();
+					funcWithEarlyReads = "";
+					for(int i = 0; i < functions.size();i++){
+						funcWithEarlyReads = funcWithEarlyReads.concat(functions.get(i).getAddress().getName()+" ");
+					}
 				}
 				if (containsloopWithoutFence && astlocation.equals(page.getAstLocation())) {
 					page.setErrorMessage("The selected Ast-File contains a loop without fence");
 					return false;
 				}
+				
 				if (containsEarlyReads)
-					page.setMessage("The selected Ast-File contains possible early reads.", 2);
+					page.setMessage("The selected Ast-File contains possible early reads at functions: "+funcWithEarlyReads, 2);
 			}
 
 		} catch (InterruptedException e) {
