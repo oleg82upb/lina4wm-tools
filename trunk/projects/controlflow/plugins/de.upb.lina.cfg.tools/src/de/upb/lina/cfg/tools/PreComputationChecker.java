@@ -29,6 +29,8 @@ public class PreComputationChecker {
 	private LLVM ast = null;
 	private String astLocation;
 	private int reordering;
+	private List<FunctionDefinition> functions = null;
+	public static final int TSO = 1;
 
 	public PreComputationChecker(String astLocation, int reordering) {
 		this.astLocation = astLocation;
@@ -36,19 +38,19 @@ public class PreComputationChecker {
 
 	}
 
-	private LLVM loadAst(){
+	private LLVM loadAst() {
 		if (ast != null) {
 			return ast;
 		}
-		try{
-		LlvmPackage.eINSTANCE.getNsURI();
-		ResourceSet resourceSet = new ResourceSetImpl();
-		Path astpath = new Path(astLocation);
-		URI uri = URI.createPlatformResourceURI(astpath.toOSString(), true);
-		Resource llvmResource = resourceSet.getResource(uri, true);
-		this.ast = (LLVM) llvmResource.getContents().get(0);
-		return ast;
-		}catch (WrappedException e) {
+		try {
+			LlvmPackage.eINSTANCE.getNsURI();
+			ResourceSet resourceSet = new ResourceSetImpl();
+			Path astpath = new Path(astLocation);
+			URI uri = URI.createPlatformResourceURI(astpath.toOSString(), true);
+			Resource llvmResource = resourceSet.getResource(uri, true);
+			this.ast = (LLVM) llvmResource.getContents().get(0);
+			return ast;
+		} catch (WrappedException e) {
 			CFGActivator.logError(e.getMessage(), e);
 		}
 		return null;
@@ -63,35 +65,51 @@ public class PreComputationChecker {
 		int a_elem = ast.getElements().size();
 		List<Transition> earlyReads = new ArrayList<Transition>();
 		List<Transition> earlyReadsInFunction = new ArrayList<Transition>();
-		
+		functions = new ArrayList<FunctionDefinition>();
+
 		// for every function
 		for (int i = 0; i < a_elem; i++) {
 
 			if (ast.getElements().get(i) instanceof FunctionDefinitionImpl) {
 				FunctionDefinition func = (FunctionDefinition) ast.getElements().get(i);
 				if (func.getBody() != null)
-					
-					if (reordering == 1) {
-						// TSO is selected -> create sc-graph and search for possible early reads
+
+					if (reordering == TSO) {
+						// create sc-graph and search for possible early reads
 						SCUtil sc = new SCUtil();
 						earlyReadsInFunction = collectEarlyReadsinSCGraph(sc.createCFG(func));
+						if(!earlyReadsInFunction.isEmpty()){
+							functions.add(func);
+						}
 					}
+				if (Debug.DEBUG) {
 
-				if (earlyReadsInFunction.isEmpty()) {
-					System.out.println("No early reads found in function " + func.getAddress().getName());
-				} else {
-					System.out.println("Early reads found in function " + func.getAddress().getName()
-							+ " at transition:");
-					for (Transition t : earlyReadsInFunction)
-						System.out.print(t.getSource().getPc() + " to " + t.getTarget().getPc() + "  ");
+					if (Debug.DEBUG && earlyReadsInFunction.isEmpty()) {
+						System.out.println("No early reads found in function " + func.getAddress().getName());
+					} else {
+						System.out.println("Early reads found in function " + func.getAddress().getName()
+								+ " at transition:");
+						for (Transition t : earlyReadsInFunction)
+							System.out.print(t.getSource().getPc() + " to " + t.getTarget().getPc() + "  ");
+					}
+					System.out.println();
 				}
-				System.out.println();
 			}
 			earlyReads.addAll(earlyReadsInFunction);
 		}
 		return !earlyReads.isEmpty();
 	}
 	
+
+	/**
+	 * This method should only be called if checkForEarlyReads() was called before 
+	 * @return the functions
+	 */
+	public List<FunctionDefinition> getFunctions() {
+		return functions;
+	}
+
+
 	public boolean checkforLoopWithoutFence() throws InterruptedException {
 
 		if (loadAst() == null) {
@@ -101,29 +119,32 @@ public class PreComputationChecker {
 		int a_elem = ast.getElements().size();
 		boolean loopWithoutFence = false;
 		boolean loopWithoutFenceinfunc = false;
-		
-		//for every function
+
+		// for every function
 		for (int i = 0; i < a_elem; i++) {
 			if (ast.getElements().get(i) instanceof FunctionDefinitionImpl) {
 				FunctionDefinition func = (FunctionDefinition) ast.getElements().get(i);
 				if (func.getBody() != null)
-					
-					if (reordering == 1) {
-						// TSO is selected -> create sc-graph and search for loops without fence
+
+					if (reordering == TSO) {
+						// create sc-graph and search for loops without fence
 						SCUtil sc = new SCUtil();
 						loopWithoutFenceinfunc = containsLoopWithoutFences(sc.createCFG(func));
 					}
-				if(loopWithoutFenceinfunc)System.out.println("Loops without fence found in function " + func.getAddress().getName());
+				if (Debug.DEBUG && loopWithoutFenceinfunc)
+					System.out.println("Loops without fence found in function " + func.getAddress().getName());
 			}
 			loopWithoutFence = loopWithoutFence | loopWithoutFenceinfunc;
 		}
-		System.out.println("Loop without fence:" +loopWithoutFence);
+		if(Debug.DEBUG)
+		System.out.println("Loop without fence:" + loopWithoutFence);
 		return loopWithoutFence;
-		
+
 	}
 
 	/**
-	 * @param cfg ControlFlowDiagram with TSO semantic
+	 * @param cfg
+	 *            ControlFlowDiagram with TSO semantic
 	 * @return a list of transitions which are early reads
 	 */
 	public List<Transition> collectEarlyReadsinTSOGraph(ControlFlowDiagram cfg) {
@@ -139,7 +160,8 @@ public class PreComputationChecker {
 	}
 
 	/**
-	 * @param t a transition, which is a load-instruction
+	 * @param t
+	 *            a transition, which is a load-instruction
 	 * @return <code>true</code> if the transition is an early read
 	 */
 	private boolean detectEarlyReadforTSO(Transition t) {
@@ -153,7 +175,7 @@ public class PreComputationChecker {
 				if (t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getLoad())
 						|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getCmpXchg())
 						|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getAtomicRMW())
-						|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getInvoke())){
+						|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getInvoke())) {
 
 					for (AddressValuePair avp : source.getBuffer().getAddressValuePairs()) {
 
@@ -168,11 +190,11 @@ public class PreComputationChecker {
 
 								if (avpaddress.getAddress().equals(taddress.getAddress()))
 									return true;
-							} else {
+							} else if(Debug.DEBUG){
 								System.out.println("not of type AddressUse " + t.getSource().getPc() + " to "
 										+ t.getTarget().getPc());
 							}
-						} else {
+						} else if(Debug.DEBUG){
 							System.out.println("t.getInstruction() not of type Load");
 						}
 					}
@@ -183,7 +205,8 @@ public class PreComputationChecker {
 	}
 
 	/**
-	 * @param cfg ControlFlowDiagram with SC semantic
+	 * @param cfg
+	 *            ControlFlowDiagram with SC semantic
 	 * @return a list of transitions which are possible early reads
 	 */
 	public List<Transition> collectEarlyReadsinSCGraph(ControlFlowDiagram cfg) {
@@ -191,11 +214,13 @@ public class PreComputationChecker {
 		List<Transition> earlyReads = new ArrayList<Transition>();
 		List<Transition> loads = new ArrayList<Transition>();
 		EList<Transition> TransitionList = cfg.getTransitions();
+		// find all loads
 		for (Transition t : TransitionList) {
 			if (t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getLoad())) {
 				loads.add(t);
 			}
 		}
+		// check for all loads whether they are early reads or not
 		for (Transition t : loads) {
 			if (detectEarlyReadforSC(t)) {
 				earlyReads.add(t);
@@ -203,7 +228,7 @@ public class PreComputationChecker {
 		}
 		return earlyReads;
 	}
-	
+
 	/**
 	 * @param t a transition, which is a load-instruction
 	 * @return <code>true</code> if the transition is a possible early read
@@ -216,23 +241,31 @@ public class PreComputationChecker {
 			for (Transition tr : t.getSource().getIncoming())
 				if (isEarlyRead(tr, explored, t))
 					return true;
-		} else {
+		} else if(Debug.DEBUG){
 			System.out.println("t.getInstruction() of type " + t.getInstruction().toString());
 		}
 		return false;
 	}
 
+	/**
+	 * @param t the transition to be checked for being a store
+	 * @param explored list of already checked transitions
+	 * @param load the load transition to be checked
+	 * @return <code>true</code> if load is an possible early read
+	 */
 	private boolean isEarlyRead(Transition t, List<Transition> explored, Transition load) {
-
+		// fence found
 		if (t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getFence())
 				|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getCmpXchg())
 				|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getAtomicRMW())
 				|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getInvoke())) {
 			return false;
 		}
+		// loop found
 		if (explored.contains(t)) {
 			return false;
 		}
+		// check if load is early read w.r.t. transition t
 		explored.add(t);
 		Load l = (Load) load.getInstruction();
 		AddressUse loadaddress = (AddressUse) l.getAddress().getValue();
@@ -247,21 +280,24 @@ public class PreComputationChecker {
 				}
 			}
 		}
+		// reached end of graph
 		if (t.getSource().getIncoming().isEmpty())
 			return false;
+		// check for all incoming transitions
 		for (Transition transition : t.getSource().getIncoming()) {
 			if (isEarlyRead(transition, explored, load))
 				return true;
 		}
+		// no early read found
 		return false;
 	}
-	
-	public boolean containsLoopWithoutFences(ControlFlowDiagram cfg){
-		List<Transition> transitions = cfg.getTransitions(); 
-		for(Transition t : transitions)
-			if(detectLoopWithoutFence(t))
-			return true;
-		
+
+	public boolean containsLoopWithoutFences(ControlFlowDiagram cfg) {
+		List<Transition> transitions = cfg.getTransitions();
+		for (Transition t : transitions)
+			if (detectLoopWithoutFence(t))
+				return true;
+
 		return false;
 	}
 
@@ -275,19 +311,26 @@ public class PreComputationChecker {
 	}
 
 	private boolean isLoopWithoutFence(Transition t, List<Transition> explored) {
-		if (t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getFence())) {
+		// fence found
+		if (t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getFence())
+				|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getCmpXchg())
+				|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getAtomicRMW())) {
 			return false;
 		}
+		// loop without fence found
 		if (explored.contains(t)) {
 			return true;
 		}
+		// reached end of graph
 		if (t.getTarget().getOutgoing().isEmpty())
 			return false;
+		// check for all outgoing transitions
 		explored.add(t);
 		for (Transition transition : t.getTarget().getOutgoing()) {
 			if (isLoopWithoutFence(transition, explored))
 				return true;
 		}
+		// no loop without fence found
 		explored.remove(t);
 		return false;
 	}
