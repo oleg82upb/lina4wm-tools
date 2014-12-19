@@ -116,7 +116,7 @@ public class GraphUtility {
 				return b.getInstructions().get(0);
 			}
 		}
-		return null;
+		throw new RuntimeException("Could not find label " + destLabel + " in function " + function.getAddress().getName());
 	}
 	
 	/**
