@@ -14,7 +14,7 @@ import de.upb.lina.cfg.tools.GraphUtility;
 import de.upb.llvm_parser.llvm.LLVM;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
-public class TSO_Test {
+public abstract class TSO_Test {
 	protected String astLoc;
 	protected LLVM ast;
 	protected GraphUtility gUtil;
