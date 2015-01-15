@@ -319,6 +319,10 @@ public class GraphUtility {
 		}
 		return adjacents;
 	}
+
+	public boolean isSynch(Instruction instruction){
+		return (instruction.eClass().equals(LlvmPackage.eINSTANCE.getFence()) || instruction.eClass().equals(LlvmPackage.eINSTANCE.getCmpXchg()));
+	}
 	
 	
 }

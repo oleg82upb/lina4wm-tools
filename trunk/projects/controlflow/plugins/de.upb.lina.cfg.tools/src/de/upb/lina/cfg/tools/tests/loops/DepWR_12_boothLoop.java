@@ -1,6 +1,8 @@
-package de.upb.lina.cfg.tools.tests;
+package de.upb.lina.cfg.tools.tests.loops;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +15,14 @@ import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.tools.ReorderingUtil;
-import de.upb.llvm_parser.llvm.Fence;
+import de.upb.lina.cfg.tools.tests.TSO_Test;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
-public class RU_T_DepWR_2 extends TSO_Test{
-
+public class DepWR_12_boothLoop extends TSO_Test {
 	@Before
 	public void setUp() throws Exception {
-		astLoc = "testdata/Test_Dependent_Write_Read_2.s.llvm";
+		astLoc = "testdata/loops/Test_Dependent_Write_Read_12_boothLoop.s.llvm";
 		super.setUp();
 	}
 
@@ -32,12 +33,12 @@ public class RU_T_DepWR_2 extends TSO_Test{
 		ControlFlowDiagram diag = util.createReachibilityGraph((FunctionDefinition) ast.getElements().get(0));
 		
 		//check for correct amount of locations and edges
-		assertEquals(diag.getLocations().size(),11);
-		assertEquals(diag.getTransitions().size(),12);
+		assertEquals(diag.getLocations().size(),16);
+		assertEquals(diag.getTransitions().size(),18);
 		
 		List<ControlFlowLocation> locs = diag.getLocations();
 		
-		Transition casTransition = null;
+		Transition fenceTransition = null;
 		
 		List<ControlFlowLocation> nonEmptyBuffers  = new ArrayList<ControlFlowLocation>();
 		for(ControlFlowLocation l: locs){
@@ -46,8 +47,8 @@ public class RU_T_DepWR_2 extends TSO_Test{
 			}
 			for(Transition t: l.getOutgoing()){
 				if(!t.eClass().equals(ControlflowPackage.eINSTANCE.getFlushTransition())){
-					if(t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getCmpXchg())){
-						casTransition = t;
+					if(t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getFence())){
+						fenceTransition = t;
 					}
 				}
 			}
@@ -64,14 +65,14 @@ public class RU_T_DepWR_2 extends TSO_Test{
 		}
 		
 		//Check weather we synch before the fence
-		if(casTransition != null){
+		if(fenceTransition != null){
 			for(ControlFlowLocation l: diag.getLocations()){
-				if(l.getPc() > casTransition.getSource().getPc() || l.getIncoming().contains(casTransition)){
+				if(l.getPc() > fenceTransition.getSource().getPc() || l.getIncoming().contains(fenceTransition)){
 					assertTrue(l.getBuffer().getAddressValuePairs().isEmpty());
 				}
 			}
 		}else{
-			fail("No cas in this test.");
+			fail("No fence in this test.");
 		}
 		
 	}
