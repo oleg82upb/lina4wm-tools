@@ -1,4 +1,4 @@
-package de.upb.lina.cfg.tools.tests;
+package de.upb.lina.cfg.tools.deprecated;
 
 import static org.junit.Assert.*;
 
@@ -23,7 +23,7 @@ import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.tools.CFGActivator;
 import de.upb.lina.cfg.tools.GraphUtility;
-import de.upb.lina.cfg.tools.ReorderingUtil;
+import de.upb.lina.cfg.tools.TSOUtil;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LLVM;
 import de.upb.llvm_parser.llvm.LlvmPackage;
@@ -61,7 +61,7 @@ public class ReorderingUtilTest {
 
 	@Test
 	public void testCreateReachibilityGraph() {
-		ReorderingUtil util = new ReorderingUtil();
+		TSOUtil util = new TSOUtil();
 
 		ControlFlowDiagram diag = util.createReachibilityGraph((FunctionDefinition) ast.getElements().get(0));
 		
