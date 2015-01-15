@@ -94,7 +94,7 @@ public class CreateGraphOperation extends WorkspaceModifyOperation {
 					if (((FunctionDefinition) ast.getElements().get(i))
 							.getBody() != null)
 						if(reordering == 1){
-							ReorderingUtil reord = new ReorderingUtil();
+							TSOUtil reord = new TSOUtil();
 								list.add(reord.createReachibilityGraph((FunctionDefinition) ast.getElements().get(i)));
 								
 								if(reord.getWarnings() != null)

@@ -28,7 +28,7 @@ import de.upb.llvm_parser.llvm.SwitchCase;
 import de.upb.llvm_parser.llvm.Value;
 import de.upb.llvm_parser.llvm.impl.AddressUseImpl;
 
-public class ReorderingUtil {
+public class TSOUtil {
 	private List<Instruction> instructions = new ArrayList<Instruction>();
 	private List<ControlFlowLocation> processed = new ArrayList<ControlFlowLocation>();
 	

@@ -14,7 +14,7 @@ import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.controlflow.Transition;
-import de.upb.lina.cfg.tools.ReorderingUtil;
+import de.upb.lina.cfg.tools.TSOUtil;
 import de.upb.lina.cfg.tools.tests.TSO_Test;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LlvmPackage;
@@ -28,7 +28,7 @@ public class DepRFW_Loop extends TSO_Test {
 
 	@Test
 	public final void testCreateReachibilityGraph() {
-		ReorderingUtil util = new ReorderingUtil();
+		TSOUtil util = new TSOUtil();
 
 		ControlFlowDiagram diag = util.createReachibilityGraph((FunctionDefinition) ast.getElements().get(0));
 		
@@ -38,19 +38,10 @@ public class DepRFW_Loop extends TSO_Test {
 		
 		List<ControlFlowLocation> locs = diag.getLocations();
 		
-		Transition fenceTransition = null;
-		
 		List<ControlFlowLocation> nonEmptyBuffers  = new ArrayList<ControlFlowLocation>();
 		for(ControlFlowLocation l: locs){
 			if(!l.getBuffer().getAddressValuePairs().isEmpty()){
 				nonEmptyBuffers.add(l);
-			}
-			for(Transition t: l.getOutgoing()){
-				if(!t.eClass().equals(ControlflowPackage.eINSTANCE.getFlushTransition())){
-					if(t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getFence())){
-						fenceTransition = t;
-					}
-				}
 			}
 		}
 		
@@ -63,17 +54,6 @@ public class DepRFW_Loop extends TSO_Test {
 			boolean isValidBuffer = buffer.equals(l.getPc()+"<(%0,%r1)>");
 			assertTrue(isValidBuffer);	
 		}
-		
-//		//Check weather we synch before the fence
-//		if(fenceTransition != null){
-//			for(ControlFlowLocation l: diag.getLocations()){
-//				if(l.getPc() > fenceTransition.getSource().getPc() || l.getIncoming().contains(fenceTransition)){
-//					assertTrue(l.getBuffer().getAddressValuePairs().isEmpty());
-//				}
-//			}
-//		}else{
-//			fail("No fence in this test.");
-//		}
 		
 	}
 }
