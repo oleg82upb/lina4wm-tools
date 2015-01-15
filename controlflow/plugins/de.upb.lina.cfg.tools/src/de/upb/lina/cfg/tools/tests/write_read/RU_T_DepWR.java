@@ -1,4 +1,4 @@
-package de.upb.lina.cfg.tools.tests;
+package de.upb.lina.cfg.tools.tests.write_read;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -12,13 +12,14 @@ import org.junit.Test;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.tools.ReorderingUtil;
+import de.upb.lina.cfg.tools.tests.TSO_Test;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 
-public class RU_T_IndWR extends TSO_Test {
+public class RU_T_DepWR extends TSO_Test{
 
 	@Before
 	public void setUp() throws Exception {
-		astLoc = "testdata/Test_Independent_Write_Read.s.llvm";
+		astLoc = "testdata/Test_Dependent_Write_Read.s.llvm";
 		super.setUp();
 	}
 
@@ -47,7 +48,7 @@ public class RU_T_IndWR extends TSO_Test {
 		//check that all buffers contain the correct elements
 		for(ControlFlowLocation l: nonEmptyBuffers){
 			String buffer = gUtil.getBufferAsString(l);
-			boolean isValidBuffer = buffer.equals(l.getPc()+"<(%b,null)>");
+			boolean isValidBuffer = buffer.equals(l.getPc()+"<(%b,%r1)>");
 			assertTrue(isValidBuffer);
 			
 		}

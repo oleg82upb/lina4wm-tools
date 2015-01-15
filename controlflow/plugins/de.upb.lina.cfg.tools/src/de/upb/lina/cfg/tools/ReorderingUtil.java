@@ -99,7 +99,7 @@ public class ReorderingUtil {
 				addFlushOptions(cfg, toBeProcessed, toExplore, nextInstruction);
 
 				//create normal SC behavior
-				if(nextInstruction != null && !isSynch(nextInstruction)){
+				if(nextInstruction != null && !util.isSynch(nextInstruction)){
 					//other options -SC
 					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction);
 				}
@@ -115,6 +115,9 @@ public class ReorderingUtil {
 			CFGActivator.logWarning("Method " + function.getAddress().getName() + " potentially returns with a non-empty store buffer."  , null);
 		}
 		
+		if(Debug.DEBUG){
+			System.out.println("#nodes: " + cfg.getLocations().size() + " ;#edges: " + cfg.getTransitions().size());
+		}
 		return cfg;
 
 	}
@@ -241,10 +244,6 @@ public class ReorderingUtil {
 				toBeProcessed.add(nextLocation);
 			}
 		}
-	}
-
-	private boolean isSynch(Instruction instruction){
-		return (instruction.eClass().equals(LlvmPackage.eINSTANCE.getFence()) || instruction.eClass().equals(LlvmPackage.eINSTANCE.getCmpXchg()));
 	}
 
 	private StoreBuffer createStoreBuffer(StoreBuffer oldBuffer, Instruction nextInstruction){

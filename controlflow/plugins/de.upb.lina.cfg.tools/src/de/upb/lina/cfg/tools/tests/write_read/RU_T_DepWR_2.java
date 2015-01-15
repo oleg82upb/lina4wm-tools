@@ -1,8 +1,6 @@
-package de.upb.lina.cfg.tools.tests;
+package de.upb.lina.cfg.tools.tests.write_read;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +13,16 @@ import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.tools.ReorderingUtil;
+import de.upb.lina.cfg.tools.tests.TSO_Test;
+import de.upb.llvm_parser.llvm.Fence;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
-public class RU_T_IndWR_2_1 extends TSO_Test {
+public class RU_T_DepWR_2 extends TSO_Test{
+
 	@Before
 	public void setUp() throws Exception {
-		astLoc = "testdata/Test_Independent_Write_Read_2_1.s.llvm";
+		astLoc = "testdata/Test_Dependent_Write_Read_2.s.llvm";
 		super.setUp();
 	}
 
@@ -32,8 +33,8 @@ public class RU_T_IndWR_2_1 extends TSO_Test {
 		ControlFlowDiagram diag = util.createReachibilityGraph((FunctionDefinition) ast.getElements().get(0));
 		
 		//check for correct amount of locations and edges
-		assertEquals(diag.getLocations().size(),12);
-		assertEquals(diag.getTransitions().size(),13);
+		assertEquals(diag.getLocations().size(),11);
+		assertEquals(diag.getTransitions().size(),12);
 		
 		List<ControlFlowLocation> locs = diag.getLocations();
 		
@@ -59,7 +60,7 @@ public class RU_T_IndWR_2_1 extends TSO_Test {
 		//check that all buffers contain the correct elements
 		for(ControlFlowLocation l: nonEmptyBuffers){
 			String buffer = gUtil.getBufferAsString(l);
-			boolean isValidBuffer = buffer.equals(l.getPc()+"<(%b,null)>");
+			boolean isValidBuffer = buffer.equals(l.getPc()+"<(%b,%r1)>");
 			assertTrue(isValidBuffer);	
 		}
 		
