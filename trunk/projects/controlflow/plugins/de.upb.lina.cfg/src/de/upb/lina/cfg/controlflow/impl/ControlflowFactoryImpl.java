@@ -59,6 +59,8 @@ public class ControlflowFactoryImpl extends EFactoryImpl implements ControlflowF
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM: return createControlFlowDiagram();
 			case ControlflowPackage.CONTROL_FLOW_LOCATION: return createControlFlowLocation();
 			case ControlflowPackage.TRANSITION: return createTransition();
+			case ControlflowPackage.WRITE_DEF_CHAIN_TRANSITION: return createWriteDefChainTransition();
+			case ControlflowPackage.EARLY_READ_TRANSITION: return createEarlyReadTransition();
 			case ControlflowPackage.GUARDED_TRANSITION: return createGuardedTransition();
 			case ControlflowPackage.MULTI_TRANSITION: return createMultiTransition();
 			case ControlflowPackage.FLUSH_TRANSITION: return createFlushTransition();
@@ -97,6 +99,26 @@ public class ControlflowFactoryImpl extends EFactoryImpl implements ControlflowF
 	public Transition createTransition() {
 		TransitionImpl transition = new TransitionImpl();
 		return transition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WriteDefChainTransition createWriteDefChainTransition() {
+		WriteDefChainTransitionImpl writeDefChainTransition = new WriteDefChainTransitionImpl();
+		return writeDefChainTransition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EarlyReadTransition createEarlyReadTransition() {
+		EarlyReadTransitionImpl earlyReadTransition = new EarlyReadTransitionImpl();
+		return earlyReadTransition;
 	}
 
 	/**

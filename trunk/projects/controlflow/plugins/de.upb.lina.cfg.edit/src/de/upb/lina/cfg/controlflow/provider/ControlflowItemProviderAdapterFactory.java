@@ -141,6 +141,52 @@ public class ControlflowItemProviderAdapterFactory extends ControlflowAdapterFac
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.lina.cfg.controlflow.WriteDefChainTransition} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected WriteDefChainTransitionItemProvider writeDefChainTransitionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.lina.cfg.controlflow.WriteDefChainTransition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createWriteDefChainTransitionAdapter() {
+		if (writeDefChainTransitionItemProvider == null) {
+			writeDefChainTransitionItemProvider = new WriteDefChainTransitionItemProvider(this);
+		}
+
+		return writeDefChainTransitionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.upb.lina.cfg.controlflow.EarlyReadTransition} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EarlyReadTransitionItemProvider earlyReadTransitionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.upb.lina.cfg.controlflow.EarlyReadTransition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createEarlyReadTransitionAdapter() {
+		if (earlyReadTransitionItemProvider == null) {
+			earlyReadTransitionItemProvider = new EarlyReadTransitionItemProvider(this);
+		}
+
+		return earlyReadTransitionItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link de.upb.lina.cfg.controlflow.GuardedTransition} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -360,6 +406,8 @@ public class ControlflowItemProviderAdapterFactory extends ControlflowAdapterFac
 		if (controlFlowDiagramItemProvider != null) controlFlowDiagramItemProvider.dispose();
 		if (controlFlowLocationItemProvider != null) controlFlowLocationItemProvider.dispose();
 		if (transitionItemProvider != null) transitionItemProvider.dispose();
+		if (writeDefChainTransitionItemProvider != null) writeDefChainTransitionItemProvider.dispose();
+		if (earlyReadTransitionItemProvider != null) earlyReadTransitionItemProvider.dispose();
 		if (guardedTransitionItemProvider != null) guardedTransitionItemProvider.dispose();
 		if (multiTransitionItemProvider != null) multiTransitionItemProvider.dispose();
 		if (flushTransitionItemProvider != null) flushTransitionItemProvider.dispose();

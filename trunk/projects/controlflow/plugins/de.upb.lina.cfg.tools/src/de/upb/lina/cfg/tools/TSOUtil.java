@@ -1,36 +1,39 @@
 package de.upb.lina.cfg.tools;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.ControlflowFactory;
+import de.upb.lina.cfg.controlflow.EarlyReadTransition;
 import de.upb.lina.cfg.controlflow.FlushTransition;
 import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.StoreBuffer;
 import de.upb.lina.cfg.controlflow.Transition;
+import de.upb.lina.cfg.controlflow.WriteDefChainTransition;
+import de.upb.llvm_parser.llvm.Address;
+import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.Branch;
-import de.upb.llvm_parser.llvm.Constant;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.Load;
+import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.Switch;
 import de.upb.llvm_parser.llvm.SwitchCase;
 import de.upb.llvm_parser.llvm.Value;
-import de.upb.llvm_parser.llvm.impl.AddressUseImpl;
 
 public class TSOUtil {
 	private List<Instruction> instructions = new ArrayList<Instruction>();
 	private List<ControlFlowLocation> processed = new ArrayList<ControlFlowLocation>();
+	private List<Instruction> specialstores = new ArrayList<Instruction>();
 	
 	private GraphUtility util = new GraphUtility();
 
@@ -48,6 +51,9 @@ public class TSOUtil {
 		ProgramCounter pc = new ProgramCounter();
 		ControlFlowDiagram cfg = ControlflowFactory.eINSTANCE
 				.createControlFlowDiagram();
+		SCUtil sc = new SCUtil();
+		PreComputationChecker checker = new PreComputationChecker("", 0);
+		List<Transition> earlyReadsInFunction = checker.collectEarlyReadsinSCGraph(sc.createCFG(function));	
 
 		cfg.setName(function.getAddress().getName());
 		List<ControlFlowLocation> toBeProcessed = new ArrayList<ControlFlowLocation>();
@@ -58,6 +64,17 @@ public class TSOUtil {
 		for (BasicBlock b : blocks) {
 			for(Instruction i: b.getInstructions()){
 				instructions.add(i);
+			}
+		}
+
+		//just for testing...
+		if(Debug.DEBUG2){
+			for(Instruction instruction: instructions){
+				if(instruction instanceof Store){
+					specialstores.add(instruction);
+					break;
+				}
+				
 			}
 		}
 
@@ -84,7 +101,7 @@ public class TSOUtil {
 			//empty buffer
 			if(toExplore.getBuffer().getAddressValuePairs().isEmpty()){
 				if(nextInstruction != null){
-					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction);
+					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction, earlyReadsInFunction);
 				}
 
 			//buffer with entries
@@ -101,7 +118,7 @@ public class TSOUtil {
 				//create normal SC behavior
 				if(nextInstruction != null && !util.isSynch(nextInstruction)){
 					//other options -SC
-					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction);
+					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction, earlyReadsInFunction);
 				}
 			}
 			//last
@@ -140,7 +157,7 @@ public class TSOUtil {
 
 	private void addNonFlushOptions(ProgramCounter pc, ControlFlowDiagram cfg,
 			List<ControlFlowLocation> toBeProcessed,
-			ControlFlowLocation toExplore, Instruction nextInstruction) {
+			ControlFlowLocation toExplore, Instruction nextInstruction, List<Transition> earlyReadsInFunction) {
 
 		//check for branches
 		if(nextInstruction.eClass().equals(LlvmPackage.eINSTANCE.getBranch())){
@@ -224,7 +241,43 @@ public class TSOUtil {
 			// control flow guards unclear
 			throw new RuntimeException(
 					"IndirectBranch found. Handling of such is not implemented yet");
+			
+			//check if nextInstruction is store in WriteDefChain
+		}else if(specialstores.contains(nextInstruction) && nextInstruction instanceof Store){
+			
+			Transition t = createWriteDefChainTransition(cfg, nextInstruction);
+			
+			//create next location
+			ControlFlowLocation nextLocation = createControlFlowLocation(cfg, toExplore.getPc() + 1,
+					createStoreBufferAfterWriteDefChainTransition(cfg, toExplore.getBuffer(), (Store)nextInstruction),
+					util.findLabelByInstruction(function, nextInstruction));
+			t.setSource(toExplore);
+			t.setTarget(nextLocation);
+			
+			if (!util.isInList(toBeProcessed, nextLocation) && !util.isInList(processed, nextLocation)) {
+				toBeProcessed.add(nextLocation);
+			}
+			
 		}else{
+			//check if instruction is earlyRead
+			if(nextInstruction instanceof Load){
+				String assignmentExpression = instructionIsEarlyRead(earlyReadsInFunction, toExplore, nextInstruction);
+				
+				if (assignmentExpression != null) {
+					//instruction is early read
+					Transition t = createEarlyReadTransition(cfg, (Load)nextInstruction, assignmentExpression);
+					ControlFlowLocation nextLocation = createControlFlowLocation(cfg, toExplore.getPc() + 1,
+							createStoreBuffer(toExplore.getBuffer(), nextInstruction),
+							util.findLabelByInstruction(function, nextInstruction));
+					t.setSource(toExplore);
+					t.setTarget(nextLocation);
+					
+					if (!util.isInList(toBeProcessed, nextLocation) && !util.isInList(processed, nextLocation)) {
+						toBeProcessed.add(nextLocation);
+					}
+					return;
+				}
+			}
 			//normal writes will be dealt here
 			
 			Transition t = createTransition(cfg, nextInstruction);
@@ -292,6 +345,33 @@ public class TSOUtil {
 		return buffer;
 	}
 
+	private StoreBuffer createStoreBufferAfterWriteDefChainTransition(ControlFlowDiagram cfg, StoreBuffer oldBuffer, Store store) {
+		StoreBuffer buffer = ControlflowFactory.eINSTANCE.createStoreBuffer();
+		// create deep copy
+		for (AddressValuePair pair : oldBuffer.getAddressValuePairs()) {
+			AddressValuePair newPair = ControlflowFactory.eINSTANCE.createAddressValuePair();
+			newPair.setAddress(pair.getAddress());
+			newPair.setValue(pair.getValue());
+			buffer.getAddressValuePairs().add(newPair);
+		}
+		// add new buffer entry for store
+		AddressValuePair newPair = ControlflowFactory.eINSTANCE.createAddressValuePair();
+		newPair.setAddress(store.getTargetAddress());
+		Parameter param = EcoreUtil.copy(store.getValue());
+		Address address =  EcoreUtil.copy(((AddressUse)store.getValue().getValue()).getAddress());
+		
+		String registerName = ((AddressUse) param.getValue()).getAddress().getName();
+		registerName += "*";
+		address.setName(registerName);
+		((AddressUse) param.getValue()).setAddress(address);		
+		cfg.getVariableCopies().add(address);
+		cfg.getVariableCopyParams().add(param);
+		newPair.setValue(param);
+		buffer.getAddressValuePairs().add(newPair);
+
+		return buffer;
+	}
+
 
 	/**
 	 * @param diag
@@ -335,6 +415,65 @@ public class TSOUtil {
 		FlushTransition transition = ControlflowFactory.eINSTANCE.createFlushTransition();
 		transition.setDiagram(diag);
 		return transition;
+	}
+	
+	private Transition createEarlyReadTransition(ControlFlowDiagram cfg, Load nextInstruction, String assignmentExpression) {
+		EarlyReadTransition transition = ControlflowFactory.eINSTANCE.createEarlyReadTransition();
+		transition.setInstruction(nextInstruction);
+		transition.setAssignmentExpression(assignmentExpression);
+		transition.setDiagram(cfg);
+		return transition;
+	}
+	
+
+	private Transition createWriteDefChainTransition(ControlFlowDiagram cfg, Instruction nextInstruction) {
+		WriteDefChainTransition transition = ControlflowFactory.eINSTANCE.createWriteDefChainTransition();
+		transition.setDiagram(cfg);
+		transition.setInstruction(nextInstruction);
+		return transition;
+	}
+
+	private String instructionIsEarlyRead(List<Transition> earlyReadsInFunction,
+			ControlFlowLocation toExplore, Instruction nextInstruction) {
+		for (Transition transition : earlyReadsInFunction) {
+			if (transition.getSource().getPc() == toExplore.getPc()
+					&& transition.getTarget().getPc() == toExplore.getPc() + 1
+					&& transition.getInstruction().equals(nextInstruction)) {
+				if (nextInstruction instanceof Load) {
+					Load earlyReadInstruction = (Load) nextInstruction;
+					// now check if it is indeed an early read
+					for (AddressValuePair avp : toExplore.getBuffer().getAddressValuePairs()) {
+						if (avp.getValue().getValue() instanceof AddressUse
+								&& earlyReadInstruction.getAddress().getValue() instanceof AddressUse) {
+							AddressUse avpaddress = (AddressUse) avp.getValue().getValue();
+							AddressUse transitionaddress = (AddressUse) earlyReadInstruction.getAddress().getValue();
+							if (avpaddress.getAddress().equals(transitionaddress.getAddress())) {
+								Value value = avp.getAddress().getValue();
+								if (value instanceof AddressUse) {
+									return ((AddressUse) value).getAddress().getName();
+								}
+								return "TODO";
+							}
+							if (avp.getAddress().eContainer() instanceof Store) {
+								Store store = (Store) avp.getAddress().eContainer();
+								if (store.getValue().getValue() instanceof AddressUse) {
+									if (((AddressUse) store.getValue().getValue()).getAddress().equals(
+											transitionaddress.getAddress())) {
+										Value value = avp.getAddress().getValue();
+										if (value instanceof AddressUse) {
+											return ((AddressUse) value).getAddress().getName();
+										}
+										return "TODO";
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		//no early read
+		return null;
 	}
 	
 	private void reportLoopWithoutFence(String functionName, ControlFlowLocation locBeforeLatesFence,

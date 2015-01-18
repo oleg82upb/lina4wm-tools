@@ -49,6 +49,24 @@ public interface ControlflowFactory extends EFactory {
 	Transition createTransition();
 
 	/**
+	 * Returns a new object of class '<em>Write Def Chain Transition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Write Def Chain Transition</em>'.
+	 * @generated
+	 */
+	WriteDefChainTransition createWriteDefChainTransition();
+
+	/**
+	 * Returns a new object of class '<em>Early Read Transition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Early Read Transition</em>'.
+	 * @generated
+	 */
+	EarlyReadTransition createEarlyReadTransition();
+
+	/**
 	 * Returns a new object of class '<em>Guarded Transition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

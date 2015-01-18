@@ -7,6 +7,7 @@ import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlflowFactory;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 
+import de.upb.llvm_parser.llvm.LlvmFactory;
 import java.util.Collection;
 import java.util.List;
 
@@ -64,6 +65,7 @@ public class ControlFlowDiagramItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addVariableCopyParamsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -91,6 +93,28 @@ public class ControlFlowDiagramItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Variable Copy Params feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVariableCopyParamsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ControlFlowDiagram_variableCopyParams_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ControlFlowDiagram_variableCopyParams_feature", "_UI_ControlFlowDiagram_type"),
+				 ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -105,6 +129,7 @@ public class ControlFlowDiagramItemProvider
 			childrenFeatures.add(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__LOCATIONS);
 			childrenFeatures.add(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__TRANSITIONS);
 			childrenFeatures.add(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__START);
+			childrenFeatures.add(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__VARIABLE_COPIES);
 		}
 		return childrenFeatures;
 	}
@@ -165,6 +190,7 @@ public class ControlFlowDiagramItemProvider
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCATIONS:
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__TRANSITIONS:
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__START:
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__VARIABLE_COPIES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -195,6 +221,16 @@ public class ControlFlowDiagramItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__TRANSITIONS,
+				 ControlflowFactory.eINSTANCE.createWriteDefChainTransition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__TRANSITIONS,
+				 ControlflowFactory.eINSTANCE.createEarlyReadTransition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__TRANSITIONS,
 				 ControlflowFactory.eINSTANCE.createGuardedTransition()));
 
 		newChildDescriptors.add
@@ -211,6 +247,11 @@ public class ControlFlowDiagramItemProvider
 			(createChildParameter
 				(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__START,
 				 ControlflowFactory.eINSTANCE.createControlFlowLocation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__VARIABLE_COPIES,
+				 LlvmFactory.eINSTANCE.createAddress()));
 	}
 
 	/**
