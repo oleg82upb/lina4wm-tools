@@ -80,6 +80,14 @@ public class ControlflowAdapterFactory extends AdapterFactoryImpl {
 				return createTransitionAdapter();
 			}
 			@Override
+			public Adapter caseWriteDefChainTransition(WriteDefChainTransition object) {
+				return createWriteDefChainTransitionAdapter();
+			}
+			@Override
+			public Adapter caseEarlyReadTransition(EarlyReadTransition object) {
+				return createEarlyReadTransitionAdapter();
+			}
+			@Override
 			public Adapter caseGuardedTransition(GuardedTransition object) {
 				return createGuardedTransitionAdapter();
 			}
@@ -158,6 +166,34 @@ public class ControlflowAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTransitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.controlflow.WriteDefChainTransition <em>Write Def Chain Transition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.lina.cfg.controlflow.WriteDefChainTransition
+	 * @generated
+	 */
+	public Adapter createWriteDefChainTransitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.controlflow.EarlyReadTransition <em>Early Read Transition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.lina.cfg.controlflow.EarlyReadTransition
+	 * @generated
+	 */
+	public Adapter createEarlyReadTransitionAdapter() {
 		return null;
 	}
 

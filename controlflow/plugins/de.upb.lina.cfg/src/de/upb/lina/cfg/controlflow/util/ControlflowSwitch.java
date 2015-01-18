@@ -84,6 +84,20 @@ public class ControlflowSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ControlflowPackage.WRITE_DEF_CHAIN_TRANSITION: {
+				WriteDefChainTransition writeDefChainTransition = (WriteDefChainTransition)theEObject;
+				T result = caseWriteDefChainTransition(writeDefChainTransition);
+				if (result == null) result = caseTransition(writeDefChainTransition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ControlflowPackage.EARLY_READ_TRANSITION: {
+				EarlyReadTransition earlyReadTransition = (EarlyReadTransition)theEObject;
+				T result = caseEarlyReadTransition(earlyReadTransition);
+				if (result == null) result = caseTransition(earlyReadTransition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ControlflowPackage.GUARDED_TRANSITION: {
 				GuardedTransition guardedTransition = (GuardedTransition)theEObject;
 				T result = caseGuardedTransition(guardedTransition);
@@ -163,6 +177,36 @@ public class ControlflowSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTransition(Transition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Write Def Chain Transition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Write Def Chain Transition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWriteDefChainTransition(WriteDefChainTransition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Early Read Transition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Early Read Transition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEarlyReadTransition(EarlyReadTransition object) {
 		return null;
 	}
 

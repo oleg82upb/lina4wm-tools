@@ -102,13 +102,31 @@ public interface ControlflowPackage extends EPackage {
 	int CONTROL_FLOW_DIAGRAM__NAME = 3;
 
 	/**
+	 * The feature id for the '<em><b>Variable Copies</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROL_FLOW_DIAGRAM__VARIABLE_COPIES = 4;
+
+	/**
+	 * The feature id for the '<em><b>Variable Copy Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS = 5;
+
+	/**
 	 * The number of structural features of the '<em>Control Flow Diagram</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_DIAGRAM_FEATURE_COUNT = 4;
+	int CONTROL_FLOW_DIAGRAM_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.ControlFlowLocationImpl <em>Control Flow Location</em>}' class.
@@ -239,6 +257,125 @@ public interface ControlflowPackage extends EPackage {
 	int TRANSITION_FEATURE_COUNT = 4;
 
 	/**
+	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.WriteDefChainTransitionImpl <em>Write Def Chain Transition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.upb.lina.cfg.controlflow.impl.WriteDefChainTransitionImpl
+	 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getWriteDefChainTransition()
+	 * @generated
+	 */
+	int WRITE_DEF_CHAIN_TRANSITION = 3;
+
+	/**
+	 * The feature id for the '<em><b>Instruction</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WRITE_DEF_CHAIN_TRANSITION__INSTRUCTION = TRANSITION__INSTRUCTION;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WRITE_DEF_CHAIN_TRANSITION__SOURCE = TRANSITION__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WRITE_DEF_CHAIN_TRANSITION__TARGET = TRANSITION__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WRITE_DEF_CHAIN_TRANSITION__DIAGRAM = TRANSITION__DIAGRAM;
+
+	/**
+	 * The number of structural features of the '<em>Write Def Chain Transition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WRITE_DEF_CHAIN_TRANSITION_FEATURE_COUNT = TRANSITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.EarlyReadTransitionImpl <em>Early Read Transition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.upb.lina.cfg.controlflow.impl.EarlyReadTransitionImpl
+	 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getEarlyReadTransition()
+	 * @generated
+	 */
+	int EARLY_READ_TRANSITION = 4;
+
+	/**
+	 * The feature id for the '<em><b>Instruction</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EARLY_READ_TRANSITION__INSTRUCTION = TRANSITION__INSTRUCTION;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EARLY_READ_TRANSITION__SOURCE = TRANSITION__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EARLY_READ_TRANSITION__TARGET = TRANSITION__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EARLY_READ_TRANSITION__DIAGRAM = TRANSITION__DIAGRAM;
+
+	/**
+	 * The feature id for the '<em><b>Assignment Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EARLY_READ_TRANSITION__ASSIGNMENT_EXPRESSION = TRANSITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Early Read Transition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EARLY_READ_TRANSITION_FEATURE_COUNT = TRANSITION_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.GuardedTransitionImpl <em>Guarded Transition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -246,7 +383,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getGuardedTransition()
 	 * @generated
 	 */
-	int GUARDED_TRANSITION = 3;
+	int GUARDED_TRANSITION = 5;
 
 	/**
 	 * The feature id for the '<em><b>Instruction</b></em>' reference.
@@ -310,7 +447,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getMultiTransition()
 	 * @generated
 	 */
-	int MULTI_TRANSITION = 4;
+	int MULTI_TRANSITION = 6;
 
 	/**
 	 * The feature id for the '<em><b>Instruction</b></em>' reference.
@@ -374,7 +511,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getFlushTransition()
 	 * @generated
 	 */
-	int FLUSH_TRANSITION = 5;
+	int FLUSH_TRANSITION = 7;
 
 	/**
 	 * The feature id for the '<em><b>Instruction</b></em>' reference.
@@ -429,7 +566,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getAddressValuePair()
 	 * @generated
 	 */
-	int ADDRESS_VALUE_PAIR = 6;
+	int ADDRESS_VALUE_PAIR = 8;
 
 	/**
 	 * The feature id for the '<em><b>Address</b></em>' reference.
@@ -475,7 +612,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getStoreBuffer()
 	 * @generated
 	 */
-	int STORE_BUFFER = 7;
+	int STORE_BUFFER = 9;
 
 	/**
 	 * The feature id for the '<em><b>Address Value Pairs</b></em>' containment reference list.
@@ -557,6 +694,28 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getControlFlowDiagram_Name();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getVariableCopies <em>Variable Copies</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Variable Copies</em>'.
+	 * @see de.upb.lina.cfg.controlflow.ControlFlowDiagram#getVariableCopies()
+	 * @see #getControlFlowDiagram()
+	 * @generated
+	 */
+	EReference getControlFlowDiagram_VariableCopies();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getVariableCopyParams <em>Variable Copy Params</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Variable Copy Params</em>'.
+	 * @see de.upb.lina.cfg.controlflow.ControlFlowDiagram#getVariableCopyParams()
+	 * @see #getControlFlowDiagram()
+	 * @generated
+	 */
+	EReference getControlFlowDiagram_VariableCopyParams();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.ControlFlowLocation <em>Control Flow Location</em>}'.
@@ -687,6 +846,37 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTransition_Diagram();
+
+	/**
+	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.WriteDefChainTransition <em>Write Def Chain Transition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Write Def Chain Transition</em>'.
+	 * @see de.upb.lina.cfg.controlflow.WriteDefChainTransition
+	 * @generated
+	 */
+	EClass getWriteDefChainTransition();
+
+	/**
+	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.EarlyReadTransition <em>Early Read Transition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Early Read Transition</em>'.
+	 * @see de.upb.lina.cfg.controlflow.EarlyReadTransition
+	 * @generated
+	 */
+	EClass getEarlyReadTransition();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.controlflow.EarlyReadTransition#getAssignmentExpression <em>Assignment Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Assignment Expression</em>'.
+	 * @see de.upb.lina.cfg.controlflow.EarlyReadTransition#getAssignmentExpression()
+	 * @see #getEarlyReadTransition()
+	 * @generated
+	 */
+	EAttribute getEarlyReadTransition_AssignmentExpression();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.GuardedTransition <em>Guarded Transition</em>}'.
@@ -880,6 +1070,22 @@ public interface ControlflowPackage extends EPackage {
 		EAttribute CONTROL_FLOW_DIAGRAM__NAME = eINSTANCE.getControlFlowDiagram_Name();
 
 		/**
+		 * The meta object literal for the '<em><b>Variable Copies</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTROL_FLOW_DIAGRAM__VARIABLE_COPIES = eINSTANCE.getControlFlowDiagram_VariableCopies();
+
+		/**
+		 * The meta object literal for the '<em><b>Variable Copy Params</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS = eINSTANCE.getControlFlowDiagram_VariableCopyParams();
+
+		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.ControlFlowLocationImpl <em>Control Flow Location</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -978,6 +1184,34 @@ public interface ControlflowPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRANSITION__DIAGRAM = eINSTANCE.getTransition_Diagram();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.WriteDefChainTransitionImpl <em>Write Def Chain Transition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.lina.cfg.controlflow.impl.WriteDefChainTransitionImpl
+		 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getWriteDefChainTransition()
+		 * @generated
+		 */
+		EClass WRITE_DEF_CHAIN_TRANSITION = eINSTANCE.getWriteDefChainTransition();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.EarlyReadTransitionImpl <em>Early Read Transition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.lina.cfg.controlflow.impl.EarlyReadTransitionImpl
+		 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getEarlyReadTransition()
+		 * @generated
+		 */
+		EClass EARLY_READ_TRANSITION = eINSTANCE.getEarlyReadTransition();
+
+		/**
+		 * The meta object literal for the '<em><b>Assignment Expression</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EARLY_READ_TRANSITION__ASSIGNMENT_EXPRESSION = eINSTANCE.getEarlyReadTransition_AssignmentExpression();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.GuardedTransitionImpl <em>Guarded Transition</em>}' class.

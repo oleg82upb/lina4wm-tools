@@ -13,11 +13,13 @@ import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.ControlflowFactory;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
+import de.upb.lina.cfg.controlflow.EarlyReadTransition;
 import de.upb.lina.cfg.controlflow.FlushTransition;
 import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.MultiTransition;
 import de.upb.lina.cfg.controlflow.StoreBuffer;
 import de.upb.lina.cfg.controlflow.Transition;
+import de.upb.lina.cfg.controlflow.WriteDefChainTransition;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
 /**
@@ -47,6 +49,20 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * @generated
 	 */
 	private EClass transitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass writeDefChainTransitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass earlyReadTransitionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -197,6 +213,24 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getControlFlowDiagram_VariableCopies() {
+		return (EReference)controlFlowDiagramEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getControlFlowDiagram_VariableCopyParams() {
+		return (EReference)controlFlowDiagramEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getControlFlowLocation() {
 		return controlFlowLocationEClass;
 	}
@@ -298,6 +332,33 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 */
 	public EReference getTransition_Diagram() {
 		return (EReference)transitionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getWriteDefChainTransition() {
+		return writeDefChainTransitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEarlyReadTransition() {
+		return earlyReadTransitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEarlyReadTransition_AssignmentExpression() {
+		return (EAttribute)earlyReadTransitionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -446,6 +507,8 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		createEReference(controlFlowDiagramEClass, CONTROL_FLOW_DIAGRAM__TRANSITIONS);
 		createEReference(controlFlowDiagramEClass, CONTROL_FLOW_DIAGRAM__START);
 		createEAttribute(controlFlowDiagramEClass, CONTROL_FLOW_DIAGRAM__NAME);
+		createEReference(controlFlowDiagramEClass, CONTROL_FLOW_DIAGRAM__VARIABLE_COPIES);
+		createEReference(controlFlowDiagramEClass, CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS);
 
 		controlFlowLocationEClass = createEClass(CONTROL_FLOW_LOCATION);
 		createEAttribute(controlFlowLocationEClass, CONTROL_FLOW_LOCATION__PC);
@@ -460,6 +523,11 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		createEReference(transitionEClass, TRANSITION__SOURCE);
 		createEReference(transitionEClass, TRANSITION__TARGET);
 		createEReference(transitionEClass, TRANSITION__DIAGRAM);
+
+		writeDefChainTransitionEClass = createEClass(WRITE_DEF_CHAIN_TRANSITION);
+
+		earlyReadTransitionEClass = createEClass(EARLY_READ_TRANSITION);
+		createEAttribute(earlyReadTransitionEClass, EARLY_READ_TRANSITION__ASSIGNMENT_EXPRESSION);
 
 		guardedTransitionEClass = createEClass(GUARDED_TRANSITION);
 		createEAttribute(guardedTransitionEClass, GUARDED_TRANSITION__CONDITION);
@@ -510,6 +578,8 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		writeDefChainTransitionEClass.getESuperTypes().add(this.getTransition());
+		earlyReadTransitionEClass.getESuperTypes().add(this.getTransition());
 		guardedTransitionEClass.getESuperTypes().add(this.getTransition());
 		multiTransitionEClass.getESuperTypes().add(this.getTransition());
 		flushTransitionEClass.getESuperTypes().add(this.getTransition());
@@ -520,6 +590,8 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		initEReference(getControlFlowDiagram_Transitions(), this.getTransition(), this.getTransition_Diagram(), "transitions", null, 0, -1, ControlFlowDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getControlFlowDiagram_Start(), this.getControlFlowLocation(), null, "start", null, 0, 1, ControlFlowDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getControlFlowDiagram_Name(), ecorePackage.getEString(), "name", null, 0, 1, ControlFlowDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getControlFlowDiagram_VariableCopies(), theLlvmPackage.getAddress(), null, "variableCopies", null, 0, -1, ControlFlowDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getControlFlowDiagram_VariableCopyParams(), theLlvmPackage.getParameter(), null, "variableCopyParams", null, 0, -1, ControlFlowDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(controlFlowLocationEClass, ControlFlowLocation.class, "ControlFlowLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getControlFlowLocation_Pc(), ecorePackage.getEInt(), "pc", null, 0, 1, ControlFlowLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -534,6 +606,11 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		initEReference(getTransition_Source(), this.getControlFlowLocation(), this.getControlFlowLocation_Outgoing(), "source", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransition_Target(), this.getControlFlowLocation(), this.getControlFlowLocation_Incoming(), "target", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransition_Diagram(), this.getControlFlowDiagram(), this.getControlFlowDiagram_Transitions(), "diagram", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(writeDefChainTransitionEClass, WriteDefChainTransition.class, "WriteDefChainTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(earlyReadTransitionEClass, EarlyReadTransition.class, "EarlyReadTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEarlyReadTransition_AssignmentExpression(), ecorePackage.getEString(), "assignmentExpression", null, 0, 1, EarlyReadTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(guardedTransitionEClass, GuardedTransition.class, "GuardedTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGuardedTransition_Condition(), ecorePackage.getEString(), "condition", null, 0, 1, GuardedTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

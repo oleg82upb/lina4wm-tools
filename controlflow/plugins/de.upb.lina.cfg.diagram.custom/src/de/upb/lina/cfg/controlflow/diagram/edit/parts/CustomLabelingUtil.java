@@ -6,9 +6,11 @@ import java.util.Iterator;
 import org.eclipse.emf.ecore.EClass;
 
 import de.upb.lina.cfg.controlflow.AddressValuePair;
+import de.upb.lina.cfg.controlflow.EarlyReadTransition;
 import de.upb.lina.cfg.controlflow.FlushTransition;
 import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.Transition;
+import de.upb.lina.cfg.controlflow.WriteDefChainTransition;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.ArithmeticOperation;
@@ -62,7 +64,7 @@ public class CustomLabelingUtil {
 	public String getNewTransitionLabel(Transition t) {
 		String result = "";
 
-		EClass transTyp = t.eClass();
+//		EClass transTyp = t.eClass();
 
 		if(t instanceof FlushTransition){
 
@@ -75,6 +77,23 @@ public class CustomLabelingUtil {
 			}
 
 			return FLUSH;
+		}
+		
+		if(t instanceof EarlyReadTransition){
+			String s = ((Load)t.getInstruction()).getResult().getName();
+			s += ASSIGN;
+			s += ((EarlyReadTransition) t).getAssignmentExpression();
+			return s;
+		}
+		
+		if(t instanceof WriteDefChainTransition){
+			Store store = (Store) t.getInstruction();
+			String s = toString(store.getValue())+"*" + ASSIGN;
+			s += toString(store.getValue());
+			result += STORE + WS;
+			result += toString(store.getTargetAddress());
+			result += toString(store.getValue())+"*";
+			return s + " , " + result;
 		}
 
 		if(t.getInstruction() == null){

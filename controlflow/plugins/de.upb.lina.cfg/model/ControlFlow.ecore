@@ -9,6 +9,12 @@
         eType="#//Transition" containment="true" eOpposite="#//Transition/diagram"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="start" eType="#//ControlFlowLocation"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableCopies" upperBound="-1"
+        eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Address"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableCopyParams" upperBound="-1"
+        eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Parameter"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ControlFlowLocation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="pc" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
@@ -31,6 +37,10 @@
         eOpposite="#//ControlFlowLocation/incoming"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="diagram" eType="#//ControlFlowDiagram"
         eOpposite="#//ControlFlowDiagram/transitions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WriteDefChainTransition" eSuperTypes="#//Transition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EarlyReadTransition" eSuperTypes="#//Transition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="assignmentExpression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GuardedTransition" eSuperTypes="#//Transition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

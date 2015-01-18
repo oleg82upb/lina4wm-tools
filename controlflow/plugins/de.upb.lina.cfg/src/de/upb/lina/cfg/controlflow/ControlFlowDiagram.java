@@ -2,6 +2,8 @@
  */
 package de.upb.lina.cfg.controlflow;
 
+import de.upb.llvm_parser.llvm.Address;
+import de.upb.llvm_parser.llvm.Parameter;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -18,6 +20,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getTransitions <em>Transitions</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getStart <em>Start</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getName <em>Name</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getVariableCopies <em>Variable Copies</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getVariableCopyParams <em>Variable Copy Params</em>}</li>
  * </ul>
  * </p>
  *
@@ -113,5 +117,37 @@ public interface ControlFlowDiagram extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Variable Copies</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.Address}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Variable Copies</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Variable Copies</em>' containment reference list.
+	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getControlFlowDiagram_VariableCopies()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Address> getVariableCopies();
+
+	/**
+	 * Returns the value of the '<em><b>Variable Copy Params</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.Parameter}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Variable Copy Params</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Variable Copy Params</em>' containment reference list.
+	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getControlFlowDiagram_VariableCopyParams()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Parameter> getVariableCopyParams();
 
 } // ControlFlowDiagram

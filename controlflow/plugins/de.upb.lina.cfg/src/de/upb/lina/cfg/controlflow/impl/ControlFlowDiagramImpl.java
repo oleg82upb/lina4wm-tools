@@ -19,6 +19,8 @@ import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.controlflow.Transition;
+import de.upb.llvm_parser.llvm.Address;
+import de.upb.llvm_parser.llvm.Parameter;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,6 +33,8 @@ import de.upb.lina.cfg.controlflow.Transition;
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getTransitions <em>Transitions</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getStart <em>Start</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getVariableCopies <em>Variable Copies</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getVariableCopyParams <em>Variable Copy Params</em>}</li>
  * </ul>
  * </p>
  *
@@ -86,6 +90,26 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getVariableCopies() <em>Variable Copies</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVariableCopies()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Address> variableCopies;
+
+	/**
+	 * The cached value of the '{@link #getVariableCopyParams() <em>Variable Copy Params</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVariableCopyParams()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Parameter> variableCopyParams;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -194,6 +218,30 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Address> getVariableCopies() {
+		if (variableCopies == null) {
+			variableCopies = new EObjectContainmentEList<Address>(Address.class, this, ControlflowPackage.CONTROL_FLOW_DIAGRAM__VARIABLE_COPIES);
+		}
+		return variableCopies;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Parameter> getVariableCopyParams() {
+		if (variableCopyParams == null) {
+			variableCopyParams = new EObjectContainmentEList<Parameter>(Parameter.class, this, ControlflowPackage.CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS);
+		}
+		return variableCopyParams;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -218,6 +266,10 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 				return ((InternalEList<?>)getLocations()).basicRemove(otherEnd, msgs);
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__TRANSITIONS:
 				return ((InternalEList<?>)getTransitions()).basicRemove(otherEnd, msgs);
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__VARIABLE_COPIES:
+				return ((InternalEList<?>)getVariableCopies()).basicRemove(otherEnd, msgs);
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS:
+				return ((InternalEList<?>)getVariableCopyParams()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -239,6 +291,10 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 				return basicGetStart();
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__NAME:
 				return getName();
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__VARIABLE_COPIES:
+				return getVariableCopies();
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS:
+				return getVariableCopyParams();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -266,6 +322,14 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__NAME:
 				setName((String)newValue);
 				return;
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__VARIABLE_COPIES:
+				getVariableCopies().clear();
+				getVariableCopies().addAll((Collection<? extends Address>)newValue);
+				return;
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS:
+				getVariableCopyParams().clear();
+				getVariableCopyParams().addAll((Collection<? extends Parameter>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -290,6 +354,12 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__VARIABLE_COPIES:
+				getVariableCopies().clear();
+				return;
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS:
+				getVariableCopyParams().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -310,6 +380,10 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 				return start != null;
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__VARIABLE_COPIES:
+				return variableCopies != null && !variableCopies.isEmpty();
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS:
+				return variableCopyParams != null && !variableCopyParams.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
