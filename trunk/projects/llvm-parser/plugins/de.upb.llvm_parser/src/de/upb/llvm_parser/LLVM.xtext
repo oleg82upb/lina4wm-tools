@@ -297,9 +297,9 @@ Load:
 	result=Address '=' 'load' atomic?='atomic' (volatile?='volatile'?)? address=Parameter 'singlethread'? ordering=ATOMIC_ORDERING (',' 'align' align = NUMBER)?;
 
 Store:
-	(volatile?='volatile' 'store' | 'store' (volatile?='volatile')?) targetAddress=Parameter ',' value=Parameter  (',' 'align' align = NUMBER)? (',' meta+=MetaArgValue)*     
+	(volatile?='volatile' 'store' | 'store' (volatile?='volatile')?) value=Parameter ',' targetAddress=Parameter  (',' 'align' align = NUMBER)? (',' meta+=MetaArgValue)*     
 	|
-	'store' atomic?='atomic' (volatile?='volatile')? targetAddress=Parameter ',' value=Parameter 'singlethread'? ordering=ATOMIC_ORDERING (',' 'align' align = NUMBER)?;
+	'store' atomic?='atomic' (volatile?='volatile')? value=Parameter ',' targetAddress=Parameter 'singlethread'? ordering=ATOMIC_ORDERING (',' 'align' align = NUMBER)?;
 
 //FIXME: no support for call of functions with a function as a result type
 Call:
