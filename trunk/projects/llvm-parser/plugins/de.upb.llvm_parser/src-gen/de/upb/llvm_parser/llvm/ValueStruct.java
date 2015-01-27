@@ -23,19 +23,19 @@ import org.eclipse.emf.common.util.EList;
 public interface ValueStruct extends Value
 {
   /**
-	 * Returns the value of the '<em><b>Values</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.Parameter}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Values</b></em>' containment reference list.
+   * The list contents are of type {@link de.upb.llvm_parser.llvm.Parameter}.
+   * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Values</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Values</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getValueStruct_Values()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Values</em>' containment reference list.
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getValueStruct_Values()
+   * @model containment="true"
+   * @generated
+   */
   EList<Parameter> getValues();
 
 } // ValueStruct

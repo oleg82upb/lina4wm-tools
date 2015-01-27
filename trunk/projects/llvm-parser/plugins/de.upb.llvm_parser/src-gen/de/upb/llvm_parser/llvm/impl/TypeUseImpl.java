@@ -29,205 +29,205 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 public class TypeUseImpl extends MinimalEObjectImpl.Container implements TypeUse
 {
   /**
-	 * The default value of the '{@link #getFunctionInput() <em>Function Input</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getFunctionInput() <em>Function Input</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getFunctionInput()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getFunctionInput()
+   * @generated
+   * @ordered
+   */
   protected static final String FUNCTION_INPUT_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getFunctionInput() <em>Function Input</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getFunctionInput() <em>Function Input</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getFunctionInput()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getFunctionInput()
+   * @generated
+   * @ordered
+   */
   protected String functionInput = FUNCTION_INPUT_EDEFAULT;
 
   /**
-	 * The default value of the '{@link #getPointer() <em>Pointer</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getPointer() <em>Pointer</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getPointer()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getPointer()
+   * @generated
+   * @ordered
+   */
   protected static final String POINTER_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getPointer() <em>Pointer</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getPointer() <em>Pointer</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getPointer()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getPointer()
+   * @generated
+   * @ordered
+   */
   protected String pointer = POINTER_EDEFAULT;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected TypeUseImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return LlvmPackage.Literals.TYPE_USE;
-	}
+    return LlvmPackage.Literals.TYPE_USE;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public String getFunctionInput()
   {
-		return functionInput;
-	}
+    return functionInput;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public void setFunctionInput(String newFunctionInput)
   {
-		String oldFunctionInput = functionInput;
-		functionInput = newFunctionInput;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.TYPE_USE__FUNCTION_INPUT, oldFunctionInput, functionInput));
-	}
+    String oldFunctionInput = functionInput;
+    functionInput = newFunctionInput;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.TYPE_USE__FUNCTION_INPUT, oldFunctionInput, functionInput));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public String getPointer()
   {
-		return pointer;
-	}
+    return pointer;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public void setPointer(String newPointer)
   {
-		String oldPointer = pointer;
-		pointer = newPointer;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.TYPE_USE__POINTER, oldPointer, pointer));
-	}
+    String oldPointer = pointer;
+    pointer = newPointer;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.TYPE_USE__POINTER, oldPointer, pointer));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID)
-		{
-			case LlvmPackage.TYPE_USE__FUNCTION_INPUT:
-				return getFunctionInput();
-			case LlvmPackage.TYPE_USE__POINTER:
-				return getPointer();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case LlvmPackage.TYPE_USE__FUNCTION_INPUT:
+        return getFunctionInput();
+      case LlvmPackage.TYPE_USE__POINTER:
+        return getPointer();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID)
-		{
-			case LlvmPackage.TYPE_USE__FUNCTION_INPUT:
-				setFunctionInput((String)newValue);
-				return;
-			case LlvmPackage.TYPE_USE__POINTER:
-				setPointer((String)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case LlvmPackage.TYPE_USE__FUNCTION_INPUT:
+        setFunctionInput((String)newValue);
+        return;
+      case LlvmPackage.TYPE_USE__POINTER:
+        setPointer((String)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID)
-		{
-			case LlvmPackage.TYPE_USE__FUNCTION_INPUT:
-				setFunctionInput(FUNCTION_INPUT_EDEFAULT);
-				return;
-			case LlvmPackage.TYPE_USE__POINTER:
-				setPointer(POINTER_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case LlvmPackage.TYPE_USE__FUNCTION_INPUT:
+        setFunctionInput(FUNCTION_INPUT_EDEFAULT);
+        return;
+      case LlvmPackage.TYPE_USE__POINTER:
+        setPointer(POINTER_EDEFAULT);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID)
-		{
-			case LlvmPackage.TYPE_USE__FUNCTION_INPUT:
-				return FUNCTION_INPUT_EDEFAULT == null ? functionInput != null : !FUNCTION_INPUT_EDEFAULT.equals(functionInput);
-			case LlvmPackage.TYPE_USE__POINTER:
-				return POINTER_EDEFAULT == null ? pointer != null : !POINTER_EDEFAULT.equals(pointer);
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case LlvmPackage.TYPE_USE__FUNCTION_INPUT:
+        return FUNCTION_INPUT_EDEFAULT == null ? functionInput != null : !FUNCTION_INPUT_EDEFAULT.equals(functionInput);
+      case LlvmPackage.TYPE_USE__POINTER:
+        return POINTER_EDEFAULT == null ? pointer != null : !POINTER_EDEFAULT.equals(pointer);
+    }
+    return super.eIsSet(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public String toString()
   {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (functionInput: ");
-		result.append(functionInput);
-		result.append(", pointer: ");
-		result.append(pointer);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (functionInput: ");
+    result.append(functionInput);
+    result.append(", pointer: ");
+    result.append(pointer);
+    result.append(')');
+    return result.toString();
+  }
 
 } //TypeUseImpl

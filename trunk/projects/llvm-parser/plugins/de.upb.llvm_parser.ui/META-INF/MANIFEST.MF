@@ -21,5 +21,6 @@ Import-Package: org.apache.log4j,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: de.upb.llvm_parser.ui.contentassist,
  de.upb.llvm_parser.ui.contentassist.antlr,
- de.upb.llvm_parser.ui.internal
+ de.upb.llvm_parser.ui.internal,
+ de.upb.llvm_parser.ui.quickfix
 Bundle-Activator: de.upb.llvm_parser.ui.internal.LLVMActivator

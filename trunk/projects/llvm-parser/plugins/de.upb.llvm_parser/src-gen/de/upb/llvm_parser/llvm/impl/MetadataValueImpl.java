@@ -38,202 +38,202 @@ import org.eclipse.emf.ecore.util.InternalEList;
 public class MetadataValueImpl extends MainLevelEntityImpl implements MetadataValue
 {
   /**
-	 * The default value of the '{@link #getNodeId() <em>Node Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getNodeId() <em>Node Id</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getNodeId()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getNodeId()
+   * @generated
+   * @ordered
+   */
   protected static final String NODE_ID_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getNodeId() <em>Node Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getNodeId() <em>Node Id</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getNodeId()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getNodeId()
+   * @generated
+   * @ordered
+   */
   protected String nodeId = NODE_ID_EDEFAULT;
 
   /**
-	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getValues()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getValues()
+   * @generated
+   * @ordered
+   */
   protected EList<Meta> values;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected MetadataValueImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return LlvmPackage.Literals.METADATA_VALUE;
-	}
+    return LlvmPackage.Literals.METADATA_VALUE;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public String getNodeId()
   {
-		return nodeId;
-	}
+    return nodeId;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public void setNodeId(String newNodeId)
   {
-		String oldNodeId = nodeId;
-		nodeId = newNodeId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.METADATA_VALUE__NODE_ID, oldNodeId, nodeId));
-	}
+    String oldNodeId = nodeId;
+    nodeId = newNodeId;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.METADATA_VALUE__NODE_ID, oldNodeId, nodeId));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EList<Meta> getValues()
   {
-		if (values == null)
-		{
-			values = new EObjectContainmentEList<Meta>(Meta.class, this, LlvmPackage.METADATA_VALUE__VALUES);
-		}
-		return values;
-	}
+    if (values == null)
+    {
+      values = new EObjectContainmentEList<Meta>(Meta.class, this, LlvmPackage.METADATA_VALUE__VALUES);
+    }
+    return values;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-		switch (featureID)
-		{
-			case LlvmPackage.METADATA_VALUE__VALUES:
-				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case LlvmPackage.METADATA_VALUE__VALUES:
+        return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID)
-		{
-			case LlvmPackage.METADATA_VALUE__NODE_ID:
-				return getNodeId();
-			case LlvmPackage.METADATA_VALUE__VALUES:
-				return getValues();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case LlvmPackage.METADATA_VALUE__NODE_ID:
+        return getNodeId();
+      case LlvmPackage.METADATA_VALUE__VALUES:
+        return getValues();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID)
-		{
-			case LlvmPackage.METADATA_VALUE__NODE_ID:
-				setNodeId((String)newValue);
-				return;
-			case LlvmPackage.METADATA_VALUE__VALUES:
-				getValues().clear();
-				getValues().addAll((Collection<? extends Meta>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case LlvmPackage.METADATA_VALUE__NODE_ID:
+        setNodeId((String)newValue);
+        return;
+      case LlvmPackage.METADATA_VALUE__VALUES:
+        getValues().clear();
+        getValues().addAll((Collection<? extends Meta>)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID)
-		{
-			case LlvmPackage.METADATA_VALUE__NODE_ID:
-				setNodeId(NODE_ID_EDEFAULT);
-				return;
-			case LlvmPackage.METADATA_VALUE__VALUES:
-				getValues().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case LlvmPackage.METADATA_VALUE__NODE_ID:
+        setNodeId(NODE_ID_EDEFAULT);
+        return;
+      case LlvmPackage.METADATA_VALUE__VALUES:
+        getValues().clear();
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID)
-		{
-			case LlvmPackage.METADATA_VALUE__NODE_ID:
-				return NODE_ID_EDEFAULT == null ? nodeId != null : !NODE_ID_EDEFAULT.equals(nodeId);
-			case LlvmPackage.METADATA_VALUE__VALUES:
-				return values != null && !values.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case LlvmPackage.METADATA_VALUE__NODE_ID:
+        return NODE_ID_EDEFAULT == null ? nodeId != null : !NODE_ID_EDEFAULT.equals(nodeId);
+      case LlvmPackage.METADATA_VALUE__VALUES:
+        return values != null && !values.isEmpty();
+    }
+    return super.eIsSet(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public String toString()
   {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (nodeId: ");
-		result.append(nodeId);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (nodeId: ");
+    result.append(nodeId);
+    result.append(')');
+    return result.toString();
+  }
 
 } //MetadataValueImpl

@@ -19,24 +19,24 @@ import org.eclipse.emf.ecore.EClass;
 public class UnreachableImpl extends InstructionImpl implements Unreachable
 {
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected UnreachableImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return LlvmPackage.Literals.UNREACHABLE;
-	}
+    return LlvmPackage.Literals.UNREACHABLE;
+  }
 
 } //UnreachableImpl

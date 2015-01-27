@@ -317,14 +317,14 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getLoadAccess().getAlignAssignment_1_8_2(), "rule__Load__AlignAssignment_1_8_2");
 					put(grammarAccess.getStoreAccess().getVolatileAssignment_0_0_0_0(), "rule__Store__VolatileAssignment_0_0_0_0");
 					put(grammarAccess.getStoreAccess().getVolatileAssignment_0_0_1_1(), "rule__Store__VolatileAssignment_0_0_1_1");
-					put(grammarAccess.getStoreAccess().getTargetAddressAssignment_0_1(), "rule__Store__TargetAddressAssignment_0_1");
-					put(grammarAccess.getStoreAccess().getValueAssignment_0_3(), "rule__Store__ValueAssignment_0_3");
+					put(grammarAccess.getStoreAccess().getValueAssignment_0_1(), "rule__Store__ValueAssignment_0_1");
+					put(grammarAccess.getStoreAccess().getTargetAddressAssignment_0_3(), "rule__Store__TargetAddressAssignment_0_3");
 					put(grammarAccess.getStoreAccess().getAlignAssignment_0_4_2(), "rule__Store__AlignAssignment_0_4_2");
 					put(grammarAccess.getStoreAccess().getMetaAssignment_0_5_1(), "rule__Store__MetaAssignment_0_5_1");
 					put(grammarAccess.getStoreAccess().getAtomicAssignment_1_1(), "rule__Store__AtomicAssignment_1_1");
 					put(grammarAccess.getStoreAccess().getVolatileAssignment_1_2(), "rule__Store__VolatileAssignment_1_2");
-					put(grammarAccess.getStoreAccess().getTargetAddressAssignment_1_3(), "rule__Store__TargetAddressAssignment_1_3");
-					put(grammarAccess.getStoreAccess().getValueAssignment_1_5(), "rule__Store__ValueAssignment_1_5");
+					put(grammarAccess.getStoreAccess().getValueAssignment_1_3(), "rule__Store__ValueAssignment_1_3");
+					put(grammarAccess.getStoreAccess().getTargetAddressAssignment_1_5(), "rule__Store__TargetAddressAssignment_1_5");
 					put(grammarAccess.getStoreAccess().getOrderingAssignment_1_7(), "rule__Store__OrderingAssignment_1_7");
 					put(grammarAccess.getStoreAccess().getAlignAssignment_1_8_2(), "rule__Store__AlignAssignment_1_8_2");
 					put(grammarAccess.getCallAccess().getResultAssignment_0_0(), "rule__Call__ResultAssignment_0_0");

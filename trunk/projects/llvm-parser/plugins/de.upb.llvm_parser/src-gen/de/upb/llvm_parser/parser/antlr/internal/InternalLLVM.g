@@ -5018,16 +5018,16 @@ ruleStore returns [EObject current=null]
 )?))(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_0_1_0()); 
+	        newCompositeNode(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_0_1_0()); 
 	    }
-		lv_targetAddress_4_0=ruleParameter		{
+		lv_value_4_0=ruleParameter		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStoreRule());
 	        }
        		set(
        			$current, 
-       			"targetAddress",
-        		lv_targetAddress_4_0, 
+       			"value",
+        		lv_value_4_0, 
         		"Parameter");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -5040,16 +5040,16 @@ ruleStore returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_0_3_0()); 
+	        newCompositeNode(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_0_3_0()); 
 	    }
-		lv_value_6_0=ruleParameter		{
+		lv_targetAddress_6_0=ruleParameter		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStoreRule());
 	        }
        		set(
        			$current, 
-       			"value",
-        		lv_value_6_0, 
+       			"targetAddress",
+        		lv_targetAddress_6_0, 
         		"Parameter");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -5141,16 +5141,16 @@ ruleStore returns [EObject current=null]
 )?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_1_3_0()); 
+	        newCompositeNode(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_1_3_0()); 
 	    }
-		lv_targetAddress_15_0=ruleParameter		{
+		lv_value_15_0=ruleParameter		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStoreRule());
 	        }
        		set(
        			$current, 
-       			"targetAddress",
-        		lv_targetAddress_15_0, 
+       			"value",
+        		lv_value_15_0, 
         		"Parameter");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -5163,16 +5163,16 @@ ruleStore returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_1_5_0()); 
+	        newCompositeNode(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_1_5_0()); 
 	    }
-		lv_value_17_0=ruleParameter		{
+		lv_targetAddress_17_0=ruleParameter		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStoreRule());
 	        }
        		set(
        			$current, 
-       			"value",
-        		lv_value_17_0, 
+       			"targetAddress",
+        		lv_targetAddress_17_0, 
         		"Parameter");
 	        afterParserOrEnumRuleCall();
 	    }

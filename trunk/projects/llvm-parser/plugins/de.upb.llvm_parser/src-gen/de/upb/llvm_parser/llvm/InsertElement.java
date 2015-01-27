@@ -25,107 +25,107 @@ package de.upb.llvm_parser.llvm;
 public interface InsertElement extends Instruction
 {
   /**
-	 * Returns the value of the '<em><b>Result</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Result</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Result</em>' containment reference.
-	 * @see #setResult(Address)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInsertElement_Result()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Result</em>' containment reference.
+   * @see #setResult(Address)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getInsertElement_Result()
+   * @model containment="true"
+   * @generated
+   */
   Address getResult();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.InsertElement#getResult <em>Result</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.InsertElement#getResult <em>Result</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Result</em>' containment reference.
-	 * @see #getResult()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Result</em>' containment reference.
+   * @see #getResult()
+   * @generated
+   */
   void setResult(Address value);
 
   /**
-	 * Returns the value of the '<em><b>Vector</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Vector</b></em>' containment reference.
+   * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Vector</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Vector</em>' containment reference.
-	 * @see #setVector(Parameter)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInsertElement_Vector()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Vector</em>' containment reference.
+   * @see #setVector(Parameter)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getInsertElement_Vector()
+   * @model containment="true"
+   * @generated
+   */
   Parameter getVector();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.InsertElement#getVector <em>Vector</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.InsertElement#getVector <em>Vector</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Vector</em>' containment reference.
-	 * @see #getVector()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Vector</em>' containment reference.
+   * @see #getVector()
+   * @generated
+   */
   void setVector(Parameter value);
 
   /**
-	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Value</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(Parameter)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInsertElement_Value()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Value</em>' containment reference.
+   * @see #setValue(Parameter)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getInsertElement_Value()
+   * @model containment="true"
+   * @generated
+   */
   Parameter getValue();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.InsertElement#getValue <em>Value</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.InsertElement#getValue <em>Value</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' containment reference.
-	 * @see #getValue()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Value</em>' containment reference.
+   * @see #getValue()
+   * @generated
+   */
   void setValue(Parameter value);
 
   /**
-	 * Returns the value of the '<em><b>Index</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Index</b></em>' containment reference.
+   * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Index</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Index</em>' containment reference.
-	 * @see #setIndex(Parameter)
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getInsertElement_Index()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Index</em>' containment reference.
+   * @see #setIndex(Parameter)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getInsertElement_Index()
+   * @model containment="true"
+   * @generated
+   */
   Parameter getIndex();
 
   /**
-	 * Sets the value of the '{@link de.upb.llvm_parser.llvm.InsertElement#getIndex <em>Index</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.InsertElement#getIndex <em>Index</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Index</em>' containment reference.
-	 * @see #getIndex()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Index</em>' containment reference.
+   * @see #getIndex()
+   * @generated
+   */
   void setIndex(Parameter value);
 
 } // InsertElement
