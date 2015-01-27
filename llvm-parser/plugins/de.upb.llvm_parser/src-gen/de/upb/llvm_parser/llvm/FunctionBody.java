@@ -26,35 +26,35 @@ import org.eclipse.emf.ecore.EObject;
 public interface FunctionBody extends EObject
 {
   /**
-	 * Returns the value of the '<em><b>Meta</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.MetadataValue}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Meta</b></em>' containment reference list.
+   * The list contents are of type {@link de.upb.llvm_parser.llvm.MetadataValue}.
+   * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Meta</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Meta</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getFunctionBody_Meta()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Meta</em>' containment reference list.
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getFunctionBody_Meta()
+   * @model containment="true"
+   * @generated
+   */
   EList<MetadataValue> getMeta();
 
   /**
-	 * Returns the value of the '<em><b>Blocks</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.llvm_parser.llvm.BasicBlock}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Blocks</b></em>' containment reference list.
+   * The list contents are of type {@link de.upb.llvm_parser.llvm.BasicBlock}.
+   * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Blocks</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Blocks</em>' containment reference list.
-	 * @see de.upb.llvm_parser.llvm.LlvmPackage#getFunctionBody_Blocks()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Blocks</em>' containment reference list.
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getFunctionBody_Blocks()
+   * @model containment="true"
+   * @generated
+   */
   EList<BasicBlock> getBlocks();
 
 } // FunctionBody

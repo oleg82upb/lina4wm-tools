@@ -36,132 +36,132 @@ import org.eclipse.emf.ecore.util.InternalEList;
 public class FunctionParameterListImpl extends MinimalEObjectImpl.Container implements FunctionParameterList
 {
   /**
-	 * The cached value of the '{@link #getParams() <em>Params</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getParams() <em>Params</em>}' containment reference list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getParams()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getParams()
+   * @generated
+   * @ordered
+   */
   protected EList<FunctionParameter> params;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected FunctionParameterListImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return LlvmPackage.Literals.FUNCTION_PARAMETER_LIST;
-	}
+    return LlvmPackage.Literals.FUNCTION_PARAMETER_LIST;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EList<FunctionParameter> getParams()
   {
-		if (params == null)
-		{
-			params = new EObjectContainmentEList<FunctionParameter>(FunctionParameter.class, this, LlvmPackage.FUNCTION_PARAMETER_LIST__PARAMS);
-		}
-		return params;
-	}
+    if (params == null)
+    {
+      params = new EObjectContainmentEList<FunctionParameter>(FunctionParameter.class, this, LlvmPackage.FUNCTION_PARAMETER_LIST__PARAMS);
+    }
+    return params;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-		switch (featureID)
-		{
-			case LlvmPackage.FUNCTION_PARAMETER_LIST__PARAMS:
-				return ((InternalEList<?>)getParams()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case LlvmPackage.FUNCTION_PARAMETER_LIST__PARAMS:
+        return ((InternalEList<?>)getParams()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID)
-		{
-			case LlvmPackage.FUNCTION_PARAMETER_LIST__PARAMS:
-				return getParams();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case LlvmPackage.FUNCTION_PARAMETER_LIST__PARAMS:
+        return getParams();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID)
-		{
-			case LlvmPackage.FUNCTION_PARAMETER_LIST__PARAMS:
-				getParams().clear();
-				getParams().addAll((Collection<? extends FunctionParameter>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case LlvmPackage.FUNCTION_PARAMETER_LIST__PARAMS:
+        getParams().clear();
+        getParams().addAll((Collection<? extends FunctionParameter>)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID)
-		{
-			case LlvmPackage.FUNCTION_PARAMETER_LIST__PARAMS:
-				getParams().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case LlvmPackage.FUNCTION_PARAMETER_LIST__PARAMS:
+        getParams().clear();
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID)
-		{
-			case LlvmPackage.FUNCTION_PARAMETER_LIST__PARAMS:
-				return params != null && !params.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case LlvmPackage.FUNCTION_PARAMETER_LIST__PARAMS:
+        return params != null && !params.isEmpty();
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //FunctionParameterListImpl

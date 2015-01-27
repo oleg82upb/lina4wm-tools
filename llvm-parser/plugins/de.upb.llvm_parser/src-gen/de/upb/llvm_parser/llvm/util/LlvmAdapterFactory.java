@@ -22,1351 +22,1351 @@ import org.eclipse.emf.ecore.EObject;
 public class LlvmAdapterFactory extends AdapterFactoryImpl
 {
   /**
-	 * The cached model package.
-	 * <!-- begin-user-doc -->
+   * The cached model package.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected static LlvmPackage modelPackage;
 
   /**
-	 * Creates an instance of the adapter factory.
-	 * <!-- begin-user-doc -->
+   * Creates an instance of the adapter factory.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public LlvmAdapterFactory()
   {
-		if (modelPackage == null)
-		{
-			modelPackage = LlvmPackage.eINSTANCE;
-		}
-	}
+    if (modelPackage == null)
+    {
+      modelPackage = LlvmPackage.eINSTANCE;
+    }
+  }
 
   /**
-	 * Returns whether this factory is applicable for the type of the object.
-	 * <!-- begin-user-doc -->
+   * Returns whether this factory is applicable for the type of the object.
+   * <!-- begin-user-doc -->
    * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
    * <!-- end-user-doc -->
-	 * @return whether this factory is applicable for the type of the object.
-	 * @generated
-	 */
+   * @return whether this factory is applicable for the type of the object.
+   * @generated
+   */
   @Override
   public boolean isFactoryForType(Object object)
   {
-		if (object == modelPackage)
-		{
-			return true;
-		}
-		if (object instanceof EObject)
-		{
-			return ((EObject)object).eClass().getEPackage() == modelPackage;
-		}
-		return false;
-	}
+    if (object == modelPackage)
+    {
+      return true;
+    }
+    if (object instanceof EObject)
+    {
+      return ((EObject)object).eClass().getEPackage() == modelPackage;
+    }
+    return false;
+  }
 
   /**
-	 * The switch that delegates to the <code>createXXX</code> methods.
-	 * <!-- begin-user-doc -->
+   * The switch that delegates to the <code>createXXX</code> methods.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected LlvmSwitch<Adapter> modelSwitch =
     new LlvmSwitch<Adapter>()
-		{
-			@Override
-			public Adapter caseLLVM(LLVM object)
-			{
-				return createLLVMAdapter();
-			}
-			@Override
-			public Adapter caseAbstractElement(AbstractElement object)
-			{
-				return createAbstractElementAdapter();
-			}
-			@Override
-			public Adapter caseTopLevelEntity(TopLevelEntity object)
-			{
-				return createTopLevelEntityAdapter();
-			}
-			@Override
-			public Adapter caseMainLevelEntity(MainLevelEntity object)
-			{
-				return createMainLevelEntityAdapter();
-			}
-			@Override
-			public Adapter caseTypeDefinition(TypeDefinition object)
-			{
-				return createTypeDefinitionAdapter();
-			}
-			@Override
-			public Adapter caseGlobalDefinition(GlobalDefinition object)
-			{
-				return createGlobalDefinitionAdapter();
-			}
-			@Override
-			public Adapter caseFunctionDefinition(FunctionDefinition object)
-			{
-				return createFunctionDefinitionAdapter();
-			}
-			@Override
-			public Adapter caseAliasDefinition(AliasDefinition object)
-			{
-				return createAliasDefinitionAdapter();
-			}
-			@Override
-			public Adapter caseTypeUse(TypeUse object)
-			{
-				return createTypeUseAdapter();
-			}
-			@Override
-			public Adapter caseAddressUse(AddressUse object)
-			{
-				return createAddressUseAdapter();
-			}
-			@Override
-			public Adapter caseAddress(Address object)
-			{
-				return createAddressAdapter();
-			}
-			@Override
-			public Adapter casePredefined(Predefined object)
-			{
-				return createPredefinedAdapter();
-			}
-			@Override
-			public Adapter caseVector(Vector object)
-			{
-				return createVectorAdapter();
-			}
-			@Override
-			public Adapter caseArray(Array object)
-			{
-				return createArrayAdapter();
-			}
-			@Override
-			public Adapter caseAggregate_Type(Aggregate_Type object)
-			{
-				return createAggregate_TypeAdapter();
-			}
-			@Override
-			public Adapter caseConstant(Constant object)
-			{
-				return createConstantAdapter();
-			}
-			@Override
-			public Adapter casePrimitiveValue(PrimitiveValue object)
-			{
-				return createPrimitiveValueAdapter();
-			}
-			@Override
-			public Adapter caseValue(Value object)
-			{
-				return createValueAdapter();
-			}
-			@Override
-			public Adapter caseValueStruct(ValueStruct object)
-			{
-				return createValueStructAdapter();
-			}
-			@Override
-			public Adapter caseStructure(Structure object)
-			{
-				return createStructureAdapter();
-			}
-			@Override
-			public Adapter caseParameter(Parameter object)
-			{
-				return createParameterAdapter();
-			}
-			@Override
-			public Adapter caseParameterList(ParameterList object)
-			{
-				return createParameterListAdapter();
-			}
-			@Override
-			public Adapter caseFunctionParameter(FunctionParameter object)
-			{
-				return createFunctionParameterAdapter();
-			}
-			@Override
-			public Adapter caseFunctionParameterList(FunctionParameterList object)
-			{
-				return createFunctionParameterListAdapter();
-			}
-			@Override
-			public Adapter caseFunctionBody(FunctionBody object)
-			{
-				return createFunctionBodyAdapter();
-			}
-			@Override
-			public Adapter caseInstruction(Instruction object)
-			{
-				return createInstructionAdapter();
-			}
-			@Override
-			public Adapter caseBasicBlock(BasicBlock object)
-			{
-				return createBasicBlockAdapter();
-			}
-			@Override
-			public Adapter caseArithmeticOperation(ArithmeticOperation object)
-			{
-				return createArithmeticOperationAdapter();
-			}
-			@Override
-			public Adapter caseLogicOperation(LogicOperation object)
-			{
-				return createLogicOperationAdapter();
-			}
-			@Override
-			public Adapter caseCast(Cast object)
-			{
-				return createCastAdapter();
-			}
-			@Override
-			public Adapter caseNestedCast(NestedCast object)
-			{
-				return createNestedCastAdapter();
-			}
-			@Override
-			public Adapter caseMetaArgValue(MetaArgValue object)
-			{
-				return createMetaArgValueAdapter();
-			}
-			@Override
-			public Adapter caseMeta(Meta object)
-			{
-				return createMetaAdapter();
-			}
-			@Override
-			public Adapter caseMetadataValue(MetadataValue object)
-			{
-				return createMetadataValueAdapter();
-			}
-			@Override
-			public Adapter caseGetElementPtr(GetElementPtr object)
-			{
-				return createGetElementPtrAdapter();
-			}
-			@Override
-			public Adapter caseNestedGetElementPtr(NestedGetElementPtr object)
-			{
-				return createNestedGetElementPtrAdapter();
-			}
-			@Override
-			public Adapter caseFence(Fence object)
-			{
-				return createFenceAdapter();
-			}
-			@Override
-			public Adapter caseCmpXchg(CmpXchg object)
-			{
-				return createCmpXchgAdapter();
-			}
-			@Override
-			public Adapter caseAtomicRMW(AtomicRMW object)
-			{
-				return createAtomicRMWAdapter();
-			}
-			@Override
-			public Adapter caseLoad(Load object)
-			{
-				return createLoadAdapter();
-			}
-			@Override
-			public Adapter caseStore(Store object)
-			{
-				return createStoreAdapter();
-			}
-			@Override
-			public Adapter caseCall(Call object)
-			{
-				return createCallAdapter();
-			}
-			@Override
-			public Adapter caseAlloc(Alloc object)
-			{
-				return createAllocAdapter();
-			}
-			@Override
-			public Adapter casePhiCase(PhiCase object)
-			{
-				return createPhiCaseAdapter();
-			}
-			@Override
-			public Adapter casePhi(Phi object)
-			{
-				return createPhiAdapter();
-			}
-			@Override
-			public Adapter caseLandingPad(LandingPad object)
-			{
-				return createLandingPadAdapter();
-			}
-			@Override
-			public Adapter caseClause(Clause object)
-			{
-				return createClauseAdapter();
-			}
-			@Override
-			public Adapter caseSelect(Select object)
-			{
-				return createSelectAdapter();
-			}
-			@Override
-			public Adapter caseVariableAttributeAccess(VariableAttributeAccess object)
-			{
-				return createVariableAttributeAccessAdapter();
-			}
-			@Override
-			public Adapter caseExtractValue(ExtractValue object)
-			{
-				return createExtractValueAdapter();
-			}
-			@Override
-			public Adapter caseInsertValue(InsertValue object)
-			{
-				return createInsertValueAdapter();
-			}
-			@Override
-			public Adapter caseExtractElement(ExtractElement object)
-			{
-				return createExtractElementAdapter();
-			}
-			@Override
-			public Adapter caseInsertElement(InsertElement object)
-			{
-				return createInsertElementAdapter();
-			}
-			@Override
-			public Adapter caseShuffleVector(ShuffleVector object)
-			{
-				return createShuffleVectorAdapter();
-			}
-			@Override
-			public Adapter caseCompare(Compare object)
-			{
-				return createCompareAdapter();
-			}
-			@Override
-			public Adapter caseIndirectBranch(IndirectBranch object)
-			{
-				return createIndirectBranchAdapter();
-			}
-			@Override
-			public Adapter caseSwitch(Switch object)
-			{
-				return createSwitchAdapter();
-			}
-			@Override
-			public Adapter caseSwitchCase(SwitchCase object)
-			{
-				return createSwitchCaseAdapter();
-			}
-			@Override
-			public Adapter caseInvoke(Invoke object)
-			{
-				return createInvokeAdapter();
-			}
-			@Override
-			public Adapter caseResume(Resume object)
-			{
-				return createResumeAdapter();
-			}
-			@Override
-			public Adapter caseUnreachable(Unreachable object)
-			{
-				return createUnreachableAdapter();
-			}
-			@Override
-			public Adapter caseReturn(Return object)
-			{
-				return createReturnAdapter();
-			}
-			@Override
-			public Adapter caseBranch(Branch object)
-			{
-				return createBranchAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object)
-			{
-				return createEObjectAdapter();
-			}
-		};
+    {
+      @Override
+      public Adapter caseLLVM(LLVM object)
+      {
+        return createLLVMAdapter();
+      }
+      @Override
+      public Adapter caseAbstractElement(AbstractElement object)
+      {
+        return createAbstractElementAdapter();
+      }
+      @Override
+      public Adapter caseTopLevelEntity(TopLevelEntity object)
+      {
+        return createTopLevelEntityAdapter();
+      }
+      @Override
+      public Adapter caseMainLevelEntity(MainLevelEntity object)
+      {
+        return createMainLevelEntityAdapter();
+      }
+      @Override
+      public Adapter caseTypeDefinition(TypeDefinition object)
+      {
+        return createTypeDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseGlobalDefinition(GlobalDefinition object)
+      {
+        return createGlobalDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseFunctionDefinition(FunctionDefinition object)
+      {
+        return createFunctionDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseAliasDefinition(AliasDefinition object)
+      {
+        return createAliasDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseTypeUse(TypeUse object)
+      {
+        return createTypeUseAdapter();
+      }
+      @Override
+      public Adapter caseAddressUse(AddressUse object)
+      {
+        return createAddressUseAdapter();
+      }
+      @Override
+      public Adapter caseAddress(Address object)
+      {
+        return createAddressAdapter();
+      }
+      @Override
+      public Adapter casePredefined(Predefined object)
+      {
+        return createPredefinedAdapter();
+      }
+      @Override
+      public Adapter caseVector(Vector object)
+      {
+        return createVectorAdapter();
+      }
+      @Override
+      public Adapter caseArray(Array object)
+      {
+        return createArrayAdapter();
+      }
+      @Override
+      public Adapter caseAggregate_Type(Aggregate_Type object)
+      {
+        return createAggregate_TypeAdapter();
+      }
+      @Override
+      public Adapter caseConstant(Constant object)
+      {
+        return createConstantAdapter();
+      }
+      @Override
+      public Adapter casePrimitiveValue(PrimitiveValue object)
+      {
+        return createPrimitiveValueAdapter();
+      }
+      @Override
+      public Adapter caseValue(Value object)
+      {
+        return createValueAdapter();
+      }
+      @Override
+      public Adapter caseValueStruct(ValueStruct object)
+      {
+        return createValueStructAdapter();
+      }
+      @Override
+      public Adapter caseStructure(Structure object)
+      {
+        return createStructureAdapter();
+      }
+      @Override
+      public Adapter caseParameter(Parameter object)
+      {
+        return createParameterAdapter();
+      }
+      @Override
+      public Adapter caseParameterList(ParameterList object)
+      {
+        return createParameterListAdapter();
+      }
+      @Override
+      public Adapter caseFunctionParameter(FunctionParameter object)
+      {
+        return createFunctionParameterAdapter();
+      }
+      @Override
+      public Adapter caseFunctionParameterList(FunctionParameterList object)
+      {
+        return createFunctionParameterListAdapter();
+      }
+      @Override
+      public Adapter caseFunctionBody(FunctionBody object)
+      {
+        return createFunctionBodyAdapter();
+      }
+      @Override
+      public Adapter caseInstruction(Instruction object)
+      {
+        return createInstructionAdapter();
+      }
+      @Override
+      public Adapter caseBasicBlock(BasicBlock object)
+      {
+        return createBasicBlockAdapter();
+      }
+      @Override
+      public Adapter caseArithmeticOperation(ArithmeticOperation object)
+      {
+        return createArithmeticOperationAdapter();
+      }
+      @Override
+      public Adapter caseLogicOperation(LogicOperation object)
+      {
+        return createLogicOperationAdapter();
+      }
+      @Override
+      public Adapter caseCast(Cast object)
+      {
+        return createCastAdapter();
+      }
+      @Override
+      public Adapter caseNestedCast(NestedCast object)
+      {
+        return createNestedCastAdapter();
+      }
+      @Override
+      public Adapter caseMetaArgValue(MetaArgValue object)
+      {
+        return createMetaArgValueAdapter();
+      }
+      @Override
+      public Adapter caseMeta(Meta object)
+      {
+        return createMetaAdapter();
+      }
+      @Override
+      public Adapter caseMetadataValue(MetadataValue object)
+      {
+        return createMetadataValueAdapter();
+      }
+      @Override
+      public Adapter caseGetElementPtr(GetElementPtr object)
+      {
+        return createGetElementPtrAdapter();
+      }
+      @Override
+      public Adapter caseNestedGetElementPtr(NestedGetElementPtr object)
+      {
+        return createNestedGetElementPtrAdapter();
+      }
+      @Override
+      public Adapter caseFence(Fence object)
+      {
+        return createFenceAdapter();
+      }
+      @Override
+      public Adapter caseCmpXchg(CmpXchg object)
+      {
+        return createCmpXchgAdapter();
+      }
+      @Override
+      public Adapter caseAtomicRMW(AtomicRMW object)
+      {
+        return createAtomicRMWAdapter();
+      }
+      @Override
+      public Adapter caseLoad(Load object)
+      {
+        return createLoadAdapter();
+      }
+      @Override
+      public Adapter caseStore(Store object)
+      {
+        return createStoreAdapter();
+      }
+      @Override
+      public Adapter caseCall(Call object)
+      {
+        return createCallAdapter();
+      }
+      @Override
+      public Adapter caseAlloc(Alloc object)
+      {
+        return createAllocAdapter();
+      }
+      @Override
+      public Adapter casePhiCase(PhiCase object)
+      {
+        return createPhiCaseAdapter();
+      }
+      @Override
+      public Adapter casePhi(Phi object)
+      {
+        return createPhiAdapter();
+      }
+      @Override
+      public Adapter caseLandingPad(LandingPad object)
+      {
+        return createLandingPadAdapter();
+      }
+      @Override
+      public Adapter caseClause(Clause object)
+      {
+        return createClauseAdapter();
+      }
+      @Override
+      public Adapter caseSelect(Select object)
+      {
+        return createSelectAdapter();
+      }
+      @Override
+      public Adapter caseVariableAttributeAccess(VariableAttributeAccess object)
+      {
+        return createVariableAttributeAccessAdapter();
+      }
+      @Override
+      public Adapter caseExtractValue(ExtractValue object)
+      {
+        return createExtractValueAdapter();
+      }
+      @Override
+      public Adapter caseInsertValue(InsertValue object)
+      {
+        return createInsertValueAdapter();
+      }
+      @Override
+      public Adapter caseExtractElement(ExtractElement object)
+      {
+        return createExtractElementAdapter();
+      }
+      @Override
+      public Adapter caseInsertElement(InsertElement object)
+      {
+        return createInsertElementAdapter();
+      }
+      @Override
+      public Adapter caseShuffleVector(ShuffleVector object)
+      {
+        return createShuffleVectorAdapter();
+      }
+      @Override
+      public Adapter caseCompare(Compare object)
+      {
+        return createCompareAdapter();
+      }
+      @Override
+      public Adapter caseIndirectBranch(IndirectBranch object)
+      {
+        return createIndirectBranchAdapter();
+      }
+      @Override
+      public Adapter caseSwitch(Switch object)
+      {
+        return createSwitchAdapter();
+      }
+      @Override
+      public Adapter caseSwitchCase(SwitchCase object)
+      {
+        return createSwitchCaseAdapter();
+      }
+      @Override
+      public Adapter caseInvoke(Invoke object)
+      {
+        return createInvokeAdapter();
+      }
+      @Override
+      public Adapter caseResume(Resume object)
+      {
+        return createResumeAdapter();
+      }
+      @Override
+      public Adapter caseUnreachable(Unreachable object)
+      {
+        return createUnreachableAdapter();
+      }
+      @Override
+      public Adapter caseReturn(Return object)
+      {
+        return createReturnAdapter();
+      }
+      @Override
+      public Adapter caseBranch(Branch object)
+      {
+        return createBranchAdapter();
+      }
+      @Override
+      public Adapter defaultCase(EObject object)
+      {
+        return createEObjectAdapter();
+      }
+    };
 
   /**
-	 * Creates an adapter for the <code>target</code>.
-	 * <!-- begin-user-doc -->
+   * Creates an adapter for the <code>target</code>.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param target the object to adapt.
-	 * @return the adapter for the <code>target</code>.
-	 * @generated
-	 */
+   * @param target the object to adapt.
+   * @return the adapter for the <code>target</code>.
+   * @generated
+   */
   @Override
   public Adapter createAdapter(Notifier target)
   {
-		return modelSwitch.doSwitch((EObject)target);
-	}
+    return modelSwitch.doSwitch((EObject)target);
+  }
 
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.LLVM <em>LLVM</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.LLVM <em>LLVM</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.LLVM
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.LLVM
+   * @generated
+   */
   public Adapter createLLVMAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.AbstractElement <em>Abstract Element</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.AbstractElement <em>Abstract Element</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.AbstractElement
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.AbstractElement
+   * @generated
+   */
   public Adapter createAbstractElementAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.TopLevelEntity <em>Top Level Entity</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.TopLevelEntity <em>Top Level Entity</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.TopLevelEntity
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.TopLevelEntity
+   * @generated
+   */
   public Adapter createTopLevelEntityAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.MainLevelEntity <em>Main Level Entity</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.MainLevelEntity <em>Main Level Entity</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.MainLevelEntity
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.MainLevelEntity
+   * @generated
+   */
   public Adapter createMainLevelEntityAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.TypeDefinition <em>Type Definition</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.TypeDefinition <em>Type Definition</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.TypeDefinition
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.TypeDefinition
+   * @generated
+   */
   public Adapter createTypeDefinitionAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.GlobalDefinition <em>Global Definition</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.GlobalDefinition <em>Global Definition</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.GlobalDefinition
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.GlobalDefinition
+   * @generated
+   */
   public Adapter createGlobalDefinitionAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.FunctionDefinition <em>Function Definition</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.FunctionDefinition <em>Function Definition</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.FunctionDefinition
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.FunctionDefinition
+   * @generated
+   */
   public Adapter createFunctionDefinitionAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.AliasDefinition <em>Alias Definition</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.AliasDefinition <em>Alias Definition</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.AliasDefinition
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.AliasDefinition
+   * @generated
+   */
   public Adapter createAliasDefinitionAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.TypeUse <em>Type Use</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.TypeUse <em>Type Use</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.TypeUse
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.TypeUse
+   * @generated
+   */
   public Adapter createTypeUseAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.AddressUse <em>Address Use</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.AddressUse <em>Address Use</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.AddressUse
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.AddressUse
+   * @generated
+   */
   public Adapter createAddressUseAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Address <em>Address</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Address <em>Address</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Address
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Address
+   * @generated
+   */
   public Adapter createAddressAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Predefined <em>Predefined</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Predefined <em>Predefined</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Predefined
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Predefined
+   * @generated
+   */
   public Adapter createPredefinedAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Vector <em>Vector</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Vector <em>Vector</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Vector
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Vector
+   * @generated
+   */
   public Adapter createVectorAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Array <em>Array</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Array <em>Array</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Array
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Array
+   * @generated
+   */
   public Adapter createArrayAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Aggregate_Type <em>Aggregate Type</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Aggregate_Type <em>Aggregate Type</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Aggregate_Type
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Aggregate_Type
+   * @generated
+   */
   public Adapter createAggregate_TypeAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Constant <em>Constant</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Constant <em>Constant</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Constant
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Constant
+   * @generated
+   */
   public Adapter createConstantAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.PrimitiveValue <em>Primitive Value</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.PrimitiveValue <em>Primitive Value</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.PrimitiveValue
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.PrimitiveValue
+   * @generated
+   */
   public Adapter createPrimitiveValueAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Value <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Value <em>Value</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Value
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Value
+   * @generated
+   */
   public Adapter createValueAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ValueStruct <em>Value Struct</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ValueStruct <em>Value Struct</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.ValueStruct
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.ValueStruct
+   * @generated
+   */
   public Adapter createValueStructAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Structure <em>Structure</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Structure <em>Structure</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Structure
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Structure
+   * @generated
+   */
   public Adapter createStructureAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Parameter <em>Parameter</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Parameter <em>Parameter</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Parameter
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Parameter
+   * @generated
+   */
   public Adapter createParameterAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ParameterList <em>Parameter List</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ParameterList <em>Parameter List</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.ParameterList
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.ParameterList
+   * @generated
+   */
   public Adapter createParameterListAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.FunctionParameter <em>Function Parameter</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.FunctionParameter <em>Function Parameter</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.FunctionParameter
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.FunctionParameter
+   * @generated
+   */
   public Adapter createFunctionParameterAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.FunctionParameterList <em>Function Parameter List</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.FunctionParameterList <em>Function Parameter List</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.FunctionParameterList
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.FunctionParameterList
+   * @generated
+   */
   public Adapter createFunctionParameterListAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.FunctionBody <em>Function Body</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.FunctionBody <em>Function Body</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.FunctionBody
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.FunctionBody
+   * @generated
+   */
   public Adapter createFunctionBodyAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Instruction <em>Instruction</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Instruction <em>Instruction</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Instruction
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Instruction
+   * @generated
+   */
   public Adapter createInstructionAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.BasicBlock <em>Basic Block</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.BasicBlock <em>Basic Block</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.BasicBlock
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.BasicBlock
+   * @generated
+   */
   public Adapter createBasicBlockAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ArithmeticOperation <em>Arithmetic Operation</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ArithmeticOperation <em>Arithmetic Operation</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.ArithmeticOperation
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperation
+   * @generated
+   */
   public Adapter createArithmeticOperationAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.LogicOperation <em>Logic Operation</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.LogicOperation <em>Logic Operation</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.LogicOperation
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.LogicOperation
+   * @generated
+   */
   public Adapter createLogicOperationAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Cast <em>Cast</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Cast <em>Cast</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Cast
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Cast
+   * @generated
+   */
   public Adapter createCastAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.NestedCast <em>Nested Cast</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.NestedCast <em>Nested Cast</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.NestedCast
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.NestedCast
+   * @generated
+   */
   public Adapter createNestedCastAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.MetaArgValue <em>Meta Arg Value</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.MetaArgValue <em>Meta Arg Value</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.MetaArgValue
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.MetaArgValue
+   * @generated
+   */
   public Adapter createMetaArgValueAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Meta <em>Meta</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Meta <em>Meta</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Meta
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Meta
+   * @generated
+   */
   public Adapter createMetaAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.MetadataValue <em>Metadata Value</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.MetadataValue <em>Metadata Value</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.MetadataValue
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.MetadataValue
+   * @generated
+   */
   public Adapter createMetadataValueAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.GetElementPtr <em>Get Element Ptr</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.GetElementPtr <em>Get Element Ptr</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.GetElementPtr
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.GetElementPtr
+   * @generated
+   */
   public Adapter createGetElementPtrAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.NestedGetElementPtr <em>Nested Get Element Ptr</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.NestedGetElementPtr <em>Nested Get Element Ptr</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.NestedGetElementPtr
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.NestedGetElementPtr
+   * @generated
+   */
   public Adapter createNestedGetElementPtrAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Fence <em>Fence</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Fence <em>Fence</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Fence
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Fence
+   * @generated
+   */
   public Adapter createFenceAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.CmpXchg <em>Cmp Xchg</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.CmpXchg <em>Cmp Xchg</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.CmpXchg
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.CmpXchg
+   * @generated
+   */
   public Adapter createCmpXchgAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.AtomicRMW <em>Atomic RMW</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.AtomicRMW <em>Atomic RMW</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.AtomicRMW
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.AtomicRMW
+   * @generated
+   */
   public Adapter createAtomicRMWAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Load <em>Load</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Load <em>Load</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Load
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Load
+   * @generated
+   */
   public Adapter createLoadAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Store <em>Store</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Store <em>Store</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Store
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Store
+   * @generated
+   */
   public Adapter createStoreAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Call <em>Call</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Call <em>Call</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Call
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Call
+   * @generated
+   */
   public Adapter createCallAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Alloc <em>Alloc</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Alloc <em>Alloc</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Alloc
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Alloc
+   * @generated
+   */
   public Adapter createAllocAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.PhiCase <em>Phi Case</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.PhiCase <em>Phi Case</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.PhiCase
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.PhiCase
+   * @generated
+   */
   public Adapter createPhiCaseAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Phi <em>Phi</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Phi <em>Phi</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Phi
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Phi
+   * @generated
+   */
   public Adapter createPhiAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.LandingPad <em>Landing Pad</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.LandingPad <em>Landing Pad</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.LandingPad
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.LandingPad
+   * @generated
+   */
   public Adapter createLandingPadAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Clause <em>Clause</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Clause <em>Clause</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Clause
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Clause
+   * @generated
+   */
   public Adapter createClauseAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Select <em>Select</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Select <em>Select</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Select
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Select
+   * @generated
+   */
   public Adapter createSelectAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.VariableAttributeAccess <em>Variable Attribute Access</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.VariableAttributeAccess <em>Variable Attribute Access</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.VariableAttributeAccess
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.VariableAttributeAccess
+   * @generated
+   */
   public Adapter createVariableAttributeAccessAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ExtractValue <em>Extract Value</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ExtractValue <em>Extract Value</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.ExtractValue
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.ExtractValue
+   * @generated
+   */
   public Adapter createExtractValueAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.InsertValue <em>Insert Value</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.InsertValue <em>Insert Value</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.InsertValue
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.InsertValue
+   * @generated
+   */
   public Adapter createInsertValueAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ExtractElement <em>Extract Element</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ExtractElement <em>Extract Element</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.ExtractElement
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.ExtractElement
+   * @generated
+   */
   public Adapter createExtractElementAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.InsertElement <em>Insert Element</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.InsertElement <em>Insert Element</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.InsertElement
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.InsertElement
+   * @generated
+   */
   public Adapter createInsertElementAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ShuffleVector <em>Shuffle Vector</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ShuffleVector <em>Shuffle Vector</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.ShuffleVector
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.ShuffleVector
+   * @generated
+   */
   public Adapter createShuffleVectorAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Compare <em>Compare</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Compare <em>Compare</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Compare
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Compare
+   * @generated
+   */
   public Adapter createCompareAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.IndirectBranch <em>Indirect Branch</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.IndirectBranch <em>Indirect Branch</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.IndirectBranch
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.IndirectBranch
+   * @generated
+   */
   public Adapter createIndirectBranchAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Switch <em>Switch</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Switch <em>Switch</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Switch
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Switch
+   * @generated
+   */
   public Adapter createSwitchAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.SwitchCase <em>Switch Case</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.SwitchCase <em>Switch Case</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.SwitchCase
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.SwitchCase
+   * @generated
+   */
   public Adapter createSwitchCaseAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Invoke <em>Invoke</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Invoke <em>Invoke</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Invoke
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Invoke
+   * @generated
+   */
   public Adapter createInvokeAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Resume <em>Resume</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Resume <em>Resume</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Resume
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Resume
+   * @generated
+   */
   public Adapter createResumeAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Unreachable <em>Unreachable</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Unreachable <em>Unreachable</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Unreachable
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Unreachable
+   * @generated
+   */
   public Adapter createUnreachableAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Return <em>Return</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Return <em>Return</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Return
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Return
+   * @generated
+   */
   public Adapter createReturnAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Branch <em>Branch</em>}'.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.Branch <em>Branch</em>}'.
+   * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.llvm_parser.llvm.Branch
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.Branch
+   * @generated
+   */
   public Adapter createBranchAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Creates a new adapter for the default case.
-	 * <!-- begin-user-doc -->
+   * Creates a new adapter for the default case.
+   * <!-- begin-user-doc -->
    * This default implementation returns null.
    * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @generated
-	 */
+   * @return the new adapter.
+   * @generated
+   */
   public Adapter createEObjectAdapter()
   {
-		return null;
-	}
+    return null;
+  }
 
 } //LlvmAdapterFactory

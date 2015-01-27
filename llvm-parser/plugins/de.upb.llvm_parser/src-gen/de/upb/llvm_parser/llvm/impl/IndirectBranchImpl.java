@@ -37,217 +37,217 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
 public class IndirectBranchImpl extends InstructionImpl implements IndirectBranch
 {
   /**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getTarget()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getTarget()
+   * @generated
+   * @ordered
+   */
   protected Parameter target;
 
   /**
-	 * The cached value of the '{@link #getPotTargetLabels() <em>Pot Target Labels</em>}' attribute list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getPotTargetLabels() <em>Pot Target Labels</em>}' attribute list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getPotTargetLabels()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getPotTargetLabels()
+   * @generated
+   * @ordered
+   */
   protected EList<String> potTargetLabels;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected IndirectBranchImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return LlvmPackage.Literals.INDIRECT_BRANCH;
-	}
+    return LlvmPackage.Literals.INDIRECT_BRANCH;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public Parameter getTarget()
   {
-		return target;
-	}
+    return target;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetTarget(Parameter newTarget, NotificationChain msgs)
   {
-		Parameter oldTarget = target;
-		target = newTarget;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__TARGET, oldTarget, newTarget);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    Parameter oldTarget = target;
+    target = newTarget;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__TARGET, oldTarget, newTarget);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public void setTarget(Parameter newTarget)
   {
-		if (newTarget != target)
-		{
-			NotificationChain msgs = null;
-			if (target != null)
-				msgs = ((InternalEObject)target).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__TARGET, null, msgs);
-			if (newTarget != null)
-				msgs = ((InternalEObject)newTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__TARGET, null, msgs);
-			msgs = basicSetTarget(newTarget, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__TARGET, newTarget, newTarget));
-	}
+    if (newTarget != target)
+    {
+      NotificationChain msgs = null;
+      if (target != null)
+        msgs = ((InternalEObject)target).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__TARGET, null, msgs);
+      if (newTarget != null)
+        msgs = ((InternalEObject)newTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.INDIRECT_BRANCH__TARGET, null, msgs);
+      msgs = basicSetTarget(newTarget, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.INDIRECT_BRANCH__TARGET, newTarget, newTarget));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EList<String> getPotTargetLabels()
   {
-		if (potTargetLabels == null)
-		{
-			potTargetLabels = new EDataTypeEList<String>(String.class, this, LlvmPackage.INDIRECT_BRANCH__POT_TARGET_LABELS);
-		}
-		return potTargetLabels;
-	}
+    if (potTargetLabels == null)
+    {
+      potTargetLabels = new EDataTypeEList<String>(String.class, this, LlvmPackage.INDIRECT_BRANCH__POT_TARGET_LABELS);
+    }
+    return potTargetLabels;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-		switch (featureID)
-		{
-			case LlvmPackage.INDIRECT_BRANCH__TARGET:
-				return basicSetTarget(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case LlvmPackage.INDIRECT_BRANCH__TARGET:
+        return basicSetTarget(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID)
-		{
-			case LlvmPackage.INDIRECT_BRANCH__TARGET:
-				return getTarget();
-			case LlvmPackage.INDIRECT_BRANCH__POT_TARGET_LABELS:
-				return getPotTargetLabels();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case LlvmPackage.INDIRECT_BRANCH__TARGET:
+        return getTarget();
+      case LlvmPackage.INDIRECT_BRANCH__POT_TARGET_LABELS:
+        return getPotTargetLabels();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID)
-		{
-			case LlvmPackage.INDIRECT_BRANCH__TARGET:
-				setTarget((Parameter)newValue);
-				return;
-			case LlvmPackage.INDIRECT_BRANCH__POT_TARGET_LABELS:
-				getPotTargetLabels().clear();
-				getPotTargetLabels().addAll((Collection<? extends String>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case LlvmPackage.INDIRECT_BRANCH__TARGET:
+        setTarget((Parameter)newValue);
+        return;
+      case LlvmPackage.INDIRECT_BRANCH__POT_TARGET_LABELS:
+        getPotTargetLabels().clear();
+        getPotTargetLabels().addAll((Collection<? extends String>)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID)
-		{
-			case LlvmPackage.INDIRECT_BRANCH__TARGET:
-				setTarget((Parameter)null);
-				return;
-			case LlvmPackage.INDIRECT_BRANCH__POT_TARGET_LABELS:
-				getPotTargetLabels().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case LlvmPackage.INDIRECT_BRANCH__TARGET:
+        setTarget((Parameter)null);
+        return;
+      case LlvmPackage.INDIRECT_BRANCH__POT_TARGET_LABELS:
+        getPotTargetLabels().clear();
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID)
-		{
-			case LlvmPackage.INDIRECT_BRANCH__TARGET:
-				return target != null;
-			case LlvmPackage.INDIRECT_BRANCH__POT_TARGET_LABELS:
-				return potTargetLabels != null && !potTargetLabels.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case LlvmPackage.INDIRECT_BRANCH__TARGET:
+        return target != null;
+      case LlvmPackage.INDIRECT_BRANCH__POT_TARGET_LABELS:
+        return potTargetLabels != null && !potTargetLabels.isEmpty();
+    }
+    return super.eIsSet(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public String toString()
   {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (potTargetLabels: ");
-		result.append(potTargetLabels);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (potTargetLabels: ");
+    result.append(potTargetLabels);
+    result.append(')');
+    return result.toString();
+  }
 
 } //IndirectBranchImpl

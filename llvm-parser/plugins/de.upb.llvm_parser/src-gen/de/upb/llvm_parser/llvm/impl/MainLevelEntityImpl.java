@@ -19,24 +19,24 @@ import org.eclipse.emf.ecore.EClass;
 public class MainLevelEntityImpl extends AbstractElementImpl implements MainLevelEntity
 {
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected MainLevelEntityImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return LlvmPackage.Literals.MAIN_LEVEL_ENTITY;
-	}
+    return LlvmPackage.Literals.MAIN_LEVEL_ENTITY;
+  }
 
 } //MainLevelEntityImpl

@@ -1130,12 +1130,12 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (
-	 *         ((volatile?='volatile' | volatile?='volatile'?) targetAddress=Parameter value=Parameter align=NUMBER? meta+=MetaArgValue*) | 
+	 *         ((volatile?='volatile' | volatile?='volatile'?) value=Parameter targetAddress=Parameter align=NUMBER? meta+=MetaArgValue*) | 
 	 *         (
 	 *             atomic?='atomic' 
 	 *             volatile?='volatile'? 
-	 *             targetAddress=Parameter 
 	 *             value=Parameter 
+	 *             targetAddress=Parameter 
 	 *             ordering=ATOMIC_ORDERING 
 	 *             align=NUMBER?
 	 *         )

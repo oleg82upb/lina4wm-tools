@@ -12824,9 +12824,9 @@ rule__Store__Group_0__1__Impl
     }
 :
 (
-{ before(grammarAccess.getStoreAccess().getTargetAddressAssignment_0_1()); }
-(rule__Store__TargetAddressAssignment_0_1)
-{ after(grammarAccess.getStoreAccess().getTargetAddressAssignment_0_1()); }
+{ before(grammarAccess.getStoreAccess().getValueAssignment_0_1()); }
+(rule__Store__ValueAssignment_0_1)
+{ after(grammarAccess.getStoreAccess().getValueAssignment_0_1()); }
 )
 
 ;
@@ -12884,9 +12884,9 @@ rule__Store__Group_0__3__Impl
     }
 :
 (
-{ before(grammarAccess.getStoreAccess().getValueAssignment_0_3()); }
-(rule__Store__ValueAssignment_0_3)
-{ after(grammarAccess.getStoreAccess().getValueAssignment_0_3()); }
+{ before(grammarAccess.getStoreAccess().getTargetAddressAssignment_0_3()); }
+(rule__Store__TargetAddressAssignment_0_3)
+{ after(grammarAccess.getStoreAccess().getTargetAddressAssignment_0_3()); }
 )
 
 ;
@@ -13356,9 +13356,9 @@ rule__Store__Group_1__3__Impl
     }
 :
 (
-{ before(grammarAccess.getStoreAccess().getTargetAddressAssignment_1_3()); }
-(rule__Store__TargetAddressAssignment_1_3)
-{ after(grammarAccess.getStoreAccess().getTargetAddressAssignment_1_3()); }
+{ before(grammarAccess.getStoreAccess().getValueAssignment_1_3()); }
+(rule__Store__ValueAssignment_1_3)
+{ after(grammarAccess.getStoreAccess().getValueAssignment_1_3()); }
 )
 
 ;
@@ -13416,9 +13416,9 @@ rule__Store__Group_1__5__Impl
     }
 :
 (
-{ before(grammarAccess.getStoreAccess().getValueAssignment_1_5()); }
-(rule__Store__ValueAssignment_1_5)
-{ after(grammarAccess.getStoreAccess().getValueAssignment_1_5()); }
+{ before(grammarAccess.getStoreAccess().getTargetAddressAssignment_1_5()); }
+(rule__Store__TargetAddressAssignment_1_5)
+{ after(grammarAccess.getStoreAccess().getTargetAddressAssignment_1_5()); }
 )
 
 ;
@@ -21101,14 +21101,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Store__TargetAddressAssignment_0_1
+rule__Store__ValueAssignment_0_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_0_1_0()); }
-	ruleParameter{ after(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_0_1_0()); }
+{ before(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_0_1_0()); }
+	ruleParameter{ after(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_0_1_0()); }
 )
 
 ;
@@ -21116,14 +21116,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Store__ValueAssignment_0_3
+rule__Store__TargetAddressAssignment_0_3
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_0_3_0()); }
-	ruleParameter{ after(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_0_3_0()); }
+{ before(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_0_3_0()); }
+	ruleParameter{ after(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_0_3_0()); }
 )
 
 ;
@@ -21207,14 +21207,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Store__TargetAddressAssignment_1_3
+rule__Store__ValueAssignment_1_3
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_1_3_0()); }
-	ruleParameter{ after(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_1_3_0()); }
+{ before(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_1_3_0()); }
+	ruleParameter{ after(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_1_3_0()); }
 )
 
 ;
@@ -21222,14 +21222,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Store__ValueAssignment_1_5
+rule__Store__TargetAddressAssignment_1_5
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_1_5_0()); }
-	ruleParameter{ after(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_1_5_0()); }
+{ before(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_1_5_0()); }
+	ruleParameter{ after(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_1_5_0()); }
 )
 
 ;

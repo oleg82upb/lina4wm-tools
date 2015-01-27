@@ -24,160 +24,160 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ALIAS_LINKAGE", "RULE_ATOMIC_ORDERING", "RULE_BIN_OP", "RULE_RETURN_ATTRIBUTES", "RULE_CAST_OP", "RULE_I_PREDICATES", "RULE_VISIBILITY", "RULE_LINKAGE", "RULE_INT_TYPE", "RULE_ID", "RULE_BOOL", "RULE_PRIMITIVE_VALUE", "RULE_FLOATING_POINT_TYPE", "RULE_STRING", "RULE_INITIALIZER", "RULE_METADATA", "RULE_F_PREDICATES", "RULE_INT", "RULE_SL_COMMENT", "RULE_POINTER", "RULE_UNKNOWN_TYPE", "RULE_VALID_ID", "RULE_ML_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'ccc'", "'fastcc'", "'coldcc'", "'x86_stdcallcc'", "'x86_fastcallcc'", "'x86_thiscallcc'", "'arm_apcscc'", "'arm_aapcscc'", "'arm_aapcs_vfpcc'", "'msp430_intrcc'", "'ptx_kernel'", "'ptx_device'", "'spir_func'", "'spir_kernel'", "'address_safety'", "'alwaysinline'", "'nonlazybind'", "'inlinehint'", "'naked'", "'noimplicitfloat'", "'noinline'", "'noredzone'", "'noreturn'", "'nounwind'", "'optsize'", "'readnone'", "'readonly'", "'returns_twice'", "'ssp'", "'sspreq'", "'uwtable'", "'catch'", "'invoke'", "'resume'", "'switch'", "'datalayout'", "'triple'", "'opaque'", "'global'", "'unnamed_addr'", "'constant'", "'()'", "'[]'", "'add'", "'fadd'", "'sub'", "'fsub'", "'mul'", "'fmul'", "'udiv'", "'sdiv'", "'fdiv'", "'urem'", "'srem'", "'frem'", "'nsw'", "'nuw'", "'shl'", "'lshr'", "'ashr'", "'and'", "'or'", "'xor'", "'!{'", "'icmp'", "'fcmp'", "'-'", "'.'", "'cc'", "'<'", "'>'", "'alignstack'", "'('", "')'", "'module'", "'asm'", "'target'", "'='", "'deplibs'", "'['", "']'", "','", "'type'", "'align'", "'define'", "'section '", "'declare'", "'alias'", "'x'", "'{'", "'}'", "':'", "'to'", "'metadata'", "'!'", "'getelementptr'", "'inbounds'", "'fence'", "'singlethread'", "'cmpxchg'", "'atomicrmw'", "'load'", "'store'", "'tail'", "'call'", "'!srcloc'", "'alloca'", "'phi'", "'landingpad'", "'personality'", "'cleanup'", "'filter'", "'select'", "'va_arg'", "'extractvalue'", "'insertvalue'", "'extractelement'", "'insertelement'", "'shufflevector'", "'indirectbr'", "'label'", "'unwind'", "'unreachable'", "'ret'", "'!dbg'", "'br'", "'volatile'", "'atomic'"
     };
-    public static final int RULE_F_PREDICATES=20;
-    public static final int RULE_ID=13;
-    public static final int T__29=29;
-    public static final int RULE_ANY_OTHER=28;
-    public static final int EOF=-1;
-    public static final int T__93=93;
-    public static final int T__94=94;
-    public static final int T__91=91;
-    public static final int T__92=92;
-    public static final int T__148=148;
-    public static final int T__147=147;
-    public static final int T__90=90;
-    public static final int T__149=149;
-    public static final int RULE_FLOATING_POINT_TYPE=16;
-    public static final int T__154=154;
-    public static final int T__155=155;
-    public static final int T__156=156;
-    public static final int T__99=99;
-    public static final int T__150=150;
-    public static final int T__98=98;
-    public static final int T__151=151;
-    public static final int T__97=97;
-    public static final int T__152=152;
-    public static final int T__96=96;
-    public static final int T__153=153;
-    public static final int T__95=95;
-    public static final int T__139=139;
-    public static final int T__138=138;
-    public static final int T__137=137;
-    public static final int RULE_INITIALIZER=18;
-    public static final int T__136=136;
-    public static final int T__80=80;
-    public static final int T__81=81;
-    public static final int T__82=82;
-    public static final int T__83=83;
-    public static final int RULE_METADATA=19;
-    public static final int T__141=141;
-    public static final int T__85=85;
-    public static final int T__142=142;
-    public static final int T__84=84;
-    public static final int T__87=87;
-    public static final int T__140=140;
-    public static final int T__86=86;
-    public static final int T__145=145;
-    public static final int T__89=89;
-    public static final int T__146=146;
-    public static final int T__88=88;
-    public static final int RULE_ML_COMMENT=26;
-    public static final int T__143=143;
     public static final int T__144=144;
-    public static final int T__126=126;
-    public static final int T__125=125;
-    public static final int T__128=128;
-    public static final int RULE_STRING=17;
-    public static final int T__127=127;
-    public static final int T__71=71;
-    public static final int T__129=129;
-    public static final int T__72=72;
-    public static final int T__70=70;
-    public static final int T__76=76;
-    public static final int T__75=75;
-    public static final int T__130=130;
-    public static final int T__74=74;
-    public static final int T__131=131;
-    public static final int T__73=73;
-    public static final int T__132=132;
-    public static final int T__133=133;
-    public static final int T__79=79;
-    public static final int T__134=134;
-    public static final int T__78=78;
-    public static final int T__135=135;
-    public static final int T__77=77;
-    public static final int T__68=68;
-    public static final int T__69=69;
-    public static final int RULE_ALIAS_LINKAGE=4;
-    public static final int T__66=66;
-    public static final int T__67=67;
-    public static final int T__64=64;
-    public static final int T__65=65;
-    public static final int T__62=62;
-    public static final int T__63=63;
-    public static final int T__118=118;
-    public static final int T__119=119;
-    public static final int T__116=116;
-    public static final int RULE_POINTER=23;
-    public static final int RULE_I_PREDICATES=9;
-    public static final int RULE_ATOMIC_ORDERING=5;
-    public static final int T__117=117;
-    public static final int T__114=114;
-    public static final int T__115=115;
-    public static final int T__124=124;
-    public static final int RULE_BOOL=14;
-    public static final int RULE_RETURN_ATTRIBUTES=7;
-    public static final int T__123=123;
-    public static final int T__122=122;
-    public static final int T__121=121;
-    public static final int T__120=120;
-    public static final int T__61=61;
+    public static final int T__143=143;
+    public static final int T__146=146;
+    public static final int T__50=50;
+    public static final int T__145=145;
+    public static final int RULE_BIN_OP=6;
+    public static final int T__140=140;
+    public static final int T__142=142;
+    public static final int T__141=141;
+    public static final int RULE_VISIBILITY=10;
     public static final int RULE_PRIMITIVE_VALUE=15;
-    public static final int T__60=60;
+    public static final int T__59=59;
+    public static final int RULE_CAST_OP=8;
     public static final int T__55=55;
     public static final int T__56=56;
     public static final int T__57=57;
     public static final int T__58=58;
     public static final int T__51=51;
+    public static final int T__137=137;
     public static final int T__52=52;
+    public static final int T__136=136;
     public static final int T__53=53;
+    public static final int T__139=139;
     public static final int T__54=54;
-    public static final int T__107=107;
-    public static final int T__108=108;
-    public static final int T__109=109;
+    public static final int T__138=138;
+    public static final int T__133=133;
+    public static final int T__132=132;
+    public static final int T__60=60;
+    public static final int T__135=135;
+    public static final int T__61=61;
+    public static final int T__134=134;
+    public static final int RULE_ID=13;
+    public static final int T__131=131;
+    public static final int T__130=130;
+    public static final int RULE_ATOMIC_ORDERING=5;
     public static final int RULE_UNKNOWN_TYPE=24;
-    public static final int RULE_CAST_OP=8;
-    public static final int T__59=59;
-    public static final int T__103=103;
-    public static final int T__104=104;
-    public static final int T__105=105;
-    public static final int T__106=106;
-    public static final int T__111=111;
-    public static final int T__110=110;
     public static final int RULE_INT=21;
-    public static final int RULE_BIN_OP=6;
-    public static final int T__113=113;
-    public static final int T__112=112;
-    public static final int T__50=50;
-    public static final int T__42=42;
-    public static final int T__43=43;
-    public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int T__46=46;
-    public static final int T__47=47;
-    public static final int T__44=44;
-    public static final int T__45=45;
-    public static final int T__48=48;
-    public static final int T__49=49;
-    public static final int T__102=102;
-    public static final int T__101=101;
-    public static final int RULE_VALID_ID=25;
-    public static final int T__100=100;
-    public static final int RULE_SL_COMMENT=22;
-    public static final int RULE_INT_TYPE=12;
-    public static final int T__30=30;
-    public static final int T__31=31;
-    public static final int T__32=32;
+    public static final int T__66=66;
+    public static final int RULE_ML_COMMENT=26;
+    public static final int T__67=67;
+    public static final int T__129=129;
+    public static final int T__68=68;
+    public static final int T__69=69;
+    public static final int T__62=62;
+    public static final int T__126=126;
+    public static final int T__63=63;
+    public static final int T__125=125;
+    public static final int T__64=64;
+    public static final int T__128=128;
+    public static final int T__65=65;
+    public static final int T__127=127;
+    public static final int RULE_POINTER=23;
+    public static final int RULE_ALIAS_LINKAGE=4;
+    public static final int T__37=37;
+    public static final int T__38=38;
+    public static final int T__39=39;
     public static final int T__33=33;
     public static final int T__34=34;
     public static final int T__35=35;
     public static final int T__36=36;
-    public static final int T__37=37;
-    public static final int T__38=38;
-    public static final int T__39=39;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int T__155=155;
+    public static final int T__154=154;
+    public static final int T__156=156;
+    public static final int T__151=151;
+    public static final int T__150=150;
+    public static final int T__153=153;
+    public static final int RULE_RETURN_ATTRIBUTES=7;
+    public static final int T__152=152;
+    public static final int RULE_BOOL=14;
+    public static final int T__48=48;
+    public static final int RULE_F_PREDICATES=20;
+    public static final int T__49=49;
+    public static final int RULE_INITIALIZER=18;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int T__46=46;
+    public static final int T__47=47;
+    public static final int T__40=40;
+    public static final int T__148=148;
+    public static final int T__41=41;
+    public static final int T__147=147;
+    public static final int T__42=42;
+    public static final int RULE_FLOATING_POINT_TYPE=16;
+    public static final int T__43=43;
+    public static final int T__149=149;
+    public static final int T__91=91;
+    public static final int T__100=100;
+    public static final int T__92=92;
+    public static final int T__93=93;
+    public static final int T__102=102;
+    public static final int T__94=94;
+    public static final int T__101=101;
+    public static final int T__90=90;
+    public static final int RULE_INT_TYPE=12;
+    public static final int T__99=99;
+    public static final int T__95=95;
+    public static final int T__96=96;
     public static final int RULE_LINKAGE=11;
-    public static final int RULE_VISIBILITY=10;
+    public static final int T__97=97;
+    public static final int T__98=98;
+    public static final int RULE_I_PREDICATES=9;
+    public static final int T__29=29;
+    public static final int RULE_VALID_ID=25;
+    public static final int T__122=122;
+    public static final int T__70=70;
+    public static final int T__121=121;
+    public static final int T__71=71;
+    public static final int T__124=124;
+    public static final int T__72=72;
+    public static final int T__123=123;
+    public static final int T__120=120;
+    public static final int RULE_STRING=17;
+    public static final int RULE_METADATA=19;
+    public static final int RULE_SL_COMMENT=22;
+    public static final int T__77=77;
+    public static final int T__119=119;
+    public static final int T__78=78;
+    public static final int T__118=118;
+    public static final int T__79=79;
+    public static final int T__73=73;
+    public static final int T__115=115;
+    public static final int EOF=-1;
+    public static final int T__74=74;
+    public static final int T__114=114;
+    public static final int T__75=75;
+    public static final int T__117=117;
+    public static final int T__76=76;
+    public static final int T__116=116;
+    public static final int T__80=80;
+    public static final int T__111=111;
+    public static final int T__81=81;
+    public static final int T__110=110;
+    public static final int T__82=82;
+    public static final int T__113=113;
+    public static final int T__83=83;
+    public static final int T__112=112;
     public static final int RULE_WS=27;
+    public static final int RULE_ANY_OTHER=28;
+    public static final int T__88=88;
+    public static final int T__108=108;
+    public static final int T__89=89;
+    public static final int T__107=107;
+    public static final int T__109=109;
+    public static final int T__84=84;
+    public static final int T__104=104;
+    public static final int T__85=85;
+    public static final int T__103=103;
+    public static final int T__86=86;
+    public static final int T__106=106;
+    public static final int T__87=87;
+    public static final int T__105=105;
 
     // delegates
     // delegators
@@ -7130,6 +7130,11 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
                 if ( (LA10_1==106) ) {
                     switch ( input.LA(3) ) {
+                    case 116:
+                        {
+                        alt10=4;
+                        }
+                        break;
                     case RULE_ALIAS_LINKAGE:
                     case RULE_LINKAGE:
                     case RULE_INT_TYPE:
@@ -7150,11 +7155,6 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
                     case 111:
                         {
                         alt10=1;
-                        }
-                        break;
-                    case 116:
-                        {
-                        alt10=4;
                         }
                         break;
                     default:
@@ -10645,11 +10645,11 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
                     else if ( (LA40_2==130) ) {
                         int LA40_4 = input.LA(4);
 
-                        if ( (LA40_4==RULE_INT_TYPE||(LA40_4>=RULE_PRIMITIVE_VALUE && LA40_4<=RULE_FLOATING_POINT_TYPE)||LA40_4==RULE_VALID_ID||LA40_4==71||LA40_4==98||LA40_4==108||LA40_4==118||LA40_4==155) ) {
-                            alt40=1;
-                        }
-                        else if ( (LA40_4==156) ) {
+                        if ( (LA40_4==156) ) {
                             alt40=2;
+                        }
+                        else if ( (LA40_4==RULE_INT_TYPE||(LA40_4>=RULE_PRIMITIVE_VALUE && LA40_4<=RULE_FLOATING_POINT_TYPE)||LA40_4==RULE_VALID_ID||LA40_4==71||LA40_4==98||LA40_4==108||LA40_4==118||LA40_4==155) ) {
+                            alt40=1;
                         }
                         else {
                             NoViableAltException nvae =
@@ -10854,11 +10854,11 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
             else if ( (LA42_0==131) ) {
                 int LA42_2 = input.LA(2);
 
-                if ( (LA42_2==156) ) {
-                    alt42=2;
-                }
-                else if ( (LA42_2==RULE_INT_TYPE||(LA42_2>=RULE_PRIMITIVE_VALUE && LA42_2<=RULE_FLOATING_POINT_TYPE)||LA42_2==RULE_VALID_ID||LA42_2==71||LA42_2==98||LA42_2==108||LA42_2==118||LA42_2==155) ) {
+                if ( (LA42_2==RULE_INT_TYPE||(LA42_2>=RULE_PRIMITIVE_VALUE && LA42_2<=RULE_FLOATING_POINT_TYPE)||LA42_2==RULE_VALID_ID||LA42_2==71||LA42_2==98||LA42_2==108||LA42_2==118||LA42_2==155) ) {
                     alt42=1;
+                }
+                else if ( (LA42_2==156) ) {
+                    alt42=2;
                 }
                 else {
                     NoViableAltException nvae =
@@ -11446,11 +11446,11 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
             if ( (LA49_0==154) ) {
                 int LA49_1 = input.LA(2);
 
-                if ( (LA49_1==RULE_INT_TYPE) ) {
-                    alt49=2;
-                }
-                else if ( (LA49_1==149) ) {
+                if ( (LA49_1==149) ) {
                     alt49=1;
+                }
+                else if ( (LA49_1==RULE_INT_TYPE) ) {
+                    alt49=2;
                 }
                 else {
                     NoViableAltException nvae =
@@ -35363,31 +35363,31 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Store__Group_0__1__Impl"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12821:1: rule__Store__Group_0__1__Impl : ( ( rule__Store__TargetAddressAssignment_0_1 ) ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12821:1: rule__Store__Group_0__1__Impl : ( ( rule__Store__ValueAssignment_0_1 ) ) ;
     public final void rule__Store__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12825:1: ( ( ( rule__Store__TargetAddressAssignment_0_1 ) ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12826:1: ( ( rule__Store__TargetAddressAssignment_0_1 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12825:1: ( ( ( rule__Store__ValueAssignment_0_1 ) ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12826:1: ( ( rule__Store__ValueAssignment_0_1 ) )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12826:1: ( ( rule__Store__TargetAddressAssignment_0_1 ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12827:1: ( rule__Store__TargetAddressAssignment_0_1 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12826:1: ( ( rule__Store__ValueAssignment_0_1 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12827:1: ( rule__Store__ValueAssignment_0_1 )
             {
-             before(grammarAccess.getStoreAccess().getTargetAddressAssignment_0_1()); 
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12828:1: ( rule__Store__TargetAddressAssignment_0_1 )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12828:2: rule__Store__TargetAddressAssignment_0_1
+             before(grammarAccess.getStoreAccess().getValueAssignment_0_1()); 
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12828:1: ( rule__Store__ValueAssignment_0_1 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12828:2: rule__Store__ValueAssignment_0_1
             {
-            pushFollow(FOLLOW_rule__Store__TargetAddressAssignment_0_1_in_rule__Store__Group_0__1__Impl26384);
-            rule__Store__TargetAddressAssignment_0_1();
+            pushFollow(FOLLOW_rule__Store__ValueAssignment_0_1_in_rule__Store__Group_0__1__Impl26384);
+            rule__Store__ValueAssignment_0_1();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getStoreAccess().getTargetAddressAssignment_0_1()); 
+             after(grammarAccess.getStoreAccess().getValueAssignment_0_1()); 
 
             }
 
@@ -35523,31 +35523,31 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Store__Group_0__3__Impl"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12881:1: rule__Store__Group_0__3__Impl : ( ( rule__Store__ValueAssignment_0_3 ) ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12881:1: rule__Store__Group_0__3__Impl : ( ( rule__Store__TargetAddressAssignment_0_3 ) ) ;
     public final void rule__Store__Group_0__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12885:1: ( ( ( rule__Store__ValueAssignment_0_3 ) ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12886:1: ( ( rule__Store__ValueAssignment_0_3 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12885:1: ( ( ( rule__Store__TargetAddressAssignment_0_3 ) ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12886:1: ( ( rule__Store__TargetAddressAssignment_0_3 ) )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12886:1: ( ( rule__Store__ValueAssignment_0_3 ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12887:1: ( rule__Store__ValueAssignment_0_3 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12886:1: ( ( rule__Store__TargetAddressAssignment_0_3 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12887:1: ( rule__Store__TargetAddressAssignment_0_3 )
             {
-             before(grammarAccess.getStoreAccess().getValueAssignment_0_3()); 
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12888:1: ( rule__Store__ValueAssignment_0_3 )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12888:2: rule__Store__ValueAssignment_0_3
+             before(grammarAccess.getStoreAccess().getTargetAddressAssignment_0_3()); 
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12888:1: ( rule__Store__TargetAddressAssignment_0_3 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:12888:2: rule__Store__TargetAddressAssignment_0_3
             {
-            pushFollow(FOLLOW_rule__Store__ValueAssignment_0_3_in_rule__Store__Group_0__3__Impl26506);
-            rule__Store__ValueAssignment_0_3();
+            pushFollow(FOLLOW_rule__Store__TargetAddressAssignment_0_3_in_rule__Store__Group_0__3__Impl26506);
+            rule__Store__TargetAddressAssignment_0_3();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getStoreAccess().getValueAssignment_0_3()); 
+             after(grammarAccess.getStoreAccess().getTargetAddressAssignment_0_3()); 
 
             }
 
@@ -36768,31 +36768,31 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Store__Group_1__3__Impl"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13353:1: rule__Store__Group_1__3__Impl : ( ( rule__Store__TargetAddressAssignment_1_3 ) ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13353:1: rule__Store__Group_1__3__Impl : ( ( rule__Store__ValueAssignment_1_3 ) ) ;
     public final void rule__Store__Group_1__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13357:1: ( ( ( rule__Store__TargetAddressAssignment_1_3 ) ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13358:1: ( ( rule__Store__TargetAddressAssignment_1_3 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13357:1: ( ( ( rule__Store__ValueAssignment_1_3 ) ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13358:1: ( ( rule__Store__ValueAssignment_1_3 ) )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13358:1: ( ( rule__Store__TargetAddressAssignment_1_3 ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13359:1: ( rule__Store__TargetAddressAssignment_1_3 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13358:1: ( ( rule__Store__ValueAssignment_1_3 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13359:1: ( rule__Store__ValueAssignment_1_3 )
             {
-             before(grammarAccess.getStoreAccess().getTargetAddressAssignment_1_3()); 
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13360:1: ( rule__Store__TargetAddressAssignment_1_3 )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13360:2: rule__Store__TargetAddressAssignment_1_3
+             before(grammarAccess.getStoreAccess().getValueAssignment_1_3()); 
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13360:1: ( rule__Store__ValueAssignment_1_3 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13360:2: rule__Store__ValueAssignment_1_3
             {
-            pushFollow(FOLLOW_rule__Store__TargetAddressAssignment_1_3_in_rule__Store__Group_1__3__Impl27437);
-            rule__Store__TargetAddressAssignment_1_3();
+            pushFollow(FOLLOW_rule__Store__ValueAssignment_1_3_in_rule__Store__Group_1__3__Impl27437);
+            rule__Store__ValueAssignment_1_3();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getStoreAccess().getTargetAddressAssignment_1_3()); 
+             after(grammarAccess.getStoreAccess().getValueAssignment_1_3()); 
 
             }
 
@@ -36928,31 +36928,31 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Store__Group_1__5__Impl"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13413:1: rule__Store__Group_1__5__Impl : ( ( rule__Store__ValueAssignment_1_5 ) ) ;
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13413:1: rule__Store__Group_1__5__Impl : ( ( rule__Store__TargetAddressAssignment_1_5 ) ) ;
     public final void rule__Store__Group_1__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13417:1: ( ( ( rule__Store__ValueAssignment_1_5 ) ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13418:1: ( ( rule__Store__ValueAssignment_1_5 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13417:1: ( ( ( rule__Store__TargetAddressAssignment_1_5 ) ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13418:1: ( ( rule__Store__TargetAddressAssignment_1_5 ) )
             {
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13418:1: ( ( rule__Store__ValueAssignment_1_5 ) )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13419:1: ( rule__Store__ValueAssignment_1_5 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13418:1: ( ( rule__Store__TargetAddressAssignment_1_5 ) )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13419:1: ( rule__Store__TargetAddressAssignment_1_5 )
             {
-             before(grammarAccess.getStoreAccess().getValueAssignment_1_5()); 
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13420:1: ( rule__Store__ValueAssignment_1_5 )
-            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13420:2: rule__Store__ValueAssignment_1_5
+             before(grammarAccess.getStoreAccess().getTargetAddressAssignment_1_5()); 
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13420:1: ( rule__Store__TargetAddressAssignment_1_5 )
+            // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:13420:2: rule__Store__TargetAddressAssignment_1_5
             {
-            pushFollow(FOLLOW_rule__Store__ValueAssignment_1_5_in_rule__Store__Group_1__5__Impl27559);
-            rule__Store__ValueAssignment_1_5();
+            pushFollow(FOLLOW_rule__Store__TargetAddressAssignment_1_5_in_rule__Store__Group_1__5__Impl27559);
+            rule__Store__TargetAddressAssignment_1_5();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getStoreAccess().getValueAssignment_1_5()); 
+             after(grammarAccess.getStoreAccess().getTargetAddressAssignment_1_5()); 
 
             }
 
@@ -56631,9 +56631,9 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Store__VolatileAssignment_0_0_1_1"
 
 
-    // $ANTLR start "rule__Store__TargetAddressAssignment_0_1"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21104:1: rule__Store__TargetAddressAssignment_0_1 : ( ruleParameter ) ;
-    public final void rule__Store__TargetAddressAssignment_0_1() throws RecognitionException {
+    // $ANTLR start "rule__Store__ValueAssignment_0_1"
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21104:1: rule__Store__ValueAssignment_0_1 : ( ruleParameter ) ;
+    public final void rule__Store__ValueAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -56644,13 +56644,13 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
             // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21109:1: ( ruleParameter )
             // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21110:1: ruleParameter
             {
-             before(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_0_1_0()); 
-            pushFollow(FOLLOW_ruleParameter_in_rule__Store__TargetAddressAssignment_0_142834);
+             before(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_0_1_0()); 
+            pushFollow(FOLLOW_ruleParameter_in_rule__Store__ValueAssignment_0_142834);
             ruleParameter();
 
             state._fsp--;
 
-             after(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_0_1_0()); 
+             after(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_0_1_0()); 
 
             }
 
@@ -56669,12 +56669,12 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Store__TargetAddressAssignment_0_1"
+    // $ANTLR end "rule__Store__ValueAssignment_0_1"
 
 
-    // $ANTLR start "rule__Store__ValueAssignment_0_3"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21119:1: rule__Store__ValueAssignment_0_3 : ( ruleParameter ) ;
-    public final void rule__Store__ValueAssignment_0_3() throws RecognitionException {
+    // $ANTLR start "rule__Store__TargetAddressAssignment_0_3"
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21119:1: rule__Store__TargetAddressAssignment_0_3 : ( ruleParameter ) ;
+    public final void rule__Store__TargetAddressAssignment_0_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -56685,13 +56685,13 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
             // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21124:1: ( ruleParameter )
             // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21125:1: ruleParameter
             {
-             before(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_0_3_0()); 
-            pushFollow(FOLLOW_ruleParameter_in_rule__Store__ValueAssignment_0_342865);
+             before(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_0_3_0()); 
+            pushFollow(FOLLOW_ruleParameter_in_rule__Store__TargetAddressAssignment_0_342865);
             ruleParameter();
 
             state._fsp--;
 
-             after(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_0_3_0()); 
+             after(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_0_3_0()); 
 
             }
 
@@ -56710,7 +56710,7 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Store__ValueAssignment_0_3"
+    // $ANTLR end "rule__Store__TargetAddressAssignment_0_3"
 
 
     // $ANTLR start "rule__Store__AlignAssignment_0_4_2"
@@ -56885,9 +56885,9 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Store__VolatileAssignment_1_2"
 
 
-    // $ANTLR start "rule__Store__TargetAddressAssignment_1_3"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21210:1: rule__Store__TargetAddressAssignment_1_3 : ( ruleParameter ) ;
-    public final void rule__Store__TargetAddressAssignment_1_3() throws RecognitionException {
+    // $ANTLR start "rule__Store__ValueAssignment_1_3"
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21210:1: rule__Store__ValueAssignment_1_3 : ( ruleParameter ) ;
+    public final void rule__Store__ValueAssignment_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -56898,13 +56898,13 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
             // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21215:1: ( ruleParameter )
             // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21216:1: ruleParameter
             {
-             before(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_1_3_0()); 
-            pushFollow(FOLLOW_ruleParameter_in_rule__Store__TargetAddressAssignment_1_343046);
+             before(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_1_3_0()); 
+            pushFollow(FOLLOW_ruleParameter_in_rule__Store__ValueAssignment_1_343046);
             ruleParameter();
 
             state._fsp--;
 
-             after(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_1_3_0()); 
+             after(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_1_3_0()); 
 
             }
 
@@ -56923,12 +56923,12 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Store__TargetAddressAssignment_1_3"
+    // $ANTLR end "rule__Store__ValueAssignment_1_3"
 
 
-    // $ANTLR start "rule__Store__ValueAssignment_1_5"
-    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21225:1: rule__Store__ValueAssignment_1_5 : ( ruleParameter ) ;
-    public final void rule__Store__ValueAssignment_1_5() throws RecognitionException {
+    // $ANTLR start "rule__Store__TargetAddressAssignment_1_5"
+    // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21225:1: rule__Store__TargetAddressAssignment_1_5 : ( ruleParameter ) ;
+    public final void rule__Store__TargetAddressAssignment_1_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -56939,13 +56939,13 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
             // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21230:1: ( ruleParameter )
             // ../de.upb.llvm_parser.ui/src-gen/de/upb/llvm_parser/ui/contentassist/antlr/internal/InternalLLVM.g:21231:1: ruleParameter
             {
-             before(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_1_5_0()); 
-            pushFollow(FOLLOW_ruleParameter_in_rule__Store__ValueAssignment_1_543077);
+             before(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_1_5_0()); 
+            pushFollow(FOLLOW_ruleParameter_in_rule__Store__TargetAddressAssignment_1_543077);
             ruleParameter();
 
             state._fsp--;
 
-             after(grammarAccess.getStoreAccess().getValueParameterParserRuleCall_1_5_0()); 
+             after(grammarAccess.getStoreAccess().getTargetAddressParameterParserRuleCall_1_5_0()); 
 
             }
 
@@ -56964,7 +56964,7 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Store__ValueAssignment_1_5"
+    // $ANTLR end "rule__Store__TargetAddressAssignment_1_5"
 
 
     // $ANTLR start "rule__Store__OrderingAssignment_1_7"
@@ -60011,13 +60011,13 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
     static final String DFA28_eotS =
         "\10\uffff";
     static final String DFA28_eofS =
-        "\2\2\1\uffff\1\2\2\uffff\2\5";
+        "\2\2\1\uffff\1\7\1\2\1\uffff\1\7\1\uffff";
     static final String DFA28_minS =
-        "\2\4\1\uffff\1\4\1\140\1\uffff\2\4";
+        "\2\4\1\uffff\2\4\1\140\1\4\1\uffff";
     static final String DFA28_maxS =
-        "\2\u009b\1\uffff\1\u009b\1\170\1\uffff\2\u009b";
+        "\2\u009b\1\uffff\2\u009b\1\170\1\u009b\1\uffff";
     static final String DFA28_acceptS =
-        "\2\uffff\1\2\2\uffff\1\1\2\uffff";
+        "\2\uffff\1\2\4\uffff\1\1";
     static final String DFA28_specialS =
         "\10\uffff}>";
     static final String[] DFA28_transitionS = {
@@ -60026,27 +60026,27 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
             "\1\2\2\uffff\1\2\2\uffff\1\2\1\uffff\1\2\2\uffff\2\2\4\uffff"+
             "\1\2\1\uffff\2\2\3\uffff\3\2\16\uffff\1\2\2\uffff\2\2\1\uffff"+
             "\2\2",
-            "\3\2\1\3\1\4\5\2\1\7\1\5\1\uffff\2\5\1\2\1\uffff\1\5\1\2\2"+
-            "\uffff\1\6\42\uffff\4\2\6\uffff\1\2\30\uffff\1\5\1\2\4\uffff"+
+            "\3\2\1\4\1\5\5\2\1\6\1\7\1\uffff\2\7\1\2\1\uffff\1\7\1\2\2"+
+            "\uffff\1\3\42\uffff\4\2\6\uffff\1\2\30\uffff\1\7\1\2\4\uffff"+
             "\3\2\1\uffff\1\2\1\uffff\1\2\2\uffff\1\2\2\uffff\1\2\1\uffff"+
-            "\1\2\2\uffff\1\5\2\2\3\uffff\1\5\1\uffff\2\2\3\uffff\3\2\16"+
+            "\1\2\2\uffff\1\7\2\2\3\uffff\1\7\1\uffff\2\2\3\uffff\3\2\16"+
             "\uffff\1\2\2\uffff\2\2\1\uffff\2\2",
             "",
-            "\3\2\1\3\1\4\5\2\1\7\1\5\1\uffff\2\5\1\2\1\uffff\1\5\1\2\2"+
-            "\uffff\1\6\42\uffff\4\2\6\uffff\1\2\30\uffff\1\5\1\2\4\uffff"+
+            "\13\7\4\uffff\1\7\2\uffff\2\7\1\uffff\1\7\42\uffff\4\7\6\uffff"+
+            "\1\7\36\uffff\3\7\1\uffff\1\7\1\2\1\7\2\uffff\1\7\2\uffff\1"+
+            "\7\1\uffff\1\7\3\uffff\1\7\6\uffff\2\7\3\uffff\3\7\16\uffff"+
+            "\1\7\2\uffff\2\7\1\uffff\2\7",
+            "\3\2\1\4\1\5\5\2\1\6\1\7\1\uffff\2\7\1\2\1\uffff\1\7\1\2\2"+
+            "\uffff\1\3\42\uffff\4\2\6\uffff\1\2\30\uffff\1\7\1\2\4\uffff"+
             "\3\2\1\uffff\1\2\1\uffff\1\2\2\uffff\1\2\2\uffff\1\2\1\uffff"+
-            "\1\2\2\uffff\1\5\2\2\3\uffff\1\5\1\uffff\2\2\3\uffff\3\2\16"+
+            "\1\2\2\uffff\1\7\2\2\3\uffff\1\7\1\uffff\2\2\3\uffff\3\2\16"+
             "\uffff\1\2\2\uffff\2\2\1\uffff\2\2",
-            "\1\2\4\uffff\1\5\22\uffff\1\2",
-            "",
-            "\13\5\4\uffff\1\5\2\uffff\2\5\1\uffff\1\5\42\uffff\4\5\6\uffff"+
-            "\1\5\36\uffff\3\5\1\uffff\1\5\1\2\1\5\2\uffff\1\5\2\uffff\1"+
-            "\5\1\uffff\1\5\3\uffff\1\5\6\uffff\2\5\3\uffff\3\5\16\uffff"+
-            "\1\5\2\uffff\2\5\1\uffff\2\5",
-            "\13\5\4\uffff\1\5\2\uffff\1\5\2\uffff\1\5\42\uffff\4\5\6\uffff"+
-            "\1\5\31\uffff\1\2\4\uffff\3\5\1\uffff\1\5\1\uffff\1\5\2\uffff"+
-            "\1\5\2\uffff\1\5\1\uffff\1\5\3\uffff\1\5\1\2\5\uffff\2\5\3\uffff"+
-            "\3\5\16\uffff\1\5\2\uffff\2\5\1\uffff\2\5"
+            "\1\2\4\uffff\1\7\22\uffff\1\2",
+            "\13\7\4\uffff\1\7\2\uffff\1\7\2\uffff\1\7\42\uffff\4\7\6\uffff"+
+            "\1\7\31\uffff\1\2\4\uffff\3\7\1\uffff\1\7\1\uffff\1\7\2\uffff"+
+            "\1\7\2\uffff\1\7\1\uffff\1\7\3\uffff\1\7\1\2\5\uffff\2\7\3\uffff"+
+            "\3\7\16\uffff\1\7\2\uffff\2\7\1\uffff\2\7",
+            ""
     };
 
     static final short[] DFA28_eot = DFA.unpackEncodedString(DFA28_eotS);
@@ -60092,8 +60092,8 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
         "\1\u009b\1\uffff\1\152\11\uffff\1\u009b\22\uffff";
     static final String DFA30_acceptS =
         "\1\uffff\1\1\1\uffff\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\32"+
-        "\1\uffff\1\4\1\30\1\3\1\6\1\5\1\22\1\27\1\26\1\31\1\21\1\24\1\23"+
-        "\1\33\1\20\1\2\1\34\1\25\1\17";
+        "\1\uffff\1\23\1\2\1\25\1\3\1\20\1\34\1\4\1\27\1\26\1\17\1\31\1\30"+
+        "\1\33\1\5\1\22\1\6\1\24\1\21";
     static final String DFA30_specialS =
         "\37\uffff}>";
     static final String[] DFA30_transitionS = {
@@ -60110,9 +60110,9 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
             "",
             "",
             "",
-            "\1\22\77\uffff\14\32\2\uffff\6\36\1\uffff\2\26\35\uffff\1"+
-            "\17\3\uffff\1\21\1\20\1\33\1\uffff\2\13\1\uffff\1\15\1\16\1"+
-            "\34\3\uffff\1\25\1\31\1\23\1\24\1\35\1\27\1\30\7\uffff\1\33",
+            "\1\33\77\uffff\14\21\2\uffff\6\26\1\uffff\2\36\35\uffff\1"+
+            "\20\3\uffff\1\32\1\34\1\16\1\uffff\2\13\1\uffff\1\23\1\30\1"+
+            "\22\3\uffff\1\27\1\31\1\24\1\25\1\17\1\35\1\15\7\uffff\1\16",
             "",
             "",
             "",
@@ -61353,13 +61353,13 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__Store__Alternatives_0_0_in_rule__Store__Group_0__0__Impl26324 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Store__Group_0__1__Impl_in_rule__Store__Group_0__126354 = new BitSet(new long[]{0x0000000000000000L,0x0000400000000000L});
     public static final BitSet FOLLOW_rule__Store__Group_0__2_in_rule__Store__Group_0__126357 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Store__TargetAddressAssignment_0_1_in_rule__Store__Group_0__1__Impl26384 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Store__ValueAssignment_0_1_in_rule__Store__Group_0__1__Impl26384 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Store__Group_0__2__Impl_in_rule__Store__Group_0__226414 = new BitSet(new long[]{0x0000000002019810L,0x00401004000000B8L});
     public static final BitSet FOLLOW_rule__Store__Group_0__3_in_rule__Store__Group_0__226417 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_110_in_rule__Store__Group_0__2__Impl26445 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Store__Group_0__3__Impl_in_rule__Store__Group_0__326476 = new BitSet(new long[]{0x0000000000000000L,0x0000400000000000L});
     public static final BitSet FOLLOW_rule__Store__Group_0__4_in_rule__Store__Group_0__326479 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Store__ValueAssignment_0_3_in_rule__Store__Group_0__3__Impl26506 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Store__TargetAddressAssignment_0_3_in_rule__Store__Group_0__3__Impl26506 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Store__Group_0__4__Impl_in_rule__Store__Group_0__426536 = new BitSet(new long[]{0x0000000000000000L,0x0000400000000000L});
     public static final BitSet FOLLOW_rule__Store__Group_0__5_in_rule__Store__Group_0__426539 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Store__Group_0_4__0_in_rule__Store__Group_0__4__Impl26566 = new BitSet(new long[]{0x0000000000000002L});
@@ -61399,13 +61399,13 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__Store__VolatileAssignment_1_2_in_rule__Store__Group_1__2__Impl27376 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Store__Group_1__3__Impl_in_rule__Store__Group_1__327407 = new BitSet(new long[]{0x0000000000000000L,0x0000400000000000L});
     public static final BitSet FOLLOW_rule__Store__Group_1__4_in_rule__Store__Group_1__327410 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Store__TargetAddressAssignment_1_3_in_rule__Store__Group_1__3__Impl27437 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Store__ValueAssignment_1_3_in_rule__Store__Group_1__3__Impl27437 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Store__Group_1__4__Impl_in_rule__Store__Group_1__427467 = new BitSet(new long[]{0x0000000002019810L,0x00401004000000B8L});
     public static final BitSet FOLLOW_rule__Store__Group_1__5_in_rule__Store__Group_1__427470 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_110_in_rule__Store__Group_1__4__Impl27498 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Store__Group_1__5__Impl_in_rule__Store__Group_1__527529 = new BitSet(new long[]{0x0000000000000020L,0x8000000000000000L});
     public static final BitSet FOLLOW_rule__Store__Group_1__6_in_rule__Store__Group_1__527532 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Store__ValueAssignment_1_5_in_rule__Store__Group_1__5__Impl27559 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Store__TargetAddressAssignment_1_5_in_rule__Store__Group_1__5__Impl27559 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Store__Group_1__6__Impl_in_rule__Store__Group_1__627589 = new BitSet(new long[]{0x0000000000000020L,0x8000000000000000L});
     public static final BitSet FOLLOW_rule__Store__Group_1__7_in_rule__Store__Group_1__627592 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_127_in_rule__Store__Group_1__6__Impl27621 = new BitSet(new long[]{0x0000000000000002L});
@@ -62037,14 +62037,14 @@ public class InternalLLVMParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleNUMBER_in_rule__Load__AlignAssignment_1_8_242715 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_155_in_rule__Store__VolatileAssignment_0_0_0_042751 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_155_in_rule__Store__VolatileAssignment_0_0_1_142795 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParameter_in_rule__Store__TargetAddressAssignment_0_142834 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParameter_in_rule__Store__ValueAssignment_0_342865 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleParameter_in_rule__Store__ValueAssignment_0_142834 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleParameter_in_rule__Store__TargetAddressAssignment_0_342865 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleNUMBER_in_rule__Store__AlignAssignment_0_4_242896 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleMetaArgValue_in_rule__Store__MetaAssignment_0_5_142927 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_156_in_rule__Store__AtomicAssignment_1_142963 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_155_in_rule__Store__VolatileAssignment_1_243007 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParameter_in_rule__Store__TargetAddressAssignment_1_343046 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParameter_in_rule__Store__ValueAssignment_1_543077 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleParameter_in_rule__Store__ValueAssignment_1_343046 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleParameter_in_rule__Store__TargetAddressAssignment_1_543077 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ATOMIC_ORDERING_in_rule__Store__OrderingAssignment_1_743108 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleNUMBER_in_rule__Store__AlignAssignment_1_8_243139 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleAddress_in_rule__Call__ResultAssignment_0_043170 = new BitSet(new long[]{0x0000000000000002L});
