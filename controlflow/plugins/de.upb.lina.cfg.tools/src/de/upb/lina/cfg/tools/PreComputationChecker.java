@@ -1,7 +1,9 @@
 package de.upb.lina.cfg.tools;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
@@ -147,62 +149,66 @@ public class PreComputationChecker {
 	 *            ControlFlowDiagram with TSO semantic
 	 * @return a list of transitions which are early reads
 	 */
-	public List<Transition> collectEarlyReadsinTSOGraph(ControlFlowDiagram cfg) {
-
-		List<Transition> earlyReads = new ArrayList<Transition>();
-		EList<Transition> TransitionList = cfg.getTransitions();
-		for (Transition t : TransitionList) {
-			if (detectEarlyReadforTSO(t)) {
-				earlyReads.add(t);
-			}
-		}
-		return earlyReads;
-	}
+//	public List<Transition> collectEarlyReadsinTSOGraph(ControlFlowDiagram cfg) {
+//
+//		List<Transition> earlyReads = new ArrayList<Transition>();
+//		EList<Transition> TransitionList = cfg.getTransitions();
+//		for (Transition t : TransitionList) {
+//			if (detectEarlyReadforTSO(t)) {
+//				earlyReads.add(t);
+//			}
+//		}
+//		return earlyReads;
+//	}
 
 	/**
 	 * @param t
 	 *            a transition, which is a load-instruction
 	 * @return <code>true</code> if the transition is an early read
 	 */
-	private boolean detectEarlyReadforTSO(Transition t) {
-
-		ControlFlowLocation source = t.getSource();
-
-		if (!source.getBuffer().getAddressValuePairs().isEmpty()) {
-
-			if (!(t instanceof FlushTransition)) {
-
-				if (t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getLoad())
-						|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getCmpXchg())
-						|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getAtomicRMW())
-						|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getInvoke())) {
-
-					for (AddressValuePair avp : source.getBuffer().getAddressValuePairs()) {
-
-						if (t.getInstruction() instanceof Load) {
-
-							Load load = (Load) t.getInstruction();
-
-							if (avp.getValue().getValue() instanceof AddressUse
-									&& load.getAddress().getValue() instanceof AddressUse) {
-								AddressUse avpaddress = (AddressUse) avp.getValue().getValue();
-								AddressUse taddress = (AddressUse) load.getAddress().getValue();
-
-								if (avpaddress.getAddress().equals(taddress.getAddress()))
-									return true;
-							} else if(Debug.DEBUG){
-								System.out.println("not of type AddressUse " + t.getSource().getPc() + " to "
-										+ t.getTarget().getPc());
-							}
-						} else if(Debug.DEBUG){
-							System.out.println("t.getInstruction() not of type Load");
-						}
-					}
-				}
-			}
-		}
-		return false;
-	}
+//	private boolean detectEarlyReadforTSO(Transition t) {
+//
+//		ControlFlowLocation source = t.getSource();
+//
+//		if (!source.getBuffer().getAddressValuePairs().isEmpty()) {
+//
+//			if (!(t instanceof FlushTransition)) {
+//
+//				if (t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getLoad())
+//						|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getCmpXchg())
+//						|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getAtomicRMW())
+//						|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getInvoke())) {
+//					
+//					EList<AddressValuePair> avpList = source.getBuffer().getAddressValuePairs();
+//
+//					ListIterator<AddressValuePair> it = avpList.listIterator(avpList.size()-1);
+//
+//					while(it.hasPrevious()){
+//						AddressValuePair avp = (AddressValuePair) it.previous();
+//					
+//						if (t.getInstruction() instanceof Load) {
+//
+//							Load load = (Load) t.getInstruction();
+//							if (avp.getAddress().getValue() instanceof AddressUse
+//									&& load.getAddress().getValue() instanceof AddressUse) {
+//								AddressUse avpaddress = (AddressUse) avp.getAddress().getValue();
+//								AddressUse taddress = (AddressUse) load.getAddress().getValue();
+//
+//								if (avpaddress.getAddress().equals(taddress.getAddress()))
+//									return true;
+//							} else if(Debug.DEBUG){
+//								System.out.println("not of type AddressUse " + t.getSource().getPc() + " to "
+//										+ t.getTarget().getPc());
+//							}
+//						} else if(Debug.DEBUG){
+//							System.out.println("t.getInstruction() not of type Load");
+//						}
+//					}
+//				}
+//			}
+//		}
+//		return false;
+//	}
 
 	/**
 	 * @param cfg
@@ -272,8 +278,8 @@ public class PreComputationChecker {
 
 		if (t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getStore())) {
 			Store store = (Store) t.getInstruction();
-			if (store.getValue().getValue() instanceof AddressUse) {
-				AddressUse storeaddress = (AddressUse) store.getValue().getValue();
+			if (store.getTargetAddress().getValue() instanceof AddressUse) {
+				AddressUse storeaddress = (AddressUse) store.getTargetAddress().getValue();
 
 				if (loadaddress.getAddress().equals(storeaddress.getAddress())) {
 					return true;

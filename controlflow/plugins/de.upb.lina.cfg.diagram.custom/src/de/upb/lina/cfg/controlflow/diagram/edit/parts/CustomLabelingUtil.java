@@ -87,12 +87,14 @@ public class CustomLabelingUtil {
 		}
 		
 		if(t instanceof WriteDefChainTransition){
+			WriteDefChainTransition wdcTransition = (WriteDefChainTransition) t;
+			
 			Store store = (Store) t.getInstruction();
-			String s = toString(store.getValue())+"*" + ASSIGN;
-			s += toString(store.getValue());
+			String s = wdcTransition.getCopyAddress().getName() + ASSIGN;
+			s += toString(store.getTargetAddress());
 			result += STORE + WS;
-			result += toString(store.getTargetAddress());
-			result += toString(store.getValue())+"*";
+			result += toString(store.getValue());
+			result += wdcTransition.getCopyAddress().getName();
 			return s + " , " + result;
 		}
 
@@ -117,8 +119,8 @@ public class CustomLabelingUtil {
 		else if (type.equals(LlvmPackage.eINSTANCE.getStore())) {
 			Store instr = (Store) t.getInstruction();
 			result += STORE + WS;
-			result += toString(instr.getTargetAddress());
 			result += toString(instr.getValue());
+			result += toString(instr.getTargetAddress());
 		}
 		// Branch
 		else if (type.equals(LlvmPackage.eINSTANCE.getBranch())) {
