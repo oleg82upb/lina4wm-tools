@@ -28,7 +28,9 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//Transition/target"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ControlFlow.ecore#//Transition/diagram"/>
     </genClasses>
-    <genClasses ecoreClass="ControlFlow.ecore#//WriteDefChainTransition"/>
+    <genClasses ecoreClass="ControlFlow.ecore#//WriteDefChainTransition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//WriteDefChainTransition/copyAddress"/>
+    </genClasses>
     <genClasses ecoreClass="ControlFlow.ecore#//EarlyReadTransition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ControlFlow.ecore#//EarlyReadTransition/assignmentExpression"/>
     </genClasses>

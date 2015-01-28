@@ -38,7 +38,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="diagram" eType="#//ControlFlowDiagram"
         eOpposite="#//ControlFlowDiagram/transitions"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="WriteDefChainTransition" eSuperTypes="#//Transition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="WriteDefChainTransition" eSuperTypes="#//Transition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="copyAddress" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Address"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EarlyReadTransition" eSuperTypes="#//Transition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="assignmentExpression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>

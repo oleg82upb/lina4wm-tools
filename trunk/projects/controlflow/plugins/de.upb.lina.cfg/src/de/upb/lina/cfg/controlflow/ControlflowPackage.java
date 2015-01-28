@@ -303,13 +303,22 @@ public interface ControlflowPackage extends EPackage {
 	int WRITE_DEF_CHAIN_TRANSITION__DIAGRAM = TRANSITION__DIAGRAM;
 
 	/**
+	 * The feature id for the '<em><b>Copy Address</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WRITE_DEF_CHAIN_TRANSITION__COPY_ADDRESS = TRANSITION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Write Def Chain Transition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WRITE_DEF_CHAIN_TRANSITION_FEATURE_COUNT = TRANSITION_FEATURE_COUNT + 0;
+	int WRITE_DEF_CHAIN_TRANSITION_FEATURE_COUNT = TRANSITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.EarlyReadTransitionImpl <em>Early Read Transition</em>}' class.
@@ -858,6 +867,17 @@ public interface ControlflowPackage extends EPackage {
 	EClass getWriteDefChainTransition();
 
 	/**
+	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.controlflow.WriteDefChainTransition#getCopyAddress <em>Copy Address</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Copy Address</em>'.
+	 * @see de.upb.lina.cfg.controlflow.WriteDefChainTransition#getCopyAddress()
+	 * @see #getWriteDefChainTransition()
+	 * @generated
+	 */
+	EReference getWriteDefChainTransition_CopyAddress();
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.EarlyReadTransition <em>Early Read Transition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1194,6 +1214,14 @@ public interface ControlflowPackage extends EPackage {
 		 * @generated
 		 */
 		EClass WRITE_DEF_CHAIN_TRANSITION = eINSTANCE.getWriteDefChainTransition();
+
+		/**
+		 * The meta object literal for the '<em><b>Copy Address</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference WRITE_DEF_CHAIN_TRANSITION__COPY_ADDRESS = eINSTANCE.getWriteDefChainTransition_CopyAddress();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.EarlyReadTransitionImpl <em>Early Read Transition</em>}' class.
