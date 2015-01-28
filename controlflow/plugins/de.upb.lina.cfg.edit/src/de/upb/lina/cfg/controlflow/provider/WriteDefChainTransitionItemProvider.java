@@ -3,12 +3,14 @@
 package de.upb.lina.cfg.controlflow.provider;
 
 
+import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 /**
@@ -39,8 +41,31 @@ public class WriteDefChainTransitionItemProvider extends TransitionItemProvider 
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addCopyAddressPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Copy Address feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCopyAddressPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_WriteDefChainTransition_copyAddress_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_WriteDefChainTransition_copyAddress_feature", "_UI_WriteDefChainTransition_type"),
+				 ControlflowPackage.Literals.WRITE_DEF_CHAIN_TRANSITION__COPY_ADDRESS,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
