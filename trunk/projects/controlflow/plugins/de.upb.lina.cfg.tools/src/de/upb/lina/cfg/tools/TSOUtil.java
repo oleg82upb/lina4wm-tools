@@ -146,8 +146,9 @@ public class TSOUtil {
 			List<ControlFlowLocation> toBeProcessed,
 			ControlFlowLocation toExplore, Instruction nextInstruction) {
 
+		StoreBuffer buffer = createFlushedStoreBuffer(toExplore.getBuffer());
 		ControlFlowLocation nextLocation = createControlFlowLocation(cfg, toExplore.getPc(),
-				createFlushedStoreBuffer(toExplore.getBuffer()), util.findLabelByInstruction(function, nextInstruction));
+				buffer, util.findLabelByInstruction(function, nextInstruction));
 		Transition transition = createFlushTransition(cfg);
 		transition.setSource(toExplore);
 		transition.setTarget(nextLocation);
@@ -167,15 +168,15 @@ public class TSOUtil {
 		if (nextInstruction.eClass().equals(LlvmPackage.eINSTANCE.getBranch())) {
 			Branch branch = (Branch) nextInstruction;
 			// no jump, real branch
-			StoreBuffer buffer = createStoreBuffer(toExplore.getBuffer(), branch);
 			if (branch.getElseDestination() != null) {
 				GuardedTransition trueCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
 
 				Instruction trueInstruction = util.getInstructionWithLabel(function,
 						branch.getDestination().substring(1));
+				StoreBuffer trueBuffer = createStoreBuffer(toExplore.getBuffer(), branch);
 				ControlFlowLocation trueLocation = createControlFlowLocation(cfg,
 						util.getPcOfInstruction(trueInstruction, instructions),
-						buffer, instructionLabel);
+						trueBuffer, instructionLabel);
 				trueCase.setSource(toExplore);
 				trueCase.setTarget(trueLocation);
 				trueCase.setInstruction(branch);
@@ -184,9 +185,10 @@ public class TSOUtil {
 
 				Instruction elseInstruction = util.getInstructionWithLabel(function, branch.getElseDestination()
 						.substring(1));
+				StoreBuffer elseBuffer = createStoreBuffer(toExplore.getBuffer(), branch);
 				ControlFlowLocation falseLocation = createControlFlowLocation(cfg,
 						util.getPcOfInstruction(elseInstruction, instructions),
-						buffer, instructionLabel);
+						elseBuffer, instructionLabel);
 				GuardedTransition falseCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
 				falseCase.setSource(toExplore);
 				falseCase.setTarget(falseLocation);
@@ -208,6 +210,7 @@ public class TSOUtil {
 				Transition t = createTransition(cfg, branch);
 				Instruction trueInstruction = util.getInstructionWithLabel(function,
 						branch.getDestination().substring(1));
+				StoreBuffer buffer = createStoreBuffer(toExplore.getBuffer(), branch);
 				ControlFlowLocation nextLocation = createControlFlowLocation(cfg,
 						util.getPcOfInstruction(trueInstruction, instructions),
 						buffer, instructionLabel);
