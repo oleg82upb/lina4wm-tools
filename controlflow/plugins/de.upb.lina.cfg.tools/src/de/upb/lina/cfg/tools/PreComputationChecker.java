@@ -1,29 +1,42 @@
 package de.upb.lina.cfg.tools;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
-
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-
 import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.FlushTransition;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.llvm_parser.llvm.AddressUse;
+import de.upb.llvm_parser.llvm.Alloc;
+import de.upb.llvm_parser.llvm.ArithmeticOperation;
+import de.upb.llvm_parser.llvm.Call;
+import de.upb.llvm_parser.llvm.Cast;
+import de.upb.llvm_parser.llvm.Compare;
+import de.upb.llvm_parser.llvm.ExtractElement;
+import de.upb.llvm_parser.llvm.ExtractValue;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
+import de.upb.llvm_parser.llvm.GetElementPtr;
+import de.upb.llvm_parser.llvm.InsertElement;
+import de.upb.llvm_parser.llvm.InsertValue;
 import de.upb.llvm_parser.llvm.LLVM;
+import de.upb.llvm_parser.llvm.LandingPad;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Load;
+import de.upb.llvm_parser.llvm.LogicOperation;
+import de.upb.llvm_parser.llvm.Phi;
+import de.upb.llvm_parser.llvm.ShuffleVector;
 import de.upb.llvm_parser.llvm.Store;
+import de.upb.llvm_parser.llvm.VariableAttributeAccess;
 import de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl;
 
 public class PreComputationChecker {
@@ -138,17 +151,17 @@ public class PreComputationChecker {
 			}
 			loopWithoutFence = loopWithoutFence | loopWithoutFenceinfunc;
 		}
-		if(Debug.DEBUG)
-		System.out.println("Loop without fence:" + loopWithoutFence);
+		if (Debug.DEBUG)
+			System.out.println("Loop without fence:" + loopWithoutFence);
 		return loopWithoutFence;
 
 	}
 
-	/**
-	 * @param cfg
-	 *            ControlFlowDiagram with TSO semantic
-	 * @return a list of transitions which are early reads
-	 */
+//	/**
+//	 * @param cfg
+//	 *            ControlFlowDiagram with TSO semantic
+//	 * @return a list of transitions which are early reads
+//	 */
 //	public List<Transition> collectEarlyReadsinTSOGraph(ControlFlowDiagram cfg) {
 //
 //		List<Transition> earlyReads = new ArrayList<Transition>();
@@ -160,12 +173,12 @@ public class PreComputationChecker {
 //		}
 //		return earlyReads;
 //	}
-
-	/**
-	 * @param t
-	 *            a transition, which is a load-instruction
-	 * @return <code>true</code> if the transition is an early read
-	 */
+//
+//	/**
+//	 * @param t
+//	 *            a transition, which is a load-instruction
+//	 * @return <code>true</code> if the transition is an early read
+//	 */
 //	private boolean detectEarlyReadforTSO(Transition t) {
 //
 //		ControlFlowLocation source = t.getSource();
@@ -339,5 +352,172 @@ public class PreComputationChecker {
 		// no loop without fence found
 		explored.remove(t);
 		return false;
+	}
+
+	public List<Transition> checkForWriteDefChains(ControlFlowDiagram cfg) {
+		EList<Transition> TransitionList = cfg.getTransitions();
+		List<Transition> writedefchains = new ArrayList<Transition>();
+		// find all writes
+		if(Debug.DEBUG){
+			System.out.print("WriteDefChains: ");
+		}
+		for (Transition t : TransitionList) {
+			if (t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getStore())) {
+				// check for all writes whether they are in a writeDefChain
+				if (detectWriteDefChain(t)) {
+					writedefchains.add(t);
+					if(Debug.DEBUG){
+						System.out.println(t.getSource().getPc()+" to "+t.getTarget().getPc());
+					}
+				}
+			}
+		}
+		if(Debug.DEBUG){
+			System.out.println();
+		}
+		return writedefchains;
+	}
+
+	private boolean detectWriteDefChain(Transition write) {
+		Store store = (Store) write.getInstruction();
+		for (Transition t : write.getTarget().getOutgoing()) {
+			Transition def = findDefinition(store, t);
+			if (def != null) {
+				if(findWayBack(def, write)){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean findWayBack(Transition start, Transition finish) {
+		
+		//way back found
+		if(start.equals(finish)) return true;
+		
+		//find way from start to store
+		for(Transition t : start.getTarget().getOutgoing()){
+			if(findWayBack(t, finish)){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private Transition findDefinition(Store store, Transition t) {
+		//sync between write and def
+		EObject instructiontype = t.getInstruction().eClass();
+		if (instructiontype.equals(LlvmPackage.eINSTANCE.getFence())
+				|| instructiontype.equals(LlvmPackage.eINSTANCE.getCmpXchg())
+				|| instructiontype.equals(LlvmPackage.eINSTANCE.getAtomicRMW())) {
+			return null;
+		}
+		
+		String storeAddress = ((AddressUse)store.getTargetAddress().getValue()).getAddress().getName();
+		
+		//FIXME: which of them are needed?
+		
+		if(instructiontype.equals(LlvmPackage.eINSTANCE.getArithmeticOperation())){
+			ArithmeticOperation op = (ArithmeticOperation) t.getInstruction();
+			if(op.getResult().getName().equals(storeAddress)){
+				return t;
+			}
+		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getLogicOperation())){
+			LogicOperation op = (LogicOperation) t.getInstruction();	
+			if(op.getResult().getName().equals(storeAddress)){
+				return t;
+			}
+		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getCast())){
+			Cast op = (Cast) t.getInstruction();		
+			if(op.getResult().getName().equals(storeAddress)){
+				return t;
+			}
+		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getGetElementPtr())){
+			GetElementPtr op = (GetElementPtr) t.getInstruction();		
+			if(op.getResult().getName().equals(storeAddress)){
+				return t;
+			}
+		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getLoad())){
+			Load op = (Load) t.getInstruction();		
+			if(op.getResult().getName().equals(storeAddress)){
+				return t;
+			}
+//		}else if(instructiontype.equals(LlvmPackage.eINSTANCE.getStore())){
+//			Store op = (Store) t.getInstruction();		
+//			if(((AddressUse)op.getTargetAddress().getValue()).getAddress().getName().equals(storeAddress)){
+//				return true;
+//			}
+		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getCall())){
+			Call op = (Call) t.getInstruction();		
+			if(op.getResult().getName().equals(storeAddress)){
+				return t;
+			}
+		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getAlloc())){
+			Alloc op = (Alloc) t.getInstruction();		
+			if(op.getResult().getName().equals(storeAddress)){
+				return t;
+			}
+		}else if(instructiontype.equals(LlvmPackage.eINSTANCE.getPhi())){
+			Phi op = (Phi) t.getInstruction();		
+			if(op.getResult().getName().equals(storeAddress)){
+				return t;
+			}
+		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getLandingPad())){
+			LandingPad op =  (LandingPad) t.getInstruction();		
+			if(op.getResult().getName().equals(storeAddress)){
+				return t;
+			}
+		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getSelect())){
+			Phi op = (Phi) t.getInstruction();		
+			if(op.getResult().getName().equals(storeAddress)){
+				return t;
+			}
+		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getVariableAttributeAccess())){
+			VariableAttributeAccess op = (VariableAttributeAccess) t.getInstruction();		
+			if(op.getResult().getName().equals(storeAddress)){
+				return t;
+			}
+		}else if(instructiontype.equals(LlvmPackage.eINSTANCE.getExtractValue())){
+			ExtractValue op = (ExtractValue) t.getInstruction();		
+			if(op.getResult().getName().equals(storeAddress)){
+				return t;
+			}
+		}else if( storeAddress.equals(LlvmPackage.eINSTANCE.getExtractElement())){
+			ExtractElement op = (ExtractElement) t.getInstruction();		
+			if(op.getResult().getName().equals(storeAddress)){
+				return t;
+			}
+		}else if( storeAddress.equals(LlvmPackage.eINSTANCE.getInsertValue())){
+			InsertValue op = (InsertValue) t.getInstruction();		
+			if(op.getResult().getName().equals(storeAddress)){
+				return t;
+			}
+		}else if( storeAddress.equals(LlvmPackage.eINSTANCE.getInsertElement())){
+			InsertElement op = (InsertElement) t.getInstruction();		
+			if(op.getResult().getName().equals(storeAddress)){
+				return t;
+			}
+		}else if( storeAddress.equals(LlvmPackage.eINSTANCE.getShuffleVector())){
+			ShuffleVector op = (ShuffleVector) t.getInstruction();		
+			if(op.getResult().getName().equals(storeAddress)){
+				return t;
+			}
+		}else if( storeAddress.equals(LlvmPackage.eINSTANCE.getCompare())){
+			Compare op = (Compare) t.getInstruction();		
+			if(op.getResult().getName().equals(storeAddress)){
+				return t;
+			}
+		}
+		
+		//search in all outgoing nodes for a definition
+		for (Transition nextTransition : t.getTarget().getOutgoing()) {
+			Transition def = findDefinition(store, nextTransition);
+			if(def != null){
+				return def;
+			}
+		}
+		
+		return null;
 	}
 }
