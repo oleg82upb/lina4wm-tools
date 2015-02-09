@@ -36,7 +36,6 @@ import de.upb.llvm_parser.llvm.Value;
 public class TSOUtil {
 	private List<Instruction> instructions = new ArrayList<Instruction>();
 	private List<ControlFlowLocation> processed = new ArrayList<ControlFlowLocation>();
-	private List<Instruction> specialstores = new ArrayList<Instruction>();
 	private HashMap<Address, Address> writeDefMap = new HashMap<Address, Address>();//orgAdr is key, copy is value
 
 	private GraphUtility util = new GraphUtility();
@@ -56,7 +55,9 @@ public class TSOUtil {
 				.createControlFlowDiagram();
 		SCUtil sc = new SCUtil();
 		PreComputationChecker checker = new PreComputationChecker("", 0);
-		List<Transition> earlyReadsInFunction = checker.collectEarlyReadsinSCGraph(sc.createCFG(function));
+		ControlFlowDiagram scCfg = sc.createCFG(function);
+		List<Transition> earlyReadsInFunction = checker.collectEarlyReadsinSCGraph(scCfg);
+		List<Transition> writeDefChains = checker.checkForWriteDefChains(scCfg);
 
 		cfg.setName(function.getAddress().getName());
 		List<ControlFlowLocation> toBeProcessed = new ArrayList<ControlFlowLocation>();
@@ -69,19 +70,6 @@ public class TSOUtil {
 				instructions.add(i);
 			}
 		}
-
-		//FIXME: delete if check for write-def-chains exists
-		// because this is just for testing...
-		if (Debug.DEBUG) {
-			for (Instruction instruction : instructions) {
-				if (instruction instanceof Store) {
-					specialstores.add(instruction);
-					break;
-				}
-
-			}
-		}
-
 		// first node
 		String instructionLabel = util.findLabelByInstruction(function, instructions.get(0));
 		StoreBuffer buffer = ControlflowFactory.eINSTANCE.createStoreBuffer();
@@ -105,7 +93,7 @@ public class TSOUtil {
 			// empty buffer
 			if (toExplore.getBuffer().getAddressValuePairs().isEmpty()) {
 				if (nextInstruction != null) {
-					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction, earlyReadsInFunction);
+					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction, earlyReadsInFunction, writeDefChains);
 				}
 
 				// buffer with entries
@@ -121,7 +109,7 @@ public class TSOUtil {
 				// create normal SC behavior
 				if (nextInstruction != null && !util.isSynch(nextInstruction)) {
 					// other options -SC
-					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction, earlyReadsInFunction);
+					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction, earlyReadsInFunction, writeDefChains);
 				}
 			}
 			// last
@@ -160,7 +148,7 @@ public class TSOUtil {
 
 	private void addNonFlushOptions(ProgramCounter pc, ControlFlowDiagram cfg, 
 			List<ControlFlowLocation> toBeProcessed,
-			ControlFlowLocation toExplore, Instruction nextInstruction, List<Transition> earlyReadsInFunction) {
+			ControlFlowLocation toExplore, Instruction nextInstruction, List<Transition> earlyReadsInFunction, List<Transition> writeDefChains) {
 		
 		String instructionLabel = util.findLabelByInstruction(function, nextInstruction);
 		
@@ -225,11 +213,10 @@ public class TSOUtil {
 			Switch swit = (Switch) nextInstruction;
 
 			Instruction defaultInstruction = util.getInstructionWithLabel(function, swit.getDefaultCase());
+			StoreBuffer defaultBuffer = createStoreBuffer(toExplore.getBuffer(), swit);
 			ControlFlowLocation defaultLocation = createControlFlowLocation(cfg,
 					util.getPcOfInstruction(defaultInstruction, instructions),
-					//FIXME
-					createStoreBuffer(toExplore.getBuffer(), defaultInstruction),
-					instructionLabel);
+					defaultBuffer, instructionLabel);
 
 			GuardedTransition defaultCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
 			defaultCase.setCondition("else");
@@ -245,11 +232,10 @@ public class TSOUtil {
 			for (SwitchCase sc : swit.getCases()) {
 				Instruction caseInstruction = util.getInstructionWithLabel(function,
 						util.valueToString(sc.getCaseValue().getValue()));
+				StoreBuffer caseBuffer = createStoreBuffer(toExplore.getBuffer(), swit);
 				ControlFlowLocation caseLocation = createControlFlowLocation(cfg,
 						util.getPcOfInstruction(caseInstruction, instructions),
-						//FIXME
-						createStoreBuffer(toExplore.getBuffer(), caseInstruction),
-						instructionLabel);
+						caseBuffer,	instructionLabel);
 
 				GuardedTransition caseC = ControlflowFactory.eINSTANCE.createGuardedTransition();
 				caseC.setCondition("else");
@@ -268,9 +254,8 @@ public class TSOUtil {
 			throw new RuntimeException(
 					"IndirectBranch found. Handling of such is not implemented yet");
 
-			// FIXME: replace by real check for write-def-chains
 			//check if nextInstruction is store in WriteDefChain
-		} else if (specialstores.contains(nextInstruction) && nextInstruction instanceof Store) {
+		} else if (nextInstruction instanceof Store && instructionIsWriteDefChain(writeDefChains, toExplore, nextInstruction)) {
 
 			Store store = (Store) nextInstruction;
 			WriteDefChainTransition transition = createWriteDefChainTransition(cfg, nextInstruction);
@@ -320,9 +305,9 @@ public class TSOUtil {
 			// normal writes will be dealt here
 
 			Transition t = createTransition(cfg, nextInstruction);
+			StoreBuffer buffer = createStoreBuffer(toExplore.getBuffer(), nextInstruction);
 			ControlFlowLocation nextLocation = createControlFlowLocation(cfg, toExplore.getPc() + 1,
-					createStoreBuffer(toExplore.getBuffer(), nextInstruction),
-					instructionLabel);
+					buffer,	instructionLabel);
 			t.setSource(toExplore);
 			t.setTarget(nextLocation);
 
@@ -492,6 +477,17 @@ public class TSOUtil {
 		return transition;
 	}
 
+	private boolean instructionIsWriteDefChain(List<Transition> wdcInScGraph, ControlFlowLocation toExplore, Instruction store ){
+		for(Transition t : wdcInScGraph){
+			if(t.getInstruction().equals(store) 
+					&& t.getSource().getPc() == toExplore.getPc()
+					&& t.getTarget().getPc() == toExplore.getPc() + 1){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	private String instructionIsEarlyRead(List<Transition> earlyReadsInFunction, ControlFlowLocation toExplore,
 			Instruction nextInstruction) {
 		for (Transition transition : earlyReadsInFunction) {
