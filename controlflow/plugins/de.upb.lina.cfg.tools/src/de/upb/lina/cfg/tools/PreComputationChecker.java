@@ -261,7 +261,7 @@ public class PreComputationChecker {
 				if (isEarlyRead(tr, explored, t))
 					return true;
 		} else if(Debug.DEBUG){
-			System.out.println("t.getInstruction() of type " + t.getInstruction().toString());
+			System.out.println("load.getAddress().getValue() of type " + load.getAddress().getValue().toString());
 		}
 		return false;
 	}
@@ -313,9 +313,11 @@ public class PreComputationChecker {
 
 	public boolean containsLoopWithoutFences(ControlFlowDiagram cfg) {
 		List<Transition> transitions = cfg.getTransitions();
-		for (Transition t : transitions)
-			if (detectLoopWithoutFence(t))
+		for (Transition t : transitions){
+			if (t.getInstruction() instanceof Store && detectLoopWithoutFence(t)){
 				return true;
+			}
+		}
 
 		return false;
 	}
@@ -324,12 +326,12 @@ public class PreComputationChecker {
 		List<Transition> explored = new ArrayList<Transition>();
 		explored.add(t);
 		for (Transition tr : t.getTarget().getOutgoing())
-			if (isLoopWithoutFence(tr, explored))
+			if (isLoopWithoutFence(tr, explored, t))
 				return true;
 		return false;
 	}
 
-	private boolean isLoopWithoutFence(Transition t, List<Transition> explored) {
+	private boolean isLoopWithoutFence(Transition t, List<Transition> explored, Transition write) {
 		// fence found
 		if (t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getFence())
 				|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getCmpXchg())
@@ -337,8 +339,13 @@ public class PreComputationChecker {
 			return false;
 		}
 		// loop without fence found
-		if (explored.contains(t)) {
+		if(t.equals(write)){
 			return true;
+		}
+		
+		//loop found, but no write inside the loop
+		if (explored.contains(t)) {
+			return false;
 		}
 		// reached end of graph
 		if (t.getTarget().getOutgoing().isEmpty())
@@ -346,8 +353,9 @@ public class PreComputationChecker {
 		// check for all outgoing transitions
 		explored.add(t);
 		for (Transition transition : t.getTarget().getOutgoing()) {
-			if (isLoopWithoutFence(transition, explored))
+			if (isLoopWithoutFence(transition, explored, write)){
 				return true;
+			}
 		}
 		// no loop without fence found
 		explored.remove(t);
@@ -380,8 +388,10 @@ public class PreComputationChecker {
 
 	private boolean detectWriteDefChain(Transition write) {
 		Store store = (Store) write.getInstruction();
+		List<Transition> explored = new ArrayList<Transition>();
+		explored.add(write);
 		for (Transition t : write.getTarget().getOutgoing()) {
-			Transition def = findDefinition(store, t);
+			Transition def = findDefinition(store, t, explored);
 			if (def != null) {
 				if(findWayBack(def, write)){
 					return true;
@@ -405,7 +415,13 @@ public class PreComputationChecker {
 		return false;
 	}
 
-	private Transition findDefinition(Store store, Transition t) {
+	private Transition findDefinition(Store store, Transition t, List<Transition> explored) {
+		
+		//loop 
+		if(explored.contains(t)){
+			return null;
+		}
+		
 		//sync between write and def
 		EObject instructiontype = t.getInstruction().eClass();
 		if (instructiontype.equals(LlvmPackage.eINSTANCE.getFence())
@@ -446,7 +462,7 @@ public class PreComputationChecker {
 //		}else if(instructiontype.equals(LlvmPackage.eINSTANCE.getStore())){
 //			Store op = (Store) t.getInstruction();		
 //			if(((AddressUse)op.getTargetAddress().getValue()).getAddress().getName().equals(storeAddress)){
-//				return true;
+//				return t;
 //			}
 		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getCall())){
 			Call op = (Call) t.getInstruction();		
@@ -483,41 +499,41 @@ public class PreComputationChecker {
 			if(op.getResult().getName().equals(storeAddress)){
 				return t;
 			}
-		}else if( storeAddress.equals(LlvmPackage.eINSTANCE.getExtractElement())){
+		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getExtractElement())){
 			ExtractElement op = (ExtractElement) t.getInstruction();		
 			if(op.getResult().getName().equals(storeAddress)){
 				return t;
 			}
-		}else if( storeAddress.equals(LlvmPackage.eINSTANCE.getInsertValue())){
+		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getInsertValue())){
 			InsertValue op = (InsertValue) t.getInstruction();		
 			if(op.getResult().getName().equals(storeAddress)){
 				return t;
 			}
-		}else if( storeAddress.equals(LlvmPackage.eINSTANCE.getInsertElement())){
+		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getInsertElement())){
 			InsertElement op = (InsertElement) t.getInstruction();		
 			if(op.getResult().getName().equals(storeAddress)){
 				return t;
 			}
-		}else if( storeAddress.equals(LlvmPackage.eINSTANCE.getShuffleVector())){
+		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getShuffleVector())){
 			ShuffleVector op = (ShuffleVector) t.getInstruction();		
 			if(op.getResult().getName().equals(storeAddress)){
 				return t;
 			}
-		}else if( storeAddress.equals(LlvmPackage.eINSTANCE.getCompare())){
+		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getCompare())){
 			Compare op = (Compare) t.getInstruction();		
 			if(op.getResult().getName().equals(storeAddress)){
 				return t;
 			}
 		}
-		
+		explored.add(t);
 		//search in all outgoing nodes for a definition
 		for (Transition nextTransition : t.getTarget().getOutgoing()) {
-			Transition def = findDefinition(store, nextTransition);
+			Transition def = findDefinition(store, nextTransition, explored);
 			if(def != null){
 				return def;
 			}
 		}
-		
+		explored.remove(t);
 		return null;
 	}
 }
