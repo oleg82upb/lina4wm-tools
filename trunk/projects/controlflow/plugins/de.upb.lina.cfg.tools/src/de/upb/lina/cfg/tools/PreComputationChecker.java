@@ -3,6 +3,7 @@ package de.upb.lina.cfg.tools;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -11,11 +12,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+
 import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.FlushTransition;
 import de.upb.lina.cfg.controlflow.Transition;
+import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.ArithmeticOperation;
@@ -87,43 +90,44 @@ public class PreComputationChecker {
 
 			if (ast.getElements().get(i) instanceof FunctionDefinitionImpl) {
 				FunctionDefinition func = (FunctionDefinition) ast.getElements().get(i);
-				if (func.getBody() != null)
+				if (func.getBody() != null) {
 
 					if (reordering == TSO) {
 						// create sc-graph and search for possible early reads
 						SCUtil sc = new SCUtil();
 						earlyReadsInFunction = collectEarlyReadsinSCGraph(sc.createCFG(func));
-						if(!earlyReadsInFunction.isEmpty()){
+						if (!earlyReadsInFunction.isEmpty()) {
 							functions.add(func);
 						}
 					}
-				if (Debug.DEBUG) {
+					if (Debug.DEBUG) {
 
-					if (Debug.DEBUG && earlyReadsInFunction.isEmpty()) {
-						System.out.println("No early reads found in function " + func.getAddress().getName());
-					} else {
-						System.out.println("Early reads found in function " + func.getAddress().getName()
-								+ " at transition:");
-						for (Transition t : earlyReadsInFunction)
-							System.out.print(t.getSource().getPc() + " to " + t.getTarget().getPc() + "  ");
+						if (Debug.DEBUG && earlyReadsInFunction.isEmpty()) {
+							System.out.println("No early reads found in function " + func.getAddress().getName());
+						} else {
+							System.out.println("Early reads found in function " + func.getAddress().getName()
+									+ " at transition:");
+							for (Transition t : earlyReadsInFunction)
+								System.out.print(t.getSource().getPc() + " to " + t.getTarget().getPc() + "  ");
+						}
+						System.out.println();
 					}
-					System.out.println();
 				}
 			}
 			earlyReads.addAll(earlyReadsInFunction);
 		}
 		return !earlyReads.isEmpty();
 	}
-	
 
 	/**
-	 * This method should only be called if checkForEarlyReads() was called before 
+	 * This method should only be called if checkForEarlyReads() was called
+	 * before
+	 * 
 	 * @return the functions
 	 */
 	public List<FunctionDefinition> getFunctions() {
 		return functions;
 	}
-
 
 	public boolean checkforLoopWithoutFence() throws InterruptedException {
 
@@ -157,72 +161,6 @@ public class PreComputationChecker {
 
 	}
 
-//	/**
-//	 * @param cfg
-//	 *            ControlFlowDiagram with TSO semantic
-//	 * @return a list of transitions which are early reads
-//	 */
-//	public List<Transition> collectEarlyReadsinTSOGraph(ControlFlowDiagram cfg) {
-//
-//		List<Transition> earlyReads = new ArrayList<Transition>();
-//		EList<Transition> TransitionList = cfg.getTransitions();
-//		for (Transition t : TransitionList) {
-//			if (detectEarlyReadforTSO(t)) {
-//				earlyReads.add(t);
-//			}
-//		}
-//		return earlyReads;
-//	}
-//
-//	/**
-//	 * @param t
-//	 *            a transition, which is a load-instruction
-//	 * @return <code>true</code> if the transition is an early read
-//	 */
-//	private boolean detectEarlyReadforTSO(Transition t) {
-//
-//		ControlFlowLocation source = t.getSource();
-//
-//		if (!source.getBuffer().getAddressValuePairs().isEmpty()) {
-//
-//			if (!(t instanceof FlushTransition)) {
-//
-//				if (t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getLoad())
-//						|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getCmpXchg())
-//						|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getAtomicRMW())
-//						|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getInvoke())) {
-//					
-//					EList<AddressValuePair> avpList = source.getBuffer().getAddressValuePairs();
-//
-//					ListIterator<AddressValuePair> it = avpList.listIterator(avpList.size()-1);
-//
-//					while(it.hasPrevious()){
-//						AddressValuePair avp = (AddressValuePair) it.previous();
-//					
-//						if (t.getInstruction() instanceof Load) {
-//
-//							Load load = (Load) t.getInstruction();
-//							if (avp.getAddress().getValue() instanceof AddressUse
-//									&& load.getAddress().getValue() instanceof AddressUse) {
-//								AddressUse avpaddress = (AddressUse) avp.getAddress().getValue();
-//								AddressUse taddress = (AddressUse) load.getAddress().getValue();
-//
-//								if (avpaddress.getAddress().equals(taddress.getAddress()))
-//									return true;
-//							} else if(Debug.DEBUG){
-//								System.out.println("not of type AddressUse " + t.getSource().getPc() + " to "
-//										+ t.getTarget().getPc());
-//							}
-//						} else if(Debug.DEBUG){
-//							System.out.println("t.getInstruction() not of type Load");
-//						}
-//					}
-//				}
-//			}
-//		}
-//		return false;
-//	}
-
 	/**
 	 * @param cfg
 	 *            ControlFlowDiagram with SC semantic
@@ -249,7 +187,8 @@ public class PreComputationChecker {
 	}
 
 	/**
-	 * @param t a transition, which is a load-instruction
+	 * @param t
+	 *            a transition, which is a load-instruction
 	 * @return <code>true</code> if the transition is a possible early read
 	 */
 	private boolean detectEarlyReadforSC(Transition t) {
@@ -260,16 +199,19 @@ public class PreComputationChecker {
 			for (Transition tr : t.getSource().getIncoming())
 				if (isEarlyRead(tr, explored, t))
 					return true;
-		} else if(Debug.DEBUG){
+		} else if (Debug.DEBUG) {
 			System.out.println("load.getAddress().getValue() of type " + load.getAddress().getValue().toString());
 		}
 		return false;
 	}
 
 	/**
-	 * @param t the transition to be checked for being a store
-	 * @param explored list of already checked transitions
-	 * @param load the load transition to be checked
+	 * @param t
+	 *            the transition to be checked for being a store
+	 * @param explored
+	 *            list of already checked transitions
+	 * @param load
+	 *            the load transition to be checked
 	 * @return <code>true</code> if load is an possible early read
 	 */
 	private boolean isEarlyRead(Transition t, List<Transition> explored, Transition load) {
@@ -313,8 +255,8 @@ public class PreComputationChecker {
 
 	public boolean containsLoopWithoutFences(ControlFlowDiagram cfg) {
 		List<Transition> transitions = cfg.getTransitions();
-		for (Transition t : transitions){
-			if (t.getInstruction() instanceof Store && detectLoopWithoutFence(t)){
+		for (Transition t : transitions) {
+			if (t.getInstruction() instanceof Store && detectLoopWithoutFence(t)) {
 				return true;
 			}
 		}
@@ -339,11 +281,11 @@ public class PreComputationChecker {
 			return false;
 		}
 		// loop without fence found
-		if(t.equals(write)){
+		if (t.equals(write)) {
 			return true;
 		}
-		
-		//loop found, but no write inside the loop
+
+		// loop found, but no write inside the loop
 		if (explored.contains(t)) {
 			return false;
 		}
@@ -353,7 +295,7 @@ public class PreComputationChecker {
 		// check for all outgoing transitions
 		explored.add(t);
 		for (Transition transition : t.getTarget().getOutgoing()) {
-			if (isLoopWithoutFence(transition, explored, write)){
+			if (isLoopWithoutFence(transition, explored, write)) {
 				return true;
 			}
 		}
@@ -362,174 +304,200 @@ public class PreComputationChecker {
 		return false;
 	}
 
-	public List<Transition> checkForWriteDefChains(ControlFlowDiagram cfg) {
+	public void checkForWriteDefChains(ControlFlowDiagram cfg) {
 		EList<Transition> TransitionList = cfg.getTransitions();
-		List<Transition> writedefchains = new ArrayList<Transition>();
 		// find all writes
-		if(Debug.DEBUG){
-			System.out.print("WriteDefChains: ");
-		}
+		
 		for (Transition t : TransitionList) {
 			if (t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getStore())) {
 				// check for all writes whether they are in a writeDefChain
-				if (detectWriteDefChain(t)) {
-					writedefchains.add(t);
-					if(Debug.DEBUG){
-						System.out.println(t.getSource().getPc()+" to "+t.getTarget().getPc());
+				detectWriteDefChain(t);
+			}
+		}
+	}
+
+	private List<Transition> wdcAddress = new ArrayList<Transition>();
+	private List<Transition> wdcValue = new ArrayList<Transition>();
+	private List<Transition> wdcAddressValue = new ArrayList<Transition>();
+	
+	/**
+	 * @return the wdcAddress
+	 */
+	public List<Transition> getWdcAddress() {
+		return wdcAddress;
+	}
+
+	/**
+	 * @return the wdcValue
+	 */
+	public List<Transition> getWdcValue() {
+		return wdcValue;
+	}
+
+	/**
+	 * @return the wdcAddressValue
+	 */
+	public List<Transition> getWdcAddressValue() {
+		return wdcAddressValue;
+	}
+
+	private void detectWriteDefChain(Transition write) {
+		Store store = (Store) write.getInstruction();
+		String storeAddress = ((AddressUse) store.getTargetAddress().getValue()).getAddress().getName();
+
+		List<Transition> explored = new ArrayList<Transition>();
+		explored.add(write);
+		for (Transition t : write.getTarget().getOutgoing()) {
+			
+			Transition def = findDefinition(t, explored, storeAddress);
+			if (def != null) {
+				if (findWayBack(def, write)) {
+					wdcAddress.add(write);
+					break;
+				}
+			}
+		}
+		explored.clear();
+		explored.add(write);
+		if (store.getValue().getValue() instanceof AddressUse) {
+			String storeValue = ((AddressUse) store.getValue().getValue()).getAddress().getName();
+			for (Transition t : write.getTarget().getOutgoing()) {
+				Transition def = findDefinition(t, explored, storeValue);
+				if (def != null) {
+					if (findWayBack(def, write)) {
+						wdcValue.add(write);
+						if (wdcAddress.contains(write)) {
+							wdcAddressValue.add(write);
+						}
+						break;
 					}
 				}
 			}
 		}
-		if(Debug.DEBUG){
-			System.out.println();
-		}
-		return writedefchains;
-	}
-
-	private boolean detectWriteDefChain(Transition write) {
-		Store store = (Store) write.getInstruction();
-		List<Transition> explored = new ArrayList<Transition>();
-		explored.add(write);
-		for (Transition t : write.getTarget().getOutgoing()) {
-			Transition def = findDefinition(store, t, explored);
-			if (def != null) {
-				if(findWayBack(def, write)){
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 
 	private boolean findWayBack(Transition start, Transition finish) {
-		
-		//way back found
-		if(start.equals(finish)) return true;
-		
-		//find way from start to store
-		for(Transition t : start.getTarget().getOutgoing()){
-			if(findWayBack(t, finish)){
+
+		// way back found
+		if (start.equals(finish))
+			return true;
+
+		// find way from start to store
+		for (Transition t : start.getTarget().getOutgoing()) {
+			if (findWayBack(t, finish)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	private Transition findDefinition(Store store, Transition t, List<Transition> explored) {
-		
-		//loop 
-		if(explored.contains(t)){
+	private Transition findDefinition(Transition t, List<Transition> explored, String address) {
+
+		// loop
+		if (explored.contains(t)) {
 			return null;
 		}
-		
-		//sync between write and def
+
+		// sync between write and def
 		EObject instructiontype = t.getInstruction().eClass();
 		if (instructiontype.equals(LlvmPackage.eINSTANCE.getFence())
 				|| instructiontype.equals(LlvmPackage.eINSTANCE.getCmpXchg())
 				|| instructiontype.equals(LlvmPackage.eINSTANCE.getAtomicRMW())) {
 			return null;
 		}
+
 		
-		String storeAddress = ((AddressUse)store.getTargetAddress().getValue()).getAddress().getName();
-		
-		//FIXME: which of them are needed?
-		
-		if(instructiontype.equals(LlvmPackage.eINSTANCE.getArithmeticOperation())){
+		if (instructiontype.equals(LlvmPackage.eINSTANCE.getArithmeticOperation())) {
 			ArithmeticOperation op = (ArithmeticOperation) t.getInstruction();
-			if(op.getResult().getName().equals(storeAddress)){
+			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getLogicOperation())){
-			LogicOperation op = (LogicOperation) t.getInstruction();	
-			if(op.getResult().getName().equals(storeAddress)){
+		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getLogicOperation())) {
+			LogicOperation op = (LogicOperation) t.getInstruction();
+			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getCast())){
-			Cast op = (Cast) t.getInstruction();		
-			if(op.getResult().getName().equals(storeAddress)){
+		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getCast())) {
+			Cast op = (Cast) t.getInstruction();
+			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getGetElementPtr())){
-			GetElementPtr op = (GetElementPtr) t.getInstruction();		
-			if(op.getResult().getName().equals(storeAddress)){
+		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getGetElementPtr())) {
+			GetElementPtr op = (GetElementPtr) t.getInstruction();
+			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getLoad())){
-			Load op = (Load) t.getInstruction();		
-			if(op.getResult().getName().equals(storeAddress)){
+		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getLoad())) {
+			Load op = (Load) t.getInstruction();
+			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-//		}else if(instructiontype.equals(LlvmPackage.eINSTANCE.getStore())){
-//			Store op = (Store) t.getInstruction();		
-//			if(((AddressUse)op.getTargetAddress().getValue()).getAddress().getName().equals(storeAddress)){
-//				return t;
-//			}
-		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getCall())){
-			Call op = (Call) t.getInstruction();		
-			if(op.getResult().getName().equals(storeAddress)){
+		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getCall())) {
+			Call op = (Call) t.getInstruction();
+			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getAlloc())){
-			Alloc op = (Alloc) t.getInstruction();		
-			if(op.getResult().getName().equals(storeAddress)){
+		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getAlloc())) {
+			Alloc op = (Alloc) t.getInstruction();
+			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		}else if(instructiontype.equals(LlvmPackage.eINSTANCE.getPhi())){
-			Phi op = (Phi) t.getInstruction();		
-			if(op.getResult().getName().equals(storeAddress)){
+		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getPhi())) {
+			Phi op = (Phi) t.getInstruction();
+			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getLandingPad())){
-			LandingPad op =  (LandingPad) t.getInstruction();		
-			if(op.getResult().getName().equals(storeAddress)){
+		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getLandingPad())) {
+			LandingPad op = (LandingPad) t.getInstruction();
+			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getSelect())){
-			Phi op = (Phi) t.getInstruction();		
-			if(op.getResult().getName().equals(storeAddress)){
+		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getSelect())) {
+			Phi op = (Phi) t.getInstruction();
+			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getVariableAttributeAccess())){
-			VariableAttributeAccess op = (VariableAttributeAccess) t.getInstruction();		
-			if(op.getResult().getName().equals(storeAddress)){
+		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getVariableAttributeAccess())) {
+			VariableAttributeAccess op = (VariableAttributeAccess) t.getInstruction();
+			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		}else if(instructiontype.equals(LlvmPackage.eINSTANCE.getExtractValue())){
-			ExtractValue op = (ExtractValue) t.getInstruction();		
-			if(op.getResult().getName().equals(storeAddress)){
+		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getExtractValue())) {
+			ExtractValue op = (ExtractValue) t.getInstruction();
+			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getExtractElement())){
-			ExtractElement op = (ExtractElement) t.getInstruction();		
-			if(op.getResult().getName().equals(storeAddress)){
+		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getExtractElement())) {
+			ExtractElement op = (ExtractElement) t.getInstruction();
+			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getInsertValue())){
-			InsertValue op = (InsertValue) t.getInstruction();		
-			if(op.getResult().getName().equals(storeAddress)){
+		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getInsertValue())) {
+			InsertValue op = (InsertValue) t.getInstruction();
+			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getInsertElement())){
-			InsertElement op = (InsertElement) t.getInstruction();		
-			if(op.getResult().getName().equals(storeAddress)){
+		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getInsertElement())) {
+			InsertElement op = (InsertElement) t.getInstruction();
+			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getShuffleVector())){
-			ShuffleVector op = (ShuffleVector) t.getInstruction();		
-			if(op.getResult().getName().equals(storeAddress)){
+		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getShuffleVector())) {
+			ShuffleVector op = (ShuffleVector) t.getInstruction();
+			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		}else if( instructiontype.equals(LlvmPackage.eINSTANCE.getCompare())){
-			Compare op = (Compare) t.getInstruction();		
-			if(op.getResult().getName().equals(storeAddress)){
+		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getCompare())) {
+			Compare op = (Compare) t.getInstruction();
+			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
 		}
 		explored.add(t);
-		//search in all outgoing nodes for a definition
+		// search in all outgoing nodes for a definition
 		for (Transition nextTransition : t.getTarget().getOutgoing()) {
-			Transition def = findDefinition(store, nextTransition, explored);
-			if(def != null){
+			Transition def = findDefinition(nextTransition, explored, address);
+			if (def != null) {
 				return def;
 			}
 		}

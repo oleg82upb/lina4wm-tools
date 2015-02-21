@@ -357,6 +357,15 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getWriteDefChainTransition_CopyValue() {
+		return (EReference)writeDefChainTransitionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEarlyReadTransition() {
 		return earlyReadTransitionEClass;
 	}
@@ -535,6 +544,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 
 		writeDefChainTransitionEClass = createEClass(WRITE_DEF_CHAIN_TRANSITION);
 		createEReference(writeDefChainTransitionEClass, WRITE_DEF_CHAIN_TRANSITION__COPY_ADDRESS);
+		createEReference(writeDefChainTransitionEClass, WRITE_DEF_CHAIN_TRANSITION__COPY_VALUE);
 
 		earlyReadTransitionEClass = createEClass(EARLY_READ_TRANSITION);
 		createEAttribute(earlyReadTransitionEClass, EARLY_READ_TRANSITION__ASSIGNMENT_EXPRESSION);
@@ -619,6 +629,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 
 		initEClass(writeDefChainTransitionEClass, WriteDefChainTransition.class, "WriteDefChainTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getWriteDefChainTransition_CopyAddress(), theLlvmPackage.getAddress(), null, "copyAddress", null, 0, 1, WriteDefChainTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWriteDefChainTransition_CopyValue(), theLlvmPackage.getAddress(), null, "copyValue", null, 0, 1, WriteDefChainTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(earlyReadTransitionEClass, EarlyReadTransition.class, "EarlyReadTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEarlyReadTransition_AssignmentExpression(), ecorePackage.getEString(), "assignmentExpression", null, 0, 1, EarlyReadTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

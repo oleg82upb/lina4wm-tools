@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.WriteDefChainTransitionImpl#getCopyAddress <em>Copy Address</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.impl.WriteDefChainTransitionImpl#getCopyValue <em>Copy Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -34,6 +35,16 @@ public class WriteDefChainTransitionImpl extends TransitionImpl implements Write
 	 * @ordered
 	 */
 	protected Address copyAddress;
+
+	/**
+	 * The cached value of the '{@link #getCopyValue() <em>Copy Value</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCopyValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected Address copyValue;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -97,12 +108,53 @@ public class WriteDefChainTransitionImpl extends TransitionImpl implements Write
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Address getCopyValue() {
+		if (copyValue != null && copyValue.eIsProxy()) {
+			InternalEObject oldCopyValue = (InternalEObject)copyValue;
+			copyValue = (Address)eResolveProxy(oldCopyValue);
+			if (copyValue != oldCopyValue) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ControlflowPackage.WRITE_DEF_CHAIN_TRANSITION__COPY_VALUE, oldCopyValue, copyValue));
+			}
+		}
+		return copyValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Address basicGetCopyValue() {
+		return copyValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCopyValue(Address newCopyValue) {
+		Address oldCopyValue = copyValue;
+		copyValue = newCopyValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ControlflowPackage.WRITE_DEF_CHAIN_TRANSITION__COPY_VALUE, oldCopyValue, copyValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ControlflowPackage.WRITE_DEF_CHAIN_TRANSITION__COPY_ADDRESS:
 				if (resolve) return getCopyAddress();
 				return basicGetCopyAddress();
+			case ControlflowPackage.WRITE_DEF_CHAIN_TRANSITION__COPY_VALUE:
+				if (resolve) return getCopyValue();
+				return basicGetCopyValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -117,6 +169,9 @@ public class WriteDefChainTransitionImpl extends TransitionImpl implements Write
 		switch (featureID) {
 			case ControlflowPackage.WRITE_DEF_CHAIN_TRANSITION__COPY_ADDRESS:
 				setCopyAddress((Address)newValue);
+				return;
+			case ControlflowPackage.WRITE_DEF_CHAIN_TRANSITION__COPY_VALUE:
+				setCopyValue((Address)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -133,6 +188,9 @@ public class WriteDefChainTransitionImpl extends TransitionImpl implements Write
 			case ControlflowPackage.WRITE_DEF_CHAIN_TRANSITION__COPY_ADDRESS:
 				setCopyAddress((Address)null);
 				return;
+			case ControlflowPackage.WRITE_DEF_CHAIN_TRANSITION__COPY_VALUE:
+				setCopyValue((Address)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -147,6 +205,8 @@ public class WriteDefChainTransitionImpl extends TransitionImpl implements Write
 		switch (featureID) {
 			case ControlflowPackage.WRITE_DEF_CHAIN_TRANSITION__COPY_ADDRESS:
 				return copyAddress != null;
+			case ControlflowPackage.WRITE_DEF_CHAIN_TRANSITION__COPY_VALUE:
+				return copyValue != null;
 		}
 		return super.eIsSet(featureID);
 	}

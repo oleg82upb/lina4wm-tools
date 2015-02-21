@@ -36,7 +36,7 @@ import de.upb.llvm_parser.llvm.Value;
 public class TSOUtil {
 	private List<Instruction> instructions = new ArrayList<Instruction>();
 	private List<ControlFlowLocation> processed = new ArrayList<ControlFlowLocation>();
-	private HashMap<Address, Address> writeDefMap = new HashMap<Address, Address>();//orgAdr is key, copy is value
+	private HashMap<Address, Address> writeDefMap = new HashMap<Address, Address>();//orgAdr is key, copyAdr is value
 
 	private GraphUtility util = new GraphUtility();
 
@@ -57,7 +57,7 @@ public class TSOUtil {
 		PreComputationChecker checker = new PreComputationChecker("", 0);
 		ControlFlowDiagram scCfg = sc.createCFG(function);
 		List<Transition> earlyReadsInFunction = checker.collectEarlyReadsinSCGraph(scCfg);
-		List<Transition> writeDefChains = checker.checkForWriteDefChains(scCfg);
+		checker.checkForWriteDefChains(scCfg);
 
 		cfg.setName(function.getAddress().getName());
 		List<ControlFlowLocation> toBeProcessed = new ArrayList<ControlFlowLocation>();
@@ -93,7 +93,7 @@ public class TSOUtil {
 			// empty buffer
 			if (toExplore.getBuffer().getAddressValuePairs().isEmpty()) {
 				if (nextInstruction != null) {
-					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction, earlyReadsInFunction, writeDefChains);
+					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction, earlyReadsInFunction, checker);
 				}
 
 				// buffer with entries
@@ -109,7 +109,7 @@ public class TSOUtil {
 				// create normal SC behavior
 				if (nextInstruction != null && !util.isSynch(nextInstruction)) {
 					// other options -SC
-					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction, earlyReadsInFunction, writeDefChains);
+					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction, earlyReadsInFunction, checker);
 				}
 			}
 			// last
@@ -148,7 +148,7 @@ public class TSOUtil {
 
 	private void addNonFlushOptions(ProgramCounter pc, ControlFlowDiagram cfg, 
 			List<ControlFlowLocation> toBeProcessed,
-			ControlFlowLocation toExplore, Instruction nextInstruction, List<Transition> earlyReadsInFunction, List<Transition> writeDefChains) {
+			ControlFlowLocation toExplore, Instruction nextInstruction, List<Transition> earlyReadsInFunction, PreComputationChecker checker) {
 		
 		String instructionLabel = util.findLabelByInstruction(function, nextInstruction);
 		
@@ -254,34 +254,24 @@ public class TSOUtil {
 			throw new RuntimeException(
 					"IndirectBranch found. Handling of such is not implemented yet");
 
-			//check if nextInstruction is store in WriteDefChain
-		} else if (nextInstruction instanceof Store && instructionIsWriteDefChain(writeDefChains, toExplore, nextInstruction)) {
-
-			Store store = (Store) nextInstruction;
+			//check if nextInstruction is store in WriteDefChain with redefined address or value
+		} else if (nextInstruction instanceof Store 
+				&& (instructionIsWriteDefChain(checker.getWdcValue(), toExplore, nextInstruction) 
+						|| instructionIsWriteDefChain(checker.getWdcAddress(), toExplore, nextInstruction))) {
+		
 			WriteDefChainTransition transition = createWriteDefChainTransition(cfg, nextInstruction);
-			Address orgAddress = ((AddressUse) store.getTargetAddress().getValue()).getAddress();
-
-			if (writeDefMap.containsKey(orgAddress)) {
-				transition.setCopyAddress(writeDefMap.get(orgAddress));
-			} else {
-				Address copyAddress = LlvmFactory.eINSTANCE.createAddress();
-				copyAddress.setName(orgAddress.getName() + "Copy");
-				writeDefMap.put(orgAddress, copyAddress);
-				cfg.getVariableCopies().add(copyAddress);
-				transition.setCopyAddress(copyAddress);
-			}
-
+			
 			// create next location
-			StoreBuffer buffer = createStoreBufferAfterWriteDefChainTransition(cfg, toExplore.getBuffer(), transition);
+			transition.setSource(toExplore);
+			StoreBuffer buffer = createStoreBufferAfterWriteDefChainTransition(cfg, toExplore.getBuffer(), transition, checker);
 			ControlFlowLocation nextLocation = createControlFlowLocation(cfg, toExplore.getPc() + 1, buffer,
 					instructionLabel);
-			transition.setSource(toExplore);
 			transition.setTarget(nextLocation);
 
 			if (!util.isInList(toBeProcessed, nextLocation) && !util.isInList(processed, nextLocation)) {
 				toBeProcessed.add(nextLocation);
 			}
-
+			
 		} else {
 			// check if instruction is earlyRead
 			if (nextInstruction instanceof Load) {
@@ -354,7 +344,7 @@ public class TSOUtil {
 	}
 	
 	private StoreBuffer createStoreBufferAfterWriteDefChainTransition(ControlFlowDiagram cfg, StoreBuffer oldBuffer,
-			WriteDefChainTransition wdcTransition) {
+			WriteDefChainTransition wdcTransition, PreComputationChecker checker) {
 		StoreBuffer buffer = ControlflowFactory.eINSTANCE.createStoreBuffer();
 		// create deep copy
 		for (AddressValuePair pair : oldBuffer.getAddressValuePairs()) {
@@ -363,26 +353,71 @@ public class TSOUtil {
 			newPair.setValue(pair.getValue());
 			buffer.getAddressValuePairs().add(newPair);
 		}
-
+		
 		// add new buffer entry for store
 		Store store = (Store) wdcTransition.getInstruction();
 		AddressValuePair newPair = ControlflowFactory.eINSTANCE.createAddressValuePair();
-		Address copyAddress = wdcTransition.getCopyAddress();
-		Parameter existingParam = getParamWithName(copyAddress.getName(), cfg.getVariableCopyParams());
+		boolean redefinedAddress = instructionIsWriteDefChain(checker.getWdcAddress(), wdcTransition.getSource(), store);
+		
+		// address redefined
+		if (redefinedAddress) {
+			//create address
+			Address orgAddress = ((AddressUse) store.getTargetAddress().getValue()).getAddress();
 
-		Parameter addressParameter = null;
-		if (existingParam != null) {
-			// use existing parameter
-			addressParameter = existingParam;
-		} else {
-			// create new parameter
-			addressParameter = EcoreUtil.copy(store.getTargetAddress());
-			((AddressUse)addressParameter.getValue()).setAddress(copyAddress);
-			cfg.getVariableCopyParams().add(addressParameter);
+			if (writeDefMap.containsKey(orgAddress)) {
+				wdcTransition.setCopyAddress(writeDefMap.get(orgAddress));
+			} else {
+				Address copyAddress = LlvmFactory.eINSTANCE.createAddress();
+				copyAddress.setName(orgAddress.getName() + "Copy");
+				writeDefMap.put(orgAddress, copyAddress);
+				cfg.getVariableCopies().add(copyAddress);
+				wdcTransition.setCopyAddress(copyAddress);
+				
+				//create Parameter
+				Parameter existingParam = getParamWithName(copyAddress.getName(), cfg.getVariableCopyParams());
+				Parameter addressParameter = null;
+				if (existingParam != null) {
+					// use existing parameter
+					addressParameter = existingParam;
+				} else {
+					// create new parameter
+					addressParameter = EcoreUtil.copy(store.getTargetAddress());
+					((AddressUse) addressParameter.getValue()).setAddress(copyAddress);
+					cfg.getVariableCopyParams().add(addressParameter);
+				}
+				newPair.setAddress(addressParameter);
+				newPair.setValue(store.getValue());
+			}
+		} 
+		if (instructionIsWriteDefChain(checker.getWdcValue(), wdcTransition.getSource(), store)) {
+			// value redefined
+			Address orgValue = ((AddressUse) store.getValue().getValue()).getAddress();
+			
+			if(writeDefMap.containsKey(orgValue)){
+				wdcTransition.setCopyValue(writeDefMap.get(orgValue));
+			}else{
+				Address copyValue = LlvmFactory.eINSTANCE.createAddress();
+				copyValue.setName(orgValue.getName() + "Copy");
+				writeDefMap.put(orgValue, copyValue);
+				cfg.getVariableCopies().add(copyValue);
+				wdcTransition.setCopyValue(copyValue);
+				
+				//create Parameter
+				Parameter existingParam = getParamWithName(copyValue.getName(), cfg.getVariableCopyParams());
+				Parameter valueParam = null;
+				if(existingParam != null){
+					valueParam = existingParam;
+				}else{
+					valueParam = EcoreUtil.copy(store.getValue());
+					((AddressUse) valueParam.getValue()).setAddress(copyValue);
+					cfg.getVariableCopyParams().add(valueParam);
+				}
+				if(!redefinedAddress){
+					newPair.setAddress(store.getTargetAddress());
+				}
+				newPair.setValue(valueParam);
+			}
 		}
-
-		newPair.setAddress(addressParameter);
-		newPair.setValue(store.getValue());
 		buffer.getAddressValuePairs().add(newPair);
 
 		return buffer;
@@ -508,10 +543,17 @@ public class TSOUtil {
 							AddressUse transitionaddress = (AddressUse) earlyReadInstruction.getAddress().getValue();
 							if (avpaddress.getAddress().equals(transitionaddress.getAddress())) {
 								Value value = avp.getValue().getValue();
+//								ControlFlowDiagram cfg = (ControlFlowDiagram)avp.getStoreBuffer().eContainer();
+//								if(cfg.getVariableCopies().contains(((AddressUse)value).getAddress()) && avp.getAddress().eContainer() instanceof Store){
+//									Store store = (Store) avp.getAddress().eContainer();
+//									value = store.getValue().getValue();
+//								}
 								if (value instanceof AddressUse) {
 									return ((AddressUse) value).getAddress().getName();
 								}
 								return "TODO";
+									
+								
 							}
 							if (avp.getValue().eContainer() instanceof Store) {
 								Store store = (Store) avp.getValue().eContainer();

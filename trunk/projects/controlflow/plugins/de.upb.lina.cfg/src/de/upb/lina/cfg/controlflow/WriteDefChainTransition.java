@@ -14,6 +14,7 @@ import de.upb.llvm_parser.llvm.Address;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.lina.cfg.controlflow.WriteDefChainTransition#getCopyAddress <em>Copy Address</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.WriteDefChainTransition#getCopyValue <em>Copy Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,4 +49,30 @@ public interface WriteDefChainTransition extends Transition {
 	 * @generated
 	 */
 	void setCopyAddress(Address value);
+
+	/**
+	 * Returns the value of the '<em><b>Copy Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Copy Value</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Copy Value</em>' reference.
+	 * @see #setCopyValue(Address)
+	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getWriteDefChainTransition_CopyValue()
+	 * @model
+	 * @generated
+	 */
+	Address getCopyValue();
+
+	/**
+	 * Sets the value of the '{@link de.upb.lina.cfg.controlflow.WriteDefChainTransition#getCopyValue <em>Copy Value</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Copy Value</em>' reference.
+	 * @see #getCopyValue()
+	 * @generated
+	 */
+	void setCopyValue(Address value);
 } // WriteDefChainTransition

@@ -27,6 +27,7 @@ import de.upb.llvm_parser.llvm.Invoke;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Load;
 import de.upb.llvm_parser.llvm.LogicOperation;
+import de.upb.llvm_parser.llvm.NestedGetElementPtr;
 import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.ParameterList;
 import de.upb.llvm_parser.llvm.Phi;
@@ -88,14 +89,32 @@ public class CustomLabelingUtil {
 		
 		if(t instanceof WriteDefChainTransition){
 			WriteDefChainTransition wdcTransition = (WriteDefChainTransition) t;
-			
 			Store store = (Store) t.getInstruction();
-			String s = wdcTransition.getCopyAddress().getName() + ASSIGN;
-			s += toString(store.getTargetAddress());
-			result += STORE + WS;
-			result += toString(store.getValue());
-			result += wdcTransition.getCopyAddress().getName();
-			return s + " , " + result;
+			if(wdcTransition.getCopyAddress() != null && wdcTransition.getCopyValue() != null){
+				String s = "("+wdcTransition.getCopyAddress().getName()+" , "+wdcTransition.getCopyValue().getName()+")";
+				s += ASSIGN;
+				s += "("+toString(store.getTargetAddress())+" , "+toString(store.getValue())+")";
+				result = STORE + WS;
+				result += wdcTransition.getCopyValue().getName() + WS;
+				result += wdcTransition.getCopyAddress().getName();
+				return s + " , " + result;
+			}
+			else if (wdcTransition.getCopyValue() != null) {
+				String s = wdcTransition.getCopyValue().getName() + ASSIGN;
+				s += toString(store.getValue());
+				result = STORE + WS;
+				result += wdcTransition.getCopyValue().getName() + WS;
+				result += toString(store.getTargetAddress());
+				return s + " , " + result;
+			}else{
+				String s = wdcTransition.getCopyAddress().getName() + ASSIGN;
+				s += toString(store.getTargetAddress());
+				result = STORE + WS;
+				result += toString(store.getValue());
+				result += wdcTransition.getCopyAddress().getName();
+				return s + " , " + result;
+			}
+
 		}
 
 		if(t.getInstruction() == null){
@@ -456,6 +475,11 @@ public class CustomLabelingUtil {
 			PrimitiveValue val = (PrimitiveValue)value;
 			result += val.getValue();
 		}
+		
+//		else if(value.eClass().equals(LlvmPackage.eINSTANCE.getNestedGetElementPtr())){
+//			NestedGetElementPtr val = (NestedGetElementPtr) value;
+//			result += TODO;
+//		}
 		else {
 			result += TODO;
 		}
