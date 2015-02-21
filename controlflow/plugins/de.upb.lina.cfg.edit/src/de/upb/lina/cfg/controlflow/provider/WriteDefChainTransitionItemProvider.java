@@ -42,6 +42,7 @@ public class WriteDefChainTransitionItemProvider extends TransitionItemProvider 
 			super.getPropertyDescriptors(object);
 
 			addCopyAddressPropertyDescriptor(object);
+			addCopyValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -60,6 +61,28 @@ public class WriteDefChainTransitionItemProvider extends TransitionItemProvider 
 				 getString("_UI_WriteDefChainTransition_copyAddress_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_WriteDefChainTransition_copyAddress_feature", "_UI_WriteDefChainTransition_type"),
 				 ControlflowPackage.Literals.WRITE_DEF_CHAIN_TRANSITION__COPY_ADDRESS,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Copy Value feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCopyValuePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_WriteDefChainTransition_copyValue_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_WriteDefChainTransition_copyValue_feature", "_UI_WriteDefChainTransition_type"),
+				 ControlflowPackage.Literals.WRITE_DEF_CHAIN_TRANSITION__COPY_VALUE,
 				 true,
 				 false,
 				 true,
