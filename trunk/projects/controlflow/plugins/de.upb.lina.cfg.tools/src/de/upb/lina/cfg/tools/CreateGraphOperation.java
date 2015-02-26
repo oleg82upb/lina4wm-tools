@@ -21,6 +21,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
+import de.upb.lina.cfg.tools.strategies.SCUtil;
+import de.upb.lina.cfg.tools.strategies.TSOUtil;
 import de.upb.llvm_parser.llvm.Constant;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LLVM;

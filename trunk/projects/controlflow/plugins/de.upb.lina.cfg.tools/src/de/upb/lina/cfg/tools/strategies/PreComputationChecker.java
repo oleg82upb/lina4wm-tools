@@ -1,4 +1,4 @@
-package de.upb.lina.cfg.tools;
+package de.upb.lina.cfg.tools.strategies;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +18,8 @@ import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.FlushTransition;
 import de.upb.lina.cfg.controlflow.Transition;
+import de.upb.lina.cfg.tools.CFGActivator;
+import de.upb.lina.cfg.tools.Debug;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.Alloc;

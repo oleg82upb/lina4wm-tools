@@ -2,28 +2,18 @@ package de.upb.lina.cfg.tools.wizards;
 
 import java.util.List;
 
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.ui.IMemento;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
-import org.eclipse.ui.XMLMemento;
 
-import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.tools.CFGActivator;
-import de.upb.lina.cfg.tools.PreComputationChecker;
 import de.upb.lina.cfg.tools.CreateGraphOperation;
+import de.upb.lina.cfg.tools.strategies.PreComputationChecker;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
-import de.upb.llvm_parser.llvm.LLVM;
-import de.upb.llvm_parser.llvm.LlvmPackage;
 
 /**
  * This is a sample new wizard. Its role is to create a new file resource in the
@@ -37,9 +27,6 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 public class NewCfgWizard extends Wizard implements INewWizard {
 	private SelectionPage page;
 	private ISelection selection;
-//	private IWorkspace iw = ResourcesPlugin.getWorkspace();
-	// private IPath root = iw.getRoot().getLocation();
-	public final static String MEMENTO__KEY = "CFGSelection";
 	private String astlocation;
 	private boolean containsEarlyReads = false;
 	private boolean containsloopWithoutFence = false;
@@ -53,19 +40,8 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 		setNeedsProgressMonitor(true);
 	}
 
-	protected synchronized void saveState() {
-		XMLMemento memento = XMLMemento.createWriteRoot(MEMENTO__KEY);
-		IMemento child = memento.createChild(MEMENTO__KEY);
-		writeSelectionState(child);
-		CFGActivator.saveMementoToFile(memento);
-	}
 
-	private void writeSelectionState(IMemento memento) {
-		memento.putString("astloc", page.getAstLocation());
-		memento.putString("container", page.getContainerName());
-		memento.putString("newfile", page.getFileName());
-		memento.putInteger("reordering", page.getReordering());
-	}
+
 
 	/**
 	 * Adding the page to the wizard.
@@ -80,22 +56,28 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	 * This method is called when 'Finish' button is pressed in the wizard. We
 	 * will create an operation and run it using wizard as execution context.
 	 */
-	public boolean performFinish() {
+	public boolean performFinish()
+	{
 
-		this.saveState();
+		page.saveMementoState();
 		CreateGraphOperation cgo = new CreateGraphOperation(page.getAstLocation(),
-				(page.getContainerName() + "/" + page.getFileName()), page.getReordering(), this.getShell());
+				(page.getContainerName() + "/" + page.getFileName()), page.getMemoryModelSelection(), this.getShell());
 
-		try {
+		try
+		{
 			getContainer().run(true, false, cgo);
-		} catch (Exception e) {
-			if (!cgo.finishedWithoutWarnings()) {
+		} catch (Exception e)
+		{
+			if (!cgo.finishedWithoutWarnings())
+			{
 				MessageDialog
 						.openWarning(
 								getShell(),
 								"Warning",
-								"The graph may contain loops without fences or flush transitions after return statement.\n Please check the error log for more details.");
-			} else {
+								"The graph may contain loops without fences or flush transitions after return statement."
+								+ "\n Please check the error log for more details.");
+			} else
+			{
 				CFGActivator.logError(e.getMessage(), e);
 			}
 		}
@@ -104,35 +86,44 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	}
 
 	@Override
-	public boolean canFinish() {
-		
-		if (!super.canFinish()) {
+	public boolean canFinish()
+	{
+
+		if (!super.canFinish())
+		{
 			return false;
 		}
-		try {
-			if (page.getReordering() == 1) {
-				if (astlocation == null || !astlocation.equals(page.getAstLocation())) {
+		try
+		{
+			if (page.getMemoryModelSelection() == 1)
+			{
+				if (astlocation == null || !astlocation.equals(page.getAstLocation()))
+				{
 					astlocation = page.getAstLocation();
 					PreComputationChecker checker = new PreComputationChecker(page.getAstLocation(),
-							page.getReordering());
+							page.getMemoryModelSelection());
 					containsEarlyReads = checker.checkforEarlyReads();
 					containsloopWithoutFence = checker.checkforLoopWithoutFence();
 					List<FunctionDefinition> functions = checker.getFunctions();
 					funcWithEarlyReads = "";
-					for(int i = 0; i < functions.size();i++){
-						funcWithEarlyReads = funcWithEarlyReads.concat(functions.get(i).getAddress().getName()+" ");
+					for (int i = 0; i < functions.size(); i++)
+					{
+						funcWithEarlyReads = funcWithEarlyReads.concat(functions.get(i).getAddress().getName() + " ");
 					}
 				}
-				if (containsloopWithoutFence && astlocation.equals(page.getAstLocation())) {
+				if (containsloopWithoutFence && astlocation.equals(page.getAstLocation()))
+				{
 					page.setErrorMessage("The selected Ast-File contains a loop without fence");
 					return false;
 				}
-				
+
 				if (containsEarlyReads)
-					page.setMessage("The selected Ast-File contains possible early reads at functions: "+funcWithEarlyReads, 2);
+					page.setMessage("The selected Ast-File contains possible early reads at functions: "
+							+ funcWithEarlyReads, 2);
 			}
 
-		} catch (InterruptedException e) {
+		} catch (InterruptedException e)
+		{
 			CFGActivator.logError(e.getMessage(), e);
 			return false;
 		}
