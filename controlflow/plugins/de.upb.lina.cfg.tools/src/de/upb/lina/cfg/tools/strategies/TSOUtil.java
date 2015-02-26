@@ -1,4 +1,4 @@
-package de.upb.lina.cfg.tools;
+package de.upb.lina.cfg.tools.strategies;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +18,10 @@ import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.StoreBuffer;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.controlflow.WriteDefChainTransition;
+import de.upb.lina.cfg.tools.CFGActivator;
+import de.upb.lina.cfg.tools.Debug;
+import de.upb.lina.cfg.tools.GraphUtility;
+import de.upb.lina.cfg.tools.ProgramCounter;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.BasicBlock;

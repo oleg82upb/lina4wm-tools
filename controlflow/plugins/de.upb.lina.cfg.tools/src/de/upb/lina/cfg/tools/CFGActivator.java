@@ -11,9 +11,11 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.XMLMemento;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+
+import de.upb.lina.cfg.controlflow.ControlflowPackage;
+import de.upb.llvm_parser.llvm.LlvmPackage;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -25,9 +27,6 @@ public class CFGActivator extends AbstractUIPlugin implements BundleActivator {
 
 	// The shared instance
 	private static CFGActivator plugin;
-
-	private static XMLMemento selectionMemento;
-	private Bundle bundle;
 
 	/**
 	 * The constructor
@@ -45,7 +44,9 @@ public class CFGActivator extends AbstractUIPlugin implements BundleActivator {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		bundle = context.getBundle();
+		//make sure the meta models are available. Otherwise, won't work properly 
+		LlvmPackage.eINSTANCE.getLLVM();
+		ControlflowPackage.eINSTANCE.getControlFlowDiagram();
 	}
 
 	/*

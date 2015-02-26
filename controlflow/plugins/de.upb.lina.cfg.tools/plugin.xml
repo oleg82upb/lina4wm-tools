@@ -5,15 +5,16 @@
    <extension
          point="org.eclipse.ui.newWizards">
       <category
-            name="Lina Wizards"
+            name="LINA"
             id="de.upb.lina.cfg.tools">
       </category>
       <wizard
-            name="New ControlFlowGraph"
-            icon="icons/sample.gif"
             category="de.upb.lina.cfg.tools"
             class="de.upb.lina.cfg.tools.wizards.NewCfgWizard"
-            id="de.upb.lina.cfg.tools.wizards.NewCfgWizard">
+            icon="icons/sample.gif"
+            id="de.upb.lina.cfg.tools.wizards.NewCfgWizard"
+            name="New Store Buffer Graph"
+            project="false">
       </wizard>
    </extension>
 </plugin>
