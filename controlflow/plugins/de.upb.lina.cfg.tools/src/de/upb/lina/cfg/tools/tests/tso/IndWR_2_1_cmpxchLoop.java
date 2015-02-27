@@ -1,4 +1,4 @@
-package de.upb.lina.cfg.tools.tests.reverseLS;
+package de.upb.lina.cfg.tools.tests.tso;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -16,29 +16,27 @@ import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.tools.strategies.TSOUtil;
 import de.upb.lina.cfg.tools.tests.TSO_Test;
-import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
-public class Dependent_Write_Read_1_1_rev extends TSO_Test {
+public class IndWR_2_1_cmpxchLoop extends TSO_Test {
 	@Before
 	public void setUp() throws Exception {
-		astLoc = "testdata/reverseLS/Test_Dependent_Write_Read_1_1_rev.s.llvm";
+		astLoc = "testdata/loops/Test_Independent_Write_Read_2_1_cmpxchLoop.s.llvm";
 		super.setUp();
 	}
 
 	@Test
 	public final void testCreateReachibilityGraph() {
-		TSOUtil util = new TSOUtil();
-
-		ControlFlowDiagram diag = util.createReachibilityGraph((FunctionDefinition) ast.getElements().get(0));
+		TSOUtil util = new TSOUtil(this.functionTestData);
+		ControlFlowDiagram diag = util.createGraph();
 		
 		//check for correct amount of locations and edges
-		assertEquals(diag.getLocations().size(),11);
-		assertEquals(diag.getTransitions().size(),11);
+		assertEquals(diag.getLocations().size(),15);
+		assertEquals(diag.getTransitions().size(),17);
 		
 		List<ControlFlowLocation> locs = diag.getLocations();
 		
-		Transition fenceTransition = null;
+		Transition casTransition = null;
 		
 		List<ControlFlowLocation> nonEmptyBuffers  = new ArrayList<ControlFlowLocation>();
 		for(ControlFlowLocation l: locs){
@@ -47,32 +45,32 @@ public class Dependent_Write_Read_1_1_rev extends TSO_Test {
 			}
 			for(Transition t: l.getOutgoing()){
 				if(!t.eClass().equals(ControlflowPackage.eINSTANCE.getFlushTransition())){
-					if(t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getFence())){
-						fenceTransition = t;
+					if(t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getCmpXchg())){
+						casTransition = t;
 					}
 				}
 			}
 		}
 		
 		//check that there is only three nodes with a buffer
-		assertEquals(nonEmptyBuffers.size(), 2);
+		assertEquals(nonEmptyBuffers.size(), 3);
 		
 		//check that all buffers contain the correct elements
 		for(ControlFlowLocation l: nonEmptyBuffers){
 			String buffer = gUtil.getBufferAsString(l);
-			boolean isValidBuffer = buffer.equals(l.getPc()+"<(%b,%r1)>");
+			boolean isValidBuffer = buffer.equals(l.getPc()+"<(%b,null)>");
 			assertTrue(isValidBuffer);	
 		}
 		
 		//Check weather we synch before the fence
-		if(fenceTransition != null){
+		if(casTransition != null){
 			for(ControlFlowLocation l: diag.getLocations()){
-				if(l.getPc() > fenceTransition.getSource().getPc() || l.getIncoming().contains(fenceTransition)){
+				if(l.getPc() > casTransition.getSource().getPc() || l.getIncoming().contains(casTransition)){
 					assertTrue(l.getBuffer().getAddressValuePairs().isEmpty());
 				}
 			}
 		}else{
-			fail("No fence in this test.");
+			fail("No cas in this test.");
 		}
 		
 	}

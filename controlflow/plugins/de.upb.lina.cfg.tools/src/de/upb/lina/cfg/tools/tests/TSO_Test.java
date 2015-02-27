@@ -11,12 +11,14 @@ import org.junit.Before;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.tools.CFGActivator;
 import de.upb.lina.cfg.tools.GraphUtility;
+import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LLVM;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
 public abstract class TSO_Test {
 	protected String astLoc;
 	protected LLVM ast;
+	protected FunctionDefinition functionTestData;
 	protected GraphUtility gUtil;
 
 	@Before
@@ -34,6 +36,7 @@ public abstract class TSO_Test {
 		EObject ast = llvmast.getContents().get(0);
 		if (ast instanceof LLVM){
 			this.ast = (LLVM) ast;
+			this.functionTestData = (FunctionDefinition) this.ast.getElements().get(0);
 		}
 	}
 

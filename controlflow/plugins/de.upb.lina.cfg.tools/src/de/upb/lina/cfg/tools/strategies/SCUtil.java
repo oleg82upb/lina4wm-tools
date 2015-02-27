@@ -13,7 +13,7 @@ import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.StoreBuffer;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.tools.GraphUtility;
-import de.upb.lina.cfg.tools.ProgramCounter;
+import de.upb.lina.cfg.tools.IGraphGenerator;
 import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.Branch;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
@@ -22,83 +22,74 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Switch;
 import de.upb.llvm_parser.llvm.SwitchCase;
 
-public class SCUtil {
-	private GraphUtility util = new GraphUtility();
-	private List<Instruction> instructions = new ArrayList<Instruction>();
-	private List<ControlFlowLocation> processed = new ArrayList<ControlFlowLocation>();
-
+public class SCUtil implements IGraphGenerator{
+	private GraphUtility util;
+	private List<Instruction> instructions; 
+	private List<ControlFlowLocation> processed;
 	private FunctionDefinition function;
-	private boolean endProcess = false;
 	
-	public ControlFlowDiagram createCFG(FunctionDefinition function) {
-		instructions = new ArrayList<Instruction>();
+	public SCUtil(FunctionDefinition function)
+	{
 		this.function = function;
-		ProgramCounter pc = new ProgramCounter();
-		ControlFlowDiagram cfg = ControlflowFactory.eINSTANCE
-				.createControlFlowDiagram();
+		this.util = new GraphUtility();
+		this.instructions = new ArrayList<Instruction>();
+		this.processed = new ArrayList<ControlFlowLocation>();
+	}
+	
 
+	public ControlFlowDiagram createGraph()
+	{
+		ControlFlowDiagram cfg = ControlflowFactory.eINSTANCE.createControlFlowDiagram();
 		cfg.setName(function.getAddress().getName());
 		List<ControlFlowLocation> toBeProcessed = new ArrayList<ControlFlowLocation>();
-		processed = new ArrayList<ControlFlowLocation>();
 
-		//Generate a list of all instructions
+		// Generate a list of all instructions
 		EList<BasicBlock> blocks = function.getBody().getBlocks();
-		for (BasicBlock b : blocks) {
-			for(Instruction i: b.getInstructions()){
+		for (BasicBlock b : blocks)
+		{
+			for (Instruction i : b.getInstructions())
+			{
 				instructions.add(i);
 			}
 		}
 
-		//first node
-		ControlFlowLocation location = createControlFlowLocation(cfg, pc.next(), ControlflowFactory.eINSTANCE.createStoreBuffer(), util.findLabelByInstruction(function,instructions.get(0)));
-		if (cfg.getStart() == null) {
-			cfg.setStart(location);
-			toBeProcessed.add(location);
-		}
-		
-		
-		//while we have still nodes to work on
-		while(!toBeProcessed.isEmpty() && !endProcess){
+		// first node
+		ControlFlowLocation location = createControlFlowLocation(cfg, 0,
+				ControlflowFactory.eINSTANCE.createStoreBuffer(),
+				util.findLabelByInstruction(function, instructions.get(0)));
+		cfg.setStart(location);
+		toBeProcessed.add(location);
+
+		// while we have still nodes to work on
+		while (!toBeProcessed.isEmpty())
+		{
 			ControlFlowLocation toExplore = toBeProcessed.get(0);
 
-			//get the right instruction of our pc, null if we are at the end
+			// get the right instruction of our pc, null if we are at the end
 			Instruction nextInstruction = null;
-			if(toExplore.getPc()<instructions.size()){
-				nextInstruction = instructions.get(toExplore.getPc());	
+			if (toExplore.getPc() < instructions.size())
+			{
+				nextInstruction = instructions.get(toExplore.getPc());
 			}
 
-
-			//empty buffer
-			if(toExplore.getBuffer().getAddressValuePairs().isEmpty()){
-				if(nextInstruction != null){
-					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction);
+			// empty buffer
+			if (toExplore.getBuffer().getAddressValuePairs().isEmpty())
+			{
+				if (nextInstruction != null)
+				{
+					addNonFlushTransitions(cfg, toBeProcessed, toExplore, nextInstruction);
 				}
-
-//			//buffer with entries
-//			}else{
-//				//possible flushes after a return
-//				if(nextInstruction == null){
-//					warningLogger.logUnflushedBuffer(function.getAddress().getName());
-//				}
-//				//create flush options, TSO behavior
-//				addFlushOptions(cfg, toBeProcessed, toExplore, nextInstruction);
-//
-//				//create normal SC behavior
-//				if(nextInstruction != null && !isSynch(nextInstruction)){
-//					//other options -SC
-//					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction);
-//				}
 			}
-			//last
+			// last
 			ControlFlowLocation lastProcessed = toBeProcessed.get(0);
 			toBeProcessed.remove(0);
 			processed.add(lastProcessed);
 		}
-		
+
 		return cfg;
 	}
 	
-	private void addNonFlushOptions(ProgramCounter pc, ControlFlowDiagram cfg,
+	private void addNonFlushTransitions(ControlFlowDiagram cfg,
 			List<ControlFlowLocation> toBeProcessed,
 			ControlFlowLocation toExplore, Instruction nextInstruction) {
 
@@ -255,4 +246,13 @@ public class SCUtil {
 		transition.setDiagram(diag);
 		return transition;
 	}
+
+
+	@Override
+	public String getWarnings()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

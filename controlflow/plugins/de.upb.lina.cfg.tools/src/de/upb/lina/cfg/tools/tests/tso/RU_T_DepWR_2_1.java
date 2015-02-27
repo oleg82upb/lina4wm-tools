@@ -1,6 +1,8 @@
-package de.upb.lina.cfg.tools.tests.write_read;
+package de.upb.lina.cfg.tools.tests.tso;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,27 +16,24 @@ import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.tools.strategies.TSOUtil;
 import de.upb.lina.cfg.tools.tests.TSO_Test;
-import de.upb.llvm_parser.llvm.Fence;
-import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
-public class RU_T_DepWR_2 extends TSO_Test{
+public class RU_T_DepWR_2_1 extends TSO_Test{
 
 	@Before
 	public void setUp() throws Exception {
-		astLoc = "testdata/Test_Dependent_Write_Read_2.s.llvm";
+		astLoc = "testdata/Test_Dependent_Write_Read_2_1.s.llvm";
 		super.setUp();
 	}
 
 	@Test
 	public final void testCreateReachibilityGraph() {
-		TSOUtil util = new TSOUtil();
-
-		ControlFlowDiagram diag = util.createReachibilityGraph((FunctionDefinition) ast.getElements().get(0));
+		TSOUtil util = new TSOUtil(this.functionTestData);
+		ControlFlowDiagram diag = util.createGraph();
 		
 		//check for correct amount of locations and edges
-		assertEquals(diag.getLocations().size(),11);
-		assertEquals(diag.getTransitions().size(),12);
+		assertEquals(diag.getLocations().size(),12);
+		assertEquals(diag.getTransitions().size(),13);
 		
 		List<ControlFlowLocation> locs = diag.getLocations();
 		
