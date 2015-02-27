@@ -1,4 +1,4 @@
-package de.upb.lina.cfg.tools.tests.reverseLS;
+package de.upb.lina.cfg.tools.tests.tso;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -16,36 +16,34 @@ import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.tools.strategies.TSOUtil;
 import de.upb.lina.cfg.tools.tests.TSO_Test;
-import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
-public class Independent_Write_Read_1_1_rev extends TSO_Test {
+public class RU_T_DepWR_1_1 extends TSO_Test{
+
 	@Before
 	public void setUp() throws Exception {
-		astLoc = "testdata/reverseLS/Test_Independent_Write_Read_1_1_rev.s.llvm";
+		astLoc = "testdata/Test_Dependent_Write_Read_1_1.s.llvm";
 		super.setUp();
 	}
 
 	@Test
 	public final void testCreateReachibilityGraph() {
-		TSOUtil util = new TSOUtil();
-
-		ControlFlowDiagram diag = util.createReachibilityGraph((FunctionDefinition) ast.getElements().get(0));
-
+		TSOUtil util = new TSOUtil(this.functionTestData);
+		ControlFlowDiagram diag = util.createGraph();
+		
 		//check for correct amount of locations and edges
-		assertEquals(diag.getLocations().size(),11);
-		assertEquals(diag.getTransitions().size(),11);
-
+		assertEquals(diag.getLocations().size(),12);
+		assertEquals(diag.getTransitions().size(),13);
+		
 		List<ControlFlowLocation> locs = diag.getLocations();
-
-		List<ControlFlowLocation> nonEmptyBuffers  = new ArrayList<ControlFlowLocation>();
+		
 		Transition fenceTransition = null;
-
+		
+		List<ControlFlowLocation> nonEmptyBuffers  = new ArrayList<ControlFlowLocation>();
 		for(ControlFlowLocation l: locs){
 			if(!l.getBuffer().getAddressValuePairs().isEmpty()){
 				nonEmptyBuffers.add(l);
 			}
-			//Find our fence
 			for(Transition t: l.getOutgoing()){
 				if(!t.eClass().equals(ControlflowPackage.eINSTANCE.getFlushTransition())){
 					if(t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getFence())){
@@ -54,18 +52,17 @@ public class Independent_Write_Read_1_1_rev extends TSO_Test {
 				}
 			}
 		}
-
-		//check that there is only two nodes with a buffer
-		assertEquals(nonEmptyBuffers.size(), 2);
-
+		
+		//check that there is only three nodes with a buffer
+		assertEquals(nonEmptyBuffers.size(), 3);
+		
 		//check that all buffers contain the correct elements
 		for(ControlFlowLocation l: nonEmptyBuffers){
 			String buffer = gUtil.getBufferAsString(l);
-			boolean isValidBuffer = buffer.equals(l.getPc()+"<(%b,null)>");
-			assertTrue(isValidBuffer);
-
+			boolean isValidBuffer = buffer.equals(l.getPc()+"<(%b,%r1)>");
+			assertTrue(isValidBuffer);	
 		}
-
+		
 		//Check weather we synch before the fence
 		if(fenceTransition != null){
 			for(ControlFlowLocation l: diag.getLocations()){
@@ -76,5 +73,6 @@ public class Independent_Write_Read_1_1_rev extends TSO_Test {
 		}else{
 			fail("No fence in this test.");
 		}
+		
 	}
 }

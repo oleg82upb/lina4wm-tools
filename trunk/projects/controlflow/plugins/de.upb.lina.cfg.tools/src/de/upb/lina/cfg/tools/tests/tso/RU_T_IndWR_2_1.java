@@ -1,4 +1,4 @@
-package de.upb.lina.cfg.tools.tests.loops;
+package de.upb.lina.cfg.tools.tests.tso;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -16,25 +16,23 @@ import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.tools.strategies.TSOUtil;
 import de.upb.lina.cfg.tools.tests.TSO_Test;
-import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
-public class IndWR_2_1_cmpxchLoop extends TSO_Test {
+public class RU_T_IndWR_2_1 extends TSO_Test {
 	@Before
 	public void setUp() throws Exception {
-		astLoc = "testdata/loops/Test_Independent_Write_Read_2_1_cmpxchLoop.s.llvm";
+		astLoc = "testdata/Test_Independent_Write_Read_2_1.s.llvm";
 		super.setUp();
 	}
 
 	@Test
 	public final void testCreateReachibilityGraph() {
-		TSOUtil util = new TSOUtil();
-
-		ControlFlowDiagram diag = util.createReachibilityGraph((FunctionDefinition) ast.getElements().get(0));
+		TSOUtil util = new TSOUtil(this.functionTestData);
+		ControlFlowDiagram diag = util.createGraph();
 		
 		//check for correct amount of locations and edges
-		assertEquals(diag.getLocations().size(),15);
-		assertEquals(diag.getTransitions().size(),17);
+		assertEquals(diag.getLocations().size(),12);
+		assertEquals(diag.getTransitions().size(),13);
 		
 		List<ControlFlowLocation> locs = diag.getLocations();
 		

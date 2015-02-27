@@ -19,8 +19,9 @@ import de.upb.lina.cfg.controlflow.StoreBuffer;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.controlflow.WriteDefChainTransition;
 import de.upb.lina.cfg.tools.CFGActivator;
-import de.upb.lina.cfg.tools.Debug;
+import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.GraphUtility;
+import de.upb.lina.cfg.tools.IGraphGenerator;
 import de.upb.lina.cfg.tools.ProgramCounter;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
@@ -37,7 +38,7 @@ import de.upb.llvm_parser.llvm.Switch;
 import de.upb.llvm_parser.llvm.SwitchCase;
 import de.upb.llvm_parser.llvm.Value;
 
-public class TSOUtil {
+public class TSOUtil implements IGraphGenerator {
 	private List<Instruction> instructions = new ArrayList<Instruction>();
 	private List<ControlFlowLocation> processed = new ArrayList<ControlFlowLocation>();
 	private HashMap<Address, Address> writeDefMap = new HashMap<Address, Address>();//orgAdr is key, copyAdr is value
@@ -45,21 +46,25 @@ public class TSOUtil {
 	private GraphUtility util = new GraphUtility();
 
 	private FunctionDefinition function;
+	public TSOUtil(FunctionDefinition function)
+	{
+		this.function = function;
+	}
+
 	private boolean endProcess = false;
 	private boolean loopWithoutFence = false;
 	private ArrayList<String> placesInLoopWithoutFence;
 
-	public ControlFlowDiagram createReachibilityGraph(FunctionDefinition function) {
+	public ControlFlowDiagram createGraph() {
 		instructions = new ArrayList<Instruction>();
-		this.function = function;
 		this.placesInLoopWithoutFence = new ArrayList<String>();
 		boolean containsFlushesAfterReturn = false;
 		ProgramCounter pc = new ProgramCounter();
 		ControlFlowDiagram cfg = ControlflowFactory.eINSTANCE
 				.createControlFlowDiagram();
-		SCUtil sc = new SCUtil();
+		SCUtil sc = new SCUtil(function);
 		PreComputationChecker checker = new PreComputationChecker("", 0);
-		ControlFlowDiagram scCfg = sc.createCFG(function);
+		ControlFlowDiagram scCfg = sc.createGraph();
 		List<Transition> earlyReadsInFunction = checker.collectEarlyReadsinSCGraph(scCfg);
 		checker.checkForWriteDefChains(scCfg);
 
@@ -127,7 +132,7 @@ public class TSOUtil {
 					+ " potentially returns with a non-empty store buffer.", null);
 		}
 
-		if (Debug.DEBUG) {
+		if (CFGConstants.DEBUG) {
 			System.out.println("#nodes: " + cfg.getLocations().size() + " ;#edges: " + cfg.getTransitions().size());
 		}
 		return cfg;

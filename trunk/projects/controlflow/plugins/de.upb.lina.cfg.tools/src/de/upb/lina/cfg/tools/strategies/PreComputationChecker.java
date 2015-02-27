@@ -2,7 +2,6 @@ package de.upb.lina.cfg.tools.strategies;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
@@ -13,14 +12,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
-import de.upb.lina.cfg.controlflow.ControlFlowLocation;
-import de.upb.lina.cfg.controlflow.FlushTransition;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.tools.CFGActivator;
-import de.upb.lina.cfg.tools.Debug;
-import de.upb.llvm_parser.llvm.Address;
+import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.ArithmeticOperation;
@@ -48,13 +43,12 @@ public class PreComputationChecker {
 
 	private LLVM ast = null;
 	private String astLocation;
-	private int reordering;
+	private int memoryModel;
 	private List<FunctionDefinition> functions = null;
-	public static final int TSO = 1;
 
 	public PreComputationChecker(String astLocation, int reordering) {
 		this.astLocation = astLocation;
-		this.reordering = reordering;
+		this.memoryModel = reordering;
 
 	}
 
@@ -94,17 +88,17 @@ public class PreComputationChecker {
 				FunctionDefinition func = (FunctionDefinition) ast.getElements().get(i);
 				if (func.getBody() != null) {
 
-					if (reordering == TSO) {
+					if (memoryModel == CFGConstants.TSO) {
 						// create sc-graph and search for possible early reads
-						SCUtil sc = new SCUtil();
-						earlyReadsInFunction = collectEarlyReadsinSCGraph(sc.createCFG(func));
+						SCUtil sc = new SCUtil(func);
+						earlyReadsInFunction = collectEarlyReadsinSCGraph(sc.createGraph());
 						if (!earlyReadsInFunction.isEmpty()) {
 							functions.add(func);
 						}
 					}
-					if (Debug.DEBUG) {
+					if (CFGConstants.DEBUG) {
 
-						if (Debug.DEBUG && earlyReadsInFunction.isEmpty()) {
+						if (CFGConstants.DEBUG && earlyReadsInFunction.isEmpty()) {
 							System.out.println("No early reads found in function " + func.getAddress().getName());
 						} else {
 							System.out.println("Early reads found in function " + func.getAddress().getName()
@@ -131,10 +125,12 @@ public class PreComputationChecker {
 		return functions;
 	}
 
-	public boolean checkforLoopWithoutFence() throws InterruptedException {
+	public boolean checkforLoopWithoutFence() throws InterruptedException
+	{
 
-		if (loadAst() == null) {
-			throw new InterruptedException("No specified LLVM Object inside the ast.");
+		if (loadAst() == null)
+		{
+			throw new RuntimeException("No specified LLVM Object inside the ast.");
 		}
 
 		int a_elem = ast.getElements().size();
@@ -142,25 +138,32 @@ public class PreComputationChecker {
 		boolean loopWithoutFenceinfunc = false;
 
 		// for every function
-		for (int i = 0; i < a_elem; i++) {
-			if (ast.getElements().get(i) instanceof FunctionDefinitionImpl) {
+		for (int i = 0; i < a_elem; i++)
+		{
+			if (ast.getElements().get(i) instanceof FunctionDefinitionImpl)
+			{
 				FunctionDefinition func = (FunctionDefinition) ast.getElements().get(i);
 				if (func.getBody() != null)
-
-					if (reordering == TSO) {
+				{
+					if (memoryModel == CFGConstants.TSO)
+					{
 						// create sc-graph and search for loops without fence
-						SCUtil sc = new SCUtil();
-						loopWithoutFenceinfunc = containsLoopWithoutFences(sc.createCFG(func));
+						SCUtil sc = new SCUtil(func);
+						loopWithoutFenceinfunc = containsLoopWithoutFences(sc.createGraph());
+						if (CFGConstants.DEBUG && loopWithoutFenceinfunc)
+						{
+							System.out.println("Loops without fence found in function " + func.getAddress().getName());
+						}
 					}
-				if (Debug.DEBUG && loopWithoutFenceinfunc)
-					System.out.println("Loops without fence found in function " + func.getAddress().getName());
+				}
 			}
 			loopWithoutFence = loopWithoutFence | loopWithoutFenceinfunc;
 		}
-		if (Debug.DEBUG)
+		if (CFGConstants.DEBUG)
+		{
 			System.out.println("Loop without fence:" + loopWithoutFence);
+		}
 		return loopWithoutFence;
-
 	}
 
 	/**
@@ -201,7 +204,7 @@ public class PreComputationChecker {
 			for (Transition tr : t.getSource().getIncoming())
 				if (isEarlyRead(tr, explored, t))
 					return true;
-		} else if (Debug.DEBUG) {
+		} else if (CFGConstants.DEBUG) {
 			System.out.println("load.getAddress().getValue() of type " + load.getAddress().getValue().toString());
 		}
 		return false;
@@ -255,10 +258,13 @@ public class PreComputationChecker {
 		return false;
 	}
 
-	public boolean containsLoopWithoutFences(ControlFlowDiagram cfg) {
+	public boolean containsLoopWithoutFences(ControlFlowDiagram cfg)
+	{
 		List<Transition> transitions = cfg.getTransitions();
-		for (Transition t : transitions) {
-			if (t.getInstruction() instanceof Store && detectLoopWithoutFence(t)) {
+		for (Transition t : transitions)
+		{
+			if (t.getInstruction() instanceof Store && detectLoopWithoutFence(t))
+			{
 				return true;
 			}
 		}
