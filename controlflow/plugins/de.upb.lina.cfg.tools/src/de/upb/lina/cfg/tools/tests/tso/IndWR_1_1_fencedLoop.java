@@ -21,7 +21,7 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 public class IndWR_1_1_fencedLoop extends TSO_Test {
 	@Before
 	public void setUp() throws Exception {
-		astLoc = "testdata/loops/Test_Independent_Write_Read_1_1_fenceLoop.s.llvm";
+		testLocation = "testdata/loops/Test_Independent_Write_Read_1_1_fenceLoop.s";
 		super.setUp();
 	}
 
@@ -31,8 +31,8 @@ public class IndWR_1_1_fencedLoop extends TSO_Test {
 		ControlFlowDiagram diag = util.createGraph();
 		
 		//check for correct amount of locations and edges
-		assertEquals(diag.getLocations().size(),15);
-		assertEquals(diag.getTransitions().size(),17);
+		assertEquals(diag.getLocations().size(),14);
+		assertEquals(diag.getTransitions().size(),15);
 		
 		List<ControlFlowLocation> locs = diag.getLocations();
 		
@@ -53,12 +53,12 @@ public class IndWR_1_1_fencedLoop extends TSO_Test {
 		}
 		
 		//check that there is only three nodes with a buffer
-		assertEquals(nonEmptyBuffers.size(), 3);
+		assertEquals(nonEmptyBuffers.size(), 2);
 		
 		//check that all buffers contain the correct elements
 		for(ControlFlowLocation l: nonEmptyBuffers){
 			String buffer = gUtil.getBufferAsString(l);
-			boolean isValidBuffer = buffer.equals(l.getPc()+"<(%b,null)>");
+			boolean isValidBuffer = buffer.equals(l.getPc()+"<(null,%b)>");
 			assertTrue(isValidBuffer);	
 		}
 		

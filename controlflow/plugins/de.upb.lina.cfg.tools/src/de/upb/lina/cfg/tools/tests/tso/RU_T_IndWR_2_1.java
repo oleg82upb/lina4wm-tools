@@ -21,7 +21,7 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 public class RU_T_IndWR_2_1 extends TSO_Test {
 	@Before
 	public void setUp() throws Exception {
-		astLoc = "testdata/Test_Independent_Write_Read_2_1.s.llvm";
+		testLocation = "testdata/Test_Independent_Write_Read_2_1.s";
 		super.setUp();
 	}
 
@@ -58,7 +58,7 @@ public class RU_T_IndWR_2_1 extends TSO_Test {
 		//check that all buffers contain the correct elements
 		for(ControlFlowLocation l: nonEmptyBuffers){
 			String buffer = gUtil.getBufferAsString(l);
-			boolean isValidBuffer = buffer.equals(l.getPc()+"<(%b,null)>");
+			boolean isValidBuffer = buffer.equals(l.getPc()+"<(null,%b)>");
 			assertTrue(isValidBuffer);	
 		}
 		
