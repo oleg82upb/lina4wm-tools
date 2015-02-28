@@ -22,7 +22,7 @@ public class RU_T_DepWR_12 extends TSO_Test{
 
 	@Before
 	public void setUp() throws Exception {
-		astLoc = "testdata/Test_Dependent_Write_Read_12.s.llvm";
+		testLocation = "testdata/Test_Dependent_Write_Read_12.s";
 		super.setUp();
 	}
 
@@ -59,7 +59,7 @@ public class RU_T_DepWR_12 extends TSO_Test{
 		//check that all buffers contain the correct elements
 		for(ControlFlowLocation l: nonEmptyBuffers){
 			String buffer = gUtil.getBufferAsString(l);
-			boolean isValidBuffer = buffer.equals(l.getPc()+"<(%b,%r1)>");
+			boolean isValidBuffer = buffer.equals(l.getPc()+"<(%r1,%b)>");
 			assertTrue(isValidBuffer);	
 		}
 		

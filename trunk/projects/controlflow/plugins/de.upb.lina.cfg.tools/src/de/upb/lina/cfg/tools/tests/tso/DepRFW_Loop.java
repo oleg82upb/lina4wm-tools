@@ -17,7 +17,7 @@ import de.upb.lina.cfg.tools.tests.TSO_Test;
 public class DepRFW_Loop extends TSO_Test {
 	@Before
 	public void setUp() throws Exception {
-		astLoc = "testdata/loops/Test_Dependent_Read_Fence_Write_Loop.s.llvm";
+		testLocation = "testdata/loops/Test_Dependent_Read_Fence_Write_Loop.s";
 		super.setUp();
 	}
 
@@ -45,7 +45,7 @@ public class DepRFW_Loop extends TSO_Test {
 		//check that all buffers contain the correct elements
 		for(ControlFlowLocation l: nonEmptyBuffers){
 			String buffer = gUtil.getBufferAsString(l);
-			boolean isValidBuffer = buffer.equals(l.getPc()+"<(%0,%r1)>");
+			boolean isValidBuffer = buffer.equals(l.getPc()+"<(%r1,%0Copy)>");
 			assertTrue(isValidBuffer);	
 		}
 		

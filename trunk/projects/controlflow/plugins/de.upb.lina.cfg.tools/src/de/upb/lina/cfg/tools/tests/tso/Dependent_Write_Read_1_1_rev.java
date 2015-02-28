@@ -21,7 +21,7 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 public class Dependent_Write_Read_1_1_rev extends TSO_Test {
 	@Before
 	public void setUp() throws Exception {
-		astLoc = "testdata/reverseLS/Test_Dependent_Write_Read_1_1_rev.s.llvm";
+		testLocation = "testdata/reverseLS/Test_Dependent_Write_Read_1_1_rev.s";
 		super.setUp();
 	}
 
@@ -58,7 +58,7 @@ public class Dependent_Write_Read_1_1_rev extends TSO_Test {
 		//check that all buffers contain the correct elements
 		for(ControlFlowLocation l: nonEmptyBuffers){
 			String buffer = gUtil.getBufferAsString(l);
-			boolean isValidBuffer = buffer.equals(l.getPc()+"<(%b,%r1)>");
+			boolean isValidBuffer = buffer.equals(l.getPc()+"<(%r1,%b)>");
 			assertTrue(isValidBuffer);	
 		}
 		
