@@ -548,34 +548,14 @@ public class TSOUtil implements IGraphGenerator {
 						AddressValuePair avp = (AddressValuePair) it.previous();
 						if (avp.getAddress().getValue() instanceof AddressUse
 								&& earlyReadInstruction.getAddress().getValue() instanceof AddressUse) {
-							AddressUse avpaddress = (AddressUse) avp.getAddress().getValue();
-							AddressUse transitionaddress = (AddressUse) earlyReadInstruction.getAddress().getValue();
-							if (avpaddress.getAddress().equals(transitionaddress.getAddress())) {
+							AddressUse avpAddress = (AddressUse) avp.getAddress().getValue();
+							AddressUse earlyReadAddress = (AddressUse) earlyReadInstruction.getAddress().getValue();
+							if (avpAddress.getAddress().equals(earlyReadAddress.getAddress())) {
 								Value value = avp.getValue().getValue();
-//								ControlFlowDiagram cfg = (ControlFlowDiagram)avp.getStoreBuffer().eContainer();
-//								if(cfg.getVariableCopies().contains(((AddressUse)value).getAddress()) && avp.getAddress().eContainer() instanceof Store){
-//									Store store = (Store) avp.getAddress().eContainer();
-//									value = store.getValue().getValue();
-//								}
 								if (value instanceof AddressUse) {
 									return ((AddressUse) value).getAddress().getName();
 								}
 								return "TODO";
-									
-								
-							}
-							if (avp.getValue().eContainer() instanceof Store) {
-								Store store = (Store) avp.getValue().eContainer();
-								if (store.getTargetAddress().getValue() instanceof AddressUse) {
-									if (((AddressUse) store.getTargetAddress().getValue()).getAddress().equals(
-											transitionaddress.getAddress())) {
-										Value value = avp.getValue().getValue();
-										if (value instanceof AddressUse) {
-											return ((AddressUse) value).getAddress().getName();
-										}
-										return "TODO";
-									}
-								}
 							}
 						}
 					}
