@@ -354,25 +354,27 @@ public class PreComputationChecker {
 		String storeAddress = ((AddressUse) store.getTargetAddress().getValue()).getAddress().getName();
 
 		List<Transition> explored = new ArrayList<Transition>();
+		List<Transition> exp2 = new ArrayList<Transition>();
 		explored.add(write);
 		for (Transition t : write.getTarget().getOutgoing()) {
 			
 			Transition def = findDefinition(t, explored, storeAddress);
 			if (def != null) {
-				if (findWayBack(def, write)) {
+				if (findWayBack(def, write, exp2)) {
 					wdcAddress.add(write);
 					break;
 				}
 			}
 		}
 		explored.clear();
+		exp2.clear();
 		explored.add(write);
 		if (store.getValue().getValue() instanceof AddressUse) {
 			String storeValue = ((AddressUse) store.getValue().getValue()).getAddress().getName();
 			for (Transition t : write.getTarget().getOutgoing()) {
 				Transition def = findDefinition(t, explored, storeValue);
 				if (def != null) {
-					if (findWayBack(def, write)) {
+					if (findWayBack(def, write, exp2)) {
 						wdcValue.add(write);
 						if (wdcAddress.contains(write)) {
 							wdcAddressValue.add(write);
@@ -384,15 +386,22 @@ public class PreComputationChecker {
 		}
 	}
 
-	private boolean findWayBack(Transition start, Transition finish) {
+	private boolean findWayBack(Transition start, Transition finish, List<Transition> explored) {
 
 		// way back found
-		if (start.equals(finish))
+		if (start.equals(finish)){
 			return true;
-
+		}
+		
+		// loop found
+		if(explored.contains(start)){
+			return false;
+		}
+		
 		// find way from start to store
+		explored.add(start);
 		for (Transition t : start.getTarget().getOutgoing()) {
-			if (findWayBack(t, finish)) {
+			if (findWayBack(t, finish, explored)) {
 				return true;
 			}
 		}
