@@ -38,6 +38,7 @@ import de.upb.llvm_parser.llvm.ShuffleVector;
 import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.VariableAttributeAccess;
 import de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl;
+import de.upb.llvm_parser.parser.antlr.LLVMParser;
 
 public class PreComputationChecker {
 
@@ -125,11 +126,9 @@ public class PreComputationChecker {
 		return functions;
 	}
 
-	public boolean checkforLoopWithoutFence() throws InterruptedException
-	{
+	public boolean checkforLoopWithoutFence() throws InterruptedException {
 
-		if (loadAst() == null)
-		{
+		if (loadAst() == null) {
 			throw new RuntimeException("No specified LLVM Object inside the ast.");
 		}
 
@@ -138,20 +137,15 @@ public class PreComputationChecker {
 		boolean loopWithoutFenceinfunc = false;
 
 		// for every function
-		for (int i = 0; i < a_elem; i++)
-		{
-			if (ast.getElements().get(i) instanceof FunctionDefinitionImpl)
-			{
+		for (int i = 0; i < a_elem; i++) {
+			if (ast.getElements().get(i) instanceof FunctionDefinitionImpl) {
 				FunctionDefinition func = (FunctionDefinition) ast.getElements().get(i);
-				if (func.getBody() != null)
-				{
-					if (memoryModel == CFGConstants.TSO)
-					{
+				if (func.getBody() != null) {
+					if (memoryModel == CFGConstants.TSO) {
 						// create sc-graph and search for loops without fence
 						SCUtil sc = new SCUtil(func);
 						loopWithoutFenceinfunc = containsLoopWithoutFences(sc.createGraph());
-						if (CFGConstants.DEBUG && loopWithoutFenceinfunc)
-						{
+						if (CFGConstants.DEBUG && loopWithoutFenceinfunc) {
 							System.out.println("Loops without fence found in function " + func.getAddress().getName());
 						}
 					}
@@ -159,8 +153,7 @@ public class PreComputationChecker {
 			}
 			loopWithoutFence = loopWithoutFence | loopWithoutFenceinfunc;
 		}
-		if (CFGConstants.DEBUG)
-		{
+		if (CFGConstants.DEBUG) {
 			System.out.println("Loop without fence:" + loopWithoutFence);
 		}
 		return loopWithoutFence;
@@ -258,13 +251,10 @@ public class PreComputationChecker {
 		return false;
 	}
 
-	public boolean containsLoopWithoutFences(ControlFlowDiagram cfg)
-	{
+	public boolean containsLoopWithoutFences(ControlFlowDiagram cfg) {
 		List<Transition> transitions = cfg.getTransitions();
-		for (Transition t : transitions)
-		{
-			if (t.getInstruction() instanceof Store && detectLoopWithoutFence(t))
-			{
+		for (Transition t : transitions) {
+			if (t.getInstruction() instanceof Store && detectLoopWithoutFence(t)) {
 				return true;
 			}
 		}
@@ -312,22 +302,10 @@ public class PreComputationChecker {
 		return false;
 	}
 
-	public void checkForWriteDefChains(ControlFlowDiagram cfg) {
-		EList<Transition> TransitionList = cfg.getTransitions();
-		// find all writes
-		
-		for (Transition t : TransitionList) {
-			if (t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getStore())) {
-				// check for all writes whether they are in a writeDefChain
-				detectWriteDefChain(t);
-			}
-		}
-	}
-
 	private List<Transition> wdcAddress = new ArrayList<Transition>();
 	private List<Transition> wdcValue = new ArrayList<Transition>();
 	private List<Transition> wdcAddressValue = new ArrayList<Transition>();
-	
+
 	/**
 	 * @return the wdcAddress
 	 */
@@ -349,55 +327,124 @@ public class PreComputationChecker {
 		return wdcAddressValue;
 	}
 
-	private void detectWriteDefChain(Transition write) {
-		Store store = (Store) write.getInstruction();
-		String storeAddress = ((AddressUse) store.getTargetAddress().getValue()).getAddress().getName();
+	public void checkForWriteDefChains(ControlFlowDiagram cfg) {
 
-		List<Transition> explored = new ArrayList<Transition>();
-		List<Transition> exp2 = new ArrayList<Transition>();
-		explored.add(write);
-		for (Transition t : write.getTarget().getOutgoing()) {
-			
-			Transition def = findDefinition(t, explored, storeAddress);
-			if (def != null) {
-				if (findWayBack(def, write, exp2)) {
-					wdcAddress.add(write);
-					break;
-				}
-			}
-		}
-		explored.clear();
-		exp2.clear();
-		explored.add(write);
-		if (store.getValue().getValue() instanceof AddressUse) {
-			String storeValue = ((AddressUse) store.getValue().getValue()).getAddress().getName();
-			for (Transition t : write.getTarget().getOutgoing()) {
-				Transition def = findDefinition(t, explored, storeValue);
-				if (def != null) {
-					if (findWayBack(def, write, exp2)) {
-						wdcValue.add(write);
-						if (wdcAddress.contains(write)) {
-							wdcAddressValue.add(write);
+		// find all store-transitions and check whether they are in a
+		// writeDefChain
+		for (Transition write : cfg.getTransitions()) {
+			if (write.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getStore())) {
+
+				Store store = (Store) write.getInstruction();
+
+				// to avoid infinite loops
+				List<Transition> explored = new ArrayList<Transition>();
+				explored.add(write);
+
+				// check if address of store is redefined before a fence
+				String storeAddress = ((AddressUse) store.getTargetAddress().getValue()).getAddress().getName();
+				for (Transition t : write.getTarget().getOutgoing()) {
+
+					Transition addressDef = findDefinition(t, explored, storeAddress);
+
+					if (addressDef != null) {
+
+						// search for a way back to the store-transition
+						if (findWayBack(addressDef, write, new ArrayList<Transition>())) {
+
+							// way back found -> add to list
+							if (!wdcAddress.contains(write))
+								wdcAddress.add(write);
+
+							// search for a possible early read
+							Transition read = searchLoadWithRedefStoreAddress(storeAddress, addressDef,
+									new ArrayList<Transition>());
+							if (read != null) {
+								// TODO throw warning
+								System.out.println(((Load) read.getInstruction()).getResult().getName()
+										+ " := LOAD "
+										+ (((AddressUse) ((Load) read.getInstruction()).getAddress().getValue()))
+												.getAddress().getName());
+							}
 						}
-						break;
+					}
+				}
+
+				// check if value of store is redefined before a fence
+				if (store.getValue().getValue() instanceof AddressUse) {
+					String storeValue = ((AddressUse) store.getValue().getValue()).getAddress().getName();
+
+					// to avoid infinite loops
+					explored.clear();
+					explored.add(write);
+
+					for (Transition t : write.getTarget().getOutgoing()) {
+
+						Transition def = findDefinition(t, explored, storeValue);
+
+						if (def != null) {
+
+							// search for a way back to the store-transition
+							if (findWayBack(def, write, new ArrayList<Transition>())) {
+
+								// way back found -> add to list
+								wdcValue.add(write);
+								if (wdcAddress.contains(write)) {
+									wdcAddressValue.add(write);
+								}
+								break;
+							}
+						}
 					}
 				}
 			}
 		}
 	}
 
+	private Transition searchLoadWithRedefStoreAddress(String storeAddress, Transition transition,
+			ArrayList<Transition> explored) {
+		EObject instructiontype = transition.getInstruction().eClass();
+		if (instructiontype.equals(LlvmPackage.eINSTANCE.getLoad())) {
+			Load load = (Load) transition.getInstruction();
+			if (load.getAddress().getValue() instanceof AddressUse) {
+				if (((AddressUse) load.getAddress().getValue()).getAddress().getName().equals(storeAddress)) {
+					return transition;
+				}
+			}
+		}
+		// loop found
+		if (explored.contains(transition)) {
+			return null;
+		}
+
+		if (instructiontype.equals(LlvmPackage.eINSTANCE.getFence())
+				|| instructiontype.equals(LlvmPackage.eINSTANCE.getCmpXchg())
+				|| instructiontype.equals(LlvmPackage.eINSTANCE.getAtomicRMW())) {
+			return null;
+		}
+
+		explored.add(transition);
+		for (Transition t : transition.getTarget().getOutgoing()) {
+			Transition read = searchLoadWithRedefStoreAddress(storeAddress, t, explored);
+			if (read != null) {
+				return read;
+			}
+		}
+
+		return null;
+	}
+
 	private boolean findWayBack(Transition start, Transition finish, List<Transition> explored) {
 
 		// way back found
-		if (start.equals(finish)){
+		if (start.equals(finish)) {
 			return true;
 		}
-		
+
 		// loop found
-		if(explored.contains(start)){
+		if (explored.contains(start)) {
 			return false;
 		}
-		
+
 		// find way from start to store
 		explored.add(start);
 		for (Transition t : start.getTarget().getOutgoing()) {
@@ -423,7 +470,6 @@ public class PreComputationChecker {
 			return null;
 		}
 
-		
 		if (instructiontype.equals(LlvmPackage.eINSTANCE.getArithmeticOperation())) {
 			ArithmeticOperation op = (ArithmeticOperation) t.getInstruction();
 			if (op.getResult().getName().equals(address)) {
