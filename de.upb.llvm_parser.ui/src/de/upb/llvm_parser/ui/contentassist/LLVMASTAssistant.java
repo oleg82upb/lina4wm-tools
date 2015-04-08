@@ -28,6 +28,7 @@ import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
 
+import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.ui.LLVMUtil;
 
 /**
@@ -50,7 +51,10 @@ public class LLVMASTAssistant extends XtextResource implements
 	public void run(IAction action)
 	{
 		Shell currentShell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-
+		//ensure LLVM is registered
+		LlvmPackage.eINSTANCE.eClass();
+		
+		
 		if (this.selection == null || this.selection instanceof IFile)
 		{
 			MessageDialog.openError(currentShell, "Wrong Selection", "Please select a file with .s extension");
