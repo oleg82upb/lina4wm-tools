@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="de.upb.lina.transformations.promela.tools.transformCat"
+            name="Transformation wizards">
+      </category>
+      <wizard
+            category="de.upb.lina.cfg.tools"
+            class="de.upb.lina.transformations.promela.tools.wizards.TransformationWizard"
+            icon="icons/sample.gif"
+            id="de.upb.lina.transformations.promela.tools.transformationWizard"
+            name="New ModelChecker Input File">
+      </wizard>
+   </extension>
+
+</plugin>

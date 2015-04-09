@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="helpermodel" nsURI="http://www.upb.de/lina/cfg/helper" nsPrefix="helpermodel">
+  <eClassifiers xsi:type="ecore:EClass" name="LocalVariables">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
+        eType="#//AdressMapping" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HelperModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="localVariables" lowerBound="1"
+        eType="#//LocalVariables" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="labels" upperBound="-1"
+        eType="#//Label" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AdressMapping">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="adresses" upperBound="-1"
+        eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Address"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Adress">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ast" lowerBound="1" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//LLVM"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cfg" lowerBound="1" eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//ControlFlowDiagram"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Label">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controlFlowLocation" eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//ControlFlowLocation"/>
+  </eClassifiers>
+</ecore:EPackage>
