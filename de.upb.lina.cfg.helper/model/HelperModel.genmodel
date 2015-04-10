@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.upb.lina.cfg.helper/src" modelPluginID="de.upb.lina.cfg.helper"
+    modelName="HelperModel" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    usedGenPackages="../../de.upb.lina.cfg/model/ControlFlow.genmodel#//controlflow ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.genmodel#//llvm"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>HelperModel.ecore</foreignModel>
+  <genPackages prefix="Helpermodel" disposableProviderFactory="true" ecorePackage="HelperModel.ecore#/">
+    <genClasses ecoreClass="HelperModel.ecore#//LocalVariables">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HelperModel.ecore#//LocalVariables/variables"/>
+    </genClasses>
+    <genClasses ecoreClass="HelperModel.ecore#//HelperModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HelperModel.ecore#//HelperModel/localVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HelperModel.ecore#//HelperModel/labels"/>
+    </genClasses>
+    <genClasses ecoreClass="HelperModel.ecore#//AdressMapping">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HelperModel.ecore#//AdressMapping/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference HelperModel.ecore#//AdressMapping/adresses"/>
+    </genClasses>
+    <genClasses ecoreClass="HelperModel.ecore#//Adress">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HelperModel.ecore#//Adress/ast"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HelperModel.ecore#//Adress/cfg"/>
+    </genClasses>
+    <genClasses ecoreClass="HelperModel.ecore#//Label">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HelperModel.ecore#//Label/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference HelperModel.ecore#//Label/controlFlowLocation"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
