@@ -1,6 +1,6 @@
 /**
  */
-package helpermodel;
+package de.upb.lina.cfg.gendata;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -14,18 +14,19 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link helpermodel.LocalVariables#getVariables <em>Variables</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.LocalVariables#getVariables <em>Variables</em>}</li>
  * </ul>
  * </p>
  *
- * @see helpermodel.HelpermodelPackage#getLocalVariables()
+ * @see de.upb.lina.cfg.gendata.GendataPackage#getLocalVariables()
  * @model
  * @generated
  */
-public interface LocalVariables extends EObject {
+public interface LocalVariables extends EObject
+{
 	/**
 	 * Returns the value of the '<em><b>Variables</b></em>' containment reference list.
-	 * The list contents are of type {@link helpermodel.AdressMapping}.
+	 * The list contents are of type {@link de.upb.lina.cfg.gendata.AddressMapping}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Variables</em>' containment reference list isn't clear,
@@ -33,10 +34,10 @@ public interface LocalVariables extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Variables</em>' containment reference list.
-	 * @see helpermodel.HelpermodelPackage#getLocalVariables_Variables()
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getLocalVariables_Variables()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<AdressMapping> getVariables();
+	EList<AddressMapping> getVariables();
 
 } // LocalVariables

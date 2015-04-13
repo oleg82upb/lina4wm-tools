@@ -1,12 +1,11 @@
 package de.upb.lina.transformations.promela.tools;
 
-import helpermodel.HelperModel;
-
 import java.util.List;
 
 import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.StoreBuffer;
+import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.llvm_parser.llvm.Constant;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.PrimitiveValue;
@@ -17,7 +16,7 @@ public abstract class AMTLGenerator {
 	
 	protected List<ControlFlowDiagram> cfgs; 
 	protected StringBuilder stringBuilder;
-	protected HelperModel helperModel;
+	protected GeneratorData helperModel;
 	
 	
 	public AMTLGenerator(List <ControlFlowDiagram> cfgs){

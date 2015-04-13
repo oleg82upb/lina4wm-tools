@@ -1,8 +1,8 @@
 /**
  */
-package helpermodel.util;
+package de.upb.lina.cfg.gendata.util;
 
-import helpermodel.*;
+import de.upb.lina.cfg.gendata.*;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -16,17 +16,18 @@ import org.eclipse.emf.ecore.EObject;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see helpermodel.HelpermodelPackage
+ * @see de.upb.lina.cfg.gendata.GendataPackage
  * @generated
  */
-public class HelpermodelAdapterFactory extends AdapterFactoryImpl {
+public class GendataAdapterFactory extends AdapterFactoryImpl
+{
 	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static HelpermodelPackage modelPackage;
+	protected static GendataPackage modelPackage;
 
 	/**
 	 * Creates an instance of the adapter factory.
@@ -34,9 +35,11 @@ public class HelpermodelAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public HelpermodelAdapterFactory() {
-		if (modelPackage == null) {
-			modelPackage = HelpermodelPackage.eINSTANCE;
+	public GendataAdapterFactory()
+	{
+		if (modelPackage == null)
+		{
+			modelPackage = GendataPackage.eINSTANCE;
 		}
 	}
 
@@ -49,11 +52,14 @@ public class HelpermodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	@Override
-	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage) {
+	public boolean isFactoryForType(Object object)
+	{
+		if (object == modelPackage)
+		{
 			return true;
 		}
-		if (object instanceof EObject) {
+		if (object instanceof EObject)
+		{
 			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -65,30 +71,32 @@ public class HelpermodelAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected HelpermodelSwitch<Adapter> modelSwitch =
-		new HelpermodelSwitch<Adapter>() {
+	protected GendataSwitch<Adapter> modelSwitch =
+		new GendataSwitch<Adapter>()
+		{
 			@Override
-			public Adapter caseLocalVariables(LocalVariables object) {
+			public Adapter caseLocalVariables(LocalVariables object)
+			{
 				return createLocalVariablesAdapter();
 			}
 			@Override
-			public Adapter caseHelperModel(HelperModel object) {
-				return createHelperModelAdapter();
+			public Adapter caseGeneratorData(GeneratorData object)
+			{
+				return createGeneratorDataAdapter();
 			}
 			@Override
-			public Adapter caseAdressMapping(AdressMapping object) {
-				return createAdressMappingAdapter();
+			public Adapter caseAddressMapping(AddressMapping object)
+			{
+				return createAddressMappingAdapter();
 			}
 			@Override
-			public Adapter caseAdress(Adress object) {
-				return createAdressAdapter();
-			}
-			@Override
-			public Adapter caseLabel(Label object) {
+			public Adapter caseLabel(Label object)
+			{
 				return createLabelAdapter();
 			}
 			@Override
-			public Adapter defaultCase(EObject object) {
+			public Adapter defaultCase(EObject object)
+			{
 				return createEObjectAdapter();
 			}
 		};
@@ -102,78 +110,69 @@ public class HelpermodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	@Override
-	public Adapter createAdapter(Notifier target) {
+	public Adapter createAdapter(Notifier target)
+	{
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link helpermodel.LocalVariables <em>Local Variables</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.gendata.LocalVariables <em>Local Variables</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see helpermodel.LocalVariables
+	 * @see de.upb.lina.cfg.gendata.LocalVariables
 	 * @generated
 	 */
-	public Adapter createLocalVariablesAdapter() {
+	public Adapter createLocalVariablesAdapter()
+	{
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link helpermodel.HelperModel <em>Helper Model</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.gendata.GeneratorData <em>Generator Data</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see helpermodel.HelperModel
+	 * @see de.upb.lina.cfg.gendata.GeneratorData
 	 * @generated
 	 */
-	public Adapter createHelperModelAdapter() {
+	public Adapter createGeneratorDataAdapter()
+	{
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link helpermodel.AdressMapping <em>Adress Mapping</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.gendata.AddressMapping <em>Address Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see helpermodel.AdressMapping
+	 * @see de.upb.lina.cfg.gendata.AddressMapping
 	 * @generated
 	 */
-	public Adapter createAdressMappingAdapter() {
+	public Adapter createAddressMappingAdapter()
+	{
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link helpermodel.Adress <em>Adress</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.gendata.Label <em>Label</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see helpermodel.Adress
+	 * @see de.upb.lina.cfg.gendata.Label
 	 * @generated
 	 */
-	public Adapter createAdressAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link helpermodel.Label <em>Label</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see helpermodel.Label
-	 * @generated
-	 */
-	public Adapter createLabelAdapter() {
+	public Adapter createLabelAdapter()
+	{
 		return null;
 	}
 
@@ -185,8 +184,9 @@ public class HelpermodelAdapterFactory extends AdapterFactoryImpl {
 	 * @return the new adapter.
 	 * @generated
 	 */
-	public Adapter createEObjectAdapter() {
+	public Adapter createEObjectAdapter()
+	{
 		return null;
 	}
 
-} //HelpermodelAdapterFactory
+} //GendataAdapterFactory

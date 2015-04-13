@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="helpermodel" nsURI="http://www.upb.de/lina/cfg/helper" nsPrefix="helpermodel">
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="gendata" nsURI="http://www.upb.de/lina/cfg/helper" nsPrefix="de.upb.lina.cfg">
   <eClassifiers xsi:type="ecore:EClass" name="LocalVariables">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
-        eType="#//AdressMapping" containment="true"/>
+        eType="#//AddressMapping" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="HelperModel">
+  <eClassifiers xsi:type="ecore:EClass" name="GeneratorData">
     <eStructuralFeatures xsi:type="ecore:EReference" name="localVariables" lowerBound="1"
         eType="#//LocalVariables" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="labels" upperBound="-1"
         eType="#//Label" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="program" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//LLVM"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AdressMapping">
+  <eClassifiers xsi:type="ecore:EClass" name="AddressMapping">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="adresses" upperBound="-1"
         eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Address"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Adress">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ast" lowerBound="1" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//LLVM"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="cfg" lowerBound="1" eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//ControlFlowDiagram"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Label">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

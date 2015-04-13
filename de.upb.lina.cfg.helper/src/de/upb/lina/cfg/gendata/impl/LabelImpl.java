@@ -1,11 +1,11 @@
 /**
  */
-package helpermodel.impl;
+package de.upb.lina.cfg.gendata.impl;
 
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 
-import helpermodel.HelpermodelPackage;
-import helpermodel.Label;
+import de.upb.lina.cfg.gendata.GendataPackage;
+import de.upb.lina.cfg.gendata.Label;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -22,14 +22,15 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link helpermodel.impl.LabelImpl#getName <em>Name</em>}</li>
- *   <li>{@link helpermodel.impl.LabelImpl#getControlFlowLocation <em>Control Flow Location</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.LabelImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.LabelImpl#getControlFlowLocation <em>Control Flow Location</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class LabelImpl extends MinimalEObjectImpl.Container implements Label {
+public class LabelImpl extends MinimalEObjectImpl.Container implements Label
+{
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -65,7 +66,8 @@ public class LabelImpl extends MinimalEObjectImpl.Container implements Label {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected LabelImpl() {
+	protected LabelImpl()
+	{
 		super();
 	}
 
@@ -75,8 +77,9 @@ public class LabelImpl extends MinimalEObjectImpl.Container implements Label {
 	 * @generated
 	 */
 	@Override
-	protected EClass eStaticClass() {
-		return HelpermodelPackage.Literals.LABEL;
+	protected EClass eStaticClass()
+	{
+		return GendataPackage.Literals.LABEL;
 	}
 
 	/**
@@ -84,7 +87,8 @@ public class LabelImpl extends MinimalEObjectImpl.Container implements Label {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
@@ -93,11 +97,12 @@ public class LabelImpl extends MinimalEObjectImpl.Container implements Label {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
+	public void setName(String newName)
+	{
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, HelpermodelPackage.LABEL__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.LABEL__NAME, oldName, name));
 	}
 
 	/**
@@ -105,13 +110,16 @@ public class LabelImpl extends MinimalEObjectImpl.Container implements Label {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ControlFlowLocation getControlFlowLocation() {
-		if (controlFlowLocation != null && controlFlowLocation.eIsProxy()) {
+	public ControlFlowLocation getControlFlowLocation()
+	{
+		if (controlFlowLocation != null && controlFlowLocation.eIsProxy())
+		{
 			InternalEObject oldControlFlowLocation = (InternalEObject)controlFlowLocation;
 			controlFlowLocation = (ControlFlowLocation)eResolveProxy(oldControlFlowLocation);
-			if (controlFlowLocation != oldControlFlowLocation) {
+			if (controlFlowLocation != oldControlFlowLocation)
+			{
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, HelpermodelPackage.LABEL__CONTROL_FLOW_LOCATION, oldControlFlowLocation, controlFlowLocation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GendataPackage.LABEL__CONTROL_FLOW_LOCATION, oldControlFlowLocation, controlFlowLocation));
 			}
 		}
 		return controlFlowLocation;
@@ -122,7 +130,8 @@ public class LabelImpl extends MinimalEObjectImpl.Container implements Label {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ControlFlowLocation basicGetControlFlowLocation() {
+	public ControlFlowLocation basicGetControlFlowLocation()
+	{
 		return controlFlowLocation;
 	}
 
@@ -131,11 +140,12 @@ public class LabelImpl extends MinimalEObjectImpl.Container implements Label {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setControlFlowLocation(ControlFlowLocation newControlFlowLocation) {
+	public void setControlFlowLocation(ControlFlowLocation newControlFlowLocation)
+	{
 		ControlFlowLocation oldControlFlowLocation = controlFlowLocation;
 		controlFlowLocation = newControlFlowLocation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, HelpermodelPackage.LABEL__CONTROL_FLOW_LOCATION, oldControlFlowLocation, controlFlowLocation));
+			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.LABEL__CONTROL_FLOW_LOCATION, oldControlFlowLocation, controlFlowLocation));
 	}
 
 	/**
@@ -144,11 +154,13 @@ public class LabelImpl extends MinimalEObjectImpl.Container implements Label {
 	 * @generated
 	 */
 	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case HelpermodelPackage.LABEL__NAME:
+	public Object eGet(int featureID, boolean resolve, boolean coreType)
+	{
+		switch (featureID)
+		{
+			case GendataPackage.LABEL__NAME:
 				return getName();
-			case HelpermodelPackage.LABEL__CONTROL_FLOW_LOCATION:
+			case GendataPackage.LABEL__CONTROL_FLOW_LOCATION:
 				if (resolve) return getControlFlowLocation();
 				return basicGetControlFlowLocation();
 		}
@@ -161,12 +173,14 @@ public class LabelImpl extends MinimalEObjectImpl.Container implements Label {
 	 * @generated
 	 */
 	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case HelpermodelPackage.LABEL__NAME:
+	public void eSet(int featureID, Object newValue)
+	{
+		switch (featureID)
+		{
+			case GendataPackage.LABEL__NAME:
 				setName((String)newValue);
 				return;
-			case HelpermodelPackage.LABEL__CONTROL_FLOW_LOCATION:
+			case GendataPackage.LABEL__CONTROL_FLOW_LOCATION:
 				setControlFlowLocation((ControlFlowLocation)newValue);
 				return;
 		}
@@ -179,12 +193,14 @@ public class LabelImpl extends MinimalEObjectImpl.Container implements Label {
 	 * @generated
 	 */
 	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case HelpermodelPackage.LABEL__NAME:
+	public void eUnset(int featureID)
+	{
+		switch (featureID)
+		{
+			case GendataPackage.LABEL__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case HelpermodelPackage.LABEL__CONTROL_FLOW_LOCATION:
+			case GendataPackage.LABEL__CONTROL_FLOW_LOCATION:
 				setControlFlowLocation((ControlFlowLocation)null);
 				return;
 		}
@@ -197,11 +213,13 @@ public class LabelImpl extends MinimalEObjectImpl.Container implements Label {
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case HelpermodelPackage.LABEL__NAME:
+	public boolean eIsSet(int featureID)
+	{
+		switch (featureID)
+		{
+			case GendataPackage.LABEL__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case HelpermodelPackage.LABEL__CONTROL_FLOW_LOCATION:
+			case GendataPackage.LABEL__CONTROL_FLOW_LOCATION:
 				return controlFlowLocation != null;
 		}
 		return super.eIsSet(featureID);
@@ -213,7 +231,8 @@ public class LabelImpl extends MinimalEObjectImpl.Container implements Label {
 	 * @generated
 	 */
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());

@@ -11,7 +11,15 @@
       <package
             uri="http://www.upb.de/lina/cfg/helper"
             class="helpermodel.HelpermodelPackage"
-            genModel="model/HelperModel.genmodel"/>
+            genModel="model/gendata.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated gendata -->
+      <package
+            uri="http://www.upb.de/lina/cfg/helper"
+            class="de.upb.lina.cfg.gendata.GendataPackage"
+            genModel="model/gendata.genmodel"/>
    </extension>
 
 </plugin>

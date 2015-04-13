@@ -1,10 +1,10 @@
 /**
  */
-package helpermodel.impl;
+package de.upb.lina.cfg.gendata.impl;
 
-import helpermodel.AdressMapping;
-import helpermodel.HelpermodelPackage;
-import helpermodel.LocalVariables;
+import de.upb.lina.cfg.gendata.AddressMapping;
+import de.upb.lina.cfg.gendata.GendataPackage;
+import de.upb.lina.cfg.gendata.LocalVariables;
 
 import java.util.Collection;
 
@@ -27,13 +27,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link helpermodel.impl.LocalVariablesImpl#getVariables <em>Variables</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.LocalVariablesImpl#getVariables <em>Variables</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class LocalVariablesImpl extends MinimalEObjectImpl.Container implements LocalVariables {
+public class LocalVariablesImpl extends MinimalEObjectImpl.Container implements LocalVariables
+{
 	/**
 	 * The cached value of the '{@link #getVariables() <em>Variables</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -42,14 +43,15 @@ public class LocalVariablesImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AdressMapping> variables;
+	protected EList<AddressMapping> variables;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected LocalVariablesImpl() {
+	protected LocalVariablesImpl()
+	{
 		super();
 	}
 
@@ -59,8 +61,9 @@ public class LocalVariablesImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
-	protected EClass eStaticClass() {
-		return HelpermodelPackage.Literals.LOCAL_VARIABLES;
+	protected EClass eStaticClass()
+	{
+		return GendataPackage.Literals.LOCAL_VARIABLES;
 	}
 
 	/**
@@ -68,9 +71,11 @@ public class LocalVariablesImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AdressMapping> getVariables() {
-		if (variables == null) {
-			variables = new EObjectContainmentEList<AdressMapping>(AdressMapping.class, this, HelpermodelPackage.LOCAL_VARIABLES__VARIABLES);
+	public EList<AddressMapping> getVariables()
+	{
+		if (variables == null)
+		{
+			variables = new EObjectContainmentEList<AddressMapping>(AddressMapping.class, this, GendataPackage.LOCAL_VARIABLES__VARIABLES);
 		}
 		return variables;
 	}
@@ -81,9 +86,11 @@ public class LocalVariablesImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case HelpermodelPackage.LOCAL_VARIABLES__VARIABLES:
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
+		switch (featureID)
+		{
+			case GendataPackage.LOCAL_VARIABLES__VARIABLES:
 				return ((InternalEList<?>)getVariables()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -95,9 +102,11 @@ public class LocalVariablesImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case HelpermodelPackage.LOCAL_VARIABLES__VARIABLES:
+	public Object eGet(int featureID, boolean resolve, boolean coreType)
+	{
+		switch (featureID)
+		{
+			case GendataPackage.LOCAL_VARIABLES__VARIABLES:
 				return getVariables();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -110,11 +119,13 @@ public class LocalVariablesImpl extends MinimalEObjectImpl.Container implements 
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case HelpermodelPackage.LOCAL_VARIABLES__VARIABLES:
+	public void eSet(int featureID, Object newValue)
+	{
+		switch (featureID)
+		{
+			case GendataPackage.LOCAL_VARIABLES__VARIABLES:
 				getVariables().clear();
-				getVariables().addAll((Collection<? extends AdressMapping>)newValue);
+				getVariables().addAll((Collection<? extends AddressMapping>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -126,9 +137,11 @@ public class LocalVariablesImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case HelpermodelPackage.LOCAL_VARIABLES__VARIABLES:
+	public void eUnset(int featureID)
+	{
+		switch (featureID)
+		{
+			case GendataPackage.LOCAL_VARIABLES__VARIABLES:
 				getVariables().clear();
 				return;
 		}
@@ -141,9 +154,11 @@ public class LocalVariablesImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case HelpermodelPackage.LOCAL_VARIABLES__VARIABLES:
+	public boolean eIsSet(int featureID)
+	{
+		switch (featureID)
+		{
+			case GendataPackage.LOCAL_VARIABLES__VARIABLES:
 				return variables != null && !variables.isEmpty();
 		}
 		return super.eIsSet(featureID);

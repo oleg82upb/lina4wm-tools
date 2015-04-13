@@ -1,6 +1,6 @@
 /**
  */
-package helpermodel;
+package de.upb.lina.cfg.gendata;
 
 import org.eclipse.emf.ecore.EFactory;
 
@@ -9,17 +9,18 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see helpermodel.HelpermodelPackage
+ * @see de.upb.lina.cfg.gendata.GendataPackage
  * @generated
  */
-public interface HelpermodelFactory extends EFactory {
+public interface GendataFactory extends EFactory
+{
 	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	HelpermodelFactory eINSTANCE = helpermodel.impl.HelpermodelFactoryImpl.init();
+	GendataFactory eINSTANCE = de.upb.lina.cfg.gendata.impl.GendataFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Local Variables</em>'.
@@ -31,31 +32,22 @@ public interface HelpermodelFactory extends EFactory {
 	LocalVariables createLocalVariables();
 
 	/**
-	 * Returns a new object of class '<em>Helper Model</em>'.
+	 * Returns a new object of class '<em>Generator Data</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Helper Model</em>'.
+	 * @return a new object of class '<em>Generator Data</em>'.
 	 * @generated
 	 */
-	HelperModel createHelperModel();
+	GeneratorData createGeneratorData();
 
 	/**
-	 * Returns a new object of class '<em>Adress Mapping</em>'.
+	 * Returns a new object of class '<em>Address Mapping</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Adress Mapping</em>'.
+	 * @return a new object of class '<em>Address Mapping</em>'.
 	 * @generated
 	 */
-	AdressMapping createAdressMapping();
-
-	/**
-	 * Returns a new object of class '<em>Adress</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Adress</em>'.
-	 * @generated
-	 */
-	Adress createAdress();
+	AddressMapping createAddressMapping();
 
 	/**
 	 * Returns a new object of class '<em>Label</em>'.
@@ -73,6 +65,6 @@ public interface HelpermodelFactory extends EFactory {
 	 * @return the package supported by this factory.
 	 * @generated
 	 */
-	HelpermodelPackage getHelpermodelPackage();
+	GendataPackage getGendataPackage();
 
-} //HelpermodelFactory
+} //GendataFactory

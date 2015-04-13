@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.upb.lina.cfg.helper/src" modelPluginID="de.upb.lina.cfg.helper"
+    modelName="HelperModel" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    usedGenPackages="../../de.upb.lina.cfg/model/ControlFlow.genmodel#//controlflow ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.genmodel#//llvm"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>gendata.ecore</foreignModel>
+  <genPackages prefix="Gendata" basePackage="de.upb.lina.cfg" disposableProviderFactory="true"
+      ecorePackage="gendata.ecore#/">
+    <genClasses ecoreClass="gendata.ecore#//LocalVariables">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//LocalVariables/variables"/>
+    </genClasses>
+    <genClasses ecoreClass="gendata.ecore#//GeneratorData">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/localVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/labels"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/program"/>
+    </genClasses>
+    <genClasses ecoreClass="gendata.ecore#//AddressMapping">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gendata.ecore#//AddressMapping/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//AddressMapping/adresses"/>
+    </genClasses>
+    <genClasses ecoreClass="gendata.ecore#//Label">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gendata.ecore#//Label/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//Label/controlFlowLocation"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

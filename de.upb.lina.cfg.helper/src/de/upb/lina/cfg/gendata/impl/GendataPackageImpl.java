@@ -1,18 +1,17 @@
 /**
  */
-package helpermodel.impl;
+package de.upb.lina.cfg.gendata.impl;
 
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 
-import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.lina.cfg.gendata.AddressMapping;
+import de.upb.lina.cfg.gendata.GendataFactory;
+import de.upb.lina.cfg.gendata.GendataPackage;
+import de.upb.lina.cfg.gendata.GeneratorData;
+import de.upb.lina.cfg.gendata.Label;
+import de.upb.lina.cfg.gendata.LocalVariables;
 
-import helpermodel.Adress;
-import helpermodel.AdressMapping;
-import helpermodel.HelperModel;
-import helpermodel.HelpermodelFactory;
-import helpermodel.HelpermodelPackage;
-import helpermodel.Label;
-import helpermodel.LocalVariables;
+import de.upb.llvm_parser.llvm.LlvmPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -27,7 +26,8 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
  * <!-- end-user-doc -->
  * @generated
  */
-public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelPackage {
+public class GendataPackageImpl extends EPackageImpl implements GendataPackage
+{
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -40,21 +40,14 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass helperModelEClass = null;
+	private EClass generatorDataEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass adressMappingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass adressEClass = null;
+	private EClass addressMappingEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -74,12 +67,13 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see helpermodel.HelpermodelPackage#eNS_URI
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
-	private HelpermodelPackageImpl() {
-		super(eNS_URI, HelpermodelFactory.eINSTANCE);
+	private GendataPackageImpl()
+	{
+		super(eNS_URI, GendataFactory.eINSTANCE);
 	}
 
 	/**
@@ -92,7 +86,7 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 * 
-	 * <p>This method is used to initialize {@link HelpermodelPackage#eINSTANCE} when that field is accessed.
+	 * <p>This method is used to initialize {@link GendataPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -101,11 +95,12 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static HelpermodelPackage init() {
-		if (isInited) return (HelpermodelPackage)EPackage.Registry.INSTANCE.getEPackage(HelpermodelPackage.eNS_URI);
+	public static GendataPackage init()
+	{
+		if (isInited) return (GendataPackage)EPackage.Registry.INSTANCE.getEPackage(GendataPackage.eNS_URI);
 
 		// Obtain or create and register package
-		HelpermodelPackageImpl theHelpermodelPackage = (HelpermodelPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof HelpermodelPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new HelpermodelPackageImpl());
+		GendataPackageImpl theGendataPackage = (GendataPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof GendataPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new GendataPackageImpl());
 
 		isInited = true;
 
@@ -113,18 +108,18 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 		ControlflowPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
-		theHelpermodelPackage.createPackageContents();
+		theGendataPackage.createPackageContents();
 
 		// Initialize created meta-data
-		theHelpermodelPackage.initializePackageContents();
+		theGendataPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
-		theHelpermodelPackage.freeze();
+		theGendataPackage.freeze();
 
   
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(HelpermodelPackage.eNS_URI, theHelpermodelPackage);
-		return theHelpermodelPackage;
+		EPackage.Registry.INSTANCE.put(GendataPackage.eNS_URI, theGendataPackage);
+		return theGendataPackage;
 	}
 
 	/**
@@ -132,7 +127,8 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getLocalVariables() {
+	public EClass getLocalVariables()
+	{
 		return localVariablesEClass;
 	}
 
@@ -141,7 +137,8 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLocalVariables_Variables() {
+	public EReference getLocalVariables_Variables()
+	{
 		return (EReference)localVariablesEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -150,8 +147,9 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getHelperModel() {
-		return helperModelEClass;
+	public EClass getGeneratorData()
+	{
+		return generatorDataEClass;
 	}
 
 	/**
@@ -159,8 +157,9 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getHelperModel_LocalVariables() {
-		return (EReference)helperModelEClass.getEStructuralFeatures().get(0);
+	public EReference getGeneratorData_LocalVariables()
+	{
+		return (EReference)generatorDataEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -168,8 +167,9 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getHelperModel_Labels() {
-		return (EReference)helperModelEClass.getEStructuralFeatures().get(1);
+	public EReference getGeneratorData_Labels()
+	{
+		return (EReference)generatorDataEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -177,8 +177,9 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAdressMapping() {
-		return adressMappingEClass;
+	public EReference getGeneratorData_Program()
+	{
+		return (EReference)generatorDataEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -186,8 +187,9 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAdressMapping_Name() {
-		return (EAttribute)adressMappingEClass.getEStructuralFeatures().get(0);
+	public EClass getAddressMapping()
+	{
+		return addressMappingEClass;
 	}
 
 	/**
@@ -195,8 +197,9 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAdressMapping_Adresses() {
-		return (EReference)adressMappingEClass.getEStructuralFeatures().get(1);
+	public EAttribute getAddressMapping_Name()
+	{
+		return (EAttribute)addressMappingEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -204,8 +207,9 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAdress() {
-		return adressEClass;
+	public EReference getAddressMapping_Adresses()
+	{
+		return (EReference)addressMappingEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -213,25 +217,8 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAdress_Ast() {
-		return (EReference)adressEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAdress_Cfg() {
-		return (EReference)adressEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getLabel() {
+	public EClass getLabel()
+	{
 		return labelEClass;
 	}
 
@@ -240,7 +227,8 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLabel_Name() {
+	public EAttribute getLabel_Name()
+	{
 		return (EAttribute)labelEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -249,7 +237,8 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLabel_ControlFlowLocation() {
+	public EReference getLabel_ControlFlowLocation()
+	{
 		return (EReference)labelEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -258,8 +247,9 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public HelpermodelFactory getHelpermodelFactory() {
-		return (HelpermodelFactory)getEFactoryInstance();
+	public GendataFactory getGendataFactory()
+	{
+		return (GendataFactory)getEFactoryInstance();
 	}
 
 	/**
@@ -276,7 +266,8 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void createPackageContents() {
+	public void createPackageContents()
+	{
 		if (isCreated) return;
 		isCreated = true;
 
@@ -284,17 +275,14 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 		localVariablesEClass = createEClass(LOCAL_VARIABLES);
 		createEReference(localVariablesEClass, LOCAL_VARIABLES__VARIABLES);
 
-		helperModelEClass = createEClass(HELPER_MODEL);
-		createEReference(helperModelEClass, HELPER_MODEL__LOCAL_VARIABLES);
-		createEReference(helperModelEClass, HELPER_MODEL__LABELS);
+		generatorDataEClass = createEClass(GENERATOR_DATA);
+		createEReference(generatorDataEClass, GENERATOR_DATA__LOCAL_VARIABLES);
+		createEReference(generatorDataEClass, GENERATOR_DATA__LABELS);
+		createEReference(generatorDataEClass, GENERATOR_DATA__PROGRAM);
 
-		adressMappingEClass = createEClass(ADRESS_MAPPING);
-		createEAttribute(adressMappingEClass, ADRESS_MAPPING__NAME);
-		createEReference(adressMappingEClass, ADRESS_MAPPING__ADRESSES);
-
-		adressEClass = createEClass(ADRESS);
-		createEReference(adressEClass, ADRESS__AST);
-		createEReference(adressEClass, ADRESS__CFG);
+		addressMappingEClass = createEClass(ADDRESS_MAPPING);
+		createEAttribute(addressMappingEClass, ADDRESS_MAPPING__NAME);
+		createEReference(addressMappingEClass, ADDRESS_MAPPING__ADRESSES);
 
 		labelEClass = createEClass(LABEL);
 		createEAttribute(labelEClass, LABEL__NAME);
@@ -315,7 +303,8 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void initializePackageContents() {
+	public void initializePackageContents()
+	{
 		if (isInitialized) return;
 		isInitialized = true;
 
@@ -336,19 +325,16 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(localVariablesEClass, LocalVariables.class, "LocalVariables", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLocalVariables_Variables(), this.getAdressMapping(), null, "variables", null, 0, -1, LocalVariables.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLocalVariables_Variables(), this.getAddressMapping(), null, "variables", null, 0, -1, LocalVariables.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(helperModelEClass, HelperModel.class, "HelperModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getHelperModel_LocalVariables(), this.getLocalVariables(), null, "localVariables", null, 1, 1, HelperModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getHelperModel_Labels(), this.getLabel(), null, "labels", null, 0, -1, HelperModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(generatorDataEClass, GeneratorData.class, "GeneratorData", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getGeneratorData_LocalVariables(), this.getLocalVariables(), null, "localVariables", null, 1, 1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGeneratorData_Labels(), this.getLabel(), null, "labels", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGeneratorData_Program(), theLlvmPackage.getLLVM(), null, "program", null, 0, 1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(adressMappingEClass, AdressMapping.class, "AdressMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAdressMapping_Name(), ecorePackage.getEString(), "name", "", 0, 1, AdressMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAdressMapping_Adresses(), theLlvmPackage.getAddress(), null, "adresses", null, 0, -1, AdressMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(adressEClass, Adress.class, "Adress", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAdress_Ast(), theLlvmPackage.getLLVM(), null, "ast", null, 1, 1, Adress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAdress_Cfg(), theControlflowPackage.getControlFlowDiagram(), null, "cfg", null, 1, 1, Adress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(addressMappingEClass, AddressMapping.class, "AddressMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAddressMapping_Name(), ecorePackage.getEString(), "name", "", 0, 1, AddressMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAddressMapping_Adresses(), theLlvmPackage.getAddress(), null, "adresses", null, 0, -1, AddressMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(labelEClass, Label.class, "Label", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLabel_Name(), ecorePackage.getEString(), "name", null, 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -358,4 +344,4 @@ public class HelpermodelPackageImpl extends EPackageImpl implements HelpermodelP
 		createResource(eNS_URI);
 	}
 
-} //HelpermodelPackageImpl
+} //GendataPackageImpl

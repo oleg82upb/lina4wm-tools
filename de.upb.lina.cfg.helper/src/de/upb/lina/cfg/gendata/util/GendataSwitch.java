@@ -1,8 +1,8 @@
 /**
  */
-package helpermodel.util;
+package de.upb.lina.cfg.gendata.util;
 
-import helpermodel.*;
+import de.upb.lina.cfg.gendata.*;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -19,17 +19,18 @@ import org.eclipse.emf.ecore.util.Switch;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see helpermodel.HelpermodelPackage
+ * @see de.upb.lina.cfg.gendata.GendataPackage
  * @generated
  */
-public class HelpermodelSwitch<T> extends Switch<T> {
+public class GendataSwitch<T> extends Switch<T>
+{
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static HelpermodelPackage modelPackage;
+	protected static GendataPackage modelPackage;
 
 	/**
 	 * Creates an instance of the switch.
@@ -37,9 +38,11 @@ public class HelpermodelSwitch<T> extends Switch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public HelpermodelSwitch() {
-		if (modelPackage == null) {
-			modelPackage = HelpermodelPackage.eINSTANCE;
+	public GendataSwitch()
+	{
+		if (modelPackage == null)
+		{
+			modelPackage = GendataPackage.eINSTANCE;
 		}
 	}
 
@@ -52,7 +55,8 @@ public class HelpermodelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	@Override
-	protected boolean isSwitchFor(EPackage ePackage) {
+	protected boolean isSwitchFor(EPackage ePackage)
+	{
 		return ePackage == modelPackage;
 	}
 
@@ -64,33 +68,33 @@ public class HelpermodelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	@Override
-	protected T doSwitch(int classifierID, EObject theEObject) {
-		switch (classifierID) {
-			case HelpermodelPackage.LOCAL_VARIABLES: {
+	protected T doSwitch(int classifierID, EObject theEObject)
+	{
+		switch (classifierID)
+		{
+			case GendataPackage.LOCAL_VARIABLES:
+			{
 				LocalVariables localVariables = (LocalVariables)theEObject;
 				T result = caseLocalVariables(localVariables);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case HelpermodelPackage.HELPER_MODEL: {
-				HelperModel helperModel = (HelperModel)theEObject;
-				T result = caseHelperModel(helperModel);
+			case GendataPackage.GENERATOR_DATA:
+			{
+				GeneratorData generatorData = (GeneratorData)theEObject;
+				T result = caseGeneratorData(generatorData);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case HelpermodelPackage.ADRESS_MAPPING: {
-				AdressMapping adressMapping = (AdressMapping)theEObject;
-				T result = caseAdressMapping(adressMapping);
+			case GendataPackage.ADDRESS_MAPPING:
+			{
+				AddressMapping addressMapping = (AddressMapping)theEObject;
+				T result = caseAddressMapping(addressMapping);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case HelpermodelPackage.ADRESS: {
-				Adress adress = (Adress)theEObject;
-				T result = caseAdress(adress);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case HelpermodelPackage.LABEL: {
+			case GendataPackage.LABEL:
+			{
 				Label label = (Label)theEObject;
 				T result = caseLabel(label);
 				if (result == null) result = defaultCase(theEObject);
@@ -111,52 +115,40 @@ public class HelpermodelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseLocalVariables(LocalVariables object) {
+	public T caseLocalVariables(LocalVariables object)
+	{
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Helper Model</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Generator Data</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Helper Model</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Generator Data</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseHelperModel(HelperModel object) {
+	public T caseGeneratorData(GeneratorData object)
+	{
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Adress Mapping</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Address Mapping</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Adress Mapping</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Address Mapping</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAdressMapping(AdressMapping object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Adress</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Adress</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAdress(Adress object) {
+	public T caseAddressMapping(AddressMapping object)
+	{
 		return null;
 	}
 
@@ -171,7 +163,8 @@ public class HelpermodelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseLabel(Label object) {
+	public T caseLabel(Label object)
+	{
 		return null;
 	}
 
@@ -187,8 +180,9 @@ public class HelpermodelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	@Override
-	public T defaultCase(EObject object) {
+	public T defaultCase(EObject object)
+	{
 		return null;
 	}
 
-} //HelpermodelSwitch
+} //GendataSwitch

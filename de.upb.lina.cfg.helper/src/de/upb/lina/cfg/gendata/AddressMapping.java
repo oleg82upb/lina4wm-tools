@@ -1,6 +1,6 @@
 /**
  */
-package helpermodel;
+package de.upb.lina.cfg.gendata;
 
 import de.upb.llvm_parser.llvm.Address;
 
@@ -10,22 +10,23 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Adress Mapping</b></em>'.
+ * A representation of the model object '<em><b>Address Mapping</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link helpermodel.AdressMapping#getName <em>Name</em>}</li>
- *   <li>{@link helpermodel.AdressMapping#getAdresses <em>Adresses</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.AddressMapping#getName <em>Name</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.AddressMapping#getAdresses <em>Adresses</em>}</li>
  * </ul>
  * </p>
  *
- * @see helpermodel.HelpermodelPackage#getAdressMapping()
+ * @see de.upb.lina.cfg.gendata.GendataPackage#getAddressMapping()
  * @model
  * @generated
  */
-public interface AdressMapping extends EObject {
+public interface AddressMapping extends EObject
+{
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * The default value is <code>""</code>.
@@ -37,14 +38,14 @@ public interface AdressMapping extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see helpermodel.HelpermodelPackage#getAdressMapping_Name()
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getAddressMapping_Name()
 	 * @model default=""
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link helpermodel.AdressMapping#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.AddressMapping#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -63,10 +64,10 @@ public interface AdressMapping extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Adresses</em>' reference list.
-	 * @see helpermodel.HelpermodelPackage#getAdressMapping_Adresses()
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getAddressMapping_Adresses()
 	 * @model
 	 * @generated
 	 */
 	EList<Address> getAdresses();
 
-} // AdressMapping
+} // AddressMapping

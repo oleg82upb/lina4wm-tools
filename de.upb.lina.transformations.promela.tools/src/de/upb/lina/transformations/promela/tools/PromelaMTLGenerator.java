@@ -1,17 +1,8 @@
 package de.upb.lina.transformations.promela.tools;
 
-import helpermodel.HelpermodelFactory;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
@@ -19,8 +10,8 @@ import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.Transition;
+import de.upb.lina.cfg.gendata.GendataFactory;
 import de.upb.llvm_parser.llvm.Address;
-import de.upb.llvm_parser.llvm.Instruction;
 
 public class PromelaMTLGenerator extends AMTLGenerator {
 	
@@ -43,7 +34,7 @@ public class PromelaMTLGenerator extends AMTLGenerator {
 	
 	public void precomputeHelperModel(){
 		//TODO implement helper model and build explicit mapping
-		helperModel = HelpermodelFactory.eINSTANCE.createHelperModel();
+		helperModel = GendataFactory.eINSTANCE.createGeneratorData();
 		
 		
 		

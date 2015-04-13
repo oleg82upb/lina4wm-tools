@@ -1,11 +1,11 @@
 /**
  */
-package helpermodel.impl;
+package de.upb.lina.cfg.gendata.impl;
+
+import de.upb.lina.cfg.gendata.AddressMapping;
+import de.upb.lina.cfg.gendata.GendataPackage;
 
 import de.upb.llvm_parser.llvm.Address;
-
-import helpermodel.AdressMapping;
-import helpermodel.HelpermodelPackage;
 
 import java.util.Collection;
 
@@ -22,19 +22,20 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Adress Mapping</b></em>'.
+ * An implementation of the model object '<em><b>Address Mapping</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link helpermodel.impl.AdressMappingImpl#getName <em>Name</em>}</li>
- *   <li>{@link helpermodel.impl.AdressMappingImpl#getAdresses <em>Adresses</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.AddressMappingImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.AddressMappingImpl#getAdresses <em>Adresses</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class AdressMappingImpl extends MinimalEObjectImpl.Container implements AdressMapping {
+public class AddressMappingImpl extends MinimalEObjectImpl.Container implements AddressMapping
+{
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -70,7 +71,8 @@ public class AdressMappingImpl extends MinimalEObjectImpl.Container implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AdressMappingImpl() {
+	protected AddressMappingImpl()
+	{
 		super();
 	}
 
@@ -80,8 +82,9 @@ public class AdressMappingImpl extends MinimalEObjectImpl.Container implements A
 	 * @generated
 	 */
 	@Override
-	protected EClass eStaticClass() {
-		return HelpermodelPackage.Literals.ADRESS_MAPPING;
+	protected EClass eStaticClass()
+	{
+		return GendataPackage.Literals.ADDRESS_MAPPING;
 	}
 
 	/**
@@ -89,7 +92,8 @@ public class AdressMappingImpl extends MinimalEObjectImpl.Container implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
@@ -98,11 +102,12 @@ public class AdressMappingImpl extends MinimalEObjectImpl.Container implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
+	public void setName(String newName)
+	{
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, HelpermodelPackage.ADRESS_MAPPING__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.ADDRESS_MAPPING__NAME, oldName, name));
 	}
 
 	/**
@@ -110,9 +115,11 @@ public class AdressMappingImpl extends MinimalEObjectImpl.Container implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Address> getAdresses() {
-		if (adresses == null) {
-			adresses = new EObjectResolvingEList<Address>(Address.class, this, HelpermodelPackage.ADRESS_MAPPING__ADRESSES);
+	public EList<Address> getAdresses()
+	{
+		if (adresses == null)
+		{
+			adresses = new EObjectResolvingEList<Address>(Address.class, this, GendataPackage.ADDRESS_MAPPING__ADRESSES);
 		}
 		return adresses;
 	}
@@ -123,11 +130,13 @@ public class AdressMappingImpl extends MinimalEObjectImpl.Container implements A
 	 * @generated
 	 */
 	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case HelpermodelPackage.ADRESS_MAPPING__NAME:
+	public Object eGet(int featureID, boolean resolve, boolean coreType)
+	{
+		switch (featureID)
+		{
+			case GendataPackage.ADDRESS_MAPPING__NAME:
 				return getName();
-			case HelpermodelPackage.ADRESS_MAPPING__ADRESSES:
+			case GendataPackage.ADDRESS_MAPPING__ADRESSES:
 				return getAdresses();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -140,12 +149,14 @@ public class AdressMappingImpl extends MinimalEObjectImpl.Container implements A
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case HelpermodelPackage.ADRESS_MAPPING__NAME:
+	public void eSet(int featureID, Object newValue)
+	{
+		switch (featureID)
+		{
+			case GendataPackage.ADDRESS_MAPPING__NAME:
 				setName((String)newValue);
 				return;
-			case HelpermodelPackage.ADRESS_MAPPING__ADRESSES:
+			case GendataPackage.ADDRESS_MAPPING__ADRESSES:
 				getAdresses().clear();
 				getAdresses().addAll((Collection<? extends Address>)newValue);
 				return;
@@ -159,12 +170,14 @@ public class AdressMappingImpl extends MinimalEObjectImpl.Container implements A
 	 * @generated
 	 */
 	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case HelpermodelPackage.ADRESS_MAPPING__NAME:
+	public void eUnset(int featureID)
+	{
+		switch (featureID)
+		{
+			case GendataPackage.ADDRESS_MAPPING__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case HelpermodelPackage.ADRESS_MAPPING__ADRESSES:
+			case GendataPackage.ADDRESS_MAPPING__ADRESSES:
 				getAdresses().clear();
 				return;
 		}
@@ -177,11 +190,13 @@ public class AdressMappingImpl extends MinimalEObjectImpl.Container implements A
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case HelpermodelPackage.ADRESS_MAPPING__NAME:
+	public boolean eIsSet(int featureID)
+	{
+		switch (featureID)
+		{
+			case GendataPackage.ADDRESS_MAPPING__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case HelpermodelPackage.ADRESS_MAPPING__ADRESSES:
+			case GendataPackage.ADDRESS_MAPPING__ADRESSES:
 				return adresses != null && !adresses.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -193,7 +208,8 @@ public class AdressMappingImpl extends MinimalEObjectImpl.Container implements A
 	 * @generated
 	 */
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -203,4 +219,4 @@ public class AdressMappingImpl extends MinimalEObjectImpl.Container implements A
 		return result.toString();
 	}
 
-} //AdressMappingImpl
+} //AddressMappingImpl
