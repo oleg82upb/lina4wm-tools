@@ -64,6 +64,7 @@ public class CreateGraphOperation extends WorkspaceModifyOperation {
 		URI uri = URI.createPlatformResourceURI(astpath.toOSString(), true);
 		Resource llvmResource = resourceSet.getResource(uri, true);
 		this.ast = (LLVM) llvmResource.getContents().get(0);
+		EcoreUtil.resolveAll(this.ast);
 		return ast;
 	}
 

@@ -497,7 +497,7 @@ public class PreComputationChecker {
 			}
 		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getCall())) {
 			Call op = (Call) t.getInstruction();
-			if (op.getResult().getName().equals(address)) {
+			if (op.getResult() != null && op.getResult().getName().equals(address)) {
 				return t;
 			}
 		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getAlloc())) {
