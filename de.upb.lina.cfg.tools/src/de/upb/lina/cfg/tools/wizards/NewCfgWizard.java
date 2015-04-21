@@ -1,7 +1,5 @@
 package de.upb.lina.cfg.tools.wizards;
 
-import java.util.List;
-
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -13,7 +11,6 @@ import org.eclipse.ui.IWorkbenchWizard;
 import de.upb.lina.cfg.tools.CFGActivator;
 import de.upb.lina.cfg.tools.CreateGraphOperation;
 import de.upb.lina.cfg.tools.strategies.PreComputationChecker;
-import de.upb.llvm_parser.llvm.FunctionDefinition;
 
 /**
  * This is a sample new wizard. Its role is to create a new file resource in the
@@ -28,9 +25,8 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	private SelectionPage page;
 	private ISelection selection;
 	private String astlocation;
-	private boolean containsEarlyReads = false;
-	private boolean containsloopWithoutFence = false;
-	private String funcWithEarlyReads = "";
+	private boolean containsLoopWithoutFence = false;
+	private boolean containsLoadsInWriteDefChains = false;
 
 	/**
 	 * Constructor for NewCfgWizard.
@@ -102,24 +98,30 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 					astlocation = page.getAstLocation();
 					PreComputationChecker checker = new PreComputationChecker(page.getAstLocation(),
 							page.getMemoryModelSelection());
-					containsEarlyReads = checker.checkforEarlyReads();
-					containsloopWithoutFence = checker.checkforLoopWithoutFence();
-					List<FunctionDefinition> functions = checker.getFunctions();
-					funcWithEarlyReads = "";
-					for (int i = 0; i < functions.size(); i++)
-					{
-						funcWithEarlyReads = funcWithEarlyReads.concat(functions.get(i).getAddress().getName() + " ");
+//					containsEarlyReads = checker.checkforEarlyReads();
+					containsLoopWithoutFence = checker.checkforLoopWithoutFence();
+					if(!containsLoopWithoutFence){
+					containsLoadsInWriteDefChains = checker.checkForLoadsInWriteDefChains();
 					}
+//					List<FunctionDefinition> functions = checker.getFunctions();
+//					funcWithEarlyReads = "";
+//					for (int i = 0; i < functions.size(); i++)
+//					{
+//						funcWithEarlyReads = funcWithEarlyReads.concat(functions.get(i).getAddress().getName() + " ");
+//					}
 				}
-				if (containsloopWithoutFence && astlocation.equals(page.getAstLocation()))
+				if (containsLoopWithoutFence && astlocation.equals(page.getAstLocation()))
 				{
 					page.setErrorMessage("The selected Ast-File contains a loop without fence");
 					return false;
 				}
 
-				if (containsEarlyReads)
-					page.setMessage("The selected Ast-File contains possible early reads at functions: "
-							+ funcWithEarlyReads, 2);
+				if(containsLoadsInWriteDefChains){
+					page.setMessage("The selected Ast-File contains reads for which it cannot be determined whether they are early reads or not", 2);
+				}
+//				if (containsEarlyReads)
+//					page.setMessage("The selected Ast-File contains possible early reads at functions: "
+//							+ funcWithEarlyReads, 2);
 			}
 
 		} catch (InterruptedException e)

@@ -66,7 +66,7 @@ public class TSOUtil implements IGraphGenerator {
 		PreComputationChecker checker = new PreComputationChecker("", 0);
 		ControlFlowDiagram scCfg = sc.createGraph();
 		List<Transition> earlyReadsInFunction = checker.collectEarlyReadsinSCGraph(scCfg);
-		checker.checkForWriteDefChains(scCfg);
+		checker.checkForWriteDefChains(scCfg, new ArrayList<Transition>());
 
 		cfg.setName(function.getAddress().getName());
 		List<ControlFlowLocation> toBeProcessed = new ArrayList<ControlFlowLocation>();
