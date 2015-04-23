@@ -27,12 +27,14 @@ import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.Branch;
+import de.upb.llvm_parser.llvm.Constant;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.LlvmFactory;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Load;
 import de.upb.llvm_parser.llvm.Parameter;
+import de.upb.llvm_parser.llvm.PrimitiveValue;
 import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.Switch;
 import de.upb.llvm_parser.llvm.SwitchCase;
@@ -554,6 +556,12 @@ public class TSOUtil implements IGraphGenerator {
 								Value value = avp.getValue().getValue();
 								if (value instanceof AddressUse) {
 									return ((AddressUse) value).getAddress().getName();
+								}
+								if(value instanceof Constant){
+									return ((Constant) value).getValue().toString();
+								}
+								if(value instanceof PrimitiveValue){
+									return ((PrimitiveValue)value).getValue();
 								}
 								return "TODO";
 							}
