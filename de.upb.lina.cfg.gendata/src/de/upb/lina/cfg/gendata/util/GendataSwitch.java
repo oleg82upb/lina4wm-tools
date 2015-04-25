@@ -40,8 +40,7 @@ public class GendataSwitch<T> extends Switch<T>
 	 */
 	public GendataSwitch()
 	{
-		if (modelPackage == null)
-		{
+		if (modelPackage == null) {
 			modelPackage = GendataPackage.eINSTANCE;
 		}
 	}
@@ -70,31 +69,26 @@ public class GendataSwitch<T> extends Switch<T>
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject)
 	{
-		switch (classifierID)
-		{
-			case GendataPackage.LOCAL_VARIABLES:
-			{
+		switch (classifierID) {
+			case GendataPackage.LOCAL_VARIABLES: {
 				LocalVariables localVariables = (LocalVariables)theEObject;
 				T result = caseLocalVariables(localVariables);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GendataPackage.GENERATOR_DATA:
-			{
+			case GendataPackage.GENERATOR_DATA: {
 				GeneratorData generatorData = (GeneratorData)theEObject;
 				T result = caseGeneratorData(generatorData);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GendataPackage.ADDRESS_MAPPING:
-			{
+			case GendataPackage.ADDRESS_MAPPING: {
 				AddressMapping addressMapping = (AddressMapping)theEObject;
 				T result = caseAddressMapping(addressMapping);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GendataPackage.LABEL:
-			{
+			case GendataPackage.LABEL: {
 				Label label = (Label)theEObject;
 				T result = caseLabel(label);
 				if (result == null) result = defaultCase(theEObject);

@@ -2,6 +2,7 @@
  */
 package de.upb.lina.cfg.gendata;
 
+import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.llvm_parser.llvm.LLVM;
 
 import org.eclipse.emf.common.util.EList;
@@ -17,8 +18,9 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getLocalVariables <em>Local Variables</em>}</li>
- *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getLabels <em>Labels</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getProgram <em>Program</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getLabels <em>Labels</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getCfgs <em>Cfgs</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,7 +41,7 @@ public interface GeneratorData extends EObject
 	 * @return the value of the '<em>Local Variables</em>' containment reference.
 	 * @see #setLocalVariables(LocalVariables)
 	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_LocalVariables()
-	 * @model containment="true" required="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	LocalVariables getLocalVariables();
@@ -53,22 +55,6 @@ public interface GeneratorData extends EObject
 	 * @generated
 	 */
 	void setLocalVariables(LocalVariables value);
-
-	/**
-	 * Returns the value of the '<em><b>Labels</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.lina.cfg.gendata.Label}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Labels</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Labels</em>' containment reference list.
-	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_Labels()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Label> getLabels();
 
 	/**
 	 * Returns the value of the '<em><b>Program</b></em>' reference.
@@ -95,5 +81,37 @@ public interface GeneratorData extends EObject
 	 * @generated
 	 */
 	void setProgram(LLVM value);
+
+	/**
+	 * Returns the value of the '<em><b>Labels</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.lina.cfg.gendata.Label}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Labels</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Labels</em>' containment reference list.
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_Labels()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Label> getLabels();
+
+	/**
+	 * Returns the value of the '<em><b>Cfgs</b></em>' reference list.
+	 * The list contents are of type {@link de.upb.lina.cfg.controlflow.ControlFlowDiagram}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Cfgs</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Cfgs</em>' reference list.
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_Cfgs()
+	 * @model required="true"
+	 * @generated
+	 */
+	EList<ControlFlowDiagram> getCfgs();
 
 } // GeneratorData

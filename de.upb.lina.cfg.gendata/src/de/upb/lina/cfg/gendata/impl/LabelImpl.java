@@ -2,6 +2,7 @@
  */
 package de.upb.lina.cfg.gendata.impl;
 
+import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 
 import de.upb.lina.cfg.gendata.GendataPackage;
@@ -24,6 +25,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <ul>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.LabelImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.LabelImpl#getControlFlowLocation <em>Control Flow Location</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.LabelImpl#getControlFlowDiagram <em>Control Flow Diagram</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,6 +62,16 @@ public class LabelImpl extends MinimalEObjectImpl.Container implements Label
 	 * @ordered
 	 */
 	protected ControlFlowLocation controlFlowLocation;
+
+	/**
+	 * The cached value of the '{@link #getControlFlowDiagram() <em>Control Flow Diagram</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getControlFlowDiagram()
+	 * @generated
+	 * @ordered
+	 */
+	protected ControlFlowDiagram controlFlowDiagram;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -112,12 +124,10 @@ public class LabelImpl extends MinimalEObjectImpl.Container implements Label
 	 */
 	public ControlFlowLocation getControlFlowLocation()
 	{
-		if (controlFlowLocation != null && controlFlowLocation.eIsProxy())
-		{
+		if (controlFlowLocation != null && controlFlowLocation.eIsProxy()) {
 			InternalEObject oldControlFlowLocation = (InternalEObject)controlFlowLocation;
 			controlFlowLocation = (ControlFlowLocation)eResolveProxy(oldControlFlowLocation);
-			if (controlFlowLocation != oldControlFlowLocation)
-			{
+			if (controlFlowLocation != oldControlFlowLocation) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GendataPackage.LABEL__CONTROL_FLOW_LOCATION, oldControlFlowLocation, controlFlowLocation));
 			}
@@ -153,16 +163,56 @@ public class LabelImpl extends MinimalEObjectImpl.Container implements Label
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ControlFlowDiagram getControlFlowDiagram() {
+		if (controlFlowDiagram != null && controlFlowDiagram.eIsProxy()) {
+			InternalEObject oldControlFlowDiagram = (InternalEObject)controlFlowDiagram;
+			controlFlowDiagram = (ControlFlowDiagram)eResolveProxy(oldControlFlowDiagram);
+			if (controlFlowDiagram != oldControlFlowDiagram) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GendataPackage.LABEL__CONTROL_FLOW_DIAGRAM, oldControlFlowDiagram, controlFlowDiagram));
+			}
+		}
+		return controlFlowDiagram;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ControlFlowDiagram basicGetControlFlowDiagram() {
+		return controlFlowDiagram;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setControlFlowDiagram(ControlFlowDiagram newControlFlowDiagram) {
+		ControlFlowDiagram oldControlFlowDiagram = controlFlowDiagram;
+		controlFlowDiagram = newControlFlowDiagram;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.LABEL__CONTROL_FLOW_DIAGRAM, oldControlFlowDiagram, controlFlowDiagram));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.LABEL__NAME:
 				return getName();
 			case GendataPackage.LABEL__CONTROL_FLOW_LOCATION:
 				if (resolve) return getControlFlowLocation();
 				return basicGetControlFlowLocation();
+			case GendataPackage.LABEL__CONTROL_FLOW_DIAGRAM:
+				if (resolve) return getControlFlowDiagram();
+				return basicGetControlFlowDiagram();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -175,13 +225,15 @@ public class LabelImpl extends MinimalEObjectImpl.Container implements Label
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.LABEL__NAME:
 				setName((String)newValue);
 				return;
 			case GendataPackage.LABEL__CONTROL_FLOW_LOCATION:
 				setControlFlowLocation((ControlFlowLocation)newValue);
+				return;
+			case GendataPackage.LABEL__CONTROL_FLOW_DIAGRAM:
+				setControlFlowDiagram((ControlFlowDiagram)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -195,13 +247,15 @@ public class LabelImpl extends MinimalEObjectImpl.Container implements Label
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.LABEL__NAME:
 				setName(NAME_EDEFAULT);
 				return;
 			case GendataPackage.LABEL__CONTROL_FLOW_LOCATION:
 				setControlFlowLocation((ControlFlowLocation)null);
+				return;
+			case GendataPackage.LABEL__CONTROL_FLOW_DIAGRAM:
+				setControlFlowDiagram((ControlFlowDiagram)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -215,12 +269,13 @@ public class LabelImpl extends MinimalEObjectImpl.Container implements Label
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.LABEL__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case GendataPackage.LABEL__CONTROL_FLOW_LOCATION:
 				return controlFlowLocation != null;
+			case GendataPackage.LABEL__CONTROL_FLOW_DIAGRAM:
+				return controlFlowDiagram != null;
 		}
 		return super.eIsSet(featureID);
 	}

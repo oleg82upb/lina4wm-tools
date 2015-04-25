@@ -37,8 +37,7 @@ public class GendataAdapterFactory extends AdapterFactoryImpl
 	 */
 	public GendataAdapterFactory()
 	{
-		if (modelPackage == null)
-		{
+		if (modelPackage == null) {
 			modelPackage = GendataPackage.eINSTANCE;
 		}
 	}
@@ -54,12 +53,10 @@ public class GendataAdapterFactory extends AdapterFactoryImpl
 	@Override
 	public boolean isFactoryForType(Object object)
 	{
-		if (object == modelPackage)
-		{
+		if (object == modelPackage) {
 			return true;
 		}
-		if (object instanceof EObject)
-		{
+		if (object instanceof EObject) {
 			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -72,31 +69,25 @@ public class GendataAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	protected GendataSwitch<Adapter> modelSwitch =
-		new GendataSwitch<Adapter>()
-		{
+		new GendataSwitch<Adapter>() {
 			@Override
-			public Adapter caseLocalVariables(LocalVariables object)
-			{
+			public Adapter caseLocalVariables(LocalVariables object) {
 				return createLocalVariablesAdapter();
 			}
 			@Override
-			public Adapter caseGeneratorData(GeneratorData object)
-			{
+			public Adapter caseGeneratorData(GeneratorData object) {
 				return createGeneratorDataAdapter();
 			}
 			@Override
-			public Adapter caseAddressMapping(AddressMapping object)
-			{
+			public Adapter caseAddressMapping(AddressMapping object) {
 				return createAddressMappingAdapter();
 			}
 			@Override
-			public Adapter caseLabel(Label object)
-			{
+			public Adapter caseLabel(Label object) {
 				return createLabelAdapter();
 			}
 			@Override
-			public Adapter defaultCase(EObject object)
-			{
+			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
 		};

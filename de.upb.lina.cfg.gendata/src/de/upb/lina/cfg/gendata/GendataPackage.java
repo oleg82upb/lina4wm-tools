@@ -39,7 +39,7 @@ public interface GendataPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.upb.de/lina/cfg/helper";
+	String eNS_URI = "http://www.upb.de/lina/cfg/gendata";
 
 	/**
 	 * The package namespace name.
@@ -114,22 +114,31 @@ public interface GendataPackage extends EPackage
 	int GENERATOR_DATA__LOCAL_VARIABLES = 0;
 
 	/**
-	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERATOR_DATA__LABELS = 1;
-
-	/**
 	 * The feature id for the '<em><b>Program</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA__PROGRAM = 2;
+	int GENERATOR_DATA__PROGRAM = 1;
+
+	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_DATA__LABELS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Cfgs</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_DATA__CFGS = 3;
 
 	/**
 	 * The number of structural features of the '<em>Generator Data</em>' class.
@@ -138,7 +147,7 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA_FEATURE_COUNT = 3;
+	int GENERATOR_DATA_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Generator Data</em>' class.
@@ -224,13 +233,22 @@ public interface GendataPackage extends EPackage
 	int LABEL__CONTROL_FLOW_LOCATION = 1;
 
 	/**
+	 * The feature id for the '<em><b>Control Flow Diagram</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LABEL__CONTROL_FLOW_DIAGRAM = 2;
+
+	/**
 	 * The number of structural features of the '<em>Label</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LABEL_FEATURE_COUNT = 2;
+	int LABEL_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Label</em>' class.
@@ -285,6 +303,17 @@ public interface GendataPackage extends EPackage
 	EReference getGeneratorData_LocalVariables();
 
 	/**
+	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.gendata.GeneratorData#getProgram <em>Program</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Program</em>'.
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getProgram()
+	 * @see #getGeneratorData()
+	 * @generated
+	 */
+	EReference getGeneratorData_Program();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link de.upb.lina.cfg.gendata.GeneratorData#getLabels <em>Labels</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -296,15 +325,15 @@ public interface GendataPackage extends EPackage
 	EReference getGeneratorData_Labels();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.gendata.GeneratorData#getProgram <em>Program</em>}'.
+	 * Returns the meta object for the reference list '{@link de.upb.lina.cfg.gendata.GeneratorData#getCfgs <em>Cfgs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Program</em>'.
-	 * @see de.upb.lina.cfg.gendata.GeneratorData#getProgram()
+	 * @return the meta object for the reference list '<em>Cfgs</em>'.
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getCfgs()
 	 * @see #getGeneratorData()
 	 * @generated
 	 */
-	EReference getGeneratorData_Program();
+	EReference getGeneratorData_Cfgs();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.AddressMapping <em>Address Mapping</em>}'.
@@ -371,6 +400,17 @@ public interface GendataPackage extends EPackage
 	EReference getLabel_ControlFlowLocation();
 
 	/**
+	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.gendata.Label#getControlFlowDiagram <em>Control Flow Diagram</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Control Flow Diagram</em>'.
+	 * @see de.upb.lina.cfg.gendata.Label#getControlFlowDiagram()
+	 * @see #getLabel()
+	 * @generated
+	 */
+	EReference getLabel_ControlFlowDiagram();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -431,6 +471,14 @@ public interface GendataPackage extends EPackage
 		EReference GENERATOR_DATA__LOCAL_VARIABLES = eINSTANCE.getGeneratorData_LocalVariables();
 
 		/**
+		 * The meta object literal for the '<em><b>Program</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GENERATOR_DATA__PROGRAM = eINSTANCE.getGeneratorData_Program();
+
+		/**
 		 * The meta object literal for the '<em><b>Labels</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -439,12 +487,12 @@ public interface GendataPackage extends EPackage
 		EReference GENERATOR_DATA__LABELS = eINSTANCE.getGeneratorData_Labels();
 
 		/**
-		 * The meta object literal for the '<em><b>Program</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Cfgs</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference GENERATOR_DATA__PROGRAM = eINSTANCE.getGeneratorData_Program();
+		EReference GENERATOR_DATA__CFGS = eINSTANCE.getGeneratorData_Cfgs();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.AddressMappingImpl <em>Address Mapping</em>}' class.
@@ -497,6 +545,14 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EReference LABEL__CONTROL_FLOW_LOCATION = eINSTANCE.getLabel_ControlFlowLocation();
+
+		/**
+		 * The meta object literal for the '<em><b>Control Flow Diagram</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LABEL__CONTROL_FLOW_DIAGRAM = eINSTANCE.getLabel_ControlFlowDiagram();
 
 	}
 

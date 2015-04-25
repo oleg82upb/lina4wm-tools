@@ -3,7 +3,6 @@
 package de.upb.lina.cfg.gendata;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -35,7 +34,7 @@ public interface LocalVariables extends EObject
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Variables</em>' containment reference list.
 	 * @see de.upb.lina.cfg.gendata.GendataPackage#getLocalVariables_Variables()
-	 * @model containment="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	EList<AddressMapping> getVariables();
