@@ -117,8 +117,7 @@ public class AddressMappingImpl extends MinimalEObjectImpl.Container implements 
 	 */
 	public EList<Address> getAdresses()
 	{
-		if (adresses == null)
-		{
+		if (adresses == null) {
 			adresses = new EObjectResolvingEList<Address>(Address.class, this, GendataPackage.ADDRESS_MAPPING__ADRESSES);
 		}
 		return adresses;
@@ -132,8 +131,7 @@ public class AddressMappingImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.ADDRESS_MAPPING__NAME:
 				return getName();
 			case GendataPackage.ADDRESS_MAPPING__ADRESSES:
@@ -151,8 +149,7 @@ public class AddressMappingImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.ADDRESS_MAPPING__NAME:
 				setName((String)newValue);
 				return;
@@ -172,8 +169,7 @@ public class AddressMappingImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.ADDRESS_MAPPING__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -192,8 +188,7 @@ public class AddressMappingImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.ADDRESS_MAPPING__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case GendataPackage.ADDRESS_MAPPING__ADRESSES:
