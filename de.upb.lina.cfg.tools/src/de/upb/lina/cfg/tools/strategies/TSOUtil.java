@@ -369,6 +369,7 @@ public class TSOUtil implements IGraphGenerator {
 		Store store = (Store) wdcTransition.getInstruction();
 		AddressValuePair newPair = ControlflowFactory.eINSTANCE.createAddressValuePair();
 		boolean redefinedAddress = instructionIsWriteDefChain(checker.getWdcAddress(), wdcTransition.getSource(), store);
+		boolean redefinedValue = instructionIsWriteDefChain(checker.getWdcValue(), wdcTransition.getSource(), store);
 		
 		// address redefined
 		if (redefinedAddress) {
@@ -383,9 +384,9 @@ public class TSOUtil implements IGraphGenerator {
 				writeDefMap.put(orgAddress, copyAddress);
 				cfg.getVariableCopies().add(copyAddress);
 				wdcTransition.setCopyAddress(copyAddress);
-				
+			}
 				//create Parameter
-				Parameter existingParam = getParamWithName(copyAddress.getName(), cfg.getVariableCopyParams());
+				Parameter existingParam = getParamWithName(wdcTransition.getCopyAddress().getName(), cfg.getVariableCopyParams());
 				Parameter addressParameter = null;
 				if (existingParam != null) {
 					// use existing parameter
@@ -393,15 +394,16 @@ public class TSOUtil implements IGraphGenerator {
 				} else {
 					// create new parameter
 					addressParameter = EcoreUtil.copy(store.getTargetAddress());
-					((AddressUse) addressParameter.getValue()).setAddress(copyAddress);
+					((AddressUse) addressParameter.getValue()).setAddress(wdcTransition.getCopyAddress());
 					cfg.getVariableCopyParams().add(addressParameter);
 				}
 				newPair.setAddress(addressParameter);
 				newPair.setValue(store.getValue());
-			}
 		} 
-		if (instructionIsWriteDefChain(checker.getWdcValue(), wdcTransition.getSource(), store)) {
-			// value redefined
+		// value redefined
+		if (redefinedValue) {
+			
+			//create address
 			Address orgValue = ((AddressUse) store.getValue().getValue()).getAddress();
 			
 			if(writeDefMap.containsKey(orgValue)){
@@ -412,22 +414,21 @@ public class TSOUtil implements IGraphGenerator {
 				writeDefMap.put(orgValue, copyValue);
 				cfg.getVariableCopies().add(copyValue);
 				wdcTransition.setCopyValue(copyValue);
-				
+			}
 				//create Parameter
-				Parameter existingParam = getParamWithName(copyValue.getName(), cfg.getVariableCopyParams());
+				Parameter existingParam = getParamWithName(wdcTransition.getCopyValue().getName(), cfg.getVariableCopyParams());
 				Parameter valueParam = null;
 				if(existingParam != null){
 					valueParam = existingParam;
 				}else{
 					valueParam = EcoreUtil.copy(store.getValue());
-					((AddressUse) valueParam.getValue()).setAddress(copyValue);
+					((AddressUse) valueParam.getValue()).setAddress(wdcTransition.getCopyValue());
 					cfg.getVariableCopyParams().add(valueParam);
 				}
 				if(!redefinedAddress){
 					newPair.setAddress(store.getTargetAddress());
 				}
 				newPair.setValue(valueParam);
-			}
 		}
 		buffer.getAddressValuePairs().add(newPair);
 

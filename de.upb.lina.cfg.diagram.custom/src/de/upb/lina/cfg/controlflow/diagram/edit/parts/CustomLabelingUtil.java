@@ -27,6 +27,7 @@ import de.upb.llvm_parser.llvm.Invoke;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Load;
 import de.upb.llvm_parser.llvm.LogicOperation;
+import de.upb.llvm_parser.llvm.NestedCast;
 import de.upb.llvm_parser.llvm.NestedGetElementPtr;
 import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.ParameterList;
@@ -122,10 +123,6 @@ public class CustomLabelingUtil {
 		}
 
 		EClass type = t.getInstruction().eClass();
-		//lets only label stores and loads for now
-		//		if(!(type.equals(LlvmPackage.eINSTANCE.getLoad()) || type.equals(LlvmPackage.eINSTANCE.getStore()) || (type.equals(LlvmPackage.eINSTANCE.getFence())))){
-		//			return result;
-		//		}
 
 		// Load
 		if (type.equals(LlvmPackage.eINSTANCE.getLoad())) {
@@ -476,10 +473,16 @@ public class CustomLabelingUtil {
 			result += val.getValue();
 		}
 		
-//		else if(value.eClass().equals(LlvmPackage.eINSTANCE.getNestedGetElementPtr())){
-//			NestedGetElementPtr val = (NestedGetElementPtr) value;
-//			result += TODO;
-//		}
+		else if(value.eClass().equals(LlvmPackage.eINSTANCE.getNestedGetElementPtr())){
+			NestedGetElementPtr val = (NestedGetElementPtr) value;
+			return "GetElementPtr" +WS+ toString(val.getAggerate());
+		}
+		
+		else if(value.eClass().equals(LlvmPackage.eINSTANCE.getNestedCast())){
+			NestedCast val = (NestedCast) value;
+			return "(" + toString((TypeUse)val.getFrom()) + "->" + toString(val.getTo()) + ") " + toString(val.getValue());
+		}
+		
 		else {
 			result += TODO;
 		}
