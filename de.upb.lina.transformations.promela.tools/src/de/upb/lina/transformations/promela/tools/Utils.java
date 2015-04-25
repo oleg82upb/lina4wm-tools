@@ -15,8 +15,13 @@ public class Utils {
 	}
 	
 	public static String clean(String string){
-		//String result = string;
-		string = string.replaceAll("%", "v");
+		int loc = string.indexOf("%");
+		//if the address is starts with a number, do not give it a v_
+		if(loc > -1 && string.substring(loc+1,loc+2).matches("[0-9]")){
+			string = string.replaceAll("%", "v");
+		}else{
+			string = string.replaceAll("%", "");
+		}
 		string = string.trim();
 		string = string.replaceAll(" ", "");
 		return string;
