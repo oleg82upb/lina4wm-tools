@@ -16,7 +16,7 @@ public class Utils {
 	
 	public static String clean(String string){
 		//String result = string;
-		string = string.replaceAll("%", "v_");
+		string = string.replaceAll("%", "v");
 		string = string.trim();
 		string = string.replaceAll(" ", "");
 		return string;
