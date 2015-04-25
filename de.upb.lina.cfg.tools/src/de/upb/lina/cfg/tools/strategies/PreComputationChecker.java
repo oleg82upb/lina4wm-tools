@@ -38,14 +38,13 @@ import de.upb.llvm_parser.llvm.ShuffleVector;
 import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.VariableAttributeAccess;
 import de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl;
-import de.upb.llvm_parser.parser.antlr.LLVMParser;
 
 public class PreComputationChecker {
 
 	private LLVM ast = null;
 	private String astLocation;
 	private int memoryModel;
-	private List<FunctionDefinition> functions = null;
+//	private List<FunctionDefinition> functions = null;
 
 	public PreComputationChecker(String astLocation, int reordering) {
 		this.astLocation = astLocation;
@@ -71,60 +70,60 @@ public class PreComputationChecker {
 		return null;
 	}
 
-	public boolean checkforEarlyReads() throws InterruptedException {
+//	public boolean checkforEarlyReads() throws InterruptedException {
+//
+//		if (loadAst() == null) {
+//			throw new InterruptedException("No specified LLVM Object inside the ast.");
+//		}
+//
+//		int a_elem = ast.getElements().size();
+//		List<Transition> earlyReads = new ArrayList<Transition>();
+//		List<Transition> earlyReadsInFunction = new ArrayList<Transition>();
+//		functions = new ArrayList<FunctionDefinition>();
+//
+//		// for every function
+//		for (int i = 0; i < a_elem; i++) {
+//
+//			if (ast.getElements().get(i) instanceof FunctionDefinitionImpl) {
+//				FunctionDefinition func = (FunctionDefinition) ast.getElements().get(i);
+//				if (func.getBody() != null) {
+//
+//					if (memoryModel == CFGConstants.TSO) {
+//						// create sc-graph and search for possible early reads
+//						SCUtil sc = new SCUtil(func);
+//						earlyReadsInFunction = collectEarlyReadsinSCGraph(sc.createGraph());
+//						if (!earlyReadsInFunction.isEmpty()) {
+//							functions.add(func);
+//						}
+//					}
+//					if (CFGConstants.DEBUG) {
+//
+//						if (CFGConstants.DEBUG && earlyReadsInFunction.isEmpty()) {
+//							System.out.println("No early reads found in function " + func.getAddress().getName());
+//						} else {
+//							System.out.println("Early reads found in function " + func.getAddress().getName()
+//									+ " at transition:");
+//							for (Transition t : earlyReadsInFunction)
+//								System.out.print(t.getSource().getPc() + " to " + t.getTarget().getPc() + "  ");
+//						}
+//						System.out.println();
+//					}
+//				}
+//			}
+//			earlyReads.addAll(earlyReadsInFunction);
+//		}
+//		return !earlyReads.isEmpty();
+//	}
 
-		if (loadAst() == null) {
-			throw new InterruptedException("No specified LLVM Object inside the ast.");
-		}
-
-		int a_elem = ast.getElements().size();
-		List<Transition> earlyReads = new ArrayList<Transition>();
-		List<Transition> earlyReadsInFunction = new ArrayList<Transition>();
-		functions = new ArrayList<FunctionDefinition>();
-
-		// for every function
-		for (int i = 0; i < a_elem; i++) {
-
-			if (ast.getElements().get(i) instanceof FunctionDefinitionImpl) {
-				FunctionDefinition func = (FunctionDefinition) ast.getElements().get(i);
-				if (func.getBody() != null) {
-
-					if (memoryModel == CFGConstants.TSO) {
-						// create sc-graph and search for possible early reads
-						SCUtil sc = new SCUtil(func);
-						earlyReadsInFunction = collectEarlyReadsinSCGraph(sc.createGraph());
-						if (!earlyReadsInFunction.isEmpty()) {
-							functions.add(func);
-						}
-					}
-					if (CFGConstants.DEBUG) {
-
-						if (CFGConstants.DEBUG && earlyReadsInFunction.isEmpty()) {
-							System.out.println("No early reads found in function " + func.getAddress().getName());
-						} else {
-							System.out.println("Early reads found in function " + func.getAddress().getName()
-									+ " at transition:");
-							for (Transition t : earlyReadsInFunction)
-								System.out.print(t.getSource().getPc() + " to " + t.getTarget().getPc() + "  ");
-						}
-						System.out.println();
-					}
-				}
-			}
-			earlyReads.addAll(earlyReadsInFunction);
-		}
-		return !earlyReads.isEmpty();
-	}
-
-	/**
-	 * This method should only be called if checkForEarlyReads() was called
-	 * before
-	 * 
-	 * @return the functions
-	 */
-	public List<FunctionDefinition> getFunctions() {
-		return functions;
-	}
+//	/**
+//	 * This method should only be called if checkForEarlyReads() was called
+//	 * before
+//	 * 
+//	 * @return the functions
+//	 */
+//	public List<FunctionDefinition> getFunctions() {
+//		return functions;
+//	}
 
 	public boolean checkforLoopWithoutFence() throws InterruptedException {
 
@@ -157,6 +156,34 @@ public class PreComputationChecker {
 			System.out.println("Loop without fence:" + loopWithoutFence);
 		}
 		return loopWithoutFence;
+	}
+	
+	public boolean checkForLoadsInWriteDefChains(){
+		
+		if (loadAst() == null) {
+			throw new RuntimeException("No specified LLVM Object inside the ast.");
+		}
+		
+		int a_elem = ast.getElements().size();
+		
+		// for every function
+				for (int i = 0; i < a_elem; i++) {
+					if (ast.getElements().get(i) instanceof FunctionDefinitionImpl) {
+						FunctionDefinition func = (FunctionDefinition) ast.getElements().get(i);
+						if (func.getBody() != null) {
+							if (memoryModel == CFGConstants.TSO) {
+								// create sc-graph and search for loops without fence
+								SCUtil sc = new SCUtil(func);
+								List<Transition> loadsFound = new ArrayList<Transition>();
+								checkForWriteDefChains(sc.createGraph(), loadsFound);
+								if(!loadsFound.isEmpty()){
+									return true;
+								}
+							}
+						}
+					}
+				}
+				return false;
 	}
 
 	/**
@@ -327,7 +354,7 @@ public class PreComputationChecker {
 		return wdcAddressValue;
 	}
 
-	public void checkForWriteDefChains(ControlFlowDiagram cfg) {
+	public void checkForWriteDefChains(ControlFlowDiagram cfg, List<Transition> loadsFound) {
 
 		// find all store-transitions and check whether they are in a
 		// writeDefChain
@@ -359,7 +386,8 @@ public class PreComputationChecker {
 							Transition read = searchLoadWithRedefStoreAddress(storeAddress, addressDef,
 									new ArrayList<Transition>());
 							if (read != null) {
-								// TODO throw warning
+								loadsFound.add(read);
+								if(CFGConstants.DEBUG)
 								System.out.println(((Load) read.getInstruction()).getResult().getName()
 										+ " := LOAD "
 										+ (((AddressUse) ((Load) read.getInstruction()).getAddress().getValue()))
