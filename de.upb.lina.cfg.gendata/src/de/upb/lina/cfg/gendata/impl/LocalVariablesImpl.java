@@ -5,18 +5,12 @@ package de.upb.lina.cfg.gendata.impl;
 import de.upb.lina.cfg.gendata.AddressMapping;
 import de.upb.lina.cfg.gendata.GendataPackage;
 import de.upb.lina.cfg.gendata.LocalVariables;
-
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -73,8 +67,7 @@ public class LocalVariablesImpl extends MinimalEObjectImpl.Container implements 
 	 */
 	public EList<AddressMapping> getVariables()
 	{
-		if (variables == null)
-		{
+		if (variables == null) {
 			variables = new EObjectContainmentEList<AddressMapping>(AddressMapping.class, this, GendataPackage.LOCAL_VARIABLES__VARIABLES);
 		}
 		return variables;
@@ -88,8 +81,7 @@ public class LocalVariablesImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.LOCAL_VARIABLES__VARIABLES:
 				return ((InternalEList<?>)getVariables()).basicRemove(otherEnd, msgs);
 		}
@@ -104,8 +96,7 @@ public class LocalVariablesImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.LOCAL_VARIABLES__VARIABLES:
 				return getVariables();
 		}
@@ -121,8 +112,7 @@ public class LocalVariablesImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.LOCAL_VARIABLES__VARIABLES:
 				getVariables().clear();
 				getVariables().addAll((Collection<? extends AddressMapping>)newValue);
@@ -139,8 +129,7 @@ public class LocalVariablesImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.LOCAL_VARIABLES__VARIABLES:
 				getVariables().clear();
 				return;
@@ -156,8 +145,7 @@ public class LocalVariablesImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.LOCAL_VARIABLES__VARIABLES:
 				return variables != null && !variables.isEmpty();
 		}

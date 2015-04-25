@@ -5,19 +5,10 @@
 -->
 
 <plugin>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated HelperModel -->
-      <package
-            uri="http://www.upb.de/lina/cfg/helper"
-            class="helpermodel.HelpermodelPackage"
-            genModel="model/gendata.genmodel"/>
-   </extension>
-
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated gendata -->
       <package
-            uri="http://www.upb.de/lina/cfg/helper"
+            uri="http://www.upb.de/lina/cfg/gendata"
             class="de.upb.lina.cfg.gendata.GendataPackage"
             genModel="model/gendata.genmodel"/>
    </extension>

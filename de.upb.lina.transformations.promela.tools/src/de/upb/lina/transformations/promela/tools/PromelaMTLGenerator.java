@@ -70,7 +70,9 @@ public class PromelaMTLGenerator extends AMTLGenerator {
 
 	public PromelaMTLGenerator(List<ControlFlowDiagram> cfgs) {
 		super(cfgs);
-		//precomputeHelperModel();
+		
+		GendataPrecomputer precomp = new GendataPrecomputer(cfgs);
+		precomp.computeGeneratorData();
 	}
 
 
