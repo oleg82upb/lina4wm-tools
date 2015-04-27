@@ -3,7 +3,9 @@ package de.upb.lina.cfg.controlflow.diagram.edit.parts;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 
 import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.EarlyReadTransition;
@@ -12,6 +14,7 @@ import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.controlflow.WriteDefChainTransition;
 import de.upb.llvm_parser.llvm.AddressUse;
+import de.upb.llvm_parser.llvm.Aggregate_Type;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.ArithmeticOperation;
 import de.upb.llvm_parser.llvm.AtomicRMW;
@@ -37,6 +40,7 @@ import de.upb.llvm_parser.llvm.Predefined;
 import de.upb.llvm_parser.llvm.PrimitiveValue;
 import de.upb.llvm_parser.llvm.Return;
 import de.upb.llvm_parser.llvm.Store;
+import de.upb.llvm_parser.llvm.Structure;
 import de.upb.llvm_parser.llvm.TypeUse;
 import de.upb.llvm_parser.llvm.Value;
 import de.upb.llvm_parser.llvm.impl.AddressUseImpl;
@@ -426,6 +430,23 @@ public class CustomLabelingUtil {
 		result += ")";
 		return result;
 	}
+	
+	private String toString(EList<EObject> pList) {
+		String result = "(";
+		
+		for(EObject o: pList){
+			if(o instanceof TypeUse){
+			
+			TypeUse p = (TypeUse) o;
+			result += toString(p) + ", ";
+			}else{
+				result += o.toString();
+			}
+			}
+		result = result.substring(0, result.length()-2);
+		result += ")";
+		return result;
+	}
 
 	/**
 	 * Adds a type
@@ -480,8 +501,14 @@ public class CustomLabelingUtil {
 		
 		else if(value.eClass().equals(LlvmPackage.eINSTANCE.getNestedCast())){
 			NestedCast val = (NestedCast) value;
+			if(val.getFrom() instanceof TypeUse){
 			return "(" + toString((TypeUse)val.getFrom()) + "->" + toString(val.getTo()) + ") " + toString(val.getValue());
-		}
+			}
+			if(val.getFrom() instanceof Structure){
+				Structure from = (Structure) val.getFrom();
+				return "(" + toString(from.getTypes()) + "->" + toString(val.getTo()) + ") " + toString(val.getValue());
+			}
+ 		}
 		
 		else {
 			result += TODO;
