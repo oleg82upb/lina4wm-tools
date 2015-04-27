@@ -47,7 +47,7 @@ public interface GendataPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "de.upb.lina.cfg";
+	String eNS_PREFIX = "gendata";
 
 	/**
 	 * The singleton instance of the package.

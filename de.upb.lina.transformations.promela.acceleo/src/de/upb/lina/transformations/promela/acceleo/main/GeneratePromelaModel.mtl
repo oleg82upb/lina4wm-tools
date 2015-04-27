@@ -1,0 +1,108 @@
+[comment encoding = UTF-8 /]
+[module GeneratePromelaModel('http://www.upb.de/lina/cfg/controlflow', 'http://www.upb.de/lina/cfg/gendata', 'http://www.upb.de/llvm_parser/llvm', 'http://www.eclipse.org/emf/2002/Ecore')]
+
+
+[template public generateModel(genData : GeneratorData) post (trim())]
+[comment @main/]
+[file ('test.pml' , false, 'UTF-8')]
+[buildDefines()/]
+[for (cfg: ControlFlowDiagram | genData.cfgs)]
+inline [cfg.name.replaceAll('@_', '')/](){
+[for (loc: ControlFlowLocation | cfg.locations)][handleLocation(loc, genData)/][/for]
+}
+
+[/for]
+
+
+[buildStandards()/]
+
+[/file]
+[/template]
+
+[template public handleLocation(loc: ControlFlowLocation, genData: GeneratorData)]
+[for (l : Label | genData.labels)]
+[if (l.controlFlowLocation = loc and loc.outgoing->size() = 1)]
+[l.name/]: [for (t : Transition | loc.outgoing)] [t.transformTransitions()/] [/for]
+[elseif (l.controlFlowLocation = loc and loc.outgoing->size() > 1)]
+[l.name/]: if 
+	   [for (t : Transition | loc.outgoing)] 
+		:: [t.transformTransitions()/]; -> goto [for (l : Label | genData.labels)][if (l.controlFlowLocation = t.target)][l.name/][/if][/for];
+   	   [/for]
+[/if]
+[/for]
+[/template]
+
+[template public transformTransitions(t: Transition)]
+instr
+[/template]
+
+
+
+
+
+
+[template public buildDefines(c: OclAny)]
+#define MEM_SIZE 15	//size of memory
+#define NULL 0
+#define I32  0 		// = {0};
+
+#define EMPTY 0
+#define MYNULL -1
+
+short memory['['/]MEM_SIZE[']'/];
+short memUse = 1; 	//shows to the next free cell in memory
+
+
+[/template]
+
+[template public buildStandards(c: OclAny)]
+//Stubs
+proctype process1(){
+	//TODO: empty stub
+}
+
+proctype process2(){
+	//TODO: empty stub
+}
+
+
+init{
+atomic{
+	//TODO: empty stub
+
+	run process1();
+	run process2();
+	}
+}
+
+
+//standard stuff
+inline getelementptr(instance, offset, targetRegister)
+{
+	atomic{
+	//simplified version of what llvm does.
+	//we don't need the type as long as we assume our memory to hold only values/pointers etc of equal length. 
+	//In this case, the offset directly correspond to adding it to instance address. 
+	//assert(offset <= type); //offset shouldn't be greater than the type range
+	targetRegister = instance + offset;
+	}
+}
+
+inline alloca(type, targetRegister)
+{
+	atomic{
+	targetRegister = memUse;
+	memUse = memUse + type + 1;
+	assert(memUse < MEM_SIZE);
+	}
+}
+
+inline cas(adr, old, new, result)
+{
+	atomic{
+	if 	:: memory['['/]adr[']'/] == old -> memory['['/]adr[']'/] = new; result = true;
+		:: else -> result = false;
+	fi;
+	}
+}
+[/template]

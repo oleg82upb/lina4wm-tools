@@ -1,5 +1,7 @@
 package de.upb.lina.transformations.promela.tools;
 
+import javax.annotation.Generated;
+
 import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.StoreBuffer;
 import de.upb.llvm_parser.llvm.Constant;
@@ -24,6 +26,8 @@ public class Utils {
 		}
 		string = string.trim();
 		string = string.replaceAll(" ", "");
+		
+		
 		return string;
 	}
 	

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
-
 import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
@@ -14,45 +12,8 @@ import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.gendata.AddressMapping;
 import de.upb.lina.cfg.gendata.GendataFactory;
-import de.upb.lina.cfg.gendata.Label;
-import de.upb.lina.cfg.gendata.LocalVariables;
-import de.upb.llvm_parser.llvm.AbstractElement;
 import de.upb.llvm_parser.llvm.Address;
-import de.upb.llvm_parser.llvm.AddressUse;
-import de.upb.llvm_parser.llvm.Alloc;
-import de.upb.llvm_parser.llvm.ArithmeticOperation;
-import de.upb.llvm_parser.llvm.AtomicRMW;
-import de.upb.llvm_parser.llvm.BasicBlock;
-import de.upb.llvm_parser.llvm.Branch;
-import de.upb.llvm_parser.llvm.Call;
-import de.upb.llvm_parser.llvm.Cast;
-import de.upb.llvm_parser.llvm.CmpXchg;
-import de.upb.llvm_parser.llvm.Compare;
-import de.upb.llvm_parser.llvm.ExtractElement;
-import de.upb.llvm_parser.llvm.ExtractValue;
-import de.upb.llvm_parser.llvm.Fence;
-import de.upb.llvm_parser.llvm.FunctionBody;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
-import de.upb.llvm_parser.llvm.GetElementPtr;
-import de.upb.llvm_parser.llvm.IndirectBranch;
-import de.upb.llvm_parser.llvm.InsertElement;
-import de.upb.llvm_parser.llvm.InsertValue;
-import de.upb.llvm_parser.llvm.Instruction;
-import de.upb.llvm_parser.llvm.Invoke;
-import de.upb.llvm_parser.llvm.LLVM;
-import de.upb.llvm_parser.llvm.LandingPad;
-import de.upb.llvm_parser.llvm.Load;
-import de.upb.llvm_parser.llvm.LogicOperation;
-import de.upb.llvm_parser.llvm.Phi;
-import de.upb.llvm_parser.llvm.Resume;
-import de.upb.llvm_parser.llvm.Return;
-import de.upb.llvm_parser.llvm.Select;
-import de.upb.llvm_parser.llvm.ShuffleVector;
-import de.upb.llvm_parser.llvm.Store;
-import de.upb.llvm_parser.llvm.Switch;
-import de.upb.llvm_parser.llvm.Unreachable;
-import de.upb.llvm_parser.llvm.Value;
-import de.upb.llvm_parser.llvm.VariableAttributeAccess;
 
 public class PromelaMTLGenerator extends AMTLGenerator {
 
@@ -71,8 +32,6 @@ public class PromelaMTLGenerator extends AMTLGenerator {
 	public PromelaMTLGenerator(List<ControlFlowDiagram> cfgs) {
 		super(cfgs);
 		
-		GendataPrecomputer precomp = new GendataPrecomputer(cfgs);
-		precomp.computeGeneratorData();
 	}
 
 

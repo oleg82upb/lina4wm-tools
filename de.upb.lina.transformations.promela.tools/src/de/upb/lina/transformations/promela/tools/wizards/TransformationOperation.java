@@ -1,6 +1,7 @@
 package de.upb.lina.transformations.promela.tools.wizards;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
+import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -21,6 +23,9 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
+import de.upb.lina.cfg.gendata.GeneratorData;
+import de.upb.lina.transformations.promela.acceleo.main.GeneratePromelaModel;
+import de.upb.lina.transformations.promela.tools.GendataPrecomputer;
 import de.upb.lina.transformations.promela.tools.MTLWriter;
 import de.upb.lina.transformations.promela.tools.PromelaMTLGenerator;
 
@@ -54,8 +59,37 @@ public class TransformationOperation extends WorkspaceModifyOperation {
 		gen.produceTransformation();
 		String toWrite = gen.getResult();
 		
-		MTLWriter writer = new MTLWriter(new Path(targetContainer + File.separator + targetName + fileEnding).toPortableString());
+		String genDataPortableStringLocation = new Path(targetContainer + File.separator + targetName +"_gendata" + ".gendata").toPortableString();
+		
+		MTLWriter writer = new MTLWriter(new Path(targetContainer + File.separator + targetName + fileEnding).toPortableString(), genDataPortableStringLocation);
 		writer.write(toWrite);
+		
+		
+		//start acceleo fun: 
+		
+		GendataPrecomputer precomp = new GendataPrecomputer(cfg);
+		GeneratorData genData = precomp.computeGeneratorData();
+		writer.writeGendata(monitor, genData);
+		refreshWorkspace(monitor);
+		
+		//test call for acceleo: 
+		
+		String path = genDataPortableStringLocation;
+		URI modelURI = URI.createFileURI(URI.decode(path));
+		Path targetFolderCont = new Path(targetContainer);
+		File targetFolder = new File(targetFolderCont.toPortableString());
+		
+		GeneratePromelaModel generator;
+		try {
+			generator = new GeneratePromelaModel(modelURI, targetFolder, new ArrayList<Object>());
+			//TODO: get this working...
+			//generator.doGenerate(null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	private List<ControlFlowDiagram> loadCfg()
