@@ -44,7 +44,7 @@ public class PreComputationChecker {
 	private LLVM ast = null;
 	private String astLocation;
 	private int memoryModel;
-//	private List<FunctionDefinition> functions = null;
+	private List<FunctionDefinition> functions = null;
 
 	public PreComputationChecker(String astLocation, int reordering) {
 		this.astLocation = astLocation;
@@ -70,60 +70,15 @@ public class PreComputationChecker {
 		return null;
 	}
 
-//	public boolean checkforEarlyReads() throws InterruptedException {
-//
-//		if (loadAst() == null) {
-//			throw new InterruptedException("No specified LLVM Object inside the ast.");
-//		}
-//
-//		int a_elem = ast.getElements().size();
-//		List<Transition> earlyReads = new ArrayList<Transition>();
-//		List<Transition> earlyReadsInFunction = new ArrayList<Transition>();
-//		functions = new ArrayList<FunctionDefinition>();
-//
-//		// for every function
-//		for (int i = 0; i < a_elem; i++) {
-//
-//			if (ast.getElements().get(i) instanceof FunctionDefinitionImpl) {
-//				FunctionDefinition func = (FunctionDefinition) ast.getElements().get(i);
-//				if (func.getBody() != null) {
-//
-//					if (memoryModel == CFGConstants.TSO) {
-//						// create sc-graph and search for possible early reads
-//						SCUtil sc = new SCUtil(func);
-//						earlyReadsInFunction = collectEarlyReadsinSCGraph(sc.createGraph());
-//						if (!earlyReadsInFunction.isEmpty()) {
-//							functions.add(func);
-//						}
-//					}
-//					if (CFGConstants.DEBUG) {
-//
-//						if (CFGConstants.DEBUG && earlyReadsInFunction.isEmpty()) {
-//							System.out.println("No early reads found in function " + func.getAddress().getName());
-//						} else {
-//							System.out.println("Early reads found in function " + func.getAddress().getName()
-//									+ " at transition:");
-//							for (Transition t : earlyReadsInFunction)
-//								System.out.print(t.getSource().getPc() + " to " + t.getTarget().getPc() + "  ");
-//						}
-//						System.out.println();
-//					}
-//				}
-//			}
-//			earlyReads.addAll(earlyReadsInFunction);
-//		}
-//		return !earlyReads.isEmpty();
-//	}
-
-//	/**
-//	 * This method should only be called if checkForEarlyReads() was called
-//	 * before
-//	 * 
-//	 * @return the functions
-//	 */
-//	public List<FunctionDefinition> getFunctions() {
-//		return functions;
-//	}
+	/**
+	 * This method should only be called if checkForLoadsInWrite...() was called
+	 * before
+	 * 
+	 * @return the functions
+	 */
+	public List<FunctionDefinition> getFunctions() {
+		return functions;
+	}
 
 	public boolean checkforLoopWithoutFence() throws InterruptedException {
 
@@ -165,6 +120,7 @@ public class PreComputationChecker {
 		}
 		
 		int a_elem = ast.getElements().size();
+		functions = new ArrayList<FunctionDefinition>();
 		
 		// for every function
 				for (int i = 0; i < a_elem; i++) {
@@ -177,6 +133,7 @@ public class PreComputationChecker {
 								List<Transition> loadsFound = new ArrayList<Transition>();
 								checkForWriteDefChains(sc.createGraph(), loadsFound);
 								if(!loadsFound.isEmpty()){
+									functions.add(func);
 									return true;
 								}
 							}
