@@ -3,12 +3,15 @@ package de.upb.lina.transformations.promela.tools.wizards;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
@@ -57,37 +60,45 @@ public class TransformationOperation extends WorkspaceModifyOperation {
 		loadCfg();
 		PromelaMTLGenerator gen = new PromelaMTLGenerator(cfg);
 		gen.produceTransformation();
-		String toWrite = gen.getResult();
 		
-		String genDataPortableStringLocation = new Path(targetContainer + File.separator + targetName +"_gendata" + ".gendata").toPortableString();
+//		String toWrite = gen.getResult();
+//		
+//		String genDataPortableStringLocation = new Path(targetContainer + File.separator + targetName +"_gendata" + ".gendata").toPortableString();
+//		
+////		MTLWriter writer = new MTLWriter(new Path(targetContainer + File.separator + targetName + fileEnding).toPortableString(), genDataPortableStringLocation);
+////		writer.write(toWrite);
 		
-		MTLWriter writer = new MTLWriter(new Path(targetContainer + File.separator + targetName + fileEnding).toPortableString(), genDataPortableStringLocation);
-		writer.write(toWrite);
 		
-		
-		//start acceleo fun: 
-		
+		//Run Acceleo
 		GendataPrecomputer precomp = new GendataPrecomputer(cfg);
 		GeneratorData genData = precomp.computeGeneratorData();
-		writer.writeGendata(monitor, genData);
-		refreshWorkspace(monitor);
 		
-		//test call for acceleo: 
 		
-		String path = genDataPortableStringLocation;
-		URI modelURI = URI.createFileURI(URI.decode(path));
+		//get workspace root
+		IWorkspaceRoot workSpaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+		File workspaceRootFile = workSpaceRoot.getRawLocation().makeAbsolute().toFile();		
+		
+		//get target path within project
 		Path targetFolderCont = new Path(targetContainer);
-		File targetFolder = new File(targetFolderCont.toPortableString());
+		IPath targetPath = targetFolderCont.makeAbsolute();
 		
+		//build correct full path
+		java.nio.file.Path fullPath = Paths.get(workspaceRootFile.toString() + File.separator + targetPath.toPortableString());
+		
+		//run acceleo
 		GeneratePromelaModel generator;
 		try {
-			generator = new GeneratePromelaModel(modelURI, targetFolder, new ArrayList<Object>());
-			//TODO: get this working...
-			//generator.doGenerate(null);
+			ArrayList<Object> args = new ArrayList<Object>();
+			args.add(targetName + fileEnding);
+			generator = new GeneratePromelaModel(genData, fullPath.toFile(), args); //TODO: add file name as parameters to be passed to template
+			generator.doGenerate(new BasicMonitor());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		refreshWorkspace(monitor);
+		refreshWorkspace(monitor);
 		
 		
 	}

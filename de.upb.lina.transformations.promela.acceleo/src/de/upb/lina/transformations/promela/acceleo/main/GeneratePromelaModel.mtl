@@ -2,52 +2,391 @@
 [module GeneratePromelaModel('http://www.upb.de/lina/cfg/controlflow', 'http://www.upb.de/lina/cfg/gendata', 'http://www.upb.de/llvm_parser/llvm', 'http://www.eclipse.org/emf/2002/Ecore')]
 
 
-[template public generateModel(genData : GeneratorData) post (trim())]
+[template public generateModel(genData : GeneratorData, fileName: String) post (trim())]   
 [comment @main/]
-[file ('test.pml' , false, 'UTF-8')]
+[file ( fileName  , false, 'UTF-8')]
 [buildDefines()/]
+
+[buildStandards()/]
+
 [for (cfg: ControlFlowDiagram | genData.cfgs)]
-inline [cfg.name.replaceAll('@_', '')/](){
+inline [cfg.name.replaceAll('@_', '')/]([genParams(cfg, genData)/]){
 [for (loc: ControlFlowLocation | cfg.locations)][handleLocation(loc, genData)/][/for]
 }
 
 [/for]
 
 
-[buildStandards()/]
-
 [/file]
+[/template]
+
+[template public genParams(cfg: ControlFlowDiagram, genData: GeneratorData)]
+[for (map: FunctionParamsMapping | genData.parameterMappings)][if (map.cfg = cfg)][for (p: FunctionParameter | map.function.parameter.params)][p.value.addressToString(genData)/], [/for][if(map.needsReturnValue = true)]returnvalue[/if][/if][/for]
 [/template]
 
 [template public handleLocation(loc: ControlFlowLocation, genData: GeneratorData)]
 [for (l : Label | genData.labels)]
 [if (l.controlFlowLocation = loc and loc.outgoing->size() = 1)]
-[l.name/]: [for (t : Transition | loc.outgoing)] [t.transformTransitions()/] [/for]
+[l.name/]: [for (t : Transition | loc.outgoing)] [t.transformTransitions(genData)/] [genGoTo(t, genData)/][/for]
 [elseif (l.controlFlowLocation = loc and loc.outgoing->size() > 1)]
 [l.name/]: if 
 	   [for (t : Transition | loc.outgoing)] 
-		:: [t.transformTransitions()/]; -> goto [for (l : Label | genData.labels)][if (l.controlFlowLocation = t.target)][l.name/][/if][/for];
+		:: [genCondition(t, genData)/] -> [t.transformTransitions(genData)/] goto [for (l : Label | genData.labels)][if (l.controlFlowLocation = t.target)][l.name/][/if][/for];
    	   [/for]
+		fi;
 [/if]
 [/for]
 [/template]
 
-[template public transformTransitions(t: Transition)]
-instr
+[template public genGoTo(t: Transition, genData: GeneratorData)]
+goto [for (l : Label | genData.labels)][if (l.controlFlowLocation = t.target)][l.name/][/if][/for];
+[/template]
+
+[template public transformTransitions(t: Transition, genData: GeneratorData)]
+[t.instruction.genInstruction(genData)/]
+[/template]
+
+[template public transformTransitions(t: FlushTransition, genData: GeneratorData)]
+memory['['/][t.source.buffer.addressValuePairs.address.value.valueToString(genData)/][']'/]=[t.source.buffer.addressValuePairs.value.value.valueToString(genData)/];
+[/template]
+
+[comment ====== Instructions ======/]
+[template public genInstruction(e : Instruction, genData: GeneratorData)]
+[comment Abstract/]
+[/template]
+
+[template public genInstruction(e : ArithmeticOperation, genData: GeneratorData)]
+[e.arithmeticInstr(genData)/]
+[/template]
+
+[query public arithmeticInstr(e : ArithmeticOperation, genData: GeneratorData) : String = 
+e.result.addressToString(genData) + ' = ' + e.value1.valueToString(genData) + ' ' 
++ e.operation.arithmeticOp() + ' ' + e.value2.valueToString(genData) + ';'
+/]
+
+[query public arithmeticOp(s : EString) : String = 
+if s.equalsIgnoreCase('add') then
+	'+'
+else if s.equalsIgnoreCase('sub') or s.equalsIgnoreCase('ashr') then
+	'-'
+else if s.equalsIgnoreCase('mul') then
+	'*'
+else if s.equalsIgnoreCase('udiv') or s.equalsIgnoreCase('sdiv') then
+	'/'
+else if s.equalsIgnoreCase('urem') or s.equalsIgnoreCase('srem') then
+	'%'
+else
+	'// UNHANDLED'
+endif
+endif
+endif
+endif
+endif
+/]
+
+[template public genInstruction(e : LogicOperation, genData: GeneratorData)]
+[e.result.addressToString(genData)/] = [e.value1.valueToString(genData)/] [e.operation.logicOp()/] [e.value2.valueToString(genData)/];
+[/template]
+
+[query public logicOp(s : EString) : String = 
+if s.equalsIgnoreCase('shl') then
+	'<<'
+else if s.equalsIgnoreCase('lshr') or s.equalsIgnoreCase('ashr') then
+	'>>'
+else if s.equalsIgnoreCase('and') then
+	'&'
+else if s.equalsIgnoreCase('or') then
+	'|'
+else if s.equalsIgnoreCase('xor') then
+	'^'
+else
+	'// UNHANDLED'
+endif
+endif
+endif
+endif
+endif
+/]
+
+[template public genInstruction(e : Cast, genData : GeneratorData)]
+[e.result.addressToString(genData)/] = [e.value.valueToString(genData)/];
+[/template]
+
+[template public genInstruction(e : NestedCast, genData : GeneratorData)]
+// TODO: Instruction (nested cast);
+[/template]
+
+[template public genInstruction(e : GetElementPtr, genData : GeneratorData)]
+//TODO: getElementPtr;
+[/template]
+
+[template public genInstruction(e : CmpXchg, genData : GeneratorData)]
+cas([e.address.value.valueToString(genData)/], [e.value.value.valueToString(genData)/], [e.newValue.value.valueToString(genData)/], [e.result.addressToString(genData)/]);
+[/template]
+
+[template public genInstruction(e : AtomicRMW, genData : GeneratorData)]
+// TODO: Instruction (atomicrmw);
+[/template]
+
+[template public genInstruction(e : Load,  genData : GeneratorData)]
+[e.address.value.valueToString(genData)/] = memory['['/][e.result.addressToString(genData)/][']'/];
+[/template]
+
+[template public genInstruction(e : Store,  genData : GeneratorData)]
+skip;
+[/template]
+
+[template public genInstruction(e : Call,  genData : GeneratorData)]
+[e.callFuncName(genData)/]([e.pList.callParams(genData)/][e.callRetParam(genData)/]);
+[/template]
+
+[query public callFuncName(c : Call,  genData : GeneratorData) : String = 
+c.function.value.valueToString(genData)
+/]
+
+[query public callParams(list : ParameterList,  genData : GeneratorData) : String = 
+list.params->iterate(p : Parameter; result : String = '' |
+if p.followingSiblings()->size() > 0 then
+	result.concat(p.value.valueToString(genData) + ', ')
+else
+	result.concat(p.value.valueToString(genData))
+endif
+)
+/]
+
+[query public callRetParam(c : Call, genData: GeneratorData) : String = 
+if c.pList.params->size() > 0 and not c.result.oclIsUndefined() then
+	', ' + c.result.addressToString(genData)
+else if c.pList.params->size() = 0 and not c.result.oclIsUndefined() then
+	c.result.addressToString(genData)
+else
+	''
+endif
+endif
+/]
+
+[template public genInstruction(e : Alloc, genData: GeneratorData)]
+//TODO: alloca
+[/template]
+
+[template public genInstruction(e : Phi, genData: GeneratorData)]
+// TODO: phi
+[/template]
+
+[template public genInstruction(e : Select, genData: GeneratorData)]
+[e.selectInstr(genData)/]
+[/template]
+
+[query public selectInstr(e : Select, genData: GeneratorData) : String = 
+e.result.addressToString(genData) + ' = (' + e.condition.value.valueToString(genData) + ' -> ' +
+e.trueValue.value.valueToString(genData) + ' : ' + e.elseValue.value.valueToString(genData) + ');'
+/]
+
+[template public genInstruction(e : ExtractValue, genData: GeneratorData)]
+// TODO: extractvalue
+[/template]
+
+[template public genInstruction(e : InsertValue, genData: GeneratorData)]
+// TODO: insertvalue
+[/template]
+
+[template public genInstruction(e : ExtractElement, genData: GeneratorData)]
+// TODO: extractelement
+[/template]
+
+[template public genInstruction(e : InsertElement, genData: GeneratorData)]
+// TODO: insertelement
+[/template]
+
+[template public genInstruction(e : Compare, genData: GeneratorData)]
+[e.compareInstr(genData)/]
+[/template]
+
+[query public compareInstr(e : Compare, genData: GeneratorData) : String =
+	e.result.addressToString(genData) + ' = (' + e.operand1.valueToString(genData) + ' ' 
+	+ e.cond.compareOp() + ' ' + e.operand2.valueToString(genData) + ');'
+/]
+
+[query public compareOp(s : EString) : String = 
+if s.equalsIgnoreCase('eq') then
+	'=='
+else if s.equalsIgnoreCase('ne') then
+	'!='
+else if s.equalsIgnoreCase('ugt') or s.equalsIgnoreCase('sgt') then
+	'>'
+else if s.equalsIgnoreCase('uge') or s.equalsIgnoreCase('sge') then
+	'>='
+else if s.equalsIgnoreCase('ult') or s.equalsIgnoreCase('slt') then
+	'<'
+else if s.equalsIgnoreCase('ule') or s.equalsIgnoreCase('sle') then
+	'<='
+else
+	'// UNHANDLED'
+endif
+endif
+endif
+endif
+endif
+endif
+/]
+
+[template public genInstruction(e : Switch, genData: GeneratorData)]
+//TODO: switch
+[/template]
+
+[template public genInstruction(e : Unreachable, genData: GeneratorData)]
+// Unreachable
+[/template]
+
+[template public genInstruction(e : Return, genData: GeneratorData)]
+[e.value.type.getTypeName(genData).returnInstr(e.value.value, genData)/]
+[/template]
+
+[query public returnInstr(s : String, v : Value, genData: GeneratorData) : String =
+if s.equalsIgnoreCase('void') then 
+	'skip;'
+else if v.oclIsTypeOf(AddressUse) then
+	'returnvalue = ' + v.oclAsType(AddressUse).address.addressToString(genData) + ';'
+else if v.oclIsTypeOf(Constant) then
+	'returnvalue = ' + v.oclAsType(Constant).value.toString() + ';'
+else if v.oclIsTypeOf(PrimitiveValue) then
+	'returnvalue = ' + v.oclAsType(PrimitiveValue).value + ';'
+else
+	'// UNHANDLED'
+endif
+endif
+endif
+endif
+/]
+
+[template public genInstruction(e : VariableAttributeAccess, genData: GeneratorData)]
+// NOT IMPLEMENTED: Instruction (va_arg)
+[/template]
+
+[template public genInstruction(e : LandingPad, genData: GeneratorData)]
+// NOT IMPLEMENTED: Instruction (landingpad)
+[/template]
+
+[template public genInstruction(e : Invoke, genData: GeneratorData)]
+// NOT IMPLEMENTED: Instruction (invoke)
+[/template]
+
+[template public genInstruction(e : Resume, genData: GeneratorData)]
+// NOT IMPLEMENTED: Instruction (resume)
+[/template]
+
+[template public genInstruction(e : IndirectBranch, genData: GeneratorData)]
+// NOT IMPLEMENTED: Instruction (indirectbr)
+[/template]
+
+[template public genInstruction(e : ShuffleVector, genData: GeneratorData)]
+// NOT IMPLEMENTED: Instruction (shufflevector)
+[/template]
+
+[comment ====== Generic Calls ======/]
+[template public addressToString(address: Address, genData: GeneratorData)]
+[for (am: AddressMapping | genData.localVariables.variables)][for (a: Address | am.adresses)][if (address = a)][am.name/][/if][/for][/for]
+[/template]
+
+[template public valueToString(v : Value, genData: GeneratorData)]
+[if (v.oclIsTypeOf(PrimitiveValue))][v.oclAsType(PrimitiveValue).value/][elseif ( v.oclIsTypeOf(Constant))][v.oclAsType(Constant).value/] [elseif (v.oclIsTypeOf(AddressUse))][for (am: AddressMapping | genData.localVariables.variables)][for (a: Address | am.adresses)][if (v.oclAsType(AddressUse).address = a)][am.name/][/if][/for][/for][/if]
+[/template]
+
+[template public genCondition(t: Transition, gD: GeneratorData)]
+[for (cm: ConstraintMapping | gD.constraints)][if (t = cm.transition)][cm.condition/][/if][/for]
 [/template]
 
 
+[query public getTypeName(o : EObject, genData: GeneratorData) : String = 
+if o.oclIsTypeOf(Predefined) then
+	if o.oclAsType(Predefined).type.equalsIgnoreCase('void') then
+		'void'
+	else if o.oclAsType(Predefined).type.equalsIgnoreCase('i1') then
+		'bool'
+	else
+		'int'
+	endif
+	endif
+else if o.oclIsTypeOf(AddressUse) then
+	o.oclAsType(AddressUse).addressUseName(genData)
+else if o.oclIsTypeOf(Array) then
+	'Array_' + o.oclAsType(Array).arraySize() + 'x' 
+	+ o.oclAsType(Array).length
+else 
+	'// UNHANDLED'
+endif
+endif
+endif
+/]
+
+[query public addressUseName(e : AddressUse, genData: GeneratorData) : String = 
+	if e.isPointer() then
+		'int'
+	else
+		e.address.structName(genData)
+	endif
+/]
+
+[query public isPointer(e : AddressUse) : Boolean = 
+	not e.pointer.oclIsUndefined()
+/]
+
+[query public arraySize(e : Array) : Integer = 
+	(e.length.round() * e.type.typeSize()).round()
+/]
+
+[query public typeSize(e : EObject) : Integer = 
+if e.oclIsTypeOf(Predefined) then
+	1
+else if e.oclIsTypeOf(Array) then
+	e.oclAsType(Array).arraySize()
+else if e.oclIsTypeOf(AddressUse) then
+	e.oclAsType(AddressUse).adressUseSize()
+else
+	-1
+endif
+endif
+endif
+ /]
+
+[query public adressUseSize(e : AddressUse) : Integer = 
+	if e.isPointer() then
+		1
+	else if e.isStructure() then
+		e.address.ancestors()->at(1).oclAsType(TypeDefinition)
+		.struct.structSize()
+	else
+		-1
+	endif
+	endif
+/]
+
+[query public isStructure(e : AddressUse) : Boolean =
+	if not e.address.ancestors()->at(1).oclIsUndefined() then
+		e.address.ancestors()->at(1).oclIsTypeOf(TypeDefinition)
+	else
+		false
+	endif
+ /]
+
+[query public structSize(e : Structure) : Integer = 
+e.types->iterate(o : EObject; size : Integer = 0 | size + o.typeSize()
+)
+/]
+
+[query public structName(e : Address, genData: GeneratorData) : String = 
+e.addressToString(genData)
+/]
 
 
 
 
+[comment basic stuff /]
 [template public buildDefines(c: OclAny)]
 #define MEM_SIZE 15	//size of memory
 #define NULL 0
 #define I32  0 		// = {0};
-
-#define EMPTY 0
-#define MYNULL -1
+#define PTR 0
 
 short memory['['/]MEM_SIZE[']'/];
 short memUse = 1; 	//shows to the next free cell in memory
@@ -100,8 +439,11 @@ inline alloca(type, targetRegister)
 inline cas(adr, old, new, result)
 {
 	atomic{
-	if 	:: memory['['/]adr[']'/] == old -> memory['['/]adr[']'/] = new; result = true;
-		:: else -> result = false;
+	//in LLVM result is usually a tuple (memory['['/]adr[']'/], successFlag)
+	//we assume it to be just a loaded value
+	result = memory['['/]adr[']'/];
+	if 	:: memory['['/]adr[']'/] == old -> memory['['/]adr[']'/] = new; 
+		:: else -> skip;
 	fi;
 	}
 }

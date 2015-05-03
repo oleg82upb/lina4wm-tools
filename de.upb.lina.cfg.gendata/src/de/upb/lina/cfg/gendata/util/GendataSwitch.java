@@ -94,6 +94,18 @@ public class GendataSwitch<T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case GendataPackage.CONSTRAINT_MAPPING: {
+				ConstraintMapping constraintMapping = (ConstraintMapping)theEObject;
+				T result = caseConstraintMapping(constraintMapping);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case GendataPackage.FUNCTION_PARAMS_MAPPING: {
+				FunctionParamsMapping functionParamsMapping = (FunctionParamsMapping)theEObject;
+				T result = caseFunctionParamsMapping(functionParamsMapping);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -159,6 +171,36 @@ public class GendataSwitch<T> extends Switch<T>
 	 */
 	public T caseLabel(Label object)
 	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constraint Mapping</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constraint Mapping</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstraintMapping(ConstraintMapping object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Function Params Mapping</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Function Params Mapping</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFunctionParamsMapping(FunctionParamsMapping object) {
 		return null;
 	}
 

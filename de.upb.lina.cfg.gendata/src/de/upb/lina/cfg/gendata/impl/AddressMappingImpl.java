@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
@@ -29,6 +30,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * <ul>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.AddressMappingImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.AddressMappingImpl#getAdresses <em>Adresses</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.AddressMappingImpl#getOldNames <em>Old Names</em>}</li>
  * </ul>
  * </p>
  *
@@ -65,6 +67,16 @@ public class AddressMappingImpl extends MinimalEObjectImpl.Container implements 
 	 * @ordered
 	 */
 	protected EList<Address> adresses;
+
+	/**
+	 * The cached value of the '{@link #getOldNames() <em>Old Names</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOldNames()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> oldNames;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -128,6 +140,18 @@ public class AddressMappingImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getOldNames() {
+		if (oldNames == null) {
+			oldNames = new EDataTypeUniqueEList<String>(String.class, this, GendataPackage.ADDRESS_MAPPING__OLD_NAMES);
+		}
+		return oldNames;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
@@ -136,6 +160,8 @@ public class AddressMappingImpl extends MinimalEObjectImpl.Container implements 
 				return getName();
 			case GendataPackage.ADDRESS_MAPPING__ADRESSES:
 				return getAdresses();
+			case GendataPackage.ADDRESS_MAPPING__OLD_NAMES:
+				return getOldNames();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -157,6 +183,10 @@ public class AddressMappingImpl extends MinimalEObjectImpl.Container implements 
 				getAdresses().clear();
 				getAdresses().addAll((Collection<? extends Address>)newValue);
 				return;
+			case GendataPackage.ADDRESS_MAPPING__OLD_NAMES:
+				getOldNames().clear();
+				getOldNames().addAll((Collection<? extends String>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -176,6 +206,9 @@ public class AddressMappingImpl extends MinimalEObjectImpl.Container implements 
 			case GendataPackage.ADDRESS_MAPPING__ADRESSES:
 				getAdresses().clear();
 				return;
+			case GendataPackage.ADDRESS_MAPPING__OLD_NAMES:
+				getOldNames().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -193,6 +226,8 @@ public class AddressMappingImpl extends MinimalEObjectImpl.Container implements 
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case GendataPackage.ADDRESS_MAPPING__ADRESSES:
 				return adresses != null && !adresses.isEmpty();
+			case GendataPackage.ADDRESS_MAPPING__OLD_NAMES:
+				return oldNames != null && !oldNames.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -210,6 +245,8 @@ public class AddressMappingImpl extends MinimalEObjectImpl.Container implements 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", oldNames: ");
+		result.append(oldNames);
 		result.append(')');
 		return result.toString();
 	}

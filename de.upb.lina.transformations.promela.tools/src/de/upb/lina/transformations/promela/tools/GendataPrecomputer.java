@@ -1,5 +1,6 @@
 package de.upb.lina.transformations.promela.tools;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -8,7 +9,11 @@ import org.eclipse.emf.ecore.EObject;
 import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
+import de.upb.lina.cfg.controlflow.GuardedTransition;
+import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.gendata.AddressMapping;
+import de.upb.lina.cfg.gendata.ConstraintMapping;
+import de.upb.lina.cfg.gendata.FunctionParamsMapping;
 import de.upb.lina.cfg.gendata.GendataFactory;
 import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.lina.cfg.gendata.Label;
@@ -31,6 +36,8 @@ import de.upb.llvm_parser.llvm.ExtractValue;
 import de.upb.llvm_parser.llvm.Fence;
 import de.upb.llvm_parser.llvm.FunctionBody;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
+import de.upb.llvm_parser.llvm.FunctionParameter;
+import de.upb.llvm_parser.llvm.FunctionParameterList;
 import de.upb.llvm_parser.llvm.GetElementPtr;
 import de.upb.llvm_parser.llvm.IndirectBranch;
 import de.upb.llvm_parser.llvm.InsertElement;
@@ -60,6 +67,7 @@ public class GendataPrecomputer {
 	private GeneratorData helperModel;
 	
 	private HashMap <Address, String> addressLookup = new HashMap<Address, String>();
+	private HashMap <ControlFlowDiagram, String> cfgToLabelPrefix = new HashMap <ControlFlowDiagram, String>();
 	
 	public GendataPrecomputer(List<ControlFlowDiagram> cfgs){
 		this.cfgs = cfgs;
@@ -90,7 +98,14 @@ public class GendataPrecomputer {
 			helperModel.setLocalVariables(localVars);
 			
 			//labels
+			computeLabelPrefixesPerFunction();
 			initLabels(localVars);
+			
+			//conditions
+			computeTransitionConditionMapping(helperModel.getConstraints());
+			
+			//parameterFunctionMappings
+			computeParameterFunctionMapping(helperModel.getParameterMappings());
 			
 
 		}catch(ClassCastException ex){
@@ -98,12 +113,53 @@ public class GendataPrecomputer {
 		}
 	}
 	
-	//nachher über Functions und Label laufen und dann über cfgLoc und outgoing eigtl Inhalt der Zeile erzeugen via Acceleo
+	private void computeParameterFunctionMapping(List<FunctionParamsMapping> functionParamMapping){
+		for(ControlFlowDiagram cfg: cfgs){
+			FunctionParamsMapping mapping = GendataFactory.eINSTANCE.createFunctionParamsMapping();
+			if(cfg.getStart() != null && !cfg.getStart().getOutgoing().isEmpty()){
+				EObject motherObject = cfg.getStart().getOutgoing().get(0).getInstruction().eContainer();
+				BasicBlock basicBlock = (BasicBlock) motherObject;
+				FunctionBody fb = (FunctionBody)basicBlock.eContainer();
+				FunctionDefinition fd = (FunctionDefinition)fb.eContainer();
+				
+				mapping.setCfg(cfg);
+				mapping.setFunction(fd);
+				mapping.setNeedsReturnValue(false);
+				for(Transition t: cfg.getTransitions()){
+					if(t.getInstruction() instanceof Return){
+						Return ret = (Return) t.getInstruction();
+						if(ret.getValue() != null){
+							mapping.setNeedsReturnValue(true);
+						}
+					}
+				}
+				functionParamMapping.add(mapping);
+			}
+			
+		}
+	}
+	
 	private void initLabels(LocalVariables localVars){
 		for(ControlFlowDiagram cfg: cfgs){
 			List<Label> labels = helperModel.getLabels();
+			//prepare for check if we can use short buffer labels
+			List<ControlFlowLocation> conflictingLocs = new ArrayList<ControlFlowLocation>();
+			List<String> iteratedBuffers = new ArrayList<String>();
 			for(ControlFlowLocation l: cfg.getLocations()){
-				String bufferRepresentation = generateLabel(l, localVars, cfg.getLocations().size());
+				String bufferRep = generateShortLabel(l, localVars, cfg.getLocations().size());
+				if(iteratedBuffers.contains(bufferRep)){
+					conflictingLocs.add(l);
+				}
+			}
+			
+			for(ControlFlowLocation l: cfg.getLocations()){
+				String bufferRepresentation;
+				//use long buffer labels if needed as of conflict, short if not needed
+				if(conflictingLocs.contains(l)){
+					bufferRepresentation = generateLabel(l, localVars, cfg.getLocations().size());
+				}else{
+					bufferRepresentation = generateShortLabel(l, localVars, cfg.getLocations().size());
+				}
 				Label label = GendataFactory.eINSTANCE.createLabel();
 				label.setName(bufferRepresentation);
 				label.setControlFlowLocation(l);
@@ -113,9 +169,116 @@ public class GendataPrecomputer {
 		}
 	}
 	
+	private void computeTransitionConditionMapping(List<ConstraintMapping> constraints){
+		for(ControlFlowDiagram cfg: cfgs){
+			ArrayList<ControlFlowLocation> workedOn = new ArrayList<ControlFlowLocation>();
+			ArrayList<ControlFlowLocation> toWorkOn = new ArrayList<ControlFlowLocation>();
+
+			toWorkOn.add(cfg.getStart());
+			
+			while(!toWorkOn.isEmpty()){
+				ControlFlowLocation currentLoc = toWorkOn.remove(0);
+				workedOn.add(currentLoc);
+				
+				List<Transition> outgoing = currentLoc.getOutgoing();
+				
+				if(outgoing.size() > 1){
+					GuardedTransition ifTransition = null;
+					for(Transition t: outgoing){
+						if(t instanceof GuardedTransition){
+							//deal with the if case
+							GuardedTransition gt = (GuardedTransition)t;
+							if(ifTransition == null && !gt.getCondition().contains("else")){
+								ifTransition = gt;
+								//TODO: Transform condition correctly!
+								constraints.add(constructConstraintMapping(gt, gt.getCondition())); //HERE Cond
+							}
+						}else{
+							//flushs and normal transitions that need a condition in promela
+							constraints.add(constructConstraintMapping(t, "true"));
+						}
+						
+					}
+					
+					//get the else case
+					for(Transition t: outgoing){
+						if(t instanceof GuardedTransition && !t.equals(ifTransition)){
+							GuardedTransition gt = (GuardedTransition)t;
+								//TODO: Transform condition correctly!
+								constraints.add(constructConstraintMapping(gt, "!" + ifTransition.getCondition())); //HERE Cond
+						}
+						//Add rest to work on
+						if(!workedOn.contains(t.getTarget()) && !toWorkOn.contains(t.getTarget())){
+							toWorkOn.add(t.getTarget());
+						}
+					}
+				}
+				
+				//Add rest to work on
+				for(Transition t: outgoing){	
+					if(!workedOn.contains(t.getTarget()) && !toWorkOn.contains(t.getTarget())){
+						toWorkOn.add(t.getTarget());
+					}
+				}
+			}
+		}
+	}
+	
+	private ConstraintMapping constructConstraintMapping(Transition t, String condition){
+		//manipulate condition
+		condition = condition.replaceAll("[\\[\\]]", "");
+		
+		if(!condition.equalsIgnoreCase("true")){
+			for(AddressMapping addressMapping: helperModel.getLocalVariables().getVariables()){
+				for(String oldName: addressMapping.getOldNames()){
+					if(oldName.equals(condition.replaceAll("!",""))){
+						if(condition.startsWith("!")){
+							condition = "!" + addressMapping.getName();
+						}else{
+							condition = addressMapping.getName();
+						}
+					}
+				}
+			}
+			
+		}
+		
+		//construct mapping
+		ConstraintMapping mapping = GendataFactory.eINSTANCE.createConstraintMapping();
+		mapping.setTransition(t);
+		mapping.setCondition(condition);
+		return mapping;
+	}
+	
+	private void computeLabelPrefixesPerFunction(){
+		char currentChar = 'A';
+		for(int i = 0; i< cfgs.size();i++){
+			ControlFlowDiagram cfg = cfgs.get(i);
+			cfgToLabelPrefix.put(cfg, ""+currentChar);
+			currentChar++;
+		}
+		
+		
+	}
+	
+	private String generateShortLabel(ControlFlowLocation loc, LocalVariables localVars, int size){
+		int sizeString = String.valueOf(size).length();
+		String bufferLabel = cfgToLabelPrefix.get(loc.getDiagram()) + String.format("%0"+sizeString+"d", loc.getPc());
+		
+		for(AddressValuePair avp: loc.getBuffer().getAddressValuePairs()){
+			//Address address = ((AddressUse) (avp.getAddress().getValue())).getAddress();
+			
+			bufferLabel += lookupValue(avp.getAddress().getValue());
+		}
+		
+//		System.out.println(bufferLabel);
+		
+		return bufferLabel;
+	}
+	
 	private String generateLabel(ControlFlowLocation loc, LocalVariables localVars, int size){
 		int sizeString = String.valueOf(size).length();
-		String bufferLabel = "" + String.format("%0"+sizeString+"d", loc.getPc());
+		String bufferLabel = cfgToLabelPrefix.get(loc.getDiagram()) + String.format("%0"+sizeString+"d", loc.getPc());
 		
 		for(AddressValuePair avp: loc.getBuffer().getAddressValuePairs()){
 			//Address address = ((AddressUse) (avp.getAddress().getValue())).getAddress();
@@ -123,7 +286,7 @@ public class GendataPrecomputer {
 			bufferLabel += lookupValue(avp.getAddress().getValue()) + lookupValue(avp.getValue().getValue());
 		}
 		
-		System.out.println(bufferLabel);
+//		System.out.println(bufferLabel);
 		
 		return bufferLabel;
 	}
@@ -166,7 +329,20 @@ public class GendataPrecomputer {
 			if(ele instanceof FunctionDefinition){
 				FunctionDefinition fDef = (FunctionDefinition)ele;
 				ControlFlowDiagram matchingCfg = getCFGForFunction(fDef);
-				//System.out.println(fDef.getBody());
+				
+				//map params
+				if(matchingCfg != null && matchingCfg.getStart() != null && !matchingCfg.getStart().getOutgoing().isEmpty()){		
+					EObject motherObject = matchingCfg.getStart().getOutgoing().get(0).getInstruction().eContainer();
+					BasicBlock basicBlock = (BasicBlock) motherObject;
+					FunctionBody fb = (FunctionBody)basicBlock.eContainer();
+					FunctionDefinition fd = (FunctionDefinition)fb.eContainer();
+					FunctionParameterList params = fd.getParameter();
+					for(FunctionParameter param: params.getParams()){
+						addToMapping(mapping, matchingCfg, param.getValue());
+					}
+				}
+				
+				//map vars in function
 				if(fDef.getBody() != null){
 					for(BasicBlock b: fDef.getBody().getBlocks()){
 						for(Instruction i: b.getInstructions()){
@@ -185,6 +361,8 @@ public class GendataPrecomputer {
 							}else if(i instanceof Cast){
 								Cast op = (Cast)i;
 								addToMapping(mapping, matchingCfg, op.getResult());
+//								System.out.println("Added: " + op.getResult().getName() + isAddressMapped(op.getResult(), mapping));
+//								System.out.println(addressLookup.get(op.getResult()));
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getValue()));
 	
 							}else if(i instanceof GetElementPtr){
@@ -218,6 +396,7 @@ public class GendataPrecomputer {
 	
 							}else if(i instanceof Call){
 								Call op = (Call)i;
+								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getFunction().getValue()));
 								addToMapping(mapping, matchingCfg, op.getResult());
 	
 							}else if(i instanceof Alloc){
@@ -324,6 +503,7 @@ public class GendataPrecomputer {
 
 		//check if already have a mapping for that address
 		if(!isAddressMapped(addressCopy, mapping)){
+			
 			//create new addressmapping
 			AddressMapping addressMapping = createAddressMapping(addressCopy, Utils.clean(addressCopy.getName()));
 
@@ -335,12 +515,22 @@ public class GendataPrecomputer {
 	private boolean isAddressMapped(Address address, List<AddressMapping> mapping){
 		for(AddressMapping am: mapping){
 			for(Address a: am.getAdresses()){
-				if(a.getName().equals(address.getName())){
+//				if(a.getName().equals(address.getName())){
+				if(a.equals(address)){
+					//System.out.println("a-name: " + a.getName() + "address: " + address.getName());
 					return true;
 				}
 			}
 		}
 		return false;
+	}
+	
+	private FunctionDefinition getFunctionForCfg(ControlFlowDiagram cfg){
+		EObject motherObject = cfg.getStart().getOutgoing().get(0).getInstruction().eContainer();
+		BasicBlock basicBlock = (BasicBlock) motherObject;
+		FunctionBody fb = (FunctionBody)basicBlock.eContainer();
+		FunctionDefinition fd = (FunctionDefinition)fb.eContainer();
+		return fd;
 	}
 	
 	/**
@@ -363,6 +553,9 @@ public class GendataPrecomputer {
 		AddressMapping mapping = GendataFactory.eINSTANCE.createAddressMapping();
 		mapping.setName(name);
 		mapping.getAdresses().addAll(addresses);
+		for(int i = 0; i< addresses.size(); i++){
+			mapping.getOldNames().add(addresses.get(i).getName());
+		}
 		return mapping;
 	}
 
@@ -370,6 +563,7 @@ public class GendataPrecomputer {
 		AddressMapping mapping = GendataFactory.eINSTANCE.createAddressMapping();
 		mapping.setName(name);
 		mapping.getAdresses().add(address);
+		mapping.getOldNames().add(address.getName());
 		return mapping;
 	}
 }

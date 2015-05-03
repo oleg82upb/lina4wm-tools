@@ -15,7 +15,7 @@ public class Utils {
 		String result = valueToString(value);
 		return clean(result);
 	}
-	
+
 	public static String clean(String string){
 		int loc = string.indexOf("%");
 		//if the address is starts with a number, do not give it a v_
@@ -26,18 +26,20 @@ public class Utils {
 		}
 		string = string.trim();
 		string = string.replaceAll(" ", "");
-		
-		
+
+		//if the address is starts with a number, do not give it a v_
+		string = string.replaceAll("@_","");
+
 		return string;
 	}
-	
-	
+
+
 	/**
 	 * Transforms a value into a String.
 	 * @param value
 	 * @return
 	 */
-	private static String valueToString(Value value) {
+	public static String valueToString(Value value) {
 		if (value.eClass().equals(LlvmPackage.eINSTANCE.getConstant())) {
 			Constant constant = (Constant) value;
 			return constant.getValue().toString();
@@ -47,15 +49,15 @@ public class Utils {
 			AddressUseImpl aui = (AddressUseImpl) value;
 			return aui.getAddress().getName();
 		}
-		
+
 		if(value.eClass().equals(LlvmPackage.eINSTANCE.getPrimitiveValue())){
 			PrimitiveValue val = (PrimitiveValue)value;
 			return val.getValue();
 		}
 		return value.toString();
 	}
-	
-	
+
+
 	/**
 	 * Returns the given buffer and pc as a String
 	 * @param buf
@@ -72,7 +74,7 @@ public class Utils {
 		}
 		return clean(buffer);
 	}
-	
+
 	/**
 	 * Returns the given value as a String
 	 * @param value to be transfored into a String
@@ -90,7 +92,7 @@ public class Utils {
 			Constant constant = (Constant) value;
 			result += constant.getValue();
 		}
-		
+
 		else if(value.eClass().equals(LlvmPackage.eINSTANCE.getPrimitiveValue())){
 			PrimitiveValue val = (PrimitiveValue)value;
 			result += val.getValue();

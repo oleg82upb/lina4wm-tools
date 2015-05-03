@@ -13,16 +13,31 @@
         eType="#//Label" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="cfgs" lowerBound="1" upperBound="-1"
         eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//ControlFlowDiagram"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
+        eType="#//ConstraintMapping" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterMappings" upperBound="-1"
+        eType="#//FunctionParamsMapping" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AddressMapping">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="adresses" upperBound="-1"
         eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Address"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="oldNames" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Label">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="controlFlowLocation" eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//ControlFlowLocation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="controlFlowDiagram" eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//ControlFlowDiagram"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConstraintMapping">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//Transition"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionParamsMapping">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//FunctionDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cfg" eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//ControlFlowDiagram"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="needsReturnValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
 </ecore:EPackage>

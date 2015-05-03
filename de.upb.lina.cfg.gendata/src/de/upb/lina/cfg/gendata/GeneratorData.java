@@ -21,6 +21,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getProgram <em>Program</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getLabels <em>Labels</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getCfgs <em>Cfgs</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getConstraints <em>Constraints</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getParameterMappings <em>Parameter Mappings</em>}</li>
  * </ul>
  * </p>
  *
@@ -113,5 +115,37 @@ public interface GeneratorData extends EObject
 	 * @generated
 	 */
 	EList<ControlFlowDiagram> getCfgs();
+
+	/**
+	 * Returns the value of the '<em><b>Constraints</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.lina.cfg.gendata.ConstraintMapping}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Constraints</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Constraints</em>' containment reference list.
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_Constraints()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ConstraintMapping> getConstraints();
+
+	/**
+	 * Returns the value of the '<em><b>Parameter Mappings</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.lina.cfg.gendata.FunctionParamsMapping}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parameter Mappings</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parameter Mappings</em>' containment reference list.
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_ParameterMappings()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<FunctionParamsMapping> getParameterMappings();
 
 } // GeneratorData

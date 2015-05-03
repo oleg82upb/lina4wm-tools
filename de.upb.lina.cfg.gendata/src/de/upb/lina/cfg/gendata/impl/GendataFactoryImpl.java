@@ -64,6 +64,8 @@ public class GendataFactoryImpl extends EFactoryImpl implements GendataFactory
 			case GendataPackage.GENERATOR_DATA: return createGeneratorData();
 			case GendataPackage.ADDRESS_MAPPING: return createAddressMapping();
 			case GendataPackage.LABEL: return createLabel();
+			case GendataPackage.CONSTRAINT_MAPPING: return createConstraintMapping();
+			case GendataPackage.FUNCTION_PARAMS_MAPPING: return createFunctionParamsMapping();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -111,6 +113,26 @@ public class GendataFactoryImpl extends EFactoryImpl implements GendataFactory
 	{
 		LabelImpl label = new LabelImpl();
 		return label;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConstraintMapping createConstraintMapping() {
+		ConstraintMappingImpl constraintMapping = new ConstraintMappingImpl();
+		return constraintMapping;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FunctionParamsMapping createFunctionParamsMapping() {
+		FunctionParamsMappingImpl functionParamsMapping = new FunctionParamsMappingImpl();
+		return functionParamsMapping;
 	}
 
 	/**

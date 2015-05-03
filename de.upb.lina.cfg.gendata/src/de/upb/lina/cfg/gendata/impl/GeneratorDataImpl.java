@@ -3,6 +3,8 @@
 package de.upb.lina.cfg.gendata.impl;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
+import de.upb.lina.cfg.gendata.ConstraintMapping;
+import de.upb.lina.cfg.gendata.FunctionParamsMapping;
 import de.upb.lina.cfg.gendata.GendataPackage;
 import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.lina.cfg.gendata.Label;
@@ -31,6 +33,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getProgram <em>Program</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getLabels <em>Labels</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getCfgs <em>Cfgs</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getConstraints <em>Constraints</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getParameterMappings <em>Parameter Mappings</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,6 +81,26 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @ordered
 	 */
 	protected EList<ControlFlowDiagram> cfgs;
+
+	/**
+	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstraints()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConstraintMapping> constraints;
+
+	/**
+	 * The cached value of the '{@link #getParameterMappings() <em>Parameter Mappings</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameterMappings()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<FunctionParamsMapping> parameterMappings;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -213,6 +237,30 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ConstraintMapping> getConstraints() {
+		if (constraints == null) {
+			constraints = new EObjectContainmentEList<ConstraintMapping>(ConstraintMapping.class, this, GendataPackage.GENERATOR_DATA__CONSTRAINTS);
+		}
+		return constraints;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<FunctionParamsMapping> getParameterMappings() {
+		if (parameterMappings == null) {
+			parameterMappings = new EObjectContainmentEList<FunctionParamsMapping>(FunctionParamsMapping.class, this, GendataPackage.GENERATOR_DATA__PARAMETER_MAPPINGS);
+		}
+		return parameterMappings;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -221,6 +269,10 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return basicSetLocalVariables(null, msgs);
 			case GendataPackage.GENERATOR_DATA__LABELS:
 				return ((InternalEList<?>)getLabels()).basicRemove(otherEnd, msgs);
+			case GendataPackage.GENERATOR_DATA__CONSTRAINTS:
+				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
+			case GendataPackage.GENERATOR_DATA__PARAMETER_MAPPINGS:
+				return ((InternalEList<?>)getParameterMappings()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -243,6 +295,10 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return getLabels();
 			case GendataPackage.GENERATOR_DATA__CFGS:
 				return getCfgs();
+			case GendataPackage.GENERATOR_DATA__CONSTRAINTS:
+				return getConstraints();
+			case GendataPackage.GENERATOR_DATA__PARAMETER_MAPPINGS:
+				return getParameterMappings();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -271,6 +327,14 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				getCfgs().clear();
 				getCfgs().addAll((Collection<? extends ControlFlowDiagram>)newValue);
 				return;
+			case GendataPackage.GENERATOR_DATA__CONSTRAINTS:
+				getConstraints().clear();
+				getConstraints().addAll((Collection<? extends ConstraintMapping>)newValue);
+				return;
+			case GendataPackage.GENERATOR_DATA__PARAMETER_MAPPINGS:
+				getParameterMappings().clear();
+				getParameterMappings().addAll((Collection<? extends FunctionParamsMapping>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -296,6 +360,12 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 			case GendataPackage.GENERATOR_DATA__CFGS:
 				getCfgs().clear();
 				return;
+			case GendataPackage.GENERATOR_DATA__CONSTRAINTS:
+				getConstraints().clear();
+				return;
+			case GendataPackage.GENERATOR_DATA__PARAMETER_MAPPINGS:
+				getParameterMappings().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -317,6 +387,10 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return labels != null && !labels.isEmpty();
 			case GendataPackage.GENERATOR_DATA__CFGS:
 				return cfgs != null && !cfgs.isEmpty();
+			case GendataPackage.GENERATOR_DATA__CONSTRAINTS:
+				return constraints != null && !constraints.isEmpty();
+			case GendataPackage.GENERATOR_DATA__PARAMETER_MAPPINGS:
+				return parameterMappings != null && !parameterMappings.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

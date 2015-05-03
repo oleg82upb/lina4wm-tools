@@ -59,6 +59,24 @@ public interface GendataFactory extends EFactory
 	Label createLabel();
 
 	/**
+	 * Returns a new object of class '<em>Constraint Mapping</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Constraint Mapping</em>'.
+	 * @generated
+	 */
+	ConstraintMapping createConstraintMapping();
+
+	/**
+	 * Returns a new object of class '<em>Function Params Mapping</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Function Params Mapping</em>'.
+	 * @generated
+	 */
+	FunctionParamsMapping createFunctionParamsMapping();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
