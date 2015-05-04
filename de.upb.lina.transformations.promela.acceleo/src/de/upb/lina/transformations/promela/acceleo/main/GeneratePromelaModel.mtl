@@ -233,8 +233,47 @@ cas([e.address.value.valueToString(genData)/], [e.value.value.valueToString(genD
 [/template]
 
 [template public genInstruction(e : AtomicRMW, genData : GeneratorData)]
-// TODO: Instruction (atomicrmw);
+[e.result.addressToString(genData)/] = [e.address.value.valueToString(genData)/]; [e.genAtomicRMWOperation(genData)/]
 [/template]
+
+[query public genAtomicRMWOperation(c : AtomicRMW, genData: GeneratorData) : String = 
+if 	c.operation.equalsIgnoreCase('xchg') then
+	c.address.value.valueToString(genData) + ' = ' + c.argument.value.valueToString(genData) + ';'
+else if c.operation.equalsIgnoreCase('add') then
+	c.address.value.valueToString(genData) + ' = ' + c.address.value.valueToString(genData) + ' + ' + c.argument.value.valueToString(genData) + ';'
+else if c.operation.equalsIgnoreCase('sub') then
+	c.address.value.valueToString(genData) + ' = ' + c.address.value.valueToString(genData) + ' - ' + c.argument.value.valueToString(genData) + ';'
+else if c.operation.equalsIgnoreCase('and') then
+	c.address.value.valueToString(genData) + ' = ' + c.address.value.valueToString(genData) + ' & ' + c.argument.value.valueToString(genData) + ';'
+else if c.operation.equalsIgnoreCase('nand') then
+	c.address.value.valueToString(genData) + ' = ' + '!(' +  c.address.value.valueToString(genData) + ' & ' + c.argument.value.valueToString(genData) + ')' +';'
+else if c.operation.equalsIgnoreCase('or') then
+	c.address.value.valueToString(genData) + ' = ' + '(' +  c.address.value.valueToString(genData) + ' | ' + c.argument.value.valueToString(genData) + ')' +';'
+else if c.operation.equalsIgnoreCase('xor') then
+	c.address.value.valueToString(genData) + ' = ' + '(' +  c.address.value.valueToString(genData) + ' ^ ' + c.argument.value.valueToString(genData) + ')' +';'
+else if c.operation.equalsIgnoreCase('max') then
+	'TODO'
+else if c.operation.equalsIgnoreCase('min') then
+	'TODO'
+else if c.operation.equalsIgnoreCase('umax') then
+	'TODO'
+else if c.operation.equalsIgnoreCase('umin') then
+	'TODO'
+
+else
+	'ERROR: unknown operation'
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+/]
 
 [template public genInstruction(e : Load,  genData : GeneratorData)]
 [e.address.value.valueToString(genData)/] = memory['['/][e.result.addressToString(genData)/][']'/];
