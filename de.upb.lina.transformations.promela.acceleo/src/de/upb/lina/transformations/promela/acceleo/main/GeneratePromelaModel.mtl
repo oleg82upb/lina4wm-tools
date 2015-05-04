@@ -31,7 +31,7 @@ inline [cfg.name.replaceAll('@_', '')/]([genParams(cfg, genData)/]){
 [elseif (l.controlFlowLocation = loc and loc.outgoing->size() > 1)]
 [l.name/]: if 
 	   [for (t : Transition | loc.outgoing)] 
-		:: [genCondition(t, genData)/] -> [t.transformTransitions(genData)/] goto [for (l : Label | genData.labels)][if (l.controlFlowLocation = t.target)][l.name/][/if][/for];
+		:: [genCondition(t, genData)/] -> [t.transformTransitions(genData)/] [genGoTo(t, genData)/]
    	   [/for]
 		fi;
 [/if]
@@ -39,8 +39,10 @@ inline [cfg.name.replaceAll('@_', '')/]([genParams(cfg, genData)/]){
 [/template]
 
 [template public genGoTo(t: Transition, genData: GeneratorData)]
-goto [for (l : Label | genData.labels)][if (l.controlFlowLocation = t.target)][l.name/][/if][/for];
+[t.genPhi(genData)/] goto [for (l : Label | genData.labels)][if (l.controlFlowLocation = t.target)][l.name/][/if][/for];
 [/template]
+
+[template public genPhi (t: Transition, genData: GeneratorData)][/template]
 
 [template public transformTransitions(t: Transition, genData: GeneratorData)]
 [t.instruction.genInstruction(genData)/]
@@ -117,8 +119,114 @@ endif
 [/template]
 
 [template public genInstruction(e : GetElementPtr, genData : GeneratorData)]
-//TODO: getElementPtr;
+[e.getelementptrInstr(genData)/]
 [/template]
+
+[query public getelementptrInstr(e : GetElementPtr, genData: GeneratorData) : String = 
+'getelementptr(' 
++ e.aggerate.type.dereferencedPtrSize() + ', ' 
++ e.aggerate.value.valueToString(genData) + ', ' 
++ e.offset(1, genData) + ', ' 
++ e.result.addressToString(genData) + ');'
+/]
+
+[query public dereferencedPtrSize(e: EObject) : Integer =
+if e.oclIsTypeOf(AddressUse) then
+	e.oclAsType(AddressUse).address.ancestors()
+		->at(1).oclAsType(TypeDefinition).struct.structSize()
+else 
+	e.typeSize()
+endif
+/]
+
+[query public dereferencedPtrType(e : EObject) : EObject =
+if e.oclIsTypeOf(AddressUse) then
+	e.oclAsType(AddressUse).address.ancestors()
+		->at(1).oclAsType(TypeDefinition).struct
+else 
+	e
+endif
+/]
+
+[query public offset(e : GetElementPtr, index : Integer, genData: GeneratorData) : String = 
+if index < e.indizies->size() then
+	e.indizies->at(index).index(genData) + ' * ' 
+	+ e.aggerate.type.dereferencedPtrSize()
+	+ e.subOffset(e.aggerate.type.dereferencedPtrType(), index+1, genData)
+else
+	e.indizies->at(index).index(genData) + ' * ' 
+	+ e.aggerate.type.dereferencedPtrSize()
+endif
+/]
+
+[query public subOffset(e : GetElementPtr, o : EObject, index : Integer, genData: GeneratorData)
+	: String =
+if o.oclIsTypeOf(Predefined) then
+	'0'
+else if o.oclIsTypeOf(Array) then
+	o.oclAsType(Array).arrayOffset(e, index, genData)
+else if o.oclIsTypeOf(AddressUse) then
+	if o.oclAsType(AddressUse).isPointer() then
+		' PTR'
+	else
+		e.subOffset(o.oclAsType(AddressUse).address.ancestors()
+		->at(1).oclAsType(TypeDefinition).struct.oclAsType(EObject), index, genData)
+	endif
+else if o.oclIsTypeOf(Structure) then
+	o.oclAsType(Structure).structOffset(e, index, genData)
+else
+	'ERROR IN OFFSET CALCULATION'
+endif
+endif
+endif
+endif
+/]
+
+[query public arrayOffset(a : Array, e : GetElementPtr, index : Integer, genData: GeneratorData) 
+	: String =
+if index < e.indizies->size() then
+	' + ' 
+	+ e.indizies->at(index).index(genData) 
+	+ ' * ' 
+	+ a.type.typeSize() 
+	+ e.subOffset(a.type, index+1, genData)
+else
+	' + ' 
+	+ e.indizies->at(index).index(genData) 
+	+ ' * ' 
+	+ a.type.typeSize() 
+endif
+/]
+
+[query public structOffset(s : Structure, e : GetElementPtr, index : Integer, genData: GeneratorData) 
+	: String =
+if index < e.indizies->size() then
+	s.types->iterate(t : EObject; result : String = '' | 
+		result + ' + (' + e.indizies->at(index).index(genData)
+		+ ' >= ' + s.types->indexOf(t) + ' -> 1 : 0) * '
+		+ t.typeSize() + ' + ((' + e.indizies->at(index).index(genData) 
+		+ ' == (' + s.types->indexOf(t) + '-1) -> 1 : 0)'
+		+ ' * (' + e.subOffset(t, index+1, genData).replace(' \\+ ', '') + '))'
+	)
+else
+	s.types->iterate(t : EObject; result : String = '' | 
+		result + ' + (' + e.indizies->at(index).index(genData)
+		+ ' >= ' + s.types->indexOf(t) + ' -> 1 : 0) * '
+		+ t.typeSize()
+	)
+endif
+/]
+
+[query public index(e : Value, genData: GeneratorData) : String = 
+if e.oclIsTypeOf(Constant) then
+	e.oclAsType(Constant).value.toString()
+else if e.oclIsTypeOf(AddressUse) then
+	e.oclAsType(AddressUse).address.addressToString(genData)
+else
+	-1
+endif
+endif
+/]
 
 [template public genInstruction(e : CmpXchg, genData : GeneratorData)]
 cas([e.address.value.valueToString(genData)/], [e.value.value.valueToString(genData)/], [e.newValue.value.valueToString(genData)/], [e.result.addressToString(genData)/]);
@@ -166,7 +274,7 @@ endif
 /]
 
 [template public genInstruction(e : Alloc, genData: GeneratorData)]
-//TODO: alloca
+alloca([e.type.typeSize()/], [e.result.addressToString(genData)/]);
 [/template]
 
 [template public genInstruction(e : Phi, genData: GeneratorData)]
@@ -235,7 +343,7 @@ endif
 [/template]
 
 [template public genInstruction(e : Unreachable, genData: GeneratorData)]
-// Unreachable
+//TODO: Unreachable
 [/template]
 
 [template public genInstruction(e : Return, genData: GeneratorData)]
@@ -416,13 +524,13 @@ atomic{
 
 
 //standard stuff
-inline getelementptr(instance, offset, targetRegister)
+inline getelementptr(type, instance, offset, targetRegister)
 {
 	atomic{
 	//simplified version of what llvm does.
 	//we don't need the type as long as we assume our memory to hold only values/pointers etc of equal length. 
 	//In this case, the offset directly correspond to adding it to instance address. 
-	//assert(offset <= type); //offset shouldn't be greater than the type range
+	assert(offset <= type); //offset shouldn't be greater than the type range
 	targetRegister = instance + offset;
 	}
 }
