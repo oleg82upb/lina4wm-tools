@@ -90,6 +90,8 @@ public class GendataPrecomputer {
 			FunctionDefinition fd = (FunctionDefinition)fb.eContainer();
 			LLVM program = (LLVM)fd.eContainer();
 			helperModel.setProgram(program);
+			helperModel.setNeedsCas(false);
+			helperModel.setNeedsGetElementPtr(false);
 			helperModel.getCfgs().addAll(cfgs);
 
 			//local vars
@@ -105,7 +107,7 @@ public class GendataPrecomputer {
 			computeTransitionConditionMapping(helperModel.getConstraints());
 			
 			//parameterFunctionMappings
-			computeParameterFunctionMapping(helperModel.getParameterMappings());
+			computeParameterFunctionMapping(helperModel);
 			
 
 		}catch(ClassCastException ex){
@@ -113,7 +115,8 @@ public class GendataPrecomputer {
 		}
 	}
 	
-	private void computeParameterFunctionMapping(List<FunctionParamsMapping> functionParamMapping){
+	private void computeParameterFunctionMapping(GeneratorData genData){
+		List<FunctionParamsMapping> functionParamMapping = genData.getParameterMappings();
 		for(ControlFlowDiagram cfg: cfgs){
 			FunctionParamsMapping mapping = GendataFactory.eINSTANCE.createFunctionParamsMapping();
 			if(cfg.getStart() != null && !cfg.getStart().getOutgoing().isEmpty()){
@@ -125,12 +128,23 @@ public class GendataPrecomputer {
 				mapping.setCfg(cfg);
 				mapping.setFunction(fd);
 				mapping.setNeedsReturnValue(false);
+				mapping.setNeedsCas(false);
+				mapping.setNeedsGetElementPtr(false);
 				for(Transition t: cfg.getTransitions()){
 					if(t.getInstruction() instanceof Return){
 						Return ret = (Return) t.getInstruction();
 						if(ret.getValue() != null){
 							mapping.setNeedsReturnValue(true);
 						}
+					}
+					
+					if(t.getInstruction() instanceof CmpXchg){
+						mapping.setNeedsCas(true);
+						genData.setNeedsCas(true);
+					}
+					if(t.getInstruction() instanceof GetElementPtr){
+						mapping.setNeedsGetElementPtr(true);
+						genData.setNeedsGetElementPtr(true);
 					}
 				}
 				functionParamMapping.add(mapping);

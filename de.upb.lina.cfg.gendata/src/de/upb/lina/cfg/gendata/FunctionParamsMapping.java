@@ -19,6 +19,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#getFunction <em>Function</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#getCfg <em>Cfg</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#isNeedsReturnValue <em>Needs Return Value</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#isNeedsGetElementPtr <em>Needs Get Element Ptr</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#isNeedsCas <em>Needs Cas</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,5 +106,57 @@ public interface FunctionParamsMapping extends EObject {
 	 * @generated
 	 */
 	void setNeedsReturnValue(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Needs Get Element Ptr</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Needs Get Element Ptr</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Needs Get Element Ptr</em>' attribute.
+	 * @see #setNeedsGetElementPtr(boolean)
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getFunctionParamsMapping_NeedsGetElementPtr()
+	 * @model
+	 * @generated
+	 */
+	boolean isNeedsGetElementPtr();
+
+	/**
+	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#isNeedsGetElementPtr <em>Needs Get Element Ptr</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Needs Get Element Ptr</em>' attribute.
+	 * @see #isNeedsGetElementPtr()
+	 * @generated
+	 */
+	void setNeedsGetElementPtr(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Needs Cas</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Needs Cas</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Needs Cas</em>' attribute.
+	 * @see #setNeedsCas(boolean)
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getFunctionParamsMapping_NeedsCas()
+	 * @model
+	 * @generated
+	 */
+	boolean isNeedsCas();
+
+	/**
+	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#isNeedsCas <em>Needs Cas</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Needs Cas</em>' attribute.
+	 * @see #isNeedsCas()
+	 * @generated
+	 */
+	void setNeedsCas(boolean value);
 
 } // FunctionParamsMapping

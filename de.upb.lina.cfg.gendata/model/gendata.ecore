@@ -17,6 +17,8 @@
         eType="#//ConstraintMapping" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameterMappings" upperBound="-1"
         eType="#//FunctionParamsMapping" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="needsGetElementPtr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="needsCas" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AddressMapping">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -39,5 +41,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//FunctionDefinition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="cfg" eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//ControlFlowDiagram"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="needsReturnValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="needsGetElementPtr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="needsCas" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
 </ecore:EPackage>

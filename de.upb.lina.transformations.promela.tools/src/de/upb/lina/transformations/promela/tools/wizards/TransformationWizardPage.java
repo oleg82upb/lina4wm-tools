@@ -83,8 +83,8 @@ public class TransformationWizardPage extends WizardPage {
 	 */
 	public TransformationWizardPage(ISelection selection) {
 		super("wizardPage");
-		setTitle("AST-Selection");
-		setDescription("Please select the AST-Model you wish to convert.");
+		setTitle("CFG - Selection");
+		setDescription("Please select the CFG model you wish to transform.");
 		this.selection = selection;
 	}
 
@@ -126,7 +126,7 @@ public class TransformationWizardPage extends WizardPage {
 
 		/* container select */
 		Label label1 = new Label(container, SWT.NULL);
-		label1.setText("&Container:");
+		label1.setText("&Target Container:");
 
 		tx_container = new Text(container, SWT.BORDER | SWT.SINGLE);
 		tx_container.setLayoutData(gd);
@@ -162,7 +162,7 @@ public class TransformationWizardPage extends WizardPage {
 		/* ordering select */
 		new Label(container, SWT.NULL).setText("Transformation type:");
 		cb_model = new Combo(container, SWT.NULL);
-		String[] orderings = new String[] { "Promela", "KIF" };
+		String[] orderings = new String[] { "Promela", "KIV" };
 		for (int i = 0; i < orderings.length; i++){
 			cb_model.add(orderings[i]);
 		}
@@ -177,14 +177,14 @@ public class TransformationWizardPage extends WizardPage {
 		cb_model.setEnabled(true);
 		setControl(container);
 				if (memento != null) {
-					tx_graphModelFile.setText(memento.getString("astloc"));
+					tx_graphModelFile.setText(memento.getString(CFGLOC));
 					validateInput();
-					tx_container.setText(memento.getString("container"));
+					tx_container.setText(memento.getString(CONTAINER));
 					validateInput();
-					tx_file.setText(memento.getString("newfile"));
+					tx_file.setText(memento.getString(NEW_FILE));
 					validateInput();
 					try {
-						cb_model.select(memento.getInteger("reordering"));
+						cb_model.select(memento.getInteger(MODEL_SELECTION));
 					} catch (NullPointerException ex) {
 						Activator.logWarning(
 								"Warning: Memento not setup correctly - this warning will disappear after creating one cfg.",
@@ -204,7 +204,7 @@ public class TransformationWizardPage extends WizardPage {
 //			break;
 
 		case 1:
-			return ".kif";
+			return ".kiv";
 //			break;
 			
 		default:
@@ -382,7 +382,7 @@ public class TransformationWizardPage extends WizardPage {
 		}
 
 		if(type == 1){
-			if (string.endsWith(".kif")){
+			if (string.endsWith(".kiv")){
 				return true;
 			}
 		}

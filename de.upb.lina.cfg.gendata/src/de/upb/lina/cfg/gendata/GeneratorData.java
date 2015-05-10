@@ -23,6 +23,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getCfgs <em>Cfgs</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getParameterMappings <em>Parameter Mappings</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#isNeedsGetElementPtr <em>Needs Get Element Ptr</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#isNeedsCas <em>Needs Cas</em>}</li>
  * </ul>
  * </p>
  *
@@ -147,5 +149,57 @@ public interface GeneratorData extends EObject
 	 * @generated
 	 */
 	EList<FunctionParamsMapping> getParameterMappings();
+
+	/**
+	 * Returns the value of the '<em><b>Needs Get Element Ptr</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Needs Get Element Ptr</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Needs Get Element Ptr</em>' attribute.
+	 * @see #setNeedsGetElementPtr(boolean)
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_NeedsGetElementPtr()
+	 * @model
+	 * @generated
+	 */
+	boolean isNeedsGetElementPtr();
+
+	/**
+	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.GeneratorData#isNeedsGetElementPtr <em>Needs Get Element Ptr</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Needs Get Element Ptr</em>' attribute.
+	 * @see #isNeedsGetElementPtr()
+	 * @generated
+	 */
+	void setNeedsGetElementPtr(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Needs Cas</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Needs Cas</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Needs Cas</em>' attribute.
+	 * @see #setNeedsCas(boolean)
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_NeedsCas()
+	 * @model
+	 * @generated
+	 */
+	boolean isNeedsCas();
+
+	/**
+	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.GeneratorData#isNeedsCas <em>Needs Cas</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Needs Cas</em>' attribute.
+	 * @see #isNeedsCas()
+	 * @generated
+	 */
+	void setNeedsCas(boolean value);
 
 } // GeneratorData

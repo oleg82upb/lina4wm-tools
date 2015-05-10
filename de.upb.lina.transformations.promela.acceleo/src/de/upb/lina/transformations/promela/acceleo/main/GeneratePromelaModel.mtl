@@ -6,22 +6,28 @@
 [comment @main/]
 [file ( fileName  , false, 'UTF-8')]
 [buildDefines()/]
-
-[buildStandards()/]
+[genData.buildStandards()/]
 
 [for (cfg: ControlFlowDiagram | genData.cfgs)]
 inline [cfg.name.replaceAll('@_', '')/]([genParams(cfg, genData)/]){
-[for (loc: ControlFlowLocation | cfg.locations)][handleLocation(loc, genData)/][/for]
+[handleStartLocation(genData, cfg)/][for (loc: ControlFlowLocation | cfg.locations)][handleLocation(loc, genData)/][/for]
 }
 
 [/for]
-
-
+[buildProcesses()/]
 [/file]
 [/template]
 
 [template public genParams(cfg: ControlFlowDiagram, genData: GeneratorData)]
 [for (map: FunctionParamsMapping | genData.parameterMappings)][if (map.cfg = cfg)][for (p: FunctionParameter | map.function.parameter.params)][p.value.addressToString(genData)/], [/for][if(map.needsReturnValue = true)]returnvalue[/if][/if][/for]
+[/template]
+
+[template public handleStartLocation(genData:GeneratorData, cfg: ControlFlowDiagram)]
+[for (l : Label | genData.labels)]
+[if (l.controlFlowLocation = cfg.start)]
+[l.name.substring(1, 1)/]Start: goto [l.name/];
+[/if]
+[/for]
 [/template]
 
 [template public handleLocation(loc: ControlFlowLocation, genData: GeneratorData)]
@@ -233,7 +239,7 @@ cas([e.address.value.valueToString(genData)/], [e.value.value.valueToString(genD
 [/template]
 
 [template public genInstruction(e : AtomicRMW, genData : GeneratorData)]
-[e.result.addressToString(genData)/] = [e.address.value.valueToString(genData)/]; [e.genAtomicRMWOperation(genData)/]
+atomic{[e.result.addressToString(genData)/] = [e.address.value.valueToString(genData)/]; [e.genAtomicRMWOperation(genData)/]}
 [/template]
 
 [query public genAtomicRMWOperation(c : AtomicRMW, genData: GeneratorData) : String = 
@@ -252,13 +258,13 @@ else if c.operation.equalsIgnoreCase('or') then
 else if c.operation.equalsIgnoreCase('xor') then
 	c.address.value.valueToString(genData) + ' = ' + '(' +  c.address.value.valueToString(genData) + ' ^ ' + c.argument.value.valueToString(genData) + ')' +';'
 else if c.operation.equalsIgnoreCase('max') then
-	'TODO'
+	c.address.value.valueToString(genData) + ' = ' + c.address.value.valueToString(genData) + '>' + c.argument.value.valueToString(genData) + ' -> ' + c.address.value.valueToString(genData) + ' : ' + c.argument.value.valueToString(genData) + ';'
 else if c.operation.equalsIgnoreCase('min') then
-	'TODO'
+	c.address.value.valueToString(genData) + ' = ' + c.address.value.valueToString(genData) + '<' + c.argument.value.valueToString(genData) + ' -> ' + c.address.value.valueToString(genData) + ' : ' + c.argument.value.valueToString(genData) + ';'
 else if c.operation.equalsIgnoreCase('umax') then
-	'TODO'
+	c.address.value.valueToString(genData) + ' = ' + c.address.value.valueToString(genData) + '>' + c.argument.value.valueToString(genData) + ' -> ' + c.address.value.valueToString(genData) + ' : ' + c.argument.value.valueToString(genData) + ' TODO, umax;'
 else if c.operation.equalsIgnoreCase('umin') then
-	'TODO'
+	c.address.value.valueToString(genData) + ' = ' + c.address.value.valueToString(genData) + '<' + c.argument.value.valueToString(genData) + ' -> ' + c.address.value.valueToString(genData) + ' : ' + c.argument.value.valueToString(genData) + ' TODO umin;'
 
 else
 	'ERROR: unknown operation'
@@ -541,7 +547,8 @@ short memUse = 1; 	//shows to the next free cell in memory
 
 [/template]
 
-[template public buildStandards(c: OclAny)]
+[template public buildProcesses(c: OclAny)]
+
 //Stubs
 proctype process1(){
 	//TODO: empty stub
@@ -560,9 +567,12 @@ atomic{
 	run process2();
 	}
 }
+[/template]
 
+[template public buildStandards(genData: GeneratorData)]
 
 //standard stuff
+[if (genData.needsGetElementPtr = true)]
 inline getelementptr(type, instance, offset, targetRegister)
 {
 	atomic{
@@ -573,7 +583,7 @@ inline getelementptr(type, instance, offset, targetRegister)
 	targetRegister = instance + offset;
 	}
 }
-
+[/if]
 inline alloca(type, targetRegister)
 {
 	atomic{
@@ -582,7 +592,7 @@ inline alloca(type, targetRegister)
 	assert(memUse < MEM_SIZE);
 	}
 }
-
+[if (genData.needsCas = true)]
 inline cas(adr, old, new, result)
 {
 	atomic{
@@ -594,4 +604,5 @@ inline cas(adr, old, new, result)
 	fi;
 	}
 }
+[/if]
 [/template]

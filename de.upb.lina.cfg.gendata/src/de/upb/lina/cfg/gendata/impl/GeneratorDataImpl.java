@@ -35,6 +35,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getCfgs <em>Cfgs</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getParameterMappings <em>Parameter Mappings</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#isNeedsGetElementPtr <em>Needs Get Element Ptr</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#isNeedsCas <em>Needs Cas</em>}</li>
  * </ul>
  * </p>
  *
@@ -101,6 +103,46 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @ordered
 	 */
 	protected EList<FunctionParamsMapping> parameterMappings;
+
+	/**
+	 * The default value of the '{@link #isNeedsGetElementPtr() <em>Needs Get Element Ptr</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isNeedsGetElementPtr()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean NEEDS_GET_ELEMENT_PTR_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isNeedsGetElementPtr() <em>Needs Get Element Ptr</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isNeedsGetElementPtr()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean needsGetElementPtr = NEEDS_GET_ELEMENT_PTR_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isNeedsCas() <em>Needs Cas</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isNeedsCas()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean NEEDS_CAS_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isNeedsCas() <em>Needs Cas</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isNeedsCas()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean needsCas = NEEDS_CAS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -261,6 +303,48 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isNeedsGetElementPtr() {
+		return needsGetElementPtr;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNeedsGetElementPtr(boolean newNeedsGetElementPtr) {
+		boolean oldNeedsGetElementPtr = needsGetElementPtr;
+		needsGetElementPtr = newNeedsGetElementPtr;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.GENERATOR_DATA__NEEDS_GET_ELEMENT_PTR, oldNeedsGetElementPtr, needsGetElementPtr));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isNeedsCas() {
+		return needsCas;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNeedsCas(boolean newNeedsCas) {
+		boolean oldNeedsCas = needsCas;
+		needsCas = newNeedsCas;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.GENERATOR_DATA__NEEDS_CAS, oldNeedsCas, needsCas));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -299,6 +383,10 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return getConstraints();
 			case GendataPackage.GENERATOR_DATA__PARAMETER_MAPPINGS:
 				return getParameterMappings();
+			case GendataPackage.GENERATOR_DATA__NEEDS_GET_ELEMENT_PTR:
+				return isNeedsGetElementPtr();
+			case GendataPackage.GENERATOR_DATA__NEEDS_CAS:
+				return isNeedsCas();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -335,6 +423,12 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				getParameterMappings().clear();
 				getParameterMappings().addAll((Collection<? extends FunctionParamsMapping>)newValue);
 				return;
+			case GendataPackage.GENERATOR_DATA__NEEDS_GET_ELEMENT_PTR:
+				setNeedsGetElementPtr((Boolean)newValue);
+				return;
+			case GendataPackage.GENERATOR_DATA__NEEDS_CAS:
+				setNeedsCas((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -366,6 +460,12 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 			case GendataPackage.GENERATOR_DATA__PARAMETER_MAPPINGS:
 				getParameterMappings().clear();
 				return;
+			case GendataPackage.GENERATOR_DATA__NEEDS_GET_ELEMENT_PTR:
+				setNeedsGetElementPtr(NEEDS_GET_ELEMENT_PTR_EDEFAULT);
+				return;
+			case GendataPackage.GENERATOR_DATA__NEEDS_CAS:
+				setNeedsCas(NEEDS_CAS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -391,8 +491,30 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return constraints != null && !constraints.isEmpty();
 			case GendataPackage.GENERATOR_DATA__PARAMETER_MAPPINGS:
 				return parameterMappings != null && !parameterMappings.isEmpty();
+			case GendataPackage.GENERATOR_DATA__NEEDS_GET_ELEMENT_PTR:
+				return needsGetElementPtr != NEEDS_GET_ELEMENT_PTR_EDEFAULT;
+			case GendataPackage.GENERATOR_DATA__NEEDS_CAS:
+				return needsCas != NEEDS_CAS_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (needsGetElementPtr: ");
+		result.append(needsGetElementPtr);
+		result.append(", needsCas: ");
+		result.append(needsCas);
+		result.append(')');
+		return result.toString();
 	}
 
 } //GeneratorDataImpl

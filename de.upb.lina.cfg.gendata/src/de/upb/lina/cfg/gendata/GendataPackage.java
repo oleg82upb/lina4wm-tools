@@ -159,13 +159,31 @@ public interface GendataPackage extends EPackage
 	int GENERATOR_DATA__PARAMETER_MAPPINGS = 5;
 
 	/**
+	 * The feature id for the '<em><b>Needs Get Element Ptr</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_DATA__NEEDS_GET_ELEMENT_PTR = 6;
+
+	/**
+	 * The feature id for the '<em><b>Needs Cas</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_DATA__NEEDS_CAS = 7;
+
+	/**
 	 * The number of structural features of the '<em>Generator Data</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA_FEATURE_COUNT = 6;
+	int GENERATOR_DATA_FEATURE_COUNT = 8;
 
 	/**
 	 * The number of operations of the '<em>Generator Data</em>' class.
@@ -372,13 +390,31 @@ public interface GendataPackage extends EPackage
 	int FUNCTION_PARAMS_MAPPING__NEEDS_RETURN_VALUE = 2;
 
 	/**
+	 * The feature id for the '<em><b>Needs Get Element Ptr</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_PARAMS_MAPPING__NEEDS_GET_ELEMENT_PTR = 3;
+
+	/**
+	 * The feature id for the '<em><b>Needs Cas</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_PARAMS_MAPPING__NEEDS_CAS = 4;
+
+	/**
 	 * The number of structural features of the '<em>Function Params Mapping</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_PARAMS_MAPPING_FEATURE_COUNT = 3;
+	int FUNCTION_PARAMS_MAPPING_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Function Params Mapping</em>' class.
@@ -486,6 +522,28 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 */
 	EReference getGeneratorData_ParameterMappings();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.gendata.GeneratorData#isNeedsGetElementPtr <em>Needs Get Element Ptr</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Needs Get Element Ptr</em>'.
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#isNeedsGetElementPtr()
+	 * @see #getGeneratorData()
+	 * @generated
+	 */
+	EAttribute getGeneratorData_NeedsGetElementPtr();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.gendata.GeneratorData#isNeedsCas <em>Needs Cas</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Needs Cas</em>'.
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#isNeedsCas()
+	 * @see #getGeneratorData()
+	 * @generated
+	 */
+	EAttribute getGeneratorData_NeedsCas();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.AddressMapping <em>Address Mapping</em>}'.
@@ -649,6 +707,28 @@ public interface GendataPackage extends EPackage
 	EAttribute getFunctionParamsMapping_NeedsReturnValue();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#isNeedsGetElementPtr <em>Needs Get Element Ptr</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Needs Get Element Ptr</em>'.
+	 * @see de.upb.lina.cfg.gendata.FunctionParamsMapping#isNeedsGetElementPtr()
+	 * @see #getFunctionParamsMapping()
+	 * @generated
+	 */
+	EAttribute getFunctionParamsMapping_NeedsGetElementPtr();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#isNeedsCas <em>Needs Cas</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Needs Cas</em>'.
+	 * @see de.upb.lina.cfg.gendata.FunctionParamsMapping#isNeedsCas()
+	 * @see #getFunctionParamsMapping()
+	 * @generated
+	 */
+	EAttribute getFunctionParamsMapping_NeedsCas();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -747,6 +827,22 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EReference GENERATOR_DATA__PARAMETER_MAPPINGS = eINSTANCE.getGeneratorData_ParameterMappings();
+
+		/**
+		 * The meta object literal for the '<em><b>Needs Get Element Ptr</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GENERATOR_DATA__NEEDS_GET_ELEMENT_PTR = eINSTANCE.getGeneratorData_NeedsGetElementPtr();
+
+		/**
+		 * The meta object literal for the '<em><b>Needs Cas</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GENERATOR_DATA__NEEDS_CAS = eINSTANCE.getGeneratorData_NeedsCas();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.AddressMappingImpl <em>Address Mapping</em>}' class.
@@ -875,6 +971,22 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute FUNCTION_PARAMS_MAPPING__NEEDS_RETURN_VALUE = eINSTANCE.getFunctionParamsMapping_NeedsReturnValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Needs Get Element Ptr</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FUNCTION_PARAMS_MAPPING__NEEDS_GET_ELEMENT_PTR = eINSTANCE.getFunctionParamsMapping_NeedsGetElementPtr();
+
+		/**
+		 * The meta object literal for the '<em><b>Needs Cas</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FUNCTION_PARAMS_MAPPING__NEEDS_CAS = eINSTANCE.getFunctionParamsMapping_NeedsCas();
 
 	}
 

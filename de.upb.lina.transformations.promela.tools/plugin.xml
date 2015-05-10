@@ -12,7 +12,7 @@
             class="de.upb.lina.transformations.promela.tools.wizards.TransformationWizard"
             icon="icons/sample.gif"
             id="de.upb.lina.transformations.promela.tools.transformationWizard"
-            name="New ModelChecker Input File">
+            name="Generate New Specification">
       </wizard>
    </extension>
 

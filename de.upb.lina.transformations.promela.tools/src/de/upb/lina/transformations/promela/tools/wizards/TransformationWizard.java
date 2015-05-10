@@ -48,7 +48,7 @@ public class TransformationWizard extends Wizard implements INewWizard {
 	@Override
 	public void addPages() {
 		super.addPages();
-		wizardPage = new TransformationWizardPage("Transform Page");
+		wizardPage = new TransformationWizardPage("Generate New Specification");
 		addPage(wizardPage);
 		
 	}
