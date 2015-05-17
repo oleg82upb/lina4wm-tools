@@ -9,6 +9,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
+import de.upb.lina.transformations.kiv.KivTransformationOperation;
 import de.upb.lina.transformations.plugin.ETransformationTarget;
 import de.upb.lina.transformations.promela.PromelaTransformationOperation;
 
@@ -34,7 +35,7 @@ public class TransformationWizard extends Wizard implements INewWizard {
 			wmo = new PromelaTransformationOperation(wizardPage.getGraphModelFile().getText(), wizardPage.getContainerText().getText(), wizardPage.getFileText().getText(), wizardPage.getFileEndingLabel().getText());
 		}else if (wizardPage.getType() == ETransformationTarget.KIV){
 			//KIV
-			//TODO: insert KIV here
+			wmo = new KivTransformationOperation(wizardPage.getGraphModelFile().getText(), wizardPage.getContainerText().getText(), wizardPage.getFileText().getText(), wizardPage.getFileEndingLabel().getText());
 		}
 		
 		try {
