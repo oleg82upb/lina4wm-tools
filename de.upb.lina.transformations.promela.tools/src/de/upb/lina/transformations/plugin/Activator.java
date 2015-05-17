@@ -1,4 +1,4 @@
-package de.upb.lina.transformations.promela.tools;
+package de.upb.lina.transformations.plugin;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -18,7 +18,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "de.upb.lina.transformations.promela.tools"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "de.upb.lina.transformations"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;

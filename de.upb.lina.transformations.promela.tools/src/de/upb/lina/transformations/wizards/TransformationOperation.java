@@ -1,7 +1,6 @@
-package de.upb.lina.transformations.promela.tools.wizards;
+package de.upb.lina.transformations.wizards;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -14,8 +13,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.jobs.ISchedulingRule;
-import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -27,18 +24,17 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.gendata.GeneratorData;
-import de.upb.lina.transformations.promela.acceleo.main.GeneratePromelaModel;
-import de.upb.lina.transformations.promela.tools.GendataPrecomputer;
-import de.upb.lina.transformations.promela.tools.MTLWriter;
-import de.upb.lina.transformations.promela.tools.PromelaMTLGenerator;
+import de.upb.lina.transformations.plugin.GendataPrecomputer;
 
-public class TransformationOperation extends WorkspaceModifyOperation {
-	private String graphModelFileLocation;
-	private String targetContainer;
-	private String targetName;
-	private String fileEnding;
+public class TransformationOperation extends WorkspaceModifyOperation{
+	protected String graphModelFileLocation;
+	protected String targetContainer;
+	protected String targetName;
+	protected String fileEnding;
+	protected java.nio.file.Path fullPath;
 	
-	private List<ControlFlowDiagram> cfg;
+	protected List<ControlFlowDiagram> cfg;
+	protected GeneratorData genData;
 	
 	
 	public TransformationOperation(String graphModelFileLocation, String targetContainer, String targetName, String fileEnding) {
@@ -47,32 +43,18 @@ public class TransformationOperation extends WorkspaceModifyOperation {
 		this.targetName = targetName;
 		this.fileEnding = fileEnding;
 	}
-
-	public TransformationOperation(ISchedulingRule rule) {
-		super(rule);
-		// TODO Auto-generated constructor stub
-	}
-
+	
+	
 	@Override
 	protected void execute(IProgressMonitor monitor) throws CoreException,
 			InvocationTargetException, InterruptedException {
 		
+
 		loadCfg();
-		PromelaMTLGenerator gen = new PromelaMTLGenerator(cfg);
-		gen.produceTransformation();
 		
-//		String toWrite = gen.getResult();
-//		
-//		String genDataPortableStringLocation = new Path(targetContainer + File.separator + targetName +"_gendata" + ".gendata").toPortableString();
-//		
-////		MTLWriter writer = new MTLWriter(new Path(targetContainer + File.separator + targetName + fileEnding).toPortableString(), genDataPortableStringLocation);
-////		writer.write(toWrite);
-		
-		
-		//Run Acceleo
+		//Run Precomputation
 		GendataPrecomputer precomp = new GendataPrecomputer(cfg);
-		GeneratorData genData = precomp.computeGeneratorData();
-		
+		genData = precomp.computeGeneratorData();
 		
 		//get workspace root
 		IWorkspaceRoot workSpaceRoot = ResourcesPlugin.getWorkspace().getRoot();
@@ -83,34 +65,16 @@ public class TransformationOperation extends WorkspaceModifyOperation {
 		IPath targetPath = targetFolderCont.makeAbsolute();
 		
 		//build correct full path
-		java.nio.file.Path fullPath = Paths.get(workspaceRootFile.toString() + File.separator + targetPath.toPortableString());
-		
-		//run acceleo
-		GeneratePromelaModel generator;
-		try {
-			ArrayList<Object> args = new ArrayList<Object>();
-			args.add(targetName + fileEnding);
-			generator = new GeneratePromelaModel(genData, fullPath.toFile(), args); //TODO: add file name as parameters to be passed to template
-			generator.doGenerate(new BasicMonitor());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		refreshWorkspace(monitor);
-		refreshWorkspace(monitor);
-		
+		fullPath = Paths.get(workspaceRootFile.toString() + File.separator + targetPath.toPortableString());
 		
 	}
 	
-	private List<ControlFlowDiagram> loadCfg()
-	{
-		if(cfg != null)
-		{
-			return cfg;
+	
+	protected void loadCfg(){
+		if(cfg != null){
+			return;
 		}
-		
-		
+
 		ControlflowPackage.eINSTANCE.getNsURI();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Path cfgpath = new Path(graphModelFileLocation);
@@ -125,10 +89,9 @@ public class TransformationOperation extends WorkspaceModifyOperation {
 			}
 		}
 		this.cfg = graphList2;
-		return cfg;
 	}
 	
-	private void refreshWorkspace(IProgressMonitor monitor) throws CoreException
+	protected void refreshWorkspace(IProgressMonitor monitor) throws CoreException
 	{
 		IProject[] iProjects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
 		for (int i = 0; i < iProjects.length; i++)
@@ -136,5 +99,5 @@ public class TransformationOperation extends WorkspaceModifyOperation {
 			iProjects[i].refreshLocal(0, monitor);
 		}
 	}
-
+	
 }

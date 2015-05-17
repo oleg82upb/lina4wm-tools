@@ -1,4 +1,4 @@
-package de.upb.lina.transformations.promela.tools;
+package de.upb.lina.transformations.plugin;
 
 import java.util.ArrayList;
 import java.util.HashMap;

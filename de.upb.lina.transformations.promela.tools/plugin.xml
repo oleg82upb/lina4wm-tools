@@ -9,7 +9,7 @@
       </category>
       <wizard
             category="de.upb.lina.cfg.tools"
-            class="de.upb.lina.transformations.promela.tools.wizards.TransformationWizard"
+            class="de.upb.lina.transformations.wizards.TransformationWizard"
             icon="icons/sample.gif"
             id="de.upb.lina.transformations.promela.tools.transformationWizard"
             name="Generate New Specification">

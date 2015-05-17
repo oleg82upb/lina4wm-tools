@@ -1,52 +1,45 @@
-package de.upb.lina.transformations.promela.tools;
+package de.upb.lina.transformations.plugin;
 
-import java.util.List;
+import javax.annotation.Generated;
 
 import de.upb.lina.cfg.controlflow.AddressValuePair;
-import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.StoreBuffer;
-import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.llvm_parser.llvm.Constant;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.PrimitiveValue;
 import de.upb.llvm_parser.llvm.Value;
 import de.upb.llvm_parser.llvm.impl.AddressUseImpl;
 
-public abstract class AMTLGenerator {
-	
-	protected List<ControlFlowDiagram> cfgs; 
-	protected StringBuilder stringBuilder;
-	protected GeneratorData helperModel;
-	
-	
-	public AMTLGenerator(List <ControlFlowDiagram> cfgs){
-		this.cfgs = cfgs;
-		stringBuilder = new StringBuilder();
-	}
-	
-	
-	
-	
-	public String produceStringFromValue(Value value){
+public class Utils {
+	public static String produceStringFromValue(Value value){
 		String result = valueToString(value);
 		return clean(result);
 	}
-	
+
 	public static String clean(String string){
-		//String result = string;
-		string = string.replaceAll("%", "v_");
+		int loc = string.indexOf("%");
+		//if the address is starts with a number, do not give it a v_
+		if(loc > -1 && string.substring(loc+1,loc+2).matches("[0-9]")){
+			string = string.replaceAll("%", "v");
+		}else{
+			string = string.replaceAll("%", "");
+		}
 		string = string.trim();
 		string = string.replaceAll(" ", "");
+
+		//if the address is starts with a number, do not give it a v_
+		string = string.replaceAll("@_","");
+
 		return string;
 	}
-	
-	
+
+
 	/**
 	 * Transforms a value into a String.
 	 * @param value
 	 * @return
 	 */
-	private String valueToString(Value value) {
+	public static String valueToString(Value value) {
 		if (value.eClass().equals(LlvmPackage.eINSTANCE.getConstant())) {
 			Constant constant = (Constant) value;
 			return constant.getValue().toString();
@@ -56,15 +49,15 @@ public abstract class AMTLGenerator {
 			AddressUseImpl aui = (AddressUseImpl) value;
 			return aui.getAddress().getName();
 		}
-		
+
 		if(value.eClass().equals(LlvmPackage.eINSTANCE.getPrimitiveValue())){
 			PrimitiveValue val = (PrimitiveValue)value;
 			return val.getValue();
 		}
 		return value.toString();
 	}
-	
-	
+
+
 	/**
 	 * Returns the given buffer and pc as a String
 	 * @param buf
@@ -81,7 +74,7 @@ public abstract class AMTLGenerator {
 		}
 		return clean(buffer);
 	}
-	
+
 	/**
 	 * Returns the given value as a String
 	 * @param value to be transfored into a String
@@ -99,7 +92,7 @@ public abstract class AMTLGenerator {
 			Constant constant = (Constant) value;
 			result += constant.getValue();
 		}
-		
+
 		else if(value.eClass().equals(LlvmPackage.eINSTANCE.getPrimitiveValue())){
 			PrimitiveValue val = (PrimitiveValue)value;
 			result += val.getValue();
@@ -107,6 +100,4 @@ public abstract class AMTLGenerator {
 
 		return (result);
 	}
-	
-	
 }

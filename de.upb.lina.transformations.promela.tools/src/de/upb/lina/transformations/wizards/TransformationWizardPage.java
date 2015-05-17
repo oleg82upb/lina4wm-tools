@@ -1,4 +1,4 @@
-package de.upb.lina.transformations.promela.tools.wizards;
+package de.upb.lina.transformations.wizards;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -45,7 +45,8 @@ import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
-import de.upb.lina.transformations.promela.tools.Activator;
+import de.upb.lina.transformations.plugin.Activator;
+import de.upb.lina.transformations.plugin.ETransformationTarget;
 
 public class TransformationWizardPage extends WizardPage {
 
@@ -195,6 +196,17 @@ public class TransformationWizardPage extends WizardPage {
 		validateInput();
 
 
+	}
+	
+	public ETransformationTarget getType(){
+		switch (cb_model.getSelectionIndex()) {
+		case 0:
+			return ETransformationTarget.PROMELA;
+		case 1:
+			return ETransformationTarget.KIV;
+		default:
+			return null;
+		}
 	}
 	
 	public String getFileEndForSelection(){

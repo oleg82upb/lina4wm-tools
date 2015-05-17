@@ -1,21 +1,16 @@
-package de.upb.lina.transformations.promela.tools.wizards;
+package de.upb.lina.transformations.wizards;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.charset.StandardCharsets;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
+import de.upb.lina.transformations.plugin.ETransformationTarget;
+import de.upb.lina.transformations.promela.PromelaTransformationOperation;
 
 public class TransformationWizard extends Wizard implements INewWizard {
 	
@@ -32,9 +27,18 @@ public class TransformationWizard extends Wizard implements INewWizard {
 	@Override
 	public boolean performFinish() {
 		wizardPage.saveMementoState();
-		TransformationOperation tfO = new TransformationOperation(wizardPage.getGraphModelFile().getText(), wizardPage.getContainerText().getText(), wizardPage.getFileText().getText(), wizardPage.getFileEndingLabel().getText());
+		WorkspaceModifyOperation wmo = null;
+		
+		if(wizardPage.getType() == ETransformationTarget.PROMELA){
+			//Promela
+			wmo = new PromelaTransformationOperation(wizardPage.getGraphModelFile().getText(), wizardPage.getContainerText().getText(), wizardPage.getFileText().getText(), wizardPage.getFileEndingLabel().getText());
+		}else if (wizardPage.getType() == ETransformationTarget.KIV){
+			//KIV
+			//TODO: insert KIV here
+		}
+		
 		try {
-			getContainer().run(true, false, tfO);
+			getContainer().run(true, false, wmo);
 		} catch (InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
