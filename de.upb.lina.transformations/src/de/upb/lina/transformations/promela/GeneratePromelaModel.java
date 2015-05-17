@@ -41,7 +41,7 @@ public class GeneratePromelaModel extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public static final String MODULE_FILE_NAME = "/de/upb/lina/transformations/promela/acceleo/GeneratePromelaModel";
+    public static final String MODULE_FILE_NAME = "/de/upb/lina/transformations/promela/GeneratePromelaModel";
     
     /**
      * The name of the templates that are to be generated.
