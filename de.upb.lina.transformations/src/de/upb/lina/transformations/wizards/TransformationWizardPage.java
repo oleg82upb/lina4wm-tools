@@ -78,24 +78,17 @@ public class TransformationWizardPage extends WizardPage {
 	private IMemento memento;
 
 	/**
-	 * Constructor for SampleNewWizardPage.
+	 * Constructor.
 	 * 
 	 * @param pageName
 	 */
-	public TransformationWizardPage(ISelection selection) {
-		super("wizardPage");
+	public TransformationWizardPage(String pageName, ISelection selection) {
+		super(pageName);
 		setTitle("CFG - Selection");
 		setDescription("Please select the CFG model you wish to transform.");
 		this.selection = selection;
 	}
-
-
-	protected TransformationWizardPage(String pageName) {
-		super(pageName);
-		setTitle("CFG - Selection");
-		setDescription("Please select the CFG model you wish to transform.");
-	}
-
+	
 	@Override
 	public void createControl(Composite parent) {
 		/* init */
@@ -482,9 +475,14 @@ public class TransformationWizardPage extends WizardPage {
 				{
 					cfgLoc = file.getFullPath().toPortableString();
 					tx_graphModelFile.setText(cfgLoc);
+					
+					newFileLoc = file.getName().replace("."+FILE_EXT,"");
+					tx_file.setText(newFileLoc);
+					
 				}
 			}
 		}
+		
 	}
 
 	protected synchronized IMemento loadMementoState()

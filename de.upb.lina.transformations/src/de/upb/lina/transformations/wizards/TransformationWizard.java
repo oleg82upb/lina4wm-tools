@@ -2,10 +2,12 @@ package de.upb.lina.transformations.wizards;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
@@ -17,13 +19,8 @@ public class TransformationWizard extends Wizard implements INewWizard {
 	
 	private TransformationWizardPage wizardPage;
 	private ControlFlowDiagram cfg;
+	private ISelection selection;
 	
-	
-	@Override
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public boolean performFinish() {
@@ -53,7 +50,7 @@ public class TransformationWizard extends Wizard implements INewWizard {
 	@Override
 	public void addPages() {
 		super.addPages();
-		wizardPage = new TransformationWizardPage("Generate New Specification");
+		wizardPage = new TransformationWizardPage("Generate New Specification", selection);
 		addPage(wizardPage);
 		
 	}
@@ -69,6 +66,16 @@ public class TransformationWizard extends Wizard implements INewWizard {
 		
 		
 		return true;
+	}
+	
+	/**
+	 * We will accept the selection in the workbench to see if we can initialize
+	 * from it.
+	 * 
+	 * @see IWorkbenchWizard#init(IWorkbench, IStructuredSelection)
+	 */
+	public void init(IWorkbench workbench, IStructuredSelection selection) {
+		this.selection = selection;
 	}
 
 	
