@@ -6,6 +6,7 @@ import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -21,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#isNeedsReturnValue <em>Needs Return Value</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#isNeedsGetElementPtr <em>Needs Get Element Ptr</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#isNeedsCas <em>Needs Cas</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#getVarNamesInFunction <em>Var Names In Function</em>}</li>
  * </ul>
  * </p>
  *
@@ -158,5 +160,21 @@ public interface FunctionParamsMapping extends EObject {
 	 * @generated
 	 */
 	void setNeedsCas(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Var Names In Function</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Var Names In Function</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Var Names In Function</em>' attribute list.
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getFunctionParamsMapping_VarNamesInFunction()
+	 * @model default=""
+	 * @generated
+	 */
+	EList<String> getVarNamesInFunction();
 
 } // FunctionParamsMapping

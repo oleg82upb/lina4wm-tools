@@ -1,7 +1,5 @@
 package de.upb.lina.transformations.plugin;
 
-import javax.annotation.Generated;
-
 import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.StoreBuffer;
 import de.upb.llvm_parser.llvm.Constant;
@@ -26,6 +24,7 @@ public class Utils {
 		}
 		string = string.trim();
 		string = string.replaceAll(" ", "");
+		//string = string.replaceAll(".", "_");
 
 		//if the address is starts with a number, do not give it a v_
 		string = string.replaceAll("@_","");

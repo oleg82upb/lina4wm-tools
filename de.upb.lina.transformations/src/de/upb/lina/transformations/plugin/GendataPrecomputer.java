@@ -69,6 +69,8 @@ public class GendataPrecomputer {
 	private HashMap <Address, String> addressLookup = new HashMap<Address, String>();
 	private HashMap <ControlFlowDiagram, String> cfgToLabelPrefix = new HashMap <ControlFlowDiagram, String>();
 	
+	private HashMap<FunctionDefinition, List<String>> usedVarsInFunctions = new HashMap<FunctionDefinition, List<String>>();
+	
 	public GendataPrecomputer(List<ControlFlowDiagram> cfgs){
 		this.cfgs = cfgs;
 	}
@@ -80,6 +82,18 @@ public class GendataPrecomputer {
 	
 	private void precomputeHelperModel(){
 		helperModel = GendataFactory.eINSTANCE.createGeneratorData();
+		
+		for(ControlFlowDiagram cfg: cfgs){
+			try{
+				EObject motherObject = cfg.getStart().getOutgoing().get(0).getInstruction().eContainer();
+				BasicBlock basicBlock = (BasicBlock) motherObject;
+				FunctionBody fb = (FunctionBody)basicBlock.eContainer();
+				FunctionDefinition fd = (FunctionDefinition)fb.eContainer();
+				usedVarsInFunctions.put(fd, new ArrayList<String>());
+			}catch(NullPointerException ex){
+				
+			}
+		}
 
 		//set the program
 		try{
@@ -147,10 +161,24 @@ public class GendataPrecomputer {
 						genData.setNeedsGetElementPtr(true);
 					}
 				}
+				
+				
+				
+				//Compute usedvars
+				//Remove params from list of vars to declare
+				for(FunctionParameter param: fd.getParameter().getParams()){
+					usedVarsInFunctions.get(fd).remove(addressLookup.get(param.getValue()));
+				}
+				mapping.getVarNamesInFunction().addAll(usedVarsInFunctions.get(fd));
+				
 				functionParamMapping.add(mapping);
 			}
 			
 		}
+		
+		
+		
+		
 	}
 	
 	private void initLabels(LocalVariables localVars){
@@ -523,6 +551,12 @@ public class GendataPrecomputer {
 
 			mapping.add(addressMapping);
 			addressLookup.put(addressCopy, addressMapping.getName());
+		}
+		
+		// add used vars to the list
+		FunctionDefinition fun = getFunctionForCfg(cfg);
+		if(!usedVarsInFunctions.get(fun).contains(addressLookup.get(addressCopy))){
+			usedVarsInFunctions.get(fun).add(addressLookup.get(addressCopy));
 		}
 	}
 

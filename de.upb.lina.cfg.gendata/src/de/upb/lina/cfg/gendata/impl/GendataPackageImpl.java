@@ -402,6 +402,15 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getFunctionParamsMapping_VarNamesInFunction() {
+		return (EAttribute)functionParamsMappingEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public GendataFactory getGendataFactory()
 	{
 		return (GendataFactory)getEFactoryInstance();
@@ -460,6 +469,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		createEAttribute(functionParamsMappingEClass, FUNCTION_PARAMS_MAPPING__NEEDS_RETURN_VALUE);
 		createEAttribute(functionParamsMappingEClass, FUNCTION_PARAMS_MAPPING__NEEDS_GET_ELEMENT_PTR);
 		createEAttribute(functionParamsMappingEClass, FUNCTION_PARAMS_MAPPING__NEEDS_CAS);
+		createEAttribute(functionParamsMappingEClass, FUNCTION_PARAMS_MAPPING__VAR_NAMES_IN_FUNCTION);
 	}
 
 	/**
@@ -530,6 +540,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		initEAttribute(getFunctionParamsMapping_NeedsReturnValue(), ecorePackage.getEBoolean(), "needsReturnValue", null, 0, 1, FunctionParamsMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFunctionParamsMapping_NeedsGetElementPtr(), ecorePackage.getEBoolean(), "needsGetElementPtr", null, 0, 1, FunctionParamsMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFunctionParamsMapping_NeedsCas(), ecorePackage.getEBoolean(), "needsCas", null, 0, 1, FunctionParamsMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFunctionParamsMapping_VarNamesInFunction(), ecorePackage.getEString(), "varNamesInFunction", "", 0, -1, FunctionParamsMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

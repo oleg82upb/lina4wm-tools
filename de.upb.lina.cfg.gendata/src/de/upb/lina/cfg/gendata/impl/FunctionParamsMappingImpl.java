@@ -9,13 +9,16 @@ import de.upb.lina.cfg.gendata.GendataPackage;
 
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,6 +32,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link de.upb.lina.cfg.gendata.impl.FunctionParamsMappingImpl#isNeedsReturnValue <em>Needs Return Value</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.FunctionParamsMappingImpl#isNeedsGetElementPtr <em>Needs Get Element Ptr</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.FunctionParamsMappingImpl#isNeedsCas <em>Needs Cas</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.FunctionParamsMappingImpl#getVarNamesInFunction <em>Var Names In Function</em>}</li>
  * </ul>
  * </p>
  *
@@ -114,6 +118,16 @@ public class FunctionParamsMappingImpl extends MinimalEObjectImpl.Container impl
 	 * @ordered
 	 */
 	protected boolean needsCas = NEEDS_CAS_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getVarNamesInFunction() <em>Var Names In Function</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVarNamesInFunction()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> varNamesInFunction;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -278,6 +292,18 @@ public class FunctionParamsMappingImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getVarNamesInFunction() {
+		if (varNamesInFunction == null) {
+			varNamesInFunction = new EDataTypeUniqueEList<String>(String.class, this, GendataPackage.FUNCTION_PARAMS_MAPPING__VAR_NAMES_IN_FUNCTION);
+		}
+		return varNamesInFunction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -293,6 +319,8 @@ public class FunctionParamsMappingImpl extends MinimalEObjectImpl.Container impl
 				return isNeedsGetElementPtr();
 			case GendataPackage.FUNCTION_PARAMS_MAPPING__NEEDS_CAS:
 				return isNeedsCas();
+			case GendataPackage.FUNCTION_PARAMS_MAPPING__VAR_NAMES_IN_FUNCTION:
+				return getVarNamesInFunction();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -302,6 +330,7 @@ public class FunctionParamsMappingImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -319,6 +348,10 @@ public class FunctionParamsMappingImpl extends MinimalEObjectImpl.Container impl
 				return;
 			case GendataPackage.FUNCTION_PARAMS_MAPPING__NEEDS_CAS:
 				setNeedsCas((Boolean)newValue);
+				return;
+			case GendataPackage.FUNCTION_PARAMS_MAPPING__VAR_NAMES_IN_FUNCTION:
+				getVarNamesInFunction().clear();
+				getVarNamesInFunction().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -347,6 +380,9 @@ public class FunctionParamsMappingImpl extends MinimalEObjectImpl.Container impl
 			case GendataPackage.FUNCTION_PARAMS_MAPPING__NEEDS_CAS:
 				setNeedsCas(NEEDS_CAS_EDEFAULT);
 				return;
+			case GendataPackage.FUNCTION_PARAMS_MAPPING__VAR_NAMES_IN_FUNCTION:
+				getVarNamesInFunction().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -369,6 +405,8 @@ public class FunctionParamsMappingImpl extends MinimalEObjectImpl.Container impl
 				return needsGetElementPtr != NEEDS_GET_ELEMENT_PTR_EDEFAULT;
 			case GendataPackage.FUNCTION_PARAMS_MAPPING__NEEDS_CAS:
 				return needsCas != NEEDS_CAS_EDEFAULT;
+			case GendataPackage.FUNCTION_PARAMS_MAPPING__VAR_NAMES_IN_FUNCTION:
+				return varNamesInFunction != null && !varNamesInFunction.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -389,6 +427,8 @@ public class FunctionParamsMappingImpl extends MinimalEObjectImpl.Container impl
 		result.append(needsGetElementPtr);
 		result.append(", needsCas: ");
 		result.append(needsCas);
+		result.append(", varNamesInFunction: ");
+		result.append(varNamesInFunction);
 		result.append(')');
 		return result.toString();
 	}

@@ -408,13 +408,22 @@ public interface GendataPackage extends EPackage
 	int FUNCTION_PARAMS_MAPPING__NEEDS_CAS = 4;
 
 	/**
+	 * The feature id for the '<em><b>Var Names In Function</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_PARAMS_MAPPING__VAR_NAMES_IN_FUNCTION = 5;
+
+	/**
 	 * The number of structural features of the '<em>Function Params Mapping</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_PARAMS_MAPPING_FEATURE_COUNT = 5;
+	int FUNCTION_PARAMS_MAPPING_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>Function Params Mapping</em>' class.
@@ -729,6 +738,17 @@ public interface GendataPackage extends EPackage
 	EAttribute getFunctionParamsMapping_NeedsCas();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#getVarNamesInFunction <em>Var Names In Function</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Var Names In Function</em>'.
+	 * @see de.upb.lina.cfg.gendata.FunctionParamsMapping#getVarNamesInFunction()
+	 * @see #getFunctionParamsMapping()
+	 * @generated
+	 */
+	EAttribute getFunctionParamsMapping_VarNamesInFunction();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -987,6 +1007,14 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute FUNCTION_PARAMS_MAPPING__NEEDS_CAS = eINSTANCE.getFunctionParamsMapping_NeedsCas();
+
+		/**
+		 * The meta object literal for the '<em><b>Var Names In Function</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FUNCTION_PARAMS_MAPPING__VAR_NAMES_IN_FUNCTION = eINSTANCE.getFunctionParamsMapping_VarNamesInFunction();
 
 	}
 
