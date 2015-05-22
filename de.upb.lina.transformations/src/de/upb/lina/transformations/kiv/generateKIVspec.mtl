@@ -1,0 +1,88 @@
+[comment encoding = UTF-8 /]
+[module generateKIVspec('http://www.upb.de/lina/cfg/controlflow', 'http://www.upb.de/lina/cfg/gendata', 'http://www.upb.de/llvm_parser/llvm', 'http://www.eclipse.org/emf/2002/Ecore')]
+
+[template public generateModel(genData : GeneratorData) ]
+[comment @main/]
+
+[file ( 'localstate.utf8', false, 'UTF-8')]
+data specification
+	using int, PC, PID
+	Localstate :=mkls( . .pc : PC;
+				   . .pid : PID;
+[for (name: String | genData.localVariables.variables.name)]
+				   . .[name/] : int;
+[/for]
+				);
+	variables
+		ls : Localstate;
+end data specification
+[/file]
+
+[file ('PC.utf8', false, 'UTF-8')]
+data specification
+	PC = 
+[for (l : Label | genData.labels)]
+	[l.name/] |
+[/for]
+	N;
+variables
+pc : PC;
+
+end data specification
+[/file]
+
+[file ('PID.utf8', false, 'UTF-8')]
+specification
+	sorts
+		PID;
+	variables
+		p : PID;
+end specification
+[/file]
+
+[file ('cindex.utf8', false, 'UTF-8')]
+data specification
+	IJ = [for (cfg : ControlFlowDiagram | genData.cfgs)] [cfg.name/]ini |[/for]
+	CJ = [for (cfg : ControlFlowDiagram | genData.cfgs)] 
+			TODO
+		[/for]
+	RJ = 
+	
+	variables
+		ij : IJ;
+		cj : CJ;
+		rj : RJ;
+end data specification
+[/file]
+
+[file ('COP.utf8', false, 'UTF-8')]
+enrich 	natref-memory,
+		localstate,
+		cindex with
+	constants
+		owner : PID;
+	...
+
+
+	functions
+		INVOP : IJ ...
+		COP : CJ gs Ô cs...
+		RETOP : RJ ...
+	predicates
+		LSInit : ...
+		GSInit : memory;
+	variables
+		invop : ...
+		cop : ...
+		retop : ...
+		mem' : memory;
+		ls' : Localstate;
+		elem : nat;
+		return : ref;
+
+	axioms
+		
+[/file]
+
+[/template]
+

@@ -1,9 +1,12 @@
 package de.upb.lina.transformations.kiv;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.BasicMonitor;
 
 import de.upb.lina.transformations.wizards.TransformationOperation;
 
@@ -20,7 +23,16 @@ public class KivTransformationOperation extends TransformationOperation {
 			InvocationTargetException, InterruptedException {
 		super.execute(monitor);
 		//TODO: Do stuff here
-		System.out.println("TODO - KIVTransformationOperation");
+		try {
+			ArrayList<Object> args = new ArrayList<Object>();
+			GenerateKIVspec generator = new GenerateKIVspec(genData, fullPath.toFile(), args);
+			generator.doGenerate(new BasicMonitor());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
+		refreshWorkspace(monitor);
 	}
 	
 	
