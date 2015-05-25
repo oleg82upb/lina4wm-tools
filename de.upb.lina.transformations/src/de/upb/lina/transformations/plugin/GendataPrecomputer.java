@@ -166,8 +166,10 @@ public class GendataPrecomputer {
 				
 				//Compute usedvars
 				//Remove params from list of vars to declare
+				if(fd.getParameter() != null){
 				for(FunctionParameter param: fd.getParameter().getParams()){
 					usedVarsInFunctions.get(fd).remove(addressLookup.get(param.getValue()));
+				}
 				}
 				mapping.getVarNamesInFunction().addAll(usedVarsInFunctions.get(fd));
 				
@@ -379,13 +381,15 @@ public class GendataPrecomputer {
 					FunctionBody fb = (FunctionBody)basicBlock.eContainer();
 					FunctionDefinition fd = (FunctionDefinition)fb.eContainer();
 					FunctionParameterList params = fd.getParameter();
-					for(FunctionParameter param: params.getParams()){
-						addToMapping(mapping, matchingCfg, param.getValue());
+					if(params!= null){
+						for(FunctionParameter param: params.getParams()){
+							addToMapping(mapping, matchingCfg, param.getValue());
+						}
 					}
 				}
 				
 				//map vars in function
-				if(fDef.getBody() != null){
+				if(fDef.getBody() != null && matchingCfg != null){
 					for(BasicBlock b: fDef.getBody().getBlocks()){
 						for(Instruction i: b.getInstructions()){
 							if(i instanceof ArithmeticOperation){

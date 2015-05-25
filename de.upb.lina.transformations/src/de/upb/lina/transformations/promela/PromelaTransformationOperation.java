@@ -3,19 +3,21 @@ package de.upb.lina.transformations.promela;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.BasicMonitor;
 
+import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.transformations.wizards.TransformationOperation;
 
 public class PromelaTransformationOperation extends TransformationOperation {
 	
 	
 	
-	public PromelaTransformationOperation(String graphModelFileLocation, String targetContainer, String targetName, String fileEnding) {
-		super(graphModelFileLocation, targetContainer, targetName, fileEnding);
+	public PromelaTransformationOperation(List<ControlFlowDiagram> cfgs, String targetContainer, String targetName, String fileEnding) {
+		super(cfgs, targetContainer, targetName, fileEnding);
 	}
 
 	@Override

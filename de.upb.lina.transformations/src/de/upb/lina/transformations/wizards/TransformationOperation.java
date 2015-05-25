@@ -37,8 +37,9 @@ public class TransformationOperation extends WorkspaceModifyOperation{
 	protected GeneratorData genData;
 	
 	
-	public TransformationOperation(String graphModelFileLocation, String targetContainer, String targetName, String fileEnding) {
-		this.graphModelFileLocation = graphModelFileLocation;
+	public TransformationOperation(List<ControlFlowDiagram> cfgs, String targetContainer, String targetName, String fileEnding) {
+//		this.graphModelFileLocation = graphModelFileLocation;
+		this.cfg = cfgs;
 		this.targetContainer = targetContainer; 
 		this.targetName = targetName;
 		this.fileEnding = fileEnding;
@@ -50,7 +51,7 @@ public class TransformationOperation extends WorkspaceModifyOperation{
 			InvocationTargetException, InterruptedException {
 		
 
-		loadCfg();
+//		loadCfg();
 		
 		//Run Precomputation
 		GendataPrecomputer precomp = new GendataPrecomputer(cfg);
@@ -70,26 +71,26 @@ public class TransformationOperation extends WorkspaceModifyOperation{
 	}
 	
 	
-	protected void loadCfg(){
-		if(cfg != null){
-			return;
-		}
-
-		ControlflowPackage.eINSTANCE.getNsURI();
-		ResourceSet resourceSet = new ResourceSetImpl();
-		Path cfgpath = new Path(graphModelFileLocation);
-		URI uri = URI.createPlatformResourceURI(cfgpath.toOSString(), true);
-		Resource cfgResource = resourceSet.getResource(uri, true);
-		EcoreUtil.resolveAll(cfgResource);
-		List<EObject> graphList = cfgResource.getContents();
-		List<ControlFlowDiagram> graphList2  = new ArrayList<ControlFlowDiagram>();
-		for(EObject o: graphList){
-			if(o instanceof ControlFlowDiagram){
-				graphList2.add((ControlFlowDiagram)o);
-			}
-		}
-		this.cfg = graphList2;
-	}
+//	protected void loadCfg(){
+//		if(cfg != null){
+//			return;
+//		}
+//
+//		ControlflowPackage.eINSTANCE.getNsURI();
+//		ResourceSet resourceSet = new ResourceSetImpl();
+//		Path cfgpath = new Path(graphModelFileLocation);
+//		URI uri = URI.createPlatformResourceURI(cfgpath.toOSString(), true);
+//		Resource cfgResource = resourceSet.getResource(uri, true);
+//		EcoreUtil.resolveAll(cfgResource);
+//		List<EObject> graphList = cfgResource.getContents();
+//		List<ControlFlowDiagram> graphList2  = new ArrayList<ControlFlowDiagram>();
+//		for(EObject o: graphList){
+//			if(o instanceof ControlFlowDiagram){
+//				graphList2.add((ControlFlowDiagram)o);
+//			}
+//		}
+//		this.cfg = graphList2;
+//	}
 	
 	protected void refreshWorkspace(IProgressMonitor monitor) throws CoreException
 	{

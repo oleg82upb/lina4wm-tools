@@ -9,8 +9,6 @@ import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
-
-import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.transformations.kiv.KivTransformationOperation;
 import de.upb.lina.transformations.plugin.ETransformationTarget;
 import de.upb.lina.transformations.promela.PromelaTransformationOperation;
@@ -18,7 +16,7 @@ import de.upb.lina.transformations.promela.PromelaTransformationOperation;
 public class TransformationWizard extends Wizard implements INewWizard {
 	
 	private TransformationWizardPage wizardPage;
-	private ControlFlowDiagram cfg;
+	private FunctionSelectionPage functionSelectionPage;
 	private ISelection selection;
 	
 
@@ -29,10 +27,10 @@ public class TransformationWizard extends Wizard implements INewWizard {
 		
 		if(wizardPage.getType() == ETransformationTarget.PROMELA){
 			//Promela
-			wmo = new PromelaTransformationOperation(wizardPage.getGraphModelFile().getText(), wizardPage.getContainerText().getText(), wizardPage.getFileText().getText(), wizardPage.getFileEndingLabel().getText());
+			wmo = new PromelaTransformationOperation(functionSelectionPage.getSelectedFunctions(), wizardPage.getContainerText().getText(), wizardPage.getFileText().getText(), wizardPage.getFileEndingLabel().getText());
 		}else if (wizardPage.getType() == ETransformationTarget.KIV){
 			//KIV
-			wmo = new KivTransformationOperation(wizardPage.getGraphModelFile().getText(), wizardPage.getContainerText().getText(), wizardPage.getFileText().getText(), wizardPage.getFileEndingLabel().getText());
+			wmo = new KivTransformationOperation(functionSelectionPage.getSelectedFunctions(), wizardPage.getContainerText().getText(), wizardPage.getFileText().getText(), wizardPage.getFileEndingLabel().getText());
 		}
 		
 		try {
@@ -50,9 +48,10 @@ public class TransformationWizard extends Wizard implements INewWizard {
 	@Override
 	public void addPages() {
 		super.addPages();
-		wizardPage = new TransformationWizardPage("Generate New Specification", selection);
+		functionSelectionPage = new FunctionSelectionPage();
+		wizardPage = new TransformationWizardPage("Generate New Specification", selection, functionSelectionPage);
 		addPage(wizardPage);
-		
+		addPage(functionSelectionPage);
 	}
 	
 	
@@ -62,8 +61,6 @@ public class TransformationWizard extends Wizard implements INewWizard {
 		if (!super.canFinish()){
 			return false;
 		}
-		
-		
 		
 		return true;
 	}

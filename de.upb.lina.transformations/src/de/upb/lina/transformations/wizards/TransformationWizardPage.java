@@ -68,13 +68,14 @@ public class TransformationWizardPage extends WizardPage {
 	private Text tx_file;
 	private Text tx_graphModelFile;
 	private Label lb_fileEnding;
+	private boolean canFlip = true;
 	
 	private ISelection selection;
 	//0 - promela
 	//1 - kif
 	private int type = 0;
 	private Combo cb_model;
-
+	private FunctionSelectionPage nextPage;
 	private IMemento memento;
 
 	/**
@@ -82,8 +83,9 @@ public class TransformationWizardPage extends WizardPage {
 	 * 
 	 * @param pageName
 	 */
-	public TransformationWizardPage(String pageName, ISelection selection) {
+	public TransformationWizardPage(String pageName, ISelection selection, FunctionSelectionPage next) {
 		super(pageName);
+		nextPage = next;
 		setTitle("CFG - Selection");
 		setDescription("Please select the CFG model you wish to transform.");
 		this.selection = selection;
@@ -336,6 +338,7 @@ public class TransformationWizardPage extends WizardPage {
 
 	private void updateStatus(String message) {
 		setErrorMessage(message);
+		canFlip = message == null;
 		setPageComplete(message == null);
 	}
 	
@@ -418,6 +421,7 @@ public class TransformationWizardPage extends WizardPage {
 		}catch(WrappedException e){
 			return 400;
 		}
+		nextPage.loadCfg();
 		return 0;
 	}
 
@@ -512,6 +516,11 @@ public class TransformationWizardPage extends WizardPage {
 
 	public String getNewFileLoc() {
 		return newFileLoc;
+	}
+	
+	@Override
+	public boolean canFlipToNextPage(){
+		return canFlip;
 	}
 
 
