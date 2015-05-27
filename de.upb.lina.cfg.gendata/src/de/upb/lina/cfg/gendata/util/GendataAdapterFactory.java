@@ -83,16 +83,24 @@ public class GendataAdapterFactory extends AdapterFactoryImpl
 				return createAddressMappingAdapter();
 			}
 			@Override
-			public Adapter caseLabel(Label object) {
-				return createLabelAdapter();
-			}
-			@Override
 			public Adapter caseConstraintMapping(ConstraintMapping object) {
 				return createConstraintMappingAdapter();
 			}
 			@Override
 			public Adapter caseFunctionParamsMapping(FunctionParamsMapping object) {
 				return createFunctionParamsMappingAdapter();
+			}
+			@Override
+			public Adapter caseNamedElement(NamedElement object) {
+				return createNamedElementAdapter();
+			}
+			@Override
+			public Adapter caseLocationLabel(LocationLabel object) {
+				return createLocationLabelAdapter();
+			}
+			@Override
+			public Adapter caseTransitionLabel(TransitionLabel object) {
+				return createTransitionLabelAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -161,21 +169,6 @@ public class GendataAdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.gendata.Label <em>Label</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.lina.cfg.gendata.Label
-	 * @generated
-	 */
-	public Adapter createLabelAdapter()
-	{
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.gendata.ConstraintMapping <em>Constraint Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -200,6 +193,48 @@ public class GendataAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createFunctionParamsMappingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.gendata.NamedElement <em>Named Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.lina.cfg.gendata.NamedElement
+	 * @generated
+	 */
+	public Adapter createNamedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.gendata.LocationLabel <em>Location Label</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.lina.cfg.gendata.LocationLabel
+	 * @generated
+	 */
+	public Adapter createLocationLabelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.gendata.TransitionLabel <em>Transition Label</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.lina.cfg.gendata.TransitionLabel
+	 * @generated
+	 */
+	public Adapter createTransitionLabelAdapter() {
 		return null;
 	}
 

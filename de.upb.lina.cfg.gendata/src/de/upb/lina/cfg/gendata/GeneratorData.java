@@ -19,12 +19,13 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getLocalVariables <em>Local Variables</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getProgram <em>Program</em>}</li>
- *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getLabels <em>Labels</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getCfgs <em>Cfgs</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getParameterMappings <em>Parameter Mappings</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#isNeedsGetElementPtr <em>Needs Get Element Ptr</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#isNeedsCas <em>Needs Cas</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getLocationLabels <em>Location Labels</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getTransitionLabels <em>Transition Labels</em>}</li>
  * </ul>
  * </p>
  *
@@ -85,22 +86,6 @@ public interface GeneratorData extends EObject
 	 * @generated
 	 */
 	void setProgram(LLVM value);
-
-	/**
-	 * Returns the value of the '<em><b>Labels</b></em>' containment reference list.
-	 * The list contents are of type {@link de.upb.lina.cfg.gendata.Label}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Labels</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Labels</em>' containment reference list.
-	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_Labels()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Label> getLabels();
 
 	/**
 	 * Returns the value of the '<em><b>Cfgs</b></em>' reference list.
@@ -201,5 +186,37 @@ public interface GeneratorData extends EObject
 	 * @generated
 	 */
 	void setNeedsCas(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Location Labels</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.lina.cfg.gendata.LocationLabel}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Location Labels</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Location Labels</em>' containment reference list.
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_LocationLabels()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<LocationLabel> getLocationLabels();
+
+	/**
+	 * Returns the value of the '<em><b>Transition Labels</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.lina.cfg.gendata.TransitionLabel}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Transition Labels</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Transition Labels</em>' containment reference list.
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_TransitionLabels()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<TransitionLabel> getTransitionLabels();
 
 } // GeneratorData

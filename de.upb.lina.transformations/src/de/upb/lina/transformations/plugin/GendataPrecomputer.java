@@ -16,8 +16,9 @@ import de.upb.lina.cfg.gendata.ConstraintMapping;
 import de.upb.lina.cfg.gendata.FunctionParamsMapping;
 import de.upb.lina.cfg.gendata.GendataFactory;
 import de.upb.lina.cfg.gendata.GeneratorData;
-import de.upb.lina.cfg.gendata.Label;
+import de.upb.lina.cfg.gendata.LocationLabel;
 import de.upb.lina.cfg.gendata.LocalVariables;
+import de.upb.lina.cfg.gendata.TransitionLabel;
 import de.upb.llvm_parser.llvm.AbstractElement;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
@@ -115,7 +116,8 @@ public class GendataPrecomputer {
 			
 			//labels
 			computeLabelPrefixesPerFunction();
-			initLabels(localVars);
+			initLocationLabels(localVars);
+			initTransitionLabels(localVars);
 			
 			//conditions
 			computeTransitionConditionMapping(helperModel.getConstraints());
@@ -183,9 +185,15 @@ public class GendataPrecomputer {
 		
 	}
 	
-	private void initLabels(LocalVariables localVars){
+	private void initTransitionLabels(LocalVariables localVars) {
+		
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private void initLocationLabels(LocalVariables localVars){
 		for(ControlFlowDiagram cfg: cfgs){
-			List<Label> labels = helperModel.getLabels();
+			List<LocationLabel> labels = helperModel.getLocationLabels();
 			//prepare for check if we can use short buffer labels
 			List<ControlFlowLocation> conflictingLocs = new ArrayList<ControlFlowLocation>();
 			List<String> iteratedBuffers = new ArrayList<String>();
@@ -204,10 +212,9 @@ public class GendataPrecomputer {
 				}else{
 					bufferRepresentation = generateShortLabel(l, localVars, cfg.getLocations().size());
 				}
-				Label label = GendataFactory.eINSTANCE.createLabel();
+				LocationLabel label = GendataFactory.eINSTANCE.createLocationLabel();
 				label.setName(bufferRepresentation);
 				label.setControlFlowLocation(l);
-				label.setControlFlowDiagram(cfg);
 				labels.add(label);
 			}
 		}

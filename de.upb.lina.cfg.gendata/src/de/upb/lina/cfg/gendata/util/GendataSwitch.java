@@ -85,12 +85,7 @@ public class GendataSwitch<T> extends Switch<T>
 			case GendataPackage.ADDRESS_MAPPING: {
 				AddressMapping addressMapping = (AddressMapping)theEObject;
 				T result = caseAddressMapping(addressMapping);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GendataPackage.LABEL: {
-				Label label = (Label)theEObject;
-				T result = caseLabel(label);
+				if (result == null) result = caseNamedElement(addressMapping);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -103,6 +98,26 @@ public class GendataSwitch<T> extends Switch<T>
 			case GendataPackage.FUNCTION_PARAMS_MAPPING: {
 				FunctionParamsMapping functionParamsMapping = (FunctionParamsMapping)theEObject;
 				T result = caseFunctionParamsMapping(functionParamsMapping);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case GendataPackage.NAMED_ELEMENT: {
+				NamedElement namedElement = (NamedElement)theEObject;
+				T result = caseNamedElement(namedElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case GendataPackage.LOCATION_LABEL: {
+				LocationLabel locationLabel = (LocationLabel)theEObject;
+				T result = caseLocationLabel(locationLabel);
+				if (result == null) result = caseNamedElement(locationLabel);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case GendataPackage.TRANSITION_LABEL: {
+				TransitionLabel transitionLabel = (TransitionLabel)theEObject;
+				T result = caseTransitionLabel(transitionLabel);
+				if (result == null) result = caseNamedElement(transitionLabel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -159,22 +174,6 @@ public class GendataSwitch<T> extends Switch<T>
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Label</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Label</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLabel(Label object)
-	{
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Constraint Mapping</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -201,6 +200,51 @@ public class GendataSwitch<T> extends Switch<T>
 	 * @generated
 	 */
 	public T caseFunctionParamsMapping(FunctionParamsMapping object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNamedElement(NamedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Location Label</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Location Label</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLocationLabel(LocationLabel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Transition Label</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Transition Label</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTransitionLabel(TransitionLabel object) {
 		return null;
 	}
 

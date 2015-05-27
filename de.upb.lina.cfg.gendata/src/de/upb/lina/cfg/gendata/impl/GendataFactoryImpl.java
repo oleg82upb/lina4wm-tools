@@ -63,9 +63,10 @@ public class GendataFactoryImpl extends EFactoryImpl implements GendataFactory
 			case GendataPackage.LOCAL_VARIABLES: return createLocalVariables();
 			case GendataPackage.GENERATOR_DATA: return createGeneratorData();
 			case GendataPackage.ADDRESS_MAPPING: return createAddressMapping();
-			case GendataPackage.LABEL: return createLabel();
 			case GendataPackage.CONSTRAINT_MAPPING: return createConstraintMapping();
 			case GendataPackage.FUNCTION_PARAMS_MAPPING: return createFunctionParamsMapping();
+			case GendataPackage.LOCATION_LABEL: return createLocationLabel();
+			case GendataPackage.TRANSITION_LABEL: return createTransitionLabel();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -109,17 +110,6 @@ public class GendataFactoryImpl extends EFactoryImpl implements GendataFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Label createLabel()
-	{
-		LabelImpl label = new LabelImpl();
-		return label;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ConstraintMapping createConstraintMapping() {
 		ConstraintMappingImpl constraintMapping = new ConstraintMappingImpl();
 		return constraintMapping;
@@ -133,6 +123,26 @@ public class GendataFactoryImpl extends EFactoryImpl implements GendataFactory
 	public FunctionParamsMapping createFunctionParamsMapping() {
 		FunctionParamsMappingImpl functionParamsMapping = new FunctionParamsMappingImpl();
 		return functionParamsMapping;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LocationLabel createLocationLabel() {
+		LocationLabelImpl locationLabel = new LocationLabelImpl();
+		return locationLabel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TransitionLabel createTransitionLabel() {
+		TransitionLabelImpl transitionLabel = new TransitionLabelImpl();
+		return transitionLabel;
 	}
 
 	/**

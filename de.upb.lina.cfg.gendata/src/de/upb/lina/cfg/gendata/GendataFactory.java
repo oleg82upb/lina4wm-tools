@@ -50,15 +50,6 @@ public interface GendataFactory extends EFactory
 	AddressMapping createAddressMapping();
 
 	/**
-	 * Returns a new object of class '<em>Label</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Label</em>'.
-	 * @generated
-	 */
-	Label createLabel();
-
-	/**
 	 * Returns a new object of class '<em>Constraint Mapping</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -75,6 +66,24 @@ public interface GendataFactory extends EFactory
 	 * @generated
 	 */
 	FunctionParamsMapping createFunctionParamsMapping();
+
+	/**
+	 * Returns a new object of class '<em>Location Label</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Location Label</em>'.
+	 * @generated
+	 */
+	LocationLabel createLocationLabel();
+
+	/**
+	 * Returns a new object of class '<em>Transition Label</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Transition Label</em>'.
+	 * @generated
+	 */
+	TransitionLabel createTransitionLabel();
 
 	/**
 	 * Returns the package supported by this factory.

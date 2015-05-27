@@ -4,20 +4,10 @@ package de.upb.lina.cfg.gendata.impl;
 
 import de.upb.lina.cfg.gendata.AddressMapping;
 import de.upb.lina.cfg.gendata.GendataPackage;
-
 import de.upb.llvm_parser.llvm.Address;
-
 import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
@@ -28,7 +18,6 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.lina.cfg.gendata.impl.AddressMappingImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.AddressMappingImpl#getAdresses <em>Adresses</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.AddressMappingImpl#getOldNames <em>Old Names</em>}</li>
  * </ul>
@@ -36,28 +25,8 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *
  * @generated
  */
-public class AddressMappingImpl extends MinimalEObjectImpl.Container implements AddressMapping
+public class AddressMappingImpl extends NamedElementImpl implements AddressMapping
 {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = "";
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getAdresses() <em>Adresses</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -104,29 +73,6 @@ public class AddressMappingImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName()
-	{
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName)
-	{
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.ADDRESS_MAPPING__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Address> getAdresses()
 	{
 		if (adresses == null) {
@@ -156,8 +102,6 @@ public class AddressMappingImpl extends MinimalEObjectImpl.Container implements 
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
 		switch (featureID) {
-			case GendataPackage.ADDRESS_MAPPING__NAME:
-				return getName();
 			case GendataPackage.ADDRESS_MAPPING__ADRESSES:
 				return getAdresses();
 			case GendataPackage.ADDRESS_MAPPING__OLD_NAMES:
@@ -176,9 +120,6 @@ public class AddressMappingImpl extends MinimalEObjectImpl.Container implements 
 	public void eSet(int featureID, Object newValue)
 	{
 		switch (featureID) {
-			case GendataPackage.ADDRESS_MAPPING__NAME:
-				setName((String)newValue);
-				return;
 			case GendataPackage.ADDRESS_MAPPING__ADRESSES:
 				getAdresses().clear();
 				getAdresses().addAll((Collection<? extends Address>)newValue);
@@ -200,9 +141,6 @@ public class AddressMappingImpl extends MinimalEObjectImpl.Container implements 
 	public void eUnset(int featureID)
 	{
 		switch (featureID) {
-			case GendataPackage.ADDRESS_MAPPING__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case GendataPackage.ADDRESS_MAPPING__ADRESSES:
 				getAdresses().clear();
 				return;
@@ -222,8 +160,6 @@ public class AddressMappingImpl extends MinimalEObjectImpl.Container implements 
 	public boolean eIsSet(int featureID)
 	{
 		switch (featureID) {
-			case GendataPackage.ADDRESS_MAPPING__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case GendataPackage.ADDRESS_MAPPING__ADRESSES:
 				return adresses != null && !adresses.isEmpty();
 			case GendataPackage.ADDRESS_MAPPING__OLD_NAMES:
@@ -243,9 +179,7 @@ public class AddressMappingImpl extends MinimalEObjectImpl.Container implements 
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", oldNames: ");
+		result.append(" (oldNames: ");
 		result.append(oldNames);
 		result.append(')');
 		return result.toString();

@@ -123,22 +123,13 @@ public interface GendataPackage extends EPackage
 	int GENERATOR_DATA__PROGRAM = 1;
 
 	/**
-	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERATOR_DATA__LABELS = 2;
-
-	/**
 	 * The feature id for the '<em><b>Cfgs</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA__CFGS = 3;
+	int GENERATOR_DATA__CFGS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -147,7 +138,7 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA__CONSTRAINTS = 4;
+	int GENERATOR_DATA__CONSTRAINTS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Mappings</b></em>' containment reference list.
@@ -156,7 +147,7 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA__PARAMETER_MAPPINGS = 5;
+	int GENERATOR_DATA__PARAMETER_MAPPINGS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Needs Get Element Ptr</b></em>' attribute.
@@ -165,7 +156,7 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA__NEEDS_GET_ELEMENT_PTR = 6;
+	int GENERATOR_DATA__NEEDS_GET_ELEMENT_PTR = 5;
 
 	/**
 	 * The feature id for the '<em><b>Needs Cas</b></em>' attribute.
@@ -174,7 +165,25 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA__NEEDS_CAS = 7;
+	int GENERATOR_DATA__NEEDS_CAS = 6;
+
+	/**
+	 * The feature id for the '<em><b>Location Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_DATA__LOCATION_LABELS = 7;
+
+	/**
+	 * The feature id for the '<em><b>Transition Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_DATA__TRANSITION_LABELS = 8;
 
 	/**
 	 * The number of structural features of the '<em>Generator Data</em>' class.
@@ -183,7 +192,7 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA_FEATURE_COUNT = 8;
+	int GENERATOR_DATA_FEATURE_COUNT = 9;
 
 	/**
 	 * The number of operations of the '<em>Generator Data</em>' class.
@@ -193,6 +202,43 @@ public interface GendataPackage extends EPackage
 	 * @ordered
 	 */
 	int GENERATOR_DATA_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link de.upb.lina.cfg.gendata.impl.NamedElementImpl <em>Named Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.upb.lina.cfg.gendata.impl.NamedElementImpl
+	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getNamedElement()
+	 * @generated
+	 */
+	int NAMED_ELEMENT = 5;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT__NAME = 0;
+
+	/**
+	 * The number of structural features of the '<em>Named Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Named Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.cfg.gendata.impl.AddressMappingImpl <em>Address Mapping</em>}' class.
@@ -211,7 +257,7 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS_MAPPING__NAME = 0;
+	int ADDRESS_MAPPING__NAME = NAMED_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Adresses</b></em>' reference list.
@@ -220,7 +266,7 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS_MAPPING__ADRESSES = 1;
+	int ADDRESS_MAPPING__ADRESSES = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Old Names</b></em>' attribute list.
@@ -229,7 +275,7 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS_MAPPING__OLD_NAMES = 2;
+	int ADDRESS_MAPPING__OLD_NAMES = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Address Mapping</em>' class.
@@ -238,7 +284,7 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS_MAPPING_FEATURE_COUNT = 3;
+	int ADDRESS_MAPPING_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Address Mapping</em>' class.
@@ -247,63 +293,7 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS_MAPPING_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link de.upb.lina.cfg.gendata.impl.LabelImpl <em>Label</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.upb.lina.cfg.gendata.impl.LabelImpl
-	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getLabel()
-	 * @generated
-	 */
-	int LABEL = 3;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LABEL__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Control Flow Location</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LABEL__CONTROL_FLOW_LOCATION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Control Flow Diagram</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LABEL__CONTROL_FLOW_DIAGRAM = 2;
-
-	/**
-	 * The number of structural features of the '<em>Label</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LABEL_FEATURE_COUNT = 3;
-
-	/**
-	 * The number of operations of the '<em>Label</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LABEL_OPERATION_COUNT = 0;
-
+	int ADDRESS_MAPPING_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.cfg.gendata.impl.ConstraintMappingImpl <em>Constraint Mapping</em>}' class.
@@ -313,7 +303,7 @@ public interface GendataPackage extends EPackage
 	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getConstraintMapping()
 	 * @generated
 	 */
-	int CONSTRAINT_MAPPING = 4;
+	int CONSTRAINT_MAPPING = 3;
 
 	/**
 	 * The feature id for the '<em><b>Transition</b></em>' reference.
@@ -360,7 +350,7 @@ public interface GendataPackage extends EPackage
 	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getFunctionParamsMapping()
 	 * @generated
 	 */
-	int FUNCTION_PARAMS_MAPPING = 5;
+	int FUNCTION_PARAMS_MAPPING = 4;
 
 	/**
 	 * The feature id for the '<em><b>Function</b></em>' reference.
@@ -436,6 +426,99 @@ public interface GendataPackage extends EPackage
 
 
 	/**
+	 * The meta object id for the '{@link de.upb.lina.cfg.gendata.impl.LocationLabelImpl <em>Location Label</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.upb.lina.cfg.gendata.impl.LocationLabelImpl
+	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getLocationLabel()
+	 * @generated
+	 */
+	int LOCATION_LABEL = 6;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION_LABEL__NAME = NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Control Flow Location</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION_LABEL__CONTROL_FLOW_LOCATION = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Location Label</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION_LABEL_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Location Label</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION_LABEL_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.upb.lina.cfg.gendata.impl.TransitionLabelImpl <em>Transition Label</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.upb.lina.cfg.gendata.impl.TransitionLabelImpl
+	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getTransitionLabel()
+	 * @generated
+	 */
+	int TRANSITION_LABEL = 7;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_LABEL__NAME = NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Transition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_LABEL__TRANSITION = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Transition Label</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_LABEL_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Transition Label</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_LABEL_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.LocalVariables <em>Local Variables</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -487,17 +570,6 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 */
 	EReference getGeneratorData_Program();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.upb.lina.cfg.gendata.GeneratorData#getLabels <em>Labels</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Labels</em>'.
-	 * @see de.upb.lina.cfg.gendata.GeneratorData#getLabels()
-	 * @see #getGeneratorData()
-	 * @generated
-	 */
-	EReference getGeneratorData_Labels();
 
 	/**
 	 * Returns the meta object for the reference list '{@link de.upb.lina.cfg.gendata.GeneratorData#getCfgs <em>Cfgs</em>}'.
@@ -555,6 +627,28 @@ public interface GendataPackage extends EPackage
 	EAttribute getGeneratorData_NeedsCas();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link de.upb.lina.cfg.gendata.GeneratorData#getLocationLabels <em>Location Labels</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Location Labels</em>'.
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getLocationLabels()
+	 * @see #getGeneratorData()
+	 * @generated
+	 */
+	EReference getGeneratorData_LocationLabels();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.upb.lina.cfg.gendata.GeneratorData#getTransitionLabels <em>Transition Labels</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Transition Labels</em>'.
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getTransitionLabels()
+	 * @see #getGeneratorData()
+	 * @generated
+	 */
+	EReference getGeneratorData_TransitionLabels();
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.AddressMapping <em>Address Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -563,17 +657,6 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 */
 	EClass getAddressMapping();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.gendata.AddressMapping#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.upb.lina.cfg.gendata.AddressMapping#getName()
-	 * @see #getAddressMapping()
-	 * @generated
-	 */
-	EAttribute getAddressMapping_Name();
 
 	/**
 	 * Returns the meta object for the reference list '{@link de.upb.lina.cfg.gendata.AddressMapping#getAdresses <em>Adresses</em>}'.
@@ -596,49 +679,6 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getAddressMapping_OldNames();
-
-	/**
-	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.Label <em>Label</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Label</em>'.
-	 * @see de.upb.lina.cfg.gendata.Label
-	 * @generated
-	 */
-	EClass getLabel();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.gendata.Label#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.upb.lina.cfg.gendata.Label#getName()
-	 * @see #getLabel()
-	 * @generated
-	 */
-	EAttribute getLabel_Name();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.gendata.Label#getControlFlowLocation <em>Control Flow Location</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Control Flow Location</em>'.
-	 * @see de.upb.lina.cfg.gendata.Label#getControlFlowLocation()
-	 * @see #getLabel()
-	 * @generated
-	 */
-	EReference getLabel_ControlFlowLocation();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.gendata.Label#getControlFlowDiagram <em>Control Flow Diagram</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Control Flow Diagram</em>'.
-	 * @see de.upb.lina.cfg.gendata.Label#getControlFlowDiagram()
-	 * @see #getLabel()
-	 * @generated
-	 */
-	EReference getLabel_ControlFlowDiagram();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.ConstraintMapping <em>Constraint Mapping</em>}'.
@@ -749,6 +789,69 @@ public interface GendataPackage extends EPackage
 	EAttribute getFunctionParamsMapping_VarNamesInFunction();
 
 	/**
+	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.NamedElement <em>Named Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Named Element</em>'.
+	 * @see de.upb.lina.cfg.gendata.NamedElement
+	 * @generated
+	 */
+	EClass getNamedElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.gendata.NamedElement#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.upb.lina.cfg.gendata.NamedElement#getName()
+	 * @see #getNamedElement()
+	 * @generated
+	 */
+	EAttribute getNamedElement_Name();
+
+	/**
+	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.LocationLabel <em>Location Label</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Location Label</em>'.
+	 * @see de.upb.lina.cfg.gendata.LocationLabel
+	 * @generated
+	 */
+	EClass getLocationLabel();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.gendata.LocationLabel#getControlFlowLocation <em>Control Flow Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Control Flow Location</em>'.
+	 * @see de.upb.lina.cfg.gendata.LocationLabel#getControlFlowLocation()
+	 * @see #getLocationLabel()
+	 * @generated
+	 */
+	EReference getLocationLabel_ControlFlowLocation();
+
+	/**
+	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.TransitionLabel <em>Transition Label</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Transition Label</em>'.
+	 * @see de.upb.lina.cfg.gendata.TransitionLabel
+	 * @generated
+	 */
+	EClass getTransitionLabel();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.gendata.TransitionLabel#getTransition <em>Transition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Transition</em>'.
+	 * @see de.upb.lina.cfg.gendata.TransitionLabel#getTransition()
+	 * @see #getTransitionLabel()
+	 * @generated
+	 */
+	EReference getTransitionLabel_Transition();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -817,14 +920,6 @@ public interface GendataPackage extends EPackage
 		EReference GENERATOR_DATA__PROGRAM = eINSTANCE.getGeneratorData_Program();
 
 		/**
-		 * The meta object literal for the '<em><b>Labels</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference GENERATOR_DATA__LABELS = eINSTANCE.getGeneratorData_Labels();
-
-		/**
 		 * The meta object literal for the '<em><b>Cfgs</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -865,6 +960,22 @@ public interface GendataPackage extends EPackage
 		EAttribute GENERATOR_DATA__NEEDS_CAS = eINSTANCE.getGeneratorData_NeedsCas();
 
 		/**
+		 * The meta object literal for the '<em><b>Location Labels</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GENERATOR_DATA__LOCATION_LABELS = eINSTANCE.getGeneratorData_LocationLabels();
+
+		/**
+		 * The meta object literal for the '<em><b>Transition Labels</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GENERATOR_DATA__TRANSITION_LABELS = eINSTANCE.getGeneratorData_TransitionLabels();
+
+		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.AddressMappingImpl <em>Address Mapping</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -873,14 +984,6 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EClass ADDRESS_MAPPING = eINSTANCE.getAddressMapping();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ADDRESS_MAPPING__NAME = eINSTANCE.getAddressMapping_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Adresses</b></em>' reference list feature.
@@ -897,40 +1000,6 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute ADDRESS_MAPPING__OLD_NAMES = eINSTANCE.getAddressMapping_OldNames();
-
-		/**
-		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.LabelImpl <em>Label</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.upb.lina.cfg.gendata.impl.LabelImpl
-		 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getLabel()
-		 * @generated
-		 */
-		EClass LABEL = eINSTANCE.getLabel();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LABEL__NAME = eINSTANCE.getLabel_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Control Flow Location</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LABEL__CONTROL_FLOW_LOCATION = eINSTANCE.getLabel_ControlFlowLocation();
-
-		/**
-		 * The meta object literal for the '<em><b>Control Flow Diagram</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LABEL__CONTROL_FLOW_DIAGRAM = eINSTANCE.getLabel_ControlFlowDiagram();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.ConstraintMappingImpl <em>Constraint Mapping</em>}' class.
@@ -1015,6 +1084,60 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute FUNCTION_PARAMS_MAPPING__VAR_NAMES_IN_FUNCTION = eINSTANCE.getFunctionParamsMapping_VarNamesInFunction();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.NamedElementImpl <em>Named Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.lina.cfg.gendata.impl.NamedElementImpl
+		 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getNamedElement()
+		 * @generated
+		 */
+		EClass NAMED_ELEMENT = eINSTANCE.getNamedElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NAMED_ELEMENT__NAME = eINSTANCE.getNamedElement_Name();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.LocationLabelImpl <em>Location Label</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.lina.cfg.gendata.impl.LocationLabelImpl
+		 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getLocationLabel()
+		 * @generated
+		 */
+		EClass LOCATION_LABEL = eINSTANCE.getLocationLabel();
+
+		/**
+		 * The meta object literal for the '<em><b>Control Flow Location</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOCATION_LABEL__CONTROL_FLOW_LOCATION = eINSTANCE.getLocationLabel_ControlFlowLocation();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.TransitionLabelImpl <em>Transition Label</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.lina.cfg.gendata.impl.TransitionLabelImpl
+		 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getTransitionLabel()
+		 * @generated
+		 */
+		EClass TRANSITION_LABEL = eINSTANCE.getTransitionLabel();
+
+		/**
+		 * The meta object literal for the '<em><b>Transition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSITION_LABEL__TRANSITION = eINSTANCE.getTransitionLabel_Transition();
 
 	}
 

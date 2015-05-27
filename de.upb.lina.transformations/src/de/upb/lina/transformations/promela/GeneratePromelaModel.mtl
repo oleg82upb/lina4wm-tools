@@ -28,7 +28,7 @@ short [for (map: FunctionParamsMapping | genData.parameterMappings)][if (map.cfg
 [/template]
 
 [template public handleStartLocation(genData:GeneratorData, cfg: ControlFlowDiagram)]
-[for (l : Label | genData.labels)]
+[for (l : LocationLabel | genData.locationLabels)]
 [if (l.controlFlowLocation = cfg.start)]
 [l.name.substring(1, 1)/]Start: goto [l.name/];
 [/if]
@@ -36,7 +36,7 @@ short [for (map: FunctionParamsMapping | genData.parameterMappings)][if (map.cfg
 [/template]
 
 [template public handleLocation(loc: ControlFlowLocation, genData: GeneratorData)]
-[for (l : Label | genData.labels)]
+[for (l : LocationLabel | genData.locationLabels)]
 [if (l.controlFlowLocation = loc and loc.outgoing->size() = 1)]
 [l.name/]: [for (t : Transition | loc.outgoing)] [t.transformTransitions(genData)/] [genGoTo(t, genData)/][/for]
 [elseif (l.controlFlowLocation = loc and loc.outgoing->size() > 1)]
@@ -50,7 +50,7 @@ short [for (map: FunctionParamsMapping | genData.parameterMappings)][if (map.cfg
 [/template]
 
 [template public genGoTo(t: Transition, genData: GeneratorData)]
-[t.genPhi(genData)/] goto [for (l : Label | genData.labels)][if (l.controlFlowLocation = t.target)][l.name/][/if][/for];
+[t.genPhi(genData)/] goto [for (l : LocationLabel | genData.locationLabels)][if (l.controlFlowLocation = t.target)][l.name/][/if][/for];
 [/template]
 
 [template public genPhi (t: Transition, genData: GeneratorData)][/template]

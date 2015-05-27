@@ -21,7 +21,7 @@ end data specification
 [file ('PC.utf8', false, 'UTF-8')]
 data specification
 	PC = 
-[for (l : Label | genData.labels)]
+[for (l : LocationLabel | genData.locationLabels)]
 	[l.name/] |
 [/for]
 	N;
@@ -42,11 +42,13 @@ end specification
 
 [file ('cindex.utf8', false, 'UTF-8')]
 data specification
-	IJ = [for (cfg : ControlFlowDiagram | genData.cfgs)] [cfg.name/]ini |[/for]
-	CJ = [for (cfg : ControlFlowDiagram | genData.cfgs)] 
-			TODO
-		[/for]
-	RJ = 
+	IJ = [for (cfg : ControlFlowDiagram | genData.cfgs)]
+ 	[cfg.name/]ini |
+ 		[/for]
+	CJ = [for (label : TransitionLabel | genData.transitionLabels)]
+				[label/]
+			[/for]
+	RJ = [for (cfg : ControlFlowDiagram | genData.cfgs)] [cfg.name/]ret |[/for]
 	
 	variables
 		ij : IJ;
