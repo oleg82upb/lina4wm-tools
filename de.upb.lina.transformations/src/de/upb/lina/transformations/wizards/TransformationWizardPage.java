@@ -165,6 +165,11 @@ public class TransformationWizardPage extends WizardPage {
 		cb_model.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
 				type = cb_model.getSelectionIndex();
+				if(type == 1){
+					tx_file.setEnabled(false);
+				}else{
+					tx_file.setEnabled(true);
+				}
 				validateInput();
 			}
 		});
@@ -211,7 +216,7 @@ public class TransformationWizardPage extends WizardPage {
 //			break;
 
 		case 1:
-			return ".kiv";
+			return "";
 //			break;
 			
 		default:
@@ -287,6 +292,7 @@ public class TransformationWizardPage extends WizardPage {
 		newFileLoc = this.tx_file.getText();
 		setDescription("Valid input! Finish!");
 		lb_fileEnding.setText(getFileEndForSelection());
+		lb_fileEnding.pack();
 
 		int result = checkCFGFile(cfgLoc);
 		if (result >= 400) {
@@ -328,6 +334,14 @@ public class TransformationWizardPage extends WizardPage {
 		
 		if(file.exists()){
 			updateWarning("A file with the given name does already exist. If you continue the present file will be overwritten!", WARNING);
+			return;
+		}
+		
+		path = new Path(tx_container.getText()+File.separator+"PC.utf8");
+		file = myWorkspaceRoot.getFile(path);
+		
+		if(file.exists() && type == 1){
+			updateWarning("The selected target folder already contains a KIV Specification. If you continue the present files will be overwritten!", WARNING);
 			return;
 		}
 		
