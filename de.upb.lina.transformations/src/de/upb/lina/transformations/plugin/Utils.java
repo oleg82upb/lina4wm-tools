@@ -24,7 +24,7 @@ public class Utils {
 		}
 		string = string.trim();
 		string = string.replaceAll(" ", "");
-		//string = string.replaceAll(".", "_");
+		string = string.replaceAll("\\.", "_");
 
 		//if the address is starts with a number, do not give it a v_
 		string = string.replaceAll("@_","");
