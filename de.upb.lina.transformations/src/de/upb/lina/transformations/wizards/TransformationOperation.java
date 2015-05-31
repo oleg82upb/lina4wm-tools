@@ -1,9 +1,9 @@
 package de.upb.lina.transformations.wizards;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
@@ -14,20 +14,13 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
-import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.lina.transformations.plugin.GendataPrecomputer;
 
-public class TransformationOperation extends WorkspaceModifyOperation{
+public abstract class TransformationOperation extends WorkspaceModifyOperation{
 	protected String graphModelFileLocation;
 	protected String targetContainer;
 	protected String targetName;
@@ -69,7 +62,17 @@ public class TransformationOperation extends WorkspaceModifyOperation{
 		//build correct full path
 		fullPath = Paths.get(workspaceRootFile.toString() + File.separator + targetPath.toPortableString());
 		
+		try {
+			runSpecGeneration();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		refreshWorkspace(monitor);
+		
 	}
+	
+	protected abstract void runSpecGeneration() throws IOException;
 	
 	
 //	protected void loadCfg(){
