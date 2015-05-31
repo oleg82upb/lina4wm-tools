@@ -414,8 +414,6 @@ public class GendataPrecomputer {
 							}else if(i instanceof Cast){
 								Cast op = (Cast)i;
 								addToMapping(mapping, matchingCfg, op.getResult());
-//								System.out.println("Added: " + op.getResult().getName() + isAddressMapped(op.getResult(), mapping));
-//								System.out.println(addressLookup.get(op.getResult()));
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getValue()));
 	
 							}else if(i instanceof GetElementPtr){

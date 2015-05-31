@@ -20,11 +20,11 @@ inline [cfg.name.replaceAll('@_', '')/]([genParams(cfg, genData)/]){
 [/template]
 
 [template public genParams(cfg: ControlFlowDiagram, genData: GeneratorData)]
-[for (map: FunctionParamsMapping | genData.parameterMappings)][if (map.cfg = cfg)][for (p: FunctionParameter | map.function.parameter.params)][p.value.addressToString(genData)/], [/for][if(map.needsReturnValue = true)]returnvalue[/if][/if][/for]
+[for (map: FunctionParamsMapping | genData.parameterMappings)][if (map.cfg = cfg)][for (p: FunctionParameter | map.function.parameter.params)][p.value.addressToString(genData)/][if(map.function.parameter.params->last() <> p)], [/if][/for][if(map.needsReturnValue = true)], returnvalue[/if][/if][/for]
 [/template]
 
 [template public genLocalVarDeclarations(cfg: ControlFlowDiagram, genData: GeneratorData)]
-short [for (map: FunctionParamsMapping | genData.parameterMappings)][if (map.cfg = cfg)][for (name: EString | map.varNamesInFunction)][name/], [/for][/if][/for];
+short [for (map: FunctionParamsMapping | genData.parameterMappings)][if (map.cfg = cfg)][for (name: EString | map.varNamesInFunction)][name/][if(map.varNamesInFunction->last() <> name)], [/if][/for][/if][/for];
 [/template]
 
 [template public handleStartLocation(genData:GeneratorData, cfg: ControlFlowDiagram)]
