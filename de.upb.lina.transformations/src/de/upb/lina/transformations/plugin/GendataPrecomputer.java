@@ -566,7 +566,7 @@ public class GendataPrecomputer {
 		
 		// add used vars to the list
 		FunctionDefinition fun = getFunctionForCfg(cfg);
-		if(!usedVarsInFunctions.get(fun).contains(addressLookup.get(addressCopy))){
+		if(!addressCopy.getName().startsWith("@") && !usedVarsInFunctions.get(fun).contains(addressLookup.get(addressCopy))){
 			usedVarsInFunctions.get(fun).add(addressLookup.get(addressCopy));
 		}
 	}
