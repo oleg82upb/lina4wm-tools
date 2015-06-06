@@ -17,24 +17,6 @@ public class PromelaTransformationOperation extends TransformationOperation {
 		super(cfgs, targetContainer, targetName, fileEnding);
 	}
 
-//	@Override
-//	protected void execute(IProgressMonitor monitor) throws CoreException,
-//			InvocationTargetException, InterruptedException {
-//		super.execute(monitor);
-//		
-//		//run acceleo
-//		
-//		try {
-//			
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		refreshWorkspace(monitor);
-//		
-//		
-//	}
 
 	@Override
 	protected void runSpecGeneration() throws IOException {

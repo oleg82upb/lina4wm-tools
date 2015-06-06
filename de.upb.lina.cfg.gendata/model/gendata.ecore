@@ -15,12 +15,15 @@
         eType="#//ConstraintMapping" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameterMappings" upperBound="-1"
         eType="#//FunctionParamsMapping" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="needsGetElementPtr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="needsCas" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="locationLabels" upperBound="-1"
         eType="#//LocationLabel" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transitionLabels" upperBound="-1"
         eType="#//TransitionLabel" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requiredBaseFunctions"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="phiMappings" upperBound="-1"
+        eType="#//PhiMapping" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AddressMapping" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="adresses" upperBound="-1"
@@ -36,8 +39,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//FunctionDefinition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="cfg" eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//ControlFlowDiagram"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="needsReturnValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="needsGetElementPtr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="needsCas" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="varNamesInFunction" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
   </eClassifiers>
@@ -49,5 +50,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TransitionLabel" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="transition" eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//Transition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PhiMapping">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//Transition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="phi" upperBound="-1" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Phi"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="blockLabelToUse" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

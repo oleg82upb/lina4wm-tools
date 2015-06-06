@@ -18,6 +18,7 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.gendata.GeneratorData;
+import de.upb.lina.transformations.plugin.Activator;
 import de.upb.lina.transformations.plugin.GendataPrecomputer;
 
 public abstract class TransformationOperation extends WorkspaceModifyOperation{
@@ -27,13 +28,13 @@ public abstract class TransformationOperation extends WorkspaceModifyOperation{
 	protected String fileEnding;
 	protected java.nio.file.Path fullPath;
 	
-	protected List<ControlFlowDiagram> cfg;
+	protected List<ControlFlowDiagram> cfgList;
 	protected GeneratorData genData;
 	
 	
 	public TransformationOperation(List<ControlFlowDiagram> cfgs, String targetContainer, String targetName, String fileEnding) {
 //		this.graphModelFileLocation = graphModelFileLocation;
-		this.cfg = cfgs;
+		this.cfgList = cfgs;
 		this.targetContainer = targetContainer; 
 		this.targetName = targetName;
 		this.fileEnding = fileEnding;
@@ -48,7 +49,7 @@ public abstract class TransformationOperation extends WorkspaceModifyOperation{
 //		loadCfg();
 		
 		//Run Precomputation
-		GendataPrecomputer precomp = new GendataPrecomputer(cfg);
+		GendataPrecomputer precomp = new GendataPrecomputer(cfgList);
 		genData = precomp.computeGeneratorData();
 		
 		//get workspace root
@@ -65,7 +66,7 @@ public abstract class TransformationOperation extends WorkspaceModifyOperation{
 		try {
 			runSpecGeneration();
 		} catch (IOException e) {
-			e.printStackTrace();
+			Activator.logError(e.getMessage(), e);
 		}
 		
 		refreshWorkspace(monitor);
@@ -98,11 +99,12 @@ public abstract class TransformationOperation extends WorkspaceModifyOperation{
 	
 	protected void refreshWorkspace(IProgressMonitor monitor) throws CoreException
 	{
-		IProject[] iProjects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
-		for (int i = 0; i < iProjects.length; i++)
-		{
-			iProjects[i].refreshLocal(IResource.DEPTH_INFINITE, monitor);
-		}
+		ResourcesPlugin.getWorkspace().getRoot().refreshLocal(IResource.DEPTH_INFINITE, monitor);
+//		IProject[] iProjects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+//		for (int i = 0; i < iProjects.length; i++)
+//		{
+//			iProjects[i].refreshLocal(IResource.DEPTH_INFINITE, monitor);
+//		}
 	}
 	
 }

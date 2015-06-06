@@ -22,10 +22,10 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getCfgs <em>Cfgs</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getParameterMappings <em>Parameter Mappings</em>}</li>
- *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#isNeedsGetElementPtr <em>Needs Get Element Ptr</em>}</li>
- *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#isNeedsCas <em>Needs Cas</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getLocationLabels <em>Location Labels</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getTransitionLabels <em>Transition Labels</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getRequiredBaseFunctions <em>Required Base Functions</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getPhiMappings <em>Phi Mappings</em>}</li>
  * </ul>
  * </p>
  *
@@ -136,58 +136,6 @@ public interface GeneratorData extends EObject
 	EList<FunctionParamsMapping> getParameterMappings();
 
 	/**
-	 * Returns the value of the '<em><b>Needs Get Element Ptr</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Needs Get Element Ptr</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Needs Get Element Ptr</em>' attribute.
-	 * @see #setNeedsGetElementPtr(boolean)
-	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_NeedsGetElementPtr()
-	 * @model
-	 * @generated
-	 */
-	boolean isNeedsGetElementPtr();
-
-	/**
-	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.GeneratorData#isNeedsGetElementPtr <em>Needs Get Element Ptr</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Needs Get Element Ptr</em>' attribute.
-	 * @see #isNeedsGetElementPtr()
-	 * @generated
-	 */
-	void setNeedsGetElementPtr(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Needs Cas</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Needs Cas</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Needs Cas</em>' attribute.
-	 * @see #setNeedsCas(boolean)
-	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_NeedsCas()
-	 * @model
-	 * @generated
-	 */
-	boolean isNeedsCas();
-
-	/**
-	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.GeneratorData#isNeedsCas <em>Needs Cas</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Needs Cas</em>' attribute.
-	 * @see #isNeedsCas()
-	 * @generated
-	 */
-	void setNeedsCas(boolean value);
-
-	/**
 	 * Returns the value of the '<em><b>Location Labels</b></em>' containment reference list.
 	 * The list contents are of type {@link de.upb.lina.cfg.gendata.LocationLabel}.
 	 * <!-- begin-user-doc -->
@@ -218,5 +166,37 @@ public interface GeneratorData extends EObject
 	 * @generated
 	 */
 	EList<TransitionLabel> getTransitionLabels();
+
+	/**
+	 * Returns the value of the '<em><b>Required Base Functions</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Required Base Functions</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Required Base Functions</em>' attribute list.
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_RequiredBaseFunctions()
+	 * @model default=""
+	 * @generated
+	 */
+	EList<String> getRequiredBaseFunctions();
+
+	/**
+	 * Returns the value of the '<em><b>Phi Mappings</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.lina.cfg.gendata.PhiMapping}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Phi Mappings</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Phi Mappings</em>' containment reference list.
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_PhiMappings()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<PhiMapping> getPhiMappings();
 
 } // GeneratorData

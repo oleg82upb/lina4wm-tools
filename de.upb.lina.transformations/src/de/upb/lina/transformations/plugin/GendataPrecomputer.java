@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
+import de.upb.lina.cfg.controlflow.FlushTransition;
 import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.gendata.AddressMapping;
@@ -16,9 +17,9 @@ import de.upb.lina.cfg.gendata.ConstraintMapping;
 import de.upb.lina.cfg.gendata.FunctionParamsMapping;
 import de.upb.lina.cfg.gendata.GendataFactory;
 import de.upb.lina.cfg.gendata.GeneratorData;
-import de.upb.lina.cfg.gendata.LocationLabel;
 import de.upb.lina.cfg.gendata.LocalVariables;
-import de.upb.lina.cfg.gendata.TransitionLabel;
+import de.upb.lina.cfg.gendata.LocationLabel;
+import de.upb.lina.cfg.gendata.PhiMapping;
 import de.upb.llvm_parser.llvm.AbstractElement;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
@@ -64,26 +65,30 @@ import de.upb.llvm_parser.llvm.VariableAttributeAccess;
 import de.upb.llvm_parser.llvm.impl.AddressUseImpl;
 
 public class GendataPrecomputer {
+
+	private static final String CAS = "cas";
+	private static final String GETELEMENTPTR = "getelementptr";
+
 	private List<ControlFlowDiagram> cfgs;
 	private GeneratorData helperModel;
-	
+
 	private HashMap <Address, String> addressLookup = new HashMap<Address, String>();
 	private HashMap <ControlFlowDiagram, String> cfgToLabelPrefix = new HashMap <ControlFlowDiagram, String>();
-	
+
 	private HashMap<FunctionDefinition, List<String>> usedVarsInFunctions = new HashMap<FunctionDefinition, List<String>>();
-	
+
 	public GendataPrecomputer(List<ControlFlowDiagram> cfgs){
 		this.cfgs = cfgs;
 	}
-	
+
 	public GeneratorData computeGeneratorData(){
 		precomputeHelperModel();
 		return helperModel;
 	}
-	
+
 	private void precomputeHelperModel(){
 		helperModel = GendataFactory.eINSTANCE.createGeneratorData();
-		
+
 		for(ControlFlowDiagram cfg: cfgs){
 			try{
 				EObject motherObject = cfg.getStart().getOutgoing().get(0).getInstruction().eContainer();
@@ -92,7 +97,7 @@ public class GendataPrecomputer {
 				FunctionDefinition fd = (FunctionDefinition)fb.eContainer();
 				usedVarsInFunctions.put(fd, new ArrayList<String>());
 			}catch(NullPointerException ex){
-				
+
 			}
 		}
 
@@ -105,32 +110,85 @@ public class GendataPrecomputer {
 			FunctionDefinition fd = (FunctionDefinition)fb.eContainer();
 			LLVM program = (LLVM)fd.eContainer();
 			helperModel.setProgram(program);
-			helperModel.setNeedsCas(false);
-			helperModel.setNeedsGetElementPtr(false);
+			//			helperModel.setNeedsCas(false);
+			//			helperModel.setNeedsGetElementPtr(false);
 			helperModel.getCfgs().addAll(cfgs);
 
 			//local vars
 			LocalVariables localVars = GendataFactory.eINSTANCE.createLocalVariables();
 			initLocalVariables(localVars, program);
 			helperModel.setLocalVariables(localVars);
-			
+
 			//labels
 			computeLabelPrefixesPerFunction();
 			initLocationLabels(localVars);
 			initTransitionLabels(localVars);
-			
+
 			//conditions
 			computeTransitionConditionMapping(helperModel.getConstraints());
-			
+
 			//parameterFunctionMappings
 			computeParameterFunctionMapping(helperModel);
-			
+
+			//phi mappings
+			computePhiMapping(helperModel.getPhiMappings());
+
 
 		}catch(ClassCastException ex){
 			Activator.logError("Could not link LLVM program to this transformation.", ex);
 		}
 	}
-	
+
+	private void computePhiMapping(List<PhiMapping> phiMappings){
+		for(ControlFlowDiagram cfg: cfgs){
+			HashMap<String, ArrayList<Phi>> blockLabelToPhiInstructions = new HashMap<String, ArrayList<Phi>>();
+			try{
+				EObject motherObject = cfg.getStart().getOutgoing().get(0).getInstruction().eContainer();
+				BasicBlock basicBlock = (BasicBlock) motherObject;
+				FunctionBody fb = (FunctionBody)basicBlock.eContainer();
+				FunctionDefinition fd = (FunctionDefinition)fb.eContainer();
+				for(BasicBlock b: fd.getBody().getBlocks()){
+					blockLabelToPhiInstructions.put(b.getLabel(), new ArrayList<Phi>());
+					for(Instruction i: b.getInstructions()){
+						if(i instanceof Phi){
+							if(!blockLabelToPhiInstructions.get(b.getLabel()).contains(i)){
+								blockLabelToPhiInstructions.get(b.getLabel()).add((Phi)i);
+							}
+//							System.out.println(((Phi)(i)).getCases().get(0).getLabel());
+						}
+					}
+				}
+
+
+			}catch(NullPointerException ex){
+
+			}
+
+			for(Transition t: cfg.getTransitions()){
+				//block change
+				if(!t.getSource().getBlockLabel().equals(t.getTarget().getBlockLabel())){
+					for(Transition inc: t.getSource().getIncoming()){
+						if(!blockLabelToPhiInstructions.get(t.getTarget().getBlockLabel()).isEmpty()){
+							PhiMapping mapping = constructPhiMapping(inc, blockLabelToPhiInstructions.get(t.getTarget().getBlockLabel()), "%" + inc.getSource().getBlockLabel());
+							phiMappings.add(mapping);
+//							System.out.println("Mapping: " + mapping.getBlockLabelToUse());
+//							System.out.println(inc.getSource());
+						}
+					}
+				}
+
+			}
+		}
+	}
+
+	private PhiMapping constructPhiMapping(Transition transition, List<Phi> phis, String blockLabel){
+		PhiMapping mapping = GendataFactory.eINSTANCE.createPhiMapping();
+		mapping.setTransition(transition);
+		mapping.getPhi().addAll(phis);
+		mapping.setBlockLabelToUse(blockLabel);
+		return mapping;
+	}
+
 	private void computeParameterFunctionMapping(GeneratorData genData){
 		List<FunctionParamsMapping> functionParamMapping = genData.getParameterMappings();
 		for(ControlFlowDiagram cfg: cfgs){
@@ -140,12 +198,11 @@ public class GendataPrecomputer {
 				BasicBlock basicBlock = (BasicBlock) motherObject;
 				FunctionBody fb = (FunctionBody)basicBlock.eContainer();
 				FunctionDefinition fd = (FunctionDefinition)fb.eContainer();
-				
+
 				mapping.setCfg(cfg);
 				mapping.setFunction(fd);
 				mapping.setNeedsReturnValue(false);
-				mapping.setNeedsCas(false);
-				mapping.setNeedsGetElementPtr(false);
+
 				for(Transition t: cfg.getTransitions()){
 					if(t.getInstruction() instanceof Return){
 						Return ret = (Return) t.getInstruction();
@@ -153,44 +210,46 @@ public class GendataPrecomputer {
 							mapping.setNeedsReturnValue(true);
 						}
 					}
-					
+
 					if(t.getInstruction() instanceof CmpXchg){
-						mapping.setNeedsCas(true);
-						genData.setNeedsCas(true);
+						if(!genData.getRequiredBaseFunctions().contains(CAS)){
+							genData.getRequiredBaseFunctions().add(CAS);
+						}
 					}
 					if(t.getInstruction() instanceof GetElementPtr){
-						mapping.setNeedsGetElementPtr(true);
-						genData.setNeedsGetElementPtr(true);
+						if(!genData.getRequiredBaseFunctions().contains(GETELEMENTPTR)){
+							genData.getRequiredBaseFunctions().add(GETELEMENTPTR);
+						}
 					}
 				}
-				
-				
-				
+
+
+
 				//Compute usedvars
 				//Remove params from list of vars to declare
 				if(fd.getParameter() != null){
-				for(FunctionParameter param: fd.getParameter().getParams()){
-					usedVarsInFunctions.get(fd).remove(addressLookup.get(param.getValue()));
-				}
+					for(FunctionParameter param: fd.getParameter().getParams()){
+						usedVarsInFunctions.get(fd).remove(addressLookup.get(param.getValue()));
+					}
 				}
 				mapping.getVarNamesInFunction().addAll(usedVarsInFunctions.get(fd));
-				
+
 				functionParamMapping.add(mapping);
 			}
-			
+
 		}
-		
-		
-		
-		
+
+
+
+
 	}
-	
+
 	private void initTransitionLabels(LocalVariables localVars) {
-		
+
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	private void initLocationLabels(LocalVariables localVars){
 		for(ControlFlowDiagram cfg: cfgs){
 			List<LocationLabel> labels = helperModel.getLocationLabels();
@@ -203,7 +262,7 @@ public class GendataPrecomputer {
 					conflictingLocs.add(l);
 				}
 			}
-			
+
 			for(ControlFlowLocation l: cfg.getLocations()){
 				String bufferRepresentation;
 				//use long buffer labels if needed as of conflict, short if not needed
@@ -219,20 +278,20 @@ public class GendataPrecomputer {
 			}
 		}
 	}
-	
+
 	private void computeTransitionConditionMapping(List<ConstraintMapping> constraints){
 		for(ControlFlowDiagram cfg: cfgs){
 			ArrayList<ControlFlowLocation> workedOn = new ArrayList<ControlFlowLocation>();
 			ArrayList<ControlFlowLocation> toWorkOn = new ArrayList<ControlFlowLocation>();
 
 			toWorkOn.add(cfg.getStart());
-			
+
 			while(!toWorkOn.isEmpty()){
 				ControlFlowLocation currentLoc = toWorkOn.remove(0);
 				workedOn.add(currentLoc);
-				
+
 				List<Transition> outgoing = currentLoc.getOutgoing();
-				
+
 				if(outgoing.size() > 1){
 					GuardedTransition ifTransition = null;
 					for(Transition t: outgoing){
@@ -248,15 +307,15 @@ public class GendataPrecomputer {
 							//flushs and normal transitions that need a condition in promela
 							constraints.add(constructConstraintMapping(t, "true"));
 						}
-						
+
 					}
-					
+
 					//get the else case
 					for(Transition t: outgoing){
 						if(t instanceof GuardedTransition && !t.equals(ifTransition)){
 							GuardedTransition gt = (GuardedTransition)t;
-								//TODO: Transform condition correctly!
-								constraints.add(constructConstraintMapping(gt, "!" + ifTransition.getCondition())); //HERE Cond
+							//TODO: Transform condition correctly!
+							constraints.add(constructConstraintMapping(gt, "!" + ifTransition.getCondition())); //HERE Cond
 						}
 						//Add rest to work on
 						if(!workedOn.contains(t.getTarget()) && !toWorkOn.contains(t.getTarget())){
@@ -264,7 +323,7 @@ public class GendataPrecomputer {
 						}
 					}
 				}
-				
+
 				//Add rest to work on
 				for(Transition t: outgoing){	
 					if(!workedOn.contains(t.getTarget()) && !toWorkOn.contains(t.getTarget())){
@@ -274,11 +333,11 @@ public class GendataPrecomputer {
 			}
 		}
 	}
-	
+
 	private ConstraintMapping constructConstraintMapping(Transition t, String condition){
 		//manipulate condition
 		condition = condition.replaceAll("[\\[\\]]", "");
-		
+
 		if(!condition.equalsIgnoreCase("true")){
 			for(AddressMapping addressMapping: helperModel.getLocalVariables().getVariables()){
 				for(String oldName: addressMapping.getOldNames()){
@@ -291,16 +350,16 @@ public class GendataPrecomputer {
 					}
 				}
 			}
-			
+
 		}
-		
+
 		//construct mapping
 		ConstraintMapping mapping = GendataFactory.eINSTANCE.createConstraintMapping();
 		mapping.setTransition(t);
 		mapping.setCondition(condition);
 		return mapping;
 	}
-	
+
 	private void computeLabelPrefixesPerFunction(){
 		char currentChar = 'A';
 		for(int i = 0; i< cfgs.size();i++){
@@ -308,55 +367,55 @@ public class GendataPrecomputer {
 			cfgToLabelPrefix.put(cfg, ""+currentChar);
 			currentChar++;
 		}
-		
-		
+
+
 	}
-	
+
 	private String generateShortLabel(ControlFlowLocation loc, LocalVariables localVars, int size){
 		int sizeString = String.valueOf(size).length();
 		String bufferLabel = cfgToLabelPrefix.get(loc.getDiagram()) + String.format("%0"+sizeString+"d", loc.getPc());
-		
+
 		for(AddressValuePair avp: loc.getBuffer().getAddressValuePairs()){
 			//Address address = ((AddressUse) (avp.getAddress().getValue())).getAddress();
-			
+
 			bufferLabel += lookupValue(avp.getAddress().getValue());
 		}
-		
-//		System.out.println(bufferLabel);
-		
+
+		//		System.out.println(bufferLabel);
+
 		return bufferLabel;
 	}
-	
+
 	private String generateLabel(ControlFlowLocation loc, LocalVariables localVars, int size){
 		int sizeString = String.valueOf(size).length();
 		String bufferLabel = cfgToLabelPrefix.get(loc.getDiagram()) + String.format("%0"+sizeString+"d", loc.getPc());
-		
+
 		for(AddressValuePair avp: loc.getBuffer().getAddressValuePairs()){
 			//Address address = ((AddressUse) (avp.getAddress().getValue())).getAddress();
-			
+
 			bufferLabel += lookupValue(avp.getAddress().getValue()) + lookupValue(avp.getValue().getValue());
 		}
-		
-//		System.out.println(bufferLabel);
-		
+
+		//		System.out.println(bufferLabel);
+
 		return bufferLabel;
 	}
-	
-	private String lookupValue(Value value){
-			if (value.eClass().equals(LlvmPackage.eINSTANCE.getConstant())) {
-				Constant constant = (Constant) value;
-				return constant.getValue().toString();
-			}
 
-			if (value instanceof AddressUseImpl) {
-				return addressLookup.get(((AddressUseImpl) value).getAddress());
-			}
-			
-			if(value.eClass().equals(LlvmPackage.eINSTANCE.getPrimitiveValue())){
-				PrimitiveValue val = (PrimitiveValue)value;
-				return val.getValue();
-			}
-			return value.toString();
+	private String lookupValue(Value value){
+		if (value.eClass().equals(LlvmPackage.eINSTANCE.getConstant())) {
+			Constant constant = (Constant) value;
+			return constant.getValue().toString();
+		}
+
+		if (value instanceof AddressUseImpl) {
+			return addressLookup.get(((AddressUseImpl) value).getAddress());
+		}
+
+		if(value.eClass().equals(LlvmPackage.eINSTANCE.getPrimitiveValue())){
+			PrimitiveValue val = (PrimitiveValue)value;
+			return val.getValue();
+		}
+		return value.toString();
 	}
 
 	private Address extractAddressFromValue(Value v){
@@ -380,7 +439,7 @@ public class GendataPrecomputer {
 			if(ele instanceof FunctionDefinition){
 				FunctionDefinition fDef = (FunctionDefinition)ele;
 				ControlFlowDiagram matchingCfg = getCFGForFunction(fDef);
-				
+
 				//map params
 				if(matchingCfg != null && matchingCfg.getStart() != null && !matchingCfg.getStart().getOutgoing().isEmpty()){		
 					EObject motherObject = matchingCfg.getStart().getOutgoing().get(0).getInstruction().eContainer();
@@ -394,7 +453,7 @@ public class GendataPrecomputer {
 						}
 					}
 				}
-				
+
 				//map vars in function
 				if(fDef.getBody() != null && matchingCfg != null){
 					for(BasicBlock b: fDef.getBody().getBlocks()){
@@ -404,23 +463,23 @@ public class GendataPrecomputer {
 								addToMapping(mapping, matchingCfg, op.getResult());
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getValue1()));
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getValue2()));
-	
+
 							}else if(i instanceof LogicOperation){
 								LogicOperation op = (LogicOperation)i;
 								addToMapping(mapping, matchingCfg, op.getResult());
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getValue1()));
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getValue2()));
-	
+
 							}else if(i instanceof Cast){
 								Cast op = (Cast)i;
 								addToMapping(mapping, matchingCfg, op.getResult());
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getValue()));
-	
+
 							}else if(i instanceof GetElementPtr){
 								GetElementPtr op = (GetElementPtr)i;
 								addToMapping(mapping, matchingCfg, op.getResult());
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getAggerate().getValue()));
-	
+
 							}else if(i instanceof Fence){
 								//nothing to do here
 							}else if(i instanceof CmpXchg){
@@ -434,53 +493,53 @@ public class GendataPrecomputer {
 								addToMapping(mapping, matchingCfg, op.getResult());
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getAddress().getValue()));
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getArgument().getValue()));
-	
+
 							}else if(i instanceof Load){
 								Load op = (Load) i;
 								addToMapping(mapping, matchingCfg, op.getResult());
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getAddress().getValue()));
-	
+
 							}else if(i instanceof Store){
 								Store op = (Store)i;
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getTargetAddress().getValue()));
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getValue().getValue()));
-	
+
 							}else if(i instanceof Call){
 								Call op = (Call)i;
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getFunction().getValue()));
 								addToMapping(mapping, matchingCfg, op.getResult());
-	
+
 							}else if(i instanceof Alloc){
 								Alloc op = (Alloc)i;
 								addToMapping(mapping, matchingCfg, op.getResult());
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getNumOfElements().getValue()));
-	
+
 							}else if(i instanceof Phi){
 								Phi op = (Phi)i;
 								addToMapping(mapping, matchingCfg, op.getResult());
-	
+
 							}else if(i instanceof LandingPad){
 								LandingPad op = (LandingPad)i;
 								addToMapping(mapping, matchingCfg, op.getResult());
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getPersonalityvalue()));
-	
+
 							}else if(i instanceof Select){
 								Select op = (Select)i;
 								addToMapping(mapping, matchingCfg, op.getResult());
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getCondition().getValue()));
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getElseValue().getValue()));
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getTrueValue().getValue()));
-	
+
 							}else if(i instanceof VariableAttributeAccess){
 								VariableAttributeAccess op = (VariableAttributeAccess) i;
 								addToMapping(mapping, matchingCfg, op.getResult());
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getVaList().getValue()));
-	
+
 							}else if(i instanceof ExtractValue){
 								ExtractValue op = (ExtractValue)i;
 								addToMapping(mapping, matchingCfg, op.getResult());
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getAggerate().getValue()));
-	
+
 							}else if(i instanceof InsertValue){
 								InsertValue op = (InsertValue)i;
 								addToMapping(mapping, matchingCfg, op.getResult());
@@ -491,14 +550,14 @@ public class GendataPrecomputer {
 								addToMapping(mapping, matchingCfg, op.getResult());
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getVector().getValue()));
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getIndex().getValue()));
-	
+
 							}else if(i instanceof InsertElement){
 								InsertElement op = (InsertElement)i;
 								addToMapping(mapping, matchingCfg, op.getResult());
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getVector().getValue()));
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getIndex().getValue()));
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getValue().getValue()));
-	
+
 							}else if(i instanceof ShuffleVector){
 								ShuffleVector op = (ShuffleVector)i;
 								addToMapping(mapping, matchingCfg, op.getResult());
@@ -524,7 +583,7 @@ public class GendataPrecomputer {
 							}else if(i instanceof Return){
 								Return op = (Return) i;
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getValue().getValue()));
-	
+
 							}else if(i instanceof Branch){
 								Branch op = (Branch)i;
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getCondition()));
@@ -554,14 +613,14 @@ public class GendataPrecomputer {
 
 		//check if already have a mapping for that address
 		if(!isAddressMapped(addressCopy, mapping)){
-			
+
 			//create new addressmapping
 			AddressMapping addressMapping = createAddressMapping(addressCopy, Utils.clean(addressCopy.getName()));
 
 			mapping.add(addressMapping);
 			addressLookup.put(addressCopy, addressMapping.getName());
 		}
-		
+
 		// add used vars to the list
 		FunctionDefinition fun = getFunctionForCfg(cfg);
 		if(!addressCopy.getName().startsWith("@") && !usedVarsInFunctions.get(fun).contains(addressLookup.get(addressCopy))){
@@ -572,7 +631,7 @@ public class GendataPrecomputer {
 	private boolean isAddressMapped(Address address, List<AddressMapping> mapping){
 		for(AddressMapping am: mapping){
 			for(Address a: am.getAdresses()){
-//				if(a.getName().equals(address.getName())){
+				//				if(a.getName().equals(address.getName())){
 				if(a.equals(address)){
 					//System.out.println("a-name: " + a.getName() + "address: " + address.getName());
 					return true;
@@ -581,7 +640,7 @@ public class GendataPrecomputer {
 		}
 		return false;
 	}
-	
+
 	private FunctionDefinition getFunctionForCfg(ControlFlowDiagram cfg){
 		EObject motherObject = cfg.getStart().getOutgoing().get(0).getInstruction().eContainer();
 		BasicBlock basicBlock = (BasicBlock) motherObject;
@@ -589,7 +648,7 @@ public class GendataPrecomputer {
 		FunctionDefinition fd = (FunctionDefinition)fb.eContainer();
 		return fd;
 	}
-	
+
 	/**
 	 * Returns the correct store buffer graph for the given function in the LLVM
 	 * @param fd

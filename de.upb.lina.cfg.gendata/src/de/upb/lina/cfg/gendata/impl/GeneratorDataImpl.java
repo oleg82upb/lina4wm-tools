@@ -9,6 +9,7 @@ import de.upb.lina.cfg.gendata.GendataPackage;
 import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.lina.cfg.gendata.LocalVariables;
 import de.upb.lina.cfg.gendata.LocationLabel;
+import de.upb.lina.cfg.gendata.PhiMapping;
 import de.upb.lina.cfg.gendata.TransitionLabel;
 import de.upb.llvm_parser.llvm.LLVM;
 import java.util.Collection;
@@ -19,6 +20,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -35,10 +37,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getCfgs <em>Cfgs</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getParameterMappings <em>Parameter Mappings</em>}</li>
- *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#isNeedsGetElementPtr <em>Needs Get Element Ptr</em>}</li>
- *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#isNeedsCas <em>Needs Cas</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getLocationLabels <em>Location Labels</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getTransitionLabels <em>Transition Labels</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getRequiredBaseFunctions <em>Required Base Functions</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getPhiMappings <em>Phi Mappings</em>}</li>
  * </ul>
  * </p>
  *
@@ -97,46 +99,6 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	protected EList<FunctionParamsMapping> parameterMappings;
 
 	/**
-	 * The default value of the '{@link #isNeedsGetElementPtr() <em>Needs Get Element Ptr</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isNeedsGetElementPtr()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean NEEDS_GET_ELEMENT_PTR_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isNeedsGetElementPtr() <em>Needs Get Element Ptr</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isNeedsGetElementPtr()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean needsGetElementPtr = NEEDS_GET_ELEMENT_PTR_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isNeedsCas() <em>Needs Cas</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isNeedsCas()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean NEEDS_CAS_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isNeedsCas() <em>Needs Cas</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isNeedsCas()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean needsCas = NEEDS_CAS_EDEFAULT;
-
-	/**
 	 * The cached value of the '{@link #getLocationLabels() <em>Location Labels</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -155,6 +117,26 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @ordered
 	 */
 	protected EList<TransitionLabel> transitionLabels;
+
+	/**
+	 * The cached value of the '{@link #getRequiredBaseFunctions() <em>Required Base Functions</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRequiredBaseFunctions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> requiredBaseFunctions;
+
+	/**
+	 * The cached value of the '{@link #getPhiMappings() <em>Phi Mappings</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPhiMappings()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PhiMapping> phiMappings;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -303,48 +285,6 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isNeedsGetElementPtr() {
-		return needsGetElementPtr;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setNeedsGetElementPtr(boolean newNeedsGetElementPtr) {
-		boolean oldNeedsGetElementPtr = needsGetElementPtr;
-		needsGetElementPtr = newNeedsGetElementPtr;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.GENERATOR_DATA__NEEDS_GET_ELEMENT_PTR, oldNeedsGetElementPtr, needsGetElementPtr));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isNeedsCas() {
-		return needsCas;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setNeedsCas(boolean newNeedsCas) {
-		boolean oldNeedsCas = needsCas;
-		needsCas = newNeedsCas;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.GENERATOR_DATA__NEEDS_CAS, oldNeedsCas, needsCas));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<LocationLabel> getLocationLabels() {
 		if (locationLabels == null) {
 			locationLabels = new EObjectContainmentEList<LocationLabel>(LocationLabel.class, this, GendataPackage.GENERATOR_DATA__LOCATION_LABELS);
@@ -369,6 +309,30 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getRequiredBaseFunctions() {
+		if (requiredBaseFunctions == null) {
+			requiredBaseFunctions = new EDataTypeUniqueEList<String>(String.class, this, GendataPackage.GENERATOR_DATA__REQUIRED_BASE_FUNCTIONS);
+		}
+		return requiredBaseFunctions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<PhiMapping> getPhiMappings() {
+		if (phiMappings == null) {
+			phiMappings = new EObjectContainmentEList<PhiMapping>(PhiMapping.class, this, GendataPackage.GENERATOR_DATA__PHI_MAPPINGS);
+		}
+		return phiMappings;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -383,6 +347,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return ((InternalEList<?>)getLocationLabels()).basicRemove(otherEnd, msgs);
 			case GendataPackage.GENERATOR_DATA__TRANSITION_LABELS:
 				return ((InternalEList<?>)getTransitionLabels()).basicRemove(otherEnd, msgs);
+			case GendataPackage.GENERATOR_DATA__PHI_MAPPINGS:
+				return ((InternalEList<?>)getPhiMappings()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -407,14 +373,14 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return getConstraints();
 			case GendataPackage.GENERATOR_DATA__PARAMETER_MAPPINGS:
 				return getParameterMappings();
-			case GendataPackage.GENERATOR_DATA__NEEDS_GET_ELEMENT_PTR:
-				return isNeedsGetElementPtr();
-			case GendataPackage.GENERATOR_DATA__NEEDS_CAS:
-				return isNeedsCas();
 			case GendataPackage.GENERATOR_DATA__LOCATION_LABELS:
 				return getLocationLabels();
 			case GendataPackage.GENERATOR_DATA__TRANSITION_LABELS:
 				return getTransitionLabels();
+			case GendataPackage.GENERATOR_DATA__REQUIRED_BASE_FUNCTIONS:
+				return getRequiredBaseFunctions();
+			case GendataPackage.GENERATOR_DATA__PHI_MAPPINGS:
+				return getPhiMappings();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -447,12 +413,6 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				getParameterMappings().clear();
 				getParameterMappings().addAll((Collection<? extends FunctionParamsMapping>)newValue);
 				return;
-			case GendataPackage.GENERATOR_DATA__NEEDS_GET_ELEMENT_PTR:
-				setNeedsGetElementPtr((Boolean)newValue);
-				return;
-			case GendataPackage.GENERATOR_DATA__NEEDS_CAS:
-				setNeedsCas((Boolean)newValue);
-				return;
 			case GendataPackage.GENERATOR_DATA__LOCATION_LABELS:
 				getLocationLabels().clear();
 				getLocationLabels().addAll((Collection<? extends LocationLabel>)newValue);
@@ -460,6 +420,14 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 			case GendataPackage.GENERATOR_DATA__TRANSITION_LABELS:
 				getTransitionLabels().clear();
 				getTransitionLabels().addAll((Collection<? extends TransitionLabel>)newValue);
+				return;
+			case GendataPackage.GENERATOR_DATA__REQUIRED_BASE_FUNCTIONS:
+				getRequiredBaseFunctions().clear();
+				getRequiredBaseFunctions().addAll((Collection<? extends String>)newValue);
+				return;
+			case GendataPackage.GENERATOR_DATA__PHI_MAPPINGS:
+				getPhiMappings().clear();
+				getPhiMappings().addAll((Collection<? extends PhiMapping>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -489,17 +457,17 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 			case GendataPackage.GENERATOR_DATA__PARAMETER_MAPPINGS:
 				getParameterMappings().clear();
 				return;
-			case GendataPackage.GENERATOR_DATA__NEEDS_GET_ELEMENT_PTR:
-				setNeedsGetElementPtr(NEEDS_GET_ELEMENT_PTR_EDEFAULT);
-				return;
-			case GendataPackage.GENERATOR_DATA__NEEDS_CAS:
-				setNeedsCas(NEEDS_CAS_EDEFAULT);
-				return;
 			case GendataPackage.GENERATOR_DATA__LOCATION_LABELS:
 				getLocationLabels().clear();
 				return;
 			case GendataPackage.GENERATOR_DATA__TRANSITION_LABELS:
 				getTransitionLabels().clear();
+				return;
+			case GendataPackage.GENERATOR_DATA__REQUIRED_BASE_FUNCTIONS:
+				getRequiredBaseFunctions().clear();
+				return;
+			case GendataPackage.GENERATOR_DATA__PHI_MAPPINGS:
+				getPhiMappings().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -524,14 +492,14 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return constraints != null && !constraints.isEmpty();
 			case GendataPackage.GENERATOR_DATA__PARAMETER_MAPPINGS:
 				return parameterMappings != null && !parameterMappings.isEmpty();
-			case GendataPackage.GENERATOR_DATA__NEEDS_GET_ELEMENT_PTR:
-				return needsGetElementPtr != NEEDS_GET_ELEMENT_PTR_EDEFAULT;
-			case GendataPackage.GENERATOR_DATA__NEEDS_CAS:
-				return needsCas != NEEDS_CAS_EDEFAULT;
 			case GendataPackage.GENERATOR_DATA__LOCATION_LABELS:
 				return locationLabels != null && !locationLabels.isEmpty();
 			case GendataPackage.GENERATOR_DATA__TRANSITION_LABELS:
 				return transitionLabels != null && !transitionLabels.isEmpty();
+			case GendataPackage.GENERATOR_DATA__REQUIRED_BASE_FUNCTIONS:
+				return requiredBaseFunctions != null && !requiredBaseFunctions.isEmpty();
+			case GendataPackage.GENERATOR_DATA__PHI_MAPPINGS:
+				return phiMappings != null && !phiMappings.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -546,10 +514,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (needsGetElementPtr: ");
-		result.append(needsGetElementPtr);
-		result.append(", needsCas: ");
-		result.append(needsCas);
+		result.append(" (requiredBaseFunctions: ");
+		result.append(requiredBaseFunctions);
 		result.append(')');
 		return result.toString();
 	}

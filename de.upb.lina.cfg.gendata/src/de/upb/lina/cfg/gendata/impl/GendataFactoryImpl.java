@@ -67,6 +67,7 @@ public class GendataFactoryImpl extends EFactoryImpl implements GendataFactory
 			case GendataPackage.FUNCTION_PARAMS_MAPPING: return createFunctionParamsMapping();
 			case GendataPackage.LOCATION_LABEL: return createLocationLabel();
 			case GendataPackage.TRANSITION_LABEL: return createTransitionLabel();
+			case GendataPackage.PHI_MAPPING: return createPhiMapping();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -143,6 +144,16 @@ public class GendataFactoryImpl extends EFactoryImpl implements GendataFactory
 	public TransitionLabel createTransitionLabel() {
 		TransitionLabelImpl transitionLabel = new TransitionLabelImpl();
 		return transitionLabel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PhiMapping createPhiMapping() {
+		PhiMappingImpl phiMapping = new PhiMappingImpl();
+		return phiMapping;
 	}
 
 	/**

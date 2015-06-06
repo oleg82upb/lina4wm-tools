@@ -53,7 +53,9 @@ short [for (map: FunctionParamsMapping | genData.parameterMappings)][if (map.cfg
 [t.genPhi(genData)/] goto [for (l : LocationLabel | genData.locationLabels)][if (l.controlFlowLocation = t.target)][l.name/][/if][/for];
 [/template]
 
-[template public genPhi (t: Transition, genData: GeneratorData)][/template]
+[template public genPhi (t: Transition, genData: GeneratorData)]
+[for (mapping: PhiMapping | genData.phiMappings)][if (mapping.transition = t)][for (phi: Phi | mapping.phi)][phi.result.addressToString(genData)/] = [for(case: PhiCase | phi.cases)][if(case.label.equalsIgnoreCase(mapping.blockLabelToUse))][case.value.valueToString(genData)/][/if][/for];[/for][/if][/for]
+[/template]
 
 [template public transformTransitions(t: Transition, genData: GeneratorData)]
 [t.instruction.genInstruction(genData)/]
@@ -134,7 +136,7 @@ endif
 [/template]
 
 [query public getelementptrInstr(e : GetElementPtr, genData: GeneratorData) : String = 
-'getelementptr(' 
+'getelementptr('
 + e.aggerate.type.dereferencedPtrSize() + ', ' 
 + e.aggerate.value.valueToString(genData) + ', ' 
 + e.offset(1, genData) + ', ' 
@@ -328,7 +330,7 @@ alloca([e.type.typeSize()/], [e.result.addressToString(genData)/]);
 [/template]
 
 [template public genInstruction(e : Phi, genData: GeneratorData)]
-// TODO: phi
+skip;
 [/template]
 
 [template public genInstruction(e : Select, genData: GeneratorData)]
@@ -577,7 +579,7 @@ atomic{
 [template public buildStandards(genData: GeneratorData)]
 
 //standard stuff
-[if (genData.needsGetElementPtr = true)]
+[for(func: String | genData.requiredBaseFunctions)][if (func.equalsIgnoreCase('getelementptr'))]
 inline getelementptr(type, instance, offset, targetRegister)
 {
 	atomic{
@@ -589,6 +591,7 @@ inline getelementptr(type, instance, offset, targetRegister)
 	}
 }
 [/if]
+[/for]
 inline alloca(type, targetRegister)
 {
 	atomic{
@@ -597,7 +600,7 @@ inline alloca(type, targetRegister)
 	assert(memUse < MEM_SIZE);
 	}
 }
-[if (genData.needsCas = true)]
+[for(func: String | genData.requiredBaseFunctions)][if (func.equalsIgnoreCase('cas'))]
 inline cas(adr, old, new, result)
 {
 	atomic{
@@ -610,4 +613,5 @@ inline cas(adr, old, new, result)
 	}
 }
 [/if]
+[/for]
 [/template]

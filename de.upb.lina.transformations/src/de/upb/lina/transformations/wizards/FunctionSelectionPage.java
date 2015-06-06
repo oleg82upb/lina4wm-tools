@@ -2,6 +2,7 @@ package de.upb.lina.transformations.wizards;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,13 +25,21 @@ import org.eclipse.swt.widgets.TreeItem;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
+import de.upb.lina.transformations.plugin.Activator;
+import de.upb.lina.transformations.plugin.Utils;
+import de.upb.llvm_parser.llvm.BasicBlock;
+import de.upb.llvm_parser.llvm.Call;
+import de.upb.llvm_parser.llvm.FunctionBody;
+import de.upb.llvm_parser.llvm.FunctionDefinition;
+import de.upb.llvm_parser.llvm.Instruction;
 
 public class FunctionSelectionPage extends WizardPage{
 	
 	
 	private List<ControlFlowDiagram> allCFGs;
 	private List<ControlFlowDiagram>selectedFunctions = new ArrayList<ControlFlowDiagram>();
-	private HashMap<String, ControlFlowDiagram> cfgMap;
+	private HashMap<ControlFlowDiagram, List<ControlFlowDiagram>> cfgToDependentFunctions = new HashMap<ControlFlowDiagram, List<ControlFlowDiagram>>();
+	private HashMap<String, ControlFlowDiagram> functionToCfg;
 	private Tree tree;
 	
 
@@ -60,6 +69,7 @@ public class FunctionSelectionPage extends WizardPage{
 		column.setWidth(450);
 		tree.setHeaderVisible(true);
 		loadCfg();
+		computeDependencies();
 		
 		tree.addListener(SWT.Selection, new Listener(){
 
@@ -110,9 +120,9 @@ public class FunctionSelectionPage extends WizardPage{
 		this.allCFGs = graphList2;
 		
 		//mapping from name to cfg
-		cfgMap  = new HashMap<String, ControlFlowDiagram>();
+		functionToCfg  = new HashMap<String, ControlFlowDiagram>();
 		for(ControlFlowDiagram cfg : allCFGs){
-			cfgMap.put(cfg.getName(), cfg);
+			functionToCfg.put(cfg.getName(), cfg);
 		}
 		refreshTree();
 		return allCFGs;
@@ -122,17 +132,105 @@ public class FunctionSelectionPage extends WizardPage{
 		String functionName = item.getText();
 		if(item.getChecked()){
 			//add to selected functions
-			ControlFlowDiagram selectedCFG = cfgMap.get(functionName);
+			ControlFlowDiagram selectedCFG = functionToCfg.get(functionName);
 			this.selectedFunctions.add(selectedCFG);
 		}else{
 			//remove from selected functions
-			ControlFlowDiagram deselectedCFG = cfgMap.get(functionName);
+			ControlFlowDiagram deselectedCFG = functionToCfg.get(functionName);
 			this.selectedFunctions.remove(deselectedCFG);
+		}
+		
+		//compute not selected functions
+		ArrayList<ControlFlowDiagram> notSelectedFunctions = new ArrayList<ControlFlowDiagram>(allCFGs);
+		Collections.copy(notSelectedFunctions, allCFGs);
+		notSelectedFunctions.removeAll(selectedFunctions);
+		
+		List<String> dependencyIssues = new ArrayList<String>();
+		//display warning in case of dependency problems
+		for(ControlFlowDiagram selectedCfg: selectedFunctions){
+			for(ControlFlowDiagram notSelectedCfg: notSelectedFunctions){
+				//a still selected item does have a dependency for function to removed
+				if(cfgToDependentFunctions.get(selectedCfg) != null && cfgToDependentFunctions.get(selectedCfg).contains(notSelectedCfg)){
+					dependencyIssues.add("Function " + notSelectedCfg.getName() + " is required by " + selectedCfg.getName() + "! Check your selection!");
+				}
+			}
+		}
+		
+		if(!dependencyIssues.isEmpty()){
+			updateWarning(dependencyIssues.get(0),WARNING);
+		}else{
+			updateStatus(null);
+			setMessage("Please select the functions you wish to transform.");
 		}
 	}
 	
 	protected List<ControlFlowDiagram> getSelectedFunctions(){
 		return selectedFunctions;
+	}
+	
+	
+	/**
+	 * Displays a warning, but finishes the dialog
+	 * @param message
+	 * @param level
+	 */
+	private void updateWarning(String message, int level) {
+		setMessage(message, level);
+		setPageComplete(false);
+		updateStatus(null);
+		getControl().redraw();
+	}
+	
+	private void updateStatus(String message) {
+		setErrorMessage(message);
+		setPageComplete(message == null);
+	}
+	
+	
+	/**
+	 * TODO: dependencies between function
+	 */
+	private void computeDependencies(){
+		try{
+			for(int i = 0; i< allCFGs.size(); i++){
+				ControlFlowDiagram cfg = allCFGs.get(i);
+				EObject motherObject = cfg.getStart().getOutgoing().get(0).getInstruction().eContainer();
+				BasicBlock basicBlock = (BasicBlock) motherObject;
+				FunctionBody fb = (FunctionBody)basicBlock.eContainer();
+				FunctionDefinition fd = (FunctionDefinition)fb.eContainer();
+				
+				if(fd.getBody() != null){
+					for(BasicBlock b: fd.getBody().getBlocks()){
+						for(Instruction ins: b.getInstructions()){
+							if(ins instanceof Call){
+								String calledFunction = Utils.valueToString(((Call) ins).getFunction().getValue());
+								//if the function is to be generated and if its not a self-call (recursion)
+								if(functionToCfg.containsKey(calledFunction) && functionToCfg.get(calledFunction) != cfg){
+									addDependency(cfg, calledFunction);
+								}
+							}
+						}
+					}
+				}
+			}
+			
+		}catch(Exception ex){
+			Activator.logWarning("Could not compute function dependencies!", ex);
+		}
+	}
+	
+	private void addDependency(ControlFlowDiagram callingCfg, String calledFunction){
+		//Create empty entry if first dependency for that cfg
+		if(!cfgToDependentFunctions.containsKey(callingCfg)){
+			cfgToDependentFunctions.put(callingCfg,new ArrayList<ControlFlowDiagram>());
+		}
+		
+		//create entry
+		List<ControlFlowDiagram> dependentFuncs =  cfgToDependentFunctions.get(callingCfg);
+		ControlFlowDiagram calledCfg = functionToCfg.get(calledFunction);
+		if(!dependentFuncs.contains(calledCfg)){
+			dependentFuncs.add(calledCfg);
+		}
 	}
 
 }

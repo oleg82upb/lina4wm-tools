@@ -86,6 +86,15 @@ public interface GendataFactory extends EFactory
 	TransitionLabel createTransitionLabel();
 
 	/**
+	 * Returns a new object of class '<em>Phi Mapping</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Phi Mapping</em>'.
+	 * @generated
+	 */
+	PhiMapping createPhiMapping();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

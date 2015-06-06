@@ -150,31 +150,13 @@ public interface GendataPackage extends EPackage
 	int GENERATOR_DATA__PARAMETER_MAPPINGS = 4;
 
 	/**
-	 * The feature id for the '<em><b>Needs Get Element Ptr</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERATOR_DATA__NEEDS_GET_ELEMENT_PTR = 5;
-
-	/**
-	 * The feature id for the '<em><b>Needs Cas</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERATOR_DATA__NEEDS_CAS = 6;
-
-	/**
 	 * The feature id for the '<em><b>Location Labels</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA__LOCATION_LABELS = 7;
+	int GENERATOR_DATA__LOCATION_LABELS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Transition Labels</b></em>' containment reference list.
@@ -183,7 +165,25 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA__TRANSITION_LABELS = 8;
+	int GENERATOR_DATA__TRANSITION_LABELS = 6;
+
+	/**
+	 * The feature id for the '<em><b>Required Base Functions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_DATA__REQUIRED_BASE_FUNCTIONS = 7;
+
+	/**
+	 * The feature id for the '<em><b>Phi Mappings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_DATA__PHI_MAPPINGS = 8;
 
 	/**
 	 * The number of structural features of the '<em>Generator Data</em>' class.
@@ -380,31 +380,13 @@ public interface GendataPackage extends EPackage
 	int FUNCTION_PARAMS_MAPPING__NEEDS_RETURN_VALUE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Needs Get Element Ptr</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_PARAMS_MAPPING__NEEDS_GET_ELEMENT_PTR = 3;
-
-	/**
-	 * The feature id for the '<em><b>Needs Cas</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_PARAMS_MAPPING__NEEDS_CAS = 4;
-
-	/**
 	 * The feature id for the '<em><b>Var Names In Function</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_PARAMS_MAPPING__VAR_NAMES_IN_FUNCTION = 5;
+	int FUNCTION_PARAMS_MAPPING__VAR_NAMES_IN_FUNCTION = 3;
 
 	/**
 	 * The number of structural features of the '<em>Function Params Mapping</em>' class.
@@ -413,7 +395,7 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_PARAMS_MAPPING_FEATURE_COUNT = 6;
+	int FUNCTION_PARAMS_MAPPING_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Function Params Mapping</em>' class.
@@ -519,6 +501,62 @@ public interface GendataPackage extends EPackage
 
 
 	/**
+	 * The meta object id for the '{@link de.upb.lina.cfg.gendata.impl.PhiMappingImpl <em>Phi Mapping</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.upb.lina.cfg.gendata.impl.PhiMappingImpl
+	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getPhiMapping()
+	 * @generated
+	 */
+	int PHI_MAPPING = 8;
+
+	/**
+	 * The feature id for the '<em><b>Transition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHI_MAPPING__TRANSITION = 0;
+
+	/**
+	 * The feature id for the '<em><b>Phi</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHI_MAPPING__PHI = 1;
+
+	/**
+	 * The feature id for the '<em><b>Block Label To Use</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHI_MAPPING__BLOCK_LABEL_TO_USE = 2;
+
+	/**
+	 * The number of structural features of the '<em>Phi Mapping</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHI_MAPPING_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Phi Mapping</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHI_MAPPING_OPERATION_COUNT = 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.LocalVariables <em>Local Variables</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -605,28 +643,6 @@ public interface GendataPackage extends EPackage
 	EReference getGeneratorData_ParameterMappings();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.gendata.GeneratorData#isNeedsGetElementPtr <em>Needs Get Element Ptr</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Needs Get Element Ptr</em>'.
-	 * @see de.upb.lina.cfg.gendata.GeneratorData#isNeedsGetElementPtr()
-	 * @see #getGeneratorData()
-	 * @generated
-	 */
-	EAttribute getGeneratorData_NeedsGetElementPtr();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.gendata.GeneratorData#isNeedsCas <em>Needs Cas</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Needs Cas</em>'.
-	 * @see de.upb.lina.cfg.gendata.GeneratorData#isNeedsCas()
-	 * @see #getGeneratorData()
-	 * @generated
-	 */
-	EAttribute getGeneratorData_NeedsCas();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link de.upb.lina.cfg.gendata.GeneratorData#getLocationLabels <em>Location Labels</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -647,6 +663,28 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 */
 	EReference getGeneratorData_TransitionLabels();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link de.upb.lina.cfg.gendata.GeneratorData#getRequiredBaseFunctions <em>Required Base Functions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Required Base Functions</em>'.
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getRequiredBaseFunctions()
+	 * @see #getGeneratorData()
+	 * @generated
+	 */
+	EAttribute getGeneratorData_RequiredBaseFunctions();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.upb.lina.cfg.gendata.GeneratorData#getPhiMappings <em>Phi Mappings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Phi Mappings</em>'.
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getPhiMappings()
+	 * @see #getGeneratorData()
+	 * @generated
+	 */
+	EReference getGeneratorData_PhiMappings();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.AddressMapping <em>Address Mapping</em>}'.
@@ -756,28 +794,6 @@ public interface GendataPackage extends EPackage
 	EAttribute getFunctionParamsMapping_NeedsReturnValue();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#isNeedsGetElementPtr <em>Needs Get Element Ptr</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Needs Get Element Ptr</em>'.
-	 * @see de.upb.lina.cfg.gendata.FunctionParamsMapping#isNeedsGetElementPtr()
-	 * @see #getFunctionParamsMapping()
-	 * @generated
-	 */
-	EAttribute getFunctionParamsMapping_NeedsGetElementPtr();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#isNeedsCas <em>Needs Cas</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Needs Cas</em>'.
-	 * @see de.upb.lina.cfg.gendata.FunctionParamsMapping#isNeedsCas()
-	 * @see #getFunctionParamsMapping()
-	 * @generated
-	 */
-	EAttribute getFunctionParamsMapping_NeedsCas();
-
-	/**
 	 * Returns the meta object for the attribute list '{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#getVarNamesInFunction <em>Var Names In Function</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -850,6 +866,49 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 */
 	EReference getTransitionLabel_Transition();
+
+	/**
+	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.PhiMapping <em>Phi Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Phi Mapping</em>'.
+	 * @see de.upb.lina.cfg.gendata.PhiMapping
+	 * @generated
+	 */
+	EClass getPhiMapping();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.gendata.PhiMapping#getTransition <em>Transition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Transition</em>'.
+	 * @see de.upb.lina.cfg.gendata.PhiMapping#getTransition()
+	 * @see #getPhiMapping()
+	 * @generated
+	 */
+	EReference getPhiMapping_Transition();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.upb.lina.cfg.gendata.PhiMapping#getPhi <em>Phi</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Phi</em>'.
+	 * @see de.upb.lina.cfg.gendata.PhiMapping#getPhi()
+	 * @see #getPhiMapping()
+	 * @generated
+	 */
+	EReference getPhiMapping_Phi();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.gendata.PhiMapping#getBlockLabelToUse <em>Block Label To Use</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Block Label To Use</em>'.
+	 * @see de.upb.lina.cfg.gendata.PhiMapping#getBlockLabelToUse()
+	 * @see #getPhiMapping()
+	 * @generated
+	 */
+	EAttribute getPhiMapping_BlockLabelToUse();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -944,22 +1003,6 @@ public interface GendataPackage extends EPackage
 		EReference GENERATOR_DATA__PARAMETER_MAPPINGS = eINSTANCE.getGeneratorData_ParameterMappings();
 
 		/**
-		 * The meta object literal for the '<em><b>Needs Get Element Ptr</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute GENERATOR_DATA__NEEDS_GET_ELEMENT_PTR = eINSTANCE.getGeneratorData_NeedsGetElementPtr();
-
-		/**
-		 * The meta object literal for the '<em><b>Needs Cas</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute GENERATOR_DATA__NEEDS_CAS = eINSTANCE.getGeneratorData_NeedsCas();
-
-		/**
 		 * The meta object literal for the '<em><b>Location Labels</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -974,6 +1017,22 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EReference GENERATOR_DATA__TRANSITION_LABELS = eINSTANCE.getGeneratorData_TransitionLabels();
+
+		/**
+		 * The meta object literal for the '<em><b>Required Base Functions</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GENERATOR_DATA__REQUIRED_BASE_FUNCTIONS = eINSTANCE.getGeneratorData_RequiredBaseFunctions();
+
+		/**
+		 * The meta object literal for the '<em><b>Phi Mappings</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GENERATOR_DATA__PHI_MAPPINGS = eINSTANCE.getGeneratorData_PhiMappings();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.AddressMappingImpl <em>Address Mapping</em>}' class.
@@ -1062,22 +1121,6 @@ public interface GendataPackage extends EPackage
 		EAttribute FUNCTION_PARAMS_MAPPING__NEEDS_RETURN_VALUE = eINSTANCE.getFunctionParamsMapping_NeedsReturnValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Needs Get Element Ptr</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FUNCTION_PARAMS_MAPPING__NEEDS_GET_ELEMENT_PTR = eINSTANCE.getFunctionParamsMapping_NeedsGetElementPtr();
-
-		/**
-		 * The meta object literal for the '<em><b>Needs Cas</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FUNCTION_PARAMS_MAPPING__NEEDS_CAS = eINSTANCE.getFunctionParamsMapping_NeedsCas();
-
-		/**
 		 * The meta object literal for the '<em><b>Var Names In Function</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1138,6 +1181,40 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EReference TRANSITION_LABEL__TRANSITION = eINSTANCE.getTransitionLabel_Transition();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.PhiMappingImpl <em>Phi Mapping</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.lina.cfg.gendata.impl.PhiMappingImpl
+		 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getPhiMapping()
+		 * @generated
+		 */
+		EClass PHI_MAPPING = eINSTANCE.getPhiMapping();
+
+		/**
+		 * The meta object literal for the '<em><b>Transition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PHI_MAPPING__TRANSITION = eINSTANCE.getPhiMapping_Transition();
+
+		/**
+		 * The meta object literal for the '<em><b>Phi</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PHI_MAPPING__PHI = eINSTANCE.getPhiMapping_Phi();
+
+		/**
+		 * The meta object literal for the '<em><b>Block Label To Use</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PHI_MAPPING__BLOCK_LABEL_TO_USE = eINSTANCE.getPhiMapping_BlockLabelToUse();
 
 	}
 
