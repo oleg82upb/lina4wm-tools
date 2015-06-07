@@ -26,18 +26,20 @@ public abstract class TransformationOperation extends WorkspaceModifyOperation{
 	protected String targetContainer;
 	protected String targetName;
 	protected String fileEnding;
+	protected int basis;
 	protected java.nio.file.Path fullPath;
 	
 	protected List<ControlFlowDiagram> cfgList;
 	protected GeneratorData genData;
 	
 	
-	public TransformationOperation(List<ControlFlowDiagram> cfgs, String targetContainer, String targetName, String fileEnding) {
+	public TransformationOperation(List<ControlFlowDiagram> cfgs, String targetContainer, String targetName, String fileEnding, int basis) {
 //		this.graphModelFileLocation = graphModelFileLocation;
 		this.cfgList = cfgs;
 		this.targetContainer = targetContainer; 
 		this.targetName = targetName;
 		this.fileEnding = fileEnding;
+		this.basis = basis;
 	}
 	
 	
@@ -49,7 +51,7 @@ public abstract class TransformationOperation extends WorkspaceModifyOperation{
 //		loadCfg();
 		
 		//Run Precomputation
-		GendataPrecomputer precomp = new GendataPrecomputer(cfgList);
+		GendataPrecomputer precomp = new GendataPrecomputer(cfgList, basis);
 		genData = precomp.computeGeneratorData();
 		
 		//get workspace root

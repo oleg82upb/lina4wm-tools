@@ -30,7 +30,9 @@ public class TransformationWizard extends Wizard implements INewWizard {
 			wmo = new PromelaTransformationOperation(functionSelectionPage.getSelectedFunctions(), wizardPage.getContainerText().getText(), wizardPage.getFileText().getText(), wizardPage.getFileEndingLabel().getText());
 		}else if (wizardPage.getType() == ETransformationTarget.KIV){
 			//KIV
-			wmo = new KivTransformationOperation(functionSelectionPage.getSelectedFunctions(), wizardPage.getContainerText().getText(), wizardPage.getFileText().getText(), wizardPage.getFileEndingLabel().getText());
+			wmo = new KivTransformationOperation(functionSelectionPage.getSelectedFunctions(), wizardPage
+					.getContainerText().getText(), wizardPage.getFileText().getText(), wizardPage.getFileEndingLabel()
+					.getText(), wizardPage.getBasis());
 		}
 		
 		try {

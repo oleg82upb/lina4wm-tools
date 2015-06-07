@@ -6,13 +6,9 @@
 
 [file ( 'localstate.utf8', false, 'UTF-8')]
 data specification
-	using int, PC, PID
-	Localstate :=mkls( . .pc : PC;
-				   . .pid : PID;
-[for (name: String | genData.localVariables.variables.name)]
-				   . .[name/] : int;
-[/for]
-				);
+	using [basis(genData)/], PC, PID
+	Localstate :=mkls( . .pc : PC; . .pid : PID;
+					[for (name: String | genData.localVariables.variables.name)] . .[name/] : [basis(genData)/];[/for] );
 	variables
 		ls : Localstate;
 end data specification
@@ -20,11 +16,7 @@ end data specification
 
 [file ('PC.utf8', false, 'UTF-8')]
 data specification
-	PC = 
-[for (l : LocationLabel | genData.locationLabels)]
-	[l.name/] |
-[/for]
-	N;
+	PC =[for (l : LocationLabel | genData.locationLabels) separator  ('|')] [l.name/] [/for] | N;
 variables
 pc : PC;
 
@@ -42,13 +34,9 @@ end specification
 
 [file ('cindex.utf8', false, 'UTF-8')]
 data specification
-	IJ = [for (cfg : ControlFlowDiagram | genData.cfgs)]
- 	[cfg.name/]ini |
- 		[/for]
-	CJ = [for (label : TransitionLabel | genData.transitionLabels)]
-				[label/]
-			[/for]
-	RJ = [for (cfg : ControlFlowDiagram | genData.cfgs)] [cfg.name/]ret |[/for]
+	IJ = [for (cfg : ControlFlowDiagram | genData.cfgs) separator ('|')] [generateCfgLabel(genData, cfg)/]ini [/for];
+	CJ = [for (label : TransitionLabel | genData.transitionLabels)separator ('|')] [label.name/] [/for];
+	RJ = [for (cfg : ControlFlowDiagram | genData.cfgs)separator ('|')] [generateCfgLabel(genData, cfg)/]ret [/for];
 	
 	variables
 		ij : IJ;
@@ -58,33 +46,80 @@ end data specification
 [/file]
 
 [file ('COP.utf8', false, 'UTF-8')]
-enrich 	natref-memory,
+enrich 	[basis(genData)/]ref-memory,
 		localstate,
 		cindex with
-	constants
-		owner : PID;
-	...
+
+
+[comment UTF-8 encoding of special symbols needed in KIV-specification /]
+[comment → implies  /]
+[comment × times  /]
+[comment ↔ equivalent /]
+[comment ∧ and /]
+[comment ⊦ follows /]
 
 
 	functions
-		INVOP : IJ ...
-		COP : CJ gs � cs...
-		RETOP : RJ ...
+		INVOP : IJ → [basis(genData)/] ×  memory ×  Localstate ×  memory ×  Localstate → bool;
+		COP : CJ → memory × Localstate × memory × Localstate → bool;
+		RETOP : RJ → memory × Localstate × memory × Localstate × ref → bool;
 	predicates
-		LSInit : ...
+		LSInit : Localstate × PID;
 		GSInit : memory;
 	variables
-		invop : ...
-		cop : ...
-		retop : ...
+		invop : [basis(genData)/] × memory × Localstate × memory × Localstate → bool;
+		cop : memory × Localstate × memory × Localstate → bool;
+		retop : memory × Localstate × memory × Localstate × ref → bool;
 		mem' : memory;
 		ls' : Localstate;
-		elem : nat;
+		elem : [basis(genData)/];
 		return : ref;
 
 	axioms
+
+	LSInit : ⊦ LSInit(ls, p) ↔ ls .pc = N ∧ ls .pid = p;
+	used for : s, ls;
+
+	[for (cfg : ControlFlowDiagram | genData.cfgs)] 
+	[generateCfgLabel(genData, cfg)/]ini : ⊦ INVOP([generateCfgLabel(genData, cfg)/]ini)(elem, mem, ls, mem', ls') ↔ ls .pc = N ∧ ls' = ls .pc:= [generateStartPC(genData, cfg)/] .elem:= elem ∧ mem' = mem;
+	used for : s, ls;
+
+	[/for]
+	[for (label : TransitionLabel | genData.transitionLabels)][if(label.transition.instruction.oclIsUndefined()._or(label.transition.instruction.oclIsTypeOf(Return)._not()))]
+	[label.name/] : ⊦ COP([label.name/])(mem, ls, mem', ls') ↔ ls .pc = [genData.generatePrevPC(genData, label.transition)/] ∧ ls' = ls .pc:= [generateNextPC(genData, label.transition)/]
+	used for : s, ls;
+	
+	[else]
+	[label.name/]ret : ⊦ RETOP([label.name/]ret)(mem, ls, mem', ls', return) ↔ ls .pc = [genData.generatePrevPC(genData, label.transition)/] ∧ ls' = ls .pc:= N ∧ return = ls .ret ∧ mem' = mem;
+	used for : s, ls;
+
+	[/if][/for]
+
+end enrich
 		
 [/file]
 
 [/template]
 
+
+[template public generatePrevPC(genData: GeneratorData, transition: Transition)]
+[for (label : LocationLabel | genData.locationLabels)][if(label.controlFlowLocation = transition.source)][label.name/][/if][/for]
+[/template]
+
+[template public generateNextPC(genData: GeneratorData, transition: Transition)]
+[for (label : LocationLabel | genData.locationLabels)][if(label.controlFlowLocation = transition.target)][label.name/][/if][/for]
+[/template]
+
+[template public generateCfgLabel(genData : GeneratorData, cfg : ControlFlowDiagram)]
+[for (l : LocationLabel | genData.locationLabels)][if (l.controlFlowLocation = cfg.start)]
+[l.name.substring(1, 1).toLowerCase()/][/if][/for]
+[/template]
+
+[template public generateStartPC(genData : GeneratorData, cfg : ControlFlowDiagram)]
+[for (l : ControlFlowLocation | cfg.locations)]
+[if (l = cfg.start)][for (label : LocationLabel | genData.locationLabels)][if (l = label.controlFlowLocation)][label.name/][/if][/for][/if][/for]
+[/template]
+
+[template public basis(genData : GeneratorData)]
+[for(basis: String | genData.requiredBaseFunctions)][if (basis.equalsIgnoreCase('INT'))]int[/if][if (basis.equalsIgnoreCase('NAT'))]nat[/if][/for]
+[/template]

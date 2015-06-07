@@ -20,6 +20,8 @@ import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.lina.cfg.gendata.LocalVariables;
 import de.upb.lina.cfg.gendata.LocationLabel;
 import de.upb.lina.cfg.gendata.PhiMapping;
+import de.upb.lina.cfg.gendata.TransitionLabel;
+import de.upb.lina.transformations.wizards.TransformationWizardPage;
 import de.upb.llvm_parser.llvm.AbstractElement;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
@@ -70,6 +72,7 @@ public class GendataPrecomputer {
 	private static final String GETELEMENTPTR = "getelementptr";
 
 	private List<ControlFlowDiagram> cfgs;
+	private int basis;
 	private GeneratorData helperModel;
 
 	private HashMap <Address, String> addressLookup = new HashMap<Address, String>();
@@ -77,8 +80,9 @@ public class GendataPrecomputer {
 
 	private HashMap<FunctionDefinition, List<String>> usedVarsInFunctions = new HashMap<FunctionDefinition, List<String>>();
 
-	public GendataPrecomputer(List<ControlFlowDiagram> cfgs){
+	public GendataPrecomputer(List<ControlFlowDiagram> cfgs, int basis){
 		this.cfgs = cfgs;
+		this.basis = basis;
 	}
 
 	public GeneratorData computeGeneratorData(){
@@ -132,10 +136,21 @@ public class GendataPrecomputer {
 
 			//phi mappings
 			computePhiMapping(helperModel.getPhiMappings());
+			
+			//KIV transformation basis
+			addBasis();
 
 
 		}catch(ClassCastException ex){
 			Activator.logError("Could not link LLVM program to this transformation.", ex);
+		}
+	}
+
+	private void addBasis() {
+		if(basis == TransformationWizardPage.INT){
+			helperModel.getRequiredBaseFunctions().add("INT");
+		}else if(basis == TransformationWizardPage.NAT){
+			helperModel.getRequiredBaseFunctions().add("NAT");
 		}
 	}
 
@@ -246,8 +261,24 @@ public class GendataPrecomputer {
 
 	private void initTransitionLabels(LocalVariables localVars) {
 
-		// TODO Auto-generated method stub
-
+		for(ControlFlowDiagram cfg : cfgs){
+			int size = 1;
+			for(Transition t : cfg.getTransitions()){
+				String labelName = generateTransitionLabel(t, size);
+				List<TransitionLabel> labels = helperModel.getTransitionLabels();
+				TransitionLabel transitionLabel = GendataFactory.eINSTANCE.createTransitionLabel();
+				transitionLabel.setName(labelName);
+				transitionLabel.setTransition(t);
+				labels.add(transitionLabel);
+				size++;
+			}
+		}
+	}
+	
+	private String generateTransitionLabel(Transition transition, int size){
+		String sizeString = String.valueOf(size);
+		String transitionLabel = cfgToLabelPrefix.get(transition.getDiagram()).toLowerCase()+sizeString;		
+		return transitionLabel;
 	}
 
 	private void initLocationLabels(LocalVariables localVars){
