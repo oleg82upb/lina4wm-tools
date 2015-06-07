@@ -154,7 +154,6 @@ public class GendataPrecomputer {
 							if(!blockLabelToPhiInstructions.get(b.getLabel()).contains(i)){
 								blockLabelToPhiInstructions.get(b.getLabel()).add((Phi)i);
 							}
-//							System.out.println(((Phi)(i)).getCases().get(0).getLabel());
 						}
 					}
 				}
@@ -171,8 +170,6 @@ public class GendataPrecomputer {
 						if(!blockLabelToPhiInstructions.get(t.getTarget().getBlockLabel()).isEmpty()){
 							PhiMapping mapping = constructPhiMapping(inc, blockLabelToPhiInstructions.get(t.getTarget().getBlockLabel()), "%" + inc.getSource().getBlockLabel());
 							phiMappings.add(mapping);
-//							System.out.println("Mapping: " + mapping.getBlockLabelToUse());
-//							System.out.println(inc.getSource());
 						}
 					}
 				}
@@ -610,10 +607,18 @@ public class GendataPrecomputer {
 				addressCopy = a;
 			}
 		}
-
-		//check if already have a mapping for that address
-		if(!isAddressMapped(addressCopy, mapping)){
-
+		
+		
+		AddressMapping correspondingMapping = getMappingForAddress(addressCopy, mapping);
+		//if corresponding mapping found
+		if(correspondingMapping != null){
+			//if that address is not yet contained
+			if(!doesContainAddress(addressCopy, correspondingMapping)){
+				correspondingMapping.getAdresses().add(addressCopy);
+				addressLookup.put(addressCopy, correspondingMapping.getName());
+			}
+		//no mapping found, create new one
+		}else{
 			//create new addressmapping
 			AddressMapping addressMapping = createAddressMapping(addressCopy, Utils.clean(addressCopy.getName()));
 
@@ -621,11 +626,58 @@ public class GendataPrecomputer {
 			addressLookup.put(addressCopy, addressMapping.getName());
 		}
 
+//		//check if already have a mapping for that address
+//		if(hasMappingForAddress(addressCopy, mapping)){
+//			
+//		}else if(!isAddressMapped(addressCopy, mapping)){
+//
+//			//create new addressmapping
+//			AddressMapping addressMapping = createAddressMapping(addressCopy, Utils.clean(addressCopy.getName()));
+//
+//			mapping.add(addressMapping);
+//			addressLookup.put(addressCopy, addressMapping.getName());
+//		}
+
 		// add used vars to the list
 		FunctionDefinition fun = getFunctionForCfg(cfg);
 		if(!addressCopy.getName().startsWith("@") && !usedVarsInFunctions.get(fun).contains(addressLookup.get(addressCopy))){
 			usedVarsInFunctions.get(fun).add(addressLookup.get(addressCopy));
 		}
+	}
+
+	/**
+	 * Returns the mapping for the given address if there already exists a mapping
+	 * that corresponds to the same varname. If no such mapping is yet constructed, it returns null.
+	 * @param address
+	 * @param mapping
+	 * @return
+	 */
+	private AddressMapping getMappingForAddress(Address address,
+			List<AddressMapping> mapping) {
+		for(AddressMapping am: mapping){
+			for(Address a: am.getAdresses()){
+				if(a.getName().equals(address.getName())){
+					return am;
+				}
+			}
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Returns true if the given mapping does have an entry for the address to search.
+	 * @param toSearch
+	 * @param mapping
+	 * @return
+	 */
+	private boolean doesContainAddress(Address toSearch, AddressMapping mapping){
+		for(Address a: mapping.getAdresses()){
+			if(a.equals(toSearch)){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private boolean isAddressMapped(Address address, List<AddressMapping> mapping){

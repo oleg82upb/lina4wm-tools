@@ -390,9 +390,7 @@ endif
 endif
 /]
 
-[template public genInstruction(e : Switch, genData: GeneratorData)]
-//TODO: switch
-[/template]
+[template public genInstruction(e : Switch, genData: GeneratorData)][/template]
 
 [template public genInstruction(e : Unreachable, genData: GeneratorData)]
 //TODO: Unreachable
