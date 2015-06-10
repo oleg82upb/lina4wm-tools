@@ -139,6 +139,7 @@ public class GendataPrecomputer {
 			
 			//KIV transformation basis
 			addBasis();
+			checkForMulOrDiv();
 
 
 		}catch(ClassCastException ex){
@@ -152,6 +153,12 @@ public class GendataPrecomputer {
 		}else if(basis == TransformationWizardPage.NAT){
 			helperModel.getRequiredBaseFunctions().add("NAT");
 		}
+	}
+	
+	private void checkForMulOrDiv(){
+		String s = Utils.checkForMulOrDiv(cfgs);
+		if(s != null)
+			helperModel.getRequiredBaseFunctions().add(s);
 	}
 
 	private void computePhiMapping(List<PhiMapping> phiMappings){
@@ -543,6 +550,7 @@ public class GendataPrecomputer {
 							}else if(i instanceof Alloc){
 								Alloc op = (Alloc)i;
 								addToMapping(mapping, matchingCfg, op.getResult());
+								if(op.getNumOfElements()!=null)
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getNumOfElements().getValue()));
 
 							}else if(i instanceof Phi){

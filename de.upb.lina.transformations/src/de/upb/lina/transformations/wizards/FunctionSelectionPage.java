@@ -69,7 +69,6 @@ public class FunctionSelectionPage extends WizardPage{
 		column.setWidth(450);
 		tree.setHeaderVisible(true);
 		loadCfg();
-		computeDependencies();
 		
 		tree.addListener(SWT.Selection, new Listener(){
 
@@ -125,6 +124,7 @@ public class FunctionSelectionPage extends WizardPage{
 			functionToCfg.put(cfg.getName(), cfg);
 		}
 		refreshTree();
+		computeDependencies();
 		return allCFGs;
 	}
 	
