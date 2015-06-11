@@ -189,6 +189,8 @@ public class FunctionSelectionPage extends WizardPage{
 		
 		if(!dependencyIssues.isEmpty()){
 			updateWarning(dependencyIssues.get(0),WARNING);
+		}else if(selectedFunctions.isEmpty()){
+			updateStatus("Please select at least one function");
 		}else{
 			updateStatus(null);
 			setMessage("Please select the functions you wish to transform.");
