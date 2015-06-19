@@ -9,9 +9,9 @@ import org.eclipse.emf.ecore.EObject;
 import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
-import de.upb.lina.cfg.controlflow.FlushTransition;
 import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.Transition;
+import de.upb.lina.cfg.controlflow.WriteDefChainTransition;
 import de.upb.lina.cfg.gendata.AddressMapping;
 import de.upb.lina.cfg.gendata.ConstraintMapping;
 import de.upb.lina.cfg.gendata.FunctionParamsMapping;
@@ -299,6 +299,10 @@ public class GendataPrecomputer {
 				if(iteratedBuffers.contains(bufferRep)){
 					conflictingLocs.add(l);
 				}
+				else
+				{
+					iteratedBuffers.add(bufferRep);
+				}
 			}
 
 			for(ControlFlowLocation l: cfg.getLocations()){
@@ -472,6 +476,23 @@ public class GendataPrecomputer {
 	private void initLocalVariables(LocalVariables localVars, LLVM program) throws IllegalArgumentException{
 		List<AddressMapping> mapping = localVars.getVariables();
 
+		//map copyVars from writeDefChain
+		for(ControlFlowDiagram cfg : cfgs){
+			for(Transition t : cfg.getTransitions()){
+				if(t instanceof WriteDefChainTransition){
+					WriteDefChainTransition wdcTransition = (WriteDefChainTransition) t;
+					if(wdcTransition.getCopyAddress() != null){
+						Address copyAddress = wdcTransition.getCopyAddress();
+						addToMapping(mapping, cfg, copyAddress);
+					}
+					if(wdcTransition.getCopyValue() != null){
+						Address copyValue = wdcTransition.getCopyValue();
+						addToMapping(mapping, cfg, copyValue);
+					}
+				}
+			}
+		}
+		
 		//collect all addresses
 		for(AbstractElement ele: program.getElements()){
 			if(ele instanceof FunctionDefinition){
@@ -641,29 +662,21 @@ public class GendataPrecomputer {
 		if(address == null){
 			return;
 		}
-		Address addressCopy = address;
-
-		//check if address was redefined
-		for(Address a: cfg.getVariableCopies()){
-			if(a.getName().replaceAll("Copy", "").equalsIgnoreCase(address.getName())){
-				addressCopy = a;
-			}
-		}
 
 		//check if already have a mapping for that address
-		if(!isAddressMapped(addressCopy, mapping)){
+		if(!isAddressMapped(address, mapping)){
 
 			//create new addressmapping
-			AddressMapping addressMapping = createAddressMapping(addressCopy, Utils.clean(addressCopy.getName()));
+			AddressMapping addressMapping = createAddressMapping(address, Utils.clean(address.getName()));
 
 			mapping.add(addressMapping);
-			addressLookup.put(addressCopy, addressMapping.getName());
+			addressLookup.put(address, addressMapping.getName());
 		}
 
 		// add used vars to the list
 		FunctionDefinition fun = getFunctionForCfg(cfg);
-		if(!addressCopy.getName().startsWith("@") && !usedVarsInFunctions.get(fun).contains(addressLookup.get(addressCopy))){
-			usedVarsInFunctions.get(fun).add(addressLookup.get(addressCopy));
+		if(!address.getName().startsWith("@") && !usedVarsInFunctions.get(fun).contains(addressLookup.get(address))){
+			usedVarsInFunctions.get(fun).add(addressLookup.get(address));
 		}
 	}
 
@@ -671,7 +684,7 @@ public class GendataPrecomputer {
 		for(AddressMapping am: mapping){
 			for(Address a: am.getAdresses()){
 				//				if(a.getName().equals(address.getName())){
-				if(a.equals(address)){
+				if(a.getName().equals(address.getName())){
 					//System.out.println("a-name: " + a.getName() + "address: " + address.getName());
 					return true;
 				}
