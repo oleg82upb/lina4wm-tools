@@ -75,6 +75,12 @@ public class TransformationWizardPage extends WizardPage {
 	//1 - kif
 	private int type = 0;
 	private Combo cb_model;
+	
+	private Combo cb_basis;
+	public static final int NAT = 0;
+	public static final int INT = 1;
+	private int basis = NAT;
+
 	private FunctionSelectionPage nextPage;
 	private IMemento memento;
 
@@ -167,8 +173,12 @@ public class TransformationWizardPage extends WizardPage {
 				type = cb_model.getSelectionIndex();
 				if(type == 1){
 					tx_file.setEnabled(false);
+					if(cb_basis != null)
+					cb_basis.setEnabled(true);
 				}else{
 					tx_file.setEnabled(true);
+					if(cb_basis != null)
+					cb_basis.setEnabled(false);
 				}
 				validateInput();
 			}
@@ -176,6 +186,24 @@ public class TransformationWizardPage extends WizardPage {
 
 		cb_model.select(0);
 		cb_model.setEnabled(true);
+				
+		/*KIV transformation basis select */
+		new Label(container, SWT.NONE);
+		new Label(container, SWT.NULL).setText("Transformation based on ");
+		cb_basis = new Combo(container, SWT.NULL);
+		String[] basisTypes = new String[] { "nat", "int" };
+		for (int i = 0; i < basisTypes.length; i++){
+			cb_basis.add(basisTypes[i]);
+		}
+		cb_basis.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent e) {
+				basis = cb_basis.getSelectionIndex();
+			}
+		});
+		
+		cb_basis.select(NAT);
+		cb_basis.setEnabled(false);
+		
 		setControl(container);
 				if (memento != null) {
 					tx_graphModelFile.setText(memento.getString(CFGLOC));
@@ -579,7 +607,9 @@ public class TransformationWizardPage extends WizardPage {
 	public Label getFileEndingLabel(){
 		return lb_fileEnding;
 	}
-
-
+	
+	public int getBasis() {
+		return basis;
+	}
 
 }

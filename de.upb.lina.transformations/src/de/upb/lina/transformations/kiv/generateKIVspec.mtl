@@ -6,13 +6,9 @@
 
 [file ( 'localstate.utf8', false, 'UTF-8')]
 data specification
-	using int, PC, PID
-	Localstate :=mkls( . .pc : PC;
-				   . .pid : PID;
-[for (name: String | genData.localVariables.variables.name)]
-				   . .[name/] : int;
-[/for]
-				);
+	using [basis(genData)/], PC, PID
+	Localstate :=mkls( . .pc : PC; . .pid : PID;
+					[for (name: String | genData.localVariables.variables.name)] . .[name/] : [basis(genData)/];[/for] );
 	variables
 		ls : Localstate;
 end data specification
@@ -20,11 +16,7 @@ end data specification
 
 [file ('PC.utf8', false, 'UTF-8')]
 data specification
-	PC = 
-[for (l : LocationLabel | genData.locationLabels)]
-	[l.name/] |
-[/for]
-	N;
+	PC =[for (l : LocationLabel | genData.locationLabels) separator  ('|')] [l.name/] [/for] | N;
 variables
 pc : PC;
 
@@ -42,14 +34,9 @@ end specification
 
 [file ('cindex.utf8', false, 'UTF-8')]
 data specification
-	IJ = [for (cfg : ControlFlowDiagram | genData.cfgs)]
- 	[cfg.name/]ini |
- 		[/for]
-	CJ = [for (label : TransitionLabel | genData.transitionLabels)]
-				[label/]
-			[/for]
-	RJ = [for (cfg : ControlFlowDiagram | genData.cfgs)] [cfg.name/]ret |[/for]
-	
+	IJ = [for (cfg : ControlFlowDiagram | genData.cfgs) separator ('|')] [generateCfgLabel(genData, cfg)/]ini [/for];
+	CJ = [for (label : TransitionLabel | genData.transitionLabels)separator ('|')] [label.name/] [/for];
+	RJ = [for (label : TransitionLabel | genData.transitionLabels->select(transition.instruction.oclIsUndefined()._not()._and((transition.instruction.eClass() = Return))))separator ('|')] [label.name/]ret [/for];
 	variables
 		ij : IJ;
 		cj : CJ;
@@ -58,33 +45,190 @@ end data specification
 [/file]
 
 [file ('COP.utf8', false, 'UTF-8')]
-enrich 	natref-memory,
+enrich 	[basis(genData)/]ref-memory,
 		localstate,
 		cindex with
-	constants
-		owner : PID;
-	...
 
-
+[comment UTF-8 encoding of special symbols needed in KIV-specification /]
+[comment â†’ implies  /]
+[comment Ã— times  /]
+[comment â†” equivalent /]
+[comment âˆ§ and /]
+[comment âŠ¦ follows /]
 	functions
-		INVOP : IJ ...
-		COP : CJ gs � cs...
-		RETOP : RJ ...
+		INVOP : IJ → [basis(genData)/] ×  memory ×  Localstate ×  memory ×  Localstate → bool;
+		COP : CJ → memory × Localstate × memory × Localstate → bool;
+		RETOP : RJ → memory × Localstate × memory × Localstate × ref → bool;
 	predicates
-		LSInit : ...
+		LSInit : Localstate × PID;
 		GSInit : memory;
 	variables
-		invop : ...
-		cop : ...
-		retop : ...
+		invop : [basis(genData)/] × memory × Localstate × memory × Localstate → bool;
+		cop : memory × Localstate × memory × Localstate → bool;
+		retop : memory × Localstate × memory × Localstate × ref → bool;
 		mem' : memory;
 		ls' : Localstate;
-		elem : nat;
+		elem : [basis(genData)/];
 		return : ref;
 
 	axioms
+
+	LSInit : ⊦ LSInit(ls, p) ↔ ls .pc = N ∧ ls .pid = p;
+	used for : s, ls;
+
+	[for (cfg : ControlFlowDiagram | genData.cfgs)] 
+	[generateCfgLabel(genData, cfg)/]ini : ⊦ INVOP([generateCfgLabel(genData, cfg)/]ini)(elem, mem, ls, mem', ls') ↔ ls .pc = N ∧ ls' = ls .pc:= [generateStartPC(genData, cfg)/] ∧ mem' = mem;
+	used for : s, ls;
+
+	[/for]
+	[for (label : TransitionLabel | genData.transitionLabels->select(transition.instruction.oclIsUndefined()._or((transition.instruction.eClass() = Return)._not())))]
+	[label.name/] : ⊦ COP([label.name/])(mem, ls, mem', ls') ↔ ls .pc = [genData.generatePrevPC(genData, label.transition)/] ∧ ls' = ls .pc:= [generateNextPC(genData, label.transition)/][label.transition.transformTransition(genData)/];
+	used for : s, ls;
+
+	[/for]
+	[for (label : TransitionLabel | genData.transitionLabels->select(transition.instruction.oclIsUndefined()._not()._and(transition.instruction.eClass() = Return)))]
+	[label.name/]ret : ⊦ RETOP([label.name/]ret)(mem, ls, mem', ls', return) ↔ ls .pc = [genData.generatePrevPC(genData, label.transition)/] ∧ ls' = ls .pc:= N ∧ mem' = mem;
+	used for : s, ls;
+	
+	[/for]
+end enrich
 		
 [/file]
 
 [/template]
 
+
+[template public generatePrevPC(genData: GeneratorData, transition: Transition)]
+[for (label : LocationLabel | genData.locationLabels)][if(label.controlFlowLocation = transition.source)][label.name/][/if][/for]
+[/template]
+
+[template public generateNextPC(genData: GeneratorData, transition: Transition)]
+[for (label : LocationLabel | genData.locationLabels)][if(label.controlFlowLocation = transition.target)][label.name/][/if][/for]
+[/template]
+
+[template public generateCfgLabel(genData : GeneratorData, cfg : ControlFlowDiagram)]
+[for (l : LocationLabel | genData.locationLabels)][if (l.controlFlowLocation = cfg.start)]
+[l.name.substring(1, 1).toLowerCase()/][/if][/for]
+[/template]
+
+[template public generateStartPC(genData : GeneratorData, cfg : ControlFlowDiagram)]
+[for (l : ControlFlowLocation | cfg.locations)]
+[if (l = cfg.start)][for (label : LocationLabel | genData.locationLabels)][if (l = label.controlFlowLocation)][label.name/][/if][/for][/if][/for]
+[/template]
+
+[template public basis(genData : GeneratorData)]
+[for(basis: String | genData.requiredBaseFunctions)][if (basis.equalsIgnoreCase('INT'))]int[/if][if (basis.equalsIgnoreCase('NAT'))]nat[/if][/for]
+[/template]
+
+
+
+
+[comment ====== Transitions ======/]
+[template public transformTransition(t: Transition, genData: GeneratorData)]
+[if (t.instruction.oclIsUndefined()._not())][t.instruction.genInstruction(genData)/][/if] ∧ mem' = mem
+[/template]
+
+[comment === WriteDefChainTransition ====/]
+[template public transformTransition(t : WriteDefChainTransition, genData : GeneratorData)]
+[if(t.copyAddress.oclIsUndefined()._not())][transformCopyAddress(t, genData)/][/if][if(t.copyValue.oclIsUndefined()._not())][transformCopyValue(t, genData)/][/if]
+[/template]
+
+[template public transformCopyAddress(t : WriteDefChainTransition, genData : GeneratorData)]
+ .[addressToString(t.copyAddress, genData)/]:= ls.[valueToString(t.instruction.oclAsType(Store).targetAddress.value, genData)/]
+[/template]
+
+[template public transformCopyValue(t : WriteDefChainTransition, genData : GeneratorData)]
+ .[addressToString(t.copyValue, genData)/]:= ls.[valueToString(t.instruction.oclAsType(Store).value.value, genData)/]
+[/template]
+
+[comment === Flush ====/]
+[template public transformTransition(t: FlushTransition, genData: GeneratorData)]
+ ∧ mem' = mem['[ '/]ls .[let first : AddressValuePair = t.source.buffer.addressValuePairs->first()][first.address.value.valueToString(genData)/] ,[let v : Value = first.value.value][generateElemOrNull(v, genData)/][']'/][/let][/let]
+[/template]
+
+[template public generateElemOrNull(v : Value, genData : GeneratorData)]
+[if(v.valueToString(genData).equalsIgnoreCase('null')._not())]⌜ [possiblyAddLS(v)/][transformBooleanToNumber(v.valueToString(genData))/] ⌝[else][possiblyAddLS(v)/][transformBooleanToNumber(v.valueToString(genData))/][/if]
+[/template]
+
+[template public possiblyAddLS(v : Value)]
+[if(v.oclIsTypeOf(PrimitiveValue)._not()._and(v.oclIsTypeOf(Constant)._not()))]ls .[/if]
+[/template]
+
+[template public transformBooleanToNumber(b : String)]
+[if(b.equalsIgnoreCase('true'))]1[elseif (b.equalsIgnoreCase('false'))]0[else][b/][/if]
+[/template]
+
+[comment === EarlyReadTransition ====/]
+[template public transformTransition(t : EarlyReadTransition, genData: GeneratorData)]
+ .[t.instruction.oclAsType(Load).result.addressToString(genData)/]:= [findValueForEarlyReadExpression(t, genData)/] ∧ mem' = mem
+[/template]
+
+[template public findValueForEarlyReadExpression(t : EarlyReadTransition, genData : GeneratorData)]
+[for (avp: AddressValuePair | t.source.buffer.addressValuePairs)][if(t.assignmentExpression.equalsIgnoreCase(avp.value.value.name(genData)))][let v : Value = avp.value.value][possiblyAddLS(v)/][transformBooleanToNumber(v.valueToString(genData))/][/let][/if][/for]
+[/template]
+
+[query public name(v : Value, genData: GeneratorData) : String = 
+if(v.oclIsTypeOf(AddressUse)) then 
+v.oclAsType(AddressUse).address.name
+else if(v.oclIsTypeOf(Constant)) then
+v.oclAsType(Constant).value.toString()
+else if(v.oclIsTypeOf(PrimitiveValue)) then
+v.oclAsType(PrimitiveValue).value
+else
+''
+endif
+endif
+endif
+/]
+
+
+
+[comment ====== Instructions ======/]
+[template public genInstruction(e : Instruction, genData: GeneratorData)]
+[comment Abstract/]
+[/template]
+
+[template public genInstruction(e : ArithmeticOperation, genData: GeneratorData)]
+[e.arithmeticInstr(genData)/]
+[/template]
+
+[query public arithmeticInstr(e : ArithmeticOperation, genData: GeneratorData) : String = 
+' .' + e.result.addressToString(genData) + ':= ( ' + 
+if(e.value1.oclIsTypeOf(AddressUse)) then 
+'ls.' + e.value1.valueToString(genData)
+	else
+e.value1.valueToString(genData)
+ endif 
++ ' '
++ e.operation.arithmeticOp() + ' ' + e.value2.valueToString(genData) + ')'
+/]
+
+[query public arithmeticOp(s : EString) : String = 
+if s.equalsIgnoreCase('add') then
+	'+'
+else if s.equalsIgnoreCase('sub') or s.equalsIgnoreCase('ashr') then
+	'-'
+else if s.equalsIgnoreCase('mul') then
+	'*'
+else if s.equalsIgnoreCase('sdiv') or s.equalsIgnoreCase('udiv') then
+	'/'
+else
+	'TODO: UNHANDLED'
+endif
+endif
+endif
+endif
+/]
+
+[template public genInstruction(e : Load, genData: GeneratorData)]
+ .[e.result.addressToString(genData)/]:= mem['['/]ls .[e.address.value.valueToString(genData)/][']'/] .v
+[/template]
+
+[comment ====== Generic Calls ======/]
+[template public addressToString(address: Address, genData: GeneratorData)]
+[for (am: AddressMapping | genData.localVariables.variables)][for (a: Address | am.adresses)][if (address.name = a.name)][am.name/][/if][/for][/for]
+[/template]
+
+[template public valueToString(v : Value, genData: GeneratorData)]
+[if (v.oclIsTypeOf(PrimitiveValue))][v.oclAsType(PrimitiveValue).value/][elseif ( v.oclIsTypeOf(Constant))][v.oclAsType(Constant).value/] [elseif (v.oclIsTypeOf(AddressUse))][for (am: AddressMapping | genData.localVariables.variables)][for (a: Address | am.adresses)][if (v.oclAsType(AddressUse).address.name = a.name)][am.name/][/if][/for][/for][/if]
+[/template]

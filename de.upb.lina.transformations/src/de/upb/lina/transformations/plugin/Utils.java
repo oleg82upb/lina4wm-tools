@@ -1,7 +1,12 @@
 package de.upb.lina.transformations.plugin;
 
+import java.util.List;
+
 import de.upb.lina.cfg.controlflow.AddressValuePair;
+import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.StoreBuffer;
+import de.upb.lina.cfg.controlflow.Transition;
+import de.upb.llvm_parser.llvm.ArithmeticOperation;
 import de.upb.llvm_parser.llvm.Constant;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.PrimitiveValue;
@@ -98,5 +103,23 @@ public class Utils {
 		}
 
 		return (result);
+	}
+	
+	public static String checkForMulOrDiv(List<ControlFlowDiagram> cfgs){
+		for(ControlFlowDiagram cfg : cfgs){
+			for(Transition t : cfg.getTransitions()){
+				if(t.getInstruction() != null && t.getInstruction() instanceof ArithmeticOperation){
+					ArithmeticOperation op = (ArithmeticOperation) t.getInstruction();
+					String operation = op.getOperation();
+					if(operation.equalsIgnoreCase("udiv") || operation.equalsIgnoreCase("sdiv")){
+						return "DIV";
+					}
+					if(operation.equalsIgnoreCase("mul")){
+						return "MUL";
+					}
+				}
+			}
+		}
+		return null;
 	}
 }

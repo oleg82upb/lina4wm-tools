@@ -9,9 +9,9 @@ import org.eclipse.emf.ecore.EObject;
 import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
-import de.upb.lina.cfg.controlflow.FlushTransition;
 import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.Transition;
+import de.upb.lina.cfg.controlflow.WriteDefChainTransition;
 import de.upb.lina.cfg.gendata.AddressMapping;
 import de.upb.lina.cfg.gendata.ConstraintMapping;
 import de.upb.lina.cfg.gendata.FunctionParamsMapping;
@@ -20,6 +20,8 @@ import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.lina.cfg.gendata.LocalVariables;
 import de.upb.lina.cfg.gendata.LocationLabel;
 import de.upb.lina.cfg.gendata.PhiMapping;
+import de.upb.lina.cfg.gendata.TransitionLabel;
+import de.upb.lina.transformations.wizards.TransformationWizardPage;
 import de.upb.llvm_parser.llvm.AbstractElement;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
@@ -70,6 +72,7 @@ public class GendataPrecomputer {
 	private static final String GETELEMENTPTR = "getelementptr";
 
 	private List<ControlFlowDiagram> cfgs;
+	private int basis;
 	private GeneratorData helperModel;
 
 	private HashMap <Address, String> addressLookup = new HashMap<Address, String>();
@@ -77,8 +80,9 @@ public class GendataPrecomputer {
 
 	private HashMap<FunctionDefinition, List<String>> usedVarsInFunctions = new HashMap<FunctionDefinition, List<String>>();
 
-	public GendataPrecomputer(List<ControlFlowDiagram> cfgs){
+	public GendataPrecomputer(List<ControlFlowDiagram> cfgs, int basis){
 		this.cfgs = cfgs;
+		this.basis = basis;
 	}
 
 	public GeneratorData computeGeneratorData(){
@@ -132,11 +136,29 @@ public class GendataPrecomputer {
 
 			//phi mappings
 			computePhiMapping(helperModel.getPhiMappings());
+			
+			//KIV transformation basis
+			addBasis();
+			checkForMulOrDiv();
 
 
 		}catch(ClassCastException ex){
 			Activator.logError("Could not link LLVM program to this transformation.", ex);
 		}
+	}
+
+	private void addBasis() {
+		if(basis == TransformationWizardPage.INT){
+			helperModel.getRequiredBaseFunctions().add("INT");
+		}else if(basis == TransformationWizardPage.NAT){
+			helperModel.getRequiredBaseFunctions().add("NAT");
+		}
+	}
+	
+	private void checkForMulOrDiv(){
+		String s = Utils.checkForMulOrDiv(cfgs);
+		if(s != null)
+			helperModel.getRequiredBaseFunctions().add(s);
 	}
 
 	private void computePhiMapping(List<PhiMapping> phiMappings){
@@ -243,8 +265,24 @@ public class GendataPrecomputer {
 
 	private void initTransitionLabels(LocalVariables localVars) {
 
-		// TODO Auto-generated method stub
-
+		for(ControlFlowDiagram cfg : cfgs){
+			int size = 1;
+			for(Transition t : cfg.getTransitions()){
+				String labelName = generateTransitionLabel(t, size);
+				List<TransitionLabel> labels = helperModel.getTransitionLabels();
+				TransitionLabel transitionLabel = GendataFactory.eINSTANCE.createTransitionLabel();
+				transitionLabel.setName(labelName);
+				transitionLabel.setTransition(t);
+				labels.add(transitionLabel);
+				size++;
+			}
+		}
+	}
+	
+	private String generateTransitionLabel(Transition transition, int size){
+		String sizeString = String.valueOf(size);
+		String transitionLabel = cfgToLabelPrefix.get(transition.getDiagram()).toLowerCase()+sizeString;		
+		return transitionLabel;
 	}
 
 	private void initLocationLabels(LocalVariables localVars){
@@ -257,6 +295,10 @@ public class GendataPrecomputer {
 				String bufferRep = generateShortLabel(l, localVars, cfg.getLocations().size());
 				if(iteratedBuffers.contains(bufferRep)){
 					conflictingLocs.add(l);
+				}
+				else
+				{
+					iteratedBuffers.add(bufferRep);
 				}
 			}
 
@@ -431,6 +473,23 @@ public class GendataPrecomputer {
 	private void initLocalVariables(LocalVariables localVars, LLVM program) throws IllegalArgumentException{
 		List<AddressMapping> mapping = localVars.getVariables();
 
+		//map copyVars from writeDefChain
+		for(ControlFlowDiagram cfg : cfgs){
+			for(Transition t : cfg.getTransitions()){
+				if(t instanceof WriteDefChainTransition){
+					WriteDefChainTransition wdcTransition = (WriteDefChainTransition) t;
+					if(wdcTransition.getCopyAddress() != null){
+						Address copyAddress = wdcTransition.getCopyAddress();
+						addToMapping(mapping, cfg, copyAddress);
+					}
+					if(wdcTransition.getCopyValue() != null){
+						Address copyValue = wdcTransition.getCopyValue();
+						addToMapping(mapping, cfg, copyValue);
+					}
+				}
+			}
+		}
+		
 		//collect all addresses
 		for(AbstractElement ele: program.getElements()){
 			if(ele instanceof FunctionDefinition){
@@ -509,6 +568,7 @@ public class GendataPrecomputer {
 							}else if(i instanceof Alloc){
 								Alloc op = (Alloc)i;
 								addToMapping(mapping, matchingCfg, op.getResult());
+								if(op.getNumOfElements()!=null)
 								addToMapping(mapping, matchingCfg, extractAddressFromValue(op.getNumOfElements().getValue()));
 
 							}else if(i instanceof Phi){
@@ -599,14 +659,15 @@ public class GendataPrecomputer {
 		if(address == null){
 			return;
 		}
+
 		Address addressCopy = address;
 
-		//check if address was redefined
-		for(Address a: cfg.getVariableCopies()){
-			if(a.getName().replaceAll("Copy", "").equalsIgnoreCase(address.getName())){
-				addressCopy = a;
-			}
-		}
+//		//check if address was redefined
+//		for(Address a: cfg.getVariableCopies()){
+//			if(a.getName().replaceAll("Copy", "").equalsIgnoreCase(address.getName())){
+//				addressCopy = a;
+//			}
+//		}
 		
 		
 		AddressMapping correspondingMapping = getMappingForAddress(addressCopy, mapping);
@@ -623,25 +684,25 @@ public class GendataPrecomputer {
 			AddressMapping addressMapping = createAddressMapping(addressCopy, Utils.clean(addressCopy.getName()));
 
 			mapping.add(addressMapping);
-			addressLookup.put(addressCopy, addressMapping.getName());
+			addressLookup.put(addressCopy, addressMapping.getName());	
 		}
 
 //		//check if already have a mapping for that address
-//		if(hasMappingForAddress(addressCopy, mapping)){
-//			
-//		}else if(!isAddressMapped(addressCopy, mapping)){
+//		if(!isAddressMapped(address, mapping)){
 //
+//>>>>>>> branch 'develop' of ssh://git@github.com/oleg82upb/lina4wm-tools.git
 //			//create new addressmapping
-//			AddressMapping addressMapping = createAddressMapping(addressCopy, Utils.clean(addressCopy.getName()));
+//			AddressMapping addressMapping = createAddressMapping(address, Utils.clean(address.getName()));
 //
 //			mapping.add(addressMapping);
-//			addressLookup.put(addressCopy, addressMapping.getName());
+//			addressLookup.put(address, addressMapping.getName());
 //		}
+
 
 		// add used vars to the list
 		FunctionDefinition fun = getFunctionForCfg(cfg);
-		if(!addressCopy.getName().startsWith("@") && !usedVarsInFunctions.get(fun).contains(addressLookup.get(addressCopy))){
-			usedVarsInFunctions.get(fun).add(addressLookup.get(addressCopy));
+		if(!address.getName().startsWith("@") && !usedVarsInFunctions.get(fun).contains(addressLookup.get(address))){
+			usedVarsInFunctions.get(fun).add(addressLookup.get(address));
 		}
 	}
 
@@ -684,7 +745,7 @@ public class GendataPrecomputer {
 		for(AddressMapping am: mapping){
 			for(Address a: am.getAdresses()){
 				//				if(a.getName().equals(address.getName())){
-				if(a.equals(address)){
+				if(a.getName().equals(address.getName())){
 					//System.out.println("a-name: " + a.getName() + "address: " + address.getName());
 					return true;
 				}

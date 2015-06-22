@@ -11,37 +11,17 @@ import de.upb.lina.transformations.wizards.TransformationOperation;
 
 public class KivTransformationOperation extends TransformationOperation {
 
-	public KivTransformationOperation(List<ControlFlowDiagram> cfgs,
-			String targetContainer, String targetName, String fileEnding) {
-		super(cfgs, targetContainer, targetName, fileEnding);
+	public KivTransformationOperation(List<ControlFlowDiagram> cfgs, String targetContainer, String targetName,
+			String fileEnding, int basis) {
+		super(cfgs, targetContainer, targetName, fileEnding, basis);
 	}
-
-//	@Override
-//	protected void execute(IProgressMonitor monitor) throws CoreException,
-//			InvocationTargetException, InterruptedException {
-//		super.execute(monitor);
-//		try {
-//			ArrayList<Object> args = new ArrayList<Object>();
-//			GenerateKIVspec generator = new GenerateKIVspec(genData, fullPath.toFile(), args);
-//			generator.doGenerate(new BasicMonitor());
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		refreshWorkspace(monitor);
-//	}
 
 	@Override
 	protected void runSpecGeneration() throws IOException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		GenerateKIVspec generator = new GenerateKIVspec(genData, fullPath.toFile(), args);
 		generator.doGenerate(new BasicMonitor());
-		
+
 	}
-	
-	
-	
-	
-	
 
 }

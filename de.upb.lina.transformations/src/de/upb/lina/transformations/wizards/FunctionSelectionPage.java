@@ -15,13 +15,11 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Tree;
-import org.eclipse.swt.widgets.TreeColumn;
-import org.eclipse.swt.widgets.TreeItem;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.*;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
@@ -60,7 +58,8 @@ public class FunctionSelectionPage extends WizardPage{
 		
 		/* init */
 		final Composite composite = new Composite(parent, SWT.NULL);
-		FillLayout layout = new FillLayout();
+		GridLayout layout = new GridLayout();
+		layout.numColumns = 1;
 		composite.setLayout(layout);
 		
 		tree = new Tree(composite,SWT.CHECK | SWT.MULTI | SWT.H_SCROLL |SWT.BORDER);
@@ -68,8 +67,39 @@ public class FunctionSelectionPage extends WizardPage{
 		column.setText("Available Functions");
 		column.setWidth(450);
 		tree.setHeaderVisible(true);
+		GridData treeLayoutData = new GridData(GridData.FILL, GridData.FILL, true, true);
+		tree.setLayoutData(treeLayoutData);
 		loadCfg();
-		computeDependencies();
+		Button select = new Button(composite, SWT.CHECK);
+		select.setText("select/deselect all");
+		select.setSelection(true);
+		select.addSelectionListener(new SelectionListener(){
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				if(select.getSelection())
+					for(TreeItem i :tree.getItems()){
+						if(!i.getChecked()){
+							i.setChecked(true);
+							updateSelectedFunctions(i);
+						}
+						
+					}
+				else
+					for(TreeItem i :tree.getItems()){
+						if(i.getChecked()){
+							i.setChecked(false);
+							updateSelectedFunctions(i);
+						}
+					}
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+			}
+		});
 		
 		tree.addListener(SWT.Selection, new Listener(){
 
@@ -98,7 +128,6 @@ public class FunctionSelectionPage extends WizardPage{
 				item.setChecked(true);
 				updateSelectedFunctions(item);
 			}
-			//tree.pack();
 		}
 	}
 
@@ -125,6 +154,7 @@ public class FunctionSelectionPage extends WizardPage{
 			functionToCfg.put(cfg.getName(), cfg);
 		}
 		refreshTree();
+		computeDependencies();
 		return allCFGs;
 	}
 	
@@ -133,6 +163,7 @@ public class FunctionSelectionPage extends WizardPage{
 		if(item.getChecked()){
 			//add to selected functions
 			ControlFlowDiagram selectedCFG = functionToCfg.get(functionName);
+			if(!selectedFunctions.contains(selectedCFG))
 			this.selectedFunctions.add(selectedCFG);
 		}else{
 			//remove from selected functions
@@ -158,6 +189,8 @@ public class FunctionSelectionPage extends WizardPage{
 		
 		if(!dependencyIssues.isEmpty()){
 			updateWarning(dependencyIssues.get(0),WARNING);
+		}else if(selectedFunctions.isEmpty()){
+			updateStatus("Please select at least one function");
 		}else{
 			updateStatus(null);
 			setMessage("Please select the functions you wish to transform.");
