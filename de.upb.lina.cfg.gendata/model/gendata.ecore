@@ -19,7 +19,7 @@
         eType="#//LocationLabel" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transitionLabels" upperBound="-1"
         eType="#//TransitionLabel" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requiredBaseFunctions"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="transformationSpecificKeys"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="phiMappings" upperBound="-1"

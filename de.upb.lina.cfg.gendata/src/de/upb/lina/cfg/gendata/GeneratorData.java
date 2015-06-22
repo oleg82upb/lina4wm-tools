@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getParameterMappings <em>Parameter Mappings</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getLocationLabels <em>Location Labels</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getTransitionLabels <em>Transition Labels</em>}</li>
- *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getRequiredBaseFunctions <em>Required Base Functions</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getTransformationSpecificKeys <em>Transformation Specific Keys</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getPhiMappings <em>Phi Mappings</em>}</li>
  * </ul>
  * </p>
@@ -168,20 +168,20 @@ public interface GeneratorData extends EObject
 	EList<TransitionLabel> getTransitionLabels();
 
 	/**
-	 * Returns the value of the '<em><b>Required Base Functions</b></em>' attribute list.
+	 * Returns the value of the '<em><b>Transformation Specific Keys</b></em>' attribute list.
 	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Required Base Functions</em>' attribute list isn't clear,
+	 * If the meaning of the '<em>Transformation Specific Keys</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Required Base Functions</em>' attribute list.
-	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_RequiredBaseFunctions()
+	 * @return the value of the '<em>Transformation Specific Keys</em>' attribute list.
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_TransformationSpecificKeys()
 	 * @model default=""
 	 * @generated
 	 */
-	EList<String> getRequiredBaseFunctions();
+	EList<String> getTransformationSpecificKeys();
 
 	/**
 	 * Returns the value of the '<em><b>Phi Mappings</b></em>' containment reference list.

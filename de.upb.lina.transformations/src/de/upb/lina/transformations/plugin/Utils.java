@@ -33,6 +33,8 @@ public class Utils {
 
 		//if the address is starts with a number, do not give it a v_
 		string = string.replaceAll("@_","");
+		
+		string = string.replaceAll("@","");
 
 		return string;
 	}

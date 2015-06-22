@@ -168,13 +168,13 @@ public interface GendataPackage extends EPackage
 	int GENERATOR_DATA__TRANSITION_LABELS = 6;
 
 	/**
-	 * The feature id for the '<em><b>Required Base Functions</b></em>' attribute list.
+	 * The feature id for the '<em><b>Transformation Specific Keys</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA__REQUIRED_BASE_FUNCTIONS = 7;
+	int GENERATOR_DATA__TRANSFORMATION_SPECIFIC_KEYS = 7;
 
 	/**
 	 * The feature id for the '<em><b>Phi Mappings</b></em>' containment reference list.
@@ -665,15 +665,15 @@ public interface GendataPackage extends EPackage
 	EReference getGeneratorData_TransitionLabels();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link de.upb.lina.cfg.gendata.GeneratorData#getRequiredBaseFunctions <em>Required Base Functions</em>}'.
+	 * Returns the meta object for the attribute list '{@link de.upb.lina.cfg.gendata.GeneratorData#getTransformationSpecificKeys <em>Transformation Specific Keys</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Required Base Functions</em>'.
-	 * @see de.upb.lina.cfg.gendata.GeneratorData#getRequiredBaseFunctions()
+	 * @return the meta object for the attribute list '<em>Transformation Specific Keys</em>'.
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getTransformationSpecificKeys()
 	 * @see #getGeneratorData()
 	 * @generated
 	 */
-	EAttribute getGeneratorData_RequiredBaseFunctions();
+	EAttribute getGeneratorData_TransformationSpecificKeys();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.upb.lina.cfg.gendata.GeneratorData#getPhiMappings <em>Phi Mappings</em>}'.
@@ -1019,12 +1019,12 @@ public interface GendataPackage extends EPackage
 		EReference GENERATOR_DATA__TRANSITION_LABELS = eINSTANCE.getGeneratorData_TransitionLabels();
 
 		/**
-		 * The meta object literal for the '<em><b>Required Base Functions</b></em>' attribute list feature.
+		 * The meta object literal for the '<em><b>Transformation Specific Keys</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute GENERATOR_DATA__REQUIRED_BASE_FUNCTIONS = eINSTANCE.getGeneratorData_RequiredBaseFunctions();
+		EAttribute GENERATOR_DATA__TRANSFORMATION_SPECIFIC_KEYS = eINSTANCE.getGeneratorData_TransformationSpecificKeys();
 
 		/**
 		 * The meta object literal for the '<em><b>Phi Mappings</b></em>' containment reference list feature.

@@ -258,7 +258,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getGeneratorData_RequiredBaseFunctions() {
+	public EAttribute getGeneratorData_TransformationSpecificKeys() {
 		return (EAttribute)generatorDataEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -503,7 +503,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		createEReference(generatorDataEClass, GENERATOR_DATA__PARAMETER_MAPPINGS);
 		createEReference(generatorDataEClass, GENERATOR_DATA__LOCATION_LABELS);
 		createEReference(generatorDataEClass, GENERATOR_DATA__TRANSITION_LABELS);
-		createEAttribute(generatorDataEClass, GENERATOR_DATA__REQUIRED_BASE_FUNCTIONS);
+		createEAttribute(generatorDataEClass, GENERATOR_DATA__TRANSFORMATION_SPECIFIC_KEYS);
 		createEReference(generatorDataEClass, GENERATOR_DATA__PHI_MAPPINGS);
 
 		addressMappingEClass = createEClass(ADDRESS_MAPPING);
@@ -584,7 +584,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		initEReference(getGeneratorData_ParameterMappings(), this.getFunctionParamsMapping(), null, "parameterMappings", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_LocationLabels(), this.getLocationLabel(), null, "locationLabels", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_TransitionLabels(), this.getTransitionLabel(), null, "transitionLabels", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getGeneratorData_RequiredBaseFunctions(), ecorePackage.getEString(), "requiredBaseFunctions", "", 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGeneratorData_TransformationSpecificKeys(), ecorePackage.getEString(), "transformationSpecificKeys", "", 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_PhiMappings(), this.getPhiMapping(), null, "phiMappings", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(addressMappingEClass, AddressMapping.class, "AddressMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

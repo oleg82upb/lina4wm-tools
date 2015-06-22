@@ -39,7 +39,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getParameterMappings <em>Parameter Mappings</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getLocationLabels <em>Location Labels</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getTransitionLabels <em>Transition Labels</em>}</li>
- *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getRequiredBaseFunctions <em>Required Base Functions</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getTransformationSpecificKeys <em>Transformation Specific Keys</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getPhiMappings <em>Phi Mappings</em>}</li>
  * </ul>
  * </p>
@@ -119,14 +119,14 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	protected EList<TransitionLabel> transitionLabels;
 
 	/**
-	 * The cached value of the '{@link #getRequiredBaseFunctions() <em>Required Base Functions</em>}' attribute list.
+	 * The cached value of the '{@link #getTransformationSpecificKeys() <em>Transformation Specific Keys</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRequiredBaseFunctions()
+	 * @see #getTransformationSpecificKeys()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<String> requiredBaseFunctions;
+	protected EList<String> transformationSpecificKeys;
 
 	/**
 	 * The cached value of the '{@link #getPhiMappings() <em>Phi Mappings</em>}' containment reference list.
@@ -309,11 +309,11 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<String> getRequiredBaseFunctions() {
-		if (requiredBaseFunctions == null) {
-			requiredBaseFunctions = new EDataTypeUniqueEList<String>(String.class, this, GendataPackage.GENERATOR_DATA__REQUIRED_BASE_FUNCTIONS);
+	public EList<String> getTransformationSpecificKeys() {
+		if (transformationSpecificKeys == null) {
+			transformationSpecificKeys = new EDataTypeUniqueEList<String>(String.class, this, GendataPackage.GENERATOR_DATA__TRANSFORMATION_SPECIFIC_KEYS);
 		}
-		return requiredBaseFunctions;
+		return transformationSpecificKeys;
 	}
 
 	/**
@@ -377,8 +377,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return getLocationLabels();
 			case GendataPackage.GENERATOR_DATA__TRANSITION_LABELS:
 				return getTransitionLabels();
-			case GendataPackage.GENERATOR_DATA__REQUIRED_BASE_FUNCTIONS:
-				return getRequiredBaseFunctions();
+			case GendataPackage.GENERATOR_DATA__TRANSFORMATION_SPECIFIC_KEYS:
+				return getTransformationSpecificKeys();
 			case GendataPackage.GENERATOR_DATA__PHI_MAPPINGS:
 				return getPhiMappings();
 		}
@@ -421,9 +421,9 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				getTransitionLabels().clear();
 				getTransitionLabels().addAll((Collection<? extends TransitionLabel>)newValue);
 				return;
-			case GendataPackage.GENERATOR_DATA__REQUIRED_BASE_FUNCTIONS:
-				getRequiredBaseFunctions().clear();
-				getRequiredBaseFunctions().addAll((Collection<? extends String>)newValue);
+			case GendataPackage.GENERATOR_DATA__TRANSFORMATION_SPECIFIC_KEYS:
+				getTransformationSpecificKeys().clear();
+				getTransformationSpecificKeys().addAll((Collection<? extends String>)newValue);
 				return;
 			case GendataPackage.GENERATOR_DATA__PHI_MAPPINGS:
 				getPhiMappings().clear();
@@ -463,8 +463,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 			case GendataPackage.GENERATOR_DATA__TRANSITION_LABELS:
 				getTransitionLabels().clear();
 				return;
-			case GendataPackage.GENERATOR_DATA__REQUIRED_BASE_FUNCTIONS:
-				getRequiredBaseFunctions().clear();
+			case GendataPackage.GENERATOR_DATA__TRANSFORMATION_SPECIFIC_KEYS:
+				getTransformationSpecificKeys().clear();
 				return;
 			case GendataPackage.GENERATOR_DATA__PHI_MAPPINGS:
 				getPhiMappings().clear();
@@ -496,8 +496,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return locationLabels != null && !locationLabels.isEmpty();
 			case GendataPackage.GENERATOR_DATA__TRANSITION_LABELS:
 				return transitionLabels != null && !transitionLabels.isEmpty();
-			case GendataPackage.GENERATOR_DATA__REQUIRED_BASE_FUNCTIONS:
-				return requiredBaseFunctions != null && !requiredBaseFunctions.isEmpty();
+			case GendataPackage.GENERATOR_DATA__TRANSFORMATION_SPECIFIC_KEYS:
+				return transformationSpecificKeys != null && !transformationSpecificKeys.isEmpty();
 			case GendataPackage.GENERATOR_DATA__PHI_MAPPINGS:
 				return phiMappings != null && !phiMappings.isEmpty();
 		}
@@ -514,8 +514,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (requiredBaseFunctions: ");
-		result.append(requiredBaseFunctions);
+		result.append(" (transformationSpecificKeys: ");
+		result.append(transformationSpecificKeys);
 		result.append(')');
 		return result.toString();
 	}

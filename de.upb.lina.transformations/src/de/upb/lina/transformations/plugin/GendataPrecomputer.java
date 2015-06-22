@@ -149,16 +149,16 @@ public class GendataPrecomputer {
 
 	private void addBasis() {
 		if(basis == TransformationWizardPage.INT){
-			helperModel.getRequiredBaseFunctions().add("INT");
+			helperModel.getTransformationSpecificKeys().add("INT");
 		}else if(basis == TransformationWizardPage.NAT){
-			helperModel.getRequiredBaseFunctions().add("NAT");
+			helperModel.getTransformationSpecificKeys().add("NAT");
 		}
 	}
 	
 	private void checkForMulOrDiv(){
 		String s = Utils.checkForMulOrDiv(cfgs);
 		if(s != null)
-			helperModel.getRequiredBaseFunctions().add(s);
+			helperModel.getTransformationSpecificKeys().add(s);
 	}
 
 	private void computePhiMapping(List<PhiMapping> phiMappings){
@@ -231,13 +231,13 @@ public class GendataPrecomputer {
 					}
 
 					if(t.getInstruction() instanceof CmpXchg){
-						if(!genData.getRequiredBaseFunctions().contains(CAS)){
-							genData.getRequiredBaseFunctions().add(CAS);
+						if(!genData.getTransformationSpecificKeys().contains(CAS)){
+							genData.getTransformationSpecificKeys().add(CAS);
 						}
 					}
 					if(t.getInstruction() instanceof GetElementPtr){
-						if(!genData.getRequiredBaseFunctions().contains(GETELEMENTPTR)){
-							genData.getRequiredBaseFunctions().add(GETELEMENTPTR);
+						if(!genData.getTransformationSpecificKeys().contains(GETELEMENTPTR)){
+							genData.getTransformationSpecificKeys().add(GETELEMENTPTR);
 						}
 					}
 				}
