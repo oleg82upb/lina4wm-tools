@@ -6,6 +6,7 @@
 [comment @main/]
 [file ( fileName  , false, 'UTF-8')]
 [buildDefines()/]
+[genData.genGlobalVars()/]
 [genData.buildStandards()/]
 
 [for (cfg: ControlFlowDiagram | genData.cfgs)]
@@ -19,12 +20,30 @@ inline [cfg.name.replaceAll('@_', '')/]([genParams(cfg, genData)/]){
 [/file]
 [/template]
 
+[template public genGlobalVars(genData: GeneratorData)]
+[for (mapping: FilterToAddressMapping | genData.filteredAddresses)][if(mapping.key.equalsIgnoreCase('globals'))]
+[if(mapping.value->size() > 0)]
+[for (mapping: FilterToAddressMapping | genData.filteredAddresses)]
+[if(mapping.key.equalsIgnoreCase('globals') and mapping.value->size() > 0)]
+[for(aMapping: AddressMapping | mapping.value)]short [aMapping.name/] = [for(gDef:AbstractElement |genData.program.elements)][if(gDef.oclIsTypeOf(GlobalDefinition))][if(gDef.oclAsType(GlobalDefinition).address = aMapping.adresses->first())][gDef.oclAsType(GlobalDefinition).value.value.valueToString(genData)/];[/if][/if][/for]
+[/for]
+[/if]
+[/for]
+[/if]
+[/if]
+[/for]
+[/template]
+
 [template public genParams(cfg: ControlFlowDiagram, genData: GeneratorData)]
-[for (map: FunctionParamsMapping | genData.parameterMappings)][if (map.cfg = cfg)][for (p: FunctionParameter | map.function.parameter.params)][p.value.addressToString(genData)/][if(map.function.parameter.params->last() <> p)], [/if][/for][if(map.needsReturnValue = true)], returnvalue[/if][/if][/for]
+[genListOfVars(genData, 'func-params:'+cfg.name)/]
 [/template]
 
 [template public genLocalVarDeclarations(cfg: ControlFlowDiagram, genData: GeneratorData)]
-short [for (map: FunctionParamsMapping | genData.parameterMappings)][if (map.cfg = cfg)][for (name: EString | map.varNamesInFunction)][name/][if(map.varNamesInFunction->last() <> name)], [/if][/for][/if][/for];
+[for (mapping: FilterToAddressMapping | genData.filteredAddresses)][if(mapping.key.equalsIgnoreCase('func-declare:'+cfg.name))][if(mapping.value->size() > 0)]short [genListOfVars(genData, 'func-declare:'+cfg.name)/];[/if][/if][/for]
+[/template]
+
+[template public genListOfVars(genData: GeneratorData, key: EString)]
+[for (mapping: FilterToAddressMapping | genData.filteredAddresses)][if(mapping.key.equalsIgnoreCase(key))][for(aMapping: AddressMapping | mapping.value)][aMapping.name/][if(mapping.value->last() <> aMapping)], [/if][/for][/if][/for]
 [/template]
 
 [template public handleStartLocation(genData:GeneratorData, cfg: ControlFlowDiagram)]
@@ -50,7 +69,7 @@ short [for (map: FunctionParamsMapping | genData.parameterMappings)][if (map.cfg
 [/template]
 
 [template public genGoTo(t: Transition, genData: GeneratorData)]
-[t.genPhi(genData)/] goto [for (l : LocationLabel | genData.locationLabels)][if (l.controlFlowLocation = t.target)][l.name/][/if][/for];
+[if(t.target.outgoing->size()>0)][t.genPhi(genData)/] goto [for (l : LocationLabel | genData.locationLabels)][if (l.controlFlowLocation = t.target)][l.name/][/if][/for];[/if]
 [/template]
 
 [template public genPhi (t: Transition, genData: GeneratorData)]
@@ -443,11 +462,11 @@ endif
 
 [comment ====== Generic Calls ======/]
 [template public addressToString(address: Address, genData: GeneratorData)]
-[for (am: AddressMapping | genData.localVariables.variables)][for (a: Address | am.adresses)][if (address = a)][am.name/][/if][/for][/for]
+[for (am: AddressMapping | genData.addressMappings)][for (a: Address | am.adresses)][if (address = a)][am.name/][/if][/for][/for]
 [/template]
 
 [template public valueToString(v : Value, genData: GeneratorData)]
-[if (v.oclIsTypeOf(PrimitiveValue))][v.oclAsType(PrimitiveValue).value/][elseif ( v.oclIsTypeOf(Constant))][v.oclAsType(Constant).value/] [elseif (v.oclIsTypeOf(AddressUse))][for (am: AddressMapping | genData.localVariables.variables)][for (a: Address | am.adresses)][if (v.oclAsType(AddressUse).address = a)][am.name/][/if][/for][/for][/if]
+[if (v.oclIsTypeOf(PrimitiveValue))][v.oclAsType(PrimitiveValue).value/][elseif ( v.oclIsTypeOf(Constant))][v.oclAsType(Constant).value/] [elseif (v.oclIsTypeOf(AddressUse))][for (am: AddressMapping | genData.addressMappings)][for (a: Address | am.adresses)][if (v.oclAsType(AddressUse).address = a)][am.name/][/if][/for][/for][/if]
 [/template]
 
 [template public genCondition(t: Transition, gD: GeneratorData)]
@@ -577,7 +596,7 @@ atomic{
 [template public buildStandards(genData: GeneratorData)]
 
 //standard stuff
-[for(func: String | genData.requiredBaseFunctions)][if (func.equalsIgnoreCase('getelementptr'))]
+[for(func: String | genData.transformationSpecificKeys)][if (func.equalsIgnoreCase('getelementptr'))]
 inline getelementptr(type, instance, offset, targetRegister)
 {
 	atomic{
@@ -598,7 +617,7 @@ inline alloca(type, targetRegister)
 	assert(memUse < MEM_SIZE);
 	}
 }
-[for(func: String | genData.requiredBaseFunctions)][if (func.equalsIgnoreCase('cas'))]
+[for(func: String | genData.transformationSpecificKeys)][if (func.equalsIgnoreCase('cas'))]
 inline cas(adr, old, new, result)
 {
 	atomic{

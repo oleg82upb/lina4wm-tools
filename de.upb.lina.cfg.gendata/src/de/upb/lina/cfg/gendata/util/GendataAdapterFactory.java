@@ -4,11 +4,13 @@ package de.upb.lina.cfg.gendata.util;
 
 import de.upb.lina.cfg.gendata.*;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -71,10 +73,6 @@ public class GendataAdapterFactory extends AdapterFactoryImpl
 	protected GendataSwitch<Adapter> modelSwitch =
 		new GendataSwitch<Adapter>() {
 			@Override
-			public Adapter caseLocalVariables(LocalVariables object) {
-				return createLocalVariablesAdapter();
-			}
-			@Override
 			public Adapter caseGeneratorData(GeneratorData object) {
 				return createGeneratorDataAdapter();
 			}
@@ -85,10 +83,6 @@ public class GendataAdapterFactory extends AdapterFactoryImpl
 			@Override
 			public Adapter caseConstraintMapping(ConstraintMapping object) {
 				return createConstraintMappingAdapter();
-			}
-			@Override
-			public Adapter caseFunctionParamsMapping(FunctionParamsMapping object) {
-				return createFunctionParamsMappingAdapter();
 			}
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
@@ -105,6 +99,10 @@ public class GendataAdapterFactory extends AdapterFactoryImpl
 			@Override
 			public Adapter casePhiMapping(PhiMapping object) {
 				return createPhiMappingAdapter();
+			}
+			@Override
+			public Adapter caseFilterToAddressMapping(Map.Entry<String, EList<AddressMapping>> object) {
+				return createFilterToAddressMappingAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -126,21 +124,6 @@ public class GendataAdapterFactory extends AdapterFactoryImpl
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.gendata.LocalVariables <em>Local Variables</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.lina.cfg.gendata.LocalVariables
-	 * @generated
-	 */
-	public Adapter createLocalVariablesAdapter()
-	{
-		return null;
-	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.gendata.GeneratorData <em>Generator Data</em>}'.
@@ -183,20 +166,6 @@ public class GendataAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createConstraintMappingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.gendata.FunctionParamsMapping <em>Function Params Mapping</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.upb.lina.cfg.gendata.FunctionParamsMapping
-	 * @generated
-	 */
-	public Adapter createFunctionParamsMappingAdapter() {
 		return null;
 	}
 
@@ -253,6 +222,20 @@ public class GendataAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createPhiMappingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Filter To Address Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.Map.Entry
+	 * @generated
+	 */
+	public Adapter createFilterToAddressMappingAdapter() {
 		return null;
 	}
 

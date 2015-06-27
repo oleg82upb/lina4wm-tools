@@ -5,16 +5,15 @@ package de.upb.lina.cfg.gendata.impl;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.gendata.AddressMapping;
 import de.upb.lina.cfg.gendata.ConstraintMapping;
-import de.upb.lina.cfg.gendata.FunctionParamsMapping;
 import de.upb.lina.cfg.gendata.GendataFactory;
 import de.upb.lina.cfg.gendata.GendataPackage;
 import de.upb.lina.cfg.gendata.GeneratorData;
-import de.upb.lina.cfg.gendata.LocalVariables;
 import de.upb.lina.cfg.gendata.LocationLabel;
 import de.upb.lina.cfg.gendata.NamedElement;
 import de.upb.lina.cfg.gendata.PhiMapping;
 import de.upb.lina.cfg.gendata.TransitionLabel;
 import de.upb.llvm_parser.llvm.LlvmPackage;
+import java.util.Map;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -29,13 +28,6 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
  */
 public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass localVariablesEClass = null;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -56,13 +48,6 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * @generated
 	 */
 	private EClass constraintMappingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass functionParamsMappingEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -91,6 +76,13 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * @generated
 	 */
 	private EClass phiMappingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass filterToAddressMappingEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -163,26 +155,6 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getLocalVariables()
-	{
-		return localVariablesEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getLocalVariables_Variables()
-	{
-		return (EReference)localVariablesEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getGeneratorData()
 	{
 		return generatorDataEClass;
@@ -193,7 +165,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getGeneratorData_LocalVariables()
+	public EReference getGeneratorData_Program()
 	{
 		return (EReference)generatorDataEClass.getEStructuralFeatures().get(0);
 	}
@@ -203,8 +175,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getGeneratorData_Program()
-	{
+	public EReference getGeneratorData_Cfgs() {
 		return (EReference)generatorDataEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -213,7 +184,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getGeneratorData_Cfgs() {
+	public EReference getGeneratorData_Constraints() {
 		return (EReference)generatorDataEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -222,7 +193,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getGeneratorData_Constraints() {
+	public EReference getGeneratorData_LocationLabels() {
 		return (EReference)generatorDataEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -231,7 +202,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getGeneratorData_ParameterMappings() {
+	public EReference getGeneratorData_TransitionLabels() {
 		return (EReference)generatorDataEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -240,26 +211,8 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getGeneratorData_LocationLabels() {
-		return (EReference)generatorDataEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getGeneratorData_TransitionLabels() {
-		return (EReference)generatorDataEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getGeneratorData_TransformationSpecificKeys() {
-		return (EAttribute)generatorDataEClass.getEStructuralFeatures().get(7);
+		return (EAttribute)generatorDataEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -268,6 +221,24 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * @generated
 	 */
 	public EReference getGeneratorData_PhiMappings() {
+		return (EReference)generatorDataEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getGeneratorData_FilteredAddresses() {
+		return (EReference)generatorDataEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getGeneratorData_AddressMappings() {
 		return (EReference)generatorDataEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -305,6 +276,15 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAddressMapping_GeneratorData() {
+		return (EReference)addressMappingEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getConstraintMapping() {
 		return constraintMappingEClass;
 	}
@@ -325,51 +305,6 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 */
 	public EAttribute getConstraintMapping_Condition() {
 		return (EAttribute)constraintMappingEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getFunctionParamsMapping() {
-		return functionParamsMappingEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getFunctionParamsMapping_Function() {
-		return (EReference)functionParamsMappingEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getFunctionParamsMapping_Cfg() {
-		return (EReference)functionParamsMappingEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFunctionParamsMapping_NeedsReturnValue() {
-		return (EAttribute)functionParamsMappingEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFunctionParamsMapping_VarNamesInFunction() {
-		return (EAttribute)functionParamsMappingEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -467,6 +402,33 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getFilterToAddressMapping() {
+		return filterToAddressMappingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFilterToAddressMapping_Key() {
+		return (EAttribute)filterToAddressMappingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFilterToAddressMapping_Value() {
+		return (EReference)filterToAddressMappingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public GendataFactory getGendataFactory()
 	{
 		return (GendataFactory)getEFactoryInstance();
@@ -492,33 +454,25 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		isCreated = true;
 
 		// Create classes and their features
-		localVariablesEClass = createEClass(LOCAL_VARIABLES);
-		createEReference(localVariablesEClass, LOCAL_VARIABLES__VARIABLES);
-
 		generatorDataEClass = createEClass(GENERATOR_DATA);
-		createEReference(generatorDataEClass, GENERATOR_DATA__LOCAL_VARIABLES);
 		createEReference(generatorDataEClass, GENERATOR_DATA__PROGRAM);
 		createEReference(generatorDataEClass, GENERATOR_DATA__CFGS);
 		createEReference(generatorDataEClass, GENERATOR_DATA__CONSTRAINTS);
-		createEReference(generatorDataEClass, GENERATOR_DATA__PARAMETER_MAPPINGS);
 		createEReference(generatorDataEClass, GENERATOR_DATA__LOCATION_LABELS);
 		createEReference(generatorDataEClass, GENERATOR_DATA__TRANSITION_LABELS);
 		createEAttribute(generatorDataEClass, GENERATOR_DATA__TRANSFORMATION_SPECIFIC_KEYS);
 		createEReference(generatorDataEClass, GENERATOR_DATA__PHI_MAPPINGS);
+		createEReference(generatorDataEClass, GENERATOR_DATA__FILTERED_ADDRESSES);
+		createEReference(generatorDataEClass, GENERATOR_DATA__ADDRESS_MAPPINGS);
 
 		addressMappingEClass = createEClass(ADDRESS_MAPPING);
 		createEReference(addressMappingEClass, ADDRESS_MAPPING__ADRESSES);
 		createEAttribute(addressMappingEClass, ADDRESS_MAPPING__OLD_NAMES);
+		createEReference(addressMappingEClass, ADDRESS_MAPPING__GENERATOR_DATA);
 
 		constraintMappingEClass = createEClass(CONSTRAINT_MAPPING);
 		createEReference(constraintMappingEClass, CONSTRAINT_MAPPING__TRANSITION);
 		createEAttribute(constraintMappingEClass, CONSTRAINT_MAPPING__CONDITION);
-
-		functionParamsMappingEClass = createEClass(FUNCTION_PARAMS_MAPPING);
-		createEReference(functionParamsMappingEClass, FUNCTION_PARAMS_MAPPING__FUNCTION);
-		createEReference(functionParamsMappingEClass, FUNCTION_PARAMS_MAPPING__CFG);
-		createEAttribute(functionParamsMappingEClass, FUNCTION_PARAMS_MAPPING__NEEDS_RETURN_VALUE);
-		createEAttribute(functionParamsMappingEClass, FUNCTION_PARAMS_MAPPING__VAR_NAMES_IN_FUNCTION);
 
 		namedElementEClass = createEClass(NAMED_ELEMENT);
 		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
@@ -533,6 +487,10 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		createEReference(phiMappingEClass, PHI_MAPPING__TRANSITION);
 		createEReference(phiMappingEClass, PHI_MAPPING__PHI);
 		createEAttribute(phiMappingEClass, PHI_MAPPING__BLOCK_LABEL_TO_USE);
+
+		filterToAddressMappingEClass = createEClass(FILTER_TO_ADDRESS_MAPPING);
+		createEAttribute(filterToAddressMappingEClass, FILTER_TO_ADDRESS_MAPPING__KEY);
+		createEReference(filterToAddressMappingEClass, FILTER_TO_ADDRESS_MAPPING__VALUE);
 	}
 
 	/**
@@ -573,33 +531,25 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		transitionLabelEClass.getESuperTypes().add(this.getNamedElement());
 
 		// Initialize classes, features, and operations; add parameters
-		initEClass(localVariablesEClass, LocalVariables.class, "LocalVariables", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLocalVariables_Variables(), this.getAddressMapping(), null, "variables", null, 1, -1, LocalVariables.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(generatorDataEClass, GeneratorData.class, "GeneratorData", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGeneratorData_LocalVariables(), this.getLocalVariables(), null, "localVariables", null, 0, 1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_Program(), theLlvmPackage.getLLVM(), null, "program", null, 0, 1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_Cfgs(), theControlflowPackage.getControlFlowDiagram(), null, "cfgs", null, 1, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_Constraints(), this.getConstraintMapping(), null, "constraints", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getGeneratorData_ParameterMappings(), this.getFunctionParamsMapping(), null, "parameterMappings", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_LocationLabels(), this.getLocationLabel(), null, "locationLabels", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_TransitionLabels(), this.getTransitionLabel(), null, "transitionLabels", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGeneratorData_TransformationSpecificKeys(), ecorePackage.getEString(), "transformationSpecificKeys", "", 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_PhiMappings(), this.getPhiMapping(), null, "phiMappings", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGeneratorData_FilteredAddresses(), this.getFilterToAddressMapping(), null, "filteredAddresses", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGeneratorData_AddressMappings(), this.getAddressMapping(), this.getAddressMapping_GeneratorData(), "addressMappings", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(addressMappingEClass, AddressMapping.class, "AddressMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAddressMapping_Adresses(), theLlvmPackage.getAddress(), null, "adresses", null, 0, -1, AddressMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAddressMapping_OldNames(), ecorePackage.getEString(), "oldNames", "", 0, -1, AddressMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAddressMapping_GeneratorData(), this.getGeneratorData(), this.getGeneratorData_AddressMappings(), "generatorData", null, 0, 1, AddressMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(constraintMappingEClass, ConstraintMapping.class, "ConstraintMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getConstraintMapping_Transition(), theControlflowPackage.getTransition(), null, "transition", null, 0, 1, ConstraintMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getConstraintMapping_Condition(), ecorePackage.getEString(), "condition", null, 0, 1, ConstraintMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(functionParamsMappingEClass, FunctionParamsMapping.class, "FunctionParamsMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFunctionParamsMapping_Function(), theLlvmPackage.getFunctionDefinition(), null, "function", null, 0, 1, FunctionParamsMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunctionParamsMapping_Cfg(), theControlflowPackage.getControlFlowDiagram(), null, "cfg", null, 0, 1, FunctionParamsMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFunctionParamsMapping_NeedsReturnValue(), ecorePackage.getEBoolean(), "needsReturnValue", null, 0, 1, FunctionParamsMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFunctionParamsMapping_VarNamesInFunction(), ecorePackage.getEString(), "varNamesInFunction", "", 0, -1, FunctionParamsMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -614,6 +564,10 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		initEReference(getPhiMapping_Transition(), theControlflowPackage.getTransition(), null, "transition", null, 0, 1, PhiMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPhiMapping_Phi(), theLlvmPackage.getPhi(), null, "phi", null, 0, -1, PhiMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPhiMapping_BlockLabelToUse(), ecorePackage.getEString(), "blockLabelToUse", null, 0, 1, PhiMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(filterToAddressMappingEClass, Map.Entry.class, "FilterToAddressMapping", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFilterToAddressMapping_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFilterToAddressMapping_Value(), this.getAddressMapping(), null, "value", null, 0, -1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

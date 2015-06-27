@@ -58,43 +58,6 @@ public interface GendataPackage extends EPackage
 	GendataPackage eINSTANCE = de.upb.lina.cfg.gendata.impl.GendataPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link de.upb.lina.cfg.gendata.impl.LocalVariablesImpl <em>Local Variables</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.upb.lina.cfg.gendata.impl.LocalVariablesImpl
-	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getLocalVariables()
-	 * @generated
-	 */
-	int LOCAL_VARIABLES = 0;
-
-	/**
-	 * The feature id for the '<em><b>Variables</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCAL_VARIABLES__VARIABLES = 0;
-
-	/**
-	 * The number of structural features of the '<em>Local Variables</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCAL_VARIABLES_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Local Variables</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCAL_VARIABLES_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl <em>Generator Data</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -102,16 +65,7 @@ public interface GendataPackage extends EPackage
 	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getGeneratorData()
 	 * @generated
 	 */
-	int GENERATOR_DATA = 1;
-
-	/**
-	 * The feature id for the '<em><b>Local Variables</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERATOR_DATA__LOCAL_VARIABLES = 0;
+	int GENERATOR_DATA = 0;
 
 	/**
 	 * The feature id for the '<em><b>Program</b></em>' reference.
@@ -120,7 +74,7 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA__PROGRAM = 1;
+	int GENERATOR_DATA__PROGRAM = 0;
 
 	/**
 	 * The feature id for the '<em><b>Cfgs</b></em>' reference list.
@@ -129,7 +83,7 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA__CFGS = 2;
+	int GENERATOR_DATA__CFGS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -138,16 +92,7 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA__CONSTRAINTS = 3;
-
-	/**
-	 * The feature id for the '<em><b>Parameter Mappings</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERATOR_DATA__PARAMETER_MAPPINGS = 4;
+	int GENERATOR_DATA__CONSTRAINTS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Location Labels</b></em>' containment reference list.
@@ -156,7 +101,7 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA__LOCATION_LABELS = 5;
+	int GENERATOR_DATA__LOCATION_LABELS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Transition Labels</b></em>' containment reference list.
@@ -165,7 +110,7 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA__TRANSITION_LABELS = 6;
+	int GENERATOR_DATA__TRANSITION_LABELS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Transformation Specific Keys</b></em>' attribute list.
@@ -174,7 +119,7 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA__TRANSFORMATION_SPECIFIC_KEYS = 7;
+	int GENERATOR_DATA__TRANSFORMATION_SPECIFIC_KEYS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Phi Mappings</b></em>' containment reference list.
@@ -183,7 +128,25 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA__PHI_MAPPINGS = 8;
+	int GENERATOR_DATA__PHI_MAPPINGS = 6;
+
+	/**
+	 * The feature id for the '<em><b>Filtered Addresses</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_DATA__FILTERED_ADDRESSES = 7;
+
+	/**
+	 * The feature id for the '<em><b>Address Mappings</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_DATA__ADDRESS_MAPPINGS = 8;
 
 	/**
 	 * The number of structural features of the '<em>Generator Data</em>' class.
@@ -211,7 +174,7 @@ public interface GendataPackage extends EPackage
 	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getNamedElement()
 	 * @generated
 	 */
-	int NAMED_ELEMENT = 5;
+	int NAMED_ELEMENT = 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -248,7 +211,7 @@ public interface GendataPackage extends EPackage
 	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getAddressMapping()
 	 * @generated
 	 */
-	int ADDRESS_MAPPING = 2;
+	int ADDRESS_MAPPING = 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -278,13 +241,22 @@ public interface GendataPackage extends EPackage
 	int ADDRESS_MAPPING__OLD_NAMES = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Generator Data</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDRESS_MAPPING__GENERATOR_DATA = NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Address Mapping</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS_MAPPING_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int ADDRESS_MAPPING_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Address Mapping</em>' class.
@@ -303,7 +275,7 @@ public interface GendataPackage extends EPackage
 	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getConstraintMapping()
 	 * @generated
 	 */
-	int CONSTRAINT_MAPPING = 3;
+	int CONSTRAINT_MAPPING = 2;
 
 	/**
 	 * The feature id for the '<em><b>Transition</b></em>' reference.
@@ -343,71 +315,6 @@ public interface GendataPackage extends EPackage
 
 
 	/**
-	 * The meta object id for the '{@link de.upb.lina.cfg.gendata.impl.FunctionParamsMappingImpl <em>Function Params Mapping</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.upb.lina.cfg.gendata.impl.FunctionParamsMappingImpl
-	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getFunctionParamsMapping()
-	 * @generated
-	 */
-	int FUNCTION_PARAMS_MAPPING = 4;
-
-	/**
-	 * The feature id for the '<em><b>Function</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_PARAMS_MAPPING__FUNCTION = 0;
-
-	/**
-	 * The feature id for the '<em><b>Cfg</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_PARAMS_MAPPING__CFG = 1;
-
-	/**
-	 * The feature id for the '<em><b>Needs Return Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_PARAMS_MAPPING__NEEDS_RETURN_VALUE = 2;
-
-	/**
-	 * The feature id for the '<em><b>Var Names In Function</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_PARAMS_MAPPING__VAR_NAMES_IN_FUNCTION = 3;
-
-	/**
-	 * The number of structural features of the '<em>Function Params Mapping</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_PARAMS_MAPPING_FEATURE_COUNT = 4;
-
-	/**
-	 * The number of operations of the '<em>Function Params Mapping</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_PARAMS_MAPPING_OPERATION_COUNT = 0;
-
-
-	/**
 	 * The meta object id for the '{@link de.upb.lina.cfg.gendata.impl.LocationLabelImpl <em>Location Label</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -415,7 +322,7 @@ public interface GendataPackage extends EPackage
 	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getLocationLabel()
 	 * @generated
 	 */
-	int LOCATION_LABEL = 6;
+	int LOCATION_LABEL = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -461,7 +368,7 @@ public interface GendataPackage extends EPackage
 	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getTransitionLabel()
 	 * @generated
 	 */
-	int TRANSITION_LABEL = 7;
+	int TRANSITION_LABEL = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -508,7 +415,7 @@ public interface GendataPackage extends EPackage
 	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getPhiMapping()
 	 * @generated
 	 */
-	int PHI_MAPPING = 8;
+	int PHI_MAPPING = 6;
 
 	/**
 	 * The feature id for the '<em><b>Transition</b></em>' reference.
@@ -557,25 +464,51 @@ public interface GendataPackage extends EPackage
 
 
 	/**
-	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.LocalVariables <em>Local Variables</em>}'.
+	 * The meta object id for the '{@link de.upb.lina.cfg.gendata.impl.FilterToAddressMappingImpl <em>Filter To Address Mapping</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Local Variables</em>'.
-	 * @see de.upb.lina.cfg.gendata.LocalVariables
+	 * @see de.upb.lina.cfg.gendata.impl.FilterToAddressMappingImpl
+	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getFilterToAddressMapping()
 	 * @generated
 	 */
-	EClass getLocalVariables();
+	int FILTER_TO_ADDRESS_MAPPING = 7;
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.upb.lina.cfg.gendata.LocalVariables#getVariables <em>Variables</em>}'.
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Variables</em>'.
-	 * @see de.upb.lina.cfg.gendata.LocalVariables#getVariables()
-	 * @see #getLocalVariables()
 	 * @generated
+	 * @ordered
 	 */
-	EReference getLocalVariables_Variables();
+	int FILTER_TO_ADDRESS_MAPPING__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILTER_TO_ADDRESS_MAPPING__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Filter To Address Mapping</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILTER_TO_ADDRESS_MAPPING_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Filter To Address Mapping</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILTER_TO_ADDRESS_MAPPING_OPERATION_COUNT = 0;
+
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.GeneratorData <em>Generator Data</em>}'.
@@ -586,17 +519,6 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 */
 	EClass getGeneratorData();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link de.upb.lina.cfg.gendata.GeneratorData#getLocalVariables <em>Local Variables</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Local Variables</em>'.
-	 * @see de.upb.lina.cfg.gendata.GeneratorData#getLocalVariables()
-	 * @see #getGeneratorData()
-	 * @generated
-	 */
-	EReference getGeneratorData_LocalVariables();
 
 	/**
 	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.gendata.GeneratorData#getProgram <em>Program</em>}'.
@@ -630,17 +552,6 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 */
 	EReference getGeneratorData_Constraints();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.upb.lina.cfg.gendata.GeneratorData#getParameterMappings <em>Parameter Mappings</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Parameter Mappings</em>'.
-	 * @see de.upb.lina.cfg.gendata.GeneratorData#getParameterMappings()
-	 * @see #getGeneratorData()
-	 * @generated
-	 */
-	EReference getGeneratorData_ParameterMappings();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.upb.lina.cfg.gendata.GeneratorData#getLocationLabels <em>Location Labels</em>}'.
@@ -687,6 +598,28 @@ public interface GendataPackage extends EPackage
 	EReference getGeneratorData_PhiMappings();
 
 	/**
+	 * Returns the meta object for the map '{@link de.upb.lina.cfg.gendata.GeneratorData#getFilteredAddresses <em>Filtered Addresses</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Filtered Addresses</em>'.
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getFilteredAddresses()
+	 * @see #getGeneratorData()
+	 * @generated
+	 */
+	EReference getGeneratorData_FilteredAddresses();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.upb.lina.cfg.gendata.GeneratorData#getAddressMappings <em>Address Mappings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Address Mappings</em>'.
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getAddressMappings()
+	 * @see #getGeneratorData()
+	 * @generated
+	 */
+	EReference getGeneratorData_AddressMappings();
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.AddressMapping <em>Address Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -719,6 +652,17 @@ public interface GendataPackage extends EPackage
 	EAttribute getAddressMapping_OldNames();
 
 	/**
+	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.gendata.AddressMapping#getGeneratorData <em>Generator Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Generator Data</em>'.
+	 * @see de.upb.lina.cfg.gendata.AddressMapping#getGeneratorData()
+	 * @see #getAddressMapping()
+	 * @generated
+	 */
+	EReference getAddressMapping_GeneratorData();
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.ConstraintMapping <em>Constraint Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -749,60 +693,6 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getConstraintMapping_Condition();
-
-	/**
-	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.FunctionParamsMapping <em>Function Params Mapping</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Function Params Mapping</em>'.
-	 * @see de.upb.lina.cfg.gendata.FunctionParamsMapping
-	 * @generated
-	 */
-	EClass getFunctionParamsMapping();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#getFunction <em>Function</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Function</em>'.
-	 * @see de.upb.lina.cfg.gendata.FunctionParamsMapping#getFunction()
-	 * @see #getFunctionParamsMapping()
-	 * @generated
-	 */
-	EReference getFunctionParamsMapping_Function();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#getCfg <em>Cfg</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Cfg</em>'.
-	 * @see de.upb.lina.cfg.gendata.FunctionParamsMapping#getCfg()
-	 * @see #getFunctionParamsMapping()
-	 * @generated
-	 */
-	EReference getFunctionParamsMapping_Cfg();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#isNeedsReturnValue <em>Needs Return Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Needs Return Value</em>'.
-	 * @see de.upb.lina.cfg.gendata.FunctionParamsMapping#isNeedsReturnValue()
-	 * @see #getFunctionParamsMapping()
-	 * @generated
-	 */
-	EAttribute getFunctionParamsMapping_NeedsReturnValue();
-
-	/**
-	 * Returns the meta object for the attribute list '{@link de.upb.lina.cfg.gendata.FunctionParamsMapping#getVarNamesInFunction <em>Var Names In Function</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Var Names In Function</em>'.
-	 * @see de.upb.lina.cfg.gendata.FunctionParamsMapping#getVarNamesInFunction()
-	 * @see #getFunctionParamsMapping()
-	 * @generated
-	 */
-	EAttribute getFunctionParamsMapping_VarNamesInFunction();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.NamedElement <em>Named Element</em>}'.
@@ -911,6 +801,40 @@ public interface GendataPackage extends EPackage
 	EAttribute getPhiMapping_BlockLabelToUse();
 
 	/**
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Filter To Address Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Filter To Address Mapping</em>'.
+	 * @see java.util.Map.Entry
+	 * @model keyDataType="org.eclipse.emf.ecore.EString"
+	 *        valueType="de.upb.lina.cfg.gendata.AddressMapping" valueMany="true"
+	 * @generated
+	 */
+	EClass getFilterToAddressMapping();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getFilterToAddressMapping()
+	 * @generated
+	 */
+	EAttribute getFilterToAddressMapping_Key();
+
+	/**
+	 * Returns the meta object for the reference list '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getFilterToAddressMapping()
+	 * @generated
+	 */
+	EReference getFilterToAddressMapping_Value();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -935,24 +859,6 @@ public interface GendataPackage extends EPackage
 	interface Literals
 	{
 		/**
-		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.LocalVariablesImpl <em>Local Variables</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.upb.lina.cfg.gendata.impl.LocalVariablesImpl
-		 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getLocalVariables()
-		 * @generated
-		 */
-		EClass LOCAL_VARIABLES = eINSTANCE.getLocalVariables();
-
-		/**
-		 * The meta object literal for the '<em><b>Variables</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LOCAL_VARIABLES__VARIABLES = eINSTANCE.getLocalVariables_Variables();
-
-		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl <em>Generator Data</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -961,14 +867,6 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EClass GENERATOR_DATA = eINSTANCE.getGeneratorData();
-
-		/**
-		 * The meta object literal for the '<em><b>Local Variables</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference GENERATOR_DATA__LOCAL_VARIABLES = eINSTANCE.getGeneratorData_LocalVariables();
 
 		/**
 		 * The meta object literal for the '<em><b>Program</b></em>' reference feature.
@@ -993,14 +891,6 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EReference GENERATOR_DATA__CONSTRAINTS = eINSTANCE.getGeneratorData_Constraints();
-
-		/**
-		 * The meta object literal for the '<em><b>Parameter Mappings</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference GENERATOR_DATA__PARAMETER_MAPPINGS = eINSTANCE.getGeneratorData_ParameterMappings();
 
 		/**
 		 * The meta object literal for the '<em><b>Location Labels</b></em>' containment reference list feature.
@@ -1035,6 +925,22 @@ public interface GendataPackage extends EPackage
 		EReference GENERATOR_DATA__PHI_MAPPINGS = eINSTANCE.getGeneratorData_PhiMappings();
 
 		/**
+		 * The meta object literal for the '<em><b>Filtered Addresses</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GENERATOR_DATA__FILTERED_ADDRESSES = eINSTANCE.getGeneratorData_FilteredAddresses();
+
+		/**
+		 * The meta object literal for the '<em><b>Address Mappings</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GENERATOR_DATA__ADDRESS_MAPPINGS = eINSTANCE.getGeneratorData_AddressMappings();
+
+		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.AddressMappingImpl <em>Address Mapping</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1061,6 +967,14 @@ public interface GendataPackage extends EPackage
 		EAttribute ADDRESS_MAPPING__OLD_NAMES = eINSTANCE.getAddressMapping_OldNames();
 
 		/**
+		 * The meta object literal for the '<em><b>Generator Data</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ADDRESS_MAPPING__GENERATOR_DATA = eINSTANCE.getAddressMapping_GeneratorData();
+
+		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.ConstraintMappingImpl <em>Constraint Mapping</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1085,48 +999,6 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute CONSTRAINT_MAPPING__CONDITION = eINSTANCE.getConstraintMapping_Condition();
-
-		/**
-		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.FunctionParamsMappingImpl <em>Function Params Mapping</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.upb.lina.cfg.gendata.impl.FunctionParamsMappingImpl
-		 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getFunctionParamsMapping()
-		 * @generated
-		 */
-		EClass FUNCTION_PARAMS_MAPPING = eINSTANCE.getFunctionParamsMapping();
-
-		/**
-		 * The meta object literal for the '<em><b>Function</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FUNCTION_PARAMS_MAPPING__FUNCTION = eINSTANCE.getFunctionParamsMapping_Function();
-
-		/**
-		 * The meta object literal for the '<em><b>Cfg</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FUNCTION_PARAMS_MAPPING__CFG = eINSTANCE.getFunctionParamsMapping_Cfg();
-
-		/**
-		 * The meta object literal for the '<em><b>Needs Return Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FUNCTION_PARAMS_MAPPING__NEEDS_RETURN_VALUE = eINSTANCE.getFunctionParamsMapping_NeedsReturnValue();
-
-		/**
-		 * The meta object literal for the '<em><b>Var Names In Function</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FUNCTION_PARAMS_MAPPING__VAR_NAMES_IN_FUNCTION = eINSTANCE.getFunctionParamsMapping_VarNamesInFunction();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.NamedElementImpl <em>Named Element</em>}' class.
@@ -1215,6 +1087,32 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute PHI_MAPPING__BLOCK_LABEL_TO_USE = eINSTANCE.getPhiMapping_BlockLabelToUse();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.FilterToAddressMappingImpl <em>Filter To Address Mapping</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.lina.cfg.gendata.impl.FilterToAddressMappingImpl
+		 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getFilterToAddressMapping()
+		 * @generated
+		 */
+		EClass FILTER_TO_ADDRESS_MAPPING = eINSTANCE.getFilterToAddressMapping();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FILTER_TO_ADDRESS_MAPPING__KEY = eINSTANCE.getFilterToAddressMapping_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FILTER_TO_ADDRESS_MAPPING__VALUE = eINSTANCE.getFilterToAddressMapping_Value();
 
 	}
 

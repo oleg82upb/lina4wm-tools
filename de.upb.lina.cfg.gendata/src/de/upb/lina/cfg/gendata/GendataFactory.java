@@ -23,15 +23,6 @@ public interface GendataFactory extends EFactory
 	GendataFactory eINSTANCE = de.upb.lina.cfg.gendata.impl.GendataFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Local Variables</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Local Variables</em>'.
-	 * @generated
-	 */
-	LocalVariables createLocalVariables();
-
-	/**
 	 * Returns a new object of class '<em>Generator Data</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -57,15 +48,6 @@ public interface GendataFactory extends EFactory
 	 * @generated
 	 */
 	ConstraintMapping createConstraintMapping();
-
-	/**
-	 * Returns a new object of class '<em>Function Params Mapping</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Function Params Mapping</em>'.
-	 * @generated
-	 */
-	FunctionParamsMapping createFunctionParamsMapping();
 
 	/**
 	 * Returns a new object of class '<em>Location Label</em>'.

@@ -4,6 +4,8 @@ package de.upb.lina.cfg.gendata.util;
 
 import de.upb.lina.cfg.gendata.*;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -70,12 +72,6 @@ public class GendataSwitch<T> extends Switch<T>
 	protected T doSwitch(int classifierID, EObject theEObject)
 	{
 		switch (classifierID) {
-			case GendataPackage.LOCAL_VARIABLES: {
-				LocalVariables localVariables = (LocalVariables)theEObject;
-				T result = caseLocalVariables(localVariables);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case GendataPackage.GENERATOR_DATA: {
 				GeneratorData generatorData = (GeneratorData)theEObject;
 				T result = caseGeneratorData(generatorData);
@@ -92,12 +88,6 @@ public class GendataSwitch<T> extends Switch<T>
 			case GendataPackage.CONSTRAINT_MAPPING: {
 				ConstraintMapping constraintMapping = (ConstraintMapping)theEObject;
 				T result = caseConstraintMapping(constraintMapping);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GendataPackage.FUNCTION_PARAMS_MAPPING: {
-				FunctionParamsMapping functionParamsMapping = (FunctionParamsMapping)theEObject;
-				T result = caseFunctionParamsMapping(functionParamsMapping);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -127,24 +117,14 @@ public class GendataSwitch<T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case GendataPackage.FILTER_TO_ADDRESS_MAPPING: {
+				@SuppressWarnings("unchecked") Map.Entry<String, EList<AddressMapping>> filterToAddressMapping = (Map.Entry<String, EList<AddressMapping>>)theEObject;
+				T result = caseFilterToAddressMapping(filterToAddressMapping);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Local Variables</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Local Variables</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLocalVariables(LocalVariables object)
-	{
-		return null;
 	}
 
 	/**
@@ -191,21 +171,6 @@ public class GendataSwitch<T> extends Switch<T>
 	 * @generated
 	 */
 	public T caseConstraintMapping(ConstraintMapping object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Function Params Mapping</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Function Params Mapping</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFunctionParamsMapping(FunctionParamsMapping object) {
 		return null;
 	}
 
@@ -266,6 +231,21 @@ public class GendataSwitch<T> extends Switch<T>
 	 * @generated
 	 */
 	public T casePhiMapping(PhiMapping object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Filter To Address Mapping</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Filter To Address Mapping</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFilterToAddressMapping(Map.Entry<String, EList<AddressMapping>> object) {
 		return null;
 	}
 

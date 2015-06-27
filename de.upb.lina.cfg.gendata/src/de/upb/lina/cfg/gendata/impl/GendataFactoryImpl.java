@@ -4,6 +4,8 @@ package de.upb.lina.cfg.gendata.impl;
 
 import de.upb.lina.cfg.gendata.*;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -60,28 +62,16 @@ public class GendataFactoryImpl extends EFactoryImpl implements GendataFactory
 	public EObject create(EClass eClass)
 	{
 		switch (eClass.getClassifierID()) {
-			case GendataPackage.LOCAL_VARIABLES: return createLocalVariables();
 			case GendataPackage.GENERATOR_DATA: return createGeneratorData();
 			case GendataPackage.ADDRESS_MAPPING: return createAddressMapping();
 			case GendataPackage.CONSTRAINT_MAPPING: return createConstraintMapping();
-			case GendataPackage.FUNCTION_PARAMS_MAPPING: return createFunctionParamsMapping();
 			case GendataPackage.LOCATION_LABEL: return createLocationLabel();
 			case GendataPackage.TRANSITION_LABEL: return createTransitionLabel();
 			case GendataPackage.PHI_MAPPING: return createPhiMapping();
+			case GendataPackage.FILTER_TO_ADDRESS_MAPPING: return (EObject)createFilterToAddressMapping();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public LocalVariables createLocalVariables()
-	{
-		LocalVariablesImpl localVariables = new LocalVariablesImpl();
-		return localVariables;
 	}
 
 	/**
@@ -121,16 +111,6 @@ public class GendataFactoryImpl extends EFactoryImpl implements GendataFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FunctionParamsMapping createFunctionParamsMapping() {
-		FunctionParamsMappingImpl functionParamsMapping = new FunctionParamsMappingImpl();
-		return functionParamsMapping;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public LocationLabel createLocationLabel() {
 		LocationLabelImpl locationLabel = new LocationLabelImpl();
 		return locationLabel;
@@ -154,6 +134,16 @@ public class GendataFactoryImpl extends EFactoryImpl implements GendataFactory
 	public PhiMapping createPhiMapping() {
 		PhiMappingImpl phiMapping = new PhiMappingImpl();
 		return phiMapping;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map.Entry<String, EList<AddressMapping>> createFilterToAddressMapping() {
+		FilterToAddressMappingImpl filterToAddressMapping = new FilterToAddressMappingImpl();
+		return filterToAddressMapping;
 	}
 
 	/**
