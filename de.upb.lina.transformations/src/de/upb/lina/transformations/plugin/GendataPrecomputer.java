@@ -478,9 +478,16 @@ public class GendataPrecomputer {
 	 */
 	private void initLocalVariables(List<AddressMapping> allVariables, EMap<String,EList<AddressMapping>> filteredAddresses, LLVM program) throws IllegalArgumentException{
 
-		//map copyVars from writeDefChain
+		//map local variables of cfgs
 		for(ControlFlowDiagram cfg : cfgs){
 			for(Transition t : cfg.getTransitions()){
+				
+				Instruction i = t.getInstruction();
+				if(i != null){
+					addInstructionVariablesToMapping(allVariables, cfg, i);
+				}
+				
+				//map copyVars from writeDefChain
 				if(t instanceof WriteDefChainTransition){
 					WriteDefChainTransition wdcTransition = (WriteDefChainTransition) t;
 					if(wdcTransition.getCopyAddress() != null){
@@ -525,144 +532,8 @@ public class GendataPrecomputer {
 					filteredAddresses.put(FUNC_PARAMS+matchingCfg.getName(), paramsMapping);
 				}
 
-				//map vars in function
-				if(fDef.getBody() != null && matchingCfg != null){
-					for(BasicBlock b: fDef.getBody().getBlocks()){
-						for(Instruction i: b.getInstructions()){
-							if(i instanceof ArithmeticOperation){
-								ArithmeticOperation op = (ArithmeticOperation)i;
-								addToMapping(allVariables, matchingCfg, op.getResult());
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getValue1()));
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getValue2()));
-
-							}else if(i instanceof LogicOperation){
-								LogicOperation op = (LogicOperation)i;
-								addToMapping(allVariables, matchingCfg, op.getResult());
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getValue1()));
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getValue2()));
-
-							}else if(i instanceof Cast){
-								Cast op = (Cast)i;
-								addToMapping(allVariables, matchingCfg, op.getResult());
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getValue()));
-
-							}else if(i instanceof GetElementPtr){
-								GetElementPtr op = (GetElementPtr)i;
-								addToMapping(allVariables, matchingCfg, op.getResult());
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getAggerate().getValue()));
-
-							}else if(i instanceof Fence){
-								//nothing to do here
-							}else if(i instanceof CmpXchg){
-								CmpXchg op = (CmpXchg)i;
-								addToMapping(allVariables, matchingCfg, op.getResult());
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getAddress().getValue()));
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getNewValue().getValue()));
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getValue().getValue()));
-							}else if(i instanceof AtomicRMW){
-								AtomicRMW op = (AtomicRMW) i;
-								addToMapping(allVariables, matchingCfg, op.getResult());
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getAddress().getValue()));
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getArgument().getValue()));
-
-							}else if(i instanceof Load){
-								Load op = (Load) i;
-								addToMapping(allVariables, matchingCfg, op.getResult());
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getAddress().getValue()));
-
-							}else if(i instanceof Store){
-								Store op = (Store)i;
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getTargetAddress().getValue()));
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getValue().getValue()));
-
-							}else if(i instanceof Call){
-								Call op = (Call)i;
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getFunction().getValue()));
-								addToMapping(allVariables, matchingCfg, op.getResult());
-
-							}else if(i instanceof Alloc){
-								Alloc op = (Alloc)i;
-								addToMapping(allVariables, matchingCfg, op.getResult());
-								if(op.getNumOfElements()!=null)
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getNumOfElements().getValue()));
-
-							}else if(i instanceof Phi){
-								Phi op = (Phi)i;
-								addToMapping(allVariables, matchingCfg, op.getResult());
-
-							}else if(i instanceof LandingPad){
-								LandingPad op = (LandingPad)i;
-								addToMapping(allVariables, matchingCfg, op.getResult());
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getPersonalityvalue()));
-
-							}else if(i instanceof Select){
-								Select op = (Select)i;
-								addToMapping(allVariables, matchingCfg, op.getResult());
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getCondition().getValue()));
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getElseValue().getValue()));
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getTrueValue().getValue()));
-
-							}else if(i instanceof VariableAttributeAccess){
-								VariableAttributeAccess op = (VariableAttributeAccess) i;
-								addToMapping(allVariables, matchingCfg, op.getResult());
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getVaList().getValue()));
-
-							}else if(i instanceof ExtractValue){
-								ExtractValue op = (ExtractValue)i;
-								addToMapping(allVariables, matchingCfg, op.getResult());
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getAggerate().getValue()));
-
-							}else if(i instanceof InsertValue){
-								InsertValue op = (InsertValue)i;
-								addToMapping(allVariables, matchingCfg, op.getResult());
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getAggerate().getValue()));
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getValue().getValue()));
-							}else if(i instanceof ExtractElement){
-								ExtractElement op = (ExtractElement)i;
-								addToMapping(allVariables, matchingCfg, op.getResult());
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getVector().getValue()));
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getIndex().getValue()));
-
-							}else if(i instanceof InsertElement){
-								InsertElement op = (InsertElement)i;
-								addToMapping(allVariables, matchingCfg, op.getResult());
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getVector().getValue()));
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getIndex().getValue()));
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getValue().getValue()));
-
-							}else if(i instanceof ShuffleVector){
-								ShuffleVector op = (ShuffleVector)i;
-								addToMapping(allVariables, matchingCfg, op.getResult());
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getValue1().getValue()));
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getValue2().getValue()));
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getMask().getValue()));
-							}else if(i instanceof Compare){
-								Compare op = (Compare)i;
-								addToMapping(allVariables, matchingCfg, op.getResult());
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getOperand1()));
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getOperand2()));
-							}else if(i instanceof IndirectBranch){
-								//nothing to do here
-							}else if(i instanceof Switch){
-								//nothing to do here
-							}else if(i instanceof Invoke){
-								Invoke op = (Invoke)i;
-								addToMapping(allVariables, matchingCfg, op.getName());
-							}else if(i instanceof Resume){
-								//nothing to do here
-							}else if(i instanceof Unreachable){
-								//nothing to do here
-							}else if(i instanceof Return){
-								Return op = (Return) i;
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getValue().getValue()));
-
-							}else if(i instanceof Branch){
-								Branch op = (Branch)i;
-								addToMapping(allVariables, matchingCfg, extractAddressFromValue(op.getCondition()));
-							}	
-						}
-					}
-				}
+				
+				
 			}else if(ele instanceof GlobalDefinition){
 				GlobalDefinition gDef = (GlobalDefinition)ele;
 				AddressMapping defAddress = addToMapping(allVariables, null, gDef.getAddress());
@@ -677,6 +548,142 @@ public class GendataPrecomputer {
 			
 		}
 		filteredAddresses.put(GLOBAL_VARS, globals);
+	}
+
+	private void addInstructionVariablesToMapping(List<AddressMapping> allVariables, ControlFlowDiagram cfg,
+			Instruction i) {
+		if(i instanceof ArithmeticOperation){
+			ArithmeticOperation op = (ArithmeticOperation)i;
+			addToMapping(allVariables, cfg, op.getResult());
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue1()));
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue2()));
+
+		}else if(i instanceof LogicOperation){
+			LogicOperation op = (LogicOperation)i;
+			addToMapping(allVariables, cfg, op.getResult());
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue1()));
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue2()));
+
+		}else if(i instanceof Cast){
+			Cast op = (Cast)i;
+			addToMapping(allVariables, cfg, op.getResult());
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue()));
+
+		}else if(i instanceof GetElementPtr){
+			GetElementPtr op = (GetElementPtr)i;
+			addToMapping(allVariables, cfg, op.getResult());
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getAggerate().getValue()));
+
+		}else if(i instanceof Fence){
+			//nothing to do here
+		}else if(i instanceof CmpXchg){
+			CmpXchg op = (CmpXchg)i;
+			addToMapping(allVariables, cfg, op.getResult());
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getAddress().getValue()));
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getNewValue().getValue()));
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue().getValue()));
+		}else if(i instanceof AtomicRMW){
+			AtomicRMW op = (AtomicRMW) i;
+			addToMapping(allVariables, cfg, op.getResult());
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getAddress().getValue()));
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getArgument().getValue()));
+
+		}else if(i instanceof Load){
+			Load op = (Load) i;
+			addToMapping(allVariables, cfg, op.getResult());
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getAddress().getValue()));
+
+		}else if(i instanceof Store){
+			Store op = (Store)i;
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getTargetAddress().getValue()));
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue().getValue()));
+
+		}else if(i instanceof Call){
+			Call op = (Call)i;
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getFunction().getValue()));
+			addToMapping(allVariables, cfg, op.getResult());
+
+		}else if(i instanceof Alloc){
+			Alloc op = (Alloc)i;
+			addToMapping(allVariables, cfg, op.getResult());
+			if(op.getNumOfElements()!=null)
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getNumOfElements().getValue()));
+
+		}else if(i instanceof Phi){
+			Phi op = (Phi)i;
+			addToMapping(allVariables, cfg, op.getResult());
+
+		}else if(i instanceof LandingPad){
+			LandingPad op = (LandingPad)i;
+			addToMapping(allVariables, cfg, op.getResult());
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getPersonalityvalue()));
+
+		}else if(i instanceof Select){
+			Select op = (Select)i;
+			addToMapping(allVariables, cfg, op.getResult());
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getCondition().getValue()));
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getElseValue().getValue()));
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getTrueValue().getValue()));
+
+		}else if(i instanceof VariableAttributeAccess){
+			VariableAttributeAccess op = (VariableAttributeAccess) i;
+			addToMapping(allVariables, cfg, op.getResult());
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getVaList().getValue()));
+
+		}else if(i instanceof ExtractValue){
+			ExtractValue op = (ExtractValue)i;
+			addToMapping(allVariables, cfg, op.getResult());
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getAggerate().getValue()));
+
+		}else if(i instanceof InsertValue){
+			InsertValue op = (InsertValue)i;
+			addToMapping(allVariables, cfg, op.getResult());
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getAggerate().getValue()));
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue().getValue()));
+		}else if(i instanceof ExtractElement){
+			ExtractElement op = (ExtractElement)i;
+			addToMapping(allVariables, cfg, op.getResult());
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getVector().getValue()));
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getIndex().getValue()));
+
+		}else if(i instanceof InsertElement){
+			InsertElement op = (InsertElement)i;
+			addToMapping(allVariables, cfg, op.getResult());
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getVector().getValue()));
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getIndex().getValue()));
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue().getValue()));
+
+		}else if(i instanceof ShuffleVector){
+			ShuffleVector op = (ShuffleVector)i;
+			addToMapping(allVariables, cfg, op.getResult());
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue1().getValue()));
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue2().getValue()));
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getMask().getValue()));
+		}else if(i instanceof Compare){
+			Compare op = (Compare)i;
+			addToMapping(allVariables, cfg, op.getResult());
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getOperand1()));
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getOperand2()));
+		}else if(i instanceof IndirectBranch){
+			//nothing to do here
+		}else if(i instanceof Switch){
+			//nothing to do here
+		}else if(i instanceof Invoke){
+			Invoke op = (Invoke)i;
+			addToMapping(allVariables, cfg, op.getName());
+		}else if(i instanceof Resume){
+			//nothing to do here
+		}else if(i instanceof Unreachable){
+			//nothing to do here
+		}else if(i instanceof Return){
+			Return op = (Return) i;
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue().getValue()));
+
+		}else if(i instanceof Branch){
+			Branch op = (Branch)i;
+			addToMapping(allVariables, cfg, extractAddressFromValue(op.getCondition()));
+		}	
+		
 	}
 
 	private AddressMapping addToMapping(List<AddressMapping> mapping, ControlFlowDiagram cfg, Address address){
