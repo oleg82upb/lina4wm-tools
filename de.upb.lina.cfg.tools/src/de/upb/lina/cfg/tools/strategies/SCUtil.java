@@ -141,7 +141,7 @@ public class SCUtil implements IGraphGenerator{
 			//TODO: check if switch implementation correct
 			Switch swit = (Switch)nextInstruction;
 			
-			Instruction defaultInstruction = util.getInstructionWithLabel(function, swit.getDefaultCase());
+			Instruction defaultInstruction = util.getInstructionWithLabel(function, swit.getDefaultCase().substring(1));
 			ControlFlowLocation defaultLocation = createControlFlowLocation(cfg, util.getPcOfInstruction(defaultInstruction, instructions), createStoreBuffer(toExplore.getBuffer(), defaultInstruction), util.findLabelByInstruction(function, nextInstruction));
 			
 			GuardedTransition defaultCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
@@ -156,7 +156,7 @@ public class SCUtil implements IGraphGenerator{
 			}
 			
 			for(SwitchCase sc: swit.getCases()){
-				Instruction caseInstruction = util.getInstructionWithLabel(function, util.valueToString(sc.getCaseValue().getValue()));
+				Instruction caseInstruction = util.getInstructionWithLabel(function, sc.getDestination().substring(1));
 				ControlFlowLocation caseLocation = createControlFlowLocation(cfg, util.getPcOfInstruction(caseInstruction, instructions), createStoreBuffer(toExplore.getBuffer(), caseInstruction), util.findLabelByInstruction(function, nextInstruction));
 				
 				GuardedTransition caseC = ControlflowFactory.eINSTANCE.createGuardedTransition();
