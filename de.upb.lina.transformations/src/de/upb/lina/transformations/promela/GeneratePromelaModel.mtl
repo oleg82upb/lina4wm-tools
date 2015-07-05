@@ -10,7 +10,7 @@
 [genData.buildStandards()/]
 
 [for (cfg: ControlFlowDiagram | genData.cfgs)]
-inline [cfg.name.replaceAll('@_', '')/]([genParams(cfg, genData)/]){
+inline [cfg.name.replaceAll('@_', '').replaceAll('@','')/]([genParams(cfg, genData)/]){
 [genLocalVarDeclarations(cfg, genData)/]
 [handleStartLocation(genData, cfg)/][for (loc: ControlFlowLocation | cfg.locations)][handleLocation(loc, genData)/][/for]
 }
