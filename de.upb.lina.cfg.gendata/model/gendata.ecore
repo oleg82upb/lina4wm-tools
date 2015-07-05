@@ -6,16 +6,16 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="cfgs" lowerBound="1" upperBound="-1"
         eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//ControlFlowDiagram"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
-        eType="#//ConstraintMapping" containment="true"/>
+        eType="#//ConstraintMapping" containment="true" eOpposite="#//ConstraintMapping/generatorData"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="locationLabels" upperBound="-1"
-        eType="#//LocationLabel" containment="true"/>
+        eType="#//LocationLabel" containment="true" eOpposite="#//LocationLabel/generatorData"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transitionLabels" upperBound="-1"
-        eType="#//TransitionLabel" containment="true"/>
+        eType="#//TransitionLabel" containment="true" eOpposite="#//TransitionLabel/generatorData"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="transformationSpecificKeys"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="phiMappings" upperBound="-1"
-        eType="#//PhiMapping" containment="true"/>
+        eType="#//PhiMapping" containment="true" eOpposite="#//PhiMapping/generatorData"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="filteredAddresses" upperBound="-1"
         eType="#//FilterToAddressMapping" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="addressMappings" upperBound="-1"
@@ -32,20 +32,28 @@
   <eClassifiers xsi:type="ecore:EClass" name="ConstraintMapping">
     <eStructuralFeatures xsi:type="ecore:EReference" name="transition" eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//Transition"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generatorData" eType="#//GeneratorData"
+        eOpposite="#//GeneratorData/constraints"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LocationLabel" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="controlFlowLocation" eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//ControlFlowLocation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generatorData" eType="#//GeneratorData"
+        eOpposite="#//GeneratorData/locationLabels"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TransitionLabel" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="transition" eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//Transition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generatorData" eType="#//GeneratorData"
+        eOpposite="#//GeneratorData/transitionLabels"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PhiMapping">
     <eStructuralFeatures xsi:type="ecore:EReference" name="transition" eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//Transition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="phi" upperBound="-1" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Phi"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="blockLabelToUse" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generatorData" eType="#//GeneratorData"
+        eOpposite="#//GeneratorData/phiMappings"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FilterToAddressMapping" instanceClassName="java.util.Map$Entry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
