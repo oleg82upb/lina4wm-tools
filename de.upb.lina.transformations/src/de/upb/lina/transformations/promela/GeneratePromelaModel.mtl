@@ -81,7 +81,7 @@ inline [cfg.name.replaceAll('@_', '').replaceAll('@','')/]([genParams(cfg, genDa
 [/template]
 
 [template public transformTransitions(t: FlushTransition, genData: GeneratorData)]
-memory['['/][t.source.buffer.addressValuePairs.address.value.valueToString(genData)/][']'/]=[t.source.buffer.addressValuePairs.value.value.valueToString(genData)/];
+memory['['/][t.source.buffer.addressValuePairs->first().address.value.valueToString(genData)/][']'/]=[t.source.buffer.addressValuePairs->first().value.value.valueToString(genData)/];
 [/template]
 
 [comment ====== Instructions ======/]
