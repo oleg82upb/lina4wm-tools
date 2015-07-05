@@ -29,13 +29,11 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IMemento;
@@ -46,20 +44,11 @@ import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
 import de.upb.lina.transformations.plugin.Activator;
+import de.upb.lina.transformations.plugin.Constants;
 import de.upb.lina.transformations.plugin.ETransformationTarget;
 
 public class TransformationWizardPage extends WizardPage {
 
-	private final static String FILE_EXT = "cfg";
-
-	public final static String MEMENTO__KEY = "de.upb.lina.cfg.transformations.transformationwizardpage";
-	private final static String CFGLOC = "cfgloc";
-	private final static String CONTAINER = "container";
-	private final static String NEW_FILE = "newFile";
-	private final static String MODEL_SELECTION = "modelSelection";
-
-	private Image ok = new Image(Display.getCurrent(), getClass().getResourceAsStream("ok.gif"));
-	private Image nok = new Image(Display.getCurrent(), getClass().getResourceAsStream("error.gif"));
 	private String newFileLoc = "";
 	private String containerLoc = "";
 	private String cfgLoc = "";
@@ -71,15 +60,13 @@ public class TransformationWizardPage extends WizardPage {
 	private boolean canFlip = true;
 	
 	private ISelection selection;
-	//0 - promela
-	//1 - kif
-	private int type = 0;
+	
+	private int type = Constants.TRANSFORMATION_TYPE_PROMELA;
 	private Combo cb_model;
 	
 	private Combo cb_basis;
-	public static final int NAT = 0;
-	public static final int INT = 1;
-	private int basis = NAT;
+	
+	private int basis = Constants.NAT;
 
 	private FunctionSelectionPage nextPage;
 	private IMemento memento;
@@ -171,7 +158,7 @@ public class TransformationWizardPage extends WizardPage {
 		cb_model.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
 				type = cb_model.getSelectionIndex();
-				if(type == 1){
+				if(type == Constants.TRANSFORMATION_TYPE_KIV){
 					tx_file.setEnabled(false);
 					if(cb_basis != null)
 					cb_basis.setEnabled(true);
@@ -201,19 +188,19 @@ public class TransformationWizardPage extends WizardPage {
 			}
 		});
 		
-		cb_basis.select(NAT);
+		cb_basis.select(Constants.NAT);
 		cb_basis.setEnabled(false);
 		
 		setControl(container);
 				if (memento != null) {
-					tx_graphModelFile.setText(memento.getString(CFGLOC));
+					tx_graphModelFile.setText(memento.getString(Constants.CFGLOC));
 					validateInput();
-					tx_container.setText(memento.getString(CONTAINER));
+					tx_container.setText(memento.getString(Constants.CONTAINER));
 					validateInput();
-					tx_file.setText(memento.getString(NEW_FILE));
+					tx_file.setText(memento.getString(Constants.NEW_FILE));
 					validateInput();
 					try {
-						cb_model.select(memento.getInteger(MODEL_SELECTION));
+						cb_model.select(memento.getInteger(Constants.MODEL_SELECTION));
 					} catch (NullPointerException ex) {
 						Activator.logWarning(
 								"Warning: Memento not setup correctly - this warning will disappear after creating one cfg.",
@@ -273,7 +260,7 @@ public class TransformationWizardPage extends WizardPage {
 				}
 				if (element instanceof IFile) {
 					IFile file = (IFile) element;
-					return FILE_EXT.equals(file.getFileExtension());
+					return Constants.FILE_EXT.equals(file.getFileExtension());
 				}
 				return false;
 			}
@@ -345,16 +332,7 @@ public class TransformationWizardPage extends WizardPage {
 			}
 			return;
 		}
-//		if (!isValidTypeName(tx_file.getText())) {
-//			if(type == 0){
-//				updateStatus("No valid filename. Check the extension (*.pml)");
-//			}else if(type == 1){
-//				updateStatus("No valid filename. Check the extension (*.kif)");
-//			}
-//			return;
-//		}
-		
-		//TODO: See why this bugs
+
 		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		
 		IPath path = new Path(tx_container.getText() + File.separator + tx_file.getText() + lb_fileEnding.getText());
@@ -368,7 +346,7 @@ public class TransformationWizardPage extends WizardPage {
 		path = new Path(tx_container.getText()+File.separator+"PC.utf8");
 		file = myWorkspaceRoot.getFile(path);
 		
-		if(file.exists() && type == 1){
+		if(file.exists() && type == Constants.TRANSFORMATION_TYPE_KIV){
 			updateWarning("The selected target folder already contains a KIV Specification. If you continue the present files will be overwritten!", WARNING);
 			return;
 		}
@@ -425,13 +403,13 @@ public class TransformationWizardPage extends WizardPage {
 		if(string.contains(" ")){
 			return false;
 		}
-		if(type == 0){
+		if(type == Constants.TRANSFORMATION_TYPE_PROMELA){
 			if (string.endsWith(".pml")){
 				return true;
 			}
 		}
 
-		if(type == 1){
+		if(type == Constants.TRANSFORMATION_TYPE_KIV){
 			if (string.endsWith(".kiv")){
 				return true;
 			}
@@ -459,6 +437,7 @@ public class TransformationWizardPage extends WizardPage {
 			ResourceSet resourceSet = new ResourceSetImpl();
 			Path cfgpath = new Path(cfgLocation);
 			URI uri = URI.createPlatformResourceURI(cfgpath.toOSString(), true);
+			@SuppressWarnings("unused")
 			Resource cfgResource = resourceSet.getResource(uri, true);
 		}catch(WrappedException e){
 			return 400;
@@ -485,27 +464,27 @@ public class TransformationWizardPage extends WizardPage {
 			}
 		}
 
-		if (memento.getString(CFGLOC) != null)
+		if (memento.getString(Constants.CFGLOC) != null)
 		{
-			cfgLoc = memento.getString(CFGLOC);
+			cfgLoc = memento.getString(Constants.CFGLOC);
 			tx_graphModelFile.setText(cfgLoc);
 		}
 
-		if (memento.getString(CONTAINER) != null)
+		if (memento.getString(Constants.CONTAINER) != null)
 		{
-			containerLoc = memento.getString(CONTAINER);
+			containerLoc = memento.getString(Constants.CONTAINER);
 			tx_container.setText(containerLoc);
 		}
 
-		if (memento.getString(NEW_FILE) != null)
+		if (memento.getString(Constants.NEW_FILE) != null)
 		{
-			newFileLoc = memento.getString(NEW_FILE);
+			newFileLoc = memento.getString(Constants.NEW_FILE);
 			tx_file.setText(newFileLoc);
 		}
 
-		if (memento.getString(MODEL_SELECTION) != null)
+		if (memento.getString(Constants.MODEL_SELECTION) != null)
 		{
-			cb_model.select(memento.getInteger(MODEL_SELECTION));
+			cb_model.select(memento.getInteger(Constants.MODEL_SELECTION));
 		}
 
 		if (selection != null && !selection.isEmpty() && selection instanceof IStructuredSelection)
@@ -517,12 +496,12 @@ public class TransformationWizardPage extends WizardPage {
 			if (obj instanceof IFile)
 			{
 				IFile file = (IFile) obj;
-				if (FILE_EXT.equals(file.getFileExtension()))
+				if (Constants.FILE_EXT.equals(file.getFileExtension()))
 				{
 					cfgLoc = file.getFullPath().toPortableString();
 					tx_graphModelFile.setText(cfgLoc);
 					
-					newFileLoc = file.getName().replace("."+FILE_EXT,"");
+					newFileLoc = file.getName().replace("."+Constants.FILE_EXT,"");
 					tx_file.setText(newFileLoc);
 					
 				}
@@ -537,7 +516,7 @@ public class TransformationWizardPage extends WizardPage {
 		{
 			BufferedReader reader = new BufferedReader(new FileReader(Activator.getStateFile()));
 			XMLMemento data = XMLMemento.createReadRoot(reader);
-			return data.getChild(MEMENTO__KEY);
+			return data.getChild(Constants.MEMENTO__KEY);
 		} catch (Exception e)
 		{
 			// hide it, as this is just for convenience and the previous data is not crucial for the dialog
@@ -546,12 +525,12 @@ public class TransformationWizardPage extends WizardPage {
 	}
 
 	protected synchronized void saveMementoState() {
-		XMLMemento memento = XMLMemento.createWriteRoot(MEMENTO__KEY);
-		IMemento child = memento.createChild(MEMENTO__KEY);
-		child.putString(CFGLOC, tx_graphModelFile.getText());
-		child.putString(CONTAINER, tx_container.getText());
-		child.putString(NEW_FILE, tx_file.getText());
-		child.putInteger(MODEL_SELECTION, cb_model.getSelectionIndex());
+		XMLMemento memento = XMLMemento.createWriteRoot(Constants.MEMENTO__KEY);
+		IMemento child = memento.createChild(Constants.MEMENTO__KEY);
+		child.putString(Constants.CFGLOC, tx_graphModelFile.getText());
+		child.putString(Constants.CONTAINER, tx_container.getText());
+		child.putString(Constants.NEW_FILE, tx_file.getText());
+		child.putInteger(Constants.MODEL_SELECTION, cb_model.getSelectionIndex());
 		Activator.saveMementoToFile(memento);
 	}
 

@@ -22,7 +22,6 @@ import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.lina.cfg.gendata.LocationLabel;
 import de.upb.lina.cfg.gendata.PhiMapping;
 import de.upb.lina.cfg.gendata.TransitionLabel;
-import de.upb.lina.transformations.wizards.TransformationWizardPage;
 import de.upb.llvm_parser.llvm.AbstractElement;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
@@ -70,14 +69,6 @@ import de.upb.llvm_parser.llvm.VariableAttributeAccess;
 import de.upb.llvm_parser.llvm.impl.AddressUseImpl;
 
 public class GendataPrecomputer {
-
-	private static final String GLOBAL_VARS = "globals";
-	private static final String FUNC_PARAMS = "func-params:";
-	private static final String FUNC_DECLARE = "func-declare:";
-	private static final String FUNC_ALL = "func-all:";
-	
-	private static final String CAS = "cas";
-	private static final String GETELEMENTPTR = "getelementptr";
 
 	private List<ControlFlowDiagram> cfgs;
 	private int basis;
@@ -127,16 +118,19 @@ public class GendataPrecomputer {
 			//local vars
 			EMap<String, EList<AddressMapping>> filteredAddresses = helperModel.getFilteredAddresses();
 			List<AddressMapping> allAddressMappings = helperModel.getAddressMappings();
-			initLocalVariables(allAddressMappings, filteredAddresses, program);
+			computeLocalVariables(allAddressMappings, filteredAddresses, program);
 
 			//labels
 			computeLabelPrefixesPerFunction();
-			initLocationLabels();
-			initTransitionLabels();
+			computeLocationLabels();
+			computeTransitionLabels();
 
 			//conditions
 			computeTransitionConditionMapping(helperModel.getConstraints());
 
+			//TransformationSpecificKeys
+			computeTransformationSpecificKeys(helperModel);
+			
 			//filteredAddresses
 			computeFiteredAddresses(helperModel);
 
@@ -154,9 +148,9 @@ public class GendataPrecomputer {
 	}
 
 	private void addBasis() {
-		if(basis == TransformationWizardPage.INT){
+		if(basis == Constants.INT){
 			helperModel.getTransformationSpecificKeys().add("INT");
-		}else if(basis == TransformationWizardPage.NAT){
+		}else if(basis == Constants.NAT){
 			helperModel.getTransformationSpecificKeys().add("NAT");
 		}
 	}
@@ -185,10 +179,8 @@ public class GendataPrecomputer {
 						}
 					}
 				}
-
-
 			}catch(NullPointerException ex){
-
+				//nothing to do here
 			}
 
 			for(Transition t: cfg.getTransitions()){
@@ -196,7 +188,7 @@ public class GendataPrecomputer {
 				if(!t.getSource().getBlockLabel().equals(t.getTarget().getBlockLabel())){
 					for(Transition inc: t.getSource().getIncoming()){
 						if(!blockLabelToPhiInstructions.get(t.getTarget().getBlockLabel()).isEmpty()){
-							PhiMapping mapping = constructPhiMapping(inc, blockLabelToPhiInstructions.get(t.getTarget().getBlockLabel()), "%" + inc.getSource().getBlockLabel());
+							PhiMapping mapping = createPhiMapping(inc, blockLabelToPhiInstructions.get(t.getTarget().getBlockLabel()), "%" + inc.getSource().getBlockLabel());
 							phiMappings.add(mapping);
 						}
 					}
@@ -206,12 +198,30 @@ public class GendataPrecomputer {
 		}
 	}
 
-	private PhiMapping constructPhiMapping(Transition transition, List<Phi> phis, String blockLabel){
+	private PhiMapping createPhiMapping(Transition transition, List<Phi> phis, String blockLabel){
 		PhiMapping mapping = GendataFactory.eINSTANCE.createPhiMapping();
 		mapping.setTransition(transition);
 		mapping.getPhi().addAll(phis);
 		mapping.setBlockLabelToUse(blockLabel);
 		return mapping;
+	}
+	private void computeTransformationSpecificKeys(GeneratorData genData){
+		for(ControlFlowDiagram cfg: cfgs){
+			if(cfg.getStart() != null && !cfg.getStart().getOutgoing().isEmpty()){
+				for(Transition t: cfg.getTransitions()){
+					if(t.getInstruction() instanceof CmpXchg){
+						if(!genData.getTransformationSpecificKeys().contains(Constants.NEEDSCAS)){
+							genData.getTransformationSpecificKeys().add(Constants.NEEDSCAS);
+						}
+					}
+					if(t.getInstruction() instanceof GetElementPtr){
+						if(!genData.getTransformationSpecificKeys().contains(Constants.NEEDSGETELEMENTPTR)){
+							genData.getTransformationSpecificKeys().add(Constants.NEEDSGETELEMENTPTR);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	private void computeFiteredAddresses(GeneratorData genData){
@@ -231,27 +241,27 @@ public class GendataPrecomputer {
 							//add a dummy mapping for a return value
 							Address returnAddress = LlvmFactory.eINSTANCE.createAddress();
 							returnAddress.setName("returnvalue");
-							genData.getFilteredAddresses().get(FUNC_PARAMS+cfg.getName()).add(createAddressMapping(returnAddress, "returnvalue"));
+							genData.getFilteredAddresses().get(Constants.FUNC_PARAMS+cfg.getName()).add(createAddressMapping(returnAddress, "returnvalue"));
 						}
 					}
 
 					if(t.getInstruction() instanceof CmpXchg){
-						if(!genData.getTransformationSpecificKeys().contains(CAS)){
-							genData.getTransformationSpecificKeys().add(CAS);
+						if(!genData.getTransformationSpecificKeys().contains(Constants.NEEDSCAS)){
+							genData.getTransformationSpecificKeys().add(Constants.NEEDSCAS);
 						}
 					}
 					if(t.getInstruction() instanceof GetElementPtr){
-						if(!genData.getTransformationSpecificKeys().contains(GETELEMENTPTR)){
-							genData.getTransformationSpecificKeys().add(GETELEMENTPTR);
+						if(!genData.getTransformationSpecificKeys().contains(Constants.NEEDSGETELEMENTPTR)){
+							genData.getTransformationSpecificKeys().add(Constants.NEEDSGETELEMENTPTR);
 						}
 					}
 				}
 				
 				//save used vars per function in filteredAddresses
-				if(!genData.getFilteredAddresses().contains(FUNC_ALL+cfg.getName())){
-					genData.getFilteredAddresses().put(FUNC_ALL+cfg.getName(), new BasicEList<AddressMapping>());
+				if(!genData.getFilteredAddresses().contains(Constants.FUNC_ALL+cfg.getName())){
+					genData.getFilteredAddresses().put(Constants.FUNC_ALL+cfg.getName(), new BasicEList<AddressMapping>());
 				}
-				List<AddressMapping> allVars = genData.getFilteredAddresses().get(FUNC_ALL+cfg.getName());
+				List<AddressMapping> allVars = genData.getFilteredAddresses().get(Constants.FUNC_ALL+cfg.getName());
 				for(String a: usedVarsInFunctions.get(fd)){
 					AddressMapping mapping = getMappingForAddress(a, genData.getAddressMappings());
 					if(mapping != null){
@@ -268,10 +278,10 @@ public class GendataPrecomputer {
 				}
 				
 				//save vars to declare per function in filteredAddresses
-				if(!genData.getFilteredAddresses().contains(FUNC_DECLARE+cfg.getName())){
-					genData.getFilteredAddresses().put(FUNC_DECLARE+cfg.getName(), new BasicEList<AddressMapping>());
+				if(!genData.getFilteredAddresses().contains(Constants.FUNC_DECLARE+cfg.getName())){
+					genData.getFilteredAddresses().put(Constants.FUNC_DECLARE+cfg.getName(), new BasicEList<AddressMapping>());
 				}
-				List<AddressMapping> declareVars = genData.getFilteredAddresses().get(FUNC_DECLARE+cfg.getName());
+				List<AddressMapping> declareVars = genData.getFilteredAddresses().get(Constants.FUNC_DECLARE+cfg.getName());
 				for(String a: usedVarsInFunctions.get(fd)){
 					AddressMapping mapping = getMappingForAddress(a, genData.getAddressMappings());
 					if(mapping != null){
@@ -284,7 +294,7 @@ public class GendataPrecomputer {
 		}
 	}
 
-	private void initTransitionLabels() {
+	private void computeTransitionLabels() {
 		for(ControlFlowDiagram cfg : cfgs){
 			int size = 1;
 			for(Transition t : cfg.getTransitions()){
@@ -305,7 +315,7 @@ public class GendataPrecomputer {
 		return transitionLabel;
 	}
 
-	private void initLocationLabels(){
+	private void computeLocationLabels(){
 		for(ControlFlowDiagram cfg: cfgs){
 			List<LocationLabel> labels = helperModel.getLocationLabels();
 			//prepare for check if we can use short buffer labels
@@ -358,11 +368,11 @@ public class GendataPrecomputer {
 							GuardedTransition gt = (GuardedTransition)t;
 							if(ifTransition == null && !gt.getCondition().contains("else")){
 								ifTransition = gt;
-								constraints.add(constructConstraintMapping(gt, gt.getCondition()));
+								constraints.add(computeConstraintMapping(gt, gt.getCondition()));
 							}
 						}else{
 							//flushes and normal transitions that need a condition
-							constraints.add(constructConstraintMapping(t, "true"));
+							constraints.add(computeConstraintMapping(t, "true"));
 						}
 
 					}
@@ -371,7 +381,7 @@ public class GendataPrecomputer {
 					for(Transition t: outgoing){
 						if(t instanceof GuardedTransition && !t.equals(ifTransition)){
 							GuardedTransition gt = (GuardedTransition)t;
-							constraints.add(constructConstraintMapping(gt, "!" + ifTransition.getCondition()));
+							constraints.add(computeConstraintMapping(gt, "!" + ifTransition.getCondition()));
 						}
 						//Add rest to work on
 						if(!workedOn.contains(t.getTarget()) && !toWorkOn.contains(t.getTarget())){
@@ -390,7 +400,7 @@ public class GendataPrecomputer {
 		}
 	}
 
-	private ConstraintMapping constructConstraintMapping(Transition t, String condition){
+	private ConstraintMapping computeConstraintMapping(Transition t, String condition){
 		//manipulate condition
 		condition = condition.replaceAll("[\\[\\]]", "");
 
@@ -476,7 +486,7 @@ public class GendataPrecomputer {
 	 * @param localVars
 	 * @param program
 	 */
-	private void initLocalVariables(List<AddressMapping> allVariables, EMap<String,EList<AddressMapping>> filteredAddresses, LLVM program) throws IllegalArgumentException{
+	private void computeLocalVariables(List<AddressMapping> allVariables, EMap<String,EList<AddressMapping>> filteredAddresses, LLVM program) throws IllegalArgumentException{
 
 		//map local variables of cfgs
 		for(ControlFlowDiagram cfg : cfgs){
@@ -529,7 +539,7 @@ public class GendataPrecomputer {
 						
 						
 					}
-					filteredAddresses.put(FUNC_PARAMS+matchingCfg.getName(), paramsMapping);
+					filteredAddresses.put(Constants.FUNC_PARAMS+matchingCfg.getName(), paramsMapping);
 				}
 
 				
@@ -547,7 +557,7 @@ public class GendataPrecomputer {
 			}
 			
 		}
-		filteredAddresses.put(GLOBAL_VARS, globals);
+		filteredAddresses.put(Constants.GLOBAL_VARS, globals);
 	}
 
 	private void addInstructionVariablesToMapping(List<AddressMapping> allVariables, ControlFlowDiagram cfg,
