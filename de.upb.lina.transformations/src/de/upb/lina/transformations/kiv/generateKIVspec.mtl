@@ -8,7 +8,9 @@
 data specification
 	using [basis(genData)/], PC, PID
 	Localstate :=mkls( . .pc : PC; . .pid : PID;
-					[for (cfg : ControlFlowDiagram | genData.cfgs)][for (mapping: FilterToAddressMapping | genData.filteredAddresses)][if(mapping.key.equalsIgnoreCase('func-declare:'+cfg.name) and mapping.value->size() > 0)][for(aMapping: AddressMapping | mapping.value)] . .[aMapping.name/] : [basis(genData)/];[/for][/if][/for][/for] );
+					[comment localvars duplicate -> waiting for list containing all localvariables and parameter /]
+					[for (cfg : ControlFlowDiagram | genData.cfgs)][for (mapping: FilterToAddressMapping | genData.filteredAddresses)][if(mapping.key.equalsIgnoreCase('func-declare:'+cfg.name) and mapping.value->size() > 0)][for(aMapping: AddressMapping | mapping.value)] . .[aMapping.name/] : [basis(genData)/];[/for][/if][/for][/for]
+					[for (cfg : ControlFlowDiagram | genData.cfgs)][for (mapping: FilterToAddressMapping | genData.filteredAddresses)][if(mapping.key.equalsIgnoreCase('func-params:'+cfg.name) and mapping.value->size() > 0)][for(aMapping: AddressMapping | mapping.value)] . .[aMapping.name/] : [basis(genData)/];[/for][/if][/for][/for] );
 	variables
 		ls : Localstate;
 end data specification
@@ -16,7 +18,9 @@ end data specification
 
 [file ('PC.utf8', false, 'UTF-8')]
 data specification
-	PC =[for (l : LocationLabel | genData.locationLabels) separator  ('|')] [l.name/] [/for] | N;
+	PC = N |[for (l : LocationLabel | genData.locationLabels) separator  (' |')] 
+		
+		[l.name/] [/for];
 variables
 pc : PC;
 
@@ -126,7 +130,7 @@ end enrich
 [comment ====== Transitions ======/]
 [template public transformTransition(t: Transition, genData: GeneratorData)]
 [let pc : String = generateNextPC(genData, t)]
-[if((t.instruction.oclIsUndefined()._not()._and(t.instruction.oclIsTypeOf(Compare)._or(t.instruction.oclIsTypeOf(CmpXchg))))._not())]ls' = ls .pc:= [pc/][/if][if (t.instruction.oclIsUndefined()._not())][t.instruction.genInstruction(t,genData)/][/if] [memory(t)/][/let]
+[if((t.instruction.oclIsUndefined()._not()._and(t.instruction.oclIsTypeOf(Compare) or t.instruction.oclIsTypeOf(CmpXchg) or t.instruction.oclIsTypeOf(Phi)))._not())]ls' = ls .pc:= [pc/][/if][if (t.instruction.oclIsUndefined()._not())][t.instruction.genInstruction(t,genData)/][/if] [memory(t)/][/let]
 [/template]
 
 [template public memory(t : Transition)]
@@ -242,7 +246,7 @@ endif
 
 [template public genInstruction(e : CmpXchg, t: Transition, genData : GeneratorData)]
 [let res : String = e.result.addressToString(genData)][let adr : String = e.address.value.valueToString(genData)][let pc : String = generateNextPC(genData, t)]
-( ls.[adr/] = ls.[e.value.value.valueToString(genData)/] ⊃ (ls' = ls .pc:= [pc/] .[res/]:= 1 ∧ mem' = mem['['/]ls.[adr/], [e.newValue.value.valueToString(genData)/][']'/]) ; (ls' = ls .pc:= [pc/] .[res/]:= 0 ∧ mem' = mem))[/let]
+( [possiblyAddLS(e.address.value)/][adr/] = [possiblyAddLS(e.value.value)/][e.value.value.valueToString(genData)/] ⊃ (ls' = ls .pc:= [pc/] .[res/]:= 1 ∧ mem' = mem['['/]ls.[adr/], ⌜[possiblyAddLS(e.newValue.value)/][e.newValue.value.valueToString(genData)/]⌝[']'/]) ; (ls' = ls .pc:= [pc/] .[res/]:= 0 ∧ mem' = mem))[/let]
 [/let][/let]
 [/template]
 
@@ -260,7 +264,12 @@ endif
 [/template]
 
 [template public genInstruction(e : Branch, t : Transition, genData : GeneratorData)]
-[if(e.condition.oclIsUndefined()._not())] ∧ [for(ct : ConstraintMapping | genData.constraints)][if(ct.transition = t)]ls.[if(ct.condition.equalsIgnoreCase('cond'))][e.condition.valueToString(genData)/] = 1[else][e.condition.valueToString(genData)/] = 0[/if][/if][/for][/if]
+[if(e.condition.oclIsUndefined()._not())] ∧ [for(ct : ConstraintMapping | genData.constraints)][if(ct.transition = t)]ls.[if(ct.condition.contains('!')._not())][e.condition.valueToString(genData)/] = 1[else][e.condition.valueToString(genData)/] = 0[/if][/if][/for][/if]
+[/template]
+
+[template public genInstruction(e : Phi , t: Transition, genData : GeneratorData)]
+[let pc : String = generateNextPC(genData, t)]
+[for (case : PhiCase | e.cases) separator('∨')] (ls' = ls .pc:= [pc/] .[e.result.addressToString(genData)/]:= [possiblyAddLS(case.value)/][transformBooleanToNumber(case.value.valueToString(genData))/]) [/for][/let]
 [/template]
 
 [comment ====== Generic Calls ======/]

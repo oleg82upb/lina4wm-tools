@@ -379,7 +379,7 @@ public class GendataPrecomputer {
 
 					//get the else case
 					for(Transition t: outgoing){
-						if(t instanceof GuardedTransition && !t.equals(ifTransition)){
+						if(t instanceof GuardedTransition && !t.equals(ifTransition) && ifTransition != null){
 							GuardedTransition gt = (GuardedTransition)t;
 							constraints.add(computeConstraintMapping(gt, "!" + ifTransition.getCondition()));
 						}
