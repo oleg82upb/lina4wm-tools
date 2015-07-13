@@ -248,7 +248,7 @@ public class TSOUtil implements IGraphGenerator {
 						caseBuffer,	instructionLabel);
 
 				GuardedTransition caseC = ControlflowFactory.eINSTANCE.createGuardedTransition();
-				caseC.setCondition("else");
+				caseC.setCondition(util.valueToString(sc.getCaseValue().getValue()));
 				caseC.setSource(toExplore);
 				caseC.setTarget(caseLocation);
 				caseC.setInstruction(swit);

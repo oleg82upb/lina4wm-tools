@@ -160,7 +160,7 @@ public class SCUtil implements IGraphGenerator{
 				ControlFlowLocation caseLocation = createControlFlowLocation(cfg, util.getPcOfInstruction(caseInstruction, instructions), createStoreBuffer(toExplore.getBuffer(), caseInstruction), util.findLabelByInstruction(function, nextInstruction));
 				
 				GuardedTransition caseC = ControlflowFactory.eINSTANCE.createGuardedTransition();
-				caseC.setCondition("else");
+				caseC.setCondition(util.valueToString(sc.getCaseValue().getValue()));
 				caseC.setSource(toExplore);
 				caseC.setTarget(caseLocation);
 				caseC.setInstruction(swit);
