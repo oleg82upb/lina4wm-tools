@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
@@ -222,7 +222,7 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 */
 	public EList<ConstraintMapping> getConstraints() {
 		if (constraints == null) {
-			constraints = new EObjectContainmentEList<ConstraintMapping>(ConstraintMapping.class, this, GendataPackage.GENERATOR_DATA__CONSTRAINTS);
+			constraints = new EObjectContainmentWithInverseEList<ConstraintMapping>(ConstraintMapping.class, this, GendataPackage.GENERATOR_DATA__CONSTRAINTS, GendataPackage.CONSTRAINT_MAPPING__GENERATOR_DATA);
 		}
 		return constraints;
 	}
@@ -234,7 +234,7 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 */
 	public EList<LocationLabel> getLocationLabels() {
 		if (locationLabels == null) {
-			locationLabels = new EObjectContainmentEList<LocationLabel>(LocationLabel.class, this, GendataPackage.GENERATOR_DATA__LOCATION_LABELS);
+			locationLabels = new EObjectContainmentWithInverseEList<LocationLabel>(LocationLabel.class, this, GendataPackage.GENERATOR_DATA__LOCATION_LABELS, GendataPackage.LOCATION_LABEL__GENERATOR_DATA);
 		}
 		return locationLabels;
 	}
@@ -246,7 +246,7 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 */
 	public EList<TransitionLabel> getTransitionLabels() {
 		if (transitionLabels == null) {
-			transitionLabels = new EObjectContainmentEList<TransitionLabel>(TransitionLabel.class, this, GendataPackage.GENERATOR_DATA__TRANSITION_LABELS);
+			transitionLabels = new EObjectContainmentWithInverseEList<TransitionLabel>(TransitionLabel.class, this, GendataPackage.GENERATOR_DATA__TRANSITION_LABELS, GendataPackage.TRANSITION_LABEL__GENERATOR_DATA);
 		}
 		return transitionLabels;
 	}
@@ -270,7 +270,7 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 */
 	public EList<PhiMapping> getPhiMappings() {
 		if (phiMappings == null) {
-			phiMappings = new EObjectContainmentEList<PhiMapping>(PhiMapping.class, this, GendataPackage.GENERATOR_DATA__PHI_MAPPINGS);
+			phiMappings = new EObjectContainmentWithInverseEList<PhiMapping>(PhiMapping.class, this, GendataPackage.GENERATOR_DATA__PHI_MAPPINGS, GendataPackage.PHI_MAPPING__GENERATOR_DATA);
 		}
 		return phiMappings;
 	}
@@ -308,6 +308,14 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case GendataPackage.GENERATOR_DATA__CONSTRAINTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConstraints()).basicAdd(otherEnd, msgs);
+			case GendataPackage.GENERATOR_DATA__LOCATION_LABELS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLocationLabels()).basicAdd(otherEnd, msgs);
+			case GendataPackage.GENERATOR_DATA__TRANSITION_LABELS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTransitionLabels()).basicAdd(otherEnd, msgs);
+			case GendataPackage.GENERATOR_DATA__PHI_MAPPINGS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPhiMappings()).basicAdd(otherEnd, msgs);
 			case GendataPackage.GENERATOR_DATA__ADDRESS_MAPPINGS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAddressMappings()).basicAdd(otherEnd, msgs);
 		}

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link de.upb.lina.cfg.gendata.ConstraintMapping#getTransition <em>Transition</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.ConstraintMapping#getCondition <em>Condition</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.ConstraintMapping#getGeneratorData <em>Generator Data</em>}</li>
  * </ul>
  * </p>
  *
@@ -75,5 +76,33 @@ public interface ConstraintMapping extends EObject {
 	 * @generated
 	 */
 	void setCondition(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Generator Data</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link de.upb.lina.cfg.gendata.GeneratorData#getConstraints <em>Constraints</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Generator Data</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Generator Data</em>' container reference.
+	 * @see #setGeneratorData(GeneratorData)
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getConstraintMapping_GeneratorData()
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getConstraints
+	 * @model opposite="constraints" transient="false"
+	 * @generated
+	 */
+	GeneratorData getGeneratorData();
+
+	/**
+	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.ConstraintMapping#getGeneratorData <em>Generator Data</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Generator Data</em>' container reference.
+	 * @see #getGeneratorData()
+	 * @generated
+	 */
+	void setGeneratorData(GeneratorData value);
 
 } // ConstraintMapping

@@ -241,18 +241,10 @@ public class GendataPrecomputer {
 							//add a dummy mapping for a return value
 							Address returnAddress = LlvmFactory.eINSTANCE.createAddress();
 							returnAddress.setName("returnvalue");
-							genData.getFilteredAddresses().get(Constants.FUNC_PARAMS+cfg.getName()).add(createAddressMapping(returnAddress, "returnvalue"));
-						}
-					}
-
-					if(t.getInstruction() instanceof CmpXchg){
-						if(!genData.getTransformationSpecificKeys().contains(Constants.NEEDSCAS)){
-							genData.getTransformationSpecificKeys().add(Constants.NEEDSCAS);
-						}
-					}
-					if(t.getInstruction() instanceof GetElementPtr){
-						if(!genData.getTransformationSpecificKeys().contains(Constants.NEEDSGETELEMENTPTR)){
-							genData.getTransformationSpecificKeys().add(Constants.NEEDSGETELEMENTPTR);
+							AddressMapping returnMapping = createAddressMapping(returnAddress, "returnvalue");
+							returnMapping.setGeneratorData(helperModel);
+							returnMapping.setType("ref");
+							genData.getFilteredAddresses().get(Constants.FUNC_PARAMS+cfg.getName()).add(returnMapping);
 						}
 					}
 				}
@@ -292,6 +284,47 @@ public class GendataPrecomputer {
 			}
 
 		}
+		computeGlobalLists();
+	}
+	
+	private void computeGlobalLists(){
+		
+		EMap<String,EList<AddressMapping>> filteredAddresses = helperModel.getFilteredAddresses();
+		
+		// compute global list of parameters
+		EList<AddressMapping> allParamMappings = new BasicEList<AddressMapping>();
+		boolean returnvalueAdded = false;
+		
+		// compute global list of local variables
+		EList<AddressMapping> allLocalVariables = new BasicEList<AddressMapping>();
+		
+		for(ControlFlowDiagram cfg : cfgs){
+			
+			String name = cfg.getName();
+			EList<AddressMapping> funcParamMapping = helperModel.getFilteredAddresses().get(Constants.FUNC_PARAMS+name);
+			EList<AddressMapping> funcLocalVarsMapping = helperModel.getFilteredAddresses().get(Constants.FUNC_DECLARE+name);
+			
+			for(AddressMapping mapping : funcParamMapping){
+				if(!allParamMappings.contains(mapping)){
+					if(mapping.getName().equals("returnvalue")){
+						if(!returnvalueAdded){
+							returnvalueAdded = true;
+							allParamMappings.add(mapping);
+						}
+					}else{
+						allParamMappings.add(mapping);
+					}
+				}
+			}
+			
+			for(AddressMapping mapping : funcLocalVarsMapping){
+				if(!allLocalVariables.contains(mapping)){
+					allLocalVariables.add(mapping);
+				}
+			}
+		}
+		filteredAddresses.put(Constants.ALL_PARAMS, allParamMappings);
+		filteredAddresses.put(Constants.ALL_DECLARE, allLocalVariables);
 	}
 
 	private void computeTransitionLabels() {
@@ -713,6 +746,7 @@ public class GendataPrecomputer {
 		}else{
 			//create new addressmapping
 			AddressMapping addressMapping = createAddressMapping(address, Utils.clean(address.getName()));
+			setType(addressMapping,address);
 
 			mapping.add(addressMapping);
 			addressLookup.put(address, addressMapping.getName());	
@@ -729,6 +763,18 @@ public class GendataPrecomputer {
 		}
 		
 		return correspondingMapping;
+	}
+	
+	private void setType(AddressMapping addressMapping, Address address){
+		
+		if(address.eContainer()!= null && address.eContainer() instanceof FunctionParameter && ((FunctionParameter)address.eContainer()).getType().getPointer()!=null){
+			addressMapping.setType("ref");
+		}else{
+			if(basis == Constants.INT)
+				addressMapping.setType("int");
+			else
+				addressMapping.setType("nat");
+		}
 	}
 
 	/**

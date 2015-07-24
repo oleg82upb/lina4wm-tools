@@ -285,6 +285,15 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAddressMapping_Type() {
+		return (EAttribute)addressMappingEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getConstraintMapping() {
 		return constraintMappingEClass;
 	}
@@ -305,6 +314,15 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 */
 	public EAttribute getConstraintMapping_Condition() {
 		return (EAttribute)constraintMappingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConstraintMapping_GeneratorData() {
+		return (EReference)constraintMappingEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -348,6 +366,15 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getLocationLabel_GeneratorData() {
+		return (EReference)locationLabelEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTransitionLabel() {
 		return transitionLabelEClass;
 	}
@@ -359,6 +386,15 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 */
 	public EReference getTransitionLabel_Transition() {
 		return (EReference)transitionLabelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTransitionLabel_GeneratorData() {
+		return (EReference)transitionLabelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -395,6 +431,15 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 */
 	public EAttribute getPhiMapping_BlockLabelToUse() {
 		return (EAttribute)phiMappingEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPhiMapping_GeneratorData() {
+		return (EReference)phiMappingEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -469,24 +514,29 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		createEReference(addressMappingEClass, ADDRESS_MAPPING__ADRESSES);
 		createEAttribute(addressMappingEClass, ADDRESS_MAPPING__OLD_NAMES);
 		createEReference(addressMappingEClass, ADDRESS_MAPPING__GENERATOR_DATA);
+		createEAttribute(addressMappingEClass, ADDRESS_MAPPING__TYPE);
 
 		constraintMappingEClass = createEClass(CONSTRAINT_MAPPING);
 		createEReference(constraintMappingEClass, CONSTRAINT_MAPPING__TRANSITION);
 		createEAttribute(constraintMappingEClass, CONSTRAINT_MAPPING__CONDITION);
+		createEReference(constraintMappingEClass, CONSTRAINT_MAPPING__GENERATOR_DATA);
 
 		namedElementEClass = createEClass(NAMED_ELEMENT);
 		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
 
 		locationLabelEClass = createEClass(LOCATION_LABEL);
 		createEReference(locationLabelEClass, LOCATION_LABEL__CONTROL_FLOW_LOCATION);
+		createEReference(locationLabelEClass, LOCATION_LABEL__GENERATOR_DATA);
 
 		transitionLabelEClass = createEClass(TRANSITION_LABEL);
 		createEReference(transitionLabelEClass, TRANSITION_LABEL__TRANSITION);
+		createEReference(transitionLabelEClass, TRANSITION_LABEL__GENERATOR_DATA);
 
 		phiMappingEClass = createEClass(PHI_MAPPING);
 		createEReference(phiMappingEClass, PHI_MAPPING__TRANSITION);
 		createEReference(phiMappingEClass, PHI_MAPPING__PHI);
 		createEAttribute(phiMappingEClass, PHI_MAPPING__BLOCK_LABEL_TO_USE);
+		createEReference(phiMappingEClass, PHI_MAPPING__GENERATOR_DATA);
 
 		filterToAddressMappingEClass = createEClass(FILTER_TO_ADDRESS_MAPPING);
 		createEAttribute(filterToAddressMappingEClass, FILTER_TO_ADDRESS_MAPPING__KEY);
@@ -534,11 +584,11 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		initEClass(generatorDataEClass, GeneratorData.class, "GeneratorData", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGeneratorData_Program(), theLlvmPackage.getLLVM(), null, "program", null, 0, 1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_Cfgs(), theControlflowPackage.getControlFlowDiagram(), null, "cfgs", null, 1, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getGeneratorData_Constraints(), this.getConstraintMapping(), null, "constraints", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getGeneratorData_LocationLabels(), this.getLocationLabel(), null, "locationLabels", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getGeneratorData_TransitionLabels(), this.getTransitionLabel(), null, "transitionLabels", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGeneratorData_Constraints(), this.getConstraintMapping(), this.getConstraintMapping_GeneratorData(), "constraints", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGeneratorData_LocationLabels(), this.getLocationLabel(), this.getLocationLabel_GeneratorData(), "locationLabels", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGeneratorData_TransitionLabels(), this.getTransitionLabel(), this.getTransitionLabel_GeneratorData(), "transitionLabels", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGeneratorData_TransformationSpecificKeys(), ecorePackage.getEString(), "transformationSpecificKeys", "", 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getGeneratorData_PhiMappings(), this.getPhiMapping(), null, "phiMappings", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGeneratorData_PhiMappings(), this.getPhiMapping(), this.getPhiMapping_GeneratorData(), "phiMappings", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_FilteredAddresses(), this.getFilterToAddressMapping(), null, "filteredAddresses", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_AddressMappings(), this.getAddressMapping(), this.getAddressMapping_GeneratorData(), "addressMappings", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -546,24 +596,29 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		initEReference(getAddressMapping_Adresses(), theLlvmPackage.getAddress(), null, "adresses", null, 0, -1, AddressMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAddressMapping_OldNames(), ecorePackage.getEString(), "oldNames", "", 0, -1, AddressMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAddressMapping_GeneratorData(), this.getGeneratorData(), this.getGeneratorData_AddressMappings(), "generatorData", null, 0, 1, AddressMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAddressMapping_Type(), ecorePackage.getEString(), "type", null, 0, 1, AddressMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(constraintMappingEClass, ConstraintMapping.class, "ConstraintMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getConstraintMapping_Transition(), theControlflowPackage.getTransition(), null, "transition", null, 0, 1, ConstraintMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getConstraintMapping_Condition(), ecorePackage.getEString(), "condition", null, 0, 1, ConstraintMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConstraintMapping_GeneratorData(), this.getGeneratorData(), this.getGeneratorData_Constraints(), "generatorData", null, 0, 1, ConstraintMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(locationLabelEClass, LocationLabel.class, "LocationLabel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLocationLabel_ControlFlowLocation(), theControlflowPackage.getControlFlowLocation(), null, "controlFlowLocation", null, 0, 1, LocationLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLocationLabel_GeneratorData(), this.getGeneratorData(), this.getGeneratorData_LocationLabels(), "generatorData", null, 0, 1, LocationLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(transitionLabelEClass, TransitionLabel.class, "TransitionLabel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransitionLabel_Transition(), theControlflowPackage.getTransition(), null, "transition", null, 0, 1, TransitionLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransitionLabel_GeneratorData(), this.getGeneratorData(), this.getGeneratorData_TransitionLabels(), "generatorData", null, 0, 1, TransitionLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(phiMappingEClass, PhiMapping.class, "PhiMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPhiMapping_Transition(), theControlflowPackage.getTransition(), null, "transition", null, 0, 1, PhiMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPhiMapping_Phi(), theLlvmPackage.getPhi(), null, "phi", null, 0, -1, PhiMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPhiMapping_BlockLabelToUse(), ecorePackage.getEString(), "blockLabelToUse", null, 0, 1, PhiMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPhiMapping_GeneratorData(), this.getGeneratorData(), this.getGeneratorData_PhiMappings(), "generatorData", null, 0, 1, PhiMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(filterToAddressMappingEClass, Map.Entry.class, "FilterToAddressMapping", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFilterToAddressMapping_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

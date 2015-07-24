@@ -8,9 +8,8 @@
 data specification
 	using [basis(genData)/], PC, PID
 	Localstate :=mkls( . .pc : PC; . .pid : PID;
-					[comment localvars duplicate -> waiting for list containing all localvariables and parameter /]
-					[for (cfg : ControlFlowDiagram | genData.cfgs)][for (mapping: FilterToAddressMapping | genData.filteredAddresses)][if(mapping.key.equalsIgnoreCase('func-declare:'+cfg.name) and mapping.value->size() > 0)][for(aMapping: AddressMapping | mapping.value)] . .[aMapping.name/] : [basis(genData)/];[/for][/if][/for][/for]
-					[for (cfg : ControlFlowDiagram | genData.cfgs)][for (mapping: FilterToAddressMapping | genData.filteredAddresses)][if(mapping.key.equalsIgnoreCase('func-params:'+cfg.name) and mapping.value->size() > 0)][for(aMapping: AddressMapping | mapping.value)] . .[aMapping.name/] : [basis(genData)/];[/for][/if][/for][/for] );
+					[for (mapping: FilterToAddressMapping | genData.filteredAddresses)][if(mapping.key.equalsIgnoreCase('all-declare') and mapping.value->size() > 0)][for(am: AddressMapping | mapping.value)] . .[am.name/] : [am.type/];[/for][/if][/for]
+					[for (mapping: FilterToAddressMapping | genData.filteredAddresses)][if(mapping.key.equalsIgnoreCase('all-params') and mapping.value->size() > 0)][for(am : AddressMapping| mapping.value)] . .[am.name/] : [am.type/];[/for][/if][/for] );
 	variables
 		ls : Localstate;
 end data specification
@@ -53,12 +52,7 @@ enrich 	[basis(genData)/]ref-memory,
 		localstate,
 		cindex with
 
-[comment UTF-8 encoding of special symbols needed in KIV-specification /]
-[comment â†’ implies  /]
-[comment Ã— times  /]
-[comment â†” equivalent /]
-[comment âˆ§ and /]
-[comment âŠ¦ follows /]
+	[generateGlobalConstants(genData)/]
 	functions
 		INVOP : IJ → [basis(genData)/] ×  memory ×  Localstate ×  memory ×  Localstate → bool;
 		COP : CJ → memory × Localstate × memory × Localstate → bool;
@@ -81,16 +75,19 @@ enrich 	[basis(genData)/]ref-memory,
 	used for : s, ls;
 
 	[for (cfg : ControlFlowDiagram | genData.cfgs)] 
+;; 	[generateCfgLabel(genData, cfg)/] reflects function [cfg.name/]
 	[generateCfgLabel(genData, cfg)/]ini : ⊦ INVOP([generateCfgLabel(genData, cfg)/]ini)(elem, mem, ls, mem', ls') ↔ ls .pc = N ∧ ls' = ls .pc:= [generateStartPC(genData, cfg)/] ∧ mem' = mem;
 	used for : s, ls;
 
 	[/for]
 	[for (label : TransitionLabel | genData.transitionLabels->select(transition.instruction.oclIsUndefined()._or((transition.instruction.eClass() = Return)._not())))]
+;;	[label.transition.createComment()/]
 	[label.name/] : ⊦ COP([label.name/])(mem, ls, mem', ls') ↔ ls .pc = [genData.generatePrevPC(genData, label.transition)/] ∧ [label.transition.transformTransition(genData)/];
 	used for : s, ls;
 
 	[/for]
 	[for (label : TransitionLabel | genData.transitionLabels->select(transition.instruction.oclIsUndefined()._not()._and(transition.instruction.eClass() = Return)))]
+;;	[label.transition.createComment()/]
 	[label.name/]ret : ⊦ RETOP([label.name/]ret)(mem, ls, mem', ls', return) ↔ ls .pc = [genData.generatePrevPC(genData, label.transition)/] ∧ ls' = ls .pc:= N ∧ mem' = mem;
 	used for : s, ls;
 	
@@ -101,6 +98,18 @@ end enrich
 
 [/template]
 
+[template public createComment(t : Transition)]
+[if(t.instruction.oclIsUndefined())][t.eClass().name/][else][t.instruction.eClass().name/][/if]
+[/template]
+
+[template public generateGlobalConstants(genData : GeneratorData)]
+[let mappings : OrderedSet(FilterToAddressMapping) = genData.filteredAddresses->select(key.equalsIgnoreCase('globals'))]
+[if(mappings->first().value->size() > 0)]
+constants
+[for(am : AddressMapping| mappings->first().value)]
+	[am.name/] : [am.type/];
+[/for][/if][/let]
+[/template]
 
 [template public generatePrevPC(genData: GeneratorData, transition: Transition)]
 [for (label : LocationLabel | genData.locationLabels)][if(label.controlFlowLocation = transition.source)][label.name/][/if][/for]
@@ -264,6 +273,14 @@ endif
 
 [template public genMemPart(e: Branch, t: Transition, genData : GeneratorData)]
 [if(e.condition.oclIsUndefined()._not())] ∧ [for(ct : ConstraintMapping | genData.constraints)][if(ct.transition = t)]ls.[if(ct.condition.contains('!')._not())][e.condition.valueToString(genData)/] = 1[else][e.condition.valueToString(genData)/] = 0[/if][/if][/for][/if]
+[/template]
+
+[template public genLsPart(e : GetElementPtr, t: Transition, genData: GeneratorData)]
+ .[e.result.addressToString(genData)/]:= [possiblyAddLS(e.aggerate.value)/][e.aggerate.value.valueToString(genData)/]
+[/template]
+
+[template public genLsPart(e : Cast, t: Transition, genData: GeneratorData)]
+ .[e.result.addressToString(genData)/]:= [possiblyAddLS(e.value)/][e.value.valueToString(genData)/]
 [/template]
 
 [comment ====== Generic Calls ======/]

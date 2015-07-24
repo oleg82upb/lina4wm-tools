@@ -250,13 +250,22 @@ public interface GendataPackage extends EPackage
 	int ADDRESS_MAPPING__GENERATOR_DATA = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDRESS_MAPPING__TYPE = NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Address Mapping</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS_MAPPING_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int ADDRESS_MAPPING_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Address Mapping</em>' class.
@@ -296,13 +305,22 @@ public interface GendataPackage extends EPackage
 	int CONSTRAINT_MAPPING__CONDITION = 1;
 
 	/**
+	 * The feature id for the '<em><b>Generator Data</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_MAPPING__GENERATOR_DATA = 2;
+
+	/**
 	 * The number of structural features of the '<em>Constraint Mapping</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_MAPPING_FEATURE_COUNT = 2;
+	int CONSTRAINT_MAPPING_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Constraint Mapping</em>' class.
@@ -343,13 +361,22 @@ public interface GendataPackage extends EPackage
 	int LOCATION_LABEL__CONTROL_FLOW_LOCATION = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Generator Data</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION_LABEL__GENERATOR_DATA = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Location Label</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOCATION_LABEL_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int LOCATION_LABEL_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Location Label</em>' class.
@@ -389,13 +416,22 @@ public interface GendataPackage extends EPackage
 	int TRANSITION_LABEL__TRANSITION = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Generator Data</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_LABEL__GENERATOR_DATA = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Transition Label</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_LABEL_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int TRANSITION_LABEL_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Transition Label</em>' class.
@@ -445,13 +481,22 @@ public interface GendataPackage extends EPackage
 	int PHI_MAPPING__BLOCK_LABEL_TO_USE = 2;
 
 	/**
+	 * The feature id for the '<em><b>Generator Data</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHI_MAPPING__GENERATOR_DATA = 3;
+
+	/**
 	 * The number of structural features of the '<em>Phi Mapping</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PHI_MAPPING_FEATURE_COUNT = 3;
+	int PHI_MAPPING_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Phi Mapping</em>' class.
@@ -663,6 +708,17 @@ public interface GendataPackage extends EPackage
 	EReference getAddressMapping_GeneratorData();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.gendata.AddressMapping#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see de.upb.lina.cfg.gendata.AddressMapping#getType()
+	 * @see #getAddressMapping()
+	 * @generated
+	 */
+	EAttribute getAddressMapping_Type();
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.ConstraintMapping <em>Constraint Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -693,6 +749,17 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getConstraintMapping_Condition();
+
+	/**
+	 * Returns the meta object for the container reference '{@link de.upb.lina.cfg.gendata.ConstraintMapping#getGeneratorData <em>Generator Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Generator Data</em>'.
+	 * @see de.upb.lina.cfg.gendata.ConstraintMapping#getGeneratorData()
+	 * @see #getConstraintMapping()
+	 * @generated
+	 */
+	EReference getConstraintMapping_GeneratorData();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.NamedElement <em>Named Element</em>}'.
@@ -737,6 +804,17 @@ public interface GendataPackage extends EPackage
 	EReference getLocationLabel_ControlFlowLocation();
 
 	/**
+	 * Returns the meta object for the container reference '{@link de.upb.lina.cfg.gendata.LocationLabel#getGeneratorData <em>Generator Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Generator Data</em>'.
+	 * @see de.upb.lina.cfg.gendata.LocationLabel#getGeneratorData()
+	 * @see #getLocationLabel()
+	 * @generated
+	 */
+	EReference getLocationLabel_GeneratorData();
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.TransitionLabel <em>Transition Label</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -756,6 +834,17 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 */
 	EReference getTransitionLabel_Transition();
+
+	/**
+	 * Returns the meta object for the container reference '{@link de.upb.lina.cfg.gendata.TransitionLabel#getGeneratorData <em>Generator Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Generator Data</em>'.
+	 * @see de.upb.lina.cfg.gendata.TransitionLabel#getGeneratorData()
+	 * @see #getTransitionLabel()
+	 * @generated
+	 */
+	EReference getTransitionLabel_GeneratorData();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.PhiMapping <em>Phi Mapping</em>}'.
@@ -799,6 +888,17 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getPhiMapping_BlockLabelToUse();
+
+	/**
+	 * Returns the meta object for the container reference '{@link de.upb.lina.cfg.gendata.PhiMapping#getGeneratorData <em>Generator Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Generator Data</em>'.
+	 * @see de.upb.lina.cfg.gendata.PhiMapping#getGeneratorData()
+	 * @see #getPhiMapping()
+	 * @generated
+	 */
+	EReference getPhiMapping_GeneratorData();
 
 	/**
 	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Filter To Address Mapping</em>}'.
@@ -975,6 +1075,14 @@ public interface GendataPackage extends EPackage
 		EReference ADDRESS_MAPPING__GENERATOR_DATA = eINSTANCE.getAddressMapping_GeneratorData();
 
 		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ADDRESS_MAPPING__TYPE = eINSTANCE.getAddressMapping_Type();
+
+		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.ConstraintMappingImpl <em>Constraint Mapping</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -999,6 +1107,14 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute CONSTRAINT_MAPPING__CONDITION = eINSTANCE.getConstraintMapping_Condition();
+
+		/**
+		 * The meta object literal for the '<em><b>Generator Data</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONSTRAINT_MAPPING__GENERATOR_DATA = eINSTANCE.getConstraintMapping_GeneratorData();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.NamedElementImpl <em>Named Element</em>}' class.
@@ -1037,6 +1153,14 @@ public interface GendataPackage extends EPackage
 		EReference LOCATION_LABEL__CONTROL_FLOW_LOCATION = eINSTANCE.getLocationLabel_ControlFlowLocation();
 
 		/**
+		 * The meta object literal for the '<em><b>Generator Data</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOCATION_LABEL__GENERATOR_DATA = eINSTANCE.getLocationLabel_GeneratorData();
+
+		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.TransitionLabelImpl <em>Transition Label</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1053,6 +1177,14 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EReference TRANSITION_LABEL__TRANSITION = eINSTANCE.getTransitionLabel_Transition();
+
+		/**
+		 * The meta object literal for the '<em><b>Generator Data</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSITION_LABEL__GENERATOR_DATA = eINSTANCE.getTransitionLabel_GeneratorData();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.PhiMappingImpl <em>Phi Mapping</em>}' class.
@@ -1087,6 +1219,14 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute PHI_MAPPING__BLOCK_LABEL_TO_USE = eINSTANCE.getPhiMapping_BlockLabelToUse();
+
+		/**
+		 * The meta object literal for the '<em><b>Generator Data</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PHI_MAPPING__GENERATOR_DATA = eINSTANCE.getPhiMapping_GeneratorData();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.FilterToAddressMappingImpl <em>Filter To Address Mapping</em>}' class.

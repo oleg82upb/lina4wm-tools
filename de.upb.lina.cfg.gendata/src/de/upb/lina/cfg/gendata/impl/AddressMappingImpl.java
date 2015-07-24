@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link de.upb.lina.cfg.gendata.impl.AddressMappingImpl#getAdresses <em>Adresses</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.AddressMappingImpl#getOldNames <em>Old Names</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.AddressMappingImpl#getGeneratorData <em>Generator Data</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.AddressMappingImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -62,6 +63,26 @@ public class AddressMappingImpl extends NamedElementImpl implements AddressMappi
 	 * @ordered
 	 */
 	protected GeneratorData generatorData;
+
+	/**
+	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected String type = TYPE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -174,6 +195,27 @@ public class AddressMappingImpl extends NamedElementImpl implements AddressMappi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(String newType) {
+		String oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.ADDRESS_MAPPING__TYPE, oldType, type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -215,6 +257,8 @@ public class AddressMappingImpl extends NamedElementImpl implements AddressMappi
 			case GendataPackage.ADDRESS_MAPPING__GENERATOR_DATA:
 				if (resolve) return getGeneratorData();
 				return basicGetGeneratorData();
+			case GendataPackage.ADDRESS_MAPPING__TYPE:
+				return getType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -240,6 +284,9 @@ public class AddressMappingImpl extends NamedElementImpl implements AddressMappi
 			case GendataPackage.ADDRESS_MAPPING__GENERATOR_DATA:
 				setGeneratorData((GeneratorData)newValue);
 				return;
+			case GendataPackage.ADDRESS_MAPPING__TYPE:
+				setType((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -262,6 +309,9 @@ public class AddressMappingImpl extends NamedElementImpl implements AddressMappi
 			case GendataPackage.ADDRESS_MAPPING__GENERATOR_DATA:
 				setGeneratorData((GeneratorData)null);
 				return;
+			case GendataPackage.ADDRESS_MAPPING__TYPE:
+				setType(TYPE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -281,6 +331,8 @@ public class AddressMappingImpl extends NamedElementImpl implements AddressMappi
 				return oldNames != null && !oldNames.isEmpty();
 			case GendataPackage.ADDRESS_MAPPING__GENERATOR_DATA:
 				return generatorData != null;
+			case GendataPackage.ADDRESS_MAPPING__TYPE:
+				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -298,6 +350,8 @@ public class AddressMappingImpl extends NamedElementImpl implements AddressMappi
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (oldNames: ");
 		result.append(oldNames);
+		result.append(", type: ");
+		result.append(type);
 		result.append(')');
 		return result.toString();
 	}

@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.gendata.PhiMapping#getTransition <em>Transition</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.PhiMapping#getPhi <em>Phi</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.PhiMapping#getBlockLabelToUse <em>Block Label To Use</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.PhiMapping#getGeneratorData <em>Generator Data</em>}</li>
  * </ul>
  * </p>
  *
@@ -95,5 +96,33 @@ public interface PhiMapping extends EObject {
 	 * @generated
 	 */
 	void setBlockLabelToUse(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Generator Data</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link de.upb.lina.cfg.gendata.GeneratorData#getPhiMappings <em>Phi Mappings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Generator Data</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Generator Data</em>' container reference.
+	 * @see #setGeneratorData(GeneratorData)
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getPhiMapping_GeneratorData()
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getPhiMappings
+	 * @model opposite="phiMappings" transient="false"
+	 * @generated
+	 */
+	GeneratorData getGeneratorData();
+
+	/**
+	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.PhiMapping#getGeneratorData <em>Generator Data</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Generator Data</em>' container reference.
+	 * @see #getGeneratorData()
+	 * @generated
+	 */
+	void setGeneratorData(GeneratorData value);
 
 } // PhiMapping

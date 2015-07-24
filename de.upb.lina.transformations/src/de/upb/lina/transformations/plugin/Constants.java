@@ -23,7 +23,16 @@ public abstract class Constants {
 	 * in the GeneratorData. Usage: FUNC_ALL+<cfgname> to obtain the list for the function with name <cfgname> 
 	 */
 	public static final String FUNC_ALL = "func-all:";
-	
+	/**
+	 * Constant used to obtain the list of all function parameters via the filteredAddresses association
+	 * in the GeneratorData.
+	 */
+	public static final String ALL_PARAMS = "all-params";
+	/**
+	 * Constant used to obtain the list of all local variables via the filteredAddresses association
+	 * in the GeneratorData.
+	 */
+	public static final String ALL_DECLARE = "all-declare";
 	/* Constants used in transformationSpecificKey association in GeneratorData*/
 	
 	/**

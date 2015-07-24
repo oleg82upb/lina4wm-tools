@@ -81,6 +81,7 @@ public interface GeneratorData extends EObject
 	/**
 	 * Returns the value of the '<em><b>Constraints</b></em>' containment reference list.
 	 * The list contents are of type {@link de.upb.lina.cfg.gendata.ConstraintMapping}.
+	 * It is bidirectional and its opposite is '{@link de.upb.lina.cfg.gendata.ConstraintMapping#getGeneratorData <em>Generator Data</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Constraints</em>' containment reference list isn't clear,
@@ -89,7 +90,8 @@ public interface GeneratorData extends EObject
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Constraints</em>' containment reference list.
 	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_Constraints()
-	 * @model containment="true"
+	 * @see de.upb.lina.cfg.gendata.ConstraintMapping#getGeneratorData
+	 * @model opposite="generatorData" containment="true"
 	 * @generated
 	 */
 	EList<ConstraintMapping> getConstraints();
@@ -97,6 +99,7 @@ public interface GeneratorData extends EObject
 	/**
 	 * Returns the value of the '<em><b>Location Labels</b></em>' containment reference list.
 	 * The list contents are of type {@link de.upb.lina.cfg.gendata.LocationLabel}.
+	 * It is bidirectional and its opposite is '{@link de.upb.lina.cfg.gendata.LocationLabel#getGeneratorData <em>Generator Data</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Location Labels</em>' containment reference list isn't clear,
@@ -105,7 +108,8 @@ public interface GeneratorData extends EObject
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Location Labels</em>' containment reference list.
 	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_LocationLabels()
-	 * @model containment="true"
+	 * @see de.upb.lina.cfg.gendata.LocationLabel#getGeneratorData
+	 * @model opposite="generatorData" containment="true"
 	 * @generated
 	 */
 	EList<LocationLabel> getLocationLabels();
@@ -113,6 +117,7 @@ public interface GeneratorData extends EObject
 	/**
 	 * Returns the value of the '<em><b>Transition Labels</b></em>' containment reference list.
 	 * The list contents are of type {@link de.upb.lina.cfg.gendata.TransitionLabel}.
+	 * It is bidirectional and its opposite is '{@link de.upb.lina.cfg.gendata.TransitionLabel#getGeneratorData <em>Generator Data</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Transition Labels</em>' containment reference list isn't clear,
@@ -121,7 +126,8 @@ public interface GeneratorData extends EObject
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Transition Labels</em>' containment reference list.
 	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_TransitionLabels()
-	 * @model containment="true"
+	 * @see de.upb.lina.cfg.gendata.TransitionLabel#getGeneratorData
+	 * @model opposite="generatorData" containment="true"
 	 * @generated
 	 */
 	EList<TransitionLabel> getTransitionLabels();
@@ -145,6 +151,7 @@ public interface GeneratorData extends EObject
 	/**
 	 * Returns the value of the '<em><b>Phi Mappings</b></em>' containment reference list.
 	 * The list contents are of type {@link de.upb.lina.cfg.gendata.PhiMapping}.
+	 * It is bidirectional and its opposite is '{@link de.upb.lina.cfg.gendata.PhiMapping#getGeneratorData <em>Generator Data</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Phi Mappings</em>' containment reference list isn't clear,
@@ -153,7 +160,8 @@ public interface GeneratorData extends EObject
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Phi Mappings</em>' containment reference list.
 	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_PhiMappings()
-	 * @model containment="true"
+	 * @see de.upb.lina.cfg.gendata.PhiMapping#getGeneratorData
+	 * @model opposite="generatorData" containment="true"
 	 * @generated
 	 */
 	EList<PhiMapping> getPhiMappings();

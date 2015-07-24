@@ -13,6 +13,7 @@ import de.upb.lina.cfg.controlflow.Transition;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.lina.cfg.gendata.TransitionLabel#getTransition <em>Transition</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.TransitionLabel#getGeneratorData <em>Generator Data</em>}</li>
  * </ul>
  * </p>
  *
@@ -46,5 +47,33 @@ public interface TransitionLabel extends NamedElement {
 	 * @generated
 	 */
 	void setTransition(Transition value);
+
+	/**
+	 * Returns the value of the '<em><b>Generator Data</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link de.upb.lina.cfg.gendata.GeneratorData#getTransitionLabels <em>Transition Labels</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Generator Data</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Generator Data</em>' container reference.
+	 * @see #setGeneratorData(GeneratorData)
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getTransitionLabel_GeneratorData()
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getTransitionLabels
+	 * @model opposite="transitionLabels" transient="false"
+	 * @generated
+	 */
+	GeneratorData getGeneratorData();
+
+	/**
+	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.TransitionLabel#getGeneratorData <em>Generator Data</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Generator Data</em>' container reference.
+	 * @see #getGeneratorData()
+	 * @generated
+	 */
+	void setGeneratorData(GeneratorData value);
 
 } // TransitionLabel
