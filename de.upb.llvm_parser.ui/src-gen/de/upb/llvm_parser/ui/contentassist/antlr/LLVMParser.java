@@ -37,7 +37,7 @@ public class LLVMParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
-					put(grammarAccess.getCallingConvAccess().getAlternatives(), "rule__CallingConv__Alternatives");
+					put(grammarAccess.getCALLING_CONVAccess().getAlternatives(), "rule__CALLING_CONV__Alternatives");
 					put(grammarAccess.getFUNCTION_ATTRIBUTESAccess().getAlternatives(), "rule__FUNCTION_ATTRIBUTES__Alternatives");
 					put(grammarAccess.getKEYWORDSAccess().getAlternatives(), "rule__KEYWORDS__Alternatives");
 					put(grammarAccess.getLABEL_IDAccess().getAlternatives_0(), "rule__LABEL_ID__Alternatives_0");
@@ -86,7 +86,7 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBranchAccess().getAlternatives(), "rule__Branch__Alternatives");
 					put(grammarAccess.getNUMBERAccess().getGroup(), "rule__NUMBER__Group__0");
 					put(grammarAccess.getNUMBERAccess().getGroup_2(), "rule__NUMBER__Group_2__0");
-					put(grammarAccess.getCallingConvAccess().getGroup_14(), "rule__CallingConv__Group_14__0");
+					put(grammarAccess.getCALLING_CONVAccess().getGroup_14(), "rule__CALLING_CONV__Group_14__0");
 					put(grammarAccess.getFUNCTION_ATTRIBUTESAccess().getGroup_1(), "rule__FUNCTION_ATTRIBUTES__Group_1__0");
 					put(grammarAccess.getLABEL_IDAccess().getGroup(), "rule__LABEL_ID__Group__0");
 					put(grammarAccess.getLABEL_IDAccess().getGroup_1(), "rule__LABEL_ID__Group_1__0");
@@ -284,12 +284,10 @@ public class LLVMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMetadataValueAccess().getValuesAssignment_4(), "rule__MetadataValue__ValuesAssignment_4");
 					put(grammarAccess.getMetadataValueAccess().getValuesAssignment_5_1(), "rule__MetadataValue__ValuesAssignment_5_1");
 					put(grammarAccess.getGetElementPtrAccess().getResultAssignment_0(), "rule__GetElementPtr__ResultAssignment_0");
-					put(grammarAccess.getGetElementPtrAccess().getAggerateAssignment_4_0(), "rule__GetElementPtr__AggerateAssignment_4_0");
-					put(grammarAccess.getGetElementPtrAccess().getIndTypesAssignment_4_1_1(), "rule__GetElementPtr__IndTypesAssignment_4_1_1");
-					put(grammarAccess.getGetElementPtrAccess().getIndiziesAssignment_4_1_2(), "rule__GetElementPtr__IndiziesAssignment_4_1_2");
-					put(grammarAccess.getNestedGetElementPtrAccess().getAggerateAssignment_2_1(), "rule__NestedGetElementPtr__AggerateAssignment_2_1");
-					put(grammarAccess.getNestedGetElementPtrAccess().getIndTypesAssignment_2_2_1(), "rule__NestedGetElementPtr__IndTypesAssignment_2_2_1");
-					put(grammarAccess.getNestedGetElementPtrAccess().getIndiziesAssignment_2_2_2(), "rule__NestedGetElementPtr__IndiziesAssignment_2_2_2");
+					put(grammarAccess.getGetElementPtrAccess().getAggregateAssignment_4_0(), "rule__GetElementPtr__AggregateAssignment_4_0");
+					put(grammarAccess.getGetElementPtrAccess().getIndicesAssignment_4_1_1(), "rule__GetElementPtr__IndicesAssignment_4_1_1");
+					put(grammarAccess.getNestedGetElementPtrAccess().getAggregateAssignment_2_1(), "rule__NestedGetElementPtr__AggregateAssignment_2_1");
+					put(grammarAccess.getNestedGetElementPtrAccess().getIndicesAssignment_2_2_1(), "rule__NestedGetElementPtr__IndicesAssignment_2_2_1");
 					put(grammarAccess.getFenceAccess().getOrderingAssignment_2(), "rule__Fence__OrderingAssignment_2");
 					put(grammarAccess.getCmpXchgAccess().getResultAssignment_0(), "rule__CmpXchg__ResultAssignment_0");
 					put(grammarAccess.getCmpXchgAccess().getVolatileAssignment_3(), "rule__CmpXchg__VolatileAssignment_3");

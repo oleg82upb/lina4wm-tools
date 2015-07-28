@@ -139,14 +139,12 @@
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//GetElementPtr">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//GetElementPtr/result"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//GetElementPtr/aggerate"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//GetElementPtr/indTypes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//GetElementPtr/indizies"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//GetElementPtr/aggregate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//GetElementPtr/indices"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//NestedGetElementPtr">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//NestedGetElementPtr/aggerate"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//NestedGetElementPtr/indTypes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//NestedGetElementPtr/indizies"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//NestedGetElementPtr/aggregate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//NestedGetElementPtr/indices"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//Fence">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Fence/ordering"/>

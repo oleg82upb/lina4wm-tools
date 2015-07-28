@@ -66,8 +66,8 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getINTTerminalRuleCall_2_1() { return cINTTerminalRuleCall_2_1; }
 	}
 
-	public class CallingConvElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CallingConv");
+	public class CALLING_CONVElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CALLING_CONV");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cCccKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cFastccKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
@@ -90,7 +90,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cGreaterThanSignKeyword_14_3 = (Keyword)cGroup_14.eContents().get(3);
 		private final RuleCall cNUMBERParserRuleCall_14_4 = (RuleCall)cGroup_14.eContents().get(4);
 		
-		//CallingConv:
+		//CALLING_CONV:
 		//	"ccc" | "fastcc" | "coldcc" | "x86_stdcallcc" | "x86_fastcallcc" | "x86_thiscallcc" | "arm_apcscc" | "arm_aapcscc" |
 		//	"arm_aapcs_vfpcc" | "msp430_intrcc" | "ptx_kernel" | "ptx_device" | "spir_func" | "spir_kernel" | "cc" "<" NUMBER ">"
 		//	NUMBER;
@@ -422,6 +422,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cMainLevelEntityParserRuleCall_1_0 = (RuleCall)cGroup_1.eContents().get(0);
 		private final RuleCall cSL_COMMENTTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
+		////(('a'..'z' | 'A'..'Z' | '_' | '.' | '0'..'9')+  | STRING)
 		//AbstractElement:
 		//	TopLevelEntity SL_COMMENT? | MainLevelEntity SL_COMMENT?;
 		public ParserRule getRule() { return rule; }
@@ -727,7 +728,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cLINKAGETerminalRuleCall_0_1_0 = (RuleCall)cAlternatives_0_1.eContents().get(0);
 		private final RuleCall cALIAS_LINKAGETerminalRuleCall_0_1_1 = (RuleCall)cAlternatives_0_1.eContents().get(1);
 		private final RuleCall cVISIBILITYTerminalRuleCall_0_2 = (RuleCall)cGroup_0.eContents().get(2);
-		private final RuleCall cCallingConvParserRuleCall_0_3 = (RuleCall)cGroup_0.eContents().get(3);
+		private final RuleCall cCALLING_CONVParserRuleCall_0_3 = (RuleCall)cGroup_0.eContents().get(3);
 		private final RuleCall cRETURN_ATTRIBUTESTerminalRuleCall_0_4 = (RuleCall)cGroup_0.eContents().get(4);
 		private final Assignment cReturnTypeAssignment_0_5 = (Assignment)cGroup_0.eContents().get(5);
 		private final RuleCall cReturnTypeTypeUseParserRuleCall_0_5_0 = (RuleCall)cReturnTypeAssignment_0_5.eContents().get(0);
@@ -757,7 +758,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cLINKAGETerminalRuleCall_1_1_0 = (RuleCall)cAlternatives_1_1.eContents().get(0);
 		private final RuleCall cALIAS_LINKAGETerminalRuleCall_1_1_1 = (RuleCall)cAlternatives_1_1.eContents().get(1);
 		private final RuleCall cVISIBILITYTerminalRuleCall_1_2 = (RuleCall)cGroup_1.eContents().get(2);
-		private final RuleCall cCallingConvParserRuleCall_1_3 = (RuleCall)cGroup_1.eContents().get(3);
+		private final RuleCall cCALLING_CONVParserRuleCall_1_3 = (RuleCall)cGroup_1.eContents().get(3);
 		private final RuleCall cRETURN_ATTRIBUTESTerminalRuleCall_1_4 = (RuleCall)cGroup_1.eContents().get(4);
 		private final Assignment cReturnTypeAssignment_1_5 = (Assignment)cGroup_1.eContents().get(5);
 		private final RuleCall cReturnTypeTypeUseParserRuleCall_1_5_0 = (RuleCall)cReturnTypeAssignment_1_5.eContents().get(0);
@@ -781,22 +782,22 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAlignNUMBERParserRuleCall_1_11_1_0 = (RuleCall)cAlignAssignment_1_11_1.eContents().get(0);
 		
 		//FunctionDefinition:
-		//	"define" (LINKAGE | ALIAS_LINKAGE)? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=TypeUse address=Address
+		//	"define" (LINKAGE | ALIAS_LINKAGE)? VISIBILITY? CALLING_CONV? RETURN_ATTRIBUTES? returnType=TypeUse address=Address
 		//	("()" | "(" parameter=FunctionParameterList? ")") "unnamed_addr"? FUNCTION_ATTRIBUTES* ("section " STRING)? ("align"
-		//	align=NUMBER)? body=FunctionBody | "declare" (LINKAGE | ALIAS_LINKAGE)? VISIBILITY? CallingConv? RETURN_ATTRIBUTES?
+		//	align=NUMBER)? body=FunctionBody | "declare" (LINKAGE | ALIAS_LINKAGE)? VISIBILITY? CALLING_CONV? RETURN_ATTRIBUTES?
 		//	returnType=TypeUse address=Address ("()" | "(" parameter=FunctionParameterList? ")") "unnamed_addr"?
 		//	FUNCTION_ATTRIBUTES* ("section " STRING)? ("align" align=NUMBER)?;
 		public ParserRule getRule() { return rule; }
 
-		//"define" (LINKAGE | ALIAS_LINKAGE)? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=TypeUse address=Address ("()"
-		//| "(" parameter=FunctionParameterList? ")") "unnamed_addr"? FUNCTION_ATTRIBUTES* ("section " STRING)? ("align"
-		//align=NUMBER)? body=FunctionBody | "declare" (LINKAGE | ALIAS_LINKAGE)? VISIBILITY? CallingConv? RETURN_ATTRIBUTES?
+		//"define" (LINKAGE | ALIAS_LINKAGE)? VISIBILITY? CALLING_CONV? RETURN_ATTRIBUTES? returnType=TypeUse address=Address
+		//("()" | "(" parameter=FunctionParameterList? ")") "unnamed_addr"? FUNCTION_ATTRIBUTES* ("section " STRING)? ("align"
+		//align=NUMBER)? body=FunctionBody | "declare" (LINKAGE | ALIAS_LINKAGE)? VISIBILITY? CALLING_CONV? RETURN_ATTRIBUTES?
 		//returnType=TypeUse address=Address ("()" | "(" parameter=FunctionParameterList? ")") "unnamed_addr"?
 		//FUNCTION_ATTRIBUTES* ("section " STRING)? ("align" align=NUMBER)?
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"define" (LINKAGE | ALIAS_LINKAGE)? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=TypeUse address=Address ("()"
-		//| "(" parameter=FunctionParameterList? ")") "unnamed_addr"? FUNCTION_ATTRIBUTES* ("section " STRING)? ("align"
+		//"define" (LINKAGE | ALIAS_LINKAGE)? VISIBILITY? CALLING_CONV? RETURN_ATTRIBUTES? returnType=TypeUse address=Address
+		//("()" | "(" parameter=FunctionParameterList? ")") "unnamed_addr"? FUNCTION_ATTRIBUTES* ("section " STRING)? ("align"
 		//align=NUMBER)? body=FunctionBody
 		public Group getGroup_0() { return cGroup_0; }
 
@@ -815,8 +816,8 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//VISIBILITY?
 		public RuleCall getVISIBILITYTerminalRuleCall_0_2() { return cVISIBILITYTerminalRuleCall_0_2; }
 
-		//CallingConv?
-		public RuleCall getCallingConvParserRuleCall_0_3() { return cCallingConvParserRuleCall_0_3; }
+		//CALLING_CONV?
+		public RuleCall getCALLING_CONVParserRuleCall_0_3() { return cCALLING_CONVParserRuleCall_0_3; }
 
 		//RETURN_ATTRIBUTES?
 		public RuleCall getRETURN_ATTRIBUTESTerminalRuleCall_0_4() { return cRETURN_ATTRIBUTESTerminalRuleCall_0_4; }
@@ -887,7 +888,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//FunctionBody
 		public RuleCall getBodyFunctionBodyParserRuleCall_0_12_0() { return cBodyFunctionBodyParserRuleCall_0_12_0; }
 
-		//"declare" (LINKAGE | ALIAS_LINKAGE)? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=TypeUse address=Address
+		//"declare" (LINKAGE | ALIAS_LINKAGE)? VISIBILITY? CALLING_CONV? RETURN_ATTRIBUTES? returnType=TypeUse address=Address
 		//("()" | "(" parameter=FunctionParameterList? ")") "unnamed_addr"? FUNCTION_ATTRIBUTES* ("section " STRING)? ("align"
 		//align=NUMBER)?
 		public Group getGroup_1() { return cGroup_1; }
@@ -907,8 +908,8 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//VISIBILITY?
 		public RuleCall getVISIBILITYTerminalRuleCall_1_2() { return cVISIBILITYTerminalRuleCall_1_2; }
 
-		//CallingConv?
-		public RuleCall getCallingConvParserRuleCall_1_3() { return cCallingConvParserRuleCall_1_3; }
+		//CALLING_CONV?
+		public RuleCall getCALLING_CONVParserRuleCall_1_3() { return cCALLING_CONVParserRuleCall_1_3; }
 
 		//RETURN_ATTRIBUTES?
 		public RuleCall getRETURN_ATTRIBUTESTerminalRuleCall_1_4() { return cRETURN_ATTRIBUTESTerminalRuleCall_1_4; }
@@ -2423,20 +2424,18 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cGetelementptrKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Keyword cInboundsKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Assignment cAggerateAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
-		private final RuleCall cAggerateParameterParserRuleCall_4_0_0 = (RuleCall)cAggerateAssignment_4_0.eContents().get(0);
+		private final Assignment cAggregateAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
+		private final RuleCall cAggregateParameterParserRuleCall_4_0_0 = (RuleCall)cAggregateAssignment_4_0.eContents().get(0);
 		private final Group cGroup_4_1 = (Group)cGroup_4.eContents().get(1);
 		private final Keyword cCommaKeyword_4_1_0 = (Keyword)cGroup_4_1.eContents().get(0);
-		private final Assignment cIndTypesAssignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
-		private final RuleCall cIndTypesTypeUseParserRuleCall_4_1_1_0 = (RuleCall)cIndTypesAssignment_4_1_1.eContents().get(0);
-		private final Assignment cIndiziesAssignment_4_1_2 = (Assignment)cGroup_4_1.eContents().get(2);
-		private final RuleCall cIndiziesValueParserRuleCall_4_1_2_0 = (RuleCall)cIndiziesAssignment_4_1_2.eContents().get(0);
+		private final Assignment cIndicesAssignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
+		private final RuleCall cIndicesParameterParserRuleCall_4_1_1_0 = (RuleCall)cIndicesAssignment_4_1_1.eContents().get(0);
 		
 		//GetElementPtr:
-		//	result=Address "=" "getelementptr" "inbounds"? (aggerate=Parameter ("," indTypes+=TypeUse indizies+=Value)*);
+		//	result=Address "=" "getelementptr" "inbounds"? (aggregate=Parameter ("," indices+=Parameter)*);
 		public ParserRule getRule() { return rule; }
 
-		//result=Address "=" "getelementptr" "inbounds"? (aggerate=Parameter ("," indTypes+=TypeUse indizies+=Value)*)
+		//result=Address "=" "getelementptr" "inbounds"? (aggregate=Parameter ("," indices+=Parameter)*)
 		public Group getGroup() { return cGroup; }
 
 		//result=Address
@@ -2454,32 +2453,26 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//"inbounds"?
 		public Keyword getInboundsKeyword_3() { return cInboundsKeyword_3; }
 
-		//aggerate=Parameter ("," indTypes+=TypeUse indizies+=Value)*
+		//aggregate=Parameter ("," indices+=Parameter)*
 		public Group getGroup_4() { return cGroup_4; }
 
-		//aggerate=Parameter
-		public Assignment getAggerateAssignment_4_0() { return cAggerateAssignment_4_0; }
+		//aggregate=Parameter
+		public Assignment getAggregateAssignment_4_0() { return cAggregateAssignment_4_0; }
 
 		//Parameter
-		public RuleCall getAggerateParameterParserRuleCall_4_0_0() { return cAggerateParameterParserRuleCall_4_0_0; }
+		public RuleCall getAggregateParameterParserRuleCall_4_0_0() { return cAggregateParameterParserRuleCall_4_0_0; }
 
-		//("," indTypes+=TypeUse indizies+=Value)*
+		//("," indices+=Parameter)*
 		public Group getGroup_4_1() { return cGroup_4_1; }
 
 		//","
 		public Keyword getCommaKeyword_4_1_0() { return cCommaKeyword_4_1_0; }
 
-		//indTypes+=TypeUse
-		public Assignment getIndTypesAssignment_4_1_1() { return cIndTypesAssignment_4_1_1; }
+		//indices+=Parameter
+		public Assignment getIndicesAssignment_4_1_1() { return cIndicesAssignment_4_1_1; }
 
-		//TypeUse
-		public RuleCall getIndTypesTypeUseParserRuleCall_4_1_1_0() { return cIndTypesTypeUseParserRuleCall_4_1_1_0; }
-
-		//indizies+=Value
-		public Assignment getIndiziesAssignment_4_1_2() { return cIndiziesAssignment_4_1_2; }
-
-		//Value
-		public RuleCall getIndiziesValueParserRuleCall_4_1_2_0() { return cIndiziesValueParserRuleCall_4_1_2_0; }
+		//Parameter
+		public RuleCall getIndicesParameterParserRuleCall_4_1_1_0() { return cIndicesParameterParserRuleCall_4_1_1_0; }
 	}
 
 	public class NestedGetElementPtrElements extends AbstractParserRuleElementFinder {
@@ -2489,21 +2482,19 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cInboundsKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cLeftParenthesisKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cAggerateAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cAggerateParameterParserRuleCall_2_1_0 = (RuleCall)cAggerateAssignment_2_1.eContents().get(0);
+		private final Assignment cAggregateAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cAggregateParameterParserRuleCall_2_1_0 = (RuleCall)cAggregateAssignment_2_1.eContents().get(0);
 		private final Group cGroup_2_2 = (Group)cGroup_2.eContents().get(2);
 		private final Keyword cCommaKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
-		private final Assignment cIndTypesAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
-		private final RuleCall cIndTypesTypeUseParserRuleCall_2_2_1_0 = (RuleCall)cIndTypesAssignment_2_2_1.eContents().get(0);
-		private final Assignment cIndiziesAssignment_2_2_2 = (Assignment)cGroup_2_2.eContents().get(2);
-		private final RuleCall cIndiziesValueParserRuleCall_2_2_2_0 = (RuleCall)cIndiziesAssignment_2_2_2.eContents().get(0);
+		private final Assignment cIndicesAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
+		private final RuleCall cIndicesParameterParserRuleCall_2_2_1_0 = (RuleCall)cIndicesAssignment_2_2_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
 		
 		//NestedGetElementPtr:
-		//	"getelementptr" "inbounds"? ("(" aggerate=Parameter ("," indTypes+=TypeUse indizies+=Value)* ")");
+		//	"getelementptr" "inbounds"? ("(" aggregate=Parameter ("," indices+=Parameter)* ")");
 		public ParserRule getRule() { return rule; }
 
-		//"getelementptr" "inbounds"? ("(" aggerate=Parameter ("," indTypes+=TypeUse indizies+=Value)* ")")
+		//"getelementptr" "inbounds"? ("(" aggregate=Parameter ("," indices+=Parameter)* ")")
 		public Group getGroup() { return cGroup; }
 
 		//"getelementptr"
@@ -2512,35 +2503,29 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//"inbounds"?
 		public Keyword getInboundsKeyword_1() { return cInboundsKeyword_1; }
 
-		//"(" aggerate=Parameter ("," indTypes+=TypeUse indizies+=Value)* ")"
+		//"(" aggregate=Parameter ("," indices+=Parameter)* ")"
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"("
 		public Keyword getLeftParenthesisKeyword_2_0() { return cLeftParenthesisKeyword_2_0; }
 
-		//aggerate=Parameter
-		public Assignment getAggerateAssignment_2_1() { return cAggerateAssignment_2_1; }
+		//aggregate=Parameter
+		public Assignment getAggregateAssignment_2_1() { return cAggregateAssignment_2_1; }
 
 		//Parameter
-		public RuleCall getAggerateParameterParserRuleCall_2_1_0() { return cAggerateParameterParserRuleCall_2_1_0; }
+		public RuleCall getAggregateParameterParserRuleCall_2_1_0() { return cAggregateParameterParserRuleCall_2_1_0; }
 
-		//("," indTypes+=TypeUse indizies+=Value)*
+		//("," indices+=Parameter)*
 		public Group getGroup_2_2() { return cGroup_2_2; }
 
 		//","
 		public Keyword getCommaKeyword_2_2_0() { return cCommaKeyword_2_2_0; }
 
-		//indTypes+=TypeUse
-		public Assignment getIndTypesAssignment_2_2_1() { return cIndTypesAssignment_2_2_1; }
+		//indices+=Parameter
+		public Assignment getIndicesAssignment_2_2_1() { return cIndicesAssignment_2_2_1; }
 
-		//TypeUse
-		public RuleCall getIndTypesTypeUseParserRuleCall_2_2_1_0() { return cIndTypesTypeUseParserRuleCall_2_2_1_0; }
-
-		//indizies+=Value
-		public Assignment getIndiziesAssignment_2_2_2() { return cIndiziesAssignment_2_2_2; }
-
-		//Value
-		public RuleCall getIndiziesValueParserRuleCall_2_2_2_0() { return cIndiziesValueParserRuleCall_2_2_2_0; }
+		//Parameter
+		public RuleCall getIndicesParameterParserRuleCall_2_2_1_0() { return cIndicesParameterParserRuleCall_2_2_1_0; }
 
 		//")"
 		public Keyword getRightParenthesisKeyword_2_3() { return cRightParenthesisKeyword_2_3; }
@@ -3123,7 +3108,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cEqualsSignKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
 		private final Keyword cTailKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Keyword cCallKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final RuleCall cCallingConvParserRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
+		private final RuleCall cCALLING_CONVParserRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		private final RuleCall cRETURN_ATTRIBUTESTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
 		private final Assignment cFunctionAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cFunctionParameterParserRuleCall_5_0 = (RuleCall)cFunctionAssignment_5.eContents().get(0);
@@ -3138,11 +3123,11 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		
 		////FIXME: no support for call of functions with a function as a result type
 		//Call:
-		//	(result=Address "=")? "tail"? "call" CallingConv? RETURN_ATTRIBUTES? function= //(('asm' 'sideeffect'? STRING ',' STRING) 
+		//	(result=Address "=")? "tail"? "call" CALLING_CONV? RETURN_ATTRIBUTES? function= //(('asm' 'sideeffect'? STRING ',' STRING) 
 		//	Parameter pList=ParameterList FUNCTION_ATTRIBUTES* ("," "!srcloc" "!" NUMBER)*;
 		public ParserRule getRule() { return rule; }
 
-		//(result=Address "=")? "tail"? "call" CallingConv? RETURN_ATTRIBUTES? function= //(('asm' 'sideeffect'? STRING ',' STRING) 
+		//(result=Address "=")? "tail"? "call" CALLING_CONV? RETURN_ATTRIBUTES? function= //(('asm' 'sideeffect'? STRING ',' STRING) 
 		//Parameter pList=ParameterList FUNCTION_ATTRIBUTES* ("," "!srcloc" "!" NUMBER)*
 		public Group getGroup() { return cGroup; }
 
@@ -3164,8 +3149,8 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//"call"
 		public Keyword getCallKeyword_2() { return cCallKeyword_2; }
 
-		//CallingConv?
-		public RuleCall getCallingConvParserRuleCall_3() { return cCallingConvParserRuleCall_3; }
+		//CALLING_CONV?
+		public RuleCall getCALLING_CONVParserRuleCall_3() { return cCALLING_CONVParserRuleCall_3; }
 
 		//RETURN_ATTRIBUTES?
 		public RuleCall getRETURN_ATTRIBUTESTerminalRuleCall_4() { return cRETURN_ATTRIBUTESTerminalRuleCall_4; }
@@ -4183,7 +4168,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Invoke");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cInvokeKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cCallingConvParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final RuleCall cCALLING_CONVParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final RuleCall cRETURN_ATTRIBUTESTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		private final Assignment cReturnTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cReturnTypeTypeUseParserRuleCall_3_0 = (RuleCall)cReturnTypeAssignment_3.eContents().get(0);
@@ -4202,19 +4187,19 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cUnwindTargetLabelVALID_IDTerminalRuleCall_12_0 = (RuleCall)cUnwindTargetLabelAssignment_12.eContents().get(0);
 		
 		//Invoke:
-		//	"invoke" CallingConv? RETURN_ATTRIBUTES? returnType=TypeUse name=Address pList=ParameterList FUNCTION_ATTRIBUTES*
+		//	"invoke" CALLING_CONV? RETURN_ATTRIBUTES? returnType=TypeUse name=Address pList=ParameterList FUNCTION_ATTRIBUTES*
 		//	"to" "label" targetLabel=VALID_ID "unwind" "label" unwindTargetLabel=VALID_ID;
 		public ParserRule getRule() { return rule; }
 
-		//"invoke" CallingConv? RETURN_ATTRIBUTES? returnType=TypeUse name=Address pList=ParameterList FUNCTION_ATTRIBUTES* "to"
+		//"invoke" CALLING_CONV? RETURN_ATTRIBUTES? returnType=TypeUse name=Address pList=ParameterList FUNCTION_ATTRIBUTES* "to"
 		//"label" targetLabel=VALID_ID "unwind" "label" unwindTargetLabel=VALID_ID
 		public Group getGroup() { return cGroup; }
 
 		//"invoke"
 		public Keyword getInvokeKeyword_0() { return cInvokeKeyword_0; }
 
-		//CallingConv?
-		public RuleCall getCallingConvParserRuleCall_1() { return cCallingConvParserRuleCall_1; }
+		//CALLING_CONV?
+		public RuleCall getCALLING_CONVParserRuleCall_1() { return cCALLING_CONVParserRuleCall_1; }
 
 		//RETURN_ATTRIBUTES?
 		public RuleCall getRETURN_ATTRIBUTESTerminalRuleCall_2() { return cRETURN_ATTRIBUTESTerminalRuleCall_2; }
@@ -4465,7 +4450,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 	private final TerminalRule tATOMIC_ORDERING;
 	private final TerminalRule tBIN_OP;
 	private final TerminalRule tRETURN_ATTRIBUTES;
-	private final CallingConvElements pCallingConv;
+	private final CALLING_CONVElements pCALLING_CONV;
 	private final FUNCTION_ATTRIBUTESElements pFUNCTION_ATTRIBUTES;
 	private final TerminalRule tCAST_OP;
 	private final TerminalRule tI_PREDICATES;
@@ -4563,7 +4548,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		this.tATOMIC_ORDERING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ATOMIC_ORDERING");
 		this.tBIN_OP = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "BIN_OP");
 		this.tRETURN_ATTRIBUTES = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "RETURN_ATTRIBUTES");
-		this.pCallingConv = new CallingConvElements();
+		this.pCALLING_CONV = new CALLING_CONVElements();
 		this.pFUNCTION_ATTRIBUTES = new FUNCTION_ATTRIBUTESElements();
 		this.tCAST_OP = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CAST_OP");
 		this.tI_PREDICATES = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "I_PREDICATES");
@@ -4683,21 +4668,8 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		return getNUMBERAccess().getRule();
 	}
 
-	////| ('(' VALID_ID POINTER? ')')		frisst doch nur pointer weg
-	////	('.' 
-	////		(
-	////			(
-	////				('a'..'z' | 'A'..'Z' | '_' | '0'..'9')+
-	////			) 
-	////			| 
-	////			(
-	////				'(' ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')+ POINTER? ')'
-	////			)
-	////		)
-	////	)*
 	//terminal VALID_ID:
-	//	("%" | "@") (("a".."z" | "A".."Z" | "_" | "." | "0".."9")+ //(ID | '_' | '.')+
-	//	| STRING);
+	//	("%" | "@") (("a".."z" | "A".."Z" | "_" | "." | "0".."9")+ | STRING);
 	public TerminalRule getVALID_IDRule() {
 		return tVALID_ID;
 	} 
@@ -4788,16 +4760,16 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		return tRETURN_ATTRIBUTES;
 	} 
 
-	//CallingConv:
+	//CALLING_CONV:
 	//	"ccc" | "fastcc" | "coldcc" | "x86_stdcallcc" | "x86_fastcallcc" | "x86_thiscallcc" | "arm_apcscc" | "arm_aapcscc" |
 	//	"arm_aapcs_vfpcc" | "msp430_intrcc" | "ptx_kernel" | "ptx_device" | "spir_func" | "spir_kernel" | "cc" "<" NUMBER ">"
 	//	NUMBER;
-	public CallingConvElements getCallingConvAccess() {
-		return pCallingConv;
+	public CALLING_CONVElements getCALLING_CONVAccess() {
+		return pCALLING_CONV;
 	}
 	
-	public ParserRule getCallingConvRule() {
-		return getCallingConvAccess().getRule();
+	public ParserRule getCALLING_CONVRule() {
+		return getCALLING_CONVAccess().getRule();
 	}
 
 	//FUNCTION_ATTRIBUTES:
@@ -4865,6 +4837,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		return getLABEL_IDAccess().getRule();
 	}
 
+	////(('a'..'z' | 'A'..'Z' | '_' | '.' | '0'..'9')+  | STRING)
 	//AbstractElement:
 	//	TopLevelEntity SL_COMMENT? | MainLevelEntity SL_COMMENT?;
 	public AbstractElementElements getAbstractElementAccess() {
@@ -4920,9 +4893,9 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FunctionDefinition:
-	//	"define" (LINKAGE | ALIAS_LINKAGE)? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=TypeUse address=Address
+	//	"define" (LINKAGE | ALIAS_LINKAGE)? VISIBILITY? CALLING_CONV? RETURN_ATTRIBUTES? returnType=TypeUse address=Address
 	//	("()" | "(" parameter=FunctionParameterList? ")") "unnamed_addr"? FUNCTION_ATTRIBUTES* ("section " STRING)? ("align"
-	//	align=NUMBER)? body=FunctionBody | "declare" (LINKAGE | ALIAS_LINKAGE)? VISIBILITY? CallingConv? RETURN_ATTRIBUTES?
+	//	align=NUMBER)? body=FunctionBody | "declare" (LINKAGE | ALIAS_LINKAGE)? VISIBILITY? CALLING_CONV? RETURN_ATTRIBUTES?
 	//	returnType=TypeUse address=Address ("()" | "(" parameter=FunctionParameterList? ")") "unnamed_addr"?
 	//	FUNCTION_ATTRIBUTES* ("section " STRING)? ("align" align=NUMBER)?;
 	public FunctionDefinitionElements getFunctionDefinitionAccess() {
@@ -5208,7 +5181,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//GetElementPtr:
-	//	result=Address "=" "getelementptr" "inbounds"? (aggerate=Parameter ("," indTypes+=TypeUse indizies+=Value)*);
+	//	result=Address "=" "getelementptr" "inbounds"? (aggregate=Parameter ("," indices+=Parameter)*);
 	public GetElementPtrElements getGetElementPtrAccess() {
 		return pGetElementPtr;
 	}
@@ -5218,7 +5191,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NestedGetElementPtr:
-	//	"getelementptr" "inbounds"? ("(" aggerate=Parameter ("," indTypes+=TypeUse indizies+=Value)* ")");
+	//	"getelementptr" "inbounds"? ("(" aggregate=Parameter ("," indices+=Parameter)* ")");
 	public NestedGetElementPtrElements getNestedGetElementPtrAccess() {
 		return pNestedGetElementPtr;
 	}
@@ -5285,7 +5258,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 
 	////FIXME: no support for call of functions with a function as a result type
 	//Call:
-	//	(result=Address "=")? "tail"? "call" CallingConv? RETURN_ATTRIBUTES? function= //(('asm' 'sideeffect'? STRING ',' STRING) 
+	//	(result=Address "=")? "tail"? "call" CALLING_CONV? RETURN_ATTRIBUTES? function= //(('asm' 'sideeffect'? STRING ',' STRING) 
 	//	Parameter pList=ParameterList FUNCTION_ATTRIBUTES* ("," "!srcloc" "!" NUMBER)*;
 	public CallElements getCallAccess() {
 		return pCall;
@@ -5462,7 +5435,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Invoke:
-	//	"invoke" CallingConv? RETURN_ATTRIBUTES? returnType=TypeUse name=Address pList=ParameterList FUNCTION_ATTRIBUTES*
+	//	"invoke" CALLING_CONV? RETURN_ATTRIBUTES? returnType=TypeUse name=Address pList=ParameterList FUNCTION_ATTRIBUTES*
 	//	"to" "label" targetLabel=VALID_ID "unwind" "label" unwindTargetLabel=VALID_ID;
 	public InvokeElements getInvokeAccess() {
 		return pInvoke;

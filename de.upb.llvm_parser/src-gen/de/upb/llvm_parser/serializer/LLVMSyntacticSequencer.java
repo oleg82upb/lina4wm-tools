@@ -27,7 +27,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_Array_LeftSquareBracketRightSquareBracketKeyword_1_1_or___LeftSquareBracketKeyword_1_2_0_RightSquareBracketKeyword_1_2_1__;
 	protected AbstractElementAlias match_Array_POINTERTerminalRuleCall_2_q;
 	protected AbstractElementAlias match_AtomicRMW_SinglethreadKeyword_8_q;
-	protected AbstractElementAlias match_Call_CallingConvParserRuleCall_3_q;
+	protected AbstractElementAlias match_Call_CALLING_CONVParserRuleCall_3_q;
 	protected AbstractElementAlias match_Call_FUNCTION_ATTRIBUTESParserRuleCall_7_a;
 	protected AbstractElementAlias match_Call_RETURN_ATTRIBUTESTerminalRuleCall_4_q;
 	protected AbstractElementAlias match_Call_TailKeyword_1_q;
@@ -35,8 +35,8 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_CmpXchg_SinglethreadKeyword_9_q;
 	protected AbstractElementAlias match_Compare_FcmpKeyword_2_0_1_or_IcmpKeyword_2_0_0;
 	protected AbstractElementAlias match_Fence_SinglethreadKeyword_1_q;
-	protected AbstractElementAlias match_FunctionDefinition_CallingConvParserRuleCall_0_3_q;
-	protected AbstractElementAlias match_FunctionDefinition_CallingConvParserRuleCall_1_3_q;
+	protected AbstractElementAlias match_FunctionDefinition_CALLING_CONVParserRuleCall_0_3_q;
+	protected AbstractElementAlias match_FunctionDefinition_CALLING_CONVParserRuleCall_1_3_q;
 	protected AbstractElementAlias match_FunctionDefinition_FUNCTION_ATTRIBUTESParserRuleCall_0_9_a;
 	protected AbstractElementAlias match_FunctionDefinition_FUNCTION_ATTRIBUTESParserRuleCall_1_9_a;
 	protected AbstractElementAlias match_FunctionDefinition_LeftParenthesisRightParenthesisKeyword_0_7_0_or___LeftParenthesisKeyword_0_7_1_0_RightParenthesisKeyword_0_7_1_2__;
@@ -54,7 +54,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_FunctionParameter_RETURN_ATTRIBUTESTerminalRuleCall_1_a;
 	protected AbstractElementAlias match_GetElementPtr_InboundsKeyword_3_q;
 	protected AbstractElementAlias match_GlobalDefinition___ALIAS_LINKAGETerminalRuleCall_2_1_or_ConstantKeyword_2_4_or_GlobalKeyword_2_2_or_LINKAGETerminalRuleCall_2_0_or_Unnamed_addrKeyword_2_3__a;
-	protected AbstractElementAlias match_Invoke_CallingConvParserRuleCall_1_q;
+	protected AbstractElementAlias match_Invoke_CALLING_CONVParserRuleCall_1_q;
 	protected AbstractElementAlias match_Invoke_FUNCTION_ATTRIBUTESParserRuleCall_6_a;
 	protected AbstractElementAlias match_Invoke_RETURN_ATTRIBUTESTerminalRuleCall_2_q;
 	protected AbstractElementAlias match_Load_SinglethreadKeyword_1_6_q;
@@ -80,7 +80,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_Array_LeftSquareBracketRightSquareBracketKeyword_1_1_or___LeftSquareBracketKeyword_1_2_0_RightSquareBracketKeyword_1_2_1__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getArrayAccess().getLeftSquareBracketKeyword_1_2_0()), new TokenAlias(false, false, grammarAccess.getArrayAccess().getRightSquareBracketKeyword_1_2_1())), new TokenAlias(false, false, grammarAccess.getArrayAccess().getLeftSquareBracketRightSquareBracketKeyword_1_1()));
 		match_Array_POINTERTerminalRuleCall_2_q = new TokenAlias(false, true, grammarAccess.getArrayAccess().getPOINTERTerminalRuleCall_2());
 		match_AtomicRMW_SinglethreadKeyword_8_q = new TokenAlias(false, true, grammarAccess.getAtomicRMWAccess().getSinglethreadKeyword_8());
-		match_Call_CallingConvParserRuleCall_3_q = new TokenAlias(false, true, grammarAccess.getCallAccess().getCallingConvParserRuleCall_3());
+		match_Call_CALLING_CONVParserRuleCall_3_q = new TokenAlias(false, true, grammarAccess.getCallAccess().getCALLING_CONVParserRuleCall_3());
 		match_Call_FUNCTION_ATTRIBUTESParserRuleCall_7_a = new TokenAlias(true, true, grammarAccess.getCallAccess().getFUNCTION_ATTRIBUTESParserRuleCall_7());
 		match_Call_RETURN_ATTRIBUTESTerminalRuleCall_4_q = new TokenAlias(false, true, grammarAccess.getCallAccess().getRETURN_ATTRIBUTESTerminalRuleCall_4());
 		match_Call_TailKeyword_1_q = new TokenAlias(false, true, grammarAccess.getCallAccess().getTailKeyword_1());
@@ -88,8 +88,8 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_CmpXchg_SinglethreadKeyword_9_q = new TokenAlias(false, true, grammarAccess.getCmpXchgAccess().getSinglethreadKeyword_9());
 		match_Compare_FcmpKeyword_2_0_1_or_IcmpKeyword_2_0_0 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getCompareAccess().getFcmpKeyword_2_0_1()), new TokenAlias(false, false, grammarAccess.getCompareAccess().getIcmpKeyword_2_0_0()));
 		match_Fence_SinglethreadKeyword_1_q = new TokenAlias(false, true, grammarAccess.getFenceAccess().getSinglethreadKeyword_1());
-		match_FunctionDefinition_CallingConvParserRuleCall_0_3_q = new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getCallingConvParserRuleCall_0_3());
-		match_FunctionDefinition_CallingConvParserRuleCall_1_3_q = new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getCallingConvParserRuleCall_1_3());
+		match_FunctionDefinition_CALLING_CONVParserRuleCall_0_3_q = new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getCALLING_CONVParserRuleCall_0_3());
+		match_FunctionDefinition_CALLING_CONVParserRuleCall_1_3_q = new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getCALLING_CONVParserRuleCall_1_3());
 		match_FunctionDefinition_FUNCTION_ATTRIBUTESParserRuleCall_0_9_a = new TokenAlias(true, true, grammarAccess.getFunctionDefinitionAccess().getFUNCTION_ATTRIBUTESParserRuleCall_0_9());
 		match_FunctionDefinition_FUNCTION_ATTRIBUTESParserRuleCall_1_9_a = new TokenAlias(true, true, grammarAccess.getFunctionDefinitionAccess().getFUNCTION_ATTRIBUTESParserRuleCall_1_9());
 		match_FunctionDefinition_LeftParenthesisRightParenthesisKeyword_0_7_0_or___LeftParenthesisKeyword_0_7_1_0_RightParenthesisKeyword_0_7_1_2__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getFunctionDefinitionAccess().getLeftParenthesisKeyword_0_7_1_0()), new TokenAlias(false, false, grammarAccess.getFunctionDefinitionAccess().getRightParenthesisKeyword_0_7_1_2())), new TokenAlias(false, false, grammarAccess.getFunctionDefinitionAccess().getLeftParenthesisRightParenthesisKeyword_0_7_0()));
@@ -107,7 +107,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_FunctionParameter_RETURN_ATTRIBUTESTerminalRuleCall_1_a = new TokenAlias(true, true, grammarAccess.getFunctionParameterAccess().getRETURN_ATTRIBUTESTerminalRuleCall_1());
 		match_GetElementPtr_InboundsKeyword_3_q = new TokenAlias(false, true, grammarAccess.getGetElementPtrAccess().getInboundsKeyword_3());
 		match_GlobalDefinition___ALIAS_LINKAGETerminalRuleCall_2_1_or_ConstantKeyword_2_4_or_GlobalKeyword_2_2_or_LINKAGETerminalRuleCall_2_0_or_Unnamed_addrKeyword_2_3__a = new AlternativeAlias(true, true, new TokenAlias(false, false, grammarAccess.getGlobalDefinitionAccess().getALIAS_LINKAGETerminalRuleCall_2_1()), new TokenAlias(false, false, grammarAccess.getGlobalDefinitionAccess().getConstantKeyword_2_4()), new TokenAlias(false, false, grammarAccess.getGlobalDefinitionAccess().getGlobalKeyword_2_2()), new TokenAlias(false, false, grammarAccess.getGlobalDefinitionAccess().getLINKAGETerminalRuleCall_2_0()), new TokenAlias(false, false, grammarAccess.getGlobalDefinitionAccess().getUnnamed_addrKeyword_2_3()));
-		match_Invoke_CallingConvParserRuleCall_1_q = new TokenAlias(false, true, grammarAccess.getInvokeAccess().getCallingConvParserRuleCall_1());
+		match_Invoke_CALLING_CONVParserRuleCall_1_q = new TokenAlias(false, true, grammarAccess.getInvokeAccess().getCALLING_CONVParserRuleCall_1());
 		match_Invoke_FUNCTION_ATTRIBUTESParserRuleCall_6_a = new TokenAlias(true, true, grammarAccess.getInvokeAccess().getFUNCTION_ATTRIBUTESParserRuleCall_6());
 		match_Invoke_RETURN_ATTRIBUTESTerminalRuleCall_2_q = new TokenAlias(false, true, grammarAccess.getInvokeAccess().getRETURN_ATTRIBUTESTerminalRuleCall_2());
 		match_Load_SinglethreadKeyword_1_6_q = new TokenAlias(false, true, grammarAccess.getLoadAccess().getSinglethreadKeyword_1_6());
@@ -127,8 +127,8 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if(ruleCall.getRule() == grammarAccess.getALIAS_LINKAGERule())
 			return getALIAS_LINKAGEToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getCallingConvRule())
-			return getCallingConvToken(semanticObject, ruleCall, node);
+		else if(ruleCall.getRule() == grammarAccess.getCALLING_CONVRule())
+			return getCALLING_CONVToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getFUNCTION_ATTRIBUTESRule())
 			return getFUNCTION_ATTRIBUTESToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getINT_TYPERule())
@@ -161,12 +161,12 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	}
 	
 	/**
-	 * CallingConv:
+	 * CALLING_CONV:
 	 * 	'ccc' | 'fastcc' | 'coldcc' | 'x86_stdcallcc' | 'x86_fastcallcc' | 'x86_thiscallcc' | 'arm_apcscc' | 'arm_aapcscc' |
 	 * 	'arm_aapcs_vfpcc' | 'msp430_intrcc' | 'ptx_kernel' | 'ptx_device' | 'spir_func' | 'spir_kernel' | 'cc' '<' NUMBER '>'
 	 * 	NUMBER;
 	 */
-	protected String getCallingConvToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+	protected String getCALLING_CONVToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "ccc";
@@ -288,8 +288,8 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_Array_POINTERTerminalRuleCall_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_AtomicRMW_SinglethreadKeyword_8_q.equals(syntax))
 				emit_AtomicRMW_SinglethreadKeyword_8_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Call_CallingConvParserRuleCall_3_q.equals(syntax))
-				emit_Call_CallingConvParserRuleCall_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_Call_CALLING_CONVParserRuleCall_3_q.equals(syntax))
+				emit_Call_CALLING_CONVParserRuleCall_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_Call_FUNCTION_ATTRIBUTESParserRuleCall_7_a.equals(syntax))
 				emit_Call_FUNCTION_ATTRIBUTESParserRuleCall_7_a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_Call_RETURN_ATTRIBUTESTerminalRuleCall_4_q.equals(syntax))
@@ -304,10 +304,10 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_Compare_FcmpKeyword_2_0_1_or_IcmpKeyword_2_0_0(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_Fence_SinglethreadKeyword_1_q.equals(syntax))
 				emit_Fence_SinglethreadKeyword_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_FunctionDefinition_CallingConvParserRuleCall_0_3_q.equals(syntax))
-				emit_FunctionDefinition_CallingConvParserRuleCall_0_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_FunctionDefinition_CallingConvParserRuleCall_1_3_q.equals(syntax))
-				emit_FunctionDefinition_CallingConvParserRuleCall_1_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_FunctionDefinition_CALLING_CONVParserRuleCall_0_3_q.equals(syntax))
+				emit_FunctionDefinition_CALLING_CONVParserRuleCall_0_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_FunctionDefinition_CALLING_CONVParserRuleCall_1_3_q.equals(syntax))
+				emit_FunctionDefinition_CALLING_CONVParserRuleCall_1_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_FunctionDefinition_FUNCTION_ATTRIBUTESParserRuleCall_0_9_a.equals(syntax))
 				emit_FunctionDefinition_FUNCTION_ATTRIBUTESParserRuleCall_0_9_a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_FunctionDefinition_FUNCTION_ATTRIBUTESParserRuleCall_1_9_a.equals(syntax))
@@ -342,8 +342,8 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_GetElementPtr_InboundsKeyword_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_GlobalDefinition___ALIAS_LINKAGETerminalRuleCall_2_1_or_ConstantKeyword_2_4_or_GlobalKeyword_2_2_or_LINKAGETerminalRuleCall_2_0_or_Unnamed_addrKeyword_2_3__a.equals(syntax))
 				emit_GlobalDefinition___ALIAS_LINKAGETerminalRuleCall_2_1_or_ConstantKeyword_2_4_or_GlobalKeyword_2_2_or_LINKAGETerminalRuleCall_2_0_or_Unnamed_addrKeyword_2_3__a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Invoke_CallingConvParserRuleCall_1_q.equals(syntax))
-				emit_Invoke_CallingConvParserRuleCall_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_Invoke_CALLING_CONVParserRuleCall_1_q.equals(syntax))
+				emit_Invoke_CALLING_CONVParserRuleCall_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_Invoke_FUNCTION_ATTRIBUTESParserRuleCall_6_a.equals(syntax))
 				emit_Invoke_FUNCTION_ATTRIBUTESParserRuleCall_6_a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_Invoke_RETURN_ATTRIBUTESTerminalRuleCall_2_q.equals(syntax))
@@ -440,9 +440,9 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     CallingConv?
+	 *     CALLING_CONV?
 	 */
-	protected void emit_Call_CallingConvParserRuleCall_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Call_CALLING_CONVParserRuleCall_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -504,17 +504,17 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     CallingConv?
+	 *     CALLING_CONV?
 	 */
-	protected void emit_FunctionDefinition_CallingConvParserRuleCall_0_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_FunctionDefinition_CALLING_CONVParserRuleCall_0_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
 	 * Syntax:
-	 *     CallingConv?
+	 *     CALLING_CONV?
 	 */
-	protected void emit_FunctionDefinition_CallingConvParserRuleCall_1_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_FunctionDefinition_CALLING_CONVParserRuleCall_1_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -656,9 +656,9 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     CallingConv?
+	 *     CALLING_CONV?
 	 */
-	protected void emit_Invoke_CallingConvParserRuleCall_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Invoke_CALLING_CONVParserRuleCall_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

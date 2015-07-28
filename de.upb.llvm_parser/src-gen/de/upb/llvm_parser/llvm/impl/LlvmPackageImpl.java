@@ -1621,7 +1621,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getGetElementPtr_Aggerate()
+  public EReference getGetElementPtr_Aggregate()
   {
     return (EReference)getElementPtrEClass.getEStructuralFeatures().get(1);
   }
@@ -1631,19 +1631,9 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getGetElementPtr_IndTypes()
+  public EReference getGetElementPtr_Indices()
   {
     return (EReference)getElementPtrEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getGetElementPtr_Indizies()
-  {
-    return (EReference)getElementPtrEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1661,7 +1651,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getNestedGetElementPtr_Aggerate()
+  public EReference getNestedGetElementPtr_Aggregate()
   {
     return (EReference)nestedGetElementPtrEClass.getEStructuralFeatures().get(0);
   }
@@ -1671,19 +1661,9 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getNestedGetElementPtr_IndTypes()
+  public EReference getNestedGetElementPtr_Indices()
   {
     return (EReference)nestedGetElementPtrEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getNestedGetElementPtr_Indizies()
-  {
-    return (EReference)nestedGetElementPtrEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -3083,14 +3063,12 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
 
     getElementPtrEClass = createEClass(GET_ELEMENT_PTR);
     createEReference(getElementPtrEClass, GET_ELEMENT_PTR__RESULT);
-    createEReference(getElementPtrEClass, GET_ELEMENT_PTR__AGGERATE);
-    createEReference(getElementPtrEClass, GET_ELEMENT_PTR__IND_TYPES);
-    createEReference(getElementPtrEClass, GET_ELEMENT_PTR__INDIZIES);
+    createEReference(getElementPtrEClass, GET_ELEMENT_PTR__AGGREGATE);
+    createEReference(getElementPtrEClass, GET_ELEMENT_PTR__INDICES);
 
     nestedGetElementPtrEClass = createEClass(NESTED_GET_ELEMENT_PTR);
-    createEReference(nestedGetElementPtrEClass, NESTED_GET_ELEMENT_PTR__AGGERATE);
-    createEReference(nestedGetElementPtrEClass, NESTED_GET_ELEMENT_PTR__IND_TYPES);
-    createEReference(nestedGetElementPtrEClass, NESTED_GET_ELEMENT_PTR__INDIZIES);
+    createEReference(nestedGetElementPtrEClass, NESTED_GET_ELEMENT_PTR__AGGREGATE);
+    createEReference(nestedGetElementPtrEClass, NESTED_GET_ELEMENT_PTR__INDICES);
 
     fenceEClass = createEClass(FENCE);
     createEAttribute(fenceEClass, FENCE__ORDERING);
@@ -3457,14 +3435,12 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
 
     initEClass(getElementPtrEClass, GetElementPtr.class, "GetElementPtr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getGetElementPtr_Result(), this.getAddress(), null, "result", null, 0, 1, GetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getGetElementPtr_Aggerate(), this.getParameter(), null, "aggerate", null, 0, 1, GetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getGetElementPtr_IndTypes(), this.getTypeUse(), null, "indTypes", null, 0, -1, GetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getGetElementPtr_Indizies(), this.getValue(), null, "indizies", null, 0, -1, GetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGetElementPtr_Aggregate(), this.getParameter(), null, "aggregate", null, 0, 1, GetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGetElementPtr_Indices(), this.getParameter(), null, "indices", null, 0, -1, GetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(nestedGetElementPtrEClass, NestedGetElementPtr.class, "NestedGetElementPtr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getNestedGetElementPtr_Aggerate(), this.getParameter(), null, "aggerate", null, 0, 1, NestedGetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getNestedGetElementPtr_IndTypes(), this.getTypeUse(), null, "indTypes", null, 0, -1, NestedGetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getNestedGetElementPtr_Indizies(), this.getValue(), null, "indizies", null, 0, -1, NestedGetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getNestedGetElementPtr_Aggregate(), this.getParameter(), null, "aggregate", null, 0, 1, NestedGetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getNestedGetElementPtr_Indices(), this.getParameter(), null, "indices", null, 0, -1, NestedGetElementPtr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(fenceEClass, Fence.class, "Fence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getFence_Ordering(), ecorePackage.getEString(), "ordering", null, 0, 1, Fence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

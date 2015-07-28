@@ -10,32 +10,8 @@ NUMBER returns EBigDecimal:
 	'-'? INT ('.' INT)?;
 
 terminal VALID_ID:
-	(
-		(
-			('%' | '@') 
-			(
-				(
-					('a'..'z' | 'A'..'Z' | '_' | '.' | '0'..'9')+
-					//(ID | '_' | '.')+
-				) 
-				| STRING
-			)
-		) 
-		//| ('(' VALID_ID POINTER? ')')		frisst doch nur pointer weg
-	)
-	
-//	('.' 
-//		(
-//			(
-//				('a'..'z' | 'A'..'Z' | '_' | '0'..'9')+
-//			) 
-//			| 
-//			(
-//				'(' ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')+ POINTER? ')'
-//			)
-//		)
-//	)*
-	;
+			('%' | '@')  (('a'..'z' | 'A'..'Z' | '_' | '.' | '0'..'9')+  | STRING)
+;
 
 terminal INT_TYPE:
 	'i' ('0'..'9')+ POINTER?;
@@ -88,7 +64,7 @@ terminal BIN_OP:
 terminal RETURN_ATTRIBUTES:
 	'zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest';
 
-CallingConv:
+CALLING_CONV:
 	'ccc' | 'fastcc' | 'coldcc' | 'x86_stdcallcc' | 'x86_fastcallcc' | 'x86_thiscallcc' | 'arm_apcscc' | 'arm_aapcscc' |
 	'arm_aapcs_vfpcc' | 'msp430_intrcc' | 'ptx_kernel' | 'ptx_device' | 'spir_func' | 'spir_kernel' | 'cc' '<' NUMBER '>'
 	NUMBER;
@@ -122,7 +98,7 @@ KEYWORDS:
 
 LABEL_ID:
 	(KEYWORDS | INT_TYPE|ID|BOOL  | 'catch' | 'invoke' | 'resume' | 'switch') ('.' (KEYWORDS|INT_TYPE|ID|BOOL | 'catch' | 'invoke' | 'resume' | 'switch'))*;
-	
+	//(('a'..'z' | 'A'..'Z' | '_' | '.' | '0'..'9')+  | STRING)
 
 
 AbstractElement:
@@ -152,11 +128,11 @@ GlobalDefinition:
 	address=Address '=' (LINKAGE | ALIAS_LINKAGE | 'global' | 'unnamed_addr' | 'constant')* value=Parameter (',' 'align' align = NUMBER)?;
 
 FunctionDefinition:
-	('define' (LINKAGE| ALIAS_LINKAGE)? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=TypeUse
+	('define' (LINKAGE| ALIAS_LINKAGE)? VISIBILITY? CALLING_CONV? RETURN_ATTRIBUTES? returnType=TypeUse
 	address=Address ('()' | '(' parameter=FunctionParameterList? ')') 'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ('align' align = NUMBER)?
 	body=FunctionBody) 
 	| 
-	('declare' (LINKAGE| ALIAS_LINKAGE)? VISIBILITY? CallingConv? RETURN_ATTRIBUTES? returnType=TypeUse
+	('declare' (LINKAGE| ALIAS_LINKAGE)? VISIBILITY? CALLING_CONV? RETURN_ATTRIBUTES? returnType=TypeUse
 	address=Address ('()' | '(' parameter=FunctionParameterList? ')') 'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ('align' align = NUMBER)?)
 ;
 
@@ -272,12 +248,10 @@ MetadataValue:
 
 
 GetElementPtr:
-	result=Address '=' 'getelementptr' 'inbounds'? 
-		(aggerate=Parameter (',' indTypes+=TypeUse indizies+=Value)*)
+	result=Address '=' 'getelementptr' 'inbounds'? (aggregate=Parameter (',' indices +=Parameter)*)
 ;
 NestedGetElementPtr:
-	'getelementptr' 'inbounds'? 
-		('(' aggerate=Parameter (',' indTypes+=TypeUse indizies+=Value)*')')
+	'getelementptr' 'inbounds'? ('(' aggregate=Parameter (',' indices +=Parameter)* ')')
 ;
 
 
@@ -303,7 +277,7 @@ Store:
 
 //FIXME: no support for call of functions with a function as a result type
 Call:
-	(result=Address '=')? 'tail'? 'call' CallingConv? RETURN_ATTRIBUTES? 
+	(result=Address '=')? 'tail'? 'call' CALLING_CONV? RETURN_ATTRIBUTES? 
 	function=Parameter //(('asm' 'sideeffect'? STRING ',' STRING) 
 	pList=ParameterList FUNCTION_ATTRIBUTES* (',' '!srcloc' '!' NUMBER)*;
 
@@ -368,7 +342,7 @@ SwitchCase:
 ;
 
 Invoke:
-	'invoke' CallingConv? RETURN_ATTRIBUTES? returnType=TypeUse name=Address pList=ParameterList
+	'invoke' CALLING_CONV? RETURN_ATTRIBUTES? returnType=TypeUse name=Address pList=ParameterList
 	FUNCTION_ATTRIBUTES* 'to' 'label' targetLabel=VALID_ID 'unwind' 'label' unwindTargetLabel=VALID_ID;
 
 Resume:

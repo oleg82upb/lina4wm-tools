@@ -5,8 +5,6 @@ package de.upb.llvm_parser.llvm.impl;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.NestedGetElementPtr;
 import de.upb.llvm_parser.llvm.Parameter;
-import de.upb.llvm_parser.llvm.TypeUse;
-import de.upb.llvm_parser.llvm.Value;
 
 import java.util.Collection;
 
@@ -30,9 +28,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.NestedGetElementPtrImpl#getAggerate <em>Aggerate</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.NestedGetElementPtrImpl#getIndTypes <em>Ind Types</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.NestedGetElementPtrImpl#getIndizies <em>Indizies</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.NestedGetElementPtrImpl#getAggregate <em>Aggregate</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.NestedGetElementPtrImpl#getIndices <em>Indices</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,34 +38,24 @@ import org.eclipse.emf.ecore.util.InternalEList;
 public class NestedGetElementPtrImpl extends ValueImpl implements NestedGetElementPtr
 {
   /**
-   * The cached value of the '{@link #getAggerate() <em>Aggerate</em>}' containment reference.
+   * The cached value of the '{@link #getAggregate() <em>Aggregate</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAggerate()
+   * @see #getAggregate()
    * @generated
    * @ordered
    */
-  protected Parameter aggerate;
+  protected Parameter aggregate;
 
   /**
-   * The cached value of the '{@link #getIndTypes() <em>Ind Types</em>}' containment reference list.
+   * The cached value of the '{@link #getIndices() <em>Indices</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIndTypes()
+   * @see #getIndices()
    * @generated
    * @ordered
    */
-  protected EList<TypeUse> indTypes;
-
-  /**
-   * The cached value of the '{@link #getIndizies() <em>Indizies</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getIndizies()
-   * @generated
-   * @ordered
-   */
-  protected EList<Value> indizies;
+  protected EList<Parameter> indices;
 
   /**
    * <!-- begin-user-doc -->
@@ -96,9 +83,9 @@ public class NestedGetElementPtrImpl extends ValueImpl implements NestedGetEleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public Parameter getAggerate()
+  public Parameter getAggregate()
   {
-    return aggerate;
+    return aggregate;
   }
 
   /**
@@ -106,13 +93,13 @@ public class NestedGetElementPtrImpl extends ValueImpl implements NestedGetEleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetAggerate(Parameter newAggerate, NotificationChain msgs)
+  public NotificationChain basicSetAggregate(Parameter newAggregate, NotificationChain msgs)
   {
-    Parameter oldAggerate = aggerate;
-    aggerate = newAggerate;
+    Parameter oldAggregate = aggregate;
+    aggregate = newAggregate;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGERATE, oldAggerate, newAggerate);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGREGATE, oldAggregate, newAggregate);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -123,20 +110,20 @@ public class NestedGetElementPtrImpl extends ValueImpl implements NestedGetEleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAggerate(Parameter newAggerate)
+  public void setAggregate(Parameter newAggregate)
   {
-    if (newAggerate != aggerate)
+    if (newAggregate != aggregate)
     {
       NotificationChain msgs = null;
-      if (aggerate != null)
-        msgs = ((InternalEObject)aggerate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGERATE, null, msgs);
-      if (newAggerate != null)
-        msgs = ((InternalEObject)newAggerate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGERATE, null, msgs);
-      msgs = basicSetAggerate(newAggerate, msgs);
+      if (aggregate != null)
+        msgs = ((InternalEObject)aggregate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGREGATE, null, msgs);
+      if (newAggregate != null)
+        msgs = ((InternalEObject)newAggregate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGREGATE, null, msgs);
+      msgs = basicSetAggregate(newAggregate, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGERATE, newAggerate, newAggerate));
+      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGREGATE, newAggregate, newAggregate));
   }
 
   /**
@@ -144,27 +131,13 @@ public class NestedGetElementPtrImpl extends ValueImpl implements NestedGetEleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<TypeUse> getIndTypes()
+  public EList<Parameter> getIndices()
   {
-    if (indTypes == null)
+    if (indices == null)
     {
-      indTypes = new EObjectContainmentEList<TypeUse>(TypeUse.class, this, LlvmPackage.NESTED_GET_ELEMENT_PTR__IND_TYPES);
+      indices = new EObjectContainmentEList<Parameter>(Parameter.class, this, LlvmPackage.NESTED_GET_ELEMENT_PTR__INDICES);
     }
-    return indTypes;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<Value> getIndizies()
-  {
-    if (indizies == null)
-    {
-      indizies = new EObjectContainmentEList<Value>(Value.class, this, LlvmPackage.NESTED_GET_ELEMENT_PTR__INDIZIES);
-    }
-    return indizies;
+    return indices;
   }
 
   /**
@@ -177,12 +150,10 @@ public class NestedGetElementPtrImpl extends ValueImpl implements NestedGetEleme
   {
     switch (featureID)
     {
-      case LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGERATE:
-        return basicSetAggerate(null, msgs);
-      case LlvmPackage.NESTED_GET_ELEMENT_PTR__IND_TYPES:
-        return ((InternalEList<?>)getIndTypes()).basicRemove(otherEnd, msgs);
-      case LlvmPackage.NESTED_GET_ELEMENT_PTR__INDIZIES:
-        return ((InternalEList<?>)getIndizies()).basicRemove(otherEnd, msgs);
+      case LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGREGATE:
+        return basicSetAggregate(null, msgs);
+      case LlvmPackage.NESTED_GET_ELEMENT_PTR__INDICES:
+        return ((InternalEList<?>)getIndices()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -197,12 +168,10 @@ public class NestedGetElementPtrImpl extends ValueImpl implements NestedGetEleme
   {
     switch (featureID)
     {
-      case LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGERATE:
-        return getAggerate();
-      case LlvmPackage.NESTED_GET_ELEMENT_PTR__IND_TYPES:
-        return getIndTypes();
-      case LlvmPackage.NESTED_GET_ELEMENT_PTR__INDIZIES:
-        return getIndizies();
+      case LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGREGATE:
+        return getAggregate();
+      case LlvmPackage.NESTED_GET_ELEMENT_PTR__INDICES:
+        return getIndices();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -218,16 +187,12 @@ public class NestedGetElementPtrImpl extends ValueImpl implements NestedGetEleme
   {
     switch (featureID)
     {
-      case LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGERATE:
-        setAggerate((Parameter)newValue);
+      case LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGREGATE:
+        setAggregate((Parameter)newValue);
         return;
-      case LlvmPackage.NESTED_GET_ELEMENT_PTR__IND_TYPES:
-        getIndTypes().clear();
-        getIndTypes().addAll((Collection<? extends TypeUse>)newValue);
-        return;
-      case LlvmPackage.NESTED_GET_ELEMENT_PTR__INDIZIES:
-        getIndizies().clear();
-        getIndizies().addAll((Collection<? extends Value>)newValue);
+      case LlvmPackage.NESTED_GET_ELEMENT_PTR__INDICES:
+        getIndices().clear();
+        getIndices().addAll((Collection<? extends Parameter>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -243,14 +208,11 @@ public class NestedGetElementPtrImpl extends ValueImpl implements NestedGetEleme
   {
     switch (featureID)
     {
-      case LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGERATE:
-        setAggerate((Parameter)null);
+      case LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGREGATE:
+        setAggregate((Parameter)null);
         return;
-      case LlvmPackage.NESTED_GET_ELEMENT_PTR__IND_TYPES:
-        getIndTypes().clear();
-        return;
-      case LlvmPackage.NESTED_GET_ELEMENT_PTR__INDIZIES:
-        getIndizies().clear();
+      case LlvmPackage.NESTED_GET_ELEMENT_PTR__INDICES:
+        getIndices().clear();
         return;
     }
     super.eUnset(featureID);
@@ -266,12 +228,10 @@ public class NestedGetElementPtrImpl extends ValueImpl implements NestedGetEleme
   {
     switch (featureID)
     {
-      case LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGERATE:
-        return aggerate != null;
-      case LlvmPackage.NESTED_GET_ELEMENT_PTR__IND_TYPES:
-        return indTypes != null && !indTypes.isEmpty();
-      case LlvmPackage.NESTED_GET_ELEMENT_PTR__INDIZIES:
-        return indizies != null && !indizies.isEmpty();
+      case LlvmPackage.NESTED_GET_ELEMENT_PTR__AGGREGATE:
+        return aggregate != null;
+      case LlvmPackage.NESTED_GET_ELEMENT_PTR__INDICES:
+        return indices != null && !indices.isEmpty();
     }
     return super.eIsSet(featureID);
   }

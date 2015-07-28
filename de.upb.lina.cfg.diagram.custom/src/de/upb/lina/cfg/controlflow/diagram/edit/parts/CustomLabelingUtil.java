@@ -156,9 +156,9 @@ public class CustomLabelingUtil {
 			GetElementPtr instr = (GetElementPtr) t.getInstruction();
 			result += instr.getResult().getName() + ASSIGN;
 			result += type.getName() + WS;
-			result += toString(instr.getAggerate());
-			for (int i = 0; i < instr.getIndizies().size(); i++) {
-				result += toString(instr.getIndizies().get(i));
+			result += toString(instr.getAggregate());
+			for (int i = 0; i < instr.getIndices().size(); i++) {
+				result += toString(instr.getIndices().get(i));
 			}
 		}
 		// CmpXchg
@@ -496,7 +496,7 @@ public class CustomLabelingUtil {
 		
 		else if(value.eClass().equals(LlvmPackage.eINSTANCE.getNestedGetElementPtr())){
 			NestedGetElementPtr val = (NestedGetElementPtr) value;
-			return "GetElementPtr" +WS+ toString(val.getAggerate());
+			return "GetElementPtr" +WS+ toString(val.getAggregate());
 		}
 		
 		else if(value.eClass().equals(LlvmPackage.eINSTANCE.getNestedCast())){

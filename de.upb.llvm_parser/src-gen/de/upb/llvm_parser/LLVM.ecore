@@ -179,20 +179,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="GetElementPtr" eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" eType="#//Address"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="aggerate" eType="#//Parameter"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aggregate" eType="#//Parameter"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="indTypes" upperBound="-1"
-        eType="#//TypeUse" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="indizies" upperBound="-1"
-        eType="#//Value" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="indices" upperBound="-1"
+        eType="#//Parameter" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NestedGetElementPtr" eSuperTypes="#//Value">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="aggerate" eType="#//Parameter"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aggregate" eType="#//Parameter"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="indTypes" upperBound="-1"
-        eType="#//TypeUse" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="indizies" upperBound="-1"
-        eType="#//Value" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="indices" upperBound="-1"
+        eType="#//Parameter" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Fence" eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ordering" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

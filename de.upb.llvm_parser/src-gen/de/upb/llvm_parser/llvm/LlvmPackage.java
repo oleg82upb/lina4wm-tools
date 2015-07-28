@@ -1361,31 +1361,22 @@ public interface LlvmPackage extends EPackage
   int GET_ELEMENT_PTR__RESULT = INSTRUCTION_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Aggerate</b></em>' containment reference.
+   * The feature id for the '<em><b>Aggregate</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GET_ELEMENT_PTR__AGGERATE = INSTRUCTION_FEATURE_COUNT + 1;
+  int GET_ELEMENT_PTR__AGGREGATE = INSTRUCTION_FEATURE_COUNT + 1;
 
   /**
-   * The feature id for the '<em><b>Ind Types</b></em>' containment reference list.
+   * The feature id for the '<em><b>Indices</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GET_ELEMENT_PTR__IND_TYPES = INSTRUCTION_FEATURE_COUNT + 2;
-
-  /**
-   * The feature id for the '<em><b>Indizies</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int GET_ELEMENT_PTR__INDIZIES = INSTRUCTION_FEATURE_COUNT + 3;
+  int GET_ELEMENT_PTR__INDICES = INSTRUCTION_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Get Element Ptr</em>' class.
@@ -1394,7 +1385,7 @@ public interface LlvmPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GET_ELEMENT_PTR_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 4;
+  int GET_ELEMENT_PTR_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.NestedGetElementPtrImpl <em>Nested Get Element Ptr</em>}' class.
@@ -1407,31 +1398,22 @@ public interface LlvmPackage extends EPackage
   int NESTED_GET_ELEMENT_PTR = 35;
 
   /**
-   * The feature id for the '<em><b>Aggerate</b></em>' containment reference.
+   * The feature id for the '<em><b>Aggregate</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int NESTED_GET_ELEMENT_PTR__AGGERATE = VALUE_FEATURE_COUNT + 0;
+  int NESTED_GET_ELEMENT_PTR__AGGREGATE = VALUE_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Ind Types</b></em>' containment reference list.
+   * The feature id for the '<em><b>Indices</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int NESTED_GET_ELEMENT_PTR__IND_TYPES = VALUE_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Indizies</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NESTED_GET_ELEMENT_PTR__INDIZIES = VALUE_FEATURE_COUNT + 2;
+  int NESTED_GET_ELEMENT_PTR__INDICES = VALUE_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Nested Get Element Ptr</em>' class.
@@ -1440,7 +1422,7 @@ public interface LlvmPackage extends EPackage
    * @generated
    * @ordered
    */
-  int NESTED_GET_ELEMENT_PTR_FEATURE_COUNT = VALUE_FEATURE_COUNT + 3;
+  int NESTED_GET_ELEMENT_PTR_FEATURE_COUNT = VALUE_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.FenceImpl <em>Fence</em>}' class.
@@ -3919,37 +3901,26 @@ public interface LlvmPackage extends EPackage
   EReference getGetElementPtr_Result();
 
   /**
-   * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.GetElementPtr#getAggerate <em>Aggerate</em>}'.
+   * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.GetElementPtr#getAggregate <em>Aggregate</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Aggerate</em>'.
-   * @see de.upb.llvm_parser.llvm.GetElementPtr#getAggerate()
+   * @return the meta object for the containment reference '<em>Aggregate</em>'.
+   * @see de.upb.llvm_parser.llvm.GetElementPtr#getAggregate()
    * @see #getGetElementPtr()
    * @generated
    */
-  EReference getGetElementPtr_Aggerate();
+  EReference getGetElementPtr_Aggregate();
 
   /**
-   * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.GetElementPtr#getIndTypes <em>Ind Types</em>}'.
+   * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.GetElementPtr#getIndices <em>Indices</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Ind Types</em>'.
-   * @see de.upb.llvm_parser.llvm.GetElementPtr#getIndTypes()
+   * @return the meta object for the containment reference list '<em>Indices</em>'.
+   * @see de.upb.llvm_parser.llvm.GetElementPtr#getIndices()
    * @see #getGetElementPtr()
    * @generated
    */
-  EReference getGetElementPtr_IndTypes();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.GetElementPtr#getIndizies <em>Indizies</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Indizies</em>'.
-   * @see de.upb.llvm_parser.llvm.GetElementPtr#getIndizies()
-   * @see #getGetElementPtr()
-   * @generated
-   */
-  EReference getGetElementPtr_Indizies();
+  EReference getGetElementPtr_Indices();
 
   /**
    * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.NestedGetElementPtr <em>Nested Get Element Ptr</em>}'.
@@ -3962,37 +3933,26 @@ public interface LlvmPackage extends EPackage
   EClass getNestedGetElementPtr();
 
   /**
-   * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.NestedGetElementPtr#getAggerate <em>Aggerate</em>}'.
+   * Returns the meta object for the containment reference '{@link de.upb.llvm_parser.llvm.NestedGetElementPtr#getAggregate <em>Aggregate</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Aggerate</em>'.
-   * @see de.upb.llvm_parser.llvm.NestedGetElementPtr#getAggerate()
+   * @return the meta object for the containment reference '<em>Aggregate</em>'.
+   * @see de.upb.llvm_parser.llvm.NestedGetElementPtr#getAggregate()
    * @see #getNestedGetElementPtr()
    * @generated
    */
-  EReference getNestedGetElementPtr_Aggerate();
+  EReference getNestedGetElementPtr_Aggregate();
 
   /**
-   * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.NestedGetElementPtr#getIndTypes <em>Ind Types</em>}'.
+   * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.NestedGetElementPtr#getIndices <em>Indices</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Ind Types</em>'.
-   * @see de.upb.llvm_parser.llvm.NestedGetElementPtr#getIndTypes()
+   * @return the meta object for the containment reference list '<em>Indices</em>'.
+   * @see de.upb.llvm_parser.llvm.NestedGetElementPtr#getIndices()
    * @see #getNestedGetElementPtr()
    * @generated
    */
-  EReference getNestedGetElementPtr_IndTypes();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link de.upb.llvm_parser.llvm.NestedGetElementPtr#getIndizies <em>Indizies</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Indizies</em>'.
-   * @see de.upb.llvm_parser.llvm.NestedGetElementPtr#getIndizies()
-   * @see #getNestedGetElementPtr()
-   * @generated
-   */
-  EReference getNestedGetElementPtr_Indizies();
+  EReference getNestedGetElementPtr_Indices();
 
   /**
    * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.Fence <em>Fence</em>}'.
@@ -6238,28 +6198,20 @@ public interface LlvmPackage extends EPackage
     EReference GET_ELEMENT_PTR__RESULT = eINSTANCE.getGetElementPtr_Result();
 
     /**
-     * The meta object literal for the '<em><b>Aggerate</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Aggregate</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference GET_ELEMENT_PTR__AGGERATE = eINSTANCE.getGetElementPtr_Aggerate();
+    EReference GET_ELEMENT_PTR__AGGREGATE = eINSTANCE.getGetElementPtr_Aggregate();
 
     /**
-     * The meta object literal for the '<em><b>Ind Types</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Indices</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference GET_ELEMENT_PTR__IND_TYPES = eINSTANCE.getGetElementPtr_IndTypes();
-
-    /**
-     * The meta object literal for the '<em><b>Indizies</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference GET_ELEMENT_PTR__INDIZIES = eINSTANCE.getGetElementPtr_Indizies();
+    EReference GET_ELEMENT_PTR__INDICES = eINSTANCE.getGetElementPtr_Indices();
 
     /**
      * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.NestedGetElementPtrImpl <em>Nested Get Element Ptr</em>}' class.
@@ -6272,28 +6224,20 @@ public interface LlvmPackage extends EPackage
     EClass NESTED_GET_ELEMENT_PTR = eINSTANCE.getNestedGetElementPtr();
 
     /**
-     * The meta object literal for the '<em><b>Aggerate</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Aggregate</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference NESTED_GET_ELEMENT_PTR__AGGERATE = eINSTANCE.getNestedGetElementPtr_Aggerate();
+    EReference NESTED_GET_ELEMENT_PTR__AGGREGATE = eINSTANCE.getNestedGetElementPtr_Aggregate();
 
     /**
-     * The meta object literal for the '<em><b>Ind Types</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Indices</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference NESTED_GET_ELEMENT_PTR__IND_TYPES = eINSTANCE.getNestedGetElementPtr_IndTypes();
-
-    /**
-     * The meta object literal for the '<em><b>Indizies</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference NESTED_GET_ELEMENT_PTR__INDIZIES = eINSTANCE.getNestedGetElementPtr_Indizies();
+    EReference NESTED_GET_ELEMENT_PTR__INDICES = eINSTANCE.getNestedGetElementPtr_Indices();
 
     /**
      * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.FenceImpl <em>Fence</em>}' class.

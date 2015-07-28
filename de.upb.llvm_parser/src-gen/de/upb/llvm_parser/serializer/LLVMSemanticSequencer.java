@@ -778,7 +778,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (result=Address aggerate=Parameter (indTypes+=TypeUse indizies+=Value)*)
+	 *     (result=Address aggregate=Parameter indices+=Parameter*)
 	 */
 	protected void sequence_GetElementPtr(EObject context, GetElementPtr semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -962,7 +962,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (aggerate=Parameter (indTypes+=TypeUse indizies+=Value)*)
+	 *     (aggregate=Parameter indices+=Parameter*)
 	 */
 	protected void sequence_NestedGetElementPtr(EObject context, NestedGetElementPtr semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
