@@ -1039,6 +1039,774 @@ public interface LlvmPackage extends EPackage
   int ARITHMETIC_OPERATION_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 5;
 
   /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationAddImpl <em>Arithmetic Operation Add</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationAddImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationAdd()
+   * @generated
+   */
+  int ARITHMETIC_OPERATION_ADD = 28;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_ADD__RESULT = ARITHMETIC_OPERATION__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_ADD__OPERATION = ARITHMETIC_OPERATION__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Optype</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_ADD__OPTYPE = ARITHMETIC_OPERATION__OPTYPE;
+
+  /**
+   * The feature id for the '<em><b>Value1</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_ADD__VALUE1 = ARITHMETIC_OPERATION__VALUE1;
+
+  /**
+   * The feature id for the '<em><b>Value2</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_ADD__VALUE2 = ARITHMETIC_OPERATION__VALUE2;
+
+  /**
+   * The number of structural features of the '<em>Arithmetic Operation Add</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_ADD_FEATURE_COUNT = ARITHMETIC_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationFaddImpl <em>Arithmetic Operation Fadd</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationFaddImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationFadd()
+   * @generated
+   */
+  int ARITHMETIC_OPERATION_FADD = 29;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FADD__RESULT = ARITHMETIC_OPERATION__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FADD__OPERATION = ARITHMETIC_OPERATION__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Optype</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FADD__OPTYPE = ARITHMETIC_OPERATION__OPTYPE;
+
+  /**
+   * The feature id for the '<em><b>Value1</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FADD__VALUE1 = ARITHMETIC_OPERATION__VALUE1;
+
+  /**
+   * The feature id for the '<em><b>Value2</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FADD__VALUE2 = ARITHMETIC_OPERATION__VALUE2;
+
+  /**
+   * The number of structural features of the '<em>Arithmetic Operation Fadd</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FADD_FEATURE_COUNT = ARITHMETIC_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationSubImpl <em>Arithmetic Operation Sub</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationSubImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationSub()
+   * @generated
+   */
+  int ARITHMETIC_OPERATION_SUB = 30;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_SUB__RESULT = ARITHMETIC_OPERATION__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_SUB__OPERATION = ARITHMETIC_OPERATION__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Optype</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_SUB__OPTYPE = ARITHMETIC_OPERATION__OPTYPE;
+
+  /**
+   * The feature id for the '<em><b>Value1</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_SUB__VALUE1 = ARITHMETIC_OPERATION__VALUE1;
+
+  /**
+   * The feature id for the '<em><b>Value2</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_SUB__VALUE2 = ARITHMETIC_OPERATION__VALUE2;
+
+  /**
+   * The number of structural features of the '<em>Arithmetic Operation Sub</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_SUB_FEATURE_COUNT = ARITHMETIC_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationFsubImpl <em>Arithmetic Operation Fsub</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationFsubImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationFsub()
+   * @generated
+   */
+  int ARITHMETIC_OPERATION_FSUB = 31;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FSUB__RESULT = ARITHMETIC_OPERATION__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FSUB__OPERATION = ARITHMETIC_OPERATION__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Optype</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FSUB__OPTYPE = ARITHMETIC_OPERATION__OPTYPE;
+
+  /**
+   * The feature id for the '<em><b>Value1</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FSUB__VALUE1 = ARITHMETIC_OPERATION__VALUE1;
+
+  /**
+   * The feature id for the '<em><b>Value2</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FSUB__VALUE2 = ARITHMETIC_OPERATION__VALUE2;
+
+  /**
+   * The number of structural features of the '<em>Arithmetic Operation Fsub</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FSUB_FEATURE_COUNT = ARITHMETIC_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationMulImpl <em>Arithmetic Operation Mul</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationMulImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationMul()
+   * @generated
+   */
+  int ARITHMETIC_OPERATION_MUL = 32;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_MUL__RESULT = ARITHMETIC_OPERATION__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_MUL__OPERATION = ARITHMETIC_OPERATION__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Optype</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_MUL__OPTYPE = ARITHMETIC_OPERATION__OPTYPE;
+
+  /**
+   * The feature id for the '<em><b>Value1</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_MUL__VALUE1 = ARITHMETIC_OPERATION__VALUE1;
+
+  /**
+   * The feature id for the '<em><b>Value2</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_MUL__VALUE2 = ARITHMETIC_OPERATION__VALUE2;
+
+  /**
+   * The number of structural features of the '<em>Arithmetic Operation Mul</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_MUL_FEATURE_COUNT = ARITHMETIC_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationFmulImpl <em>Arithmetic Operation Fmul</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationFmulImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationFmul()
+   * @generated
+   */
+  int ARITHMETIC_OPERATION_FMUL = 33;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FMUL__RESULT = ARITHMETIC_OPERATION__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FMUL__OPERATION = ARITHMETIC_OPERATION__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Optype</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FMUL__OPTYPE = ARITHMETIC_OPERATION__OPTYPE;
+
+  /**
+   * The feature id for the '<em><b>Value1</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FMUL__VALUE1 = ARITHMETIC_OPERATION__VALUE1;
+
+  /**
+   * The feature id for the '<em><b>Value2</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FMUL__VALUE2 = ARITHMETIC_OPERATION__VALUE2;
+
+  /**
+   * The number of structural features of the '<em>Arithmetic Operation Fmul</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FMUL_FEATURE_COUNT = ARITHMETIC_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationUdivImpl <em>Arithmetic Operation Udiv</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationUdivImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationUdiv()
+   * @generated
+   */
+  int ARITHMETIC_OPERATION_UDIV = 34;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_UDIV__RESULT = ARITHMETIC_OPERATION__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_UDIV__OPERATION = ARITHMETIC_OPERATION__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Optype</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_UDIV__OPTYPE = ARITHMETIC_OPERATION__OPTYPE;
+
+  /**
+   * The feature id for the '<em><b>Value1</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_UDIV__VALUE1 = ARITHMETIC_OPERATION__VALUE1;
+
+  /**
+   * The feature id for the '<em><b>Value2</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_UDIV__VALUE2 = ARITHMETIC_OPERATION__VALUE2;
+
+  /**
+   * The number of structural features of the '<em>Arithmetic Operation Udiv</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_UDIV_FEATURE_COUNT = ARITHMETIC_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationSdivImpl <em>Arithmetic Operation Sdiv</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationSdivImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationSdiv()
+   * @generated
+   */
+  int ARITHMETIC_OPERATION_SDIV = 35;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_SDIV__RESULT = ARITHMETIC_OPERATION__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_SDIV__OPERATION = ARITHMETIC_OPERATION__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Optype</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_SDIV__OPTYPE = ARITHMETIC_OPERATION__OPTYPE;
+
+  /**
+   * The feature id for the '<em><b>Value1</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_SDIV__VALUE1 = ARITHMETIC_OPERATION__VALUE1;
+
+  /**
+   * The feature id for the '<em><b>Value2</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_SDIV__VALUE2 = ARITHMETIC_OPERATION__VALUE2;
+
+  /**
+   * The number of structural features of the '<em>Arithmetic Operation Sdiv</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_SDIV_FEATURE_COUNT = ARITHMETIC_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationFdivImpl <em>Arithmetic Operation Fdiv</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationFdivImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationFdiv()
+   * @generated
+   */
+  int ARITHMETIC_OPERATION_FDIV = 36;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FDIV__RESULT = ARITHMETIC_OPERATION__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FDIV__OPERATION = ARITHMETIC_OPERATION__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Optype</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FDIV__OPTYPE = ARITHMETIC_OPERATION__OPTYPE;
+
+  /**
+   * The feature id for the '<em><b>Value1</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FDIV__VALUE1 = ARITHMETIC_OPERATION__VALUE1;
+
+  /**
+   * The feature id for the '<em><b>Value2</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FDIV__VALUE2 = ARITHMETIC_OPERATION__VALUE2;
+
+  /**
+   * The number of structural features of the '<em>Arithmetic Operation Fdiv</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FDIV_FEATURE_COUNT = ARITHMETIC_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationUremImpl <em>Arithmetic Operation Urem</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationUremImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationUrem()
+   * @generated
+   */
+  int ARITHMETIC_OPERATION_UREM = 37;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_UREM__RESULT = ARITHMETIC_OPERATION__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_UREM__OPERATION = ARITHMETIC_OPERATION__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Optype</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_UREM__OPTYPE = ARITHMETIC_OPERATION__OPTYPE;
+
+  /**
+   * The feature id for the '<em><b>Value1</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_UREM__VALUE1 = ARITHMETIC_OPERATION__VALUE1;
+
+  /**
+   * The feature id for the '<em><b>Value2</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_UREM__VALUE2 = ARITHMETIC_OPERATION__VALUE2;
+
+  /**
+   * The number of structural features of the '<em>Arithmetic Operation Urem</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_UREM_FEATURE_COUNT = ARITHMETIC_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationSremImpl <em>Arithmetic Operation Srem</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationSremImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationSrem()
+   * @generated
+   */
+  int ARITHMETIC_OPERATION_SREM = 38;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_SREM__RESULT = ARITHMETIC_OPERATION__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_SREM__OPERATION = ARITHMETIC_OPERATION__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Optype</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_SREM__OPTYPE = ARITHMETIC_OPERATION__OPTYPE;
+
+  /**
+   * The feature id for the '<em><b>Value1</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_SREM__VALUE1 = ARITHMETIC_OPERATION__VALUE1;
+
+  /**
+   * The feature id for the '<em><b>Value2</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_SREM__VALUE2 = ARITHMETIC_OPERATION__VALUE2;
+
+  /**
+   * The number of structural features of the '<em>Arithmetic Operation Srem</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_SREM_FEATURE_COUNT = ARITHMETIC_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationFremImpl <em>Arithmetic Operation Frem</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationFremImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationFrem()
+   * @generated
+   */
+  int ARITHMETIC_OPERATION_FREM = 39;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FREM__RESULT = ARITHMETIC_OPERATION__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FREM__OPERATION = ARITHMETIC_OPERATION__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Optype</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FREM__OPTYPE = ARITHMETIC_OPERATION__OPTYPE;
+
+  /**
+   * The feature id for the '<em><b>Value1</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FREM__VALUE1 = ARITHMETIC_OPERATION__VALUE1;
+
+  /**
+   * The feature id for the '<em><b>Value2</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FREM__VALUE2 = ARITHMETIC_OPERATION__VALUE2;
+
+  /**
+   * The number of structural features of the '<em>Arithmetic Operation Frem</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARITHMETIC_OPERATION_FREM_FEATURE_COUNT = ARITHMETIC_OPERATION_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.LogicOperationImpl <em>Logic Operation</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1046,7 +1814,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLogicOperation()
    * @generated
    */
-  int LOGIC_OPERATION = 28;
+  int LOGIC_OPERATION = 40;
 
   /**
    * The feature id for the '<em><b>Result</b></em>' containment reference.
@@ -1110,7 +1878,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getCast()
    * @generated
    */
-  int CAST = 29;
+  int CAST = 41;
 
   /**
    * The feature id for the '<em><b>Result</b></em>' containment reference.
@@ -1174,7 +1942,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getNestedCast()
    * @generated
    */
-  int NESTED_CAST = 30;
+  int NESTED_CAST = 42;
 
   /**
    * The feature id for the '<em><b>Operation</b></em>' attribute.
@@ -1229,7 +1997,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getMetaArgValue()
    * @generated
    */
-  int META_ARG_VALUE = 31;
+  int META_ARG_VALUE = 43;
 
   /**
    * The feature id for the '<em><b>Arg</b></em>' attribute.
@@ -1266,7 +2034,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getMeta()
    * @generated
    */
-  int META = 32;
+  int META = 44;
 
   /**
    * The feature id for the '<em><b>Meta</b></em>' attribute.
@@ -1312,7 +2080,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getMetadataValue()
    * @generated
    */
-  int METADATA_VALUE = 33;
+  int METADATA_VALUE = 45;
 
   /**
    * The feature id for the '<em><b>Node Id</b></em>' attribute.
@@ -1349,7 +2117,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getGetElementPtr()
    * @generated
    */
-  int GET_ELEMENT_PTR = 34;
+  int GET_ELEMENT_PTR = 46;
 
   /**
    * The feature id for the '<em><b>Result</b></em>' containment reference.
@@ -1395,7 +2163,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getNestedGetElementPtr()
    * @generated
    */
-  int NESTED_GET_ELEMENT_PTR = 35;
+  int NESTED_GET_ELEMENT_PTR = 47;
 
   /**
    * The feature id for the '<em><b>Aggregate</b></em>' containment reference.
@@ -1432,7 +2200,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getFence()
    * @generated
    */
-  int FENCE = 36;
+  int FENCE = 48;
 
   /**
    * The feature id for the '<em><b>Ordering</b></em>' attribute.
@@ -1460,7 +2228,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getCmpXchg()
    * @generated
    */
-  int CMP_XCHG = 37;
+  int CMP_XCHG = 49;
 
   /**
    * The feature id for the '<em><b>Result</b></em>' containment reference.
@@ -1533,7 +2301,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRMW()
    * @generated
    */
-  int ATOMIC_RMW = 38;
+  int ATOMIC_RMW = 50;
 
   /**
    * The feature id for the '<em><b>Result</b></em>' containment reference.
@@ -1599,6 +2367,809 @@ public interface LlvmPackage extends EPackage
   int ATOMIC_RMW_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 6;
 
   /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwXchgImpl <em>Atomic Rmw Xchg</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.AtomicRmwXchgImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwXchg()
+   * @generated
+   */
+  int ATOMIC_RMW_XCHG = 51;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_XCHG__RESULT = ATOMIC_RMW__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Volatile</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_XCHG__VOLATILE = ATOMIC_RMW__VOLATILE;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_XCHG__OPERATION = ATOMIC_RMW__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Address</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_XCHG__ADDRESS = ATOMIC_RMW__ADDRESS;
+
+  /**
+   * The feature id for the '<em><b>Argument</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_XCHG__ARGUMENT = ATOMIC_RMW__ARGUMENT;
+
+  /**
+   * The feature id for the '<em><b>Ordering</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_XCHG__ORDERING = ATOMIC_RMW__ORDERING;
+
+  /**
+   * The number of structural features of the '<em>Atomic Rmw Xchg</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_XCHG_FEATURE_COUNT = ATOMIC_RMW_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwAddImpl <em>Atomic Rmw Add</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.AtomicRmwAddImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwAdd()
+   * @generated
+   */
+  int ATOMIC_RMW_ADD = 52;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_ADD__RESULT = ATOMIC_RMW__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Volatile</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_ADD__VOLATILE = ATOMIC_RMW__VOLATILE;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_ADD__OPERATION = ATOMIC_RMW__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Address</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_ADD__ADDRESS = ATOMIC_RMW__ADDRESS;
+
+  /**
+   * The feature id for the '<em><b>Argument</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_ADD__ARGUMENT = ATOMIC_RMW__ARGUMENT;
+
+  /**
+   * The feature id for the '<em><b>Ordering</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_ADD__ORDERING = ATOMIC_RMW__ORDERING;
+
+  /**
+   * The number of structural features of the '<em>Atomic Rmw Add</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_ADD_FEATURE_COUNT = ATOMIC_RMW_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwSubImpl <em>Atomic Rmw Sub</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.AtomicRmwSubImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwSub()
+   * @generated
+   */
+  int ATOMIC_RMW_SUB = 53;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_SUB__RESULT = ATOMIC_RMW__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Volatile</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_SUB__VOLATILE = ATOMIC_RMW__VOLATILE;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_SUB__OPERATION = ATOMIC_RMW__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Address</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_SUB__ADDRESS = ATOMIC_RMW__ADDRESS;
+
+  /**
+   * The feature id for the '<em><b>Argument</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_SUB__ARGUMENT = ATOMIC_RMW__ARGUMENT;
+
+  /**
+   * The feature id for the '<em><b>Ordering</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_SUB__ORDERING = ATOMIC_RMW__ORDERING;
+
+  /**
+   * The number of structural features of the '<em>Atomic Rmw Sub</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_SUB_FEATURE_COUNT = ATOMIC_RMW_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwAndImpl <em>Atomic Rmw And</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.AtomicRmwAndImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwAnd()
+   * @generated
+   */
+  int ATOMIC_RMW_AND = 54;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_AND__RESULT = ATOMIC_RMW__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Volatile</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_AND__VOLATILE = ATOMIC_RMW__VOLATILE;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_AND__OPERATION = ATOMIC_RMW__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Address</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_AND__ADDRESS = ATOMIC_RMW__ADDRESS;
+
+  /**
+   * The feature id for the '<em><b>Argument</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_AND__ARGUMENT = ATOMIC_RMW__ARGUMENT;
+
+  /**
+   * The feature id for the '<em><b>Ordering</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_AND__ORDERING = ATOMIC_RMW__ORDERING;
+
+  /**
+   * The number of structural features of the '<em>Atomic Rmw And</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_AND_FEATURE_COUNT = ATOMIC_RMW_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwNandImpl <em>Atomic Rmw Nand</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.AtomicRmwNandImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwNand()
+   * @generated
+   */
+  int ATOMIC_RMW_NAND = 55;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_NAND__RESULT = ATOMIC_RMW__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Volatile</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_NAND__VOLATILE = ATOMIC_RMW__VOLATILE;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_NAND__OPERATION = ATOMIC_RMW__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Address</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_NAND__ADDRESS = ATOMIC_RMW__ADDRESS;
+
+  /**
+   * The feature id for the '<em><b>Argument</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_NAND__ARGUMENT = ATOMIC_RMW__ARGUMENT;
+
+  /**
+   * The feature id for the '<em><b>Ordering</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_NAND__ORDERING = ATOMIC_RMW__ORDERING;
+
+  /**
+   * The number of structural features of the '<em>Atomic Rmw Nand</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_NAND_FEATURE_COUNT = ATOMIC_RMW_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwOrImpl <em>Atomic Rmw Or</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.AtomicRmwOrImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwOr()
+   * @generated
+   */
+  int ATOMIC_RMW_OR = 56;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_OR__RESULT = ATOMIC_RMW__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Volatile</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_OR__VOLATILE = ATOMIC_RMW__VOLATILE;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_OR__OPERATION = ATOMIC_RMW__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Address</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_OR__ADDRESS = ATOMIC_RMW__ADDRESS;
+
+  /**
+   * The feature id for the '<em><b>Argument</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_OR__ARGUMENT = ATOMIC_RMW__ARGUMENT;
+
+  /**
+   * The feature id for the '<em><b>Ordering</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_OR__ORDERING = ATOMIC_RMW__ORDERING;
+
+  /**
+   * The number of structural features of the '<em>Atomic Rmw Or</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_OR_FEATURE_COUNT = ATOMIC_RMW_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwXorImpl <em>Atomic Rmw Xor</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.AtomicRmwXorImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwXor()
+   * @generated
+   */
+  int ATOMIC_RMW_XOR = 57;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_XOR__RESULT = ATOMIC_RMW__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Volatile</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_XOR__VOLATILE = ATOMIC_RMW__VOLATILE;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_XOR__OPERATION = ATOMIC_RMW__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Address</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_XOR__ADDRESS = ATOMIC_RMW__ADDRESS;
+
+  /**
+   * The feature id for the '<em><b>Argument</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_XOR__ARGUMENT = ATOMIC_RMW__ARGUMENT;
+
+  /**
+   * The feature id for the '<em><b>Ordering</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_XOR__ORDERING = ATOMIC_RMW__ORDERING;
+
+  /**
+   * The number of structural features of the '<em>Atomic Rmw Xor</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_XOR_FEATURE_COUNT = ATOMIC_RMW_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwMaxImpl <em>Atomic Rmw Max</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.AtomicRmwMaxImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwMax()
+   * @generated
+   */
+  int ATOMIC_RMW_MAX = 58;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_MAX__RESULT = ATOMIC_RMW__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Volatile</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_MAX__VOLATILE = ATOMIC_RMW__VOLATILE;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_MAX__OPERATION = ATOMIC_RMW__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Address</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_MAX__ADDRESS = ATOMIC_RMW__ADDRESS;
+
+  /**
+   * The feature id for the '<em><b>Argument</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_MAX__ARGUMENT = ATOMIC_RMW__ARGUMENT;
+
+  /**
+   * The feature id for the '<em><b>Ordering</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_MAX__ORDERING = ATOMIC_RMW__ORDERING;
+
+  /**
+   * The number of structural features of the '<em>Atomic Rmw Max</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_MAX_FEATURE_COUNT = ATOMIC_RMW_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwMinImpl <em>Atomic Rmw Min</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.AtomicRmwMinImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwMin()
+   * @generated
+   */
+  int ATOMIC_RMW_MIN = 59;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_MIN__RESULT = ATOMIC_RMW__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Volatile</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_MIN__VOLATILE = ATOMIC_RMW__VOLATILE;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_MIN__OPERATION = ATOMIC_RMW__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Address</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_MIN__ADDRESS = ATOMIC_RMW__ADDRESS;
+
+  /**
+   * The feature id for the '<em><b>Argument</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_MIN__ARGUMENT = ATOMIC_RMW__ARGUMENT;
+
+  /**
+   * The feature id for the '<em><b>Ordering</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_MIN__ORDERING = ATOMIC_RMW__ORDERING;
+
+  /**
+   * The number of structural features of the '<em>Atomic Rmw Min</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_MIN_FEATURE_COUNT = ATOMIC_RMW_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwUmaxImpl <em>Atomic Rmw Umax</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.AtomicRmwUmaxImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwUmax()
+   * @generated
+   */
+  int ATOMIC_RMW_UMAX = 60;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_UMAX__RESULT = ATOMIC_RMW__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Volatile</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_UMAX__VOLATILE = ATOMIC_RMW__VOLATILE;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_UMAX__OPERATION = ATOMIC_RMW__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Address</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_UMAX__ADDRESS = ATOMIC_RMW__ADDRESS;
+
+  /**
+   * The feature id for the '<em><b>Argument</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_UMAX__ARGUMENT = ATOMIC_RMW__ARGUMENT;
+
+  /**
+   * The feature id for the '<em><b>Ordering</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_UMAX__ORDERING = ATOMIC_RMW__ORDERING;
+
+  /**
+   * The number of structural features of the '<em>Atomic Rmw Umax</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_UMAX_FEATURE_COUNT = ATOMIC_RMW_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwUminImpl <em>Atomic Rmw Umin</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.AtomicRmwUminImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwUmin()
+   * @generated
+   */
+  int ATOMIC_RMW_UMIN = 61;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_UMIN__RESULT = ATOMIC_RMW__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Volatile</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_UMIN__VOLATILE = ATOMIC_RMW__VOLATILE;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_UMIN__OPERATION = ATOMIC_RMW__OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Address</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_UMIN__ADDRESS = ATOMIC_RMW__ADDRESS;
+
+  /**
+   * The feature id for the '<em><b>Argument</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_UMIN__ARGUMENT = ATOMIC_RMW__ARGUMENT;
+
+  /**
+   * The feature id for the '<em><b>Ordering</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_UMIN__ORDERING = ATOMIC_RMW__ORDERING;
+
+  /**
+   * The number of structural features of the '<em>Atomic Rmw Umin</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATOMIC_RMW_UMIN_FEATURE_COUNT = ATOMIC_RMW_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.LoadImpl <em>Load</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1606,7 +3177,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLoad()
    * @generated
    */
-  int LOAD = 39;
+  int LOAD = 62;
 
   /**
    * The feature id for the '<em><b>Result</b></em>' containment reference.
@@ -1688,7 +3259,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getStore()
    * @generated
    */
-  int STORE = 40;
+  int STORE = 63;
 
   /**
    * The feature id for the '<em><b>Volatile</b></em>' attribute.
@@ -1770,7 +3341,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getCall()
    * @generated
    */
-  int CALL = 41;
+  int CALL = 64;
 
   /**
    * The feature id for the '<em><b>Result</b></em>' containment reference.
@@ -1816,7 +3387,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAlloc()
    * @generated
    */
-  int ALLOC = 42;
+  int ALLOC = 65;
 
   /**
    * The feature id for the '<em><b>Result</b></em>' containment reference.
@@ -1871,7 +3442,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getPhiCase()
    * @generated
    */
-  int PHI_CASE = 43;
+  int PHI_CASE = 66;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -1908,7 +3479,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getPhi()
    * @generated
    */
-  int PHI = 44;
+  int PHI = 67;
 
   /**
    * The feature id for the '<em><b>Result</b></em>' containment reference.
@@ -1954,7 +3525,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getLandingPad()
    * @generated
    */
-  int LANDING_PAD = 45;
+  int LANDING_PAD = 68;
 
   /**
    * The feature id for the '<em><b>Result</b></em>' containment reference.
@@ -2018,7 +3589,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getClause()
    * @generated
    */
-  int CLAUSE = 46;
+  int CLAUSE = 69;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -2073,7 +3644,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getSelect()
    * @generated
    */
-  int SELECT = 47;
+  int SELECT = 70;
 
   /**
    * The feature id for the '<em><b>Result</b></em>' containment reference.
@@ -2128,7 +3699,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getVariableAttributeAccess()
    * @generated
    */
-  int VARIABLE_ATTRIBUTE_ACCESS = 48;
+  int VARIABLE_ATTRIBUTE_ACCESS = 71;
 
   /**
    * The feature id for the '<em><b>Result</b></em>' containment reference.
@@ -2174,7 +3745,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getExtractValue()
    * @generated
    */
-  int EXTRACT_VALUE = 49;
+  int EXTRACT_VALUE = 72;
 
   /**
    * The feature id for the '<em><b>Result</b></em>' containment reference.
@@ -2220,7 +3791,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getInsertValue()
    * @generated
    */
-  int INSERT_VALUE = 50;
+  int INSERT_VALUE = 73;
 
   /**
    * The feature id for the '<em><b>Result</b></em>' containment reference.
@@ -2275,7 +3846,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getExtractElement()
    * @generated
    */
-  int EXTRACT_ELEMENT = 51;
+  int EXTRACT_ELEMENT = 74;
 
   /**
    * The feature id for the '<em><b>Result</b></em>' containment reference.
@@ -2321,7 +3892,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getInsertElement()
    * @generated
    */
-  int INSERT_ELEMENT = 52;
+  int INSERT_ELEMENT = 75;
 
   /**
    * The feature id for the '<em><b>Result</b></em>' containment reference.
@@ -2376,7 +3947,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getShuffleVector()
    * @generated
    */
-  int SHUFFLE_VECTOR = 53;
+  int SHUFFLE_VECTOR = 76;
 
   /**
    * The feature id for the '<em><b>Result</b></em>' containment reference.
@@ -2431,7 +4002,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getCompare()
    * @generated
    */
-  int COMPARE = 54;
+  int COMPARE = 77;
 
   /**
    * The feature id for the '<em><b>Result</b></em>' containment reference.
@@ -2488,6 +4059,134 @@ public interface LlvmPackage extends EPackage
   int COMPARE_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 5;
 
   /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.CompareIntImpl <em>Compare Int</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.CompareIntImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getCompareInt()
+   * @generated
+   */
+  int COMPARE_INT = 78;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARE_INT__RESULT = COMPARE__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Cond</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARE_INT__COND = COMPARE__COND;
+
+  /**
+   * The feature id for the '<em><b>Op Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARE_INT__OP_TYPE = COMPARE__OP_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Operand1</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARE_INT__OPERAND1 = COMPARE__OPERAND1;
+
+  /**
+   * The feature id for the '<em><b>Operand2</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARE_INT__OPERAND2 = COMPARE__OPERAND2;
+
+  /**
+   * The number of structural features of the '<em>Compare Int</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARE_INT_FEATURE_COUNT = COMPARE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.CompareFloatImpl <em>Compare Float</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.upb.llvm_parser.llvm.impl.CompareFloatImpl
+   * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getCompareFloat()
+   * @generated
+   */
+  int COMPARE_FLOAT = 79;
+
+  /**
+   * The feature id for the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARE_FLOAT__RESULT = COMPARE__RESULT;
+
+  /**
+   * The feature id for the '<em><b>Cond</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARE_FLOAT__COND = COMPARE__COND;
+
+  /**
+   * The feature id for the '<em><b>Op Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARE_FLOAT__OP_TYPE = COMPARE__OP_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Operand1</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARE_FLOAT__OPERAND1 = COMPARE__OPERAND1;
+
+  /**
+   * The feature id for the '<em><b>Operand2</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARE_FLOAT__OPERAND2 = COMPARE__OPERAND2;
+
+  /**
+   * The number of structural features of the '<em>Compare Float</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARE_FLOAT_FEATURE_COUNT = COMPARE_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.IndirectBranchImpl <em>Indirect Branch</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2495,7 +4194,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getIndirectBranch()
    * @generated
    */
-  int INDIRECT_BRANCH = 55;
+  int INDIRECT_BRANCH = 80;
 
   /**
    * The feature id for the '<em><b>Target</b></em>' containment reference.
@@ -2532,7 +4231,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getSwitch()
    * @generated
    */
-  int SWITCH = 56;
+  int SWITCH = 81;
 
   /**
    * The feature id for the '<em><b>Case Value</b></em>' containment reference.
@@ -2578,7 +4277,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getSwitchCase()
    * @generated
    */
-  int SWITCH_CASE = 57;
+  int SWITCH_CASE = 82;
 
   /**
    * The feature id for the '<em><b>Case Value</b></em>' containment reference.
@@ -2615,7 +4314,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getInvoke()
    * @generated
    */
-  int INVOKE = 58;
+  int INVOKE = 83;
 
   /**
    * The feature id for the '<em><b>Return Type</b></em>' containment reference.
@@ -2679,7 +4378,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getResume()
    * @generated
    */
-  int RESUME = 59;
+  int RESUME = 84;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -2716,7 +4415,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getUnreachable()
    * @generated
    */
-  int UNREACHABLE = 60;
+  int UNREACHABLE = 85;
 
   /**
    * The number of structural features of the '<em>Unreachable</em>' class.
@@ -2735,7 +4434,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getReturn()
    * @generated
    */
-  int RETURN = 61;
+  int RETURN = 86;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -2763,7 +4462,7 @@ public interface LlvmPackage extends EPackage
    * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getBranch()
    * @generated
    */
-  int BRANCH = 62;
+  int BRANCH = 87;
 
   /**
    * The feature id for the '<em><b>Destination</b></em>' attribute.
@@ -3589,6 +5288,126 @@ public interface LlvmPackage extends EPackage
   EReference getArithmeticOperation_Value2();
 
   /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationAdd <em>Arithmetic Operation Add</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Arithmetic Operation Add</em>'.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationAdd
+   * @generated
+   */
+  EClass getArithmeticOperationAdd();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationFadd <em>Arithmetic Operation Fadd</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Arithmetic Operation Fadd</em>'.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationFadd
+   * @generated
+   */
+  EClass getArithmeticOperationFadd();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationSub <em>Arithmetic Operation Sub</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Arithmetic Operation Sub</em>'.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationSub
+   * @generated
+   */
+  EClass getArithmeticOperationSub();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationFsub <em>Arithmetic Operation Fsub</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Arithmetic Operation Fsub</em>'.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationFsub
+   * @generated
+   */
+  EClass getArithmeticOperationFsub();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationMul <em>Arithmetic Operation Mul</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Arithmetic Operation Mul</em>'.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationMul
+   * @generated
+   */
+  EClass getArithmeticOperationMul();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationFmul <em>Arithmetic Operation Fmul</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Arithmetic Operation Fmul</em>'.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationFmul
+   * @generated
+   */
+  EClass getArithmeticOperationFmul();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationUdiv <em>Arithmetic Operation Udiv</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Arithmetic Operation Udiv</em>'.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationUdiv
+   * @generated
+   */
+  EClass getArithmeticOperationUdiv();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationSdiv <em>Arithmetic Operation Sdiv</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Arithmetic Operation Sdiv</em>'.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationSdiv
+   * @generated
+   */
+  EClass getArithmeticOperationSdiv();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationFdiv <em>Arithmetic Operation Fdiv</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Arithmetic Operation Fdiv</em>'.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationFdiv
+   * @generated
+   */
+  EClass getArithmeticOperationFdiv();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationUrem <em>Arithmetic Operation Urem</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Arithmetic Operation Urem</em>'.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationUrem
+   * @generated
+   */
+  EClass getArithmeticOperationUrem();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationSrem <em>Arithmetic Operation Srem</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Arithmetic Operation Srem</em>'.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationSrem
+   * @generated
+   */
+  EClass getArithmeticOperationSrem();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationFrem <em>Arithmetic Operation Frem</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Arithmetic Operation Frem</em>'.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationFrem
+   * @generated
+   */
+  EClass getArithmeticOperationFrem();
+
+  /**
    * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.LogicOperation <em>Logic Operation</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4126,6 +5945,116 @@ public interface LlvmPackage extends EPackage
    * @generated
    */
   EAttribute getAtomicRMW_Ordering();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.AtomicRmwXchg <em>Atomic Rmw Xchg</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Atomic Rmw Xchg</em>'.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwXchg
+   * @generated
+   */
+  EClass getAtomicRmwXchg();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.AtomicRmwAdd <em>Atomic Rmw Add</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Atomic Rmw Add</em>'.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwAdd
+   * @generated
+   */
+  EClass getAtomicRmwAdd();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.AtomicRmwSub <em>Atomic Rmw Sub</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Atomic Rmw Sub</em>'.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwSub
+   * @generated
+   */
+  EClass getAtomicRmwSub();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.AtomicRmwAnd <em>Atomic Rmw And</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Atomic Rmw And</em>'.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwAnd
+   * @generated
+   */
+  EClass getAtomicRmwAnd();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.AtomicRmwNand <em>Atomic Rmw Nand</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Atomic Rmw Nand</em>'.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwNand
+   * @generated
+   */
+  EClass getAtomicRmwNand();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.AtomicRmwOr <em>Atomic Rmw Or</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Atomic Rmw Or</em>'.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwOr
+   * @generated
+   */
+  EClass getAtomicRmwOr();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.AtomicRmwXor <em>Atomic Rmw Xor</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Atomic Rmw Xor</em>'.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwXor
+   * @generated
+   */
+  EClass getAtomicRmwXor();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.AtomicRmwMax <em>Atomic Rmw Max</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Atomic Rmw Max</em>'.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwMax
+   * @generated
+   */
+  EClass getAtomicRmwMax();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.AtomicRmwMin <em>Atomic Rmw Min</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Atomic Rmw Min</em>'.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwMin
+   * @generated
+   */
+  EClass getAtomicRmwMin();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.AtomicRmwUmax <em>Atomic Rmw Umax</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Atomic Rmw Umax</em>'.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwUmax
+   * @generated
+   */
+  EClass getAtomicRmwUmax();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.AtomicRmwUmin <em>Atomic Rmw Umin</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Atomic Rmw Umin</em>'.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwUmin
+   * @generated
+   */
+  EClass getAtomicRmwUmin();
 
   /**
    * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.Load <em>Load</em>}'.
@@ -5001,6 +6930,26 @@ public interface LlvmPackage extends EPackage
    * @generated
    */
   EReference getCompare_Operand2();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.CompareInt <em>Compare Int</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Compare Int</em>'.
+   * @see de.upb.llvm_parser.llvm.CompareInt
+   * @generated
+   */
+  EClass getCompareInt();
+
+  /**
+   * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.CompareFloat <em>Compare Float</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Compare Float</em>'.
+   * @see de.upb.llvm_parser.llvm.CompareFloat
+   * @generated
+   */
+  EClass getCompareFloat();
 
   /**
    * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.IndirectBranch <em>Indirect Branch</em>}'.
@@ -5952,6 +7901,126 @@ public interface LlvmPackage extends EPackage
     EReference ARITHMETIC_OPERATION__VALUE2 = eINSTANCE.getArithmeticOperation_Value2();
 
     /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationAddImpl <em>Arithmetic Operation Add</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationAddImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationAdd()
+     * @generated
+     */
+    EClass ARITHMETIC_OPERATION_ADD = eINSTANCE.getArithmeticOperationAdd();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationFaddImpl <em>Arithmetic Operation Fadd</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationFaddImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationFadd()
+     * @generated
+     */
+    EClass ARITHMETIC_OPERATION_FADD = eINSTANCE.getArithmeticOperationFadd();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationSubImpl <em>Arithmetic Operation Sub</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationSubImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationSub()
+     * @generated
+     */
+    EClass ARITHMETIC_OPERATION_SUB = eINSTANCE.getArithmeticOperationSub();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationFsubImpl <em>Arithmetic Operation Fsub</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationFsubImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationFsub()
+     * @generated
+     */
+    EClass ARITHMETIC_OPERATION_FSUB = eINSTANCE.getArithmeticOperationFsub();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationMulImpl <em>Arithmetic Operation Mul</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationMulImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationMul()
+     * @generated
+     */
+    EClass ARITHMETIC_OPERATION_MUL = eINSTANCE.getArithmeticOperationMul();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationFmulImpl <em>Arithmetic Operation Fmul</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationFmulImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationFmul()
+     * @generated
+     */
+    EClass ARITHMETIC_OPERATION_FMUL = eINSTANCE.getArithmeticOperationFmul();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationUdivImpl <em>Arithmetic Operation Udiv</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationUdivImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationUdiv()
+     * @generated
+     */
+    EClass ARITHMETIC_OPERATION_UDIV = eINSTANCE.getArithmeticOperationUdiv();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationSdivImpl <em>Arithmetic Operation Sdiv</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationSdivImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationSdiv()
+     * @generated
+     */
+    EClass ARITHMETIC_OPERATION_SDIV = eINSTANCE.getArithmeticOperationSdiv();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationFdivImpl <em>Arithmetic Operation Fdiv</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationFdivImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationFdiv()
+     * @generated
+     */
+    EClass ARITHMETIC_OPERATION_FDIV = eINSTANCE.getArithmeticOperationFdiv();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationUremImpl <em>Arithmetic Operation Urem</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationUremImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationUrem()
+     * @generated
+     */
+    EClass ARITHMETIC_OPERATION_UREM = eINSTANCE.getArithmeticOperationUrem();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationSremImpl <em>Arithmetic Operation Srem</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationSremImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationSrem()
+     * @generated
+     */
+    EClass ARITHMETIC_OPERATION_SREM = eINSTANCE.getArithmeticOperationSrem();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ArithmeticOperationFremImpl <em>Arithmetic Operation Frem</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.ArithmeticOperationFremImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getArithmeticOperationFrem()
+     * @generated
+     */
+    EClass ARITHMETIC_OPERATION_FREM = eINSTANCE.getArithmeticOperationFrem();
+
+    /**
      * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.LogicOperationImpl <em>Logic Operation</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -6372,6 +8441,116 @@ public interface LlvmPackage extends EPackage
      * @generated
      */
     EAttribute ATOMIC_RMW__ORDERING = eINSTANCE.getAtomicRMW_Ordering();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwXchgImpl <em>Atomic Rmw Xchg</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.AtomicRmwXchgImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwXchg()
+     * @generated
+     */
+    EClass ATOMIC_RMW_XCHG = eINSTANCE.getAtomicRmwXchg();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwAddImpl <em>Atomic Rmw Add</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.AtomicRmwAddImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwAdd()
+     * @generated
+     */
+    EClass ATOMIC_RMW_ADD = eINSTANCE.getAtomicRmwAdd();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwSubImpl <em>Atomic Rmw Sub</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.AtomicRmwSubImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwSub()
+     * @generated
+     */
+    EClass ATOMIC_RMW_SUB = eINSTANCE.getAtomicRmwSub();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwAndImpl <em>Atomic Rmw And</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.AtomicRmwAndImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwAnd()
+     * @generated
+     */
+    EClass ATOMIC_RMW_AND = eINSTANCE.getAtomicRmwAnd();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwNandImpl <em>Atomic Rmw Nand</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.AtomicRmwNandImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwNand()
+     * @generated
+     */
+    EClass ATOMIC_RMW_NAND = eINSTANCE.getAtomicRmwNand();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwOrImpl <em>Atomic Rmw Or</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.AtomicRmwOrImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwOr()
+     * @generated
+     */
+    EClass ATOMIC_RMW_OR = eINSTANCE.getAtomicRmwOr();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwXorImpl <em>Atomic Rmw Xor</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.AtomicRmwXorImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwXor()
+     * @generated
+     */
+    EClass ATOMIC_RMW_XOR = eINSTANCE.getAtomicRmwXor();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwMaxImpl <em>Atomic Rmw Max</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.AtomicRmwMaxImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwMax()
+     * @generated
+     */
+    EClass ATOMIC_RMW_MAX = eINSTANCE.getAtomicRmwMax();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwMinImpl <em>Atomic Rmw Min</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.AtomicRmwMinImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwMin()
+     * @generated
+     */
+    EClass ATOMIC_RMW_MIN = eINSTANCE.getAtomicRmwMin();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwUmaxImpl <em>Atomic Rmw Umax</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.AtomicRmwUmaxImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwUmax()
+     * @generated
+     */
+    EClass ATOMIC_RMW_UMAX = eINSTANCE.getAtomicRmwUmax();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.AtomicRmwUminImpl <em>Atomic Rmw Umin</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.AtomicRmwUminImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getAtomicRmwUmin()
+     * @generated
+     */
+    EClass ATOMIC_RMW_UMIN = eINSTANCE.getAtomicRmwUmin();
 
     /**
      * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.LoadImpl <em>Load</em>}' class.
@@ -7052,6 +9231,26 @@ public interface LlvmPackage extends EPackage
      * @generated
      */
     EReference COMPARE__OPERAND2 = eINSTANCE.getCompare_Operand2();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.CompareIntImpl <em>Compare Int</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.CompareIntImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getCompareInt()
+     * @generated
+     */
+    EClass COMPARE_INT = eINSTANCE.getCompareInt();
+
+    /**
+     * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.CompareFloatImpl <em>Compare Float</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.upb.llvm_parser.llvm.impl.CompareFloatImpl
+     * @see de.upb.llvm_parser.llvm.impl.LlvmPackageImpl#getCompareFloat()
+     * @generated
+     */
+    EClass COMPARE_FLOAT = eINSTANCE.getCompareFloat();
 
     /**
      * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.IndirectBranchImpl <em>Indirect Branch</em>}' class.

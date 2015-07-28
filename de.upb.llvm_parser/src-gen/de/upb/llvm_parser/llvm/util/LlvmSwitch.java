@@ -288,6 +288,114 @@ public class LlvmSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case LlvmPackage.ARITHMETIC_OPERATION_ADD:
+      {
+        ArithmeticOperationAdd arithmeticOperationAdd = (ArithmeticOperationAdd)theEObject;
+        T result = caseArithmeticOperationAdd(arithmeticOperationAdd);
+        if (result == null) result = caseArithmeticOperation(arithmeticOperationAdd);
+        if (result == null) result = caseInstruction(arithmeticOperationAdd);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ARITHMETIC_OPERATION_FADD:
+      {
+        ArithmeticOperationFadd arithmeticOperationFadd = (ArithmeticOperationFadd)theEObject;
+        T result = caseArithmeticOperationFadd(arithmeticOperationFadd);
+        if (result == null) result = caseArithmeticOperation(arithmeticOperationFadd);
+        if (result == null) result = caseInstruction(arithmeticOperationFadd);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ARITHMETIC_OPERATION_SUB:
+      {
+        ArithmeticOperationSub arithmeticOperationSub = (ArithmeticOperationSub)theEObject;
+        T result = caseArithmeticOperationSub(arithmeticOperationSub);
+        if (result == null) result = caseArithmeticOperation(arithmeticOperationSub);
+        if (result == null) result = caseInstruction(arithmeticOperationSub);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ARITHMETIC_OPERATION_FSUB:
+      {
+        ArithmeticOperationFsub arithmeticOperationFsub = (ArithmeticOperationFsub)theEObject;
+        T result = caseArithmeticOperationFsub(arithmeticOperationFsub);
+        if (result == null) result = caseArithmeticOperation(arithmeticOperationFsub);
+        if (result == null) result = caseInstruction(arithmeticOperationFsub);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ARITHMETIC_OPERATION_MUL:
+      {
+        ArithmeticOperationMul arithmeticOperationMul = (ArithmeticOperationMul)theEObject;
+        T result = caseArithmeticOperationMul(arithmeticOperationMul);
+        if (result == null) result = caseArithmeticOperation(arithmeticOperationMul);
+        if (result == null) result = caseInstruction(arithmeticOperationMul);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ARITHMETIC_OPERATION_FMUL:
+      {
+        ArithmeticOperationFmul arithmeticOperationFmul = (ArithmeticOperationFmul)theEObject;
+        T result = caseArithmeticOperationFmul(arithmeticOperationFmul);
+        if (result == null) result = caseArithmeticOperation(arithmeticOperationFmul);
+        if (result == null) result = caseInstruction(arithmeticOperationFmul);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ARITHMETIC_OPERATION_UDIV:
+      {
+        ArithmeticOperationUdiv arithmeticOperationUdiv = (ArithmeticOperationUdiv)theEObject;
+        T result = caseArithmeticOperationUdiv(arithmeticOperationUdiv);
+        if (result == null) result = caseArithmeticOperation(arithmeticOperationUdiv);
+        if (result == null) result = caseInstruction(arithmeticOperationUdiv);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ARITHMETIC_OPERATION_SDIV:
+      {
+        ArithmeticOperationSdiv arithmeticOperationSdiv = (ArithmeticOperationSdiv)theEObject;
+        T result = caseArithmeticOperationSdiv(arithmeticOperationSdiv);
+        if (result == null) result = caseArithmeticOperation(arithmeticOperationSdiv);
+        if (result == null) result = caseInstruction(arithmeticOperationSdiv);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ARITHMETIC_OPERATION_FDIV:
+      {
+        ArithmeticOperationFdiv arithmeticOperationFdiv = (ArithmeticOperationFdiv)theEObject;
+        T result = caseArithmeticOperationFdiv(arithmeticOperationFdiv);
+        if (result == null) result = caseArithmeticOperation(arithmeticOperationFdiv);
+        if (result == null) result = caseInstruction(arithmeticOperationFdiv);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ARITHMETIC_OPERATION_UREM:
+      {
+        ArithmeticOperationUrem arithmeticOperationUrem = (ArithmeticOperationUrem)theEObject;
+        T result = caseArithmeticOperationUrem(arithmeticOperationUrem);
+        if (result == null) result = caseArithmeticOperation(arithmeticOperationUrem);
+        if (result == null) result = caseInstruction(arithmeticOperationUrem);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ARITHMETIC_OPERATION_SREM:
+      {
+        ArithmeticOperationSrem arithmeticOperationSrem = (ArithmeticOperationSrem)theEObject;
+        T result = caseArithmeticOperationSrem(arithmeticOperationSrem);
+        if (result == null) result = caseArithmeticOperation(arithmeticOperationSrem);
+        if (result == null) result = caseInstruction(arithmeticOperationSrem);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ARITHMETIC_OPERATION_FREM:
+      {
+        ArithmeticOperationFrem arithmeticOperationFrem = (ArithmeticOperationFrem)theEObject;
+        T result = caseArithmeticOperationFrem(arithmeticOperationFrem);
+        if (result == null) result = caseArithmeticOperation(arithmeticOperationFrem);
+        if (result == null) result = caseInstruction(arithmeticOperationFrem);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case LlvmPackage.LOGIC_OPERATION:
       {
         LogicOperation logicOperation = (LogicOperation)theEObject;
@@ -372,6 +480,105 @@ public class LlvmSwitch<T> extends Switch<T>
         AtomicRMW atomicRMW = (AtomicRMW)theEObject;
         T result = caseAtomicRMW(atomicRMW);
         if (result == null) result = caseInstruction(atomicRMW);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ATOMIC_RMW_XCHG:
+      {
+        AtomicRmwXchg atomicRmwXchg = (AtomicRmwXchg)theEObject;
+        T result = caseAtomicRmwXchg(atomicRmwXchg);
+        if (result == null) result = caseAtomicRMW(atomicRmwXchg);
+        if (result == null) result = caseInstruction(atomicRmwXchg);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ATOMIC_RMW_ADD:
+      {
+        AtomicRmwAdd atomicRmwAdd = (AtomicRmwAdd)theEObject;
+        T result = caseAtomicRmwAdd(atomicRmwAdd);
+        if (result == null) result = caseAtomicRMW(atomicRmwAdd);
+        if (result == null) result = caseInstruction(atomicRmwAdd);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ATOMIC_RMW_SUB:
+      {
+        AtomicRmwSub atomicRmwSub = (AtomicRmwSub)theEObject;
+        T result = caseAtomicRmwSub(atomicRmwSub);
+        if (result == null) result = caseAtomicRMW(atomicRmwSub);
+        if (result == null) result = caseInstruction(atomicRmwSub);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ATOMIC_RMW_AND:
+      {
+        AtomicRmwAnd atomicRmwAnd = (AtomicRmwAnd)theEObject;
+        T result = caseAtomicRmwAnd(atomicRmwAnd);
+        if (result == null) result = caseAtomicRMW(atomicRmwAnd);
+        if (result == null) result = caseInstruction(atomicRmwAnd);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ATOMIC_RMW_NAND:
+      {
+        AtomicRmwNand atomicRmwNand = (AtomicRmwNand)theEObject;
+        T result = caseAtomicRmwNand(atomicRmwNand);
+        if (result == null) result = caseAtomicRMW(atomicRmwNand);
+        if (result == null) result = caseInstruction(atomicRmwNand);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ATOMIC_RMW_OR:
+      {
+        AtomicRmwOr atomicRmwOr = (AtomicRmwOr)theEObject;
+        T result = caseAtomicRmwOr(atomicRmwOr);
+        if (result == null) result = caseAtomicRMW(atomicRmwOr);
+        if (result == null) result = caseInstruction(atomicRmwOr);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ATOMIC_RMW_XOR:
+      {
+        AtomicRmwXor atomicRmwXor = (AtomicRmwXor)theEObject;
+        T result = caseAtomicRmwXor(atomicRmwXor);
+        if (result == null) result = caseAtomicRMW(atomicRmwXor);
+        if (result == null) result = caseInstruction(atomicRmwXor);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ATOMIC_RMW_MAX:
+      {
+        AtomicRmwMax atomicRmwMax = (AtomicRmwMax)theEObject;
+        T result = caseAtomicRmwMax(atomicRmwMax);
+        if (result == null) result = caseAtomicRMW(atomicRmwMax);
+        if (result == null) result = caseInstruction(atomicRmwMax);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ATOMIC_RMW_MIN:
+      {
+        AtomicRmwMin atomicRmwMin = (AtomicRmwMin)theEObject;
+        T result = caseAtomicRmwMin(atomicRmwMin);
+        if (result == null) result = caseAtomicRMW(atomicRmwMin);
+        if (result == null) result = caseInstruction(atomicRmwMin);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ATOMIC_RMW_UMAX:
+      {
+        AtomicRmwUmax atomicRmwUmax = (AtomicRmwUmax)theEObject;
+        T result = caseAtomicRmwUmax(atomicRmwUmax);
+        if (result == null) result = caseAtomicRMW(atomicRmwUmax);
+        if (result == null) result = caseInstruction(atomicRmwUmax);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.ATOMIC_RMW_UMIN:
+      {
+        AtomicRmwUmin atomicRmwUmin = (AtomicRmwUmin)theEObject;
+        T result = caseAtomicRmwUmin(atomicRmwUmin);
+        if (result == null) result = caseAtomicRMW(atomicRmwUmin);
+        if (result == null) result = caseInstruction(atomicRmwUmin);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -498,6 +705,24 @@ public class LlvmSwitch<T> extends Switch<T>
         Compare compare = (Compare)theEObject;
         T result = caseCompare(compare);
         if (result == null) result = caseInstruction(compare);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.COMPARE_INT:
+      {
+        CompareInt compareInt = (CompareInt)theEObject;
+        T result = caseCompareInt(compareInt);
+        if (result == null) result = caseCompare(compareInt);
+        if (result == null) result = caseInstruction(compareInt);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.COMPARE_FLOAT:
+      {
+        CompareFloat compareFloat = (CompareFloat)theEObject;
+        T result = caseCompareFloat(compareFloat);
+        if (result == null) result = caseCompare(compareFloat);
+        if (result == null) result = caseInstruction(compareFloat);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1017,6 +1242,198 @@ public class LlvmSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Arithmetic Operation Add</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Arithmetic Operation Add</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArithmeticOperationAdd(ArithmeticOperationAdd object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Arithmetic Operation Fadd</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Arithmetic Operation Fadd</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArithmeticOperationFadd(ArithmeticOperationFadd object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Arithmetic Operation Sub</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Arithmetic Operation Sub</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArithmeticOperationSub(ArithmeticOperationSub object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Arithmetic Operation Fsub</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Arithmetic Operation Fsub</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArithmeticOperationFsub(ArithmeticOperationFsub object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Arithmetic Operation Mul</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Arithmetic Operation Mul</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArithmeticOperationMul(ArithmeticOperationMul object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Arithmetic Operation Fmul</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Arithmetic Operation Fmul</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArithmeticOperationFmul(ArithmeticOperationFmul object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Arithmetic Operation Udiv</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Arithmetic Operation Udiv</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArithmeticOperationUdiv(ArithmeticOperationUdiv object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Arithmetic Operation Sdiv</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Arithmetic Operation Sdiv</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArithmeticOperationSdiv(ArithmeticOperationSdiv object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Arithmetic Operation Fdiv</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Arithmetic Operation Fdiv</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArithmeticOperationFdiv(ArithmeticOperationFdiv object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Arithmetic Operation Urem</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Arithmetic Operation Urem</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArithmeticOperationUrem(ArithmeticOperationUrem object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Arithmetic Operation Srem</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Arithmetic Operation Srem</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArithmeticOperationSrem(ArithmeticOperationSrem object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Arithmetic Operation Frem</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Arithmetic Operation Frem</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArithmeticOperationFrem(ArithmeticOperationFrem object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Logic Operation</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1188,6 +1605,182 @@ public class LlvmSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseAtomicRMW(AtomicRMW object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Atomic Rmw Xchg</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Atomic Rmw Xchg</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAtomicRmwXchg(AtomicRmwXchg object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Atomic Rmw Add</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Atomic Rmw Add</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAtomicRmwAdd(AtomicRmwAdd object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Atomic Rmw Sub</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Atomic Rmw Sub</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAtomicRmwSub(AtomicRmwSub object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Atomic Rmw And</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Atomic Rmw And</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAtomicRmwAnd(AtomicRmwAnd object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Atomic Rmw Nand</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Atomic Rmw Nand</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAtomicRmwNand(AtomicRmwNand object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Atomic Rmw Or</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Atomic Rmw Or</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAtomicRmwOr(AtomicRmwOr object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Atomic Rmw Xor</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Atomic Rmw Xor</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAtomicRmwXor(AtomicRmwXor object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Atomic Rmw Max</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Atomic Rmw Max</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAtomicRmwMax(AtomicRmwMax object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Atomic Rmw Min</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Atomic Rmw Min</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAtomicRmwMin(AtomicRmwMin object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Atomic Rmw Umax</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Atomic Rmw Umax</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAtomicRmwUmax(AtomicRmwUmax object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Atomic Rmw Umin</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Atomic Rmw Umin</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAtomicRmwUmin(AtomicRmwUmin object)
   {
     return null;
   }
@@ -1444,6 +2037,38 @@ public class LlvmSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseCompare(Compare object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Compare Int</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Compare Int</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCompareInt(CompareInt object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Compare Float</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Compare Float</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCompareFloat(CompareFloat object)
   {
     return null;
   }

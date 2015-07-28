@@ -9,8 +9,31 @@ import de.upb.llvm_parser.llvm.Aggregate_Type;
 import de.upb.llvm_parser.llvm.AliasDefinition;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.ArithmeticOperation;
+import de.upb.llvm_parser.llvm.ArithmeticOperationAdd;
+import de.upb.llvm_parser.llvm.ArithmeticOperationFadd;
+import de.upb.llvm_parser.llvm.ArithmeticOperationFdiv;
+import de.upb.llvm_parser.llvm.ArithmeticOperationFmul;
+import de.upb.llvm_parser.llvm.ArithmeticOperationFrem;
+import de.upb.llvm_parser.llvm.ArithmeticOperationFsub;
+import de.upb.llvm_parser.llvm.ArithmeticOperationMul;
+import de.upb.llvm_parser.llvm.ArithmeticOperationSdiv;
+import de.upb.llvm_parser.llvm.ArithmeticOperationSrem;
+import de.upb.llvm_parser.llvm.ArithmeticOperationSub;
+import de.upb.llvm_parser.llvm.ArithmeticOperationUdiv;
+import de.upb.llvm_parser.llvm.ArithmeticOperationUrem;
 import de.upb.llvm_parser.llvm.Array;
 import de.upb.llvm_parser.llvm.AtomicRMW;
+import de.upb.llvm_parser.llvm.AtomicRmwAdd;
+import de.upb.llvm_parser.llvm.AtomicRmwAnd;
+import de.upb.llvm_parser.llvm.AtomicRmwMax;
+import de.upb.llvm_parser.llvm.AtomicRmwMin;
+import de.upb.llvm_parser.llvm.AtomicRmwNand;
+import de.upb.llvm_parser.llvm.AtomicRmwOr;
+import de.upb.llvm_parser.llvm.AtomicRmwSub;
+import de.upb.llvm_parser.llvm.AtomicRmwUmax;
+import de.upb.llvm_parser.llvm.AtomicRmwUmin;
+import de.upb.llvm_parser.llvm.AtomicRmwXchg;
+import de.upb.llvm_parser.llvm.AtomicRmwXor;
 import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.Branch;
 import de.upb.llvm_parser.llvm.Call;
@@ -18,6 +41,8 @@ import de.upb.llvm_parser.llvm.Cast;
 import de.upb.llvm_parser.llvm.Clause;
 import de.upb.llvm_parser.llvm.CmpXchg;
 import de.upb.llvm_parser.llvm.Compare;
+import de.upb.llvm_parser.llvm.CompareFloat;
+import de.upb.llvm_parser.llvm.CompareInt;
 import de.upb.llvm_parser.llvm.Constant;
 import de.upb.llvm_parser.llvm.ExtractElement;
 import de.upb.llvm_parser.llvm.ExtractValue;
@@ -283,6 +308,90 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass arithmeticOperationAddEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass arithmeticOperationFaddEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass arithmeticOperationSubEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass arithmeticOperationFsubEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass arithmeticOperationMulEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass arithmeticOperationFmulEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass arithmeticOperationUdivEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass arithmeticOperationSdivEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass arithmeticOperationFdivEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass arithmeticOperationUremEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass arithmeticOperationSremEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass arithmeticOperationFremEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass logicOperationEClass = null;
 
   /**
@@ -354,6 +463,83 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
    * @generated
    */
   private EClass atomicRMWEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass atomicRmwXchgEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass atomicRmwAddEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass atomicRmwSubEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass atomicRmwAndEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass atomicRmwNandEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass atomicRmwOrEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass atomicRmwXorEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass atomicRmwMaxEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass atomicRmwMinEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass atomicRmwUmaxEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass atomicRmwUminEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -466,6 +652,20 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
    * @generated
    */
   private EClass compareEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass compareIntEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass compareFloatEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1331,6 +1531,126 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getArithmeticOperationAdd()
+  {
+    return arithmeticOperationAddEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getArithmeticOperationFadd()
+  {
+    return arithmeticOperationFaddEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getArithmeticOperationSub()
+  {
+    return arithmeticOperationSubEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getArithmeticOperationFsub()
+  {
+    return arithmeticOperationFsubEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getArithmeticOperationMul()
+  {
+    return arithmeticOperationMulEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getArithmeticOperationFmul()
+  {
+    return arithmeticOperationFmulEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getArithmeticOperationUdiv()
+  {
+    return arithmeticOperationUdivEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getArithmeticOperationSdiv()
+  {
+    return arithmeticOperationSdivEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getArithmeticOperationFdiv()
+  {
+    return arithmeticOperationFdivEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getArithmeticOperationUrem()
+  {
+    return arithmeticOperationUremEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getArithmeticOperationSrem()
+  {
+    return arithmeticOperationSremEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getArithmeticOperationFrem()
+  {
+    return arithmeticOperationFremEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getLogicOperation()
   {
     return logicOperationEClass;
@@ -1824,6 +2144,116 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
   public EAttribute getAtomicRMW_Ordering()
   {
     return (EAttribute)atomicRMWEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAtomicRmwXchg()
+  {
+    return atomicRmwXchgEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAtomicRmwAdd()
+  {
+    return atomicRmwAddEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAtomicRmwSub()
+  {
+    return atomicRmwSubEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAtomicRmwAnd()
+  {
+    return atomicRmwAndEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAtomicRmwNand()
+  {
+    return atomicRmwNandEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAtomicRmwOr()
+  {
+    return atomicRmwOrEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAtomicRmwXor()
+  {
+    return atomicRmwXorEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAtomicRmwMax()
+  {
+    return atomicRmwMaxEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAtomicRmwMin()
+  {
+    return atomicRmwMinEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAtomicRmwUmax()
+  {
+    return atomicRmwUmaxEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAtomicRmwUmin()
+  {
+    return atomicRmwUminEClass;
   }
 
   /**
@@ -2641,6 +3071,26 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getCompareInt()
+  {
+    return compareIntEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getCompareFloat()
+  {
+    return compareFloatEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getIndirectBranch()
   {
     return indirectBranchEClass;
@@ -3028,6 +3478,30 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
     createEReference(arithmeticOperationEClass, ARITHMETIC_OPERATION__VALUE1);
     createEReference(arithmeticOperationEClass, ARITHMETIC_OPERATION__VALUE2);
 
+    arithmeticOperationAddEClass = createEClass(ARITHMETIC_OPERATION_ADD);
+
+    arithmeticOperationFaddEClass = createEClass(ARITHMETIC_OPERATION_FADD);
+
+    arithmeticOperationSubEClass = createEClass(ARITHMETIC_OPERATION_SUB);
+
+    arithmeticOperationFsubEClass = createEClass(ARITHMETIC_OPERATION_FSUB);
+
+    arithmeticOperationMulEClass = createEClass(ARITHMETIC_OPERATION_MUL);
+
+    arithmeticOperationFmulEClass = createEClass(ARITHMETIC_OPERATION_FMUL);
+
+    arithmeticOperationUdivEClass = createEClass(ARITHMETIC_OPERATION_UDIV);
+
+    arithmeticOperationSdivEClass = createEClass(ARITHMETIC_OPERATION_SDIV);
+
+    arithmeticOperationFdivEClass = createEClass(ARITHMETIC_OPERATION_FDIV);
+
+    arithmeticOperationUremEClass = createEClass(ARITHMETIC_OPERATION_UREM);
+
+    arithmeticOperationSremEClass = createEClass(ARITHMETIC_OPERATION_SREM);
+
+    arithmeticOperationFremEClass = createEClass(ARITHMETIC_OPERATION_FREM);
+
     logicOperationEClass = createEClass(LOGIC_OPERATION);
     createEReference(logicOperationEClass, LOGIC_OPERATION__RESULT);
     createEAttribute(logicOperationEClass, LOGIC_OPERATION__OPERATION);
@@ -3088,6 +3562,28 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
     createEReference(atomicRMWEClass, ATOMIC_RMW__ADDRESS);
     createEReference(atomicRMWEClass, ATOMIC_RMW__ARGUMENT);
     createEAttribute(atomicRMWEClass, ATOMIC_RMW__ORDERING);
+
+    atomicRmwXchgEClass = createEClass(ATOMIC_RMW_XCHG);
+
+    atomicRmwAddEClass = createEClass(ATOMIC_RMW_ADD);
+
+    atomicRmwSubEClass = createEClass(ATOMIC_RMW_SUB);
+
+    atomicRmwAndEClass = createEClass(ATOMIC_RMW_AND);
+
+    atomicRmwNandEClass = createEClass(ATOMIC_RMW_NAND);
+
+    atomicRmwOrEClass = createEClass(ATOMIC_RMW_OR);
+
+    atomicRmwXorEClass = createEClass(ATOMIC_RMW_XOR);
+
+    atomicRmwMaxEClass = createEClass(ATOMIC_RMW_MAX);
+
+    atomicRmwMinEClass = createEClass(ATOMIC_RMW_MIN);
+
+    atomicRmwUmaxEClass = createEClass(ATOMIC_RMW_UMAX);
+
+    atomicRmwUminEClass = createEClass(ATOMIC_RMW_UMIN);
 
     loadEClass = createEClass(LOAD);
     createEReference(loadEClass, LOAD__RESULT);
@@ -3186,6 +3682,10 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
     createEReference(compareEClass, COMPARE__OPERAND1);
     createEReference(compareEClass, COMPARE__OPERAND2);
 
+    compareIntEClass = createEClass(COMPARE_INT);
+
+    compareFloatEClass = createEClass(COMPARE_FLOAT);
+
     indirectBranchEClass = createEClass(INDIRECT_BRANCH);
     createEReference(indirectBranchEClass, INDIRECT_BRANCH__TARGET);
     createEAttribute(indirectBranchEClass, INDIRECT_BRANCH__POT_TARGET_LABELS);
@@ -3266,6 +3766,18 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
     valueStructEClass.getESuperTypes().add(this.getValue());
     structureEClass.getESuperTypes().add(this.getAggregate_Type());
     arithmeticOperationEClass.getESuperTypes().add(this.getInstruction());
+    arithmeticOperationAddEClass.getESuperTypes().add(this.getArithmeticOperation());
+    arithmeticOperationFaddEClass.getESuperTypes().add(this.getArithmeticOperation());
+    arithmeticOperationSubEClass.getESuperTypes().add(this.getArithmeticOperation());
+    arithmeticOperationFsubEClass.getESuperTypes().add(this.getArithmeticOperation());
+    arithmeticOperationMulEClass.getESuperTypes().add(this.getArithmeticOperation());
+    arithmeticOperationFmulEClass.getESuperTypes().add(this.getArithmeticOperation());
+    arithmeticOperationUdivEClass.getESuperTypes().add(this.getArithmeticOperation());
+    arithmeticOperationSdivEClass.getESuperTypes().add(this.getArithmeticOperation());
+    arithmeticOperationFdivEClass.getESuperTypes().add(this.getArithmeticOperation());
+    arithmeticOperationUremEClass.getESuperTypes().add(this.getArithmeticOperation());
+    arithmeticOperationSremEClass.getESuperTypes().add(this.getArithmeticOperation());
+    arithmeticOperationFremEClass.getESuperTypes().add(this.getArithmeticOperation());
     logicOperationEClass.getESuperTypes().add(this.getInstruction());
     castEClass.getESuperTypes().add(this.getInstruction());
     nestedCastEClass.getESuperTypes().add(this.getValue());
@@ -3275,6 +3787,17 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
     fenceEClass.getESuperTypes().add(this.getInstruction());
     cmpXchgEClass.getESuperTypes().add(this.getInstruction());
     atomicRMWEClass.getESuperTypes().add(this.getInstruction());
+    atomicRmwXchgEClass.getESuperTypes().add(this.getAtomicRMW());
+    atomicRmwAddEClass.getESuperTypes().add(this.getAtomicRMW());
+    atomicRmwSubEClass.getESuperTypes().add(this.getAtomicRMW());
+    atomicRmwAndEClass.getESuperTypes().add(this.getAtomicRMW());
+    atomicRmwNandEClass.getESuperTypes().add(this.getAtomicRMW());
+    atomicRmwOrEClass.getESuperTypes().add(this.getAtomicRMW());
+    atomicRmwXorEClass.getESuperTypes().add(this.getAtomicRMW());
+    atomicRmwMaxEClass.getESuperTypes().add(this.getAtomicRMW());
+    atomicRmwMinEClass.getESuperTypes().add(this.getAtomicRMW());
+    atomicRmwUmaxEClass.getESuperTypes().add(this.getAtomicRMW());
+    atomicRmwUminEClass.getESuperTypes().add(this.getAtomicRMW());
     loadEClass.getESuperTypes().add(this.getInstruction());
     storeEClass.getESuperTypes().add(this.getInstruction());
     callEClass.getESuperTypes().add(this.getInstruction());
@@ -3289,6 +3812,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
     insertElementEClass.getESuperTypes().add(this.getInstruction());
     shuffleVectorEClass.getESuperTypes().add(this.getInstruction());
     compareEClass.getESuperTypes().add(this.getInstruction());
+    compareIntEClass.getESuperTypes().add(this.getCompare());
+    compareFloatEClass.getESuperTypes().add(this.getCompare());
     indirectBranchEClass.getESuperTypes().add(this.getInstruction());
     switchEClass.getESuperTypes().add(this.getInstruction());
     invokeEClass.getESuperTypes().add(this.getInstruction());
@@ -3400,6 +3925,30 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
     initEReference(getArithmeticOperation_Value1(), this.getValue(), null, "value1", null, 0, 1, ArithmeticOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getArithmeticOperation_Value2(), this.getValue(), null, "value2", null, 0, 1, ArithmeticOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(arithmeticOperationAddEClass, ArithmeticOperationAdd.class, "ArithmeticOperationAdd", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(arithmeticOperationFaddEClass, ArithmeticOperationFadd.class, "ArithmeticOperationFadd", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(arithmeticOperationSubEClass, ArithmeticOperationSub.class, "ArithmeticOperationSub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(arithmeticOperationFsubEClass, ArithmeticOperationFsub.class, "ArithmeticOperationFsub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(arithmeticOperationMulEClass, ArithmeticOperationMul.class, "ArithmeticOperationMul", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(arithmeticOperationFmulEClass, ArithmeticOperationFmul.class, "ArithmeticOperationFmul", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(arithmeticOperationUdivEClass, ArithmeticOperationUdiv.class, "ArithmeticOperationUdiv", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(arithmeticOperationSdivEClass, ArithmeticOperationSdiv.class, "ArithmeticOperationSdiv", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(arithmeticOperationFdivEClass, ArithmeticOperationFdiv.class, "ArithmeticOperationFdiv", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(arithmeticOperationUremEClass, ArithmeticOperationUrem.class, "ArithmeticOperationUrem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(arithmeticOperationSremEClass, ArithmeticOperationSrem.class, "ArithmeticOperationSrem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(arithmeticOperationFremEClass, ArithmeticOperationFrem.class, "ArithmeticOperationFrem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
     initEClass(logicOperationEClass, LogicOperation.class, "LogicOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getLogicOperation_Result(), this.getAddress(), null, "result", null, 0, 1, LogicOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getLogicOperation_Operation(), ecorePackage.getEString(), "operation", null, 0, 1, LogicOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3460,6 +4009,28 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
     initEReference(getAtomicRMW_Address(), this.getParameter(), null, "address", null, 0, 1, AtomicRMW.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAtomicRMW_Argument(), this.getParameter(), null, "argument", null, 0, 1, AtomicRMW.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAtomicRMW_Ordering(), ecorePackage.getEString(), "ordering", null, 0, 1, AtomicRMW.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(atomicRmwXchgEClass, AtomicRmwXchg.class, "AtomicRmwXchg", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(atomicRmwAddEClass, AtomicRmwAdd.class, "AtomicRmwAdd", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(atomicRmwSubEClass, AtomicRmwSub.class, "AtomicRmwSub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(atomicRmwAndEClass, AtomicRmwAnd.class, "AtomicRmwAnd", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(atomicRmwNandEClass, AtomicRmwNand.class, "AtomicRmwNand", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(atomicRmwOrEClass, AtomicRmwOr.class, "AtomicRmwOr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(atomicRmwXorEClass, AtomicRmwXor.class, "AtomicRmwXor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(atomicRmwMaxEClass, AtomicRmwMax.class, "AtomicRmwMax", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(atomicRmwMinEClass, AtomicRmwMin.class, "AtomicRmwMin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(atomicRmwUmaxEClass, AtomicRmwUmax.class, "AtomicRmwUmax", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(atomicRmwUminEClass, AtomicRmwUmin.class, "AtomicRmwUmin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(loadEClass, Load.class, "Load", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getLoad_Result(), this.getAddress(), null, "result", null, 0, 1, Load.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3557,6 +4128,10 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
     initEReference(getCompare_OpType(), this.getTypeUse(), null, "opType", null, 0, 1, Compare.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getCompare_Operand1(), this.getValue(), null, "operand1", null, 0, 1, Compare.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getCompare_Operand2(), this.getValue(), null, "operand2", null, 0, 1, Compare.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(compareIntEClass, CompareInt.class, "CompareInt", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(compareFloatEClass, CompareFloat.class, "CompareFloat", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(indirectBranchEClass, IndirectBranch.class, "IndirectBranch", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getIndirectBranch_Target(), this.getParameter(), null, "target", null, 0, 1, IndirectBranch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

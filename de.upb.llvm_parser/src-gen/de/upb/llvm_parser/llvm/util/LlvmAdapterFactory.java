@@ -215,6 +215,66 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
         return createArithmeticOperationAdapter();
       }
       @Override
+      public Adapter caseArithmeticOperationAdd(ArithmeticOperationAdd object)
+      {
+        return createArithmeticOperationAddAdapter();
+      }
+      @Override
+      public Adapter caseArithmeticOperationFadd(ArithmeticOperationFadd object)
+      {
+        return createArithmeticOperationFaddAdapter();
+      }
+      @Override
+      public Adapter caseArithmeticOperationSub(ArithmeticOperationSub object)
+      {
+        return createArithmeticOperationSubAdapter();
+      }
+      @Override
+      public Adapter caseArithmeticOperationFsub(ArithmeticOperationFsub object)
+      {
+        return createArithmeticOperationFsubAdapter();
+      }
+      @Override
+      public Adapter caseArithmeticOperationMul(ArithmeticOperationMul object)
+      {
+        return createArithmeticOperationMulAdapter();
+      }
+      @Override
+      public Adapter caseArithmeticOperationFmul(ArithmeticOperationFmul object)
+      {
+        return createArithmeticOperationFmulAdapter();
+      }
+      @Override
+      public Adapter caseArithmeticOperationUdiv(ArithmeticOperationUdiv object)
+      {
+        return createArithmeticOperationUdivAdapter();
+      }
+      @Override
+      public Adapter caseArithmeticOperationSdiv(ArithmeticOperationSdiv object)
+      {
+        return createArithmeticOperationSdivAdapter();
+      }
+      @Override
+      public Adapter caseArithmeticOperationFdiv(ArithmeticOperationFdiv object)
+      {
+        return createArithmeticOperationFdivAdapter();
+      }
+      @Override
+      public Adapter caseArithmeticOperationUrem(ArithmeticOperationUrem object)
+      {
+        return createArithmeticOperationUremAdapter();
+      }
+      @Override
+      public Adapter caseArithmeticOperationSrem(ArithmeticOperationSrem object)
+      {
+        return createArithmeticOperationSremAdapter();
+      }
+      @Override
+      public Adapter caseArithmeticOperationFrem(ArithmeticOperationFrem object)
+      {
+        return createArithmeticOperationFremAdapter();
+      }
+      @Override
       public Adapter caseLogicOperation(LogicOperation object)
       {
         return createLogicOperationAdapter();
@@ -268,6 +328,61 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
       public Adapter caseAtomicRMW(AtomicRMW object)
       {
         return createAtomicRMWAdapter();
+      }
+      @Override
+      public Adapter caseAtomicRmwXchg(AtomicRmwXchg object)
+      {
+        return createAtomicRmwXchgAdapter();
+      }
+      @Override
+      public Adapter caseAtomicRmwAdd(AtomicRmwAdd object)
+      {
+        return createAtomicRmwAddAdapter();
+      }
+      @Override
+      public Adapter caseAtomicRmwSub(AtomicRmwSub object)
+      {
+        return createAtomicRmwSubAdapter();
+      }
+      @Override
+      public Adapter caseAtomicRmwAnd(AtomicRmwAnd object)
+      {
+        return createAtomicRmwAndAdapter();
+      }
+      @Override
+      public Adapter caseAtomicRmwNand(AtomicRmwNand object)
+      {
+        return createAtomicRmwNandAdapter();
+      }
+      @Override
+      public Adapter caseAtomicRmwOr(AtomicRmwOr object)
+      {
+        return createAtomicRmwOrAdapter();
+      }
+      @Override
+      public Adapter caseAtomicRmwXor(AtomicRmwXor object)
+      {
+        return createAtomicRmwXorAdapter();
+      }
+      @Override
+      public Adapter caseAtomicRmwMax(AtomicRmwMax object)
+      {
+        return createAtomicRmwMaxAdapter();
+      }
+      @Override
+      public Adapter caseAtomicRmwMin(AtomicRmwMin object)
+      {
+        return createAtomicRmwMinAdapter();
+      }
+      @Override
+      public Adapter caseAtomicRmwUmax(AtomicRmwUmax object)
+      {
+        return createAtomicRmwUmaxAdapter();
+      }
+      @Override
+      public Adapter caseAtomicRmwUmin(AtomicRmwUmin object)
+      {
+        return createAtomicRmwUminAdapter();
       }
       @Override
       public Adapter caseLoad(Load object)
@@ -348,6 +463,16 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
       public Adapter caseCompare(Compare object)
       {
         return createCompareAdapter();
+      }
+      @Override
+      public Adapter caseCompareInt(CompareInt object)
+      {
+        return createCompareIntAdapter();
+      }
+      @Override
+      public Adapter caseCompareFloat(CompareFloat object)
+      {
+        return createCompareFloatAdapter();
       }
       @Override
       public Adapter caseIndirectBranch(IndirectBranch object)
@@ -832,6 +957,186 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationAdd <em>Arithmetic Operation Add</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationAdd
+   * @generated
+   */
+  public Adapter createArithmeticOperationAddAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationFadd <em>Arithmetic Operation Fadd</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationFadd
+   * @generated
+   */
+  public Adapter createArithmeticOperationFaddAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationSub <em>Arithmetic Operation Sub</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationSub
+   * @generated
+   */
+  public Adapter createArithmeticOperationSubAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationFsub <em>Arithmetic Operation Fsub</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationFsub
+   * @generated
+   */
+  public Adapter createArithmeticOperationFsubAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationMul <em>Arithmetic Operation Mul</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationMul
+   * @generated
+   */
+  public Adapter createArithmeticOperationMulAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationFmul <em>Arithmetic Operation Fmul</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationFmul
+   * @generated
+   */
+  public Adapter createArithmeticOperationFmulAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationUdiv <em>Arithmetic Operation Udiv</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationUdiv
+   * @generated
+   */
+  public Adapter createArithmeticOperationUdivAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationSdiv <em>Arithmetic Operation Sdiv</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationSdiv
+   * @generated
+   */
+  public Adapter createArithmeticOperationSdivAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationFdiv <em>Arithmetic Operation Fdiv</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationFdiv
+   * @generated
+   */
+  public Adapter createArithmeticOperationFdivAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationUrem <em>Arithmetic Operation Urem</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationUrem
+   * @generated
+   */
+  public Adapter createArithmeticOperationUremAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationSrem <em>Arithmetic Operation Srem</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationSrem
+   * @generated
+   */
+  public Adapter createArithmeticOperationSremAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.ArithmeticOperationFrem <em>Arithmetic Operation Frem</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.ArithmeticOperationFrem
+   * @generated
+   */
+  public Adapter createArithmeticOperationFremAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.LogicOperation <em>Logic Operation</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -992,6 +1297,171 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAtomicRMWAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.AtomicRmwXchg <em>Atomic Rmw Xchg</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwXchg
+   * @generated
+   */
+  public Adapter createAtomicRmwXchgAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.AtomicRmwAdd <em>Atomic Rmw Add</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwAdd
+   * @generated
+   */
+  public Adapter createAtomicRmwAddAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.AtomicRmwSub <em>Atomic Rmw Sub</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwSub
+   * @generated
+   */
+  public Adapter createAtomicRmwSubAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.AtomicRmwAnd <em>Atomic Rmw And</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwAnd
+   * @generated
+   */
+  public Adapter createAtomicRmwAndAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.AtomicRmwNand <em>Atomic Rmw Nand</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwNand
+   * @generated
+   */
+  public Adapter createAtomicRmwNandAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.AtomicRmwOr <em>Atomic Rmw Or</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwOr
+   * @generated
+   */
+  public Adapter createAtomicRmwOrAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.AtomicRmwXor <em>Atomic Rmw Xor</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwXor
+   * @generated
+   */
+  public Adapter createAtomicRmwXorAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.AtomicRmwMax <em>Atomic Rmw Max</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwMax
+   * @generated
+   */
+  public Adapter createAtomicRmwMaxAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.AtomicRmwMin <em>Atomic Rmw Min</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwMin
+   * @generated
+   */
+  public Adapter createAtomicRmwMinAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.AtomicRmwUmax <em>Atomic Rmw Umax</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwUmax
+   * @generated
+   */
+  public Adapter createAtomicRmwUmaxAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.AtomicRmwUmin <em>Atomic Rmw Umin</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.AtomicRmwUmin
+   * @generated
+   */
+  public Adapter createAtomicRmwUminAdapter()
   {
     return null;
   }
@@ -1232,6 +1702,36 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createCompareAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.CompareInt <em>Compare Int</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.CompareInt
+   * @generated
+   */
+  public Adapter createCompareIntAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.CompareFloat <em>Compare Float</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.CompareFloat
+   * @generated
+   */
+  public Adapter createCompareFloatAdapter()
   {
     return null;
   }

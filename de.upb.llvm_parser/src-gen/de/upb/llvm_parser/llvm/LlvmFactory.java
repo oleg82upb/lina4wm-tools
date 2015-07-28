@@ -275,6 +275,114 @@ public interface LlvmFactory extends EFactory
   ArithmeticOperation createArithmeticOperation();
 
   /**
+   * Returns a new object of class '<em>Arithmetic Operation Add</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Arithmetic Operation Add</em>'.
+   * @generated
+   */
+  ArithmeticOperationAdd createArithmeticOperationAdd();
+
+  /**
+   * Returns a new object of class '<em>Arithmetic Operation Fadd</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Arithmetic Operation Fadd</em>'.
+   * @generated
+   */
+  ArithmeticOperationFadd createArithmeticOperationFadd();
+
+  /**
+   * Returns a new object of class '<em>Arithmetic Operation Sub</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Arithmetic Operation Sub</em>'.
+   * @generated
+   */
+  ArithmeticOperationSub createArithmeticOperationSub();
+
+  /**
+   * Returns a new object of class '<em>Arithmetic Operation Fsub</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Arithmetic Operation Fsub</em>'.
+   * @generated
+   */
+  ArithmeticOperationFsub createArithmeticOperationFsub();
+
+  /**
+   * Returns a new object of class '<em>Arithmetic Operation Mul</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Arithmetic Operation Mul</em>'.
+   * @generated
+   */
+  ArithmeticOperationMul createArithmeticOperationMul();
+
+  /**
+   * Returns a new object of class '<em>Arithmetic Operation Fmul</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Arithmetic Operation Fmul</em>'.
+   * @generated
+   */
+  ArithmeticOperationFmul createArithmeticOperationFmul();
+
+  /**
+   * Returns a new object of class '<em>Arithmetic Operation Udiv</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Arithmetic Operation Udiv</em>'.
+   * @generated
+   */
+  ArithmeticOperationUdiv createArithmeticOperationUdiv();
+
+  /**
+   * Returns a new object of class '<em>Arithmetic Operation Sdiv</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Arithmetic Operation Sdiv</em>'.
+   * @generated
+   */
+  ArithmeticOperationSdiv createArithmeticOperationSdiv();
+
+  /**
+   * Returns a new object of class '<em>Arithmetic Operation Fdiv</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Arithmetic Operation Fdiv</em>'.
+   * @generated
+   */
+  ArithmeticOperationFdiv createArithmeticOperationFdiv();
+
+  /**
+   * Returns a new object of class '<em>Arithmetic Operation Urem</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Arithmetic Operation Urem</em>'.
+   * @generated
+   */
+  ArithmeticOperationUrem createArithmeticOperationUrem();
+
+  /**
+   * Returns a new object of class '<em>Arithmetic Operation Srem</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Arithmetic Operation Srem</em>'.
+   * @generated
+   */
+  ArithmeticOperationSrem createArithmeticOperationSrem();
+
+  /**
+   * Returns a new object of class '<em>Arithmetic Operation Frem</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Arithmetic Operation Frem</em>'.
+   * @generated
+   */
+  ArithmeticOperationFrem createArithmeticOperationFrem();
+
+  /**
    * Returns a new object of class '<em>Logic Operation</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -372,6 +480,105 @@ public interface LlvmFactory extends EFactory
    * @generated
    */
   AtomicRMW createAtomicRMW();
+
+  /**
+   * Returns a new object of class '<em>Atomic Rmw Xchg</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Atomic Rmw Xchg</em>'.
+   * @generated
+   */
+  AtomicRmwXchg createAtomicRmwXchg();
+
+  /**
+   * Returns a new object of class '<em>Atomic Rmw Add</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Atomic Rmw Add</em>'.
+   * @generated
+   */
+  AtomicRmwAdd createAtomicRmwAdd();
+
+  /**
+   * Returns a new object of class '<em>Atomic Rmw Sub</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Atomic Rmw Sub</em>'.
+   * @generated
+   */
+  AtomicRmwSub createAtomicRmwSub();
+
+  /**
+   * Returns a new object of class '<em>Atomic Rmw And</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Atomic Rmw And</em>'.
+   * @generated
+   */
+  AtomicRmwAnd createAtomicRmwAnd();
+
+  /**
+   * Returns a new object of class '<em>Atomic Rmw Nand</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Atomic Rmw Nand</em>'.
+   * @generated
+   */
+  AtomicRmwNand createAtomicRmwNand();
+
+  /**
+   * Returns a new object of class '<em>Atomic Rmw Or</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Atomic Rmw Or</em>'.
+   * @generated
+   */
+  AtomicRmwOr createAtomicRmwOr();
+
+  /**
+   * Returns a new object of class '<em>Atomic Rmw Xor</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Atomic Rmw Xor</em>'.
+   * @generated
+   */
+  AtomicRmwXor createAtomicRmwXor();
+
+  /**
+   * Returns a new object of class '<em>Atomic Rmw Max</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Atomic Rmw Max</em>'.
+   * @generated
+   */
+  AtomicRmwMax createAtomicRmwMax();
+
+  /**
+   * Returns a new object of class '<em>Atomic Rmw Min</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Atomic Rmw Min</em>'.
+   * @generated
+   */
+  AtomicRmwMin createAtomicRmwMin();
+
+  /**
+   * Returns a new object of class '<em>Atomic Rmw Umax</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Atomic Rmw Umax</em>'.
+   * @generated
+   */
+  AtomicRmwUmax createAtomicRmwUmax();
+
+  /**
+   * Returns a new object of class '<em>Atomic Rmw Umin</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Atomic Rmw Umin</em>'.
+   * @generated
+   */
+  AtomicRmwUmin createAtomicRmwUmin();
 
   /**
    * Returns a new object of class '<em>Load</em>'.
@@ -516,6 +723,24 @@ public interface LlvmFactory extends EFactory
    * @generated
    */
   Compare createCompare();
+
+  /**
+   * Returns a new object of class '<em>Compare Int</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Compare Int</em>'.
+   * @generated
+   */
+  CompareInt createCompareInt();
+
+  /**
+   * Returns a new object of class '<em>Compare Float</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Compare Float</em>'.
+   * @generated
+   */
+  CompareFloat createCompareFloat();
 
   /**
    * Returns a new object of class '<em>Indirect Branch</em>'.

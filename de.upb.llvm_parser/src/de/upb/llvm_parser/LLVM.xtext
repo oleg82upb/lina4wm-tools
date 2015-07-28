@@ -18,19 +18,11 @@ terminal INT_TYPE:
 	
 terminal BOOL:
 	'true' | 'false'
-;
-	
-terminal PRIMITIVE_VALUE:
-		'void' | 'null' | 'label' | 'undef' | '...' ;
-		
-
+;	
 		
 terminal FLOATING_POINT_TYPE:
 	'half' | 'float' | 'double' | 'x86_fp80' | 'fp128' | 'ppc_fp128';
 	
-
-terminal INITIALIZER:
-	'zeroinitializer';
 
 terminal STRING:
 	'c'?'"' ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '"' | "'" | '\\') | !('\\' | '"'))* '"' |
@@ -51,54 +43,47 @@ terminal METADATA:
 ;
 	
 //Key Words
-terminal F_PREDICATES:
-	'oeq' | 'ogt' | 'oge' | 'olt' | 'ole' | 'one' | 'ord' |
-	'ueq' | 'ugt' | 'uge' | 'ult' | 'ule' | 'une' | 'uno' ;
-	
-terminal ATOMIC_ORDERING:
-	'unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst';
-
-terminal BIN_OP:
-	('xchg' | 'add' | 'sub' | 'and' | 'nand' | 'or' | 'xor' | 'max' | 'min' | 'umax' | 'umin');
-
-terminal RETURN_ATTRIBUTES:
-	'zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest';
 
 CALLING_CONV:
-	'ccc' | 'fastcc' | 'coldcc' | 'x86_stdcallcc' | 'x86_fastcallcc' | 'x86_thiscallcc' | 'arm_apcscc' | 'arm_aapcscc' |
-	'arm_aapcs_vfpcc' | 'msp430_intrcc' | 'ptx_kernel' | 'ptx_device' | 'spir_func' | 'spir_kernel' | 'cc' '<' NUMBER '>'
-	NUMBER;
+	'ccc' | 'fastcc' | 'coldcc' | 'x86_stdcallcc' | 'x86_fastcallcc' | 'x86_thiscallcc' 
+	| 'arm_apcscc' | 'arm_aapcscc' | 'arm_aapcs_vfpcc' | 'msp430_intrcc' | 'ptx_kernel' 
+	| 'ptx_device' | 'spir_func' | 'spir_kernel' | 'cc' '<' NUMBER '>' NUMBER;
 
 FUNCTION_ATTRIBUTES:
-	'address_safety' | 'alignstack' '(' '<' NUMBER '>' ')' | 'alwaysinline' | 'nonlazybind' | 'inlinehint' | 'naked' |
-	'noimplicitfloat' | 'noinline' | 'noredzone' | 'noreturn' | 'nounwind' | 'optsize' | 'readnone' | 'readonly' |
-	'returns_twice' | 'ssp' | 'sspreq' | 'uwtable';
-
-terminal CAST_OP:
-	'trunc' | 'zext' | 'sext' | 'fptrunc' | 'fpext' | 'fptoui' | 'fptosi' | 'uitofp' | 'sitofp' | 'ptrtoint' | 'inttoptr'
-	| 'bitcast';
-
-terminal I_PREDICATES:
-	'eq' | 'ne' | 'ugt' | 'uge' | 'ult' | 'ule' | 'sgt' | 'sge' | 'slt' | 'sle';
-
-
-terminal VISIBILITY:
-	'default' | 'hidden' | 'protected';
-
-terminal LINKAGE:
-	'private' | 'linker_private' | 'linker_private_weak' | 'available_externally' | 'linkonce' | 'common' | 'appending' |
-	'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' | 'dllimport' | 'dllexport' ;
-
-terminal ALIAS_LINKAGE:
-	'external' | 'internal' | 'weak' | 'weak_odr';
-
-KEYWORDS:
-	ALIAS_LINKAGE | ATOMIC_ORDERING | BIN_OP | RETURN_ATTRIBUTES | CAST_OP | I_PREDICATES | VISIBILITY | LINKAGE 
-;
+	'address_safety' | 'alignstack' '(' '<' NUMBER '>' ')' | 'alwaysinline' | 'nonlazybind' 
+	| 'inlinehint' | 'naked' | 'noimplicitfloat' | 'noinline' | 'noredzone' | 'noreturn' 
+	| 'nounwind' | 'optsize' | 'readnone' | 'readonly' | 'returns_twice' | 'ssp' | 'sspreq' | 'uwtable';
 
 LABEL_ID:
-	(KEYWORDS | INT_TYPE|ID|BOOL  | 'catch' | 'invoke' | 'resume' | 'switch') ('.' (KEYWORDS|INT_TYPE|ID|BOOL | 'catch' | 'invoke' | 'resume' | 'switch'))*;
-	//(('a'..'z' | 'A'..'Z' | '_' | '.' | '0'..'9')+  | STRING)
+	(INT_TYPE|ID|BOOL  | 'catch' | 'invoke' | 'resume' | 'switch' | 
+	'xchg' | 'add' | 'sub' | 'and' | 'nand' | 'or' | 'xor' | 'max' | 'min' | 'umax' | 'umin'
+	| 'default' | 'hidden' | 'protected'
+	| 'external' | 'internal' | 'weak' | 'weak_odr'
+	| 'oeq' | 'ogt' | 'oge' | 'olt' | 'ole' | 'one' | 'ord' 
+	| 'ueq' | 'ugt' | 'uge' | 'ult' | 'ule' | 'une' | 'uno'
+	| 'eq' | 'ne' | 'sgt' | 'sge' | 'slt' | 'sle'
+	| 'unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst'
+	| 'zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest'
+	| 'trunc' | 'zext' | 'sext' | 'fptrunc' | 'fpext' | 'fptoui' | 'fptosi' 
+	| 'uitofp' | 'sitofp' | 'ptrtoint' | 'inttoptr'	| 'bitcast'
+	| 'private' | 'linker_private' | 'linker_private_weak' | 'available_externally' | 'linkonce' 
+	| 'common' | 'appending' | 'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' | 'dllimport' | 'dllexport'
+	| 'void' | 'null' | 'label' | 'undef')
+	 
+	('.' (INT_TYPE|ID|BOOL | 'catch' | 'invoke' | 'resume' | 'switch' | 
+	'xchg' | 'add' | 'sub' | 'and' | 'nand' | 'or' | 'xor' | 'max' | 'min' | 'umax' | 'umin'
+	| 'default' | 'hidden' | 'protected'
+	| 'external' | 'internal' | 'weak' | 'weak_odr'
+	| 'oeq' | 'ogt' | 'oge' | 'olt' | 'ole' | 'one' | 'ord' 
+	| 'ueq' | 'ugt' | 'uge' | 'ult' | 'ule' | 'une' | 'uno'
+	| 'eq' | 'ne' | 'sgt' | 'sge' | 'slt' | 'sle'
+	| 'unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst'
+	| 'zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest'
+	| 'trunc' | 'zext' | 'sext' | 'fptrunc' | 'fpext' | 'fptoui' | 'fptosi' 
+	| 'uitofp' | 'sitofp' | 'ptrtoint' | 'inttoptr'	| 'bitcast'
+	| 'private' | 'linker_private' | 'linker_private_weak' | 'available_externally' | 'linkonce' 
+	| 'common' | 'appending' | 'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' | 'dllimport' | 'dllexport'
+	| 'void' | 'null' | 'label' | 'undef'))*;
 
 
 AbstractElement:
@@ -125,21 +110,39 @@ TypeDefinition:
 	(address=Address '=' (('type' (struct=Structure | 'opaque'))));
 
 GlobalDefinition:
-	address=Address '=' (LINKAGE | ALIAS_LINKAGE | 'global' | 'unnamed_addr' | 'constant')* value=Parameter (',' 'align' align = NUMBER)?;
+	address=Address '=' ('private' | 'linker_private' | 'linker_private_weak' | 'available_externally' 
+		| 'linkonce' | 'common' | 'appending' |	'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' 
+		| 'dllimport' | 'dllexport' | 'external' | 'internal' | 'weak' | 'weak_odr' | 'global' | 'unnamed_addr' | 'constant')* 
+	value=Parameter (',' 'align' align = NUMBER)?;
 
 FunctionDefinition:
-	('define' (LINKAGE| ALIAS_LINKAGE)? VISIBILITY? CALLING_CONV? RETURN_ATTRIBUTES? returnType=TypeUse
-	address=Address ('()' | '(' parameter=FunctionParameterList? ')') 'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ('align' align = NUMBER)?
+	('define' ('private' | 'linker_private' | 'linker_private_weak' | 'available_externally' 
+		| 'linkonce' | 'common' | 'appending' |
+		'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' | 'dllimport' | 'dllexport'
+		| 'external' | 'internal' | 'weak' | 'weak_odr')? 
+		('default' | 'hidden' | 'protected')? 
+		CALLING_CONV? 
+		('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')? 
+		returnType=TypeUse
+		address=Address ('()' | '(' parameter=FunctionParameterList? ')') 
+		'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ('align' align = NUMBER)?
 	body=FunctionBody) 
 	| 
-	('declare' (LINKAGE| ALIAS_LINKAGE)? VISIBILITY? CALLING_CONV? RETURN_ATTRIBUTES? returnType=TypeUse
-	address=Address ('()' | '(' parameter=FunctionParameterList? ')') 'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ('align' align = NUMBER)?)
+	('declare' ('private' | 'linker_private' | 'linker_private_weak' | 'available_externally' 
+		| 'linkonce' | 'common' | 'appending' |	'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' 
+		| 'dllimport' | 'dllexport'| 'external' | 'internal' | 'weak' | 'weak_odr')? 
+		('default' | 'hidden' | 'protected')? 
+		CALLING_CONV? 
+		('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')? 
+		returnType=TypeUse
+		address=Address ('()' | '(' parameter=FunctionParameterList? ')') 
+		'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ('align' align = NUMBER)?)
 ;
 
 AliasDefinition:
-	address=Address '=' 'alias' ALIAS_LINKAGE? VISIBILITY? aliastype=TypeUse aliasvalue=Value aliasee=(TypeUse);
-
-
+	address=Address '=' 'alias' ('external' | 'internal' | 'weak' | 'weak_odr')? 
+	('default' | 'hidden' | 'protected')? 
+	aliastype=TypeUse aliasvalue=Value aliasee=(TypeUse);
 
 TypeUse:
 	(Predefined | AddressUse) functionInput=UNKNOWN_TYPE?	
@@ -153,7 +156,7 @@ Address:
 	name=VALID_ID;
 
 Predefined:
-	type=(PRIMITIVE_VALUE | INT_TYPE | FLOATING_POINT_TYPE) (pointer=POINTER)?
+	type=('void' | 'null' | 'label' | 'undef' | '...' | INT_TYPE | FLOATING_POINT_TYPE) (pointer=POINTER)?
 	;
 
 
@@ -172,7 +175,7 @@ Constant:
 	value = NUMBER;
 	
 PrimitiveValue:
-	value = (STRING| PRIMITIVE_VALUE | INITIALIZER | BOOL);
+	value = (STRING | 'void' | 'null' | 'label' | 'undef' | '...' | BOOL | 'zeroinitializer');
 
 Value:
 	 NestedCast | NestedGetElementPtr | Constant | AddressUse | PrimitiveValue | ValueStruct;
@@ -185,7 +188,10 @@ Structure:
 
 
 Parameter:
-	type = (TypeUse | Aggregate_Type) (RETURN_ATTRIBUTES+ value = Value | value = Value? RETURN_ATTRIBUTES*)
+	type = (TypeUse | Aggregate_Type) 
+	(('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')+ value = Value 
+		| value = Value? ('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')*
+	)
 ;
 
 ParameterList:
@@ -193,7 +199,9 @@ ParameterList:
 	('()' | '('	((params+=Parameter (',' params+=Parameter)*)?) ')');
 
 FunctionParameter:
-	type = TypeUse RETURN_ATTRIBUTES* (value = Address)?
+	type = TypeUse 
+	('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')* 
+	(value = Address)?
 ;
 
 FunctionParameterList:
@@ -220,18 +228,36 @@ BasicBlock:
 
 
 ArithmeticOperation:
-	result=Address '=' operation = ('add' | 'fadd' | 'sub' | 'fsub' | 'mul' | 'fmul' | 'udiv' | 'sdiv' | 'fdiv' | 'urem' | 'srem' | 'frem') (('nsw' |
-	'nuw') ('nuw' | 'nsw')?)?
-	optype=TypeUse value1=Value ',' value2=Value;
+	ArithmeticOperationAdd | ArithmeticOperationFadd | ArithmeticOperationSub | ArithmeticOperationFsub
+	| ArithmeticOperationMul | ArithmeticOperationFmul | ArithmeticOperationUdiv | ArithmeticOperationSdiv
+	| ArithmeticOperationFdiv | ArithmeticOperationUrem | ArithmeticOperationSrem | ArithmeticOperationFrem;
+	
+ArithmeticOperationAdd:		result=Address '=' operation = 'add' 'nuw'? 'nsw'?	optype=TypeUse value1=Value ',' value2=Value;
+ArithmeticOperationFadd:	result=Address '=' operation = 'fadd' 'nuw'? 'nsw'?	optype=TypeUse value1=Value ',' value2=Value;
+ArithmeticOperationSub:		result=Address '=' operation = 'sub' 'nuw'? 'nsw'?	optype=TypeUse value1=Value ',' value2=Value;
+ArithmeticOperationFsub:	result=Address '=' operation = 'fsub' 'nuw'? 'nsw'?	optype=TypeUse value1=Value ',' value2=Value;
+ArithmeticOperationMul:		result=Address '=' operation = 'mul' 'nuw'? 'nsw'?	optype=TypeUse value1=Value ',' value2=Value;
+ArithmeticOperationFmul:	result=Address '=' operation = 'fmul' 'nuw'? 'nsw'?	optype=TypeUse value1=Value ',' value2=Value;
+ArithmeticOperationUdiv:	result=Address '=' operation = 'udiv' 'nuw'? 'nsw'?	optype=TypeUse value1=Value ',' value2=Value;
+ArithmeticOperationSdiv:	result=Address '=' operation = 'sdiv' 'nuw'? 'nsw'?	optype=TypeUse value1=Value ',' value2=Value;
+ArithmeticOperationFdiv:	result=Address '=' operation = 'fdiv' 'nuw'? 'nsw'?	optype=TypeUse value1=Value ',' value2=Value;
+ArithmeticOperationUrem:	result=Address '=' operation = 'urem' 'nuw'? 'nsw'?	optype=TypeUse value1=Value ',' value2=Value;
+ArithmeticOperationSrem:	result=Address '=' operation = 'srem' 'nuw'? 'nsw'?	optype=TypeUse value1=Value ',' value2=Value;
+ArithmeticOperationFrem:	result=Address '=' operation = 'frem' 'nuw'? 'nsw'?	optype=TypeUse value1=Value ',' value2=Value;
 
 LogicOperation:
 	result=Address '=' operation = ('shl' | 'lshr' | 'ashr' | 'and' | 'or' | 'xor') optype=TypeUse value1=Value ',' value2=Value;
 
 Cast:
-	result=Address '=' operation = CAST_OP from=(TypeUse|Aggregate_Type) value=Value 'to' to=TypeUse;
+	result=Address '=' 
+	operation = ('trunc' | 'zext' | 'sext' | 'fptrunc' | 'fpext' | 'fptoui' | 'fptosi' 
+				| 'uitofp' | 'sitofp' | 'ptrtoint' | 'inttoptr'	| 'bitcast') 
+	from=(TypeUse|Aggregate_Type) value=Value 'to' to=TypeUse;
 
 NestedCast: 
-	operation = CAST_OP '(' from=(TypeUse|Aggregate_Type) value=Value 'to' to=TypeUse ')' 
+	operation = ('trunc' | 'zext' | 'sext' | 'fptrunc' | 'fpext' | 'fptoui' | 'fptosi' 
+				| 'uitofp' | 'sitofp' | 'ptrtoint' | 'inttoptr'	| 'bitcast') 
+	'(' from=(TypeUse|Aggregate_Type) value=Value 'to' to=TypeUse ')' 
 ;
 
 MetaArgValue:
@@ -257,27 +283,49 @@ NestedGetElementPtr:
 
 
 Fence:
-	'fence' 'singlethread'? ordering=ATOMIC_ORDERING;
+	'fence' 'singlethread'? ordering=('unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst');
 
 CmpXchg:
-	result=Address '=' 'cmpxchg' (volatile?='volatile')? address=Parameter ',' value=Parameter',' newValue=Parameter 'singlethread'? ordering=ATOMIC_ORDERING;
+	result=Address '=' 'cmpxchg' (volatile?='volatile')? address=Parameter ',' value=Parameter',' 
+	newValue=Parameter 'singlethread'? ordering=('unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst');
 
 AtomicRMW:
-	result=Address '=' 'atomicrmw' (volatile?='volatile')? operation = BIN_OP address=Parameter ',' argument=Parameter 'singlethread'? ordering=ATOMIC_ORDERING;
+	AtomicRmwXchg | AtomicRmwAdd | AtomicRmwSub | AtomicRmwAnd | AtomicRmwNand 
+	| AtomicRmwOr | AtomicRmwXor | AtomicRmwMax | AtomicRmwMin | AtomicRmwUmax
+	| AtomicRmwUmin
+;
+
+AtomicRmwXchg: 	result=Address '=' 'atomicrmw' (volatile?='volatile')? operation = 'xchg' address=Parameter ',' argument=Parameter 'singlethread'? ordering=('unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst');
+AtomicRmwAdd:  	result=Address '=' 'atomicrmw' (volatile?='volatile')? operation = 'add' address=Parameter ',' argument=Parameter 'singlethread'? ordering=('unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst');
+AtomicRmwSub:  	result=Address '=' 'atomicrmw' (volatile?='volatile')? operation = 'sub' address=Parameter ',' argument=Parameter 'singlethread'? ordering=('unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst');
+AtomicRmwAnd:  	result=Address '=' 'atomicrmw' (volatile?='volatile')? operation = 'and' address=Parameter ',' argument=Parameter 'singlethread'? ordering=('unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst');
+AtomicRmwNand: 	result=Address '=' 'atomicrmw' (volatile?='volatile')? operation = 'nand' address=Parameter ',' argument=Parameter 'singlethread'? ordering=('unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst');
+AtomicRmwOr:	result=Address '=' 'atomicrmw' (volatile?='volatile')? operation = 'or' address=Parameter ',' argument=Parameter 'singlethread'? ordering=('unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst');
+AtomicRmwXor:	result=Address '=' 'atomicrmw' (volatile?='volatile')? operation = 'xor' address=Parameter ',' argument=Parameter 'singlethread'? ordering=('unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst');
+AtomicRmwMax:	result=Address '=' 'atomicrmw' (volatile?='volatile')? operation = 'max' address=Parameter ',' argument=Parameter 'singlethread'? ordering=('unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst');
+AtomicRmwMin:	result=Address '=' 'atomicrmw' (volatile?='volatile')? operation = 'min' address=Parameter ',' argument=Parameter 'singlethread'? ordering=('unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst');
+AtomicRmwUmax:	result=Address '=' 'atomicrmw' (volatile?='volatile')? operation = 'umax' address=Parameter ',' argument=Parameter 'singlethread'? ordering=('unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst');
+AtomicRmwUmin:	result=Address '=' 'atomicrmw' (volatile?='volatile')? operation = 'umin' address=Parameter ',' argument=Parameter 'singlethread'? ordering=('unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst');
+
 
 Load:
-	result=Address '=' ( volatile?='volatile' 'load'  | 'load' (volatile?='volatile')?) address=Parameter (',' 'align' align = NUMBER)?  (',' meta+=MetaArgValue)* 
+	result=Address '=' ( volatile?='volatile' 'load'  | 'load' (volatile?='volatile')?) 
+	address=Parameter (',' 'align' align = NUMBER)?  (',' meta+=MetaArgValue)* 
 	|
-	result=Address '=' 'load' atomic?='atomic' (volatile?='volatile'?)? address=Parameter 'singlethread'? ordering=ATOMIC_ORDERING (',' 'align' align = NUMBER)?;
+	result=Address '=' 'load' atomic?='atomic' (volatile?='volatile'?)? address=Parameter 'singlethread'? 
+	ordering=('unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst') (',' 'align' align = NUMBER)?;
 
 Store:
-	(volatile?='volatile' 'store' | 'store' (volatile?='volatile')?) value=Parameter ',' targetAddress=Parameter  (',' 'align' align = NUMBER)? (',' meta+=MetaArgValue)*     
+	(volatile?='volatile' 'store' | 'store' (volatile?='volatile')?) value=Parameter ',' 
+	targetAddress=Parameter  (',' 'align' align = NUMBER)? (',' meta+=MetaArgValue)*     
 	|
-	'store' atomic?='atomic' (volatile?='volatile')? value=Parameter ',' targetAddress=Parameter 'singlethread'? ordering=ATOMIC_ORDERING (',' 'align' align = NUMBER)?;
+	'store' atomic?='atomic' (volatile?='volatile')? value=Parameter ',' targetAddress=Parameter 'singlethread'? 
+	ordering=('unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst') (',' 'align' align = NUMBER)?;
 
 //FIXME: no support for call of functions with a function as a result type
 Call:
-	(result=Address '=')? 'tail'? 'call' CALLING_CONV? RETURN_ATTRIBUTES? 
+	(result=Address '=')? 'tail'? 'call' CALLING_CONV? 
+	('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')? 
 	function=Parameter //(('asm' 'sideeffect'? STRING ',' STRING) 
 	pList=ParameterList FUNCTION_ATTRIBUTES* (',' '!srcloc' '!' NUMBER)*;
 
@@ -329,7 +377,17 @@ ShuffleVector:
 	result=Address '=' 'shufflevector' value1=Parameter ',' value2=Parameter ',' mask=Parameter;
 
 Compare:
-	result=Address '=' (('icmp' | 'fcmp') cond = (I_PREDICATES | F_PREDICATES| BOOL) opType=TypeUse operand1=Value ',' operand2=Value);
+	CompareInt | CompareFloat;
+	
+CompareInt:
+	result=Address '=' 'icmp' 
+	cond = ('eq' | 'ne' | 'ugt' | 'uge' | 'ult' | 'ule' | 'sgt' | 'sge' | 'slt' | 'sle') 
+	opType=TypeUse operand1=Value ',' operand2=Value;
+CompareFloat:
+	result=Address '=' 'fcmp' 
+	cond = ('oeq' | 'ogt' | 'oge' | 'olt' | 'ole' | 'one' | 'ord' |
+	'ueq' | 'ugt' | 'uge' | 'ult' | 'ule' | 'une' | 'uno')
+	opType=TypeUse operand1=Value ',' operand2=Value;
 
 IndirectBranch:
 	'indirectbr' target=Parameter ',' '[' ('label' potTargetLabels+=VALID_ID (',' 'label' potTargetLabels+=VALID_ID)*)? ']';
@@ -342,7 +400,9 @@ SwitchCase:
 ;
 
 Invoke:
-	'invoke' CALLING_CONV? RETURN_ATTRIBUTES? returnType=TypeUse name=Address pList=ParameterList
+	'invoke' CALLING_CONV? 
+	('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')? 
+	returnType=TypeUse name=Address pList=ParameterList
 	FUNCTION_ATTRIBUTES* 'to' 'label' targetLabel=VALID_ID 'unwind' 'label' unwindTargetLabel=VALID_ID;
 
 Resume:

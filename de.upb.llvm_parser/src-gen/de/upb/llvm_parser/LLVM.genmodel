@@ -104,6 +104,18 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ArithmeticOperation/value1"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//ArithmeticOperation/value2"/>
     </genClasses>
+    <genClasses ecoreClass="LLVM.ecore#//ArithmeticOperationAdd"/>
+    <genClasses ecoreClass="LLVM.ecore#//ArithmeticOperationFadd"/>
+    <genClasses ecoreClass="LLVM.ecore#//ArithmeticOperationSub"/>
+    <genClasses ecoreClass="LLVM.ecore#//ArithmeticOperationFsub"/>
+    <genClasses ecoreClass="LLVM.ecore#//ArithmeticOperationMul"/>
+    <genClasses ecoreClass="LLVM.ecore#//ArithmeticOperationFmul"/>
+    <genClasses ecoreClass="LLVM.ecore#//ArithmeticOperationUdiv"/>
+    <genClasses ecoreClass="LLVM.ecore#//ArithmeticOperationSdiv"/>
+    <genClasses ecoreClass="LLVM.ecore#//ArithmeticOperationFdiv"/>
+    <genClasses ecoreClass="LLVM.ecore#//ArithmeticOperationUrem"/>
+    <genClasses ecoreClass="LLVM.ecore#//ArithmeticOperationSrem"/>
+    <genClasses ecoreClass="LLVM.ecore#//ArithmeticOperationFrem"/>
     <genClasses ecoreClass="LLVM.ecore#//LogicOperation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//LogicOperation/result"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//LogicOperation/operation"/>
@@ -165,6 +177,17 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//AtomicRMW/argument"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//AtomicRMW/ordering"/>
     </genClasses>
+    <genClasses ecoreClass="LLVM.ecore#//AtomicRmwXchg"/>
+    <genClasses ecoreClass="LLVM.ecore#//AtomicRmwAdd"/>
+    <genClasses ecoreClass="LLVM.ecore#//AtomicRmwSub"/>
+    <genClasses ecoreClass="LLVM.ecore#//AtomicRmwAnd"/>
+    <genClasses ecoreClass="LLVM.ecore#//AtomicRmwNand"/>
+    <genClasses ecoreClass="LLVM.ecore#//AtomicRmwOr"/>
+    <genClasses ecoreClass="LLVM.ecore#//AtomicRmwXor"/>
+    <genClasses ecoreClass="LLVM.ecore#//AtomicRmwMax"/>
+    <genClasses ecoreClass="LLVM.ecore#//AtomicRmwMin"/>
+    <genClasses ecoreClass="LLVM.ecore#//AtomicRmwUmax"/>
+    <genClasses ecoreClass="LLVM.ecore#//AtomicRmwUmin"/>
     <genClasses ecoreClass="LLVM.ecore#//Load">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Load/result"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Load/volatile"/>
@@ -262,6 +285,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Compare/operand1"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Compare/operand2"/>
     </genClasses>
+    <genClasses ecoreClass="LLVM.ecore#//CompareInt"/>
+    <genClasses ecoreClass="LLVM.ecore#//CompareFloat"/>
     <genClasses ecoreClass="LLVM.ecore#//IndirectBranch">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//IndirectBranch/target"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//IndirectBranch/potTargetLabels"/>

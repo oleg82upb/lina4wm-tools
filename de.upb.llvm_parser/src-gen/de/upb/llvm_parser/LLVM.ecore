@@ -129,6 +129,18 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value2" eType="#//Value"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArithmeticOperationAdd" eSuperTypes="#//ArithmeticOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArithmeticOperationFadd" eSuperTypes="#//ArithmeticOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArithmeticOperationSub" eSuperTypes="#//ArithmeticOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArithmeticOperationFsub" eSuperTypes="#//ArithmeticOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArithmeticOperationMul" eSuperTypes="#//ArithmeticOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArithmeticOperationFmul" eSuperTypes="#//ArithmeticOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArithmeticOperationUdiv" eSuperTypes="#//ArithmeticOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArithmeticOperationSdiv" eSuperTypes="#//ArithmeticOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArithmeticOperationFdiv" eSuperTypes="#//ArithmeticOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArithmeticOperationUrem" eSuperTypes="#//ArithmeticOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArithmeticOperationSrem" eSuperTypes="#//ArithmeticOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArithmeticOperationFrem" eSuperTypes="#//ArithmeticOperation"/>
   <eClassifiers xsi:type="ecore:EClass" name="LogicOperation" eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" eType="#//Address"
         containment="true"/>
@@ -216,6 +228,17 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ordering" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicRmwXchg" eSuperTypes="#//AtomicRMW"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicRmwAdd" eSuperTypes="#//AtomicRMW"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicRmwSub" eSuperTypes="#//AtomicRMW"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicRmwAnd" eSuperTypes="#//AtomicRMW"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicRmwNand" eSuperTypes="#//AtomicRMW"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicRmwOr" eSuperTypes="#//AtomicRMW"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicRmwXor" eSuperTypes="#//AtomicRMW"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicRmwMax" eSuperTypes="#//AtomicRMW"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicRmwMin" eSuperTypes="#//AtomicRMW"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicRmwUmax" eSuperTypes="#//AtomicRMW"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicRmwUmin" eSuperTypes="#//AtomicRMW"/>
   <eClassifiers xsi:type="ecore:EClass" name="Load" eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" eType="#//Address"
         containment="true"/>
@@ -367,6 +390,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="operand2" eType="#//Value"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompareInt" eSuperTypes="#//Compare"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompareFloat" eSuperTypes="#//Compare"/>
   <eClassifiers xsi:type="ecore:EClass" name="IndirectBranch" eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Parameter"
         containment="true"/>

@@ -92,6 +92,18 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
       case LlvmPackage.INSTRUCTION: return createInstruction();
       case LlvmPackage.BASIC_BLOCK: return createBasicBlock();
       case LlvmPackage.ARITHMETIC_OPERATION: return createArithmeticOperation();
+      case LlvmPackage.ARITHMETIC_OPERATION_ADD: return createArithmeticOperationAdd();
+      case LlvmPackage.ARITHMETIC_OPERATION_FADD: return createArithmeticOperationFadd();
+      case LlvmPackage.ARITHMETIC_OPERATION_SUB: return createArithmeticOperationSub();
+      case LlvmPackage.ARITHMETIC_OPERATION_FSUB: return createArithmeticOperationFsub();
+      case LlvmPackage.ARITHMETIC_OPERATION_MUL: return createArithmeticOperationMul();
+      case LlvmPackage.ARITHMETIC_OPERATION_FMUL: return createArithmeticOperationFmul();
+      case LlvmPackage.ARITHMETIC_OPERATION_UDIV: return createArithmeticOperationUdiv();
+      case LlvmPackage.ARITHMETIC_OPERATION_SDIV: return createArithmeticOperationSdiv();
+      case LlvmPackage.ARITHMETIC_OPERATION_FDIV: return createArithmeticOperationFdiv();
+      case LlvmPackage.ARITHMETIC_OPERATION_UREM: return createArithmeticOperationUrem();
+      case LlvmPackage.ARITHMETIC_OPERATION_SREM: return createArithmeticOperationSrem();
+      case LlvmPackage.ARITHMETIC_OPERATION_FREM: return createArithmeticOperationFrem();
       case LlvmPackage.LOGIC_OPERATION: return createLogicOperation();
       case LlvmPackage.CAST: return createCast();
       case LlvmPackage.NESTED_CAST: return createNestedCast();
@@ -103,6 +115,17 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
       case LlvmPackage.FENCE: return createFence();
       case LlvmPackage.CMP_XCHG: return createCmpXchg();
       case LlvmPackage.ATOMIC_RMW: return createAtomicRMW();
+      case LlvmPackage.ATOMIC_RMW_XCHG: return createAtomicRmwXchg();
+      case LlvmPackage.ATOMIC_RMW_ADD: return createAtomicRmwAdd();
+      case LlvmPackage.ATOMIC_RMW_SUB: return createAtomicRmwSub();
+      case LlvmPackage.ATOMIC_RMW_AND: return createAtomicRmwAnd();
+      case LlvmPackage.ATOMIC_RMW_NAND: return createAtomicRmwNand();
+      case LlvmPackage.ATOMIC_RMW_OR: return createAtomicRmwOr();
+      case LlvmPackage.ATOMIC_RMW_XOR: return createAtomicRmwXor();
+      case LlvmPackage.ATOMIC_RMW_MAX: return createAtomicRmwMax();
+      case LlvmPackage.ATOMIC_RMW_MIN: return createAtomicRmwMin();
+      case LlvmPackage.ATOMIC_RMW_UMAX: return createAtomicRmwUmax();
+      case LlvmPackage.ATOMIC_RMW_UMIN: return createAtomicRmwUmin();
       case LlvmPackage.LOAD: return createLoad();
       case LlvmPackage.STORE: return createStore();
       case LlvmPackage.CALL: return createCall();
@@ -119,6 +142,8 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
       case LlvmPackage.INSERT_ELEMENT: return createInsertElement();
       case LlvmPackage.SHUFFLE_VECTOR: return createShuffleVector();
       case LlvmPackage.COMPARE: return createCompare();
+      case LlvmPackage.COMPARE_INT: return createCompareInt();
+      case LlvmPackage.COMPARE_FLOAT: return createCompareFloat();
       case LlvmPackage.INDIRECT_BRANCH: return createIndirectBranch();
       case LlvmPackage.SWITCH: return createSwitch();
       case LlvmPackage.SWITCH_CASE: return createSwitchCase();
@@ -445,6 +470,138 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public ArithmeticOperationAdd createArithmeticOperationAdd()
+  {
+    ArithmeticOperationAddImpl arithmeticOperationAdd = new ArithmeticOperationAddImpl();
+    return arithmeticOperationAdd;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ArithmeticOperationFadd createArithmeticOperationFadd()
+  {
+    ArithmeticOperationFaddImpl arithmeticOperationFadd = new ArithmeticOperationFaddImpl();
+    return arithmeticOperationFadd;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ArithmeticOperationSub createArithmeticOperationSub()
+  {
+    ArithmeticOperationSubImpl arithmeticOperationSub = new ArithmeticOperationSubImpl();
+    return arithmeticOperationSub;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ArithmeticOperationFsub createArithmeticOperationFsub()
+  {
+    ArithmeticOperationFsubImpl arithmeticOperationFsub = new ArithmeticOperationFsubImpl();
+    return arithmeticOperationFsub;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ArithmeticOperationMul createArithmeticOperationMul()
+  {
+    ArithmeticOperationMulImpl arithmeticOperationMul = new ArithmeticOperationMulImpl();
+    return arithmeticOperationMul;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ArithmeticOperationFmul createArithmeticOperationFmul()
+  {
+    ArithmeticOperationFmulImpl arithmeticOperationFmul = new ArithmeticOperationFmulImpl();
+    return arithmeticOperationFmul;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ArithmeticOperationUdiv createArithmeticOperationUdiv()
+  {
+    ArithmeticOperationUdivImpl arithmeticOperationUdiv = new ArithmeticOperationUdivImpl();
+    return arithmeticOperationUdiv;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ArithmeticOperationSdiv createArithmeticOperationSdiv()
+  {
+    ArithmeticOperationSdivImpl arithmeticOperationSdiv = new ArithmeticOperationSdivImpl();
+    return arithmeticOperationSdiv;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ArithmeticOperationFdiv createArithmeticOperationFdiv()
+  {
+    ArithmeticOperationFdivImpl arithmeticOperationFdiv = new ArithmeticOperationFdivImpl();
+    return arithmeticOperationFdiv;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ArithmeticOperationUrem createArithmeticOperationUrem()
+  {
+    ArithmeticOperationUremImpl arithmeticOperationUrem = new ArithmeticOperationUremImpl();
+    return arithmeticOperationUrem;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ArithmeticOperationSrem createArithmeticOperationSrem()
+  {
+    ArithmeticOperationSremImpl arithmeticOperationSrem = new ArithmeticOperationSremImpl();
+    return arithmeticOperationSrem;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ArithmeticOperationFrem createArithmeticOperationFrem()
+  {
+    ArithmeticOperationFremImpl arithmeticOperationFrem = new ArithmeticOperationFremImpl();
+    return arithmeticOperationFrem;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public LogicOperation createLogicOperation()
   {
     LogicOperationImpl logicOperation = new LogicOperationImpl();
@@ -559,6 +716,127 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
   {
     AtomicRMWImpl atomicRMW = new AtomicRMWImpl();
     return atomicRMW;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AtomicRmwXchg createAtomicRmwXchg()
+  {
+    AtomicRmwXchgImpl atomicRmwXchg = new AtomicRmwXchgImpl();
+    return atomicRmwXchg;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AtomicRmwAdd createAtomicRmwAdd()
+  {
+    AtomicRmwAddImpl atomicRmwAdd = new AtomicRmwAddImpl();
+    return atomicRmwAdd;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AtomicRmwSub createAtomicRmwSub()
+  {
+    AtomicRmwSubImpl atomicRmwSub = new AtomicRmwSubImpl();
+    return atomicRmwSub;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AtomicRmwAnd createAtomicRmwAnd()
+  {
+    AtomicRmwAndImpl atomicRmwAnd = new AtomicRmwAndImpl();
+    return atomicRmwAnd;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AtomicRmwNand createAtomicRmwNand()
+  {
+    AtomicRmwNandImpl atomicRmwNand = new AtomicRmwNandImpl();
+    return atomicRmwNand;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AtomicRmwOr createAtomicRmwOr()
+  {
+    AtomicRmwOrImpl atomicRmwOr = new AtomicRmwOrImpl();
+    return atomicRmwOr;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AtomicRmwXor createAtomicRmwXor()
+  {
+    AtomicRmwXorImpl atomicRmwXor = new AtomicRmwXorImpl();
+    return atomicRmwXor;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AtomicRmwMax createAtomicRmwMax()
+  {
+    AtomicRmwMaxImpl atomicRmwMax = new AtomicRmwMaxImpl();
+    return atomicRmwMax;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AtomicRmwMin createAtomicRmwMin()
+  {
+    AtomicRmwMinImpl atomicRmwMin = new AtomicRmwMinImpl();
+    return atomicRmwMin;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AtomicRmwUmax createAtomicRmwUmax()
+  {
+    AtomicRmwUmaxImpl atomicRmwUmax = new AtomicRmwUmaxImpl();
+    return atomicRmwUmax;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AtomicRmwUmin createAtomicRmwUmin()
+  {
+    AtomicRmwUminImpl atomicRmwUmin = new AtomicRmwUminImpl();
+    return atomicRmwUmin;
   }
 
   /**
@@ -735,6 +1013,28 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
   {
     CompareImpl compare = new CompareImpl();
     return compare;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CompareInt createCompareInt()
+  {
+    CompareIntImpl compareInt = new CompareIntImpl();
+    return compareInt;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CompareFloat createCompareFloat()
+  {
+    CompareFloatImpl compareFloat = new CompareFloatImpl();
+    return compareFloat;
   }
 
   /**
