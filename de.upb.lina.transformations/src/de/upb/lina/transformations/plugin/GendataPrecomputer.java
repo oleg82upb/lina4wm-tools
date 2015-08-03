@@ -25,6 +25,7 @@ import de.upb.lina.cfg.gendata.TransitionLabel;
 import de.upb.llvm_parser.llvm.AbstractElement;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
+import de.upb.llvm_parser.llvm.Aggregate_Type;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.ArithmeticOperation;
 import de.upb.llvm_parser.llvm.AtomicRMW;
@@ -56,6 +57,7 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Load;
 import de.upb.llvm_parser.llvm.LogicOperation;
 import de.upb.llvm_parser.llvm.Phi;
+import de.upb.llvm_parser.llvm.Predefined;
 import de.upb.llvm_parser.llvm.PrimitiveValue;
 import de.upb.llvm_parser.llvm.Resume;
 import de.upb.llvm_parser.llvm.Return;
@@ -63,6 +65,7 @@ import de.upb.llvm_parser.llvm.Select;
 import de.upb.llvm_parser.llvm.ShuffleVector;
 import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.Switch;
+import de.upb.llvm_parser.llvm.TypeUse;
 import de.upb.llvm_parser.llvm.Unreachable;
 import de.upb.llvm_parser.llvm.Value;
 import de.upb.llvm_parser.llvm.VariableAttributeAccess;
@@ -595,63 +598,81 @@ public class GendataPrecomputer {
 
 	private void addInstructionVariablesToMapping(List<AddressMapping> allVariables, ControlFlowDiagram cfg,
 			Instruction i) {
+		AddressMapping m;
 		if(i instanceof ArithmeticOperation){
 			ArithmeticOperation op = (ArithmeticOperation)i;
 			addToMapping(allVariables, cfg, op.getResult());
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue1()));
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue2()));
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue1()));
+			setType(m,op.getOptype());
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue2()));
+			setType(m,op.getOptype());
 
 		}else if(i instanceof LogicOperation){
 			LogicOperation op = (LogicOperation)i;
 			addToMapping(allVariables, cfg, op.getResult());
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue1()));
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue2()));
-
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue1()));
+			setType(m,op.getOptype());
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue2()));
+			setType(m,op.getOptype());
+			
 		}else if(i instanceof Cast){
 			Cast op = (Cast)i;
 			addToMapping(allVariables, cfg, op.getResult());
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue()));
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue()));
+			setType(m, op.getFrom());
 
 		}else if(i instanceof GetElementPtr){
 			GetElementPtr op = (GetElementPtr)i;
 			addToMapping(allVariables, cfg, op.getResult());
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getAggerate().getValue()));
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getAggregate().getValue()));
+			setType(m,op.getAggregate().getType());
 
 		}else if(i instanceof Fence){
 			//nothing to do here
 		}else if(i instanceof CmpXchg){
 			CmpXchg op = (CmpXchg)i;
 			addToMapping(allVariables, cfg, op.getResult());
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getAddress().getValue()));
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getNewValue().getValue()));
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue().getValue()));
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getAddress().getValue()));
+			setType(m, op.getAddress().getType());
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getNewValue().getValue()));
+			setType(m, op.getNewValue().getType());
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue().getValue()));
+			setType(m, op.getValue().getType());
+			
 		}else if(i instanceof AtomicRMW){
 			AtomicRMW op = (AtomicRMW) i;
 			addToMapping(allVariables, cfg, op.getResult());
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getAddress().getValue()));
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getArgument().getValue()));
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getAddress().getValue()));
+			setType(m, op.getAddress().getType());
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getArgument().getValue()));
+			setType(m, op.getArgument().getType());
 
 		}else if(i instanceof Load){
 			Load op = (Load) i;
 			addToMapping(allVariables, cfg, op.getResult());
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getAddress().getValue()));
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getAddress().getValue()));
+			setType(m, op.getAddress().getType());
 
 		}else if(i instanceof Store){
 			Store op = (Store)i;
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getTargetAddress().getValue()));
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue().getValue()));
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getTargetAddress().getValue()));
+			setType(m, op.getTargetAddress().getType());
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue().getValue()));
+			setType(m, op.getValue().getType());
 
 		}else if(i instanceof Call){
 			Call op = (Call)i;
 			addToMapping(allVariables, cfg, extractAddressFromValue(op.getFunction().getValue()));
-			addToMapping(allVariables, cfg, op.getResult());
+			m = addToMapping(allVariables, cfg, op.getResult());
+			setType(m, op.getFunction().getType());
 
 		}else if(i instanceof Alloc){
 			Alloc op = (Alloc)i;
 			addToMapping(allVariables, cfg, op.getResult());
-			if(op.getNumOfElements()!=null)
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getNumOfElements().getValue()));
-
+			if(op.getNumOfElements()!=null){
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getNumOfElements().getValue()));
+			setType(m, op.getNumOfElements().getType());
+			}
 		}else if(i instanceof Phi){
 			Phi op = (Phi)i;
 			addToMapping(allVariables, cfg, op.getResult());
@@ -659,68 +680,89 @@ public class GendataPrecomputer {
 		}else if(i instanceof LandingPad){
 			LandingPad op = (LandingPad)i;
 			addToMapping(allVariables, cfg, op.getResult());
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getPersonalityvalue()));
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getPersonalityvalue()));
+			setType(m, op.getPersonalitytype());
 
 		}else if(i instanceof Select){
 			Select op = (Select)i;
 			addToMapping(allVariables, cfg, op.getResult());
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getCondition().getValue()));
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getElseValue().getValue()));
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getTrueValue().getValue()));
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getCondition().getValue()));
+			setType(m, op.getCondition().getType());
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getElseValue().getValue()));
+			setType(m, op.getElseValue().getType());
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getTrueValue().getValue()));
+			setType(m, op.getTrueValue().getType());
 
 		}else if(i instanceof VariableAttributeAccess){
 			VariableAttributeAccess op = (VariableAttributeAccess) i;
 			addToMapping(allVariables, cfg, op.getResult());
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getVaList().getValue()));
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getVaList().getValue()));
+			setType(m, op.getVaList().getType());
 
 		}else if(i instanceof ExtractValue){
 			ExtractValue op = (ExtractValue)i;
 			addToMapping(allVariables, cfg, op.getResult());
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getAggerate().getValue()));
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getAggerate().getValue()));
+			setType(m, op.getAggerate().getType());
 
 		}else if(i instanceof InsertValue){
 			InsertValue op = (InsertValue)i;
 			addToMapping(allVariables, cfg, op.getResult());
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getAggerate().getValue()));
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue().getValue()));
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getAggerate().getValue()));
+			setType(m, op.getAggerate().getType());
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue().getValue()));
+			setType(m, op.getValue().getType());
+			
 		}else if(i instanceof ExtractElement){
 			ExtractElement op = (ExtractElement)i;
 			addToMapping(allVariables, cfg, op.getResult());
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getVector().getValue()));
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getIndex().getValue()));
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getVector().getValue()));
+			setType(m, op.getVector().getType());
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getIndex().getValue()));
+			setType(m, op.getIndex().getType());
 
 		}else if(i instanceof InsertElement){
 			InsertElement op = (InsertElement)i;
 			addToMapping(allVariables, cfg, op.getResult());
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getVector().getValue()));
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getIndex().getValue()));
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue().getValue()));
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getVector().getValue()));
+			setType(m, op.getVector().getType());
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getIndex().getValue()));
+			setType(m, op.getIndex().getType());
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue().getValue()));
+			setType(m, op.getValue().getType());
 
 		}else if(i instanceof ShuffleVector){
 			ShuffleVector op = (ShuffleVector)i;
 			addToMapping(allVariables, cfg, op.getResult());
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue1().getValue()));
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue2().getValue()));
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getMask().getValue()));
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue1().getValue()));
+			setType(m, op.getValue1().getType());
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue2().getValue()));
+			setType(m, op.getValue2().getType());
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getMask().getValue()));
+			setType(m, op.getMask().getType());
 		}else if(i instanceof Compare){
 			Compare op = (Compare)i;
 			addToMapping(allVariables, cfg, op.getResult());
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getOperand1()));
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getOperand2()));
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getOperand1()));
+			setType(m, op.getOpType());
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getOperand2()));
+			setType(m, op.getOpType());
 		}else if(i instanceof IndirectBranch){
 			//nothing to do here
 		}else if(i instanceof Switch){
 			//nothing to do here
 		}else if(i instanceof Invoke){
 			Invoke op = (Invoke)i;
-			addToMapping(allVariables, cfg, op.getName());
+			m = addToMapping(allVariables, cfg, op.getName());
+			setType(m, op.getReturnType());
 		}else if(i instanceof Resume){
 			//nothing to do here
 		}else if(i instanceof Unreachable){
 			//nothing to do here
 		}else if(i instanceof Return){
 			Return op = (Return) i;
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue().getValue()));
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue().getValue()));
+			setType(m, op.getValue().getType());
 
 		}else if(i instanceof Branch){
 			Branch op = (Branch)i;
@@ -765,16 +807,53 @@ public class GendataPrecomputer {
 		return correspondingMapping;
 	}
 	
-	private void setType(AddressMapping addressMapping, Address address){
-		
-		if(address.eContainer()!= null && address.eContainer() instanceof FunctionParameter && ((FunctionParameter)address.eContainer()).getType().getPointer()!=null){
-			addressMapping.setType("ref");
+	private void setType(AddressMapping addressMapping, TypeUse type){
+		if(addressMapping==null)
+			return;
+		String t = "";
+		if(type.getPointer()!=null ){
+			t = "ref";
+		}else if(type instanceof Predefined && ((Predefined)type).getType().contains("*")){
+			t = "ref";
 		}else{
-			if(basis == Constants.INT)
-				addressMapping.setType("int");
-			else
-				addressMapping.setType("nat");
+			if(basis == Constants.INT){
+				t = "int";
+			}else{
+				t = "nat";
+			}
 		}
+		if(addressMapping.getType()== null || !addressMapping.getType().equals("ref"))
+			addressMapping.setType(t);
+	}
+	
+	private void setType(AddressMapping addressMapping, EObject type){
+		if(addressMapping==null)
+			return;
+		if(type instanceof TypeUse){
+			if(addressMapping.getType()== null || !addressMapping.getType().equals("ref"))
+				setType(addressMapping, (TypeUse)type);
+		}else if(type instanceof Aggregate_Type){
+			
+			//TODO
+		}
+	}
+		
+	private void setType(AddressMapping addressMapping, Address address){
+		if(addressMapping==null)
+			return;
+		
+		String t = "";
+		if(address.eContainer()!= null && address.eContainer() instanceof FunctionParameter && ((FunctionParameter)address.eContainer()).getType().getPointer()!=null){
+			t = "ref";
+		}else{
+			if(basis == Constants.INT){
+				t = "int";
+			}else{
+				t = "nat";
+			}
+		}
+		if(addressMapping.getType()== null || !addressMapping.getType().equals("ref"))
+			addressMapping.setType(t);
 	}
 
 	/**
