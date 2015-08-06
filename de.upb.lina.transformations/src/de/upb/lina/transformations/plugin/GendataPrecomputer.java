@@ -119,9 +119,7 @@ public class GendataPrecomputer {
 			helperModel.getCfgs().addAll(cfgs);
 
 			//local vars
-			EMap<String, EList<AddressMapping>> filteredAddresses = helperModel.getFilteredAddresses();
-			List<AddressMapping> allAddressMappings = helperModel.getAddressMappings();
-			computeLocalVariables(allAddressMappings, filteredAddresses, program);
+			computeLocalVariables(program);
 
 			//labels
 			computeLabelPrefixesPerFunction();
@@ -129,16 +127,16 @@ public class GendataPrecomputer {
 			computeTransitionLabels();
 
 			//conditions
-			computeTransitionConditionMapping(helperModel.getConstraints());
+			computeTransitionConditionMapping();
 
 			//TransformationSpecificKeys
-			computeTransformationSpecificKeys(helperModel);
+			computeTransformationSpecificKeys();
 			
 			//filteredAddresses
-			computeFiteredAddresses(helperModel);
+			computeFiteredAddresses();
 
 			//phi mappings
-			computePhiMapping(helperModel.getPhiMappings());
+			computePhiMapping();
 			
 			//KIV transformation basis
 			addBasis();
@@ -164,7 +162,7 @@ public class GendataPrecomputer {
 			helperModel.getTransformationSpecificKeys().add(s);
 	}
 
-	private void computePhiMapping(List<PhiMapping> phiMappings){
+	private void computePhiMapping(){
 		for(ControlFlowDiagram cfg: cfgs){
 			HashMap<String, ArrayList<Phi>> blockLabelToPhiInstructions = new HashMap<String, ArrayList<Phi>>();
 			try{
@@ -186,13 +184,19 @@ public class GendataPrecomputer {
 				//nothing to do here
 			}
 
-			for(Transition t: cfg.getTransitions()){
-				//block change
-				if(!t.getSource().getBlockLabel().equals(t.getTarget().getBlockLabel())){
-					for(Transition inc: t.getSource().getIncoming()){
-						if(!blockLabelToPhiInstructions.get(t.getTarget().getBlockLabel()).isEmpty()){
-							PhiMapping mapping = createPhiMapping(inc, blockLabelToPhiInstructions.get(t.getTarget().getBlockLabel()), "%" + inc.getSource().getBlockLabel());
-							phiMappings.add(mapping);
+			for (Transition t : cfg.getTransitions())
+			{
+				// block change
+				if (!t.getSource().getBlockLabel().equals(t.getTarget().getBlockLabel()))
+				{
+					for (Transition inc : t.getSource().getIncoming())
+					{
+						if (!blockLabelToPhiInstructions.get(t.getTarget().getBlockLabel()).isEmpty())
+						{
+							PhiMapping mapping = createPhiMapping(inc,
+									blockLabelToPhiInstructions.get(t.getTarget().getBlockLabel()), "%"
+											+ inc.getSource().getBlockLabel());
+							helperModel.getPhiMappings().add(mapping);
 						}
 					}
 				}
@@ -201,25 +205,36 @@ public class GendataPrecomputer {
 		}
 	}
 
-	private PhiMapping createPhiMapping(Transition transition, List<Phi> phis, String blockLabel){
+	private PhiMapping createPhiMapping(Transition transition, List<Phi> phis, String blockLabel)
+	{
 		PhiMapping mapping = GendataFactory.eINSTANCE.createPhiMapping();
 		mapping.setTransition(transition);
 		mapping.getPhi().addAll(phis);
 		mapping.setBlockLabelToUse(blockLabel);
 		return mapping;
 	}
-	private void computeTransformationSpecificKeys(GeneratorData genData){
-		for(ControlFlowDiagram cfg: cfgs){
-			if(cfg.getStart() != null && !cfg.getStart().getOutgoing().isEmpty()){
-				for(Transition t: cfg.getTransitions()){
-					if(t.getInstruction() instanceof CmpXchg){
-						if(!genData.getTransformationSpecificKeys().contains(Constants.NEEDSCAS)){
-							genData.getTransformationSpecificKeys().add(Constants.NEEDSCAS);
+
+	
+	private void computeTransformationSpecificKeys()
+	{
+		for (ControlFlowDiagram cfg : cfgs)
+		{
+			if (cfg.getStart() != null && !cfg.getStart().getOutgoing().isEmpty())
+			{
+				for (Transition t : cfg.getTransitions())
+				{
+					if (t.getInstruction() instanceof CmpXchg)
+					{
+						if (!helperModel.getTransformationSpecificKeys().contains(Constants.NEEDSCAS))
+						{
+							helperModel.getTransformationSpecificKeys().add(Constants.NEEDSCAS);
 						}
 					}
-					if(t.getInstruction() instanceof GetElementPtr){
-						if(!genData.getTransformationSpecificKeys().contains(Constants.NEEDSGETELEMENTPTR)){
-							genData.getTransformationSpecificKeys().add(Constants.NEEDSGETELEMENTPTR);
+					if (t.getInstruction() instanceof GetElementPtr)
+					{
+						if (!helperModel.getTransformationSpecificKeys().contains(Constants.NEEDSGETELEMENTPTR))
+						{
+							helperModel.getTransformationSpecificKeys().add(Constants.NEEDSGETELEMENTPTR);
 						}
 					}
 				}
@@ -227,7 +242,7 @@ public class GendataPrecomputer {
 		}
 	}
 
-	private void computeFiteredAddresses(GeneratorData genData){
+	private void computeFiteredAddresses(){
 		
 		for(ControlFlowDiagram cfg: cfgs){
 			if(cfg.getStart() != null && !cfg.getStart().getOutgoing().isEmpty()){
@@ -247,18 +262,15 @@ public class GendataPrecomputer {
 							AddressMapping returnMapping = createAddressMapping(returnAddress, "returnvalue");
 							returnMapping.setGeneratorData(helperModel);
 							returnMapping.setType("ref");
-							genData.getFilteredAddresses().get(Constants.FUNC_PARAMS+cfg.getName()).add(returnMapping);
+							helperModel.getFilteredAddresses(Constants.FUNC_PARAMS+cfg.getName()).add(returnMapping);
 						}
 					}
 				}
 				
 				//save used vars per function in filteredAddresses
-				if(!genData.getFilteredAddresses().contains(Constants.FUNC_ALL+cfg.getName())){
-					genData.getFilteredAddresses().put(Constants.FUNC_ALL+cfg.getName(), new BasicEList<AddressMapping>());
-				}
-				List<AddressMapping> allVars = genData.getFilteredAddresses().get(Constants.FUNC_ALL+cfg.getName());
+				List<AddressMapping> allVars = helperModel.getFilteredAddresses(Constants.FUNC_ALL+cfg.getName());
 				for(String a: usedVarsInFunctions.get(fd)){
-					AddressMapping mapping = getMappingForAddress(a, genData.getAddressMappings());
+					AddressMapping mapping = getMappingForAddress(a, helperModel.getAddressMappings());
 					if(mapping != null){
 						allVars.add(mapping);
 					}
@@ -273,12 +285,9 @@ public class GendataPrecomputer {
 				}
 				
 				//save vars to declare per function in filteredAddresses
-				if(!genData.getFilteredAddresses().contains(Constants.FUNC_DECLARE+cfg.getName())){
-					genData.getFilteredAddresses().put(Constants.FUNC_DECLARE+cfg.getName(), new BasicEList<AddressMapping>());
-				}
-				List<AddressMapping> declareVars = genData.getFilteredAddresses().get(Constants.FUNC_DECLARE+cfg.getName());
+				List<AddressMapping> declareVars = helperModel.getFilteredAddresses(Constants.FUNC_DECLARE+cfg.getName());
 				for(String a: usedVarsInFunctions.get(fd)){
-					AddressMapping mapping = getMappingForAddress(a, genData.getAddressMappings());
+					AddressMapping mapping = getMappingForAddress(a, helperModel.getAddressMappings());
 					if(mapping != null){
 						declareVars.add(mapping);
 					}
@@ -383,52 +392,67 @@ public class GendataPrecomputer {
 		}
 	}
 
-	private void computeTransitionConditionMapping(List<ConstraintMapping> constraints){
-		for(ControlFlowDiagram cfg: cfgs){
+	private void computeTransitionConditionMapping()
+	{
+		EList<ConstraintMapping> constraints = helperModel.getConstraints();
+		for (ControlFlowDiagram cfg : cfgs)
+		{
 			ArrayList<ControlFlowLocation> workedOn = new ArrayList<ControlFlowLocation>();
 			ArrayList<ControlFlowLocation> toWorkOn = new ArrayList<ControlFlowLocation>();
 
 			toWorkOn.add(cfg.getStart());
 
-			while(!toWorkOn.isEmpty()){
+			while (!toWorkOn.isEmpty())
+			{
 				ControlFlowLocation currentLoc = toWorkOn.remove(0);
 				workedOn.add(currentLoc);
 
 				List<Transition> outgoing = currentLoc.getOutgoing();
 
-				if(outgoing.size() > 1){
+				if (outgoing.size() > 1)
+				{
 					GuardedTransition ifTransition = null;
-					for(Transition t: outgoing){
-						if(t instanceof GuardedTransition){
-							//deal with the if case
-							GuardedTransition gt = (GuardedTransition)t;
-							if(ifTransition == null && !gt.getCondition().contains("else")){
+					for (Transition t : outgoing)
+					{
+						if (t instanceof GuardedTransition)
+						{
+							// deal with the if case
+							GuardedTransition gt = (GuardedTransition) t;
+							if (ifTransition == null && !gt.getCondition().contains("else"))
+							{
 								ifTransition = gt;
 								constraints.add(computeConstraintMapping(gt, gt.getCondition()));
 							}
-						}else{
-							//flushes and normal transitions that need a condition
+						} else
+						{
+							// flushes and normal transitions that need a
+							// condition
 							constraints.add(computeConstraintMapping(t, "true"));
 						}
 
 					}
 
-					//get the else case
-					for(Transition t: outgoing){
-						if(t instanceof GuardedTransition && !t.equals(ifTransition) && ifTransition != null){
-							GuardedTransition gt = (GuardedTransition)t;
+					// get the else case
+					for (Transition t : outgoing)
+					{
+						if (t instanceof GuardedTransition && !t.equals(ifTransition) && ifTransition != null)
+						{
+							GuardedTransition gt = (GuardedTransition) t;
 							constraints.add(computeConstraintMapping(gt, "!" + ifTransition.getCondition()));
 						}
-						//Add rest to work on
-						if(!workedOn.contains(t.getTarget()) && !toWorkOn.contains(t.getTarget())){
+						// Add rest to work on
+						if (!workedOn.contains(t.getTarget()) && !toWorkOn.contains(t.getTarget()))
+						{
 							toWorkOn.add(t.getTarget());
 						}
 					}
 				}
 
-				//Add rest to work on
-				for(Transition t: outgoing){	
-					if(!workedOn.contains(t.getTarget()) && !toWorkOn.contains(t.getTarget())){
+				// Add rest to work on
+				for (Transition t : outgoing)
+				{
+					if (!workedOn.contains(t.getTarget()) && !toWorkOn.contains(t.getTarget()))
+					{
 						toWorkOn.add(t.getTarget());
 					}
 				}
@@ -522,8 +546,10 @@ public class GendataPrecomputer {
 	 * @param localVars
 	 * @param program
 	 */
-	private void computeLocalVariables(List<AddressMapping> allVariables, EMap<String,EList<AddressMapping>> filteredAddresses, LLVM program) throws IllegalArgumentException{
+	private void computeLocalVariables(LLVM program) throws IllegalArgumentException{
 
+		List<AddressMapping> allVariables = helperModel.getAddressMappings();
+		
 		//map local variables of cfgs
 		for(ControlFlowDiagram cfg : cfgs){
 			for(Transition t : cfg.getTransitions()){
@@ -575,7 +601,7 @@ public class GendataPrecomputer {
 						
 						
 					}
-					filteredAddresses.put(Constants.FUNC_PARAMS+matchingCfg.getName(), paramsMapping);
+					helperModel.getFilteredAddresses(Constants.FUNC_PARAMS+matchingCfg.getName()).addAll(paramsMapping);
 				}
 
 				
@@ -593,7 +619,7 @@ public class GendataPrecomputer {
 			}
 			
 		}
-		filteredAddresses.put(Constants.GLOBAL_VARS, globals);
+		helperModel.getFilteredAddresses(Constants.GLOBAL_VARS).addAll(globals);
 	}
 
 	private void addInstructionVariablesToMapping(List<AddressMapping> allVariables, ControlFlowDiagram cfg,

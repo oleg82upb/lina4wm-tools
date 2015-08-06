@@ -8,23 +8,51 @@
   <foreignModel>gendata.ecore</foreignModel>
   <genPackages prefix="Gendata" basePackage="de.upb.lina.cfg" disposableProviderFactory="true"
       ecorePackage="gendata.ecore#/">
-    <genClasses ecoreClass="gendata.ecore#//LocalVariables">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//LocalVariables/variables"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//LocalVariables/cfg"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//LocalVariables/function"/>
-    </genClasses>
     <genClasses ecoreClass="gendata.ecore#//GeneratorData">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/localVariables"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/program"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/labels"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/cfgs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/constraints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/locationLabels"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/transitionLabels"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gendata.ecore#//GeneratorData/transformationSpecificKeys"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/phiMappings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/filteredAddresses"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/addressMappings"/>
+      <genOperations ecoreOperation="gendata.ecore#//GeneratorData/getFilteredAddresses">
+        <genParameters ecoreParameter="gendata.ecore#//GeneratorData/getFilteredAddresses/key"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="gendata.ecore#//AddressMapping">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gendata.ecore#//AddressMapping/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//AddressMapping/adresses"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gendata.ecore#//AddressMapping/oldNames"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//AddressMapping/generatorData"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gendata.ecore#//AddressMapping/type"/>
     </genClasses>
-    <genClasses ecoreClass="gendata.ecore#//Label">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gendata.ecore#//Label/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//Label/controlFlowLocation"/>
+    <genClasses ecoreClass="gendata.ecore#//ConstraintMapping">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//ConstraintMapping/transition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gendata.ecore#//ConstraintMapping/condition"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gendata.ecore#//ConstraintMapping/generatorData"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="gendata.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gendata.ecore#//NamedElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="gendata.ecore#//LocationLabel">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//LocationLabel/controlFlowLocation"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gendata.ecore#//LocationLabel/generatorData"/>
+    </genClasses>
+    <genClasses ecoreClass="gendata.ecore#//TransitionLabel">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//TransitionLabel/transition"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gendata.ecore#//TransitionLabel/generatorData"/>
+    </genClasses>
+    <genClasses ecoreClass="gendata.ecore#//PhiMapping">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//PhiMapping/transition"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//PhiMapping/phi"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gendata.ecore#//PhiMapping/blockLabelToUse"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gendata.ecore#//PhiMapping/generatorData"/>
+    </genClasses>
+    <genClasses ecoreClass="gendata.ecore#//FilterToAddressMapping">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gendata.ecore#//FilterToAddressMapping/key"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//FilterToAddressMapping/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

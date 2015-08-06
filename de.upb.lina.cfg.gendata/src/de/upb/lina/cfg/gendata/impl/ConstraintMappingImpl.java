@@ -89,10 +89,12 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	public Transition getTransition() {
-		if (transition != null && transition.eIsProxy()) {
+		if (transition != null && transition.eIsProxy())
+		{
 			InternalEObject oldTransition = (InternalEObject)transition;
 			transition = (Transition)eResolveProxy(oldTransition);
-			if (transition != oldTransition) {
+			if (transition != oldTransition)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GendataPackage.CONSTRAINT_MAPPING__TRANSITION, oldTransition, transition));
 			}
@@ -168,7 +170,8 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	public void setGeneratorData(GeneratorData newGeneratorData) {
-		if (newGeneratorData != eInternalContainer() || (eContainerFeatureID() != GendataPackage.CONSTRAINT_MAPPING__GENERATOR_DATA && newGeneratorData != null)) {
+		if (newGeneratorData != eInternalContainer() || (eContainerFeatureID() != GendataPackage.CONSTRAINT_MAPPING__GENERATOR_DATA && newGeneratorData != null))
+		{
 			if (EcoreUtil.isAncestor(this, newGeneratorData))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -190,7 +193,8 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.CONSTRAINT_MAPPING__GENERATOR_DATA:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -206,7 +210,8 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.CONSTRAINT_MAPPING__GENERATOR_DATA:
 				return basicSetGeneratorData(null, msgs);
 		}
@@ -220,7 +225,8 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
+		switch (eContainerFeatureID())
+		{
 			case GendataPackage.CONSTRAINT_MAPPING__GENERATOR_DATA:
 				return eInternalContainer().eInverseRemove(this, GendataPackage.GENERATOR_DATA__CONSTRAINTS, GeneratorData.class, msgs);
 		}
@@ -234,7 +240,8 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.CONSTRAINT_MAPPING__TRANSITION:
 				if (resolve) return getTransition();
 				return basicGetTransition();
@@ -253,7 +260,8 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.CONSTRAINT_MAPPING__TRANSITION:
 				setTransition((Transition)newValue);
 				return;
@@ -274,7 +282,8 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.CONSTRAINT_MAPPING__TRANSITION:
 				setTransition((Transition)null);
 				return;
@@ -295,7 +304,8 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.CONSTRAINT_MAPPING__TRANSITION:
 				return transition != null;
 			case GendataPackage.CONSTRAINT_MAPPING__CONDITION:

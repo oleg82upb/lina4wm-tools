@@ -4,6 +4,7 @@ package de.upb.lina.cfg.gendata;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -158,13 +159,22 @@ public interface GendataPackage extends EPackage
 	int GENERATOR_DATA_FEATURE_COUNT = 9;
 
 	/**
+	 * The operation id for the '<em>Get Filtered Addresses</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_DATA___GET_FILTERED_ADDRESSES__STRING = 0;
+
+	/**
 	 * The number of operations of the '<em>Generator Data</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA_OPERATION_COUNT = 0;
+	int GENERATOR_DATA_OPERATION_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.cfg.gendata.impl.NamedElementImpl <em>Named Element</em>}' class.
@@ -665,6 +675,16 @@ public interface GendataPackage extends EPackage
 	EReference getGeneratorData_AddressMappings();
 
 	/**
+	 * Returns the meta object for the '{@link de.upb.lina.cfg.gendata.GeneratorData#getFilteredAddresses(java.lang.String) <em>Get Filtered Addresses</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Filtered Addresses</em>' operation.
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getFilteredAddresses(java.lang.String)
+	 * @generated
+	 */
+	EOperation getGeneratorData__GetFilteredAddresses__String();
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.AddressMapping <em>Address Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1039,6 +1059,14 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EReference GENERATOR_DATA__ADDRESS_MAPPINGS = eINSTANCE.getGeneratorData_AddressMappings();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Filtered Addresses</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation GENERATOR_DATA___GET_FILTERED_ADDRESSES__STRING = eINSTANCE.getGeneratorData__GetFilteredAddresses__String();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.AddressMappingImpl <em>Address Mapping</em>}' class.

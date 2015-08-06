@@ -93,7 +93,8 @@ public abstract class NamedElementImpl extends MinimalEObjectImpl.Container impl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.NAMED_ELEMENT__NAME:
 				return getName();
 		}
@@ -107,7 +108,8 @@ public abstract class NamedElementImpl extends MinimalEObjectImpl.Container impl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.NAMED_ELEMENT__NAME:
 				setName((String)newValue);
 				return;
@@ -122,7 +124,8 @@ public abstract class NamedElementImpl extends MinimalEObjectImpl.Container impl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.NAMED_ELEMENT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -137,7 +140,8 @@ public abstract class NamedElementImpl extends MinimalEObjectImpl.Container impl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.NAMED_ELEMENT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}

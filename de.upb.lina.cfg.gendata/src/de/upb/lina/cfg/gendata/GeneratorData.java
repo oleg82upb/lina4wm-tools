@@ -201,4 +201,12 @@ public interface GeneratorData extends EObject
 	 */
 	EList<AddressMapping> getAddressMappings();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	EList<AddressMapping> getFilteredAddresses(String key);
+
 } // GeneratorData

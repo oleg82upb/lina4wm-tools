@@ -42,7 +42,8 @@ public class GendataSwitch<T> extends Switch<T>
 	 */
 	public GendataSwitch()
 	{
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = GendataPackage.eINSTANCE;
 		}
 	}
@@ -71,53 +72,62 @@ public class GendataSwitch<T> extends Switch<T>
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject)
 	{
-		switch (classifierID) {
-			case GendataPackage.GENERATOR_DATA: {
+		switch (classifierID)
+		{
+			case GendataPackage.GENERATOR_DATA:
+			{
 				GeneratorData generatorData = (GeneratorData)theEObject;
 				T result = caseGeneratorData(generatorData);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GendataPackage.ADDRESS_MAPPING: {
+			case GendataPackage.ADDRESS_MAPPING:
+			{
 				AddressMapping addressMapping = (AddressMapping)theEObject;
 				T result = caseAddressMapping(addressMapping);
 				if (result == null) result = caseNamedElement(addressMapping);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GendataPackage.CONSTRAINT_MAPPING: {
+			case GendataPackage.CONSTRAINT_MAPPING:
+			{
 				ConstraintMapping constraintMapping = (ConstraintMapping)theEObject;
 				T result = caseConstraintMapping(constraintMapping);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GendataPackage.NAMED_ELEMENT: {
+			case GendataPackage.NAMED_ELEMENT:
+			{
 				NamedElement namedElement = (NamedElement)theEObject;
 				T result = caseNamedElement(namedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GendataPackage.LOCATION_LABEL: {
+			case GendataPackage.LOCATION_LABEL:
+			{
 				LocationLabel locationLabel = (LocationLabel)theEObject;
 				T result = caseLocationLabel(locationLabel);
 				if (result == null) result = caseNamedElement(locationLabel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GendataPackage.TRANSITION_LABEL: {
+			case GendataPackage.TRANSITION_LABEL:
+			{
 				TransitionLabel transitionLabel = (TransitionLabel)theEObject;
 				T result = caseTransitionLabel(transitionLabel);
 				if (result == null) result = caseNamedElement(transitionLabel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GendataPackage.PHI_MAPPING: {
+			case GendataPackage.PHI_MAPPING:
+			{
 				PhiMapping phiMapping = (PhiMapping)theEObject;
 				T result = casePhiMapping(phiMapping);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GendataPackage.FILTER_TO_ADDRESS_MAPPING: {
+			case GendataPackage.FILTER_TO_ADDRESS_MAPPING:
+			{
 				@SuppressWarnings("unchecked") Map.Entry<String, EList<AddressMapping>> filterToAddressMapping = (Map.Entry<String, EList<AddressMapping>>)theEObject;
 				T result = caseFilterToAddressMapping(filterToAddressMapping);
 				if (result == null) result = defaultCase(theEObject);

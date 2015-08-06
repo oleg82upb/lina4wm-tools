@@ -5,15 +5,21 @@ package de.upb.lina.cfg.gendata.impl;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.gendata.AddressMapping;
 import de.upb.lina.cfg.gendata.ConstraintMapping;
+import de.upb.lina.cfg.gendata.GendataFactory;
 import de.upb.lina.cfg.gendata.GendataPackage;
 import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.lina.cfg.gendata.LocationLabel;
 import de.upb.lina.cfg.gendata.PhiMapping;
 import de.upb.lina.cfg.gendata.TransitionLabel;
 import de.upb.llvm_parser.llvm.LLVM;
+
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
@@ -169,10 +175,12 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 */
 	public LLVM getProgram()
 	{
-		if (program != null && program.eIsProxy()) {
+		if (program != null && program.eIsProxy())
+		{
 			InternalEObject oldProgram = (InternalEObject)program;
 			program = (LLVM)eResolveProxy(oldProgram);
-			if (program != oldProgram) {
+			if (program != oldProgram)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GendataPackage.GENERATOR_DATA__PROGRAM, oldProgram, program));
 			}
@@ -209,7 +217,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @generated
 	 */
 	public EList<ControlFlowDiagram> getCfgs() {
-		if (cfgs == null) {
+		if (cfgs == null)
+		{
 			cfgs = new EObjectResolvingEList<ControlFlowDiagram>(ControlFlowDiagram.class, this, GendataPackage.GENERATOR_DATA__CFGS);
 		}
 		return cfgs;
@@ -221,7 +230,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @generated
 	 */
 	public EList<ConstraintMapping> getConstraints() {
-		if (constraints == null) {
+		if (constraints == null)
+		{
 			constraints = new EObjectContainmentWithInverseEList<ConstraintMapping>(ConstraintMapping.class, this, GendataPackage.GENERATOR_DATA__CONSTRAINTS, GendataPackage.CONSTRAINT_MAPPING__GENERATOR_DATA);
 		}
 		return constraints;
@@ -233,7 +243,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @generated
 	 */
 	public EList<LocationLabel> getLocationLabels() {
-		if (locationLabels == null) {
+		if (locationLabels == null)
+		{
 			locationLabels = new EObjectContainmentWithInverseEList<LocationLabel>(LocationLabel.class, this, GendataPackage.GENERATOR_DATA__LOCATION_LABELS, GendataPackage.LOCATION_LABEL__GENERATOR_DATA);
 		}
 		return locationLabels;
@@ -245,7 +256,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @generated
 	 */
 	public EList<TransitionLabel> getTransitionLabels() {
-		if (transitionLabels == null) {
+		if (transitionLabels == null)
+		{
 			transitionLabels = new EObjectContainmentWithInverseEList<TransitionLabel>(TransitionLabel.class, this, GendataPackage.GENERATOR_DATA__TRANSITION_LABELS, GendataPackage.TRANSITION_LABEL__GENERATOR_DATA);
 		}
 		return transitionLabels;
@@ -257,7 +269,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @generated
 	 */
 	public EList<String> getTransformationSpecificKeys() {
-		if (transformationSpecificKeys == null) {
+		if (transformationSpecificKeys == null)
+		{
 			transformationSpecificKeys = new EDataTypeUniqueEList<String>(String.class, this, GendataPackage.GENERATOR_DATA__TRANSFORMATION_SPECIFIC_KEYS);
 		}
 		return transformationSpecificKeys;
@@ -269,7 +282,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @generated
 	 */
 	public EList<PhiMapping> getPhiMappings() {
-		if (phiMappings == null) {
+		if (phiMappings == null)
+		{
 			phiMappings = new EObjectContainmentWithInverseEList<PhiMapping>(PhiMapping.class, this, GendataPackage.GENERATOR_DATA__PHI_MAPPINGS, GendataPackage.PHI_MAPPING__GENERATOR_DATA);
 		}
 		return phiMappings;
@@ -281,7 +295,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @generated
 	 */
 	public EMap<String, EList<AddressMapping>> getFilteredAddresses() {
-		if (filteredAddresses == null) {
+		if (filteredAddresses == null)
+		{
 			filteredAddresses = new EcoreEMap<String,EList<AddressMapping>>(GendataPackage.Literals.FILTER_TO_ADDRESS_MAPPING, FilterToAddressMappingImpl.class, this, GendataPackage.GENERATOR_DATA__FILTERED_ADDRESSES);
 		}
 		return filteredAddresses;
@@ -293,10 +308,32 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @generated
 	 */
 	public EList<AddressMapping> getAddressMappings() {
-		if (addressMappings == null) {
+		if (addressMappings == null)
+		{
 			addressMappings = new EObjectWithInverseResolvingEList<AddressMapping>(AddressMapping.class, this, GendataPackage.GENERATOR_DATA__ADDRESS_MAPPINGS, GendataPackage.ADDRESS_MAPPING__GENERATOR_DATA);
 		}
 		return addressMappings;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@SuppressWarnings("unchecked")
+	public EList<AddressMapping> getFilteredAddresses(String key)
+	{
+		if (key == null)
+		{
+			return (EList<AddressMapping>) ECollections.EMPTY_ELIST;
+		}
+		
+		if (getFilteredAddresses().get(key) == null)
+		{
+			getFilteredAddresses().put(key, new BasicEList<AddressMapping>());
+		}
+		
+		return getFilteredAddresses().get(key);
 	}
 
 	/**
@@ -307,7 +344,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.GENERATOR_DATA__CONSTRAINTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConstraints()).basicAdd(otherEnd, msgs);
 			case GendataPackage.GENERATOR_DATA__LOCATION_LABELS:
@@ -330,7 +368,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.GENERATOR_DATA__CONSTRAINTS:
 				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
 			case GendataPackage.GENERATOR_DATA__LOCATION_LABELS:
@@ -355,7 +394,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.GENERATOR_DATA__PROGRAM:
 				if (resolve) return getProgram();
 				return basicGetProgram();
@@ -389,7 +429,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.GENERATOR_DATA__PROGRAM:
 				setProgram((LLVM)newValue);
 				return;
@@ -436,7 +477,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.GENERATOR_DATA__PROGRAM:
 				setProgram((LLVM)null);
 				return;
@@ -476,7 +518,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.GENERATOR_DATA__PROGRAM:
 				return program != null;
 			case GendataPackage.GENERATOR_DATA__CFGS:
@@ -497,6 +540,22 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return addressMappings != null && !addressMappings.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException
+	{
+		switch (operationID)
+		{
+			case GendataPackage.GENERATOR_DATA___GET_FILTERED_ADDRESSES__STRING:
+				return getFilteredAddresses((String)arguments.get(0));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

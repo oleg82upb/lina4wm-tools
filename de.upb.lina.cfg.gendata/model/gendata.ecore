@@ -2,6 +2,9 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="gendata" nsURI="http://www.upb.de/lina/cfg/gendata" nsPrefix="gendata">
   <eClassifiers xsi:type="ecore:EClass" name="GeneratorData">
+    <eOperations name="getFilteredAddresses" upperBound="-1" eType="#//AddressMapping">
+      <eParameters name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="program" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//LLVM"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="cfgs" lowerBound="1" upperBound="-1"
         eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//ControlFlowDiagram"/>
