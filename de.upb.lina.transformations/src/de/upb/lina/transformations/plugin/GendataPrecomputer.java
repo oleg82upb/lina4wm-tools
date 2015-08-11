@@ -56,7 +56,9 @@ import de.upb.llvm_parser.llvm.LlvmFactory;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Load;
 import de.upb.llvm_parser.llvm.LogicOperation;
+import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.Phi;
+import de.upb.llvm_parser.llvm.PhiCase;
 import de.upb.llvm_parser.llvm.Predefined;
 import de.upb.llvm_parser.llvm.PrimitiveValue;
 import de.upb.llvm_parser.llvm.Resume;
@@ -133,7 +135,7 @@ public class GendataPrecomputer {
 			computeTransformationSpecificKeys();
 			
 			//filteredAddresses
-			computeFiteredAddresses();
+			computeFilteredAddresses();
 
 			//phi mappings
 			computePhiMapping();
@@ -242,7 +244,7 @@ public class GendataPrecomputer {
 		}
 	}
 
-	private void computeFiteredAddresses(){
+	private void computeFilteredAddresses(){
 		
 		for(ControlFlowDiagram cfg: cfgs){
 			if(cfg.getStart() != null && !cfg.getStart().getOutgoing().isEmpty()){
@@ -313,8 +315,8 @@ public class GendataPrecomputer {
 		for(ControlFlowDiagram cfg : cfgs){
 			
 			String name = cfg.getName();
-			EList<AddressMapping> funcParamMapping = helperModel.getFilteredAddresses().get(Constants.FUNC_PARAMS+name);
-			EList<AddressMapping> funcLocalVarsMapping = helperModel.getFilteredAddresses().get(Constants.FUNC_DECLARE+name);
+			EList<AddressMapping> funcParamMapping = helperModel.getFilteredAddresses(Constants.FUNC_PARAMS+name);
+			EList<AddressMapping> funcLocalVarsMapping = helperModel.getFilteredAddresses(Constants.FUNC_DECLARE+name);
 			
 			for(AddressMapping mapping : funcParamMapping){
 				if(!allParamMappings.contains(mapping)){
@@ -594,6 +596,7 @@ public class GendataPrecomputer {
 					if(params!= null){
 						for(FunctionParameter param: params.getParams()){
 							AddressMapping paramMapping = addToMapping(allVariables, matchingCfg, param.getValue());
+							setType(paramMapping, param.getType());
 							
 							//Add to params mapping
 							paramsMapping.add(paramMapping);
@@ -609,10 +612,12 @@ public class GendataPrecomputer {
 			}else if(ele instanceof GlobalDefinition){
 				GlobalDefinition gDef = (GlobalDefinition)ele;
 				AddressMapping defAddress = addToMapping(allVariables, null, gDef.getAddress());
+				setType(defAddress, gDef.getValue());
 				if(defAddress != null){
 					globals.add(defAddress);
 				}
 				AddressMapping defValue = addToMapping(allVariables, null, extractAddressFromValue(gDef.getValue().getValue()));
+				setType(defValue, gDef.getValue().getType());
 				if(defValue != null){	
 					globals.add(defValue);
 				}
@@ -702,6 +707,10 @@ public class GendataPrecomputer {
 		}else if(i instanceof Phi){
 			Phi op = (Phi)i;
 			addToMapping(allVariables, cfg, op.getResult());
+			for( PhiCase c : op.getCases()){
+				m = addToMapping(allVariables, cfg, extractAddressFromValue(c.getValue()));
+				setType(m, op.getType());
+			}
 
 		}else if(i instanceof LandingPad){
 			LandingPad op = (LandingPad)i;
@@ -792,7 +801,8 @@ public class GendataPrecomputer {
 
 		}else if(i instanceof Branch){
 			Branch op = (Branch)i;
-			addToMapping(allVariables, cfg, extractAddressFromValue(op.getCondition()));
+			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getCondition()));
+			setType(m, op.getCondition());
 		}	
 		
 	}
@@ -833,52 +843,51 @@ public class GendataPrecomputer {
 		return correspondingMapping;
 	}
 	
-	private void setType(AddressMapping addressMapping, TypeUse type){
-		if(addressMapping==null)
+	private void setType(AddressMapping addressMapping, TypeUse type) {
+		if (addressMapping == null)
 			return;
 		String t = "";
-		if(type.getPointer()!=null ){
+		if (type.getPointer() != null) {
 			t = "ref";
-		}else if(type instanceof Predefined && ((Predefined)type).getType().contains("*")){
+		} else if (type instanceof Predefined && ((Predefined) type).getType().contains("*")) {
 			t = "ref";
-		}else{
-			if(basis == Constants.INT){
+		} else {
+			if (basis == Constants.INT) {
 				t = "int";
-			}else{
+			} else {
 				t = "nat";
 			}
 		}
-		if(addressMapping.getType()== null || !addressMapping.getType().equals("ref"))
+		if (addressMapping.getType() == null || !addressMapping.getType().equals("ref"))
 			addressMapping.setType(t);
 	}
 	
-	private void setType(AddressMapping addressMapping, EObject type){
-		if(addressMapping==null)
+	private void setType(AddressMapping addressMapping, EObject type) {
+		if (addressMapping == null)
 			return;
-		if(type instanceof TypeUse){
-			if(addressMapping.getType()== null || !addressMapping.getType().equals("ref"))
-				setType(addressMapping, (TypeUse)type);
-		}else if(type instanceof Aggregate_Type){
-			
-			//TODO
+		if (type instanceof TypeUse) {
+			if (addressMapping.getType() == null || !addressMapping.getType().equals("ref"))
+				setType(addressMapping, (TypeUse) type);
+		} else if (type instanceof Aggregate_Type) {
+			addressMapping.setType("ref");
+		} else if (type instanceof Parameter) {
+			setType(addressMapping, ((Parameter) type).getType());
 		}
 	}
-		
-	private void setType(AddressMapping addressMapping, Address address){
-		if(addressMapping==null)
+
+	private void setType(AddressMapping addressMapping, Address address) {
+		if (addressMapping == null)
 			return;
-		
+
 		String t = "";
-		if(address.eContainer()!= null && address.eContainer() instanceof FunctionParameter && ((FunctionParameter)address.eContainer()).getType().getPointer()!=null){
-			t = "ref";
-		}else{
-			if(basis == Constants.INT){
-				t = "int";
-			}else{
-				t = "nat";
-			}
+
+		if (basis == Constants.INT) {
+			t = "int";
+		} else {
+			t = "nat";
 		}
-		if(addressMapping.getType()== null || !addressMapping.getType().equals("ref"))
+
+		if (addressMapping.getType() == null || !addressMapping.getType().equals("ref"))
 			addressMapping.setType(t);
 	}
 
