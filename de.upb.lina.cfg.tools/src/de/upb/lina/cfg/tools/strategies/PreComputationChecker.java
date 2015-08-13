@@ -7,7 +7,6 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -19,21 +18,27 @@ import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.ArithmeticOperation;
+import de.upb.llvm_parser.llvm.AtomicRMW;
 import de.upb.llvm_parser.llvm.Call;
 import de.upb.llvm_parser.llvm.Cast;
+import de.upb.llvm_parser.llvm.CmpXchg;
 import de.upb.llvm_parser.llvm.Compare;
 import de.upb.llvm_parser.llvm.ExtractElement;
 import de.upb.llvm_parser.llvm.ExtractValue;
+import de.upb.llvm_parser.llvm.Fence;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.GetElementPtr;
 import de.upb.llvm_parser.llvm.InsertElement;
 import de.upb.llvm_parser.llvm.InsertValue;
+import de.upb.llvm_parser.llvm.Instruction;
+import de.upb.llvm_parser.llvm.Invoke;
 import de.upb.llvm_parser.llvm.LLVM;
 import de.upb.llvm_parser.llvm.LandingPad;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Load;
 import de.upb.llvm_parser.llvm.LogicOperation;
 import de.upb.llvm_parser.llvm.Phi;
+import de.upb.llvm_parser.llvm.Select;
 import de.upb.llvm_parser.llvm.ShuffleVector;
 import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.VariableAttributeAccess;
@@ -99,8 +104,12 @@ public class PreComputationChecker {
 						// create sc-graph and search for loops without fence
 						SCUtil sc = new SCUtil(func);
 						loopWithoutFenceinfunc = containsLoopWithoutFences(sc.createGraph());
-						if (CFGConstants.DEBUG && loopWithoutFenceinfunc) {
-							System.out.println("Loops without fence found in function " + func.getAddress().getName());
+						if (CFGConstants.DEBUG) {
+							if (loopWithoutFenceinfunc) {
+
+								System.out.println("Loops without fence found in function "
+										+ func.getAddress().getName());
+							}
 						}
 					}
 				}
@@ -155,7 +164,7 @@ public class PreComputationChecker {
 		EList<Transition> TransitionList = cfg.getTransitions();
 		// find all loads
 		for (Transition t : TransitionList) {
-			if (t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getLoad())) {
+			if (t.getInstruction() instanceof Load) {
 				loads.add(t);
 			}
 		}
@@ -198,10 +207,10 @@ public class PreComputationChecker {
 	 */
 	private boolean isEarlyRead(Transition t, List<Transition> explored, Transition load) {
 		// fence found
-		if (t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getFence())
-				|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getCmpXchg())
-				|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getAtomicRMW())
-				|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getInvoke())) {
+		if (t.getInstruction() instanceof Fence
+				|| t.getInstruction() instanceof CmpXchg
+				|| t.getInstruction() instanceof AtomicRMW
+				|| t.getInstruction() instanceof Invoke) {
 			return false;
 		}
 		// loop found
@@ -213,7 +222,7 @@ public class PreComputationChecker {
 		Load l = (Load) load.getInstruction();
 		AddressUse loadaddress = (AddressUse) l.getAddress().getValue();
 
-		if (t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getStore())) {
+		if (t.getInstruction() instanceof Store) {
 			Store store = (Store) t.getInstruction();
 			if (store.getTargetAddress().getValue() instanceof AddressUse) {
 				AddressUse storeaddress = (AddressUse) store.getTargetAddress().getValue();
@@ -257,9 +266,9 @@ public class PreComputationChecker {
 
 	private boolean isLoopWithoutFence(Transition t, List<Transition> explored, Transition write) {
 		// fence found
-		if (t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getFence())
-				|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getCmpXchg())
-				|| t.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getAtomicRMW())) {
+		if (t.getInstruction() instanceof Fence
+				|| t.getInstruction() instanceof CmpXchg
+				|| t.getInstruction() instanceof AtomicRMW) {
 			return false;
 		}
 		// loop without fence found
@@ -316,7 +325,7 @@ public class PreComputationChecker {
 		// find all store-transitions and check whether they are in a
 		// writeDefChain
 		for (Transition write : cfg.getTransitions()) {
-			if (write.getInstruction().eClass().equals(LlvmPackage.eINSTANCE.getStore())) {
+			if (write.getInstruction() instanceof Store) {
 
 				Store store = (Store) write.getInstruction();
 
@@ -387,8 +396,8 @@ public class PreComputationChecker {
 
 	private Transition searchLoadWithRedefStoreAddress(String storeAddress, Transition transition,
 			ArrayList<Transition> explored) {
-		EObject instructiontype = transition.getInstruction().eClass();
-		if (instructiontype.equals(LlvmPackage.eINSTANCE.getLoad())) {
+		Instruction instruction = transition.getInstruction();
+		if (instruction instanceof Load) {
 			Load load = (Load) transition.getInstruction();
 			if (load.getAddress().getValue() instanceof AddressUse) {
 				if (((AddressUse) load.getAddress().getValue()).getAddress().getName().equals(storeAddress)) {
@@ -401,9 +410,9 @@ public class PreComputationChecker {
 			return null;
 		}
 
-		if (instructiontype.equals(LlvmPackage.eINSTANCE.getFence())
-				|| instructiontype.equals(LlvmPackage.eINSTANCE.getCmpXchg())
-				|| instructiontype.equals(LlvmPackage.eINSTANCE.getAtomicRMW())) {
+		if (instruction instanceof Fence
+				|| instruction instanceof CmpXchg
+				|| instruction instanceof AtomicRMW) {
 			return null;
 		}
 
@@ -448,94 +457,94 @@ public class PreComputationChecker {
 		}
 
 		// sync between write and def
-		EObject instructiontype = t.getInstruction().eClass();
-		if (instructiontype.equals(LlvmPackage.eINSTANCE.getFence())
-				|| instructiontype.equals(LlvmPackage.eINSTANCE.getCmpXchg())
-				|| instructiontype.equals(LlvmPackage.eINSTANCE.getAtomicRMW())) {
+		Instruction instruction = t.getInstruction();
+		if (instruction instanceof Fence
+				|| instruction instanceof CmpXchg
+				|| instruction instanceof AtomicRMW) {
 			return null;
 		}
 
-		if (instructiontype.equals(LlvmPackage.eINSTANCE.getArithmeticOperation())) {
+		if (instruction instanceof ArithmeticOperation) {
 			ArithmeticOperation op = (ArithmeticOperation) t.getInstruction();
 			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getLogicOperation())) {
+		} else if (instruction instanceof LogicOperation) {
 			LogicOperation op = (LogicOperation) t.getInstruction();
 			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getCast())) {
+		} else if (instruction instanceof Cast) {
 			Cast op = (Cast) t.getInstruction();
 			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getGetElementPtr())) {
+		} else if (instruction instanceof GetElementPtr) {
 			GetElementPtr op = (GetElementPtr) t.getInstruction();
 			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getLoad())) {
+		} else if (instruction instanceof Load) {
 			Load op = (Load) t.getInstruction();
 			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getCall())) {
+		} else if (instruction instanceof Call) {
 			Call op = (Call) t.getInstruction();
 			if (op.getResult() != null && op.getResult().getName().equals(address)) {
 				return t;
 			}
-		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getAlloc())) {
+		} else if (instruction instanceof Alloc) {
 			Alloc op = (Alloc) t.getInstruction();
 			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getPhi())) {
+		} else if (instruction instanceof Phi) {
 			Phi op = (Phi) t.getInstruction();
 			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getLandingPad())) {
+		} else if (instruction instanceof LandingPad) {
 			LandingPad op = (LandingPad) t.getInstruction();
 			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getSelect())) {
-			Phi op = (Phi) t.getInstruction();
+		} else if (instruction instanceof Select) {
+			Select op = (Select) t.getInstruction();
 			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getVariableAttributeAccess())) {
+		} else if (instruction instanceof VariableAttributeAccess) {
 			VariableAttributeAccess op = (VariableAttributeAccess) t.getInstruction();
 			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getExtractValue())) {
+		} else if (instruction instanceof ExtractValue) {
 			ExtractValue op = (ExtractValue) t.getInstruction();
 			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getExtractElement())) {
+		} else if (instruction instanceof ExtractElement) {
 			ExtractElement op = (ExtractElement) t.getInstruction();
 			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getInsertValue())) {
+		} else if (instruction instanceof InsertValue) {
 			InsertValue op = (InsertValue) t.getInstruction();
 			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getInsertElement())) {
+		} else if (instruction instanceof InsertElement) {
 			InsertElement op = (InsertElement) t.getInstruction();
 			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getShuffleVector())) {
+		} else if (instruction instanceof ShuffleVector) {
 			ShuffleVector op = (ShuffleVector) t.getInstruction();
 			if (op.getResult().getName().equals(address)) {
 				return t;
 			}
-		} else if (instructiontype.equals(LlvmPackage.eINSTANCE.getCompare())) {
+		} else if (instruction instanceof Compare) {
 			Compare op = (Compare) t.getInstruction();
 			if (op.getResult().getName().equals(address)) {
 				return t;
