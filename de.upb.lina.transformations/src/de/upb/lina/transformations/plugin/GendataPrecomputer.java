@@ -53,7 +53,6 @@ import de.upb.llvm_parser.llvm.Invoke;
 import de.upb.llvm_parser.llvm.LLVM;
 import de.upb.llvm_parser.llvm.LandingPad;
 import de.upb.llvm_parser.llvm.LlvmFactory;
-import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Load;
 import de.upb.llvm_parser.llvm.LogicOperation;
 import de.upb.llvm_parser.llvm.Parameter;
@@ -519,7 +518,7 @@ public class GendataPrecomputer {
 	}
 
 	private String lookupValue(Value value){
-		if (value.eClass().equals(LlvmPackage.eINSTANCE.getConstant())) {
+		if (value instanceof Constant) {
 			Constant constant = (Constant) value;
 			return constant.getValue().toString();
 		}
@@ -528,7 +527,7 @@ public class GendataPrecomputer {
 			return addressLookup.get(((AddressUseImpl) value).getAddress());
 		}
 
-		if(value.eClass().equals(LlvmPackage.eINSTANCE.getPrimitiveValue())){
+		if(value instanceof PrimitiveValue){
 			PrimitiveValue val = (PrimitiveValue)value;
 			return val.getValue();
 		}
@@ -564,13 +563,18 @@ public class GendataPrecomputer {
 				//map copyVars from writeDefChain
 				if(t instanceof WriteDefChainTransition){
 					WriteDefChainTransition wdcTransition = (WriteDefChainTransition) t;
+					Store store = (Store)wdcTransition.getInstruction();
 					if(wdcTransition.getCopyAddress() != null){
 						Address copyAddress = wdcTransition.getCopyAddress();
-						addToMapping(allVariables, cfg, copyAddress);
+						Address originalAddress = ((AddressUse)store.getTargetAddress().getValue()).getAddress();
+						AddressMapping m = addToMapping(allVariables, cfg, copyAddress);
+						setType(m, originalAddress);
 					}
 					if(wdcTransition.getCopyValue() != null){
 						Address copyValue = wdcTransition.getCopyValue();
-						addToMapping(allVariables, cfg, copyValue);
+						Address originalValue = ((AddressUse)store.getValue().getValue()).getAddress();
+						AddressMapping m = addToMapping(allVariables, cfg, copyValue);
+						setType(m, originalValue);
 					}
 				}
 			}
@@ -881,7 +885,10 @@ public class GendataPrecomputer {
 
 		String t = "";
 
-		if (basis == Constants.INT) {
+		AddressMapping m = getMappingForAddress(address, helperModel.getAddressMappings());
+		if (m != null && m.getType() != null && m.getType().equals("ref")) {
+			t = "ref";
+		} else if (basis == Constants.INT) {
 			t = "int";
 		} else {
 			t = "nat";
