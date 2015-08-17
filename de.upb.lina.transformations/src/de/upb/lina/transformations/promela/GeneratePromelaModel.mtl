@@ -12,7 +12,7 @@
 [for (cfg: ControlFlowDiagram | genData.cfgs)]
 inline [cfg.name.replaceAll('@_', '').replaceAll('@','')/]([genParams(cfg, genData)/]){
 [genLocalVarDeclarations(cfg, genData)/]
-[handleStartLocation(genData, cfg)/][for (loc: ControlFlowLocation | cfg.locations)][handleLocation(loc, genData)/][/for]
+[handleStartLocation(genData, cfg)/][for (loc: ControlFlowLocation | cfg.locations)][handleLocation(loc, genData)/][/for][handleEndLocation(genData, cfg)/]
 }
 
 [/for]
@@ -54,6 +54,14 @@ inline [cfg.name.replaceAll('@_', '').replaceAll('@','')/]([genParams(cfg, genDa
 [/for]
 [/template]
 
+[template public handleEndLocation(genData:GeneratorData, cfg: ControlFlowDiagram)]
+[for (l : LocationLabel | genData.locationLabels)]
+[if (l.controlFlowLocation = cfg.start)]
+[l.name.substring(1, 1)/]End: skip;
+[/if]
+[/for]
+[/template]
+
 [template public handleLocation(loc: ControlFlowLocation, genData: GeneratorData)]
 [for (l : LocationLabel | genData.locationLabels)]
 [if (l.controlFlowLocation = loc and loc.outgoing->size() = 1)]
@@ -69,7 +77,7 @@ inline [cfg.name.replaceAll('@_', '').replaceAll('@','')/]([genParams(cfg, genDa
 [/template]
 
 [template public genGoTo(t: Transition, genData: GeneratorData)]
-[if(t.target.outgoing->size()>0)][t.genPhi(genData)/] goto [for (l : LocationLabel | genData.locationLabels)][if (l.controlFlowLocation = t.target)][l.name/][/if][/for];[/if]
+[if(t.target.outgoing->size()>0)][t.genPhi(genData)/] goto [for (l : LocationLabel | genData.locationLabels)][if (l.controlFlowLocation = t.target)][l.name/][/if][/for]; [elseif(t.target.outgoing->size()=0)]goto [for (l : LocationLabel | genData.locationLabels)][if (l.controlFlowLocation = t.target)][l.name.substring(1, 1)/]End[/if][/for];[/if]
 [/template]
 
 [template public genPhi (t: Transition, genData: GeneratorData)]
@@ -155,11 +163,8 @@ endif
 [/template]
 
 [query public getelementptrInstr(e : GetElementPtr, genData: GeneratorData) : String = 
-'getelementptr('
-+ e.aggerate.type.dereferencedPtrSize() + ', ' 
-+ e.aggerate.value.valueToString(genData) + ', ' 
-+ e.offset(1, genData) + ', ' 
-+ e.result.addressToString(genData) + ');'
+'getelementptr(PUT IN NEW FEATURE HERE)'
+
 /]
 
 [query public dereferencedPtrSize(e: EObject) : Integer =
@@ -180,74 +185,7 @@ else
 endif
 /]
 
-[query public offset(e : GetElementPtr, index : Integer, genData: GeneratorData) : String = 
-if index < e.indizies->size() then
-	e.indizies->at(index).index(genData) + ' * ' 
-	+ e.aggerate.type.dereferencedPtrSize()
-	+ e.subOffset(e.aggerate.type.dereferencedPtrType(), index+1, genData)
-else
-	e.indizies->at(index).index(genData) + ' * ' 
-	+ e.aggerate.type.dereferencedPtrSize()
-endif
-/]
 
-[query public subOffset(e : GetElementPtr, o : EObject, index : Integer, genData: GeneratorData)
-	: String =
-if o.oclIsTypeOf(Predefined) then
-	'0'
-else if o.oclIsTypeOf(Array) then
-	o.oclAsType(Array).arrayOffset(e, index, genData)
-else if o.oclIsTypeOf(AddressUse) then
-	if o.oclAsType(AddressUse).isPointer() then
-		' PTR'
-	else
-		e.subOffset(o.oclAsType(AddressUse).address.ancestors()
-		->at(1).oclAsType(TypeDefinition).struct.oclAsType(EObject), index, genData)
-	endif
-else if o.oclIsTypeOf(Structure) then
-	o.oclAsType(Structure).structOffset(e, index, genData)
-else
-	'ERROR IN OFFSET CALCULATION'
-endif
-endif
-endif
-endif
-/]
-
-[query public arrayOffset(a : Array, e : GetElementPtr, index : Integer, genData: GeneratorData) 
-	: String =
-if index < e.indizies->size() then
-	' + ' 
-	+ e.indizies->at(index).index(genData) 
-	+ ' * ' 
-	+ a.type.typeSize() 
-	+ e.subOffset(a.type, index+1, genData)
-else
-	' + ' 
-	+ e.indizies->at(index).index(genData) 
-	+ ' * ' 
-	+ a.type.typeSize() 
-endif
-/]
-
-[query public structOffset(s : Structure, e : GetElementPtr, index : Integer, genData: GeneratorData) 
-	: String =
-if index < e.indizies->size() then
-	s.types->iterate(t : EObject; result : String = '' | 
-		result + ' + (' + e.indizies->at(index).index(genData)
-		+ ' >= ' + s.types->indexOf(t) + ' -> 1 : 0) * '
-		+ t.typeSize() + ' + ((' + e.indizies->at(index).index(genData) 
-		+ ' == (' + s.types->indexOf(t) + '-1) -> 1 : 0)'
-		+ ' * (' + e.subOffset(t, index+1, genData).replace(' \\+ ', '') + '))'
-	)
-else
-	s.types->iterate(t : EObject; result : String = '' | 
-		result + ' + (' + e.indizies->at(index).index(genData)
-		+ ' >= ' + s.types->indexOf(t) + ' -> 1 : 0) * '
-		+ t.typeSize()
-	)
-endif
-/]
 
 [query public index(e : Value, genData: GeneratorData) : String = 
 if e.oclIsTypeOf(Constant) then
@@ -412,7 +350,7 @@ endif
 [template public genInstruction(e : Switch, genData: GeneratorData)][/template]
 
 [template public genInstruction(e : Unreachable, genData: GeneratorData)]
-//TODO: Unreachable
+skip;
 [/template]
 
 [template public genInstruction(e : Return, genData: GeneratorData)]
