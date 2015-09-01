@@ -8,8 +8,6 @@ import de.upb.llvm_parser.llvm.Load;
 import de.upb.llvm_parser.llvm.MetaArgValue;
 import de.upb.llvm_parser.llvm.Parameter;
 
-import java.math.BigDecimal;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -94,7 +92,7 @@ public class LoadImpl extends InstructionImpl implements Load
    * @generated
    * @ordered
    */
-  protected static final BigDecimal ALIGN_EDEFAULT = null;
+  protected static final int ALIGN_EDEFAULT = 0;
 
   /**
    * The cached value of the '{@link #getAlign() <em>Align</em>}' attribute.
@@ -104,7 +102,7 @@ public class LoadImpl extends InstructionImpl implements Load
    * @generated
    * @ordered
    */
-  protected BigDecimal align = ALIGN_EDEFAULT;
+  protected int align = ALIGN_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getMeta() <em>Meta</em>}' containment reference list.
@@ -301,7 +299,7 @@ public class LoadImpl extends InstructionImpl implements Load
    * <!-- end-user-doc -->
    * @generated
    */
-  public BigDecimal getAlign()
+  public int getAlign()
   {
     return align;
   }
@@ -311,9 +309,9 @@ public class LoadImpl extends InstructionImpl implements Load
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAlign(BigDecimal newAlign)
+  public void setAlign(int newAlign)
   {
-    BigDecimal oldAlign = align;
+    int oldAlign = align;
     align = newAlign;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.LOAD__ALIGN, oldAlign, align));
@@ -448,7 +446,7 @@ public class LoadImpl extends InstructionImpl implements Load
         setAddress((Parameter)newValue);
         return;
       case LlvmPackage.LOAD__ALIGN:
-        setAlign((BigDecimal)newValue);
+        setAlign((Integer)newValue);
         return;
       case LlvmPackage.LOAD__META:
         getMeta().clear();
@@ -516,7 +514,7 @@ public class LoadImpl extends InstructionImpl implements Load
       case LlvmPackage.LOAD__ADDRESS:
         return address != null;
       case LlvmPackage.LOAD__ALIGN:
-        return ALIGN_EDEFAULT == null ? align != null : !ALIGN_EDEFAULT.equals(align);
+        return align != ALIGN_EDEFAULT;
       case LlvmPackage.LOAD__META:
         return meta != null && !meta.isEmpty();
       case LlvmPackage.LOAD__ATOMIC:

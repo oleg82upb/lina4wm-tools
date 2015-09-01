@@ -3,13 +3,13 @@
  */
 package de.upb.lina.cfg.controlflow.diagram.edit.parts;
 
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Connection;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.notation.Connector;
 import org.eclipse.gmf.runtime.notation.View;
 
 import de.upb.lina.cfg.controlflow.Transition;
+import de.upb.lina.cfg.tools.GraphUtility;
 
 /**
  * @author Oleg Travkin
@@ -17,7 +17,6 @@ import de.upb.lina.cfg.controlflow.Transition;
  */
 public class CustomTransitionEditPart extends TransitionEditPart
 {
-	private CustomLabelingUtil labelutil = new CustomLabelingUtil();
 	private static String EMPTY = "null";
 
 	/**
@@ -61,7 +60,7 @@ public class CustomTransitionEditPart extends TransitionEditPart
 		{
 			return EMPTY;
 		}
-		return labelutil.getNewTransitionLabel(t);
+		return GraphUtility.getNewTransitionLabel(t);
 	}
 
 	@Override

@@ -3,13 +3,13 @@
 package de.upb.llvm_parser.llvm.impl;
 
 import de.upb.llvm_parser.llvm.LlvmPackage;
-import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.Return;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -37,7 +37,7 @@ public class ReturnImpl extends InstructionImpl implements Return
    * @generated
    * @ordered
    */
-  protected Parameter value;
+  protected EObject value;
 
   /**
    * <!-- begin-user-doc -->
@@ -65,7 +65,7 @@ public class ReturnImpl extends InstructionImpl implements Return
    * <!-- end-user-doc -->
    * @generated
    */
-  public Parameter getValue()
+  public EObject getValue()
   {
     return value;
   }
@@ -75,9 +75,9 @@ public class ReturnImpl extends InstructionImpl implements Return
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetValue(Parameter newValue, NotificationChain msgs)
+  public NotificationChain basicSetValue(EObject newValue, NotificationChain msgs)
   {
-    Parameter oldValue = value;
+    EObject oldValue = value;
     value = newValue;
     if (eNotificationRequired())
     {
@@ -92,7 +92,7 @@ public class ReturnImpl extends InstructionImpl implements Return
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(Parameter newValue)
+  public void setValue(EObject newValue)
   {
     if (newValue != value)
     {
@@ -151,7 +151,7 @@ public class ReturnImpl extends InstructionImpl implements Return
     switch (featureID)
     {
       case LlvmPackage.RETURN__VALUE:
-        setValue((Parameter)newValue);
+        setValue((EObject)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -168,7 +168,7 @@ public class ReturnImpl extends InstructionImpl implements Return
     switch (featureID)
     {
       case LlvmPackage.RETURN__VALUE:
-        setValue((Parameter)null);
+        setValue((EObject)null);
         return;
     }
     super.eUnset(featureID);

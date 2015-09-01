@@ -106,6 +106,14 @@ Workflow {
     
                 // generates a more lightweight Antlr parser and lexer tailored for content assist
                 fragment = parser.antlr.XtextAntlrUiGeneratorFragment {}
+//                fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {
+//				options = {
+//					classSplitting = true
+//					fieldsPerClass = "100"
+//					methodsPerClass= "100"
+//					}
+//				}
+	
     
                 // generates junit test support classes into Generator#pathTestProject
                 fragment = junit.Junit4Fragment {}

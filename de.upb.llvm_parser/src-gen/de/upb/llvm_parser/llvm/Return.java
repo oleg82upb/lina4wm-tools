@@ -2,6 +2,7 @@
  */
 package de.upb.llvm_parser.llvm;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,12 +31,12 @@ public interface Return extends Instruction
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' containment reference.
-   * @see #setValue(Parameter)
+   * @see #setValue(EObject)
    * @see de.upb.llvm_parser.llvm.LlvmPackage#getReturn_Value()
    * @model containment="true"
    * @generated
    */
-  Parameter getValue();
+  EObject getValue();
 
   /**
    * Sets the value of the '{@link de.upb.llvm_parser.llvm.Return#getValue <em>Value</em>}' containment reference.
@@ -45,6 +46,6 @@ public interface Return extends Instruction
    * @see #getValue()
    * @generated
    */
-  void setValue(Parameter value);
+  void setValue(EObject value);
 
 } // Return

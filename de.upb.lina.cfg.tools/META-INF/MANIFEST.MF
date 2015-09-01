@@ -15,3 +15,6 @@ Require-Bundle: org.eclipse.ui,
  org.junit
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: de.upb.lina.cfg.tools,
+ de.upb.lina.cfg.tools.strategies,
+ de.upb.lina.cfg.tools.wizards

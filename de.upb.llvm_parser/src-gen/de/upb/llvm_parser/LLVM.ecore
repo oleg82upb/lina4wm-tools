@@ -22,18 +22,19 @@
   <eClassifiers xsi:type="ecore:EClass" name="GlobalDefinition" eSuperTypes="#//MainLevelEntity">
     <eStructuralFeatures xsi:type="ecore:EReference" name="address" eType="#//Address"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Parameter"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="align" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="align" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FunctionDefinition" eSuperTypes="#//MainLevelEntity">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="returnAttribute" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="#//TypeUse"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="address" eType="#//Address"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//FunctionParameterList"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="align" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="align" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//FunctionBody"
         containment="true"/>
   </eClassifiers>
@@ -61,18 +62,22 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Vector" eSuperTypes="#//Aggregate_Type">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TypeUse"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Array" eSuperTypes="#//Aggregate_Type">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Aggregate_Type"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Constant" eSuperTypes="#//Value">
+  <eClassifiers xsi:type="ecore:EClass" name="Constant" eSuperTypes="#//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DecimalConstant" eSuperTypes="#//Constant">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerConstant" eSuperTypes="#//Constant">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveValue" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -89,6 +94,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Parameter">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attributes" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"
         containment="true"/>
   </eClassifiers>
@@ -245,7 +252,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="volatile" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="address" eType="#//Parameter"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="align" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="align" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="meta" upperBound="-1" eType="#//MetaArgValue"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="atomic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -257,7 +264,7 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetAddress" eType="#//Parameter"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="align" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="align" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="meta" upperBound="-1" eType="#//MetaArgValue"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="atomic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -278,7 +285,7 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="numOfElements" eType="#//Parameter"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="align" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="align" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PhiCase">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"
@@ -339,7 +346,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="aggerate" eType="#//Parameter"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" unique="false" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InsertValue" eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" eType="#//Address"
@@ -349,7 +356,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Parameter"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" unique="false" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExtractElement" eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" eType="#//Address"
@@ -428,7 +435,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Unreachable" eSuperTypes="#//Instruction"/>
   <eClassifiers xsi:type="ecore:EClass" name="Return" eSuperTypes="#//Instruction">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Parameter"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Branch" eSuperTypes="#//Instruction">

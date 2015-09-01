@@ -2,8 +2,6 @@
  */
 package de.upb.llvm_parser.llvm;
 
-import java.math.BigDecimal;
-
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -117,12 +115,12 @@ public interface Load extends Instruction
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Align</em>' attribute.
-   * @see #setAlign(BigDecimal)
+   * @see #setAlign(int)
    * @see de.upb.llvm_parser.llvm.LlvmPackage#getLoad_Align()
    * @model
    * @generated
    */
-  BigDecimal getAlign();
+  int getAlign();
 
   /**
    * Sets the value of the '{@link de.upb.llvm_parser.llvm.Load#getAlign <em>Align</em>}' attribute.
@@ -132,7 +130,7 @@ public interface Load extends Instruction
    * @see #getAlign()
    * @generated
    */
-  void setAlign(BigDecimal value);
+  void setAlign(int value);
 
   /**
    * Returns the value of the '<em><b>Meta</b></em>' containment reference list.

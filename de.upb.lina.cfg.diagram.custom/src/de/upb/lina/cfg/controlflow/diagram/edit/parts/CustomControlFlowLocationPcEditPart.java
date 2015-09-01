@@ -7,8 +7,8 @@ import org.eclipse.gmf.runtime.notation.View;
 
 import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
-import de.upb.llvm_parser.llvm.Constant;
-import de.upb.llvm_parser.llvm.LlvmPackage;
+import de.upb.llvm_parser.llvm.DecimalConstant;
+import de.upb.llvm_parser.llvm.IntegerConstant;
 import de.upb.llvm_parser.llvm.PrimitiveValue;
 import de.upb.llvm_parser.llvm.Value;
 import de.upb.llvm_parser.llvm.impl.AddressUseImpl;
@@ -59,13 +59,15 @@ public class CustomControlFlowLocationPcEditPart extends ControlFlowLocationPcEd
 			AddressUseImpl aui = (AddressUseImpl)value;
 			result +=aui.getAddress().getName();
 		}
-
-		else if (value.eClass().equals(LlvmPackage.eINSTANCE.getConstant())) {
-			Constant constant = (Constant) value;
+		else if (value instanceof IntegerConstant) {
+			IntegerConstant constant = (IntegerConstant) value;
 			result += constant.getValue();
 		}
-		
-		else if(value.eClass().equals(LlvmPackage.eINSTANCE.getPrimitiveValue())){
+		else if (value instanceof DecimalConstant) {
+			DecimalConstant constant = (DecimalConstant) value;
+			result += constant.getValue();
+		}
+		else if(value instanceof PrimitiveValue){
 			PrimitiveValue val = (PrimitiveValue)value;
 			result += val.getValue();
 		}

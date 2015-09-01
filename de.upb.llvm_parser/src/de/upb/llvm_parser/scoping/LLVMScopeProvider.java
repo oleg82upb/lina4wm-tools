@@ -7,15 +7,11 @@ import java.util.ArrayList;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 
-import com.google.common.base.Function;
-
 import de.upb.llvm_parser.llvm.AbstractElement;
-import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.AliasDefinition;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.ArithmeticOperation;

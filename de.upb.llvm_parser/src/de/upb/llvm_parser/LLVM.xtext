@@ -6,8 +6,10 @@ generate llvm "http://www.upb.de/llvm_parser/llvm"
 LLVM:
 	elements+=AbstractElement*;
 
-NUMBER returns EBigDecimal:
-	'-'? INT ('.' INT)?;
+terminal DECIMAL returns EBigDecimal:
+	'-'? ('0'..'9')+ '.' ('0'..'9')+;
+
+terminal INT returns EInt: '-'?('0'..'9')+;
 
 terminal VALID_ID:
 			('%' | '@')  (('a'..'z' | 'A'..'Z' | '_' | '.' | '0'..'9')+  | STRING)
@@ -47,10 +49,10 @@ terminal METADATA:
 CALLING_CONV:
 	'ccc' | 'fastcc' | 'coldcc' | 'x86_stdcallcc' | 'x86_fastcallcc' | 'x86_thiscallcc' 
 	| 'arm_apcscc' | 'arm_aapcscc' | 'arm_aapcs_vfpcc' | 'msp430_intrcc' | 'ptx_kernel' 
-	| 'ptx_device' | 'spir_func' | 'spir_kernel' | 'cc' '<' NUMBER '>' NUMBER;
+	| 'ptx_device' | 'spir_func' | 'spir_kernel' | 'cc' '<' INT '>' INT;
 
 FUNCTION_ATTRIBUTES:
-	'address_safety' | 'alignstack' '(' '<' NUMBER '>' ')' | 'alwaysinline' | 'nonlazybind' 
+	'address_safety' | 'alignstack' '(' '<' INT '>' ')' | 'alwaysinline' | 'nonlazybind' 
 	| 'inlinehint' | 'naked' | 'noimplicitfloat' | 'noinline' | 'noredzone' | 'noreturn' 
 	| 'nounwind' | 'optsize' | 'readnone' | 'readonly' | 'returns_twice' | 'ssp' | 'sspreq' | 'uwtable';
 
@@ -113,7 +115,8 @@ GlobalDefinition:
 	address=Address '=' ('private' | 'linker_private' | 'linker_private_weak' | 'available_externally' 
 		| 'linkonce' | 'common' | 'appending' |	'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' 
 		| 'dllimport' | 'dllexport' | 'external' | 'internal' | 'weak' | 'weak_odr' | 'global' | 'unnamed_addr' | 'constant')* 
-	value=Parameter (',' 'align' align = NUMBER)?;
+	(value=Parameter|value=Predefined) (',' 'align' align = INT)?
+;
 
 FunctionDefinition:
 	('define' ('private' | 'linker_private' | 'linker_private_weak' | 'available_externally' 
@@ -122,10 +125,10 @@ FunctionDefinition:
 		| 'external' | 'internal' | 'weak' | 'weak_odr')? 
 		('default' | 'hidden' | 'protected')? 
 		CALLING_CONV? 
-		('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')? 
+		returnAttribute=('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')? 
 		returnType=TypeUse
 		address=Address ('()' | '(' parameter=FunctionParameterList? ')') 
-		'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ('align' align = NUMBER)?
+		'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ('align' align = INT)?
 	body=FunctionBody) 
 	| 
 	('declare' ('private' | 'linker_private' | 'linker_private_weak' | 'available_externally' 
@@ -133,10 +136,10 @@ FunctionDefinition:
 		| 'dllimport' | 'dllexport'| 'external' | 'internal' | 'weak' | 'weak_odr')? 
 		('default' | 'hidden' | 'protected')? 
 		CALLING_CONV? 
-		('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')? 
+		returnAttribute=('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')? 
 		returnType=TypeUse
 		address=Address ('()' | '(' parameter=FunctionParameterList? ')') 
-		'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ('align' align = NUMBER)?)
+		'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ('align' align = INT)?)
 ;
 
 AliasDefinition:
@@ -163,16 +166,21 @@ Predefined:
 
 
 Vector:
-	'<' length=NUMBER 'x' type=TypeUse '>';
+	'<' length=INT 'x' type=TypeUse '>';
 
 Array:
-	{Array} ('[' length=NUMBER 'x' type=(TypeUse|Aggregate_Type) ']' | '[]' | '[' ']') POINTER?;
+	{Array} ('[' length=INT 'x' type=(TypeUse|Aggregate_Type) ']' | '[]' | '[' ']') POINTER?;
 
 Aggregate_Type:
 	Structure | Array | Vector;
 
+
 Constant:
-	value = NUMBER;
+	DecimalConstant | IntegerConstant;
+DecimalConstant:
+	value = DECIMAL;
+IntegerConstant:
+	value = INT;
 	
 PrimitiveValue:
 	value = (STRING | 'void' | 'null' | 'label' | 'undef' | '...' | BOOL | 'zeroinitializer');
@@ -189,9 +197,12 @@ Structure:
 
 Parameter:
 	type = (TypeUse | Aggregate_Type) 
-	(('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')+ value = Value 
-		| value = Value? ('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')*
-	)
+	attributes += ('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')* 
+	value = Value
+//	|
+//	(	value = Value?
+//		attributes += ('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')*
+//	))
 ;
 
 ParameterList:
@@ -310,27 +321,27 @@ AtomicRmwUmin:	result=Address '=' 'atomicrmw' (volatile?='volatile')? operation 
 
 Load:
 	result=Address '=' ( volatile?='volatile' 'load'  | 'load' (volatile?='volatile')?) 
-	address=Parameter (',' 'align' align = NUMBER)?  (',' meta+=MetaArgValue)* 
+	address=Parameter (',' 'align' align = INT)?  (',' meta+=MetaArgValue)* 
 	|
 	result=Address '=' 'load' atomic?='atomic' (volatile?='volatile'?)? address=Parameter 'singlethread'? 
-	ordering=('unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst') (',' 'align' align = NUMBER)?;
+	ordering=('unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst') (',' 'align' align = INT)?;
 
 Store:
 	(volatile?='volatile' 'store' | 'store' (volatile?='volatile')?) value=Parameter ',' 
-	targetAddress=Parameter  (',' 'align' align = NUMBER)? (',' meta+=MetaArgValue)*     
+	targetAddress=Parameter  (',' 'align' align = INT)? (',' meta+=MetaArgValue)*     
 	|
 	'store' atomic?='atomic' (volatile?='volatile')? value=Parameter ',' targetAddress=Parameter 'singlethread'? 
-	ordering=('unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst') (',' 'align' align = NUMBER)?;
+	ordering=('unordered' | 'monotonic' | 'aquire' | 'release' | 'acq_rel' | 'seq_cst') (',' 'align' align = INT)?;
 
-//FIXME: no support for call of functions with a function as a result type
+//TODO: no support for call of functions with a function as a result type
 Call:
 	(result=Address '=')? 'tail'? 'call' CALLING_CONV? 
 	('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')? 
-	function=Parameter //(('asm' 'sideeffect'? STRING ',' STRING) 
-	pList=ParameterList FUNCTION_ATTRIBUTES* (',' '!srcloc' '!' NUMBER)*;
+	function=Parameter
+	pList=ParameterList FUNCTION_ATTRIBUTES* (',' '!srcloc' '!' INT)*;
 
 Alloc:
-	result=Address '=' 'alloca' type=TypeUse (',' numOfElements=Parameter)? (',' 'align' align = NUMBER)?;
+	result=Address '=' 'alloca' type=TypeUse (',' numOfElements=Parameter)? (',' 'align' align = INT)?;
 
 PhiCase:
 	value= Value ',' label = VALID_ID
@@ -354,14 +365,14 @@ VariableAttributeAccess:
 	result=Address '=' 'va_arg' vaList= Parameter',' aType=TypeUse;
 
 
-//FIXME TODO
+//TODO
 
 //...Value for structs and arrays 
 ExtractValue:
-	result=Address '=' 'extractvalue' aggerate=Parameter (',' index+=NUMBER)+;
+	result=Address '=' 'extractvalue' aggerate=Parameter (',' index+=INT)+;
 
 InsertValue:
-	result=Address '=' 'insertvalue' aggerate=Parameter',' value=Parameter (',' index+=NUMBER)+;
+	result=Address '=' 'insertvalue' aggerate=Parameter',' value=Parameter (',' index+=INT)+;
 
 //...Element for vectors
 ExtractElement:
@@ -412,7 +423,9 @@ Unreachable:
 	{Unreachable} 'unreachable';
 
 Return:
-	'ret' value=Parameter (',' '!dbg' '!' NUMBER)?
+	'ret' value=Parameter (',' '!dbg' '!' INT)?
+	|
+	'ret' value=PrimitiveValue (',' '!dbg' '!' INT)?
 ;
 
 Branch:

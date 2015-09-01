@@ -200,6 +200,24 @@ public class LlvmSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case LlvmPackage.DECIMAL_CONSTANT:
+      {
+        DecimalConstant decimalConstant = (DecimalConstant)theEObject;
+        T result = caseDecimalConstant(decimalConstant);
+        if (result == null) result = caseConstant(decimalConstant);
+        if (result == null) result = caseValue(decimalConstant);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LlvmPackage.INTEGER_CONSTANT:
+      {
+        IntegerConstant integerConstant = (IntegerConstant)theEObject;
+        T result = caseIntegerConstant(integerConstant);
+        if (result == null) result = caseConstant(integerConstant);
+        if (result == null) result = caseValue(integerConstant);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case LlvmPackage.PRIMITIVE_VALUE:
       {
         PrimitiveValue primitiveValue = (PrimitiveValue)theEObject;
@@ -1045,6 +1063,38 @@ public class LlvmSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseConstant(Constant object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Decimal Constant</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Decimal Constant</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDecimalConstant(DecimalConstant object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Integer Constant</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Integer Constant</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIntegerConstant(IntegerConstant object)
   {
     return null;
   }

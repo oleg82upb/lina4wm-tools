@@ -2,8 +2,6 @@
  */
 package de.upb.llvm_parser.llvm;
 
-import java.math.BigDecimal;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -34,12 +32,12 @@ public interface Array extends Aggregate_Type
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Length</em>' attribute.
-   * @see #setLength(BigDecimal)
+   * @see #setLength(int)
    * @see de.upb.llvm_parser.llvm.LlvmPackage#getArray_Length()
    * @model
    * @generated
    */
-  BigDecimal getLength();
+  int getLength();
 
   /**
    * Sets the value of the '{@link de.upb.llvm_parser.llvm.Array#getLength <em>Length</em>}' attribute.
@@ -49,7 +47,7 @@ public interface Array extends Aggregate_Type
    * @see #getLength()
    * @generated
    */
-  void setLength(BigDecimal value);
+  void setLength(int value);
 
   /**
    * Returns the value of the '<em><b>Type</b></em>' containment reference.

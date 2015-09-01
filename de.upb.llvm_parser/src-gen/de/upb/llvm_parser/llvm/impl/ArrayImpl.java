@@ -5,8 +5,6 @@ package de.upb.llvm_parser.llvm.impl;
 import de.upb.llvm_parser.llvm.Array;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
-import java.math.BigDecimal;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -40,7 +38,7 @@ public class ArrayImpl extends Aggregate_TypeImpl implements Array
    * @generated
    * @ordered
    */
-  protected static final BigDecimal LENGTH_EDEFAULT = null;
+  protected static final int LENGTH_EDEFAULT = 0;
 
   /**
    * The cached value of the '{@link #getLength() <em>Length</em>}' attribute.
@@ -50,7 +48,7 @@ public class ArrayImpl extends Aggregate_TypeImpl implements Array
    * @generated
    * @ordered
    */
-  protected BigDecimal length = LENGTH_EDEFAULT;
+  protected int length = LENGTH_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
@@ -88,7 +86,7 @@ public class ArrayImpl extends Aggregate_TypeImpl implements Array
    * <!-- end-user-doc -->
    * @generated
    */
-  public BigDecimal getLength()
+  public int getLength()
   {
     return length;
   }
@@ -98,9 +96,9 @@ public class ArrayImpl extends Aggregate_TypeImpl implements Array
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setLength(BigDecimal newLength)
+  public void setLength(int newLength)
   {
-    BigDecimal oldLength = length;
+    int oldLength = length;
     length = newLength;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ARRAY__LENGTH, oldLength, length));
@@ -199,7 +197,7 @@ public class ArrayImpl extends Aggregate_TypeImpl implements Array
     switch (featureID)
     {
       case LlvmPackage.ARRAY__LENGTH:
-        setLength((BigDecimal)newValue);
+        setLength((Integer)newValue);
         return;
       case LlvmPackage.ARRAY__TYPE:
         setType((EObject)newValue);
@@ -239,7 +237,7 @@ public class ArrayImpl extends Aggregate_TypeImpl implements Array
     switch (featureID)
     {
       case LlvmPackage.ARRAY__LENGTH:
-        return LENGTH_EDEFAULT == null ? length != null : !LENGTH_EDEFAULT.equals(length);
+        return length != LENGTH_EDEFAULT;
       case LlvmPackage.ARRAY__TYPE:
         return type != null;
     }

@@ -23,8 +23,6 @@ public abstract class TSO_Test {
 	public void setUp() throws Exception {
 		LlvmPackage.eINSTANCE.getNsURI();
 		ControlflowPackage.eINSTANCE.getNsPrefix();
-
-		gUtil = new GraphUtility();
 		
 		ResourceSetImpl xtextResourceSet = new ResourceSetImpl();
 		URI uri = URI.createURI(testLocation);

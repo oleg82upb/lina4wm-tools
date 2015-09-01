@@ -2,7 +2,6 @@
  */
 package de.upb.llvm_parser.llvm;
 
-import java.math.BigDecimal;
 
 /**
  * <!-- begin-user-doc -->
@@ -12,6 +11,7 @@ import java.math.BigDecimal;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link de.upb.llvm_parser.llvm.FunctionDefinition#getReturnAttribute <em>Return Attribute</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.FunctionDefinition#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.FunctionDefinition#getAddress <em>Address</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.FunctionDefinition#getParameter <em>Parameter</em>}</li>
@@ -26,6 +26,32 @@ import java.math.BigDecimal;
  */
 public interface FunctionDefinition extends MainLevelEntity
 {
+  /**
+   * Returns the value of the '<em><b>Return Attribute</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Return Attribute</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Return Attribute</em>' attribute.
+   * @see #setReturnAttribute(String)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getFunctionDefinition_ReturnAttribute()
+   * @model
+   * @generated
+   */
+  String getReturnAttribute();
+
+  /**
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.FunctionDefinition#getReturnAttribute <em>Return Attribute</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Return Attribute</em>' attribute.
+   * @see #getReturnAttribute()
+   * @generated
+   */
+  void setReturnAttribute(String value);
+
   /**
    * Returns the value of the '<em><b>Return Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
@@ -113,12 +139,12 @@ public interface FunctionDefinition extends MainLevelEntity
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Align</em>' attribute.
-   * @see #setAlign(BigDecimal)
+   * @see #setAlign(int)
    * @see de.upb.llvm_parser.llvm.LlvmPackage#getFunctionDefinition_Align()
    * @model
    * @generated
    */
-  BigDecimal getAlign();
+  int getAlign();
 
   /**
    * Sets the value of the '{@link de.upb.llvm_parser.llvm.FunctionDefinition#getAlign <em>Align</em>}' attribute.
@@ -128,7 +154,7 @@ public interface FunctionDefinition extends MainLevelEntity
    * @see #getAlign()
    * @generated
    */
-  void setAlign(BigDecimal value);
+  void setAlign(int value);
 
   /**
    * Returns the value of the '<em><b>Body</b></em>' containment reference.

@@ -27,9 +27,10 @@ import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.Branch;
-import de.upb.llvm_parser.llvm.Constant;
+import de.upb.llvm_parser.llvm.DecimalConstant;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.Instruction;
+import de.upb.llvm_parser.llvm.IntegerConstant;
 import de.upb.llvm_parser.llvm.LlvmFactory;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Load;
@@ -45,7 +46,6 @@ public class TSOUtil implements IGraphGenerator {
 	private List<ControlFlowLocation> processed = new ArrayList<ControlFlowLocation>();
 	private HashMap<Address, Address> writeDefMap = new HashMap<Address, Address>();//orgAdr is key, copyAdr is value
 
-	private GraphUtility util = new GraphUtility();
 
 	private FunctionDefinition function;
 	public TSOUtil(FunctionDefinition function)
@@ -82,7 +82,7 @@ public class TSOUtil implements IGraphGenerator {
 			}
 		}
 		// first node
-		String instructionLabel = util.findLabelByInstruction(function, instructions.get(0));
+		String instructionLabel = GraphUtility.findLabelByInstruction(function, instructions.get(0));
 		StoreBuffer buffer = ControlflowFactory.eINSTANCE.createStoreBuffer();
 		ControlFlowLocation location = createControlFlowLocation(cfg, pc.next(), buffer, instructionLabel);
 		if (cfg.getStart() == null) {
@@ -118,7 +118,7 @@ public class TSOUtil implements IGraphGenerator {
 				addFlushOptions(cfg, toBeProcessed, toExplore, nextInstruction);
 
 				// create normal SC behavior
-				if (nextInstruction != null && !util.isSynch(nextInstruction)) {
+				if (nextInstruction != null && !GraphUtility.isSynch(nextInstruction)) {
 					// other options -SC
 					addNonFlushOptions(pc, cfg, toBeProcessed, toExplore, nextInstruction, earlyReadsInFunction, checker);
 				}
@@ -147,12 +147,12 @@ public class TSOUtil implements IGraphGenerator {
 
 		StoreBuffer buffer = createFlushedStoreBuffer(toExplore.getBuffer());
 		ControlFlowLocation nextLocation = createControlFlowLocation(cfg, toExplore.getPc(),
-				buffer, util.findLabelByInstruction(function, nextInstruction));
+				buffer, GraphUtility.findLabelByInstruction(function, nextInstruction));
 		Transition transition = createFlushTransition(cfg);
 		transition.setSource(toExplore);
 		transition.setTarget(nextLocation);
 
-		if (!util.isInList(toBeProcessed, nextLocation) && !util.isInList(processed, nextLocation)) {
+		if (!GraphUtility.isInList(toBeProcessed, nextLocation) && !GraphUtility.isInList(processed, nextLocation)) {
 			toBeProcessed.add(nextLocation);
 		}
 	}
@@ -161,7 +161,7 @@ public class TSOUtil implements IGraphGenerator {
 			List<ControlFlowLocation> toBeProcessed,
 			ControlFlowLocation toExplore, Instruction nextInstruction, List<Transition> earlyReadsInFunction, PreComputationChecker checker) {
 		
-		String instructionLabel = util.findLabelByInstruction(function, nextInstruction);
+		String instructionLabel = GraphUtility.findLabelByInstruction(function, nextInstruction);
 		
 		// check for branches
 		if (nextInstruction.eClass().equals(LlvmPackage.eINSTANCE.getBranch())) {
@@ -170,23 +170,23 @@ public class TSOUtil implements IGraphGenerator {
 			if (branch.getElseDestination() != null) {
 				GuardedTransition trueCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
 
-				Instruction trueInstruction = util.getInstructionWithLabel(function,
+				Instruction trueInstruction = GraphUtility.getInstructionWithLabel(function,
 						branch.getDestination().substring(1));
 				StoreBuffer trueBuffer = createStoreBuffer(toExplore.getBuffer(), branch);
 				ControlFlowLocation trueLocation = createControlFlowLocation(cfg,
-						util.getPcOfInstruction(trueInstruction, instructions),
+						GraphUtility.getPcOfInstruction(trueInstruction, instructions),
 						trueBuffer, instructionLabel);
 				trueCase.setSource(toExplore);
 				trueCase.setTarget(trueLocation);
 				trueCase.setInstruction(branch);
-				trueCase.setCondition("[" + util.valueToString(branch.getCondition()) + "]");
+				trueCase.setCondition("[" + GraphUtility.valueToString(branch.getCondition()) + "]");
 				trueCase.setDiagram(cfg);
 
-				Instruction elseInstruction = util.getInstructionWithLabel(function, branch.getElseDestination()
+				Instruction elseInstruction = GraphUtility.getInstructionWithLabel(function, branch.getElseDestination()
 						.substring(1));
 				StoreBuffer elseBuffer = createStoreBuffer(toExplore.getBuffer(), branch);
 				ControlFlowLocation falseLocation = createControlFlowLocation(cfg,
-						util.getPcOfInstruction(elseInstruction, instructions),
+						GraphUtility.getPcOfInstruction(elseInstruction, instructions),
 						elseBuffer, instructionLabel);
 				GuardedTransition falseCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
 				falseCase.setSource(toExplore);
@@ -195,10 +195,10 @@ public class TSOUtil implements IGraphGenerator {
 				falseCase.setCondition("[else]");
 				falseCase.setDiagram(cfg);
 
-				if (!util.isInList(toBeProcessed, trueLocation) && !util.isInList(processed, trueLocation)) {
+				if (!GraphUtility.isInList(toBeProcessed, trueLocation) && !GraphUtility.isInList(processed, trueLocation)) {
 					toBeProcessed.add(trueLocation);
 				}
-				if (!util.isInList(toBeProcessed, falseLocation) && !util.isInList(processed, falseLocation)) {
+				if (!GraphUtility.isInList(toBeProcessed, falseLocation) && !GraphUtility.isInList(processed, falseLocation)) {
 					toBeProcessed.add(falseLocation);
 				}
 			}
@@ -207,15 +207,15 @@ public class TSOUtil implements IGraphGenerator {
 			// && branch.getElseDestination() == null
 			else if (branch.getDestination() != null) {
 				Transition t = createTransition(cfg, branch);
-				Instruction trueInstruction = util.getInstructionWithLabel(function,
+				Instruction trueInstruction = GraphUtility.getInstructionWithLabel(function,
 						branch.getDestination().substring(1));
 				StoreBuffer buffer = createStoreBuffer(toExplore.getBuffer(), branch);
 				ControlFlowLocation nextLocation = createControlFlowLocation(cfg,
-						util.getPcOfInstruction(trueInstruction, instructions),
+						GraphUtility.getPcOfInstruction(trueInstruction, instructions),
 						buffer, instructionLabel);
 				t.setSource(toExplore);
 				t.setTarget(nextLocation);
-				if (!util.isInList(toBeProcessed, nextLocation) && !util.isInList(processed, nextLocation)) {
+				if (!GraphUtility.isInList(toBeProcessed, nextLocation) && !GraphUtility.isInList(processed, nextLocation)) {
 					toBeProcessed.add(nextLocation);
 				}
 			}
@@ -223,10 +223,10 @@ public class TSOUtil implements IGraphGenerator {
 			// TODO: check if switch implementation correct
 			Switch swit = (Switch) nextInstruction;
 
-			Instruction defaultInstruction = util.getInstructionWithLabel(function, swit.getDefaultCase().substring(1));
+			Instruction defaultInstruction = GraphUtility.getInstructionWithLabel(function, swit.getDefaultCase().substring(1));
 			StoreBuffer defaultBuffer = createStoreBuffer(toExplore.getBuffer(), swit);
 			ControlFlowLocation defaultLocation = createControlFlowLocation(cfg,
-					util.getPcOfInstruction(defaultInstruction, instructions),
+					GraphUtility.getPcOfInstruction(defaultInstruction, instructions),
 					defaultBuffer, instructionLabel);
 
 			GuardedTransition defaultCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
@@ -236,25 +236,25 @@ public class TSOUtil implements IGraphGenerator {
 			defaultCase.setDiagram(cfg);
 			defaultCase.setInstruction(swit);
 
-			if (!util.isInList(toBeProcessed, defaultLocation) && !util.isInList(processed, defaultLocation)) {
+			if (!GraphUtility.isInList(toBeProcessed, defaultLocation) && !GraphUtility.isInList(processed, defaultLocation)) {
 				toBeProcessed.add(defaultLocation);
 			}
 
 			for (SwitchCase sc : swit.getCases()) {
-				Instruction caseInstruction = util.getInstructionWithLabel(function, sc.getDestination().substring(1));
+				Instruction caseInstruction = GraphUtility.getInstructionWithLabel(function, sc.getDestination().substring(1));
 				StoreBuffer caseBuffer = createStoreBuffer(toExplore.getBuffer(), swit);
 				ControlFlowLocation caseLocation = createControlFlowLocation(cfg,
-						util.getPcOfInstruction(caseInstruction, instructions),
+						GraphUtility.getPcOfInstruction(caseInstruction, instructions),
 						caseBuffer,	instructionLabel);
 
 				GuardedTransition caseC = ControlflowFactory.eINSTANCE.createGuardedTransition();
-				caseC.setCondition(util.valueToString(sc.getCaseValue().getValue()));
+				caseC.setCondition(GraphUtility.valueToString(sc.getCaseValue().getValue()));
 				caseC.setSource(toExplore);
 				caseC.setTarget(caseLocation);
 				caseC.setInstruction(swit);
 				caseC.setDiagram(cfg);
 
-				if (!util.isInList(toBeProcessed, caseLocation) && !util.isInList(processed, caseLocation)) {
+				if (!GraphUtility.isInList(toBeProcessed, caseLocation) && !GraphUtility.isInList(processed, caseLocation)) {
 					toBeProcessed.add(caseLocation);
 				}
 			}
@@ -278,7 +278,7 @@ public class TSOUtil implements IGraphGenerator {
 					instructionLabel);
 			transition.setTarget(nextLocation);
 
-			if (!util.isInList(toBeProcessed, nextLocation) && !util.isInList(processed, nextLocation)) {
+			if (!GraphUtility.isInList(toBeProcessed, nextLocation) && !GraphUtility.isInList(processed, nextLocation)) {
 				toBeProcessed.add(nextLocation);
 			}
 			
@@ -296,7 +296,7 @@ public class TSOUtil implements IGraphGenerator {
 					t.setSource(toExplore);
 					t.setTarget(nextLocation);
 
-					if (!util.isInList(toBeProcessed, nextLocation) && !util.isInList(processed, nextLocation)) {
+					if (!GraphUtility.isInList(toBeProcessed, nextLocation) && !GraphUtility.isInList(processed, nextLocation)) {
 						toBeProcessed.add(nextLocation);
 					}
 					return;
@@ -319,7 +319,7 @@ public class TSOUtil implements IGraphGenerator {
 				// warningLogger.logPlaceInLoopWithoutFence(function.getAddress().getName(), toExplore, nextLocation, nextInstruction);
 			}
 
-			if (!util.isInList(toBeProcessed, nextLocation) && !util.isInList(processed, nextLocation)) {
+			if (!GraphUtility.isInList(toBeProcessed, nextLocation) && !GraphUtility.isInList(processed, nextLocation)) {
 				toBeProcessed.add(nextLocation);
 			}
 		}
@@ -341,7 +341,7 @@ public class TSOUtil implements IGraphGenerator {
 			AddressValuePair newPair = ControlflowFactory.eINSTANCE.createAddressValuePair();
 			newPair.setAddress(store.getTargetAddress());
 			newPair.setValue(store.getValue());
-			if (!util.isAVPInList(buffer.getAddressValuePairs(), newPair)) {
+			if (!GraphUtility.isAVPInList(buffer.getAddressValuePairs(), newPair)) {
 				buffer.getAddressValuePairs().add(newPair);
 			} else {
 				// TODO: Error handling - loop without fence
@@ -471,7 +471,7 @@ public class TSOUtil implements IGraphGenerator {
 	private ControlFlowLocation createControlFlowLocation(
 			ControlFlowDiagram diag, int pc, StoreBuffer buffer, String blockLabel) {
 		for (ControlFlowLocation l : diag.getLocations()) {
-			if (util.isCorrectLocation(l, pc, buffer)) {
+			if (GraphUtility.isCorrectLocation(l, pc, buffer)) {
 				return l;
 			}
 		}
@@ -535,34 +535,49 @@ public class TSOUtil implements IGraphGenerator {
 	}
 	
 	private String instructionIsEarlyRead(List<Transition> earlyReadsInFunction, ControlFlowLocation toExplore,
-			Instruction nextInstruction) {
-		for (Transition transition : earlyReadsInFunction) {
+			Instruction nextInstruction)
+	{
+		for (Transition transition : earlyReadsInFunction)
+		{
 			if (transition.getSource().getPc() == toExplore.getPc()
 					&& transition.getTarget().getPc() == toExplore.getPc() + 1
-					&& transition.getInstruction().equals(nextInstruction)) {
-				if (nextInstruction instanceof Load) {
+					&& transition.getInstruction().equals(nextInstruction))
+			{
+				if (nextInstruction instanceof Load)
+				{
 					Load earlyReadInstruction = (Load) nextInstruction;
 					// now check if it is indeed an early read
 					EList<AddressValuePair> avpList = toExplore.getBuffer().getAddressValuePairs();
 					ListIterator<AddressValuePair> it = avpList.listIterator(avpList.size());
-					//newest entries first
-					while (it.hasPrevious()) {
+					// newest entries first
+					while (it.hasPrevious())
+					{
 						AddressValuePair avp = (AddressValuePair) it.previous();
 						if (avp.getAddress().getValue() instanceof AddressUse
-								&& earlyReadInstruction.getAddress().getValue() instanceof AddressUse) {
+								&& earlyReadInstruction.getAddress().getValue() instanceof AddressUse)
+						{
 							AddressUse avpAddress = (AddressUse) avp.getAddress().getValue();
 							AddressUse earlyReadAddress = (AddressUse) earlyReadInstruction.getAddress().getValue();
-							if (avpAddress.getAddress().equals(earlyReadAddress.getAddress())) {
+							if (avpAddress.getAddress().equals(earlyReadAddress.getAddress()))
+							{
 								Value value = avp.getValue().getValue();
-								if (value instanceof AddressUse) {
+								if (value instanceof AddressUse)
+								{
 									return ((AddressUse) value).getAddress().getName();
 								}
-								if(value instanceof Constant){
-									return ((Constant) value).getValue().toString();
+								if (value instanceof IntegerConstant)
+								{
+									return String.valueOf(((IntegerConstant) value).getValue());
 								}
-								if(value instanceof PrimitiveValue){
-									return ((PrimitiveValue)value).getValue();
+								if (value instanceof DecimalConstant)
+								{
+									return ((DecimalConstant) value).getValue().toString();
 								}
+								if (value instanceof PrimitiveValue)
+								{
+									return ((PrimitiveValue) value).getValue();
+								}
+								// TODO WHAT IS HERE STILL TO DO???
 								return "TODO";
 							}
 						}
@@ -583,8 +598,8 @@ public class TSOUtil implements IGraphGenerator {
 
 	private void reportLoopWithoutFence(String functionName, ControlFlowLocation locBeforeLatesFence,
 			ControlFlowLocation nextLocAfterWrite, Instruction instruction) {
-		String error = functionName + " - between " + util.getBufferAsString(locBeforeLatesFence) + " and "
-				+ util.getBufferAsString(nextLocAfterWrite) + " caused by " + instruction.toString() + "\n";
+		String error = functionName + " - between " + GraphUtility.getBufferAsString(locBeforeLatesFence) + " and "
+				+ GraphUtility.getBufferAsString(nextLocAfterWrite) + " caused by " + instruction.toString() + "\n";
 		if (!placesInLoopWithoutFence.contains(error)) {
 			placesInLoopWithoutFence.add(error);
 		}

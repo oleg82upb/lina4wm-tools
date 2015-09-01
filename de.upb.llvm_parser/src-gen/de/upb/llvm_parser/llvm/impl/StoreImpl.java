@@ -7,8 +7,6 @@ import de.upb.llvm_parser.llvm.MetaArgValue;
 import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.Store;
 
-import java.math.BigDecimal;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -93,7 +91,7 @@ public class StoreImpl extends InstructionImpl implements Store
    * @generated
    * @ordered
    */
-  protected static final BigDecimal ALIGN_EDEFAULT = null;
+  protected static final int ALIGN_EDEFAULT = 0;
 
   /**
    * The cached value of the '{@link #getAlign() <em>Align</em>}' attribute.
@@ -103,7 +101,7 @@ public class StoreImpl extends InstructionImpl implements Store
    * @generated
    * @ordered
    */
-  protected BigDecimal align = ALIGN_EDEFAULT;
+  protected int align = ALIGN_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getMeta() <em>Meta</em>}' containment reference list.
@@ -300,7 +298,7 @@ public class StoreImpl extends InstructionImpl implements Store
    * <!-- end-user-doc -->
    * @generated
    */
-  public BigDecimal getAlign()
+  public int getAlign()
   {
     return align;
   }
@@ -310,9 +308,9 @@ public class StoreImpl extends InstructionImpl implements Store
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAlign(BigDecimal newAlign)
+  public void setAlign(int newAlign)
   {
-    BigDecimal oldAlign = align;
+    int oldAlign = align;
     align = newAlign;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.STORE__ALIGN, oldAlign, align));
@@ -447,7 +445,7 @@ public class StoreImpl extends InstructionImpl implements Store
         setTargetAddress((Parameter)newValue);
         return;
       case LlvmPackage.STORE__ALIGN:
-        setAlign((BigDecimal)newValue);
+        setAlign((Integer)newValue);
         return;
       case LlvmPackage.STORE__META:
         getMeta().clear();
@@ -515,7 +513,7 @@ public class StoreImpl extends InstructionImpl implements Store
       case LlvmPackage.STORE__TARGET_ADDRESS:
         return targetAddress != null;
       case LlvmPackage.STORE__ALIGN:
-        return ALIGN_EDEFAULT == null ? align != null : !ALIGN_EDEFAULT.equals(align);
+        return align != ALIGN_EDEFAULT;
       case LlvmPackage.STORE__META:
         return meta != null && !meta.isEmpty();
       case LlvmPackage.STORE__ATOMIC:

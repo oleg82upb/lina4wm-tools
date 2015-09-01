@@ -64,11 +64,9 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_Call_FUNCTION_ATTRIBUTESParserRuleCall_7_a;
 	protected AbstractElementAlias match_Call_TailKeyword_1_q;
 	protected AbstractElementAlias match_Call___ByvalKeyword_4_3_or_InregKeyword_4_2_or_NestKeyword_4_7_or_NoaliasKeyword_4_5_or_NocaptureKeyword_4_6_or_SignextKeyword_4_1_or_SretKeyword_4_4_or_ZeroextKeyword_4_0__q;
-	protected AbstractElementAlias match_Call___CommaKeyword_8_0_SrclocKeyword_8_1_ExclamationMarkKeyword_8_2_NUMBERParserRuleCall_8_3__a;
+	protected AbstractElementAlias match_Call___CommaKeyword_8_0_SrclocKeyword_8_1_ExclamationMarkKeyword_8_2_INTTerminalRuleCall_8_3__a;
 	protected AbstractElementAlias match_CmpXchg_SinglethreadKeyword_9_q;
 	protected AbstractElementAlias match_Fence_SinglethreadKeyword_1_q;
-	protected AbstractElementAlias match_FunctionDefinition_ByvalKeyword_0_4_3_q_or_InregKeyword_0_4_2_q_or_NestKeyword_0_4_7_q_or_NoaliasKeyword_0_4_5_q_or_NocaptureKeyword_0_4_6_q_or_SignextKeyword_0_4_1_q_or_SretKeyword_0_4_4_q_or_ZeroextKeyword_0_4_0_q;
-	protected AbstractElementAlias match_FunctionDefinition_ByvalKeyword_1_4_3_q_or_InregKeyword_1_4_2_q_or_NestKeyword_1_4_7_q_or_NoaliasKeyword_1_4_5_q_or_NocaptureKeyword_1_4_6_q_or_SignextKeyword_1_4_1_q_or_SretKeyword_1_4_4_q_or_ZeroextKeyword_1_4_0_q;
 	protected AbstractElementAlias match_FunctionDefinition_CALLING_CONVParserRuleCall_0_3_q;
 	protected AbstractElementAlias match_FunctionDefinition_CALLING_CONVParserRuleCall_1_3_q;
 	protected AbstractElementAlias match_FunctionDefinition_DefaultKeyword_0_2_0_q_or_HiddenKeyword_0_2_1_q_or_ProtectedKeyword_0_2_2_q;
@@ -94,9 +92,8 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_MetadataValue_MetadataKeyword_2_q;
 	protected AbstractElementAlias match_NestedGetElementPtr_InboundsKeyword_1_q;
 	protected AbstractElementAlias match_ParameterList_LeftParenthesisRightParenthesisKeyword_1_0_or___LeftParenthesisKeyword_1_1_0_RightParenthesisKeyword_1_1_2__;
-	protected AbstractElementAlias match_Parameter___ByvalKeyword_1_0_0_3_or_InregKeyword_1_0_0_2_or_NestKeyword_1_0_0_7_or_NoaliasKeyword_1_0_0_5_or_NocaptureKeyword_1_0_0_6_or_SignextKeyword_1_0_0_1_or_SretKeyword_1_0_0_4_or_ZeroextKeyword_1_0_0_0__p;
-	protected AbstractElementAlias match_Parameter___ByvalKeyword_1_1_1_3_or_InregKeyword_1_1_1_2_or_NestKeyword_1_1_1_7_or_NoaliasKeyword_1_1_1_5_or_NocaptureKeyword_1_1_1_6_or_SignextKeyword_1_1_1_1_or_SretKeyword_1_1_1_4_or_ZeroextKeyword_1_1_1_0__a;
-	protected AbstractElementAlias match_Return___CommaKeyword_2_0_DbgKeyword_2_1_ExclamationMarkKeyword_2_2_NUMBERParserRuleCall_2_3__q;
+	protected AbstractElementAlias match_Return___CommaKeyword_0_2_0_DbgKeyword_0_2_1_ExclamationMarkKeyword_0_2_2_INTTerminalRuleCall_0_2_3__q;
+	protected AbstractElementAlias match_Return___CommaKeyword_1_2_0_DbgKeyword_1_2_1_ExclamationMarkKeyword_1_2_2_INTTerminalRuleCall_1_2_3__q;
 	protected AbstractElementAlias match_Store_SinglethreadKeyword_1_6_q;
 	protected AbstractElementAlias match_Structure_POINTERTerminalRuleCall_4_q;
 	protected AbstractElementAlias match_TopLevelEntity_DatalayoutKeyword_1_1_0_or_TripleKeyword_1_1_1;
@@ -149,11 +146,9 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_Call_FUNCTION_ATTRIBUTESParserRuleCall_7_a = new TokenAlias(true, true, grammarAccess.getCallAccess().getFUNCTION_ATTRIBUTESParserRuleCall_7());
 		match_Call_TailKeyword_1_q = new TokenAlias(false, true, grammarAccess.getCallAccess().getTailKeyword_1());
 		match_Call___ByvalKeyword_4_3_or_InregKeyword_4_2_or_NestKeyword_4_7_or_NoaliasKeyword_4_5_or_NocaptureKeyword_4_6_or_SignextKeyword_4_1_or_SretKeyword_4_4_or_ZeroextKeyword_4_0__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getCallAccess().getByvalKeyword_4_3()), new TokenAlias(false, false, grammarAccess.getCallAccess().getInregKeyword_4_2()), new TokenAlias(false, false, grammarAccess.getCallAccess().getNestKeyword_4_7()), new TokenAlias(false, false, grammarAccess.getCallAccess().getNoaliasKeyword_4_5()), new TokenAlias(false, false, grammarAccess.getCallAccess().getNocaptureKeyword_4_6()), new TokenAlias(false, false, grammarAccess.getCallAccess().getSignextKeyword_4_1()), new TokenAlias(false, false, grammarAccess.getCallAccess().getSretKeyword_4_4()), new TokenAlias(false, false, grammarAccess.getCallAccess().getZeroextKeyword_4_0()));
-		match_Call___CommaKeyword_8_0_SrclocKeyword_8_1_ExclamationMarkKeyword_8_2_NUMBERParserRuleCall_8_3__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getCallAccess().getCommaKeyword_8_0()), new TokenAlias(false, false, grammarAccess.getCallAccess().getSrclocKeyword_8_1()), new TokenAlias(false, false, grammarAccess.getCallAccess().getExclamationMarkKeyword_8_2()), new TokenAlias(false, false, grammarAccess.getCallAccess().getNUMBERParserRuleCall_8_3()));
+		match_Call___CommaKeyword_8_0_SrclocKeyword_8_1_ExclamationMarkKeyword_8_2_INTTerminalRuleCall_8_3__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getCallAccess().getCommaKeyword_8_0()), new TokenAlias(false, false, grammarAccess.getCallAccess().getSrclocKeyword_8_1()), new TokenAlias(false, false, grammarAccess.getCallAccess().getExclamationMarkKeyword_8_2()), new TokenAlias(false, false, grammarAccess.getCallAccess().getINTTerminalRuleCall_8_3()));
 		match_CmpXchg_SinglethreadKeyword_9_q = new TokenAlias(false, true, grammarAccess.getCmpXchgAccess().getSinglethreadKeyword_9());
 		match_Fence_SinglethreadKeyword_1_q = new TokenAlias(false, true, grammarAccess.getFenceAccess().getSinglethreadKeyword_1());
-		match_FunctionDefinition_ByvalKeyword_0_4_3_q_or_InregKeyword_0_4_2_q_or_NestKeyword_0_4_7_q_or_NoaliasKeyword_0_4_5_q_or_NocaptureKeyword_0_4_6_q_or_SignextKeyword_0_4_1_q_or_SretKeyword_0_4_4_q_or_ZeroextKeyword_0_4_0_q = new AlternativeAlias(false, false, new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getByvalKeyword_0_4_3()), new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getInregKeyword_0_4_2()), new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getNestKeyword_0_4_7()), new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getNoaliasKeyword_0_4_5()), new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getNocaptureKeyword_0_4_6()), new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getSignextKeyword_0_4_1()), new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getSretKeyword_0_4_4()), new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getZeroextKeyword_0_4_0()));
-		match_FunctionDefinition_ByvalKeyword_1_4_3_q_or_InregKeyword_1_4_2_q_or_NestKeyword_1_4_7_q_or_NoaliasKeyword_1_4_5_q_or_NocaptureKeyword_1_4_6_q_or_SignextKeyword_1_4_1_q_or_SretKeyword_1_4_4_q_or_ZeroextKeyword_1_4_0_q = new AlternativeAlias(false, false, new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getByvalKeyword_1_4_3()), new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getInregKeyword_1_4_2()), new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getNestKeyword_1_4_7()), new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getNoaliasKeyword_1_4_5()), new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getNocaptureKeyword_1_4_6()), new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getSignextKeyword_1_4_1()), new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getSretKeyword_1_4_4()), new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getZeroextKeyword_1_4_0()));
 		match_FunctionDefinition_CALLING_CONVParserRuleCall_0_3_q = new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getCALLING_CONVParserRuleCall_0_3());
 		match_FunctionDefinition_CALLING_CONVParserRuleCall_1_3_q = new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getCALLING_CONVParserRuleCall_1_3());
 		match_FunctionDefinition_DefaultKeyword_0_2_0_q_or_HiddenKeyword_0_2_1_q_or_ProtectedKeyword_0_2_2_q = new AlternativeAlias(false, false, new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getDefaultKeyword_0_2_0()), new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getHiddenKeyword_0_2_1()), new TokenAlias(false, true, grammarAccess.getFunctionDefinitionAccess().getProtectedKeyword_0_2_2()));
@@ -179,9 +174,8 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_MetadataValue_MetadataKeyword_2_q = new TokenAlias(false, true, grammarAccess.getMetadataValueAccess().getMetadataKeyword_2());
 		match_NestedGetElementPtr_InboundsKeyword_1_q = new TokenAlias(false, true, grammarAccess.getNestedGetElementPtrAccess().getInboundsKeyword_1());
 		match_ParameterList_LeftParenthesisRightParenthesisKeyword_1_0_or___LeftParenthesisKeyword_1_1_0_RightParenthesisKeyword_1_1_2__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getParameterListAccess().getLeftParenthesisKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getParameterListAccess().getRightParenthesisKeyword_1_1_2())), new TokenAlias(false, false, grammarAccess.getParameterListAccess().getLeftParenthesisRightParenthesisKeyword_1_0()));
-		match_Parameter___ByvalKeyword_1_0_0_3_or_InregKeyword_1_0_0_2_or_NestKeyword_1_0_0_7_or_NoaliasKeyword_1_0_0_5_or_NocaptureKeyword_1_0_0_6_or_SignextKeyword_1_0_0_1_or_SretKeyword_1_0_0_4_or_ZeroextKeyword_1_0_0_0__p = new AlternativeAlias(true, false, new TokenAlias(false, false, grammarAccess.getParameterAccess().getByvalKeyword_1_0_0_3()), new TokenAlias(false, false, grammarAccess.getParameterAccess().getInregKeyword_1_0_0_2()), new TokenAlias(false, false, grammarAccess.getParameterAccess().getNestKeyword_1_0_0_7()), new TokenAlias(false, false, grammarAccess.getParameterAccess().getNoaliasKeyword_1_0_0_5()), new TokenAlias(false, false, grammarAccess.getParameterAccess().getNocaptureKeyword_1_0_0_6()), new TokenAlias(false, false, grammarAccess.getParameterAccess().getSignextKeyword_1_0_0_1()), new TokenAlias(false, false, grammarAccess.getParameterAccess().getSretKeyword_1_0_0_4()), new TokenAlias(false, false, grammarAccess.getParameterAccess().getZeroextKeyword_1_0_0_0()));
-		match_Parameter___ByvalKeyword_1_1_1_3_or_InregKeyword_1_1_1_2_or_NestKeyword_1_1_1_7_or_NoaliasKeyword_1_1_1_5_or_NocaptureKeyword_1_1_1_6_or_SignextKeyword_1_1_1_1_or_SretKeyword_1_1_1_4_or_ZeroextKeyword_1_1_1_0__a = new AlternativeAlias(true, true, new TokenAlias(false, false, grammarAccess.getParameterAccess().getByvalKeyword_1_1_1_3()), new TokenAlias(false, false, grammarAccess.getParameterAccess().getInregKeyword_1_1_1_2()), new TokenAlias(false, false, grammarAccess.getParameterAccess().getNestKeyword_1_1_1_7()), new TokenAlias(false, false, grammarAccess.getParameterAccess().getNoaliasKeyword_1_1_1_5()), new TokenAlias(false, false, grammarAccess.getParameterAccess().getNocaptureKeyword_1_1_1_6()), new TokenAlias(false, false, grammarAccess.getParameterAccess().getSignextKeyword_1_1_1_1()), new TokenAlias(false, false, grammarAccess.getParameterAccess().getSretKeyword_1_1_1_4()), new TokenAlias(false, false, grammarAccess.getParameterAccess().getZeroextKeyword_1_1_1_0()));
-		match_Return___CommaKeyword_2_0_DbgKeyword_2_1_ExclamationMarkKeyword_2_2_NUMBERParserRuleCall_2_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getReturnAccess().getCommaKeyword_2_0()), new TokenAlias(false, false, grammarAccess.getReturnAccess().getDbgKeyword_2_1()), new TokenAlias(false, false, grammarAccess.getReturnAccess().getExclamationMarkKeyword_2_2()), new TokenAlias(false, false, grammarAccess.getReturnAccess().getNUMBERParserRuleCall_2_3()));
+		match_Return___CommaKeyword_0_2_0_DbgKeyword_0_2_1_ExclamationMarkKeyword_0_2_2_INTTerminalRuleCall_0_2_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getReturnAccess().getCommaKeyword_0_2_0()), new TokenAlias(false, false, grammarAccess.getReturnAccess().getDbgKeyword_0_2_1()), new TokenAlias(false, false, grammarAccess.getReturnAccess().getExclamationMarkKeyword_0_2_2()), new TokenAlias(false, false, grammarAccess.getReturnAccess().getINTTerminalRuleCall_0_2_3()));
+		match_Return___CommaKeyword_1_2_0_DbgKeyword_1_2_1_ExclamationMarkKeyword_1_2_2_INTTerminalRuleCall_1_2_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getReturnAccess().getCommaKeyword_1_2_0()), new TokenAlias(false, false, grammarAccess.getReturnAccess().getDbgKeyword_1_2_1()), new TokenAlias(false, false, grammarAccess.getReturnAccess().getExclamationMarkKeyword_1_2_2()), new TokenAlias(false, false, grammarAccess.getReturnAccess().getINTTerminalRuleCall_1_2_3()));
 		match_Store_SinglethreadKeyword_1_6_q = new TokenAlias(false, true, grammarAccess.getStoreAccess().getSinglethreadKeyword_1_6());
 		match_Structure_POINTERTerminalRuleCall_4_q = new TokenAlias(false, true, grammarAccess.getStructureAccess().getPOINTERTerminalRuleCall_4());
 		match_TopLevelEntity_DatalayoutKeyword_1_1_0_or_TripleKeyword_1_1_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getTopLevelEntityAccess().getDatalayoutKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getTopLevelEntityAccess().getTripleKeyword_1_1_1()));
@@ -193,10 +187,10 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 			return getCALLING_CONVToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getFUNCTION_ATTRIBUTESRule())
 			return getFUNCTION_ATTRIBUTESToken(semanticObject, ruleCall, node);
+		else if(ruleCall.getRule() == grammarAccess.getINTRule())
+			return getINTToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getINT_TYPERule())
 			return getINT_TYPEToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getNUMBERRule())
-			return getNUMBERToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getPOINTERRule())
 			return getPOINTERToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getSL_COMMENTRule())
@@ -210,7 +204,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * CALLING_CONV:
 	 * 	'ccc' | 'fastcc' | 'coldcc' | 'x86_stdcallcc' | 'x86_fastcallcc' | 'x86_thiscallcc' 
 	 * 	| 'arm_apcscc' | 'arm_aapcscc' | 'arm_aapcs_vfpcc' | 'msp430_intrcc' | 'ptx_kernel' 
-	 * 	| 'ptx_device' | 'spir_func' | 'spir_kernel' | 'cc' '<' NUMBER '>' NUMBER;
+	 * 	| 'ptx_device' | 'spir_func' | 'spir_kernel' | 'cc' '<' INT '>' INT;
 	 */
 	protected String getCALLING_CONVToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
@@ -220,7 +214,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * FUNCTION_ATTRIBUTES:
-	 * 	'address_safety' | 'alignstack' '(' '<' NUMBER '>' ')' | 'alwaysinline' | 'nonlazybind' 
+	 * 	'address_safety' | 'alignstack' '(' '<' INT '>' ')' | 'alwaysinline' | 'nonlazybind' 
 	 * 	| 'inlinehint' | 'naked' | 'noimplicitfloat' | 'noinline' | 'noredzone' | 'noreturn' 
 	 * 	| 'nounwind' | 'optsize' | 'readnone' | 'readonly' | 'returns_twice' | 'ssp' | 'sspreq' | 'uwtable';
 	 */
@@ -231,6 +225,15 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	}
 	
 	/**
+	 * terminal INT returns EInt: '-'?('0'..'9')+;
+	 */
+	protected String getINTToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "";
+	}
+	
+	/**
 	 * terminal INT_TYPE:
 	 * 	'i' ('0'..'9')+ POINTER?;
 	 */
@@ -238,16 +241,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 		if (node != null)
 			return getTokenText(node);
 		return "i";
-	}
-	
-	/**
-	 * NUMBER returns EBigDecimal:
-	 * 	'-'? INT ('.' INT)?;
-	 */
-	protected String getNUMBERToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "";
 	}
 	
 	/**
@@ -377,16 +370,12 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_Call_TailKeyword_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_Call___ByvalKeyword_4_3_or_InregKeyword_4_2_or_NestKeyword_4_7_or_NoaliasKeyword_4_5_or_NocaptureKeyword_4_6_or_SignextKeyword_4_1_or_SretKeyword_4_4_or_ZeroextKeyword_4_0__q.equals(syntax))
 				emit_Call___ByvalKeyword_4_3_or_InregKeyword_4_2_or_NestKeyword_4_7_or_NoaliasKeyword_4_5_or_NocaptureKeyword_4_6_or_SignextKeyword_4_1_or_SretKeyword_4_4_or_ZeroextKeyword_4_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Call___CommaKeyword_8_0_SrclocKeyword_8_1_ExclamationMarkKeyword_8_2_NUMBERParserRuleCall_8_3__a.equals(syntax))
-				emit_Call___CommaKeyword_8_0_SrclocKeyword_8_1_ExclamationMarkKeyword_8_2_NUMBERParserRuleCall_8_3__a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_Call___CommaKeyword_8_0_SrclocKeyword_8_1_ExclamationMarkKeyword_8_2_INTTerminalRuleCall_8_3__a.equals(syntax))
+				emit_Call___CommaKeyword_8_0_SrclocKeyword_8_1_ExclamationMarkKeyword_8_2_INTTerminalRuleCall_8_3__a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_CmpXchg_SinglethreadKeyword_9_q.equals(syntax))
 				emit_CmpXchg_SinglethreadKeyword_9_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_Fence_SinglethreadKeyword_1_q.equals(syntax))
 				emit_Fence_SinglethreadKeyword_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_FunctionDefinition_ByvalKeyword_0_4_3_q_or_InregKeyword_0_4_2_q_or_NestKeyword_0_4_7_q_or_NoaliasKeyword_0_4_5_q_or_NocaptureKeyword_0_4_6_q_or_SignextKeyword_0_4_1_q_or_SretKeyword_0_4_4_q_or_ZeroextKeyword_0_4_0_q.equals(syntax))
-				emit_FunctionDefinition_ByvalKeyword_0_4_3_q_or_InregKeyword_0_4_2_q_or_NestKeyword_0_4_7_q_or_NoaliasKeyword_0_4_5_q_or_NocaptureKeyword_0_4_6_q_or_SignextKeyword_0_4_1_q_or_SretKeyword_0_4_4_q_or_ZeroextKeyword_0_4_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_FunctionDefinition_ByvalKeyword_1_4_3_q_or_InregKeyword_1_4_2_q_or_NestKeyword_1_4_7_q_or_NoaliasKeyword_1_4_5_q_or_NocaptureKeyword_1_4_6_q_or_SignextKeyword_1_4_1_q_or_SretKeyword_1_4_4_q_or_ZeroextKeyword_1_4_0_q.equals(syntax))
-				emit_FunctionDefinition_ByvalKeyword_1_4_3_q_or_InregKeyword_1_4_2_q_or_NestKeyword_1_4_7_q_or_NoaliasKeyword_1_4_5_q_or_NocaptureKeyword_1_4_6_q_or_SignextKeyword_1_4_1_q_or_SretKeyword_1_4_4_q_or_ZeroextKeyword_1_4_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_FunctionDefinition_CALLING_CONVParserRuleCall_0_3_q.equals(syntax))
 				emit_FunctionDefinition_CALLING_CONVParserRuleCall_0_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_FunctionDefinition_CALLING_CONVParserRuleCall_1_3_q.equals(syntax))
@@ -437,12 +426,10 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_NestedGetElementPtr_InboundsKeyword_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_ParameterList_LeftParenthesisRightParenthesisKeyword_1_0_or___LeftParenthesisKeyword_1_1_0_RightParenthesisKeyword_1_1_2__.equals(syntax))
 				emit_ParameterList_LeftParenthesisRightParenthesisKeyword_1_0_or___LeftParenthesisKeyword_1_1_0_RightParenthesisKeyword_1_1_2__(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Parameter___ByvalKeyword_1_0_0_3_or_InregKeyword_1_0_0_2_or_NestKeyword_1_0_0_7_or_NoaliasKeyword_1_0_0_5_or_NocaptureKeyword_1_0_0_6_or_SignextKeyword_1_0_0_1_or_SretKeyword_1_0_0_4_or_ZeroextKeyword_1_0_0_0__p.equals(syntax))
-				emit_Parameter___ByvalKeyword_1_0_0_3_or_InregKeyword_1_0_0_2_or_NestKeyword_1_0_0_7_or_NoaliasKeyword_1_0_0_5_or_NocaptureKeyword_1_0_0_6_or_SignextKeyword_1_0_0_1_or_SretKeyword_1_0_0_4_or_ZeroextKeyword_1_0_0_0__p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Parameter___ByvalKeyword_1_1_1_3_or_InregKeyword_1_1_1_2_or_NestKeyword_1_1_1_7_or_NoaliasKeyword_1_1_1_5_or_NocaptureKeyword_1_1_1_6_or_SignextKeyword_1_1_1_1_or_SretKeyword_1_1_1_4_or_ZeroextKeyword_1_1_1_0__a.equals(syntax))
-				emit_Parameter___ByvalKeyword_1_1_1_3_or_InregKeyword_1_1_1_2_or_NestKeyword_1_1_1_7_or_NoaliasKeyword_1_1_1_5_or_NocaptureKeyword_1_1_1_6_or_SignextKeyword_1_1_1_1_or_SretKeyword_1_1_1_4_or_ZeroextKeyword_1_1_1_0__a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Return___CommaKeyword_2_0_DbgKeyword_2_1_ExclamationMarkKeyword_2_2_NUMBERParserRuleCall_2_3__q.equals(syntax))
-				emit_Return___CommaKeyword_2_0_DbgKeyword_2_1_ExclamationMarkKeyword_2_2_NUMBERParserRuleCall_2_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_Return___CommaKeyword_0_2_0_DbgKeyword_0_2_1_ExclamationMarkKeyword_0_2_2_INTTerminalRuleCall_0_2_3__q.equals(syntax))
+				emit_Return___CommaKeyword_0_2_0_DbgKeyword_0_2_1_ExclamationMarkKeyword_0_2_2_INTTerminalRuleCall_0_2_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_Return___CommaKeyword_1_2_0_DbgKeyword_1_2_1_ExclamationMarkKeyword_1_2_2_INTTerminalRuleCall_1_2_3__q.equals(syntax))
+				emit_Return___CommaKeyword_1_2_0_DbgKeyword_1_2_1_ExclamationMarkKeyword_1_2_2_INTTerminalRuleCall_1_2_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_Store_SinglethreadKeyword_1_6_q.equals(syntax))
 				emit_Store_SinglethreadKeyword_1_6_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_Structure_POINTERTerminalRuleCall_4_q.equals(syntax))
@@ -824,9 +811,9 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     (',' '!srcloc' '!' NUMBER)*
+	 *     (',' '!srcloc' '!' INT)*
 	 */
-	protected void emit_Call___CommaKeyword_8_0_SrclocKeyword_8_1_ExclamationMarkKeyword_8_2_NUMBERParserRuleCall_8_3__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Call___CommaKeyword_8_0_SrclocKeyword_8_1_ExclamationMarkKeyword_8_2_INTTerminalRuleCall_8_3__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -843,40 +830,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     'singlethread'?
 	 */
 	protected void emit_Fence_SinglethreadKeyword_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Syntax:
-	 *     (
-	     'zeroext'? | 
-	     'signext'? | 
-	     'inreg'? | 
-	     'byval'? | 
-	     'sret'? | 
-	     'noalias'? | 
-	     'nocapture'? | 
-	     'nest'?
-	 )
-	 */
-	protected void emit_FunctionDefinition_ByvalKeyword_0_4_3_q_or_InregKeyword_0_4_2_q_or_NestKeyword_0_4_7_q_or_NoaliasKeyword_0_4_5_q_or_NocaptureKeyword_0_4_6_q_or_SignextKeyword_0_4_1_q_or_SretKeyword_0_4_4_q_or_ZeroextKeyword_0_4_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Syntax:
-	 *     (
-	     'zeroext'? | 
-	     'signext'? | 
-	     'inreg'? | 
-	     'byval'? | 
-	     'sret'? | 
-	     'noalias'? | 
-	     'nocapture'? | 
-	     'nest'?
-	 )
-	 */
-	protected void emit_FunctionDefinition_ByvalKeyword_1_4_3_q_or_InregKeyword_1_4_2_q_or_NestKeyword_1_4_7_q_or_NoaliasKeyword_1_4_5_q_or_NocaptureKeyword_1_4_6_q_or_SignextKeyword_1_4_1_q_or_SretKeyword_1_4_4_q_or_ZeroextKeyword_1_4_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -1154,43 +1107,17 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     (
-	     'zeroext' | 
-	     'signext' | 
-	     'inreg' | 
-	     'byval' | 
-	     'sret' | 
-	     'noalias' | 
-	     'nocapture' | 
-	     'nest'
-	 )+
+	 *     (',' '!dbg' '!' INT)?
 	 */
-	protected void emit_Parameter___ByvalKeyword_1_0_0_3_or_InregKeyword_1_0_0_2_or_NestKeyword_1_0_0_7_or_NoaliasKeyword_1_0_0_5_or_NocaptureKeyword_1_0_0_6_or_SignextKeyword_1_0_0_1_or_SretKeyword_1_0_0_4_or_ZeroextKeyword_1_0_0_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Return___CommaKeyword_0_2_0_DbgKeyword_0_2_1_ExclamationMarkKeyword_0_2_2_INTTerminalRuleCall_0_2_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
 	 * Syntax:
-	 *     (
-	     'zeroext' | 
-	     'signext' | 
-	     'inreg' | 
-	     'byval' | 
-	     'sret' | 
-	     'noalias' | 
-	     'nocapture' | 
-	     'nest'
-	 )*
+	 *     (',' '!dbg' '!' INT)?
 	 */
-	protected void emit_Parameter___ByvalKeyword_1_1_1_3_or_InregKeyword_1_1_1_2_or_NestKeyword_1_1_1_7_or_NoaliasKeyword_1_1_1_5_or_NocaptureKeyword_1_1_1_6_or_SignextKeyword_1_1_1_1_or_SretKeyword_1_1_1_4_or_ZeroextKeyword_1_1_1_0__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Syntax:
-	 *     (',' '!dbg' '!' NUMBER)?
-	 */
-	protected void emit_Return___CommaKeyword_2_0_DbgKeyword_2_1_ExclamationMarkKeyword_2_2_NUMBERParserRuleCall_2_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Return___CommaKeyword_1_2_0_DbgKeyword_1_2_1_ExclamationMarkKeyword_1_2_2_INTTerminalRuleCall_1_2_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

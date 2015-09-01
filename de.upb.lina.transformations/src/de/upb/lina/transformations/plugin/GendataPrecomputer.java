@@ -22,6 +22,7 @@ import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.lina.cfg.gendata.LocationLabel;
 import de.upb.lina.cfg.gendata.PhiMapping;
 import de.upb.lina.cfg.gendata.TransitionLabel;
+import de.upb.lina.cfg.tools.GraphUtility;
 import de.upb.llvm_parser.llvm.AbstractElement;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
@@ -35,7 +36,7 @@ import de.upb.llvm_parser.llvm.Call;
 import de.upb.llvm_parser.llvm.Cast;
 import de.upb.llvm_parser.llvm.CmpXchg;
 import de.upb.llvm_parser.llvm.Compare;
-import de.upb.llvm_parser.llvm.Constant;
+import de.upb.llvm_parser.llvm.DecimalConstant;
 import de.upb.llvm_parser.llvm.ExtractElement;
 import de.upb.llvm_parser.llvm.ExtractValue;
 import de.upb.llvm_parser.llvm.Fence;
@@ -49,6 +50,7 @@ import de.upb.llvm_parser.llvm.IndirectBranch;
 import de.upb.llvm_parser.llvm.InsertElement;
 import de.upb.llvm_parser.llvm.InsertValue;
 import de.upb.llvm_parser.llvm.Instruction;
+import de.upb.llvm_parser.llvm.IntegerConstant;
 import de.upb.llvm_parser.llvm.Invoke;
 import de.upb.llvm_parser.llvm.LLVM;
 import de.upb.llvm_parser.llvm.LandingPad;
@@ -158,7 +160,7 @@ public class GendataPrecomputer {
 	}
 	
 	private void checkForMulOrDiv(){
-		String s = Utils.checkForMulOrDiv(cfgs);
+		String s = GraphUtility.hasMultiplicationOrDivision(cfgs);
 		if(s != null)
 			helperModel.getTransformationSpecificKeys().add(s);
 	}
@@ -501,7 +503,7 @@ public class GendataPrecomputer {
 		String bufferLabel = cfgToLabelPrefix.get(loc.getDiagram()) + String.format("%0"+sizeString+"d", loc.getPc());
 
 		for(AddressValuePair avp: loc.getBuffer().getAddressValuePairs()){
-			bufferLabel += lookupValue(avp.getAddress().getValue());
+			bufferLabel += valueToString(avp.getAddress().getValue());
 		}
 		return bufferLabel;
 	}
@@ -511,16 +513,18 @@ public class GendataPrecomputer {
 		String bufferLabel = cfgToLabelPrefix.get(loc.getDiagram()) + String.format("%0"+sizeString+"d", loc.getPc());
 
 		for(AddressValuePair avp: loc.getBuffer().getAddressValuePairs()){
-			bufferLabel += lookupValue(avp.getAddress().getValue()) + lookupValue(avp.getValue().getValue());
+			bufferLabel += valueToString(avp.getAddress().getValue()) + valueToString(avp.getValue().getValue());
 		}
 
 		return bufferLabel;
 	}
 
-	private String lookupValue(Value value){
-		if (value instanceof Constant) {
-			Constant constant = (Constant) value;
-			return constant.getValue().toString();
+	private String valueToString(Value value){
+		if (value instanceof IntegerConstant) {
+			return ""+((IntegerConstant)value).getValue();
+		}
+		if (value instanceof DecimalConstant) {
+			return ((DecimalConstant)value).getValue().toString();
 		}
 
 		if (value instanceof AddressUseImpl) {
@@ -620,8 +624,26 @@ public class GendataPrecomputer {
 				if(defAddress != null){
 					globals.add(defAddress);
 				}
-				AddressMapping defValue = addToMapping(allVariables, null, extractAddressFromValue(gDef.getValue().getValue()));
-				setType(defValue, gDef.getValue().getType());
+				
+				EObject type = null;
+				AddressMapping defValue = null;
+				if(gDef.getValue() instanceof Parameter)
+				{
+					Parameter param = (Parameter)gDef.getValue(); 
+					type = param.getType();
+					
+					Address address = extractAddressFromValue(param.getValue());
+					defValue = addToMapping(allVariables, null, address);
+				}
+				else if (gDef.getValue() instanceof Predefined)
+				{
+					type  = gDef.getValue();
+				}
+				else {
+					throw new RuntimeException("Unexpected type " + type + " detected for globale definition");
+				}
+				
+				setType(defValue, type);
 				if(defValue != null){	
 					globals.add(defValue);
 				}
@@ -800,8 +822,15 @@ public class GendataPrecomputer {
 			//nothing to do here
 		}else if(i instanceof Return){
 			Return op = (Return) i;
-			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getValue().getValue()));
-			setType(m, op.getValue().getType());
+			if(op.getValue() instanceof Parameter)
+			{
+				Parameter param = (Parameter)op.getValue();
+				m = addToMapping(allVariables, cfg, extractAddressFromValue(param.getValue()));
+				setType(m, param.getType());
+			}
+			else if (op.getValue() instanceof PrimitiveValue){
+				m = addToMapping(allVariables, cfg, extractAddressFromValue((PrimitiveValue)op.getValue()));
+			}
 
 		}else if(i instanceof Branch){
 			Branch op = (Branch)i;
@@ -827,7 +856,7 @@ public class GendataPrecomputer {
 		//no mapping found, create new one
 		}else{
 			//create new addressmapping
-			AddressMapping addressMapping = createAddressMapping(address, Utils.clean(address.getName()));
+			AddressMapping addressMapping = createAddressMapping(address, GraphUtility.clean(address.getName()));
 			setType(addressMapping,address);
 
 			mapping.add(addressMapping);

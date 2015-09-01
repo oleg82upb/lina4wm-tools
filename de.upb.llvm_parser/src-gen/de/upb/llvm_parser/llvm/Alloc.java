@@ -2,7 +2,6 @@
  */
 package de.upb.llvm_parser.llvm;
 
-import java.math.BigDecimal;
 
 /**
  * <!-- begin-user-doc -->
@@ -112,12 +111,12 @@ public interface Alloc extends Instruction
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Align</em>' attribute.
-   * @see #setAlign(BigDecimal)
+   * @see #setAlign(int)
    * @see de.upb.llvm_parser.llvm.LlvmPackage#getAlloc_Align()
    * @model
    * @generated
    */
-  BigDecimal getAlign();
+  int getAlign();
 
   /**
    * Sets the value of the '{@link de.upb.llvm_parser.llvm.Alloc#getAlign <em>Align</em>}' attribute.
@@ -127,6 +126,6 @@ public interface Alloc extends Instruction
    * @see #getAlign()
    * @generated
    */
-  void setAlign(BigDecimal value);
+  void setAlign(int value);
 
 } // Alloc

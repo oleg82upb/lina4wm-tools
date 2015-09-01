@@ -2,6 +2,8 @@
  */
 package de.upb.llvm_parser.llvm;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -13,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.Parameter#getType <em>Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Parameter#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Parameter#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
@@ -48,6 +51,22 @@ public interface Parameter extends EObject
    * @generated
    */
   void setType(EObject value);
+
+  /**
+   * Returns the value of the '<em><b>Attributes</b></em>' attribute list.
+   * The list contents are of type {@link java.lang.String}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Attributes</em>' attribute list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Attributes</em>' attribute list.
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getParameter_Attributes()
+   * @model unique="false"
+   * @generated
+   */
+  EList<String> getAttributes();
 
   /**
    * Returns the value of the '<em><b>Value</b></em>' containment reference.

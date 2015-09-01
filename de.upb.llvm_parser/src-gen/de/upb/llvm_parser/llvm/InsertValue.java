@@ -2,8 +2,6 @@
  */
 package de.upb.llvm_parser.llvm;
 
-import java.math.BigDecimal;
-
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -107,7 +105,7 @@ public interface InsertValue extends Instruction
 
   /**
    * Returns the value of the '<em><b>Index</b></em>' attribute list.
-   * The list contents are of type {@link java.math.BigDecimal}.
+   * The list contents are of type {@link java.lang.Integer}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Index</em>' attribute list isn't clear,
@@ -119,6 +117,6 @@ public interface InsertValue extends Instruction
    * @model unique="false"
    * @generated
    */
-  EList<BigDecimal> getIndex();
+  EList<Integer> getIndex();
 
 } // InsertValue

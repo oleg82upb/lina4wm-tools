@@ -19,12 +19,18 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.*;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeColumn;
+import org.eclipse.swt.widgets.TreeItem;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
+import de.upb.lina.cfg.tools.GraphUtility;
 import de.upb.lina.transformations.plugin.Activator;
-import de.upb.lina.transformations.plugin.Utils;
 import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.Call;
 import de.upb.llvm_parser.llvm.FunctionBody;
@@ -236,7 +242,7 @@ public class FunctionSelectionPage extends WizardPage{
 					for(BasicBlock b: fd.getBody().getBlocks()){
 						for(Instruction ins: b.getInstructions()){
 							if(ins instanceof Call){
-								String calledFunction = Utils.valueToString(((Call) ins).getFunction().getValue());
+								String calledFunction = GraphUtility.valueToString(((Call) ins).getFunction().getValue());
 								//if the function is to be generated and if its not a self-call (recursion)
 								if(functionToCfg.containsKey(calledFunction) && functionToCfg.get(calledFunction) != cfg){
 									addDependency(cfg, calledFunction);

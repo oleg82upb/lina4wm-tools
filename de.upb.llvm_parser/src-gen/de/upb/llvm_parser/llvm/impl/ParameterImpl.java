@@ -6,8 +6,12 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.Value;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -15,6 +19,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,6 +30,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.ParameterImpl#getType <em>Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.ParameterImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.ParameterImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
@@ -41,6 +48,16 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
    * @ordered
    */
   protected EObject type;
+
+  /**
+   * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAttributes()
+   * @generated
+   * @ordered
+   */
+  protected EList<String> attributes;
 
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
@@ -126,6 +143,20 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<String> getAttributes()
+  {
+    if (attributes == null)
+    {
+      attributes = new EDataTypeEList<String>(String.class, this, LlvmPackage.PARAMETER__ATTRIBUTES);
+    }
+    return attributes;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Value getValue()
   {
     return value;
@@ -199,6 +230,8 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
     {
       case LlvmPackage.PARAMETER__TYPE:
         return getType();
+      case LlvmPackage.PARAMETER__ATTRIBUTES:
+        return getAttributes();
       case LlvmPackage.PARAMETER__VALUE:
         return getValue();
     }
@@ -210,6 +243,7 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -217,6 +251,10 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
     {
       case LlvmPackage.PARAMETER__TYPE:
         setType((EObject)newValue);
+        return;
+      case LlvmPackage.PARAMETER__ATTRIBUTES:
+        getAttributes().clear();
+        getAttributes().addAll((Collection<? extends String>)newValue);
         return;
       case LlvmPackage.PARAMETER__VALUE:
         setValue((Value)newValue);
@@ -238,6 +276,9 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
       case LlvmPackage.PARAMETER__TYPE:
         setType((EObject)null);
         return;
+      case LlvmPackage.PARAMETER__ATTRIBUTES:
+        getAttributes().clear();
+        return;
       case LlvmPackage.PARAMETER__VALUE:
         setValue((Value)null);
         return;
@@ -257,10 +298,29 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
     {
       case LlvmPackage.PARAMETER__TYPE:
         return type != null;
+      case LlvmPackage.PARAMETER__ATTRIBUTES:
+        return attributes != null && !attributes.isEmpty();
       case LlvmPackage.PARAMETER__VALUE:
         return value != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (attributes: ");
+    result.append(attributes);
+    result.append(')');
+    return result.toString();
   }
 
 } //ParameterImpl

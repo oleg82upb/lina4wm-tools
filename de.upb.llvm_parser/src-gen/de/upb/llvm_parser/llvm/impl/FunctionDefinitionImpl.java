@@ -9,8 +9,6 @@ import de.upb.llvm_parser.llvm.FunctionParameterList;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.TypeUse;
 
-import java.math.BigDecimal;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -26,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl#getReturnAttribute <em>Return Attribute</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl#getAddress <em>Address</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl#getParameter <em>Parameter</em>}</li>
@@ -38,6 +37,26 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class FunctionDefinitionImpl extends MainLevelEntityImpl implements FunctionDefinition
 {
+  /**
+   * The default value of the '{@link #getReturnAttribute() <em>Return Attribute</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getReturnAttribute()
+   * @generated
+   * @ordered
+   */
+  protected static final String RETURN_ATTRIBUTE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getReturnAttribute() <em>Return Attribute</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getReturnAttribute()
+   * @generated
+   * @ordered
+   */
+  protected String returnAttribute = RETURN_ATTRIBUTE_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -76,7 +95,7 @@ public class FunctionDefinitionImpl extends MainLevelEntityImpl implements Funct
    * @generated
    * @ordered
    */
-  protected static final BigDecimal ALIGN_EDEFAULT = null;
+  protected static final int ALIGN_EDEFAULT = 0;
 
   /**
    * The cached value of the '{@link #getAlign() <em>Align</em>}' attribute.
@@ -86,7 +105,7 @@ public class FunctionDefinitionImpl extends MainLevelEntityImpl implements Funct
    * @generated
    * @ordered
    */
-  protected BigDecimal align = ALIGN_EDEFAULT;
+  protected int align = ALIGN_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
@@ -117,6 +136,29 @@ public class FunctionDefinitionImpl extends MainLevelEntityImpl implements Funct
   protected EClass eStaticClass()
   {
     return LlvmPackage.Literals.FUNCTION_DEFINITION;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getReturnAttribute()
+  {
+    return returnAttribute;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setReturnAttribute(String newReturnAttribute)
+  {
+    String oldReturnAttribute = returnAttribute;
+    returnAttribute = newReturnAttribute;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.FUNCTION_DEFINITION__RETURN_ATTRIBUTE, oldReturnAttribute, returnAttribute));
   }
 
   /**
@@ -268,7 +310,7 @@ public class FunctionDefinitionImpl extends MainLevelEntityImpl implements Funct
    * <!-- end-user-doc -->
    * @generated
    */
-  public BigDecimal getAlign()
+  public int getAlign()
   {
     return align;
   }
@@ -278,9 +320,9 @@ public class FunctionDefinitionImpl extends MainLevelEntityImpl implements Funct
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAlign(BigDecimal newAlign)
+  public void setAlign(int newAlign)
   {
-    BigDecimal oldAlign = align;
+    int oldAlign = align;
     align = newAlign;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.FUNCTION_DEFINITION__ALIGN, oldAlign, align));
@@ -366,6 +408,8 @@ public class FunctionDefinitionImpl extends MainLevelEntityImpl implements Funct
   {
     switch (featureID)
     {
+      case LlvmPackage.FUNCTION_DEFINITION__RETURN_ATTRIBUTE:
+        return getReturnAttribute();
       case LlvmPackage.FUNCTION_DEFINITION__RETURN_TYPE:
         return getReturnType();
       case LlvmPackage.FUNCTION_DEFINITION__ADDRESS:
@@ -390,6 +434,9 @@ public class FunctionDefinitionImpl extends MainLevelEntityImpl implements Funct
   {
     switch (featureID)
     {
+      case LlvmPackage.FUNCTION_DEFINITION__RETURN_ATTRIBUTE:
+        setReturnAttribute((String)newValue);
+        return;
       case LlvmPackage.FUNCTION_DEFINITION__RETURN_TYPE:
         setReturnType((TypeUse)newValue);
         return;
@@ -400,7 +447,7 @@ public class FunctionDefinitionImpl extends MainLevelEntityImpl implements Funct
         setParameter((FunctionParameterList)newValue);
         return;
       case LlvmPackage.FUNCTION_DEFINITION__ALIGN:
-        setAlign((BigDecimal)newValue);
+        setAlign((Integer)newValue);
         return;
       case LlvmPackage.FUNCTION_DEFINITION__BODY:
         setBody((FunctionBody)newValue);
@@ -419,6 +466,9 @@ public class FunctionDefinitionImpl extends MainLevelEntityImpl implements Funct
   {
     switch (featureID)
     {
+      case LlvmPackage.FUNCTION_DEFINITION__RETURN_ATTRIBUTE:
+        setReturnAttribute(RETURN_ATTRIBUTE_EDEFAULT);
+        return;
       case LlvmPackage.FUNCTION_DEFINITION__RETURN_TYPE:
         setReturnType((TypeUse)null);
         return;
@@ -448,6 +498,8 @@ public class FunctionDefinitionImpl extends MainLevelEntityImpl implements Funct
   {
     switch (featureID)
     {
+      case LlvmPackage.FUNCTION_DEFINITION__RETURN_ATTRIBUTE:
+        return RETURN_ATTRIBUTE_EDEFAULT == null ? returnAttribute != null : !RETURN_ATTRIBUTE_EDEFAULT.equals(returnAttribute);
       case LlvmPackage.FUNCTION_DEFINITION__RETURN_TYPE:
         return returnType != null;
       case LlvmPackage.FUNCTION_DEFINITION__ADDRESS:
@@ -455,7 +507,7 @@ public class FunctionDefinitionImpl extends MainLevelEntityImpl implements Funct
       case LlvmPackage.FUNCTION_DEFINITION__PARAMETER:
         return parameter != null;
       case LlvmPackage.FUNCTION_DEFINITION__ALIGN:
-        return ALIGN_EDEFAULT == null ? align != null : !ALIGN_EDEFAULT.equals(align);
+        return align != ALIGN_EDEFAULT;
       case LlvmPackage.FUNCTION_DEFINITION__BODY:
         return body != null;
     }
@@ -473,7 +525,9 @@ public class FunctionDefinitionImpl extends MainLevelEntityImpl implements Funct
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (align: ");
+    result.append(" (returnAttribute: ");
+    result.append(returnAttribute);
+    result.append(", align: ");
     result.append(align);
     result.append(')');
     return result.toString();

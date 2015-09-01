@@ -2,7 +2,7 @@
  */
 package de.upb.llvm_parser.llvm;
 
-import java.math.BigDecimal;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -59,12 +59,12 @@ public interface GlobalDefinition extends MainLevelEntity
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' containment reference.
-   * @see #setValue(Parameter)
+   * @see #setValue(EObject)
    * @see de.upb.llvm_parser.llvm.LlvmPackage#getGlobalDefinition_Value()
    * @model containment="true"
    * @generated
    */
-  Parameter getValue();
+  EObject getValue();
 
   /**
    * Sets the value of the '{@link de.upb.llvm_parser.llvm.GlobalDefinition#getValue <em>Value</em>}' containment reference.
@@ -74,7 +74,7 @@ public interface GlobalDefinition extends MainLevelEntity
    * @see #getValue()
    * @generated
    */
-  void setValue(Parameter value);
+  void setValue(EObject value);
 
   /**
    * Returns the value of the '<em><b>Align</b></em>' attribute.
@@ -85,12 +85,12 @@ public interface GlobalDefinition extends MainLevelEntity
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Align</em>' attribute.
-   * @see #setAlign(BigDecimal)
+   * @see #setAlign(int)
    * @see de.upb.llvm_parser.llvm.LlvmPackage#getGlobalDefinition_Align()
    * @model
    * @generated
    */
-  BigDecimal getAlign();
+  int getAlign();
 
   /**
    * Sets the value of the '{@link de.upb.llvm_parser.llvm.GlobalDefinition#getAlign <em>Align</em>}' attribute.
@@ -100,6 +100,6 @@ public interface GlobalDefinition extends MainLevelEntity
    * @see #getAlign()
    * @generated
    */
-  void setAlign(BigDecimal value);
+  void setAlign(int value);
 
 } // GlobalDefinition

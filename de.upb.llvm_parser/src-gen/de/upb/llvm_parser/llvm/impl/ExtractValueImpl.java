@@ -7,8 +7,6 @@ import de.upb.llvm_parser.llvm.ExtractValue;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Parameter;
 
-import java.math.BigDecimal;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -68,7 +66,7 @@ public class ExtractValueImpl extends InstructionImpl implements ExtractValue
    * @generated
    * @ordered
    */
-  protected EList<BigDecimal> index;
+  protected EList<Integer> index;
 
   /**
    * <!-- begin-user-doc -->
@@ -192,11 +190,11 @@ public class ExtractValueImpl extends InstructionImpl implements ExtractValue
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<BigDecimal> getIndex()
+  public EList<Integer> getIndex()
   {
     if (index == null)
     {
-      index = new EDataTypeEList<BigDecimal>(BigDecimal.class, this, LlvmPackage.EXTRACT_VALUE__INDEX);
+      index = new EDataTypeEList<Integer>(Integer.class, this, LlvmPackage.EXTRACT_VALUE__INDEX);
     }
     return index;
   }
@@ -258,7 +256,7 @@ public class ExtractValueImpl extends InstructionImpl implements ExtractValue
         return;
       case LlvmPackage.EXTRACT_VALUE__INDEX:
         getIndex().clear();
-        getIndex().addAll((Collection<? extends BigDecimal>)newValue);
+        getIndex().addAll((Collection<? extends Integer>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

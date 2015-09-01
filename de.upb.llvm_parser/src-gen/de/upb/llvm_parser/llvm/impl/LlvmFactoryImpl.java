@@ -80,6 +80,8 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
       case LlvmPackage.ARRAY: return createArray();
       case LlvmPackage.AGGREGATE_TYPE: return createAggregate_Type();
       case LlvmPackage.CONSTANT: return createConstant();
+      case LlvmPackage.DECIMAL_CONSTANT: return createDecimalConstant();
+      case LlvmPackage.INTEGER_CONSTANT: return createIntegerConstant();
       case LlvmPackage.PRIMITIVE_VALUE: return createPrimitiveValue();
       case LlvmPackage.VALUE: return createValue();
       case LlvmPackage.VALUE_STRUCT: return createValueStruct();
@@ -331,6 +333,28 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
   {
     ConstantImpl constant = new ConstantImpl();
     return constant;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DecimalConstant createDecimalConstant()
+  {
+    DecimalConstantImpl decimalConstant = new DecimalConstantImpl();
+    return decimalConstant;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IntegerConstant createIntegerConstant()
+  {
+    IntegerConstantImpl integerConstant = new IntegerConstantImpl();
+    return integerConstant;
   }
 
   /**

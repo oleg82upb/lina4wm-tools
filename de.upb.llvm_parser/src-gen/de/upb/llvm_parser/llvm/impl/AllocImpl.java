@@ -8,8 +8,6 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.TypeUse;
 
-import java.math.BigDecimal;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -74,7 +72,7 @@ public class AllocImpl extends InstructionImpl implements Alloc
    * @generated
    * @ordered
    */
-  protected static final BigDecimal ALIGN_EDEFAULT = null;
+  protected static final int ALIGN_EDEFAULT = 0;
 
   /**
    * The cached value of the '{@link #getAlign() <em>Align</em>}' attribute.
@@ -84,7 +82,7 @@ public class AllocImpl extends InstructionImpl implements Alloc
    * @generated
    * @ordered
    */
-  protected BigDecimal align = ALIGN_EDEFAULT;
+  protected int align = ALIGN_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -256,7 +254,7 @@ public class AllocImpl extends InstructionImpl implements Alloc
    * <!-- end-user-doc -->
    * @generated
    */
-  public BigDecimal getAlign()
+  public int getAlign()
   {
     return align;
   }
@@ -266,9 +264,9 @@ public class AllocImpl extends InstructionImpl implements Alloc
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAlign(BigDecimal newAlign)
+  public void setAlign(int newAlign)
   {
-    BigDecimal oldAlign = align;
+    int oldAlign = align;
     align = newAlign;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ALLOC__ALIGN, oldAlign, align));
@@ -336,7 +334,7 @@ public class AllocImpl extends InstructionImpl implements Alloc
         setNumOfElements((Parameter)newValue);
         return;
       case LlvmPackage.ALLOC__ALIGN:
-        setAlign((BigDecimal)newValue);
+        setAlign((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -385,7 +383,7 @@ public class AllocImpl extends InstructionImpl implements Alloc
       case LlvmPackage.ALLOC__NUM_OF_ELEMENTS:
         return numOfElements != null;
       case LlvmPackage.ALLOC__ALIGN:
-        return ALIGN_EDEFAULT == null ? align != null : !ALIGN_EDEFAULT.equals(align);
+        return align != ALIGN_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }

@@ -167,6 +167,24 @@ public interface LlvmFactory extends EFactory
   Constant createConstant();
 
   /**
+   * Returns a new object of class '<em>Decimal Constant</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Decimal Constant</em>'.
+   * @generated
+   */
+  DecimalConstant createDecimalConstant();
+
+  /**
+   * Returns a new object of class '<em>Integer Constant</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Integer Constant</em>'.
+   * @generated
+   */
+  IntegerConstant createIntegerConstant();
+
+  /**
    * Returns a new object of class '<em>Primitive Value</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -155,6 +155,16 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
         return createConstantAdapter();
       }
       @Override
+      public Adapter caseDecimalConstant(DecimalConstant object)
+      {
+        return createDecimalConstantAdapter();
+      }
+      @Override
+      public Adapter caseIntegerConstant(IntegerConstant object)
+      {
+        return createIntegerConstantAdapter();
+      }
+      @Override
       public Adapter casePrimitiveValue(PrimitiveValue object)
       {
         return createPrimitiveValueAdapter();
@@ -772,6 +782,36 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createConstantAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.DecimalConstant <em>Decimal Constant</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.DecimalConstant
+   * @generated
+   */
+  public Adapter createDecimalConstantAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.IntegerConstant <em>Integer Constant</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.IntegerConstant
+   * @generated
+   */
+  public Adapter createIntegerConstantAdapter()
   {
     return null;
   }
