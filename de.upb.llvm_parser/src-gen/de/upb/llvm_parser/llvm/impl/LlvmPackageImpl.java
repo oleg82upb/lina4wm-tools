@@ -1227,6 +1227,16 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getArray_Pointer()
+  {
+    return (EAttribute)arrayEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getAggregate_Type()
   {
     return aggregate_TypeEClass;
@@ -1350,6 +1360,16 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
   public EReference getStructure_Types()
   {
     return (EReference)structureEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getStructure_Pointer()
+  {
+    return (EAttribute)structureEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -3497,6 +3517,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
     arrayEClass = createEClass(ARRAY);
     createEAttribute(arrayEClass, ARRAY__LENGTH);
     createEReference(arrayEClass, ARRAY__TYPE);
+    createEAttribute(arrayEClass, ARRAY__POINTER);
 
     aggregate_TypeEClass = createEClass(AGGREGATE_TYPE);
 
@@ -3518,6 +3539,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
 
     structureEClass = createEClass(STRUCTURE);
     createEReference(structureEClass, STRUCTURE__TYPES);
+    createEAttribute(structureEClass, STRUCTURE__POINTER);
 
     parameterEClass = createEClass(PARAMETER);
     createEReference(parameterEClass, PARAMETER__TYPE);
@@ -3953,6 +3975,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
     initEClass(arrayEClass, Array.class, "Array", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getArray_Length(), ecorePackage.getEInt(), "length", null, 0, 1, Array.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getArray_Type(), ecorePackage.getEObject(), null, "type", null, 0, 1, Array.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getArray_Pointer(), ecorePackage.getEString(), "pointer", null, 0, 1, Array.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(aggregate_TypeEClass, Aggregate_Type.class, "Aggregate_Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -3974,6 +3997,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
 
     initEClass(structureEClass, Structure.class, "Structure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getStructure_Types(), ecorePackage.getEObject(), null, "types", null, 0, -1, Structure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getStructure_Pointer(), ecorePackage.getEString(), "pointer", null, 0, 1, Structure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getParameter_Type(), ecorePackage.getEObject(), null, "type", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

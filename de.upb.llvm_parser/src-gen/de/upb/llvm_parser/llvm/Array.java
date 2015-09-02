@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.Array#getLength <em>Length</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.Array#getType <em>Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Array#getPointer <em>Pointer</em>}</li>
  * </ul>
  * </p>
  *
@@ -74,5 +75,31 @@ public interface Array extends Aggregate_Type
    * @generated
    */
   void setType(EObject value);
+
+  /**
+   * Returns the value of the '<em><b>Pointer</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Pointer</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Pointer</em>' attribute.
+   * @see #setPointer(String)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getArray_Pointer()
+   * @model
+   * @generated
+   */
+  String getPointer();
+
+  /**
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Array#getPointer <em>Pointer</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Pointer</em>' attribute.
+   * @see #getPointer()
+   * @generated
+   */
+  void setPointer(String value);
 
 } // Array

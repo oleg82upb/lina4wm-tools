@@ -169,7 +169,7 @@ Vector:
 	'<' length=INT 'x' type=TypeUse '>';
 
 Array:
-	{Array} ('[' length=INT 'x' type=(TypeUse|Aggregate_Type) ']' | '[]' | '[' ']') POINTER?;
+	{Array} ('[' length=INT 'x' type=(TypeUse|Aggregate_Type) ']' | '[]' | '[' ']') (pointer=POINTER)?;
 
 Aggregate_Type:
 	Structure | Array | Vector;
@@ -192,7 +192,7 @@ ValueStruct:
 	'{' values+=Parameter (',' values+=Parameter)* '}';
 
 Structure:
-	{Structure} '{' (types+=(TypeUse|Aggregate_Type) (',' types+=(TypeUse|Aggregate_Type))*)? '}' POINTER?;
+	{Structure} '{' (types+=(TypeUse|Aggregate_Type) (',' types+=(TypeUse|Aggregate_Type))*)? '}' (pointer=POINTER)?;
 
 
 Parameter:

@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.ArrayImpl#getLength <em>Length</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.ArrayImpl#getType <em>Type</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.ArrayImpl#getPointer <em>Pointer</em>}</li>
  * </ul>
  * </p>
  *
@@ -59,6 +60,26 @@ public class ArrayImpl extends Aggregate_TypeImpl implements Array
    * @ordered
    */
   protected EObject type;
+
+  /**
+   * The default value of the '{@link #getPointer() <em>Pointer</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPointer()
+   * @generated
+   * @ordered
+   */
+  protected static final String POINTER_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getPointer() <em>Pointer</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPointer()
+   * @generated
+   * @ordered
+   */
+  protected String pointer = POINTER_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -157,6 +178,29 @@ public class ArrayImpl extends Aggregate_TypeImpl implements Array
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getPointer()
+  {
+    return pointer;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setPointer(String newPointer)
+  {
+    String oldPointer = pointer;
+    pointer = newPointer;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ARRAY__POINTER, oldPointer, pointer));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -182,6 +226,8 @@ public class ArrayImpl extends Aggregate_TypeImpl implements Array
         return getLength();
       case LlvmPackage.ARRAY__TYPE:
         return getType();
+      case LlvmPackage.ARRAY__POINTER:
+        return getPointer();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -201,6 +247,9 @@ public class ArrayImpl extends Aggregate_TypeImpl implements Array
         return;
       case LlvmPackage.ARRAY__TYPE:
         setType((EObject)newValue);
+        return;
+      case LlvmPackage.ARRAY__POINTER:
+        setPointer((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -222,6 +271,9 @@ public class ArrayImpl extends Aggregate_TypeImpl implements Array
       case LlvmPackage.ARRAY__TYPE:
         setType((EObject)null);
         return;
+      case LlvmPackage.ARRAY__POINTER:
+        setPointer(POINTER_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -240,6 +292,8 @@ public class ArrayImpl extends Aggregate_TypeImpl implements Array
         return length != LENGTH_EDEFAULT;
       case LlvmPackage.ARRAY__TYPE:
         return type != null;
+      case LlvmPackage.ARRAY__POINTER:
+        return POINTER_EDEFAULT == null ? pointer != null : !POINTER_EDEFAULT.equals(pointer);
     }
     return super.eIsSet(featureID);
   }
@@ -257,6 +311,8 @@ public class ArrayImpl extends Aggregate_TypeImpl implements Array
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (length: ");
     result.append(length);
+    result.append(", pointer: ");
+    result.append(pointer);
     result.append(')');
     return result.toString();
   }

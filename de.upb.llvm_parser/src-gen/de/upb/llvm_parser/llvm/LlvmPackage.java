@@ -621,13 +621,22 @@ public interface LlvmPackage extends EPackage
   int ARRAY__TYPE = AGGREGATE_TYPE_FEATURE_COUNT + 1;
 
   /**
+   * The feature id for the '<em><b>Pointer</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARRAY__POINTER = AGGREGATE_TYPE_FEATURE_COUNT + 2;
+
+  /**
    * The number of structural features of the '<em>Array</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ARRAY_FEATURE_COUNT = AGGREGATE_TYPE_FEATURE_COUNT + 2;
+  int ARRAY_FEATURE_COUNT = AGGREGATE_TYPE_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ValueImpl <em>Value</em>}' class.
@@ -799,13 +808,22 @@ public interface LlvmPackage extends EPackage
   int STRUCTURE__TYPES = AGGREGATE_TYPE_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Pointer</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STRUCTURE__POINTER = AGGREGATE_TYPE_FEATURE_COUNT + 1;
+
+  /**
    * The number of structural features of the '<em>Structure</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STRUCTURE_FEATURE_COUNT = AGGREGATE_TYPE_FEATURE_COUNT + 1;
+  int STRUCTURE_FEATURE_COUNT = AGGREGATE_TYPE_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link de.upb.llvm_parser.llvm.impl.ParameterImpl <em>Parameter</em>}' class.
@@ -5015,6 +5033,17 @@ public interface LlvmPackage extends EPackage
   EReference getArray_Type();
 
   /**
+   * Returns the meta object for the attribute '{@link de.upb.llvm_parser.llvm.Array#getPointer <em>Pointer</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Pointer</em>'.
+   * @see de.upb.llvm_parser.llvm.Array#getPointer()
+   * @see #getArray()
+   * @generated
+   */
+  EAttribute getArray_Pointer();
+
+  /**
    * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.Aggregate_Type <em>Aggregate Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5148,6 +5177,17 @@ public interface LlvmPackage extends EPackage
    * @generated
    */
   EReference getStructure_Types();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.upb.llvm_parser.llvm.Structure#getPointer <em>Pointer</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Pointer</em>'.
+   * @see de.upb.llvm_parser.llvm.Structure#getPointer()
+   * @see #getStructure()
+   * @generated
+   */
+  EAttribute getStructure_Pointer();
 
   /**
    * Returns the meta object for class '{@link de.upb.llvm_parser.llvm.Parameter <em>Parameter</em>}'.
@@ -7735,6 +7775,14 @@ public interface LlvmPackage extends EPackage
     EReference ARRAY__TYPE = eINSTANCE.getArray_Type();
 
     /**
+     * The meta object literal for the '<em><b>Pointer</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ARRAY__POINTER = eINSTANCE.getArray_Pointer();
+
+    /**
      * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.Aggregate_TypeImpl <em>Aggregate Type</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -7853,6 +7901,14 @@ public interface LlvmPackage extends EPackage
      * @generated
      */
     EReference STRUCTURE__TYPES = eINSTANCE.getStructure_Types();
+
+    /**
+     * The meta object literal for the '<em><b>Pointer</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute STRUCTURE__POINTER = eINSTANCE.getStructure_Pointer();
 
     /**
      * The meta object literal for the '{@link de.upb.llvm_parser.llvm.impl.ParameterImpl <em>Parameter</em>}' class.

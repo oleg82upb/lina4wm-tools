@@ -7,6 +7,7 @@ import de.upb.llvm_parser.llvm.Structure;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -14,6 +15,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -26,6 +29,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.StructureImpl#getTypes <em>Types</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.StructureImpl#getPointer <em>Pointer</em>}</li>
  * </ul>
  * </p>
  *
@@ -42,6 +46,26 @@ public class StructureImpl extends Aggregate_TypeImpl implements Structure
    * @ordered
    */
   protected EList<EObject> types;
+
+  /**
+   * The default value of the '{@link #getPointer() <em>Pointer</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPointer()
+   * @generated
+   * @ordered
+   */
+  protected static final String POINTER_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getPointer() <em>Pointer</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPointer()
+   * @generated
+   * @ordered
+   */
+  protected String pointer = POINTER_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -83,6 +107,29 @@ public class StructureImpl extends Aggregate_TypeImpl implements Structure
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getPointer()
+  {
+    return pointer;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setPointer(String newPointer)
+  {
+    String oldPointer = pointer;
+    pointer = newPointer;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.STRUCTURE__POINTER, oldPointer, pointer));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -106,6 +153,8 @@ public class StructureImpl extends Aggregate_TypeImpl implements Structure
     {
       case LlvmPackage.STRUCTURE__TYPES:
         return getTypes();
+      case LlvmPackage.STRUCTURE__POINTER:
+        return getPointer();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -125,6 +174,9 @@ public class StructureImpl extends Aggregate_TypeImpl implements Structure
         getTypes().clear();
         getTypes().addAll((Collection<? extends EObject>)newValue);
         return;
+      case LlvmPackage.STRUCTURE__POINTER:
+        setPointer((String)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -142,6 +194,9 @@ public class StructureImpl extends Aggregate_TypeImpl implements Structure
       case LlvmPackage.STRUCTURE__TYPES:
         getTypes().clear();
         return;
+      case LlvmPackage.STRUCTURE__POINTER:
+        setPointer(POINTER_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -158,8 +213,27 @@ public class StructureImpl extends Aggregate_TypeImpl implements Structure
     {
       case LlvmPackage.STRUCTURE__TYPES:
         return types != null && !types.isEmpty();
+      case LlvmPackage.STRUCTURE__POINTER:
+        return POINTER_EDEFAULT == null ? pointer != null : !POINTER_EDEFAULT.equals(pointer);
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (pointer: ");
+    result.append(pointer);
+    result.append(')');
+    return result.toString();
   }
 
 } //StructureImpl

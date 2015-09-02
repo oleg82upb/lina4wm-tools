@@ -11383,9 +11383,9 @@ rule__Array__Group__2__Impl
     }
 :
 (
-{ before(grammarAccess.getArrayAccess().getPOINTERTerminalRuleCall_2()); }
-(	RULE_POINTER)?
-{ after(grammarAccess.getArrayAccess().getPOINTERTerminalRuleCall_2()); }
+{ before(grammarAccess.getArrayAccess().getPointerAssignment_2()); }
+(rule__Array__PointerAssignment_2)?
+{ after(grammarAccess.getArrayAccess().getPointerAssignment_2()); }
 )
 
 ;
@@ -11954,9 +11954,9 @@ rule__Structure__Group__4__Impl
     }
 :
 (
-{ before(grammarAccess.getStructureAccess().getPOINTERTerminalRuleCall_4()); }
-(	RULE_POINTER)?
-{ after(grammarAccess.getStructureAccess().getPOINTERTerminalRuleCall_4()); }
+{ before(grammarAccess.getStructureAccess().getPointerAssignment_4()); }
+(rule__Structure__PointerAssignment_4)?
+{ after(grammarAccess.getStructureAccess().getPointerAssignment_4()); }
 )
 
 ;
@@ -30518,6 +30518,21 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__Array__PointerAssignment_2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getArrayAccess().getPointerPOINTERTerminalRuleCall_2_0()); }
+	RULE_POINTER{ after(grammarAccess.getArrayAccess().getPointerPOINTERTerminalRuleCall_2_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 rule__DecimalConstant__ValueAssignment
     @init {
 		int stackSize = keepStackSize();
@@ -30619,6 +30634,21 @@ rule__Structure__TypesAssignment_2_1_1
 { before(grammarAccess.getStructureAccess().getTypesAlternatives_2_1_1_0()); }
 (rule__Structure__TypesAlternatives_2_1_1_0)
 { after(grammarAccess.getStructureAccess().getTypesAlternatives_2_1_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Structure__PointerAssignment_4
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getStructureAccess().getPointerPOINTERTerminalRuleCall_4_0()); }
+	RULE_POINTER{ after(grammarAccess.getStructureAccess().getPointerPOINTERTerminalRuleCall_4_0()); }
 )
 
 ;

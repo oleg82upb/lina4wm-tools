@@ -2173,13 +2173,14 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_1_2 = (Group)cAlternatives_1.eContents().get(2);
 		private final Keyword cLeftSquareBracketKeyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_1_2_1 = (Keyword)cGroup_1_2.eContents().get(1);
-		private final RuleCall cPOINTERTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final Assignment cPointerAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cPointerPOINTERTerminalRuleCall_2_0 = (RuleCall)cPointerAssignment_2.eContents().get(0);
 		
 		//Array:
-		//	{Array} ("[" length=INT "x" type=(TypeUse | Aggregate_Type) "]" | "[]" | "[" "]") POINTER?;
+		//	{Array} ("[" length=INT "x" type=(TypeUse | Aggregate_Type) "]" | "[]" | "[" "]") pointer=POINTER?;
 		public ParserRule getRule() { return rule; }
 
-		//{Array} ("[" length=INT "x" type=(TypeUse | Aggregate_Type) "]" | "[]" | "[" "]") POINTER?
+		//{Array} ("[" length=INT "x" type=(TypeUse | Aggregate_Type) "]" | "[]" | "[" "]") pointer=POINTER?
 		public Group getGroup() { return cGroup; }
 
 		//{Array}
@@ -2230,8 +2231,11 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//"]"
 		public Keyword getRightSquareBracketKeyword_1_2_1() { return cRightSquareBracketKeyword_1_2_1; }
 
-		//POINTER?
-		public RuleCall getPOINTERTerminalRuleCall_2() { return cPOINTERTerminalRuleCall_2; }
+		//pointer=POINTER?
+		public Assignment getPointerAssignment_2() { return cPointerAssignment_2; }
+
+		//POINTER
+		public RuleCall getPointerPOINTERTerminalRuleCall_2_0() { return cPointerPOINTERTerminalRuleCall_2_0; }
 	}
 
 	public class Aggregate_TypeElements extends AbstractParserRuleElementFinder {
@@ -2455,13 +2459,14 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTypesTypeUseParserRuleCall_2_1_1_0_0 = (RuleCall)cTypesAlternatives_2_1_1_0.eContents().get(0);
 		private final RuleCall cTypesAggregate_TypeParserRuleCall_2_1_1_0_1 = (RuleCall)cTypesAlternatives_2_1_1_0.eContents().get(1);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final RuleCall cPOINTERTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
+		private final Assignment cPointerAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cPointerPOINTERTerminalRuleCall_4_0 = (RuleCall)cPointerAssignment_4.eContents().get(0);
 		
 		//Structure:
-		//	{Structure} "{" (types+=(TypeUse | Aggregate_Type) ("," types+=(TypeUse | Aggregate_Type))*)? "}" POINTER?;
+		//	{Structure} "{" (types+=(TypeUse | Aggregate_Type) ("," types+=(TypeUse | Aggregate_Type))*)? "}" pointer=POINTER?;
 		public ParserRule getRule() { return rule; }
 
-		//{Structure} "{" (types+=(TypeUse | Aggregate_Type) ("," types+=(TypeUse | Aggregate_Type))*)? "}" POINTER?
+		//{Structure} "{" (types+=(TypeUse | Aggregate_Type) ("," types+=(TypeUse | Aggregate_Type))*)? "}" pointer=POINTER?
 		public Group getGroup() { return cGroup; }
 
 		//{Structure}
@@ -2506,8 +2511,11 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 
-		//POINTER?
-		public RuleCall getPOINTERTerminalRuleCall_4() { return cPOINTERTerminalRuleCall_4; }
+		//pointer=POINTER?
+		public Assignment getPointerAssignment_4() { return cPointerAssignment_4; }
+
+		//POINTER
+		public RuleCall getPointerPOINTERTerminalRuleCall_4_0() { return cPointerPOINTERTerminalRuleCall_4_0; }
 	}
 
 	public class ParameterElements extends AbstractParserRuleElementFinder {
@@ -6238,16 +6246,14 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cExclamationMarkKeyword_8_2 = (Keyword)cGroup_8.eContents().get(2);
 		private final RuleCall cINTTerminalRuleCall_8_3 = (RuleCall)cGroup_8.eContents().get(3);
 		
-		////FIXME: no support for call of functions with a function as a result type
+		////TODO: no support for call of functions with a function as a result type
 		//Call:
 		//	(result=Address "=")? "tail"? "call" CALLING_CONV? ("zeroext" | "signext" | "inreg" | "byval" | "sret" | "noalias" |
-		//	"nocapture" | "nest")? function= //(('asm' 'sideeffect'? STRING ',' STRING) 
-		//	Parameter pList=ParameterList FUNCTION_ATTRIBUTES* ("," "!srcloc" "!" INT)*;
+		//	"nocapture" | "nest")? function=Parameter pList=ParameterList FUNCTION_ATTRIBUTES* ("," "!srcloc" "!" INT)*;
 		public ParserRule getRule() { return rule; }
 
 		//(result=Address "=")? "tail"? "call" CALLING_CONV? ("zeroext" | "signext" | "inreg" | "byval" | "sret" | "noalias" |
-		//"nocapture" | "nest")? function= //(('asm' 'sideeffect'? STRING ',' STRING) 
-		//Parameter pList=ParameterList FUNCTION_ATTRIBUTES* ("," "!srcloc" "!" INT)*
+		//"nocapture" | "nest")? function=Parameter pList=ParameterList FUNCTION_ATTRIBUTES* ("," "!srcloc" "!" INT)*
 		public Group getGroup() { return cGroup; }
 
 		//(result=Address "=")?
@@ -6298,11 +6304,9 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		//"nest"
 		public Keyword getNestKeyword_4_7() { return cNestKeyword_4_7; }
 
-		//function= //(('asm' 'sideeffect'? STRING ',' STRING) 
-		//Parameter
+		//function=Parameter
 		public Assignment getFunctionAssignment_5() { return cFunctionAssignment_5; }
 
-		////(('asm' 'sideeffect'? STRING ',' STRING) 
 		//Parameter
 		public RuleCall getFunctionParameterParserRuleCall_5_0() { return cFunctionParameterParserRuleCall_5_0; }
 
@@ -6779,7 +6783,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cIndexAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
 		private final RuleCall cIndexINTTerminalRuleCall_4_1_0 = (RuleCall)cIndexAssignment_4_1.eContents().get(0);
 		
-		////FIXME TODO
+		////TODO
 		////...Value for structs and arrays 
 		//ExtractValue:
 		//	result=Address "=" "extractvalue" aggerate=Parameter ("," index+=INT)+;
@@ -8321,7 +8325,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Array:
-	//	{Array} ("[" length=INT "x" type=(TypeUse | Aggregate_Type) "]" | "[]" | "[" "]") POINTER?;
+	//	{Array} ("[" length=INT "x" type=(TypeUse | Aggregate_Type) "]" | "[]" | "[" "]") pointer=POINTER?;
 	public ArrayElements getArrayAccess() {
 		return pArray;
 	}
@@ -8401,7 +8405,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Structure:
-	//	{Structure} "{" (types+=(TypeUse | Aggregate_Type) ("," types+=(TypeUse | Aggregate_Type))*)? "}" POINTER?;
+	//	{Structure} "{" (types+=(TypeUse | Aggregate_Type) ("," types+=(TypeUse | Aggregate_Type))*)? "}" pointer=POINTER?;
 	public StructureElements getStructureAccess() {
 		return pStructure;
 	}
@@ -8881,11 +8885,10 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		return getStoreAccess().getRule();
 	}
 
-	////FIXME: no support for call of functions with a function as a result type
+	////TODO: no support for call of functions with a function as a result type
 	//Call:
 	//	(result=Address "=")? "tail"? "call" CALLING_CONV? ("zeroext" | "signext" | "inreg" | "byval" | "sret" | "noalias" |
-	//	"nocapture" | "nest")? function= //(('asm' 'sideeffect'? STRING ',' STRING) 
-	//	Parameter pList=ParameterList FUNCTION_ATTRIBUTES* ("," "!srcloc" "!" INT)*;
+	//	"nocapture" | "nest")? function=Parameter pList=ParameterList FUNCTION_ATTRIBUTES* ("," "!srcloc" "!" INT)*;
 	public CallElements getCallAccess() {
 		return pCall;
 	}
@@ -8965,7 +8968,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 		return getVariableAttributeAccessAccess().getRule();
 	}
 
-	////FIXME TODO
+	////TODO
 	////...Value for structs and arrays 
 	//ExtractValue:
 	//	result=Address "=" "extractvalue" aggerate=Parameter ("," index+=INT)+;

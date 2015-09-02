@@ -60,6 +60,7 @@
     <genClasses ecoreClass="LLVM.ecore#//Array">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Array/length"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Array/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Array/pointer"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//Aggregate_Type"/>
     <genClasses ecoreClass="LLVM.ecore#//Constant"/>
@@ -78,6 +79,7 @@
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//Structure">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Structure/types"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Structure/pointer"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//Parameter">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//Parameter/type"/>

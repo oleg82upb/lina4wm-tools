@@ -1100,7 +1100,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((length=INT (type=TypeUse | type=Aggregate_Type))?)
+	 *     ((length=INT (type=TypeUse | type=Aggregate_Type))? pointer=POINTER?)
 	 */
 	protected void sequence_Array(EObject context, Array semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -2094,7 +2094,7 @@ public class LLVMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (((types+=TypeUse | types+=Aggregate_Type) (types+=TypeUse | types+=Aggregate_Type)*)?)
+	 *     (((types+=TypeUse | types+=Aggregate_Type) (types+=TypeUse | types+=Aggregate_Type)*)? pointer=POINTER?)
 	 */
 	protected void sequence_Structure(EObject context, Structure semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

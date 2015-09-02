@@ -3466,10 +3466,24 @@ ruleArray returns [EObject current=null]
     {
     	newLeafNode(otherlv_8, grammarAccess.getArrayAccess().getRightSquareBracketKeyword_1_2_1());
     }
-))(this_POINTER_9=RULE_POINTER
-    { 
-    newLeafNode(this_POINTER_9, grammarAccess.getArrayAccess().getPOINTERTerminalRuleCall_2()); 
-    }
+))(
+(
+		lv_pointer_9_0=RULE_POINTER
+		{
+			newLeafNode(lv_pointer_9_0, grammarAccess.getArrayAccess().getPointerPOINTERTerminalRuleCall_2_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getArrayRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"pointer",
+        		lv_pointer_9_0, 
+        		"POINTER");
+	    }
+
+)
 )?)
 ;
 
@@ -4027,10 +4041,24 @@ ruleStructure returns [EObject current=null]
     {
     	newLeafNode(otherlv_5, grammarAccess.getStructureAccess().getRightCurlyBracketKeyword_3());
     }
-(this_POINTER_6=RULE_POINTER
-    { 
-    newLeafNode(this_POINTER_6, grammarAccess.getStructureAccess().getPOINTERTerminalRuleCall_4()); 
-    }
+(
+(
+		lv_pointer_6_0=RULE_POINTER
+		{
+			newLeafNode(lv_pointer_6_0, grammarAccess.getStructureAccess().getPointerPOINTERTerminalRuleCall_4_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getStructureRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"pointer",
+        		lv_pointer_6_0, 
+        		"POINTER");
+	    }
+
+)
 )?)
 ;
 

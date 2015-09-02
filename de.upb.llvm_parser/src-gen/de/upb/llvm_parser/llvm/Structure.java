@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.Structure#getTypes <em>Types</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.Structure#getPointer <em>Pointer</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,5 +40,31 @@ public interface Structure extends Aggregate_Type
    * @generated
    */
   EList<EObject> getTypes();
+
+  /**
+   * Returns the value of the '<em><b>Pointer</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Pointer</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Pointer</em>' attribute.
+   * @see #setPointer(String)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getStructure_Pointer()
+   * @model
+   * @generated
+   */
+  String getPointer();
+
+  /**
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.Structure#getPointer <em>Pointer</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Pointer</em>' attribute.
+   * @see #getPointer()
+   * @generated
+   */
+  void setPointer(String value);
 
 } // Structure

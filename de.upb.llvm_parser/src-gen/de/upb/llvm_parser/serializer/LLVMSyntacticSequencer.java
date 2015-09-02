@@ -48,7 +48,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_ArithmeticOperationUrem_NswKeyword_4_q;
 	protected AbstractElementAlias match_ArithmeticOperationUrem_NuwKeyword_3_q;
 	protected AbstractElementAlias match_Array_LeftSquareBracketRightSquareBracketKeyword_1_1_or___LeftSquareBracketKeyword_1_2_0_RightSquareBracketKeyword_1_2_1__;
-	protected AbstractElementAlias match_Array_POINTERTerminalRuleCall_2_q;
 	protected AbstractElementAlias match_AtomicRmwAdd_SinglethreadKeyword_8_q;
 	protected AbstractElementAlias match_AtomicRmwAnd_SinglethreadKeyword_8_q;
 	protected AbstractElementAlias match_AtomicRmwMax_SinglethreadKeyword_8_q;
@@ -95,7 +94,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_Return___CommaKeyword_0_2_0_DbgKeyword_0_2_1_ExclamationMarkKeyword_0_2_2_INTTerminalRuleCall_0_2_3__q;
 	protected AbstractElementAlias match_Return___CommaKeyword_1_2_0_DbgKeyword_1_2_1_ExclamationMarkKeyword_1_2_2_INTTerminalRuleCall_1_2_3__q;
 	protected AbstractElementAlias match_Store_SinglethreadKeyword_1_6_q;
-	protected AbstractElementAlias match_Structure_POINTERTerminalRuleCall_4_q;
 	protected AbstractElementAlias match_TopLevelEntity_DatalayoutKeyword_1_1_0_or_TripleKeyword_1_1_1;
 	
 	@Inject
@@ -130,7 +128,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_ArithmeticOperationUrem_NswKeyword_4_q = new TokenAlias(false, true, grammarAccess.getArithmeticOperationUremAccess().getNswKeyword_4());
 		match_ArithmeticOperationUrem_NuwKeyword_3_q = new TokenAlias(false, true, grammarAccess.getArithmeticOperationUremAccess().getNuwKeyword_3());
 		match_Array_LeftSquareBracketRightSquareBracketKeyword_1_1_or___LeftSquareBracketKeyword_1_2_0_RightSquareBracketKeyword_1_2_1__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getArrayAccess().getLeftSquareBracketKeyword_1_2_0()), new TokenAlias(false, false, grammarAccess.getArrayAccess().getRightSquareBracketKeyword_1_2_1())), new TokenAlias(false, false, grammarAccess.getArrayAccess().getLeftSquareBracketRightSquareBracketKeyword_1_1()));
-		match_Array_POINTERTerminalRuleCall_2_q = new TokenAlias(false, true, grammarAccess.getArrayAccess().getPOINTERTerminalRuleCall_2());
 		match_AtomicRmwAdd_SinglethreadKeyword_8_q = new TokenAlias(false, true, grammarAccess.getAtomicRmwAddAccess().getSinglethreadKeyword_8());
 		match_AtomicRmwAnd_SinglethreadKeyword_8_q = new TokenAlias(false, true, grammarAccess.getAtomicRmwAndAccess().getSinglethreadKeyword_8());
 		match_AtomicRmwMax_SinglethreadKeyword_8_q = new TokenAlias(false, true, grammarAccess.getAtomicRmwMaxAccess().getSinglethreadKeyword_8());
@@ -177,7 +174,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_Return___CommaKeyword_0_2_0_DbgKeyword_0_2_1_ExclamationMarkKeyword_0_2_2_INTTerminalRuleCall_0_2_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getReturnAccess().getCommaKeyword_0_2_0()), new TokenAlias(false, false, grammarAccess.getReturnAccess().getDbgKeyword_0_2_1()), new TokenAlias(false, false, grammarAccess.getReturnAccess().getExclamationMarkKeyword_0_2_2()), new TokenAlias(false, false, grammarAccess.getReturnAccess().getINTTerminalRuleCall_0_2_3()));
 		match_Return___CommaKeyword_1_2_0_DbgKeyword_1_2_1_ExclamationMarkKeyword_1_2_2_INTTerminalRuleCall_1_2_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getReturnAccess().getCommaKeyword_1_2_0()), new TokenAlias(false, false, grammarAccess.getReturnAccess().getDbgKeyword_1_2_1()), new TokenAlias(false, false, grammarAccess.getReturnAccess().getExclamationMarkKeyword_1_2_2()), new TokenAlias(false, false, grammarAccess.getReturnAccess().getINTTerminalRuleCall_1_2_3()));
 		match_Store_SinglethreadKeyword_1_6_q = new TokenAlias(false, true, grammarAccess.getStoreAccess().getSinglethreadKeyword_1_6());
-		match_Structure_POINTERTerminalRuleCall_4_q = new TokenAlias(false, true, grammarAccess.getStructureAccess().getPOINTERTerminalRuleCall_4());
 		match_TopLevelEntity_DatalayoutKeyword_1_1_0_or_TripleKeyword_1_1_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getTopLevelEntityAccess().getDatalayoutKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getTopLevelEntityAccess().getTripleKeyword_1_1_1()));
 	}
 	
@@ -191,8 +187,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 			return getINTToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getINT_TYPERule())
 			return getINT_TYPEToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getPOINTERRule())
-			return getPOINTERToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getSL_COMMENTRule())
 			return getSL_COMMENTToken(semanticObject, ruleCall, node);
 		else if(ruleCall.getRule() == grammarAccess.getSTRINGRule())
@@ -241,16 +235,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 		if (node != null)
 			return getTokenText(node);
 		return "i";
-	}
-	
-	/**
-	 * terminal POINTER:
-	 * 	'*'+;
-	 */
-	protected String getPOINTERToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "*";
 	}
 	
 	/**
@@ -338,8 +322,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_ArithmeticOperationUrem_NuwKeyword_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_Array_LeftSquareBracketRightSquareBracketKeyword_1_1_or___LeftSquareBracketKeyword_1_2_0_RightSquareBracketKeyword_1_2_1__.equals(syntax))
 				emit_Array_LeftSquareBracketRightSquareBracketKeyword_1_1_or___LeftSquareBracketKeyword_1_2_0_RightSquareBracketKeyword_1_2_1__(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Array_POINTERTerminalRuleCall_2_q.equals(syntax))
-				emit_Array_POINTERTerminalRuleCall_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_AtomicRmwAdd_SinglethreadKeyword_8_q.equals(syntax))
 				emit_AtomicRmwAdd_SinglethreadKeyword_8_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_AtomicRmwAnd_SinglethreadKeyword_8_q.equals(syntax))
@@ -432,8 +414,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_Return___CommaKeyword_1_2_0_DbgKeyword_1_2_1_ExclamationMarkKeyword_1_2_2_INTTerminalRuleCall_1_2_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_Store_SinglethreadKeyword_1_6_q.equals(syntax))
 				emit_Store_SinglethreadKeyword_1_6_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Structure_POINTERTerminalRuleCall_4_q.equals(syntax))
-				emit_Structure_POINTERTerminalRuleCall_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_TopLevelEntity_DatalayoutKeyword_1_1_0_or_TripleKeyword_1_1_1.equals(syntax))
 				emit_TopLevelEntity_DatalayoutKeyword_1_1_0_or_TripleKeyword_1_1_1(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
@@ -669,14 +649,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     '[]' | ('[' ']')
 	 */
 	protected void emit_Array_LeftSquareBracketRightSquareBracketKeyword_1_1_or___LeftSquareBracketKeyword_1_2_0_RightSquareBracketKeyword_1_2_1__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Syntax:
-	 *     POINTER?
-	 */
-	protected void emit_Array_POINTERTerminalRuleCall_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -1126,14 +1098,6 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     'singlethread'?
 	 */
 	protected void emit_Store_SinglethreadKeyword_1_6_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Syntax:
-	 *     POINTER?
-	 */
-	protected void emit_Structure_POINTERTerminalRuleCall_4_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
