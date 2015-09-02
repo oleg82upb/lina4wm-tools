@@ -453,10 +453,10 @@ public class SelectionPage extends WizardPage {
 	protected synchronized void saveMementoState() {
 		XMLMemento memento = XMLMemento.createWriteRoot(MEMENTO__KEY);
 		IMemento child = memento.createChild(MEMENTO__KEY);
-		child.putString("astloc", getAstLocation());
-		child.putString("container", getContainerName());
-		child.putString("newfile", getFileName());
-		child.putInteger("modelSelection", getMemoryModelSelection());
+		child.putString(ASTLOC, getAstLocation());
+		child.putString(CONTAINER, getContainerName());
+		child.putString(NEW_FILE, getFileName());
+		child.putInteger(MODEL_SELECTION, getMemoryModelSelection());
 		CFGActivator.saveMementoToFile(memento);
 	}
 }

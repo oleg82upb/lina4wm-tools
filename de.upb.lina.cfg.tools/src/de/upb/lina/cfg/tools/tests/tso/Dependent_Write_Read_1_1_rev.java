@@ -57,7 +57,7 @@ public class Dependent_Write_Read_1_1_rev extends TSO_Test {
 		
 		//check that all buffers contain the correct elements
 		for(ControlFlowLocation l: nonEmptyBuffers){
-			String buffer = gUtil.getBufferAsString(l);
+			String buffer = gUtil.bufferToString(l);
 			boolean isValidBuffer = buffer.equals(l.getPc()+"<(%r1,%b)>");
 			assertTrue(isValidBuffer);	
 		}

@@ -131,6 +131,15 @@ public interface LlvmFactory extends EFactory
   Predefined createPredefined();
 
   /**
+   * Returns a new object of class '<em>Function Type</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Function Type</em>'.
+   * @generated
+   */
+  FunctionType createFunctionType();
+
+  /**
    * Returns a new object of class '<em>Vector</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

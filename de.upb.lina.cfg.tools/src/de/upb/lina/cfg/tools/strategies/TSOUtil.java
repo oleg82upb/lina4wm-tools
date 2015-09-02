@@ -471,7 +471,7 @@ public class TSOUtil implements IGraphGenerator {
 	private ControlFlowLocation createControlFlowLocation(
 			ControlFlowDiagram diag, int pc, StoreBuffer buffer, String blockLabel) {
 		for (ControlFlowLocation l : diag.getLocations()) {
-			if (GraphUtility.isCorrectLocation(l, pc, buffer)) {
+			if (GraphUtility.isRepresentedBy(l, pc, buffer)) {
 				return l;
 			}
 		}
@@ -598,8 +598,8 @@ public class TSOUtil implements IGraphGenerator {
 
 	private void reportLoopWithoutFence(String functionName, ControlFlowLocation locBeforeLatesFence,
 			ControlFlowLocation nextLocAfterWrite, Instruction instruction) {
-		String error = functionName + " - between " + GraphUtility.getBufferAsString(locBeforeLatesFence) + " and "
-				+ GraphUtility.getBufferAsString(nextLocAfterWrite) + " caused by " + instruction.toString() + "\n";
+		String error = functionName + " - between " + GraphUtility.bufferToString(locBeforeLatesFence) + " and "
+				+ GraphUtility.bufferToString(nextLocAfterWrite) + " caused by " + instruction.toString() + "\n";
 		if (!placesInLoopWithoutFence.contains(error)) {
 			placesInLoopWithoutFence.add(error);
 		}

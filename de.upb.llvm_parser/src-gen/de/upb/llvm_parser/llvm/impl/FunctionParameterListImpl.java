@@ -8,6 +8,7 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -15,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -28,6 +30,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.FunctionParameterListImpl#getParams <em>Params</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.impl.FunctionParameterListImpl#isIsNumberOfParametersUnknown <em>Is Number Of Parameters Unknown</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,6 +47,26 @@ public class FunctionParameterListImpl extends MinimalEObjectImpl.Container impl
    * @ordered
    */
   protected EList<FunctionParameter> params;
+
+  /**
+   * The default value of the '{@link #isIsNumberOfParametersUnknown() <em>Is Number Of Parameters Unknown</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isIsNumberOfParametersUnknown()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean IS_NUMBER_OF_PARAMETERS_UNKNOWN_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isIsNumberOfParametersUnknown() <em>Is Number Of Parameters Unknown</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isIsNumberOfParametersUnknown()
+   * @generated
+   * @ordered
+   */
+  protected boolean isNumberOfParametersUnknown = IS_NUMBER_OF_PARAMETERS_UNKNOWN_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -85,6 +108,29 @@ public class FunctionParameterListImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  public boolean isIsNumberOfParametersUnknown()
+  {
+    return isNumberOfParametersUnknown;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setIsNumberOfParametersUnknown(boolean newIsNumberOfParametersUnknown)
+  {
+    boolean oldIsNumberOfParametersUnknown = isNumberOfParametersUnknown;
+    isNumberOfParametersUnknown = newIsNumberOfParametersUnknown;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.FUNCTION_PARAMETER_LIST__IS_NUMBER_OF_PARAMETERS_UNKNOWN, oldIsNumberOfParametersUnknown, isNumberOfParametersUnknown));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -108,6 +154,8 @@ public class FunctionParameterListImpl extends MinimalEObjectImpl.Container impl
     {
       case LlvmPackage.FUNCTION_PARAMETER_LIST__PARAMS:
         return getParams();
+      case LlvmPackage.FUNCTION_PARAMETER_LIST__IS_NUMBER_OF_PARAMETERS_UNKNOWN:
+        return isIsNumberOfParametersUnknown();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -127,6 +175,9 @@ public class FunctionParameterListImpl extends MinimalEObjectImpl.Container impl
         getParams().clear();
         getParams().addAll((Collection<? extends FunctionParameter>)newValue);
         return;
+      case LlvmPackage.FUNCTION_PARAMETER_LIST__IS_NUMBER_OF_PARAMETERS_UNKNOWN:
+        setIsNumberOfParametersUnknown((Boolean)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -144,6 +195,9 @@ public class FunctionParameterListImpl extends MinimalEObjectImpl.Container impl
       case LlvmPackage.FUNCTION_PARAMETER_LIST__PARAMS:
         getParams().clear();
         return;
+      case LlvmPackage.FUNCTION_PARAMETER_LIST__IS_NUMBER_OF_PARAMETERS_UNKNOWN:
+        setIsNumberOfParametersUnknown(IS_NUMBER_OF_PARAMETERS_UNKNOWN_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -160,8 +214,27 @@ public class FunctionParameterListImpl extends MinimalEObjectImpl.Container impl
     {
       case LlvmPackage.FUNCTION_PARAMETER_LIST__PARAMS:
         return params != null && !params.isEmpty();
+      case LlvmPackage.FUNCTION_PARAMETER_LIST__IS_NUMBER_OF_PARAMETERS_UNKNOWN:
+        return isNumberOfParametersUnknown != IS_NUMBER_OF_PARAMETERS_UNKNOWN_EDEFAULT;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (isNumberOfParametersUnknown: ");
+    result.append(isNumberOfParametersUnknown);
+    result.append(')');
+    return result.toString();
   }
 
 } //FunctionParameterListImpl

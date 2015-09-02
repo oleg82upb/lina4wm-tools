@@ -76,6 +76,7 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
       case LlvmPackage.ADDRESS_USE: return createAddressUse();
       case LlvmPackage.ADDRESS: return createAddress();
       case LlvmPackage.PREDEFINED: return createPredefined();
+      case LlvmPackage.FUNCTION_TYPE: return createFunctionType();
       case LlvmPackage.VECTOR: return createVector();
       case LlvmPackage.ARRAY: return createArray();
       case LlvmPackage.AGGREGATE_TYPE: return createAggregate_Type();
@@ -289,6 +290,17 @@ public class LlvmFactoryImpl extends EFactoryImpl implements LlvmFactory
   {
     PredefinedImpl predefined = new PredefinedImpl();
     return predefined;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public FunctionType createFunctionType()
+  {
+    FunctionTypeImpl functionType = new FunctionTypeImpl();
+    return functionType;
   }
 
   /**

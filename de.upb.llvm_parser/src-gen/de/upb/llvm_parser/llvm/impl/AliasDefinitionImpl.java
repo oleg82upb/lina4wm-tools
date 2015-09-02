@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link de.upb.llvm_parser.llvm.impl.AliasDefinitionImpl#getAddress <em>Address</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.AliasDefinitionImpl#getAliastype <em>Aliastype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.AliasDefinitionImpl#getAliasvalue <em>Aliasvalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.AliasDefinitionImpl#getAliasee <em>Aliasee</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,16 +62,6 @@ public class AliasDefinitionImpl extends MainLevelEntityImpl implements AliasDef
    * @ordered
    */
   protected Value aliasvalue;
-
-  /**
-   * The cached value of the '{@link #getAliasee() <em>Aliasee</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAliasee()
-   * @generated
-   * @ordered
-   */
-  protected TypeUse aliasee;
 
   /**
    * <!-- begin-user-doc -->
@@ -244,54 +233,6 @@ public class AliasDefinitionImpl extends MainLevelEntityImpl implements AliasDef
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypeUse getAliasee()
-  {
-    return aliasee;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetAliasee(TypeUse newAliasee, NotificationChain msgs)
-  {
-    TypeUse oldAliasee = aliasee;
-    aliasee = newAliasee;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LlvmPackage.ALIAS_DEFINITION__ALIASEE, oldAliasee, newAliasee);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setAliasee(TypeUse newAliasee)
-  {
-    if (newAliasee != aliasee)
-    {
-      NotificationChain msgs = null;
-      if (aliasee != null)
-        msgs = ((InternalEObject)aliasee).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ALIAS_DEFINITION__ALIASEE, null, msgs);
-      if (newAliasee != null)
-        msgs = ((InternalEObject)newAliasee).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LlvmPackage.ALIAS_DEFINITION__ALIASEE, null, msgs);
-      msgs = basicSetAliasee(newAliasee, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.ALIAS_DEFINITION__ALIASEE, newAliasee, newAliasee));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -303,8 +244,6 @@ public class AliasDefinitionImpl extends MainLevelEntityImpl implements AliasDef
         return basicSetAliastype(null, msgs);
       case LlvmPackage.ALIAS_DEFINITION__ALIASVALUE:
         return basicSetAliasvalue(null, msgs);
-      case LlvmPackage.ALIAS_DEFINITION__ALIASEE:
-        return basicSetAliasee(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -325,8 +264,6 @@ public class AliasDefinitionImpl extends MainLevelEntityImpl implements AliasDef
         return getAliastype();
       case LlvmPackage.ALIAS_DEFINITION__ALIASVALUE:
         return getAliasvalue();
-      case LlvmPackage.ALIAS_DEFINITION__ALIASEE:
-        return getAliasee();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -349,9 +286,6 @@ public class AliasDefinitionImpl extends MainLevelEntityImpl implements AliasDef
         return;
       case LlvmPackage.ALIAS_DEFINITION__ALIASVALUE:
         setAliasvalue((Value)newValue);
-        return;
-      case LlvmPackage.ALIAS_DEFINITION__ALIASEE:
-        setAliasee((TypeUse)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -376,9 +310,6 @@ public class AliasDefinitionImpl extends MainLevelEntityImpl implements AliasDef
       case LlvmPackage.ALIAS_DEFINITION__ALIASVALUE:
         setAliasvalue((Value)null);
         return;
-      case LlvmPackage.ALIAS_DEFINITION__ALIASEE:
-        setAliasee((TypeUse)null);
-        return;
     }
     super.eUnset(featureID);
   }
@@ -399,8 +330,6 @@ public class AliasDefinitionImpl extends MainLevelEntityImpl implements AliasDef
         return aliastype != null;
       case LlvmPackage.ALIAS_DEFINITION__ALIASVALUE:
         return aliasvalue != null;
-      case LlvmPackage.ALIAS_DEFINITION__ALIASEE:
-        return aliasee != null;
     }
     return super.eIsSet(featureID);
   }

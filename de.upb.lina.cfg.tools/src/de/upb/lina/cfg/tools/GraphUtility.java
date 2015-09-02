@@ -20,8 +20,10 @@ import de.upb.lina.cfg.controlflow.StoreBuffer;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.controlflow.WriteDefChainTransition;
 import de.upb.llvm_parser.llvm.AddressUse;
+import de.upb.llvm_parser.llvm.Aggregate_Type;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.ArithmeticOperation;
+import de.upb.llvm_parser.llvm.Array;
 import de.upb.llvm_parser.llvm.AtomicRMW;
 import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.Branch;
@@ -32,6 +34,8 @@ import de.upb.llvm_parser.llvm.Compare;
 import de.upb.llvm_parser.llvm.DecimalConstant;
 import de.upb.llvm_parser.llvm.Fence;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
+import de.upb.llvm_parser.llvm.FunctionParameter;
+import de.upb.llvm_parser.llvm.FunctionType;
 import de.upb.llvm_parser.llvm.GetElementPtr;
 import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.IntegerConstant;
@@ -52,8 +56,7 @@ import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.Structure;
 import de.upb.llvm_parser.llvm.TypeUse;
 import de.upb.llvm_parser.llvm.Value;
-import de.upb.llvm_parser.llvm.impl.AddressUseImpl;
-import de.upb.llvm_parser.llvm.impl.PredefinedImpl;
+import de.upb.llvm_parser.llvm.Vector;
 
 public abstract class GraphUtility {
 	
@@ -70,29 +73,6 @@ public abstract class GraphUtility {
 	private static final String TODO = "TODO";
 	private static final String WS = " ";
 	
-	/**
-	 * Returns the given value as a String
-	 * @param value to be transformed into a String
-	 * @return String of the given value
-	 */
-	public static String valueToString(Value value) {
-		String result = "";
-
-		if(value instanceof AddressUseImpl){
-			AddressUseImpl aui = (AddressUseImpl)value;
-			result +=aui.getAddress().getName();
-		}
-		else if (value instanceof IntegerConstant) {
-			result += ((IntegerConstant)value).getValue();
-		}
-		else if (value instanceof DecimalConstant) {
-			result += ((DecimalConstant)value).getValue();
-		}
-		else if(value instanceof PrimitiveValue){
-			result += ((PrimitiveValue)value).getValue();
-		}
-		return (result);
-	}
 	
 	public static String valueToCleanString(Value value)
 	{
@@ -207,10 +187,10 @@ public abstract class GraphUtility {
 	 * @param l
 	 * @param pc
 	 * @param buffer
-	 * @return
+	 * @return true if location is represented by the given pc and store buffer combination
 	 */
-	public static boolean isCorrectLocation(ControlFlowLocation l, int pc, StoreBuffer buffer){
-		return (getBufferAsString(l).equalsIgnoreCase(bufferToString(buffer, pc)));
+	public static boolean isRepresentedBy(ControlFlowLocation l, int pc, StoreBuffer buffer){
+		return (bufferToString(l).equalsIgnoreCase(bufferToString(buffer, pc)));
 	}
 	
 	/**
@@ -219,7 +199,7 @@ public abstract class GraphUtility {
 	 * @param nextLocation
 	 * @return
 	 */
-	public static String getBufferAsString(ControlFlowLocation nextLocation){
+	public static String bufferToString(ControlFlowLocation nextLocation){
 		return bufferToString(nextLocation.getBuffer(), nextLocation.getPc());
 	}
 	
@@ -301,7 +281,7 @@ public abstract class GraphUtility {
 	{
 		for (ControlFlowLocation loc : list)
 		{
-			if (isCorrectLocation(location, loc.getPc(), loc.getBuffer()))
+			if (isRepresentedBy(location, loc.getPc(), loc.getBuffer()))
 			{
 				return true;
 			}
@@ -378,15 +358,13 @@ public abstract class GraphUtility {
 	public static String getNewTransitionLabel(Transition t) {
 		String result = "";
 
-//		EClass transTyp = t.eClass();
-
 		if(t instanceof FlushTransition){
 
 			if(!t.getSource().getBuffer().getAddressValuePairs().isEmpty())
 			{
 				AddressValuePair p = t.getSource().getBuffer().getAddressValuePairs().get(0);
-				String s = toString(p.getAddress());
-				s +=  "," + toString(p.getValue());
+				String s = parameterValueToString(p.getAddress());
+				s +=  "," + parameterValueToString(p.getValue());
 				return FLUSH + "(" + s + ")";
 			}
 
@@ -406,7 +384,7 @@ public abstract class GraphUtility {
 			if(wdcTransition.getCopyAddress() != null && wdcTransition.getCopyValue() != null){
 				String s = "("+wdcTransition.getCopyAddress().getName()+" , "+wdcTransition.getCopyValue().getName()+")";
 				s += ASSIGN;
-				s += "("+toString(store.getTargetAddress())+" , "+toString(store.getValue())+")";
+				s += "("+parameterValueToString(store.getTargetAddress())+" , "+parameterValueToString(store.getValue())+")";
 				result = STORE + WS;
 				result += wdcTransition.getCopyValue().getName() + WS;
 				result += wdcTransition.getCopyAddress().getName();
@@ -414,16 +392,16 @@ public abstract class GraphUtility {
 			}
 			else if (wdcTransition.getCopyValue() != null) {
 				String s = wdcTransition.getCopyValue().getName() + ASSIGN;
-				s += toString(store.getValue());
+				s += parameterValueToString(store.getValue());
 				result = STORE + WS;
 				result += wdcTransition.getCopyValue().getName() + WS;
-				result += toString(store.getTargetAddress());
+				result += parameterValueToString(store.getTargetAddress());
 				return s + " , " + result;
 			}else{
 				String s = wdcTransition.getCopyAddress().getName() + ASSIGN;
-				s += toString(store.getTargetAddress());
+				s += parameterValueToString(store.getTargetAddress());
 				result = STORE + WS;
-				result += toString(store.getValue());
+				result += parameterValueToString(store.getValue());
 				result += wdcTransition.getCopyAddress().getName();
 				return s + " , " + result;
 			}
@@ -441,14 +419,14 @@ public abstract class GraphUtility {
 			Load instr = (Load) t.getInstruction();
 			result += instr.getResult().getName() + ASSIGN;
 			result += LOAD + " ";
-			result += toString(instr.getAddress());
+			result += parameterValueToString(instr.getAddress());
 		}
 		// Store
 		else if (type.equals(LlvmPackage.eINSTANCE.getStore())) {
 			Store instr = (Store) t.getInstruction();
 			result += STORE + WS;
-			result += toString(instr.getValue());
-			result += toString(instr.getTargetAddress());
+			result += parameterValueToString(instr.getValue());
+			result += parameterValueToString(instr.getTargetAddress());
 		}
 		// Branch
 		else if (type.equals(LlvmPackage.eINSTANCE.getBranch())) {
@@ -464,9 +442,9 @@ public abstract class GraphUtility {
 			GetElementPtr instr = (GetElementPtr) t.getInstruction();
 			result += instr.getResult().getName() + ASSIGN;
 			result += type.getName() + WS;
-			result += toString(instr.getAggregate());
+			result += parameterValueToString(instr.getAggregate());
 			for (int i = 0; i < instr.getIndices().size(); i++) {
-				result += toString(instr.getIndices().get(i));
+				result += parameterValueToString(instr.getIndices().get(i));
 			}
 		}
 		// CmpXchg
@@ -475,9 +453,9 @@ public abstract class GraphUtility {
 			CmpXchg instr = (CmpXchg) t.getInstruction();
 			result += instr.getResult().getName() + ASSIGN;
 			result += "CAS(";
-			result += toString(instr.getAddress()) +", ";
-			result += toString(instr.getValue()) + ", ";
-			result += toString(instr.getNewValue()) + ")";
+			result += parameterValueToString(instr.getAddress()) +", ";
+			result += parameterValueToString(instr.getValue()) + ", ";
+			result += parameterValueToString(instr.getNewValue()) + ")";
 		}
 		// Call
 		else if (type.equals(LlvmPackage.eINSTANCE.getCall())) {
@@ -489,22 +467,22 @@ public abstract class GraphUtility {
 				result += VOID + WS;
 			}
 			result += type.getName() + WS;
-			result += toString(instr.getFunction());
-			result += toString(instr.getPList());
+			result += parameterValueToString(instr.getFunction());
+			result += parameterListToString(instr.getPList());
 		}
 		// Alloc
 		else if (type.equals(LlvmPackage.eINSTANCE.getAlloc())) {
 			Alloc instr = (Alloc) t.getInstruction();
 			result += instr.getResult().getName() + ASSIGN;
 			result += ALLOC + WS;
-			result += toString(instr.getType());
+			result += typeUseToString(instr.getType());
 		}
 		// Arithmetic Operations
 		else if (type.equals(LlvmPackage.eINSTANCE.getArithmeticOperation())) {
 			ArithmeticOperation instr = (ArithmeticOperation) t.getInstruction();
 			result += instr.getResult().getName() + ASSIGN;
 			String operation = instr.getOperation();
-			result += toString(instr.getValue1()) + WS;
+			result += valueToString(instr.getValue1()) + WS;
 			if (operation.equals("add") || operation.equals("fadd")) {
 				result += "+ ";
 			} else if (operation.equals("sub") || operation.equals("fsub")) {
@@ -516,14 +494,14 @@ public abstract class GraphUtility {
 			} else if (operation.equals("urem") || operation.equals("srem") || operation.equals("frem")) {
 				result += "% ";
 			}
-			result += toString(instr.getValue2());
+			result += valueToString(instr.getValue2());
 		}
 		// Logical Operations
 		else if (type.equals(LlvmPackage.eINSTANCE.getLogicOperation())) {
 			LogicOperation instr = (LogicOperation) t.getInstruction();
 			result += instr.getResult().getName() + ASSIGN;
 			String operation = instr.getOperation();
-			result += toString(instr.getValue1()) + WS;
+			result += valueToString(instr.getValue1()) + WS;
 			if (operation.equals("shl")) {
 				result += "<< ";
 			} else if (operation.equals("lshr")) {
@@ -537,7 +515,7 @@ public abstract class GraphUtility {
 			} else if (operation.equals("xor")) {
 				result += "^ ";
 			}
-			result += toString(instr.getValue2());
+			result += valueToString(instr.getValue2());
 		}
 		// Compare
 		else if (type.equals(LlvmPackage.eINSTANCE.getCompare())) {
@@ -551,7 +529,7 @@ public abstract class GraphUtility {
 				result += TRUE;
 				return result;
 			}
-			result += toString(instr.getOperand1()) + WS;
+			result += valueToString(instr.getOperand1()) + WS;
 			if (compare.equals("eq")) {
 				result += "== ";
 			} else if (compare.equals("ne")) {
@@ -593,7 +571,7 @@ public abstract class GraphUtility {
 			} else if (compare.equals("uno")) {
 				result += "not orderd ";
 			}
-			result += toString(instr.getOperand2()) + ")";
+			result += valueToString(instr.getOperand2()) + ")";
 		}
 		// Return
 		else if (type.equals(LlvmPackage.eINSTANCE.getReturn()))
@@ -612,7 +590,7 @@ public abstract class GraphUtility {
 			
 			if (value != null)
 			{
-				result += toString(value);
+				result += valueToString(value);
 			} else
 			{
 				result += WS + VOID;
@@ -621,14 +599,14 @@ public abstract class GraphUtility {
 		// Cast
 		else if (type.equals(LlvmPackage.eINSTANCE.getCast())) {
 			Cast instr = (Cast) t.getInstruction();
-			result += (instr.getResult().getName() + ASSIGN + "(" + toString((TypeUse)instr.getFrom()) + "->" + toString(instr.getTo()) + ") " + toString(instr.getValue()));
+			result += (instr.getResult().getName() + ASSIGN + "(" + typeUseToString((TypeUse)instr.getFrom()) + "->" + typeUseToString(instr.getTo()) + ") " + valueToString(instr.getValue()));
 		}
 		// Invoke
 		else if (type.equals(LlvmPackage.eINSTANCE.getInvoke())) {
 			result += type.getName();
 			Invoke instr = (Invoke) t.getInstruction();
 			result += instr.getName().getName();
-			result += toString(instr.getPList());
+			result += parameterListToString(instr.getPList());
 		}
 		// Fence
 		else if (type.equals(LlvmPackage.eINSTANCE.getFence())) {
@@ -642,65 +620,65 @@ public abstract class GraphUtility {
 			AtomicRMW instr = (AtomicRMW) t.getInstruction();
 			String operation = instr.getOperation();
 			if (operation.equals("xchg")) {
-				result += toString(instr.getAddress());
+				result += parameterValueToString(instr.getAddress());
 				result += " = ";
-				result += toString(instr.getArgument());
+				result += parameterValueToString(instr.getArgument());
 			} else if (operation.equals("add")) {
-				result += toString(instr.getAddress());
+				result += parameterValueToString(instr.getAddress());
 				result += " = ";
-				result += toString(instr.getAddress());
+				result += parameterValueToString(instr.getAddress());
 				result += " + ";
-				result += toString(instr.getArgument());
+				result += parameterValueToString(instr.getArgument());
 			} else if (operation.equals("sub")) {
-				result += toString(instr.getAddress());
+				result += parameterValueToString(instr.getAddress());
 				result += " = ";
-				result += toString(instr.getAddress());
+				result += parameterValueToString(instr.getAddress());
 				result += " - ";
-				result += toString(instr.getArgument());
+				result += parameterValueToString(instr.getArgument());
 			} else if (operation.equals("and")) {
-				result += toString(instr.getAddress());
+				result += parameterValueToString(instr.getAddress());
 				result += " = ";
-				result += toString(instr.getAddress());
+				result += parameterValueToString(instr.getAddress());
 				result += " & ";
-				result += toString(instr.getArgument());
+				result += parameterValueToString(instr.getArgument());
 			} else if (operation.equals("nand")) {
-				result += toString(instr.getAddress());
+				result += parameterValueToString(instr.getAddress());
 				result += " = ";
-				result += toString(instr.getAddress());
+				result += parameterValueToString(instr.getAddress());
 				result += " !& ";
-				result += toString(instr.getArgument());
+				result += parameterValueToString(instr.getArgument());
 			} else if (operation.equals("or")) {
-				result += toString(instr.getAddress());
+				result += parameterValueToString(instr.getAddress());
 				result += " = ";
-				result += toString(instr.getAddress());
+				result += parameterValueToString(instr.getAddress());
 				result += " | ";
-				result += toString(instr.getArgument());
+				result += parameterValueToString(instr.getArgument());
 			} else if (operation.equals("xor")) {
-				result += toString(instr.getAddress());
+				result += parameterValueToString(instr.getAddress());
 				result += " = ";
-				result += toString(instr.getAddress());
+				result += parameterValueToString(instr.getAddress());
 				result += " ^ ";
-				result += toString(instr.getArgument());
+				result += parameterValueToString(instr.getArgument());
 			} else if (operation.equals("max") || operation.equals("umax")) {
-				result += toString(instr.getAddress());
+				result += parameterValueToString(instr.getAddress());
 				result += " = ";
-				result += toString(instr.getAddress());
+				result += parameterValueToString(instr.getAddress());
 				result += " > ";
-				result += toString(instr.getArgument());
+				result += parameterValueToString(instr.getArgument());
 				result += " ? ";
-				result += toString(instr.getAddress());
+				result += parameterValueToString(instr.getAddress());
 				result += " : ";
-				result += toString(instr.getArgument());
+				result += parameterValueToString(instr.getArgument());
 			} else if (operation.equals("min") || operation.equals("umin")) {
-				result += toString(instr.getAddress());
+				result += parameterValueToString(instr.getAddress());
 				result += " = ";
-				result += toString(instr.getAddress());
+				result += parameterValueToString(instr.getAddress());
 				result += " < ";
-				result += toString(instr.getArgument());
+				result += parameterValueToString(instr.getArgument());
 				result += " ? ";
-				result += toString(instr.getAddress());
+				result += parameterValueToString(instr.getAddress());
 				result += " : ";
-				result += toString(instr.getArgument());
+				result += parameterValueToString(instr.getArgument());
 			}
 			result += " )";
 			//phi
@@ -718,7 +696,7 @@ public abstract class GraphUtility {
 				if(incomingLabels.containsKey(phiLabel)){
 					phiLabel += "(PC:"+incomingLabels.get(phiLabel)+")";
 				}
-				result+= "[" + toString(phiCase.getValue()) + ", " + phiLabel + "], ";
+				result+= "[" + valueToString(phiCase.getValue()) + ", " + phiLabel + "], ";
 			}
 			result = result.substring(0,result.length()-2) + ")";
 
@@ -735,7 +713,7 @@ public abstract class GraphUtility {
 	 * @param pList
 	 * @return 
 	 */
-	private static String toString(ParameterList pList) {
+	public static String parameterListToString(ParameterList pList) {
 		String result = "(";
 		Iterator<Parameter> i = pList.getParams().iterator();
 		while (i.hasNext())
@@ -743,29 +721,12 @@ public abstract class GraphUtility {
 			Parameter p = i.next();
 			if(i.hasNext())
 			{
-				result += toString(p) + ", ";
+				result += parameterValueToString(p) + ", ";
 			}
 			else {
-				result += toString(p);
+				result += parameterValueToString(p);
 			}
 		}
-		result += ")";
-		return result;
-	}
-	
-	private static String toString(EList<EObject> pList) {
-		String result = "(";
-		
-		for(EObject o: pList){
-			if(o instanceof TypeUse){
-			
-			TypeUse p = (TypeUse) o;
-			result += toString(p) + ", ";
-			}else{
-				result += o.toString();
-			}
-			}
-		result = result.substring(0, result.length()-2);
 		result += ")";
 		return result;
 	}
@@ -775,22 +736,99 @@ public abstract class GraphUtility {
 	 * @param type the type to add to the String.
 	 * @return concatenated String
 	 */
-	private static String toString(TypeUse type) {
+	public static String typeUseToString(TypeUse type)
+	{
 		String result;
-		if (type instanceof PredefinedImpl) {
+		if (type instanceof Predefined)
+		{
 			result = ((Predefined) type).getType();
-			if (((Predefined) type).getPointer() != null) {
+			if (((Predefined) type).getPointer() != null)
+			{
 				result += ((Predefined) type).getPointer();
 			}
-		} else if (type instanceof AddressUseImpl) {
+		} else if (type instanceof AddressUse)
+		{
 			result = ((AddressUse) type).getAddress().getName();
-			if (((AddressUse) type).getPointer() != null) {
+			if (((AddressUse) type).getPointer() != null)
+			{
 				result += ((AddressUse) type).getPointer();
 			}
-		} else {
+		} else if (type instanceof FunctionType)
+		{
+			FunctionType ftype = (FunctionType) type;
+			result = typeToString(ftype.getReturnType()) + "(";
+			Iterator<FunctionParameter> i = ftype.getParameter().getParams().iterator();
+			while (i.hasNext())
+			{
+				result += typeToString(i.next());
+				if (i.hasNext())
+				{
+					result += ", ";
+				}
+			}
+			result += ")";
+		} else
+		{
 			result = type.toString();
 		}
 		return result;
+	}
+	
+	public static String aggregateTypeToString(Aggregate_Type type)
+	{
+		String result = null;
+		if (type instanceof Array)
+		{
+			Array array = (Array) type;
+			EObject arrayType = array.getType();
+			result = "[" + array.getLength() + " x " + typeToString(arrayType)+"]"  ;
+			if(array.getPointer() != null)
+			{
+				result+= array.getPointer();
+			}
+		} 
+		else if (type instanceof Vector)
+		{
+			Vector vector = (Vector) type;
+			EObject arrayType = vector.getType();
+			
+			result = "[" + vector.getLength() + " x " + typeToString(arrayType) +"]";
+		} 
+		else if (type instanceof Structure)
+		{
+			Structure struct = (Structure) type;
+			result = "{";
+			EList<EObject> types = struct.getTypes();
+			Iterator<EObject> i = types.iterator();
+			while (i.hasNext())
+			{
+				result += typeToString(i.next());
+				if (i.hasNext())
+				{
+					result += ", ";
+				} 
+			}
+			if(struct.getPointer() != null)
+			{
+				result+= struct.getPointer();
+			}
+			result += "}";
+		} 
+		
+		return result;
+	}
+	
+	public static String typeToString(EObject type)
+	{
+		if (type instanceof TypeUse)
+		{
+			return typeUseToString((TypeUse)type);
+		}
+		else if (type instanceof Aggregate_Type)
+		{
+			return aggregateTypeToString((Aggregate_Type)type);
+		}
+		else return null;
 	}
 
 	/**
@@ -798,53 +836,42 @@ public abstract class GraphUtility {
 	 * @param value
 	 * @return the concatenated String
 	 */
-	private static String toString(Value value) {
+	public static String valueToString(Value value)
+	{
 		String result = "";
 
-		if(value instanceof AddressUseImpl){
-			AddressUseImpl aui = (AddressUseImpl)value;
-			result +=aui.getAddress().getName();
+		if (value instanceof AddressUse)
+		{
+			AddressUse aui = (AddressUse) value;
+			result += aui.getAddress().getName();
 		}
-
-		else if (value instanceof IntegerConstant) {
+		else if (value instanceof IntegerConstant)
+		{
 			result += ((IntegerConstant) value).getValue();
-		}
-		else if (value instanceof DecimalConstant) {
+		} else if (value instanceof DecimalConstant)
+		{
 			result += ((DecimalConstant) value).getValue();
-		}
-
-		else if(value instanceof PrimitiveValue){
-			result += ((PrimitiveValue)value).getValue();
-		}
-		
-		else if(value instanceof NestedGetElementPtr){
-			return "GetElementPtr" +WS+ toString(((NestedGetElementPtr) value).getAggregate());
-		}
-		
-		else if (value instanceof NestedCast)
+		} else if (value instanceof PrimitiveValue)
+		{
+			result += ((PrimitiveValue) value).getValue();
+		} else if (value instanceof NestedGetElementPtr)
+		{
+			// TODO indices are missing and actually a simple representation
+			return "(GetElementPtr" + WS + parameterValueToString(((NestedGetElementPtr) value).getAggregate()) +")";
+		} else if (value instanceof NestedCast)
 		{
 			NestedCast val = (NestedCast) value;
-			if (val.getFrom() instanceof TypeUse)
-			{
-				return "(" + toString((TypeUse) val.getFrom()) + "->" + toString(val.getTo()) + ") "
-						+ toString(val.getValue());
-			}
-			if (val.getFrom() instanceof Structure)
-			{
-				Structure from = (Structure) val.getFrom();
-				return "(" + toString(from.getTypes()) + "->" + toString(val.getTo()) + ") " + toString(val.getValue());
-			}
-		}
-		
-		else {
+			result += "(" + typeToString(val.getFrom()) + "-->" + typeToString(val.getTo()) + ")" + valueToString(val.getValue());
+		} else
+		{
 			result += TODO;
 		}
 
 		return (result + WS);
 	}
 
-	private static String toString(Parameter val) {
-		return toString(val.getValue());
+	public static String parameterValueToString(Parameter val) {
+		return valueToString(val.getValue());
 	}
 	
 }

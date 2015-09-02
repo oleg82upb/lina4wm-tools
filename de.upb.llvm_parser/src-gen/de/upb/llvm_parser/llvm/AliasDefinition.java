@@ -14,7 +14,6 @@ package de.upb.llvm_parser.llvm;
  *   <li>{@link de.upb.llvm_parser.llvm.AliasDefinition#getAddress <em>Address</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.AliasDefinition#getAliastype <em>Aliastype</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.AliasDefinition#getAliasvalue <em>Aliasvalue</em>}</li>
- *   <li>{@link de.upb.llvm_parser.llvm.AliasDefinition#getAliasee <em>Aliasee</em>}</li>
  * </ul>
  * </p>
  *
@@ -101,31 +100,5 @@ public interface AliasDefinition extends MainLevelEntity
    * @generated
    */
   void setAliasvalue(Value value);
-
-  /**
-   * Returns the value of the '<em><b>Aliasee</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Aliasee</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Aliasee</em>' containment reference.
-   * @see #setAliasee(TypeUse)
-   * @see de.upb.llvm_parser.llvm.LlvmPackage#getAliasDefinition_Aliasee()
-   * @model containment="true"
-   * @generated
-   */
-  TypeUse getAliasee();
-
-  /**
-   * Sets the value of the '{@link de.upb.llvm_parser.llvm.AliasDefinition#getAliasee <em>Aliasee</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Aliasee</em>' containment reference.
-   * @see #getAliasee()
-   * @generated
-   */
-  void setAliasee(TypeUse value);
 
 } // AliasDefinition

@@ -38,10 +38,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//AliasDefinition/address"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//AliasDefinition/aliastype"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//AliasDefinition/aliasvalue"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//AliasDefinition/aliasee"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//TypeUse">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//TypeUse/functionInput"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//TypeUse/pointer"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//AddressUse">
@@ -52,6 +50,10 @@
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//Predefined">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Predefined/type"/>
+    </genClasses>
+    <genClasses ecoreClass="LLVM.ecore#//FunctionType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//FunctionType/returnType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//FunctionType/parameter"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//Vector">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//Vector/length"/>
@@ -95,6 +97,7 @@
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//FunctionParameterList">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//FunctionParameterList/params"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LLVM.ecore#//FunctionParameterList/isNumberOfParametersUnknown"/>
     </genClasses>
     <genClasses ecoreClass="LLVM.ecore#//FunctionBody">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LLVM.ecore#//FunctionBody/meta"/>

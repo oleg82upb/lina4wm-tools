@@ -58,7 +58,7 @@ public class RU_T_IndWR_1_1 extends TSO_Test {
 
 		//check that all buffers contain the correct elements
 		for(ControlFlowLocation l: nonEmptyBuffers){
-			String buffer = gUtil.getBufferAsString(l);
+			String buffer = gUtil.bufferToString(l);
 			boolean isValidBuffer = buffer.equals(l.getPc()+"<(null,%b)>");
 			assertTrue(isValidBuffer);
 

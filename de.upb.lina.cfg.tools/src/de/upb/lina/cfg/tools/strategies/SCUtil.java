@@ -209,7 +209,7 @@ public class SCUtil implements IGraphGenerator{
 	private ControlFlowLocation createControlFlowLocation(
 			ControlFlowDiagram diag, int pc, StoreBuffer buffer, String blockLabel) {
 		for(ControlFlowLocation l: diag.getLocations()){
-			if(GraphUtility.isCorrectLocation(l, pc, buffer)){
+			if(GraphUtility.isRepresentedBy(l, pc, buffer)){
 				return l;
 			}
 		}

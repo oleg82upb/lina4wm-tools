@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.llvm_parser.llvm.FunctionParameterList#getParams <em>Params</em>}</li>
+ *   <li>{@link de.upb.llvm_parser.llvm.FunctionParameterList#isIsNumberOfParametersUnknown <em>Is Number Of Parameters Unknown</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,5 +40,31 @@ public interface FunctionParameterList extends EObject
    * @generated
    */
   EList<FunctionParameter> getParams();
+
+  /**
+   * Returns the value of the '<em><b>Is Number Of Parameters Unknown</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Is Number Of Parameters Unknown</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Is Number Of Parameters Unknown</em>' attribute.
+   * @see #setIsNumberOfParametersUnknown(boolean)
+   * @see de.upb.llvm_parser.llvm.LlvmPackage#getFunctionParameterList_IsNumberOfParametersUnknown()
+   * @model
+   * @generated
+   */
+  boolean isIsNumberOfParametersUnknown();
+
+  /**
+   * Sets the value of the '{@link de.upb.llvm_parser.llvm.FunctionParameterList#isIsNumberOfParametersUnknown <em>Is Number Of Parameters Unknown</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Is Number Of Parameters Unknown</em>' attribute.
+   * @see #isIsNumberOfParametersUnknown()
+   * @generated
+   */
+  void setIsNumberOfParametersUnknown(boolean value);
 
 } // FunctionParameterList

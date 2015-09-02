@@ -135,6 +135,11 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
         return createPredefinedAdapter();
       }
       @Override
+      public Adapter caseFunctionType(FunctionType object)
+      {
+        return createFunctionTypeAdapter();
+      }
+      @Override
       public Adapter caseVector(Vector object)
       {
         return createVectorAdapter();
@@ -722,6 +727,21 @@ public class LlvmAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createPredefinedAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.upb.llvm_parser.llvm.FunctionType <em>Function Type</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.upb.llvm_parser.llvm.FunctionType
+   * @generated
+   */
+  public Adapter createFunctionTypeAdapter()
   {
     return null;
   }

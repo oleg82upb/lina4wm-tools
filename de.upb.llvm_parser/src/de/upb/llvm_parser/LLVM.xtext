@@ -30,9 +30,6 @@ terminal STRING:
 	'c'?'"' ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '"' | "'" | '\\') | !('\\' | '"'))* '"' |
 	'c'?"'" ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '0' | '"' | "'" | '\\') | !('\\' | "'"))* "'";
 
-terminal UNKNOWN_TYPE:
-	'(...)' POINTER?;
-
 terminal SL_COMMENT:
 	';' !('\n' | '\r')* ('\r'? '\n')?;
 
@@ -129,8 +126,8 @@ FunctionDefinition:
 		returnType=TypeUse
 		address=Address ('()' | '(' parameter=FunctionParameterList? ')') 
 		'unnamed_addr'? FUNCTION_ATTRIBUTES* ('section ' STRING)? ('align' align = INT)?
-	body=FunctionBody) 
-	| 
+	body=FunctionBody)
+|
 	('declare' ('private' | 'linker_private' | 'linker_private_weak' | 'available_externally' 
 		| 'linkonce' | 'common' | 'appending' |	'extern_weak' | 'linkonce_odr' | 'linkonce_odr_auto_hide' 
 		| 'dllimport' | 'dllexport'| 'external' | 'internal' | 'weak' | 'weak_odr')? 
@@ -145,10 +142,12 @@ FunctionDefinition:
 AliasDefinition:
 	address=Address '=' 'alias' ('external' | 'internal' | 'weak' | 'weak_odr')? 
 	('default' | 'hidden' | 'protected')? 
-	aliastype=TypeUse aliasvalue=Value aliasee=(TypeUse);
+	aliastype=TypeUse aliasvalue=Value 
+	//aliasee=(AddressUse)
+	;
 
 TypeUse:
-	(Predefined | AddressUse) functionInput=UNKNOWN_TYPE?	
+	Predefined | AddressUse | FunctionType 	
 ;
 
 AddressUse:
@@ -159,10 +158,12 @@ Address:
 	name=VALID_ID;
 
 Predefined:
-	type=('void' | 'null' | 'label' | 'undef' | '...' | INT_TYPE | FLOATING_POINT_TYPE) (pointer=POINTER)?
+	type=('void' | 'null' | 'label' | 'undef' | INT_TYPE | FLOATING_POINT_TYPE) (pointer=POINTER)?
 	;
 
-
+FunctionType:
+	returnType= Predefined "(" parameter=FunctionParameterList? ")" (pointer=POINTER?)
+;
 
 
 Vector:
@@ -183,7 +184,7 @@ IntegerConstant:
 	value = INT;
 	
 PrimitiveValue:
-	value = (STRING | 'void' | 'null' | 'label' | 'undef' | '...' | BOOL | 'zeroinitializer');
+	value = (STRING | 'void' | 'null' | 'label' | 'undef' | BOOL | 'zeroinitializer');
 
 Value:
 	 NestedCast | NestedGetElementPtr | Constant | AddressUse | PrimitiveValue | ValueStruct;
@@ -199,25 +200,24 @@ Parameter:
 	type = (TypeUse | Aggregate_Type) 
 	attributes += ('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')* 
 	value = Value
-//	|
-//	(	value = Value?
-//		attributes += ('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')*
-//	))
 ;
 
 ParameterList:
 	{ParameterList}
-	('()' | '('	((params+=Parameter (',' params+=Parameter)*)?) ')');
+	((params+=Parameter (',' (params+=Parameter))* )? );
 
+
+//declares value variable instead of reusing existing ones as with normal parameters
 FunctionParameter:
 	type = TypeUse 
-	('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')* 
+	('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')*
 	(value = Address)?
 ;
 
 FunctionParameterList:
 	{FunctionParameterList} 
-	params+=FunctionParameter (',' params+=FunctionParameter)* 
+	(params+=FunctionParameter ((',' params+=FunctionParameter)* | ',' isNumberOfParametersUnknown?='...' ) 
+	| isNumberOfParametersUnknown?='...')
 ;
 
 
@@ -338,7 +338,9 @@ Call:
 	(result=Address '=')? 'tail'? 'call' CALLING_CONV? 
 	('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')? 
 	function=Parameter
-	pList=ParameterList FUNCTION_ATTRIBUTES* (',' '!srcloc' '!' INT)*;
+	( '()' | '(' pList=ParameterList ')') 
+	FUNCTION_ATTRIBUTES* 
+	(',' '!srcloc' '!' INT)*;
 
 Alloc:
 	result=Address '=' 'alloca' type=TypeUse (',' numOfElements=Parameter)? (',' 'align' align = INT)?;
@@ -413,7 +415,8 @@ SwitchCase:
 Invoke:
 	'invoke' CALLING_CONV? 
 	('zeroext' | 'signext' | 'inreg' | 'byval' | 'sret' | 'noalias' | 'nocapture' | 'nest')? 
-	returnType=TypeUse name=Address pList=ParameterList
+	returnType=TypeUse name=Address 
+	( '()' | '(' pList=ParameterList ')') 
 	FUNCTION_ATTRIBUTES* 'to' 'label' targetLabel=VALID_ID 'unwind' 'label' unwindTargetLabel=VALID_ID;
 
 Resume:

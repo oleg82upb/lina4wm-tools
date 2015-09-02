@@ -52,6 +52,7 @@ import de.upb.llvm_parser.llvm.FunctionBody;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.FunctionParameter;
 import de.upb.llvm_parser.llvm.FunctionParameterList;
+import de.upb.llvm_parser.llvm.FunctionType;
 import de.upb.llvm_parser.llvm.GetElementPtr;
 import de.upb.llvm_parser.llvm.GlobalDefinition;
 import de.upb.llvm_parser.llvm.IndirectBranch;
@@ -192,6 +193,13 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
    * @generated
    */
   private EClass predefinedEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass functionTypeEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1067,16 +1075,6 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAliasDefinition_Aliasee()
-  {
-    return (EReference)aliasDefinitionEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getTypeUse()
   {
     return typeUseEClass;
@@ -1087,19 +1085,9 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTypeUse_FunctionInput()
-  {
-    return (EAttribute)typeUseEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EAttribute getTypeUse_Pointer()
   {
-    return (EAttribute)typeUseEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)typeUseEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1160,6 +1148,36 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
   public EAttribute getPredefined_Type()
   {
     return (EAttribute)predefinedEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getFunctionType()
+  {
+    return functionTypeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getFunctionType_ReturnType()
+  {
+    return (EReference)functionTypeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getFunctionType_Parameter()
+  {
+    return (EReference)functionTypeEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1480,6 +1498,16 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
   public EReference getFunctionParameterList_Params()
   {
     return (EReference)functionParameterListEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getFunctionParameterList_IsNumberOfParametersUnknown()
+  {
+    return (EAttribute)functionParameterListEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -3495,10 +3523,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
     createEReference(aliasDefinitionEClass, ALIAS_DEFINITION__ADDRESS);
     createEReference(aliasDefinitionEClass, ALIAS_DEFINITION__ALIASTYPE);
     createEReference(aliasDefinitionEClass, ALIAS_DEFINITION__ALIASVALUE);
-    createEReference(aliasDefinitionEClass, ALIAS_DEFINITION__ALIASEE);
 
     typeUseEClass = createEClass(TYPE_USE);
-    createEAttribute(typeUseEClass, TYPE_USE__FUNCTION_INPUT);
     createEAttribute(typeUseEClass, TYPE_USE__POINTER);
 
     addressUseEClass = createEClass(ADDRESS_USE);
@@ -3509,6 +3535,10 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
 
     predefinedEClass = createEClass(PREDEFINED);
     createEAttribute(predefinedEClass, PREDEFINED__TYPE);
+
+    functionTypeEClass = createEClass(FUNCTION_TYPE);
+    createEReference(functionTypeEClass, FUNCTION_TYPE__RETURN_TYPE);
+    createEReference(functionTypeEClass, FUNCTION_TYPE__PARAMETER);
 
     vectorEClass = createEClass(VECTOR);
     createEAttribute(vectorEClass, VECTOR__LENGTH);
@@ -3555,6 +3585,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
 
     functionParameterListEClass = createEClass(FUNCTION_PARAMETER_LIST);
     createEReference(functionParameterListEClass, FUNCTION_PARAMETER_LIST__PARAMS);
+    createEAttribute(functionParameterListEClass, FUNCTION_PARAMETER_LIST__IS_NUMBER_OF_PARAMETERS_UNKNOWN);
 
     functionBodyEClass = createEClass(FUNCTION_BODY);
     createEReference(functionBodyEClass, FUNCTION_BODY__META);
@@ -3854,6 +3885,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
     addressUseEClass.getESuperTypes().add(this.getTypeUse());
     addressUseEClass.getESuperTypes().add(this.getValue());
     predefinedEClass.getESuperTypes().add(this.getTypeUse());
+    functionTypeEClass.getESuperTypes().add(this.getTypeUse());
     vectorEClass.getESuperTypes().add(this.getAggregate_Type());
     arrayEClass.getESuperTypes().add(this.getAggregate_Type());
     constantEClass.getESuperTypes().add(this.getValue());
@@ -3953,10 +3985,8 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
     initEReference(getAliasDefinition_Address(), this.getAddress(), null, "address", null, 0, 1, AliasDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAliasDefinition_Aliastype(), this.getTypeUse(), null, "aliastype", null, 0, 1, AliasDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAliasDefinition_Aliasvalue(), this.getValue(), null, "aliasvalue", null, 0, 1, AliasDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAliasDefinition_Aliasee(), this.getTypeUse(), null, "aliasee", null, 0, 1, AliasDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeUseEClass, TypeUse.class, "TypeUse", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTypeUse_FunctionInput(), ecorePackage.getEString(), "functionInput", null, 0, 1, TypeUse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTypeUse_Pointer(), ecorePackage.getEString(), "pointer", null, 0, 1, TypeUse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(addressUseEClass, AddressUse.class, "AddressUse", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3967,6 +3997,10 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
 
     initEClass(predefinedEClass, Predefined.class, "Predefined", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getPredefined_Type(), ecorePackage.getEString(), "type", null, 0, 1, Predefined.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(functionTypeEClass, FunctionType.class, "FunctionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getFunctionType_ReturnType(), this.getPredefined(), null, "returnType", null, 0, 1, FunctionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFunctionType_Parameter(), this.getFunctionParameterList(), null, "parameter", null, 0, 1, FunctionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(vectorEClass, Vector.class, "Vector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getVector_Length(), ecorePackage.getEInt(), "length", null, 0, 1, Vector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4013,6 +4047,7 @@ public class LlvmPackageImpl extends EPackageImpl implements LlvmPackage
 
     initEClass(functionParameterListEClass, FunctionParameterList.class, "FunctionParameterList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getFunctionParameterList_Params(), this.getFunctionParameter(), null, "params", null, 0, -1, FunctionParameterList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getFunctionParameterList_IsNumberOfParametersUnknown(), ecorePackage.getEBoolean(), "isNumberOfParametersUnknown", null, 0, 1, FunctionParameterList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(functionBodyEClass, FunctionBody.class, "FunctionBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getFunctionBody_Meta(), this.getMetadataValue(), null, "meta", null, 0, -1, FunctionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

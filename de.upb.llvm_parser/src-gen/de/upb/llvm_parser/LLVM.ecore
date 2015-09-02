@@ -45,11 +45,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="aliasvalue" eType="#//Value"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="aliasee" eType="#//TypeUse"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeUse">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="functionInput" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="pointer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AddressUse" eSuperTypes="#//TypeUse #//Value">
@@ -60,6 +57,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Predefined" eSuperTypes="#//TypeUse">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionType" eSuperTypes="#//TypeUse">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="#//Predefined"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//FunctionParameterList"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Vector" eSuperTypes="#//Aggregate_Type">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
@@ -114,6 +117,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="FunctionParameterList">
     <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1"
         eType="#//FunctionParameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isNumberOfParametersUnknown"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FunctionBody">
     <eStructuralFeatures xsi:type="ecore:EReference" name="meta" upperBound="-1" eType="#//MetadataValue"

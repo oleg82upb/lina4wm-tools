@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.llvm_parser.llvm.impl.TypeUseImpl#getFunctionInput <em>Function Input</em>}</li>
  *   <li>{@link de.upb.llvm_parser.llvm.impl.TypeUseImpl#getPointer <em>Pointer</em>}</li>
  * </ul>
  * </p>
@@ -28,26 +27,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  */
 public class TypeUseImpl extends MinimalEObjectImpl.Container implements TypeUse
 {
-  /**
-   * The default value of the '{@link #getFunctionInput() <em>Function Input</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getFunctionInput()
-   * @generated
-   * @ordered
-   */
-  protected static final String FUNCTION_INPUT_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getFunctionInput() <em>Function Input</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getFunctionInput()
-   * @generated
-   * @ordered
-   */
-  protected String functionInput = FUNCTION_INPUT_EDEFAULT;
-
   /**
    * The default value of the '{@link #getPointer() <em>Pointer</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -94,29 +73,6 @@ public class TypeUseImpl extends MinimalEObjectImpl.Container implements TypeUse
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getFunctionInput()
-  {
-    return functionInput;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setFunctionInput(String newFunctionInput)
-  {
-    String oldFunctionInput = functionInput;
-    functionInput = newFunctionInput;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LlvmPackage.TYPE_USE__FUNCTION_INPUT, oldFunctionInput, functionInput));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public String getPointer()
   {
     return pointer;
@@ -145,8 +101,6 @@ public class TypeUseImpl extends MinimalEObjectImpl.Container implements TypeUse
   {
     switch (featureID)
     {
-      case LlvmPackage.TYPE_USE__FUNCTION_INPUT:
-        return getFunctionInput();
       case LlvmPackage.TYPE_USE__POINTER:
         return getPointer();
     }
@@ -163,9 +117,6 @@ public class TypeUseImpl extends MinimalEObjectImpl.Container implements TypeUse
   {
     switch (featureID)
     {
-      case LlvmPackage.TYPE_USE__FUNCTION_INPUT:
-        setFunctionInput((String)newValue);
-        return;
       case LlvmPackage.TYPE_USE__POINTER:
         setPointer((String)newValue);
         return;
@@ -183,9 +134,6 @@ public class TypeUseImpl extends MinimalEObjectImpl.Container implements TypeUse
   {
     switch (featureID)
     {
-      case LlvmPackage.TYPE_USE__FUNCTION_INPUT:
-        setFunctionInput(FUNCTION_INPUT_EDEFAULT);
-        return;
       case LlvmPackage.TYPE_USE__POINTER:
         setPointer(POINTER_EDEFAULT);
         return;
@@ -203,8 +151,6 @@ public class TypeUseImpl extends MinimalEObjectImpl.Container implements TypeUse
   {
     switch (featureID)
     {
-      case LlvmPackage.TYPE_USE__FUNCTION_INPUT:
-        return FUNCTION_INPUT_EDEFAULT == null ? functionInput != null : !FUNCTION_INPUT_EDEFAULT.equals(functionInput);
       case LlvmPackage.TYPE_USE__POINTER:
         return POINTER_EDEFAULT == null ? pointer != null : !POINTER_EDEFAULT.equals(pointer);
     }
@@ -222,9 +168,7 @@ public class TypeUseImpl extends MinimalEObjectImpl.Container implements TypeUse
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (functionInput: ");
-    result.append(functionInput);
-    result.append(", pointer: ");
+    result.append(" (pointer: ");
     result.append(pointer);
     result.append(')');
     return result.toString();
