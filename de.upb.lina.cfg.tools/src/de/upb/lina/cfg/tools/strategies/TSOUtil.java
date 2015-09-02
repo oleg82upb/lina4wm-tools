@@ -331,7 +331,7 @@ public class TSOUtil implements IGraphGenerator {
 		for (AddressValuePair pair : oldBuffer.getAddressValuePairs()) {
 			AddressValuePair newPair = ControlflowFactory.eINSTANCE.createAddressValuePair();
 			newPair.setAddress(pair.getAddress());
-			newPair.setValue(pair.getValue());
+			newPair.getValues().addAll(pair.getValues());
 			buffer.getAddressValuePairs().add(newPair);
 		}
 
@@ -340,7 +340,7 @@ public class TSOUtil implements IGraphGenerator {
 			Store store = (Store) nextInstruction;
 			AddressValuePair newPair = ControlflowFactory.eINSTANCE.createAddressValuePair();
 			newPair.setAddress(store.getTargetAddress());
-			newPair.setValue(store.getValue());
+			newPair.getValues().add(store.getValue());
 			if (!GraphUtility.isAVPInList(buffer.getAddressValuePairs(), newPair)) {
 				buffer.getAddressValuePairs().add(newPair);
 			} else {
@@ -360,7 +360,7 @@ public class TSOUtil implements IGraphGenerator {
 		for (AddressValuePair pair : oldBuffer.getAddressValuePairs()) {
 			AddressValuePair newPair = ControlflowFactory.eINSTANCE.createAddressValuePair();
 			newPair.setAddress(pair.getAddress());
-			newPair.setValue(pair.getValue());
+			newPair.getValues().addAll(pair.getValues());
 			buffer.getAddressValuePairs().add(newPair);
 		}
 		
@@ -397,7 +397,7 @@ public class TSOUtil implements IGraphGenerator {
 					cfg.getVariableCopyParams().add(addressParameter);
 				}
 				newPair.setAddress(addressParameter);
-				newPair.setValue(store.getValue());
+				newPair.getValues().add(store.getValue());
 		} 
 		// value redefined
 		if (redefinedValue) {
@@ -427,7 +427,7 @@ public class TSOUtil implements IGraphGenerator {
 				if(!redefinedAddress){
 					newPair.setAddress(store.getTargetAddress());
 				}
-				newPair.setValue(valueParam);
+				newPair.getValues().add(valueParam);
 		}
 		buffer.getAddressValuePairs().add(newPair);
 
@@ -446,7 +446,7 @@ public class TSOUtil implements IGraphGenerator {
 		for (AddressValuePair pair : oldBuffer.getAddressValuePairs()) {
 			AddressValuePair newPair = ControlflowFactory.eINSTANCE.createAddressValuePair();
 			newPair.setAddress(pair.getAddress());
-			newPair.setValue(pair.getValue());
+			newPair.getValues().addAll(pair.getValues());
 			buffer.getAddressValuePairs().add(newPair);
 		}
 		buffer.getAddressValuePairs().remove(0);
@@ -560,7 +560,7 @@ public class TSOUtil implements IGraphGenerator {
 							AddressUse earlyReadAddress = (AddressUse) earlyReadInstruction.getAddress().getValue();
 							if (avpAddress.getAddress().equals(earlyReadAddress.getAddress()))
 							{
-								Value value = avp.getValue().getValue();
+								Value value = avp.getValues().get(0).getValue();
 								if (value instanceof AddressUse)
 								{
 									return ((AddressUse) value).getAddress().getName();

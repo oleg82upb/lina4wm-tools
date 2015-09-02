@@ -91,7 +91,8 @@ public class EarlyReadTransitionImpl extends TransitionImpl implements EarlyRead
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.EARLY_READ_TRANSITION__ASSIGNMENT_EXPRESSION:
 				return getAssignmentExpression();
 		}
@@ -105,7 +106,8 @@ public class EarlyReadTransitionImpl extends TransitionImpl implements EarlyRead
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.EARLY_READ_TRANSITION__ASSIGNMENT_EXPRESSION:
 				setAssignmentExpression((String)newValue);
 				return;
@@ -120,7 +122,8 @@ public class EarlyReadTransitionImpl extends TransitionImpl implements EarlyRead
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.EARLY_READ_TRANSITION__ASSIGNMENT_EXPRESSION:
 				setAssignmentExpression(ASSIGNMENT_EXPRESSION_EDEFAULT);
 				return;
@@ -135,7 +138,8 @@ public class EarlyReadTransitionImpl extends TransitionImpl implements EarlyRead
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.EARLY_READ_TRANSITION__ASSIGNMENT_EXPRESSION:
 				return ASSIGNMENT_EXPRESSION_EDEFAULT == null ? assignmentExpression != null : !ASSIGNMENT_EXPRESSION_EDEFAULT.equals(assignmentExpression);
 		}

@@ -61,7 +61,8 @@ public class StoreBufferItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -79,7 +80,8 @@ public class StoreBufferItemProvider
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ControlflowPackage.Literals.STORE_BUFFER__ADDRESS_VALUE_PAIRS);
 		}
@@ -137,7 +139,8 @@ public class StoreBufferItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(StoreBuffer.class)) {
+		switch (notification.getFeatureID(StoreBuffer.class))
+		{
 			case ControlflowPackage.STORE_BUFFER__ADDRESS_VALUE_PAIRS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;

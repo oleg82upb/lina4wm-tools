@@ -57,11 +57,12 @@ public class AddressValuePairItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addAddressPropertyDescriptor(object);
-			addValuePropertyDescriptor(object);
+			addValuesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -90,20 +91,20 @@ public class AddressValuePairItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Value feature.
+	 * This adds a property descriptor for the Values feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addValuePropertyDescriptor(Object object)
+	protected void addValuesPropertyDescriptor(Object object)
 	{
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_AddressValuePair_value_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AddressValuePair_value_feature", "_UI_AddressValuePair_type"),
-				 ControlflowPackage.Literals.ADDRESS_VALUE_PAIR__VALUE,
+				 getString("_UI_AddressValuePair_values_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AddressValuePair_values_feature", "_UI_AddressValuePair_type"),
+				 ControlflowPackage.Literals.ADDRESS_VALUE_PAIR__VALUES,
 				 true,
 				 false,
 				 true,

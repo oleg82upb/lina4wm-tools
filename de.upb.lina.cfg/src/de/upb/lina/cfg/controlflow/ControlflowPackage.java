@@ -596,13 +596,13 @@ public interface ControlflowPackage extends EPackage {
 	int ADDRESS_VALUE_PAIR__ADDRESS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
+	 * The feature id for the '<em><b>Values</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS_VALUE_PAIR__VALUE = 1;
+	int ADDRESS_VALUE_PAIR__VALUES = 1;
 
 	/**
 	 * The feature id for the '<em><b>Store Buffer</b></em>' container reference.
@@ -992,15 +992,15 @@ public interface ControlflowPackage extends EPackage {
 	EReference getAddressValuePair_Address();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.controlflow.AddressValuePair#getValue <em>Value</em>}'.
+	 * Returns the meta object for the reference list '{@link de.upb.lina.cfg.controlflow.AddressValuePair#getValues <em>Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Value</em>'.
-	 * @see de.upb.lina.cfg.controlflow.AddressValuePair#getValue()
+	 * @return the meta object for the reference list '<em>Values</em>'.
+	 * @see de.upb.lina.cfg.controlflow.AddressValuePair#getValues()
 	 * @see #getAddressValuePair()
 	 * @generated
 	 */
-	EReference getAddressValuePair_Value();
+	EReference getAddressValuePair_Values();
 
 	/**
 	 * Returns the meta object for the container reference '{@link de.upb.lina.cfg.controlflow.AddressValuePair#getStoreBuffer <em>Store Buffer</em>}'.
@@ -1334,12 +1334,12 @@ public interface ControlflowPackage extends EPackage {
 		EReference ADDRESS_VALUE_PAIR__ADDRESS = eINSTANCE.getAddressValuePair_Address();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Values</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ADDRESS_VALUE_PAIR__VALUE = eINSTANCE.getAddressValuePair_Value();
+		EReference ADDRESS_VALUE_PAIR__VALUES = eINSTANCE.getAddressValuePair_Values();
 
 		/**
 		 * The meta object literal for the '<em><b>Store Buffer</b></em>' container reference feature.

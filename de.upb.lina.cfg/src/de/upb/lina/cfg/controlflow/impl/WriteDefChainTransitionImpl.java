@@ -71,10 +71,12 @@ public class WriteDefChainTransitionImpl extends TransitionImpl implements Write
 	 * @generated
 	 */
 	public Address getCopyAddress() {
-		if (copyAddress != null && copyAddress.eIsProxy()) {
+		if (copyAddress != null && copyAddress.eIsProxy())
+		{
 			InternalEObject oldCopyAddress = (InternalEObject)copyAddress;
 			copyAddress = (Address)eResolveProxy(oldCopyAddress);
-			if (copyAddress != oldCopyAddress) {
+			if (copyAddress != oldCopyAddress)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ControlflowPackage.WRITE_DEF_CHAIN_TRANSITION__COPY_ADDRESS, oldCopyAddress, copyAddress));
 			}
@@ -109,10 +111,12 @@ public class WriteDefChainTransitionImpl extends TransitionImpl implements Write
 	 * @generated
 	 */
 	public Address getCopyValue() {
-		if (copyValue != null && copyValue.eIsProxy()) {
+		if (copyValue != null && copyValue.eIsProxy())
+		{
 			InternalEObject oldCopyValue = (InternalEObject)copyValue;
 			copyValue = (Address)eResolveProxy(oldCopyValue);
-			if (copyValue != oldCopyValue) {
+			if (copyValue != oldCopyValue)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ControlflowPackage.WRITE_DEF_CHAIN_TRANSITION__COPY_VALUE, oldCopyValue, copyValue));
 			}
@@ -148,7 +152,8 @@ public class WriteDefChainTransitionImpl extends TransitionImpl implements Write
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.WRITE_DEF_CHAIN_TRANSITION__COPY_ADDRESS:
 				if (resolve) return getCopyAddress();
 				return basicGetCopyAddress();
@@ -166,7 +171,8 @@ public class WriteDefChainTransitionImpl extends TransitionImpl implements Write
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.WRITE_DEF_CHAIN_TRANSITION__COPY_ADDRESS:
 				setCopyAddress((Address)newValue);
 				return;
@@ -184,7 +190,8 @@ public class WriteDefChainTransitionImpl extends TransitionImpl implements Write
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.WRITE_DEF_CHAIN_TRANSITION__COPY_ADDRESS:
 				setCopyAddress((Address)null);
 				return;
@@ -202,7 +209,8 @@ public class WriteDefChainTransitionImpl extends TransitionImpl implements Write
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.WRITE_DEF_CHAIN_TRANSITION__COPY_ADDRESS:
 				return copyAddress != null;
 			case ControlflowPackage.WRITE_DEF_CHAIN_TRANSITION__COPY_VALUE:

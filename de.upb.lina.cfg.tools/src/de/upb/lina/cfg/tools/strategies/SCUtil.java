@@ -190,10 +190,11 @@ public class SCUtil implements IGraphGenerator{
 	private StoreBuffer createStoreBuffer(StoreBuffer oldBuffer, Instruction nextInstruction){
 		StoreBuffer buffer = ControlflowFactory.eINSTANCE.createStoreBuffer();
 		//create deep copy
-		for(AddressValuePair pair: oldBuffer.getAddressValuePairs()){
+		for (AddressValuePair pair : oldBuffer.getAddressValuePairs())
+		{
 			AddressValuePair newPair = ControlflowFactory.eINSTANCE.createAddressValuePair();
 			newPair.setAddress(pair.getAddress());
-			newPair.setValue(pair.getValue());
+			newPair.getValues().addAll(pair.getValues());
 			buffer.getAddressValuePairs().add(newPair);
 		}
 

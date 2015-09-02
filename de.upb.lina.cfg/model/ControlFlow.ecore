@@ -55,7 +55,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="FlushTransition" eSuperTypes="#//Transition"/>
   <eClassifiers xsi:type="ecore:EClass" name="AddressValuePair">
     <eStructuralFeatures xsi:type="ecore:EReference" name="address" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Parameter"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Parameter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Parameter"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="storeBuffer" eType="#//StoreBuffer"
         eOpposite="#//StoreBuffer/addressValuePairs"/>
   </eClassifiers>

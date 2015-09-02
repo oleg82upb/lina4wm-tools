@@ -1,7 +1,6 @@
 package de.upb.lina.cfg.tools;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -189,6 +188,7 @@ public abstract class GraphUtility {
 	 * @param buffer
 	 * @return true if location is represented by the given pc and store buffer combination
 	 */
+	//FIXME this check depends on the chosen semantics. right now, it only works for SC and TSO
 	public static boolean isRepresentedBy(ControlFlowLocation l, int pc, StoreBuffer buffer){
 		return (bufferToString(l).equalsIgnoreCase(bufferToString(buffer, pc)));
 	}
@@ -209,16 +209,37 @@ public abstract class GraphUtility {
 	 * @param pc
 	 * @return
 	 */
-	public static String bufferToString(StoreBuffer buf,  int pc){
-		String buffer = "L_"+pc;
-		if(!buf.getAddressValuePairs().isEmpty()){
-			buffer += "_";
+	public static String bufferToString(StoreBuffer buf, int pc)
+	{
+		String buffer = "L_" + pc;
+		if (buf.getAddressValuePairs().isEmpty())
+		{
+			return clean(buffer);
 		}
-		for(AddressValuePair p: buf.getAddressValuePairs()){
-			buffer += "("+valueToString(p.getAddress().getValue())+","
-		+valueToString(p.getValue().getValue())+")";
+		
+		buffer += "_<";
+		for (AddressValuePair pair : buf.getAddressValuePairs())
+		{
+			buffer += "(" + addressValuePairToString(pair) + ")";
 		}
+		buffer += ">";
 		return clean(buffer);
+	}
+	
+	public static String addressValuePairToString(AddressValuePair pair)
+	{
+		String result = valueToString(pair.getAddress().getValue()) + " : ";
+		Iterator<Parameter> i = pair.getValues().iterator();
+		while(i.hasNext())
+		{
+			Parameter param = i.next();
+			result += GraphUtility.valueToString(param.getValue());
+			if(i.hasNext())
+			{
+				result+= ", ";
+			}
+		}
+		return result;
 	}
 	
 	
@@ -297,30 +318,11 @@ public abstract class GraphUtility {
 	 */
 	public static boolean isAVPInList(List<AddressValuePair> list, AddressValuePair pair)
 	{
-		Comparator<AddressValuePair> comparator = new Comparator<AddressValuePair>()
-		{
-
-			@Override
-			public int compare(AddressValuePair o1, AddressValuePair o2)
-			{
-				if (valueToString(o1.getAddress().getValue()).compareToIgnoreCase(valueToString(o2.getAddress().getValue())) != 0)
-				{
-
-					return -2;
-				}
-
-				if (valueToString(o1.getValue().getValue()).compareToIgnoreCase(valueToString(o2.getValue().getValue())) != 0)
-				{
-					return 2;
-				}
-
-				return 0;
-			}
-		};
+		String pairString = addressValuePairToString(pair);
 
 		for (AddressValuePair p : list)
 		{
-			if (comparator.compare(p, pair) == 0)
+			if (pairString.equalsIgnoreCase(addressValuePairToString(p)))
 			{
 				return true;
 			}
@@ -363,8 +365,8 @@ public abstract class GraphUtility {
 			if(!t.getSource().getBuffer().getAddressValuePairs().isEmpty())
 			{
 				AddressValuePair p = t.getSource().getBuffer().getAddressValuePairs().get(0);
-				String s = parameterValueToString(p.getAddress());
-				s +=  "," + parameterValueToString(p.getValue());
+				//FIXME this is TSO specific as the whole pair
+				String s = addressValuePairToString(p);
 				return FLUSH + "(" + s + ")";
 			}
 

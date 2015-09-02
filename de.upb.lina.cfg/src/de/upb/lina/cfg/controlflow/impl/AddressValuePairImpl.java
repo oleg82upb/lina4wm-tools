@@ -8,14 +8,17 @@ import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.controlflow.StoreBuffer;
 import de.upb.llvm_parser.llvm.Parameter;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
@@ -26,7 +29,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.AddressValuePairImpl#getAddress <em>Address</em>}</li>
- *   <li>{@link de.upb.lina.cfg.controlflow.impl.AddressValuePairImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.impl.AddressValuePairImpl#getValues <em>Values</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.AddressValuePairImpl#getStoreBuffer <em>Store Buffer</em>}</li>
  * </ul>
  * </p>
@@ -45,14 +48,14 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	protected Parameter address;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
+	 * The cached value of the '{@link #getValues() <em>Values</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getValues()
 	 * @generated
 	 * @ordered
 	 */
-	protected Parameter value;
+	protected EList<Parameter> values;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -82,10 +85,12 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	 */
 	public Parameter getAddress()
 	{
-		if (address != null && address.eIsProxy()) {
+		if (address != null && address.eIsProxy())
+		{
 			InternalEObject oldAddress = (InternalEObject)address;
 			address = (Parameter)eResolveProxy(oldAddress);
-			if (address != oldAddress) {
+			if (address != oldAddress)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ControlflowPackage.ADDRESS_VALUE_PAIR__ADDRESS, oldAddress, address));
 			}
@@ -121,40 +126,13 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Parameter getValue()
+	public EList<Parameter> getValues()
 	{
-		if (value != null && value.eIsProxy()) {
-			InternalEObject oldValue = (InternalEObject)value;
-			value = (Parameter)eResolveProxy(oldValue);
-			if (value != oldValue) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ControlflowPackage.ADDRESS_VALUE_PAIR__VALUE, oldValue, value));
-			}
+		if (values == null)
+		{
+			values = new EObjectResolvingEList<Parameter>(Parameter.class, this, ControlflowPackage.ADDRESS_VALUE_PAIR__VALUES);
 		}
-		return value;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Parameter basicGetValue()
-	{
-		return value;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setValue(Parameter newValue)
-	{
-		Parameter oldValue = value;
-		value = newValue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ControlflowPackage.ADDRESS_VALUE_PAIR__VALUE, oldValue, value));
+		return values;
 	}
 
 	/**
@@ -186,7 +164,8 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	 */
 	public void setStoreBuffer(StoreBuffer newStoreBuffer)
 	{
-		if (newStoreBuffer != eInternalContainer() || (eContainerFeatureID() != ControlflowPackage.ADDRESS_VALUE_PAIR__STORE_BUFFER && newStoreBuffer != null)) {
+		if (newStoreBuffer != eInternalContainer() || (eContainerFeatureID() != ControlflowPackage.ADDRESS_VALUE_PAIR__STORE_BUFFER && newStoreBuffer != null))
+		{
 			if (EcoreUtil.isAncestor(this, newStoreBuffer))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -209,7 +188,8 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.ADDRESS_VALUE_PAIR__STORE_BUFFER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -226,7 +206,8 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.ADDRESS_VALUE_PAIR__STORE_BUFFER:
 				return basicSetStoreBuffer(null, msgs);
 		}
@@ -241,21 +222,14 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
 	{
-		switch (eContainerFeatureID()) {
+		switch (eContainerFeatureID())
+		{
 			case ControlflowPackage.ADDRESS_VALUE_PAIR__STORE_BUFFER:
 				return eInternalContainer().eInverseRemove(this, ControlflowPackage.STORE_BUFFER__ADDRESS_VALUE_PAIRS, StoreBuffer.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if(obj instanceof AddressValuePair){
-			AddressValuePair otherPair = (AddressValuePair)obj;
-			return otherPair.getAddress().equals(address) && otherPair.getValue().equals(value);
-		}
-		return false;
-	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -264,13 +238,13 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.ADDRESS_VALUE_PAIR__ADDRESS:
 				if (resolve) return getAddress();
 				return basicGetAddress();
-			case ControlflowPackage.ADDRESS_VALUE_PAIR__VALUE:
-				if (resolve) return getValue();
-				return basicGetValue();
+			case ControlflowPackage.ADDRESS_VALUE_PAIR__VALUES:
+				return getValues();
 			case ControlflowPackage.ADDRESS_VALUE_PAIR__STORE_BUFFER:
 				return getStoreBuffer();
 		}
@@ -282,14 +256,17 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.ADDRESS_VALUE_PAIR__ADDRESS:
 				setAddress((Parameter)newValue);
 				return;
-			case ControlflowPackage.ADDRESS_VALUE_PAIR__VALUE:
-				setValue((Parameter)newValue);
+			case ControlflowPackage.ADDRESS_VALUE_PAIR__VALUES:
+				getValues().clear();
+				getValues().addAll((Collection<? extends Parameter>)newValue);
 				return;
 			case ControlflowPackage.ADDRESS_VALUE_PAIR__STORE_BUFFER:
 				setStoreBuffer((StoreBuffer)newValue);
@@ -305,12 +282,13 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.ADDRESS_VALUE_PAIR__ADDRESS:
 				setAddress((Parameter)null);
 				return;
-			case ControlflowPackage.ADDRESS_VALUE_PAIR__VALUE:
-				setValue((Parameter)null);
+			case ControlflowPackage.ADDRESS_VALUE_PAIR__VALUES:
+				getValues().clear();
 				return;
 			case ControlflowPackage.ADDRESS_VALUE_PAIR__STORE_BUFFER:
 				setStoreBuffer((StoreBuffer)null);
@@ -326,11 +304,12 @@ public class AddressValuePairImpl extends EObjectImpl implements AddressValuePai
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.ADDRESS_VALUE_PAIR__ADDRESS:
 				return address != null;
-			case ControlflowPackage.ADDRESS_VALUE_PAIR__VALUE:
-				return value != null;
+			case ControlflowPackage.ADDRESS_VALUE_PAIR__VALUES:
+				return values != null && !values.isEmpty();
 			case ControlflowPackage.ADDRESS_VALUE_PAIR__STORE_BUFFER:
 				return getStoreBuffer() != null;
 		}

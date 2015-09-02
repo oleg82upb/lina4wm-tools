@@ -136,7 +136,8 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * @generated
 	 */
 	public EList<ControlFlowLocation> getLocations() {
-		if (locations == null) {
+		if (locations == null)
+		{
 			locations = new EObjectContainmentWithInverseEList<ControlFlowLocation>(ControlFlowLocation.class, this, ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCATIONS, ControlflowPackage.CONTROL_FLOW_LOCATION__DIAGRAM);
 		}
 		return locations;
@@ -148,7 +149,8 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * @generated
 	 */
 	public EList<Transition> getTransitions() {
-		if (transitions == null) {
+		if (transitions == null)
+		{
 			transitions = new EObjectContainmentWithInverseEList<Transition>(Transition.class, this, ControlflowPackage.CONTROL_FLOW_DIAGRAM__TRANSITIONS, ControlflowPackage.TRANSITION__DIAGRAM);
 		}
 		return transitions;
@@ -160,10 +162,12 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * @generated
 	 */
 	public ControlFlowLocation getStart() {
-		if (start != null && start.eIsProxy()) {
+		if (start != null && start.eIsProxy())
+		{
 			InternalEObject oldStart = (InternalEObject)start;
 			start = (ControlFlowLocation)eResolveProxy(oldStart);
-			if (start != oldStart) {
+			if (start != oldStart)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ControlflowPackage.CONTROL_FLOW_DIAGRAM__START, oldStart, start));
 			}
@@ -219,7 +223,8 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * @generated
 	 */
 	public EList<Address> getVariableCopies() {
-		if (variableCopies == null) {
+		if (variableCopies == null)
+		{
 			variableCopies = new EObjectContainmentEList<Address>(Address.class, this, ControlflowPackage.CONTROL_FLOW_DIAGRAM__VARIABLE_COPIES);
 		}
 		return variableCopies;
@@ -231,7 +236,8 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * @generated
 	 */
 	public EList<Parameter> getVariableCopyParams() {
-		if (variableCopyParams == null) {
+		if (variableCopyParams == null)
+		{
 			variableCopyParams = new EObjectContainmentEList<Parameter>(Parameter.class, this, ControlflowPackage.CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS);
 		}
 		return variableCopyParams;
@@ -245,7 +251,8 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCATIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLocations()).basicAdd(otherEnd, msgs);
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__TRANSITIONS:
@@ -261,7 +268,8 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCATIONS:
 				return ((InternalEList<?>)getLocations()).basicRemove(otherEnd, msgs);
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__TRANSITIONS:
@@ -281,7 +289,8 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCATIONS:
 				return getLocations();
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__TRANSITIONS:
@@ -307,7 +316,8 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCATIONS:
 				getLocations().clear();
 				getLocations().addAll((Collection<? extends ControlFlowLocation>)newValue);
@@ -341,7 +351,8 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCATIONS:
 				getLocations().clear();
 				return;
@@ -371,7 +382,8 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCATIONS:
 				return locations != null && !locations.isEmpty();
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__TRANSITIONS:

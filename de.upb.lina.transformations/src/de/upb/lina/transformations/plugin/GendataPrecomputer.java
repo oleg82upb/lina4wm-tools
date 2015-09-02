@@ -512,8 +512,10 @@ public class GendataPrecomputer {
 		int sizeString = String.valueOf(size).length();
 		String bufferLabel = cfgToLabelPrefix.get(loc.getDiagram()) + String.format("%0"+sizeString+"d", loc.getPc());
 
-		for(AddressValuePair avp: loc.getBuffer().getAddressValuePairs()){
-			bufferLabel += valueToString(avp.getAddress().getValue()) + valueToString(avp.getValue().getValue());
+		for (AddressValuePair avp : loc.getBuffer().getAddressValuePairs())
+		{
+			bufferLabel += valueToString(avp.getAddress().getValue())
+					+ valueToString(avp.getValues().get(0).getValue());
 		}
 
 		return bufferLabel;

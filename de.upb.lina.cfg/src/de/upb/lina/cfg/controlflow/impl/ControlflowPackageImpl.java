@@ -448,7 +448,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAddressValuePair_Value()
+	public EReference getAddressValuePair_Values()
 	{
 		return (EReference)addressValuePairEClass.getEStructuralFeatures().get(1);
 	}
@@ -559,7 +559,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 
 		addressValuePairEClass = createEClass(ADDRESS_VALUE_PAIR);
 		createEReference(addressValuePairEClass, ADDRESS_VALUE_PAIR__ADDRESS);
-		createEReference(addressValuePairEClass, ADDRESS_VALUE_PAIR__VALUE);
+		createEReference(addressValuePairEClass, ADDRESS_VALUE_PAIR__VALUES);
 		createEReference(addressValuePairEClass, ADDRESS_VALUE_PAIR__STORE_BUFFER);
 
 		storeBufferEClass = createEClass(STORE_BUFFER);
@@ -644,7 +644,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 
 		initEClass(addressValuePairEClass, AddressValuePair.class, "AddressValuePair", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAddressValuePair_Address(), theLlvmPackage.getParameter(), null, "address", null, 0, 1, AddressValuePair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAddressValuePair_Value(), theLlvmPackage.getParameter(), null, "value", null, 0, 1, AddressValuePair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAddressValuePair_Values(), theLlvmPackage.getParameter(), null, "values", null, 0, -1, AddressValuePair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAddressValuePair_StoreBuffer(), this.getStoreBuffer(), this.getStoreBuffer_AddressValuePairs(), "storeBuffer", null, 0, 1, AddressValuePair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(storeBufferEClass, StoreBuffer.class, "StoreBuffer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

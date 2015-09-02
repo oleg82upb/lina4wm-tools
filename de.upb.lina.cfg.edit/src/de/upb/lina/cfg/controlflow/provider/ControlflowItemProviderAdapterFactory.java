@@ -87,7 +87,8 @@ public class ControlflowItemProviderAdapterFactory extends ControlflowAdapterFac
 	 */
 	@Override
 	public Adapter createControlFlowDiagramAdapter() {
-		if (controlFlowDiagramItemProvider == null) {
+		if (controlFlowDiagramItemProvider == null)
+		{
 			controlFlowDiagramItemProvider = new ControlFlowDiagramItemProvider(this);
 		}
 
@@ -110,7 +111,8 @@ public class ControlflowItemProviderAdapterFactory extends ControlflowAdapterFac
 	 */
 	@Override
 	public Adapter createControlFlowLocationAdapter() {
-		if (controlFlowLocationItemProvider == null) {
+		if (controlFlowLocationItemProvider == null)
+		{
 			controlFlowLocationItemProvider = new ControlFlowLocationItemProvider(this);
 		}
 
@@ -133,7 +135,8 @@ public class ControlflowItemProviderAdapterFactory extends ControlflowAdapterFac
 	 */
 	@Override
 	public Adapter createTransitionAdapter() {
-		if (transitionItemProvider == null) {
+		if (transitionItemProvider == null)
+		{
 			transitionItemProvider = new TransitionItemProvider(this);
 		}
 
@@ -156,7 +159,8 @@ public class ControlflowItemProviderAdapterFactory extends ControlflowAdapterFac
 	 */
 	@Override
 	public Adapter createWriteDefChainTransitionAdapter() {
-		if (writeDefChainTransitionItemProvider == null) {
+		if (writeDefChainTransitionItemProvider == null)
+		{
 			writeDefChainTransitionItemProvider = new WriteDefChainTransitionItemProvider(this);
 		}
 
@@ -179,7 +183,8 @@ public class ControlflowItemProviderAdapterFactory extends ControlflowAdapterFac
 	 */
 	@Override
 	public Adapter createEarlyReadTransitionAdapter() {
-		if (earlyReadTransitionItemProvider == null) {
+		if (earlyReadTransitionItemProvider == null)
+		{
 			earlyReadTransitionItemProvider = new EarlyReadTransitionItemProvider(this);
 		}
 
@@ -202,7 +207,8 @@ public class ControlflowItemProviderAdapterFactory extends ControlflowAdapterFac
 	 */
 	@Override
 	public Adapter createGuardedTransitionAdapter() {
-		if (guardedTransitionItemProvider == null) {
+		if (guardedTransitionItemProvider == null)
+		{
 			guardedTransitionItemProvider = new GuardedTransitionItemProvider(this);
 		}
 
@@ -225,7 +231,8 @@ public class ControlflowItemProviderAdapterFactory extends ControlflowAdapterFac
 	 */
 	@Override
 	public Adapter createMultiTransitionAdapter() {
-		if (multiTransitionItemProvider == null) {
+		if (multiTransitionItemProvider == null)
+		{
 			multiTransitionItemProvider = new MultiTransitionItemProvider(this);
 		}
 
@@ -249,7 +256,8 @@ public class ControlflowItemProviderAdapterFactory extends ControlflowAdapterFac
 	@Override
 	public Adapter createFlushTransitionAdapter()
 	{
-		if (flushTransitionItemProvider == null) {
+		if (flushTransitionItemProvider == null)
+		{
 			flushTransitionItemProvider = new FlushTransitionItemProvider(this);
 		}
 
@@ -273,7 +281,8 @@ public class ControlflowItemProviderAdapterFactory extends ControlflowAdapterFac
 	@Override
 	public Adapter createAddressValuePairAdapter()
 	{
-		if (addressValuePairItemProvider == null) {
+		if (addressValuePairItemProvider == null)
+		{
 			addressValuePairItemProvider = new AddressValuePairItemProvider(this);
 		}
 
@@ -297,7 +306,8 @@ public class ControlflowItemProviderAdapterFactory extends ControlflowAdapterFac
 	@Override
 	public Adapter createStoreBufferAdapter()
 	{
-		if (storeBufferItemProvider == null) {
+		if (storeBufferItemProvider == null)
+		{
 			storeBufferItemProvider = new StoreBufferItemProvider(this);
 		}
 
@@ -352,9 +362,11 @@ public class ControlflowItemProviderAdapterFactory extends ControlflowAdapterFac
 	 */
 	@Override
 	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
+		if (isFactoryForType(type))
+		{
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter)))
+			{
 				return adapter;
 			}
 		}
@@ -391,7 +403,8 @@ public class ControlflowItemProviderAdapterFactory extends ControlflowAdapterFac
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null) {
+		if (parentAdapterFactory != null)
+		{
 			parentAdapterFactory.fireNotifyChanged(notification);
 		}
 	}
