@@ -149,7 +149,7 @@ public abstract class GraphUtility {
 	 * @param destLabel
 	 * @return instruction corresponding to the label
 	 */
-	public static Instruction getInstructionWithLabel(FunctionDefinition function, String destLabel)
+	public static Instruction getInstructionByLabel(FunctionDefinition function, String destLabel)
 	{
 		for (BasicBlock b : function.getBody().getBlocks())
 		{
@@ -175,7 +175,7 @@ public abstract class GraphUtility {
 	public static ControlFlowLocation findLabeledLocation(ControlFlowDiagram cfg, FunctionDefinition function,
 			String destLabel)
 	{
-		Instruction dest = getInstructionWithLabel(function, destLabel);
+		Instruction dest = getInstructionByLabel(function, destLabel);
 		Transition destTrans = findCorrespondingTransition(cfg, dest);
 		return destTrans.getSource();
 	}
@@ -308,6 +308,24 @@ public abstract class GraphUtility {
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Checks wether a location is contained in the given list, which represents the combination of PC and StoreBuffer
+	 * @param list
+	 * @param location
+	 * @return the represented location or null, if there is none
+	 */
+	public static ControlFlowLocation getLocationRepresentedBy(List<ControlFlowLocation> list, int pc, StoreBuffer storeBuffer)
+	{
+		for (ControlFlowLocation loc : list)
+		{
+			if (isRepresentedBy(loc, pc, storeBuffer))
+			{
+				return loc;
+			}
+		}
+		return null;
 	}
 
 	/**

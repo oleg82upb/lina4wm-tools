@@ -98,7 +98,7 @@ public class SCUtil implements IGraphGenerator{
 			if(branch.getElseDestination() != null){
 				GuardedTransition trueCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
 
-				Instruction trueInstruction = GraphUtility.getInstructionWithLabel(function, branch.getDestination().substring(1));
+				Instruction trueInstruction = GraphUtility.getInstructionByLabel(function, branch.getDestination().substring(1));
 				ControlFlowLocation trueLocation = createControlFlowLocation(cfg, GraphUtility.getPcOfInstruction(trueInstruction, instructions), createStoreBuffer(toExplore.getBuffer(), trueInstruction), GraphUtility.findLabelByInstruction(function, nextInstruction));
 				trueCase.setSource(toExplore);
 				trueCase.setTarget(trueLocation);
@@ -106,7 +106,7 @@ public class SCUtil implements IGraphGenerator{
 				trueCase.setCondition("["+ GraphUtility.valueToString(branch.getCondition()) + "]");
 				trueCase.setDiagram(cfg);
 
-				Instruction elseInstruction = GraphUtility.getInstructionWithLabel(function, branch.getElseDestination().substring(1));
+				Instruction elseInstruction = GraphUtility.getInstructionByLabel(function, branch.getElseDestination().substring(1));
 				ControlFlowLocation falseLocation = createControlFlowLocation(cfg, GraphUtility.getPcOfInstruction(elseInstruction, instructions), createStoreBuffer(toExplore.getBuffer(), elseInstruction), GraphUtility.findLabelByInstruction(function, nextInstruction));
 				GuardedTransition falseCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
 				falseCase.setSource(toExplore);
@@ -127,7 +127,7 @@ public class SCUtil implements IGraphGenerator{
 			//&& branch.getElseDestination() == null
 			else if(branch.getDestination() != null){
 				Transition t = createTransition(cfg, branch);
-				Instruction trueInstruction = GraphUtility.getInstructionWithLabel(function, branch.getDestination().substring(1));
+				Instruction trueInstruction = GraphUtility.getInstructionByLabel(function, branch.getDestination().substring(1));
 				ControlFlowLocation nextLocation = createControlFlowLocation(cfg, GraphUtility.getPcOfInstruction(trueInstruction, instructions), createStoreBuffer(toExplore.getBuffer(), branch), GraphUtility.findLabelByInstruction(function, nextInstruction));
 				t.setSource(toExplore);
 				t.setTarget(nextLocation);
@@ -139,7 +139,7 @@ public class SCUtil implements IGraphGenerator{
 			//TODO: check if switch implementation correct
 			Switch swit = (Switch)nextInstruction;
 			
-			Instruction defaultInstruction = GraphUtility.getInstructionWithLabel(function, swit.getDefaultCase().substring(1));
+			Instruction defaultInstruction = GraphUtility.getInstructionByLabel(function, swit.getDefaultCase().substring(1));
 			ControlFlowLocation defaultLocation = createControlFlowLocation(cfg, GraphUtility.getPcOfInstruction(defaultInstruction, instructions), createStoreBuffer(toExplore.getBuffer(), defaultInstruction), GraphUtility.findLabelByInstruction(function, nextInstruction));
 			
 			GuardedTransition defaultCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
@@ -154,7 +154,7 @@ public class SCUtil implements IGraphGenerator{
 			}
 			
 			for(SwitchCase sc: swit.getCases()){
-				Instruction caseInstruction = GraphUtility.getInstructionWithLabel(function, sc.getDestination().substring(1));
+				Instruction caseInstruction = GraphUtility.getInstructionByLabel(function, sc.getDestination().substring(1));
 				ControlFlowLocation caseLocation = createControlFlowLocation(cfg, GraphUtility.getPcOfInstruction(caseInstruction, instructions), createStoreBuffer(toExplore.getBuffer(), caseInstruction), GraphUtility.findLabelByInstruction(function, nextInstruction));
 				
 				GuardedTransition caseC = ControlflowFactory.eINSTANCE.createGuardedTransition();

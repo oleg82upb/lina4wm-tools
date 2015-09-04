@@ -170,7 +170,7 @@ public class TSOUtil implements IGraphGenerator {
 			if (branch.getElseDestination() != null) {
 				GuardedTransition trueCase = ControlflowFactory.eINSTANCE.createGuardedTransition();
 
-				Instruction trueInstruction = GraphUtility.getInstructionWithLabel(function,
+				Instruction trueInstruction = GraphUtility.getInstructionByLabel(function,
 						branch.getDestination().substring(1));
 				StoreBuffer trueBuffer = createStoreBuffer(toExplore.getBuffer(), branch);
 				ControlFlowLocation trueLocation = createControlFlowLocation(cfg,
@@ -182,7 +182,7 @@ public class TSOUtil implements IGraphGenerator {
 				trueCase.setCondition("[" + GraphUtility.valueToString(branch.getCondition()) + "]");
 				trueCase.setDiagram(cfg);
 
-				Instruction elseInstruction = GraphUtility.getInstructionWithLabel(function, branch.getElseDestination()
+				Instruction elseInstruction = GraphUtility.getInstructionByLabel(function, branch.getElseDestination()
 						.substring(1));
 				StoreBuffer elseBuffer = createStoreBuffer(toExplore.getBuffer(), branch);
 				ControlFlowLocation falseLocation = createControlFlowLocation(cfg,
@@ -207,7 +207,7 @@ public class TSOUtil implements IGraphGenerator {
 			// && branch.getElseDestination() == null
 			else if (branch.getDestination() != null) {
 				Transition t = createTransition(cfg, branch);
-				Instruction trueInstruction = GraphUtility.getInstructionWithLabel(function,
+				Instruction trueInstruction = GraphUtility.getInstructionByLabel(function,
 						branch.getDestination().substring(1));
 				StoreBuffer buffer = createStoreBuffer(toExplore.getBuffer(), branch);
 				ControlFlowLocation nextLocation = createControlFlowLocation(cfg,
@@ -223,7 +223,7 @@ public class TSOUtil implements IGraphGenerator {
 			// TODO: check if switch implementation correct
 			Switch swit = (Switch) nextInstruction;
 
-			Instruction defaultInstruction = GraphUtility.getInstructionWithLabel(function, swit.getDefaultCase().substring(1));
+			Instruction defaultInstruction = GraphUtility.getInstructionByLabel(function, swit.getDefaultCase().substring(1));
 			StoreBuffer defaultBuffer = createStoreBuffer(toExplore.getBuffer(), swit);
 			ControlFlowLocation defaultLocation = createControlFlowLocation(cfg,
 					GraphUtility.getPcOfInstruction(defaultInstruction, instructions),
@@ -241,7 +241,7 @@ public class TSOUtil implements IGraphGenerator {
 			}
 
 			for (SwitchCase sc : swit.getCases()) {
-				Instruction caseInstruction = GraphUtility.getInstructionWithLabel(function, sc.getDestination().substring(1));
+				Instruction caseInstruction = GraphUtility.getInstructionByLabel(function, sc.getDestination().substring(1));
 				StoreBuffer caseBuffer = createStoreBuffer(toExplore.getBuffer(), swit);
 				ControlFlowLocation caseLocation = createControlFlowLocation(cfg,
 						GraphUtility.getPcOfInstruction(caseInstruction, instructions),
