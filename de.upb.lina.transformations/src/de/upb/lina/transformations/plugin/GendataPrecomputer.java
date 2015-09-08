@@ -497,7 +497,6 @@ public class GendataPrecomputer {
 		ConstraintMapping mapping = GendataFactory.eINSTANCE.createConstraintMapping();
 		mapping.setTransition(t);
 		mapping.setCondition(condition);
-		System.out.println(condition);
 		return mapping;
 	}
 
@@ -1059,6 +1058,10 @@ public class GendataPrecomputer {
 			}
 		}else if(obj instanceof TypeUse){
 			if(obj instanceof Predefined){
+				Predefined predefined = (Predefined) obj;
+				if(!predefined.getType().contains("*")){
+					return Integer.parseInt(predefined.getType().replace("i", ""))/8;
+				}
 				return 1;
 			}else if(obj instanceof AddressUse){
 				AddressUse aU = (AddressUse)obj;
@@ -1088,6 +1091,10 @@ public class GendataPrecomputer {
 			}
 		}else if(obj instanceof TypeUse){
 			if(obj instanceof Predefined){
+				Predefined predefined = (Predefined) obj;
+				if(!predefined.getType().contains("*")){
+					return Integer.parseInt(predefined.getType().replace("i", ""))/8;
+				}
 				return 1;
 			}else if(obj instanceof AddressUse){
 				AddressUse aU = (AddressUse)obj;
