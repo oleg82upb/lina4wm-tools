@@ -538,6 +538,15 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMemorySizeMapping_CompleteTypeSize() {
+		return (EAttribute)memorySizeMappingEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public GendataFactory getGendataFactory()
 	{
 		return (GendataFactory)getEFactoryInstance();
@@ -612,6 +621,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		createEReference(memorySizeMappingEClass, MEMORY_SIZE_MAPPING__INSTRUCTION);
 		createEAttribute(memorySizeMappingEClass, MEMORY_SIZE_MAPPING__SIZE);
 		createEReference(memorySizeMappingEClass, MEMORY_SIZE_MAPPING__GENERATOR_DATA);
+		createEAttribute(memorySizeMappingEClass, MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE);
 	}
 
 	/**
@@ -703,6 +713,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		initEReference(getMemorySizeMapping_Instruction(), theLlvmPackage.getInstruction(), null, "instruction", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMemorySizeMapping_Size(), ecorePackage.getEString(), "size", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMemorySizeMapping_GeneratorData(), this.getGeneratorData(), this.getGeneratorData_MemorySizeMappings(), "generatorData", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMemorySizeMapping_CompleteTypeSize(), ecorePackage.getEInt(), "completeTypeSize", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

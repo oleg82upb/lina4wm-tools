@@ -159,13 +159,17 @@ endif
 [/template]
 
 [template public genInstruction(e : GetElementPtr, genData : GeneratorData)]
-[e.getelementptrInstr(genData)/]
+getelementptr([genAggregateSize(e, genData)/], [e.aggregate.value.valueToString(genData)/], [genPtrOffset(e,genData)/], [e.result.addressToString(genData)/]);
 [/template]
 
-[query public getelementptrInstr(e : GetElementPtr, genData: GeneratorData) : String = 
-'getelementptr(PUT IN NEW FEATURE HERE)'
+[template public genPtrOffset(e : GetElementPtr, genData : GeneratorData)]
+[for (m: MemorySizeMapping | genData.memorySizeMappings)][if (m.instruction=e)][m.size/][/if][/for]
+[/template]
 
-/]
+[template public genAggregateSize(e : GetElementPtr, genData : GeneratorData)]
+[for (m: MemorySizeMapping | genData.memorySizeMappings)][if (m.instruction=e)][m.completeTypeSize/][/if][/for]
+[/template]
+
 
 [query public dereferencedPtrSize(e: EObject) : Integer =
 if e.oclIsTypeOf(AddressUse) then
@@ -347,21 +351,12 @@ skip;
 [query public returnInstr(s : String, v : EObject, genData: GeneratorData) : String =
 if s.equalsIgnoreCase('void') then 
 	'skip;'
-else if v.oclIsTypeOf(AddressUse) then
-	'returnvalue = ' + v.oclAsType(AddressUse).address.addressToString(genData) + ';'
-else if v.oclIsTypeOf(DecimalConstant) then
-	'returnvalue = ' + v.oclAsType(DecimalConstant).value.toString() + ';'
-else if v.oclIsTypeOf(IntegerConstant) then
-	'returnvalue = ' + v.oclAsType(IntegerConstant).value.toString() + ';'
 else if v.oclIsTypeOf(PrimitiveValue) then
 	'returnvalue = ' + v.oclAsType(PrimitiveValue).value + ';'
 else if v.oclIsTypeOf(Parameter) then
 	'returnvalue = ' + v.oclAsType(Parameter).value.valueToString(genData) + ';'
 else
 	'// UNHANDLED'
-endif
-endif
-endif
 endif
 endif
 endif

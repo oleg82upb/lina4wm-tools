@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl#getInstruction <em>Instruction</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl#getSize <em>Size</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl#getGeneratorData <em>Generator Data</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl#getCompleteTypeSize <em>Complete Type Size</em>}</li>
  * </ul>
  * </p>
  *
@@ -59,6 +60,26 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * @ordered
 	 */
 	protected String size = SIZE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getCompleteTypeSize() <em>Complete Type Size</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCompleteTypeSize()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int COMPLETE_TYPE_SIZE_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getCompleteTypeSize() <em>Complete Type Size</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCompleteTypeSize()
+	 * @generated
+	 * @ordered
+	 */
+	protected int completeTypeSize = COMPLETE_TYPE_SIZE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -184,6 +205,27 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getCompleteTypeSize() {
+		return completeTypeSize;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCompleteTypeSize(int newCompleteTypeSize) {
+		int oldCompleteTypeSize = completeTypeSize;
+		completeTypeSize = newCompleteTypeSize;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE, oldCompleteTypeSize, completeTypeSize));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -238,6 +280,8 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 				return getSize();
 			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				return getGeneratorData();
+			case GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE:
+				return getCompleteTypeSize();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -260,6 +304,9 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				setGeneratorData((GeneratorData)newValue);
 				return;
+			case GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE:
+				setCompleteTypeSize((Integer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -281,6 +328,9 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				setGeneratorData((GeneratorData)null);
 				return;
+			case GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE:
+				setCompleteTypeSize(COMPLETE_TYPE_SIZE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -299,6 +349,8 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 				return SIZE_EDEFAULT == null ? size != null : !SIZE_EDEFAULT.equals(size);
 			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				return getGeneratorData() != null;
+			case GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE:
+				return completeTypeSize != COMPLETE_TYPE_SIZE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -315,6 +367,8 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (size: ");
 		result.append(size);
+		result.append(", completeTypeSize: ");
+		result.append(completeTypeSize);
 		result.append(')');
 		return result.toString();
 	}

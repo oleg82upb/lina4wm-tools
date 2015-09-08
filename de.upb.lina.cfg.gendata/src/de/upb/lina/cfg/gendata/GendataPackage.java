@@ -612,13 +612,22 @@ public interface GendataPackage extends EPackage
 	int MEMORY_SIZE_MAPPING__GENERATOR_DATA = 2;
 
 	/**
+	 * The feature id for the '<em><b>Complete Type Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE = 3;
+
+	/**
 	 * The number of structural features of the '<em>Memory Size Mapping</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEMORY_SIZE_MAPPING_FEATURE_COUNT = 3;
+	int MEMORY_SIZE_MAPPING_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Memory Size Mapping</em>' class.
@@ -1074,6 +1083,17 @@ public interface GendataPackage extends EPackage
 	EReference getMemorySizeMapping_GeneratorData();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getCompleteTypeSize <em>Complete Type Size</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Complete Type Size</em>'.
+	 * @see de.upb.lina.cfg.gendata.MemorySizeMapping#getCompleteTypeSize()
+	 * @see #getMemorySizeMapping()
+	 * @generated
+	 */
+	EAttribute getMemorySizeMapping_CompleteTypeSize();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1442,6 +1462,14 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EReference MEMORY_SIZE_MAPPING__GENERATOR_DATA = eINSTANCE.getMemorySizeMapping_GeneratorData();
+
+		/**
+		 * The meta object literal for the '<em><b>Complete Type Size</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE = eINSTANCE.getMemorySizeMapping_CompleteTypeSize();
 
 	}
 

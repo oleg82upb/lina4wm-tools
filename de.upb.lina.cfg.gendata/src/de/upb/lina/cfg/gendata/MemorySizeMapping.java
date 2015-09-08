@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getInstruction <em>Instruction</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getSize <em>Size</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getGeneratorData <em>Generator Data</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getCompleteTypeSize <em>Complete Type Size</em>}</li>
  * </ul>
  * </p>
  *
@@ -103,5 +104,31 @@ public interface MemorySizeMapping extends EObject {
 	 * @generated
 	 */
 	void setGeneratorData(GeneratorData value);
+
+	/**
+	 * Returns the value of the '<em><b>Complete Type Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Complete Type Size</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Complete Type Size</em>' attribute.
+	 * @see #setCompleteTypeSize(int)
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getMemorySizeMapping_CompleteTypeSize()
+	 * @model
+	 * @generated
+	 */
+	int getCompleteTypeSize();
+
+	/**
+	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getCompleteTypeSize <em>Complete Type Size</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Complete Type Size</em>' attribute.
+	 * @see #getCompleteTypeSize()
+	 * @generated
+	 */
+	void setCompleteTypeSize(int value);
 
 } // MemorySizeMapping

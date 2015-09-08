@@ -1164,6 +1164,7 @@ public class GendataPrecomputer {
 		mapping.setGeneratorData(helperModel);
 		mapping.setInstruction(ptr);
 		mapping.setSize(""+getGetElementPtrValue(ptr));
+		mapping.setCompleteTypeSize(computeSize(ptr.getAggregate().getType()));
 		return mapping;
 	}
 	

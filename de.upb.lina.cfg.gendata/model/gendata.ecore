@@ -71,5 +71,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="generatorData" eType="#//GeneratorData"
         eOpposite="#//GeneratorData/memorySizeMappings"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="completeTypeSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
 </ecore:EPackage>
