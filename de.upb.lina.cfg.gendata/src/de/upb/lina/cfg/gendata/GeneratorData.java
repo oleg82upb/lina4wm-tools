@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getPhiMappings <em>Phi Mappings</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getFilteredAddresses <em>Filtered Addresses</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getAddressMappings <em>Address Mappings</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getMemorySizeMappings <em>Memory Size Mappings</em>}</li>
  * </ul>
  * </p>
  *
@@ -200,6 +201,24 @@ public interface GeneratorData extends EObject
 	 * @generated
 	 */
 	EList<AddressMapping> getAddressMappings();
+
+	/**
+	 * Returns the value of the '<em><b>Memory Size Mappings</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.lina.cfg.gendata.MemorySizeMapping}.
+	 * It is bidirectional and its opposite is '{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getGeneratorData <em>Generator Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Memory Size Mappings</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Memory Size Mappings</em>' containment reference list.
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_MemorySizeMappings()
+	 * @see de.upb.lina.cfg.gendata.MemorySizeMapping#getGeneratorData
+	 * @model opposite="generatorData" containment="true"
+	 * @generated
+	 */
+	EList<MemorySizeMapping> getMemorySizeMappings();
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -2,74 +2,70 @@
  */
 package de.upb.lina.cfg.gendata.impl;
 
-import de.upb.lina.cfg.controlflow.Transition;
-
-import de.upb.lina.cfg.gendata.ConstraintMapping;
 import de.upb.lina.cfg.gendata.GendataPackage;
-
 import de.upb.lina.cfg.gendata.GeneratorData;
+import de.upb.lina.cfg.gendata.MemorySizeMapping;
+import de.upb.llvm_parser.llvm.Instruction;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Constraint Mapping</b></em>'.
+ * An implementation of the model object '<em><b>Memory Size Mapping</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.lina.cfg.gendata.impl.ConstraintMappingImpl#getTransition <em>Transition</em>}</li>
- *   <li>{@link de.upb.lina.cfg.gendata.impl.ConstraintMappingImpl#getCondition <em>Condition</em>}</li>
- *   <li>{@link de.upb.lina.cfg.gendata.impl.ConstraintMappingImpl#getGeneratorData <em>Generator Data</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl#getInstruction <em>Instruction</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl#getSize <em>Size</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl#getGeneratorData <em>Generator Data</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implements ConstraintMapping {
+public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implements MemorySizeMapping {
 	/**
-	 * The cached value of the '{@link #getTransition() <em>Transition</em>}' reference.
+	 * The cached value of the '{@link #getInstruction() <em>Instruction</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTransition()
+	 * @see #getInstruction()
 	 * @generated
 	 * @ordered
 	 */
-	protected Transition transition;
+	protected Instruction instruction;
 
 	/**
-	 * The default value of the '{@link #getCondition() <em>Condition</em>}' attribute.
+	 * The default value of the '{@link #getSize() <em>Size</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCondition()
+	 * @see #getSize()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String CONDITION_EDEFAULT = null;
+	protected static final String SIZE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' attribute.
+	 * The cached value of the '{@link #getSize() <em>Size</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCondition()
+	 * @see #getSize()
 	 * @generated
 	 * @ordered
 	 */
-	protected String condition = CONDITION_EDEFAULT;
+	protected String size = SIZE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ConstraintMappingImpl() {
+	protected MemorySizeMappingImpl() {
 		super();
 	}
 
@@ -80,7 +76,7 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return GendataPackage.Literals.CONSTRAINT_MAPPING;
+		return GendataPackage.Literals.MEMORY_SIZE_MAPPING;
 	}
 
 	/**
@@ -88,16 +84,16 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Transition getTransition() {
-		if (transition != null && transition.eIsProxy()) {
-			InternalEObject oldTransition = (InternalEObject)transition;
-			transition = (Transition)eResolveProxy(oldTransition);
-			if (transition != oldTransition) {
+	public Instruction getInstruction() {
+		if (instruction != null && instruction.eIsProxy()) {
+			InternalEObject oldInstruction = (InternalEObject)instruction;
+			instruction = (Instruction)eResolveProxy(oldInstruction);
+			if (instruction != oldInstruction) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GendataPackage.CONSTRAINT_MAPPING__TRANSITION, oldTransition, transition));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION, oldInstruction, instruction));
 			}
 		}
-		return transition;
+		return instruction;
 	}
 
 	/**
@@ -105,8 +101,8 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Transition basicGetTransition() {
-		return transition;
+	public Instruction basicGetInstruction() {
+		return instruction;
 	}
 
 	/**
@@ -114,11 +110,11 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTransition(Transition newTransition) {
-		Transition oldTransition = transition;
-		transition = newTransition;
+	public void setInstruction(Instruction newInstruction) {
+		Instruction oldInstruction = instruction;
+		instruction = newInstruction;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.CONSTRAINT_MAPPING__TRANSITION, oldTransition, transition));
+			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION, oldInstruction, instruction));
 	}
 
 	/**
@@ -126,8 +122,8 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getCondition() {
-		return condition;
+	public String getSize() {
+		return size;
 	}
 
 	/**
@@ -135,11 +131,11 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCondition(String newCondition) {
-		String oldCondition = condition;
-		condition = newCondition;
+	public void setSize(String newSize) {
+		String oldSize = size;
+		size = newSize;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.CONSTRAINT_MAPPING__CONDITION, oldCondition, condition));
+			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__SIZE, oldSize, size));
 	}
 
 	/**
@@ -148,7 +144,7 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	public GeneratorData getGeneratorData() {
-		if (eContainerFeatureID() != GendataPackage.CONSTRAINT_MAPPING__GENERATOR_DATA) return null;
+		if (eContainerFeatureID() != GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA) return null;
 		return (GeneratorData)eInternalContainer();
 	}
 
@@ -158,7 +154,7 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	public NotificationChain basicSetGeneratorData(GeneratorData newGeneratorData, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newGeneratorData, GendataPackage.CONSTRAINT_MAPPING__GENERATOR_DATA, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newGeneratorData, GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA, msgs);
 		return msgs;
 	}
 
@@ -168,19 +164,19 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	public void setGeneratorData(GeneratorData newGeneratorData) {
-		if (newGeneratorData != eInternalContainer() || (eContainerFeatureID() != GendataPackage.CONSTRAINT_MAPPING__GENERATOR_DATA && newGeneratorData != null)) {
+		if (newGeneratorData != eInternalContainer() || (eContainerFeatureID() != GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA && newGeneratorData != null)) {
 			if (EcoreUtil.isAncestor(this, newGeneratorData))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newGeneratorData != null)
-				msgs = ((InternalEObject)newGeneratorData).eInverseAdd(this, GendataPackage.GENERATOR_DATA__CONSTRAINTS, GeneratorData.class, msgs);
+				msgs = ((InternalEObject)newGeneratorData).eInverseAdd(this, GendataPackage.GENERATOR_DATA__MEMORY_SIZE_MAPPINGS, GeneratorData.class, msgs);
 			msgs = basicSetGeneratorData(newGeneratorData, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.CONSTRAINT_MAPPING__GENERATOR_DATA, newGeneratorData, newGeneratorData));
+			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA, newGeneratorData, newGeneratorData));
 	}
 
 	/**
@@ -191,7 +187,7 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case GendataPackage.CONSTRAINT_MAPPING__GENERATOR_DATA:
+			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetGeneratorData((GeneratorData)otherEnd, msgs);
@@ -207,7 +203,7 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case GendataPackage.CONSTRAINT_MAPPING__GENERATOR_DATA:
+			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				return basicSetGeneratorData(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -221,8 +217,8 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case GendataPackage.CONSTRAINT_MAPPING__GENERATOR_DATA:
-				return eInternalContainer().eInverseRemove(this, GendataPackage.GENERATOR_DATA__CONSTRAINTS, GeneratorData.class, msgs);
+			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
+				return eInternalContainer().eInverseRemove(this, GendataPackage.GENERATOR_DATA__MEMORY_SIZE_MAPPINGS, GeneratorData.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -235,12 +231,12 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case GendataPackage.CONSTRAINT_MAPPING__TRANSITION:
-				if (resolve) return getTransition();
-				return basicGetTransition();
-			case GendataPackage.CONSTRAINT_MAPPING__CONDITION:
-				return getCondition();
-			case GendataPackage.CONSTRAINT_MAPPING__GENERATOR_DATA:
+			case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
+				if (resolve) return getInstruction();
+				return basicGetInstruction();
+			case GendataPackage.MEMORY_SIZE_MAPPING__SIZE:
+				return getSize();
+			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				return getGeneratorData();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -251,16 +247,17 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case GendataPackage.CONSTRAINT_MAPPING__TRANSITION:
-				setTransition((Transition)newValue);
+			case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
+				setInstruction((Instruction)newValue);
 				return;
-			case GendataPackage.CONSTRAINT_MAPPING__CONDITION:
-				setCondition((String)newValue);
+			case GendataPackage.MEMORY_SIZE_MAPPING__SIZE:
+				setSize((String)newValue);
 				return;
-			case GendataPackage.CONSTRAINT_MAPPING__GENERATOR_DATA:
+			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				setGeneratorData((GeneratorData)newValue);
 				return;
 		}
@@ -275,13 +272,13 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case GendataPackage.CONSTRAINT_MAPPING__TRANSITION:
-				setTransition((Transition)null);
+			case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
+				setInstruction((Instruction)null);
 				return;
-			case GendataPackage.CONSTRAINT_MAPPING__CONDITION:
-				setCondition(CONDITION_EDEFAULT);
+			case GendataPackage.MEMORY_SIZE_MAPPING__SIZE:
+				setSize(SIZE_EDEFAULT);
 				return;
-			case GendataPackage.CONSTRAINT_MAPPING__GENERATOR_DATA:
+			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				setGeneratorData((GeneratorData)null);
 				return;
 		}
@@ -296,11 +293,11 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case GendataPackage.CONSTRAINT_MAPPING__TRANSITION:
-				return transition != null;
-			case GendataPackage.CONSTRAINT_MAPPING__CONDITION:
-				return CONDITION_EDEFAULT == null ? condition != null : !CONDITION_EDEFAULT.equals(condition);
-			case GendataPackage.CONSTRAINT_MAPPING__GENERATOR_DATA:
+			case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
+				return instruction != null;
+			case GendataPackage.MEMORY_SIZE_MAPPING__SIZE:
+				return SIZE_EDEFAULT == null ? size != null : !SIZE_EDEFAULT.equals(size);
+			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				return getGeneratorData() != null;
 		}
 		return super.eIsSet(featureID);
@@ -316,10 +313,10 @@ public class ConstraintMappingImpl extends MinimalEObjectImpl.Container implemen
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (condition: ");
-		result.append(condition);
+		result.append(" (size: ");
+		result.append(size);
 		result.append(')');
 		return result.toString();
 	}
 
-} //ConstraintMappingImpl
+} //MemorySizeMappingImpl

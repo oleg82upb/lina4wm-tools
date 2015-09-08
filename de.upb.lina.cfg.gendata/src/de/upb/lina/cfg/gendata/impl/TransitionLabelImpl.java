@@ -67,12 +67,10 @@ public class TransitionLabelImpl extends NamedElementImpl implements TransitionL
 	 * @generated
 	 */
 	public Transition getTransition() {
-		if (transition != null && transition.eIsProxy())
-		{
+		if (transition != null && transition.eIsProxy()) {
 			InternalEObject oldTransition = (InternalEObject)transition;
 			transition = (Transition)eResolveProxy(oldTransition);
-			if (transition != oldTransition)
-			{
+			if (transition != oldTransition) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GendataPackage.TRANSITION_LABEL__TRANSITION, oldTransition, transition));
 			}
@@ -127,8 +125,7 @@ public class TransitionLabelImpl extends NamedElementImpl implements TransitionL
 	 * @generated
 	 */
 	public void setGeneratorData(GeneratorData newGeneratorData) {
-		if (newGeneratorData != eInternalContainer() || (eContainerFeatureID() != GendataPackage.TRANSITION_LABEL__GENERATOR_DATA && newGeneratorData != null))
-		{
+		if (newGeneratorData != eInternalContainer() || (eContainerFeatureID() != GendataPackage.TRANSITION_LABEL__GENERATOR_DATA && newGeneratorData != null)) {
 			if (EcoreUtil.isAncestor(this, newGeneratorData))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -150,8 +147,7 @@ public class TransitionLabelImpl extends NamedElementImpl implements TransitionL
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.TRANSITION_LABEL__GENERATOR_DATA:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -167,8 +163,7 @@ public class TransitionLabelImpl extends NamedElementImpl implements TransitionL
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.TRANSITION_LABEL__GENERATOR_DATA:
 				return basicSetGeneratorData(null, msgs);
 		}
@@ -182,8 +177,7 @@ public class TransitionLabelImpl extends NamedElementImpl implements TransitionL
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID())
-		{
+		switch (eContainerFeatureID()) {
 			case GendataPackage.TRANSITION_LABEL__GENERATOR_DATA:
 				return eInternalContainer().eInverseRemove(this, GendataPackage.GENERATOR_DATA__TRANSITION_LABELS, GeneratorData.class, msgs);
 		}
@@ -197,8 +191,7 @@ public class TransitionLabelImpl extends NamedElementImpl implements TransitionL
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.TRANSITION_LABEL__TRANSITION:
 				if (resolve) return getTransition();
 				return basicGetTransition();
@@ -215,8 +208,7 @@ public class TransitionLabelImpl extends NamedElementImpl implements TransitionL
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.TRANSITION_LABEL__TRANSITION:
 				setTransition((Transition)newValue);
 				return;
@@ -234,8 +226,7 @@ public class TransitionLabelImpl extends NamedElementImpl implements TransitionL
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.TRANSITION_LABEL__TRANSITION:
 				setTransition((Transition)null);
 				return;
@@ -253,8 +244,7 @@ public class TransitionLabelImpl extends NamedElementImpl implements TransitionL
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.TRANSITION_LABEL__TRANSITION:
 				return transition != null;
 			case GendataPackage.TRANSITION_LABEL__GENERATOR_DATA:

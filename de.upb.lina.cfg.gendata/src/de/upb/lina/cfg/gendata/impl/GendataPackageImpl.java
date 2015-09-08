@@ -9,6 +9,7 @@ import de.upb.lina.cfg.gendata.GendataFactory;
 import de.upb.lina.cfg.gendata.GendataPackage;
 import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.lina.cfg.gendata.LocationLabel;
+import de.upb.lina.cfg.gendata.MemorySizeMapping;
 import de.upb.lina.cfg.gendata.NamedElement;
 import de.upb.lina.cfg.gendata.PhiMapping;
 import de.upb.lina.cfg.gendata.TransitionLabel;
@@ -84,6 +85,13 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * @generated
 	 */
 	private EClass filterToAddressMappingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass memorySizeMappingEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -241,6 +249,15 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 */
 	public EReference getGeneratorData_AddressMappings() {
 		return (EReference)generatorDataEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getGeneratorData_MemorySizeMappings() {
+		return (EReference)generatorDataEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -485,6 +502,42 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getMemorySizeMapping() {
+		return memorySizeMappingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMemorySizeMapping_Instruction() {
+		return (EReference)memorySizeMappingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMemorySizeMapping_Size() {
+		return (EAttribute)memorySizeMappingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMemorySizeMapping_GeneratorData() {
+		return (EReference)memorySizeMappingEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public GendataFactory getGendataFactory()
 	{
 		return (GendataFactory)getEFactoryInstance();
@@ -520,6 +573,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		createEReference(generatorDataEClass, GENERATOR_DATA__PHI_MAPPINGS);
 		createEReference(generatorDataEClass, GENERATOR_DATA__FILTERED_ADDRESSES);
 		createEReference(generatorDataEClass, GENERATOR_DATA__ADDRESS_MAPPINGS);
+		createEReference(generatorDataEClass, GENERATOR_DATA__MEMORY_SIZE_MAPPINGS);
 		createEOperation(generatorDataEClass, GENERATOR_DATA___GET_FILTERED_ADDRESSES__STRING);
 
 		addressMappingEClass = createEClass(ADDRESS_MAPPING);
@@ -553,6 +607,11 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		filterToAddressMappingEClass = createEClass(FILTER_TO_ADDRESS_MAPPING);
 		createEAttribute(filterToAddressMappingEClass, FILTER_TO_ADDRESS_MAPPING__KEY);
 		createEReference(filterToAddressMappingEClass, FILTER_TO_ADDRESS_MAPPING__VALUE);
+
+		memorySizeMappingEClass = createEClass(MEMORY_SIZE_MAPPING);
+		createEReference(memorySizeMappingEClass, MEMORY_SIZE_MAPPING__INSTRUCTION);
+		createEAttribute(memorySizeMappingEClass, MEMORY_SIZE_MAPPING__SIZE);
+		createEReference(memorySizeMappingEClass, MEMORY_SIZE_MAPPING__GENERATOR_DATA);
 	}
 
 	/**
@@ -603,6 +662,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		initEReference(getGeneratorData_PhiMappings(), this.getPhiMapping(), this.getPhiMapping_GeneratorData(), "phiMappings", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_FilteredAddresses(), this.getFilterToAddressMapping(), null, "filteredAddresses", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_AddressMappings(), this.getAddressMapping(), this.getAddressMapping_GeneratorData(), "addressMappings", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGeneratorData_MemorySizeMappings(), this.getMemorySizeMapping(), this.getMemorySizeMapping_GeneratorData(), "memorySizeMappings", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = initEOperation(getGeneratorData__GetFilteredAddresses__String(), this.getAddressMapping(), "getFilteredAddresses", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "key", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -638,6 +698,11 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		initEClass(filterToAddressMappingEClass, Map.Entry.class, "FilterToAddressMapping", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFilterToAddressMapping_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFilterToAddressMapping_Value(), this.getAddressMapping(), null, "value", null, 0, -1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(memorySizeMappingEClass, MemorySizeMapping.class, "MemorySizeMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMemorySizeMapping_Instruction(), theLlvmPackage.getInstruction(), null, "instruction", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMemorySizeMapping_Size(), ecorePackage.getEString(), "size", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMemorySizeMapping_GeneratorData(), this.getGeneratorData(), this.getGeneratorData_MemorySizeMappings(), "generatorData", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

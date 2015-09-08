@@ -100,12 +100,10 @@ public class PhiMappingImpl extends MinimalEObjectImpl.Container implements PhiM
 	 * @generated
 	 */
 	public Transition getTransition() {
-		if (transition != null && transition.eIsProxy())
-		{
+		if (transition != null && transition.eIsProxy()) {
 			InternalEObject oldTransition = (InternalEObject)transition;
 			transition = (Transition)eResolveProxy(oldTransition);
-			if (transition != oldTransition)
-			{
+			if (transition != oldTransition) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GendataPackage.PHI_MAPPING__TRANSITION, oldTransition, transition));
 			}
@@ -140,8 +138,7 @@ public class PhiMappingImpl extends MinimalEObjectImpl.Container implements PhiM
 	 * @generated
 	 */
 	public EList<Phi> getPhi() {
-		if (phi == null)
-		{
+		if (phi == null) {
 			phi = new EObjectResolvingEList<Phi>(Phi.class, this, GendataPackage.PHI_MAPPING__PHI);
 		}
 		return phi;
@@ -194,8 +191,7 @@ public class PhiMappingImpl extends MinimalEObjectImpl.Container implements PhiM
 	 * @generated
 	 */
 	public void setGeneratorData(GeneratorData newGeneratorData) {
-		if (newGeneratorData != eInternalContainer() || (eContainerFeatureID() != GendataPackage.PHI_MAPPING__GENERATOR_DATA && newGeneratorData != null))
-		{
+		if (newGeneratorData != eInternalContainer() || (eContainerFeatureID() != GendataPackage.PHI_MAPPING__GENERATOR_DATA && newGeneratorData != null)) {
 			if (EcoreUtil.isAncestor(this, newGeneratorData))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -217,8 +213,7 @@ public class PhiMappingImpl extends MinimalEObjectImpl.Container implements PhiM
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.PHI_MAPPING__GENERATOR_DATA:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -234,8 +229,7 @@ public class PhiMappingImpl extends MinimalEObjectImpl.Container implements PhiM
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.PHI_MAPPING__GENERATOR_DATA:
 				return basicSetGeneratorData(null, msgs);
 		}
@@ -249,8 +243,7 @@ public class PhiMappingImpl extends MinimalEObjectImpl.Container implements PhiM
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID())
-		{
+		switch (eContainerFeatureID()) {
 			case GendataPackage.PHI_MAPPING__GENERATOR_DATA:
 				return eInternalContainer().eInverseRemove(this, GendataPackage.GENERATOR_DATA__PHI_MAPPINGS, GeneratorData.class, msgs);
 		}
@@ -264,8 +257,7 @@ public class PhiMappingImpl extends MinimalEObjectImpl.Container implements PhiM
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.PHI_MAPPING__TRANSITION:
 				if (resolve) return getTransition();
 				return basicGetTransition();
@@ -287,8 +279,7 @@ public class PhiMappingImpl extends MinimalEObjectImpl.Container implements PhiM
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.PHI_MAPPING__TRANSITION:
 				setTransition((Transition)newValue);
 				return;
@@ -313,8 +304,7 @@ public class PhiMappingImpl extends MinimalEObjectImpl.Container implements PhiM
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.PHI_MAPPING__TRANSITION:
 				setTransition((Transition)null);
 				return;
@@ -338,8 +328,7 @@ public class PhiMappingImpl extends MinimalEObjectImpl.Container implements PhiM
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.PHI_MAPPING__TRANSITION:
 				return transition != null;
 			case GendataPackage.PHI_MAPPING__PHI:

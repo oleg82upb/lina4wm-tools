@@ -20,6 +20,7 @@ import de.upb.lina.cfg.gendata.ConstraintMapping;
 import de.upb.lina.cfg.gendata.GendataFactory;
 import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.lina.cfg.gendata.LocationLabel;
+import de.upb.lina.cfg.gendata.MemorySizeMapping;
 import de.upb.lina.cfg.gendata.PhiMapping;
 import de.upb.lina.cfg.gendata.TransitionLabel;
 import de.upb.lina.cfg.tools.GraphUtility;
@@ -29,6 +30,7 @@ import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.Aggregate_Type;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.ArithmeticOperation;
+import de.upb.llvm_parser.llvm.Array;
 import de.upb.llvm_parser.llvm.AtomicRMW;
 import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.Branch;
@@ -67,11 +69,14 @@ import de.upb.llvm_parser.llvm.Return;
 import de.upb.llvm_parser.llvm.Select;
 import de.upb.llvm_parser.llvm.ShuffleVector;
 import de.upb.llvm_parser.llvm.Store;
+import de.upb.llvm_parser.llvm.Structure;
 import de.upb.llvm_parser.llvm.Switch;
+import de.upb.llvm_parser.llvm.TypeDefinition;
 import de.upb.llvm_parser.llvm.TypeUse;
 import de.upb.llvm_parser.llvm.Unreachable;
 import de.upb.llvm_parser.llvm.Value;
 import de.upb.llvm_parser.llvm.VariableAttributeAccess;
+import de.upb.llvm_parser.llvm.Vector;
 import de.upb.llvm_parser.llvm.impl.AddressUseImpl;
 
 public class GendataPrecomputer {
@@ -82,6 +87,9 @@ public class GendataPrecomputer {
 
 	private HashMap <Address, String> addressLookup = new HashMap<Address, String>();
 	private HashMap <ControlFlowDiagram, String> cfgToLabelPrefix = new HashMap <ControlFlowDiagram, String>();
+	
+	private ArrayList<Structure> definedStructures = new ArrayList<Structure>();
+	private HashMap<Structure, Integer> structureToSizeMap = new HashMap<Structure, Integer>();
 
 	private HashMap<FunctionDefinition, List<String>> usedVarsInFunctions = new HashMap<FunctionDefinition, List<String>>();
 
@@ -123,6 +131,9 @@ public class GendataPrecomputer {
 
 			//local vars
 			computeLocalVariables(program);
+			
+			//sizes of structures
+			computeStructureSizes();
 
 			//labels
 			computeLabelPrefixesPerFunction();
@@ -470,7 +481,7 @@ public class GendataPrecomputer {
 		if(!condition.equalsIgnoreCase("true")){
 			for(AddressMapping addressMapping: helperModel.getAddressMappings()){
 				for(String oldName: addressMapping.getOldNames()){
-					if(oldName.equals(condition.replaceAll("!",""))){
+					if(oldName.trim().equals(condition.replaceAll("!","").trim())){
 						if(condition.startsWith("!")){
 							condition = "!" + addressMapping.getName();
 						}else{
@@ -486,6 +497,7 @@ public class GendataPrecomputer {
 		ConstraintMapping mapping = GendataFactory.eINSTANCE.createConstraintMapping();
 		mapping.setTransition(t);
 		mapping.setCondition(condition);
+		System.out.println(condition);
 		return mapping;
 	}
 
@@ -649,6 +661,10 @@ public class GendataPrecomputer {
 				if(defValue != null){	
 					globals.add(defValue);
 				}
+			}else if(ele instanceof TypeDefinition){
+				TypeDefinition tDef = (TypeDefinition)ele;
+				Structure struct = tDef.getStruct();
+				definedStructures.add(struct);
 			}
 			
 		}
@@ -685,6 +701,7 @@ public class GendataPrecomputer {
 			addToMapping(allVariables, cfg, op.getResult());
 			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getAggregate().getValue()));
 			setType(m,op.getAggregate().getType());
+			setSize(op);
 
 		}else if(i instanceof Fence){
 			//nothing to do here
@@ -1011,4 +1028,144 @@ public class GendataPrecomputer {
 		mapping.getOldNames().add(address.getName());
 		return mapping;
 	}
+	
+	
+		private void computeStructureSizes() {
+		for(Structure s: definedStructures){
+			int result = 0;
+			for(EObject obj: s.getTypes()){
+				result += computeSize(obj);
+			}
+			structureToSizeMap.put(s, result);
+		}
+	}
+	
+	
+	private int computeSize(EObject obj){
+		if(obj instanceof Aggregate_Type){
+			if(obj instanceof Structure){
+				Structure struct = (Structure)obj;
+				int result = 0;
+				for(EObject o: struct.getTypes()){
+					result += computeSize(o);
+				}
+				return result;
+			}else if(obj instanceof Array){
+				Array arr = ((Array) obj);
+				return arr.getLength() * computeSize(arr.getType());
+			}else if(obj instanceof Vector){
+				Vector vector = (Vector)obj;
+				return vector.getLength() * computeSize(vector.getType());
+			}
+		}else if(obj instanceof TypeUse){
+			if(obj instanceof Predefined){
+				return 1;
+			}else if(obj instanceof AddressUse){
+				AddressUse aU = (AddressUse)obj;
+				return 1;
+			}
+		}
+		
+		return 0;
+	}
+	
+	private int computeSize(EObject obj, int upToPos){
+		upToPos = Math.max(0, upToPos -1 );
+		if(obj instanceof Aggregate_Type){
+			if(obj instanceof Structure){
+				Structure struct = (Structure)obj;
+				int result = 0;
+				for(int i = 0; i<=upToPos; i++){
+					result += computeSize(struct.getTypes().get(i));
+				}
+				return result;
+			}else if(obj instanceof Array){
+				Array arr = ((Array) obj);
+				return upToPos * computeSize(arr.getType());
+			}else if(obj instanceof Vector){
+				Vector vector = (Vector)obj;
+				return upToPos * computeSize(vector.getType());
+			}
+		}else if(obj instanceof TypeUse){
+			if(obj instanceof Predefined){
+				return 1;
+			}else if(obj instanceof AddressUse){
+				AddressUse aU = (AddressUse)obj;
+				return 1;
+			}
+		}
+		
+		return 0;
+	}
+	
+	private EObject getPartOfAggregate(EObject obj, int index){
+		if(obj instanceof Aggregate_Type){
+			if(obj instanceof Structure){
+				Structure struct = (Structure)obj;
+				return struct.getTypes().get(index);
+			}else if(obj instanceof Array){
+				Array arr = ((Array) obj);
+				return arr.getType();
+			}else if(obj instanceof Vector){
+				Vector vector = (Vector)obj;
+				return vector.getType();
+			}
+		}else if(obj instanceof TypeUse){
+			if(obj instanceof Predefined){
+				return null;
+			}else if(obj instanceof AddressUse){
+				AddressUse aU = (AddressUse)obj;
+				//TODO: what to do here?
+			}
+		}
+		return null;
+	}
+	
+		
+	private int getGetElementPtrValue(GetElementPtr instr){
+		int result = 0;
+		EObject aggregateType = instr.getAggregate().getType();
+		int size = computeSize(aggregateType);
+		try{
+			//first index
+			int val = Integer.parseInt(GraphUtility.valueToString(instr.getIndices().get(0).getValue()));
+			result += val*size;
+			
+			EObject partOfAggregate = aggregateType;
+			//following indices
+			for(int i = 1; i<instr.getIndices().size(); i++){
+				int indexVal = Integer.parseInt(GraphUtility.valueToString(instr.getIndices().get(i).getValue()));;
+				result += computeSize(partOfAggregate, indexVal);
+				partOfAggregate = getPartOfAggregate(partOfAggregate, indexVal);
+			}	
+		}catch(NumberFormatException ex){
+			//TODO: output
+		}
+		return result;
+	}
+	
+	public void setSize(GetElementPtr ptr){
+		if(!mappedInstructionToMemoryMapping(ptr)){
+			helperModel.getMemorySizeMappings().add(createMemorySizeMapping(ptr)); //Create memory size mapping
+		}
+	}
+	
+	public boolean mappedInstructionToMemoryMapping(Instruction i){
+		for(MemorySizeMapping m : helperModel.getMemorySizeMappings()){
+			if(m.getInstruction().equals(i)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public MemorySizeMapping createMemorySizeMapping(GetElementPtr ptr){
+		MemorySizeMapping mapping = GendataFactory.eINSTANCE.createMemorySizeMapping();
+		mapping.setGeneratorData(helperModel);
+		mapping.setInstruction(ptr);
+		mapping.setSize(""+getGetElementPtrValue(ptr));
+		return mapping;
+	}
+	
+
 }

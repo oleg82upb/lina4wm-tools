@@ -150,13 +150,22 @@ public interface GendataPackage extends EPackage
 	int GENERATOR_DATA__ADDRESS_MAPPINGS = 8;
 
 	/**
+	 * The feature id for the '<em><b>Memory Size Mappings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_DATA__MEMORY_SIZE_MAPPINGS = 9;
+
+	/**
 	 * The number of structural features of the '<em>Generator Data</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA_FEATURE_COUNT = 9;
+	int GENERATOR_DATA_FEATURE_COUNT = 10;
 
 	/**
 	 * The operation id for the '<em>Get Filtered Addresses</em>' operation.
@@ -566,6 +575,62 @@ public interface GendataPackage extends EPackage
 
 
 	/**
+	 * The meta object id for the '{@link de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl <em>Memory Size Mapping</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl
+	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getMemorySizeMapping()
+	 * @generated
+	 */
+	int MEMORY_SIZE_MAPPING = 8;
+
+	/**
+	 * The feature id for the '<em><b>Instruction</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMORY_SIZE_MAPPING__INSTRUCTION = 0;
+
+	/**
+	 * The feature id for the '<em><b>Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMORY_SIZE_MAPPING__SIZE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Generator Data</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMORY_SIZE_MAPPING__GENERATOR_DATA = 2;
+
+	/**
+	 * The number of structural features of the '<em>Memory Size Mapping</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMORY_SIZE_MAPPING_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Memory Size Mapping</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMORY_SIZE_MAPPING_OPERATION_COUNT = 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.GeneratorData <em>Generator Data</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -673,6 +738,17 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 */
 	EReference getGeneratorData_AddressMappings();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.upb.lina.cfg.gendata.GeneratorData#getMemorySizeMappings <em>Memory Size Mappings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Memory Size Mappings</em>'.
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getMemorySizeMappings()
+	 * @see #getGeneratorData()
+	 * @generated
+	 */
+	EReference getGeneratorData_MemorySizeMappings();
 
 	/**
 	 * Returns the meta object for the '{@link de.upb.lina.cfg.gendata.GeneratorData#getFilteredAddresses(java.lang.String) <em>Get Filtered Addresses</em>}' operation.
@@ -955,6 +1031,49 @@ public interface GendataPackage extends EPackage
 	EReference getFilterToAddressMapping_Value();
 
 	/**
+	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.MemorySizeMapping <em>Memory Size Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Memory Size Mapping</em>'.
+	 * @see de.upb.lina.cfg.gendata.MemorySizeMapping
+	 * @generated
+	 */
+	EClass getMemorySizeMapping();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getInstruction <em>Instruction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Instruction</em>'.
+	 * @see de.upb.lina.cfg.gendata.MemorySizeMapping#getInstruction()
+	 * @see #getMemorySizeMapping()
+	 * @generated
+	 */
+	EReference getMemorySizeMapping_Instruction();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getSize <em>Size</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Size</em>'.
+	 * @see de.upb.lina.cfg.gendata.MemorySizeMapping#getSize()
+	 * @see #getMemorySizeMapping()
+	 * @generated
+	 */
+	EAttribute getMemorySizeMapping_Size();
+
+	/**
+	 * Returns the meta object for the container reference '{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getGeneratorData <em>Generator Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Generator Data</em>'.
+	 * @see de.upb.lina.cfg.gendata.MemorySizeMapping#getGeneratorData()
+	 * @see #getMemorySizeMapping()
+	 * @generated
+	 */
+	EReference getMemorySizeMapping_GeneratorData();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1059,6 +1178,14 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EReference GENERATOR_DATA__ADDRESS_MAPPINGS = eINSTANCE.getGeneratorData_AddressMappings();
+
+		/**
+		 * The meta object literal for the '<em><b>Memory Size Mappings</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GENERATOR_DATA__MEMORY_SIZE_MAPPINGS = eINSTANCE.getGeneratorData_MemorySizeMappings();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Filtered Addresses</b></em>' operation.
@@ -1281,6 +1408,40 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EReference FILTER_TO_ADDRESS_MAPPING__VALUE = eINSTANCE.getFilterToAddressMapping_Value();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl <em>Memory Size Mapping</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl
+		 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getMemorySizeMapping()
+		 * @generated
+		 */
+		EClass MEMORY_SIZE_MAPPING = eINSTANCE.getMemorySizeMapping();
+
+		/**
+		 * The meta object literal for the '<em><b>Instruction</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MEMORY_SIZE_MAPPING__INSTRUCTION = eINSTANCE.getMemorySizeMapping_Instruction();
+
+		/**
+		 * The meta object literal for the '<em><b>Size</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEMORY_SIZE_MAPPING__SIZE = eINSTANCE.getMemorySizeMapping_Size();
+
+		/**
+		 * The meta object literal for the '<em><b>Generator Data</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MEMORY_SIZE_MAPPING__GENERATOR_DATA = eINSTANCE.getMemorySizeMapping_GeneratorData();
 
 	}
 

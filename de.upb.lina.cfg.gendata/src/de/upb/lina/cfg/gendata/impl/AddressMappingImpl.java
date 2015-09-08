@@ -112,8 +112,7 @@ public class AddressMappingImpl extends NamedElementImpl implements AddressMappi
 	 */
 	public EList<Address> getAdresses()
 	{
-		if (adresses == null)
-		{
+		if (adresses == null) {
 			adresses = new EObjectResolvingEList<Address>(Address.class, this, GendataPackage.ADDRESS_MAPPING__ADRESSES);
 		}
 		return adresses;
@@ -125,8 +124,7 @@ public class AddressMappingImpl extends NamedElementImpl implements AddressMappi
 	 * @generated
 	 */
 	public EList<String> getOldNames() {
-		if (oldNames == null)
-		{
+		if (oldNames == null) {
 			oldNames = new EDataTypeUniqueEList<String>(String.class, this, GendataPackage.ADDRESS_MAPPING__OLD_NAMES);
 		}
 		return oldNames;
@@ -138,12 +136,10 @@ public class AddressMappingImpl extends NamedElementImpl implements AddressMappi
 	 * @generated
 	 */
 	public GeneratorData getGeneratorData() {
-		if (generatorData != null && generatorData.eIsProxy())
-		{
+		if (generatorData != null && generatorData.eIsProxy()) {
 			InternalEObject oldGeneratorData = (InternalEObject)generatorData;
 			generatorData = (GeneratorData)eResolveProxy(oldGeneratorData);
-			if (generatorData != oldGeneratorData)
-			{
+			if (generatorData != oldGeneratorData) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GendataPackage.ADDRESS_MAPPING__GENERATOR_DATA, oldGeneratorData, generatorData));
 			}
@@ -168,8 +164,7 @@ public class AddressMappingImpl extends NamedElementImpl implements AddressMappi
 	public NotificationChain basicSetGeneratorData(GeneratorData newGeneratorData, NotificationChain msgs) {
 		GeneratorData oldGeneratorData = generatorData;
 		generatorData = newGeneratorData;
-		if (eNotificationRequired())
-		{
+		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GendataPackage.ADDRESS_MAPPING__GENERATOR_DATA, oldGeneratorData, newGeneratorData);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -182,8 +177,7 @@ public class AddressMappingImpl extends NamedElementImpl implements AddressMappi
 	 * @generated
 	 */
 	public void setGeneratorData(GeneratorData newGeneratorData) {
-		if (newGeneratorData != generatorData)
-		{
+		if (newGeneratorData != generatorData) {
 			NotificationChain msgs = null;
 			if (generatorData != null)
 				msgs = ((InternalEObject)generatorData).eInverseRemove(this, GendataPackage.GENERATOR_DATA__ADDRESS_MAPPINGS, GeneratorData.class, msgs);
@@ -224,8 +218,7 @@ public class AddressMappingImpl extends NamedElementImpl implements AddressMappi
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.ADDRESS_MAPPING__GENERATOR_DATA:
 				if (generatorData != null)
 					msgs = ((InternalEObject)generatorData).eInverseRemove(this, GendataPackage.GENERATOR_DATA__ADDRESS_MAPPINGS, GeneratorData.class, msgs);
@@ -241,8 +234,7 @@ public class AddressMappingImpl extends NamedElementImpl implements AddressMappi
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.ADDRESS_MAPPING__GENERATOR_DATA:
 				return basicSetGeneratorData(null, msgs);
 		}
@@ -257,8 +249,7 @@ public class AddressMappingImpl extends NamedElementImpl implements AddressMappi
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.ADDRESS_MAPPING__ADRESSES:
 				return getAdresses();
 			case GendataPackage.ADDRESS_MAPPING__OLD_NAMES:
@@ -281,8 +272,7 @@ public class AddressMappingImpl extends NamedElementImpl implements AddressMappi
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.ADDRESS_MAPPING__ADRESSES:
 				getAdresses().clear();
 				getAdresses().addAll((Collection<? extends Address>)newValue);
@@ -309,8 +299,7 @@ public class AddressMappingImpl extends NamedElementImpl implements AddressMappi
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.ADDRESS_MAPPING__ADRESSES:
 				getAdresses().clear();
 				return;
@@ -335,8 +324,7 @@ public class AddressMappingImpl extends NamedElementImpl implements AddressMappi
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.ADDRESS_MAPPING__ADRESSES:
 				return adresses != null && !adresses.isEmpty();
 			case GendataPackage.ADDRESS_MAPPING__OLD_NAMES:

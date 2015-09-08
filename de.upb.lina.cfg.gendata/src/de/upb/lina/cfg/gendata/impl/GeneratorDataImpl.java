@@ -5,17 +5,15 @@ package de.upb.lina.cfg.gendata.impl;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.gendata.AddressMapping;
 import de.upb.lina.cfg.gendata.ConstraintMapping;
-import de.upb.lina.cfg.gendata.GendataFactory;
 import de.upb.lina.cfg.gendata.GendataPackage;
 import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.lina.cfg.gendata.LocationLabel;
+import de.upb.lina.cfg.gendata.MemorySizeMapping;
 import de.upb.lina.cfg.gendata.PhiMapping;
 import de.upb.lina.cfg.gendata.TransitionLabel;
 import de.upb.llvm_parser.llvm.LLVM;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
@@ -50,6 +48,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getPhiMappings <em>Phi Mappings</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getFilteredAddresses <em>Filtered Addresses</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getAddressMappings <em>Address Mappings</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getMemorySizeMappings <em>Memory Size Mappings</em>}</li>
  * </ul>
  * </p>
  *
@@ -148,6 +147,16 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	protected EList<AddressMapping> addressMappings;
 
 	/**
+	 * The cached value of the '{@link #getMemorySizeMappings() <em>Memory Size Mappings</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMemorySizeMappings()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<MemorySizeMapping> memorySizeMappings;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -175,12 +184,10 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 */
 	public LLVM getProgram()
 	{
-		if (program != null && program.eIsProxy())
-		{
+		if (program != null && program.eIsProxy()) {
 			InternalEObject oldProgram = (InternalEObject)program;
 			program = (LLVM)eResolveProxy(oldProgram);
-			if (program != oldProgram)
-			{
+			if (program != oldProgram) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GendataPackage.GENERATOR_DATA__PROGRAM, oldProgram, program));
 			}
@@ -217,8 +224,7 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @generated
 	 */
 	public EList<ControlFlowDiagram> getCfgs() {
-		if (cfgs == null)
-		{
+		if (cfgs == null) {
 			cfgs = new EObjectResolvingEList<ControlFlowDiagram>(ControlFlowDiagram.class, this, GendataPackage.GENERATOR_DATA__CFGS);
 		}
 		return cfgs;
@@ -230,8 +236,7 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @generated
 	 */
 	public EList<ConstraintMapping> getConstraints() {
-		if (constraints == null)
-		{
+		if (constraints == null) {
 			constraints = new EObjectContainmentWithInverseEList<ConstraintMapping>(ConstraintMapping.class, this, GendataPackage.GENERATOR_DATA__CONSTRAINTS, GendataPackage.CONSTRAINT_MAPPING__GENERATOR_DATA);
 		}
 		return constraints;
@@ -243,8 +248,7 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @generated
 	 */
 	public EList<LocationLabel> getLocationLabels() {
-		if (locationLabels == null)
-		{
+		if (locationLabels == null) {
 			locationLabels = new EObjectContainmentWithInverseEList<LocationLabel>(LocationLabel.class, this, GendataPackage.GENERATOR_DATA__LOCATION_LABELS, GendataPackage.LOCATION_LABEL__GENERATOR_DATA);
 		}
 		return locationLabels;
@@ -256,8 +260,7 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @generated
 	 */
 	public EList<TransitionLabel> getTransitionLabels() {
-		if (transitionLabels == null)
-		{
+		if (transitionLabels == null) {
 			transitionLabels = new EObjectContainmentWithInverseEList<TransitionLabel>(TransitionLabel.class, this, GendataPackage.GENERATOR_DATA__TRANSITION_LABELS, GendataPackage.TRANSITION_LABEL__GENERATOR_DATA);
 		}
 		return transitionLabels;
@@ -269,8 +272,7 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @generated
 	 */
 	public EList<String> getTransformationSpecificKeys() {
-		if (transformationSpecificKeys == null)
-		{
+		if (transformationSpecificKeys == null) {
 			transformationSpecificKeys = new EDataTypeUniqueEList<String>(String.class, this, GendataPackage.GENERATOR_DATA__TRANSFORMATION_SPECIFIC_KEYS);
 		}
 		return transformationSpecificKeys;
@@ -282,8 +284,7 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @generated
 	 */
 	public EList<PhiMapping> getPhiMappings() {
-		if (phiMappings == null)
-		{
+		if (phiMappings == null) {
 			phiMappings = new EObjectContainmentWithInverseEList<PhiMapping>(PhiMapping.class, this, GendataPackage.GENERATOR_DATA__PHI_MAPPINGS, GendataPackage.PHI_MAPPING__GENERATOR_DATA);
 		}
 		return phiMappings;
@@ -295,8 +296,7 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @generated
 	 */
 	public EMap<String, EList<AddressMapping>> getFilteredAddresses() {
-		if (filteredAddresses == null)
-		{
+		if (filteredAddresses == null) {
 			filteredAddresses = new EcoreEMap<String,EList<AddressMapping>>(GendataPackage.Literals.FILTER_TO_ADDRESS_MAPPING, FilterToAddressMappingImpl.class, this, GendataPackage.GENERATOR_DATA__FILTERED_ADDRESSES);
 		}
 		return filteredAddresses;
@@ -308,11 +308,22 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @generated
 	 */
 	public EList<AddressMapping> getAddressMappings() {
-		if (addressMappings == null)
-		{
+		if (addressMappings == null) {
 			addressMappings = new EObjectWithInverseResolvingEList<AddressMapping>(AddressMapping.class, this, GendataPackage.GENERATOR_DATA__ADDRESS_MAPPINGS, GendataPackage.ADDRESS_MAPPING__GENERATOR_DATA);
 		}
 		return addressMappings;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<MemorySizeMapping> getMemorySizeMappings() {
+		if (memorySizeMappings == null) {
+			memorySizeMappings = new EObjectContainmentWithInverseEList<MemorySizeMapping>(MemorySizeMapping.class, this, GendataPackage.GENERATOR_DATA__MEMORY_SIZE_MAPPINGS, GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA);
+		}
+		return memorySizeMappings;
 	}
 
 	/**
@@ -344,8 +355,7 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.GENERATOR_DATA__CONSTRAINTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConstraints()).basicAdd(otherEnd, msgs);
 			case GendataPackage.GENERATOR_DATA__LOCATION_LABELS:
@@ -356,6 +366,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPhiMappings()).basicAdd(otherEnd, msgs);
 			case GendataPackage.GENERATOR_DATA__ADDRESS_MAPPINGS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAddressMappings()).basicAdd(otherEnd, msgs);
+			case GendataPackage.GENERATOR_DATA__MEMORY_SIZE_MAPPINGS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMemorySizeMappings()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -368,8 +380,7 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.GENERATOR_DATA__CONSTRAINTS:
 				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
 			case GendataPackage.GENERATOR_DATA__LOCATION_LABELS:
@@ -382,6 +393,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return ((InternalEList<?>)getFilteredAddresses()).basicRemove(otherEnd, msgs);
 			case GendataPackage.GENERATOR_DATA__ADDRESS_MAPPINGS:
 				return ((InternalEList<?>)getAddressMappings()).basicRemove(otherEnd, msgs);
+			case GendataPackage.GENERATOR_DATA__MEMORY_SIZE_MAPPINGS:
+				return ((InternalEList<?>)getMemorySizeMappings()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -394,8 +407,7 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.GENERATOR_DATA__PROGRAM:
 				if (resolve) return getProgram();
 				return basicGetProgram();
@@ -416,6 +428,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				else return getFilteredAddresses().map();
 			case GendataPackage.GENERATOR_DATA__ADDRESS_MAPPINGS:
 				return getAddressMappings();
+			case GendataPackage.GENERATOR_DATA__MEMORY_SIZE_MAPPINGS:
+				return getMemorySizeMappings();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -429,8 +443,7 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.GENERATOR_DATA__PROGRAM:
 				setProgram((LLVM)newValue);
 				return;
@@ -465,6 +478,10 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				getAddressMappings().clear();
 				getAddressMappings().addAll((Collection<? extends AddressMapping>)newValue);
 				return;
+			case GendataPackage.GENERATOR_DATA__MEMORY_SIZE_MAPPINGS:
+				getMemorySizeMappings().clear();
+				getMemorySizeMappings().addAll((Collection<? extends MemorySizeMapping>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -477,8 +494,7 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.GENERATOR_DATA__PROGRAM:
 				setProgram((LLVM)null);
 				return;
@@ -506,6 +522,9 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 			case GendataPackage.GENERATOR_DATA__ADDRESS_MAPPINGS:
 				getAddressMappings().clear();
 				return;
+			case GendataPackage.GENERATOR_DATA__MEMORY_SIZE_MAPPINGS:
+				getMemorySizeMappings().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -518,8 +537,7 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.GENERATOR_DATA__PROGRAM:
 				return program != null;
 			case GendataPackage.GENERATOR_DATA__CFGS:
@@ -538,6 +556,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return filteredAddresses != null && !filteredAddresses.isEmpty();
 			case GendataPackage.GENERATOR_DATA__ADDRESS_MAPPINGS:
 				return addressMappings != null && !addressMappings.isEmpty();
+			case GendataPackage.GENERATOR_DATA__MEMORY_SIZE_MAPPINGS:
+				return memorySizeMappings != null && !memorySizeMappings.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -550,8 +570,7 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException
 	{
-		switch (operationID)
-		{
+		switch (operationID) {
 			case GendataPackage.GENERATOR_DATA___GET_FILTERED_ADDRESSES__STRING:
 				return getFilteredAddresses((String)arguments.get(0));
 		}

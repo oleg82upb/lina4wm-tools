@@ -67,12 +67,10 @@ public class LocationLabelImpl extends NamedElementImpl implements LocationLabel
 	 * @generated
 	 */
 	public ControlFlowLocation getControlFlowLocation() {
-		if (controlFlowLocation != null && controlFlowLocation.eIsProxy())
-		{
+		if (controlFlowLocation != null && controlFlowLocation.eIsProxy()) {
 			InternalEObject oldControlFlowLocation = (InternalEObject)controlFlowLocation;
 			controlFlowLocation = (ControlFlowLocation)eResolveProxy(oldControlFlowLocation);
-			if (controlFlowLocation != oldControlFlowLocation)
-			{
+			if (controlFlowLocation != oldControlFlowLocation) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GendataPackage.LOCATION_LABEL__CONTROL_FLOW_LOCATION, oldControlFlowLocation, controlFlowLocation));
 			}
@@ -127,8 +125,7 @@ public class LocationLabelImpl extends NamedElementImpl implements LocationLabel
 	 * @generated
 	 */
 	public void setGeneratorData(GeneratorData newGeneratorData) {
-		if (newGeneratorData != eInternalContainer() || (eContainerFeatureID() != GendataPackage.LOCATION_LABEL__GENERATOR_DATA && newGeneratorData != null))
-		{
+		if (newGeneratorData != eInternalContainer() || (eContainerFeatureID() != GendataPackage.LOCATION_LABEL__GENERATOR_DATA && newGeneratorData != null)) {
 			if (EcoreUtil.isAncestor(this, newGeneratorData))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -150,8 +147,7 @@ public class LocationLabelImpl extends NamedElementImpl implements LocationLabel
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.LOCATION_LABEL__GENERATOR_DATA:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -167,8 +163,7 @@ public class LocationLabelImpl extends NamedElementImpl implements LocationLabel
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.LOCATION_LABEL__GENERATOR_DATA:
 				return basicSetGeneratorData(null, msgs);
 		}
@@ -182,8 +177,7 @@ public class LocationLabelImpl extends NamedElementImpl implements LocationLabel
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID())
-		{
+		switch (eContainerFeatureID()) {
 			case GendataPackage.LOCATION_LABEL__GENERATOR_DATA:
 				return eInternalContainer().eInverseRemove(this, GendataPackage.GENERATOR_DATA__LOCATION_LABELS, GeneratorData.class, msgs);
 		}
@@ -197,8 +191,7 @@ public class LocationLabelImpl extends NamedElementImpl implements LocationLabel
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.LOCATION_LABEL__CONTROL_FLOW_LOCATION:
 				if (resolve) return getControlFlowLocation();
 				return basicGetControlFlowLocation();
@@ -215,8 +208,7 @@ public class LocationLabelImpl extends NamedElementImpl implements LocationLabel
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.LOCATION_LABEL__CONTROL_FLOW_LOCATION:
 				setControlFlowLocation((ControlFlowLocation)newValue);
 				return;
@@ -234,8 +226,7 @@ public class LocationLabelImpl extends NamedElementImpl implements LocationLabel
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.LOCATION_LABEL__CONTROL_FLOW_LOCATION:
 				setControlFlowLocation((ControlFlowLocation)null);
 				return;
@@ -253,8 +244,7 @@ public class LocationLabelImpl extends NamedElementImpl implements LocationLabel
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.LOCATION_LABEL__CONTROL_FLOW_LOCATION:
 				return controlFlowLocation != null;
 			case GendataPackage.LOCATION_LABEL__GENERATOR_DATA:

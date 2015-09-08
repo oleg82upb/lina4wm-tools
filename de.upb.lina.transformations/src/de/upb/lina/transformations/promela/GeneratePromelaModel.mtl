@@ -25,7 +25,7 @@ inline [cfg.name.replaceAll('@_', '').replaceAll('@','')/]([genParams(cfg, genDa
 [if(mapping.value->size() > 0)]
 [for (mapping: FilterToAddressMapping | genData.filteredAddresses)]
 [if(mapping.key.equalsIgnoreCase('globals') and mapping.value->size() > 0)]
-[for(aMapping: AddressMapping | mapping.value)]short [aMapping.name/] = [for(gDef:AbstractElement |genData.program.elements)][if(gDef.oclIsTypeOf(GlobalDefinition))][if(gDef.oclAsType(GlobalDefinition).address = aMapping.adresses->first())][gDef.oclAsType(GlobalDefinition).value.value.valueToString(genData)/];[/if][/if][/for]
+[for(aMapping: AddressMapping | mapping.value)]short [aMapping.name/] = [for(gDef:AbstractElement |genData.program.elements)][if(gDef.oclIsTypeOf(GlobalDefinition))][if(gDef.oclAsType(GlobalDefinition).address = aMapping.adresses->first())][gDef.oclAsType(GlobalDefinition).value.getTypeName(genData)/];[/if][/if][/for]
 [/for]
 [/if]
 [/for]
@@ -89,7 +89,7 @@ inline [cfg.name.replaceAll('@_', '').replaceAll('@','')/]([genParams(cfg, genDa
 [/template]
 
 [template public transformTransitions(t: FlushTransition, genData: GeneratorData)]
-memory['['/][t.source.buffer.addressValuePairs->first().address.value.valueToString(genData)/][']'/]=[t.source.buffer.addressValuePairs->first().value.value.valueToString(genData)/];
+memory['['/][t.source.buffer.addressValuePairs->first().address.value.valueToString(genData)/][']'/]=[t.source.buffer.addressValuePairs->first().values->first().value.valueToString(genData)/];
 [/template]
 
 [comment ====== Instructions ======/]
@@ -188,12 +188,15 @@ endif
 
 
 [query public index(e : Value, genData: GeneratorData) : String = 
-if e.oclIsTypeOf(Constant) then
-	e.oclAsType(Constant).value.toString()
+if e.oclIsTypeOf(DecimalConstant) then
+	e.oclAsType(DecimalConstant).value.toString()
+else if e.oclIsTypeOf(IntegerConstant) then
+	e.oclAsType(IntegerConstant).value.toString()
 else if e.oclIsTypeOf(AddressUse) then
 	e.oclAsType(AddressUse).address.addressToString(genData)
 else
 	-1
+endif
 endif
 endif
 /]
@@ -299,22 +302,6 @@ e.result.addressToString(genData) + ' = (' + e.condition.value.valueToString(gen
 e.trueValue.value.valueToString(genData) + ' : ' + e.elseValue.value.valueToString(genData) + ');'
 /]
 
-[template public genInstruction(e : ExtractValue, genData: GeneratorData)]
-// TODO: extractvalue
-[/template]
-
-[template public genInstruction(e : InsertValue, genData: GeneratorData)]
-// TODO: insertvalue
-[/template]
-
-[template public genInstruction(e : ExtractElement, genData: GeneratorData)]
-// TODO: extractelement
-[/template]
-
-[template public genInstruction(e : InsertElement, genData: GeneratorData)]
-// TODO: insertelement
-[/template]
-
 [template public genInstruction(e : Compare, genData: GeneratorData)]
 [e.compareInstr(genData)/]
 [/template]
@@ -354,16 +341,18 @@ skip;
 [/template]
 
 [template public genInstruction(e : Return, genData: GeneratorData)]
-[e.value.type.getTypeName(genData).returnInstr(e.value.value, genData)/]
+[e.value.getTypeName(genData).returnInstr(e.value, genData)/]
 [/template]
 
-[query public returnInstr(s : String, v : Value, genData: GeneratorData) : String =
+[query public returnInstr(s : String, v : EObject, genData: GeneratorData) : String =
 if s.equalsIgnoreCase('void') then 
 	'skip;'
 else if v.oclIsTypeOf(AddressUse) then
 	'returnvalue = ' + v.oclAsType(AddressUse).address.addressToString(genData) + ';'
-else if v.oclIsTypeOf(Constant) then
-	'returnvalue = ' + v.oclAsType(Constant).value.toString() + ';'
+else if v.oclIsTypeOf(DecimalConstant) then
+	'returnvalue = ' + v.oclAsType(DecimalConstant).value.toString() + ';'
+else if v.oclIsTypeOf(IntegerConstant) then
+	'returnvalue = ' + v.oclAsType(IntegerConstant).value.toString() + ';'
 else if v.oclIsTypeOf(PrimitiveValue) then
 	'returnvalue = ' + v.oclAsType(PrimitiveValue).value + ';'
 else
@@ -372,30 +361,47 @@ endif
 endif
 endif
 endif
+endif
 /]
 
+[template public genInstruction(e : ExtractValue, genData: GeneratorData)]
+// NOT SUPPORTED: Instruction (extractvalue)
+[/template]
+
+[template public genInstruction(e : InsertValue, genData: GeneratorData)]
+// NOT SUPPORTED: Instruction (insertvalue)
+[/template]
+
+[template public genInstruction(e : ExtractElement, genData: GeneratorData)]
+// NOT SUPPORTED: Instruction (extractelement)
+[/template]
+
+[template public genInstruction(e : InsertElement, genData: GeneratorData)]
+// NOT SUPPORTED: Instruction (insertelement)
+[/template]
+
 [template public genInstruction(e : VariableAttributeAccess, genData: GeneratorData)]
-// NOT IMPLEMENTED: Instruction (va_arg)
+// NOT SUPPORTED: Instruction (va_arg)
 [/template]
 
 [template public genInstruction(e : LandingPad, genData: GeneratorData)]
-// NOT IMPLEMENTED: Instruction (landingpad)
+// NOT SUPPORTED: Instruction (landingpad)
 [/template]
 
 [template public genInstruction(e : Invoke, genData: GeneratorData)]
-// NOT IMPLEMENTED: Instruction (invoke)
+// NOT SUPPORTED: Instruction (invoke)
 [/template]
 
 [template public genInstruction(e : Resume, genData: GeneratorData)]
-// NOT IMPLEMENTED: Instruction (resume)
+// NOT SUPPORTED: Instruction (resume)
 [/template]
 
 [template public genInstruction(e : IndirectBranch, genData: GeneratorData)]
-// NOT IMPLEMENTED: Instruction (indirectbr)
+// NOT SUPPORTED: Instruction (indirectbr)
 [/template]
 
 [template public genInstruction(e : ShuffleVector, genData: GeneratorData)]
-// NOT IMPLEMENTED: Instruction (shufflevector)
+// NOT SUPPORTED: Instruction (shufflevector)
 [/template]
 
 [comment ====== Generic Calls ======/]
@@ -403,8 +409,12 @@ endif
 [for (am: AddressMapping | genData.addressMappings)][for (a: Address | am.adresses)][if (address = a)][am.name/][/if][/for][/for]
 [/template]
 
+[template public valueToString(v : EObject, genData: GeneratorData)]
+[if (v.oclIsTypeOf(PrimitiveValue))][v.oclAsType(PrimitiveValue).value/][elseif ( v.oclIsTypeOf(IntegerConstant))][v.oclAsType(IntegerConstant).value/][elseif ( v.oclIsTypeOf(DecimalConstant))][v.oclAsType(DecimalConstant).value/] [elseif (v.oclIsTypeOf(AddressUse))][for (am: AddressMapping | genData.addressMappings)][for (a: Address | am.adresses)][if (v.oclAsType(AddressUse).address = a)][am.name/][/if][/for][/for][/if]
+[/template]
+
 [template public valueToString(v : Value, genData: GeneratorData)]
-[if (v.oclIsTypeOf(PrimitiveValue))][v.oclAsType(PrimitiveValue).value/][elseif ( v.oclIsTypeOf(Constant))][v.oclAsType(Constant).value/] [elseif (v.oclIsTypeOf(AddressUse))][for (am: AddressMapping | genData.addressMappings)][for (a: Address | am.adresses)][if (v.oclAsType(AddressUse).address = a)][am.name/][/if][/for][/for][/if]
+[if (v.oclIsTypeOf(PrimitiveValue))][v.oclAsType(PrimitiveValue).value/][elseif ( v.oclIsTypeOf(IntegerConstant))][v.oclAsType(IntegerConstant).value/][elseif ( v.oclIsTypeOf(DecimalConstant))][v.oclAsType(DecimalConstant).value/] [elseif (v.oclIsTypeOf(AddressUse))][for (am: AddressMapping | genData.addressMappings)][for (a: Address | am.adresses)][if (v.oclAsType(AddressUse).address = a)][am.name/][/if][/for][/for][/if]
 [/template]
 
 [template public genCondition(t: Transition, gD: GeneratorData)]
@@ -499,7 +509,7 @@ e.addressToString(genData)
 [comment basic stuff /]
 [template public buildDefines(c: OclAny)]
 #define MEM_SIZE 15	//size of memory
-#define NULL 0
+#define null 0
 #define I32  0 		// = {0};
 #define PTR 0
 

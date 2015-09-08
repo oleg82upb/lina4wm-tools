@@ -112,8 +112,7 @@ public class FilterToAddressMappingImpl extends MinimalEObjectImpl.Container imp
 	 * @generated
 	 */
 	public EList<AddressMapping> getTypedValue() {
-		if (value == null)
-		{
+		if (value == null) {
 			value = new EObjectResolvingEList<AddressMapping>(AddressMapping.class, this, GendataPackage.FILTER_TO_ADDRESS_MAPPING__VALUE);
 		}
 		return value;
@@ -126,8 +125,7 @@ public class FilterToAddressMappingImpl extends MinimalEObjectImpl.Container imp
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.FILTER_TO_ADDRESS_MAPPING__KEY:
 				return getTypedKey();
 			case GendataPackage.FILTER_TO_ADDRESS_MAPPING__VALUE:
@@ -144,8 +142,7 @@ public class FilterToAddressMappingImpl extends MinimalEObjectImpl.Container imp
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.FILTER_TO_ADDRESS_MAPPING__KEY:
 				setTypedKey((String)newValue);
 				return;
@@ -164,8 +161,7 @@ public class FilterToAddressMappingImpl extends MinimalEObjectImpl.Container imp
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.FILTER_TO_ADDRESS_MAPPING__KEY:
 				setTypedKey(KEY_EDEFAULT);
 				return;
@@ -183,8 +179,7 @@ public class FilterToAddressMappingImpl extends MinimalEObjectImpl.Container imp
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case GendataPackage.FILTER_TO_ADDRESS_MAPPING__KEY:
 				return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
 			case GendataPackage.FILTER_TO_ADDRESS_MAPPING__VALUE:
@@ -222,8 +217,7 @@ public class FilterToAddressMappingImpl extends MinimalEObjectImpl.Container imp
 	 * @generated
 	 */
 	public int getHash() {
-		if (hash == -1)
-		{
+		if (hash == -1) {
 			Object theKey = getKey();
 			hash = (theKey == null ? 0 : theKey.hashCode());
 		}
