@@ -355,8 +355,11 @@ else if v.oclIsTypeOf(IntegerConstant) then
 	'returnvalue = ' + v.oclAsType(IntegerConstant).value.toString() + ';'
 else if v.oclIsTypeOf(PrimitiveValue) then
 	'returnvalue = ' + v.oclAsType(PrimitiveValue).value + ';'
+else if v.oclIsTypeOf(Parameter) then
+	'returnvalue = ' + v.oclAsType(Parameter).value.valueToString(genData) + ';'
 else
 	'// UNHANDLED'
+endif
 endif
 endif
 endif
