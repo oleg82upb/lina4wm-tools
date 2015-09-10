@@ -103,17 +103,18 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 					PreComputationChecker checker = new PreComputationChecker(page.getAstLocation(),
 							page.getMemoryModelSelection());
 					containsLoopWithoutFence = checker.checkforLoopWithoutFence();
-					if(!containsLoopWithoutFence){
-					containsLoadsInWriteDefChains = checker.checkForLoadsInWriteDefChains();
-					}
-					List<FunctionDefinition> functions = checker.getFunctions();
-					funcWithLoadsInWDC = "";
-					for (int i = 0; i < functions.size(); i++)
+					if(!containsLoopWithoutFence)
 					{
-						funcWithLoadsInWDC = funcWithLoadsInWDC.concat(functions.get(i).getAddress().getName() + " ");
+						containsLoadsInWriteDefChains = checker.checkForLoadsInWriteDefChains();
+						List<FunctionDefinition> functions = checker.getFunctions();
+						funcWithLoadsInWDC = "";
+						for (int i = 0; i < functions.size(); i++)
+						{
+							funcWithLoadsInWDC = funcWithLoadsInWDC.concat(functions.get(i).getAddress().getName() + " ");
+						}
 					}
 				}
-				if (containsLoopWithoutFence && astlocation.equals(page.getAstLocation()))
+				if (containsLoopWithoutFence)
 				{
 					page.setErrorMessage("The selected Ast-File contains a loop without fence");
 					return false;
