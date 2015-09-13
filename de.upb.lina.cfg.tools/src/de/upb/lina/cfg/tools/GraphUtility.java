@@ -39,7 +39,6 @@ import de.upb.llvm_parser.llvm.GetElementPtr;
 import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.IntegerConstant;
 import de.upb.llvm_parser.llvm.Invoke;
-import de.upb.llvm_parser.llvm.LlvmPackage;
 import de.upb.llvm_parser.llvm.Load;
 import de.upb.llvm_parser.llvm.LogicOperation;
 import de.upb.llvm_parser.llvm.NestedCast;
@@ -433,23 +432,24 @@ public abstract class GraphUtility {
 		}
 
 		EClass type = t.getInstruction().eClass();
+		Instruction instruction = t.getInstruction();
 
 		// Load
-		if (type.equals(LlvmPackage.eINSTANCE.getLoad())) {
+		if (instruction instanceof Load) {
 			Load instr = (Load) t.getInstruction();
 			result += instr.getResult().getName() + ASSIGN;
 			result += LOAD + " ";
 			result += parameterValueToString(instr.getAddress());
 		}
 		// Store
-		else if (type.equals(LlvmPackage.eINSTANCE.getStore())) {
+		else if (instruction instanceof Store) {
 			Store instr = (Store) t.getInstruction();
 			result += STORE + WS;
 			result += parameterValueToString(instr.getValue());
 			result += parameterValueToString(instr.getTargetAddress());
 		}
 		// Branch
-		else if (type.equals(LlvmPackage.eINSTANCE.getBranch())) {
+		else if (instruction instanceof Branch) {
 			if (t instanceof GuardedTransition) {
 				result += "[" + (((GuardedTransition) t).getCondition().replace("[", ""));
 			}else{
@@ -458,7 +458,7 @@ public abstract class GraphUtility {
 			}
 		}
 		// GetElementPtr
-		else if (type.equals(LlvmPackage.eINSTANCE.getGetElementPtr())) {
+		else if (instruction instanceof GetElementPtr) {
 			GetElementPtr instr = (GetElementPtr) t.getInstruction();
 			result += instr.getResult().getName() + ASSIGN;
 			result += type.getName() + WS;
@@ -468,7 +468,7 @@ public abstract class GraphUtility {
 			}
 		}
 		// CmpXchg
-		else if (type.equals(LlvmPackage.eINSTANCE.getCmpXchg())) {
+		else if (instruction instanceof CmpXchg) {
 
 			CmpXchg instr = (CmpXchg) t.getInstruction();
 			result += instr.getResult().getName() + ASSIGN;
@@ -478,7 +478,7 @@ public abstract class GraphUtility {
 			result += parameterValueToString(instr.getNewValue()) + ")";
 		}
 		// Call
-		else if (type.equals(LlvmPackage.eINSTANCE.getCall())) {
+		else if (instruction instanceof Call) {
 
 			Call instr = (Call) t.getInstruction();
 			if(instr.getResult() != null){
@@ -491,14 +491,14 @@ public abstract class GraphUtility {
 			result += parameterListToString(instr.getPList());
 		}
 		// Alloc
-		else if (type.equals(LlvmPackage.eINSTANCE.getAlloc())) {
+		else if (instruction instanceof Alloc) {
 			Alloc instr = (Alloc) t.getInstruction();
 			result += instr.getResult().getName() + ASSIGN;
 			result += ALLOC + WS;
 			result += typeUseToString(instr.getType());
 		}
 		// Arithmetic Operations
-		else if (type.equals(LlvmPackage.eINSTANCE.getArithmeticOperation())) {
+		else if (instruction instanceof ArithmeticOperation) {
 			ArithmeticOperation instr = (ArithmeticOperation) t.getInstruction();
 			result += instr.getResult().getName() + ASSIGN;
 			String operation = instr.getOperation();
@@ -517,7 +517,7 @@ public abstract class GraphUtility {
 			result += valueToString(instr.getValue2());
 		}
 		// Logical Operations
-		else if (type.equals(LlvmPackage.eINSTANCE.getLogicOperation())) {
+		else if (instruction instanceof LogicOperation) {
 			LogicOperation instr = (LogicOperation) t.getInstruction();
 			result += instr.getResult().getName() + ASSIGN;
 			String operation = instr.getOperation();
@@ -538,7 +538,7 @@ public abstract class GraphUtility {
 			result += valueToString(instr.getValue2());
 		}
 		// Compare
-		else if (type.equals(LlvmPackage.eINSTANCE.getCompare())) {
+		else if (instruction instanceof Compare) {
 			Compare instr = (Compare) t.getInstruction();
 			result += instr.getResult().getName() + ASSIGN + "(";
 			String compare = instr.getCond();
@@ -594,7 +594,7 @@ public abstract class GraphUtility {
 			result += valueToString(instr.getOperand2()) + ")";
 		}
 		// Return
-		else if (type.equals(LlvmPackage.eINSTANCE.getReturn()))
+		else if (instruction instanceof Return)
 		{
 			result += RETURN + WS;
 			EObject returnValue = ((Return) t.getInstruction()).getValue();
@@ -617,25 +617,25 @@ public abstract class GraphUtility {
 			}
 		}
 		// Cast
-		else if (type.equals(LlvmPackage.eINSTANCE.getCast())) {
+		else if (instruction instanceof Cast) {
 			Cast instr = (Cast) t.getInstruction();
 			result += (instr.getResult().getName() + ASSIGN + "(" + typeUseToString((TypeUse)instr.getFrom()) + "->" + typeUseToString(instr.getTo()) + ") " + valueToString(instr.getValue()));
 		}
 		// Invoke
-		else if (type.equals(LlvmPackage.eINSTANCE.getInvoke())) {
+		else if (instruction instanceof Invoke) {
 			result += type.getName();
 			Invoke instr = (Invoke) t.getInstruction();
 			result += instr.getName().getName();
 			result += parameterListToString(instr.getPList());
 		}
 		// Fence
-		else if (type.equals(LlvmPackage.eINSTANCE.getFence())) {
+		else if (instruction instanceof Fence) {
 			result += type.getName();
 			Fence instr = (Fence) t.getInstruction();
 			result += instr.getOrdering();
 		}
 		// AtomicRMW
-		else if (type.equals(LlvmPackage.eINSTANCE.getAtomicRMW())) {
+		else if (instruction instanceof AtomicRMW) {
 			result += "atomic( ";
 			AtomicRMW instr = (AtomicRMW) t.getInstruction();
 			String operation = instr.getOperation();
@@ -702,7 +702,7 @@ public abstract class GraphUtility {
 			}
 			result += " )";
 			//phi
-		}else if(type.equals(LlvmPackage.eINSTANCE.getPhi())){
+		}else if(instruction instanceof Phi){
 			Phi phiInstruction = (Phi)t.getInstruction();
 			result += "phi(";
 			HashMap<String, Integer> incomingLabels = new HashMap<String, Integer>();
