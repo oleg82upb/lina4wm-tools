@@ -9,7 +9,9 @@ import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+
 import de.upb.lina.transformations.kiv.KivTransformationOperation;
+import de.upb.lina.transformations.plugin.Activator;
 import de.upb.lina.transformations.plugin.ETransformationTarget;
 import de.upb.lina.transformations.promela.PromelaTransformationOperation;
 
@@ -27,7 +29,9 @@ public class TransformationWizard extends Wizard implements INewWizard {
 		
 		if(wizardPage.getType() == ETransformationTarget.PROMELA){
 			//Promela
-			wmo = new PromelaTransformationOperation(functionSelectionPage.getSelectedFunctions(), wizardPage.getContainerText().getText(), wizardPage.getFileText().getText(), wizardPage.getFileEndingLabel().getText());
+			wmo = new PromelaTransformationOperation(functionSelectionPage.getSelectedFunctions(), 
+					wizardPage.getContainerText().getText(), wizardPage.getFileText().getText(), 
+					wizardPage.getFileEndingLabel().getText());
 		}else if (wizardPage.getType() == ETransformationTarget.KIV){
 			//KIV
 			wmo = new KivTransformationOperation(functionSelectionPage.getSelectedFunctions(), wizardPage
@@ -38,11 +42,9 @@ public class TransformationWizard extends Wizard implements INewWizard {
 		try {
 			getContainer().run(true, false, wmo);
 		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Activator.logError("InvocationTargetException occured during the transformation.", e);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Activator.logError("InterruptedException occured during the transformation.", e);
 		}
 		return true;
 	}
@@ -59,11 +61,9 @@ public class TransformationWizard extends Wizard implements INewWizard {
 	
 	@Override
 	public boolean canFinish(){
-		
 		if (!super.canFinish()){
 			return false;
 		}
-		
 		return true;
 	}
 	

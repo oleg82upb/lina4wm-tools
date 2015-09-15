@@ -269,7 +269,6 @@ public class TransformationWizardPage extends WizardPage {
 		dialog.setMessage("Select a ControlFlowDiagram-file:");
 		dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
 		dialog.setDoubleClickSelects(true);
-		// dialog.setSorter(new ResourceSorter(ResourceSorter.TYPE));
 		if (dialog.open() == Dialog.OK) {
 			Object[] result = dialog.getResult();
 			if (result.length == 1) {
@@ -283,10 +282,12 @@ public class TransformationWizardPage extends WizardPage {
 	}
 
 	private void handleContainerBrowse(Text textf) {
-		ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), ResourcesPlugin.getWorkspace()
-				.getRoot(), false, "Select new file container.");
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace()
+				.getRoot();
+		ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(),root , false, "Select new file container.");
 		if (dialog.open() == Dialog.OK) {
 			Object[] result = dialog.getResult();
+			
 			if (result.length == 1) {
 				String s = result[0].toString();
 				char c = s.charAt(0);
@@ -335,18 +336,20 @@ public class TransformationWizardPage extends WizardPage {
 
 		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		
-		IPath path = new Path(tx_container.getText() + File.separator + tx_file.getText() + lb_fileEnding.getText());
-		IFile file = myWorkspaceRoot.getFile(path);
+		IPath path = new Path(tx_container.getText());
+		IResource resource = myWorkspaceRoot.findMember(path);
+		IPath searchPath = resource.getLocation().append(File.separator + tx_file.getText() + lb_fileEnding.getText());
 		
-		if(file.exists()){
+		if(searchPath.toFile().exists()){
 			updateWarning("A file with the given name does already exist. If you continue the present file will be overwritten!", WARNING);
 			return;
 		}
 		
-		path = new Path(tx_container.getText()+File.separator+"PC.utf8");
-		file = myWorkspaceRoot.getFile(path);
+		path = new Path(tx_container.getText());
+		resource = myWorkspaceRoot.findMember(path);
+		searchPath = resource.getLocation().append(File.separator+"PC.utf8");
 		
-		if(file.exists() && type == Constants.TRANSFORMATION_TYPE_KIV){
+		if(searchPath.toFile().exists() && type == Constants.TRANSFORMATION_TYPE_KIV){
 			updateWarning("The selected target folder already contains a KIV Specification. If you continue the present files will be overwritten!", WARNING);
 			return;
 		}
@@ -381,7 +384,6 @@ public class TransformationWizardPage extends WizardPage {
 
 	public boolean isValidContainer(String container) {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		//		IPath path = root.getFullPath().append(container);
 		IResource file = root.findMember(container);
 		if (file != null && file.isAccessible() && !file.equals(root) && container.startsWith("/")) {
 			return true;
