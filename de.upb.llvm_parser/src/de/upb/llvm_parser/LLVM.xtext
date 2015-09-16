@@ -16,7 +16,7 @@ terminal VALID_ID:
 ;
 
 terminal INT_TYPE:
-	'i' ('0'..'9')+ POINTER?;
+	'i' ('0'..'9')+ ;
 	
 terminal BOOL:
 	'true' | 'false'

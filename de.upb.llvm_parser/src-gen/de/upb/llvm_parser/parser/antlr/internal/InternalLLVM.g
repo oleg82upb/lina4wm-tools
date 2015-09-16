@@ -13765,7 +13765,7 @@ RULE_INT : '-'? ('0'..'9')+;
 
 RULE_VALID_ID : ('%'|'@') (('a'..'z'|'A'..'Z'|'_'|'.'|'0'..'9')+|RULE_STRING);
 
-RULE_INT_TYPE : 'i' ('0'..'9')+ RULE_POINTER?;
+RULE_INT_TYPE : 'i' ('0'..'9')+;
 
 RULE_BOOL : ('true'|'false');
 

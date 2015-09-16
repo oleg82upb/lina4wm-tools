@@ -8167,7 +8167,7 @@ public class LLVMGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal INT_TYPE:
-	//	"i" "0".."9"+ POINTER?;
+	//	"i" "0".."9"+;
 	public TerminalRule getINT_TYPERule() {
 		return tINT_TYPE;
 	} 

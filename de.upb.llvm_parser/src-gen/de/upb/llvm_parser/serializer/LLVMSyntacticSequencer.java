@@ -227,7 +227,7 @@ public class LLVMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * terminal INT_TYPE:
-	 * 	'i' ('0'..'9')+ POINTER?;
+	 * 	'i' ('0'..'9')+ ;
 	 */
 	protected String getINT_TYPEToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
