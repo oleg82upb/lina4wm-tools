@@ -175,7 +175,7 @@ ls' = ls .pc:= [generateNextPC(genData, t)/] .[t.instruction.oclAsType(Load).res
 [query private name(v : Value, genData: GeneratorData) : String = 
 if(v.oclIsTypeOf(AddressUse)) then 
 v.oclAsType(AddressUse).address.name
-else if(v.oclIsTypeOf(Constant)) then
+else if(v.oclIsKindOf(Constant)) then
 v.oclAsType(Constant).getValueFromConstant()
 else if(v.oclIsTypeOf(PrimitiveValue)) then
 v.oclAsType(PrimitiveValue).value
@@ -271,7 +271,7 @@ endif
 [/template]
 
 [template private genLsPart(e : GetElementPtr, t: Transition, genData: GeneratorData)]
- .[e.result.addressToString(genData)/]:= [possiblyAddLS(e.aggregate.value, genData)/][e.aggregate.value.valueToString(genData)/]
+ .[e.result.addressToString(genData)/]:= ⌜([e.aggregate.value.castFromRef(genData)/][for(mm : MemorySizeMapping | genData.memorySizeMappings)][if(mm.instruction = e)] + [mm.size/])⌝[/if][/for]
 [/template]
 
 [template private genLsPart(e : Cast, t: Transition, genData: GeneratorData)]
@@ -280,7 +280,7 @@ endif
 
 [template private getTypeOfCast(v: Value, result : Address, genData : GeneratorData)]
 [if (v.oclIsTypeOf(PrimitiveValue))][v.oclAsType(PrimitiveValue).value.transformBooleanToNumber()/]
-[elseif ( v.oclIsTypeOf(Constant))][v.oclAsType(Constant).getValueFromConstant()/] 
+[elseif ( v.oclIsKindOf(Constant))][v.oclAsType(Constant).getValueFromConstant()/] 
 [elseif (v.oclIsTypeOf(AddressUse))]
 [for (am: AddressMapping | genData.addressMappings)]
 [for (a: Address | am.adresses)]
@@ -297,12 +297,12 @@ endif
 [/template]
 
 [template private valueToString(v : Value, genData: GeneratorData)]
-[if (v.oclIsTypeOf(PrimitiveValue))][v.oclAsType(PrimitiveValue).value.transformBooleanToNumber()/][elseif ( v.oclIsTypeOf(Constant))][v.oclAsType(Constant).getValueFromConstant()/] [elseif (v.oclIsTypeOf(AddressUse))]
+[if (v.oclIsTypeOf(PrimitiveValue))][v.oclAsType(PrimitiveValue).value.transformBooleanToNumber()/][elseif ( v.oclIsKindOf(Constant))][v.oclAsType(Constant).getValueFromConstant()/] [elseif (v.oclIsTypeOf(AddressUse))]
 [for (am: AddressMapping | genData.addressMappings)][for (a: Address | am.adresses)][if (v.oclAsType(AddressUse).address = a)][am.name.transformBooleanToNumber()/][/if][/for][/for][/if]
 [/template]
 
 [template private possiblyAddLS(v : Value, genData: GeneratorData)]
-[if(v.oclIsTypeOf(PrimitiveValue)._not()._and(v.oclIsTypeOf(Constant)._not()))]
+[if(v.oclIsTypeOf(AddressUse))]
 [for(am : AddressMapping| genData.getFilteredAddresses('all-declare'))][for(a : Address | am.adresses)][if(a = v.oclAsType(AddressUse).address)]ls .[/if][/for][/for][for(am : AddressMapping| genData.getFilteredAddresses('all-params'))][for(a : Address | am.adresses)][if(a = v.oclAsType(AddressUse).address)]ls .[/if][/for][/for][/if]
 [/template]
 
@@ -311,7 +311,7 @@ endif
 [/template]
 
 [template public castToRef(v : Value, genData : GeneratorData)]
-[if (v.oclIsTypeOf(PrimitiveValue))][if(v.oclAsType(PrimitiveValue).value.equalsIgnoreCase('null'))]null[else]⌜[possiblyAddLS(v, genData)/][v.valueToString(genData)/]⌝[/if][elseif ( v.oclIsTypeOf(Constant))]⌜[v.oclAsType(Constant).getValueFromConstant()/]⌝[elseif (v.oclIsTypeOf(AddressUse))]
+[if (v.oclIsTypeOf(PrimitiveValue))][if(v.oclAsType(PrimitiveValue).value.equalsIgnoreCase('null'))]null[else]⌜[possiblyAddLS(v, genData)/][v.valueToString(genData)/]⌝[/if][elseif ( v.oclIsKindOf(Constant))]⌜[v.oclAsType(Constant).getValueFromConstant()/]⌝[elseif (v.oclIsTypeOf(AddressUse))]
 [for (am: AddressMapping | genData.addressMappings)]
 [for (a: Address | am.adresses)]
 [if (v.oclAsType(AddressUse).address = a)][if (am.type.equalsIgnoreCase(genData.basis()))]⌜ [possiblyAddLS(v, genData)/][am.name.transformBooleanToNumber()/]⌝[else][possiblyAddLS(v, genData)/][am.name.transformBooleanToNumber()/][/if][/if][/for][/for][/if]
@@ -319,7 +319,7 @@ endif
 
 [template public castFromRef(v : Value, genData : GeneratorData)]
 [if (v.oclIsTypeOf(PrimitiveValue))][possiblyAddLS(v, genData)/][v.oclAsType(PrimitiveValue).value.transformBooleanToNumber()/]
-[elseif ( v.oclIsTypeOf(Constant))][v.oclAsType(Constant).getValueFromConstant()/] 
+[elseif ( v.oclIsKindOf(Constant))][v.oclAsType(Constant).getValueFromConstant()/] 
 [elseif (v.oclIsTypeOf(AddressUse))]
 [for (am: AddressMapping | genData.addressMappings)]
 [for (a: Address | am.adresses)]
@@ -343,7 +343,7 @@ endif
 				[/for][/for]
 			[else]
 				[if(v2.oclIsTypeOf(PrimitiveValue) and am1.type.equalsIgnoreCase('ref'))][ls1/][am1.name/] = [if(v2.oclAsType(PrimitiveValue).value.equalsIgnoreCase('null'))]null[else]⌜[ls2/][v2.valueToString(genData)/]⌝[/if][else]
-				[if(v2.oclIsTypeOf(Constant) and am1.type.equalsIgnoreCase('ref'))][ls1/][am1.name/] = ⌜[v2.oclAsType(Constant).getValueFromConstant()/]⌝[else][ls1/][v1.valueToString(genData)/] = [ls2/][v2.valueToString(genData)/]
+				[if(v2.oclIsKindOf(Constant) and am1.type.equalsIgnoreCase('ref'))][ls1/][am1.name/] = ⌜[v2.oclAsType(Constant).getValueFromConstant()/]⌝[else][ls1/][v1.valueToString(genData)/] = [ls2/][v2.valueToString(genData)/]
 				[/if][/if]
 			[/if]
 		[/if]
@@ -354,7 +354,7 @@ endif
 		[for (a: Address | am2.adresses)]
 		[if (v2.oclAsType(AddressUse).address = a)]
 			[if(v1.oclIsTypeOf(PrimitiveValue) and am2.type.equalsIgnoreCase('ref'))][if(v1.oclAsType(PrimitiveValue).value.equalsIgnoreCase('null'))]null[else]⌜[ls1/][v1.valueToString(genData)/]⌝[/if] = [ls2/][am2.name/][else]
-			[if(v1.oclIsTypeOf(Constant) and am2.type.equalsIgnoreCase('ref'))]⌜[v1.oclAsType(Constant).getValueFromConstant()/]⌝ = [ls2/][am2.name/][else][ls1/][v1.valueToString(genData)/] = [ls2/][v2.valueToString(genData)/]
+			[if(v1.oclIsKindOf(Constant) and am2.type.equalsIgnoreCase('ref'))]⌜[v1.oclAsType(Constant).getValueFromConstant()/]⌝ = [ls2/][am2.name/][else][ls1/][v1.valueToString(genData)/] = [ls2/][v2.valueToString(genData)/]
 			[/if][/if]
 		[/if][/for][/for]
 	[else][ls1/][v1.valueToString(genData)/] = [ls2/][v2.valueToString(genData)/][/if]

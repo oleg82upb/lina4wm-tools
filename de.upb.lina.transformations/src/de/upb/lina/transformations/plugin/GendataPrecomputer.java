@@ -900,8 +900,6 @@ public class GendataPrecomputer {
 		String t = "";
 		if (type.getPointer() != null) {
 			t = "ref";
-		} else if (type instanceof Predefined && ((Predefined) type).getType().contains("*")) {
-			t = "ref";
 		} else {
 			if (basis == Constants.INT) {
 				t = "int";
@@ -913,16 +911,26 @@ public class GendataPrecomputer {
 			addressMapping.setType(t);
 	}
 	
-	private void setType(AddressMapping addressMapping, EObject type) {
+	private void setType(AddressMapping addressMapping, EObject type) 
+	{
 		if (addressMapping == null)
 			return;
-		if (type instanceof TypeUse) {
+		if (type instanceof TypeUse) 
+		{
 			if (addressMapping.getType() == null || !addressMapping.getType().equals("ref"))
 				setType(addressMapping, (TypeUse) type);
-		} else if (type instanceof Aggregate_Type) {
+		} 
+		else if (type instanceof Aggregate_Type) 
+		{
 			addressMapping.setType("ref");
-		} else if (type instanceof Parameter) {
+		} 
+		else if (type instanceof Parameter) 
+		{
 			setType(addressMapping, ((Parameter) type).getType());
+		} 
+		else if(addressMapping.getType() == null)
+		{
+			addressMapping.setType("ref");
 		}
 	}
 
