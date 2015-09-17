@@ -68,7 +68,6 @@ public class ControlFlowLocationItemProvider
 			addIncomingPropertyDescriptor(object);
 			addOutgoingPropertyDescriptor(object);
 			addBufferPropertyDescriptor(object);
-			addBlockLabelPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -162,28 +161,6 @@ public class ControlFlowLocationItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Block Label feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addBlockLabelPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ControlFlowLocation_blockLabel_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ControlFlowLocation_blockLabel_feature", "_UI_ControlFlowLocation_type"),
-				 ControlflowPackage.Literals.CONTROL_FLOW_LOCATION__BLOCK_LABEL,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This returns ControlFlowLocation.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -220,7 +197,6 @@ public class ControlFlowLocationItemProvider
 		switch (notification.getFeatureID(ControlFlowLocation.class))
 		{
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__PC:
-			case ControlflowPackage.CONTROL_FLOW_LOCATION__BLOCK_LABEL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

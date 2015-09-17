@@ -1,7 +1,6 @@
 package de.upb.lina.cfg.tools;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -32,6 +31,7 @@ import de.upb.llvm_parser.llvm.CmpXchg;
 import de.upb.llvm_parser.llvm.Compare;
 import de.upb.llvm_parser.llvm.DecimalConstant;
 import de.upb.llvm_parser.llvm.Fence;
+import de.upb.llvm_parser.llvm.FunctionBody;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.FunctionParameter;
 import de.upb.llvm_parser.llvm.FunctionType;
@@ -70,6 +70,8 @@ public abstract class GraphUtility {
 	private static final String BRANCH = "GOTO";
 	private static final String TODO = "TODO";
 	private static final String WS = " ";
+	private static final String PC_PREF = "L";
+	private static final String PHI = '\u03A6' + "";
 	
 	
 	public static String valueToCleanString(Value value)
@@ -210,7 +212,7 @@ public abstract class GraphUtility {
 	 */
 	public static String bufferToString(StoreBuffer buf, int pc)
 	{
-		String buffer = "L_" + pc;
+		String buffer = PC_PREF + pc;
 		if (buf.getAddressValuePairs().isEmpty())
 		{
 			return clean(buffer);
@@ -631,8 +633,8 @@ public abstract class GraphUtility {
 		// Fence
 		else if (instruction instanceof Fence) {
 			result += type.getName();
-			Fence instr = (Fence) t.getInstruction();
-			result += instr.getOrdering();
+//			Fence instr = (Fence) t.getInstruction();
+//			result += instr.getOrdering();
 		}
 		// AtomicRMW
 		else if (instruction instanceof AtomicRMW) {
@@ -702,27 +704,56 @@ public abstract class GraphUtility {
 			}
 			result += " )";
 			//phi
-		}else if(instruction instanceof Phi){
-			Phi phiInstruction = (Phi)t.getInstruction();
-			result += "phi(";
-			HashMap<String, Integer> incomingLabels = new HashMap<String, Integer>();
-			for(Transition incoming: t.getSource().getIncoming()){
-				if(incoming.getSource().getBlockLabel() != null){
-					incomingLabels.put(incoming.getSource().getBlockLabel(), incoming.getSource().getPc());
-				}
-			}
-			for(PhiCase phiCase: phiInstruction.getCases()){
-				String phiLabel = phiCase.getLabel().replace("%", "");
-				if(incomingLabels.containsKey(phiLabel)){
-					phiLabel += "(PC:"+incomingLabels.get(phiLabel)+")";
-				}
-				result+= "[" + valueToString(phiCase.getValue()) + ", " + phiLabel + "], ";
-			}
-			result = result.substring(0,result.length()-2) + ")";
+		} else if (instruction instanceof Phi)
+		{
+			Phi phiInstruction = (Phi) t.getInstruction();
+			result = phiInstruction.getResult().getName().replace("%", "");
+			result += " := " + PHI +" ";
 
+			FunctionBody body = null;
+			EObject o = phiInstruction.eContainer().eContainer();
+			if(o instanceof FunctionBody)
+			{
+				body = (FunctionBody) o;
+			}
+			else
+			{
+				throw new RuntimeException("Could not resolve FunctionBody of phi instruction");
+			}
+			
+			Iterator<PhiCase> i = phiInstruction.getCases().iterator();
+			while (i.hasNext())
+			{
+				PhiCase phiCase = i.next();
+				String caseLabel = phiCase.getLabel().replace("%", "");
+				int sourcePC = -1;
+				
+				
+				for(BasicBlock block : body.getBlocks())
+				{
+					if(caseLabel.equals(block.getLabel()))
+					{
+						//get last instruction because it is the one jumping to 
+						//the block containing the phi instruction
+						int size = block.getInstructions().size();
+						Instruction last = block.getInstructions().get(size-1);
+						sourcePC = getPcOfInstruction(last, gatherInstructionsInCodeOrder((FunctionDefinition) body.eContainer()));
+					}
+				}
+				
+				// we use the PC instead of the original label, since we don't
+				// have the labels in the store buffer graph anymore
+				result += "[" + valueToString(phiCase.getValue()) + ", " + PC_PREF + sourcePC + "]";
+
+				if (i.hasNext())
+				{
+					result += ", ";
+				}
+			}
 		}
 		// not-implemented
-		else {
+		else
+		{
 			result += type.getName();
 		}
 		return result;
@@ -892,6 +923,24 @@ public abstract class GraphUtility {
 
 	public static String parameterValueToString(Parameter val) {
 		return valueToString(val.getValue());
+	}
+	
+	
+	/**
+	 * @return a list of all instructions
+	 */
+	public static ArrayList<Instruction> gatherInstructionsInCodeOrder(FunctionDefinition function)
+	{
+		ArrayList<Instruction> list = new ArrayList<Instruction>();
+		EList<BasicBlock> blocks = function.getBody().getBlocks();
+		for (BasicBlock b : blocks)
+		{
+			for (Instruction i : b.getInstructions())
+			{
+				list.add(i);
+			}
+		}
+		return list;
 	}
 	
 }

@@ -176,56 +176,90 @@ public class GendataPrecomputer {
 			helperModel.getTransformationSpecificKeys().add(s);
 	}
 
-	private void computePhiMapping(){
-		for(ControlFlowDiagram cfg: cfgs){
+	private void computePhiMapping()
+	{
+		for (ControlFlowDiagram cfg : cfgs)
+		{
 			HashMap<String, ArrayList<Phi>> blockLabelToPhiInstructions = new HashMap<String, ArrayList<Phi>>();
-			try{
-				EObject motherObject = cfg.getStart().getOutgoing().get(0).getInstruction().eContainer();
-				BasicBlock basicBlock = (BasicBlock) motherObject;
-				FunctionBody fb = (FunctionBody)basicBlock.eContainer();
-				FunctionDefinition fd = (FunctionDefinition)fb.eContainer();
-				for(BasicBlock b: fd.getBody().getBlocks()){
-					blockLabelToPhiInstructions.put(b.getLabel(), new ArrayList<Phi>());
-					for(Instruction i: b.getInstructions()){
-						if(i instanceof Phi){
-							if(!blockLabelToPhiInstructions.get(b.getLabel()).contains(i)){
-								blockLabelToPhiInstructions.get(b.getLabel()).add((Phi)i);
-							}
+
+			EObject motherObject = cfg.getStart().getOutgoing().get(0).getInstruction().eContainer();
+			BasicBlock basicBlock = (BasicBlock) motherObject;
+			FunctionBody fb = (FunctionBody) basicBlock.eContainer();
+			FunctionDefinition fd = (FunctionDefinition) fb.eContainer();
+
+			for (BasicBlock b : fd.getBody().getBlocks())
+			{
+				blockLabelToPhiInstructions.put(b.getLabel(), new ArrayList<Phi>());
+
+				for (Instruction i : b.getInstructions())
+				{
+					if (i instanceof Phi)
+					{
+						if (!blockLabelToPhiInstructions.get(b.getLabel()).contains(i))
+						{
+							blockLabelToPhiInstructions.get(b.getLabel()).add((Phi) i);
 						}
 					}
 				}
-			}catch(NullPointerException ex){
-				//nothing to do here
 			}
 
 			for (Transition t : cfg.getTransitions())
 			{
-				// block change
-				if (!t.getSource().getBlockLabel().equals(t.getTarget().getBlockLabel()))
+				if (t.getInstruction() instanceof Branch)
 				{
-					for (Transition inc : t.getSource().getIncoming())
+					Branch branch = (Branch) t.getInstruction();
+					if (branch.getDestination() != null)
 					{
-						if (!blockLabelToPhiInstructions.get(t.getTarget().getBlockLabel()).isEmpty())
+						String dest = branch.getDestination().replace("%", "");
+						ArrayList<Phi> list = blockLabelToPhiInstructions.get(dest);
+
+						if (!list.isEmpty())
 						{
-							PhiMapping mapping = createPhiMapping(inc,
-									blockLabelToPhiInstructions.get(t.getTarget().getBlockLabel()), "%"
-											+ inc.getSource().getBlockLabel());
-							helperModel.getPhiMappings().add(mapping);
+							createPhiMapping(t, list, branch.getDestination());
+						}
+					}
+
+					if (branch.getElseDestination() != null)
+					{
+						String dest = branch.getElseDestination().replace("%", "");
+						ArrayList<Phi> list = blockLabelToPhiInstructions.get(dest);
+
+						if (!list.isEmpty())
+						{
+							createPhiMapping(t, list, branch.getDestination());
 						}
 					}
 				}
+				
+				if (t.getInstruction() instanceof IndirectBranch)
+				{
+					IndirectBranch branch = (IndirectBranch) t.getInstruction();
+					if (!branch.getPotTargetLabels().isEmpty())
+					{
+						
+						for (String dest : branch.getPotTargetLabels())
+						{
+							String destPureLabel = dest.replace("%", "");
+							ArrayList<Phi> list = blockLabelToPhiInstructions.get(destPureLabel);
 
+							if (!list.isEmpty())
+							{
+								createPhiMapping(t, list, dest);
+							}
+						}
+					}
+				}
 			}
 		}
 	}
 
-	private PhiMapping createPhiMapping(Transition transition, List<Phi> phis, String blockLabel)
+	private void createPhiMapping(Transition transition, List<Phi> phis, String blockLabel)
 	{
 		PhiMapping mapping = GendataFactory.eINSTANCE.createPhiMapping();
 		mapping.setTransition(transition);
 		mapping.getPhi().addAll(phis);
 		mapping.setBlockLabelToUse(blockLabel);
-		return mapping;
+		this.helperModel.getPhiMappings().add(mapping);
 	}
 
 	

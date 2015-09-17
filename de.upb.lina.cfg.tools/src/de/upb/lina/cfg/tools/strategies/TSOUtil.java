@@ -64,7 +64,7 @@ public class TSOUtil implements IGraphGenerator {
 		ProgramCounter pc = new ProgramCounter();
 		ControlFlowDiagram cfg = ControlflowFactory.eINSTANCE
 				.createControlFlowDiagram();
-		SCUtil sc = new SCUtil(function);
+		SCGraphGenerator sc = new SCGraphGenerator(function);
 		PreComputationChecker checker = new PreComputationChecker("", 0);
 		ControlFlowDiagram scCfg = sc.createGraph();
 		List<Transition> earlyReadsInFunction = checker.collectEarlyReadsinSCGraph(scCfg);
@@ -480,7 +480,6 @@ public class TSOUtil implements IGraphGenerator {
 		loc.setBuffer(buffer);
 		loc.setPc(pc);
 		loc.setDiagram(diag);
-		loc.setBlockLabel(blockLabel);
 		return loc;
 	}
 

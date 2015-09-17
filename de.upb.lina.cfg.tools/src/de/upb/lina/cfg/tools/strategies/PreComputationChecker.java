@@ -102,7 +102,7 @@ public class PreComputationChecker {
 				if (func.getBody() != null) {
 					if (memoryModel == CFGConstants.TSO) {
 						// create sc-graph and search for loops without fence
-						SCUtil sc = new SCUtil(func);
+						SCGraphGenerator sc = new SCGraphGenerator(func);
 						loopWithoutFenceinfunc = containsLoopWithoutFences(sc.createGraph());
 						if (CFGConstants.DEBUG) {
 							if (loopWithoutFenceinfunc) {
@@ -138,7 +138,7 @@ public class PreComputationChecker {
 						if (func.getBody() != null) {
 							if (memoryModel == CFGConstants.TSO) {
 								// create sc-graph and search for loops without fence
-								SCUtil sc = new SCUtil(func);
+								SCGraphGenerator sc = new SCGraphGenerator(func);
 								List<Transition> loadsFound = new ArrayList<Transition>();
 								checkForWriteDefChains(sc.createGraph(), loadsFound);
 								if(!loadsFound.isEmpty()){

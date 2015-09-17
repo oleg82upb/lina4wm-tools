@@ -3,8 +3,6 @@ package de.upb.lina.cfg.tools.strategies;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
-
 import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
@@ -14,7 +12,6 @@ import de.upb.lina.cfg.controlflow.StoreBuffer;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.tools.GraphUtility;
 import de.upb.lina.cfg.tools.IGraphGenerator;
-import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.Branch;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.IndirectBranch;
@@ -29,22 +26,65 @@ public abstract class AbstractGraphGenerator implements IGraphGenerator
 	protected List<ControlFlowLocation> toBeProcessedLocations;
 	protected List<ControlFlowLocation> processedLocations;
 	protected ArrayList<Instruction> instructions;
+	
+	
+
+	public AbstractGraphGenerator(FunctionDefinition function)
+	{
+		// intialize variables
+		this.function = function;
+		this.toBeProcessedLocations = new ArrayList<ControlFlowLocation>();
+		this.processedLocations = new ArrayList<ControlFlowLocation>();
+		this.instructions = GraphUtility.gatherInstructionsInCodeOrder(this.function);
+	}
+	
+	
+	public ControlFlowDiagram createGraph()
+	{
+		if(this.graph != null)
+		{
+			return this.graph;
+		}
+		
+		this.graph = ControlflowFactory.eINSTANCE.createControlFlowDiagram();
+		this.graph.setName(this.function.getAddress().getName());
+
+		// setup first node
+		ControlFlowLocation first = createControlFlowLocation(0, ControlflowFactory.eINSTANCE.createStoreBuffer());
+		//GraphUtility.findLabelByInstruction(function, instructions.get(0));
+		this.graph.setStart(first);
+		this.toBeProcessedLocations.add(first);
+
+		// while we have still nodes to work on
+		while (!toBeProcessedLocations.isEmpty())
+		{
+			ControlFlowLocation sourceLocation = toBeProcessedLocations.get(0);
+			if (sourceLocation.getPc() < instructions.size())
+			{
+				Instruction nextInstruction = instructions.get(sourceLocation.getPc());
+
+				if (nextInstruction != null)
+				{
+					addTransitions(sourceLocation, nextInstruction);
+				}
+			}
+			
+			this.toBeProcessedLocations.remove(sourceLocation);
+			this.processedLocations.add(sourceLocation);
+		}
+
+		return graph;
+	}
+
 
 	/**
-	 * @return a list of all instructions
+	 * Creates SC transitions only. Overwrite, if you need to customize.
+	 * @param sourceLocation
+	 * @param nextInstruction
 	 */
-	protected ArrayList<Instruction> gatherInstructions()
+	protected void addTransitions(ControlFlowLocation sourceLocation, Instruction nextInstruction)
 	{
-		ArrayList<Instruction> list = new ArrayList<Instruction>();
-		EList<BasicBlock> blocks = this.function.getBody().getBlocks();
-		for (BasicBlock b : blocks)
-		{
-			for (Instruction i : b.getInstructions())
-			{
-				list.add(i);
-			}
-		}
-		return list;
+		addInstructionTransitions(sourceLocation, nextInstruction);
 	}
 	
 	

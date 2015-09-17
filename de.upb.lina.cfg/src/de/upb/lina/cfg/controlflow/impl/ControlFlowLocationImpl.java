@@ -33,7 +33,6 @@ import de.upb.lina.cfg.controlflow.Transition;
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowLocationImpl#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowLocationImpl#getOutgoing <em>Outgoing</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowLocationImpl#getBuffer <em>Buffer</em>}</li>
- *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowLocationImpl#getBlockLabel <em>Block Label</em>}</li>
  * </ul>
  * </p>
  *
@@ -89,26 +88,6 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 * @ordered
 	 */
 	protected StoreBuffer buffer;
-
-	/**
-	 * The default value of the '{@link #getBlockLabel() <em>Block Label</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBlockLabel()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String BLOCK_LABEL_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getBlockLabel() <em>Block Label</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBlockLabel()
-	 * @generated
-	 * @ordered
-	 */
-	protected String blockLabel = BLOCK_LABEL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -269,27 +248,6 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getBlockLabel() {
-		return blockLabel;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setBlockLabel(String newBlockLabel) {
-		String oldBlockLabel = blockLabel;
-		blockLabel = newBlockLabel;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ControlflowPackage.CONTROL_FLOW_LOCATION__BLOCK_LABEL, oldBlockLabel, blockLabel));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -366,8 +324,6 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 				return getOutgoing();
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__BUFFER:
 				return getBuffer();
-			case ControlflowPackage.CONTROL_FLOW_LOCATION__BLOCK_LABEL:
-				return getBlockLabel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -399,9 +355,6 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__BUFFER:
 				setBuffer((StoreBuffer)newValue);
 				return;
-			case ControlflowPackage.CONTROL_FLOW_LOCATION__BLOCK_LABEL:
-				setBlockLabel((String)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -430,9 +383,6 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__BUFFER:
 				setBuffer((StoreBuffer)null);
 				return;
-			case ControlflowPackage.CONTROL_FLOW_LOCATION__BLOCK_LABEL:
-				setBlockLabel(BLOCK_LABEL_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -456,8 +406,6 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 				return outgoing != null && !outgoing.isEmpty();
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__BUFFER:
 				return buffer != null;
-			case ControlflowPackage.CONTROL_FLOW_LOCATION__BLOCK_LABEL:
-				return BLOCK_LABEL_EDEFAULT == null ? blockLabel != null : !BLOCK_LABEL_EDEFAULT.equals(blockLabel);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -474,8 +422,6 @@ public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowL
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (pc: ");
 		result.append(pc);
-		result.append(", blockLabel: ");
-		result.append(blockLabel);
 		result.append(')');
 		return result.toString();
 	}

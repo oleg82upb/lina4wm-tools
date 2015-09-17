@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getOutgoing <em>Outgoing</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getBuffer <em>Buffer</em>}</li>
- *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getBlockLabel <em>Block Label</em>}</li>
  * </ul>
  * </p>
  *
@@ -145,31 +144,5 @@ public interface ControlFlowLocation extends EObject {
 	 * @generated
 	 */
 	void setBuffer(StoreBuffer value);
-
-	/**
-	 * Returns the value of the '<em><b>Block Label</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Block Label</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Block Label</em>' attribute.
-	 * @see #setBlockLabel(String)
-	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getControlFlowLocation_BlockLabel()
-	 * @model
-	 * @generated
-	 */
-	String getBlockLabel();
-
-	/**
-	 * Sets the value of the '{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getBlockLabel <em>Block Label</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Block Label</em>' attribute.
-	 * @see #getBlockLabel()
-	 * @generated
-	 */
-	void setBlockLabel(String value);
 
 } // ControlFlowLocation

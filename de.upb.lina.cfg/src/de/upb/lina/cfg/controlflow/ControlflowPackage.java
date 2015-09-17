@@ -184,22 +184,13 @@ public interface ControlflowPackage extends EPackage {
 	int CONTROL_FLOW_LOCATION__BUFFER = 4;
 
 	/**
-	 * The feature id for the '<em><b>Block Label</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTROL_FLOW_LOCATION__BLOCK_LABEL = 5;
-
-	/**
 	 * The number of structural features of the '<em>Control Flow Location</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_LOCATION_FEATURE_COUNT = 6;
+	int CONTROL_FLOW_LOCATION_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.TransitionImpl <em>Transition</em>}' class.
@@ -801,17 +792,6 @@ public interface ControlflowPackage extends EPackage {
 	EReference getControlFlowLocation_Buffer();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.controlflow.ControlFlowLocation#getBlockLabel <em>Block Label</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Block Label</em>'.
-	 * @see de.upb.lina.cfg.controlflow.ControlFlowLocation#getBlockLabel()
-	 * @see #getControlFlowLocation()
-	 * @generated
-	 */
-	EAttribute getControlFlowLocation_BlockLabel();
-
-	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.Transition <em>Transition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1174,14 +1154,6 @@ public interface ControlflowPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CONTROL_FLOW_LOCATION__BUFFER = eINSTANCE.getControlFlowLocation_Buffer();
-
-		/**
-		 * The meta object literal for the '<em><b>Block Label</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CONTROL_FLOW_LOCATION__BLOCK_LABEL = eINSTANCE.getControlFlowLocation_BlockLabel();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.TransitionImpl <em>Transition</em>}' class.

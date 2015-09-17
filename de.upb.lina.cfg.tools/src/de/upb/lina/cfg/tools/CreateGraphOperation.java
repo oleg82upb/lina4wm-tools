@@ -22,7 +22,7 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.tools.strategies.PSOGraphGenerator;
-import de.upb.lina.cfg.tools.strategies.SCUtil;
+import de.upb.lina.cfg.tools.strategies.SCGraphGenerator;
 import de.upb.lina.cfg.tools.strategies.TSOUtil;
 import de.upb.llvm_parser.llvm.AbstractElement;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
@@ -90,7 +90,7 @@ public class CreateGraphOperation extends WorkspaceModifyOperation {
 					IGraphGenerator generator = null;
 					if (memoryModel == CFGConstants.SC)
 					{
-						generator = new SCUtil(function);
+						generator = new SCGraphGenerator(function);
 					} else if (memoryModel == CFGConstants.TSO)
 					{
 						generator = new TSOUtil(function);
