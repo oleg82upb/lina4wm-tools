@@ -41,6 +41,8 @@ import de.upb.llvm_parser.llvm.Switch;
 import de.upb.llvm_parser.llvm.SwitchCase;
 import de.upb.llvm_parser.llvm.Value;
 
+
+@Deprecated
 public class TSOUtil implements IGraphGenerator {
 	private List<Instruction> instructions = new ArrayList<Instruction>();
 	private List<ControlFlowLocation> processed = new ArrayList<ControlFlowLocation>();
@@ -588,12 +590,7 @@ public class TSOUtil implements IGraphGenerator {
 		return null;
 	}
 
-	/**
-	 * @return the writeDefMap
-	 */
-	public HashMap<Address, Address> getWriteDefMap() {
-		return writeDefMap;
-	}
+
 
 	private void reportLoopWithoutFence(String functionName, ControlFlowLocation locBeforeLatesFence,
 			ControlFlowLocation nextLocAfterWrite, Instruction instruction) {

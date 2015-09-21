@@ -10,6 +10,7 @@ import de.upb.lina.cfg.controlflow.ControlflowFactory;
 import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.StoreBuffer;
 import de.upb.lina.cfg.controlflow.Transition;
+import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.GraphUtility;
 import de.upb.lina.cfg.tools.IGraphGenerator;
 import de.upb.llvm_parser.llvm.Branch;
@@ -33,9 +34,6 @@ public abstract class AbstractGraphGenerator implements IGraphGenerator
 	{
 		// intialize variables
 		this.function = function;
-		this.toBeProcessedLocations = new ArrayList<ControlFlowLocation>();
-		this.processedLocations = new ArrayList<ControlFlowLocation>();
-		this.instructions = GraphUtility.gatherInstructionsInCodeOrder(this.function);
 	}
 	
 	
@@ -45,6 +43,8 @@ public abstract class AbstractGraphGenerator implements IGraphGenerator
 		{
 			return this.graph;
 		}
+		
+		initialize();
 		
 		this.graph = ControlflowFactory.eINSTANCE.createControlFlowDiagram();
 		this.graph.setName(this.function.getAddress().getName());
@@ -62,18 +62,29 @@ public abstract class AbstractGraphGenerator implements IGraphGenerator
 			if (sourceLocation.getPc() < instructions.size())
 			{
 				Instruction nextInstruction = instructions.get(sourceLocation.getPc());
-
-				if (nextInstruction != null)
-				{
-					addTransitions(sourceLocation, nextInstruction);
-				}
+				addTransitions(sourceLocation, nextInstruction);
 			}
 			
 			this.toBeProcessedLocations.remove(sourceLocation);
 			this.processedLocations.add(sourceLocation);
 		}
+		
+		if (CFGConstants.DEBUG) {
+			System.out.println("#nodes: " + this.graph.getLocations().size() + " ;#edges: " + this.graph.getTransitions().size());
+		}
 
 		return graph;
+	}
+
+
+	/**
+	 * Initialize variables and other stuff and don't forget to call super.initialize(); 
+	 */
+	protected void initialize()
+	{
+		this.toBeProcessedLocations = new ArrayList<ControlFlowLocation>();
+		this.processedLocations = new ArrayList<ControlFlowLocation>();
+		this.instructions = GraphUtility.gatherInstructionsInCodeOrder(this.function);
 	}
 
 

@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 import de.upb.lina.cfg.controlflow.AddressValuePair;
@@ -17,6 +16,7 @@ import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.StoreBuffer;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.controlflow.WriteDefChainTransition;
+import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.Aggregate_Type;
 import de.upb.llvm_parser.llvm.Alloc;
@@ -62,24 +62,29 @@ public abstract class GraphUtility {
 	private static final String STORE = "STORE";
 	private static final String LOAD = "LOAD";
 	private static final String FLUSH = "FLUSH";
-	private static final String VOID = "void";
 	private static final String ALLOC = "alloc";
 	private static final String TRUE = "true";
 	private static final String FALSE = "false";
 	private static final String RETURN = "RET";
 	private static final String BRANCH = "GOTO";
+	private static final String FENCE = "FENCE";
+	private static final String CALL = "CALL";
+	private static final String INVOKE = "INVOKE";
 	private static final String TODO = "TODO";
 	private static final String WS = " ";
 	private static final String PC_PREF = "L";
 	private static final String PHI = '\u03A6' + "";
+	private static final String VEE = '\u02C5' + "";
+	private static final String WEDGE = '\u02C4' + "";
+	private static final String GETELEMENENTPTR = "getElementPtr";
 	
 	
-	public static String valueToCleanString(Value value)
-	{
-		String result = GraphUtility.valueToString(value);
-		return clean(result);
-	}
+	
 
+	/**
+	 * @param string representation of address or value 
+	 * @return
+	 */
 	public static String clean(String string)
 	{
 		int loc = string.indexOf("%");
@@ -163,23 +168,23 @@ public abstract class GraphUtility {
 				+ function.getAddress().getName());
 	}
 	
-	/**
-	 * Searches for the block with label destLabel and returns preceeding
-	 * location of the transition that is corresponding to the first instruction
-	 * of the block.
-	 * 
-	 * @param cfg
-	 * @param function
-	 * @param destLabel
-	 * @return
-	 */
-	public static ControlFlowLocation findLabeledLocation(ControlFlowDiagram cfg, FunctionDefinition function,
-			String destLabel)
-	{
-		Instruction dest = getInstructionByLabel(function, destLabel);
-		Transition destTrans = findCorrespondingTransition(cfg, dest);
-		return destTrans.getSource();
-	}
+//	/**
+//	 * Searches for the block with label destLabel and returns preceeding
+//	 * location of the transition that is corresponding to the first instruction
+//	 * of the block.
+//	 * 
+//	 * @param cfg
+//	 * @param function
+//	 * @param destLabel
+//	 * @return
+//	 */
+//	public static ControlFlowLocation findLabeledLocation(ControlFlowDiagram cfg, FunctionDefinition function,
+//			String destLabel)
+//	{
+//		Instruction dest = getInstructionByLabel(function, destLabel);
+//		Transition destTrans = findCorrespondingTransition(cfg, dest);
+//		return destTrans.getSource();
+//	}
 	
 	/**
 	 * Checks weather l is equal to the given pc in combination with the given buffer
@@ -197,11 +202,11 @@ public abstract class GraphUtility {
 	/**
 	 * Returns the given ControlFlowLocation as a String
 	 * 
-	 * @param nextLocation
+	 * @param location
 	 * @return
 	 */
-	public static String bufferToString(ControlFlowLocation nextLocation){
-		return bufferToString(nextLocation.getBuffer(), nextLocation.getPc());
+	public static String bufferToString(ControlFlowLocation location){
+		return bufferToString(location.getBuffer(), location.getPc());
 	}
 	
 	/**
@@ -215,21 +220,27 @@ public abstract class GraphUtility {
 		String buffer = PC_PREF + pc;
 		if (buf.getAddressValuePairs().isEmpty())
 		{
-			return clean(buffer);
+			return buffer;
 		}
 		
-		buffer += "_<";
-		for (AddressValuePair pair : buf.getAddressValuePairs())
+		buffer += " <";
+		Iterator<AddressValuePair> i = buf.getAddressValuePairs().iterator();
+		while(i.hasNext())
 		{
-			buffer += "(" + addressValuePairToString(pair) + ")";
+		
+			buffer += "(" + addressValuePairToString(i.next()) + ")";
+			if(i.hasNext())
+			{
+				buffer += ", ";
+			}
 		}
 		buffer += ">";
-		return clean(buffer);
+		return buffer;
 	}
 	
 	public static String addressValuePairToString(AddressValuePair pair)
 	{
-		String result = valueToString(pair.getAddress().getValue()) + " : ";
+		String result = valueToString(pair.getAddress().getValue()) + ": ";
 		Iterator<Parameter> i = pair.getValues().iterator();
 		while(i.hasNext())
 		{
@@ -376,371 +387,412 @@ public abstract class GraphUtility {
 	 * @param t transition that needs a label
 	 * @return label for the transition
 	 */
-	public static String getNewTransitionLabel(Transition t) {
+	public static String getNewTransitionLabel(Transition t)
+	{
 		String result = "";
 
-		if(t instanceof FlushTransition){
+		if (t instanceof FlushTransition)
+		{
 
-			if(!t.getSource().getBuffer().getAddressValuePairs().isEmpty())
+			if (!t.getSource().getBuffer().getAddressValuePairs().isEmpty())
 			{
 				AddressValuePair p = t.getSource().getBuffer().getAddressValuePairs().get(0);
-				//FIXME this is TSO specific as the whole pair
-				String s = addressValuePairToString(p);
-				return FLUSH + "(" + s + ")";
+				// FIXME this is TSO specific as the whole pair
+				return FLUSH + "(" + addressValuePairToString(p) + ")";
 			}
 
-			return FLUSH;
+			throw new RuntimeException("Found flush transition for an empty buffer!");
 		}
-		
-		if(t instanceof EarlyReadTransition){
-			String s = ((Load)t.getInstruction()).getResult().getName();
+
+		if (t instanceof EarlyReadTransition)
+		{
+			String s = addressToString(((Load) t.getInstruction()).getResult());
 			s += ASSIGN;
 			s += ((EarlyReadTransition) t).getAssignmentExpression();
 			return s;
 		}
-		
-		if(t instanceof WriteDefChainTransition){
-			WriteDefChainTransition wdcTransition = (WriteDefChainTransition) t;
-			Store store = (Store) t.getInstruction();
-			if(wdcTransition.getCopyAddress() != null && wdcTransition.getCopyValue() != null){
-				String s = "("+wdcTransition.getCopyAddress().getName()+" , "+wdcTransition.getCopyValue().getName()+")";
-				s += ASSIGN;
-				s += "("+parameterValueToString(store.getTargetAddress())+" , "+parameterValueToString(store.getValue())+")";
-				result = STORE + WS;
-				result += wdcTransition.getCopyValue().getName() + WS;
-				result += wdcTransition.getCopyAddress().getName();
-				return s + " , " + result;
-			}
-			else if (wdcTransition.getCopyValue() != null) {
-				String s = wdcTransition.getCopyValue().getName() + ASSIGN;
-				s += parameterValueToString(store.getValue());
-				result = STORE + WS;
-				result += wdcTransition.getCopyValue().getName() + WS;
-				result += parameterValueToString(store.getTargetAddress());
-				return s + " , " + result;
-			}else{
-				String s = wdcTransition.getCopyAddress().getName() + ASSIGN;
-				s += parameterValueToString(store.getTargetAddress());
-				result = STORE + WS;
-				result += parameterValueToString(store.getValue());
-				result += wdcTransition.getCopyAddress().getName();
-				return s + " , " + result;
+
+		if (t instanceof WriteDefChainTransition)
+		{
+			WriteDefChainTransition wdc = (WriteDefChainTransition) t;
+			Store store = (Store) wdc.getInstruction();
+			if (wdc.getCopyAddress() != null && wdc.getCopyValue() != null)
+			{
+				String s = addressToString(wdc.getCopyAddress()) + ASSIGN
+						+ parameterValueToString(store.getTargetAddress()) + "; " + addressToString(wdc.getCopyValue())
+						+ ASSIGN + parameterValueToString(store.getValue()) + "; " + STORE + "("
+						+ wdc.getCopyValue().getName() + ", " + wdc.getCopyAddress().getName() + ")";
+				return s;
+			} else if (wdc.getCopyValue() != null)
+			{
+				String s = addressToString(wdc.getCopyValue()) + ASSIGN + parameterValueToString(store.getValue())
+						+ "; " + STORE + "(" + wdc.getCopyValue().getName() + ", "
+						+ parameterValueToString(store.getTargetAddress()) + ")";
+				return s;
+			} else
+			{
+				String s = addressToString(wdc.getCopyAddress()) + ASSIGN
+						+ parameterValueToString(store.getTargetAddress()) + "; " + STORE + "("
+						+ parameterValueToString(store.getValue()) + ", " + wdc.getCopyAddress().getName() + ")";
+				return s;
 			}
 
 		}
+		
+		
+		// special transition done
+		// the following use normal transitions
 
-		if(t.getInstruction() == null){
+		if (t.getInstruction() == null)
+		{
 			return TODO;
 		}
 
-		EClass type = t.getInstruction().eClass();
 		Instruction instruction = t.getInstruction();
-
-		// Load
-		if (instruction instanceof Load) {
+		if (instruction instanceof Load)
+		{
 			Load instr = (Load) t.getInstruction();
-			result += instr.getResult().getName() + ASSIGN;
-			result += LOAD + " ";
-			result += parameterValueToString(instr.getAddress());
+			result += addressToString(instr.getResult()) + ASSIGN;
+			result += LOAD + WS +  "(" + parameterValueToString(instr.getAddress()) + ")";
 		}
-		// Store
-		else if (instruction instanceof Store) {
+		else if (instruction instanceof Store)
+		{
 			Store instr = (Store) t.getInstruction();
-			result += STORE + WS;
-			result += parameterValueToString(instr.getValue());
-			result += parameterValueToString(instr.getTargetAddress());
+			result += STORE + "(" + parameterValueToString(instr.getValue()) + ", "
+					+ parameterValueToString(instr.getTargetAddress()) + ")";
 		}
-		// Branch
-		else if (instruction instanceof Branch) {
-			if (t instanceof GuardedTransition) {
-				result += "[" + (((GuardedTransition) t).getCondition().replace("[", ""));
-			}else{
-				Branch br = (Branch)t.getInstruction();
-				result += BRANCH + WS + br.getDestination()+WS;
+		else if (instruction instanceof Branch)
+		{
+			if (t instanceof GuardedTransition)
+			{
+				return ((GuardedTransition) t).getCondition();
+			} else
+			{
+				return BRANCH + WS + PC_PREF + t.getTarget().getPc();
 			}
 		}
-		// GetElementPtr
-		else if (instruction instanceof GetElementPtr) {
+		else if (instruction instanceof GetElementPtr)
+		{
 			GetElementPtr instr = (GetElementPtr) t.getInstruction();
-			result += instr.getResult().getName() + ASSIGN;
-			result += type.getName() + WS;
-			result += parameterValueToString(instr.getAggregate());
-			for (int i = 0; i < instr.getIndices().size(); i++) {
+			result += addressToString(instr.getResult()) + ASSIGN;
+			result += GETELEMENENTPTR + "(";
+			result += parameterValueToString(instr.getAggregate()) + ", ";
+			for (int i = 0; i < instr.getIndices().size(); i++)
+			{
 				result += parameterValueToString(instr.getIndices().get(i));
+				if(i+1 < instr.getIndices().size())
+				{
+					result += ", ";
+				}
 			}
+			return result + ")";
 		}
-		// CmpXchg
-		else if (instruction instanceof CmpXchg) {
+		else if (instruction instanceof CmpXchg)
+		{
 
 			CmpXchg instr = (CmpXchg) t.getInstruction();
-			result += instr.getResult().getName() + ASSIGN;
+			result += addressToString(instr.getResult()) + ASSIGN;
 			result += "CAS(";
-			result += parameterValueToString(instr.getAddress()) +", ";
+			result += parameterValueToString(instr.getAddress()) + ", ";
 			result += parameterValueToString(instr.getValue()) + ", ";
 			result += parameterValueToString(instr.getNewValue()) + ")";
 		}
-		// Call
-		else if (instruction instanceof Call) {
+		else if (instruction instanceof Call)
+		{
 
 			Call instr = (Call) t.getInstruction();
-			if(instr.getResult() != null){
-				result += instr.getResult().getName() + ASSIGN;
-			}else{
-				result += VOID + WS;
-			}
-			result += type.getName() + WS;
+			if (instr.getResult() != null)
+			{
+				result += addressToString(instr.getResult()) + ASSIGN;
+			} 
+			result += CALL + WS;
 			result += parameterValueToString(instr.getFunction());
 			result += parameterListToString(instr.getPList());
 		}
-		// Alloc
-		else if (instruction instanceof Alloc) {
+		else if (instruction instanceof Alloc)
+		{
 			Alloc instr = (Alloc) t.getInstruction();
-			result += instr.getResult().getName() + ASSIGN;
+			result += addressToString(instr.getResult()) + ASSIGN;
 			result += ALLOC + WS;
-			result += typeUseToString(instr.getType());
+			result += clean(typeUseToString(instr.getType()));
 		}
-		// Arithmetic Operations
-		else if (instruction instanceof ArithmeticOperation) {
+		else if (instruction instanceof ArithmeticOperation)
+		{
 			ArithmeticOperation instr = (ArithmeticOperation) t.getInstruction();
-			result += instr.getResult().getName() + ASSIGN;
+			result += addressToString(instr.getResult()) + ASSIGN;
+			
 			String operation = instr.getOperation();
 			result += valueToString(instr.getValue1()) + WS;
-			if (operation.equals("add") || operation.equals("fadd")) {
+			if (operation.equals("add") || operation.equals("fadd"))
+			{
 				result += "+ ";
-			} else if (operation.equals("sub") || operation.equals("fsub")) {
+			} else if (operation.equals("sub") || operation.equals("fsub"))
+			{
 				result += "- ";
-			} else if (operation.equals("mul") || operation.equals("fmul")) {
+			} else if (operation.equals("mul") || operation.equals("fmul"))
+			{
 				result += "* ";
-			} else if (operation.equals("udiv") || operation.equals("sdiv") || operation.equals("fdiv")) {
+			} else if (operation.equals("udiv") || operation.equals("sdiv") || operation.equals("fdiv"))
+			{
 				result += ": ";
-			} else if (operation.equals("urem") || operation.equals("srem") || operation.equals("frem")) {
+			} else if (operation.equals("urem") || operation.equals("srem") || operation.equals("frem"))
+			{
 				result += "% ";
 			}
 			result += valueToString(instr.getValue2());
 		}
-		// Logical Operations
-		else if (instruction instanceof LogicOperation) {
+		else if (instruction instanceof LogicOperation)
+		{
 			LogicOperation instr = (LogicOperation) t.getInstruction();
-			result += instr.getResult().getName() + ASSIGN;
+			result += addressToString(instr.getResult()) + ASSIGN;
 			String operation = instr.getOperation();
 			result += valueToString(instr.getValue1()) + WS;
-			if (operation.equals("shl")) {
+			if (operation.equals("shl"))
+			{
 				result += "<< ";
-			} else if (operation.equals("lshr")) {
+			} else if (operation.equals("lshr"))
+			{
 				result += ">>[L] ";
-			} else if (operation.equals("ashr")) {
+			} else if (operation.equals("ashr"))
+			{
 				result += ">>[A] ";
-			} else if (operation.equals("and")) {
+			} else if (operation.equals("and"))
+			{
 				result += "& ";
-			} else if (operation.equals("or")) {
+			} else if (operation.equals("or"))
+			{
 				result += "| ";
-			} else if (operation.equals("xor")) {
+			} else if (operation.equals("xor"))
+			{
 				result += "^ ";
 			}
 			result += valueToString(instr.getValue2());
 		}
 		// Compare
-		else if (instruction instanceof Compare) {
+		else if (instruction instanceof Compare)
+		{
 			Compare instr = (Compare) t.getInstruction();
-			result += instr.getResult().getName() + ASSIGN + "(";
+			result += addressToString(instr.getResult()) + ASSIGN + "(";
 			String compare = instr.getCond();
-			if (compare.equals(FALSE)) {
+			if (compare.equals(FALSE))
+			{
 				result += FALSE;
 				return result;
-			} else if (compare.equals(TRUE)) {
+			} else if (compare.equals(TRUE))
+			{
 				result += TRUE;
 				return result;
 			}
 			result += valueToString(instr.getOperand1()) + WS;
-			if (compare.equals("eq")) {
+			if (compare.equals("eq"))
+			{
 				result += "== ";
-			} else if (compare.equals("ne")) {
+			} else if (compare.equals("ne"))
+			{
 				result += "!= ";
-			} else if (compare.equals("ugt") || compare.equals("sgt")) {
+			} else if (compare.equals("ugt") || compare.equals("sgt"))
+			{
 				result += "> ";
-			} else if (compare.equals("uge") || compare.equals("sge")) {
+			} else if (compare.equals("uge") || compare.equals("sge"))
+			{
 				result += ">= ";
-			} else if (compare.equals("ult") || compare.equals("slt")) {
+			} else if (compare.equals("ult") || compare.equals("slt"))
+			{
 				result += "< ";
-			} else if (compare.equals("ule") || compare.equals("sle")) {
+			} else if (compare.equals("ule") || compare.equals("sle"))
+			{
 				result += "<= ";
-			} else if (compare.equals("oeq")) {
+			} else if (compare.equals("oeq"))
+			{
 				result += "=[o] ";
-			} else if (compare.equals("ogt")) {
+			} else if (compare.equals("ogt"))
+			{
 				result += ">[o] ";
-			} else if (compare.equals("oge")) {
+			} else if (compare.equals("oge"))
+			{
 				result += ">=[o] ";
-			} else if (compare.equals("olt")) {
+			} else if (compare.equals("olt"))
+			{
 				result += "<[o] ";
-			} else if (compare.equals("ole")) {
+			} else if (compare.equals("ole"))
+			{
 				result += "<=[o] ";
-			} else if (compare.equals("one")) {
+			} else if (compare.equals("one"))
+			{
 				result += "!=[o] ";
-			} else if (compare.equals("ueq")) {
+			} else if (compare.equals("ueq"))
+			{
 				result += "=[u] ";
-			} else if (compare.equals("ugt")) {
+			} else if (compare.equals("ugt"))
+			{
 				result += ">[u] ";
-			} else if (compare.equals("uge")) {
+			} else if (compare.equals("uge"))
+			{
 				result += ">=[u] ";
-			} else if (compare.equals("ult")) {
+			} else if (compare.equals("ult"))
+			{
 				result += "<[u] ";
-			} else if (compare.equals("ule")) {
+			} else if (compare.equals("ule"))
+			{
 				result += "<=[u] ";
-			} else if (compare.equals("une")) {
+			} else if (compare.equals("une"))
+			{
 				result += "!=[u] ";
-			} else if (compare.equals("ord")) {
+			} else if (compare.equals("ord"))
+			{
 				result += "orderd ";
-			} else if (compare.equals("uno")) {
+			} else if (compare.equals("uno"))
+			{
 				result += "not orderd ";
 			}
 			result += valueToString(instr.getOperand2()) + ")";
 		}
-		// Return
 		else if (instruction instanceof Return)
 		{
-			result += RETURN + WS;
+			result += RETURN;
 			EObject returnValue = ((Return) t.getInstruction()).getValue();
 			Value value = null;
 			if (returnValue instanceof Parameter)
 			{
-				value = ((Parameter)returnValue).getValue();
-			}
-			else if (returnValue instanceof PrimitiveValue)
+				value = ((Parameter) returnValue).getValue();
+			} else if (returnValue instanceof PrimitiveValue)
 			{
 				value = (PrimitiveValue) returnValue;
-			} 
-			
+			}
+
 			if (value != null)
 			{
-				result += valueToString(value);
-			} else
-			{
-				result += WS + VOID;
+				result += WS + valueToString(value) + WS;
 			}
+			return result;
 		}
-		// Cast
-		else if (instruction instanceof Cast) {
+		else if (instruction instanceof Cast)
+		{
 			Cast instr = (Cast) t.getInstruction();
-			result += (instr.getResult().getName() + ASSIGN + "(" + typeUseToString((TypeUse)instr.getFrom()) + "->" + typeUseToString(instr.getTo()) + ") " + valueToString(instr.getValue()));
+			result += (addressToString(instr.getResult()) + ASSIGN + "(" 
+			//+ typeUseToString((TypeUse) instr.getFrom()) + "->"
+					+ clean(typeUseToString(instr.getTo())) + ") " + valueToString(instr.getValue()));
 		}
-		// Invoke
-		else if (instruction instanceof Invoke) {
-			result += type.getName();
+		else if (instruction instanceof Invoke)
+		{
 			Invoke instr = (Invoke) t.getInstruction();
-			result += instr.getName().getName();
-			result += parameterListToString(instr.getPList());
+			result += INVOKE + WS + addressToString(instr.getName()) + parameterListToString(instr.getPList());
+			return result;
 		}
 		// Fence
-		else if (instruction instanceof Fence) {
-			result += type.getName();
-//			Fence instr = (Fence) t.getInstruction();
-//			result += instr.getOrdering();
+		else if (instruction instanceof Fence)
+		{
+			return FENCE;
+			// Fence instr = (Fence) t.getInstruction();
+			// result += instr.getOrdering();
 		}
 		// AtomicRMW
-		else if (instruction instanceof AtomicRMW) {
-			result += "atomic( ";
+		else if (instruction instanceof AtomicRMW)
+		{
+			result += "atomicRMW( ";
 			AtomicRMW instr = (AtomicRMW) t.getInstruction();
 			String operation = instr.getOperation();
-			if (operation.equals("xchg")) {
+			if (operation.equals("xchg"))
+			{
 				result += parameterValueToString(instr.getAddress());
-				result += " = ";
+				result += " <-> ";
 				result += parameterValueToString(instr.getArgument());
-			} else if (operation.equals("add")) {
+			} else if (operation.equals("add"))
+			{
 				result += parameterValueToString(instr.getAddress());
 				result += " = ";
 				result += parameterValueToString(instr.getAddress());
 				result += " + ";
 				result += parameterValueToString(instr.getArgument());
-			} else if (operation.equals("sub")) {
+			} else if (operation.equals("sub"))
+			{
 				result += parameterValueToString(instr.getAddress());
 				result += " = ";
 				result += parameterValueToString(instr.getAddress());
 				result += " - ";
 				result += parameterValueToString(instr.getArgument());
-			} else if (operation.equals("and")) {
+			} else if (operation.equals("and"))
+			{
 				result += parameterValueToString(instr.getAddress());
 				result += " = ";
 				result += parameterValueToString(instr.getAddress());
-				result += " & ";
+				result += WS+ WEDGE + WS;
 				result += parameterValueToString(instr.getArgument());
-			} else if (operation.equals("nand")) {
+			} else if (operation.equals("nand"))
+			{
 				result += parameterValueToString(instr.getAddress());
 				result += " = ";
 				result += parameterValueToString(instr.getAddress());
 				result += " !& ";
 				result += parameterValueToString(instr.getArgument());
-			} else if (operation.equals("or")) {
+			} else if (operation.equals("or"))
+			{
 				result += parameterValueToString(instr.getAddress());
 				result += " = ";
 				result += parameterValueToString(instr.getAddress());
-				result += " | ";
+				result += WS + VEE + WS;
 				result += parameterValueToString(instr.getArgument());
-			} else if (operation.equals("xor")) {
+			} else if (operation.equals("xor"))
+			{
 				result += parameterValueToString(instr.getAddress());
 				result += " = ";
 				result += parameterValueToString(instr.getAddress());
-				result += " ^ ";
+				result += " xor ";
 				result += parameterValueToString(instr.getArgument());
-			} else if (operation.equals("max") || operation.equals("umax")) {
+			} else if (operation.equals("max") || operation.equals("umax"))
+			{
 				result += parameterValueToString(instr.getAddress());
-				result += " = ";
+				result += " = max(";
 				result += parameterValueToString(instr.getAddress());
-				result += " > ";
+				result += ", ";
 				result += parameterValueToString(instr.getArgument());
-				result += " ? ";
+				result += ") ";
+			} else if (operation.equals("min") || operation.equals("umin"))
+			{
 				result += parameterValueToString(instr.getAddress());
-				result += " : ";
+				result += " = min(";
+				result += parameterValueToString(instr.getAddress());
+				result += ", ";
 				result += parameterValueToString(instr.getArgument());
-			} else if (operation.equals("min") || operation.equals("umin")) {
-				result += parameterValueToString(instr.getAddress());
-				result += " = ";
-				result += parameterValueToString(instr.getAddress());
-				result += " < ";
-				result += parameterValueToString(instr.getArgument());
-				result += " ? ";
-				result += parameterValueToString(instr.getAddress());
-				result += " : ";
-				result += parameterValueToString(instr.getArgument());
+				result += ")";
 			}
 			result += " )";
-			//phi
 		} else if (instruction instanceof Phi)
 		{
 			Phi phiInstruction = (Phi) t.getInstruction();
-			result = phiInstruction.getResult().getName().replace("%", "");
-			result += " := " + PHI +" ";
+			result = addressToString(phiInstruction.getResult());
+			result += " := " + PHI + " ";
 
 			FunctionBody body = null;
 			EObject o = phiInstruction.eContainer().eContainer();
-			if(o instanceof FunctionBody)
+			if (o instanceof FunctionBody)
 			{
 				body = (FunctionBody) o;
-			}
-			else
+			} else
 			{
 				throw new RuntimeException("Could not resolve FunctionBody of phi instruction");
 			}
-			
+
 			Iterator<PhiCase> i = phiInstruction.getCases().iterator();
 			while (i.hasNext())
 			{
 				PhiCase phiCase = i.next();
 				String caseLabel = phiCase.getLabel().replace("%", "");
 				int sourcePC = -1;
-				
-				
-				for(BasicBlock block : body.getBlocks())
+
+				for (BasicBlock block : body.getBlocks())
 				{
-					if(caseLabel.equals(block.getLabel()))
+					if (caseLabel.equals(block.getLabel()))
 					{
-						//get last instruction because it is the one jumping to 
-						//the block containing the phi instruction
+						// get last instruction because it is the one jumping to
+						// the block containing the phi instruction
 						int size = block.getInstructions().size();
-						Instruction last = block.getInstructions().get(size-1);
-						sourcePC = getPcOfInstruction(last, gatherInstructionsInCodeOrder((FunctionDefinition) body.eContainer()));
+						Instruction last = block.getInstructions().get(size - 1);
+						sourcePC = getPcOfInstruction(last,
+								gatherInstructionsInCodeOrder((FunctionDefinition) body.eContainer()));
 					}
 				}
-				
+
 				// we use the PC instead of the original label, since we don't
 				// have the labels in the store buffer graph anymore
 				result += "[" + valueToString(phiCase.getValue()) + ", " + PC_PREF + sourcePC + "]";
@@ -754,7 +806,7 @@ public abstract class GraphUtility {
 		// not-implemented
 		else
 		{
-			result += type.getName();
+			result += instruction.toString();
 		}
 		return result;
 	}
@@ -881,13 +933,25 @@ public abstract class GraphUtility {
 		}
 		else return null;
 	}
+	
+	private static String addressToString(Address adr)
+	{
+		return clean(adr.getName());
+	}
+	
+	
+	public static String valueToString(Value value)
+	{
+		String result = GraphUtility.valueToRawString(value);
+		return clean(result);
+	}
 
 	/**
 	 * Add a value to the String
 	 * @param value
 	 * @return the concatenated String
 	 */
-	public static String valueToString(Value value)
+	private static String valueToRawString(Value value)
 	{
 		String result = "";
 

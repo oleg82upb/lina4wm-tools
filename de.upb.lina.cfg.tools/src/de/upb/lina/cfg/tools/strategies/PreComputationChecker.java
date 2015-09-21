@@ -15,6 +15,7 @@ import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.tools.CFGActivator;
 import de.upb.lina.cfg.tools.CFGConstants;
+import de.upb.lina.cfg.tools.GraphUtility;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.ArithmeticOperation;
@@ -266,9 +267,8 @@ public class PreComputationChecker {
 
 	private boolean isLoopWithoutFence(Transition t, List<Transition> explored, Transition write) {
 		// fence found
-		if (t.getInstruction() instanceof Fence
-				|| t.getInstruction() instanceof CmpXchg
-				|| t.getInstruction() instanceof AtomicRMW) {
+		if(GraphUtility.isSynch(t.getInstruction()))
+		{
 			return false;
 		}
 		// loop without fence found
