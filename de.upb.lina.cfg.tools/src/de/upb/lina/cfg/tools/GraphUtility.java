@@ -254,35 +254,6 @@ public abstract class GraphUtility {
 		return result;
 	}
 	
-	
-	/**
-	 * @param cfgs
-	 * @return "DIV" or "MUL" if CFG has multipication or divisions and null, otherwise.
-	 */
-	public static String hasMultiplicationOrDivision(List<ControlFlowDiagram> cfgs)
-	{
-		for (ControlFlowDiagram cfg : cfgs)
-		{
-			for (Transition t : cfg.getTransitions())
-			{
-				if (t.getInstruction() != null && t.getInstruction() instanceof ArithmeticOperation)
-				{
-					ArithmeticOperation op = (ArithmeticOperation) t.getInstruction();
-					String operation = op.getOperation();
-					if (operation.equalsIgnoreCase("udiv") || operation.equalsIgnoreCase("sdiv"))
-					{
-						return "DIV";
-					}
-					if (operation.equalsIgnoreCase("mul"))
-					{
-						return "MUL";
-					}
-				}
-			}
-		}
-		return null;
-	}
-	
 	/**
 	 * Returns the pc of the given instruction in the given list of all instructions
 	 * 

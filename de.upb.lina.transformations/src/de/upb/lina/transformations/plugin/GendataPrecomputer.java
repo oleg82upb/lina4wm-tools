@@ -152,9 +152,8 @@ public class GendataPrecomputer {
 			//phi mappings
 			computePhiMapping();
 			
-			//KIV transformation basis
-			addBasis();
-			checkForMulOrDiv();
+			//KIVSpecificKeys
+			computeKIVSpecificKeys();
 
 
 		}catch(ClassCastException ex){
@@ -162,18 +161,61 @@ public class GendataPrecomputer {
 		}
 	}
 
-	private void addBasis() {
-		if(basis == Constants.INT){
+	private void computeKIVSpecificKeys() 
+	{
+		//compute basis
+		if(basis == Constants.INT)
+		{
 			helperModel.getTransformationSpecificKeys().add("INT");
-		}else if(basis == Constants.NAT){
+		}
+		else if(basis == Constants.NAT)
+		{
 			helperModel.getTransformationSpecificKeys().add("NAT");
 		}
-	}
-	
-	private void checkForMulOrDiv(){
-		String s = GraphUtility.hasMultiplicationOrDivision(cfgs);
+		
+		//check for mul or div
+		String s = null;
+		for (ControlFlowDiagram cfg : cfgs)
+		{
+			for (Transition t : cfg.getTransitions())
+			{
+				if (t.getInstruction() != null && t.getInstruction() instanceof ArithmeticOperation)
+				{
+					ArithmeticOperation op = (ArithmeticOperation) t.getInstruction();
+					String operation = op.getOperation();
+					if (operation.equalsIgnoreCase("udiv") || operation.equalsIgnoreCase("sdiv"))
+					{
+						s = "DIV";
+					}
+					else if (operation.equalsIgnoreCase("mul"))
+					{
+						s = "MUL";
+					}
+				}
+			}
+		}
+				
 		if(s != null)
 			helperModel.getTransformationSpecificKeys().add(s);
+		
+		// checks if a function with a parameter exists
+		boolean hasParams = false;
+		for(ControlFlowDiagram cfg : cfgs)
+		{
+			EList<AddressMapping> mappings = helperModel.getFilteredAddresses(Constants.FUNC_PARAMS+cfg.getName());
+			if(mappings.size() > 1)//one element in the list of mappings is always the dummy-returnmapping
+			{
+				hasParams = true;
+				
+			}
+			if(mappings.size() == 1 && mappings.get(0).getName()!="returnvalue")
+			{
+				hasParams = true;
+			}
+		}
+		if(hasParams)
+			helperModel.getTransformationSpecificKeys().add("INPUT_NEEDED");
+		
 	}
 
 	private void computePhiMapping()
@@ -292,6 +334,8 @@ public class GendataPrecomputer {
 
 	private void computeFilteredAddresses(){
 		
+		List<AddressMapping> returnMappings = new ArrayList<AddressMapping>();
+		
 		for(ControlFlowDiagram cfg: cfgs){
 			if(cfg.getStart() != null && !cfg.getStart().getOutgoing().isEmpty()){
 				EObject motherObject = cfg.getStart().getOutgoing().get(0).getInstruction().eContainer();
@@ -309,7 +353,8 @@ public class GendataPrecomputer {
 							returnAddress.setName("returnvalue");
 							AddressMapping returnMapping = createAddressMapping(returnAddress, "returnvalue");
 							returnMapping.setGeneratorData(helperModel);
-							returnMapping.setType("ref");
+							setType(returnMapping, ret.getValue());
+							returnMappings.add(returnMapping);
 							helperModel.getFilteredAddresses(Constants.FUNC_PARAMS+cfg.getName()).add(returnMapping);
 						}
 					}
@@ -344,6 +389,24 @@ public class GendataPrecomputer {
 			}
 
 		}
+		
+		// set Type of all returnMapings to the same value
+		boolean refExists = false;
+		for(AddressMapping mapping : returnMappings){
+			if(mapping.getType().equals("ref")){
+				refExists = true;
+			}
+		}
+		if(refExists){
+			for(AddressMapping mapping : returnMappings){
+				mapping.setType("ref");
+			}
+		}else{
+			for(AddressMapping mapping : returnMappings){
+				mapping.setType(getBasis());
+			}
+		}
+		
 		computeGlobalLists();
 	}
 	
@@ -927,64 +990,54 @@ public class GendataPrecomputer {
 		
 		return correspondingMapping;
 	}
-	
-	private void setType(AddressMapping addressMapping, TypeUse type) {
+
+	private void setType(AddressMapping addressMapping, EObject object) {
+		
 		if (addressMapping == null)
 			return;
-		String t = "";
-		if (type.getPointer() != null) {
-			t = "ref";
-		} else {
-			if (basis == Constants.INT) {
-				t = "int";
+
+		String t = "ref";
+
+		if (object instanceof TypeUse) {
+			
+			if (((TypeUse) object).getPointer() != null) {
+				t = "ref";
 			} else {
-				t = "nat";
+				t = getBasis();
 			}
 		}
+
+		else if (object instanceof Parameter) {
+			setType(addressMapping, ((Parameter) object).getType());
+		}
+
+		else if (object instanceof PrimitiveValue) {
+			PrimitiveValue val = (PrimitiveValue) object;
+			if (val.getValue().equals("void") || val.getValue().equals("true")|| val.getValue().equals("false")) {
+				t = getBasis();
+			}
+		}
+
+		else if (object instanceof Address) {
+			Address address = (Address) object;
+			AddressMapping m = getMappingForAddress(address, helperModel.getAddressMappings());
+			if (m != null && m.getType() != null && m.getType().equals("ref")) {
+				t = "ref";
+			} else {
+				t = getBasis();
+			}
+		}
+		
 		if (addressMapping.getType() == null || !addressMapping.getType().equals("ref"))
 			addressMapping.setType(t);
 	}
-	
-	private void setType(AddressMapping addressMapping, EObject type) 
-	{
-		if (addressMapping == null)
-			return;
-		if (type instanceof TypeUse) 
-		{
-			if (addressMapping.getType() == null || !addressMapping.getType().equals("ref"))
-				setType(addressMapping, (TypeUse) type);
-		} 
-		else if (type instanceof Aggregate_Type) 
-		{
-			addressMapping.setType("ref");
-		} 
-		else if (type instanceof Parameter) 
-		{
-			setType(addressMapping, ((Parameter) type).getType());
-		} 
-		else if(addressMapping.getType() == null)
-		{
-			addressMapping.setType("ref");
-		}
-	}
 
-	private void setType(AddressMapping addressMapping, Address address) {
-		if (addressMapping == null)
-			return;
-
-		String t = "";
-
-		AddressMapping m = getMappingForAddress(address, helperModel.getAddressMappings());
-		if (m != null && m.getType() != null && m.getType().equals("ref")) {
-			t = "ref";
-		} else if (basis == Constants.INT) {
-			t = "int";
+	private String getBasis() {
+		if (basis == Constants.INT) {
+			return "int";
 		} else {
-			t = "nat";
+			return "nat";
 		}
-
-		if (addressMapping.getType() == null || !addressMapping.getType().equals("ref"))
-			addressMapping.setType(t);
 	}
 
 	/**

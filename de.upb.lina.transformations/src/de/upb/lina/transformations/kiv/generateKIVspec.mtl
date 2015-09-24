@@ -49,27 +49,46 @@ data specification
 end data specification
 [/file]
 
+[for(key : String | genData.transformationSpecificKeys)]
+[if(key.equalsIgnoreCase('INPUT_NEEDED'))]
+[file ('input.utf8', false, 'UTF-8')]
+data specification
+	using [basis(genData)/]ref
+
+	input = [for(cfg : ControlFlowDiagram | genData.cfgs->select(genData.getFilteredAddresses('func-params:'+name)->size() > 1)) separator('| ')] mk[i/]( [for(am : AddressMapping | genData.getFilteredAddresses('func-params:' + cfg.name))]
+[if(am.name.equalsIgnoreCase('returnvalue')._not())]. .[am.name/]: [am.type/]; [/if][/for]) with [cfg.name/]? [/for];
+	variables
+		inp : input;
+end data specification
+[/file]
+[/if][/for]
+
 [file ('COP.utf8', false, 'UTF-8')]
 enrich 	[basis(genData)/]ref-memory,
 		localstate,
-		cindex with
+		cindex[if(input(genData))],
+		input[/if] with 
 
 	[generateGlobalConstants(genData)/]
 	functions
-		INVOP : IJ → [basis(genData)/] ×  memory ×  Localstate ×  memory ×  Localstate → bool;
+		INVOP : IJ → [if(input(genData))]input[else][basis(genData)/][/if] ×  memory ×  Localstate ×  memory ×  Localstate → bool;
 		COP : CJ → memory × Localstate × memory × Localstate → bool;
-		RETOP : RJ → memory × Localstate × memory × Localstate × ref → bool;
+		RETOP : RJ → memory × Localstate × memory × Localstate × [genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->first().type/] → bool;
 	predicates
 		LSInit : Localstate × PID;
 		GSInit : memory;
 	variables
-		invop : [basis(genData)/] × memory × Localstate × memory × Localstate → bool;
+		invop : [if(input(genData))]input[else][basis(genData)/][/if] × memory × Localstate × memory × Localstate → bool;
 		cop : memory × Localstate × memory × Localstate → bool;
-		retop : memory × Localstate × memory × Localstate × ref → bool;
+		retop : memory × Localstate × memory × Localstate × [genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->first().type/] → bool;
 		mem' : memory;
 		ls' : Localstate;
-		elem : [basis(genData)/];
-		return : ref;
+[if(input(genData)._not())]
+		inp : [basis(genData)/];
+[/if]
+[if(genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->size()>0)]
+		return : [genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->first().type/];
+[/if]
 
 	axioms
 
@@ -78,7 +97,7 @@ enrich 	[basis(genData)/]ref-memory,
 
 	[for (cfg : ControlFlowDiagram | genData.cfgs)] 
 ;; 	[generateCfgLabel(genData, cfg)/] reflects function [cfg.name/]
-	[generateCfgLabel(genData, cfg)/]ini : ⊦ INVOP([generateCfgLabel(genData, cfg)/]ini)(elem, mem, ls, mem', ls') ↔ ls .pc = N ∧ ls' = ls .pc:= [generateStartPC(genData, cfg)/] ∧ mem' = mem;
+	[generateCfgLabel(genData, cfg)/]ini : ⊦ INVOP([generateCfgLabel(genData, cfg)/]ini)(inp, mem, ls, mem', ls') ↔ ls .pc = N [if(input(genData))][if(genData.getFilteredAddresses('func-params:'+cfg.name)->size()>1)]∧ [cfg.name/]?(inp) [/if][/if]∧ ls' = ls .pc:= [generateStartPC(genData, cfg)/] [generateFunctionParameter(cfg, genData)/]∧ mem' = mem; 
 	used for : s, ls;
 
 	[/for]
@@ -90,7 +109,7 @@ enrich 	[basis(genData)/]ref-memory,
 	[/for]
 	[for (label : TransitionLabel | genData.transitionLabels->select(transition.instruction.oclIsUndefined()._not()._and(transition.instruction.eClass() = Return)))]
 ;;	[label.transition.createComment()/]
-	[label.name/]ret : ⊦ RETOP([label.name/]ret)(mem, ls, mem', ls', return) ↔ ls .pc = [genData.generatePrevPC(genData, label.transition)/] ∧ ls' = ls .pc:= N ∧ mem' = mem;
+	[label.name/]ret : ⊦ RETOP([label.name/]ret)(mem, ls, mem', ls', return) ↔ ls .pc = [genData.generatePrevPC(genData, label.transition)/] ∧ ls' = ls .pc:= N[generateReturn(genData, label.transition.instruction.oclAsType(Return))/] ∧ mem' = mem;
 	used for : s, ls;
 	
 	[/for]
@@ -98,6 +117,13 @@ end enrich
 		
 [/file]
 
+[/template]
+
+[query private input(genData : GeneratorData) : Boolean = 
+if genData.transformationSpecificKeys->indexOf('INPUT_NEEDED').oclIsUndefined() then false else true endif/]
+
+[template private generateFunctionParameter(cfg: ControlFlowDiagram, genData : GeneratorData)]
+[for(am : AddressMapping | genData.getFilteredAddresses('func-params:' + cfg.name))][if(am.name.equalsIgnoreCase('returnvalue')._not())].[am.name/]:= inp .[am.name/] [/if][/for]
 [/template]
 
 [template private createComment(t : Transition)]
@@ -185,6 +211,12 @@ endif
 endif
 endif
 /]
+
+[comment === Return ====/]
+[template private generateReturn(genData : GeneratorData, ret : Return)]
+[if(ret.value.oclIsTypeOf(Parameter))] ∧ return = [if(genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->first().type.equalsIgnoreCase('ref'))][castToRef(ret.value.oclAsType(Parameter).value, genData)/][else][possiblyAddLS(ret.value.oclAsType(Parameter).value, genData)/][ret.value.oclAsType(Parameter).value.valueToString(genData)/][/if][else]
+[if(ret.value.oclAsType(PrimitiveValue).value.equalsIgnoreCase('void')._not())] ∧ return = [ret.value.oclAsType(PrimitiveValue).valueToString(genData)/][/if][/if]
+[/template]
 
 [comment ====== Instructions ======/]
 [template private genLsPart(e : Instruction, t: Transition, genData : GeneratorData)]
