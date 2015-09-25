@@ -168,7 +168,7 @@ constants
 [comment ====== Transitions ======/]
 [template private transformTransition(t: Transition, genData: GeneratorData)]
 [let pc : String = generateNextPC(genData, t)]
-[if((t.instruction.oclIsUndefined() or t.instruction.oclIsTypeOf(CompareInt) or t.instruction.oclIsTypeOf(CmpXchg))._not())]ls' = ls .pc:= [pc/][/if][if (t.instruction.oclIsUndefined()._not())][t.instruction.genLsPart(t,genData)/][/if][if(t.instruction.oclIsTypeOf(CmpXchg)._not())][t.genPhiInstruction(genData)/][/if][t.instruction.genMemPart(t,genData)/][/let]
+[if((t.instruction.oclIsUndefined() or t.instruction.oclIsKindOf(Select) or t.instruction.oclIsTypeOf(CompareInt) or t.instruction.oclIsTypeOf(CmpXchg))._not())]ls' = ls .pc:= [pc/][/if][if (t.instruction.oclIsUndefined()._not())][t.instruction.genLsPart(t,genData)/][/if][if(t.instruction.oclIsTypeOf(CmpXchg)._not())][t.genPhiInstruction(genData)/][/if][t.instruction.genMemPart(t,genData)/][/let]
 [/template]
 
 [comment === WriteDefChainTransition ====/]
@@ -290,12 +290,14 @@ endif
 [/template]
 
 [template private genMemPart(e: AtomicRMW, t: Transition, genData : GeneratorData)]
- ∧ [let adr : String = e.address.value.castFromRef(genData)][let arg : String = e.argument.value.valueToString(genData)][let res : String = e.result.addressToString(genData)]
-[if(e.operation.equalsIgnoreCase('xchg'))]mem' = mem['[ '/][adr/], [e.argument.value.castToRef(genData)/][']'/][else]
-[if(e.operation.equalsIgnoreCase('add'))]mem' = mem['[ '/][adr/], ⌜(mem['['/][adr/][']'/] .v) + [possiblyAddLS(e.argument.value, genData)/][arg/]⌝[']'/][else]
-[if(e.operation.equalsIgnoreCase('sub'))]mem' = mem['[ '/][adr/], ⌜(mem['['/][adr/][']'/] .v) - [possiblyAddLS(e.argument.value, genData)/][arg/]⌝[']'/][else]
-[if(e.operation.equalsIgnoreCase('max')._or(e.operation.equalsIgnoreCase('umax')))]([adr/] > [e.argument.value.castFromRef(genData)/] ⊃ mem' = mem ; mem' = mem['[ '/][adr/], [e.argument.value.castToRef(genData)/][']'/])[else]
-[if(e.operation.equalsIgnoreCase('min')._or(e.operation.equalsIgnoreCase('umin')))]([adr/] < [e.argument.value.castFromRef(genData)/] ⊃ mem' = mem ; mem' = mem['[ '/][adr/], [e.argument.value.castToRef(genData)/][']'/])[/if][/if][/if][/if][/if][/let][/let][/let]
+[let adr : String = e.address.value.castFromRef(genData)][let arg : String = e.argument.value.valueToString(genData)][let res : String = e.result.addressToString(genData)]
+[if(e.operation.equalsIgnoreCase('xchg'))] ∧ mem' = mem['[ '/][adr/], [e.argument.value.castToRef(genData)/][']'/][else]
+[if(e.operation.equalsIgnoreCase('add'))] ∧ mem' = mem['[ '/][adr/], ⌜(mem['['/][adr/][']'/] .v) + [possiblyAddLS(e.argument.value, genData)/][arg/]⌝[']'/][else]
+[if(e.operation.equalsIgnoreCase('sub'))] ∧ mem' = mem['[ '/][adr/], ⌜(mem['['/][adr/][']'/] .v) - [possiblyAddLS(e.argument.value, genData)/][arg/]⌝[']'/][else]
+[if(e.operation.equalsIgnoreCase('max')._or(e.operation.equalsIgnoreCase('umax')))] ∧ ([adr/] > [e.argument.value.castFromRef(genData)/] ⊃ mem' = mem ; mem' = mem['[ '/][adr/], [e.argument.value.castToRef(genData)/][']'/])[else]
+[if(e.operation.equalsIgnoreCase('min')._or(e.operation.equalsIgnoreCase('umin')))] ∧ ([adr/] < [e.argument.value.castFromRef(genData)/] ⊃ mem' = mem ; mem' = mem['[ '/][adr/], [e.argument.value.castToRef(genData)/][']'/])[else]
+;; unsupported operation
+[/if][/if][/if][/if][/if][/let][/let][/let]
 [/template]
 
 [template private genMemPart(e: Branch, t: Transition, genData : GeneratorData)]
@@ -321,6 +323,12 @@ endif
 [for (a: Address | amRes.adresses)]
 [if (result = a)]
 [if (amRes.type.equalsIgnoreCase(genData.basis()) and am.type.equalsIgnoreCase('ref'))][v.castFromRef(genData)/][else][possiblyAddLS(v, genData)/][v.valueToString(genData)/][/if][/if][/for][/for][/if][/for][/for][/if]
+[/template]
+
+[template private genLsPart(e : Select, t : Transition, genData : GeneratorData)]
+[let pc : String = generateNextPC(genData, t)]
+([possiblyAddLS(e.condition.value, genData)/][e.condition.value.valueToString(genData)/] = 1 ⊃ ls' = ls .pc:= [pc/] .[e.result.addressToString(genData)/]:= [possiblyAddLS(e.trueValue.value, genData)/][e.trueValue.value.valueToString(genData)/] ; ls' = ls .pc:= [pc/] .[e.result.addressToString(genData)/]:= [possiblyAddLS(e.elseValue.value, genData)/][e.elseValue.value.valueToString(genData)/])
+[/let]
 [/template]
 
 [comment ====== General Calls ======/]
