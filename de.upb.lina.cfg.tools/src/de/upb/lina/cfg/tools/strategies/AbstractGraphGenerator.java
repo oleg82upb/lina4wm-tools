@@ -36,6 +36,7 @@ public abstract class AbstractGraphGenerator implements IGraphGenerator
 		this.function = function;
 	}
 	
+	public abstract int getMemoryModel();
 	
 	public ControlFlowDiagram createGraph()
 	{
@@ -48,6 +49,7 @@ public abstract class AbstractGraphGenerator implements IGraphGenerator
 		
 		this.graph = ControlflowFactory.eINSTANCE.createControlFlowDiagram();
 		this.graph.setName(this.function.getAddress().getName());
+		this.graph.setMemoryModel(this.getMemoryModel());
 
 		// setup first node
 		ControlFlowLocation first = createControlFlowLocation(0, ControlflowFactory.eINSTANCE.createStoreBuffer());
@@ -104,10 +106,7 @@ public abstract class AbstractGraphGenerator implements IGraphGenerator
 	 * @param buffer
 	 * @return ControlFlowLocation representing pc and buffer value or null if there exists none
 	 */
-	protected ControlFlowLocation getLocationByPcAndBuffer(int pc, StoreBuffer buffer)
-	{
-		return GraphUtility.getLocationRepresentedBy(this.graph.getLocations(), pc, buffer);
-	}
+	protected abstract ControlFlowLocation getLocationByPcAndBuffer(int pc, StoreBuffer buffer);
 
 	
 	/**Overwrite this method to add special treatment of transitions, e.g., for read, write, atomicRmw instructions.

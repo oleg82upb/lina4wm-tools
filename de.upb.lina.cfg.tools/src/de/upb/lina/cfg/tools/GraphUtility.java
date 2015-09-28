@@ -1,6 +1,7 @@
 package de.upb.lina.cfg.tools;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -194,9 +195,8 @@ public abstract class GraphUtility {
 	 * @param buffer
 	 * @return true if location is represented by the given pc and store buffer combination
 	 */
-	//FIXME this check depends on the chosen semantics. right now, it only works for SC and TSO
-	public static boolean isRepresentedBy(ControlFlowLocation l, int pc, StoreBuffer buffer){
-		return (bufferToString(l).equalsIgnoreCase(bufferToString(buffer, pc)));
+	public static boolean isRepresentedBy(ControlFlowLocation l, int pc, StoreBuffer buffer, int memoryModel){
+		return (bufferToString(l, memoryModel).equalsIgnoreCase(bufferToString(buffer, pc, memoryModel)));
 	}
 	
 	/**
@@ -205,8 +205,8 @@ public abstract class GraphUtility {
 	 * @param location
 	 * @return
 	 */
-	public static String bufferToString(ControlFlowLocation location){
-		return bufferToString(location.getBuffer(), location.getPc());
+	public static String bufferToString(ControlFlowLocation location, int memoryModel){
+		return bufferToString(location.getBuffer(), location.getPc(), memoryModel);
 	}
 	
 	/**
@@ -215,25 +215,70 @@ public abstract class GraphUtility {
 	 * @param pc
 	 * @return
 	 */
-	public static String bufferToString(StoreBuffer buf, int pc)
+	public static String bufferToString(StoreBuffer buf, int pc, int memoryModel)
 	{
+
 		String buffer = PC_PREF + pc;
 		if (buf.getAddressValuePairs().isEmpty())
 		{
 			return buffer;
 		}
-		
+
 		buffer += " <";
-		Iterator<AddressValuePair> i = buf.getAddressValuePairs().iterator();
-		while(i.hasNext())
+		if (memoryModel == CFGConstants.SC || memoryModel == CFGConstants.TSO)
 		{
-		
-			buffer += "(" + addressValuePairToString(i.next()) + ")";
-			if(i.hasNext())
+
+			Iterator<AddressValuePair> i = buf.getAddressValuePairs().iterator();
+			while (i.hasNext())
 			{
-				buffer += ", ";
+
+				buffer += "(" + addressValuePairToString(i.next()) + ")";
+				if (i.hasNext())
+				{
+					buffer += ", ";
+				}
 			}
 		}
+		else if(memoryModel == CFGConstants.PSO)
+		{
+			//entries will be represented in alphabetical order
+			ArrayList<String> list = new ArrayList<String>();
+			Iterator<AddressValuePair> i = buf.getAddressValuePairs().iterator();
+			while(i.hasNext())
+			{
+				Value v = i.next().getAddress().getValue();
+				list.add(valueToRawString(v));
+			}
+			
+			Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
+			
+			//create representation in sorted order
+			Iterator<String> sIter = list.iterator();
+			while(sIter.hasNext())
+			{
+				String addressString = sIter.next();
+				
+				i = buf.getAddressValuePairs().iterator();
+				while(i.hasNext())
+				{
+					AddressValuePair pair = i.next();
+					Value v = pair.getAddress().getValue();
+					if(addressString.equals(valueToRawString(v)))
+					{
+						buffer += "(" + addressValuePairToString(pair) + ")";
+						if (sIter.hasNext())
+						{
+							buffer += ", ";
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			buffer += "not specified";
+		}
+		
 		buffer += ">";
 		return buffer;
 	}
@@ -281,11 +326,12 @@ public abstract class GraphUtility {
 	 * @param location
 	 * @return true if location in list, else false
 	 */
+	@Deprecated
 	public static boolean isInList(List<ControlFlowLocation> list, ControlFlowLocation location)
 	{
 		for (ControlFlowLocation loc : list)
 		{
-			if (isRepresentedBy(location, loc.getPc(), loc.getBuffer()))
+			if (isRepresentedBy(location, loc.getPc(), loc.getBuffer(), CFGConstants.TSO))
 			{
 				return true;
 			}
@@ -299,11 +345,11 @@ public abstract class GraphUtility {
 	 * @param location
 	 * @return the represented location or null, if there is none
 	 */
-	public static ControlFlowLocation getLocationRepresentedBy(List<ControlFlowLocation> list, int pc, StoreBuffer storeBuffer)
+	public static ControlFlowLocation getLocationRepresentedBy(List<ControlFlowLocation> list, int pc, StoreBuffer storeBuffer, int memoryModel)
 	{
 		for (ControlFlowLocation loc : list)
 		{
-			if (isRepresentedBy(loc, pc, storeBuffer))
+			if (isRepresentedBy(loc, pc, storeBuffer, memoryModel))
 			{
 				return loc;
 			}
@@ -367,9 +413,14 @@ public abstract class GraphUtility {
 
 			if (!t.getSource().getBuffer().getAddressValuePairs().isEmpty())
 			{
-				AddressValuePair p = t.getSource().getBuffer().getAddressValuePairs().get(0);
-				// FIXME this is TSO specific as the whole pair
-				return FLUSH + "(" + addressValuePairToString(p) + ")";
+
+				if (t.getDiagram().getMemoryModel() == CFGConstants.TSO)
+				{ 
+					// this is TSO specific as the whole pair
+					AddressValuePair p = t.getSource().getBuffer().getAddressValuePairs().get(0);
+					return FLUSH + "(" + addressValuePairToString(p) + ")";
+				}
+				return FLUSH; //TODO compute what was flushed for PSO 
 			}
 
 			throw new RuntimeException("Found flush transition for an empty buffer!");

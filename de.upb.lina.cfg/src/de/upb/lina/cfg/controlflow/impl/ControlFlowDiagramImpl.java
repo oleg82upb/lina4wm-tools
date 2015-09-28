@@ -35,6 +35,7 @@ import de.upb.llvm_parser.llvm.Parameter;
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getVariableCopies <em>Variable Copies</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getVariableCopyParams <em>Variable Copy Params</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getMemoryModel <em>Memory Model</em>}</li>
  * </ul>
  * </p>
  *
@@ -110,6 +111,26 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * @ordered
 	 */
 	protected EList<Parameter> variableCopyParams;
+
+	/**
+	 * The default value of the '{@link #getMemoryModel() <em>Memory Model</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMemoryModel()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int MEMORY_MODEL_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getMemoryModel() <em>Memory Model</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMemoryModel()
+	 * @generated
+	 * @ordered
+	 */
+	protected int memoryModel = MEMORY_MODEL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -248,6 +269,29 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getMemoryModel()
+	{
+		return memoryModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMemoryModel(int newMemoryModel)
+	{
+		int oldMemoryModel = memoryModel;
+		memoryModel = newMemoryModel;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ControlflowPackage.CONTROL_FLOW_DIAGRAM__MEMORY_MODEL, oldMemoryModel, memoryModel));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -304,6 +348,8 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 				return getVariableCopies();
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS:
 				return getVariableCopyParams();
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__MEMORY_MODEL:
+				return getMemoryModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -340,6 +386,9 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 				getVariableCopyParams().clear();
 				getVariableCopyParams().addAll((Collection<? extends Parameter>)newValue);
 				return;
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__MEMORY_MODEL:
+				setMemoryModel((Integer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -371,6 +420,9 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS:
 				getVariableCopyParams().clear();
 				return;
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__MEMORY_MODEL:
+				setMemoryModel(MEMORY_MODEL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -396,6 +448,8 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 				return variableCopies != null && !variableCopies.isEmpty();
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS:
 				return variableCopyParams != null && !variableCopyParams.isEmpty();
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__MEMORY_MODEL:
+				return memoryModel != MEMORY_MODEL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -412,6 +466,8 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", memoryModel: ");
+		result.append(memoryModel);
 		result.append(')');
 		return result.toString();
 	}

@@ -120,13 +120,22 @@ public interface ControlflowPackage extends EPackage {
 	int CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS = 5;
 
 	/**
+	 * The feature id for the '<em><b>Memory Model</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROL_FLOW_DIAGRAM__MEMORY_MODEL = 6;
+
+	/**
 	 * The number of structural features of the '<em>Control Flow Diagram</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_DIAGRAM_FEATURE_COUNT = 6;
+	int CONTROL_FLOW_DIAGRAM_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.ControlFlowLocationImpl <em>Control Flow Location</em>}' class.
@@ -727,6 +736,17 @@ public interface ControlflowPackage extends EPackage {
 	EReference getControlFlowDiagram_VariableCopyParams();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getMemoryModel <em>Memory Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Memory Model</em>'.
+	 * @see de.upb.lina.cfg.controlflow.ControlFlowDiagram#getMemoryModel()
+	 * @see #getControlFlowDiagram()
+	 * @generated
+	 */
+	EAttribute getControlFlowDiagram_MemoryModel();
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.ControlFlowLocation <em>Control Flow Location</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1104,6 +1124,14 @@ public interface ControlflowPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS = eINSTANCE.getControlFlowDiagram_VariableCopyParams();
+
+		/**
+		 * The meta object literal for the '<em><b>Memory Model</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTROL_FLOW_DIAGRAM__MEMORY_MODEL = eINSTANCE.getControlFlowDiagram_MemoryModel();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.ControlFlowLocationImpl <em>Control Flow Location</em>}' class.

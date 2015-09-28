@@ -231,6 +231,16 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getControlFlowDiagram_MemoryModel()
+	{
+		return (EAttribute)controlFlowDiagramEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getControlFlowLocation() {
 		return controlFlowLocationEClass;
 	}
@@ -518,6 +528,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		createEAttribute(controlFlowDiagramEClass, CONTROL_FLOW_DIAGRAM__NAME);
 		createEReference(controlFlowDiagramEClass, CONTROL_FLOW_DIAGRAM__VARIABLE_COPIES);
 		createEReference(controlFlowDiagramEClass, CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS);
+		createEAttribute(controlFlowDiagramEClass, CONTROL_FLOW_DIAGRAM__MEMORY_MODEL);
 
 		controlFlowLocationEClass = createEClass(CONTROL_FLOW_LOCATION);
 		createEAttribute(controlFlowLocationEClass, CONTROL_FLOW_LOCATION__PC);
@@ -602,6 +613,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		initEAttribute(getControlFlowDiagram_Name(), ecorePackage.getEString(), "name", null, 0, 1, ControlFlowDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getControlFlowDiagram_VariableCopies(), theLlvmPackage.getAddress(), null, "variableCopies", null, 0, -1, ControlFlowDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getControlFlowDiagram_VariableCopyParams(), theLlvmPackage.getParameter(), null, "variableCopyParams", null, 0, -1, ControlFlowDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getControlFlowDiagram_MemoryModel(), ecorePackage.getEInt(), "memoryModel", null, 0, 1, ControlFlowDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(controlFlowLocationEClass, ControlFlowLocation.class, "ControlFlowLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getControlFlowLocation_Pc(), ecorePackage.getEInt(), "pc", null, 0, 1, ControlFlowLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

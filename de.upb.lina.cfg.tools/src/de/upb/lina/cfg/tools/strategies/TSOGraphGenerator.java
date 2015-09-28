@@ -30,10 +30,9 @@ import de.upb.llvm_parser.llvm.Store;
 public class TSOGraphGenerator extends AbstractGraphGenerator
 {
 	private PreComputationChecker check = null;
-	private ControlFlowDiagram scGraph = null;
 	
 	//original address/value is key and is mapped to a new address/value
-	private HashMap<Address, Address> wdcMapping = null;
+	protected HashMap<Address, Address> wdcMapping = null;
 
 	public TSOGraphGenerator(FunctionDefinition function)
 	{
@@ -49,10 +48,10 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 		this.wdcMapping = new HashMap<Address, Address>();
 		
 		SCGraphGenerator scGen = new SCGraphGenerator(function); 
-		this.scGraph = scGen.createGraph();
+		ControlFlowDiagram scGraph = scGen.createGraph();
 		
-		this.check = new PreComputationChecker(null, CFGConstants.TSO);
-		this.check.checkForWriteDefChains(this.scGraph, new ArrayList<Transition>());
+		this.check = new PreComputationChecker(null);
+		this.check.checkForWriteDefChains(scGraph, new ArrayList<Transition>());
 	}
 
 
@@ -139,7 +138,7 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 	}
 
 	
-	private AddressValuePair createAddressValuePairForWrite(StoreBuffer buffer, Store store)
+	protected AddressValuePair createAddressValuePairForWrite(StoreBuffer buffer, Store store)
 	{
 		AddressValuePair newPair = ControlflowFactory.eINSTANCE.createAddressValuePair();
 		newPair.setAddress(store.getTargetAddress());
@@ -151,19 +150,7 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 		// address must be redefined
 		if (wdcType == CFGConstants.WDC_BOTH || wdcType == CFGConstants.WDC_ADDRESS)
 		{
-			Address orgAddress = ((AddressUse) store.getTargetAddress().getValue()).getAddress();
-			Address newAddress = null;
-
-			if (wdcMapping.containsKey(orgAddress))
-			{
-				newAddress = wdcMapping.get(orgAddress);
-			} else
-			{
-				newAddress = LlvmFactory.eINSTANCE.createAddress();
-				newAddress.setName(orgAddress.getName() + CFGConstants.WDC_SUFFIX);
-				wdcMapping.put(orgAddress, newAddress);
-				this.graph.getVariableCopies().add(newAddress);
-			}
+			Address newAddress = getOrCreateAddressCopyForWDC(store);
 
 			Parameter param = getOrCreateParamForAddress(newAddress, store.getTargetAddress());
 			newPair.setAddress(param);
@@ -173,19 +160,7 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 		{
 
 			// create address
-			Address orgValue = ((AddressUse) store.getValue().getValue()).getAddress();
-			Address newValue = null;
-
-			if (wdcMapping.containsKey(orgValue))
-			{
-				newValue = wdcMapping.get(orgValue);
-			} else
-			{
-				Address copyValue = LlvmFactory.eINSTANCE.createAddress();
-				copyValue.setName(orgValue.getName() + CFGConstants.WDC_SUFFIX);
-				wdcMapping.put(orgValue, copyValue);
-				this.graph.getVariableCopies().add(copyValue);
-			}
+			Address newValue = getOrCreateValueCopyForWDC(store);
 			// create Parameter
 			Parameter param = getOrCreateParamForAddress(newValue, store.getValue());
 			newPair.getValues().add(param);
@@ -195,7 +170,47 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 	}
 
 
-	private Parameter getOrCreateParamForAddress(Address address, Parameter existing)
+
+	protected Address getOrCreateAddressCopyForWDC(Store store)
+	{
+		Address orgAddress = ((AddressUse) store.getTargetAddress().getValue()).getAddress();
+		Address newAddress = null;
+
+		if (wdcMapping.containsKey(orgAddress))
+		{
+			newAddress = wdcMapping.get(orgAddress);
+		} else
+		{
+			newAddress = LlvmFactory.eINSTANCE.createAddress();
+			newAddress.setName(orgAddress.getName() + CFGConstants.WDC_SUFFIX);
+			wdcMapping.put(orgAddress, newAddress);
+			this.graph.getVariableCopies().add(newAddress);
+		}
+		return newAddress;
+	}
+
+
+
+	protected Address getOrCreateValueCopyForWDC(Store store)
+	{
+		Address orgValue = ((AddressUse) store.getValue().getValue()).getAddress();
+		Address newValue = null;
+
+		if (wdcMapping.containsKey(orgValue))
+		{
+			newValue = wdcMapping.get(orgValue);
+		} else
+		{
+			Address copyValue = LlvmFactory.eINSTANCE.createAddress();
+			copyValue.setName(orgValue.getName() + CFGConstants.WDC_SUFFIX);
+			wdcMapping.put(orgValue, copyValue);
+			this.graph.getVariableCopies().add(copyValue);
+		}
+		return newValue;
+	}
+
+
+	protected Parameter getOrCreateParamForAddress(Address address, Parameter existing)
 	{
 		//search
 		for (Parameter param : this.graph.getVariableCopyParams())
@@ -255,7 +270,7 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 	 * @param load
 	 * @return true if the load instruction would result in an early read based on the current location
 	 */
-	private boolean isEarlyRead(ControlFlowLocation location, Load load)
+	protected boolean isEarlyRead(ControlFlowLocation location, Load load)
 	{
 		Parameter adrParam = load.getAddress();
 		
@@ -278,7 +293,7 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 	 * @param load
 	 * @return the latest address value pair from the store buffer for the address requested by load. null otherwise. 
 	 */
-	private AddressValuePair getLatestBufferEntry(ControlFlowLocation location, Load load)
+	protected AddressValuePair getLatestBufferEntry(ControlFlowLocation location, Load load)
 	{
 		Parameter adrParam = load.getAddress();
 		
@@ -311,7 +326,7 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 	}
 	
 	
-	private int typeOfWriteDefChain(Store store)
+	protected int typeOfWriteDefChain(Store store)
 	{
 		
 		Iterator<Transition> i = this.check.getWdcAddressValue().iterator();
@@ -352,6 +367,22 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 	{
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+	@Override
+	protected ControlFlowLocation getLocationByPcAndBuffer(int pc, StoreBuffer buffer)
+	{
+		return GraphUtility.getLocationRepresentedBy(this.graph.getLocations(), pc, buffer, CFGConstants.TSO);
+	}
+
+
+
+	@Override
+	public int getMemoryModel()
+	{
+		return CFGConstants.TSO;
 	}
 
 }

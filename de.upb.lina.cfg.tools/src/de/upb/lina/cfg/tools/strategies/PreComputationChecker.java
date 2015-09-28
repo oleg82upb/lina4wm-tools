@@ -49,12 +49,10 @@ public class PreComputationChecker {
 
 	private LLVM ast = null;
 	private String astLocation;
-	private int memoryModel;
 	private List<FunctionDefinition> functions = null;
 
-	public PreComputationChecker(String astLocation, int reordering) {
+	public PreComputationChecker(String astLocation) {
 		this.astLocation = astLocation;
-		this.memoryModel = reordering;
 
 	}
 
@@ -86,9 +84,11 @@ public class PreComputationChecker {
 		return functions;
 	}
 
-	public boolean checkforLoopWithoutFence() throws InterruptedException {
+	public boolean checkforLoopWithoutFence() throws InterruptedException
+	{
 
-		if (loadAst() == null) {
+		if (loadAst() == null)
+		{
 			throw new RuntimeException("No specified LLVM Object inside the ast.");
 		}
 
@@ -97,60 +97,67 @@ public class PreComputationChecker {
 		boolean loopWithoutFenceinfunc = false;
 
 		// for every function
-		for (int i = 0; i < a_elem; i++) {
-			if (ast.getElements().get(i) instanceof FunctionDefinitionImpl) {
+		for (int i = 0; i < a_elem; i++)
+		{
+			if (ast.getElements().get(i) instanceof FunctionDefinitionImpl)
+			{
 				FunctionDefinition func = (FunctionDefinition) ast.getElements().get(i);
-				if (func.getBody() != null) {
-					if (memoryModel == CFGConstants.TSO) {
-						// create sc-graph and search for loops without fence
-						SCGraphGenerator sc = new SCGraphGenerator(func);
-						loopWithoutFenceinfunc = containsLoopWithoutFences(sc.createGraph());
-						if (CFGConstants.DEBUG) {
-							if (loopWithoutFenceinfunc) {
+				if (func.getBody() != null)
+				{
+					// create sc-graph and search for loops without fence
+					SCGraphGenerator sc = new SCGraphGenerator(func);
+					loopWithoutFenceinfunc = containsLoopWithoutFences(sc.createGraph());
+					if (CFGConstants.DEBUG)
+					{
+						if (loopWithoutFenceinfunc)
+						{
 
-								System.out.println("Loops without fence found in function "
-										+ func.getAddress().getName());
-							}
+							System.out.println("Loops without fence found in function " + func.getAddress().getName());
 						}
 					}
 				}
 			}
 			loopWithoutFence = loopWithoutFence | loopWithoutFenceinfunc;
 		}
-		if (CFGConstants.DEBUG) {
+		if (CFGConstants.DEBUG)
+		{
 			System.out.println("Loop without fence:" + loopWithoutFence);
 		}
 		return loopWithoutFence;
 	}
 	
-	public boolean checkForLoadsInWriteDefChains(){
-		
-		if (loadAst() == null) {
+	public boolean checkForLoadsInWriteDefChains()
+	{
+
+		if (loadAst() == null)
+		{
 			throw new RuntimeException("No specified LLVM Object inside the ast.");
 		}
-		
+
 		int a_elem = ast.getElements().size();
 		functions = new ArrayList<FunctionDefinition>();
-		
+
 		// for every function
-				for (int i = 0; i < a_elem; i++) {
-					if (ast.getElements().get(i) instanceof FunctionDefinitionImpl) {
-						FunctionDefinition func = (FunctionDefinition) ast.getElements().get(i);
-						if (func.getBody() != null) {
-							if (memoryModel == CFGConstants.TSO) {
-								// create sc-graph and search for loops without fence
-								SCGraphGenerator sc = new SCGraphGenerator(func);
-								List<Transition> loadsFound = new ArrayList<Transition>();
-								checkForWriteDefChains(sc.createGraph(), loadsFound);
-								if(!loadsFound.isEmpty()){
-									functions.add(func);
-									return true;
-								}
-							}
-						}
+		for (int i = 0; i < a_elem; i++)
+		{
+			if (ast.getElements().get(i) instanceof FunctionDefinitionImpl)
+			{
+				FunctionDefinition func = (FunctionDefinition) ast.getElements().get(i);
+				if (func.getBody() != null)
+				{
+					// create sc-graph and search for loops without fence
+					SCGraphGenerator sc = new SCGraphGenerator(func);
+					List<Transition> loadsFound = new ArrayList<Transition>();
+					checkForWriteDefChains(sc.createGraph(), loadsFound);
+					if (!loadsFound.isEmpty())
+					{
+						functions.add(func);
+						return true;
 					}
 				}
-				return false;
+			}
+		}
+		return false;
 	}
 
 	/**

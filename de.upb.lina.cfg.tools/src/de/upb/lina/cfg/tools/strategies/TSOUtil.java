@@ -67,7 +67,7 @@ public class TSOUtil implements IGraphGenerator {
 		ControlFlowDiagram cfg = ControlflowFactory.eINSTANCE
 				.createControlFlowDiagram();
 		SCGraphGenerator sc = new SCGraphGenerator(function);
-		PreComputationChecker checker = new PreComputationChecker("", 0);
+		PreComputationChecker checker = new PreComputationChecker("");
 		ControlFlowDiagram scCfg = sc.createGraph();
 		List<Transition> earlyReadsInFunction = checker.collectEarlyReadsinSCGraph(scCfg);
 		checker.checkForWriteDefChains(scCfg, new ArrayList<Transition>());
@@ -473,7 +473,7 @@ public class TSOUtil implements IGraphGenerator {
 	private ControlFlowLocation createControlFlowLocation(
 			ControlFlowDiagram diag, int pc, StoreBuffer buffer, String blockLabel) {
 		for (ControlFlowLocation l : diag.getLocations()) {
-			if (GraphUtility.isRepresentedBy(l, pc, buffer)) {
+			if (GraphUtility.isRepresentedBy(l, pc, buffer, CFGConstants.TSO)) {
 				return l;
 			}
 		}
@@ -594,8 +594,8 @@ public class TSOUtil implements IGraphGenerator {
 
 	private void reportLoopWithoutFence(String functionName, ControlFlowLocation locBeforeLatesFence,
 			ControlFlowLocation nextLocAfterWrite, Instruction instruction) {
-		String error = functionName + " - between " + GraphUtility.bufferToString(locBeforeLatesFence) + " and "
-				+ GraphUtility.bufferToString(nextLocAfterWrite) + " caused by " + instruction.toString() + "\n";
+		String error = functionName + " - between " + GraphUtility.bufferToString(locBeforeLatesFence, CFGConstants.TSO) + " and "
+				+ GraphUtility.bufferToString(nextLocAfterWrite, CFGConstants.TSO) + " caused by " + instruction.toString() + "\n";
 		if (!placesInLoopWithoutFence.contains(error)) {
 			placesInLoopWithoutFence.add(error);
 		}

@@ -67,6 +67,7 @@ public class ControlFlowDiagramItemProvider
 
 			addNamePropertyDescriptor(object);
 			addVariableCopyParamsPropertyDescriptor(object);
+			addMemoryModelPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -111,6 +112,29 @@ public class ControlFlowDiagramItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Memory Model feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMemoryModelPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ControlFlowDiagram_memoryModel_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ControlFlowDiagram_memoryModel_feature", "_UI_ControlFlowDiagram_type"),
+				 ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__MEMORY_MODEL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -188,6 +212,7 @@ public class ControlFlowDiagramItemProvider
 		switch (notification.getFeatureID(ControlFlowDiagram.class))
 		{
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__NAME:
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__MEMORY_MODEL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCATIONS:

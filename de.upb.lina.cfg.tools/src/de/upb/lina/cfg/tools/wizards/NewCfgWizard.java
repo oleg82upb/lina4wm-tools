@@ -11,6 +11,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 
 import de.upb.lina.cfg.tools.CFGActivator;
+import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.CreateGraphOperation;
 import de.upb.lina.cfg.tools.strategies.PreComputationChecker;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
@@ -95,13 +96,12 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 		}
 		try
 		{
-			if (page.getMemoryModelSelection() == 1)
+			if (page.getMemoryModelSelection() > CFGConstants.SC)
 			{
 				if (astlocation == null || !astlocation.equals(page.getAstLocation()))
 				{
 					astlocation = page.getAstLocation();
-					PreComputationChecker checker = new PreComputationChecker(page.getAstLocation(),
-							page.getMemoryModelSelection());
+					PreComputationChecker checker = new PreComputationChecker(page.getAstLocation());
 					containsLoopWithoutFence = checker.checkforLoopWithoutFence();
 					if(!containsLoopWithoutFence)
 					{

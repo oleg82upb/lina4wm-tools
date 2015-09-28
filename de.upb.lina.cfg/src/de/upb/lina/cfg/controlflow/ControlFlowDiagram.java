@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getName <em>Name</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getVariableCopies <em>Variable Copies</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getVariableCopyParams <em>Variable Copy Params</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getMemoryModel <em>Memory Model</em>}</li>
  * </ul>
  * </p>
  *
@@ -149,5 +150,31 @@ public interface ControlFlowDiagram extends EObject {
 	 * @generated
 	 */
 	EList<Parameter> getVariableCopyParams();
+
+	/**
+	 * Returns the value of the '<em><b>Memory Model</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Memory Model</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Memory Model</em>' attribute.
+	 * @see #setMemoryModel(int)
+	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getControlFlowDiagram_MemoryModel()
+	 * @model
+	 * @generated
+	 */
+	int getMemoryModel();
+
+	/**
+	 * Sets the value of the '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getMemoryModel <em>Memory Model</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Memory Model</em>' attribute.
+	 * @see #getMemoryModel()
+	 * @generated
+	 */
+	void setMemoryModel(int value);
 
 } // ControlFlowDiagram

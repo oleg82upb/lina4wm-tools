@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
+import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.strategies.TSOUtil;
 import de.upb.lina.cfg.tools.tests.TSO_Test;
 
@@ -45,7 +46,7 @@ public class RU_T_IndWR extends TSO_Test {
 		
 		//check that all buffers contain the correct elements
 		for(ControlFlowLocation l: nonEmptyBuffers){
-			String buffer = gUtil.bufferToString(l);
+			String buffer = gUtil.bufferToString(l, CFGConstants.TSO);
 			boolean isValidBuffer = buffer.equals(l.getPc()+"<(null,%b)>");
 			assertTrue(isValidBuffer);
 			

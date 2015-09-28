@@ -15,6 +15,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="variableCopyParams" upperBound="-1"
         eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Parameter"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="memoryModel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ControlFlowLocation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="pc" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>

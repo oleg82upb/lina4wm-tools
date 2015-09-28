@@ -30,6 +30,6 @@ public class CustomControlFlowLocationPcEditPart extends ControlFlowLocationPcEd
 	protected String getLabelText()
 	{
 		ControlFlowLocation loc = (ControlFlowLocation) view.getElement();
-		return GraphUtility.bufferToString(loc);
+		return GraphUtility.bufferToString(loc, loc.getDiagram().getMemoryModel());
 	}
 }

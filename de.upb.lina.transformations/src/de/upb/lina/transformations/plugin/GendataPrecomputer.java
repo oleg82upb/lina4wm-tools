@@ -250,26 +250,28 @@ public class GendataPrecomputer {
 				if (t.getInstruction() instanceof Branch)
 				{
 					Branch branch = (Branch) t.getInstruction();
-					if (branch.getDestination() != null)
+					if (t instanceof GuardedTransition)
 					{
-						String dest = branch.getDestination().replace("%", "");
-						ArrayList<Phi> list = blockLabelToPhiInstructions.get(dest);
-
-						if (!list.isEmpty())
+						GuardedTransition gt = (GuardedTransition) t;
+						if (gt.getCondition().startsWith("not"))
 						{
-							createPhiMapping(t, list, branch.getDestination());
+
+							String dest = branch.getElseDestination().replace("%", "");
+							ArrayList<Phi> list = blockLabelToPhiInstructions.get(dest);
+
+							if (!list.isEmpty())
+							{
+								createPhiMapping(t, list, ((BasicBlock) branch.eContainer()).getLabel());
+							}
 						}
 					}
 
-					if (branch.getElseDestination() != null)
-					{
-						String dest = branch.getElseDestination().replace("%", "");
-						ArrayList<Phi> list = blockLabelToPhiInstructions.get(dest);
+					String dest = branch.getDestination().replace("%", "");
+					ArrayList<Phi> list = blockLabelToPhiInstructions.get(dest);
 
-						if (!list.isEmpty())
-						{
-							createPhiMapping(t, list, branch.getDestination());
-						}
+					if (!list.isEmpty())
+					{
+						createPhiMapping(t, list, ((BasicBlock) branch.eContainer()).getLabel());
 					}
 				}
 				
@@ -286,7 +288,7 @@ public class GendataPrecomputer {
 
 							if (!list.isEmpty())
 							{
-								createPhiMapping(t, list, dest);
+								createPhiMapping(t, list, ((BasicBlock)branch.eContainer()).getLabel());
 							}
 						}
 					}
