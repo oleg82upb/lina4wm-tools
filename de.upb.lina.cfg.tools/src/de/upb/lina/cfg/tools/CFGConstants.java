@@ -19,4 +19,7 @@ public class CFGConstants {
 	public static final int WDC_BOTH = 2;
 	
 	public static final String WDC_SUFFIX = "'";
+	
+	public static int LEVEL_ERROR = 1;
+	public static int LEVEL_WARNING = 2;
 }

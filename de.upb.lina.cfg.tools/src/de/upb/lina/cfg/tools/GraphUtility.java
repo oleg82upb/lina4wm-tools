@@ -396,7 +396,9 @@ public abstract class GraphUtility {
 	{
 		return (instruction instanceof Fence
 				|| instruction instanceof CmpXchg 
-				|| instruction instanceof Return);
+				|| instruction instanceof Return
+				|| instruction instanceof AtomicRMW
+				|| instruction instanceof Invoke);
 	}
 	
 	/**
