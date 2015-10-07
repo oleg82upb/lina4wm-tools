@@ -11,14 +11,11 @@ import de.upb.lina.cfg.tools.strategies.SCGraphGenerator;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.ArithmeticOperation;
-import de.upb.llvm_parser.llvm.AtomicRMW;
 import de.upb.llvm_parser.llvm.Call;
 import de.upb.llvm_parser.llvm.Cast;
-import de.upb.llvm_parser.llvm.CmpXchg;
 import de.upb.llvm_parser.llvm.Compare;
 import de.upb.llvm_parser.llvm.ExtractElement;
 import de.upb.llvm_parser.llvm.ExtractValue;
-import de.upb.llvm_parser.llvm.Fence;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.GetElementPtr;
 import de.upb.llvm_parser.llvm.InsertElement;
@@ -49,6 +46,11 @@ public class LIWDCPropertyChecker extends AbstractPropertyChecker {
 	private List<Transition> wdcValue;
 	private List<Transition> wdcAddressValue;
 
+	/**
+	 * Default constructor - should be used if all checks are required.
+	 * @param ast
+	 * @param manager
+	 */
 	public LIWDCPropertyChecker(LLVM ast, PropertyCheckerManager manager) {
 		super(ast, manager);
 		
@@ -339,4 +341,17 @@ public class LIWDCPropertyChecker extends AbstractPropertyChecker {
 		return null;
 	}
 
+	public List<Transition> getWdcAddress() {
+		return wdcAddress;
+	}
+
+	public List<Transition> getWdcValue() {
+		return wdcValue;
+	}
+
+	public List<Transition> getWdcAddressValue() {
+		return wdcAddressValue;
+	}
+
+	
 }

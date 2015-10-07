@@ -18,6 +18,7 @@ import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.controlflow.WriteDefChainTransition;
 import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.GraphUtility;
+import de.upb.lina.cfg.tools.checks.LIWDCPropertyChecker;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
@@ -29,7 +30,7 @@ import de.upb.llvm_parser.llvm.Store;
 
 public class TSOGraphGenerator extends AbstractGraphGenerator
 {
-	private PreComputationChecker check = null;
+	private LIWDCPropertyChecker liwdcChecker = null;
 	
 	//original address/value is key and is mapped to a new address/value
 	protected HashMap<Address, Address> wdcMapping = null;
@@ -50,8 +51,8 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 		SCGraphGenerator scGen = new SCGraphGenerator(function); 
 		ControlFlowDiagram scGraph = scGen.createGraph();
 		
-		this.check = new PreComputationChecker(null);
-		this.check.checkForWriteDefChains(scGraph, new ArrayList<Transition>());
+		this.liwdcChecker = new LIWDCPropertyChecker(null, null);
+		this.liwdcChecker.checkForWriteDefChains(scGraph, new ArrayList<Transition>());
 	}
 
 
@@ -329,7 +330,7 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 	protected int typeOfWriteDefChain(Store store)
 	{
 		
-		Iterator<Transition> i = this.check.getWdcAddressValue().iterator();
+		Iterator<Transition> i = this.liwdcChecker.getWdcAddressValue().iterator();
 		while(i.hasNext())
 		{
 			if(store.equals(i.next().getInstruction()))
@@ -338,7 +339,7 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 			}
 		}
 		
-		i = this.check.getWdcAddress().iterator();
+		i = this.liwdcChecker.getWdcAddress().iterator();
 		while(i.hasNext())
 		{
 			if(store.equals(i.next().getInstruction()))
@@ -347,7 +348,7 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 			}
 		}
 		
-		i = this.check.getWdcValue().iterator();
+		i = this.liwdcChecker.getWdcValue().iterator();
 		while(i.hasNext())
 		{
 			if(store.equals(i.next().getInstruction()))

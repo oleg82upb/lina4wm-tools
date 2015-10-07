@@ -11,20 +11,7 @@ import de.upb.lina.cfg.tools.CFGActivator;
 import de.upb.llvm_parser.llvm.LLVM;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
-public class AstHolder {
-	private static LLVM ast;
-	
-	
-	public static LLVM getAst(){
-		return ast;
-	}
-	
-	public static void setAst(String astLocation){	
-		loadAst(astLocation);
-		if(ast == null){
-			throw new RuntimeException("Failed to load ast: " + astLocation);
-		}
-	}
+public class AstUtil {
 	
 	public static LLVM loadAst(String astLocation){
 		try {
@@ -33,8 +20,7 @@ public class AstHolder {
 			Path astpath = new Path(astLocation);
 			URI uri = URI.createPlatformResourceURI(astpath.toOSString(), true);
 			Resource llvmResource = resourceSet.getResource(uri, true);
-			ast = (LLVM) llvmResource.getContents().get(0);
-			return ast;
+			return (LLVM) llvmResource.getContents().get(0);
 		} catch (WrappedException e) {
 			CFGActivator.logError("Failed to load ast at " + astLocation + "." , e);
 		}

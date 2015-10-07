@@ -3,17 +3,8 @@ package de.upb.lina.cfg.tools.checks;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-
-import de.upb.lina.cfg.tools.CFGActivator;
 import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.llvm_parser.llvm.LLVM;
-import de.upb.llvm_parser.llvm.LlvmPackage;
 
 public abstract class AbstractPropertyChecker {
 	
