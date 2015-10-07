@@ -11,8 +11,6 @@ import de.upb.lina.transformations.wizards.TransformationOperation;
 
 public class PromelaTransformationOperation extends TransformationOperation {
 	
-	
-	
 	public PromelaTransformationOperation(List<ControlFlowDiagram> cfgs, String targetContainer, String targetName, String fileEnding) {
 		super(cfgs, targetContainer, targetName, fileEnding, 1);
 	}

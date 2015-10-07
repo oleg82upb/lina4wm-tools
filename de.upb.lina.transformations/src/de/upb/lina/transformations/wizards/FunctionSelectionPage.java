@@ -103,7 +103,7 @@ public class FunctionSelectionPage extends WizardPage{
 
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
-				// TODO Auto-generated method stub
+				
 			}
 		});
 		
@@ -227,7 +227,7 @@ public class FunctionSelectionPage extends WizardPage{
 	
 	
 	/**
-	 * TODO: dependencies between function
+	 * Computes dependencies between function
 	 */
 	private void computeDependencies(){
 		try{
