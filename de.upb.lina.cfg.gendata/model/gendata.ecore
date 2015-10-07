@@ -25,6 +25,8 @@
         eType="#//AddressMapping" eOpposite="#//AddressMapping/generatorData"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="memorySizeMappings" upperBound="-1"
         eType="#//MemorySizeMapping" containment="true" eOpposite="#//MemorySizeMapping/generatorData"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputTypes" upperBound="-1"
+        eType="#//InputTypeList" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AddressMapping" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="adresses" upperBound="-1"
@@ -72,5 +74,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="generatorData" eType="#//GeneratorData"
         eOpposite="#//GeneratorData/memorySizeMappings"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="completeTypeSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InputTypeList">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inputType" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

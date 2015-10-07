@@ -129,6 +129,12 @@ public class GendataSwitch<T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case GendataPackage.INPUT_TYPE_LIST: {
+				InputTypeList inputTypeList = (InputTypeList)theEObject;
+				T result = caseInputTypeList(inputTypeList);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -267,6 +273,21 @@ public class GendataSwitch<T> extends Switch<T>
 	 * @generated
 	 */
 	public T caseMemorySizeMapping(MemorySizeMapping object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Input Type List</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Input Type List</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInputTypeList(InputTypeList object) {
 		return null;
 	}
 

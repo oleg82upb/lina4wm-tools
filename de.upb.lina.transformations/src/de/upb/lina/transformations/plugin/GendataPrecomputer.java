@@ -19,6 +19,7 @@ import de.upb.lina.cfg.gendata.AddressMapping;
 import de.upb.lina.cfg.gendata.ConstraintMapping;
 import de.upb.lina.cfg.gendata.GendataFactory;
 import de.upb.lina.cfg.gendata.GeneratorData;
+import de.upb.lina.cfg.gendata.InputTypeList;
 import de.upb.lina.cfg.gendata.LocationLabel;
 import de.upb.lina.cfg.gendata.MemorySizeMapping;
 import de.upb.lina.cfg.gendata.PhiMapping;
@@ -154,6 +155,7 @@ public class GendataPrecomputer {
 			
 			//KIVSpecificKeys
 			computeKIVSpecificKeys();
+			computeInputTypes();
 
 
 		}catch(ClassCastException ex){
@@ -198,17 +200,17 @@ public class GendataPrecomputer {
 		if(s != null)
 			helperModel.getTransformationSpecificKeys().add(s);
 		
-		// checks if a function with a parameter exists
+		// checks if a function with more than one parameter exists
 		boolean hasParams = false;
 		for(ControlFlowDiagram cfg : cfgs)
 		{
 			EList<AddressMapping> mappings = helperModel.getFilteredAddresses(Constants.FUNC_PARAMS+cfg.getName());
-			if(mappings.size() > 1)//one element in the list of mappings is always the dummy-returnmapping
+			if(mappings.size() > 2)//one element in the list of mappings is always the dummy-returnmapping
 			{
 				hasParams = true;
 				
 			}
-			if(mappings.size() == 1 && mappings.get(0).getName()!="returnvalue")
+			if(mappings.size() == 2 && !(mappings.get(0).getName().equals("returnvalue")||mappings.get(1).getName().equals("returnvalue")))
 			{
 				hasParams = true;
 			}
@@ -216,6 +218,18 @@ public class GendataPrecomputer {
 		if(hasParams)
 			helperModel.getTransformationSpecificKeys().add("INPUT_NEEDED");
 		
+		boolean refInput = false;
+		for( AddressMapping am : helperModel.getFilteredAddresses("all-params"))
+		{
+			if(am.getType().equals("ref"))
+			{
+				refInput =true;
+			}
+		}
+		if(refInput)
+		{
+			helperModel.getTransformationSpecificKeys().add("INPUT_REF");
+		}
 	}
 
 	private void computePhiMapping()
@@ -253,7 +267,7 @@ public class GendataPrecomputer {
 					if (t instanceof GuardedTransition)
 					{
 						GuardedTransition gt = (GuardedTransition) t;
-						if (gt.getCondition().startsWith("not"))
+						if (gt.getCondition().startsWith("[not"))
 						{
 
 							String dest = branch.getElseDestination().replace("%", "");
@@ -450,6 +464,48 @@ public class GendataPrecomputer {
 		}
 		filteredAddresses.put(Constants.ALL_PARAMS, allParamMappings);
 		filteredAddresses.put(Constants.ALL_DECLARE, allLocalVariables);
+	}
+	
+	
+	private void computeInputTypes()
+	{
+		EList<InputTypeList> input = helperModel.getInputTypes();
+
+		for (ControlFlowDiagram cfg : cfgs)
+		{
+			List<String> funcInput = new ArrayList<>();
+			EList<AddressMapping> funcParamMapping = helperModel.getFilteredAddresses(Constants.FUNC_PARAMS
+					+ cfg.getName());
+			for (AddressMapping am : funcParamMapping)
+			{
+				if (!am.getName().equals("returnvalue"))
+				{
+					funcInput.add(am.getType());
+				}
+			}
+
+			boolean duplicate = false;
+			for (InputTypeList list : input)
+			{
+				if (list.getInputType().size() == funcInput.size())
+				{
+					List<String> copyFuncInput = new ArrayList<String>(funcInput);
+
+					copyFuncInput.removeAll(list.getInputType());
+					if (copyFuncInput.isEmpty())
+					{
+						duplicate = true;
+						break;
+					}
+				}
+			}
+			if (!duplicate && !funcInput.isEmpty())
+			{
+				InputTypeList inputTypeList = GendataFactory.eINSTANCE.createInputTypeList();
+				inputTypeList.getInputType().addAll(funcInput);
+				input.add(inputTypeList);
+			}
+		}
 	}
 
 	private void computeTransitionLabels() {

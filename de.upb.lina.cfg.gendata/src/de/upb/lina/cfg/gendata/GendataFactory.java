@@ -86,6 +86,15 @@ public interface GendataFactory extends EFactory
 	MemorySizeMapping createMemorySizeMapping();
 
 	/**
+	 * Returns a new object of class '<em>Input Type List</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Input Type List</em>'.
+	 * @generated
+	 */
+	InputTypeList createInputTypeList();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

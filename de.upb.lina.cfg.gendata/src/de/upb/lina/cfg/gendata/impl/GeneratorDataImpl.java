@@ -7,6 +7,7 @@ import de.upb.lina.cfg.gendata.AddressMapping;
 import de.upb.lina.cfg.gendata.ConstraintMapping;
 import de.upb.lina.cfg.gendata.GendataPackage;
 import de.upb.lina.cfg.gendata.GeneratorData;
+import de.upb.lina.cfg.gendata.InputTypeList;
 import de.upb.lina.cfg.gendata.LocationLabel;
 import de.upb.lina.cfg.gendata.MemorySizeMapping;
 import de.upb.lina.cfg.gendata.PhiMapping;
@@ -26,6 +27,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
@@ -49,6 +51,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getFilteredAddresses <em>Filtered Addresses</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getAddressMappings <em>Address Mappings</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getMemorySizeMappings <em>Memory Size Mappings</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getInputTypes <em>Input Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -155,6 +158,16 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @ordered
 	 */
 	protected EList<MemorySizeMapping> memorySizeMappings;
+
+	/**
+	 * The cached value of the '{@link #getInputTypes() <em>Input Types</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInputTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<InputTypeList> inputTypes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -329,6 +342,18 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<InputTypeList> getInputTypes() {
+		if (inputTypes == null) {
+			inputTypes = new EObjectContainmentEList<InputTypeList>(InputTypeList.class, this, GendataPackage.GENERATOR_DATA__INPUT_TYPES);
+		}
+		return inputTypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unchecked")
@@ -395,6 +420,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return ((InternalEList<?>)getAddressMappings()).basicRemove(otherEnd, msgs);
 			case GendataPackage.GENERATOR_DATA__MEMORY_SIZE_MAPPINGS:
 				return ((InternalEList<?>)getMemorySizeMappings()).basicRemove(otherEnd, msgs);
+			case GendataPackage.GENERATOR_DATA__INPUT_TYPES:
+				return ((InternalEList<?>)getInputTypes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -430,6 +457,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return getAddressMappings();
 			case GendataPackage.GENERATOR_DATA__MEMORY_SIZE_MAPPINGS:
 				return getMemorySizeMappings();
+			case GendataPackage.GENERATOR_DATA__INPUT_TYPES:
+				return getInputTypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -482,6 +511,10 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				getMemorySizeMappings().clear();
 				getMemorySizeMappings().addAll((Collection<? extends MemorySizeMapping>)newValue);
 				return;
+			case GendataPackage.GENERATOR_DATA__INPUT_TYPES:
+				getInputTypes().clear();
+				getInputTypes().addAll((Collection<? extends InputTypeList>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -525,6 +558,9 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 			case GendataPackage.GENERATOR_DATA__MEMORY_SIZE_MAPPINGS:
 				getMemorySizeMappings().clear();
 				return;
+			case GendataPackage.GENERATOR_DATA__INPUT_TYPES:
+				getInputTypes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -558,6 +594,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return addressMappings != null && !addressMappings.isEmpty();
 			case GendataPackage.GENERATOR_DATA__MEMORY_SIZE_MAPPINGS:
 				return memorySizeMappings != null && !memorySizeMappings.isEmpty();
+			case GendataPackage.GENERATOR_DATA__INPUT_TYPES:
+				return inputTypes != null && !inputTypes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

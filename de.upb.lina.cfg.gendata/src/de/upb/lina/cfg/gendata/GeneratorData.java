@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getFilteredAddresses <em>Filtered Addresses</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getAddressMappings <em>Address Mappings</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getMemorySizeMappings <em>Memory Size Mappings</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getInputTypes <em>Input Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -219,6 +220,22 @@ public interface GeneratorData extends EObject
 	 * @generated
 	 */
 	EList<MemorySizeMapping> getMemorySizeMappings();
+
+	/**
+	 * Returns the value of the '<em><b>Input Types</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.lina.cfg.gendata.InputTypeList}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Input Types</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Input Types</em>' containment reference list.
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_InputTypes()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<InputTypeList> getInputTypes();
 
 	/**
 	 * <!-- begin-user-doc -->

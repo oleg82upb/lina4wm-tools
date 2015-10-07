@@ -159,13 +159,22 @@ public interface GendataPackage extends EPackage
 	int GENERATOR_DATA__MEMORY_SIZE_MAPPINGS = 9;
 
 	/**
+	 * The feature id for the '<em><b>Input Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_DATA__INPUT_TYPES = 10;
+
+	/**
 	 * The number of structural features of the '<em>Generator Data</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA_FEATURE_COUNT = 10;
+	int GENERATOR_DATA_FEATURE_COUNT = 11;
 
 	/**
 	 * The operation id for the '<em>Get Filtered Addresses</em>' operation.
@@ -640,6 +649,44 @@ public interface GendataPackage extends EPackage
 
 
 	/**
+	 * The meta object id for the '{@link de.upb.lina.cfg.gendata.impl.InputTypeListImpl <em>Input Type List</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.upb.lina.cfg.gendata.impl.InputTypeListImpl
+	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getInputTypeList()
+	 * @generated
+	 */
+	int INPUT_TYPE_LIST = 9;
+
+	/**
+	 * The feature id for the '<em><b>Input Type</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TYPE_LIST__INPUT_TYPE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Input Type List</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TYPE_LIST_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Input Type List</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TYPE_LIST_OPERATION_COUNT = 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.GeneratorData <em>Generator Data</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -758,6 +805,17 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 */
 	EReference getGeneratorData_MemorySizeMappings();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.upb.lina.cfg.gendata.GeneratorData#getInputTypes <em>Input Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Input Types</em>'.
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getInputTypes()
+	 * @see #getGeneratorData()
+	 * @generated
+	 */
+	EReference getGeneratorData_InputTypes();
 
 	/**
 	 * Returns the meta object for the '{@link de.upb.lina.cfg.gendata.GeneratorData#getFilteredAddresses(java.lang.String) <em>Get Filtered Addresses</em>}' operation.
@@ -1094,6 +1152,27 @@ public interface GendataPackage extends EPackage
 	EAttribute getMemorySizeMapping_CompleteTypeSize();
 
 	/**
+	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.InputTypeList <em>Input Type List</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Input Type List</em>'.
+	 * @see de.upb.lina.cfg.gendata.InputTypeList
+	 * @generated
+	 */
+	EClass getInputTypeList();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link de.upb.lina.cfg.gendata.InputTypeList#getInputType <em>Input Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Input Type</em>'.
+	 * @see de.upb.lina.cfg.gendata.InputTypeList#getInputType()
+	 * @see #getInputTypeList()
+	 * @generated
+	 */
+	EAttribute getInputTypeList_InputType();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1206,6 +1285,14 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EReference GENERATOR_DATA__MEMORY_SIZE_MAPPINGS = eINSTANCE.getGeneratorData_MemorySizeMappings();
+
+		/**
+		 * The meta object literal for the '<em><b>Input Types</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GENERATOR_DATA__INPUT_TYPES = eINSTANCE.getGeneratorData_InputTypes();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Filtered Addresses</b></em>' operation.
@@ -1470,6 +1557,24 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE = eINSTANCE.getMemorySizeMapping_CompleteTypeSize();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.InputTypeListImpl <em>Input Type List</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.lina.cfg.gendata.impl.InputTypeListImpl
+		 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getInputTypeList()
+		 * @generated
+		 */
+		EClass INPUT_TYPE_LIST = eINSTANCE.getInputTypeList();
+
+		/**
+		 * The meta object literal for the '<em><b>Input Type</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INPUT_TYPE_LIST__INPUT_TYPE = eINSTANCE.getInputTypeList_InputType();
 
 	}
 
