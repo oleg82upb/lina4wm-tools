@@ -23,6 +23,7 @@ import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.GraphUtility;
 import de.upb.lina.cfg.tools.IGraphGenerator;
 import de.upb.lina.cfg.tools.ProgramCounter;
+import de.upb.lina.cfg.tools.checks.PreComputationChecker;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.BasicBlock;

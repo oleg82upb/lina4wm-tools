@@ -1,4 +1,4 @@
-package de.upb.lina.cfg.tools.strategies;
+package de.upb.lina.cfg.tools.checks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,7 @@ import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.tools.CFGActivator;
 import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.GraphUtility;
+import de.upb.lina.cfg.tools.strategies.SCGraphGenerator;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.ArithmeticOperation;
@@ -45,6 +46,7 @@ import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.VariableAttributeAccess;
 import de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl;
 
+@Deprecated
 public class PreComputationChecker {
 
 	private LLVM ast = null;
