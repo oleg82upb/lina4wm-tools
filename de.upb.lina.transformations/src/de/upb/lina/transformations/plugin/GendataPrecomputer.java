@@ -278,14 +278,26 @@ public class GendataPrecomputer {
 								createPhiMapping(t, list, ((BasicBlock) branch.eContainer()).getLabel());
 							}
 						}
+						else 
+						{
+							String dest = branch.getDestination().replace("%", "");
+							ArrayList<Phi> list = blockLabelToPhiInstructions.get(dest);
+		
+							if (!list.isEmpty())
+							{
+								createPhiMapping(t, list, ((BasicBlock) branch.eContainer()).getLabel());
+							}
+						}
 					}
-
-					String dest = branch.getDestination().replace("%", "");
-					ArrayList<Phi> list = blockLabelToPhiInstructions.get(dest);
-
-					if (!list.isEmpty())
+					else 
 					{
-						createPhiMapping(t, list, ((BasicBlock) branch.eContainer()).getLabel());
+						String dest = branch.getDestination().replace("%", "");
+						ArrayList<Phi> list = blockLabelToPhiInstructions.get(dest);
+	
+						if (!list.isEmpty())
+						{
+							createPhiMapping(t, list, ((BasicBlock) branch.eContainer()).getLabel());
+						}
 					}
 				}
 				
