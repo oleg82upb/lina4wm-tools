@@ -51,8 +51,8 @@ public class LIWDCPropertyChecker extends AbstractPropertyChecker {
 	 * @param ast
 	 * @param manager
 	 */
-	public LIWDCPropertyChecker(LLVM ast, PropertyCheckerManager manager) {
-		super(ast, manager);
+	public LIWDCPropertyChecker(LLVM ast) {
+		super(ast);
 		
 		wdcAddress = new ArrayList<Transition>();
 		wdcValue = new ArrayList<Transition>();
@@ -60,9 +60,9 @@ public class LIWDCPropertyChecker extends AbstractPropertyChecker {
 	}
 
 	@Override
-	public void check() {
-		checkResult = checkForLoadsInWriteDefChains();
-		if(checkResult){
+	public boolean check() {
+		isPropetyFulfilled = checkForLoadsInWriteDefChains();
+		if(isPropetyFulfilled){
 			String funcWithLoadsInWDC = "";
 			for (int i = 0; i < functionsWithLoadsInWriteDefChains.size(); i++)
 			{
@@ -71,8 +71,9 @@ public class LIWDCPropertyChecker extends AbstractPropertyChecker {
 			funcWithLoadsInWDC = funcWithLoadsInWDC.substring(0,funcWithLoadsInWDC.length()-2);
 			
 			String warning = "For some reads in functions " + funcWithLoadsInWDC + " it cannot be statically determined whether they are early reads or not.";
-			warningMessages.add(warning);
+			addMessage(warning);
 		}
+		return isPropetyFulfilled;
 	}
 	
 	public boolean checkForLoadsInWriteDefChains()
@@ -351,6 +352,12 @@ public class LIWDCPropertyChecker extends AbstractPropertyChecker {
 
 	public List<Transition> getWdcAddressValue() {
 		return wdcAddressValue;
+	}
+
+	@Override
+	protected void setErrorLevel() {
+		errorLevel = CFGConstants.LEVEL_WARNING;
+		
 	}
 
 	

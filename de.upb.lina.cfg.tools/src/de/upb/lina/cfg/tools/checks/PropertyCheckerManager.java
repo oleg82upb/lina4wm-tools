@@ -32,13 +32,12 @@ public class PropertyCheckerManager {
 		for(AbstractPropertyChecker checker: checkerModules){
 			checker.check();
 			if(checker.getLevel() == CFGConstants.LEVEL_ERROR){
-				foundError = foundError || checker.getCheckResult();
+				foundError = foundError || checker.isPropertyFulfilled();
+				this.errorMessages.addAll(checker.getMessages());
 			}else if(checker.getLevel() == CFGConstants.LEVEL_WARNING){
-				foundWarning = foundWarning || checker.getCheckResult();
+				foundWarning = foundWarning || checker.isPropertyFulfilled();
+				this.warningMessages.addAll(checker.getMessages());
 			}
-			
-			this.errorMessages.addAll(checker.getErrorMessages());
-			this.warningMessages.addAll(checker.getWarningMessages());
 		}
 	}
 	

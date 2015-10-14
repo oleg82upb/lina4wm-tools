@@ -8,42 +8,72 @@ import de.upb.llvm_parser.llvm.LLVM;
 
 public abstract class AbstractPropertyChecker {
 	
-	protected List<String> errorMessages;
-	protected List<String> warningMessages;
+	private int numberOfMessages = 0;
 	
-	protected boolean checkResult;
-	protected int level;
+	private List<String> messages;
+	
+	protected boolean isPropetyFulfilled;
+	protected int errorLevel;
 	
 	protected LLVM ast;
 	
-	public AbstractPropertyChecker(LLVM ast, PropertyCheckerManager manager){
-		this.errorMessages = new ArrayList<String>();
-		this.warningMessages = new ArrayList<String>();
-		this.checkResult = false;
+	public AbstractPropertyChecker(LLVM ast){
+		this.messages = new ArrayList<String>();
+		this.isPropetyFulfilled = false;
 		
 		this.ast = ast;
 		
-		level = CFGConstants.LEVEL_WARNING;
-		if(manager != null){
-			manager.registerPropertyChecker(this);
-		}
+		setErrorLevel();
+
 	}
 	
-	public List<String> getErrorMessages(){
-		return errorMessages;
+	public List<String> getMessages(){
+		return messages;
 	}
+
 	
-	public List<String> getWarningMessages(){
-		return warningMessages;
-	}
-	
-	public boolean getCheckResult(){
-		return checkResult;
+	public boolean isPropertyFulfilled(){
+		return isPropetyFulfilled;
 	}
 	
 	public int getLevel(){
-		return level;
+		return errorLevel;
+	}
+	
+	protected void addMessage(String m){
+		numberOfMessages++;
+		m = numberOfMessages +". " + m;
+		for(String message : splitMessage(m)){
+			messages.add(message);
+		}
+		
+	}
+	
+	public List<String> splitMessage(String m){
+		List<String> resultMessage = new ArrayList<String>();
+		if(m.length() > 20){
+			String result = "";
+			String[] splittedM = m.split(" ");
+			int size = 0;
+			for(int i = 0; i<splittedM.length; i++){
+				if(size > 70){
+					resultMessage.add(result);
+					result = "";
+					size = 0;
+				}
+				result += " " +splittedM[i];
+				size += splittedM[i].length();
+			}
+			if(!resultMessage.contains(result)){
+				resultMessage.add(result);
+			}
+		}else{
+			resultMessage.add(m);
+		}
+		return resultMessage;
 	}
 
-	public abstract void check();
+	public abstract boolean check();
+	
+	protected abstract void setErrorLevel();
 }

@@ -51,7 +51,7 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 		SCGraphGenerator scGen = new SCGraphGenerator(function); 
 		ControlFlowDiagram scGraph = scGen.createGraph();
 		
-		this.liwdcChecker = new LIWDCPropertyChecker(null, null);
+		this.liwdcChecker = new LIWDCPropertyChecker(null);
 		this.liwdcChecker.checkForWriteDefChains(scGraph, new ArrayList<Transition>());
 	}
 

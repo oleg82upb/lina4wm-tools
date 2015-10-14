@@ -3,6 +3,7 @@ package de.upb.lina.cfg.tools.checks;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.llvm_parser.llvm.AbstractElement;
 import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.ExtractElement;
@@ -22,17 +23,16 @@ public class UnsupportedInstructionPropertyChecker extends AbstractPropertyCheck
 	
 	private List<Class<?>> unsupportedInstructions;
 	
-	public UnsupportedInstructionPropertyChecker(LLVM ast,
-			PropertyCheckerManager manager) {
-		super(ast, manager);
+	public UnsupportedInstructionPropertyChecker(LLVM ast) {
+		super(ast);
 		
 		addUnsupportedInstructions();
 	}
 	
 	@Override
-	public void check() {
+	public boolean check() {
 		checkForUnsupportedInstructions();
-		
+		return isPropetyFulfilled;
 	}
 	
 	private void checkForUnsupportedInstructions(){
@@ -45,7 +45,7 @@ public class UnsupportedInstructionPropertyChecker extends AbstractPropertyCheck
 							String instructionName = getNameIfUnsupported(i);
 							if(instructionName != null){
 								generateUnsupportedString(instructionName, fDef);
-								checkResult = true;
+								isPropetyFulfilled = true;
 							}
 						}
 					}
@@ -58,7 +58,7 @@ public class UnsupportedInstructionPropertyChecker extends AbstractPropertyCheck
 		String result =  "Instruction of type " + instructionName
 				+ " in function " + functionDefinition.getAddress().getName()
 				+ " is unsupported.";
-		warningMessages.add(result);
+		addMessage(result);
 	}
 	
 	/**
@@ -93,6 +93,12 @@ public class UnsupportedInstructionPropertyChecker extends AbstractPropertyCheck
 		//forbid exception handling
 		unsupportedInstructions.add(Resume.class);
 		unsupportedInstructions.add(LandingPad.class);
+	}
+
+	@Override
+	protected void setErrorLevel() {
+		errorLevel = CFGConstants.LEVEL_WARNING;
+		
 	}
 
 }

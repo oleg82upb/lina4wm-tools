@@ -17,13 +17,13 @@ import de.upb.llvm_parser.llvm.Store;
 public class EarlyReadPropertyChecker extends AbstractPropertyChecker {
 
 	//TODO I guess we do not need this anymore?
-	public EarlyReadPropertyChecker(LLVM ast, PropertyCheckerManager manager) {
-		super(ast, manager);
+	public EarlyReadPropertyChecker(LLVM ast) {
+		super(ast);
 	}
 
 	@Override
-	public void check() {
-		// TODO Auto-generated method stub
+	public boolean check() {
+		return false;
 
 	}
 	
@@ -109,6 +109,12 @@ public class EarlyReadPropertyChecker extends AbstractPropertyChecker {
 		}
 		// no early read found
 		return false;
+	}
+
+	@Override
+	protected void setErrorLevel() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

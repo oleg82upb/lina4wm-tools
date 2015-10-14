@@ -12,7 +12,7 @@ import org.eclipse.ui.IWorkbenchWizard;
 import de.upb.lina.cfg.tools.CFGActivator;
 import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.CreateGraphOperation;
-import de.upb.lina.cfg.tools.checks.AstUtil;
+import de.upb.lina.cfg.tools.checks.AstLoader;
 import de.upb.lina.cfg.tools.checks.LIWDCPropertyChecker;
 import de.upb.lina.cfg.tools.checks.LWFPropertyChecker;
 import de.upb.lina.cfg.tools.checks.PropertyCheckerManager;
@@ -52,9 +52,12 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	 * @return false if we are not allowed to finish the page
 	 */
 	private void performChecks(LLVM ast){
-		PropertyCheckerManager manager = new PropertyCheckerManager();
 		
-		addPropertyCheckers(ast, manager);
+		//Setup checker and register checkers
+		PropertyCheckerManager manager = new PropertyCheckerManager();	
+		manager.registerPropertyChecker(new LIWDCPropertyChecker(ast));
+		manager.registerPropertyChecker(new LWFPropertyChecker(ast));
+		manager.registerPropertyChecker(new UnsupportedInstructionPropertyChecker(ast));
 		
 		manager.performChecks();
 		if(manager.foundError()){
@@ -70,12 +73,6 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 		warningPage.setWarningMessages(manager.getWarningMessages());
 		warningPage.setErrorMessages(manager.getErrorMessages());
 		
-	}
-
-	private void addPropertyCheckers(LLVM ast, PropertyCheckerManager manager) {
-		new LIWDCPropertyChecker(ast, manager);
-		new LWFPropertyChecker(ast, manager);
-		new UnsupportedInstructionPropertyChecker(ast, manager);
 	}
 
 
@@ -137,7 +134,7 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 			if (astLocation == null || !astLocation.equals(page.getAstLocation()))
 			{
 				astLocation = page.getAstLocation();
-				LLVM ast = AstUtil.loadAst(astLocation);
+				LLVM ast = AstLoader.loadAst(astLocation);
 				if(ast == null){
 					myCanFinish = false;
 				}else{

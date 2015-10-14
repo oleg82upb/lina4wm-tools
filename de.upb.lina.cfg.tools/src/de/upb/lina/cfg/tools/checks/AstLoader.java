@@ -11,7 +11,7 @@ import de.upb.lina.cfg.tools.CFGActivator;
 import de.upb.llvm_parser.llvm.LLVM;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
-public class AstUtil {
+public class AstLoader {
 	
 	public static LLVM loadAst(String astLocation){
 		try {

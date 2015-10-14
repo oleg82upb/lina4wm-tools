@@ -23,18 +23,18 @@ public class LWFPropertyChecker extends AbstractPropertyChecker {
 	
 	private String result;
 
-	public LWFPropertyChecker(LLVM ast, PropertyCheckerManager manager) {
-		super(ast, manager);
-		level = CFGConstants.LEVEL_ERROR;
+	public LWFPropertyChecker(LLVM ast) {
+		super(ast);
 	}
 
 	@Override
-	public void check() {
+	public boolean check() {
 		result = "";
-		checkResult = checkforLoopWithoutFence();
-		if(checkResult){
-			errorMessages.add("The selected ast contains a loop without fence in function " + result + ".");
+		isPropetyFulfilled = checkforLoopWithoutFence();
+		if(isPropetyFulfilled){
+			addMessage("The selected ast contains a loop without fence in function " + result + ".");
 		}
+		return isPropetyFulfilled;
 	}
 
 	private boolean checkforLoopWithoutFence()
@@ -58,7 +58,7 @@ public class LWFPropertyChecker extends AbstractPropertyChecker {
 
 					if (loopWithoutFenceinfunc)
 					{
-						result = func.getAddress().getName()+" at pc " + storeInLoopWithoutFence.getSource().getPc();
+						result = func.getAddress().getName();
 						if (CFGConstants.DEBUG)
 						{
 							System.out.println("Loops without fence found in function " + func.getAddress().getName());
@@ -123,6 +123,11 @@ public class LWFPropertyChecker extends AbstractPropertyChecker {
 		// no loop without fence found
 		explored.remove(t);
 		return false;
+	}
+
+	@Override
+	protected void setErrorLevel() {
+		errorLevel = CFGConstants.LEVEL_ERROR;
 	}
 
 }

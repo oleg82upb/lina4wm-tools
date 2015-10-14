@@ -66,7 +66,7 @@ public class WarningPage extends WizardPage {
 
 		errorViewer = new ListViewer(container, SWT.V_SCROLL);
 		errorViewer.setContentProvider(ArrayContentProvider.getInstance());
-		errorViewer.getControl().setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		errorViewer.getControl().setLayoutData(new GridData(GridData.FILL_BOTH));
 
 
 		Label warningLabel = new Label(container, SWT.NULL);
@@ -74,7 +74,7 @@ public class WarningPage extends WizardPage {
 		
 		warningViewer = new ListViewer(container, SWT.V_SCROLL);
 		warningViewer.setContentProvider(ArrayContentProvider.getInstance());
-		warningViewer.getControl().setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		warningViewer.getControl().setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		setControl(container);
 
