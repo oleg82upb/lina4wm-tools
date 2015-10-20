@@ -10,13 +10,11 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.tools.CFGConstants;
-import de.upb.lina.cfg.tools.strategies.TSOGraphGenerator;
-import de.upb.lina.cfg.tools.strategies.TSOUtil;
+import de.upb.lina.cfg.tools.GraphUtility;
 import de.upb.lina.cfg.tools.tests.TSO_Test;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
@@ -57,7 +55,7 @@ public class IndWR_2_1_cmpxchLoop extends TSO_Test {
 		
 		//check that all buffers contain the correct elements
 		for(ControlFlowLocation l: nonEmptyBuffers){
-			String buffer = gUtil.bufferToString(l, CFGConstants.TSO);
+			String buffer = GraphUtility.bufferToString(l, CFGConstants.TSO);
 			boolean isValidBuffer = buffer.equals("L" +l.getPc()+" <(null: b)>");
 			assertTrue(isValidBuffer);	
 		}

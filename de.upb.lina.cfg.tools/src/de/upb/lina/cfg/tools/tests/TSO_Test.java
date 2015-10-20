@@ -9,7 +9,6 @@ import org.junit.Before;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
-import de.upb.lina.cfg.tools.GraphUtility;
 import de.upb.lina.cfg.tools.strategies.TSOGraphGenerator;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LLVM;
@@ -19,7 +18,6 @@ public abstract class TSO_Test {
 	protected String testLocation;
 	protected LLVM ast;
 	protected FunctionDefinition functionTestData;
-	protected GraphUtility gUtil;
 	protected ControlFlowDiagram diag;
 
 	@Before
