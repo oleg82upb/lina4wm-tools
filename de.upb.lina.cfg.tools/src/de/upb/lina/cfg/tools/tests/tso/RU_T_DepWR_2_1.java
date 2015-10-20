@@ -60,7 +60,7 @@ public class RU_T_DepWR_2_1 extends TSO_Test{
 		//check that all buffers contain the correct elements
 		for(ControlFlowLocation l: nonEmptyBuffers){
 			String buffer = gUtil.bufferToString(l, CFGConstants.TSO);
-			boolean isValidBuffer = buffer.equals(l.getPc()+"<(%r1,%b)>");
+			boolean isValidBuffer = buffer.equals("L" +l.getPc()+" <(r1: b)>");
 			assertTrue(isValidBuffer);	
 		}
 		

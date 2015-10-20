@@ -60,7 +60,7 @@ public class Independent_Write_Read_1_1_rev extends TSO_Test {
 		//check that all buffers contain the correct elements
 		for(ControlFlowLocation l: nonEmptyBuffers){
 			String buffer = gUtil.bufferToString(l, CFGConstants.TSO);
-			boolean isValidBuffer = buffer.equals(l.getPc()+"<(null,%b)>");
+			boolean isValidBuffer = buffer.equals("L" +l.getPc()+" <(null: b)>");
 			assertTrue(isValidBuffer);
 
 		}
