@@ -12,6 +12,7 @@ import org.junit.Test;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.tools.CFGConstants;
+import de.upb.lina.cfg.tools.strategies.TSOGraphGenerator;
 import de.upb.lina.cfg.tools.strategies.TSOUtil;
 import de.upb.lina.cfg.tools.tests.TSO_Test;
 
@@ -25,8 +26,8 @@ public class RU_T_DepWR extends TSO_Test{
 
 	@Test
 	public final void testCreateReachibilityGraph() {
-		TSOUtil util = new TSOUtil(this.functionTestData);
-		ControlFlowDiagram diag = util.createGraph();
+		TSOGraphGenerator generator = new TSOGraphGenerator(this.functionTestData);
+		ControlFlowDiagram diag = generator.createGraph();
 		
 		//check for correct amount of locations and edges
 		assertEquals(diag.getLocations().size(),8);

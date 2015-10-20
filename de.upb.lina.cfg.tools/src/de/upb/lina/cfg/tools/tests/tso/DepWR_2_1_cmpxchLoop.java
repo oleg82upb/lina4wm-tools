@@ -15,6 +15,7 @@ import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.tools.CFGConstants;
+import de.upb.lina.cfg.tools.strategies.TSOGraphGenerator;
 import de.upb.lina.cfg.tools.strategies.TSOUtil;
 import de.upb.lina.cfg.tools.tests.TSO_Test;
 import de.upb.llvm_parser.llvm.LlvmPackage;
@@ -29,8 +30,8 @@ public class DepWR_2_1_cmpxchLoop extends TSO_Test {
 
 	@Test
 	public final void testCreateReachibilityGraph() {
-		TSOUtil util = new TSOUtil(this.functionTestData);
-		ControlFlowDiagram diag = util.createGraph();
+		TSOGraphGenerator generator = new TSOGraphGenerator(this.functionTestData);
+		ControlFlowDiagram diag = generator.createGraph();
 		
 		//check for correct amount of locations and edges
 		assertEquals(diag.getLocations().size(),14);
