@@ -43,7 +43,7 @@ public class DepRFW_Loop extends TSO_Test {
 		//check that all buffers contain the correct elements
 		for(ControlFlowLocation l: nonEmptyBuffers){
 			String buffer = GraphUtility.bufferToString(l, CFGConstants.TSO);
-			boolean isValidBuffer = buffer.equals("L" +l.getPc()+" <(r1: 0Copy)>");
+			boolean isValidBuffer = buffer.equals("L" +l.getPc()+" <(r1: v0"+CFGConstants.WDC_SUFFIX+")>");
 			assertTrue(isValidBuffer);	
 		}
 		

@@ -143,8 +143,6 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 	{
 		AddressValuePair newPair = ControlflowFactory.eINSTANCE.createAddressValuePair();
 		newPair.setAddress(store.getTargetAddress());
-		newPair.getValues().add(store.getValue());
-		//for normal write we are done here
 		
 		int wdcType = typeOfWriteDefChain(store);
 
@@ -165,6 +163,11 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 			// create Parameter
 			Parameter param = getOrCreateParamForAddress(newValue, store.getValue());
 			newPair.getValues().add(param);
+		}
+		else
+		{
+			// otherwise, use original value
+			newPair.getValues().add(store.getValue());
 		}
 		
 		return newPair;
@@ -202,10 +205,10 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 			newValue = wdcMapping.get(orgValue);
 		} else
 		{
-			Address copyValue = LlvmFactory.eINSTANCE.createAddress();
-			copyValue.setName(orgValue.getName() + CFGConstants.WDC_SUFFIX);
-			wdcMapping.put(orgValue, copyValue);
-			this.graph.getVariableCopies().add(copyValue);
+			newValue = LlvmFactory.eINSTANCE.createAddress();
+			newValue.setName(orgValue.getName() + CFGConstants.WDC_SUFFIX);
+			wdcMapping.put(orgValue, newValue);
+			this.graph.getVariableCopies().add(newValue);
 		}
 		return newValue;
 	}
@@ -239,14 +242,17 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 		transition.setDiagram(this.graph);
 		transition.setSource(source);
 		transition.setTarget(target);
+		transition.setInstruction(store);
 		
 		if (type == CFGConstants.WDC_BOTH || type == CFGConstants.WDC_ADDRESS)
 		{
 			transition.setCopyAddress((Address) pair.getAddress().getValue());
 		}
-		if (type == CFGConstants.WDC_BOTH || type == CFGConstants.WDC_ADDRESS)
+		if (type == CFGConstants.WDC_BOTH || type == CFGConstants.WDC_VALUE)
 		{
-			transition.setCopyValue((Address) pair.getValues().get(0));
+			Parameter v = pair.getValues().get(0);
+			Address copyV = ((AddressUse)v.getValue()).getAddress();
+			transition.setCopyValue(copyV);
 		}
 		
 		return transition;

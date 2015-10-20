@@ -59,28 +59,7 @@ import de.upb.llvm_parser.llvm.Vector;
 
 public abstract class GraphUtility {
 	
-	private static final String ASSIGN = " := ";
-	private static final String STORE = "STORE";
-	private static final String LOAD = "LOAD";
-	private static final String FLUSH = "FLUSH";
-	private static final String ALLOC = "alloc";
-	private static final String TRUE = "true";
-	private static final String FALSE = "false";
-	private static final String RETURN = "RET";
-	private static final String BRANCH = "GOTO";
-	private static final String FENCE = "FENCE";
-	private static final String CALL = "CALL";
-	private static final String INVOKE = "INVOKE";
-	private static final String TODO = "TODO";
-	private static final String WS = " ";
-	private static final String PC_PREF = "L";
-	private static final String PHI = '\u03A6' + "";
-	private static final String VEE = '\u02C5' + "";
-	private static final String WEDGE = '\u02C4' + "";
-	private static final String GETELEMENENTPTR = "getElementPtr";
-	
-	
-	
+
 
 	/**
 	 * @param string representation of address or value 
@@ -218,7 +197,7 @@ public abstract class GraphUtility {
 	public static String bufferToString(StoreBuffer buf, int pc, int memoryModel)
 	{
 
-		String buffer = PC_PREF + pc;
+		String buffer = CFGConstants.PC_PREF + pc;
 		if (buf.getAddressValuePairs().isEmpty())
 		{
 			return buffer;
@@ -420,9 +399,9 @@ public abstract class GraphUtility {
 				{ 
 					// this is TSO specific as the whole pair
 					AddressValuePair p = t.getSource().getBuffer().getAddressValuePairs().get(0);
-					return FLUSH + "(" + addressValuePairToString(p) + ")";
+					return CFGConstants.FLUSH + "(" + addressValuePairToString(p) + ")";
 				}
-				return FLUSH; //TODO compute what was flushed for PSO 
+				return CFGConstants.FLUSH; //TODO compute what was flushed for PSO 
 			}
 
 			throw new RuntimeException("Found flush transition for an empty buffer!");
@@ -431,7 +410,7 @@ public abstract class GraphUtility {
 		if (t instanceof EarlyReadTransition)
 		{
 			String s = addressToString(((Load) t.getInstruction()).getResult());
-			s += ASSIGN;
+			s += CFGConstants.ASSIGN;
 			s += ((EarlyReadTransition) t).getAssignmentExpression();
 			return s;
 		}
@@ -442,21 +421,21 @@ public abstract class GraphUtility {
 			Store store = (Store) wdc.getInstruction();
 			if (wdc.getCopyAddress() != null && wdc.getCopyValue() != null)
 			{
-				String s = addressToString(wdc.getCopyAddress()) + ASSIGN
+				String s = addressToString(wdc.getCopyAddress()) + CFGConstants.ASSIGN
 						+ parameterValueToString(store.getTargetAddress()) + "; " + addressToString(wdc.getCopyValue())
-						+ ASSIGN + parameterValueToString(store.getValue()) + "; " + STORE + "("
+						+ CFGConstants.ASSIGN + parameterValueToString(store.getValue()) + "; " + CFGConstants.STORE + "("
 						+ wdc.getCopyValue().getName() + ", " + wdc.getCopyAddress().getName() + ")";
 				return s;
 			} else if (wdc.getCopyValue() != null)
 			{
-				String s = addressToString(wdc.getCopyValue()) + ASSIGN + parameterValueToString(store.getValue())
-						+ "; " + STORE + "(" + wdc.getCopyValue().getName() + ", "
+				String s = addressToString(wdc.getCopyValue()) + CFGConstants.ASSIGN + parameterValueToString(store.getValue())
+						+ "; " + CFGConstants.STORE + "(" + wdc.getCopyValue().getName() + ", "
 						+ parameterValueToString(store.getTargetAddress()) + ")";
 				return s;
 			} else
 			{
-				String s = addressToString(wdc.getCopyAddress()) + ASSIGN
-						+ parameterValueToString(store.getTargetAddress()) + "; " + STORE + "("
+				String s = addressToString(wdc.getCopyAddress()) + CFGConstants.ASSIGN
+						+ parameterValueToString(store.getTargetAddress()) + "; " + CFGConstants.STORE + "("
 						+ parameterValueToString(store.getValue()) + ", " + wdc.getCopyAddress().getName() + ")";
 				return s;
 			}
@@ -469,20 +448,20 @@ public abstract class GraphUtility {
 
 		if (t.getInstruction() == null)
 		{
-			return TODO;
+			return CFGConstants.TODO;
 		}
 
 		Instruction instruction = t.getInstruction();
 		if (instruction instanceof Load)
 		{
 			Load instr = (Load) t.getInstruction();
-			result += addressToString(instr.getResult()) + ASSIGN;
-			result += LOAD + WS +  "(" + parameterValueToString(instr.getAddress()) + ")";
+			result += addressToString(instr.getResult()) + CFGConstants.ASSIGN;
+			result += CFGConstants.LOAD + CFGConstants.WS +  "(" + parameterValueToString(instr.getAddress()) + ")";
 		}
 		else if (instruction instanceof Store)
 		{
 			Store instr = (Store) t.getInstruction();
-			result += STORE + "(" + parameterValueToString(instr.getValue()) + ", "
+			result += CFGConstants.STORE + "(" + parameterValueToString(instr.getValue()) + ", "
 					+ parameterValueToString(instr.getTargetAddress()) + ")";
 		}
 		else if (instruction instanceof Branch)
@@ -492,14 +471,14 @@ public abstract class GraphUtility {
 				return ((GuardedTransition) t).getCondition();
 			} else
 			{
-				return BRANCH + WS + PC_PREF + t.getTarget().getPc();
+				return CFGConstants.BRANCH + CFGConstants.WS + CFGConstants.PC_PREF + t.getTarget().getPc();
 			}
 		}
 		else if (instruction instanceof GetElementPtr)
 		{
 			GetElementPtr instr = (GetElementPtr) t.getInstruction();
-			result += addressToString(instr.getResult()) + ASSIGN;
-			result += GETELEMENENTPTR + "(";
+			result += addressToString(instr.getResult()) + CFGConstants.ASSIGN;
+			result += CFGConstants.GETELEMENENTPTR + "(";
 			result += parameterValueToString(instr.getAggregate()) + ", ";
 			for (int i = 0; i < instr.getIndices().size(); i++)
 			{
@@ -515,7 +494,7 @@ public abstract class GraphUtility {
 		{
 
 			CmpXchg instr = (CmpXchg) t.getInstruction();
-			result += addressToString(instr.getResult()) + ASSIGN;
+			result += addressToString(instr.getResult()) + CFGConstants.ASSIGN;
 			result += "CAS(";
 			result += parameterValueToString(instr.getAddress()) + ", ";
 			result += parameterValueToString(instr.getValue()) + ", ";
@@ -527,26 +506,26 @@ public abstract class GraphUtility {
 			Call instr = (Call) t.getInstruction();
 			if (instr.getResult() != null)
 			{
-				result += addressToString(instr.getResult()) + ASSIGN;
+				result += addressToString(instr.getResult()) + CFGConstants.ASSIGN;
 			} 
-			result += CALL + WS;
+			result += CFGConstants.CALL + CFGConstants.WS;
 			result += parameterValueToString(instr.getFunction());
 			result += parameterListToString(instr.getPList());
 		}
 		else if (instruction instanceof Alloc)
 		{
 			Alloc instr = (Alloc) t.getInstruction();
-			result += addressToString(instr.getResult()) + ASSIGN;
-			result += ALLOC + WS;
+			result += addressToString(instr.getResult()) + CFGConstants.ASSIGN;
+			result += CFGConstants.ALLOC + CFGConstants.WS;
 			result += clean(typeUseToString(instr.getType()));
 		}
 		else if (instruction instanceof ArithmeticOperation)
 		{
 			ArithmeticOperation instr = (ArithmeticOperation) t.getInstruction();
-			result += addressToString(instr.getResult()) + ASSIGN;
+			result += addressToString(instr.getResult()) + CFGConstants.ASSIGN;
 			
 			String operation = instr.getOperation();
-			result += valueToString(instr.getValue1()) + WS;
+			result += valueToString(instr.getValue1()) + CFGConstants.WS;
 			if (operation.equals("add") || operation.equals("fadd"))
 			{
 				result += "+ ";
@@ -568,9 +547,9 @@ public abstract class GraphUtility {
 		else if (instruction instanceof LogicOperation)
 		{
 			LogicOperation instr = (LogicOperation) t.getInstruction();
-			result += addressToString(instr.getResult()) + ASSIGN;
+			result += addressToString(instr.getResult()) + CFGConstants.ASSIGN;
 			String operation = instr.getOperation();
-			result += valueToString(instr.getValue1()) + WS;
+			result += valueToString(instr.getValue1()) + CFGConstants.WS;
 			if (operation.equals("shl"))
 			{
 				result += "<< ";
@@ -596,18 +575,18 @@ public abstract class GraphUtility {
 		else if (instruction instanceof Compare)
 		{
 			Compare instr = (Compare) t.getInstruction();
-			result += addressToString(instr.getResult()) + ASSIGN + "(";
+			result += addressToString(instr.getResult()) + CFGConstants.ASSIGN + "(";
 			String compare = instr.getCond();
-			if (compare.equals(FALSE))
+			if (compare.equals(CFGConstants.FALSE))
 			{
-				result += FALSE;
+				result += CFGConstants.FALSE;
 				return result;
-			} else if (compare.equals(TRUE))
+			} else if (compare.equals(CFGConstants.TRUE))
 			{
-				result += TRUE;
+				result += CFGConstants.TRUE;
 				return result;
 			}
-			result += valueToString(instr.getOperand1()) + WS;
+			result += valueToString(instr.getOperand1()) + CFGConstants.WS;
 			if (compare.equals("eq"))
 			{
 				result += "== ";
@@ -673,7 +652,7 @@ public abstract class GraphUtility {
 		}
 		else if (instruction instanceof Return)
 		{
-			result += RETURN;
+			result += CFGConstants.RETURN;
 			EObject returnValue = ((Return) t.getInstruction()).getValue();
 			Value value = null;
 			if (returnValue instanceof Parameter)
@@ -686,27 +665,27 @@ public abstract class GraphUtility {
 
 			if (value != null)
 			{
-				result += WS + valueToString(value) + WS;
+				result += CFGConstants.WS + valueToString(value) + CFGConstants.WS;
 			}
 			return result;
 		}
 		else if (instruction instanceof Cast)
 		{
 			Cast instr = (Cast) t.getInstruction();
-			result += (addressToString(instr.getResult()) + ASSIGN + "(" 
+			result += (addressToString(instr.getResult()) + CFGConstants.ASSIGN + "(" 
 			//+ typeUseToString((TypeUse) instr.getFrom()) + "->"
 					+ clean(typeUseToString(instr.getTo())) + ") " + valueToString(instr.getValue()));
 		}
 		else if (instruction instanceof Invoke)
 		{
 			Invoke instr = (Invoke) t.getInstruction();
-			result += INVOKE + WS + addressToString(instr.getName()) + parameterListToString(instr.getPList());
+			result += CFGConstants.INVOKE + CFGConstants.WS + addressToString(instr.getName()) + parameterListToString(instr.getPList());
 			return result;
 		}
 		// Fence
 		else if (instruction instanceof Fence)
 		{
-			return FENCE;
+			return CFGConstants.FENCE;
 			// Fence instr = (Fence) t.getInstruction();
 			// result += instr.getOrdering();
 		}
@@ -740,7 +719,7 @@ public abstract class GraphUtility {
 				result += parameterValueToString(instr.getAddress());
 				result += " = ";
 				result += parameterValueToString(instr.getAddress());
-				result += WS+ WEDGE + WS;
+				result += CFGConstants.WS+ CFGConstants.WEDGE + CFGConstants.WS;
 				result += parameterValueToString(instr.getArgument());
 			} else if (operation.equals("nand"))
 			{
@@ -754,7 +733,7 @@ public abstract class GraphUtility {
 				result += parameterValueToString(instr.getAddress());
 				result += " = ";
 				result += parameterValueToString(instr.getAddress());
-				result += WS + VEE + WS;
+				result += CFGConstants.WS + CFGConstants.VEE + CFGConstants.WS;
 				result += parameterValueToString(instr.getArgument());
 			} else if (operation.equals("xor"))
 			{
@@ -785,7 +764,7 @@ public abstract class GraphUtility {
 		{
 			Phi phiInstruction = (Phi) t.getInstruction();
 			result = addressToString(phiInstruction.getResult());
-			result += " := " + PHI + " ";
+			result += " := " + CFGConstants.PHI + " ";
 
 			FunctionBody body = null;
 			EObject o = phiInstruction.eContainer().eContainer();
@@ -819,7 +798,7 @@ public abstract class GraphUtility {
 
 				// we use the PC instead of the original label, since we don't
 				// have the labels in the store buffer graph anymore
-				result += "[" + valueToString(phiCase.getValue()) + ", " + PC_PREF + sourcePC + "]";
+				result += "[" + valueToString(phiCase.getValue()) + ", " + CFGConstants.PC_PREF + sourcePC + "]";
 
 				if (i.hasNext())
 				{
@@ -996,17 +975,17 @@ public abstract class GraphUtility {
 		} else if (value instanceof NestedGetElementPtr)
 		{
 			// TODO indices are missing and actually a simple representation
-			return "(GetElementPtr" + WS + parameterValueToString(((NestedGetElementPtr) value).getAggregate()) +")";
+			return "(GetElementPtr" + CFGConstants.WS + parameterValueToString(((NestedGetElementPtr) value).getAggregate()) +")";
 		} else if (value instanceof NestedCast)
 		{
 			NestedCast val = (NestedCast) value;
 			result += "(" + typeToString(val.getFrom()) + "-->" + typeToString(val.getTo()) + ")" + valueToString(val.getValue());
 		} else
 		{
-			result += TODO;
+			result += CFGConstants.TODO;
 		}
 
-		return (result + WS);
+		return (result + CFGConstants.WS);
 	}
 
 	public static String parameterValueToString(Parameter val) {

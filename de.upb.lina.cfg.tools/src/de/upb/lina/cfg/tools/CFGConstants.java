@@ -22,4 +22,25 @@ public class CFGConstants {
 	
 	public static int LEVEL_ERROR = 1;
 	public static int LEVEL_WARNING = 2;
+	
+	
+	public static final String ASSIGN = " := ";
+	public static final String STORE = "STORE";
+	public static final String LOAD = "LOAD";
+	public static final String FLUSH = "FLUSH";
+	public static final String ALLOC = "alloc";
+	public static final String TRUE = "true";
+	public static final String FALSE = "false";
+	public static final String RETURN = "RET";
+	public static final String BRANCH = "GOTO";
+	public static final String FENCE = "FENCE";
+	public static final String CALL = "CALL";
+	public static final String INVOKE = "INVOKE";
+	public static final String TODO = "TODO";
+	public static final String WS = " ";
+	public static final String PC_PREF = "L";
+	public static final String PHI = '\u03A6' + "";
+	public static final String VEE = '\u02C5' + "";
+	public static final String WEDGE = '\u02C4' + "";
+	public static final String GETELEMENENTPTR = "getElementPtr";
 }
