@@ -25,8 +25,6 @@ public class DepRFW_Loop extends TSO_Test {
 
 	@Test
 	public final void testCreateReachibilityGraph() {
-		TSOGraphGenerator generator = new TSOGraphGenerator(this.functionTestData);
-		ControlFlowDiagram diag = generator.createGraph();
 		
 		//check for correct amount of locations and edges
 		assertEquals(diag.getLocations().size(),14);

@@ -7,8 +7,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.junit.Before;
 
+import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.tools.GraphUtility;
+import de.upb.lina.cfg.tools.strategies.TSOGraphGenerator;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LLVM;
 import de.upb.llvm_parser.llvm.LlvmPackage;
@@ -18,6 +20,7 @@ public abstract class TSO_Test {
 	protected LLVM ast;
 	protected FunctionDefinition functionTestData;
 	protected GraphUtility gUtil;
+	protected ControlFlowDiagram diag;
 
 	@Before
 	public void setUp() throws Exception {
@@ -33,5 +36,8 @@ public abstract class TSO_Test {
 			this.ast = (LLVM) ast;
 			this.functionTestData = (FunctionDefinition) this.ast.getElements().get(0);
 		}
+		
+		TSOGraphGenerator generator = new TSOGraphGenerator(this.functionTestData);
+		diag = generator.createGraph();
 	}
 }
