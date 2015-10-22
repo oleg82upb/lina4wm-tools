@@ -438,44 +438,64 @@ public class GendataPrecomputer {
 		computeGlobalLists();
 	}
 	
-	private void computeGlobalLists(){
-		
-		EMap<String,EList<AddressMapping>> filteredAddresses = helperModel.getFilteredAddresses();
-		
+	private void computeGlobalLists()
+	{
+
+		EMap<String, EList<AddressMapping>> filteredAddresses = helperModel.getFilteredAddresses();
+
 		// compute global list of parameters
 		EList<AddressMapping> allParamMappings = new BasicEList<AddressMapping>();
 		boolean returnvalueAdded = false;
-		
+
 		// compute global list of local variables
 		EList<AddressMapping> allLocalVariables = new BasicEList<AddressMapping>();
-		
-		for(ControlFlowDiagram cfg : cfgs){
-			
+
+		for (ControlFlowDiagram cfg : cfgs)
+		{
+
 			String name = cfg.getName();
-			EList<AddressMapping> funcParamMapping = helperModel.getFilteredAddresses(Constants.FUNC_PARAMS+name);
-			EList<AddressMapping> funcLocalVarsMapping = helperModel.getFilteredAddresses(Constants.FUNC_DECLARE+name);
-			
-			for(AddressMapping mapping : funcParamMapping){
-				if(!allParamMappings.contains(mapping)){
-					if(mapping.getName().equals("returnvalue")){
-						if(!returnvalueAdded){
+			EList<AddressMapping> funcParamMapping = helperModel.getFilteredAddresses(Constants.FUNC_PARAMS + name);
+			EList<AddressMapping> funcLocalVarsMapping = helperModel
+					.getFilteredAddresses(Constants.FUNC_DECLARE + name);
+
+			for (AddressMapping mapping : funcParamMapping)
+			{
+				if (!allParamMappings.contains(mapping))
+				{
+					if (mapping.getName().equals("returnvalue"))
+					{
+						if (!returnvalueAdded)
+						{
 							returnvalueAdded = true;
 							allParamMappings.add(mapping);
 						}
-					}else{
+					} else
+					{
 						allParamMappings.add(mapping);
 					}
 				}
 			}
-			
-			for(AddressMapping mapping : funcLocalVarsMapping){
-				if(!allLocalVariables.contains(mapping)){
+
+			for (AddressMapping mapping : funcLocalVarsMapping)
+			{
+				if (!allLocalVariables.contains(mapping))
+				{
 					allLocalVariables.add(mapping);
 				}
 			}
 		}
-		filteredAddresses.put(Constants.ALL_PARAMS, allParamMappings);
-		filteredAddresses.put(Constants.ALL_DECLARE, allLocalVariables);
+
+		// compute global list of local variables and parameter
+		EList<AddressMapping> allLocalsAndParams = new BasicEList<AddressMapping>();
+		allLocalsAndParams.addAll(allLocalVariables);
+		for (AddressMapping am : allParamMappings)
+		{
+			if(!allLocalsAndParams.contains(am))
+			{
+				allLocalsAndParams.add(am);
+			}
+		}
+		filteredAddresses.put(Constants.ALL_DECLARE_PARAMS, allLocalsAndParams);
 	}
 	
 	
@@ -503,7 +523,10 @@ public class GendataPrecomputer {
 				{
 					List<String> copyFuncInput = new ArrayList<String>(funcInput);
 
-					copyFuncInput.removeAll(list.getInputType());
+					for(String s : list.getInputType()){
+						copyFuncInput.remove(s);
+					}
+//					copyFuncInput.removeAll(list.getInputType());
 					if (copyFuncInput.isEmpty())
 					{
 						duplicate = true;

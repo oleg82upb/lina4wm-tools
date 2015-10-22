@@ -18,6 +18,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/phiMappings"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/filteredAddresses"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/addressMappings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/memorySizeMappings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/inputTypes"/>
       <genOperations ecoreOperation="gendata.ecore#//GeneratorData/getFilteredAddresses">
         <genParameters ecoreParameter="gendata.ecore#//GeneratorData/getFilteredAddresses/key"/>
       </genOperations>
@@ -53,6 +55,15 @@
     <genClasses ecoreClass="gendata.ecore#//FilterToAddressMapping">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gendata.ecore#//FilterToAddressMapping/key"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//FilterToAddressMapping/value"/>
+    </genClasses>
+    <genClasses ecoreClass="gendata.ecore#//MemorySizeMapping">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//MemorySizeMapping/instruction"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gendata.ecore#//MemorySizeMapping/size"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gendata.ecore#//MemorySizeMapping/generatorData"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gendata.ecore#//MemorySizeMapping/completeTypeSize"/>
+    </genClasses>
+    <genClasses ecoreClass="gendata.ecore#//InputTypeList">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gendata.ecore#//InputTypeList/inputType"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

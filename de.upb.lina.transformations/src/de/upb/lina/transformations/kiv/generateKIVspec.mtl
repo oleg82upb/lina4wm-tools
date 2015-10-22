@@ -8,10 +8,9 @@
 data specification
 	using [basis(genData)/]ref, PC, PID
 	Localstate :=mkls( . .pc : PC; . .pid : PID;
-					[for(am: AddressMapping | genData.getFilteredAddresses('all-declare'))] 
+					[for(am: AddressMapping | genData.getFilteredAddresses('all-declare-params'))]
 					. .[am.name/] : [am.type/];
-					[/for]
-					[for(am: AddressMapping | genData.getFilteredAddresses('all-params'))]. .[am.name/] : [am.type/]; [/for]);
+					[/for]);
 	variables
 		ls : Localstate;
 end data specification
@@ -54,7 +53,7 @@ end data specification
 data specification
 	using [basis(genData)/]ref
 
-	input =[for(inpList : InputTypeList | genData.inputTypes)separator('|')] mk[i/]([for(inputType : String | inpList.inputType->asSequence())] . .[inputType/]: [inputType/];[/for]) with [for(inputType : String | inpList.inputType)][inputType/][/for]? [/for];
+	input =[for(inpList : InputTypeList | genData.inputTypes)separator('|')] mk[i/]([for(inputType : String | inpList.inputType->asSequence()->select(equalsIgnoreCase(basis(genData))))] . .[inputType/][i/]: [inputType/];[/for][for(inputType : String | inpList.inputType->asSequence()->select(equalsIgnoreCase('ref')))] . .[inputType/][i/]: [inputType/];[/for]) with [for(inputType : String | inpList.inputType)][inputType/][/for]? [/for];
 	variables
 		inp : input;
 end data specification
@@ -125,7 +124,8 @@ if genData.transformationSpecificKeys->indexOf('INPUT_NEEDED').oclIsUndefined() 
 [/template]
 
 [template private generateFunctionParameter(cfg: ControlFlowDiagram, genData : GeneratorData)]
-[for(am : AddressMapping | genData.getFilteredAddresses('func-params:' + cfg.name))][if(am.name.equalsIgnoreCase('returnvalue')._not())].[am.name/]:=[if(am.type.equalsIgnoreCase('ref')._not() and genData.transformationSpecificKeys->indexOf('INPUT_REF').oclIsUndefined()._not() and input(genData)._not())] inp .v [else] inp [/if][if(input(genData))].[am.type/] [/if][/if][/for]
+[for(am : AddressMapping | genData.getFilteredAddresses('func-params:' + cfg.name)->select(type.equalsIgnoreCase('ref'))->select(name.equalsIgnoreCase('returnvalue')._not()))].[am.name/]:= inp [if(input(genData))].[am.type/][i/] [/if][/for]
+[for(am : AddressMapping | genData.getFilteredAddresses('func-params:' + cfg.name)->select(type.equalsIgnoreCase(basis(genData)))->select(name.equalsIgnoreCase('returnvalue')._not()))].[am.name/]:=[if(genData.transformationSpecificKeys->indexOf('INPUT_REF').oclIsUndefined()._not() and input(genData)._not())] inp .v [else] inp [/if][if(input(genData))].[am.type/][i/] [/if][/for]
 [/template]
 
 [template private generateGlobalConstants(genData : GeneratorData)]
@@ -350,7 +350,7 @@ unsupported operation
 
 [template private possiblyAddLS(v : Value, genData: GeneratorData)]
 [if(v.oclIsTypeOf(AddressUse))]
-[for(am : AddressMapping| genData.getFilteredAddresses('all-declare'))][for(a : Address | am.adresses)][if(a = v.oclAsType(AddressUse).address)]ls .[/if][/for][/for][for(am : AddressMapping| genData.getFilteredAddresses('all-params'))][for(a : Address | am.adresses)][if(a = v.oclAsType(AddressUse).address)]ls .[/if][/for][/for][/if]
+[for(am : AddressMapping | genData.getFilteredAddresses('all-declare-params'))][for(a: Address | am.adresses)][if(a = v.oclAsType(AddressUse).address)]ls .[/if][/for][/for][/if]
 [/template]
 
 [template private transformBooleanToNumber(b : String)]

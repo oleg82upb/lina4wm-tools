@@ -4,15 +4,11 @@ package de.upb.lina.cfg.gendata.impl;
 
 import de.upb.lina.cfg.gendata.GendataPackage;
 import de.upb.lina.cfg.gendata.InputTypeList;
-
 import java.util.Collection;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -64,7 +60,7 @@ public class InputTypeListImpl extends MinimalEObjectImpl.Container implements I
 	 */
 	public EList<String> getInputType() {
 		if (inputType == null) {
-			inputType = new EDataTypeUniqueEList<String>(String.class, this, GendataPackage.INPUT_TYPE_LIST__INPUT_TYPE);
+			inputType = new EDataTypeEList<String>(String.class, this, GendataPackage.INPUT_TYPE_LIST__INPUT_TYPE);
 		}
 		return inputType;
 	}

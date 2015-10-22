@@ -33,7 +33,7 @@ public interface InputTypeList extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Input Type</em>' attribute list.
 	 * @see de.upb.lina.cfg.gendata.GendataPackage#getInputTypeList_InputType()
-	 * @model
+	 * @model unique="false"
 	 * @generated
 	 */
 	EList<String> getInputType();

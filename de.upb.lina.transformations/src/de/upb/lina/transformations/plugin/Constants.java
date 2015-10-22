@@ -24,15 +24,10 @@ public abstract class Constants {
 	 */
 	public static final String FUNC_ALL = "func-all:";
 	/**
-	 * Constant used to obtain the list of all function parameters via the filteredAddresses association
+	 * Constant used to obtain the list of all local variables and all function parameters via the filteredAddresses association
 	 * in the GeneratorData.
 	 */
-	public static final String ALL_PARAMS = "all-params";
-	/**
-	 * Constant used to obtain the list of all local variables via the filteredAddresses association
-	 * in the GeneratorData.
-	 */
-	public static final String ALL_DECLARE = "all-declare";
+	public static final String ALL_DECLARE_PARAMS = "all-declare-params";
 	/* Constants used in transformationSpecificKey association in GeneratorData*/
 	
 	/**
