@@ -3,6 +3,7 @@ package de.upb.lina.transformations.plugin;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -84,6 +85,7 @@ public class GendataPrecomputer {
 
 	private List<ControlFlowDiagram> cfgs;
 	private int basis;
+	private Map<String, String> oldToNewCfgName;
 	private GeneratorData helperModel;
 
 	private HashMap <Address, String> addressLookup = new HashMap<Address, String>();
@@ -94,9 +96,10 @@ public class GendataPrecomputer {
 
 	private HashMap<FunctionDefinition, List<String>> usedVarsInFunctions = new HashMap<FunctionDefinition, List<String>>();
 
-	public GendataPrecomputer(List<ControlFlowDiagram> cfgs, int basis){
-		this.cfgs = cfgs;
-		this.basis = basis;
+	public GendataPrecomputer(Configuration config){
+		this.cfgs = config.getCfgs();
+		this.basis = config.getKIVBasis();
+		this.oldToNewCfgName = config.getOldToNewCfgName();
 	}
 
 	public GeneratorData computeGeneratorData(){

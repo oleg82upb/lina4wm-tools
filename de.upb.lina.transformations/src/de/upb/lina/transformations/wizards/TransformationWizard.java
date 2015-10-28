@@ -1,6 +1,8 @@
 package de.upb.lina.transformations.wizards;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+import java.util.Map;
 
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -10,8 +12,10 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
+import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.transformations.kiv.KivTransformationOperation;
 import de.upb.lina.transformations.plugin.Activator;
+import de.upb.lina.transformations.plugin.Configuration;
 import de.upb.lina.transformations.plugin.ETransformationTarget;
 import de.upb.lina.transformations.promela.PromelaTransformationOperation;
 
@@ -23,27 +27,37 @@ public class TransformationWizard extends Wizard implements INewWizard {
 	
 
 	@Override
-	public boolean performFinish() {
+	public boolean performFinish()
+	{
 		wizardPage.saveMementoState();
 		WorkspaceModifyOperation wmo = null;
-		
-		if(wizardPage.getType() == ETransformationTarget.PROMELA){
-			//Promela
-			wmo = new PromelaTransformationOperation(functionSelectionPage.getSelectedFunctions(), 
-					wizardPage.getContainerText().getText(), wizardPage.getFileText().getText(), 
-					wizardPage.getFileEndingLabel().getText());
-		}else if (wizardPage.getType() == ETransformationTarget.KIV){
-			//KIV
-			wmo = new KivTransformationOperation(functionSelectionPage.getSelectedFunctions(), wizardPage
-					.getContainerText().getText(), wizardPage.getFileText().getText(), wizardPage.getFileEndingLabel()
-					.getText(), wizardPage.getBasis());
+
+		// create config object from selected configuration
+		List<ControlFlowDiagram> cfgs = functionSelectionPage.getSelectedFunctions();
+		int kIVBasis = wizardPage.getBasis();
+		Map<String, String> oldToNewCfgName = functionSelectionPage.getMap();
+		Configuration config = new Configuration(cfgs, kIVBasis, oldToNewCfgName);
+
+		if (wizardPage.getType() == ETransformationTarget.PROMELA)
+		{
+			// Promela
+			wmo = new PromelaTransformationOperation(wizardPage.getContainerText().getText(), wizardPage.getFileText()
+					.getText(), wizardPage.getFileEndingLabel().getText(), config);
+		} else if (wizardPage.getType() == ETransformationTarget.KIV)
+		{
+			// KIV
+			wmo = new KivTransformationOperation(wizardPage.getContainerText().getText(), wizardPage.getFileText()
+					.getText(), wizardPage.getFileEndingLabel().getText(), config);
 		}
-		
-		try {
+
+		try
+		{
 			getContainer().run(true, false, wmo);
-		} catch (InvocationTargetException e) {
+		} catch (InvocationTargetException e)
+		{
 			Activator.logError("InvocationTargetException occured during the transformation.", e);
-		} catch (InterruptedException e) {
+		} catch (InterruptedException e)
+		{
 			Activator.logError("InterruptedException occured during the transformation.", e);
 		}
 		return true;

@@ -15,14 +15,19 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.TreeEditor;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.swt.widgets.TreeItem;
@@ -42,8 +47,9 @@ public class FunctionSelectionPage extends WizardPage{
 	
 	private List<ControlFlowDiagram> allCFGs;
 	private List<ControlFlowDiagram>selectedFunctions = new ArrayList<ControlFlowDiagram>();
-	private HashMap<ControlFlowDiagram, List<ControlFlowDiagram>> cfgToDependentFunctions = new HashMap<ControlFlowDiagram, List<ControlFlowDiagram>>();
+	private HashMap<ControlFlowDiagram, List<ControlFlowDiagram>> cfgToDependentFunctions = new HashMap<>();
 	private HashMap<String, ControlFlowDiagram> functionToCfg;
+	private HashMap<String, String> oldToNewCfgName = new HashMap<>();
 	private Tree tree;
 	
 
@@ -71,8 +77,14 @@ public class FunctionSelectionPage extends WizardPage{
 		tree = new Tree(composite,SWT.CHECK | SWT.MULTI | SWT.H_SCROLL |SWT.BORDER);
 		TreeColumn column = new TreeColumn(tree, SWT.H_SCROLL);
 		column.setText("Available Functions");
-		column.setWidth(450);
+		column.setWidth(250);
+		
+		TreeColumn column2 = new TreeColumn(tree, SWT.H_SCROLL);
+		column2.setText("Name in Transformation");
+		column2.setWidth(200);
+		
 		tree.setHeaderVisible(true);
+		tree.setLinesVisible(true);
 		GridData treeLayoutData = new GridData(GridData.FILL, GridData.FILL, true, true);
 		tree.setLayoutData(treeLayoutData);
 		loadCfg();
@@ -126,12 +138,37 @@ public class FunctionSelectionPage extends WizardPage{
 	private void refreshTree(){
 		if(tree!=null){
 			tree.removeAll();
+			Control[] children = tree.getChildren();
+			for(int i = 0; i<children.length;i++){
+				Control child = children[i];
+				if(child instanceof Text){
+					Text text = (Text)child;
+					text.setText("");
+					text.dispose();
+				}
+			}
+			
+			oldToNewCfgName.clear();
 			selectedFunctions.clear();
 			for(ControlFlowDiagram diagram : allCFGs){
-				String cfgname = diagram.getName();
+				String cfgName = diagram.getName();
 				TreeItem item = new TreeItem(tree, SWT.NONE);
-				item.setText(new String[]{cfgname});
+				TreeEditor editor = new TreeEditor(tree);
+				item.setText(cfgName);
 				item.setChecked(true);
+				Text newName = new Text(tree, SWT.NONE);
+				newName.addModifyListener(new ModifyListener() {
+					
+					@Override
+					public void modifyText(ModifyEvent e)
+					{
+						Text text = (Text) e.widget;
+						oldToNewCfgName.put(diagram.getName(), text.getText());
+					}
+				});
+				newName.setText(cfgName.replace("@_", "").replace("@", ""));
+				editor.grabHorizontal = true;
+				editor.setEditor(newName, item, 1);
 				updateSelectedFunctions(item);
 			}
 		}
@@ -270,6 +307,11 @@ public class FunctionSelectionPage extends WizardPage{
 		if(!dependentFuncs.contains(calledCfg)){
 			dependentFuncs.add(calledCfg);
 		}
+	}
+	
+	public HashMap<String, String> getMap()
+	{
+		return oldToNewCfgName;
 	}
 
 }

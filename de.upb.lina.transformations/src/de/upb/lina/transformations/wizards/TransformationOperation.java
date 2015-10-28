@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
@@ -16,6 +17,7 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.lina.transformations.plugin.Activator;
+import de.upb.lina.transformations.plugin.Configuration;
 import de.upb.lina.transformations.plugin.GendataPrecomputer;
 
 public abstract class TransformationOperation extends WorkspaceModifyOperation{
@@ -23,19 +25,17 @@ public abstract class TransformationOperation extends WorkspaceModifyOperation{
 	protected String targetContainer;
 	protected String targetName;
 	protected String fileEnding;
-	protected int basis;
 	protected java.nio.file.Path fullPath;
 	
-	protected List<ControlFlowDiagram> cfgList;
 	protected GeneratorData genData;
+	Configuration config;
 	
 	
-	public TransformationOperation(List<ControlFlowDiagram> cfgs, String targetContainer, String targetName, String fileEnding, int basis) {
-		this.cfgList = cfgs;
+	public TransformationOperation(String targetContainer, String targetName, String fileEnding, Configuration config) {
 		this.targetContainer = targetContainer; 
 		this.targetName = targetName;
 		this.fileEnding = fileEnding;
-		this.basis = basis;
+		this.config = config;
 	}
 	
 	
@@ -44,7 +44,7 @@ public abstract class TransformationOperation extends WorkspaceModifyOperation{
 			InvocationTargetException, InterruptedException {
 		
 		//Run Precomputation
-		GendataPrecomputer precomp = new GendataPrecomputer(cfgList, basis);
+		GendataPrecomputer precomp = new GendataPrecomputer(config);
 		genData = precomp.computeGeneratorData();
 		
 		//get workspace root
