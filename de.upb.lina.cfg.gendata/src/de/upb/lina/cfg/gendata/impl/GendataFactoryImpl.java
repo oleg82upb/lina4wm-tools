@@ -71,6 +71,7 @@ public class GendataFactoryImpl extends EFactoryImpl implements GendataFactory
 			case GendataPackage.FILTER_TO_ADDRESS_MAPPING: return (EObject)createFilterToAddressMapping();
 			case GendataPackage.MEMORY_SIZE_MAPPING: return createMemorySizeMapping();
 			case GendataPackage.INPUT_TYPE_LIST: return createInputTypeList();
+			case GendataPackage.OLD_TO_NEW_CFG_NAME_MAPPING: return (EObject)createoldToNewCfgNameMapping();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -166,6 +167,16 @@ public class GendataFactoryImpl extends EFactoryImpl implements GendataFactory
 	public InputTypeList createInputTypeList() {
 		InputTypeListImpl inputTypeList = new InputTypeListImpl();
 		return inputTypeList;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map.Entry<String, String> createoldToNewCfgNameMapping() {
+		oldToNewCfgNameMappingImpl oldToNewCfgNameMapping = new oldToNewCfgNameMappingImpl();
+		return oldToNewCfgNameMapping;
 	}
 
 	/**

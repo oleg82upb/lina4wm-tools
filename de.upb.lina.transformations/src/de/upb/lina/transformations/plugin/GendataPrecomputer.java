@@ -159,6 +159,9 @@ public class GendataPrecomputer {
 			//KIVSpecificKeys
 			computeKIVSpecificKeys();
 			computeInputTypes();
+			
+			//new CFG names
+			computeNewCfgNames();
 
 
 		}catch(ClassCastException ex){
@@ -362,6 +365,14 @@ public class GendataPrecomputer {
 			}
 		}
 	}
+	
+	private void computeNewCfgNames()
+	{
+		for(Map.Entry<String, String> entry : oldToNewCfgName.entrySet())
+		{
+			helperModel.getOldToNewCfgName().put(entry.getKey(), entry.getValue());
+		}
+	}
 
 	private void computeFilteredAddresses(){
 		
@@ -546,11 +557,16 @@ public class GendataPrecomputer {
 		}
 	}
 
-	private void computeTransitionLabels() {
-		for(ControlFlowDiagram cfg : cfgs){
+	private void computeTransitionLabels()
+	{
+		for (ControlFlowDiagram cfg : cfgs)
+		{
 			int size = 1;
-			for(Transition t : cfg.getTransitions()){
-				String labelName = generateTransitionLabel(t, size);
+			for (Transition t : cfg.getTransitions())
+			{
+				String sizeString = String.valueOf(size);
+				String newCfgName = oldToNewCfgName.get(t.getDiagram().getName());
+				String labelName = newCfgName + sizeString;
 				List<TransitionLabel> labels = helperModel.getTransitionLabels();
 				TransitionLabel transitionLabel = GendataFactory.eINSTANCE.createTransitionLabel();
 				transitionLabel.setName(labelName);
@@ -559,12 +575,6 @@ public class GendataPrecomputer {
 				size++;
 			}
 		}
-	}
-	
-	private String generateTransitionLabel(Transition transition, int size){
-		String sizeString = String.valueOf(size);
-		String transitionLabel = cfgToLabelPrefix.get(transition.getDiagram()).toLowerCase()+sizeString;		
-		return transitionLabel;
 	}
 
 	private void computeLocationLabels(){

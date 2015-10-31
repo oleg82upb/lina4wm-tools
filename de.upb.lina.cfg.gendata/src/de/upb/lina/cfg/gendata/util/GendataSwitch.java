@@ -135,6 +135,12 @@ public class GendataSwitch<T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case GendataPackage.OLD_TO_NEW_CFG_NAME_MAPPING: {
+				@SuppressWarnings("unchecked") Map.Entry<String, String> oldToNewCfgNameMapping = (Map.Entry<String, String>)theEObject;
+				T result = caseoldToNewCfgNameMapping(oldToNewCfgNameMapping);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -288,6 +294,21 @@ public class GendataSwitch<T> extends Switch<T>
 	 * @generated
 	 */
 	public T caseInputTypeList(InputTypeList object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>old To New Cfg Name Mapping</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>old To New Cfg Name Mapping</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseoldToNewCfgNameMapping(Map.Entry<String, String> object) {
 		return null;
 	}
 

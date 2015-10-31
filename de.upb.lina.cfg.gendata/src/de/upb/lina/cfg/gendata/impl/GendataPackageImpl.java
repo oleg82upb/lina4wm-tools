@@ -102,6 +102,13 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	private EClass inputTypeListEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass oldToNewCfgNameMappingEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -275,6 +282,15 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 */
 	public EReference getGeneratorData_InputTypes() {
 		return (EReference)generatorDataEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getGeneratorData_OldToNewCfgName() {
+		return (EReference)generatorDataEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -582,6 +598,33 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getoldToNewCfgNameMapping() {
+		return oldToNewCfgNameMappingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getoldToNewCfgNameMapping_Key() {
+		return (EAttribute)oldToNewCfgNameMappingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getoldToNewCfgNameMapping_Value() {
+		return (EAttribute)oldToNewCfgNameMappingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public GendataFactory getGendataFactory()
 	{
 		return (GendataFactory)getEFactoryInstance();
@@ -619,6 +662,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		createEReference(generatorDataEClass, GENERATOR_DATA__ADDRESS_MAPPINGS);
 		createEReference(generatorDataEClass, GENERATOR_DATA__MEMORY_SIZE_MAPPINGS);
 		createEReference(generatorDataEClass, GENERATOR_DATA__INPUT_TYPES);
+		createEReference(generatorDataEClass, GENERATOR_DATA__OLD_TO_NEW_CFG_NAME);
 		createEOperation(generatorDataEClass, GENERATOR_DATA___GET_FILTERED_ADDRESSES__STRING);
 
 		addressMappingEClass = createEClass(ADDRESS_MAPPING);
@@ -661,6 +705,10 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 
 		inputTypeListEClass = createEClass(INPUT_TYPE_LIST);
 		createEAttribute(inputTypeListEClass, INPUT_TYPE_LIST__INPUT_TYPE);
+
+		oldToNewCfgNameMappingEClass = createEClass(OLD_TO_NEW_CFG_NAME_MAPPING);
+		createEAttribute(oldToNewCfgNameMappingEClass, OLD_TO_NEW_CFG_NAME_MAPPING__KEY);
+		createEAttribute(oldToNewCfgNameMappingEClass, OLD_TO_NEW_CFG_NAME_MAPPING__VALUE);
 	}
 
 	/**
@@ -713,6 +761,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		initEReference(getGeneratorData_AddressMappings(), this.getAddressMapping(), this.getAddressMapping_GeneratorData(), "addressMappings", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_MemorySizeMappings(), this.getMemorySizeMapping(), this.getMemorySizeMapping_GeneratorData(), "memorySizeMappings", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_InputTypes(), this.getInputTypeList(), null, "inputTypes", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGeneratorData_OldToNewCfgName(), this.getoldToNewCfgNameMapping(), null, "oldToNewCfgName", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = initEOperation(getGeneratorData__GetFilteredAddresses__String(), this.getAddressMapping(), "getFilteredAddresses", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "key", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -757,6 +806,10 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 
 		initEClass(inputTypeListEClass, InputTypeList.class, "InputTypeList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getInputTypeList_InputType(), ecorePackage.getEString(), "inputType", null, 0, -1, InputTypeList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(oldToNewCfgNameMappingEClass, Map.Entry.class, "oldToNewCfgNameMapping", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getoldToNewCfgNameMapping_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getoldToNewCfgNameMapping_Value(), ecorePackage.getEString(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

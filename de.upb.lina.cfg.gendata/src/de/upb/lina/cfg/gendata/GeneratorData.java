@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getAddressMappings <em>Address Mappings</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getMemorySizeMappings <em>Memory Size Mappings</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getInputTypes <em>Input Types</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getOldToNewCfgName <em>Old To New Cfg Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -236,6 +237,23 @@ public interface GeneratorData extends EObject
 	 * @generated
 	 */
 	EList<InputTypeList> getInputTypes();
+
+	/**
+	 * Returns the value of the '<em><b>Old To New Cfg Name</b></em>' map.
+	 * The key is of type {@link java.lang.String},
+	 * and the value is of type {@link java.lang.String},
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Old To New Cfg Name</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Old To New Cfg Name</em>' map.
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_OldToNewCfgName()
+	 * @model mapType="de.upb.lina.cfg.gendata.oldToNewCfgNameMapping<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>"
+	 * @generated
+	 */
+	EMap<String, String> getOldToNewCfgName();
 
 	/**
 	 * <!-- begin-user-doc -->

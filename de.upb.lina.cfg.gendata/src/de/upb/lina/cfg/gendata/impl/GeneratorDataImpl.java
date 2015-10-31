@@ -52,6 +52,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getAddressMappings <em>Address Mappings</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getMemorySizeMappings <em>Memory Size Mappings</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getInputTypes <em>Input Types</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getOldToNewCfgName <em>Old To New Cfg Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -168,6 +169,16 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @ordered
 	 */
 	protected EList<InputTypeList> inputTypes;
+
+	/**
+	 * The cached value of the '{@link #getOldToNewCfgName() <em>Old To New Cfg Name</em>}' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOldToNewCfgName()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMap<String, String> oldToNewCfgName;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -354,6 +365,18 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EMap<String, String> getOldToNewCfgName() {
+		if (oldToNewCfgName == null) {
+			oldToNewCfgName = new EcoreEMap<String,String>(GendataPackage.Literals.OLD_TO_NEW_CFG_NAME_MAPPING, oldToNewCfgNameMappingImpl.class, this, GendataPackage.GENERATOR_DATA__OLD_TO_NEW_CFG_NAME);
+		}
+		return oldToNewCfgName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unchecked")
@@ -422,6 +445,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return ((InternalEList<?>)getMemorySizeMappings()).basicRemove(otherEnd, msgs);
 			case GendataPackage.GENERATOR_DATA__INPUT_TYPES:
 				return ((InternalEList<?>)getInputTypes()).basicRemove(otherEnd, msgs);
+			case GendataPackage.GENERATOR_DATA__OLD_TO_NEW_CFG_NAME:
+				return ((InternalEList<?>)getOldToNewCfgName()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -459,6 +484,9 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return getMemorySizeMappings();
 			case GendataPackage.GENERATOR_DATA__INPUT_TYPES:
 				return getInputTypes();
+			case GendataPackage.GENERATOR_DATA__OLD_TO_NEW_CFG_NAME:
+				if (coreType) return getOldToNewCfgName();
+				else return getOldToNewCfgName().map();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -515,6 +543,9 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				getInputTypes().clear();
 				getInputTypes().addAll((Collection<? extends InputTypeList>)newValue);
 				return;
+			case GendataPackage.GENERATOR_DATA__OLD_TO_NEW_CFG_NAME:
+				((EStructuralFeature.Setting)getOldToNewCfgName()).set(newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -561,6 +592,9 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 			case GendataPackage.GENERATOR_DATA__INPUT_TYPES:
 				getInputTypes().clear();
 				return;
+			case GendataPackage.GENERATOR_DATA__OLD_TO_NEW_CFG_NAME:
+				getOldToNewCfgName().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -596,6 +630,8 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return memorySizeMappings != null && !memorySizeMappings.isEmpty();
 			case GendataPackage.GENERATOR_DATA__INPUT_TYPES:
 				return inputTypes != null && !inputTypes.isEmpty();
+			case GendataPackage.GENERATOR_DATA__OLD_TO_NEW_CFG_NAME:
+				return oldToNewCfgName != null && !oldToNewCfgName.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

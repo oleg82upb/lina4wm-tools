@@ -168,13 +168,22 @@ public interface GendataPackage extends EPackage
 	int GENERATOR_DATA__INPUT_TYPES = 10;
 
 	/**
+	 * The feature id for the '<em><b>Old To New Cfg Name</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_DATA__OLD_TO_NEW_CFG_NAME = 11;
+
+	/**
 	 * The number of structural features of the '<em>Generator Data</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA_FEATURE_COUNT = 11;
+	int GENERATOR_DATA_FEATURE_COUNT = 12;
 
 	/**
 	 * The operation id for the '<em>Get Filtered Addresses</em>' operation.
@@ -687,6 +696,52 @@ public interface GendataPackage extends EPackage
 
 
 	/**
+	 * The meta object id for the '{@link de.upb.lina.cfg.gendata.impl.oldToNewCfgNameMappingImpl <em>old To New Cfg Name Mapping</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.upb.lina.cfg.gendata.impl.oldToNewCfgNameMappingImpl
+	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getoldToNewCfgNameMapping()
+	 * @generated
+	 */
+	int OLD_TO_NEW_CFG_NAME_MAPPING = 10;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OLD_TO_NEW_CFG_NAME_MAPPING__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OLD_TO_NEW_CFG_NAME_MAPPING__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>old To New Cfg Name Mapping</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OLD_TO_NEW_CFG_NAME_MAPPING_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>old To New Cfg Name Mapping</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OLD_TO_NEW_CFG_NAME_MAPPING_OPERATION_COUNT = 0;
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.GeneratorData <em>Generator Data</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -816,6 +871,17 @@ public interface GendataPackage extends EPackage
 	 * @generated
 	 */
 	EReference getGeneratorData_InputTypes();
+
+	/**
+	 * Returns the meta object for the map '{@link de.upb.lina.cfg.gendata.GeneratorData#getOldToNewCfgName <em>Old To New Cfg Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Old To New Cfg Name</em>'.
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getOldToNewCfgName()
+	 * @see #getGeneratorData()
+	 * @generated
+	 */
+	EReference getGeneratorData_OldToNewCfgName();
 
 	/**
 	 * Returns the meta object for the '{@link de.upb.lina.cfg.gendata.GeneratorData#getFilteredAddresses(java.lang.String) <em>Get Filtered Addresses</em>}' operation.
@@ -1173,6 +1239,40 @@ public interface GendataPackage extends EPackage
 	EAttribute getInputTypeList_InputType();
 
 	/**
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>old To New Cfg Name Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>old To New Cfg Name Mapping</em>'.
+	 * @see java.util.Map.Entry
+	 * @model keyDataType="org.eclipse.emf.ecore.EString"
+	 *        valueDataType="org.eclipse.emf.ecore.EString"
+	 * @generated
+	 */
+	EClass getoldToNewCfgNameMapping();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getoldToNewCfgNameMapping()
+	 * @generated
+	 */
+	EAttribute getoldToNewCfgNameMapping_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getoldToNewCfgNameMapping()
+	 * @generated
+	 */
+	EAttribute getoldToNewCfgNameMapping_Value();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1293,6 +1393,14 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EReference GENERATOR_DATA__INPUT_TYPES = eINSTANCE.getGeneratorData_InputTypes();
+
+		/**
+		 * The meta object literal for the '<em><b>Old To New Cfg Name</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GENERATOR_DATA__OLD_TO_NEW_CFG_NAME = eINSTANCE.getGeneratorData_OldToNewCfgName();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Filtered Addresses</b></em>' operation.
@@ -1575,6 +1683,32 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute INPUT_TYPE_LIST__INPUT_TYPE = eINSTANCE.getInputTypeList_InputType();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.oldToNewCfgNameMappingImpl <em>old To New Cfg Name Mapping</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.lina.cfg.gendata.impl.oldToNewCfgNameMappingImpl
+		 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getoldToNewCfgNameMapping()
+		 * @generated
+		 */
+		EClass OLD_TO_NEW_CFG_NAME_MAPPING = eINSTANCE.getoldToNewCfgNameMapping();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OLD_TO_NEW_CFG_NAME_MAPPING__KEY = eINSTANCE.getoldToNewCfgNameMapping_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OLD_TO_NEW_CFG_NAME_MAPPING__VALUE = eINSTANCE.getoldToNewCfgNameMapping_Value();
 
 	}
 

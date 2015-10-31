@@ -145,8 +145,7 @@ constants
 [/template]
 
 [template private generateCfgLabel(genData : GeneratorData, cfg : ControlFlowDiagram)]
-[for (l : LocationLabel | genData.locationLabels)][if (l.controlFlowLocation = cfg.start)]
-[l.name.substring(1, 1).toLowerCase()/][/if][/for]
+[for(mapping : oldToNewCfgNameMapping |genData.oldToNewCfgName)][if(mapping.key.equalsIgnoreCase(cfg.name))][mapping.value/][/if][/for]
 [/template]
 
 [template private generateStartPC(genData : GeneratorData, cfg : ControlFlowDiagram)]
