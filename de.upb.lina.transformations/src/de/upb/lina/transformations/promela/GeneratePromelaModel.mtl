@@ -95,8 +95,12 @@ inline [mapping.value/]([genParams(cfg, genData)/][/if][/for]){
 [/template]
 
 [template public transformTransitions(t: FlushTransition, genData: GeneratorData)]
-memory['['/][t.source.buffer.addressValuePairs->first().address.value.valueToString(genData)/][']'/]=[t.source.buffer.addressValuePairs->first().values->first().value.valueToString(genData)/];
+[let flushedAvp: AddressValuePair = getFlushedAvp(t)]
+memory['['/][flushedAvp.address.value.valueToString(genData)/][']'/]=[flushedAvp.values->first().value.valueToString(genData)/];
+[/let]
 [/template]
+
+[query public getFlushedAvp(t: FlushTransition) : AddressValuePair = invoke('de.upb.lina.cfg.tools.GraphUtility','getFlushedAddressValuePair(de.upb.lina.cfg.controlflow.FlushTransition)', Sequence{t})/]
 
 [comment ====== Instructions ======/]
 [template public genInstruction(e : Instruction, genData: GeneratorData)]
@@ -259,7 +263,7 @@ endif
 /]
 
 [template public genInstruction(e : Load,  genData : GeneratorData)]
-[e.address.value.valueToString(genData)/] = memory['['/][e.result.addressToString(genData)/][']'/];
+[e.result.addressToString(genData)/] = memory['['/][e.address.value.valueToString(genData)/][']'/];
 [/template]
 
 [template public genInstruction(e : Store,  genData : GeneratorData)]

@@ -1010,4 +1010,31 @@ public abstract class GraphUtility {
 		return list;
 	}
 	
+	/**
+	 * 
+	 * @param transition
+	 * @return AVP that was flushed on this transition
+	 */
+	public static AddressValuePair getFlushedAddressValuePair(FlushTransition transition){
+		StoreBuffer sourceBuffer = transition.getSource().getBuffer();
+		StoreBuffer targetBuffer = transition.getTarget().getBuffer();
+		
+		List<AddressValuePair> sourceAddressValuePairs = new ArrayList<AddressValuePair>(sourceBuffer.getAddressValuePairs());
+		Collections.copy(sourceAddressValuePairs, sourceBuffer.getAddressValuePairs());
+		
+		for(AddressValuePair sourcePair: sourceBuffer.getAddressValuePairs()){
+			for(AddressValuePair targetPair: targetBuffer.getAddressValuePairs()){
+				if(sourcePair.getAddress().equals(targetPair.getAddress()) && sourcePair.getValues().equals(targetPair.getValues())){
+					sourceAddressValuePairs.remove(sourcePair);
+				}
+			}
+		}
+		
+		if(sourceAddressValuePairs.isEmpty() || sourceAddressValuePairs.size() > 1){
+			throw new RuntimeException("Could not determine flushed AddressValuePair of transition " + transition);
+		}
+		
+		return sourceAddressValuePairs.get(0);
+	}
+	
 }

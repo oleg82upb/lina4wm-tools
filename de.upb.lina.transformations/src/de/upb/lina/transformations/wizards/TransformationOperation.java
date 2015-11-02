@@ -3,9 +3,8 @@ package de.upb.lina.transformations.wizards;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.Map;
 
+import org.eclipse.acceleo.common.preference.AcceleoPreferences;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -14,7 +13,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
-import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.lina.transformations.plugin.Activator;
 import de.upb.lina.transformations.plugin.Configuration;
@@ -58,6 +56,7 @@ public abstract class TransformationOperation extends WorkspaceModifyOperation{
 		fullPath = Paths.get(resource.getLocation().toPortableString());
 		
 		try {
+			AcceleoPreferences.switchQueryCache(false);
 			runSpecGeneration();
 		} catch (IOException e) {
 			Activator.logError(e.getMessage(), e);
