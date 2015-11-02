@@ -10,7 +10,7 @@
 [genData.buildStandards()/]
 
 [for (cfg: ControlFlowDiagram | genData.cfgs)]
-inline [cfg.name.replaceAll('@_', '').replaceAll('@','')/]([genParams(cfg, genData)/]){
+[cfg.genFunctionHead(genData)/]
 [genLocalVarDeclarations(cfg, genData)/]
 [handleStartLocation(genData, cfg)/][for (loc: ControlFlowLocation | cfg.locations)][handleLocation(loc, genData)/][/for][handleEndLocation(genData, cfg)/]
 }
@@ -18,6 +18,12 @@ inline [cfg.name.replaceAll('@_', '').replaceAll('@','')/]([genParams(cfg, genDa
 [/for]
 [buildProcesses()/]
 [/file]
+[/template]
+
+[template public genFunctionHead(cfg: ControlFlowDiagram, genData: GeneratorData)]
+[for (mapping: oldToNewCfgNameMapping | genData.oldToNewCfgName)][if (mapping.key.equalsIgnoreCase(cfg.name))]
+[if(not mapping.key.replaceAll('@_','').replaceAll('@','').equalsIgnoreCase(mapping.value))]//function was renamed from: [mapping.key/][/if]
+inline [mapping.value/]([genParams(cfg, genData)/][/if][/for]){
 [/template]
 
 [template public genGlobalVars(genData: GeneratorData)]
