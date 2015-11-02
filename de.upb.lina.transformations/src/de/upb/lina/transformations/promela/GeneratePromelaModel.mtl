@@ -25,7 +25,7 @@ inline [cfg.name.replaceAll('@_', '').replaceAll('@','')/]([genParams(cfg, genDa
 [if(mapping.value->size() > 0)]
 [for (mapping: FilterToAddressMapping | genData.filteredAddresses)]
 [if(mapping.key.equalsIgnoreCase('globals') and mapping.value->size() > 0)]
-[for(aMapping: AddressMapping | mapping.value)]short [aMapping.name/] = [for(gDef:AbstractElement |genData.program.elements)][if(gDef.oclIsTypeOf(GlobalDefinition))][if(gDef.oclAsType(GlobalDefinition).address = aMapping.adresses->first())][gDef.oclAsType(GlobalDefinition).value.getTypeName(genData)/];[/if][/if][/for]
+[for(aMapping: AddressMapping | mapping.value)]short [aMapping.name/] = [for(gDef:AbstractElement |genData.program.elements)][if(gDef.oclIsTypeOf(GlobalDefinition))][if(gDef.oclAsType(GlobalDefinition).address = aMapping.adresses->first())][gDef.oclAsType(GlobalDefinition).value.typeSize()/];[/if][/if][/for]
 [/for]
 [/if]
 [/for]
@@ -81,7 +81,7 @@ inline [cfg.name.replaceAll('@_', '').replaceAll('@','')/]([genParams(cfg, genDa
 [/template]
 
 [template public genPhi (t: Transition, genData: GeneratorData)]
-[for (mapping: PhiMapping | genData.phiMappings)][if (mapping.transition = t)][for (phi: Phi | mapping.phi)][phi.result.addressToString(genData)/] = [for(case: PhiCase | phi.cases)][if(case.label.equalsIgnoreCase(mapping.blockLabelToUse))][case.value.valueToString(genData)/][/if][/for];[/for][/if][/for]
+[for (mapping: PhiMapping | genData.phiMappings)][if (mapping.transition = t)][for (phi: Phi | mapping.phi)][phi.result.addressToString(genData)/] = [for(case: PhiCase | phi.cases)][if(case.label.replaceAll('%', '').equalsIgnoreCase(mapping.blockLabelToUse))][case.value.valueToString(genData)/][/if][/for];[/for][/if][/for]
 [/template]
 
 [template public transformTransitions(t: Transition, genData: GeneratorData)]
@@ -435,8 +435,14 @@ else if o.oclIsTypeOf(AddressUse) then
 else if o.oclIsTypeOf(Array) then
 	'Array_' + o.oclAsType(Array).arraySize() + 'x' 
 	+ o.oclAsType(Array).length
+else if o.oclIsTypeOf(PrimitiveValue) then
+	if o.oclAsType(PrimitiveValue).value.equalsIgnoreCase('void') then
+		'void'
+	else '// UNHANDLED TYPE'
+	endif
 else 
-	'// UNHANDLED'
+	'// UNHANDLED TYPE'
+endif
 endif
 endif
 endif

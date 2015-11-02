@@ -389,15 +389,17 @@ public class GendataPrecomputer {
 					if(t.getInstruction() instanceof Return){
 						Return ret = (Return) t.getInstruction();
 						if(ret.getValue() != null){
-
-							//add a dummy mapping for a return value
-							Address returnAddress = LlvmFactory.eINSTANCE.createAddress();
-							returnAddress.setName("returnvalue");
-							AddressMapping returnMapping = createAddressMapping(returnAddress, "returnvalue");
-							returnMapping.setGeneratorData(helperModel);
-							setType(returnMapping, ret.getValue());
-							returnMappings.add(returnMapping);
-							helperModel.getFilteredAddresses(Constants.FUNC_PARAMS+cfg.getName()).add(returnMapping);
+							//make sure we do not generate void
+							if(! (ret.getValue() instanceof PrimitiveValue)  || (ret.getValue() instanceof PrimitiveValue && !((PrimitiveValue)ret.getValue()).getValue().equals("void"))){
+								//add a dummy mapping for a return value
+								Address returnAddress = LlvmFactory.eINSTANCE.createAddress();
+								returnAddress.setName("returnvalue");
+								AddressMapping returnMapping = createAddressMapping(returnAddress, "returnvalue");
+								returnMapping.setGeneratorData(helperModel);
+								setType(returnMapping, ret.getValue());
+								returnMappings.add(returnMapping);
+								helperModel.getFilteredAddresses(Constants.FUNC_PARAMS+cfg.getName()).add(returnMapping);
+							}
 						}
 					}
 				}
@@ -1323,7 +1325,7 @@ public class GendataPrecomputer {
 				return null;
 			}else if(obj instanceof AddressUse){
 				AddressUse aU = (AddressUse)obj;
-				//TODO: what to do here?
+				return null;
 			}
 		}
 		return null;
