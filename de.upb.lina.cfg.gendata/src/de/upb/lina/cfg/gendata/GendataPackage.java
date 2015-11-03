@@ -612,13 +612,13 @@ public interface GendataPackage extends EPackage
 	int MEMORY_SIZE_MAPPING__INSTRUCTION = 0;
 
 	/**
-	 * The feature id for the '<em><b>Size</b></em>' attribute.
+	 * The feature id for the '<em><b>Offset</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEMORY_SIZE_MAPPING__SIZE = 1;
+	int MEMORY_SIZE_MAPPING__OFFSET = 1;
 
 	/**
 	 * The feature id for the '<em><b>Generator Data</b></em>' container reference.
@@ -696,11 +696,11 @@ public interface GendataPackage extends EPackage
 
 
 	/**
-	 * The meta object id for the '{@link de.upb.lina.cfg.gendata.impl.oldToNewCfgNameMappingImpl <em>old To New Cfg Name Mapping</em>}' class.
+	 * The meta object id for the '{@link de.upb.lina.cfg.gendata.impl.OldToNewCfgNameMappingImpl <em>Old To New Cfg Name Mapping</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.upb.lina.cfg.gendata.impl.oldToNewCfgNameMappingImpl
-	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getoldToNewCfgNameMapping()
+	 * @see de.upb.lina.cfg.gendata.impl.OldToNewCfgNameMappingImpl
+	 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getOldToNewCfgNameMapping()
 	 * @generated
 	 */
 	int OLD_TO_NEW_CFG_NAME_MAPPING = 10;
@@ -724,7 +724,7 @@ public interface GendataPackage extends EPackage
 	int OLD_TO_NEW_CFG_NAME_MAPPING__VALUE = 1;
 
 	/**
-	 * The number of structural features of the '<em>old To New Cfg Name Mapping</em>' class.
+	 * The number of structural features of the '<em>Old To New Cfg Name Mapping</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -733,7 +733,7 @@ public interface GendataPackage extends EPackage
 	int OLD_TO_NEW_CFG_NAME_MAPPING_FEATURE_COUNT = 2;
 
 	/**
-	 * The number of operations of the '<em>old To New Cfg Name Mapping</em>' class.
+	 * The number of operations of the '<em>Old To New Cfg Name Mapping</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1185,15 +1185,15 @@ public interface GendataPackage extends EPackage
 	EReference getMemorySizeMapping_Instruction();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getSize <em>Size</em>}'.
+	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getOffset <em>Offset</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Size</em>'.
-	 * @see de.upb.lina.cfg.gendata.MemorySizeMapping#getSize()
+	 * @return the meta object for the attribute '<em>Offset</em>'.
+	 * @see de.upb.lina.cfg.gendata.MemorySizeMapping#getOffset()
 	 * @see #getMemorySizeMapping()
 	 * @generated
 	 */
-	EAttribute getMemorySizeMapping_Size();
+	EAttribute getMemorySizeMapping_Offset();
 
 	/**
 	 * Returns the meta object for the container reference '{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getGeneratorData <em>Generator Data</em>}'.
@@ -1239,16 +1239,16 @@ public interface GendataPackage extends EPackage
 	EAttribute getInputTypeList_InputType();
 
 	/**
-	 * Returns the meta object for class '{@link java.util.Map.Entry <em>old To New Cfg Name Mapping</em>}'.
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Old To New Cfg Name Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>old To New Cfg Name Mapping</em>'.
+	 * @return the meta object for class '<em>Old To New Cfg Name Mapping</em>'.
 	 * @see java.util.Map.Entry
 	 * @model keyDataType="org.eclipse.emf.ecore.EString"
 	 *        valueDataType="org.eclipse.emf.ecore.EString"
 	 * @generated
 	 */
-	EClass getoldToNewCfgNameMapping();
+	EClass getOldToNewCfgNameMapping();
 
 	/**
 	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
@@ -1256,10 +1256,10 @@ public interface GendataPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Key</em>'.
 	 * @see java.util.Map.Entry
-	 * @see #getoldToNewCfgNameMapping()
+	 * @see #getOldToNewCfgNameMapping()
 	 * @generated
 	 */
-	EAttribute getoldToNewCfgNameMapping_Key();
+	EAttribute getOldToNewCfgNameMapping_Key();
 
 	/**
 	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
@@ -1267,10 +1267,10 @@ public interface GendataPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
 	 * @see java.util.Map.Entry
-	 * @see #getoldToNewCfgNameMapping()
+	 * @see #getOldToNewCfgNameMapping()
 	 * @generated
 	 */
-	EAttribute getoldToNewCfgNameMapping_Value();
+	EAttribute getOldToNewCfgNameMapping_Value();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1643,12 +1643,12 @@ public interface GendataPackage extends EPackage
 		EReference MEMORY_SIZE_MAPPING__INSTRUCTION = eINSTANCE.getMemorySizeMapping_Instruction();
 
 		/**
-		 * The meta object literal for the '<em><b>Size</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Offset</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MEMORY_SIZE_MAPPING__SIZE = eINSTANCE.getMemorySizeMapping_Size();
+		EAttribute MEMORY_SIZE_MAPPING__OFFSET = eINSTANCE.getMemorySizeMapping_Offset();
 
 		/**
 		 * The meta object literal for the '<em><b>Generator Data</b></em>' container reference feature.
@@ -1685,14 +1685,14 @@ public interface GendataPackage extends EPackage
 		EAttribute INPUT_TYPE_LIST__INPUT_TYPE = eINSTANCE.getInputTypeList_InputType();
 
 		/**
-		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.oldToNewCfgNameMappingImpl <em>old To New Cfg Name Mapping</em>}' class.
+		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.OldToNewCfgNameMappingImpl <em>Old To New Cfg Name Mapping</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.upb.lina.cfg.gendata.impl.oldToNewCfgNameMappingImpl
-		 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getoldToNewCfgNameMapping()
+		 * @see de.upb.lina.cfg.gendata.impl.OldToNewCfgNameMappingImpl
+		 * @see de.upb.lina.cfg.gendata.impl.GendataPackageImpl#getOldToNewCfgNameMapping()
 		 * @generated
 		 */
-		EClass OLD_TO_NEW_CFG_NAME_MAPPING = eINSTANCE.getoldToNewCfgNameMapping();
+		EClass OLD_TO_NEW_CFG_NAME_MAPPING = eINSTANCE.getOldToNewCfgNameMapping();
 
 		/**
 		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
@@ -1700,7 +1700,7 @@ public interface GendataPackage extends EPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute OLD_TO_NEW_CFG_NAME_MAPPING__KEY = eINSTANCE.getoldToNewCfgNameMapping_Key();
+		EAttribute OLD_TO_NEW_CFG_NAME_MAPPING__KEY = eINSTANCE.getOldToNewCfgNameMapping_Key();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -1708,7 +1708,7 @@ public interface GendataPackage extends EPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute OLD_TO_NEW_CFG_NAME_MAPPING__VALUE = eINSTANCE.getoldToNewCfgNameMapping_Value();
+		EAttribute OLD_TO_NEW_CFG_NAME_MAPPING__VALUE = eINSTANCE.getOldToNewCfgNameMapping_Value();
 
 	}
 

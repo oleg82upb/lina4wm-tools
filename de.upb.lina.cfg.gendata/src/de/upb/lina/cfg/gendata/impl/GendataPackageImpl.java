@@ -553,7 +553,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMemorySizeMapping_Size() {
+	public EAttribute getMemorySizeMapping_Offset() {
 		return (EAttribute)memorySizeMappingEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -598,7 +598,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getoldToNewCfgNameMapping() {
+	public EClass getOldToNewCfgNameMapping() {
 		return oldToNewCfgNameMappingEClass;
 	}
 
@@ -607,7 +607,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getoldToNewCfgNameMapping_Key() {
+	public EAttribute getOldToNewCfgNameMapping_Key() {
 		return (EAttribute)oldToNewCfgNameMappingEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -616,7 +616,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getoldToNewCfgNameMapping_Value() {
+	public EAttribute getOldToNewCfgNameMapping_Value() {
 		return (EAttribute)oldToNewCfgNameMappingEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -699,7 +699,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 
 		memorySizeMappingEClass = createEClass(MEMORY_SIZE_MAPPING);
 		createEReference(memorySizeMappingEClass, MEMORY_SIZE_MAPPING__INSTRUCTION);
-		createEAttribute(memorySizeMappingEClass, MEMORY_SIZE_MAPPING__SIZE);
+		createEAttribute(memorySizeMappingEClass, MEMORY_SIZE_MAPPING__OFFSET);
 		createEReference(memorySizeMappingEClass, MEMORY_SIZE_MAPPING__GENERATOR_DATA);
 		createEAttribute(memorySizeMappingEClass, MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE);
 
@@ -761,7 +761,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		initEReference(getGeneratorData_AddressMappings(), this.getAddressMapping(), this.getAddressMapping_GeneratorData(), "addressMappings", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_MemorySizeMappings(), this.getMemorySizeMapping(), this.getMemorySizeMapping_GeneratorData(), "memorySizeMappings", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_InputTypes(), this.getInputTypeList(), null, "inputTypes", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getGeneratorData_OldToNewCfgName(), this.getoldToNewCfgNameMapping(), null, "oldToNewCfgName", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGeneratorData_OldToNewCfgName(), this.getOldToNewCfgNameMapping(), null, "oldToNewCfgName", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = initEOperation(getGeneratorData__GetFilteredAddresses__String(), this.getAddressMapping(), "getFilteredAddresses", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "key", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -800,16 +800,16 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 
 		initEClass(memorySizeMappingEClass, MemorySizeMapping.class, "MemorySizeMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMemorySizeMapping_Instruction(), theLlvmPackage.getInstruction(), null, "instruction", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMemorySizeMapping_Size(), ecorePackage.getEString(), "size", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMemorySizeMapping_Offset(), ecorePackage.getEString(), "offset", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMemorySizeMapping_GeneratorData(), this.getGeneratorData(), this.getGeneratorData_MemorySizeMappings(), "generatorData", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMemorySizeMapping_CompleteTypeSize(), ecorePackage.getEInt(), "completeTypeSize", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(inputTypeListEClass, InputTypeList.class, "InputTypeList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getInputTypeList_InputType(), ecorePackage.getEString(), "inputType", null, 0, -1, InputTypeList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(oldToNewCfgNameMappingEClass, Map.Entry.class, "oldToNewCfgNameMapping", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getoldToNewCfgNameMapping_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getoldToNewCfgNameMapping_Value(), ecorePackage.getEString(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(oldToNewCfgNameMappingEClass, Map.Entry.class, "OldToNewCfgNameMapping", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOldToNewCfgNameMapping_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOldToNewCfgNameMapping_Value(), ecorePackage.getEString(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

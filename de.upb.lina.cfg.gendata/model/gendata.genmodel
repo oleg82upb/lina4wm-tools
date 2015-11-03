@@ -20,8 +20,12 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/addressMappings"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/memorySizeMappings"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/inputTypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/oldToNewCfgName"/>
       <genOperations ecoreOperation="gendata.ecore#//GeneratorData/getFilteredAddresses">
         <genParameters ecoreParameter="gendata.ecore#//GeneratorData/getFilteredAddresses/key"/>
+      </genOperations>
+      <genOperations ecoreOperation="gendata.ecore#//GeneratorData/getOldToNewCfgName">
+        <genParameters ecoreParameter="gendata.ecore#//GeneratorData/getOldToNewCfgName/key"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="gendata.ecore#//AddressMapping">
@@ -64,6 +68,10 @@
     </genClasses>
     <genClasses ecoreClass="gendata.ecore#//InputTypeList">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gendata.ecore#//InputTypeList/inputType"/>
+    </genClasses>
+    <genClasses ecoreClass="gendata.ecore#//OldToNewNameMapping">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gendata.ecore#//OldToNewNameMapping/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gendata.ecore#//OldToNewNameMapping/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

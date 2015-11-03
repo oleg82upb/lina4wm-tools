@@ -113,8 +113,8 @@ public class GendataAdapterFactory extends AdapterFactoryImpl
 				return createInputTypeListAdapter();
 			}
 			@Override
-			public Adapter caseoldToNewCfgNameMapping(Map.Entry<String, String> object) {
-				return createoldToNewCfgNameMappingAdapter();
+			public Adapter caseOldToNewCfgNameMapping(Map.Entry<String, String> object) {
+				return createOldToNewCfgNameMappingAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -280,7 +280,7 @@ public class GendataAdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>old To New Cfg Name Mapping</em>}'.
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Old To New Cfg Name Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -289,7 +289,7 @@ public class GendataAdapterFactory extends AdapterFactoryImpl
 	 * @see java.util.Map.Entry
 	 * @generated
 	 */
-	public Adapter createoldToNewCfgNameMappingAdapter() {
+	public Adapter createOldToNewCfgNameMappingAdapter() {
 		return null;
 	}
 

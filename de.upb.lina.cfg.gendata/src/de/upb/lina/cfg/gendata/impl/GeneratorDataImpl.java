@@ -369,7 +369,7 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 */
 	public EMap<String, String> getOldToNewCfgName() {
 		if (oldToNewCfgName == null) {
-			oldToNewCfgName = new EcoreEMap<String,String>(GendataPackage.Literals.OLD_TO_NEW_CFG_NAME_MAPPING, oldToNewCfgNameMappingImpl.class, this, GendataPackage.GENERATOR_DATA__OLD_TO_NEW_CFG_NAME);
+			oldToNewCfgName = new EcoreEMap<String,String>(GendataPackage.Literals.OLD_TO_NEW_CFG_NAME_MAPPING, OldToNewCfgNameMappingImpl.class, this, GendataPackage.GENERATOR_DATA__OLD_TO_NEW_CFG_NAME);
 		}
 		return oldToNewCfgName;
 	}

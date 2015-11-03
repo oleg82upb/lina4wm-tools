@@ -145,7 +145,7 @@ constants
 [/template]
 
 [template private generateCfgLabel(genData : GeneratorData, cfg : ControlFlowDiagram)]
-[for(mapping : oldToNewCfgNameMapping |genData.oldToNewCfgName)][if(mapping.key.equalsIgnoreCase(cfg.name))][mapping.value/][/if][/for]
+[for(mapping : OldToNewCfgNameMapping |genData.oldToNewCfgName)][if(mapping.key.equalsIgnoreCase(cfg.name))][mapping.value/][/if][/for]
 [/template]
 
 [template private generateStartPC(genData : GeneratorData, cfg : ControlFlowDiagram)]
@@ -302,7 +302,7 @@ unsupported operation
 [/template]
 
 [template private genLsPart(e : GetElementPtr, t: Transition, genData: GeneratorData)]
- .[e.result.addressToString(genData)/]:= ⌜([e.aggregate.value.castFromRef(genData)/][for(mm : MemorySizeMapping | genData.memorySizeMappings)][if(mm.instruction = e)] + [mm.size/])⌝[/if][/for]
+ .[e.result.addressToString(genData)/]:= ⌜([e.aggregate.value.castFromRef(genData)/][for(mm : MemorySizeMapping | genData.memorySizeMappings)][if(mm.instruction = e)] + [mm.offset/])⌝[/if][/for]
 [/template]
 
 [template private genLsPart(e : Cast, t: Transition, genData: GeneratorData)]

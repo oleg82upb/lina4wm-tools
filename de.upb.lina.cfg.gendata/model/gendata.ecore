@@ -28,7 +28,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputTypes" upperBound="-1"
         eType="#//InputTypeList" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="oldToNewCfgName" upperBound="-1"
-        eType="#//oldToNewCfgNameMapping" containment="true"/>
+        eType="#//OldToNewCfgNameMapping" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AddressMapping" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="adresses" upperBound="-1"
@@ -72,7 +72,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MemorySizeMapping">
     <eStructuralFeatures xsi:type="ecore:EReference" name="instruction" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Instruction"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="offset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="generatorData" eType="#//GeneratorData"
         eOpposite="#//GeneratorData/memorySizeMappings"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="completeTypeSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
@@ -81,7 +81,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="inputType" unique="false"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="oldToNewCfgNameMapping" instanceClassName="java.util.Map$Entry">
+  <eClassifiers xsi:type="ecore:EClass" name="OldToNewCfgNameMapping" instanceClassName="java.util.Map$Entry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>

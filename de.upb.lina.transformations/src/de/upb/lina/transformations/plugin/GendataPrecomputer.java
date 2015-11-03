@@ -1373,7 +1373,7 @@ public class GendataPrecomputer {
 		MemorySizeMapping mapping = GendataFactory.eINSTANCE.createMemorySizeMapping();
 		mapping.setGeneratorData(helperModel);
 		mapping.setInstruction(ptr);
-		mapping.setSize(""+getGetElementPtrValue(ptr));
+		mapping.setOffset(""+getGetElementPtrValue(ptr));
 		mapping.setCompleteTypeSize(computeSize(ptr.getAggregate().getType()));
 		return mapping;
 	}

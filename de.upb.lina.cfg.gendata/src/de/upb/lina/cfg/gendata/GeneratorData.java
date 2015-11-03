@@ -250,7 +250,7 @@ public interface GeneratorData extends EObject
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Old To New Cfg Name</em>' map.
 	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_OldToNewCfgName()
-	 * @model mapType="de.upb.lina.cfg.gendata.oldToNewCfgNameMapping<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>"
+	 * @model mapType="de.upb.lina.cfg.gendata.OldToNewCfgNameMapping<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>"
 	 * @generated
 	 */
 	EMap<String, String> getOldToNewCfgName();

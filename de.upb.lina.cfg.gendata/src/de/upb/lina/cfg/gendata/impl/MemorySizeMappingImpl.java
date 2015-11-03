@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl#getInstruction <em>Instruction</em>}</li>
- *   <li>{@link de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl#getSize <em>Size</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl#getOffset <em>Offset</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl#getGeneratorData <em>Generator Data</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl#getCompleteTypeSize <em>Complete Type Size</em>}</li>
  * </ul>
@@ -42,24 +42,24 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	protected Instruction instruction;
 
 	/**
-	 * The default value of the '{@link #getSize() <em>Size</em>}' attribute.
+	 * The default value of the '{@link #getOffset() <em>Offset</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSize()
+	 * @see #getOffset()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String SIZE_EDEFAULT = null;
+	protected static final String OFFSET_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getSize() <em>Size</em>}' attribute.
+	 * The cached value of the '{@link #getOffset() <em>Offset</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSize()
+	 * @see #getOffset()
 	 * @generated
 	 * @ordered
 	 */
-	protected String size = SIZE_EDEFAULT;
+	protected String offset = OFFSET_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getCompleteTypeSize() <em>Complete Type Size</em>}' attribute.
@@ -143,8 +143,8 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getSize() {
-		return size;
+	public String getOffset() {
+		return offset;
 	}
 
 	/**
@@ -152,11 +152,11 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSize(String newSize) {
-		String oldSize = size;
-		size = newSize;
+	public void setOffset(String newOffset) {
+		String oldOffset = offset;
+		offset = newOffset;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__SIZE, oldSize, size));
+			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__OFFSET, oldOffset, offset));
 	}
 
 	/**
@@ -276,8 +276,8 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 			case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
 				if (resolve) return getInstruction();
 				return basicGetInstruction();
-			case GendataPackage.MEMORY_SIZE_MAPPING__SIZE:
-				return getSize();
+			case GendataPackage.MEMORY_SIZE_MAPPING__OFFSET:
+				return getOffset();
 			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				return getGeneratorData();
 			case GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE:
@@ -298,8 +298,8 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 			case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
 				setInstruction((Instruction)newValue);
 				return;
-			case GendataPackage.MEMORY_SIZE_MAPPING__SIZE:
-				setSize((String)newValue);
+			case GendataPackage.MEMORY_SIZE_MAPPING__OFFSET:
+				setOffset((String)newValue);
 				return;
 			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				setGeneratorData((GeneratorData)newValue);
@@ -322,8 +322,8 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 			case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
 				setInstruction((Instruction)null);
 				return;
-			case GendataPackage.MEMORY_SIZE_MAPPING__SIZE:
-				setSize(SIZE_EDEFAULT);
+			case GendataPackage.MEMORY_SIZE_MAPPING__OFFSET:
+				setOffset(OFFSET_EDEFAULT);
 				return;
 			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				setGeneratorData((GeneratorData)null);
@@ -345,8 +345,8 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 		switch (featureID) {
 			case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
 				return instruction != null;
-			case GendataPackage.MEMORY_SIZE_MAPPING__SIZE:
-				return SIZE_EDEFAULT == null ? size != null : !SIZE_EDEFAULT.equals(size);
+			case GendataPackage.MEMORY_SIZE_MAPPING__OFFSET:
+				return OFFSET_EDEFAULT == null ? offset != null : !OFFSET_EDEFAULT.equals(offset);
 			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				return getGeneratorData() != null;
 			case GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE:
@@ -365,8 +365,8 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (size: ");
-		result.append(size);
+		result.append(" (offset: ");
+		result.append(offset);
 		result.append(", completeTypeSize: ");
 		result.append(completeTypeSize);
 		result.append(')');

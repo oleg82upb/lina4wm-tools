@@ -3,29 +3,33 @@
 package de.upb.lina.cfg.gendata.impl;
 
 import de.upb.lina.cfg.gendata.GendataPackage;
+
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EMap;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>old To New Cfg Name Mapping</b></em>'.
+ * An implementation of the model object '<em><b>Old To New Cfg Name Mapping</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.upb.lina.cfg.gendata.impl.oldToNewCfgNameMappingImpl#getTypedKey <em>Key</em>}</li>
- *   <li>{@link de.upb.lina.cfg.gendata.impl.oldToNewCfgNameMappingImpl#getTypedValue <em>Value</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.OldToNewCfgNameMappingImpl#getTypedKey <em>Key</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.OldToNewCfgNameMappingImpl#getTypedValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class oldToNewCfgNameMappingImpl extends MinimalEObjectImpl.Container implements BasicEMap.Entry<String,String> {
+public class OldToNewCfgNameMappingImpl extends MinimalEObjectImpl.Container implements BasicEMap.Entry<String,String> {
 	/**
 	 * The default value of the '{@link #getTypedKey() <em>Key</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -71,7 +75,7 @@ public class oldToNewCfgNameMappingImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected oldToNewCfgNameMappingImpl() {
+	protected OldToNewCfgNameMappingImpl() {
 		super();
 	}
 
@@ -125,55 +129,6 @@ public class oldToNewCfgNameMappingImpl extends MinimalEObjectImpl.Container imp
 		value = newValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.OLD_TO_NEW_CFG_NAME_MAPPING__VALUE, oldValue, value));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getKey() {
-		return getTypedKey();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setKey(String key) {
-		setTypedKey(key);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getValue() {
-		return getTypedValue();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String setValue(String value) {
-		String oldValue = getValue();
-		setTypedValue(value);
-		return oldValue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	public EMap<String, String> getEMap() {
-		EObject container = eContainer();
-		return container == null ? null : (EMap<String, String>)container.eGet(eContainmentFeature());
 	}
 
 	/**
@@ -291,4 +246,53 @@ public class oldToNewCfgNameMappingImpl extends MinimalEObjectImpl.Container imp
 		this.hash = hash;
 	}
 
-} //oldToNewCfgNameMappingImpl
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getKey() {
+		return getTypedKey();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setKey(String key) {
+		setTypedKey(key);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getValue() {
+		return getTypedValue();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String setValue(String value) {
+		String oldValue = getValue();
+		setTypedValue(value);
+		return oldValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	public EMap<String, String> getEMap() {
+		EObject container = eContainer();
+		return container == null ? null : (EMap<String, String>)container.eGet(eContainmentFeature());
+	}
+
+} //OldToNewCfgNameMappingImpl

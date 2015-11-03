@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getInstruction <em>Instruction</em>}</li>
- *   <li>{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getSize <em>Size</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getOffset <em>Offset</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getGeneratorData <em>Generator Data</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getCompleteTypeSize <em>Complete Type Size</em>}</li>
  * </ul>
@@ -52,30 +52,30 @@ public interface MemorySizeMapping extends EObject {
 	void setInstruction(Instruction value);
 
 	/**
-	 * Returns the value of the '<em><b>Size</b></em>' attribute.
+	 * Returns the value of the '<em><b>Offset</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Size</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Offset</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Size</em>' attribute.
-	 * @see #setSize(String)
-	 * @see de.upb.lina.cfg.gendata.GendataPackage#getMemorySizeMapping_Size()
+	 * @return the value of the '<em>Offset</em>' attribute.
+	 * @see #setOffset(String)
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getMemorySizeMapping_Offset()
 	 * @model
 	 * @generated
 	 */
-	String getSize();
+	String getOffset();
 
 	/**
-	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getSize <em>Size</em>}' attribute.
+	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getOffset <em>Offset</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Size</em>' attribute.
-	 * @see #getSize()
+	 * @param value the new value of the '<em>Offset</em>' attribute.
+	 * @see #getOffset()
 	 * @generated
 	 */
-	void setSize(String value);
+	void setOffset(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Generator Data</b></em>' container reference.
