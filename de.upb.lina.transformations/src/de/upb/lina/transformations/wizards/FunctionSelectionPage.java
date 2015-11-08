@@ -268,8 +268,7 @@ public class FunctionSelectionPage extends WizardPage{
 	 */
 	private void computeDependencies(){
 		try{
-			for(int i = 0; i< allCFGs.size(); i++){
-				ControlFlowDiagram cfg = allCFGs.get(i);
+			for(ControlFlowDiagram cfg : allCFGs){
 				EObject motherObject = cfg.getStart().getOutgoing().get(0).getInstruction().eContainer();
 				BasicBlock basicBlock = (BasicBlock) motherObject;
 				FunctionBody fb = (FunctionBody)basicBlock.eContainer();
@@ -279,7 +278,7 @@ public class FunctionSelectionPage extends WizardPage{
 					for(BasicBlock b: fd.getBody().getBlocks()){
 						for(Instruction ins: b.getInstructions()){
 							if(ins instanceof Call){
-								String calledFunction = GraphUtility.valueToString(((Call) ins).getFunction().getValue());
+								String calledFunction = GraphUtility.valueToRawString(((Call) ins).getFunction().getValue()).trim();
 								//if the function is to be generated and if its not a self-call (recursion)
 								if(functionToCfg.containsKey(calledFunction) && functionToCfg.get(calledFunction) != cfg){
 									addDependency(cfg, calledFunction);

@@ -954,7 +954,7 @@ public abstract class GraphUtility {
 	 * @param value
 	 * @return the concatenated String
 	 */
-	private static String valueToRawString(Value value)
+	public static String valueToRawString(Value value)
 	{
 		String result = "";
 
