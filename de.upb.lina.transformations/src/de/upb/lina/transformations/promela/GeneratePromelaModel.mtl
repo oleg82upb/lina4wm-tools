@@ -31,7 +31,7 @@ inline [mapping.value/]([genParams(cfg, genData)/][/if][/for]){
 [if(mapping.value->size() > 0)]
 [for (mapping: FilterToAddressMapping | genData.filteredAddresses)]
 [if(mapping.key.equalsIgnoreCase('globals') and mapping.value->size() > 0)]
-[for(aMapping: AddressMapping | mapping.value)]short [aMapping.name/] = [for(gDef:AbstractElement |genData.program.elements)][if(gDef.oclIsTypeOf(GlobalDefinition))][if(gDef.oclAsType(GlobalDefinition).address = aMapping.adresses->first())][gDef.oclAsType(GlobalDefinition).value.typeSize()/];[/if][/if][/for]
+[for(aMapping: AddressMapping | mapping.value)]short [aMapping.name/] = [for(gDef:AbstractElement |genData.program.elements)][if(gDef.oclIsTypeOf(GlobalDefinition))][if(gDef.oclAsType(GlobalDefinition).address = aMapping.adresses->first())][if (gDef.oclAsType(GlobalDefinition).value.oclIsTypeOf(Parameter))][gDef.oclAsType(GlobalDefinition).value.oclAsType(Parameter).value.valueToString(genData)/];[elseif(gDef.oclAsType(GlobalDefinition).value.oclIsTypeOf(Predefined))][gDef.oclAsType(GlobalDefinition).value.oclAsType(Predefined).type/][gDef.oclAsType(GlobalDefinition).value.oclAsType(Predefined).pointer/];//needs attention[/if][/if][/if][/for]
 [/for]
 [/if]
 [/for]
@@ -418,11 +418,11 @@ endif
 [/template]
 
 [template public valueToString(v : EObject, genData: GeneratorData)]
-[if (v.oclIsTypeOf(PrimitiveValue))][v.oclAsType(PrimitiveValue).value/][elseif ( v.oclIsTypeOf(IntegerConstant))][v.oclAsType(IntegerConstant).value/][elseif ( v.oclIsTypeOf(DecimalConstant))][v.oclAsType(DecimalConstant).value/] [elseif (v.oclIsTypeOf(AddressUse))][for (am: AddressMapping | genData.addressMappings)][for (a: Address | am.adresses)][if (v.oclAsType(AddressUse).address = a)][am.name/][/if][/for][/for][/if]
+[if (v.oclIsTypeOf(PrimitiveValue))][if(v.oclAsType(PrimitiveValue).value.equalsIgnoreCase('null'))]-1[else][v.oclAsType(PrimitiveValue).value/][/if][elseif ( v.oclIsTypeOf(IntegerConstant))][v.oclAsType(IntegerConstant).value/][elseif ( v.oclIsTypeOf(DecimalConstant))][v.oclAsType(DecimalConstant).value/] [elseif (v.oclIsTypeOf(AddressUse))][for (am: AddressMapping | genData.addressMappings)][for (a: Address | am.adresses)][if (v.oclAsType(AddressUse).address = a)][am.name/][/if][/for][/for][/if]
 [/template]
 
 [template public valueToString(v : Value, genData: GeneratorData)]
-[if (v.oclIsTypeOf(PrimitiveValue))][v.oclAsType(PrimitiveValue).value/][elseif ( v.oclIsTypeOf(IntegerConstant))][v.oclAsType(IntegerConstant).value/][elseif ( v.oclIsTypeOf(DecimalConstant))][v.oclAsType(DecimalConstant).value/] [elseif (v.oclIsTypeOf(AddressUse))][for (am: AddressMapping | genData.addressMappings)][for (a: Address | am.adresses)][if (v.oclAsType(AddressUse).address = a)][am.name/][/if][/for][/for][/if]
+[if (v.oclIsTypeOf(PrimitiveValue))][if(v.oclAsType(PrimitiveValue).value.equalsIgnoreCase('null'))]-1[else][v.oclAsType(PrimitiveValue).value/][/if][elseif ( v.oclIsTypeOf(IntegerConstant))][v.oclAsType(IntegerConstant).value/][elseif ( v.oclIsTypeOf(DecimalConstant))][v.oclAsType(DecimalConstant).value/] [elseif (v.oclIsTypeOf(AddressUse))][for (am: AddressMapping | genData.addressMappings)][for (a: Address | am.adresses)][if (v.oclAsType(AddressUse).address = a)][am.name/][/if][/for][/for][/if]
 [/template]
 
 [template public genCondition(t: Transition, gD: GeneratorData)]
