@@ -21,7 +21,7 @@
 [/template]
 
 [template public genFunctionHead(cfg: ControlFlowDiagram, genData: GeneratorData)]
-[for (mapping: oldToNewCfgNameMapping | genData.oldToNewCfgName)][if (mapping.key.equalsIgnoreCase(cfg.name))]
+[for (mapping: OldToNewCfgNameMapping | genData.oldToNewCfgName)][if (mapping.key.equalsIgnoreCase(cfg.name))]
 [if(not mapping.key.replaceAll('@_','').replaceAll('@','').equalsIgnoreCase(mapping.value))]//function was renamed from: [mapping.key/][/if]
 inline [mapping.value/]([genParams(cfg, genData)/][/if][/for]){
 [/template]
@@ -173,7 +173,7 @@ getelementptr([genAggregateSize(e, genData)/], [e.aggregate.value.valueToString(
 [/template]
 
 [template public genPtrOffset(e : GetElementPtr, genData : GeneratorData)]
-[for (m: MemorySizeMapping | genData.memorySizeMappings)][if (m.instruction=e)][m.size/][/if][/for]
+[for (m: MemorySizeMapping | genData.memorySizeMappings)][if (m.instruction=e)][m.offset/][/if][/for]
 [/template]
 
 [template public genAggregateSize(e : GetElementPtr, genData : GeneratorData)]

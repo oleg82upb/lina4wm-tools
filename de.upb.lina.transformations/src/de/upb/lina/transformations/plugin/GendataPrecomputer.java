@@ -730,8 +730,10 @@ public class GendataPrecomputer {
 
 		for (AddressValuePair avp : loc.getBuffer().getAddressValuePairs())
 		{
-			bufferLabel += valueToString(avp.getAddress().getValue())
-					+ valueToString(avp.getValues().get(0).getValue());
+			bufferLabel += valueToString(avp.getAddress().getValue());
+			for(int i = 0; i< avp.getValues().size(); i++){
+				bufferLabel += valueToString(avp.getValues().get(i).getValue());
+			}
 		}
 
 		return bufferLabel;
