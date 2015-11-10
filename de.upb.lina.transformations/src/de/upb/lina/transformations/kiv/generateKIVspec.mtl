@@ -4,11 +4,11 @@
 [template public generateModel(genData : GeneratorData) ]
 [comment @main/]
 
-[file ( 'localstate.utf8', false, 'UTF-8')]
+[file ( 'specs/localstate/specification.utf8', false, 'UTF-8')]
 data specification
 	using [basis(genData)/]ref, PC, PID
 	Localstate :=mkls( . .pc : PC; . .pid : PID;
-					[for(am: AddressMapping | genData.getFilteredAddresses('all-declare-params'))]
+					[for(am: AddressMapping | genData.getFilteredAddresses('all-declare-params')->select(name.equalsIgnoreCase('returnvalue')._not()))]
 					. .[am.name/] : [am.type/];
 					[/for]);
 	variables
@@ -16,7 +16,7 @@ data specification
 end data specification
 [/file]
 
-[file ('PC.utf8', false, 'UTF-8')]
+[file ('specs/PC/specification.utf8', false, 'UTF-8')]
 data specification
 	PC = N |[for (l : LocationLabel | genData.locationLabels) separator  (' |')] 
 		
@@ -27,7 +27,7 @@ pc : PC;
 end data specification
 [/file]
 
-[file ('PID.utf8', false, 'UTF-8')]
+[file ('specs/PID/specification.utf8', false, 'UTF-8')]
 specification
 	sorts
 		PID;
@@ -36,7 +36,7 @@ specification
 end specification
 [/file]
 
-[file ('cindex.utf8', false, 'UTF-8')]
+[file ('specs/cindex/specification.utf8', false, 'UTF-8')]
 data specification
 	IJ = [for (cfg : ControlFlowDiagram | genData.cfgs) separator ('|')] [generateCfgLabel(genData, cfg)/]ini [/for];
 	CJ = [for (label : TransitionLabel | genData.transitionLabels->select(transition.instruction.oclIsUndefined()._or((transition.instruction.eClass() = Return)._not())))separator ('|')] [label.name/] [/for];
@@ -49,7 +49,7 @@ end data specification
 [/file]
 
 [if(input(genData))]
-[file ('input.utf8', false, 'UTF-8')]
+[file ('specs/input/specification.utf8', false, 'UTF-8')]
 data specification
 	using [basis(genData)/]ref
 
@@ -60,7 +60,7 @@ end data specification
 [/file]
 [/if]
 
-[file ('COP.utf8', false, 'UTF-8')]
+[file ('specs/COP/specification.utf8', false, 'UTF-8')]
 enrich 	[basis(genData)/]ref-memory,
 		localstate,
 		cindex[if(input(genData))],
@@ -70,22 +70,20 @@ enrich 	[basis(genData)/]ref-memory,
 	functions
 		INVOP : IJ → [if(input(genData))]input[else][inputType(genData)/][/if] ×  memory ×  Localstate ×  memory ×  Localstate → bool;
 		COP : CJ → memory × Localstate × memory × Localstate → bool;
-		RETOP : RJ → memory × Localstate × memory × Localstate × [genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->first().type/] → bool;
+		RETOP : RJ → memory × Localstate × memory × Localstate × [if(genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->size()>0)][genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->first().type/][else][basis(genData)/][/if] → bool;
 	predicates
 		LSInit : Localstate × PID;
 		GSInit : memory;
 	variables
 		invop : [if(input(genData))]input[else][inputType(genData)/][/if] × memory × Localstate × memory × Localstate → bool;
 		cop : memory × Localstate × memory × Localstate → bool;
-		retop : memory × Localstate × memory × Localstate × [genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->first().type/] → bool;
+		retop : memory × Localstate × memory × Localstate × [if(genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->size()>0)][genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->first().type/][else][basis(genData)/][/if] → bool;
 		mem' : memory;
 		ls' : Localstate;
 [if(input(genData)._not())]
 		inp : [inputType(genData)/];
 [/if]
-[if(genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->size()>0)]
-		return : [genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->first().type/];
-[/if]
+		return : [if(genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->size()>0)][genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->first().type/][else][basis(genData)/][/if];
 
 	axioms
 

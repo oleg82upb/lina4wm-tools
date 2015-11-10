@@ -542,7 +542,6 @@ public class GendataPrecomputer {
 					for(String s : list.getInputType()){
 						copyFuncInput.remove(s);
 					}
-//					copyFuncInput.removeAll(list.getInputType());
 					if (copyFuncInput.isEmpty())
 					{
 						duplicate = true;
@@ -1119,6 +1118,7 @@ public class GendataPrecomputer {
 
 		else if (object instanceof Parameter) {
 			setType(addressMapping, ((Parameter) object).getType());
+			return;
 		}
 
 		else if (object instanceof PrimitiveValue) {
