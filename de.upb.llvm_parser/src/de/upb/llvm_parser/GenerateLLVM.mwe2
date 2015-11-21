@@ -80,6 +80,7 @@ Workflow {
                 // scoping and exporting API
                 fragment = scoping.ImportNamespacesScopingFragment {}
                 fragment = exporting.QualifiedNamesFragment {}
+                fragment = naming.LLVMQualifiedNamesFragment {}
                 fragment = builder.BuilderIntegrationFragment {}
     
                 // generator API

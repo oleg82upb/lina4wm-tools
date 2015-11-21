@@ -114,6 +114,11 @@ public abstract class AbstractLLVMRuntimeModule extends DefaultRuntimeModule {
 		return org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider.class;
 	}
 
+	// contributed by de.upb.llvm_parser.naming.LLVMQualifiedNamesFragment
+	public Class<? extends org.eclipse.xtext.naming.IQualifiedNameConverter> bindIQualifiedNameConverter() {
+		return de.upb.llvm_parser.naming.LLVMQualifiedNameConverter.class;
+	}
+
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
 	public Class<? extends org.eclipse.xtext.resource.IContainer.Manager> bindIContainer$Manager() {
 		return org.eclipse.xtext.resource.containers.StateBasedContainerManager.class;

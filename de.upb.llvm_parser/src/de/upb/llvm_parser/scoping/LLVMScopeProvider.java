@@ -17,6 +17,8 @@ import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.ArithmeticOperation;
 import de.upb.llvm_parser.llvm.AtomicRMW;
 import de.upb.llvm_parser.llvm.BasicBlock;
+import de.upb.llvm_parser.llvm.Call;
+import de.upb.llvm_parser.llvm.Cast;
 import de.upb.llvm_parser.llvm.CmpXchg;
 import de.upb.llvm_parser.llvm.Compare;
 import de.upb.llvm_parser.llvm.ExtractElement;
@@ -73,7 +75,7 @@ public class LLVMScopeProvider extends AbstractDeclarativeScopeProvider {
 				{
 					
 					l = collectElementsInScope((FunctionDefinition) f.eContainer(), param);
-					return Scopes.scopeFor(l, delegateGetScope(param, ref));
+					return Scopes.scopeFor(l);
 				}
 			} 
 		}
@@ -109,11 +111,22 @@ public class LLVMScopeProvider extends AbstractDeclarativeScopeProvider {
 				}
 				else if (i instanceof ArithmeticOperation)
 				{
-					l.add(((Alloc) i).getResult());
+					l.add(((ArithmeticOperation) i).getResult());
 				}
 				else if (i instanceof AtomicRMW)
 				{
 					l.add(((AtomicRMW) i).getResult());
+				}
+				else if (i instanceof Call)
+				{
+					if(((Call)i).getResult() != null)
+					{
+						l.add(((Call) i).getResult());
+					}
+				}
+				else if (i instanceof Cast)
+				{
+					l.add(((Cast) i).getResult());
 				}
 				else if (i instanceof CmpXchg)
 				{
@@ -208,9 +221,11 @@ public class LLVMScopeProvider extends AbstractDeclarativeScopeProvider {
 			}
 				
 		}
-		for(FunctionParameter fp : f.getParameter().getParams())
-		{
-			l.add(fp.getValue());
+		if(f.getParameter() != null){
+			for(FunctionParameter fp : f.getParameter().getParams())
+			{
+				l.add(fp.getValue());
+			}
 		}
 		
 		return l;
