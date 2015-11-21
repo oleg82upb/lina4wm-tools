@@ -246,7 +246,8 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 		
 		if (type == CFGConstants.WDC_BOTH || type == CFGConstants.WDC_ADDRESS)
 		{
-			transition.setCopyAddress((Address) pair.getAddress().getValue());
+			Address copyA = ((AddressUse)pair.getAddress().getValue()).getAddress();
+			transition.setCopyAddress(copyA);
 		}
 		if (type == CFGConstants.WDC_BOTH || type == CFGConstants.WDC_VALUE)
 		{
