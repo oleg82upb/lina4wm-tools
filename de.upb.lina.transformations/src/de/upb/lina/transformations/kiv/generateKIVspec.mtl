@@ -4,7 +4,7 @@
 [template public generateModel(genData : GeneratorData) ]
 [comment @main/]
 
-[file ( 'specs/localstate/specification.utf8', false, 'UTF-8')]
+[file ( 'specs/localstate.utf8', false, 'UTF-8')]
 data specification
 	using [basis(genData)/]ref, PC, PID
 	Localstate :=mkls( . .pc : PC; . .pid : PID;
@@ -16,7 +16,7 @@ data specification
 end data specification
 [/file]
 
-[file ('specs/PC/specification.utf8', false, 'UTF-8')]
+[file ('specs/PC.utf8', false, 'UTF-8')]
 data specification
 	PC = N |[for (l : LocationLabel | genData.locationLabels) separator  (' |')] 
 		
@@ -27,7 +27,7 @@ pc : PC;
 end data specification
 [/file]
 
-[file ('specs/PID/specification.utf8', false, 'UTF-8')]
+[file ('specs/PID.utf8', false, 'UTF-8')]
 specification
 	sorts
 		PID;
@@ -36,20 +36,23 @@ specification
 end specification
 [/file]
 
-[file ('specs/cindex/specification.utf8', false, 'UTF-8')]
+[file ('specs/cindex.utf8', false, 'UTF-8')]
 data specification
 	IJ = [for (cfg : ControlFlowDiagram | genData.cfgs) separator ('|')] [generateCfgLabel(genData, cfg)/]ini [/for];
 	CJ = [for (label : TransitionLabel | genData.transitionLabels->select(transition.instruction.oclIsUndefined()._or((transition.instruction.eClass() = Return)._not())))separator ('|')] [label.name/] [/for];
-	RJ = [for (label : TransitionLabel | genData.transitionLabels->select(transition.instruction.oclIsUndefined()._not()._and((transition.instruction.eClass() = Return))))separator ('|')] [label.name/]ret [/for];
-	variables
+	[let returns : OrderedSet(TransitionLabel) = genData.transitionLabels->select(transition.instruction.oclIsUndefined()._not()._and(transition.instruction.eClass() = Return))]
+	[if(returns->size() > 0)]
+	RJ = [for (label : TransitionLabel | returns )separator ('|')] [label.name/]ret [/for];[/if]
+variables
 		ij : IJ;
 		cj : CJ;
-		rj : RJ;
-end data specification
+[if(returns->size() > 0)]
+		rj : RJ;[/if]
+end data specification[/let]
 [/file]
 
 [if(input(genData))]
-[file ('specs/input/specification.utf8', false, 'UTF-8')]
+[file ('specs/input.utf8', false, 'UTF-8')]
 data specification
 	using [basis(genData)/]ref
 
@@ -60,7 +63,7 @@ end data specification
 [/file]
 [/if]
 
-[file ('specs/COP/specification.utf8', false, 'UTF-8')]
+[file ('specs/COP.utf8', false, 'UTF-8')]
 enrich 	[basis(genData)/]ref-memory,
 		localstate,
 		cindex[if(input(genData))],

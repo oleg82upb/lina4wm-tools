@@ -52,17 +52,19 @@ public class FunctionSelectionPage extends WizardPage{
 	private HashMap<String, String> oldToNewCfgName = new HashMap<>();
 	private Tree tree;
 	
+	private String DEFAULT_MESSAGE = "Please select the functions you wish to transform and enter names for the functions.";
+	
 
 	protected FunctionSelectionPage(String pageName) {
 		super(pageName);
 		setTitle("Function - Selection");
-		setDescription("Please select the functions you wish to transform.");
+		setDescription(DEFAULT_MESSAGE);
 	}
 	
 	public FunctionSelectionPage() {
 		super("wizardPage");
 		setTitle("Function - Selection");
-		setDescription("Please select the functions you wish to transform.");
+		setDescription(DEFAULT_MESSAGE);
 	}
 
 	@Override
@@ -236,7 +238,7 @@ public class FunctionSelectionPage extends WizardPage{
 			updateStatus("Please select at least one function");
 		}else{
 			updateStatus(null);
-			setMessage("Please select the functions you wish to transform.");
+			setMessage(DEFAULT_MESSAGE);
 		}
 	}
 	
