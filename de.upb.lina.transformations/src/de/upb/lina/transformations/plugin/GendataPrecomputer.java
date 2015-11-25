@@ -91,11 +91,11 @@ public class GendataPrecomputer {
 	private HashMap <Address, String> addressLookup = new HashMap<Address, String>();
 	private HashMap <ControlFlowDiagram, String> cfgToLabelPrefix = new HashMap <ControlFlowDiagram, String>();
 	
-	private ArrayList<Structure> definedStructures = new ArrayList<Structure>();
+	private ArrayList<TypeDefinition> typeDefinitions = new ArrayList<TypeDefinition>();
 	private HashMap<Structure, Integer> structureToSizeMap = new HashMap<Structure, Integer>();
 
 	private HashMap<FunctionDefinition, List<String>> usedVarsInFunctions = new HashMap<FunctionDefinition, List<String>>();
-
+	
 	public GendataPrecomputer(Configuration config){
 		this.cfgs = config.getCfgs();
 		this.basis = config.getKIVBasis();
@@ -868,10 +868,8 @@ public class GendataPrecomputer {
 				}
 			}else if(ele instanceof TypeDefinition){
 				TypeDefinition tDef = (TypeDefinition)ele;
-				Structure struct = tDef.getStruct();
-				definedStructures.add(struct);
+				typeDefinitions.add(tDef);
 			}
-			
 		}
 		helperModel.getFilteredAddresses(Constants.GLOBAL_VARS).addAll(globals);
 	}
@@ -1235,7 +1233,8 @@ public class GendataPrecomputer {
 	
 	
 		private void computeStructureSizes() {
-		for(Structure s: definedStructures){
+		for(TypeDefinition td: typeDefinitions){
+			Structure s = td.getStruct();
 			int result = 0;
 			for(EObject obj: s.getTypes()){
 				result += computeSize(obj);
@@ -1337,21 +1336,57 @@ public class GendataPrecomputer {
 	private int getGetElementPtrValue(GetElementPtr instr){
 		int result = 0;
 		EObject aggregateType = instr.getAggregate().getType();
-		int size = computeSize(aggregateType);
-		try{
-			//first index
-			int val = Integer.parseInt(GraphUtility.valueToString(instr.getIndices().get(0).getValue()));
-			result += val*size;
-			
-			EObject partOfAggregate = aggregateType;
-			//following indices
-			for(int i = 1; i<instr.getIndices().size(); i++){
-				int indexVal = Integer.parseInt(GraphUtility.valueToString(instr.getIndices().get(i).getValue()));;
-				result += computeSize(partOfAggregate, indexVal);
-				partOfAggregate = getPartOfAggregate(partOfAggregate, indexVal);
-			}	
-		}catch(NumberFormatException ex){
-			//TODO: output
+		if(aggregateType instanceof Predefined){
+			int aggregateTypeSize = 0;
+			Predefined predef = (Predefined)aggregateType;
+			if(predef.getType().startsWith("i")){
+				try{
+					aggregateTypeSize = Integer.parseInt(predef.getType().replaceAll("i", ""));
+					Parameter firstIndex = instr.getIndices().get(0);
+					if(firstIndex.getType() instanceof Predefined){
+						Predefined firstIndexPredefined = (Predefined) firstIndex.getType();
+						int firstIndexSize = Integer.parseInt(firstIndexPredefined.getType().replaceAll("i", "").replaceAll("\\*", ""));
+						
+						//TODO: show warning for user here
+						if(aggregateTypeSize != firstIndexSize){
+							
+						}
+
+						if(firstIndex.getValue() instanceof IntegerConstant){
+							IntegerConstant intConstant = (IntegerConstant)firstIndex.getValue();
+							int firstIndexValue = intConstant.getValue();
+							return (firstIndexValue)/(firstIndexSize/aggregateTypeSize);
+						}
+							
+					}else{
+						throw new RuntimeException(firstIndex.getType() + " is not an int_type.");
+					}
+					
+				}catch(NumberFormatException ex){
+					Activator.logError(ex.getMessage(), ex);
+				}
+			}else{
+				throw new RuntimeException(predef.getType() + " is not an int_type.");
+			}
+		}else{
+			//TODO fix this
+			int size = computeSize(aggregateType);
+			try{
+	
+				//first index
+				int val = Integer.parseInt(GraphUtility.valueToString(instr.getIndices().get(0).getValue()));
+				result += val*size;
+				
+				EObject partOfAggregate = aggregateType;
+				//following indices
+				for(int i = 1; i<instr.getIndices().size(); i++){
+					int indexVal = Integer.parseInt(GraphUtility.valueToString(instr.getIndices().get(i).getValue()));;
+					result += computeSize(partOfAggregate, indexVal);
+					partOfAggregate = getPartOfAggregate(partOfAggregate, indexVal);
+				}	
+			}catch(NumberFormatException ex){
+				//TODO: output
+			}
 		}
 		return result;
 	}
