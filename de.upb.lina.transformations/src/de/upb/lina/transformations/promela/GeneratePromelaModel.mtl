@@ -71,23 +71,24 @@ inline [mapping.value/]([genParams(cfg, genData)/][/if][/for]){
 [template public handleLocation(loc: ControlFlowLocation, genData: GeneratorData)]
 [for (l : LocationLabel | genData.locationLabels)]
 [if (l.controlFlowLocation = loc and loc.outgoing->size() = 1)]
-[l.name/]: [for (t : Transition | loc.outgoing)] [t.transformTransitions(genData)/] [genGoTo(t, genData)/][/for]
+[l.name/]: [for (t : Transition | loc.outgoing)][t.transformTransitions(genData)/][genGoTo(t, genData)/][/for]
 [elseif (l.controlFlowLocation = loc and loc.outgoing->size() > 1)]
-[l.name/]: if 
-	   [for (t : Transition | loc.outgoing)] 
-		:: [genCondition(t, genData)/] -> [t.transformTransitions(genData)/] [genGoTo(t, genData)/]
-   	   [/for]
-		fi;
+[l.name/]: 
+	if 
+	[for (t : Transition | loc.outgoing)] 
+	::[genCondition(t, genData)/][t.transformTransitions(genData)/][genGoTo(t, genData)/]
+   	[/for]
+	fi;
 [/if]
 [/for]
 [/template]
 
 [template public genGoTo(t: Transition, genData: GeneratorData)]
-[if(t.target.outgoing->size()>0)][t.genPhi(genData)/] goto [for (l : LocationLabel | genData.locationLabels)][if (l.controlFlowLocation = t.target)][l.name/][/if][/for]; [elseif(t.target.outgoing->size()=0)]goto [for (l : LocationLabel | genData.locationLabels)][if (l.controlFlowLocation = t.target)][l.name.substring(1, 1)/]End[/if][/for];[/if]
+[if(t.target.outgoing->size()>0)][t.genPhi(genData)/]goto [for (l : LocationLabel | genData.locationLabels)][if (l.controlFlowLocation = t.target)][l.name/][/if][/for]; [elseif(t.target.outgoing->size()=0)]goto [for (l : LocationLabel | genData.locationLabels)][if (l.controlFlowLocation = t.target)][l.name.substring(1, 1)/]End[/if][/for];[/if]
 [/template]
 
 [template public genPhi (t: Transition, genData: GeneratorData)]
-[for (mapping: PhiMapping | genData.phiMappings)][if (mapping.transition = t)][for (phi: Phi | mapping.phi)][phi.result.addressToString(genData)/] = [for(case: PhiCase | phi.cases)][if(case.label.replaceAll('%', '').equalsIgnoreCase(mapping.blockLabelToUse))][case.value.valueToString(genData)/][/if][/for];[/for][/if][/for]
+[for (mapping: PhiMapping | genData.phiMappings)][if (mapping.transition = t)][for (phi: Phi | mapping.phi)][phi.result.addressToString(genData)/] = [for(case: PhiCase | phi.cases)][if(case.label.replaceAll('%', '').equalsIgnoreCase(mapping.blockLabelToUse))][case.value.valueToString(genData)/][/if][/for]; [/for][/if][/for]
 [/template]
 
 [template public transformTransitions(t: Transition, genData: GeneratorData)]
@@ -96,8 +97,7 @@ inline [mapping.value/]([genParams(cfg, genData)/][/if][/for]){
 
 [template public transformTransitions(t: FlushTransition, genData: GeneratorData)]
 [let flushedAvp: AddressValuePair = getFlushedAvp(t)]
-memory['['/][flushedAvp.address.value.valueToString(genData)/][']'/]=[flushedAvp.values->first().value.valueToString(genData)/];
-[/let]
+memory['['/][flushedAvp.address.value.valueToString(genData)/][']'/] = [flushedAvp.values->first().value.valueToString(genData)/]; [/let]
 [/template]
 
 [query public getFlushedAvp(t: FlushTransition) : AddressValuePair = invoke('de.upb.lina.cfg.tools.GraphUtility','getFlushedAddressValuePair(de.upb.lina.cfg.controlflow.FlushTransition)', Sequence{t})/]
@@ -107,13 +107,15 @@ memory['['/][flushedAvp.address.value.valueToString(genData)/][']'/]=[flushedAvp
 [comment Abstract/]
 [/template]
 
+[template public genInstruction(e : Branch, genData: GeneratorData)][/template]
+
 [template public genInstruction(e : ArithmeticOperation, genData: GeneratorData)]
 [e.arithmeticInstr(genData)/]
 [/template]
 
 [query public arithmeticInstr(e : ArithmeticOperation, genData: GeneratorData) : String = 
 e.result.addressToString(genData) + ' = ' + e.value1.valueToString(genData) + ' ' 
-+ e.operation.arithmeticOp() + ' ' + e.value2.valueToString(genData) + ';'
++ e.operation.arithmeticOp() + ' ' + e.value2.valueToString(genData) + '; '
 /]
 
 [query public arithmeticOp(s : EString) : String = 
@@ -137,7 +139,7 @@ endif
 /]
 
 [template public genInstruction(e : LogicOperation, genData: GeneratorData)]
-[e.result.addressToString(genData)/] = [e.value1.valueToString(genData)/] [e.operation.logicOp()/] [e.value2.valueToString(genData)/];
+[e.result.addressToString(genData)/] = [e.value1.valueToString(genData)/] [e.operation.logicOp()/] [e.value2.valueToString(genData)/]; 
 [/template]
 
 [query public logicOp(s : EString) : String = 
@@ -161,7 +163,7 @@ endif
 /]
 
 [template public genInstruction(e : Cast, genData : GeneratorData)]
-[e.result.addressToString(genData)/] = [e.value.valueToString(genData)/];
+[e.result.addressToString(genData)/] = [e.value.valueToString(genData)/]; 
 [/template]
 
 [template public genInstruction(e : NestedCast, genData : GeneratorData)]
@@ -169,7 +171,7 @@ endif
 [/template]
 
 [template public genInstruction(e : GetElementPtr, genData : GeneratorData)]
-getelementptr([genAggregateSize(e, genData)/], [e.aggregate.value.valueToString(genData)/], [genPtrOffset(e,genData)/], [e.result.addressToString(genData)/]);
+getelementptr([genAggregateSize(e, genData)/], [e.aggregate.value.valueToString(genData)/], [genPtrOffset(e,genData)/], [e.result.addressToString(genData)/]); 
 [/template]
 
 [template public genPtrOffset(e : GetElementPtr, genData : GeneratorData)]
@@ -216,11 +218,11 @@ endif
 /]
 
 [template public genInstruction(e : CmpXchg, genData : GeneratorData)]
-cas([e.address.value.valueToString(genData)/], [e.value.value.valueToString(genData)/], [e.newValue.value.valueToString(genData)/], [e.result.addressToString(genData)/]);
+cas([e.address.value.valueToString(genData)/], [e.value.value.valueToString(genData)/], [e.newValue.value.valueToString(genData)/], [e.result.addressToString(genData)/]); 
 [/template]
 
 [template public genInstruction(e : AtomicRMW, genData : GeneratorData)]
-atomic{[e.result.addressToString(genData)/] = [e.address.value.valueToString(genData)/]; [e.genAtomicRMWOperation(genData)/]}
+atomic{[e.result.addressToString(genData)/] = [e.address.value.valueToString(genData)/]; [e.genAtomicRMWOperation(genData)/]} 
 [/template]
 
 [query public genAtomicRMWOperation(c : AtomicRMW, genData: GeneratorData) : String = 
@@ -263,15 +265,13 @@ endif
 /]
 
 [template public genInstruction(e : Load,  genData : GeneratorData)]
-[e.result.addressToString(genData)/] = memory['['/][e.address.value.valueToString(genData)/][']'/];
+[e.result.addressToString(genData)/] = memory['['/][e.address.value.valueToString(genData)/][']'/]; 
 [/template]
 
-[template public genInstruction(e : Store,  genData : GeneratorData)]
-skip;
-[/template]
+[template public genInstruction(e : Store,  genData : GeneratorData)][/template]
 
 [template public genInstruction(e : Call,  genData : GeneratorData)]
-[e.callFuncName(genData)/]([e.pList.callParams(genData)/][e.callRetParam(genData)/]);
+[e.callFuncName(genData)/]([e.pList.callParams(genData)/][e.callRetParam(genData)/]); 
 [/template]
 
 [query public callFuncName(c : Call,  genData : GeneratorData) : String = 
@@ -300,15 +300,13 @@ endif
 /]
 
 [template public genInstruction(e : Alloc, genData: GeneratorData)]
-alloca([e.type.typeSize()/], [e.result.addressToString(genData)/]);
+alloca([e.type.typeSize()/], [e.result.addressToString(genData)/]); 
 [/template]
 
-[template public genInstruction(e : Phi, genData: GeneratorData)]
-skip;
-[/template]
+[template public genInstruction(e : Phi, genData: GeneratorData)][/template]
 
 [template public genInstruction(e : Select, genData: GeneratorData)]
-[e.selectInstr(genData)/]
+[e.selectInstr(genData)/] 
 [/template]
 
 [query public selectInstr(e : Select, genData: GeneratorData) : String = 
@@ -317,7 +315,7 @@ e.trueValue.value.valueToString(genData) + ' : ' + e.elseValue.value.valueToStri
 /]
 
 [template public genInstruction(e : Compare, genData: GeneratorData)]
-[e.compareInstr(genData)/]
+[e.compareInstr(genData)/] 
 [/template]
 
 [query public compareInstr(e : Compare, genData: GeneratorData) : String =
@@ -350,9 +348,7 @@ endif
 
 [template public genInstruction(e : Switch, genData: GeneratorData)][/template]
 
-[template public genInstruction(e : Unreachable, genData: GeneratorData)]
-skip;
-[/template]
+[template public genInstruction(e : Unreachable, genData: GeneratorData)][/template]
 
 [template public genInstruction(e : Return, genData: GeneratorData)]
 [e.value.getTypeName(genData).returnInstr(e.value, genData)/]
@@ -360,11 +356,11 @@ skip;
 
 [query public returnInstr(s : String, v : EObject, genData: GeneratorData) : String =
 if s.equalsIgnoreCase('void') then 
-	'skip;'
+	''
 else if v.oclIsTypeOf(PrimitiveValue) then
-	'returnvalue = ' + v.oclAsType(PrimitiveValue).value + ';'
+	'returnvalue = ' + v.oclAsType(PrimitiveValue).value + '; '
 else if v.oclIsTypeOf(Parameter) then
-	'returnvalue = ' + v.oclAsType(Parameter).value.valueToString(genData) + ';'
+	'returnvalue = ' + v.oclAsType(Parameter).value.valueToString(genData) + '; '
 else
 	'// UNHANDLED'
 endif
@@ -426,7 +422,7 @@ endif
 [/template]
 
 [template public genCondition(t: Transition, gD: GeneratorData)]
-[for (cm: ConstraintMapping | gD.constraints)][if (t = cm.transition)][cm.condition/][/if][/for]
+[for (cm: ConstraintMapping | gD.constraints)][if (t = cm.transition)][if(not cm.condition.equalsIgnoreCase('true'))][cm.condition/] -> [else] [/if][/if][/for]
 [/template]
 
 
