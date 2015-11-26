@@ -35,6 +35,9 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	private String astLocation;
 	
 	private boolean myCanFinish;
+	private boolean foundError;
+	private boolean foundWarning;
+	private String userMessage;
 
 
 	/**
@@ -44,6 +47,9 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 		super();
 		setNeedsProgressMonitor(true);
 		myCanFinish = false;
+		userMessage = "Check your input and press next or finish!";
+		foundError = false;
+		foundWarning = false;
 	}
 
 	/**
@@ -62,9 +68,13 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 		manager.performChecks();
 		if(manager.foundError()){
 			myCanFinish = false;
-			page.setErrorMessage(" Problems were found in the specified program. Click 'next' for more details.");
+			foundError = true;
+			this.userMessage = " Problems were found in the specified program. Click 'next' for more details.";
+			page.setErrorMessage(userMessage);
 		}else if(manager.foundWarning()){
-			page.setMessage(" Warnings encountered while checking the program. Click 'next' for more details.", WizardPage.WARNING);
+			foundWarning = true;
+			this.userMessage = " Warnings encountered while checking the program. Click 'next' for more details.";
+			page.setMessage(userMessage, WizardPage.WARNING);
 			myCanFinish = true;
 		}else if(!manager.foundError() && !manager.foundWarning()){
 			myCanFinish = true;
@@ -81,7 +91,7 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	 */
 
 	public void addPages() {
-		page = new SelectionPage(selection);
+		page = new SelectionPage(selection, this);
 		warningPage = new WarningPage();
 		addPage(page);
 		addPage(warningPage);
@@ -154,5 +164,17 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	 */
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
+	}
+	
+	public String getUserMessage(){
+		return userMessage;
+	}
+	
+	public boolean hasFoundError(){
+		return foundError;
+	}
+	
+	public boolean hasFoundWarning(){
+		return foundWarning;
 	}
 }

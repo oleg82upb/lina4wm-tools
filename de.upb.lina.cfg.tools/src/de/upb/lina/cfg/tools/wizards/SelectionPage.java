@@ -44,6 +44,7 @@ import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
 import de.upb.lina.cfg.tools.CFGActivator;
+import de.upb.lina.cfg.tools.CFGConstants;
 
 /**
  * The "New" wizard page allows setting the container for the new file as well
@@ -77,17 +78,21 @@ public class SelectionPage extends WizardPage {
 	
 	//memento
 	private IMemento memento;
+	
+	//wizard
+	private NewCfgWizard wizard;
 
 	/**
 	 * Constructor for SampleNewWizardPage.
 	 * 
 	 * @param pageName
 	 */
-	public SelectionPage(ISelection selection) {
+	public SelectionPage(ISelection selection, NewCfgWizard wizard) {
 		super("wizardPage");
 		setTitle("AST-Selection");
 		setDescription("Please select the AST-Model you wish to convert.");
 		this.selection = selection;
+		this.wizard = wizard;
 	}
 
 	/**
@@ -324,7 +329,7 @@ public class SelectionPage extends WizardPage {
 		this.sourceAstFileName = this.tx_sourceAstFileName.getText();
 		this.targetContainerName = this.tx_targetContainerName.getText();
 		this.targetFileName = this.tx_targetFileName.getText();
-		setDescription("Please Select next");
+		setDescription("Check your input and press next or finish!");
 
 		if (!isAstFileExtOk())
 		{
@@ -356,7 +361,17 @@ public class SelectionPage extends WizardPage {
 			updateStatus("No valid filename.");
 			return;
 		}
-		updateDescription("Check your Input and hit finish.");
+		if(modelSelection != CFGConstants.SC){
+			if(wizard.hasFoundError()){
+				setMessage(wizard.getUserMessage(), WizardPage.ERROR);
+			}else if(wizard.hasFoundWarning() && !wizard.hasFoundError()){
+				setMessage(wizard.getUserMessage(), WizardPage.WARNING);
+			}else{
+				setMessage(wizard.getUserMessage());
+			}
+		}else{
+			setMessage("Check your input and press next or finish!");
+		}
 		updateStatus(null);
 		getControl().redraw();
 	}
@@ -449,7 +464,7 @@ public class SelectionPage extends WizardPage {
 
 	/**
 	 * 
-	 * @return modelSelection 0 - SC 1 - TSO
+	 * @return modelSelection 0 - SC 1 - TSO 2 - PSO
 	 */
 	public int getMemoryModelSelection() {
 
