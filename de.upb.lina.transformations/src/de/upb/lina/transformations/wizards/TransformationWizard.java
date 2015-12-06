@@ -16,6 +16,7 @@ import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.transformations.kiv.KivTransformationOperation;
 import de.upb.lina.transformations.plugin.Activator;
 import de.upb.lina.transformations.plugin.Configuration;
+import de.upb.lina.transformations.plugin.Constants;
 import de.upb.lina.transformations.plugin.ETransformationTarget;
 import de.upb.lina.transformations.promela.PromelaTransformationOperation;
 
@@ -37,15 +38,23 @@ public class TransformationWizard extends Wizard implements INewWizard {
 		int kIVBasis = wizardPage.getBasis();
 		Map<String, String> oldToNewCfgName = functionSelectionPage.getMap();
 		Configuration config = new Configuration(cfgs, kIVBasis, oldToNewCfgName);
+		if(wizardPage.getType() == ETransformationTarget.KIVLOCAL)
+		{
+			config.setKivTransformationType(Constants.TRANSFORMATION_TYPE_KIV_LOCAL);
+		}
+		else if(wizardPage.getType() == ETransformationTarget.KIVGLOBAL)
+		{
+			config.setKivTransformationType(Constants.TRANSFORMATION_TYPE_KIV_GLOBAL);
+		}
 
 		if (wizardPage.getType() == ETransformationTarget.PROMELA)
 		{
 			// Promela
 			wmo = new PromelaTransformationOperation(wizardPage.getContainerText().getText(), wizardPage.getFileText()
 					.getText(), wizardPage.getFileEndingLabel().getText(), config);
-		} else if (wizardPage.getType() == ETransformationTarget.KIV)
+		} else
 		{
-			// KIV
+			// KIVLOCAL
 			wmo = new KivTransformationOperation(wizardPage.getContainerText().getText(), wizardPage.getFileText()
 					.getText(), wizardPage.getFileEndingLabel().getText(), config);
 		}

@@ -157,8 +157,8 @@ public class GendataPrecomputer {
 			computePhiMapping();
 			
 			//KIVSpecificKeys
-			computeKIVSpecificKeys();
 			computeInputTypes();
+			computeKIVSpecificKeys();
 			
 			//new CFG names
 			computeNewCfgNames();
@@ -223,15 +223,24 @@ public class GendataPrecomputer {
 		}
 		if(hasParams)
 			helperModel.getTransformationSpecificKeys().add("INPUT_NEEDED");
+		else
+			if(helperModel.getInputTypes().size()>1)
+			{
+				helperModel.getTransformationSpecificKeys().add("INPUT_NEEDED");
+			}
 		
 		boolean refInput = false;
-		for( AddressMapping am : helperModel.getFilteredAddresses("all-params"))
+		for(InputTypeList inputTypeList : helperModel.getInputTypes())
 		{
-			if(am.getType().equals("ref"))
+			for(String inputType : inputTypeList.getInputType())
 			{
-				refInput =true;
+				if(inputType.equals("ref"))
+				{
+					refInput =true;
+				}
 			}
 		}
+		
 		if(refInput)
 		{
 			helperModel.getTransformationSpecificKeys().add("INPUT_REF");
@@ -376,7 +385,7 @@ public class GendataPrecomputer {
 
 	private void computeFilteredAddresses(){
 		
-		List<AddressMapping> returnMappings = new ArrayList<AddressMapping>();
+		HashMap<AddressMapping, Return> returnMappings = new HashMap<AddressMapping, Return>();
 		
 		for(ControlFlowDiagram cfg: cfgs){
 			if(cfg.getStart() != null && !cfg.getStart().getOutgoing().isEmpty()){
@@ -397,7 +406,7 @@ public class GendataPrecomputer {
 								AddressMapping returnMapping = createAddressMapping(returnAddress, "returnvalue");
 								returnMapping.setGeneratorData(helperModel);
 								setType(returnMapping, ret.getValue());
-								returnMappings.add(returnMapping);
+								returnMappings.put(returnMapping,ret);
 								helperModel.getFilteredAddresses(Constants.FUNC_PARAMS+cfg.getName()).add(returnMapping);
 							}
 						}
@@ -436,17 +445,39 @@ public class GendataPrecomputer {
 		
 		// set Type of all returnMapings to the same value
 		boolean refExists = false;
-		for(AddressMapping mapping : returnMappings){
+		for(AddressMapping mapping : returnMappings.keySet()){
 			if(mapping.getType().equals("ref")){
 				refExists = true;
+			}else{
+				Return ret = returnMappings.get(mapping);
+				if(ret.getValue() instanceof Parameter){
+					Parameter p = (Parameter) ret.getValue();
+					if(p.getValue() instanceof AddressUse){
+						AddressUse au = (AddressUse) p.getValue();
+						AddressMapping am = getMappingForAddress(au.getAddress(), helperModel.getAddressMappings());
+						if(am.getType().equals("ref")){
+							refExists = true;
+						}
+					}
+				}
 			}
+			
 		}
 		if(refExists){
-			for(AddressMapping mapping : returnMappings){
+			for(AddressMapping mapping : returnMappings.keySet()){
 				mapping.setType("ref");
+				Return ret = returnMappings.get(mapping);
+				if(ret.getValue() instanceof Parameter){
+					Parameter p = (Parameter) ret.getValue();
+					if(p.getValue() instanceof AddressUse){
+						AddressUse au = (AddressUse) p.getValue();
+						AddressMapping am = getMappingForAddress(au.getAddress(), helperModel.getAddressMappings());
+						am.setType("ref");
+					}
+				}
 			}
 		}else{
-			for(AddressMapping mapping : returnMappings){
+			for(AddressMapping mapping : returnMappings.keySet()){
 				mapping.setType(getBasis());
 			}
 		}
@@ -521,23 +552,23 @@ public class GendataPrecomputer {
 
 		for (ControlFlowDiagram cfg : cfgs)
 		{
-			List<String> funcInput = new ArrayList<>();
-			EList<AddressMapping> funcParamMapping = helperModel.getFilteredAddresses(Constants.FUNC_PARAMS
+			List<String> functionInputTypes = new ArrayList<>();
+			EList<AddressMapping> funcParamMappings = helperModel.getFilteredAddresses(Constants.FUNC_PARAMS
 					+ cfg.getName());
-			for (AddressMapping am : funcParamMapping)
+			for (AddressMapping functionParameterMapping : funcParamMappings)
 			{
-				if (!am.getName().equals("returnvalue"))
+				if (!functionParameterMapping.getName().equals("returnvalue"))
 				{
-					funcInput.add(am.getType());
+					functionInputTypes.add(functionParameterMapping.getType());
 				}
 			}
 
 			boolean duplicate = false;
 			for (InputTypeList list : input)
 			{
-				if (list.getInputType().size() == funcInput.size())
+				if (list.getInputType().size() == functionInputTypes.size())
 				{
-					List<String> copyFuncInput = new ArrayList<String>(funcInput);
+					List<String> copyFuncInput = new ArrayList<String>(functionInputTypes);
 
 					for(String s : list.getInputType()){
 						copyFuncInput.remove(s);
@@ -549,10 +580,10 @@ public class GendataPrecomputer {
 					}
 				}
 			}
-			if (!duplicate && !funcInput.isEmpty())
+			if (!duplicate && !functionInputTypes.isEmpty())
 			{
 				InputTypeList inputTypeList = GendataFactory.eINSTANCE.createInputTypeList();
-				inputTypeList.getInputType().addAll(funcInput);
+				inputTypeList.getInputType().addAll(functionInputTypes);
 				input.add(inputTypeList);
 			}
 		}

@@ -153,18 +153,29 @@ public class TransformationWizardPage extends WizardPage {
 		/* ordering select */
 		new Label(container, SWT.NULL).setText("Transformation type:");
 		cb_modelType = new Combo(container, SWT.NULL);
-		String[] orderings = new String[] { "Promela", "KIV" };
+		String[] orderings = new String[] { "Promela", "KIVLocal", "KIVGlobal" };
 		for (int i = 0; i < orderings.length; i++){
 			cb_modelType.add(orderings[i]);
 		}
 		cb_modelType.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
 				modelType = cb_modelType.getSelectionIndex();
-				if(modelType == Constants.TRANSFORMATION_TYPE_KIV){
+				if(modelType == Constants.TRANSFORMATION_TYPE_KIV_LOCAL)
+				{
 					tx_targetFileName.setEnabled(false);
 					if(cb_basis != null)
-					cb_basis.setEnabled(true);
-				}else{
+					{
+						cb_basis.setEnabled(true);
+					}
+				}else if(modelType == Constants.TRANSFORMATION_TYPE_KIV_GLOBAL)
+				{
+					tx_targetFileName.setEnabled(false);
+					if(cb_basis != null)
+					{
+						cb_basis.setEnabled(true);
+					}
+				}else
+				{
 					tx_targetFileName.setEnabled(true);
 					if(cb_basis != null)
 					cb_basis.setEnabled(false);
@@ -220,7 +231,9 @@ public class TransformationWizardPage extends WizardPage {
 		case 0:
 			return ETransformationTarget.PROMELA;
 		case 1:
-			return ETransformationTarget.KIV;
+			return ETransformationTarget.KIVLOCAL;
+		case 2:
+			return ETransformationTarget.KIVGLOBAL;
 		default:
 			return null;
 		}
@@ -230,11 +243,12 @@ public class TransformationWizardPage extends WizardPage {
 		switch (cb_modelType.getSelectionIndex()) {
 		case 0:
 			return ".pml";
-//			break;
 
 		case 1:
 			return "";
-//			break;
+			
+		case 2:
+			return "";
 			
 		default:
 			break;
@@ -349,9 +363,9 @@ public class TransformationWizardPage extends WizardPage {
 		
 		path = new Path(tx_targetContainer.getText());
 		resource = myWorkspaceRoot.findMember(path);
-		searchPath = resource.getLocation().append(File.separator+"PC.utf8");
+		searchPath = resource.getLocation().append(File.separator+"specs"+File.separator+"PC.utf8");
 		
-		if(searchPath.toFile().exists() && modelType == Constants.TRANSFORMATION_TYPE_KIV){
+		if(searchPath.toFile().exists() && (modelType == Constants.TRANSFORMATION_TYPE_KIV_LOCAL ||modelType == Constants.TRANSFORMATION_TYPE_KIV_GLOBAL)){
 			updateWarning("The selected target folder already contains a KIV Specification. If you continue the present files will be overwritten!", WARNING);
 			return;
 		}
@@ -413,7 +427,7 @@ public class TransformationWizardPage extends WizardPage {
 			}
 		}
 
-		if(modelType == Constants.TRANSFORMATION_TYPE_KIV){
+		if(modelType == Constants.TRANSFORMATION_TYPE_KIV_LOCAL || modelType == Constants.TRANSFORMATION_TYPE_KIV_GLOBAL){
 			if (string.endsWith(".kiv")){
 				return true;
 			}

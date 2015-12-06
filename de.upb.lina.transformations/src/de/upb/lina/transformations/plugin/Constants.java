@@ -57,7 +57,7 @@ public abstract class Constants {
 	
 	/* Constants to determine transformation type*/
 	public static final int TRANSFORMATION_TYPE_PROMELA = 0;
-	public static final int TRANSFORMATION_TYPE_KIV = 1;
-	
+	public static final int TRANSFORMATION_TYPE_KIV_LOCAL = 1;
+	public static final int TRANSFORMATION_TYPE_KIV_GLOBAL = 2;
 	
 }

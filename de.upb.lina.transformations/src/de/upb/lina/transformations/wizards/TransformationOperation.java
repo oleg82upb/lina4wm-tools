@@ -26,7 +26,7 @@ public abstract class TransformationOperation extends WorkspaceModifyOperation{
 	protected java.nio.file.Path fullPath;
 	
 	protected GeneratorData genData;
-	Configuration config;
+	protected Configuration config;
 	
 	
 	public TransformationOperation(String targetContainer, String targetName, String fileEnding, Configuration config) {

@@ -10,7 +10,7 @@ public class Configuration {
 	private List<ControlFlowDiagram> cfgs;	
 	private int kIVBasis;
 	private Map<String, String> oldToNewCfgName;
-	
+	private int kivTransformationType = Constants.TRANSFORMATION_TYPE_KIV_LOCAL;
 	
 	
 	public Configuration(List<ControlFlowDiagram> cfgs, int kIVBasis, Map<String, String> oldToNewCfgName){
@@ -40,5 +40,21 @@ public class Configuration {
 	public Map<String, String> getOldToNewCfgName()
 	{
 		return oldToNewCfgName;
+	}
+
+	/**
+	 * @return the kivTransformationType
+	 */
+	public int getKivTransformationType()
+	{
+		return kivTransformationType;
+	}
+
+	/**
+	 * @param kivTransformationType the kivTransformationType to set
+	 */
+	public void setKivTransformationType(int kivSpecType)
+	{
+		this.kivTransformationType = kivSpecType;
 	}
 }
