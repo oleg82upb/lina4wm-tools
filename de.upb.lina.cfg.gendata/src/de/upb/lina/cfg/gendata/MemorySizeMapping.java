@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getOffset <em>Offset</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getGeneratorData <em>Generator Data</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getCompleteTypeSize <em>Complete Type Size</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getWarning <em>Warning</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,12 +61,12 @@ public interface MemorySizeMapping extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Offset</em>' attribute.
-	 * @see #setOffset(String)
+	 * @see #setOffset(int)
 	 * @see de.upb.lina.cfg.gendata.GendataPackage#getMemorySizeMapping_Offset()
 	 * @model
 	 * @generated
 	 */
-	String getOffset();
+	int getOffset();
 
 	/**
 	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getOffset <em>Offset</em>}' attribute.
@@ -75,7 +76,7 @@ public interface MemorySizeMapping extends EObject {
 	 * @see #getOffset()
 	 * @generated
 	 */
-	void setOffset(String value);
+	void setOffset(int value);
 
 	/**
 	 * Returns the value of the '<em><b>Generator Data</b></em>' container reference.
@@ -130,5 +131,32 @@ public interface MemorySizeMapping extends EObject {
 	 * @generated
 	 */
 	void setCompleteTypeSize(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Warning</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Warning</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Warning</em>' attribute.
+	 * @see #setWarning(String)
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getMemorySizeMapping_Warning()
+	 * @model default=""
+	 * @generated
+	 */
+	String getWarning();
+
+	/**
+	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getWarning <em>Warning</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Warning</em>' attribute.
+	 * @see #getWarning()
+	 * @generated
+	 */
+	void setWarning(String value);
 
 } // MemorySizeMapping

@@ -30,6 +30,7 @@ import de.upb.llvm_parser.llvm.AbstractElement;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.Aggregate_Type;
+import de.upb.llvm_parser.llvm.AliasDefinition;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.ArithmeticOperation;
 import de.upb.llvm_parser.llvm.Array;
@@ -136,8 +137,8 @@ public class GendataPrecomputer {
 			//local vars
 			computeLocalVariables(program);
 			
-			//sizes of structures
-			computeStructureSizes();
+			//getElementPtrMapping
+			computeGetElementPtrMapping();
 
 			//labels
 			computeLabelPrefixesPerFunction();
@@ -795,6 +796,21 @@ public class GendataPrecomputer {
 
 		return null;
 	}
+	
+	private void computeGetElementPtrMapping(){
+		for(ControlFlowDiagram cfg : cfgs){
+			for(Transition t : cfg.getTransitions()){
+				
+				Instruction i = t.getInstruction();
+				if(i != null){
+					if(i instanceof GetElementPtr){
+						GetElementPtr op = (GetElementPtr)i;
+						setSize(op);
+					}
+				}
+			}
+		}
+	}
 
 	/**
 	 * Constructs the actual variable mapping
@@ -900,6 +916,9 @@ public class GendataPrecomputer {
 			}else if(ele instanceof TypeDefinition){
 				TypeDefinition tDef = (TypeDefinition)ele;
 				typeDefinitions.add(tDef);
+			}else if(ele instanceof AliasDefinition){
+				AliasDefinition aDef = (AliasDefinition)ele;
+				aDef.getAddress();
 			}
 		}
 		helperModel.getFilteredAddresses(Constants.GLOBAL_VARS).addAll(globals);
@@ -935,8 +954,6 @@ public class GendataPrecomputer {
 			addToMapping(allVariables, cfg, op.getResult());
 			m = addToMapping(allVariables, cfg, extractAddressFromValue(op.getAggregate().getValue()));
 			setType(m,op.getAggregate().getType());
-			setSize(op);
-
 		}else if(i instanceof Fence){
 			//nothing to do here
 		}else if(i instanceof CmpXchg){
@@ -1263,81 +1280,99 @@ public class GendataPrecomputer {
 	}
 	
 	
-		private void computeStructureSizes() {
-		for(TypeDefinition td: typeDefinitions){
-			Structure s = td.getStruct();
-			int result = 0;
-			for(EObject obj: s.getTypes()){
-				result += computeSize(obj);
-			}
-			structureToSizeMap.put(s, result);
-		}
-	}
-	
-	
-	private int computeSize(EObject obj){
+	private int computeCompleteSize(EObject obj, boolean countAsPointer){
 		if(obj instanceof Aggregate_Type){
 			if(obj instanceof Structure){
 				Structure struct = (Structure)obj;
 				int result = 0;
-				for(EObject o: struct.getTypes()){
-					result += computeSize(o);
+				for(int i = 0; i<struct.getTypes().size(); i++){
+					result += computeCompleteSize(struct.getTypes().get(i), false);
 				}
 				return result;
 			}else if(obj instanceof Array){
 				Array arr = ((Array) obj);
-				return arr.getLength() * computeSize(arr.getType());
+				return arr.getLength() * computeCompleteSize(arr.getType(), true);
 			}else if(obj instanceof Vector){
 				Vector vector = (Vector)obj;
-				return vector.getLength() * computeSize(vector.getType());
+				return vector.getLength() * computeCompleteSize(vector.getType(), true);
 			}
-		}else if(obj instanceof TypeUse){
-			if(obj instanceof Predefined){
-				Predefined predefined = (Predefined) obj;
-				if(!predefined.getType().contains("*")){
-					return Integer.parseInt(predefined.getType().replace("i", ""))/8;
-				}
-				return 1;
-			}else if(obj instanceof AddressUse){
+		}else if(obj instanceof AddressUse){
+			if(!countAsPointer){
 				AddressUse aU = (AddressUse)obj;
+				TypeDefinition def = getTypeDefinedForAddress(aU.getAddress());
+				if(def != null){
+					Structure struct = def.getStruct();
+					int result = 0;
+					for(int i = 0; i<struct.getTypes().size(); i++){
+						result += computeCompleteSize(struct.getTypes().get(i), true);
+					}
+					return result;
+				}
+			}else{
 				return 1;
 			}
+		}else if(obj instanceof Predefined){
+			Predefined predefined = (Predefined) obj;
+			if(!predefined.getType().contains("*")){
+				return Math.max(1,Integer.parseInt(predefined.getType().replace("i", ""))/32);
+			}
+			return 1;
+		}
+		else if(obj == null){
+			return 1;
 		}
 		
-		return 0;
+		return -100;
 	}
 	
-	private int computeSize(EObject obj, int upToPos){
-		upToPos = Math.max(0, upToPos -1 );
+	private int computeSize(EObject obj, int upToPos, boolean countAsPointer){
+		upToPos = upToPos -1;
+		if(upToPos < 0){
+			return 0;
+		}
+		
 		if(obj instanceof Aggregate_Type){
 			if(obj instanceof Structure){
 				Structure struct = (Structure)obj;
 				int result = 0;
 				for(int i = 0; i<=upToPos; i++){
-					result += computeSize(struct.getTypes().get(i));
+					result += computeCompleteSize(struct.getTypes().get(i), false);
 				}
 				return result;
 			}else if(obj instanceof Array){
 				Array arr = ((Array) obj);
-				return upToPos * computeSize(arr.getType());
+				return (upToPos+1) * computeCompleteSize(arr.getType(), true);
 			}else if(obj instanceof Vector){
 				Vector vector = (Vector)obj;
-				return upToPos * computeSize(vector.getType());
+				return (upToPos+1) * computeCompleteSize(vector.getType(), true);
 			}
-		}else if(obj instanceof TypeUse){
-			if(obj instanceof Predefined){
-				Predefined predefined = (Predefined) obj;
-				if(!predefined.getType().contains("*")){
-					return Integer.parseInt(predefined.getType().replace("i", ""))/8;
-				}
-				return 1;
-			}else if(obj instanceof AddressUse){
+		}else if(obj instanceof AddressUse){
+			if(!countAsPointer){
 				AddressUse aU = (AddressUse)obj;
+				TypeDefinition def = getTypeDefinedForAddress(aU.getAddress());
+				if(def != null){
+					Structure struct = def.getStruct();
+					int result = 0;
+					for(int i = 0; i<=upToPos; i++){
+						result += computeCompleteSize(struct.getTypes().get(i), true);
+					}
+					return result;
+				}
+			}else{
 				return 1;
 			}
+		}else if(obj instanceof Predefined){
+			Predefined predefined = (Predefined) obj;
+			if(!predefined.getType().contains("*")){
+				return Math.max(1,Integer.parseInt(predefined.getType().replace("i", ""))/32);
+			}
+			return 1;
+		}
+		else if(obj == null){
+			return 1;
 		}
 		
-		return 0;
+		return -100;
 	}
 	
 	private EObject getPartOfAggregate(EObject obj, int index){
@@ -1357,14 +1392,17 @@ public class GendataPrecomputer {
 				return null;
 			}else if(obj instanceof AddressUse){
 				AddressUse aU = (AddressUse)obj;
-				return null;
+				TypeDefinition def = getTypeDefinedForAddress(aU.getAddress());
+				if(def != null){
+					return def.getStruct().getTypes().get(index);
+				}
 			}
 		}
 		return null;
 	}
 	
 		
-	private int getGetElementPtrValue(GetElementPtr instr){
+	private int getGetElementPtrValue(GetElementPtr instr, MemorySizeMapping mapping){
 		int result = 0;
 		EObject aggregateType = instr.getAggregate().getType();
 		if(aggregateType instanceof Predefined){
@@ -1378,9 +1416,9 @@ public class GendataPrecomputer {
 						Predefined firstIndexPredefined = (Predefined) firstIndex.getType();
 						int firstIndexSize = Integer.parseInt(firstIndexPredefined.getType().replaceAll("i", "").replaceAll("\\*", ""));
 						
-						//TODO: show warning for user here
+						//show warning that computation might be wrong
 						if(aggregateTypeSize != firstIndexSize){
-							
+							mapping.setWarning(mapping.getWarning() + "Needs attention due to different types of first index and aggregate.");
 						}
 
 						if(firstIndex.getValue() instanceof IntegerConstant){
@@ -1400,26 +1438,44 @@ public class GendataPrecomputer {
 				throw new RuntimeException(predef.getType() + " is not an int_type.");
 			}
 		}else{
-			//TODO fix this
-			int size = computeSize(aggregateType);
-			try{
-	
-				//first index
-				int val = Integer.parseInt(GraphUtility.valueToString(instr.getIndices().get(0).getValue()));
-				result += val*size;
+			if(aggregateType instanceof AddressUse){
+				try{
+
+					//first index
+					int firstIndexValue = Integer.parseInt(GraphUtility.valueToString(instr.getIndices().get(0).getValue()));
+					if(firstIndexValue != 0){
+						mapping.setWarning(mapping.getWarning() + "Needs attention as first index is not 0!");
+					}
+
+					EObject partOfAggregate = aggregateType;
+					//following indices
+					for(int i = 1; i<instr.getIndices().size(); i++){
+						int indexVal = Integer.parseInt(GraphUtility.valueToString(instr.getIndices().get(i).getValue()));
+						
+						int intermediateResult = computeSize(partOfAggregate, indexVal, false);
+						result += intermediateResult;
+
+						partOfAggregate = getPartOfAggregate(partOfAggregate, indexVal);
+					}	
+					return result;
+				}catch(NumberFormatException ex){
+					Activator.logError("Parsed a non-integer index entry for getElementPtr.", ex);
+				}
 				
-				EObject partOfAggregate = aggregateType;
-				//following indices
-				for(int i = 1; i<instr.getIndices().size(); i++){
-					int indexVal = Integer.parseInt(GraphUtility.valueToString(instr.getIndices().get(i).getValue()));;
-					result += computeSize(partOfAggregate, indexVal);
-					partOfAggregate = getPartOfAggregate(partOfAggregate, indexVal);
-				}	
-			}catch(NumberFormatException ex){
-				//TODO: output
 			}
+			
+			return -1;
 		}
 		return result;
+	}
+	
+	public TypeDefinition getTypeDefinedForAddress(Address address){
+		for(TypeDefinition def: typeDefinitions){
+			if(def.getAddress().equals(address)){
+				return def;
+			}
+		}
+		return null;
 	}
 	
 	public void setSize(GetElementPtr ptr){
@@ -1439,10 +1495,12 @@ public class GendataPrecomputer {
 	
 	public MemorySizeMapping createMemorySizeMapping(GetElementPtr ptr){
 		MemorySizeMapping mapping = GendataFactory.eINSTANCE.createMemorySizeMapping();
+		mapping.setWarning("");
 		mapping.setGeneratorData(helperModel);
 		mapping.setInstruction(ptr);
-		mapping.setOffset(""+getGetElementPtrValue(ptr));
-		mapping.setCompleteTypeSize(computeSize(ptr.getAggregate().getType()));
+		mapping.setOffset(getGetElementPtrValue(ptr, mapping));
+		int completeSize = computeCompleteSize(ptr.getAggregate().getType(), false);
+		mapping.setCompleteTypeSize(completeSize - 1);
 		return mapping;
 	}
 	

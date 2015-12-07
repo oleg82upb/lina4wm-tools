@@ -171,7 +171,7 @@ endif
 [/template]
 
 [template public genInstruction(e : GetElementPtr, genData : GeneratorData)]
-getelementptr([genAggregateSize(e, genData)/], [e.aggregate.value.valueToString(genData)/], [genPtrOffset(e,genData)/], [e.result.addressToString(genData)/]); 
+getelementptr([genAggregateSize(e, genData)/], [e.aggregate.value.valueToString(genData)/], [genPtrOffset(e,genData)/], [e.result.addressToString(genData)/]); [for (m: MemorySizeMapping | genData.memorySizeMappings)][if(m.instruction=e)][if(not m.warning.equalsIgnoreCase(''))] /*[m.warning/]*/ [/if][/if][/for]
 [/template]
 
 [template public genPtrOffset(e : GetElementPtr, genData : GeneratorData)]
@@ -418,7 +418,7 @@ endif
 [/template]
 
 [template public valueToString(v : Value, genData: GeneratorData)]
-[if (v.oclIsTypeOf(PrimitiveValue))][if(v.oclAsType(PrimitiveValue).value.equalsIgnoreCase('null'))]-1[else][v.oclAsType(PrimitiveValue).value/][/if][elseif ( v.oclIsTypeOf(IntegerConstant))][v.oclAsType(IntegerConstant).value/][elseif ( v.oclIsTypeOf(DecimalConstant))][v.oclAsType(DecimalConstant).value/] [elseif (v.oclIsTypeOf(AddressUse))][for (am: AddressMapping | genData.addressMappings)][for (a: Address | am.adresses)][if (v.oclAsType(AddressUse).address = a)][am.name/][/if][/for][/for][/if]
+[if (v.oclIsTypeOf(PrimitiveValue))][if(v.oclAsType(PrimitiveValue).value.equalsIgnoreCase('null'))]null[else][v.oclAsType(PrimitiveValue).value/][/if][elseif ( v.oclIsTypeOf(IntegerConstant))][v.oclAsType(IntegerConstant).value/][elseif ( v.oclIsTypeOf(DecimalConstant))][v.oclAsType(DecimalConstant).value/] [elseif (v.oclIsTypeOf(AddressUse))][for (am: AddressMapping | genData.addressMappings)][for (a: Address | am.adresses)][if (v.oclAsType(AddressUse).address = a)][am.name/][/if][/for][/for][/if]
 [/template]
 
 [template public genCondition(t: Transition, gD: GeneratorData)]

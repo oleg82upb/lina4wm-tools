@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl#getOffset <em>Offset</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl#getGeneratorData <em>Generator Data</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl#getCompleteTypeSize <em>Complete Type Size</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.MemorySizeMappingImpl#getWarning <em>Warning</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,7 +50,7 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String OFFSET_EDEFAULT = null;
+	protected static final int OFFSET_EDEFAULT = 0;
 
 	/**
 	 * The cached value of the '{@link #getOffset() <em>Offset</em>}' attribute.
@@ -59,7 +60,7 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 * @ordered
 	 */
-	protected String offset = OFFSET_EDEFAULT;
+	protected int offset = OFFSET_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getCompleteTypeSize() <em>Complete Type Size</em>}' attribute.
@@ -80,6 +81,26 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * @ordered
 	 */
 	protected int completeTypeSize = COMPLETE_TYPE_SIZE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getWarning() <em>Warning</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWarning()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String WARNING_EDEFAULT = "";
+
+	/**
+	 * The cached value of the '{@link #getWarning() <em>Warning</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWarning()
+	 * @generated
+	 * @ordered
+	 */
+	protected String warning = WARNING_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -143,7 +164,7 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getOffset() {
+	public int getOffset() {
 		return offset;
 	}
 
@@ -152,8 +173,8 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOffset(String newOffset) {
-		String oldOffset = offset;
+	public void setOffset(int newOffset) {
+		int oldOffset = offset;
 		offset = newOffset;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__OFFSET, oldOffset, offset));
@@ -226,6 +247,27 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getWarning() {
+		return warning;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWarning(String newWarning) {
+		String oldWarning = warning;
+		warning = newWarning;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__WARNING, oldWarning, warning));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -282,6 +324,8 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 				return getGeneratorData();
 			case GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE:
 				return getCompleteTypeSize();
+			case GendataPackage.MEMORY_SIZE_MAPPING__WARNING:
+				return getWarning();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -299,13 +343,16 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 				setInstruction((Instruction)newValue);
 				return;
 			case GendataPackage.MEMORY_SIZE_MAPPING__OFFSET:
-				setOffset((String)newValue);
+				setOffset((Integer)newValue);
 				return;
 			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				setGeneratorData((GeneratorData)newValue);
 				return;
 			case GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE:
 				setCompleteTypeSize((Integer)newValue);
+				return;
+			case GendataPackage.MEMORY_SIZE_MAPPING__WARNING:
+				setWarning((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -331,6 +378,9 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 			case GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE:
 				setCompleteTypeSize(COMPLETE_TYPE_SIZE_EDEFAULT);
 				return;
+			case GendataPackage.MEMORY_SIZE_MAPPING__WARNING:
+				setWarning(WARNING_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -346,11 +396,13 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 			case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
 				return instruction != null;
 			case GendataPackage.MEMORY_SIZE_MAPPING__OFFSET:
-				return OFFSET_EDEFAULT == null ? offset != null : !OFFSET_EDEFAULT.equals(offset);
+				return offset != OFFSET_EDEFAULT;
 			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				return getGeneratorData() != null;
 			case GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE:
 				return completeTypeSize != COMPLETE_TYPE_SIZE_EDEFAULT;
+			case GendataPackage.MEMORY_SIZE_MAPPING__WARNING:
+				return WARNING_EDEFAULT == null ? warning != null : !WARNING_EDEFAULT.equals(warning);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -369,6 +421,8 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 		result.append(offset);
 		result.append(", completeTypeSize: ");
 		result.append(completeTypeSize);
+		result.append(", warning: ");
+		result.append(warning);
 		result.append(')');
 		return result.toString();
 	}

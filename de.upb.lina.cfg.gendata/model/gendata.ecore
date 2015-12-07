@@ -72,10 +72,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MemorySizeMapping">
     <eStructuralFeatures xsi:type="ecore:EReference" name="instruction" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Instruction"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="offset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="offset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="generatorData" eType="#//GeneratorData"
         eOpposite="#//GeneratorData/memorySizeMappings"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="completeTypeSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="warning" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InputTypeList">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="inputType" unique="false"

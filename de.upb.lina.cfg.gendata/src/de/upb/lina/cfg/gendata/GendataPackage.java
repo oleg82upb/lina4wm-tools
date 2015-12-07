@@ -639,13 +639,22 @@ public interface GendataPackage extends EPackage
 	int MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE = 3;
 
 	/**
+	 * The feature id for the '<em><b>Warning</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMORY_SIZE_MAPPING__WARNING = 4;
+
+	/**
 	 * The number of structural features of the '<em>Memory Size Mapping</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEMORY_SIZE_MAPPING_FEATURE_COUNT = 4;
+	int MEMORY_SIZE_MAPPING_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Memory Size Mapping</em>' class.
@@ -1218,6 +1227,17 @@ public interface GendataPackage extends EPackage
 	EAttribute getMemorySizeMapping_CompleteTypeSize();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getWarning <em>Warning</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Warning</em>'.
+	 * @see de.upb.lina.cfg.gendata.MemorySizeMapping#getWarning()
+	 * @see #getMemorySizeMapping()
+	 * @generated
+	 */
+	EAttribute getMemorySizeMapping_Warning();
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.gendata.InputTypeList <em>Input Type List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1665,6 +1685,14 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE = eINSTANCE.getMemorySizeMapping_CompleteTypeSize();
+
+		/**
+		 * The meta object literal for the '<em><b>Warning</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEMORY_SIZE_MAPPING__WARNING = eINSTANCE.getMemorySizeMapping_Warning();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.gendata.impl.InputTypeListImpl <em>Input Type List</em>}' class.

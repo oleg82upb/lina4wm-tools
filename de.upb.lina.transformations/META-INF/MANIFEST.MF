@@ -24,7 +24,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.acceleo.engine;bundle-version="3.3.0",
  com.google.guava,
  de.upb.lina.cfg;bundle-version="1.0.0",
- de.upb.lina.cfg.tools;bundle-version="1.0.0"
+ de.upb.lina.cfg.tools;bundle-version="1.0.0",
+ org.eclipse.core.expressions;bundle-version="3.4.600"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: de.upb.lina.transformations.promela, 

@@ -580,6 +580,15 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMemorySizeMapping_Warning() {
+		return (EAttribute)memorySizeMappingEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getInputTypeList() {
 		return inputTypeListEClass;
 	}
@@ -702,6 +711,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		createEAttribute(memorySizeMappingEClass, MEMORY_SIZE_MAPPING__OFFSET);
 		createEReference(memorySizeMappingEClass, MEMORY_SIZE_MAPPING__GENERATOR_DATA);
 		createEAttribute(memorySizeMappingEClass, MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE);
+		createEAttribute(memorySizeMappingEClass, MEMORY_SIZE_MAPPING__WARNING);
 
 		inputTypeListEClass = createEClass(INPUT_TYPE_LIST);
 		createEAttribute(inputTypeListEClass, INPUT_TYPE_LIST__INPUT_TYPE);
@@ -800,9 +810,10 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 
 		initEClass(memorySizeMappingEClass, MemorySizeMapping.class, "MemorySizeMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMemorySizeMapping_Instruction(), theLlvmPackage.getInstruction(), null, "instruction", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMemorySizeMapping_Offset(), ecorePackage.getEString(), "offset", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMemorySizeMapping_Offset(), ecorePackage.getEInt(), "offset", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMemorySizeMapping_GeneratorData(), this.getGeneratorData(), this.getGeneratorData_MemorySizeMappings(), "generatorData", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMemorySizeMapping_CompleteTypeSize(), ecorePackage.getEInt(), "completeTypeSize", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMemorySizeMapping_Warning(), ecorePackage.getEString(), "warning", "", 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(inputTypeListEClass, InputTypeList.class, "InputTypeList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getInputTypeList_InputType(), ecorePackage.getEString(), "inputType", null, 0, -1, InputTypeList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
