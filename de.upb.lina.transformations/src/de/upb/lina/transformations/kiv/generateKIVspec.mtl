@@ -317,7 +317,7 @@ unsupported operation
 [/template]
 
 [template private genLsPart(e : GetElementPtr, t: Transition, genData: GeneratorData)]
- .[e.result.addressToString(genData)/]:= [for(mm : MemorySizeMapping | genData.memorySizeMappings)][if(mm.instruction = e)][let offset : String = mm.offset][possiblyCastToRef('('+ e.aggregate.value.castFromRef(genData) +' + '+ offset + ')', e.result, genData)/][/let][/if][/for]
+ .[e.result.addressToString(genData)/]:= [for(mm : MemorySizeMapping | genData.memorySizeMappings)][if(mm.instruction = e)][let offset : EInt = mm.offset][possiblyCastToRef('('+ e.aggregate.value.castFromRef(genData) +' + '+ offset + ')', e.result, genData)/][/let][/if][/for]
 [/template]
 
 [template private genLsPart(e : Cast, t: Transition, genData: GeneratorData)]
