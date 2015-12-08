@@ -3,6 +3,7 @@ package de.upb.lina.cfg.tools.strategies;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ListIterator;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -286,7 +287,7 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 		while(i.hasNext())
 		{
 			AddressValuePair pair = i.next();
-			if(pair.getAddress().getValue().equals(adrParam.getValue()))
+			if(((AddressUse)pair.getAddress().getValue()).getAddress().getName().equals(((AddressUse)adrParam.getValue()).getAddress().getName()))
 			{
 				//store buffer contains entry for address
 				//it must be an early read
@@ -304,12 +305,12 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 	protected AddressValuePair getLatestBufferEntry(ControlFlowLocation location, Load load)
 	{
 		Parameter adrParam = load.getAddress();
-		
-		ListIterator<AddressValuePair> i = location.getBuffer().getAddressValuePairs().listIterator();
+		List<AddressValuePair> l =location.getBuffer().getAddressValuePairs();
+		ListIterator<AddressValuePair> i = l.listIterator(l.size());
 		while(i.hasPrevious())
 		{
 			AddressValuePair pair = i.previous();
-			if(pair.getAddress().getValue().equals(adrParam.getValue()))
+			if(((AddressUse)pair.getAddress().getValue()).getAddress().getName().equals(((AddressUse)adrParam.getValue()).getAddress().getName()))
 			{
 				//store buffer contains entry for address
 				//it must be an early read
