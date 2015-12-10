@@ -35,7 +35,7 @@ public class TransformationWizard extends Wizard implements INewWizard {
 
 		// create config object from selected configuration
 		List<ControlFlowDiagram> cfgs = functionSelectionPage.getSelectedFunctions();
-		int kIVBasis = wizardPage.getBasis();
+		String kIVBasis = wizardPage.getBasis();
 		Map<String, String> oldToNewCfgName = functionSelectionPage.getMap();
 		Configuration config = new Configuration(cfgs, kIVBasis, oldToNewCfgName);
 		if(wizardPage.getType() == ETransformationTarget.KIVLOCAL)

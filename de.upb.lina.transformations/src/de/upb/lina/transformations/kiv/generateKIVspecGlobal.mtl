@@ -116,7 +116,7 @@ enrich 	CS,
 [/template]
 
 [template private basis(genData : GeneratorData)]
-[for(basis: String | genData.transformationSpecificKeys)][if (basis.equalsIgnoreCase('INT'))]int[/if][if (basis.equalsIgnoreCase('NAT'))]nat[/if][/for]
+[for(basis: String | genData.transformationSpecificKeys)][if (basis.equalsIgnoreCase('int'))]int[/if][if (basis.equalsIgnoreCase('nat'))]nat[/if][/for]
 [/template]
 
 [template private generateCfgLabel(genData : GeneratorData, cfg : ControlFlowDiagram)]

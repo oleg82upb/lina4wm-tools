@@ -63,7 +63,7 @@ public class TransformationWizardPage extends WizardPage {
 	private String targetContainer = "";
 	private String sourceGraphModelFileName = "";
 	private int modelType = Constants.TRANSFORMATION_TYPE_PROMELA;
-	private int basis = Constants.NAT;
+	private String basis = Constants.NAT;
 
 	private boolean canFlip = true;
 	
@@ -191,17 +191,22 @@ public class TransformationWizardPage extends WizardPage {
 		new Label(container, SWT.NONE);
 		new Label(container, SWT.NULL).setText("Transformation based on ");
 		cb_basis = new Combo(container, SWT.NULL);
-		String[] basisTypes = new String[] { "nat", "int" };
+		String[] basisTypes = new String[] { Constants.NAT, Constants.INT };
 		for (int i = 0; i < basisTypes.length; i++){
 			cb_basis.add(basisTypes[i]);
 		}
 		cb_basis.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				basis = cb_basis.getSelectionIndex();
+				if(cb_basis.getSelectionIndex() == Constants.NAT_INDEX){
+					basis = Constants.NAT;
+				}else if(cb_basis.getSelectionIndex() == Constants.INT_INDEX){
+					basis = Constants.INT;
+				}
+				
 			}
 		});
 		
-		cb_basis.select(Constants.NAT);
+		cb_basis.select(Constants.NAT_INDEX);
 		cb_basis.setEnabled(false);
 		
 		setControl(container);
@@ -611,7 +616,7 @@ public class TransformationWizardPage extends WizardPage {
 		return lb_fileEnding;
 	}
 	
-	public int getBasis() {
+	public String getBasis() {
 		return basis;
 	}
 

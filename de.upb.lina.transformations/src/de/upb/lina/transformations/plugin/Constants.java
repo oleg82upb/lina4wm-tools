@@ -52,8 +52,11 @@ public abstract class Constants {
 	public final static String MODEL_SELECTION = "modelSelection";
 	
 	/* Constants regarding settings for KIV transformation */
-	public static final int NAT = 0;
-	public static final int INT = 1;
+	public static final String NAT = "nat";
+	public static final String INT = "int";
+	public static final String REF = "ref";
+	public static final int NAT_INDEX = 0;
+	public static final int INT_INDEX = 1;
 	
 	/* Constants to determine transformation type*/
 	public static final int TRANSFORMATION_TYPE_PROMELA = 0;

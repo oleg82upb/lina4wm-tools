@@ -8,12 +8,12 @@ import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 public class Configuration {
 	
 	private List<ControlFlowDiagram> cfgs;	
-	private int kIVBasis;
+	private String kIVBasis;
 	private Map<String, String> oldToNewCfgName;
 	private int kivTransformationType = Constants.TRANSFORMATION_TYPE_KIV_LOCAL;
 	
 	
-	public Configuration(List<ControlFlowDiagram> cfgs, int kIVBasis, Map<String, String> oldToNewCfgName){
+	public Configuration(List<ControlFlowDiagram> cfgs, String kIVBasis, Map<String, String> oldToNewCfgName){
 		this.cfgs = cfgs;
 		this.kIVBasis = kIVBasis;
 		this.oldToNewCfgName = oldToNewCfgName;
@@ -29,7 +29,7 @@ public class Configuration {
 	/**
 	 * @return the kIVBasis
 	 */
-	public int getKIVBasis()
+	public String getKIVBasis()
 	{
 		return kIVBasis;
 	}

@@ -103,7 +103,7 @@ enrich 	[basis(genData)/]ref-memory,
 	[for (cfg : ControlFlowDiagram | genData.cfgs)] 
 ;; 	[generateCfgLabel(genData, cfg)/] reflects function [cfg.name/]
 	[generateCfgLabel(genData, cfg)/]ini :
-	⊦ INVOP([generateCfgLabel(genData, cfg)/]ini)(inp, mem, ls, mem', ls') ↔ ls .pc = N [if(input(genData))]∧ [for(am : AddressMapping | genData.getFilteredAddresses('func-params:' + cfg.name))][if(am.name.equalsIgnoreCase('returnvalue')._not())][am.type/][/if][/for]?(inp) [/if]∧ ls' = ls .pc:= [generateStartPC(genData, cfg)/] [generateFunctionParameter(cfg, genData)/]∧ mem' = mem; 
+	⊦ INVOP([generateCfgLabel(genData, cfg)/]ini)(inp, mem, ls, mem', ls') ↔ ls .pc = N [if(input(genData))][let params : OrderedSet(AddressMapping) = genData.getFilteredAddresses('func-params:'+cfg.name)->select(name.equalsIgnoreCase('returnvalue')._not())][if(params->size()>0)]∧ [for(am : AddressMapping | params)][am.type/][/for]?(inp) [/if][/let][/if]∧ ls' = ls .pc:= [generateStartPC(genData, cfg)/] [generateFunctionParameter(cfg, genData)/]∧ mem' = mem; 
 	used for : s, ls;
 
 	[/for]
@@ -165,7 +165,7 @@ constants
 [/template]
 
 [template private basis(genData : GeneratorData)]
-[for(basis: String | genData.transformationSpecificKeys)][if (basis.equalsIgnoreCase('INT'))]int[/if][if (basis.equalsIgnoreCase('NAT'))]nat[/if][/for]
+[for(basis: String | genData.transformationSpecificKeys)][if (basis.equalsIgnoreCase('int'))]int[/if][if (basis.equalsIgnoreCase('nat'))]nat[/if][/for]
 [/template]
 
 [template private genPhiInstruction(t : Transition, genData : GeneratorData)]
@@ -207,7 +207,10 @@ ls' = ls .pc:= [generateNextPC(genData, t)/] .[t.instruction.oclAsType(Load).res
 [/template]
 
 [template private findValueForEarlyReadExpression(t : EarlyReadTransition, genData : GeneratorData)]
-[for (avp: AddressValuePair | t.source.buffer.addressValuePairs)][if(t.assignmentExpression.equalsIgnoreCase(avp.values->first().value.name(genData)))][let v : Value = avp.values->first().value][possiblyAddLS(v, genData)/][v.valueToString(genData)/][/let][/if][/for]
+[for (avp: AddressValuePair | t.source.buffer.addressValuePairs)]
+[for(parameter : Parameter | avp.values)]
+[let v : String = parameter.value.valueToString(genData)]
+[if(t.assignmentExpression.equalsIgnoreCase(v))][possiblyAddLS(parameter.value, genData)/][v/][/if][/let][/for][/for]
 [/template]
 
 [query private name(v : Value, genData: GeneratorData) : String = 
@@ -264,7 +267,7 @@ else if s.equalsIgnoreCase('mul') then
 else if s.equalsIgnoreCase('sdiv') or s.equalsIgnoreCase('udiv') then
 	'/'
 else
-	'NEEDS ATTENTION'
+	'NEEDS ATTENTION -> UNSUPPORTED ARITHMETIC OPERATION'
 endif
 endif
 endif
