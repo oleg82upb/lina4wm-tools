@@ -12,7 +12,7 @@ data specification
 					. .[am.name/] : [am.type/];
 					[/for]);
 	variables
-		ls : Localstate;
+		ls , ls' : Localstate;
 end data specification
 [/file]
 
@@ -89,7 +89,6 @@ enrich 	[basis(genData)/]ref-memory,
 		retop : memory × Localstate × memory × Localstate × [if(genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->size()>0)][genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->first().type/][else][basis(genData)/][/if] → bool;
 		[/if]
 		mem' : memory;
-		ls' : Localstate;
 [if(input(genData)._not())]
 		inp : [inputType(genData)/];
 [/if][if(returns->size() > 0)]
@@ -127,6 +126,10 @@ end enrich
 
 [/template]
 
+[template private basis(genData : GeneratorData)]
+[for(basis: String | genData.transformationSpecificKeys)][if (basis.equalsIgnoreCase('int'))]int[/if][if (basis.equalsIgnoreCase('nat'))]nat[/if][/for]
+[/template]
+
 [query private input(genData : GeneratorData) : Boolean = 
 if genData.transformationSpecificKeys->indexOf('INPUT_NEEDED').oclIsUndefined() then false else true endif/]
 
@@ -155,26 +158,16 @@ constants
 [for (label : LocationLabel | genData.locationLabels)][if(label.controlFlowLocation = transition.target)][label.name/][/if][/for]
 [/template]
 
-[template private generateCfgLabel(genData : GeneratorData, cfg : ControlFlowDiagram)]
-[for(mapping : OldToNewCfgNameMapping |genData.oldToNewCfgName)][if(mapping.key.equalsIgnoreCase(cfg.name))][mapping.value/][/if][/for]
-[/template]
-
 [template private generateStartPC(genData : GeneratorData, cfg : ControlFlowDiagram)]
 [for (l : ControlFlowLocation | cfg.locations)]
 [if (l = cfg.start)][for (label : LocationLabel | genData.locationLabels)][if (l = label.controlFlowLocation)][label.name/][/if][/for][/if][/for]
 [/template]
 
-[template private basis(genData : GeneratorData)]
-[for(basis: String | genData.transformationSpecificKeys)][if (basis.equalsIgnoreCase('int'))]int[/if][if (basis.equalsIgnoreCase('nat'))]nat[/if][/for]
+[template private generateCfgLabel(genData : GeneratorData, cfg : ControlFlowDiagram)]
+[for(mapping : OldToNewCfgNameMapping |genData.oldToNewCfgName)][if(mapping.key.equalsIgnoreCase(cfg.name))][mapping.value/][/if][/for]
 [/template]
 
-[template private genPhiInstruction(t : Transition, genData : GeneratorData)]
-[for(map : PhiMapping| genData.phiMappings)][if(map.transition = t)][for(phi : Phi | map.phi)] .[phi.result.addressToString(genData)/]:= [for(case : PhiCase|phi.cases)][if(case.label.replace('%', '').equalsIgnoreCase(map.blockLabelToUse))][for (am: AddressMapping | genData.addressMappings)][for (a: Address | am.adresses)]
-[if (phi.result = a)][if(am.type.equalsIgnoreCase('ref'))][castToRef(case.value, genData)/][else][possiblyAddLS(case.value, genData)/][case.value.valueToString(genData)/][/if][/if][/for][/for][/if][/for][/for][/if][/for]
-[/template]
-
-
-[comment ====== Transitions ======/]
+[comment ============================= Transitions=============================================== /]
 [template private transformTransition(t: Transition, genData: GeneratorData)]
 [let pc : String = generateNextPC(genData, t)]
 [if((t.instruction.oclIsUndefined() or t.instruction.oclIsKindOf(Select) or t.instruction.oclIsTypeOf(CompareInt) or t.instruction.oclIsTypeOf(CmpXchg))._not())]ls' = ls .pc:= [pc/][/if][if (t.instruction.oclIsUndefined()._not())][t.instruction.genLsPart(t,genData)/][/if][if(t.instruction.oclIsTypeOf(CmpXchg)._not())][t.genPhiInstruction(genData)/][/if][t.instruction.genMemPart(t,genData)/][/let]
@@ -242,6 +235,11 @@ endif
  ∧ mem' = mem
 [/template]
 
+[template private genPhiInstruction(t : Transition, genData : GeneratorData)]
+[for(map : PhiMapping| genData.phiMappings)][if(map.transition = t)][for(phi : Phi | map.phi)] .[phi.result.addressToString(genData)/]:= [for(case : PhiCase|phi.cases)][if(case.label.replace('%', '').equalsIgnoreCase(map.blockLabelToUse))][for (am: AddressMapping | genData.addressMappings)][for (a: Address | am.adresses)]
+[if (phi.result = a)][if(am.type.equalsIgnoreCase('ref'))][castToRef(case.value, genData)/][else][possiblyAddLS(case.value, genData)/][case.value.valueToString(genData)/][/if][/if][/for][/for][/if][/for][/for][/if][/for]
+[/template]
+
 [template private genLsPart(e : ArithmeticOperation, t: Transition, genData : GeneratorData)]
 [e.arithmeticInstr(e, genData)/]
 [/template]
@@ -281,14 +279,14 @@ endif
 [/template]
 
 [template private genLsPart(e : CompareInt, t : Transition, genData : GeneratorData)]
-[let pc : String = generateNextPC(genData, t)][let op1 : String = e.operand1.valueToString(genData)][let op2 : String = e.operand2.valueToString(genData)][let res : String = e.result.addressToString(genData)]
+[let pc : String = generateNextPC(genData, t)][let res : String = e.result.addressToString(genData)]
 [if(e.cond.equalsIgnoreCase('eq'))]([compareTypecorrect(e.operand1, e.operand2, genData)/] ⊃ ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('1',e.result, genData)/] ; ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('0',e.result, genData)/])[else]
 [if(e.cond.equalsIgnoreCase('ne'))]([compareTypecorrect(e.operand1, e.operand2, genData)/] ⊃ ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('0',e.result, genData)/] ; ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('1',e.result, genData)/])[else]
 [if(e.cond.equalsIgnoreCase('uge')._or(e.cond.equalsIgnoreCase('sge')))]([e.operand1.castFromRef(genData)/] ≥ [e.operand2.castFromRef(genData)/] ⊃ ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('1',e.result, genData)/] ; ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('0',e.result, genData)/])[else]
 [if(e.cond.equalsIgnoreCase('ugt')._or(e.cond.equalsIgnoreCase('sgt')))]([e.operand1.castFromRef(genData)/] ≤ [e.operand2.castFromRef(genData)/] ⊃ ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('0',e.result, genData)/] ; ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('1',e.result, genData)/])[else]
 [if(e.cond.equalsIgnoreCase('ult')._or(e.cond.equalsIgnoreCase('slt')))]([e.operand1.castFromRef(genData)/] ≥ [e.operand2.castFromRef(genData)/] ⊃ ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('0',e.result, genData)/] ; ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('1',e.result, genData)/])[else]
 [if(e.cond.equalsIgnoreCase('ule')._or(e.cond.equalsIgnoreCase('sle')))]([e.operand1.castFromRef(genData)/] ≤ [e.operand2.castFromRef(genData)/] ⊃ ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('1',e.result, genData)/] ; ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('0',e.result, genData)/])[/if][/if][/if][/if][/if][/if]
-[/let][/let][/let][/let]
+[/let][/let]
 [/template]
 
 [template private genLsPart(e : CmpXchg, t: Transition, genData : GeneratorData)]

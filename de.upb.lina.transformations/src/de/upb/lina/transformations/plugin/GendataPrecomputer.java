@@ -1620,4 +1620,22 @@ public class GendataPrecomputer {
 		mapping.setCompleteTypeSize(completeSize - 1);
 		return mapping;
 	}
+	
+	//invoked in generateKIVspecGlobal.mtl
+	public static AddressMapping getCorrespondingAddressMapping(Address inputAddress, GeneratorData genData, String keyForListOfMappings){
+		List<AddressMapping> addressMappings = null;
+		if(keyForListOfMappings != null){
+			addressMappings = genData.getFilteredAddresses(keyForListOfMappings);
+		}else{
+			addressMappings = genData.getAddressMappings();
+		}
+		for(AddressMapping am : addressMappings){
+			for(Address address : am.getAdresses()){
+				if(inputAddress.equals(address)){
+					return am;
+				}
+			}
+		}
+		return null;
+	}
 }
