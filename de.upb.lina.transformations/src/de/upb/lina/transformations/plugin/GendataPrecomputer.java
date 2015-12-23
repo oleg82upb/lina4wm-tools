@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
 
 import de.upb.lina.cfg.controlflow.AddressValuePair;
@@ -30,7 +29,6 @@ import de.upb.llvm_parser.llvm.AbstractElement;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.Aggregate_Type;
-import de.upb.llvm_parser.llvm.AliasDefinition;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.ArithmeticOperation;
 import de.upb.llvm_parser.llvm.Array;
@@ -350,9 +348,79 @@ public class GendataPrecomputer {
 
 	private void computeFilteredAddresses()
 	{
+		// collect all addresses
+		EList<AddressMapping> globals = new BasicEList<AddressMapping>();
+		LLVM program = helperModel.getProgram();
+		for (AbstractElement ele : program.getElements())
+		{
+			// compute list of function parameter
+			if (ele instanceof FunctionDefinition)
+			{
+				FunctionDefinition fDef = (FunctionDefinition) ele;
+				ControlFlowDiagram matchingCfg = getCFGForFunction(fDef);
+				if (matchingCfg != null)
+				{
+					FunctionParameterList params = fDef.getParameter();
+
+					// make sure we store all of the params as such
+					EList<AddressMapping> paramsMapping = new BasicEList<AddressMapping>();
+					if (params != null)
+					{
+						for (FunctionParameter param : params.getParams())
+						{
+							AddressMapping paramMapping = addToMapping(fDef, param.getValue());
+							setType(paramMapping, param.getType());
+
+							// Add to params mapping
+							paramsMapping.add(paramMapping);
+						}
+
+						helperModel.getFilteredAddresses(Constants.FUNC_PARAMS + matchingCfg.getName()).addAll(
+								paramsMapping);
+					}
+				}
+				// compute list of global variables
+			} else if (ele instanceof GlobalDefinition)
+			{
+				GlobalDefinition gDef = (GlobalDefinition) ele;
+				AddressMapping defAddress = addToMapping(null, gDef.getAddress());
+				setType(defAddress, gDef.getValue());
+				if (defAddress != null)
+				{
+					globals.add(defAddress);
+				}
+
+				EObject type = null;
+				AddressMapping defValue = null;
+				if (gDef.getValue() instanceof Parameter)
+				{
+					Parameter param = (Parameter) gDef.getValue();
+					type = param.getType();
+
+					Address address = extractAddressFromValue(param.getValue());
+					defValue = addToMapping(null, address);
+				} else if (gDef.getValue() instanceof Predefined)
+				{
+					type = gDef.getValue();
+				} else
+				{
+					throw new RuntimeException("Unexpected type " + type + " detected for global definition");
+				}
+
+				setType(defValue, type);
+				if (defValue != null)
+				{
+					globals.add(defValue);
+				}
+			} else if (ele instanceof TypeDefinition)
+			{
+				TypeDefinition tDef = (TypeDefinition) ele;
+				typeDefinitions.add(tDef);
+			}
+		}
+		helperModel.getFilteredAddresses(Constants.GLOBAL_VARS).addAll(globals);
 
 		HashMap<AddressMapping, Return> returnMappings = new HashMap<AddressMapping, Return>();
-
 		for (ControlFlowDiagram cfg : cfgs)
 		{
 			FunctionDefinition fd = getFunctionForCfg(cfg);
@@ -373,7 +441,6 @@ public class GendataPrecomputer {
 							Address returnAddress = LlvmFactory.eINSTANCE.createAddress();
 							returnAddress.setName("returnvalue");
 							AddressMapping returnMapping = createAddressMapping(returnAddress, "returnvalue");
-							returnMapping.setGeneratorData(helperModel);
 							setType(returnMapping, ret.getValue());
 							returnMappings.put(returnMapping, ret);
 							helperModel.getFilteredAddresses(Constants.FUNC_PARAMS + cfg.getName()).add(returnMapping);
@@ -413,66 +480,9 @@ public class GendataPrecomputer {
 				}
 			}
 		}
-
-		// set Type of all returnMapings to the same value
-		boolean refExists = false;
-		for (AddressMapping mapping : returnMappings.keySet())
-		{
-			if (mapping.getType().equals(Constants.REF))
-			{
-				refExists = true;
-			} else
-			{
-				Return ret = returnMappings.get(mapping);
-				if (ret.getValue() instanceof Parameter)
-				{
-					Parameter p = (Parameter) ret.getValue();
-					if (p.getValue() instanceof AddressUse)
-					{
-						AddressUse au = (AddressUse) p.getValue();
-						AddressMapping am = getMappingForAddress(au.getAddress());
-						if (am.getType().equals(Constants.REF))
-						{
-							refExists = true;
-						}
-					}
-				}
-			}
-
-		}
-		if (refExists)
-		{
-			for (AddressMapping mapping : returnMappings.keySet())
-			{
-				mapping.setType(Constants.REF);
-				Return ret = returnMappings.get(mapping);
-				if (ret.getValue() instanceof Parameter)
-				{
-					Parameter p = (Parameter) ret.getValue();
-					if (p.getValue() instanceof AddressUse)
-					{
-						AddressUse au = (AddressUse) p.getValue();
-						AddressMapping am = getMappingForAddress(au.getAddress());
-						am.setType(Constants.REF);
-					}
-				}
-			}
-		} else
-		{
-			for (AddressMapping mapping : returnMappings.keySet())
-			{
-				mapping.setType(kivTransformationBasis);
-			}
-		}
-
-		computeGlobalLists();
-	}
-
-	private void computeGlobalLists()
-	{
-
-		EMap<String, EList<AddressMapping>> filteredAddresses = helperModel.getFilteredAddresses();
-
+		
+		setTypeOfReturnMappings(returnMappings);
+		
 		// compute global list of parameters
 		EList<AddressMapping> allParamMappings = new BasicEList<AddressMapping>();
 		boolean returnvalueAdded = false;
@@ -482,7 +492,6 @@ public class GendataPrecomputer {
 
 		for (ControlFlowDiagram cfg : cfgs)
 		{
-
 			String name = cfg.getName();
 			EList<AddressMapping> funcParamMapping = helperModel.getFilteredAddresses(Constants.FUNC_PARAMS + name);
 			EList<AddressMapping> funcLocalVarsMapping = helperModel
@@ -525,7 +534,60 @@ public class GendataPrecomputer {
 				allLocalsAndParams.add(am);
 			}
 		}
-		filteredAddresses.put(Constants.ALL_DECLARE_PARAMS, allLocalsAndParams);
+		helperModel.getFilteredAddresses().put(Constants.ALL_DECLARE_PARAMS, allLocalsAndParams);
+	}
+	
+	private void setTypeOfReturnMappings(Map<AddressMapping, Return> returnMappings)
+	{
+		// set Type of all returnMapings to the same value
+		boolean refExists = false;
+		for (AddressMapping mapping : returnMappings.keySet())
+		{
+			if (mapping.getType().equals(Constants.REF))
+			{
+				refExists = true;
+			} else
+			{
+				Return ret = returnMappings.get(mapping);
+				if (ret.getValue() instanceof Parameter)
+				{
+					Parameter p = (Parameter) ret.getValue();
+					if (p.getValue() instanceof AddressUse)
+					{
+						AddressUse au = (AddressUse) p.getValue();
+						AddressMapping am = getMappingForAddress(au.getAddress());
+						if (am.getType().equals(Constants.REF))
+						{
+							refExists = true;
+						}
+					}
+				}
+			}
+		}
+		if (refExists)
+		{
+			for (AddressMapping mapping : returnMappings.keySet())
+			{
+				mapping.setType(Constants.REF);
+				Return ret = returnMappings.get(mapping);
+				if (ret.getValue() instanceof Parameter)
+				{
+					Parameter p = (Parameter) ret.getValue();
+					if (p.getValue() instanceof AddressUse)
+					{
+						AddressUse au = (AddressUse) p.getValue();
+						AddressMapping am = getMappingForAddress(au.getAddress());
+						am.setType(Constants.REF);
+					}
+				}
+			}
+		} else
+		{
+			for (AddressMapping mapping : returnMappings.keySet())
+			{
+				mapping.setType(kivTransformationBasis);
+			}
+		}
 	}
 
 	private void computeInputTypes()
@@ -795,7 +857,7 @@ public class GendataPrecomputer {
 	/**
 	 * Constructs the actual variable mapping
 	 */
-	private void computeLocalVariables() throws IllegalArgumentException
+	private void computeLocalVariables()
 	{
 		// map local variables of cfgs
 		for (ControlFlowDiagram cfg : cfgs)
@@ -833,81 +895,6 @@ public class GendataPrecomputer {
 				}
 			}
 		}
-
-		// collect all addresses
-		EList<AddressMapping> globals = new BasicEList<AddressMapping>();
-		LLVM program = helperModel.getProgram();
-		for (AbstractElement ele : program.getElements())
-		{
-			if (ele instanceof FunctionDefinition)
-			{
-				FunctionDefinition fDef = (FunctionDefinition) ele;
-				ControlFlowDiagram matchingCfg = getCFGForFunction(fDef);
-				if (matchingCfg != null)
-				{
-					// map params
-					FunctionParameterList params = fDef.getParameter();
-
-					// make sure we store all of the params as such
-					EList<AddressMapping> paramsMapping = new BasicEList<AddressMapping>();
-					if (params != null)
-					{
-						for (FunctionParameter param : params.getParams())
-						{
-							AddressMapping paramMapping = addToMapping(fDef, param.getValue());
-							setType(paramMapping, param.getType());
-
-							// Add to params mapping
-							paramsMapping.add(paramMapping);
-						}
-
-						helperModel.getFilteredAddresses(Constants.FUNC_PARAMS + matchingCfg.getName()).addAll(
-								paramsMapping);
-					}
-				}
-			} else if (ele instanceof GlobalDefinition)
-			{
-				GlobalDefinition gDef = (GlobalDefinition) ele;
-				AddressMapping defAddress = addToMapping(null, gDef.getAddress());
-				setType(defAddress, gDef.getValue());
-				if (defAddress != null)
-				{
-					globals.add(defAddress);
-				}
-
-				EObject type = null;
-				AddressMapping defValue = null;
-				if (gDef.getValue() instanceof Parameter)
-				{
-					Parameter param = (Parameter) gDef.getValue();
-					type = param.getType();
-
-					Address address = extractAddressFromValue(param.getValue());
-					defValue = addToMapping(null, address);
-				} else if (gDef.getValue() instanceof Predefined)
-				{
-					type = gDef.getValue();
-				} else
-				{
-					throw new RuntimeException("Unexpected type " + type + " detected for global definition");
-				}
-
-				setType(defValue, type);
-				if (defValue != null)
-				{
-					globals.add(defValue);
-				}
-			} else if (ele instanceof TypeDefinition)
-			{
-				TypeDefinition tDef = (TypeDefinition) ele;
-				typeDefinitions.add(tDef);
-			} else if (ele instanceof AliasDefinition)
-			{
-				AliasDefinition aDef = (AliasDefinition) ele;
-				aDef.getAddress();
-			}
-		}
-		helperModel.getFilteredAddresses(Constants.GLOBAL_VARS).addAll(globals);
 	}
 
 	private void addInstructionVariablesToMapping(FunctionDefinition function, Instruction i)
@@ -1151,9 +1138,7 @@ public class GendataPrecomputer {
 			// create new addressmapping
 			AddressMapping addressMapping = createAddressMapping(address, GraphUtility.clean(address.getName()));
 			setType(addressMapping, address);
-
-			EList<AddressMapping> mapping = helperModel.getAddressMappings();
-			mapping.add(addressMapping);
+			
 			addressLookup.put(address, addressMapping.getName());
 
 			correspondingMapping = addressMapping;
@@ -1178,10 +1163,8 @@ public class GendataPrecomputer {
 			return;
 
 		String t = Constants.REF;
-
 		if (object instanceof TypeUse)
 		{
-
 			if (((TypeUse) object).getPointer() != null)
 			{
 				t = Constants.REF;
@@ -1330,6 +1313,8 @@ public class GendataPrecomputer {
 		mapping.setName(name);
 		mapping.getAdresses().add(address);
 		mapping.getOldNames().add(address.getName());
+		mapping.setGeneratorData(helperModel);
+		helperModel.getAddressMappings().add(mapping);
 		return mapping;
 	}
 
@@ -1621,7 +1606,7 @@ public class GendataPrecomputer {
 		return mapping;
 	}
 	
-	//invoked in generateKIVspecGlobal.mtl
+	//invoked in generateKIVspec(...).mtl
 	public static AddressMapping getCorrespondingAddressMapping(Address inputAddress, GeneratorData genData, String keyForListOfMappings){
 		List<AddressMapping> addressMappings = null;
 		if(keyForListOfMappings != null){
