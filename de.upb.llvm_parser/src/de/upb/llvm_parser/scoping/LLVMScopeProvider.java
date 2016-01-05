@@ -12,6 +12,7 @@ import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 
 import de.upb.llvm_parser.llvm.AbstractElement;
+import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.AliasDefinition;
 import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.ArithmeticOperation;
@@ -54,180 +55,148 @@ public class LLVMScopeProvider extends AbstractDeclarativeScopeProvider {
 	
 	
 	
-	
-	public IScope scope_AddressUse_address(Parameter param, EReference ref)
-	{		ArrayList<EObject> l = new ArrayList<EObject>();
-		
-		
-		EObject container = param.eContainer();
-		if(container instanceof ParameterList)
+	public IScope scope_AddressUse_address(AddressUse au, EReference ref)
+	{
+		ArrayList<EObject> l = new ArrayList<EObject>();
+
+		EObject container = au.eContainer();
+		if (container instanceof Parameter)
 		{
 			container = container.eContainer();
 		}
-		
-		if(container instanceof Instruction)
+		if (container instanceof ParameterList)
 		{
-			EObject i = container.eContainer();
-			if(i instanceof BasicBlock)
-			{
-				EObject f = i.eContainer();
-				if(f instanceof FunctionBody)
-				{
-					
-					l = collectElementsInScope((FunctionDefinition) f.eContainer(), param);
-					return Scopes.scopeFor(l);
-				}
-			} 
+			container = container.eContainer();
 		}
-		
-		
-		//fall back to implementation of super class
-		IScope scope = polymorphicFindScopeForClassName(param, ref);
-		if (scope == null) {
-			scope = delegateGetScope(param, ref);
+		if (container instanceof Instruction)
+		{
+			container = container.eContainer();
+		}
+		if (container instanceof BasicBlock)
+		{
+			container = container.eContainer();
+		}
+		if (container instanceof FunctionBody)
+		{
+			container = container.eContainer();
+		}
+		if (container instanceof FunctionDefinition)
+		{
+			l = collectElementsInScope((FunctionDefinition) container, au);
+			return Scopes.scopeFor(l);
+		}
+
+		// fall back to implementation of super class
+		IScope scope = polymorphicFindScopeForClassName(au, ref);
+		if (scope == null)
+		{
+			scope = delegateGetScope(au, ref);
 		}
 		return scope;
 	}
 	
 	
-	private ArrayList<EObject> collectElementsInScope(FunctionDefinition f, Parameter param)
+	private ArrayList<EObject> collectElementsInScope(FunctionDefinition f, AddressUse au)
 	{
 		ArrayList<EObject> l = new ArrayList<EObject>();
-		
-		
-		//we take only previously defined addresses into account
-		//and therefor break once we reach the instruction containing address use 
-		Instruction containerOfParam = (Instruction) param.eContainer();
-		boolean instructionReached = false;
-		
-		for(BasicBlock bb : f.getBody().getBlocks())
+
+		for (BasicBlock bb : f.getBody().getBlocks())
 		{
-			for(Instruction i : bb.getInstructions())
+			for (Instruction i : bb.getInstructions())
 			{
-				if(i instanceof Alloc)
+				if (i instanceof Alloc)
 				{
-					
+
 					l.add(((Alloc) i).getResult());
-				}
-				else if (i instanceof ArithmeticOperation)
+				} else if (i instanceof ArithmeticOperation)
 				{
 					l.add(((ArithmeticOperation) i).getResult());
-				}
-				else if (i instanceof AtomicRMW)
+				} else if (i instanceof AtomicRMW)
 				{
 					l.add(((AtomicRMW) i).getResult());
-				}
-				else if (i instanceof Call)
+				} else if (i instanceof Call)
 				{
-					if(((Call)i).getResult() != null)
+					if (((Call) i).getResult() != null)
 					{
 						l.add(((Call) i).getResult());
 					}
-				}
-				else if (i instanceof Cast)
+				} else if (i instanceof Cast)
 				{
 					l.add(((Cast) i).getResult());
-				}
-				else if (i instanceof CmpXchg)
+				} else if (i instanceof CmpXchg)
 				{
 					l.add(((CmpXchg) i).getResult());
-				}
-				else if (i instanceof Compare)
+				} else if (i instanceof Compare)
 				{
 					l.add(((Compare) i).getResult());
-				}
-				else if (i instanceof ExtractElement)
+				} else if (i instanceof ExtractElement)
 				{
 					l.add(((ExtractElement) i).getResult());
-				}
-				else if (i instanceof ExtractValue)
+				} else if (i instanceof ExtractValue)
 				{
 					l.add(((ExtractValue) i).getResult());
-				}
-				else if (i instanceof GetElementPtr)
+				} else if (i instanceof GetElementPtr)
 				{
 					l.add(((GetElementPtr) i).getResult());
-				}
-				else if (i instanceof InsertElement)
+				} else if (i instanceof InsertElement)
 				{
 					l.add(((InsertElement) i).getResult());
-				}
-				else if (i instanceof InsertValue)
+				} else if (i instanceof InsertValue)
 				{
 					l.add(((InsertValue) i).getResult());
-				}
-				else if (i instanceof LandingPad)
+				} else if (i instanceof LandingPad)
 				{
 					l.add(((LandingPad) i).getResult());
-				}
-				else if (i instanceof Load)
+				} else if (i instanceof Load)
 				{
 					l.add(((Load) i).getResult());
-				}
-				else if (i instanceof LogicOperation)
+				} else if (i instanceof LogicOperation)
 				{
 					l.add(((LogicOperation) i).getResult());
-				}
-				else if (i instanceof Phi)
+				} else if (i instanceof Phi)
 				{
 					l.add(((Phi) i).getResult());
-				}
-				else if (i instanceof Select)
+				} else if (i instanceof Select)
 				{
 					l.add(((Select) i).getResult());
-				}
-				else if (i instanceof ShuffleVector)
+				} else if (i instanceof ShuffleVector)
 				{
 					l.add(((ShuffleVector) i).getResult());
-				}
-				else if (i instanceof VariableAttributeAccess)
+				} else if (i instanceof VariableAttributeAccess)
 				{
 					l.add(((VariableAttributeAccess) i).getResult());
 				}
-				
-				if(i == containerOfParam)
-				{
-					instructionReached = true;
-					break;
-				}
 			}
-			if(instructionReached)
-			{
-				break;
-			}
-			
 		}
-		
-		//collect globally defined addresses
+
+		// collect globally defined addresses
 		LLVM llvm = (LLVM) f.eContainer();
 		for (AbstractElement e : llvm.getElements())
 		{
-			if(e instanceof TypeDefinition)
+			if (e instanceof TypeDefinition)
 			{
-				
-				l.add(((TypeDefinition)e).getAddress());
-			}
-			else if (e instanceof GlobalDefinition)
+
+				l.add(((TypeDefinition) e).getAddress());
+			} else if (e instanceof GlobalDefinition)
 			{
 				l.add(((GlobalDefinition) e).getAddress());
-			}
-			else if (e instanceof FunctionDefinition)
+			} else if (e instanceof FunctionDefinition)
 			{
 				l.add(((FunctionDefinition) e).getAddress());
-			}
-			else if (e instanceof AliasDefinition)
+			} else if (e instanceof AliasDefinition)
 			{
 				l.add(((AliasDefinition) e).getAddress());
 			}
-				
+
 		}
-		if(f.getParameter() != null){
-			for(FunctionParameter fp : f.getParameter().getParams())
+		if (f.getParameter() != null)
+		{
+			for (FunctionParameter fp : f.getParameter().getParams())
 			{
 				l.add(fp.getValue());
 			}
 		}
-		
+
 		return l;
 	}
 }
