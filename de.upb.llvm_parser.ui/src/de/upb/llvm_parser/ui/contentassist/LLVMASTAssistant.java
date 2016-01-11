@@ -3,6 +3,7 @@ package de.upb.llvm_parser.ui.contentassist;
 import java.util.Collections;
 import java.util.Iterator;
 
+import org.eclipse.core.internal.resources.File;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -54,7 +55,6 @@ public class LLVMASTAssistant extends XtextResource implements
 		//ensure LLVM is registered
 		LlvmPackage.eINSTANCE.eClass();
 		
-		
 		if (this.selection == null || this.selection instanceof IFile)
 		{
 			MessageDialog.openError(currentShell, "Wrong Selection", "Please select a file with .s extension");
@@ -63,6 +63,7 @@ public class LLVMASTAssistant extends XtextResource implements
 
 		IFile file = (IFile) this.selection.getFirstElement();
 		SaveAsDialog sad = new SaveAsDialog(currentShell);
+		sad.setOriginalFile(file);
 		sad.setOriginalName(file.getName() + ".llvm");
 		sad.open();
 
