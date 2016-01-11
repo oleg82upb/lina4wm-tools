@@ -5,10 +5,10 @@ package de.upb.lina.cfg.gendata.impl;
 import de.upb.lina.cfg.gendata.GendataPackage;
 import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.lina.cfg.gendata.MemorySizeMapping;
-import de.upb.llvm_parser.llvm.Instruction;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
@@ -40,7 +40,7 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 * @ordered
 	 */
-	protected Instruction instruction;
+	protected EObject instruction;
 
 	/**
 	 * The default value of the '{@link #getOffset() <em>Offset</em>}' attribute.
@@ -126,10 +126,10 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Instruction getInstruction() {
+	public EObject getInstruction() {
 		if (instruction != null && instruction.eIsProxy()) {
 			InternalEObject oldInstruction = (InternalEObject)instruction;
-			instruction = (Instruction)eResolveProxy(oldInstruction);
+			instruction = eResolveProxy(oldInstruction);
 			if (instruction != oldInstruction) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION, oldInstruction, instruction));
@@ -143,7 +143,7 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Instruction basicGetInstruction() {
+	public EObject basicGetInstruction() {
 		return instruction;
 	}
 
@@ -152,8 +152,8 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInstruction(Instruction newInstruction) {
-		Instruction oldInstruction = instruction;
+	public void setInstruction(EObject newInstruction) {
+		EObject oldInstruction = instruction;
 		instruction = newInstruction;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION, oldInstruction, instruction));
@@ -340,7 +340,7 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
-				setInstruction((Instruction)newValue);
+				setInstruction((EObject)newValue);
 				return;
 			case GendataPackage.MEMORY_SIZE_MAPPING__OFFSET:
 				setOffset((Integer)newValue);
@@ -367,7 +367,7 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
-				setInstruction((Instruction)null);
+				setInstruction((EObject)null);
 				return;
 			case GendataPackage.MEMORY_SIZE_MAPPING__OFFSET:
 				setOffset(OFFSET_EDEFAULT);

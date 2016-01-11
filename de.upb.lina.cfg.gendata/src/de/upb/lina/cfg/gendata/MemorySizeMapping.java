@@ -2,7 +2,6 @@
  */
 package de.upb.lina.cfg.gendata;
 
-import de.upb.llvm_parser.llvm.Instruction;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -35,12 +34,12 @@ public interface MemorySizeMapping extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Instruction</em>' reference.
-	 * @see #setInstruction(Instruction)
+	 * @see #setInstruction(EObject)
 	 * @see de.upb.lina.cfg.gendata.GendataPackage#getMemorySizeMapping_Instruction()
 	 * @model
 	 * @generated
 	 */
-	Instruction getInstruction();
+	EObject getInstruction();
 
 	/**
 	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getInstruction <em>Instruction</em>}' reference.
@@ -50,7 +49,7 @@ public interface MemorySizeMapping extends EObject {
 	 * @see #getInstruction()
 	 * @generated
 	 */
-	void setInstruction(Instruction value);
+	void setInstruction(EObject value);
 
 	/**
 	 * Returns the value of the '<em><b>Offset</b></em>' attribute.

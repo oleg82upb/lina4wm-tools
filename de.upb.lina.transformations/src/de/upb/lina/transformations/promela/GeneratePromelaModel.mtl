@@ -174,7 +174,15 @@ endif
 getelementptr([genAggregateSize(e, genData)/], [e.aggregate.value.valueToString(genData)/], [genPtrOffset(e,genData)/], [e.result.addressToString(genData)/]); [for (m: MemorySizeMapping | genData.memorySizeMappings)][if(m.instruction=e)][if(not m.warning.equalsIgnoreCase(''))] /*[m.warning/]*/ [/if][/if][/for]
 [/template]
 
+[template public genInstruction(e : NestedGetElementPtr, genData: GeneratorData)]
+([e.aggregate.value.valueToString(genData)/] + [genPtrOffset(e,genData)/])
+[/template]
+
 [template public genPtrOffset(e : GetElementPtr, genData : GeneratorData)]
+[for (m: MemorySizeMapping | genData.memorySizeMappings)][if (m.instruction=e)][m.offset/][/if][/for]
+[/template]
+
+[template public genPtrOffset(e : NestedGetElementPtr, genData : GeneratorData)]
 [for (m: MemorySizeMapping | genData.memorySizeMappings)][if (m.instruction=e)][m.offset/][/if][/for]
 [/template]
 

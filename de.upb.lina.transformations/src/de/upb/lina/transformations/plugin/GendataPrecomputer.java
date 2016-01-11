@@ -59,6 +59,7 @@ import de.upb.llvm_parser.llvm.LandingPad;
 import de.upb.llvm_parser.llvm.LlvmFactory;
 import de.upb.llvm_parser.llvm.Load;
 import de.upb.llvm_parser.llvm.LogicOperation;
+import de.upb.llvm_parser.llvm.NestedGetElementPtr;
 import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.Phi;
 import de.upb.llvm_parser.llvm.PhiCase;
@@ -119,8 +120,6 @@ public class GendataPrecomputer {
 		// local vars
 		computeLocalVariables();
 
-		// getElementPtrMapping
-		computeGetElementPtrMapping();
 
 		// labels
 		computeLabelPrefixesPerFunction();
@@ -135,6 +134,9 @@ public class GendataPrecomputer {
 
 		// filteredAddresses
 		computeFilteredAddresses();
+		
+		// getElementPtrMapping
+		computeGetElementPtrMapping();
 
 		// phi mappings
 		computePhiMapping();
@@ -849,6 +851,10 @@ public class GendataPrecomputer {
 						GetElementPtr op = (GetElementPtr) i;
 						setSize(op);
 					}
+					else if(i instanceof NestedGetElementPtr){
+						NestedGetElementPtr op = (NestedGetElementPtr)i;
+						setSize(op);
+					}
 				}
 			}
 		}
@@ -1475,8 +1481,18 @@ public class GendataPrecomputer {
 		return null;
 	}
 
-	private int getGetElementPtrValue(GetElementPtr instr, MemorySizeMapping mapping)
+	private int getGetElementPtrValue(EObject object, MemorySizeMapping mapping)
 	{
+		GetElementPtr instr;
+		if(object instanceof GetElementPtr){
+			instr = (GetElementPtr)object;
+		}else{
+			//TODO maybe change this? Problem: NestedGetElementPtr und GetElementPtr do not have a common base class
+			NestedGetElementPtr nGep = (NestedGetElementPtr)object;
+			instr = LlvmFactory.eINSTANCE.createGetElementPtr();
+			instr.setAggregate(nGep.getAggregate());
+			instr.getIndices().addAll(nGep.getIndices());
+		}
 		int result = 0;
 		EObject aggregateType = instr.getAggregate().getType();
 		if (aggregateType instanceof Predefined)
@@ -1574,15 +1590,19 @@ public class GendataPrecomputer {
 		return null;
 	}
 
-	public void setSize(GetElementPtr ptr)
+	public void setSize(EObject ptr)
 	{
-		if (!mappedInstructionToMemoryMapping(ptr))
-		{
-			helperModel.getMemorySizeMappings().add(createMemorySizeMapping(ptr)); // Create memory size mapping
+		if((ptr instanceof GetElementPtr || ptr instanceof NestedGetElementPtr)){
+			if (!mappedInstructionToMemoryMapping(ptr))
+			{
+				helperModel.getMemorySizeMappings().add(createMemorySizeMapping(ptr)); // Create memory size mapping
+			}
+		}else{
+			throw new RuntimeException("Trying to map a non getElementPtr object");
 		}
 	}
 
-	public boolean mappedInstructionToMemoryMapping(Instruction i)
+	public boolean mappedInstructionToMemoryMapping(EObject i)
 	{
 		for (MemorySizeMapping m : helperModel.getMemorySizeMappings())
 		{
@@ -1594,16 +1614,30 @@ public class GendataPrecomputer {
 		return false;
 	}
 
-	public MemorySizeMapping createMemorySizeMapping(GetElementPtr ptr)
+	public MemorySizeMapping createMemorySizeMapping(EObject ptr)
 	{
-		MemorySizeMapping mapping = GendataFactory.eINSTANCE.createMemorySizeMapping();
-		mapping.setWarning("");
-		mapping.setGeneratorData(helperModel);
-		mapping.setInstruction(ptr);
-		mapping.setOffset(getGetElementPtrValue(ptr, mapping));
-		int completeSize = computeCompleteSize(ptr.getAggregate().getType(), false);
-		mapping.setCompleteTypeSize(completeSize - 1);
-		return mapping;
+		if((ptr instanceof GetElementPtr || ptr instanceof NestedGetElementPtr)){
+			MemorySizeMapping mapping = GendataFactory.eINSTANCE.createMemorySizeMapping();
+			mapping.setWarning("");
+			mapping.setGeneratorData(helperModel);
+			mapping.setInstruction(ptr);
+			int completeSize = 0;
+			if(ptr instanceof GetElementPtr){
+				GetElementPtr ePtr = (GetElementPtr)ptr;
+				mapping.setOffset(getGetElementPtrValue(ePtr, mapping));
+				completeSize = computeCompleteSize(ePtr.getAggregate().getType(), false);
+				
+			}else{
+				ptr = (NestedGetElementPtr)ptr;
+				NestedGetElementPtr nPtr = (NestedGetElementPtr)ptr;
+				mapping.setOffset(getGetElementPtrValue(nPtr, mapping));
+				completeSize = computeCompleteSize(nPtr.getAggregate().getType(), false);
+			}
+			mapping.setCompleteTypeSize(completeSize - 1);
+			return mapping;
+		}else{
+			throw new RuntimeException("Trying to map a non getElementPtr object");
+		}
 	}
 	
 	//invoked in generateKIVspec(...).mtl
