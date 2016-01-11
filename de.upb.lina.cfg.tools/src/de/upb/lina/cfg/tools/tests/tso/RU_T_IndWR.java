@@ -26,8 +26,8 @@ public class RU_T_IndWR extends TSO_Test {
 	public final void testCreateReachibilityGraph() {
 		
 		//check for correct amount of locations and edges
-		assertEquals(diag.getLocations().size(),8);
-		assertEquals(diag.getTransitions().size(),8);
+		assertEquals(diag.getLocations().size(),9);
+		assertEquals(diag.getTransitions().size(),9);
 		
 		List<ControlFlowLocation> locs = diag.getLocations();
 		
@@ -44,7 +44,7 @@ public class RU_T_IndWR extends TSO_Test {
 		//check that all buffers contain the correct elements
 		for(ControlFlowLocation l: nonEmptyBuffers){
 			String buffer = GraphUtility.bufferToString(l, CFGConstants.TSO);
-			boolean isValidBuffer = buffer.equals("L" +l.getPc()+" <(null: b)>");
+			boolean isValidBuffer = buffer.equals("L" +l.getPc()+" <(r1: b)>");
 			assertTrue(isValidBuffer);
 			
 		}
