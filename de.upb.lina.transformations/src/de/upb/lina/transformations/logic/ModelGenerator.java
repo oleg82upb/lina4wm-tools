@@ -8,7 +8,7 @@
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
-package de.upb.lina.transformations.promela;
+package de.upb.lina.transformations.logic;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +18,6 @@ import java.util.List;
 import org.eclipse.acceleo.engine.event.IAcceleoTextGenerationListener;
 import org.eclipse.acceleo.engine.generation.strategy.IAcceleoGenerationStrategy;
 import org.eclipse.acceleo.engine.service.AbstractAcceleoGenerator;
-import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -28,20 +27,21 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.gendata.GendataPackage;
+import de.upb.lina.transformations.Constants;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
 /**
- * Entry point of the 'GeneratePromelaModel' generation module.
+ * Entry point of the 'ModelGenerator' generation module.
  *
  * @generated
  */
-public class GeneratePromelaModel extends AbstractAcceleoGenerator {
+public class ModelGenerator extends AbstractAcceleoGenerator {
     /**
      * The name of the module.
      *
-     * @generated
+     * @generated NOT
      */
-    public static final String MODULE_FILE_NAME = "/de/upb/lina/transformations/promela/GeneratePromelaModel";
+    private String moduleFileName = null;
     
     /**
      * The name of the templates that are to be generated.
@@ -69,11 +69,29 @@ public class GeneratePromelaModel extends AbstractAcceleoGenerator {
      * {@link #getGenerationListeners()}.
      * </p>
      *
-     * @generated
+     * @generated NOT
      */
-    public GeneratePromelaModel() {
-        // Empty implementation
-    }
+	public ModelGenerator(int transformationType)
+	{
+		initializeModuleByType(transformationType);
+	}
+
+	protected void initializeModuleByType(int transformationType)
+	{
+		if (transformationType == Constants.TRANSFORMATION_TYPE_PROMELA)
+		{
+			this.moduleFileName = Constants.GENERATOR_PROMELA;
+		} else if (transformationType == Constants.TRANSFORMATION_TYPE_KIV_LOCAL)
+		{
+			this.moduleFileName = Constants.GENERATOR_KIV_LOCAL;
+		} else if (transformationType == Constants.TRANSFORMATION_TYPE_KIV_GLOBAL)
+		{
+			this.moduleFileName = Constants.GENERATOR_KIV_GLOBAL;
+		} else if (transformationType == Constants.TRANSFORMATION_TYPE_OPERATIONAL_PROMELA)
+		{
+			this.moduleFileName = Constants.GENERATOR_OPERATIONAL_PROMELA;
+		}
+	}
 
     /**
      * This allows clients to instantiates a generator with all required information.
@@ -89,10 +107,11 @@ public class GeneratePromelaModel extends AbstractAcceleoGenerator {
      * @throws IOException
      *             This can be thrown in three scenarios : the module cannot be found, it cannot be loaded, or
      *             the model cannot be loaded.
-     * @generated
+     * @generated NOT
      */
-    public GeneratePromelaModel(URI modelURI, File targetFolder,
+    public ModelGenerator(int transformationType, URI modelURI, File targetFolder,
             List<? extends Object> arguments) throws IOException {
+    	initializeModuleByType(transformationType);
         initialize(modelURI, targetFolder, arguments);
     }
 
@@ -110,65 +129,15 @@ public class GeneratePromelaModel extends AbstractAcceleoGenerator {
      *            pass them here.
      * @throws IOException
      *             This can be thrown in two scenarios : the module cannot be found, or it cannot be loaded.
-     * @generated
+     * @generated NOT
      */
-    public GeneratePromelaModel(EObject model, File targetFolder,
+    public ModelGenerator(int transformationType, EObject model, File targetFolder,
             List<? extends Object> arguments) throws IOException {
+    	initializeModuleByType(transformationType);
         initialize(model, targetFolder, arguments);
     }
     
-    /**
-     * This can be used to launch the generation from a standalone application.
-     * 
-     * @param args
-     *            Arguments of the generation.
-     * @generated
-     */
-    public static void main(String[] args) {
-        try {
-            if (args.length < 2) {
-                System.out.println("Arguments not valid : {model, folder}.");
-            } else {
-                URI modelURI = URI.createFileURI(args[0]);
-                File folder = new File(args[1]);
-                
-                List<String> arguments = new ArrayList<String>();
-                
-                /*
-                 * If you want to change the content of this method, do NOT forget to change the "@generated"
-                 * tag in the Javadoc of this method to "@generated NOT". Without this new tag, any compilation
-                 * of the Acceleo module with the main template that has caused the creation of this class will
-                 * revert your modifications.
-                 */
-
-                /*
-                 * Add in this list all the arguments used by the starting point of the generation
-                 * If your main template is called on an element of your model and a String, you can
-                 * add in "arguments" this "String" attribute.
-                 */
-                
-                GeneratePromelaModel generator = new GeneratePromelaModel(modelURI, folder, arguments);
-                
-                /*
-                 * Add the properties from the launch arguments.
-                 * If you want to programmatically add new properties, add them in "propertiesFiles"
-                 * You can add the absolute path of a properties files, or even a project relative path.
-                 * If you want to add another "protocol" for your properties files, please override 
-                 * "getPropertiesLoaderService(AcceleoService)" in order to return a new property loader.
-                 * The behavior of the properties loader service is explained in the Acceleo documentation
-                 * (Help -> Help Contents).
-                 */
-                 
-                for (int i = 2; i < args.length; i++) {
-                    generator.addPropertiesFile(args[i]);
-                }
-                
-                generator.doGenerate(new BasicMonitor());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+  
 
     /**
      * Launches the generation described by this instance.
@@ -261,7 +230,7 @@ public class GeneratePromelaModel extends AbstractAcceleoGenerator {
      */
     @Override
     public String getModuleName() {
-        return MODULE_FILE_NAME;
+        return this.moduleFileName;
     }
     
     /**

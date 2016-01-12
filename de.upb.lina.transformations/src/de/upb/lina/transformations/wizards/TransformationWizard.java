@@ -13,12 +13,9 @@ import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
-import de.upb.lina.transformations.kiv.KivTransformationOperation;
-import de.upb.lina.transformations.plugin.Activator;
-import de.upb.lina.transformations.plugin.Configuration;
-import de.upb.lina.transformations.plugin.Constants;
-import de.upb.lina.transformations.plugin.ETransformationTarget;
-import de.upb.lina.transformations.promela.PromelaTransformationOperation;
+import de.upb.lina.transformations.Activator;
+import de.upb.lina.transformations.logic.Configuration;
+import de.upb.lina.transformations.logic.TransformationOperation;
 
 public class TransformationWizard extends Wizard implements INewWizard {
 	
@@ -38,26 +35,10 @@ public class TransformationWizard extends Wizard implements INewWizard {
 		String kIVBasis = wizardPage.getBasis();
 		Map<String, String> oldToNewCfgName = functionSelectionPage.getMap();
 		Configuration config = new Configuration(cfgs, kIVBasis, oldToNewCfgName);
-		if(wizardPage.getType() == ETransformationTarget.KIVLOCAL)
-		{
-			config.setKivTransformationType(Constants.TRANSFORMATION_TYPE_KIV_LOCAL);
-		}
-		else if(wizardPage.getType() == ETransformationTarget.KIVGLOBAL)
-		{
-			config.setKivTransformationType(Constants.TRANSFORMATION_TYPE_KIV_GLOBAL);
-		}
+		config.setTransformationType(wizardPage.getType());
 
-		if (wizardPage.getType() == ETransformationTarget.PROMELA)
-		{
-			// Promela
-			wmo = new PromelaTransformationOperation(wizardPage.getContainerText().getText(), wizardPage.getFileText()
-					.getText(), wizardPage.getFileEndingLabel().getText(), config);
-		} else
-		{
-			// KIVLOCAL
-			wmo = new KivTransformationOperation(wizardPage.getContainerText().getText(), wizardPage.getFileText()
-					.getText(), wizardPage.getFileEndingLabel().getText(), config);
-		}
+		wmo = new TransformationOperation(wizardPage.getContainerText().getText(), wizardPage.getFileText().getText(),
+				wizardPage.getFileEndingLabel().getText(), config);
 
 		try
 		{

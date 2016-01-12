@@ -1,4 +1,4 @@
-package de.upb.lina.transformations.plugin;
+package de.upb.lina.transformations;
 
 public abstract class Constants {
 
@@ -62,5 +62,11 @@ public abstract class Constants {
 	public static final int TRANSFORMATION_TYPE_PROMELA = 0;
 	public static final int TRANSFORMATION_TYPE_KIV_LOCAL = 1;
 	public static final int TRANSFORMATION_TYPE_KIV_GLOBAL = 2;
+	public static final int TRANSFORMATION_TYPE_OPERATIONAL_PROMELA = 3;
 	
+	/* Generator constants determine which mtl file is used by each transformation*/
+	public static final String GENERATOR_KIV_LOCAL = "/de/upb/lina/transformations/kiv/generateKIVspec";
+	public static final String GENERATOR_KIV_GLOBAL = "/de/upb/lina/transformations/kiv/generateKIVspecGlobal";
+	public static final String GENERATOR_PROMELA = "/de/upb/lina/transformations/promela/GeneratePromelaModel";
+	public static final String GENERATOR_OPERATIONAL_PROMELA = "/de/upb/lina/transformations/promela/GenerateOperationalPromelaModel";
 }

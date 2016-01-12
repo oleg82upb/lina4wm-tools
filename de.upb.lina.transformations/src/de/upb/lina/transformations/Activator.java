@@ -1,4 +1,4 @@
-package de.upb.lina.transformations.plugin;
+package de.upb.lina.transformations;
 
 import java.io.File;
 import java.io.FileOutputStream;

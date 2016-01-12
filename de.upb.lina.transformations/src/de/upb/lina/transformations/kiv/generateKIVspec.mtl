@@ -193,7 +193,7 @@ ls' = ls .pc:= [generateNextPC(genData, t)/] ∧ mem' = mem['[ '/][flushed.addre
 [/template]
 
 [query public getFlushedAvp(t: FlushTransition) : AddressValuePair = invoke('de.upb.lina.cfg.tools.GraphUtility','getFlushedAddressValuePair(de.upb.lina.cfg.controlflow.FlushTransition)', Sequence{t})/]
-[query public getcorrespondingAddressMapping(a: Address, genData : GeneratorData, keyForMapping : String) : AddressMapping = invoke('de.upb.lina.transformations.plugin.GendataPrecomputer','getCorrespondingAddressMapping(de.upb.llvm_parser.llvm.Address, de.upb.lina.cfg.gendata.GeneratorData, java.lang.String)', Sequence{a,genData,keyForMapping})/]
+[query public getcorrespondingAddressMapping(a: Address, genData : GeneratorData, keyForMapping : String) : AddressMapping = invoke('de.upb.lina.transformations.logic.GendataPrecomputer','getCorrespondingAddressMapping(de.upb.llvm_parser.llvm.Address, de.upb.lina.cfg.gendata.GeneratorData, java.lang.String)', Sequence{a,genData,keyForMapping})/]
 
 [comment === EarlyReadTransition ====/]
 [template private transformTransition(t : EarlyReadTransition, genData: GeneratorData)]

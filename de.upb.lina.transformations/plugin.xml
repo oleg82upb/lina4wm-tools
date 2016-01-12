@@ -18,7 +18,7 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            defaultHandler="de.upb.lina.transformations.plugin.CreateAllHandler"
+            defaultHandler="de.upb.lina.transformations.logic.CreateAllHandler"
             id="de.upb.lina.transformations.createallcommand"
             name="Create All">
       </command>

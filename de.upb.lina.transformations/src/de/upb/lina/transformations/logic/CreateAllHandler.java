@@ -1,4 +1,4 @@
-package de.upb.lina.transformations.plugin;
+package de.upb.lina.transformations.logic;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: TransformationTools
 Bundle-SymbolicName: de.upb.lina.transformations;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: de.upb.lina.transformations.plugin.Activator
+Bundle-Activator: de.upb.lina.transformations.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  de.upb.lina.cfg.diagram;bundle-version="1.0.0",

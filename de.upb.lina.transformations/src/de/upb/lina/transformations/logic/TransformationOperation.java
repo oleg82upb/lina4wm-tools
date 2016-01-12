@@ -1,8 +1,9 @@
-package de.upb.lina.transformations.wizards;
+package de.upb.lina.transformations.logic;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import org.eclipse.acceleo.common.preference.AcceleoPreferences;
 import org.eclipse.core.resources.IResource;
@@ -11,14 +12,14 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 import de.upb.lina.cfg.gendata.GeneratorData;
-import de.upb.lina.transformations.plugin.Activator;
-import de.upb.lina.transformations.plugin.Configuration;
-import de.upb.lina.transformations.plugin.GendataPrecomputer;
+import de.upb.lina.transformations.Activator;
+import de.upb.lina.transformations.Constants;
 
-public abstract class TransformationOperation extends WorkspaceModifyOperation{
+public class TransformationOperation extends WorkspaceModifyOperation{
 	protected String graphModelFileLocation;
 	protected String targetContainer;
 	protected String targetName;
@@ -38,41 +39,46 @@ public abstract class TransformationOperation extends WorkspaceModifyOperation{
 	
 	
 	@Override
-	protected void execute(IProgressMonitor monitor) throws CoreException,
-			InvocationTargetException, InterruptedException {
-		
-		//Run Precomputation
+	protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
+			InterruptedException
+	{
+
+		// Run Precomputation
 		GendataPrecomputer precomp = new GendataPrecomputer(config);
 		genData = precomp.computeGeneratorData();
-		
-		//get workspace root
-		IWorkspaceRoot workSpaceRoot = ResourcesPlugin.getWorkspace().getRoot();		
-		
-		//get target path within project
+
+		// get workspace root
+		IWorkspaceRoot workSpaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+
+		// get target path within project
 		Path targetFolderCont = new Path(targetContainer);
-		IResource resource =  workSpaceRoot.findMember(targetFolderCont.makeAbsolute());
-		
-		//build correct full path
+		IResource resource = workSpaceRoot.findMember(targetFolderCont.makeAbsolute());
+
+		// build correct full path
 		fullPath = Paths.get(resource.getLocation().toPortableString());
-		
-		try {
+
+		try
+		{
 			AcceleoPreferences.switchQueryCache(false);
-			runSpecGeneration();
-		} catch (IOException e) {
+			AcceleoPreferences.switchDebugMessages(true);
+			AcceleoPreferences.switchProfiler(true);
+			int type = this.config.getTransformationType();
+			ArrayList<Object> args = new ArrayList<Object>();
+
+			if (type == Constants.TRANSFORMATION_TYPE_PROMELA
+					|| type == Constants.TRANSFORMATION_TYPE_OPERATIONAL_PROMELA)
+			{
+				args.add(targetName + fileEnding);
+			}
+
+			ModelGenerator generator = new ModelGenerator(type, genData, fullPath.toFile(), args);
+			generator.doGenerate(new BasicMonitor());
+		} catch (IOException e)
+		{
 			Activator.logError(e.getMessage(), e);
 		}
-		
-		refreshWorkspace(monitor);
-		
-	}
-	
-	protected abstract void runSpecGeneration() throws IOException;
-	
-	
-	
-	protected void refreshWorkspace(IProgressMonitor monitor) throws CoreException
-	{
+
 		ResourcesPlugin.getWorkspace().getRoot().refreshLocal(IResource.DEPTH_INFINITE, monitor);
+
 	}
-	
 }

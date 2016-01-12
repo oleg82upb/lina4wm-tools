@@ -1,16 +1,17 @@
-package de.upb.lina.transformations.plugin;
+package de.upb.lina.transformations.logic;
 
 import java.util.List;
 import java.util.Map;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
+import de.upb.lina.transformations.Constants;
 
 public class Configuration {
 	
 	private List<ControlFlowDiagram> cfgs;	
 	private String kIVBasis;
 	private Map<String, String> oldToNewCfgName;
-	private int kivTransformationType = Constants.TRANSFORMATION_TYPE_KIV_LOCAL;
+	private int transformationType = Constants.TRANSFORMATION_TYPE_KIV_LOCAL;
 	
 	
 	public Configuration(List<ControlFlowDiagram> cfgs, String kIVBasis, Map<String, String> oldToNewCfgName){
@@ -43,18 +44,18 @@ public class Configuration {
 	}
 
 	/**
-	 * @return the kivTransformationType
+	 * @return the transformationType
 	 */
-	public int getKivTransformationType()
+	public int getTransformationType()
 	{
-		return kivTransformationType;
+		return transformationType;
 	}
 
 	/**
-	 * @param kivTransformationType the kivTransformationType to set
+	 * @param transformationType the transformationType to set
 	 */
-	public void setKivTransformationType(int kivSpecType)
+	public void setTransformationType(int kivSpecType)
 	{
-		this.kivTransformationType = kivSpecType;
+		this.transformationType = kivSpecType;
 	}
 }

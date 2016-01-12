@@ -43,10 +43,13 @@ import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
-import de.upb.lina.transformations.plugin.Activator;
-import de.upb.lina.transformations.plugin.Constants;
-import de.upb.lina.transformations.plugin.ETransformationTarget;
+import de.upb.lina.transformations.Activator;
+import de.upb.lina.transformations.Constants;
 
+/**
+ * @author Oleg Travkin
+ *
+ */
 public class TransformationWizardPage extends WizardPage {
 
 
@@ -153,7 +156,7 @@ public class TransformationWizardPage extends WizardPage {
 		/* ordering select */
 		new Label(container, SWT.NULL).setText("Transformation type:");
 		cb_modelType = new Combo(container, SWT.NULL);
-		String[] orderings = new String[] { "Promela", "KIVLocal", "KIVGlobal" };
+		String[] orderings = new String[] { "Promela", "KIVLocal", "KIVGlobal", "operational Promela" };
 		for (int i = 0; i < orderings.length; i++){
 			cb_modelType.add(orderings[i]);
 		}
@@ -231,17 +234,13 @@ public class TransformationWizardPage extends WizardPage {
 
 	}
 	
-	public ETransformationTarget getType(){
-		switch (cb_modelType.getSelectionIndex()) {
-		case 0:
-			return ETransformationTarget.PROMELA;
-		case 1:
-			return ETransformationTarget.KIVLOCAL;
-		case 2:
-			return ETransformationTarget.KIVGLOBAL;
-		default:
-			return null;
-		}
+	
+	/**
+	 * @return selected type of transformation see Constants.TRANSFORMATION... 
+	 */
+	public int getType()
+	{
+		return cb_modelType.getSelectionIndex();
 	}
 	
 	public String getFileEndForSelection(){
@@ -254,7 +253,9 @@ public class TransformationWizardPage extends WizardPage {
 			
 		case 2:
 			return "";
-			
+		
+		case 3:
+			return ".pml";
 		default:
 			break;
 		}
@@ -426,7 +427,7 @@ public class TransformationWizardPage extends WizardPage {
 		if(string.contains(" ")){
 			return false;
 		}
-		if(modelType == Constants.TRANSFORMATION_TYPE_PROMELA){
+		if(modelType == Constants.TRANSFORMATION_TYPE_PROMELA || modelType == Constants.TRANSFORMATION_TYPE_OPERATIONAL_PROMELA){
 			if (string.endsWith(".pml")){
 				return true;
 			}

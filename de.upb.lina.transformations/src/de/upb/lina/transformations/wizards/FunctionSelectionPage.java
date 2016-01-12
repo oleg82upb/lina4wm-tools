@@ -35,7 +35,7 @@ import org.eclipse.swt.widgets.TreeItem;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.tools.GraphUtility;
-import de.upb.lina.transformations.plugin.Activator;
+import de.upb.lina.transformations.Activator;
 import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.Call;
 import de.upb.llvm_parser.llvm.FunctionBody;
