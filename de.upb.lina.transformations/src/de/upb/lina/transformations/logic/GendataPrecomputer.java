@@ -1485,18 +1485,21 @@ public class GendataPrecomputer {
 
 	private int getGetElementPtrValue(EObject object, MemorySizeMapping mapping)
 	{
-		GetElementPtr instr;
-		if(object instanceof GetElementPtr){
-			instr = (GetElementPtr)object;
-		}else{
-			//TODO maybe change this? Problem: NestedGetElementPtr und GetElementPtr do not have a common base class
-			NestedGetElementPtr nGep = (NestedGetElementPtr)object;
-			instr = LlvmFactory.eINSTANCE.createGetElementPtr();
-			instr.setAggregate(nGep.getAggregate());
-			instr.getIndices().addAll(nGep.getIndices());
-		}
+		EList<Parameter> indices;
+		EObject aggregateType;
+		
 		int result = 0;
-		EObject aggregateType = instr.getAggregate().getType();
+		if(object instanceof GetElementPtr)
+		{
+			aggregateType = ((GetElementPtr)object).getAggregate().getType();
+			indices = ((GetElementPtr)object).getIndices();
+		}
+		else
+		{
+			aggregateType = ((NestedGetElementPtr)object).getAggregate().getType();
+			indices = ((NestedGetElementPtr)object).getIndices();
+		}
+		
 		if (aggregateType instanceof Predefined)
 		{
 			int aggregateTypeSize = 0;
@@ -1506,7 +1509,7 @@ public class GendataPrecomputer {
 				try
 				{
 					aggregateTypeSize = Integer.parseInt(predef.getType().replaceAll("i", ""));
-					Parameter firstIndex = instr.getIndices().get(0);
+					Parameter firstIndex = indices.get(0);
 					if (firstIndex.getType() instanceof Predefined)
 					{
 						Predefined firstIndexPredefined = (Predefined) firstIndex.getType();
@@ -1548,7 +1551,7 @@ public class GendataPrecomputer {
 				{
 
 					// first index
-					int firstIndexValue = Integer.parseInt(GraphUtility.valueToString(instr.getIndices().get(0)
+					int firstIndexValue = Integer.parseInt(GraphUtility.valueToString(indices.get(0)
 							.getValue()));
 					if (firstIndexValue != 0)
 					{
@@ -1557,10 +1560,10 @@ public class GendataPrecomputer {
 
 					EObject partOfAggregate = aggregateType;
 					// following indices
-					for (int i = 1; i < instr.getIndices().size(); i++)
+					for (int i = 1; i < indices.size(); i++)
 					{
 						int indexVal = Integer.parseInt(GraphUtility
-								.valueToString(instr.getIndices().get(i).getValue()));
+								.valueToString(indices.get(i).getValue()));
 
 						int intermediateResult = computeSize(partOfAggregate, indexVal, false);
 						result += intermediateResult;
