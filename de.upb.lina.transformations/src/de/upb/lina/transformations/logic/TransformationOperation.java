@@ -10,6 +10,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.BasicMonitor;
@@ -51,9 +52,9 @@ public class TransformationOperation extends WorkspaceModifyOperation{
 		IWorkspaceRoot workSpaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 
 		// get target path within project
-		Path targetFolderCont = new Path(targetContainer);
-		IResource resource = workSpaceRoot.findMember(targetFolderCont.makeAbsolute());
-
+		IPath targetFolderCont = new Path(targetContainer);
+		
+		IResource resource = workSpaceRoot.findMember(targetFolderCont.makeRelativeTo(workSpaceRoot.getLocation()));
 		// build correct full path
 		fullPath = Paths.get(resource.getLocation().toPortableString());
 
@@ -62,6 +63,7 @@ public class TransformationOperation extends WorkspaceModifyOperation{
 			AcceleoPreferences.switchQueryCache(false);
 			AcceleoPreferences.switchDebugMessages(true);
 			AcceleoPreferences.switchProfiler(true);
+			AcceleoPreferences.switchSuccessNotifications(false);
 			int type = this.config.getTransformationType();
 			ArrayList<Object> args = new ArrayList<Object>();
 
@@ -81,4 +83,11 @@ public class TransformationOperation extends WorkspaceModifyOperation{
 		ResourcesPlugin.getWorkspace().getRoot().refreshLocal(IResource.DEPTH_INFINITE, monitor);
 
 	}
+
+
+	public String getTargetContainer() {
+		return targetContainer;
+	}
+	
+	
 }

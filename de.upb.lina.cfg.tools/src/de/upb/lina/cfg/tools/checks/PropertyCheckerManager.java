@@ -29,6 +29,9 @@ public class PropertyCheckerManager {
 	}
 	
 	public void performChecks(){
+		errorMessages.clear();
+		warningMessages.clear();
+		
 		for(AbstractPropertyChecker checker: checkerModules){
 			checker.check();
 			if(checker.getLevel() == CFGConstants.LEVEL_ERROR){
