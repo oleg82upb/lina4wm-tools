@@ -20,7 +20,7 @@
       <command
             defaultHandler="de.upb.lina.transformations.logic.CreateAllHandler"
             id="de.upb.lina.transformations.createallcommand"
-            name="Create All">
+            name="Create All Transformtions">
       </command>
    </extension>
    <extension
