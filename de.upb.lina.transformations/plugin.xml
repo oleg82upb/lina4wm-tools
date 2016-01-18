@@ -20,7 +20,7 @@
       <command
             defaultHandler="de.upb.lina.transformations.logic.CreateAllHandler"
             id="de.upb.lina.transformations.createallcommand"
-            name="Create All Transformtions">
+            name="Create All Transformations">
       </command>
    </extension>
    <extension
@@ -30,7 +30,7 @@
             locationURI="popup:org.eclipse.jdt.ui.PackageExplorer">
          <command
                commandId="de.upb.lina.transformations.createallcommand"
-               label="Create All"
+               label="Create All Transformations"
                style="push"
                tooltip="Test">
             <visibleWhen
