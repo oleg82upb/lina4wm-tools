@@ -1,6 +1,5 @@
 package de.upb.lina.transformations.logic;
 
-import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,8 +14,9 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -48,52 +48,52 @@ import de.upb.llvm_parser.llvm.AbstractElement;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LLVM;
 
-public class CreateAllHandler extends AbstractHandler {
+public class CreateAllHandler extends AbstractHandler
+{
+	IFile file = null;
 
 	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event)
-				.getActivePage().getSelection();
+	public Object execute(ExecutionEvent event) throws ExecutionException
+	{
+		ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().getSelection();
 
-		//Check for a proper selection
-		if (selection != null & selection instanceof IStructuredSelection) {
+		// Check for a proper selection
+		if (selection != null & selection instanceof IStructuredSelection)
+		{
 
-			//obtain shell
+			// obtain shell
 			Shell shell = HandlerUtil.getActiveShellChecked(event);
 
-			//iterate over selected objects
+			// iterate over selected objects
 			IStructuredSelection structSelection = (IStructuredSelection) selection;
 			Iterator<?> iterator = structSelection.iterator();
-			while (iterator.hasNext()) {
+			while (iterator.hasNext())
+			{
 				Object element = iterator.next();
 
-				//Check if the current selected object is a file
-				if(element instanceof IFile){
-					IFile file = (IFile) element;
+				// Check if the current selected object is a file
+				if (element instanceof IFile)
+				{
+					file = (IFile) element;
 
-					//save ast first
+					// save ast first
 					LLVM ast = createAstFromLLVM(shell, file);
-					//check if everything worked out
-					if(ast == null){
+					// check if everything worked out
+					if (ast == null)
+					{
 						return null;
 					}
 
-					//==generate all cfgs==
-					if(!doesUserAbortAsOfErrors(shell, ast)){
-						int[] memoryModels = {CFGConstants.SC, CFGConstants.TSO, CFGConstants.PSO};
-						String[] memoryModelNames ={"SC", "TSO", "PSO"};
-
-						for(int i =0; i< memoryModels.length; i++){
-							int memoryModel = memoryModels[i];
-							String memoryModelName = memoryModelNames[i];
-
-							List<ControlFlowDiagram> cfgs = createCFGFromAst(memoryModel, ast, shell);
-							if(!cfgs.isEmpty()){
-								createTransformations(cfgs, file.getLocation().removeLastSegments(1) + File.separator + memoryModelName + File.separator, file.getName());
-
-							}
-						}
-
+					// ==generate all cfgs==
+					if (!doesUserAbortAsOfErrors(shell, ast))
+					{
+						List<ControlFlowDiagram> cfgs = null;
+						cfgs = createCFGFromAst(CFGConstants.SC, ast, shell);
+						createTransformations(cfgs, CFGConstants.SC);
+						cfgs = createCFGFromAst(CFGConstants.TSO, ast, shell);
+						createTransformations(cfgs, CFGConstants.TSO);
+						cfgs = createCFGFromAst(CFGConstants.PSO, ast, shell);
+						createTransformations(cfgs, CFGConstants.PSO);
 					}
 				}
 			}
@@ -101,66 +101,105 @@ public class CreateAllHandler extends AbstractHandler {
 		return null;
 	}
 
-	private void createTransformations(List<ControlFlowDiagram> cfgs, String targetContainer, String targetName){
+	private void createTransformations(List<ControlFlowDiagram> cfgs, int mm )
+	{
 		TransformationOperation wmo = null;
 		Map<String, String> oldToNewCfgName = new HashMap<String, String>();
-		for(ControlFlowDiagram cfg: cfgs){
+		for (ControlFlowDiagram cfg : cfgs)
+		{
 			oldToNewCfgName.put(cfg.getName(), cfg.getName().replaceAll("@_", "").replaceAll("@", ""));
 		}
 
-		//Do kiv transformations
-		int[] kivTransformationTypes = {Constants.TRANSFORMATION_TYPE_KIV_GLOBAL, Constants.TRANSFORMATION_TYPE_KIV_LOCAL};
-		String[] kivTransformationTypeNames = {"kiv_global", "kiv_local"};
+		// Do kiv transformations
+		int[] kivTransformationTypes = { Constants.TRANSFORMATION_TYPE_KIV_GLOBAL,
+				Constants.TRANSFORMATION_TYPE_KIV_LOCAL };
+		String[] kivTransformationTypeNames = { "kiv_global", "kiv_local" };
 
-		for(int i = 0; i< kivTransformationTypes.length; i++){
+		for (int i = 0; i < kivTransformationTypes.length; i++)
+		{
 			int transformationType = kivTransformationTypes[i];
 			String transformationTypeName = kivTransformationTypeNames[i];
-			String[] kivBases = {Constants.INT, Constants.NAT};
-			for(String kIVBasis: kivBases){
+			String[] kivBases = { Constants.INT, Constants.NAT };
+			for (String kIVBasis : kivBases)
+			{
 				Configuration config = new Configuration(cfgs, kIVBasis, oldToNewCfgName);
 				config.setTransformationType(transformationType);
-				wmo = new TransformationOperation(targetContainer + File.separator + transformationTypeName + "_" + kIVBasis, "", "", config);
-				runWorkspaceModifyOperation(wmo);
+				wmo = new TransformationOperation(createFolder(mm, transformationTypeName + "_" + kIVBasis) , "", "", config);
+				try
+				{
+					wmo.run(new NullProgressMonitor());
+				} catch (InvocationTargetException | InterruptedException e)
+				{
+					Activator.logError(e.getMessage(), e);
+				}
 			}
 
 		}
 
-		//Do promela transformations
-		int[] promelaTransformationTypes = {Constants.TRANSFORMATION_TYPE_PROMELA, Constants.TRANSFORMATION_TYPE_OPERATIONAL_PROMELA};
-		String[] promelaTransformationTypeNames = {"promela", "operational_promela"};
-		for(int i = 0; i< promelaTransformationTypes.length; i++){
+		// Do promela transformations
+		int[] promelaTransformationTypes = { Constants.TRANSFORMATION_TYPE_PROMELA,
+				Constants.TRANSFORMATION_TYPE_OPERATIONAL_PROMELA };
+		String[] promelaTransformationTypeNames = { "promela", "operational_promela" };
+		for (int i = 0; i < promelaTransformationTypes.length; i++)
+		{
 			int transformationType = promelaTransformationTypes[i];
 			String transformationTypeName = promelaTransformationTypeNames[i];
 			Configuration config = new Configuration(cfgs, Constants.INT, oldToNewCfgName);
 			config.setTransformationType(transformationType);
-			wmo = new TransformationOperation(targetContainer + File.separator + "promela", transformationTypeName + "_" + targetName, ".pml", config);
-			runWorkspaceModifyOperation(wmo);
+			wmo = new TransformationOperation(createFolder(mm, transformationTypeName),
+					transformationTypeName + "_" + file.getName(), ".pml", config);
+			try
+			{
+				wmo.run(new NullProgressMonitor());
+			} catch (InvocationTargetException | InterruptedException e)
+			{
+				Activator.logError(e.getMessage(), e);
+			}
 
 		}
 	}
-
-	private void runWorkspaceModifyOperation(TransformationOperation wmo){
+	
+	
+	private String createFolder(int mm, String subfolder)
+	{
 		try
 		{
-			//create directories if they do not exist yet
-			File directory = (new Path(wmo.getTargetContainer())).toFile();
-			if(!directory.exists()){
-				directory.mkdirs();
-				ResourcesPlugin.getWorkspace().getRoot().refreshLocal(IResource.DEPTH_INFINITE, null);
+			IPath p = null;
+			IPath pr = null;
+			if (mm == CFGConstants.SC)
+			{
+				p = file.getParent().getLocation().append("SC").append(subfolder);
+				pr = file.getFullPath().removeLastSegments(1).append("SC").append(subfolder);
+			} else if (mm == CFGConstants.TSO)
+			{
+				p = file.getParent().getLocation().append("TSO").append(subfolder);
+				pr = file.getFullPath().removeLastSegments(1).append("SC").append(subfolder);
+			} else if (mm == CFGConstants.PSO)
+			{
+				p = file.getParent().getLocation().append("PSO").append(subfolder);
+				pr = file.getFullPath().removeLastSegments(1).append("SC").append(subfolder);
+			} else
+			{
+				p = file.getParent().getLocation().append("UNKNOWN").append(subfolder);
+				pr = file.getFullPath().removeLastSegments(1).append("SC").append(subfolder);
 			}
-			wmo.run(null);
-		} catch (InvocationTargetException e)
+
+			p.toFile().mkdirs();
+			ResourcesPlugin.getWorkspace().getRoot().refreshLocal(IResource.DEPTH_INFINITE, null);
+		
+			return pr.toPortableString();
+
+		} catch (CoreException e)
 		{
-			Activator.logError("InvocationTargetException occured during the transformation.", e);
-		} catch (InterruptedException e)
-		{
-			Activator.logError("InterruptedException occured during the transformation.", e);
-		} catch (CoreException e) {
-			Activator.logError("Core exception occured: ", e);
+			Activator.logError(e.getMessage(), e);
+			return null;
 		}
 	}
 
-	private List<ControlFlowDiagram> createCFGFromAst(int memoryModel, LLVM ast, Shell shell){
+
+
+	private List<ControlFlowDiagram> createCFGFromAst(int memoryModel, LLVM ast, Shell shell)
+	{
 		List<ControlFlowDiagram> list = new ArrayList<ControlFlowDiagram>();
 		// generating cfg for each function
 		Iterator<AbstractElement> i = ast.getElements().iterator();
@@ -207,9 +246,10 @@ public class CreateAllHandler extends AbstractHandler {
 	 * @param shell
 	 * @return
 	 */
-	private boolean doesUserAbortAsOfErrors(Shell shell, LLVM ast){
-		//Setup checker and register checkers
-		PropertyCheckerManager manager = new PropertyCheckerManager();	
+	private boolean doesUserAbortAsOfErrors(Shell shell, LLVM ast)
+	{
+		// Setup checker and register checkers
+		PropertyCheckerManager manager = new PropertyCheckerManager();
 		manager.registerPropertyChecker(new LIWDCPropertyChecker(ast));
 		manager.registerPropertyChecker(new LWFPropertyChecker(ast));
 		manager.registerPropertyChecker(new UnsupportedInstructionPropertyChecker(ast));
@@ -219,20 +259,25 @@ public class CreateAllHandler extends AbstractHandler {
 		List<String> errors = manager.getErrorMessages();
 		List<String> warnings = manager.getWarningMessages();
 
-		if(!errors.isEmpty() || !warnings.isEmpty()){	
+		if (!errors.isEmpty() || !warnings.isEmpty())
+		{
 			String message = "Encountered problems in cfg creation. \n";
 			message += "---- \n";
-			if(!errors.isEmpty()){
+			if (!errors.isEmpty())
+			{
 				message += "Errors: \n";
-				for(String error: errors){
+				for (String error : errors)
+				{
 					message += error + " \n";
 					Activator.logError("Error in cfg creation: " + error, null);
 				}
 				message += "---- \n";
 			}
-			if(!warnings.isEmpty()){
+			if (!warnings.isEmpty())
+			{
 				message += "Warnings: \n";
-				for(String warning: warnings){
+				for (String warning : warnings)
+				{
 					message += warning + " \n";
 					Activator.logWarning("Warning in cfg creation: " + warning, null);
 				}
@@ -243,14 +288,14 @@ public class CreateAllHandler extends AbstractHandler {
 			MessageBox messageBox = new MessageBox(shell, SWT.ICON_QUESTION | SWT.YES | SWT.NO);
 			messageBox.setMessage(message);
 			messageBox.setText("Problems");
-			if (messageBox.open() == SWT.NO){
+			if (messageBox.open() == SWT.NO)
+			{
 				Activator.log(IStatus.INFO, "User aborted creation of all transformations.", null);
 				return true;
 			}
 		}
 		return false;
 	}
-
 
 	private LLVM createAstFromLLVM(Shell currentShell, IFile file)
 	{
@@ -267,7 +312,8 @@ public class CreateAllHandler extends AbstractHandler {
 				messageBox.setMessage("There are errors located on selected file.\n"
 						+ "Do really want to save the AST file?");
 				messageBox.setText("Syntax Errors");
-				if (messageBox.open() == SWT.NO){
+				if (messageBox.open() == SWT.NO)
+				{
 					Activator.log(IStatus.INFO, "User aborted creation of all transformations.", null);
 					return null;
 				}
@@ -276,11 +322,12 @@ public class CreateAllHandler extends AbstractHandler {
 
 		EObject ast = resource.getContents().get(0);
 		EcoreUtil.resolveAll(ast);
-		if(!(ast instanceof LLVM)){
+		if (!(ast instanceof LLVM))
+		{
 			Activator.log(IStatus.ERROR, "Unexpected problem while creating ast file.", null);
 			return null;
 		}
-		return (LLVM)ast;
+		return (LLVM) ast;
 	}
 
 }

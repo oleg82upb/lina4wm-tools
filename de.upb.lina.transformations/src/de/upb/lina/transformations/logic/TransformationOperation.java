@@ -2,7 +2,6 @@ package de.upb.lina.transformations.logic;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import org.eclipse.acceleo.common.preference.AcceleoPreferences;
@@ -25,7 +24,7 @@ public class TransformationOperation extends WorkspaceModifyOperation{
 	protected String targetContainer;
 	protected String targetName;
 	protected String fileEnding;
-	protected java.nio.file.Path fullPath;
+	protected IPath fullPath;
 	
 	protected GeneratorData genData;
 	protected Configuration config;
@@ -54,9 +53,18 @@ public class TransformationOperation extends WorkspaceModifyOperation{
 		// get target path within project
 		IPath targetFolderCont = new Path(targetContainer);
 		
-		IResource resource = workSpaceRoot.findMember(targetFolderCont.makeRelativeTo(workSpaceRoot.getLocation()));
+		IResource resource = null;
+		if(targetFolderCont.isAbsolute())
+		{
+			resource = workSpaceRoot.getFolder(targetFolderCont);
+		}
+		else
+		{
+			resource = workSpaceRoot.getFolder(targetFolderCont.makeAbsolute());
+		}
+		 
 		// build correct full path
-		fullPath = Paths.get(resource.getLocation().toPortableString());
+		fullPath = resource.getLocation();
 
 		try
 		{
@@ -82,12 +90,5 @@ public class TransformationOperation extends WorkspaceModifyOperation{
 
 		ResourcesPlugin.getWorkspace().getRoot().refreshLocal(IResource.DEPTH_INFINITE, monitor);
 
-	}
-
-
-	public String getTargetContainer() {
-		return targetContainer;
-	}
-	
-	
+	}	
 }
