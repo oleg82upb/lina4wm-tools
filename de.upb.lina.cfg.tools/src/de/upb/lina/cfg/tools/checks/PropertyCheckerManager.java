@@ -31,6 +31,8 @@ public class PropertyCheckerManager {
 	public void performChecks(){
 		errorMessages.clear();
 		warningMessages.clear();
+		foundError = false;
+		foundWarning = false;
 		
 		for(AbstractPropertyChecker checker: checkerModules){
 			checker.check();

@@ -23,7 +23,7 @@ public class ControlFlowLayoutProvider extends TopDownProvider {
 	public boolean provides(IOperation operation) {
 		// enable this provider only on control flow diagrams
 		if (operation instanceof ILayoutNodeOperation) {
-			Iterator nodes = ((ILayoutNodeOperation) operation)
+			Iterator<?> nodes = ((ILayoutNodeOperation) operation)
 					.getLayoutNodes().listIterator();
 			if (nodes.hasNext()) {
 				View node = ((ILayoutNode) nodes.next()).getNode();

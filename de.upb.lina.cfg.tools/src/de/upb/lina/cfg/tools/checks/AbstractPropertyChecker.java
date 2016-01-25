@@ -3,7 +3,6 @@ package de.upb.lina.cfg.tools.checks;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.llvm_parser.llvm.LLVM;
 
 public abstract class AbstractPropertyChecker {

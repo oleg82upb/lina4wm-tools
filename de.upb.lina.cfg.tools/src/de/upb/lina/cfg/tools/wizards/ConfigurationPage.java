@@ -52,7 +52,7 @@ import de.upb.lina.cfg.tools.CFGConstants;
  * OR with the extension that matches the expected one (cfg).
  */
 
-public class SelectionPage extends WizardPage {
+public class ConfigurationPage extends WizardPage {
 	//Constants
 	public final static String MEMENTO__KEY = "de.upb.lina.cfg.selection.wizard";
 	private final static String ASTLOC = "astloc";
@@ -87,7 +87,7 @@ public class SelectionPage extends WizardPage {
 	 * 
 	 * @param pageName
 	 */
-	public SelectionPage(ISelection selection, NewCfgWizard wizard) {
+	public ConfigurationPage(ISelection selection, NewCfgWizard wizard) {
 		super("wizardPage");
 		setTitle("AST-Selection");
 		setDescription("Please select the AST-Model you wish to convert.");
@@ -329,6 +329,7 @@ public class SelectionPage extends WizardPage {
 		this.sourceAstFileName = this.tx_sourceAstFileName.getText();
 		this.targetContainerName = this.tx_targetContainerName.getText();
 		this.targetFileName = this.tx_targetFileName.getText();
+		setPageComplete(false);
 		setDescription("Check your input and press next or finish!");
 
 		if (!isAstFileExtOk())
@@ -361,18 +362,12 @@ public class SelectionPage extends WizardPage {
 			updateStatus("No valid filename.");
 			return;
 		}
-		if(modelSelection != CFGConstants.SC){
-			if(wizard.hasFoundError()){
-				setMessage(wizard.getUserMessage(), WizardPage.ERROR);
-			}else if(wizard.hasFoundWarning() && !wizard.hasFoundError()){
-				setMessage(wizard.getUserMessage(), WizardPage.WARNING);
-			}else{
-				setMessage(wizard.getUserMessage());
-			}
-		}else{
-			setMessage("Check your input and press next or finish!");
-		}
-		updateStatus(null);
+		
+		//make sure we can go into the error view
+		setPageComplete(true);
+		
+		//redo checks
+		wizard.restartChecks();
 		getControl().redraw();
 	}
 
@@ -381,10 +376,6 @@ public class SelectionPage extends WizardPage {
 		setPageComplete(message == null);
 	}
 
-	private void updateDescription(String message) {
-		setMessage(message, INFORMATION);
-		setPageComplete(false);
-	}
 
 	public String getAstLocation() {
 		return sourceAstFileName;

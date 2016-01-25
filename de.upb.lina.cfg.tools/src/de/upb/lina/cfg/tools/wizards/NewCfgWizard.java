@@ -10,7 +10,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 
 import de.upb.lina.cfg.tools.CFGActivator;
-import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.CreateGraphOperation;
 import de.upb.lina.cfg.tools.checks.AstLoader;
 import de.upb.lina.cfg.tools.checks.LIWDCPropertyChecker;
@@ -29,11 +28,11 @@ import de.upb.llvm_parser.llvm.LLVM;
  */
 
 public class NewCfgWizard extends Wizard implements INewWizard {
-	private SelectionPage page;
+	private ConfigurationPage configurationPage;
 	private WarningPage warningPage;
 	private ISelection selection;
 	private String astLocation;
-	
+
 	private boolean myCanFinish;
 	private boolean foundError;
 	private boolean foundWarning;
@@ -52,37 +51,34 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 		foundWarning = false;
 	}
 
-	/**
-	 * 
-	 * @param ast
-	 * @return false if we are not allowed to finish the page
-	 */
-	private void performChecks(LLVM ast){
-		
+
+	public void performChecks(LLVM ast){
+
 		//Setup checker and register checkers
 		PropertyCheckerManager manager = new PropertyCheckerManager();	
 		manager.registerPropertyChecker(new LIWDCPropertyChecker(ast));
 		manager.registerPropertyChecker(new LWFPropertyChecker(ast));
 		manager.registerPropertyChecker(new UnsupportedInstructionPropertyChecker(ast));
-		
+
 		manager.performChecks();
 		if(manager.foundError()){
 			myCanFinish = false;
 			foundError = true;
 			this.userMessage = " Problems were found in the specified program. Click 'next' for more details.";
-			page.setErrorMessage(userMessage);
+			configurationPage.setErrorMessage(userMessage);
 		}else if(manager.foundWarning()){
 			foundWarning = true;
 			this.userMessage = " Warnings encountered while checking the program. Click 'next' for more details.";
-			page.setMessage(userMessage, WizardPage.WARNING);
+			configurationPage.setMessage(userMessage, WizardPage.WARNING);
 			myCanFinish = true;
 		}else if(!manager.foundError() && !manager.foundWarning()){
 			myCanFinish = true;
+			configurationPage.setErrorMessage(null);
+			configurationPage.setMessage("Check your input and hit finish.");
 		}
-		
 		warningPage.setWarningMessages(manager.getWarningMessages());
 		warningPage.setErrorMessages(manager.getErrorMessages());
-		
+
 	}
 
 
@@ -91,9 +87,9 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	 */
 
 	public void addPages() {
-		page = new SelectionPage(selection, this);
 		warningPage = new WarningPage();
-		addPage(page);
+		configurationPage = new ConfigurationPage(selection, this);
+		addPage(configurationPage);
 		addPage(warningPage);
 	}
 
@@ -104,9 +100,9 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	public boolean performFinish()
 	{
 
-		page.saveMementoState();
-		CreateGraphOperation cgo = new CreateGraphOperation(page.getAstLocation(),
-				(page.getContainerName() + "/" + page.getFileName()), page.getMemoryModelSelection(), this.getShell());
+		configurationPage.saveMementoState();
+		CreateGraphOperation cgo = new CreateGraphOperation(configurationPage.getAstLocation(),
+				(configurationPage.getContainerName() + "/" + configurationPage.getFileName()), configurationPage.getMemoryModelSelection(), this.getShell());
 
 		try
 		{
@@ -133,27 +129,25 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	@Override
 	public boolean canFinish()
 	{
-
 		if (!super.canFinish())
 		{
 			return false;
 		}
-
-		if (page.getMemoryModelSelection() > CFGConstants.SC)
+		restartChecks();
+		return myCanFinish;
+	}
+	
+	public void restartChecks(){
+		if (astLocation == null || !astLocation.equals(configurationPage.getAstLocation()))
 		{
-			if (astLocation == null || !astLocation.equals(page.getAstLocation()))
-			{
-				astLocation = page.getAstLocation();
-				LLVM ast = AstLoader.loadAst(astLocation);
-				if(ast == null){
-					myCanFinish = false;
-				}else{
-					performChecks(ast);
-				}
+			astLocation = configurationPage.getAstLocation();
+			LLVM ast = AstLoader.loadAst(astLocation);
+			if(ast == null){
+				myCanFinish = false;
+			}else{
+				performChecks(ast);
 			}
-			return myCanFinish;
 		}
-		return true;
 	}
 
 	/**
@@ -165,15 +159,15 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 	}
-	
+
 	public String getUserMessage(){
 		return userMessage;
 	}
-	
+
 	public boolean hasFoundError(){
 		return foundError;
 	}
-	
+
 	public boolean hasFoundWarning(){
 		return foundWarning;
 	}

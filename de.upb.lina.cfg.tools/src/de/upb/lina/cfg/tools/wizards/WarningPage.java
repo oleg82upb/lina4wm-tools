@@ -34,19 +34,20 @@ public class WarningPage extends WizardPage {
 
 	private void updateDescription(){
 		if(errorMessages == null && warningMessages == null || (errorMessages != null && warningMessages != null && errorMessages.isEmpty() && warningMessages.isEmpty())){
+			setErrorMessage(null);
 			setDescription("No errors or warnings found");
 		}else{
-			setDescription("The following errors and warnings were found.");
+			setErrorMessage("The following errors and warnings were found.");
 		}
 	}
 	
 	private void updateContent(){
-		if(errorMessages != null){
+		if(errorMessages != null && errorViewer != null){
 			errorViewer.setInput(errorMessages.toArray());
 			errorViewer.refresh();
 		}
 		
-		if(warningMessages != null){
+		if(warningMessages != null && warningViewer != null ){
 			warningViewer.setInput(warningMessages.toArray());
 			warningViewer.refresh();
 		}
@@ -77,7 +78,7 @@ public class WarningPage extends WizardPage {
 		warningViewer.getControl().setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		setControl(container);
-
+		updateContent();
 	}
 
 }
