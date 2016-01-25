@@ -27,9 +27,10 @@
          point="org.eclipse.ui.menus">
       <menuContribution
             allPopups="false"
-            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer">
+            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer?before=additions">
          <command
                commandId="de.upb.lina.transformations.createallcommand"
+               id="de.upb.lina.transformations.createalltransformations"
                label="Create All Transformations"
                style="push"
                tooltip="Test">

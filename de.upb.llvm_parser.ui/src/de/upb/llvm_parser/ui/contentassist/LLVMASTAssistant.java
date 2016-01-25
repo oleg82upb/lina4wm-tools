@@ -3,7 +3,6 @@ package de.upb.llvm_parser.ui.contentassist;
 import java.util.Collections;
 import java.util.Iterator;
 
-import org.eclipse.core.internal.resources.File;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
