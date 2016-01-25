@@ -34,8 +34,7 @@ public class TransformationWizard extends Wizard implements INewWizard {
 		List<ControlFlowDiagram> cfgs = functionSelectionPage.getSelectedFunctions();
 		String kIVBasis = wizardPage.getBasis();
 		Map<String, String> oldToNewCfgName = functionSelectionPage.getMap();
-		Configuration config = new Configuration(cfgs, kIVBasis, oldToNewCfgName);
-		config.setTransformationType(wizardPage.getType());
+		Configuration config = new Configuration(cfgs, kIVBasis, oldToNewCfgName, wizardPage.getType());
 
 		wmo = new TransformationOperation(wizardPage.getContainerText().getText(), wizardPage.getFileText().getText(),
 				wizardPage.getFileEndingLabel().getText(), config);

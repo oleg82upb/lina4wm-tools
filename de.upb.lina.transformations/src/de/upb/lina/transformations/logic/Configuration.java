@@ -4,20 +4,45 @@ import java.util.List;
 import java.util.Map;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
-import de.upb.lina.transformations.Constants;
 
+/**
+ * Stores the configuration for a transformation. It is required by the 
+ * @see de.upb.lina.transformations.logic.TransformationOperation class in order to make a transformation. 
+ * It is currently used for both promela and kiv transformations.
+ *
+ */
 public class Configuration {
 	
 	private List<ControlFlowDiagram> cfgs;	
+	private Map<String, String> oldToNewCfgNameMap;
+	
 	private String kIVBasis;
-	private Map<String, String> oldToNewCfgName;
-	private int transformationType = Constants.TRANSFORMATION_TYPE_KIV_LOCAL;
+	private int transformationType;
 	
-	
-	public Configuration(List<ControlFlowDiagram> cfgs, String kIVBasis, Map<String, String> oldToNewCfgName){
+	/**
+	 * Constructor intended for promela transformations only, as the kiv basis is not set 
+	 * properly by this constructor.
+	 * @param cfgs cfgs to transform
+	 * @param oldToNewCfgNameMap 
+	 * @param transformationType
+	 */
+	public Configuration(List<ControlFlowDiagram> cfgs, Map<String, String> oldToNewCfgNameMap, int transformationType){
 		this.cfgs = cfgs;
+		this.oldToNewCfgNameMap = oldToNewCfgNameMap;
+		this.transformationType = transformationType;
+		this.kIVBasis = "";
+	}
+	
+	/**
+	 * Constructor intended for kiv transformations.
+	 * @param cfgs
+	 * @param kIVBasis
+	 * @param oldToNewCfgNameMap
+	 * @param transformationType
+	 */
+	public Configuration(List<ControlFlowDiagram> cfgs, String kIVBasis, Map<String, String> oldToNewCfgNameMap,int transformationType){
+		this(cfgs, oldToNewCfgNameMap, transformationType);
 		this.kIVBasis = kIVBasis;
-		this.oldToNewCfgName = oldToNewCfgName;
 	}
 
 	/**
@@ -40,7 +65,7 @@ public class Configuration {
 	 */
 	public Map<String, String> getOldToNewCfgName()
 	{
-		return oldToNewCfgName;
+		return oldToNewCfgNameMap;
 	}
 
 	/**
@@ -49,13 +74,5 @@ public class Configuration {
 	public int getTransformationType()
 	{
 		return transformationType;
-	}
-
-	/**
-	 * @param transformationType the transformationType to set
-	 */
-	public void setTransformationType(int kivSpecType)
-	{
-		this.transformationType = kivSpecType;
 	}
 }

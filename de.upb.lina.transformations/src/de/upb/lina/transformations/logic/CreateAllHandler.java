@@ -48,9 +48,32 @@ import de.upb.llvm_parser.llvm.AbstractElement;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LLVM;
 
+/**
+ * This is a handler class for the Create All Transformations menu extension button. It generates all transformations
+ * for the selected llvm files and saves them in according folders. The according asts and cfgs are computed on the fly
+ * but not explicitly saved. 
+ * 
+ * @author Alexander Hetzer
+ *
+ */
 public class CreateAllHandler extends AbstractHandler
 {
-	IFile file = null;
+	private static final int[] TRANSFORMATION_TYPES_KIV = { Constants.TRANSFORMATION_TYPE_KIV_GLOBAL,
+		Constants.TRANSFORMATION_TYPE_KIV_LOCAL };
+	private static final String[] TRANSFORMATION_TYPE_NAMES_KIV = { "kiv_global", "kiv_local" };
+	private static final String[] KIV_BASES = { Constants.INT, Constants.NAT };
+
+	private static final int[] TRANSFORMATION_TYPES_PROMELA = { Constants.TRANSFORMATION_TYPE_PROMELA,
+		Constants.TRANSFORMATION_TYPE_OPERATIONAL_PROMELA };
+	private static final String[] TRANSFORMATION_TYPE_NAMES_PROMELA = { "promela", "operational_promela" };
+
+
+	private IFile file = null;
+	private Shell shell = null;
+
+	/**
+	 * Creates all transformations for the selected llvm file. 
+	 */
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException
@@ -62,7 +85,7 @@ public class CreateAllHandler extends AbstractHandler
 		{
 
 			// obtain shell
-			Shell shell = HandlerUtil.getActiveShellChecked(event);
+			shell = HandlerUtil.getActiveShellChecked(event);
 
 			// iterate over selected objects
 			IStructuredSelection structSelection = (IStructuredSelection) selection;
@@ -77,23 +100,23 @@ public class CreateAllHandler extends AbstractHandler
 					file = (IFile) element;
 
 					// save ast first
-					LLVM ast = createAstFromLLVM(shell, file);
+					LLVM ast = createAstFromLLVM(file);
 					// check if everything worked out
 					if (ast == null)
 					{
 						return null;
 					}
 
-					// ==generate all cfgs==
-					if (!doesUserAbortAsOfErrors(shell, ast))
+					// generate all cfgs and transformations
+					if (!doesUserAbortAsOfErrors(ast))
 					{
 						List<ControlFlowDiagram> cfgs = null;
-						cfgs = createCFGFromAst(CFGConstants.SC, ast, shell);
-						createTransformations(cfgs, CFGConstants.SC);
-						cfgs = createCFGFromAst(CFGConstants.TSO, ast, shell);
-						createTransformations(cfgs, CFGConstants.TSO);
-						cfgs = createCFGFromAst(CFGConstants.PSO, ast, shell);
-						createTransformations(cfgs, CFGConstants.PSO);
+						cfgs = createCFGFromAst(CFGConstants.SC, ast);
+						createTransformations(cfgs);
+						cfgs = createCFGFromAst(CFGConstants.TSO, ast);
+						createTransformations(cfgs);
+						cfgs = createCFGFromAst(CFGConstants.PSO, ast);
+						createTransformations(cfgs);
 					}
 				}
 			}
@@ -101,30 +124,39 @@ public class CreateAllHandler extends AbstractHandler
 		return null;
 	}
 
-	private void createTransformations(List<ControlFlowDiagram> cfgs, int mm )
+	/**
+	 * Creates all transformations for the list of current cfgs. Note that all cfgs in the list 
+	 * need to have the same memory model.
+	 * @param cfgs list of cfgs to create transformations for
+	 */
+	private void createTransformations(List<ControlFlowDiagram> cfgs)
 	{
+		//make sure we have something to transform
+		if(cfgs.isEmpty()){
+			Activator.logError("Transformation could not be done as of missing control flow diagrams.", null);
+			return;
+		}
+
+		int memoryModel = cfgs.get(0).getMemoryModel();
 		TransformationOperation wmo = null;
+
+		//Create default function name map
 		Map<String, String> oldToNewCfgName = new HashMap<String, String>();
 		for (ControlFlowDiagram cfg : cfgs)
 		{
 			oldToNewCfgName.put(cfg.getName(), cfg.getName().replaceAll("@_", "").replaceAll("@", ""));
 		}
 
-		// Do kiv transformations
-		int[] kivTransformationTypes = { Constants.TRANSFORMATION_TYPE_KIV_GLOBAL,
-				Constants.TRANSFORMATION_TYPE_KIV_LOCAL };
-		String[] kivTransformationTypeNames = { "kiv_global", "kiv_local" };
 
-		for (int i = 0; i < kivTransformationTypes.length; i++)
+		// Do kiv transformations
+		for (int i = 0; i < TRANSFORMATION_TYPES_KIV.length; i++)
 		{
-			int transformationType = kivTransformationTypes[i];
-			String transformationTypeName = kivTransformationTypeNames[i];
-			String[] kivBases = { Constants.INT, Constants.NAT };
-			for (String kIVBasis : kivBases)
+			int transformationType = TRANSFORMATION_TYPES_KIV[i];
+			String transformationTypeName = TRANSFORMATION_TYPE_NAMES_KIV[i];
+			for (String kIVBasis : KIV_BASES)
 			{
-				Configuration config = new Configuration(cfgs, kIVBasis, oldToNewCfgName);
-				config.setTransformationType(transformationType);
-				wmo = new TransformationOperation(createFolder(mm, transformationTypeName + "_" + kIVBasis) , "", "", config);
+				Configuration config = new Configuration(cfgs, kIVBasis, oldToNewCfgName, transformationType);
+				wmo = new TransformationOperation(createFolder(memoryModel, transformationTypeName + "_" + kIVBasis) , "", "", config);
 				try
 				{
 					wmo.run(new NullProgressMonitor());
@@ -137,16 +169,12 @@ public class CreateAllHandler extends AbstractHandler
 		}
 
 		// Do promela transformations
-		int[] promelaTransformationTypes = { Constants.TRANSFORMATION_TYPE_PROMELA,
-				Constants.TRANSFORMATION_TYPE_OPERATIONAL_PROMELA };
-		String[] promelaTransformationTypeNames = { "promela", "operational_promela" };
-		for (int i = 0; i < promelaTransformationTypes.length; i++)
+		for (int i = 0; i < TRANSFORMATION_TYPES_PROMELA.length; i++)
 		{
-			int transformationType = promelaTransformationTypes[i];
-			String transformationTypeName = promelaTransformationTypeNames[i];
-			Configuration config = new Configuration(cfgs, Constants.INT, oldToNewCfgName);
-			config.setTransformationType(transformationType);
-			wmo = new TransformationOperation(createFolder(mm, transformationTypeName),
+			int transformationType = TRANSFORMATION_TYPES_PROMELA[i];
+			String transformationTypeName = TRANSFORMATION_TYPE_NAMES_PROMELA[i];
+			Configuration config = new Configuration(cfgs,oldToNewCfgName, transformationType);
+			wmo = new TransformationOperation(createFolder(memoryModel, transformationTypeName),
 					transformationTypeName + "_" + file.getName(), ".pml", config);
 			try
 			{
@@ -158,35 +186,46 @@ public class CreateAllHandler extends AbstractHandler
 
 		}
 	}
-	
-	
+
+
+	/**
+	 * Creates a folder (and all parent folder) for storing the resulting transformations. Folders are 
+	 * created depending on the location of the original llvm file and the transformation parameters.
+	 * Make sure to return the workspace relative path to the created folder!
+	 * 
+	 * @param mm memoryModel to create folder for
+	 * @param subfolder subfolder path implicitly specified by the transformation parameters
+	 * @return the workspace relative path of the created folder
+	 */
 	private String createFolder(int mm, String subfolder)
 	{
 		try
 		{
-			IPath p = null;
-			IPath pr = null;
-			if (mm == CFGConstants.SC)
-			{
-				p = file.getParent().getLocation().append("SC").append(subfolder);
-				pr = file.getFullPath().removeLastSegments(1).append("SC").append(subfolder);
-			} else if (mm == CFGConstants.TSO)
-			{
-				p = file.getParent().getLocation().append("TSO").append(subfolder);
-				pr = file.getFullPath().removeLastSegments(1).append("SC").append(subfolder);
-			} else if (mm == CFGConstants.PSO)
-			{
-				p = file.getParent().getLocation().append("PSO").append(subfolder);
-				pr = file.getFullPath().removeLastSegments(1).append("SC").append(subfolder);
-			} else
-			{
-				p = file.getParent().getLocation().append("UNKNOWN").append(subfolder);
-				pr = file.getFullPath().removeLastSegments(1).append("SC").append(subfolder);
+			String memoryModelName = "";
+
+			switch(mm){
+			case CFGConstants.SC: 
+				memoryModelName = "SC";
+				break;
+			case CFGConstants.TSO:
+				memoryModelName = "TSO";
+				break;
+			case CFGConstants.PSO:
+				memoryModelName = "PSO";
+				break;
+			default:
+				memoryModelName = "UNKNOWN";
+				break;
 			}
 
+			IPath p = file.getParent().getLocation().append(memoryModelName).append(subfolder);
+			IPath pr = file.getFullPath().removeLastSegments(1).append(memoryModelName).append(subfolder);
+
+			//use absolut paths to make directories
 			p.toFile().mkdirs();
 			ResourcesPlugin.getWorkspace().getRoot().refreshLocal(IResource.DEPTH_INFINITE, null);
-		
+
+			//ensure to return a workspace relative path
 			return pr.toPortableString();
 
 		} catch (CoreException e)
@@ -197,8 +236,14 @@ public class CreateAllHandler extends AbstractHandler
 	}
 
 
-
-	private List<ControlFlowDiagram> createCFGFromAst(int memoryModel, LLVM ast, Shell shell)
+	/**
+	 * Creates the according controlflow diagrams for the given ast and memory model.
+	 * 
+	 * @param memoryModel memory model to consider for cfg creation
+	 * @param ast ast to create cfg for
+	 * @return created cfgs of the functions of ast
+	 */
+	private List<ControlFlowDiagram> createCFGFromAst(int memoryModel, LLVM ast)
 	{
 		List<ControlFlowDiagram> list = new ArrayList<ControlFlowDiagram>();
 		// generating cfg for each function
@@ -212,17 +257,18 @@ public class CreateAllHandler extends AbstractHandler
 				if (function.getBody() != null)
 				{
 					IGraphGenerator generator = null;
-					if (memoryModel == CFGConstants.SC)
-					{
+
+					switch(memoryModel){
+					case CFGConstants.SC: 
 						generator = new SCGraphGenerator(function);
-					} else if (memoryModel == CFGConstants.TSO)
-					{
+						break;
+					case CFGConstants.TSO:
 						generator = new TSOGraphGenerator(function);
-					} else if (memoryModel == CFGConstants.PSO)
-					{
+						break;
+					case CFGConstants.PSO:
 						generator = new PSOGraphGenerator(function);
-					} else
-					{
+						break;
+					default:
 						throw new RuntimeException("Memory model selection not supported");
 					}
 
@@ -238,15 +284,14 @@ public class CreateAllHandler extends AbstractHandler
 	}
 
 	/**
-	 * Returns true, if the user wants to abort the transformation, false if not
+	 * Checks for problems and errors in the given ast and reports them to the user. The user is asked if he
+	 * wants to continue or abort the transformation, if errors exist.
 	 * 
-	 * @param model
-	 * @param errors
-	 * @param warnings
-	 * @param shell
-	 * @return
+	 * @param ast ast to check for errors and problems
+	 * @return true, if errors exist and use decided to abort transformation, false, if no errors exist or
+	 * user decided not to abort the transformation although errors exist
 	 */
-	private boolean doesUserAbortAsOfErrors(Shell shell, LLVM ast)
+	private boolean doesUserAbortAsOfErrors(LLVM ast)
 	{
 		// Setup checker and register checkers
 		PropertyCheckerManager manager = new PropertyCheckerManager();
@@ -285,19 +330,19 @@ public class CreateAllHandler extends AbstractHandler
 			}
 			message += "Do you want to continue the transformation?";
 
-			MessageBox messageBox = new MessageBox(shell, SWT.ICON_QUESTION | SWT.YES | SWT.NO);
-			messageBox.setMessage(message);
-			messageBox.setText("Problems");
-			if (messageBox.open() == SWT.NO)
-			{
-				Activator.log(IStatus.INFO, "User aborted creation of all transformations.", null);
-				return true;
-			}
+			boolean abortTransformation = !askUserToContinue(message, "Problems");
+			return abortTransformation;
 		}
 		return false;
 	}
 
-	private LLVM createAstFromLLVM(Shell currentShell, IFile file)
+	/**
+	 * Creates the according ast for a given (llvm) file. 
+	 * 
+	 * @param file llvm file to create ast for
+	 * @return created ast, if no problems occurred - null, if error occurred during ast creation, 
+	 */
+	private LLVM createAstFromLLVM(IFile file)
 	{
 		ResourceSetImpl xtextResourceSet = new ResourceSetImpl();
 		URI uri = URI.createURI(((IFile) file).getFullPath().toString());
@@ -308,13 +353,9 @@ public class CreateAllHandler extends AbstractHandler
 			Iterator<INode> i = llr.getParseResult().getSyntaxErrors().iterator();
 			if (i.hasNext())
 			{
-				MessageBox messageBox = new MessageBox(currentShell, SWT.ICON_QUESTION | SWT.YES | SWT.NO);
-				messageBox.setMessage("There are errors located on selected file.\n"
-						+ "Do really want to save the AST file?");
-				messageBox.setText("Syntax Errors");
-				if (messageBox.open() == SWT.NO)
-				{
-					Activator.log(IStatus.INFO, "User aborted creation of all transformations.", null);
+				boolean continueTransformation = askUserToContinue("There are errors located on selected file.\n" + 
+						"Do really want to save the AST file?", "Syntax Errors");
+				if(!continueTransformation){
 					return null;
 				}
 			}
@@ -328,6 +369,26 @@ public class CreateAllHandler extends AbstractHandler
 			return null;
 		}
 		return (LLVM) ast;
+	}
+
+	/**
+	 * Opens a @see org.eclipse.swt.widgets.MessageBox instance displaying the given message and text. If the users
+	 * answers with no, a transformation abortion by the user is logged.
+	 * 
+	 * @param message question to be displayed
+	 * @param text heading of the box
+	 * @return true, if user hits yes - false, if not
+	 */
+	private boolean askUserToContinue(String message, String text){
+		MessageBox messageBox = new MessageBox(shell, SWT.ICON_QUESTION | SWT.YES | SWT.NO);
+		messageBox.setMessage(message);
+		messageBox.setText(text);
+		if (messageBox.open() == SWT.NO)
+		{
+			Activator.log(IStatus.INFO, "User aborted creation of all transformations.", null);
+			return false;
+		}
+		return true;
 	}
 
 }

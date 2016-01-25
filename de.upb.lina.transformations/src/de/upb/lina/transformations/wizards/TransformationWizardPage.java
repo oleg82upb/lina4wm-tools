@@ -236,7 +236,7 @@ public class TransformationWizardPage extends WizardPage {
 	
 	
 	/**
-	 * @return selected type of transformation see Constants.TRANSFORMATION... 
+	 * @return selected type of transformation according to @see Constants
 	 */
 	public int getType()
 	{
