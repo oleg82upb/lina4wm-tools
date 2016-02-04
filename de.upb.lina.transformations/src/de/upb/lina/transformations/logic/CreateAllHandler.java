@@ -15,8 +15,11 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -25,6 +28,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.handlers.HandlerUtil;
@@ -67,10 +71,12 @@ public class CreateAllHandler extends AbstractHandler
 		Constants.TRANSFORMATION_TYPE_OPERATIONAL_PROMELA };
 	private static final String[] TRANSFORMATION_TYPE_NAMES_PROMELA = { "promela", "operational_promela" };
 
-
 	private IFile file = null;
 	private Shell shell = null;
-
+	private IProgressMonitor monitor = null;
+	
+	private boolean userContinues = true;
+	
 	/**
 	 * Creates all transformations for the selected llvm file. 
 	 */
@@ -86,42 +92,75 @@ public class CreateAllHandler extends AbstractHandler
 
 			// obtain shell
 			shell = HandlerUtil.getActiveShellChecked(event);
+			doExecute(selection);
 
-			// iterate over selected objects
-			IStructuredSelection structSelection = (IStructuredSelection) selection;
-			Iterator<?> iterator = structSelection.iterator();
-			while (iterator.hasNext())
-			{
-				Object element = iterator.next();
-
-				// Check if the current selected object is a file
-				if (element instanceof IFile)
-				{
-					file = (IFile) element;
-
-					// save ast first
-					LLVM ast = createAstFromLLVM(file);
-					// check if everything worked out
-					if (ast == null)
-					{
-						return null;
-					}
-
-					// generate all cfgs and transformations
-					if (!doesUserAbortAsOfErrors(ast))
-					{
-						List<ControlFlowDiagram> cfgs = null;
-						cfgs = createCFGFromAst(CFGConstants.SC, ast);
-						createTransformations(cfgs);
-						cfgs = createCFGFromAst(CFGConstants.TSO, ast);
-						createTransformations(cfgs);
-						cfgs = createCFGFromAst(CFGConstants.PSO, ast);
-						createTransformations(cfgs);
-					}
-				}
-			}
 		}
 		return null;
+	}
+
+	/**
+	 * Execution wrapper methon in order to let the transformation be run by a job instance.
+	 * This is needed to get access to a progress monitor.
+	 * 
+	 * @param selection selected elements
+	 */
+	public void doExecute(ISelection selection){
+		Job job = new Job("Create All Transformations") {
+
+			@Override
+			protected IStatus run(IProgressMonitor mon) {
+				monitor = mon;
+				try{
+					monitor.beginTask("Create all transformations.", 7);
+					// iterate over selected objects
+					IStructuredSelection structSelection = (IStructuredSelection) selection;
+					Iterator<?> iterator = structSelection.iterator();
+					while (iterator.hasNext())
+					{
+						Object element = iterator.next();
+
+						// Check if the current selected object is a file
+						if (element instanceof IFile)
+						{
+							file = (IFile) element;
+
+							// save ast first
+							LLVM ast = createAstFromLLVM(file);
+							monitor.worked(1);
+							// check if everything worked out
+							if (ast == null)
+							{
+								monitor.done();
+								return Status.CANCEL_STATUS;
+							}
+
+							// generate all cfgs and transformations
+							if (!doesUserAbortAsOfErrors(ast))
+							{
+								List<ControlFlowDiagram> cfgs = null;
+								cfgs = createCFGFromAst(CFGConstants.SC, ast);
+								monitor.worked(1);
+								createTransformations(cfgs);
+								monitor.worked(1);
+								cfgs = createCFGFromAst(CFGConstants.TSO, ast);
+								monitor.worked(1);
+								createTransformations(cfgs);
+								monitor.worked(1);
+								cfgs = createCFGFromAst(CFGConstants.PSO, ast);
+								monitor.worked(1);
+								createTransformations(cfgs);
+								monitor.worked(1);
+							}
+						}
+					}
+				}finally{
+					monitor.done();
+				}
+				return Status.OK_STATUS;
+			}
+		};
+		job.setUser(true);
+		job.schedule();
 	}
 
 	/**
@@ -380,15 +419,21 @@ public class CreateAllHandler extends AbstractHandler
 	 * @return true, if user hits yes - false, if not
 	 */
 	private boolean askUserToContinue(String message, String text){
-		MessageBox messageBox = new MessageBox(shell, SWT.ICON_QUESTION | SWT.YES | SWT.NO);
-		messageBox.setMessage(message);
-		messageBox.setText(text);
-		if (messageBox.open() == SWT.NO)
-		{
-			Activator.log(IStatus.INFO, "User aborted creation of all transformations.", null);
-			return false;
-		}
-		return true;
+		userContinues = true;
+		Runnable runnable = new Runnable() {
+            public void run() {
+            	MessageBox messageBox = new MessageBox(shell, SWT.ICON_QUESTION | SWT.YES | SWT.NO);
+    			messageBox.setMessage(message);
+    			messageBox.setText(text);
+    			if (messageBox.open() == SWT.NO)
+    			{
+    				Activator.log(IStatus.INFO, "User aborted creation of all transformations.", null);
+    				userContinues = false;
+    			}
+            }
+         };
+		Display.getDefault().syncExec(runnable);
+		return userContinues;
 	}
 
 }
