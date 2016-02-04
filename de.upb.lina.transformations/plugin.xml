@@ -15,6 +15,8 @@
             name="Generate New Specification">
       </wizard>
    </extension>
+   
+   <!-- Create All command -->
    <extension
          point="org.eclipse.ui.commands">
       <command
@@ -23,6 +25,18 @@
             name="Create All Transformations">
       </command>
    </extension>
+   
+    <!-- Save Ast command -->
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="de.upb.lina.transformations.logic.SaveAstHandler"
+            id="de.upb.lina.transformations.saveastcommand"
+            name="Save AST">
+      </command>
+   </extension>
+   
+   <!-- Create All button -->
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
@@ -33,7 +47,7 @@
                id="de.upb.lina.transformations.createalltransformations"
                label="Create All Transformations"
                style="push"
-               tooltip="Test">
+               tooltip="Create all transformations.">
             <visibleWhen
                   checkEnabled="false">
                <with
@@ -53,8 +67,37 @@
          </command>
       </menuContribution>
    </extension>
+   
+   <!-- Save Ast Button -->
    <extension
-         point="org.eclipse.core.expressions.definitions">
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer?before=additions">
+         <command
+               commandId="de.upb.lina.transformations.saveastcommand"
+               id="de.upb.lina.transformations.saveast"
+               label="Save AST"
+               style="push"
+               tooltip="Save Abstract Syntax Tree Model.">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="activeMenuSelection">
+                  <iterate
+                        ifEmpty="false">
+                     <adapt
+                           type="org.eclipse.core.resources.IResource">
+                        <test
+                              property="org.eclipse.core.resources.extension"
+                              value="s">
+                        </test>
+                     </adapt>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
    </extension>
 
 </plugin>

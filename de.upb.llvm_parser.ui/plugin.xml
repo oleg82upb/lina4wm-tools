@@ -320,21 +320,6 @@
     </provider>
   </extension>
   <extension
-        point="org.eclipse.ui.popupMenus">
-     <objectContribution
-           id="de.upb.llvm_parser.ui.saveasttool"
-           nameFilter="*.s"
-           objectClass="org.eclipse.core.resources.IFile">
-        <action
-              class="de.upb.llvm_parser.ui.contentassist.LLVMASTAssistant"
-              enablesFor="1"
-              id="de.upb.llvm_parser.ui.action1"
-              label="Save Abstract Syntax Tree Model"
-              menubarPath="additions">
-        </action>
-     </objectContribution>
-  </extension>
-  <extension
         point="org.eclipse.ui.startup">
      <startup
            class="de.upb.llvm_parser.ui.Startup">

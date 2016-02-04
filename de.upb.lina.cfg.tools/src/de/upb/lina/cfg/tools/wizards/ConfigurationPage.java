@@ -44,7 +44,6 @@ import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
 import de.upb.lina.cfg.tools.CFGActivator;
-import de.upb.lina.cfg.tools.CFGConstants;
 
 /**
  * The "New" wizard page allows setting the container for the new file as well
@@ -330,7 +329,6 @@ public class ConfigurationPage extends WizardPage {
 		this.targetContainerName = this.tx_targetContainerName.getText();
 		this.targetFileName = this.tx_targetFileName.getText();
 		setPageComplete(false);
-		setDescription("Check your input and press next or finish!");
 
 		if (!isAstFileExtOk())
 		{
@@ -365,6 +363,8 @@ public class ConfigurationPage extends WizardPage {
 		
 		//make sure we can go into the error view
 		setPageComplete(true);
+		setErrorMessage(null);
+		setDescription("Check your input and press next or finish!");
 		
 		//redo checks
 		wizard.restartChecks();
