@@ -32,13 +32,21 @@ import org.eclipse.xtext.nodemodel.INode;
 import de.upb.lina.transformations.Activator;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
+/**
+ * This is a handler class for the Save AST menu extension button. It generates and saves the according ast file 
+ * of a given .s file.
+ * 
+ * @author Alexander Hetzer
+ *
+ */
 public class SaveAstHandler extends AbstractHandler {
-
+	private Shell shell;
+	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		
 		// obtain shell
-		Shell shell = HandlerUtil.getActiveShellChecked(event);
+		shell = HandlerUtil.getActiveShellChecked(event);
 		
 		ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().getSelection();
 		// Check for a proper selection
@@ -81,7 +89,7 @@ public class SaveAstHandler extends AbstractHandler {
 						return null;
 					}
 
-					Resource content = parseFile(shell, file);
+					Resource content = parseFile(file);
 					if(content == null)
 					{
 						Activator.logError("An error occured while saving parse result",null);
@@ -116,7 +124,15 @@ public class SaveAstHandler extends AbstractHandler {
 		return null;
 	}
 	
-	private Resource parseFile(Shell currentShell, IFile file)
+	/**
+	 * Passes the given file to the LLVM parser and tries to save the resulting llvm file. 
+	 * Displays an error message to the user incase the .s file contans errors.
+	 * 
+	 * @param currentShell 
+	 * @param file
+	 * @return
+	 */
+	private Resource parseFile(IFile file)
 	{
 		ResourceSetImpl xtextResourceSet = new ResourceSetImpl();
 		URI uri = URI.createURI(((IFile) file).getFullPath().toString());
@@ -127,7 +143,7 @@ public class SaveAstHandler extends AbstractHandler {
 			Iterator<INode> i = llr.getParseResult().getSyntaxErrors().iterator();
 			if (i.hasNext())
 			{
-				MessageBox messageBox = new MessageBox(currentShell, SWT.ICON_QUESTION | SWT.YES | SWT.NO);
+				MessageBox messageBox = new MessageBox(shell, SWT.ICON_QUESTION | SWT.YES | SWT.NO);
 				messageBox.setMessage("There are errors located on selected file.\n"
 						+ "Do really want to save the AST-file?");
 				messageBox.setText("Syntax Errors");
