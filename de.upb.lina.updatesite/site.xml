@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/de.upb.lina.feature_1.0.0.qualifier.jar" id="de.upb.lina.feature" version="1.0.0.qualifier"/>
+</site>
