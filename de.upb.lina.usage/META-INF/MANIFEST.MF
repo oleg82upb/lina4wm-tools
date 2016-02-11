@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Usage
+Bundle-SymbolicName: de.upb.lina.usage;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: de.upb.lina.usage.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.help.webapp;bundle-version="3.6.300",
+ org.eclipse.help.ui;bundle-version="4.0.100",
+ org.eclipse.equinox.http.jetty;bundle-version="3.0.200"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
