@@ -274,6 +274,10 @@ read([e.address.value.valueToString(genData)/], [e.result.addressToString(genDat
 write([e.targetAddress.value.valueToString(genData)/], [e.value.value.valueToString(genData)/]);
 [/template]
 
+[template public genInstruction(e : Fence,  genData : GeneratorData)]
+mfence();
+[/template]
+
 
 
 [template public genInstruction(e : Call,  genData : GeneratorData)]
