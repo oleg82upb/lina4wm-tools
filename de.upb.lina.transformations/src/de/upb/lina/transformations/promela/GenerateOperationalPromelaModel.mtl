@@ -118,6 +118,9 @@ inline [mapping.value/]([genParams(cfg, genData)/][/if][/for]){
 
 [comment SINGLE INSTRUCTION TRANSLATION /]
 
+
+
+
 [template public genInstruction(e : Instruction, genData: GeneratorData)]
 [comment this is the fall back template/]
 // NOT SUPPORTED: [e.eClass().name/]
@@ -155,13 +158,26 @@ endif
 
 [template public genInstruction(e : Branch, genData: GeneratorData)]
 [if (e.elseDestination.oclIsUndefined())]
-goto [e.destination.escape()/];
+[genPhi(e, e.destination, genData)/]  goto [e.destination.escape()/];
 [else]
 if 
-	:: [e.condition.valueToString(genData)/] -> goto [escape(e.destination)/];
-	:: ![e.condition.valueToString(genData)/] -> goto [escape(e.elseDestination)/];
+	:: [e.condition.valueToString(genData)/] -> [genPhi(e, e.destination, genData)/] goto [escape(e.destination)/];
+	:: ![e.condition.valueToString(genData)/] -> [genPhi(e, e.elseDestination, genData)/] goto [escape(e.elseDestination)/];
 fi;
 [/if]
+[/template]
+
+[template public genPhi (e: Branch, dest: String, genData: GeneratorData)]
+[for (mapping: PhiMapping | genData.phiMappings)]
+	[if (mapping.blockLabelToUse.equalsIgnoreCase(e.eContainer().oclAsType(BasicBlock).label) 
+	and (mapping.phi->select(p | p.eContainer().oclAsType(BasicBlock).label.equalsIgnoreCase(dest.replaceAll('%', ''))))->notEmpty())]
+	[genPhiCases(mapping, genData)/]
+	[/if]
+[/for]
+[/template]
+
+[template public genPhiCases (m: PhiMapping, genData: GeneratorData)]
+[for (phi: Phi | m.phi)][phi.result.addressToString(genData)/] = [for(case: PhiCase | phi.cases)][if(case.label.replaceAll('%', '').equalsIgnoreCase(m.blockLabelToUse))][case.value.valueToString(genData)/][/if][/for];[/for]
 [/template]
 
 [template public genInstruction(e : Return, genData: GeneratorData)]
@@ -500,6 +516,7 @@ endif
 		false
 	endif
  /]
+
 
 [query public structSize(e : Structure) : Integer = 
 e.types->iterate(o : EObject; size : Integer = 0 | size + o.typeSize()

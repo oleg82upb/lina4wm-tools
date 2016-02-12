@@ -226,6 +226,7 @@ public class GendataPrecomputer {
 	{
 		for (ControlFlowDiagram cfg : cfgs)
 		{
+			//create a mapping of block labels to phi instructions, if instructions is contained in the block
 			HashMap<String, ArrayList<Phi>> blockLabelToPhiInstructions = new HashMap<String, ArrayList<Phi>>();
 			FunctionDefinition fd = getFunctionForCfg(cfg);
 			for (BasicBlock b : fd.getBody().getBlocks())
@@ -244,6 +245,7 @@ public class GendataPrecomputer {
 				}
 			}
 
+			//assign a phiMapping to each transition that changes the block
 			for (Transition t : cfg.getTransitions())
 			{
 				if (t.getInstruction() instanceof Branch)
