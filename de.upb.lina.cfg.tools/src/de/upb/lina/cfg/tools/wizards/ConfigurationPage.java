@@ -1,37 +1,27 @@
 package de.upb.lina.cfg.tools.wizards;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogPage;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
-import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
@@ -44,6 +34,7 @@ import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
 import de.upb.lina.cfg.tools.CFGActivator;
+import de.upb.lina.cfg.tools.checks.AstLoader;
 
 /**
  * The "New" wizard page allows setting the container for the new file as well
@@ -51,26 +42,59 @@ import de.upb.lina.cfg.tools.CFGActivator;
  * OR with the extension that matches the expected one (cfg).
  */
 
-public class ConfigurationPage extends WizardPage {
-	//Constants
+public class ConfigurationPage extends ExtendedWizardPage {
+	
+	//Other Constants
 	public final static String MEMENTO__KEY = "de.upb.lina.cfg.selection.wizard";
 	private final static String ASTLOC = "astloc";
 	private final static String CONTAINER = "container";
 	private final static String NEW_FILE = "newFile";
 	private final static String MODEL_SELECTION = "modelSelection";
-	private final static String FILE_EXT = "llvm";
+	public final static String LLVM_FILE_EXTENSION = "llvm";
+	public static final String CFG_FILE_EXTENSION = "cfg";
+	public static final String S_FILE_EXTENSION = "s";
+	private static final String[] SUPPORTED_SEMANTICS = new String[] { "SC", "TSO", "PSO" };
+	
+	//Label Constants
+	private static final String MSG_STATUS_INVALID_OUTPUT_CONTAINER_NAME = "The folder path has to start with '/'.";
+	private static final String MSG_STATUS_INVALID_OUTPUT_CONTAINER = "Invalid output folder.";
+	private static final String MSG_STATUS_INVALID_OUTPUT_FILE_NAME = "Invalid output filename.";
+	private static final String MSG_STATUS_OK = "Check your input and press next or finish!";
+	private static final String MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED = "Unable to load the specified input file.";
+	private static final String MSG_STATUS_INPUT_FILE_NOT_EXISTING = "The specified input file does not exist.";
+	private static final String MSG_STATUS_WRONG_FILE_TYPE = "Invalid input file type. Please select a ." + LLVM_FILE_EXTENSION + " or ." + S_FILE_EXTENSION + " file.";
+	
+	/*output folder browse dialog*/
+	private static final String DG_TX_SELECTION_MESSAGE = "Please select the output file folder.";
+	
+	/*input file browse dialog*/
+	private static final String DG_TX_MESSAGE = "Please select an input file (." + S_FILE_EXTENSION + " || ." + LLVM_FILE_EXTENSION + ").";
+	private static final String DG_TX_TITLE = "Inpute file selection";
+	
+	/*GUI label labels*/
+	private static final String LB_TX_INPUT_FILE = "&Input file: \n(." + S_FILE_EXTENSION + " || ." + LLVM_FILE_EXTENSION + ")";
+	private static final String LB_TX_REORDERING = "Semantics:";
+	private static final String LB_TX_NEW_FILENAME = "&Output filename:";
+	private static final String LB_TX_CONTAINER = "&Output folder:";
+	
+	/*GUI button labels*/
+	private static final String BT_TX_BROWSE = "Browse";
+	
+	/*GUI page information*/
+	private static final String PAGE_DESCRIPTION = "Please configure your transformation.";
+	private static final String PAGE_TITLE = "Configuration of transformation.";
 	
 	//GUI elements
 	private Text tx_targetContainerName;
-	private Text tx_targetFileName;
-	private Combo cb_modelSelection;
+	private Text tx_outputFileName;
+	private Combo cb_semanticsSelection;
 	private Text tx_sourceAstFileName;
 	
 	//storage for GUI element input
-	private String targetFileName = "";
-	private String targetContainerName = "";
-	private String sourceAstFileName = "";
-	private int modelSelection = 0;
+	private String outputFileName = "";
+	private String outputFolderName = "";
+	private String inputFilePath = "";
+	private int selectedSemantics = 0;
 	
 	//selection given by user
 	private ISelection selection;
@@ -87,9 +111,7 @@ public class ConfigurationPage extends WizardPage {
 	 * @param pageName
 	 */
 	public ConfigurationPage(ISelection selection, NewCfgWizard wizard) {
-		super("wizardPage");
-		setTitle("AST-Selection");
-		setDescription("Please select the AST-Model you wish to convert.");
+		super("wizardPage", PAGE_TITLE, PAGE_DESCRIPTION);
 		this.selection = selection;
 		this.wizard = wizard;
 	}
@@ -98,88 +120,81 @@ public class ConfigurationPage extends WizardPage {
 	 * @see IDialogPage#createControl(Composite)
 	 */
 	public void createControl(Composite parent) {
-		/* init */
+		/* GUI initialization */
 		final Composite container = new Composite(parent, SWT.NULL);
 		GridLayout layout = new GridLayout();
 		container.setLayout(layout);
 		layout.numColumns = 3;
 		layout.verticalSpacing = 9;
-
-		/* AST select */
-		Label label = new Label(container, SWT.NULL);
-		label.setText("&AST-File:");
-		tx_sourceAstFileName = new Text(container, SWT.BORDER | SWT.SINGLE);
+		
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
-		tx_sourceAstFileName.setLayoutData(gd);
-		tx_sourceAstFileName.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				validateInput();
-			}
-		});
-		Button button = new Button(container, SWT.PUSH);
-		button.setText("Browse...");
-		button.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				handleASTFileSelection();
-				validateInput();
-			}
-		});
+		
+		/* GUI elements for selection fo input file */
+		Label label = new Label(container, SWT.NULL);
+		label.setText(LB_TX_INPUT_FILE);
+		
+		
+		tx_sourceAstFileName = createText(container, SWT.BORDER | SWT.SINGLE, createModifyListener(false), gd);
+		
+		createButton(container, SWT.PUSH, BT_TX_BROWSE, createSelectionAdapter(true, false));	
 
 		/* container select */
 		Label label1 = new Label(container, SWT.NULL);
-		label1.setText("&Container:");
+		label1.setText(LB_TX_CONTAINER);
 
-		tx_targetContainerName = new Text(container, SWT.BORDER | SWT.SINGLE);
-		tx_targetContainerName.setLayoutData(gd);
-		tx_targetContainerName.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				validateInput();
-			}
-		});
+		tx_targetContainerName = createText(container, SWT.BORDER | SWT.SINGLE, createModifyListener(false), gd);
 
-		Button button1 = new Button(container, SWT.PUSH);
-		button1.setText("Browse...");
-		button1.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				handleContainerSelection();
-				validateInput();
-			}
-		});
+		createButton(container, SWT.PUSH, BT_TX_BROWSE, createSelectionAdapter(false, true));	
 
-		/* new_file name */
+		/*GUI elements for the output file*/
 		label = new Label(container, SWT.NULL);
-		label.setText("&File name:");
-		tx_targetFileName = new Text(container, SWT.BORDER | SWT.SINGLE);
-		tx_targetFileName.setLayoutData(gd);
-		tx_targetFileName.setText("new_file.cfg");
-
-		tx_targetFileName.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				validateInput();
-			}
-		});
+		label.setText(LB_TX_NEW_FILENAME);
+		
+		tx_outputFileName = createText(container, SWT.BORDER | SWT.SINGLE, createModifyListener(false), gd);
+		tx_outputFileName.setText("new_file.cfg");
+		
 		new Label(container, SWT.NULL).setText("");
 
-		/* ordering select */
-		new Label(container, SWT.NULL).setText("Reordering:");
-		cb_modelSelection = new Combo(container, SWT.NULL);
-		String[] orderings = new String[] { "SC", "TSO", "PSO" };
-		for (int i = 0; i < orderings.length; i++)
-			cb_modelSelection.add(orderings[i]);
-		cb_modelSelection.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				modelSelection = cb_modelSelection.getSelectionIndex();
-				validateInput();
-			}
-		});
-
-		cb_modelSelection.select(0);
-		cb_modelSelection.setEnabled(true);
+		/*GUI elements for selection of semantics */
+		new Label(container, SWT.NULL).setText(LB_TX_REORDERING);
+		cb_semanticsSelection = new Combo(container, SWT.NULL);
+		for (int i = 0; i < SUPPORTED_SEMANTICS.length; i++){
+			cb_semanticsSelection.add(SUPPORTED_SEMANTICS[i]);
+		}
+		cb_semanticsSelection.addModifyListener(createModifyListener(true));
+		cb_semanticsSelection.select(0);
+		cb_semanticsSelection.setEnabled(true);
+		
 		setControl(container);
-
 		initializeMementoAndSelection();
 		validateInput();
 
+	}
+	
+	private ModifyListener createModifyListener(final boolean doModelSelection){
+		return new ModifyListener() {
+			public void modifyText(ModifyEvent e) {
+				if(doModelSelection){
+					selectedSemantics = cb_semanticsSelection.getSelectionIndex();
+				}
+				validateInput();
+			}
+		};
+	}
+	
+	private SelectionListener createSelectionAdapter(final boolean doHandleAstFile, final boolean doHandleContainer){
+		return new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				if(doHandleAstFile){
+					handleASTFileSelection();
+				}
+				if(doHandleContainer){
+					handleContainerSelection();
+				}
+				
+				validateInput();
+			}
+		};
 	}
 
 
@@ -193,7 +208,7 @@ public class ConfigurationPage extends WizardPage {
 			return;
 		} else
 		{
-			memento = loadMementoState();
+			memento = loadMementoState(MEMENTO__KEY, CFGActivator.getStateFile());
 			if (memento == null)
 			{
 				// nothing to initialize here
@@ -203,25 +218,25 @@ public class ConfigurationPage extends WizardPage {
 
 		if (memento.getString(ASTLOC) != null)
 		{
-			this.sourceAstFileName = memento.getString(ASTLOC);
-			tx_sourceAstFileName.setText(this.sourceAstFileName);
+			this.inputFilePath = memento.getString(ASTLOC);
+			tx_sourceAstFileName.setText(this.inputFilePath);
 		}
 
 		if (memento.getString(CONTAINER) != null)
 		{
-			this.targetContainerName = memento.getString(CONTAINER);
-			tx_targetContainerName.setText(targetContainerName);
+			this.outputFolderName = memento.getString(CONTAINER);
+			tx_targetContainerName.setText(outputFolderName);
 		}
 
 		if (memento.getString(NEW_FILE) != null)
 		{
-			this.targetFileName = memento.getString(NEW_FILE);
-			tx_targetFileName.setText(this.targetFileName);
+			this.outputFileName = memento.getString(NEW_FILE);
+			tx_outputFileName.setText(this.outputFileName);
 		}
 
 		if (memento.getString(MODEL_SELECTION) != null)
 		{
-			cb_modelSelection.select(memento.getInteger(MODEL_SELECTION));
+			cb_semanticsSelection.select(memento.getInteger(MODEL_SELECTION));
 		}
 
 		//if the user selected a file, we want to use that as standard input instead of the memento data
@@ -234,29 +249,29 @@ public class ConfigurationPage extends WizardPage {
 			if (obj instanceof IFile)
 			{
 				IFile file = (IFile) obj;
-				if (FILE_EXT.equals(file.getFileExtension()))
+				if (LLVM_FILE_EXTENSION.equals(file.getFileExtension()) || S_FILE_EXTENSION.equals(file.getFileExtension()))
 				{
 					IPath pathOfSelectedFile = file.getFullPath();
-					//set ast file according to selection
-					this.sourceAstFileName = pathOfSelectedFile.toPortableString();
-					tx_sourceAstFileName.setText(this.sourceAstFileName);
+					//set input file according to selection
+					this.inputFilePath = pathOfSelectedFile.toPortableString();
+					tx_sourceAstFileName.setText(this.inputFilePath);
 					
-					//set target container according to selection
-					this.targetContainerName = pathOfSelectedFile.removeLastSegments(1).toPortableString();
-					tx_targetContainerName.setText(this.targetContainerName);
+					//set output folder according to selection
+					this.outputFolderName = pathOfSelectedFile.removeLastSegments(1).toPortableString();
+					tx_targetContainerName.setText(this.outputFolderName);
 					
-					//set targetFileName according to selection
-					this.targetFileName = pathOfSelectedFile.lastSegment().split("\\.")[0]+".cfg";
-					tx_targetFileName.setText(this.targetFileName);
+					//set output file name according to selection
+					this.outputFileName = pathOfSelectedFile.lastSegment().split("\\.")[0]+ "." + CFG_FILE_EXTENSION;
+					tx_outputFileName.setText(this.outputFileName);
 				}
 			}
 		}
 	}
 
+	
 	/**
 	 * updates ast location text field
 	 */
-
 	private void handleASTFileSelection()
 	{
 		ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(getShell(), new WorkbenchLabelProvider(),
@@ -275,28 +290,17 @@ public class ConfigurationPage extends WizardPage {
 				if (element instanceof IFile)
 				{
 					IFile file = (IFile) element;
-					return FILE_EXT.equals(file.getFileExtension());
+					return LLVM_FILE_EXTENSION.equals(file.getFileExtension()) || S_FILE_EXTENSION.equals(file.getFileExtension());
 				}
 				return false;
 			}
 		});
-		dialog.setTitle("Tree Selection");
-		dialog.setMessage("Please select an AST:");
+		dialog.setTitle(DG_TX_TITLE);
+		dialog.setMessage(DG_TX_MESSAGE);
 		dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
 		dialog.setDoubleClickSelects(true);
-		// dialog.setSorter(new ResourceSorter(ResourceSorter.TYPE));
-		if (dialog.open() == Dialog.OK)
-		{
-			Object[] result = dialog.getResult();
-			if (result.length == 1)
-			{
-				String s = result[0].toString();
-				char c = s.charAt(0);
-				if (c == ('P') || c == ('L'))
-					s = s.substring(1);
-				this.tx_sourceAstFileName.setText(s);
-			}
-		}
+		
+		evaluateSelectionDialogResult(dialog, tx_sourceAstFileName);
 	}
 
 	/**
@@ -305,98 +309,81 @@ public class ConfigurationPage extends WizardPage {
 	private void handleContainerSelection()
 	{
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), root, false, "Please select new file location.");
-		if (dialog.open() == Dialog.OK)
-		{
-			Object[] result = dialog.getResult();
-			if (result.length == 1)
-			{
-				String s = result[0].toString();
-				char c = s.charAt(0);
-				if (c == ('P') || c == ('L'))
-					s = s.substring(1);
-				this.tx_targetContainerName.setText(s);
-			}
-		}
+		ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), root, false, DG_TX_SELECTION_MESSAGE);
+		evaluateSelectionDialogResult(dialog, tx_targetContainerName);
 	}
 
 	/**
-	 * Validates dialog input
+	 * Validates the dialog input.
 	 */
-
 	private void validateInput() {
-		this.sourceAstFileName = this.tx_sourceAstFileName.getText();
-		this.targetContainerName = this.tx_targetContainerName.getText();
-		this.targetFileName = this.tx_targetFileName.getText();
+		this.inputFilePath = this.tx_sourceAstFileName.getText();
+		this.outputFolderName = this.tx_targetContainerName.getText();
+		this.outputFileName = this.tx_outputFileName.getText();
 		setPageComplete(false);
 
-		if (!isAstFileExtOk())
+		if (!isInputFileExtensionValid())
 		{
-			updateStatus("Please, select an AST-File (*.llvm)");
+			updateErrorMessage(MSG_STATUS_WRONG_FILE_TYPE);
 			return;
 		}
 		
-		if (!isAstFileExisting())
+		if (!isFileAccessible(inputFilePath))
 		{
-			updateStatus("The specified path refers no exisiting AST-file.");
+			updateErrorMessage(MSG_STATUS_INPUT_FILE_NOT_EXISTING);
 			return;
 		}
-		
-		if (!isAstFileLoadable())
-		{
-			updateStatus("The selected AST-File can not be loaded.");
-			return;
+		if(inputFilePath.endsWith("." + LLVM_FILE_EXTENSION)){
+			if (AstLoader.loadAst(inputFilePath) == null)
+			{
+				updateErrorMessage(MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
+				return;
+			}
 		}
+		//.s extension
+		else{
+			if(AstLoader.createAstFromLLVM(inputFilePath) == null){
+				updateErrorMessage(MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
+				return;
+			}
+		}
+			
 
-		if (!isValidContainer(tx_targetContainerName.getText())) {
+		if (!isValidFolderPath(tx_targetContainerName.getText())) {
 			if(!tx_targetContainerName.getText().startsWith("/")){
-				updateStatus("The container has to start with '/'.");
+				updateErrorMessage(MSG_STATUS_INVALID_OUTPUT_CONTAINER_NAME);
 			}else{
-				updateStatus("No valid container is selected.");
+				updateErrorMessage(MSG_STATUS_INVALID_OUTPUT_CONTAINER);
 			}
 			return;
 		}
-		if (!isValidCFGName(tx_targetFileName.getText())) {
-			updateStatus("No valid filename.");
+		if (!isValidCFGName(tx_outputFileName.getText())) {
+			updateErrorMessage(MSG_STATUS_INVALID_OUTPUT_FILE_NAME);
 			return;
 		}
 		
 		//make sure we can go into the error view
-		setPageComplete(true);
-		setErrorMessage(null);
-		setDescription("Check your input and press next or finish!");
+		updateErrorMessage(null);
+		setDescription(MSG_STATUS_OK);
 		
 		//redo checks
 		wizard.restartChecks();
 		getControl().redraw();
 	}
 
-	private void updateStatus(String message) {
-		setErrorMessage(message);
-		setPageComplete(message == null);
-	}
+	
+	
 
-
-	public String getAstLocation() {
-		return sourceAstFileName;
-	}
-
-	private boolean isValidContainer(String container)
+	/**
+	 * Checks if the given cfg name is valid. 
+	 * 
+	 * @param cfgNameToCheck name to check
+	 * @return true if the given cfg name is valid, false if not
+	 */
+	private boolean isValidCFGName(String cfgNameToCheck)
 	{
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		IResource file = root.findMember(container);
-		if (file != null && file.isAccessible() && !file.equals(root) && container.startsWith("/"))
-		{
-			return true;
-		}
-		return false;
-	}
-
-	private boolean isValidCFGName(String string)
-	{
-
-		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		IPath path = root.getFullPath().append(string);
+		IPath path = root.getFullPath().append(cfgNameToCheck);
 		File file = path.toFile();
 		try
 		{
@@ -406,83 +393,68 @@ public class ConfigurationPage extends WizardPage {
 			return false;
 		}
 
-		if (string.contains(" "))
+		if (cfgNameToCheck.contains(" "))
 		{
 			return false;
 		}
-		if (string.endsWith(".cfg"))
+		if (cfgNameToCheck.endsWith("." + CFG_FILE_EXTENSION)){
 			return true;
+		}
 
 		return false;
 	}
 
-	private boolean isAstFileLoadable()
-	{
-		// check if ast-file can be loaded or if an exception occurs
-		try
-		{
-			ResourceSet resourceSet = new ResourceSetImpl();
-			Path astpath = new Path(this.sourceAstFileName);
-			URI uri = URI.createPlatformResourceURI(astpath.toOSString(), true);
-			Resource llvmResource = resourceSet.getResource(uri, true);
-			assert (llvmResource != null);
-		} catch (Exception e)
-		{
-			return false;
-		}
-		return true;
-	}
-
-	private boolean isAstFileExtOk()
-	{
-		return !(this.sourceAstFileName.length() == 0 || (this.sourceAstFileName.substring(this.sourceAstFileName.length() - 4).equalsIgnoreCase("llvm") == false));
-	}
-
-	private boolean isAstFileExisting()
-	{
-		IWorkspaceRoot r = ResourcesPlugin.getWorkspace().getRoot();
-		IResource file = r.findMember(this.sourceAstFileName);
-		return !(file == null || !file.isAccessible() || !this.sourceAstFileName.startsWith("/"));
-	}
-
-	public String getContainerName() {
-		return targetContainerName;
-	}
-
-	public String getFileName() {
-		return targetFileName;
-	}
-
 	/**
+	 * Checks whether the extension of the input file is valid. 
 	 * 
-	 * @return modelSelection 0 - SC 1 - TSO 2 - PSO
+	 * @return true if the input file name ends on a valid extension, false else
 	 */
-	public int getMemoryModelSelection() {
-
-		return modelSelection;
-	}
-
-	protected synchronized IMemento loadMementoState()
+	private boolean isInputFileExtensionValid()
 	{
-		try
-		{
-			BufferedReader reader = new BufferedReader(new FileReader(CFGActivator.getStateFile()));
-			XMLMemento data = XMLMemento.createReadRoot(reader);
-			return data.getChild(MEMENTO__KEY);
-		} catch (Exception e)
-		{
-			// hide it, as this is just for convenience and the previous data is not crucial for the dialog
+		if(!inputFilePath.isEmpty()){
+			if(inputFilePath.endsWith("." + LLVM_FILE_EXTENSION) || inputFilePath.endsWith("." + S_FILE_EXTENSION)){
+				return true;
+			}
 		}
-		return null;
+		
+		return false;
 	}
 	
 	protected synchronized void saveMementoState() {
 		XMLMemento memento = XMLMemento.createWriteRoot(MEMENTO__KEY);
 		IMemento child = memento.createChild(MEMENTO__KEY);
-		child.putString(ASTLOC, getAstLocation());
+		child.putString(ASTLOC, getInputFilePath());
 		child.putString(CONTAINER, getContainerName());
 		child.putString(NEW_FILE, getFileName());
-		child.putInteger(MODEL_SELECTION, getMemoryModelSelection());
+		child.putInteger(MODEL_SELECTION, getSelectedSemantics());
 		CFGActivator.saveMementoToFile(memento);
+	}
+	
+	/*=== Getter methods ===*/
+	
+	public String getContainerName() {
+		return outputFolderName;
+	}
+
+	public String getFileName() {
+		return outputFileName;
+	}
+	
+	/**
+	 * Returns the input file path.
+	 * @return input file path
+	 */
+	public String getInputFilePath() {
+		return inputFilePath;
+	}
+
+	/**
+	 * Returns the value of the selected semantics. 
+	 * 
+	 * @return selectedSemantics see semantics in {@link de.upb.lina.cfg.tools.CFGConstants}.
+	 */
+	public int getSelectedSemantics() {
+
+		return selectedSemantics;
 	}
 }

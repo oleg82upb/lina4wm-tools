@@ -31,7 +31,7 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	private ConfigurationPage configurationPage;
 	private WarningPage warningPage;
 	private ISelection selection;
-	private String astLocation;
+	private String inputFileLocation;
 
 	private boolean myCanFinish;
 	private boolean foundError;
@@ -101,8 +101,8 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	{
 
 		configurationPage.saveMementoState();
-		CreateGraphOperation cgo = new CreateGraphOperation(configurationPage.getAstLocation(),
-				(configurationPage.getContainerName() + "/" + configurationPage.getFileName()), configurationPage.getMemoryModelSelection(), this.getShell());
+		CreateGraphOperation cgo = new CreateGraphOperation(configurationPage.getInputFilePath(),
+				(configurationPage.getContainerName() + "/" + configurationPage.getFileName()), configurationPage.getSelectedSemantics(), this.getShell());
 
 		try
 		{
@@ -138,10 +138,19 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	}
 	
 	public void restartChecks(){
-		if (astLocation == null || !astLocation.equals(configurationPage.getAstLocation()))
+		if (inputFileLocation == null || !inputFileLocation.equals(configurationPage.getInputFilePath()))
 		{
-			astLocation = configurationPage.getAstLocation();
-			LLVM ast = AstLoader.loadAst(astLocation);
+			LLVM ast = null;
+			inputFileLocation = configurationPage.getInputFilePath();
+			
+			if(configurationPage.getInputFilePath().endsWith("." + ConfigurationPage.LLVM_FILE_EXTENSION)){
+				ast = AstLoader.loadAst(inputFileLocation);			
+			}
+			//.s extension
+			else{
+				ast = AstLoader.createAstFromLLVM(inputFileLocation);
+			}
+			
 			if(ast == null){
 				myCanFinish = false;
 			}else{

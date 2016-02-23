@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -177,30 +178,35 @@ public class FunctionSelectionPage extends WizardPage{
 	}
 
 	protected List<ControlFlowDiagram> loadCfg() {
-		String location= ((TransformationWizardPage)this.getPreviousPage()).getGraphModelFile().getText();
-		ControlflowPackage.eINSTANCE.getNsURI();
-		ResourceSet resourceSet = new ResourceSetImpl();
-		Path cfgpath = new Path(location);
-		URI uri = URI.createPlatformResourceURI(cfgpath.toOSString(), true);
-		Resource cfgResource = resourceSet.getResource(uri, true);
-		EcoreUtil.resolveAll(cfgResource);
-		List<EObject> graphList = cfgResource.getContents();
-		List<ControlFlowDiagram> graphList2  = new ArrayList<ControlFlowDiagram>();
-		for(EObject o: graphList){
-			if(o instanceof ControlFlowDiagram){
-				graphList2.add((ControlFlowDiagram)o);
+		try{
+			String location= ((TransformationWizardPage)this.getPreviousPage()).getGraphModelFile().getText();
+			ControlflowPackage.eINSTANCE.getNsURI();
+			ResourceSet resourceSet = new ResourceSetImpl();
+			Path cfgpath = new Path(location);
+			URI uri = URI.createPlatformResourceURI(cfgpath.toOSString(), true);
+			Resource cfgResource = resourceSet.getResource(uri, true);
+			EcoreUtil.resolveAll(cfgResource);
+			List<EObject> graphList = cfgResource.getContents();
+			List<ControlFlowDiagram> graphList2  = new ArrayList<ControlFlowDiagram>();
+			for(EObject o: graphList){
+				if(o instanceof ControlFlowDiagram){
+					graphList2.add((ControlFlowDiagram)o);
+				}
 			}
+			this.allCFGs = graphList2;
+			
+			//mapping from name to cfg
+			functionToCfg  = new HashMap<String, ControlFlowDiagram>();
+			for(ControlFlowDiagram cfg : allCFGs){
+				functionToCfg.put(cfg.getName(), cfg);
+			}
+			refreshTree();
+			computeDependencies();
+			return allCFGs;
+		}catch(WrappedException ex){
+			Activator.logError("Error while loading cfg file.", ex);
 		}
-		this.allCFGs = graphList2;
-		
-		//mapping from name to cfg
-		functionToCfg  = new HashMap<String, ControlFlowDiagram>();
-		for(ControlFlowDiagram cfg : allCFGs){
-			functionToCfg.put(cfg.getName(), cfg);
-		}
-		refreshTree();
-		computeDependencies();
-		return allCFGs;
+		return null;
 	}
 	
 	private void updateSelectedFunctions(TreeItem item) {
