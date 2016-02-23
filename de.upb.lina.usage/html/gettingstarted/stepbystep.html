@@ -23,7 +23,7 @@
 	TODO
 
 	<h2>2. From LLVM to AST</h2>
-	Once you obtained the llvm code in the form of a '.s' file, you right click the '.s' file and choose 'Save AST'. 
+	Once you obtained the LLVM code in the form of a '.s' file, you right click the '.s' file and choose 'Save AST'. 
 	</br>
 	<a href="img/01_saveAst.png">
 		<img src="img/01_saveAst.png" class="fixed-ratio-resize">
@@ -35,8 +35,8 @@
 		<img src="img/02_saveAst.png" class="fixed-ratio-resize">
 	</a>
 	</br>
-	By default the folder containing the llvm file is selected as a parent folder, whereas the default file name is the name of the '.s' file 
-	extended by '.llvm'. </br>
+	By default the folder containing the LLVM file is selected as a parent folder, whereas the default file name is the name of the '.s' file 
+	extended by '.LLVM'. </br>
 
 	In case the '.s' file contains any syntax errors, you will be notified and asked if you want to abort the AST generation.
 	</br>
@@ -45,7 +45,7 @@
 	</a>
 	</br>
 	<h2>3. From AST to CFG</h2>
-	After the '.llvm' AST file has been generated, it is time to generate a controlfow graph for a specific memory model. In order to do so, right click the '.llvm' file 
+	After the '.LLVM' AST file has been generated, it is time to generate a store buffer graph for a specific memory model. In order to do so, right click the '.LLVM' file 
 	and choose 'New->Other'.
 	</br>
 	<a href="img/04_newOther.png">
@@ -58,18 +58,18 @@
 		<img src="img/05_newCFG.png" class="fixed-ratio-resize">
 	</a>
 	</br>
-	After clicking 'Next' you will find yourself in the AST selection wizard page where you can choose the AST file you want to generate a controlflow graph for. You have provide
-	a path to a valid '.llvm' AST file and both a container and file name for the resulting controlflow graph file. Furthermore you have to choose a memory model as a reordering
+	After clicking 'Next' you will find yourself in the AST selection wizard page where you can choose the AST file you want to generate a store buffer graph for. You have provide
+	a path to a valid '.LLVM' AST file and both a container and file name for the resulting store buffer graph file. Furthermore you have to choose a memory model as a reordering
 	strategy. 
 	</br>
 	<a href="img/06_newCFG.png">
 		<img src="img/06_newCFG.png" class="fixed-ratio-resize">
 	</a>
 	</br>
-	Since you right clicked your 'llvm' file the correct AST file is already chosen and the container for the controlflow graph is chosen accordingly. As a default file name, the AST file 
+	Since you right clicked your 'LLVM' file the correct AST file is already chosen and the container for the store buffer graph is chosen accordingly. As a default file name, the AST file 
 	name is used with a '.cfg' extension. </br>
 
-	The AST file will be checked automatically for errors, unsupported LLVM code and other problems. If no problems are found, you can press 'Finish' and will find a generated control flow graph
+	The AST file will be checked automatically for errors, unsupported LLVM code and other problems. If no problems are found, you can press 'Finish' and will find a generated store buffer graph
 	file in the specified folder. If any error was found, you will not be able to click 'Finish', but you have to choose 'Next' and will find a list of the errors. In case only minor 
 	problems are found, you will receive a warning and can see the full list in the same wizard page. 
 
@@ -80,7 +80,7 @@
 		<img src="img/07_newSpec.png" class="fixed-ratio-resize">
 	</a>
 	</br>
-	Now you should see the CFG selection wizard page where you have to choose a control flow diagram file, a target container for the specification and a transformation type. Depending 
+	Now you should see the CFG selection wizard page where you have to choose a store buffer graph file, a target container for the specification and a transformation type. Depending 
 	on the transformation type, you might also have to choose a file name for the specification and a basis. 
 	</br>
 	<a href="img/08_newSpec.png">
