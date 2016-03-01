@@ -66,11 +66,11 @@ public class ConfigurationPage extends ExtendedWizardPage {
 	private static final String DG_TX_SELECTION_MESSAGE = "Please select the output file folder.";
 	
 	/*input file browse dialog*/
-	private static final String DG_TX_MESSAGE = "Please select an input file (." + CFGConstants.S_FILE_EXTENSION + " || ." + CFGConstants.LLVM_FILE_EXTENSION + ").";
+	private static final String DG_TX_MESSAGE = "Please select an input file (." + CFGConstants.S_FILE_EXTENSION + " or ." + CFGConstants.LLVM_FILE_EXTENSION + ").";
 	private static final String DG_TX_TITLE = "Inpute file selection";
 	
 	/*GUI label labels*/
-	private static final String LB_TX_INPUT_FILE = "&Input file: \n(." + CFGConstants.S_FILE_EXTENSION + " || ." + CFGConstants.LLVM_FILE_EXTENSION + ")";
+	private static final String LB_TX_INPUT_FILE = "&Input file: \n(." + CFGConstants.S_FILE_EXTENSION + " or ." + CFGConstants.LLVM_FILE_EXTENSION + ")";
 	private static final String LB_TX_REORDERING = "Semantics:";
 	private static final String LB_TX_NEW_FILENAME = "&Output filename:";
 	private static final String LB_TX_CONTAINER = "&Output folder:";
