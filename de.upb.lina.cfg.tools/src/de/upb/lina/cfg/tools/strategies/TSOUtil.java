@@ -137,7 +137,7 @@ public class TSOUtil implements IGraphGenerator {
 					+ " potentially returns with a non-empty store buffer.", null);
 		}
 
-		if (CFGConstants.DEBUG) {
+		if (CFGConstants.IN_DEBUG_MODE) {
 			System.out.println("#nodes: " + cfg.getLocations().size() + " ;#edges: " + cfg.getTransitions().size());
 		}
 		return cfg;

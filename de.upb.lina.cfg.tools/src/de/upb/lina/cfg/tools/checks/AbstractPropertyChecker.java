@@ -11,6 +11,8 @@ public abstract class AbstractPropertyChecker {
 	
 	private List<String> messages;
 	
+	private List<Integer> semanticsToPerformChecksFor;
+	
 	protected boolean isPropetyFulfilled;
 	protected int errorLevel;
 	
@@ -18,11 +20,15 @@ public abstract class AbstractPropertyChecker {
 	
 	public AbstractPropertyChecker(LLVM ast){
 		this.messages = new ArrayList<String>();
+		this.semanticsToPerformChecksFor = new ArrayList<Integer>();
+		
 		this.isPropetyFulfilled = false;
 		
 		this.ast = ast;
 		
+		
 		setErrorLevel();
+		setSemanticsToPerformChecksFor();
 
 	}
 	
@@ -75,4 +81,30 @@ public abstract class AbstractPropertyChecker {
 	public abstract boolean check();
 	
 	protected abstract void setErrorLevel();
+	
+	/**
+	 * Checks if this property checker should perform its checks for the given semantic. 
+	 * 
+	 * @param semantic semantic to check for
+	 * @return true, if this checker should perform checks for the given semantic, false if not
+	 */
+	public boolean shouldPerformChecksForSemantic(int semantic){
+		return semanticsToPerformChecksFor.contains(semantic);
+	}
+	
+	/**
+	 * Adds the given semantic to the list of semantics to perform checks for.
+	 * 
+	 * @param semanticToAdd semantic to add to the list of semantics to perform checks for
+	 */
+	protected void addSemanticToPerformChecksFor(int semanticToAdd){
+		semanticsToPerformChecksFor.add(semanticToAdd);
+	}
+	
+	/**
+	 * Each checker should call the {@link AbstractPropertyChecker#addSemanticToPerformChecksFor(int)} for
+	 * each of the semantics it should perform checks for in this method.
+	 */
+	protected abstract void setSemanticsToPerformChecksFor();
+	
 }

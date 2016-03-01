@@ -100,5 +100,12 @@ public class UnsupportedInstructionPropertyChecker extends AbstractPropertyCheck
 		errorLevel = CFGConstants.LEVEL_WARNING;
 		
 	}
+	
+	@Override
+	protected void setSemanticsToPerformChecksFor() {
+		addSemanticToPerformChecksFor(CFGConstants.SC);
+		addSemanticToPerformChecksFor(CFGConstants.TSO);
+		addSemanticToPerformChecksFor(CFGConstants.PSO);
+	}
 
 }

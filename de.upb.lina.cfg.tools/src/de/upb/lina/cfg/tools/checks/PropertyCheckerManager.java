@@ -20,7 +20,12 @@ public class PropertyCheckerManager {
 	private boolean foundError;
 	private boolean foundWarning;
 	
-	public PropertyCheckerManager(){
+	//this is the semantic we want to perform the checks on
+	private int semanticToPerformChecksFor;
+	
+	public PropertyCheckerManager(int semanticToPerformChecksFor){
+		this.semanticToPerformChecksFor = semanticToPerformChecksFor;
+		
 		errorMessages = new ArrayList<String>();
 		warningMessages = new ArrayList<String>();
 		checkerModules = new ArrayList<AbstractPropertyChecker>();
@@ -39,14 +44,16 @@ public class PropertyCheckerManager {
 		foundError = false;
 		foundWarning = false;
 		
-		for(AbstractPropertyChecker checker: checkerModules){
-			checker.check();
-			if(checker.getLevel() == CFGConstants.LEVEL_ERROR){
-				foundError = foundError || checker.isPropertyFulfilled();
-				this.errorMessages.addAll(checker.getMessages());
-			}else if(checker.getLevel() == CFGConstants.LEVEL_WARNING){
-				foundWarning = foundWarning || checker.isPropertyFulfilled();
-				this.warningMessages.addAll(checker.getMessages());
+		for(AbstractPropertyChecker propertyChecker: checkerModules){
+			if(propertyChecker.shouldPerformChecksForSemantic(semanticToPerformChecksFor)){
+				propertyChecker.check();
+				if(propertyChecker.getLevel() == CFGConstants.LEVEL_ERROR){
+					foundError = foundError || propertyChecker.isPropertyFulfilled();
+					this.errorMessages.addAll(propertyChecker.getMessages());
+				}else if(propertyChecker.getLevel() == CFGConstants.LEVEL_WARNING){
+					foundWarning = foundWarning || propertyChecker.isPropertyFulfilled();
+					this.warningMessages.addAll(propertyChecker.getMessages());
+				}
 			}
 		}
 	}

@@ -39,7 +39,7 @@ import de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl;
  * @author Alexander Hetzer
  *
  */
-public class LIWDCPropertyChecker extends AbstractPropertyChecker {
+public class LoadsInWriteDefChainPropertyChecker extends AbstractPropertyChecker {
 	
 	private List<FunctionDefinition> functionsWithLoadsInWriteDefChains;
 	private List<Transition> wdcAddress;
@@ -51,7 +51,7 @@ public class LIWDCPropertyChecker extends AbstractPropertyChecker {
 	 * @param ast
 	 * @param manager
 	 */
-	public LIWDCPropertyChecker(LLVM ast) {
+	public LoadsInWriteDefChainPropertyChecker(LLVM ast) {
 		super(ast);
 		
 		wdcAddress = new ArrayList<Transition>();
@@ -137,7 +137,7 @@ public class LIWDCPropertyChecker extends AbstractPropertyChecker {
 									new ArrayList<Transition>());
 							if (read != null) {
 								loadsFound.add(read);
-								if(CFGConstants.DEBUG)
+								if(CFGConstants.IN_DEBUG_MODE)
 								System.out.println(((Load) read.getInstruction()).getResult().getName()
 										+ " := LOAD "
 										+ (((AddressUse) ((Load) read.getInstruction()).getAddress().getValue()))
@@ -358,6 +358,12 @@ public class LIWDCPropertyChecker extends AbstractPropertyChecker {
 	protected void setErrorLevel() {
 		errorLevel = CFGConstants.LEVEL_WARNING;
 		
+	}
+	
+	@Override
+	protected void setSemanticsToPerformChecksFor() {
+		addSemanticToPerformChecksFor(CFGConstants.TSO);
+		addSemanticToPerformChecksFor(CFGConstants.PSO);
 	}
 
 	

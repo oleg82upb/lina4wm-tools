@@ -71,7 +71,7 @@ public abstract class AbstractGraphGenerator implements IGraphGenerator
 			this.processedLocations.add(sourceLocation);
 		}
 		
-		if (CFGConstants.DEBUG) {
+		if (CFGConstants.IN_DEBUG_MODE) {
 			System.out.println("#nodes: " + this.graph.getLocations().size() + " ;#edges: " + this.graph.getTransitions().size());
 		}
 

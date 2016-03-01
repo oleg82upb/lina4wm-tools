@@ -39,8 +39,8 @@ import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.tools.CFGActivator;
 import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.IGraphGenerator;
-import de.upb.lina.cfg.tools.checks.LIWDCPropertyChecker;
-import de.upb.lina.cfg.tools.checks.LWFPropertyChecker;
+import de.upb.lina.cfg.tools.checks.LoadsInWriteDefChainPropertyChecker;
+import de.upb.lina.cfg.tools.checks.WritingLoopWithoutFencePropertyChecker;
 import de.upb.lina.cfg.tools.checks.PropertyCheckerManager;
 import de.upb.lina.cfg.tools.checks.UnsupportedInstructionPropertyChecker;
 import de.upb.lina.cfg.tools.strategies.PSOGraphGenerator;
@@ -99,7 +99,7 @@ public class CreateAllHandler extends AbstractHandler
 	}
 
 	/**
-	 * Execution wrapper methon in order to let the transformation be run by a job instance.
+	 * Execution wrapper method in order to let the transformation be run by a job instance.
 	 * This is needed to get access to a progress monitor.
 	 * 
 	 * @param selection selected elements
@@ -135,22 +135,29 @@ public class CreateAllHandler extends AbstractHandler
 							}
 
 							// generate all cfgs and transformations
-							if (!doesUserAbortAsOfErrors(ast))
+							List<ControlFlowDiagram> cfgs = null;
+							if (!doesUserAbortAsOfErrors(ast, CFGConstants.SC))
 							{
-								List<ControlFlowDiagram> cfgs = null;
 								cfgs = createCFGFromAst(CFGConstants.SC, ast);
 								monitor.worked(1);
 								createTransformations(cfgs);
 								monitor.worked(1);
+							}
+							if (!doesUserAbortAsOfErrors(ast, CFGConstants.TSO))
+							{
 								cfgs = createCFGFromAst(CFGConstants.TSO, ast);
 								monitor.worked(1);
 								createTransformations(cfgs);
 								monitor.worked(1);
+							}
+							if (!doesUserAbortAsOfErrors(ast, CFGConstants.PSO))
+							{
 								cfgs = createCFGFromAst(CFGConstants.PSO, ast);
 								monitor.worked(1);
 								createTransformations(cfgs);
 								monitor.worked(1);
 							}
+							
 						}
 					}
 				}finally{
@@ -327,15 +334,16 @@ public class CreateAllHandler extends AbstractHandler
 	 * wants to continue or abort the transformation, if errors exist.
 	 * 
 	 * @param ast ast to check for errors and problems
+	 * @param semantic semantic to check on
 	 * @return true, if errors exist and use decided to abort transformation, false, if no errors exist or
 	 * user decided not to abort the transformation although errors exist
 	 */
-	private boolean doesUserAbortAsOfErrors(LLVM ast)
+	private boolean doesUserAbortAsOfErrors(LLVM ast, int semantic)
 	{
 		// Setup checker and register checkers
-		PropertyCheckerManager manager = new PropertyCheckerManager();
-		manager.registerPropertyChecker(new LIWDCPropertyChecker(ast));
-		manager.registerPropertyChecker(new LWFPropertyChecker(ast));
+		PropertyCheckerManager manager = new PropertyCheckerManager(semantic);
+		manager.registerPropertyChecker(new LoadsInWriteDefChainPropertyChecker(ast));
+		manager.registerPropertyChecker(new WritingLoopWithoutFencePropertyChecker(ast));
 		manager.registerPropertyChecker(new UnsupportedInstructionPropertyChecker(ast));
 
 		manager.performChecks();

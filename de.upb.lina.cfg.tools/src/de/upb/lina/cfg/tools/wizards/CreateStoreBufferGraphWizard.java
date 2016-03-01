@@ -14,8 +14,8 @@ import de.upb.lina.cfg.tools.CFGActivator;
 import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.CreateGraphOperation;
 import de.upb.lina.cfg.tools.ResourceIOUtil;
-import de.upb.lina.cfg.tools.checks.LIWDCPropertyChecker;
-import de.upb.lina.cfg.tools.checks.LWFPropertyChecker;
+import de.upb.lina.cfg.tools.checks.LoadsInWriteDefChainPropertyChecker;
+import de.upb.lina.cfg.tools.checks.WritingLoopWithoutFencePropertyChecker;
 import de.upb.lina.cfg.tools.checks.PropertyCheckerManager;
 import de.upb.lina.cfg.tools.checks.UnsupportedInstructionPropertyChecker;
 import de.upb.llvm_parser.llvm.LLVM;
@@ -71,9 +71,9 @@ public class CreateStoreBufferGraphWizard extends Wizard implements INewWizard {
 		foundWarning = false;
 		myCanFinish = true;
 
-		PropertyCheckerManager manager = new PropertyCheckerManager();	
-		manager.registerPropertyChecker(new LIWDCPropertyChecker(ast));
-		manager.registerPropertyChecker(new LWFPropertyChecker(ast));
+		PropertyCheckerManager manager = new PropertyCheckerManager(configurationPage.getSelectedSemantics());	
+		manager.registerPropertyChecker(new LoadsInWriteDefChainPropertyChecker(ast));
+		manager.registerPropertyChecker(new WritingLoopWithoutFencePropertyChecker(ast));
 		manager.registerPropertyChecker(new UnsupportedInstructionPropertyChecker(ast));
 
 		manager.performChecks();

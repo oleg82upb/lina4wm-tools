@@ -14,16 +14,16 @@ import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.impl.FunctionDefinitionImpl;
 
 /**
- * Checker for loops without fences. 
+ * Checker for writing loops without fences. 
  * 
  * @author Alexander Hetzer
  *
  */
-public class LWFPropertyChecker extends AbstractPropertyChecker {
+public class WritingLoopWithoutFencePropertyChecker extends AbstractPropertyChecker {
 	
 	private String result;
 
-	public LWFPropertyChecker(LLVM ast) {
+	public WritingLoopWithoutFencePropertyChecker(LLVM ast) {
 		super(ast);
 	}
 
@@ -32,7 +32,7 @@ public class LWFPropertyChecker extends AbstractPropertyChecker {
 		result = "";
 		isPropetyFulfilled = checkforLoopWithoutFence();
 		if(isPropetyFulfilled){
-			addMessage("The selected ast contains a loop without fence in function " + result + ".");
+			addMessage("The selected ast contains a writing loop without fence in function " + result + ".");
 		}
 		return isPropetyFulfilled;
 	}
@@ -53,24 +53,24 @@ public class LWFPropertyChecker extends AbstractPropertyChecker {
 				{
 					// create sc-graph and search for loops without fence
 					SCGraphGenerator sc = new SCGraphGenerator(func);
-					Transition storeInLoopWithoutFence = containsLoopWithoutFences(sc.createGraph());;
+					Transition storeInLoopWithoutFence = containsLoopWithoutFences(sc.createGraph());
 					loopWithoutFenceinfunc = storeInLoopWithoutFence != null;
 
 					if (loopWithoutFenceinfunc)
 					{
 						result = func.getAddress().getName();
-						if (CFGConstants.DEBUG)
+						if (CFGConstants.IN_DEBUG_MODE)
 						{
-							System.out.println("Loops without fence found in function " + func.getAddress().getName());
+							System.out.println("Writing loops without fence found in function " + func.getAddress().getName());
 						}
 					}
 				}
 			}
 			loopWithoutFence = loopWithoutFence | loopWithoutFenceinfunc;
 		}
-		if (CFGConstants.DEBUG)
+		if (CFGConstants.IN_DEBUG_MODE)
 		{
-			System.out.println("Loop without fence:" + loopWithoutFence);
+			System.out.println("Writing loop without fence:" + loopWithoutFence);
 		}
 		return loopWithoutFence;
 	}
@@ -128,6 +128,12 @@ public class LWFPropertyChecker extends AbstractPropertyChecker {
 	@Override
 	protected void setErrorLevel() {
 		errorLevel = CFGConstants.LEVEL_ERROR;
+	}
+
+	@Override
+	protected void setSemanticsToPerformChecksFor() {
+		addSemanticToPerformChecksFor(CFGConstants.TSO);
+		addSemanticToPerformChecksFor(CFGConstants.PSO);
 	}
 
 }

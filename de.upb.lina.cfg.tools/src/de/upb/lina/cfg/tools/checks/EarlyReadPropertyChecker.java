@@ -14,6 +14,7 @@ import de.upb.llvm_parser.llvm.LLVM;
 import de.upb.llvm_parser.llvm.Load;
 import de.upb.llvm_parser.llvm.Store;
 
+@Deprecated
 public class EarlyReadPropertyChecker extends AbstractPropertyChecker {
 
 	//TODO I guess we do not need this anymore?
@@ -63,7 +64,7 @@ public class EarlyReadPropertyChecker extends AbstractPropertyChecker {
 			for (Transition tr : t.getSource().getIncoming())
 				if (isEarlyRead(tr, explored, t))
 					return true;
-		} else if (CFGConstants.DEBUG) {
+		} else if (CFGConstants.IN_DEBUG_MODE) {
 			System.out.println("load.getAddress().getValue() of type " + load.getAddress().getValue().toString());
 		}
 		return false;
@@ -115,6 +116,12 @@ public class EarlyReadPropertyChecker extends AbstractPropertyChecker {
 	protected void setErrorLevel() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	protected void setSemanticsToPerformChecksFor() {
+		addSemanticToPerformChecksFor(CFGConstants.TSO);
+		addSemanticToPerformChecksFor(CFGConstants.PSO);
 	}
 
 }

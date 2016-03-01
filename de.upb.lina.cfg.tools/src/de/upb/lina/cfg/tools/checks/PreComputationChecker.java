@@ -109,7 +109,7 @@ public class PreComputationChecker {
 					// create sc-graph and search for loops without fence
 					SCGraphGenerator sc = new SCGraphGenerator(func);
 					loopWithoutFenceinfunc = containsLoopWithoutFences(sc.createGraph());
-					if (CFGConstants.DEBUG)
+					if (CFGConstants.IN_DEBUG_MODE)
 					{
 						if (loopWithoutFenceinfunc)
 						{
@@ -121,7 +121,7 @@ public class PreComputationChecker {
 			}
 			loopWithoutFence = loopWithoutFence | loopWithoutFenceinfunc;
 		}
-		if (CFGConstants.DEBUG)
+		if (CFGConstants.IN_DEBUG_MODE)
 		{
 			System.out.println("Loop without fence:" + loopWithoutFence);
 		}
@@ -200,7 +200,7 @@ public class PreComputationChecker {
 			for (Transition tr : t.getSource().getIncoming())
 				if (isEarlyRead(tr, explored, t))
 					return true;
-		} else if (CFGConstants.DEBUG) {
+		} else if (CFGConstants.IN_DEBUG_MODE) {
 			System.out.println("load.getAddress().getValue() of type " + load.getAddress().getValue().toString());
 		}
 		return false;
@@ -362,7 +362,7 @@ public class PreComputationChecker {
 									new ArrayList<Transition>());
 							if (read != null) {
 								loadsFound.add(read);
-								if(CFGConstants.DEBUG)
+								if(CFGConstants.IN_DEBUG_MODE)
 								System.out.println(((Load) read.getInstruction()).getResult().getName()
 										+ " := LOAD "
 										+ (((AddressUse) ((Load) read.getInstruction()).getAddress().getValue()))

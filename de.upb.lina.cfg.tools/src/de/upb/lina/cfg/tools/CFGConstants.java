@@ -3,7 +3,7 @@ package de.upb.lina.cfg.tools;
 public class CFGConstants {
 
 	
-	public static final boolean DEBUG = false;
+	public static final boolean IN_DEBUG_MODE = false;
 	//memory models
 	public static final int SC = 0;
 	public static final int TSO = 1;

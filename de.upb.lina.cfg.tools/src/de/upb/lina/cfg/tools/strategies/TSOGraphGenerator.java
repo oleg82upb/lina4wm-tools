@@ -19,7 +19,7 @@ import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.lina.cfg.controlflow.WriteDefChainTransition;
 import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.GraphUtility;
-import de.upb.lina.cfg.tools.checks.LIWDCPropertyChecker;
+import de.upb.lina.cfg.tools.checks.LoadsInWriteDefChainPropertyChecker;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
@@ -31,7 +31,7 @@ import de.upb.llvm_parser.llvm.Store;
 
 public class TSOGraphGenerator extends AbstractGraphGenerator
 {
-	private LIWDCPropertyChecker liwdcChecker = null;
+	private LoadsInWriteDefChainPropertyChecker liwdcChecker = null;
 	
 	//original address/value is key and is mapped to a new address/value
 	protected HashMap<Address, Address> wdcMapping = null;
@@ -52,7 +52,7 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 		SCGraphGenerator scGen = new SCGraphGenerator(function); 
 		ControlFlowDiagram scGraph = scGen.createGraph();
 		
-		this.liwdcChecker = new LIWDCPropertyChecker(null);
+		this.liwdcChecker = new LoadsInWriteDefChainPropertyChecker(null);
 		this.liwdcChecker.checkForWriteDefChains(scGraph, new ArrayList<Transition>());
 	}
 
