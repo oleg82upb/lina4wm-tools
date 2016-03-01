@@ -33,8 +33,8 @@ import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
+import de.upb.lina.cfg.tools.ResourceIOUtil;
 import de.upb.lina.cfg.tools.CFGActivator;
-import de.upb.lina.cfg.tools.checks.AstLoader;
 
 /**
  * The "New" wizard page allows setting the container for the new file as well
@@ -92,7 +92,7 @@ public class ConfigurationPage extends ExtendedWizardPage {
 	
 	//storage for GUI element input
 	private String outputFileName = "";
-	private String outputFolderName = "";
+	private String pathToOutputFolder = "";
 	private String inputFilePath = "";
 	private int selectedSemantics = 0;
 	
@@ -224,8 +224,8 @@ public class ConfigurationPage extends ExtendedWizardPage {
 
 		if (memento.getString(CONTAINER) != null)
 		{
-			this.outputFolderName = memento.getString(CONTAINER);
-			tx_targetContainerName.setText(outputFolderName);
+			this.pathToOutputFolder = memento.getString(CONTAINER);
+			tx_targetContainerName.setText(pathToOutputFolder);
 		}
 
 		if (memento.getString(NEW_FILE) != null)
@@ -257,8 +257,8 @@ public class ConfigurationPage extends ExtendedWizardPage {
 					tx_sourceAstFileName.setText(this.inputFilePath);
 					
 					//set output folder according to selection
-					this.outputFolderName = pathOfSelectedFile.removeLastSegments(1).toPortableString();
-					tx_targetContainerName.setText(this.outputFolderName);
+					this.pathToOutputFolder = pathOfSelectedFile.removeLastSegments(1).toPortableString();
+					tx_targetContainerName.setText(this.pathToOutputFolder);
 					
 					//set output file name according to selection
 					this.outputFileName = pathOfSelectedFile.lastSegment().split("\\.")[0]+ "." + CFG_FILE_EXTENSION;
@@ -318,7 +318,7 @@ public class ConfigurationPage extends ExtendedWizardPage {
 	 */
 	private void validateInput() {
 		this.inputFilePath = this.tx_sourceAstFileName.getText();
-		this.outputFolderName = this.tx_targetContainerName.getText();
+		this.pathToOutputFolder = this.tx_targetContainerName.getText();
 		this.outputFileName = this.tx_outputFileName.getText();
 		setPageComplete(false);
 
@@ -334,7 +334,7 @@ public class ConfigurationPage extends ExtendedWizardPage {
 			return;
 		}
 		if(inputFilePath.endsWith("." + LLVM_FILE_EXTENSION)){
-			if (AstLoader.loadAst(inputFilePath) == null)
+			if (ResourceIOUtil.loadAst(inputFilePath) == null)
 			{
 				updateErrorMessage(MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
 				return;
@@ -342,7 +342,7 @@ public class ConfigurationPage extends ExtendedWizardPage {
 		}
 		//.s extension
 		else{
-			if(AstLoader.createAstFromLLVM(inputFilePath) == null){
+			if(ResourceIOUtil.createAstFromLLVM(inputFilePath) == null){
 				updateErrorMessage(MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
 				return;
 			}
@@ -424,20 +424,24 @@ public class ConfigurationPage extends ExtendedWizardPage {
 		XMLMemento memento = XMLMemento.createWriteRoot(MEMENTO__KEY);
 		IMemento child = memento.createChild(MEMENTO__KEY);
 		child.putString(ASTLOC, getInputFilePath());
-		child.putString(CONTAINER, getContainerName());
-		child.putString(NEW_FILE, getFileName());
+		child.putString(CONTAINER, getPathToOutputFolder());
+		child.putString(NEW_FILE, getOutputFileName());
 		child.putInteger(MODEL_SELECTION, getSelectedSemantics());
 		CFGActivator.saveMementoToFile(memento);
 	}
 	
 	/*=== Getter methods ===*/
 	
-	public String getContainerName() {
-		return outputFolderName;
+	public String getPathToOutputFolder() {
+		return pathToOutputFolder;
 	}
 
-	public String getFileName() {
+	public String getOutputFileName() {
 		return outputFileName;
+	}
+	
+	public String getCompletePathToOutputFile(){
+		return getPathToOutputFolder() + File.separator + getOutputFileName();
 	}
 	
 	/**

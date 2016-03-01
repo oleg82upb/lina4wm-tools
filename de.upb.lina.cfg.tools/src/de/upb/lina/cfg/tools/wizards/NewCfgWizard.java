@@ -1,6 +1,7 @@
 package de.upb.lina.cfg.tools.wizards;
 
-import org.eclipse.jface.dialogs.MessageDialog;
+import java.io.File;
+
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -11,7 +12,7 @@ import org.eclipse.ui.IWorkbenchWizard;
 
 import de.upb.lina.cfg.tools.CFGActivator;
 import de.upb.lina.cfg.tools.CreateGraphOperation;
-import de.upb.lina.cfg.tools.checks.AstLoader;
+import de.upb.lina.cfg.tools.ResourceIOUtil;
 import de.upb.lina.cfg.tools.checks.LIWDCPropertyChecker;
 import de.upb.lina.cfg.tools.checks.LWFPropertyChecker;
 import de.upb.lina.cfg.tools.checks.PropertyCheckerManager;
@@ -99,28 +100,37 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 	 */
 	public boolean performFinish()
 	{
-
 		configurationPage.saveMementoState();
-		CreateGraphOperation cgo = new CreateGraphOperation(configurationPage.getInputFilePath(),
-				(configurationPage.getContainerName() + "/" + configurationPage.getFileName()), configurationPage.getSelectedSemantics(), this.getShell());
-
+		CreateGraphOperation cgo = null;
+		
+		if(inputFileLocation.endsWith("." + ConfigurationPage.S_FILE_EXTENSION)){
+			//we first need to transform the LLVM file into an AST file
+			LLVM astForInputLLVMFile = ResourceIOUtil.createAstFromLLVM(inputFileLocation);
+			
+			if(astForInputLLVMFile == null){
+				return false;
+			}
+			
+			//store the transformed ast file
+			String pathToOutputFileForAst = configurationPage.getPathToOutputFolder() + File.separator + configurationPage.getOutputFileName().replace("." + ConfigurationPage.CFG_FILE_EXTENSION, "." + ConfigurationPage.LLVM_FILE_EXTENSION);
+			ResourceIOUtil.saveResourceToDisk(pathToOutputFileForAst, ConfigurationPage.LLVM_FILE_EXTENSION, astForInputLLVMFile);
+			
+			//create graph operation accordingly
+			cgo = new CreateGraphOperation(pathToOutputFileForAst, 
+				configurationPage.getCompletePathToOutputFile(), configurationPage.getSelectedSemantics(), this.getShell());
+			
+		}else if(inputFileLocation.endsWith("." + ConfigurationPage.LLVM_FILE_EXTENSION)){
+			cgo = new CreateGraphOperation(configurationPage.getInputFilePath(),
+				configurationPage.getCompletePathToOutputFile() , configurationPage.getSelectedSemantics(), this.getShell());
+		}
+		
+		//execute the CreateGraphOperation
 		try
 		{
 			getContainer().run(true, false, cgo);
 		} catch (Exception e)
 		{
-			if (!cgo.finishedWithoutWarnings())
-			{
-				MessageDialog
-				.openWarning(
-						getShell(),
-						"Warning",
-						"The graph may contain loops without fences or flush transitions after return statement."
-								+ "\n Please check the error log for more details.");
-			} else
-			{
-				CFGActivator.logError(e.getMessage(), e);
-			}
+			CFGActivator.logError(e.getMessage(), e);
 		}
 
 		return true;
@@ -143,12 +153,12 @@ public class NewCfgWizard extends Wizard implements INewWizard {
 			LLVM ast = null;
 			inputFileLocation = configurationPage.getInputFilePath();
 			
-			if(configurationPage.getInputFilePath().endsWith("." + ConfigurationPage.LLVM_FILE_EXTENSION)){
-				ast = AstLoader.loadAst(inputFileLocation);			
+			if(inputFileLocation.endsWith("." + ConfigurationPage.LLVM_FILE_EXTENSION)){
+				ast = ResourceIOUtil.loadAst(inputFileLocation);			
 			}
 			//.s extension
 			else{
-				ast = AstLoader.createAstFromLLVM(inputFileLocation);
+				ast = ResourceIOUtil.createAstFromLLVM(inputFileLocation);
 			}
 			
 			if(ast == null){
