@@ -43,4 +43,10 @@ public class CFGConstants {
 	public static final String VEE = '\u02C5' + "";
 	public static final String WEDGE = '\u02C4' + "";
 	public static final String GETELEMENENTPTR = "getElementPtr";
+	public final static String LLVM_FILE_EXTENSION = "llvm";
+	public static final String CFG_FILE_EXTENSION = "cfg";
+	public static final String S_FILE_EXTENSION = "s";
+	
+	//file extensions
+	
 }

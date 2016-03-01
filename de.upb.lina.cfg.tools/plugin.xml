@@ -10,7 +10,7 @@
       </category>
       <wizard
             category="de.upb.lina.cfg.tools"
-            class="de.upb.lina.cfg.tools.wizards.NewCfgWizard"
+            class="de.upb.lina.cfg.tools.wizards.CreateStoreBufferGraphWizard"
             icon="icons/sample.gif"
             id="de.upb.lina.cfg.tools.wizards.NewCfgWizard"
             name="New Store Buffer Graph"

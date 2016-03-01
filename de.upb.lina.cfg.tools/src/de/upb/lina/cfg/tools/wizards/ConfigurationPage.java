@@ -33,6 +33,7 @@ import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
+import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.ResourceIOUtil;
 import de.upb.lina.cfg.tools.CFGActivator;
 
@@ -50,9 +51,6 @@ public class ConfigurationPage extends ExtendedWizardPage {
 	private final static String CONTAINER = "container";
 	private final static String NEW_FILE = "newFile";
 	private final static String MODEL_SELECTION = "modelSelection";
-	public final static String LLVM_FILE_EXTENSION = "llvm";
-	public static final String CFG_FILE_EXTENSION = "cfg";
-	public static final String S_FILE_EXTENSION = "s";
 	private static final String[] SUPPORTED_SEMANTICS = new String[] { "SC", "TSO", "PSO" };
 	
 	//Label Constants
@@ -62,17 +60,17 @@ public class ConfigurationPage extends ExtendedWizardPage {
 	private static final String MSG_STATUS_OK = "Check your input and press next or finish!";
 	private static final String MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED = "Unable to load the specified input file.";
 	private static final String MSG_STATUS_INPUT_FILE_NOT_EXISTING = "The specified input file does not exist.";
-	private static final String MSG_STATUS_WRONG_FILE_TYPE = "Invalid input file type. Please select a ." + LLVM_FILE_EXTENSION + " or ." + S_FILE_EXTENSION + " file.";
+	private static final String MSG_STATUS_WRONG_FILE_TYPE = "Invalid input file type. Please select a ." + CFGConstants.LLVM_FILE_EXTENSION + " or ." + CFGConstants.S_FILE_EXTENSION + " file.";
 	
 	/*output folder browse dialog*/
 	private static final String DG_TX_SELECTION_MESSAGE = "Please select the output file folder.";
 	
 	/*input file browse dialog*/
-	private static final String DG_TX_MESSAGE = "Please select an input file (." + S_FILE_EXTENSION + " || ." + LLVM_FILE_EXTENSION + ").";
+	private static final String DG_TX_MESSAGE = "Please select an input file (." + CFGConstants.S_FILE_EXTENSION + " || ." + CFGConstants.LLVM_FILE_EXTENSION + ").";
 	private static final String DG_TX_TITLE = "Inpute file selection";
 	
 	/*GUI label labels*/
-	private static final String LB_TX_INPUT_FILE = "&Input file: \n(." + S_FILE_EXTENSION + " || ." + LLVM_FILE_EXTENSION + ")";
+	private static final String LB_TX_INPUT_FILE = "&Input file: \n(." + CFGConstants.S_FILE_EXTENSION + " || ." + CFGConstants.LLVM_FILE_EXTENSION + ")";
 	private static final String LB_TX_REORDERING = "Semantics:";
 	private static final String LB_TX_NEW_FILENAME = "&Output filename:";
 	private static final String LB_TX_CONTAINER = "&Output folder:";
@@ -103,14 +101,14 @@ public class ConfigurationPage extends ExtendedWizardPage {
 	private IMemento memento;
 	
 	//wizard
-	private NewCfgWizard wizard;
+	private CreateStoreBufferGraphWizard wizard;
 
 	/**
 	 * Constructor for SampleNewWizardPage.
 	 * 
 	 * @param pageName
 	 */
-	public ConfigurationPage(ISelection selection, NewCfgWizard wizard) {
+	public ConfigurationPage(ISelection selection, CreateStoreBufferGraphWizard wizard) {
 		super("wizardPage", PAGE_TITLE, PAGE_DESCRIPTION);
 		this.selection = selection;
 		this.wizard = wizard;
@@ -206,14 +204,13 @@ public class ConfigurationPage extends ExtendedWizardPage {
 		if (memento != null)
 		{
 			return;
-		} else
+		}
+		
+		memento = loadMementoState(MEMENTO__KEY, CFGActivator.getStateFile());
+		if (memento == null)
 		{
-			memento = loadMementoState(MEMENTO__KEY, CFGActivator.getStateFile());
-			if (memento == null)
-			{
-				// nothing to initialize here
-				return;
-			}
+			// nothing to initialize here
+			return;
 		}
 
 		if (memento.getString(ASTLOC) != null)
@@ -249,7 +246,7 @@ public class ConfigurationPage extends ExtendedWizardPage {
 			if (obj instanceof IFile)
 			{
 				IFile file = (IFile) obj;
-				if (LLVM_FILE_EXTENSION.equals(file.getFileExtension()) || S_FILE_EXTENSION.equals(file.getFileExtension()))
+				if (CFGConstants.LLVM_FILE_EXTENSION.equals(file.getFileExtension()) || CFGConstants.S_FILE_EXTENSION.equals(file.getFileExtension()))
 				{
 					IPath pathOfSelectedFile = file.getFullPath();
 					//set input file according to selection
@@ -261,7 +258,7 @@ public class ConfigurationPage extends ExtendedWizardPage {
 					tx_targetContainerName.setText(this.pathToOutputFolder);
 					
 					//set output file name according to selection
-					this.outputFileName = pathOfSelectedFile.lastSegment().split("\\.")[0]+ "." + CFG_FILE_EXTENSION;
+					this.outputFileName = pathOfSelectedFile.lastSegment().split("\\.")[0]+ "." + CFGConstants.CFG_FILE_EXTENSION;
 					tx_outputFileName.setText(this.outputFileName);
 				}
 			}
@@ -290,7 +287,7 @@ public class ConfigurationPage extends ExtendedWizardPage {
 				if (element instanceof IFile)
 				{
 					IFile file = (IFile) element;
-					return LLVM_FILE_EXTENSION.equals(file.getFileExtension()) || S_FILE_EXTENSION.equals(file.getFileExtension());
+					return CFGConstants.LLVM_FILE_EXTENSION.equals(file.getFileExtension()) || CFGConstants.S_FILE_EXTENSION.equals(file.getFileExtension());
 				}
 				return false;
 			}
@@ -333,7 +330,7 @@ public class ConfigurationPage extends ExtendedWizardPage {
 			updateErrorMessage(MSG_STATUS_INPUT_FILE_NOT_EXISTING);
 			return;
 		}
-		if(inputFilePath.endsWith("." + LLVM_FILE_EXTENSION)){
+		if(inputFilePath.endsWith("." + CFGConstants.LLVM_FILE_EXTENSION)){
 			if (ResourceIOUtil.loadAst(inputFilePath) == null)
 			{
 				updateErrorMessage(MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
@@ -397,7 +394,7 @@ public class ConfigurationPage extends ExtendedWizardPage {
 		{
 			return false;
 		}
-		if (cfgNameToCheck.endsWith("." + CFG_FILE_EXTENSION)){
+		if (cfgNameToCheck.endsWith("." + CFGConstants.CFG_FILE_EXTENSION)){
 			return true;
 		}
 
@@ -412,7 +409,7 @@ public class ConfigurationPage extends ExtendedWizardPage {
 	private boolean isInputFileExtensionValid()
 	{
 		if(!inputFilePath.isEmpty()){
-			if(inputFilePath.endsWith("." + LLVM_FILE_EXTENSION) || inputFilePath.endsWith("." + S_FILE_EXTENSION)){
+			if(inputFilePath.endsWith("." + CFGConstants.LLVM_FILE_EXTENSION) || inputFilePath.endsWith("." + CFGConstants.S_FILE_EXTENSION)){
 				return true;
 			}
 		}

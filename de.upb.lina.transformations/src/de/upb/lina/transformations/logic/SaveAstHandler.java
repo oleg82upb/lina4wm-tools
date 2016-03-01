@@ -17,8 +17,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.SaveAsDialog;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.ResourceIOUtil;
-import de.upb.lina.cfg.tools.wizards.ConfigurationPage;
 import de.upb.lina.transformations.Activator;
 import de.upb.llvm_parser.llvm.LLVM;
 
@@ -71,14 +71,14 @@ public class SaveAstHandler extends AbstractHandler {
 					
 					//if user did not cancel the dialog
 					if(pathToOutputFileAst != null){
-						ResourceIOUtil.saveResourceToDisk(pathToOutputFileAst.toString(), ConfigurationPage.LLVM_FILE_EXTENSION, astParsedFromInputFile);
+						ResourceIOUtil.saveResourceToDisk(pathToOutputFileAst.toString(), CFGConstants.LLVM_FILE_EXTENSION, astParsedFromInputFile);
 					}
 				}else{
 					Activator.logError("One or more of the selected elements is not an instance of IFile.", null);
 				}
 			}
 		}else{
-			MessageDialog.openError(shell, "Wrong Selection", "Please select a file with" + ConfigurationPage.S_FILE_EXTENSION + "extension");
+			MessageDialog.openError(shell, "Wrong Selection", "Please select a file with" + CFGConstants.S_FILE_EXTENSION + "extension");
 		}
 		return null;
 	}
@@ -95,7 +95,7 @@ public class SaveAstHandler extends AbstractHandler {
 		//try to get a handle to the default output ast file
 		IPath defaultPathToOutputAstFile = new Path(selectedFile.getLocation().toPortableString());
 		defaultPathToOutputAstFile = defaultPathToOutputAstFile.removeFileExtension();
-		defaultPathToOutputAstFile = defaultPathToOutputAstFile.addFileExtension(ConfigurationPage.LLVM_FILE_EXTENSION);
+		defaultPathToOutputAstFile = defaultPathToOutputAstFile.addFileExtension(CFGConstants.LLVM_FILE_EXTENSION);
 		IWorkspace workspace= ResourcesPlugin.getWorkspace(); 
 		IFile oldAstFile= workspace.getRoot().getFileForLocation(defaultPathToOutputAstFile);
 		
@@ -105,7 +105,7 @@ public class SaveAstHandler extends AbstractHandler {
 		}
 		//if not, we set the file name directly
 		else{
-			String defaultNameOfOutputFile = selectedFile.getName().replaceAll("." + ConfigurationPage.S_FILE_EXTENSION, "." + ConfigurationPage.LLVM_FILE_EXTENSION);
+			String defaultNameOfOutputFile = selectedFile.getName().replaceAll("." + CFGConstants.S_FILE_EXTENSION, "." + CFGConstants.LLVM_FILE_EXTENSION);
 			saveAsDialog.setOriginalName(defaultNameOfOutputFile);
 		}
 	}
