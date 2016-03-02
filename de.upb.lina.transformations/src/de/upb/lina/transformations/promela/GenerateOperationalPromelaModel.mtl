@@ -26,6 +26,7 @@ ret: skip;
 [template public generateFunction(f : FunctionDefinition, genData:  GeneratorData)]
 [let b:  FunctionBody = f._body]
 [if (not( b.oclIsUndefined()))]
+skip;
 [for (block : BasicBlock | b.blocks)]
 [generateBlock(block, genData)/]
 [/for]
@@ -42,11 +43,14 @@ ret: skip;
 
 [template public genStartOfFile(c: OclAny)]
 #define MEM_SIZE 10	//size of memory
+#define BUFF_SIZE 3 	//size of Buffer 
 #define null 0
 #define I32  0 		// = {0};
 #define PTR 0
 
-#include "../x86_tso_buffer.pml"
+//#include "sc.pml"
+#include "tso.pml"
+//#include "pso.pml"
 
 chan channelT1 = ['['/]0[']'/] of {mtype, short, short, short};
 chan channelT2 = ['['/]0[']'/] of {mtype, short, short, short};
@@ -67,8 +71,8 @@ proctype process2(){
 init{
 atomic{
 	//TODO: initialize global variables or allocate space here, if necessary
-	run bufferProcess(channelT1);
-	run bufferProcess(channelT2);
+	run bufferProcess(channelT1); //obsolete for SC, remove line when SC is chosen
+	run bufferProcess(channelT2); //obsolete for SC, remove line when SC is chosen
 	run process1(channelT1);
 	run process2(channelT2);
 	}
