@@ -170,6 +170,7 @@ fi;
 [template public genPhi (e: Branch, dest: String, genData: GeneratorData)]
 [for (mapping: PhiMapping | genData.phiMappings)]
 	[if (mapping.blockLabelToUse.equalsIgnoreCase(e.eContainer().oclAsType(BasicBlock).label) 
+	and (mapping.transition.instruction = e)
 	and (mapping.phi->select(p | p.eContainer().oclAsType(BasicBlock).label.equalsIgnoreCase(dest.replaceAll('%', ''))))->notEmpty())]
 	[genPhiCases(mapping, genData)/]
 	[/if]
@@ -178,6 +179,10 @@ fi;
 
 [template public genPhiCases (m: PhiMapping, genData: GeneratorData)]
 [for (phi: Phi | m.phi)][phi.result.addressToString(genData)/] = [for(case: PhiCase | phi.cases)][if(case.label.replaceAll('%', '').equalsIgnoreCase(m.blockLabelToUse))][case.value.valueToString(genData)/][/if][/for];[/for]
+[/template]
+
+[template public genInstruction(e : Phi, genData: GeneratorData)]
+// phi instruction replaced by assignments before  the goto to this block 
 [/template]
 
 [template public genInstruction(e : Return, genData: GeneratorData)]
