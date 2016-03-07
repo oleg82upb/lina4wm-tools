@@ -169,7 +169,8 @@ public class PSOGraphGenerator extends TSOGraphGenerator
 		//there should be only on, so we actually don't care if it's the latest or not
 		AddressValuePair pair = getLatestBufferEntry(source, load);
 		//last value
-		Parameter value = pair.getValues().listIterator().previous();
+		int lastIndex = pair.getValues().size();
+		Parameter value = pair.getValues().get(lastIndex-1);
 		String valueInBuffer = GraphUtility.valueToString(value.getValue());
 		transition.setAssignmentExpression(valueInBuffer);
 		transition.setInstruction(load);

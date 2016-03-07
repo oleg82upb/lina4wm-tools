@@ -59,11 +59,11 @@ chan channelT2 = ['['/]0[']'/] of {mtype, short, short, short};
 [template public genProcessTemplates(c: OclAny)]
 
 //Stubs
-proctype process1(){
+proctype process1(chan ch){
 	//TODO: empty stub
 }
 
-proctype process2(){
+proctype process2(chan ch){
 	//TODO: empty stub
 }
 
