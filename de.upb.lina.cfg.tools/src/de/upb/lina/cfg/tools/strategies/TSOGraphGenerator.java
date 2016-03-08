@@ -28,6 +28,7 @@ import de.upb.llvm_parser.llvm.LlvmFactory;
 import de.upb.llvm_parser.llvm.Load;
 import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.Store;
+import de.upb.llvm_parser.llvm.Value;
 
 public class TSOGraphGenerator extends AbstractGraphGenerator
 {
@@ -287,12 +288,23 @@ public class TSOGraphGenerator extends AbstractGraphGenerator
 		while(i.hasNext())
 		{
 			AddressValuePair pair = i.next();
-			if(((AddressUse)pair.getAddress().getValue()).getAddress().getName().equals(((AddressUse)adrParam.getValue()).getAddress().getName()))
+			AddressUse pairValue = (AddressUse) pair.getAddress().getValue();
+			Value adrParamValue = adrParam.getValue();
+			if(adrParamValue instanceof AddressUse)
 			{
-				//store buffer contains entry for address
-				//it must be an early read
-				return true;
+				if(pairValue.getAddress().getName().equals(((AddressUse)adrParamValue).getAddress().getName()))
+				{
+					//store buffer contains entry for address
+					//it must be an early read
+					return true;
+				}
 			}
+			else 
+			{
+				//nested cast or nested getelementptr
+				//we should not have those in our symbolic buffer
+			}
+			
 		}
 		return false;
 	}
