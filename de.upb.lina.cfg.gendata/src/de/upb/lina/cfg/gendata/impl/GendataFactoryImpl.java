@@ -30,13 +30,16 @@ public class GendataFactoryImpl extends EFactoryImpl implements GendataFactory
 	 */
 	public static GendataFactory init()
 	{
-		try {
+		try
+		{
 			GendataFactory theGendataFactory = (GendataFactory)EPackage.Registry.INSTANCE.getEFactory(GendataPackage.eNS_URI);
-			if (theGendataFactory != null) {
+			if (theGendataFactory != null)
+			{
 				return theGendataFactory;
 			}
 		}
-		catch (Exception exception) {
+		catch (Exception exception)
+		{
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new GendataFactoryImpl();
@@ -61,7 +64,8 @@ public class GendataFactoryImpl extends EFactoryImpl implements GendataFactory
 	@Override
 	public EObject create(EClass eClass)
 	{
-		switch (eClass.getClassifierID()) {
+		switch (eClass.getClassifierID())
+		{
 			case GendataPackage.GENERATOR_DATA: return createGeneratorData();
 			case GendataPackage.ADDRESS_MAPPING: return createAddressMapping();
 			case GendataPackage.CONSTRAINT_MAPPING: return createConstraintMapping();

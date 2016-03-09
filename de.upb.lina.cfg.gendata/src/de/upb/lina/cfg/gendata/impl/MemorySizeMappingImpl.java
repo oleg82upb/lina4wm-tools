@@ -50,7 +50,7 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int OFFSET_EDEFAULT = 0;
+	protected static final String OFFSET_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getOffset() <em>Offset</em>}' attribute.
@@ -60,7 +60,7 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 * @ordered
 	 */
-	protected int offset = OFFSET_EDEFAULT;
+	protected String offset = OFFSET_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getCompleteTypeSize() <em>Complete Type Size</em>}' attribute.
@@ -127,10 +127,12 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	public EObject getInstruction() {
-		if (instruction != null && instruction.eIsProxy()) {
+		if (instruction != null && instruction.eIsProxy())
+		{
 			InternalEObject oldInstruction = (InternalEObject)instruction;
 			instruction = eResolveProxy(oldInstruction);
-			if (instruction != oldInstruction) {
+			if (instruction != oldInstruction)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION, oldInstruction, instruction));
 			}
@@ -164,7 +166,7 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getOffset() {
+	public String getOffset() {
 		return offset;
 	}
 
@@ -173,8 +175,9 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOffset(int newOffset) {
-		int oldOffset = offset;
+	public void setOffset(String newOffset)
+	{
+		String oldOffset = offset;
 		offset = newOffset;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__OFFSET, oldOffset, offset));
@@ -206,7 +209,8 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	public void setGeneratorData(GeneratorData newGeneratorData) {
-		if (newGeneratorData != eInternalContainer() || (eContainerFeatureID() != GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA && newGeneratorData != null)) {
+		if (newGeneratorData != eInternalContainer() || (eContainerFeatureID() != GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA && newGeneratorData != null))
+		{
 			if (EcoreUtil.isAncestor(this, newGeneratorData))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -270,7 +274,8 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -286,7 +291,8 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				return basicSetGeneratorData(null, msgs);
 		}
@@ -300,7 +306,8 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
+		switch (eContainerFeatureID())
+		{
 			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				return eInternalContainer().eInverseRemove(this, GendataPackage.GENERATOR_DATA__MEMORY_SIZE_MAPPINGS, GeneratorData.class, msgs);
 		}
@@ -314,7 +321,8 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
 				if (resolve) return getInstruction();
 				return basicGetInstruction();
@@ -338,12 +346,13 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
 				setInstruction((EObject)newValue);
 				return;
 			case GendataPackage.MEMORY_SIZE_MAPPING__OFFSET:
-				setOffset((Integer)newValue);
+				setOffset((String)newValue);
 				return;
 			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				setGeneratorData((GeneratorData)newValue);
@@ -365,7 +374,8 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
 				setInstruction((EObject)null);
 				return;
@@ -392,11 +402,12 @@ public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implemen
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
 				return instruction != null;
 			case GendataPackage.MEMORY_SIZE_MAPPING__OFFSET:
-				return offset != OFFSET_EDEFAULT;
+				return OFFSET_EDEFAULT == null ? offset != null : !OFFSET_EDEFAULT.equals(offset);
 			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
 				return getGeneratorData() != null;
 			case GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE:

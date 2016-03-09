@@ -59,7 +59,8 @@ public class InputTypeListImpl extends MinimalEObjectImpl.Container implements I
 	 * @generated
 	 */
 	public EList<String> getInputType() {
-		if (inputType == null) {
+		if (inputType == null)
+		{
 			inputType = new EDataTypeEList<String>(String.class, this, GendataPackage.INPUT_TYPE_LIST__INPUT_TYPE);
 		}
 		return inputType;
@@ -72,7 +73,8 @@ public class InputTypeListImpl extends MinimalEObjectImpl.Container implements I
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.INPUT_TYPE_LIST__INPUT_TYPE:
 				return getInputType();
 		}
@@ -87,7 +89,8 @@ public class InputTypeListImpl extends MinimalEObjectImpl.Container implements I
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.INPUT_TYPE_LIST__INPUT_TYPE:
 				getInputType().clear();
 				getInputType().addAll((Collection<? extends String>)newValue);
@@ -103,7 +106,8 @@ public class InputTypeListImpl extends MinimalEObjectImpl.Container implements I
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.INPUT_TYPE_LIST__INPUT_TYPE:
 				getInputType().clear();
 				return;
@@ -118,7 +122,8 @@ public class InputTypeListImpl extends MinimalEObjectImpl.Container implements I
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.INPUT_TYPE_LIST__INPUT_TYPE:
 				return inputType != null && !inputType.isEmpty();
 		}

@@ -39,7 +39,8 @@ public class GendataAdapterFactory extends AdapterFactoryImpl
 	 */
 	public GendataAdapterFactory()
 	{
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = GendataPackage.eINSTANCE;
 		}
 	}
@@ -55,10 +56,12 @@ public class GendataAdapterFactory extends AdapterFactoryImpl
 	@Override
 	public boolean isFactoryForType(Object object)
 	{
-		if (object == modelPackage) {
+		if (object == modelPackage)
+		{
 			return true;
 		}
-		if (object instanceof EObject) {
+		if (object instanceof EObject)
+		{
 			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -71,53 +74,66 @@ public class GendataAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	protected GendataSwitch<Adapter> modelSwitch =
-		new GendataSwitch<Adapter>() {
+		new GendataSwitch<Adapter>()
+		{
 			@Override
-			public Adapter caseGeneratorData(GeneratorData object) {
+			public Adapter caseGeneratorData(GeneratorData object)
+			{
 				return createGeneratorDataAdapter();
 			}
 			@Override
-			public Adapter caseAddressMapping(AddressMapping object) {
+			public Adapter caseAddressMapping(AddressMapping object)
+			{
 				return createAddressMappingAdapter();
 			}
 			@Override
-			public Adapter caseConstraintMapping(ConstraintMapping object) {
+			public Adapter caseConstraintMapping(ConstraintMapping object)
+			{
 				return createConstraintMappingAdapter();
 			}
 			@Override
-			public Adapter caseNamedElement(NamedElement object) {
+			public Adapter caseNamedElement(NamedElement object)
+			{
 				return createNamedElementAdapter();
 			}
 			@Override
-			public Adapter caseLocationLabel(LocationLabel object) {
+			public Adapter caseLocationLabel(LocationLabel object)
+			{
 				return createLocationLabelAdapter();
 			}
 			@Override
-			public Adapter caseTransitionLabel(TransitionLabel object) {
+			public Adapter caseTransitionLabel(TransitionLabel object)
+			{
 				return createTransitionLabelAdapter();
 			}
 			@Override
-			public Adapter casePhiMapping(PhiMapping object) {
+			public Adapter casePhiMapping(PhiMapping object)
+			{
 				return createPhiMappingAdapter();
 			}
 			@Override
-			public Adapter caseFilterToAddressMapping(Map.Entry<String, EList<AddressMapping>> object) {
+			public Adapter caseFilterToAddressMapping(Map.Entry<String, EList<AddressMapping>> object)
+			{
 				return createFilterToAddressMappingAdapter();
 			}
 			@Override
-			public Adapter caseMemorySizeMapping(MemorySizeMapping object) {
+			public Adapter caseMemorySizeMapping(MemorySizeMapping object)
+			{
 				return createMemorySizeMappingAdapter();
 			}
 			@Override
-			public Adapter caseInputTypeList(InputTypeList object) {
+			public Adapter caseInputTypeList(InputTypeList object)
+			{
 				return createInputTypeListAdapter();
 			}
 			@Override
-			public Adapter caseOldToNewCfgNameMapping(Map.Entry<String, String> object) {
+			public Adapter caseOldToNewCfgNameMapping(Map.Entry<String, String> object)
+			{
 				return createOldToNewCfgNameMappingAdapter();
 			}
 			@Override
-			public Adapter defaultCase(EObject object) {
+			public Adapter defaultCase(EObject object)
+			{
 				return createEObjectAdapter();
 			}
 		};

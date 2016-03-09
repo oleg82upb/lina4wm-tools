@@ -138,7 +138,8 @@ public class OldToNewCfgNameMappingImpl extends MinimalEObjectImpl.Container imp
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.OLD_TO_NEW_CFG_NAME_MAPPING__KEY:
 				return getTypedKey();
 			case GendataPackage.OLD_TO_NEW_CFG_NAME_MAPPING__VALUE:
@@ -154,7 +155,8 @@ public class OldToNewCfgNameMappingImpl extends MinimalEObjectImpl.Container imp
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.OLD_TO_NEW_CFG_NAME_MAPPING__KEY:
 				setTypedKey((String)newValue);
 				return;
@@ -172,7 +174,8 @@ public class OldToNewCfgNameMappingImpl extends MinimalEObjectImpl.Container imp
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.OLD_TO_NEW_CFG_NAME_MAPPING__KEY:
 				setTypedKey(KEY_EDEFAULT);
 				return;
@@ -190,7 +193,8 @@ public class OldToNewCfgNameMappingImpl extends MinimalEObjectImpl.Container imp
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case GendataPackage.OLD_TO_NEW_CFG_NAME_MAPPING__KEY:
 				return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
 			case GendataPackage.OLD_TO_NEW_CFG_NAME_MAPPING__VALUE:
@@ -230,7 +234,8 @@ public class OldToNewCfgNameMappingImpl extends MinimalEObjectImpl.Container imp
 	 * @generated
 	 */
 	public int getHash() {
-		if (hash == -1) {
+		if (hash == -1)
+		{
 			Object theKey = getKey();
 			hash = (theKey == null ? 0 : theKey.hashCode());
 		}

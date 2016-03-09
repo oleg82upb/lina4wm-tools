@@ -3,6 +3,7 @@
 package de.upb.lina.cfg.controlflow;
 
 import de.upb.llvm_parser.llvm.Address;
+import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.Parameter;
 import org.eclipse.emf.common.util.EList;
 
@@ -23,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getVariableCopies <em>Variable Copies</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getVariableCopyParams <em>Variable Copy Params</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getMemoryModel <em>Memory Model</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getFunctionDefinition <em>Function Definition</em>}</li>
  * </ul>
  * </p>
  *
@@ -176,5 +178,31 @@ public interface ControlFlowDiagram extends EObject {
 	 * @generated
 	 */
 	void setMemoryModel(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Function Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Function Definition</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Function Definition</em>' reference.
+	 * @see #setFunctionDefinition(FunctionDefinition)
+	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getControlFlowDiagram_FunctionDefinition()
+	 * @model
+	 * @generated
+	 */
+	FunctionDefinition getFunctionDefinition();
+
+	/**
+	 * Sets the value of the '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getFunctionDefinition <em>Function Definition</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Function Definition</em>' reference.
+	 * @see #getFunctionDefinition()
+	 * @generated
+	 */
+	void setFunctionDefinition(FunctionDefinition value);
 
 } // ControlFlowDiagram

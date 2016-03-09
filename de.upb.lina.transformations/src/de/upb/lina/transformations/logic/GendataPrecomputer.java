@@ -2,11 +2,13 @@ package de.upb.lina.transformations.logic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
 import de.upb.lina.cfg.controlflow.AddressValuePair;
@@ -854,14 +856,21 @@ public class GendataPrecomputer {
 					{
 						GetElementPtr op = (GetElementPtr) i;
 						setSize(op);
-					}
-					else if(i instanceof NestedGetElementPtr){
-						NestedGetElementPtr op = (NestedGetElementPtr)i;
-						setSize(op);
+					} 
+				}
+			}
+			
+			TreeIterator<EObject> iter = cfg.getFunctionDefinition().eAllContents();
+			while(iter.hasNext())
+			{
+				EObject i = iter.next();
+				if (i instanceof NestedGetElementPtr)
+				{
+					NestedGetElementPtr op = (NestedGetElementPtr) i;
+					setSize(op);
 				}
 			}
 		}
-	}
 	}
 
 	/**
@@ -1485,7 +1494,7 @@ public class GendataPrecomputer {
 		return null;
 	}
 
-	private int getGetElementPtrValue(EObject object, MemorySizeMapping mapping)
+	private String getGetElementPtrValue(EObject object, MemorySizeMapping mapping)
 	{
 		EList<Parameter> indices;
 		EObject aggregateType;
@@ -1529,7 +1538,7 @@ public class GendataPrecomputer {
 						{
 							IntegerConstant intConstant = (IntegerConstant) firstIndex.getValue();
 							int firstIndexValue = intConstant.getValue();
-							return (firstIndexValue) / (firstIndexSize / aggregateTypeSize);
+							return String.valueOf((firstIndexValue) / (firstIndexSize / aggregateTypeSize));
 						}
 
 					} else
@@ -1547,11 +1556,8 @@ public class GendataPrecomputer {
 			}
 		} else
 		{
-			if (aggregateType instanceof AddressUse)
-			{
 				try
 				{
-
 					// first index
 					int firstIndexValue = Integer.parseInt(GraphUtility.valueToString(indices.get(0)
 							.getValue()));
@@ -1559,30 +1565,73 @@ public class GendataPrecomputer {
 					{
 						mapping.setWarning(mapping.getWarning() + "Needs attention as first index is not 0!");
 					}
-
-					EObject partOfAggregate = aggregateType;
-					// following indices
-					for (int i = 1; i < indices.size(); i++)
+					
+					Iterator<Parameter> iter = indices.iterator();
+					boolean allConstants  = true;
+					while(iter.hasNext())
 					{
-						int indexVal = Integer.parseInt(GraphUtility
-								.valueToString(indices.get(i).getValue()));
-
-						int intermediateResult = computeSize(partOfAggregate, indexVal, false);
-						result += intermediateResult;
-
-						partOfAggregate = getPartOfAggregate(partOfAggregate, indexVal);
+						Parameter p = iter.next();
+						if(!(p.getValue() instanceof IntegerConstant))
+						{
+							allConstants = false;
+							break;
+						}
 					}
-					return result;
+					
+					if(allConstants)
+					{
+						EObject partOfAggregate = aggregateType;
+						// following indices
+						for (int i = 1; i < indices.size(); i++)
+						{
+							
+							
+							int indexVal = Integer.parseInt(GraphUtility
+									.valueToString(indices.get(i).getValue()));
+
+							int intermediateResult = computeSize(partOfAggregate, indexVal, false);
+							result += intermediateResult;
+
+							partOfAggregate = getPartOfAggregate(partOfAggregate, indexVal);
+						}
+						return String.valueOf(result);
+					}
+					else //dynamic computation
+					{	
+						EObject partOfAggregate = aggregateType;
+						String sResult = "";
+						// following indices
+						for (int i = 1; i < indices.size(); i++)
+						{
+							
+							Value index = indices.get(i).getValue();
+							
+							if(index instanceof IntegerConstant)
+							{
+								//constant
+								sResult += computeSize(partOfAggregate, ((IntegerConstant)index).getValue(), false);
+							}
+							else
+							{
+								//must be a variable
+								sResult += computeCompleteSize(getPartOfAggregate(partOfAggregate, i), false) + "*" +  GraphUtility.valueToString(index);
+							}
+							
+							partOfAggregate = getPartOfAggregate(partOfAggregate, i);
+						}
+						return sResult;
+					}
+
+					
 				} catch (NumberFormatException ex)
 				{
 					Activator.logError("Parsed a non-integer index entry for getElementPtr.", ex);
 				}
 
-			}
 
-			return -1;
+			return String.valueOf(-1);
 		}
-		return result;
+		return String.valueOf(result);
 	}
 
 	public TypeDefinition getTypeDefinedForAddress(Address address)

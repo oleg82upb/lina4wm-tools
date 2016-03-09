@@ -48,6 +48,7 @@ public abstract class AbstractGraphGenerator implements IGraphGenerator
 		initialize();
 		
 		this.graph = ControlflowFactory.eINSTANCE.createControlFlowDiagram();
+		this.graph.setFunctionDefinition(this.function);
 		this.graph.setName(this.function.getAddress().getName());
 		this.graph.setMemoryModel(this.getMemoryModel());
 

@@ -60,12 +60,12 @@ public interface MemorySizeMapping extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Offset</em>' attribute.
-	 * @see #setOffset(int)
+	 * @see #setOffset(String)
 	 * @see de.upb.lina.cfg.gendata.GendataPackage#getMemorySizeMapping_Offset()
 	 * @model
 	 * @generated
 	 */
-	int getOffset();
+	String getOffset();
 
 	/**
 	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.MemorySizeMapping#getOffset <em>Offset</em>}' attribute.
@@ -75,7 +75,7 @@ public interface MemorySizeMapping extends EObject {
 	 * @see #getOffset()
 	 * @generated
 	 */
-	void setOffset(int value);
+	void setOffset(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Generator Data</b></em>' container reference.

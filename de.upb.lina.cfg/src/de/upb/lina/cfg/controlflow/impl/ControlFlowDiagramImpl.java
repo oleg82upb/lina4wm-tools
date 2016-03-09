@@ -20,6 +20,7 @@ import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.controlflow.Transition;
 import de.upb.llvm_parser.llvm.Address;
+import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.Parameter;
 
 /**
@@ -36,6 +37,7 @@ import de.upb.llvm_parser.llvm.Parameter;
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getVariableCopies <em>Variable Copies</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getVariableCopyParams <em>Variable Copy Params</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getMemoryModel <em>Memory Model</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getFunctionDefinition <em>Function Definition</em>}</li>
  * </ul>
  * </p>
  *
@@ -131,6 +133,16 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * @ordered
 	 */
 	protected int memoryModel = MEMORY_MODEL_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getFunctionDefinition() <em>Function Definition</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFunctionDefinition()
+	 * @generated
+	 * @ordered
+	 */
+	protected FunctionDefinition functionDefinition;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -292,6 +304,49 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public FunctionDefinition getFunctionDefinition()
+	{
+		if (functionDefinition != null && functionDefinition.eIsProxy())
+		{
+			InternalEObject oldFunctionDefinition = (InternalEObject)functionDefinition;
+			functionDefinition = (FunctionDefinition)eResolveProxy(oldFunctionDefinition);
+			if (functionDefinition != oldFunctionDefinition)
+			{
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ControlflowPackage.CONTROL_FLOW_DIAGRAM__FUNCTION_DEFINITION, oldFunctionDefinition, functionDefinition));
+			}
+		}
+		return functionDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FunctionDefinition basicGetFunctionDefinition()
+	{
+		return functionDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFunctionDefinition(FunctionDefinition newFunctionDefinition)
+	{
+		FunctionDefinition oldFunctionDefinition = functionDefinition;
+		functionDefinition = newFunctionDefinition;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ControlflowPackage.CONTROL_FLOW_DIAGRAM__FUNCTION_DEFINITION, oldFunctionDefinition, functionDefinition));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -350,6 +405,9 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 				return getVariableCopyParams();
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__MEMORY_MODEL:
 				return getMemoryModel();
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__FUNCTION_DEFINITION:
+				if (resolve) return getFunctionDefinition();
+				return basicGetFunctionDefinition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -389,6 +447,9 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__MEMORY_MODEL:
 				setMemoryModel((Integer)newValue);
 				return;
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__FUNCTION_DEFINITION:
+				setFunctionDefinition((FunctionDefinition)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -423,6 +484,9 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__MEMORY_MODEL:
 				setMemoryModel(MEMORY_MODEL_EDEFAULT);
 				return;
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__FUNCTION_DEFINITION:
+				setFunctionDefinition((FunctionDefinition)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -450,6 +514,8 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 				return variableCopyParams != null && !variableCopyParams.isEmpty();
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__MEMORY_MODEL:
 				return memoryModel != MEMORY_MODEL_EDEFAULT;
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__FUNCTION_DEFINITION:
+				return functionDefinition != null;
 		}
 		return super.eIsSet(featureID);
 	}

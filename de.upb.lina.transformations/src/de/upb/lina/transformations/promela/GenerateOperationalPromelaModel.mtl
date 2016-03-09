@@ -443,6 +443,10 @@ getelementptr([genAggregateSize(e, genData)/], [e.aggregate.value.valueToString(
 [if (v.oclIsTypeOf(PrimitiveValue))][if(v.oclAsType(PrimitiveValue).value.equalsIgnoreCase('null'))]null[else][v.oclAsType(PrimitiveValue).value/][/if][elseif ( v.oclIsTypeOf(IntegerConstant))][v.oclAsType(IntegerConstant).value/][elseif ( v.oclIsTypeOf(DecimalConstant))][v.oclAsType(DecimalConstant).value/] [elseif (v.oclIsTypeOf(AddressUse))][for (am: AddressMapping | genData.addressMappings)][for (a: Address | am.adresses)][if (v.oclAsType(AddressUse).address = a)][am.name/][/if][/for][/for][/if]
 [/template]
 
+[template public valueToString(v : NestedGetElementPtr, genData: GeneratorData)]
+[valueToString(v.aggregate.value, genData)/] + [valueToString(v.indices->at(2).value, genData)/]
+[/template]
+
 [template public genCondition(t: Transition, gD: GeneratorData)]
 [for (cm: ConstraintMapping | gD.constraints)][if (t = cm.transition)][if(not cm.condition.equalsIgnoreCase('true'))][cm.condition/] -> [else] [/if][/if][/for]
 [/template]

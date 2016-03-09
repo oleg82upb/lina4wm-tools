@@ -68,6 +68,7 @@ public class ControlFlowDiagramItemProvider
 			addNamePropertyDescriptor(object);
 			addVariableCopyParamsPropertyDescriptor(object);
 			addMemoryModelPropertyDescriptor(object);
+			addFunctionDefinitionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -135,6 +136,29 @@ public class ControlFlowDiagramItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Function Definition feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addFunctionDefinitionPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ControlFlowDiagram_functionDefinition_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ControlFlowDiagram_functionDefinition_feature", "_UI_ControlFlowDiagram_type"),
+				 ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__FUNCTION_DEFINITION,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

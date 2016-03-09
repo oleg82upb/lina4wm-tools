@@ -810,7 +810,7 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 
 		initEClass(memorySizeMappingEClass, MemorySizeMapping.class, "MemorySizeMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMemorySizeMapping_Instruction(), ecorePackage.getEObject(), null, "instruction", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMemorySizeMapping_Offset(), ecorePackage.getEInt(), "offset", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMemorySizeMapping_Offset(), ecorePackage.getEString(), "offset", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMemorySizeMapping_GeneratorData(), this.getGeneratorData(), this.getGeneratorData_MemorySizeMappings(), "generatorData", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMemorySizeMapping_CompleteTypeSize(), ecorePackage.getEInt(), "completeTypeSize", null, 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMemorySizeMapping_Warning(), ecorePackage.getEString(), "warning", "", 0, 1, MemorySizeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -129,13 +129,22 @@ public interface ControlflowPackage extends EPackage {
 	int CONTROL_FLOW_DIAGRAM__MEMORY_MODEL = 6;
 
 	/**
+	 * The feature id for the '<em><b>Function Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROL_FLOW_DIAGRAM__FUNCTION_DEFINITION = 7;
+
+	/**
 	 * The number of structural features of the '<em>Control Flow Diagram</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_DIAGRAM_FEATURE_COUNT = 7;
+	int CONTROL_FLOW_DIAGRAM_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.ControlFlowLocationImpl <em>Control Flow Location</em>}' class.
@@ -747,6 +756,17 @@ public interface ControlflowPackage extends EPackage {
 	EAttribute getControlFlowDiagram_MemoryModel();
 
 	/**
+	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getFunctionDefinition <em>Function Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Function Definition</em>'.
+	 * @see de.upb.lina.cfg.controlflow.ControlFlowDiagram#getFunctionDefinition()
+	 * @see #getControlFlowDiagram()
+	 * @generated
+	 */
+	EReference getControlFlowDiagram_FunctionDefinition();
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.ControlFlowLocation <em>Control Flow Location</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1132,6 +1152,14 @@ public interface ControlflowPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CONTROL_FLOW_DIAGRAM__MEMORY_MODEL = eINSTANCE.getControlFlowDiagram_MemoryModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Function Definition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTROL_FLOW_DIAGRAM__FUNCTION_DEFINITION = eINSTANCE.getControlFlowDiagram_FunctionDefinition();
 
 		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.ControlFlowLocationImpl <em>Control Flow Location</em>}' class.
