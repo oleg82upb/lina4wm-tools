@@ -211,7 +211,7 @@ public class GendataPrecomputer {
 		{
 			for (String inputType : inputTypeList.getInputType())
 			{
-				if (inputType.equals(Constants.REF))
+				if (inputType.equals(Constants.KIV_BASIS_REF))
 				{
 					refInput = true;
 				}
@@ -551,7 +551,7 @@ public class GendataPrecomputer {
 		boolean refExists = false;
 		for (AddressMapping mapping : returnMappings.keySet())
 		{
-			if (mapping.getType().equals(Constants.REF))
+			if (mapping.getType().equals(Constants.KIV_BASIS_REF))
 			{
 				refExists = true;
 			} else
@@ -564,7 +564,7 @@ public class GendataPrecomputer {
 					{
 						AddressUse au = (AddressUse) p.getValue();
 						AddressMapping am = getMappingForAddress(au.getAddress());
-						if (am.getType().equals(Constants.REF))
+						if (am.getType().equals(Constants.KIV_BASIS_REF))
 						{
 							refExists = true;
 						}
@@ -576,7 +576,7 @@ public class GendataPrecomputer {
 		{
 			for (AddressMapping mapping : returnMappings.keySet())
 			{
-				mapping.setType(Constants.REF);
+				mapping.setType(Constants.KIV_BASIS_REF);
 				Return ret = returnMappings.get(mapping);
 				if (ret.getValue() instanceof Parameter)
 				{
@@ -585,7 +585,7 @@ public class GendataPrecomputer {
 					{
 						AddressUse au = (AddressUse) p.getValue();
 						AddressMapping am = getMappingForAddress(au.getAddress());
-						am.setType(Constants.REF);
+						am.setType(Constants.KIV_BASIS_REF);
 					}
 				}
 			}
@@ -1181,12 +1181,12 @@ public class GendataPrecomputer {
 		if (addressMapping == null)
 			return;
 
-		String t = Constants.REF;
+		String t = Constants.KIV_BASIS_REF;
 		if (object instanceof TypeUse)
 		{
 			if (((TypeUse) object).getPointer() != null)
 			{
-				t = Constants.REF;
+				t = Constants.KIV_BASIS_REF;
 			} else
 			{
 				t = kivTransformationBasis;
@@ -1211,16 +1211,16 @@ public class GendataPrecomputer {
 		else if (object instanceof Address)
 		{
 			AddressMapping m = getMappingForAddress((Address) object);
-			if (m != null && m.getType() != null && m.getType().equals(Constants.REF))
+			if (m != null && m.getType() != null && m.getType().equals(Constants.KIV_BASIS_REF))
 			{
-				t = Constants.REF;
+				t = Constants.KIV_BASIS_REF;
 			} else
 			{
 				t = kivTransformationBasis;
 			}
 		}
 
-		if (addressMapping.getType() == null || !addressMapping.getType().equals(Constants.REF))
+		if (addressMapping.getType() == null || !addressMapping.getType().equals(Constants.KIV_BASIS_REF))
 			addressMapping.setType(t);
 	}
 

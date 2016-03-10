@@ -65,7 +65,7 @@ public class CreateAllHandler extends AbstractHandler
 	private static final int[] TRANSFORMATION_TYPES_KIV = { Constants.TRANSFORMATION_TYPE_KIV_GLOBAL,
 		Constants.TRANSFORMATION_TYPE_KIV_LOCAL };
 	private static final String[] TRANSFORMATION_TYPE_NAMES_KIV = { "kiv_global", "kiv_local" };
-	private static final String[] KIV_BASES = { Constants.INT, Constants.NAT };
+	private static final String[] KIV_BASES = { Constants.KIV_BASIS_INT, Constants.KIV_BASIS_NAT };
 
 	private static final int[] TRANSFORMATION_TYPES_PROMELA = { Constants.TRANSFORMATION_TYPE_PROMELA,
 		Constants.TRANSFORMATION_TYPE_OPERATIONAL_PROMELA };

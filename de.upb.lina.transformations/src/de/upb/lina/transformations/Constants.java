@@ -41,20 +41,30 @@ public abstract class Constants {
 	 */
 	public static final String NEEDSGETELEMENTPTR = "getelementptr";
 	
-	/* Constants used in TransformationWizardPage*/
-	public final static String FILE_EXT = "cfg";
+	public final static String PROMELA_FILE_EXTENSION = "pml";
+	public final static String KIV_FILE_EXTENSION = "";
+	
+	/* Memento keys for AllInOneConfigurationPage */
+	public final static String ALL_IN_ONE_WIZARD_MEMENTO__KEY = "de.upb.lina.cfg.transformations.wizards.allinone.allinoneconfigurationpage";
+	public final static String ALL_IN_ONE_WIZARD_INPUTFILE = "allinone_inputfile";
+	public final static String ALL_IN_ONE_WIZARD_OUTPUT_FOLDER = "allinone_outputfolder";
+	public final static String ALL_IN_ONE_WIZARD_OUTPUT_FILE = "allinone_outputfile";
+	public final static String ALL_IN_ONE_WIZARD_SEMANTICS = "allinone_semantics";
+	public final static String ALL_IN_ONE_WIZARD_TRANSFORMATION_TYPE = "allinone_transformationtype";
+	public final static String ALL_IN_ONE_WIZARD_KIV_BASIS = "allinone_kivbasis";
+	
 
 	/* Memento keys for TransformationWizardPage*/
-	public final static String MEMENTO__KEY = "de.upb.lina.cfg.transformations.transformationwizardpage";
-	public final static String CFGLOC = "cfgloc";
-	public final static String CONTAINER = "container";
-	public final static String NEW_FILE = "newFile";
-	public final static String MODEL_SELECTION = "modelSelection";
+	public final static String TRANSFORMATION_WIZARD_MEMENTO__KEY = "de.upb.lina.cfg.transformations.transformationwizardpage";
+	public final static String TRANSFORMATION_WIZARD_CFGLOC = "cfgloc";
+	public final static String TRANSFORMATION_WIZARD_CONTAINER = "container";
+	public final static String TRANSFORMATION_WIZARD_NEW_FILE = "newFile";
+	public final static String TRANSFORMATION_WIZARD_MODEL_SELECTION = "modelSelection";
 	
 	/* Constants regarding settings for KIV transformation */
-	public static final String NAT = "nat";
-	public static final String INT = "int";
-	public static final String REF = "ref";
+	public static final String KIV_BASIS_NAT = "nat";
+	public static final String KIV_BASIS_INT = "int";
+	public static final String KIV_BASIS_REF = "ref";
 	public static final int NAT_INDEX = 0;
 	public static final int INT_INDEX = 1;
 	

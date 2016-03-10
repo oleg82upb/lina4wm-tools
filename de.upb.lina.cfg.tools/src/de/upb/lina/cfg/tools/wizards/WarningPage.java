@@ -16,7 +16,7 @@ public class WarningPage extends WizardPage {
 	private ListViewer errorViewer;
 	private ListViewer warningViewer;
 
-	protected WarningPage() {
+	public WarningPage() {
 		super("Errors and Warnings");
 		setTitle("Errors and Warnings");
 		setDescription("No errors or warnings found.");

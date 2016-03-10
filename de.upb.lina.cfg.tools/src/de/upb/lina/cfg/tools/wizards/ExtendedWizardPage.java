@@ -13,6 +13,7 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.XMLMemento;
@@ -53,6 +54,12 @@ public abstract class ExtendedWizardPage extends WizardPage {
 		tx.setLayoutData(layoutData);
 		tx.addModifyListener(listener);
 		return tx;
+	}
+	
+	protected Label createLabel(Composite container, int style ,String labelText){
+		Label label = new Label(container, style);
+		label.setText(labelText);
+		return label;
 	}
 	
 	/**

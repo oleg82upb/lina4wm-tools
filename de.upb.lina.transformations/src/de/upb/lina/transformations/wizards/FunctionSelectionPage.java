@@ -179,7 +179,7 @@ public class FunctionSelectionPage extends WizardPage{
 
 	protected List<ControlFlowDiagram> loadCfg() {
 		try{
-			String location= ((TransformationWizardPage)this.getPreviousPage()).getGraphModelFile().getText();
+			String location= ((TransformationConfigurationPage)this.getPreviousPage()).getGraphModelFile().getText();
 			ControlflowPackage.eINSTANCE.getNsURI();
 			ResourceSet resourceSet = new ResourceSetImpl();
 			Path cfgpath = new Path(location);

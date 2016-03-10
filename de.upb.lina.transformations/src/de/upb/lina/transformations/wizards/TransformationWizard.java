@@ -19,7 +19,7 @@ import de.upb.lina.transformations.logic.TransformationOperation;
 
 public class TransformationWizard extends Wizard implements INewWizard {
 	
-	private TransformationWizardPage wizardPage;
+	private TransformationConfigurationPage wizardPage;
 	private FunctionSelectionPage functionSelectionPage;
 	private ISelection selection;
 	
@@ -56,7 +56,7 @@ public class TransformationWizard extends Wizard implements INewWizard {
 	public void addPages() {
 		super.addPages();
 		functionSelectionPage = new FunctionSelectionPage();
-		wizardPage = new TransformationWizardPage("Generate New Specification", selection, functionSelectionPage);
+		wizardPage = new TransformationConfigurationPage("Generate New Specification", selection, functionSelectionPage);
 		addPage(wizardPage);
 		addPage(functionSelectionPage);
 	}

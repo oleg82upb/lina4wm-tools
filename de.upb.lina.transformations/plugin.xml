@@ -14,6 +14,13 @@
             id="de.upb.lina.transformations.promela.tools.transformationWizard"
             name="Generate New Specification">
       </wizard>
+      <wizard
+            category="de.upb.lina.cfg.tools"
+            class="de.upb.lina.transformations.wizards.allinone.AllInOneWizard"
+            icon="icons/sample.gif"
+            id="de.upb.lina.transformations.promela.tools.allinonewizard"
+            name="Generate New Specification from LLVM">
+      </wizard>
    </extension>
    
    <!-- Create All command -->
