@@ -1,7 +1,9 @@
 package de.upb.lina.cfg.tools;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -17,6 +19,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.nodemodel.INode;
 
+import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.llvm_parser.llvm.LLVM;
 import de.upb.llvm_parser.llvm.LlvmPackage;
@@ -52,6 +55,27 @@ public class ResourceIOUtil {
 	}
 	
 	/**
+	 * Loads a store buffer graph file from the disk and checks its contents for valid control flow diagram
+	 * instances. These ones are aggregated and returned
+	 * 
+	 * @param pathToFile path to the file to load
+	 * @return list of valid cfg instances in the store buffer graph file
+	 */
+	public static List<ControlFlowDiagram> loadStoreBufferGraphFile(String pathToFile){
+		ensureCFGPackageIsRegistered();
+		Resource storeBufferGraphResource = loadResourceFromFile(pathToFile);
+		
+		List<EObject> resourceContents = storeBufferGraphResource.getContents();
+		List<ControlFlowDiagram> loadedStoreBufferGraphs  = new ArrayList<ControlFlowDiagram>();
+		for(EObject resourceContent: resourceContents){
+			if(resourceContent instanceof ControlFlowDiagram){
+				loadedStoreBufferGraphs.add((ControlFlowDiagram)resourceContent);
+			}
+		}
+		return loadedStoreBufferGraphs;
+	}
+	
+	/**
 	 * Tries to load the AST file at the given location. 
 	 * 
 	 * @param astLocation location of the AST file to load
@@ -59,16 +83,33 @@ public class ResourceIOUtil {
 	 */
 	public static LLVM loadAst(String astLocation){
 		try {
-			LlvmPackage.eINSTANCE.getNsURI();
-			ResourceSet resourceSet = new ResourceSetImpl();
-			Path astpath = new Path(astLocation);
-			URI uri = URI.createPlatformResourceURI(astpath.toOSString(), true);
-			Resource llvmResource = resourceSet.getResource(uri, true);
+			ensureLLVMPackageIsRegistered();
+			Resource llvmResource = loadResourceFromFile(astLocation);
 			return (LLVM) llvmResource.getContents().get(0);
 		} catch (Exception e) {
 			CFGActivator.logError("Failed to load AST at " + astLocation + "." , e);
 		}
 		return null;
+	}
+
+	/**
+	 * Loads a resource from a file.
+	 * 
+	 * @param pathToFile path to the file 
+	 * @return loaded resource or null if loading failed
+	 */
+	protected static Resource loadResourceFromFile(String pathToFile) {
+		Resource loadedResource = null;
+		try{
+			ResourceSet resourceSet = new ResourceSetImpl();
+			Path resourcePath = new Path(pathToFile);
+			URI uri = URI.createPlatformResourceURI(resourcePath.toOSString(), true);
+			loadedResource = resourceSet.getResource(uri, true);
+			EcoreUtil.resolveAll(loadedResource);
+		}catch(Exception ex){
+			CFGActivator.logError("Failed to load resource at " + pathToFile , ex);
+		}
+		return loadedResource;
 	}
 	
 	/**
@@ -109,6 +150,7 @@ public class ResourceIOUtil {
 	 * Ensures that the LLVM package is registered.
 	 */
 	public static void ensureLLVMPackageIsRegistered() {
+		LlvmPackage.eINSTANCE.getNsURI();
 		LlvmPackage.eINSTANCE.eClass();
 	}
 	

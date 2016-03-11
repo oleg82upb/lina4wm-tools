@@ -332,7 +332,7 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 			return;
 		}
 		
-		nextPage.loadCfg();
+		nextPage.setPathToInputFile(sourceGraphModelFileName);
 		
 		updateDescription("Check your Input and hit finish.");
 		updateErrorMessage(null);
@@ -427,7 +427,7 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 			return 400;
 		}
 
-		nextPage.loadCfg();
+		nextPage.setPathToInputFile(cfgLocation);
 		return 0;
 	}
 

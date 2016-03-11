@@ -289,7 +289,7 @@ public class CreateAllHandler extends AbstractHandler
 	 * @param ast ast to create cfg for
 	 * @return created cfgs of the functions of ast
 	 */
-	private List<ControlFlowDiagram> createCFGFromAst(int memoryModel, LLVM ast)
+	public static List<ControlFlowDiagram> createCFGFromAst(int memoryModel, LLVM ast)
 	{
 		List<ControlFlowDiagram> list = new ArrayList<ControlFlowDiagram>();
 		// generating cfg for each function

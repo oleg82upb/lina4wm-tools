@@ -6,6 +6,7 @@ import de.upb.lina.cfg.tools.ResourceIOUtil;
 import de.upb.lina.cfg.tools.wizards.ConfigurationPage;
 import de.upb.lina.cfg.tools.wizards.ConfigurationWizardUsingChecks;
 import de.upb.lina.cfg.tools.wizards.WarningPage;
+import de.upb.lina.transformations.wizards.FunctionSelectionPage;
 import de.upb.llvm_parser.llvm.LLVM;
 
 public class AllInOneWizard extends ConfigurationWizardUsingChecks implements INewWizard {
@@ -21,12 +22,16 @@ public class AllInOneWizard extends ConfigurationWizardUsingChecks implements IN
 	@Override
 	public void addPages() {
 		super.addPages();
+		FunctionSelectionPage functionSelectionPage = new FunctionSelectionPage();
+		
 		setConfigurationPage(new AllInOneConfigurationPage("All in One Configuration Page", "New Transformation", 
-				"Create a new transformation from a LLVM file!", getUserSelection(), this));
+				"Create a new transformation from a LLVM file!", getUserSelection(), this, functionSelectionPage));
 		addPage(getConfigurationPage());
+		
 		setWarningPage(new WarningPage());
 		addPage(getWarningPage());
-//		addPage(new FunctionSelectionPage());
+		
+		addPage(functionSelectionPage);
 	}
 
 	@Override

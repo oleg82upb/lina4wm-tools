@@ -6,15 +6,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TreeEditor;
 import org.eclipse.swt.events.ModifyEvent;
@@ -34,8 +27,9 @@ import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.swt.widgets.TreeItem;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
-import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.tools.GraphUtility;
+import de.upb.lina.cfg.tools.ResourceIOUtil;
+import de.upb.lina.cfg.tools.wizards.ExtendedWizardPage;
 import de.upb.lina.transformations.Activator;
 import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.Call;
@@ -43,29 +37,23 @@ import de.upb.llvm_parser.llvm.FunctionBody;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.Instruction;
 
-public class FunctionSelectionPage extends WizardPage{
+public class FunctionSelectionPage extends ExtendedWizardPage{
 	
 	
 	private List<ControlFlowDiagram> allCFGs;
 	private List<ControlFlowDiagram>selectedFunctions = new ArrayList<ControlFlowDiagram>();
 	private HashMap<ControlFlowDiagram, List<ControlFlowDiagram>> cfgToDependentFunctions = new HashMap<>();
-	private HashMap<String, ControlFlowDiagram> functionToCfg;
+	private HashMap<String, ControlFlowDiagram> functionNameToStoreBufferGraph;
 	private HashMap<String, String> oldToNewCfgName = new HashMap<>();
 	private Tree tree;
 	
-	private String DEFAULT_MESSAGE = "Please select the functions you wish to transform and enter names for the functions.";
+	private String pathToInputFile;
 	
-
-	protected FunctionSelectionPage(String pageName) {
-		super(pageName);
-		setTitle("Function - Selection");
-		setDescription(DEFAULT_MESSAGE);
-	}
+	private static String DEFAULT_MESSAGE = "Please select the functions you wish to transform and enter names for the functions.";
 	
 	public FunctionSelectionPage() {
-		super("wizardPage");
-		setTitle("Function - Selection");
-		setDescription(DEFAULT_MESSAGE);
+		super("functionselectionpage", "Function - Selection", DEFAULT_MESSAGE);
+		this.allCFGs = new ArrayList<ControlFlowDiagram>();
 	}
 
 	@Override
@@ -176,49 +164,54 @@ public class FunctionSelectionPage extends WizardPage{
 			}
 		}
 	}
-
-	protected List<ControlFlowDiagram> loadCfg() {
-		try{
-			String location= ((TransformationConfigurationPage)this.getPreviousPage()).getGraphModelFile().getText();
-			ControlflowPackage.eINSTANCE.getNsURI();
-			ResourceSet resourceSet = new ResourceSetImpl();
-			Path cfgpath = new Path(location);
-			URI uri = URI.createPlatformResourceURI(cfgpath.toOSString(), true);
-			Resource cfgResource = resourceSet.getResource(uri, true);
-			EcoreUtil.resolveAll(cfgResource);
-			List<EObject> graphList = cfgResource.getContents();
-			List<ControlFlowDiagram> graphList2  = new ArrayList<ControlFlowDiagram>();
-			for(EObject o: graphList){
-				if(o instanceof ControlFlowDiagram){
-					graphList2.add((ControlFlowDiagram)o);
-				}
-			}
-			this.allCFGs = graphList2;
-			
-			//mapping from name to cfg
-			functionToCfg  = new HashMap<String, ControlFlowDiagram>();
-			for(ControlFlowDiagram cfg : allCFGs){
-				functionToCfg.put(cfg.getName(), cfg);
-			}
-			refreshTree();
-			computeDependencies();
-			return allCFGs;
-		}catch(WrappedException ex){
-			Activator.logError("Error while loading cfg file.", ex);
+	
+	public void setPathToInputFile(String pathToInputFile){
+		this.pathToInputFile = pathToInputFile;
+		loadCfg();
+	}
+	
+	public void setStoreBufferDiagramToUse(List<ControlFlowDiagram> cfgs){
+		if(cfgs != null){
+			this.allCFGs.clear();
+			this.allCFGs.addAll(cfgs);
 		}
-		return null;
+		reloadCfg();
+	}
+	
+	private void loadCfg(){
+		if(pathToInputFile != null){
+			try{
+				List<ControlFlowDiagram> loadedCfgs = ResourceIOUtil.loadStoreBufferGraphFile(pathToInputFile);
+				if(loadedCfgs != null){
+					this.allCFGs = loadedCfgs;
+				}
+			}catch(WrappedException ex){
+				Activator.logError("Error while loading cfg file.", ex);
+			}
+		}
+		reloadCfg();
+	}
+
+	private void reloadCfg() {
+		//mapping from name to cfg
+		functionNameToStoreBufferGraph  = new HashMap<String, ControlFlowDiagram>();
+		for(ControlFlowDiagram cfg : allCFGs){
+			functionNameToStoreBufferGraph.put(cfg.getName(), cfg);
+		}
+		refreshTree();
+		computeDependencies();
 	}
 	
 	private void updateSelectedFunctions(TreeItem item) {
 		String functionName = item.getText();
 		if(item.getChecked()){
 			//add to selected functions
-			ControlFlowDiagram selectedCFG = functionToCfg.get(functionName);
+			ControlFlowDiagram selectedCFG = functionNameToStoreBufferGraph.get(functionName);
 			if(!selectedFunctions.contains(selectedCFG))
 			this.selectedFunctions.add(selectedCFG);
 		}else{
 			//remove from selected functions
-			ControlFlowDiagram deselectedCFG = functionToCfg.get(functionName);
+			ControlFlowDiagram deselectedCFG = functionNameToStoreBufferGraph.get(functionName);
 			this.selectedFunctions.remove(deselectedCFG);
 		}
 		
@@ -288,7 +281,7 @@ public class FunctionSelectionPage extends WizardPage{
 							if(ins instanceof Call){
 								String calledFunction = GraphUtility.valueToRawString(((Call) ins).getFunction().getValue()).trim();
 								//if the function is to be generated and if its not a self-call (recursion)
-								if(functionToCfg.containsKey(calledFunction) && functionToCfg.get(calledFunction) != cfg){
+								if(functionNameToStoreBufferGraph.containsKey(calledFunction) && functionNameToStoreBufferGraph.get(calledFunction) != cfg){
 									addDependency(cfg, calledFunction);
 								}
 							}
@@ -310,7 +303,7 @@ public class FunctionSelectionPage extends WizardPage{
 		
 		//create entry
 		List<ControlFlowDiagram> dependentFuncs =  cfgToDependentFunctions.get(callingCfg);
-		ControlFlowDiagram calledCfg = functionToCfg.get(calledFunction);
+		ControlFlowDiagram calledCfg = functionNameToStoreBufferGraph.get(calledFunction);
 		if(!dependentFuncs.contains(calledCfg)){
 			dependentFuncs.add(calledCfg);
 		}

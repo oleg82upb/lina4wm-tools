@@ -1,5 +1,7 @@
 package de.upb.lina.transformations.wizards.allinone;
 
+import java.util.List;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -9,14 +11,14 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.XMLMemento;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
@@ -24,6 +26,7 @@ import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
+import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.ResourceIOUtil;
 import de.upb.lina.cfg.tools.wizards.ConfigurationPage;
@@ -31,6 +34,9 @@ import de.upb.lina.cfg.tools.wizards.ConfigurationWizardUsingChecks;
 import de.upb.lina.cfg.tools.wizards.StoreBufferGraphConfigurationPage;
 import de.upb.lina.transformations.Activator;
 import de.upb.lina.transformations.Constants;
+import de.upb.lina.transformations.logic.CreateAllHandler;
+import de.upb.lina.transformations.wizards.FunctionSelectionPage;
+import de.upb.llvm_parser.llvm.LLVM;
 
 public class AllInOneConfigurationPage extends ConfigurationPage{
 	
@@ -63,11 +69,15 @@ public class AllInOneConfigurationPage extends ConfigurationPage{
 	private Combo cb_semanticsSelection;
 	private Combo cb_transformationTypeSelection;
 	private Combo cb_kivBasis;
+	
+	private FunctionSelectionPage functionSelectionPage;
 
 	public AllInOneConfigurationPage(String pageName, String pageTitle,
-			String pageDescription, IStructuredSelection userSelection, ConfigurationWizardUsingChecks wizard) {
+			String pageDescription, IStructuredSelection userSelection,
+			ConfigurationWizardUsingChecks wizard, FunctionSelectionPage functionSelectionPage) {
+		
 		super(pageName, pageTitle, pageDescription, userSelection, wizard);
-		// TODO Auto-generated constructor stub
+		this.functionSelectionPage = functionSelectionPage;
 	}
 
 	@Override
@@ -216,6 +226,8 @@ public class AllInOneConfigurationPage extends ConfigurationPage{
 			return;
 		}
 		
+		updateFunctionSelectionPage();
+		
 		//make sure we can go into the error view
 		updateErrorMessage(null);
 		setDescription(StoreBufferGraphConfigurationPage.MSG_STATUS_OK);
@@ -224,6 +236,12 @@ public class AllInOneConfigurationPage extends ConfigurationPage{
 		wizard.restartChecks();
 		getControl().redraw();
 		
+	}
+
+	private void updateFunctionSelectionPage() {
+		LLVM ast = ResourceIOUtil.createAstFromLLVM(getPathToInputFile());
+		List<ControlFlowDiagram> loadedCfgs = CreateAllHandler.createCFGFromAst(CFGConstants.SC, ast);
+		functionSelectionPage.setStoreBufferDiagramToUse(loadedCfgs);
 	}
 	
 	/**
