@@ -1606,6 +1606,11 @@ public class GendataPrecomputer {
 							
 							Value index = indices.get(i).getValue();
 							
+							if(!"".equals(sResult))
+							{
+								sResult += " + ";
+							}
+							
 							if(index instanceof IntegerConstant)
 							{
 								//constant
@@ -1614,7 +1619,17 @@ public class GendataPrecomputer {
 							else
 							{
 								//must be a variable
-								sResult += computeCompleteSize(getPartOfAggregate(partOfAggregate, i), false) + "*" +  GraphUtility.valueToString(index);
+								int size = computeCompleteSize(getPartOfAggregate(partOfAggregate, i), false);
+								if(size != 1)
+								{
+									sResult += size + "*" +  GraphUtility.valueToString(index); //2*value or 3*value...
+								}
+								else
+								{
+									sResult += GraphUtility.valueToString(index); // 1*value = value
+								}
+								
+								
 							}
 							
 							partOfAggregate = getPartOfAggregate(partOfAggregate, i);
