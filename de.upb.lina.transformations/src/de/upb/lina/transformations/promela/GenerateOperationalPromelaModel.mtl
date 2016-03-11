@@ -7,6 +7,7 @@
 [file ( fileName  , false, 'UTF-8')]
 [genStartOfFile()/]
 [genData.genGlobalVars()/]
+[buildStandards(genData)/]
 //------------- functions ------------------
 [for (cfg: ControlFlowDiagram | genData.cfgs)]
 [cfg.genFunctionHead(genData)/]
@@ -18,7 +19,7 @@ ret: skip;
 [/for]
 
 //------------- process template -------------
-[genProcessTemplates()/]
+[genProcessTemplates(genData)/]
 [/file]
 [/template]
 
@@ -47,6 +48,7 @@ skip;
 #define null 0
 #define I32  0 		// = {0};
 #define PTR 0
+short memUse = 1; 	//shows to the next free cell in memory
 
 //#include "sc.pml"
 #include "tso.pml"
@@ -56,7 +58,7 @@ chan channelT1 = ['['/]0[']'/] of {mtype, short, short, short};
 chan channelT2 = ['['/]0[']'/] of {mtype, short, short, short};
 [/template]
 
-[template public genProcessTemplates(c: OclAny)]
+[template public genProcessTemplates(c: OclAny, genData: GeneratorData)]
 
 //Stubs
 proctype process1(chan ch){
@@ -70,7 +72,8 @@ proctype process2(chan ch){
 
 init{
 atomic{
-	//TODO: initialize global variables or allocate space here, if necessary
+	//initialize global variables or allocate memory space here, if necessary
+	[genGlobalVariableAllocation(genData)/]
 	run bufferProcess(channelT1); //obsolete for SC, remove line when SC is chosen
 	run bufferProcess(channelT2); //obsolete for SC, remove line when SC is chosen
 	run process1(channelT1);
@@ -90,19 +93,72 @@ s.substituteAll('.', '').substituteAll('%', '')
 inline [mapping.value/]([genParams(cfg, genData)/][/if][/for]){
 [/template]
 
+
 [template public genGlobalVars(genData: GeneratorData)]
-[for (mapping: FilterToAddressMapping | genData.filteredAddresses)][if(mapping.key.equalsIgnoreCase('globals'))]
-[if(mapping.value->size() > 0)]
-[for (mapping: FilterToAddressMapping | genData.filteredAddresses)]
-[if(mapping.key.equalsIgnoreCase('globals') and mapping.value->size() > 0)]
-[for(aMapping: AddressMapping | mapping.value)]short [aMapping.name/] = [for(gDef:AbstractElement |genData.program.elements)][if(gDef.oclIsTypeOf(GlobalDefinition))][if(gDef.oclAsType(GlobalDefinition).address = aMapping.adresses->first())][if (gDef.oclAsType(GlobalDefinition).value.oclIsTypeOf(Parameter))][gDef.oclAsType(GlobalDefinition).value.oclAsType(Parameter).value.valueToString(genData)/];[elseif(gDef.oclAsType(GlobalDefinition).value.oclIsTypeOf(Predefined))][gDef.oclAsType(GlobalDefinition).value.oclAsType(Predefined).type/][gDef.oclAsType(GlobalDefinition).value.oclAsType(Predefined).pointer/];//needs attention[/if][/if][/if][/for]
+[let mappings: OrderedSet(FilterToAddressMapping) = genData.filteredAddresses->select(m | m.key.equalsIgnoreCase('globals') and m.value->size() > 0)]
+[for (aMapping: AddressMapping | mappings.value)]
+short [aMapping.name/] = [genValueInitialization(aMapping, genData) /]
 [/for]
-[/if]
-[/for]
-[/if]
-[/if]
-[/for]
+[/let]
 [/template]
+
+[query public genValueInitialization(aMapping : AddressMapping, genData: GeneratorData) : String =
+let gDefs : OrderedSet(GlobalDefinition) = genData.program.elements->filter(GlobalDefinition)->select(df | df.address = aMapping.adresses->first()) in
+let gDef : GlobalDefinition  = gDefs->first() in 
+if gDef.value.oclIsTypeOf(Parameter) then
+	if gDef.value.oclAsType(Parameter).type.oclIsTypeOf(Array) then
+	'0; //Array: please, check initialization in the init process'
+	else if gDef.value.oclAsType(Parameter).type.oclIsTypeOf(Structure) then
+			'0; //Structure: please, check initialization in the init process'
+		else
+			gDef.value.oclAsType(Parameter).value.valueToString(genData) + ';'
+		endif
+	endif
+else if gDef.value.oclIsTypeOf(Predefined) then
+		gDef.value.oclAsType(Predefined).type + '' + gDef.value.oclAsType(Predefined).pointer + ';//needs attention'
+	else 
+		''
+	endif
+endif
+/]
+
+[template public genGlobalVariableAllocation(genData: GeneratorData)]
+[let mappings: OrderedSet(FilterToAddressMapping) = genData.filteredAddresses->select(m | m.key.equalsIgnoreCase('globals') and m.value->size() > 0)]
+[for (aMapping: AddressMapping | mappings.value)]
+alloca([genAllocationSize(aMapping, genData)/], [aMapping.name/]);
+[/for]
+[/let]
+[/template]
+
+[query public genAllocationSize(aMapping : AddressMapping, genData: GeneratorData) : String =
+let gDefs : OrderedSet(GlobalDefinition) = genData.program.elements->filter(GlobalDefinition)->select(df | df.address = aMapping.adresses->first()) in
+let gDef : GlobalDefinition  = gDefs->first() in 
+if gDef.value.oclIsTypeOf(Parameter) then
+	if gDef.value.oclAsType(Parameter).type.oclIsTypeOf(Array) or gDef.value.oclAsType(Parameter).type.oclIsTypeOf(Structure) then
+		determineSize(gDef.value.oclAsType(Parameter).type)
+	else '1'
+	endif
+else 
+	'1'
+endif
+/]
+
+[query public determineSize(t: EObject) : Integer = 
+if t.oclIsTypeOf(Array) then
+if determineSize(t.oclAsType(Array).type) = 1 then  
+	t.oclAsType(Array).length
+else
+	t.oclAsType(Array).length * determineSize(t.oclAsType(Array).type) 
+endif 
+else if t.oclIsTypeOf(Structure) then  
+		t.oclAsType(Structure).types->collect(type | determineSize(type))->sum()
+	else
+		1 
+endif
+endif
+/]
+
+
 
 [template public genParams(cfg: ControlFlowDiagram, genData: GeneratorData)]
 [genListOfVars(genData, 'func-params:'+cfg.name)/]
@@ -116,7 +172,47 @@ inline [mapping.value/]([genParams(cfg, genData)/][/if][/for]){
 [for (mapping: FilterToAddressMapping | genData.filteredAddresses)][if(mapping.key.equalsIgnoreCase(key))][for(aMapping: AddressMapping | mapping.value)][aMapping.name/][if(mapping.value->last() <> aMapping)], [/if][/for][/if][/for]
 [/template]
 
+[template public buildStandards(genData: GeneratorData)]
 
+[for(func: String | genData.transformationSpecificKeys)][if (func.equalsIgnoreCase('getelementptr'))]
+//pointer computation 
+inline getelementptr(type, instance, offset, targetRegister)
+{
+	atomic{
+	//simplified version of what llvm does.
+	//we don't need the type as long as we assume our memory to hold only values/pointers etc of equal length. 
+	//In this case, the offset directly correspond to adding it to instance address. 
+	assert(offset <= type); //offset shouldn't be greater than the type range
+	targetRegister = instance + offset;
+	}
+}
+[/if]
+[/for]
+//memory allocation
+inline alloca(type, targetRegister)
+{
+	atomic{
+	targetRegister = memUse;
+	memUse = memUse + type + 1;
+	assert(memUse < MEM_SIZE);
+	}
+}
+[for(func: String | genData.transformationSpecificKeys)][if (func.equalsIgnoreCase('cas'))]
+//atomic compare and swap instruction 
+inline cas(adr, old, new, result)
+{
+	atomic{
+	//in LLVM result is usually a tuple (memory['['/]adr[']'/], successFlag)
+	//we assume it to be just a loaded value
+	result = memory['['/]adr[']'/];
+	if 	:: memory['['/]adr[']'/] == old -> memory['['/]adr[']'/] = new; 
+		:: else -> skip;
+	fi;
+	}
+}
+[/if]
+[/for]
+[/template]
 
 
 
@@ -385,8 +481,16 @@ e.trueValue.value.valueToString(genData) + ' : ' + e.elseValue.value.valueToStri
 
 [comment NEED REVISION /]
 [template public genInstruction(e : GetElementPtr, genData : GeneratorData)]
-getelementptr([genAggregateSize(e, genData)/], [e.aggregate.value.valueToString(genData)/], [genPtrOffset(e,genData)/], [e.result.addressToString(genData)/]); [for (m: MemorySizeMapping | genData.memorySizeMappings)][if(m.instruction=e)][if(not m.warning.equalsIgnoreCase(''))] /*[m.warning/]*/ [/if][/if][/for]
+getelementptr([genAggregateSize(e, genData)/], [e.aggregate.value.valueToString(genData)/], [genPtrOffset(e,genData)/], [e.result.addressToString(genData)/]); [checkForWarnings(e, genData)/]
 [/template]
+
+[query public checkForWarnings(e : GetElementPtr, genData: GeneratorData) : String =   
+let set : Set(MemorySizeMapping) = genData.memorySizeMappings->select(m | m.instruction = e and not m.warning.equalsIgnoreCase('')) in
+if set->isEmpty() then ''
+else
+'/*' +  set->asSequence()->first().warning + '*/' 
+endif
+/]
 
 [template public genPtrOffset(e : GetElementPtr, genData : GeneratorData)]
 [for (m: MemorySizeMapping | genData.memorySizeMappings)][if (m.instruction=e)][m.offset/][/if][/for]

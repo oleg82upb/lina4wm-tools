@@ -860,6 +860,10 @@ public class GendataPrecomputer {
 				}
 			}
 			
+			if(cfg.getFunctionDefinition() == null)
+			{
+				throw new RuntimeException("You are likely using an outdated AST model. Please parse and derive all models again.");
+			}
 			TreeIterator<EObject> iter = cfg.getFunctionDefinition().eAllContents();
 			while(iter.hasNext())
 			{

@@ -16,7 +16,7 @@
 }
 
 [/for]
-[buildProcesses()/]
+[buildProcesses(genData)/]
 [/file]
 [/template]
 
@@ -27,18 +27,69 @@ inline [mapping.value/]([genParams(cfg, genData)/][/if][/for]){
 [/template]
 
 [template public genGlobalVars(genData: GeneratorData)]
-[for (mapping: FilterToAddressMapping | genData.filteredAddresses)][if(mapping.key.equalsIgnoreCase('globals'))]
-[if(mapping.value->size() > 0)]
-[for (mapping: FilterToAddressMapping | genData.filteredAddresses)]
-[if(mapping.key.equalsIgnoreCase('globals') and mapping.value->size() > 0)]
-[for(aMapping: AddressMapping | mapping.value)]short [aMapping.name/] = [for(gDef:AbstractElement |genData.program.elements)][if(gDef.oclIsTypeOf(GlobalDefinition))][if(gDef.oclAsType(GlobalDefinition).address = aMapping.adresses->first())][if (gDef.oclAsType(GlobalDefinition).value.oclIsTypeOf(Parameter))][gDef.oclAsType(GlobalDefinition).value.oclAsType(Parameter).value.valueToString(genData)/];[elseif(gDef.oclAsType(GlobalDefinition).value.oclIsTypeOf(Predefined))][gDef.oclAsType(GlobalDefinition).value.oclAsType(Predefined).type/][gDef.oclAsType(GlobalDefinition).value.oclAsType(Predefined).pointer/];//needs attention[/if][/if][/if][/for]
+[let mappings: OrderedSet(FilterToAddressMapping) = genData.filteredAddresses->select(m | m.key.equalsIgnoreCase('globals') and m.value->size() > 0)]
+[for (aMapping: AddressMapping | mappings.value)]
+short [aMapping.name/] = [genValueInitialization(aMapping, genData) /]
 [/for]
-[/if]
-[/for]
-[/if]
-[/if]
-[/for]
+[/let]
 [/template]
+
+[query public genValueInitialization(aMapping : AddressMapping, genData: GeneratorData) : String =
+let gDefs : OrderedSet(GlobalDefinition) = genData.program.elements->filter(GlobalDefinition)->select(df | df.address = aMapping.adresses->first()) in
+let gDef : GlobalDefinition  = gDefs->first() in 
+if gDef.value.oclIsTypeOf(Parameter) then
+	if gDef.value.oclAsType(Parameter).type.oclIsTypeOf(Array) then
+	'0; //Array: please, check initialization in the init process'
+	else if gDef.value.oclAsType(Parameter).type.oclIsTypeOf(Structure) then
+			'0; //Structure: please, check initialization in the init process'
+		else
+			gDef.value.oclAsType(Parameter).value.valueToString(genData) + ';'
+		endif
+	endif
+else if gDef.value.oclIsTypeOf(Predefined) then
+		gDef.value.oclAsType(Predefined).type + '' + gDef.value.oclAsType(Predefined).pointer + ';//needs attention'
+	else 
+		''
+	endif
+endif
+/]
+
+[template public genGlobalVariableAllocation(genData: GeneratorData)]
+[let mappings: OrderedSet(FilterToAddressMapping) = genData.filteredAddresses->select(m | m.key.equalsIgnoreCase('globals') and m.value->size() > 0)]
+[for (aMapping: AddressMapping | mappings.value)]
+alloca([genAllocationSize(aMapping, genData)/], [aMapping.name/]);
+[/for]
+[/let]
+[/template]
+
+[query public genAllocationSize(aMapping : AddressMapping, genData: GeneratorData) : String =
+let gDefs : OrderedSet(GlobalDefinition) = genData.program.elements->filter(GlobalDefinition)->select(df | df.address = aMapping.adresses->first()) in
+let gDef : GlobalDefinition  = gDefs->first() in 
+if gDef.value.oclIsTypeOf(Parameter) then
+	if gDef.value.oclAsType(Parameter).type.oclIsTypeOf(Array) or gDef.value.oclAsType(Parameter).type.oclIsTypeOf(Structure) then
+		determineSize(gDef.value.oclAsType(Parameter).type)
+	else '1'
+	endif
+else 
+	'1'
+endif
+/]
+
+[query public determineSize(t: EObject) : Integer = 
+if t.oclIsTypeOf(Array) then
+if determineSize(t.oclAsType(Array).type) = 1 then  
+	t.oclAsType(Array).length
+else
+	t.oclAsType(Array).length * determineSize(t.oclAsType(Array).type) 
+endif 
+else if t.oclIsTypeOf(Structure) then  
+		t.oclAsType(Structure).types->collect(type | determineSize(type))->sum()
+	else
+		1 
+endif
+endif
+/]
+
 
 [template public genParams(cfg: ControlFlowDiagram, genData: GeneratorData)]
 [genListOfVars(genData, 'func-params:'+cfg.name)/]
@@ -542,7 +593,7 @@ short memUse = 1; 	//shows to the next free cell in memory
 
 [/template]
 
-[template public buildProcesses(c: OclAny)]
+[template public buildProcesses(c: OclAny, genData: GeneratorData)]
 
 //Stubs
 proctype process1(){
@@ -556,7 +607,8 @@ proctype process2(){
 
 init{
 atomic{
-	//TODO: empty stub
+	//initialize global variables or allocate memory space here, if necessary
+	[genGlobalVariableAllocation(genData)/]
 
 	run process1();
 	run process2();
@@ -566,8 +618,8 @@ atomic{
 
 [template public buildStandards(genData: GeneratorData)]
 
-//standard stuff
 [for(func: String | genData.transformationSpecificKeys)][if (func.equalsIgnoreCase('getelementptr'))]
+//pointer computation 
 inline getelementptr(type, instance, offset, targetRegister)
 {
 	atomic{
@@ -580,6 +632,7 @@ inline getelementptr(type, instance, offset, targetRegister)
 }
 [/if]
 [/for]
+//memory allocation
 inline alloca(type, targetRegister)
 {
 	atomic{
@@ -589,6 +642,7 @@ inline alloca(type, targetRegister)
 	}
 }
 [for(func: String | genData.transformationSpecificKeys)][if (func.equalsIgnoreCase('cas'))]
+//atomic compare and swap instruction 
 inline cas(adr, old, new, result)
 {
 	atomic{
