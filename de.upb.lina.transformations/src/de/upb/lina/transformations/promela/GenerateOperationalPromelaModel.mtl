@@ -654,6 +654,9 @@ e.addressToString(genData)
 
 [template public generateOperationalModelSC(genData: GeneratorData)]
 [file ( 'sc.pml'  , false, 'UTF-8')]
+// [protected ('SC')]
+// This code will not be regenerated, if you change it. Delete the file 
+// or remove the first and last line of the file, if you want it to be regenerated.  
 #define NULL 0
 
 /*Speicher*/
@@ -690,11 +693,16 @@ inline cas(adr, oldValue, newValue, returnValue) {
 		fi;
 	}
 }
+
+// [/protected]
 [/file]
 [/template]
 
 [template public generateOperationalModelTSO(genData: GeneratorData)]
 [file ( 'tso.pml'  , false, 'UTF-8')]
+// [protected ('operational TSO model')]
+// This code will not be regenerated, if you change it. Delete the file 
+// or remove the first and last line of the file, if you want it to be regenerated.  
 #define NULL 0
 
 /*Buffer as a 2 dimensional array which represents the queue ['['/](nx2)-matrix[']'/]*/
@@ -849,11 +857,15 @@ end:	do
 			fi
 		od
 }
+// [/protected]
 [/file]
 [/template]
 
 [template public generateOperationalModelPSO(genData: GeneratorData)]
 [file ( 'pso.pml'  , false, 'UTF-8')]
+// [protected ('operational PSO model')]
+// This code will not be regenerated, if you change it. Delete the file 
+// or remove the first and last line of the file, if you want it to be regenerated.  
 #define NULL 0
 
 mtype = {iWrite, iRead , iMfence, iCas};
@@ -1077,6 +1089,7 @@ end:	do
 			fi
 		od
 }
+// [/protected]
 [/file]
 [/template]
 
