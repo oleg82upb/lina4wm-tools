@@ -1708,7 +1708,7 @@ public class GendataPrecomputer {
 				mapping.setOffset(getGetElementPtrValue(nPtr, mapping));
 				completeSize = computeCompleteSize(nPtr.getAggregate().getType(), false);
 			}
-		mapping.setCompleteTypeSize(completeSize - 1);
+		mapping.setCompleteTypeSize(completeSize);
 		return mapping;
 		}else{
 			throw new RuntimeException("Trying to map a non getElementPtr object");
