@@ -97,7 +97,7 @@ public class GendataPrecomputer {
 
 	private HashMap<FunctionDefinition, List<String>> usedVarsInFunctions = new HashMap<FunctionDefinition, List<String>>();
 
-	public GendataPrecomputer(Configuration config) {
+	public GendataPrecomputer(TransformationConfiguration config) {
 		this.cfgs = config.getCfgs();
 		this.kivTransformationBasis = config.getKIVBasis();
 		this.oldToNewCfgName = config.getOldToNewCfgName();

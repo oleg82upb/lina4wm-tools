@@ -27,10 +27,10 @@ public class TransformationOperation extends WorkspaceModifyOperation{
 	protected IPath fullPath;
 	
 	protected GeneratorData genData;
-	protected Configuration config;
+	protected TransformationConfiguration config;
 	
 	
-	public TransformationOperation(String targetContainer, String targetName, String fileEnding, Configuration config) {
+	public TransformationOperation(String targetContainer, String targetName, String fileEnding, TransformationConfiguration config) {
 		this.targetContainer = targetContainer; 
 		this.targetName = targetName;
 		this.fileEnding = fileEnding;

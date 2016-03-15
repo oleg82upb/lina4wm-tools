@@ -1,7 +1,6 @@
 package de.upb.lina.transformations.logic;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -36,20 +35,13 @@ import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.nodemodel.INode;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
-import de.upb.lina.cfg.tools.CFGActivator;
 import de.upb.lina.cfg.tools.CFGConstants;
-import de.upb.lina.cfg.tools.IGraphGenerator;
 import de.upb.lina.cfg.tools.checks.LoadsInWriteDefChainPropertyChecker;
 import de.upb.lina.cfg.tools.checks.WritingLoopWithoutFencePropertyChecker;
 import de.upb.lina.cfg.tools.checks.PropertyCheckerManager;
 import de.upb.lina.cfg.tools.checks.UnsupportedInstructionPropertyChecker;
-import de.upb.lina.cfg.tools.strategies.PSOGraphGenerator;
-import de.upb.lina.cfg.tools.strategies.SCGraphGenerator;
-import de.upb.lina.cfg.tools.strategies.TSOGraphGenerator;
 import de.upb.lina.transformations.Activator;
 import de.upb.lina.transformations.Constants;
-import de.upb.llvm_parser.llvm.AbstractElement;
-import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LLVM;
 
 /**
@@ -138,21 +130,21 @@ public class CreateAllHandler extends AbstractHandler
 							List<ControlFlowDiagram> cfgs = null;
 							if (!doesUserAbortAsOfErrors(ast, CFGConstants.SC))
 							{
-								cfgs = createCFGFromAst(CFGConstants.SC, ast);
+								cfgs = TransformationUtil.createCFGFromAst(CFGConstants.SC, ast);
 								monitor.worked(1);
 								createTransformations(cfgs);
 								monitor.worked(1);
 							}
 							if (!doesUserAbortAsOfErrors(ast, CFGConstants.TSO))
 							{
-								cfgs = createCFGFromAst(CFGConstants.TSO, ast);
+								cfgs = TransformationUtil.createCFGFromAst(CFGConstants.TSO, ast);
 								monitor.worked(1);
 								createTransformations(cfgs);
 								monitor.worked(1);
 							}
 							if (!doesUserAbortAsOfErrors(ast, CFGConstants.PSO))
 							{
-								cfgs = createCFGFromAst(CFGConstants.PSO, ast);
+								cfgs = TransformationUtil.createCFGFromAst(CFGConstants.PSO, ast);
 								monitor.worked(1);
 								createTransformations(cfgs);
 								monitor.worked(1);
@@ -201,7 +193,7 @@ public class CreateAllHandler extends AbstractHandler
 			String transformationTypeName = TRANSFORMATION_TYPE_NAMES_KIV[i];
 			for (String kIVBasis : KIV_BASES)
 			{
-				Configuration config = new Configuration(cfgs, kIVBasis, oldToNewCfgName, transformationType);
+				TransformationConfiguration config = new TransformationConfiguration(cfgs, kIVBasis, oldToNewCfgName, transformationType);
 				wmo = new TransformationOperation(createFolder(memoryModel, transformationTypeName + "_" + kIVBasis) , "", "", config);
 				try
 				{
@@ -219,7 +211,7 @@ public class CreateAllHandler extends AbstractHandler
 		{
 			int transformationType = TRANSFORMATION_TYPES_PROMELA[i];
 			String transformationTypeName = TRANSFORMATION_TYPE_NAMES_PROMELA[i];
-			Configuration config = new Configuration(cfgs,oldToNewCfgName, transformationType);
+			TransformationConfiguration config = new TransformationConfiguration(cfgs,oldToNewCfgName, transformationType);
 			wmo = new TransformationOperation(createFolder(memoryModel, transformationTypeName),
 					transformationTypeName + "_" + file.getName(), ".pml", config);
 			try
@@ -281,53 +273,6 @@ public class CreateAllHandler extends AbstractHandler
 		}
 	}
 
-
-	/**
-	 * Creates the according controlflow diagrams for the given ast and memory model.
-	 * 
-	 * @param memoryModel memory model to consider for cfg creation
-	 * @param ast ast to create cfg for
-	 * @return created cfgs of the functions of ast
-	 */
-	public static List<ControlFlowDiagram> createCFGFromAst(int memoryModel, LLVM ast)
-	{
-		List<ControlFlowDiagram> list = new ArrayList<ControlFlowDiagram>();
-		// generating cfg for each function
-		Iterator<AbstractElement> i = ast.getElements().iterator();
-		while (i.hasNext())
-		{
-			AbstractElement e = i.next();
-			if (e instanceof FunctionDefinition)
-			{
-				FunctionDefinition function = (FunctionDefinition) e;
-				if (function.getBody() != null)
-				{
-					IGraphGenerator generator = null;
-
-					switch(memoryModel){
-					case CFGConstants.SC: 
-						generator = new SCGraphGenerator(function);
-						break;
-					case CFGConstants.TSO:
-						generator = new TSOGraphGenerator(function);
-						break;
-					case CFGConstants.PSO:
-						generator = new PSOGraphGenerator(function);
-						break;
-					default:
-						throw new RuntimeException("Memory model selection not supported");
-					}
-
-					list.add(generator.createGraph());
-					if (generator.getWarnings() != null)
-					{
-						CFGActivator.logWarning(generator.getWarnings(), null);
-					}
-				}
-			}
-		}
-		return list;
-	}
 
 	/**
 	 * Checks for problems and errors in the given ast and reports them to the user. The user is asked if he
