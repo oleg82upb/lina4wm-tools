@@ -51,6 +51,14 @@ public abstract class ConfigurationWizardUsingChecks extends Wizard implements
 		return isMyCanFinish();
 	}
 	
+	
+	
+	@Override
+	public boolean performFinish() {
+		configurationPage.saveMementoState();
+		return true;
+	}
+
 	/**
 	 * Executes checks of several property checkers on the AST model 
 	 * and passes the results to the {@link WarningPage}. 
