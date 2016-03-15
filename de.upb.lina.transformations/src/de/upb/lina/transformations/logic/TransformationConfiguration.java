@@ -11,7 +11,7 @@ import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
  * It is currently used for both promela and kiv transformations.
  *
  */
-public class Configuration {
+public class TransformationConfiguration {
 	
 	private List<ControlFlowDiagram> cfgs;	
 	private Map<String, String> oldToNewCfgNameMap;
@@ -26,7 +26,7 @@ public class Configuration {
 	 * @param oldToNewCfgNameMap 
 	 * @param transformationType
 	 */
-	public Configuration(List<ControlFlowDiagram> cfgs, Map<String, String> oldToNewCfgNameMap, int transformationType){
+	public TransformationConfiguration(List<ControlFlowDiagram> cfgs, Map<String, String> oldToNewCfgNameMap, int transformationType){
 		this.cfgs = cfgs;
 		this.oldToNewCfgNameMap = oldToNewCfgNameMap;
 		this.transformationType = transformationType;
@@ -40,7 +40,7 @@ public class Configuration {
 	 * @param oldToNewCfgNameMap
 	 * @param transformationType
 	 */
-	public Configuration(List<ControlFlowDiagram> cfgs, String kIVBasis, Map<String, String> oldToNewCfgNameMap,int transformationType){
+	public TransformationConfiguration(List<ControlFlowDiagram> cfgs, String kIVBasis, Map<String, String> oldToNewCfgNameMap,int transformationType){
 		this(cfgs, oldToNewCfgNameMap, transformationType);
 		this.kIVBasis = kIVBasis;
 	}
@@ -75,4 +75,5 @@ public class Configuration {
 	{
 		return transformationType;
 	}
+	
 }
