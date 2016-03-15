@@ -12,14 +12,14 @@
             class="de.upb.lina.transformations.wizards.TransformationWizard"
             icon="icons/sample.gif"
             id="de.upb.lina.transformations.promela.tools.transformationWizard"
-            name="Generate New Specification">
+            name="New Specification from Store Buffer Graph">
       </wizard>
       <wizard
             category="de.upb.lina.cfg.tools"
             class="de.upb.lina.transformations.wizards.allinone.AllInOneWizard"
             icon="icons/sample.gif"
             id="de.upb.lina.transformations.promela.tools.allinonewizard"
-            name="Generate New Specification from LLVM">
+            name="New Specification directly from LLVM">
       </wizard>
    </extension>
    
