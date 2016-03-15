@@ -34,7 +34,7 @@ import de.upb.lina.cfg.tools.wizards.ConfigurationWizardUsingChecks;
 import de.upb.lina.cfg.tools.wizards.StoreBufferGraphConfigurationPage;
 import de.upb.lina.transformations.Activator;
 import de.upb.lina.transformations.Constants;
-import de.upb.lina.transformations.logic.CreateAllHandler;
+import de.upb.lina.transformations.logic.TransformationUtil;
 import de.upb.lina.transformations.wizards.FunctionSelectionPage;
 import de.upb.llvm_parser.llvm.LLVM;
 
@@ -240,7 +240,7 @@ public class AllInOneConfigurationPage extends ConfigurationPage{
 
 	private void updateFunctionSelectionPage() {
 		LLVM ast = ResourceIOUtil.createAstFromLLVM(getPathToInputFile());
-		List<ControlFlowDiagram> loadedCfgs = CreateAllHandler.createCFGFromAst(CFGConstants.SC, ast);
+		List<ControlFlowDiagram> loadedCfgs = TransformationUtil.createCFGFromAst(CFGConstants.SC, ast);
 		functionSelectionPage.setStoreBufferDiagramToUse(loadedCfgs);
 	}
 	
@@ -318,6 +318,23 @@ public class AllInOneConfigurationPage extends ConfigurationPage{
 	
 	public int getSelectedKivBasis(){
 		return cb_kivBasis.getSelectionIndex();
+	}
+	
+	/**
+	 * Returns the according string representation of the selected KIV basis. 
+	 * 
+	 * @return string representation of the selected KIV basis
+	 */
+	public String getSelectedKivBasisAsString(){
+		switch (getSelectedKivBasis()) {
+		case Constants.NAT_INDEX:
+			return Constants.KIV_BASIS_NAT;
+		case Constants.INT_INDEX:
+			return Constants.KIV_BASIS_INT;
+		default:
+			break;
+		}
+		return "";
 	}
 
 	private void enableKivSpecificGuiSettings() {
@@ -412,6 +429,10 @@ public class AllInOneConfigurationPage extends ConfigurationPage{
 	@Override
 	protected String getNameOfOutputFile() {
 		return tx_outputFileName.getText();
+	}
+	
+	public String getOutputFileExtension(){
+		return lb_outputFileExtension.getText();
 	}
 	
 	
