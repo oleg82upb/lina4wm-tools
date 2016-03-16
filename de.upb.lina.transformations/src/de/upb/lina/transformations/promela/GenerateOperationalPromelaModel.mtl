@@ -142,7 +142,7 @@ let gDefs : OrderedSet(GlobalDefinition) = genData.program.elements->filter(Glob
 let gDef : GlobalDefinition  = gDefs->first() in 
 if gDef.value.oclIsTypeOf(Parameter) then
 	if gDef.value.oclAsType(Parameter).type.oclIsTypeOf(Array) or gDef.value.oclAsType(Parameter).type.oclIsTypeOf(Structure) then
-		determineSize(gDef.value.oclAsType(Parameter).type)
+		determineSize(gDef.value.oclAsType(Parameter).type, genData)
 	else '1'
 	endif
 else 
@@ -150,18 +150,26 @@ else
 endif
 /]
 
-[query public determineSize(t: EObject) : Integer = 
+[query public determineSize(t: EObject, genData: GeneratorData) : Integer = 
 if t.oclIsTypeOf(Array) then
-if determineSize(t.oclAsType(Array).type) = 1 then  
+if determineSize(t.oclAsType(Array).type, genData) = 1 then  
 	t.oclAsType(Array).length
 else
-	t.oclAsType(Array).length * determineSize(t.oclAsType(Array).type) 
+	t.oclAsType(Array).length * determineSize(t.oclAsType(Array).type, genData) 
 endif 
 else if t.oclIsTypeOf(Structure) then  
-		t.oclAsType(Structure).types->collect(type | determineSize(type))->sum()
-	else
-		1 
-endif
+		t.oclAsType(Structure).types->collect(type | determineSize(type, genData))->sum()
+	else if t.oclIsTypeOf(AddressUse) then
+		let tDef : TypeDefinition = genData.program.elements->filter(TypeDefinition)->select(tf | tf.address = t.oclAsType(AddressUse).address)->first() in
+			if tDef.oclIsUndefined() then
+				1
+			else
+				determineSize(tDef.struct.oclAsType(EObject), genData)
+			endif
+		else 
+				1
+		endif
+	endif
 endif
 /]
 
