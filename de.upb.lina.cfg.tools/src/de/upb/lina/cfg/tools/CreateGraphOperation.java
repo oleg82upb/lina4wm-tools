@@ -126,6 +126,13 @@ public class CreateGraphOperation extends WorkspaceModifyOperation {
 
 			resource.save(Collections.EMPTY_MAP);
 			refreshWorkspace(monitor);
+			
+			
+			for (ControlFlowDiagram cfg : list)
+			{
+				CFGActivator.log(IStatus.INFO, "Generated " + cfg.getName() + " with " + cfg.getLocations().size() + " nodes and " + cfg.getTransitions().size() + " edges.", null);
+			}
+			
 
 		} catch (IOException e)
 		{

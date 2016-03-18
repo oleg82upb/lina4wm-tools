@@ -662,41 +662,51 @@ public class GendataPrecomputer {
 		}
 	}
 
+	/**
+	 * Computes unique labels for each node in the store buffer graph.
+	 */
 	private void computeLocationLabels()
 	{
 		for (ControlFlowDiagram cfg : cfgs)
 		{
-			List<LocationLabel> labels = helperModel.getLocationLabels();
 			// prepare for check if we can use short buffer labels
-			List<ControlFlowLocation> conflictingLocs = new ArrayList<ControlFlowLocation>();
-			List<String> iteratedBuffers = new ArrayList<String>();
-			for (ControlFlowLocation l : cfg.getLocations())
+			List<String> generatedLabels = new ArrayList<String>();
+			int numberOfNodes = cfg.getLocations().size();
+			for (ControlFlowLocation location : cfg.getLocations())
 			{
-				String bufferRep = generateLabel(l, cfg.getLocations().size(), true);
-				if (iteratedBuffers.contains(bufferRep))
+				String labelString = generateLabel(location, numberOfNodes, true);
+				if (generatedLabels.contains(labelString))
 				{
-					conflictingLocs.add(l);
+					// label already used, fall back to long label version
+					labelString = generateLabel(location, numberOfNodes, false);
+
+					if (generatedLabels.contains(labelString))
+					{
+						// append index until it is unique
+						int i = 0;
+						String newLabelString = labelString;
+						do
+						{
+							newLabelString = labelString + i;
+							i++;
+						} while (generatedLabels.contains(newLabelString));
+
+						// finally, this label is also unique
+						labelString = newLabelString;
+					} 
+					//else: label is unique, we are good
+					
+					generatedLabels.add(labelString);
+					
 				} else
 				{
-					iteratedBuffers.add(bufferRep);
+					generatedLabels.add(labelString);
 				}
-			}
 
-			for (ControlFlowLocation l : cfg.getLocations())
-			{
-
-				// use long buffer labels if needed as of conflict, short if not
-				// needed
-				boolean shortLabel = false;
-				if (!conflictingLocs.contains(l))
-				{
-					shortLabel = true;
-				}
-				String bufferRepresentation = generateLabel(l, cfg.getLocations().size(), shortLabel);
 				LocationLabel label = GendataFactory.eINSTANCE.createLocationLabel();
-				label.setName(bufferRepresentation);
-				label.setControlFlowLocation(l);
-				labels.add(label);
+				label.setName(labelString);
+				label.setControlFlowLocation(location);
+				helperModel.getLocationLabels().add(label);
 			}
 		}
 	}
@@ -811,6 +821,16 @@ public class GendataPrecomputer {
 		}
 	}
 
+	/**
+	 * Generates labels for the given location. A label combines program location with 
+	 * the store buffer entries, e.g. line 37 with store buffer entries (x,1),(y,2) of the second method will result in:
+	 * B37x1y2 or if shortLabel is true, then B37xy.   
+	 * 
+	 * @param loc the location 
+	 * @param size of the graph, i.e., number of nodes determines the number digits necessary
+	 * @param shortLabel true for short labels
+	 * @return the label
+	 */
 	private String generateLabel(ControlFlowLocation loc, int size, boolean shortLabel)
 	{
 		int sizeString = String.valueOf(size).length();
