@@ -10,16 +10,16 @@
       <wizard
             category="de.upb.lina.cfg.tools"
             class="de.upb.lina.transformations.wizards.TransformationWizard"
-            icon="icons/sample.gif"
+            icon="icons/spec.png"
             id="de.upb.lina.transformations.promela.tools.transformationWizard"
-            name="New Specification from Store Buffer Graph">
+            name="Generate Specification from Store Buffer Graph">
       </wizard>
       <wizard
             category="de.upb.lina.cfg.tools"
             class="de.upb.lina.transformations.wizards.allinone.AllInOneWizard"
-            icon="icons/sample.gif"
+            icon="icons/spec.png"
             id="de.upb.lina.transformations.promela.tools.allinonewizard"
-            name="New Specification directly from LLVM">
+            name="Generate Specification from LLVM in one Step">
       </wizard>
    </extension>
    
@@ -52,9 +52,9 @@
          <command
                commandId="de.upb.lina.transformations.createallcommand"
                id="de.upb.lina.transformations.createalltransformations"
-               label="Create All Transformations"
+               label="Generate All Specifications from LLVM"
                style="push"
-               tooltip="Create all transformations.">
+               tooltip="Generates all specification variations for Promela and KIV directly from LLVM code.">
             <visibleWhen
                   checkEnabled="false">
                <with
@@ -84,9 +84,9 @@
          <command
                commandId="de.upb.lina.transformations.saveastcommand"
                id="de.upb.lina.transformations.saveast"
-               label="Save AST"
+               label="Save LLVM AST"
                style="push"
-               tooltip="Save Abstract Syntax Tree Model.">
+               tooltip="Save LLVM Abstract Syntax Tree as a model.">
             <visibleWhen
                   checkEnabled="false">
                <with

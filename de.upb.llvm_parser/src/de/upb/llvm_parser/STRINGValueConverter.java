@@ -12,7 +12,7 @@ public class STRINGValueConverter extends AbstractValueConverter<String> {
 		return '"' + Strings.convertToJavaString(value, false) + '"';
 	}
 
-	@Override
+
 	public String toValue(String string, INode node) throws ValueConverterException {
 		if (string == null)
 			return null;

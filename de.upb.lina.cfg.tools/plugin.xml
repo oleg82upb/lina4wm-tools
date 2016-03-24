@@ -5,15 +5,15 @@
    <extension
          point="org.eclipse.ui.newWizards">
       <category
-            name="LINA"
+            name="Weak2SC"
             id="de.upb.lina.cfg.tools">
       </category>
       <wizard
             category="de.upb.lina.cfg.tools"
             class="de.upb.lina.cfg.tools.wizards.CreateStoreBufferGraphWizard"
-            icon="icons/sample.gif"
+            icon="icons/graph.png"
             id="de.upb.lina.cfg.tools.wizards.NewCfgWizard"
-            name="New Store Buffer Graph"
+            name="Derive Store Buffer Graph from LLVM"
             project="false">
       </wizard>
    </extension>

@@ -8,7 +8,6 @@ import org.eclipse.xtext.util.Strings;
 
 public class LLVMQualifiedNameConverter implements IQualifiedNameConverter {
 
-	@Override
 	public String toString(QualifiedName qualifiedName)
 	{
 		if (qualifiedName == null)
@@ -16,7 +15,6 @@ public class LLVMQualifiedNameConverter implements IQualifiedNameConverter {
 		return qualifiedName.toString(getDelimiter());
 	}
 
-	@Override
 	public QualifiedName toQualifiedName(String qualifiedNameAsString)
 	{
 		if (qualifiedNameAsString == null)

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/de.upb.lina.feature_1.0.0.qualifier.jar" id="de.upb.lina.feature" version="1.0.0.qualifier"/>
+   <feature url="features/de.upb.lina.feature_1.0.0.jar" id="de.upb.lina.feature" version="1.0.0">
+      <category name="de.upb.lina.weak2sc"/>
+   </feature>
+   <category-def name="de.upb.lina.weak2sc" label="Weak2SC"/>
 </site>

@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Control Flow Graph Tools
+Bundle-Name: Store Buffer Graph Tools
 Bundle-SymbolicName: de.upb.lina.cfg.tools;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: de.upb.lina.cfg.tools.CFGActivator
