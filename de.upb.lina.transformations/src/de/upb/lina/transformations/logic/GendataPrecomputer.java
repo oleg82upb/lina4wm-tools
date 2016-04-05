@@ -1522,155 +1522,97 @@ public class GendataPrecomputer {
 	{
 		EList<Parameter> indices;
 		EObject aggregateType;
-		
+
 		int result = 0;
-		if(object instanceof GetElementPtr)
+		if (object instanceof GetElementPtr)
 		{
-			aggregateType = ((GetElementPtr)object).getAggregate().getType();
-			indices = ((GetElementPtr)object).getIndices();
-		}
-		else
-		{
-			aggregateType = ((NestedGetElementPtr)object).getAggregate().getType();
-			indices = ((NestedGetElementPtr)object).getIndices();
-		}
-		
-		if (aggregateType instanceof Predefined)
-		{
-			int aggregateTypeSize = 0;
-			Predefined predef = (Predefined) aggregateType;
-			if (predef.getType().startsWith("i"))
-			{
-				try
-				{
-					aggregateTypeSize = Integer.parseInt(predef.getType().replaceAll("i", ""));
-					Parameter firstIndex = indices.get(0);
-					if (firstIndex.getType() instanceof Predefined)
-					{
-						Predefined firstIndexPredefined = (Predefined) firstIndex.getType();
-						int firstIndexSize = Integer.parseInt(firstIndexPredefined.getType().replaceAll("i", "")
-								.replaceAll("\\*", ""));
-
-						// show warning that computation might be wrong
-						if (aggregateTypeSize != firstIndexSize)
-						{
-							mapping.setWarning(mapping.getWarning()
-									+ "Needs attention due to different types of first index and aggregate.");
-						}
-
-						if (firstIndex.getValue() instanceof IntegerConstant)
-						{
-							IntegerConstant intConstant = (IntegerConstant) firstIndex.getValue();
-							int firstIndexValue = intConstant.getValue();
-							return String.valueOf((firstIndexValue) / (firstIndexSize / aggregateTypeSize));
-						}
-
-					} else
-					{
-						throw new RuntimeException(firstIndex.getType() + " is not an int_type.");
-					}
-
-				} catch (NumberFormatException ex)
-				{
-					Activator.logError(ex.getMessage(), ex);
-				}
-			} else
-			{
-				throw new RuntimeException(predef.getType() + " is not an int_type.");
-			}
+			aggregateType = ((GetElementPtr) object).getAggregate().getType();
+			indices = ((GetElementPtr) object).getIndices();
 		} else
 		{
-				try
+			aggregateType = ((NestedGetElementPtr) object).getAggregate().getType();
+			indices = ((NestedGetElementPtr) object).getIndices();
+		}
+
+		try
+		{
+			// first index
+			int firstIndexValue = Integer.parseInt(GraphUtility.valueToString(indices.get(0).getValue()));
+			if (firstIndexValue != 0)
+			{
+				mapping.setWarning(mapping.getWarning() + "Needs attention as first index is not 0!");
+			}
+		} catch (NumberFormatException ex)
+		{
+			// do nothing, not all parameters are constants
+		}
+
+		Iterator<Parameter> iter = indices.iterator();
+		boolean allConstants = true;
+		while (iter.hasNext())
+		{
+			Parameter p = iter.next();
+			if (!(p.getValue() instanceof IntegerConstant))
+			{
+				allConstants = false;
+				break;
+			}
+		}
+
+		if (allConstants)
+		{
+			EObject partOfAggregate = aggregateType;
+			// following indices
+			for (int i = 0; i < indices.size(); i++)
+			{
+
+				int indexVal = Integer.parseInt(GraphUtility.valueToString(indices.get(i).getValue()));
+
+				int intermediateResult = computeSize(partOfAggregate, indexVal, false);
+				result += intermediateResult;
+
+				partOfAggregate = getPartOfAggregate(partOfAggregate, indexVal);
+			}
+			return String.valueOf(result);
+		} else
+		// dynamic computation
+		{
+			EObject partOfAggregate = aggregateType;
+			String sResult = "";
+			// following indices
+			for (int i = 0; i < indices.size(); i++)
+			{
+
+				Value index = indices.get(i).getValue();
+
+				if (!"".equals(sResult))
 				{
-					// first index
-					int firstIndexValue = Integer.parseInt(GraphUtility.valueToString(indices.get(0)
-							.getValue()));
-					if (firstIndexValue != 0)
-					{
-						mapping.setWarning(mapping.getWarning() + "Needs attention as first index is not 0!");
-					}
-					
-					Iterator<Parameter> iter = indices.iterator();
-					boolean allConstants  = true;
-					while(iter.hasNext())
-					{
-						Parameter p = iter.next();
-						if(!(p.getValue() instanceof IntegerConstant))
-						{
-							allConstants = false;
-							break;
-						}
-					}
-					
-					if(allConstants)
-					{
-						EObject partOfAggregate = aggregateType;
-						// following indices
-						for (int i = 1; i < indices.size(); i++)
-						{
-							
-							
-							int indexVal = Integer.parseInt(GraphUtility
-									.valueToString(indices.get(i).getValue()));
-
-							int intermediateResult = computeSize(partOfAggregate, indexVal, false);
-							result += intermediateResult;
-
-							partOfAggregate = getPartOfAggregate(partOfAggregate, indexVal);
-						}
-						return String.valueOf(result);
-					}
-					else //dynamic computation
-					{	
-						EObject partOfAggregate = aggregateType;
-						String sResult = "";
-						// following indices
-						for (int i = 1; i < indices.size(); i++)
-						{
-							
-							Value index = indices.get(i).getValue();
-							
-							if(!"".equals(sResult))
-							{
-								sResult += " + ";
-							}
-							
-							if(index instanceof IntegerConstant)
-							{
-								//constant
-								sResult += computeSize(partOfAggregate, ((IntegerConstant)index).getValue(), false);
-							}
-							else
-							{
-								//must be a variable
-								int size = computeCompleteSize(getPartOfAggregate(partOfAggregate, i), false);
-								if(size != 1)
-								{
-									sResult += size + "*" +  GraphUtility.valueToString(index); //2*value or 3*value...
-								}
-								else
-								{
-									sResult += GraphUtility.valueToString(index); // 1*value = value
-								}
-								
-								
-							}
-							
-							partOfAggregate = getPartOfAggregate(partOfAggregate, i);
-						}
-						return sResult;
-					}
-
-					
-				} catch (NumberFormatException ex)
-				{
-					Activator.logError("Parsed a non-integer index entry for getElementPtr.", ex);
+					sResult += " + ";
 				}
 
-
-			return String.valueOf(-1);
+				if (index instanceof IntegerConstant)
+				{
+					// constant
+					sResult += computeSize(partOfAggregate, ((IntegerConstant) index).getValue(), false);
+				} else
+				{
+					// must be a variable
+					int size = computeCompleteSize(getPartOfAggregate(partOfAggregate, i), false);
+					if (size != 1)
+					{
+						// 2*value or 3*value...
+						sResult += size + "*" + GraphUtility.valueToString(index);  
+					} else
+					{
+						//1*value = value
+						sResult += GraphUtility.valueToString(index); 
+					}
+				}
+				
+				partOfAggregate = getPartOfAggregate(partOfAggregate, i);
+			}
+			return sResult;
 		}
-		return String.valueOf(result);
 	}
 
 	public TypeDefinition getTypeDefinedForAddress(Address address)

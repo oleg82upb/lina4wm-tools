@@ -649,8 +649,11 @@ inline alloca(type, targetRegister)
 	assert(memUse < MEM_SIZE);
 	}
 }
-[for(func: String | genData.transformationSpecificKeys)][if (func.equalsIgnoreCase('cas'))]
+[if (genData.transformationSpecificKeys->select(s | s.equalsIgnoreCase('cas'))->notEmpty())]
 //atomic compare and swap instruction 
+//Note, LLVM returns a tuple (i32, i1), the value read and a success bit.
+//Sometimes the follow up code uses the succes bit but usually the read value. 
+//Adjust CAS semantics, if necessary.
 inline cas(adr, old, new, result)
 {
 	atomic{
@@ -663,5 +666,4 @@ inline cas(adr, old, new, result)
 	}
 }
 [/if]
-[/for]
 [/template]
