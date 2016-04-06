@@ -20,8 +20,11 @@
 	specification, which can be used as input for a model checker. Each step is shown in detail, including screenshots which can be clicked to obtain a larger version.
 
 	<h2>1. From C to LLVM</h2>
-	TODO
-
+	As a first step a LLVM file has to be generated from the C code which should be analyzed. In order to do this, enter
+	the following command into the console: </br>
+	<pre>clang -S [-O1-3] -emit -llvm &ltinputfile.c&gt -o &ltoutput.s&gt</pre>
+	Please note that the second parameter "[-O1-3]" is optimal and refers to three different compiler optimization levels.
+	
 	<h2>2. From LLVM to AST</h2>
 	Once you obtained the LLVM code in the form of a '.s' file, you right click the '.s' file and choose 'Save AST'. 
 	</br>
