@@ -43,11 +43,18 @@ skip;
 [/template]
 
 [template public generateBlock(block: BasicBlock, genData: GeneratorData)]
-[block.label.escape()/]: 
+[escape(block.label)/]: 
 [for (i : Instruction | block.instructions)]
  [i.genInstruction(genData)/]
 [/for]
 [/template]
+
+[query public escape(s : EString) : String = 
+if s.substituteAll('.', '').substituteAll('%', '').equalsIgnoreCase('return') then
+ 'return1' 
+else s.substituteAll('.', '').substituteAll('%', '')
+endif
+/]
 
 [template public genStartOfFile(c: OclAny)]
 #define MEM_SIZE 10	//size of memory
@@ -90,9 +97,6 @@ atomic{
 [/template]
 
 
-[query public escape(s : EString) : String = 
-s.substituteAll('.', '').substituteAll('%', '')
-/]
 
 [template public genFunctionHead(cfg: ControlFlowDiagram, genData: GeneratorData)]
 [for (mapping: OldToNewCfgNameMapping | genData.oldToNewCfgName)][if (mapping.key.equalsIgnoreCase(cfg.name))]
@@ -720,7 +724,6 @@ short memory['['/]MEM_SIZE[']'/];
 inline write(adr, newValue)
 {
 	atomic{
-	assert(adr != 0);
 	ch ! iWrite, adr, newValue, NULL;
 	}
 }
@@ -728,7 +731,6 @@ inline write(adr, newValue)
 inline read(adr, target)
 {
 	atomic{
-	assert(adr != 0);
 	ch ! iRead, adr, NULL, NULL;
 	ch ? iRead, NULL, target, NULL;
 	}
@@ -746,13 +748,13 @@ inline cas(adr, oldValue, newValue, successBit)
 {
 	// 2 steps for the executing process, but atomic on memory
 	atomic{
-	assert(adr != 0);
 	ch ! iCas, adr, oldValue, newValue;
 	ch ? iCas, NULL, successBit, NULL; 
 	}
 }
 
 inline writeB() {
+		assert(address != 0);
 		assert(tail < BUFF_SIZE);
 		buffer['['/]tail[']'/].line['['/]0[']'/] = address;
 		buffer['['/]tail[']'/].line['['/]1[']'/] = value;
@@ -763,6 +765,7 @@ inline writeB() {
 
 
 inline readB() {
+	assert(address != 0);
 	i = tail-1;
 	do
 	:: i >= 0  -> 
@@ -820,6 +823,7 @@ inline casB()
 {
 	mfenceB();	//buffer must be empty
 	atomic{
+	assert(address != 0);
 	i = memory['['/]address[']'/]; 
 	if 
 		:: memory['['/]address[']'/] == value 
@@ -894,7 +898,6 @@ short memory['['/]MEM_SIZE[']'/];
 inline write(adr, newValue)
 {
 	atomic{
-	assert(adr != 0);
 	ch ! iWrite, adr, newValue, NULL;
 	}
 }
@@ -902,7 +905,6 @@ inline write(adr, newValue)
 inline read(adr, target)
 {
 	atomic{
-	assert(adr != 0);
 	ch ! iRead, adr, NULL, NULL;
 	ch ? iRead, NULL, target, NULL;
 	}
@@ -920,7 +922,6 @@ inline cas(adr, oldValue, newValue, successBit)
 {
 	// 2 steps for the executing process, but atomic on memory
 	atomic{
-		assert(adr != 0);
 		ch ! iCas, adr, oldValue, newValue;
 		ch ? iCas, NULL, successBit, NULL; 
 	}
@@ -931,6 +932,7 @@ inline cas(adr, oldValue, newValue, successBit)
 //the semantics for each instruction
 inline writeB() {
 	atomic{
+	assert(address != 0);
 	assert(address < MEM_SIZE);
 	assert(tail['['/]address[']'/] < BUFF_SIZE);
 	buffer['['/]address[']'/].entry['['/]tail['['/]address[']'/][']'/] = value;
@@ -1055,6 +1057,7 @@ inline casB()
 {
 	mfenceB();	//buffer must be empty
 	atomic{
+	assert(address != 0);
 	i = memory['['/]address[']'/];
 	if 
 		:: memory['['/]address[']'/] == value 
