@@ -72,7 +72,7 @@ public class CreateStoreBufferGraphWizard extends ConfigurationWizardUsingChecks
 			}
 
 			//store the transformed ast file
-			String pathToOutputFileForAst = getConfigurationPage().getPathToOutputFolder() + File.separator + getConfigurationPage().getNameOfOutputFile().replace("." + CFGConstants.CFG_FILE_EXTENSION, "." + CFGConstants.LLVM_FILE_EXTENSION);
+			String pathToOutputFileForAst = getPathToAstOutputFile();
 			ResourceIOUtil.saveResourceToDisk(pathToOutputFileForAst, CFGConstants.LLVM_FILE_EXTENSION, astForInputLLVMFile);
 
 			//create graph operation accordingly
@@ -94,6 +94,11 @@ public class CreateStoreBufferGraphWizard extends ConfigurationWizardUsingChecks
 		}
 
 		return true;
+	}
+
+
+	public String getPathToAstOutputFile() {
+		return getConfigurationPage().getPathToOutputFolder() + File.separator + getConfigurationPage().getNameOfOutputFile().replace("." + CFGConstants.CFG_FILE_EXTENSION, "." + CFGConstants.LLVM_FILE_EXTENSION);
 	}
 
 

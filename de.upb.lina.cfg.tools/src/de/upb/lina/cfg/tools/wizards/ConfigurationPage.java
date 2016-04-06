@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
@@ -163,6 +164,13 @@ public abstract class ConfigurationPage extends ExtendedWizardPage {
 			return false;
 		}
 		return true;
+	}
+	
+	protected boolean doesFileExist(String pathToFile){
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		IPath path = root.getFullPath().append(pathToFile);
+		IResource resource = root.findMember(path);
+		return (resource != null);
 	}
 	
 	

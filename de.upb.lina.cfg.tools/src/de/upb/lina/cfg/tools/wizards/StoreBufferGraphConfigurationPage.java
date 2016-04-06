@@ -38,6 +38,7 @@ import de.upb.lina.cfg.tools.ResourceIOUtil;
 
 public class StoreBufferGraphConfigurationPage extends ConfigurationPage {
 	
+	private static final String MSG_WARNING_AST_FILE_OVERWRITE = "This generation will overwrite the according AST file: ";
 	//Other Constants
 	public final static String MEMENTO__KEY = "de.upb.lina.cfg.selection.wizard";
 	private final static String ASTLOC = "astloc";
@@ -80,9 +81,12 @@ public class StoreBufferGraphConfigurationPage extends ConfigurationPage {
 	private Text tx_outputFileName;
 	private Combo cb_semanticsSelection;
 	private Text tx_sourceAstFileName;
+	private Label lb_overwritingFilesWarning;
 	
 	//storage for GUI element input
 	private int selectedSemantics = 0;
+	
+	private CreateStoreBufferGraphWizard createStoreBufferGraphWizard;
 
 	/**
 	 * Constructor for SampleNewWizardPage.
@@ -91,13 +95,13 @@ public class StoreBufferGraphConfigurationPage extends ConfigurationPage {
 	 */
 	public StoreBufferGraphConfigurationPage(IStructuredSelection selection, CreateStoreBufferGraphWizard wizard) {
 		super("wizardPage", PAGE_TITLE, PAGE_DESCRIPTION, selection, wizard);
+		this.createStoreBufferGraphWizard = (CreateStoreBufferGraphWizard)wizard;
 	}
 
 	/**
 	 * @see IDialogPage#createControl(Composite)
 	 */
 	public void createControl(Composite parent) {
-		/* GUI initialization */
 		final Composite container = new Composite(parent, SWT.NULL);
 		GridLayout layout = new GridLayout();
 		container.setLayout(layout);
@@ -106,33 +110,59 @@ public class StoreBufferGraphConfigurationPage extends ConfigurationPage {
 		
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		
-		/* GUI elements for selection fo input file */
-		Label label = new Label(container, SWT.NULL);
-		label.setText(LB_TX_INPUT_FILE);
-		
-		
-		tx_sourceAstFileName = createText(container, SWT.BORDER | SWT.SINGLE, createModifyListener(false), gd);
-		
-		createButton(container, SWT.PUSH, BT_TX_BROWSE, createSelectionAdapter(true, false));	
+		createInputFileGui(container, gd);
 
-		/* container select */
+		createOutputFolderGui(container, gd);
+
+		createButton(container, SWT.PUSH, BT_TX_BROWSE, createSelectionAdapter(false, true));		
+		
+		createOutputFileNameGui(container, gd);
+		
+		createLabel(container, SWT.NULL, "");
+
+		createSemanticSelectionGui(container);
+		
+		createLabel(container, SWT.NULL, "");
+		
+		createOverwritingOutputFileWarningGui(container);
+		
+		setControl(container);
+		initializeGuiElements(MEMENTO__KEY, CFGActivator.getStateFile());
+		validateInput();
+
+	}
+
+	public void createOutputFolderGui(final Composite container, GridData gd) {
 		Label label1 = new Label(container, SWT.NULL);
 		label1.setText(LB_TX_CONTAINER);
 
 		tx_targetContainerName = createText(container, SWT.BORDER | SWT.SINGLE, createModifyListener(false), gd);
+	}
 
-		createButton(container, SWT.PUSH, BT_TX_BROWSE, createSelectionAdapter(false, true));	
+	public void createInputFileGui(final Composite container, GridData gd) {
+		Label label = new Label(container, SWT.NULL);
+		label.setText(LB_TX_INPUT_FILE);
+		tx_sourceAstFileName = createText(container, SWT.BORDER | SWT.SINGLE, createModifyListener(false), gd);
+		//browse button
+		createButton(container, SWT.PUSH, BT_TX_BROWSE, createSelectionAdapter(true, false));	
+	}
 
-		/*GUI elements for the output file*/
-		label = new Label(container, SWT.NULL);
-		label.setText(LB_TX_NEW_FILENAME);
-		
+	public void createOutputFileNameGui(final Composite container, GridData gd) {
+		createLabel(container, SWT.NULL, LB_TX_NEW_FILENAME);
 		tx_outputFileName = createText(container, SWT.BORDER | SWT.SINGLE, createModifyListener(false), gd);
 		tx_outputFileName.setText("new_file.cfg");
-		
-		new Label(container, SWT.NULL).setText("");
+		tx_outputFileName.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
+	}
 
-		/*GUI elements for selection of semantics */
+	public void createOverwritingOutputFileWarningGui(final Composite container) {
+		lb_overwritingFilesWarning = createLabel(container, SWT.NULL, "");
+		GridData gridData = new GridData(GridData.VERTICAL_ALIGN_END);
+	    gridData.horizontalSpan = 2;
+	    gridData.horizontalAlignment = GridData.FILL;
+	    lb_overwritingFilesWarning.setLayoutData(gridData);
+	}
+
+	public void createSemanticSelectionGui(final Composite container) {
 		new Label(container, SWT.NULL).setText(LB_TX_REORDERING);
 		cb_semanticsSelection = new Combo(container, SWT.NULL);
 		for (int i = 0; i < SUPPORTED_SEMANTICS.length; i++){
@@ -141,11 +171,6 @@ public class StoreBufferGraphConfigurationPage extends ConfigurationPage {
 		cb_semanticsSelection.addModifyListener(createModifyListener(true));
 		cb_semanticsSelection.select(0);
 		cb_semanticsSelection.setEnabled(true);
-		
-		setControl(container);
-		initializeGuiElements(MEMENTO__KEY, CFGActivator.getStateFile());
-		validateInput();
-
 	}
 	
 	private ModifyListener createModifyListener(final boolean doModelSelection){
@@ -236,8 +261,13 @@ public class StoreBufferGraphConfigurationPage extends ConfigurationPage {
 				updateErrorMessage(MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
 				return;
 			}
-		}
 			
+			if(doesFileExist(createStoreBufferGraphWizard.getPathToAstOutputFile())){
+				lb_overwritingFilesWarning.setText(MSG_WARNING_AST_FILE_OVERWRITE + createStoreBufferGraphWizard.getPathToAstOutputFile());
+			}else{
+				lb_overwritingFilesWarning.setText("");
+			}
+		}		
 
 		if (!isValidFolderPath(tx_targetContainerName.getText())) {
 			if(!tx_targetContainerName.getText().startsWith("/")){
