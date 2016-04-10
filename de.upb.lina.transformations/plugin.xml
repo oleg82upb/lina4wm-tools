@@ -23,19 +23,16 @@
       </wizard>
    </extension>
    
-   <!-- Create All command -->
+   <!-- Commands -->
    <extension
          point="org.eclipse.ui.commands">
+      <!-- Create All command -->
       <command
             defaultHandler="de.upb.lina.transformations.logic.CreateAllHandler"
             id="de.upb.lina.transformations.createallcommand"
             name="Create All Transformations">
       </command>
-   </extension>
-   
-    <!-- Save Ast command -->
-   <extension
-         point="org.eclipse.ui.commands">
+      <!-- Save Ast command -->
       <command
             defaultHandler="de.upb.lina.transformations.logic.SaveAstHandler"
             id="de.upb.lina.transformations.saveastcommand"
@@ -43,9 +40,11 @@
       </command>
    </extension>
    
-   <!-- Create All button -->
+  
+   <!-- Menu Contributions -->
    <extension
          point="org.eclipse.ui.menus">
+      <!-- Create All button - Java perspective-->
       <menuContribution
             allPopups="false"
             locationURI="popup:org.eclipse.jdt.ui.PackageExplorer?before=additions">
@@ -73,17 +72,74 @@
             </visibleWhen>
          </command>
       </menuContribution>
-   </extension>
-   
-   <!-- Save Ast Button -->
-   <extension
-         point="org.eclipse.ui.menus">
+      
+       <!-- Create All button - Project Perspective-->
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?before=additions">
+         <command
+               commandId="de.upb.lina.transformations.createallcommand"
+               id="de.upb.lina.transformations.createalltransformations"
+               label="Generate All Specifications from LLVM"
+               style="push"
+               tooltip="Generates all specification variations for Promela and KIV directly from LLVM code.">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="activeMenuSelection">
+                  <iterate
+                        ifEmpty="false">
+                     <adapt
+                           type="org.eclipse.core.resources.IResource">
+                        <test
+                              property="org.eclipse.core.resources.extension"
+                              value="s">
+                        </test>
+                     </adapt>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+      
+      <!-- Create All button - Navigator-->
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.views.ResourceNavigator?before=additions">
+         <command
+               commandId="de.upb.lina.transformations.createallcommand"
+               id="de.upb.lina.transformations.createalltransformations"
+               label="Generate All Specifications from LLVM"
+               style="push"
+               tooltip="Generates all specification variations for Promela and KIV directly from LLVM code.">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="activeMenuSelection">
+                  <iterate
+                        ifEmpty="false">
+                     <adapt
+                           type="org.eclipse.core.resources.IResource">
+                        <test
+                              property="org.eclipse.core.resources.extension"
+                              value="s">
+                        </test>
+                     </adapt>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+      
+      
+      
+      <!-- Save Ast Button - Java Perspective -->
       <menuContribution
             allPopups="false"
             locationURI="popup:org.eclipse.jdt.ui.PackageExplorer?before=additions">
          <command
                commandId="de.upb.lina.transformations.saveastcommand"
-               id="de.upb.lina.transformations.saveast"
+               id="de.upb.lina.transformations.saveast.java"
                label="Save LLVM AST"
                style="push"
                tooltip="Save LLVM Abstract Syntax Tree as a model.">
@@ -105,6 +161,64 @@
             </visibleWhen>
          </command>
       </menuContribution>
-   </extension>
+      
+       <!-- Save Ast Button - Project Perspective -->
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?before=additions">
+         <command
+               commandId="de.upb.lina.transformations.saveastcommand"
+               id="de.upb.lina.transformations.saveast.project"
+               label="Save LLVM AST"
+               style="push"
+               tooltip="Save LLVM Abstract Syntax Tree as a model.">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="activeMenuSelection">
+                  <iterate
+                        ifEmpty="false">
+                     <adapt
+                           type="org.eclipse.core.resources.IResource">
+                        <test
+                              property="org.eclipse.core.resources.extension"
+                              value="s">
+                        </test>
+                     </adapt>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+      
+       <!-- Save Ast Button - Navigator Perspective -->
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.views.ResourceNavigator?before=additions">
+         <command
+               commandId="de.upb.lina.transformations.saveastcommand"
+               id="de.upb.lina.transformations.saveast.project"
+               label="Save LLVM AST"
+               style="push"
+               tooltip="Save LLVM Abstract Syntax Tree as a model.">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="activeMenuSelection">
+                  <iterate
+                        ifEmpty="false">
+                     <adapt
+                           type="org.eclipse.core.resources.IResource">
+                        <test
+                              property="org.eclipse.core.resources.extension"
+                              value="s">
+                        </test>
+                     </adapt>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>  
 
 </plugin>
