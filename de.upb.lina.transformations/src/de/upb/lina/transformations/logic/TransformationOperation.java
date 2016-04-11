@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import org.eclipse.acceleo.common.preference.AcceleoPreferences;
+import org.eclipse.acceleo.engine.service.AbstractAcceleoGenerator;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -17,7 +18,6 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.lina.transformations.Activator;
-import de.upb.lina.transformations.Constants;
 
 public class TransformationOperation extends WorkspaceModifyOperation{
 	protected String graphModelFileLocation;
@@ -72,16 +72,21 @@ public class TransformationOperation extends WorkspaceModifyOperation{
 			AcceleoPreferences.switchDebugMessages(true);
 			AcceleoPreferences.switchProfiler(true);
 			AcceleoPreferences.switchSuccessNotifications(false);
-			int type = this.config.getTransformationType();
+			ETransformationType transformationType = ETransformationType.getTransformationTypeById(this.config.getTransformationType());
+			if(transformationType == null){
+				Activator.logError("Unknown transformation type " + this.config.getTransformationType(), new RuntimeException("Unknown transformation type " + this.config.getTransformationType()));
+			}
 			ArrayList<Object> args = new ArrayList<Object>();
 
-			if (type == Constants.TRANSFORMATION_TYPE_PROMELA
-					|| type == Constants.TRANSFORMATION_TYPE_OPERATIONAL_PROMELA)
+			
+			if (transformationType == ETransformationType.PROMELA
+					|| transformationType == ETransformationType.PROMELA_OPERATIONAL)
 			{
 				args.add(targetName + fileEnding);
 			}
 
-			ModelGenerator generator = new ModelGenerator(type, genData, fullPath.toFile(), args);
+			transformationType.createAcceleoGenerator(genData, fullPath.toFile(), args);
+			AbstractAcceleoGenerator generator = transformationType.createAcceleoGenerator(genData, fullPath.toFile(), args);
 			generator.doGenerate(new BasicMonitor());
 		} catch (IOException e)
 		{

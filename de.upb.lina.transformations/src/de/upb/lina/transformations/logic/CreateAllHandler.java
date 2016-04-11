@@ -54,14 +54,7 @@ import de.upb.llvm_parser.llvm.LLVM;
  */
 public class CreateAllHandler extends AbstractHandler
 {
-	private static final int[] TRANSFORMATION_TYPES_KIV = { Constants.TRANSFORMATION_TYPE_KIV_GLOBAL,
-		Constants.TRANSFORMATION_TYPE_KIV_LOCAL };
-	private static final String[] TRANSFORMATION_TYPE_NAMES_KIV = { "kiv_global", "kiv_local" };
 	private static final String[] KIV_BASES = { Constants.KIV_BASIS_INT, Constants.KIV_BASIS_NAT };
-
-	private static final int[] TRANSFORMATION_TYPES_PROMELA = { Constants.TRANSFORMATION_TYPE_PROMELA,
-		Constants.TRANSFORMATION_TYPE_OPERATIONAL_PROMELA };
-	private static final String[] TRANSFORMATION_TYPE_NAMES_PROMELA = { "promela", "operational_promela" };
 
 	private IFile file = null;
 	private Shell shell = null;
@@ -187,10 +180,10 @@ public class CreateAllHandler extends AbstractHandler
 
 
 		// Do kiv transformations
-		for (int i = 0; i < TRANSFORMATION_TYPES_KIV.length; i++)
+		for (ETransformationType eTransformationType: ETransformationType.getKivTransformationTypes())
 		{
-			int transformationType = TRANSFORMATION_TYPES_KIV[i];
-			String transformationTypeName = TRANSFORMATION_TYPE_NAMES_KIV[i];
+			int transformationType = eTransformationType.getId();
+			String transformationTypeName = eTransformationType.getIdentifier();
 			for (String kIVBasis : KIV_BASES)
 			{
 				TransformationConfiguration config = new TransformationConfiguration(cfgs, kIVBasis, oldToNewCfgName, transformationType);
@@ -207,10 +200,10 @@ public class CreateAllHandler extends AbstractHandler
 		}
 
 		// Do promela transformations
-		for (int i = 0; i < TRANSFORMATION_TYPES_PROMELA.length; i++)
+		for (ETransformationType eTransformationType: ETransformationType.getPromelaTransformationTypes())
 		{
-			int transformationType = TRANSFORMATION_TYPES_PROMELA[i];
-			String transformationTypeName = TRANSFORMATION_TYPE_NAMES_PROMELA[i];
+			int transformationType = eTransformationType.getId();
+			String transformationTypeName = eTransformationType.getIdentifier();
 			TransformationConfiguration config = new TransformationConfiguration(cfgs,oldToNewCfgName, transformationType);
 			wmo = new TransformationOperation(createFolder(memoryModel, transformationTypeName),
 					transformationTypeName + "_" + file.getName(), ".pml", config);

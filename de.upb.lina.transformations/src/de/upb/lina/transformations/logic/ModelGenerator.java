@@ -33,8 +33,9 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 /**
  * Entry point of the 'ModelGenerator' generation module.
  *
- * @generated
+ * @generated NOT
  */
+@Deprecated
 public class ModelGenerator extends AbstractAcceleoGenerator {
     /**
      * The name of the module.
@@ -71,23 +72,23 @@ public class ModelGenerator extends AbstractAcceleoGenerator {
      *
      * @generated NOT
      */
-	public ModelGenerator(int transformationType)
+	private ModelGenerator(int transformationType)
 	{
 		initializeModuleByType(transformationType);
 	}
 
 	protected void initializeModuleByType(int transformationType)
 	{
-		if (transformationType == Constants.TRANSFORMATION_TYPE_PROMELA)
+		if (transformationType == ETransformationType.PROMELA.getId())
 		{
 			this.moduleFileName = Constants.GENERATOR_PROMELA;
-		} else if (transformationType == Constants.TRANSFORMATION_TYPE_KIV_LOCAL)
+		} else if (transformationType == ETransformationType.KIV_LOCAL.getId())
 		{
 			this.moduleFileName = Constants.GENERATOR_KIV_LOCAL;
-		} else if (transformationType == Constants.TRANSFORMATION_TYPE_KIV_GLOBAL)
+		} else if (transformationType == ETransformationType.KIV_GLOBAL.getId())
 		{
 			this.moduleFileName = Constants.GENERATOR_KIV_GLOBAL;
-		} else if (transformationType == Constants.TRANSFORMATION_TYPE_OPERATIONAL_PROMELA)
+		} else if (transformationType == ETransformationType.PROMELA_OPERATIONAL.getId())
 		{
 			this.moduleFileName = Constants.GENERATOR_OPERATIONAL_PROMELA;
 		}
@@ -109,7 +110,7 @@ public class ModelGenerator extends AbstractAcceleoGenerator {
      *             the model cannot be loaded.
      * @generated NOT
      */
-    public ModelGenerator(int transformationType, URI modelURI, File targetFolder,
+    private ModelGenerator(int transformationType, URI modelURI, File targetFolder,
             List<? extends Object> arguments) throws IOException {
     	initializeModuleByType(transformationType);
         initialize(modelURI, targetFolder, arguments);
@@ -131,7 +132,7 @@ public class ModelGenerator extends AbstractAcceleoGenerator {
      *             This can be thrown in two scenarios : the module cannot be found, or it cannot be loaded.
      * @generated NOT
      */
-    public ModelGenerator(int transformationType, EObject model, File targetFolder,
+    private ModelGenerator(int transformationType, EObject model, File targetFolder,
             List<? extends Object> arguments) throws IOException {
     	initializeModuleByType(transformationType);
         initialize(model, targetFolder, arguments);

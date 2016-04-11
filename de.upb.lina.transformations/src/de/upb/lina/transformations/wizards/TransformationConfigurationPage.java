@@ -42,6 +42,7 @@ import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.wizards.ExtendedWizardPage;
 import de.upb.lina.transformations.Activator;
 import de.upb.lina.transformations.Constants;
+import de.upb.lina.transformations.logic.ETransformationType;
 
 /**
  * @author Oleg Travkin
@@ -62,7 +63,7 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 	private String targetFileName = "";
 	private String targetContainer = "";
 	private String sourceGraphModelFileName = "";
-	private int modelType = Constants.TRANSFORMATION_TYPE_PROMELA;
+	private ETransformationType modelType = ETransformationType.PROMELA;
 	private String basis = Constants.KIV_BASIS_NAT;
 
 	private boolean canFlip = true;
@@ -156,15 +157,19 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 		}
 		cb_modelType.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				modelType = cb_modelType.getSelectionIndex();
-				if(modelType == Constants.TRANSFORMATION_TYPE_KIV_LOCAL)
+				int transformationTypeId = cb_modelType.getSelectionIndex();
+				modelType = ETransformationType.getTransformationTypeById(transformationTypeId);
+				if(modelType == null){
+					Activator.logError("Unknown transformation type with id " + transformationTypeId, new RuntimeException("Unknown transformation type with id " + transformationTypeId));
+				}
+				if(modelType == ETransformationType.KIV_LOCAL)
 				{
 					tx_targetFileName.setEnabled(false);
 					if(cb_basis != null)
 					{
 						cb_basis.setEnabled(true);
 					}
-				}else if(modelType == Constants.TRANSFORMATION_TYPE_KIV_GLOBAL)
+				}else if(modelType == ETransformationType.KIV_GLOBAL)
 				{
 					tx_targetFileName.setEnabled(false);
 					if(cb_basis != null)
@@ -327,7 +332,7 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 		resource = myWorkspaceRoot.findMember(path);
 		searchPath = resource.getLocation().append(File.separator+"specs"+File.separator+"PC.utf8");
 
-		if(searchPath.toFile().exists() && (modelType == Constants.TRANSFORMATION_TYPE_KIV_LOCAL ||modelType == Constants.TRANSFORMATION_TYPE_KIV_GLOBAL)){
+		if(searchPath.toFile().exists() && (modelType == ETransformationType.KIV_LOCAL ||modelType == ETransformationType.KIV_GLOBAL)){
 			updateWarning("The selected target folder already contains a KIV Specification. If you continue the present files will be overwritten!", WARNING);
 			return;
 		}
@@ -387,13 +392,13 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 		if(string.contains(" ")){
 			return false;
 		}
-		if(modelType == Constants.TRANSFORMATION_TYPE_PROMELA || modelType == Constants.TRANSFORMATION_TYPE_OPERATIONAL_PROMELA){
+		if(modelType == ETransformationType.PROMELA || modelType == ETransformationType.PROMELA_OPERATIONAL){
 			if (string.endsWith(".pml")){
 				return true;
 			}
 		}
 
-		if(modelType == Constants.TRANSFORMATION_TYPE_KIV_LOCAL || modelType == Constants.TRANSFORMATION_TYPE_KIV_GLOBAL){
+		if(modelType == ETransformationType.KIV_LOCAL || modelType == ETransformationType.KIV_GLOBAL){
 			if (string.endsWith(".kiv")){
 				return true;
 			}

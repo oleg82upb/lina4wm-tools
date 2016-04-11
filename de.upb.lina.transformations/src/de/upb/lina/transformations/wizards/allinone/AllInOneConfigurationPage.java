@@ -34,6 +34,7 @@ import de.upb.lina.cfg.tools.wizards.ConfigurationWizardUsingChecks;
 import de.upb.lina.cfg.tools.wizards.StoreBufferGraphConfigurationPage;
 import de.upb.lina.transformations.Activator;
 import de.upb.lina.transformations.Constants;
+import de.upb.lina.transformations.logic.ETransformationType;
 import de.upb.lina.transformations.logic.TransformationUtil;
 import de.upb.lina.transformations.wizards.FunctionSelectionPage;
 import de.upb.llvm_parser.llvm.LLVM;
@@ -146,22 +147,23 @@ public class AllInOneConfigurationPage extends ConfigurationPage{
 		for(String transformationType: SUPPORTED_TRANSFORMATION_TYPES){
 			cb_transformationTypeSelection.add(transformationType);
 		}
-		cb_transformationTypeSelection.select(Constants.TRANSFORMATION_TYPE_PROMELA);
+		cb_transformationTypeSelection.select(ETransformationType.PROMELA.getId());
 		cb_transformationTypeSelection.addModifyListener(new ModifyListener() {
 			
 			@Override
 			public void modifyText(ModifyEvent e) {
-				switch (getSelectedTransformationType()) {
-				case Constants.TRANSFORMATION_TYPE_PROMELA:
+				ETransformationType selectedTransformationType = ETransformationType.getTransformationTypeById(getSelectedTransformationType());
+				switch (selectedTransformationType) {
+				case PROMELA:
 					enablePromelaSpecificGuiSettings();
 					break;
-				case Constants.TRANSFORMATION_TYPE_OPERATIONAL_PROMELA:
+				case PROMELA_OPERATIONAL:
 					enablePromelaSpecificGuiSettings();
 					break;
-				case Constants.TRANSFORMATION_TYPE_KIV_LOCAL:
+				case KIV_LOCAL:
 					enableKivSpecificGuiSettings();
 					break;
-				case Constants.TRANSFORMATION_TYPE_KIV_GLOBAL:
+				case KIV_GLOBAL:
 					enableKivSpecificGuiSettings();
 					break;
 				default:
