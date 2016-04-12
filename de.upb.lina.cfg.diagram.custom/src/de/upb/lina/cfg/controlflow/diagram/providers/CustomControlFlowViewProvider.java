@@ -71,9 +71,9 @@ public class CustomControlFlowViewProvider extends ControlFlowViewProvider
 
 		if (color != style.getLineColor())
 		{
-			style.setLineWidth(2);
 			style.setLineColor(color);
 		}
+		style.setLineWidth(2);
 
 		return edge;
 	}
