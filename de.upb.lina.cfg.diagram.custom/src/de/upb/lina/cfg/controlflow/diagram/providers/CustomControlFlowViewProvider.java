@@ -82,7 +82,7 @@ public class CustomControlFlowViewProvider extends ControlFlowViewProvider
 			View containerView, int index, boolean persisted,
 			PreferencesHint preferencesHint) {
 		Node node = super.createControlFlowLocation_2001(domainElement, containerView, index, persisted, preferencesHint);
-		
+
 		ControlFlowLocation loc = ((ControlFlowLocation)node.getElement());
 		//end node or start node
 		if(loc.getOutgoing().isEmpty() || (loc.getBuffer() != null && loc.getBuffer().getAddressValuePairs().isEmpty() && loc.getPc() == 0)){
@@ -91,6 +91,8 @@ public class CustomControlFlowViewProvider extends ControlFlowViewProvider
 					NotationPackage.eINSTANCE.getFillStyle_FillColor(),
 					FigureUtilities.RGBToInteger(fillRGB));
 		}
+
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getLineStyle_LineWidth(), -1);
 		return node;
 		
 	}

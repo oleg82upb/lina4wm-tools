@@ -27,6 +27,9 @@ public class CustomControlFlowEditPartFactory extends
 			else if (ControlFlowVisualIDRegistry.getVisualID(view) == ControlFlowLocationPcEditPart.VISUAL_ID) {
 				return new CustomControlFlowLocationPcEditPart(view);
 			}
+			else if (ControlFlowVisualIDRegistry.getVisualID(view) == ControlFlowLocationEditPart.VISUAL_ID) {
+				return new CustomControlFlowLocationEditPart(view);
+			}
 		}
 
 		return super.createEditPart(context, model);

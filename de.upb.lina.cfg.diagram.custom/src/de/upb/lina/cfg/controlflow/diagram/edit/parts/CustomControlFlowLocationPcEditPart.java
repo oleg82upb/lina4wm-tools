@@ -3,6 +3,7 @@
  */
 package de.upb.lina.cfg.controlflow.diagram.edit.parts;
 
+import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.notation.View;
 
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
@@ -25,6 +26,12 @@ public class CustomControlFlowLocationPcEditPart extends ControlFlowLocationPcEd
 		super(view);
 		this.view = view;	
 	}
+	
+	public void setLabel(WrappingLabel figure)
+	{
+		super.setLabel(figure);
+	}
+	
 
 	@Override
 	protected String getLabelText()
