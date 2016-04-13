@@ -33,11 +33,10 @@ public class PSOGraphGenerator extends TSOGraphGenerator
 		if (nextInstruction instanceof Store)
 		{
 			Store store = (Store) nextInstruction;
-			int type = typeOfWriteDefChain(store);
-			StoreBuffer nextBuffer = cloneStoreBuffer(currentLocation.getBuffer());
-			
-			Parameter addressParam = store.getTargetAddress();
 			int writeType = typeOfWriteDefChain(store);
+			StoreBuffer nextBuffer = cloneStoreBuffer(currentLocation.getBuffer());
+			Parameter addressParam = store.getTargetAddress();
+			
 			
 			Address address = ((AddressUse) addressParam.getValue()).getAddress();
 			if(writeType == CFGConstants.WDC_BOTH || writeType == CFGConstants.WDC_ADDRESS)
@@ -62,8 +61,8 @@ public class PSOGraphGenerator extends TSOGraphGenerator
 				{
 					Address valueAddress = getOrCreateValueCopyForWDC(store);
 					value = getOrCreateParamForAddress(valueAddress, store.getValue());
-					pair.getValues().add(value);
 				}
+				pair.getValues().add(value);
 			}
 			
 			
@@ -76,7 +75,7 @@ public class PSOGraphGenerator extends TSOGraphGenerator
 				this.toBeProcessedLocations.add(nextLoc);
 			}
 
-			createWriteTransition(currentLocation, store, nextLoc, pair, type);
+			createWriteTransition(currentLocation, store, nextLoc, pair, writeType);
 			return;
 
 		} else if (nextInstruction instanceof Load && isEarlyRead(currentLocation, (Load) nextInstruction))
@@ -154,7 +153,9 @@ public class PSOGraphGenerator extends TSOGraphGenerator
 		while(i.hasNext())
 		{
 			AddressValuePair pair = i.next();
-			if (address.equals(pair.getAddress()))
+			String a = GraphUtility.valueToString(address.getValue());
+			String b = GraphUtility.valueToString(pair.getAddress().getValue());
+			if (a.equals(b))
 			{
 				return pair;
 			}

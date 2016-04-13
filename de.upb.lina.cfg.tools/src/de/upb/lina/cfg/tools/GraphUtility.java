@@ -227,7 +227,11 @@ public abstract class GraphUtility {
 			while(i.hasNext())
 			{
 				Value v = i.next().getAddress().getValue();
-				list.add(valueToRawString(v));
+				String value = valueToRawString(v);
+				if(!list.contains(value))
+				{
+					list.add(value);
+				}
 			}
 			
 			Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
