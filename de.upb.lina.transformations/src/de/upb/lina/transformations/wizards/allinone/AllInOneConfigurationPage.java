@@ -32,6 +32,7 @@ import de.upb.lina.cfg.tools.ResourceIOUtil;
 import de.upb.lina.cfg.tools.wizards.ConfigurationPage;
 import de.upb.lina.cfg.tools.wizards.ConfigurationWizardUsingChecks;
 import de.upb.lina.cfg.tools.wizards.StoreBufferGraphConfigurationPage;
+import de.upb.lina.cfg.tools.wizards.WizardMessageConstants;
 import de.upb.lina.transformations.Activator;
 import de.upb.lina.transformations.Constants;
 import de.upb.lina.transformations.logic.ETransformationType;
@@ -113,13 +114,13 @@ public class AllInOneConfigurationPage extends ConfigurationPage{
 	private void createGuiElementsForInputFileSelection() {
 		createLabel(mainGuiContainer, SWT.NULL, LB_TX_INPUT_FILE);
 		tx_inputFilePath = createText(mainGuiContainer, SWT.BORDER | SWT.SINGLE, createValidationModificationListener(), gridData);
-		createButton(mainGuiContainer, SWT.PUSH, StoreBufferGraphConfigurationPage.BT_TX_BROWSE, createSelectionAdapter(true, false));
+		createButton(mainGuiContainer, SWT.PUSH, WizardMessageConstants.BT_TX_BROWSE, createSelectionAdapter(true, false));
 	}
 
 	private void createGuiElementsForOutputFolderSelection() {
 		createLabel(mainGuiContainer, SWT.NULL, LB_TX_CONTAINER);
 		tx_outputFolderPath = createText(mainGuiContainer, SWT.BORDER | SWT.SINGLE, createValidationModificationListener(), gridData);
-		createButton(mainGuiContainer, SWT.PUSH, StoreBufferGraphConfigurationPage.BT_TX_BROWSE, createSelectionAdapter(false, true));
+		createButton(mainGuiContainer, SWT.PUSH, WizardMessageConstants.BT_TX_BROWSE, createSelectionAdapter(false, true));
 	}
 
 	private void createGuiElementsForOutputFileNameSelection() {
@@ -205,26 +206,26 @@ public class AllInOneConfigurationPage extends ConfigurationPage{
 		
 		if (!isFileAccessible(getPathToInputFile()))
 		{
-			updateErrorMessage(StoreBufferGraphConfigurationPage.MSG_STATUS_INPUT_FILE_NOT_EXISTING);
+			updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_NOT_EXISTING);
 			return;
 		}
 		if(ResourceIOUtil.createAstFromLLVM(getPathToInputFile()) == null){
-			updateErrorMessage(StoreBufferGraphConfigurationPage.MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
+			updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
 			return;
 		}
 			
 
 		if (!isValidFolderPath(tx_outputFolderPath.getText())) {
 			if(!tx_outputFolderPath.getText().startsWith("/")){
-				updateErrorMessage(StoreBufferGraphConfigurationPage.MSG_STATUS_INVALID_OUTPUT_CONTAINER_NAME);
+				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_CONTAINER_NAME);
 			}else{
-				updateErrorMessage(StoreBufferGraphConfigurationPage.MSG_STATUS_INVALID_OUTPUT_CONTAINER);
+				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_CONTAINER);
 			}
 			return;
 		}
 		
 		if (!isValidFileName(tx_outputFileName.getText())) {
-			updateErrorMessage(StoreBufferGraphConfigurationPage.MSG_STATUS_INVALID_OUTPUT_FILE_NAME);
+			updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_FILE_NAME);
 			return;
 		}
 		
@@ -232,7 +233,7 @@ public class AllInOneConfigurationPage extends ConfigurationPage{
 		
 		//make sure we can go into the error view
 		updateErrorMessage(null);
-		setDescription(StoreBufferGraphConfigurationPage.MSG_STATUS_OK);
+		setDescription(WizardMessageConstants.MSG_STATUS_OK);
 		
 		//redo checks
 		wizard.restartChecks();
