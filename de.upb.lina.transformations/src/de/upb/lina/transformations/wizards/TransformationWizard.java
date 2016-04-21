@@ -29,13 +29,13 @@ public class TransformationWizard extends Wizard implements INewWizard {
 
 		// create config object from selected configuration
 		List<ControlFlowDiagram> cfgs = functionSelectionPage.getSelectedFunctions();
-		String kIVBasis = wizardPage.getBasis();
+		String kIVBasis = wizardPage.getKivBasis();
 		Map<String, String> oldToNewCfgName = functionSelectionPage.getMap();
-		TransformationConfiguration config = new TransformationConfiguration(cfgs, kIVBasis, oldToNewCfgName, wizardPage.getType());
+		TransformationConfiguration config = new TransformationConfiguration(cfgs, kIVBasis, oldToNewCfgName, wizardPage.getIdForSelectedTransformationType());
 
 		TransformationOperation transformationOperation 
-				= new TransformationOperation(wizardPage.getContainerText().getText(), wizardPage.getFileText().getText(),
-				wizardPage.getFileEndingLabel().getText(), config);
+				= new TransformationOperation(wizardPage.getOutputFolderPath(), wizardPage.getOutputFileName(),
+				wizardPage.getOutputFileExtension(), config);
 
 		TransformationUtil.runTransformationOperation(this, transformationOperation);
 		return true;
@@ -45,7 +45,7 @@ public class TransformationWizard extends Wizard implements INewWizard {
 	public void addPages() {
 		super.addPages();
 		functionSelectionPage = new FunctionSelectionPage();
-		wizardPage = new TransformationConfigurationPage("Generate New Specification", selection, functionSelectionPage);
+		wizardPage = new TransformationConfigurationPage(selection, functionSelectionPage);
 		addPage(wizardPage);
 		addPage(functionSelectionPage);
 	}

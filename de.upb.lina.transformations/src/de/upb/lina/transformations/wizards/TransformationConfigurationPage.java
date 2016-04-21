@@ -1,7 +1,6 @@
 package de.upb.lina.transformations.wizards;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -13,7 +12,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.viewers.ISelection;
@@ -40,6 +38,7 @@ import org.eclipse.ui.model.WorkbenchLabelProvider;
 
 import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.wizards.ExtendedWizardPage;
+import de.upb.lina.cfg.tools.wizards.WizardMessageConstants;
 import de.upb.lina.transformations.Activator;
 import de.upb.lina.transformations.Constants;
 import de.upb.lina.transformations.logic.ETransformationType;
@@ -49,40 +48,42 @@ import de.upb.lina.transformations.logic.ETransformationType;
  *
  */
 public class TransformationConfigurationPage extends ExtendedWizardPage {
-
-
+	private static final String PAGE_NAME = "Generate New Specification";
+	private static final String PAGE_DESCRIPTION = "Please select the SBG model you wish to transform.";
+	private static final String PAGE_TITLE = "SBG - Selection";
+	
+	private static final String LB_TX_TRANSFORMATION_BASIS = "Transformation based on ";
+	private static final String LB_TX_TRANSFORMATION_TYPE = "Transformation type:";
+	private static final String LB_TX_INPUT_FILE = "&Input file: \n(." + CFGConstants.CFG_FILE_EXTENSION + ")";
+	private static final String LB_TX_NEW_FILENAME = "&Output filename:";
+	private static final String LB_TX_CONTAINER = "&Output folder:";
+	
+	private static final String MSG_STATUS_WRONG_FILE_TYPE = "Invalid input file type. Please select a ." + CFGConstants.CFG_FILE_EXTENSION + " file.";
+	
+	
 	//GUI elements
-	private Text tx_targetContainer;
-	private Text tx_targetFileName;
-	private Text tx_sourceGraphModelFileName;
-	private Combo cb_modelType;
-	private Combo cb_basis;
-	private Label lb_fileEnding;
+	private Text tx_outputFolderPath;
+	private Text tx_outputFileName;
+	private Text tx_inputFilePath;
+	private Combo cb_transformationType;
+	private Combo cb_kivBasis;
+	private Label lb_outputFileExtension;
 
 	//storage for input of GUI elements
-	private String targetFileName = "";
-	private String targetContainer = "";
-	private String sourceGraphModelFileName = "";
-	private ETransformationType modelType = ETransformationType.PROMELA;
-	private String basis = Constants.KIV_BASIS_NAT;
+	private ETransformationType transformationType = ETransformationType.PROMELA;
 
-	private boolean canFlip = true;
+	private boolean canGoToNextPage = true;
 
-	//selection of user 
-	private ISelection selection;
+	private ISelection userSelection;
 
 	private FunctionSelectionPage nextPage;
 	private IMemento memento;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param pageName
-	 */
-	public TransformationConfigurationPage(String pageName, ISelection selection, FunctionSelectionPage nextPage) {
-		super(pageName, "CFG - Selection", "Please select the CFG model you wish to transform.");
+
+	public TransformationConfigurationPage(ISelection userSelection, FunctionSelectionPage nextPage) {
+		super(PAGE_NAME, PAGE_TITLE, PAGE_DESCRIPTION);
 		this.nextPage = nextPage;
-		this.selection = selection;
+		this.userSelection = userSelection;
 	}
 
 	@Override
@@ -95,146 +96,186 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 		layout.verticalSpacing = 9;
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 
-		/* Graph select */
-		Label label = new Label(container, SWT.NULL);
-		label.setText("&ControlFlowDiagram-File:");
-
-		tx_sourceGraphModelFileName = createText(container, SWT.BORDER | SWT.SINGLE, 
-				new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				validateInput();
-			}
-		}, gd);
-
-
-		createButton(container, SWT.PUSH, "Browse", 
-				new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				handleElementBrowse(tx_sourceGraphModelFileName);
-			}
-		});
-
-
-		/* container select */
-		Label label1 = new Label(container, SWT.NULL);
-		label1.setText("&Target Container:");
-
-		tx_targetContainer = createText(container, SWT.BORDER | SWT.SINGLE, 
-				new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				validateInput();
-			}
-		}, gd);
-
-
-		createButton(container, SWT.PUSH, "Browse", 
-				new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				handleContainerBrowse(tx_targetContainer);
-			}
-		});
-
-		/* new_file name */
-		label = new Label(container, SWT.NULL);
-		label.setText("&File name:");
-
-		tx_targetFileName = createText(container, SWT.BORDER | SWT.SINGLE, 
-				new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				validateInput();
-			}
-		}, gd);
-
-		lb_fileEnding = new Label(container, SWT.NULL);
-		lb_fileEnding.setText(".pml");
-
-		/* ordering select */
-		new Label(container, SWT.NULL).setText("Transformation type:");
-		cb_modelType = new Combo(container, SWT.NULL);
-		String[] orderings = new String[] { "Promela", "KIVLocal", "KIVGlobal", "operational Promela" };
-		for (int i = 0; i < orderings.length; i++){
-			cb_modelType.add(orderings[i]);
-		}
-		cb_modelType.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				int transformationTypeId = cb_modelType.getSelectionIndex();
-				modelType = ETransformationType.getTransformationTypeById(transformationTypeId);
-				if(modelType == null){
-					Activator.logError("Unknown transformation type with id " + transformationTypeId, new RuntimeException("Unknown transformation type with id " + transformationTypeId));
-				}
-				if(modelType == ETransformationType.KIV_LOCAL)
-				{
-					tx_targetFileName.setEnabled(false);
-					if(cb_basis != null)
-					{
-						cb_basis.setEnabled(true);
-					}
-				}else if(modelType == ETransformationType.KIV_GLOBAL)
-				{
-					tx_targetFileName.setEnabled(false);
-					if(cb_basis != null)
-					{
-						cb_basis.setEnabled(true);
-					}
-				}else
-				{
-					tx_targetFileName.setEnabled(true);
-					if(cb_basis != null)
-						cb_basis.setEnabled(false);
-				}
-				validateInput();
-			}
-		});
-
-		cb_modelType.select(0);
-		cb_modelType.setEnabled(true);
-
-		/*KIV transformation basis select */
-		new Label(container, SWT.NONE);
-		new Label(container, SWT.NULL).setText("Transformation based on ");
-		cb_basis = new Combo(container, SWT.NULL);
-		String[] basisTypes = new String[] { Constants.KIV_BASIS_NAT, Constants.KIV_BASIS_INT };
-		for (int i = 0; i < basisTypes.length; i++){
-			cb_basis.add(basisTypes[i]);
-		}
-		cb_basis.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				if(cb_basis.getSelectionIndex() == Constants.NAT_INDEX){
-					basis = Constants.KIV_BASIS_NAT;
-				}else if(cb_basis.getSelectionIndex() == Constants.INT_INDEX){
-					basis = Constants.KIV_BASIS_INT;
-				}
-
-			}
-		});
-
-		cb_basis.select(Constants.NAT_INDEX);
-		cb_basis.setEnabled(false);
+		createInputFileGui(container, gd);
+		createOutputFolderGui(container, gd);
+		createOutputFileGui(container, gd);
+		createTransformationTypeGui(container);
+		createKivBasisGui(container);
 
 		setControl(container);
 		initializeGuiElements();
 		validateInput();
 	}
 
-
 	/**
-	 * @return selected type of transformation according to @see Constants
+	 * Creates all GUI elements for the KIV basis selection.
+	 * 
+	 * @param container gui container to add the elements
 	 */
-	public int getType()
-	{
-		return cb_modelType.getSelectionIndex();
+	private void createKivBasisGui(final Composite container) {
+		createLabel(container, SWT.NONE, "");
+		createLabel(container, SWT.NULL, LB_TX_TRANSFORMATION_BASIS);
+		cb_kivBasis = new Combo(container, SWT.NULL);
+		String[] basisTypes = new String[] { Constants.KIV_BASIS_NAT, Constants.KIV_BASIS_INT };
+		for (int i = 0; i < basisTypes.length; i++){
+			cb_kivBasis.add(basisTypes[i]);
+		}
+		cb_kivBasis.select(Constants.NAT_INDEX);
+		cb_kivBasis.setEnabled(false);
 	}
 
-	public String getFileEndForSelection(){
-		switch (cb_modelType.getSelectionIndex()) {
+	/**
+	 * Creates all GUI elements for the transformation type selection.
+	 * 
+	 * @param container gui container to add the elements
+	 */
+	private void createTransformationTypeGui(final Composite container) {
+		createLabel(container, SWT.NULL, LB_TX_TRANSFORMATION_TYPE);
+		
+		cb_transformationType = new Combo(container, SWT.NULL);
+		for(ETransformationType transformationType: ETransformationType.getTransformationTypes()){
+			cb_transformationType.add(transformationType.getIdentifier());
+		}
+		
+		cb_transformationType.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent e) {
+				setTransformationTypeAccordingToSelection();
+				adaptGuiAccordingToTransformationType();
+				validateInput();
+			}
+
+			private void adaptGuiAccordingToTransformationType() {
+				if(transformationType.isKivTransformation()){
+					tx_outputFileName.setEnabled(false);
+					enableKivBasisComboBox();
+				}else if(transformationType.isPromelaTransformation()){
+					tx_outputFileName.setEnabled(true);
+					disableKivBasisComboBox();
+				}
+			}
+
+			private void setTransformationTypeAccordingToSelection() {
+				int transformationTypeId = cb_transformationType.getSelectionIndex();
+				transformationType = ETransformationType.getTransformationTypeById(transformationTypeId);
+				handleUnkownTransformationTypeId(transformationTypeId);
+			}
+
+			private void handleUnkownTransformationTypeId(
+					int transformationTypeId) {
+				if(transformationType == null){
+					new RuntimeException("Unknown transformation type with id " + transformationTypeId);
+				}
+			}
+
+			private void disableKivBasisComboBox() {
+				if(cb_kivBasis != null){
+					cb_kivBasis.setEnabled(false);
+				}
+			}
+
+			private void enableKivBasisComboBox() {
+				if(cb_kivBasis != null)
+				{
+					cb_kivBasis.setEnabled(true);
+				}
+			}
+		});
+
+		cb_transformationType.select(0);
+		cb_transformationType.setEnabled(true);
+	}
+
+	/**
+	 * Creates all GUI elements for output file selection.
+	 * 
+	 * @param container gui container to add the elements
+	 */
+	public void createOutputFileGui(final Composite container, GridData gd) {
+		createLabel(container, SWT.NULL, LB_TX_NEW_FILENAME);
+
+		tx_outputFileName = createText(container, SWT.BORDER | SWT.SINGLE, 
+				new ModifyListener() {
+			public void modifyText(ModifyEvent e) {
+				validateInput();
+			}
+		}, gd);
+
+		lb_outputFileExtension = new Label(container, SWT.NULL);
+		lb_outputFileExtension.setText(".pml");
+	}
+
+	/**
+	 * Creates all GUI elements for the output folder selection.
+	 * 
+	 * @param container gui container to add the elements
+	 */
+	public void createOutputFolderGui(final Composite container, GridData gd) {
+		createLabel(container, SWT.NULL, LB_TX_CONTAINER);
+
+		tx_outputFolderPath = createText(container, SWT.BORDER | SWT.SINGLE, 
+				new ModifyListener() {
+			public void modifyText(ModifyEvent e) {
+				validateInput();
+			}
+		}, gd);
+
+
+		createButton(container, SWT.PUSH, WizardMessageConstants.BT_TX_BROWSE, 
+				new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				handleContainerBrowse(tx_outputFolderPath);
+			}
+		});
+	}
+
+	/**
+	 * Creates all GUI elements for the input file selection.
+	 * 
+	 * @param container gui container to add the elements
+	 */
+	public void createInputFileGui(final Composite container, GridData gd) {
+		createLabel(container, SWT.NULL, LB_TX_INPUT_FILE);
+		tx_inputFilePath = createText(container, SWT.BORDER | SWT.SINGLE, 
+				new ModifyListener() {
+			public void modifyText(ModifyEvent e) {
+				validateInput();
+			}
+		}, gd);
+		
+		createButton(container, SWT.PUSH, WizardMessageConstants.BT_TX_BROWSE, 
+				new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				handleElementBrowse(tx_inputFilePath);
+			}
+		});
+	}
+
+
+	/**
+	 * Returns the id of the selected transformation type. See also {@see ETransformationType}.
+	 * 
+	 * @return id of the selected transformation type
+	 */
+	public int getIdForSelectedTransformationType()
+	{
+		return cb_transformationType.getSelectionIndex();
+	}
+
+	/**
+	 * Returns the file extension for the selected transformation type.
+	 * 
+	 * @return file extension for the selected transformation type.
+	 */
+	private String getFileExtensionForSelectedTransformationType(){
+		switch (cb_transformationType.getSelectionIndex()) {
 		case 0:
-			return ".pml";
+			return "." + Constants.PROMELA_FILE_EXTENSION;
 		case 1:
 			return "";
 		case 2:
 			return "";
 		case 3:
-			return ".pml";
+			return "." + Constants.PROMELA_FILE_EXTENSION;
 		default:
 			break;
 		}
@@ -266,8 +307,8 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 				return false;
 			}
 		});
-		dialog.setTitle("CFG - Selection");
-		dialog.setMessage("Select a ControlFlowDiagram-file:");
+		dialog.setTitle(PAGE_TITLE);
+		dialog.setMessage(PAGE_DESCRIPTION);
 		dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
 		dialog.setDoubleClickSelects(true);
 
@@ -284,62 +325,57 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 	/**
 	 * Ensures that both text fields are set.
 	 */
+	private void validateInput() {		
+		lb_outputFileExtension.setText(getFileExtensionForSelectedTransformationType());
+		lb_outputFileExtension.pack();
 
-	private void validateInput() {
-		sourceGraphModelFileName = this.tx_sourceGraphModelFileName.getText();
-		targetContainer = this.tx_targetContainer.getText();
-		targetFileName = this.tx_targetFileName.getText();
-		
-		lb_fileEnding.setText(getFileEndForSelection());
-		lb_fileEnding.pack();
-
-		int result = checkCFGFile(sourceGraphModelFileName);
+		int result = checkCFGFile(getInputFilePath());
 		if (result >= 400) {
-			updateErrorMessage("The selected CFG-file cannot be loaded.");
+			updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
 			return;
 		}else if (result >= 300) {
-			updateErrorMessage("Select a CFG-file (*.cfg)");
+			updateErrorMessage(MSG_STATUS_WRONG_FILE_TYPE);
 			return;
 		} else if (result >= 200) {
-			updateErrorMessage("The specified path refers no exisiting CFG-file.");
+			updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_NOT_EXISTING);
 			return;
 		} else if (result >= 100) {
-			updateErrorMessage("The CFG-file extension has to be type of *.cfg");
+			updateErrorMessage(MSG_STATUS_WRONG_FILE_TYPE);
 			return;
 		}
 
-		if (!isValidContainer(tx_targetContainer.getText())) {
-			if(!tx_targetContainer.getText().startsWith("/")){
-				updateErrorMessage("The container has to start with '/'.");
+		if (!isValidFolderPath(tx_outputFolderPath.getText())) {
+			if(!tx_outputFolderPath.getText().startsWith("/")){
+				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_CONTAINER_NAME);
 			}else{
-				updateErrorMessage("No valid container is selected.");
+				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_CONTAINER);
 			}
 			return;
 		}
 
 		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 
-		IPath path = new Path(tx_targetContainer.getText());
+		IPath path = new Path(tx_outputFolderPath.getText());
 		IResource resource = myWorkspaceRoot.findMember(path);
-		IPath searchPath = resource.getLocation().append(File.separator + tx_targetFileName.getText() + lb_fileEnding.getText());
+		IPath searchPath = resource.getLocation().append(File.separator + tx_outputFileName.getText() + lb_outputFileExtension.getText());
 
 		if(searchPath.toFile().exists()){
 			updateWarning("A file with the given name does already exist. If you continue the present file will be overwritten!", WARNING);
 			return;
 		}
 
-		path = new Path(tx_targetContainer.getText());
+		path = new Path(tx_outputFolderPath.getText());
 		resource = myWorkspaceRoot.findMember(path);
 		searchPath = resource.getLocation().append(File.separator+"specs"+File.separator+"PC.utf8");
 
-		if(searchPath.toFile().exists() && (modelType == ETransformationType.KIV_LOCAL ||modelType == ETransformationType.KIV_GLOBAL)){
+		if(searchPath.toFile().exists() && (transformationType == ETransformationType.KIV_LOCAL ||transformationType == ETransformationType.KIV_GLOBAL)){
 			updateWarning("The selected target folder already contains a KIV Specification. If you continue the present files will be overwritten!", WARNING);
 			return;
 		}
 		
-		nextPage.setPathToInputFile(sourceGraphModelFileName);
+		nextPage.setPathToInputFile(getInputFilePath());
 		
-		updateDescription("Check your Input and hit finish.");
+		updateDescription(WizardMessageConstants.MSG_STATUS_OK);
 		updateErrorMessage(null);
 		getControl().redraw();
 	}
@@ -349,7 +385,7 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 	@Override
 	protected void updateErrorMessage(String message) {
 		super.updateErrorMessage(message);
-		canFlip = true;
+		canGoToNextPage = true;
 	}
 
 	/**
@@ -368,45 +404,7 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 		setMessage(message, INFORMATION);
 		setPageComplete(false);
 	}
-
-	public boolean isValidContainer(String container) {
-		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		IResource file = root.findMember(container);
-		if (file != null && file.isAccessible() && !file.equals(root) && container.startsWith("/")) {
-			return true;
-		}
-		return false;
-	}
-
-	public boolean isValidTypeName(String string) {
-		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		IPath path = root.getFullPath().append(string);
-		File file = path.toFile();
-		try {
-			file.getCanonicalPath();
-		}
-		catch (IOException e) {
-			return false;
-		}
-
-		if(string.contains(" ")){
-			return false;
-		}
-		if(modelType == ETransformationType.PROMELA || modelType == ETransformationType.PROMELA_OPERATIONAL){
-			if (string.endsWith(".pml")){
-				return true;
-			}
-		}
-
-		if(modelType == ETransformationType.KIV_LOCAL || modelType == ETransformationType.KIV_GLOBAL){
-			if (string.endsWith(".kiv")){
-				return true;
-			}
-		}
-
-		return false;
-	}
-
+	
 	public int checkCFGFile(String cfgLocation) {
 		if (cfgLocation.length() == 0) {
 			return 300;
@@ -426,8 +424,7 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 			ResourceSet resourceSet = new ResourceSetImpl();
 			Path cfgpath = new Path(cfgLocation);
 			URI uri = URI.createPlatformResourceURI(cfgpath.toOSString(), true);
-			@SuppressWarnings("unused")
-			Resource cfgResource = resourceSet.getResource(uri, true);
+			resourceSet.getResource(uri, true);
 		}catch(WrappedException e){
 			return 400;
 		}
@@ -447,9 +444,9 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 		
 		initializeDefaultGuiElementValuesFromMemento();
 
-		if (selection != null && selection instanceof IStructuredSelection)
+		if (userSelection != null && userSelection instanceof IStructuredSelection)
 		{
-			IStructuredSelection structuredSelectionByUser = (IStructuredSelection) selection;
+			IStructuredSelection structuredSelectionByUser = (IStructuredSelection) userSelection;
 			if (hasExactlyOneSelectedElement(structuredSelectionByUser))
 			{
 				Object selectedObject = structuredSelectionByUser.getFirstElement();
@@ -477,18 +474,9 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 	private void initializeDefaultGuiElementValuesFromFile(IFile file) {
 		if (CFGConstants.CFG_FILE_EXTENSION.equals(file.getFileExtension()))
 		{
-			//set source file name according to selection
-			sourceGraphModelFileName = file.getFullPath().toPortableString();
-			tx_sourceGraphModelFileName.setText(sourceGraphModelFileName);
-
-			//set target container according to selection
-			this.targetContainer = file.getFullPath().removeLastSegments(1).toPortableString();
-			tx_targetContainer.setText(this.targetContainer);
-
-			//Set target file name according to selection
-			targetFileName = file.getName().replace("." + CFGConstants.CFG_FILE_EXTENSION,"");
-			tx_targetFileName.setText(targetFileName);
-
+			tx_inputFilePath.setText(file.getFullPath().toPortableString());
+			tx_outputFolderPath.setText(file.getFullPath().removeLastSegments(1).toPortableString());
+			tx_outputFileName.setText(file.getName().replace("." + CFGConstants.CFG_FILE_EXTENSION,""));
 		}
 	}
 
@@ -496,25 +484,22 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 		if(memento != null){
 			if (memento.getString(Constants.TRANSFORMATION_WIZARD_CFGLOC) != null)
 			{
-				sourceGraphModelFileName = memento.getString(Constants.TRANSFORMATION_WIZARD_CFGLOC);
-				tx_sourceGraphModelFileName.setText(sourceGraphModelFileName);
+				tx_inputFilePath.setText(memento.getString(Constants.TRANSFORMATION_WIZARD_CFGLOC));
 			}
 	
 			if (memento.getString(Constants.TRANSFORMATION_WIZARD_CONTAINER) != null)
 			{
-				targetContainer = memento.getString(Constants.TRANSFORMATION_WIZARD_CONTAINER);
-				tx_targetContainer.setText(targetContainer);
+				tx_outputFolderPath.setText(memento.getString(Constants.TRANSFORMATION_WIZARD_CONTAINER));
 			}
 	
 			if (memento.getString(Constants.TRANSFORMATION_WIZARD_NEW_FILE) != null)
 			{
-				targetFileName = memento.getString(Constants.TRANSFORMATION_WIZARD_NEW_FILE);
-				tx_targetFileName.setText(targetFileName);
+				tx_outputFileName.setText(memento.getString(Constants.TRANSFORMATION_WIZARD_NEW_FILE));
 			}
 	
 			if (memento.getString(Constants.TRANSFORMATION_WIZARD_MODEL_SELECTION) != null)
 			{
-				cb_modelType.select(memento.getInteger(Constants.TRANSFORMATION_WIZARD_MODEL_SELECTION));
+				cb_transformationType.select(memento.getInteger(Constants.TRANSFORMATION_WIZARD_MODEL_SELECTION));
 			}
 		}
 	}
@@ -522,36 +507,41 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 	protected synchronized void saveMementoState() {
 		XMLMemento memento = XMLMemento.createWriteRoot(Constants.TRANSFORMATION_WIZARD_MEMENTO__KEY);
 		IMemento child = memento.createChild(Constants.TRANSFORMATION_WIZARD_MEMENTO__KEY);
-		child.putString(Constants.TRANSFORMATION_WIZARD_CFGLOC, tx_sourceGraphModelFileName.getText());
-		child.putString(Constants.TRANSFORMATION_WIZARD_CONTAINER, tx_targetContainer.getText());
-		child.putString(Constants.TRANSFORMATION_WIZARD_NEW_FILE, tx_targetFileName.getText());
-		child.putInteger(Constants.TRANSFORMATION_WIZARD_MODEL_SELECTION, cb_modelType.getSelectionIndex());
+		child.putString(Constants.TRANSFORMATION_WIZARD_CFGLOC, tx_inputFilePath.getText());
+		child.putString(Constants.TRANSFORMATION_WIZARD_CONTAINER, tx_outputFolderPath.getText());
+		child.putString(Constants.TRANSFORMATION_WIZARD_NEW_FILE, tx_outputFileName.getText());
+		child.putInteger(Constants.TRANSFORMATION_WIZARD_MODEL_SELECTION, cb_transformationType.getSelectionIndex());
 		Activator.saveMementoToFile(memento);
 	}
 
 	@Override
 	public boolean canFlipToNextPage(){
-		return canFlip;
+		return canGoToNextPage;
+	}
+	
+	public String getOutputFileExtension(){
+		return lb_outputFileExtension.getText();
 	}
 
-	public Text getContainerText() {
-		return tx_targetContainer;
+	public String getKivBasis() {
+		if(cb_kivBasis.getSelectionIndex() == Constants.NAT_INDEX){
+			return Constants.KIV_BASIS_NAT;
+		}else if(cb_kivBasis.getSelectionIndex() == Constants.INT_INDEX){
+			return Constants.KIV_BASIS_INT;
+		}
+		return null;
 	}
-
-	public Text getGraphModelFile() {
-		return tx_sourceGraphModelFileName;
+	
+	public String getInputFilePath(){
+		return tx_inputFilePath.getText();
 	}
-
-	public Text getFileText(){
-		return tx_targetFileName;
+	
+	public String getOutputFileName(){
+		return tx_outputFileName.getText();
 	}
-
-	public Label getFileEndingLabel(){
-		return lb_fileEnding;
-	}
-
-	public String getBasis() {
-		return basis;
+	
+	public String getOutputFolderPath(){
+		return tx_outputFolderPath.getText();
 	}
 
 }

@@ -47,13 +47,6 @@ public class StoreBufferGraphConfigurationPage extends ConfigurationPage {
 	private final static String MODEL_SELECTION = "modelSelection";
 	public static final String[] SUPPORTED_SEMANTICS = new String[] { "SC", "TSO", "PSO" };
 	
-	//Label Constants
-	public static final String MSG_STATUS_INVALID_OUTPUT_CONTAINER_NAME = "The folder path has to start with '/'.";
-	public static final String MSG_STATUS_INVALID_OUTPUT_CONTAINER = "Invalid output folder.";
-	public static final String MSG_STATUS_INVALID_OUTPUT_FILE_NAME = "Invalid output filename.";
-	public static final String MSG_STATUS_OK = "Check your input and press next or finish!";
-	public static final String MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED = "Unable to load the specified input file.";
-	public static final String MSG_STATUS_INPUT_FILE_NOT_EXISTING = "The specified input file does not exist.";
 	private static final String MSG_STATUS_WRONG_FILE_TYPE = "Invalid input file type. Please select a ." + CFGConstants.LLVM_FILE_EXTENSION + " or ." + CFGConstants.S_FILE_EXTENSION + " file.";
 	
 	/*output folder browse dialog*/
@@ -68,9 +61,6 @@ public class StoreBufferGraphConfigurationPage extends ConfigurationPage {
 	private static final String LB_TX_REORDERING = "Semantics:";
 	private static final String LB_TX_NEW_FILENAME = "&Output filename:";
 	private static final String LB_TX_CONTAINER = "&Output folder:";
-	
-	/*GUI button labels*/
-	public static final String BT_TX_BROWSE = "Browse";
 	
 	/*GUI page information*/
 	private static final String PAGE_DESCRIPTION = "Please configure your transformation.";
@@ -114,7 +104,7 @@ public class StoreBufferGraphConfigurationPage extends ConfigurationPage {
 
 		createOutputFolderGui(container, gd);
 
-		createButton(container, SWT.PUSH, BT_TX_BROWSE, createSelectionAdapter(false, true));		
+		createButton(container, SWT.PUSH, WizardMessageConstants.BT_TX_BROWSE, createSelectionAdapter(false, true));		
 		
 		createOutputFileNameGui(container, gd);
 		
@@ -144,7 +134,7 @@ public class StoreBufferGraphConfigurationPage extends ConfigurationPage {
 		label.setText(LB_TX_INPUT_FILE);
 		tx_sourceAstFileName = createText(container, SWT.BORDER | SWT.SINGLE, createModifyListener(false), gd);
 		//browse button
-		createButton(container, SWT.PUSH, BT_TX_BROWSE, createSelectionAdapter(true, false));	
+		createButton(container, SWT.PUSH, WizardMessageConstants.BT_TX_BROWSE, createSelectionAdapter(true, false));	
 	}
 
 	public void createOutputFileNameGui(final Composite container, GridData gd) {
@@ -245,20 +235,21 @@ public class StoreBufferGraphConfigurationPage extends ConfigurationPage {
 		
 		if (!isFileAccessible(getPathToInputFile()))
 		{
-			updateErrorMessage(MSG_STATUS_INPUT_FILE_NOT_EXISTING);
+			updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_NOT_EXISTING);
 			return;
 		}
 		if(getPathToInputFile().endsWith("." + CFGConstants.LLVM_FILE_EXTENSION)){
 			if (ResourceIOUtil.loadAst(getPathToInputFile()) == null)
 			{
-				updateErrorMessage(MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
+				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
 				return;
 			}
+			lb_overwritingFilesWarning.setText("");
 		}
 		//.s extension
 		else{
 			if(ResourceIOUtil.createAstFromLLVM(getPathToInputFile()) == null){
-				updateErrorMessage(MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
+				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
 				return;
 			}
 			
@@ -271,20 +262,20 @@ public class StoreBufferGraphConfigurationPage extends ConfigurationPage {
 
 		if (!isValidFolderPath(tx_targetContainerName.getText())) {
 			if(!tx_targetContainerName.getText().startsWith("/")){
-				updateErrorMessage(MSG_STATUS_INVALID_OUTPUT_CONTAINER_NAME);
+				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_CONTAINER_NAME);
 			}else{
-				updateErrorMessage(MSG_STATUS_INVALID_OUTPUT_CONTAINER);
+				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_CONTAINER);
 			}
 			return;
 		}
 		if (!isValidCFGName(tx_outputFileName.getText())) {
-			updateErrorMessage(MSG_STATUS_INVALID_OUTPUT_FILE_NAME);
+			updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_FILE_NAME);
 			return;
 		}
 		
 		//make sure we can go into the error view
 		updateErrorMessage(null);
-		setDescription(MSG_STATUS_OK);
+		setDescription(WizardMessageConstants.MSG_STATUS_OK);
 		
 		//redo checks
 		wizard.restartChecks();
