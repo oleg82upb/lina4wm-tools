@@ -29,7 +29,7 @@ import de.upb.llvm_parser.llvm.LLVM;
  * @author Alexander Hetzer
  *
  */
-public class SaveAstHandler extends AbstractHandler {
+public class SaveAstCommandHandler extends AbstractHandler {
 	
 	private Shell shell;
 	private SaveAsDialog saveAsDialog;

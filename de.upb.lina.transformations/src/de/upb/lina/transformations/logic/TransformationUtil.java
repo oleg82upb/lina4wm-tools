@@ -22,7 +22,6 @@ import de.upb.llvm_parser.llvm.LLVM;
 /**
  * Utility class implementing several utility methods useful for the transformation process.
  * 
- *
  */
 public abstract class TransformationUtil {
 

@@ -52,7 +52,7 @@ import de.upb.llvm_parser.llvm.LLVM;
  * @author Alexander Hetzer
  *
  */
-public class CreateAllHandler extends AbstractHandler
+public class CreateAllTransformationsCommandHandler extends AbstractHandler
 {
 	private static final String[] KIV_BASES = { Constants.KIV_BASIS_INT, Constants.KIV_BASIS_NAT };
 

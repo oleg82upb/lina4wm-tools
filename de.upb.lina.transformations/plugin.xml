@@ -28,13 +28,13 @@
          point="org.eclipse.ui.commands">
       <!-- Create All command -->
       <command
-            defaultHandler="de.upb.lina.transformations.logic.CreateAllHandler"
+            defaultHandler="de.upb.lina.transformations.logic.CreateAllTransformationsCommandHandler"
             id="de.upb.lina.transformations.createallcommand"
             name="Create All Transformations">
       </command>
       <!-- Save Ast command -->
       <command
-            defaultHandler="de.upb.lina.transformations.logic.SaveAstHandler"
+            defaultHandler="de.upb.lina.transformations.logic.SaveAstCommandHandler"
             id="de.upb.lina.transformations.saveastcommand"
             name="Save AST">
       </command>
