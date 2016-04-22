@@ -47,7 +47,7 @@
 		<img src="img/03_saveAstError.png" class="fixed-ratio-resize">
 	</a>
 	</br>
-	<h2>3. From AST to CFG</h2>
+	<h2>3. From AST to SBG</h2>
 	After the '.LLVM' AST file has been generated, it is time to generate a store buffer graph for a specific memory model. In order to do so, right click the '.LLVM' file 
 	and choose 'New->Other'.
 	</br>
@@ -76,14 +76,14 @@
 	file in the specified folder. If any error was found, you will not be able to click 'Finish', but you have to choose 'Next' and will find a list of the errors. In case only minor 
 	problems are found, you will receive a warning and can see the full list in the same wizard page. 
 
-	<h2>4. From CFG to specification</h2>
+	<h2>4. From SBG to specification</h2>
 	Once again you right click the '.cfg' file and choose 'New->Other' and will be asked to selet a wizard. Select the 'Generate New Specification' wizard from the 'LINA' category. 
 	</br>
 	<a href="img/07_newSpec.png">
 		<img src="img/07_newSpec.png" class="fixed-ratio-resize">
 	</a>
 	</br>
-	Now you should see the CFG selection wizard page where you have to choose a store buffer graph file, a target container for the specification and a transformation type. Depending 
+	Now you should see the SBG selection wizard page where you have to choose a store buffer graph file, a target container for the specification and a transformation type. Depending 
 	on the transformation type, you might also have to choose a file name for the specification and a basis. 
 	</br>
 	<a href="img/08_newSpec.png">
@@ -98,7 +98,7 @@
 		<img src="img/09_newSpec.png" class="fixed-ratio-resize">
 	</a>
 	
-	<h2>5. Manually resolve problems</h2>
+	<h2>5. Manual Problem Resolution</h2>
 	You should be able to open your specification file(s) now in order to take a first look at it. If the tool had trouble with certain parts of the specification, you will be 
 	notified by a comment in the according line stating a 'TODO' or 'NEEDS ATTENTION'. For a more detailed explanation of these situations, have a look at the <a href="problems.html">problems
 	section</a>.

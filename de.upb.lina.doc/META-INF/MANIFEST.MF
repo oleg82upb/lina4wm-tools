@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Usage
-Bundle-SymbolicName: de.upb.lina.usage;singleton:=true
+Bundle-SymbolicName: de.upb.lina.doc;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: de.upb.lina.usage.Activator
+Bundle-Activator: de.upb.lina.doc.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.help.webapp;bundle-version="3.6.300",

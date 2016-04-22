@@ -1,4 +1,4 @@
-package de.upb.lina.usage;
+package de.upb.lina.doc;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
