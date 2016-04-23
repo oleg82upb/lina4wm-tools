@@ -12,16 +12,14 @@ import de.upb.lina.cfg.controlflow.diagram.providers.ControlFlowModelingAssistan
 /**
  * @generated
  */
-public class ControlFlowModelingAssistantProviderOfControlFlowDiagramEditPart extends
-		ControlFlowModelingAssistantProvider
-{
+public class ControlFlowModelingAssistantProviderOfControlFlowDiagramEditPart
+		extends ControlFlowModelingAssistantProvider {
 
 	/**
 	 * @generated
 	 */
 	@Override
-	public List<IElementType> getTypesForPopupBar(IAdaptable host)
-	{
+	public List<IElementType> getTypesForPopupBar(IAdaptable host) {
 		List<IElementType> types = new ArrayList<IElementType>(1);
 		types.add(ControlFlowElementTypes.ControlFlowLocation_2001);
 		return types;

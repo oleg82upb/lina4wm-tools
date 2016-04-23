@@ -1,6 +1,9 @@
 package de.upb.lina.cfg.controlflow.diagram.part;
 
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramActionBarContributor;
+import org.eclipse.gmf.runtime.diagram.ui.printing.render.actions.EnhancedPrintActionHelper;
+import org.eclipse.gmf.runtime.diagram.ui.printing.render.actions.RenderedPrintPreviewAction;
+import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IWorkbenchActionConstants;
@@ -35,6 +38,8 @@ public class ControlFlowDiagramActionBarContributor extends
 		IMenuManager fileMenu = bars.getMenuManager().findMenuUsingPath(
 				IWorkbenchActionConstants.M_FILE);
 		assert fileMenu != null;
-		fileMenu.remove("pageSetupAction"); //$NON-NLS-1$
+		IAction printPreviewAction = new RenderedPrintPreviewAction(
+				new EnhancedPrintActionHelper());
+		fileMenu.insertBefore("print", printPreviewAction); //$NON-NLS-1$
 	}
 }

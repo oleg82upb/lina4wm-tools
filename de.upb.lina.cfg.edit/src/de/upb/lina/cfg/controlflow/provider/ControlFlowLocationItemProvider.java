@@ -60,8 +60,7 @@ public class ControlFlowLocationItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addPcPropertyDescriptor(object);
@@ -194,8 +193,7 @@ public class ControlFlowLocationItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ControlFlowLocation.class))
-		{
+		switch (notification.getFeatureID(ControlFlowLocation.class)) {
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__PC:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

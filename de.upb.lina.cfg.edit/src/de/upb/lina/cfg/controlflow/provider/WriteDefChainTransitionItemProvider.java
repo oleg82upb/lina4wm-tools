@@ -38,8 +38,7 @@ public class WriteDefChainTransitionItemProvider extends TransitionItemProvider 
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addCopyAddressPropertyDescriptor(object);

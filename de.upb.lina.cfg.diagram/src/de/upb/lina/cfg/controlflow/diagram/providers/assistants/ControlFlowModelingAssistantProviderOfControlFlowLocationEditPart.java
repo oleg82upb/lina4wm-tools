@@ -15,25 +15,24 @@ import de.upb.lina.cfg.controlflow.diagram.providers.ControlFlowModelingAssistan
 /**
  * @generated
  */
-public class ControlFlowModelingAssistantProviderOfControlFlowLocationEditPart extends
-		ControlFlowModelingAssistantProvider
-{
+public class ControlFlowModelingAssistantProviderOfControlFlowLocationEditPart
+		extends ControlFlowModelingAssistantProvider {
 
 	/**
 	 * @generated
 	 */
 	@Override
-	public List<IElementType> getRelTypesOnSource(IAdaptable source)
-	{
-		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source.getAdapter(IGraphicalEditPart.class);
+	public List<IElementType> getRelTypesOnSource(IAdaptable source) {
+		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source
+				.getAdapter(IGraphicalEditPart.class);
 		return doGetRelTypesOnSource((ControlFlowLocationEditPart) sourceEditPart);
 	}
 
 	/**
 	 * @generated
 	 */
-	public List<IElementType> doGetRelTypesOnSource(ControlFlowLocationEditPart source)
-	{
+	public List<IElementType> doGetRelTypesOnSource(
+			ControlFlowLocationEditPart source) {
 		List<IElementType> types = new ArrayList<IElementType>(1);
 		types.add(ControlFlowElementTypes.Transition_4001);
 		return types;
@@ -43,22 +42,24 @@ public class ControlFlowModelingAssistantProviderOfControlFlowLocationEditPart e
 	 * @generated
 	 */
 	@Override
-	public List<IElementType> getRelTypesOnSourceAndTarget(IAdaptable source, IAdaptable target)
-	{
-		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source.getAdapter(IGraphicalEditPart.class);
-		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target.getAdapter(IGraphicalEditPart.class);
-		return doGetRelTypesOnSourceAndTarget((ControlFlowLocationEditPart) sourceEditPart, targetEditPart);
+	public List<IElementType> getRelTypesOnSourceAndTarget(IAdaptable source,
+			IAdaptable target) {
+		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source
+				.getAdapter(IGraphicalEditPart.class);
+		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target
+				.getAdapter(IGraphicalEditPart.class);
+		return doGetRelTypesOnSourceAndTarget(
+				(ControlFlowLocationEditPart) sourceEditPart, targetEditPart);
 	}
 
 	/**
 	 * @generated
 	 */
-	public List<IElementType> doGetRelTypesOnSourceAndTarget(ControlFlowLocationEditPart source,
-			IGraphicalEditPart targetEditPart)
-	{
+	public List<IElementType> doGetRelTypesOnSourceAndTarget(
+			ControlFlowLocationEditPart source,
+			IGraphicalEditPart targetEditPart) {
 		List<IElementType> types = new LinkedList<IElementType>();
-		if (targetEditPart instanceof ControlFlowLocationEditPart)
-		{
+		if (targetEditPart instanceof ControlFlowLocationEditPart) {
 			types.add(ControlFlowElementTypes.Transition_4001);
 		}
 		return types;
@@ -68,20 +69,21 @@ public class ControlFlowModelingAssistantProviderOfControlFlowLocationEditPart e
 	 * @generated
 	 */
 	@Override
-	public List<IElementType> getTypesForTarget(IAdaptable source, IElementType relationshipType)
-	{
-		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source.getAdapter(IGraphicalEditPart.class);
-		return doGetTypesForTarget((ControlFlowLocationEditPart) sourceEditPart, relationshipType);
+	public List<IElementType> getTypesForTarget(IAdaptable source,
+			IElementType relationshipType) {
+		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source
+				.getAdapter(IGraphicalEditPart.class);
+		return doGetTypesForTarget(
+				(ControlFlowLocationEditPart) sourceEditPart, relationshipType);
 	}
 
 	/**
 	 * @generated
 	 */
-	public List<IElementType> doGetTypesForTarget(ControlFlowLocationEditPart source, IElementType relationshipType)
-	{
+	public List<IElementType> doGetTypesForTarget(
+			ControlFlowLocationEditPart source, IElementType relationshipType) {
 		List<IElementType> types = new ArrayList<IElementType>();
-		if (relationshipType == ControlFlowElementTypes.Transition_4001)
-		{
+		if (relationshipType == ControlFlowElementTypes.Transition_4001) {
 			types.add(ControlFlowElementTypes.ControlFlowLocation_2001);
 		}
 		return types;
@@ -91,17 +93,17 @@ public class ControlFlowModelingAssistantProviderOfControlFlowLocationEditPart e
 	 * @generated
 	 */
 	@Override
-	public List<IElementType> getRelTypesOnTarget(IAdaptable target)
-	{
-		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target.getAdapter(IGraphicalEditPart.class);
+	public List<IElementType> getRelTypesOnTarget(IAdaptable target) {
+		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target
+				.getAdapter(IGraphicalEditPart.class);
 		return doGetRelTypesOnTarget((ControlFlowLocationEditPart) targetEditPart);
 	}
 
 	/**
 	 * @generated
 	 */
-	public List<IElementType> doGetRelTypesOnTarget(ControlFlowLocationEditPart target)
-	{
+	public List<IElementType> doGetRelTypesOnTarget(
+			ControlFlowLocationEditPart target) {
 		List<IElementType> types = new ArrayList<IElementType>(1);
 		types.add(ControlFlowElementTypes.Transition_4001);
 		return types;
@@ -111,20 +113,21 @@ public class ControlFlowModelingAssistantProviderOfControlFlowLocationEditPart e
 	 * @generated
 	 */
 	@Override
-	public List<IElementType> getTypesForSource(IAdaptable target, IElementType relationshipType)
-	{
-		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target.getAdapter(IGraphicalEditPart.class);
-		return doGetTypesForSource((ControlFlowLocationEditPart) targetEditPart, relationshipType);
+	public List<IElementType> getTypesForSource(IAdaptable target,
+			IElementType relationshipType) {
+		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target
+				.getAdapter(IGraphicalEditPart.class);
+		return doGetTypesForSource(
+				(ControlFlowLocationEditPart) targetEditPart, relationshipType);
 	}
 
 	/**
 	 * @generated
 	 */
-	public List<IElementType> doGetTypesForSource(ControlFlowLocationEditPart target, IElementType relationshipType)
-	{
+	public List<IElementType> doGetTypesForSource(
+			ControlFlowLocationEditPart target, IElementType relationshipType) {
 		List<IElementType> types = new ArrayList<IElementType>();
-		if (relationshipType == ControlFlowElementTypes.Transition_4001)
-		{
+		if (relationshipType == ControlFlowElementTypes.Transition_4001) {
 			types.add(ControlFlowElementTypes.ControlFlowLocation_2001);
 		}
 		return types;

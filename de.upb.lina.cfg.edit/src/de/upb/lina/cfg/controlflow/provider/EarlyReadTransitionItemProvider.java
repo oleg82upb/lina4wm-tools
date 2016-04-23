@@ -41,8 +41,7 @@ public class EarlyReadTransitionItemProvider extends TransitionItemProvider {
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addAssignmentExpressionPropertyDescriptor(object);
@@ -109,8 +108,7 @@ public class EarlyReadTransitionItemProvider extends TransitionItemProvider {
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(EarlyReadTransition.class))
-		{
+		switch (notification.getFeatureID(EarlyReadTransition.class)) {
 			case ControlflowPackage.EARLY_READ_TRANSITION__ASSIGNMENT_EXPRESSION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

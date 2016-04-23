@@ -38,6 +38,8 @@ Require-Bundle: org.eclipse.core.runtime,
  de.upb.lina.cfg.edit,
  de.upb.llvm_parser,
  de.upb.llvm_parser.edit,
- org.eclipse.gef
+ org.eclipse.gef,
+ org.eclipse.gmf.runtime.diagram.ui.printing,
+ org.eclipse.gmf.runtime.diagram.ui.printing.render
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

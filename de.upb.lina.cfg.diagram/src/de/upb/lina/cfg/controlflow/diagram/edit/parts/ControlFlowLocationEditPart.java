@@ -260,58 +260,6 @@ public class ControlFlowLocationEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public List<IElementType> getMARelTypesOnSource() {
-		ArrayList<IElementType> types = new ArrayList<IElementType>(1);
-		types.add(ControlFlowElementTypes.Transition_4001);
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMARelTypesOnSourceAndTarget(
-			IGraphicalEditPart targetEditPart) {
-		LinkedList<IElementType> types = new LinkedList<IElementType>();
-		if (targetEditPart instanceof de.upb.lina.cfg.controlflow.diagram.edit.parts.ControlFlowLocationEditPart) {
-			types.add(ControlFlowElementTypes.Transition_4001);
-		}
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMATypesForTarget(IElementType relationshipType) {
-		LinkedList<IElementType> types = new LinkedList<IElementType>();
-		if (relationshipType == ControlFlowElementTypes.Transition_4001) {
-			types.add(ControlFlowElementTypes.ControlFlowLocation_2001);
-		}
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMARelTypesOnTarget() {
-		ArrayList<IElementType> types = new ArrayList<IElementType>(1);
-		types.add(ControlFlowElementTypes.Transition_4001);
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMATypesForSource(IElementType relationshipType) {
-		LinkedList<IElementType> types = new LinkedList<IElementType>();
-		if (relationshipType == ControlFlowElementTypes.Transition_4001) {
-			types.add(ControlFlowElementTypes.ControlFlowLocation_2001);
-		}
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
 	public class ControlFlowLocationFigure extends RectangleFigure {
 
 		/**
