@@ -1,4 +1,4 @@
-package de.upb.lina.transformations.logic;
+package de.upb.lina.transformations.logic.commandhandler;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -42,6 +42,10 @@ import de.upb.lina.cfg.tools.checks.PropertyCheckerManager;
 import de.upb.lina.cfg.tools.checks.UnsupportedInstructionPropertyChecker;
 import de.upb.lina.transformations.Activator;
 import de.upb.lina.transformations.Constants;
+import de.upb.lina.transformations.logic.ETransformationType;
+import de.upb.lina.transformations.logic.TransformationConfiguration;
+import de.upb.lina.transformations.logic.TransformationOperation;
+import de.upb.lina.transformations.logic.TransformationUtil;
 import de.upb.llvm_parser.llvm.LLVM;
 
 /**

@@ -1,4 +1,4 @@
-package de.upb.lina.transformations.logic;
+package de.upb.lina.transformations.logic.commandhandler;
 
 import java.util.Iterator;
 
