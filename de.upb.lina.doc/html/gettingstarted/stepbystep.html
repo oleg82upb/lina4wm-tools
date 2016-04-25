@@ -15,7 +15,7 @@
 </head>
 
 <body>
-	<h1>Step by Step Tutorial</h1>
+	<h1>Step by Step including intermediate Files</h1>
 	In the following we will provide a step by step tutorial showing how to get from a C file to a valid Promela or KIV 
 	specification, which can be used as input for a model checker. Each step is shown in detail, including screenshots which can be clicked to obtain a larger version.
 
@@ -28,14 +28,14 @@
 	<h2>2. From LLVM to AST</h2>
 	Once you obtained the LLVM code in the form of a '.s' file, you right click the '.s' file and choose 'Save AST'. 
 	</br>
-	<a href="img/01_saveAst.png">
-		<img src="img/01_saveAst.png" class="fixed-ratio-resize">
+	<a href="img/step_by_step/01_saveAst.png">
+		<img src="img/step_by_step/01_saveAst.png" class="fixed-ratio-resize">
 	</a>
 	</br>
 	You will be prompted with a save dialog, where you can choose both the parent folder and the file name of the AST file to be generated.
 	</br>
-	<a href="img/02_saveAst.png">
-		<img src="img/02_saveAst.png" class="fixed-ratio-resize">
+	<a href="img/step_by_step/02_saveAst.png">
+		<img src="img/step_by_step/02_saveAst.png" class="fixed-ratio-resize">
 	</a>
 	</br>
 	By default the folder containing the LLVM file is selected as a parent folder, whereas the default file name is the name of the '.s' file 
@@ -43,30 +43,30 @@
 
 	In case the '.s' file contains any syntax errors, you will be notified and asked if you want to abort the AST generation.
 	</br>
-	<a href="img/03_saveAstError.png">
-		<img src="img/03_saveAstError.png" class="fixed-ratio-resize">
+	<a href="img/step_by_step/03_saveAstError.png">
+		<img src="img/step_by_step/03_saveAstError.png" class="fixed-ratio-resize">
 	</a>
 	</br>
 	<h2>3. From AST to SBG</h2>
 	After the '.LLVM' AST file has been generated, it is time to generate a store buffer graph for a specific memory model. In order to do so, right click the '.LLVM' file 
 	and choose 'New->Other'.
 	</br>
-	<a href="img/04_newOther.png">
-		<img src="img/04_newOther.png" class="fixed-ratio-resize">
+	<a href="img/step_by_step/04_newOther.png">
+		<img src="img/step_by_step/04_newOther.png" class="fixed-ratio-resize">
 	</a>
 	</br>
-	Next choose the wizard category 'LINA' and select 'New Store Buffer Graph'.
+	Next choose the wizard category 'Weak2SC' and select 'Derive Store Buffer Graph from LLVM'.
 	</br>
-	<a href="img/05_newCFG.png">
-		<img src="img/05_newCFG.png" class="fixed-ratio-resize">
+	<a href="img/step_by_step/05_newCFG.png">
+		<img src="img/step_by_step/05_newCFG.png" class="fixed-ratio-resize">
 	</a>
 	</br>
 	After clicking 'Next' you will find yourself in the AST selection wizard page where you can choose the AST file you want to generate a store buffer graph for. You have provide
 	a path to a valid '.LLVM' AST file and both a container and file name for the resulting store buffer graph file. Furthermore you have to choose a memory model as a reordering
 	strategy. 
 	</br>
-	<a href="img/06_newCFG.png">
-		<img src="img/06_newCFG.png" class="fixed-ratio-resize">
+	<a href="img/step_by_step/06_newCFG.png">
+		<img src="img/step_by_step/06_newCFG.png" class="fixed-ratio-resize">
 	</a>
 	</br>
 	Since you right clicked your 'LLVM' file the correct AST file is already chosen and the container for the store buffer graph is chosen accordingly. As a default file name, the AST file 
@@ -79,29 +79,28 @@
 	<h2>4. From SBG to specification</h2>
 	Once again you right click the '.cfg' file and choose 'New->Other' and will be asked to selet a wizard. Select the 'Generate New Specification' wizard from the 'LINA' category. 
 	</br>
-	<a href="img/07_newSpec.png">
-		<img src="img/07_newSpec.png" class="fixed-ratio-resize">
+	<a href="img/step_by_step/07_newSpec.png">
+		<img src="img/step_by_step/07_newSpec.png" class="fixed-ratio-resize">
 	</a>
 	</br>
 	Now you should see the SBG selection wizard page where you have to choose a store buffer graph file, a target container for the specification and a transformation type. Depending 
 	on the transformation type, you might also have to choose a file name for the specification and a basis. 
 	</br>
-	<a href="img/08_newSpec.png">
-		<img src="img/08_newSpec.png" class="fixed-ratio-resize">
+	<a href="img/step_by_step/08_newSpec.png">
+		<img src="img/step_by_step/08_newSpec.png" class="fixed-ratio-resize">
 	</a>
 	</br>
 
 	At this point you can either hit 'Finish' to start the transformation to generate the whole specification, including all functions, or hit 'Next' to decide which functions should be
 	included in the specification and which not. You can also rename functions for the transformation. If you do so, you will find the old function names as comments in the transformation.
 	</br>
-	<a href="img/09_newSpec.png">
-		<img src="img/09_newSpec.png" class="fixed-ratio-resize">
+	<a href="img/step_by_step/09_newSpec.png">
+		<img src="img/step_by_step/09_newSpec.png" class="fixed-ratio-resize">
 	</a>
 	
 	<h2>5. Manual Problem Resolution</h2>
 	You should be able to open your specification file(s) now in order to take a first look at it. If the tool had trouble with certain parts of the specification, you will be 
-	notified by a comment in the according line stating a 'TODO' or 'NEEDS ATTENTION'. For a more detailed explanation of these situations, have a look at the <a href="problems.html">problems
-	section</a>.
+	notified by a comment in the according line stating a 'TODO' or 'NEEDS ATTENTION'.
 	</br>
 	</br>
 	

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>From LLVM to Specification in a single Step</title>
+	
+<style>
+.fixed-ratio-resize { /* basic responsive img */
+	max-width: 80%;
+	height: auto;
+	width: auto\9; /* IE8 */
+}
+</style>
+</head>
+
+<body>
+	<h1>From LLVM to Specification in a single Step</h1>
+	In the following we show how to generate a specification directly from a LLVM file without intermediate steps and files.
+	
+	<h2>How To</h2>
+	Take a look at the <a href="stepbystep.html">step by step guide</a> to see how to generate a LLVM file for a C file. Once you have a '.s' file, 
+	right click it and select "New -> Other".
+	</br>
+	<a href="img/step_by_step/04_newOther.png">
+		<img src="img/step_by_step/04_newOther.png" class="fixed-ratio-resize">
+	</a>
+	</br>
+	Next choose the wizard category 'Weak2SC' and select 'Generate Specification from LLVM in one Step'.
+	</br>
+	<a href="img/one_step/01_oneStep.png">
+		<img src="img/one_step/01_oneStep.png" class="fixed-ratio-resize">
+	</a>
+	</br>
+	On the first page of the wizard you will be able to select several configuration parameters for the transformation such as the output folder, the memory model semantics
+	and the type of transformation, i.e. the type of the output specification. Change the values to your desire and click on 'Next'.
+	</br>
+	<a href="img/one_step/02_oneStep.png">
+		<img src="img/one_step/02_oneStep.png" class="fixed-ratio-resize">
+	</a>
+	</br>
+	On the next page you will be informed about warnings and errors depending on your specification configuration. Errors make the generation impossible and need to be fixed, whereas 
+	problems could be ignored but might lead to strange behavior.
+	</br>
+	<a href="img/one_step/03_oneStep.png">
+		<img src="img/one_step/03_oneStep.png" class="fixed-ratio-resize">
+	</a>
+	</br>
+	After you have dealt with all warnings and problems, you can click on 'Next' and will be brought to the last page, where you can select specific functions and rename.
+	</br>
+	<a href="img/one_step/04_oneStep.png">
+		<img src="img/one_step/04_oneStep.png" class="fixed-ratio-resize">
+	</a>
+	</br>
+	A last click on 'Finish' will start the generation process.
+	
+</body>

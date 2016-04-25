@@ -2,11 +2,15 @@
 <?NLS TYPE="org.eclipse.help.toc"?>
 
 <toc label="Getting Started" link_to="toc.xml#gettingstarted"> 
-	<topic label="From C code to specification step by step"  href="html/gettingstarted/stepbystep.html"> 
+	<topic label="From C code to Specification step by step"  href="html/gettingstarted/stepbystep.html"> 
+	</topic>
+	<topic label="From LLVM to Specification in a single step"  href="html/gettingstarted/one_step_specification_from_llvm.html"> 
 	</topic>
 	<topic label="Jump Start"  href="html/gettingstarted/quickstart.html"> 
 	</topic>
-	<topic label="Problems"  href="html/gettingstarted/problems.html"> 
+	<topic label="Generate Store Buffer Graphs"  href="html/gettingstarted/generate_sbg.html"> 
+	</topic>
+	<topic label="Supported Memory Models"  href="html/gettingstarted/supported_memory_models.html"> 
 	</topic>
 	<topic label="Dependencies"  href="html/gettingstarted/dependencies.html"> 
 	</topic>
