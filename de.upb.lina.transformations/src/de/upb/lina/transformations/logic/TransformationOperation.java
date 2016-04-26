@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.eclipse.acceleo.common.preference.AcceleoPreferences;
 import org.eclipse.acceleo.engine.service.AbstractAcceleoGenerator;
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -52,15 +53,14 @@ public class TransformationOperation extends WorkspaceModifyOperation{
 
 		// get target path within project
 		IPath targetFolderCont = new Path(targetContainer);
-		
 		IResource resource = null;
 		if(targetFolderCont.isAbsolute())
 		{
-			resource = workSpaceRoot.getFolder(targetFolderCont);
+			resource = workSpaceRoot.findMember(targetFolderCont);
 		}
 		else
 		{
-			resource = workSpaceRoot.getFolder(targetFolderCont.makeAbsolute());
+			resource = workSpaceRoot.findMember(targetFolderCont.makeAbsolute());
 		}
 		 
 		// build correct full path
