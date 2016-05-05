@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+		<title>Weak2SC</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<meta http-equiv="Content-Language" content="en">
+		<meta http-equiv="expires" content="0">
+		<meta name="robots" content="index,follow">
+		<meta name="revisit-after" content="7 days">
+		<meta name="author" content="Oleg Travkin">
+		<meta name="Content-Language" content="de">
+		<meta name="page-topic" content="Weak2SC - Getting Started">
+		<meta name="keywords" content="Weak2SC, TSO, SC, model checking, lina">
+		<meta name="description" content="Getting Started for the Weak2SC Toolsuite">
+		<base target="_self">
+		<link rel="stylesheet" href="style.css" type="text/css">
+	</head>
+	<body>
+		<div id="container">
+			<div id="head">
+				<div id="headInfo">
+					Weak2SC - Getting Started
+				</div>
+			</div>
+			
+			<div id="navigation">
+				<ul>
+					<a href="index.html"><li>Home</li></a>
+					<a href="installation.html"><li>Installation</li></a>
+					<a href="dependencies.html"><li>Dependencies</li></a>
+					<a href="quickstart.html"><li>Quickstart</li></a>
+					<a href="stepbystep.html"><li>Step by Step Guide</li></a>
+					<a href="one_step_specification_from_llvm.html"><li>One Step Guide</li></a>
+					<a href="generate_sbg.html"><li id="active">SBG Generation</li></a>
+				</ul>
+			</div>
+			
+			<div id="content">
+					<h1>Generate Store Buffer Graphs</h1>
+	In the following we will show how to generate store buffer graphs from LLVM code and the according visualization.
+	</br>
+	<h2>How to: Generation</h2>
+	Take a look at the <a href="stepbystep.html">step by step guide</a> to see how to generate a LLVM file for a C file. Once you have a '.s' file, 
+	right click it and select "New -> Other".
+	</br>
+	<a href="img/step_by_step/04_newOther.png">
+		<img src="img/step_by_step/04_newOther.png" class="fixed-ratio-resize">
+	</a>
+	</br>
+	Next choose the wizard category 'Weak2SC' and select 'Derive Store Buffer Graph from LLVM'.
+	</br>
+	<a href="img/step_by_step/05_newCFG.png">
+		<img src="img/step_by_step/05_newCFG.png" class="fixed-ratio-resize">
+	</a>
+	</br>
+	On the first page of the wizard you will be able to configure the generation by providing an input file, output file, output folder and the memory models semantics.
+	</br>
+	<a href="img/step_by_step/06_newCFG.png">
+		<img src="img/step_by_step/06_newCFG.png" class="fixed-ratio-resize">
+	</a>
+	</br>
+	The AST file will be checked automatically for errors, unsupported LLVM code and other problems. If no problems are found, you can press 'Finish' and will find a generated store buffer graph
+	file in the specified folder. If any error was found, you will not be able to click 'Finish', but you have to choose 'Next' and will find a list of the errors. In case only minor 
+	problems are found, you will receive a warning and can see the full list in the same wizard page. 
+	</br> 
+	After clicking 'Finish' you will find you store buffer graph file with the extension '.cfg' in the output folder you chose. 
+	
+	<h2>How to: Visualization</h2>
+	Right-click your store buffer graph file ('.cfg') and select 'Initialize cfg_diagram diagram file'. 
+	</br>
+	<a href="img/diagram/01_diagram.png">
+		<img src="img/diagram/01_diagram.png" class="fixed-ratio-resize">
+	</a>
+	</br>
+	On the first page of the wizard you will be asked to select an output folder and name for your diagram file. Change these fields to you desire and press 'Next'.
+	</br>
+	<a href="img/diagram/02_diagram.png">
+		<img src="img/diagram/02_diagram.png" class="fixed-ratio-resize">
+	</a>
+	</br>
+	On the next page you can select which element of the store buffer graph file should visualized. Please note that this wizard is generated and therefore it might be possible that
+	you will be able to see strange elements to be visualized. These ones can simply be ignored. Usually you will be interested in generation the visualization of the store
+	buffer graph for a specific function. To do so simply select the function and click on 'Finish'.
+	</br>
+	<a href="img/diagram/03_diagram.png">
+		<img src="img/diagram/03_diagram.png" class="fixed-ratio-resize">
+	</a>
+	</br>
+	After that you can find the store buffer graph visualization file ('.cfg_diagram') in the output folder you chose. Opening it, you can find a visualization of the function 
+	you chose: 
+	</br>
+	<a href="img/diagram/04_diagram.png">
+		<img src="img/diagram/04_diagram.png" class="fixed-ratio-resize">
+	</a>
+	</br>
+	States with buffers are marked with '< >', containing the current buffer entries as tuples.
+	</br>	
+			</div>
+			
+			<div class="clear"></div>
+		</div>
+		<div id="footer">
+			<p>
+			<a href="Impressum.html">Impressum</a>
+			</p>
+		</div>
+	</body>
+</html>
