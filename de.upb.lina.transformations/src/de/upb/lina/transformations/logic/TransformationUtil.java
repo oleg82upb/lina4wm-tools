@@ -8,7 +8,6 @@ import java.util.List;
 import org.eclipse.jface.wizard.Wizard;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
-import de.upb.lina.cfg.tools.CFGActivator;
 import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.IGraphGenerator;
 import de.upb.lina.cfg.tools.strategies.PSOGraphGenerator;
@@ -62,10 +61,6 @@ public abstract class TransformationUtil {
 					}
 	
 					list.add(generator.createGraph());
-					if (generator.getWarnings() != null)
-					{
-						CFGActivator.logWarning(generator.getWarnings(), null);
-					}
 				}
 			}
 		}

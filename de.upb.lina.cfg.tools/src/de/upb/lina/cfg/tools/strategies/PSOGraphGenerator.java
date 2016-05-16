@@ -17,79 +17,77 @@ import de.upb.llvm_parser.llvm.Load;
 import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.Store;
 
-public class PSOGraphGenerator extends TSOGraphGenerator
-{
-	
+public class PSOGraphGenerator extends TSOGraphGenerator {
 
-	public PSOGraphGenerator(FunctionDefinition function)
-	{
+	public PSOGraphGenerator(FunctionDefinition function) {
 		super(function);
 	}
-	
-	
+
 	@Override
-	protected void addInstructionTransitions(ControlFlowLocation currentLocation, Instruction nextInstruction)
-	{
-		if (nextInstruction instanceof Store)
-		{
+	protected void addInstructionTransitions(
+			ControlFlowLocation currentLocation, Instruction nextInstruction) {
+		if (nextInstruction instanceof Store) {
 			Store store = (Store) nextInstruction;
 			int writeType = typeOfWriteDefChain(store);
-			StoreBuffer nextBuffer = cloneStoreBuffer(currentLocation.getBuffer());
+			StoreBuffer nextBuffer = cloneStoreBuffer(currentLocation
+					.getBuffer());
 			Parameter addressParam = store.getTargetAddress();
-			
-			
-			Address address = ((AddressUse) addressParam.getValue()).getAddress();
-			if(writeType == CFGConstants.WDC_BOTH || writeType == CFGConstants.WDC_ADDRESS)
-			{
-				//write def chain, we need a variable copy
+
+			Address address = ((AddressUse) addressParam.getValue())
+					.getAddress();
+			if (writeType == CFGConstants.WDC_BOTH
+					|| writeType == CFGConstants.WDC_ADDRESS) {
+				// write def chain, we need a variable copy
 				address = getOrCreateAddressCopyForWDC(store);
 				addressParam = getOrCreateParamForAddress(address, addressParam);
 			}
-			
-			AddressValuePair pair = findAddressValuePairByAddress(nextBuffer, addressParam);
-			if(pair == null)
-			{
-				//first entry for this location, create new address value pair
-				pair = createAddressValuePairForWrite(currentLocation.getBuffer(), store);
+
+			AddressValuePair pair = findAddressValuePairByAddress(nextBuffer,
+					addressParam);
+			if (pair == null) {
+				// first entry for this location, create new address value pair
+				pair = createAddressValuePairForWrite(
+						currentLocation.getBuffer(), store);
 				nextBuffer.getAddressValuePairs().add(pair);
-			}
-			else
-			{
-				//not the first entry, add to values of existing address value pair
+			} else {
+				// not the first entry, add to values of existing address value
+				// pair
 				Parameter value = store.getValue();
-				if(writeType == CFGConstants.WDC_BOTH || writeType == CFGConstants.WDC_VALUE)
-				{
+				if (writeType == CFGConstants.WDC_BOTH
+						|| writeType == CFGConstants.WDC_VALUE) {
 					Address valueAddress = getOrCreateValueCopyForWDC(store);
-					value = getOrCreateParamForAddress(valueAddress, store.getValue());
+					value = getOrCreateParamForAddress(valueAddress,
+							store.getValue());
 				}
 				pair.getValues().add(value);
 			}
-			
-			
 
-			ControlFlowLocation nextLoc = getLocationByPcAndBuffer(currentLocation.getPc() + 1, nextBuffer);
+			ControlFlowLocation nextLoc = getLocationByPcAndBuffer(
+					currentLocation.getPc() + 1, nextBuffer);
 
-			if (nextLoc == null)
-			{
-				nextLoc = createControlFlowLocation(currentLocation.getPc() + 1, nextBuffer);
+			if (nextLoc == null) {
+				nextLoc = createControlFlowLocation(
+						currentLocation.getPc() + 1, nextBuffer);
 				this.toBeProcessedLocations.add(nextLoc);
 			}
 
-			createWriteTransition(currentLocation, store, nextLoc, pair, writeType);
+			createWriteTransition(currentLocation, store, nextLoc, pair,
+					writeType);
 			return;
 
-		} else if (nextInstruction instanceof Load && isEarlyRead(currentLocation, (Load) nextInstruction))
-		{
-			ControlFlowLocation nextLoc = getLocationByPcAndBuffer(currentLocation.getPc() + 1,
-					currentLocation.getBuffer());
-			if (nextLoc == null)
-			{
-				nextLoc = createControlFlowLocation(currentLocation.getPc() + 1,
+		} else if (nextInstruction instanceof Load
+				&& isEarlyRead(currentLocation, (Load) nextInstruction)) {
+			ControlFlowLocation nextLoc = getLocationByPcAndBuffer(
+					currentLocation.getPc() + 1, currentLocation.getBuffer());
+			if (nextLoc == null) {
+				nextLoc = createControlFlowLocation(
+						currentLocation.getPc() + 1,
 						cloneStoreBuffer(currentLocation.getBuffer()));
 				this.toBeProcessedLocations.add(nextLoc);
 			}
 
-			createEarlyReadTransition(currentLocation, (Load) nextInstruction, nextLoc);
+			createEarlyReadTransition(currentLocation, (Load) nextInstruction,
+					nextLoc);
 			return;
 		}
 
@@ -97,81 +95,76 @@ public class PSOGraphGenerator extends TSOGraphGenerator
 		super.addInstructionTransitions(currentLocation, nextInstruction);
 	}
 
-	
-	protected void addFlushTransition(ControlFlowLocation sourceLocation)
-	{
+	protected void addFlushTransition(ControlFlowLocation sourceLocation) {
 		StoreBuffer srcBuffer = sourceLocation.getBuffer();
-		int srcPC= sourceLocation.getPc();
-		
-		if(srcBuffer.getAddressValuePairs().isEmpty())
-		{
-			//nothing to flush
+		int srcPC = sourceLocation.getPc();
+
+		if (srcBuffer.getAddressValuePairs().isEmpty()) {
+			// nothing to flush
 			return;
 		}
-		
-		
-		//create flush transition for each address entry in buffer
-		Iterator<AddressValuePair> i = srcBuffer.getAddressValuePairs().iterator();
-		while(i.hasNext())
-		{
+
+		// create flush transition for each address entry in buffer
+		Iterator<AddressValuePair> i = srcBuffer.getAddressValuePairs()
+				.iterator();
+		while (i.hasNext()) {
 			AddressValuePair pair = i.next();
 			StoreBuffer targetBuffer = cloneStoreBuffer(srcBuffer);
-			AddressValuePair targetPair = findAddressValuePairByAddress(targetBuffer, pair.getAddress());
-			if (targetPair == null)
-			{
-				throw new RuntimeException("Could not compute flush transition for "
-						+ GraphUtility.bufferToString(srcBuffer, srcPC, CFGConstants.PSO));
+			AddressValuePair targetPair = findAddressValuePairByAddress(
+					targetBuffer, pair.getAddress());
+			if (targetPair == null) {
+				throw new RuntimeException(
+						"Could not compute flush transition for "
+								+ GraphUtility.bufferToString(srcBuffer, srcPC,
+										CFGConstants.PSO));
 			}
-			
-			
-			if (targetPair.getValues().size() > 1)
-			{
+
+			if (targetPair.getValues().size() > 1) {
 				// remove first value from pair
 				targetPair.getValues().remove(0);
-			} else
-			{
+			} else {
 				// remove pair
 				targetBuffer.getAddressValuePairs().remove(targetPair);
 			}
-			
-			ControlFlowLocation targetLocation = getLocationByPcAndBuffer(srcPC, targetBuffer);
-			if(targetLocation == null)
-			{
+
+			ControlFlowLocation targetLocation = getLocationByPcAndBuffer(
+					srcPC, targetBuffer);
+			if (targetLocation == null) {
 				targetLocation = createControlFlowLocation(srcPC, targetBuffer);
 				this.toBeProcessedLocations.add(targetLocation);
 			}
-			
+
 			createFlushTransition(sourceLocation, targetLocation);
 		}
-		
-		
+
 	}
 
-	private AddressValuePair findAddressValuePairByAddress(StoreBuffer targetBuffer, Parameter address)
-	{
-		Iterator<AddressValuePair> i = targetBuffer.getAddressValuePairs().iterator();
-		while(i.hasNext())
-		{
+	private AddressValuePair findAddressValuePairByAddress(
+			StoreBuffer targetBuffer, Parameter address) {
+		Iterator<AddressValuePair> i = targetBuffer.getAddressValuePairs()
+				.iterator();
+		while (i.hasNext()) {
 			AddressValuePair pair = i.next();
 			String a = GraphUtility.valueToString(address.getValue());
 			String b = GraphUtility.valueToString(pair.getAddress().getValue());
-			if (a.equals(b))
-			{
+			if (a.equals(b)) {
 				return pair;
 			}
 		}
 		return null;
 	}
-	
+
 	@Override
-	protected EarlyReadTransition createEarlyReadTransition(ControlFlowLocation source, Load load, ControlFlowLocation target)
-	{
-		EarlyReadTransition transition = ControlflowFactory.eINSTANCE.createEarlyReadTransition();
-		//there should be only on, so we actually don't care if it's the latest or not
+	protected EarlyReadTransition createEarlyReadTransition(
+			ControlFlowLocation source, Load load, ControlFlowLocation target) {
+		EarlyReadTransition transition = ControlflowFactory.eINSTANCE
+				.createEarlyReadTransition();
+		// there should be only on, so we actually don't care if it's the latest
+		// or not
 		AddressValuePair pair = getLatestBufferEntry(source, load);
-		//last value
+		// last value
 		int lastIndex = pair.getValues().size();
-		Parameter value = pair.getValues().get(lastIndex-1);
+		Parameter value = pair.getValues().get(lastIndex - 1);
 		String valueInBuffer = GraphUtility.valueToString(value.getValue());
 		transition.setAssignmentExpression(valueInBuffer);
 		transition.setInstruction(load);
@@ -181,26 +174,16 @@ public class PSOGraphGenerator extends TSOGraphGenerator
 		return transition;
 	}
 
-
 	@Override
-	public String getWarnings()
-	{
-		// TODO Auto-generated method stub
-		return null;
+	protected ControlFlowLocation getLocationByPcAndBuffer(int pc,
+			StoreBuffer buffer) {
+		return GraphUtility.getLocationRepresentedBy(this.graph.getLocations(),
+				pc, buffer, CFGConstants.PSO);
 	}
 
 	@Override
-	protected ControlFlowLocation getLocationByPcAndBuffer(int pc, StoreBuffer buffer)
-	{
-		return GraphUtility.getLocationRepresentedBy(this.graph.getLocations(), pc, buffer, CFGConstants.PSO);
-	}
-
-
-	@Override
-	public int getMemoryModel()
-	{
+	public int getMemoryModel() {
 		return CFGConstants.PSO;
 	}
-	
-	
+
 }

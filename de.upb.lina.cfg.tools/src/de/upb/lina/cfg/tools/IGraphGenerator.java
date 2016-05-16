@@ -15,8 +15,4 @@ public interface IGraphGenerator
 	 */
 	public ControlFlowDiagram createGraph(); 
 	
-	/**
-	 * @return Warnings (text message) that occurred during store buffer graph generation.
-	 */
-	public String getWarnings();
 }
