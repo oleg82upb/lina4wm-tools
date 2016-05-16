@@ -18,7 +18,7 @@ public class RU_T_DepWR extends TSO_Test{
 
 	@Before
 	public void setUp() throws Exception {
-		testLocation = "testdata/Test_Dependent_Write_Read.s";
+		testLocation = "Test_Dependent_Write_Read.s";
 		super.setUp();
 	}
 

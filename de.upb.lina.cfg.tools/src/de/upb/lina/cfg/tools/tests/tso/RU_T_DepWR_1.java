@@ -22,7 +22,7 @@ public class RU_T_DepWR_1 extends TSO_Test{
 
 	@Before
 	public void setUp() throws Exception {
-		testLocation = "testdata/Test_Dependent_Write_Read_1.s";
+		testLocation = "Test_Dependent_Write_Read_1.s";
 		super.setUp();
 	}
 

@@ -21,7 +21,7 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 public class IndWR_1_1_fencedLoop extends TSO_Test {
 	@Before
 	public void setUp() throws Exception {
-		testLocation = "testdata/loops/Test_Independent_Write_Read_1_1_fenceLoop.s";
+		testLocation = "LoopTests/Test_Independent_Write_Read_1_1_fenceLoop.s";
 		super.setUp();
 	}
 

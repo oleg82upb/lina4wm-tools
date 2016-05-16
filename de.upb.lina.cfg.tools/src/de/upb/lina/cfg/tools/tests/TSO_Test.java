@@ -1,18 +1,18 @@
 package de.upb.lina.cfg.tools.tests;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import java.io.File;
+
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.junit.Before;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
-import de.upb.lina.cfg.controlflow.ControlflowPackage;
+import de.upb.lina.cfg.tools.ResourceIOUtil;
 import de.upb.lina.cfg.tools.strategies.TSOGraphGenerator;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LLVM;
-import de.upb.llvm_parser.llvm.LlvmPackage;
 
 public abstract class TSO_Test {
 	protected String testLocation;
@@ -22,20 +22,17 @@ public abstract class TSO_Test {
 
 	@Before
 	public void setUp() throws Exception {
-		LlvmPackage.eINSTANCE.getNsURI();
-		ControlflowPackage.eINSTANCE.getNsPrefix();
-		
-		ResourceSetImpl xtextResourceSet = new ResourceSetImpl();
-		URI uri = URI.createURI(testLocation);
-		Resource resource = xtextResourceSet.getResource(uri, true);
-		EObject ast = resource.getContents().get(0);
-		EcoreUtil.resolveAll(ast);
-		if (ast instanceof LLVM) {
-			this.ast = (LLVM) ast;
-			this.functionTestData = (FunctionDefinition) this.ast.getElements().get(0);
-		}
-		
+		this.ast = getLLVMOfTestFile();
+		this.functionTestData = (FunctionDefinition) this.ast.getElements().get(0);
+
 		TSOGraphGenerator generator = new TSOGraphGenerator(this.functionTestData);
 		diag = generator.createGraph();
+	}
+
+	private LLVM getLLVMOfTestFile() {
+		IWorkspaceRoot workSpaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+		IProject examplesProject = workSpaceRoot.getProject("/examples");
+		IResource resource = examplesProject.findMember("SimpleTests" + File.separator + testLocation);
+		return ResourceIOUtil.createAstFromLLVM(resource.getFullPath().toPortableString());
 	}
 }

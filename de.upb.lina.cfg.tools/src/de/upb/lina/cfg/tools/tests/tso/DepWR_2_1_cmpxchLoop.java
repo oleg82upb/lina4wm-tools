@@ -22,7 +22,7 @@ public class DepWR_2_1_cmpxchLoop extends TSO_Test {
 	@Before
 	public void setUp() throws Exception {
 		
-		testLocation = "testdata/loops/Test_Dependent_Write_Read_2_1_cmpxchLoop.s";
+		testLocation = "LoopTests/Test_Dependent_Write_Read_2_1_cmpxchLoop.s";
 		super.setUp();
 	}
 

@@ -21,7 +21,7 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 public class RU_T_IndWR_2_1 extends TSO_Test {
 	@Before
 	public void setUp() throws Exception {
-		testLocation = "testdata/Test_Independent_Write_Read_2_1.s";
+		testLocation = "Test_Independent_Write_Read_2_1.s";
 		super.setUp();
 	}
 

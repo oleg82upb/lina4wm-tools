@@ -17,7 +17,7 @@ import de.upb.lina.cfg.tools.tests.TSO_Test;
 public class DepRFW_Loop extends TSO_Test {
 	@Before
 	public void setUp() throws Exception {
-		testLocation = "testdata/loops/Test_Dependent_Read_Fence_Write_Loop.s";
+		testLocation = "LoopTests/Test_Dependent_Read_Fence_Write_Loop.s";
 		super.setUp();
 	}
 

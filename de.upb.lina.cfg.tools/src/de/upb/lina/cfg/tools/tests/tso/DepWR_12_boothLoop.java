@@ -21,7 +21,7 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 public class DepWR_12_boothLoop extends TSO_Test {
 	@Before
 	public void setUp() throws Exception {
-		testLocation = "testdata/loops/Test_Dependent_Write_Read_12_boothLoop.s";
+		testLocation = "LoopTests/Test_Dependent_Write_Read_12_boothLoop.s";
 		super.setUp();
 	}
 

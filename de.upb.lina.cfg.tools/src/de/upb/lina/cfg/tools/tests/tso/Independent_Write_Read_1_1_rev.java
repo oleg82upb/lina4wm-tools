@@ -21,7 +21,7 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
 public class Independent_Write_Read_1_1_rev extends TSO_Test {
 	@Before
 	public void setUp() throws Exception {
-		testLocation = "testdata/reverseLS/Test_Independent_Write_Read_1_1_rev.s";
+		testLocation = "ReverseLS/Test_Independent_Write_Read_1_1_rev.s";
 		super.setUp();
 	}
 
