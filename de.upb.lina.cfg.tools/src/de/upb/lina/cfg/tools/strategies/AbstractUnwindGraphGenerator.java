@@ -11,15 +11,9 @@ import de.upb.lina.cfg.controlflow.ControlflowFactory;
 import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.StoreBuffer;
 import de.upb.lina.cfg.controlflow.Transition;
-import de.upb.lina.cfg.tools.CFGConstants;
-import de.upb.lina.cfg.tools.GraphUtility;
 import de.upb.lina.cfg.tools.IGraphGenerator;
-import de.upb.llvm_parser.llvm.Branch;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
-import de.upb.llvm_parser.llvm.IndirectBranch;
 import de.upb.llvm_parser.llvm.Instruction;
-import de.upb.llvm_parser.llvm.Switch;
-import de.upb.llvm_parser.llvm.SwitchCase;
 
 public abstract class AbstractUnwindGraphGenerator implements IGraphGenerator
 {
