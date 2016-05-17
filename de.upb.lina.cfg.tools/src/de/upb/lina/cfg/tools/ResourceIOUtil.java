@@ -137,7 +137,7 @@ public class ResourceIOUtil {
 		// before trying to access the errors!
 		EcoreUtil.resolveAll(resource);
 		if (!resource.getErrors().isEmpty()) {
-			CFGActivator.log(IStatus.ERROR, "Cannot load LLVM file due to unresolved errors.", null);
+			CFGActivator.log(IStatus.ERROR, "Cannot load LLVM file due to parse error: " + resource.getErrors().get(0).getMessage(), null);
 			return null;
 		}
 
