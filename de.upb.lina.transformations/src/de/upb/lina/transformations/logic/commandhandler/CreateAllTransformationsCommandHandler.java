@@ -181,10 +181,9 @@ public class CreateAllTransformationsCommandHandler extends AbstractHandler {
 
       // Do kiv transformations
       for (ETransformationType eTransformationType : ETransformationType.getKivTransformationTypes()) {
-         int transformationType = eTransformationType.getId();
          String transformationTypeName = eTransformationType.getIdentifier();
          for (String kIVBasis : KIV_BASES) {
-            TransformationConfiguration config = new TransformationConfiguration(cfgs, kIVBasis, oldToNewCfgName, transformationType);
+            TransformationConfiguration config = new TransformationConfiguration(cfgs, kIVBasis, oldToNewCfgName, eTransformationType);
             wmo = new TransformationOperation(createFolder(memoryModel, transformationTypeName + "_" + kIVBasis), "", "", config);
             try {
                wmo.run(new NullProgressMonitor());
@@ -197,9 +196,8 @@ public class CreateAllTransformationsCommandHandler extends AbstractHandler {
 
       // Do promela transformations
       for (ETransformationType eTransformationType : ETransformationType.getPromelaTransformationTypes()) {
-         int transformationType = eTransformationType.getId();
          String transformationTypeName = eTransformationType.getIdentifier();
-         TransformationConfiguration config = new TransformationConfiguration(cfgs, oldToNewCfgName, transformationType);
+         TransformationConfiguration config = new TransformationConfiguration(cfgs, oldToNewCfgName, eTransformationType);
          wmo = new TransformationOperation(createFolder(memoryModel, transformationTypeName),
                transformationTypeName + "_" + file.getName(), ".pml", config);
          try {

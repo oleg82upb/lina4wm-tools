@@ -1,5 +1,6 @@
 package de.upb.lina.transformations.logic;
 
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -19,80 +20,81 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.lina.transformations.Activator;
 
-public class TransformationOperation extends WorkspaceModifyOperation{
-	protected String graphModelFileLocation;
-	protected String targetContainer;
-	protected String targetName;
-	protected String fileEnding;
-	protected IPath fullPath;
-	
-	protected GeneratorData genData;
-	protected TransformationConfiguration config;
-	
-	
-	public TransformationOperation(String targetContainer, String targetName, String fileEnding, TransformationConfiguration config) {
-		this.targetContainer = targetContainer; 
-		this.targetName = targetName;
-		this.fileEnding = fileEnding;
-		this.config = config;
-	}
-	
-	
-	@Override
-	protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
-			InterruptedException
-	{
 
-		// Run Precomputation
-		GendataPrecomputer precomp = new GendataPrecomputer(config);
-		genData = precomp.computeGeneratorData();
+/**
+ * This workspace modify operation starts an Acceleo MTL transformation from a given store buffer
+ * graph model to a specified target transformation type such as KIV or Promela.
+ * 
+ * @author Alexander Hetzer
+ *
+ */
+public class TransformationOperation extends WorkspaceModifyOperation {
+   protected String inputFileLocation;
+   protected String outputFolderLocation;
+   protected String outputFileName;
+   protected String outputFileExtension;
+   protected IPath completeOutputPath;
 
-		// get workspace root
-		IWorkspaceRoot workSpaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+   protected GeneratorData generatorData;
+   protected TransformationConfiguration configuration;
 
-		// get target path within project
-		IPath targetFolderCont = new Path(targetContainer);
-		IResource resource = null;
-		if(targetFolderCont.isAbsolute())
-		{
-			resource = workSpaceRoot.findMember(targetFolderCont);
-		}
-		else
-		{
-			resource = workSpaceRoot.findMember(targetFolderCont.makeAbsolute());
-		}
-		 
-		// build correct full path
-		fullPath = resource.getLocation();
 
-		try
-		{
-			AcceleoPreferences.switchQueryCache(false);
-			AcceleoPreferences.switchDebugMessages(true);
-			AcceleoPreferences.switchProfiler(true);
-			AcceleoPreferences.switchSuccessNotifications(false);
-			ETransformationType transformationType = ETransformationType.getTransformationTypeById(this.config.getTransformationType());
-			if(transformationType == null){
-				Activator.logError("Unknown transformation type " + this.config.getTransformationType(), new RuntimeException("Unknown transformation type " + this.config.getTransformationType()));
-			}
-			ArrayList<Object> args = new ArrayList<Object>();
+   public TransformationOperation(String outputFolderLocation, String outputFileName, String outputFileExtension,
+         TransformationConfiguration configuration) {
+      this.outputFolderLocation = outputFolderLocation;
+      this.outputFileName = outputFileName;
+      this.outputFileExtension = outputFileExtension;
+      this.configuration = configuration;
+   }
 
-			
-			if (transformationType == ETransformationType.PROMELA
-					|| transformationType == ETransformationType.PROMELA_OPERATIONAL)
-			{
-				args.add(targetName + fileEnding);
-			}
 
-			transformationType.createAcceleoGenerator(genData, fullPath.toFile(), args);
-			AbstractAcceleoGenerator generator = transformationType.createAcceleoGenerator(genData, fullPath.toFile(), args);
-			generator.doGenerate(new BasicMonitor());
-		} catch (IOException e)
-		{
-			Activator.logError(e.getMessage(), e);
-		}
+   @Override
+   protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
 
-		ResourcesPlugin.getWorkspace().getRoot().refreshLocal(IResource.DEPTH_INFINITE, monitor);
+      // Run Precomputation
+      GendataPrecomputer precomp = new GendataPrecomputer(configuration);
+      generatorData = precomp.computeGeneratorData();
 
-	}	
+      // get workspace root
+      IWorkspaceRoot workSpaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+
+      // get target path within project
+      IPath targetFolderCont = new Path(outputFolderLocation);
+      IResource resource = null;
+      if (targetFolderCont.isAbsolute()) {
+         resource = workSpaceRoot.findMember(targetFolderCont);
+      } else {
+         resource = workSpaceRoot.findMember(targetFolderCont.makeAbsolute());
+      }
+
+      // build correct full path
+      completeOutputPath = resource.getLocation();
+
+      try {
+         AcceleoPreferences.switchQueryCache(false);
+         AcceleoPreferences.switchDebugMessages(true);
+         AcceleoPreferences.switchProfiler(true);
+         AcceleoPreferences.switchSuccessNotifications(false);
+         ETransformationType transformationType = this.configuration.getTransformationType();
+         if (transformationType == null) {
+            Activator.logError("Unknown transformation type " + this.configuration.getTransformationType(), new RuntimeException(
+                  "Unknown transformation type " + this.configuration.getTransformationType()));
+         }
+         ArrayList<Object> args = new ArrayList<Object>();
+
+
+         if (transformationType == ETransformationType.PROMELA || transformationType == ETransformationType.PROMELA_OPERATIONAL) {
+            args.add(outputFileName + outputFileExtension);
+         }
+
+         transformationType.createAcceleoGenerator(generatorData, completeOutputPath.toFile(), args);
+         AbstractAcceleoGenerator generator = transformationType.createAcceleoGenerator(generatorData, completeOutputPath.toFile(), args);
+         generator.doGenerate(new BasicMonitor());
+      } catch (IOException e) {
+         Activator.logError(e.getMessage(), e);
+      }
+
+      ResourcesPlugin.getWorkspace().getRoot().refreshLocal(IResource.DEPTH_INFINITE, monitor);
+
+   }
 }

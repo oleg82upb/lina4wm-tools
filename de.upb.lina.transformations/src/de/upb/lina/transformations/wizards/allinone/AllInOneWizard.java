@@ -12,6 +12,7 @@ import de.upb.lina.cfg.tools.ResourceIOUtil;
 import de.upb.lina.cfg.tools.wizards.ConfigurationPage;
 import de.upb.lina.cfg.tools.wizards.ConfigurationWizardUsingChecks;
 import de.upb.lina.cfg.tools.wizards.WarningPage;
+import de.upb.lina.transformations.logic.ETransformationType;
 import de.upb.lina.transformations.logic.TransformationConfiguration;
 import de.upb.lina.transformations.logic.TransformationOperation;
 import de.upb.lina.transformations.logic.TransformationUtil;
@@ -69,7 +70,8 @@ public class AllInOneWizard extends ConfigurationWizardUsingChecks implements IN
       List<ControlFlowDiagram> storeBufferGraphs = createStoreBufferGraphsFromAstAndUserInput(ast);
 
       String kivBasis = allInOneConfigurationPage.getSelectedKivBasisAsString();
-      int transformationType = allInOneConfigurationPage.getSelectedTransformationType();
+      int transformationTypeId = allInOneConfigurationPage.getSelectedTransformationType();
+      ETransformationType transformationType = ETransformationType.getTransformationTypeById(transformationTypeId);
       Map<String, String> oldToNewCfgName = functionSelectionPage.getMap();
       TransformationConfiguration config = new TransformationConfiguration(storeBufferGraphs, kivBasis, oldToNewCfgName, transformationType);
       return config;
