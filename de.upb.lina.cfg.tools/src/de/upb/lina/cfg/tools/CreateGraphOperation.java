@@ -6,8 +6,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -25,6 +23,13 @@ import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.LLVM;
 
 
+/**
+ * This workspace modify operation creates a store buffer graph based on a given AST and memory
+ * model.
+ * 
+ * @author Alexander Hetzer
+ *
+ */
 public class CreateGraphOperation extends WorkspaceModifyOperation {
 
    private LLVM ast = null;
@@ -34,6 +39,13 @@ public class CreateGraphOperation extends WorkspaceModifyOperation {
    private ArrayList<ControlFlowDiagram> generatedStoreBufferGraphs = new ArrayList<ControlFlowDiagram>();
 
 
+   /**
+    * Creates a new instance of the create graph operation, initialized with the given values.
+    * 
+    * @param astLocation location of the ast file to generate the store buffer graphs from
+    * @param storeBufferGraphLocation location of the output store buffer graph
+    * @param memoryModel memory model to use for the generation
+    */
    public CreateGraphOperation(String astLocation, String storeBufferGraphLocation, EMemoryModel memoryModel) {
       super();
       this.astLocation = astLocation;
@@ -42,6 +54,31 @@ public class CreateGraphOperation extends WorkspaceModifyOperation {
    }
 
 
+   @Override
+   protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
+      assertAstIsNotNull();
+      generateStoreBufferGraphsForAllFunctionsInAst();
+      storeGeneratedStoreBufferGraphs();
+   }
+
+
+   /**
+    * Asserts that the ast is not {@code null}, after it was loaded
+    * 
+    * @throws RuntimeException if the AST is {@code null}
+    */
+   private void assertAstIsNotNull() {
+      if (loadAst() == null) {
+         throw new RuntimeException("Could not load the LLVM AST model.");
+      }
+   }
+
+
+   /**
+    * Loads the AST located at the local ast location.
+    * 
+    * @return AST produced by the loading process
+    */
    private LLVM loadAst() {
       if (ast == null) {
          ast = ResourceIOUtil.loadAst(astLocation);
@@ -50,15 +87,10 @@ public class CreateGraphOperation extends WorkspaceModifyOperation {
    }
 
 
-   @Override
-   protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
-      if (loadAst() == null) {
-         throw new RuntimeException("Could not load the LLVM AST model.");
-      }
-
-      // generating cfg for each function
-      generateStoreBufferGraphsForAllFunctionsInAst();
-
+   /**
+    * Stores the generated store buffer graphs to the hard drive.
+    */
+   private void storeGeneratedStoreBufferGraphs() {
       try {
          // store resulting cfg
          ResourceSet resSet = new ResourceSetImpl();
@@ -70,12 +102,9 @@ public class CreateGraphOperation extends WorkspaceModifyOperation {
          }
 
          resource.save(Collections.EMPTY_MAP);
-         refreshWorkspace(monitor);
+         ResourceIOUtil.refreshWorkspace();
 
-         for (ControlFlowDiagram cfg : generatedStoreBufferGraphs) {
-            CFGActivator.log(IStatus.INFO, "Generated " + cfg.getName() + " with " + cfg.getLocations().size() + " nodes and "
-                  + cfg.getTransitions().size() + " edges.", null);
-         }
+         logGeneratedStoreBufferGraphs();
 
       } catch (IOException e) {
          CFGActivator.logError(e.getMessage(), e);
@@ -85,17 +114,39 @@ public class CreateGraphOperation extends WorkspaceModifyOperation {
    }
 
 
+   /**
+    * Logs which store buffer graphs were generated.
+    */
+   private void logGeneratedStoreBufferGraphs() {
+      for (ControlFlowDiagram cfg : generatedStoreBufferGraphs) {
+         CFGActivator.log(IStatus.INFO, "Generated " + cfg.getName() + " with " + cfg.getLocations().size() + " nodes and "
+               + cfg.getTransitions().size() + " edges.", null);
+      }
+   }
+
+
+   /**
+    * Generates store buffer graphs for all non-empty functions in the given AST.
+    */
    private void generateStoreBufferGraphsForAllFunctionsInAst() {
       for (AbstractElement abstractElement : ast.getElements()) {
          if (abstractElement instanceof FunctionDefinition) {
             FunctionDefinition function = (FunctionDefinition) abstractElement;
             ControlFlowDiagram storeBufferGraph = generateStoreBufferGraphOfFunction(function);
-            generatedStoreBufferGraphs.add(storeBufferGraph);
+            if (storeBufferGraph != null) {
+               generatedStoreBufferGraphs.add(storeBufferGraph);
+            }
          }
       }
    }
 
 
+   /**
+    * Generates the store buffer graph for the given function definition.
+    * 
+    * @param function function definition to generate the store buffer graph from
+    * @return store buffer graph computed from the given function
+    */
    private ControlFlowDiagram generateStoreBufferGraphOfFunction(FunctionDefinition function) {
       if (function.getBody() != null) {
          if (memoryModel != null) {
@@ -108,14 +159,6 @@ public class CreateGraphOperation extends WorkspaceModifyOperation {
 
       }
       return null;
-   }
-
-
-   private void refreshWorkspace(IProgressMonitor monitor) throws CoreException {
-      IProject[] iProjects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
-      for (int i = 0; i < iProjects.length; i++) {
-         iProjects[i].refreshLocal(0, monitor);
-      }
    }
 
 }
