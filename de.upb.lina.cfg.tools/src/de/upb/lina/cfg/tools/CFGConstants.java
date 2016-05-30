@@ -4,13 +4,6 @@ public class CFGConstants {
 
 	
 	public static final boolean IN_DEBUG_MODE = false;
-	//memory models
-	public static final int SC = 0;
-	public static final int TSO = 1;
-	public static final int PSO = 2;
-	public static final int RMO = 3;
-	public static final int ARM = 4;
-	public static final int POWER = 5;
 	
 	//types of write def chain
 	public static final int WDC_NONE = -1;

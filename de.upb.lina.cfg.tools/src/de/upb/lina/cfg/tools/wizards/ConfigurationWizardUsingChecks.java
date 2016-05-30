@@ -1,5 +1,6 @@
 package de.upb.lina.cfg.tools.wizards;
 
+
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardPage;
@@ -7,183 +8,203 @@ import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 
+import de.upb.lina.cfg.tools.EMemoryModel;
 import de.upb.lina.cfg.tools.checks.LoadsInWriteDefChainPropertyChecker;
 import de.upb.lina.cfg.tools.checks.PropertyCheckerManager;
 import de.upb.lina.cfg.tools.checks.UnsupportedInstructionPropertyChecker;
 import de.upb.lina.cfg.tools.checks.WritingLoopWithoutFencePropertyChecker;
 import de.upb.llvm_parser.llvm.LLVM;
 
-public abstract class ConfigurationWizardUsingChecks extends Wizard implements
-		INewWizard {
-	
-	private boolean myCanFinish;
-	private boolean foundError;
-	private boolean foundWarning;
-	private String messageForUser;
-	
-	private IStructuredSelection userSelection;
-	private String pathToCheckableFile;
-	
-	private WarningPage warningPage;
-	private ConfigurationPage configurationPage;
 
-	/**
-	 * We will accept the selection in the workbench to see if we can initialize
-	 * from it.
-	 * 
-	 * @see IWorkbenchWizard#init(IWorkbench, IStructuredSelection)
-	 */
-	@Override
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		this.userSelection = selection;
-	}
-	
-	public abstract void restartChecks();
-	
-	@Override
-	public boolean canFinish()
-	{
-		if (!super.canFinish())
-		{
-			return false;
-		}
-		restartChecks();
-		return isMyCanFinish();
-	}
-	
-	
-	
-	@Override
-	public boolean performFinish() {
-		configurationPage.saveMementoState();
-		return true;
-	}
+public abstract class ConfigurationWizardUsingChecks extends Wizard implements INewWizard {
 
-	/**
-	 * Executes checks of several property checkers on the AST model 
-	 * and passes the results to the {@link WarningPage}. 
-	 * 
-	 * @param ast AST model to check on 
-	 */
-	public void performLogicChecksOnASTModel(LLVM ast, int semanticToPerformChecksFor){
-		foundError = false;
-		foundWarning = false;
-		myCanFinish = true;
+   private boolean myCanFinish;
+   private boolean foundError;
+   private boolean foundWarning;
+   private String messageForUser;
 
-		PropertyCheckerManager manager = new PropertyCheckerManager(semanticToPerformChecksFor);	
-		manager.registerPropertyChecker(new LoadsInWriteDefChainPropertyChecker(ast));
-		manager.registerPropertyChecker(new WritingLoopWithoutFencePropertyChecker(ast));
-		manager.registerPropertyChecker(new UnsupportedInstructionPropertyChecker(ast));
+   private IStructuredSelection userSelection;
+   private String pathToCheckableFile;
 
-		manager.performChecks();
+   private WarningPage warningPage;
+   private ConfigurationPage configurationPage;
 
-		interpretManagerStatus(manager);
 
-		warningPage.setWarningMessages(manager.getWarningMessages());
-		warningPage.setErrorMessages(manager.getErrorMessages());
+   /**
+    * We will accept the selection in the workbench to see if we can initialize from it.
+    * 
+    * @see IWorkbenchWizard#init(IWorkbench, IStructuredSelection)
+    */
+   @Override
+   public void init(IWorkbench workbench, IStructuredSelection selection) {
+      this.userSelection = selection;
+   }
 
-	}
-	
-	private void interpretManagerStatus(PropertyCheckerManager manager) {
-		switch (manager.getStatus()) {
-		case PropertyCheckerManager.STATUS_ERROR_FOUND:
 
-			myCanFinish = false;
-			foundError = true;
-			this.messageForUser = " Problems were found in the specified program. Click 'next' for more details.";
-			configurationPage.setErrorMessage(messageForUser);
-			break;
+   public abstract void restartChecks();
 
-		case PropertyCheckerManager.STATUS_WARNING_FOUND:
 
-			foundWarning = true;
-			this.messageForUser = " Warnings encountered while checking the program. Click 'next' for more details.";
-			configurationPage.setMessage(messageForUser, WizardPage.WARNING);
-			myCanFinish = true;
-			break;
+   @Override
+   public boolean canFinish() {
+      if (!super.canFinish()) {
+         return false;
+      }
+      restartChecks();
+      return isMyCanFinish();
+   }
 
-		case PropertyCheckerManager.STATUS_OK:
 
-			myCanFinish = true;
-			configurationPage.setErrorMessage(null);
-			configurationPage.setMessage("Check your input and hit finish.");
-			break;
+   @Override
+   public boolean performFinish() {
+      configurationPage.saveMementoState();
+      return true;
+   }
 
-		default:
-			break;
-		}
-	}
-	
-	/**
-	 * Checks if {@link CreateStoreBufferGraphWizard#pathToCheckableFile} ends with the given file extension.
-	 * 
-	 * @param fileExtension file extension to check for
-	 * @return true, if {@link CreateStoreBufferGraphWizard#pathToCheckableFile} ends with the given file extension, false if not
-	 */
-	protected boolean doesPathToInputFileHasGivenFileExtenion(String fileExtension){
-		return getPathToCheckableFile().endsWith("." + fileExtension);
-	}
 
-	protected IStructuredSelection getUserSelection() {
-		return userSelection;
-	}
+   /**
+    * Executes checks of several property checkers on the AST model and passes the results to the
+    * {@link WarningPage}.
+    * 
+    * @param ast AST model to check on
+    * @param memoryModel memory model to use as basis for the checks
+    */
+   public void performLogicChecksOnASTModel(LLVM ast, EMemoryModel memoryModel) {
+      foundError = false;
+      foundWarning = false;
+      myCanFinish = true;
 
-	protected String getPathToCheckableFile() {
-		return pathToCheckableFile;
-	}
+      PropertyCheckerManager manager = new PropertyCheckerManager(memoryModel);
+      manager.registerPropertyChecker(new LoadsInWriteDefChainPropertyChecker(ast));
+      manager.registerPropertyChecker(new WritingLoopWithoutFencePropertyChecker(ast));
+      manager.registerPropertyChecker(new UnsupportedInstructionPropertyChecker(ast));
 
-	protected void setPathToCheckableFile(String pathToCheckableFile) {
-		this.pathToCheckableFile = pathToCheckableFile;
-	}
+      manager.performChecks();
 
-	protected WarningPage getWarningPage() {
-		return warningPage;
-	}
+      interpretManagerStatus(manager);
 
-	protected void setWarningPage(WarningPage warningPage) {
-		this.warningPage = warningPage;
-	}
+      warningPage.setWarningMessages(manager.getWarningMessages());
+      warningPage.setErrorMessages(manager.getErrorMessages());
 
-	protected boolean isMyCanFinish() {
-		return myCanFinish;
-	}
+   }
 
-	protected void setMyCanFinish(boolean myCanFinish) {
-		this.myCanFinish = myCanFinish;
-	}
 
-	protected boolean isFoundError() {
-		return foundError;
-	}
+   private void interpretManagerStatus(PropertyCheckerManager manager) {
+      switch (manager.getStatus()) {
+         case PropertyCheckerManager.STATUS_ERROR_FOUND:
 
-	protected void setFoundError(boolean foundError) {
-		this.foundError = foundError;
-	}
+            myCanFinish = false;
+            foundError = true;
+            this.messageForUser = " Problems were found in the specified program. Click 'next' for more details.";
+            configurationPage.setErrorMessage(messageForUser);
+            break;
 
-	protected boolean isFoundWarning() {
-		return foundWarning;
-	}
+         case PropertyCheckerManager.STATUS_WARNING_FOUND:
 
-	protected void setFoundWarning(boolean foundWarning) {
-		this.foundWarning = foundWarning;
-	}
+            foundWarning = true;
+            this.messageForUser = " Warnings encountered while checking the program. Click 'next' for more details.";
+            configurationPage.setMessage(messageForUser, WizardPage.WARNING);
+            myCanFinish = true;
+            break;
 
-	protected String getMessageForUser() {
-		return messageForUser;
-	}
+         case PropertyCheckerManager.STATUS_OK:
 
-	protected void setMessageForUser(String messageForUser) {
-		this.messageForUser = messageForUser;
-	}
+            myCanFinish = true;
+            configurationPage.setErrorMessage(null);
+            configurationPage.setMessage("Check your input and hit finish.");
+            break;
 
-	protected ConfigurationPage getConfigurationPage() {
-		return configurationPage;
-	}
+         default:
+            break;
+      }
+   }
 
-	protected void setConfigurationPage(ConfigurationPage configurationPage) {
-		this.configurationPage = configurationPage;
-	}
 
-	
-	
+   /**
+    * Checks if {@link CreateStoreBufferGraphWizard#pathToCheckableFile} ends with the given file
+    * extension.
+    * 
+    * @param fileExtension file extension to check for
+    * @return true, if {@link CreateStoreBufferGraphWizard#pathToCheckableFile} ends with the given
+    *         file extension, false if not
+    */
+   protected boolean doesPathToInputFileHasGivenFileExtenion(String fileExtension) {
+      return getPathToCheckableFile().endsWith("." + fileExtension);
+   }
+
+
+   protected IStructuredSelection getUserSelection() {
+      return userSelection;
+   }
+
+
+   protected String getPathToCheckableFile() {
+      return pathToCheckableFile;
+   }
+
+
+   protected void setPathToCheckableFile(String pathToCheckableFile) {
+      this.pathToCheckableFile = pathToCheckableFile;
+   }
+
+
+   protected WarningPage getWarningPage() {
+      return warningPage;
+   }
+
+
+   protected void setWarningPage(WarningPage warningPage) {
+      this.warningPage = warningPage;
+   }
+
+
+   protected boolean isMyCanFinish() {
+      return myCanFinish;
+   }
+
+
+   protected void setMyCanFinish(boolean myCanFinish) {
+      this.myCanFinish = myCanFinish;
+   }
+
+
+   protected boolean isFoundError() {
+      return foundError;
+   }
+
+
+   protected void setFoundError(boolean foundError) {
+      this.foundError = foundError;
+   }
+
+
+   protected boolean isFoundWarning() {
+      return foundWarning;
+   }
+
+
+   protected void setFoundWarning(boolean foundWarning) {
+      this.foundWarning = foundWarning;
+   }
+
+
+   protected String getMessageForUser() {
+      return messageForUser;
+   }
+
+
+   protected void setMessageForUser(String messageForUser) {
+      this.messageForUser = messageForUser;
+   }
+
+
+   protected ConfigurationPage getConfigurationPage() {
+      return configurationPage;
+   }
+
+
+   protected void setConfigurationPage(ConfigurationPage configurationPage) {
+      this.configurationPage = configurationPage;
+   }
+
+
 }
