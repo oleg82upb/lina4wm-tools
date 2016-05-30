@@ -73,6 +73,8 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 	private ETransformationType transformationType = ETransformationType.PROMELA;
 
 	private boolean canGoToNextPage = true;
+	
+	private boolean guiCompletelySetUp = false;
 
 	private ISelection userSelection;
 
@@ -325,59 +327,61 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 	/**
 	 * Ensures that both text fields are set.
 	 */
-	private void validateInput() {		
-		lb_outputFileExtension.setText(getFileExtensionForSelectedTransformationType());
-		lb_outputFileExtension.pack();
-
-		int result = checkCFGFile(getInputFilePath());
-		if (result >= 400) {
-			updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
-			return;
-		}else if (result >= 300) {
-			updateErrorMessage(MSG_STATUS_WRONG_FILE_TYPE);
-			return;
-		} else if (result >= 200) {
-			updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_NOT_EXISTING);
-			return;
-		} else if (result >= 100) {
-			updateErrorMessage(MSG_STATUS_WRONG_FILE_TYPE);
-			return;
-		}
-
-		if (!isValidFolderPath(tx_outputFolderPath.getText())) {
-			if(!tx_outputFolderPath.getText().startsWith("/")){
-				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_CONTAINER_NAME);
-			}else{
-				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_CONTAINER);
+	private void validateInput() {
+		if(guiCompletelySetUp){
+			lb_outputFileExtension.setText(getFileExtensionForSelectedTransformationType());
+			lb_outputFileExtension.pack();
+	
+			int result = checkCFGFile(getInputFilePath());
+			if (result >= 400) {
+				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
+				return;
+			}else if (result >= 300) {
+				updateErrorMessage(MSG_STATUS_WRONG_FILE_TYPE);
+				return;
+			} else if (result >= 200) {
+				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_NOT_EXISTING);
+				return;
+			} else if (result >= 100) {
+				updateErrorMessage(MSG_STATUS_WRONG_FILE_TYPE);
+				return;
 			}
-			return;
+	
+			if (!isValidFolderPath(tx_outputFolderPath.getText())) {
+				if(!tx_outputFolderPath.getText().startsWith("/")){
+					updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_CONTAINER_NAME);
+				}else{
+					updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_CONTAINER);
+				}
+				return;
+			}
+	
+			IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+	
+			IPath path = new Path(tx_outputFolderPath.getText());
+			IResource resource = myWorkspaceRoot.findMember(path);
+			IPath searchPath = resource.getLocation().append(File.separator + tx_outputFileName.getText() + lb_outputFileExtension.getText());
+	
+			if(searchPath.toFile().exists()){
+				updateWarning("A file with the given name does already exist. If you continue the present file will be overwritten!", WARNING);
+				return;
+			}
+	
+			path = new Path(tx_outputFolderPath.getText());
+			resource = myWorkspaceRoot.findMember(path);
+			searchPath = resource.getLocation().append(File.separator+"specs"+File.separator+"PC.utf8");
+	
+			if(searchPath.toFile().exists() && (transformationType == ETransformationType.KIV_LOCAL ||transformationType == ETransformationType.KIV_GLOBAL)){
+				updateWarning("The selected target folder already contains a KIV Specification. If you continue the present files will be overwritten!", WARNING);
+				return;
+			}
+			
+			nextPage.setPathToInputFile(getInputFilePath());
+			
+			updateDescription(WizardMessageConstants.MSG_STATUS_OK);
+			updateErrorMessage(null);
+			getControl().redraw();
 		}
-
-		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-
-		IPath path = new Path(tx_outputFolderPath.getText());
-		IResource resource = myWorkspaceRoot.findMember(path);
-		IPath searchPath = resource.getLocation().append(File.separator + tx_outputFileName.getText() + lb_outputFileExtension.getText());
-
-		if(searchPath.toFile().exists()){
-			updateWarning("A file with the given name does already exist. If you continue the present file will be overwritten!", WARNING);
-			return;
-		}
-
-		path = new Path(tx_outputFolderPath.getText());
-		resource = myWorkspaceRoot.findMember(path);
-		searchPath = resource.getLocation().append(File.separator+"specs"+File.separator+"PC.utf8");
-
-		if(searchPath.toFile().exists() && (transformationType == ETransformationType.KIV_LOCAL ||transformationType == ETransformationType.KIV_GLOBAL)){
-			updateWarning("The selected target folder already contains a KIV Specification. If you continue the present files will be overwritten!", WARNING);
-			return;
-		}
-		
-		nextPage.setPathToInputFile(getInputFilePath());
-		
-		updateDescription(WizardMessageConstants.MSG_STATUS_OK);
-		updateErrorMessage(null);
-		getControl().redraw();
 	}
 
 
@@ -457,7 +461,7 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 				}
 			}
 		}
-
+		guiCompletelySetUp = true;
 	}
 	
 	private boolean hasExactlyOneSelectedElement(

@@ -73,6 +73,8 @@ public class AllInOneConfigurationPage extends ConfigurationPage{
 	private Combo cb_kivBasis;
 	
 	private FunctionSelectionPage functionSelectionPage;
+	
+	private boolean guiCompletelySetUp = false;
 
 	public AllInOneConfigurationPage(String pageName, String pageTitle,
 			String pageDescription, IStructuredSelection userSelection,
@@ -97,8 +99,8 @@ public class AllInOneConfigurationPage extends ConfigurationPage{
 		
 		setControl(mainGuiContainer);
 		initializeGuiElements(Constants.ALL_IN_ONE_WIZARD_MEMENTO__KEY, Activator.getStateFile());
+		guiCompletelySetUp = true;
 		validateInput();
-
 	}
 
 	private void createMainContainerWithLayout(Composite parent) {
@@ -196,49 +198,50 @@ public class AllInOneConfigurationPage extends ConfigurationPage{
 
 	@Override
 	public void validateInput() {
-		setPageComplete(false);
-
-		if (!isInputFileExtensionValid())
-		{
-			updateErrorMessage(MSG_STATUS_WRONG_FILE_TYPE);
-			return;
-		}
-		
-		if (!isFileAccessible(getPathToInputFile()))
-		{
-			updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_NOT_EXISTING);
-			return;
-		}
-		if(ResourceIOUtil.createAstFromLLVM(getPathToInputFile()) == null){
-			updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
-			return;
-		}
-			
-
-		if (!isValidFolderPath(tx_outputFolderPath.getText())) {
-			if(!tx_outputFolderPath.getText().startsWith("/")){
-				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_CONTAINER_NAME);
-			}else{
-				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_CONTAINER);
+		if(guiCompletelySetUp){
+			setPageComplete(false);
+	
+			if (!isInputFileExtensionValid())
+			{
+				updateErrorMessage(MSG_STATUS_WRONG_FILE_TYPE);
+				return;
 			}
-			return;
+			
+			if (!isFileAccessible(getPathToInputFile()))
+			{
+				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_NOT_EXISTING);
+				return;
+			}
+			if(ResourceIOUtil.createAstFromLLVM(getPathToInputFile()) == null){
+				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
+				return;
+			}
+				
+	
+			if (!isValidFolderPath(tx_outputFolderPath.getText())) {
+				if(!tx_outputFolderPath.getText().startsWith("/")){
+					updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_CONTAINER_NAME);
+				}else{
+					updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_CONTAINER);
+				}
+				return;
+			}
+			
+			if (!isValidFileName(tx_outputFileName.getText())) {
+				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_FILE_NAME);
+				return;
+			}
+			
+			updateFunctionSelectionPage();
+			
+			//make sure we can go into the error view
+			updateErrorMessage(null);
+			setDescription(WizardMessageConstants.MSG_STATUS_OK);
+			
+			//redo checks
+			wizard.restartChecks();
+			getControl().redraw();
 		}
-		
-		if (!isValidFileName(tx_outputFileName.getText())) {
-			updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_FILE_NAME);
-			return;
-		}
-		
-		updateFunctionSelectionPage();
-		
-		//make sure we can go into the error view
-		updateErrorMessage(null);
-		setDescription(WizardMessageConstants.MSG_STATUS_OK);
-		
-		//redo checks
-		wizard.restartChecks();
-		getControl().redraw();
-		
 	}
 
 	private void updateFunctionSelectionPage() {

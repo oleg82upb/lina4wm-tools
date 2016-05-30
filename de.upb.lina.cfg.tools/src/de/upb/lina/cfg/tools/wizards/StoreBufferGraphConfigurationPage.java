@@ -76,6 +76,8 @@ public class StoreBufferGraphConfigurationPage extends ConfigurationPage {
 	//storage for GUI element input
 	private int selectedSemantics = 0;
 	
+	private boolean guiCompletelySetUp = false;
+	
 	private CreateStoreBufferGraphWizard createStoreBufferGraphWizard;
 
 	/**
@@ -118,6 +120,7 @@ public class StoreBufferGraphConfigurationPage extends ConfigurationPage {
 		
 		setControl(container);
 		initializeGuiElements(MEMENTO__KEY, CFGActivator.getStateFile());
+		guiCompletelySetUp = true;
 		validateInput();
 
 	}
@@ -222,64 +225,67 @@ public class StoreBufferGraphConfigurationPage extends ConfigurationPage {
 	 * Validates the dialog input.
 	 */
 	public void validateInput() {
-		setPathToInputFile(this.tx_sourceAstFileName.getText());
-		setPathToOutputFolder(this.tx_targetContainerName.getText());
-		setNameOfOutputFile(this.tx_outputFileName.getText());
-		setPageComplete(false);
-
-		if (!isInputFileExtensionValid())
-		{
-			updateErrorMessage(MSG_STATUS_WRONG_FILE_TYPE);
-			return;
-		}
-		
-		if (!isFileAccessible(getPathToInputFile()))
-		{
-			updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_NOT_EXISTING);
-			return;
-		}
-		if(getPathToInputFile().endsWith("." + CFGConstants.LLVM_FILE_EXTENSION)){
-			if (ResourceIOUtil.loadAst(getPathToInputFile()) == null)
+		if(guiCompletelySetUp){
+			setPageComplete(false);
+			
+			setPathToInputFile(this.tx_sourceAstFileName.getText());
+			setPathToOutputFolder(this.tx_targetContainerName.getText());
+			setNameOfOutputFile(this.tx_outputFileName.getText());
+	
+			if (!isInputFileExtensionValid())
 			{
-				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
-				return;
-			}
-			lb_overwritingFilesWarning.setText("");
-		}
-		//.s extension
-		else{
-			if(ResourceIOUtil.createAstFromLLVM(getPathToInputFile()) == null){
-				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
+				updateErrorMessage(MSG_STATUS_WRONG_FILE_TYPE);
 				return;
 			}
 			
-			if(doesFileExist(createStoreBufferGraphWizard.getPathToAstOutputFile())){
-				lb_overwritingFilesWarning.setText(MSG_WARNING_AST_FILE_OVERWRITE + createStoreBufferGraphWizard.getPathToAstOutputFile());
-			}else{
+			if (!isFileAccessible(getPathToInputFile()))
+			{
+				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_NOT_EXISTING);
+				return;
+			}
+			if(getPathToInputFile().endsWith("." + CFGConstants.LLVM_FILE_EXTENSION)){
+				if (ResourceIOUtil.loadAst(getPathToInputFile()) == null)
+				{
+					updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
+					return;
+				}
 				lb_overwritingFilesWarning.setText("");
 			}
-		}		
-
-		if (!isValidFolderPath(tx_targetContainerName.getText())) {
-			if(!tx_targetContainerName.getText().startsWith("/")){
-				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_CONTAINER_NAME);
-			}else{
-				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_CONTAINER);
+			//.s extension
+			else{
+				if(ResourceIOUtil.createAstFromLLVM(getPathToInputFile()) == null){
+					updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
+					return;
+				}
+				
+				if(doesFileExist(createStoreBufferGraphWizard.getPathToAstOutputFile())){
+					lb_overwritingFilesWarning.setText(MSG_WARNING_AST_FILE_OVERWRITE + createStoreBufferGraphWizard.getPathToAstOutputFile());
+				}else{
+					lb_overwritingFilesWarning.setText("");
+				}
+			}		
+	
+			if (!isValidFolderPath(tx_targetContainerName.getText())) {
+				if(!tx_targetContainerName.getText().startsWith("/")){
+					updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_CONTAINER_NAME);
+				}else{
+					updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_CONTAINER);
+				}
+				return;
 			}
-			return;
+			if (!isValidCFGName(tx_outputFileName.getText())) {
+				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_FILE_NAME);
+				return;
+			}
+			
+			//make sure we can go into the error view
+			updateErrorMessage(null);
+			setDescription(WizardMessageConstants.MSG_STATUS_OK);
+			
+			//redo checks
+			wizard.restartChecks();
+			getControl().redraw();
 		}
-		if (!isValidCFGName(tx_outputFileName.getText())) {
-			updateErrorMessage(WizardMessageConstants.MSG_STATUS_INVALID_OUTPUT_FILE_NAME);
-			return;
-		}
-		
-		//make sure we can go into the error view
-		updateErrorMessage(null);
-		setDescription(WizardMessageConstants.MSG_STATUS_OK);
-		
-		//redo checks
-		wizard.restartChecks();
-		getControl().redraw();
 	}
 
 	/**
@@ -309,18 +315,6 @@ public class StoreBufferGraphConfigurationPage extends ConfigurationPage {
 		CFGActivator.saveMementoToFile(memento);
 	}
 	
-	/*=== Getter methods ===*/
-
-	/**
-	 * Returns the value of the selected semantics. 
-	 * 
-	 * @return selectedSemantics see semantics in {@link de.upb.lina.cfg.tools.CFGConstants}.
-	 */
-	public int getSelectedSemantics() {
-
-		return selectedSemantics;
-	}
-
 	@Override
 	protected void initializeDefaultGuiElementValuesFromFile(IFile file) {
 		if (CFGConstants.LLVM_FILE_EXTENSION.equals(file.getFileExtension()) || CFGConstants.S_FILE_EXTENSION.equals(file.getFileExtension()))
@@ -367,4 +361,18 @@ public class StoreBufferGraphConfigurationPage extends ConfigurationPage {
 			}
 		}
 	}
+	
+	/*=== Getter methods ===*/
+
+	/**
+	 * Returns the value of the selected semantics. 
+	 * 
+	 * @return selectedSemantics see semantics in {@link de.upb.lina.cfg.tools.CFGConstants}.
+	 */
+	public int getSelectedSemantics() {
+
+		return selectedSemantics;
+	}
+
+	
 }
