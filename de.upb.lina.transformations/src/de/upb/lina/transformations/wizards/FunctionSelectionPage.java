@@ -241,7 +241,7 @@ public class FunctionSelectionPage extends ExtendedWizardPage{
 		}
 	}
 	
-	protected List<ControlFlowDiagram> getSelectedFunctions(){
+	protected List<ControlFlowDiagram> getSelectedStoreBufferGraphs(){
 		return selectedFunctions;
 	}
 	
@@ -309,7 +309,7 @@ public class FunctionSelectionPage extends ExtendedWizardPage{
 		}
 	}
 	
-	public HashMap<String, String> getMap()
+	public HashMap<String, String> getOldToNewStoreBufferGraphNameMap()
 	{
 		return oldToNewCfgName;
 	}

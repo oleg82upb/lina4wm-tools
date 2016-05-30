@@ -72,7 +72,7 @@ public class AllInOneWizard extends ConfigurationWizardUsingChecks implements IN
       String kivBasis = allInOneConfigurationPage.getSelectedKivBasisAsString();
       int transformationTypeId = allInOneConfigurationPage.getSelectedTransformationType();
       ETransformationType transformationType = ETransformationType.getTransformationTypeById(transformationTypeId);
-      Map<String, String> oldToNewCfgName = functionSelectionPage.getMap();
+      Map<String, String> oldToNewCfgName = functionSelectionPage.getOldToNewStoreBufferGraphNameMap();
       TransformationConfiguration config = new TransformationConfiguration(storeBufferGraphs, kivBasis, oldToNewCfgName, transformationType);
       return config;
    }
