@@ -75,16 +75,24 @@ public class WritingLoopWithoutFencePropertyChecker extends AbstractPropertyChec
    }
 
 
-   private Transition containsLoopWithoutFences(ControlFlowDiagram cfg) {
-      List<Transition> transitions = cfg.getTransitions();
-      for (Transition t : transitions) {
-         if (t.getInstruction() instanceof Store && detectLoopWithoutFence(t)) {
-            return t;
-         }
-      }
+	/** Recursively checks for each write of the graph, whether it lies on a loop that is not fenced.
+	 * Reports the first occurrence. 
+	 * @param cfg
+	 * @return
+	 */
+	private Transition containsLoopWithoutFences(ControlFlowDiagram cfg)
+	{
+		List<Transition> transitions = cfg.getTransitions();
+		for (Transition t : transitions)
+		{
+			if (t.getInstruction() instanceof Store && detectLoopWithoutFence(t))
+			{
+				return t;
+			}
+		}
 
-      return null;
-   }
+		return null;
+	}
 
 
    private boolean detectLoopWithoutFence(Transition t) {
@@ -97,34 +105,45 @@ public class WritingLoopWithoutFencePropertyChecker extends AbstractPropertyChec
    }
 
 
-   private boolean isLoopWithoutFence(Transition t, List<Transition> explored, Transition write) {
-      // fence found
-      if (GraphUtility.isSynch(t.getInstruction())) {
-         return false;
-      }
-      // loop without fence found
-      if (t.equals(write)) {
-         return true;
-      }
+	/**Checks for the write, whether it can be reached again within a loop that does not contain a fence/synchronization instructions.
+	 * 
+	 * @param t
+	 * @param explored
+	 * @param write
+	 * @return
+	 */
+	private boolean isLoopWithoutFence(Transition t, List<Transition> explored, Transition write)
+	{
+		// fence found
+		if (GraphUtility.isSynch(t.getInstruction()))
+		{
+			return false;
+		}
+		// loop without fence found
+		if (t.equals(write))
+		{
+			return true;
+		}
 
-      // loop found, but no write inside the loop
-      if (explored.contains(t)) {
-         return false;
-      }
-      // reached end of graph
-      if (t.getTarget().getOutgoing().isEmpty())
-         return false;
-      // check for all outgoing transitions
-      explored.add(t);
-      for (Transition transition : t.getTarget().getOutgoing()) {
-         if (isLoopWithoutFence(transition, explored, write)) {
-            return true;
-         }
-      }
-      // no loop without fence found
-      explored.remove(t);
-      return false;
-   }
+		// loop found, but it is not harmful for the write. don't explore any
+		// further at this point
+		if (explored.contains(t))
+		{
+			return false;
+		}
+		// check for all outgoing transitions
+		explored.add(t);
+		for (Transition transition : t.getTarget().getOutgoing())
+		{
+			if (isLoopWithoutFence(transition, explored, write))
+			{
+				return true;
+			}
+		}
+		// no loop without fence found
+//		explored.remove(t);
+		return false;
+	}
 
 
    @Override

@@ -107,79 +107,138 @@ public class LoadsInWriteDefChainPropertyChecker extends AbstractPropertyChecker
    }
 
 
-   public void checkForWriteDefChains(ControlFlowDiagram cfg, List<Transition> loadsFound) {
+	public void checkForWriteDefChains(ControlFlowDiagram cfg, List<Transition> loadsFound)
+	{
 
-      // find all store-transitions and check whether they are in a
-      // writeDefChain
-      for (Transition write : cfg.getTransitions()) {
-         if (write.getInstruction() instanceof Store) {
+		// find all store-transitions and check whether they are in a
+		// writeDefChain
+		for (Transition write : cfg.getTransitions())
+		{
+			if (write.getInstruction() instanceof Store)
+			{
 
-            Store store = (Store) write.getInstruction();
+				Store store = (Store) write.getInstruction();
 
-            // to avoid infinite loops
-            List<Transition> explored = new ArrayList<Transition>();
-            explored.add(write);
+				// to avoid infinite loops
+				List<Transition> explored = new ArrayList<Transition>();
+//				explored.add(write);
+				String storeAddress = ((AddressUse) store.getTargetAddress().getValue()).getAddress().getName();
+				Transition addressDef = findDefinition(write, explored, storeAddress);
+				// if def not null, then we found a loop. at least for generated LLVM IR code as it is in SSA form
+				if (addressDef != null)
+				{
 
-            // check if address of store is redefined before a fence
-            String storeAddress = ((AddressUse) store.getTargetAddress().getValue()).getAddress().getName();
-            for (Transition t : write.getTarget().getOutgoing()) {
+					// way back found -> add to list
+					if (!wdcAddress.contains(write))
+						wdcAddress.add(write);
 
-               Transition addressDef = findDefinition(t, explored, storeAddress);
+					// search for a possible early read
+					Transition read = searchLoadWithRedefStoreAddress(storeAddress, addressDef,
+							new ArrayList<Transition>());
+					if (read != null)
+					{
+						loadsFound.add(read);
+						if (CFGConstants.IN_DEBUG_MODE)
+							System.out.println(((Load) read.getInstruction()).getResult().getName()
+									+ " := LOAD "
+									+ (((AddressUse) ((Load) read.getInstruction()).getAddress().getValue()))
+											.getAddress().getName());
+					}
+				}
 
-               if (addressDef != null) {
+				/** the commented code is the original and I am still not sure whether I perhaps missed something on 
+				 * why we would need to check for a path back from a write to its definition. */
+				
+				// check if address of store is redefined before a fence
+//				String storeAddress = ((AddressUse) store.getTargetAddress().getValue()).getAddress().getName();
+//				for (Transition t : write.getTarget().getOutgoing())
+//				{
+//
+//					Transition addressDef = findDefinition(t, explored, storeAddress);
+//
+//					if (addressDef != null)
+//					{
+//
+//						// search for a way back to the store-transition
+//						if (findWayBack(addressDef, write, new ArrayList<Transition>()))
+//						{
+//
+//							// way back found -> add to list
+//							if (!wdcAddress.contains(write))
+//								wdcAddress.add(write);
+//
+//							// search for a possible early read
+//							Transition read = searchLoadWithRedefStoreAddress(storeAddress, addressDef,
+//									new ArrayList<Transition>());
+//							if (read != null)
+//							{
+//								loadsFound.add(read);
+//								if (CFGConstants.IN_DEBUG_MODE)
+//									System.out.println(((Load) read.getInstruction()).getResult().getName()
+//											+ " := LOAD "
+//											+ (((AddressUse) ((Load) read.getInstruction()).getAddress().getValue()))
+//													.getAddress().getName());
+//							}
+//						}
+//					}
+//				}
 
-                  // search for a way back to the store-transition
-                  if (findWayBack(addressDef, write, new ArrayList<Transition>())) {
+				// check if value of store is redefined before a fence
+				if (store.getValue().getValue() instanceof AddressUse)
+				{
+					String storeValue = ((AddressUse) store.getValue().getValue()).getAddress().getName();
 
-                     // way back found -> add to list
-                     if (!wdcAddress.contains(write))
-                        wdcAddress.add(write);
+					// to avoid infinite loops
+					explored = new ArrayList<Transition>();
+//					explored.add(write);
+					Transition def = findDefinition(write, explored, storeValue);
+					// if def not null, then we found a loop. at least for generated LLVM IR code as it is in SSA form 
+					if (def != null)
+					{
 
-                     // search for a possible early read
-                     Transition read = searchLoadWithRedefStoreAddress(storeAddress, addressDef, new ArrayList<Transition>());
-                     if (read != null) {
-                        loadsFound.add(read);
-                        if (CFGConstants.IN_DEBUG_MODE)
-                           System.out.println(((Load) read.getInstruction()).getResult().getName() + " := LOAD "
-                                 + (((AddressUse) ((Load) read.getInstruction()).getAddress().getValue())).getAddress().getName());
-                     }
-                  }
-               }
-            }
-
-            // check if value of store is redefined before a fence
-            if (store.getValue().getValue() instanceof AddressUse) {
-               String storeValue = ((AddressUse) store.getValue().getValue()).getAddress().getName();
-
-               // to avoid infinite loops
-               explored.clear();
-               explored.add(write);
-
-               for (Transition t : write.getTarget().getOutgoing()) {
-
-                  Transition def = findDefinition(t, explored, storeValue);
-
-                  if (def != null) {
-
-                     // search for a way back to the store-transition
-                     if (findWayBack(def, write, new ArrayList<Transition>())) {
-
-                        // way back found -> add to list
-                        wdcValue.add(write);
-                        if (wdcAddress.contains(write)) {
-                           wdcAddressValue.add(write);
-                        }
-                        break;
-                     }
-                  }
-               }
-            }
-         }
-      }
-   }
+						// way back found -> add to list
+						wdcValue.add(write);
+						if (wdcAddress.contains(write))
+						{
+							wdcAddressValue.add(write);
+						}
+					}
+					
+//					for (Transition t : write.getTarget().getOutgoing())
+//					{
+//
+//						Transition def = findDefinition(t, explored, storeValue);
+//
+//						if (def != null)
+//						{
+//
+//							// search for a way back to the store-transition
+//							if (findWayBack(def, write, new ArrayList<Transition>()))
+//							{
+//
+//								// way back found -> add to list
+//								wdcValue.add(write);
+//								if (wdcAddress.contains(write))
+//								{
+//									wdcAddressValue.add(write);
+//								}
+//								break;
+//							}
+//						}
+//					}
+				}
+			}
+		}
+	}
 
 
-   private boolean findWayBack(Transition start, Transition finish, List<Transition> explored) {
+   /** Recursively searches for way between start and finish.
+ * @param start
+ * @param finish
+ * @param explored
+ * @return
+ */
+private boolean findWayBack(Transition start, Transition finish, List<Transition> explored) {
 
       // way back found
       if (start.equals(finish)) {
@@ -202,7 +261,13 @@ public class LoadsInWriteDefChainPropertyChecker extends AbstractPropertyChecker
    }
 
 
-   private Transition findDefinition(Transition t, List<Transition> explored, String address) {
+   /** Searches recursively for a reachable definition of the given address.
+ * @param t
+ * @param explored
+ * @param address
+ * @return
+ */
+private Transition findDefinition(Transition t, List<Transition> explored, String address) {
 
       // loop
       if (explored.contains(t)) {
@@ -309,7 +374,7 @@ public class LoadsInWriteDefChainPropertyChecker extends AbstractPropertyChecker
             return def;
          }
       }
-      explored.remove(t);
+      //explored.remove(t);
       return null;
    }
 
