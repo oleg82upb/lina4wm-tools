@@ -55,7 +55,7 @@ public class TransformationConfiguration {
    }
 
 
-   public List<ControlFlowDiagram> getCfgs() {
+   public List<ControlFlowDiagram> getStoreBufferGraphs() {
       return storeBufferGraphs;
    }
 
