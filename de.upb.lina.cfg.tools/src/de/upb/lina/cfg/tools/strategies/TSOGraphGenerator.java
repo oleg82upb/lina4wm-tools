@@ -338,10 +338,22 @@ public class TSOGraphGenerator extends AbstractGraphGenerator {
    }
 
 
-   @Override
-   protected ControlFlowLocation getLocationByPcAndBuffer(int pc, StoreBuffer buffer) {
-      return GraphUtility.getLocationRepresentedBy(this.graph.getLocations(), pc, buffer, getMemoryModel());
-   }
+	@Override
+	protected ControlFlowLocation getLocationByPcAndBuffer(int pc, StoreBuffer buffer)
+	{
+		ArrayList<ControlFlowLocation> list = new ArrayList<ControlFlowLocation>();
+		for (Iterator<ControlFlowLocation> iterator = this.graph.getLocations().iterator(); iterator.hasNext();)
+		{
+			ControlFlowLocation location = iterator.next();
+			if(location.getPc() == pc)
+			{
+				list.add(location);
+			}
+			
+		}
+		//this method needs a lot of string manipulation, so it is better to keep the list short
+		return GraphUtility.getLocationRepresentedBy(list, pc, buffer, getMemoryModel());
+	}
 
 
    @Override

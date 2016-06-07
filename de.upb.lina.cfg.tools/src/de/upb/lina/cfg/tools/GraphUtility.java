@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -61,28 +62,40 @@ import de.upb.llvm_parser.llvm.Vector;
 
 public abstract class GraphUtility {
 
+	private final static String REPLACE_STRINGS_REGEX = "\\s|\"|@_|@|%";
+	private final static String NUMBERS_REGEX = "[0-9]";
+	private final static String EMPTY_STRING = "";
+	private final static Pattern REPLACE_PATTERN = Pattern.compile(REPLACE_STRINGS_REGEX);
 
    /**
     * @param string representation of address or value
     * @return
     */
    public static String clean(String string) {
-      int loc = string.indexOf("%");
+	   //TODO: determine whether the patterns cause any problems
+	   //unless nothing strange happens all of a sudden, we can delete the commented code soon
+//      int loc = string.indexOf("%");
       // if the address is starts with a number, do not give it a v_
-      if (loc > -1 && string.substring(loc + 1, loc + 2).matches("[0-9]")) {
-         string = string.replaceAll("%", "v");
-      } else {
-         string = string.replaceAll("%", "");
+//      if (loc > -1 && string.substring(loc + 1, loc + 2).matches("[0-9]")) {
+//         string = string.replaceAll("%", "v");
+//      } else {
+//         string = string.replaceAll("%", "");
+//      }
+//      string = string.trim();
+		
+      string = REPLACE_PATTERN.matcher(string).replaceAll(EMPTY_STRING);
+    		  // old string.replaceAll(REPLACE_STRINGS_REGEX, EMPTY_STRING);
+      if(string.matches(NUMBERS_REGEX))
+      {
+    	  string = "v".concat(string);
       }
-      string = string.trim();
-      string = string.replaceAll(" ", "");
-      string = string.replaceAll("\"", "");
-      string = string.replaceAll("\\.", "_");
+//      string = string.replaceAll("\"", "");
+//      string = string.replaceAll("\\.", "_");
 
       // if the address is starts with a number, do not give it a v_
-      string = string.replaceAll("@_", "");
+//      string = string.replaceAll("@_", "");
 
-      string = string.replaceAll("@", "");
+//      string = string.replaceAll("@", "");
 
       return string;
    }
@@ -801,30 +814,40 @@ public abstract class GraphUtility {
     * @param value
     * @return the concatenated String
     */
-   public static String valueToRawString(Value value) {
-      String result = "";
+	public static String valueToRawString(Value value)
+	{
+		String result = "";
 
-      if (value instanceof AddressUse) {
-         AddressUse aui = (AddressUse) value;
-         result += aui.getAddress().getName();
-      } else if (value instanceof IntegerConstant) {
-         result += ((IntegerConstant) value).getValue();
-      } else if (value instanceof DecimalConstant) {
-         result += ((DecimalConstant) value).getValue();
-      } else if (value instanceof PrimitiveValue) {
-         result += ((PrimitiveValue) value).getValue();
-      } else if (value instanceof NestedGetElementPtr) {
-         // TODO indices are missing and actually a simple representation
-         return "(GetElementPtr" + CFGConstants.WS + parameterValueToString(((NestedGetElementPtr) value).getAggregate()) + ")";
-      } else if (value instanceof NestedCast) {
-         NestedCast val = (NestedCast) value;
-         result += "(" + typeToString(val.getFrom()) + "-->" + typeToString(val.getTo()) + ")" + valueToString(val.getValue());
-      } else {
-         result += CFGConstants.TODO;
-      }
+		if (value instanceof AddressUse)
+		{
+			AddressUse aui = (AddressUse) value;
+			result += aui.getAddress().getName();
+		} else if (value instanceof IntegerConstant)
+		{
+			result += ((IntegerConstant) value).getValue();
+		} else if (value instanceof DecimalConstant)
+		{
+			result += ((DecimalConstant) value).getValue();
+		} else if (value instanceof PrimitiveValue)
+		{
+			result += ((PrimitiveValue) value).getValue();
+		} else if (value instanceof NestedGetElementPtr)
+		{
+			// TODO indices are missing and actually a simple representation
+			return "(GetElementPtr" + CFGConstants.WS
+					+ parameterValueToString(((NestedGetElementPtr) value).getAggregate()) + ")";
+		} else if (value instanceof NestedCast)
+		{
+			NestedCast val = (NestedCast) value;
+			result += "(" + typeToString(val.getFrom()) + "-->" + typeToString(val.getTo()) + ")"
+					+ valueToString(val.getValue());
+		} else
+		{
+			result += CFGConstants.TODO;
+		}
 
-      return (result + CFGConstants.WS);
-   }
+		return (result + CFGConstants.WS);
+	}
 
 
    public static String parameterValueToString(Parameter val) {
