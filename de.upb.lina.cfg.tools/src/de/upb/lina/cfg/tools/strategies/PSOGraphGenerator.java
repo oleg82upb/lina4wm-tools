@@ -159,12 +159,6 @@ public class PSOGraphGenerator extends TSOGraphGenerator {
 
 
    @Override
-   protected ControlFlowLocation getLocationByPcAndBuffer(int pc, StoreBuffer buffer) {
-      return GraphUtility.getLocationRepresentedBy(this.graph.getLocations(), pc, buffer, getMemoryModel());
-   }
-
-
-   @Override
    public EMemoryModel getMemoryModel() {
       return EMemoryModel.PSO;
    }
