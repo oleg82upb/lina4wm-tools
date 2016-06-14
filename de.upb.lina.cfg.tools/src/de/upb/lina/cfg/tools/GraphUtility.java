@@ -12,47 +12,30 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
-import de.upb.lina.cfg.controlflow.EarlyReadTransition;
 import de.upb.lina.cfg.controlflow.FlushTransition;
-import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.StoreBuffer;
-import de.upb.lina.cfg.controlflow.Transition;
-import de.upb.lina.cfg.controlflow.WriteDefChainTransition;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.Aggregate_Type;
-import de.upb.llvm_parser.llvm.Alloc;
-import de.upb.llvm_parser.llvm.ArithmeticOperation;
 import de.upb.llvm_parser.llvm.Array;
 import de.upb.llvm_parser.llvm.AtomicRMW;
 import de.upb.llvm_parser.llvm.BasicBlock;
-import de.upb.llvm_parser.llvm.Branch;
-import de.upb.llvm_parser.llvm.Call;
-import de.upb.llvm_parser.llvm.Cast;
 import de.upb.llvm_parser.llvm.CmpXchg;
-import de.upb.llvm_parser.llvm.Compare;
 import de.upb.llvm_parser.llvm.DecimalConstant;
 import de.upb.llvm_parser.llvm.Fence;
-import de.upb.llvm_parser.llvm.FunctionBody;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.FunctionParameter;
 import de.upb.llvm_parser.llvm.FunctionType;
-import de.upb.llvm_parser.llvm.GetElementPtr;
 import de.upb.llvm_parser.llvm.Instruction;
 import de.upb.llvm_parser.llvm.IntegerConstant;
 import de.upb.llvm_parser.llvm.Invoke;
-import de.upb.llvm_parser.llvm.Load;
-import de.upb.llvm_parser.llvm.LogicOperation;
 import de.upb.llvm_parser.llvm.NestedCast;
 import de.upb.llvm_parser.llvm.NestedGetElementPtr;
 import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.ParameterList;
-import de.upb.llvm_parser.llvm.Phi;
-import de.upb.llvm_parser.llvm.PhiCase;
 import de.upb.llvm_parser.llvm.Predefined;
 import de.upb.llvm_parser.llvm.PrimitiveValue;
 import de.upb.llvm_parser.llvm.Return;
-import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.Structure;
 import de.upb.llvm_parser.llvm.TypeUse;
 import de.upb.llvm_parser.llvm.Value;
@@ -61,14 +44,9 @@ import de.upb.llvm_parser.llvm.Vector;
 
 public abstract class GraphUtility {
 
-   private static final String RIGHT_BRACKET = ")";
-   private static final String LEFT_BRACKET = "(";
    private final static String REPLACE_STRINGS_REGEX = "\\s|\"|@_|@|%";
-   private final static String REPLACE_DOTS_REGEX = "\\.";
-   private final static String NUMBERS_REGEX = "[0-9]";
-   private final static String EMPTY_STRING = "";
    private final static Pattern REPLACE_PATTERN = Pattern.compile(REPLACE_STRINGS_REGEX);
-   private final static Pattern REPLACE_DOT_PATTERN = Pattern.compile(REPLACE_DOTS_REGEX);
+   private final static Pattern REPLACE_DOT_PATTERN = Pattern.compile(StringUtils.REPLACE_DOTS_REGEX);
 
 
    /**
@@ -91,10 +69,10 @@ public abstract class GraphUtility {
       // }
       // string = string.trim();
       boolean needsVariablePrefix = string.contains("%");
-      string = REPLACE_PATTERN.matcher(string).replaceAll(EMPTY_STRING);
+      string = REPLACE_PATTERN.matcher(string).replaceAll(StringUtils.EMPTY_STRING);
       string = REPLACE_DOT_PATTERN.matcher(string).replaceAll("_");
       // old string.replaceAll(REPLACE_STRINGS_REGEX, EMPTY_STRING);
-      if (needsVariablePrefix && string.matches(NUMBERS_REGEX)) {
+      if (needsVariablePrefix && string.matches(StringUtils.NUMBERS_REGEX)) {
          string = "v".concat(string);
       }
       // string = string.replaceAll("\"", "");
@@ -199,9 +177,9 @@ public abstract class GraphUtility {
 
          Iterator<AddressValuePair> addressValuePairIterator = storeBuffer.getAddressValuePairs().iterator();
          while (addressValuePairIterator.hasNext()) {
-            stringBuffer.append(LEFT_BRACKET);
+            stringBuffer.append(StringUtils.LEFT_BRACKET);
             stringBuffer.append(addressValuePairToString(addressValuePairIterator.next()));
-            stringBuffer.append(RIGHT_BRACKET);
+            stringBuffer.append(StringUtils.RIGHT_BRACKET);
             if (addressValuePairIterator.hasNext()) {
                stringBuffer.append(", ");
             }
@@ -229,9 +207,9 @@ public abstract class GraphUtility {
             for (AddressValuePair addressValuePair : storeBuffer.getAddressValuePairs()) {
                Value addressValue = addressValuePair.getAddress().getValue();
                if (addressName.equals(valueToLLVMString(addressValue))) {
-                  stringBuffer.append(LEFT_BRACKET);
+                  stringBuffer.append(StringUtils.LEFT_BRACKET);
                   stringBuffer.append(addressValuePairToString(addressValuePair));
-                  stringBuffer.append(RIGHT_BRACKET);
+                  stringBuffer.append(StringUtils.RIGHT_BRACKET);
                   if (addressNameIterator.hasNext()) {
                      stringBuffer.append(", ");
                   }
@@ -324,399 +302,13 @@ public abstract class GraphUtility {
 
 
    /**
-    * Creates a string representation of the given transition, consisting of the name of the
-    * instruction linked with the transition and its parameters.
-    * 
-    * @param transition the transition to create the string representation of
-    * @return string representation of the transition
-    */
-   public static String createStringRepresentationOfTransition(Transition transition) {
-
-      if (transition instanceof FlushTransition) {
-
-         if (!transition.getSource().getBuffer().getAddressValuePairs().isEmpty()) {
-
-            if (transition.getDiagram().getMemoryModel() == EMemoryModel.TSO.getModelId()) {
-               // this is TSO specific as the whole pair
-               AddressValuePair p = transition.getSource().getBuffer().getAddressValuePairs().get(0);
-               return CFGConstants.FLUSH + LEFT_BRACKET + addressValuePairToString(p) + RIGHT_BRACKET;
-            }
-            return CFGConstants.FLUSH; // TODO compute what was flushed for PSO
-         }
-
-         throw new RuntimeException("Found flush transition for an empty buffer!");
-      }
-
-      if (transition instanceof EarlyReadTransition) {
-         String s = addressToString(((Load) transition.getInstruction()).getResult());
-         s += CFGConstants.ASSIGN;
-         s += ((EarlyReadTransition) transition).getAssignmentExpression();
-         return s;
-      }
-
-      if (transition instanceof WriteDefChainTransition) {
-         WriteDefChainTransition wdc = (WriteDefChainTransition) transition;
-         Store store = (Store) wdc.getInstruction();
-         if (wdc.getCopyAddress() != null && wdc.getCopyValue() != null) {
-            String s = addressToString(wdc.getCopyAddress()) + CFGConstants.ASSIGN + parameterValueToString(store.getTargetAddress())
-                  + "; " + addressToString(wdc.getCopyValue()) + CFGConstants.ASSIGN + parameterValueToString(store.getValue()) + "; "
-                  + CFGConstants.STORE + LEFT_BRACKET + wdc.getCopyValue().getName() + ", " + wdc.getCopyAddress().getName()
-                  + RIGHT_BRACKET;
-            return s;
-         } else if (wdc.getCopyValue() != null) {
-            String s = addressToString(wdc.getCopyValue()) + CFGConstants.ASSIGN + parameterValueToString(store.getValue()) + "; "
-                  + CFGConstants.STORE + LEFT_BRACKET + wdc.getCopyValue().getName() + ", "
-                  + parameterValueToString(store.getTargetAddress()) + RIGHT_BRACKET;
-            return s;
-         } else {
-            String s = addressToString(wdc.getCopyAddress()) + CFGConstants.ASSIGN + parameterValueToString(store.getTargetAddress())
-                  + "; " + CFGConstants.STORE + LEFT_BRACKET + parameterValueToString(store.getValue()) + ", "
-                  + wdc.getCopyAddress().getName() + RIGHT_BRACKET;
-            return s;
-         }
-
-      }
-
-
-      // special transition done
-      // the following use normal transitions
-      StringBuffer stringBuffer = new StringBuffer();
-
-      if (transition.getInstruction() == null) {
-         return CFGConstants.TODO;
-      }
-
-      Instruction instruction = transition.getInstruction();
-      if (instruction instanceof Load) {
-         Load instr = (Load) transition.getInstruction();
-         stringBuffer.append(addressToString(instr.getResult()));
-         stringBuffer.append(CFGConstants.ASSIGN);
-         stringBuffer.append(CFGConstants.LOAD);
-         stringBuffer.append(CFGConstants.WS);
-         stringBuffer.append(LEFT_BRACKET);
-         stringBuffer.append(parameterValueToString(instr.getAddress()));
-         stringBuffer.append(RIGHT_BRACKET);
-      } else if (instruction instanceof Store) {
-         Store instr = (Store) transition.getInstruction();
-         stringBuffer.append(CFGConstants.STORE);
-         stringBuffer.append(LEFT_BRACKET);
-         stringBuffer.append(parameterValueToString(instr.getValue()));
-         stringBuffer.append(", ");
-         stringBuffer.append(parameterValueToString(instr.getTargetAddress()));
-         stringBuffer.append(RIGHT_BRACKET);
-      } else if (instruction instanceof Branch) {
-         if (transition instanceof GuardedTransition) {
-            return ((GuardedTransition) transition).getCondition();
-         } else {
-            return CFGConstants.BRANCH + CFGConstants.WS + CFGConstants.PC_PREFIX + transition.getTarget().getPc();
-         }
-      } else if (instruction instanceof GetElementPtr) {
-         GetElementPtr instr = (GetElementPtr) transition.getInstruction();
-         stringBuffer.append(addressToString(instr.getResult()));
-         stringBuffer.append(CFGConstants.ASSIGN);
-         stringBuffer.append(CFGConstants.GETELEMENENTPTR);
-         stringBuffer.append(LEFT_BRACKET);
-         stringBuffer.append(parameterValueToString(instr.getAggregate()));
-         stringBuffer.append(", ");
-         for (int i = 0; i < instr.getIndices().size(); i++) {
-            stringBuffer.append(parameterValueToString(instr.getIndices().get(i)));
-            if (i + 1 < instr.getIndices().size()) {
-               stringBuffer.append(", ");
-            }
-         }
-         return stringBuffer + RIGHT_BRACKET;
-      } else if (instruction instanceof CmpXchg) {
-         CmpXchg instr = (CmpXchg) transition.getInstruction();
-         stringBuffer.append(addressToString(instr.getResult()));
-         stringBuffer.append(CFGConstants.ASSIGN);
-         stringBuffer.append("CAS(");
-         stringBuffer.append(parameterValueToString(instr.getAddress()));
-         stringBuffer.append(", ");
-         stringBuffer.append(parameterValueToString(instr.getValue()));
-         stringBuffer.append(", ");
-         stringBuffer.append(parameterValueToString(instr.getNewValue()));
-         stringBuffer.append(RIGHT_BRACKET);
-      } else if (instruction instanceof Call) {
-
-         Call instr = (Call) transition.getInstruction();
-         if (instr.getResult() != null) {
-            stringBuffer.append(addressToString(instr.getResult()));
-            stringBuffer.append(CFGConstants.ASSIGN);
-         }
-         stringBuffer.append(CFGConstants.CALL);
-         stringBuffer.append(CFGConstants.WS);
-         stringBuffer.append(parameterValueToString(instr.getFunction()));
-         stringBuffer.append(parameterListToString(instr.getPList()));
-      } else if (instruction instanceof Alloc) {
-         Alloc instr = (Alloc) transition.getInstruction();
-         stringBuffer.append(addressToString(instr.getResult()));
-         stringBuffer.append(CFGConstants.ASSIGN);
-         stringBuffer.append(CFGConstants.ALLOC);
-         stringBuffer.append(CFGConstants.WS);
-         stringBuffer.append(clean(typeUseToString(instr.getType())));
-      } else if (instruction instanceof ArithmeticOperation) {
-         ArithmeticOperation instr = (ArithmeticOperation) transition.getInstruction();
-         stringBuffer.append(addressToString(instr.getResult()));
-         stringBuffer.append(CFGConstants.ASSIGN);
-
-         String operation = instr.getOperation();
-         stringBuffer.append(valueToString(instr.getValue1()));
-         stringBuffer.append(CFGConstants.WS);
-         if (operation.equals("add") || operation.equals("fadd")) {
-            stringBuffer.append("+ ");
-         } else if (operation.equals("sub") || operation.equals("fsub")) {
-            stringBuffer.append("- ");
-         } else if (operation.equals("mul") || operation.equals("fmul")) {
-            stringBuffer.append("* ");
-         } else if (operation.equals("udiv") || operation.equals("sdiv") || operation.equals("fdiv")) {
-            stringBuffer.append(": ");
-         } else if (operation.equals("urem") || operation.equals("srem") || operation.equals("frem")) {
-            stringBuffer.append("% ");
-         }
-         stringBuffer.append(valueToString(instr.getValue2()));
-      } else if (instruction instanceof LogicOperation) {
-         LogicOperation instr = (LogicOperation) transition.getInstruction();
-         stringBuffer.append(addressToString(instr.getResult()));
-         stringBuffer.append(CFGConstants.ASSIGN);
-         String operation = instr.getOperation();
-         stringBuffer.append(valueToString(instr.getValue1()));
-         stringBuffer.append(CFGConstants.WS);
-         if (operation.equals("shl")) {
-            stringBuffer.append("<< ");
-         } else if (operation.equals("lshr")) {
-            stringBuffer.append(">>[L] ");
-         } else if (operation.equals("ashr")) {
-            stringBuffer.append(">>[A] ");
-         } else if (operation.equals("and")) {
-            stringBuffer.append("& ");
-         } else if (operation.equals("or")) {
-            stringBuffer.append("| ");
-         } else if (operation.equals("xor")) {
-            stringBuffer.append("^ ");
-         }
-         stringBuffer.append(valueToString(instr.getValue2()));
-      }
-      // Compare
-      else if (instruction instanceof Compare) {
-         Compare instr = (Compare) transition.getInstruction();
-         stringBuffer.append(addressToString(instr.getResult()));
-         stringBuffer.append(CFGConstants.ASSIGN);
-         stringBuffer.append(LEFT_BRACKET);
-         String compare = instr.getCond();
-         if (compare.equals(CFGConstants.FALSE)) {
-            stringBuffer.append(CFGConstants.FALSE);
-            return stringBuffer.toString();
-         } else if (compare.equals(CFGConstants.TRUE)) {
-            stringBuffer.append(CFGConstants.TRUE);
-            return stringBuffer.toString();
-         }
-         stringBuffer.append(valueToString(instr.getOperand1()));
-         stringBuffer.append(CFGConstants.WS);
-         if (compare.equals("eq")) {
-            stringBuffer.append("== ");
-         } else if (compare.equals("ne")) {
-            stringBuffer.append("!= ");
-         } else if (compare.equals("ugt") || compare.equals("sgt")) {
-            stringBuffer.append("> ");
-         } else if (compare.equals("uge") || compare.equals("sge")) {
-            stringBuffer.append(">= ");
-         } else if (compare.equals("ult") || compare.equals("slt")) {
-            stringBuffer.append("< ");
-         } else if (compare.equals("ule") || compare.equals("sle")) {
-            stringBuffer.append("<= ");
-         } else if (compare.equals("oeq")) {
-            stringBuffer.append("=[o] ");
-         } else if (compare.equals("ogt")) {
-            stringBuffer.append(">[o] ");
-         } else if (compare.equals("oge")) {
-            stringBuffer.append(">=[o] ");
-         } else if (compare.equals("olt")) {
-            stringBuffer.append("<[o] ");
-         } else if (compare.equals("ole")) {
-            stringBuffer.append("<=[o] ");
-         } else if (compare.equals("one")) {
-            stringBuffer.append("!=[o] ");
-         } else if (compare.equals("ueq")) {
-            stringBuffer.append("=[u] ");
-         } else if (compare.equals("ugt")) {
-            stringBuffer.append(">[u] ");
-         } else if (compare.equals("uge")) {
-            stringBuffer.append(">=[u] ");
-         } else if (compare.equals("ult")) {
-            stringBuffer.append("<[u] ");
-         } else if (compare.equals("ule")) {
-            stringBuffer.append("<=[u] ");
-         } else if (compare.equals("une")) {
-            stringBuffer.append("!=[u] ");
-         } else if (compare.equals("ord")) {
-            stringBuffer.append("orderd ");
-         } else if (compare.equals("uno")) {
-            stringBuffer.append("not orderd ");
-         }
-         stringBuffer.append(valueToString(instr.getOperand2()));
-         stringBuffer.append(RIGHT_BRACKET);
-      } else if (instruction instanceof Return) {
-         stringBuffer.append(CFGConstants.RETURN);
-         EObject returnValue = ((Return) transition.getInstruction()).getValue();
-         Value value = null;
-         if (returnValue instanceof Parameter) {
-            value = ((Parameter) returnValue).getValue();
-         } else if (returnValue instanceof PrimitiveValue) {
-            value = (PrimitiveValue) returnValue;
-         }
-
-         if (value != null) {
-            stringBuffer.append(CFGConstants.WS);
-            stringBuffer.append(valueToString(value));
-            stringBuffer.append(CFGConstants.WS);
-         }
-         return stringBuffer.toString();
-      } else if (instruction instanceof Cast) {
-         Cast instr = (Cast) transition.getInstruction();
-         stringBuffer.append(addressToString(instr.getResult()));
-         stringBuffer.append(CFGConstants.ASSIGN);
-         stringBuffer.append(LEFT_BRACKET);
-         stringBuffer.append(clean(typeUseToString(instr.getTo())));
-         stringBuffer.append(") ");
-         stringBuffer.append(valueToString(instr.getValue()));
-      } else if (instruction instanceof Invoke) {
-         Invoke instr = (Invoke) transition.getInstruction();
-         stringBuffer.append(CFGConstants.INVOKE);
-         stringBuffer.append(CFGConstants.WS);
-         stringBuffer.append(addressToString(instr.getName()));
-         stringBuffer.append(parameterListToString(instr.getPList()));
-         return stringBuffer.toString();
-      }
-      // Fence
-      else if (instruction instanceof Fence) {
-         return CFGConstants.FENCE;
-      }
-      // AtomicRMW
-      else if (instruction instanceof AtomicRMW) {
-         stringBuffer.append("atomicRMW( ");
-         AtomicRMW instr = (AtomicRMW) transition.getInstruction();
-         String operation = instr.getOperation();
-         if (operation.equals("xchg")) {
-            stringBuffer.append(parameterValueToString(instr.getAddress()));
-            stringBuffer.append(" <-> ");
-            stringBuffer.append(parameterValueToString(instr.getArgument()));
-         } else if (operation.equals("add")) {
-            stringBuffer.append(parameterValueToString(instr.getAddress()));
-            stringBuffer.append(" = ");
-            stringBuffer.append(parameterValueToString(instr.getAddress()));
-            stringBuffer.append(" + ");
-            stringBuffer.append(parameterValueToString(instr.getArgument()));
-         } else if (operation.equals("sub")) {
-            stringBuffer.append(parameterValueToString(instr.getAddress()));
-            stringBuffer.append(" = ");
-            stringBuffer.append(parameterValueToString(instr.getAddress()));
-            stringBuffer.append(" - ");
-            stringBuffer.append(parameterValueToString(instr.getArgument()));
-         } else if (operation.equals("and")) {
-            stringBuffer.append(parameterValueToString(instr.getAddress()));
-            stringBuffer.append(" = ");
-            stringBuffer.append(parameterValueToString(instr.getAddress()));
-            stringBuffer.append(CFGConstants.WS);
-            stringBuffer.append(CFGConstants.WEDGE);
-            stringBuffer.append(CFGConstants.WS);
-            stringBuffer.append(parameterValueToString(instr.getArgument()));
-         } else if (operation.equals("nand")) {
-            stringBuffer.append(parameterValueToString(instr.getAddress()));
-            stringBuffer.append(" = ");
-            stringBuffer.append(parameterValueToString(instr.getAddress()));
-            stringBuffer.append(" !& ");
-            stringBuffer.append(parameterValueToString(instr.getArgument()));
-         } else if (operation.equals("or")) {
-            stringBuffer.append(parameterValueToString(instr.getAddress()));
-            stringBuffer.append(" = ");
-            stringBuffer.append(parameterValueToString(instr.getAddress()));
-            stringBuffer.append(CFGConstants.WS);
-            stringBuffer.append(CFGConstants.VEE);
-            stringBuffer.append(CFGConstants.WS);
-            stringBuffer.append(parameterValueToString(instr.getArgument()));
-         } else if (operation.equals("xor")) {
-            stringBuffer.append(parameterValueToString(instr.getAddress()));
-            stringBuffer.append(" = ");
-            stringBuffer.append(parameterValueToString(instr.getAddress()));
-            stringBuffer.append(" xor ");
-            stringBuffer.append(parameterValueToString(instr.getArgument()));
-         } else if (operation.equals("max") || operation.equals("umax")) {
-            stringBuffer.append(parameterValueToString(instr.getAddress()));
-            stringBuffer.append(" = max(");
-            stringBuffer.append(parameterValueToString(instr.getAddress()));
-            stringBuffer.append(", ");
-            stringBuffer.append(parameterValueToString(instr.getArgument()));
-            stringBuffer.append(") ");
-         } else if (operation.equals("min") || operation.equals("umin")) {
-            stringBuffer.append(parameterValueToString(instr.getAddress()));
-            stringBuffer.append(" = min(");
-            stringBuffer.append(parameterValueToString(instr.getAddress()));
-            stringBuffer.append(", ");
-            stringBuffer.append(parameterValueToString(instr.getArgument()));
-            stringBuffer.append(RIGHT_BRACKET);
-         }
-         stringBuffer.append(" )");
-      } else if (instruction instanceof Phi) {
-         Phi phiInstruction = (Phi) transition.getInstruction();
-         stringBuffer = new StringBuffer(addressToString(phiInstruction.getResult()));
-         stringBuffer.append(" := ");
-         stringBuffer.append(CFGConstants.PHI);
-         stringBuffer.append(" ");
-
-         FunctionBody body = null;
-         EObject o = phiInstruction.eContainer().eContainer();
-         if (o instanceof FunctionBody) {
-            body = (FunctionBody) o;
-         } else {
-            throw new RuntimeException("Could not resolve FunctionBody of phi instruction");
-         }
-
-         Iterator<PhiCase> phiCaseIterator = phiInstruction.getCases().iterator();
-         while (phiCaseIterator.hasNext()) {
-            PhiCase phiCase = phiCaseIterator.next();
-            String caseLabel = phiCase.getLabel().replace("%", "");
-            int sourcePC = -1;
-
-            for (BasicBlock block : body.getBlocks()) {
-               if (caseLabel.equals(block.getLabel())) {
-                  // get last instruction because it is the one jumping to
-                  // the block containing the phi instruction
-                  int size = block.getInstructions().size();
-                  Instruction last = block.getInstructions().get(size - 1);
-                  sourcePC = getPcOfInstruction(last, gatherInstructionsInCodeOrder((FunctionDefinition) body.eContainer()));
-               }
-            }
-
-            // we use the PC instead of the original label, since we don't
-            // have the labels in the store buffer graph anymore
-            stringBuffer.append("[");
-            stringBuffer.append(valueToString(phiCase.getValue()));
-            stringBuffer.append(", ");
-            stringBuffer.append(CFGConstants.PC_PREFIX);
-            stringBuffer.append(sourcePC);
-            stringBuffer.append("]");
-
-            if (phiCaseIterator.hasNext()) {
-               stringBuffer.append(", ");
-            }
-         }
-      }
-      // not-implemented
-      else {
-         stringBuffer.append(instruction.toString());
-      }
-      return stringBuffer.toString();
-   }
-
-
-   /**
     * Creates the string representation of the given parameter list.
     * 
     * @param parameterList the parameter list to create the string representation of
     * @return the string representation of the given parameter list
     */
    public static String parameterListToString(ParameterList parameterList) {
-      StringBuffer stringBuffer = new StringBuffer(LEFT_BRACKET);
+      StringBuffer stringBuffer = new StringBuffer(StringUtils.LEFT_BRACKET);
       Iterator<Parameter> parameterIterator = parameterList.getParams().iterator();
       while (parameterIterator.hasNext()) {
          Parameter parameter = parameterIterator.next();
@@ -725,7 +317,7 @@ public abstract class GraphUtility {
             stringBuffer.append(", ");
          }
       }
-      stringBuffer.append(RIGHT_BRACKET);
+      stringBuffer.append(StringUtils.RIGHT_BRACKET);
       return stringBuffer.toString();
    }
 
@@ -753,7 +345,7 @@ public abstract class GraphUtility {
       } else if (typeUse instanceof FunctionType) {
          FunctionType ftype = (FunctionType) typeUse;
          stringBuffer = new StringBuffer(typeToString(ftype.getReturnType()));
-         stringBuffer.append(LEFT_BRACKET);
+         stringBuffer.append(StringUtils.LEFT_BRACKET);
          Iterator<FunctionParameter> i = ftype.getParameter().getParams().iterator();
          while (i.hasNext()) {
             stringBuffer.append(typeToString(i.next()));
@@ -761,7 +353,7 @@ public abstract class GraphUtility {
                stringBuffer.append(", ");
             }
          }
-         stringBuffer.append(RIGHT_BRACKET);
+         stringBuffer.append(StringUtils.RIGHT_BRACKET);
       } else {
          return typeUse.toString();
       }
@@ -840,7 +432,7 @@ public abstract class GraphUtility {
     * @param adress the address to represent
     * @return the string representation of the given address
     */
-   private static String addressToString(Address adress) {
+   static String addressToString(Address adress) {
       return clean(adress.getName());
    }
 
@@ -877,14 +469,14 @@ public abstract class GraphUtility {
          stringBuffer.append(((PrimitiveValue) value).getValue());
       } else if (value instanceof NestedGetElementPtr) {
          // TODO indices are missing and actually a simple representation
-         return "(GetElementPtr" + CFGConstants.WS + parameterValueToString(((NestedGetElementPtr) value).getAggregate()) + RIGHT_BRACKET;
+         return "(GetElementPtr" + CFGConstants.WS + parameterValueToString(((NestedGetElementPtr) value).getAggregate()) + StringUtils.RIGHT_BRACKET;
       } else if (value instanceof NestedCast) {
          NestedCast val = (NestedCast) value;
-         stringBuffer.append(LEFT_BRACKET);
+         stringBuffer.append(StringUtils.LEFT_BRACKET);
          stringBuffer.append(typeToString(val.getFrom()));
          stringBuffer.append("-->");
          stringBuffer.append(typeToString(val.getTo()));
-         stringBuffer.append(RIGHT_BRACKET);
+         stringBuffer.append(StringUtils.RIGHT_BRACKET);
          stringBuffer.append(valueToString(val.getValue()));
       } else {
          stringBuffer.append(CFGConstants.TODO);

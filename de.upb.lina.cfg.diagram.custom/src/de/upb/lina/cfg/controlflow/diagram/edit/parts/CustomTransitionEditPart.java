@@ -9,7 +9,7 @@ import org.eclipse.gmf.runtime.notation.Connector;
 import org.eclipse.gmf.runtime.notation.View;
 
 import de.upb.lina.cfg.controlflow.Transition;
-import de.upb.lina.cfg.tools.GraphUtility;
+import de.upb.lina.cfg.tools.TransitionToStringConverter;
 
 /**
  * @author Oleg Travkin
@@ -60,7 +60,7 @@ public class CustomTransitionEditPart extends TransitionEditPart
 		{
 			return EMPTY;
 		}
-		return GraphUtility.createStringRepresentationOfTransition(t);
+		return TransitionToStringConverter.createStringRepresentationOfTransition(t);
 	}
 
 	@Override
