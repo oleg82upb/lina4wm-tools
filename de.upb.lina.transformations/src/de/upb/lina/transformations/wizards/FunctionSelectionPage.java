@@ -279,7 +279,7 @@ public class FunctionSelectionPage extends ExtendedWizardPage{
 					for(BasicBlock b: fd.getBody().getBlocks()){
 						for(Instruction ins: b.getInstructions()){
 							if(ins instanceof Call){
-								String calledFunction = GraphUtility.valueToRawString(((Call) ins).getFunction().getValue()).trim();
+								String calledFunction = GraphUtility.valueToLLVMString(((Call) ins).getFunction().getValue()).trim();
 								//if the function is to be generated and if its not a self-call (recursion)
 								if(functionNameToStoreBufferGraph.containsKey(calledFunction) && functionNameToStoreBufferGraph.get(calledFunction) != cfg){
 									addDependency(cfg, calledFunction);

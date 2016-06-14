@@ -276,7 +276,7 @@ public class PreComputationChecker {
 
 	private boolean isLoopWithoutFence(Transition t, List<Transition> explored, Transition write) {
 		// fence found
-		if(GraphUtility.isSynch(t.getInstruction()))
+		if(GraphUtility.isSynchronizingInstruction(t.getInstruction()))
 		{
 			return false;
 		}

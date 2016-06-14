@@ -60,7 +60,7 @@ public class CustomTransitionEditPart extends TransitionEditPart
 		{
 			return EMPTY;
 		}
-		return GraphUtility.getNewTransitionLabel(t);
+		return GraphUtility.createStringRepresentationOfTransition(t);
 	}
 
 	@Override

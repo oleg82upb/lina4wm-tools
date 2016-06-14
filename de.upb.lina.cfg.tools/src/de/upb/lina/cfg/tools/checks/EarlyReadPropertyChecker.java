@@ -85,7 +85,7 @@ public class EarlyReadPropertyChecker extends AbstractPropertyChecker {
     */
    private boolean isEarlyRead(Transition t, List<Transition> explored, Transition load) {
       // fence found
-      if (GraphUtility.isSynch(t.getInstruction())) {
+      if (GraphUtility.isSynchronizingInstruction(t.getInstruction())) {
          return false;
       }
       // loop found

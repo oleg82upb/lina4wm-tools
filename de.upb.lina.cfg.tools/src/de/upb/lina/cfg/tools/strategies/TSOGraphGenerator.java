@@ -60,7 +60,7 @@ public class TSOGraphGenerator extends AbstractGraphGenerator {
 
    @Override
    protected void addTransitions(ControlFlowLocation sourceLocation, Instruction nextInstruction) {
-      if (!GraphUtility.isSynch(nextInstruction) || sourceLocation.getBuffer().getAddressValuePairs().isEmpty()) {
+      if (!GraphUtility.isSynchronizingInstruction(nextInstruction) || sourceLocation.getBuffer().getAddressValuePairs().isEmpty()) {
          addInstructionTransitions(sourceLocation, nextInstruction);
       }
       addFlushTransition(sourceLocation);

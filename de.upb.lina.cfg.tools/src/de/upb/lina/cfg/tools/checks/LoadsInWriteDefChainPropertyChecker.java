@@ -276,7 +276,7 @@ private Transition findDefinition(Transition t, List<Transition> explored, Strin
 
       // sync between write and def
       Instruction instruction = t.getInstruction();
-      if (GraphUtility.isSynch(instruction)) {
+      if (GraphUtility.isSynchronizingInstruction(instruction)) {
          return null;
       }
 
@@ -394,7 +394,7 @@ private Transition findDefinition(Transition t, List<Transition> explored, Strin
          return null;
       }
 
-      if (GraphUtility.isSynch(instruction)) {
+      if (GraphUtility.isSynchronizingInstruction(instruction)) {
          return null;
       }
 

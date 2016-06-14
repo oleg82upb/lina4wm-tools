@@ -11,7 +11,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 import de.upb.lina.cfg.controlflow.AddressValuePair;
-import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.EarlyReadTransition;
 import de.upb.lina.cfg.controlflow.FlushTransition;
@@ -62,47 +61,56 @@ import de.upb.llvm_parser.llvm.Vector;
 
 public abstract class GraphUtility {
 
-	private final static String REPLACE_STRINGS_REGEX = "\\s|\"|@_|@|%";
-	private final static String NUMBERS_REGEX = "[0-9]";
-	private final static String EMPTY_STRING = "";
-	private final static Pattern REPLACE_PATTERN = Pattern.compile(REPLACE_STRINGS_REGEX);
+   private static final String RIGHT_BRACKET = ")";
+   private static final String LEFT_BRACKET = "(";
+   private final static String REPLACE_STRINGS_REGEX = "\\s|\"|@_|@|%";
+   private final static String REPLACE_DOTS_REGEX = "\\.";
+   private final static String NUMBERS_REGEX = "[0-9]";
+   private final static String EMPTY_STRING = "";
+   private final static Pattern REPLACE_PATTERN = Pattern.compile(REPLACE_STRINGS_REGEX);
+   private final static Pattern REPLACE_DOT_PATTERN = Pattern.compile(REPLACE_DOTS_REGEX);
+
 
    /**
-    * @param string representation of address or value
-    * @return
+    * Deletes any strange symbols used in LLVM code such as {@code @} or {@code %} from the given
+    * string. If the string only consists of numbers after this procedure, a 'v' will be
+    * concatenated in front of the number. The resulting string is returned.
+    * 
+    * @param string the string to clean
+    * @return the result of the clean operation
     */
    public static String clean(String string) {
-	   //TODO: determine whether the patterns cause any problems
-	   //unless nothing strange happens all of a sudden, we can delete the commented code soon
-//      int loc = string.indexOf("%");
+      // TODO: determine whether the patterns cause any problems
+      // unless nothing strange happens all of a sudden, we can delete the commented code soon
+      // int loc = string.indexOf("%");
       // if the address is starts with a number, do not give it a v_
-//      if (loc > -1 && string.substring(loc + 1, loc + 2).matches("[0-9]")) {
-//         string = string.replaceAll("%", "v");
-//      } else {
-//         string = string.replaceAll("%", "");
-//      }
-//      string = string.trim();
-		
+      // if (loc > -1 && string.substring(loc + 1, loc + 2).matches("[0-9]")) {
+      // string = string.replaceAll("%", "v");
+      // } else {
+      // string = string.replaceAll("%", "");
+      // }
+      // string = string.trim();
+      boolean needsVariablePrefix = string.contains("%");
       string = REPLACE_PATTERN.matcher(string).replaceAll(EMPTY_STRING);
-    		  // old string.replaceAll(REPLACE_STRINGS_REGEX, EMPTY_STRING);
-      if(string.matches(NUMBERS_REGEX))
-      {
-    	  string = "v".concat(string);
+      string = REPLACE_DOT_PATTERN.matcher(string).replaceAll("_");
+      // old string.replaceAll(REPLACE_STRINGS_REGEX, EMPTY_STRING);
+      if (needsVariablePrefix && string.matches(NUMBERS_REGEX)) {
+         string = "v".concat(string);
       }
-//      string = string.replaceAll("\"", "");
-//      string = string.replaceAll("\\.", "_");
+      // string = string.replaceAll("\"", "");
+      // string = string.replaceAll("\\.", "_");
 
       // if the address is starts with a number, do not give it a v_
-//      string = string.replaceAll("@_", "");
+      // string = string.replaceAll("@_", "");
 
-//      string = string.replaceAll("@", "");
+      // string = string.replaceAll("@", "");
 
       return string;
    }
 
 
    /**
-    * Returns the label under which the given instruction is listed
+    * Returns the label under which the given instruction is listed.
     * 
     * @param function function of the instruction
     * @param instruction instruction to look for
@@ -122,167 +130,152 @@ public abstract class GraphUtility {
 
 
    /**
-    * Returns the transition that belongs to the instruction i in cfg
+    * Returns the first instruction in the given function that is listed under the given label.
     * 
-    * @param cfg
-    * @param i
-    * @return CFG transition corresponding to instruction i
+    * @param function the function to search
+    * @param label the label of the block to return the first instruction of
+    * @return the first instruction of the block with the given label in the given function
     */
-   public static Transition findCorrespondingTransition(ControlFlowDiagram cfg, Instruction i) {
-      for (Transition t : cfg.getTransitions()) {
-         if (i.equals(t.getInstruction())) {
-            return t;
-         }
-      }
-      return null;
-   }
-
-
-   /**
-    * Returns the first instruction that is listed under the given label
-    * 
-    * @param function
-    * @param destLabel
-    * @return instruction corresponding to the label
-    */
-   public static Instruction getInstructionByLabel(FunctionDefinition function, String destLabel) {
+   public static Instruction getInstructionByLabel(FunctionDefinition function, String label) {
       for (BasicBlock b : function.getBody().getBlocks()) {
-         if (destLabel.equals(b.getLabel())) {
+         if (label.equals(b.getLabel())) {
             return b.getInstructions().get(0);
          }
       }
-      throw new RuntimeException("Could not find label " + destLabel + " in function " + function.getAddress().getName());
-   }
-
-
-   // /**
-   // * Searches for the block with label destLabel and returns preceeding
-   // * location of the transition that is corresponding to the first instruction
-   // * of the block.
-   // *
-   // * @param cfg
-   // * @param function
-   // * @param destLabel
-   // * @return
-   // */
-   // public static ControlFlowLocation findLabeledLocation(ControlFlowDiagram cfg,
-   // FunctionDefinition function,
-   // String destLabel)
-   // {
-   // Instruction dest = getInstructionByLabel(function, destLabel);
-   // Transition destTrans = findCorrespondingTransition(cfg, dest);
-   // return destTrans.getSource();
-   // }
-
-   /**
-    * Checks weather l is equal to the given pc in combination with the given buffer
-    * 
-    * @param l
-    * @param pc
-    * @param buffer
-    * @return true if location is represented by the given pc and store buffer combination
-    */
-   public static boolean isRepresentedBy(ControlFlowLocation l, int pc, StoreBuffer buffer, EMemoryModel memoryModel) {
-      return (bufferToString(l, memoryModel).equalsIgnoreCase(bufferToString(buffer, pc, memoryModel)));
+      throw new RuntimeException("Could not find label " + label + " in function " + function.getAddress().getName());
    }
 
 
    /**
-    * Returns the given ControlFlowLocation as a String
+    * Checks weather the given node is equal to the given pc in combination with the given buffer
+    * under the given memory model.
     * 
-    * @param location
-    * @return
+    * @param node the node to check
+    * @param pc the pc to compare against
+    * @param buffer the buffer to compare against
+    * @param memoryModel the memory model to consider for the check
+    * @return {@code true}, if the given node is represented by the given pc and store buffer
+    *         combination, {@code false} else
     */
-   public static String bufferToString(ControlFlowLocation location, EMemoryModel memoryModel) {
-      return bufferToString(location.getBuffer(), location.getPc(), memoryModel);
+   public static boolean isRepresentedBy(ControlFlowLocation node, int pc, StoreBuffer buffer, EMemoryModel memoryModel) {
+      return (bufferToString(node, memoryModel).equalsIgnoreCase(bufferToString(buffer, pc, memoryModel)));
    }
 
 
    /**
-    * Returns the given buffer and pc as a String
+    * Returns the string representation of the given store buffer graph node under the given memory
+    * model.
     * 
-    * @param buf
-    * @param pc
-    * @return
+    * @param node the store buffer graph node to represent as a string
+    * @return the string representation of the given store buffer graph node under the given memory
+    *         model
     */
-   public static String bufferToString(StoreBuffer buf, int pc, EMemoryModel memoryModel) {
+   public static String bufferToString(ControlFlowLocation node, EMemoryModel memoryModel) {
+      return bufferToString(node.getBuffer(), node.getPc(), memoryModel);
+   }
 
-      String buffer = CFGConstants.PC_PREF + pc;
-      if (buf.getAddressValuePairs().isEmpty()) {
-         return buffer;
+
+   /**
+    * Returns the string representation of the store buffer graph node constructed from the given pc
+    * and store buffer under the given memory model.
+    * 
+    * @param pc the pc to use to construct a store buffer graph node
+    * @param storeBuffer the store buffer to use to construct a store buffer graph node
+    * @param memoryModel the memory model to consider
+    * @return the string representation of given store buffer graph node constructed from the given
+    *         pc and store buffer under the given memory model
+    */
+   public static String bufferToString(StoreBuffer storeBuffer, int pc, EMemoryModel memoryModel) {
+
+      StringBuffer stringBuffer = new StringBuffer(CFGConstants.PC_PREFIX);
+      stringBuffer.append(pc);
+
+      if (storeBuffer.getAddressValuePairs().isEmpty()) {
+         return stringBuffer.toString();
       }
 
-      buffer += " <";
+      stringBuffer.append(" <");
       if (memoryModel == EMemoryModel.SC || memoryModel == EMemoryModel.TSO) {
 
-         Iterator<AddressValuePair> i = buf.getAddressValuePairs().iterator();
-         while (i.hasNext()) {
-
-            buffer += "(" + addressValuePairToString(i.next()) + ")";
-            if (i.hasNext()) {
-               buffer += ", ";
+         Iterator<AddressValuePair> addressValuePairIterator = storeBuffer.getAddressValuePairs().iterator();
+         while (addressValuePairIterator.hasNext()) {
+            stringBuffer.append(LEFT_BRACKET);
+            stringBuffer.append(addressValuePairToString(addressValuePairIterator.next()));
+            stringBuffer.append(RIGHT_BRACKET);
+            if (addressValuePairIterator.hasNext()) {
+               stringBuffer.append(", ");
             }
          }
       } else if (memoryModel == EMemoryModel.PSO) {
+         // TODO improve this, by sorting the the addressvaluepairs directly, using a
+         // comparator
          // entries will be represented in alphabetical order
-         ArrayList<String> list = new ArrayList<String>();
-         Iterator<AddressValuePair> i = buf.getAddressValuePairs().iterator();
-         while (i.hasNext()) {
-            Value v = i.next().getAddress().getValue();
-            String value = valueToRawString(v);
-            if (!list.contains(value)) {
-               list.add(value);
+         ArrayList<String> addressNamesInStoreBuffer = new ArrayList<String>();
+
+         for (AddressValuePair addressValuePair : storeBuffer.getAddressValuePairs()) {
+            Value addressValue = addressValuePair.getAddress().getValue();
+            String addressName = valueToLLVMString(addressValue);
+            if (!addressNamesInStoreBuffer.contains(addressName)) {
+               addressNamesInStoreBuffer.add(addressName);
             }
          }
 
-         Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
+         Collections.sort(addressNamesInStoreBuffer, String.CASE_INSENSITIVE_ORDER);
 
-         // create representation in sorted order
-         Iterator<String> sIter = list.iterator();
-         while (sIter.hasNext()) {
-            String addressString = sIter.next();
-
-            i = buf.getAddressValuePairs().iterator();
-            while (i.hasNext()) {
-               AddressValuePair pair = i.next();
-               Value v = pair.getAddress().getValue();
-               if (addressString.equals(valueToRawString(v))) {
-                  buffer += "(" + addressValuePairToString(pair) + ")";
-                  if (sIter.hasNext()) {
-                     buffer += ", ";
+         // Create representation in sorted order
+         Iterator<String> addressNameIterator = addressNamesInStoreBuffer.iterator();
+         while (addressNameIterator.hasNext()) {
+            String addressName = addressNameIterator.next();
+            for (AddressValuePair addressValuePair : storeBuffer.getAddressValuePairs()) {
+               Value addressValue = addressValuePair.getAddress().getValue();
+               if (addressName.equals(valueToLLVMString(addressValue))) {
+                  stringBuffer.append(LEFT_BRACKET);
+                  stringBuffer.append(addressValuePairToString(addressValuePair));
+                  stringBuffer.append(RIGHT_BRACKET);
+                  if (addressNameIterator.hasNext()) {
+                     stringBuffer.append(", ");
                   }
                }
             }
          }
+
       } else {
-         buffer += "not specified";
+         stringBuffer.append("not specified");
       }
 
-      buffer += ">";
-      return buffer;
-   }
-
-
-   public static String addressValuePairToString(AddressValuePair pair) {
-      String result = valueToString(pair.getAddress().getValue()) + ": ";
-      Iterator<Parameter> i = pair.getValues().iterator();
-      while (i.hasNext()) {
-         Parameter param = i.next();
-         result += GraphUtility.valueToString(param.getValue());
-         if (i.hasNext()) {
-            result += ", ";
-         }
-      }
-      return result;
+      stringBuffer.append(">");
+      return stringBuffer.toString();
    }
 
 
    /**
-    * Returns the pc of the given instruction in the given list of all instructions
+    * Returns the string representation of the given address value pair.
     * 
-    * @param instruction
-    * @param instructions
-    * @return
+    * @param addressValuePair the address value pair to represent as a string
+    * @return the string representation of the given address value pair
+    */
+   public static String addressValuePairToString(AddressValuePair addressValuePair) {
+      StringBuffer stringBuffer = new StringBuffer(valueToString(addressValuePair.getAddress().getValue()));
+      stringBuffer.append(": ");
+      Iterator<Parameter> parameterIterator = addressValuePair.getValues().iterator();
+      while (parameterIterator.hasNext()) {
+         Parameter parameter = parameterIterator.next();
+         stringBuffer.append(GraphUtility.valueToString(parameter.getValue()));
+         if (parameterIterator.hasNext()) {
+            stringBuffer.append(", ");
+         }
+      }
+      return stringBuffer.toString();
+   }
+
+
+   /**
+    * Returns the pc of the given instruction in the given list of all instructions.
+    * 
+    * @param instruction the instruction to obtain the pc for
+    * @param instructions the list of all instructions.
+    * @return the pc of the given instruction in the given list of all instructions, {@code -1}, if
+    *         the instruction is not found
     */
    public static int getPcOfInstruction(Instruction instruction, List<Instruction> instructions) {
       for (int i = 0; i < instructions.size(); i++) {
@@ -297,16 +290,18 @@ public abstract class GraphUtility {
 
 
    /**
-    * Checks wether a location is contained in the given list, which represents the combination of
-    * PC and StoreBuffer
+    * Checks whether a store buffer graph node is contained in the given list, which represents the
+    * combination of PC and store buffer.
     * 
-    * @param list
-    * @param location
+    * @param storeBufferGraphNodes the list to search for the according node
+    * @param pc the pc to seach for
+    * @param storeBuffer the store buffer to search for
+    * @param memoryModel the memory model to consider
     * @return the represented location or null, if there is none
     */
-   public static ControlFlowLocation getLocationRepresentedBy(List<ControlFlowLocation> list, int pc, StoreBuffer storeBuffer,
-         EMemoryModel memoryModel) {
-      for (ControlFlowLocation loc : list) {
+   public static ControlFlowLocation getLocationRepresentedBy(List<ControlFlowLocation> storeBufferGraphNodes, int pc,
+         StoreBuffer storeBuffer, EMemoryModel memoryModel) {
+      for (ControlFlowLocation loc : storeBufferGraphNodes) {
          if (isRepresentedBy(loc, pc, storeBuffer, memoryModel)) {
             return loc;
          }
@@ -316,62 +311,35 @@ public abstract class GraphUtility {
 
 
    /**
-    * Checks wether the given pair is in the given list
+    * Checks whether the given instruction is a synchronizing instruction.
     * 
-    * @param list
-    * @param pair
-    * @return true if pair is in list, else false
+    * @param instruction the instruction to check
+    * @return {@code true}, if the given instruction is a synchronizing instruction, {@code false}
+    *         else
     */
-   public static boolean isAVPInList(List<AddressValuePair> list, AddressValuePair pair) {
-      String pairString = addressValuePairToString(pair);
-
-      for (AddressValuePair p : list) {
-         if (pairString.equalsIgnoreCase(addressValuePairToString(p))) {
-            return true;
-         }
-      }
-      return false;
-   }
-
-
-   /**
-    * Retruns a list of all nodes that are adjacent to the given location
-    * 
-    * @param l
-    * @return
-    */
-   public static ArrayList<ControlFlowLocation> getAdjacentNodes(ControlFlowLocation l) {
-      ArrayList<ControlFlowLocation> adjacents = new ArrayList<ControlFlowLocation>();
-      for (Transition t : l.getOutgoing()) {
-         adjacents.add(t.getTarget());
-      }
-      return adjacents;
-   }
-
-
-   public static boolean isSynch(Instruction instruction) {
+   public static boolean isSynchronizingInstruction(Instruction instruction) {
       return (instruction instanceof Fence || instruction instanceof CmpXchg || instruction instanceof Return
             || instruction instanceof AtomicRMW || instruction instanceof Invoke);
    }
 
 
    /**
-    * Gets called to get a label for the given transition
+    * Creates a string representation of the given transition, consisting of the name of the
+    * instruction linked with the transition and its parameters.
     * 
-    * @param t transition that needs a label
-    * @return label for the transition
+    * @param transition the transition to create the string representation of
+    * @return string representation of the transition
     */
-   public static String getNewTransitionLabel(Transition t) {
-      String result = "";
+   public static String createStringRepresentationOfTransition(Transition transition) {
 
-      if (t instanceof FlushTransition) {
+      if (transition instanceof FlushTransition) {
 
-         if (!t.getSource().getBuffer().getAddressValuePairs().isEmpty()) {
+         if (!transition.getSource().getBuffer().getAddressValuePairs().isEmpty()) {
 
-            if (t.getDiagram().getMemoryModel() == EMemoryModel.TSO.getModelId()) {
+            if (transition.getDiagram().getMemoryModel() == EMemoryModel.TSO.getModelId()) {
                // this is TSO specific as the whole pair
-               AddressValuePair p = t.getSource().getBuffer().getAddressValuePairs().get(0);
-               return CFGConstants.FLUSH + "(" + addressValuePairToString(p) + ")";
+               AddressValuePair p = transition.getSource().getBuffer().getAddressValuePairs().get(0);
+               return CFGConstants.FLUSH + LEFT_BRACKET + addressValuePairToString(p) + RIGHT_BRACKET;
             }
             return CFGConstants.FLUSH; // TODO compute what was flushed for PSO
          }
@@ -379,29 +347,31 @@ public abstract class GraphUtility {
          throw new RuntimeException("Found flush transition for an empty buffer!");
       }
 
-      if (t instanceof EarlyReadTransition) {
-         String s = addressToString(((Load) t.getInstruction()).getResult());
+      if (transition instanceof EarlyReadTransition) {
+         String s = addressToString(((Load) transition.getInstruction()).getResult());
          s += CFGConstants.ASSIGN;
-         s += ((EarlyReadTransition) t).getAssignmentExpression();
+         s += ((EarlyReadTransition) transition).getAssignmentExpression();
          return s;
       }
 
-      if (t instanceof WriteDefChainTransition) {
-         WriteDefChainTransition wdc = (WriteDefChainTransition) t;
+      if (transition instanceof WriteDefChainTransition) {
+         WriteDefChainTransition wdc = (WriteDefChainTransition) transition;
          Store store = (Store) wdc.getInstruction();
          if (wdc.getCopyAddress() != null && wdc.getCopyValue() != null) {
             String s = addressToString(wdc.getCopyAddress()) + CFGConstants.ASSIGN + parameterValueToString(store.getTargetAddress())
                   + "; " + addressToString(wdc.getCopyValue()) + CFGConstants.ASSIGN + parameterValueToString(store.getValue()) + "; "
-                  + CFGConstants.STORE + "(" + wdc.getCopyValue().getName() + ", " + wdc.getCopyAddress().getName() + ")";
+                  + CFGConstants.STORE + LEFT_BRACKET + wdc.getCopyValue().getName() + ", " + wdc.getCopyAddress().getName()
+                  + RIGHT_BRACKET;
             return s;
          } else if (wdc.getCopyValue() != null) {
             String s = addressToString(wdc.getCopyValue()) + CFGConstants.ASSIGN + parameterValueToString(store.getValue()) + "; "
-                  + CFGConstants.STORE + "(" + wdc.getCopyValue().getName() + ", " + parameterValueToString(store.getTargetAddress()) + ")";
+                  + CFGConstants.STORE + LEFT_BRACKET + wdc.getCopyValue().getName() + ", "
+                  + parameterValueToString(store.getTargetAddress()) + RIGHT_BRACKET;
             return s;
          } else {
             String s = addressToString(wdc.getCopyAddress()) + CFGConstants.ASSIGN + parameterValueToString(store.getTargetAddress())
-                  + "; " + CFGConstants.STORE + "(" + parameterValueToString(store.getValue()) + ", " + wdc.getCopyAddress().getName()
-                  + ")";
+                  + "; " + CFGConstants.STORE + LEFT_BRACKET + parameterValueToString(store.getValue()) + ", "
+                  + wdc.getCopyAddress().getName() + RIGHT_BRACKET;
             return s;
          }
 
@@ -410,156 +380,184 @@ public abstract class GraphUtility {
 
       // special transition done
       // the following use normal transitions
+      StringBuffer stringBuffer = new StringBuffer();
 
-      if (t.getInstruction() == null) {
+      if (transition.getInstruction() == null) {
          return CFGConstants.TODO;
       }
 
-      Instruction instruction = t.getInstruction();
+      Instruction instruction = transition.getInstruction();
       if (instruction instanceof Load) {
-         Load instr = (Load) t.getInstruction();
-         result += addressToString(instr.getResult()) + CFGConstants.ASSIGN;
-         result += CFGConstants.LOAD + CFGConstants.WS + "(" + parameterValueToString(instr.getAddress()) + ")";
+         Load instr = (Load) transition.getInstruction();
+         stringBuffer.append(addressToString(instr.getResult()));
+         stringBuffer.append(CFGConstants.ASSIGN);
+         stringBuffer.append(CFGConstants.LOAD);
+         stringBuffer.append(CFGConstants.WS);
+         stringBuffer.append(LEFT_BRACKET);
+         stringBuffer.append(parameterValueToString(instr.getAddress()));
+         stringBuffer.append(RIGHT_BRACKET);
       } else if (instruction instanceof Store) {
-         Store instr = (Store) t.getInstruction();
-         result += CFGConstants.STORE + "(" + parameterValueToString(instr.getValue()) + ", "
-               + parameterValueToString(instr.getTargetAddress()) + ")";
+         Store instr = (Store) transition.getInstruction();
+         stringBuffer.append(CFGConstants.STORE);
+         stringBuffer.append(LEFT_BRACKET);
+         stringBuffer.append(parameterValueToString(instr.getValue()));
+         stringBuffer.append(", ");
+         stringBuffer.append(parameterValueToString(instr.getTargetAddress()));
+         stringBuffer.append(RIGHT_BRACKET);
       } else if (instruction instanceof Branch) {
-         if (t instanceof GuardedTransition) {
-            return ((GuardedTransition) t).getCondition();
+         if (transition instanceof GuardedTransition) {
+            return ((GuardedTransition) transition).getCondition();
          } else {
-            return CFGConstants.BRANCH + CFGConstants.WS + CFGConstants.PC_PREF + t.getTarget().getPc();
+            return CFGConstants.BRANCH + CFGConstants.WS + CFGConstants.PC_PREFIX + transition.getTarget().getPc();
          }
       } else if (instruction instanceof GetElementPtr) {
-         GetElementPtr instr = (GetElementPtr) t.getInstruction();
-         result += addressToString(instr.getResult()) + CFGConstants.ASSIGN;
-         result += CFGConstants.GETELEMENENTPTR + "(";
-         result += parameterValueToString(instr.getAggregate()) + ", ";
+         GetElementPtr instr = (GetElementPtr) transition.getInstruction();
+         stringBuffer.append(addressToString(instr.getResult()));
+         stringBuffer.append(CFGConstants.ASSIGN);
+         stringBuffer.append(CFGConstants.GETELEMENENTPTR);
+         stringBuffer.append(LEFT_BRACKET);
+         stringBuffer.append(parameterValueToString(instr.getAggregate()));
+         stringBuffer.append(", ");
          for (int i = 0; i < instr.getIndices().size(); i++) {
-            result += parameterValueToString(instr.getIndices().get(i));
+            stringBuffer.append(parameterValueToString(instr.getIndices().get(i)));
             if (i + 1 < instr.getIndices().size()) {
-               result += ", ";
+               stringBuffer.append(", ");
             }
          }
-         return result + ")";
+         return stringBuffer + RIGHT_BRACKET;
       } else if (instruction instanceof CmpXchg) {
-
-         CmpXchg instr = (CmpXchg) t.getInstruction();
-         result += addressToString(instr.getResult()) + CFGConstants.ASSIGN;
-         result += "CAS(";
-         result += parameterValueToString(instr.getAddress()) + ", ";
-         result += parameterValueToString(instr.getValue()) + ", ";
-         result += parameterValueToString(instr.getNewValue()) + ")";
+         CmpXchg instr = (CmpXchg) transition.getInstruction();
+         stringBuffer.append(addressToString(instr.getResult()));
+         stringBuffer.append(CFGConstants.ASSIGN);
+         stringBuffer.append("CAS(");
+         stringBuffer.append(parameterValueToString(instr.getAddress()));
+         stringBuffer.append(", ");
+         stringBuffer.append(parameterValueToString(instr.getValue()));
+         stringBuffer.append(", ");
+         stringBuffer.append(parameterValueToString(instr.getNewValue()));
+         stringBuffer.append(RIGHT_BRACKET);
       } else if (instruction instanceof Call) {
 
-         Call instr = (Call) t.getInstruction();
+         Call instr = (Call) transition.getInstruction();
          if (instr.getResult() != null) {
-            result += addressToString(instr.getResult()) + CFGConstants.ASSIGN;
+            stringBuffer.append(addressToString(instr.getResult()));
+            stringBuffer.append(CFGConstants.ASSIGN);
          }
-         result += CFGConstants.CALL + CFGConstants.WS;
-         result += parameterValueToString(instr.getFunction());
-         result += parameterListToString(instr.getPList());
+         stringBuffer.append(CFGConstants.CALL);
+         stringBuffer.append(CFGConstants.WS);
+         stringBuffer.append(parameterValueToString(instr.getFunction()));
+         stringBuffer.append(parameterListToString(instr.getPList()));
       } else if (instruction instanceof Alloc) {
-         Alloc instr = (Alloc) t.getInstruction();
-         result += addressToString(instr.getResult()) + CFGConstants.ASSIGN;
-         result += CFGConstants.ALLOC + CFGConstants.WS;
-         result += clean(typeUseToString(instr.getType()));
+         Alloc instr = (Alloc) transition.getInstruction();
+         stringBuffer.append(addressToString(instr.getResult()));
+         stringBuffer.append(CFGConstants.ASSIGN);
+         stringBuffer.append(CFGConstants.ALLOC);
+         stringBuffer.append(CFGConstants.WS);
+         stringBuffer.append(clean(typeUseToString(instr.getType())));
       } else if (instruction instanceof ArithmeticOperation) {
-         ArithmeticOperation instr = (ArithmeticOperation) t.getInstruction();
-         result += addressToString(instr.getResult()) + CFGConstants.ASSIGN;
+         ArithmeticOperation instr = (ArithmeticOperation) transition.getInstruction();
+         stringBuffer.append(addressToString(instr.getResult()));
+         stringBuffer.append(CFGConstants.ASSIGN);
 
          String operation = instr.getOperation();
-         result += valueToString(instr.getValue1()) + CFGConstants.WS;
+         stringBuffer.append(valueToString(instr.getValue1()));
+         stringBuffer.append(CFGConstants.WS);
          if (operation.equals("add") || operation.equals("fadd")) {
-            result += "+ ";
+            stringBuffer.append("+ ");
          } else if (operation.equals("sub") || operation.equals("fsub")) {
-            result += "- ";
+            stringBuffer.append("- ");
          } else if (operation.equals("mul") || operation.equals("fmul")) {
-            result += "* ";
+            stringBuffer.append("* ");
          } else if (operation.equals("udiv") || operation.equals("sdiv") || operation.equals("fdiv")) {
-            result += ": ";
+            stringBuffer.append(": ");
          } else if (operation.equals("urem") || operation.equals("srem") || operation.equals("frem")) {
-            result += "% ";
+            stringBuffer.append("% ");
          }
-         result += valueToString(instr.getValue2());
+         stringBuffer.append(valueToString(instr.getValue2()));
       } else if (instruction instanceof LogicOperation) {
-         LogicOperation instr = (LogicOperation) t.getInstruction();
-         result += addressToString(instr.getResult()) + CFGConstants.ASSIGN;
+         LogicOperation instr = (LogicOperation) transition.getInstruction();
+         stringBuffer.append(addressToString(instr.getResult()));
+         stringBuffer.append(CFGConstants.ASSIGN);
          String operation = instr.getOperation();
-         result += valueToString(instr.getValue1()) + CFGConstants.WS;
+         stringBuffer.append(valueToString(instr.getValue1()));
+         stringBuffer.append(CFGConstants.WS);
          if (operation.equals("shl")) {
-            result += "<< ";
+            stringBuffer.append("<< ");
          } else if (operation.equals("lshr")) {
-            result += ">>[L] ";
+            stringBuffer.append(">>[L] ");
          } else if (operation.equals("ashr")) {
-            result += ">>[A] ";
+            stringBuffer.append(">>[A] ");
          } else if (operation.equals("and")) {
-            result += "& ";
+            stringBuffer.append("& ");
          } else if (operation.equals("or")) {
-            result += "| ";
+            stringBuffer.append("| ");
          } else if (operation.equals("xor")) {
-            result += "^ ";
+            stringBuffer.append("^ ");
          }
-         result += valueToString(instr.getValue2());
+         stringBuffer.append(valueToString(instr.getValue2()));
       }
       // Compare
       else if (instruction instanceof Compare) {
-         Compare instr = (Compare) t.getInstruction();
-         result += addressToString(instr.getResult()) + CFGConstants.ASSIGN + "(";
+         Compare instr = (Compare) transition.getInstruction();
+         stringBuffer.append(addressToString(instr.getResult()));
+         stringBuffer.append(CFGConstants.ASSIGN);
+         stringBuffer.append(LEFT_BRACKET);
          String compare = instr.getCond();
          if (compare.equals(CFGConstants.FALSE)) {
-            result += CFGConstants.FALSE;
-            return result;
+            stringBuffer.append(CFGConstants.FALSE);
+            return stringBuffer.toString();
          } else if (compare.equals(CFGConstants.TRUE)) {
-            result += CFGConstants.TRUE;
-            return result;
+            stringBuffer.append(CFGConstants.TRUE);
+            return stringBuffer.toString();
          }
-         result += valueToString(instr.getOperand1()) + CFGConstants.WS;
+         stringBuffer.append(valueToString(instr.getOperand1()));
+         stringBuffer.append(CFGConstants.WS);
          if (compare.equals("eq")) {
-            result += "== ";
+            stringBuffer.append("== ");
          } else if (compare.equals("ne")) {
-            result += "!= ";
+            stringBuffer.append("!= ");
          } else if (compare.equals("ugt") || compare.equals("sgt")) {
-            result += "> ";
+            stringBuffer.append("> ");
          } else if (compare.equals("uge") || compare.equals("sge")) {
-            result += ">= ";
+            stringBuffer.append(">= ");
          } else if (compare.equals("ult") || compare.equals("slt")) {
-            result += "< ";
+            stringBuffer.append("< ");
          } else if (compare.equals("ule") || compare.equals("sle")) {
-            result += "<= ";
+            stringBuffer.append("<= ");
          } else if (compare.equals("oeq")) {
-            result += "=[o] ";
+            stringBuffer.append("=[o] ");
          } else if (compare.equals("ogt")) {
-            result += ">[o] ";
+            stringBuffer.append(">[o] ");
          } else if (compare.equals("oge")) {
-            result += ">=[o] ";
+            stringBuffer.append(">=[o] ");
          } else if (compare.equals("olt")) {
-            result += "<[o] ";
+            stringBuffer.append("<[o] ");
          } else if (compare.equals("ole")) {
-            result += "<=[o] ";
+            stringBuffer.append("<=[o] ");
          } else if (compare.equals("one")) {
-            result += "!=[o] ";
+            stringBuffer.append("!=[o] ");
          } else if (compare.equals("ueq")) {
-            result += "=[u] ";
+            stringBuffer.append("=[u] ");
          } else if (compare.equals("ugt")) {
-            result += ">[u] ";
+            stringBuffer.append(">[u] ");
          } else if (compare.equals("uge")) {
-            result += ">=[u] ";
+            stringBuffer.append(">=[u] ");
          } else if (compare.equals("ult")) {
-            result += "<[u] ";
+            stringBuffer.append("<[u] ");
          } else if (compare.equals("ule")) {
-            result += "<=[u] ";
+            stringBuffer.append("<=[u] ");
          } else if (compare.equals("une")) {
-            result += "!=[u] ";
+            stringBuffer.append("!=[u] ");
          } else if (compare.equals("ord")) {
-            result += "orderd ";
+            stringBuffer.append("orderd ");
          } else if (compare.equals("uno")) {
-            result += "not orderd ";
+            stringBuffer.append("not orderd ");
          }
-         result += valueToString(instr.getOperand2()) + ")";
+         stringBuffer.append(valueToString(instr.getOperand2()));
+         stringBuffer.append(RIGHT_BRACKET);
       } else if (instruction instanceof Return) {
-         result += CFGConstants.RETURN;
-         EObject returnValue = ((Return) t.getInstruction()).getValue();
+         stringBuffer.append(CFGConstants.RETURN);
+         EObject returnValue = ((Return) transition.getInstruction()).getValue();
          Value value = null;
          if (returnValue instanceof Parameter) {
             value = ((Parameter) returnValue).getValue();
@@ -568,90 +566,102 @@ public abstract class GraphUtility {
          }
 
          if (value != null) {
-            result += CFGConstants.WS + valueToString(value) + CFGConstants.WS;
+            stringBuffer.append(CFGConstants.WS);
+            stringBuffer.append(valueToString(value));
+            stringBuffer.append(CFGConstants.WS);
          }
-         return result;
+         return stringBuffer.toString();
       } else if (instruction instanceof Cast) {
-         Cast instr = (Cast) t.getInstruction();
-         result += (addressToString(instr.getResult()) + CFGConstants.ASSIGN + "("
-         // + typeUseToString((TypeUse) instr.getFrom()) + "->"
-               + clean(typeUseToString(instr.getTo())) + ") " + valueToString(instr.getValue()));
+         Cast instr = (Cast) transition.getInstruction();
+         stringBuffer.append(addressToString(instr.getResult()));
+         stringBuffer.append(CFGConstants.ASSIGN);
+         stringBuffer.append(LEFT_BRACKET);
+         stringBuffer.append(clean(typeUseToString(instr.getTo())));
+         stringBuffer.append(") ");
+         stringBuffer.append(valueToString(instr.getValue()));
       } else if (instruction instanceof Invoke) {
-         Invoke instr = (Invoke) t.getInstruction();
-         result += CFGConstants.INVOKE + CFGConstants.WS + addressToString(instr.getName()) + parameterListToString(instr.getPList());
-         return result;
+         Invoke instr = (Invoke) transition.getInstruction();
+         stringBuffer.append(CFGConstants.INVOKE);
+         stringBuffer.append(CFGConstants.WS);
+         stringBuffer.append(addressToString(instr.getName()));
+         stringBuffer.append(parameterListToString(instr.getPList()));
+         return stringBuffer.toString();
       }
       // Fence
       else if (instruction instanceof Fence) {
          return CFGConstants.FENCE;
-         // Fence instr = (Fence) t.getInstruction();
-         // result += instr.getOrdering();
       }
       // AtomicRMW
       else if (instruction instanceof AtomicRMW) {
-         result += "atomicRMW( ";
-         AtomicRMW instr = (AtomicRMW) t.getInstruction();
+         stringBuffer.append("atomicRMW( ");
+         AtomicRMW instr = (AtomicRMW) transition.getInstruction();
          String operation = instr.getOperation();
          if (operation.equals("xchg")) {
-            result += parameterValueToString(instr.getAddress());
-            result += " <-> ";
-            result += parameterValueToString(instr.getArgument());
+            stringBuffer.append(parameterValueToString(instr.getAddress()));
+            stringBuffer.append(" <-> ");
+            stringBuffer.append(parameterValueToString(instr.getArgument()));
          } else if (operation.equals("add")) {
-            result += parameterValueToString(instr.getAddress());
-            result += " = ";
-            result += parameterValueToString(instr.getAddress());
-            result += " + ";
-            result += parameterValueToString(instr.getArgument());
+            stringBuffer.append(parameterValueToString(instr.getAddress()));
+            stringBuffer.append(" = ");
+            stringBuffer.append(parameterValueToString(instr.getAddress()));
+            stringBuffer.append(" + ");
+            stringBuffer.append(parameterValueToString(instr.getArgument()));
          } else if (operation.equals("sub")) {
-            result += parameterValueToString(instr.getAddress());
-            result += " = ";
-            result += parameterValueToString(instr.getAddress());
-            result += " - ";
-            result += parameterValueToString(instr.getArgument());
+            stringBuffer.append(parameterValueToString(instr.getAddress()));
+            stringBuffer.append(" = ");
+            stringBuffer.append(parameterValueToString(instr.getAddress()));
+            stringBuffer.append(" - ");
+            stringBuffer.append(parameterValueToString(instr.getArgument()));
          } else if (operation.equals("and")) {
-            result += parameterValueToString(instr.getAddress());
-            result += " = ";
-            result += parameterValueToString(instr.getAddress());
-            result += CFGConstants.WS + CFGConstants.WEDGE + CFGConstants.WS;
-            result += parameterValueToString(instr.getArgument());
+            stringBuffer.append(parameterValueToString(instr.getAddress()));
+            stringBuffer.append(" = ");
+            stringBuffer.append(parameterValueToString(instr.getAddress()));
+            stringBuffer.append(CFGConstants.WS);
+            stringBuffer.append(CFGConstants.WEDGE);
+            stringBuffer.append(CFGConstants.WS);
+            stringBuffer.append(parameterValueToString(instr.getArgument()));
          } else if (operation.equals("nand")) {
-            result += parameterValueToString(instr.getAddress());
-            result += " = ";
-            result += parameterValueToString(instr.getAddress());
-            result += " !& ";
-            result += parameterValueToString(instr.getArgument());
+            stringBuffer.append(parameterValueToString(instr.getAddress()));
+            stringBuffer.append(" = ");
+            stringBuffer.append(parameterValueToString(instr.getAddress()));
+            stringBuffer.append(" !& ");
+            stringBuffer.append(parameterValueToString(instr.getArgument()));
          } else if (operation.equals("or")) {
-            result += parameterValueToString(instr.getAddress());
-            result += " = ";
-            result += parameterValueToString(instr.getAddress());
-            result += CFGConstants.WS + CFGConstants.VEE + CFGConstants.WS;
-            result += parameterValueToString(instr.getArgument());
+            stringBuffer.append(parameterValueToString(instr.getAddress()));
+            stringBuffer.append(" = ");
+            stringBuffer.append(parameterValueToString(instr.getAddress()));
+            stringBuffer.append(CFGConstants.WS);
+            stringBuffer.append(CFGConstants.VEE);
+            stringBuffer.append(CFGConstants.WS);
+            stringBuffer.append(parameterValueToString(instr.getArgument()));
          } else if (operation.equals("xor")) {
-            result += parameterValueToString(instr.getAddress());
-            result += " = ";
-            result += parameterValueToString(instr.getAddress());
-            result += " xor ";
-            result += parameterValueToString(instr.getArgument());
+            stringBuffer.append(parameterValueToString(instr.getAddress()));
+            stringBuffer.append(" = ");
+            stringBuffer.append(parameterValueToString(instr.getAddress()));
+            stringBuffer.append(" xor ");
+            stringBuffer.append(parameterValueToString(instr.getArgument()));
          } else if (operation.equals("max") || operation.equals("umax")) {
-            result += parameterValueToString(instr.getAddress());
-            result += " = max(";
-            result += parameterValueToString(instr.getAddress());
-            result += ", ";
-            result += parameterValueToString(instr.getArgument());
-            result += ") ";
+            stringBuffer.append(parameterValueToString(instr.getAddress()));
+            stringBuffer.append(" = max(");
+            stringBuffer.append(parameterValueToString(instr.getAddress()));
+            stringBuffer.append(", ");
+            stringBuffer.append(parameterValueToString(instr.getArgument()));
+            stringBuffer.append(") ");
          } else if (operation.equals("min") || operation.equals("umin")) {
-            result += parameterValueToString(instr.getAddress());
-            result += " = min(";
-            result += parameterValueToString(instr.getAddress());
-            result += ", ";
-            result += parameterValueToString(instr.getArgument());
-            result += ")";
+            stringBuffer.append(parameterValueToString(instr.getAddress()));
+            stringBuffer.append(" = min(");
+            stringBuffer.append(parameterValueToString(instr.getAddress()));
+            stringBuffer.append(", ");
+            stringBuffer.append(parameterValueToString(instr.getArgument()));
+            stringBuffer.append(RIGHT_BRACKET);
          }
-         result += " )";
+         stringBuffer.append(" )");
       } else if (instruction instanceof Phi) {
-         Phi phiInstruction = (Phi) t.getInstruction();
-         result = addressToString(phiInstruction.getResult());
-         result += " := " + CFGConstants.PHI + " ";
+         Phi phiInstruction = (Phi) transition.getInstruction();
+         stringBuffer = new StringBuffer(addressToString(phiInstruction.getResult()));
+         stringBuffer.append(" := ");
+         stringBuffer.append(CFGConstants.PHI);
+         stringBuffer.append(" ");
 
          FunctionBody body = null;
          EObject o = phiInstruction.eContainer().eContainer();
@@ -661,9 +671,9 @@ public abstract class GraphUtility {
             throw new RuntimeException("Could not resolve FunctionBody of phi instruction");
          }
 
-         Iterator<PhiCase> i = phiInstruction.getCases().iterator();
-         while (i.hasNext()) {
-            PhiCase phiCase = i.next();
+         Iterator<PhiCase> phiCaseIterator = phiInstruction.getCases().iterator();
+         while (phiCaseIterator.hasNext()) {
+            PhiCase phiCase = phiCaseIterator.next();
             String caseLabel = phiCase.getLabel().replace("%", "");
             int sourcePC = -1;
 
@@ -679,114 +689,141 @@ public abstract class GraphUtility {
 
             // we use the PC instead of the original label, since we don't
             // have the labels in the store buffer graph anymore
-            result += "[" + valueToString(phiCase.getValue()) + ", " + CFGConstants.PC_PREF + sourcePC + "]";
+            stringBuffer.append("[");
+            stringBuffer.append(valueToString(phiCase.getValue()));
+            stringBuffer.append(", ");
+            stringBuffer.append(CFGConstants.PC_PREFIX);
+            stringBuffer.append(sourcePC);
+            stringBuffer.append("]");
 
-            if (i.hasNext()) {
-               result += ", ";
+            if (phiCaseIterator.hasNext()) {
+               stringBuffer.append(", ");
             }
          }
       }
       // not-implemented
       else {
-         result += instruction.toString();
+         stringBuffer.append(instruction.toString());
       }
-      return result;
+      return stringBuffer.toString();
    }
 
 
    /**
-    * creates string representation of the parameter list
+    * Creates the string representation of the given parameter list.
     * 
-    * @param pList
-    * @return
+    * @param parameterList the parameter list to create the string representation of
+    * @return the string representation of the given parameter list
     */
-   public static String parameterListToString(ParameterList pList) {
-      String result = "(";
-      Iterator<Parameter> i = pList.getParams().iterator();
-      while (i.hasNext()) {
-         Parameter p = i.next();
-         if (i.hasNext()) {
-            result += parameterValueToString(p) + ", ";
-         } else {
-            result += parameterValueToString(p);
+   public static String parameterListToString(ParameterList parameterList) {
+      StringBuffer stringBuffer = new StringBuffer(LEFT_BRACKET);
+      Iterator<Parameter> parameterIterator = parameterList.getParams().iterator();
+      while (parameterIterator.hasNext()) {
+         Parameter parameter = parameterIterator.next();
+         stringBuffer.append(parameterValueToString(parameter));
+         if (parameterIterator.hasNext()) {
+            stringBuffer.append(", ");
          }
       }
-      result += ")";
-      return result;
+      stringBuffer.append(RIGHT_BRACKET);
+      return stringBuffer.toString();
    }
 
 
    /**
-    * Adds a type
+    * Creates the string representation of the given type use.
     * 
-    * @param type the type to add to the String.
-    * @return concatenated String
+    * @param typeUse the type use to be represented as a string
+    * @return the string representation of the given type use
     */
-   public static String typeUseToString(TypeUse type) {
-      String result;
-      if (type instanceof Predefined) {
-         result = ((Predefined) type).getType();
-         if (((Predefined) type).getPointer() != null) {
-            result += ((Predefined) type).getPointer();
+   public static String typeUseToString(TypeUse typeUse) {
+      StringBuffer stringBuffer = new StringBuffer();
+      if (typeUse instanceof Predefined) {
+         Predefined predefinedTypeUse = (Predefined) typeUse;
+         stringBuffer = new StringBuffer(predefinedTypeUse.getType());
+         if (predefinedTypeUse.getPointer() != null) {
+            stringBuffer.append(predefinedTypeUse.getPointer());
          }
-      } else if (type instanceof AddressUse) {
-         result = ((AddressUse) type).getAddress().getName();
-         if (((AddressUse) type).getPointer() != null) {
-            result += ((AddressUse) type).getPointer();
+      } else if (typeUse instanceof AddressUse) {
+         AddressUse addressUse = (AddressUse) typeUse;
+         stringBuffer = new StringBuffer(addressUse.getAddress().getName());
+         if (addressUse.getPointer() != null) {
+            stringBuffer.append(addressUse.getPointer());
          }
-      } else if (type instanceof FunctionType) {
-         FunctionType ftype = (FunctionType) type;
-         result = typeToString(ftype.getReturnType()) + "(";
+      } else if (typeUse instanceof FunctionType) {
+         FunctionType ftype = (FunctionType) typeUse;
+         stringBuffer = new StringBuffer(typeToString(ftype.getReturnType()));
+         stringBuffer.append(LEFT_BRACKET);
          Iterator<FunctionParameter> i = ftype.getParameter().getParams().iterator();
          while (i.hasNext()) {
-            result += typeToString(i.next());
+            stringBuffer.append(typeToString(i.next()));
             if (i.hasNext()) {
-               result += ", ";
+               stringBuffer.append(", ");
             }
          }
-         result += ")";
+         stringBuffer.append(RIGHT_BRACKET);
       } else {
-         result = type.toString();
+         return typeUse.toString();
       }
-      return result;
+      return stringBuffer.toString();
    }
 
 
-   public static String aggregateTypeToString(Aggregate_Type type) {
-      String result = null;
-      if (type instanceof Array) {
-         Array array = (Array) type;
+   /**
+    * Creates the string representation of the given aggregate type.
+    * 
+    * @param aggregateType the aggregate type to represent
+    * @return the string representation of the given aggregate type
+    */
+   public static String aggregateTypeToString(Aggregate_Type aggregateType) {
+      StringBuffer stringBuffer = new StringBuffer();
+      if (aggregateType instanceof Array) {
+         Array array = (Array) aggregateType;
          EObject arrayType = array.getType();
-         result = "[" + array.getLength() + " x " + typeToString(arrayType) + "]";
+         stringBuffer = new StringBuffer("[");
+         stringBuffer.append(array.getLength());
+         stringBuffer.append(" x ");
+         stringBuffer.append(typeToString(arrayType));
+         stringBuffer.append("]");
          if (array.getPointer() != null) {
-            result += array.getPointer();
+            stringBuffer.append(array.getPointer());
          }
-      } else if (type instanceof Vector) {
-         Vector vector = (Vector) type;
-         EObject arrayType = vector.getType();
+      } else if (aggregateType instanceof Vector) {
+         Vector vector = (Vector) aggregateType;
+         EObject vectorType = vector.getType();
 
-         result = "[" + vector.getLength() + " x " + typeToString(arrayType) + "]";
-      } else if (type instanceof Structure) {
-         Structure struct = (Structure) type;
-         result = "{";
+         stringBuffer = new StringBuffer("[");
+         stringBuffer.append(vector.getLength());
+         stringBuffer.append(" x ");
+         stringBuffer.append(typeToString(vectorType));
+         stringBuffer.append("]");
+      } else if (aggregateType instanceof Structure) {
+         Structure struct = (Structure) aggregateType;
+         stringBuffer = new StringBuffer("{");
          EList<EObject> types = struct.getTypes();
-         Iterator<EObject> i = types.iterator();
-         while (i.hasNext()) {
-            result += typeToString(i.next());
-            if (i.hasNext()) {
-               result += ", ";
+         Iterator<EObject> typeIterator = types.iterator();
+         while (typeIterator.hasNext()) {
+            stringBuffer.append(typeToString(typeIterator.next()));
+            if (typeIterator.hasNext()) {
+               stringBuffer.append(", ");
             }
          }
          if (struct.getPointer() != null) {
-            result += struct.getPointer();
+            stringBuffer.append(struct.getPointer());
          }
-         result += "}";
+         stringBuffer.append("}");
       }
 
-      return result;
+      return stringBuffer.toString();
    }
 
 
+   /**
+    * Creates the string representation of the given type.
+    * 
+    * @param type the type to represent
+    * @return the string representation of the given type
+    */
    public static String typeToString(EObject type) {
       if (type instanceof TypeUse) {
          return typeUseToString((TypeUse) type);
@@ -797,83 +834,102 @@ public abstract class GraphUtility {
    }
 
 
-   private static String addressToString(Address adr) {
-      return clean(adr.getName());
+   /**
+    * Creates the string representation of the given address.
+    * 
+    * @param adress the address to represent
+    * @return the string representation of the given address
+    */
+   private static String addressToString(Address adress) {
+      return clean(adress.getName());
    }
 
 
+   /**
+    * Creates the string representation of the given value.
+    * 
+    * @param value the value to represent
+    * @return the string representation of the given value
+    */
    public static String valueToString(Value value) {
-      String result = GraphUtility.valueToRawString(value);
+      String result = GraphUtility.valueToLLVMString(value);
       return clean(result);
    }
 
 
    /**
-    * Add a value to the String
+    * Creates the LLVM string representation of the given value.
     * 
-    * @param value
-    * @return the concatenated String
+    * @param value the value to be represented
+    * @return the LLVM string representation of the given value
     */
-	public static String valueToRawString(Value value)
-	{
-		String result = "";
+   public static String valueToLLVMString(Value value) {
+      StringBuffer stringBuffer = new StringBuffer();
 
-		if (value instanceof AddressUse)
-		{
-			AddressUse aui = (AddressUse) value;
-			result += aui.getAddress().getName();
-		} else if (value instanceof IntegerConstant)
-		{
-			result += ((IntegerConstant) value).getValue();
-		} else if (value instanceof DecimalConstant)
-		{
-			result += ((DecimalConstant) value).getValue();
-		} else if (value instanceof PrimitiveValue)
-		{
-			result += ((PrimitiveValue) value).getValue();
-		} else if (value instanceof NestedGetElementPtr)
-		{
-			// TODO indices are missing and actually a simple representation
-			return "(GetElementPtr" + CFGConstants.WS
-					+ parameterValueToString(((NestedGetElementPtr) value).getAggregate()) + ")";
-		} else if (value instanceof NestedCast)
-		{
-			NestedCast val = (NestedCast) value;
-			result += "(" + typeToString(val.getFrom()) + "-->" + typeToString(val.getTo()) + ")"
-					+ valueToString(val.getValue());
-		} else
-		{
-			result += CFGConstants.TODO;
-		}
+      if (value instanceof AddressUse) {
+         AddressUse addressUse = (AddressUse) value;
+         stringBuffer.append(addressUse.getAddress().getName());
+      } else if (value instanceof IntegerConstant) {
+         stringBuffer.append(((IntegerConstant) value).getValue());
+      } else if (value instanceof DecimalConstant) {
+         stringBuffer.append(((DecimalConstant) value).getValue());
+      } else if (value instanceof PrimitiveValue) {
+         stringBuffer.append(((PrimitiveValue) value).getValue());
+      } else if (value instanceof NestedGetElementPtr) {
+         // TODO indices are missing and actually a simple representation
+         return "(GetElementPtr" + CFGConstants.WS + parameterValueToString(((NestedGetElementPtr) value).getAggregate()) + RIGHT_BRACKET;
+      } else if (value instanceof NestedCast) {
+         NestedCast val = (NestedCast) value;
+         stringBuffer.append(LEFT_BRACKET);
+         stringBuffer.append(typeToString(val.getFrom()));
+         stringBuffer.append("-->");
+         stringBuffer.append(typeToString(val.getTo()));
+         stringBuffer.append(RIGHT_BRACKET);
+         stringBuffer.append(valueToString(val.getValue()));
+      } else {
+         stringBuffer.append(CFGConstants.TODO);
+      }
 
-		return (result + CFGConstants.WS);
-	}
-
-
-   public static String parameterValueToString(Parameter val) {
-      return valueToString(val.getValue());
+      stringBuffer.append(CFGConstants.WS);
+      return stringBuffer.toString();
    }
 
 
    /**
-    * @return a list of all instructions
+    * Creates the string representation of the value of the given parameter.
+    * 
+    * @param parameter the parameter hosting the value to represent
+    * @return the string representation of the value of the given parameter
+    */
+   public static String parameterValueToString(Parameter parameter) {
+      return valueToString(parameter.getValue());
+   }
+
+
+   /**
+    * Creates a list of all instructions in the given function in the order they are given in the
+    * code.
+    * 
+    * @param function the function to gather the instructions for
+    * @return a list of all instructions in the given function in the order they are given in the
+    *         code
     */
    public static ArrayList<Instruction> gatherInstructionsInCodeOrder(FunctionDefinition function) {
       ArrayList<Instruction> list = new ArrayList<Instruction>();
       EList<BasicBlock> blocks = function.getBody().getBlocks();
       for (BasicBlock b : blocks) {
-         for (Instruction i : b.getInstructions()) {
-            list.add(i);
-         }
+         list.addAll(b.getInstructions());
       }
       return list;
    }
 
 
    /**
+    * Returns the address value pair, which is flushed in the given flush transition. NOTE: This
+    * method is used by the .mtl models!
     * 
-    * @param transition
-    * @return AVP that was flushed on this transition
+    * @param transition the flush transition to consider
+    * @return the address value pair, which is flushed in the given transition
     */
    public static AddressValuePair getFlushedAddressValuePair(FlushTransition transition) {
       StoreBuffer sourceBuffer = transition.getSource().getBuffer();
