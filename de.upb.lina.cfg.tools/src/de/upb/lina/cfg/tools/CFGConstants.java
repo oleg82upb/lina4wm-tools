@@ -30,7 +30,6 @@ public class CFGConstants {
 	public static final String CALL = "CALL";
 	public static final String INVOKE = "INVOKE";
 	public static final String TODO = "TODO";
-	public static final String WS = " ";
 	public static final String PC_PREFIX = "L";
 	public static final String PHI = '\u03A6' + "";
 	public static final String VEE = '\u02C5' + "";

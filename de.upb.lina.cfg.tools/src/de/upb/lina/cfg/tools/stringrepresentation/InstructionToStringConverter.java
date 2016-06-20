@@ -36,348 +36,452 @@ import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.Value;
 
 
+/**
+ * This class is responsible for creating the string representation of instructions. In order to do
+ * so, create a new instance of this class and pass it either the instruction or the transition
+ * holding the according instruction. Calling {{@link #createStringRepresentation()} will then
+ * return the string representation of the according instruction. NOTE: Since creating the string
+ * representation of a branch instruction is only possible, if the transition holding the
+ * instruction is known is well, it is a better idea to always initialize the class with the
+ * transition, holding it, if possible.
+ * 
+ * @author Alexander Hetzer
+ *
+ */
 public class InstructionToStringConverter {
    private Instruction instruction;
    private Transition transition;
    private StringBuilder stringBuilder;
 
 
+   /**
+    * Creates a new instruction to string converter, which can be used to create the string
+    * representation of the given function. NOTE: Since creating the string representation of a
+    * branch instruction is only possible, if the transition holding the instruction is known is
+    * well, this constructor should be avoided!
+    * 
+    * @param instruction the instruction to create the string representation of
+    */
    public InstructionToStringConverter(Instruction instruction) {
       this.instruction = instruction;
       this.stringBuilder = new StringBuilder();
    }
 
 
+   /**
+    * Creates a new instruction to string converter, which can be used to create the string
+    * representation of the function hosted by the given transition.
+    * 
+    * @param transition the transition hosting the instruction to create the string representation
+    *           of
+    */
    public InstructionToStringConverter(Transition transition) {
       this(transition.getInstruction());
       this.transition = transition;
    }
 
 
+   /**
+    * Creates the string representation of the instruction, this class was initialized with.
+    * 
+    * @return the string representation of the instruction, this class was initialized with
+    */
    public String createStringRepresentation() {
       if (instruction instanceof Load) {
-         Load load = (Load) instruction;
-         stringBuilder.append(GraphUtility.addressToString(load.getResult()));
-         stringBuilder.append(CFGConstants.ASSIGN);
-         stringBuilder.append(CFGConstants.LOAD);
-         stringBuilder.append(CFGConstants.WS);
-         stringBuilder.append(StringUtils.LEFT_BRACKET);
-         stringBuilder.append(GraphUtility.parameterValueToString(load.getAddress()));
-         stringBuilder.append(StringUtils.RIGHT_BRACKET);
+         createLoadStringRepresentation();
       } else if (instruction instanceof Store) {
-         Store store = (Store) instruction;
-         stringBuilder.append(CFGConstants.STORE);
-         stringBuilder.append(StringUtils.LEFT_BRACKET);
-         stringBuilder.append(GraphUtility.parameterValueToString(store.getValue()));
-         stringBuilder.append(", ");
-         stringBuilder.append(GraphUtility.parameterValueToString(store.getTargetAddress()));
-         stringBuilder.append(StringUtils.RIGHT_BRACKET);
+         createStoreStringRepresentation();
       } else if (instruction instanceof Branch) {
-         if (transition != null) {
-            if (transition instanceof GuardedTransition) {
-               return ((GuardedTransition) transition).getCondition();
-            } else {
-               return CFGConstants.BRANCH + CFGConstants.WS + CFGConstants.PC_PREFIX + transition.getTarget().getPc();
-            }
-         } else {
-            throw new RuntimeException("Cannot create string representation of branch instruction without according transition.");
-         }
+         createBranchStringRepresentation();
       } else if (instruction instanceof GetElementPtr) {
-         GetElementPtr instr = (GetElementPtr) instruction;
-         stringBuilder.append(GraphUtility.addressToString(instr.getResult()));
-         stringBuilder.append(CFGConstants.ASSIGN);
-         stringBuilder.append(CFGConstants.GETELEMENENTPTR);
-         stringBuilder.append(StringUtils.LEFT_BRACKET);
-         stringBuilder.append(GraphUtility.parameterValueToString(instr.getAggregate()));
-         stringBuilder.append(", ");
-         for (int i = 0; i < instr.getIndices().size(); i++) {
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getIndices().get(i)));
-            if (i + 1 < instr.getIndices().size()) {
-               stringBuilder.append(", ");
-            }
-         }
-         return stringBuilder + StringUtils.RIGHT_BRACKET;
+         createGetElementPointerStringRepresentation();
       } else if (instruction instanceof CmpXchg) {
-         CmpXchg instr = (CmpXchg) instruction;
-         stringBuilder.append(GraphUtility.addressToString(instr.getResult()));
-         stringBuilder.append(CFGConstants.ASSIGN);
-         stringBuilder.append("CAS(");
-         stringBuilder.append(GraphUtility.parameterValueToString(instr.getAddress()));
-         stringBuilder.append(", ");
-         stringBuilder.append(GraphUtility.parameterValueToString(instr.getValue()));
-         stringBuilder.append(", ");
-         stringBuilder.append(GraphUtility.parameterValueToString(instr.getNewValue()));
-         stringBuilder.append(StringUtils.RIGHT_BRACKET);
+         createCompareExchangeStringRepresentation();
       } else if (instruction instanceof Call) {
-
-         Call instr = (Call) instruction;
-         if (instr.getResult() != null) {
-            stringBuilder.append(GraphUtility.addressToString(instr.getResult()));
-            stringBuilder.append(CFGConstants.ASSIGN);
-         }
-         stringBuilder.append(CFGConstants.CALL);
-         stringBuilder.append(CFGConstants.WS);
-         stringBuilder.append(GraphUtility.parameterValueToString(instr.getFunction()));
-         stringBuilder.append(GraphUtility.parameterListToString(instr.getPList()));
+         createCallStringRepresentation();
       } else if (instruction instanceof Alloc) {
-         Alloc instr = (Alloc) instruction;
-         stringBuilder.append(GraphUtility.addressToString(instr.getResult()));
-         stringBuilder.append(CFGConstants.ASSIGN);
-         stringBuilder.append(CFGConstants.ALLOC);
-         stringBuilder.append(CFGConstants.WS);
-         stringBuilder.append(GraphUtility.clean(GraphUtility.typeUseToString(instr.getType())));
+         createAllocStringRepresentation();
       } else if (instruction instanceof ArithmeticOperation) {
-         ArithmeticOperation instr = (ArithmeticOperation) instruction;
-         stringBuilder.append(GraphUtility.addressToString(instr.getResult()));
-         stringBuilder.append(CFGConstants.ASSIGN);
-
-         String operation = instr.getOperation();
-         stringBuilder.append(GraphUtility.valueToString(instr.getValue1()));
-         stringBuilder.append(CFGConstants.WS);
-         if (operation.equals("add") || operation.equals("fadd")) {
-            stringBuilder.append("+ ");
-         } else if (operation.equals("sub") || operation.equals("fsub")) {
-            stringBuilder.append("- ");
-         } else if (operation.equals("mul") || operation.equals("fmul")) {
-            stringBuilder.append("* ");
-         } else if (operation.equals("udiv") || operation.equals("sdiv") || operation.equals("fdiv")) {
-            stringBuilder.append(": ");
-         } else if (operation.equals("urem") || operation.equals("srem") || operation.equals("frem")) {
-            stringBuilder.append("% ");
-         }
-         stringBuilder.append(GraphUtility.valueToString(instr.getValue2()));
+         createArithmeticOperationStringRepresentation();
       } else if (instruction instanceof LogicOperation) {
-         LogicOperation instr = (LogicOperation) instruction;
-         stringBuilder.append(GraphUtility.addressToString(instr.getResult()));
-         stringBuilder.append(CFGConstants.ASSIGN);
-         String operation = instr.getOperation();
-         stringBuilder.append(GraphUtility.valueToString(instr.getValue1()));
-         stringBuilder.append(CFGConstants.WS);
-         if (operation.equals("shl")) {
-            stringBuilder.append("<< ");
-         } else if (operation.equals("lshr")) {
-            stringBuilder.append(">>[L] ");
-         } else if (operation.equals("ashr")) {
-            stringBuilder.append(">>[A] ");
-         } else if (operation.equals("and")) {
-            stringBuilder.append("& ");
-         } else if (operation.equals("or")) {
-            stringBuilder.append("| ");
-         } else if (operation.equals("xor")) {
-            stringBuilder.append("^ ");
-         }
-         stringBuilder.append(GraphUtility.valueToString(instr.getValue2()));
-      }
-      // Compare
-      else if (instruction instanceof Compare) {
-         Compare instr = (Compare) instruction;
-         stringBuilder.append(GraphUtility.addressToString(instr.getResult()));
-         stringBuilder.append(CFGConstants.ASSIGN);
-         stringBuilder.append(StringUtils.LEFT_BRACKET);
-         String compare = instr.getCond();
-         if (compare.equals(CFGConstants.FALSE)) {
-            stringBuilder.append(CFGConstants.FALSE);
-            return stringBuilder.toString();
-         } else if (compare.equals(CFGConstants.TRUE)) {
-            stringBuilder.append(CFGConstants.TRUE);
-            return stringBuilder.toString();
-         }
-         stringBuilder.append(GraphUtility.valueToString(instr.getOperand1()));
-         stringBuilder.append(CFGConstants.WS);
-         if (compare.equals("eq")) {
-            stringBuilder.append("== ");
-         } else if (compare.equals("ne")) {
-            stringBuilder.append("!= ");
-         } else if (compare.equals("ugt") || compare.equals("sgt")) {
-            stringBuilder.append("> ");
-         } else if (compare.equals("uge") || compare.equals("sge")) {
-            stringBuilder.append(">= ");
-         } else if (compare.equals("ult") || compare.equals("slt")) {
-            stringBuilder.append("< ");
-         } else if (compare.equals("ule") || compare.equals("sle")) {
-            stringBuilder.append("<= ");
-         } else if (compare.equals("oeq")) {
-            stringBuilder.append("=[o] ");
-         } else if (compare.equals("ogt")) {
-            stringBuilder.append(">[o] ");
-         } else if (compare.equals("oge")) {
-            stringBuilder.append(">=[o] ");
-         } else if (compare.equals("olt")) {
-            stringBuilder.append("<[o] ");
-         } else if (compare.equals("ole")) {
-            stringBuilder.append("<=[o] ");
-         } else if (compare.equals("one")) {
-            stringBuilder.append("!=[o] ");
-         } else if (compare.equals("ueq")) {
-            stringBuilder.append("=[u] ");
-         } else if (compare.equals("ugt")) {
-            stringBuilder.append(">[u] ");
-         } else if (compare.equals("uge")) {
-            stringBuilder.append(">=[u] ");
-         } else if (compare.equals("ult")) {
-            stringBuilder.append("<[u] ");
-         } else if (compare.equals("ule")) {
-            stringBuilder.append("<=[u] ");
-         } else if (compare.equals("une")) {
-            stringBuilder.append("!=[u] ");
-         } else if (compare.equals("ord")) {
-            stringBuilder.append("orderd ");
-         } else if (compare.equals("uno")) {
-            stringBuilder.append("not orderd ");
-         }
-         stringBuilder.append(GraphUtility.valueToString(instr.getOperand2()));
-         stringBuilder.append(StringUtils.RIGHT_BRACKET);
+         createLogicOperationStringRepresentation();
+      } else if (instruction instanceof Compare) {
+         createCompareStringRepresentation();
       } else if (instruction instanceof Return) {
-         stringBuilder.append(CFGConstants.RETURN);
-         EObject returnValue = ((Return) instruction).getValue();
-         Value value = null;
-         if (returnValue instanceof Parameter) {
-            value = ((Parameter) returnValue).getValue();
-         } else if (returnValue instanceof PrimitiveValue) {
-            value = (PrimitiveValue) returnValue;
-         }
-
-         if (value != null) {
-            stringBuilder.append(CFGConstants.WS);
-            stringBuilder.append(GraphUtility.valueToString(value));
-            stringBuilder.append(CFGConstants.WS);
-         }
-         return stringBuilder.toString();
+         return createReturnStringRepresentation();
       } else if (instruction instanceof Cast) {
-         Cast instr = (Cast) instruction;
-         stringBuilder.append(GraphUtility.addressToString(instr.getResult()));
-         stringBuilder.append(CFGConstants.ASSIGN);
-         stringBuilder.append(StringUtils.LEFT_BRACKET);
-         stringBuilder.append(GraphUtility.clean(GraphUtility.typeUseToString(instr.getTo())));
-         stringBuilder.append(") ");
-         stringBuilder.append(GraphUtility.valueToString(instr.getValue()));
+         createCastStringRepresentation();
       } else if (instruction instanceof Invoke) {
-         Invoke instr = (Invoke) instruction;
-         stringBuilder.append(CFGConstants.INVOKE);
-         stringBuilder.append(CFGConstants.WS);
-         stringBuilder.append(GraphUtility.addressToString(instr.getName()));
-         stringBuilder.append(GraphUtility.parameterListToString(instr.getPList()));
-         return stringBuilder.toString();
-      }
-      // Fence
-      else if (instruction instanceof Fence) {
-         return CFGConstants.FENCE;
-      }
-      // AtomicRMW
-      else if (instruction instanceof AtomicRMW) {
-         stringBuilder.append("atomicRMW( ");
-         AtomicRMW instr = (AtomicRMW) instruction;
-         String operation = instr.getOperation();
-         if (operation.equals("xchg")) {
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getAddress()));
-            stringBuilder.append(" <-> ");
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getArgument()));
-         } else if (operation.equals("add")) {
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getAddress()));
-            stringBuilder.append(" = ");
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getAddress()));
-            stringBuilder.append(" + ");
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getArgument()));
-         } else if (operation.equals("sub")) {
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getAddress()));
-            stringBuilder.append(" = ");
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getAddress()));
-            stringBuilder.append(" - ");
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getArgument()));
-         } else if (operation.equals("and")) {
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getAddress()));
-            stringBuilder.append(" = ");
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getAddress()));
-            stringBuilder.append(CFGConstants.WS);
-            stringBuilder.append(CFGConstants.WEDGE);
-            stringBuilder.append(CFGConstants.WS);
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getArgument()));
-         } else if (operation.equals("nand")) {
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getAddress()));
-            stringBuilder.append(" = ");
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getAddress()));
-            stringBuilder.append(" !& ");
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getArgument()));
-         } else if (operation.equals("or")) {
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getAddress()));
-            stringBuilder.append(" = ");
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getAddress()));
-            stringBuilder.append(CFGConstants.WS);
-            stringBuilder.append(CFGConstants.VEE);
-            stringBuilder.append(CFGConstants.WS);
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getArgument()));
-         } else if (operation.equals("xor")) {
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getAddress()));
-            stringBuilder.append(" = ");
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getAddress()));
-            stringBuilder.append(" xor ");
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getArgument()));
-         } else if (operation.equals("max") || operation.equals("umax")) {
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getAddress()));
-            stringBuilder.append(" = max(");
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getAddress()));
-            stringBuilder.append(", ");
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getArgument()));
-            stringBuilder.append(") ");
-         } else if (operation.equals("min") || operation.equals("umin")) {
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getAddress()));
-            stringBuilder.append(" = min(");
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getAddress()));
-            stringBuilder.append(", ");
-            stringBuilder.append(GraphUtility.parameterValueToString(instr.getArgument()));
-            stringBuilder.append(StringUtils.RIGHT_BRACKET);
-         }
-         stringBuilder.append(" )");
+         createInvokeStringRepresentation();
+      } else if (instruction instanceof Fence) {
+         createFenceStringRepresentation();
+      } else if (instruction instanceof AtomicRMW) {
+         createAtomicRMWStringRepresentation();
       } else if (instruction instanceof Phi) {
-         Phi phiInstruction = (Phi) instruction;
-         stringBuilder.append(GraphUtility.addressToString(phiInstruction.getResult()));
-         stringBuilder.append(" := ");
-         stringBuilder.append(CFGConstants.PHI);
-         stringBuilder.append(" ");
-
-         FunctionBody body = null;
-         EObject o = phiInstruction.eContainer().eContainer();
-         if (o instanceof FunctionBody) {
-            body = (FunctionBody) o;
-         } else {
-            throw new RuntimeException("Could not resolve FunctionBody of phi instruction");
-         }
-
-         Iterator<PhiCase> phiCaseIterator = phiInstruction.getCases().iterator();
-         while (phiCaseIterator.hasNext()) {
-            PhiCase phiCase = phiCaseIterator.next();
-            String caseLabel = phiCase.getLabel().replace("%", "");
-            int sourcePC = -1;
-
-            for (BasicBlock block : body.getBlocks()) {
-               if (caseLabel.equals(block.getLabel())) {
-                  // get last instruction because it is the one jumping to
-                  // the block containing the phi instruction
-                  int size = block.getInstructions().size();
-                  Instruction last = block.getInstructions().get(size - 1);
-                  sourcePC = GraphUtility.getPcOfInstruction(last,
-                        GraphUtility.gatherInstructionsInCodeOrder((FunctionDefinition) body.eContainer()));
-               }
-            }
-
-            // we use the PC instead of the original label, since we don't
-            // have the labels in the store buffer graph anymore
-            stringBuilder.append("[");
-            stringBuilder.append(GraphUtility.valueToString(phiCase.getValue()));
-            stringBuilder.append(", ");
-            stringBuilder.append(CFGConstants.PC_PREFIX);
-            stringBuilder.append(sourcePC);
-            stringBuilder.append("]");
-
-            if (phiCaseIterator.hasNext()) {
-               stringBuilder.append(", ");
-            }
-         }
-      }
-      // not-implemented
-      else {
+         createPhiStringRepresentation();
+      } else {
+         // backup: instruction not-implemented
          stringBuilder.append(instruction.toString());
       }
       return stringBuilder.toString();
+   }
+
+
+   private void createCompareStringRepresentation() {
+      Compare compare = (Compare) instruction;
+      stringBuilder.append(GraphUtility.addressToString(compare.getResult()));
+      stringBuilder.append(CFGConstants.ASSIGN);
+      stringBuilder.append(StringUtils.LEFT_BRACKET);
+      String compareCondition = compare.getCond();
+      if (compareCondition.equals(CFGConstants.FALSE)) {
+         stringBuilder.append(CFGConstants.FALSE);
+         return;
+      } else if (compareCondition.equals(CFGConstants.TRUE)) {
+         stringBuilder.append(CFGConstants.TRUE);
+         return;
+      }
+      stringBuilder.append(GraphUtility.valueToString(compare.getOperand1()));
+      stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
+      if (compareCondition.equals("eq")) {
+         stringBuilder.append("== ");
+      } else if (compareCondition.equals("ne")) {
+         stringBuilder.append("!= ");
+      } else if (compareCondition.equals("ugt") || compareCondition.equals("sgt")) {
+         stringBuilder.append("> ");
+      } else if (compareCondition.equals("uge") || compareCondition.equals("sge")) {
+         stringBuilder.append(">= ");
+      } else if (compareCondition.equals("ult") || compareCondition.equals("slt")) {
+         stringBuilder.append("< ");
+      } else if (compareCondition.equals("ule") || compareCondition.equals("sle")) {
+         stringBuilder.append("<= ");
+      } else if (compareCondition.equals("oeq")) {
+         stringBuilder.append("=[o] ");
+      } else if (compareCondition.equals("ogt")) {
+         stringBuilder.append(">[o] ");
+      } else if (compareCondition.equals("oge")) {
+         stringBuilder.append(">=[o] ");
+      } else if (compareCondition.equals("olt")) {
+         stringBuilder.append("<[o] ");
+      } else if (compareCondition.equals("ole")) {
+         stringBuilder.append("<=[o] ");
+      } else if (compareCondition.equals("one")) {
+         stringBuilder.append("!=[o] ");
+      } else if (compareCondition.equals("ueq")) {
+         stringBuilder.append("=[u] ");
+      } else if (compareCondition.equals("ugt")) {
+         stringBuilder.append(">[u] ");
+      } else if (compareCondition.equals("uge")) {
+         stringBuilder.append(">=[u] ");
+      } else if (compareCondition.equals("ult")) {
+         stringBuilder.append("<[u] ");
+      } else if (compareCondition.equals("ule")) {
+         stringBuilder.append("<=[u] ");
+      } else if (compareCondition.equals("une")) {
+         stringBuilder.append("!=[u] ");
+      } else if (compareCondition.equals("ord")) {
+         stringBuilder.append("orderd ");
+      } else if (compareCondition.equals("uno")) {
+         stringBuilder.append("not orderd ");
+      }
+      stringBuilder.append(GraphUtility.valueToString(compare.getOperand2()));
+      stringBuilder.append(StringUtils.RIGHT_BRACKET);
+   }
+
+
+   private void createLogicOperationStringRepresentation() {
+      LogicOperation logicOperation = (LogicOperation) instruction;
+      stringBuilder.append(GraphUtility.addressToString(logicOperation.getResult()));
+      stringBuilder.append(CFGConstants.ASSIGN);
+      String operationName = logicOperation.getOperation();
+      stringBuilder.append(GraphUtility.valueToString(logicOperation.getValue1()));
+      stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
+      if (operationName.equals("shl")) {
+         stringBuilder.append("<< ");
+      } else if (operationName.equals("lshr")) {
+         stringBuilder.append(">>[L] ");
+      } else if (operationName.equals("ashr")) {
+         stringBuilder.append(">>[A] ");
+      } else if (operationName.equals("and")) {
+         stringBuilder.append("& ");
+      } else if (operationName.equals("or")) {
+         stringBuilder.append("| ");
+      } else if (operationName.equals("xor")) {
+         stringBuilder.append("^ ");
+      }
+      stringBuilder.append(GraphUtility.valueToString(logicOperation.getValue2()));
+   }
+
+
+   private void createArithmeticOperationStringRepresentation() {
+      ArithmeticOperation arithmeticOperation = (ArithmeticOperation) instruction;
+      stringBuilder.append(GraphUtility.addressToString(arithmeticOperation.getResult()));
+      stringBuilder.append(CFGConstants.ASSIGN);
+
+      String operation = arithmeticOperation.getOperation();
+      stringBuilder.append(GraphUtility.valueToString(arithmeticOperation.getValue1()));
+      stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
+      if (operation.equals("add") || operation.equals("fadd")) {
+         stringBuilder.append("+ ");
+      } else if (operation.equals("sub") || operation.equals("fsub")) {
+         stringBuilder.append("- ");
+      } else if (operation.equals("mul") || operation.equals("fmul")) {
+         stringBuilder.append("* ");
+      } else if (operation.equals("udiv") || operation.equals("sdiv") || operation.equals("fdiv")) {
+         stringBuilder.append(": ");
+      } else if (operation.equals("urem") || operation.equals("srem") || operation.equals("frem")) {
+         stringBuilder.append("% ");
+      }
+      stringBuilder.append(GraphUtility.valueToString(arithmeticOperation.getValue2()));
+   }
+
+
+   private void createAllocStringRepresentation() {
+      Alloc alloc = (Alloc) instruction;
+      stringBuilder.append(GraphUtility.addressToString(alloc.getResult()));
+      stringBuilder.append(CFGConstants.ASSIGN);
+      stringBuilder.append(CFGConstants.ALLOC);
+      stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
+      stringBuilder.append(GraphUtility.clean(GraphUtility.typeUseToString(alloc.getType())));
+   }
+
+
+   private void createCallStringRepresentation() {
+      Call call = (Call) instruction;
+      if (call.getResult() != null) {
+         stringBuilder.append(GraphUtility.addressToString(call.getResult()));
+         stringBuilder.append(CFGConstants.ASSIGN);
+      }
+      stringBuilder.append(CFGConstants.CALL);
+      stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
+      stringBuilder.append(GraphUtility.parameterValueToString(call.getFunction()));
+      stringBuilder.append(GraphUtility.parameterListToString(call.getPList()));
+   }
+
+
+   private void createCompareExchangeStringRepresentation() {
+      CmpXchg compareExchange = (CmpXchg) instruction;
+      stringBuilder.append(GraphUtility.addressToString(compareExchange.getResult()));
+      stringBuilder.append(CFGConstants.ASSIGN);
+      stringBuilder.append("CAS(");
+      stringBuilder.append(GraphUtility.parameterValueToString(compareExchange.getAddress()));
+      stringBuilder.append(", ");
+      stringBuilder.append(GraphUtility.parameterValueToString(compareExchange.getValue()));
+      stringBuilder.append(", ");
+      stringBuilder.append(GraphUtility.parameterValueToString(compareExchange.getNewValue()));
+      stringBuilder.append(StringUtils.RIGHT_BRACKET);
+   }
+
+
+   private void createGetElementPointerStringRepresentation() {
+      GetElementPtr getElementPointer = (GetElementPtr) instruction;
+      stringBuilder.append(GraphUtility.addressToString(getElementPointer.getResult()));
+      stringBuilder.append(CFGConstants.ASSIGN);
+      stringBuilder.append(CFGConstants.GETELEMENENTPTR);
+      stringBuilder.append(StringUtils.LEFT_BRACKET);
+      stringBuilder.append(GraphUtility.parameterValueToString(getElementPointer.getAggregate()));
+      for (Parameter getElementPointerIndex : getElementPointer.getIndices()) {
+         stringBuilder.append(", ");
+         stringBuilder.append(GraphUtility.parameterValueToString(getElementPointerIndex));
+      }
+      stringBuilder.append(StringUtils.RIGHT_BRACKET);
+   }
+
+
+   private void createBranchStringRepresentation() {
+      if (transition != null) {
+         if (transition instanceof GuardedTransition) {
+            stringBuilder.append(((GuardedTransition) transition).getCondition());
+         } else {
+            stringBuilder.append(CFGConstants.BRANCH + StringUtils.WHITESPACE_SINGLE + CFGConstants.PC_PREFIX
+                  + transition.getTarget().getPc());
+         }
+      } else {
+         // notice that a suitable string representation of the branch instruction can only be
+         // created when knowing the transition it is linked to
+         throw new RuntimeException("Cannot create string representation of branch instruction without according transition.");
+      }
+   }
+
+
+   private void createStoreStringRepresentation() {
+      Store store = (Store) instruction;
+      stringBuilder.append(CFGConstants.STORE);
+      stringBuilder.append(StringUtils.LEFT_BRACKET);
+      stringBuilder.append(GraphUtility.parameterValueToString(store.getValue()));
+      stringBuilder.append(", ");
+      stringBuilder.append(GraphUtility.parameterValueToString(store.getTargetAddress()));
+      stringBuilder.append(StringUtils.RIGHT_BRACKET);
+   }
+
+
+   private void createLoadStringRepresentation() {
+      Load load = (Load) instruction;
+      stringBuilder.append(GraphUtility.addressToString(load.getResult()));
+      stringBuilder.append(CFGConstants.ASSIGN);
+      stringBuilder.append(CFGConstants.LOAD);
+      stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
+      stringBuilder.append(StringUtils.LEFT_BRACKET);
+      stringBuilder.append(GraphUtility.parameterValueToString(load.getAddress()));
+      stringBuilder.append(StringUtils.RIGHT_BRACKET);
+   }
+
+
+   private String createReturnStringRepresentation() {
+      Return returnInstruction = ((Return) instruction);
+      stringBuilder.append(CFGConstants.RETURN);
+      EObject returnValue = returnInstruction.getValue();
+      Value castedReturnValue = null;
+      if (returnValue instanceof Parameter) {
+         castedReturnValue = ((Parameter) returnValue).getValue();
+      } else if (returnValue instanceof PrimitiveValue) {
+         castedReturnValue = (PrimitiveValue) returnValue;
+      }
+
+      if (castedReturnValue != null) {
+         stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
+         stringBuilder.append(GraphUtility.valueToString(castedReturnValue));
+         stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
+      }
+      return stringBuilder.toString();
+   }
+
+
+   private void createCastStringRepresentation() {
+      Cast instr = (Cast) instruction;
+      stringBuilder.append(GraphUtility.addressToString(instr.getResult()));
+      stringBuilder.append(CFGConstants.ASSIGN);
+      stringBuilder.append(StringUtils.LEFT_BRACKET);
+      stringBuilder.append(GraphUtility.clean(GraphUtility.typeUseToString(instr.getTo())));
+      stringBuilder.append(") ");
+      stringBuilder.append(GraphUtility.valueToString(instr.getValue()));
+   }
+
+
+   private void createInvokeStringRepresentation() {
+      Invoke instr = (Invoke) instruction;
+      stringBuilder.append(CFGConstants.INVOKE);
+      stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
+      stringBuilder.append(GraphUtility.addressToString(instr.getName()));
+      stringBuilder.append(GraphUtility.parameterListToString(instr.getPList()));
+   }
+
+
+   private void createFenceStringRepresentation() {
+      stringBuilder.append(CFGConstants.FENCE);
+   }
+
+
+   private void createAtomicRMWStringRepresentation() {
+      stringBuilder.append("atomicRMW( ");
+      AtomicRMW atomicReadModifyWrite = (AtomicRMW) instruction;
+      String operationName = atomicReadModifyWrite.getOperation();
+      if (operationName.equals("xchg")) {
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(" <-> ");
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getArgument()));
+      } else if (operationName.equals("add")) {
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(" = ");
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(" + ");
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getArgument()));
+      } else if (operationName.equals("sub")) {
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(" = ");
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(" - ");
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getArgument()));
+      } else if (operationName.equals("and")) {
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(" = ");
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
+         stringBuilder.append(CFGConstants.WEDGE);
+         stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getArgument()));
+      } else if (operationName.equals("nand")) {
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(" = ");
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(" !& ");
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getArgument()));
+      } else if (operationName.equals("or")) {
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(" = ");
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
+         stringBuilder.append(CFGConstants.VEE);
+         stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getArgument()));
+      } else if (operationName.equals("xor")) {
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(" = ");
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(" xor ");
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getArgument()));
+      } else if (operationName.equals("max") || operationName.equals("umax")) {
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(" = max(");
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(", ");
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getArgument()));
+         stringBuilder.append(") ");
+      } else if (operationName.equals("min") || operationName.equals("umin")) {
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(" = min(");
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(", ");
+         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getArgument()));
+         stringBuilder.append(StringUtils.RIGHT_BRACKET);
+      }
+      stringBuilder.append(" )");
+   }
+
+
+   private void createPhiStringRepresentation() {
+      Phi phiInstruction = (Phi) instruction;
+      stringBuilder.append(GraphUtility.addressToString(phiInstruction.getResult()));
+      stringBuilder.append(" := ");
+      stringBuilder.append(CFGConstants.PHI);
+      stringBuilder.append(" ");
+
+      FunctionBody functionBodyContainingPhi = null;
+      EObject suspectedFunctionBodyContainingPhi = phiInstruction.eContainer().eContainer();
+      if (suspectedFunctionBodyContainingPhi instanceof FunctionBody) {
+         functionBodyContainingPhi = (FunctionBody) suspectedFunctionBodyContainingPhi;
+      } else {
+         throw new RuntimeException("Could not resolve function body of phi instruction " + phiInstruction + ".");
+      }
+
+      Iterator<PhiCase> phiCaseIterator = phiInstruction.getCases().iterator();
+      while (phiCaseIterator.hasNext()) {
+         PhiCase phiCase = phiCaseIterator.next();
+         String caseLabel = phiCase.getLabel().replace("%", "");
+         int sourcePC = -1;
+
+         for (BasicBlock block : functionBodyContainingPhi.getBlocks()) {
+            if (caseLabel.equals(block.getLabel())) {
+               // get last instruction because it is the one jumping to
+               // the block containing the phi instruction
+               int size = block.getInstructions().size();
+               Instruction last = block.getInstructions().get(size - 1);
+               sourcePC = GraphUtility.getPcOfInstruction(last,
+                     GraphUtility.gatherInstructionsInCodeOrder((FunctionDefinition) functionBodyContainingPhi.eContainer()));
+            }
+         }
+
+         // we use the PC instead of the original label, since we don't
+         // have the labels in the store buffer graph anymore
+         stringBuilder.append("[");
+         stringBuilder.append(GraphUtility.valueToString(phiCase.getValue()));
+         stringBuilder.append(", ");
+         stringBuilder.append(CFGConstants.PC_PREFIX);
+         stringBuilder.append(sourcePC);
+         stringBuilder.append("]");
+
+         if (phiCaseIterator.hasNext()) {
+            stringBuilder.append(", ");
+         }
+      }
    }
 }

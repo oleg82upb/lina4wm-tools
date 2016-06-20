@@ -15,6 +15,7 @@ public class StringUtils {
    public static final String EMPTY_STRING = "";
    public static final String NUMBERS_REGEX = "[0-9]";
    public static final String REPLACE_DOTS_REGEX = "\\.";
+   public static final String WHITESPACE_SINGLE = " ";
 
 
    private StringUtils() {
