@@ -14,10 +14,6 @@ import de.upb.llvm_parser.llvm.Load;
 
 public class TransitionToStringConverter {
 
-   public TransitionToStringConverter() {
-   }
-
-
    /**
     * Creates a string representation of the given transition, consisting of the name of the
     * instruction linked with the transition and its parameters.
@@ -27,6 +23,7 @@ public class TransitionToStringConverter {
     */
    public static String createStringRepresentationOfTransition(Transition transition) {
 
+      // check for special transitions first
       if (transition instanceof FlushTransition) {
          FlushTransition flushTransition = (FlushTransition) transition;
          return createFlushTransitionStringRepresentation(flushTransition);
@@ -38,12 +35,10 @@ public class TransitionToStringConverter {
          return createWriteDefChainTransitionStringRepresentation(writeDefChainTransition);
       }
 
-
-      // special transition done
-      // the following use normal transitions
       if (transition.getInstruction() == null) {
          return CFGConstants.TODO;
       }
+
       InstructionToStringConverter instructionToStringConverter = new InstructionToStringConverter(transition);
       return instructionToStringConverter.createStringRepresentation();
    }
