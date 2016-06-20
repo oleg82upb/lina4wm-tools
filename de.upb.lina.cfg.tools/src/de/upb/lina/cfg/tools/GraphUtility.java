@@ -2,89 +2,28 @@ package de.upb.lina.cfg.tools;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 
 import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.FlushTransition;
 import de.upb.lina.cfg.controlflow.StoreBuffer;
-import de.upb.llvm_parser.llvm.Address;
-import de.upb.llvm_parser.llvm.AddressUse;
-import de.upb.llvm_parser.llvm.Aggregate_Type;
-import de.upb.llvm_parser.llvm.Array;
+import de.upb.lina.cfg.tools.stringrepresentation.StringConversionManager;
 import de.upb.llvm_parser.llvm.AtomicRMW;
 import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.CmpXchg;
-import de.upb.llvm_parser.llvm.DecimalConstant;
 import de.upb.llvm_parser.llvm.Fence;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
-import de.upb.llvm_parser.llvm.FunctionParameter;
-import de.upb.llvm_parser.llvm.FunctionType;
 import de.upb.llvm_parser.llvm.Instruction;
-import de.upb.llvm_parser.llvm.IntegerConstant;
 import de.upb.llvm_parser.llvm.Invoke;
-import de.upb.llvm_parser.llvm.NestedCast;
-import de.upb.llvm_parser.llvm.NestedGetElementPtr;
-import de.upb.llvm_parser.llvm.Parameter;
-import de.upb.llvm_parser.llvm.ParameterList;
-import de.upb.llvm_parser.llvm.Predefined;
-import de.upb.llvm_parser.llvm.PrimitiveValue;
 import de.upb.llvm_parser.llvm.Return;
-import de.upb.llvm_parser.llvm.Structure;
-import de.upb.llvm_parser.llvm.TypeUse;
-import de.upb.llvm_parser.llvm.Value;
-import de.upb.llvm_parser.llvm.Vector;
 
 
 public abstract class GraphUtility {
 
-   private final static String REPLACE_STRINGS_REGEX = "\\s|\"|@_|@|%";
-   private final static Pattern REPLACE_PATTERN = Pattern.compile(REPLACE_STRINGS_REGEX);
-   private final static Pattern REPLACE_DOT_PATTERN = Pattern.compile(StringUtils.REPLACE_DOTS_REGEX);
-
-
-   /**
-    * Deletes any strange symbols used in LLVM code such as {@code @} or {@code %} from the given
-    * string. If the string only consists of numbers after this procedure, a 'v' will be
-    * concatenated in front of the number. The resulting string is returned.
-    * 
-    * @param string the string to clean
-    * @return the result of the clean operation
-    */
-   public static String clean(String string) {
-      // TODO: determine whether the patterns cause any problems
-      // unless nothing strange happens all of a sudden, we can delete the commented code soon
-      // int loc = string.indexOf("%");
-      // if the address is starts with a number, do not give it a v_
-      // if (loc > -1 && string.substring(loc + 1, loc + 2).matches("[0-9]")) {
-      // string = string.replaceAll("%", "v");
-      // } else {
-      // string = string.replaceAll("%", "");
-      // }
-      // string = string.trim();
-      boolean needsVariablePrefix = string.contains("%");
-      string = REPLACE_PATTERN.matcher(string).replaceAll(StringUtils.EMPTY_STRING);
-      string = REPLACE_DOT_PATTERN.matcher(string).replaceAll("_");
-      // old string.replaceAll(REPLACE_STRINGS_REGEX, EMPTY_STRING);
-      if (needsVariablePrefix && string.matches(StringUtils.NUMBERS_REGEX)) {
-         string = "v".concat(string);
-      }
-      // string = string.replaceAll("\"", "");
-      // string = string.replaceAll("\\.", "_");
-
-      // if the address is starts with a number, do not give it a v_
-      // string = string.replaceAll("@_", "");
-
-      // string = string.replaceAll("@", "");
-
-      return string;
-   }
+   private static StringConversionManager stringConversionManager = new StringConversionManager();
 
 
    /**
@@ -136,114 +75,8 @@ public abstract class GraphUtility {
     *         combination, {@code false} else
     */
    public static boolean isRepresentedBy(ControlFlowLocation node, int pc, StoreBuffer buffer, EMemoryModel memoryModel) {
-      return (bufferToString(node, memoryModel).equalsIgnoreCase(bufferToString(buffer, pc, memoryModel)));
-   }
-
-
-   /**
-    * Returns the string representation of the given store buffer graph node under the given memory
-    * model.
-    * 
-    * @param node the store buffer graph node to represent as a string
-    * @return the string representation of the given store buffer graph node under the given memory
-    *         model
-    */
-   public static String bufferToString(ControlFlowLocation node, EMemoryModel memoryModel) {
-      return bufferToString(node.getBuffer(), node.getPc(), memoryModel);
-   }
-
-
-   /**
-    * Returns the string representation of the store buffer graph node constructed from the given pc
-    * and store buffer under the given memory model.
-    * 
-    * @param pc the pc to use to construct a store buffer graph node
-    * @param storeBuffer the store buffer to use to construct a store buffer graph node
-    * @param memoryModel the memory model to consider
-    * @return the string representation of given store buffer graph node constructed from the given
-    *         pc and store buffer under the given memory model
-    */
-   public static String bufferToString(StoreBuffer storeBuffer, int pc, EMemoryModel memoryModel) {
-
-      StringBuffer stringBuffer = new StringBuffer(CFGConstants.PC_PREFIX);
-      stringBuffer.append(pc);
-
-      if (storeBuffer.getAddressValuePairs().isEmpty()) {
-         return stringBuffer.toString();
-      }
-
-      stringBuffer.append(" <");
-      if (memoryModel == EMemoryModel.SC || memoryModel == EMemoryModel.TSO) {
-
-         Iterator<AddressValuePair> addressValuePairIterator = storeBuffer.getAddressValuePairs().iterator();
-         while (addressValuePairIterator.hasNext()) {
-            stringBuffer.append(StringUtils.LEFT_BRACKET);
-            stringBuffer.append(addressValuePairToString(addressValuePairIterator.next()));
-            stringBuffer.append(StringUtils.RIGHT_BRACKET);
-            if (addressValuePairIterator.hasNext()) {
-               stringBuffer.append(", ");
-            }
-         }
-      } else if (memoryModel == EMemoryModel.PSO) {
-         // TODO improve this, by sorting the the addressvaluepairs directly, using a
-         // comparator
-         // entries will be represented in alphabetical order
-         ArrayList<String> addressNamesInStoreBuffer = new ArrayList<String>();
-
-         for (AddressValuePair addressValuePair : storeBuffer.getAddressValuePairs()) {
-            Value addressValue = addressValuePair.getAddress().getValue();
-            String addressName = valueToLLVMString(addressValue);
-            if (!addressNamesInStoreBuffer.contains(addressName)) {
-               addressNamesInStoreBuffer.add(addressName);
-            }
-         }
-
-         Collections.sort(addressNamesInStoreBuffer, String.CASE_INSENSITIVE_ORDER);
-
-         // Create representation in sorted order
-         Iterator<String> addressNameIterator = addressNamesInStoreBuffer.iterator();
-         while (addressNameIterator.hasNext()) {
-            String addressName = addressNameIterator.next();
-            for (AddressValuePair addressValuePair : storeBuffer.getAddressValuePairs()) {
-               Value addressValue = addressValuePair.getAddress().getValue();
-               if (addressName.equals(valueToLLVMString(addressValue))) {
-                  stringBuffer.append(StringUtils.LEFT_BRACKET);
-                  stringBuffer.append(addressValuePairToString(addressValuePair));
-                  stringBuffer.append(StringUtils.RIGHT_BRACKET);
-                  if (addressNameIterator.hasNext()) {
-                     stringBuffer.append(", ");
-                  }
-               }
-            }
-         }
-
-      } else {
-         stringBuffer.append("not specified");
-      }
-
-      stringBuffer.append(">");
-      return stringBuffer.toString();
-   }
-
-
-   /**
-    * Returns the string representation of the given address value pair.
-    * 
-    * @param addressValuePair the address value pair to represent as a string
-    * @return the string representation of the given address value pair
-    */
-   public static String addressValuePairToString(AddressValuePair addressValuePair) {
-      StringBuffer stringBuffer = new StringBuffer(valueToString(addressValuePair.getAddress().getValue()));
-      stringBuffer.append(": ");
-      Iterator<Parameter> parameterIterator = addressValuePair.getValues().iterator();
-      while (parameterIterator.hasNext()) {
-         Parameter parameter = parameterIterator.next();
-         stringBuffer.append(GraphUtility.valueToString(parameter.getValue()));
-         if (parameterIterator.hasNext()) {
-            stringBuffer.append(", ");
-         }
-      }
-      return stringBuffer.toString();
+      return (stringConversionManager.bufferToString(node, memoryModel).equalsIgnoreCase(stringConversionManager.bufferToString(buffer, pc,
+            memoryModel)));
    }
 
 
@@ -298,204 +131,6 @@ public abstract class GraphUtility {
    public static boolean isSynchronizingInstruction(Instruction instruction) {
       return (instruction instanceof Fence || instruction instanceof CmpXchg || instruction instanceof Return
             || instruction instanceof AtomicRMW || instruction instanceof Invoke);
-   }
-
-
-   /**
-    * Creates the string representation of the given parameter list.
-    * 
-    * @param parameterList the parameter list to create the string representation of
-    * @return the string representation of the given parameter list
-    */
-   public static String parameterListToString(ParameterList parameterList) {
-      StringBuffer stringBuffer = new StringBuffer(StringUtils.LEFT_BRACKET);
-      Iterator<Parameter> parameterIterator = parameterList.getParams().iterator();
-      while (parameterIterator.hasNext()) {
-         Parameter parameter = parameterIterator.next();
-         stringBuffer.append(parameterValueToString(parameter));
-         if (parameterIterator.hasNext()) {
-            stringBuffer.append(", ");
-         }
-      }
-      stringBuffer.append(StringUtils.RIGHT_BRACKET);
-      return stringBuffer.toString();
-   }
-
-
-   /**
-    * Creates the string representation of the given type use.
-    * 
-    * @param typeUse the type use to be represented as a string
-    * @return the string representation of the given type use
-    */
-   public static String typeUseToString(TypeUse typeUse) {
-      StringBuffer stringBuffer = new StringBuffer();
-      if (typeUse instanceof Predefined) {
-         Predefined predefinedTypeUse = (Predefined) typeUse;
-         stringBuffer = new StringBuffer(predefinedTypeUse.getType());
-         if (predefinedTypeUse.getPointer() != null) {
-            stringBuffer.append(predefinedTypeUse.getPointer());
-         }
-      } else if (typeUse instanceof AddressUse) {
-         AddressUse addressUse = (AddressUse) typeUse;
-         stringBuffer = new StringBuffer(addressUse.getAddress().getName());
-         if (addressUse.getPointer() != null) {
-            stringBuffer.append(addressUse.getPointer());
-         }
-      } else if (typeUse instanceof FunctionType) {
-         FunctionType ftype = (FunctionType) typeUse;
-         stringBuffer = new StringBuffer(typeToString(ftype.getReturnType()));
-         stringBuffer.append(StringUtils.LEFT_BRACKET);
-         Iterator<FunctionParameter> i = ftype.getParameter().getParams().iterator();
-         while (i.hasNext()) {
-            stringBuffer.append(typeToString(i.next()));
-            if (i.hasNext()) {
-               stringBuffer.append(", ");
-            }
-         }
-         stringBuffer.append(StringUtils.RIGHT_BRACKET);
-      } else {
-         return typeUse.toString();
-      }
-      return stringBuffer.toString();
-   }
-
-
-   /**
-    * Creates the string representation of the given aggregate type.
-    * 
-    * @param aggregateType the aggregate type to represent
-    * @return the string representation of the given aggregate type
-    */
-   public static String aggregateTypeToString(Aggregate_Type aggregateType) {
-      StringBuffer stringBuffer = new StringBuffer();
-      if (aggregateType instanceof Array) {
-         Array array = (Array) aggregateType;
-         EObject arrayType = array.getType();
-         stringBuffer = new StringBuffer("[");
-         stringBuffer.append(array.getLength());
-         stringBuffer.append(" x ");
-         stringBuffer.append(typeToString(arrayType));
-         stringBuffer.append("]");
-         if (array.getPointer() != null) {
-            stringBuffer.append(array.getPointer());
-         }
-      } else if (aggregateType instanceof Vector) {
-         Vector vector = (Vector) aggregateType;
-         EObject vectorType = vector.getType();
-
-         stringBuffer = new StringBuffer("[");
-         stringBuffer.append(vector.getLength());
-         stringBuffer.append(" x ");
-         stringBuffer.append(typeToString(vectorType));
-         stringBuffer.append("]");
-      } else if (aggregateType instanceof Structure) {
-         Structure struct = (Structure) aggregateType;
-         stringBuffer = new StringBuffer("{");
-         EList<EObject> types = struct.getTypes();
-         Iterator<EObject> typeIterator = types.iterator();
-         while (typeIterator.hasNext()) {
-            stringBuffer.append(typeToString(typeIterator.next()));
-            if (typeIterator.hasNext()) {
-               stringBuffer.append(", ");
-            }
-         }
-         if (struct.getPointer() != null) {
-            stringBuffer.append(struct.getPointer());
-         }
-         stringBuffer.append("}");
-      }
-
-      return stringBuffer.toString();
-   }
-
-
-   /**
-    * Creates the string representation of the given type.
-    * 
-    * @param type the type to represent
-    * @return the string representation of the given type
-    */
-   public static String typeToString(EObject type) {
-      if (type instanceof TypeUse) {
-         return typeUseToString((TypeUse) type);
-      } else if (type instanceof Aggregate_Type) {
-         return aggregateTypeToString((Aggregate_Type) type);
-      } else
-         return null;
-   }
-
-
-   /**
-    * Creates the string representation of the given address.
-    * 
-    * @param adress the address to represent
-    * @return the string representation of the given address
-    */
-   public static String addressToString(Address adress) {
-      return clean(adress.getName());
-   }
-
-
-   /**
-    * Creates the string representation of the given value.
-    * 
-    * @param value the value to represent
-    * @return the string representation of the given value
-    */
-   public static String valueToString(Value value) {
-      String result = GraphUtility.valueToLLVMString(value);
-      return clean(result);
-   }
-
-
-   /**
-    * Creates the LLVM string representation of the given value.
-    * 
-    * @param value the value to be represented
-    * @return the LLVM string representation of the given value
-    */
-   public static String valueToLLVMString(Value value) {
-      StringBuffer stringBuffer = new StringBuffer();
-
-      if (value instanceof AddressUse) {
-         AddressUse addressUse = (AddressUse) value;
-         stringBuffer.append(addressUse.getAddress().getName());
-      } else if (value instanceof IntegerConstant) {
-         stringBuffer.append(((IntegerConstant) value).getValue());
-      } else if (value instanceof DecimalConstant) {
-         stringBuffer.append(((DecimalConstant) value).getValue());
-      } else if (value instanceof PrimitiveValue) {
-         stringBuffer.append(((PrimitiveValue) value).getValue());
-      } else if (value instanceof NestedGetElementPtr) {
-         // TODO indices are missing and actually a simple representation
-         return "(GetElementPtr" + StringUtils.WHITESPACE_SINGLE + parameterValueToString(((NestedGetElementPtr) value).getAggregate())
-               + StringUtils.RIGHT_BRACKET;
-      } else if (value instanceof NestedCast) {
-         NestedCast val = (NestedCast) value;
-         stringBuffer.append(StringUtils.LEFT_BRACKET);
-         stringBuffer.append(typeToString(val.getFrom()));
-         stringBuffer.append("-->");
-         stringBuffer.append(typeToString(val.getTo()));
-         stringBuffer.append(StringUtils.RIGHT_BRACKET);
-         stringBuffer.append(valueToString(val.getValue()));
-      } else {
-         stringBuffer.append(CFGConstants.TODO);
-      }
-
-      stringBuffer.append(StringUtils.WHITESPACE_SINGLE);
-      return stringBuffer.toString();
-   }
-
-
-   /**
-    * Creates the string representation of the value of the given parameter.
-    * 
-    * @param parameter the parameter hosting the value to represent
-    * @return the string representation of the value of the given parameter
-    */
-   public static String parameterValueToString(Parameter parameter) {
-      return valueToString(parameter.getValue());
    }
 
 
