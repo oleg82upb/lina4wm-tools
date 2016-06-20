@@ -9,7 +9,7 @@ import org.eclipse.gmf.runtime.notation.Connector;
 import org.eclipse.gmf.runtime.notation.View;
 
 import de.upb.lina.cfg.controlflow.Transition;
-import de.upb.lina.cfg.tools.TransitionToStringConverter;
+import de.upb.lina.cfg.tools.stringrepresentation.TransitionToStringConverter;
 
 /**
  * @author Oleg Travkin
