@@ -10,7 +10,6 @@ import de.upb.lina.cfg.controlflow.EarlyReadTransition;
 import de.upb.lina.cfg.controlflow.StoreBuffer;
 import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.EMemoryModel;
-import de.upb.lina.cfg.tools.GraphUtility;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
@@ -102,7 +101,7 @@ public class PSOGraphGenerator extends TSOGraphGenerator {
          AddressValuePair targetPair = findAddressValuePairByAddress(targetBuffer, pair.getAddress());
          if (targetPair == null) {
             throw new RuntimeException("Could not compute flush transition for "
-                  + GraphUtility.bufferToString(srcBuffer, srcPC, getMemoryModel()));
+                  + stringConversionManager.bufferToString(srcBuffer, srcPC, getMemoryModel()));
          }
 
          if (targetPair.getValues().size() > 1) {
@@ -129,8 +128,8 @@ public class PSOGraphGenerator extends TSOGraphGenerator {
       Iterator<AddressValuePair> i = targetBuffer.getAddressValuePairs().iterator();
       while (i.hasNext()) {
          AddressValuePair pair = i.next();
-         String a = GraphUtility.valueToString(address.getValue());
-         String b = GraphUtility.valueToString(pair.getAddress().getValue());
+         String a = stringConversionManager.valueToString(address.getValue());
+         String b = stringConversionManager.valueToString(pair.getAddress().getValue());
          if (a.equals(b)) {
             return pair;
          }
@@ -148,7 +147,7 @@ public class PSOGraphGenerator extends TSOGraphGenerator {
       // last value
       int lastIndex = pair.getValues().size();
       Parameter value = pair.getValues().get(lastIndex - 1);
-      String valueInBuffer = GraphUtility.valueToString(value.getValue());
+      String valueInBuffer = stringConversionManager.valueToString(value.getValue());
       transition.setAssignmentExpression(valueInBuffer);
       transition.setInstruction(load);
       transition.setDiagram(this.graph);

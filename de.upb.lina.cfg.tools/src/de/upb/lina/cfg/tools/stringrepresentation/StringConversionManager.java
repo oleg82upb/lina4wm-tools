@@ -37,6 +37,14 @@ import de.upb.llvm_parser.llvm.Value;
 import de.upb.llvm_parser.llvm.Vector;
 
 
+/**
+ * The string conversion manager is responsible for creating the string representation of low level
+ * store buffer graph model and llvm model classes, such as addresses or values. The performance is
+ * improved by storing previous results in a cache.
+ * 
+ * @author Alexander Hetzer
+ *
+ */
 public class StringConversionManager {
 
    private final static String REPLACE_STRINGS_REGEX = "\\s|\"|@_|@|%";

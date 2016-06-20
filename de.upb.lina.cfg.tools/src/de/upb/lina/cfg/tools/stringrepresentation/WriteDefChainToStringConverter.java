@@ -3,7 +3,6 @@ package de.upb.lina.cfg.tools.stringrepresentation;
 
 import de.upb.lina.cfg.controlflow.WriteDefChainTransition;
 import de.upb.lina.cfg.tools.CFGConstants;
-import de.upb.lina.cfg.tools.GraphUtility;
 import de.upb.lina.cfg.tools.StringUtils;
 import de.upb.llvm_parser.llvm.Store;
 
@@ -19,6 +18,7 @@ import de.upb.llvm_parser.llvm.Store;
  */
 public class WriteDefChainToStringConverter {
 
+   private StringConversionManager stringConversionManager;
    private WriteDefChainTransition writeDefChainTransition;
    private Store store;
 
@@ -29,13 +29,16 @@ public class WriteDefChainToStringConverter {
     * 
     * @param writeDefChainTransition the write def chain transition to produce a string
     *           representation of
+    * @param stringConversionManager the string conversion manager, which should be used to clean
+    *           strings
     */
-   public WriteDefChainToStringConverter(WriteDefChainTransition writeDefChainTransition) {
+   public WriteDefChainToStringConverter(WriteDefChainTransition writeDefChainTransition, StringConversionManager stringConversionManager) {
       this.writeDefChainTransition = writeDefChainTransition;
       if (!(writeDefChainTransition.getInstruction() instanceof Store)) {
          throw new RuntimeException("Instruction on write def chain transition " + writeDefChainTransition + " is not a store instruction.");
       }
       this.store = (Store) writeDefChainTransition.getInstruction();
+      this.stringConversionManager = stringConversionManager;
    }
 
 
@@ -88,7 +91,7 @@ public class WriteDefChainToStringConverter {
     *         chain transition
     */
    private String getOriginalValueName() {
-      return GraphUtility.parameterValueToString(store.getValue());
+      return stringConversionManager.parameterValueToString(store.getValue());
    }
 
 
@@ -100,7 +103,7 @@ public class WriteDefChainToStringConverter {
     *         def chain transition
     */
    private String getOriginalAddressName() {
-      return GraphUtility.parameterValueToString(store.getTargetAddress());
+      return stringConversionManager.parameterValueToString(store.getTargetAddress());
    }
 
 
@@ -110,7 +113,7 @@ public class WriteDefChainToStringConverter {
     * @return name of the redefined value linked to the local write def chain transition
     */
    private String getRedefinedValueName() {
-      return GraphUtility.addressToString(writeDefChainTransition.getCopyValue());
+      return stringConversionManager.addressToString(writeDefChainTransition.getCopyValue());
    }
 
 
@@ -120,7 +123,7 @@ public class WriteDefChainToStringConverter {
     * @return name of the redefined address linked to the local write def chain transition
     */
    private String getRedefinedAddressName() {
-      return GraphUtility.addressToString(writeDefChainTransition.getCopyAddress());
+      return stringConversionManager.addressToString(writeDefChainTransition.getCopyAddress());
    }
 
 

@@ -15,6 +15,7 @@ import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.EMemoryModel;
 import de.upb.lina.cfg.tools.GraphUtility;
 import de.upb.lina.cfg.tools.IGraphGenerator;
+import de.upb.lina.cfg.tools.stringrepresentation.StringConversionManager;
 import de.upb.llvm_parser.llvm.Branch;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.IndirectBranch;
@@ -29,11 +30,12 @@ public abstract class AbstractGraphGenerator implements IGraphGenerator {
    protected List<ControlFlowLocation> toBeProcessedLocations;
    protected List<ControlFlowLocation> processedLocations;
    protected ArrayList<Instruction> instructions;
+   protected StringConversionManager stringConversionManager;
 
 
    public AbstractGraphGenerator(FunctionDefinition function) {
-      // intialize variables
       this.function = function;
+      this.stringConversionManager = new StringConversionManager();
    }
 
 
@@ -147,9 +149,9 @@ public abstract class AbstractGraphGenerator implements IGraphGenerator {
             }
 
             GuardedTransition trueCase = createGuardedTransition(currentLocation, branch, trueCaseNextLocation);
-            trueCase.setCondition("[" + GraphUtility.valueToString(branch.getCondition()) + "]");
+            trueCase.setCondition("[" + stringConversionManager.valueToString(branch.getCondition()) + "]");
             GuardedTransition falseCase = createGuardedTransition(currentLocation, branch, elseCaseNextLocation);
-            falseCase.setCondition("[not " + GraphUtility.valueToString(branch.getCondition()) + "]");
+            falseCase.setCondition("[not " + stringConversionManager.valueToString(branch.getCondition()) + "]");
          } else if (branch.getDestination() != null) {
             // simple jump, unconditional
             String targetInstructionLabel = branch.getDestination().substring(1);
@@ -191,7 +193,7 @@ public abstract class AbstractGraphGenerator implements IGraphGenerator {
             }
 
             GuardedTransition caseC = createGuardedTransition(currentLocation, switchInstruction, caseTargetLocation);
-            caseC.setCondition("[" + GraphUtility.valueToString(sc.getCaseValue().getValue()) + "]");
+            caseC.setCondition("[" + stringConversionManager.valueToString(sc.getCaseValue().getValue()) + "]");
          }
       } else if (nextInstruction instanceof IndirectBranch) {
          throw new RuntimeException("IndirectBranch found. Handling of such is not implemented yet");

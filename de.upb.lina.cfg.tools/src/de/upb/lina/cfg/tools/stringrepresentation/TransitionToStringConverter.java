@@ -20,6 +20,30 @@ import de.upb.llvm_parser.llvm.Load;
  */
 public class TransitionToStringConverter {
 
+   private StringConversionManager stringConversionManager;
+
+
+   /**
+    * Creates an instance of the transition to string converter using the given string conversion
+    * manager.
+    * 
+    * @param stringConversionManager the string conversion manager, which should be used to clean
+    *           strings
+    */
+   public TransitionToStringConverter(StringConversionManager stringConversionManager) {
+      this.stringConversionManager = stringConversionManager;
+   }
+
+
+   /**
+    * Creates an instance of the transition to string converter using the given string conversion
+    * manager.
+    */
+   public TransitionToStringConverter() {
+      this.stringConversionManager = new StringConversionManager();
+   }
+
+
    /**
     * Creates a string representation of the given transition, consisting of the name of the
     * instruction linked with the transition and its parameters.
@@ -27,7 +51,7 @@ public class TransitionToStringConverter {
     * @param transition the transition to create the string representation of
     * @return string representation of the transition
     */
-   public static String createStringRepresentationOfTransition(Transition transition) {
+   public String createStringRepresentationOfTransition(Transition transition) {
 
       // check for special transitions first
       if (transition instanceof FlushTransition) {
@@ -45,7 +69,7 @@ public class TransitionToStringConverter {
          return CFGConstants.TODO;
       }
 
-      InstructionToStringConverter instructionToStringConverter = new InstructionToStringConverter(transition);
+      InstructionToStringConverter instructionToStringConverter = new InstructionToStringConverter(transition, stringConversionManager);
       return instructionToStringConverter.createStringRepresentation();
    }
 
@@ -57,8 +81,9 @@ public class TransitionToStringConverter {
     *           representation should be computed
     * @return the string representation of the given write def chain transition
     */
-   private static String createWriteDefChainTransitionStringRepresentation(WriteDefChainTransition writeDefChainTransition) {
-      WriteDefChainToStringConverter writeDefChainToStringConverter = new WriteDefChainToStringConverter(writeDefChainTransition);
+   private String createWriteDefChainTransitionStringRepresentation(WriteDefChainTransition writeDefChainTransition) {
+      WriteDefChainToStringConverter writeDefChainToStringConverter = new WriteDefChainToStringConverter(writeDefChainTransition,
+            stringConversionManager);
       return writeDefChainToStringConverter.createStringRepresentation();
    }
 
@@ -70,12 +95,12 @@ public class TransitionToStringConverter {
     *           be computed
     * @return the string representation of the given early read transition
     */
-   private static String createEarlyReadTransitionStringRepresentation(EarlyReadTransition earlyReadTransition) {
+   private String createEarlyReadTransitionStringRepresentation(EarlyReadTransition earlyReadTransition) {
       if (!(earlyReadTransition.getInstruction() instanceof Load)) {
          throw new RuntimeException("Instruction on early read transition " + earlyReadTransition + " is not a load instruction.");
       }
       Load earlyReadLoad = (Load) earlyReadTransition.getInstruction();
-      String loadAddressName = GraphUtility.addressToString(earlyReadLoad.getResult());
+      String loadAddressName = stringConversionManager.addressToString(earlyReadLoad.getResult());
       StringBuilder stringBuilder = new StringBuilder(loadAddressName);
       stringBuilder.append(CFGConstants.ASSIGN);
       stringBuilder.append(earlyReadTransition.getAssignmentExpression());
@@ -90,13 +115,13 @@ public class TransitionToStringConverter {
     *           computed
     * @return the string representation of the given flush transition
     */
-   private static String createFlushTransitionStringRepresentation(FlushTransition flushTransition) {
+   private String createFlushTransitionStringRepresentation(FlushTransition flushTransition) {
       if (!flushTransition.getSource().getBuffer().getAddressValuePairs().isEmpty()) {
          StringBuffer stringBuffer = new StringBuffer(CFGConstants.FLUSH);
          AddressValuePair flushedAddressValuePair = GraphUtility.getFlushedAddressValuePair(flushTransition);
          if (flushedAddressValuePair != null) {
             stringBuffer.append(StringUtils.LEFT_BRACKET);
-            stringBuffer.append(GraphUtility.addressValuePairToString(flushedAddressValuePair));
+            stringBuffer.append(stringConversionManager.addressValuePairToString(flushedAddressValuePair));
             stringBuffer.append(StringUtils.RIGHT_BRACKET);
          } else {
             throw new RuntimeException("Found flush transition which flushes no buffer entry.");

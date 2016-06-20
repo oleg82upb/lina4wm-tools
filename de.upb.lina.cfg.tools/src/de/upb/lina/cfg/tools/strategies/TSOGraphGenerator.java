@@ -301,7 +301,7 @@ public class TSOGraphGenerator extends AbstractGraphGenerator {
       EarlyReadTransition transition = ControlflowFactory.eINSTANCE.createEarlyReadTransition();
       AddressValuePair pair = getLatestBufferEntry(source, load);
       Parameter value = pair.getValues().get(0);
-      String valueInBuffer = GraphUtility.valueToString(value.getValue());
+      String valueInBuffer = stringConversionManager.valueToString(value.getValue());
       transition.setAssignmentExpression(valueInBuffer);
       transition.setInstruction(load);
       transition.setDiagram(this.graph);
@@ -338,14 +338,16 @@ public class TSOGraphGenerator extends AbstractGraphGenerator {
    }
 
 
-	@Override
-	protected ControlFlowLocation getLocationByPcAndBuffer(int pc, StoreBuffer buffer)
-	{
-		ArrayList<ControlFlowLocation> list = new ArrayList<ControlFlowLocation>();
-		this.graph.getLocations().forEach(loc -> {if (loc.getPc() == pc) list.add(loc);});
-		//this method needs a lot of string manipulation, so it is better to keep the list short
-		return GraphUtility.getLocationRepresentedBy(list, pc, buffer, getMemoryModel());
-	}
+   @Override
+   protected ControlFlowLocation getLocationByPcAndBuffer(int pc, StoreBuffer buffer) {
+      ArrayList<ControlFlowLocation> list = new ArrayList<ControlFlowLocation>();
+      this.graph.getLocations().forEach(loc -> {
+         if (loc.getPc() == pc)
+            list.add(loc);
+      });
+      // this method needs a lot of string manipulation, so it is better to keep the list short
+      return GraphUtility.getLocationRepresentedBy(list, pc, buffer, getMemoryModel());
+   }
 
 
    @Override

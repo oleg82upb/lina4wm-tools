@@ -9,7 +9,7 @@ import org.eclipse.gmf.runtime.notation.View;
 
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.tools.EMemoryModel;
-import de.upb.lina.cfg.tools.GraphUtility;
+import de.upb.lina.cfg.tools.stringrepresentation.StringConversionManager;
 
 
 /**
@@ -20,6 +20,7 @@ import de.upb.lina.cfg.tools.GraphUtility;
 public class CustomControlFlowLocationPcEditPart extends ControlFlowLocationPcEditPart {
 
    private View view;
+   private StringConversionManager stringConversionManager;
 
 
    /**
@@ -28,6 +29,7 @@ public class CustomControlFlowLocationPcEditPart extends ControlFlowLocationPcEd
    public CustomControlFlowLocationPcEditPart(View view) {
       super(view);
       this.view = view;
+      this.stringConversionManager = new StringConversionManager();
    }
 
 
@@ -40,6 +42,6 @@ public class CustomControlFlowLocationPcEditPart extends ControlFlowLocationPcEd
    @Override
    protected String getLabelText() {
       ControlFlowLocation loc = (ControlFlowLocation) view.getElement();
-      return GraphUtility.bufferToString(loc, EMemoryModel.getMemoryModelById(loc.getDiagram().getMemoryModel()));
+      return stringConversionManager.bufferToString(loc, EMemoryModel.getMemoryModelById(loc.getDiagram().getMemoryModel()));
    }
 }

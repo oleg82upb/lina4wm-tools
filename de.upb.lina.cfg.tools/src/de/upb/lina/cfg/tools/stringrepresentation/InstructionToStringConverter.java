@@ -53,6 +53,8 @@ public class InstructionToStringConverter {
    private Transition transition;
    private StringBuilder stringBuilder;
 
+   private StringConversionManager stringConversionManager;
+
 
    /**
     * Creates a new instruction to string converter, which can be used to create the string
@@ -61,10 +63,13 @@ public class InstructionToStringConverter {
     * well, this constructor should be avoided!
     * 
     * @param instruction the instruction to create the string representation of
+    * @param stringConversionManager the string conversion manager, which should be used to clean
+    *           strings
     */
-   public InstructionToStringConverter(Instruction instruction) {
+   public InstructionToStringConverter(Instruction instruction, StringConversionManager stringConversionManager) {
       this.instruction = instruction;
       this.stringBuilder = new StringBuilder();
+      this.stringConversionManager = stringConversionManager;
    }
 
 
@@ -74,9 +79,11 @@ public class InstructionToStringConverter {
     * 
     * @param transition the transition hosting the instruction to create the string representation
     *           of
+    * @param stringConversionManager the string conversion manager, which should be used to clean
+    *           strings
     */
-   public InstructionToStringConverter(Transition transition) {
-      this(transition.getInstruction());
+   public InstructionToStringConverter(Transition transition, StringConversionManager stringConversionManager) {
+      this(transition.getInstruction(), stringConversionManager);
       this.transition = transition;
    }
 
@@ -129,7 +136,7 @@ public class InstructionToStringConverter {
 
    private void createCompareStringRepresentation() {
       Compare compare = (Compare) instruction;
-      stringBuilder.append(GraphUtility.addressToString(compare.getResult()));
+      stringBuilder.append(stringConversionManager.addressToString(compare.getResult()));
       stringBuilder.append(CFGConstants.ASSIGN);
       stringBuilder.append(StringUtils.LEFT_BRACKET);
       String compareCondition = compare.getCond();
@@ -140,7 +147,7 @@ public class InstructionToStringConverter {
          stringBuilder.append(CFGConstants.TRUE);
          return;
       }
-      stringBuilder.append(GraphUtility.valueToString(compare.getOperand1()));
+      stringBuilder.append(stringConversionManager.valueToString(compare.getOperand1()));
       stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
       if (compareCondition.equals("eq")) {
          stringBuilder.append("== ");
@@ -183,17 +190,17 @@ public class InstructionToStringConverter {
       } else if (compareCondition.equals("uno")) {
          stringBuilder.append("not orderd ");
       }
-      stringBuilder.append(GraphUtility.valueToString(compare.getOperand2()));
+      stringBuilder.append(stringConversionManager.valueToString(compare.getOperand2()));
       stringBuilder.append(StringUtils.RIGHT_BRACKET);
    }
 
 
    private void createLogicOperationStringRepresentation() {
       LogicOperation logicOperation = (LogicOperation) instruction;
-      stringBuilder.append(GraphUtility.addressToString(logicOperation.getResult()));
+      stringBuilder.append(stringConversionManager.addressToString(logicOperation.getResult()));
       stringBuilder.append(CFGConstants.ASSIGN);
       String operationName = logicOperation.getOperation();
-      stringBuilder.append(GraphUtility.valueToString(logicOperation.getValue1()));
+      stringBuilder.append(stringConversionManager.valueToString(logicOperation.getValue1()));
       stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
       if (operationName.equals("shl")) {
          stringBuilder.append("<< ");
@@ -208,17 +215,17 @@ public class InstructionToStringConverter {
       } else if (operationName.equals("xor")) {
          stringBuilder.append("^ ");
       }
-      stringBuilder.append(GraphUtility.valueToString(logicOperation.getValue2()));
+      stringBuilder.append(stringConversionManager.valueToString(logicOperation.getValue2()));
    }
 
 
    private void createArithmeticOperationStringRepresentation() {
       ArithmeticOperation arithmeticOperation = (ArithmeticOperation) instruction;
-      stringBuilder.append(GraphUtility.addressToString(arithmeticOperation.getResult()));
+      stringBuilder.append(stringConversionManager.addressToString(arithmeticOperation.getResult()));
       stringBuilder.append(CFGConstants.ASSIGN);
 
       String operation = arithmeticOperation.getOperation();
-      stringBuilder.append(GraphUtility.valueToString(arithmeticOperation.getValue1()));
+      stringBuilder.append(stringConversionManager.valueToString(arithmeticOperation.getValue1()));
       stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
       if (operation.equals("add") || operation.equals("fadd")) {
          stringBuilder.append("+ ");
@@ -231,57 +238,57 @@ public class InstructionToStringConverter {
       } else if (operation.equals("urem") || operation.equals("srem") || operation.equals("frem")) {
          stringBuilder.append("% ");
       }
-      stringBuilder.append(GraphUtility.valueToString(arithmeticOperation.getValue2()));
+      stringBuilder.append(stringConversionManager.valueToString(arithmeticOperation.getValue2()));
    }
 
 
    private void createAllocStringRepresentation() {
       Alloc alloc = (Alloc) instruction;
-      stringBuilder.append(GraphUtility.addressToString(alloc.getResult()));
+      stringBuilder.append(stringConversionManager.addressToString(alloc.getResult()));
       stringBuilder.append(CFGConstants.ASSIGN);
       stringBuilder.append(CFGConstants.ALLOC);
       stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
-      stringBuilder.append(GraphUtility.clean(GraphUtility.typeUseToString(alloc.getType())));
+      stringBuilder.append(stringConversionManager.clean(stringConversionManager.typeUseToString(alloc.getType())));
    }
 
 
    private void createCallStringRepresentation() {
       Call call = (Call) instruction;
       if (call.getResult() != null) {
-         stringBuilder.append(GraphUtility.addressToString(call.getResult()));
+         stringBuilder.append(stringConversionManager.addressToString(call.getResult()));
          stringBuilder.append(CFGConstants.ASSIGN);
       }
       stringBuilder.append(CFGConstants.CALL);
       stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
-      stringBuilder.append(GraphUtility.parameterValueToString(call.getFunction()));
-      stringBuilder.append(GraphUtility.parameterListToString(call.getPList()));
+      stringBuilder.append(stringConversionManager.parameterValueToString(call.getFunction()));
+      stringBuilder.append(stringConversionManager.parameterListToString(call.getPList()));
    }
 
 
    private void createCompareExchangeStringRepresentation() {
       CmpXchg compareExchange = (CmpXchg) instruction;
-      stringBuilder.append(GraphUtility.addressToString(compareExchange.getResult()));
+      stringBuilder.append(stringConversionManager.addressToString(compareExchange.getResult()));
       stringBuilder.append(CFGConstants.ASSIGN);
       stringBuilder.append("CAS(");
-      stringBuilder.append(GraphUtility.parameterValueToString(compareExchange.getAddress()));
+      stringBuilder.append(stringConversionManager.parameterValueToString(compareExchange.getAddress()));
       stringBuilder.append(", ");
-      stringBuilder.append(GraphUtility.parameterValueToString(compareExchange.getValue()));
+      stringBuilder.append(stringConversionManager.parameterValueToString(compareExchange.getValue()));
       stringBuilder.append(", ");
-      stringBuilder.append(GraphUtility.parameterValueToString(compareExchange.getNewValue()));
+      stringBuilder.append(stringConversionManager.parameterValueToString(compareExchange.getNewValue()));
       stringBuilder.append(StringUtils.RIGHT_BRACKET);
    }
 
 
    private void createGetElementPointerStringRepresentation() {
       GetElementPtr getElementPointer = (GetElementPtr) instruction;
-      stringBuilder.append(GraphUtility.addressToString(getElementPointer.getResult()));
+      stringBuilder.append(stringConversionManager.addressToString(getElementPointer.getResult()));
       stringBuilder.append(CFGConstants.ASSIGN);
       stringBuilder.append(CFGConstants.GETELEMENENTPTR);
       stringBuilder.append(StringUtils.LEFT_BRACKET);
-      stringBuilder.append(GraphUtility.parameterValueToString(getElementPointer.getAggregate()));
+      stringBuilder.append(stringConversionManager.parameterValueToString(getElementPointer.getAggregate()));
       for (Parameter getElementPointerIndex : getElementPointer.getIndices()) {
          stringBuilder.append(", ");
-         stringBuilder.append(GraphUtility.parameterValueToString(getElementPointerIndex));
+         stringBuilder.append(stringConversionManager.parameterValueToString(getElementPointerIndex));
       }
       stringBuilder.append(StringUtils.RIGHT_BRACKET);
    }
@@ -307,21 +314,21 @@ public class InstructionToStringConverter {
       Store store = (Store) instruction;
       stringBuilder.append(CFGConstants.STORE);
       stringBuilder.append(StringUtils.LEFT_BRACKET);
-      stringBuilder.append(GraphUtility.parameterValueToString(store.getValue()));
+      stringBuilder.append(stringConversionManager.parameterValueToString(store.getValue()));
       stringBuilder.append(", ");
-      stringBuilder.append(GraphUtility.parameterValueToString(store.getTargetAddress()));
+      stringBuilder.append(stringConversionManager.parameterValueToString(store.getTargetAddress()));
       stringBuilder.append(StringUtils.RIGHT_BRACKET);
    }
 
 
    private void createLoadStringRepresentation() {
       Load load = (Load) instruction;
-      stringBuilder.append(GraphUtility.addressToString(load.getResult()));
+      stringBuilder.append(stringConversionManager.addressToString(load.getResult()));
       stringBuilder.append(CFGConstants.ASSIGN);
       stringBuilder.append(CFGConstants.LOAD);
       stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
       stringBuilder.append(StringUtils.LEFT_BRACKET);
-      stringBuilder.append(GraphUtility.parameterValueToString(load.getAddress()));
+      stringBuilder.append(stringConversionManager.parameterValueToString(load.getAddress()));
       stringBuilder.append(StringUtils.RIGHT_BRACKET);
    }
 
@@ -339,7 +346,7 @@ public class InstructionToStringConverter {
 
       if (castedReturnValue != null) {
          stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
-         stringBuilder.append(GraphUtility.valueToString(castedReturnValue));
+         stringBuilder.append(stringConversionManager.valueToString(castedReturnValue));
          stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
       }
       return stringBuilder.toString();
@@ -348,12 +355,12 @@ public class InstructionToStringConverter {
 
    private void createCastStringRepresentation() {
       Cast instr = (Cast) instruction;
-      stringBuilder.append(GraphUtility.addressToString(instr.getResult()));
+      stringBuilder.append(stringConversionManager.addressToString(instr.getResult()));
       stringBuilder.append(CFGConstants.ASSIGN);
       stringBuilder.append(StringUtils.LEFT_BRACKET);
-      stringBuilder.append(GraphUtility.clean(GraphUtility.typeUseToString(instr.getTo())));
+      stringBuilder.append(stringConversionManager.clean(stringConversionManager.typeUseToString(instr.getTo())));
       stringBuilder.append(") ");
-      stringBuilder.append(GraphUtility.valueToString(instr.getValue()));
+      stringBuilder.append(stringConversionManager.valueToString(instr.getValue()));
    }
 
 
@@ -361,8 +368,8 @@ public class InstructionToStringConverter {
       Invoke instr = (Invoke) instruction;
       stringBuilder.append(CFGConstants.INVOKE);
       stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
-      stringBuilder.append(GraphUtility.addressToString(instr.getName()));
-      stringBuilder.append(GraphUtility.parameterListToString(instr.getPList()));
+      stringBuilder.append(stringConversionManager.addressToString(instr.getName()));
+      stringBuilder.append(stringConversionManager.parameterListToString(instr.getPList()));
    }
 
 
@@ -376,62 +383,62 @@ public class InstructionToStringConverter {
       AtomicRMW atomicReadModifyWrite = (AtomicRMW) instruction;
       String operationName = atomicReadModifyWrite.getOperation();
       if (operationName.equals("xchg")) {
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getAddress()));
          stringBuilder.append(" <-> ");
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getArgument()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getArgument()));
       } else if (operationName.equals("add")) {
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getAddress()));
          stringBuilder.append(" = ");
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getAddress()));
          stringBuilder.append(" + ");
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getArgument()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getArgument()));
       } else if (operationName.equals("sub")) {
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getAddress()));
          stringBuilder.append(" = ");
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getAddress()));
          stringBuilder.append(" - ");
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getArgument()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getArgument()));
       } else if (operationName.equals("and")) {
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getAddress()));
          stringBuilder.append(" = ");
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getAddress()));
          stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
          stringBuilder.append(CFGConstants.WEDGE);
          stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getArgument()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getArgument()));
       } else if (operationName.equals("nand")) {
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getAddress()));
          stringBuilder.append(" = ");
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getAddress()));
          stringBuilder.append(" !& ");
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getArgument()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getArgument()));
       } else if (operationName.equals("or")) {
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getAddress()));
          stringBuilder.append(" = ");
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getAddress()));
          stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
          stringBuilder.append(CFGConstants.VEE);
          stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getArgument()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getArgument()));
       } else if (operationName.equals("xor")) {
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getAddress()));
          stringBuilder.append(" = ");
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getAddress()));
          stringBuilder.append(" xor ");
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getArgument()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getArgument()));
       } else if (operationName.equals("max") || operationName.equals("umax")) {
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getAddress()));
          stringBuilder.append(" = max(");
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getAddress()));
          stringBuilder.append(", ");
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getArgument()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getArgument()));
          stringBuilder.append(") ");
       } else if (operationName.equals("min") || operationName.equals("umin")) {
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getAddress()));
          stringBuilder.append(" = min(");
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getAddress()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getAddress()));
          stringBuilder.append(", ");
-         stringBuilder.append(GraphUtility.parameterValueToString(atomicReadModifyWrite.getArgument()));
+         stringBuilder.append(stringConversionManager.parameterValueToString(atomicReadModifyWrite.getArgument()));
          stringBuilder.append(StringUtils.RIGHT_BRACKET);
       }
       stringBuilder.append(" )");
@@ -440,7 +447,7 @@ public class InstructionToStringConverter {
 
    private void createPhiStringRepresentation() {
       Phi phiInstruction = (Phi) instruction;
-      stringBuilder.append(GraphUtility.addressToString(phiInstruction.getResult()));
+      stringBuilder.append(stringConversionManager.addressToString(phiInstruction.getResult()));
       stringBuilder.append(" := ");
       stringBuilder.append(CFGConstants.PHI);
       stringBuilder.append(" ");
@@ -473,7 +480,7 @@ public class InstructionToStringConverter {
          // we use the PC instead of the original label, since we don't
          // have the labels in the store buffer graph anymore
          stringBuilder.append("[");
-         stringBuilder.append(GraphUtility.valueToString(phiCase.getValue()));
+         stringBuilder.append(stringConversionManager.valueToString(phiCase.getValue()));
          stringBuilder.append(", ");
          stringBuilder.append(CFGConstants.PC_PREFIX);
          stringBuilder.append(sourcePC);

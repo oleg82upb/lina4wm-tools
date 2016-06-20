@@ -27,7 +27,7 @@ import de.upb.lina.cfg.gendata.LocationLabel;
 import de.upb.lina.cfg.gendata.MemorySizeMapping;
 import de.upb.lina.cfg.gendata.PhiMapping;
 import de.upb.lina.cfg.gendata.TransitionLabel;
-import de.upb.lina.cfg.tools.GraphUtility;
+import de.upb.lina.cfg.tools.stringrepresentation.StringConversionManager;
 import de.upb.lina.transformations.Activator;
 import de.upb.lina.transformations.Constants;
 import de.upb.llvm_parser.llvm.AbstractElement;
@@ -100,10 +100,14 @@ public class GendataPrecomputer {
    private HashMap<FunctionDefinition, List<String>> usedVarsInFunctions = new HashMap<FunctionDefinition, List<String>>();
 
 
+   private StringConversionManager stringConversionManager;
+
+
    public GendataPrecomputer(TransformationConfiguration config) {
       this.cfgs = config.getStoreBufferGraphs();
       this.kivTransformationBasis = config.getKIVBasis();
       this.oldToNewCfgName = config.getOldToNewCfgName();
+      this.stringConversionManager = new StringConversionManager();
    }
 
 
@@ -717,11 +721,11 @@ public class GendataPrecomputer {
       String bufferLabel = cfgToLabelPrefix.get(loc.getDiagram()) + String.format("%0" + sizeString + "d", loc.getPc());
 
       for (AddressValuePair avp : loc.getBuffer().getAddressValuePairs()) {
-         bufferLabel += GraphUtility.valueToString(avp.getAddress().getValue());
+         bufferLabel += stringConversionManager.valueToString(avp.getAddress().getValue());
 
          if (!shortLabel) {
             for (int i = 0; i < avp.getValues().size(); i++) {
-               bufferLabel += GraphUtility.valueToString(avp.getValues().get(i).getValue());
+               bufferLabel += stringConversionManager.valueToString(avp.getValues().get(i).getValue());
             }
          }
       }
@@ -1005,7 +1009,7 @@ public class GendataPrecomputer {
          // no mapping found, create new one
       } else {
          // create new addressmapping
-         AddressMapping addressMapping = createAddressMapping(address, GraphUtility.clean(address.getName()));
+         AddressMapping addressMapping = createAddressMapping(address, stringConversionManager.clean(address.getName()));
          setType(addressMapping, address);
 
          addressLookup.put(address, addressMapping.getName());
@@ -1298,7 +1302,7 @@ public class GendataPrecomputer {
 
       try {
          // first index
-         int firstIndexValue = Integer.parseInt(GraphUtility.valueToString(indices.get(0).getValue()));
+         int firstIndexValue = Integer.parseInt(stringConversionManager.valueToString(indices.get(0).getValue()));
          if (firstIndexValue != 0) {
             mapping.setWarning(mapping.getWarning() + "Needs attention as first index is not 0!");
          }
@@ -1321,7 +1325,7 @@ public class GendataPrecomputer {
          // following indices
          for (int i = 0; i < indices.size(); i++) {
 
-            int indexVal = Integer.parseInt(GraphUtility.valueToString(indices.get(i).getValue()));
+            int indexVal = Integer.parseInt(stringConversionManager.valueToString(indices.get(i).getValue()));
 
             int intermediateResult = computeSize(partOfAggregate, indexVal, false);
             result += intermediateResult;
@@ -1351,10 +1355,10 @@ public class GendataPrecomputer {
                int size = computeCompleteSize(getPartOfAggregate(partOfAggregate, i), false);
                if (size != 1) {
                   // 2*value or 3*value...
-                  sResult += size + "*" + GraphUtility.valueToString(index);
+                  sResult += size + "*" + stringConversionManager.valueToString(index);
                } else {
                   // 1*value = value
-                  sResult += GraphUtility.valueToString(index);
+                  sResult += stringConversionManager.valueToString(index);
                }
             }
 
@@ -1410,7 +1414,6 @@ public class GendataPrecomputer {
             completeSize = computeCompleteSize(ePtr.getAggregate().getType(), false);
 
          } else {
-            ptr = ptr;
             NestedGetElementPtr nPtr = (NestedGetElementPtr) ptr;
             mapping.setOffset(getGetElementPtrValue(nPtr, mapping));
             completeSize = computeCompleteSize(nPtr.getAggregate().getType(), false);

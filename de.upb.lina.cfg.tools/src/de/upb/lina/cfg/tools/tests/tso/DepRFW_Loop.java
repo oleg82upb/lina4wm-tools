@@ -13,7 +13,6 @@ import org.junit.Test;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.EMemoryModel;
-import de.upb.lina.cfg.tools.GraphUtility;
 import de.upb.lina.cfg.tools.tests.TSO_Test;
 
 
@@ -47,7 +46,7 @@ public class DepRFW_Loop extends TSO_Test {
 
       // check that all buffers contain the correct elements
       for (ControlFlowLocation l : nonEmptyBuffers) {
-         String buffer = GraphUtility.bufferToString(l, EMemoryModel.TSO);
+         String buffer = stringConversionManager.bufferToString(l, EMemoryModel.TSO);
          boolean isValidBuffer = buffer.equals("L" + l.getPc() + " <(r1: v0" + CFGConstants.WDC_SUFFIX + ")>");
          assertTrue(isValidBuffer);
       }
