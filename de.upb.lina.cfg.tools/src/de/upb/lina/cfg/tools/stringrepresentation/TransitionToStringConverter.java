@@ -12,6 +12,12 @@ import de.upb.lina.cfg.tools.StringUtils;
 import de.upb.llvm_parser.llvm.Load;
 
 
+/**
+ * This class is responsible for creating the string representation of a transition.
+ * 
+ * @author Alexander Hetzer
+ *
+ */
 public class TransitionToStringConverter {
 
    /**
