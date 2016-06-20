@@ -432,7 +432,7 @@ public abstract class GraphUtility {
     * @param adress the address to represent
     * @return the string representation of the given address
     */
-   static String addressToString(Address adress) {
+   public static String addressToString(Address adress) {
       return clean(adress.getName());
    }
 
@@ -469,7 +469,8 @@ public abstract class GraphUtility {
          stringBuffer.append(((PrimitiveValue) value).getValue());
       } else if (value instanceof NestedGetElementPtr) {
          // TODO indices are missing and actually a simple representation
-         return "(GetElementPtr" + CFGConstants.WS + parameterValueToString(((NestedGetElementPtr) value).getAggregate()) + StringUtils.RIGHT_BRACKET;
+         return "(GetElementPtr" + StringUtils.WHITESPACE_SINGLE + parameterValueToString(((NestedGetElementPtr) value).getAggregate())
+               + StringUtils.RIGHT_BRACKET;
       } else if (value instanceof NestedCast) {
          NestedCast val = (NestedCast) value;
          stringBuffer.append(StringUtils.LEFT_BRACKET);
@@ -482,7 +483,7 @@ public abstract class GraphUtility {
          stringBuffer.append(CFGConstants.TODO);
       }
 
-      stringBuffer.append(CFGConstants.WS);
+      stringBuffer.append(StringUtils.WHITESPACE_SINGLE);
       return stringBuffer.toString();
    }
 
@@ -521,7 +522,8 @@ public abstract class GraphUtility {
     * method is used by the .mtl models!
     * 
     * @param transition the flush transition to consider
-    * @return the address value pair, which is flushed in the given transition
+    * @return the address value pair, which is flushed in the given transition, {@code null} if none
+    *         was found
     */
    public static AddressValuePair getFlushedAddressValuePair(FlushTransition transition) {
       StoreBuffer sourceBuffer = transition.getSource().getBuffer();
