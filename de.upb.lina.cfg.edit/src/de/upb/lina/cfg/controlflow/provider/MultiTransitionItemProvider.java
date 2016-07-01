@@ -5,6 +5,7 @@ package de.upb.lina.cfg.controlflow.provider;
 
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 
+import de.upb.lina.cfg.controlflow.MultiTransition;
 import java.util.Collection;
 import java.util.List;
 
@@ -45,7 +46,8 @@ public class MultiTransitionItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addInstructionsPropertyDescriptor(object);
@@ -94,7 +96,10 @@ public class MultiTransitionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_MultiTransition_type");
+		String label = ((MultiTransition)object).getLabel();
+		return label == null || label.length() == 0 ?
+			getString("_UI_MultiTransition_type") :
+			getString("_UI_MultiTransition_type") + " " + label;
 	}
 
 	/**

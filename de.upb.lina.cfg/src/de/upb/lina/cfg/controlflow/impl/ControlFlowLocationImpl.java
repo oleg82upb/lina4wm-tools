@@ -38,7 +38,7 @@ import de.upb.lina.cfg.controlflow.Transition;
  *
  * @generated
  */
-public class ControlFlowLocationImpl extends EObjectImpl implements ControlFlowLocation {
+public class ControlFlowLocationImpl extends AbstractLabeledElementImpl implements ControlFlowLocation {
 	/**
 	 * The default value of the '{@link #getPc() <em>Pc</em>}' attribute.
 	 * <!-- begin-user-doc -->

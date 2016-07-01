@@ -70,6 +70,8 @@ public class ControlflowFactoryImpl extends EFactoryImpl implements ControlflowF
 			case ControlflowPackage.FLUSH_TRANSITION: return createFlushTransition();
 			case ControlflowPackage.ADDRESS_VALUE_PAIR: return createAddressValuePair();
 			case ControlflowPackage.STORE_BUFFER: return createStoreBuffer();
+			case ControlflowPackage.PHI_ASSIGNMENT: return createPhiAssignment();
+			case ControlflowPackage.VARIABLE: return createVariable();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -173,6 +175,28 @@ public class ControlflowFactoryImpl extends EFactoryImpl implements ControlflowF
 	public StoreBuffer createStoreBuffer() {
 		StoreBufferImpl storeBuffer = new StoreBufferImpl();
 		return storeBuffer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PhiAssignment createPhiAssignment()
+	{
+		PhiAssignmentImpl phiAssignment = new PhiAssignmentImpl();
+		return phiAssignment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Variable createVariable()
+	{
+		VariableImpl variable = new VariableImpl();
+		return variable;
 	}
 
 	/**

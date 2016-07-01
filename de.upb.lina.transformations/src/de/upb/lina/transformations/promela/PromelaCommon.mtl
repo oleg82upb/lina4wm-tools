@@ -1,0 +1,421 @@
+[module PromelaCommon('http://www.upb.de/lina/cfg/controlflow', 'http://www.upb.de/lina/cfg/gendata', 'http://www.upb.de/llvm_parser/llvm', 'http://www.eclipse.org/emf/2002/Ecore')]
+
+
+
+
+[template public genFunctionHead(cfg: ControlFlowDiagram, genData: GeneratorData)]
+[if(not cfg.name.equalsIgnoreCase(cleanFunctionName(cfg.functionDefinition.address.name)))]//function was renamed from: [cfg.functionDefinition.address.name/][/if]
+inline [cleanFunctionName(cfg.name)/]([generateAllParameters(cfg, genData)/]){
+[/template]
+
+[query private cleanFunctionName(str: String) : String = 
+str.replaceAll('@_','').replaceAll('@','') /]
+
+
+[template private generateAllParameters(cfg: ControlFlowDiagram, genData: GeneratorData)]
+[for (v : Variable | cfg.parameterVariables) separator(', ')][v.newName/][/for][generateReturnParamIfNecessary(cfg.functionDefinition.parameter.oclIsUndefined(), cfg.functionDefinition.returnType, genData)/]
+[/template]
+
+[template private generateReturnParamIfNecessary(noPreviousParams: Boolean, ret: TypeUse, genData: GeneratorData)]
+[if (ret.oclIsTypeOf(Predefined) and 'void'.equalsIgnoreCase(ret.oclAsType(Predefined).type))][else][if (noPreviousParams)]returnvalue[else], returnvalue[/if][/if]
+[/template]
+
+[template public genGlobalVars(genData: GeneratorData)]
+[for (v: Variable | genData.globalVariables)]
+short [v.newName/] = [genValueInitialization(getGlobalDefForAddress(v.originalAddresses->first(), genData), genData) /]
+[/for]
+[/template]
+[query private getGlobalDefForAddress(adr : Address, genData: GeneratorData) : GlobalDefinition = 
+genData.program.elements->filter(GlobalDefinition)->any(gd | gd.address = adr) /]
+
+
+[query private genValueInitialization(gDef : GlobalDefinition, genData: GeneratorData) : String = 
+if gDef.value.oclIsTypeOf(Parameter) then
+	if gDef.value.oclAsType(Parameter).type.oclIsTypeOf(Array) then
+	'0; //Array: please, check initialization in the init process'
+	else if gDef.value.oclAsType(Parameter).type.oclIsTypeOf(Structure) then
+			'0; //Structure: please, check initialization in the init process'
+		else
+			valueToString(gDef.value.oclAsType(Parameter).value, null, genData) + ';'
+		endif
+	endif
+else if gDef.value.oclIsTypeOf(Predefined) then
+		gDef.value.oclAsType(Predefined).type + '' + gDef.value.oclAsType(Predefined).pointer + ';//needs attention'
+	else 
+		''
+	endif
+endif
+/]
+
+[template public genGlobalVariableAllocation(genData: GeneratorData)]
+[for (var: Variable | genData.globalVariables)]
+alloca([genAllocationSize(var, genData)/], [var.newName/]);
+[/for]
+[/template]
+
+[query private genAllocationSize(v : Variable, genData: GeneratorData) : String =
+let gDefs : OrderedSet(GlobalDefinition) = genData.program.elements->filter(GlobalDefinition)->select(df | df.address = v.originalAddresses->first()) in
+let gDef : GlobalDefinition  = gDefs->first() in 
+if gDef.value.oclIsTypeOf(Parameter) then
+	if gDef.value.oclAsType(Parameter).type.oclIsTypeOf(Array) or gDef.value.oclAsType(Parameter).type.oclIsTypeOf(Structure) then
+		determineSize(gDef.value.oclAsType(Parameter).type, genData)
+	else '1'
+	endif
+else 
+	'1'
+endif
+/]
+
+[query private determineSize(t: EObject, genData: GeneratorData) : Integer = 
+if t.oclIsTypeOf(Array) then
+if determineSize(t.oclAsType(Array).type, genData) = 1 then  
+	t.oclAsType(Array).length
+else
+	t.oclAsType(Array).length * determineSize(t.oclAsType(Array).type, genData) 
+endif 
+else if t.oclIsTypeOf(Structure) then  
+		t.oclAsType(Structure).types->collect(type | determineSize(type, genData))->sum()
+	else if t.oclIsTypeOf(AddressUse) then
+		let tDef : TypeDefinition = genData.program.elements->filter(TypeDefinition)->select(tf | tf.address = t.oclAsType(AddressUse).address)->first() in
+			if tDef.oclIsUndefined() then
+				1
+			else
+				determineSize(tDef.struct.oclAsType(EObject), genData)
+			endif
+		else 
+				1
+		endif
+	endif
+endif
+/]
+
+[template public genLocalVarDeclarations(cfg: ControlFlowDiagram, genData: GeneratorData)]
+[if (cfg.localVariables->notEmpty())]short [for (v: Variable | cfg.localVariables) separator(', ')][v.newName/][/for];[/if]
+[/template]
+
+[comment ====== Generic Calls ======/]
+[query private getVariableExpensive(address: Address, genData: GeneratorData) : Variable = 
+genData.allVariables->any(v | v.originalAddresses->select(adr | adr = address)->notEmpty())
+/]
+
+[query public getVariableForAddress(a: Address, t : Transition, genData: GeneratorData) : Variable =  
+if t.oclIsUndefined() or getVariableFromTransition(a, t).oclIsUndefined() then
+ 	getVariableExpensive(a, genData)
+else 
+	getVariableFromTransition(a, t)
+endif
+/]
+
+[query private getVariableFromTransition(address: Address, t : Transition) : Variable = 
+t.usedVariables->any(v | v.originalAddresses->select(adr | adr = address)->notEmpty())
+/]
+
+[query private valueToString(v : PrimitiveValue, t: Transition, genData: GeneratorData) : String = '' + v.value /]
+
+[query private valueToString(v : IntegerConstant, t: Transition, genData: GeneratorData) : String = '' + v.value /]
+
+[query private valueToString(v : DecimalConstant, t : Transition, genData: GeneratorData) : String = '' + v.value /]
+
+[comment]addressToStringExpensive(address, genData)  we can use it as a fall back solution, but it is very expensive[/comment]
+[query private valueToString(v : AddressUse, t : Transition, genData: GeneratorData) : String = 
+getVariableForAddress(v.address, t, genData).newName/]
+
+[query private valueToString(v : NestedGetElementPtr, t : Transition, genData: GeneratorData) : String = 
+valueToString(v.aggregate.value, t, genData) + ' + ' + valueToString(v.indices->at(2).value, t, genData) /]
+
+[query private valueToString(v : NestedCast, t : Transition, genData: GeneratorData) : String = 'FIXME, THIS NEVER HAPPENED BEFORE' /]
+
+[query private valueToString(v : ValueStruct, t : Transition, genData: GeneratorData) : String = 'FIXME, THIS NEVER HAPPENED BEFORE' /]
+
+[query private valueToString(v : Parameter, t : Transition, genData: GeneratorData) : String = valueToString(v.value, t, genData)/]
+
+[query public valueToString(v : EObject, t : Transition, genData: GeneratorData) : String = 
+if v.oclIsKindOf(Parameter) then valueToString(v.oclAsType(Parameter), t, genData)
+else if v.oclIsKindOf(Value) then valueToString(v.oclAsType(Value), t, genData)
+else 'FIXME, THIS NEVER HAPPENED BEFORE'
+endif
+endif 
+/]
+
+[query public valueToString(v : Value, t : Transition, genData: GeneratorData) : String = 
+if v.oclIsTypeOf(PrimitiveValue) then 
+	valueToString(v.oclAsType(PrimitiveValue), t, genData)
+else if v.oclIsTypeOf(IntegerConstant) then 
+	valueToString(v.oclAsType(IntegerConstant), t, genData)
+else if v.oclIsTypeOf(DecimalConstant) then 
+	valueToString(v.oclAsType(DecimalConstant), t, genData)
+else if v.oclIsTypeOf(AddressUse) then 
+	valueToString(v.oclAsType(AddressUse), t, genData)
+else if v.oclIsTypeOf(NestedGetElementPtr) then 
+	valueToString(v.oclAsType(NestedGetElementPtr), t, genData)
+else if v.oclIsTypeOf(NestedCast) then 
+	valueToString(v.oclAsType(NestedCast), t, genData)
+else 
+	'FIXME, THIS NEVER HAPPENED BEFORE'
+endif
+endif
+endif
+endif
+endif
+endif
+ /]
+
+
+
+
+[comment]   THIS PART CONTAINS ONLY LOCAL SEMANTICS     [/comment]
+
+[template public genPhiAssignments (t: Transition, genData: GeneratorData)][for (pa: PhiAssignment | t.phiAssignments)][pa.variable.newName/] = [valueToString(pa.value, t, genData)/]; [/for][/template]
+
+[template public genInstruction(e : Instruction, t: Transition, genData: GeneratorData)]
+[comment this is the fall back template/]
+// NOT SUPPORTED: [e.eClass().name/]
+[/template]
+
+[template public genInstruction(e : ArithmeticOperation, t: Transition, genData: GeneratorData)]
+[getVariableForAddress(e.result, t, genData).newName/] = [valueToString(e.value1, t, genData)/] [arithmeticOp(e.operation)/] [valueToString(e.value2, t, genData)/]; 
+[/template]
+
+[query private arithmeticOp(s : EString) : String = 
+if s.equalsIgnoreCase('add') then
+	'+'
+else if s.equalsIgnoreCase('sub') or s.equalsIgnoreCase('ashr') then
+	'-'
+else if s.equalsIgnoreCase('mul') then
+	'*'
+else if s.equalsIgnoreCase('udiv') or s.equalsIgnoreCase('sdiv') then
+	'/'
+else if s.equalsIgnoreCase('urem') or s.equalsIgnoreCase('srem') then
+	'%'
+else
+	'// UNHANDLED'
+endif
+endif
+endif
+endif
+endif
+/]
+
+[template public genInstruction(e : LogicOperation, t: Transition, genData: GeneratorData)]
+[getVariableForAddress(e.result, t, genData).newName/] = [valueToString(e.value1, t, genData)/] [e.operation.logicOp()/] [valueToString(e.value2, t, genData)/]; 
+[/template]
+
+[query private logicOp(s : EString) : String = 
+if s.equalsIgnoreCase('shl') then
+	'<<'
+else if s.equalsIgnoreCase('lshr') or s.equalsIgnoreCase('ashr') then
+	'>>'
+else if s.equalsIgnoreCase('and') then
+	'&'
+else if s.equalsIgnoreCase('or') then
+	'|'
+else if s.equalsIgnoreCase('xor') then
+	'^'
+else
+	'// UNHANDLED'
+endif
+endif
+endif
+endif
+endif
+/]
+
+[template public genInstruction(e : Cast, t: Transition, genData : GeneratorData)]
+[getVariableForAddress(e.result, t, genData).newName/] = [valueToString(e.value, t, genData)/]; 
+[/template]
+
+[template public genInstruction(e : NestedCast, t: Transition, genData : GeneratorData)]
+// TODO: Instruction (nested cast);
+[/template]
+
+[template public genInstruction(e : GetElementPtr, t: Transition, genData : GeneratorData)]
+getelementptr([genAggregateSize(e, genData)/], [valueToString(e.aggregate.value, t, genData)/], [genPtrOffset(e,genData)/], [getVariableForAddress(e.result, t, genData).newName/]); [for (m: MemorySizeMapping | genData.memorySizeMappings)][if(m.instruction=e)][if(not m.warning.equalsIgnoreCase(''))] /*[m.warning/]*/ [/if][/if][/for]
+[/template]
+
+[template public genInstruction(e : NestedGetElementPtr, t: Transition, genData: GeneratorData)]
+([valueToString(e.aggregate.value, t, genData)/] + [genPtrOffset(e,genData)/])
+[/template]
+
+[template public genPtrOffset(e : GetElementPtr, genData : GeneratorData)]
+[genData.memorySizeMappings->any(m | m.instruction = e).offset/]
+[/template]
+
+[template public genPtrOffset(e : NestedGetElementPtr, genData : GeneratorData)]
+[genData.memorySizeMappings->any(m | m.instruction = e).offset/]
+[/template]
+
+[template public genAggregateSize(e : GetElementPtr, genData : GeneratorData)]
+[genData.memorySizeMappings->any(m | m.instruction = e).completeTypeSize/]
+[/template]
+
+
+[query private dereferencedPtrSize(e: EObject) : Integer =
+if e.oclIsTypeOf(AddressUse) then
+	e.oclAsType(AddressUse).address.ancestors()
+		->at(1).oclAsType(TypeDefinition).struct.structSize()
+else 
+	e.typeSize()
+endif
+/]
+
+[query private dereferencedPtrType(e : EObject) : EObject =
+if e.oclIsTypeOf(AddressUse) then
+	e.oclAsType(AddressUse).address.ancestors()
+		->at(1).oclAsType(TypeDefinition).struct
+else 
+	e
+endif
+/]
+
+
+
+[template public genInstruction(e : Call,  t: Transition, genData : GeneratorData)]
+[valueToString(e.function.value, t, genData)/]([genFunctionCallParameter(e.pList, t, genData)/][if (e.pList.params->notEmpty())], [/if][genFunctionCallReturnParameter(e.result, t, genData)/]); 
+[/template]
+
+[template public genFunctionCallParameter(pl : ParameterList, t: Transition, genData: GeneratorData)]
+[for (p : Parameter | pl.params) separator (', ')][valueToString(p.value, t, genData)/][/for]
+[/template]
+
+[template public genFunctionCallReturnParameter(adr : Address, t: Transition, genData: GeneratorData)]
+[if (adr.oclIsUndefined())][else][getVariableForAddress(adr, t, genData).newName/][/if]
+[/template]
+
+
+[template public genInstruction(e : Alloc, t: Transition, genData: GeneratorData)]
+alloca([e.type.typeSize()/], [getVariableForAddress(e.result, t, genData).newName/]); 
+[/template]
+
+[template public genInstruction(e : Phi, t: Transition, genData: GeneratorData)][/template]
+
+[template public genInstruction(e : Select, t: Transition, genData: GeneratorData)]
+[getVariableForAddress(e.result, t, genData).newName/] = ([valueToString(e.condition.value, t, genData)/] -> [valueToString(e.trueValue.value, t, genData)/] : [valueToString(e.elseValue.value, t, genData)/]); 
+[/template]
+
+
+[template public genInstruction(e : Compare, t: Transition, genData: GeneratorData)]
+[getVariableForAddress(e.result, t, genData).newName/] = ([valueToString(e.operand1, t, genData)/] [compareOp(e.cond)/] [valueToString(e.operand2, t, genData)/]); 
+[/template]
+
+[query private compareOp(s : EString) : String = 
+if s.equalsIgnoreCase('eq') then
+	'=='
+else if s.equalsIgnoreCase('ne') then
+	'!='
+else if s.equalsIgnoreCase('ugt') or s.equalsIgnoreCase('sgt') then
+	'>'
+else if s.equalsIgnoreCase('uge') or s.equalsIgnoreCase('sge') then
+	'>='
+else if s.equalsIgnoreCase('ult') or s.equalsIgnoreCase('slt') then
+	'<'
+else if s.equalsIgnoreCase('ule') or s.equalsIgnoreCase('sle') then
+	'<='
+else
+	'// UNHANDLED'
+endif
+endif
+endif
+endif
+endif
+endif
+/]
+
+
+
+
+
+[template public genInstruction(e : Return, t: Transition, genData: GeneratorData)]
+[if (t.diagram.returnVariable.oclIsUndefined())][else][t.diagram.returnVariable.newName/] = [valueToString(e.value, t, genData)/]; [/if]
+[/template]
+
+[comment]
+[template public genInstruction(e : Switch, t: Transition, genData: GeneratorData)][/template]
+
+[template public genInstruction(e : Unreachable, t: Transition, genData: GeneratorData)][/template]
+
+[template public genInstruction(e : ExtractValue, t: Transition, genData: GeneratorData)]
+// NOT SUPPORTED: Instruction (extractvalue)
+[/template]
+
+[template public genInstruction(e : InsertValue, t: Transition, genData: GeneratorData)]
+// NOT SUPPORTED: Instruction (insertvalue)
+[/template]
+
+[template public genInstruction(e : ExtractElement, t: Transition, genData: GeneratorData)]
+// NOT SUPPORTED: Instruction (extractelement)
+[/template]
+
+[template public genInstruction(e : InsertElement, t: Transition, genData: GeneratorData)]
+// NOT SUPPORTED: Instruction (insertelement)
+[/template]
+
+[template public genInstruction(e : VariableAttributeAccess, t: Transition, genData: GeneratorData)]
+// NOT SUPPORTED: Instruction (va_arg)
+[/template]
+
+[template public genInstruction(e : LandingPad, t: Transition, genData: GeneratorData)]
+// NOT SUPPORTED: Instruction (landingpad)
+[/template]
+
+[template public genInstruction(e : Invoke, t: Transition, genData: GeneratorData)]
+// NOT SUPPORTED: Instruction (invoke)
+[/template]
+
+[template public genInstruction(e : Resume, t: Transition, genData: GeneratorData)]
+// NOT SUPPORTED: Instruction (resume)
+[/template]
+
+[template public genInstruction(e : IndirectBranch, t: Transition, genData: GeneratorData)]
+// NOT SUPPORTED: Instruction (indirectbr)
+[/template]
+
+[template public genInstruction(e : ShuffleVector, t: Transition, genData: GeneratorData)]
+// NOT SUPPORTED: Instruction (shufflevector)
+[/template][/comment]
+
+[query private isPointer(e : AddressUse) : Boolean = 
+	not e.pointer.oclIsUndefined()
+/]
+
+[query private arraySize(e : Array) : Integer = 
+	(e.length.round() * e.type.typeSize()).round()
+/]
+
+[query private typeSize(e : EObject) : Integer = 
+if e.oclIsTypeOf(Predefined) then
+	1
+else if e.oclIsTypeOf(Array) then
+	e.oclAsType(Array).arraySize()
+else if e.oclIsTypeOf(AddressUse) then
+	e.oclAsType(AddressUse).adressUseSize()
+else
+	-1
+endif
+endif
+endif
+ /]
+
+[query private adressUseSize(e : AddressUse) : Integer = 
+	if e.isPointer() then
+		1
+	else if e.isStructure() then
+		e.address.ancestors()->at(1).oclAsType(TypeDefinition)
+		.struct.structSize()
+	else
+		-1
+	endif
+	endif
+/]
+
+[query private isStructure(e : AddressUse) : Boolean =
+	if not e.address.ancestors()->at(1).oclIsUndefined() then
+		e.address.ancestors()->at(1).oclIsTypeOf(TypeDefinition)
+	else
+		false
+	endif
+ /]
+
+[query private structSize(e : Structure) : Integer = 
+e.types->iterate(o : EObject; size : Integer = 0 | size + o.typeSize()
+)
+/]

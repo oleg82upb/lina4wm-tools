@@ -177,13 +177,31 @@ public interface GendataPackage extends EPackage
 	int GENERATOR_DATA__OLD_TO_NEW_CFG_NAME = 11;
 
 	/**
+	 * The feature id for the '<em><b>Global Variables</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_DATA__GLOBAL_VARIABLES = 12;
+
+	/**
+	 * The feature id for the '<em><b>All Variables</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_DATA__ALL_VARIABLES = 13;
+
+	/**
 	 * The number of structural features of the '<em>Generator Data</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_DATA_FEATURE_COUNT = 12;
+	int GENERATOR_DATA_FEATURE_COUNT = 14;
 
 	/**
 	 * The operation id for the '<em>Get Filtered Addresses</em>' operation.
@@ -893,6 +911,28 @@ public interface GendataPackage extends EPackage
 	EReference getGeneratorData_OldToNewCfgName();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link de.upb.lina.cfg.gendata.GeneratorData#getGlobalVariables <em>Global Variables</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Global Variables</em>'.
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getGlobalVariables()
+	 * @see #getGeneratorData()
+	 * @generated
+	 */
+	EReference getGeneratorData_GlobalVariables();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.upb.lina.cfg.gendata.GeneratorData#getAllVariables <em>All Variables</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>All Variables</em>'.
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getAllVariables()
+	 * @see #getGeneratorData()
+	 * @generated
+	 */
+	EReference getGeneratorData_AllVariables();
+
+	/**
 	 * Returns the meta object for the '{@link de.upb.lina.cfg.gendata.GeneratorData#getFilteredAddresses(java.lang.String) <em>Get Filtered Addresses</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1421,6 +1461,22 @@ public interface GendataPackage extends EPackage
 		 * @generated
 		 */
 		EReference GENERATOR_DATA__OLD_TO_NEW_CFG_NAME = eINSTANCE.getGeneratorData_OldToNewCfgName();
+
+		/**
+		 * The meta object literal for the '<em><b>Global Variables</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GENERATOR_DATA__GLOBAL_VARIABLES = eINSTANCE.getGeneratorData_GlobalVariables();
+
+		/**
+		 * The meta object literal for the '<em><b>All Variables</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GENERATOR_DATA__ALL_VARIABLES = eINSTANCE.getGeneratorData_AllVariables();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Filtered Addresses</b></em>' operation.

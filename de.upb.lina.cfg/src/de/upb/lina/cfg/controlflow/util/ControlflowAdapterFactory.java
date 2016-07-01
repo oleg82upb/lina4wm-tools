@@ -122,6 +122,21 @@ public class ControlflowAdapterFactory extends AdapterFactoryImpl {
 				return createStoreBufferAdapter();
 			}
 			@Override
+			public Adapter caseAbstractLabeledElement(AbstractLabeledElement object)
+			{
+				return createAbstractLabeledElementAdapter();
+			}
+			@Override
+			public Adapter casePhiAssignment(PhiAssignment object)
+			{
+				return createPhiAssignmentAdapter();
+			}
+			@Override
+			public Adapter caseVariable(Variable object)
+			{
+				return createVariableAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object)
 			{
 				return createEObjectAdapter();
@@ -279,6 +294,51 @@ public class ControlflowAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStoreBufferAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.controlflow.AbstractLabeledElement <em>Abstract Labeled Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.lina.cfg.controlflow.AbstractLabeledElement
+	 * @generated
+	 */
+	public Adapter createAbstractLabeledElementAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.controlflow.PhiAssignment <em>Phi Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.lina.cfg.controlflow.PhiAssignment
+	 * @generated
+	 */
+	public Adapter createPhiAssignmentAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.upb.lina.cfg.controlflow.Variable <em>Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.upb.lina.cfg.controlflow.Variable
+	 * @generated
+	 */
+	public Adapter createVariableAdapter()
+	{
 		return null;
 	}
 

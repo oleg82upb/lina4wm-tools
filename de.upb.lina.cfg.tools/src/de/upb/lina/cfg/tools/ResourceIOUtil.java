@@ -39,6 +39,7 @@ public class ResourceIOUtil {
     */
    public static boolean saveResourceToDisk(String pathToOutputFile, String contentType, EObject objectToSave) {
       ResourceSetImpl rset = new ResourceSetImpl();
+      rset.getResourceFactoryRegistry().getExtensionToFactoryMap().put("llvm", new IDUsingResourceFactory());
       URI uri = URI.createPlatformResourceURI(pathToOutputFile, true);
       Resource newResource = rset.createResource(uri, contentType);
       rset.getResources().add(newResource);
@@ -118,6 +119,7 @@ public class ResourceIOUtil {
       Resource loadedResource = null;
       try {
          ResourceSet resourceSet = new ResourceSetImpl();
+         resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("cfg", new IDUsingResourceFactory());
          Path resourcePath = new Path(pathToFile);
          URI uri = URI.createPlatformResourceURI(resourcePath.toOSString(), true);
          loadedResource = resourceSet.getResource(uri, true);
@@ -138,6 +140,7 @@ public class ResourceIOUtil {
    public static LLVM createAstFromLLVM(String pathToLLVMFile) {
       ensureLLVMPackageIsRegistered();
       ResourceSetImpl xtextResourceSet = new ResourceSetImpl();
+      xtextResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("cfg", new IDUsingResourceFactory());
       Path llvmFilePath = new Path(pathToLLVMFile);
       URI uriForPathToLLVMFile = URI.createPlatformResourceURI(llvmFilePath.toOSString(), true);
       Resource resource = xtextResourceSet.getResource(uriForPathToLLVMFile, true);

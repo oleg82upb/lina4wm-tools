@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -15,20 +14,18 @@ import org.eclipse.emf.ecore.EObject;
 import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
+import de.upb.lina.cfg.controlflow.ControlflowFactory;
+import de.upb.lina.cfg.controlflow.FlushTransition;
 import de.upb.lina.cfg.controlflow.GuardedTransition;
+import de.upb.lina.cfg.controlflow.PhiAssignment;
 import de.upb.lina.cfg.controlflow.Transition;
+import de.upb.lina.cfg.controlflow.Variable;
 import de.upb.lina.cfg.controlflow.WriteDefChainTransition;
 import de.upb.lina.cfg.gendata.AddressMapping;
-import de.upb.lina.cfg.gendata.ConstraintMapping;
 import de.upb.lina.cfg.gendata.GendataFactory;
 import de.upb.lina.cfg.gendata.GeneratorData;
-import de.upb.lina.cfg.gendata.InputTypeList;
-import de.upb.lina.cfg.gendata.LocationLabel;
 import de.upb.lina.cfg.gendata.MemorySizeMapping;
-import de.upb.lina.cfg.gendata.PhiMapping;
-import de.upb.lina.cfg.gendata.TransitionLabel;
 import de.upb.lina.cfg.tools.stringrepresentation.StringConversionManager;
-import de.upb.lina.transformations.Activator;
 import de.upb.lina.transformations.Constants;
 import de.upb.llvm_parser.llvm.AbstractElement;
 import de.upb.llvm_parser.llvm.Address;
@@ -47,7 +44,6 @@ import de.upb.llvm_parser.llvm.Compare;
 import de.upb.llvm_parser.llvm.ExtractElement;
 import de.upb.llvm_parser.llvm.ExtractValue;
 import de.upb.llvm_parser.llvm.Fence;
-import de.upb.llvm_parser.llvm.FunctionBody;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.FunctionParameter;
 import de.upb.llvm_parser.llvm.FunctionParameterList;
@@ -64,6 +60,7 @@ import de.upb.llvm_parser.llvm.LandingPad;
 import de.upb.llvm_parser.llvm.LlvmFactory;
 import de.upb.llvm_parser.llvm.Load;
 import de.upb.llvm_parser.llvm.LogicOperation;
+import de.upb.llvm_parser.llvm.NestedCast;
 import de.upb.llvm_parser.llvm.NestedGetElementPtr;
 import de.upb.llvm_parser.llvm.Parameter;
 import de.upb.llvm_parser.llvm.Phi;
@@ -87,623 +84,562 @@ import de.upb.llvm_parser.llvm.Vector;
 
 public class GendataPrecomputer {
 
-   private List<ControlFlowDiagram> cfgs;
-   private String kivTransformationBasis;
-   private Map<String, String> oldToNewCfgName;
-   private GeneratorData helperModel;
-
-   private HashMap<Address, String> addressLookup = new HashMap<Address, String>();
-   private HashMap<ControlFlowDiagram, String> cfgToLabelPrefix = new HashMap<ControlFlowDiagram, String>();
-
-   private ArrayList<TypeDefinition> typeDefinitions = new ArrayList<TypeDefinition>();
-
-   private HashMap<FunctionDefinition, List<String>> usedVarsInFunctions = new HashMap<FunctionDefinition, List<String>>();
-
-
-   private StringConversionManager stringConversionManager;
-
-
-   public GendataPrecomputer(TransformationConfiguration config) {
-      this.cfgs = config.getStoreBufferGraphs();
-      this.kivTransformationBasis = config.getKIVBasis();
-      this.oldToNewCfgName = config.getOldToNewCfgName();
-      this.stringConversionManager = new StringConversionManager();
-   }
-
-
-   public GeneratorData computeGeneratorData() {
-      precomputeHelperModel();
-      return helperModel;
-   }
-
-
-   private void precomputeHelperModel() {
-      helperModel = GendataFactory.eINSTANCE.createGeneratorData();
-
-      // set the program
-      FunctionDefinition fd = getFunctionForCfg(cfgs.get(0));
-      LLVM program = (LLVM) fd.eContainer();
-      helperModel.setProgram(program);
-
-      // set list of cfgs
-      helperModel.getCfgs().addAll(cfgs);
-
-      // local vars
-      computeLocalVariables();
-
-
-      // labels
-      computeLabelPrefixesPerFunction();
-      computeLocationLabels();
-      computeTransitionLabels();
-
-      // conditions
-      computeTransitionConditionMapping(); // DONE
-
-      // TransformationSpecificKeys
-      computeTransformationSpecificKeys(); // DONE
-
-      // filteredAddresses
-      computeFilteredAddresses();
-
-      // getElementPtrMapping
-      computeGetElementPtrMapping();
-
-      // phi mappings
-      computePhiMapping(); // IN PROGRESS
-
-      // KIVSpecificKeys
-      computeInputTypes();
-      computeKIVSpecificKeys();
-
-      // new CFG names
-      computeNewCfgNames();
-   }
-
-
-   private void computeKIVSpecificKeys() {
-      // add basis(int or nat) to helperModel
-      helperModel.getTransformationSpecificKeys().add(kivTransformationBasis);
-
-      // check for mul or div
-      String s = null;
-      for (ControlFlowDiagram cfg : cfgs) {
-         for (Transition t : cfg.getTransitions()) {
-            if (t.getInstruction() != null && t.getInstruction() instanceof ArithmeticOperation) {
-               ArithmeticOperation op = (ArithmeticOperation) t.getInstruction();
-               String operation = op.getOperation();
-               if (operation.equalsIgnoreCase("udiv") || operation.equalsIgnoreCase("sdiv")) {
-                  s = "DIV";
-               } else if (operation.equalsIgnoreCase("mul")) {
-                  s = "MUL";
-               }
-            }
-         }
-      }
-
-      if (s != null)
-         helperModel.getTransformationSpecificKeys().add(s);
-
-      // checks if a function with more than one parameter exists
-      boolean hasParams = false;
-      for (ControlFlowDiagram cfg : cfgs) {
-         EList<AddressMapping> mappings = helperModel.getFilteredAddresses(Constants.FUNC_PARAMS + cfg.getName());
-         if (mappings.size() > 2)// one element in the list of mappings is
-         // always the dummy-returnmapping
-         {
-            hasParams = true;
-         }
-         if (mappings.size() == 2 && !(mappings.get(0).getName().equals("returnvalue") || mappings.get(1).getName().equals("returnvalue"))) {
-            hasParams = true;
-         }
-      }
-      if (hasParams)
-         helperModel.getTransformationSpecificKeys().add("INPUT_NEEDED");
-      else if (helperModel.getInputTypes().size() > 1) {
-         helperModel.getTransformationSpecificKeys().add("INPUT_NEEDED");
-      }
-
-      boolean refInput = false;
-      for (InputTypeList inputTypeList : helperModel.getInputTypes()) {
-         for (String inputType : inputTypeList.getInputType()) {
-            if (inputType.equals(Constants.KIV_BASIS_REF)) {
-               refInput = true;
-            }
-         }
-      }
-
-      if (refInput) {
-         helperModel.getTransformationSpecificKeys().add("INPUT_REF");
-      }
-   }
-
-
-   private void computePhiMapping() {
-      for (ControlFlowDiagram cfg : cfgs) {
-         // create a mapping of block labels to phi instructions, if instructions is contained in
-         // the block
-         HashMap<String, ArrayList<Phi>> blockLabelToPhiInstructions = new HashMap<String, ArrayList<Phi>>();
-         FunctionDefinition fd = getFunctionForCfg(cfg);
-         for (BasicBlock b : fd.getBody().getBlocks()) {
-            blockLabelToPhiInstructions.put(b.getLabel(), new ArrayList<Phi>());
-
-            for (Instruction i : b.getInstructions()) {
-               if (i instanceof Phi) {
-                  if (!blockLabelToPhiInstructions.get(b.getLabel()).contains(i)) {
-                     blockLabelToPhiInstructions.get(b.getLabel()).add((Phi) i);
-                  }
-               }
-            }
-         }
-
-         // assign a phiMapping to each transition that changes the block
-         for (Transition t : cfg.getTransitions()) {
-            if (t.getInstruction() instanceof Branch) {
-               Branch branch = (Branch) t.getInstruction();
-               if (t instanceof GuardedTransition) {
-                  GuardedTransition gt = (GuardedTransition) t;
-                  if (gt.getCondition().startsWith("[not")) {
-
-                     String dest = branch.getElseDestination().replace("%", "");
-                     ArrayList<Phi> list = blockLabelToPhiInstructions.get(dest);
-
-                     if (!list.isEmpty()) {
-                        createPhiMapping(t, list, ((BasicBlock) branch.eContainer()).getLabel());
-                     }
-                  } else {
-                     String dest = branch.getDestination().replace("%", "");
-                     ArrayList<Phi> list = blockLabelToPhiInstructions.get(dest);
-
-                     if (!list.isEmpty()) {
-                        createPhiMapping(t, list, ((BasicBlock) branch.eContainer()).getLabel());
-                     }
-                  }
-               } else {
-                  String dest = branch.getDestination().replace("%", "");
-                  ArrayList<Phi> list = blockLabelToPhiInstructions.get(dest);
-
-                  if (!list.isEmpty()) {
-                     createPhiMapping(t, list, ((BasicBlock) branch.eContainer()).getLabel());
-                  }
-               }
-            }
-
-            if (t.getInstruction() instanceof IndirectBranch) {
-               IndirectBranch branch = (IndirectBranch) t.getInstruction();
-               if (!branch.getPotTargetLabels().isEmpty()) {
-
-                  for (String dest : branch.getPotTargetLabels()) {
-                     String destPureLabel = dest.replace("%", "");
-                     ArrayList<Phi> list = blockLabelToPhiInstructions.get(destPureLabel);
-
-                     if (!list.isEmpty()) {
-                        createPhiMapping(t, list, ((BasicBlock) branch.eContainer()).getLabel());
-                     }
-                  }
-               }
-            }
-         }
-      }
-   }
-
-
-   private void createPhiMapping(Transition transition, List<Phi> phis, String blockLabel) {
-      PhiMapping mapping = GendataFactory.eINSTANCE.createPhiMapping();
-      mapping.setTransition(transition);
-      mapping.getPhi().addAll(phis);
-      mapping.setBlockLabelToUse(blockLabel);
-      this.helperModel.getPhiMappings().add(mapping);
-   }
-
-
-   private void computeTransformationSpecificKeys() {
-      for (ControlFlowDiagram cfg : cfgs) {
-         if (cfg.getStart() != null && !cfg.getStart().getOutgoing().isEmpty()) {
-            for (Transition t : cfg.getTransitions()) {
-               if (t.getInstruction() instanceof CmpXchg) {
-                  if (!helperModel.getTransformationSpecificKeys().contains(Constants.NEEDSCAS)) {
-                     helperModel.getTransformationSpecificKeys().add(Constants.NEEDSCAS);
-                  }
-               }
-               if (t.getInstruction() instanceof GetElementPtr) {
-                  if (!helperModel.getTransformationSpecificKeys().contains(Constants.NEEDSGETELEMENTPTR)) {
-                     helperModel.getTransformationSpecificKeys().add(Constants.NEEDSGETELEMENTPTR);
-                  }
-               }
-            }
-         }
-      }
-   }
-
-
-   private void computeNewCfgNames() {
-      for (Map.Entry<String, String> entry : oldToNewCfgName.entrySet()) {
-         helperModel.getOldToNewCfgName().put(entry.getKey(), entry.getValue());
-      }
-   }
-
-
-   private void computeFilteredAddresses() {
-      // collect all addresses
-      EList<AddressMapping> globals = new BasicEList<AddressMapping>();
-      LLVM program = helperModel.getProgram();
-      for (AbstractElement ele : program.getElements()) {
-         // compute list of function parameter
-         if (ele instanceof FunctionDefinition) {
-            FunctionDefinition fDef = (FunctionDefinition) ele;
-            ControlFlowDiagram matchingCfg = getCFGForFunction(fDef);
-            if (matchingCfg != null) {
-               FunctionParameterList params = fDef.getParameter();
-
-               // make sure we store all of the params as such
-               EList<AddressMapping> paramsMapping = new BasicEList<AddressMapping>();
-               if (params != null) {
-                  for (FunctionParameter param : params.getParams()) {
-                     AddressMapping paramMapping = addToMapping(fDef, param.getValue());
-                     setType(paramMapping, param.getType());
-
-                     // Add to params mapping
-                     paramsMapping.add(paramMapping);
-                  }
-
-                  helperModel.getFilteredAddresses(Constants.FUNC_PARAMS + matchingCfg.getName()).addAll(paramsMapping);
-               }
-            }
-            // compute list of global variables
-         } else if (ele instanceof GlobalDefinition) {
-            GlobalDefinition gDef = (GlobalDefinition) ele;
-            AddressMapping defAddress = addToMapping(null, gDef.getAddress());
-            setType(defAddress, gDef.getValue());
-            if (defAddress != null) {
-               globals.add(defAddress);
-            }
-
-            EObject type = null;
-            AddressMapping defValue = null;
-            if (gDef.getValue() instanceof Parameter) {
-               Parameter param = (Parameter) gDef.getValue();
-               type = param.getType();
-
-               Address address = extractAddressFromValue(param.getValue());
-               defValue = addToMapping(null, address);
-            } else if (gDef.getValue() instanceof Predefined) {
-               type = gDef.getValue();
-            } else {
-               throw new RuntimeException("Unexpected type " + type + " detected for global definition");
-            }
-
-            setType(defValue, type);
-            if (defValue != null) {
-               globals.add(defValue);
-            }
-         } else if (ele instanceof TypeDefinition) {
-            TypeDefinition tDef = (TypeDefinition) ele;
-            typeDefinitions.add(tDef);
-         }
-      }
-      helperModel.getFilteredAddresses(Constants.GLOBAL_VARS).addAll(globals);
-
-      HashMap<AddressMapping, Return> returnMappings = new HashMap<AddressMapping, Return>();
-      for (ControlFlowDiagram cfg : cfgs) {
-         FunctionDefinition fd = getFunctionForCfg(cfg);
-
-         for (Transition t : cfg.getTransitions()) {
-            if (t.getInstruction() instanceof Return) {
-               Return ret = (Return) t.getInstruction();
-               if (ret.getValue() != null) {
-                  // make sure we do not generate void
-                  if (!(ret.getValue() instanceof PrimitiveValue)
-                        || (ret.getValue() instanceof PrimitiveValue && !((PrimitiveValue) ret.getValue()).getValue().equals("void"))) {
-                     // add a dummy mapping for a return value
-                     Address returnAddress = LlvmFactory.eINSTANCE.createAddress();
-                     returnAddress.setName("returnvalue");
-                     AddressMapping returnMapping = createAddressMapping(returnAddress, "returnvalue");
-                     setType(returnMapping, ret.getValue());
-                     returnMappings.put(returnMapping, ret);
-                     helperModel.getFilteredAddresses(Constants.FUNC_PARAMS + cfg.getName()).add(returnMapping);
-                  }
-               }
-            }
-         }
-
-         // save used vars per function in filteredAddresses
-         List<AddressMapping> allVars = helperModel.getFilteredAddresses(Constants.FUNC_ALL + cfg.getName());
-         for (String a : usedVarsInFunctions.get(fd)) {
-            AddressMapping mapping = getMappingForAddress(a);
-            if (mapping != null) {
-               allVars.add(mapping);
-            }
-         }
-
-         // Remove params from list of vars to declare
-         if (fd.getParameter() != null) {
-            for (FunctionParameter param : fd.getParameter().getParams()) {
-               usedVarsInFunctions.get(fd).remove(addressLookup.get(param.getValue()));
-            }
-         }
-
-         // save vars to declare per function in filteredAddresses
-         List<AddressMapping> declareVars = helperModel.getFilteredAddresses(Constants.FUNC_DECLARE + cfg.getName());
-         for (String a : usedVarsInFunctions.get(fd)) {
-            AddressMapping mapping = getMappingForAddress(a);
-            if (mapping != null) {
-               declareVars.add(mapping);
-            }
-         }
-      }
-
-      setTypeOfReturnMappings(returnMappings);
-
-      // compute global list of parameters
-      EList<AddressMapping> allParamMappings = new BasicEList<AddressMapping>();
-      boolean returnvalueAdded = false;
-
-      // compute global list of local variables
-      EList<AddressMapping> allLocalVariables = new BasicEList<AddressMapping>();
-
-      for (ControlFlowDiagram cfg : cfgs) {
-         String name = cfg.getName();
-         EList<AddressMapping> funcParamMapping = helperModel.getFilteredAddresses(Constants.FUNC_PARAMS + name);
-         EList<AddressMapping> funcLocalVarsMapping = helperModel.getFilteredAddresses(Constants.FUNC_DECLARE + name);
-
-         for (AddressMapping mapping : funcParamMapping) {
-            if (!allParamMappings.contains(mapping)) {
-               if (mapping.getName().equals("returnvalue")) {
-                  if (!returnvalueAdded) {
-                     returnvalueAdded = true;
-                     allParamMappings.add(mapping);
-                  }
-               } else {
-                  allParamMappings.add(mapping);
-               }
-            }
-         }
-
-         for (AddressMapping mapping : funcLocalVarsMapping) {
-            if (!allLocalVariables.contains(mapping)) {
-               allLocalVariables.add(mapping);
-            }
-         }
-      }
-
-      // compute global list of local variables and parameter
-      EList<AddressMapping> allLocalsAndParams = new BasicEList<AddressMapping>();
-      allLocalsAndParams.addAll(allLocalVariables);
-      for (AddressMapping am : allParamMappings) {
-         if (!allLocalsAndParams.contains(am)) {
-            allLocalsAndParams.add(am);
-         }
-      }
-      helperModel.getFilteredAddresses().put(Constants.ALL_DECLARE_PARAMS, allLocalsAndParams);
-   }
-
-
-   private void setTypeOfReturnMappings(Map<AddressMapping, Return> returnMappings) {
-      // set Type of all returnMapings to the same value
-      boolean refExists = false;
-      for (AddressMapping mapping : returnMappings.keySet()) {
-         if (mapping.getType().equals(Constants.KIV_BASIS_REF)) {
-            refExists = true;
-         } else {
-            Return ret = returnMappings.get(mapping);
-            if (ret.getValue() instanceof Parameter) {
-               Parameter p = (Parameter) ret.getValue();
-               if (p.getValue() instanceof AddressUse) {
-                  AddressUse au = (AddressUse) p.getValue();
-                  AddressMapping am = getMappingForAddress(au.getAddress());
-                  if (am.getType().equals(Constants.KIV_BASIS_REF)) {
-                     refExists = true;
-                  }
-               }
-            }
-         }
-      }
-      if (refExists) {
-         for (AddressMapping mapping : returnMappings.keySet()) {
-            mapping.setType(Constants.KIV_BASIS_REF);
-            Return ret = returnMappings.get(mapping);
-            if (ret.getValue() instanceof Parameter) {
-               Parameter p = (Parameter) ret.getValue();
-               if (p.getValue() instanceof AddressUse) {
-                  AddressUse au = (AddressUse) p.getValue();
-                  AddressMapping am = getMappingForAddress(au.getAddress());
-                  am.setType(Constants.KIV_BASIS_REF);
-               }
-            }
-         }
-      } else {
-         for (AddressMapping mapping : returnMappings.keySet()) {
-            mapping.setType(kivTransformationBasis);
-         }
-      }
-   }
-
-
-   private void computeInputTypes() {
-      EList<InputTypeList> input = helperModel.getInputTypes();
-
-      for (ControlFlowDiagram cfg : cfgs) {
-         List<String> functionInputTypes = new ArrayList<>();
-         EList<AddressMapping> funcParamMappings = helperModel.getFilteredAddresses(Constants.FUNC_PARAMS + cfg.getName());
-         for (AddressMapping functionParameterMapping : funcParamMappings) {
-            if (!functionParameterMapping.getName().equals("returnvalue")) {
-               functionInputTypes.add(functionParameterMapping.getType());
-            }
-         }
-
-         boolean duplicate = false;
-         for (InputTypeList list : input) {
-            if (list.getInputType().size() == functionInputTypes.size()) {
-               List<String> copyFuncInput = new ArrayList<String>(functionInputTypes);
-
-               for (String s : list.getInputType()) {
-                  copyFuncInput.remove(s);
-               }
-               if (copyFuncInput.isEmpty()) {
-                  duplicate = true;
-                  break;
-               }
-            }
-         }
-         if (!duplicate && !functionInputTypes.isEmpty()) {
-            InputTypeList inputTypeList = GendataFactory.eINSTANCE.createInputTypeList();
-            inputTypeList.getInputType().addAll(functionInputTypes);
-            input.add(inputTypeList);
-         }
-      }
-   }
-
-
-   private void computeTransitionLabels() {
-      for (ControlFlowDiagram cfg : cfgs) {
-         int size = 1;
-         for (Transition t : cfg.getTransitions()) {
-            String sizeString = String.valueOf(size);
-            String newCfgName = oldToNewCfgName.get(t.getDiagram().getName());
-            String labelName = newCfgName + sizeString;
-            List<TransitionLabel> labels = helperModel.getTransitionLabels();
-            TransitionLabel transitionLabel = GendataFactory.eINSTANCE.createTransitionLabel();
-            transitionLabel.setName(labelName);
-            transitionLabel.setTransition(t);
-            labels.add(transitionLabel);
-            size++;
-         }
-      }
-   }
+	private List<ControlFlowDiagram> cfgs;
+	private String kivBaseType;
+	private Map<String, String> oldToNewCfgName;
+	private GeneratorData helperModel;
+	private TransformationConfiguration config;
+	private final static String DUMMY_TYPE = "DUMMY";
+
+	private ArrayList<TypeDefinition> typeDefinitions = new ArrayList<TypeDefinition>();
+
+	private StringConversionManager stringConversionManager;
+
+	public GendataPrecomputer(TransformationConfiguration config)
+	{
+		this.config = config;
+		this.cfgs = config.getStoreBufferGraphs();
+		this.kivBaseType = config.getKIVBasis();
+		this.oldToNewCfgName = config.getOldToNewCfgName();
+		this.stringConversionManager = new StringConversionManager();
+	}
+
+
+	public GeneratorData computeGeneratorData()
+	{
+		execute();
+		return helperModel;
+	}
+
+
+	private void execute()
+	{
+		helperModel = GendataFactory.eINSTANCE.createGeneratorData();
+
+		// set the program
+		FunctionDefinition fd = cfgs.get(0).getFunctionDefinition();
+		LLVM program = (LLVM) fd.eContainer();
+		helperModel.setProgram(program);
+
+		// set list of cfgs
+		helperModel.getCfgs().addAll(cfgs);
+
+		// variables. These must be computed before various of the later steps
+		// here.
+		computeGlobalVariables();
+		computeFunctionParametersVariables();
+		computeReturnVariablesIfNecessary();
+		computeLocalVariablesAndAttachUsedVariablesToTransition();
+
+		// labels
+		setFunctionLabelPrefixes();
+		computeLocationLabels();
+		if (ETransformationType.KIV_GLOBAL.equals(this.config.getTransformationType()) || ETransformationType.KIV_LOCAL
+				.equals(this.config.getTransformationType()))
+		{
+			computeTransitionLabels();
+		}
+
+		// conditions, requires variable being already computed
+		computeTransitionConditionMapping();
+
+		// TransformationSpecificKeys
+		computeTransformationSpecificKeys();
+
+		// getElementPtrMapping
+		computeGetElementPtrMapping();
+
+		// phi mappings
+		computePhiAssignments();
+
+		// new CFG names
+		replaceCfgNamesWithProvidedNames();
+	}
+
+	private void computeTransformationSpecificKeys()
+	{
+		determineWhetherCasAndGepNesessary();
+		
+		if (ETransformationType.KIV_GLOBAL.equals(this.config.getTransformationType())
+	    		  || ETransformationType.KIV_LOCAL.equals(this.config.getTransformationType()))
+		{
+			computeKIVSpecificKeys();
+		}
+	}
+
+	private void determineWhetherCasAndGepNesessary()
+	{
+		boolean needsCas = false, needsGep = false;
+		Iterator<ControlFlowDiagram> c = cfgs.iterator();
+		
+		while (c.hasNext() && (!needsCas || !needsGep))
+		{
+			ControlFlowDiagram cfg = c.next();
+			Iterator<Transition> i = cfg.getTransitions().iterator();
+			
+			while (i.hasNext() && (!needsCas || !needsGep))
+			{
+				Transition t = i.next();
+				if(t.getInstruction() instanceof CmpXchg)
+				{
+					needsCas = true;
+				}
+				else if (t.getInstruction() instanceof GetElementPtr)
+				{
+					needsGep = true;
+				}
+			}
+		}
+		
+		if(needsCas)
+		{
+			helperModel.getTransformationSpecificKeys().add(Constants.NEEDSCAS);
+		}
+		
+		if(needsGep)
+		{
+			helperModel.getTransformationSpecificKeys().add(Constants.NEEDSGETELEMENTPTR);
+		}
+	}
+
+	private void computeKIVSpecificKeys()
+	{
+		// add basis(int or nat) to helperModel
+		helperModel.getTransformationSpecificKeys().add(kivBaseType);
+
+		determineWhetherMultOrDivIsNecessary();
+
+		determineKivFunctionInput();
+	}
+
+
+	/**
+	 * Checks all FunctionDefinitions for their input, in order to determine whether KIV
+	 * needs a parameter tuple instead of a simple parameter representing one single value. 
+	 */
+	private void determineKivFunctionInput()
+	{
+		boolean hasParams = false, refInput = false;
+		
+		for (ControlFlowDiagram cfg : cfgs)
+		{
+			Iterator<Variable> i = cfg.getParameterVariables().iterator();
+			while (i.hasNext())
+			{
+				hasParams = true;
+				
+				Variable v = i.next();
+				if (Constants.KIV_BASIS_REF.equals(v.getType()))
+				{
+					refInput = true;
+				}
+			}
+		}
+		
+		
+		if (hasParams)
+		{
+			helperModel.getTransformationSpecificKeys().add("INPUT_NEEDED");
+		}
+
+		if (refInput)
+		{
+			helperModel.getTransformationSpecificKeys().add("INPUT_REF");
+		}
+	}
+
+
+	/**
+	 * Adds key to TransformationSpecificKeys, if multiplication or division is involved in the program.
+	 */
+	private void determineWhetherMultOrDivIsNecessary()
+	{
+		// check for mul or div
+		String s = null;
+		for (ControlFlowDiagram cfg : cfgs)
+		{
+			for (Transition t : cfg.getTransitions())
+			{
+				if (t.getInstruction() != null && t.getInstruction() instanceof ArithmeticOperation)
+				{
+					ArithmeticOperation op = (ArithmeticOperation) t.getInstruction();
+					String operation = op.getOperation();
+					if (operation.equalsIgnoreCase("udiv") || operation.equalsIgnoreCase("sdiv"))
+					{
+						s = "DIV";
+					} else if (operation.equalsIgnoreCase("mul"))
+					{
+						s = "MUL";
+					}
+				}
+			}
+		}
+
+		if (s != null)
+		{
+			helperModel.getTransformationSpecificKeys().add(s);
+		}
+	}
+
+
+	/**
+	 * Each transition that moves from one block to another, has to do some
+	 * assignments according to the phi instructions in the target block. 
+	 * Must be called after the condition of GuardedTransition have been set
+	 * to new values.
+	 */
+	private void computePhiAssignments()
+	{
+		for (ControlFlowDiagram cfg : cfgs)
+		{
+			// create a mapping of block labels to phi instructions, if instructions is contained in the block
+			HashMap<String, ArrayList<Phi>> blockLabelToPhiInstructions = new HashMap<String, ArrayList<Phi>>();
+			FunctionDefinition fd = cfg.getFunctionDefinition();
+			for (BasicBlock b : fd.getBody().getBlocks())
+			{
+				blockLabelToPhiInstructions.put(b.getLabel(), new ArrayList<Phi>());
+
+				for (Instruction i : b.getInstructions())
+				{
+					if (i instanceof Phi)
+					{
+						if (!blockLabelToPhiInstructions.get(b.getLabel()).contains(i))
+						{
+							blockLabelToPhiInstructions.get(b.getLabel()).add((Phi) i);
+						}
+					}
+				}
+			}
+
+			// assign a phiMapping to each transition that changes the block
+			for (Transition t : cfg.getTransitions())
+			{
+				if (t.getInstruction() instanceof Branch)
+				{
+					Branch branch = (Branch) t.getInstruction();
+					String sourceLabel = ((BasicBlock) branch.eContainer()).getLabel();
+					if (t instanceof GuardedTransition)
+					{
+						GuardedTransition gt = (GuardedTransition) t;
+
+						// modified since gt.conditions are now a side effect
+						// ConstraintMapping computation
+						// if (gt.getCondition().startsWith("[not"))
+						if (gt.getCondition().startsWith("!"))
+						{
+							String dest = branch.getElseDestination().replace("%", "");
+							ArrayList<Phi> phiInstructionsInTargetBlock = blockLabelToPhiInstructions.get(dest);
+
+							if (!phiInstructionsInTargetBlock.isEmpty())
+							{
+								createPhiAssignmentsForBranchingTransition(t, sourceLabel, phiInstructionsInTargetBlock);
+							}
+
+						} else
+						{
+							String dest = branch.getDestination().replace("%", "");
+							ArrayList<Phi> phiInstructionsInTargetBlock = blockLabelToPhiInstructions.get(dest);
+
+							if (!phiInstructionsInTargetBlock.isEmpty())
+							{
+								createPhiAssignmentsForBranchingTransition(t, sourceLabel, phiInstructionsInTargetBlock);
+							}
+						}
+					} else
+					{
+						String dest = branch.getDestination().replace("%", "");
+						ArrayList<Phi> phiInstructionsInTargetBlock = blockLabelToPhiInstructions.get(dest);
+
+						if (!phiInstructionsInTargetBlock.isEmpty())
+						{
+							createPhiAssignmentsForBranchingTransition(t, sourceLabel, phiInstructionsInTargetBlock);
+						}
+					}
+				}
+
+				if (t.getInstruction() instanceof IndirectBranch)
+				{
+					IndirectBranch branch = (IndirectBranch) t.getInstruction();
+					String sourceLabel = ((BasicBlock) branch.eContainer()).getLabel();
+					if (!branch.getPotTargetLabels().isEmpty())
+					{
+
+						for (String dest : branch.getPotTargetLabels())
+						{
+							String destPureLabel = dest.replace("%", "");
+							ArrayList<Phi> phiInstructionsInTargetBlock = blockLabelToPhiInstructions
+									.get(destPureLabel);
+
+							if (!phiInstructionsInTargetBlock.isEmpty())
+							{
+								createPhiAssignmentsForBranchingTransition(t, sourceLabel, phiInstructionsInTargetBlock);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * creates assignments for each phiInstrInTargetBlock and attaches them to the transition
+	 * @param t
+	 * @param dest
+	 * @param phiInstrInTargetBlock
+	 */
+	protected void createPhiAssignmentsForBranchingTransition(Transition t, String dest,
+			ArrayList<Phi> phiInstrInTargetBlock)
+	{
+		for (Iterator<Phi> i = phiInstrInTargetBlock.iterator(); i.hasNext();)
+		{
+			Phi phi = i.next();
+			PhiAssignment assignment = ControlflowFactory.eINSTANCE.createPhiAssignment();
+			Variable v = getOrCreateLocalVariableAndAttachToCfg(phi.getResult(), null, t.getDiagram());
+			assignment.setVariable(v);
+			
+			for (Iterator<PhiCase> cases = phi.getCases().iterator(); cases.hasNext();)
+			{
+				PhiCase pc = cases.next();
+				if (dest.equals(pc.getLabel().replace("%", "")))
+				{
+					assignment.setValue(pc.getValue());
+					fetchOrCreateVariableForValueAndAttachToTransition(t, pc.getValue(), null);
+					break;
+				}
+			}
+			
+			t.getPhiAssignments().add(assignment);
+		}
+	}
+
+
+
+	
+
+
+	/**
+	 * Replaces the name of the CFGs with their new names
+	 */
+	private void replaceCfgNamesWithProvidedNames()
+	{
+		for (ControlFlowDiagram cfg : cfgs)
+		{
+			String newName = oldToNewCfgName.get(cfg.getName());
+			cfg.setName(newName);
+		}
+	}
+	
+	/**
+	 * Creates variables for all GlobalDefinitions.
+	 */
+	private void computeGlobalVariables()
+	{
+		// collect all addresses
+		LLVM program = helperModel.getProgram();
+		for (AbstractElement ele : program.getElements())
+		{
+			if (ele instanceof GlobalDefinition)
+			{
+				GlobalDefinition gDef = (GlobalDefinition) ele;
+				Variable var = getOrCreateVariable(gDef.getAddress(), getVariableTypeAsString(gDef.getValue()));
+				this.helperModel.getGlobalVariables().add(var);
+			} else if (ele instanceof TypeDefinition)
+			{
+				// TODO: is this ever used?
+				TypeDefinition tDef = (TypeDefinition) ele;
+				typeDefinitions.add(tDef);
+			}
+		}
+	}
+	
+	private void computeFunctionParametersVariables()
+	{
+		// collect all addresses
+		for (ControlFlowDiagram cfg: this.cfgs)
+		{
+			FunctionDefinition function = cfg.getFunctionDefinition();
+			FunctionParameterList params = function.getParameter();
+
+			if (params != null)
+			{
+				for (FunctionParameter param : params.getParams())
+				{
+					String type = getVariableTypeAsString(param.getType());
+					Variable var = getOrCreateVariable(param.getValue(), type);
+					cfg.getParameterVariables().add(var);
+				}
+			}
+		}
+	}
+	
+	private void computeReturnVariablesIfNecessary()
+	{
+		for (ControlFlowDiagram cfg : cfgs)
+		{
+			FunctionDefinition fd = cfg.getFunctionDefinition();
+			TypeUse type = fd.getReturnType();
+			if(type instanceof Predefined)
+			{
+				Predefined pt = (Predefined) type;
+				if ("void".equals(pt.getType()))
+				{
+					continue;
+				}
+			}
+			
+			//this address is contained nowhere, beware
+			Address retAdr = LlvmFactory.eINSTANCE.createAddress();
+			retAdr.setName("returnvalue");
+			String t = getVariableTypeAsString(type);
+			
+			Variable var = getOrCreateVariable(retAdr, t);
+			cfg.setReturnVariable(var);
+		}
+	}
+
+
+
+	/**
+	 * Necessary for KIV transformations only.
+	 */
+	private void computeTransitionLabels()
+	{
+		for (ControlFlowDiagram cfg : cfgs)
+		{
+			int size = 1;
+			for (Transition t : cfg.getTransitions())
+			{
+				String sizeString = String.valueOf(size);
+				String newCfgName = oldToNewCfgName.get(t.getDiagram().getName());
+				String labelName = newCfgName + sizeString;
+				t.setLabel(labelName);
+				size++;
+			}
+		}
+	}
 
 
    /**
     * Computes unique labels for each node in the store buffer graph.
     */
-   private void computeLocationLabels() {
-      for (ControlFlowDiagram cfg : cfgs) {
-         // prepare for check if we can use short buffer labels
-         List<String> generatedLabels = new ArrayList<String>();
-         int numberOfNodes = cfg.getLocations().size();
-         for (ControlFlowLocation location : cfg.getLocations()) {
-            String labelString = generateLabel(location, numberOfNodes, true);
-            if (generatedLabels.contains(labelString)) {
-               // label already used, fall back to long label version
-               labelString = generateLabel(location, numberOfNodes, false);
+	private void computeLocationLabels()
+	{
+		for (ControlFlowDiagram cfg : cfgs)
+		{
+			// prepare for check if we can use short buffer labels
+			List<String> generatedLabels = new ArrayList<String>();
+			int numberOfNodes = cfg.getLocations().size();
+			for (ControlFlowLocation location : cfg.getLocations())
+			{
+				String labelString = generateLabel(location, numberOfNodes, true);
+				if (generatedLabels.contains(labelString))
+				{
+					// label already used, fall back to long label version
+					labelString = generateLabel(location, numberOfNodes, false);
 
-               if (generatedLabels.contains(labelString)) {
-                  // append index until it is unique
-                  int i = 0;
-                  String newLabelString = labelString;
-                  do {
-                     newLabelString = labelString + i;
-                     i++;
-                  } while (generatedLabels.contains(newLabelString));
+					if (generatedLabels.contains(labelString))
+					{
+						// append index until it is unique
+						int i = 0;
+						String newLabelString = labelString;
+						do
+						{
+							newLabelString = labelString + i;
+							i++;
+						} while (generatedLabels.contains(newLabelString));
 
-                  // finally, this label is also unique
-                  labelString = newLabelString;
-               }
-               // else: label is unique, we are good
+						// finally, this label is also unique
+						labelString = newLabelString;
+					}
+					// else: label is unique, we are good
 
-               generatedLabels.add(labelString);
+					generatedLabels.add(labelString);
 
-            } else {
-               generatedLabels.add(labelString);
-            }
+				} else
+				{
+					generatedLabels.add(labelString);
+				}
 
-            LocationLabel label = GendataFactory.eINSTANCE.createLocationLabel();
-            label.setName(labelString);
-            label.setControlFlowLocation(location);
-            helperModel.getLocationLabels().add(label);
-         }
-      }
-   }
-
-
-   private void computeTransitionConditionMapping() {
-      for (ControlFlowDiagram cfg : cfgs) {
-         ArrayList<ControlFlowLocation> workedOn = new ArrayList<ControlFlowLocation>();
-         ArrayList<ControlFlowLocation> toWorkOn = new ArrayList<ControlFlowLocation>();
-
-         toWorkOn.add(cfg.getStart());
-
-         while (!toWorkOn.isEmpty()) {
-            ControlFlowLocation currentLoc = toWorkOn.remove(0);
-            workedOn.add(currentLoc);
-
-            List<Transition> outgoing = currentLoc.getOutgoing();
-
-            if (outgoing.size() > 1) {
-               GuardedTransition ifTransition = null;
-               for (Transition t : outgoing) {
-                  if (t instanceof GuardedTransition) {
-                     // deal with the if case
-                     GuardedTransition gt = (GuardedTransition) t;
-                     if (ifTransition == null && !gt.getCondition().contains("else")) {
-                        ifTransition = gt;
-                        createConstraintMapping(gt, gt.getCondition());
-                     }
-                  } else {
-                     // flushes and normal transitions that need a
-                     // condition
-                     createConstraintMapping(t, "true");
-                  }
-
-               }
-
-               // get the else case
-               for (Transition t : outgoing) {
-                  if (t instanceof GuardedTransition && !t.equals(ifTransition) && ifTransition != null) {
-                     GuardedTransition gt = (GuardedTransition) t;
-                     createConstraintMapping(gt, "!" + ifTransition.getCondition());
-                  }
-                  // Add rest to work on
-                  if (!workedOn.contains(t.getTarget()) && !toWorkOn.contains(t.getTarget())) {
-                     toWorkOn.add(t.getTarget());
-                  }
-               }
-            }
-
-            // Add rest to work on
-            for (Transition t : outgoing) {
-               if (!workedOn.contains(t.getTarget()) && !toWorkOn.contains(t.getTarget())) {
-                  toWorkOn.add(t.getTarget());
-               }
-            }
-         }
-      }
-   }
+				location.setLabel(labelString);
+			}
+		}
+	}
 
 
-   private void createConstraintMapping(Transition t, String condition) {
-      // manipulate condition
-      condition = condition.replaceAll("[\\[\\]]", "");
+	private void computeTransitionConditionMapping()
+	{
+		for (ControlFlowDiagram cfg : cfgs)
+		{
+			for (Transition t : cfg.getTransitions())
+			{
+				if(t instanceof GuardedTransition)
+				{
+					GuardedTransition gt = (GuardedTransition) t;
+					String transitionGuard = null;
+					
+					if (gt.getCondition().startsWith("[not "))
+					{
+						//negative condition case
+						transitionGuard = getGuardedTransitionGuard(gt, false);
+					} else
+					{
+						transitionGuard = getGuardedTransitionGuard(gt, true);
+					}
+					
+					//TODO: this should even fit for switch cases, but does not deal with 
+					//the default case, which must be a negation of all other cases.
+					
+					gt.setCondition(transitionGuard);
+				}
+			}
+		}	
+	}
 
-      if (!condition.equalsIgnoreCase("true")) {
-         for (AddressMapping addressMapping : helperModel.getAddressMappings()) {
-            for (String oldName : addressMapping.getOldNames()) {
-               if (oldName.trim().equals(condition.replaceAll("!", "").trim())) {
-                  if (condition.startsWith("!")) {
-                     condition = "!" + addressMapping.getName();
-                  } else {
-                     condition = addressMapping.getName();
-                  }
-               }
-            }
-         }
-      }
 
-      // construct mapping
-      ConstraintMapping mapping = GendataFactory.eINSTANCE.createConstraintMapping();
-      mapping.setTransition(t);
-      mapping.setCondition(condition);
-      helperModel.getConstraints().add(mapping);
-   }
+	/**
+	 * Creates the new string representation of the Guards
+	 * @param t
+	 * @param positiveCase
+	 * @return
+	 */
+	private String getGuardedTransitionGuard(GuardedTransition t, boolean positiveCase)
+	{
+		// manipulate condition
+		String condition = null;
+		Branch br = (Branch) t.getInstruction();
+		String actualCondition = this.stringConversionManager.valueToLLVMString(br.getCondition()).trim();
+		// make sure we use the new representation of the variable here
+		Variable v = getVariableFromAllVariablesByOldName(actualCondition);
+
+		if (v != null)
+		{
+			if (!positiveCase)
+			{
+				condition = "!" + v.getNewName();
+			} else
+			{
+				condition = v.getNewName();
+			}
+		} else
+		{
+			// condition seems to be a constant value and not a variable
+			condition = this.stringConversionManager.valueToString(br.getCondition());
+		}
+
+		return condition;
+	}
 
 
-   private void computeLabelPrefixesPerFunction() {
-      char currentChar = 'A';
-      for (int i = 0; i < cfgs.size(); i++) {
-         ControlFlowDiagram cfg = cfgs.get(i);
-         cfgToLabelPrefix.put(cfg, "" + currentChar);
-         currentChar++;
-      }
-   }
+	private void setFunctionLabelPrefixes()
+	{
+		char currentChar = 'A';
+		for (int i = 0; i < cfgs.size(); i++)
+		{
+			ControlFlowDiagram cfg = cfgs.get(i);
+			cfg.setLabelPrefix("" + currentChar);
+			currentChar++;
+		}
+	}
 
 
    /**
@@ -716,31 +652,27 @@ public class GendataPrecomputer {
     * @param shortLabel true for short labels
     * @return the label
     */
-   private String generateLabel(ControlFlowLocation loc, int size, boolean shortLabel) {
-      int sizeString = String.valueOf(size).length();
-      String bufferLabel = cfgToLabelPrefix.get(loc.getDiagram()) + String.format("%0" + sizeString + "d", loc.getPc());
+	private String generateLabel(ControlFlowLocation loc, int size, boolean shortLabel)
+	{
+		int sizeString = String.valueOf(size).length();
+		String bufferLabel = loc.getDiagram().getLabelPrefix()
+				+ String.format("%0" + sizeString + "d", loc.getPc());
 
-      for (AddressValuePair avp : loc.getBuffer().getAddressValuePairs()) {
-         bufferLabel += stringConversionManager.valueToString(avp.getAddress().getValue());
+		for (AddressValuePair avp : loc.getBuffer().getAddressValuePairs())
+		{
+			bufferLabel += stringConversionManager.valueToString(avp.getAddress().getValue());
 
-         if (!shortLabel) {
-            for (int i = 0; i < avp.getValues().size(); i++) {
-               bufferLabel += stringConversionManager.valueToString(avp.getValues().get(i).getValue());
-            }
-         }
-      }
+			if (!shortLabel)
+			{
+				for (int i = 0; i < avp.getValues().size(); i++)
+				{
+					bufferLabel += stringConversionManager.valueToString(avp.getValues().get(i).getValue());
+				}
+			}
+		}
 
-      return bufferLabel;
-   }
-
-
-   private Address extractAddressFromValue(Value v) {
-      if (v instanceof AddressUse) {
-         return ((AddressUse) v).getAddress();
-      }
-
-      return null;
-   }
+		return bufferLabel;
+	}
 
 
    private void computeGetElementPtrMapping() {
@@ -771,399 +703,468 @@ public class GendataPrecomputer {
 
 
    /**
-    * Constructs the actual variable mapping
-    */
-   private void computeLocalVariables() {
-      // map local variables of cfgs
-      for (ControlFlowDiagram cfg : cfgs) {
-         FunctionDefinition function = getFunctionForCfg(cfg);
-         usedVarsInFunctions.put(function, new ArrayList<String>());
-         for (Transition t : cfg.getTransitions()) {
+	 * Gathers all local variables except for function parameters and attaches them to the cfg.
+	 */
+	private void computeLocalVariablesAndAttachUsedVariablesToTransition()
+	{
+		// map local variables of cfgs
+		for (ControlFlowDiagram cfg : cfgs)
+		{
+			for (Transition t : cfg.getTransitions())
+			{
+				// map copyVars from writeDefChain
+				if (t instanceof WriteDefChainTransition)
+				{
+					createVariablesIntroducedByWriteDefChainTransition(t, cfg);
+				} else if (t instanceof FlushTransition)
+				{
+					FlushTransition ft = (FlushTransition) t;
+					fetchOrCreateVariableForValueAndAttachToTransition(ft, ft.getFlushedEntry().getAddress().getValue(), null);
+					fetchOrCreateVariableForValueAndAttachToTransition(ft, ft.getFlushedEntry().getValues().get(0).getValue(), null);
+				} else
+				{
+					createVariableIntroducedByThisTransition(t, cfg);
+				}
+			}
+		}
+	}
 
-            Instruction i = t.getInstruction();
-            if (i != null) {
-               addInstructionVariablesToMapping(function, i);
-            }
+	private void createVariablesIntroducedByWriteDefChainTransition(Transition t, ControlFlowDiagram cfg)
+	{
+		WriteDefChainTransition wdcTransition = (WriteDefChainTransition) t;
+		Store store = (Store) wdcTransition.getInstruction();
 
-            // map copyVars from writeDefChain
-            if (t instanceof WriteDefChainTransition) {
-               WriteDefChainTransition wdcTransition = (WriteDefChainTransition) t;
-               Store store = (Store) wdcTransition.getInstruction();
-               if (wdcTransition.getCopyAddress() != null) {
-                  Address copyAddress = wdcTransition.getCopyAddress();
-                  Address originalAddress = ((AddressUse) store.getTargetAddress().getValue()).getAddress();
-                  AddressMapping m = addToMapping(function, copyAddress);
-                  setType(m, originalAddress);
-               }
-               if (wdcTransition.getCopyValue() != null) {
-                  Address copyValue = wdcTransition.getCopyValue();
-                  Address originalValue = ((AddressUse) store.getValue().getValue()).getAddress();
-                  AddressMapping m = addToMapping(function, copyValue);
-                  setType(m, originalValue);
-               }
-            }
-         }
-      }
-   }
+		if (wdcTransition.getCopyAddress() != null)
+		{
+			Address copyAddress = wdcTransition.getCopyAddress();
+			String type = getVariableTypeAsString(store.getTargetAddress().getType());
+			Variable cpyAdrVar = getOrCreateLocalVariableAndAttachToCfg(copyAddress, type, cfg);
+			wdcTransition.getUsedVariables().add(cpyAdrVar);
+
+		}
+
+		if (wdcTransition.getCopyValue() != null)
+		{
+			Address copyValue = wdcTransition.getCopyValue();
+			String type = getVariableTypeAsString(store.getValue().getType());
+			Variable cpyValVar = getOrCreateLocalVariableAndAttachToCfg(copyValue, type, cfg);
+			wdcTransition.getUsedVariables().add(cpyValVar);
+		}
+		
+		Value adr = store.getTargetAddress().getValue();
+		fetchOrCreateVariableForValueAndAttachToTransition(wdcTransition, adr, null);
+		
+		Value val = store.getValue().getValue();
+		fetchOrCreateVariableForValueAndAttachToTransition(wdcTransition, val, null);
+	}
+
+	protected Variable getOrCreateVariable(Address originalVariable, String type)
+	{
+		String newName = this.stringConversionManager.clean(originalVariable.getName());
+		Variable existingVariable = getVariableFromAllVariablesByNewName(newName);
+		
+		if(existingVariable != null)
+		{
+			existingVariable.getOriginalAddresses().add(originalVariable);
+			String typeOfExistingVariable = existingVariable.getType();
+			
+			//determine greatest common type
+			if (Constants.KIV_BASIS_REF.equals(typeOfExistingVariable)
+					|| Constants.KIV_BASIS_REF.equals(type))
+			{
+				//variable is treated as a value possibly being null at some point
+				//so, we need to set it everywhere to extended REF type
+				existingVariable.setType(Constants.KIV_BASIS_REF);
+			} else if (DUMMY_TYPE.equals(typeOfExistingVariable) && type != null)
+			{
+				//Variable must have been created before the defining transition  
+				existingVariable.setType(type);
+			} 
+			
+			return existingVariable;
+		}
+		
+		//create a fresh variable
+		Variable var = ControlflowFactory.eINSTANCE.createVariable();
+		var.getOriginalAddresses().add(originalVariable);
+		var.setNewName(newName);
+		if (type == null)
+		{
+			var.setType(DUMMY_TYPE);
+		} else
+		{
+			var.setType(type);
+		}
+		this.helperModel.getAllVariables().add(var);
+		return var;
+	}
+	
+	private Variable getVariableFromAllVariablesByNewName(String name)
+	{
+		Iterator<Variable> i = this.helperModel.getAllVariables().iterator();
+		while(i.hasNext())
+		{
+			Variable v = i.next();
+			if(v.getNewName().equals(name))
+			{
+				return v;
+			}
+		}
+		return null;
+	}
+	
+	
+	private Variable getVariableFromAllVariablesByOldName(String name)
+	{
+		Iterator<Variable> i = this.helperModel.getAllVariables().iterator();
+		while(i.hasNext())
+		{
+			Variable v = i.next();
+			Iterator<Address> ai = v.getOriginalAddresses().iterator();
+			while(ai.hasNext())
+			{
+				Address org = ai.next();
+				if(org.getName().equals(name))
+				{
+					return v;
+				}
+			}
+		}
+		return null;
+	}
+	
+
+	
+	/**
+	 * Convenience method, creates and attaches variable to the cfg as a local variable. 
+	 * @param originalVariable
+	 * @param type
+	 * @param cfg
+	 * @return
+	 */
+	protected Variable getOrCreateLocalVariableAndAttachToCfg(Address originalVariable, String type, ControlFlowDiagram cfg)
+	{
+		Variable var = getOrCreateVariable(originalVariable, type);
+		cfg.getLocalVariables().add(var);
+		return var;
+	}
+	
+	/**
+	 * Fetches a variable for the address if there exists one. Otherwise, it is created. However, the type 
+	 * of the new variable is a dummy type and is supposed to be set, when the transition defining the 
+	 * variable is handled.  The new variable is attached to the transition as being used by the transition.   
+	 * @param t
+	 * @param v
+	 * @param type being null, will result in dummy type 
+	 */
+	private void fetchOrCreateVariableForValueAndAttachToTransition(Transition t, Value v, String type)
+	{
+		if(v instanceof AddressUse)
+		{
+			AddressUse au = (AddressUse) v;
+			Address a = au.getAddress();
+			Variable var = null;
+			if(type != null)
+			{
+				var = getOrCreateVariable(a, type);
+			} else
+			{
+				var = getOrCreateVariable(a, DUMMY_TYPE);
+			}
+			t.getUsedVariables().add(var);
+		} else if (v instanceof NestedGetElementPtr) 
+		{
+			NestedGetElementPtr nGEP = (NestedGetElementPtr) v;
+			Parameter aggregate = nGEP.getAggregate();
+			String agrType = getVariableTypeAsString(aggregate.getType());
+			fetchOrCreateVariableForValueAndAttachToTransition(t, aggregate.getValue(), agrType);
+			
+			Iterator<Parameter> i = nGEP.getIndices().iterator();
+			while(i.hasNext())
+			{
+				Parameter p = i.next();
+				String pType = getVariableTypeAsString(p.getType());
+				fetchOrCreateVariableForValueAndAttachToTransition(t, p.getValue(), pType);
+			}
+			
+		} else if (v instanceof NestedCast) 
+		{
+			NestedCast nc = (NestedCast) v;
+			fetchOrCreateVariableForValueAndAttachToTransition(t, nc.getValue(), this.kivBaseType);
+		}
+		
+		//else it is likely an actual value and we don't do anything here
+	}
+
+	/**
+	 * Does not deal with different types of Transition, but instructions only. EarlyRead, Flush, 
+	 * WriteDefChains must be handled outside. 
+	 * @param i
+	 * @param cfg
+	 */
+
+	private void createVariableIntroducedByThisTransition(Transition t, ControlFlowDiagram cfg)
+	{
+		Instruction i = t.getInstruction();
+		if(i == null)
+		{
+			return;
+		}
+		
+		Variable createdVariable = null;
+		if (i instanceof ArithmeticOperation)
+		{
+			ArithmeticOperation op = (ArithmeticOperation) i;
+			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), this.kivBaseType, cfg);
+			
+			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getValue1(), this.kivBaseType);
+			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getValue2(), this.kivBaseType);
+		} else if (i instanceof LogicOperation)
+		{
+			LogicOperation op = (LogicOperation) i;
+			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), this.kivBaseType, cfg);
+			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getValue1(), this.kivBaseType);
+			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getValue2(), this.kivBaseType);
+
+		} else if (i instanceof Cast)
+		{
+			Cast op = (Cast) i;
+			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), this.kivBaseType, cfg);
+			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getValue(), this.kivBaseType);
+
+		} else if (i instanceof GetElementPtr)
+		{
+			GetElementPtr op = (GetElementPtr) i;
+			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), this.kivBaseType, cfg);
+			Iterator<Parameter> iter = op.getIndices().iterator();
+			while (iter.hasNext())
+			{
+				Parameter p = iter.next();
+				fetchOrCreateVariableForValueAndAttachToTransition(t, p.getValue(), this.kivBaseType);
+			}
+		} else if (i instanceof Fence)
+		{
+			// nothing to do here
+		} else if (i instanceof CmpXchg)
+		{
+			CmpXchg op = (CmpXchg) i;
+			//TODO: check what type is the results of cmpxchg instructions
+			String type = getVariableTypeAsString(op.getNewValue().getType());
+			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
+			
+			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getAddress().getValue(), Constants.KIV_BASIS_REF);
+			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getNewValue().getValue(), null);
+			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getValue().getValue(), null);
+
+		} else if (i instanceof AtomicRMW)
+		{
+			//TODO: check what type is the results of rmw instructions
+			AtomicRMW op = (AtomicRMW) i;
+			String type = getVariableTypeAsString(op.getArgument().getType());
+			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
+			
+			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getAddress().getValue(), Constants.KIV_BASIS_REF);
+			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getArgument().getValue(), null);
+		} else if (i instanceof Load)
+		{
+			Load op = (Load) i;
+			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), null, cfg);
+			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getAddress().getValue(), null);
+
+		} else if (i instanceof Call)
+		{
+			Call op = (Call) i;
+			if(op.getResult() != null)
+			{
+				String type = getVariableTypeAsString(op.getFunction().getType());
+				createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
+			}
+			
+			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getFunction().getValue(), null);
+			Iterator<Parameter> iter = op.getPList().getParams().iterator();
+			while(iter.hasNext())
+			{
+				Parameter p = iter.next();
+				fetchOrCreateVariableForValueAndAttachToTransition(t, p.getValue(), null);
+			}
+			
+		} else if (i instanceof Alloc)
+		{
+			Alloc op = (Alloc) i;
+			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), Constants.KIV_BASIS_REF, cfg);
+		} else if (i instanceof Phi)
+		{
+			Phi op = (Phi) i;
+			String type = getVariableTypeAsString(op.getType());
+			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
+			
+			Iterator<PhiCase> iter = op.getCases().iterator();
+			while(iter.hasNext())
+			{
+				PhiCase pc = iter.next();
+				fetchOrCreateVariableForValueAndAttachToTransition(t, pc.getValue(), null);
+			}
+
+		} else if (i instanceof LandingPad)
+		{
+//			LandingPad op = (LandingPad) i;
+//			String type = getVariableTypeAsString(op.getPersonalitytype());
+//			createLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
+
+		} else if (i instanceof Select)
+		{
+			Select op = (Select) i;
+			String type = getVariableTypeAsString(op.getTrueValue().getType());
+			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
+			
+			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getCondition().getValue(), this.kivBaseType);
+			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getElseValue().getValue(), this.kivBaseType);
+			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getTrueValue().getValue(), this.kivBaseType);
+
+		} else if (i instanceof VariableAttributeAccess)
+		{
+			VariableAttributeAccess op = (VariableAttributeAccess) i;
+			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), Constants.KIV_BASIS_REF, cfg);
+			
+			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getVaList().getValue(), null);
+
+		} else if (i instanceof ExtractValue)
+		{
+			ExtractValue op = (ExtractValue) i;
+			String type = getVariableTypeAsString(op.getAggerate().getType());
+			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
+			//TODO: check at some point whether we need to attach variables from here
+
+		} else if (i instanceof InsertValue)
+		{
+			InsertValue op = (InsertValue) i;
+			String type = getVariableTypeAsString(op.getAggerate().getType());
+			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
+			//TODO: check at some point whether we need to attach variables from here
+
+		} else if (i instanceof ExtractElement)
+		{
+			ExtractElement op = (ExtractElement) i;
+			String type = getVariableTypeAsString(op.getVector().getType());
+			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
+			//TODO: check at some point whether we need to attach variables from here
+
+		} else if (i instanceof InsertElement)
+		{
+			InsertElement op = (InsertElement) i;
+			String type = getVariableTypeAsString(op.getVector().getType());
+			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
+			//TODO: check at some point whether we need to attach variables from here
+
+		} else if (i instanceof ShuffleVector)
+		{
+			ShuffleVector op = (ShuffleVector) i;
+			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), null, cfg);
+			//TODO: check at some point whether we need to attach variables from here
+		} else if (i instanceof Compare)
+		{
+			Compare op = (Compare) i;
+			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), this.kivBaseType, cfg);
+			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getOperand1(), null);
+			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getOperand2(), null);
+		} else if (i instanceof IndirectBranch)
+		{
+			//TODO: check at some point whether we need to attach variables from here
+		} else if (i instanceof Switch)
+		{
+			//TODO: check at some point whether we need to attach variables from here
+		} else if (i instanceof Invoke)
+		{
+			Invoke op = (Invoke) i;
+			String type = getVariableTypeAsString(op.getReturnType());
+			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getName(), type, cfg);
+			Iterator<Parameter> iter = op.getPList().getParams().iterator();
+			while(iter.hasNext())
+			{
+				Parameter p = iter.next();
+				type = getVariableTypeAsString(p.getType());
+				fetchOrCreateVariableForValueAndAttachToTransition(t, p.getValue(), type);
+			}
+			
+		} else if (i instanceof Resume)
+		{
+			// nothing to do here
+		} else if (i instanceof Unreachable)
+		{
+			// nothing to do here
+		} else if (i instanceof Return)
+		{
+			Return op = (Return) i;
+			if(op.getValue() instanceof Value)
+			{
+				fetchOrCreateVariableForValueAndAttachToTransition(t, (Value) op.getValue(), null);
+			}
+		} else if (i instanceof Branch)
+		{
+			Branch op = (Branch) i;
+			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getCondition(), null);
+		}
+		
+		if(createdVariable != null)
+		{
+			t.getUsedVariables().add(createdVariable);
+		}
+	}
+	
+	
+   
+	/**
+	 * This method determines whether the value represented by the variable can represent a null value.
+	 * In KIV, there are different types: "nat" for positive integer, "int" includes negative values and 
+	 * "Ref" being used as a type that can also represent a null value. 
+	 * 
+	 * @param object
+	 * @return
+	 */
+	private String getVariableTypeAsString(EObject object)
+	{
+		String t = Constants.KIV_BASIS_REF;
+		if (object instanceof TypeUse)
+		{
+			if (((TypeUse) object).getPointer() != null)
+			{
+				return Constants.KIV_BASIS_REF;
+			} else
+			{
+				t = kivBaseType;
+			}
+		}
+		else if (object instanceof Parameter)
+		{
+			t = getVariableTypeAsString(((Parameter) object).getType());
+		}
+		else if (object instanceof PrimitiveValue)
+		{
+			PrimitiveValue val = (PrimitiveValue) object;
+			if (val.getValue().equals("void") || val.getValue().equals("true") || val.getValue().equals("false"))
+			{
+				t = kivBaseType;
+			}
+		}
+		else if (object instanceof Address)
+		{
+			Address a = (Address) object;
+			Variable v = getVariableFromAllVariablesByOldName(a.getName());
+			if (v != null && v.getType() != null)
+			{
+				t = Constants.KIV_BASIS_REF;
+			} else
+			{
+				t = kivBaseType;
+				throw new RuntimeException("Found a variable without type: " + v.getNewName()); 
+			}
+		}
+
+		return t;
+	}
 
 
-   private void addInstructionVariablesToMapping(FunctionDefinition function, Instruction i) {
-      AddressMapping m;
-      if (i instanceof ArithmeticOperation) {
-         ArithmeticOperation op = (ArithmeticOperation) i;
-         addToMapping(function, op.getResult());
-         m = addToMapping(function, extractAddressFromValue(op.getValue1()));
-         setType(m, op.getOptype());
-         m = addToMapping(function, extractAddressFromValue(op.getValue2()));
-         setType(m, op.getOptype());
-
-      } else if (i instanceof LogicOperation) {
-         LogicOperation op = (LogicOperation) i;
-         addToMapping(function, op.getResult());
-         m = addToMapping(function, extractAddressFromValue(op.getValue1()));
-         setType(m, op.getOptype());
-         m = addToMapping(function, extractAddressFromValue(op.getValue2()));
-         setType(m, op.getOptype());
-
-      } else if (i instanceof Cast) {
-         Cast op = (Cast) i;
-         addToMapping(function, op.getResult());
-         m = addToMapping(function, extractAddressFromValue(op.getValue()));
-         setType(m, op.getFrom());
-
-      } else if (i instanceof GetElementPtr) {
-         GetElementPtr op = (GetElementPtr) i;
-         addToMapping(function, op.getResult());
-         m = addToMapping(function, extractAddressFromValue(op.getAggregate().getValue()));
-         setType(m, op.getAggregate().getType());
-      } else if (i instanceof Fence) {
-         // nothing to do here
-      } else if (i instanceof CmpXchg) {
-         CmpXchg op = (CmpXchg) i;
-         addToMapping(function, op.getResult());
-         m = addToMapping(function, extractAddressFromValue(op.getAddress().getValue()));
-         setType(m, op.getAddress().getType());
-         m = addToMapping(function, extractAddressFromValue(op.getNewValue().getValue()));
-         setType(m, op.getNewValue().getType());
-         m = addToMapping(function, extractAddressFromValue(op.getValue().getValue()));
-         setType(m, op.getValue().getType());
-
-      } else if (i instanceof AtomicRMW) {
-         AtomicRMW op = (AtomicRMW) i;
-         addToMapping(function, op.getResult());
-         m = addToMapping(function, extractAddressFromValue(op.getAddress().getValue()));
-         setType(m, op.getAddress().getType());
-         m = addToMapping(function, extractAddressFromValue(op.getArgument().getValue()));
-         setType(m, op.getArgument().getType());
-
-      } else if (i instanceof Load) {
-         Load op = (Load) i;
-         addToMapping(function, op.getResult());
-         m = addToMapping(function, extractAddressFromValue(op.getAddress().getValue()));
-         setType(m, op.getAddress().getType());
-
-      } else if (i instanceof Store) {
-         Store op = (Store) i;
-         m = addToMapping(function, extractAddressFromValue(op.getTargetAddress().getValue()));
-         setType(m, op.getTargetAddress().getType());
-         m = addToMapping(function, extractAddressFromValue(op.getValue().getValue()));
-         setType(m, op.getValue().getType());
-
-      } else if (i instanceof Call) {
-         Call op = (Call) i;
-         addToMapping(function, extractAddressFromValue(op.getFunction().getValue()));
-         m = addToMapping(function, op.getResult());
-         setType(m, op.getFunction().getType());
-
-      } else if (i instanceof Alloc) {
-         Alloc op = (Alloc) i;
-         addToMapping(function, op.getResult());
-         if (op.getNumOfElements() != null) {
-            m = addToMapping(function, extractAddressFromValue(op.getNumOfElements().getValue()));
-            setType(m, op.getNumOfElements().getType());
-         }
-      } else if (i instanceof Phi) {
-         Phi op = (Phi) i;
-         addToMapping(function, op.getResult());
-         for (PhiCase c : op.getCases()) {
-            m = addToMapping(function, extractAddressFromValue(c.getValue()));
-            setType(m, op.getType());
-         }
-
-      } else if (i instanceof LandingPad) {
-         LandingPad op = (LandingPad) i;
-         addToMapping(function, op.getResult());
-         m = addToMapping(function, extractAddressFromValue(op.getPersonalityvalue()));
-         setType(m, op.getPersonalitytype());
-
-      } else if (i instanceof Select) {
-         Select op = (Select) i;
-         addToMapping(function, op.getResult());
-         m = addToMapping(function, extractAddressFromValue(op.getCondition().getValue()));
-         setType(m, op.getCondition().getType());
-         m = addToMapping(function, extractAddressFromValue(op.getElseValue().getValue()));
-         setType(m, op.getElseValue().getType());
-         m = addToMapping(function, extractAddressFromValue(op.getTrueValue().getValue()));
-         setType(m, op.getTrueValue().getType());
-
-      } else if (i instanceof VariableAttributeAccess) {
-         VariableAttributeAccess op = (VariableAttributeAccess) i;
-         addToMapping(function, op.getResult());
-         m = addToMapping(function, extractAddressFromValue(op.getVaList().getValue()));
-         setType(m, op.getVaList().getType());
-
-      } else if (i instanceof ExtractValue) {
-         ExtractValue op = (ExtractValue) i;
-         addToMapping(function, op.getResult());
-         m = addToMapping(function, extractAddressFromValue(op.getAggerate().getValue()));
-         setType(m, op.getAggerate().getType());
-
-      } else if (i instanceof InsertValue) {
-         InsertValue op = (InsertValue) i;
-         addToMapping(function, op.getResult());
-         m = addToMapping(function, extractAddressFromValue(op.getAggerate().getValue()));
-         setType(m, op.getAggerate().getType());
-         m = addToMapping(function, extractAddressFromValue(op.getValue().getValue()));
-         setType(m, op.getValue().getType());
-
-      } else if (i instanceof ExtractElement) {
-         ExtractElement op = (ExtractElement) i;
-         addToMapping(function, op.getResult());
-         m = addToMapping(function, extractAddressFromValue(op.getVector().getValue()));
-         setType(m, op.getVector().getType());
-         m = addToMapping(function, extractAddressFromValue(op.getIndex().getValue()));
-         setType(m, op.getIndex().getType());
-
-      } else if (i instanceof InsertElement) {
-         InsertElement op = (InsertElement) i;
-         addToMapping(function, op.getResult());
-         m = addToMapping(function, extractAddressFromValue(op.getVector().getValue()));
-         setType(m, op.getVector().getType());
-         m = addToMapping(function, extractAddressFromValue(op.getIndex().getValue()));
-         setType(m, op.getIndex().getType());
-         m = addToMapping(function, extractAddressFromValue(op.getValue().getValue()));
-         setType(m, op.getValue().getType());
-
-      } else if (i instanceof ShuffleVector) {
-         ShuffleVector op = (ShuffleVector) i;
-         addToMapping(function, op.getResult());
-         m = addToMapping(function, extractAddressFromValue(op.getValue1().getValue()));
-         setType(m, op.getValue1().getType());
-         m = addToMapping(function, extractAddressFromValue(op.getValue2().getValue()));
-         setType(m, op.getValue2().getType());
-         m = addToMapping(function, extractAddressFromValue(op.getMask().getValue()));
-         setType(m, op.getMask().getType());
-      } else if (i instanceof Compare) {
-         Compare op = (Compare) i;
-         addToMapping(function, op.getResult());
-         m = addToMapping(function, extractAddressFromValue(op.getOperand1()));
-         setType(m, op.getOpType());
-         m = addToMapping(function, extractAddressFromValue(op.getOperand2()));
-         setType(m, op.getOpType());
-      } else if (i instanceof IndirectBranch) {
-         // nothing to do here
-      } else if (i instanceof Switch) {
-         // nothing to do here
-      } else if (i instanceof Invoke) {
-         Invoke op = (Invoke) i;
-         m = addToMapping(function, op.getName());
-         setType(m, op.getReturnType());
-      } else if (i instanceof Resume) {
-         // nothing to do here
-      } else if (i instanceof Unreachable) {
-         // nothing to do here
-      } else if (i instanceof Return) {
-         Return op = (Return) i;
-         if (op.getValue() instanceof Parameter) {
-            Parameter param = (Parameter) op.getValue();
-            m = addToMapping(function, extractAddressFromValue(param.getValue()));
-            setType(m, param.getType());
-         } else if (op.getValue() instanceof PrimitiveValue) {
-            m = addToMapping(function, extractAddressFromValue((PrimitiveValue) op.getValue()));
-         }
-
-      } else if (i instanceof Branch) {
-         Branch op = (Branch) i;
-         m = addToMapping(function, extractAddressFromValue(op.getCondition()));
-         setType(m, op.getCondition());
-      }
-
-   }
-
-
-   private AddressMapping addToMapping(FunctionDefinition function, Address address) {
-      if (address == null) {
-         return null;
-      }
-
-      AddressMapping correspondingMapping = getMappingForAddress(address);
-
-      // if corresponding mapping found
-      if (correspondingMapping != null) {
-         // if that address is not yet contained
-         if (!doesContainAddress(address, correspondingMapping)) {
-            correspondingMapping.getAdresses().add(address);
-            addressLookup.put(address, correspondingMapping.getName());
-         }
-
-         // no mapping found, create new one
-      } else {
-         // create new addressmapping
-         AddressMapping addressMapping = createAddressMapping(address, stringConversionManager.clean(address.getName()));
-         setType(addressMapping, address);
-
-         addressLookup.put(address, addressMapping.getName());
-
-         correspondingMapping = addressMapping;
-      }
-
-      if (function != null) {
-         // add used vars to the list
-         if (!address.getName().startsWith("@") && !usedVarsInFunctions.get(function).contains(addressLookup.get(address))) {
-            usedVarsInFunctions.get(function).add(addressLookup.get(address));
-         }
-      }
-      return correspondingMapping;
-   }
-
-
-   private void setType(AddressMapping addressMapping, EObject object) {
-
-      if (addressMapping == null)
-         return;
-
-      String t = Constants.KIV_BASIS_REF;
-      if (object instanceof TypeUse) {
-         if (((TypeUse) object).getPointer() != null) {
-            t = Constants.KIV_BASIS_REF;
-         } else {
-            t = kivTransformationBasis;
-         }
-      }
-
-      else if (object instanceof Parameter) {
-         setType(addressMapping, ((Parameter) object).getType());
-         return;
-      }
-
-      else if (object instanceof PrimitiveValue) {
-         PrimitiveValue val = (PrimitiveValue) object;
-         if (val.getValue().equals("void") || val.getValue().equals("true") || val.getValue().equals("false")) {
-            t = kivTransformationBasis;
-         }
-      }
-
-      else if (object instanceof Address) {
-         AddressMapping m = getMappingForAddress((Address) object);
-         if (m != null && m.getType() != null && m.getType().equals(Constants.KIV_BASIS_REF)) {
-            t = Constants.KIV_BASIS_REF;
-         } else {
-            t = kivTransformationBasis;
-         }
-      }
-
-      if (addressMapping.getType() == null || !addressMapping.getType().equals(Constants.KIV_BASIS_REF))
-         addressMapping.setType(t);
-   }
-
-
-   /**
-    * Returns the mapping for the given address if there already exists a mapping that corresponds
-    * to the same varname. If no such mapping is yet constructed, it returns null.
-    * 
-    * @param address
-    * @param mapping
-    * @return
-    */
-   private AddressMapping getMappingForAddress(Address address) {
-      for (AddressMapping am : helperModel.getAddressMappings()) {
-         for (Address a : am.getAdresses()) {
-            if (a.getName().equals(address.getName())) {
-               return am;
-            }
-         }
-      }
-      return null;
-   }
-
-
-   /**
-    * Returns the mapping for the given address if there already exists a mapping that corresponds
-    * to the same varname. If no such mapping is yet constructed, it returns null.
-    * 
-    * @param address
-    * @return
-    */
-   private AddressMapping getMappingForAddress(String address) {
-      for (AddressMapping am : helperModel.getAddressMappings()) {
-         if (am.getName().equals(address)) {
-            return am;
-         }
-      }
-      return null;
-   }
-
-
-   /**
-    * Returns true if the given mapping does have an entry for the address to search.
-    * 
-    * @param toSearch
-    * @param mapping
-    * @return
-    */
-   private boolean doesContainAddress(Address toSearch, AddressMapping mapping) {
-      for (Address a : mapping.getAdresses()) {
-         if (a.equals(toSearch)) {
-            return true;
-         }
-      }
-      return false;
-   }
-
-
-   private FunctionDefinition getFunctionForCfg(ControlFlowDiagram cfg) {
-      try {
-         if (cfg.getStart() != null && !cfg.getStart().getOutgoing().isEmpty()
-               && cfg.getStart().getOutgoing().get(0).getInstruction() != null) {
-            EObject motherObject = cfg.getStart().getOutgoing().get(0).getInstruction().eContainer();
-            BasicBlock basicBlock = (BasicBlock) motherObject;
-            FunctionBody fb = (FunctionBody) basicBlock.eContainer();
-            FunctionDefinition fd = (FunctionDefinition) fb.eContainer();
-            return fd;
-         }
-      } catch (ClassCastException ex) {
-         Activator.logError("Could not link LLVM program to this transformation.", ex);
-      }
-      return null;
-   }
-
-
-   /**
-    * Returns the correct store buffer graph for the given function in the LLVM
-    * 
-    * @param fd
-    * @return
-    */
-   private ControlFlowDiagram getCFGForFunction(FunctionDefinition fd) {
-      for (ControlFlowDiagram g : cfgs) {
-         if (g.getName().equalsIgnoreCase(fd.getAddress().getName())) {
-            return g;
-         }
-      }
-      return null;
-   }
-
-
-   private AddressMapping createAddressMapping(Address address, String name) {
-      AddressMapping mapping = GendataFactory.eINSTANCE.createAddressMapping();
-      mapping.setName(name);
-      mapping.getAdresses().add(address);
-      mapping.getOldNames().add(address.getName());
-      mapping.setGeneratorData(helperModel);
-      helperModel.getAddressMappings().add(mapping);
-      return mapping;
-   }
-
+// THE REST MUST BE REVISED. It mainly deals with space allocation and sizes of types, allocated memory etc.
 
    private int computeCompleteSize(EObject obj, boolean countAsPointer) {
       if (obj instanceof Aggregate_Type) {

@@ -4,6 +4,7 @@ package de.upb.lina.cfg.controlflow.provider;
 
 
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
+import de.upb.lina.cfg.controlflow.WriteDefChainTransition;
 import java.util.Collection;
 import java.util.List;
 
@@ -38,7 +39,8 @@ public class WriteDefChainTransitionItemProvider extends TransitionItemProvider 
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addCopyAddressPropertyDescriptor(object);
@@ -110,7 +112,10 @@ public class WriteDefChainTransitionItemProvider extends TransitionItemProvider 
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_WriteDefChainTransition_type");
+		String label = ((WriteDefChainTransition)object).getLabel();
+		return label == null || label.length() == 0 ?
+			getString("_UI_WriteDefChainTransition_type") :
+			getString("_UI_WriteDefChainTransition_type") + " " + label;
 	}
 	
 

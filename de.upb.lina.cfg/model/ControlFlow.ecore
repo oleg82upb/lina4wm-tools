@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="controlflow" nsURI="http://www.upb.de/lina/cfg/controlflow"
     nsPrefix="controlflow">
-  <eClassifiers xsi:type="ecore:EClass" name="ControlFlowDiagram">
+  <eClassifiers xsi:type="ecore:EClass" name="ControlFlowDiagram" eSuperTypes="#//AbstractLabeledElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="locations" upperBound="-1"
         eType="#//ControlFlowLocation" containment="true" eOpposite="#//ControlFlowLocation/diagram"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
@@ -17,8 +17,14 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="memoryModel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="functionDefinition" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//FunctionDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="labelPrefix" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnVariable" eType="#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterVariables" upperBound="-1"
+        eType="#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="localVariables" upperBound="-1"
+        eType="#//Variable"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ControlFlowLocation">
+  <eClassifiers xsi:type="ecore:EClass" name="ControlFlowLocation" eSuperTypes="#//AbstractLabeledElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="pc" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="diagram" eType="#//ControlFlowDiagram"
         eOpposite="#//ControlFlowDiagram/locations"/>
@@ -29,7 +35,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="buffer" eType="#//StoreBuffer"
         containment="true" eOpposite="#//StoreBuffer/location"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="#//AbstractLabeledElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="instruction" unique="false"
         eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Instruction"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//ControlFlowLocation"
@@ -38,6 +44,10 @@
         eOpposite="#//ControlFlowLocation/incoming"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="diagram" eType="#//ControlFlowDiagram"
         eOpposite="#//ControlFlowDiagram/transitions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="phiAssignments" upperBound="-1"
+        eType="#//PhiAssignment"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="usedVariables" upperBound="-1"
+        eType="#//Variable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WriteDefChainTransition" eSuperTypes="#//Transition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="copyAddress" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Address"/>
@@ -53,7 +63,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" unique="false"
         upperBound="-1" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Instruction"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FlushTransition" eSuperTypes="#//Transition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FlushTransition" eSuperTypes="#//Transition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="flushedEntry" eType="#//AddressValuePair"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AddressValuePair">
     <eStructuralFeatures xsi:type="ecore:EReference" name="address" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Parameter"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
@@ -66,5 +79,18 @@
         eType="#//AddressValuePair" containment="true" eOpposite="#//AddressValuePair/storeBuffer"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="location" eType="#//ControlFlowLocation"
         eOpposite="#//ControlFlowLocation/buffer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractLabeledElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PhiAssignment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Value"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="newName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="originalAddresses" upperBound="-1"
+        eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Address"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

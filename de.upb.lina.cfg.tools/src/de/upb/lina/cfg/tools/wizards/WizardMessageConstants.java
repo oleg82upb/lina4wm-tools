@@ -9,6 +9,7 @@ public class WizardMessageConstants {
 	public static final String MSG_STATUS_OK = "Check your input and press next or finish!";
 	public static final String MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED = "Unable to load the specified input file.";
 	public static final String MSG_STATUS_INPUT_FILE_NOT_EXISTING = "The specified input file does not exist.";
+	public static final String MSG_STATUS_NOT_AN_SC_FILE = "The contained store buffer graph is not an SC graph. Please choose or generate it with SC semantics.";
 	/*GUI button labels*/
 	public static final String BT_TX_BROWSE = "Browse";
 

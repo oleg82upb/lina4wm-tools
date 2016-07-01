@@ -15,6 +15,10 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//ControlFlowDiagram/variableCopyParams"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ControlFlow.ecore#//ControlFlowDiagram/memoryModel"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//ControlFlowDiagram/functionDefinition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ControlFlow.ecore#//ControlFlowDiagram/labelPrefix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//ControlFlowDiagram/returnVariable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//ControlFlowDiagram/parameterVariables"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//ControlFlowDiagram/localVariables"/>
     </genClasses>
     <genClasses ecoreClass="ControlFlow.ecore#//ControlFlowLocation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ControlFlow.ecore#//ControlFlowLocation/pc"/>
@@ -28,6 +32,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//Transition/source"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//Transition/target"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ControlFlow.ecore#//Transition/diagram"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//Transition/phiAssignments"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//Transition/usedVariables"/>
     </genClasses>
     <genClasses ecoreClass="ControlFlow.ecore#//WriteDefChainTransition">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//WriteDefChainTransition/copyAddress"/>
@@ -42,7 +48,9 @@
     <genClasses ecoreClass="ControlFlow.ecore#//MultiTransition">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//MultiTransition/instructions"/>
     </genClasses>
-    <genClasses ecoreClass="ControlFlow.ecore#//FlushTransition"/>
+    <genClasses ecoreClass="ControlFlow.ecore#//FlushTransition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//FlushTransition/flushedEntry"/>
+    </genClasses>
     <genClasses ecoreClass="ControlFlow.ecore#//AddressValuePair">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//AddressValuePair/address"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//AddressValuePair/values"/>
@@ -51,6 +59,18 @@
     <genClasses ecoreClass="ControlFlow.ecore#//StoreBuffer">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//StoreBuffer/addressValuePairs"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ControlFlow.ecore#//StoreBuffer/location"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ControlFlow.ecore#//AbstractLabeledElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ControlFlow.ecore#//AbstractLabeledElement/label"/>
+    </genClasses>
+    <genClasses ecoreClass="ControlFlow.ecore#//PhiAssignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//PhiAssignment/variable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//PhiAssignment/value"/>
+    </genClasses>
+    <genClasses ecoreClass="ControlFlow.ecore#//Variable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ControlFlow.ecore#//Variable/newName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ControlFlow.ecore#//Variable/originalAddresses"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ControlFlow.ecore#//Variable/type"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -56,6 +56,34 @@ public interface ControlflowPackage extends EPackage {
 	ControlflowPackage eINSTANCE = de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.AbstractLabeledElementImpl <em>Abstract Labeled Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.upb.lina.cfg.controlflow.impl.AbstractLabeledElementImpl
+	 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getAbstractLabeledElement()
+	 * @generated
+	 */
+	int ABSTRACT_LABELED_ELEMENT = 10;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_LABELED_ELEMENT__LABEL = 0;
+
+	/**
+	 * The number of structural features of the '<em>Abstract Labeled Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl <em>Control Flow Diagram</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -66,13 +94,22 @@ public interface ControlflowPackage extends EPackage {
 	int CONTROL_FLOW_DIAGRAM = 0;
 
 	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROL_FLOW_DIAGRAM__LABEL = ABSTRACT_LABELED_ELEMENT__LABEL;
+
+	/**
 	 * The feature id for the '<em><b>Locations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_DIAGRAM__LOCATIONS = 0;
+	int CONTROL_FLOW_DIAGRAM__LOCATIONS = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Transitions</b></em>' containment reference list.
@@ -81,7 +118,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_DIAGRAM__TRANSITIONS = 1;
+	int CONTROL_FLOW_DIAGRAM__TRANSITIONS = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Start</b></em>' reference.
@@ -90,7 +127,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_DIAGRAM__START = 2;
+	int CONTROL_FLOW_DIAGRAM__START = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -99,7 +136,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_DIAGRAM__NAME = 3;
+	int CONTROL_FLOW_DIAGRAM__NAME = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Variable Copies</b></em>' containment reference list.
@@ -108,7 +145,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_DIAGRAM__VARIABLE_COPIES = 4;
+	int CONTROL_FLOW_DIAGRAM__VARIABLE_COPIES = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Variable Copy Params</b></em>' containment reference list.
@@ -117,7 +154,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS = 5;
+	int CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Memory Model</b></em>' attribute.
@@ -126,7 +163,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_DIAGRAM__MEMORY_MODEL = 6;
+	int CONTROL_FLOW_DIAGRAM__MEMORY_MODEL = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Function Definition</b></em>' reference.
@@ -135,7 +172,43 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_DIAGRAM__FUNCTION_DEFINITION = 7;
+	int CONTROL_FLOW_DIAGRAM__FUNCTION_DEFINITION = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Label Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROL_FLOW_DIAGRAM__LABEL_PREFIX = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Return Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROL_FLOW_DIAGRAM__RETURN_VARIABLE = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Parameter Variables</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROL_FLOW_DIAGRAM__PARAMETER_VARIABLES = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Local Variables</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROL_FLOW_DIAGRAM__LOCAL_VARIABLES = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>Control Flow Diagram</em>' class.
@@ -144,7 +217,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_DIAGRAM_FEATURE_COUNT = 8;
+	int CONTROL_FLOW_DIAGRAM_FEATURE_COUNT = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.ControlFlowLocationImpl <em>Control Flow Location</em>}' class.
@@ -157,13 +230,22 @@ public interface ControlflowPackage extends EPackage {
 	int CONTROL_FLOW_LOCATION = 1;
 
 	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROL_FLOW_LOCATION__LABEL = ABSTRACT_LABELED_ELEMENT__LABEL;
+
+	/**
 	 * The feature id for the '<em><b>Pc</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_LOCATION__PC = 0;
+	int CONTROL_FLOW_LOCATION__PC = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
@@ -172,7 +254,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_LOCATION__DIAGRAM = 1;
+	int CONTROL_FLOW_LOCATION__DIAGRAM = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
@@ -181,7 +263,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_LOCATION__INCOMING = 2;
+	int CONTROL_FLOW_LOCATION__INCOMING = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing</b></em>' reference list.
@@ -190,7 +272,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_LOCATION__OUTGOING = 3;
+	int CONTROL_FLOW_LOCATION__OUTGOING = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Buffer</b></em>' containment reference.
@@ -199,7 +281,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_LOCATION__BUFFER = 4;
+	int CONTROL_FLOW_LOCATION__BUFFER = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Control Flow Location</em>' class.
@@ -208,7 +290,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_FLOW_LOCATION_FEATURE_COUNT = 5;
+	int CONTROL_FLOW_LOCATION_FEATURE_COUNT = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.TransitionImpl <em>Transition</em>}' class.
@@ -221,13 +303,22 @@ public interface ControlflowPackage extends EPackage {
 	int TRANSITION = 2;
 
 	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__LABEL = ABSTRACT_LABELED_ELEMENT__LABEL;
+
+	/**
 	 * The feature id for the '<em><b>Instruction</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__INSTRUCTION = 0;
+	int TRANSITION__INSTRUCTION = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -236,7 +327,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__SOURCE = 1;
+	int TRANSITION__SOURCE = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -245,7 +336,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__TARGET = 2;
+	int TRANSITION__TARGET = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
@@ -254,7 +345,25 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__DIAGRAM = 3;
+	int TRANSITION__DIAGRAM = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Phi Assignments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__PHI_ASSIGNMENTS = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Used Variables</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__USED_VARIABLES = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Transition</em>' class.
@@ -263,7 +372,7 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_FEATURE_COUNT = 4;
+	int TRANSITION_FEATURE_COUNT = ABSTRACT_LABELED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.WriteDefChainTransitionImpl <em>Write Def Chain Transition</em>}' class.
@@ -274,6 +383,15 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 */
 	int WRITE_DEF_CHAIN_TRANSITION = 3;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WRITE_DEF_CHAIN_TRANSITION__LABEL = TRANSITION__LABEL;
 
 	/**
 	 * The feature id for the '<em><b>Instruction</b></em>' reference.
@@ -310,6 +428,24 @@ public interface ControlflowPackage extends EPackage {
 	 * @ordered
 	 */
 	int WRITE_DEF_CHAIN_TRANSITION__DIAGRAM = TRANSITION__DIAGRAM;
+
+	/**
+	 * The feature id for the '<em><b>Phi Assignments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WRITE_DEF_CHAIN_TRANSITION__PHI_ASSIGNMENTS = TRANSITION__PHI_ASSIGNMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Used Variables</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WRITE_DEF_CHAIN_TRANSITION__USED_VARIABLES = TRANSITION__USED_VARIABLES;
 
 	/**
 	 * The feature id for the '<em><b>Copy Address</b></em>' reference.
@@ -349,6 +485,15 @@ public interface ControlflowPackage extends EPackage {
 	int EARLY_READ_TRANSITION = 4;
 
 	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EARLY_READ_TRANSITION__LABEL = TRANSITION__LABEL;
+
+	/**
 	 * The feature id for the '<em><b>Instruction</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -385,6 +530,24 @@ public interface ControlflowPackage extends EPackage {
 	int EARLY_READ_TRANSITION__DIAGRAM = TRANSITION__DIAGRAM;
 
 	/**
+	 * The feature id for the '<em><b>Phi Assignments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EARLY_READ_TRANSITION__PHI_ASSIGNMENTS = TRANSITION__PHI_ASSIGNMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Used Variables</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EARLY_READ_TRANSITION__USED_VARIABLES = TRANSITION__USED_VARIABLES;
+
+	/**
 	 * The feature id for the '<em><b>Assignment Expression</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -411,6 +574,15 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 */
 	int GUARDED_TRANSITION = 5;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARDED_TRANSITION__LABEL = TRANSITION__LABEL;
 
 	/**
 	 * The feature id for the '<em><b>Instruction</b></em>' reference.
@@ -449,6 +621,24 @@ public interface ControlflowPackage extends EPackage {
 	int GUARDED_TRANSITION__DIAGRAM = TRANSITION__DIAGRAM;
 
 	/**
+	 * The feature id for the '<em><b>Phi Assignments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARDED_TRANSITION__PHI_ASSIGNMENTS = TRANSITION__PHI_ASSIGNMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Used Variables</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARDED_TRANSITION__USED_VARIABLES = TRANSITION__USED_VARIABLES;
+
+	/**
 	 * The feature id for the '<em><b>Condition</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -475,6 +665,15 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 */
 	int MULTI_TRANSITION = 6;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_TRANSITION__LABEL = TRANSITION__LABEL;
 
 	/**
 	 * The feature id for the '<em><b>Instruction</b></em>' reference.
@@ -513,6 +712,24 @@ public interface ControlflowPackage extends EPackage {
 	int MULTI_TRANSITION__DIAGRAM = TRANSITION__DIAGRAM;
 
 	/**
+	 * The feature id for the '<em><b>Phi Assignments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_TRANSITION__PHI_ASSIGNMENTS = TRANSITION__PHI_ASSIGNMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Used Variables</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_TRANSITION__USED_VARIABLES = TRANSITION__USED_VARIABLES;
+
+	/**
 	 * The feature id for the '<em><b>Instructions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -539,6 +756,15 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 */
 	int FLUSH_TRANSITION = 7;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLUSH_TRANSITION__LABEL = TRANSITION__LABEL;
 
 	/**
 	 * The feature id for the '<em><b>Instruction</b></em>' reference.
@@ -577,13 +803,40 @@ public interface ControlflowPackage extends EPackage {
 	int FLUSH_TRANSITION__DIAGRAM = TRANSITION__DIAGRAM;
 
 	/**
+	 * The feature id for the '<em><b>Phi Assignments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLUSH_TRANSITION__PHI_ASSIGNMENTS = TRANSITION__PHI_ASSIGNMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Used Variables</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLUSH_TRANSITION__USED_VARIABLES = TRANSITION__USED_VARIABLES;
+
+	/**
+	 * The feature id for the '<em><b>Flushed Entry</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLUSH_TRANSITION__FLUSHED_ENTRY = TRANSITION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Flush Transition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FLUSH_TRANSITION_FEATURE_COUNT = TRANSITION_FEATURE_COUNT + 0;
+	int FLUSH_TRANSITION_FEATURE_COUNT = TRANSITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.AddressValuePairImpl <em>Address Value Pair</em>}' class.
@@ -667,6 +920,89 @@ public interface ControlflowPackage extends EPackage {
 	 * @ordered
 	 */
 	int STORE_BUFFER_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.PhiAssignmentImpl <em>Phi Assignment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.upb.lina.cfg.controlflow.impl.PhiAssignmentImpl
+	 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getPhiAssignment()
+	 * @generated
+	 */
+	int PHI_ASSIGNMENT = 11;
+
+	/**
+	 * The feature id for the '<em><b>Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHI_ASSIGNMENT__VARIABLE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHI_ASSIGNMENT__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Phi Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHI_ASSIGNMENT_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link de.upb.lina.cfg.controlflow.impl.VariableImpl <em>Variable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.upb.lina.cfg.controlflow.impl.VariableImpl
+	 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getVariable()
+	 * @generated
+	 */
+	int VARIABLE = 12;
+
+	/**
+	 * The feature id for the '<em><b>New Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE__NEW_NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Original Addresses</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE__ORIGINAL_ADDRESSES = 1;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE__TYPE = 2;
+
+	/**
+	 * The number of structural features of the '<em>Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_FEATURE_COUNT = 3;
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram <em>Control Flow Diagram</em>}'.
@@ -765,6 +1101,50 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getControlFlowDiagram_FunctionDefinition();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getLabelPrefix <em>Label Prefix</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Label Prefix</em>'.
+	 * @see de.upb.lina.cfg.controlflow.ControlFlowDiagram#getLabelPrefix()
+	 * @see #getControlFlowDiagram()
+	 * @generated
+	 */
+	EAttribute getControlFlowDiagram_LabelPrefix();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getReturnVariable <em>Return Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Return Variable</em>'.
+	 * @see de.upb.lina.cfg.controlflow.ControlFlowDiagram#getReturnVariable()
+	 * @see #getControlFlowDiagram()
+	 * @generated
+	 */
+	EReference getControlFlowDiagram_ReturnVariable();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getParameterVariables <em>Parameter Variables</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Parameter Variables</em>'.
+	 * @see de.upb.lina.cfg.controlflow.ControlFlowDiagram#getParameterVariables()
+	 * @see #getControlFlowDiagram()
+	 * @generated
+	 */
+	EReference getControlFlowDiagram_ParameterVariables();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getLocalVariables <em>Local Variables</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Local Variables</em>'.
+	 * @see de.upb.lina.cfg.controlflow.ControlFlowDiagram#getLocalVariables()
+	 * @see #getControlFlowDiagram()
+	 * @generated
+	 */
+	EReference getControlFlowDiagram_LocalVariables();
 
 	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.ControlFlowLocation <em>Control Flow Location</em>}'.
@@ -886,6 +1266,28 @@ public interface ControlflowPackage extends EPackage {
 	EReference getTransition_Diagram();
 
 	/**
+	 * Returns the meta object for the reference list '{@link de.upb.lina.cfg.controlflow.Transition#getPhiAssignments <em>Phi Assignments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Phi Assignments</em>'.
+	 * @see de.upb.lina.cfg.controlflow.Transition#getPhiAssignments()
+	 * @see #getTransition()
+	 * @generated
+	 */
+	EReference getTransition_PhiAssignments();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.upb.lina.cfg.controlflow.Transition#getUsedVariables <em>Used Variables</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Used Variables</em>'.
+	 * @see de.upb.lina.cfg.controlflow.Transition#getUsedVariables()
+	 * @see #getTransition()
+	 * @generated
+	 */
+	EReference getTransition_UsedVariables();
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.WriteDefChainTransition <em>Write Def Chain Transition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -991,6 +1393,17 @@ public interface ControlflowPackage extends EPackage {
 	EClass getFlushTransition();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link de.upb.lina.cfg.controlflow.FlushTransition#getFlushedEntry <em>Flushed Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Flushed Entry</em>'.
+	 * @see de.upb.lina.cfg.controlflow.FlushTransition#getFlushedEntry()
+	 * @see #getFlushTransition()
+	 * @generated
+	 */
+	EReference getFlushTransition_FlushedEntry();
+
+	/**
 	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.AddressValuePair <em>Address Value Pair</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1064,6 +1477,102 @@ public interface ControlflowPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getStoreBuffer_Location();
+
+	/**
+	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.AbstractLabeledElement <em>Abstract Labeled Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Abstract Labeled Element</em>'.
+	 * @see de.upb.lina.cfg.controlflow.AbstractLabeledElement
+	 * @generated
+	 */
+	EClass getAbstractLabeledElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.controlflow.AbstractLabeledElement#getLabel <em>Label</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Label</em>'.
+	 * @see de.upb.lina.cfg.controlflow.AbstractLabeledElement#getLabel()
+	 * @see #getAbstractLabeledElement()
+	 * @generated
+	 */
+	EAttribute getAbstractLabeledElement_Label();
+
+	/**
+	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.PhiAssignment <em>Phi Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Phi Assignment</em>'.
+	 * @see de.upb.lina.cfg.controlflow.PhiAssignment
+	 * @generated
+	 */
+	EClass getPhiAssignment();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.controlflow.PhiAssignment#getVariable <em>Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Variable</em>'.
+	 * @see de.upb.lina.cfg.controlflow.PhiAssignment#getVariable()
+	 * @see #getPhiAssignment()
+	 * @generated
+	 */
+	EReference getPhiAssignment_Variable();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.upb.lina.cfg.controlflow.PhiAssignment#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Value</em>'.
+	 * @see de.upb.lina.cfg.controlflow.PhiAssignment#getValue()
+	 * @see #getPhiAssignment()
+	 * @generated
+	 */
+	EReference getPhiAssignment_Value();
+
+	/**
+	 * Returns the meta object for class '{@link de.upb.lina.cfg.controlflow.Variable <em>Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Variable</em>'.
+	 * @see de.upb.lina.cfg.controlflow.Variable
+	 * @generated
+	 */
+	EClass getVariable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.controlflow.Variable#getNewName <em>New Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>New Name</em>'.
+	 * @see de.upb.lina.cfg.controlflow.Variable#getNewName()
+	 * @see #getVariable()
+	 * @generated
+	 */
+	EAttribute getVariable_NewName();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.upb.lina.cfg.controlflow.Variable#getOriginalAddresses <em>Original Addresses</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Original Addresses</em>'.
+	 * @see de.upb.lina.cfg.controlflow.Variable#getOriginalAddresses()
+	 * @see #getVariable()
+	 * @generated
+	 */
+	EReference getVariable_OriginalAddresses();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.upb.lina.cfg.controlflow.Variable#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see de.upb.lina.cfg.controlflow.Variable#getType()
+	 * @see #getVariable()
+	 * @generated
+	 */
+	EAttribute getVariable_Type();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1162,6 +1671,38 @@ public interface ControlflowPackage extends EPackage {
 		EReference CONTROL_FLOW_DIAGRAM__FUNCTION_DEFINITION = eINSTANCE.getControlFlowDiagram_FunctionDefinition();
 
 		/**
+		 * The meta object literal for the '<em><b>Label Prefix</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTROL_FLOW_DIAGRAM__LABEL_PREFIX = eINSTANCE.getControlFlowDiagram_LabelPrefix();
+
+		/**
+		 * The meta object literal for the '<em><b>Return Variable</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTROL_FLOW_DIAGRAM__RETURN_VARIABLE = eINSTANCE.getControlFlowDiagram_ReturnVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameter Variables</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTROL_FLOW_DIAGRAM__PARAMETER_VARIABLES = eINSTANCE.getControlFlowDiagram_ParameterVariables();
+
+		/**
+		 * The meta object literal for the '<em><b>Local Variables</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTROL_FLOW_DIAGRAM__LOCAL_VARIABLES = eINSTANCE.getControlFlowDiagram_LocalVariables();
+
+		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.ControlFlowLocationImpl <em>Control Flow Location</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1254,6 +1795,22 @@ public interface ControlflowPackage extends EPackage {
 		EReference TRANSITION__DIAGRAM = eINSTANCE.getTransition_Diagram();
 
 		/**
+		 * The meta object literal for the '<em><b>Phi Assignments</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSITION__PHI_ASSIGNMENTS = eINSTANCE.getTransition_PhiAssignments();
+
+		/**
+		 * The meta object literal for the '<em><b>Used Variables</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSITION__USED_VARIABLES = eINSTANCE.getTransition_UsedVariables();
+
+		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.WriteDefChainTransitionImpl <em>Write Def Chain Transition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1344,6 +1901,14 @@ public interface ControlflowPackage extends EPackage {
 		EClass FLUSH_TRANSITION = eINSTANCE.getFlushTransition();
 
 		/**
+		 * The meta object literal for the '<em><b>Flushed Entry</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FLUSH_TRANSITION__FLUSHED_ENTRY = eINSTANCE.getFlushTransition_FlushedEntry();
+
+		/**
 		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.AddressValuePairImpl <em>Address Value Pair</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1402,6 +1967,84 @@ public interface ControlflowPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STORE_BUFFER__LOCATION = eINSTANCE.getStoreBuffer_Location();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.AbstractLabeledElementImpl <em>Abstract Labeled Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.lina.cfg.controlflow.impl.AbstractLabeledElementImpl
+		 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getAbstractLabeledElement()
+		 * @generated
+		 */
+		EClass ABSTRACT_LABELED_ELEMENT = eINSTANCE.getAbstractLabeledElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Label</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_LABELED_ELEMENT__LABEL = eINSTANCE.getAbstractLabeledElement_Label();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.PhiAssignmentImpl <em>Phi Assignment</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.lina.cfg.controlflow.impl.PhiAssignmentImpl
+		 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getPhiAssignment()
+		 * @generated
+		 */
+		EClass PHI_ASSIGNMENT = eINSTANCE.getPhiAssignment();
+
+		/**
+		 * The meta object literal for the '<em><b>Variable</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PHI_ASSIGNMENT__VARIABLE = eINSTANCE.getPhiAssignment_Variable();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PHI_ASSIGNMENT__VALUE = eINSTANCE.getPhiAssignment_Value();
+
+		/**
+		 * The meta object literal for the '{@link de.upb.lina.cfg.controlflow.impl.VariableImpl <em>Variable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.upb.lina.cfg.controlflow.impl.VariableImpl
+		 * @see de.upb.lina.cfg.controlflow.impl.ControlflowPackageImpl#getVariable()
+		 * @generated
+		 */
+		EClass VARIABLE = eINSTANCE.getVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>New Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VARIABLE__NEW_NAME = eINSTANCE.getVariable_NewName();
+
+		/**
+		 * The meta object literal for the '<em><b>Original Addresses</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE__ORIGINAL_ADDRESSES = eINSTANCE.getVariable_OriginalAddresses();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VARIABLE__TYPE = eINSTANCE.getVariable_Type();
 
 	}
 

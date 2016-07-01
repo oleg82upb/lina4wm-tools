@@ -298,6 +298,26 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getGeneratorData_GlobalVariables()
+	{
+		return (EReference)generatorDataEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getGeneratorData_AllVariables()
+	{
+		return (EReference)generatorDataEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getGeneratorData__GetFilteredAddresses__String()
 	{
 		return generatorDataEClass.getEOperations().get(0);
@@ -672,6 +692,8 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		createEReference(generatorDataEClass, GENERATOR_DATA__MEMORY_SIZE_MAPPINGS);
 		createEReference(generatorDataEClass, GENERATOR_DATA__INPUT_TYPES);
 		createEReference(generatorDataEClass, GENERATOR_DATA__OLD_TO_NEW_CFG_NAME);
+		createEReference(generatorDataEClass, GENERATOR_DATA__GLOBAL_VARIABLES);
+		createEReference(generatorDataEClass, GENERATOR_DATA__ALL_VARIABLES);
 		createEOperation(generatorDataEClass, GENERATOR_DATA___GET_FILTERED_ADDRESSES__STRING);
 
 		addressMappingEClass = createEClass(ADDRESS_MAPPING);
@@ -772,6 +794,8 @@ public class GendataPackageImpl extends EPackageImpl implements GendataPackage
 		initEReference(getGeneratorData_MemorySizeMappings(), this.getMemorySizeMapping(), this.getMemorySizeMapping_GeneratorData(), "memorySizeMappings", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_InputTypes(), this.getInputTypeList(), null, "inputTypes", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorData_OldToNewCfgName(), this.getOldToNewCfgNameMapping(), null, "oldToNewCfgName", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGeneratorData_GlobalVariables(), theControlflowPackage.getVariable(), null, "globalVariables", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGeneratorData_AllVariables(), theControlflowPackage.getVariable(), null, "allVariables", null, 0, -1, GeneratorData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = initEOperation(getGeneratorData__GetFilteredAddresses__String(), this.getAddressMapping(), "getFilteredAddresses", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "key", 0, 1, IS_UNIQUE, IS_ORDERED);

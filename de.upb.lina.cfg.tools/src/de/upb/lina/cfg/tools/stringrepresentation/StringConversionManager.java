@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.EList;
@@ -50,6 +51,7 @@ public class StringConversionManager {
    private final static String REPLACE_STRINGS_REGEX = "\\s|\"|@_|@|%";
    private final static Pattern REPLACE_PATTERN = Pattern.compile(REPLACE_STRINGS_REGEX);
    private final static Pattern REPLACE_DOT_PATTERN = Pattern.compile(StringUtils.REPLACE_DOTS_REGEX);
+   private final static Predicate<String> STARTS_WITH_CHARACTER_PATTERN = Pattern.compile("^[a-z]").asPredicate();
 
    private Map<EObject, String> eObjectToStringCache;
    private Map<String, String> llvmToCleanedNameCache;
@@ -69,38 +71,26 @@ public class StringConversionManager {
     * @param string the string to clean
     * @return the result of the clean operation
     */
-   public String clean(String string) {
-      if (llvmToCleanedNameCache.containsKey(string)) {
-         return llvmToCleanedNameCache.get(string);
-      }
+	public String clean(String string)
+	{
+		if (llvmToCleanedNameCache.containsKey(string))
+		{
+			return llvmToCleanedNameCache.get(string);
+		}
 
-      // TODO: determine whether the patterns cause any problems
-      // unless nothing strange happens all of a sudden, we can delete the commented code soon
-      // int loc = string.indexOf("%");
-      // if the address is starts with a number, do not give it a v_
-      // if (loc > -1 && string.substring(loc + 1, loc + 2).matches("[0-9]")) {
-      // string = string.replaceAll("%", "v");
-      // } else {
-      // string = string.replaceAll("%", "");
-      // }
-      // string = string.trim();
-      boolean needsVariablePrefix = string.contains("%");
-      string = REPLACE_PATTERN.matcher(string).replaceAll(StringUtils.EMPTY_STRING);
-      string = REPLACE_DOT_PATTERN.matcher(string).replaceAll("_");
-      // old string.replaceAll(REPLACE_STRINGS_REGEX, EMPTY_STRING);
-      if (needsVariablePrefix && string.matches(StringUtils.NUMBERS_REGEX)) {
-         string = "v".concat(string);
-      }
-      // string = string.replaceAll("\"", "");
-      // string = string.replaceAll("\\.", "_");
+		boolean needsPrefix = string.contains("%");
+		String newString = REPLACE_PATTERN.matcher(string).replaceAll(StringUtils.EMPTY_STRING);
+		newString = REPLACE_DOT_PATTERN.matcher(newString).replaceAll("_");
 
-      // if the address is starts with a number, do not give it a v_
-      // string = string.replaceAll("@_", "");
+		if (needsPrefix && !STARTS_WITH_CHARACTER_PATTERN.test(newString))
+		{
+			newString = "v".concat(newString);
+		}
 
-      // string = string.replaceAll("@", "");
+		this.llvmToCleanedNameCache.put(string, newString);
 
-      return string;
-   }
+		return newString;
+	}
 
 
    /**
@@ -180,7 +170,7 @@ public class StringConversionManager {
          stringBuilder.append(CFGConstants.TODO);
       }
 
-      stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
+//      stringBuilder.append(StringUtils.WHITESPACE_SINGLE);
 
       String stringRepresentation = stringBuilder.toString();
       addCacheEntry(value, stringRepresentation);

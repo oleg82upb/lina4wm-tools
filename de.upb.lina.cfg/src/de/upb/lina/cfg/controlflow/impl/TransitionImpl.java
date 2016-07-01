@@ -2,22 +2,28 @@
  */
 package de.upb.lina.cfg.controlflow.impl;
 
+import de.upb.lina.cfg.controlflow.AddressRenaming;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
+import de.upb.lina.cfg.controlflow.PhiAssignment;
 import de.upb.lina.cfg.controlflow.Transition;
 
+import de.upb.lina.cfg.controlflow.Variable;
 import de.upb.llvm_parser.llvm.Instruction;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
@@ -31,12 +37,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.TransitionImpl#getSource <em>Source</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.TransitionImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.TransitionImpl#getDiagram <em>Diagram</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.impl.TransitionImpl#getPhiAssignments <em>Phi Assignments</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.impl.TransitionImpl#getUsedVariables <em>Used Variables</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class TransitionImpl extends EObjectImpl implements Transition {
+public class TransitionImpl extends AbstractLabeledElementImpl implements Transition {
 	/**
 	 * The cached value of the '{@link #getInstruction() <em>Instruction</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -66,6 +74,26 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * @ordered
 	 */
 	protected ControlFlowLocation target;
+
+	/**
+	 * The cached value of the '{@link #getPhiAssignments() <em>Phi Assignments</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPhiAssignments()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PhiAssignment> phiAssignments;
+
+	/**
+	 * The cached value of the '{@link #getUsedVariables() <em>Used Variables</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUsedVariables()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Variable> usedVariables;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -303,6 +331,34 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<PhiAssignment> getPhiAssignments()
+	{
+		if (phiAssignments == null)
+		{
+			phiAssignments = new EObjectResolvingEList<PhiAssignment>(PhiAssignment.class, this, ControlflowPackage.TRANSITION__PHI_ASSIGNMENTS);
+		}
+		return phiAssignments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Variable> getUsedVariables()
+	{
+		if (usedVariables == null)
+		{
+			usedVariables = new EObjectResolvingEList<Variable>(Variable.class, this, ControlflowPackage.TRANSITION__USED_VARIABLES);
+		}
+		return usedVariables;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID)
@@ -377,6 +433,10 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 				return basicGetTarget();
 			case ControlflowPackage.TRANSITION__DIAGRAM:
 				return getDiagram();
+			case ControlflowPackage.TRANSITION__PHI_ASSIGNMENTS:
+				return getPhiAssignments();
+			case ControlflowPackage.TRANSITION__USED_VARIABLES:
+				return getUsedVariables();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -386,6 +446,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
@@ -401,6 +462,14 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 				return;
 			case ControlflowPackage.TRANSITION__DIAGRAM:
 				setDiagram((ControlFlowDiagram)newValue);
+				return;
+			case ControlflowPackage.TRANSITION__PHI_ASSIGNMENTS:
+				getPhiAssignments().clear();
+				getPhiAssignments().addAll((Collection<? extends PhiAssignment>)newValue);
+				return;
+			case ControlflowPackage.TRANSITION__USED_VARIABLES:
+				getUsedVariables().clear();
+				getUsedVariables().addAll((Collection<? extends Variable>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -427,6 +496,12 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 			case ControlflowPackage.TRANSITION__DIAGRAM:
 				setDiagram((ControlFlowDiagram)null);
 				return;
+			case ControlflowPackage.TRANSITION__PHI_ASSIGNMENTS:
+				getPhiAssignments().clear();
+				return;
+			case ControlflowPackage.TRANSITION__USED_VARIABLES:
+				getUsedVariables().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -448,6 +523,10 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 				return target != null;
 			case ControlflowPackage.TRANSITION__DIAGRAM:
 				return getDiagram() != null;
+			case ControlflowPackage.TRANSITION__PHI_ASSIGNMENTS:
+				return phiAssignments != null && !phiAssignments.isEmpty();
+			case ControlflowPackage.TRANSITION__USED_VARIABLES:
+				return usedVariables != null && !usedVariables.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

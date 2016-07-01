@@ -112,6 +112,24 @@ public interface ControlflowFactory extends EFactory {
 	StoreBuffer createStoreBuffer();
 
 	/**
+	 * Returns a new object of class '<em>Phi Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Phi Assignment</em>'.
+	 * @generated
+	 */
+	PhiAssignment createPhiAssignment();
+
+	/**
+	 * Returns a new object of class '<em>Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Variable</em>'.
+	 * @generated
+	 */
+	Variable createVariable();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

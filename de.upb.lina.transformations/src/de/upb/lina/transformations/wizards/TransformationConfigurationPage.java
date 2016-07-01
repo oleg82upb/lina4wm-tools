@@ -1,6 +1,7 @@
 package de.upb.lina.transformations.wizards;
 
 import java.io.File;
+import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -12,6 +13,8 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.viewers.ISelection;
@@ -36,7 +39,9 @@ import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
+import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.tools.CFGConstants;
+import de.upb.lina.cfg.tools.EMemoryModel;
 import de.upb.lina.cfg.tools.wizards.ExtendedWizardPage;
 import de.upb.lina.cfg.tools.wizards.WizardMessageConstants;
 import de.upb.lina.transformations.Activator;
@@ -135,11 +140,14 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 		createLabel(container, SWT.NULL, LB_TX_TRANSFORMATION_TYPE);
 		
 		cb_transformationType = new Combo(container, SWT.NULL);
-		for(ETransformationType transformationType: ETransformationType.getTransformationTypes()){
-			cb_transformationType.add(transformationType.getIdentifier());
+		//this must be a static order, otherwise gui says its Promela, but does a KIV transformation 
+		for (int i = 0; i < 4; i++)
+		{
+			cb_transformationType.add(ETransformationType.getTransformationTypeById(i).getIdentifier());
 		}
 		
 		cb_transformationType.addModifyListener(new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent e) {
 				setTransformationTypeAccordingToSelection();
 				adaptGuiAccordingToTransformationType();
@@ -197,6 +205,7 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 
 		tx_outputFileName = createText(container, SWT.BORDER | SWT.SINGLE, 
 				new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent e) {
 				validateInput();
 			}
@@ -216,6 +225,7 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 
 		tx_outputFolderPath = createText(container, SWT.BORDER | SWT.SINGLE, 
 				new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent e) {
 				validateInput();
 			}
@@ -224,6 +234,7 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 
 		createButton(container, SWT.PUSH, WizardMessageConstants.BT_TX_BROWSE, 
 				new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				handleContainerBrowse(tx_outputFolderPath);
 			}
@@ -239,6 +250,7 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 		createLabel(container, SWT.NULL, LB_TX_INPUT_FILE);
 		tx_inputFilePath = createText(container, SWT.BORDER | SWT.SINGLE, 
 				new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent e) {
 				validateInput();
 			}
@@ -246,6 +258,7 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 		
 		createButton(container, SWT.PUSH, WizardMessageConstants.BT_TX_BROWSE, 
 				new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				handleElementBrowse(tx_inputFilePath);
 			}
@@ -333,7 +346,10 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 			lb_outputFileExtension.pack();
 	
 			int result = checkCFGFile(getInputFilePath());
-			if (result >= 400) {
+			if (result >= 500) {
+				updateErrorMessage(WizardMessageConstants.MSG_STATUS_NOT_AN_SC_FILE);
+				return;
+			} else if (result >= 400) {
 				updateErrorMessage(WizardMessageConstants.MSG_STATUS_INPUT_FILE_CANNOT_BE_LOADED);
 				return;
 			}else if (result >= 300) {
@@ -428,7 +444,28 @@ public class TransformationConfigurationPage extends ExtendedWizardPage {
 			ResourceSet resourceSet = new ResourceSetImpl();
 			Path cfgpath = new Path(cfgLocation);
 			URI uri = URI.createPlatformResourceURI(cfgpath.toOSString(), true);
-			resourceSet.getResource(uri, true);
+			Resource res = resourceSet.getResource(uri, true);
+			
+			int transformationTypeId = cb_transformationType.getSelectionIndex();
+			if(transformationTypeId == ETransformationType.PROMELA_OPERATIONAL.getId())
+			{
+				//check if this is an SC graph
+				if(!res.getContents().isEmpty())
+				{
+					Iterator<EObject> i = res.getContents().iterator();
+					EObject o = i.next();
+					if(o instanceof ControlFlowDiagram)
+					{
+						ControlFlowDiagram cfg = (ControlFlowDiagram) o;
+						int mm = cfg.getMemoryModel();
+						if (mm != EMemoryModel.SC.getModelId())
+						{
+							return 500;
+						}
+
+					}
+				}
+			}
 		}catch(WrappedException e){
 			return 400;
 		}

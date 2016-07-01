@@ -3,6 +3,7 @@
 package de.upb.lina.cfg.gendata;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
+import de.upb.lina.cfg.controlflow.Variable;
 import de.upb.llvm_parser.llvm.LLVM;
 
 import org.eclipse.emf.common.util.EList;
@@ -30,6 +31,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getMemorySizeMappings <em>Memory Size Mappings</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getInputTypes <em>Input Types</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getOldToNewCfgName <em>Old To New Cfg Name</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getGlobalVariables <em>Global Variables</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.GeneratorData#getAllVariables <em>All Variables</em>}</li>
  * </ul>
  * </p>
  *
@@ -254,6 +257,38 @@ public interface GeneratorData extends EObject
 	 * @generated
 	 */
 	EMap<String, String> getOldToNewCfgName();
+
+	/**
+	 * Returns the value of the '<em><b>Global Variables</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.lina.cfg.controlflow.Variable}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Global Variables</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Global Variables</em>' containment reference list.
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_GlobalVariables()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Variable> getGlobalVariables();
+
+	/**
+	 * Returns the value of the '<em><b>All Variables</b></em>' containment reference list.
+	 * The list contents are of type {@link de.upb.lina.cfg.controlflow.Variable}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>All Variables</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>All Variables</em>' containment reference list.
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getGeneratorData_AllVariables()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Variable> getAllVariables();
 
 	/**
 	 * <!-- begin-user-doc -->

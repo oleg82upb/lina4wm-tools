@@ -68,9 +68,4 @@ public abstract class Constants {
 	public static final int NAT_INDEX = 0;
 	public static final int INT_INDEX = 1;
 	
-	/* Generator constants determine which mtl file is used by each transformation*/
-	public static final String GENERATOR_KIV_LOCAL = "/de/upb/lina/transformations/kiv/generateKIVspec";
-	public static final String GENERATOR_KIV_GLOBAL = "/de/upb/lina/transformations/kiv/generateKIVspecGlobal";
-	public static final String GENERATOR_PROMELA = "/de/upb/lina/transformations/promela/GeneratePromelaModel";
-	public static final String GENERATOR_OPERATIONAL_PROMELA = "/de/upb/lina/transformations/promela/GenerateOperationalPromelaModel";
 }

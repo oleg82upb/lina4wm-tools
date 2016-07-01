@@ -2,13 +2,15 @@
  */
 package de.upb.lina.cfg.controlflow.impl;
 
-import de.upb.lina.cfg.controlflow.AddressValuePair;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import de.upb.lina.cfg.controlflow.AbstractLabeledElement;
+import de.upb.lina.cfg.controlflow.AddressRenaming;
+import de.upb.lina.cfg.controlflow.AddressValuePair;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.ControlflowFactory;
@@ -17,8 +19,10 @@ import de.upb.lina.cfg.controlflow.EarlyReadTransition;
 import de.upb.lina.cfg.controlflow.FlushTransition;
 import de.upb.lina.cfg.controlflow.GuardedTransition;
 import de.upb.lina.cfg.controlflow.MultiTransition;
+import de.upb.lina.cfg.controlflow.PhiAssignment;
 import de.upb.lina.cfg.controlflow.StoreBuffer;
 import de.upb.lina.cfg.controlflow.Transition;
+import de.upb.lina.cfg.controlflow.Variable;
 import de.upb.lina.cfg.controlflow.WriteDefChainTransition;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
@@ -100,6 +104,27 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	private EClass storeBufferEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass abstractLabeledElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass phiAssignmentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass variableEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -168,6 +193,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getControlFlowDiagram() {
 		return controlFlowDiagramEClass;
 	}
@@ -177,6 +203,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getControlFlowDiagram_Locations() {
 		return (EReference)controlFlowDiagramEClass.getEStructuralFeatures().get(0);
 	}
@@ -186,6 +213,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getControlFlowDiagram_Transitions() {
 		return (EReference)controlFlowDiagramEClass.getEStructuralFeatures().get(1);
 	}
@@ -195,6 +223,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getControlFlowDiagram_Start() {
 		return (EReference)controlFlowDiagramEClass.getEStructuralFeatures().get(2);
 	}
@@ -204,6 +233,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getControlFlowDiagram_Name() {
 		return (EAttribute)controlFlowDiagramEClass.getEStructuralFeatures().get(3);
 	}
@@ -213,6 +243,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getControlFlowDiagram_VariableCopies() {
 		return (EReference)controlFlowDiagramEClass.getEStructuralFeatures().get(4);
 	}
@@ -222,6 +253,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getControlFlowDiagram_VariableCopyParams() {
 		return (EReference)controlFlowDiagramEClass.getEStructuralFeatures().get(5);
 	}
@@ -231,6 +263,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getControlFlowDiagram_MemoryModel()
 	{
 		return (EAttribute)controlFlowDiagramEClass.getEStructuralFeatures().get(6);
@@ -241,6 +274,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getControlFlowDiagram_FunctionDefinition()
 	{
 		return (EReference)controlFlowDiagramEClass.getEStructuralFeatures().get(7);
@@ -251,6 +285,48 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EAttribute getControlFlowDiagram_LabelPrefix()
+	{
+		return (EAttribute)controlFlowDiagramEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getControlFlowDiagram_ReturnVariable()
+	{
+		return (EReference)controlFlowDiagramEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getControlFlowDiagram_ParameterVariables()
+	{
+		return (EReference)controlFlowDiagramEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getControlFlowDiagram_LocalVariables()
+	{
+		return (EReference)controlFlowDiagramEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getControlFlowLocation() {
 		return controlFlowLocationEClass;
 	}
@@ -260,6 +336,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getControlFlowLocation_Pc() {
 		return (EAttribute)controlFlowLocationEClass.getEStructuralFeatures().get(0);
 	}
@@ -269,6 +346,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getControlFlowLocation_Diagram() {
 		return (EReference)controlFlowLocationEClass.getEStructuralFeatures().get(1);
 	}
@@ -278,6 +356,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getControlFlowLocation_Incoming() {
 		return (EReference)controlFlowLocationEClass.getEStructuralFeatures().get(2);
 	}
@@ -287,6 +366,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getControlFlowLocation_Outgoing() {
 		return (EReference)controlFlowLocationEClass.getEStructuralFeatures().get(3);
 	}
@@ -296,6 +376,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getControlFlowLocation_Buffer() {
 		return (EReference)controlFlowLocationEClass.getEStructuralFeatures().get(4);
 	}
@@ -305,6 +386,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTransition() {
 		return transitionEClass;
 	}
@@ -314,6 +396,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTransition_Instruction() {
 		return (EReference)transitionEClass.getEStructuralFeatures().get(0);
 	}
@@ -323,6 +406,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTransition_Source() {
 		return (EReference)transitionEClass.getEStructuralFeatures().get(1);
 	}
@@ -332,6 +416,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTransition_Target() {
 		return (EReference)transitionEClass.getEStructuralFeatures().get(2);
 	}
@@ -341,6 +426,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTransition_Diagram() {
 		return (EReference)transitionEClass.getEStructuralFeatures().get(3);
 	}
@@ -350,6 +436,28 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EReference getTransition_PhiAssignments()
+	{
+		return (EReference)transitionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTransition_UsedVariables()
+	{
+		return (EReference)transitionEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getWriteDefChainTransition() {
 		return writeDefChainTransitionEClass;
 	}
@@ -359,6 +467,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getWriteDefChainTransition_CopyAddress() {
 		return (EReference)writeDefChainTransitionEClass.getEStructuralFeatures().get(0);
 	}
@@ -368,6 +477,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getWriteDefChainTransition_CopyValue() {
 		return (EReference)writeDefChainTransitionEClass.getEStructuralFeatures().get(1);
 	}
@@ -377,6 +487,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEarlyReadTransition() {
 		return earlyReadTransitionEClass;
 	}
@@ -386,6 +497,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getEarlyReadTransition_AssignmentExpression() {
 		return (EAttribute)earlyReadTransitionEClass.getEStructuralFeatures().get(0);
 	}
@@ -395,6 +507,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getGuardedTransition() {
 		return guardedTransitionEClass;
 	}
@@ -404,6 +517,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getGuardedTransition_Condition() {
 		return (EAttribute)guardedTransitionEClass.getEStructuralFeatures().get(0);
 	}
@@ -413,6 +527,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMultiTransition() {
 		return multiTransitionEClass;
 	}
@@ -422,6 +537,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMultiTransition_Instructions() {
 		return (EReference)multiTransitionEClass.getEStructuralFeatures().get(0);
 	}
@@ -431,6 +547,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFlushTransition() {
 		return flushTransitionEClass;
 	}
@@ -440,6 +557,18 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EReference getFlushTransition_FlushedEntry()
+	{
+		return (EReference)flushTransitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getAddressValuePair() {
 		return addressValuePairEClass;
 	}
@@ -449,6 +578,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAddressValuePair_Address()
 	{
 		return (EReference)addressValuePairEClass.getEStructuralFeatures().get(0);
@@ -459,6 +589,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAddressValuePair_Values()
 	{
 		return (EReference)addressValuePairEClass.getEStructuralFeatures().get(1);
@@ -469,6 +600,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAddressValuePair_StoreBuffer()
 	{
 		return (EReference)addressValuePairEClass.getEStructuralFeatures().get(2);
@@ -479,6 +611,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStoreBuffer() {
 		return storeBufferEClass;
 	}
@@ -488,6 +621,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStoreBuffer_AddressValuePairs()
 	{
 		return (EReference)storeBufferEClass.getEStructuralFeatures().get(0);
@@ -498,6 +632,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStoreBuffer_Location()
 	{
 		return (EReference)storeBufferEClass.getEStructuralFeatures().get(1);
@@ -508,6 +643,101 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EClass getAbstractLabeledElement()
+	{
+		return abstractLabeledElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getAbstractLabeledElement_Label()
+	{
+		return (EAttribute)abstractLabeledElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getPhiAssignment()
+	{
+		return phiAssignmentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPhiAssignment_Variable()
+	{
+		return (EReference)phiAssignmentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getPhiAssignment_Value()
+	{
+		return (EReference)phiAssignmentEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getVariable()
+	{
+		return variableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getVariable_NewName()
+	{
+		return (EAttribute)variableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVariable_OriginalAddresses()
+	{
+		return (EReference)variableEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getVariable_Type()
+	{
+		return (EAttribute)variableEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public ControlflowFactory getControlflowFactory() {
 		return (ControlflowFactory)getEFactoryInstance();
 	}
@@ -540,6 +770,10 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		createEReference(controlFlowDiagramEClass, CONTROL_FLOW_DIAGRAM__VARIABLE_COPY_PARAMS);
 		createEAttribute(controlFlowDiagramEClass, CONTROL_FLOW_DIAGRAM__MEMORY_MODEL);
 		createEReference(controlFlowDiagramEClass, CONTROL_FLOW_DIAGRAM__FUNCTION_DEFINITION);
+		createEAttribute(controlFlowDiagramEClass, CONTROL_FLOW_DIAGRAM__LABEL_PREFIX);
+		createEReference(controlFlowDiagramEClass, CONTROL_FLOW_DIAGRAM__RETURN_VARIABLE);
+		createEReference(controlFlowDiagramEClass, CONTROL_FLOW_DIAGRAM__PARAMETER_VARIABLES);
+		createEReference(controlFlowDiagramEClass, CONTROL_FLOW_DIAGRAM__LOCAL_VARIABLES);
 
 		controlFlowLocationEClass = createEClass(CONTROL_FLOW_LOCATION);
 		createEAttribute(controlFlowLocationEClass, CONTROL_FLOW_LOCATION__PC);
@@ -553,6 +787,8 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		createEReference(transitionEClass, TRANSITION__SOURCE);
 		createEReference(transitionEClass, TRANSITION__TARGET);
 		createEReference(transitionEClass, TRANSITION__DIAGRAM);
+		createEReference(transitionEClass, TRANSITION__PHI_ASSIGNMENTS);
+		createEReference(transitionEClass, TRANSITION__USED_VARIABLES);
 
 		writeDefChainTransitionEClass = createEClass(WRITE_DEF_CHAIN_TRANSITION);
 		createEReference(writeDefChainTransitionEClass, WRITE_DEF_CHAIN_TRANSITION__COPY_ADDRESS);
@@ -568,6 +804,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		createEReference(multiTransitionEClass, MULTI_TRANSITION__INSTRUCTIONS);
 
 		flushTransitionEClass = createEClass(FLUSH_TRANSITION);
+		createEReference(flushTransitionEClass, FLUSH_TRANSITION__FLUSHED_ENTRY);
 
 		addressValuePairEClass = createEClass(ADDRESS_VALUE_PAIR);
 		createEReference(addressValuePairEClass, ADDRESS_VALUE_PAIR__ADDRESS);
@@ -577,6 +814,18 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		storeBufferEClass = createEClass(STORE_BUFFER);
 		createEReference(storeBufferEClass, STORE_BUFFER__ADDRESS_VALUE_PAIRS);
 		createEReference(storeBufferEClass, STORE_BUFFER__LOCATION);
+
+		abstractLabeledElementEClass = createEClass(ABSTRACT_LABELED_ELEMENT);
+		createEAttribute(abstractLabeledElementEClass, ABSTRACT_LABELED_ELEMENT__LABEL);
+
+		phiAssignmentEClass = createEClass(PHI_ASSIGNMENT);
+		createEReference(phiAssignmentEClass, PHI_ASSIGNMENT__VARIABLE);
+		createEReference(phiAssignmentEClass, PHI_ASSIGNMENT__VALUE);
+
+		variableEClass = createEClass(VARIABLE);
+		createEAttribute(variableEClass, VARIABLE__NEW_NAME);
+		createEReference(variableEClass, VARIABLE__ORIGINAL_ADDRESSES);
+		createEAttribute(variableEClass, VARIABLE__TYPE);
 	}
 
 	/**
@@ -610,6 +859,9 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		controlFlowDiagramEClass.getESuperTypes().add(this.getAbstractLabeledElement());
+		controlFlowLocationEClass.getESuperTypes().add(this.getAbstractLabeledElement());
+		transitionEClass.getESuperTypes().add(this.getAbstractLabeledElement());
 		writeDefChainTransitionEClass.getESuperTypes().add(this.getTransition());
 		earlyReadTransitionEClass.getESuperTypes().add(this.getTransition());
 		guardedTransitionEClass.getESuperTypes().add(this.getTransition());
@@ -626,6 +878,10 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		initEReference(getControlFlowDiagram_VariableCopyParams(), theLlvmPackage.getParameter(), null, "variableCopyParams", null, 0, -1, ControlFlowDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getControlFlowDiagram_MemoryModel(), ecorePackage.getEInt(), "memoryModel", null, 0, 1, ControlFlowDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getControlFlowDiagram_FunctionDefinition(), theLlvmPackage.getFunctionDefinition(), null, "functionDefinition", null, 0, 1, ControlFlowDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getControlFlowDiagram_LabelPrefix(), ecorePackage.getEString(), "labelPrefix", null, 0, 1, ControlFlowDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getControlFlowDiagram_ReturnVariable(), this.getVariable(), null, "returnVariable", null, 0, 1, ControlFlowDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getControlFlowDiagram_ParameterVariables(), this.getVariable(), null, "parameterVariables", null, 0, -1, ControlFlowDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getControlFlowDiagram_LocalVariables(), this.getVariable(), null, "localVariables", null, 0, -1, ControlFlowDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(controlFlowLocationEClass, ControlFlowLocation.class, "ControlFlowLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getControlFlowLocation_Pc(), ecorePackage.getEInt(), "pc", null, 0, 1, ControlFlowLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -639,6 +895,8 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		initEReference(getTransition_Source(), this.getControlFlowLocation(), this.getControlFlowLocation_Outgoing(), "source", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransition_Target(), this.getControlFlowLocation(), this.getControlFlowLocation_Incoming(), "target", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransition_Diagram(), this.getControlFlowDiagram(), this.getControlFlowDiagram_Transitions(), "diagram", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransition_PhiAssignments(), this.getPhiAssignment(), null, "phiAssignments", null, 0, -1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransition_UsedVariables(), this.getVariable(), null, "usedVariables", null, 0, -1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(writeDefChainTransitionEClass, WriteDefChainTransition.class, "WriteDefChainTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getWriteDefChainTransition_CopyAddress(), theLlvmPackage.getAddress(), null, "copyAddress", null, 0, 1, WriteDefChainTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -654,6 +912,7 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		initEReference(getMultiTransition_Instructions(), theLlvmPackage.getInstruction(), null, "instructions", null, 0, -1, MultiTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(flushTransitionEClass, FlushTransition.class, "FlushTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFlushTransition_FlushedEntry(), this.getAddressValuePair(), null, "flushedEntry", null, 0, 1, FlushTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(addressValuePairEClass, AddressValuePair.class, "AddressValuePair", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAddressValuePair_Address(), theLlvmPackage.getParameter(), null, "address", null, 0, 1, AddressValuePair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -663,6 +922,18 @@ public class ControlflowPackageImpl extends EPackageImpl implements ControlflowP
 		initEClass(storeBufferEClass, StoreBuffer.class, "StoreBuffer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStoreBuffer_AddressValuePairs(), this.getAddressValuePair(), this.getAddressValuePair_StoreBuffer(), "addressValuePairs", null, 0, -1, StoreBuffer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStoreBuffer_Location(), this.getControlFlowLocation(), this.getControlFlowLocation_Buffer(), "location", null, 0, 1, StoreBuffer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(abstractLabeledElementEClass, AbstractLabeledElement.class, "AbstractLabeledElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAbstractLabeledElement_Label(), ecorePackage.getEString(), "label", null, 0, 1, AbstractLabeledElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(phiAssignmentEClass, PhiAssignment.class, "PhiAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPhiAssignment_Variable(), this.getVariable(), null, "variable", null, 0, 1, PhiAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPhiAssignment_Value(), theLlvmPackage.getValue(), null, "value", null, 0, 1, PhiAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(variableEClass, Variable.class, "Variable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getVariable_NewName(), ecorePackage.getEString(), "newName", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVariable_OriginalAddresses(), theLlvmPackage.getAddress(), null, "originalAddresses", null, 0, -1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVariable_Type(), ecorePackage.getEString(), "type", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

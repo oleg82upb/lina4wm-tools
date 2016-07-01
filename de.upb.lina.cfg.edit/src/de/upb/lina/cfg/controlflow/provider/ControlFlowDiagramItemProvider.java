@@ -36,13 +36,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class ControlFlowDiagramItemProvider
-	extends ItemProviderAdapter
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends AbstractLabeledElementItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -61,13 +55,17 @@ public class ControlFlowDiagramItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
 			addVariableCopyParamsPropertyDescriptor(object);
 			addMemoryModelPropertyDescriptor(object);
 			addFunctionDefinitionPropertyDescriptor(object);
+			addLabelPrefixPropertyDescriptor(object);
+			addParameterVariablesPropertyDescriptor(object);
+			addLocalVariablesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -163,6 +161,75 @@ public class ControlFlowDiagramItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Label Prefix feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLabelPrefixPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ControlFlowDiagram_labelPrefix_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ControlFlowDiagram_labelPrefix_feature", "_UI_ControlFlowDiagram_type"),
+				 ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__LABEL_PREFIX,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Parameter Variables feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addParameterVariablesPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ControlFlowDiagram_parameterVariables_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ControlFlowDiagram_parameterVariables_feature", "_UI_ControlFlowDiagram_type"),
+				 ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__PARAMETER_VARIABLES,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Local Variables feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLocalVariablesPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ControlFlowDiagram_localVariables_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ControlFlowDiagram_localVariables_feature", "_UI_ControlFlowDiagram_type"),
+				 ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__LOCAL_VARIABLES,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -172,12 +239,14 @@ public class ControlFlowDiagramItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__LOCATIONS);
 			childrenFeatures.add(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__TRANSITIONS);
 			childrenFeatures.add(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__START);
 			childrenFeatures.add(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__VARIABLE_COPIES);
+			childrenFeatures.add(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__RETURN_VARIABLE);
 		}
 		return childrenFeatures;
 	}
@@ -231,15 +300,18 @@ public class ControlFlowDiagramItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ControlFlowDiagram.class)) {
+		switch (notification.getFeatureID(ControlFlowDiagram.class))
+		{
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__NAME:
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__MEMORY_MODEL:
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__LABEL_PREFIX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCATIONS:
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__TRANSITIONS:
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__START:
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__VARIABLE_COPIES:
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__RETURN_VARIABLE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -301,6 +373,11 @@ public class ControlFlowDiagramItemProvider
 			(createChildParameter
 				(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__VARIABLE_COPIES,
 				 LlvmFactory.eINSTANCE.createAddress()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__RETURN_VARIABLE,
+				 ControlflowFactory.eINSTANCE.createVariable()));
 	}
 
 	/**
@@ -318,23 +395,13 @@ public class ControlFlowDiagramItemProvider
 			childFeature == ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__LOCATIONS ||
 			childFeature == ControlflowPackage.Literals.CONTROL_FLOW_DIAGRAM__START;
 
-		if (qualify) {
+		if (qualify)
+		{
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return ControlFlowEditPlugin.INSTANCE;
 	}
 
 }

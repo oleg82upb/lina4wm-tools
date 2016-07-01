@@ -4,6 +4,7 @@ package de.upb.lina.cfg.controlflow;
 
 import de.upb.llvm_parser.llvm.Instruction;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -18,6 +19,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.controlflow.Transition#getSource <em>Source</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.Transition#getTarget <em>Target</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.Transition#getDiagram <em>Diagram</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.Transition#getPhiAssignments <em>Phi Assignments</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.Transition#getUsedVariables <em>Used Variables</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Transition extends EObject {
+public interface Transition extends AbstractLabeledElement {
 	/**
 	 * Returns the value of the '<em><b>Instruction</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -135,5 +138,37 @@ public interface Transition extends EObject {
 	 * @generated
 	 */
 	void setDiagram(ControlFlowDiagram value);
+
+	/**
+	 * Returns the value of the '<em><b>Phi Assignments</b></em>' reference list.
+	 * The list contents are of type {@link de.upb.lina.cfg.controlflow.PhiAssignment}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Phi Assignments</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Phi Assignments</em>' reference list.
+	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getTransition_PhiAssignments()
+	 * @model
+	 * @generated
+	 */
+	EList<PhiAssignment> getPhiAssignments();
+
+	/**
+	 * Returns the value of the '<em><b>Used Variables</b></em>' reference list.
+	 * The list contents are of type {@link de.upb.lina.cfg.controlflow.Variable}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Used Variables</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Used Variables</em>' reference list.
+	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getTransition_UsedVariables()
+	 * @model
+	 * @generated
+	 */
+	EList<Variable> getUsedVariables();
 
 } // Transition

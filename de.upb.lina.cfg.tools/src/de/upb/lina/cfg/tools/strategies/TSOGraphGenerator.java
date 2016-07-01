@@ -85,7 +85,7 @@ public class TSOGraphGenerator extends AbstractGraphGenerator {
          this.toBeProcessedLocations.add(targetLocation);
       }
 
-      createFlushTransition(sourceLocation, targetLocation);
+      createFlushTransition(sourceLocation, targetLocation, pair);
 
    }
 
@@ -235,11 +235,12 @@ public class TSOGraphGenerator extends AbstractGraphGenerator {
     * @return newly created transition that has source, target, instruction and the control flow
     *         graph set up
     */
-   protected FlushTransition createFlushTransition(ControlFlowLocation source, ControlFlowLocation target) {
+   protected FlushTransition createFlushTransition(ControlFlowLocation source, ControlFlowLocation target, AddressValuePair flushedEntry) {
       FlushTransition transition = ControlflowFactory.eINSTANCE.createFlushTransition();
       transition.setDiagram(this.graph);
       transition.setSource(source);
       transition.setTarget(target);
+      transition.setFlushedEntry(flushedEntry);
       return transition;
    }
 

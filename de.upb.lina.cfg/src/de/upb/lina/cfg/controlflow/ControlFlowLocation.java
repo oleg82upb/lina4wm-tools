@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface ControlFlowLocation extends EObject {
+public interface ControlFlowLocation extends AbstractLabeledElement {
 	/**
 	 * Returns the value of the '<em><b>Pc</b></em>' attribute.
 	 * <!-- begin-user-doc -->

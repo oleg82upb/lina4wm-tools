@@ -25,6 +25,10 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getVariableCopyParams <em>Variable Copy Params</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getMemoryModel <em>Memory Model</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getFunctionDefinition <em>Function Definition</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getLabelPrefix <em>Label Prefix</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getReturnVariable <em>Return Variable</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getParameterVariables <em>Parameter Variables</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getLocalVariables <em>Local Variables</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,7 +36,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface ControlFlowDiagram extends EObject {
+public interface ControlFlowDiagram extends AbstractLabeledElement {
 	/**
 	 * Returns the value of the '<em><b>Locations</b></em>' containment reference list.
 	 * The list contents are of type {@link de.upb.lina.cfg.controlflow.ControlFlowLocation}.
@@ -204,5 +208,89 @@ public interface ControlFlowDiagram extends EObject {
 	 * @generated
 	 */
 	void setFunctionDefinition(FunctionDefinition value);
+
+	/**
+	 * Returns the value of the '<em><b>Label Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Label Prefix</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Label Prefix</em>' attribute.
+	 * @see #setLabelPrefix(String)
+	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getControlFlowDiagram_LabelPrefix()
+	 * @model
+	 * @generated
+	 */
+	String getLabelPrefix();
+
+	/**
+	 * Sets the value of the '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getLabelPrefix <em>Label Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Label Prefix</em>' attribute.
+	 * @see #getLabelPrefix()
+	 * @generated
+	 */
+	void setLabelPrefix(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Return Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Return Variable</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Return Variable</em>' reference.
+	 * @see #setReturnVariable(Variable)
+	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getControlFlowDiagram_ReturnVariable()
+	 * @model
+	 * @generated
+	 */
+	Variable getReturnVariable();
+
+	/**
+	 * Sets the value of the '{@link de.upb.lina.cfg.controlflow.ControlFlowDiagram#getReturnVariable <em>Return Variable</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Return Variable</em>' reference.
+	 * @see #getReturnVariable()
+	 * @generated
+	 */
+	void setReturnVariable(Variable value);
+
+	/**
+	 * Returns the value of the '<em><b>Parameter Variables</b></em>' reference list.
+	 * The list contents are of type {@link de.upb.lina.cfg.controlflow.Variable}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parameter Variables</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parameter Variables</em>' reference list.
+	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getControlFlowDiagram_ParameterVariables()
+	 * @model
+	 * @generated
+	 */
+	EList<Variable> getParameterVariables();
+
+	/**
+	 * Returns the value of the '<em><b>Local Variables</b></em>' reference list.
+	 * The list contents are of type {@link de.upb.lina.cfg.controlflow.Variable}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Local Variables</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Local Variables</em>' reference list.
+	 * @see de.upb.lina.cfg.controlflow.ControlflowPackage#getControlFlowDiagram_LocalVariables()
+	 * @model
+	 * @generated
+	 */
+	EList<Variable> getLocalVariables();
 
 } // ControlFlowDiagram

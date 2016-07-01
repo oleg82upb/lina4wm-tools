@@ -72,6 +72,7 @@ public class ControlflowSwitch<T> extends Switch<T> {
 			{
 				ControlFlowDiagram controlFlowDiagram = (ControlFlowDiagram)theEObject;
 				T result = caseControlFlowDiagram(controlFlowDiagram);
+				if (result == null) result = caseAbstractLabeledElement(controlFlowDiagram);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -79,6 +80,7 @@ public class ControlflowSwitch<T> extends Switch<T> {
 			{
 				ControlFlowLocation controlFlowLocation = (ControlFlowLocation)theEObject;
 				T result = caseControlFlowLocation(controlFlowLocation);
+				if (result == null) result = caseAbstractLabeledElement(controlFlowLocation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -86,6 +88,7 @@ public class ControlflowSwitch<T> extends Switch<T> {
 			{
 				Transition transition = (Transition)theEObject;
 				T result = caseTransition(transition);
+				if (result == null) result = caseAbstractLabeledElement(transition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -94,6 +97,7 @@ public class ControlflowSwitch<T> extends Switch<T> {
 				WriteDefChainTransition writeDefChainTransition = (WriteDefChainTransition)theEObject;
 				T result = caseWriteDefChainTransition(writeDefChainTransition);
 				if (result == null) result = caseTransition(writeDefChainTransition);
+				if (result == null) result = caseAbstractLabeledElement(writeDefChainTransition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -102,6 +106,7 @@ public class ControlflowSwitch<T> extends Switch<T> {
 				EarlyReadTransition earlyReadTransition = (EarlyReadTransition)theEObject;
 				T result = caseEarlyReadTransition(earlyReadTransition);
 				if (result == null) result = caseTransition(earlyReadTransition);
+				if (result == null) result = caseAbstractLabeledElement(earlyReadTransition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -110,6 +115,7 @@ public class ControlflowSwitch<T> extends Switch<T> {
 				GuardedTransition guardedTransition = (GuardedTransition)theEObject;
 				T result = caseGuardedTransition(guardedTransition);
 				if (result == null) result = caseTransition(guardedTransition);
+				if (result == null) result = caseAbstractLabeledElement(guardedTransition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -118,6 +124,7 @@ public class ControlflowSwitch<T> extends Switch<T> {
 				MultiTransition multiTransition = (MultiTransition)theEObject;
 				T result = caseMultiTransition(multiTransition);
 				if (result == null) result = caseTransition(multiTransition);
+				if (result == null) result = caseAbstractLabeledElement(multiTransition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -126,6 +133,7 @@ public class ControlflowSwitch<T> extends Switch<T> {
 				FlushTransition flushTransition = (FlushTransition)theEObject;
 				T result = caseFlushTransition(flushTransition);
 				if (result == null) result = caseTransition(flushTransition);
+				if (result == null) result = caseAbstractLabeledElement(flushTransition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -140,6 +148,27 @@ public class ControlflowSwitch<T> extends Switch<T> {
 			{
 				StoreBuffer storeBuffer = (StoreBuffer)theEObject;
 				T result = caseStoreBuffer(storeBuffer);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ControlflowPackage.ABSTRACT_LABELED_ELEMENT:
+			{
+				AbstractLabeledElement abstractLabeledElement = (AbstractLabeledElement)theEObject;
+				T result = caseAbstractLabeledElement(abstractLabeledElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ControlflowPackage.PHI_ASSIGNMENT:
+			{
+				PhiAssignment phiAssignment = (PhiAssignment)theEObject;
+				T result = casePhiAssignment(phiAssignment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ControlflowPackage.VARIABLE:
+			{
+				Variable variable = (Variable)theEObject;
+				T result = caseVariable(variable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -294,6 +323,54 @@ public class ControlflowSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseStoreBuffer(StoreBuffer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Labeled Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Labeled Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractLabeledElement(AbstractLabeledElement object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Phi Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Phi Assignment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePhiAssignment(PhiAssignment object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Variable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVariable(Variable object)
+	{
 		return null;
 	}
 

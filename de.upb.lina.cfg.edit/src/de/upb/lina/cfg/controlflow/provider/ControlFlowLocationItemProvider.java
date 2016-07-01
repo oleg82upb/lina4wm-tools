@@ -35,13 +35,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class ControlFlowLocationItemProvider
-	extends ItemProviderAdapter
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends AbstractLabeledElementItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -60,7 +54,8 @@ public class ControlFlowLocationItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addPcPropertyDescriptor(object);
@@ -178,8 +173,10 @@ public class ControlFlowLocationItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		ControlFlowLocation controlFlowLocation = (ControlFlowLocation)object;
-		return getString("_UI_ControlFlowLocation_type") + " " + controlFlowLocation.getPc();
+		String label = ((ControlFlowLocation)object).getLabel();
+		return label == null || label.length() == 0 ?
+			getString("_UI_ControlFlowLocation_type") :
+			getString("_UI_ControlFlowLocation_type") + " " + label;
 	}
 
 	/**
@@ -193,7 +190,8 @@ public class ControlFlowLocationItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ControlFlowLocation.class)) {
+		switch (notification.getFeatureID(ControlFlowLocation.class))
+		{
 			case ControlflowPackage.CONTROL_FLOW_LOCATION__PC:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
@@ -211,17 +209,6 @@ public class ControlFlowLocationItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return ControlFlowEditPlugin.INSTANCE;
 	}
 
 }

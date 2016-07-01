@@ -21,6 +21,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/memorySizeMappings"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/inputTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/oldToNewCfgName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/globalVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gendata.ecore#//GeneratorData/allVariables"/>
       <genOperations ecoreOperation="gendata.ecore#//GeneratorData/getFilteredAddresses">
         <genParameters ecoreParameter="gendata.ecore#//GeneratorData/getFilteredAddresses/key"/>
       </genOperations>

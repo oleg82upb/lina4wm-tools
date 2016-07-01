@@ -94,6 +94,7 @@ public class CreateGraphOperation extends WorkspaceModifyOperation {
       try {
          // store resulting cfg
          ResourceSet resSet = new ResourceSetImpl();
+         resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("cfg", new IDUsingResourceFactory());
          Resource resource = resSet.createResource(URI.createURI(storeBufferGraphLocation.toPortableString()));
 
          for (ControlFlowDiagram cfg : generatedStoreBufferGraphs) {

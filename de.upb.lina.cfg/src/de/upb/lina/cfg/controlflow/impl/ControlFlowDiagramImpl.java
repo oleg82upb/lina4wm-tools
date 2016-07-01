@@ -10,15 +10,17 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import de.upb.lina.cfg.controlflow.AddressRenaming;
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
 import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.controlflow.Transition;
+import de.upb.lina.cfg.controlflow.Variable;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.Parameter;
@@ -38,12 +40,16 @@ import de.upb.llvm_parser.llvm.Parameter;
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getVariableCopyParams <em>Variable Copy Params</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getMemoryModel <em>Memory Model</em>}</li>
  *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getFunctionDefinition <em>Function Definition</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getLabelPrefix <em>Label Prefix</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getReturnVariable <em>Return Variable</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getParameterVariables <em>Parameter Variables</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.controlflow.impl.ControlFlowDiagramImpl#getLocalVariables <em>Local Variables</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDiagram {
+public class ControlFlowDiagramImpl extends AbstractLabeledElementImpl implements ControlFlowDiagram {
 	/**
 	 * The cached value of the '{@link #getLocations() <em>Locations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -145,6 +151,56 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	protected FunctionDefinition functionDefinition;
 
 	/**
+	 * The default value of the '{@link #getLabelPrefix() <em>Label Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabelPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LABEL_PREFIX_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLabelPrefix() <em>Label Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabelPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected String labelPrefix = LABEL_PREFIX_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getReturnVariable() <em>Return Variable</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReturnVariable()
+	 * @generated
+	 * @ordered
+	 */
+	protected Variable returnVariable;
+
+	/**
+	 * The cached value of the '{@link #getParameterVariables() <em>Parameter Variables</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameterVariables()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Variable> parameterVariables;
+
+	/**
+	 * The cached value of the '{@link #getLocalVariables() <em>Local Variables</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocalVariables()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Variable> localVariables;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -168,6 +224,7 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ControlFlowLocation> getLocations() {
 		if (locations == null)
 		{
@@ -181,6 +238,7 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Transition> getTransitions() {
 		if (transitions == null)
 		{
@@ -194,6 +252,7 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ControlFlowLocation getStart() {
 		if (start != null && start.eIsProxy())
 		{
@@ -222,6 +281,7 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStart(ControlFlowLocation newStart) {
 		ControlFlowLocation oldStart = start;
 		start = newStart;
@@ -234,6 +294,7 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -243,6 +304,7 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -255,6 +317,7 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Address> getVariableCopies() {
 		if (variableCopies == null)
 		{
@@ -268,6 +331,7 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Parameter> getVariableCopyParams() {
 		if (variableCopyParams == null)
 		{
@@ -281,6 +345,7 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getMemoryModel()
 	{
 		return memoryModel;
@@ -291,6 +356,7 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMemoryModel(int newMemoryModel)
 	{
 		int oldMemoryModel = memoryModel;
@@ -304,6 +370,7 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FunctionDefinition getFunctionDefinition()
 	{
 		if (functionDefinition != null && functionDefinition.eIsProxy())
@@ -334,12 +401,109 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFunctionDefinition(FunctionDefinition newFunctionDefinition)
 	{
 		FunctionDefinition oldFunctionDefinition = functionDefinition;
 		functionDefinition = newFunctionDefinition;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ControlflowPackage.CONTROL_FLOW_DIAGRAM__FUNCTION_DEFINITION, oldFunctionDefinition, functionDefinition));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getLabelPrefix()
+	{
+		return labelPrefix;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setLabelPrefix(String newLabelPrefix)
+	{
+		String oldLabelPrefix = labelPrefix;
+		labelPrefix = newLabelPrefix;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ControlflowPackage.CONTROL_FLOW_DIAGRAM__LABEL_PREFIX, oldLabelPrefix, labelPrefix));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Variable getReturnVariable()
+	{
+		if (returnVariable != null && returnVariable.eIsProxy())
+		{
+			InternalEObject oldReturnVariable = (InternalEObject)returnVariable;
+			returnVariable = (Variable)eResolveProxy(oldReturnVariable);
+			if (returnVariable != oldReturnVariable)
+			{
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ControlflowPackage.CONTROL_FLOW_DIAGRAM__RETURN_VARIABLE, oldReturnVariable, returnVariable));
+			}
+		}
+		return returnVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Variable basicGetReturnVariable()
+	{
+		return returnVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReturnVariable(Variable newReturnVariable)
+	{
+		Variable oldReturnVariable = returnVariable;
+		returnVariable = newReturnVariable;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ControlflowPackage.CONTROL_FLOW_DIAGRAM__RETURN_VARIABLE, oldReturnVariable, returnVariable));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Variable> getParameterVariables()
+	{
+		if (parameterVariables == null)
+		{
+			parameterVariables = new EObjectResolvingEList<Variable>(Variable.class, this, ControlflowPackage.CONTROL_FLOW_DIAGRAM__PARAMETER_VARIABLES);
+		}
+		return parameterVariables;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Variable> getLocalVariables()
+	{
+		if (localVariables == null)
+		{
+			localVariables = new EObjectResolvingEList<Variable>(Variable.class, this, ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCAL_VARIABLES);
+		}
+		return localVariables;
 	}
 
 	/**
@@ -408,6 +572,15 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__FUNCTION_DEFINITION:
 				if (resolve) return getFunctionDefinition();
 				return basicGetFunctionDefinition();
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__LABEL_PREFIX:
+				return getLabelPrefix();
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__RETURN_VARIABLE:
+				if (resolve) return getReturnVariable();
+				return basicGetReturnVariable();
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__PARAMETER_VARIABLES:
+				return getParameterVariables();
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCAL_VARIABLES:
+				return getLocalVariables();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -450,6 +623,20 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__FUNCTION_DEFINITION:
 				setFunctionDefinition((FunctionDefinition)newValue);
 				return;
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__LABEL_PREFIX:
+				setLabelPrefix((String)newValue);
+				return;
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__RETURN_VARIABLE:
+				setReturnVariable((Variable)newValue);
+				return;
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__PARAMETER_VARIABLES:
+				getParameterVariables().clear();
+				getParameterVariables().addAll((Collection<? extends Variable>)newValue);
+				return;
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCAL_VARIABLES:
+				getLocalVariables().clear();
+				getLocalVariables().addAll((Collection<? extends Variable>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -487,6 +674,18 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__FUNCTION_DEFINITION:
 				setFunctionDefinition((FunctionDefinition)null);
 				return;
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__LABEL_PREFIX:
+				setLabelPrefix(LABEL_PREFIX_EDEFAULT);
+				return;
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__RETURN_VARIABLE:
+				setReturnVariable((Variable)null);
+				return;
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__PARAMETER_VARIABLES:
+				getParameterVariables().clear();
+				return;
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCAL_VARIABLES:
+				getLocalVariables().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -516,6 +715,14 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 				return memoryModel != MEMORY_MODEL_EDEFAULT;
 			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__FUNCTION_DEFINITION:
 				return functionDefinition != null;
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__LABEL_PREFIX:
+				return LABEL_PREFIX_EDEFAULT == null ? labelPrefix != null : !LABEL_PREFIX_EDEFAULT.equals(labelPrefix);
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__RETURN_VARIABLE:
+				return returnVariable != null;
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__PARAMETER_VARIABLES:
+				return parameterVariables != null && !parameterVariables.isEmpty();
+			case ControlflowPackage.CONTROL_FLOW_DIAGRAM__LOCAL_VARIABLES:
+				return localVariables != null && !localVariables.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -534,6 +741,8 @@ public class ControlFlowDiagramImpl extends EObjectImpl implements ControlFlowDi
 		result.append(name);
 		result.append(", memoryModel: ");
 		result.append(memoryModel);
+		result.append(", labelPrefix: ");
+		result.append(labelPrefix);
 		result.append(')');
 		return result.toString();
 	}

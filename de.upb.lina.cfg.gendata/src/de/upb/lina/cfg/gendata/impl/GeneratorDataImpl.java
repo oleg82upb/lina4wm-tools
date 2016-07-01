@@ -3,6 +3,7 @@
 package de.upb.lina.cfg.gendata.impl;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
+import de.upb.lina.cfg.controlflow.Variable;
 import de.upb.lina.cfg.gendata.AddressMapping;
 import de.upb.lina.cfg.gendata.ConstraintMapping;
 import de.upb.lina.cfg.gendata.GendataPackage;
@@ -53,6 +54,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getMemorySizeMappings <em>Memory Size Mappings</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getInputTypes <em>Input Types</em>}</li>
  *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getOldToNewCfgName <em>Old To New Cfg Name</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getGlobalVariables <em>Global Variables</em>}</li>
+ *   <li>{@link de.upb.lina.cfg.gendata.impl.GeneratorDataImpl#getAllVariables <em>All Variables</em>}</li>
  * </ul>
  * </p>
  *
@@ -179,6 +182,26 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	 * @ordered
 	 */
 	protected EMap<String, String> oldToNewCfgName;
+
+	/**
+	 * The cached value of the '{@link #getGlobalVariables() <em>Global Variables</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGlobalVariables()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Variable> globalVariables;
+
+	/**
+	 * The cached value of the '{@link #getAllVariables() <em>All Variables</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllVariables()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Variable> allVariables;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -390,6 +413,34 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Variable> getGlobalVariables()
+	{
+		if (globalVariables == null)
+		{
+			globalVariables = new EObjectContainmentEList<Variable>(Variable.class, this, GendataPackage.GENERATOR_DATA__GLOBAL_VARIABLES);
+		}
+		return globalVariables;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Variable> getAllVariables()
+	{
+		if (allVariables == null)
+		{
+			allVariables = new EObjectContainmentEList<Variable>(Variable.class, this, GendataPackage.GENERATOR_DATA__ALL_VARIABLES);
+		}
+		return allVariables;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unchecked")
@@ -462,6 +513,10 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return ((InternalEList<?>)getInputTypes()).basicRemove(otherEnd, msgs);
 			case GendataPackage.GENERATOR_DATA__OLD_TO_NEW_CFG_NAME:
 				return ((InternalEList<?>)getOldToNewCfgName()).basicRemove(otherEnd, msgs);
+			case GendataPackage.GENERATOR_DATA__GLOBAL_VARIABLES:
+				return ((InternalEList<?>)getGlobalVariables()).basicRemove(otherEnd, msgs);
+			case GendataPackage.GENERATOR_DATA__ALL_VARIABLES:
+				return ((InternalEList<?>)getAllVariables()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -503,6 +558,10 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 			case GendataPackage.GENERATOR_DATA__OLD_TO_NEW_CFG_NAME:
 				if (coreType) return getOldToNewCfgName();
 				else return getOldToNewCfgName().map();
+			case GendataPackage.GENERATOR_DATA__GLOBAL_VARIABLES:
+				return getGlobalVariables();
+			case GendataPackage.GENERATOR_DATA__ALL_VARIABLES:
+				return getAllVariables();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -563,6 +622,14 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 			case GendataPackage.GENERATOR_DATA__OLD_TO_NEW_CFG_NAME:
 				((EStructuralFeature.Setting)getOldToNewCfgName()).set(newValue);
 				return;
+			case GendataPackage.GENERATOR_DATA__GLOBAL_VARIABLES:
+				getGlobalVariables().clear();
+				getGlobalVariables().addAll((Collection<? extends Variable>)newValue);
+				return;
+			case GendataPackage.GENERATOR_DATA__ALL_VARIABLES:
+				getAllVariables().clear();
+				getAllVariables().addAll((Collection<? extends Variable>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -613,6 +680,12 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 			case GendataPackage.GENERATOR_DATA__OLD_TO_NEW_CFG_NAME:
 				getOldToNewCfgName().clear();
 				return;
+			case GendataPackage.GENERATOR_DATA__GLOBAL_VARIABLES:
+				getGlobalVariables().clear();
+				return;
+			case GendataPackage.GENERATOR_DATA__ALL_VARIABLES:
+				getAllVariables().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -651,6 +724,10 @@ public class GeneratorDataImpl extends MinimalEObjectImpl.Container implements G
 				return inputTypes != null && !inputTypes.isEmpty();
 			case GendataPackage.GENERATOR_DATA__OLD_TO_NEW_CFG_NAME:
 				return oldToNewCfgName != null && !oldToNewCfgName.isEmpty();
+			case GendataPackage.GENERATOR_DATA__GLOBAL_VARIABLES:
+				return globalVariables != null && !globalVariables.isEmpty();
+			case GendataPackage.GENERATOR_DATA__ALL_VARIABLES:
+				return allVariables != null && !allVariables.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

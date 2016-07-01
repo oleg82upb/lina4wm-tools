@@ -105,10 +105,16 @@ public class PSOGraphGenerator extends TSOGraphGenerator {
          }
 
          if (targetPair.getValues().size() > 1) {
-            // remove first value from pair
-            targetPair.getValues().remove(0);
+            // remove first value from pair and create a new AddressValuePair that will be attached to FlushTransition
+            Parameter flushedValue = targetPair.getValues().remove(0);
+            Parameter flushedAddress = targetPair.getAddress();
+            
+            AddressValuePair flushedEntry = ControlflowFactory.eINSTANCE.createAddressValuePair();
+            flushedEntry.setAddress(flushedAddress);
+            flushedEntry.getValues().add(flushedValue);
+            targetPair = flushedEntry;
          } else {
-            // remove pair
+            // remove pair, no need to create a new AVP as we can reuse it in the FlushTransition
             targetBuffer.getAddressValuePairs().remove(targetPair);
          }
 
@@ -118,7 +124,7 @@ public class PSOGraphGenerator extends TSOGraphGenerator {
             this.toBeProcessedLocations.add(targetLocation);
          }
 
-         createFlushTransition(sourceLocation, targetLocation);
+         createFlushTransition(sourceLocation, targetLocation, targetPair);
       }
 
    }
