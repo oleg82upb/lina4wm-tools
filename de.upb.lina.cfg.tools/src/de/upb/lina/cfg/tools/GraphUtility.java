@@ -3,13 +3,18 @@ package de.upb.lina.cfg.tools;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.EList;
 
 import de.upb.lina.cfg.controlflow.AddressValuePair;
+import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
 import de.upb.lina.cfg.controlflow.ControlFlowLocation;
+import de.upb.lina.cfg.controlflow.EarlyReadTransition;
 import de.upb.lina.cfg.controlflow.FlushTransition;
 import de.upb.lina.cfg.controlflow.StoreBuffer;
+import de.upb.lina.cfg.controlflow.Transition;
+import de.upb.lina.cfg.controlflow.WriteDefChainTransition;
 import de.upb.lina.cfg.tools.stringrepresentation.StringConversionManager;
 import de.upb.llvm_parser.llvm.AtomicRMW;
 import de.upb.llvm_parser.llvm.BasicBlock;
@@ -178,6 +183,58 @@ public abstract class GraphUtility {
       }
 
       return null;
+   }
+
+
+   /**
+    * Collects all early read edges in the given store buffer graph.
+    * 
+    * @param storeBufferGraph the store buffer graph to search in
+    * @return all early read edges in the given store buffer graph
+    */
+   public static List<EarlyReadTransition> collectEarlyReadEdges(ControlFlowDiagram storeBufferGraph)
+   {
+      return storeBufferGraph.getTransitions().stream().filter(x -> (x instanceof EarlyReadTransition)).map(x -> (EarlyReadTransition) x)
+            .collect(Collectors.toList());
+   }
+
+
+   /**
+    * Collects all write def chain edges in the given store buffer graph.
+    * 
+    * @param storeBufferGraph the store buffer graph to search in
+    * @return all write def chain edges in the given store buffer graph
+    */
+   public static List<WriteDefChainTransition> collectWriteDefChainTransitions(ControlFlowDiagram storeBufferGraph)
+   {
+      return storeBufferGraph.getTransitions().stream().filter(x -> (x instanceof WriteDefChainTransition))
+            .map(x -> (WriteDefChainTransition) x).collect(Collectors.toList());
+   }
+
+
+   /**
+    * Collects all nodes with non empty store buffers in the given store buffer graph.
+    * 
+    * @param storeBufferGraph the store buffer graph to search in
+    * @return all nodes with non empty store buffers in the given store buffer graph
+    */
+   public static List<ControlFlowLocation> collectNodesWithNonEmptyStoreBuffers(ControlFlowDiagram storeBufferGraph)
+   {
+      return storeBufferGraph.getLocations().stream().filter(x -> !x.getBuffer().getAddressValuePairs().isEmpty())
+            .collect(Collectors.toList());
+   }
+
+
+   /**
+    * Collects all edges hosting a synchronizing instruction in the given store buffer graph.
+    * 
+    * @param storeBufferGraph the store buffer graph to search in
+    * @return all edges hosting a synchronizing instruction in the given store buffer graph
+    */
+   public static List<Transition> collectEdgesWithSynchronizingInstruction(ControlFlowDiagram storeBufferGraph)
+   {
+      return storeBufferGraph.getTransitions().stream().filter(x -> GraphUtility.isSynchronizingInstruction(x.getInstruction()))
+            .collect(Collectors.toList());
    }
 
 }
