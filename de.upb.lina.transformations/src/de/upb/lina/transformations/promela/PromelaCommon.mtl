@@ -1,5 +1,5 @@
 [module PromelaCommon('http://www.upb.de/lina/cfg/controlflow', 'http://www.upb.de/lina/cfg/gendata', 'http://www.upb.de/llvm_parser/llvm', 'http://www.eclipse.org/emf/2002/Ecore')]
-
+[import de::upb::lina::transformations::TransformationCommon/]
 
 
 
@@ -7,10 +7,6 @@
 [if(not cfg.name.equalsIgnoreCase(cleanFunctionName(cfg.functionDefinition.address.name)))]//function was renamed from: [cfg.functionDefinition.address.name/][/if]
 inline [cleanFunctionName(cfg.name)/]([generateAllParameters(cfg, genData)/]){
 [/template]
-
-[query private cleanFunctionName(str: String) : String = 
-str.replaceAll('@_','').replaceAll('@','') /]
-
 
 [template private generateAllParameters(cfg: ControlFlowDiagram, genData: GeneratorData)]
 [for (v : Variable | cfg.parameterVariables) separator(', ')][v.newName/][/for][generateReturnParamIfNecessary(cfg.functionDefinition.parameter.oclIsUndefined(), cfg.functionDefinition.returnType, genData)/]
@@ -92,75 +88,6 @@ endif
 [template public genLocalVarDeclarations(cfg: ControlFlowDiagram, genData: GeneratorData)]
 [if (cfg.localVariables->notEmpty())]short [for (v: Variable | cfg.localVariables) separator(', ')][v.newName/][/for];[/if]
 [/template]
-
-[comment ====== Generic Calls ======/]
-[query private getVariableExpensive(address: Address, genData: GeneratorData) : Variable = 
-genData.allVariables->any(v | v.originalAddresses->select(adr | adr = address)->notEmpty())
-/]
-
-[query public getVariableForAddress(a: Address, t : Transition, genData: GeneratorData) : Variable =  
-if t.oclIsUndefined() or getVariableFromTransition(a, t).oclIsUndefined() then
- 	getVariableExpensive(a, genData)
-else 
-	getVariableFromTransition(a, t)
-endif
-/]
-
-[query private getVariableFromTransition(address: Address, t : Transition) : Variable = 
-t.usedVariables->any(v | v.originalAddresses->select(adr | adr = address)->notEmpty())
-/]
-
-[query private valueToString(v : PrimitiveValue, t: Transition, genData: GeneratorData) : String = '' + v.value /]
-
-[query private valueToString(v : IntegerConstant, t: Transition, genData: GeneratorData) : String = '' + v.value /]
-
-[query private valueToString(v : DecimalConstant, t : Transition, genData: GeneratorData) : String = '' + v.value /]
-
-[comment]addressToStringExpensive(address, genData)  we can use it as a fall back solution, but it is very expensive[/comment]
-[query private valueToString(v : AddressUse, t : Transition, genData: GeneratorData) : String = 
-getVariableForAddress(v.address, t, genData).newName/]
-
-[query private valueToString(v : NestedGetElementPtr, t : Transition, genData: GeneratorData) : String = 
-valueToString(v.aggregate.value, t, genData) + ' + ' + valueToString(v.indices->at(2).value, t, genData) /]
-
-[query private valueToString(v : NestedCast, t : Transition, genData: GeneratorData) : String = 'FIXME, THIS NEVER HAPPENED BEFORE' /]
-
-[query private valueToString(v : ValueStruct, t : Transition, genData: GeneratorData) : String = 'FIXME, THIS NEVER HAPPENED BEFORE' /]
-
-[query private valueToString(v : Parameter, t : Transition, genData: GeneratorData) : String = valueToString(v.value, t, genData)/]
-
-[query public valueToString(v : EObject, t : Transition, genData: GeneratorData) : String = 
-if v.oclIsKindOf(Parameter) then valueToString(v.oclAsType(Parameter), t, genData)
-else if v.oclIsKindOf(Value) then valueToString(v.oclAsType(Value), t, genData)
-else 'FIXME, THIS NEVER HAPPENED BEFORE'
-endif
-endif 
-/]
-
-[query public valueToString(v : Value, t : Transition, genData: GeneratorData) : String = 
-if v.oclIsTypeOf(PrimitiveValue) then 
-	valueToString(v.oclAsType(PrimitiveValue), t, genData)
-else if v.oclIsTypeOf(IntegerConstant) then 
-	valueToString(v.oclAsType(IntegerConstant), t, genData)
-else if v.oclIsTypeOf(DecimalConstant) then 
-	valueToString(v.oclAsType(DecimalConstant), t, genData)
-else if v.oclIsTypeOf(AddressUse) then 
-	valueToString(v.oclAsType(AddressUse), t, genData)
-else if v.oclIsTypeOf(NestedGetElementPtr) then 
-	valueToString(v.oclAsType(NestedGetElementPtr), t, genData)
-else if v.oclIsTypeOf(NestedCast) then 
-	valueToString(v.oclAsType(NestedCast), t, genData)
-else 
-	'FIXME, THIS NEVER HAPPENED BEFORE'
-endif
-endif
-endif
-endif
-endif
-endif
- /]
-
-
 
 
 [comment]   THIS PART CONTAINS ONLY LOCAL SEMANTICS     [/comment]

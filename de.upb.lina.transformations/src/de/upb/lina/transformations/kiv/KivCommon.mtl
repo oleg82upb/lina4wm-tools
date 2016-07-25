@@ -1,0 +1,184 @@
+[comment encoding = UTF-8 /]
+[module KivCommon('http://www.upb.de/lina/cfg/controlflow', 'http://www.upb.de/lina/cfg/gendata', 'http://www.upb.de/llvm_parser/llvm', 'http://www.eclipse.org/emf/2002/Ecore')]
+[import de::upb::lina::transformations::TransformationCommon/]
+
+[template public generateCIndexFile(genData: GeneratorData)]
+[file ('specs/cindex.utf8', false, 'UTF-8')]
+data specification
+	IJ = [for (cfg : ControlFlowDiagram | genData.cfgs) separator ('|')] [generateCfgLabel(genData, cfg)/]ini [/for];
+	CJ = [for (cfg : ControlFlowDiagram | genData.cfgs->select(getCopTransitions()->size() > 0)) separator (' |')] [for (transition : Transition | getCopTransitions(cfg)) separator (' | ')][transition.label/][/for][/for];
+	RJ = [for (transition : Transition | getAllReturnTransitions(genData))separator ('|')] [transition.label/]ret [/for];
+variables
+		ij : IJ;
+		cj : CJ;
+		rj : RJ;
+end data specification
+[/file]
+[/template]
+
+[template public generatePCFile(genData: GeneratorData)]
+[file ('specs/PC.utf8', false, 'UTF-8')]
+data specification
+	PC = N |[for (node: ControlFlowLocation | getAllControlFlowLocations(genData)) separator  (' |')] 
+		
+		[node.label/] [/for];
+variables
+pc : PC;
+
+end data specification
+[/file]
+[/template]
+
+[query public getCopTransitions(cfg: ControlFlowDiagram) : Set(Transition) =
+cfg.transitions->select(instruction.oclIsUndefined() or not instruction.oclIsTypeOf(Return)) /]
+
+[query public getAllCopTransitions(genData: GeneratorData) : Sequence(Transition) = 
+genData.cfgs->iterate(cfg : ControlFlowDiagram; allCopTransitions: Sequence(Transition) = Sequence{} | allCopTransitions->union(getCopTransitions(cfg)->asSequence())) /]
+
+[query public getReturnTransitions(cfg: ControlFlowDiagram): Set(Transition) = 
+cfg.transitions->select(not instruction.oclIsUndefined() and (instruction.oclIsTypeOf(Return)))/]
+
+[query public getAllReturnTransitions(genData: GeneratorData) : Sequence(Transition) = 
+genData.cfgs->iterate(cfg : ControlFlowDiagram; returnTransitions: Sequence(Transition) = Sequence{} | returnTransitions->union(getReturnTransitions(cfg)->asSequence())) /]
+
+[query public getAllControlFlowLocations(genData: GeneratorData) : Sequence(ControlFlowLocation) = 
+genData.cfgs->iterate(cfg : ControlFlowDiagram; controlFlowLocations: Sequence(ControlFlowLocation) = Sequence{} | controlFlowLocations->union(cfg.locations->asSequence())) /]
+
+[query public getLocalAndParameterVariables(cfg: ControlFlowDiagram) : Sequence(Variable) = 
+let localAndParameterVariables: Sequence(Variable) = cfg.localVariables->asSequence() in 
+localAndParameterVariables->union(cfg.parameterVariables->asSequence())
+/]
+
+[query public getAllLocalAndParameterVariables(genData: GeneratorData) : Sequence(Variable) = 
+genData.cfgs->iterate(cfg : ControlFlowDiagram; allLocalAndParameterVariables: Sequence(Variable) = Sequence{} | allLocalAndParameterVariables->union(getLocalAndParameterVariables(cfg))) 
+/]
+
+[query public getAllReturnVariables(genData: GeneratorData) : Sequence(Variable) = 
+getAllLocalAndParameterVariables(genData)->select(newName.equalsIgnoreCase('returnvalue'))
+/]
+
+
+
+[template public basis(genData : GeneratorData)]
+[for(basis: String | genData.transformationSpecificKeys)][if (basis.equalsIgnoreCase('int'))]int[/if][if (basis.equalsIgnoreCase('nat'))]nat[/if][/for]
+[/template]
+
+[query public input(genData : GeneratorData) : Boolean = 
+if genData.transformationSpecificKeys->indexOf('INPUT_NEEDED').oclIsUndefined() then false else true endif/]
+
+[query public inputType(genData : GeneratorData) : String =
+if genData.transformationSpecificKeys->indexOf('INPUT_REF').oclIsUndefined() then basis(genData) else 'ref' endif /]
+
+[template public generatePrevPC(genData: GeneratorData, transition: Transition)]
+[transition.source.label/]
+[/template]
+
+[template public generateNextPC(genData: GeneratorData, transition: Transition)]
+[transition.target.label/]
+[/template]
+
+[template public generateStartPC(genData : GeneratorData, cfg : ControlFlowDiagram)]
+[cfg.start.label/]
+[/template]
+
+[template public generateCfgLabel(genData : GeneratorData, cfg : ControlFlowDiagram)]
+[cleanFunctionName(cfg.name)/]
+[/template]
+
+[query public getFlushedAvp(t: FlushTransition) : AddressValuePair = invoke('de.upb.lina.cfg.tools.GraphUtility','getFlushedAddressValuePair(de.upb.lina.cfg.controlflow.FlushTransition)', Sequence{t})/]
+[query public getcorrespondingAddressMapping(a: Address, genData : GeneratorData, keyForMapping : String) : AddressMapping = invoke('de.upb.lina.transformations.logic.GendataPrecomputer','getCorrespondingAddressMapping(de.upb.llvm_parser.llvm.Address, de.upb.lina.cfg.gendata.GeneratorData, java.lang.String)', Sequence{a,genData,keyForMapping})/]
+
+[query public arithmeticOp(s : EString) : String = 
+if s.equalsIgnoreCase('add') then
+	'+'
+else if s.equalsIgnoreCase('sub') or s.equalsIgnoreCase('ashr') then
+	'-'
+else if s.equalsIgnoreCase('mul') then
+	'*'
+else if s.equalsIgnoreCase('sdiv') or s.equalsIgnoreCase('udiv') then
+	'/'
+else
+	'NEEDS ATTENTION -> UNSUPPORTED ARITHMETIC OPERATION'
+endif
+endif
+endif
+endif
+/]
+
+[query public addressToString(address: Address, genData: GeneratorData) : String = getcorrespondingAddressMapping(address, genData, null).name/]
+
+[query public possiblyZeroBeforeMinus(s : EInt) : String = if (s < 0) then '(0 - '+s.abs()+')' else s endif /]
+
+[query public transformBooleanToNumber(b : String) : String =
+if b.equalsIgnoreCase('true') then '1'
+else if b.equalsIgnoreCase('false') then '0' 
+else b endif endif /]
+
+[query public getValueFromConstant(c : Constant) : String =
+if c.oclIsTypeOf(IntegerConstant) then c.oclAsType(IntegerConstant).value.possiblyZeroBeforeMinus() else c.oclAsType(DecimalConstant).value endif/]
+
+[template public createComment(t : Transition)]
+[let l : Load = t.instruction]
+[l.result.name/] = load [l.address.displayParameter()/][if(l.align.oclIsUndefined()._not())], align [l.align/][/if][for(m : MetaArgValue | l.meta)], [m.arg/] [m.value/][/for][elselet s : Store = t.instruction]
+store [s.value.displayParameter()/], [s.targetAddress.displayParameter()/][if(s.align.oclIsUndefined()._not())], align [s.align/][/if][for(m : MetaArgValue | s.meta)], [m.arg/] [m.value/][/for][elselet s : GetElementPtr = t.instruction]
+[s.result.name/] = getelementptr [s.aggregate.displayParameter()/][for(index : Parameter | s.indices)], [index.displayParameter()/][/for][elselet s : Alloc = t.instruction]
+[s.result.name/] = alloca [s.type.extractType()/][if(s.numOfElements.oclIsUndefined()._not())], [s.numOfElements.displayParameter()/][/if][if(s.align.oclIsUndefined()._not())], align [s.align/][/if][elselet s : CmpXchg = t.instruction]
+[s.result.name/] = cmpxchg [if(s.volatile)]volatile [/if][s.address.displayParameter()/], [s.value.displayParameter()/], [s.newValue.displayParameter()/] [s.ordering/][elselet s : AtomicRMW = t.instruction]
+[s.result.name/] = atomicrmw [if(s.volatile)]volatile [/if][s.operation/] [s.address.displayParameter()/], [s.argument.displayParameter()/] [s.ordering/][elselet s : Fence = t.instruction]
+fence [s.ordering/][elselet s : Return = t.instruction]
+ret [if(s.value.oclIsTypeOf(Parameter))][s.value.oclAsType(Parameter).displayParameter()/][else][s.value.oclAsType(PrimitiveValue).value/][/if][elselet s : Branch = t.instruction]
+br [if(s.condition.oclIsUndefined()._not())][s.condition.extractValue()/], [/if]label [s.destination/][if(s.elseDestination.oclIsUndefined()._not())], label [s.elseDestination/][/if][elselet s : Switch = t.instruction]
+switch [s.caseValue.displayParameter()/], label [s.defaultCase/] ['['/] [for(case : SwitchCase | s.cases)][case.caseValue.displayParameter()/], label [case.destination/] [/for][']'/][elselet s : IndirectBranch = t.instruction]
+indirectbr [s.target.displayParameter()/], ['['/][for(target : EString | s.potTargetLabels)separator(', ')]label [target/][/for][']'/]
+	NEEDS ATTENTION ![elselet s : Invoke = t.instruction]
+invoke [s.returnType.extractType()/] [s.name.name/] ([if(s.pList.oclIsUndefined()._not())][for(param : Parameter | s.pList.params)separator(', ')][param.displayParameter()/][/for][/if]) to label [s.targetLabel/] unwind label [s.unwindTargetLabel/]
+	NEEDS ATTENTION ![elselet s : Resume = t.instruction]
+resume [s.type.extractType()/] [s.value.extractValue()/]
+	NEEDS ATTENTION ![elselet s : LogicOperation = t.instruction]
+[s.result.name/] = [s.operation/] [s.optype.extractType()/] [s.value1.extractValue()/], [s.value2.extractValue()/]
+	NEEDS ATTENTION ![elselet s : ArithmeticOperation = t.instruction]
+[s.result.name/] = [s.operation/] [s.optype.extractType()/] [s.value1.extractValue()/], [s.value2.extractValue()/][elselet s : Compare = t.instruction]
+[s.result.name/] = [if(s.oclIsTypeOf(CompareInt))]icmp[else]fcmp[/if] [s.cond/] [s.opType.extractType()/] [s.operand1.extractValue()/], [s.operand2.extractValue()/][elselet s : Cast = t.instruction]
+[s.result.name/] = [s.operation/] [s.from.extractType()/] [s.value.extractValue()/] to [s.to.extractType()/][elselet s : ShuffleVector = t.instruction]
+[s.result.name/] = shufflevector [s.value1.displayParameter()/], [s.value2.displayParameter()/], [s.mask.displayParameter()/]
+	NEEDS ATTENTION ![elselet s : InsertElement = t.instruction]
+[s.result.name/] = insertelement [s.vector.displayParameter()/], [s.value.displayParameter()/], [s.index.displayParameter()/]
+	NEEDS ATTENTION ![elselet s : ExtractElement = t.instruction]
+[s.result.name/] = extractelement [s.vector.displayParameter()/], [s.index.displayParameter()/]
+	NEEDS ATTENTION ![elselet s : InsertValue = t.instruction]
+[s.result.name/] = insertvalue [s.aggerate.displayParameter()/], [s.value.displayParameter()/][for(i : EInt | s.index)separator(', ')][i/][/for]
+	NEEDS ATTENTION ![elselet s : ExtractValue = t.instruction]
+[s.result.name/] = extractvalue [s.aggerate.displayParameter()/][for(i : EInt | s.index)separator(', ')][i/][/for]
+	NEEDS ATTENTION ![elselet s : Phi = t.instruction]
+[s.result.name/] = phi [s.type.extractType()/] [for(case : PhiCase | s.cases)]['['/][case.value.extractType()/], [case.label/][']'/][/for][elselet s : Select = t.instruction]
+[s.result.name/] = select [s.condition.displayParameter()/], [s.trueValue.displayParameter()/], [s.elseValue.displayParameter()/][elselet s : Call = t.instruction]
+[if(s.result.oclIsUndefined()._not())][s.result.name/] = [/if]call [s.function.displayParameter()/] ([if(s.pList.oclIsUndefined()._not())][for(param : Parameter | s.pList.params)separator(', ')][param.displayParameter()/][/for][/if])
+	NEEDS ATTENTION ![elselet s : VariableAttributeAccess = t.instruction]
+[s.result.name/] = va_arg [s.vaList.displayParameter()/], [s.aType.extractType()/]
+	NEEDS ATTENTION ![elselet s : LandingPad = t.instruction]
+[s.result.name/] = landingpad [s.struct.extractType()/] personality [s.personalitytype.extractType()/] [s.personalityvalue.extractValue()/]
+	NEEDS ATTENTION ![else]
+[if(t.instruction.oclIsUndefined()._not())][t.instruction.eClass().name/]
+	NEEDS ATTENTION ![else][t.eClass().name/][/if][/let]
+[/template]
+
+[query public displayParameter(param : Parameter) : String = param.type.extractType() + param.value.extractValue()/]
+
+[template public extractType(type : EObject)]
+[let type : Predefined = type]
+[type.type/][if(type.pointer.oclIsUndefined()._not())][type.pointer/][/if][elselet type : AddressUse = type]
+[type.address.name/] [if(type.pointer.oclIsUndefined()._not())][type.pointer/][/if][elselet type : FunctionType = type]
+[type.returnType.extractType()/]([if(type.parameter.oclIsUndefined()._not())][for(t : FunctionParameter | type.parameter.params)separator(', ')][t.type.extractType()/] [if(t.value.oclIsUndefined()._not())][t.value.name/][/if][/for][/if])[if(type.pointer.oclIsUndefined()._not())][type.pointer/][/if][elselet struct : Structure = type]
+{[for(type : EObject | struct.types)separator(', ')][type.extractType()/][/for]}[if(struct.pointer.oclIsUndefined()._not())][struct.pointer/][/if][elselet type : Array = type]
+['['/][if(type.length.oclIsUndefined()._not())][type.length/] x [extractType(type.type)/][/if][']'/][if(type.pointer.oclIsUndefined()._not())][type.pointer/][/if][elselet type : Vector = type]
+<[type.length/] x [extractType(type.type.oclAsType(EObject))/]>;[/let]
+[/template]
+
+[template extractValue(v : Value)]
+[let value : AddressUse = v]
+[value.address.name/][elselet value : PrimitiveValue = v]
+[value.value/][elselet value : IntegerConstant = v]
+[value.value/][elselet value : NestedGetElementPtr = v]
+getelementptr [value.aggregate.displayParameter()/][for(index : Parameter | value.indices)], [index.displayParameter()/][/for][elselet value : NestedCast = v]
+[value.operation/]([value.from.extractType()/] [value.value.extractValue()/] to [value.to.extractType()/])[/let]
+[/template]

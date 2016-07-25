@@ -1,0 +1,72 @@
+[comment encoding = UTF-8 /]
+[module TransformationCommon('http://www.upb.de/lina/cfg/controlflow', 'http://www.upb.de/lina/cfg/gendata', 'http://www.upb.de/llvm_parser/llvm', 'http://www.eclipse.org/emf/2002/Ecore')]
+
+[query public cleanFunctionName(str: String) : String = 
+str.replaceAll('@_','').replaceAll('@','') /]
+
+[comment ====== Generic Calls ======/]
+[query public getVariableExpensive(address: Address, genData: GeneratorData) : Variable = 
+genData.allVariables->any(v | v.originalAddresses->select(adr | adr = address)->notEmpty())
+/]
+
+[query public getVariableForAddress(a: Address, t : Transition, genData: GeneratorData) : Variable =  
+if t.oclIsUndefined() or getVariableFromTransition(a, t).oclIsUndefined() then
+ 	getVariableExpensive(a, genData)
+else 
+	getVariableFromTransition(a, t)
+endif
+/]
+
+[query public getVariableFromTransition(address: Address, t : Transition) : Variable = 
+t.usedVariables->any(v | v.originalAddresses->select(adr | adr = address)->notEmpty())
+/]
+
+[query public valueToString(v : PrimitiveValue, t: Transition, genData: GeneratorData) : String = '' + v.value /]
+
+[query public valueToString(v : IntegerConstant, t: Transition, genData: GeneratorData) : String = '' + v.value /]
+
+[query public valueToString(v : DecimalConstant, t : Transition, genData: GeneratorData) : String = '' + v.value /]
+
+[comment]addressToStringExpensive(address, genData)  we can use it as a fall back solution, but it is very expensive[/comment]
+[query public valueToString(v : AddressUse, t : Transition, genData: GeneratorData) : String = 
+getVariableForAddress(v.address, t, genData).newName/]
+
+[query public valueToString(v : NestedGetElementPtr, t : Transition, genData: GeneratorData) : String = 
+valueToString(v.aggregate.value, t, genData) + ' + ' + valueToString(v.indices->at(2).value, t, genData) /]
+
+[query public valueToString(v : NestedCast, t : Transition, genData: GeneratorData) : String = 'FIXME, THIS NEVER HAPPENED BEFORE' /]
+
+[query public valueToString(v : ValueStruct, t : Transition, genData: GeneratorData) : String = 'FIXME, THIS NEVER HAPPENED BEFORE' /]
+
+[query public valueToString(v : Parameter, t : Transition, genData: GeneratorData) : String = valueToString(v.value, t, genData)/]
+
+[query public valueToString(v : EObject, t : Transition, genData: GeneratorData) : String = 
+if v.oclIsKindOf(Parameter) then valueToString(v.oclAsType(Parameter), t, genData)
+else if v.oclIsKindOf(Value) then valueToString(v.oclAsType(Value), t, genData)
+else 'FIXME, THIS NEVER HAPPENED BEFORE'
+endif
+endif 
+/]
+
+[query public valueToString(v : Value, t : Transition, genData: GeneratorData) : String = 
+if v.oclIsTypeOf(PrimitiveValue) then 
+	valueToString(v.oclAsType(PrimitiveValue), t, genData)
+else if v.oclIsTypeOf(IntegerConstant) then 
+	valueToString(v.oclAsType(IntegerConstant), t, genData)
+else if v.oclIsTypeOf(DecimalConstant) then 
+	valueToString(v.oclAsType(DecimalConstant), t, genData)
+else if v.oclIsTypeOf(AddressUse) then 
+	valueToString(v.oclAsType(AddressUse), t, genData)
+else if v.oclIsTypeOf(NestedGetElementPtr) then 
+	valueToString(v.oclAsType(NestedGetElementPtr), t, genData)
+else if v.oclIsTypeOf(NestedCast) then 
+	valueToString(v.oclAsType(NestedCast), t, genData)
+else 
+	'FIXME, THIS NEVER HAPPENED BEFORE'
+endif
+endif
+endif
+endif
+endif
+endif
+ /]

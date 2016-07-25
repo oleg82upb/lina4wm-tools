@@ -1,57 +1,18 @@
 [comment encoding = UTF-8 /]
 [module generateKIVspec('http://www.upb.de/lina/cfg/controlflow', 'http://www.upb.de/lina/cfg/gendata', 'http://www.upb.de/llvm_parser/llvm', 'http://www.eclipse.org/emf/2002/Ecore')]
+[import de::upb::lina::transformations::TransformationCommon/]
+[import de::upb::lina::transformations::kiv::KivCommon/]
 
 [template public generateModel(genData : GeneratorData) ]
 [comment @main/]
 
-[file ( 'specs/localstate.utf8', false, 'UTF-8')]
-data specification
-	using [basis(genData)/]ref, PC, PID
-	Localstate :=mkls( . .pc : PC; . .pid : PID;
-					[for(am: AddressMapping | genData.getFilteredAddresses('all-declare-params')->select(name.equalsIgnoreCase('returnvalue')._not()))]
-					. .[am.name/] : [am.type/];
-					[/for]);
-	variables
-		ls , ls' : Localstate;
-end data specification
-[/file]
+[generateLocalstateFile(genData)/]
 
-[file ('specs/PC.utf8', false, 'UTF-8')]
-data specification
-	PC = N |[for (l : LocationLabel | genData.locationLabels) separator  (' |')] 
-		
-		[l.name/] [/for];
-variables
-pc : PC;
+[generatePCFile(genData)/]
 
-end data specification
-[/file]
+[generatePIDFile(genData)/]
 
-[file ('specs/PID.utf8', false, 'UTF-8')]
-specification
-	sorts
-		PID;
-	variables
-		p : PID;
-end specification
-[/file]
-
-[file ('specs/cindex.utf8', false, 'UTF-8')]
-data specification
-	IJ = [for (cfg : ControlFlowDiagram | genData.cfgs) separator ('|')] [generateCfgLabel(genData, cfg)/]ini [/for];
-	CJ = [for (label : TransitionLabel | genData.transitionLabels->select(transition.instruction.oclIsUndefined()._or((transition.instruction.eClass() = Return)._not())))separator ('|')] [label.name/] [/for];
-	[let returns : OrderedSet(TransitionLabel) = genData.transitionLabels->select(transition.instruction.oclIsUndefined()._not()._and(transition.instruction.eClass() = Return))]
-	[if(returns->size() > 0)]
-	RJ = [for (label : TransitionLabel | returns )separator ('|')] [label.name/]ret [/for];
-[/if]
-variables
-		ij : IJ;
-		cj : CJ;
-[if(returns->size() > 0)]
-		rj : RJ;
-[/if]
-end data specification[/let]
-[/file]
+[generateCIndexFile(genData)/]
 
 [if(input(genData))]
 [file ('specs/input.utf8', false, 'UTF-8')]
@@ -65,6 +26,12 @@ end data specification
 [/file]
 [/if]
 
+[generateCOPFile(genData)/]
+
+
+[/template]
+
+[template private generateCOPFile(genData: GeneratorData)]
 [file ('specs/COP.utf8', false, 'UTF-8')]
 enrich 	[basis(genData)/]ref-memory,
 		localstate,
@@ -75,9 +42,9 @@ enrich 	[basis(genData)/]ref-memory,
 	functions
 		INVOP : IJ → [if(input(genData))]input[else][inputType(genData)/][/if] ×  memory ×  Localstate ×  memory ×  Localstate → bool;
 		COP : CJ → memory × Localstate × memory × Localstate → bool;
-[let returns : OrderedSet(TransitionLabel) = genData.transitionLabels->select(transition.instruction.oclIsUndefined()._not()._and(transition.instruction.eClass() = Return))]
-	[if(returns->size() > 0)]
-		RETOP : RJ → memory × Localstate × memory × Localstate × [if(genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->size()>0)][genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->first().type/][else][basis(genData)/][/if] → bool;
+[let returnTransitions : Sequence(Transition) = getAllReturnTransitions(genData)]
+	[if(returnTransitions->size() > 0)]
+		RETOP : RJ → memory × Localstate × memory × Localstate × [if(getAllReturnVariables(genData)->size()>0)][getAllReturnVariables(genData)->first().type/][else][basis(genData)/][/if] → bool;
 	[/if]
 	predicates
 		LSInit : Localstate × PID;
@@ -85,14 +52,14 @@ enrich 	[basis(genData)/]ref-memory,
 	variables
 		invop : [if(input(genData))]input[else][inputType(genData)/][/if] × memory × Localstate × memory × Localstate → bool;
 		cop : memory × Localstate × memory × Localstate → bool;
-	[if(returns->size() > 0)]
-		retop : memory × Localstate × memory × Localstate × [if(genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->size()>0)][genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->first().type/][else][basis(genData)/][/if] → bool;
+	[if(returnTransitions->size() > 0)]
+		retop : memory × Localstate × memory × Localstate × [if(getAllReturnVariables(genData)->size()>0)][getAllReturnVariables(genData)->first().type/][else][basis(genData)/][/if] → bool;
 		[/if]
 		mem' : memory;
 [if(input(genData)._not())]
 		inp : [inputType(genData)/];
-[/if][if(returns->size() > 0)]
-		return : [if(genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->size()>0)][genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->first().type/][else][basis(genData)/][/if];
+[/if][if(returnTransitions->size() > 0)]
+		return : [if(getAllReturnVariables(genData)->size() > 0)][getAllReturnVariables(genData)->first().type/][else][basis(genData)/][/if];
 [/if][/let]
 	axioms
 
@@ -106,35 +73,50 @@ enrich 	[basis(genData)/]ref-memory,
 	used for : s, ls;
 
 	[/for]
-	[for (label : TransitionLabel | genData.transitionLabels->select(transition.instruction.oclIsUndefined()._or((transition.instruction.eClass() = Return)._not())))]
-;;	[label.transition.createComment()/]
-	[label.name/] :
-	⊦ COP([label.name/])(mem, ls, mem', ls') ↔ ls .pc = [genData.generatePrevPC(genData, label.transition)/] ∧ [label.transition.transformTransition(genData)/];
+	[for (transition : Transition | getAllCopTransitions(genData))]
+;;	[transition.createComment()/]
+	[transition.label/] :
+	⊦ COP([transition.label/])(mem, ls, mem', ls') ↔ ls .pc = [genData.generatePrevPC(genData, transition)/] ∧ [transition.transformTransition(genData)/];
 	used for : s, ls;
 
 	[/for]
-	[for (label : TransitionLabel | genData.transitionLabels->select(transition.instruction.oclIsUndefined()._not()._and(transition.instruction.eClass() = Return)))]
-;;	[label.transition.createComment()/]
-	[label.name/]ret :
-	⊦ RETOP([label.name/]ret)(mem, ls, mem', ls', return) ↔ ls .pc = [genData.generatePrevPC(genData, label.transition)/] ∧ ls' = ls .pc:= N[generateReturn(genData, label.transition.instruction.oclAsType(Return))/] ∧ mem' = mem;
+	[for (transition : Transition | getAllReturnTransitions(genData))]
+;;	[transition.createComment()/]
+	[transition.label/]ret :
+	⊦ RETOP([transition.label/]ret)(mem, ls, mem', ls', return) ↔ ls .pc = [genData.generatePrevPC(genData, transition)/] ∧ ls' = ls .pc:= N[generateReturn(genData, transition.instruction.oclAsType(Return))/] ∧ mem' = mem;
 	used for : s, ls;
 	
 	[/for]
 end enrich
 		
 [/file]
-
 [/template]
 
-[template private basis(genData : GeneratorData)]
-[for(basis: String | genData.transformationSpecificKeys)][if (basis.equalsIgnoreCase('int'))]int[/if][if (basis.equalsIgnoreCase('nat'))]nat[/if][/for]
+[template private generateLocalstateFile(genData: GeneratorData)]
+[file ( 'specs/localstate.utf8', false, 'UTF-8')]
+data specification
+	using [basis(genData)/]ref, PC, PID
+	Localstate :=mkls( . .pc : PC; . .pid : PID;
+					[for(variable: Variable | getAllLocalAndParameterVariables(genData)->select(newName.equalsIgnoreCase('returnvalue')._not()))]
+					. .[variable.newName/] : [variable.type/];
+					[/for]);
+	variables
+		ls , ls' : Localstate;
+end data specification
+[/file]
 [/template]
 
-[query private input(genData : GeneratorData) : Boolean = 
-if genData.transformationSpecificKeys->indexOf('INPUT_NEEDED').oclIsUndefined() then false else true endif/]
+[template private generatePIDFile(genData: GeneratorData)]
+[file ('specs/PID.utf8', false, 'UTF-8')]
+specification
+	sorts
+		PID;
+	variables
+		p : PID;
+end specification
+[/file]
+[/template]
 
-[query private inputType(genData : GeneratorData) : String =
-if genData.transformationSpecificKeys->indexOf('INPUT_REF').oclIsUndefined() then basis(genData) else 'ref' endif /]
 
 [template private generateFunctionParameter(cfg: ControlFlowDiagram, genData : GeneratorData)]
 [for(am : AddressMapping | genData.getFilteredAddresses('func-params:' + cfg.name)->select(type.equalsIgnoreCase('ref'))->select(name.equalsIgnoreCase('returnvalue')._not()))]
@@ -143,29 +125,13 @@ if genData.transformationSpecificKeys->indexOf('INPUT_REF').oclIsUndefined() the
 [/template]
 
 [template private generateGlobalConstants(genData : GeneratorData)]
-[if(genData.getFilteredAddresses('globals')->size() > 0)]
+[if(genData.globalVariables->size() > 0)]
 constants
-[for(am : AddressMapping| genData.getFilteredAddresses('globals'))]
-	[am.name/] : [am.type/];
+[for(variable : Variable| genData.globalVariables)]
+	[variable.newName/] : [variable.type/];
 [/for][/if]
 [/template]
 
-[template private generatePrevPC(genData: GeneratorData, transition: Transition)]
-[for (label : LocationLabel | genData.locationLabels)][if(label.controlFlowLocation = transition.source)][label.name/][/if][/for]
-[/template]
-
-[template private generateNextPC(genData: GeneratorData, transition: Transition)]
-[for (label : LocationLabel | genData.locationLabels)][if(label.controlFlowLocation = transition.target)][label.name/][/if][/for]
-[/template]
-
-[template private generateStartPC(genData : GeneratorData, cfg : ControlFlowDiagram)]
-[for (l : ControlFlowLocation | cfg.locations)]
-[if (l = cfg.start)][for (label : LocationLabel | genData.locationLabels)][if (l = label.controlFlowLocation)][label.name/][/if][/for][/if][/for]
-[/template]
-
-[template private generateCfgLabel(genData : GeneratorData, cfg : ControlFlowDiagram)]
-[for(mapping : OldToNewCfgNameMapping |genData.oldToNewCfgName)][if(mapping.key.equalsIgnoreCase(cfg.name))][mapping.value/][/if][/for]
-[/template]
 
 [comment ============================= Transitions=============================================== /]
 [template private transformTransition(t: Transition, genData: GeneratorData)]
@@ -192,9 +158,6 @@ ls' = ls .pc:= [generateNextPC(genData, t)/][if(t.copyAddress.oclIsUndefined()._
 ls' = ls .pc:= [generateNextPC(genData, t)/] ∧ mem' = mem['[ '/][flushed.address.value.castFromRef(genData)/] ,[flushed.values->first().value.castToRef(genData)/][']'/][/let]
 [/template]
 
-[query public getFlushedAvp(t: FlushTransition) : AddressValuePair = invoke('de.upb.lina.cfg.tools.GraphUtility','getFlushedAddressValuePair(de.upb.lina.cfg.controlflow.FlushTransition)', Sequence{t})/]
-[query public getcorrespondingAddressMapping(a: Address, genData : GeneratorData, keyForMapping : String) : AddressMapping = invoke('de.upb.lina.transformations.logic.GendataPrecomputer','getCorrespondingAddressMapping(de.upb.llvm_parser.llvm.Address, de.upb.lina.cfg.gendata.GeneratorData, java.lang.String)', Sequence{a,genData,keyForMapping})/]
-
 [comment === EarlyReadTransition ====/]
 [template private transformTransition(t : EarlyReadTransition, genData: GeneratorData)]
 ls' = ls .pc:= [generateNextPC(genData, t)/] .[t.instruction.oclAsType(Load).result.addressToString(genData)/]:= [findValueForEarlyReadExpression(t, genData)/] ∧ mem' = mem
@@ -216,9 +179,6 @@ ls' = ls .pc:= [generateNextPC(genData, t)/] .[t.instruction.oclAsType(Load).res
 [/template]
 
 [comment ====== Instructions ======/]
-[template private genLsPart(e : Instruction, t: Transition, genData : GeneratorData)]
-[comment Abstract/]
-[/template]
 
 [template private genMemPart(e : Instruction, t: Transition, genData : GeneratorData)]
  ∧ mem' = mem
@@ -229,44 +189,23 @@ ls' = ls .pc:= [generateNextPC(genData, t)/] .[t.instruction.oclAsType(Load).res
 [if (phi.result = a)][if(am.type.equalsIgnoreCase('ref'))][castToRef(case.value, genData)/][else][possiblyAddLS(case.value, genData)/][case.value.valueToString(genData)/][/if][/if][/for][/for][/if][/for][/for][/if][/for]
 [/template]
 
+[template private genLsPart(e : Instruction, t: Transition, genData : GeneratorData)]
+[comment Abstract/]
+[/template]
+
+[comment ====== Arithmetic Operation ======/]
 [template private genLsPart(e : ArithmeticOperation, t: Transition, genData : GeneratorData)]
 [e.arithmeticInstr(e, genData)/]
 [/template]
 
-[query private arithmeticInstr(e : ArithmeticOperation, genData: GeneratorData) : String = 
-' .' + e.result.addressToString(genData) + ':= ( ' 
-+ possiblyAddLS(e.value1, genData)
-+ e.value1.valueToString(genData)
-+ ' '
-+ e.operation.arithmeticOp() + ' ' 
-+ possiblyAddLS(e.value2, genData) 
-+ e.value2.valueToString(genData) 
-+ ')'
-/]
-
-[query private arithmeticOp(s : EString) : String = 
-if s.equalsIgnoreCase('add') then
-	'+'
-else if s.equalsIgnoreCase('sub') or s.equalsIgnoreCase('ashr') then
-	'-'
-else if s.equalsIgnoreCase('mul') then
-	'*'
-else if s.equalsIgnoreCase('sdiv') or s.equalsIgnoreCase('udiv') then
-	'/'
-else
-	'NEEDS ATTENTION -> UNSUPPORTED ARITHMETIC OPERATION'
-endif
-endif
-endif
-endif
-/]
-
+[comment ====== Load ======/]
 [template private genLsPart(e : Load, t : Transition, genData : GeneratorData)]
  .[e.result.addressToString(genData)/]:= mem['['/][e.address.value.castFromRef(genData)/][']'/][for (am1: AddressMapping | genData.addressMappings)]
 [for (a: Address | am1.adresses)]
 [if (e.result = a)][if(am1.type.equalsIgnoreCase('ref')._not())] .v[/if][/if][/for][/for]
 [/template]
 
+[comment ====== CompareInt ======/]
 [template private genLsPart(e : CompareInt, t : Transition, genData : GeneratorData)]
 [let pc : String = generateNextPC(genData, t)][let res : String = e.result.addressToString(genData)]
 [if(e.cond.equalsIgnoreCase('eq'))]([compareTypecorrect(e.operand1, e.operand2, genData)/] ⊃ ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('1',e.result, genData)/] ; ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('0',e.result, genData)/])[else]
@@ -278,6 +217,7 @@ endif
 [/let][/let]
 [/template]
 
+[comment ====== Compare Exchange ======/]
 [template private genLsPart(e : CmpXchg, t: Transition, genData : GeneratorData)]
 [let res : String = e.result.addressToString(genData)][let adr : String = e.address.value.valueToString(genData)][let pc : String = generateNextPC(genData, t)]
 ( mem['['/][e.address.value.castFromRef(genData)/][']'/] = [e.value.value.castToRef(genData)/] ⊃ (ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('1',e.result, genData)/][genPhiInstruction(t, genData)/] ∧ mem' = mem['['/][e.address.value.castFromRef(genData)/], [e.newValue.value.castToRef(genData)/][']'/]) ; (ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('0',e.result, genData)/][genPhiInstruction(t, genData)/] ∧ mem' = mem))[/let]
@@ -287,6 +227,7 @@ endif
 [template private genMemPart(e : CmpXchg, t: Transition, genData: GeneratorData)]
 [/template]
 
+[comment ====== Atomic Read Modify Write ======/]
 [template private genLsPart(e : AtomicRMW, t: Transition, genData: GeneratorData)]
  .[e.result.addressToString(genData)/]:= mem['['/][e.address.value.castFromRef(genData)/][']'/] .v
 [/template]
@@ -302,33 +243,31 @@ unsupported operation
 [/if][/if][/if][/if][/if][/let][/let][/let]
 [/template]
 
+[comment ====== Branch ======/]
 [template private genMemPart(e: Branch, t: Transition, genData : GeneratorData)]
 [if(e.condition.oclIsUndefined()._not())] ∧ [for(ct : ConstraintMapping | genData.constraints)][if(ct.transition = t)][if(ct.condition.contains('!')._not())][possiblyAddLS(e.condition, genData)/][e.condition.valueToString(genData)/] = 1[else][possiblyAddLS(e.condition, genData)/][e.condition.valueToString(genData)/] = 0[/if][/if][/for][/if]
 [/template]
 
+[comment ====== Get Element Pointer ======/]
 [template private genLsPart(e : GetElementPtr, t: Transition, genData: GeneratorData)]
  .[e.result.addressToString(genData)/]:= [for(mm : MemorySizeMapping | genData.memorySizeMappings)][if(mm.instruction = e)][let offset : EInt = mm.offset][possiblyCastToRef('('+ e.aggregate.value.castFromRef(genData) +' + '+ offset + ')', e.result, genData)/][/let][/if][/for]
 [/template]
 
+[comment ====== Cast ======/]
 [template private genLsPart(e : Cast, t: Transition, genData: GeneratorData)]
  .[e.result.addressToString(genData)/]:= [for (amRes: AddressMapping | genData.addressMappings)]
 [for (ad: Address | amRes.adresses)]
 [if (e.result = ad)][e.value.possiblyCast(amRes.type, genData)/][/if][/for][/for]
 [/template]
 
-[template private possiblyCast(v: Value, resultType : String, genData : GeneratorData)]
-[if (v.oclIsTypeOf(AddressUse))][let am : AddressMapping = getcorrespondingAddressMapping(v.oclAsType(AddressUse).address, genData, null)]
-[if (resultType.equalsIgnoreCase(genData.basis()) and am.type.equalsIgnoreCase('ref'))][v.castFromRef(genData)/][elseif(resultType.equalsIgnoreCase('ref') and am.type.equalsIgnoreCase(genData.basis()))]
-[v.castToRef(genData)/][else][possiblyAddLS(v, genData)/][v.valueToString(genData)/][/if][/let][elseif(resultType.equalsIgnoreCase('ref'))]
-[v.castToRef(genData)/][else][possiblyAddLS(v, genData)/][v.valueToString(genData)/][/if]
-[/template]
-
+[comment ====== Select ======/]
 [template private genLsPart(e : Select, t : Transition, genData : GeneratorData)]
 [let pc : String = generateNextPC(genData, t)]
 ([possiblyAddLS(e.condition.value, genData)/][e.condition.value.valueToString(genData)/] = 1 ⊃ ls' = ls .pc:= [pc/] .[e.result.addressToString(genData)/]:= [possiblyAddLS(e.trueValue.value, genData)/][e.trueValue.value.valueToString(genData)/] ; ls' = ls .pc:= [pc/] .[e.result.addressToString(genData)/]:= [possiblyAddLS(e.elseValue.value, genData)/][e.elseValue.value.valueToString(genData)/])
 [/let]
 [/template]
 
+[comment ====== Switch ======/]
 [template private genLsPart(e : Switch, t : Transition, genData : GeneratorData)]
  ∧[let cond : String = t.oclAsType(GuardedTransition).condition.substitute('[', '').substitute(']', '').trim()]
 [for (case : SwitchCase | e.cases) separator (' ∧')] [possiblyAddLS(e.caseValue.value, genData)/][e.caseValue.value.valueToString(genData)/][if(case.caseValue.value.valueToString(genData).trim().equalsIgnoreCase(cond))] = [cond/][else] ≠ [case.caseValue.value.valueToString(genData).trim()/][/if][/for][/let]
@@ -339,12 +278,40 @@ unsupported operation
 [/template]
 
 [comment ====== General Calls ======/]
+
+[query private arithmeticInstr(e : ArithmeticOperation, genData: GeneratorData) : String = 
+' .' + e.result.addressToString(genData) + ':= ( ' 
++ possiblyAddLS(e.value1, genData)
++ e.value1.valueToString(genData)
++ ' '
++ e.operation.arithmeticOp() + ' ' 
++ possiblyAddLS(e.value2, genData) 
++ e.value2.valueToString(genData) 
++ ')'
+/]
+
+[template private possiblyCast(v: Value, resultType : String, genData : GeneratorData)]
+[if (v.oclIsTypeOf(AddressUse))][let am : AddressMapping = getcorrespondingAddressMapping(v.oclAsType(AddressUse).address, genData, null)]
+[if (resultType.equalsIgnoreCase(genData.basis()) and am.type.equalsIgnoreCase('ref'))][v.castFromRef(genData)/][elseif(resultType.equalsIgnoreCase('ref') and am.type.equalsIgnoreCase(genData.basis()))]
+[v.castToRef(genData)/][else][possiblyAddLS(v, genData)/][v.valueToString(genData)/][/if][/let][elseif(resultType.equalsIgnoreCase('ref'))]
+[v.castToRef(genData)/][else][possiblyAddLS(v, genData)/][v.valueToString(genData)/][/if]
+[/template]
+
 [query private possiblyCastToRef(s : String, address : Address, genData : GeneratorData) : String =
 if (getcorrespondingAddressMapping(address, genData, null).type.equalsIgnoreCase('ref')) then '⌜'+s+'⌝' else s endif/]
 
-[query private addressToString(address: Address, genData: GeneratorData) : String = getcorrespondingAddressMapping(address, genData, null).name/]
+[query public valueToString(v : PrimitiveValue, t: Transition, genData: GeneratorData): String = '' + v.value.transformBooleanToNumber() /]
 
-[query private possiblyZeroBeforeMinus(s : EInt) : String = if (s < 0) then '(0 - '+s.abs()+')' else s endif /]
+[query public valueToString(v : IntegerConstant, t: Transition, genData: GeneratorData) : String = '' + v.getValueFromConstant() /]
+
+[query public valueToString(v : DecimalConstant, t : Transition, genData: GeneratorData) : String = '' + v.getValueFromConstant() /]
+
+[query public valueToString(v : AddressUse, t : Transition, genData: GeneratorData) : String = 
+getVariableForAddress(v.address, t, genData).newName.transformBooleanToNumber()/]
+
+[query public valueToString(v : NestedCast, t : Transition, genData: GeneratorData) : String = genNestedCast(v.oclAsType(NestedCast), genData) /]
+
+[query public valueToString(v : NestedGetElementPtr, t : Transition, genData: GeneratorData) : String = genNestedGetElemPtr(v.oclAsType(NestedGetElementPtr), genData) /]
 
 [template private valueToString(v : Value, genData: GeneratorData)]
 [if (v.oclIsTypeOf(PrimitiveValue))][v.oclAsType(PrimitiveValue).value.transformBooleanToNumber()/][elseif ( v.oclIsKindOf(Constant))]
@@ -358,11 +325,6 @@ if (getcorrespondingAddressMapping(address, genData, null).type.equalsIgnoreCase
 [if(v.oclIsTypeOf(AddressUse))]
 [for(am : AddressMapping | genData.getFilteredAddresses('all-declare-params'))][for(a: Address | am.adresses)][if(a = v.oclAsType(AddressUse).address)]ls .[/if][/for][/for][/if]
 [/template]
-
-[query private transformBooleanToNumber(b : String) : String =
-if b.equalsIgnoreCase('true') then '1'
-else if b.equalsIgnoreCase('false') then '0' 
-else b endif endif /]
 
 [template public castToRef(v : Value, genData : GeneratorData)]
 [if (v.oclIsTypeOf(PrimitiveValue))][if(v.oclAsType(PrimitiveValue).value.equalsIgnoreCase('null'))]null[else]⌜[possiblyAddLS(v, genData)/][v.valueToString(genData)/]⌝[/if][elseif ( v.oclIsKindOf(Constant))]
@@ -384,7 +346,7 @@ else b endif endif /]
 [genNestedCast(v.oclAsType(NestedCast), genData)/][/if]
 [/template]
 
-[template private genNestedGetElemPtr(nestedPtr : NestedGetElementPtr, genData : GeneratorData)]
+[template public genNestedGetElemPtr(nestedPtr : NestedGetElementPtr, genData : GeneratorData)]
 ([nestedPtr.aggregate.value.castFromRef(genData)/][for(mm : MemorySizeMapping | genData.memorySizeMappings)][if(mm.instruction = nestedPtr)] + [mm.offset/][/if][/for])
 [/template]
 
@@ -414,73 +376,4 @@ else b endif endif /]
 	[else][ls1/][v1.valueToString(genData)/] = [ls2/][v2.valueToString(genData)/][/if]
 [else][ls1/][v1.valueToString(genData)/] = [ls2/][v2.valueToString(genData)/][/if]
 [/let][/let]
-[/template]
-
-[query public getValueFromConstant(c : Constant) : String =
-if c.oclIsTypeOf(IntegerConstant) then c.oclAsType(IntegerConstant).value.possiblyZeroBeforeMinus() else c.oclAsType(DecimalConstant).value endif/]
-
-[template private createComment(t : Transition)]
-[let l : Load = t.instruction]
-[l.result.name/] = load [l.address.displayParameter()/][if(l.align.oclIsUndefined()._not())], align [l.align/][/if][for(m : MetaArgValue | l.meta)], [m.arg/] [m.value/][/for][elselet s : Store = t.instruction]
-store [s.value.displayParameter()/], [s.targetAddress.displayParameter()/][if(s.align.oclIsUndefined()._not())], align [s.align/][/if][for(m : MetaArgValue | s.meta)], [m.arg/] [m.value/][/for][elselet s : GetElementPtr = t.instruction]
-[s.result.name/] = getelementptr [s.aggregate.displayParameter()/][for(index : Parameter | s.indices)], [index.displayParameter()/][/for][elselet s : Alloc = t.instruction]
-[s.result.name/] = alloca [s.type.extractType()/][if(s.numOfElements.oclIsUndefined()._not())], [s.numOfElements.displayParameter()/][/if][if(s.align.oclIsUndefined()._not())], align [s.align/][/if][elselet s : CmpXchg = t.instruction]
-[s.result.name/] = cmpxchg [if(s.volatile)]volatile [/if][s.address.displayParameter()/], [s.value.displayParameter()/], [s.newValue.displayParameter()/] [s.ordering/][elselet s : AtomicRMW = t.instruction]
-[s.result.name/] = atomicrmw [if(s.volatile)]volatile [/if][s.operation/] [s.address.displayParameter()/], [s.argument.displayParameter()/] [s.ordering/][elselet s : Fence = t.instruction]
-fence [s.ordering/][elselet s : Return = t.instruction]
-ret [if(s.value.oclIsTypeOf(Parameter))][s.value.oclAsType(Parameter).displayParameter()/][else][s.value.oclAsType(PrimitiveValue).value/][/if][elselet s : Branch = t.instruction]
-br [if(s.condition.oclIsUndefined()._not())][s.condition.extractValue()/], [/if]label [s.destination/][if(s.elseDestination.oclIsUndefined()._not())], label [s.elseDestination/][/if][elselet s : Switch = t.instruction]
-switch [s.caseValue.displayParameter()/], label [s.defaultCase/] ['['/] [for(case : SwitchCase | s.cases)][case.caseValue.displayParameter()/], label [case.destination/] [/for][']'/][elselet s : IndirectBranch = t.instruction]
-indirectbr [s.target.displayParameter()/], ['['/][for(target : EString | s.potTargetLabels)separator(', ')]label [target/][/for][']'/]
-	NEEDS ATTENTION ![elselet s : Invoke = t.instruction]
-invoke [s.returnType.extractType()/] [s.name.name/] ([if(s.pList.oclIsUndefined()._not())][for(param : Parameter | s.pList.params)separator(', ')][param.displayParameter()/][/for][/if]) to label [s.targetLabel/] unwind label [s.unwindTargetLabel/]
-	NEEDS ATTENTION ![elselet s : Resume = t.instruction]
-resume [s.type.extractType()/] [s.value.extractValue()/]
-	NEEDS ATTENTION ![elselet s : LogicOperation = t.instruction]
-[s.result.name/] = [s.operation/] [s.optype.extractType()/] [s.value1.extractValue()/], [s.value2.extractValue()/]
-	NEEDS ATTENTION ![elselet s : ArithmeticOperation = t.instruction]
-[s.result.name/] = [s.operation/] [s.optype.extractType()/] [s.value1.extractValue()/], [s.value2.extractValue()/][elselet s : Compare = t.instruction]
-[s.result.name/] = [if(s.oclIsTypeOf(CompareInt))]icmp[else]fcmp[/if] [s.cond/] [s.opType.extractType()/] [s.operand1.extractValue()/], [s.operand2.extractValue()/][elselet s : Cast = t.instruction]
-[s.result.name/] = [s.operation/] [s.from.extractType()/] [s.value.extractValue()/] to [s.to.extractType()/][elselet s : ShuffleVector = t.instruction]
-[s.result.name/] = shufflevector [s.value1.displayParameter()/], [s.value2.displayParameter()/], [s.mask.displayParameter()/]
-	NEEDS ATTENTION ![elselet s : InsertElement = t.instruction]
-[s.result.name/] = insertelement [s.vector.displayParameter()/], [s.value.displayParameter()/], [s.index.displayParameter()/]
-	NEEDS ATTENTION ![elselet s : ExtractElement = t.instruction]
-[s.result.name/] = extractelement [s.vector.displayParameter()/], [s.index.displayParameter()/]
-	NEEDS ATTENTION ![elselet s : InsertValue = t.instruction]
-[s.result.name/] = insertvalue [s.aggerate.displayParameter()/], [s.value.displayParameter()/][for(i : EInt | s.index)separator(', ')][i/][/for]
-	NEEDS ATTENTION ![elselet s : ExtractValue = t.instruction]
-[s.result.name/] = extractvalue [s.aggerate.displayParameter()/][for(i : EInt | s.index)separator(', ')][i/][/for]
-	NEEDS ATTENTION ![elselet s : Phi = t.instruction]
-[s.result.name/] = phi [s.type.extractType()/] [for(case : PhiCase | s.cases)]['['/][case.value.extractType()/], [case.label/][']'/][/for][elselet s : Select = t.instruction]
-[s.result.name/] = select [s.condition.displayParameter()/], [s.trueValue.displayParameter()/], [s.elseValue.displayParameter()/][elselet s : Call = t.instruction]
-[if(s.result.oclIsUndefined()._not())][s.result.name/] = [/if]call [s.function.displayParameter()/] ([if(s.pList.oclIsUndefined()._not())][for(param : Parameter | s.pList.params)separator(', ')][param.displayParameter()/][/for][/if])
-	NEEDS ATTENTION ![elselet s : VariableAttributeAccess = t.instruction]
-[s.result.name/] = va_arg [s.vaList.displayParameter()/], [s.aType.extractType()/]
-	NEEDS ATTENTION ![elselet s : LandingPad = t.instruction]
-[s.result.name/] = landingpad [s.struct.extractType()/] personality [s.personalitytype.extractType()/] [s.personalityvalue.extractValue()/]
-	NEEDS ATTENTION ![else]
-[if(t.instruction.oclIsUndefined()._not())][t.instruction.eClass().name/]
-	NEEDS ATTENTION ![else][t.eClass().name/][/if][/let]
-[/template]
-
-[query private displayParameter(param : Parameter) : String = param.type.extractType() + param.value.extractValue()/]
-
-[template public extractType(type : EObject)]
-[let type : Predefined = type]
-[type.type/][if(type.pointer.oclIsUndefined()._not())][type.pointer/][/if][elselet type : AddressUse = type]
-[type.address.name/] [if(type.pointer.oclIsUndefined()._not())][type.pointer/][/if][elselet type : FunctionType = type]
-[type.returnType.extractType()/]([if(type.parameter.oclIsUndefined()._not())][for(t : FunctionParameter | type.parameter.params)separator(', ')][t.type.extractType()/] [if(t.value.oclIsUndefined()._not())][t.value.name/][/if][/for][/if])[if(type.pointer.oclIsUndefined()._not())][type.pointer/][/if][elselet struct : Structure = type]
-{[for(type : EObject | struct.types)separator(', ')][type.extractType()/][/for]}[if(struct.pointer.oclIsUndefined()._not())][struct.pointer/][/if][elselet type : Array = type]
-['['/][if(type.length.oclIsUndefined()._not())][type.length/] x [extractType(type.type)/][/if][']'/][if(type.pointer.oclIsUndefined()._not())][type.pointer/][/if][elselet type : Vector = type]
-<[type.length/] x [extractType(type.type.oclAsType(EObject))/]>;[/let]
-[/template]
-
-[template extractValue(v : Value)]
-[let value : AddressUse = v]
-[value.address.name/][elselet value : PrimitiveValue = v]
-[value.value/][elselet value : IntegerConstant = v]
-[value.value/][elselet value : NestedGetElementPtr = v]
-getelementptr [value.aggregate.displayParameter()/][for(index : Parameter | value.indices)], [index.displayParameter()/][/for][elselet value : NestedCast = v]
-[value.operation/]([value.from.extractType()/] [value.value.extractValue()/] to [value.to.extractType()/])[/let]
 [/template]
