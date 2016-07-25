@@ -138,11 +138,6 @@ endif
 
 [template public generateCondition(t : Transition, genData: GeneratorData)][/template]
 
-
-[query public getTransitionGuard(t : Transition, genData: GeneratorData) : ConstraintMapping = 
-genData.constraints->any(cm | cm.transition = t) 
-/]
-
 [query public genCondition(t : Transition, genData: GeneratorData) : String = 
 if 'true'.equalsIgnoreCase(getTransitionGuard(t, genData).condition) then
 	'' 

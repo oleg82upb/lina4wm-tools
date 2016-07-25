@@ -54,9 +54,12 @@ genData.cfgs->iterate(cfg : ControlFlowDiagram; allLocalAndParameterVariables: S
 /]
 
 [query public getAllReturnVariables(genData: GeneratorData) : Sequence(Variable) = 
-getAllLocalAndParameterVariables(genData)->select(newName.equalsIgnoreCase('returnvalue'))
+genData.cfgs->iterate(cfg : ControlFlowDiagram; allReturnVariables: Sequence(Variable) = Sequence{} | if not cfg.returnVariable.oclIsUndefined() then allReturnVariables->append(cfg.returnVariable) else allReturnVariables endif)
 /]
 
+[query public getVariableFromLocalAndParameterVariables(address: Address, t: Transition, genData: GeneratorData) : Variable = 
+getAllLocalAndParameterVariables(genData)->any(v | v.originalAddresses->select(adr | adr = address)->notEmpty())
+/]
 
 
 [template public basis(genData : GeneratorData)]
@@ -105,7 +108,7 @@ endif
 endif
 /]
 
-[query public addressToString(address: Address, genData: GeneratorData) : String = getcorrespondingAddressMapping(address, genData, null).name/]
+[query public addressToString(address: Address, t : Transition, genData: GeneratorData) : String = getVariableForAddress(address, t, genData).newName/]
 
 [query public possiblyZeroBeforeMinus(s : EInt) : String = if (s < 0) then '(0 - '+s.abs()+')' else s endif /]
 

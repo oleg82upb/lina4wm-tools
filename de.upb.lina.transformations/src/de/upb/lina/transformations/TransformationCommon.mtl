@@ -70,3 +70,7 @@ endif
 endif
 endif
  /]
+
+[query public getTransitionGuard(t : Transition, genData: GeneratorData) : ConstraintMapping = 
+genData.constraints->any(cm | cm.transition = t) 
+/]
