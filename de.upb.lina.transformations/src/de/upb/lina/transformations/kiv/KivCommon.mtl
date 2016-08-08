@@ -49,8 +49,8 @@ let localAndParameterVariables: Sequence(Variable) = cfg.localVariables->asSeque
 localAndParameterVariables->union(cfg.parameterVariables->asSequence())
 /]
 
-[query public getAllLocalAndParameterVariables(genData: GeneratorData) : Sequence(Variable) = 
-genData.cfgs->iterate(cfg : ControlFlowDiagram; allLocalAndParameterVariables: Sequence(Variable) = Sequence{} | allLocalAndParameterVariables->union(getLocalAndParameterVariables(cfg))) 
+[query public getAllLocalAndParameterVariables(genData: GeneratorData) : OrderedSet(Variable) = 
+genData.cfgs->iterate(cfg : ControlFlowDiagram; allLocalAndParameterVariables: OrderedSet(Variable) = OrderedSet{} | allLocalAndParameterVariables->union(getLocalAndParameterVariables(cfg)->asSet())->asOrderedSet())->sortedBy(newName)
 /]
 
 [query public getAllReturnVariables(genData: GeneratorData) : Sequence(Variable) = 

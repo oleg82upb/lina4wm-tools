@@ -67,7 +67,7 @@ enrich 	[basis(genData)/]ref-memory,
 	used for : s, ls;
 
 	[for (cfg : ControlFlowDiagram | genData.cfgs)] 
-;; 	[generateCfgLabel(genData, cfg)/] reflects function [cfg.name/]
+;; 	[generateCfgLabel(genData, cfg)/] reflects function [cfg.functionDefinition.address.name/]
 	[generateCfgLabel(genData, cfg)/]ini :
 	⊦ INVOP([generateCfgLabel(genData, cfg)/]ini)(inp, mem, ls, mem', ls') ↔ ls .pc = N [if(input(genData))][let params : OrderedSet(AddressMapping) = genData.getFilteredAddresses('func-params:'+cfg.name)->select(name.equalsIgnoreCase('returnvalue')._not())][if(params->size()>0)]∧ [for(am : AddressMapping | params->select(type.equalsIgnoreCase(genData.basis())))][am.type/][/for][for(am : AddressMapping | params->select(type.equalsIgnoreCase('ref')))][am.type/][/for]?(inp) [/if][/let][/if]∧ ls' = ls .pc:= [generateStartPC(genData, cfg)/] [generateFunctionParameter(cfg, genData)/]∧ mem' = mem; 
 	used for : s, ls;
@@ -97,7 +97,7 @@ end enrich
 data specification
 	using [basis(genData)/]ref, PC, PID
 	Localstate :=mkls( . .pc : PC; . .pid : PID;
-					[for(variable: Variable | getAllLocalAndParameterVariables(genData)->select(newName.equalsIgnoreCase('returnvalue')._not()))]
+					[for(variable: Variable | getAllLocalAndParameterVariables(genData)->select(not newName.equalsIgnoreCase('returnvalue')))]
 					. .[variable.newName/] : [variable.type/];
 					[/for]);
 	variables
@@ -127,7 +127,7 @@ end specification
 [template private generateGlobalConstants(genData : GeneratorData)]
 [if(genData.globalVariables->size() > 0)]
 constants
-[for(variable : Variable| genData.globalVariables)]
+[for(variable : Variable | genData.globalVariables)]
 	[variable.newName/] : [variable.type/];
 [/for][/if]
 [/template]
@@ -167,9 +167,9 @@ ls' = ls .pc:= [generateNextPC(genData, t)/] .[t.instruction.oclAsType(Load).res
 [for (avp: AddressValuePair | t.source.buffer.addressValuePairs)]
 [for(parameter : Parameter | avp.values)]
 [let v : String = valueToString(parameter.value, t,genData)]
-[let am : AddressMapping = getcorrespondingAddressMapping(t.instruction.oclAsType(Load).result, genData, null)]
-[if (parameter.value.oclIsKindOf(IntegerConstant))][let intParam : String = possiblyZeroBeforeMinus(parameter.value.oclAsType(IntegerConstant).value).toString()][if(intParam.equalsIgnoreCase(v))][possiblyCast(parameter.value, am.type, t, genData)/][/if][/let][else]
-[if(t.assignmentExpression.equalsIgnoreCase(v))][possiblyCast(parameter.value, am.type, t, genData)/][/if][/if][/let][/let][/for][/for]
+[let variable : Variable = getVariableForAddress(t.instruction.oclAsType(Load).result, t, genData)]
+[if (parameter.value.oclIsKindOf(IntegerConstant))][let intParam : String = possiblyZeroBeforeMinus(parameter.value.oclAsType(IntegerConstant).value).toString()][if(intParam.equalsIgnoreCase(v))][possiblyCast(parameter.value, variable.type, t, genData)/][/if][/let][else]
+[if(t.assignmentExpression.equalsIgnoreCase(v))][possiblyCast(parameter.value, variable.type, t, genData)/][/if][/if][/let][/let][/for][/for]
 [/template]
 
 [comment === Return ====/]
@@ -185,8 +185,7 @@ ls' = ls .pc:= [generateNextPC(genData, t)/] .[t.instruction.oclAsType(Load).res
 [/template]
 
 [template private genPhiInstruction(t : Transition, genData : GeneratorData)]
-[for(map : PhiMapping| genData.phiMappings)][if(map.transition = t)][for(phi : Phi | map.phi)] .[phi.result.addressToString(t, genData)/]:= [for(case : PhiCase|phi.cases)][if(case.label.replace('%', '').equalsIgnoreCase(map.blockLabelToUse))][for (am: AddressMapping | genData.addressMappings)][for (a: Address | am.adresses)]
-[if (phi.result = a)][if(am.type.equalsIgnoreCase('ref'))][castToRef(case.value, t, genData)/][else][possiblyAddLS(case.value, t, genData)/][valueToString(case.value,t,genData)/][/if][/if][/for][/for][/if][/for][/for][/if][/for]
+[for(phi : PhiAssignment | t.phiAssignments)] .[phi.variable.newName/]:= [if(phi.variable.type.equalsIgnoreCase('ref'))][castToRef(phi.value, t, genData)/][else][possiblyAddLS(phi.value, t, genData)/][transformBooleanToNumber(valueToString(phi.value,t,genData))/][/if][/for]
 [/template]
 
 [template private genLsPart(e : Instruction, t: Transition, genData : GeneratorData)]
@@ -200,9 +199,7 @@ ls' = ls .pc:= [generateNextPC(genData, t)/] .[t.instruction.oclAsType(Load).res
 
 [comment ====== Load ======/]
 [template private genLsPart(e : Load, t : Transition, genData : GeneratorData)]
- .[e.result.addressToString(t, genData)/]:= mem['['/][e.address.value.castFromRef(t, genData)/][']'/][for (am1: AddressMapping | genData.addressMappings)]
-[for (a: Address | am1.adresses)]
-[if (e.result = a)][if(am1.type.equalsIgnoreCase('ref')._not())] .v[/if][/if][/for][/for]
+ .[e.result.addressToString(t, genData)/]:= mem['['/][e.address.value.castFromRef(t, genData)/][']'/][if(not getVariableForAddress(e.result, t, genData).type.equalsIgnoreCase('ref'))] .v[/if]
 [/template]
 
 [comment ====== CompareInt ======/]
@@ -298,7 +295,7 @@ unsupported operation
 [query private possiblyCastToRef(s : String, address : Address, t : Transition, genData : GeneratorData) : String =
 if (getVariableForAddress(address, t, genData).type.equalsIgnoreCase('ref')) then '⌜'+s+'⌝' else s endif/]
 
-[query public valueToString(v : PrimitiveValue, t: Transition, genData: GeneratorData): String = '' + v.value.transformBooleanToNumber() /]
+[query public valueToString(v : PrimitiveValue, t: Transition, genData: GeneratorData): String = '' + transformBooleanToNumber(v.value) /]
 
 [query public valueToString(v : IntegerConstant, t: Transition, genData: GeneratorData) : String = '' + v.getValueFromConstant() /]
 
