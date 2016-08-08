@@ -30,8 +30,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="oldToNewCfgName" upperBound="-1"
         eType="#//OldToNewCfgNameMapping" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="globalVariables" upperBound="-1"
-        eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//Variable"
-        containment="true"/>
+        eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//Variable"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="allVariables" upperBound="-1"
         eType="ecore:EClass ../../de.upb.lina.cfg/model/ControlFlow.ecore#//Variable"
         containment="true"/>

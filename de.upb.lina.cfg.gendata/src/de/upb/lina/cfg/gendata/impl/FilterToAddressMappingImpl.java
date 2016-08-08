@@ -37,256 +37,250 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  */
 public class FilterToAddressMappingImpl extends MinimalEObjectImpl.Container implements BasicEMap.Entry<String,EList<AddressMapping>> {
 	/**
-	 * The default value of the '{@link #getTypedKey() <em>Key</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    * The default value of the '{@link #getTypedKey() <em>Key</em>}' attribute.
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTypedKey()
-	 * @generated
-	 * @ordered
-	 */
+    * @see #getTypedKey()
+    * @generated
+    * @ordered
+    */
 	protected static final String KEY_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getTypedKey() <em>Key</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getTypedKey() <em>Key</em>}' attribute.
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTypedKey()
-	 * @generated
-	 * @ordered
-	 */
+    * @see #getTypedKey()
+    * @generated
+    * @ordered
+    */
 	protected String key = KEY_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}' reference list.
-	 * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getTypedValue() <em>Value</em>}' reference list.
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTypedValue()
-	 * @generated
-	 * @ordered
-	 */
+    * @see #getTypedValue()
+    * @generated
+    * @ordered
+    */
 	protected EList<AddressMapping> value;
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	protected FilterToAddressMappingImpl() {
-		super();
-	}
+      super();
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	protected EClass eStaticClass() {
-		return GendataPackage.Literals.FILTER_TO_ADDRESS_MAPPING;
-	}
+      return GendataPackage.Literals.FILTER_TO_ADDRESS_MAPPING;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public String getTypedKey() {
-		return key;
-	}
+      return key;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public void setTypedKey(String newKey) {
-		String oldKey = key;
-		key = newKey;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.FILTER_TO_ADDRESS_MAPPING__KEY, oldKey, key));
-	}
+      String oldKey = key;
+      key = newKey;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.FILTER_TO_ADDRESS_MAPPING__KEY, oldKey, key));
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public EList<AddressMapping> getTypedValue() {
-		if (value == null)
-		{
-			value = new EObjectResolvingEList<AddressMapping>(AddressMapping.class, this, GendataPackage.FILTER_TO_ADDRESS_MAPPING__VALUE);
-		}
-		return value;
-	}
+      if (value == null) {
+         value = new EObjectResolvingEList<AddressMapping>(AddressMapping.class, this, GendataPackage.FILTER_TO_ADDRESS_MAPPING__VALUE);
+      }
+      return value;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
-			case GendataPackage.FILTER_TO_ADDRESS_MAPPING__KEY:
-				return getTypedKey();
-			case GendataPackage.FILTER_TO_ADDRESS_MAPPING__VALUE:
-				return getTypedValue();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+      switch (featureID) {
+         case GendataPackage.FILTER_TO_ADDRESS_MAPPING__KEY:
+            return getTypedKey();
+         case GendataPackage.FILTER_TO_ADDRESS_MAPPING__VALUE:
+            return getTypedValue();
+      }
+      return super.eGet(featureID, resolve, coreType);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
-			case GendataPackage.FILTER_TO_ADDRESS_MAPPING__KEY:
-				setTypedKey((String)newValue);
-				return;
-			case GendataPackage.FILTER_TO_ADDRESS_MAPPING__VALUE:
-				getTypedValue().clear();
-				getTypedValue().addAll((Collection<? extends AddressMapping>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+      switch (featureID) {
+         case GendataPackage.FILTER_TO_ADDRESS_MAPPING__KEY:
+            setTypedKey((String)newValue);
+            return;
+         case GendataPackage.FILTER_TO_ADDRESS_MAPPING__VALUE:
+            getTypedValue().clear();
+            getTypedValue().addAll((Collection<? extends AddressMapping>)newValue);
+            return;
+      }
+      super.eSet(featureID, newValue);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
-			case GendataPackage.FILTER_TO_ADDRESS_MAPPING__KEY:
-				setTypedKey(KEY_EDEFAULT);
-				return;
-			case GendataPackage.FILTER_TO_ADDRESS_MAPPING__VALUE:
-				getTypedValue().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+      switch (featureID) {
+         case GendataPackage.FILTER_TO_ADDRESS_MAPPING__KEY:
+            setTypedKey(KEY_EDEFAULT);
+            return;
+         case GendataPackage.FILTER_TO_ADDRESS_MAPPING__VALUE:
+            getTypedValue().clear();
+            return;
+      }
+      super.eUnset(featureID);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
-			case GendataPackage.FILTER_TO_ADDRESS_MAPPING__KEY:
-				return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
-			case GendataPackage.FILTER_TO_ADDRESS_MAPPING__VALUE:
-				return value != null && !value.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+      switch (featureID) {
+         case GendataPackage.FILTER_TO_ADDRESS_MAPPING__KEY:
+            return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
+         case GendataPackage.FILTER_TO_ADDRESS_MAPPING__VALUE:
+            return value != null && !value.isEmpty();
+      }
+      return super.eIsSet(featureID);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+      if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (key: ");
-		result.append(key);
-		result.append(')');
-		return result.toString();
-	}
+      StringBuffer result = new StringBuffer(super.toString());
+      result.append(" (key: ");
+      result.append(key);
+      result.append(')');
+      return result.toString();
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	protected int hash = -1;
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public int getHash() {
-		if (hash == -1)
-		{
-			Object theKey = getKey();
-			hash = (theKey == null ? 0 : theKey.hashCode());
-		}
-		return hash;
-	}
+      if (hash == -1) {
+         Object theKey = getKey();
+         hash = (theKey == null ? 0 : theKey.hashCode());
+      }
+      return hash;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public void setHash(int hash) {
-		this.hash = hash;
-	}
+      this.hash = hash;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public String getKey() {
-		return getTypedKey();
-	}
+      return getTypedKey();
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public void setKey(String key) {
-		setTypedKey(key);
-	}
+      setTypedKey(key);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public EList<AddressMapping> getValue() {
-		return getTypedValue();
-	}
+      return getTypedValue();
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public EList<AddressMapping> setValue(EList<AddressMapping> value) {
-		EList<AddressMapping> oldValue = getValue();
-		getTypedValue().clear();
-		getTypedValue().addAll(value);
-		return oldValue;
-	}
+      EList<AddressMapping> oldValue = getValue();
+      getTypedValue().clear();
+      getTypedValue().addAll(value);
+      return oldValue;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@SuppressWarnings("unchecked")
 	public EMap<String, EList<AddressMapping>> getEMap() {
-		EObject container = eContainer();
-		return container == null ? null : (EMap<String, EList<AddressMapping>>)container.eGet(eContainmentFeature());
-	}
+      EObject container = eContainer();
+      return container == null ? null : (EMap<String, EList<AddressMapping>>)container.eGet(eContainmentFeature());
+   }
 
 } //FilterToAddressMappingImpl

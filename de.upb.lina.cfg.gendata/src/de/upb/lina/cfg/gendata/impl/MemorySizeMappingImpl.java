@@ -33,409 +33,399 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public class MemorySizeMappingImpl extends MinimalEObjectImpl.Container implements MemorySizeMapping {
 	/**
-	 * The cached value of the '{@link #getInstruction() <em>Instruction</em>}' reference.
-	 * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getInstruction() <em>Instruction</em>}' reference.
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInstruction()
-	 * @generated
-	 * @ordered
-	 */
+    * @see #getInstruction()
+    * @generated
+    * @ordered
+    */
 	protected EObject instruction;
 
 	/**
-	 * The default value of the '{@link #getOffset() <em>Offset</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    * The default value of the '{@link #getOffset() <em>Offset</em>}' attribute.
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOffset()
-	 * @generated
-	 * @ordered
-	 */
+    * @see #getOffset()
+    * @generated
+    * @ordered
+    */
 	protected static final String OFFSET_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getOffset() <em>Offset</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getOffset() <em>Offset</em>}' attribute.
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOffset()
-	 * @generated
-	 * @ordered
-	 */
+    * @see #getOffset()
+    * @generated
+    * @ordered
+    */
 	protected String offset = OFFSET_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getCompleteTypeSize() <em>Complete Type Size</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    * The default value of the '{@link #getCompleteTypeSize() <em>Complete Type Size</em>}' attribute.
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCompleteTypeSize()
-	 * @generated
-	 * @ordered
-	 */
+    * @see #getCompleteTypeSize()
+    * @generated
+    * @ordered
+    */
 	protected static final int COMPLETE_TYPE_SIZE_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getCompleteTypeSize() <em>Complete Type Size</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getCompleteTypeSize() <em>Complete Type Size</em>}' attribute.
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCompleteTypeSize()
-	 * @generated
-	 * @ordered
-	 */
+    * @see #getCompleteTypeSize()
+    * @generated
+    * @ordered
+    */
 	protected int completeTypeSize = COMPLETE_TYPE_SIZE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getWarning() <em>Warning</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    * The default value of the '{@link #getWarning() <em>Warning</em>}' attribute.
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getWarning()
-	 * @generated
-	 * @ordered
-	 */
+    * @see #getWarning()
+    * @generated
+    * @ordered
+    */
 	protected static final String WARNING_EDEFAULT = "";
 
 	/**
-	 * The cached value of the '{@link #getWarning() <em>Warning</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getWarning() <em>Warning</em>}' attribute.
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getWarning()
-	 * @generated
-	 * @ordered
-	 */
+    * @see #getWarning()
+    * @generated
+    * @ordered
+    */
 	protected String warning = WARNING_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	protected MemorySizeMappingImpl() {
-		super();
-	}
+      super();
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	protected EClass eStaticClass() {
-		return GendataPackage.Literals.MEMORY_SIZE_MAPPING;
-	}
+      return GendataPackage.Literals.MEMORY_SIZE_MAPPING;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public EObject getInstruction() {
-		if (instruction != null && instruction.eIsProxy())
-		{
-			InternalEObject oldInstruction = (InternalEObject)instruction;
-			instruction = eResolveProxy(oldInstruction);
-			if (instruction != oldInstruction)
-			{
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION, oldInstruction, instruction));
-			}
-		}
-		return instruction;
-	}
+      if (instruction != null && instruction.eIsProxy()) {
+         InternalEObject oldInstruction = (InternalEObject)instruction;
+         instruction = eResolveProxy(oldInstruction);
+         if (instruction != oldInstruction) {
+            if (eNotificationRequired())
+               eNotify(new ENotificationImpl(this, Notification.RESOLVE, GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION, oldInstruction, instruction));
+         }
+      }
+      return instruction;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public EObject basicGetInstruction() {
-		return instruction;
-	}
+      return instruction;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public void setInstruction(EObject newInstruction) {
-		EObject oldInstruction = instruction;
-		instruction = newInstruction;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION, oldInstruction, instruction));
-	}
+      EObject oldInstruction = instruction;
+      instruction = newInstruction;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION, oldInstruction, instruction));
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public String getOffset() {
-		return offset;
-	}
+      return offset;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public void setOffset(String newOffset)
 	{
-		String oldOffset = offset;
-		offset = newOffset;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__OFFSET, oldOffset, offset));
-	}
+      String oldOffset = offset;
+      offset = newOffset;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__OFFSET, oldOffset, offset));
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public GeneratorData getGeneratorData() {
-		if (eContainerFeatureID() != GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA) return null;
-		return (GeneratorData)eInternalContainer();
-	}
+      if (eContainerFeatureID() != GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA) return null;
+      return (GeneratorData)eInternalContainer();
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public NotificationChain basicSetGeneratorData(GeneratorData newGeneratorData, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newGeneratorData, GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA, msgs);
-		return msgs;
-	}
+      msgs = eBasicSetContainer((InternalEObject)newGeneratorData, GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA, msgs);
+      return msgs;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public void setGeneratorData(GeneratorData newGeneratorData) {
-		if (newGeneratorData != eInternalContainer() || (eContainerFeatureID() != GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA && newGeneratorData != null))
-		{
-			if (EcoreUtil.isAncestor(this, newGeneratorData))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newGeneratorData != null)
-				msgs = ((InternalEObject)newGeneratorData).eInverseAdd(this, GendataPackage.GENERATOR_DATA__MEMORY_SIZE_MAPPINGS, GeneratorData.class, msgs);
-			msgs = basicSetGeneratorData(newGeneratorData, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA, newGeneratorData, newGeneratorData));
-	}
+      if (newGeneratorData != eInternalContainer() || (eContainerFeatureID() != GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA && newGeneratorData != null)) {
+         if (EcoreUtil.isAncestor(this, newGeneratorData))
+            throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+         NotificationChain msgs = null;
+         if (eInternalContainer() != null)
+            msgs = eBasicRemoveFromContainer(msgs);
+         if (newGeneratorData != null)
+            msgs = ((InternalEObject)newGeneratorData).eInverseAdd(this, GendataPackage.GENERATOR_DATA__MEMORY_SIZE_MAPPINGS, GeneratorData.class, msgs);
+         msgs = basicSetGeneratorData(newGeneratorData, msgs);
+         if (msgs != null) msgs.dispatch();
+      }
+      else if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA, newGeneratorData, newGeneratorData));
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public int getCompleteTypeSize() {
-		return completeTypeSize;
-	}
+      return completeTypeSize;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public void setCompleteTypeSize(int newCompleteTypeSize) {
-		int oldCompleteTypeSize = completeTypeSize;
-		completeTypeSize = newCompleteTypeSize;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE, oldCompleteTypeSize, completeTypeSize));
-	}
+      int oldCompleteTypeSize = completeTypeSize;
+      completeTypeSize = newCompleteTypeSize;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE, oldCompleteTypeSize, completeTypeSize));
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public String getWarning() {
-		return warning;
-	}
+      return warning;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public void setWarning(String newWarning) {
-		String oldWarning = warning;
-		warning = newWarning;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__WARNING, oldWarning, warning));
-	}
+      String oldWarning = warning;
+      warning = newWarning;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.MEMORY_SIZE_MAPPING__WARNING, oldWarning, warning));
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
-			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetGeneratorData((GeneratorData)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
+      switch (featureID) {
+         case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
+            if (eInternalContainer() != null)
+               msgs = eBasicRemoveFromContainer(msgs);
+            return basicSetGeneratorData((GeneratorData)otherEnd, msgs);
+      }
+      return super.eInverseAdd(otherEnd, featureID, msgs);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
-			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
-				return basicSetGeneratorData(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+      switch (featureID) {
+         case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
+            return basicSetGeneratorData(null, msgs);
+      }
+      return super.eInverseRemove(otherEnd, featureID, msgs);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID())
-		{
-			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
-				return eInternalContainer().eInverseRemove(this, GendataPackage.GENERATOR_DATA__MEMORY_SIZE_MAPPINGS, GeneratorData.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
-	}
+      switch (eContainerFeatureID()) {
+         case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
+            return eInternalContainer().eInverseRemove(this, GendataPackage.GENERATOR_DATA__MEMORY_SIZE_MAPPINGS, GeneratorData.class, msgs);
+      }
+      return super.eBasicRemoveFromContainerFeature(msgs);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
-			case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
-				if (resolve) return getInstruction();
-				return basicGetInstruction();
-			case GendataPackage.MEMORY_SIZE_MAPPING__OFFSET:
-				return getOffset();
-			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
-				return getGeneratorData();
-			case GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE:
-				return getCompleteTypeSize();
-			case GendataPackage.MEMORY_SIZE_MAPPING__WARNING:
-				return getWarning();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+      switch (featureID) {
+         case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
+            if (resolve) return getInstruction();
+            return basicGetInstruction();
+         case GendataPackage.MEMORY_SIZE_MAPPING__OFFSET:
+            return getOffset();
+         case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
+            return getGeneratorData();
+         case GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE:
+            return getCompleteTypeSize();
+         case GendataPackage.MEMORY_SIZE_MAPPING__WARNING:
+            return getWarning();
+      }
+      return super.eGet(featureID, resolve, coreType);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
-			case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
-				setInstruction((EObject)newValue);
-				return;
-			case GendataPackage.MEMORY_SIZE_MAPPING__OFFSET:
-				setOffset((String)newValue);
-				return;
-			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
-				setGeneratorData((GeneratorData)newValue);
-				return;
-			case GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE:
-				setCompleteTypeSize((Integer)newValue);
-				return;
-			case GendataPackage.MEMORY_SIZE_MAPPING__WARNING:
-				setWarning((String)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+      switch (featureID) {
+         case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
+            setInstruction((EObject)newValue);
+            return;
+         case GendataPackage.MEMORY_SIZE_MAPPING__OFFSET:
+            setOffset((String)newValue);
+            return;
+         case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
+            setGeneratorData((GeneratorData)newValue);
+            return;
+         case GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE:
+            setCompleteTypeSize((Integer)newValue);
+            return;
+         case GendataPackage.MEMORY_SIZE_MAPPING__WARNING:
+            setWarning((String)newValue);
+            return;
+      }
+      super.eSet(featureID, newValue);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
-			case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
-				setInstruction((EObject)null);
-				return;
-			case GendataPackage.MEMORY_SIZE_MAPPING__OFFSET:
-				setOffset(OFFSET_EDEFAULT);
-				return;
-			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
-				setGeneratorData((GeneratorData)null);
-				return;
-			case GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE:
-				setCompleteTypeSize(COMPLETE_TYPE_SIZE_EDEFAULT);
-				return;
-			case GendataPackage.MEMORY_SIZE_MAPPING__WARNING:
-				setWarning(WARNING_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+      switch (featureID) {
+         case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
+            setInstruction((EObject)null);
+            return;
+         case GendataPackage.MEMORY_SIZE_MAPPING__OFFSET:
+            setOffset(OFFSET_EDEFAULT);
+            return;
+         case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
+            setGeneratorData((GeneratorData)null);
+            return;
+         case GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE:
+            setCompleteTypeSize(COMPLETE_TYPE_SIZE_EDEFAULT);
+            return;
+         case GendataPackage.MEMORY_SIZE_MAPPING__WARNING:
+            setWarning(WARNING_EDEFAULT);
+            return;
+      }
+      super.eUnset(featureID);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
-			case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
-				return instruction != null;
-			case GendataPackage.MEMORY_SIZE_MAPPING__OFFSET:
-				return OFFSET_EDEFAULT == null ? offset != null : !OFFSET_EDEFAULT.equals(offset);
-			case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
-				return getGeneratorData() != null;
-			case GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE:
-				return completeTypeSize != COMPLETE_TYPE_SIZE_EDEFAULT;
-			case GendataPackage.MEMORY_SIZE_MAPPING__WARNING:
-				return WARNING_EDEFAULT == null ? warning != null : !WARNING_EDEFAULT.equals(warning);
-		}
-		return super.eIsSet(featureID);
-	}
+      switch (featureID) {
+         case GendataPackage.MEMORY_SIZE_MAPPING__INSTRUCTION:
+            return instruction != null;
+         case GendataPackage.MEMORY_SIZE_MAPPING__OFFSET:
+            return OFFSET_EDEFAULT == null ? offset != null : !OFFSET_EDEFAULT.equals(offset);
+         case GendataPackage.MEMORY_SIZE_MAPPING__GENERATOR_DATA:
+            return getGeneratorData() != null;
+         case GendataPackage.MEMORY_SIZE_MAPPING__COMPLETE_TYPE_SIZE:
+            return completeTypeSize != COMPLETE_TYPE_SIZE_EDEFAULT;
+         case GendataPackage.MEMORY_SIZE_MAPPING__WARNING:
+            return WARNING_EDEFAULT == null ? warning != null : !WARNING_EDEFAULT.equals(warning);
+      }
+      return super.eIsSet(featureID);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+      if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (offset: ");
-		result.append(offset);
-		result.append(", completeTypeSize: ");
-		result.append(completeTypeSize);
-		result.append(", warning: ");
-		result.append(warning);
-		result.append(')');
-		return result.toString();
-	}
+      StringBuffer result = new StringBuffer(super.toString());
+      result.append(" (offset: ");
+      result.append(offset);
+      result.append(", completeTypeSize: ");
+      result.append(completeTypeSize);
+      result.append(", warning: ");
+      result.append(warning);
+      result.append(')');
+      return result.toString();
+   }
 
 } //MemorySizeMappingImpl

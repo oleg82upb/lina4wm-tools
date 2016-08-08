@@ -33,234 +33,224 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public class LocationLabelImpl extends NamedElementImpl implements LocationLabel {
 	/**
-	 * The cached value of the '{@link #getControlFlowLocation() <em>Control Flow Location</em>}' reference.
-	 * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getControlFlowLocation() <em>Control Flow Location</em>}' reference.
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getControlFlowLocation()
-	 * @generated
-	 * @ordered
-	 */
+    * @see #getControlFlowLocation()
+    * @generated
+    * @ordered
+    */
 	protected ControlFlowLocation controlFlowLocation;
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	protected LocationLabelImpl() {
-		super();
-	}
+      super();
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	protected EClass eStaticClass() {
-		return GendataPackage.Literals.LOCATION_LABEL;
-	}
+      return GendataPackage.Literals.LOCATION_LABEL;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public ControlFlowLocation getControlFlowLocation() {
-		if (controlFlowLocation != null && controlFlowLocation.eIsProxy())
-		{
-			InternalEObject oldControlFlowLocation = (InternalEObject)controlFlowLocation;
-			controlFlowLocation = (ControlFlowLocation)eResolveProxy(oldControlFlowLocation);
-			if (controlFlowLocation != oldControlFlowLocation)
-			{
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GendataPackage.LOCATION_LABEL__CONTROL_FLOW_LOCATION, oldControlFlowLocation, controlFlowLocation));
-			}
-		}
-		return controlFlowLocation;
-	}
+      if (controlFlowLocation != null && controlFlowLocation.eIsProxy()) {
+         InternalEObject oldControlFlowLocation = (InternalEObject)controlFlowLocation;
+         controlFlowLocation = (ControlFlowLocation)eResolveProxy(oldControlFlowLocation);
+         if (controlFlowLocation != oldControlFlowLocation) {
+            if (eNotificationRequired())
+               eNotify(new ENotificationImpl(this, Notification.RESOLVE, GendataPackage.LOCATION_LABEL__CONTROL_FLOW_LOCATION, oldControlFlowLocation, controlFlowLocation));
+         }
+      }
+      return controlFlowLocation;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public ControlFlowLocation basicGetControlFlowLocation() {
-		return controlFlowLocation;
-	}
+      return controlFlowLocation;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public void setControlFlowLocation(ControlFlowLocation newControlFlowLocation) {
-		ControlFlowLocation oldControlFlowLocation = controlFlowLocation;
-		controlFlowLocation = newControlFlowLocation;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.LOCATION_LABEL__CONTROL_FLOW_LOCATION, oldControlFlowLocation, controlFlowLocation));
-	}
+      ControlFlowLocation oldControlFlowLocation = controlFlowLocation;
+      controlFlowLocation = newControlFlowLocation;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.LOCATION_LABEL__CONTROL_FLOW_LOCATION, oldControlFlowLocation, controlFlowLocation));
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public GeneratorData getGeneratorData() {
-		if (eContainerFeatureID() != GendataPackage.LOCATION_LABEL__GENERATOR_DATA) return null;
-		return (GeneratorData)eInternalContainer();
-	}
+      if (eContainerFeatureID() != GendataPackage.LOCATION_LABEL__GENERATOR_DATA) return null;
+      return (GeneratorData)eInternalContainer();
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public NotificationChain basicSetGeneratorData(GeneratorData newGeneratorData, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newGeneratorData, GendataPackage.LOCATION_LABEL__GENERATOR_DATA, msgs);
-		return msgs;
-	}
+      msgs = eBasicSetContainer((InternalEObject)newGeneratorData, GendataPackage.LOCATION_LABEL__GENERATOR_DATA, msgs);
+      return msgs;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public void setGeneratorData(GeneratorData newGeneratorData) {
-		if (newGeneratorData != eInternalContainer() || (eContainerFeatureID() != GendataPackage.LOCATION_LABEL__GENERATOR_DATA && newGeneratorData != null))
-		{
-			if (EcoreUtil.isAncestor(this, newGeneratorData))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newGeneratorData != null)
-				msgs = ((InternalEObject)newGeneratorData).eInverseAdd(this, GendataPackage.GENERATOR_DATA__LOCATION_LABELS, GeneratorData.class, msgs);
-			msgs = basicSetGeneratorData(newGeneratorData, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.LOCATION_LABEL__GENERATOR_DATA, newGeneratorData, newGeneratorData));
-	}
+      if (newGeneratorData != eInternalContainer() || (eContainerFeatureID() != GendataPackage.LOCATION_LABEL__GENERATOR_DATA && newGeneratorData != null)) {
+         if (EcoreUtil.isAncestor(this, newGeneratorData))
+            throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+         NotificationChain msgs = null;
+         if (eInternalContainer() != null)
+            msgs = eBasicRemoveFromContainer(msgs);
+         if (newGeneratorData != null)
+            msgs = ((InternalEObject)newGeneratorData).eInverseAdd(this, GendataPackage.GENERATOR_DATA__LOCATION_LABELS, GeneratorData.class, msgs);
+         msgs = basicSetGeneratorData(newGeneratorData, msgs);
+         if (msgs != null) msgs.dispatch();
+      }
+      else if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, GendataPackage.LOCATION_LABEL__GENERATOR_DATA, newGeneratorData, newGeneratorData));
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
-			case GendataPackage.LOCATION_LABEL__GENERATOR_DATA:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetGeneratorData((GeneratorData)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
+      switch (featureID) {
+         case GendataPackage.LOCATION_LABEL__GENERATOR_DATA:
+            if (eInternalContainer() != null)
+               msgs = eBasicRemoveFromContainer(msgs);
+            return basicSetGeneratorData((GeneratorData)otherEnd, msgs);
+      }
+      return super.eInverseAdd(otherEnd, featureID, msgs);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
-			case GendataPackage.LOCATION_LABEL__GENERATOR_DATA:
-				return basicSetGeneratorData(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+      switch (featureID) {
+         case GendataPackage.LOCATION_LABEL__GENERATOR_DATA:
+            return basicSetGeneratorData(null, msgs);
+      }
+      return super.eInverseRemove(otherEnd, featureID, msgs);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID())
-		{
-			case GendataPackage.LOCATION_LABEL__GENERATOR_DATA:
-				return eInternalContainer().eInverseRemove(this, GendataPackage.GENERATOR_DATA__LOCATION_LABELS, GeneratorData.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
-	}
+      switch (eContainerFeatureID()) {
+         case GendataPackage.LOCATION_LABEL__GENERATOR_DATA:
+            return eInternalContainer().eInverseRemove(this, GendataPackage.GENERATOR_DATA__LOCATION_LABELS, GeneratorData.class, msgs);
+      }
+      return super.eBasicRemoveFromContainerFeature(msgs);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
-			case GendataPackage.LOCATION_LABEL__CONTROL_FLOW_LOCATION:
-				if (resolve) return getControlFlowLocation();
-				return basicGetControlFlowLocation();
-			case GendataPackage.LOCATION_LABEL__GENERATOR_DATA:
-				return getGeneratorData();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+      switch (featureID) {
+         case GendataPackage.LOCATION_LABEL__CONTROL_FLOW_LOCATION:
+            if (resolve) return getControlFlowLocation();
+            return basicGetControlFlowLocation();
+         case GendataPackage.LOCATION_LABEL__GENERATOR_DATA:
+            return getGeneratorData();
+      }
+      return super.eGet(featureID, resolve, coreType);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
-			case GendataPackage.LOCATION_LABEL__CONTROL_FLOW_LOCATION:
-				setControlFlowLocation((ControlFlowLocation)newValue);
-				return;
-			case GendataPackage.LOCATION_LABEL__GENERATOR_DATA:
-				setGeneratorData((GeneratorData)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+      switch (featureID) {
+         case GendataPackage.LOCATION_LABEL__CONTROL_FLOW_LOCATION:
+            setControlFlowLocation((ControlFlowLocation)newValue);
+            return;
+         case GendataPackage.LOCATION_LABEL__GENERATOR_DATA:
+            setGeneratorData((GeneratorData)newValue);
+            return;
+      }
+      super.eSet(featureID, newValue);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
-			case GendataPackage.LOCATION_LABEL__CONTROL_FLOW_LOCATION:
-				setControlFlowLocation((ControlFlowLocation)null);
-				return;
-			case GendataPackage.LOCATION_LABEL__GENERATOR_DATA:
-				setGeneratorData((GeneratorData)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+      switch (featureID) {
+         case GendataPackage.LOCATION_LABEL__CONTROL_FLOW_LOCATION:
+            setControlFlowLocation((ControlFlowLocation)null);
+            return;
+         case GendataPackage.LOCATION_LABEL__GENERATOR_DATA:
+            setGeneratorData((GeneratorData)null);
+            return;
+      }
+      super.eUnset(featureID);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
-			case GendataPackage.LOCATION_LABEL__CONTROL_FLOW_LOCATION:
-				return controlFlowLocation != null;
-			case GendataPackage.LOCATION_LABEL__GENERATOR_DATA:
-				return getGeneratorData() != null;
-		}
-		return super.eIsSet(featureID);
-	}
+      switch (featureID) {
+         case GendataPackage.LOCATION_LABEL__CONTROL_FLOW_LOCATION:
+            return controlFlowLocation != null;
+         case GendataPackage.LOCATION_LABEL__GENERATOR_DATA:
+            return getGeneratorData() != null;
+      }
+      return super.eIsSet(featureID);
+   }
 
 } //LocationLabelImpl
