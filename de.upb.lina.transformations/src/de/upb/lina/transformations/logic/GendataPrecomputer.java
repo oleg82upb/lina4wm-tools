@@ -964,12 +964,12 @@ public class GendataPrecomputer {
 			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
 			
 			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getAddress().getValue(), Constants.KIV_BASIS_REF);
-			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getArgument().getValue(), null);
+         fetchOrCreateVariableForValueAndAttachToTransition(t, op.getArgument().getValue(), null);
 		} else if (i instanceof Load)
 		{
 			Load op = (Load) i;
-			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), null, cfg);
-			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getAddress().getValue(), null);
+         createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), this.kivBaseType, cfg);
+         fetchOrCreateVariableForValueAndAttachToTransition(t, op.getAddress().getValue(), Constants.KIV_BASIS_REF);
 
 		} else if (i instanceof Call)
 		{
@@ -1103,6 +1103,11 @@ public class GendataPrecomputer {
 		{
 			Branch op = (Branch) i;
 			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getCondition(), null);
+      } else if (i instanceof Store)
+      {
+         Store store = (Store) i;
+         fetchOrCreateVariableForValueAndAttachToTransition(t, store.getValue().getValue(), null);
+         fetchOrCreateVariableForValueAndAttachToTransition(t, store.getTargetAddress().getValue(), Constants.KIV_BASIS_REF);
 		}
 		
 		if(createdVariable != null)
