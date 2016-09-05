@@ -36,7 +36,10 @@ import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.nodemodel.INode;
 
 import de.upb.lina.cfg.controlflow.ControlFlowDiagram;
+import de.upb.lina.cfg.tools.CFGActivator;
 import de.upb.lina.cfg.tools.EMemoryModel;
+import de.upb.lina.cfg.tools.ResourceIOUtil;
+import de.upb.lina.cfg.tools.StringUtils;
 import de.upb.lina.cfg.tools.checks.LoadsInWriteDefChainPropertyChecker;
 import de.upb.lina.cfg.tools.checks.PropertyCheckerManager;
 import de.upb.lina.cfg.tools.checks.UnsupportedInstructionPropertyChecker;
@@ -61,11 +64,18 @@ import de.upb.llvm_parser.llvm.LLVM;
 public class CreateAllTransformationsCommandHandler extends AbstractHandler {
    private static final String[] KIV_BASES = { Constants.KIV_BASIS_INT, Constants.KIV_BASIS_NAT };
 
-   private IFile file = null;
+   private IFile userSelectedFile = null;
    private Shell shell = null;
    private IProgressMonitor monitor = null;
 
    private boolean userContinues = true;
+
+   private IPath originaStoreBufferGraphsPath;
+
+   // used during the transformation process
+   private EMemoryModel memoryModel;
+   private Map<String, String> defaultFunctionRenamingMap;
+   private List<ControlFlowDiagram> storeBufferGraphs;
 
 
    /**
@@ -110,10 +120,10 @@ public class CreateAllTransformationsCommandHandler extends AbstractHandler {
 
                   // Check if the current selected object is a file
                   if (element instanceof IFile) {
-                     file = (IFile) element;
+                     userSelectedFile = (IFile) element;
 
                      // save ast first
-                     LLVM ast = createAstFromLLVM(file);
+                     LLVM ast = createAstFromLLVM(userSelectedFile);
                      monitor.worked(1);
                      // check if everything worked out
                      if (ast == null) {
@@ -159,53 +169,128 @@ public class CreateAllTransformationsCommandHandler extends AbstractHandler {
     * Creates all transformations for the list of current cfgs. Note that all cfgs in the list need
     * to have the same memory model.
     * 
-    * @param cfgs list of cfgs to create transformations for
+    * @param storeBufferGraphs list of cfgs to create transformations for
     */
-   private void createTransformations(List<ControlFlowDiagram> cfgs) {
+   private void createTransformations(List<ControlFlowDiagram> storeBufferGraphs)
+   {
       // make sure we have something to transform
-      if (cfgs.isEmpty()) {
-         Activator.logError("Transformation could not be done as of missing control flow diagrams.", null);
+      if (storeBufferGraphs.isEmpty())
+      {
+         Activator.logError("Transformation could not be done as of missing store buffer graphs.", null);
          return;
       }
+      this.storeBufferGraphs = storeBufferGraphs;
 
-      int memoryModelId = cfgs.get(0).getMemoryModel();
-      EMemoryModel memoryModel = EMemoryModel.getMemoryModelById(memoryModelId);
-      TransformationOperation wmo = null;
+      storeStoreBufferGraphsToTemporaryFile();
 
-      // Create default function name map
-      Map<String, String> oldToNewCfgName = new HashMap<String, String>();
-      for (ControlFlowDiagram cfg : cfgs) {
-         oldToNewCfgName.put(cfg.getName(), cfg.getName().replaceAll("@_", "").replaceAll("@", ""));
-      }
+      createDefaultFunctionRenamingMap();
+      determineMemoryModelOfStoreBufferGraphs();
+
+      performKIVTransformations();
+      performPromelaTransformations();
+
+      deleteTemporaryStoreBufferGraphFile();
+   }
 
 
-      // Do kiv transformations
-      for (ETransformationType eTransformationType : ETransformationType.getKivTransformationTypes()) {
-         String transformationTypeName = eTransformationType.getIdentifier();
-         for (String kIVBasis : KIV_BASES) {
-            TransformationConfiguration config = new TransformationConfiguration(cfgs, kIVBasis, oldToNewCfgName, eTransformationType);
-            wmo = new TransformationOperation(createFolder(memoryModel, transformationTypeName + "_" + kIVBasis), "", "", config);
-            try {
-               wmo.run(new NullProgressMonitor());
-            } catch (InvocationTargetException | InterruptedException e) {
-               Activator.logError(e.getMessage(), e);
-            }
-         }
-
-      }
-
-      // Do promela transformations
+   /**
+    * Performs all possible promela transformations.
+    */
+   private void performPromelaTransformations()
+   {
       for (ETransformationType eTransformationType : ETransformationType.getPromelaTransformationTypes()) {
          String transformationTypeName = eTransformationType.getIdentifier();
-         TransformationConfiguration config = new TransformationConfiguration(cfgs, oldToNewCfgName, eTransformationType);
-         wmo = new TransformationOperation(createFolder(memoryModel, transformationTypeName),
-               transformationTypeName + "_" + file.getName(), ".pml", config);
+         TransformationConfiguration config = new TransformationConfiguration(this.storeBufferGraphs, defaultFunctionRenamingMap,
+               eTransformationType);
+         TransformationOperation wmo = new TransformationOperation(createFolder(memoryModel, transformationTypeName),
+               transformationTypeName + "_" + userSelectedFile.getName(), ".pml", config);
          try {
             wmo.run(new NullProgressMonitor());
          } catch (InvocationTargetException | InterruptedException e) {
             Activator.logError(e.getMessage(), e);
          }
+         this.storeBufferGraphs = ResourceIOUtil.loadStoreBufferGraphFile(originaStoreBufferGraphsPath.toPortableString());
+      }
+   }
 
+
+   /**
+    * Performs all possible KIV transformations.
+    */
+   private void performKIVTransformations()
+   {
+      for (ETransformationType eTransformationType : ETransformationType.getKivTransformationTypes()) {
+         String transformationTypeName = eTransformationType.getIdentifier();
+         for (String kIVBasis : KIV_BASES) {
+            TransformationConfiguration config = new TransformationConfiguration(this.storeBufferGraphs, kIVBasis,
+                  defaultFunctionRenamingMap,
+                  eTransformationType);
+            TransformationOperation wmo = new TransformationOperation(createFolder(memoryModel, transformationTypeName + "_" + kIVBasis),
+                  "", "", config);
+            try {
+               wmo.run(new NullProgressMonitor());
+            } catch (InvocationTargetException | InterruptedException e) {
+               Activator.logError(e.getMessage(), e);
+            }
+            this.storeBufferGraphs = ResourceIOUtil.loadStoreBufferGraphFile(originaStoreBufferGraphsPath.toPortableString());
+         }
+      }
+   }
+
+
+   /**
+    * Determines the memory model of the store buffer graphs. Note: It is assumed that all store
+    * buffer graphs have the same memory model.
+    */
+   private void determineMemoryModelOfStoreBufferGraphs()
+   {
+      int memoryModelId = storeBufferGraphs.get(0).getMemoryModel();
+      memoryModel = EMemoryModel.getMemoryModelById(memoryModelId);
+   }
+
+
+   /**
+    * Creates the default function renaming map. This is done by simply replacing all non-allowed
+    * characters with whitespace.
+    */
+   private void createDefaultFunctionRenamingMap()
+   {
+      defaultFunctionRenamingMap = new HashMap<String, String>();
+      for (ControlFlowDiagram cfg : storeBufferGraphs)
+      {
+         defaultFunctionRenamingMap.put(cfg.getName(), cfg.getName().replaceAll("@_", "").replaceAll("@", ""));
+      }
+   }
+
+
+   /**
+    * Store the store buffer graphs to a temporary file.
+    */
+   private void storeStoreBufferGraphsToTemporaryFile()
+   {
+      originaStoreBufferGraphsPath = userSelectedFile.getParent().getFullPath().append("temp_" + StringUtils.getCurrentTimeStamp() + ".cfg");
+      ResourceIOUtil.saveStoreBufferGraphsToDisk(originaStoreBufferGraphsPath.toPortableString(), storeBufferGraphs);
+   }
+
+
+   /**
+    * Deletes the current temporary store buffer graph file generated during the transformation
+    * process.
+    * 
+    */
+   private void deleteTemporaryStoreBufferGraphFile()
+   {
+      IResource originalStoreBufferGraphFile = ResourcesPlugin.getWorkspace().getRoot().findMember(originaStoreBufferGraphsPath);
+      if (originalStoreBufferGraphFile.exists())
+      {
+         try
+         {
+            originalStoreBufferGraphFile.delete(false, new NullProgressMonitor());
+         } catch (CoreException e)
+         {
+            CFGActivator.logError("Error while deleting the temporary store buffer graph file: " + originalStoreBufferGraphFile.toString(),
+                  e);
+         }
       }
    }
 
@@ -226,8 +311,8 @@ public class CreateAllTransformationsCommandHandler extends AbstractHandler {
             memoryModelName = memoryModel.getModelName();
          }
 
-         IPath p = file.getParent().getLocation().append(memoryModelName).append(subfolder);
-         IPath pr = file.getFullPath().removeLastSegments(1).append(memoryModelName).append(subfolder);
+         IPath p = userSelectedFile.getParent().getLocation().append(memoryModelName).append(subfolder);
+         IPath pr = userSelectedFile.getFullPath().removeLastSegments(1).append(memoryModelName).append(subfolder);
 
          // use absolut paths to make directories
          p.toFile().mkdirs();
