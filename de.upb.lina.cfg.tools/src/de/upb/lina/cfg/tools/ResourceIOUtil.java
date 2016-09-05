@@ -58,6 +58,39 @@ public class ResourceIOUtil {
 
 
    /**
+    * Stores the given list of store buffer graphs to a file defined by the given path.
+    * 
+    * @param pathToOutputFile the path to the file where the graphs should be stored
+    * @param storeBufferGraphs the store buffer graphs to store
+    * @return {@code true}, if the store process exited without problems, {@code false} else
+    */
+   public static boolean saveStoreBufferGraphsToDisk(String pathToOutputFile, List<ControlFlowDiagram> storeBufferGraphs)
+   {
+      // store resulting cfg
+      ResourceSet resSet = new ResourceSetImpl();
+      resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(CFGConstants.CFG_FILE_EXTENSION, new IDUsingResourceFactory());
+      Resource resource = resSet.createResource(URI.createURI(pathToOutputFile));
+
+      for (ControlFlowDiagram cfg : storeBufferGraphs)
+      {
+         EcoreUtil.resolveAll(cfg);
+         resource.getContents().add(cfg);
+      }
+
+      try
+      {
+         resource.save(Collections.EMPTY_MAP);
+         refreshWorkspace();
+         return true;
+      } catch (Exception e)
+      {
+         CFGActivator.logError("An error occured while saving " + storeBufferGraphs + " to file " + pathToOutputFile, e);
+      }
+      return false;
+   }
+
+
+   /**
     * Refreshes the workspace.
     */
    public static void refreshWorkspace() {
