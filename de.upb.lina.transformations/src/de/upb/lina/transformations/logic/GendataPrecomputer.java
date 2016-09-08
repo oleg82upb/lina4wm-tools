@@ -219,25 +219,38 @@ public class GendataPrecomputer {
 	 */
 	private void determineKivFunctionInput()
 	{
-		boolean hasParams = false, refInput = false;
+      boolean needsInputFile = false;
+      boolean refInput = false;
 		
 		for (ControlFlowDiagram cfg : cfgs)
 		{
-			Iterator<Variable> i = cfg.getParameterVariables().iterator();
+         List<Variable> parameterVariables = cfg.getParameterVariables();
+         Iterator<Variable> i = parameterVariables.iterator();
 			while (i.hasNext())
 			{
-				hasParams = true;
-				
 				Variable v = i.next();
 				if (Constants.KIV_BASIS_REF.equals(v.getType()))
 				{
 					refInput = true;
 				}
 			}
+
+         if (parameterVariables.size() > 1)
+         {
+            if (parameterVariables.size() == 2
+                  && !(parameterVariables.get(0).getNewName().equalsIgnoreCase("returnvalue") || cfg.getParameterVariables().get(1)
+                        .getNewName().equalsIgnoreCase("returnvalue")))
+            {
+               needsInputFile = true;
+            } else
+            {
+               needsInputFile = true;
+            }
+         }
 		}
 		
 		
-		if (hasParams)
+		if (needsInputFile)
 		{
 			helperModel.getTransformationSpecificKeys().add("INPUT_NEEDED");
 		}
