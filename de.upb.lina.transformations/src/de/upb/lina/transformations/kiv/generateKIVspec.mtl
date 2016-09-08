@@ -69,7 +69,7 @@ enrich 	[basis(genData)/]ref-memory,
 	[for (cfg : ControlFlowDiagram | genData.cfgs)] 
 ;; 	[generateCfgLabel(genData, cfg)/] reflects function [cfg.functionDefinition.address.name/]
 	[generateCfgLabel(genData, cfg)/]ini :
-	⊦ INVOP([generateCfgLabel(genData, cfg)/]ini)(inp, mem, ls, mem', ls') ↔ ls .pc = N [if(input(genData))][let params : OrderedSet(AddressMapping) = genData.getFilteredAddresses('func-params:'+cfg.name)->select(name.equalsIgnoreCase('returnvalue')._not())][if(params->size()>0)]∧ [for(am : AddressMapping | params->select(type.equalsIgnoreCase(genData.basis())))][am.type/][/for][for(am : AddressMapping | params->select(type.equalsIgnoreCase('ref')))][am.type/][/for]?(inp) [/if][/let][/if]∧ ls' = ls .pc:= [generateStartPC(genData, cfg)/] [generateFunctionParameter(cfg, genData)/]∧ mem' = mem; 
+	⊦ INVOP([generateCfgLabel(genData, cfg)/]ini)(inp, mem, ls, mem', ls') ↔ ls .pc = N [if(input(genData))][let params : OrderedSet(Variable) = cfg.parameterVariables->select(name.equalsIgnoreCase('returnvalue')._not())][if(params->size()>0)]∧ [for(variable : Variable | params->select(type.equalsIgnoreCase(genData.basis())))][variable.type/][/for][for(variable : Variable | params->select(type.equalsIgnoreCase('ref')))][variable.type/][/for]?(inp) [/if][/let][/if]∧ ls' = ls .pc:= [generateStartPC(genData, cfg)/] [generateFunctionParameter(cfg, genData)/]∧ mem' = mem; 
 	used for : s, ls;
 
 	[/for]
@@ -119,9 +119,9 @@ end specification
 
 
 [template private generateFunctionParameter(cfg: ControlFlowDiagram, genData : GeneratorData)]
-[for(am : AddressMapping | genData.getFilteredAddresses('func-params:' + cfg.name)->select(type.equalsIgnoreCase('ref'))->select(name.equalsIgnoreCase('returnvalue')._not()))]
-.[am.name/]:= inp [if(input(genData))].[am.type/][i/] [/if][/for][for(am : AddressMapping | genData.getFilteredAddresses('func-params:' + cfg.name)->select(type.equalsIgnoreCase(basis(genData)))->select(name.equalsIgnoreCase('returnvalue')._not()))]
-.[am.name/]:= inp [if(genData.transformationSpecificKeys->indexOf('INPUT_REF').oclIsUndefined()._not() and input(genData)._not())].v [/if][if(input(genData))].[am.type/][i/] [/if][/for]
+[for(am : Variable | cfg.parameterVariables->select(type.equalsIgnoreCase('ref'))->select(newName.equalsIgnoreCase('returnvalue')._not()))]
+.[am.newName/]:= inp [if(input(genData))].[am.type/][i/] [/if][/for][for(am : Variable | cfg.parameterVariables->select(type.equalsIgnoreCase(basis(genData)))->select(name.equalsIgnoreCase('returnvalue')._not()))]
+.[am.newName/]:= inp [if(genData.transformationSpecificKeys->indexOf('INPUT_REF').oclIsUndefined()._not() and input(genData)._not())].v [/if][if(input(genData))].[am.type/][i/] [/if][/for]
 [/template]
 
 [template private generateGlobalConstants(genData : GeneratorData)]
@@ -247,7 +247,7 @@ unsupported operation
 
 [comment ====== Get Element Pointer ======/]
 [template private genLsPart(e : GetElementPtr, t: Transition, genData: GeneratorData)]
- .[e.result.addressToString(t, genData)/]:= [for(mm : MemorySizeMapping | genData.memorySizeMappings)][if(mm.instruction = e)][let offset : EInt = mm.offset][possiblyCastToRef('('+ e.aggregate.value.castFromRef(t, genData) +' + '+ offset + ')', e.result, t,genData)/][/let][/if][/for]
+ .[e.result.addressToString(t, genData)/]:= [for(mm : MemorySizeMapping | genData.memorySizeMappings)][if(mm.instruction = e)][let offset : EString = mm.offset][possiblyCastToRef('('+ e.aggregate.value.castFromRef(t, genData) +' + '+ offset + ')', e.result, t,genData)/][/let][/if][/for]
 [/template]
 
 [comment ====== Cast ======/]

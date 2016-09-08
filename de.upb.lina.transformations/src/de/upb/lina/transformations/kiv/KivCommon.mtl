@@ -61,6 +61,10 @@ genData.cfgs->iterate(cfg : ControlFlowDiagram; allReturnVariables: Sequence(Var
 getAllLocalAndParameterVariables(genData)->any(v | v.originalAddresses->select(adr | adr = address)->notEmpty())
 /]
 
+[query public getAllParameterVariables(genData: GeneratorData) : Sequence(Variable) = 
+genData.cfgs->iterate(cfg : ControlFlowDiagram; allParameterVariables: Sequence(Variable) = Sequence{} | allParameterVariables->union(cfg.parameterVariables->asSequence()))
+/]
+
 
 [template public basis(genData : GeneratorData)]
 [for(basis: String | genData.transformationSpecificKeys)][if (basis.equalsIgnoreCase('int'))]int[/if][if (basis.equalsIgnoreCase('nat'))]nat[/if][/for]
