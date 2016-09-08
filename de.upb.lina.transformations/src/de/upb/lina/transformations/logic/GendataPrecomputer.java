@@ -24,6 +24,7 @@ import de.upb.lina.cfg.controlflow.WriteDefChainTransition;
 import de.upb.lina.cfg.gendata.AddressMapping;
 import de.upb.lina.cfg.gendata.GendataFactory;
 import de.upb.lina.cfg.gendata.GeneratorData;
+import de.upb.lina.cfg.gendata.InputTypeList;
 import de.upb.lina.cfg.gendata.MemorySizeMapping;
 import de.upb.lina.cfg.tools.stringrepresentation.StringConversionManager;
 import de.upb.lina.transformations.Constants;
@@ -210,7 +211,50 @@ public class GendataPrecomputer {
 		determineWhetherMultOrDivIsNecessary();
 
 		determineKivFunctionInput();
+
+      determineKivInputTypeLists();
 	}
+
+
+   /**
+    * Computes the input type lists used in the generation of the input files for the KIV
+    * transformation.
+    */
+   private void determineKivInputTypeLists()
+   {
+      EList<InputTypeList> inputTypeLists = helperModel.getInputTypes();
+
+      for (ControlFlowDiagram cfg : cfgs)
+      {
+         List<String> functionInputTypes = new ArrayList<>();
+         List<Variable> parameterVariables = cfg.getParameterVariables();
+         for (Variable parameterVariable : parameterVariables)
+         {
+            if (!parameterVariable.getNewName().equals("returnvalue"))
+            {
+               functionInputTypes.add(parameterVariable.getType());
+            }
+         }
+
+         boolean duplicate = false;
+         for (InputTypeList inputTypeList : inputTypeLists)
+         {
+            if (inputTypeList.getInputType().size() == functionInputTypes.size()
+                  && inputTypeList.getInputType().containsAll(functionInputTypes))
+            {
+               duplicate = true;
+               break;
+            }
+         }
+
+         if (!duplicate && !functionInputTypes.isEmpty())
+         {
+            InputTypeList inputTypeList = GendataFactory.eINSTANCE.createInputTypeList();
+            inputTypeList.getInputType().addAll(functionInputTypes);
+            inputTypeLists.add(inputTypeList);
+         }
+      }
+   }
 
 
 	/**
