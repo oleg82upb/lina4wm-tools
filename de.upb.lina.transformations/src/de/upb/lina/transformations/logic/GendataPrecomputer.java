@@ -75,6 +75,7 @@ import de.upb.llvm_parser.llvm.ShuffleVector;
 import de.upb.llvm_parser.llvm.Store;
 import de.upb.llvm_parser.llvm.Structure;
 import de.upb.llvm_parser.llvm.Switch;
+import de.upb.llvm_parser.llvm.SwitchCase;
 import de.upb.llvm_parser.llvm.TypeDefinition;
 import de.upb.llvm_parser.llvm.TypeUse;
 import de.upb.llvm_parser.llvm.Unreachable;
@@ -135,8 +136,7 @@ public class GendataPrecomputer {
 		// labels
 		setFunctionLabelPrefixes();
 		computeLocationLabels();
-		if (ETransformationType.KIV_GLOBAL.equals(this.config.getTransformationType()) || ETransformationType.KIV_LOCAL
-				.equals(this.config.getTransformationType()))
+      if (this.config.getTransformationType().isKivTransformation())
 		{
 			computeTransitionLabels();
 		}
@@ -970,36 +970,36 @@ public class GendataPrecomputer {
 
 	private void createVariableIntroducedByThisTransition(Transition t, ControlFlowDiagram cfg)
 	{
-		Instruction i = t.getInstruction();
-		if(i == null)
+      Instruction instruction = t.getInstruction();
+      if (instruction == null)
 		{
 			return;
 		}
 		
 		Variable createdVariable = null;
-		if (i instanceof ArithmeticOperation)
+      if (instruction instanceof ArithmeticOperation)
 		{
-			ArithmeticOperation op = (ArithmeticOperation) i;
+         ArithmeticOperation op = (ArithmeticOperation) instruction;
 			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), this.kivBaseType, cfg);
 			
 			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getValue1(), this.kivBaseType);
 			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getValue2(), this.kivBaseType);
-		} else if (i instanceof LogicOperation)
+      } else if (instruction instanceof LogicOperation)
 		{
-			LogicOperation op = (LogicOperation) i;
+         LogicOperation op = (LogicOperation) instruction;
 			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), this.kivBaseType, cfg);
 			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getValue1(), this.kivBaseType);
 			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getValue2(), this.kivBaseType);
 
-		} else if (i instanceof Cast)
+      } else if (instruction instanceof Cast)
 		{
-			Cast op = (Cast) i;
+         Cast op = (Cast) instruction;
 			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), this.kivBaseType, cfg);
 			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getValue(), this.kivBaseType);
 
-		} else if (i instanceof GetElementPtr)
+      } else if (instruction instanceof GetElementPtr)
 		{
-			GetElementPtr op = (GetElementPtr) i;
+         GetElementPtr op = (GetElementPtr) instruction;
 			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), this.kivBaseType, cfg);
 			Iterator<Parameter> iter = op.getIndices().iterator();
 			while (iter.hasNext())
@@ -1007,12 +1007,12 @@ public class GendataPrecomputer {
 				Parameter p = iter.next();
 				fetchOrCreateVariableForValueAndAttachToTransition(t, p.getValue(), this.kivBaseType);
 			}
-		} else if (i instanceof Fence)
+      } else if (instruction instanceof Fence)
 		{
 			// nothing to do here
-		} else if (i instanceof CmpXchg)
+      } else if (instruction instanceof CmpXchg)
 		{
-			CmpXchg op = (CmpXchg) i;
+         CmpXchg op = (CmpXchg) instruction;
 			//TODO: check what type is the results of cmpxchg instructions
 			String type = getVariableTypeAsString(op.getNewValue().getType());
 			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
@@ -1021,24 +1021,24 @@ public class GendataPrecomputer {
 			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getNewValue().getValue(), null);
 			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getValue().getValue(), null);
 
-		} else if (i instanceof AtomicRMW)
+      } else if (instruction instanceof AtomicRMW)
 		{
 			//TODO: check what type is the results of rmw instructions
-			AtomicRMW op = (AtomicRMW) i;
+         AtomicRMW op = (AtomicRMW) instruction;
 			String type = getVariableTypeAsString(op.getArgument().getType());
 			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
 			
 			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getAddress().getValue(), Constants.KIV_BASIS_REF);
          fetchOrCreateVariableForValueAndAttachToTransition(t, op.getArgument().getValue(), null);
-		} else if (i instanceof Load)
+      } else if (instruction instanceof Load)
 		{
-			Load op = (Load) i;
+         Load op = (Load) instruction;
          createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), this.kivBaseType, cfg);
          fetchOrCreateVariableForValueAndAttachToTransition(t, op.getAddress().getValue(), Constants.KIV_BASIS_REF);
 
-		} else if (i instanceof Call)
+      } else if (instruction instanceof Call)
 		{
-			Call op = (Call) i;
+         Call op = (Call) instruction;
 			if(op.getResult() != null)
 			{
 				String type = getVariableTypeAsString(op.getFunction().getType());
@@ -1053,13 +1053,13 @@ public class GendataPrecomputer {
 				fetchOrCreateVariableForValueAndAttachToTransition(t, p.getValue(), null);
 			}
 			
-		} else if (i instanceof Alloc)
+      } else if (instruction instanceof Alloc)
 		{
-			Alloc op = (Alloc) i;
+         Alloc op = (Alloc) instruction;
 			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), Constants.KIV_BASIS_REF, cfg);
-		} else if (i instanceof Phi)
+      } else if (instruction instanceof Phi)
 		{
-			Phi op = (Phi) i;
+         Phi op = (Phi) instruction;
 			String type = getVariableTypeAsString(op.getType());
 			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
 			
@@ -1070,15 +1070,15 @@ public class GendataPrecomputer {
 				fetchOrCreateVariableForValueAndAttachToTransition(t, pc.getValue(), null);
 			}
 
-		} else if (i instanceof LandingPad)
+      } else if (instruction instanceof LandingPad)
 		{
 //			LandingPad op = (LandingPad) i;
 //			String type = getVariableTypeAsString(op.getPersonalitytype());
 //			createLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
 
-		} else if (i instanceof Select)
+      } else if (instruction instanceof Select)
 		{
-			Select op = (Select) i;
+         Select op = (Select) instruction;
 			String type = getVariableTypeAsString(op.getTrueValue().getType());
 			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
 			
@@ -1086,61 +1086,68 @@ public class GendataPrecomputer {
 			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getElseValue().getValue(), this.kivBaseType);
 			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getTrueValue().getValue(), this.kivBaseType);
 
-		} else if (i instanceof VariableAttributeAccess)
+      } else if (instruction instanceof VariableAttributeAccess)
 		{
-			VariableAttributeAccess op = (VariableAttributeAccess) i;
+         VariableAttributeAccess op = (VariableAttributeAccess) instruction;
 			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), Constants.KIV_BASIS_REF, cfg);
 			
 			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getVaList().getValue(), null);
 
-		} else if (i instanceof ExtractValue)
+      } else if (instruction instanceof ExtractValue)
 		{
-			ExtractValue op = (ExtractValue) i;
+         ExtractValue op = (ExtractValue) instruction;
 			String type = getVariableTypeAsString(op.getAggerate().getType());
 			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
 			//TODO: check at some point whether we need to attach variables from here
 
-		} else if (i instanceof InsertValue)
+      } else if (instruction instanceof InsertValue)
 		{
-			InsertValue op = (InsertValue) i;
+         InsertValue op = (InsertValue) instruction;
 			String type = getVariableTypeAsString(op.getAggerate().getType());
 			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
 			//TODO: check at some point whether we need to attach variables from here
 
-		} else if (i instanceof ExtractElement)
+      } else if (instruction instanceof ExtractElement)
 		{
-			ExtractElement op = (ExtractElement) i;
+         ExtractElement op = (ExtractElement) instruction;
 			String type = getVariableTypeAsString(op.getVector().getType());
 			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
 			//TODO: check at some point whether we need to attach variables from here
 
-		} else if (i instanceof InsertElement)
+      } else if (instruction instanceof InsertElement)
 		{
-			InsertElement op = (InsertElement) i;
+         InsertElement op = (InsertElement) instruction;
 			String type = getVariableTypeAsString(op.getVector().getType());
 			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), type, cfg);
 			//TODO: check at some point whether we need to attach variables from here
 
-		} else if (i instanceof ShuffleVector)
+      } else if (instruction instanceof ShuffleVector)
 		{
-			ShuffleVector op = (ShuffleVector) i;
+         ShuffleVector op = (ShuffleVector) instruction;
 			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), null, cfg);
 			//TODO: check at some point whether we need to attach variables from here
-		} else if (i instanceof Compare)
+      } else if (instruction instanceof Compare)
 		{
-			Compare op = (Compare) i;
+         Compare op = (Compare) instruction;
 			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getResult(), this.kivBaseType, cfg);
 			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getOperand1(), null);
 			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getOperand2(), null);
-		} else if (i instanceof IndirectBranch)
+      } else if (instruction instanceof IndirectBranch)
 		{
-			//TODO: check at some point whether we need to attach variables from here
-		} else if (i instanceof Switch)
+         IndirectBranch indirectBranch = (IndirectBranch) instruction;
+         fetchOrCreateVariableForValueAndAttachToTransition(t, indirectBranch.getTarget().getValue(), this.kivBaseType);
+      } else if (instruction instanceof Switch)
 		{
-			//TODO: check at some point whether we need to attach variables from here
-		} else if (i instanceof Invoke)
+         Switch switchInstruction = (Switch) instruction;
+         fetchOrCreateVariableForValueAndAttachToTransition(t, switchInstruction.getCaseValue().getValue(), this.kivBaseType);
+         for (SwitchCase switchCase : switchInstruction.getCases())
+         {
+            Parameter caseValue = switchCase.getCaseValue();
+            fetchOrCreateVariableForValueAndAttachToTransition(t, caseValue.getValue(), this.kivBaseType);
+         }
+      } else if (instruction instanceof Invoke)
 		{
-			Invoke op = (Invoke) i;
+         Invoke op = (Invoke) instruction;
 			String type = getVariableTypeAsString(op.getReturnType());
 			createdVariable = getOrCreateLocalVariableAndAttachToCfg(op.getName(), type, cfg);
 			Iterator<Parameter> iter = op.getPList().getParams().iterator();
@@ -1151,26 +1158,26 @@ public class GendataPrecomputer {
 				fetchOrCreateVariableForValueAndAttachToTransition(t, p.getValue(), type);
 			}
 			
-		} else if (i instanceof Resume)
+      } else if (instruction instanceof Resume)
 		{
 			// nothing to do here
-		} else if (i instanceof Unreachable)
+      } else if (instruction instanceof Unreachable)
 		{
 			// nothing to do here
-		} else if (i instanceof Return)
+      } else if (instruction instanceof Return)
 		{
-			Return op = (Return) i;
+         Return op = (Return) instruction;
 			if(op.getValue() instanceof Value)
 			{
 				fetchOrCreateVariableForValueAndAttachToTransition(t, (Value) op.getValue(), null);
 			}
-		} else if (i instanceof Branch)
+      } else if (instruction instanceof Branch)
 		{
-			Branch op = (Branch) i;
-			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getCondition(), null);
-      } else if (i instanceof Store)
+         Branch op = (Branch) instruction;
+         fetchOrCreateVariableForValueAndAttachToTransition(t, op.getCondition(), this.kivBaseType);
+      } else if (instruction instanceof Store)
       {
-         Store store = (Store) i;
+         Store store = (Store) instruction;
          fetchOrCreateVariableForValueAndAttachToTransition(t, store.getValue().getValue(), null);
          fetchOrCreateVariableForValueAndAttachToTransition(t, store.getTargetAddress().getValue(), Constants.KIV_BASIS_REF);
 		}
