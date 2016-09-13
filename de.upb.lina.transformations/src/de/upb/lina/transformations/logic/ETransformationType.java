@@ -8,10 +8,10 @@ import java.util.List;
 import org.eclipse.acceleo.engine.service.AbstractAcceleoGenerator;
 import org.eclipse.emf.ecore.EObject;
 
-import de.upb.lina.transformations.kiv.GenerateKIVspec;
-import de.upb.lina.transformations.kiv.GenerateKIVspecGlobal;
-import de.upb.lina.transformations.promela.GenerateOperationalPromelaModel;
-import de.upb.lina.transformations.promela.GeneratePromelaModel;
+import de.upb.lina.transformations.acceleo.kiv.GenerateKIVspec;
+import de.upb.lina.transformations.acceleo.kiv.GenerateKIVspecGlobal;
+import de.upb.lina.transformations.acceleo.promela.GenerateOperationalPromelaModel;
+import de.upb.lina.transformations.acceleo.promela.GeneratePromelaModel;
 
 public enum ETransformationType {
 	PROMELA("promela", 0) {

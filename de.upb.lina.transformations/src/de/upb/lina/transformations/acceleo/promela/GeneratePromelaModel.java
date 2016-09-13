@@ -8,7 +8,7 @@
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
-package de.upb.lina.transformations.promela;
+package de.upb.lina.transformations.acceleo.promela;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,7 +41,7 @@ public class GeneratePromelaModel extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public static final String MODULE_FILE_NAME = "/de/upb/lina/transformations/promela/GeneratePromelaModel";
+    public static final String MODULE_FILE_NAME = "/de/upb/lina/transformations/acceleo/promela/GeneratePromelaModel";
     
     /**
      * The name of the templates that are to be generated.

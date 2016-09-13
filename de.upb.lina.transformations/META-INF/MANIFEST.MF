@@ -28,5 +28,5 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.expressions;bundle-version="3.4.600"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Export-Package: de.upb.lina.transformations.promela, 
- de.upb.lina.transformations.kiv
+Export-Package: de.upb.lina.transformations.acceleo.kiv,
+ de.upb.lina.transformations.acceleo.promela

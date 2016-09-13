@@ -8,7 +8,7 @@
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
-package de.upb.lina.transformations.promela;
+package de.upb.lina.transformations.acceleo.kiv;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,17 +31,17 @@ import de.upb.lina.cfg.gendata.GendataPackage;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
 /**
- * Entry point of the 'GenerateOperationalPromelaModel' generation module.
+ * Entry point of the 'GenerateKIVspec' generation module.
  *
  * @generated
  */
-public class GenerateOperationalPromelaModel extends AbstractAcceleoGenerator {
+public class GenerateKIVspec extends AbstractAcceleoGenerator {
     /**
      * The name of the module.
      *
      * @generated
      */
-    public static final String MODULE_FILE_NAME = "/de/upb/lina/transformations/promela/GenerateOperationalPromelaModel";
+    public static final String MODULE_FILE_NAME = "/de/upb/lina/transformations/acceleo/kiv/generateKIVspec";
     
     /**
      * The name of the templates that are to be generated.
@@ -71,7 +71,7 @@ public class GenerateOperationalPromelaModel extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public GenerateOperationalPromelaModel() {
+    public GenerateKIVspec() {
         // Empty implementation
     }
 
@@ -91,7 +91,7 @@ public class GenerateOperationalPromelaModel extends AbstractAcceleoGenerator {
      *             the model cannot be loaded.
      * @generated
      */
-    public GenerateOperationalPromelaModel(URI modelURI, File targetFolder,
+    public GenerateKIVspec(URI modelURI, File targetFolder,
             List<? extends Object> arguments) throws IOException {
         initialize(modelURI, targetFolder, arguments);
     }
@@ -112,7 +112,7 @@ public class GenerateOperationalPromelaModel extends AbstractAcceleoGenerator {
      *             This can be thrown in two scenarios : the module cannot be found, or it cannot be loaded.
      * @generated
      */
-    public GenerateOperationalPromelaModel(EObject model, File targetFolder,
+    public GenerateKIVspec(EObject model, File targetFolder,
             List<? extends Object> arguments) throws IOException {
         initialize(model, targetFolder, arguments);
     }
@@ -147,7 +147,7 @@ public class GenerateOperationalPromelaModel extends AbstractAcceleoGenerator {
                  * add in "arguments" this "String" attribute.
                  */
                 
-                GenerateOperationalPromelaModel generator = new GenerateOperationalPromelaModel(modelURI, folder, arguments);
+                GenerateKIVspec generator = new GenerateKIVspec(modelURI, folder, arguments);
                 
                 /*
                  * Add the properties from the launch arguments.
