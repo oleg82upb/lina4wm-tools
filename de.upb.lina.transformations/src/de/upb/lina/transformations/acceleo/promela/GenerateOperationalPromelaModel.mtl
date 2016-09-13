@@ -185,11 +185,13 @@ read([valueToString(e.address.value, t, genData)/], [getVariableForAddress(e.res
 write([valueToString(e.targetAddress.value, t, genData)/], [valueToString(e.value.value, t, genData)/]);
 [/template]
 
-[template public genInstruction(e : Fence,  genData : GeneratorData)]
+[template public genInstruction(e : Fence,  t: Transition, genData : GeneratorData)]
 mfence();
 [/template]
 
-
+[template public genInstruction(e : Return, t: Transition, genData: GeneratorData)]
+[if (t.diagram.returnVariable.oclIsUndefined())]goto ret;[else][t.diagram.returnVariable.newName/] = [valueToString(e.value, t, genData)/]; ['\n'/]goto ret;[/if]
+[/template]
 
 
 

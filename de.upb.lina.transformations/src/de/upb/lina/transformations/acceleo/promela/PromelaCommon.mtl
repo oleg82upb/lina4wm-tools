@@ -251,11 +251,12 @@ endif
 
 
 
+
+
+[comment]
 [template public genInstruction(e : Return, t: Transition, genData: GeneratorData)]
 [if (t.diagram.returnVariable.oclIsUndefined())][else][t.diagram.returnVariable.newName/] = [valueToString(e.value, t, genData)/]; [/if]
 [/template]
-
-[comment]
 [template public genInstruction(e : Switch, t: Transition, genData: GeneratorData)][/template]
 
 [template public genInstruction(e : Unreachable, t: Transition, genData: GeneratorData)][/template]

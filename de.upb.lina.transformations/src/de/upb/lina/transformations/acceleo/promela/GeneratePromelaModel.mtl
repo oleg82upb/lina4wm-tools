@@ -131,6 +131,7 @@ endif
 
 [template public genInstruction(e : Store,  t: Transition, genData : GeneratorData)][/template]
 
+[template public genInstruction(e : Fence,  t: Transition, genData : GeneratorData)][/template]
 
 [template public generateCondition(t : GuardedTransition, genData: GeneratorData)]
 [t.condition/] -> 
@@ -145,6 +146,10 @@ else
 	getTransitionGuard(t, genData).condition + ' -> '
 endif 
 /]
+
+[template public genInstruction(e : Return, t: Transition, genData: GeneratorData)]
+[if (t.diagram.returnVariable.oclIsUndefined())][else][t.diagram.returnVariable.newName/] = [valueToString(e.value, t, genData)/]; [/if]
+[/template]
 
 
 [comment basic stuff /]
