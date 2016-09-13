@@ -237,13 +237,21 @@ public class GendataPrecomputer {
          }
 
          boolean duplicate = false;
-         for (InputTypeList inputTypeList : inputTypeLists)
+         for (InputTypeList list : inputTypeLists)
          {
-            if (inputTypeList.getInputType().size() == functionInputTypes.size()
-                  && inputTypeList.getInputType().containsAll(functionInputTypes))
+            if (list.getInputType().size() == functionInputTypes.size())
             {
-               duplicate = true;
-               break;
+               List<String> copyFuncInput = new ArrayList<String>(functionInputTypes);
+
+               for (String s : list.getInputType())
+               {
+                  copyFuncInput.remove(s);
+               }
+               if (copyFuncInput.isEmpty())
+               {
+                  duplicate = true;
+                  break;
+               }
             }
          }
 
