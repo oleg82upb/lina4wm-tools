@@ -4,6 +4,7 @@ package de.upb.lina.cfg.tools.tests.writedefchains.tso;
 import java.util.Arrays;
 import java.util.List;
 
+import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.tests.TSOStoreBufferGraphTest;
 
 
@@ -54,7 +55,9 @@ public class WdcRedefAddrEarlyReadTsoSBGTest extends TSOStoreBufferGraphTest {
    @Override
    protected List<String> getExpectedStoreBufferStringRepresentations()
    {
-      return Arrays.asList("L7 <(r1Cpy: a)>", "L2 <(r1Cpy: a)>", "L8 <(r1Cpy: a)>", "L3 <(r1Cpy: a)>", "L4 <(r1Cpy: a)>");
+      return Arrays.asList("L7 <(r1" + CFGConstants.WDC_SUFFIX + ": a)>", "L2 <(r1" + CFGConstants.WDC_SUFFIX + ": a)>", "L8 <(r1"
+            + CFGConstants.WDC_SUFFIX + ": a)>", "L3 <(r1" + CFGConstants.WDC_SUFFIX + ": a)>", "L4 <(r1" + CFGConstants.WDC_SUFFIX
+            + ": a)>");
    }
 
 }

@@ -4,6 +4,7 @@ package de.upb.lina.cfg.tools.tests.writedefchains.tso;
 import java.util.Arrays;
 import java.util.List;
 
+import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.tests.TSOStoreBufferGraphTest;
 
 
@@ -54,8 +55,10 @@ public class TestLoopInLoopRedefValTsoSBGTest extends TSOStoreBufferGraphTest {
    @Override
    protected List<String> getExpectedStoreBufferStringRepresentations()
    {
-      return Arrays.asList("L9 <(r1: bCpy)>", "L10 <(r1: bCpy)>", "L5 <(r1: bCpy)>", "L7 <(r1: bCpy)>", "L6 <(r1: bCpy)>",
-            "L2 <(r1: bCpy)>", "L11 <(r1: bCpy)>", "L3 <(r1: bCpy)>", "L4 <(r1: bCpy)>");
+      return Arrays.asList("L9 <(r1: b" + CFGConstants.WDC_SUFFIX + ")>", "L10 <(r1: b" + CFGConstants.WDC_SUFFIX + ")>", "L5 <(r1: b"
+            + CFGConstants.WDC_SUFFIX + ")>", "L7 <(r1: b" + CFGConstants.WDC_SUFFIX + ")>", "L6 <(r1: b" + CFGConstants.WDC_SUFFIX + ")>",
+            "L2 <(r1: b" + CFGConstants.WDC_SUFFIX + ")>", "L11 <(r1: b" + CFGConstants.WDC_SUFFIX + ")>", "L3 <(r1: b"
+                  + CFGConstants.WDC_SUFFIX + ")>", "L4 <(r1: b" + CFGConstants.WDC_SUFFIX + ")>");
    }
 
 }

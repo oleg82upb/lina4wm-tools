@@ -4,6 +4,7 @@ package de.upb.lina.cfg.tools.tests.writedefchains.pso;
 import java.util.Arrays;
 import java.util.List;
 
+import de.upb.lina.cfg.tools.CFGConstants;
 import de.upb.lina.cfg.tools.tests.PSOStoreBufferGraphTest;
 
 
@@ -55,7 +56,10 @@ public class WdcRedefAddrValPsoSBGTest extends PSOStoreBufferGraphTest {
    @Override
    protected List<String> getExpectedStoreBufferStringRepresentations()
    {
-      return Arrays.asList("L6 <(r1Cpy: aCpy)>", "L1 <(r1Cpy: aCpy)>", "L7 <(r1Cpy: aCpy)>", "L2 <(r1Cpy: aCpy)>", "L3 <(r1Cpy: aCpy)>");
+      return Arrays.asList("L6 <(r1" + CFGConstants.WDC_SUFFIX + ": a" + CFGConstants.WDC_SUFFIX + ")>", "L1 <(r1"
+            + CFGConstants.WDC_SUFFIX + ": a" + CFGConstants.WDC_SUFFIX + ")>", "L7 <(r1" + CFGConstants.WDC_SUFFIX + ": a"
+            + CFGConstants.WDC_SUFFIX + ")>", "L2 <(r1" + CFGConstants.WDC_SUFFIX + ": a" + CFGConstants.WDC_SUFFIX + ")>", "L3 <(r1"
+            + CFGConstants.WDC_SUFFIX + ": a" + CFGConstants.WDC_SUFFIX + ")>");
    }
 
 }
