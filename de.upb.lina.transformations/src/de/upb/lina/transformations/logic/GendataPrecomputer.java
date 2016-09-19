@@ -1046,11 +1046,10 @@ public class GendataPrecomputer {
 			}
 			
 			fetchOrCreateVariableForValueAndAttachToTransition(t, op.getFunction().getValue(), null);
-			Iterator<Parameter> iter = op.getPList().getParams().iterator();
-			while(iter.hasNext())
+
+         for (Parameter parameter : op.getPList().getParams())
 			{
-				Parameter p = iter.next();
-				fetchOrCreateVariableForValueAndAttachToTransition(t, p.getValue(), null);
+            fetchOrCreateVariableForValueAndAttachToTransition(t, parameter.getValue(), null);
 			}
 			
       } else if (instruction instanceof Alloc)
