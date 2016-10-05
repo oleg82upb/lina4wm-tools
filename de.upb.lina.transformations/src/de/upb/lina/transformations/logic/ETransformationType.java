@@ -8,7 +8,7 @@ import java.util.List;
 import org.eclipse.acceleo.engine.service.AbstractAcceleoGenerator;
 import org.eclipse.emf.ecore.EObject;
 
-import de.upb.lina.transformations.acceleo.kiv.GenerateKIVspecGlobal;
+import de.upb.lina.transformations.acceleo.kiv.global.GenerateGlobalKivModel;
 import de.upb.lina.transformations.acceleo.kiv.local.GenerateLocalKivModel;
 import de.upb.lina.transformations.acceleo.promela.GenerateOperationalPromelaModel;
 import de.upb.lina.transformations.acceleo.promela.GeneratePromelaModel;
@@ -39,7 +39,7 @@ public enum ETransformationType {
 		@Override
 		public AbstractAcceleoGenerator createAcceleoGenerator(EObject model,
 				File targetFolder, List<? extends Object> arguments) throws IOException{
-			return new GenerateKIVspecGlobal(model, targetFolder, arguments);
+			return new GenerateGlobalKivModel(model, targetFolder, arguments);
 		}
 	};
 	

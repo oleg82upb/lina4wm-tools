@@ -8,7 +8,7 @@
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
-package de.upb.lina.transformations.acceleo.kiv;
+package de.upb.lina.transformations.acceleo.kiv.global;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,13 +35,13 @@ import de.upb.llvm_parser.llvm.LlvmPackage;
  *
  * @generated
  */
-public class GenerateKIVspecGlobal extends AbstractAcceleoGenerator {
+public class GenerateGlobalKivModel extends AbstractAcceleoGenerator {
     /**
      * The name of the module.
      *
      * @generated
      */
-    public static final String MODULE_FILE_NAME = "/de/upb/lina/transformations/acceleo/kiv/generateKIVspecGlobal";
+   public static final String MODULE_FILE_NAME = "/de/upb/lina/transformations/acceleo/kiv/global/GenerateGlobalKivModel";
     
     /**
      * The name of the templates that are to be generated.
@@ -71,7 +71,7 @@ public class GenerateKIVspecGlobal extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public GenerateKIVspecGlobal() {
+    public GenerateGlobalKivModel() {
         // Empty implementation
     }
 
@@ -91,7 +91,7 @@ public class GenerateKIVspecGlobal extends AbstractAcceleoGenerator {
      *             the model cannot be loaded.
      * @generated
      */
-    public GenerateKIVspecGlobal(URI modelURI, File targetFolder,
+    public GenerateGlobalKivModel(URI modelURI, File targetFolder,
             List<? extends Object> arguments) throws IOException {
         initialize(modelURI, targetFolder, arguments);
     }
@@ -112,7 +112,7 @@ public class GenerateKIVspecGlobal extends AbstractAcceleoGenerator {
      *             This can be thrown in two scenarios : the module cannot be found, or it cannot be loaded.
      * @generated
      */
-    public GenerateKIVspecGlobal(EObject model, File targetFolder,
+    public GenerateGlobalKivModel(EObject model, File targetFolder,
             List<? extends Object> arguments) throws IOException {
         initialize(model, targetFolder, arguments);
     }
@@ -147,7 +147,7 @@ public class GenerateKIVspecGlobal extends AbstractAcceleoGenerator {
                  * add in "arguments" this "String" attribute.
                  */
                 
-                GenerateKIVspecGlobal generator = new GenerateKIVspecGlobal(modelURI, folder, arguments);
+                GenerateGlobalKivModel generator = new GenerateGlobalKivModel(modelURI, folder, arguments);
                 
                 /*
                  * Add the properties from the launch arguments.
