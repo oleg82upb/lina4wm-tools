@@ -2,6 +2,9 @@
 [module generateKIVspec('http://www.upb.de/lina/cfg/controlflow', 'http://www.upb.de/lina/cfg/gendata', 'http://www.upb.de/llvm_parser/llvm', 'http://www.eclipse.org/emf/2002/Ecore')]
 [import de::upb::lina::transformations::acceleo::TransformationCommon/]
 [import de::upb::lina::transformations::acceleo::kiv::KivCommon/]
+[import de::upb::lina::transformations::acceleo::kiv::local::GenerateLocalStateFile/]
+[import de::upb::lina::transformations::acceleo::kiv::local::GenerateInputFile/]
+[import de::upb::lina::transformations::acceleo::kiv::local::GeneratePIDFile/]
 
 [template public generateModel(genData : GeneratorData) ]
 [comment @main/]
@@ -14,17 +17,7 @@
 
 [generateCIndexFile(genData)/]
 
-[if(input(genData))]
-[file ('specs/input.utf8', false, 'UTF-8')]
-data specification
-	using [basis(genData)/]ref
-
-	input =[for(inpList : InputTypeList | genData.inputTypes)separator('|')] mk[i/]([for(inputType : String | inpList.inputType->asSequence()->select(equalsIgnoreCase(basis(genData))))] . .[inputType/][i/]: [inputType/];[/for][for(inputType : String | inpList.inputType->asSequence()->select(equalsIgnoreCase('ref')))] . .[inputType/][i/]: [inputType/];[/for]) with [for(inputType : String | inpList.inputType->select(equalsIgnoreCase(genData.basis())))][inputType/][/for][for(inputType : String | inpList.inputType->select(equalsIgnoreCase('ref')))][inputType/][/for]? [/for];
-	variables
-		inp : input;
-end data specification
-[/file]
-[/if]
+[generateInputFile(genData)/]
 
 [generateCOPFile(genData)/]
 
@@ -91,32 +84,6 @@ end enrich
 		
 [/file]
 [/template]
-
-[template private generateLocalstateFile(genData: GeneratorData)]
-[file ( 'specs/localstate.utf8', false, 'UTF-8')]
-data specification
-	using [basis(genData)/]ref, PC, PID
-	Localstate :=mkls( . .pc : PC; . .pid : PID;
-					[for(variable: Variable | getAllLocalAndParameterVariables(genData)->select(not newName.equalsIgnoreCase('returnvalue')))]
-					. .[variable.newName/] : [variable.type/];
-					[/for]);
-	variables
-		ls , ls' : Localstate;
-end data specification
-[/file]
-[/template]
-
-[template private generatePIDFile(genData: GeneratorData)]
-[file ('specs/PID.utf8', false, 'UTF-8')]
-specification
-	sorts
-		PID;
-	variables
-		p : PID;
-end specification
-[/file]
-[/template]
-
 
 [template private generateFunctionParameter(cfg: ControlFlowDiagram, genData : GeneratorData)]
 [for(am : Variable | cfg.parameterVariables->select(type.equalsIgnoreCase('ref'))->select(newName.equalsIgnoreCase('returnvalue')._not()))]
