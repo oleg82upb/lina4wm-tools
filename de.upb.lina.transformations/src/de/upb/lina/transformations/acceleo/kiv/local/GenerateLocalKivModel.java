@@ -8,7 +8,7 @@
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
-package de.upb.lina.transformations.acceleo.kiv;
+package de.upb.lina.transformations.acceleo.kiv.local;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,18 +30,19 @@ import de.upb.lina.cfg.controlflow.ControlflowPackage;
 import de.upb.lina.cfg.gendata.GendataPackage;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
+
 /**
  * Entry point of the 'GenerateKIVspec' generation module.
  *
  * @generated
  */
-public class GenerateKIVspec extends AbstractAcceleoGenerator {
+public class GenerateLocalKivModel extends AbstractAcceleoGenerator {
     /**
      * The name of the module.
      *
      * @generated
      */
-    public static final String MODULE_FILE_NAME = "/de/upb/lina/transformations/acceleo/kiv/generateKIVspec";
+   public static final String MODULE_FILE_NAME = "/de/upb/lina/transformations/acceleo/kiv/local/GenerateLocalKivModel";
     
     /**
      * The name of the templates that are to be generated.
@@ -71,7 +72,8 @@ public class GenerateKIVspec extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public GenerateKIVspec() {
+   public GenerateLocalKivModel()
+   {
         // Empty implementation
     }
 
@@ -91,7 +93,7 @@ public class GenerateKIVspec extends AbstractAcceleoGenerator {
      *             the model cannot be loaded.
      * @generated
      */
-    public GenerateKIVspec(URI modelURI, File targetFolder,
+   public GenerateLocalKivModel(URI modelURI, File targetFolder,
             List<? extends Object> arguments) throws IOException {
         initialize(modelURI, targetFolder, arguments);
     }
@@ -112,7 +114,7 @@ public class GenerateKIVspec extends AbstractAcceleoGenerator {
      *             This can be thrown in two scenarios : the module cannot be found, or it cannot be loaded.
      * @generated
      */
-    public GenerateKIVspec(EObject model, File targetFolder,
+   public GenerateLocalKivModel(EObject model, File targetFolder,
             List<? extends Object> arguments) throws IOException {
         initialize(model, targetFolder, arguments);
     }
@@ -147,7 +149,7 @@ public class GenerateKIVspec extends AbstractAcceleoGenerator {
                  * add in "arguments" this "String" attribute.
                  */
                 
-                GenerateKIVspec generator = new GenerateKIVspec(modelURI, folder, arguments);
+                GenerateLocalKivModel generator = new GenerateLocalKivModel(modelURI, folder, arguments);
                 
                 /*
                  * Add the properties from the launch arguments.
@@ -336,35 +338,41 @@ public class GenerateKIVspec extends AbstractAcceleoGenerator {
         return TEMPLATE_NAMES;
     }
     
-    /**
-     * This can be used to update the resource set's package registry with all needed EPackages.
-     * 
-     * @param resourceSet
-     *            The resource set which registry has to be updated.
-     * @generated NOT
-     */
+
+   /**
+    * This can be used to update the resource set's package registry with all needed EPackages.
+    * 
+    * @param resourceSet The resource set which registry has to be updated.
+    * @generated NOT
+    */
     @Override
     public void registerPackages(ResourceSet resourceSet) {
-    	super.registerPackages(resourceSet);
+      super.registerPackages(resourceSet);
         if (!isInWorkspace(org.eclipse.emf.ecore.EcorePackage.class)) {
             resourceSet.getPackageRegistry().put(org.eclipse.emf.ecore.EcorePackage.eINSTANCE.getNsURI(), org.eclipse.emf.ecore.EcorePackage.eINSTANCE);
         }
         
-        if(!isInWorkspace(de.upb.lina.cfg.controlflow.ControlflowPackage.class)){
-        	EPackage.Registry.INSTANCE.put(ControlflowPackage.eNS_URI, ControlflowPackage.eINSTANCE); 
-        	//Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(ControlflowPackage., ControlflowPackage.eINSTANCE);
-        }
-        
-        if(!isInWorkspace(de.upb.llvm_parser.llvm.LlvmPackage.class)){
-        	EPackage.Registry.INSTANCE.put(LlvmPackage.eNS_URI, LlvmPackage.eINSTANCE); 
-        	//Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(ControlflowPackage.FILE_EXTENSION, ControlflowPackage..INSTANCE);
-        }
-        
-        if(!isInWorkspace(de.upb.lina.cfg.gendata.GendataPackage.class)){
-        	EPackage.Registry.INSTANCE.put(GendataPackage.eNS_URI, GendataPackage.eINSTANCE); 
-        	//Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(ControlflowPackage.FILE_EXTENSION, ControlflowPackage..INSTANCE);
-        }
-        
+      if (!isInWorkspace(de.upb.lina.cfg.controlflow.ControlflowPackage.class))
+      {
+         EPackage.Registry.INSTANCE.put(ControlflowPackage.eNS_URI, ControlflowPackage.eINSTANCE);
+         // Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(ControlflowPackage.,
+         // ControlflowPackage.eINSTANCE);
+      }
+
+      if (!isInWorkspace(de.upb.llvm_parser.llvm.LlvmPackage.class))
+      {
+         EPackage.Registry.INSTANCE.put(LlvmPackage.eNS_URI, LlvmPackage.eINSTANCE);
+         // Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(ControlflowPackage.FILE_EXTENSION,
+         // ControlflowPackage..INSTANCE);
+      }
+
+      if (!isInWorkspace(de.upb.lina.cfg.gendata.GendataPackage.class))
+      {
+         EPackage.Registry.INSTANCE.put(GendataPackage.eNS_URI, GendataPackage.eINSTANCE);
+         // Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(ControlflowPackage.FILE_EXTENSION,
+         // ControlflowPackage..INSTANCE);
+      }
+
         /*
          * If you want to change the content of this method, do NOT forget to change the "@generated"
          * tag in the Javadoc of this method to "@generated NOT". Without this new tag, any compilation
@@ -398,13 +406,14 @@ public class GenerateKIVspec extends AbstractAcceleoGenerator {
          */
     }
 
-    /**
-     * This can be used to update the resource set's resource factory registry with all needed factories.
-     * 
-     * @param resourceSet
-     *            The resource set which registry has to be updated.
-     * @generated NOT
-     */
+
+   /**
+    * This can be used to update the resource set's resource factory registry with all needed
+    * factories.
+    * 
+    * @param resourceSet The resource set which registry has to be updated.
+    * @generated NOT
+    */
     @Override
     public void registerResourceFactories(ResourceSet resourceSet) {
         super.registerResourceFactories(resourceSet);
@@ -415,9 +424,9 @@ public class GenerateKIVspec extends AbstractAcceleoGenerator {
          * revert your modifications.
          */
         
-        resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("llvm", new XMIResourceFactoryImpl());
-        resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("cfg", new XMIResourceFactoryImpl());
-        resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("gendata", new XMIResourceFactoryImpl());
+      resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("llvm", new XMIResourceFactoryImpl());
+      resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("cfg", new XMIResourceFactoryImpl());
+      resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("gendata", new XMIResourceFactoryImpl());
         
         // resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(UMLResource.FILE_EXTENSION, UMLResource.Factory.INSTANCE);
     }

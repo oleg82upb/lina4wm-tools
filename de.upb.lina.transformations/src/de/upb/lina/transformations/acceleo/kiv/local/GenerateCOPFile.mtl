@@ -1,30 +1,9 @@
 [comment encoding = UTF-8 /]
-[module generateKIVspec('http://www.upb.de/lina/cfg/controlflow', 'http://www.upb.de/lina/cfg/gendata', 'http://www.upb.de/llvm_parser/llvm', 'http://www.eclipse.org/emf/2002/Ecore')]
+[module GenerateCOPFile('http://www.upb.de/lina/cfg/controlflow', 'http://www.upb.de/lina/cfg/gendata', 'http://www.upb.de/llvm_parser/llvm', 'http://www.eclipse.org/emf/2002/Ecore')]
 [import de::upb::lina::transformations::acceleo::TransformationCommon/]
 [import de::upb::lina::transformations::acceleo::kiv::KivCommon/]
-[import de::upb::lina::transformations::acceleo::kiv::local::GenerateLocalStateFile/]
-[import de::upb::lina::transformations::acceleo::kiv::local::GenerateInputFile/]
-[import de::upb::lina::transformations::acceleo::kiv::local::GeneratePIDFile/]
 
-[template public generateModel(genData : GeneratorData) ]
-[comment @main/]
-
-[generateLocalstateFile(genData)/]
-
-[generatePCFile(genData)/]
-
-[generatePIDFile(genData)/]
-
-[generateCIndexFile(genData)/]
-
-[generateInputFile(genData)/]
-
-[generateCOPFile(genData)/]
-
-
-[/template]
-
-[template private generateCOPFile(genData: GeneratorData)]
+[template public generateCOPFile(genData: GeneratorData)]
 [file ('specs/COP.utf8', false, 'UTF-8')]
 enrich 	[basis(genData)/]ref-memory,
 		localstate,
@@ -85,12 +64,6 @@ end enrich
 [/file]
 [/template]
 
-[template private generateFunctionParameter(cfg: ControlFlowDiagram, genData : GeneratorData)]
-[for(am : Variable | cfg.parameterVariables->select(type.equalsIgnoreCase('ref'))->select(newName.equalsIgnoreCase('returnvalue')._not()))]
-.[am.newName/]:= inp [if(input(genData))].[am.type/][i/] [/if][/for][for(am : Variable | cfg.parameterVariables->select(type.equalsIgnoreCase(basis(genData)))->select(name.equalsIgnoreCase('returnvalue')._not()))]
-.[am.newName/]:= inp [if(genData.transformationSpecificKeys->indexOf('INPUT_REF').oclIsUndefined()._not() and input(genData)._not())].v [/if][if(input(genData))].[am.type/][i/] [/if][/for]
-[/template]
-
 [template private generateGlobalConstants(genData : GeneratorData)]
 [if(genData.globalVariables->size() > 0)]
 constants
@@ -99,6 +72,11 @@ constants
 [/for][/if]
 [/template]
 
+[template private generateFunctionParameter(cfg: ControlFlowDiagram, genData : GeneratorData)]
+[for(am : Variable | cfg.parameterVariables->select(type.equalsIgnoreCase('ref'))->select(newName.equalsIgnoreCase('returnvalue')._not()))]
+.[am.newName/]:= inp [if(input(genData))].[am.type/][i/] [/if][/for][for(am : Variable | cfg.parameterVariables->select(type.equalsIgnoreCase(basis(genData)))->select(name.equalsIgnoreCase('returnvalue')._not()))]
+.[am.newName/]:= inp [if(genData.transformationSpecificKeys->indexOf('INPUT_REF').oclIsUndefined()._not() and input(genData)._not())].v [/if][if(input(genData))].[am.type/][i/] [/if][/for]
+[/template]
 
 [comment ============================= Transitions=============================================== /]
 [template private transformTransition(t: Transition, genData: GeneratorData)]
@@ -366,10 +344,3 @@ endif
 [query private hasAddressTypeRef(address: Address, t: Transition, genData : GeneratorData) : Boolean = 
 	getVariableForAddress(address, t, genData).type.equalsIgnoreCase('ref')
 /]
-
-
-
-
-
-
-

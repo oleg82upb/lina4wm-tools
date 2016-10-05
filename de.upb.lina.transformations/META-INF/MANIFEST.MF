@@ -29,4 +29,5 @@ Require-Bundle: org.eclipse.ui,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: de.upb.lina.transformations.acceleo.kiv,
+ de.upb.lina.transformations.acceleo.kiv.local,
  de.upb.lina.transformations.acceleo.promela
