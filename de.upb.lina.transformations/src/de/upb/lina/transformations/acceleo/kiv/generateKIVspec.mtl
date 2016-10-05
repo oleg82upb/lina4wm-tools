@@ -205,8 +205,8 @@ ls' = ls .pc:= [generateNextPC(genData, t)/] .[t.instruction.oclAsType(Load).res
 [comment ====== CompareInt ======/]
 [template private genLsPart(e : CompareInt, t : Transition, genData : GeneratorData)]
 [let pc : String = generateNextPC(genData, t)][let res : String = e.result.addressToString(t, genData)]
-[if(e.cond.equalsIgnoreCase('eq'))]([compareTypecorrect(e.operand1, e.operand2, t, genData)/] ⊃ ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('1',e.result, t, genData)/] ; ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('0',e.result, t, genData)/])[else]
-[if(e.cond.equalsIgnoreCase('ne'))]([compareTypecorrect(e.operand1, e.operand2, t, genData)/] ⊃ ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('0',e.result, t, genData)/] ; ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('1',e.result, t, genData)/])[else]
+[if(e.cond.equalsIgnoreCase('eq'))]([generateCastedAssignment(e.operand1, e.operand2, t, genData)/] ⊃ ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('1',e.result, t, genData)/] ; ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('0',e.result, t, genData)/])[else]
+[if(e.cond.equalsIgnoreCase('ne'))]([generateCastedAssignment(e.operand1, e.operand2, t, genData)/] ⊃ ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('0',e.result, t, genData)/] ; ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('1',e.result, t, genData)/])[else]
 [if(e.cond.equalsIgnoreCase('uge')._or(e.cond.equalsIgnoreCase('sge')))]([e.operand1.castFromRef(t, genData)/] ≥ [e.operand2.castFromRef(t, genData)/] ⊃ ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('1',e.result, t, genData)/] ; ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('0',e.result, t, genData)/])[else]
 [if(e.cond.equalsIgnoreCase('ugt')._or(e.cond.equalsIgnoreCase('sgt')))]([e.operand1.castFromRef(t, genData)/] ≤ [e.operand2.castFromRef(t, genData)/] ⊃ ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('0',e.result, t, genData)/] ; ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('1',e.result, t, genData)/])[else]
 [if(e.cond.equalsIgnoreCase('ult')._or(e.cond.equalsIgnoreCase('slt')))]([e.operand1.castFromRef(t, genData)/] ≥ [e.operand2.castFromRef(t, genData)/] ⊃ ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('0',e.result, t, genData)/] ; ls' = ls .pc:= [pc/] .[res/]:= [possiblyCastToRef('1',e.result, t, genData)/])[else]
@@ -327,7 +327,7 @@ getVariableForAddress(v.address, t, genData).newName.transformBooleanToNumber()/
 [template public castToRef(v : AddressUse, t: Transition, genData : GeneratorData)]
 [let variable : Variable = getVariableForAddress(v.address, t, genData)]
 [let addressName : String = possiblyAddLS(v, t, genData)+variable.newName.transformBooleanToNumber()]
-[if (variable.type.equalsIgnoreCase(genData.basis()))]⌜ [addressName/]⌝[else][addressName/][/if][/let][/let]
+[if (variable.type.equalsIgnoreCase(genData.basis()))]⌜[addressName/]⌝[else][addressName/][/if][/let][/let]
 [/template]
 
 [template public castToRef(v : NestedGetElementPtr, t: Transition, genData : GeneratorData)]
@@ -368,30 +368,41 @@ getVariableForAddress(v.address, t, genData).newName.transformBooleanToNumber()/
 ([nestedPtr.aggregate.value.castFromRef(t, genData)/][for(mm : MemorySizeMapping | genData.memorySizeMappings)][if(mm.instruction = nestedPtr)] + [mm.offset/][/if][/for])
 [/template]
 
-[template private compareTypecorrect(v1 : Value, v2 : Value, t : Transition, genData : GeneratorData)]
-[let ls1 : String = possiblyAddLS(v1, t, genData)][let ls2 : String = possiblyAddLS(v2, t, genData)]
-[if(v1.oclIsTypeOf(AddressUse) or v2.oclIsTypeOf(AddressUse))]
-	[if(v1.oclIsTypeOf(AddressUse))]
-		[let variable1 : Variable = getVariableForAddress(v1.oclAsType(AddressUse).address, t,  genData)]
-			[if(v2.oclIsTypeOf(AddressUse))]
-				[let variable2 : Variable = getVariableForAddress(v2.oclAsType(AddressUse).address, t,  genData)]
-					[if(variable1.type.equalsIgnoreCase(genData.basis()) and variable2.type.equalsIgnoreCase('ref'))]⌜[ls1/][variable1.newName/]⌝ = [ls2/][variable2.newName/][else]
-					[if(variable2.type.equalsIgnoreCase('ref') and variable2.type.equalsIgnoreCase(genData.basis()))][ls1/][variable1.newName/] = ⌜[ls2/][variable2.newName/]⌝[else][ls1/][variable1.newName/] = [ls2/][variable2.newName/]
-					[/if][/if]
-				[/let]
-			[else]
-				[if(v2.oclIsTypeOf(PrimitiveValue) and variable1.type.equalsIgnoreCase('ref'))][ls1/][variable1.newName/] = [if(v2.oclAsType(PrimitiveValue).value.equalsIgnoreCase('null'))]null[else]⌜[ls2/][valueToString(v2, t, genData)/]⌝[/if][else]
-				[if(v2.oclIsKindOf(Constant) and variable1.type.equalsIgnoreCase('ref'))][ls1/][variable1.newName/] = ⌜[v2.oclAsType(Constant).getValueFromConstant()/]⌝[else][ls1/][valueToString(v1, t, genData)/] = [ls2/][valueToString(v2, t, genData)/]
-				[/if][/if]
-			[/if]
-		[/let]
-	[elseif(v2.oclIsTypeOf(AddressUse))]
-		[let variable2 : Variable = getVariableForAddress(v2.oclAsType(AddressUse).address, t, genData)]
-			[if(v1.oclIsTypeOf(PrimitiveValue) and variable2.type.equalsIgnoreCase('ref'))][if(v1.oclAsType(PrimitiveValue).value.equalsIgnoreCase('null'))]null[else]⌜[ls1/][valueToString(v1, t, genData)/]⌝[/if] = [ls2/][variable2.newName/][else]
-			[if(v1.oclIsKindOf(Constant) and variable2.type.equalsIgnoreCase('ref'))]⌜[v1.oclAsType(Constant).getValueFromConstant()/]⌝ = [ls2/][variable2.newName/][else][ls1/][valueToString(v1, t, genData)/] = [ls2/][valueToString(v2, t, genData)/]
-			[/if][/if]
-		[/let]
-	[else][ls1/][valueToString(v1, t, genData)/] = [ls2/][valueToString(v2, t, genData)/][/if]
-[else][ls1/][valueToString(v1, t, genData)/] = [ls2/][valueToString(v2, t, genData)/][/if]
-[/let][/let]
+[template private generateCastedAssignment(targetValue : Value, sourceValue : Value, t : Transition, genData : GeneratorData)]
+[createCastedAssignment(targetValue, sourceValue, t, genData)/]
 [/template]
+
+[query private createCastedAssignment(targetValue : Value, sourceValue : Value, t : Transition, genData : GeneratorData) : String =
+if haveUnequalKivTypes(targetValue, sourceValue, t, genData) then 
+	castToRef(targetValue, t, genData) + ' = ' + castToRef(sourceValue, t, genData)
+else
+	possiblyAddLS(targetValue, t, genData) + valueToString(targetValue, t, genData) + ' = ' + possiblyAddLS(sourceValue, t, genData) + valueToString(sourceValue, t, genData)
+endif
+/]
+
+[query private haveUnequalKivTypes(targetValue : Value, sourceValue : Value, t : Transition, genData : GeneratorData) : Boolean =
+	if targetValue.oclIsTypeOf(AddressUse) then
+		if sourceValue.oclIsTypeOf(AddressUse) then
+			not getVariableForAddress(targetValue.oclAsType(AddressUse).address, t, genData).type.equalsIgnoreCase(getVariableForAddress(sourceValue.oclAsType(AddressUse).address, t, genData).type)
+		else 
+			hasAddressTypeRef(targetValue.oclAsType(AddressUse).address, t, genData)
+		endif 
+	else 
+		if sourceValue.oclIsTypeOf(AddressUse) then
+			hasAddressTypeRef(sourceValue.oclAsType(AddressUse).address, t, genData)
+		else
+			false
+		endif
+	endif
+/] 
+
+[query private hasAddressTypeRef(address: Address, t: Transition, genData : GeneratorData) : Boolean = 
+	getVariableForAddress(address, t, genData).type.equalsIgnoreCase('ref')
+/]
+
+
+
+
+
+
+
