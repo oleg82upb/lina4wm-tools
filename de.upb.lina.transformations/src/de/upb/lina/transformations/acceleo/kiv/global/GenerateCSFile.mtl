@@ -7,12 +7,12 @@
 [file ('specs/CS.utf8', false, 'UTF-8')]
 data specification
 	using [basis(genData)/]ref, PC, genProc, [basis(genData)/]ref-memory
-	CS := mkcs([for(am: AddressMapping | genData.getFilteredAddresses('globals'))]
-				. .[am.name/] : [am.type/];
+	CS := mkcs([for(variable: Variable | genData.globalVariables)]
+				. .[variable.newName/] : [variable.type/];
 [/for]				. .pc : Proc → PC;
 				. .mem : memory;
-[for(am: AddressMapping | genData.getFilteredAddresses('all-declare-params')->select(name.equalsIgnoreCase('returnvalue')._not()))]
-				. .[am.name/] : Proc → [am.type/];
+[for(variable: Variable | getAllLocalAndParameterVariables(genData)->select(not newName.equalsIgnoreCase('returnvalue')))]
+				. .[variable.newName/] : Proc → [variable.type/];
 [/for]);
 	variables
 		cs, cs' : CS;
