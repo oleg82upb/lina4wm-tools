@@ -10,8 +10,8 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.upb.lina.transformations.acceleo.kiv.global.GenerateGlobalKivModel;
 import de.upb.lina.transformations.acceleo.kiv.local.GenerateLocalKivModel;
-import de.upb.lina.transformations.acceleo.promela.GenerateOperationalPromelaModel;
-import de.upb.lina.transformations.acceleo.promela.GeneratePromelaModel;
+import de.upb.lina.transformations.acceleo.promela.normal.GeneratePromelaModel;
+import de.upb.lina.transformations.acceleo.promela.operational.GenerateOperationalPromelaModel;
 
 public enum ETransformationType {
 	PROMELA("promela", 0) {

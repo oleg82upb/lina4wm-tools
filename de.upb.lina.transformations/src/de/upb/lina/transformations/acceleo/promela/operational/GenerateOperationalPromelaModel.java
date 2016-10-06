@@ -8,7 +8,7 @@
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
-package de.upb.lina.transformations.acceleo.promela;
+package de.upb.lina.transformations.acceleo.promela.operational;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,17 +31,17 @@ import de.upb.lina.cfg.gendata.GendataPackage;
 import de.upb.llvm_parser.llvm.LlvmPackage;
 
 /**
- * Entry point of the 'GeneratePromelaModel' generation module.
+ * Entry point of the 'GenerateOperationalPromelaModel' generation module.
  *
  * @generated
  */
-public class GeneratePromelaModel extends AbstractAcceleoGenerator {
+public class GenerateOperationalPromelaModel extends AbstractAcceleoGenerator {
     /**
      * The name of the module.
      *
      * @generated
      */
-    public static final String MODULE_FILE_NAME = "/de/upb/lina/transformations/acceleo/promela/GeneratePromelaModel";
+    public static final String MODULE_FILE_NAME = "/de/upb/lina/transformations/acceleo/promela/operational/GenerateOperationalPromelaModel";
     
     /**
      * The name of the templates that are to be generated.
@@ -71,7 +71,7 @@ public class GeneratePromelaModel extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public GeneratePromelaModel() {
+    public GenerateOperationalPromelaModel() {
         // Empty implementation
     }
 
@@ -91,7 +91,7 @@ public class GeneratePromelaModel extends AbstractAcceleoGenerator {
      *             the model cannot be loaded.
      * @generated
      */
-    public GeneratePromelaModel(URI modelURI, File targetFolder,
+    public GenerateOperationalPromelaModel(URI modelURI, File targetFolder,
             List<? extends Object> arguments) throws IOException {
         initialize(modelURI, targetFolder, arguments);
     }
@@ -112,7 +112,7 @@ public class GeneratePromelaModel extends AbstractAcceleoGenerator {
      *             This can be thrown in two scenarios : the module cannot be found, or it cannot be loaded.
      * @generated
      */
-    public GeneratePromelaModel(EObject model, File targetFolder,
+    public GenerateOperationalPromelaModel(EObject model, File targetFolder,
             List<? extends Object> arguments) throws IOException {
         initialize(model, targetFolder, arguments);
     }
@@ -147,7 +147,7 @@ public class GeneratePromelaModel extends AbstractAcceleoGenerator {
                  * add in "arguments" this "String" attribute.
                  */
                 
-                GeneratePromelaModel generator = new GeneratePromelaModel(modelURI, folder, arguments);
+                GenerateOperationalPromelaModel generator = new GenerateOperationalPromelaModel(modelURI, folder, arguments);
                 
                 /*
                  * Add the properties from the launch arguments.
