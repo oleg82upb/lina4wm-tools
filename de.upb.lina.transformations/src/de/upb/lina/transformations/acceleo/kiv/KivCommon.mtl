@@ -2,33 +2,6 @@
 [module KivCommon('http://www.upb.de/lina/cfg/controlflow', 'http://www.upb.de/lina/cfg/gendata', 'http://www.upb.de/llvm_parser/llvm', 'http://www.eclipse.org/emf/2002/Ecore')]
 [import de::upb::lina::transformations::acceleo::TransformationCommon/]
 
-[template public generateCIndexFile(genData: GeneratorData)]
-[file ('specs/cindex.utf8', false, 'UTF-8')]
-data specification
-	IJ = [for (cfg : ControlFlowDiagram | genData.cfgs) separator ('|')] [generateCfgLabel(genData, cfg)/]ini [/for];
-	CJ = [for (cfg : ControlFlowDiagram | genData.cfgs->select(getCopTransitions()->size() > 0)) separator (' |')] [for (transition : Transition | getCopTransitions(cfg)) separator (' | ')][transition.label/][/for][/for];
-	RJ = [for (transition : Transition | getAllReturnTransitions(genData))separator ('|')] [transition.label/]ret [/for];
-variables
-		ij : IJ;
-		cj : CJ;
-		rj : RJ;
-end data specification
-[/file]
-[/template]
-
-[template public generatePCFile(genData: GeneratorData)]
-[file ('specs/PC.utf8', false, 'UTF-8')]
-data specification
-	PC = N |[for (node: ControlFlowLocation | getAllControlFlowLocations(genData)) separator  (' |')] 
-		
-		[node.label/] [/for];
-variables
-pc : PC;
-
-end data specification
-[/file]
-[/template]
-
 [query public getCopTransitions(cfg: ControlFlowDiagram) : Set(Transition) =
 cfg.transitions->select(instruction.oclIsUndefined() or not instruction.oclIsTypeOf(Return)) /]
 
