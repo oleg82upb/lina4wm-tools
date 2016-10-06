@@ -1,0 +1,16 @@
+[comment encoding = UTF-8 /]
+[module GenerateProcFile('http://www.upb.de/lina/cfg/controlflow', 'http://www.upb.de/lina/cfg/gendata', 'http://www.upb.de/llvm_parser/llvm', 'http://www.eclipse.org/emf/2002/Ecore')]
+[import de::upb::lina::transformations::acceleo::TransformationCommon/]
+[import de::upb::lina::transformations::acceleo::kiv::KivCommon/]
+
+[template public generateProcFile (genData : GeneratorData) ]
+[file ('specs/Proc.utf8', false, 'UTF-8')]
+specification
+	
+	sorts Proc;
+
+	variables p : Proc;
+
+end specification
+[/file]
+[/template]

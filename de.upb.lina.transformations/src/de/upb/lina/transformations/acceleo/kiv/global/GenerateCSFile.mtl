@@ -1,0 +1,24 @@
+[comment encoding = UTF-8 /]
+[module GenerateCSFile('http://www.upb.de/lina/cfg/controlflow', 'http://www.upb.de/lina/cfg/gendata', 'http://www.upb.de/llvm_parser/llvm', 'http://www.eclipse.org/emf/2002/Ecore')]
+[import de::upb::lina::transformations::acceleo::TransformationCommon/]
+[import de::upb::lina::transformations::acceleo::kiv::KivCommon/]
+
+[template public generateCSFile (genData : GeneratorData) ]
+[file ('specs/CS.utf8', false, 'UTF-8')]
+data specification
+	using [basis(genData)/]ref, PC, genProc, [basis(genData)/]ref-memory
+	CS := mkcs([for(am: AddressMapping | genData.getFilteredAddresses('globals'))]
+				. .[am.name/] : [am.type/];
+[/for]				. .pc : Proc → PC;
+				. .mem : memory;
+[for(am: AddressMapping | genData.getFilteredAddresses('all-declare-params')->select(name.equalsIgnoreCase('returnvalue')._not()))]
+				. .[am.name/] : Proc → [am.type/];
+[/for]);
+	variables
+		cs, cs' : CS;
+		pcf, pcf' : Proc → PC;
+		[basis(genData)/]f,[basis(genData)/]f' : Proc → [basis(genData)/];
+		reff, reff' : Proc → ref;
+end data specification
+[/file]
+[/template]

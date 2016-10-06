@@ -1,0 +1,16 @@
+[comment encoding = UTF-8 /]
+[module GenerateGenProcFile('http://www.upb.de/lina/cfg/controlflow', 'http://www.upb.de/lina/cfg/gendata', 'http://www.upb.de/llvm_parser/llvm', 'http://www.eclipse.org/emf/2002/Ecore')]
+[import de::upb::lina::transformations::acceleo::TransformationCommon/]
+[import de::upb::lina::transformations::acceleo::kiv::KivCommon/]
+
+[template public generateGenProcFile (genData : GeneratorData) ]
+[file ('specs/genProc.utf8', false, 'UTF-8')]
+generic specification
+	
+	parameter Proc
+
+	target
+
+end generic specification
+[/file]
+[/template]
