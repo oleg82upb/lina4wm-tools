@@ -12,9 +12,9 @@ enrich 	CS,
 	functions
 		INVOP : Proc × IJ → [if(input(genData))]input[else][inputType(genData)/][/if] × CS × CS → bool;
 		COP : Proc × CJ → CS × CS → bool;
-[let returns : OrderedSet(TransitionLabel) = genData.transitionLabels->select(transition.instruction.oclIsUndefined()._not()._and(transition.instruction.eClass() = Return))]
-	[if(returns->size() > 0)]
-		RETOP : Proc × RJ → CS × CS × [if(genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->size()>0)][genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->first().type/][else][basis(genData)/][/if] → bool;
+[let returnTransitions : Sequence(Transition) = getAllReturnTransitions(genData)]
+	[if(not returnTransitions->isEmpty())]
+		RETOP : Proc × RJ → CS × CS × [if(not getAllReturnVariables(genData)->isEmpty())][getAllReturnVariables(genData)->first().type/][else][basis(genData)/][/if] → bool;
 [/if]
 	predicates
 		CSInit : CS;
@@ -22,39 +22,39 @@ enrich 	CS,
 	variables
 		invop : [if(input(genData))]input[else][inputType(genData)/][/if] × CS × CS → bool;
 		cop : CS × CS → bool;
-[if(returns->size() > 0)]
-		retop : CS × CS × [if(genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->size()>0)][genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->first().type/][else][basis(genData)/][/if] → bool;
-[/if]		[for(am: AddressMapping | genData.getFilteredAddresses('globals'))]
-		[am.name/], [am.name/]' : [am.type/];
+[if(not returnTransitions->isEmpty())]
+		retop : CS × CS × [if(not getAllReturnVariables(genData)->isEmpty())][getAllReturnVariables(genData)->first().type/][else][basis(genData)/][/if] → bool;
+[/if]		[for(variable: Variable | genData.globalVariables)]
+		[variable.newName/], [variable.newName/]' : [variable.type/];
 		[/for]
 		[if(input(genData)._not())]
 		inp : [inputType(genData)/];
-[/if][if(returns->size() > 0)]
-		return : [if(genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->size()>0)][genData.addressMappings->select(name.equalsIgnoreCase('returnvalue'))->first().type/][else][basis(genData)/][/if];
+[/if][if(not returnTransitions->isEmpty())]
+		return : [if(not getAllReturnVariables(genData)->isEmpty())][getAllReturnVariables(genData)->first().type/][else][basis(genData)/][/if];
 [/if][/let]
 	axioms
 	CSInit : 
-	⊦ CSInit(mkcs([for(am: AddressMapping | genData.getFilteredAddresses('globals'))][am.name/], [/for]pcf, mem[for(am: AddressMapping | genData.getFilteredAddresses('all-declare-params')->select(name.equalsIgnoreCase('returnvalue')._not()))], [am.type/]f[i/][/for])) ↔ ([for(am: AddressMapping | genData.getFilteredAddresses('globals'))] [am.name/] = [if(am.type.equalsIgnoreCase('ref'))]⌜0⌝[else]0[/if] ∧[/for] pcf = (λ p. N) [for(am: AddressMapping | genData.getFilteredAddresses('all-declare-params')->select(name.equalsIgnoreCase('returnvalue')._not()))] ∧ [am.type/]f[i/] = (λ p. [if(am.type.equalsIgnoreCase('ref'))]⌜0⌝[else]0[/if])[/for]);
+	⊦ CSInit(mkcs([for(variable: Variable | genData.globalVariables)][variable.newName/], [/for]pcf, mem[for(variable: Variable | getAllLocalAndParameterVariables(genData)->select(not newName.equalsIgnoreCase('returnvalue')))], [variable.type/]f[i/][/for])) ↔ ([for(variable: Variable | genData.globalVariables)] [variable.newName/] = [if(variable.type.equalsIgnoreCase('ref'))]⌜0⌝[else]0[/if] ∧[/for] pcf = (λ p. N) [for(variable: Variable | getAllLocalAndParameterVariables(genData)->select(not newName.equalsIgnoreCase('returnvalue')))] ∧ [variable.type/]f[i/] = (λ p. [if(variable.type.equalsIgnoreCase('ref'))]⌜0⌝[else]0[/if])[/for]);
 	used for : s, ls;
 
 	[for (cfg : ControlFlowDiagram | genData.cfgs)] 
 ;; 	[generateCfgLabel(genData, cfg)/] reflects function [cfg.name/]
 	[generateCfgLabel(genData, cfg)/]ini :
-	⊦ INVOP(p, [generateCfgLabel(genData, cfg)/]ini)(inp, cs, cs') ↔ cs .pc(p) = N [if(input(genData))][let params : OrderedSet(AddressMapping) = genData.getFilteredAddresses('func-params:'+cfg.name)->select(name.equalsIgnoreCase('returnvalue')._not())][if(params->size()>0)]∧ [for(am : AddressMapping | params->select(type.equalsIgnoreCase(genData.basis())))][am.type/][/for][for(am : AddressMapping | params->select(type.equalsIgnoreCase('ref')))][am.type/][/for]?(inp) [/if][/let][/if]∧ cs' = cs .pc:= cs.pc(p ; [generateStartPC(genData, cfg)/]) [generateFunctionParameter(cfg, genData)/]; 
+	⊦ INVOP(p, [generateCfgLabel(genData, cfg)/]ini)(inp, cs, cs') ↔ cs .pc(p) = N [if(input(genData))][let parameterVariables : OrderedSet(Variable) = cfg.parameterVariables->select(not newName.equalsIgnoreCase('returnvalue'))][if(not parameterVariables->isEmpty())]∧ [for(variable : Variable | parameterVariables->select(type.equalsIgnoreCase(genData.basis())))][variable.type/][/for][for(variable : Variable | parameterVariables->select(type.equalsIgnoreCase('ref')))][variable.type/][/for]?(inp) [/if][/let][/if]∧ cs' = cs .pc:= cs.pc(p ; [generateStartPC(genData, cfg)/]) [generateFunctionParameter(cfg, genData)/]; 
 	used for : s, ls;
 
 	[/for]
-	[for (label : TransitionLabel | genData.transitionLabels->select(transition.instruction.oclIsUndefined()._or((transition.instruction.eClass() = Return)._not())))]
-;;	[label.transition.createComment()/]
-	[label.name/] :
-	⊦ COP(p, [label.name/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, label.transition)/] ∧ [label.transition.transformTransition(genData)/];
+	[for (copTransition : Transition | getAllCopTransitions(genData))]
+;;	[copTransition.createComment()/]
+	[copTransition.label/] :
+	⊦ COP(p, [copTransition.label/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [copTransition.transformTransition(genData)/];
 	used for : s, ls;
 
 	[/for]
-	[for (label : TransitionLabel | genData.transitionLabels->select(transition.instruction.oclIsUndefined()._not()._and(transition.instruction.eClass() = Return)))]
-;;	[label.transition.createComment()/]
-	[label.name/]ret :
-	⊦ RETOP(p, [label.name/]ret)(cs, cs', return) ↔ cs .pc(p) = [genData.generatePrevPC(genData, label.transition)/] ∧ cs' = cs .pc:= cs.pc(p ; N)[generateReturn(genData, label.transition.instruction.oclAsType(Return))/];
+	[for (returnTransition : Transition | getAllReturnTransitions(genData))]
+;;	[returnTransition.createComment()/]
+	[returnTransition.label/]ret :
+	⊦ RETOP(p, [returnTransition.label/]ret)(cs, cs', return) ↔ cs .pc(p) = [genData.generatePrevPC(genData, returnTransition)/] ∧ cs' = cs .pc:= cs.pc(p ; N)[generateReturn(genData, returnTransition.instruction.oclAsType(Return))/];
 	used for : s, ls;
 	
 	[/for]
