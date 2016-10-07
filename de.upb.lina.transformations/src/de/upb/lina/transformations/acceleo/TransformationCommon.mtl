@@ -74,3 +74,8 @@ endif
 [query public getTransitionGuard(t : Transition, genData: GeneratorData) : ConstraintMapping = 
 genData.constraints->any(cm | cm.transition = t) 
 /]
+
+[comment]Checks whether the given transformation specific key is present or not. Returns true if this is the case.[/comment]
+[query public hasTransformationSpecificKey(genData : GeneratorData, key : String): Boolean = 
+not genData.transformationSpecificKeys->indexOf(key).oclIsUndefined()
+/]
