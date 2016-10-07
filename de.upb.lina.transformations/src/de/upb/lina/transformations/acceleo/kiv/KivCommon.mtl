@@ -69,9 +69,6 @@ if genData.transformationSpecificKeys->indexOf('INPUT_REF').oclIsUndefined() the
 [cleanFunctionName(cfg.name)/]
 [/template]
 
-[query public getFlushedAvp(t: FlushTransition) : AddressValuePair = invoke('de.upb.lina.cfg.tools.GraphUtility','getFlushedAddressValuePair(de.upb.lina.cfg.controlflow.FlushTransition)', Sequence{t})/]
-[query public getcorrespondingAddressMapping(a: Address, genData : GeneratorData, keyForMapping : String) : AddressMapping = invoke('de.upb.lina.transformations.logic.GendataPrecomputer','getCorrespondingAddressMapping(de.upb.llvm_parser.llvm.Address, de.upb.lina.cfg.gendata.GeneratorData, java.lang.String)', Sequence{a,genData,keyForMapping})/]
-
 [query public arithmeticOp(s : EString) : String = 
 if s.equalsIgnoreCase('add') then
 	'+'
