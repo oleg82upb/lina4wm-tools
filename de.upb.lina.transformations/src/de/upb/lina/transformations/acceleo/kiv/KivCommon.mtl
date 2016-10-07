@@ -39,6 +39,10 @@ genData.cfgs->iterate(cfg : ControlFlowDiagram; allParameterVariables: Sequence(
 /]
 
 
+[query public getParameterVariablesOfTypeExcludingReturnVariables(cfg : ControlFlowDiagram, type : String): Sequence(Variable) = 
+cfg.parameterVariables->select(type.equalsIgnoreCase(type))->select(not newName.equalsIgnoreCase('returnvalue'))->asSequence()
+/]
+
 [template public basis(genData : GeneratorData)]
 [for(basis: String | genData.transformationSpecificKeys)][if (basis.equalsIgnoreCase('int'))]int[/if][if (basis.equalsIgnoreCase('nat'))]nat[/if][/for]
 [/template]
