@@ -27,7 +27,7 @@ enrich 	CS,
 [/if]		[for(variable: Variable | genData.globalVariables)]
 		[variable.newName/], [variable.newName/]' : [variable.type/];
 		[/for]
-		[if(input(genData)._not())]
+		[if(not input(genData))]
 		inp : [inputType(genData)/];
 [/if][if(not returnTransitions->isEmpty())]
 		return : [if(not getAllReturnVariables(genData)->isEmpty())][getAllReturnVariables(genData)->first().type/][else][basis(genData)/][/if];
@@ -38,9 +38,9 @@ enrich 	CS,
 	used for : s, ls;
 
 	[for (cfg : ControlFlowDiagram | genData.cfgs)] 
-;; 	[generateCfgLabel(genData, cfg)/] reflects function [cfg.name/]
+;; 	[generateCfgLabel(genData, cfg)/] reflects function [cfg.functionDefinition.address.name/]
 	[generateCfgLabel(genData, cfg)/]ini :
-	⊦ INVOP(p, [generateCfgLabel(genData, cfg)/]ini)(inp, cs, cs') ↔ cs .pc(p) = N [if(input(genData))][let parameterVariables : OrderedSet(Variable) = cfg.parameterVariables->select(not newName.equalsIgnoreCase('returnvalue'))][if(not parameterVariables->isEmpty())]∧ [for(variable : Variable | parameterVariables->select(type.equalsIgnoreCase(genData.basis())))][variable.type/][/for][for(variable : Variable | parameterVariables->select(type.equalsIgnoreCase('ref')))][variable.type/][/for]?(inp) [/if][/let][/if]∧ cs' = cs .pc:= cs.pc(p ; [generateStartPC(genData, cfg)/]) [generateFunctionParameter(cfg, genData)/]; 
+	⊦ INVOP(p, [generateCfgLabel(genData, cfg)/]ini)(inp, cs, cs') ↔ cs .pc(p) = N [if(input(genData))][let parameterVariables : OrderedSet(Variable) = cfg.parameterVariables->select(not newName.equalsIgnoreCase('returnvalue'))][if(not parameterVariables->isEmpty())]∧ [for(variable : Variable | parameterVariables->select(type.equalsIgnoreCase(genData.basis())))][variable.type/][/for][for(variable : Variable | parameterVariables->select(type.equalsIgnoreCase('ref')))][variable.type/][/for]?(inp) [/if][/let][/if]∧ cs' = cs .pc:= cs.pc(p ; [generateStartPC(genData, cfg)/]) [generateFunctionParameters(cfg, genData)/]; 
 	used for : s, ls;
 
 	[/for]
@@ -63,10 +63,11 @@ end enrich
 
 [/template]
 
-[template private generateFunctionParameter(cfg: ControlFlowDiagram, genData : GeneratorData)]
-[for(am : AddressMapping | genData.getFilteredAddresses('func-params:' + cfg.name)->select(type.equalsIgnoreCase('ref'))->select(name.equalsIgnoreCase('returnvalue')._not()))]
-.[am.name/]:= cs.[am.name/](p ; inp[if(input(genData))] .[am.type/][i/][/if])[/for][for(am : AddressMapping | genData.getFilteredAddresses('func-params:' + cfg.name)->select(type.equalsIgnoreCase(basis(genData)))->select(name.equalsIgnoreCase('returnvalue')._not()))]
-.[am.name/]:= cs.[am.name/](p ; inp[if(genData.transformationSpecificKeys->indexOf('INPUT_REF').oclIsUndefined()._not() and input(genData)._not())] .v [/if][if(input(genData))] .[am.type/][i/][/if])[/for]
+[template private generateFunctionParameters(cfg: ControlFlowDiagram, genData : GeneratorData)]
+[for(variable : Variable | getParameterVariablesOfTypeExcludingReturnVariables(cfg, 'ref'))]
+.[variable.newName/]:= cs.[variable.newName/](p ; inp[if(input(genData))] .[variable.type/][i/][/if])[/for]
+[for(variable : Variable | getParameterVariablesOfTypeExcludingReturnVariables(cfg, basis(genData)))]
+.[variable.newName/]:= cs.[variable.newName/](p ; inp[if(hasTransformationSpecificKey(genData, 'INPUT_REF') and not input(genData))] .v [/if][if(input(genData))] .[variable.type/][i/][/if])[/for]
 [/template]
 
 [comment ============================= Transitions=============================================== /]
