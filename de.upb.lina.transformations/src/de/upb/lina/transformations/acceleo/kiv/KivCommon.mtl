@@ -142,7 +142,7 @@ resume [s.type.extractType()/] [s.value.extractValue()/]
 	NEEDS ATTENTION ![else][t.eClass().name/][/if][/let]
 [/template]
 
-[query public displayParameter(param : Parameter) : String = param.type.extractType() + param.value.extractValue()/]
+[query public displayParameter(param : Parameter) : String = param.type.extractType() + ' ' + param.value.extractValue()/]
 
 [template public extractType(type : EObject)]
 [let type : Predefined = type]
