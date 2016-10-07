@@ -73,9 +73,10 @@ constants
 [/template]
 
 [template private generateFunctionParameter(cfg: ControlFlowDiagram, genData : GeneratorData)]
-[for(am : Variable | cfg.parameterVariables->select(type.equalsIgnoreCase('ref'))->select(newName.equalsIgnoreCase('returnvalue')._not()))]
-.[am.newName/]:= inp [if(input(genData))].[am.type/][i/] [/if][/for][for(am : Variable | cfg.parameterVariables->select(type.equalsIgnoreCase(basis(genData)))->select(name.equalsIgnoreCase('returnvalue')._not()))]
-.[am.newName/]:= inp [if(genData.transformationSpecificKeys->indexOf('INPUT_REF').oclIsUndefined()._not() and input(genData)._not())].v [/if][if(input(genData))].[am.type/][i/] [/if][/for]
+[for(variable : Variable | getParameterVariablesOfTypeExcludingReturnVariables(cfg, 'ref'))]
+.[variable.newName/]:= inp [if(input(genData))].[variable.type/][i/] [/if][/for]
+[for(variable : Variable | getParameterVariablesOfTypeExcludingReturnVariables(cfg, basis(genData)))]
+.[variable.newName/]:= inp [if(hasTransformationSpecificKey(genData, 'INPUT_REF') and input(genData)._not())].v [/if][if(input(genData))].[variable.type/][i/] [/if][/for]
 [/template]
 
 [comment ============================= Transitions=============================================== /]
