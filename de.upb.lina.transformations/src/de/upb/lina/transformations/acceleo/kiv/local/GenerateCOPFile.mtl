@@ -100,8 +100,7 @@ ls' = ls .pc:= [generateNextPC(genData, t)/][if(t.copyAddress.oclIsUndefined()._
 
 [comment === FlushTransition ====/]
 [template private transformTransition(t: FlushTransition, genData: GeneratorData)]
-[let flushed : AddressValuePair = getFlushedAvp(t)]
-ls' = ls .pc:= [generateNextPC(genData, t)/] ∧ mem' = mem['[ '/][t.flushedEntry.address.value.castFromRef(t, genData)/] ,[t.flushedEntry.values->first().value.castToRef(t, genData)/][']'/][/let]
+ls' = ls .pc:= [generateNextPC(genData, t)/] ∧ mem' = mem['[ '/][t.flushedEntry.address.value.castFromRef(t, genData)/] ,[t.flushedEntry.values->first().value.castToRef(t, genData)/][']'/]
 [/template]
 
 [comment === EarlyReadTransition ====/]
