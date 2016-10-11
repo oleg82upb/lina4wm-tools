@@ -82,9 +82,16 @@ end enrich
 [/template]
 
 [query private canGeneratePCDirectly(t : Transition) : Boolean = 
-if t.instruction.oclIsUndefined() or t.instruction.oclIsKindOf(Select) or t.instruction.oclIsTypeOf(CompareInt) or t.instruction.oclIsTypeOf(CmpXchg) 
-or t.instruction.oclIsTypeOf(AtomicRmwMax) or t.instruction.oclIsTypeOf(AtomicRmwMin) or t.instruction.oclIsTypeOf(AtomicRmwUmax) or t.instruction.oclIsTypeOf(AtomicRmwUmin) 
-then false else true endif /]
+if t.instruction.oclIsUndefined() 
+	or t.instruction.oclIsKindOf(Select) 
+	or t.instruction.oclIsTypeOf(CompareInt) 
+	or t.instruction.oclIsTypeOf(CmpXchg) 
+	or t.instruction.oclIsTypeOf(AtomicRmwMax) 
+	or t.instruction.oclIsTypeOf(AtomicRmwMin) 
+	or t.instruction.oclIsTypeOf(AtomicRmwUmax) 
+	or t.instruction.oclIsTypeOf(AtomicRmwUmin) 
+then false 
+else true endif /]
 
 [template public handleCSPartGeneration (t : Transition, pc : String, genData : GeneratorData) ]
 [if (canGenerateCSPart(t))][genCSPart(t.instruction, t, genData)/][/if]
