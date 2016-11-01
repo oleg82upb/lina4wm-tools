@@ -2,6 +2,18 @@
 [module KivCommon('http://www.upb.de/lina/cfg/controlflow', 'http://www.upb.de/lina/cfg/gendata', 'http://www.upb.de/llvm_parser/llvm', 'http://www.eclipse.org/emf/2002/Ecore')]
 [import de::upb::lina::transformations::acceleo::TransformationCommon/]
 
+[comment]Returns the parameter, which is read from the store buffer by the load instruction linked to the given early read transition. 
+Note that this works for both TSO and PSO, as we assume that the latest parameter is read.[/comment]
+[query public getParameterOfBufferEntryReadByEarlyRead(earlyReadTransition : EarlyReadTransition) : Parameter = 
+	getBufferEntryReadByEarlyRead(earlyReadTransition).values->last()
+/]
+
+[comment]Returns the buffer entry of the given node, which is read by load linked to the given early read transition.[/comment]
+[query public getBufferEntryReadByEarlyRead(earlyReadTransition : EarlyReadTransition) : AddressValuePair = 
+	earlyReadTransition.source.buffer.addressValuePairs->
+	select(address.value.oclAsType(AddressUse).address.name.equalsIgnoreCase(earlyReadTransition.instruction.oclAsType(Load).address.value.oclAsType(AddressUse).address.name))
+/]
+
 [query public getCopTransitions(cfg: ControlFlowDiagram) : Set(Transition) =
 cfg.transitions->select(instruction.oclIsUndefined() or not instruction.oclIsTypeOf(Return)) /]
 
