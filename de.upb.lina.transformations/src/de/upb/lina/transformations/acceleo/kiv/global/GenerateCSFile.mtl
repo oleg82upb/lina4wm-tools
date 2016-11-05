@@ -7,7 +7,8 @@
 [file ('specs/CS.utf8', false, 'UTF-8')]
 data specification
 	using [basis(genData)/]ref, PC, genProc, [basis(genData)/]ref-memory
-	CS := mkcs([for(variable: Variable | genData.globalVariables)]
+	CS := mkcs(
+[for(variable: Variable | genData.globalVariables)]
 				. .[variable.newName/] : [variable.type/];
 [/for]				. .pc : Proc → PC;
 				. .mem : memory;
