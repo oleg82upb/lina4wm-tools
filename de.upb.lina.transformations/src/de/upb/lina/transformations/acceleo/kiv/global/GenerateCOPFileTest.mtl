@@ -80,12 +80,9 @@ end enrich
 
 
 [comment]:::::::::::======== COP Transition Transformation ========:::::::::::[/comment]
-[comment][template public tranformCOPTransition (copTransition : Transition, store : Store, genData : GeneratorData) ]
-[generateTransitionCommentLabelAndDefaultBeginning(copTransition, genData)/][genData.generatePrevPC(genData, copTransition)/] ∧ ∧ cs' = cs .pc:= cs.pc(p ; [generateNextPC(genData, copTransition)/]) BLUBB [genPhiInstruction(copTransition, genData)/];
-	used for : s, ls;
-[/template][/comment]
 [template public tranformCOPTransition (copTransition : Transition, instruction : Instruction, genData : GeneratorData) ]
-FALLBACK
+[generateTransitionCommentLabelAndDefaultBeginning(copTransition, genData)/][genData.generatePrevPC(genData, copTransition)/] ∧ cs' = cs .pc:= cs.pc(p ; [generateNextPC(genData, copTransition)/]) [genPhiInstruction(copTransition, genData)/] ∧ mem' = mem;
+	used for : s, ls;
 [/template]
 
 [comment]======== GetElementPtr ========[/comment]
@@ -95,11 +92,11 @@ FALLBACK
 [/template]
 
 [query private generateGetElementPtrCSPart(transition : Transition, getElementPtr : GetElementPtr, genData : GeneratorData) : String = 
-'.' + addressToString(getElementPtr.result, transition, genData) + ':=' + possiblyCastToRef('('+ castFromRef(getElementPtr.aggregate.value, transition, genData) +' + '+ findMemorySizeMappingForInstruction(getElementPtr, genData).offset + ')', getElementPtr.result, transition, genData)
+'.' + addressToString(getElementPtr.result, transition, genData) + ':=' + possiblyCastToRef('('+ castFromRef(getElementPtr.aggregate.value, transition, genData) +' + '+ findMemorySizeMappingForInstruction(getElementPtr.oclAsType(EObject), genData).offset + ')', getElementPtr.result, transition, genData)
 /]
 
-[query private findMemorySizeMappingForInstruction(getElementPtr : GetElementPtr, genData : GeneratorData) : MemorySizeMapping = 
-	genData.memorySizeMappings->any(instruction = getElementPtr)
+[query private findMemorySizeMappingForInstruction(pInstruction : EObject, genData : GeneratorData) : MemorySizeMapping = 
+	genData.memorySizeMappings->any(instruction = pInstruction)
 /]
 
 [comment]======== Load ========[/comment]
@@ -119,22 +116,26 @@ FALLBACK
 
 [comment]======== Branch ========[/comment]
 [template public tranformCOPTransition (copTransition : Transition, branch : Branch, genData : GeneratorData) ]
-[generateTransitionCommentLabelAndDefaultBeginning(copTransition, genData)/][genData.generatePrevPC(genData, copTransition)/] ∧ cs' = cs .pc:= cs.pc(p ; [generateNextPC(genData, copTransition)/]) [genPhiInstruction(copTransition, genData)/] [generateBranchMemPart(copTransition.oclAsType(GuardedTransition), branch, genData)/] ∧ mem' = mem;
+[generateTransitionCommentLabelAndDefaultBeginning(copTransition, genData)/][genData.generatePrevPC(genData, copTransition)/] ∧ cs' = cs .pc:= cs.pc(p ; [generateNextPC(genData, copTransition)/]) [genPhiInstruction(copTransition, genData)/] [generateBranchSpecificPart(copTransition, branch, genData)/] ∧ mem' = mem;
 	used for : s, ls;
 [/template]
 
-[query private generateBranchMemPart(guardedTransition : GuardedTransition, branch : Branch, genData : GeneratorData): String = 
+[query private generateBranchSpecificPart(transition : Transition, branch : Branch, genData : GeneratorData) : String = 
 	if(not branch.condition.oclIsUndefined()) then
-		'∧' + possiblyAddCS(branch.condition, genData) 
-			+ branch.condition.valueToString(guardedTransition, genData) +
-			if(guardedTransition.condition.contains('!')) then 
-				'= 0' 
-			else
-				'= 1'
-			endif
+		generateBranchMemPart(transition.oclAsType(GuardedTransition), branch, genData)
 	else
 		''
 	endif
+/]
+
+[query private generateBranchMemPart(guardedTransition : GuardedTransition, branch : Branch, genData : GeneratorData): String = 
+	'∧ ' + possiblyAddCS(branch.condition, genData) 
+		+ branch.condition.valueToString(guardedTransition, genData) +
+		if(guardedTransition.condition.contains('!')) then 
+			'= 0' 
+		else
+			'= 1'
+		endif
 /]
 
 [comment]======== Switch ========[/comment]
@@ -464,6 +465,62 @@ and therefore need special handling. In particular, we need two KIV COP transiti
 .[variable.newName/]:= cs.[variable.newName/](p ; inp[if(hasTransformationSpecificKey(genData, 'INPUT_REF') and not input(genData))] .v [/if][if(input(genData))] .[variable.type/][i/][/if])[/for]
 [/template]
 
+[query private possiblyAddCS(v : Value, genData: GeneratorData) : String = 
+	if v.oclIsTypeOf(AddressUse) then 
+		'cs .' 
+	else 	
+		'' 
+	endif 
+/]
+
+[comment]Returns the proper address access expression for the given address based on if it a local address or a global one.[/comment]
+[query private getAddressAccessExpression(address : Address, transition : Transition, s : String, genData : GeneratorData) : String = 
+	if isLocalAddress(address, genData) then 
+		'cs.' + addressToString(address, transition, genData) + '(p ; ' + s + ')'
+	else 
+		s
+	endif
+/]
+
+[comment]Checks whether the given address is a local adress or a global one. Returns true if it is a local one.[/comment]
+[query private isLocalAddress(a : Address, genData : GeneratorData) : Boolean = 
+	if genData.globalVariables->select(originalAddresses->indexOf(a) > 0)->isEmpty() then 
+		true 
+	else 
+		false 
+	endif
+/]
+
+[comment]:::::::::::======== Casting and Type Comparison Operations ========:::::::::::[/comment]
+[query private possiblyCastToRef(s : String, address : Address, t : Transition, genData : GeneratorData) : String = 
+	if(getVariableForAddress(address, t, genData).type.equalsIgnoreCase('ref')) then
+		getAddressAccessExpression(address, t, '⌜'+s+'⌝', genData)
+	else
+		getAddressAccessExpression(address, t, s, genData)
+	endif
+/]
+
+[query private possiblyCast(value : Value, transition : Transition, resultType : String, genData : GeneratorData) : String = 
+	if isAddressUse(value) then 
+		let am : Variable = getVariableForAddress(value.oclAsType(AddressUse).address, transition, genData) in
+			if resultType.equalsIgnoreCase(genData.basis()) and am.type.equalsIgnoreCase('ref') then
+				castFromRef(value, transition, genData)
+			else 
+				if resultType.equalsIgnoreCase('ref') and am.type.equalsIgnoreCase(genData.basis()) then
+					castToRef(value, transition, genData)
+				else
+					possiblyAddCS(value, genData) + valueToString(value, transition, genData)
+				endif
+			endif
+	else
+		if resultType.equalsIgnoreCase('ref') then
+			castToRef(value, transition, genData)
+		else
+			possiblyAddCS(value, genData) + valueToString(value, transition, genData)
+		endif	
+	endif				
+/]
+
 [comment]TODO: FIX THIS[/comment]
 [template private compareTypecorrect(v1 : Value, t1 : Transition, v2 : Value, t2 :Transition, genData : GeneratorData)]
 [let cs1 : String = possiblyAddCS(v1, genData)][let cs2 : String = possiblyAddCS(v2, genData)]
@@ -487,37 +544,86 @@ and therefore need special handling. In particular, we need two KIV COP transiti
 [else][s1/] = [s2/][/if]
 [/let][/let][/let][/let]
 [/template]
-
-
-[template private possiblyCastToRef(s : String, address : Address, t : Transition, genData : GeneratorData)]
-[let am : Variable = getVariableForAddress(address, t, genData)][if(am.type.equalsIgnoreCase('ref'))][getAddressAccessExpression(address, t, '⌜'+s+'⌝', genData)/][else][getAddressAccessExpression(address, t, s, genData)/][/if][/let]
-[/template]
-
-
-[query private possiblyAddCS(v : Value, genData: GeneratorData) : String = if v.oclIsTypeOf(AddressUse) then 'cs .' else '' endif /]
-
-[template private possiblyCast(v: Value, t : Transition, resultType : String, genData : GeneratorData)]
-TODO: FILL WITH CONTENT
-[/template]
-
-[query public castToRef(v : Value, t : Transition, genData : GeneratorData): String = 
-	'TODO: FILL WITH CONTENT'
+[comment]======== CastToRef Implementation ========[/comment]
+[query public castToRef(v : Value, t : Transition, genData : GeneratorData) : String = 
+	'//NOT SUPPORTED'
 /]
 
-[query public castFromRef(v : Value, t : Transition, genData : GeneratorData): String = 
-	'TODO: FILL WITH CONTENT'
+[query private castToRef(primitiveValue : PrimitiveValue, transition : Transition, genData : GeneratorData) : String = 
+	if(primitiveValue.oclAsType(PrimitiveValue).value.equalsIgnoreCase('null')) then 
+		'null'
+	else
+		'⌜' + possiblyAddCS(primitiveValue, genData) + valueToString(primitiveValue, transition, genData) + '⌝'
+	endif
 /]
 
-[comment]Returns the proper address access expression for the given address based on if it a local address or a global one.[/comment]
-[query private getAddressAccessExpression(address : Address, transition : Transition, s : String, genData : GeneratorData) : String = 
-if isLocalAddress(address, genData) then 
-	'cs.' + addressToString(address, transition, genData) + '(p ; ' + s + ')'
-else 
-	s
-endif
+[query private castToRef(v : Constant, t: Transition, genData : GeneratorData) : String = 
+	'⌜' + v.oclAsType(Constant).getValueFromConstant() + '⌝'
 /]
 
-[comment]Checks whether the given address is a local adress or a global one. Returns true if it is a local one.[/comment]
-[query private isLocalAddress(a : Address, genData : GeneratorData) : Boolean = if genData.globalVariables->select(originalAddresses->indexOf(a) > 0)->isEmpty() then true else false endif/]
+[query private castToRef(addressUse : AddressUse, transition : Transition, genData : GeneratorData) : String = 
+let variable : Variable = getVariableForAddress(addressUse.address, transition, genData) in 
+	let addressName : String = possiblyAddCS(addressUse, genData) + variable.newName.transformBooleanToNumber() in
+		if variable.type.equalsIgnoreCase(genData.basis()) then 
+			'⌜' + addressName + '⌝'
+		else
+			addressName
+		endif
+/]
+
+[query private castToRef(nestedGetElementPtr : NestedGetElementPtr, transition : Transition, genData : GeneratorData) : String = 
+	nestedGetElementPointerToString(nestedGetElementPtr, transition, genData)
+/]
+
+[query private castToRef(nestedCast : NestedCast, transition : Transition, genData : GeneratorData) : String = 
+	nestedCastToString(nestedCast, transition, genData)
+/]
+
+[query private nestedCastToString(nestedCast : NestedCast, transition : Transition, genData : GeneratorData) : String = 
+	if(extractType(nestedCast.from).contains('*')) then 
+		possiblyCast(nestedCast.value, transition, 'ref', genData) 
+	else
+		possiblyCast(nestedCast.value, transition, genData.basis(), genData)
+	endif
+/]
+
+[query private nestedGetElementPointerToString(nestedGetElementPointer : NestedGetElementPtr, transition : Transition, genData : GeneratorData) : String = 
+	'(' + castFromRef(nestedGetElementPointer.aggregate.value, transition, genData) + ' + '
+		+ findMemorySizeMappingForInstruction(nestedGetElementPointer.oclAsType(EObject), genData).offset +
+	')'		
+/]
+
+[comment]======== CastFromRef Implementation ========[/comment]
+[query private castFromRef(v : Value, t: Transition, genData : GeneratorData) : String = 
+	'//NOT SUPPORTED'
+/]
+
+[query private castFromRef(primitiveValue : PrimitiveValue, transition: Transition, genData : GeneratorData) : String = 
+	possiblyAddCS(primitiveValue, genData) + primitiveValue.value.transformBooleanToNumber()
+/]
+
+[query public castFromRef(constant : Constant, transitin: Transition, genData : GeneratorData) : String = 
+	constant.getValueFromConstant()
+/]
+
+[query public castFromRef(addressUse : AddressUse, transition: Transition, genData : GeneratorData) : String = 
+	let variable : Variable = getVariableForAddress(addressUse.address, transition, genData) in
+		let addressName : String = possiblyAddCS(addressUse, genData) + variable.newName.transformBooleanToNumber() in
+			if (variable.type.equalsIgnoreCase('ref')) then
+				addressName + ' .v'
+			else
+				addressName
+			endif
+/]
+
+[query public castFromRef(nestedGetElementPointer : NestedGetElementPtr, transition: Transition, genData : GeneratorData) : String = 
+	nestedGetElementPointerToString(nestedGetElementPointer, transition, genData)
+/]
+
+[query public castFromRef(nestedCast : NestedCast, transition: Transition, genData : GeneratorData) : String = 
+	nestedCastToString(nestedCast, transition, genData)
+/]
+
+
 
 
