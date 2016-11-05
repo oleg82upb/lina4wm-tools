@@ -98,17 +98,58 @@ endif
 endif
 /]
 
-[query public addressToString(address: Address, t : Transition, genData: GeneratorData) : String = getVariableForAddress(address, t, genData).newName/]
+[query public addressToString(address: Address, t : Transition, genData: GeneratorData) : String = 
+	getVariableForAddress(address, t, genData).newName
+/]
 
-[query public possiblyZeroBeforeMinus(s : EInt) : String = if (s < 0) then '(0 - '+s.abs()+')' else s endif /]
+[query public possiblyZeroBeforeMinus(s : EInt) : String = 
+	if (s < 0) then 
+		'(0 - ' + s.abs() + ')' 
+	else 
+		s 
+	endif 
+/]
 
 [query public transformBooleanToNumber(b : String) : String =
-if b.equalsIgnoreCase('true') then '1'
-else if b.equalsIgnoreCase('false') then '0' 
-else b endif endif /]
+	if b.equalsIgnoreCase('true') then 
+		'1'
+	else 
+		if b.equalsIgnoreCase('false') 
+			then '0' 
+		else 
+			b 
+		endif 
+	endif 
+/]
 
 [query public getValueFromConstant(c : Constant) : String =
 if c.oclIsTypeOf(IntegerConstant) then c.oclAsType(IntegerConstant).value.possiblyZeroBeforeMinus() else c.oclAsType(DecimalConstant).value endif/]
+
+
+[query public haveUnequalKivTypes(targetValue : Value, sourceValue : Value, t : Transition, genData : GeneratorData) : Boolean =
+	if targetValue.oclIsTypeOf(AddressUse) then
+		if sourceValue.oclIsTypeOf(AddressUse) then
+			not getVariableForAddress(targetValue.oclAsType(AddressUse).address, t, genData).type.equalsIgnoreCase(getVariableForAddress(sourceValue.oclAsType(AddressUse).address, t, genData).type)
+		else 
+			hasAddressTypeRef(targetValue.oclAsType(AddressUse).address, t, genData)
+		endif 
+	else 
+		if sourceValue.oclIsTypeOf(AddressUse) then
+			hasAddressTypeRef(sourceValue.oclAsType(AddressUse).address, t, genData)
+		else
+			false
+		endif
+	endif
+/] 
+
+[query public isAddressUse(value : Value) : Boolean = 
+	value.oclIsTypeOf(AddressUse)
+/]
+
+[query public hasAddressTypeRef(address: Address, t: Transition, genData : GeneratorData) : Boolean = 
+	getVariableForAddress(address, t, genData).type.equalsIgnoreCase('ref')
+/]
+
 
 [template public createComment(t : Transition)]
 [let l : Load = t.instruction]
