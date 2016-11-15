@@ -11,7 +11,7 @@ Note that this works for both TSO and PSO, as we assume that the latest paramete
 [comment]Returns the buffer entry of the given node, which is read by load linked to the given early read transition.[/comment]
 [query public getBufferEntryReadByEarlyRead(earlyReadTransition : EarlyReadTransition) : AddressValuePair = 
 	earlyReadTransition.source.buffer.addressValuePairs->
-	select(address.value.oclAsType(AddressUse).address.name.equalsIgnoreCase(earlyReadTransition.instruction.oclAsType(Load).address.value.oclAsType(AddressUse).address.name))
+	select(address.value.oclAsType(AddressUse).address.name.equalsIgnoreCase(earlyReadTransition.instruction.oclAsType(Load).address.value.oclAsType(AddressUse).address.name))->first()
 /]
 
 [query public getCopTransitions(cfg: ControlFlowDiagram) : Set(Transition) =
@@ -150,7 +150,17 @@ if c.oclIsTypeOf(IntegerConstant) then c.oclAsType(IntegerConstant).value.possib
 	getVariableForAddress(address, t, genData).type.equalsIgnoreCase('ref')
 /]
 
+[comment]====== Label Suffixes for Instructions with two controlflows modeled by only one edge =======[/comment]
 
+[query public getPositiveCaseLabelSuffix(tracabilityContext : OclAny) : String = 
+	'_t'
+/]
+
+[query public getNegativeCaseLabelSuffix(tracabilityContext : OclAny) : String = 
+	'_f'
+/]
+
+[comment]======= Comment Creation =======[/comment]
 [template public createComment(t : Transition)]
 [let l : Load = t.instruction]
 [l.result.name/] = load [l.address.displayParameter()/][if(l.align.oclIsUndefined()._not())], align [l.align/][/if][for(m : MetaArgValue | l.meta)], [m.arg/] [m.value/][/for][elselet s : Store = t.instruction]
