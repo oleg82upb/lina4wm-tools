@@ -199,13 +199,13 @@ end enrich
 [comment]======== CmpXchg ========[/comment]
 [template public transformCOPTransition (copTransition : Transition, compareExchange : CmpXchg, genData : GeneratorData) ]
 ;;	[copTransition.createComment()/] _ positive case
-	[copTransition.label/]_true :
-	⊦ COP(p, [copTransition.label/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generatePositiveCompareExchangeCsPart(copTransition, compareExchange, genData)/];
+	[getPositiveLabelForTransition(copTransition)/] :
+	⊦ COP(p, [getPositiveLabelForTransition(copTransition)/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generatePositiveCompareExchangeCsPart(copTransition, compareExchange, genData)/];
 	used for : s, ls;
 
 ;;	[copTransition.createComment()/] _ negative case
-	[copTransition.label/]_false :
-	⊦ COP(p, [copTransition.label/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generateNegativeCompareExchangeCsPart(copTransition, compareExchange, genData)/];
+	[getNegativeLabelForTransition(copTransition)/] :
+	⊦ COP(p, [getNegativeLabelForTransition(copTransition)/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generateNegativeCompareExchangeCsPart(copTransition, compareExchange, genData)/];
 	used for : s, ls;
 [/template]
 
@@ -220,13 +220,13 @@ end enrich
 [comment]======== Select ========[/comment]
 [template public transformCOPTransition (copTransition : Transition, select : Select, genData : GeneratorData) ]
 ;;	[copTransition.createComment()/] _ positive case
-	[copTransition.label/]_true :
-	⊦ COP(p, [copTransition.label/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧  [generatePositiveSelectCSPart(copTransition, select, genData)/] [genPhiInstruction(copTransition, genData)/];
+	[getPositiveLabelForTransition(copTransition)/] :
+	⊦ COP(p, [getPositiveLabelForTransition(copTransition)/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧  [generatePositiveSelectCSPart(copTransition, select, genData)/] [genPhiInstruction(copTransition, genData)/];
 	used for : s, ls;
 
 ;;	[copTransition.createComment()/] _ negative case
-	[copTransition.label/]_false :
-	⊦ COP(p, [copTransition.label/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧  [generateNegativeSelectCSPart(copTransition, select, genData)/] [genPhiInstruction(copTransition, genData)/];
+	[getNegativeLabelForTransition(copTransition)/] :
+	⊦ COP(p, [getNegativeLabelForTransition(copTransition)/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧  [generateNegativeSelectCSPart(copTransition, select, genData)/] [genPhiInstruction(copTransition, genData)/];
 	used for : s, ls;
 [/template]
 
@@ -282,25 +282,25 @@ and therefore need special handling. In particular, we need two KIV COP transiti
 [comment]== AtomicRmwUmin and AtomicRmwMin ==[/comment]
 [template public transformCOPTransition (copTransition : Transition, atomicRMWUmin : AtomicRmwUmin, genData : GeneratorData) ]
 ;;	[copTransition.createComment()/] _ positive case
-	[copTransition.label/]_true :
-	⊦ COP(p, [copTransition.label/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generatePositiveCSAndMemPartForAtomicRMWMin(atomicRMWUmin, copTransition, genData)/];
+	[getPositiveLabelForTransition(copTransition)/] :
+	⊦ COP(p, [getPositiveLabelForTransition(copTransition)/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generatePositiveCSAndMemPartForAtomicRMWMin(atomicRMWUmin, copTransition, genData)/];
 	used for : s, ls;
 
 ;;	[copTransition.createComment()/] _ negative case
-	[copTransition.label/]_false :
-	⊦ COP(p, [copTransition.label/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generateNegativeCSAndMemPartForAtomicRMWMin(atomicRMWUmin, copTransition, genData)/];
+	[getNegativeLabelForTransition(copTransition)/] :
+	⊦ COP(p, [getNegativeLabelForTransition(copTransition)/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generateNegativeCSAndMemPartForAtomicRMWMin(atomicRMWUmin, copTransition, genData)/];
 	used for : s, ls;
 [/template]
 
 [template public transformCOPTransition (copTransition : Transition, atomicRMWmin : AtomicRmwMin, genData : GeneratorData) ]
 ;;	[copTransition.createComment()/] _ positive case
-	[copTransition.label/]_true :
-	⊦ COP(p, [copTransition.label/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generatePositiveCSAndMemPartForAtomicRMWMin(atomicRMWmin, copTransition, genData)/];
+	[getPositiveLabelForTransition(copTransition)/]:
+	⊦ COP(p, [getPositiveLabelForTransition(copTransition)/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generatePositiveCSAndMemPartForAtomicRMWMin(atomicRMWmin, copTransition, genData)/];
 	used for : s, ls;
 
 ;;	[copTransition.createComment()/] _ negative case
-	[copTransition.label/]_false :
-	⊦ COP(p, [copTransition.label/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generateNegativeCSAndMemPartForAtomicRMWMin(atomicRMWmin, copTransition, genData)/];
+	[getNegativeLabelForTransition(copTransition)/] :
+	⊦ COP(p, [getNegativeLabelForTransition(copTransition)/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generateNegativeCSAndMemPartForAtomicRMWMin(atomicRMWmin, copTransition, genData)/];
 	used for : s, ls;
 [/template]
 
@@ -321,24 +321,24 @@ and therefore need special handling. In particular, we need two KIV COP transiti
 [comment]== AtomicRmwUmax and AtomicRmwMax ==[/comment]
 [template public transformCOPTransition (copTransition : Transition, atomicRMWUmax : AtomicRmwUmax, genData : GeneratorData) ]
 ;;	[copTransition.createComment()/] _ positive case
-	[copTransition.label/]_true :
-	⊦ COP(p, [copTransition.label/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generatePositiveCSAndMemPartForAtomicRMWMax(atomicRMWUmax, copTransition, genData)/];
+	[getPositiveLabelForTransition(copTransition)/]:
+	⊦ COP(p, [getPositiveLabelForTransition(copTransition)/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generatePositiveCSAndMemPartForAtomicRMWMax(atomicRMWUmax, copTransition, genData)/];
 	used for : s, ls;
 
 ;;	[copTransition.createComment()/] _ negative case
-	[copTransition.label/]_false :
-	⊦ COP(p, [copTransition.label/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generateNegativeCSAndMemPartForAtomicRMWMax(atomicRMWUmax, copTransition, genData)/];
+	[getNegativeLabelForTransition(copTransition)/] :
+	⊦ COP(p, [getNegativeLabelForTransition(copTransition)/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generateNegativeCSAndMemPartForAtomicRMWMax(atomicRMWUmax, copTransition, genData)/];
 	used for : s, ls;
 [/template]
 
 [template public transformCOPTransition (copTransition : Transition, atomicRMWmax : AtomicRmwMax, genData : GeneratorData) ]
 ;;	[copTransition.createComment()/] _ positive case
-	[copTransition.label/]_true :
-	⊦ COP(p, [copTransition.label/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generatePositiveCSAndMemPartForAtomicRMWMax(atomicRMWmax, copTransition, genData)/];
+	[getPositiveLabelForTransition(copTransition)/] :
+	⊦ COP(p, [getPositiveLabelForTransition(copTransition)/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generatePositiveCSAndMemPartForAtomicRMWMax(atomicRMWmax, copTransition, genData)/];
 	used for : s, ls;
 ;;	[copTransition.createComment()/] _ negative case
-	[copTransition.label/]_false :
-	⊦ COP(p, [copTransition.label/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generateNegativeCSAndMemPartForAtomicRMWMax(atomicRMWmax, copTransition, genData)/];
+	[getNegativeLabelForTransition(copTransition)/] :
+	⊦ COP(p, [getNegativeLabelForTransition(copTransition)/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generateNegativeCSAndMemPartForAtomicRMWMax(atomicRMWmax, copTransition, genData)/];
 	used for : s, ls;
 [/template]
 
@@ -359,13 +359,13 @@ and therefore need special handling. In particular, we need two KIV COP transiti
 [comment]======== Compare ========[/comment]
 [template public transformCOPTransition (copTransition : Transition, compare : Compare, genData : GeneratorData) ]
 ;;	[copTransition.createComment()/] _ positive case
-	[copTransition.label/]_true :
-	⊦ COP(p, [copTransition.label/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generatePositiveCompareCSPart(compare, copTransition, genData)/] [genPhiInstruction(copTransition, genData)/];
+	[getPositiveLabelForTransition(copTransition)/] :
+	⊦ COP(p, [getPositiveLabelForTransition(copTransition)/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generatePositiveCompareCSPart(compare, copTransition, genData)/] [genPhiInstruction(copTransition, genData)/];
 	used for : s, ls;
 
 ;;	[copTransition.createComment()/] _ negative case
-	[copTransition.label/]_false :
-	⊦ COP(p, [copTransition.label/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generateNegativeCompareCSPart(compare, copTransition, genData)/] [genPhiInstruction(copTransition, genData)/];
+	[getNegativeLabelForTransition(copTransition)/] :
+	⊦ COP(p, [getNegativeLabelForTransition(copTransition)/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [generateNegativeCompareCSPart(compare, copTransition, genData)/] [genPhiInstruction(copTransition, genData)/];
 	used for : s, ls;
 [/template]
 
