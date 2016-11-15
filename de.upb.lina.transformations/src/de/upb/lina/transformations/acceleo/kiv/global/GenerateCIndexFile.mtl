@@ -19,30 +19,27 @@ end data specification
 
 [query private getLabelForTransition(transition : Transition) : String = 
 	if(doesInstructionNeedMultipleLabels(transition)) then
-		getPositiveOrNegativeLabelForTransition(transition, true) + ' | ' + getPositiveOrNegativeLabelForTransition(transition, false)
+		getPositiveLabelForTransition(transition) + ' | ' + getNegativeLabelForTransition(transition)
 	else
 		transition.label
 	endif
 /]
 
-[query private getPositiveOrNegativeLabelForTransition(transition : Transition, needsTrueLabel : Boolean) : String = 
-	if(needsTrueLabel) then 
-		transition.label + getPositiveCaseLabelSuffix()
-	else
-		transition.label + getNegativeCaseLabelSuffix()
-	endif
-/]
 
 [query private doesInstructionNeedMultipleLabels(transition : Transition): Boolean = 
-	if transition.instruction.oclIsKindOf(Select) 
-	or transition.instruction.oclIsTypeOf(CompareInt) 
-	or transition.instruction.oclIsTypeOf(CmpXchg) 
-	or transition.instruction.oclIsTypeOf(AtomicRmwMax) 
-	or transition.instruction.oclIsTypeOf(AtomicRmwMin) 
-	or transition.instruction.oclIsTypeOf(AtomicRmwUmax) 
-	or transition.instruction.oclIsTypeOf(AtomicRmwUmin) then 
-		true 
-	else 
-		false 
+	if not transition.instruction.oclIsUndefined() then 
+		if transition.instruction.oclIsKindOf(Select) 
+		or transition.instruction.oclIsTypeOf(CompareInt) 
+		or transition.instruction.oclIsTypeOf(CmpXchg) 
+		or transition.instruction.oclIsTypeOf(AtomicRmwMax) 
+		or transition.instruction.oclIsTypeOf(AtomicRmwMin) 
+		or transition.instruction.oclIsTypeOf(AtomicRmwUmax) 
+		or transition.instruction.oclIsTypeOf(AtomicRmwUmin) then 
+			true 
+		else 
+			false 
+		endif
+	else
+		false
 	endif
 /]

@@ -160,6 +160,14 @@ if c.oclIsTypeOf(IntegerConstant) then c.oclAsType(IntegerConstant).value.possib
 	'_f'
 /]
 
+[query public getPositiveLabelForTransition(transition : Transition) : String = 
+	transition.label + getPositiveCaseLabelSuffix()
+/]
+
+[query public getNegativeLabelForTransition(transition : Transition) : String = 
+	transition.label + getNegativeCaseLabelSuffix()
+/]
+
 [comment]======= Comment Creation =======[/comment]
 [template public createComment(t : Transition)]
 [let l : Load = t.instruction]
