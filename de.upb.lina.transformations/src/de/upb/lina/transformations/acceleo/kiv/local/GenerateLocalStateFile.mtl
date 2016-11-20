@@ -8,7 +8,7 @@
 data specification
 	using [basis(genData)/]ref, PC, Proc
 	Localstate :=mkls( . .pc : PC; . .proc : Proc;
-					[for(variable: Variable | getAllLocalAndParameterVariables(genData)->select(not newName.equalsIgnoreCase('returnvalue')))]
+					[for(variable: Variable | getAllLocalAndParameterVariables(genData)->select(not newName.equalsIgnoreCase('returnvalue') and not type.equalsIgnoreCase('DUMMY')))]
 					. .[variable.newName/] : [variable.type/];
 					[/for]);
 	variables

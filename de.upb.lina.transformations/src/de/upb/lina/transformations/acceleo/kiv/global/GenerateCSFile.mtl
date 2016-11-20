@@ -12,7 +12,7 @@ data specification
 				. .[variable.newName/] : [variable.type/];
 [/for]				. .pc : Proc → PC;
 				. .mem : memory;
-[for(variable: Variable | getAllLocalAndParameterVariables(genData)->select(not newName.equalsIgnoreCase('returnvalue')))]
+[for(variable: Variable | getAllLocalAndParameterVariables(genData)->select(not newName.equalsIgnoreCase('returnvalue') and not type.equalsIgnoreCase('DUMMY')))]
 				. .[variable.newName/] : Proc → [variable.type/];
 [/for]);
 	variables
