@@ -110,6 +110,14 @@ endif
 	endif 
 /]
 
+[query public possiblyZeroBeforeMinus(s : EBigDecimal) : String = 
+	if (s < 0) then 
+		'(0 - ' + s.abs() + ')' 
+	else 
+		s 
+	endif 
+/]
+
 [query public transformBooleanToNumber(b : String) : String =
 	if b.equalsIgnoreCase('true') then 
 		'1'
@@ -123,7 +131,12 @@ endif
 /]
 
 [query public getValueFromConstant(c : Constant) : String =
-if c.oclIsTypeOf(IntegerConstant) then c.oclAsType(IntegerConstant).value.possiblyZeroBeforeMinus() else c.oclAsType(DecimalConstant).value endif/]
+	if c.oclIsTypeOf(IntegerConstant) then 
+		possiblyZeroBeforeMinus(c.oclAsType(IntegerConstant).value) 
+	else 
+		possiblyZeroBeforeMinus(c.oclAsType(DecimalConstant).value) 
+	endif
+/]
 
 
 [query public haveUnequalKivTypes(targetValue : Value, sourceValue : Value, t : Transition, genData : GeneratorData) : Boolean =
