@@ -240,18 +240,28 @@ unsupported operation
 [query private possiblyCastToRef(s : String, address : Address, t : Transition, genData : GeneratorData) : String =
 if (getVariableForAddress(address, t, genData).type.equalsIgnoreCase('ref')) then '⌜'+s+'⌝' else s endif/]
 
-[query public valueToString(v : PrimitiveValue, t: Transition, genData: GeneratorData): String = '' + transformBooleanToNumber(v.value) /]
-
-[query public valueToString(v : IntegerConstant, t: Transition, genData: GeneratorData) : String = '' + v.getValueFromConstant() /]
-
-[query public valueToString(v : DecimalConstant, t : Transition, genData: GeneratorData) : String = '' + v.getValueFromConstant() /]
-
-[query public valueToString(v : AddressUse, t : Transition, genData: GeneratorData) : String = 
-getVariableForAddress(v.address, t, genData).newName.transformBooleanToNumber()/]
-
-[query public valueToString(v : NestedCast, t : Transition, genData: GeneratorData) : String = genNestedCast(v, t, genData) /]
-
-[query public valueToString(v : NestedGetElementPtr, t : Transition, genData: GeneratorData) : String = genNestedGetElemPtr(v, t, genData) /]
+[query public valueToString(v : Value, t : Transition, genData: GeneratorData) : String = 
+if v.oclIsTypeOf(PrimitiveValue) then 
+	'' + transformBooleanToNumber(v.oclAsType(PrimitiveValue).value)
+else if v.oclIsTypeOf(IntegerConstant) then 
+	getValueFromConstant(v.oclAsType(IntegerConstant))
+else if v.oclIsTypeOf(DecimalConstant) then 
+	getValueFromConstant(v.oclAsType(DecimalConstant))
+else if v.oclIsTypeOf(AddressUse) then 
+	getVariableForAddress(v.oclAsType(AddressUse).address, t, genData).newName
+else if v.oclIsTypeOf(NestedGetElementPtr) then 
+	genNestedGetElemPtr(v.oclAsType(NestedGetElementPtr), t, genData)
+else if v.oclIsTypeOf(NestedCast) then 
+	genNestedCast(v.oclAsType(NestedCast), t, genData)
+else 
+	'FIXME, THIS NEVER HAPPENED BEFORE'
+endif
+endif
+endif
+endif
+endif
+endif
+ /]
 
 [template private possiblyAddLS(v : Value, t : Transition, genData: GeneratorData)]
 [if(v.oclIsTypeOf(AddressUse))][if(not getVariableFromLocalAndParameterVariables(v.oclAsType(AddressUse).address, t, genData).oclIsUndefined())]ls .[/if][/if]
