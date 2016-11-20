@@ -6,8 +6,8 @@
 [template public generateLocalstateFile(genData: GeneratorData)]
 [file ( 'specs/localstate.utf8', false, 'UTF-8')]
 data specification
-	using [basis(genData)/]ref, PC, PID
-	Localstate :=mkls( . .pc : PC; . .pid : PID;
+	using [basis(genData)/]ref, PC, Proc
+	Localstate :=mkls( . .pc : PC; . .proc : Proc;
 					[for(variable: Variable | getAllLocalAndParameterVariables(genData)->select(not newName.equalsIgnoreCase('returnvalue')))]
 					. .[variable.newName/] : [variable.type/];
 					[/for]);

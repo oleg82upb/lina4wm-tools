@@ -19,7 +19,7 @@ enrich 	[basis(genData)/]ref-memory,
 		RETOP : RJ → memory × Localstate × memory × Localstate × [if(getAllReturnVariables(genData)->size()>0)][getAllReturnVariables(genData)->first().type/][else][basis(genData)/][/if] → bool;
 	[/if]
 	predicates
-		LSInit : Localstate × PID;
+		LSInit : Localstate × Proc;
 		GSInit : memory;
 	variables
 		invop : [if(input(genData))]input[else][inputType(genData)/][/if] × memory × Localstate × memory × Localstate → bool;
@@ -35,7 +35,7 @@ enrich 	[basis(genData)/]ref-memory,
 [/if][/let]
 	axioms
 
-	LSInit : ⊦ LSInit(ls, p) ↔ ls .pc = N ∧ ls .pid = p;
+	LSInit : ⊦ LSInit(ls, p) ↔ ls .pc = N ∧ ls .proc = p;
 	used for : s, ls;
 
 	[for (cfg : ControlFlowDiagram | genData.cfgs)] 
