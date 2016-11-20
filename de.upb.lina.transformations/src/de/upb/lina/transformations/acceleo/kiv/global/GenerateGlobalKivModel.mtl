@@ -3,10 +3,10 @@
 [import de::upb::lina::transformations::acceleo::kiv::KivCommon/]
 [import de::upb::lina::transformations::acceleo::kiv::GeneratePCFile/]
 [import de::upb::lina::transformations::acceleo::kiv::GenerateInputFile/]
+[import de::upb::lina::transformations::acceleo::kiv::GenerateProcFile/]
 
 [import de::upb::lina::transformations::acceleo::kiv::global::GenerateCIndexFile/]
 [import de::upb::lina::transformations::acceleo::kiv::global::GenerateCSFile/]
-[import de::upb::lina::transformations::acceleo::kiv::global::GenerateProcFile/]
 [import de::upb::lina::transformations::acceleo::kiv::global::GenerateGenProcFile/]
 [import de::upb::lina::transformations::acceleo::kiv::global::GenerateCOPFile/]
 [template public generateModel(genData : GeneratorData)]
