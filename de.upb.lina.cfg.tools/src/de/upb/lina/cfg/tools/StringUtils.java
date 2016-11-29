@@ -38,4 +38,17 @@ public class StringUtils {
       return strDate;
    }
 
+
+   /**
+    * Checks if the given string is either {@code null} or empty. Returns {@code true} if the given
+    * string is {@code null} or empty, {@code false} otherwise.
+    *
+    * @param string The string to check which may be {@code null}.
+    * @return {@code true} if the given string is {@code null} or empty, {@code false} otherwise.
+    */
+   public static boolean isEmpty(final String string)
+   {
+      return string == null || string.isEmpty();
+   }
+
 }
