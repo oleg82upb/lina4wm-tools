@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import de.upb.lina.cfg.tools.StringUtils;
 import de.upb.lina.transformations.logic.precomputation.sizecomputation.exception.TypeExplorationException;
 import de.upb.llvm_parser.llvm.Address;
+import de.upb.llvm_parser.llvm.Alloc;
 import de.upb.llvm_parser.llvm.BasicBlock;
 import de.upb.llvm_parser.llvm.FunctionDefinition;
 import de.upb.llvm_parser.llvm.GetElementPtr;
@@ -76,13 +77,28 @@ public class TypeUtils {
          List<BasicBlock> functionBlocks = functionDefinition.getBody().getBlocks();
          for (BasicBlock basicBlock : functionBlocks)
          {
-            List<GetElementPtr> getElementPointaerInstructionsInBlock = extractGetElementPointerInstructionsFromBasicBlock(basicBlock);
-            getElementPointerInstructions.addAll(getElementPointaerInstructionsInBlock);
+            List<GetElementPtr> getElementPointerInstructionsInBlock = extractGetElementPointerInstructionsFromBasicBlock(basicBlock);
+            getElementPointerInstructions.addAll(getElementPointerInstructionsInBlock);
          }
       }
       return getElementPointerInstructions;
    }
 
+
+   public static List<Alloc> extractAllocInstructionsFromLLVMProgram(LLVM program)
+   {
+      List<Alloc> allocInstructions = new ArrayList<>();
+      for (FunctionDefinition functionDefinition : extractFunctionDefinitionsFromLLVMProgram(program))
+      {
+         List<BasicBlock> functionBlocks = functionDefinition.getBody().getBlocks();
+         for (BasicBlock basicBlock : functionBlocks)
+         {
+            List<Alloc> allocInstructionsInBlock = extractAllocInstructionsFromBasicBlock(basicBlock);
+            allocInstructions.addAll(allocInstructionsInBlock);
+         }
+      }
+      return allocInstructions;
+   }
 
    public static List<FunctionDefinition> extractFunctionDefinitionsFromLLVMProgram(LLVM program)
    {
@@ -95,6 +111,13 @@ public class TypeUtils {
    {
       return basicBlock.getInstructions().stream().filter(instruction -> instruction instanceof GetElementPtr)
             .map(instruction -> (GetElementPtr) instruction).collect(Collectors.toList());
+   }
+   
+
+   public static List<Alloc> extractAllocInstructionsFromBasicBlock(BasicBlock basicBlock)
+   {
+      return basicBlock.getInstructions().stream().filter(instruction -> instruction instanceof Alloc)
+            .map(instruction -> (Alloc) instruction).collect(Collectors.toList());
    }
 
 }
