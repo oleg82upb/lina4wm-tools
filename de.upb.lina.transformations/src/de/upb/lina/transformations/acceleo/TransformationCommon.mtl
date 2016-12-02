@@ -80,3 +80,7 @@ genData.constraints->any(cm | cm.transition = t)
 not genData.transformationSpecificKeys->indexOf(key).oclIsUndefined()
 /]
 
+[query public findMemorySizeMappingForInstruction(pInstruction : EObject, genData : GeneratorData) : MemorySizeMapping = 
+	genData.memorySizeMappings->any(instruction = pInstruction)
+/]
+
