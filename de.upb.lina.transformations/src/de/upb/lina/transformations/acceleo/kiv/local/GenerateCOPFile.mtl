@@ -46,14 +46,14 @@ enrich 	[basis(genData)/]ref-memory,
 
 	[/for]
 	[for (transition : Transition | getAllCopTransitions(genData))]
-;;	[transition.createComment()/]
+;;	[transition.createComment(genData)/]
 	[transition.label/] :
 	⊦ COP([transition.label/])(mem, ls, mem', ls') ↔ ls .pc = [genData.generatePrevPC(genData, transition)/] ∧ [transition.transformTransition(genData)/];
 	used for : s, ls;
 
 	[/for]
 	[for (transition : Transition | getAllReturnTransitions(genData))]
-;;	[transition.createComment()/]
+;;	[transition.createComment(genData)/]
 	[transition.label/]ret :
 	⊦ RETOP([transition.label/]ret)(mem, ls, mem', ls', return) ↔ ls .pc = [genData.generatePrevPC(genData, transition)/] ∧ ls' = ls .pc:= N[generateReturn(genData, transition.instruction.oclAsType(Return), transition)/] ∧ mem' = mem;
 	used for : s, ls;

@@ -45,14 +45,14 @@ enrich 	CS,
 
 	[/for]
 	[for (copTransition : Transition | getAllCopTransitions(genData))]
-;;	[copTransition.createComment()/]
+;;	[copTransition.createComment(genData)/]
 	[copTransition.label/]-def :
 	⊦ COP(p, [copTransition.label/])(cs, cs') ↔ cs .pc(p) = [genData.generatePrevPC(genData, copTransition)/] ∧ [copTransition.transformTransition(genData)/];
 	used for : s, ls;
 
 	[/for]
 	[for (returnTransition : Transition | getAllReturnTransitions(genData))]
-;;	[returnTransition.createComment()/]
+;;	[returnTransition.createComment(genData)/]
 	[returnTransition.label/]ret-def :
 	⊦ RETOP(p, [returnTransition.label/]ret)(cs, cs', return) ↔ cs .pc(p) = [genData.generatePrevPC(genData, returnTransition)/] ∧ cs' = cs .pc:= cs.pc(p ; N)[generateReturn(genData, returnTransition.instruction.oclAsType(Return), returnTransition)/];
 	used for : s, ls;
