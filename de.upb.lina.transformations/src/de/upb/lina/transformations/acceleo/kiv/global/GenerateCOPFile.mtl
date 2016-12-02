@@ -95,15 +95,11 @@ end enrich
 [/template]
 
 [query private generateGetElementPtrCSPart(transition : Transition, getElementPtr : GetElementPtr, genData : GeneratorData) : String = 
-<<<<<<< Upstream, based on origin/develop
 '.' + addressToString(getElementPtr.result, transition, genData) + ':=' + possiblyCastToRef('('+ castFromRef(getElementPtr.aggregate.value, transition, genData) +' + '+ genPtrOffset(getElementPtr, 'cs.', '(p)', transition, genData) + ')', getElementPtr.result, transition, genData)
 /]
 
 [query private findMemorySizeMappingForInstruction(pInstruction : EObject, genData : GeneratorData) : MemorySizeMapping = 
 	genData.memorySizeMappings->any(instruction = pInstruction)
-=======
-'.' + addressToString(getElementPtr.result, transition, genData) + ':=' + possiblyCastToRef('('+ castFromRef(getElementPtr.aggregate.value, transition, genData) +' + '+ findMemorySizeMappingForInstruction(getElementPtr.oclAsType(EObject), genData).offset + ')', getElementPtr.result, transition, genData)
->>>>>>> ab2ae03 Adapted existing module files to work with the changed comment template.
 /]
 
 [comment]======== Load ========[/comment]
