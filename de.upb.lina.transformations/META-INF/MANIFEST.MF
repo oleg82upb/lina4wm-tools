@@ -33,3 +33,4 @@ Export-Package: de.upb.lina.transformations.acceleo.kiv,
  de.upb.lina.transformations.acceleo.kiv.global,
  de.upb.lina.transformations.acceleo.promela.normal, 
  de.upb.lina.transformations.acceleo.promela.operational
+Import-Package: org.junit
