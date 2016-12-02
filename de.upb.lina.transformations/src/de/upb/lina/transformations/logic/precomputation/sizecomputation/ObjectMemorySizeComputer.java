@@ -19,6 +19,10 @@ import de.upb.llvm_parser.llvm.TypeUse;
 import de.upb.llvm_parser.llvm.Vector;
 
 
+/**
+ * The {@link ObjectMemorySizeComputer} is used to compute the (partial) size of any type which can
+ * be represented in our {@link LLVM} model in terms of memory slots used in the transformation.
+ */
 public class ObjectMemorySizeComputer {
 
    private LLVM llvmProgram;

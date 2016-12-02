@@ -7,6 +7,14 @@ import de.upb.llvm_parser.llvm.Array;
 import de.upb.llvm_parser.llvm.Vector;
 
 
+/**
+ * This wrapper offers common functionality for both {@link Array}s and {@link Vector}s.
+ * 
+ * As {@link Array}s and {@link Vector}s do have the same functionality in our model, they can be
+ * treated equally. Since they do not have a common interface, this wrapper is used to treat them
+ * equivalently for the memory size computation, thus reducing redundant code.
+ *
+ */
 public class ArrayVectorWrapper {
 
    private int length;

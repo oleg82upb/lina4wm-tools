@@ -30,6 +30,11 @@ import de.upb.llvm_parser.llvm.Value;
 import de.upb.llvm_parser.llvm.Vector;
 
 
+/**
+ * The {@link GetElementPointerOffsetComputer} is used to compute the required offsets of given
+ * {@link GetElementPtr} instructions for the transformation.
+ *
+ */
 public class GetElementPointerOffsetComputer {
 
    private StringConversionManager stringConversionManager;

@@ -11,6 +11,16 @@ import de.upb.llvm_parser.llvm.NestedGetElementPtr;
 import de.upb.llvm_parser.llvm.Parameter;
 
 
+/**
+ * This class offers common functionality for both {@link GetElementPtr} and
+ * {@link NestedGetElementPtr}. As both have an almost identical feature their offset computation is
+ * essentially identical. Nevertheless they do not have a common interface. Therefore this wrapper
+ * is used to reduce redundant code.
+ * 
+ * Note that when initializing this wrapper from a {@link NestedGetElementPtr}, the result value is
+ * {@code null}.
+ *
+ */
 public class GetElementPointerWrapper {
 
    private List<Parameter> indices;

@@ -5,11 +5,21 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 import de.upb.llvm_parser.llvm.AddressUse;
+import de.upb.llvm_parser.llvm.GetElementPtr;
 import de.upb.llvm_parser.llvm.IntegerConstant;
+import de.upb.llvm_parser.llvm.NestedGetElementPtr;
 import de.upb.llvm_parser.llvm.Predefined;
 import de.upb.llvm_parser.llvm.Value;
 
 
+/**
+ * Ther {@link GetElementPointerValidator} should be used on {@link GetElementPtr} and
+ * {@link NestedGetElementPtr} via {@link GetElementPointerWrapper} objects in order to ensure that
+ * they can be handled by our transformation. This validator checks several conditions and generates
+ * warnings in case some problem might occur. In order to obtain those warnings, use the
+ * {@link #validate()} and after that the {@link #getWarnings()} method.
+ *
+ */
 public class GetElementPointerValidator {
 
    public static final String WARNING_SEPARATOR = " ;; ";
