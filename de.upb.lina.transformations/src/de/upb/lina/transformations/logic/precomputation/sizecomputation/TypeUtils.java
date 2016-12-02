@@ -1,10 +1,16 @@
 package de.upb.lina.transformations.logic.precomputation.sizecomputation;
 
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import de.upb.lina.cfg.tools.StringUtils;
 import de.upb.lina.transformations.logic.precomputation.sizecomputation.exception.TypeExplorationException;
 import de.upb.llvm_parser.llvm.Address;
+import de.upb.llvm_parser.llvm.BasicBlock;
+import de.upb.llvm_parser.llvm.FunctionDefinition;
+import de.upb.llvm_parser.llvm.GetElementPtr;
 import de.upb.llvm_parser.llvm.IntegerConstant;
 import de.upb.llvm_parser.llvm.LLVM;
 import de.upb.llvm_parser.llvm.Parameter;
@@ -59,6 +65,36 @@ public class TypeUtils {
    public static boolean areAllParametersConstants(List<Parameter> parameters)
    {
       return !parameters.stream().anyMatch(parameter -> !(parameter.getValue() instanceof IntegerConstant));
+   }
+
+
+   public static List<GetElementPtr> extractGetElementPointerInstructionsFromLLVMProgram(LLVM program)
+   {
+      List<GetElementPtr> getElementPointerInstructions = new ArrayList<>();
+      for (FunctionDefinition functionDefinition : extractFunctionDefinitionsFromLLVMProgram(program))
+      {
+         List<BasicBlock> functionBlocks = functionDefinition.getBody().getBlocks();
+         for (BasicBlock basicBlock : functionBlocks)
+         {
+            List<GetElementPtr> getElementPointaerInstructionsInBlock = extractGetElementPointerInstructionsFromBasicBlock(basicBlock);
+            getElementPointerInstructions.addAll(getElementPointaerInstructionsInBlock);
+         }
+      }
+      return getElementPointerInstructions;
+   }
+
+
+   public static List<FunctionDefinition> extractFunctionDefinitionsFromLLVMProgram(LLVM program)
+   {
+      return program.getElements().stream().filter(element -> element instanceof FunctionDefinition)
+            .map(element -> (FunctionDefinition) element).collect(Collectors.toList());
+   }
+
+
+   public static List<GetElementPtr> extractGetElementPointerInstructionsFromBasicBlock(BasicBlock basicBlock)
+   {
+      return basicBlock.getInstructions().stream().filter(instruction -> instruction instanceof GetElementPtr)
+            .map(instruction -> (GetElementPtr) instruction).collect(Collectors.toList());
    }
 
 }

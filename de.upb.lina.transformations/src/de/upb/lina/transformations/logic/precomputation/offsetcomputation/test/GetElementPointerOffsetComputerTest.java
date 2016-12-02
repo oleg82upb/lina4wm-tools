@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 import de.upb.lina.transformations.logic.precomputation.offsetcomputation.GetElementPointerOffsetComputer;
+import de.upb.lina.transformations.logic.precomputation.sizecomputation.TypeUtils;
 import de.upb.llvm_parser.llvm.GetElementPtr;
 import de.upb.llvm_parser.llvm.LLVM;
 
@@ -31,7 +32,7 @@ public class GetElementPointerOffsetComputerTest {
    {
       GetElementPointerOffsetComputer getElementPointerOffsetComputer = new GetElementPointerOffsetComputer(program);
       
-      List<GetElementPtr> getElementPointerInstructions = TestUtils.extractGetElementPointerInstructionsFromLLVMProgram(program);
+      List<GetElementPtr> getElementPointerInstructions = TypeUtils.extractGetElementPointerInstructionsFromLLVMProgram(program);
       for (int i = 0; i < expectedOffsets.size(); i++)
       {
          assertEquals(expectedOffsets.get(i),

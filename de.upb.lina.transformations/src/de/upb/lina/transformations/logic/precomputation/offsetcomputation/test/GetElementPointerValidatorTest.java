@@ -10,6 +10,7 @@ import org.junit.Test;
 import de.upb.lina.cfg.tools.StringUtils;
 import de.upb.lina.transformations.logic.precomputation.offsetcomputation.GetElementPointerValidator;
 import de.upb.lina.transformations.logic.precomputation.offsetcomputation.GetElementPointerWrapper;
+import de.upb.lina.transformations.logic.precomputation.sizecomputation.TypeUtils;
 import de.upb.llvm_parser.llvm.GetElementPtr;
 import de.upb.llvm_parser.llvm.LLVM;
 
@@ -21,7 +22,7 @@ public class GetElementPointerValidatorTest {
    {
       LLVM program = TestUtils.getLLVMOfTestFile("/tutorial", "getElementPointerTest.s");
 
-      List<GetElementPtr> getElementPointerInstructions = TestUtils.extractGetElementPointerInstructionsFromLLVMProgram(program);
+      List<GetElementPtr> getElementPointerInstructions = TypeUtils.extractGetElementPointerInstructionsFromLLVMProgram(program);
       testIfNonIntegerIndicesAreRecognized(getElementPointerInstructions.get(1));
       testIfNoWarningIsCreatedIfAllIndicesAreIntegers(getElementPointerInstructions.get(2));
       testBehaviorWhenFirstIndexIsZeroForAddressUseAggregate(getElementPointerInstructions.get(8));
