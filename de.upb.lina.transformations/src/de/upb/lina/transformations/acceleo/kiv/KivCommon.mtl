@@ -247,3 +247,119 @@ resume [s.type.extractType()/] [s.value.extractValue()/]
 getelementptr [value.aggregate.displayParameter()/][for(index : Parameter | value.indices)], [index.displayParameter()/][/for][elselet value : NestedCast = v]
 [value.operation/]([value.from.extractType()/] [value.value.extractValue()/] to [value.to.extractType()/])[/let]
 [/template]
+
+
+[template public genPtrOffset(e: GetElementPtr, prefix: String, suffix: String, t: Transition, genData: GeneratorData)]
+[let mm : MemorySizeMapping = genData.memorySizeMappings->any(m | m.instruction = e)][for (oe : OffsetElement | mm.offset) separator(' + ')][offsetValue(oe, prefix, suffix, t,genData)/][/for][/let]
+[/template]
+[template public genPtrOffset(e: NestedGetElementPtr, prefix: String, suffix: String, t: Transition, genData: GeneratorData)]
+[let mm : MemorySizeMapping = genData.memorySizeMappings->any(m | m.instruction = e)][for (oe : OffsetElement | mm.offset) separator(' + ')][offsetValue(oe, prefix, suffix, t,genData)/][/for][/let]
+[/template]
+
+[query private offsetValue(oe: OffsetElement, prefix: String, suffix: String, t: Transition, genData: GeneratorData) : String =
+if oe.constant then
+	'' + oe.intValue
+else 
+	if oe.factor = 1 then
+		vts(oe.variableValue, prefix, suffix, false, t, genData)
+	else
+		oe.factor + '*' + vts(oe.variableValue, prefix, suffix, false, t, genData)
+	endif
+endif
+/]
+
+
+[comment] valueToString may need conversion in KIV, e.g. true becomes 1 etc. For KIV it also needs to consider Ref and prefixes [/comment]
+[query public vts(v : PrimitiveValue, prefix: String, suffix: String, asRef: Boolean, t: Transition, genData: GeneratorData) : String = 
+if not asRef and v.value <> null then
+	v.value
+else
+	'⌜' + v.value + '⌝'
+endif 
+/]
+
+[query public vts(v : IntegerConstant, prefix: String, suffix: String, asRef: Boolean, t: Transition, genData: GeneratorData) : String = 
+if not asRef then
+	v.value
+else
+	'⌜' + v.value + '⌝'
+endif 
+/]
+
+[query public vts(v : DecimalConstant, prefix: String, suffix: String, asRef: Boolean, t: Transition, genData: GeneratorData) : String = 
+if not asRef then
+	v.value
+else
+	'⌜' + v.value + '⌝'
+endif 
+/]
+
+[comment]addressToStringExpensive(address, genData)  we can use it as a fall back solution, but it is very expensive[/comment]
+[query public vts(v : AddressUse, prefix: String, suffix: String, asRef: Boolean, t: Transition, genData: GeneratorData) : String = 
+let variable : Variable = getVariableForAddress(v.address, t, genData) in
+if asRef then
+	if variable.type.equalsIgnoreCase('ref') then
+		prefix + variable.newName + suffix
+	else
+		'⌜' + prefix + variable.newName  + suffix + '⌝'
+	endif 
+else
+	if variable.type.equalsIgnoreCase('ref') then
+		prefix + variable.newName + suffix + '.v'
+	else
+		prefix + variable.newName + suffix
+	endif 
+endif 
+/]
+
+[query public vts(v : Parameter, prefix: String, suffix: String, asRef: Boolean, t: Transition, genData: GeneratorData) : String = 
+vts(v.value, prefix, suffix, asRef, t, genData)
+/]
+
+[comment]TODO consider using genPtrOffset for computation[/comment]
+[query public vts(v : NestedGetElementPtr,  prefix: String, suffix: String, asRef: Boolean, t : Transition, genData: GeneratorData) : String = 
+vts(v.aggregate.value, prefix, suffix, asRef, t, genData) + ' + ' + vts(v.indices->at(2).value, prefix, suffix, asRef, t, genData) /]
+
+[query public vts(v : NestedCast, prefix: String, suffix: String, asRef: Boolean, t: Transition, genData: GeneratorData) : String = 'FIXME, THIS NEVER HAPPENED BEFORE' /]
+
+[query public vts(v : ValueStruct, prefix: String, suffix: String, asRef: Boolean, t: Transition, genData: GeneratorData) : String = 'FIXME, THIS NEVER HAPPENED BEFORE' /]
+
+
+[query public vts(v : EObject,  prefix: String, suffix: String, asRef: Boolean, t : Transition, genData: GeneratorData) : String = 
+if v.oclIsKindOf(Parameter) then vts(v.oclAsType(Parameter), prefix, suffix, asRef, t, genData)
+else if v.oclIsKindOf(Value) then vts(v.oclAsType(Value), prefix, suffix, asRef, t, genData)
+else 'FIXME, THIS NEVER HAPPENED BEFORE'
+endif
+endif 
+/]
+
+[query public vts(v : Value,  prefix: String, suffix: String, asRef: Boolean, t : Transition, genData: GeneratorData) : String = 
+if v.oclIsTypeOf(PrimitiveValue) then 
+	vts(v.oclAsType(PrimitiveValue), prefix, suffix, asRef, t, genData)
+else if v.oclIsTypeOf(IntegerConstant) then 
+	vts(v.oclAsType(IntegerConstant), prefix, suffix, asRef, t, genData)
+else if v.oclIsTypeOf(DecimalConstant) then 
+	vts(v.oclAsType(DecimalConstant), prefix, suffix, asRef, t, genData)
+else if v.oclIsTypeOf(AddressUse) then 
+	vts(v.oclAsType(AddressUse), prefix, suffix, asRef, t, genData)
+else if v.oclIsTypeOf(NestedGetElementPtr) then 
+	vts(v.oclAsType(NestedGetElementPtr), prefix, suffix, asRef, t, genData)
+else if v.oclIsTypeOf(NestedCast) then 
+	vts(v.oclAsType(NestedCast), prefix, suffix, asRef, t, genData)
+else 
+	'FIXME, THIS NEVER HAPPENED BEFORE'
+endif
+endif
+endif
+endif
+endif
+endif
+ /]
+
+
+
+
+
+
+
+

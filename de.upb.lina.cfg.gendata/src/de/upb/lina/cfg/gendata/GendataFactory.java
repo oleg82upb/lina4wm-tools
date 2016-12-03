@@ -15,92 +15,101 @@ import org.eclipse.emf.ecore.EFactory;
 public interface GendataFactory extends EFactory
 {
 	/**
-    * The singleton instance of the factory.
-    * <!-- begin-user-doc -->
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
 	GendataFactory eINSTANCE = de.upb.lina.cfg.gendata.impl.GendataFactoryImpl.init();
 
 	/**
-    * Returns a new object of class '<em>Generator Data</em>'.
-    * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Generator Data</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @return a new object of class '<em>Generator Data</em>'.
-    * @generated
-    */
+	 * @return a new object of class '<em>Generator Data</em>'.
+	 * @generated
+	 */
 	GeneratorData createGeneratorData();
 
 	/**
-    * Returns a new object of class '<em>Address Mapping</em>'.
-    * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Address Mapping</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @return a new object of class '<em>Address Mapping</em>'.
-    * @generated
-    */
+	 * @return a new object of class '<em>Address Mapping</em>'.
+	 * @generated
+	 */
 	AddressMapping createAddressMapping();
 
 	/**
-    * Returns a new object of class '<em>Constraint Mapping</em>'.
-    * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Constraint Mapping</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @return a new object of class '<em>Constraint Mapping</em>'.
-    * @generated
-    */
+	 * @return a new object of class '<em>Constraint Mapping</em>'.
+	 * @generated
+	 */
 	ConstraintMapping createConstraintMapping();
 
 	/**
-    * Returns a new object of class '<em>Location Label</em>'.
-    * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Location Label</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @return a new object of class '<em>Location Label</em>'.
-    * @generated
-    */
+	 * @return a new object of class '<em>Location Label</em>'.
+	 * @generated
+	 */
 	LocationLabel createLocationLabel();
 
 	/**
-    * Returns a new object of class '<em>Transition Label</em>'.
-    * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Transition Label</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @return a new object of class '<em>Transition Label</em>'.
-    * @generated
-    */
+	 * @return a new object of class '<em>Transition Label</em>'.
+	 * @generated
+	 */
 	TransitionLabel createTransitionLabel();
 
 	/**
-    * Returns a new object of class '<em>Phi Mapping</em>'.
-    * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Phi Mapping</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @return a new object of class '<em>Phi Mapping</em>'.
-    * @generated
-    */
+	 * @return a new object of class '<em>Phi Mapping</em>'.
+	 * @generated
+	 */
 	PhiMapping createPhiMapping();
 
 	/**
-    * Returns a new object of class '<em>Memory Size Mapping</em>'.
-    * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Memory Size Mapping</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @return a new object of class '<em>Memory Size Mapping</em>'.
-    * @generated
-    */
+	 * @return a new object of class '<em>Memory Size Mapping</em>'.
+	 * @generated
+	 */
 	MemorySizeMapping createMemorySizeMapping();
 
 	/**
-    * Returns a new object of class '<em>Input Type List</em>'.
-    * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Input Type List</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @return a new object of class '<em>Input Type List</em>'.
-    * @generated
-    */
+	 * @return a new object of class '<em>Input Type List</em>'.
+	 * @generated
+	 */
 	InputTypeList createInputTypeList();
 
 	/**
-    * Returns the package supported by this factory.
-    * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Offset Element</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @return the package supported by this factory.
-    * @generated
-    */
+	 * @return a new object of class '<em>Offset Element</em>'.
+	 * @generated
+	 */
+	OffsetElement createOffsetElement();
+
+	/**
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the package supported by this factory.
+	 * @generated
+	 */
 	GendataPackage getGendataPackage();
 
 } //GendataFactory

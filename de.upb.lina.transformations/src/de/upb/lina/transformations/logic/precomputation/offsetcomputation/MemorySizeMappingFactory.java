@@ -84,7 +84,7 @@ public class MemorySizeMappingFactory {
    {
       MemorySizeMapping memorySizeMapping = GendataFactory.eINSTANCE.createMemorySizeMapping();
       memorySizeMapping.setInstruction(objectToBeMapped);
-      memorySizeMapping.setOffset(offset);
+//      memorySizeMapping.setOffset(offset);
       memorySizeMapping.setCompleteTypeSize(completeTypeSize);
       memorySizeMapping.setWarning(warning);
       return memorySizeMapping;

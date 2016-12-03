@@ -151,7 +151,6 @@ inline alloca(type, targetRegister)
 
 [comment SINGLE INSTRUCTION TRANSLATION /]
 
-
 [template public genInstruction(e : Branch, t: Transition, genData: GeneratorData)]
 [if (e.elseDestination.oclIsUndefined())]
 [genPhiAssignments(t, genData)/]  goto [e.destination.escape()/];

@@ -79,3 +79,4 @@ genData.constraints->any(cm | cm.transition = t)
 [query public hasTransformationSpecificKey(genData : GeneratorData, key : String): Boolean = 
 not genData.transformationSpecificKeys->indexOf(key).oclIsUndefined()
 /]
+

@@ -27,89 +27,89 @@ import org.eclipse.emf.common.util.EList;
 public interface AddressMapping extends NamedElement
 {
 	/**
-    * Returns the value of the '<em><b>Adresses</b></em>' reference list.
-    * The list contents are of type {@link de.upb.llvm_parser.llvm.Address}.
-    * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Adresses</b></em>' reference list.
+	 * The list contents are of type {@link de.upb.llvm_parser.llvm.Address}.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Adresses</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-    * @return the value of the '<em>Adresses</em>' reference list.
-    * @see de.upb.lina.cfg.gendata.GendataPackage#getAddressMapping_Adresses()
-    * @model
-    * @generated
-    */
+	 * @return the value of the '<em>Adresses</em>' reference list.
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getAddressMapping_Adresses()
+	 * @model
+	 * @generated
+	 */
 	EList<Address> getAdresses();
 
 	/**
-    * Returns the value of the '<em><b>Old Names</b></em>' attribute list.
-    * The list contents are of type {@link java.lang.String}.
-    * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Old Names</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Old Names</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-    * @return the value of the '<em>Old Names</em>' attribute list.
-    * @see de.upb.lina.cfg.gendata.GendataPackage#getAddressMapping_OldNames()
-    * @model default=""
-    * @generated
-    */
+	 * @return the value of the '<em>Old Names</em>' attribute list.
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getAddressMapping_OldNames()
+	 * @model default=""
+	 * @generated
+	 */
 	EList<String> getOldNames();
 
 	/**
-    * Returns the value of the '<em><b>Generator Data</b></em>' reference.
-    * It is bidirectional and its opposite is '{@link de.upb.lina.cfg.gendata.GeneratorData#getAddressMappings <em>Address Mappings</em>}'.
-    * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Generator Data</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link de.upb.lina.cfg.gendata.GeneratorData#getAddressMappings <em>Address Mappings</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Generator Data</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-    * @return the value of the '<em>Generator Data</em>' reference.
-    * @see #setGeneratorData(GeneratorData)
-    * @see de.upb.lina.cfg.gendata.GendataPackage#getAddressMapping_GeneratorData()
-    * @see de.upb.lina.cfg.gendata.GeneratorData#getAddressMappings
-    * @model opposite="addressMappings"
-    * @generated
-    */
+	 * @return the value of the '<em>Generator Data</em>' reference.
+	 * @see #setGeneratorData(GeneratorData)
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getAddressMapping_GeneratorData()
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getAddressMappings
+	 * @model opposite="addressMappings"
+	 * @generated
+	 */
 	GeneratorData getGeneratorData();
 
 	/**
-    * Sets the value of the '{@link de.upb.lina.cfg.gendata.AddressMapping#getGeneratorData <em>Generator Data</em>}' reference.
-    * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.AddressMapping#getGeneratorData <em>Generator Data</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @param value the new value of the '<em>Generator Data</em>' reference.
-    * @see #getGeneratorData()
-    * @generated
-    */
+	 * @param value the new value of the '<em>Generator Data</em>' reference.
+	 * @see #getGeneratorData()
+	 * @generated
+	 */
 	void setGeneratorData(GeneratorData value);
 
 	/**
-    * Returns the value of the '<em><b>Type</b></em>' attribute.
-    * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Type</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-    * @return the value of the '<em>Type</em>' attribute.
-    * @see #setType(String)
-    * @see de.upb.lina.cfg.gendata.GendataPackage#getAddressMapping_Type()
-    * @model
-    * @generated
-    */
+	 * @return the value of the '<em>Type</em>' attribute.
+	 * @see #setType(String)
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getAddressMapping_Type()
+	 * @model
+	 * @generated
+	 */
 	String getType();
 
 	/**
-    * Sets the value of the '{@link de.upb.lina.cfg.gendata.AddressMapping#getType <em>Type</em>}' attribute.
-    * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.AddressMapping#getType <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @param value the new value of the '<em>Type</em>' attribute.
-    * @see #getType()
-    * @generated
-    */
+	 * @param value the new value of the '<em>Type</em>' attribute.
+	 * @see #getType()
+	 * @generated
+	 */
 	void setType(String value);
 
 } // AddressMapping

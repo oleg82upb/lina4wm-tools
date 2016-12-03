@@ -77,12 +77,13 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MemorySizeMapping">
     <eStructuralFeatures xsi:type="ecore:EReference" name="instruction" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="offset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="generatorData" eType="#//GeneratorData"
         eOpposite="#//GeneratorData/memorySizeMappings"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="completeTypeSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="warning" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="offset" upperBound="-1"
+        eType="#//OffsetElement" containment="true" eOpposite="#//OffsetElement/memorySizeMapping"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InputTypeList">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="inputType" unique="false"
@@ -91,5 +92,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="OldToNewCfgNameMapping" instanceClassName="java.util.Map$Entry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OffsetElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="factor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableValue" eType="ecore:EClass ../../de.upb.llvm_parser/src-gen/de/upb/llvm_parser/LLVM.ecore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="intValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="memorySizeMapping" eType="#//MemorySizeMapping"
+        eOpposite="#//MemorySizeMapping/offset"/>
   </eClassifiers>
 </ecore:EPackage>

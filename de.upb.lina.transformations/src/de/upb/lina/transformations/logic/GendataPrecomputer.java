@@ -26,6 +26,7 @@ import de.upb.lina.cfg.gendata.GendataFactory;
 import de.upb.lina.cfg.gendata.GeneratorData;
 import de.upb.lina.cfg.gendata.InputTypeList;
 import de.upb.lina.cfg.gendata.MemorySizeMapping;
+import de.upb.lina.cfg.gendata.OffsetElement;
 import de.upb.lina.cfg.tools.stringrepresentation.StringConversionManager;
 import de.upb.lina.transformations.Constants;
 import de.upb.llvm_parser.llvm.AbstractElement;
@@ -1364,7 +1365,7 @@ public class GendataPrecomputer {
    }
 
 
-   private String getGetElementPtrValue(EObject object, MemorySizeMapping mapping) {
+   private void computeGetElementPtrOffset(EObject object, MemorySizeMapping mapping) {
       EList<Parameter> indices;
       EObject aggregateType;
 
@@ -1409,39 +1410,53 @@ public class GendataPrecomputer {
 
             partOfAggregate = getPartOfAggregate(partOfAggregate, indexVal);
          }
-         return String.valueOf(result);
+         
+         OffsetElement elem = GendataFactory.eINSTANCE.createOffsetElement();
+         elem.setConstant(true);
+         elem.setIntValue(result);
+         mapping.getOffset().add(elem);
+//         return String.valueOf(result);
       } else
       // dynamic computation
       {
          EObject partOfAggregate = aggregateType;
-         String sResult = "";
+//         String sResult = "";
          // following indices
          for (int i = 0; i < indices.size(); i++) {
 
             Value index = indices.get(i).getValue();
 
-            if (!"".equals(sResult)) {
-               sResult += " + ";
-            }
+//            if (!"".equals(sResult)) {
+//               sResult += " + ";
+//            }
 
             if (index instanceof IntegerConstant) {
                // constant
-               sResult += computeSize(partOfAggregate, ((IntegerConstant) index).getValue(), false);
+               int constant = computeSize(partOfAggregate, ((IntegerConstant) index).getValue(), false);
+               OffsetElement elem = GendataFactory.eINSTANCE.createOffsetElement();
+               elem.setConstant(true);
+               elem.setIntValue(constant);
+               mapping.getOffset().add(elem);
             } else {
                // must be a variable
+               OffsetElement elem = GendataFactory.eINSTANCE.createOffsetElement();
+               elem.setConstant(false);
                int size = computeCompleteSize(getPartOfAggregate(partOfAggregate, i), false);
-               if (size != 1) {
-                  // 2*value or 3*value...
-                  sResult += size + "*" + stringConversionManager.valueToString(index);
-               } else {
-                  // 1*value = value
-                  sResult += stringConversionManager.valueToString(index);
-               }
+               elem.setFactor(size);
+               elem.setVariableValue(index);
+//               if (size != 1) {
+//                  // 2*value or 3*value...
+//                  sResult += size + "*" + stringConversionManager.valueToString(index);
+//               } else {
+//                  // 1*value = value
+//                  sResult += stringConversionManager.valueToString(index);
+//               }
+               mapping.getOffset().add(elem);
             }
 
             partOfAggregate = getPartOfAggregate(partOfAggregate, i);
          }
-         return sResult;
+//         return sResult;
       }
    }
 
@@ -1487,12 +1502,12 @@ public class GendataPrecomputer {
          int completeSize = 0;
          if (ptr instanceof GetElementPtr) {
             GetElementPtr ePtr = (GetElementPtr) ptr;
-            mapping.setOffset(getGetElementPtrValue(ePtr, mapping));
+            computeGetElementPtrOffset(ePtr, mapping);
             completeSize = computeCompleteSize(ePtr.getAggregate().getType(), false);
 
          } else {
             NestedGetElementPtr nPtr = (NestedGetElementPtr) ptr;
-            mapping.setOffset(getGetElementPtrValue(nPtr, mapping));
+            computeGetElementPtrOffset(nPtr, mapping);
             completeSize = computeCompleteSize(nPtr.getAggregate().getType(), false);
          }
          mapping.setCompleteTypeSize(completeSize);

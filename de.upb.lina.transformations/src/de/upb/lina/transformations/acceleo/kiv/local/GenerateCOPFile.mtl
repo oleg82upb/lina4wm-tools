@@ -192,7 +192,7 @@ unsupported operation
 
 [comment ====== Get Element Pointer ======/]
 [template private genLsPart(e : GetElementPtr, t: Transition, genData: GeneratorData)]
- .[e.result.addressToString(t, genData)/]:= [for(mm : MemorySizeMapping | genData.memorySizeMappings)][if(mm.instruction = e)][let offset : EString = mm.offset][possiblyCastToRef('('+ e.aggregate.value.castFromRef(t, genData) +' + '+ offset + ')', e.result, t,genData)/][/let][/if][/for]
+ .[e.result.addressToString(t, genData)/]:=[possiblyCastToRef('('+ e.aggregate.value.castFromRef(t, genData) +' + '+ genPtrOffset(e, 'ls.', '', t, genData) + ')', e.result, t,genData)/] 
 [/template]
 
 [comment ====== Cast ======/]

@@ -85,7 +85,7 @@ public class FunctionSelectionPage extends ExtendedWizardPage {
       GridData treeLayoutData = new GridData(GridData.FILL, GridData.FILL, true, true);
       tree.setLayoutData(treeLayoutData);
       loadCfg();
-      Button select = new Button(composite, SWT.CHECK);
+      final Button select = new Button(composite, SWT.CHECK);
       select.setText("select/deselect all");
       select.setSelection(true);
       select.addSelectionListener(new SelectionListener() {
@@ -149,7 +149,7 @@ public class FunctionSelectionPage extends ExtendedWizardPage {
 
          oldToNewCfgName.clear();
          selectedFunctions.clear();
-         for (ControlFlowDiagram diagram : allCFGs) {
+         for (final ControlFlowDiagram diagram : allCFGs) {
             String cfgName = diagram.getName();
             TreeItem item = new TreeItem(tree, SWT.NONE);
             TreeEditor editor = new TreeEditor(tree);

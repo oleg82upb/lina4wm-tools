@@ -156,20 +156,33 @@ endif
 [/template]
 
 [template public genInstruction(e : GetElementPtr, t: Transition, genData : GeneratorData)]
-getelementptr([genAggregateSize(e, genData)/], [valueToString(e.aggregate.value, t, genData)/], [genPtrOffset(e,genData)/], [getVariableForAddress(e.result, t, genData).newName/]); [for (m: MemorySizeMapping | genData.memorySizeMappings)][if(m.instruction=e)][if(not m.warning.equalsIgnoreCase(''))] /*[m.warning/]*/ [/if][/if][/for]
+getelementptr([genAggregateSize(e, genData)/], [valueToString(e.aggregate.value, t, genData)/], [genPtrOffset(e,t,genData)/], [getVariableForAddress(e.result, t, genData).newName/]); [for (m: MemorySizeMapping | genData.memorySizeMappings)][if(m.instruction=e)][if(not m.warning.equalsIgnoreCase(''))] /*[m.warning/]*/ [/if][/if][/for]
 [/template]
+
+[template public genPtrOffset(e: GetElementPtr, t: Transition, genData: GeneratorData)]
+[let mm : MemorySizeMapping = genData.memorySizeMappings->any(m | m.instruction = e)][for (oe : OffsetElement | mm.offset) separator(' + ')][offsetValue(oe, t,genData)/][/for][/let]
+[/template]
+[template public genPtrOffset(e: NestedGetElementPtr, t: Transition, genData: GeneratorData)]
+[let mm : MemorySizeMapping = genData.memorySizeMappings->any(m | m.instruction = e)][for (oe : OffsetElement | mm.offset) separator(' + ')][offsetValue(oe, t,genData)/][/for][/let]
+[/template]
+
+[query private offsetValue(oe: OffsetElement, t: Transition, genData: GeneratorData) : String =
+if oe.constant then
+	'' + oe.intValue
+else 
+	if oe.factor = 1 then
+		valueToString(oe.variableValue, t, genData)
+	else
+		oe.factor + '*' + valueToString(oe.variableValue, t, genData)
+	endif
+endif
+/]
+
 
 [template public genInstruction(e : NestedGetElementPtr, t: Transition, genData: GeneratorData)]
-([valueToString(e.aggregate.value, t, genData)/] + [genPtrOffset(e,genData)/])
+([valueToString(e.aggregate.value, t, genData)/] + [genPtrOffset(e,t,genData)/])
 [/template]
 
-[template public genPtrOffset(e : GetElementPtr, genData : GeneratorData)]
-[genData.memorySizeMappings->any(m | m.instruction = e).offset/]
-[/template]
-
-[template public genPtrOffset(e : NestedGetElementPtr, genData : GeneratorData)]
-[genData.memorySizeMappings->any(m | m.instruction = e).offset/]
-[/template]
 
 [template public genAggregateSize(e : GetElementPtr, genData : GeneratorData)]
 [genData.memorySizeMappings->any(m | m.instruction = e).completeTypeSize/]

@@ -26,83 +26,83 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ConstraintMapping extends EObject {
 	/**
-    * Returns the value of the '<em><b>Transition</b></em>' reference.
-    * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Transition</b></em>' reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Transition</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-    * @return the value of the '<em>Transition</em>' reference.
-    * @see #setTransition(Transition)
-    * @see de.upb.lina.cfg.gendata.GendataPackage#getConstraintMapping_Transition()
-    * @model
-    * @generated
-    */
+	 * @return the value of the '<em>Transition</em>' reference.
+	 * @see #setTransition(Transition)
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getConstraintMapping_Transition()
+	 * @model
+	 * @generated
+	 */
 	Transition getTransition();
 
 	/**
-    * Sets the value of the '{@link de.upb.lina.cfg.gendata.ConstraintMapping#getTransition <em>Transition</em>}' reference.
-    * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.ConstraintMapping#getTransition <em>Transition</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @param value the new value of the '<em>Transition</em>' reference.
-    * @see #getTransition()
-    * @generated
-    */
+	 * @param value the new value of the '<em>Transition</em>' reference.
+	 * @see #getTransition()
+	 * @generated
+	 */
 	void setTransition(Transition value);
 
 	/**
-    * Returns the value of the '<em><b>Condition</b></em>' attribute.
-    * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Condition</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Condition</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-    * @return the value of the '<em>Condition</em>' attribute.
-    * @see #setCondition(String)
-    * @see de.upb.lina.cfg.gendata.GendataPackage#getConstraintMapping_Condition()
-    * @model
-    * @generated
-    */
+	 * @return the value of the '<em>Condition</em>' attribute.
+	 * @see #setCondition(String)
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getConstraintMapping_Condition()
+	 * @model
+	 * @generated
+	 */
 	String getCondition();
 
 	/**
-    * Sets the value of the '{@link de.upb.lina.cfg.gendata.ConstraintMapping#getCondition <em>Condition</em>}' attribute.
-    * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.ConstraintMapping#getCondition <em>Condition</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @param value the new value of the '<em>Condition</em>' attribute.
-    * @see #getCondition()
-    * @generated
-    */
+	 * @param value the new value of the '<em>Condition</em>' attribute.
+	 * @see #getCondition()
+	 * @generated
+	 */
 	void setCondition(String value);
 
 	/**
-    * Returns the value of the '<em><b>Generator Data</b></em>' container reference.
-    * It is bidirectional and its opposite is '{@link de.upb.lina.cfg.gendata.GeneratorData#getConstraints <em>Constraints</em>}'.
-    * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Generator Data</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link de.upb.lina.cfg.gendata.GeneratorData#getConstraints <em>Constraints</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Generator Data</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-    * @return the value of the '<em>Generator Data</em>' container reference.
-    * @see #setGeneratorData(GeneratorData)
-    * @see de.upb.lina.cfg.gendata.GendataPackage#getConstraintMapping_GeneratorData()
-    * @see de.upb.lina.cfg.gendata.GeneratorData#getConstraints
-    * @model opposite="constraints" transient="false"
-    * @generated
-    */
+	 * @return the value of the '<em>Generator Data</em>' container reference.
+	 * @see #setGeneratorData(GeneratorData)
+	 * @see de.upb.lina.cfg.gendata.GendataPackage#getConstraintMapping_GeneratorData()
+	 * @see de.upb.lina.cfg.gendata.GeneratorData#getConstraints
+	 * @model opposite="constraints" transient="false"
+	 * @generated
+	 */
 	GeneratorData getGeneratorData();
 
 	/**
-    * Sets the value of the '{@link de.upb.lina.cfg.gendata.ConstraintMapping#getGeneratorData <em>Generator Data</em>}' container reference.
-    * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.upb.lina.cfg.gendata.ConstraintMapping#getGeneratorData <em>Generator Data</em>}' container reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @param value the new value of the '<em>Generator Data</em>' container reference.
-    * @see #getGeneratorData()
-    * @generated
-    */
+	 * @param value the new value of the '<em>Generator Data</em>' container reference.
+	 * @see #getGeneratorData()
+	 * @generated
+	 */
 	void setGeneratorData(GeneratorData value);
 
 } // ConstraintMapping
