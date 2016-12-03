@@ -95,7 +95,7 @@ end enrich
 [/template]
 
 [query private generateGetElementPtrCSPart(transition : Transition, getElementPtr : GetElementPtr, genData : GeneratorData) : String = 
-'.' + addressToString(getElementPtr.result, transition, genData) + ':=' + possiblyCastToRef('('+ castFromRef(getElementPtr.aggregate.value, transition, genData) +' + '+ findMemorySizeMappingForInstruction(getElementPtr.oclAsType(EObject), genData).offset + ')', getElementPtr.result, transition, genData)
+'.' + addressToString(getElementPtr.result, transition, genData) + ':=' + possiblyCastToRef('('+ castFromRef(getElementPtr.aggregate.value, transition, genData) +' + '+ genPtrOffset(getElementPtr, 'cs.', '(p)', transition, genData) + ')', getElementPtr.result, transition, genData)
 /]
 
 [query private findMemorySizeMappingForInstruction(pInstruction : EObject, genData : GeneratorData) : MemorySizeMapping = 
@@ -610,8 +610,7 @@ let variable : Variable = getVariableForAddress(addressUse.address, transition, 
 
 [query private nestedGetElementPointerToString(nestedGetElementPointer : NestedGetElementPtr, transition : Transition, genData : GeneratorData) : String = 
 	'(' + castFromRef(nestedGetElementPointer.aggregate.value, transition, genData) + ' + '
-		+ findMemorySizeMappingForInstruction(nestedGetElementPointer.oclAsType(EObject), genData).offset +
-	')'		
+		+ genPtrOffset(nestedGetElementPointer, 'cs.', '(p)', transition, genData) + ')'		
 /]
 
 [template private castToRef(nestedCast : NestedCast, transition : Transition, genData : GeneratorData)]

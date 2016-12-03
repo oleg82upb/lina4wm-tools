@@ -272,25 +272,25 @@ endif
 [comment] valueToString may need conversion in KIV, e.g. true becomes 1 etc. For KIV it also needs to consider Ref and prefixes [/comment]
 [query public vts(v : PrimitiveValue, prefix: String, suffix: String, asRef: Boolean, t: Transition, genData: GeneratorData) : String = 
 if not asRef and v.value <> null then
-	v.value
+	transformBooleanToNumber(v.value)
 else
-	'⌜' + v.value + '⌝'
+	'⌜' + transformBooleanToNumber(v.value) + '⌝'
 endif 
 /]
 
 [query public vts(v : IntegerConstant, prefix: String, suffix: String, asRef: Boolean, t: Transition, genData: GeneratorData) : String = 
 if not asRef then
-	v.value
+	possiblyZeroBeforeMinus(v.value) 
 else
-	'⌜' + v.value + '⌝'
+	'⌜' + possiblyZeroBeforeMinus(v.value) + '⌝'
 endif 
 /]
 
 [query public vts(v : DecimalConstant, prefix: String, suffix: String, asRef: Boolean, t: Transition, genData: GeneratorData) : String = 
 if not asRef then
-	v.value
+	possiblyZeroBeforeMinus(v.value)
 else
-	'⌜' + v.value + '⌝'
+	'⌜' + possiblyZeroBeforeMinus(v.value) + '⌝'
 endif 
 /]
 
