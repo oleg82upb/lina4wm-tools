@@ -19,9 +19,9 @@ public class GetElementPointerOffsetComputerTest {
    @Test
    public void testGetElementPointerOffsetComputation()
    {
-      LLVM program = TestUtils.getLLVMOfTestFile("/tutorial", "getElementPointerTest.s");
+      LLVM program = TestUtils.getLLVMOfTestFile("/examples", "SimpleTests/offset_computation/getElementPointerTest.s");
 
-      List<String> expectedOffsets = Arrays.asList("2 + 1 + b*20 + 12", "95", "1", "0", "0", "1");
+      List<String> expectedOffsets = Arrays.asList("2 + 1 + b*20 + 13", "116", "1", "0", "0", "1");
       testGetElementPointerOffsetsInLLVMProgram(program, expectedOffsets);
 
 
@@ -35,6 +35,7 @@ public class GetElementPointerOffsetComputerTest {
       List<GetElementPtr> getElementPointerInstructions = TypeUtils.extractGetElementPointerInstructionsFromLLVMProgram(program);
       for (int i = 0; i < expectedOffsets.size(); i++)
       {
+         System.out.println(i);
          assertEquals(expectedOffsets.get(i),
                getElementPointerOffsetComputer.computeGetElementPointerOffset(getElementPointerInstructions.get(i)));
       }
