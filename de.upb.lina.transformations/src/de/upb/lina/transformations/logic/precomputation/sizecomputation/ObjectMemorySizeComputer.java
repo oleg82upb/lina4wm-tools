@@ -27,24 +27,26 @@ public class ObjectMemorySizeComputer {
 
    private LLVM llvmProgram;
 
-   private boolean countPointersAsOneField;
+   private boolean countPointersAsOneField = true;
+   private boolean firstComputationDone = false;
 
 
-   public ObjectMemorySizeComputer(LLVM llvmProgram, boolean countPointersAsOneField)
+   public ObjectMemorySizeComputer(LLVM llvmProgram)
    {
       this.llvmProgram = Objects.requireNonNull(llvmProgram);
-      this.countPointersAsOneField = countPointersAsOneField;
-   }
-
-
-   public ObjectMemorySizeComputer(LLVM program)
-   {
-      this(program, true);
    }
 
 
    public int computePartialObjectMemorySize(EObject object, int upperIndexBound)
    {
+      if (!this.firstComputationDone && !countPointersAsOneField)
+      {
+         setFirstComputationDone();
+      }
+      if (!this.firstComputationDone)
+      {
+         initializeForFirstComputation();
+      }
       Objects.requireNonNull(object, "object must not be null");
       if (object instanceof Aggregate_Type)
       {
@@ -98,6 +100,10 @@ public class ObjectMemorySizeComputer {
       if (upperIndexBound == 0)
       {
          return 0;
+      }
+      if (countPointersAsOneField && TypeUtils.isPointerSet(addressUse.getPointer()))
+      {
+         return 1;
       }
       Address address = addressUse.getAddress();
       if (address != null)
@@ -167,18 +173,28 @@ public class ObjectMemorySizeComputer {
       {
          return 0;
       }
-      if (TypeUtils.isPointerSet(arrayVectorWrapper.getPointer()))
+      if (countPointersAsOneField && TypeUtils.isPointerSet(arrayVectorWrapper.getPointer()))
       {
          return 1;
       }
 
-      return Math.min(arrayVectorWrapper.getLength(), upperIndexBound - 1) * computeObjectMemorySize(arrayVectorWrapper.getType());
+      return Math.min(arrayVectorWrapper.getLength(), upperIndexBound) * computeObjectMemorySize(arrayVectorWrapper.getType());
    }
 
 
-   protected void setCountPointersAsOneField(boolean countPointersAsOneField)
+   private void initializeForFirstComputation()
    {
-      this.countPointersAsOneField = countPointersAsOneField;
+      this.countPointersAsOneField = false;
+   }
+
+
+   private void setFirstComputationDone()
+   {
+      if (!this.firstComputationDone)
+      {
+         this.firstComputationDone = true;
+         this.countPointersAsOneField = true;
+      }
    }
 
 }

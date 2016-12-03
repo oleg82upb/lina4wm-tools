@@ -38,8 +38,6 @@ import de.upb.llvm_parser.llvm.Vector;
 public class GetElementPointerOffsetComputer {
 
    private StringConversionManager stringConversionManager;
-   private ObjectMemorySizeComputer objectMemorySizeComputer;
-   private ObjectMemorySizeComputer objectMemorySizeComputerCountingPointersAsFullSpace;
 
    private LLVM llvmProgram;
 
@@ -48,8 +46,6 @@ public class GetElementPointerOffsetComputer {
    {
       Objects.requireNonNull(llvmProgram, "llvmProgram must not be null");
       this.llvmProgram = llvmProgram;
-      this.objectMemorySizeComputer = new ObjectMemorySizeComputer(llvmProgram);
-      this.objectMemorySizeComputerCountingPointersAsFullSpace = new ObjectMemorySizeComputer(llvmProgram, false);
       this.stringConversionManager = new StringConversionManager();
    }
 
@@ -95,13 +91,13 @@ public class GetElementPointerOffsetComputer {
       List<Parameter> indices = getElementPointer.getIndices();
 
       int partialAggregateSize = 0;
+      ObjectMemorySizeComputer objectMemorySizeComputer = new ObjectMemorySizeComputer(llvmProgram);
       for (int i = firstIndexToConsider; i < indices.size(); i++)
       {
          int upperIndexBound = TypeUtils.getIntValueFromParameter(indices.get(i));
          if (i == firstIndexToConsider)
          {
-            partialAggregateSize += objectMemorySizeComputerCountingPointersAsFullSpace.computePartialObjectMemorySize(aggregateType,
-                  upperIndexBound);
+            partialAggregateSize += objectMemorySizeComputer.computePartialObjectMemorySize(aggregateType, upperIndexBound);
          }
          else
          {
@@ -119,6 +115,7 @@ public class GetElementPointerOffsetComputer {
       StringJoiner partialAggregateSizeJoiner = new StringJoiner(" + ");
       EObject aggregate = getElementPointer.getAggregate().getType();
 
+      ObjectMemorySizeComputer objectMemorySizeComputer = new ObjectMemorySizeComputer(llvmProgram);
       for (int i = firstIndexToConsider; i < indices.size(); i++)
       {
          Value indexValue = indices.get(i).getValue();
@@ -127,8 +124,8 @@ public class GetElementPointerOffsetComputer {
             int upperIndexBound = ((IntegerConstant) indexValue).getValue();
             if (i == firstIndexToConsider)
             {
-               partialAggregateSizeJoiner.add(String.valueOf(objectMemorySizeComputerCountingPointersAsFullSpace
-                     .computePartialObjectMemorySize(aggregate, upperIndexBound)));
+               partialAggregateSizeJoiner.add(String.valueOf(objectMemorySizeComputer.computePartialObjectMemorySize(aggregate,
+                     upperIndexBound)));
             }
             else
             {

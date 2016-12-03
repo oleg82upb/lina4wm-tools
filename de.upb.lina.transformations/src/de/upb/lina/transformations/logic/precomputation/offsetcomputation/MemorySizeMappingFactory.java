@@ -24,13 +24,14 @@ import de.upb.llvm_parser.llvm.TypeUse;
  */
 public class MemorySizeMappingFactory {
 
-   private ObjectMemorySizeComputer objectMemorySizeComputer;
    private GetElementPointerOffsetComputer getElementPointerOffsetComputer;
+
+   private LLVM llvmProgram;
 
 
    public MemorySizeMappingFactory(LLVM llvmProgram)
    {
-      this.objectMemorySizeComputer = new ObjectMemorySizeComputer(llvmProgram);
+      this.llvmProgram = llvmProgram;
       this.getElementPointerOffsetComputer = new GetElementPointerOffsetComputer(llvmProgram);
    }
 
@@ -54,6 +55,7 @@ public class MemorySizeMappingFactory {
       String warnings = validator.getWarnings();
       try{
          String totalOffset = getElementPointerOffsetComputer.computeGetElementPointerOffset(getElementPointerWrapper);
+         ObjectMemorySizeComputer objectMemorySizeComputer = new ObjectMemorySizeComputer(llvmProgram);
          int completeAggregateSize = objectMemorySizeComputer.computeObjectMemorySize(getElementPointerWrapper.getAggregate().getType());
          return createMemorySizeMapping(getElementPointerWrapper.getWrappedObject(), totalOffset, warnings,
                completeAggregateSize);
@@ -69,7 +71,8 @@ public class MemorySizeMappingFactory {
    public MemorySizeMapping createAllocMemorySizeMapping(Alloc alloc)
    {
       TypeUse allocType = alloc.getType();
-      int allocTypeSize = this.objectMemorySizeComputer.computeObjectMemorySize(allocType);
+      ObjectMemorySizeComputer objectMemorySizeComputer = new ObjectMemorySizeComputer(llvmProgram);
+      int allocTypeSize = objectMemorySizeComputer.computeObjectMemorySize(allocType);
       return createMemorySizeMapping(alloc, allocTypeSize);
    }
 
