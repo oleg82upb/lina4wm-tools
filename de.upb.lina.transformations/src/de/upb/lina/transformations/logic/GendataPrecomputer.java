@@ -29,6 +29,8 @@ import de.upb.lina.cfg.gendata.MemorySizeMapping;
 import de.upb.lina.cfg.gendata.OffsetElement;
 import de.upb.lina.cfg.tools.stringrepresentation.StringConversionManager;
 import de.upb.lina.transformations.Constants;
+import de.upb.lina.transformations.logic.precomputation.offsetcomputation.MemorySizeMappingFactory;
+import de.upb.lina.transformations.logic.precomputation.sizecomputation.TypeUtils;
 import de.upb.llvm_parser.llvm.AbstractElement;
 import de.upb.llvm_parser.llvm.Address;
 import de.upb.llvm_parser.llvm.AddressUse;
@@ -149,7 +151,9 @@ public class GendataPrecomputer {
 		computeTransformationSpecificKeys();
 
 		// getElementPtrMapping
-		computeGetElementPtrMapping();
+      computeMemorySizeMappings();
+      // old getElementPtrMapping
+		//computeGetElementPtrMapping();
 
 		// phi mappings
 		computePhiAssignments();
@@ -741,7 +745,59 @@ public class GendataPrecomputer {
 	}
 
 
-   private void computeGetElementPtrMapping() {
+   private void computeMemorySizeMappings()
+   {
+      computeGetElementPointerRelatedMemorySizeMappings();
+      computeAllocRelatedMemorySizeMappings();
+      computeNestedGetElementPointerRelatedMemorySizeMappings();
+   }
+
+
+   private void computeGetElementPointerRelatedMemorySizeMappings()
+   {
+      MemorySizeMappingFactory memorySizeMappingFactory = new MemorySizeMappingFactory(helperModel.getProgram());
+      List<GetElementPtr> getElementPointerInstructions = TypeUtils.extractGetElementPointerInstructionsFromLLVMProgram(helperModel
+            .getProgram());
+      for (GetElementPtr getElementPointer : getElementPointerInstructions)
+      {
+         MemorySizeMapping memorySizeMapping = memorySizeMappingFactory.createGetElementPointerMemorySizeMapping(getElementPointer);
+         helperModel.getMemorySizeMappings().add(memorySizeMapping);
+      }
+   }
+
+
+   private void computeAllocRelatedMemorySizeMappings()
+   {
+      MemorySizeMappingFactory memorySizeMappingFactory = new MemorySizeMappingFactory(helperModel.getProgram());
+      List<Alloc> allocInstructions = TypeUtils.extractAllocInstructionsFromLLVMProgram(helperModel.getProgram());
+      for (Alloc alloc : allocInstructions)
+      {
+         MemorySizeMapping memorySizeMapping = memorySizeMappingFactory.createAllocMemorySizeMapping(alloc);
+         helperModel.getMemorySizeMappings().add(memorySizeMapping);
+      }
+   }
+
+
+   private void computeNestedGetElementPointerRelatedMemorySizeMappings()
+   {
+      MemorySizeMappingFactory memorySizeMappingFactory = new MemorySizeMappingFactory(helperModel.getProgram());
+      TreeIterator<EObject> programContentIterator = helperModel.getProgram().eAllContents();
+      while (programContentIterator.hasNext())
+      {
+         EObject nextContent = programContentIterator.next();
+         if (nextContent instanceof NestedGetElementPtr)
+         {
+            NestedGetElementPtr nestedGetElementPointer = (NestedGetElementPtr) nextContent;
+            MemorySizeMapping memorySizeMapping = memorySizeMappingFactory
+                  .createNestedGetElementPointerMemorySizeMapping(nestedGetElementPointer);
+            helperModel.getMemorySizeMappings().add(memorySizeMapping);
+         }
+      }
+   }
+
+
+   private void computeGetElementPtrMapping()
+   {
       for (ControlFlowDiagram cfg : cfgs) {
          for (Transition t : cfg.getTransitions()) {
             Instruction i = t.getInstruction();
