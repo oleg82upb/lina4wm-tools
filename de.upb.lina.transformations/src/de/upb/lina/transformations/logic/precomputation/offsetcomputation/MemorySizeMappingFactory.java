@@ -54,14 +54,14 @@ public class MemorySizeMappingFactory {
       validator.validate();
       String warnings = validator.getWarnings();
       try{
-         String totalOffset = getElementPointerOffsetComputer.computeGetElementPointerOffset(getElementPointerWrapper);
+         OffsetElementList totalOffset = getElementPointerOffsetComputer.computeGetElementPointerOffset(getElementPointerWrapper);
          ObjectMemorySizeComputer objectMemorySizeComputer = new ObjectMemorySizeComputer(llvmProgram);
          int completeAggregateSize = objectMemorySizeComputer.computeObjectMemorySize(getElementPointerWrapper.getAggregate().getType());
          return createMemorySizeMapping(getElementPointerWrapper.getWrappedObject(), totalOffset, warnings,
                completeAggregateSize);
       } catch (GetElementPointerOffsetComputationException exception)
       {
-         return createMemorySizeMapping(getElementPointerWrapper.getWrappedObject(), "-666",
+         return createMemorySizeMapping(getElementPointerWrapper.getWrappedObject(), OffsetElementList.createErrorOffsetElementList(),
                "Could not compute memory size mapping correctly due to a problem: " + exception.getMessage()
                      + GetElementPointerValidator.WARNING_SEPARATOR + warnings, -666);
       }
@@ -79,15 +79,16 @@ public class MemorySizeMappingFactory {
 
    private MemorySizeMapping createMemorySizeMapping(EObject objectToBeMapped, int completeTypeSize)
    {
-      return createMemorySizeMapping(objectToBeMapped, String.valueOf(0), StringUtils.EMPTY_STRING, completeTypeSize);
+      return createMemorySizeMapping(objectToBeMapped, OffsetElementList.emptyOffsetElementList(), StringUtils.EMPTY_STRING,
+            completeTypeSize);
    }
 
 
-   private MemorySizeMapping createMemorySizeMapping(EObject objectToBeMapped, String offset, String warning, int completeTypeSize)
+   private MemorySizeMapping createMemorySizeMapping(EObject objectToBeMapped, OffsetElementList offsetElements, String warning, int completeTypeSize)
    {
       MemorySizeMapping memorySizeMapping = GendataFactory.eINSTANCE.createMemorySizeMapping();
       memorySizeMapping.setInstruction(objectToBeMapped);
-//      memorySizeMapping.setOffset(offset);
+      memorySizeMapping.getOffset().addAll(offsetElements.getOffsetElements());
       memorySizeMapping.setCompleteTypeSize(completeTypeSize);
       memorySizeMapping.setWarning(warning);
       return memorySizeMapping;

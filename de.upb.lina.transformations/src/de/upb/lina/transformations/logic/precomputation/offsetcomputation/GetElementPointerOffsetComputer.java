@@ -3,11 +3,9 @@ package de.upb.lina.transformations.logic.precomputation.offsetcomputation;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.StringJoiner;
 
 import org.eclipse.emf.ecore.EObject;
 
-import de.upb.lina.cfg.tools.stringrepresentation.StringConversionManager;
 import de.upb.lina.transformations.logic.precomputation.offsetcomputation.exception.GetElementPointerOffsetComputationException;
 import de.upb.lina.transformations.logic.precomputation.sizecomputation.ObjectMemorySizeComputer;
 import de.upb.lina.transformations.logic.precomputation.sizecomputation.TypeUtils;
@@ -37,7 +35,6 @@ import de.upb.llvm_parser.llvm.Vector;
  */
 public class GetElementPointerOffsetComputer {
 
-   private StringConversionManager stringConversionManager;
 
    private LLVM llvmProgram;
 
@@ -46,23 +43,22 @@ public class GetElementPointerOffsetComputer {
    {
       Objects.requireNonNull(llvmProgram, "llvmProgram must not be null");
       this.llvmProgram = llvmProgram;
-      this.stringConversionManager = new StringConversionManager();
    }
 
 
-   public String computeNestedGetElementPointerOffset(NestedGetElementPtr nestedGetElementPointer)
+   public OffsetElementList computeNestedGetElementPointerOffset(NestedGetElementPtr nestedGetElementPointer)
    {
       return computeGetElementPointerOffset(new GetElementPointerWrapper(nestedGetElementPointer));
    }
 
 
-   public String computeGetElementPointerOffset(GetElementPtr getElementPointer)
+   public OffsetElementList computeGetElementPointerOffset(GetElementPtr getElementPointer)
    {
       return computeGetElementPointerOffset(new GetElementPointerWrapper(getElementPointer));
    }
 
 
-   public String computeGetElementPointerOffset(GetElementPointerWrapper getElementPointer)
+   public OffsetElementList computeGetElementPointerOffset(GetElementPointerWrapper getElementPointer)
    {
       try
       {
@@ -71,8 +67,8 @@ public class GetElementPointerOffsetComputer {
          int firstIndexToConsider = getFirstIndexToConsider(getElementPointer.getAggregate().getType());
          if (TypeUtils.areAllParametersConstants(indices))
          {
-            int partialAggregateSize = computeGetElementPointerOffsetForConstantIndices(getElementPointer, firstIndexToConsider);
-            return String.valueOf(partialAggregateSize);
+            return computeGetElementPointerOffsetForConstantIndices(getElementPointer,
+                  firstIndexToConsider);
          }
          else
          {
@@ -85,7 +81,8 @@ public class GetElementPointerOffsetComputer {
    }
 
 
-   private int computeGetElementPointerOffsetForConstantIndices(GetElementPointerWrapper getElementPointer, int firstIndexToConsider)
+   private OffsetElementList computeGetElementPointerOffsetForConstantIndices(GetElementPointerWrapper getElementPointer,
+         int firstIndexToConsider)
    {
       EObject aggregateType = getElementPointer.getAggregate().getType();
       List<Parameter> indices = getElementPointer.getIndices();
@@ -95,24 +92,20 @@ public class GetElementPointerOffsetComputer {
       for (int i = firstIndexToConsider; i < indices.size(); i++)
       {
          int upperIndexBound = TypeUtils.getIntValueFromParameter(indices.get(i));
-         if (i == firstIndexToConsider)
-         {
-            partialAggregateSize += objectMemorySizeComputer.computePartialObjectMemorySize(aggregateType, upperIndexBound);
-         }
-         else
-         {
-            partialAggregateSize += objectMemorySizeComputer.computePartialObjectMemorySize(aggregateType, upperIndexBound);
-         }
+         partialAggregateSize += objectMemorySizeComputer.computePartialObjectMemorySize(aggregateType, upperIndexBound);
          aggregateType = getTypeOfSubAggregate(aggregateType, upperIndexBound);
       }
-      return partialAggregateSize;
+      OffsetElementJoiner offsetElementJoiner = new OffsetElementJoiner();
+      offsetElementJoiner.addConstantOffsetWithValue(partialAggregateSize);
+      return offsetElementJoiner.toOffsetElementList();
    }
 
 
-   private String computeGetElementPointerOffsetForNonConstantIndices(GetElementPointerWrapper getElementPointer, int firstIndexToConsider)
+   private OffsetElementList computeGetElementPointerOffsetForNonConstantIndices(GetElementPointerWrapper getElementPointer,
+         int firstIndexToConsider)
    {
       List<Parameter> indices = getElementPointer.getIndices();
-      StringJoiner partialAggregateSizeJoiner = new StringJoiner(" + ");
+      OffsetElementJoiner partialAggregateSizeJoiner = new OffsetElementJoiner();
       EObject aggregate = getElementPointer.getAggregate().getType();
 
       ObjectMemorySizeComputer objectMemorySizeComputer = new ObjectMemorySizeComputer(llvmProgram);
@@ -122,16 +115,8 @@ public class GetElementPointerOffsetComputer {
          if (indexValue instanceof IntegerConstant)
          {
             int upperIndexBound = ((IntegerConstant) indexValue).getValue();
-            if (i == firstIndexToConsider)
-            {
-               partialAggregateSizeJoiner.add(String.valueOf(objectMemorySizeComputer.computePartialObjectMemorySize(aggregate,
-                     upperIndexBound)));
-            }
-            else
-            {
-               partialAggregateSizeJoiner.add(String.valueOf(objectMemorySizeComputer.computePartialObjectMemorySize(aggregate,
-                     upperIndexBound)));
-            }
+            partialAggregateSizeJoiner.addConstantOffsetWithValue(objectMemorySizeComputer.computePartialObjectMemorySize(aggregate,
+                  upperIndexBound));
             aggregate = getTypeOfSubAggregate(aggregate, upperIndexBound);
          }
          else
@@ -140,8 +125,7 @@ public class GetElementPointerOffsetComputer {
 
             EObject subAggregate = getTypeOfSubAggregate(aggregate, 0);
             int subAggregateSize = objectMemorySizeComputer.computeObjectMemorySize(subAggregate);
-            String indexAsString = stringConversionManager.valueToString(indexValue);
-            partialAggregateSizeJoiner.add(indexAsString + "*" + subAggregateSize);
+            partialAggregateSizeJoiner.addDynamicOffsetWithValue(indexValue, subAggregateSize);
 
             // as we asserted that aggregate is not a structure, it can only be a vector or array
             // this means that it does not matter which part of the aggregate we take a look at
@@ -149,7 +133,7 @@ public class GetElementPointerOffsetComputer {
             aggregate = getTypeOfSubAggregate(aggregate, 0);
          }
       }
-      return partialAggregateSizeJoiner.toString();
+      return partialAggregateSizeJoiner.toOffsetElementList();
    }
 
 
