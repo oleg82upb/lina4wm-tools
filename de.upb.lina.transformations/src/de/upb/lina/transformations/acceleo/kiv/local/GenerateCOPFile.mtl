@@ -64,13 +64,7 @@ end enrich
 [/file]
 [/template]
 
-[template private generateGlobalConstants(genData : GeneratorData)]
-[if(genData.globalVariables->size() > 0)]
-constants
-[for(variable : Variable | genData.globalVariables)]
-	[variable.newName/] : [variable.type/];
-[/for][/if]
-[/template]
+
 
 [template private generateFunctionParameter(cfg: ControlFlowDiagram, genData : GeneratorData)]
 [for(variable : Variable | getParameterVariablesOfTypeExcludingReturnVariables(cfg, 'ref'))]

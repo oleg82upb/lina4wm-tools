@@ -2,6 +2,16 @@
 [module KivCommon('http://www.upb.de/lina/cfg/controlflow', 'http://www.upb.de/lina/cfg/gendata', 'http://www.upb.de/llvm_parser/llvm', 'http://www.eclipse.org/emf/2002/Ecore')]
 [import de::upb::lina::transformations::acceleo::TransformationCommon/]
 
+
+[template public generateGlobalConstants(genData : GeneratorData)]
+[if(genData.globalVariables->size() > 0)]
+constants
+[for(variable : Variable | genData.globalVariables)]
+	[variable.newName/] : [variable.type/];
+[/for][/if]
+[/template]
+
+
 [comment]Returns the parameter, which is read from the store buffer by the load instruction linked to the given early read transition. 
 Note that this works for both TSO and PSO, as we assume that the latest parameter is read.[/comment]
 [query public getParameterOfBufferEntryReadByEarlyRead(earlyReadTransition : EarlyReadTransition) : Parameter = 

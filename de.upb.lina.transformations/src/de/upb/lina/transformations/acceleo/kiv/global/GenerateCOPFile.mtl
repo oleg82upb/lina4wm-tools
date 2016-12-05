@@ -9,6 +9,7 @@ enrich 	CS,
 		cindex[if(input(genData))],
 		input[/if] with 
 
+	[generateGlobalConstants(genData)/]
 	functions
 		INVOP : Proc × IJ → [if(input(genData))]input[else][inputType(genData)/][/if] × CS × CS → bool;
 		COP : Proc × CJ → CS × CS → bool;
@@ -371,8 +372,8 @@ and therefore need special handling. In particular, we need two KIV COP transiti
 
 [template private generatePositiveCompareCSPart(e : Compare, t : Transition, genData : GeneratorData)]
 [let pc : String = generateNextPC(genData, t)][let res : String = addressToString(e.result, t, genData)]
-[if(e.cond.equalsIgnoreCase('eq'))]([compareTypecorrect(e.operand1, t, e.operand2, t, genData)/] ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('1',e.result, t, genData)/] [else]
-[if(e.cond.equalsIgnoreCase('ne'))](¬([compareTypecorrect(e.operand1, t, e.operand2, t, genData)/]) ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('0',e.result, t, genData)/] [else]
+[if(e.cond.equalsIgnoreCase('eq'))]([compareTypecorrect(e.operand1, t, e.operand2, t, genData)/]) ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('1',e.result, t, genData)/] [else]
+[if(e.cond.equalsIgnoreCase('ne'))]([compareTypecorrect(e.operand1, t, e.operand2, t, genData)/]) ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('0',e.result, t, genData)/] [else]
 [if(e.cond.equalsIgnoreCase('uge') or e.cond.equalsIgnoreCase('sge'))]([castFromRef(e.operand1, t, genData)/] ≥ [castFromRef(e.operand2, t, genData)/] ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('1',e.result, t, genData)/] [else]
 [if(e.cond.equalsIgnoreCase('ugt') or e.cond.equalsIgnoreCase('sgt'))]([castFromRef(e.operand1, t, genData)/] > [castFromRef(e.operand2, t, genData)/] ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('0',e.result, t, genData)/] [else]
 [if(e.cond.equalsIgnoreCase('ult') or e.cond.equalsIgnoreCase('slt'))]([castFromRef(e.operand1, t, genData)/] < [castFromRef(e.operand2, t, genData)/] ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('0',e.result, t, genData)/] [else]
@@ -382,8 +383,8 @@ and therefore need special handling. In particular, we need two KIV COP transiti
 
 [template private generateNegativeCompareCSPart(e : Compare, t : Transition, genData : GeneratorData)]
 [let pc : String = generateNextPC(genData, t)][let res : String = addressToString(e.result, t, genData)]
-[if(e.cond.equalsIgnoreCase('eq'))](¬([compareTypecorrect(e.operand1, t, e.operand2, t, genData)/]) ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('0',e.result, t, genData)/])[else]
-[if(e.cond.equalsIgnoreCase('ne'))]([compareTypecorrect(e.operand1, t, e.operand2, t, genData)/] ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('1',e.result, t, genData)/])[else]
+[if(e.cond.equalsIgnoreCase('eq'))]([compareTypecorrect(e.operand1, t, e.operand2, t, genData)/]) ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('0',e.result, t, genData)/])[else]
+[if(e.cond.equalsIgnoreCase('ne'))]([compareTypecorrect(e.operand1, t, e.operand2, t, genData)/]) ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('1',e.result, t, genData)/])[else]
 [if(e.cond.equalsIgnoreCase('uge') or e.cond.equalsIgnoreCase('sge'))]([castFromRef(e.operand1, t, genData)/] < [castFromRef(e.operand2, t, genData)/] ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('0', e.result, t, genData)/])[else]
 [if(e.cond.equalsIgnoreCase('ugt') or e.cond.equalsIgnoreCase('sgt'))]([castFromRef(e.operand1, t, genData)/] ≤ [castFromRef(e.operand2, t, genData)/] ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('1', e.result, t, genData)/])[else]
 [if(e.cond.equalsIgnoreCase('ult') or e.cond.equalsIgnoreCase('slt'))]([castFromRef(e.operand1, t, genData)/] ≥ [castFromRef(e.operand2, t, genData)/] ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('1', e.result, t, genData)/])[else]
@@ -561,9 +562,7 @@ ERROR - DETECTED NORMAL TRANSITION WITH NULL INSTRUCTION
 		[if(v1.oclIsTypeOf(PrimitiveValue) and am2.type.equalsIgnoreCase('ref'))][if(v1.oclAsType(PrimitiveValue).value.equalsIgnoreCase('null'))]null[else]⌜[s1/]⌝[/if] = [s2/][else]
 		[if(v1.oclIsKindOf(Constant) and am2.type.equalsIgnoreCase('ref'))]⌜[v1.oclAsType(Constant).getValueFromConstant()/]⌝ = [s2/][else][s1/] = [s2/]
 		[/if][/if][/let]
-	[else][s1/] = [s2/][/if]
-[else][s1/] = [s2/][/if]
-[/let][/let][/let][/let]
+	[else][s1/] = [s2/][/if][else][s1/] = [s2/][/if][/let][/let][/let][/let]
 [/template]
 [comment]======== CastToRef Implementation ========[/comment]
 [template private castToRef(value : Value, transition : Transition, genData : GeneratorData)]

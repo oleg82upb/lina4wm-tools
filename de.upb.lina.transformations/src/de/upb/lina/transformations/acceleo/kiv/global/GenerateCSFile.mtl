@@ -3,15 +3,17 @@
 [import de::upb::lina::transformations::acceleo::TransformationCommon/]
 [import de::upb::lina::transformations::acceleo::kiv::KivCommon/]
 
+[comment]
+[for(variable: Variable | genData.globalVariables)]
+				. .[variable.newName/] : [variable.type/];
+[/for]	
+[/comment]
 [template public generateCSFile (genData : GeneratorData) ]
 [file ('specs/CS.utf8', false, 'UTF-8')]
 data specification
 	using [basis(genData)/]ref, PC, genProc, [basis(genData)/]ref-memory
-	CS := mkcs(
-[for(variable: Variable | genData.globalVariables)]
-				. .[variable.newName/] : [variable.type/];
-[/for]				. .pc : Proc → PC;
-				. .mem : memory;
+	CS := mkcs( . .mem : memory;
+				. .pc : Proc → PC;
 [for(variable: Variable | getAllLocalAndParameterVariables(genData)->select(not newName.equalsIgnoreCase('returnvalue') and not type.equalsIgnoreCase('DUMMY')))]
 				. .[variable.newName/] : Proc → [variable.type/];
 [/for]);
