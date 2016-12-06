@@ -39,7 +39,7 @@ enrich 	[basis(genData)/]ref-memory,
 	used for : s, ls;
 
 	[for (cfg : ControlFlowDiagram | genData.cfgs)] 
-;; 	[generateCfgLabel(genData, cfg)/] reflects function [cfg.functionDefinition.address.name/]
+;; 	[generateCfgLabel(genData, cfg)/] corresponds to method [cfg.functionDefinition.address.name/]
 	[generateCfgLabel(genData, cfg)/]ini :
 	⊦ INVOP([generateCfgLabel(genData, cfg)/]ini)(inp, mem, ls, mem', ls') ↔ ls .pc = N [if(input(genData))][let params : OrderedSet(Variable) = cfg.parameterVariables->select(name.equalsIgnoreCase('returnvalue')._not())][if(params->size()>0)]∧ [for(variable : Variable | params->select(type.equalsIgnoreCase(genData.basis())))][variable.type/][/for][for(variable : Variable | params->select(type.equalsIgnoreCase('ref')))][variable.type/][/for]?(inp) [/if][/let][/if]∧ ls' = ls .pc:= [generateStartPC(genData, cfg)/] [generateFunctionParameter(cfg, genData)/]∧ mem' = mem; 
 	used for : s, ls;

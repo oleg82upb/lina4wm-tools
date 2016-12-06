@@ -74,12 +74,15 @@ public class TypeUtils {
       List<GetElementPtr> getElementPointerInstructions = new ArrayList<>();
       for (FunctionDefinition functionDefinition : extractFunctionDefinitionsFromLLVMProgram(program))
       {
-         List<BasicBlock> functionBlocks = functionDefinition.getBody().getBlocks();
-         for (BasicBlock basicBlock : functionBlocks)
-         {
-            List<GetElementPtr> getElementPointerInstructionsInBlock = extractGetElementPointerInstructionsFromBasicBlock(basicBlock);
-            getElementPointerInstructions.addAll(getElementPointerInstructionsInBlock);
-         }
+			if (functionDefinition.getBody() != null)
+			{
+				List<BasicBlock> functionBlocks = functionDefinition.getBody().getBlocks();
+				for (BasicBlock basicBlock : functionBlocks)
+				{
+					List<GetElementPtr> getElementPointerInstructionsInBlock = extractGetElementPointerInstructionsFromBasicBlock(basicBlock);
+					getElementPointerInstructions.addAll(getElementPointerInstructionsInBlock);
+				}
+			}
       }
       return getElementPointerInstructions;
    }
@@ -90,12 +93,15 @@ public class TypeUtils {
       List<Alloc> allocInstructions = new ArrayList<>();
       for (FunctionDefinition functionDefinition : extractFunctionDefinitionsFromLLVMProgram(program))
       {
-         List<BasicBlock> functionBlocks = functionDefinition.getBody().getBlocks();
-         for (BasicBlock basicBlock : functionBlocks)
-         {
-            List<Alloc> allocInstructionsInBlock = extractAllocInstructionsFromBasicBlock(basicBlock);
-            allocInstructions.addAll(allocInstructionsInBlock);
-         }
+			if (functionDefinition.getBody() != null)
+			{
+				List<BasicBlock> functionBlocks = functionDefinition.getBody().getBlocks();
+				for (BasicBlock basicBlock : functionBlocks)
+				{
+					List<Alloc> allocInstructionsInBlock = extractAllocInstructionsFromBasicBlock(basicBlock);
+					allocInstructions.addAll(allocInstructionsInBlock);
+				}
+			}
       }
       return allocInstructions;
    }

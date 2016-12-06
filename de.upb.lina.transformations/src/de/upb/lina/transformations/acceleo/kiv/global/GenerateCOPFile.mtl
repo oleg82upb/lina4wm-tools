@@ -47,7 +47,7 @@ end enrich
 
 [template public transformINVOPTransitions (genData : GeneratorData) ]
 	[for (cfg : ControlFlowDiagram | genData.cfgs)] 
-;; 	[generateCfgLabel(genData, cfg)/] reflects function [cfg.functionDefinition.address.name/]
+;; 	[generateCfgLabel(genData, cfg)/] corresponds to method [cfg.functionDefinition.address.name/]
 	[generateCfgLabel(genData, cfg)/]ini :
 	⊦ INVOP(p, [generateCfgLabel(genData, cfg)/]ini)(inp, cs, cs') ↔ cs .pc(p) = N [if(input(genData))][let parameterVariables : OrderedSet(Variable) = cfg.parameterVariables->select(not newName.equalsIgnoreCase('returnvalue'))][if(not parameterVariables->isEmpty())]∧ [for(variable : Variable | parameterVariables->select(type.equalsIgnoreCase(genData.basis())))][variable.type/][/for][for(variable : Variable | parameterVariables->select(type.equalsIgnoreCase('ref')))][variable.type/][/for]?(inp) [/if][/let][/if]∧ cs' = cs .pc:= cs.pc(p ; [generateStartPC(genData, cfg)/]) [generateFunctionParameters(cfg, genData)/]; 
 	used for : s, ls;
