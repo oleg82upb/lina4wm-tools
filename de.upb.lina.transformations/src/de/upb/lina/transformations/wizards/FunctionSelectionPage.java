@@ -84,7 +84,7 @@ public class FunctionSelectionPage extends ExtendedWizardPage {
       tree.setLinesVisible(true);
       GridData treeLayoutData = new GridData(GridData.FILL, GridData.FILL, true, true);
       tree.setLayoutData(treeLayoutData);
-      loadCfg();
+//      loadCfg();
       final Button select = new Button(composite, SWT.CHECK);
       select.setText("select/deselect all");
       select.setSelection(true);
@@ -130,7 +130,7 @@ public class FunctionSelectionPage extends ExtendedWizardPage {
 
       });
       setControl(composite);
-
+      reloadCfg();
    }
 
 

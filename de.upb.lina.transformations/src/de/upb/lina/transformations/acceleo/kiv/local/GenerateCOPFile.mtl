@@ -41,7 +41,7 @@ enrich 	[basis(genData)/]ref-memory,
 	[for (cfg : ControlFlowDiagram | genData.cfgs)] 
 ;; 	[generateCfgLabel(genData, cfg)/] corresponds to method [cfg.functionDefinition.address.name/]
 	[generateCfgLabel(genData, cfg)/]ini :
-	⊦ INVOP([generateCfgLabel(genData, cfg)/]ini)(inp, mem, ls, mem', ls') ↔ ls .pc = N [if(input(genData))][let params : OrderedSet(Variable) = cfg.parameterVariables->select(name.equalsIgnoreCase('returnvalue')._not())][if(params->size()>0)]∧ [for(variable : Variable | params->select(type.equalsIgnoreCase(genData.basis())))][variable.type/][/for][for(variable : Variable | params->select(type.equalsIgnoreCase('ref')))][variable.type/][/for]?(inp) [/if][/let][/if]∧ ls' = ls .pc:= [generateStartPC(genData, cfg)/] [generateFunctionParameter(cfg, genData)/]∧ mem' = mem; 
+	⊦ INVOP([generateCfgLabel(genData, cfg)/]ini)(inp, mem, ls, mem', ls') ↔ ls .pc = N [if(input(genData))][let params : OrderedSet(Variable) = cfg.parameterVariables->select(name.equalsIgnoreCase('returnvalue')._not())][if(params->size()>0)]∧ [for(variable : Variable | params->select(type.equalsIgnoreCase(genData.basis())))][variable.type/][/for][for(variable : Variable | params->select(type.equalsIgnoreCase('ref')))][variable.type/][/for]?(inp) [/if][/let][/if]∧ ls' = ls .pc:= [generateStartPC(genData, cfg)/] [generateFunctionParameterAssignment(cfg, genData)/]∧ mem' = mem; 
 	used for : s, ls;
 
 	[/for]
@@ -66,12 +66,14 @@ end enrich
 
 
 
-[template private generateFunctionParameter(cfg: ControlFlowDiagram, genData : GeneratorData)]
-[for(variable : Variable | getParameterVariablesOfTypeExcludingReturnVariables(cfg, 'ref'))]
-.[variable.newName/]:= inp [if(input(genData))].[variable.type/][i/] [/if][/for]
-[for(variable : Variable | getParameterVariablesOfTypeExcludingReturnVariables(cfg, basis(genData)))]
-.[variable.newName/]:= inp [if(hasTransformationSpecificKey(genData, 'INPUT_REF') and input(genData)._not())].v [/if][if(input(genData))].[variable.type/][i/] [/if][/for]
-[/template]
+
+[template private generateFunctionParameterAssignment(cfg: ControlFlowDiagram, genData : GeneratorData)]
+[if(input(genData)._not())] 
+[for(variable : Variable | cfg.parameterVariables)]
+.[variable.newName/]:= inp [/for]
+[else]
+[for(variable : Variable | cfg.parameterVariables) separator (' ')]
+.[variable.newName/]:= inp.[variable.type/][i/] [/for][' '/][/if][/template]
 
 [comment ============================= Transitions=============================================== /]
 [template private transformTransition(t: Transition, genData: GeneratorData)]

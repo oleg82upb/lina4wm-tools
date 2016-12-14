@@ -49,7 +49,7 @@ end enrich
 	[for (cfg : ControlFlowDiagram | genData.cfgs)] 
 ;; 	[generateCfgLabel(genData, cfg)/] corresponds to method [cfg.functionDefinition.address.name/]
 	[generateCfgLabel(genData, cfg)/]ini :
-	⊦ INVOP(p, [generateCfgLabel(genData, cfg)/]ini)(inp, cs, cs') ↔ cs .pc(p) = N [if(input(genData))][let parameterVariables : OrderedSet(Variable) = cfg.parameterVariables->select(not newName.equalsIgnoreCase('returnvalue'))][if(not parameterVariables->isEmpty())]∧ [for(variable : Variable | parameterVariables->select(type.equalsIgnoreCase(genData.basis())))][variable.type/][/for][for(variable : Variable | parameterVariables->select(type.equalsIgnoreCase('ref')))][variable.type/][/for]?(inp) [/if][/let][/if]∧ cs' = cs .pc:= cs.pc(p ; [generateStartPC(genData, cfg)/]) [generateFunctionParameters(cfg, genData)/]; 
+	⊦ INVOP(p, [generateCfgLabel(genData, cfg)/]ini)(inp, cs, cs') ↔ cs .pc(p) = N [if(input(genData))][let parameterVariables : OrderedSet(Variable) = cfg.parameterVariables->select(not newName.equalsIgnoreCase('returnvalue'))][if(not parameterVariables->isEmpty())]∧ [for(variable : Variable | parameterVariables->select(type.equalsIgnoreCase(genData.basis())))][variable.type/][/for][for(variable : Variable | parameterVariables->select(type.equalsIgnoreCase('ref')))][variable.type/][/for]?(inp) [/if][/let][/if]∧ cs' = cs .pc:= cs.pc(p ; [generateStartPC(genData, cfg)/]) [generateFunctionParameterAssignment(cfg, genData)/]; 
 	used for : s, ls;
 
 	[/for]
@@ -472,12 +472,14 @@ ERROR - DETECTED NORMAL TRANSITION WITH NULL INSTRUCTION
 [if(ret.value.oclAsType(PrimitiveValue).value.equalsIgnoreCase('void')._not())] ∧ return = [ret.value.oclAsType(PrimitiveValue).valueToString(t, genData)/][/if][/if]
 [/template]
 
-[template private generateFunctionParameters(cfg: ControlFlowDiagram, genData : GeneratorData)]
-[for(variable : Variable | getParameterVariablesOfTypeExcludingReturnVariables(cfg, 'ref'))]
-.[variable.newName/]:= cs.[variable.newName/](p ; inp[if(input(genData))] .[variable.type/][i/][/if])[/for]
-[for(variable : Variable | getParameterVariablesOfTypeExcludingReturnVariables(cfg, basis(genData)))]
-.[variable.newName/]:= cs.[variable.newName/](p ; inp[if(hasTransformationSpecificKey(genData, 'INPUT_REF') and not input(genData))] .v [/if][if(input(genData))] .[variable.type/][i/][/if])[/for]
-[/template]
+
+[template private generateFunctionParameterAssignment(cfg: ControlFlowDiagram, genData : GeneratorData)]
+[if(input(genData)._not())] 
+[for(variable : Variable | cfg.parameterVariables)]
+.[variable.newName/]:= cs.[variable.newName/](p ; inp) [/for]
+[else]
+[for(variable : Variable | cfg.parameterVariables) separator (' ')]
+.[variable.newName/]:= cs.[variable.newName/](p ; inp.[variable.type/][i/]) [/for][' '/][/if][/template]
 
 [query private possiblyAddCS(v : Value, genData: GeneratorData) : String = 
 	if v.oclIsTypeOf(AddressUse) then 
