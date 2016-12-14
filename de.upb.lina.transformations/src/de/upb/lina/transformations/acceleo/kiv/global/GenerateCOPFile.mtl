@@ -373,7 +373,7 @@ and therefore need special handling. In particular, we need two KIV COP transiti
 [template private generatePositiveCompareCSPart(e : Compare, t : Transition, genData : GeneratorData)]
 [let pc : String = generateNextPC(genData, t)][let res : String = addressToString(e.result, t, genData)]
 [if(e.cond.equalsIgnoreCase('eq'))]([compareTypecorrect(e.operand1, t, e.operand2, t, genData)/]) ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('1',e.result, t, genData)/] [else]
-[if(e.cond.equalsIgnoreCase('ne'))]([compareTypecorrect(e.operand1, t, e.operand2, t, genData)/]) ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('0',e.result, t, genData)/] [else]
+[if(e.cond.equalsIgnoreCase('ne'))]¬([compareTypecorrect(e.operand1, t, e.operand2, t, genData)/]) ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('0',e.result, t, genData)/] [else]
 [if(e.cond.equalsIgnoreCase('uge') or e.cond.equalsIgnoreCase('sge'))]([castFromRef(e.operand1, t, genData)/] ≥ [castFromRef(e.operand2, t, genData)/] ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('1',e.result, t, genData)/] [else]
 [if(e.cond.equalsIgnoreCase('ugt') or e.cond.equalsIgnoreCase('sgt'))]([castFromRef(e.operand1, t, genData)/] > [castFromRef(e.operand2, t, genData)/] ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('0',e.result, t, genData)/] [else]
 [if(e.cond.equalsIgnoreCase('ult') or e.cond.equalsIgnoreCase('slt'))]([castFromRef(e.operand1, t, genData)/] < [castFromRef(e.operand2, t, genData)/] ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('0',e.result, t, genData)/] [else]
@@ -383,7 +383,7 @@ and therefore need special handling. In particular, we need two KIV COP transiti
 
 [template private generateNegativeCompareCSPart(e : Compare, t : Transition, genData : GeneratorData)]
 [let pc : String = generateNextPC(genData, t)][let res : String = addressToString(e.result, t, genData)]
-[if(e.cond.equalsIgnoreCase('eq'))]([compareTypecorrect(e.operand1, t, e.operand2, t, genData)/]) ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('0',e.result, t, genData)/])[else]
+[if(e.cond.equalsIgnoreCase('eq'))]¬([compareTypecorrect(e.operand1, t, e.operand2, t, genData)/]) ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('0',e.result, t, genData)/])[else]
 [if(e.cond.equalsIgnoreCase('ne'))]([compareTypecorrect(e.operand1, t, e.operand2, t, genData)/]) ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('1',e.result, t, genData)/])[else]
 [if(e.cond.equalsIgnoreCase('uge') or e.cond.equalsIgnoreCase('sge'))]([castFromRef(e.operand1, t, genData)/] < [castFromRef(e.operand2, t, genData)/] ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('0', e.result, t, genData)/])[else]
 [if(e.cond.equalsIgnoreCase('ugt') or e.cond.equalsIgnoreCase('sgt'))]([castFromRef(e.operand1, t, genData)/] ≤ [castFromRef(e.operand2, t, genData)/] ∧ cs' = cs .pc:= cs.pc(p; [pc/]) .[res/]:= [possiblyCastToRef('1', e.result, t, genData)/])[else]

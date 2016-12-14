@@ -127,8 +127,8 @@ public class GetElementPointerOffsetComputer {
             int subAggregateSize = objectMemorySizeComputer.computeObjectMemorySize(subAggregate);
             partialAggregateSizeJoiner.addDynamicOffsetWithValue(indexValue, subAggregateSize);
 
-            // as we asserted that aggregate is not a structure, it can only be a vector or array
-            // this means that it does not matter which part of the aggregate we take a look at
+            // as we asserted that aggregate is not a structure, it can only be a vector or array.
+            // this means that it does not matter which part of the array or vector we take a look at
             // next, as they are all equivalent.
             aggregate = getTypeOfSubAggregate(aggregate, 0);
          }
