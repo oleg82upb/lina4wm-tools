@@ -129,7 +129,9 @@ endif
 [getVariableForAddress(e.result, t, genData).newName/] = memory['['/][valueToString(e.address.value, t, genData)/][']'/]; 
 [/template]
 
-[template public genInstruction(e : Store,  t: Transition, genData : GeneratorData)][/template]
+[template public genInstruction(e : Store,  t: Transition, genData : GeneratorData)]
+[if (t.diagram.memoryModel = 0)]memory['['/][valueToString(e.targetAddress.value, t, genData)/][']'/] = [valueToString(e.value.value, t, genData)/]; [/if]
+[/template]
 
 [template public genInstruction(e : Fence,  t: Transition, genData : GeneratorData)][/template]
 
